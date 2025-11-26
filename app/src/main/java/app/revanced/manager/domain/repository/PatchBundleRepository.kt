@@ -17,6 +17,7 @@ import app.revanced.manager.data.room.bundles.PatchBundleEntity
 import app.revanced.manager.data.room.bundles.PatchBundleProperties
 import app.revanced.manager.data.room.bundles.Source
 import app.revanced.manager.domain.bundles.APIPatchBundle
+import app.revanced.manager.domain.bundles.GitHubPullRequestBundle
 import app.revanced.manager.domain.bundles.JsonPatchBundle
 import app.revanced.manager.data.room.bundles.Source as SourceInfo
 import app.revanced.manager.domain.bundles.LocalPatchBundle
@@ -279,6 +280,19 @@ class PatchBundleRepository(
                 dir,
                 source.url.toString(),
                 autoUpdate,
+            )
+
+            is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
+                actualName,
+                uid,
+                normalizedDisplayName,
+                createdAt,
+                updatedAt,
+                versionHash,
+                null,
+                dir,
+                source.url.toString(),
+                autoUpdate
             )
         }
     }

@@ -53,6 +53,12 @@ class AdvancedSettingsViewModel(
         patchBundleRepository.reloadApiBundles()
     }
 
+    fun setGitHubPat(value: String?) = viewModelScope.launch(Dispatchers.Default) {
+        if (value == prefs.gitHubPat.get()) return@launch
+
+        prefs.gitHubPat.update(value ?: "")
+    }
+
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {
         val exitCode = try {
             withContext(Dispatchers.IO) {

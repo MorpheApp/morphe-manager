@@ -19,6 +19,7 @@ class PreferencesManager(
     val theme = enumPreference("theme", Theme.SYSTEM)
 
     val api = stringPreference("api_url", "https://api.revanced.app")
+    val gitHubPat = stringPreference("github_pat", "")
 
     val useProcessRuntime = booleanPreference("use_process_runtime", false)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)

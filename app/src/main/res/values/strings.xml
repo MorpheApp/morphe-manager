@@ -445,6 +445,10 @@ Recommended for this device: %1$d MB.</string>
     <string name="api_url_dialog_warning">Universal ReVanced Manager connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
+    <string name="github_pat">GitHub PAT</string>
+    <string name="github_pat_description">GitHub Personal Access Token needed for GitHub integration</string>
+    <string name="set_github_pat_dialog_title">Set GitHub PAT</string>
+    <string name="set_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo</string>
     <string name="device">Device</string>
     <string name="device_android_version">Android version</string>
     <string name="device_model">Model</string>

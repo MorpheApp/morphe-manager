@@ -20,11 +20,19 @@ sealed class Source {
         override fun toString() = url.toString()
     }
 
+    data class GitHubPullRequest(val url: Url) : Source() {
+        override fun toString() = url.toString()
+    }
+
     companion object {
         fun from(value: String) = when (value) {
             Local.SENTINEL -> Local
             API.SENTINEL -> API
-            else -> Remote(Url(value))
+            else ->
+                if (value.matches(Regex("^https://github\\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/pull/(\\d+)/?\$")))
+                    GitHubPullRequest(Url(value))
+                else
+                    Remote(Url(value))
         }
     }
 }

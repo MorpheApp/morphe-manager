@@ -9,96 +9,61 @@ import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Api
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Restore
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material.icons.outlined.VpnKey
+import androidx.compose.material3.*
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.content.getSystemService
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import app.universal.revanced.manager.BuildConfig
-import app.universal.revanced.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.consumeHorizontalScroll
+import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
 import app.revanced.manager.util.withHapticFeedback
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import app.universal.revanced.manager.BuildConfig
+import app.universal.revanced.manager.R
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import kotlinx.coroutines.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -141,7 +106,9 @@ fun AdvancedSettingsScreen(
             GroupHeader(stringResource(R.string.manager))
 
             val apiUrl by viewModel.prefs.api.getAsState()
+            val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
             var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
+            var showGitHubPatDialog by rememberSaveable { mutableStateOf(false) }
 
             if (showApiUrlDialog) {
                 APIUrlDialog(
@@ -153,11 +120,32 @@ fun AdvancedSettingsScreen(
                     }
                 )
             }
+            if (showGitHubPatDialog) {
+                GitHubPatDialog(
+                    currentPat = gitHubPat,
+                    onSubmit = {
+                        showGitHubPatDialog = false
+                        it.let(viewModel::setGitHubPat)
+                    },
+                    onDismiss = {
+                        showGitHubPatDialog = false
+                    }
+                )
+            }
+
+
             SettingsListItem(
                 headlineContent = stringResource(R.string.api_url),
                 supportingContent = stringResource(R.string.api_url_description),
                 modifier = Modifier.clickable {
                     showApiUrlDialog = true
+                }
+            )
+            SettingsListItem(
+                headlineContent = stringResource(R.string.github_pat),
+                supportingContent = stringResource(R.string.github_pat_description),
+                modifier = Modifier.clickable {
+                    showGitHubPatDialog = true
                 }
             )
 
@@ -1338,6 +1326,102 @@ private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (Stri
                         IconButton(onClick = { url = defaultUrl }) {
                             Icon(Icons.Outlined.Restore, stringResource(R.string.api_url_dialog_reset))
                         }
+                    }
+                )
+            }
+        }
+    )
+}
+
+@Composable
+private fun GitHubPatDialog(
+    currentPat: String,
+    onSubmit: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var pat by rememberSaveable(currentPat) { mutableStateOf(currentPat) }
+    val context = LocalContext.current
+
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onSubmit(pat)
+                }
+            ) {
+                Text(stringResource(R.string.save))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismiss() }) {
+                Text(stringResource(R.string.cancel))
+            }
+        },
+        icon = {
+            Icon(Icons.Outlined.VpnKey, null)
+        },
+        title = {
+            Text(
+                text = stringResource(R.string.set_github_pat_dialog_title),
+                style = MaterialTheme.typography.headlineSmall.copy(textAlign = TextAlign.Center),
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                val description = stringResource(R.string.set_github_pat_dialog_description)
+                val hereLabel = stringResource(R.string.unique_features_label)
+                val generatePatLink = "https://github.com/settings/tokens/new?scopes=public_repo&amp;description=urv-manager-github-integration"
+                val annotatedDescription = buildAnnotatedString {
+                    append(description)
+                    append(" ")
+                    pushStringAnnotation(tag = "create_pat_link", annotation = generatePatLink)
+                    withStyle(
+                        SpanStyle(
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            textDecoration = TextDecoration.Underline
+                        )
+                    ) {
+                        append(hereLabel)
+                    }
+                    pop()
+                }
+                val launchUrl = { url: String -> context.openUrl(url) }
+
+                ClickableText(
+                    text = annotatedDescription,
+                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
+                    onClick = { offset ->
+                        annotatedDescription.getStringAnnotations("create_pat_link", offset, offset)
+                            .firstOrNull()
+                            ?.let { launchUrl(it.item) }
+                    }
+                )
+
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = pat,
+                    onValueChange = { pat = it },
+                    label = { Text(stringResource(R.string.github_pat)) },
+                    trailingIcon = {
+                        IconButton(onClick = { pat = "" }) {
+                            Icon(Icons.Outlined.Delete, null)
+                        }
+                    },
+                    visualTransformation = VisualTransformation { original ->
+                        val s = original.text
+                        val masked =
+                            if (s.length <= 5) s
+                            else s.take(5) + "•".repeat(s.length - 5)
+
+                        TransformedText(
+                            AnnotatedString(masked),
+                            OffsetMapping.Identity
+                        )
                     }
                 )
             }
