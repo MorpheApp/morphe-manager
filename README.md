@@ -78,7 +78,7 @@ Universal ReVanced Manager includes powerful features that the official ReVanced
 ### 🎨 Appearance & Theming
 - 🎯 **Accent Color Picker**: Appearance settings include an accent color picker so you can choose a custom theme color. This is in addition to Material You theming and the pure black theme
 - ⚫ **Monochrome App Icons**: Support for Android monochrome icons
-- 🎛️ **Theme Color Pickers**: Teme color pickers with a live preview, plus manual HEX input for both accent and theme colors
+- 🎛️ **Theme Color Pickers**: Theme color pickers with a live preview, plus manual HEX input for both accent and theme colors
 - ↔️ **Better Long Names**: Long labels use horizontal swipe instead of auto-sliding or wrapping
 
 ### 🌐 Network & Updates
@@ -109,4 +109,5 @@ To import patch bundles into Universal ReVanced Manager, use my [ReVanced Patch 
 Universal ReVanced Manager is licensed under the GPLv3 license. Please see the [license file](https://github.com/Jman-Github/universal-revanced-manager/blob/main/LICENSE) for more information.
 [tl;dr](https://www.tldrlegal.com/license/gnu-general-public-license-v3-gpl-3) you may copy, distribute and modify Universal ReVanced Manager as long as you track changes/dates in source files.
 Any modifications to Universal ReVanced Manager must also be made available under the GPL, along with build & install instructions.
+
 
