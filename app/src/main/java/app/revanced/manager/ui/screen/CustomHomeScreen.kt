@@ -7,52 +7,19 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallFloatingActionButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -86,17 +53,24 @@ fun CustomHomeScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val composableScope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
 
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
+    // Any notification in the sheet?
+    val hasSheetNotifications by remember {
+        derivedStateOf {
+            dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification
+        }
+    }
+
     var isNavigating by rememberSaveable { mutableStateOf(false) }
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
-    val installAppsPermissionLauncher = rememberLauncherForActivityResult(
-        RequestInstallAppsContract
-    ) { granted ->
+    var showBundlesSheet by remember { mutableStateOf(false) }
+
+    val installAppsPermissionLauncher = rememberLauncherForActivityResult(RequestInstallAppsContract) {
         showAndroid11Dialog = false
     }
 
@@ -111,26 +85,66 @@ fun CustomHomeScreen(
     if (showAndroid11Dialog) {
         Android11Dialog(
             onDismissRequest = { showAndroid11Dialog = false },
-            onContinue = {
-                installAppsPermissionLauncher.launch(context.packageName)
-            }
+            onContinue = { installAppsPermissionLauncher.launch(context.packageName) }
         )
     }
 
-    var showBundlesSheet by remember { mutableStateOf(false) }
+    // Bottom Sheet.
     if (showBundlesSheet) {
         ModalBottomSheet(
             onDismissRequest = { showBundlesSheet = false },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false),
-            modifier = Modifier.fillMaxSize()
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
         ) {
-            BundleListScreen(
-                eventsFlow = dashboardViewModel.bundleListEventsFlow,
-                setSelectedSourceCount = { },
-                showOrderDialog = false,
-                onDismissOrderDialog = { },
-                onScrollStateChange = { }
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+                    .padding(bottom = 16.dp)
+            ) {
+                val batteryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    dashboardViewModel.updateBatteryOptimizationsWarning()
+                }
+
+                if (dashboardViewModel.showBatteryOptimizationsWarning) {
+                    NotificationCard(
+                        isWarning = true,
+                        icon = Icons.Default.BatteryAlert,
+                        text = stringResource(R.string.battery_optimization_notification),
+                        onClick = {
+                            batteryLauncher.launch(
+                                Intent(
+                                    AndroidSettings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                                    Uri.fromParts("package", context.packageName, null)
+                                )
+                            )
+                        },
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                }
+
+                if (showNewDownloaderPluginsNotification) {
+                    NotificationCard(
+                        text = stringResource(R.string.new_downloader_plugins_notification),
+                        icon = Icons.Outlined.Download,
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .clickable { onDownloaderPluginClick() },
+                        actions = {
+                            TextButton(onClick = dashboardViewModel::ignoreNewDownloaderPlugins) {
+                                Text(stringResource(R.string.dismiss))
+                            }
+                        }
+                    )
+                }
+
+                BundleListScreen(
+                    eventsFlow = dashboardViewModel.bundleListEventsFlow,
+                    setSelectedSourceCount = { },
+                    showOrderDialog = false,
+                    onDismissOrderDialog = { },
+                    onScrollStateChange = { }
+                )
+            }
         }
     }
 
@@ -140,12 +154,38 @@ fun CustomHomeScreen(
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                SmallFloatingActionButton(
-                    onClick = { showBundlesSheet = true },
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                ) {
-                    Icon(Icons.Outlined.Source, stringResource(R.string.custom_home_bundles))
+                // Sources FAB.
+                Box {
+                    SmallFloatingActionButton(
+                        onClick = { showBundlesSheet = true },
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ) {
+                        Icon(
+                            Icons.Outlined.Source,
+                            contentDescription = stringResource(R.string.custom_home_bundles)
+                        )
+                    }
+
+                    // Red dot.
+                    if (hasSheetNotifications) {
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(14.dp)
+                                    .background(Color.White, CircleShape)
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .size(10.dp)
+                                    .align(Alignment.Center)
+                                    .background(Color.Red, CircleShape)
+                            )
+                        }
+                    }
                 }
 
                 SmallFloatingActionButton(
@@ -153,7 +193,7 @@ fun CustomHomeScreen(
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {
-                    Icon(Icons.Default.Settings, stringResource(R.string.settings))
+                    Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
                 }
             }
         }
@@ -163,22 +203,44 @@ fun CustomHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            // Bundle update progress — fixed at top, doesn't push content.
+            bundleUpdateProgress?.let { progress ->
+                val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.TopCenter)
+                        .padding(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = stringResource(R.string.bundle_update_banner_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        LinearProgressIndicator(
+                            progress = { fraction },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+
+            // Main centered content.
             MainContent(
                 availablePatches = availablePatches,
-                showNewDownloaderPluginsNotification = showNewDownloaderPluginsNotification,
-                bundleUpdateProgress = bundleUpdateProgress,
                 dashboardViewModel = dashboardViewModel,
-                showBundlesSheet = showBundlesSheet,
-                onShowBundlesSheet = { showBundlesSheet = it },
-                onSettingsClick = onSettingsClick,
                 onAllAppsClick = onAllAppsClick,
-                onDownloaderPluginClick = onDownloaderPluginClick,
                 onYouTubeClick = {
                     if (availablePatches < 1) {
                         context.toast(context.getString(R.string.no_patch_found))
-                        composableScope.launch {
-                            showBundlesSheet = true
-                        }
+                        scope.launch { showBundlesSheet = true }
                         return@MainContent
                     }
                     if (dashboardViewModel.android11BugActive) {
@@ -186,7 +248,7 @@ fun CustomHomeScreen(
                         return@MainContent
                     }
                     isNavigating = true
-                    composableScope.launch {
+                    scope.launch {
                         delay(100)
                         onAppSelected("com.google.android.youtube")
                     }
@@ -194,9 +256,7 @@ fun CustomHomeScreen(
                 onYouTubeMusicClick = {
                     if (availablePatches < 1) {
                         context.toast(context.getString(R.string.no_patch_found))
-                        composableScope.launch {
-                            showBundlesSheet = true
-                        }
+                        scope.launch { showBundlesSheet = true }
                         return@MainContent
                     }
                     if (dashboardViewModel.android11BugActive) {
@@ -204,7 +264,7 @@ fun CustomHomeScreen(
                         return@MainContent
                     }
                     isNavigating = true
-                    composableScope.launch {
+                    scope.launch {
                         delay(100)
                         onAppSelected("com.google.android.apps.youtube.music")
                     }
@@ -212,36 +272,20 @@ fun CustomHomeScreen(
                 enabled = !isNavigating
             )
 
-            // Fullscreen loading indicator on top of everything.
+            // Loading overlay.
             if (isNavigating) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable(enabled = false) { } // Blocking interaction.
-                        .padding(paddingValues),
+                        .clickable(enabled = false) { },
                     contentAlignment = Alignment.Center
                 ) {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
-                            ) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(48.dp),
-                                    strokeWidth = 4.dp
-                                )
-                                Text(
-                                    text = stringResource(R.string.loading),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
+                    Surface(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)) {
+                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                CircularProgressIndicator(modifier = Modifier.size(48.dp), strokeWidth = 4.dp)
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(text = stringResource(R.string.loading), style = MaterialTheme.typography.bodyLarge)
                             }
                         }
                     }
@@ -254,103 +298,16 @@ fun CustomHomeScreen(
 @Composable
 private fun MainContent(
     availablePatches: Int,
-    showNewDownloaderPluginsNotification: Boolean,
-    bundleUpdateProgress: BundleUpdateProgress?,
     dashboardViewModel: DashboardViewModel,
-    showBundlesSheet: Boolean,
-    onShowBundlesSheet: (Boolean) -> Unit,
-    onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
-    onDownloaderPluginClick: () -> Unit,
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     enabled: Boolean
 ) {
-    val context = LocalContext.current
-
     Box(modifier = Modifier.fillMaxSize()) {
-        // Notifications area - fixed at top.
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // Battery optimization warning.
-            if (dashboardViewModel.showBatteryOptimizationsWarning) {
-                val batteryOptimizationsLauncher = rememberLauncherForActivityResult(
-                    ActivityResultContracts.StartActivityForResult()
-                ) {
-                    dashboardViewModel.updateBatteryOptimizationsWarning()
-                }
-                NotificationCard(
-                    isWarning = true,
-                    icon = Icons.Default.BatteryAlert,
-                    text = stringResource(R.string.battery_optimization_notification),
-                    onClick = {
-                        batteryOptimizationsLauncher.launch(
-                            Intent(
-                                AndroidSettings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                Uri.fromParts("package", context.packageName, null)
-                            )
-                        )
-                    }
-                )
-            }
-
-            // New downloader plugins notification.
-            if (showNewDownloaderPluginsNotification) {
-                NotificationCard(
-                    text = stringResource(R.string.new_downloader_plugins_notification),
-                    icon = Icons.Outlined.Download,
-                    modifier = Modifier.clickable(onClick = onDownloaderPluginClick),
-                    actions = {
-                        TextButton(onClick = dashboardViewModel::ignoreNewDownloaderPlugins) {
-                            Text(stringResource(R.string.dismiss))
-                        }
-                    }
-                )
-            }
-
-            // Bundle update progress banner.
-            bundleUpdateProgress?.let { progress ->
-                val progressFraction = if (progress.total == 0) 0f
-                else progress.completed.toFloat() / progress.total
-
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer
-                    )
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.bundle_update_banner_title),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        LinearProgressIndicator(
-                            progress = { progressFraction },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-                }
-            }
-        }
-
-        // Main content - centered.
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Center)
+                .fillMaxSize()
                 .padding(horizontal = 32.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -362,7 +319,6 @@ private fun MainContent(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-
             Text(
                 text = stringResource(R.string.custom_home_subtitle),
                 style = MaterialTheme.typography.bodyLarge,
@@ -374,15 +330,8 @@ private fun MainContent(
             // YouTube Button.
             AppButton(
                 text = stringResource(R.string.custom_home_youtube),
-                icon = {
-                    Icon(
-                        imageVector = Icons.Filled.PlayArrow,
-                        contentDescription = "YouTube",
-                        tint = Color.White,
-                        modifier = Modifier.size(56.dp)
-                    )
-                },
-                backgroundColor = Color(0xFFFF0033), // YouTube Red.
+                icon = { Icon(Icons.Filled.PlayArrow, "YouTube", tint = Color.White, modifier = Modifier.size(56.dp)) },
+                backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
                 enabled = enabled,
                 onClick = onYouTubeClick
@@ -393,21 +342,10 @@ private fun MainContent(
             // YouTube Music Button.
             AppButton(
                 text = stringResource(R.string.custom_home_youtube_music),
-                icon = {
-                    Icon(
-                        imageVector = Icons.Outlined.MusicNote,
-                        contentDescription = "YouTube Music",
-                        tint = Color.White,
-                        modifier = Modifier.size(56.dp)
-                    )
-                },
-                backgroundColor = Color(0xFF121212), // YT Music dark base.
+                icon = { Icon(Icons.Outlined.MusicNote, "YouTube Music", tint = Color.White, modifier = Modifier.size(56.dp)) },
+                backgroundColor = Color(0xFF121212),
                 contentColor = Color.White,
-                gradientColors = listOf(
-                    Color(0xFFFF3E5A),
-                    Color(0xFFFF8C3E),
-                    Color(0xFFFFD23E)
-                ),
+                gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
                 enabled = enabled,
                 onClick = onYouTubeMusicClick
             )
@@ -419,7 +357,7 @@ private fun MainContent(
             enabled = enabled,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 32.dp)
+                .padding(bottom = 16.dp)
         ) {
             Text(
                 text = stringResource(R.string.custom_home_other_apps),
@@ -444,13 +382,8 @@ private fun AppButton(
     Button(
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-            contentColor = contentColor
-        ),
+        modifier = Modifier.fillMaxWidth().height(100.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = contentColor),
         shape = RoundedCornerShape(28.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
@@ -458,14 +391,10 @@ private fun AppButton(
             modifier = Modifier
                 .fillMaxSize()
                 .then(
-                    if (gradientColors != null) {
-                        Modifier.background(
-                            brush = Brush.horizontalGradient(gradientColors),
-                            shape = RoundedCornerShape(28.dp)
-                        )
-                    } else {
+                    if (gradientColors != null)
+                        Modifier.background(Brush.horizontalGradient(gradientColors), RoundedCornerShape(28.dp))
+                    else
                         Modifier.background(backgroundColor, RoundedCornerShape(28.dp))
-                    }
                 )
                 .alpha(if (enabled) 1f else 0.6f)
         ) {
@@ -473,28 +402,15 @@ private fun AppButton(
                 CircularProgressIndicator(color = contentColor, strokeWidth = 3.dp)
             } else {
                 Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 32.dp), // Consistent left padding
+                    modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Icon fixed on the left side
                     Box(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .background(Color.White.copy(alpha = 0.16f), CircleShape),
+                        modifier = Modifier.size(80.dp).background(Color.White.copy(alpha = 0.16f), CircleShape),
                         contentAlignment = Alignment.Center
-                    ) {
-                        icon()
-                    }
-
+                    ) { icon() }
                     Spacer(modifier = Modifier.width(20.dp))
-
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Text(text = text, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 }
             }
         }
