@@ -15,6 +15,9 @@ val viewModelModule = module {
     viewModel { (params: SelectedApplicationInfo.PatchesSelector.ViewModelParams) ->
         PatchesSelectorViewModel(params)
     }
+    viewModel { (packageName: String) ->
+        QuickPatchViewModel(packageName)
+    }
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::AdvancedSettingsViewModel)
     viewModelOf(::AppSelectorViewModel)

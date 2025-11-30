@@ -138,8 +138,16 @@ private fun ReVancedManager(vm: MainViewModel) {
                 onSettingsClick = { navController.navigate(Settings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
-                onAppSelected = { packageName ->
-                    vm.selectAppWithSourceSelection(packageName)
+                onStartQuickPatch = { params ->
+                    // Immediately start patching with the received parameters.
+                    navController.navigateComplex(
+                        Patcher,
+                        Patcher.ViewModelParams(
+                            selectedApp = params.selectedApp,
+                            selectedPatches = params.patches,
+                            options = params.options
+                        )
+                    )
                 }
             )
         }

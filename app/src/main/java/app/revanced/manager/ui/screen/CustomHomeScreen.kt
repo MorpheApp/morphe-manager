@@ -31,15 +31,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.revanced.manager.domain.repository.PatchBundleRepository.BundleUpdateProgress
 import app.revanced.manager.ui.component.NotificationCard
+import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
+import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.universal.revanced.manager.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import android.provider.Settings as AndroidSettings
 
 @SuppressLint("BatteryLife")
@@ -49,7 +53,7 @@ fun CustomHomeScreen(
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
-    onAppSelected: (String) -> Unit,
+    onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -59,7 +63,6 @@ fun CustomHomeScreen(
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
-    // Any notification in the sheet?
     val hasSheetNotifications by remember {
         derivedStateOf {
             dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification
@@ -69,6 +72,8 @@ fun CustomHomeScreen(
     var isNavigating by rememberSaveable { mutableStateOf(false) }
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     var showBundlesSheet by remember { mutableStateOf(false) }
+    var showQuickPatchDialog by rememberSaveable { mutableStateOf(false) }
+    var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(RequestInstallAppsContract) {
         showAndroid11Dialog = false
@@ -148,6 +153,63 @@ fun CustomHomeScreen(
         }
     }
 
+    // Quick Patch Dialog.
+    if (showQuickPatchDialog && selectedPackageName != null) {
+        // Use key to create a new ViewModel for each packageName.
+        val quickPatchViewModel: QuickPatchViewModel = koinViewModel(
+            key = selectedPackageName
+        ) {
+            parametersOf(selectedPackageName)
+        }
+
+        val plugins by quickPatchViewModel.plugins.collectAsStateWithLifecycle(emptyList())
+        val requiredVersion by quickPatchViewModel.bundleRepository.suggestedVersions
+            .collectAsStateWithLifecycle(emptyMap())
+
+        val launcher = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+            onResult = quickPatchViewModel::handlePluginActivityResult
+        )
+        EventEffect(flow = quickPatchViewModel.launchActivityFlow) { intent ->
+            launcher.launch(intent)
+        }
+
+        val storagePickerLauncher = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.GetContent(),
+            onResult = quickPatchViewModel::handleStorageResult
+        )
+        EventEffect(flow = quickPatchViewModel.requestStorageSelection) {
+            storagePickerLauncher.launch(APK_MIMETYPE)
+        }
+
+        EventEffect(flow = quickPatchViewModel.startPatchingFlow) { params ->
+            showQuickPatchDialog = false
+            selectedPackageName = null
+            isNavigating = true
+            onStartQuickPatch(params)
+        }
+
+        QuickPatchSourceSelectorDialog(
+            packageName = selectedPackageName!!,
+            suggestedVersion = quickPatchViewModel.suggestedVersion,
+            plugins = plugins,
+            installedApp = quickPatchViewModel.installedAppData,
+            downloadedApps = quickPatchViewModel.downloadedApps,
+            hasRoot = quickPatchViewModel.hasRoot,
+            activeSearchJob = quickPatchViewModel.activePluginAction,
+            requiredVersion = requiredVersion[selectedPackageName],
+            onDismissRequest = {
+                showQuickPatchDialog = false
+                selectedPackageName = null
+            },
+            onSelectAuto = { quickPatchViewModel.selectAuto() },
+            onSelectInstalled = { quickPatchViewModel.selectInstalledApp(it) },
+            onSelectDownloaded = { quickPatchViewModel.selectDownloadedApp(it) },
+            onSelectLocal = { quickPatchViewModel.requestLocalSelection() },
+            onSelectPlugin = { quickPatchViewModel.searchUsingPlugin(it) }
+        )
+    }
+
     Scaffold(
         floatingActionButton = {
             Column(
@@ -169,15 +231,8 @@ fun CustomHomeScreen(
 
                     // Red dot.
                     if (hasSheetNotifications) {
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(14.dp)
-                                    .background(Color.White, CircleShape)
-                            )
+                        Box(modifier = Modifier.align(Alignment.TopEnd)) {
+                            Box(modifier = Modifier.size(14.dp).background(Color.White, CircleShape))
                             Box(
                                 modifier = Modifier
                                     .size(10.dp)
@@ -235,7 +290,6 @@ fun CustomHomeScreen(
             // Main centered content.
             MainContent(
                 availablePatches = availablePatches,
-                dashboardViewModel = dashboardViewModel,
                 onAllAppsClick = onAllAppsClick,
                 onYouTubeClick = {
                     if (availablePatches < 1) {
@@ -247,11 +301,8 @@ fun CustomHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    isNavigating = true
-                    scope.launch {
-                        delay(100)
-                        onAppSelected("com.google.android.youtube")
-                    }
+                    selectedPackageName = "com.google.android.youtube"
+                    showQuickPatchDialog = true
                 },
                 onYouTubeMusicClick = {
                     if (availablePatches < 1) {
@@ -263,11 +314,8 @@ fun CustomHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    isNavigating = true
-                    scope.launch {
-                        delay(100)
-                        onAppSelected("com.google.android.apps.youtube.music")
-                    }
+                    selectedPackageName = "com.google.android.apps.youtube.music"
+                    showQuickPatchDialog = true
                 },
                 enabled = !isNavigating
             )
@@ -298,7 +346,6 @@ fun CustomHomeScreen(
 @Composable
 private fun MainContent(
     availablePatches: Int,
-    dashboardViewModel: DashboardViewModel,
     onAllAppsClick: () -> Unit,
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
