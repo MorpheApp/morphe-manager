@@ -5,19 +5,25 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Download
@@ -49,6 +55,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -268,6 +277,7 @@ private fun MainContent(
                 .padding(horizontal = 16.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            // Battery optimization warning.
             if (dashboardViewModel.showBatteryOptimizationsWarning) {
                 val batteryOptimizationsLauncher = rememberLauncherForActivityResult(
                     ActivityResultContracts.StartActivityForResult()
@@ -289,6 +299,7 @@ private fun MainContent(
                 )
             }
 
+            // New downloader plugins notification.
             if (showNewDownloaderPluginsNotification) {
                 NotificationCard(
                     text = stringResource(R.string.new_downloader_plugins_notification),
@@ -302,6 +313,7 @@ private fun MainContent(
                 )
             }
 
+            // Bundle update progress banner.
             bundleUpdateProgress?.let { progress ->
                 val progressFraction = if (progress.total == 0) 0f
                 else progress.completed.toFloat() / progress.total
@@ -313,9 +325,7 @@ private fun MainContent(
                     )
                 ) {
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                        modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
@@ -324,11 +334,7 @@ private fun MainContent(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = stringResource(
-                                R.string.bundle_update_progress,
-                                progress.completed,
-                                progress.total
-                            ),
+                            text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
                             style = MaterialTheme.typography.bodyMedium
                         )
                         LinearProgressIndicator(
@@ -345,7 +351,7 @@ private fun MainContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.Center)
-                .padding(horizontal = 24.dp),
+                .padding(horizontal = 32.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -362,56 +368,75 @@ private fun MainContent(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 32.dp)
+                modifier = Modifier.padding(bottom = 48.dp)
             )
 
             // YouTube Button.
-            AppButton(
+            LargeAppButton(
                 text = stringResource(R.string.custom_home_youtube),
-                icon = Icons.Outlined.Apps,
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                icon = {
+                    Icon(
+                        imageVector = Icons.Filled.PlayArrow,
+                        contentDescription = "YouTube",
+                        tint = Color.White,
+                        modifier = Modifier.size(56.dp)
+                    )
+                },
+                backgroundColor = Color(0xFFFF0033), // YouTube Red.
+                contentColor = Color.White,
                 enabled = enabled,
-                isLoading = false,
                 onClick = onYouTubeClick
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // YouTube Music Button.
-            AppButton(
+            LargeAppButton(
                 text = stringResource(R.string.custom_home_youtube_music),
-                icon = Icons.Outlined.MusicNote,
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.MusicNote,
+                        contentDescription = "YouTube Music",
+                        tint = Color.White,
+                        modifier = Modifier.size(56.dp)
+                    )
+                },
+                backgroundColor = Color(0xFF121212), // YT Music dark base.
+                contentColor = Color.White,
+                gradientColors = listOf(
+                    Color(0xFFFF3E5A),
+                    Color(0xFFFF8C3E),
+                    Color(0xFFFFD23E)
+                ),
                 enabled = enabled,
-                isLoading = false,
                 onClick = onYouTubeMusicClick
             )
         }
 
-        // Bottom button - fixed at bottom.
+        // Bottom "Other apps" button.
         TextButton(
             onClick = onAllAppsClick,
             enabled = enabled,
             modifier = Modifier
-                .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(horizontal = 24.dp, vertical = 24.dp)
+                .padding(bottom = 32.dp)
         ) {
             Text(
                 text = stringResource(R.string.custom_home_other_apps),
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Medium
             )
         }
     }
 }
+
 @Composable
-private fun AppButton(
+private fun LargeAppButton(
     text: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    containerColor: androidx.compose.ui.graphics.Color,
-    contentColor: androidx.compose.ui.graphics.Color,
+    icon: @Composable () -> Unit,
+    backgroundColor: Color,
+    contentColor: Color,
+    gradientColors: List<Color>? = null,
     onClick: () -> Unit,
     enabled: Boolean = true,
     isLoading: Boolean = false
@@ -421,34 +446,57 @@ private fun AppButton(
         enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
-            .height(64.dp),
+            .height(100.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = containerColor.copy(alpha = 0.6f),
-            disabledContentColor = contentColor.copy(alpha = 0.6f)
+            containerColor = Color.Transparent,
+            contentColor = contentColor
         ),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(28.dp),
+        contentPadding = PaddingValues(0.dp)
     ) {
-        if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(24.dp),
-                color = contentColor,
-                strokeWidth = 2.dp
-            )
-        } else {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(28.dp)
-                    .padding(end = 12.dp)
-            )
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .then(
+                    if (gradientColors != null) {
+                        Modifier.background(
+                            brush = Brush.horizontalGradient(gradientColors),
+                            shape = RoundedCornerShape(28.dp)
+                        )
+                    } else {
+                        Modifier.background(backgroundColor, RoundedCornerShape(28.dp))
+                    }
+                )
+                .alpha(if (enabled) 1f else 0.6f)
+        ) {
+            if (isLoading) {
+                CircularProgressIndicator(color = contentColor, strokeWidth = 3.dp)
+            } else {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 32.dp), // Consistent left padding
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Icon fixed on the left side
+                    Box(
+                        modifier = Modifier
+                            .size(80.dp)
+                            .background(Color.White.copy(alpha = 0.16f), CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        icon()
+                    }
+
+                    Spacer(modifier = Modifier.width(20.dp))
+
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     }
 }
