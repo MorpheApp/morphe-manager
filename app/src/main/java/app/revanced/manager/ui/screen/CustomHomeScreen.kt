@@ -3,7 +3,6 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -28,6 +27,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -35,10 +35,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,13 +55,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.domain.repository.PatchBundleRepository.BundleUpdateProgress
 import app.revanced.manager.ui.component.NotificationCard
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.universal.revanced.manager.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import android.provider.Settings as AndroidSettings
 
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,11 +83,20 @@ fun CustomHomeScreen(
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
+    var isNavigating by rememberSaveable { mutableStateOf(false) }
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
         RequestInstallAppsContract
     ) { granted ->
         showAndroid11Dialog = false
+    }
+
+    // Reset navigation state after a short delay.
+    LaunchedEffect(isNavigating) {
+        if (isNavigating) {
+            delay(1000) // Delay for smooth animation.
+            isNavigating = false
+        }
     }
 
     if (showAndroid11Dialog) {
@@ -140,205 +154,301 @@ fun CustomHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Notifications area - fixed at top
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.TopCenter)
-                    .padding(horizontal = 16.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                if (dashboardViewModel.showBatteryOptimizationsWarning) {
-                    val batteryOptimizationsLauncher = rememberLauncherForActivityResult(
-                        ActivityResultContracts.StartActivityForResult()
-                    ) {
-                        dashboardViewModel.updateBatteryOptimizationsWarning()
+            MainContent(
+                availablePatches = availablePatches,
+                showNewDownloaderPluginsNotification = showNewDownloaderPluginsNotification,
+                bundleUpdateProgress = bundleUpdateProgress,
+                dashboardViewModel = dashboardViewModel,
+                showBundlesSheet = showBundlesSheet,
+                onShowBundlesSheet = { showBundlesSheet = it },
+                onSettingsClick = onSettingsClick,
+                onAllAppsClick = onAllAppsClick,
+                onDownloaderPluginClick = onDownloaderPluginClick,
+                onYouTubeClick = {
+                    if (availablePatches < 1) {
+                        context.toast(context.getString(R.string.no_patch_found))
+                        composableScope.launch {
+                            showBundlesSheet = true
+                        }
+                        return@MainContent
                     }
-                    NotificationCard(
-                        isWarning = true,
-                        icon = Icons.Default.BatteryAlert,
-                        text = stringResource(R.string.battery_optimization_notification),
-                        onClick = {
-                            batteryOptimizationsLauncher.launch(
-                                Intent(
-                                    Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                    Uri.fromParts("package", context.packageName, null)
-                                )
-                            )
-                        }
-                    )
-                }
-
-                if (showNewDownloaderPluginsNotification) {
-                    NotificationCard(
-                        text = stringResource(R.string.new_downloader_plugins_notification),
-                        icon = Icons.Outlined.Download,
-                        modifier = Modifier.clickable(onClick = onDownloaderPluginClick),
-                        actions = {
-                            TextButton(onClick = dashboardViewModel::ignoreNewDownloaderPlugins) {
-                                Text(stringResource(R.string.dismiss))
-                            }
-                        }
-                    )
-                }
-
-                bundleUpdateProgress?.let { progress ->
-                    val progressFraction = if (progress.total == 0) 0f
-                    else progress.completed.toFloat() / progress.total
-
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer
-                        )
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.bundle_update_banner_title),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = stringResource(
-                                    R.string.bundle_update_progress,
-                                    progress.completed,
-                                    progress.total
-                                ),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                            LinearProgressIndicator(
-                                progress = { progressFraction },
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
+                    if (dashboardViewModel.android11BugActive) {
+                        showAndroid11Dialog = true
+                        return@MainContent
                     }
-                }
-            }
-
-            // Main content - centered
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Center)
-                    .padding(horizontal = 24.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = stringResource(R.string.custom_home_title),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-
-                Text(
-                    text = stringResource(R.string.custom_home_subtitle),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = 32.dp)
-                )
-
-                // YouTube Button
-                AppButton(
-                    text = stringResource(R.string.custom_home_youtube),
-                    icon = Icons.Outlined.Apps,
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    onClick = {
-                        if (availablePatches < 1) {
-                            context.toast(context.getString(R.string.no_patch_found))
-                            composableScope.launch {
-                                showBundlesSheet = true
-                            }
-                            return@AppButton
-                        }
-                        if (dashboardViewModel.android11BugActive) {
-                            showAndroid11Dialog = true
-                            return@AppButton
-                        }
+                    isNavigating = true
+                    composableScope.launch {
+                        delay(100)
                         onAppSelected("com.google.android.youtube")
                     }
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // YouTube Music Button
-                AppButton(
-                    text = stringResource(R.string.custom_home_youtube_music),
-                    icon = Icons.Outlined.MusicNote,
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    onClick = {
-                        if (availablePatches < 1) {
-                            context.toast(context.getString(R.string.no_patch_found))
-                            composableScope.launch {
-                                showBundlesSheet = true
-                            }
-                            return@AppButton
+                },
+                onYouTubeMusicClick = {
+                    if (availablePatches < 1) {
+                        context.toast(context.getString(R.string.no_patch_found))
+                        composableScope.launch {
+                            showBundlesSheet = true
                         }
-                        if (dashboardViewModel.android11BugActive) {
-                            showAndroid11Dialog = true
-                            return@AppButton
-                        }
+                        return@MainContent
+                    }
+                    if (dashboardViewModel.android11BugActive) {
+                        showAndroid11Dialog = true
+                        return@MainContent
+                    }
+                    isNavigating = true
+                    composableScope.launch {
+                        delay(100)
                         onAppSelected("com.google.android.apps.youtube.music")
                     }
-                )
-            }
+                },
+                enabled = !isNavigating
+            )
 
-            // Bottom button - fixed at bottom
-            TextButton(
-                onClick = onAllAppsClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 24.dp, vertical = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.custom_home_other_apps),
-                    style = MaterialTheme.typography.labelLarge
-                )
+            // Fullscreen loading indicator on top of everything.
+            if (isNavigating) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable(enabled = false) { } // Blocking interaction.
+                        .padding(paddingValues),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            ) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(48.dp),
+                                    strokeWidth = 4.dp
+                                )
+                                Text(
+                                    text = stringResource(R.string.loading),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
+private fun MainContent(
+    availablePatches: Int,
+    showNewDownloaderPluginsNotification: Boolean,
+    bundleUpdateProgress: BundleUpdateProgress?,
+    dashboardViewModel: DashboardViewModel,
+    showBundlesSheet: Boolean,
+    onShowBundlesSheet: (Boolean) -> Unit,
+    onSettingsClick: () -> Unit,
+    onAllAppsClick: () -> Unit,
+    onDownloaderPluginClick: () -> Unit,
+    onYouTubeClick: () -> Unit,
+    onYouTubeMusicClick: () -> Unit,
+    enabled: Boolean
+) {
+    val context = LocalContext.current
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Notifications area - fixed at top.
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            if (dashboardViewModel.showBatteryOptimizationsWarning) {
+                val batteryOptimizationsLauncher = rememberLauncherForActivityResult(
+                    ActivityResultContracts.StartActivityForResult()
+                ) {
+                    dashboardViewModel.updateBatteryOptimizationsWarning()
+                }
+                NotificationCard(
+                    isWarning = true,
+                    icon = Icons.Default.BatteryAlert,
+                    text = stringResource(R.string.battery_optimization_notification),
+                    onClick = {
+                        batteryOptimizationsLauncher.launch(
+                            Intent(
+                                AndroidSettings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                                Uri.fromParts("package", context.packageName, null)
+                            )
+                        )
+                    }
+                )
+            }
+
+            if (showNewDownloaderPluginsNotification) {
+                NotificationCard(
+                    text = stringResource(R.string.new_downloader_plugins_notification),
+                    icon = Icons.Outlined.Download,
+                    modifier = Modifier.clickable(onClick = onDownloaderPluginClick),
+                    actions = {
+                        TextButton(onClick = dashboardViewModel::ignoreNewDownloaderPlugins) {
+                            Text(stringResource(R.string.dismiss))
+                        }
+                    }
+                )
+            }
+
+            bundleUpdateProgress?.let { progress ->
+                val progressFraction = if (progress.total == 0) 0f
+                else progress.completed.toFloat() / progress.total
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.bundle_update_banner_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = stringResource(
+                                R.string.bundle_update_progress,
+                                progress.completed,
+                                progress.total
+                            ),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        LinearProgressIndicator(
+                            progress = { progressFraction },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+        }
+
+        // Main content - centered.
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
+                .padding(horizontal = 24.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.custom_home_title),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = stringResource(R.string.custom_home_subtitle),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 32.dp)
+            )
+
+            // YouTube Button.
+            AppButton(
+                text = stringResource(R.string.custom_home_youtube),
+                icon = Icons.Outlined.Apps,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                enabled = enabled,
+                isLoading = false,
+                onClick = onYouTubeClick
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // YouTube Music Button.
+            AppButton(
+                text = stringResource(R.string.custom_home_youtube_music),
+                icon = Icons.Outlined.MusicNote,
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                enabled = enabled,
+                isLoading = false,
+                onClick = onYouTubeMusicClick
+            )
+        }
+
+        // Bottom button - fixed at bottom.
+        TextButton(
+            onClick = onAllAppsClick,
+            enabled = enabled,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(horizontal = 24.dp, vertical = 24.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.custom_home_other_apps),
+                style = MaterialTheme.typography.labelLarge
+            )
+        }
+    }
+}
+@Composable
 private fun AppButton(
     text: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     containerColor: androidx.compose.ui.graphics.Color,
     contentColor: androidx.compose.ui.graphics.Color,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+    isLoading: Boolean = false
 ) {
     Button(
         onClick = onClick,
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .height(64.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
-            contentColor = contentColor
+            contentColor = contentColor,
+            disabledContainerColor = containerColor.copy(alpha = 0.6f),
+            disabledContentColor = contentColor.copy(alpha = 0.6f)
         ),
         shape = RoundedCornerShape(16.dp)
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier
-                .size(28.dp)
-                .padding(end = 12.dp)
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold
-        )
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(24.dp),
+                color = contentColor,
+                strokeWidth = 2.dp
+            )
+        } else {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(28.dp)
+                    .padding(end = 12.dp)
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
     }
 }
