@@ -13,6 +13,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -25,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
 import app.revanced.manager.ui.model.navigation.Dashboard
@@ -34,7 +36,9 @@ import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.model.navigation.Update
 import app.revanced.manager.ui.model.SelectedApp
+import app.revanced.manager.ui.model.navigation.CustomHome
 import app.revanced.manager.ui.screen.AppSelectorScreen
+import app.revanced.manager.ui.screen.CustomHomeScreen
 import app.revanced.manager.ui.screen.DashboardScreen
 import app.revanced.manager.ui.screen.InstalledAppInfoScreen
 import app.revanced.manager.ui.screen.PatcherScreen
@@ -54,12 +58,15 @@ import app.revanced.manager.ui.screen.settings.update.ChangelogsSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
+import app.revanced.manager.ui.viewmodel.CustomHomeViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.util.EventEffect
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
@@ -108,6 +115,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun ReVancedManager(vm: MainViewModel) {
     val navController = rememberNavController()
+    val prefs: PreferencesManager = koinInject()
+    val useCustomHome by prefs.useCustomHomeScreen.getAsState()
+
+    val startDest = if (useCustomHome) CustomHome else Dashboard
 
     EventEffect(vm.appSelectFlow) { params ->
         navController.navigateComplex(
@@ -118,12 +129,34 @@ private fun ReVancedManager(vm: MainViewModel) {
 
     NavHost(
         navController = navController,
-        startDestination = Dashboard,
+        startDestination = startDest,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { -it / 3 }) },
         popEnterTransition = { slideInHorizontally(initialOffsetX = { -it / 3 }) },
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
+        composable<CustomHome> {
+            val customHomeViewModel: CustomHomeViewModel = koinViewModel()
+
+            LaunchedEffect(Unit) {
+                launch {
+                    customHomeViewModel.selectAppWithDownloaderFlow.collect { packageName ->
+                        vm.selectApp(packageName)
+                    }
+                }
+                launch {
+                    customHomeViewModel.selectAppFromStorageFlow.collect { packageName ->
+                        vm.selectApp(packageName)
+                    }
+                }
+            }
+
+            CustomHomeScreen(
+                onSettingsClick = { navController.navigate(Settings) },
+                onAllAppsClick = { navController.navigate(AppSelector) },
+                onDownloaderPluginClick = { navController.navigate(Settings.Downloads) }
+            )
+        }
         composable<Dashboard> {
             DashboardScreen(
                 onSettingsClick = { navController.navigate(Settings) },

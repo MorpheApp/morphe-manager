@@ -53,6 +53,8 @@ class PreferencesManager(
 
     val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
 
+    val useCustomHomeScreen = booleanPreference("use_custom_home_screen", true)
+
     @Serializable
     data class SettingsSnapshot(
         val dynamicColor: Boolean? = null,

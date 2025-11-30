@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.di.*
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -18,6 +19,7 @@ import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.internal.BuilderImpl
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
@@ -73,6 +75,20 @@ class ManagerApplication : Application() {
             val currentApi = prefs.api.get()
             if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
                 prefs.api.update(DEFAULT_API_URL)
+            }
+
+            if (prefs.firstLaunch.get()) {
+                prefs.managerAutoUpdates.update(true)
+
+                with(patchBundleRepository) {
+                    sources
+                        .first()
+                        .find { it.uid == 0 }
+                        ?.asRemoteOrNull
+                        ?.setAutoUpdate(true)
+                }
+
+                prefs.firstLaunch.update(false)
             }
         }
         scope.launch(Dispatchers.Default) {

@@ -388,6 +388,12 @@ fun AdvancedSettingsScreen(
                 headline = R.string.universal_patches_safeguard,
                 description = R.string.universal_patches_safeguard_description,
             )
+            BooleanItem(
+                preference = viewModel.prefs.useCustomHomeScreen,
+                coroutineScope = viewModel.viewModelScope,
+                headline = R.string.use_custom_home_screen,
+                description = R.string.use_custom_home_screen_description
+            )
 
             val restoreDescription = if (hasOfficialBundle) {
                 stringResource(R.string.restore_official_bundle_description_installed)
