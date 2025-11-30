@@ -3,30 +3,40 @@ package app.revanced.manager.ui.screen
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.horizontalScroll
-import app.revanced.manager.util.consumeHorizontalScroll
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowRight
 import androidx.compose.material.icons.filled.AutoFixHigh
-import androidx.compose.material.icons.outlined.UnfoldLess
-import androidx.compose.material.icons.outlined.UnfoldMore
+import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -50,16 +60,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.universal.revanced.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
 import app.revanced.manager.data.room.apps.installed.InstallType
@@ -71,20 +82,18 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.NotificationCard
-import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
 import app.revanced.manager.ui.component.SafeguardHintCard
+import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.Alignment
+import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.enabled
+import app.revanced.manager.util.consumeHorizontalScroll
 import app.revanced.manager.util.toast
-import app.revanced.manager.util.transparentListItemColors
+import app.universal.revanced.manager.R
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -776,7 +785,11 @@ private fun AppSourceSelectorDialog(
     onSelect: (SelectedApp) -> Unit,
 ) {
     val canSelect = activeSearchJob == null
-    var showDownloadedApps by remember { mutableStateOf(false) }
+
+    // Safe string resources inside composable context.
+    val noRootMessage = stringResource(R.string.app_source_dialog_option_installed_no_root)
+    val alreadyPatchedMessage = stringResource(R.string.already_patched)
+    val versionNotSuggestedFormat = stringResource(R.string.app_source_dialog_option_installed_version_not_suggested)
 
     AlertDialogExtended(
         onDismissRequest = onDismissRequest,
@@ -785,107 +798,197 @@ private fun AppSourceSelectorDialog(
                 Text(stringResource(R.string.cancel))
             }
         },
-        title = { Text(stringResource(R.string.app_source_dialog_title)) },
-        textHorizontalPadding = PaddingValues(horizontal = 0.dp),
+        title = {
+            Text(
+                text = stringResource(R.string.app_source_dialog_title),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold
+            )
+        },
         text = {
-            LazyColumn {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                // Downloaded apps.
                 if (downloadedApps.isNotEmpty()) {
-                    item(key = "downloaded_header") {
-                        val icon = if (showDownloadedApps) Icons.Outlined.UnfoldLess else Icons.Outlined.UnfoldMore
-                        ListItem(
-                            modifier = Modifier
-                                .clickable { showDownloadedApps = !showDownloadedApps }
-                                .enabled(downloadedApps.isNotEmpty()),
-                            headlineContent = { Text(stringResource(R.string.downloaded_apps)) },
-                            trailingContent = { Icon(icon, null) },
-                            colors = transparentListItemColors
-                        )
-                    }
-                    if (showDownloadedApps) {
-                        items(
-                            items = downloadedApps,
-                            key = { "downloaded_${it.packageName}_${it.version}" }
-                        ) { downloadedApp ->
-                            ListItem(
-                                modifier = Modifier
-                                    .clickable(enabled = canSelect) { onSelectDownloaded(downloadedApp) }
-                                    .padding(start = 16.dp),
-                                headlineContent = { Text(downloadedApp.version) },
-                                supportingContent = { Text(downloadedApp.packageName) },
-                                colors = transparentListItemColors
-                            )
-                        }
-                    }
-                }
-
-                if (includeAutoOption) {
-                    item(key = "auto") {
-                        val hasPlugins = plugins.isNotEmpty()
-                        ListItem(
-                            modifier = Modifier
-                                .clickable(enabled = canSelect && hasPlugins) { onSelect(searchApp) }
-                                .enabled(hasPlugins),
-                            headlineContent = { Text(stringResource(R.string.app_source_dialog_option_auto)) },
-                            supportingContent = {
-                                Text(
-                                    if (hasPlugins)
-                                        stringResource(R.string.app_source_dialog_option_auto_description)
-                                    else
-                                        stringResource(R.string.app_source_dialog_option_auto_unavailable)
-                                )
+                    item { SectionHeader(title = stringResource(R.string.downloaded_apps)) }
+                    items(downloadedApps) { app ->
+                        SourceOptionButton(
+                            text = app.version,
+                            subtitle = app.packageName,
+                            icon = {
+                                Icon(Icons.Outlined.Source, null, tint = Color.White, modifier = Modifier.size(40.dp))
                             },
-                            colors = transparentListItemColors
+                            backgroundColor = Color(0xFF1E88E5),
+                            enabled = canSelect,
+                            onClick = { onSelectDownloaded(app) }
                         )
                     }
                 }
 
-                if (includeInstalledOption) installedApp?.let { (app, meta) ->
-                    item(key = "installed") {
-                        val (usable, text) = when {
-                            meta?.installType == InstallType.MOUNT && !hasRoot -> false to stringResource(
-                                R.string.app_source_dialog_option_installed_no_root
-                            )
-                            meta?.installType == InstallType.DEFAULT -> false to stringResource(R.string.already_patched)
-                            requiredVersion != null && app.version != requiredVersion -> false to stringResource(
-                                R.string.app_source_dialog_option_installed_version_not_suggested,
-                                app.version
-                            )
+                // Auto (recommended)
+                if (includeAutoOption && plugins.isNotEmpty()) {
+                    item {
+                        SourceOptionButton(
+                            text = stringResource(R.string.app_source_dialog_option_auto),
+                            subtitle = stringResource(R.string.app_source_dialog_option_auto_description),
+                            icon = {
+                                Icon(Icons.Filled.AutoFixHigh, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                            },
+                            backgroundColor = Color(0xFF00C853),
+                            enabled = canSelect,
+                            onClick = { onSelect(searchApp) }
+                        )
+                    }
+                }
 
+                // Installed app.
+                if (includeInstalledOption) {
+                    installedApp?.let { (app, meta) ->
+                        val (usable, message) = when {
+                            meta?.installType == InstallType.MOUNT && !hasRoot ->
+                                false to noRootMessage
+                            meta?.installType == InstallType.DEFAULT ->
+                                false to alreadyPatchedMessage
+                            requiredVersion != null && app.version != requiredVersion ->
+                                false to versionNotSuggestedFormat.format(app.version)
                             else -> true to app.version
                         }
-                        ListItem(
-                            modifier = Modifier
-                                .clickable(enabled = canSelect && usable) { onSelect(app) }
-                                .enabled(usable),
-                            headlineContent = { Text(stringResource(R.string.installed)) },
-                            supportingContent = { Text(text) },
-                            colors = transparentListItemColors
-                        )
+
+                        item {
+                            SourceOptionButton(
+                                text = stringResource(R.string.installed),
+                                subtitle = message,
+                                icon = {
+                                    Icon(Icons.Outlined.Apps, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                                },
+                                backgroundColor = if (usable) Color(0xFF2196F3) else Color(0xFF757575),
+                                enabled = canSelect && usable,
+                                onClick = { onSelect(app) }
+                            )
+                        }
                     }
                 }
 
+                // Local storage.
                 onSelectLocal?.let { selectLocal ->
-                    item(key = "storage") {
-                        ListItem(
-                            modifier = Modifier.clickable(enabled = canSelect) { selectLocal() },
-                            headlineContent = { Text(stringResource(R.string.app_source_dialog_option_storage)) },
-                            supportingContent = {
-                                Text(stringResource(R.string.app_source_dialog_option_storage_description))
+                    item {
+                        SourceOptionButton(
+                            text = stringResource(R.string.app_source_dialog_option_storage),
+                            subtitle = stringResource(R.string.app_source_dialog_option_storage_description),
+                            icon = {
+                                Icon(Icons.Outlined.FolderOpen, null, tint = Color.White, modifier = Modifier.size(40.dp))
                             },
-                            colors = transparentListItemColors
+                            backgroundColor = Color(0xFFFF9800),
+                            enabled = canSelect,
+                            onClick = selectLocal
                         )
                     }
                 }
 
-                items(plugins, key = { "plugin_${it.packageName}" }) { plugin ->
-                    ListItem(
-                        modifier = Modifier.clickable(enabled = canSelect) { onSelectPlugin(plugin) },
-                        headlineContent = { Text(plugin.name) },
-                        trailingContent = (@Composable { LoadingIndicator() }).takeIf { activeSearchJob == plugin.packageName },
-                        colors = transparentListItemColors
+                // Downloader plugins.
+                items(plugins) { plugin ->
+                    SourceOptionButton(
+                        text = plugin.name,
+                        subtitle = plugin.packageName,
+                        icon = {
+                            Icon(Icons.Outlined.Download, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                        },
+                        backgroundColor = Color(0xFF9C27B0),
+                        enabled = canSelect,
+                        trailingContent = if (activeSearchJob == plugin.packageName) {
+                            { LoadingIndicator() }
+                        } else null,
+                        onClick = { onSelectPlugin(plugin) }
                     )
                 }
             }
         }
+    )
+}
+
+@Composable
+private fun SourceOptionButton(
+    text: String,
+    subtitle: String?,
+    icon: @Composable () -> Unit,
+    backgroundColor: Color,
+    enabled: Boolean = true,
+    trailingContent: (@Composable () -> Unit)? = null,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 76.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+        shape = RoundedCornerShape(20.dp),
+        contentPadding = PaddingValues(0.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor, RoundedCornerShape(20.dp))
+                .alpha(if (enabled) 1f else 0.6f)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Small icon in glass circle.
+                Box(
+                    modifier = Modifier
+                        .size(56.dp)
+                        .background(Color.White.copy(alpha = 0.18f), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    icon()
+                }
+
+                Spacer(modifier = Modifier.width(14.dp))
+
+                // Text.
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.White,
+                        maxLines = 4,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    subtitle?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White.copy(alpha = 0.9f),
+                            maxLines = 4,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
+                trailingContent?.invoke()
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionHeader(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp, vertical = 8.dp)
     )
 }

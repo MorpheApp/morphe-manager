@@ -372,7 +372,7 @@ private fun MainContent(
             )
 
             // YouTube Button.
-            LargeAppButton(
+            AppButton(
                 text = stringResource(R.string.custom_home_youtube),
                 icon = {
                     Icon(
@@ -391,7 +391,7 @@ private fun MainContent(
             Spacer(modifier = Modifier.height(24.dp))
 
             // YouTube Music Button.
-            LargeAppButton(
+            AppButton(
                 text = stringResource(R.string.custom_home_youtube_music),
                 icon = {
                     Icon(
@@ -431,7 +431,7 @@ private fun MainContent(
 }
 
 @Composable
-private fun LargeAppButton(
+private fun AppButton(
     text: String,
     icon: @Composable () -> Unit,
     backgroundColor: Color,
