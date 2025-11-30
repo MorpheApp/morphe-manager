@@ -8,9 +8,6 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModelOf(::MainViewModel)
-    viewModel { CustomHomeViewModel(
-        get(), get(), get(), get())
-    }
     viewModelOf(::DashboardViewModel)
     viewModel { (params: SelectedApplicationInfo.ViewModelParams) ->
         SelectedAppInfoViewModel(params)

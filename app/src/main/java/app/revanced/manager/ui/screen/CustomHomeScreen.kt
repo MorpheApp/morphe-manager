@@ -4,14 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,17 +20,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -40,7 +35,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -60,7 +54,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.revanced.manager.ui.component.NotificationCard
-import app.revanced.manager.ui.viewmodel.CustomHomeViewModel
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
@@ -75,7 +68,7 @@ fun CustomHomeScreen(
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
-    viewModel: CustomHomeViewModel = koinViewModel(),
+    onAppSelected: (String) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -85,17 +78,11 @@ fun CustomHomeScreen(
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
-    var showSourceSelector by rememberSaveable { mutableStateOf(false) }
-    var selectedPackageName by rememberSaveable { mutableStateOf("") }
-
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
         RequestInstallAppsContract
     ) { granted ->
         showAndroid11Dialog = false
-        if (granted && selectedPackageName.isNotEmpty()) {
-            showSourceSelector = true
-        }
     }
 
     if (showAndroid11Dialog) {
@@ -112,41 +99,16 @@ fun CustomHomeScreen(
         ModalBottomSheet(
             onDismissRequest = { showBundlesSheet = false },
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false),
-            modifier = Modifier.fillMaxSize() // Зробити sheet повноекранним для складного контенту
+            modifier = Modifier.fillMaxSize()
         ) {
             BundleListScreen(
-                eventsFlow = dashboardViewModel.bundleListEventsFlow, // З DashboardScreen
-                setSelectedSourceCount = { /* Ігноруємо або обробляємо, якщо потрібно */ },
+                eventsFlow = dashboardViewModel.bundleListEventsFlow,
+                setSelectedSourceCount = { },
                 showOrderDialog = false,
                 onDismissOrderDialog = { },
                 onScrollStateChange = { }
             )
         }
-    }
-
-    if (showSourceSelector && selectedPackageName.isNotEmpty()) {
-        AppSourceSelectorDialog(
-            packageName = selectedPackageName,
-            onDismiss = {
-                showSourceSelector = false
-                selectedPackageName = ""
-            },
-            onDownloaderSelected = {
-                showSourceSelector = false
-                viewModel.selectAppWithDownloader(selectedPackageName)
-                selectedPackageName = ""
-            },
-            onStorageSelected = {
-                showSourceSelector = false
-                viewModel.selectAppFromStorage(selectedPackageName)
-                selectedPackageName = ""
-            }
-        )
-    }
-
-    BackHandler(enabled = showSourceSelector) {
-        showSourceSelector = false
-        selectedPackageName = ""
     }
 
     Scaffold(
@@ -299,11 +261,9 @@ fun CustomHomeScreen(
                         }
                         if (dashboardViewModel.android11BugActive) {
                             showAndroid11Dialog = true
-                            selectedPackageName = "com.google.android.youtube"
                             return@AppButton
                         }
-                        selectedPackageName = "com.google.android.youtube"
-                        showSourceSelector = true
+                        onAppSelected("com.google.android.youtube")
                     }
                 )
 
@@ -325,11 +285,9 @@ fun CustomHomeScreen(
                         }
                         if (dashboardViewModel.android11BugActive) {
                             showAndroid11Dialog = true
-                            selectedPackageName = "com.google.android.apps.youtube.music"
                             return@AppButton
                         }
-                        selectedPackageName = "com.google.android.apps.youtube.music"
-                        showSourceSelector = true
+                        onAppSelected("com.google.android.apps.youtube.music")
                     }
                 )
             }
@@ -383,128 +341,4 @@ private fun AppButton(
             fontWeight = FontWeight.SemiBold
         )
     }
-}
-
-@Composable
-private fun AppSourceSelectorDialog(
-    packageName: String,
-    onDismiss: () -> Unit,
-    onDownloaderSelected: () -> Unit,
-    onStorageSelected: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = {
-            Text(
-                text = stringResource(R.string.custom_home_select_source),
-                style = MaterialTheme.typography.titleLarge
-            )
-        },
-        text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(R.string.custom_home_select_source_description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                // Downloader option
-                ElevatedCard(
-                    onClick = onDownloaderSelected,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.elevatedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = MaterialTheme.colorScheme.primaryContainer,
-                            modifier = Modifier.size(48.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    Icons.Outlined.Download,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                            }
-                        }
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.custom_home_use_downloader),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                text = stringResource(R.string.custom_home_downloader_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-
-                // Storage option
-                ElevatedCard(
-                    onClick = onStorageSelected,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.elevatedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = MaterialTheme.colorScheme.secondaryContainer,
-                            modifier = Modifier.size(48.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    Icons.Default.Storage,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                            }
-                        }
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.custom_home_select_from_storage),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                text = stringResource(R.string.custom_home_storage_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
-            }
-        }
-    )
 }

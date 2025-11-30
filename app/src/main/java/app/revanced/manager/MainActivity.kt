@@ -58,12 +58,10 @@ import app.revanced.manager.ui.screen.settings.update.ChangelogsSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
-import app.revanced.manager.ui.viewmodel.CustomHomeViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.util.EventEffect
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
 import org.koin.compose.koinInject
@@ -136,25 +134,13 @@ private fun ReVancedManager(vm: MainViewModel) {
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         composable<CustomHome> {
-            val customHomeViewModel: CustomHomeViewModel = koinViewModel()
-
-            LaunchedEffect(Unit) {
-                launch {
-                    customHomeViewModel.selectAppWithDownloaderFlow.collect { packageName ->
-                        vm.selectApp(packageName)
-                    }
-                }
-                launch {
-                    customHomeViewModel.selectAppFromStorageFlow.collect { packageName ->
-                        vm.selectApp(packageName)
-                    }
-                }
-            }
-
             CustomHomeScreen(
                 onSettingsClick = { navController.navigate(Settings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
-                onDownloaderPluginClick = { navController.navigate(Settings.Downloads) }
+                onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
+                onAppSelected = { packageName ->
+                    vm.selectAppWithSourceSelection(packageName)
+                }
             )
         }
         composable<Dashboard> {

@@ -487,7 +487,7 @@ class SelectedAppInfoViewModel(
         selection
     }
 
-    var showSourceSelector by mutableStateOf(requiresSourceSelection)
+    var showSourceSelector by mutableStateOf(requiresSourceSelection || _selectedApp is SelectedApp.Search)
         private set
     private var pluginAction: Pair<LoadedDownloaderPlugin, Job>? by mutableStateOf(null)
     val activePluginAction get() = pluginAction?.first?.packageName

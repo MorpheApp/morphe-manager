@@ -93,6 +93,20 @@ class MainViewModel(
         }
     }
 
+    fun selectAppWithSourceSelection(packageName: String, patches: PatchSelection? = null) = viewModelScope.launch {
+        val app = SelectedApp.Search(packageName, suggestedVersion(packageName))
+        appSelectChannel.send(
+            SelectedApplicationInfo.ViewModelParams(
+                app = app,
+                patches = patches,
+                profileId = null,
+                requiresSourceSelection = false
+            )
+        )
+    }
+
+    fun selectAppWithSourceSelection(packageName: String) = selectAppWithSourceSelection(packageName, null)
+
     fun applyLegacySettings(result: ActivityResult) {
         if (result.resultCode != Activity.RESULT_OK) {
             app.toast(app.getString(R.string.legacy_import_failed))
