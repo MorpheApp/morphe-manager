@@ -166,8 +166,9 @@ android {
 
         release {
             if (!project.hasProperty("noProguard")) {
-                isMinifyEnabled = true
-                isShrinkResources = true
+                // FIXME: Enable this again after changing to public repo patcher/library dependencies.
+                //isMinifyEnabled = true
+                //isShrinkResources = true
                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             }
 
