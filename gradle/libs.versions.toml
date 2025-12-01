@@ -17,8 +17,8 @@ serialization = "1.8.0"
 collection = "0.3.8"
 datetime = "0.6.1"
 room-version = "2.7.1"
-revanced-patcher = "21.0.0"
-revanced-library = "3.0.2"
+morphe-patcher = "1.0.0-dev.2"
+morphe-library = "1.0.1"
 koin = "3.5.3"
 ktor = "2.3.9"
 markdown-renderer = "0.30.0"
@@ -82,8 +82,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-ver
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
 
 # Patcher
-revanced-patcher = { group = "app.revanced", name = "revanced-patcher", version.ref = "revanced-patcher" }
-revanced-library = { group = "app.revanced", name = "revanced-library", version.ref = "revanced-library" }
+morphe-patcher = { group = "app.morphe", name = "morphe-patcher", version.ref = "morphe-patcher" }
+morphe-library = { group = "app.morphe", name = "morphe-library", version.ref = "morphe-library" }
 
 # Koin
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
