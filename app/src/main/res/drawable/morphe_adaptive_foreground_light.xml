@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Morphe. This is copyrighted content, and not licensed under open source terms. See https://github.com/Morphe/morphe-branding -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:aapt="http://schemas.android.com/aapt"
+android:width="108dp"
+android:height="108dp"
+android:viewportWidth="512"
+android:viewportHeight="512">
+<group
+    android:scaleX="0.6"
+    android:scaleY="0.6"
+    android:translateX="102.4"
+    android:translateY="102.4">
+    <path
+        android:fillColor="#12437E"
+        android:pathData="M123,140c-21,0 -39,17 -40,38v192c1,21 19,38 40,38 21,0 39,-17 40,-38V178c-1,-21 -19,-38 -40,-38z" />
+    <path
+        android:fillColor="#03CFCC"
+        android:pathData="M349,285v85c1,21 19,38 40,38 21,0 39,-17 40,-38V182c-11,-14 -74,63 -80,103z" />
+    <path android:pathData="M127,108c-34,0 -44,25 -44,40v54c30,-33 75,27 80,33 28,32 44,87 93,89 48,-2 67,-56 93,-89 0,0 45,-74 80,-80 0,-28 -11,-47 -44,-47 -34,0 -58,50 -75,72 -17,22 -25,46 -54,46 -29,0 -38,-25 -54,-46 -17,-22 -41,-72 -75,-72z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="429"
+                android:endY="216"
+                android:startX="83"
+                android:startY="216"
+                android:type="linear">
+                <item
+                    android:color="#12437E"
+                    android:offset="0" />
+                <item
+                    android:color="#03CFCC"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</group>
+</vector>
+
