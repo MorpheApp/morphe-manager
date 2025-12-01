@@ -57,8 +57,8 @@ dependencies {
     ksp(libs.room.compiler)
 
     // ReVanced
-    implementation(libs.revanced.patcher)
-    implementation(libs.revanced.library)
+    implementation(libs.morphe.patcher)
+    implementation(libs.morphe.library)
 
     // Downloader plugins
     implementation(project(":api"))
