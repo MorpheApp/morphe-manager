@@ -60,7 +60,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -210,7 +209,6 @@ class SelectedAppInfoViewModel(
         invalidateSelectedAppInfo()
         profileId?.let(::loadProfileConfiguration)
         viewModelScope.launch(Dispatchers.Main) {
-            delay(100) // Delay for smooth animation.
             val packageInfo = async(Dispatchers.IO) { pm.getPackageInfo(packageName) }
             val installedAppDeferred =
                 async(Dispatchers.IO) { installedAppRepository.get(packageName) }

@@ -54,6 +54,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -77,11 +78,13 @@ import app.revanced.manager.ui.component.NotificationCard
 import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
+import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.universal.revanced.manager.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -113,14 +116,29 @@ fun CustomHomeScreen(
         }
     }
 
-    var isNavigating by rememberSaveable { mutableStateOf(false) }
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     var showBundlesSheet by remember { mutableStateOf(false) }
     var showQuickPatchDialog by rememberSaveable { mutableStateOf(false) }
     var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
 
+    // State for bundle update snackbar with minimum display time
+    var showBundleUpdateSnackbar by remember { mutableStateOf(false) }
+    var lastBundleUpdateProgress by remember { mutableStateOf<PatchBundleRepository.BundleUpdateProgress?>(null) }
+
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(RequestInstallAppsContract) {
         showAndroid11Dialog = false
+    }
+
+    // Control snackbar visibility
+    LaunchedEffect(bundleUpdateProgress) {
+        if (bundleUpdateProgress != null) {
+            lastBundleUpdateProgress = bundleUpdateProgress
+            showBundleUpdateSnackbar = true
+        } else if (showBundleUpdateSnackbar) {
+            // Wait minimum 3 seconds before allowing hide
+            delay(3000)
+            showBundleUpdateSnackbar = false
+        }
     }
 
     if (showAndroid11Dialog) {
@@ -130,7 +148,7 @@ fun CustomHomeScreen(
         )
     }
 
-    // Bottom Sheet.
+    // Bottom Sheet
     if (showBundlesSheet) {
         ModalBottomSheet(
             onDismissRequest = { showBundlesSheet = false },
@@ -189,9 +207,9 @@ fun CustomHomeScreen(
         }
     }
 
-    // Quick Patch Dialog.
+    // Quick Patch Dialog
     if (showQuickPatchDialog && selectedPackageName != null) {
-        // Use key to create a new ViewModel for each packageName.
+        // Use key to create a new ViewModel for each packageName
         val quickPatchViewModel: QuickPatchViewModel = koinViewModel(
             key = selectedPackageName
         ) {
@@ -221,7 +239,6 @@ fun CustomHomeScreen(
         EventEffect(flow = quickPatchViewModel.startPatchingFlow) { params ->
             showQuickPatchDialog = false
             selectedPackageName = null
-            isNavigating = true
             onStartQuickPatch(params)
         }
 
@@ -252,35 +269,46 @@ fun CustomHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Bundle update progress
+            // Bundle update snackbar with smooth animation
             AnimatedVisibility(
-                visible = bundleUpdateProgress != null,
-                enter = fadeIn(animationSpec = tween(600)) + slideInVertically(initialOffsetY = { -it }),
-                exit = fadeOut(animationSpec = tween(400)) + slideOutVertically(targetOffsetY = { -it }),
+                visible = showBundleUpdateSnackbar && lastBundleUpdateProgress != null,
+                enter = slideInVertically(
+                    initialOffsetY = { -it },
+                    animationSpec = tween(durationMillis = 500)
+                ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+                exit = slideOutVertically(
+                    targetOffsetY = { -it },
+                    animationSpec = tween(durationMillis = 500)
+                ) + fadeOut(animationSpec = tween(durationMillis = 500)),
                 modifier = Modifier.align(Alignment.TopCenter)
             ) {
-                bundleUpdateProgress?.let { progress ->
+                lastBundleUpdateProgress?.let { progress ->
                     val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
 
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
                     ) {
                         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(
                                 text = stringResource(R.string.bundle_update_banner_title),
                                 style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                             Text(
                                 text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
-                                style = MaterialTheme.typography.bodyMedium
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                             LinearProgressIndicator(
                                 progress = { fraction },
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth(),
+                                color = MaterialTheme.colorScheme.primary,
+                                trackColor = MaterialTheme.colorScheme.surfaceVariant
                             )
                         }
                     }
@@ -316,8 +344,7 @@ fun CustomHomeScreen(
                     }
                     selectedPackageName = PACKAGE_YOUTUBE_MUSIC
                     showQuickPatchDialog = true
-                },
-                enabled = !isNavigating
+                }
             )
 
             // Floating Action Buttons
@@ -345,8 +372,8 @@ fun CustomHomeScreen(
                         Box(modifier = Modifier.align(Alignment.TopEnd)) {
                             Box(
                                 modifier = Modifier
-                                .size(14.dp)
-                                .background(Color.White, CircleShape))
+                                    .size(14.dp)
+                                    .background(Color.White, CircleShape))
                             Box(
                                 modifier = Modifier
                                     .size(12.dp)
@@ -365,26 +392,6 @@ fun CustomHomeScreen(
                     Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
                 }
             }
-
-            // Loading overlay.
-            if (isNavigating) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clickable(enabled = false) { },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Surface(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)) {
-                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                CircularProgressIndicator(modifier = Modifier.size(48.dp), strokeWidth = 4.dp)
-                                Spacer(modifier = Modifier.height(16.dp))
-                                Text(text = stringResource(R.string.loading), style = MaterialTheme.typography.bodyLarge)
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -394,8 +401,7 @@ private fun MainContent(
     availablePatches: Int,
     onAllAppsClick: () -> Unit,
     onYouTubeClick: () -> Unit,
-    onYouTubeMusicClick: () -> Unit,
-    enabled: Boolean
+    onYouTubeMusicClick: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -447,7 +453,6 @@ private fun MainContent(
                 },
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
-                enabled = enabled,
                 onClick = onYouTubeClick
             )
 
@@ -467,7 +472,6 @@ private fun MainContent(
                 backgroundColor = Color(0xFF121212),
                 contentColor = Color.White,
                 gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
-                enabled = enabled,
                 onClick = onYouTubeMusicClick
             )
 
@@ -477,7 +481,6 @@ private fun MainContent(
         // Bottom "Other apps" button.
         TextButton(
             onClick = onAllAppsClick,
-            enabled = enabled,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 16.dp)
@@ -519,7 +522,6 @@ private fun AppButton(
                     else
                         Modifier.background(backgroundColor, RoundedCornerShape(28.dp))
                 )
-                .alpha(if (enabled) 1f else 0.6f)
         ) {
             if (isLoading) {
                 CircularProgressIndicator(color = contentColor, strokeWidth = 3.dp)

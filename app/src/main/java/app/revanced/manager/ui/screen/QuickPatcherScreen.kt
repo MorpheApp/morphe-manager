@@ -718,7 +718,8 @@ private fun PatchingSuccess(
                     text = stringResource(R.string.quick_patcher_success_title),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center
                 )
 
                 Spacer(Modifier.height(8.dp))
