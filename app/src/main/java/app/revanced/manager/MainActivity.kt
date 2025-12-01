@@ -160,9 +160,6 @@ private fun ReVancedManager(vm: MainViewModel) {
             )
         }
 
-
-
-
         composable<Dashboard> {
             DashboardScreen(
                 onSettingsClick = { navController.navigate(Settings) },
