@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -95,6 +96,7 @@ class DownloadsViewModel(
             appContext.registerReceiver(uninstallReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
         } else {
             @Suppress("DEPRECATION")
+            @SuppressLint("UnspecifiedRegisterReceiverFlag")
             appContext.registerReceiver(uninstallReceiver, filter)
         }
     }

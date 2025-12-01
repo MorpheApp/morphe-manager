@@ -1,5 +1,6 @@
 package app.revanced.manager.patcher.worker
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
@@ -143,6 +144,7 @@ class PatcherWorker(
             wakeLock.release()
         }
 
+        @SuppressLint("RestrictedApi") // FIXME
         if (result is Result.Success && args.input is SelectedApp.Local && args.input.temporary) {
             args.input.file.delete()
         }
