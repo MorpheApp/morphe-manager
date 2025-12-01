@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
@@ -38,8 +39,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
+import app.revanced.manager.ui.component.ConfirmDialog
+import app.revanced.manager.ui.component.InstallerStatusDialog
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.toast
@@ -138,6 +142,13 @@ fun QuickPatcherScreen(
         }
     }
 
+    // Auto-install after successful patching
+    LaunchedEffect(patcherSucceeded, viewModel.isInstalling, viewModel.installedPackageName) {
+        if (patcherSucceeded == true && !viewModel.isInstalling && viewModel.installedPackageName == null && !hasError) {
+            viewModel.install()
+        }
+    }
+
     BackHandler {
         onBackClick()
     }
@@ -204,7 +215,147 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Main content without Scaffold - fullscreen
+    // Add handling for installer status dialog (from PatcherScreen)
+    viewModel.packageInstallerStatus?.let {
+        InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
+    }
+
+    // Add handling for memory adjustment dialog (from PatcherScreen)
+    viewModel.memoryAdjustmentDialog?.let { state ->
+        val message = if (state.adjusted) {
+            stringResource(
+                R.string.patcher_memory_adjustment_message_reduced,
+                state.previousLimit,
+                state.newLimit
+            )
+        } else {
+            stringResource(
+                R.string.patcher_memory_adjustment_message_no_change,
+                state.previousLimit
+            )
+        }
+        AlertDialog(
+            onDismissRequest = viewModel::dismissMemoryAdjustmentDialog,
+            title = { Text(stringResource(R.string.patcher_memory_adjustment_title)) },
+            text = { Text(message) },
+            confirmButton = {
+                TextButton(onClick = viewModel::retryAfterMemoryAdjustment) {
+                    Text(stringResource(R.string.patcher_memory_adjustment_retry))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::dismissMemoryAdjustmentDialog) {
+                    Text(stringResource(R.string.patcher_memory_adjustment_dismiss))
+                }
+            }
+        )
+    }
+
+    // Add handling for missing patch dialog (from PatcherScreen)
+    viewModel.missingPatchDialog?.let { state ->
+        val patchList = state.patchNames.joinToString(separator = "\n• ", prefix = "• ")
+        AlertDialog(
+            onDismissRequest = viewModel::dismissMissingPatchDialog,
+            title = { Text(stringResource(R.string.patcher_missing_patch_title)) },
+            text = {
+                Text(
+                    text = stringResource(
+                        R.string.patcher_missing_patch_message,
+                        patchList
+                    )
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = viewModel::dismissMissingPatchDialog
+                ) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
+    }
+
+    // Add handling for install failure message (from PatcherScreen)
+    viewModel.installFailureMessage?.let { message ->
+        AlertDialog(
+            onDismissRequest = viewModel::dismissInstallFailureMessage,
+            title = { Text(stringResource(R.string.install_app_fail_title)) },
+            text = { Text(message) },
+            confirmButton = {
+                TextButton(onClick = viewModel::dismissInstallFailureMessage) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
+    }
+
+    // Add handling for install status (from PatcherScreen)
+    viewModel.installStatus?.let { status ->
+        when (status) {
+            PatcherViewModel.InstallCompletionStatus.InProgress -> {
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            is PatcherViewModel.InstallCompletionStatus.Success -> {
+                LaunchedEffect(status) {
+                    viewModel.clearInstallStatus()
+                }
+            }
+
+            is PatcherViewModel.InstallCompletionStatus.Failure -> {
+                if (viewModel.installFailureMessage == null) {
+                    AlertDialog(
+                        onDismissRequest = viewModel::dismissInstallFailureMessage,
+                        title = { Text(stringResource(R.string.install_app_fail_title)) },
+                        text = { Text(status.message) },
+                        confirmButton = {
+                            TextButton(onClick = viewModel::dismissInstallFailureMessage) {
+                                Text(stringResource(R.string.ok))
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    }
+
+    // Add activity launcher for handling plugin activities or external installs (from PatcherScreen)
+    val activityLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = viewModel::handleActivityResult
+    )
+    EventEffect(flow = viewModel.launchActivityFlow) { intent ->
+        activityLauncher.launch(intent)
+    }
+
+    // Add activity prompt dialog (from PatcherScreen)
+    viewModel.activityPromptDialog?.let { title ->
+        AlertDialog(
+            onDismissRequest = viewModel::rejectInteraction,
+            confirmButton = {
+                TextButton(
+                    onClick = viewModel::allowInteraction
+                ) {
+                    Text(stringResource(R.string.continue_))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = viewModel::rejectInteraction
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            },
+            title = { Text(title) },
+            text = {
+                Text(stringResource(R.string.plugin_activity_dialog_body))
+            }
+        )
+    }
+
+    // Main content
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -311,8 +462,8 @@ fun QuickPatcherScreen(
                                         clipboardManager.setText(AnnotatedString(errorMessage))
                                         context.toast(context.getString(R.string.quick_patcher_error_copied))
                                     },
-                                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                                 ) {
                                     Icon(Icons.Default.ContentCopy, stringResource(R.string.quick_patcher_copy_error))
                                 }
