@@ -1,0 +1,158 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../morphe-library/1.0.1/morphe-library-1.0.1.module",
+    "group": "app.morphe",
+    "module": "morphe-library",
+    "version": "1.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.9"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "morphe-library-jvm-1.0.1.jar",
+          "url": "morphe-library-jvm-1.0.1.jar",
+          "size": 72803,
+          "sha512": "c10794a1f51a58f6f78096c514540233dfac334a6a63431391b3588d95f02664aa89a6cd121d1ae07b8b2f8f3c26ae98c257ef3dbbf84786bf36cefce1230680",
+          "sha256": "5f628680bd7bcec48831386f5a70431e5b6f68919b808cf39f18f9fc515ce330",
+          "sha1": "721a8b6cb80d2523db26a359fbcee2de617566cb",
+          "md5": "374087c4c37b17fd74b6ceed7f935dc8"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.20"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "apksig",
+          "version": {
+            "requires": "8.5.2"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "apkzlib",
+          "version": {
+            "requires": "8.5.2"
+          }
+        },
+        {
+          "group": "org.bouncycastle",
+          "module": "bcpkix-jdk18on",
+          "version": {
+            "requires": "1.77"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.2.1-jre"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "jadb",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-reflect",
+          "version": {
+            "requires": "2.0.20"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.7.1"
+          }
+        },
+        {
+          "group": "app.morphe",
+          "module": "morphe-patcher",
+          "version": {
+            "requires": "1.0.0-dev.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "morphe-library-jvm-1.0.1.jar",
+          "url": "morphe-library-jvm-1.0.1.jar",
+          "size": 72803,
+          "sha512": "c10794a1f51a58f6f78096c514540233dfac334a6a63431391b3588d95f02664aa89a6cd121d1ae07b8b2f8f3c26ae98c257ef3dbbf84786bf36cefce1230680",
+          "sha256": "5f628680bd7bcec48831386f5a70431e5b6f68919b808cf39f18f9fc515ce330",
+          "sha1": "721a8b6cb80d2523db26a359fbcee2de617566cb",
+          "md5": "374087c4c37b17fd74b6ceed7f935dc8"
+        }
+      ]
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "morphe-library-jvm-1.0.1-sources.jar",
+          "url": "morphe-library-jvm-1.0.1-sources.jar",
+          "size": 20659,
+          "sha512": "92af7eae0b2215ea517c8b64e470d2ca43a3466fb436a8aff90f6b18e88ff65a825f53e3c56065861a5f51c73e8d1192fdbb7c48392b69378eb2d5140b423a0e",
+          "sha256": "6d232ff094307fdf90deb385dde42ccd8cdf1e10d58db32db5241262254c8879",
+          "sha1": "91f0ca2511f40b6a106aa2e1fdd6a1dce02f877d",
+          "md5": "fa07ae8e001d511e810745c950aa8fbd"
+        }
+      ]
+    }
+  ]
+}

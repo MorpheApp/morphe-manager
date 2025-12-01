@@ -15,6 +15,18 @@ plugins {
 val outputApkFileName = "universal-revanced-manager-$version.apk"
 
 dependencies {
+    // FIXME: Temporary copy pasted dependencies from morphe-library until repos are public.
+    implementation("app.morphe:morphe-patcher:1.0.0-dev.1")
+    implementation("app.morphe:morphe-library-jvm:1.0.1")
+    implementation("app.morphe:morphe-library:1.0.1")
+    implementation("com.android.tools.build:apksig:8.5.2")
+    implementation("com.android.tools.build:apkzlib:8.5.2")
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.77")
+    implementation("com.google.guava:guava:33.2.1-jre")
+    implementation("app.revanced:jadb:1.2.1") // Fork with Shell v2 support
+    implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+
     // AndroidX Core
     implementation(libs.androidx.ktx)
     implementation(libs.runtime.ktx)

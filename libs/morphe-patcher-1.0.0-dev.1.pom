@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>app.morphe</groupId>
+  <artifactId>morphe-patcher</artifactId>
+  <version>1.0.0-dev.1</version>
+  <name>Morphe Patcher</name>
+  <description>Patcher used by Morphe.</description>
+  <url>https://Morphe.software</url>
+  <licenses>
+    <license>
+      <name>GNU General Public License v3.0</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>Morphe</id>
+      <name>Morphe</name>
+      <email>contact@morphe.software</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/MorpheApp/morphe-patcher.git</connection>
+    <developerConnection>scm:git:git@github.com:MorpheApp/morphe-patcher.git</developerConnection>
+    <url>https://github.com/MorpheApp/morphe-patcher</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>2.1.10</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>app.revanced</groupId>
+      <artifactId>apktool-lib</artifactId>
+      <version>2.9.3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+      <version>2.1.10</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlinx</groupId>
+      <artifactId>kotlinx-coroutines-core-jvm</artifactId>
+      <version>1.8.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>app.revanced</groupId>
+      <artifactId>multidexlib2</artifactId>
+      <version>3.0.3.r3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android.tools.smali</groupId>
+      <artifactId>smali</artifactId>
+      <version>3.0.5</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3</artifactId>
+      <version>1.1.4c</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
