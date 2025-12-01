@@ -33,6 +33,9 @@
     <string name="home_greeting_5">Let\'s make the ad providers cry in 4K, together.</string>
     <string name="home_greeting_6">Want to watch ads? Me neither.</string>
     <string name="home_greeting_7">Today’s forecast: 100%% chance of patching.</string>
+    <string name="loading_patches">Loading patches…</string>
+    <string name="please_wait">Please wait…</string>
+
     <!-- Quick Patcher Screen -->
     <string name="quick_patcher_title">Patching</string>
     <string name="quick_patcher_save_apk">Save APK</string>

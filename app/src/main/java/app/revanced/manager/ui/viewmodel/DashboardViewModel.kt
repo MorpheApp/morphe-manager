@@ -70,6 +70,13 @@ class DashboardViewModel(
         viewModelScope.launch {
             checkForManagerUpdates()
             updateBatteryOptimizationsWarning()
+
+            // Automatically update bundles when using custom home screen
+            if (prefs.useCustomHomeScreen.get()) {
+                uiSafe(app, R.string.failed_to_check_updates, "Failed to check for bundle updates") {
+                    patchBundleRepository.updateCheck()
+                }
+            }
         }
     }
 

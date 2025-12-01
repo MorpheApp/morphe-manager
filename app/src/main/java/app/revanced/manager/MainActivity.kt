@@ -145,6 +145,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                 onSettingsClick = { navController.navigate(Settings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
+                onUpdateClick = { navController.navigate(Update()) },
                 onStartQuickPatch = { params ->
                     // Immediately start patching with the received parameters.
                     navController.navigateComplex(
@@ -158,6 +159,9 @@ private fun ReVancedManager(vm: MainViewModel) {
                 }
             )
         }
+
+
+
 
         composable<Dashboard> {
             DashboardScreen(

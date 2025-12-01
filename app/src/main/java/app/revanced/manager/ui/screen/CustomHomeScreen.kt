@@ -37,6 +37,9 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.Update
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -76,6 +79,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.revanced.manager.ui.component.NotificationCard
 import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
+import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -101,6 +105,7 @@ fun CustomHomeScreen(
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
+    onUpdateClick: () -> Unit = {},
     dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -109,6 +114,14 @@ fun CustomHomeScreen(
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+
+    // Check if bundles are ready and loaded
+    val isBundlesReady by remember {
+        derivedStateOf { availablePatches > 0 }
+    }
+    val isBundlesLoading by remember {
+        derivedStateOf { bundleUpdateProgress != null || availablePatches == 0 }
+    }
 
     val hasSheetNotifications by remember {
         derivedStateOf {
@@ -120,6 +133,26 @@ fun CustomHomeScreen(
     var showBundlesSheet by remember { mutableStateOf(false) }
     var showQuickPatchDialog by rememberSaveable { mutableStateOf(false) }
     var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
+
+    // Manager update dialog state
+    var showUpdateDialog by rememberSaveable {
+        mutableStateOf(dashboardViewModel.prefs.showManagerUpdateDialogOnLaunch.getBlocking())
+    }
+    val availableUpdate by remember {
+        derivedStateOf { dashboardViewModel.updatedManagerVersion.takeIf { showUpdateDialog } }
+    }
+
+    availableUpdate?.let { version ->
+        AvailableUpdateDialog(
+            onDismiss = { showUpdateDialog = false },
+            setShowManagerUpdateDialogOnLaunch = dashboardViewModel::setShowManagerUpdateDialogOnLaunch,
+            onConfirm = {
+                showUpdateDialog = false
+                onUpdateClick()
+            },
+            newVersion = version
+        )
+    }
 
     // State for bundle update snackbar with minimum display time
     var showBundleUpdateSnackbar by remember { mutableStateOf(false) }
@@ -269,9 +302,17 @@ fun CustomHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Bundle update snackbar with smooth animation
+            // Loading overlay when bundles are not ready
+            if (isBundlesLoading) {
+                LoadingOverlay(
+                    bundleUpdateProgress = bundleUpdateProgress,
+                    availablePatches = availablePatches
+                )
+            }
+
+            // Bundle update snackbar
             AnimatedVisibility(
-                visible = showBundleUpdateSnackbar && lastBundleUpdateProgress != null,
+                visible = showBundleUpdateSnackbar && lastBundleUpdateProgress != null && isBundlesReady,
                 enter = slideInVertically(
                     initialOffsetY = { -it },
                     animationSpec = tween(durationMillis = 500)
@@ -316,49 +357,78 @@ fun CustomHomeScreen(
             }
 
             // Main centered content
-            MainContent(
-                availablePatches = availablePatches,
-                onAllAppsClick = onAllAppsClick,
-                onYouTubeClick = {
-                    if (availablePatches < 1) {
-                        context.toast(context.getString(R.string.no_patch_found))
-                        scope.launch { showBundlesSheet = true }
-                        return@MainContent
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .alpha(if (isBundlesLoading) 0.3f else 1f)
+            ) {
+                MainContent(
+                    availablePatches = availablePatches,
+                    onAllAppsClick = onAllAppsClick,
+                    onYouTubeClick = {
+                        if (isBundlesLoading) return@MainContent
+                        if (availablePatches < 1) {
+                            context.toast(context.getString(R.string.no_patch_found))
+                            scope.launch { showBundlesSheet = true }
+                            return@MainContent
+                        }
+                        if (dashboardViewModel.android11BugActive) {
+                            showAndroid11Dialog = true
+                            return@MainContent
+                        }
+                        selectedPackageName = PACKAGE_YOUTUBE
+                        showQuickPatchDialog = true
+                    },
+                    onYouTubeMusicClick = {
+                        if (isBundlesLoading) return@MainContent
+                        if (availablePatches < 1) {
+                            context.toast(context.getString(R.string.no_patch_found))
+                            scope.launch { showBundlesSheet = true }
+                            return@MainContent
+                        }
+                        if (dashboardViewModel.android11BugActive) {
+                            showAndroid11Dialog = true
+                            return@MainContent
+                        }
+                        selectedPackageName = PACKAGE_YOUTUBE_MUSIC
+                        showQuickPatchDialog = true
                     }
-                    if (dashboardViewModel.android11BugActive) {
-                        showAndroid11Dialog = true
-                        return@MainContent
-                    }
-                    selectedPackageName = PACKAGE_YOUTUBE
-                    showQuickPatchDialog = true
-                },
-                onYouTubeMusicClick = {
-                    if (availablePatches < 1) {
-                        context.toast(context.getString(R.string.no_patch_found))
-                        scope.launch { showBundlesSheet = true }
-                        return@MainContent
-                    }
-                    if (dashboardViewModel.android11BugActive) {
-                        showAndroid11Dialog = true
-                        return@MainContent
-                    }
-                    selectedPackageName = PACKAGE_YOUTUBE_MUSIC
-                    showQuickPatchDialog = true
-                }
-            )
+                )
+            }
 
             // Floating Action Buttons
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .alpha(if (isBundlesLoading) 0.3f else 1f),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                // Update FAB with badge for manager updates
+                if (!dashboardViewModel.updatedManagerVersion.isNullOrEmpty()) {
+                    FloatingActionButton(
+                        onClick = { if (!isBundlesLoading) onUpdateClick() },
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    ) {
+                        BadgedBox(
+                            badge = {
+                                Badge(modifier = Modifier.size(6.dp))
+                            }
+                        ) {
+                            Icon(
+                                Icons.Outlined.Update,
+                                contentDescription = stringResource(R.string.update)
+                            )
+                        }
+                    }
+                }
+
                 // Sources FAB with notification dot
                 Box {
                     FloatingActionButton(
-                        onClick = { showBundlesSheet = true },
+                        onClick = { if (!isBundlesLoading) showBundlesSheet = true },
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ) {
@@ -385,12 +455,70 @@ fun CustomHomeScreen(
                 }
 
                 FloatingActionButton(
-                    onClick = onSettingsClick,
+                    onClick = { if (!isBundlesLoading) onSettingsClick() },
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {
                     Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
                 }
+            }
+        }
+    }
+}
+
+// Loading overlay component shown when bundles are updating or not ready
+@Composable
+private fun LoadingOverlay(
+    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    availablePatches: Int
+) {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background.copy(alpha = 0.95f)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(64.dp),
+                strokeWidth = 6.dp,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = if (bundleUpdateProgress != null) {
+                    stringResource(
+                        R.string.bundle_update_progress,
+                        bundleUpdateProgress.completed,
+                        bundleUpdateProgress.total
+                    )
+                } else if (availablePatches == 0) {
+                    stringResource(R.string.loading_patches)
+                } else {
+                    stringResource(R.string.please_wait)
+                },
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            bundleUpdateProgress?.let { progress ->
+                Spacer(modifier = Modifier.height(16.dp))
+                LinearProgressIndicator(
+                    progress = {
+                        if (progress.total == 0) 0f
+                        else progress.completed.toFloat() / progress.total
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .height(8.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                )
             }
         }
     }
