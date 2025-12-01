@@ -143,11 +143,11 @@ android {
     buildToolsVersion = "35.0.1"
 
     defaultConfig {
-        applicationId = "app.universal.revanced.manager"
+        applicationId = "software.morphe.manager"
         minSdk = 26
         targetSdk = 35
 
-        val versionStr = if (version == "unspecified") "1.5.0" else version.toString()
+        val versionStr = if (version == "unspecified") "1.0.0" else version.toString()
         versionName = versionStr
         versionCode = with(versionStr.toVersion()) {
             major * 10_000_000 +

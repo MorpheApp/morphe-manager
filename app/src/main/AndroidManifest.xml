@@ -31,7 +31,7 @@
         android:largeHeap="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="URV Manager"
+        android:label="Morphe"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReVancedManager"
         android:enableOnBackInvokedCallback="true"
