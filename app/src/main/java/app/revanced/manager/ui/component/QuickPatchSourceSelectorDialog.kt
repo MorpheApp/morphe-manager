@@ -70,7 +70,8 @@ fun QuickPatchSourceSelectorDialog(
         },
         text = {
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+                contentPadding = PaddingValues(vertical = 4.dp)
             ) {
                 // Downloaded apps.
                 if (downloadedApps.isNotEmpty()) {
@@ -84,7 +85,7 @@ fun QuickPatchSourceSelectorDialog(
                                     Icons.Outlined.Source,
                                     null,
                                     tint = Color.White,
-                                    modifier = Modifier.size(40.dp)
+                                    modifier = Modifier.size(32.dp)
                                 )
                             },
                             backgroundColor = Color(0xFF1E88E5),
@@ -94,7 +95,7 @@ fun QuickPatchSourceSelectorDialog(
                     }
                 }
 
-                // Auto.
+                // Auto
                 if (plugins.isNotEmpty()) {
                     item {
                         QuickPatchSourceButton(
@@ -105,7 +106,7 @@ fun QuickPatchSourceSelectorDialog(
                                     Icons.Filled.AutoFixHigh,
                                     null,
                                     tint = Color.White,
-                                    modifier = Modifier.size(40.dp)
+                                    modifier = Modifier.size(32.dp)
                                 )
                             },
                             backgroundColor = Color(0xFF00C853),
@@ -115,7 +116,7 @@ fun QuickPatchSourceSelectorDialog(
                     }
                 }
 
-                // Installed app.
+                // Installed app
                 installedApp?.let { (app, meta) ->
                     val (usable, message) = when {
                         meta?.installType == InstallType.MOUNT && !hasRoot ->
@@ -136,7 +137,7 @@ fun QuickPatchSourceSelectorDialog(
                                     Icons.Outlined.Apps,
                                     null,
                                     tint = Color.White,
-                                    modifier = Modifier.size(40.dp)
+                                    modifier = Modifier.size(32.dp)
                                 )
                             },
                             backgroundColor = if (usable) Color(0xFF2196F3) else Color(0xFF757575),
@@ -146,7 +147,7 @@ fun QuickPatchSourceSelectorDialog(
                     }
                 }
 
-                // Local storage.
+                // Local storage
                 item {
                     QuickPatchSourceButton(
                         text = stringResource(R.string.app_source_dialog_option_storage),
@@ -156,7 +157,7 @@ fun QuickPatchSourceSelectorDialog(
                                 Icons.Outlined.FolderOpen,
                                 null,
                                 tint = Color.White,
-                                modifier = Modifier.size(40.dp)
+                                modifier = Modifier.size(32.dp)
                             )
                         },
                         backgroundColor = Color(0xFFFF9800),
@@ -165,7 +166,7 @@ fun QuickPatchSourceSelectorDialog(
                     )
                 }
 
-                // Downloader plugins.
+                // Downloader plugins
                 items(plugins) { plugin ->
                     QuickPatchSourceButton(
                         text = plugin.name,
@@ -175,7 +176,7 @@ fun QuickPatchSourceSelectorDialog(
                                 Icons.Outlined.Download,
                                 null,
                                 tint = Color.White,
-                                modifier = Modifier.size(40.dp)
+                                modifier = Modifier.size(32.dp)
                             )
                         },
                         backgroundColor = Color(0xFF9C27B0),
@@ -206,40 +207,40 @@ private fun QuickPatchSourceButton(
         enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 76.dp),
+            .heightIn(min = 64.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(backgroundColor, RoundedCornerShape(20.dp))
+                .background(backgroundColor, RoundedCornerShape(16.dp))
                 .alpha(if (enabled) 1f else 0.6f)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Icon in circle.
                 Box(
                     modifier = Modifier
-                        .size(56.dp)
+                        .size(48.dp)
                         .background(Color.White.copy(alpha = 0.18f), CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     icon()
                 }
 
-                Spacer(modifier = Modifier.width(14.dp))
+                Spacer(modifier = Modifier.width(10.dp))
 
                 // Text.
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = text,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
                         maxLines = 2,
@@ -248,9 +249,9 @@ private fun QuickPatchSourceButton(
                     subtitle?.let {
                         Text(
                             text = it,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             color = Color.White.copy(alpha = 0.9f),
-                            maxLines = 2,
+                            maxLines = 4,
                             overflow = TextOverflow.Ellipsis
                         )
                     }
@@ -266,11 +267,11 @@ private fun QuickPatchSourceButton(
 private fun SectionHeader(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleSmall,
         fontWeight = FontWeight.SemiBold,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 8.dp)
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     )
 }
