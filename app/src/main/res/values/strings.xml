@@ -20,20 +20,17 @@
     <string name="patches_count_selected">%1$d/%2$d selected</string>
 
     <!-- Custom Home Screen -->
-    <string name="use_custom_home_screen">Use custom home screen</string>
-    <string name="use_custom_home_screen_description">A simplified interface with quick access to YouTube</string>
-    <string name="custom_home_title">Choose an app</string>
-    <string name="custom_home_subtitle">Select an app for patching</string>
+    <string name="use_custom_home_screen">Use Morphe home screen</string>
+    <string name="use_custom_home_screen_description">A simplified interface with quick patching YouTube and YouTube Music</string>
     <string name="custom_home_youtube">YouTube</string>
     <string name="custom_home_youtube_music">YouTube Music</string>
     <string name="custom_home_other_apps">Choose other apps</string>
     <string name="custom_home_bundles">Patch bundles</string>
-    <string name="custom_home_select_source">Select a source</string>
-    <string name="custom_home_select_source_description">Where to get the file for patching?</string>
-    <string name="custom_home_use_downloader">Use downloader</string>
-    <string name="custom_home_select_from_storage">Choose from storage</string>
-    <string name="custom_home_downloader_description">Automatically download the APK</string>
-    <string name="custom_home_storage_description">Choose a file from the device</string>
+    <string name="home_greeting_1">Hey there! Ready to make YouTube great again?</string>
+    <string name="home_greeting_2">What masterpiece are we patching today</string>
+    <string name="home_greeting_3">Welcome back, troublemaker! Let’s break some apps</string>
+    <string name="home_greeting_4">Another day, another ad-blocked masterpiece</string>
+    <string name="home_greeting_5">Let’s make Google cry in 4K, shall we</string>
 
     <!-- Quick Patcher Screen -->
     <string name="quick_patcher_title">Patching</string>

@@ -5,21 +5,63 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -40,11 +82,13 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.universal.revanced.manager.R
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import android.provider.Settings as AndroidSettings
+
+private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
+private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
 
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,14 +121,6 @@ fun CustomHomeScreen(
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(RequestInstallAppsContract) {
         showAndroid11Dialog = false
-    }
-
-    // Reset navigation state after a short delay.
-    LaunchedEffect(isNavigating) {
-        if (isNavigating) {
-            delay(1000) // Delay for smooth animation.
-            isNavigating = false
-        }
     }
 
     if (showAndroid11Dialog) {
@@ -210,84 +246,48 @@ fun CustomHomeScreen(
         )
     }
 
-    Scaffold(
-        floatingActionButton = {
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                // Sources FAB.
-                Box {
-                    SmallFloatingActionButton(
-                        onClick = { showBundlesSheet = true },
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                    ) {
-                        Icon(
-                            Icons.Outlined.Source,
-                            contentDescription = stringResource(R.string.custom_home_bundles)
-                        )
-                    }
-
-                    // Red dot.
-                    if (hasSheetNotifications) {
-                        Box(modifier = Modifier.align(Alignment.TopEnd)) {
-                            Box(modifier = Modifier.size(14.dp).background(Color.White, CircleShape))
-                            Box(
-                                modifier = Modifier
-                                    .size(10.dp)
-                                    .align(Alignment.Center)
-                                    .background(Color.Red, CircleShape)
-                            )
-                        }
-                    }
-                }
-
-                SmallFloatingActionButton(
-                    onClick = onSettingsClick,
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-                ) {
-                    Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
-                }
-            }
-        }
-    ) { paddingValues ->
+    Scaffold { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Bundle update progress — fixed at top, doesn't push content.
-            bundleUpdateProgress?.let { progress ->
-                val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
+            // Bundle update progress
+            AnimatedVisibility(
+                visible = bundleUpdateProgress != null,
+                enter = fadeIn(animationSpec = tween(600)) + slideInVertically(initialOffsetY = { -it }),
+                exit = fadeOut(animationSpec = tween(400)) + slideOutVertically(targetOffsetY = { -it }),
+                modifier = Modifier.align(Alignment.TopCenter)
+            ) {
+                bundleUpdateProgress?.let { progress ->
+                    val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.TopCenter)
-                        .padding(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
-                ) {
-                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            text = stringResource(R.string.bundle_update_banner_title),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        LinearProgressIndicator(
-                            progress = { fraction },
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text(
+                                text = stringResource(R.string.bundle_update_banner_title),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            LinearProgressIndicator(
+                                progress = { fraction },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                     }
                 }
             }
 
-            // Main centered content.
+            // Main centered content
             MainContent(
                 availablePatches = availablePatches,
                 onAllAppsClick = onAllAppsClick,
@@ -301,7 +301,7 @@ fun CustomHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    selectedPackageName = "com.google.android.youtube"
+                    selectedPackageName = PACKAGE_YOUTUBE
                     showQuickPatchDialog = true
                 },
                 onYouTubeMusicClick = {
@@ -314,11 +314,57 @@ fun CustomHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    selectedPackageName = "com.google.android.apps.youtube.music"
+                    selectedPackageName = PACKAGE_YOUTUBE_MUSIC
                     showQuickPatchDialog = true
                 },
                 enabled = !isNavigating
             )
+
+            // Floating Action Buttons
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // Sources FAB with notification dot
+                Box {
+                    FloatingActionButton(
+                        onClick = { showBundlesSheet = true },
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ) {
+                        Icon(
+                            Icons.Outlined.Source,
+                            contentDescription = stringResource(R.string.custom_home_bundles)
+                        )
+                    }
+
+                    if (hasSheetNotifications) {
+                        Box(modifier = Modifier.align(Alignment.TopEnd)) {
+                            Box(
+                                modifier = Modifier
+                                .size(14.dp)
+                                .background(Color.White, CircleShape))
+                            Box(
+                                modifier = Modifier
+                                    .size(12.dp)
+                                    .align(Alignment.Center)
+                                    .background(Color.Red, CircleShape)
+                            )
+                        }
+                    }
+                }
+
+                FloatingActionButton(
+                    onClick = onSettingsClick,
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                ) {
+                    Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
+                }
+            }
 
             // Loading overlay.
             if (isNavigating) {
@@ -359,43 +405,73 @@ private fun MainContent(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = stringResource(R.string.custom_home_title),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 8.dp)
+            // Funny rotating greeting message
+            val greetingMessages = listOf(
+                R.string.home_greeting_1,
+                R.string.home_greeting_2,
+                R.string.home_greeting_3,
+                R.string.home_greeting_4,
+                R.string.home_greeting_5
             )
-            Text(
-                text = stringResource(R.string.custom_home_subtitle),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 48.dp)
-            )
+            var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
 
-            // YouTube Button.
+            AnimatedContent(
+                targetState = greetingMessages[currentGreetingIndex],
+                transitionSpec = {
+                    fadeIn(tween(800)) togetherWith fadeOut(tween(800))
+                },
+                label = "greeting_animation"
+            ) { resId ->
+                Text(
+                    text = stringResource(resId),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
+
+            Spacer(Modifier.height(64.dp))
+
+            // YouTube Button
             AppButton(
                 text = stringResource(R.string.custom_home_youtube),
-                icon = { Icon(Icons.Filled.PlayArrow, "YouTube", tint = Color.White, modifier = Modifier.size(56.dp)) },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Filled.PlayCircle,
+                        contentDescription = stringResource(R.string.custom_home_youtube),
+                        tint = Color.White,
+                        modifier = Modifier.size(64.dp)
+                    )
+                },
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
                 enabled = enabled,
                 onClick = onYouTubeClick
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(Modifier.height(24.dp))
 
-            // YouTube Music Button.
+            // YouTube Music Button
             AppButton(
                 text = stringResource(R.string.custom_home_youtube_music),
-                icon = { Icon(Icons.Outlined.MusicNote, "YouTube Music", tint = Color.White, modifier = Modifier.size(56.dp)) },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.MusicNote,
+                        contentDescription = stringResource(R.string.custom_home_youtube_music),
+                        tint = Color.White,
+                        modifier = Modifier.size(64.dp)
+                    )
+                },
                 backgroundColor = Color(0xFF121212),
                 contentColor = Color.White,
                 gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
                 enabled = enabled,
                 onClick = onYouTubeMusicClick
             )
+
+            Spacer(Modifier.height(100.dp))
         }
 
         // Bottom "Other apps" button.
@@ -456,7 +532,7 @@ private fun AppButton(
                         modifier = Modifier.size(80.dp).background(Color.White.copy(alpha = 0.16f), CircleShape),
                         contentAlignment = Alignment.Center
                     ) { icon() }
-                    Spacer(modifier = Modifier.width(20.dp))
+                    Spacer(Modifier.width(20.dp))
                     Text(text = text, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 }
             }
