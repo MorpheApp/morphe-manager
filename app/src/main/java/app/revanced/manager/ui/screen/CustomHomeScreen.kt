@@ -135,22 +135,24 @@ fun CustomHomeScreen(
     var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
 
     // Manager update dialog state
-    var showUpdateDialog by rememberSaveable {
-        mutableStateOf(dashboardViewModel.prefs.showManagerUpdateDialogOnLaunch.getBlocking())
-    }
-    val availableUpdate by remember {
-        derivedStateOf { dashboardViewModel.updatedManagerVersion.takeIf { showUpdateDialog } }
-    }
+    var hasCheckedForUpdates by rememberSaveable { mutableStateOf(false) }
+    val showDialogOnLaunch by dashboardViewModel.prefs.showManagerUpdateDialogOnLaunch.getAsState()
+    val updatedManagerVersion = dashboardViewModel.updatedManagerVersion
 
-    availableUpdate?.let { version ->
+    // Show dialog only if: (1) not checked yet, (2) dialog enabled, (3) update available
+    val shouldShowUpdateDialog = !hasCheckedForUpdates && showDialogOnLaunch && !updatedManagerVersion.isNullOrEmpty()
+
+    if (shouldShowUpdateDialog) {
         AvailableUpdateDialog(
-            onDismiss = { showUpdateDialog = false },
+            onDismiss = {
+                hasCheckedForUpdates = true
+            },
             setShowManagerUpdateDialogOnLaunch = dashboardViewModel::setShowManagerUpdateDialogOnLaunch,
             onConfirm = {
-                showUpdateDialog = false
+                hasCheckedForUpdates = true
                 onUpdateClick()
             },
-            newVersion = version
+            newVersion = updatedManagerVersion
         )
     }
 
