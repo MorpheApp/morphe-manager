@@ -13,6 +13,8 @@ import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.APIFailure
 import app.revanced.manager.network.utils.getOrNull
 import io.ktor.client.request.url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -81,6 +83,12 @@ class ReVancedAPI(
             url("${apiUrl()}/v4/$normalizedRoute")
         }
     }
+
+    // Check if string is a direct JSON link
+    private fun String.isDirectJsonLink(): Boolean =
+        lowercase().run {
+            (startsWith("http://") || startsWith("https://")) && endsWith(".json")
+        }
 
     private suspend fun fetchReleaseAsset(
         config: RepoConfig,
@@ -157,8 +165,17 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
-    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> =
-        apiRequest("patches?prerelease=${prefs.usePatchesPrereleases.get()}")
+    // Support both API URLs and direct JSON links
+    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = withContext(Dispatchers.IO) {
+        val url = prefs.api.get().trim()
+        if (url.isDirectJsonLink()) {
+            // Direct JSON link - fetch it directly
+            client.request { url(url) }
+        } else {
+            // API URL - use standard API request
+            apiRequest<ReVancedAsset>("patches?prerelease=${prefs.usePatchesPrereleases.get()}")
+        }
+    }
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
         val config = repoConfig()
@@ -184,4 +201,5 @@ class ReVancedAPI(
     }
 }
 
-private const val MANAGER_REPO_URL = "https://github.com/Jman-Github/universal-revanced-manager"
+//FIXME: Remove "-alpha" when released
+private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"

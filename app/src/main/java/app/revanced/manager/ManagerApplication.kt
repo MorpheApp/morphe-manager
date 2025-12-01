@@ -76,20 +76,6 @@ class ManagerApplication : Application() {
             if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
                 prefs.api.update(DEFAULT_API_URL)
             }
-
-            if (prefs.firstLaunch.get()) {
-                prefs.managerAutoUpdates.update(true)
-
-                with(patchBundleRepository) {
-                    sources
-                        .first()
-                        .find { it.uid == 0 }
-                        ?.asRemoteOrNull
-                        ?.setAutoUpdate(true)
-                }
-
-                prefs.firstLaunch.update(false)
-            }
         }
         scope.launch(Dispatchers.Default) {
             downloaderPluginRepository.reload()

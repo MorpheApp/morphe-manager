@@ -31,6 +31,7 @@ import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
+import io.ktor.http.Url
 import kotlinx.collections.immutable.*
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -161,7 +162,7 @@ class PatchBundleRepository(
         val info = loadMetadata(sources).toMutableMap()
 
         val officialSource = sources[0]
-        val officialDisplayName = "Official ReVanced Patches"
+        val officialDisplayName = "Morphe Patches"
         if (officialSource != null && officialSource.displayName != officialDisplayName) {
             updateDb(officialSource.uid) { it.copy(displayName = officialDisplayName) }
             sources[officialSource.uid] = officialSource.copy(displayName = officialDisplayName)
@@ -315,7 +316,7 @@ class PatchBundleRepository(
         val existingProps = dao.getProps(resolvedUid)
         val normalizedDisplayName = displayName?.takeUnless { it.isBlank() }
             ?: existingProps?.displayName?.takeUnless { it.isBlank() }
-            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Official ReVanced Patches" else null
+            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Morphe Patches" else null
         val normalizedName = ensureUniqueName(name)
         val assignedSortOrder = when {
             sortOrder != null -> sortOrder
@@ -817,13 +818,15 @@ class PatchBundleRepository(
 
     private companion object {
         const val DEFAULT_SOURCE_UID = 0
+
+        // Use Remote source with direct JSON bundle URL instead of API
         fun defaultSource() = PatchBundleEntity(
             uid = DEFAULT_SOURCE_UID,
             name = "",
-            displayName = null,
+            displayName = "Morphe Patches",
             versionHash = null,
-            source = Source.API,
-            autoUpdate = false,
+            source = Source.Remote(Url("https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json")),
+            autoUpdate = true, // Enable auto-update for automatic bundle updates.
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis()
