@@ -3,7 +3,6 @@ package app.revanced.manager.ui.screen.settings
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,18 +62,18 @@ fun AboutSettingsScreen(
         listOf(
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.github),
-                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
+                context.getString(R.string.patches_github),
+                { context.openUrl("https://github.com/MorpheApp/Patches") }
             ),
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.original_revanced_manager_github),
-                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
+                context.getString(R.string.manager_github),
+                { context.openUrl("https://github.com/MorpheApp/Morphe-alpha") } // TODO: Remove "-alpha" when released.
             ),
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.patch_bundle_urls),
-                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
+                context.getString(R.string.patcher_github),
+                { context.openUrl("https://github.com/MorpheApp/Patcher") }
             )
         )
     }

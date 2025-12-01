@@ -100,6 +100,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+// TODO: Rename to MorpheHomeScreen
 fun CustomHomeScreen(
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
