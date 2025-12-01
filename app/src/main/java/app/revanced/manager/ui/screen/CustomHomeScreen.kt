@@ -417,7 +417,9 @@ private fun MainContent(
                 R.string.home_greeting_2,
                 R.string.home_greeting_3,
                 R.string.home_greeting_4,
-                R.string.home_greeting_5
+                R.string.home_greeting_5,
+                R.string.home_greeting_6,
+                R.string.home_greeting_7,
             )
             var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
 
