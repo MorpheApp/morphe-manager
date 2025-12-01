@@ -105,7 +105,7 @@ class PatcherViewModel(
     private val rootInstaller: RootInstaller by inject()
     private val shizukuInstaller: ShizukuInstaller by inject()
     private val installerManager: InstallerManager by inject()
-    private val prefs: PreferencesManager by inject()
+    val prefs: PreferencesManager by inject()
     private val savedStateHandle: SavedStateHandle = get()
 
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null

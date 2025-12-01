@@ -35,6 +35,39 @@
     <string name="custom_home_downloader_description">Automatically download the APK</string>
     <string name="custom_home_storage_description">Choose a file from the device</string>
 
+    <!-- Quick Patcher Screen -->
+    <string name="quick_patcher_title">Patching</string>
+    <string name="quick_patcher_save_apk">Save APK</string>
+    <string name="quick_patcher_copy_error">Copy Error</string>
+    <string name="quick_patcher_show_error">Show Error</string>
+    <string name="quick_patcher_close">Close</string>
+    <string name="quick_patcher_error_copied">Error copied to clipboard</string>
+    <string name="quick_patcher_patches_progress">%1$d / %2$d patches</string>
+    <string name="quick_patcher_percentage">%1$d%%</string>
+
+    <!-- Patching status messages -->
+    <string name="quick_patcher_installing">Installing…</string>
+    <string name="quick_patcher_installing_subtitle">Almost ready to rock! 🎸</string>
+    <string name="quick_patcher_success_title">All Done! 🎉</string>
+    <string name="quick_patcher_success_subtitle">Your app is patched and installed!</string>
+    <string name="quick_patcher_complete_title">Patching Complete! ✨</string>
+    <string name="quick_patcher_failed_title">Oops! Something went wrong</string>
+    <string name="quick_patcher_failed_subtitle">Check the error details below</string>
+    <string name="quick_patcher_failed_dialog_title">Patching Failed</string>
+    <string name="quick_patcher_unknown_error">Unknown error occurred</string>
+
+    <!-- Witty messages - can include emoji -->
+    <string name="quick_patcher_message_1">Brewing some digital magic… ☕</string>
+    <string name="quick_patcher_message_2">Teaching old apps new tricks… 🎩</string>
+    <string name="quick_patcher_message_3">Sprinkling patches like fairy dust… ✨</string>
+    <string name="quick_patcher_message_4">Making your app awesome… 🚀</string>
+    <string name="quick_patcher_message_5">Coffee break recommended… ☕</string>
+    <string name="quick_patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
+    <string name="quick_patcher_message_7">Patch-o-matic 3000 in action… 🤖</string>
+    <string name="quick_patcher_message_8">Your app is getting a makeover… 💅</string>
+    <string name="quick_patcher_message_9">Turning bugs into features… 🐛➡️✨</string>
+    <string name="quick_patcher_message_10">Almost there… maybe… hopefully… 🤞</string>
+
     <string name="new_downloader_plugins_notification">New downloader plugins available. Click here to configure them.</string>
     <string name="unsupported_architecture_warning">Patching on this device architecture is unsupported and will most likely fail.</string>
 

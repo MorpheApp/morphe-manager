@@ -13,7 +13,6 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -27,22 +26,23 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
+import app.revanced.manager.ui.model.navigation.CustomHome
 import app.revanced.manager.ui.model.navigation.Dashboard
 import app.revanced.manager.ui.model.navigation.InstalledApplicationInfo
 import app.revanced.manager.ui.model.navigation.Patcher
 import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.model.navigation.Update
-import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.model.navigation.CustomHome
 import app.revanced.manager.ui.screen.AppSelectorScreen
 import app.revanced.manager.ui.screen.CustomHomeScreen
 import app.revanced.manager.ui.screen.DashboardScreen
 import app.revanced.manager.ui.screen.InstalledAppInfoScreen
 import app.revanced.manager.ui.screen.PatcherScreen
 import app.revanced.manager.ui.screen.PatchesSelectorScreen
+import app.revanced.manager.ui.screen.QuickPatcherScreen
 import app.revanced.manager.ui.screen.RequiredOptionsScreen
 import app.revanced.manager.ui.screen.SelectedAppInfoScreen
 import app.revanced.manager.ui.screen.SettingsScreen
@@ -59,8 +59,12 @@ import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.MainViewModel
+import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
+import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
+import app.revanced.manager.util.ExportNameFormatter
+import app.revanced.manager.util.PatchedAppExportData
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
@@ -134,6 +138,9 @@ private fun ReVancedManager(vm: MainViewModel) {
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         composable<CustomHome> {
+            val prefs: PreferencesManager = koinInject()
+            val useCustomHomeScreen by prefs.useCustomHomeScreen.getAsState()
+
             CustomHomeScreen(
                 onSettingsClick = { navController.navigate(Settings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
@@ -151,6 +158,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                 }
             )
         }
+
         composable<Dashboard> {
             DashboardScreen(
                 onSettingsClick = { navController.navigate(Settings) },
@@ -205,21 +213,35 @@ private fun ReVancedManager(vm: MainViewModel) {
 
         composable<Patcher> {
             val params = it.getComplexArg<Patcher.ViewModelParams>()
-            PatcherScreen(
-                onBackClick = navController::popBackStack,
-                onReviewSelection = { app, selection, options, missing ->
-                    navController.navigateComplex(
-                        SelectedApplicationInfo.PatchesSelector,
-                        SelectedApplicationInfo.PatchesSelector.ViewModelParams(
-                            app = app,
-                            currentSelection = selection,
-                            options = options,
-                            missingPatchNames = missing
+            val prefs: PreferencesManager = koinInject()
+            val useCustomHomeScreen by prefs.useCustomHomeScreen.getAsState()
+
+            val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
+
+            if (useCustomHomeScreen) {
+                // Use custom quick patcher screen
+                QuickPatcherScreen(
+                    onBackClick = navController::popBackStack,
+                    viewModel = patcherViewModel
+                )
+            } else {
+                // Use original patcher screen
+                PatcherScreen(
+                    onBackClick = navController::popBackStack,
+                    onReviewSelection = { app, selection, options, missing ->
+                        navController.navigateComplex(
+                            SelectedApplicationInfo.PatchesSelector,
+                            SelectedApplicationInfo.PatchesSelector.ViewModelParams(
+                                app = app,
+                                currentSelection = selection,
+                                options = options,
+                                missingPatchNames = missing
+                            )
                         )
-                    )
-                },
-                viewModel = koinViewModel { parametersOf(params) }
-            )
+                    },
+                    viewModel = patcherViewModel
+                )
+            }
         }
 
         composable<Update> {
