@@ -761,7 +761,8 @@ private fun PatchingSuccess(
                     text = stringResource(R.string.quick_patcher_complete_title),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center
                 )
             }
         }
