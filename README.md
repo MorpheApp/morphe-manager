@@ -3,12 +3,12 @@
     <source
       width="256px"
       media="(prefers-color-scheme: dark)"
-      srcset="assets/morphe-manager-logo.svg"
+      srcset="assets/morphe_logo_with_frame.svg"
     >
     <img 
       width="256px"
-      src="assets/morphe-manager-logo.svg"
-    >
+      src="assets/morphe_logo_with_frame.svg"
+     alt="Morphe">
   </picture>
    <br>
 </p>
