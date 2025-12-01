@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Morphe. This is copyrighted content, and not licensed under open source terms. See https://github.com/Morphe/morphe-branding -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Path must be white to ensure the icon appears white in the expanded status bar panel. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M3.79688,2.5 C1.63503,2.5,1,4.0832,1,5.0332 L1,8.45313 L1,19.0938 C1.06358,20.4237,2.20771,21.5,3.54297,21.5 C4.87823,21.5,6.02235,20.4237,6.08594,19.0938 L6.08594,10.543 C7.86628,12.5696,8.88439,16.053,12,16.1797 C15.052,16.053,16.2609,12.633,17.9141,10.543 C17.9141,10.543,20.7746,5.85656,23,5.47656 C23,3.70323,22.3014,2.5,20.2031,2.5 C18.0413,2.5,16.5145,5.66721,15.4336,7.06055 C14.3527,8.45388,13.8439,9.97266,12,9.97266 C10.1561,9.97266,9.58375,8.39055,8.56641,7.06055 C7.48548,5.66721,5.95872,2.5,3.79688,2.5 Z M22.7793,7.08008 C21.6973,7.04724,18.2658,11.3755,17.9141,13.7109 L17.9141,19.0938 C17.9777,20.4237,19.1218,21.5,20.457,21.5 C21.7923,21.5,22.9364,20.4237,23,19.0938 L23,7.1875 C22.9454,7.11823,22.871,7.08286,22.7793,7.08008 Z" />
+</vector>
