@@ -51,14 +51,6 @@ fun UpdatesSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            GroupHeader(stringResource(R.string.patches_and_manager))
-
-            BooleanItem(
-                preference = vm.allowMeteredUpdates,
-                headline = R.string.update_on_metered_connections,
-                description = R.string.update_on_metered_connections_description
-            )
-
             GroupHeader(stringResource(R.string.manager))
 
             SettingsListItem(

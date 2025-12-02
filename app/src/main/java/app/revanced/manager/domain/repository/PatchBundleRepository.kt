@@ -627,13 +627,6 @@ class PatchBundleRepository(
         override suspend fun ActionContext.execute(
             current: State
         ) = coroutineScope {
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowMeteredUpdates && !networkInfo.isSafe()) {
-                Log.d(tag, "Skipping update check because the network is down or metered.")
-                bundleUpdateProgressFlow.value = null
-                return@coroutineScope current
-            }
-
             val targets = current.sources.values
                 .filterIsInstance<RemotePatchBundle>()
                 .filter { predicate(it) }
@@ -731,12 +724,6 @@ class PatchBundleRepository(
                         }
                     }
                 }
-                return@coroutineScope current
-            }
-
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowMeteredUpdates && !networkInfo.isSafe()) {
-                Log.d(tag, "Skipping manual update check because the network is down or metered.")
                 return@coroutineScope current
             }
 
