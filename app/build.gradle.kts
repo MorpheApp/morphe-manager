@@ -21,18 +21,27 @@ dependencies {
     implementation("app.morphe:morphe-library:1.0.1")
     implementation("app.revanced:multidexlib2:3.0.3.r3")
 
-    implementation("app.revanced:apktool-lib:2.9.3")
-    implementation("app.revanced:brut.j.util:2.9.3")
-    implementation("app.revanced:brut.j.common:2.9.3")
-    implementation("app.revanced:brut.j.dir:2.9.3")
+//    implementation("kofua.app.revanced:brut.j.util:2.12.0.1")
+//    implementation("kofua.app.revanced:brut.j.yaml:2.12.0.1")
+//    implementation("kofua.app.revanced:brut.j.util:2.12.0.1")
+//    implementation("kofua.app.revanced:apktool-lib:2.12.0.1")
+//    implementation("kofua.app.revanced:brut.j.xml:2.12.0.1")
+//    implementation("kofua.app.revanced:brut.j.dir:2.12.0.1")
+////    implementation("revanced:brut.j.common:2.12.0.1") // No release exist, but not needed?
 
-    implementation("app.revanced:brut.j.xml:2.10.1.1") // Only one release.
-
-    // New release, doesn't link correctly.
 //    implementation("app.revanced:apktool-lib:2.10.1.1")
 //    implementation("app.revanced:brut.j.util:2.10.1.1")
 //    implementation("app.revanced:brut.j.common:2.10.1.1")
 //    implementation("app.revanced:brut.j.dir:2.10.1.1")
+//    implementation("app.revanced:brut.j.xml:2.10.1.1")
+
+    implementation("app.revanced:apktool-lib:2.9.3")
+    implementation("app.revanced:brut.j.util:2.9.3")
+    implementation("app.revanced:brut.j.common:2.9.3")
+    implementation("app.revanced:brut.j.dir:2.9.3")
+    implementation("app.revanced:brut.j.xml:2.10.1.1") // Missing 2.9.3 release?
+
+    // FIXME END
 
     implementation("com.android.tools.build:apksig:8.5.2")
     implementation("com.android.tools.build:apkzlib:8.5.2")

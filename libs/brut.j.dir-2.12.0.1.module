@@ -1,0 +1,123 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "kofua.app.revanced",
+    "module": "brut.j.dir",
+    "version": "2.12.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "brut.j.dir-2.12.0.1.jar",
+          "url": "brut.j.dir-2.12.0.1.jar",
+          "size": 18377,
+          "sha512": "1568ca3e8e86f992cdfaebbda6febb3fa6b891ca5b6bef8f1c66cea7e260cb58385525c6b7b4accdf7719928122f199d198830d9a94cdd4adaefa00fa8e2d0b2",
+          "sha256": "ea74555a6f1bfda6af68e4c56961e7b329065d2bd5fb54f5a4fd11933fb5923b",
+          "sha1": "cf7bcb9dbc20a6a2f24a1cb90857df25e0471914",
+          "md5": "b0c75d63a1727661caee3111a77f3eb0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "kofua.app.revanced",
+          "module": "brut.j.common",
+          "version": {
+            "requires": "2.12.0.1"
+          }
+        },
+        {
+          "group": "kofua.app.revanced",
+          "module": "brut.j.util",
+          "version": {
+            "requires": "2.12.0.1"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.20.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "brut.j.dir-2.12.0.1.jar",
+          "url": "brut.j.dir-2.12.0.1.jar",
+          "size": 18377,
+          "sha512": "1568ca3e8e86f992cdfaebbda6febb3fa6b891ca5b6bef8f1c66cea7e260cb58385525c6b7b4accdf7719928122f199d198830d9a94cdd4adaefa00fa8e2d0b2",
+          "sha256": "ea74555a6f1bfda6af68e4c56961e7b329065d2bd5fb54f5a4fd11933fb5923b",
+          "sha1": "cf7bcb9dbc20a6a2f24a1cb90857df25e0471914",
+          "md5": "b0c75d63a1727661caee3111a77f3eb0"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "brut.j.dir-2.12.0.1-javadoc.jar",
+          "url": "brut.j.dir-2.12.0.1-javadoc.jar",
+          "size": 130161,
+          "sha512": "48a251abedc4df2db134ef39a1afbdc9f9c18af23aea84999493d5d62616e1deaba1cf1ee8c86e82b31b2c4479af911b7fe8af8be102e00f2d7c7bf3268a455d",
+          "sha256": "bdc7713fd3df0f13919f16e33ec4d121c58def763cba640d3d408f61a8098b57",
+          "sha1": "e9f6a5d63c63e5cf43d05c824eee731c240ef2f9",
+          "md5": "e7a64c0f6df96e7bd2013d7f81add375"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "brut.j.dir-2.12.0.1-sources.jar",
+          "url": "brut.j.dir-2.12.0.1-sources.jar",
+          "size": 12194,
+          "sha512": "d8a6e60d5ce35870ee479f16f2aed3016e60b9591f58849ea31e64b19daed7262f7efb550a2e841b3b451ecd02bb6dbd4fd10529f03d4f573f07cab3b13e1a68",
+          "sha256": "cc422bfc3938e2f6a9b011350c9d9139c681073e21268b8385c685404853a048",
+          "sha1": "0bd58d254489292270cc88eff16fc1e116a68643",
+          "md5": "3c5b62343e832e08932fa424927c742d"
+        }
+      ]
+    }
+  ]
+}
