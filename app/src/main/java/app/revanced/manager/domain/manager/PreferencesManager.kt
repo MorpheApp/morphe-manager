@@ -30,7 +30,7 @@ class PreferencesManager(
     val officialBundleRemoved = booleanPreference("official_bundle_removed", false)
     val autoCollapsePatcherSteps = booleanPreference("auto_collapse_patcher_steps", false)
 
-    val allowMeteredUpdates = booleanPreference("allow_metered_updates", false)
+    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
     val installerFallback = stringPreference("installer_fallback", InstallerPreferenceTokens.NONE)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
