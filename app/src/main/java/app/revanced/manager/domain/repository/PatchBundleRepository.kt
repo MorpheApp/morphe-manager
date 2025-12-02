@@ -825,7 +825,7 @@ class PatchBundleRepository(
             name = "",
             displayName = "Morphe Patches",
             versionHash = null,
-            source = Source.Remote(Url("https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json")),
+            source = SourceInfo.from("https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json"),
             autoUpdate = true, // Enable auto-update for automatic bundle updates.
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),
