@@ -1,0 +1,202 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "app.revanced",
+    "module": "apktool-lib",
+    "version": "2.10.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "app.revanced",
+          "module": "brut.j.common",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.util",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.dir",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.xml",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "apktool-lib-2.10.1.1.jar",
+          "url": "apktool-lib-2.10.1.1.jar",
+          "size": 22983406,
+          "sha512": "0835ea56eb9d5699cb2d53ea15435bf4e693691324c91e122d71eec400c5089dcb435eb71acdf27c912f572a08a6a8b42e644c7b57b6ef7b6044e2def37cdd93",
+          "sha256": "7ef51fee8ae5a0dbd24ba6baaca92fb3bd37bdfadc715e0db7b216013474db9c",
+          "sha1": "8e762e083c9cca39dff89006b6fea3a1f07a4f42",
+          "md5": "d786e99bb26235691657cc3690549e18"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.smali",
+          "module": "smali-baksmali",
+          "version": {
+            "requires": "3.0.8"
+          }
+        },
+        {
+          "group": "com.android.tools.smali",
+          "module": "smali",
+          "version": {
+            "requires": "3.0.8"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.3.1-jre"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.17.0"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.18.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-text",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.common",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.util",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.dir",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "app.revanced",
+          "module": "brut.j.xml",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "apktool-lib-2.10.1.1.jar",
+          "url": "apktool-lib-2.10.1.1.jar",
+          "size": 22983406,
+          "sha512": "0835ea56eb9d5699cb2d53ea15435bf4e693691324c91e122d71eec400c5089dcb435eb71acdf27c912f572a08a6a8b42e644c7b57b6ef7b6044e2def37cdd93",
+          "sha256": "7ef51fee8ae5a0dbd24ba6baaca92fb3bd37bdfadc715e0db7b216013474db9c",
+          "sha1": "8e762e083c9cca39dff89006b6fea3a1f07a4f42",
+          "md5": "d786e99bb26235691657cc3690549e18"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "apktool-lib-2.10.1.1-javadoc.jar",
+          "url": "apktool-lib-2.10.1.1-javadoc.jar",
+          "size": 415354,
+          "sha512": "45f03e43312f85bbc0648c0fbdd87bab35cb54c9167d391d284fd4d8fb0f58dae48e9b6eb24cd025bc5b0daac79b501f924c8c2066d26c67b2151fd4a9da8fc1",
+          "sha256": "6d86b8ba436598d23bda2cb638e5aa8b9146b787dc47bdec04787c4b343df248",
+          "sha1": "c9192cb5cfcef525268781d4c0b2fde0acf07119",
+          "md5": "a9f416c58798bc4d96d15b2e080a9efb"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "apktool-lib-2.10.1.1-sources.jar",
+          "url": "apktool-lib-2.10.1.1-sources.jar",
+          "size": 22934894,
+          "sha512": "98ad6726351dc9c49d5c342687540e9a8d2bd843873c54c90ec799c07a547268e0d4e9925947e52bcec7f56a1c4db81db7839527f33ee5dfa2dd47affb07b0ed",
+          "sha256": "1416f17ce4848bf3af3ccfcd64bd804a55cd316d31b07a0fe87b12f4747ebd53",
+          "sha1": "84cf4839599e4bb814952a1e3017d59345c9cbe8",
+          "md5": "b6ad6fac367bc01eda7e1091c8661c73"
+        }
+      ]
+    }
+  ]
+}

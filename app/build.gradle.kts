@@ -20,6 +20,10 @@ dependencies {
     implementation("app.morphe:morphe-library-jvm:1.0.1")
     implementation("app.morphe:morphe-library:1.0.1")
     implementation("app.revanced:multidexlib2:3.0.3.r3")
+    implementation("app.revanced:apktool-lib:2.9.3")
+    // FIXME: ReVanced latest apktool does not decompile YouTube correctly.
+    //        and throws "Could not decode attr value" exception. 2.9.3 still works.
+//    implementation("app.revanced:apktool-lib:2.10.1.1")
     implementation("com.android.tools.build:apksig:8.5.2")
     implementation("com.android.tools.build:apkzlib:8.5.2")
     implementation("org.bouncycastle:bcpkix-jdk18on:1.77")
