@@ -1,0 +1,123 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "app.revanced",
+    "module": "brut.j.util",
+    "version": "2.10.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "brut.j.util-2.10.1.1.jar",
+          "url": "brut.j.util-2.10.1.1.jar",
+          "size": 15874,
+          "sha512": "e6616dc1aff29b9557ad41c63d12e0cb443f3b421c7f84af95b9373b35e911af1a777271006fcac41d9b6c46e709b103ddc40bbe9b070ca25b89da4fe1a7a4ff",
+          "sha256": "9f92ef2227ef013ab128b83a4bd62fc16a52cc6c548088ea111fb37192385ef6",
+          "sha1": "f4c9af6a69e549192ad1563d5dad421eda8bddaf",
+          "md5": "6efb59eff5f585939c713895806c17f8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "app.revanced",
+          "module": "brut.j.common",
+          "version": {
+            "requires": "2.10.1.1"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.18.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.3.1-jre"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "brut.j.util-2.10.1.1.jar",
+          "url": "brut.j.util-2.10.1.1.jar",
+          "size": 15874,
+          "sha512": "e6616dc1aff29b9557ad41c63d12e0cb443f3b421c7f84af95b9373b35e911af1a777271006fcac41d9b6c46e709b103ddc40bbe9b070ca25b89da4fe1a7a4ff",
+          "sha256": "9f92ef2227ef013ab128b83a4bd62fc16a52cc6c548088ea111fb37192385ef6",
+          "sha1": "f4c9af6a69e549192ad1563d5dad421eda8bddaf",
+          "md5": "6efb59eff5f585939c713895806c17f8"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "brut.j.util-2.10.1.1-javadoc.jar",
+          "url": "brut.j.util-2.10.1.1-javadoc.jar",
+          "size": 95336,
+          "sha512": "30b756d2f36b00157d62fe224320a3096e127afc50b3a57b08246ee44b1c470d70ab35d97c5ce9d6e078a026d6a1f0108140e169d7ecb1877094a0c798a8d24a",
+          "sha256": "f2e384df4a06e7c6c626693c3afb9a94e32ea1f0383935e53e58330458440b58",
+          "sha1": "ce6878ef48f50547137551eca86e2317d9dbf869",
+          "md5": "2f9dcdbebd6c0e74f143359e45d684c6"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "brut.j.util-2.10.1.1-sources.jar",
+          "url": "brut.j.util-2.10.1.1-sources.jar",
+          "size": 10891,
+          "sha512": "9dbb3c20f4c0dd57e03c090dc32c17a6fb6c2308e28eaf57dfdf60f43d2dd431d4be6d9ea0997be9dc1c813affb4c43e20bca467966701df00879a084e715c45",
+          "sha256": "aa8b03e7ed0ae357a696e111092b670a2576ee3210d157d1382f67909e6da9ab",
+          "sha1": "aeb70d6c9e4b8fc34da3c606c86494971df3a745",
+          "md5": "019556d5d9ff21c73b181222821c689f"
+        }
+      ]
+    }
+  ]
+}
