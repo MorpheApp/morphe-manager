@@ -120,9 +120,13 @@ fun CustomHomeScreen(
     val isBundlesReady by remember {
         derivedStateOf { availablePatches > 0 }
     }
+    // TEMPORARILY DISABLED: Remove loading check to debug
     val isBundlesLoading by remember {
-        derivedStateOf { bundleUpdateProgress != null || availablePatches == 0 }
+        derivedStateOf { bundleUpdateProgress != null }
     }
+//    val isBundlesLoading by remember {
+//        derivedStateOf { bundleUpdateProgress != null || availablePatches == 0 }
+//    }
 
     val hasSheetNotifications by remember {
         derivedStateOf {
