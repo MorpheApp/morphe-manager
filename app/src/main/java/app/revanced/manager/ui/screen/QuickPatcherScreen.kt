@@ -10,9 +10,12 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ContentCopy
@@ -67,13 +70,6 @@ fun QuickPatcherScreen(
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
 
-    // Same logic as original PatcherScreen
-    val canInstall by remember {
-        derivedStateOf {
-            patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling)
-        }
-    }
-
     // Animated progress for smooth animation
     var targetProgress by remember { mutableStateOf(0f) }
     val animatedProgress by animateFloatAsState(
@@ -91,6 +87,21 @@ fun QuickPatcherScreen(
     var showErrorBottomSheet by rememberSaveable { mutableStateOf(false) }
     var errorMessage by rememberSaveable { mutableStateOf("") }
     var hasError by rememberSaveable { mutableStateOf(false) }
+    var showCancelDialog by rememberSaveable { mutableStateOf(false) }
+
+    // Same logic as original PatcherScreen
+    val canInstall by remember {
+        derivedStateOf {
+            patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling)
+        }
+    }
+
+    // Track if install button should be visible
+    val shouldShowInstallButton by remember {
+        derivedStateOf {
+            patcherSucceeded == true && !hasError
+        }
+    }
 
     // Export APK setup
     val exportFormat = remember { viewModel.prefs.patchedAppExportFormat.getBlocking() }
@@ -142,7 +153,7 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Auto-install after successful patching
+    // Auto-install after successful patching (only if not already installing or installed)
     LaunchedEffect(patcherSucceeded, viewModel.isInstalling, viewModel.installedPackageName) {
         if (patcherSucceeded == true && !viewModel.isInstalling && viewModel.installedPackageName == null && !hasError) {
             viewModel.install()
@@ -150,7 +161,37 @@ fun QuickPatcherScreen(
     }
 
     BackHandler {
-        onBackClick()
+        if (patcherSucceeded == null) {
+            // Show cancel dialog if patching is in progress
+            showCancelDialog = true
+        } else {
+            // Allow normal back navigation if patching is complete or failed
+            onBackClick()
+        }
+    }
+
+    // Cancel patching confirmation dialog
+    if (showCancelDialog) {
+        AlertDialog(
+            onDismissRequest = { showCancelDialog = false },
+            title = { Text(stringResource(R.string.patcher_stop_confirm_title)) },
+            text = { Text(stringResource(R.string.patcher_stop_confirm_description)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showCancelDialog = false
+                        onBackClick()
+                    }
+                ) {
+                    Text(stringResource(R.string.yes))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCancelDialog = false }) {
+                    Text(stringResource(R.string.no))
+                }
+            }
+        )
     }
 
     // Error bottom sheet
@@ -181,16 +222,22 @@ fun QuickPatcherScreen(
                 )
 
                 Surface(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 400.dp), // Increased max height for better error visibility
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer
                 ) {
-                    Text(
-                        text = errorMessage,
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onErrorContainer
-                    )
+                    Box(
+                        modifier = Modifier.verticalScroll(rememberScrollState())
+                    ) {
+                        Text(
+                            text = errorMessage,
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                    }
                 }
 
                 Button(
@@ -204,23 +251,16 @@ fun QuickPatcherScreen(
                     Spacer(Modifier.width(8.dp))
                     Text(stringResource(R.string.quick_patcher_copy_error))
                 }
-
-                TextButton(
-                    onClick = { showErrorBottomSheet = false },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.quick_patcher_close))
-                }
             }
         }
     }
 
-    // Add handling for installer status dialog (from PatcherScreen)
+    // Add handling for installer status dialog
     viewModel.packageInstallerStatus?.let {
         InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
     }
 
-    // Add handling for memory adjustment dialog (from PatcherScreen)
+    // Add handling for memory adjustment dialog
     viewModel.memoryAdjustmentDialog?.let { state ->
         val message = if (state.adjusted) {
             stringResource(
@@ -251,7 +291,7 @@ fun QuickPatcherScreen(
         )
     }
 
-    // Add handling for missing patch dialog (from PatcherScreen)
+    // Add handling for missing patch dialog
     viewModel.missingPatchDialog?.let { state ->
         val patchList = state.patchNames.joinToString(separator = "\n• ", prefix = "• ")
         AlertDialog(
@@ -275,7 +315,7 @@ fun QuickPatcherScreen(
         )
     }
 
-    // Add handling for install failure message (from PatcherScreen)
+    // Add handling for install failure message
     viewModel.installFailureMessage?.let { message ->
         AlertDialog(
             onDismissRequest = viewModel::dismissInstallFailureMessage,
@@ -289,7 +329,7 @@ fun QuickPatcherScreen(
         )
     }
 
-    // Add handling for install status (from PatcherScreen)
+    // Add handling for install status
     viewModel.installStatus?.let { status ->
         when (status) {
             PatcherViewModel.InstallCompletionStatus.InProgress -> {
@@ -321,7 +361,7 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Add activity launcher for handling plugin activities or external installs (from PatcherScreen)
+    // Add activity launcher for handling plugin activities or external installs
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = viewModel::handleActivityResult
@@ -330,7 +370,7 @@ fun QuickPatcherScreen(
         activityLauncher.launch(intent)
     }
 
-    // Add activity prompt dialog (from PatcherScreen)
+    // Add activity prompt dialog
     viewModel.activityPromptDialog?.let { title ->
         AlertDialog(
             onDismissRequest = viewModel::rejectInteraction,
@@ -372,7 +412,8 @@ fun QuickPatcherScreen(
                     patcherSucceeded == null -> {
                         PatchingInProgress(
                             progress = animatedProgress,
-                            patchesProgress = patchesProgress
+                            patchesProgress = patchesProgress,
+                            downloadProgress = viewModel.downloadProgress
                         )
                     }
                     patcherSucceeded == true && !hasError -> {
@@ -396,117 +437,101 @@ fun QuickPatcherScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
-                // Left: Save APK or Home button
+                // Left: Save APK button or empty space for symmetry
                 when {
                     patcherSucceeded == true && !hasError -> {
-                        Column(
-                            horizontalAlignment = Alignment.Start,
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        FloatingActionButton(
+                            onClick = {
+                                if (!isSaving) {
+                                    exportApkLauncher.launch(exportFileName)
+                                }
+                            },
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                         ) {
-                            FloatingActionButton(
-                                onClick = {
-                                    if (!isSaving) {
-                                        exportApkLauncher.launch(exportFileName)
-                                    }
-                                },
-                                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-                            ) {
-                                Icon(Icons.Outlined.Save, stringResource(R.string.quick_patcher_save_apk))
-                            }
-
-                            FloatingActionButton(
-                                onClick = onBackClick,
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                            ) {
-                                Icon(Icons.Default.Home, "Home")
-                            }
+                            Icon(Icons.Outlined.Save, stringResource(R.string.quick_patcher_save_apk))
                         }
                     }
                     patcherSucceeded == null -> {
                         // Cancel button during patching
                         FloatingActionButton(
-                            onClick = onBackClick,
+                            onClick = { showCancelDialog = true },
                             containerColor = MaterialTheme.colorScheme.errorContainer,
                             contentColor = MaterialTheme.colorScheme.onErrorContainer
                         ) {
-                            Icon(Icons.Default.Close, "Cancel")
+                            Icon(Icons.Default.Close, stringResource(R.string.cancel))
                         }
                     }
-                    hasError -> {
-                        // Home button after error
-                        FloatingActionButton(
-                            onClick = onBackClick,
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                        ) {
-                            Icon(Icons.Default.Home, "Home")
-                        }
+                    else -> {
+                        // Empty spacer for symmetry
+                        Spacer(Modifier.size(56.dp))
                     }
                 }
 
-                Spacer(Modifier.weight(1f))
+                // Center: Home button (only show when patching is complete)
+                if (patcherSucceeded != null) {
+                    FloatingActionButton(
+                        onClick = onBackClick,
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ) {
+                        Icon(Icons.Default.Home, "Home")
+                    }
+                } else {
+                    // Empty spacer during patching
+                    Spacer(Modifier.size(56.dp))
+                }
 
-                // Right: Install, Copy Error, or Show Error button
-                Column(
-                    horizontalAlignment = Alignment.End,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    when {
-                        hasError -> {
-                            // Copy error button (above show error)
-                            if (!showErrorBottomSheet) {
-                                FloatingActionButton(
-                                    onClick = {
-                                        clipboardManager.setText(AnnotatedString(errorMessage))
-                                        context.toast(context.getString(R.string.quick_patcher_error_copied))
-                                    },
-                                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-                                ) {
-                                    Icon(Icons.Default.ContentCopy, stringResource(R.string.quick_patcher_copy_error))
-                                }
-                            }
-
-                            // Show error button
-                            if (!showErrorBottomSheet) {
-                                FloatingActionButton(
-                                    onClick = { showErrorBottomSheet = true },
-                                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
-                                ) {
-                                    Icon(Icons.Default.Error, stringResource(R.string.quick_patcher_show_error))
-                                }
-                            }
-                        }
-                        // Show install button using same logic as original PatcherScreen
-                        canInstall -> {
+                // Right: Install or Show Error button
+                when {
+                    hasError -> {
+                        // Show error button
+                        if (!showErrorBottomSheet) {
                             FloatingActionButton(
-                                onClick = {
+                                onClick = { showErrorBottomSheet = true },
+                                containerColor = MaterialTheme.colorScheme.errorContainer,
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer
+                            ) {
+                                Icon(Icons.Default.Error, stringResource(R.string.quick_patcher_show_error))
+                            }
+                        } else {
+                            // Empty spacer for symmetry when error sheet is shown
+                            Spacer(Modifier.size(56.dp))
+                        }
+                    }
+                    // Show install button - always visible when patching succeeded
+                    shouldShowInstallButton -> {
+                        FloatingActionButton(
+                            onClick = {
+                                if (canInstall) {
                                     if (viewModel.installedPackageName == null) {
                                         viewModel.install()
                                     } else {
                                         viewModel.open()
                                     }
-                                },
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                            ) {
-                                Icon(
+                                }
+                            },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            // Disable button when install is in progress but keep it visible
+                        ) {
+                            Icon(
+                                if (viewModel.installedPackageName == null)
+                                    Icons.Outlined.FileDownload
+                                else
+                                    Icons.AutoMirrored.Outlined.OpenInNew,
+                                stringResource(
                                     if (viewModel.installedPackageName == null)
-                                        Icons.Outlined.FileDownload
+                                        R.string.install_app
                                     else
-                                        Icons.Outlined.FileDownload,
-                                    stringResource(
-                                        if (viewModel.installedPackageName == null)
-                                            R.string.install_app
-                                        else
-                                            R.string.open_app
-                                    )
+                                        R.string.open_app
                                 )
-                            }
+                            )
                         }
+                    }
+                    else -> {
+                        // Empty spacer for symmetry
+                        Spacer(Modifier.size(56.dp))
                     }
                 }
             }
@@ -517,9 +542,29 @@ fun QuickPatcherScreen(
 @Composable
 private fun PatchingInProgress(
     progress: Float,
-    patchesProgress: Pair<Int, Int>
+    patchesProgress: Pair<Int, Int>,
+    downloadProgress: Pair<Long, Long?>? = null
 ) {
     val (completed, total) = patchesProgress
+
+    // Track when download is complete to hide progress smoothly
+    var isDownloadComplete by remember { mutableStateOf(false) }
+
+    LaunchedEffect(downloadProgress) {
+        if (downloadProgress != null) {
+            val (downloaded, totalSize) = downloadProgress
+            // Check if download is complete
+            if (totalSize != null && downloaded >= totalSize) {
+                // Wait longer before hiding to show 100% completion
+                delay(1500)
+                isDownloadComplete = true
+            } else {
+                isDownloadComplete = false
+            }
+        } else {
+            isDownloadComplete = false
+        }
+    }
 
     // Witty messages from strings
     val wittyMessages = remember {
@@ -553,13 +598,13 @@ private fun PatchingInProgress(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        // Witty message - fixed height box to prevent shifting
+        // Witty message
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
                 .padding(horizontal = 32.dp),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.TopCenter
         ) {
             AnimatedContent(
                 targetState = wittyMessages[currentMessageIndex],
@@ -573,7 +618,8 @@ private fun PatchingInProgress(
                     text = stringResource(messageResId),
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
@@ -627,6 +673,68 @@ private fun PatchingInProgress(
                 )
             }
         }
+
+        Spacer(Modifier.height(32.dp))
+
+        // Fixed space for download progress bar to prevent layout shifts
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp), // Reserved space for download progress
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            // Download progress bar with smooth fade-out after completion
+            AnimatedVisibility(
+                visible = downloadProgress != null && !isDownloadComplete,
+                enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
+                exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
+            ) {
+                downloadProgress?.let { (downloaded, total) ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 32.dp, vertical = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        LinearProgressIndicator(
+                            progress = {
+                                if (total != null && total > 0) {
+                                    (downloaded.toFloat() / total.toFloat()).coerceIn(0f, 1f)
+                                } else {
+                                    0f
+                                }
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(8.dp),
+                            strokeCap = StrokeCap.Round,
+                        )
+
+                        Text(
+                            text = if (total != null) {
+                                "${formatBytes(downloaded)} / ${formatBytes(total)}"
+                            } else {
+                                formatBytes(downloaded)
+                            },
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Function to format bytes into a convenient format
+private fun formatBytes(bytes: Long): String {
+    return when {
+        bytes < 1024 -> "$bytes B"
+        bytes < 1024 * 1024 -> "%.2f KB".format(bytes / 1024.0)
+        bytes < 1024 * 1024 * 1024 -> "%.2f MB".format(bytes / (1024.0 * 1024.0))
+        else -> "%.2f GB".format(bytes / (1024.0 * 1024.0 * 1024.0))
     }
 }
 
@@ -635,17 +743,6 @@ private fun PatchingSuccess(
     isInstalling: Boolean,
     installedPackageName: String?
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "success_animation")
-    val rotation by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "rotation"
-    )
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -657,18 +754,22 @@ private fun PatchingSuccess(
             isInstalling -> {
                 Box(
                     contentAlignment = Alignment.Center,
-                    modifier = Modifier.size(200.dp)
+                    modifier = Modifier
+                        .size(200.dp)
+                        .background(
+                            brush = Brush.radialGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                                    Color.Transparent
+                                )
+                            ),
+                            shape = CircleShape
+                        )
                 ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.fillMaxSize(),
-                        strokeWidth = 8.dp
-                    )
                     Icon(
-                        imageVector = Icons.Outlined.FileDownload,
+                        imageVector = Icons.Default.Check,
                         contentDescription = null,
-                        modifier = Modifier
-                            .size(80.dp)
-                            .rotate(rotation),
+                        modifier = Modifier.size(120.dp),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -677,15 +778,19 @@ private fun PatchingSuccess(
 
                 Text(
                     text = stringResource(R.string.quick_patcher_installing),
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center
                 )
+
+                Spacer(Modifier.height(8.dp))
 
                 Text(
                     text = stringResource(R.string.quick_patcher_installing_subtitle),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
                 )
             }
 
@@ -733,6 +838,7 @@ private fun PatchingSuccess(
             }
 
             else -> {
+                // The case when the patch is successful, but the auto-installation failed
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
