@@ -39,7 +39,7 @@ dependencies {
     implementation("app.revanced:brut.j.util:2.9.3")
     implementation("app.revanced:brut.j.common:2.9.3")
     implementation("app.revanced:brut.j.dir:2.9.3")
-    implementation("app.revanced:brut.j.xml:2.10.1.1") // Missing 2.9.3 release?
+//    implementation("app.revanced:brut.j.xml:2.10.1.1") // Missing 2.9.3 release?
 
     // FIXME END
 
