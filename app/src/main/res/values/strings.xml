@@ -25,8 +25,11 @@
     <string name="quick_patcher_error_copied">Error copied to clipboard</string>
     <string name="quick_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="quick_patcher_percentage">%1$d%%</string>
-
-    <!-- Patching status messages -->
+    <string name="quick_patcher_install_dialog_message">Install patched app?</string>
+    <string name="quick_patcher_install_conflict_message">A package conflict has been detected. To install the new version, you must first uninstall the previous version of the app</string>
+    <string name="quick_patcher_install_ready_message">The previous version has been uninstalled. You can now install the patched app</string>
+    <string name="quick_patcher_install_cancelled_title">Installation canceled</string>
+    <string name="quick_patcher_install_cancelled_subtitle">Click the install button to try again</string>
     <string name="quick_patcher_installing">Installing…</string>
     <string name="quick_patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="quick_patcher_success_title">All Done! 🎉</string>
@@ -36,8 +39,6 @@
     <string name="quick_patcher_failed_subtitle">Check the error details below</string>
     <string name="quick_patcher_failed_dialog_title">Patching Failed</string>
     <string name="quick_patcher_unknown_error">Unknown error occurred</string>
-
-    <!-- Witty messages - can include emoji -->
     <string name="quick_patcher_message_1">Brewing some digital magic… ☕</string>
     <string name="quick_patcher_message_2">Teaching old apps new tricks… 🎩</string>
     <string name="quick_patcher_message_3">Sprinkling patches like fairy dust… ✨</string>

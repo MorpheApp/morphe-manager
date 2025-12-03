@@ -49,16 +49,12 @@ import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
+import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
 import app.morphe.manager.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-/**
- * Quick patcher screen with simplified UI - fullscreen without top bar
- * Shows a large circular progress indicator with witty messages
- * Automatically installs the patched app when done
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuickPatcherScreen(
@@ -86,10 +82,97 @@ fun QuickPatcherScreen(
 
     var showErrorBottomSheet by rememberSaveable { mutableStateOf(false) }
     var errorMessage by rememberSaveable { mutableStateOf("") }
-    var hasError by rememberSaveable { mutableStateOf(false) }
+    var hasPatchingError by rememberSaveable { mutableStateOf(false) }
     var showCancelDialog by rememberSaveable { mutableStateOf(false) }
 
-    // Same logic as original PatcherScreen
+    // Installation dialog state - now with conflict handling
+    var showInstallDialog by rememberSaveable { mutableStateOf(false) }
+    var installDialogShownOnce by rememberSaveable { mutableStateOf(false) }
+    var userCancelledInstall by rememberSaveable { mutableStateOf(false) }
+
+    // NEW: Track install dialog state
+    var installDialogState by rememberSaveable { mutableStateOf(InstallDialogState.INITIAL) }
+    var isWaitingForUninstall by rememberSaveable { mutableStateOf(false) }
+
+    // Track if packageInstallerStatus was set (to avoid showing generic dialog after InstallerStatusDialog)
+    var hadInstallerStatus by rememberSaveable { mutableStateOf(false) }
+
+    // Monitor successful installation
+    LaunchedEffect(viewModel.installedPackageName) {
+        if (viewModel.installedPackageName != null) {
+            android.util.Log.d("QuickPatcher", "Installation successful: ${viewModel.installedPackageName}")
+            // Installation succeeded, make sure dialog is closed
+            showInstallDialog = false
+            installDialogState = InstallDialogState.INITIAL
+            isWaitingForUninstall = false
+            hadInstallerStatus = false
+        }
+    }
+
+    LaunchedEffect(viewModel.packageInstallerStatus) {
+        if (viewModel.packageInstallerStatus != null) {
+            hadInstallerStatus = true
+            val status = viewModel.packageInstallerStatus
+
+            // Check if there's a conflict
+            if (status == android.content.pm.PackageInstaller.STATUS_FAILURE_CONFLICT) {
+                android.util.Log.d("QuickPatcher", "Conflict detected, showing conflict dialog")
+                // Dismiss any failure message that might have been set
+                viewModel.dismissInstallFailureMessage()
+                // Change dialog state to show conflict message
+                installDialogState = InstallDialogState.CONFLICT
+                showInstallDialog = true // Show dialog with conflict message
+                viewModel.dismissPackageInstallerDialog()
+            } else {
+                // For other errors, keep the dialog hidden and let installFailureMessage handle it
+                android.util.Log.d("QuickPatcher", "Non-conflict error: $status")
+                viewModel.dismissPackageInstallerDialog()
+            }
+        }
+    }
+
+    // Monitor package removal during uninstall for reinstall
+    DisposableEffect(Unit) {
+        val receiver = object : android.content.BroadcastReceiver() {
+            override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
+                android.util.Log.d("QuickPatcher", "Broadcast received: ${intent?.action}, pkg: ${intent?.data?.schemeSpecificPart}, isWaitingForUninstall: $isWaitingForUninstall")
+
+                if (intent?.action == android.content.Intent.ACTION_PACKAGE_REMOVED && isWaitingForUninstall) {
+                    val pkg = intent.data?.schemeSpecificPart
+                    if (pkg == viewModel.packageName) {
+                        // Package was removed, change dialog state to show install button
+                        android.util.Log.d("QuickPatcher", "Package removed, showing install button again")
+
+                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
+                            kotlinx.coroutines.delay(500) // Wait for system dialog to close
+                            isWaitingForUninstall = false
+                            installDialogState = InstallDialogState.READY_TO_INSTALL
+                            showInstallDialog = true
+                        }
+                    }
+                }
+            }
+        }
+
+        val filter = android.content.IntentFilter(android.content.Intent.ACTION_PACKAGE_REMOVED).apply {
+            addDataScheme("package")
+        }
+        androidx.core.content.ContextCompat.registerReceiver(
+            context,
+            receiver,
+            filter,
+            androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+
+        onDispose {
+            try {
+                context.unregisterReceiver(receiver)
+            } catch (e: Exception) {
+                android.util.Log.e("QuickPatcher", "Failed to unregister receiver", e)
+            }
+        }
+    }
+
     val canInstall by remember {
         derivedStateOf {
             patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling)
@@ -99,7 +182,7 @@ fun QuickPatcherScreen(
     // Track if install button should be visible
     val shouldShowInstallButton by remember {
         derivedStateOf {
-            patcherSucceeded == true && !hasError
+            patcherSucceeded == true // Always show Install button after successful patching
         }
     }
 
@@ -142,10 +225,10 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Monitor for errors
+    // Monitor for patching errors (not installation errors)
     LaunchedEffect(patcherSucceeded) {
-        if (patcherSucceeded == false && !hasError) {
-            hasError = true
+        if (patcherSucceeded == false && !hasPatchingError) {
+            hasPatchingError = true
             val steps = viewModel.steps
             val failedStep = steps.firstOrNull { it.state == app.revanced.manager.ui.model.State.FAILED }
             errorMessage = failedStep?.message ?: context.getString(R.string.quick_patcher_unknown_error)
@@ -153,10 +236,12 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Auto-install after successful patching (only if not already installing or installed)
-    LaunchedEffect(patcherSucceeded, viewModel.isInstalling, viewModel.installedPackageName) {
-        if (patcherSucceeded == true && !viewModel.isInstalling && viewModel.installedPackageName == null && !hasError) {
-            viewModel.install()
+    // Auto-show install dialog after successful patching (only once)
+    LaunchedEffect(patcherSucceeded, installDialogShownOnce) {
+        if (patcherSucceeded == true && !installDialogShownOnce && !hasPatchingError) {
+            installDialogShownOnce = true
+            installDialogState = InstallDialogState.INITIAL
+            showInstallDialog = true
         }
     }
 
@@ -194,6 +279,80 @@ fun QuickPatcherScreen(
         )
     }
 
+    // NEW: Unified install dialog with state management
+    if (showInstallDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showInstallDialog = false
+                userCancelledInstall = true
+                installDialogState = InstallDialogState.INITIAL
+            },
+            title = { Text(stringResource(R.string.install_app)) },
+            text = {
+                Text(
+                    stringResource(
+                        when (installDialogState) {
+                            InstallDialogState.INITIAL -> R.string.quick_patcher_install_dialog_message
+                            InstallDialogState.CONFLICT -> R.string.quick_patcher_install_conflict_message
+                            InstallDialogState.READY_TO_INSTALL -> R.string.quick_patcher_install_ready_message
+                        }
+                    )
+                )
+            },
+            confirmButton = {
+                when (installDialogState) {
+                    InstallDialogState.INITIAL, InstallDialogState.READY_TO_INSTALL -> {
+                        TextButton(
+                            onClick = {
+                                android.util.Log.d("QuickPatcher", "Install button clicked, state: $installDialogState")
+                                // Hide dialog while installing
+                                showInstallDialog = false
+                                userCancelledInstall = false
+                                viewModel.install()
+                            },
+                            enabled = !isWaitingForUninstall
+                        ) {
+                            Text(stringResource(R.string.install_app))
+                        }
+                    }
+                    InstallDialogState.CONFLICT -> {
+                        TextButton(
+                            onClick = {
+                                android.util.Log.d("QuickPatcher", "Uninstall button clicked")
+                                // Start uninstall process
+                                isWaitingForUninstall = true
+                                hadInstallerStatus = false
+
+                                val intent = android.content.Intent(android.content.Intent.ACTION_DELETE).apply {
+                                    data = android.net.Uri.parse("package:${viewModel.packageName}")
+                                    flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                                }
+                                context.startActivity(intent)
+
+                                // Keep dialog open but hide it temporarily
+                                showInstallDialog = false
+                            }
+                        ) {
+                            Text(stringResource(R.string.uninstall))
+                        }
+                    }
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showInstallDialog = false
+                        userCancelledInstall = true
+                        installDialogState = InstallDialogState.INITIAL
+                        isWaitingForUninstall = false
+                    }
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+
     // Error bottom sheet
     if (showErrorBottomSheet) {
         ModalBottomSheet(
@@ -224,7 +383,7 @@ fun QuickPatcherScreen(
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .heightIn(max = 400.dp), // Increased max height for better error visibility
+                        .heightIn(max = 400.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer
                 ) {
@@ -255,10 +414,8 @@ fun QuickPatcherScreen(
         }
     }
 
-    // Add handling for installer status dialog
-    viewModel.packageInstallerStatus?.let {
-        InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
-    }
+    // We no longer use InstallerStatusDialog - handle everything in our unified dialog
+    // packageInstallerStatus is now handled in LaunchedEffect above
 
     // Add handling for memory adjustment dialog
     viewModel.memoryAdjustmentDialog?.let { state ->
@@ -315,49 +472,27 @@ fun QuickPatcherScreen(
         )
     }
 
-    // Add handling for install failure message
-    viewModel.installFailureMessage?.let { message ->
-        AlertDialog(
-            onDismissRequest = viewModel::dismissInstallFailureMessage,
-            title = { Text(stringResource(R.string.install_app_fail_title)) },
-            text = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                    Text(stringResource(R.string.ok))
+    // Add handling for install failure message (only if no packageInstallerStatus)
+    // Don't show if we're showing conflict dialog
+    if (viewModel.packageInstallerStatus == null && !hadInstallerStatus && !showInstallDialog) {
+        viewModel.installFailureMessage?.let { message ->
+            AlertDialog(
+                onDismissRequest = viewModel::dismissInstallFailureMessage,
+                title = { Text(stringResource(R.string.install_app_fail_title)) },
+                text = { Text(message) },
+                confirmButton = {
+                    TextButton(onClick = {
+                        viewModel.dismissInstallFailureMessage()
+                    }) {
+                        Text(stringResource(R.string.ok))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = viewModel::dismissInstallFailureMessage) {
+                        Text(stringResource(R.string.cancel))
+                    }
                 }
-            }
-        )
-    }
-
-    // Add handling for install status
-    viewModel.installStatus?.let { status ->
-        when (status) {
-            PatcherViewModel.InstallCompletionStatus.InProgress -> {
-                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Success -> {
-                LaunchedEffect(status) {
-                    viewModel.clearInstallStatus()
-                }
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Failure -> {
-                if (viewModel.installFailureMessage == null) {
-                    AlertDialog(
-                        onDismissRequest = viewModel::dismissInstallFailureMessage,
-                        title = { Text(stringResource(R.string.install_app_fail_title)) },
-                        text = { Text(status.message) },
-                        confirmButton = {
-                            TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                                Text(stringResource(R.string.ok))
-                            }
-                        }
-                    )
-                }
-            }
+            )
         }
     }
 
@@ -416,13 +551,15 @@ fun QuickPatcherScreen(
                             downloadProgress = viewModel.downloadProgress
                         )
                     }
-                    patcherSucceeded == true && !hasError -> {
+                    patcherSucceeded == true -> {
                         PatchingSuccess(
                             isInstalling = viewModel.isInstalling,
-                            installedPackageName = viewModel.installedPackageName
+                            installedPackageName = viewModel.installedPackageName,
+                            userCancelledInstall = userCancelledInstall
                         )
                     }
                     else -> {
+                        // Patching failed
                         PatchingFailed()
                     }
                 }
@@ -439,7 +576,7 @@ fun QuickPatcherScreen(
             ) {
                 // Left: Save APK button or empty space for symmetry
                 when {
-                    patcherSucceeded == true && !hasError -> {
+                    patcherSucceeded == true && !hasPatchingError -> {
                         FloatingActionButton(
                             onClick = {
                                 if (!isSaving) {
@@ -484,8 +621,8 @@ fun QuickPatcherScreen(
 
                 // Right: Install or Show Error button
                 when {
-                    hasError -> {
-                        // Show error button
+                    hasPatchingError -> {
+                        // Show error button only for patching errors
                         if (!showErrorBottomSheet) {
                             FloatingActionButton(
                                 onClick = { showErrorBottomSheet = true },
@@ -505,7 +642,9 @@ fun QuickPatcherScreen(
                             onClick = {
                                 if (canInstall) {
                                     if (viewModel.installedPackageName == null) {
-                                        viewModel.install()
+                                        // Reset state and show install dialog
+                                        installDialogState = InstallDialogState.INITIAL
+                                        showInstallDialog = true
                                     } else {
                                         viewModel.open()
                                     }
@@ -513,7 +652,6 @@ fun QuickPatcherScreen(
                             },
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                            // Disable button when install is in progress but keep it visible
                         ) {
                             Icon(
                                 if (viewModel.installedPackageName == null)
@@ -537,6 +675,13 @@ fun QuickPatcherScreen(
             }
         }
     }
+}
+
+// Helper enum for install dialog states
+private enum class InstallDialogState {
+    INITIAL,            // First time showing dialog - "Install app?"
+    CONFLICT,           // Conflict detected - "Package conflict, need to uninstall"
+    READY_TO_INSTALL    // After uninstall - "Ready to install, press Install"
 }
 
 @Composable
@@ -603,7 +748,7 @@ private fun PatchingInProgress(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        // Witty message
+        // Witty message - fixed height box to prevent shifting, aligned to top
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -685,11 +830,11 @@ private fun PatchingInProgress(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(80.dp), // Reserved space for download progress
+                .height(80.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Download progress bar with smooth fade-out after completion
+            // Download progress bar - positioned lower with smooth fade-out after completion
             AnimatedVisibility(
                 visible = downloadProgress != null && !isDownloadComplete,
                 enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
@@ -746,8 +891,17 @@ private fun formatBytes(bytes: Long): String {
 @Composable
 private fun PatchingSuccess(
     isInstalling: Boolean,
-    installedPackageName: String?
+    installedPackageName: String?,
+    userCancelledInstall: Boolean
 ) {
+    // Determine current state for animation
+    val currentState = when {
+        isInstalling -> SuccessState.INSTALLING
+        installedPackageName != null -> SuccessState.INSTALLED
+        userCancelledInstall -> SuccessState.INSTALL_CANCELLED
+        else -> SuccessState.COMPLETED
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -755,129 +909,105 @@ private fun PatchingSuccess(
             .fillMaxSize()
             .padding(32.dp)
     ) {
-        when {
-            isInstalling -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(200.dp)
-                        .background(
-                            brush = Brush.radialGradient(
-                                colors = listOf(
-                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                                    Color.Transparent
-                                )
-                            ),
-                            shape = CircleShape
+        // Icon with gradient background (stays the same for success states, error for cancelled)
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(200.dp)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            if (userCancelledInstall)
+                                MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                            else
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                            Color.Transparent
                         )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null,
-                        modifier = Modifier.size(120.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                Spacer(Modifier.height(24.dp))
-
-                Text(
-                    text = stringResource(R.string.quick_patcher_installing),
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    textAlign = TextAlign.Center
+                    ),
+                    shape = CircleShape
                 )
+        ) {
+            Icon(
+                imageVector = if (userCancelledInstall) Icons.Default.Close else Icons.Default.Check,
+                contentDescription = null,
+                modifier = Modifier.size(120.dp),
+                tint = if (userCancelledInstall)
+                    MaterialTheme.colorScheme.error
+                else
+                    MaterialTheme.colorScheme.primary
+            )
+        }
 
-                Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(24.dp))
 
+        // Animated title text
+        AnimatedContent(
+            targetState = currentState,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(500)) togetherWith
+                        fadeOut(animationSpec = tween(500))
+            },
+            label = "title_animation"
+        ) { state ->
+            Text(
+                text = stringResource(
+                    when (state) {
+                        SuccessState.INSTALLING -> R.string.quick_patcher_installing
+                        SuccessState.INSTALLED -> R.string.quick_patcher_success_title
+                        SuccessState.INSTALL_CANCELLED -> R.string.quick_patcher_install_cancelled_title
+                        SuccessState.COMPLETED -> R.string.quick_patcher_complete_title
+                    }
+                ),
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                color = if (userCancelledInstall)
+                    MaterialTheme.colorScheme.error
+                else
+                    MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        // Animated subtitle text (only for INSTALLING, INSTALLED, and CANCELLED states)
+        AnimatedVisibility(
+            visible = currentState != SuccessState.COMPLETED,
+            enter = fadeIn(animationSpec = tween(500)),
+            exit = fadeOut(animationSpec = tween(500))
+        ) {
+            AnimatedContent(
+                targetState = currentState,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(500)) togetherWith
+                            fadeOut(animationSpec = tween(500))
+                },
+                label = "subtitle_animation"
+            ) { state ->
                 Text(
-                    text = stringResource(R.string.quick_patcher_installing_subtitle),
+                    text = stringResource(
+                        when (state) {
+                            SuccessState.INSTALLING -> R.string.quick_patcher_installing_subtitle
+                            SuccessState.INSTALLED -> R.string.quick_patcher_success_subtitle
+                            SuccessState.INSTALL_CANCELLED -> R.string.quick_patcher_install_cancelled_subtitle
+                            else -> R.string.quick_patcher_installing_subtitle // fallback
+                        }
+                    ),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            installedPackageName != null -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(200.dp)
-                        .background(
-                            brush = Brush.radialGradient(
-                                colors = listOf(
-                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                                    Color.Transparent
-                                )
-                            ),
-                            shape = CircleShape
-                        )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null,
-                        modifier = Modifier.size(120.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                Spacer(Modifier.height(24.dp))
-
-                Text(
-                    text = stringResource(R.string.quick_patcher_success_title),
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    textAlign = TextAlign.Center
-                )
-
-                Spacer(Modifier.height(8.dp))
-
-                Text(
-                    text = stringResource(R.string.quick_patcher_success_subtitle),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            else -> {
-                // The case when the patch is successful, but the auto-installation failed
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(200.dp)
-                        .background(
-                            brush = Brush.radialGradient(
-                                colors = listOf(
-                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                                    Color.Transparent
-                                )
-                            ),
-                            shape = CircleShape
-                        )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null,
-                        modifier = Modifier.size(120.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                Spacer(Modifier.height(24.dp))
-
-                Text(
-                    text = stringResource(R.string.quick_patcher_complete_title),
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )
             }
         }
     }
+}
+
+// Helper enum for state tracking
+private enum class SuccessState {
+    INSTALLING,
+    INSTALLED,
+    INSTALL_CANCELLED,
+    COMPLETED
 }
 
 @Composable
