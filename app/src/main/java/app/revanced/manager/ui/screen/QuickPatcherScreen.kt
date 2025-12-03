@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.screen
 
 import android.app.Activity
+import android.content.pm.PackageInstaller
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -752,8 +753,7 @@ private fun PatchingInProgress(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
-                .padding(horizontal = 32.dp),
+                .height(120.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             AnimatedContent(

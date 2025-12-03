@@ -477,13 +477,13 @@ class PatcherViewModel(
                         awaitingPackageInstall = null
                         installedPackageName = packageName
                         installFailureMessage = null
-                viewModelScope.launch {
-                    val persisted = persistPatchedApp(installedPackageName, InstallType.DEFAULT)
-                    if (!persisted) {
-                        Log.w(TAG, "Failed to persist installed patched app metadata")
-                    }
-                }
-                app.toast(app.getString(R.string.install_app_success))
+                        viewModelScope.launch {
+                            val persisted = persistPatchedApp(installedPackageName, InstallType.DEFAULT)
+                            if (!persisted) {
+                                Log.w(TAG, "Failed to persist installed patched app metadata")
+                            }
+                        }
+                        app.toast(app.getString(R.string.install_app_success))
                         installStatus = InstallCompletionStatus.Success(packageName)
                         updateInstallingState(false)
                         packageInstallerStatus = null

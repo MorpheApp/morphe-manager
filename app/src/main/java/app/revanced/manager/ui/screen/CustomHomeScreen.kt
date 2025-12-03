@@ -476,8 +476,7 @@ private fun MainContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
-                    .padding(horizontal = 32.dp),
+                    .height(120.dp),
                 contentAlignment = Alignment.TopCenter
             ) {
                 AnimatedContent(
