@@ -578,7 +578,12 @@ private fun PatchingInProgress(
             R.string.quick_patcher_message_7,
             R.string.quick_patcher_message_8,
             R.string.quick_patcher_message_9,
-            R.string.quick_patcher_message_10
+            R.string.quick_patcher_message_10,
+            R.string.quick_patcher_message_11,
+            R.string.quick_patcher_message_12,
+            R.string.quick_patcher_message_13,
+            R.string.quick_patcher_message_14,
+            R.string.quick_patcher_message_15,
         )
     }
 
