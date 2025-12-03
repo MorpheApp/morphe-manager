@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import app.revanced.manager.data.room.profile.PatchProfilePayload
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 enum class InstallType(val stringResource: Int) {
     DEFAULT(R.string.default_install),

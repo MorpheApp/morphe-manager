@@ -36,7 +36,7 @@ import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel.AppBundleSummary
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)

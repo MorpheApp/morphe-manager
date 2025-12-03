@@ -27,7 +27,7 @@ import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.network.downloader.LoadedDownloaderPlugin
 import app.revanced.manager.ui.model.SelectedApp
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @Composable
 fun QuickPatchSourceSelectorDialog(

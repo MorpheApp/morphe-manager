@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.Process
 import android.os.RemoteException
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

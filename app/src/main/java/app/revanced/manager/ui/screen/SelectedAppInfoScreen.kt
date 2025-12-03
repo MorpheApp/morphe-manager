@@ -93,7 +93,7 @@ import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.consumeHorizontalScroll
 import app.revanced.manager.util.toast
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 

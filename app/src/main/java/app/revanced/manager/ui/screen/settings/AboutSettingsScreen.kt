@@ -37,8 +37,8 @@ import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import app.universal.revanced.manager.BuildConfig
-import app.universal.revanced.manager.R
+import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
 import androidx.compose.ui.graphics.vector.ImageVector
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.model.navigation.Settings

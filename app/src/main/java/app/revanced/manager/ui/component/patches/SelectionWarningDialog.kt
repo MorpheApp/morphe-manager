@@ -2,7 +2,7 @@ package app.revanced.manager.ui.component.patches
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.ui.component.SafeguardDialog
 
 @Composable

@@ -163,12 +163,12 @@ buildscript {
 }
 
 android {
-    namespace = "app.universal.revanced.manager"
+    namespace = "app.morphe.manager"
     compileSdk = 35
     buildToolsVersion = "35.0.1"
 
     defaultConfig {
-        applicationId = "software.morphe.manager"
+        applicationId = "app.morphe.manager"
         minSdk = 26
         targetSdk = 35
 

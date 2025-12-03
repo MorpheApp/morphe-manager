@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import androidx.core.content.ContextCompat
-import app.universal.revanced.manager.BuildConfig
+import app.morphe.manager.BuildConfig
 import app.revanced.manager.patcher.runtime.process.IPatcherEvents
 import app.revanced.manager.patcher.runtime.process.IPatcherProcess
 import app.revanced.manager.patcher.LibraryResolver

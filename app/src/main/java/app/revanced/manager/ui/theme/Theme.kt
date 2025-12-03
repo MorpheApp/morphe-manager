@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowCompat
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.serialization.Serializable
 
 private val DarkColorScheme = darkColorScheme(

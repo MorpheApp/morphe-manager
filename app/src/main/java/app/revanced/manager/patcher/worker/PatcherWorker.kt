@@ -19,7 +19,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import app.revanced.manager.MainActivity
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.domain.installer.RootInstaller

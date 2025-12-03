@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.network.api.ReVancedAPI

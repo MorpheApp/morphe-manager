@@ -2,7 +2,7 @@ package app.revanced.manager.ui.model
 
 import android.os.Parcelable
 import androidx.annotation.StringRes
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.parcelize.Parcelize
 
 enum class StepCategory(@StringRes val displayName: Int) {

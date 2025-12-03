@@ -22,7 +22,7 @@ import app.revanced.manager.util.PM
 import app.revanced.manager.util.mutableStateSetOf
 
 import app.revanced.manager.util.toast
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.service.UninstallService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable

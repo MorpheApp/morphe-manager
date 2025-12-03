@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.ui.component.AlertDialogExtended
 import app.revanced.manager.ui.component.TextHorizontalPadding
 import app.revanced.manager.ui.component.haptics.HapticCheckbox

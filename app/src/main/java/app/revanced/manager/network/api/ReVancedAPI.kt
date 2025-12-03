@@ -1,6 +1,6 @@
 package app.revanced.manager.network.api
 
-import app.universal.revanced.manager.BuildConfig
+import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.dto.GitHubAsset
 import app.revanced.manager.network.dto.GitHubContributor

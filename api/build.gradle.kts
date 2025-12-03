@@ -8,7 +8,7 @@ plugins {
     signing
 }
 
-group = "app.revanced"
+group = "app.morphe"
 
 dependencies {
     implementation(libs.androidx.ktx)
@@ -18,7 +18,7 @@ dependencies {
 }
 
 android {
-    namespace = "app.universal.revanced.manager.plugin.downloader"
+    namespace = "app.morphe.manager.plugin.downloader"
     compileSdk = 35
     buildToolsVersion = "35.0.1"
 
@@ -53,6 +53,7 @@ android {
 }
 
 apiValidation {
+    // FIXME? Update this to app.morphe?
     nonPublicMarkers += "app.revanced.manager.plugin.downloader.PluginHostApi"
 }
 
@@ -86,29 +87,31 @@ publishing {
                 from(components["release"])
             }
 
-            groupId = "app.revanced"
-            artifactId = "universal-revanced-manager-api"
+            groupId = "app.morphe"
+            artifactId = "morphe-manager-api"
             version = project.version.toString()
 
             pom {
-                name = "ReVanced Manager API"
-                description = "API for ReVanced Manager."
-                url = "https://revanced.app"
+                name = "Morphe Manager API"
+                description = "API for Morphe Manager."
+                url = "https://morphe.software"
 
                 licenses {
                     license {
                         name = "GNU General Public License v3.0"
                         url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
+                        comments = "Additional conditions under GPL section 7 apply: attribution and project name restrictions. See LICENSE file."
                     }
                 }
                 developers {
                     developer {
-                        id = "ReVanced"
-                        name = "ReVanced"
-                        email = "contact@revanced.app"
+                        id = "Morphe"
+                        name = "Morphe"
+                        email = "contact@morphe.software"
                     }
                 }
                 scm {
+                    // FIXME
                     val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "Jman-Github/Universal-ReVanced-Manager"
                     connection = "scm:git:git://github.com/$ghRepo.git"
                     developerConnection = "scm:git:git@github.com:$ghRepo.git"

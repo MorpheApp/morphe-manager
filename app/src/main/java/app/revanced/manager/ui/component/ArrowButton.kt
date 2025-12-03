@@ -10,7 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @Composable
 fun ArrowButton(

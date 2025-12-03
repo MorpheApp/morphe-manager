@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.util.transparentListItemColors
 

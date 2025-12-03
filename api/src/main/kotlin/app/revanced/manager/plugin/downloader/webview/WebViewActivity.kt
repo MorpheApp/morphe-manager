@@ -21,7 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import app.revanced.manager.plugin.downloader.PluginHostApi
-import app.universal.revanced.manager.plugin.downloader.R
+import app.morphe.manager.plugin.downloader.R
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch

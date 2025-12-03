@@ -11,7 +11,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @Composable
 fun SafeguardDialog(

@@ -1,5 +1,6 @@
 -dontobfuscate
 
+-keep class app.morphe.** { *; }
 -keep class app.revanced.manager.patcher.runtime.process.* { *; }
 -keep class app.revanced.manager.plugin.** { *; }
 -keep class app.revanced.patcher.** { *; }

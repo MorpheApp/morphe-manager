@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.room.profile.PatchProfilePayload
 import app.revanced.manager.data.room.options.Option as StoredOption
 import app.revanced.manager.domain.manager.PreferencesManager

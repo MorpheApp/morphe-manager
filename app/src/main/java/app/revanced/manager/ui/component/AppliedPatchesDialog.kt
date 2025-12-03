@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.ui.component.bundle.BundleTopBar
 import app.revanced.manager.ui.component.bundle.PatchItem
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 data class AppliedPatchBundleUi(
     val uid: Int,

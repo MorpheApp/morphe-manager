@@ -1,7 +1,7 @@
 package app.revanced.manager.di
 
 import android.content.Context
-import app.universal.revanced.manager.BuildConfig
+import app.morphe.manager.BuildConfig
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.plugins.HttpTimeout

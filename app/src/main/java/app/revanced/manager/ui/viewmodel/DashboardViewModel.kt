@@ -21,7 +21,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first

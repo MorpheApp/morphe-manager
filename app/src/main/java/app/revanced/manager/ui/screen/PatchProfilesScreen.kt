@@ -61,7 +61,7 @@ import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel.RenameResult
 import app.revanced.manager.util.relativeTime
 import app.revanced.manager.util.toast
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 

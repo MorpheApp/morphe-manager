@@ -10,7 +10,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.ui.component.haptics.HapticRadioButton
 import app.revanced.manager.util.transparentListItemColors

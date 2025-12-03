@@ -2,7 +2,7 @@ package app.revanced.manager.patcher
 
 import android.content.Context
 import app.revanced.library.ApkUtils.applyTo
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.ui.model.State
 import app.revanced.patcher.Patcher

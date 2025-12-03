@@ -22,7 +22,7 @@ import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.ui.component.ColumnWithScrollbar
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @Composable
 fun PasswordField(modifier: Modifier = Modifier, value: String, onValueChange: (String) -> Unit, label: @Composable (() -> Unit)? = null, placeholder: @Composable (() -> Unit)? = null) {

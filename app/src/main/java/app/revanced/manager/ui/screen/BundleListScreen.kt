@@ -35,7 +35,7 @@ import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.bundle.BundleItem
 import app.revanced.manager.ui.viewmodel.BundleListViewModel
 import app.revanced.manager.util.EventEffect
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault

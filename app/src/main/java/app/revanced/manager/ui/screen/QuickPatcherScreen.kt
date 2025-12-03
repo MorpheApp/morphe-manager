@@ -50,7 +50,7 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.toast
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

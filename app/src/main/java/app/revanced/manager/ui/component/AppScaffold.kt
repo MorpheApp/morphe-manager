@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

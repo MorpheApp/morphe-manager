@@ -36,7 +36,7 @@ import app.revanced.manager.ui.component.FullscreenDialog
 import app.revanced.manager.ui.component.settings.Changelog
 import app.revanced.manager.util.relativeTime
 import app.revanced.manager.util.simpleMessage
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

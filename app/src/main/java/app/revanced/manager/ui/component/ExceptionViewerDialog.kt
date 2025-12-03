@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.revanced.manager.util.consumeHorizontalScroll
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.ui.component.bundle.BundleTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)

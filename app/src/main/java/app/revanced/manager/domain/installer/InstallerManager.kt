@@ -15,10 +15,10 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.StringRes
-import app.universal.revanced.manager.BuildConfig
+import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import java.io.File
 import java.io.IOException
 import java.util.LinkedHashMap

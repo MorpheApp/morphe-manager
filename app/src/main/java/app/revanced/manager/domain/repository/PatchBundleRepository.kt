@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.annotation.StringRes
 import app.revanced.library.mostCommonCompatibleVersions
 import app.revanced.patcher.patch.Patch
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.redux.Action
 import app.revanced.manager.data.redux.ActionContext

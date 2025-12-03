@@ -2,7 +2,7 @@ package app.revanced.manager.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.api.ReVancedAPI
