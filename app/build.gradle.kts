@@ -93,8 +93,9 @@ dependencies {
     ksp(libs.room.compiler)
 
     // ReVanced
-    implementation(libs.morphe.patcher)
-    implementation(libs.morphe.library)
+    // FIXME: temporarily use local libs
+//    implementation(libs.morphe.patcher)
+//    implementation(libs.morphe.library)
 
     // Downloader plugins
     implementation(project(":api"))
