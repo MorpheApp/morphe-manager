@@ -12,7 +12,7 @@ plugins {
     signing
 }
 
-val outputApkFileName = "universal-revanced-manager-$version.apk"
+val outputApkFileName = "morphe-manager-$version.apk"
 
 dependencies {
     // FIXME: Temporary copy pasted dependencies from morphe-library until repos are public.
