@@ -473,21 +473,29 @@ private fun MainContent(
             )
             var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
 
-            AnimatedContent(
-                targetState = greetingMessages[currentGreetingIndex],
-                transitionSpec = {
-                    fadeIn(tween(800)) togetherWith fadeOut(tween(800))
-                },
-                label = "greeting_animation"
-            ) { resId ->
-                Text(
-                    text = stringResource(resId),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp)
+                    .padding(horizontal = 32.dp),
+                contentAlignment = Alignment.TopCenter
+            ) {
+                AnimatedContent(
+                    targetState = greetingMessages[currentGreetingIndex],
+                    transitionSpec = {
+                        fadeIn(tween(800)) togetherWith fadeOut(tween(800))
+                    },
+                    label = "greeting_animation"
+                ) { resId ->
+                    Text(
+                        text = stringResource(resId),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
             }
 
             Spacer(Modifier.height(64.dp))
