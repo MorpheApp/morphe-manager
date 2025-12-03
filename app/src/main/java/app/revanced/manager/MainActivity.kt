@@ -1,13 +1,10 @@
 package app.revanced.manager
 
-import android.content.ActivityNotFoundException
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -61,10 +58,7 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
-import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
-import app.revanced.manager.util.ExportNameFormatter
-import app.revanced.manager.util.PatchedAppExportData
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
@@ -84,22 +78,11 @@ class MainActivity : ComponentActivity() {
         val vm: MainViewModel = getActivityViewModel()
 
         setContent {
-            val launcher = rememberLauncherForActivityResult(
-                ActivityResultContracts.StartActivityForResult(),
-                onResult = vm::applyLegacySettings
-            )
             val theme by vm.prefs.theme.getAsState()
             val dynamicColor by vm.prefs.dynamicColor.getAsState()
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
-
-            EventEffect(vm.legacyImportActivityFlow) {
-                try {
-                    launcher.launch(it)
-                } catch (_: ActivityNotFoundException) {
-                }
-            }
 
             ReVancedManagerTheme(
                 darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,

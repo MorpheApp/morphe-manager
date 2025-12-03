@@ -52,7 +52,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -68,7 +67,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -100,8 +98,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-// TODO: Rename to MorpheHomeScreen
-fun CustomHomeScreen(
+fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
@@ -120,13 +117,6 @@ fun CustomHomeScreen(
     val isBundlesReady by remember {
         derivedStateOf { availablePatches > 0 }
     }
-    // TEMPORARILY DISABLED: Remove loading check to debug
-    val isBundlesLoading by remember {
-        derivedStateOf { bundleUpdateProgress != null }
-    }
-//    val isBundlesLoading by remember {
-//        derivedStateOf { bundleUpdateProgress != null || availablePatches == 0 }
-//    }
 
     val hasSheetNotifications by remember {
         derivedStateOf {
@@ -309,14 +299,6 @@ fun CustomHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Loading overlay when bundles are not ready
-            if (isBundlesLoading) {
-                LoadingOverlay(
-                    bundleUpdateProgress = bundleUpdateProgress,
-                    availablePatches = availablePatches
-                )
-            }
-
             // Bundle update snackbar
             AnimatedVisibility(
                 visible = showBundleUpdateSnackbar && lastBundleUpdateProgress != null && isBundlesReady,
@@ -364,58 +346,49 @@ fun CustomHomeScreen(
             }
 
             // Main centered content
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .alpha(if (isBundlesLoading) 0.3f else 1f)
-            ) {
-                MainContent(
-                    availablePatches = availablePatches,
-                    onAllAppsClick = onAllAppsClick,
-                    onYouTubeClick = {
-                        if (isBundlesLoading) return@MainContent
-                        if (availablePatches < 1) {
-                            context.toast(context.getString(R.string.no_patch_found))
-                            scope.launch { showBundlesSheet = true }
-                            return@MainContent
-                        }
-                        if (dashboardViewModel.android11BugActive) {
-                            showAndroid11Dialog = true
-                            return@MainContent
-                        }
-                        selectedPackageName = PACKAGE_YOUTUBE
-                        showQuickPatchDialog = true
-                    },
-                    onYouTubeMusicClick = {
-                        if (isBundlesLoading) return@MainContent
-                        if (availablePatches < 1) {
-                            context.toast(context.getString(R.string.no_patch_found))
-                            scope.launch { showBundlesSheet = true }
-                            return@MainContent
-                        }
-                        if (dashboardViewModel.android11BugActive) {
-                            showAndroid11Dialog = true
-                            return@MainContent
-                        }
-                        selectedPackageName = PACKAGE_YOUTUBE_MUSIC
-                        showQuickPatchDialog = true
+            MainContent(
+                availablePatches = availablePatches,
+                onAllAppsClick = onAllAppsClick,
+                onYouTubeClick = {
+                    if (availablePatches < 1) {
+                        context.toast(context.getString(R.string.no_patch_found))
+                        scope.launch { showBundlesSheet = true }
+                        return@MainContent
                     }
-                )
-            }
+                    if (dashboardViewModel.android11BugActive) {
+                        showAndroid11Dialog = true
+                        return@MainContent
+                    }
+                    selectedPackageName = PACKAGE_YOUTUBE
+                    showQuickPatchDialog = true
+                },
+                onYouTubeMusicClick = {
+                    if (availablePatches < 1) {
+                        context.toast(context.getString(R.string.no_patch_found))
+                        scope.launch { showBundlesSheet = true }
+                        return@MainContent
+                    }
+                    if (dashboardViewModel.android11BugActive) {
+                        showAndroid11Dialog = true
+                        return@MainContent
+                    }
+                    selectedPackageName = PACKAGE_YOUTUBE_MUSIC
+                    showQuickPatchDialog = true
+                }
+            )
 
             // Floating Action Buttons
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp)
-                    .alpha(if (isBundlesLoading) 0.3f else 1f),
+                    .padding(16.dp),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 // Update FAB with badge for manager updates
                 if (!dashboardViewModel.updatedManagerVersion.isNullOrEmpty()) {
                     FloatingActionButton(
-                        onClick = { if (!isBundlesLoading) onUpdateClick() },
+                        onClick = onUpdateClick,
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     ) {
@@ -435,7 +408,7 @@ fun CustomHomeScreen(
                 // Sources FAB with notification dot
                 Box {
                     FloatingActionButton(
-                        onClick = { if (!isBundlesLoading) showBundlesSheet = true },
+                        onClick = { showBundlesSheet = true },
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ) {
@@ -462,70 +435,12 @@ fun CustomHomeScreen(
                 }
 
                 FloatingActionButton(
-                    onClick = { if (!isBundlesLoading) onSettingsClick() },
+                    onClick = onSettingsClick,
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {
                     Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
                 }
-            }
-        }
-    }
-}
-
-// Loading overlay component shown when bundles are updating or not ready
-@Composable
-private fun LoadingOverlay(
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    availablePatches: Int
-) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background.copy(alpha = 0.95f)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(64.dp),
-                strokeWidth = 6.dp,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = if (bundleUpdateProgress != null) {
-                    stringResource(
-                        R.string.bundle_update_progress,
-                        bundleUpdateProgress.completed,
-                        bundleUpdateProgress.total
-                    )
-                } else if (availablePatches == 0) {
-                    stringResource(R.string.loading_patches)
-                } else {
-                    stringResource(R.string.please_wait)
-                },
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            bundleUpdateProgress?.let { progress ->
-                Spacer(modifier = Modifier.height(16.dp))
-                LinearProgressIndicator(
-                    progress = {
-                        if (progress.total == 0) 0f
-                        else progress.completed.toFloat() / progress.total
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(0.6f)
-                        .height(8.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                )
             }
         }
     }
