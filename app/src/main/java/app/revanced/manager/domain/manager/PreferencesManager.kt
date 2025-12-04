@@ -18,8 +18,8 @@ class PreferencesManager(
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
 
-    val patchesRepoOwner = stringPreference("patches_repo_owner", "LisoUseInAIKyrios")
-    val patchesRepo = stringPreference("patches_repo", "revanced-patches")
+    val patchesRepoOwner = stringPreference("patches_repo_owner", "HundEdFeteTree")
+    val patchesRepo = stringPreference("patches_repo", "HappyFunTest")
 
     val useProcessRuntime = booleanPreference("use_process_runtime", false)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
