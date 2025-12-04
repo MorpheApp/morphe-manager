@@ -18,7 +18,8 @@ class PreferencesManager(
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
 
-    val api = stringPreference("api_url", "https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json")
+    val patchesRepoOwner = stringPreference("patches_repo_owner", "LisoUseInAIKyrios")
+    val patchesRepo = stringPreference("patches_repo", "revanced-patches")
 
     val useProcessRuntime = booleanPreference("use_process_runtime", false)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
@@ -63,7 +64,8 @@ class PreferencesManager(
         val customThemeColor: String? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
-        val api: String? = null,
+        val patchesRepoOwner: String? = null,
+        val patchesRepo: String? = null,
         val useProcessRuntime: Boolean? = null,
         val patcherProcessMemoryLimit: Int? = null,
         val patchedAppExportFormat: String? = null,
@@ -79,6 +81,7 @@ class PreferencesManager(
         val managerAutoUpdates: Boolean? = null,
         val showManagerUpdateDialogOnLaunch: Boolean? = null,
         val useManagerPrereleases: Boolean? = null,
+        val usePatchesPrereleases: Boolean? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val disableSelectionWarning: Boolean? = null,
         val disableUniversalPatchCheck: Boolean? = null,
@@ -94,7 +97,8 @@ class PreferencesManager(
         customThemeColor = customThemeColor.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
-        api = api.get(),
+        patchesRepoOwner = patchesRepoOwner.get(),
+        patchesRepo = patchesRepo.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
         patchedAppExportFormat = patchedAppExportFormat.get(),
@@ -110,6 +114,7 @@ class PreferencesManager(
         managerAutoUpdates = managerAutoUpdates.get(),
         showManagerUpdateDialogOnLaunch = showManagerUpdateDialogOnLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
+        usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         disableSelectionWarning = disableSelectionWarning.get(),
         disableUniversalPatchCheck = disableUniversalPatchCheck.get(),
@@ -125,7 +130,8 @@ class PreferencesManager(
         snapshot.customThemeColor?.let { customThemeColor.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
-        snapshot.api?.let { api.value = it }
+        snapshot.patchesRepoOwner?.let { patchesRepoOwner.value = it }
+        snapshot.patchesRepo?.let { patchesRepo.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
         snapshot.patchedAppExportFormat?.let { patchedAppExportFormat.value = it }
@@ -143,6 +149,7 @@ class PreferencesManager(
             showManagerUpdateDialogOnLaunch.value = it
         }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
+        snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.disableSelectionWarning?.let { disableSelectionWarning.value = it }
         snapshot.disableUniversalPatchCheck?.let { disableUniversalPatchCheck.value = it }

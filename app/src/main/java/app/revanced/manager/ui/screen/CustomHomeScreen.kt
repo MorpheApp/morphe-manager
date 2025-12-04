@@ -497,7 +497,7 @@ private fun MainContent(
                 }
             }
 
-            Spacer(Modifier.height(64.dp))
+            Spacer(Modifier.height(32.dp))
 
             // YouTube Button
             AppButton(

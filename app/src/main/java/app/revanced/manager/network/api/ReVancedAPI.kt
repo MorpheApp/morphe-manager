@@ -2,12 +2,7 @@ package app.revanced.manager.network.api
 
 import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.network.dto.GitHubAsset
-import app.revanced.manager.network.dto.GitHubContributor
-import app.revanced.manager.network.dto.GitHubRelease
-import app.revanced.manager.network.dto.ReVancedAsset
-import app.revanced.manager.network.dto.ReVancedContributor
-import app.revanced.manager.network.dto.ReVancedGitRepository
+import app.revanced.manager.network.dto.*
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.APIFailure
@@ -18,7 +13,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlin.runCatching
+import kotlinx.serialization.Serializable
 
 class ReVancedAPI(
     private val client: HttpService,
@@ -31,7 +26,22 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
+    private fun managerRepoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
+
+    private suspend fun patchesRepoConfig(): RepoConfig {
+        val owner = prefs.patchesRepoOwner.get().trim()
+        val repoName = prefs.patchesRepo.get().trim()
+
+        val finalOwner = if (owner.isBlank()) DEFAULT_PATCHES_OWNER else owner
+        val finalName = if (repoName.isBlank()) DEFAULT_PATCHES_REPO else repoName
+
+        return RepoConfig(
+            owner = finalOwner,
+            name = finalName,
+            apiBase = "https://api.github.com/repos/$finalOwner/$finalName",
+            htmlUrl = "https://github.com/$finalOwner/$finalName"
+        )
+    }
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -40,13 +50,11 @@ class ReVancedAPI(
                 val repoPath = trimmed.removePrefix("https://github.com/").removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 require(parts.size >= 2) { "Invalid GitHub repository URL: $raw" }
-                val owner = parts[0]
-                val name = parts[1]
                 RepoConfig(
-                    owner = owner,
-                    name = name,
-                    apiBase = "https://api.github.com/repos/$owner/$name",
-                    htmlUrl = "https://github.com/$owner/$name"
+                    owner = parts[0],
+                    name = parts[1],
+                    apiBase = "https://api.github.com/repos/${parts[0]}/${parts[1]}",
+                    htmlUrl = "https://github.com/${parts[0]}/${parts[1]}"
                 )
             }
 
@@ -54,8 +62,10 @@ class ReVancedAPI(
                 val repoPath = trimmed.removePrefix("https://api.github.com/").trim('/').removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 val reposIndex = parts.indexOf("repos")
-                val owner = parts.getOrNull(reposIndex + 1) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
-                val name = parts.getOrNull(reposIndex + 2) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val owner = parts.getOrNull(reposIndex + 1)
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val name = parts.getOrNull(reposIndex + 2)
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
                 RepoConfig(
                     owner = owner,
                     name = name,
@@ -75,21 +85,6 @@ class ReVancedAPI(
         }
     }
 
-    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
-
-    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
-        val normalizedRoute = route.trimStart('/')
-        return client.request {
-            url("${apiUrl()}/v4/$normalizedRoute")
-        }
-    }
-
-    // Check if string is a direct JSON link
-    private fun String.isDirectJsonLink(): Boolean =
-        lowercase().run {
-            (startsWith("http://") || startsWith("https://")) && endsWith(".json")
-        }
-
     private suspend fun fetchReleaseAsset(
         config: RepoConfig,
         includePrerelease: Boolean,
@@ -97,7 +92,7 @@ class ReVancedAPI(
     ): APIResponse<ReVancedAsset> {
         return when (val releasesResponse = githubRequest<List<GitHubRelease>>(config, "releases")) {
             is APIResponse.Success -> {
-                val mapped = runCatching {
+                val mapped = kotlin.runCatching {
                     val release = releasesResponse.data.firstOrNull { release ->
                         !release.draft && (includePrerelease || !release.prerelease) && release.assets.any(matcher)
                     } ?: throw IllegalStateException("No matching release found")
@@ -153,9 +148,14 @@ class ReVancedAPI(
         asset.name.endsWith(".apk", ignoreCase = true) ||
                 asset.contentType?.contains("android.package-archive", ignoreCase = true) == true
 
+    private fun isPatchesAsset(asset: GitHubAsset): Boolean {
+        val name = asset.name.lowercase()
+        return name.endsWith(".rvp") ||
+                (name.contains("patches") && !name.endsWith(".asc") && !name.endsWith(".sig"))
+    }
 
     suspend fun getLatestAppInfo(): APIResponse<ReVancedAsset> {
-        val config = repoConfig()
+        val config = managerRepoConfig()
         val includePrerelease = prefs.useManagerPrereleases.get()
         return fetchReleaseAsset(config, includePrerelease, ::isManagerAsset)
     }
@@ -165,20 +165,18 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
-    // Support both API URLs and direct JSON links
+    /**
+     * Fetches the latest patches bundle .rvp from the configured repository.
+     * Uses GitHub Releases only.
+     */
     suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = withContext(Dispatchers.IO) {
-        val url = prefs.api.get().trim()
-        if (url.isDirectJsonLink()) {
-            // Direct JSON link - fetch it directly
-            client.request { url(url) }
-        } else {
-            // API URL - use standard API request
-            apiRequest<ReVancedAsset>("patches?prerelease=${prefs.usePatchesPrereleases.get()}")
-        }
+        val config = patchesRepoConfig()
+        val includePrerelease = prefs.usePatchesPrereleases.get()
+        fetchReleaseAsset(config, includePrerelease, ::isPatchesAsset)
     }
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
-        val config = repoConfig()
+        val config = managerRepoConfig()
         return when (val response = githubRequest<List<GitHubContributor>>(config, "contributors")) {
             is APIResponse.Success -> {
                 val contributors = response.data.map {
@@ -199,7 +197,11 @@ class ReVancedAPI(
             is APIResponse.Failure -> APIResponse.Failure(response.error)
         }
     }
-}
 
-//FIXME: Remove "-alpha" when released
-private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
+    companion object {
+        // FIXME: Change this when released
+        private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
+        private const val DEFAULT_PATCHES_OWNER = "LisoUseInAIKyrios"
+        private const val DEFAULT_PATCHES_REPO = "revanced-patches"
+    }
+}

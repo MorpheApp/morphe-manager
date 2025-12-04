@@ -15,25 +15,22 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Api
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material3.AlertDialog
@@ -63,37 +60,34 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.content.getSystemService
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.consumeHorizontalScroll
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
 import app.revanced.manager.util.withHapticFeedback
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -110,9 +104,11 @@ fun AdvancedSettingsScreen(
 ) {
     val context = LocalContext.current
     val installerManager: InstallerManager = koinInject()
+
     var installerDialogTarget by rememberSaveable { mutableStateOf<InstallerDialogTarget?>(null) }
     var showCustomInstallerDialog by rememberSaveable { mutableStateOf(false) }
     val hasOfficialBundle by viewModel.hasOfficialBundle.collectAsStateWithLifecycle(true)
+
     val memoryLimit = remember {
         val activityManager = context.getSystemService<ActivityManager>()!!
         context.getString(
@@ -121,7 +117,27 @@ fun AdvancedSettingsScreen(
             activityManager.largeMemoryClass
         )
     }
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    val patchesRepoOwner by viewModel.prefs.patchesRepoOwner.getAsState()
+    val patchesRepoName by viewModel.prefs.patchesRepo.getAsState()
+    var showPatchesRepoDialog by rememberSaveable { mutableStateOf(false) }
+
+    if (showPatchesRepoDialog) {
+        PatchesRepoDialog(
+            currentOwner = patchesRepoOwner,
+            currentRepo = patchesRepoName,
+            defaultOwner = viewModel.prefs.patchesRepoOwner.default,
+            defaultRepo = viewModel.prefs.patchesRepo.default,
+            onDismiss = { showPatchesRepoDialog = false },
+            onSave = { owner, repo ->
+                viewModel.setPatchesRepoOwner(owner.trim())
+                viewModel.setPatchesRepoName(repo.trim())
+                showPatchesRepoDialog = false
+            }
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -140,25 +156,11 @@ fun AdvancedSettingsScreen(
         ) {
             GroupHeader(stringResource(R.string.manager))
 
-            val apiUrl by viewModel.prefs.api.getAsState()
-            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
-
-            if (showApiUrlDialog) {
-                APIUrlDialog(
-                    currentUrl = apiUrl,
-                    defaultUrl = viewModel.prefs.api.default,
-                    onSubmit = {
-                        showApiUrlDialog = false
-                        it?.let(viewModel::setApiUrl)
-                    }
-                )
-            }
+            // Patches repository
             SettingsListItem(
-                headlineContent = stringResource(R.string.api_url),
-                supportingContent = stringResource(R.string.api_url_description),
-                modifier = Modifier.clickable {
-                    showApiUrlDialog = true
-                }
+                headlineContent = stringResource(R.string.patches_repo),
+                supportingContent = stringResource(R.string.patches_repo_description),
+                modifier = Modifier.clickable { showPatchesRepoDialog = true }
             )
 
             val installTarget = InstallerManager.InstallTarget.PATCHER
@@ -166,6 +168,7 @@ fun AdvancedSettingsScreen(
             val fallbackPreference by viewModel.prefs.installerFallback.getAsState()
             val primaryToken = remember(primaryPreference) { installerManager.parseToken(primaryPreference) }
             val fallbackToken = remember(fallbackPreference) { installerManager.parseToken(fallbackPreference) }
+
             fun ensureSelection(
                 entries: List<InstallerManager.Entry>,
                 token: InstallerManager.Token,
@@ -263,6 +266,7 @@ fun AdvancedSettingsScreen(
 
             val primarySupporting = entrySupporting(primaryEntry)
             val fallbackSupporting = entrySupporting(fallbackEntry)
+
             fun installerLeadingContent(
                 entry: InstallerManager.Entry,
                 selected: Boolean
@@ -849,7 +853,7 @@ private fun CustomInstallerContent(
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         savedEntries.forEach { (component, entry) ->
                             val isBuiltinSaved = component in builtinComponents ||
-                                component.packageName == "com.google.android.packageinstaller"
+                                    component.packageName == "com.google.android.packageinstaller"
                             val badgeText = when {
                                 isBuiltinSaved -> stringResource(R.string.installer_custom_builtin_indicator)
                                 component.flattenToString() in savedComponents -> stringResource(R.string.installer_custom_saved_indicator)
@@ -1008,7 +1012,7 @@ private fun CustomInstallerContent(
                             val flattened = token.componentName.flattenToString()
                             val isSaved = flattened in savedComponents
                             val isBuiltin = token.componentName in builtinComponents ||
-                                token.componentName.packageName == "com.google.android.packageinstaller"
+                                    token.componentName.packageName == "com.google.android.packageinstaller"
                             val badgeText = when {
                                 isSaved -> stringResource(R.string.installer_custom_saved_indicator)
                                 isBuiltin -> stringResource(R.string.installer_custom_builtin_indicator)
@@ -1136,12 +1140,12 @@ private fun InstallerSelectionDialog(
             selection = options.firstOrNull {
                 !tokensEqual(it.token, blockedToken) && it.availability.available
             }?.token ?: options.firstOrNull { !tokensEqual(it.token, blockedToken) }?.token
-            ?: selection
+                    ?: selection
         }
         currentSelection = selection
     }
     val confirmEnabled = options.find { it.token == currentSelection }?.availability?.available != false &&
-        !(blockedToken != null && tokensEqual(currentSelection, blockedToken))
+            !(blockedToken != null && tokensEqual(currentSelection, blockedToken))
     val scrollState = rememberScrollState()
 
     AlertDialog(
@@ -1169,8 +1173,8 @@ private fun InstallerSelectionDialog(
                     val enabled = option.availability.available
                     val selectedOption = currentSelection == option.token
                     val showShizukuAction = option.token == InstallerManager.Token.Shizuku &&
-                        option.availability.reason in shizukuPromptReasons &&
-                        onOpenShizuku != null
+                            option.availability.reason in shizukuPromptReasons &&
+                            onOpenShizuku != null
                     ListItem(
                         modifier = Modifier.clickable(enabled = enabled) {
                             if (enabled) currentSelection = option.token
@@ -1292,60 +1296,74 @@ private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?):
 }
 
 @Composable
-private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (String?) -> Unit) {
-    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
+private fun PatchesRepoDialog(
+    currentOwner: String,
+    currentRepo: String,
+    defaultOwner: String,
+    defaultRepo: String,
+    onDismiss: () -> Unit,
+    onSave: (owner: String, repo: String) -> Unit
+) {
+    var owner by rememberSaveable(currentOwner) { mutableStateOf(currentOwner) }
+    var repo by rememberSaveable(currentRepo) { mutableStateOf(currentRepo) }
 
     AlertDialog(
-        onDismissRequest = { onSubmit(null) },
+        onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
-                onClick = {
-                    onSubmit(url)
-                }
+                onClick = { onSave(owner, repo) },
+                enabled = owner.trim().isNotBlank() && repo.trim().isNotBlank()
             ) {
-                Text(stringResource(R.string.api_url_dialog_save))
+                Text(stringResource(R.string.patches_repo_dialog_save))
             }
         },
         dismissButton = {
-            TextButton(onClick = { onSubmit(null) }) {
+            TextButton(onClick = onDismiss) {
                 Text(stringResource(R.string.cancel))
             }
         },
-        icon = {
-            Icon(Icons.Outlined.Api, null)
-        },
-        title = {
-            Text(
-                text = stringResource(R.string.api_url_dialog_title),
-                style = MaterialTheme.typography.headlineSmall.copy(textAlign = TextAlign.Center),
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-        },
+        icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
+        title = { Text(stringResource(R.string.patches_repo_dialog_title)) },
         text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = stringResource(R.string.api_url_dialog_description),
+                    text = stringResource(R.string.patches_repo_dialog_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Text(
-                    text = stringResource(R.string.api_url_dialog_warning),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.error
-                )
+
                 OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = url,
-                    onValueChange = { url = it },
-                    label = { Text(stringResource(R.string.api_url)) },
-                    trailingIcon = {
-                        IconButton(onClick = { url = defaultUrl }) {
-                            Icon(Icons.Outlined.Restore, stringResource(R.string.api_url_dialog_reset))
-                        }
-                    }
+                    value = owner,
+                    onValueChange = { owner = it },
+                    label = { Text(stringResource(R.string.patches_repo_dialog_owner_label)) },
+                    singleLine = true,
+                    supportingText = { Text("e.g. MorpheApp") },
+                    modifier = Modifier.fillMaxWidth()
                 )
+
+                OutlinedTextField(
+                    value = repo,
+                    onValueChange = { repo = it },
+                    label = { Text(stringResource(R.string.patches_repo_dialog_repo_label)) },
+                    singleLine = true,
+                    supportingText = { Text("e.g. morphe-patches") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    TextButton(
+                        onClick = {
+                            owner = defaultOwner
+                            repo = defaultRepo
+                        }
+                    ) {
+                        Icon(Icons.Outlined.Restore, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Text(stringResource(R.string.patches_repo_dialog_reset), modifier = Modifier.padding(start = 4.dp))
+                    }
+                }
             }
         }
     )

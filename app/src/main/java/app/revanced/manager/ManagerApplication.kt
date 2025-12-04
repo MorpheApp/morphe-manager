@@ -8,18 +8,16 @@ import android.os.Bundle
 import android.util.Log
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.di.*
-import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.util.tag
-import kotlinx.coroutines.Dispatchers
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.internal.BuilderImpl
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
@@ -57,6 +55,7 @@ class ManagerApplication : Application() {
             )
         }
 
+        // App icon loader (Coil)
         val pixels = 512
         Coil.setImageLoader(
             ImageLoader.Builder(this)
@@ -67,25 +66,27 @@ class ManagerApplication : Application() {
                 .build()
         )
 
+        // LibSuperuser: always use mount master mode
         val shellBuilder = BuilderImpl.create().setFlags(Shell.FLAG_MOUNT_MASTER)
         Shell.setDefaultBuilder(shellBuilder)
 
+        // Preload preferences + initialize repositories
         scope.launch {
             prefs.preload()
-            val currentApi = prefs.api.get()
-            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
-                prefs.api.update(DEFAULT_API_URL)
-            }
         }
+
         scope.launch(Dispatchers.Default) {
             downloaderPluginRepository.reload()
         }
+
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
-                reload()
-                updateCheck()
+                reload()        // This will use patchesRepoOwner + patchesRepo
+                updateCheck()   // Check for new patches bundle
             }
         }
+
+        // Clean temp dir on fresh start
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             private var firstActivityCreated = false
 
@@ -98,7 +99,9 @@ class ManagerApplication : Application() {
                 if (savedInstanceState == null) {
                     Log.d(tag, "Fresh process created")
                     onFreshProcessStart()
-                } else Log.d(tag, "System-initiated process death detected")
+                } else {
+                    Log.d(tag, "System-initiated process death detected")
+                }
             }
 
             override fun onActivityStarted(activity: Activity) {}
@@ -122,11 +125,5 @@ class ManagerApplication : Application() {
             deleteRecursively()
             mkdirs()
         }
-    }
-
-    private companion object {
-        private const val DEFAULT_API_URL = "https://api.revanced.app"
-        private const val LEGACY_MANAGER_REPO_URL = "https://github.com/Jman-Github/universal-revanced-manager"
-        private const val LEGACY_MANAGER_REPO_API_URL = "https://api.github.com/repos/Jman-Github/universal-revanced-manager"
     }
 }

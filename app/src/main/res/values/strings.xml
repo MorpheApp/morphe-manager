@@ -55,6 +55,17 @@
     <string name="quick_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
     <string name="quick_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
 
+    <!-- Patches Repository Settings -->
+    <string name="patches_repo">Patches repository</string>
+    <string name="patches_repo_description">GitHub user or organization and name of the repository containing the patches bundle</string>
+    <string name="patches_repo_dialog_title">Patches repository</string>
+    <string name="patches_repo_dialog_description">Configure custom GitHub repository for downloading patches .rvp</string>
+    <string name="patches_repo_dialog_owner_label">Owner</string>
+    <string name="patches_repo_dialog_repo_label">Repository</string>
+    <string name="patches_repo_dialog_reset">Reset to default</string>
+    <string name="patches_repo_dialog_save">Save</string>
+    <string name="default_value">Default</string>
+
     <!-- About screen -->
     <string name="patches_github">Morphe Patches GitHub</string>
     <string name="manager_github">Morphe Manager GitHub</string>

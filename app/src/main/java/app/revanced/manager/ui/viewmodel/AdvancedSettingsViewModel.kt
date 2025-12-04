@@ -46,10 +46,15 @@ class AdvancedSettingsViewModel(
             return "revanced-manager_logcat_$time"
         }
 
-    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-        if (value == prefs.api.get()) return@launch
+    fun setPatchesRepoOwner(value: String) = viewModelScope.launch(Dispatchers.Default) {
+        if (value == prefs.patchesRepoOwner.get()) return@launch
+        prefs.patchesRepoOwner.update(value)
+        patchBundleRepository.reloadApiBundles()
+    }
 
-        prefs.api.update(value)
+    fun setPatchesRepoName(value: String) = viewModelScope.launch(Dispatchers.Default) {
+        if (value == prefs.patchesRepo.get()) return@launch
+        prefs.patchesRepo.update(value)
         patchBundleRepository.reloadApiBundles()
     }
 

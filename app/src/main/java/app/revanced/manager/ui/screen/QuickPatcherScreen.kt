@@ -86,16 +86,16 @@ fun QuickPatcherScreen(
     var hasPatchingError by rememberSaveable { mutableStateOf(false) }
     var showCancelDialog by rememberSaveable { mutableStateOf(false) }
 
-    // Installation dialog state - now with conflict handling
+    // Installation dialog state
     var showInstallDialog by rememberSaveable { mutableStateOf(false) }
     var installDialogShownOnce by rememberSaveable { mutableStateOf(false) }
     var userCancelledInstall by rememberSaveable { mutableStateOf(false) }
 
-    // NEW: Track install dialog state
+    // Track install dialog state
     var installDialogState by rememberSaveable { mutableStateOf(InstallDialogState.INITIAL) }
     var isWaitingForUninstall by rememberSaveable { mutableStateOf(false) }
 
-    // Track if packageInstallerStatus was set (to avoid showing generic dialog after InstallerStatusDialog)
+    // Track if packageInstallerStatus was set
     var hadInstallerStatus by rememberSaveable { mutableStateOf(false) }
 
     // Monitor successful installation
@@ -280,7 +280,7 @@ fun QuickPatcherScreen(
         )
     }
 
-    // NEW: Unified install dialog with state management
+    // Unified install dialog with state management
     if (showInstallDialog) {
         AlertDialog(
             onDismissRequest = {
@@ -414,9 +414,6 @@ fun QuickPatcherScreen(
             }
         }
     }
-
-    // We no longer use InstallerStatusDialog - handle everything in our unified dialog
-    // packageInstallerStatus is now handled in LaunchedEffect above
 
     // Add handling for memory adjustment dialog
     viewModel.memoryAdjustmentDialog?.let { state ->
@@ -712,7 +709,7 @@ private fun PatchingInProgress(
         }
     }
 
-    // Witty messages from strings
+    // Funny message when patching
     val wittyMessages = remember {
         listOf(
             R.string.quick_patcher_message_1,
@@ -749,7 +746,7 @@ private fun PatchingInProgress(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        // Witty message - fixed height box to prevent shifting, aligned to top
+        // Funny message
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -776,7 +773,7 @@ private fun PatchingInProgress(
 
         Spacer(Modifier.height(48.dp))
 
-        // Circular progress - fixed size
+        // Circular progress
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.size(280.dp)
@@ -834,7 +831,7 @@ private fun PatchingInProgress(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Download progress bar - positioned lower with smooth fade-out after completion
+            // Download progress bar
             AnimatedVisibility(
                 visible = downloadProgress != null && !isDownloadComplete,
                 enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
