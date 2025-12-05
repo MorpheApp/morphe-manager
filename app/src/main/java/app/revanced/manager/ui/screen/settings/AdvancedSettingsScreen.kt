@@ -120,21 +120,17 @@ fun AdvancedSettingsScreen(
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
-    val patchesRepoOwner by viewModel.prefs.patchesRepoOwner.getAsState()
-    val patchesRepoName by viewModel.prefs.patchesRepo.getAsState()
-    var showPatchesRepoDialog by rememberSaveable { mutableStateOf(false) }
+    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
+    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
 
-    if (showPatchesRepoDialog) {
-        PatchesRepoDialog(
-            currentOwner = patchesRepoOwner,
-            currentRepo = patchesRepoName,
-            defaultOwner = viewModel.prefs.patchesRepoOwner.default,
-            defaultRepo = viewModel.prefs.patchesRepo.default,
-            onDismiss = { showPatchesRepoDialog = false },
-            onSave = { owner, repo ->
-                viewModel.setPatchesRepoOwner(owner.trim())
-                viewModel.setPatchesRepoName(repo.trim())
-                showPatchesRepoDialog = false
+    if (showPatchesBundleJsonUrlDialog) {
+        PatchesBundleJsonUrlDialog(
+            currentUrl = patchesBundleJsonUrl,
+            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
+            onDismiss = { showPatchesBundleJsonUrlDialog = false },
+            onSave = { url ->
+                viewModel.setPatchesBundleJsonUrl(url.trim())
+                showPatchesBundleJsonUrlDialog = false
             }
         )
     }
@@ -158,9 +154,9 @@ fun AdvancedSettingsScreen(
 
             // Patches repository
             SettingsListItem(
-                headlineContent = stringResource(R.string.patches_repo),
-                supportingContent = stringResource(R.string.patches_repo_description),
-                modifier = Modifier.clickable { showPatchesRepoDialog = true }
+                headlineContent = stringResource(R.string.patches_bundle_json_url),
+                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
+                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
             )
 
             val installTarget = InstallerManager.InstallTarget.PATCHER
@@ -1296,25 +1292,30 @@ private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?):
 }
 
 @Composable
-private fun PatchesRepoDialog(
-    currentOwner: String,
-    currentRepo: String,
-    defaultOwner: String,
-    defaultRepo: String,
+private fun PatchesBundleJsonUrlDialog(
+    currentUrl: String,
+    defaultUrl: String,
     onDismiss: () -> Unit,
-    onSave: (owner: String, repo: String) -> Unit
+    onSave: (url: String) -> Unit
 ) {
-    var owner by rememberSaveable(currentOwner) { mutableStateOf(currentOwner) }
-    var repo by rememberSaveable(currentRepo) { mutableStateOf(currentRepo) }
+    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
+    var showError by rememberSaveable { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
-                onClick = { onSave(owner, repo) },
-                enabled = owner.trim().isNotBlank() && repo.trim().isNotBlank()
+                onClick = {
+                    val trimmedUrl = url.trim()
+                    if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
+                        showError = true
+                    } else {
+                        onSave(trimmedUrl)
+                    }
+                },
+                enabled = url.trim().isNotBlank()
             ) {
-                Text(stringResource(R.string.patches_repo_dialog_save))
+                Text(stringResource(R.string.patches_bundle_json_dialog_save))
             }
         },
         dismissButton = {
@@ -1323,30 +1324,35 @@ private fun PatchesRepoDialog(
             }
         },
         icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
-        title = { Text(stringResource(R.string.patches_repo_dialog_title)) },
+        title = { Text(stringResource(R.string.patches_bundle_json_url_dialog_title)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = stringResource(R.string.patches_repo_dialog_description),
+                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 OutlinedTextField(
-                    value = owner,
-                    onValueChange = { owner = it },
-                    label = { Text(stringResource(R.string.patches_repo_dialog_owner_label)) },
-                    singleLine = true,
-                    supportingText = { Text("e.g. MorpheApp") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                OutlinedTextField(
-                    value = repo,
-                    onValueChange = { repo = it },
-                    label = { Text(stringResource(R.string.patches_repo_dialog_repo_label)) },
-                    singleLine = true,
-                    supportingText = { Text("e.g. morphe-patches") },
+                    value = url,
+                    onValueChange = {
+                        url = it
+                        if (showError) showError = false
+                    },
+                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
+                    supportingText = {
+                        if (showError) {
+                            Text(
+                                stringResource(R.string.patches_bundle_json_url_error),
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        } else {
+                            Text("e.g. https://.../bundle.json")
+                        }
+                    },
+                    isError = showError,
+                    singleLine = false,
+                    maxLines = 4,
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -1356,12 +1362,12 @@ private fun PatchesRepoDialog(
                 ) {
                     TextButton(
                         onClick = {
-                            owner = defaultOwner
-                            repo = defaultRepo
+                            url = defaultUrl
+                            showError = false
                         }
                     ) {
                         Icon(Icons.Outlined.Restore, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text(stringResource(R.string.patches_repo_dialog_reset), modifier = Modifier.padding(start = 4.dp))
+                        Text(stringResource(R.string.patches_bundle_json_dialog_reset), modifier = Modifier.padding(start = 4.dp))
                     }
                 }
             }

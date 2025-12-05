@@ -18,8 +18,10 @@ class PreferencesManager(
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
 
-    val patchesRepoOwner = stringPreference("patches_repo_owner", "LisoUseInAIKyrios")
-    val patchesRepo = stringPreference("patches_repo", "revanced-patches")
+    val patchesBundleJsonUrl = stringPreference(
+        "patches_bundle_json_url",
+        "https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json"
+    )
 
     val useProcessRuntime = booleanPreference("use_process_runtime", false)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
@@ -64,8 +66,7 @@ class PreferencesManager(
         val customThemeColor: String? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
-        val patchesRepoOwner: String? = null,
-        val patchesRepo: String? = null,
+        val patchesBundleJsonUrl: String? = null,
         val useProcessRuntime: Boolean? = null,
         val patcherProcessMemoryLimit: Int? = null,
         val patchedAppExportFormat: String? = null,
@@ -97,8 +98,7 @@ class PreferencesManager(
         customThemeColor = customThemeColor.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
-        patchesRepoOwner = patchesRepoOwner.get(),
-        patchesRepo = patchesRepo.get(),
+        patchesBundleJsonUrl = patchesBundleJsonUrl.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
         patchedAppExportFormat = patchedAppExportFormat.get(),
@@ -130,8 +130,7 @@ class PreferencesManager(
         snapshot.customThemeColor?.let { customThemeColor.value = it }
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
-        snapshot.patchesRepoOwner?.let { patchesRepoOwner.value = it }
-        snapshot.patchesRepo?.let { patchesRepo.value = it }
+        snapshot.patchesBundleJsonUrl?.let { patchesBundleJsonUrl.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
         snapshot.patchedAppExportFormat?.let { patchedAppExportFormat.value = it }
