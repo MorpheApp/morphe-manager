@@ -33,7 +33,7 @@ import java.io.FileNotFoundException
 
 class DashboardViewModel(
     private val app: Application,
-    private val patchBundleRepository: PatchBundleRepository,
+    val patchBundleRepository: PatchBundleRepository,
     private val downloaderPluginRepository: DownloaderPluginRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,

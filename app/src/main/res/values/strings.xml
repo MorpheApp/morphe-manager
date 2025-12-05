@@ -4,7 +4,7 @@
     <string name="use_custom_home_screen_description">A simplified interface with quick patching YouTube and YouTube Music</string>
     <string name="custom_home_youtube">YouTube</string>
     <string name="custom_home_youtube_music">YouTube Music</string>
-    <string name="custom_home_other_apps">Choose other apps</string>
+    <string name="custom_home_advanced_mode">Advanced mode</string>
     <string name="custom_home_bundles">Patch bundles</string>
     <string name="home_greeting_1">Ready to make YouTube legendary again?</string>
     <string name="home_greeting_2">What digital masterpiece are we crafting today?</string>
@@ -15,6 +15,19 @@
     <string name="home_greeting_7">Today’s forecast: 100% chance of patching</string>
     <string name="loading_patches">Loading patches…</string>
     <string name="please_wait">Please wait…</string>
+    <string name="battery_optimization_warning_title">Battery Optimization</string>
+    <string name="new_plugins_available">New Plugins Available</string>
+    <string name="patches_source">Patches Source</string>
+    <string name="bundle_type_api">API Bundle</string>
+    <string name="updating">Updating…</string>
+    <string name="check_for_updates">Check for Updates</string>
+    <string name="notifications">Notifications</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="failed_to_open_url">Failed to open URL</string>
+    <string name="date_added">Added</string>
+    <string name="date_updated">Updated</string>
+    <string name="check_updates">Check</string>
+    <string name="bundle_update_completed">Update Completed</string>
 
     <!-- Quick Patcher Screen -->
     <string name="quick_patcher_title">Patching</string>

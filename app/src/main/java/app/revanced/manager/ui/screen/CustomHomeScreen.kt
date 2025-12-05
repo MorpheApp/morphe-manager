@@ -15,6 +15,7 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,16 +29,24 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.CalendarToday
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.MusicNote
+import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
+import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
@@ -45,15 +54,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -67,30 +78,39 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.revanced.manager.ui.component.NotificationCard
 import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.morphe.manager.R
+import app.revanced.manager.network.dto.ReVancedAsset
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import android.provider.Settings as AndroidSettings
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
 private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
@@ -98,7 +118,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
+fun CustomHomeScreen(
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
@@ -108,15 +128,17 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val uriHandler = LocalUriHandler.current
 
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+    val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
+    val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
 
-    // Check if bundles are ready and loaded
-    val isBundlesReady by remember {
-        derivedStateOf { availablePatches > 0 }
-    }
+    // Get only the API bundle (uid = 0)
+    val apiBundle = remember(sources) { sources.firstOrNull { it.uid == 0 } }
 
     val hasSheetNotifications by remember {
         derivedStateOf {
@@ -128,6 +150,7 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
     var showBundlesSheet by remember { mutableStateOf(false) }
     var showQuickPatchDialog by rememberSaveable { mutableStateOf(false) }
     var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
+    var isRefreshingBundle by remember { mutableStateOf(false) }
 
     // Manager update dialog state
     var hasCheckedForUpdates by rememberSaveable { mutableStateOf(false) }
@@ -135,7 +158,8 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
     val updatedManagerVersion = dashboardViewModel.updatedManagerVersion
 
     // Show dialog only if: (1) not checked yet, (2) dialog enabled, (3) update available
-    val shouldShowUpdateDialog = !hasCheckedForUpdates && showDialogOnLaunch && !updatedManagerVersion.isNullOrEmpty()
+    val shouldShowUpdateDialog =
+        !hasCheckedForUpdates && showDialogOnLaunch && !updatedManagerVersion.isNullOrEmpty()
 
     if (shouldShowUpdateDialog) {
         AvailableUpdateDialog(
@@ -153,19 +177,32 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
 
     // State for bundle update snackbar with minimum display time
     var showBundleUpdateSnackbar by remember { mutableStateOf(false) }
-    var lastBundleUpdateProgress by remember { mutableStateOf<PatchBundleRepository.BundleUpdateProgress?>(null) }
+    var bundleUpdateCompleted by remember { mutableStateOf(false) }
 
-    val installAppsPermissionLauncher = rememberLauncherForActivityResult(RequestInstallAppsContract) {
-        showAndroid11Dialog = false
+    val installAppsPermissionLauncher =
+        rememberLauncherForActivityResult(RequestInstallAppsContract) {
+            showAndroid11Dialog = false
+        }
+
+    LaunchedEffect(Unit) {
+        dashboardViewModel.patchBundleRepository.checkManualUpdates(0)
     }
 
     // Control snackbar visibility
     LaunchedEffect(bundleUpdateProgress) {
-        if (bundleUpdateProgress != null) {
-            lastBundleUpdateProgress = bundleUpdateProgress
+        val progress = bundleUpdateProgress
+        if (progress != null) {
             showBundleUpdateSnackbar = true
-        } else if (showBundleUpdateSnackbar) {
-            // Wait minimum 3 seconds before allowing hide
+            bundleUpdateCompleted = false
+
+            // Check if update is complete
+            if (progress.completed >= progress.total && progress.total > 0) {
+                bundleUpdateCompleted = true
+                delay(3000) // Show completed state for 3 seconds minimum
+                showBundleUpdateSnackbar = false
+            }
+        } else if (showBundleUpdateSnackbar && !bundleUpdateCompleted) {
+            // Progress became null but wasn't completed
             delay(3000)
             showBundleUpdateSnackbar = false
         }
@@ -177,29 +214,97 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
             onContinue = { installAppsPermissionLauncher.launch(context.packageName) }
         )
     }
-
-    // Bottom Sheet
+    // Bottom Sheet with scrolling
     if (showBundlesSheet) {
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        val sheetScrollState = rememberScrollState()
+
         ModalBottomSheet(
             onDismissRequest = { showBundlesSheet = false },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
+            sheetState = sheetState
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(bottom = 16.dp)
+                    .verticalScroll(sheetScrollState)
+                    .padding(bottom = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                val batteryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    dashboardViewModel.updateBatteryOptimizationsWarning()
+                val batteryLauncher =
+                    rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                        dashboardViewModel.updateBatteryOptimizationsWarning()
+                    }
+
+                // API Bundle Card
+                if (apiBundle != null) {
+                    Text(
+                        text = stringResource(R.string.patches_source),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+
+                    ApiPatchBundleCard(
+                        bundle = apiBundle,
+                        patchCount = patchCounts[apiBundle.uid] ?: 0,
+                        updateInfo = manualUpdateInfo[apiBundle.uid],
+                        isRefreshing = isRefreshingBundle,
+                        onRefresh = {
+                            scope.launch {
+                                isRefreshingBundle = true
+                                try {
+                                    if (apiBundle is RemotePatchBundle) {
+                                        dashboardViewModel.patchBundleRepository.update(
+                                            apiBundle,
+                                            showToast = true
+                                        )
+                                    }
+                                } finally {
+                                    delay(500)
+                                    isRefreshingBundle = false
+                                }
+                            }
+                        },
+                        onCardClick = {
+                            // TODO: add onBundleSettingsClick(apiBundle.uid)
+                        },
+                        onOpenInBrowser = {
+                            val pageUrl = manualUpdateInfo[apiBundle.uid]?.pageUrl
+                                ?: "https://github.com/LisoUseInAIKyrios/revanced-patches/releases/latest" // FIXME
+                            try {
+                                uriHandler.openUri(pageUrl)
+                            } catch (e: Exception) {
+                                context.toast(context.getString(R.string.failed_to_open_url))
+                            }
+                        },
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
                 }
 
+                // Notifications section
+                if (dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification) {
+                    Text(
+                        text = stringResource(R.string.notifications),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+
+                // Battery Optimization Warning
                 if (dashboardViewModel.showBatteryOptimizationsWarning) {
-                    NotificationCard(
-                        isWarning = true,
+                    ModernNotificationCard(
                         icon = Icons.Default.BatteryAlert,
-                        text = stringResource(R.string.battery_optimization_notification),
+                        title = stringResource(R.string.battery_optimization_warning_title),
+                        message = stringResource(R.string.battery_optimization_notification),
+                        backgroundColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.onErrorContainer,
                         onClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                showBundlesSheet = false
+                            }
                             batteryLauncher.launch(
                                 Intent(
                                     AndroidSettings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
@@ -207,36 +312,34 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
                                 )
                             )
                         },
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
 
+                // Downloader Plugins Notification
                 if (showNewDownloaderPluginsNotification) {
-                    NotificationCard(
-                        text = stringResource(R.string.new_downloader_plugins_notification),
+                    ModernNotificationCard(
                         icon = Icons.Outlined.Download,
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp, vertical = 8.dp)
-                            .clickable { onDownloaderPluginClick() },
-                        actions = {
-                            TextButton(onClick = dashboardViewModel::ignoreNewDownloaderPlugins) {
-                                Text(stringResource(R.string.dismiss))
+                        title = stringResource(R.string.new_plugins_available),
+                        message = stringResource(R.string.new_downloader_plugins_notification),
+                        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        onClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                showBundlesSheet = false
                             }
-                        }
+                            onDownloaderPluginClick()
+                        },
+                        onDismiss = dashboardViewModel::ignoreNewDownloaderPlugins,
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
 
-                BundleListScreen(
-                    eventsFlow = dashboardViewModel.bundleListEventsFlow,
-                    setSelectedSourceCount = { },
-                    showOrderDialog = false,
-                    onDismissOrderDialog = { },
-                    onScrollStateChange = { }
-                )
+                Spacer(Modifier.height(8.dp))
             }
         }
     }
-
     // Quick Patch Dialog
     if (showQuickPatchDialog && selectedPackageName != null) {
         // Use key to create a new ViewModel for each packageName
@@ -301,7 +404,7 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
         ) {
             // Bundle update snackbar
             AnimatedVisibility(
-                visible = showBundleUpdateSnackbar && lastBundleUpdateProgress != null && isBundlesReady,
+                visible = showBundleUpdateSnackbar && bundleUpdateProgress != null,
                 enter = slideInVertically(
                     initialOffsetY = { -it },
                     animationSpec = tween(durationMillis = 500)
@@ -312,36 +415,11 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
                 ) + fadeOut(animationSpec = tween(durationMillis = 500)),
                 modifier = Modifier.align(Alignment.TopCenter)
             ) {
-                lastBundleUpdateProgress?.let { progress ->
-                    val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
-
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text(
-                                text = stringResource(R.string.bundle_update_banner_title),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                            Text(
-                                text = stringResource(R.string.bundle_update_progress, progress.completed, progress.total),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                            LinearProgressIndicator(
-                                progress = { fraction },
-                                modifier = Modifier.fillMaxWidth(),
-                                color = MaterialTheme.colorScheme.primary,
-                                trackColor = MaterialTheme.colorScheme.surfaceVariant
-                            )
-                        }
-                    }
+                bundleUpdateProgress?.let { progress ->
+                    BundleUpdateSnackbar(
+                        progress = progress,
+                        isCompleted = bundleUpdateCompleted
+                    )
                 }
             }
 
@@ -405,7 +483,7 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
                     }
                 }
 
-                // Sources FAB with notification dot
+                // Source FAB with notification dot
                 Box {
                     FloatingActionButton(
                         onClick = { showBundlesSheet = true },
@@ -423,7 +501,8 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
                             Box(
                                 modifier = Modifier
                                     .size(14.dp)
-                                    .background(Color.White, CircleShape))
+                                    .background(Color.White, CircleShape)
+                            )
                             Box(
                                 modifier = Modifier
                                     .size(12.dp)
@@ -439,10 +518,317 @@ fun CustomHomeScreen( // TODO: Rename to MorpheHomeScreen
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings))
+                    Icon(
+                        Icons.Default.Settings,
+                        contentDescription = stringResource(R.string.settings)
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun BundleUpdateSnackbar(
+    progress: PatchBundleRepository.BundleUpdateProgress,
+    isCompleted: Boolean
+) {
+    val fraction = if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isCompleted) {
+                MaterialTheme.colorScheme.primaryContainer
+            } else {
+                MaterialTheme.colorScheme.surfaceVariant
+            }
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (isCompleted) {
+                Icon(
+                    imageVector = Icons.Outlined.CheckCircle,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+            } else {
+                CircularProgressIndicator(
+                    progress = { fraction },
+                    modifier = Modifier.size(24.dp),
+                    strokeWidth = 3.dp,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = if (isCompleted) {
+                        stringResource(R.string.bundle_update_completed)
+                    } else {
+                        stringResource(R.string.bundle_update_banner_title)
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = stringResource(
+                        R.string.bundle_update_progress,
+                        progress.completed,
+                        progress.total
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        if (!isCompleted) {
+            LinearProgressIndicator(
+                progress = { fraction },
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun ModernNotificationCard(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    title: String,
+    message: String,
+    backgroundColor: Color,
+    contentColor: Color,
+    onClick: () -> Unit,
+    onDismiss: (() -> Unit)? = null,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor
+        ),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                shape = CircleShape,
+                color = contentColor.copy(alpha = 0.15f),
+                modifier = Modifier.size(48.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = contentColor,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = contentColor
+                )
+                Text(
+                    text = message,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = contentColor.copy(alpha = 0.8f)
+                )
+            }
+
+            if (onDismiss != null) {
+                IconButton(onClick = onDismiss) {
+                    Icon(
+                        imageVector = Icons.Outlined.CheckCircle,
+                        contentDescription = stringResource(R.string.dismiss),
+                        tint = contentColor
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ApiPatchBundleCard(
+    bundle: PatchBundleSource,
+    patchCount: Int,
+    updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
+    onCardClick: () -> Unit,
+    onOpenInBrowser: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // Formatter with date + time: dd.MM.yy HH:mm
+    val fullDateTimeFormatter = remember { SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault()) }
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onCardClick),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Header
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(Icons.Outlined.Source, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
+                    }
+                }
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = bundle.displayTitle,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = stringResource(R.string.bundle_type_api),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                IconButton(onClick = onOpenInBrowser) {
+                    Icon(Icons.Outlined.OpenInNew, contentDescription = stringResource(R.string.open_in_browser), tint = MaterialTheme.colorScheme.primary)
+                }
+            }
+
+            // Patches
+            InfoRow(icon = Icons.Outlined.Info, label = stringResource(R.string.patches), value = patchCount.toString())
+
+            // Version
+            InfoRow(
+                icon = Icons.Outlined.Update,
+                label = stringResource(R.string.version),
+                value = updateInfo?.latestVersion?.removePrefix("v")
+                    ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
+                    ?: "N/A"
+            )
+
+            // Added — when bundle was first added
+            InfoRow(
+                icon = Icons.Outlined.CalendarToday,
+                label = stringResource(R.string.date_added),
+                value = fullDateTimeFormatter.format(bundle.createdAt)
+            )
+
+            // Updated — when the bundle was last updated
+            InfoRow(
+                icon = Icons.Outlined.Refresh,
+                label = stringResource(R.string.date_updated),
+                value = fullDateTimeFormatter.format(bundle.updatedAt)
+            )
+
+            Divider(color = MaterialTheme.colorScheme.outlineVariant)
+
+            // Update / Check updates button
+            Button(
+                onClick = onRefresh,
+                enabled = !isRefreshing,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                if (isRefreshing) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(18.dp),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+                }
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = if (updateInfo != null) stringResource(R.string.update)
+                    else stringResource(R.string.check_updates),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun InfoRow(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(18.dp)
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.width(80.dp)
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
@@ -453,99 +839,95 @@ private fun MainContent(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+            .padding(horizontal = 32.dp, vertical = 32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Funny rotating greeting message
+        val greetingMessages = listOf(
+            R.string.home_greeting_1,
+            R.string.home_greeting_2,
+            R.string.home_greeting_3,
+            R.string.home_greeting_4,
+            R.string.home_greeting_5,
+            R.string.home_greeting_6,
+            R.string.home_greeting_7,
+        )
+        var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
+
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 32.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
+                .height(100.dp),
+            contentAlignment = Alignment.Center
         ) {
-            // Funny rotating greeting message
-            val greetingMessages = listOf(
-                R.string.home_greeting_1,
-                R.string.home_greeting_2,
-                R.string.home_greeting_3,
-                R.string.home_greeting_4,
-                R.string.home_greeting_5,
-                R.string.home_greeting_6,
-                R.string.home_greeting_7,
-            )
-            var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp),
-                contentAlignment = Alignment.TopCenter
-            ) {
-                AnimatedContent(
-                    targetState = greetingMessages[currentGreetingIndex],
-                    transitionSpec = {
-                        fadeIn(tween(800)) togetherWith fadeOut(tween(800))
-                    },
-                    label = "greeting_animation"
-                ) { resId ->
-                    Text(
-                        text = stringResource(resId),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                }
+            AnimatedContent(
+                targetState = greetingMessages[currentGreetingIndex],
+                transitionSpec = {
+                    fadeIn(tween(800)) togetherWith fadeOut(tween(800))
+                },
+                label = "greeting_animation"
+            ) { resId ->
+                Text(
+                    text = stringResource(resId),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
             }
-
-            Spacer(Modifier.height(32.dp))
-
-            // YouTube Button
-            AppButton(
-                text = stringResource(R.string.custom_home_youtube),
-                icon = {
-                    Icon(
-                        imageVector = Icons.Filled.PlayCircle,
-                        contentDescription = stringResource(R.string.custom_home_youtube),
-                        tint = Color.White,
-                        modifier = Modifier.size(64.dp)
-                    )
-                },
-                backgroundColor = Color(0xFFFF0033),
-                contentColor = Color.White,
-                onClick = onYouTubeClick
-            )
-
-            Spacer(Modifier.height(24.dp))
-
-            // YouTube Music Button
-            AppButton(
-                text = stringResource(R.string.custom_home_youtube_music),
-                icon = {
-                    Icon(
-                        imageVector = Icons.Outlined.MusicNote,
-                        contentDescription = stringResource(R.string.custom_home_youtube_music),
-                        tint = Color.White,
-                        modifier = Modifier.size(64.dp)
-                    )
-                },
-                backgroundColor = Color(0xFF121212),
-                contentColor = Color.White,
-                gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
-                onClick = onYouTubeMusicClick
-            )
-
-            Spacer(Modifier.height(100.dp))
         }
 
-        // Bottom "Other apps" button.
-        TextButton(
-            onClick = onAllAppsClick,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp)
-        ) {
+        Spacer(Modifier.height(32.dp))
+
+        // YouTube Button
+        AppButton(
+            text = stringResource(R.string.custom_home_youtube),
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.PlayCircle,
+                    contentDescription = stringResource(R.string.custom_home_youtube),
+                    tint = Color.White,
+                    modifier = Modifier.size(64.dp)
+                )
+            },
+            backgroundColor = Color(0xFFFF0033),
+            contentColor = Color.White,
+            onClick = onYouTubeClick
+        )
+
+        Spacer(Modifier.height(24.dp))
+
+        // YouTube Music Button
+        AppButton(
+            text = stringResource(R.string.custom_home_youtube_music),
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.MusicNote,
+                    contentDescription = stringResource(R.string.custom_home_youtube_music),
+                    tint = Color.White,
+                    modifier = Modifier.size(64.dp)
+                )
+            },
+            backgroundColor = Color(0xFF121212),
+            contentColor = Color.White,
+            gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
+            onClick = onYouTubeMusicClick
+        )
+
+        Spacer(Modifier.height(24.dp))
+
+        // Other apps button
+        androidx.compose.material3.TextButton(onClick = onAllAppsClick) {
             Text(
-                text = stringResource(R.string.custom_home_other_apps),
+                text = stringResource(R.string.custom_home_advanced_mode),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Medium
             )
@@ -567,8 +949,13 @@ private fun AppButton(
     Button(
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier.fillMaxWidth().height(100.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = contentColor),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = contentColor
+        ),
         shape = RoundedCornerShape(28.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
@@ -577,7 +964,10 @@ private fun AppButton(
                 .fillMaxSize()
                 .then(
                     if (gradientColors != null)
-                        Modifier.background(Brush.horizontalGradient(gradientColors), RoundedCornerShape(28.dp))
+                        Modifier.background(
+                            Brush.horizontalGradient(gradientColors),
+                            RoundedCornerShape(28.dp)
+                        )
                     else
                         Modifier.background(backgroundColor, RoundedCornerShape(28.dp))
                 )
@@ -586,15 +976,23 @@ private fun AppButton(
                 CircularProgressIndicator(color = contentColor, strokeWidth = 3.dp)
             } else {
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 32.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
-                        modifier = Modifier.size(80.dp).background(Color.White.copy(alpha = 0.16f), CircleShape),
+                        modifier = Modifier
+                            .size(80.dp)
+                            .background(Color.White.copy(alpha = 0.16f), CircleShape),
                         contentAlignment = Alignment.Center
                     ) { icon() }
                     Spacer(Modifier.width(20.dp))
-                    Text(text = text, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
         }
