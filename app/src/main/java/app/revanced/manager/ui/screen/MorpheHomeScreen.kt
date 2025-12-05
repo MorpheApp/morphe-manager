@@ -15,7 +15,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,7 +45,6 @@ import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
@@ -78,7 +76,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -101,11 +98,8 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
 import app.morphe.manager.R
-import app.revanced.manager.network.dto.ReVancedAsset
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import android.provider.Settings as AndroidSettings
@@ -118,7 +112,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomHomeScreen(
+fun MorpheHomeScreen(
     onSettingsClick: () -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
@@ -239,7 +233,7 @@ fun CustomHomeScreen(
                 // API Bundle Card
                 if (apiBundle != null) {
                     Text(
-                        text = stringResource(R.string.patches_source),
+                        text = stringResource(R.string.morphe_home_patches_source),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -275,7 +269,7 @@ fun CustomHomeScreen(
                             try {
                                 uriHandler.openUri(pageUrl)
                             } catch (e: Exception) {
-                                context.toast(context.getString(R.string.failed_to_open_url))
+                                context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
                             }
                         },
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -285,7 +279,7 @@ fun CustomHomeScreen(
                 // Notifications section
                 if (dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification) {
                     Text(
-                        text = stringResource(R.string.notifications),
+                        text = stringResource(R.string.morphe_home_notifications),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -296,7 +290,7 @@ fun CustomHomeScreen(
                 if (dashboardViewModel.showBatteryOptimizationsWarning) {
                     ModernNotificationCard(
                         icon = Icons.Default.BatteryAlert,
-                        title = stringResource(R.string.battery_optimization_warning_title),
+                        title = stringResource(R.string.morphe_home_battery_optimization_warning_title),
                         message = stringResource(R.string.battery_optimization_notification),
                         backgroundColor = MaterialTheme.colorScheme.errorContainer,
                         contentColor = MaterialTheme.colorScheme.onErrorContainer,
@@ -320,7 +314,7 @@ fun CustomHomeScreen(
                 if (showNewDownloaderPluginsNotification) {
                     ModernNotificationCard(
                         icon = Icons.Outlined.Download,
-                        title = stringResource(R.string.new_plugins_available),
+                        title = stringResource(R.string.morphe_home_new_plugins_available),
                         message = stringResource(R.string.new_downloader_plugins_notification),
                         backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -492,7 +486,7 @@ fun CustomHomeScreen(
                     ) {
                         Icon(
                             Icons.Outlined.Source,
-                            contentDescription = stringResource(R.string.custom_home_bundles)
+                            contentDescription = stringResource(R.string.morphe_home_bundles)
                         )
                     }
 
@@ -575,7 +569,7 @@ private fun BundleUpdateSnackbar(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = if (isCompleted) {
-                        stringResource(R.string.bundle_update_completed)
+                        stringResource(R.string.morphe_home_bundle_update_completed)
                     } else {
                         stringResource(R.string.bundle_update_banner_title)
                     },
@@ -732,14 +726,14 @@ private fun ApiPatchBundleCard(
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
-                        text = stringResource(R.string.bundle_type_api),
+                        text = stringResource(R.string.morphe_home_bundle_type_api),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
                 IconButton(onClick = onOpenInBrowser) {
-                    Icon(Icons.Outlined.OpenInNew, contentDescription = stringResource(R.string.open_in_browser), tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Outlined.OpenInNew, contentDescription = stringResource(R.string.morphe_home_open_in_browser), tint = MaterialTheme.colorScheme.primary)
                 }
             }
 
@@ -758,14 +752,14 @@ private fun ApiPatchBundleCard(
             // Added — when bundle was first added
             InfoRow(
                 icon = Icons.Outlined.CalendarToday,
-                label = stringResource(R.string.date_added),
+                label = stringResource(R.string.morphe_home_date_added),
                 value = fullDateTimeFormatter.format(bundle.createdAt)
             )
 
             // Updated — when the bundle was last updated
             InfoRow(
                 icon = Icons.Outlined.Refresh,
-                label = stringResource(R.string.date_updated),
+                label = stringResource(R.string.morphe_home_date_updated),
                 value = fullDateTimeFormatter.format(bundle.updatedAt)
             )
 
@@ -790,7 +784,7 @@ private fun ApiPatchBundleCard(
                 Spacer(Modifier.width(8.dp))
                 Text(
                     text = if (updateInfo != null) stringResource(R.string.update)
-                    else stringResource(R.string.check_updates),
+                    else stringResource(R.string.morphe_home_check_updates),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
@@ -851,13 +845,13 @@ private fun MainContent(
     ) {
         // Funny rotating greeting message
         val greetingMessages = listOf(
-            R.string.home_greeting_1,
-            R.string.home_greeting_2,
-            R.string.home_greeting_3,
-            R.string.home_greeting_4,
-            R.string.home_greeting_5,
-            R.string.home_greeting_6,
-            R.string.home_greeting_7,
+            R.string.morphe_home_greeting_1,
+            R.string.morphe_home_greeting_2,
+            R.string.morphe_home_greeting_3,
+            R.string.morphe_home_greeting_4,
+            R.string.morphe_home_greeting_5,
+            R.string.morphe_home_greeting_6,
+            R.string.morphe_home_greeting_7,
         )
         var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
 
@@ -889,11 +883,11 @@ private fun MainContent(
 
         // YouTube Button
         AppButton(
-            text = stringResource(R.string.custom_home_youtube),
+            text = stringResource(R.string.morphe_home_youtube),
             icon = {
                 Icon(
                     imageVector = Icons.Filled.PlayCircle,
-                    contentDescription = stringResource(R.string.custom_home_youtube),
+                    contentDescription = stringResource(R.string.morphe_home_youtube),
                     tint = Color.White,
                     modifier = Modifier.size(64.dp)
                 )
@@ -907,11 +901,11 @@ private fun MainContent(
 
         // YouTube Music Button
         AppButton(
-            text = stringResource(R.string.custom_home_youtube_music),
+            text = stringResource(R.string.morphe_home_youtube_music),
             icon = {
                 Icon(
                     imageVector = Icons.Outlined.MusicNote,
-                    contentDescription = stringResource(R.string.custom_home_youtube_music),
+                    contentDescription = stringResource(R.string.morphe_home_youtube_music),
                     tint = Color.White,
                     modifier = Modifier.size(64.dp)
                 )
@@ -927,7 +921,7 @@ private fun MainContent(
         // Other apps button
         androidx.compose.material3.TextButton(onClick = onAllAppsClick) {
             Text(
-                text = stringResource(R.string.custom_home_advanced_mode),
+                text = stringResource(R.string.morphe_home_advanced_mode),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Medium
             )

@@ -26,7 +26,7 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
-import app.revanced.manager.ui.model.navigation.CustomHome
+import app.revanced.manager.ui.model.navigation.MorpheHomeScreen
 import app.revanced.manager.ui.model.navigation.Dashboard
 import app.revanced.manager.ui.model.navigation.InstalledApplicationInfo
 import app.revanced.manager.ui.model.navigation.Patcher
@@ -34,12 +34,12 @@ import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.model.navigation.Update
 import app.revanced.manager.ui.screen.AppSelectorScreen
-import app.revanced.manager.ui.screen.CustomHomeScreen
+import app.revanced.manager.ui.screen.MorpheHomeScreen
 import app.revanced.manager.ui.screen.DashboardScreen
 import app.revanced.manager.ui.screen.InstalledAppInfoScreen
 import app.revanced.manager.ui.screen.PatcherScreen
 import app.revanced.manager.ui.screen.PatchesSelectorScreen
-import app.revanced.manager.ui.screen.QuickPatcherScreen
+import app.revanced.manager.ui.screen.MorphePatcherScreen
 import app.revanced.manager.ui.screen.RequiredOptionsScreen
 import app.revanced.manager.ui.screen.SelectedAppInfoScreen
 import app.revanced.manager.ui.screen.SettingsScreen
@@ -101,9 +101,9 @@ class MainActivity : ComponentActivity() {
 private fun ReVancedManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
-    val useCustomHome by prefs.useCustomHomeScreen.getAsState()
+    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
 
-    val startDest = if (useCustomHome) CustomHome else Dashboard
+    val startDest = if (useMorpheHomeScreen) MorpheHomeScreen else Dashboard
 
     EventEffect(vm.appSelectFlow) { params ->
         navController.navigateComplex(
@@ -120,11 +120,11 @@ private fun ReVancedManager(vm: MainViewModel) {
         popEnterTransition = { slideInHorizontally(initialOffsetX = { -it / 3 }) },
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
-        composable<CustomHome> {
+        composable<MorpheHomeScreen> {
             val prefs: PreferencesManager = koinInject()
-            val useCustomHomeScreen by prefs.useCustomHomeScreen.getAsState()
+            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
 
-            CustomHomeScreen(
+            MorpheHomeScreen(
                 onSettingsClick = { navController.navigate(Settings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
@@ -198,13 +198,13 @@ private fun ReVancedManager(vm: MainViewModel) {
         composable<Patcher> {
             val params = it.getComplexArg<Patcher.ViewModelParams>()
             val prefs: PreferencesManager = koinInject()
-            val useCustomHomeScreen by prefs.useCustomHomeScreen.getAsState()
+            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
 
             val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
 
-            if (useCustomHomeScreen) {
-                // Use custom quick patcher screen
-                QuickPatcherScreen(
+            if (useMorpheHomeScreen) {
+                // Use Morphe quick patcher screen
+                MorphePatcherScreen(
                     onBackClick = navController::popBackStack,
                     viewModel = patcherViewModel
                 )

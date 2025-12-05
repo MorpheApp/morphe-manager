@@ -389,10 +389,10 @@ fun AdvancedSettingsScreen(
                 description = R.string.universal_patches_safeguard_description,
             )
             BooleanItem(
-                preference = viewModel.prefs.useCustomHomeScreen,
+                preference = viewModel.prefs.useMorpheHomeScreen,
                 coroutineScope = viewModel.viewModelScope,
-                headline = R.string.use_custom_home_screen,
-                description = R.string.use_custom_home_screen_description
+                headline = R.string.morphe_home_screen,
+                description = R.string.morphe_home_screen_description
             )
 
             val restoreDescription = if (hasOfficialBundle) {
