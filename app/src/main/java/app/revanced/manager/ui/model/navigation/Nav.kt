@@ -14,6 +14,9 @@ interface ComplexParameter<T : Parcelable>
 object MorpheHomeScreen
 
 @Serializable
+object MorpheSettings
+
+@Serializable
 object Dashboard
 
 @Serializable

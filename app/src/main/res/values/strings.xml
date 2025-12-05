@@ -81,6 +81,9 @@
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
 
+    <string name="morphe_settings_switch_to_original">Return to Original Interface</string>
+    <string name="morphe_settings_switch_to_original_description">Switch back to the full-featured advanced interface</string>
+
     <!-- About screen -->
     <string name="morphe_about_patches_github">Morphe Patches GitHub</string>
     <string name="morphe_about_manager_github">Morphe Manager GitHub</string>

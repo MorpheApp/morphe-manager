@@ -29,6 +29,7 @@ import app.revanced.manager.ui.model.navigation.ComplexParameter
 import app.revanced.manager.ui.model.navigation.MorpheHomeScreen
 import app.revanced.manager.ui.model.navigation.Dashboard
 import app.revanced.manager.ui.model.navigation.InstalledApplicationInfo
+import app.revanced.manager.ui.model.navigation.MorpheSettings
 import app.revanced.manager.ui.model.navigation.Patcher
 import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
 import app.revanced.manager.ui.model.navigation.Settings
@@ -40,6 +41,7 @@ import app.revanced.manager.ui.screen.InstalledAppInfoScreen
 import app.revanced.manager.ui.screen.PatcherScreen
 import app.revanced.manager.ui.screen.PatchesSelectorScreen
 import app.revanced.manager.ui.screen.MorphePatcherScreen
+import app.revanced.manager.ui.screen.MorpheSettingsScreen
 import app.revanced.manager.ui.screen.RequiredOptionsScreen
 import app.revanced.manager.ui.screen.SelectedAppInfoScreen
 import app.revanced.manager.ui.screen.SettingsScreen
@@ -121,16 +123,13 @@ private fun ReVancedManager(vm: MainViewModel) {
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         composable<MorpheHomeScreen> {
-            val prefs: PreferencesManager = koinInject()
-            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
-
             MorpheHomeScreen(
-                onSettingsClick = { navController.navigate(Settings) },
+                onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
                 onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
                 onUpdateClick = { navController.navigate(Update()) },
                 onStartQuickPatch = { params ->
-                    // Immediately start patching with the received parameters.
+                    // Immediately start patching with the received parameters
                     navController.navigateComplex(
                         Patcher,
                         Patcher.ViewModelParams(
@@ -382,7 +381,10 @@ private fun ReVancedManager(vm: MainViewModel) {
                 ContributorSettingsScreen(onBackClick = navController::popBackStack)
             }
 
-
+            // Morphe Simplified Settings Screen
+            composable<MorpheSettings> {
+                MorpheSettingsScreen(onBackClick = navController::popBackStack)
+            }
         }
     }
 }

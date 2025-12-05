@@ -151,6 +151,12 @@ fun AdvancedSettingsScreen(
                 .padding(paddingValues)
         ) {
             GroupHeader(stringResource(R.string.manager))
+            BooleanItem(
+                preference = viewModel.prefs.useMorpheHomeScreen,
+                coroutineScope = viewModel.viewModelScope,
+                headline = R.string.morphe_home_screen,
+                description = R.string.morphe_home_screen_description
+            )
 
             // Patches repository
             SettingsListItem(
@@ -387,12 +393,6 @@ fun AdvancedSettingsScreen(
                 coroutineScope = viewModel.viewModelScope,
                 headline = R.string.universal_patches_safeguard,
                 description = R.string.universal_patches_safeguard_description,
-            )
-            BooleanItem(
-                preference = viewModel.prefs.useMorpheHomeScreen,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.morphe_home_screen,
-                description = R.string.morphe_home_screen_description
             )
 
             val restoreDescription = if (hasOfficialBundle) {

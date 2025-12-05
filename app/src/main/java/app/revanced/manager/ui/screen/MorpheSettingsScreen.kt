@@ -1,0 +1,1326 @@
+package app.revanced.manager.ui.screen
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
+import androidx.compose.ui.window.Dialog
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewModelScope
+import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.network.downloader.DownloaderPluginState
+import app.revanced.manager.ui.component.AppTopBar
+import app.revanced.manager.ui.component.ConfirmDialog
+import app.revanced.manager.ui.component.ExceptionViewerDialog
+import app.revanced.manager.ui.component.PasswordField
+import app.revanced.manager.ui.component.settings.BooleanItem
+import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.theme.Theme
+import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
+import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import app.revanced.manager.ui.viewmodel.DownloadsViewModel
+import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.ImportExportViewModel
+import app.revanced.manager.util.openUrl
+import app.revanced.manager.util.toast
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
+import android.provider.Settings as AndroidSettings
+
+/**
+ * Morphe Simplified Settings Screen
+ *
+ * A streamlined settings interface for the Morphe home screen that includes:
+ * - Theme settings (Light/Dark/System + Pure Black)
+ * - Downloader plugins management
+ * - Patches bundle JSON URL configuration
+ * - Installer settings
+ * - Keystore import
+ * - About dialog
+ * - Interface switcher to return to original UI
+ */
+@SuppressLint("BatteryLife")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MorpheSettingsScreen(
+    onBackClick: () -> Unit,
+    generalViewModel: GeneralSettingsViewModel = koinViewModel(),
+    advancedViewModel: AdvancedSettingsViewModel = koinViewModel(),
+    downloadsViewModel: DownloadsViewModel = koinViewModel(),
+    importExportViewModel: ImportExportViewModel = koinViewModel()
+) {
+    val context = LocalContext.current
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
+
+    // General Settings - theme and appearance
+    val theme by generalViewModel.prefs.theme.getAsState()
+    val pureBlackTheme by generalViewModel.prefs.pureBlackTheme.getAsState()
+
+    // Advanced Settings - patches and installers
+    val patchesBundleJsonUrl by advancedViewModel.prefs.patchesBundleJsonUrl.getAsState()
+    val primaryInstaller by advancedViewModel.prefs.installerPrimary.getAsState()
+    val fallbackInstaller by advancedViewModel.prefs.installerFallback.getAsState()
+
+    // Downloads - plugin states
+    val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
+
+    // Dialog states
+    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
+    var showAboutDialog by rememberSaveable { mutableStateOf(false) }
+    var showPluginDialog by rememberSaveable { mutableStateOf<String?>(null) }
+    var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
+
+    // Keystore import launcher
+    val importKeystoreLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.startKeystoreImport(it)
+        }
+    }
+
+    // Show keystore credentials dialog when needed
+    LaunchedEffect(importExportViewModel.showCredentialsDialog) {
+        showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
+    }
+
+    // Show patches bundle JSON URL dialog
+    if (showPatchesBundleJsonUrlDialog) {
+        PatchesBundleJsonUrlDialog(
+            currentUrl = patchesBundleJsonUrl,
+            defaultUrl = advancedViewModel.prefs.patchesBundleJsonUrl.default,
+            onDismiss = { showPatchesBundleJsonUrlDialog = false },
+            onSave = { url ->
+                advancedViewModel.setPatchesBundleJsonUrl(url.trim())
+                showPatchesBundleJsonUrlDialog = false
+            }
+        )
+    }
+
+    // Show about dialog
+    if (showAboutDialog) {
+        AboutDialog(onDismiss = { showAboutDialog = false })
+    }
+
+    // Show plugin management dialog
+    showPluginDialog?.let { packageName ->
+        val state = pluginStates[packageName]
+        var showExceptionViewer by remember { mutableStateOf(false) }
+
+        if (showExceptionViewer && state is DownloaderPluginState.Failed) {
+            ExceptionViewerDialog(
+                text = state.throwable.stackTraceToString(),
+                onDismiss = { showExceptionViewer = false }
+            )
+        } else {
+            PluginActionDialog(
+                packageName = packageName,
+                state = state,
+                onDismiss = { showPluginDialog = null },
+                onTrust = { downloadsViewModel.trustPlugin(packageName) },
+                onRevoke = { downloadsViewModel.revokePluginTrust(packageName) },
+                onUninstall = { downloadsViewModel.uninstallPlugin(packageName) },
+                onViewError = { showExceptionViewer = true }
+            )
+        }
+    }
+
+    // Show keystore credentials dialog
+    if (showKeystoreCredentialsDialog) {
+        KeystoreCredentialsDialog(
+            onDismissRequest = {
+                importExportViewModel.cancelKeystoreImport()
+                showKeystoreCredentialsDialog = false
+            },
+            onSubmit = { alias, pass ->
+                coroutineScope.launch {
+                    val result = importExportViewModel.tryKeystoreImport(alias, pass)
+                    if (result) {
+                        showKeystoreCredentialsDialog = false
+                    } else {
+                        context.toast(context.getString(R.string.import_keystore_wrong_credentials))
+                    }
+                }
+            }
+        )
+    }
+
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(scrollState)
+                .padding(vertical = 8.dp)
+        ) {
+            // Theme Section
+            SectionHeader(
+                icon = Icons.Outlined.Palette,
+                title = stringResource(R.string.appearance)
+            )
+
+            SettingsCard {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    // Interface switcher
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                coroutineScope.launch {
+                                    generalViewModel.prefs.useMorpheHomeScreen.update(false)
+                                }
+                                // Navigate back and let the app switch to original interface
+                                onBackClick()
+                            }
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.SwapHoriz,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Column {
+                                Text(
+                                    text = stringResource(R.string.morphe_settings_switch_to_original),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.morphe_settings_switch_to_original_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
+
+                    Text(
+                        text = stringResource(R.string.theme),
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        ThemeOption(
+                            theme = Theme.SYSTEM,
+                            icon = Icons.Outlined.PhoneAndroid,
+                            label = stringResource(R.string.system),
+                            selected = theme == Theme.SYSTEM,
+                            onClick = { generalViewModel.setTheme(Theme.SYSTEM) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        ThemeOption(
+                            theme = Theme.LIGHT,
+                            icon = Icons.Outlined.LightMode,
+                            label = stringResource(R.string.light),
+                            selected = theme == Theme.LIGHT,
+                            onClick = { generalViewModel.setTheme(Theme.LIGHT) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        ThemeOption(
+                            theme = Theme.DARK,
+                            icon = Icons.Outlined.DarkMode,
+                            label = stringResource(R.string.dark),
+                            selected = theme == Theme.DARK,
+                            onClick = { generalViewModel.setTheme(Theme.DARK) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    AnimatedVisibility(visible = theme != Theme.LIGHT) {
+                        Column(modifier = Modifier.padding(top = 16.dp)) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .clickable {
+                                        coroutineScope.launch {
+                                            generalViewModel.prefs.pureBlackTheme
+                                                .update(!pureBlackTheme)
+                                        }
+                                    }
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.pure_black_theme),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.pure_black_theme_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = pureBlackTheme,
+                                    onCheckedChange = {
+                                        coroutineScope.launch {
+                                            generalViewModel.prefs.pureBlackTheme.update(it)
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Downloader Plugins Section
+            SectionHeader(
+                icon = Icons.Filled.Download,
+                title = stringResource(R.string.downloader_plugins)
+            )
+
+            SettingsCard {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    if (pluginStates.isEmpty()) {
+                        Text(
+                            text = stringResource(R.string.downloader_no_plugins_installed),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    } else {
+                        pluginStates.forEach { (packageName, state) ->
+                            PluginItem(
+                                packageName = packageName,
+                                state = state,
+                                onClick = { showPluginDialog = packageName },
+                                modifier = Modifier.padding(vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Patches & Installation Section
+            SectionHeader(
+                icon = Icons.Outlined.Build,
+                title = stringResource(R.string.patches_and_manager)
+            )
+
+            SettingsCard {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    // Patches Bundle JSON URL
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { showPatchesBundleJsonUrlDialog = true },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Outlined.Api,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.patches_bundle_json_url),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.patches_bundle_json_url_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Keystore Import
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { importKeystoreLauncher.launch("*/*") },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Outlined.Key,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.import_keystore),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.import_keystore_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // About Section
+            SectionHeader(
+                icon = Icons.Outlined.Info,
+                title = stringResource(R.string.about)
+            )
+
+            SettingsCard {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable { showAboutDialog = true },
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        val icon = rememberDrawablePainter(
+                            drawable = remember {
+                                AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                            }
+                        )
+                        Image(
+                            painter = icon,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = stringResource(R.string.app_name),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Text(
+                                text = "Version ${BuildConfig.VERSION_NAME}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Icon(
+                            Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
+
+/**
+ * Section header with icon and title
+ * Used to visually separate different settings categories
+ */
+@Composable
+private fun SectionHeader(
+    icon: ImageVector,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Surface(
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.primaryContainer,
+            modifier = Modifier.size(32.dp)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        }
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
+}
+
+/**
+ * Card wrapper for settings sections
+ * Provides consistent styling across all settings groups
+ */
+@Composable
+private fun SettingsCard(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        content()
+    }
+}
+
+/**
+ * Individual theme selection button
+ * Displays icon and label with visual feedback for selected state
+ */
+@Composable
+private fun ThemeOption(
+    theme: Theme,
+    icon: ImageVector,
+    label: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier.height(80.dp),
+        shape = RoundedCornerShape(12.dp),
+        color = if (selected) {
+            MaterialTheme.colorScheme.primaryContainer
+        } else {
+            MaterialTheme.colorScheme.surface
+        },
+        border = BorderStroke(
+            width = if (selected) 2.dp else 1.dp,
+            color = if (selected) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                MaterialTheme.colorScheme.outline
+            }
+        ),
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (selected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelMedium,
+                color = if (selected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                }
+            )
+        }
+    }
+}
+
+/**
+ * Individual plugin list item
+ * Shows plugin name, status icon, and allows clicking for management
+ */
+@Composable
+private fun PluginItem(
+    packageName: String,
+    state: DownloaderPluginState,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val packageInfo = remember(packageName) {
+        try {
+            context.packageManager.getPackageInfo(packageName, 0)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+        onClick = onClick
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = when (state) {
+                    is DownloaderPluginState.Loaded -> Icons.Outlined.CheckCircle
+                    is DownloaderPluginState.Failed -> Icons.Outlined.Error
+                    is DownloaderPluginState.Untrusted -> Icons.Outlined.Warning
+                },
+                contentDescription = null,
+                tint = when (state) {
+                    is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.primary
+                    is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.error
+                    is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.tertiary
+                },
+                modifier = Modifier.size(24.dp)
+            )
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+                        ?: packageName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
+                )
+                Text(
+                    text = stringResource(
+                        when (state) {
+                            is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
+                            is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
+                            is DownloaderPluginState.Untrusted -> R.string.downloader_plugin_state_untrusted
+                        }
+                    ),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            Icon(
+                imageVector = Icons.Outlined.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+/**
+ * Plugin management dialog
+ * Beautiful dialog for managing plugins with signature display
+ */
+@Composable
+private fun PluginActionDialog(
+    packageName: String,
+    state: DownloaderPluginState?,
+    onDismiss: () -> Unit,
+    onTrust: () -> Unit,
+    onRevoke: () -> Unit,
+    onUninstall: () -> Unit,
+    onViewError: () -> Unit
+) {
+    val context = LocalContext.current
+    val pm = remember { context.packageManager }
+
+    val signature = remember(packageName) {
+        runCatching {
+            val androidSignature = pm.getPackageInfo(
+                packageName,
+                android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES
+            ).signingInfo?.apkContentsSigners?.firstOrNull()
+
+            if (androidSignature != null) {
+                val hash = java.security.MessageDigest.getInstance("SHA-256")
+                    .digest(androidSignature.toByteArray())
+                hash.joinToString(":") { "%02X".format(it) }
+            } else {
+                "Unknown"
+            }
+        }.getOrNull() ?: "Unknown"
+    }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = when (state) {
+                        is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.primaryContainer
+                        is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.errorContainer
+                        is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.tertiaryContainer
+                        else -> MaterialTheme.colorScheme.surfaceVariant
+                    },
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = when (state) {
+                                is DownloaderPluginState.Loaded -> Icons.Outlined.CheckCircle
+                                is DownloaderPluginState.Failed -> Icons.Outlined.Error
+                                is DownloaderPluginState.Untrusted -> Icons.Outlined.Warning
+                                else -> Icons.Outlined.Info
+                            },
+                            contentDescription = null,
+                            tint = when (state) {
+                                is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.onPrimaryContainer
+                                is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.onErrorContainer
+                                is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.onTertiaryContainer
+                                else -> MaterialTheme.colorScheme.onSurfaceVariant
+                            },
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = when (state) {
+                        is DownloaderPluginState.Loaded -> stringResource(R.string.downloader_plugin_revoke_trust_dialog_title)
+                        is DownloaderPluginState.Failed -> stringResource(R.string.downloader_plugin_state_failed)
+                        is DownloaderPluginState.Untrusted -> stringResource(R.string.downloader_plugin_trust_dialog_title)
+                        else -> packageName
+                    },
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Content
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    when (state) {
+                        is DownloaderPluginState.Failed -> {
+                            Text(
+                                text = stringResource(R.string.downloader_plugin_failed_dialog_body, packageName),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                        else -> {
+                            Text(
+                                text = "Package:",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = packageName,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontFamily = FontFamily.Monospace
+                            )
+
+                            Spacer(modifier = Modifier.height(4.dp))
+
+                            Text(
+                                text = "Signature (SHA-256):",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = signature,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontFamily = FontFamily.Monospace,
+                                lineHeight = 20.sp
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons - two rows
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // First row: Action and Uninstall
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                    ) {
+                        // Action button (Trust/Revoke/View Error)
+                        when (state) {
+                            is DownloaderPluginState.Loaded -> {
+                                FilledTonalButton(
+                                    onClick = {
+                                        onRevoke()
+                                        onDismiss()
+                                    }
+                                ) {
+                                    Text(stringResource(R.string.continue_))
+                                }
+                            }
+                            is DownloaderPluginState.Untrusted -> {
+                                FilledTonalButton(
+                                    onClick = {
+                                        onTrust()
+                                        onDismiss()
+                                    }
+                                ) {
+                                    Text(stringResource(R.string.continue_))
+                                }
+                            }
+                            is DownloaderPluginState.Failed -> {
+                                FilledTonalButton(onClick = onViewError) {
+                                    Text(stringResource(R.string.downloader_plugin_view_error))
+                                }
+                            }
+                            else -> {}
+                        }
+
+                        // Uninstall button
+                        OutlinedButton(
+                            onClick = {
+                                onUninstall()
+                                onDismiss()
+                            }
+                        ) {
+                            Text(stringResource(R.string.uninstall))
+                        }
+                    }
+
+                    // Second row: Dismiss button (same style as Uninstall)
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth(0.5f)
+                    ) {
+                        Text(stringResource(R.string.dismiss))
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Beautiful About dialog with gradient background
+ * Shows app icon, version, description, and GitHub links
+ */
+@Composable
+private fun AboutDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp,
+            modifier = Modifier.fillMaxWidth(0.95f)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // App Icon with gradient background
+                Box(
+                    modifier = Modifier.size(80.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    Brush.linearGradient(
+                                        listOf(
+                                            MaterialTheme.colorScheme.primaryContainer,
+                                            MaterialTheme.colorScheme.secondaryContainer
+                                        )
+                                    )
+                                )
+                        )
+                    }
+                    val icon = rememberDrawablePainter(
+                        drawable = remember {
+                            AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                        }
+                    )
+                    Image(
+                        painter = icon,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+
+                // App Name & Version
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                // Description
+                Text(
+                    text = stringResource(R.string.revanced_manager_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+
+                // GitHub Links
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    GitHubButton(
+                        icon = getSocialIcon("GitHub"),
+                        text = stringResource(R.string.morphe_about_patches_github),
+                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Patches") }
+                    )
+                    GitHubButton(
+                        icon = getSocialIcon("GitHub"),
+                        text = stringResource(R.string.morphe_about_manager_github),
+                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Morphe-alpha") }
+                    )
+                    GitHubButton(
+                        icon = getSocialIcon("GitHub"),
+                        text = stringResource(R.string.morphe_about_patcher_github),
+                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Patcher") }
+                    )
+                }
+
+                // Close button - centered
+                Spacer(modifier = Modifier.height(8.dp))
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    FilledTonalButton(onClick = onDismiss) {
+                        Text(stringResource(R.string.close))
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * GitHub repository link button
+ * Styled button for opening GitHub repositories
+ */
+@Composable
+private fun GitHubButton(
+    icon: ImageVector,
+    text: String,
+    onClick: () -> Unit
+) {
+    FilledTonalButton(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Start
+            )
+        }
+    }
+}
+
+/**
+ * Dialog for editing patches bundle JSON URL
+ * Validates URL format and allows reset to default
+ */
+@Composable
+private fun PatchesBundleJsonUrlDialog(
+    currentUrl: String,
+    defaultUrl: String,
+    onDismiss: () -> Unit,
+    onSave: (url: String) -> Unit
+) {
+    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
+    var showError by rememberSaveable { mutableStateOf(false) }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Outlined.Api,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.patches_bundle_json_url_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description
+                Text(
+                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                // URL Input
+                OutlinedTextField(
+                    value = url,
+                    onValueChange = {
+                        url = it
+                        if (showError) showError = false
+                    },
+                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
+                    supportingText = {
+                        if (showError) {
+                            Text(
+                                stringResource(R.string.patches_bundle_json_url_error),
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        } else {
+                            Text("e.g. https://.../bundle.json")
+                        }
+                    },
+                    isError = showError,
+                    singleLine = false,
+                    maxLines = 6,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Reset button
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    TextButton(
+                        onClick = {
+                            url = defaultUrl
+                            showError = false
+                        }
+                    ) {
+                        Icon(
+                            Icons.Outlined.Restore,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(stringResource(R.string.patches_bundle_json_dialog_reset))
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons - two rows
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // First row: Save button
+                    FilledTonalButton(
+                        onClick = {
+                            val trimmedUrl = url.trim()
+                            if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
+                                showError = true
+                            } else {
+                                onSave(trimmedUrl)
+                            }
+                        },
+                        enabled = url.trim().isNotBlank(),
+                        modifier = Modifier.fillMaxWidth(0.5f)
+                    ) {
+                        Text(stringResource(R.string.patches_bundle_json_dialog_save))
+                    }
+
+                    // Second row: Cancel button
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth(0.5f)
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Beautiful Keystore Credentials Dialog
+ * Allows entering alias and password for keystore import
+ */
+@Composable
+private fun KeystoreCredentialsDialog(
+    onDismissRequest: () -> Unit,
+    onSubmit: (String, String) -> Unit
+) {
+    var alias by rememberSaveable { mutableStateOf("") }
+    var pass by rememberSaveable { mutableStateOf("") }
+
+    Dialog(onDismissRequest = onDismissRequest) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Outlined.Key,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.import_keystore_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description
+                Text(
+                    text = stringResource(R.string.import_keystore_dialog_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                // Alias Input
+                OutlinedTextField(
+                    value = alias,
+                    onValueChange = { alias = it },
+                    label = { Text(stringResource(R.string.import_keystore_dialog_alias_field)) },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Password Input
+                PasswordField(
+                    value = pass,
+                    onValueChange = { pass = it },
+                    label = { Text(stringResource(R.string.import_keystore_dialog_password_field)) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons - two rows
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // First row: Import button
+                    FilledTonalButton(
+                        onClick = { onSubmit(alias, pass) },
+                        modifier = Modifier.fillMaxWidth(0.5f)
+                    ) {
+                        Text(stringResource(R.string.import_keystore_dialog_button))
+                    }
+
+                    // Second row: Cancel button
+                    OutlinedButton(
+                        onClick = onDismissRequest,
+                        modifier = Modifier.fillMaxWidth(0.5f)
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
