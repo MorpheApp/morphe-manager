@@ -2,6 +2,7 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.text.format.DateUtils
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -14,6 +15,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +31,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,17 +40,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.OpenInNew
+import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
-import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
@@ -55,7 +56,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -79,35 +79,39 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
-import app.revanced.manager.ui.component.AvailableUpdateDialog
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
-import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.component.AvailableUpdateDialog
+import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
-import app.morphe.manager.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import android.provider.Settings as AndroidSettings
 import java.text.SimpleDateFormat
 import java.util.Locale
+import android.provider.Settings as AndroidSettings
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
 private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
@@ -422,7 +426,6 @@ fun MorpheHomeScreen(
 
             // Main centered content
             MainContent(
-                availablePatches = availablePatches,
                 onAllAppsClick = onAllAppsClick,
                 onYouTubeClick = {
                     if (availablePatches < 1) {
@@ -758,7 +761,7 @@ private fun ApiPatchBundleCard(
                 }
             }
 
-            // Stats Row - компактніше
+            // Stats Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -906,7 +909,7 @@ private fun StatChip(
 private fun TimelineItem(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     label: String,
-    time: Long?, // Зробити nullable
+    time: Long?,
     isLast: Boolean = false
 ) {
     val dateTimeFormatter = remember { SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault()) }
@@ -976,103 +979,153 @@ private fun getRelativeTimeString(timestamp: Long): String {
 
 @Composable
 private fun MainContent(
-    availablePatches: Int,
     onAllAppsClick: () -> Unit,
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .padding(horizontal = 32.dp, vertical = 32.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    // Maximum width for buttons in landscape mode
+    val maxButtonWidth = if (isLandscape) 500.dp else Dp.Infinity
+
+    // Get theme colors outside of Canvas
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val secondaryColor = MaterialTheme.colorScheme.secondary
+    val tertiaryColor = MaterialTheme.colorScheme.tertiary
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        // Funny rotating greeting message
-        val greetingMessages = listOf(
-            R.string.morphe_home_greeting_1,
-            R.string.morphe_home_greeting_2,
-            R.string.morphe_home_greeting_3,
-            R.string.morphe_home_greeting_4,
-            R.string.morphe_home_greeting_5,
-            R.string.morphe_home_greeting_6,
-            R.string.morphe_home_greeting_7,
-        )
-        var currentGreetingIndex by rememberSaveable { mutableIntStateOf((0..<greetingMessages.size).random()) }
+        // Decorative circles in background (adapt to theme) - more subtle
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            // Large circle on top left
+            drawCircle(
+                color = primaryColor.copy(alpha = 0.03f),
+                radius = 400f,
+                center = Offset(size.width * 0.15f, size.height * 0.25f)
+            )
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            AnimatedContent(
-                targetState = greetingMessages[currentGreetingIndex],
-                transitionSpec = {
-                    fadeIn(tween(800)) togetherWith fadeOut(tween(800))
-                },
-                label = "greeting_animation"
-            ) { resId ->
-                Text(
-                    text = stringResource(resId),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-            }
+            // Medium circle on top right
+            drawCircle(
+                color = tertiaryColor.copy(alpha = 0.025f),
+                radius = 280f,
+                center = Offset(size.width * 0.88f, size.height * 0.15f)
+            )
+
+            // Small circle in center right
+            drawCircle(
+                color = tertiaryColor.copy(alpha = 0.02f),
+                radius = 200f,
+                center = Offset(size.width * 0.75f, size.height * 0.4f)
+            )
+
+            // Medium circle on bottom right
+            drawCircle(
+                color = secondaryColor.copy(alpha = 0.025f),
+                radius = 320f,
+                center = Offset(size.width * 0.85f, size.height * 0.75f)
+            )
+
+            // Small circle on bottom left
+            drawCircle(
+                color = primaryColor.copy(alpha = 0.02f),
+                radius = 180f,
+                center = Offset(size.width * 0.2f, size.height * 0.8f)
+            )
+
+            // Additional circle at bottom center
+            drawCircle(
+                color = secondaryColor.copy(alpha = 0.02f),
+                radius = 220f,
+                center = Offset(size.width * 0.5f, size.height * 0.92f)
+            )
         }
 
-        Spacer(Modifier.height(32.dp))
-
-        // YouTube Button
-        AppButton(
-            text = stringResource(R.string.morphe_home_youtube),
-            icon = {
-                Icon(
-                    imageVector = Icons.Filled.PlayCircle,
-                    contentDescription = stringResource(R.string.morphe_home_youtube),
-                    tint = Color.White,
-                    modifier = Modifier.size(64.dp)
-                )
-            },
-            backgroundColor = Color(0xFFFF0033),
-            contentColor = Color.White,
-            onClick = onYouTubeClick
-        )
-
-        Spacer(Modifier.height(24.dp))
-
-        // YouTube Music Button
-        AppButton(
-            text = stringResource(R.string.morphe_home_youtube_music),
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.MusicNote,
-                    contentDescription = stringResource(R.string.morphe_home_youtube_music),
-                    tint = Color.White,
-                    modifier = Modifier.size(64.dp)
-                )
-            },
-            backgroundColor = Color(0xFF121212),
-            contentColor = Color.White,
-            gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
-            onClick = onYouTubeMusicClick
-        )
-
-        Spacer(Modifier.height(24.dp))
-
-        // Other apps button
-        androidx.compose.material3.TextButton(onClick = onAllAppsClick) {
-            Text(
-                text = stringResource(R.string.morphe_home_advanced_mode),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Medium
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(horizontal = 32.dp, vertical = 32.dp)
+                .padding(bottom = 80.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Funny rotating greeting message
+            val greetingMessages = listOf(
+                R.string.morphe_home_greeting_1,
+                R.string.morphe_home_greeting_2,
+                R.string.morphe_home_greeting_3,
+                R.string.morphe_home_greeting_4,
+                R.string.morphe_home_greeting_5,
+                R.string.morphe_home_greeting_6,
+                R.string.morphe_home_greeting_7,
             )
+            var currentGreetingIndex by rememberSaveable {
+                mutableIntStateOf((0..<greetingMessages.size).random())
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                AnimatedContent(
+                    targetState = greetingMessages[currentGreetingIndex],
+                    transitionSpec = {
+                        fadeIn(tween(800)) togetherWith fadeOut(tween(800))
+                    },
+                    label = "greeting_animation"
+                ) { resId ->
+                    Text(
+                        text = stringResource(resId),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(32.dp))
+
+            // Buttons container with constrained width
+            Column(
+                modifier = Modifier.widthIn(max = maxButtonWidth),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // YouTube Button
+                AppButton(
+                    text = stringResource(R.string.morphe_home_youtube),
+                    backgroundColor = Color(0xFFFF0033),
+                    contentColor = Color.White,
+                    onClick = onYouTubeClick
+                )
+
+                // YouTube Music Button
+                AppButton(
+                    text = stringResource(R.string.morphe_home_youtube_music),
+                    backgroundColor = Color(0xFF121212),
+                    contentColor = Color.White,
+                    gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
+                    onClick = onYouTubeMusicClick
+                )
+
+                Spacer(Modifier.height(8.dp))
+
+                // Other apps button
+                androidx.compose.material3.TextButton(onClick = onAllAppsClick) {
+                    Text(
+                        text = stringResource(R.string.morphe_home_advanced_mode),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
         }
     }
 }
@@ -1080,63 +1133,46 @@ private fun MainContent(
 @Composable
 private fun AppButton(
     text: String,
-    icon: @Composable () -> Unit,
     backgroundColor: Color,
     contentColor: Color,
     gradientColors: List<Color>? = null,
-    onClick: () -> Unit,
-    enabled: Boolean = true,
-    isLoading: Boolean = false
+    onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
-        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(72.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = contentColor
         ),
-        shape = RoundedCornerShape(28.dp),
-        contentPadding = PaddingValues(0.dp)
+        shape = RoundedCornerShape(20.dp),
+        contentPadding = PaddingValues(0.dp),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 4.dp,
+            pressedElevation = 8.dp
+        )
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .then(
-                    if (gradientColors != null)
-                        Modifier.background(
-                            Brush.horizontalGradient(gradientColors),
-                            RoundedCornerShape(28.dp)
-                        )
-                    else
-                        Modifier.background(backgroundColor, RoundedCornerShape(28.dp))
-                )
+                .background(
+                    brush = if (gradientColors != null) {
+                        Brush.horizontalGradient(gradientColors)
+                    } else {
+                        Brush.horizontalGradient(listOf(backgroundColor, backgroundColor))
+                    },
+                    shape = RoundedCornerShape(20.dp)
+                ),
+            contentAlignment = Alignment.Center
         ) {
-            if (isLoading) {
-                CircularProgressIndicator(color = contentColor, strokeWidth = 3.dp)
-            } else {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 32.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .background(Color.White.copy(alpha = 0.16f), CircleShape),
-                        contentAlignment = Alignment.Center
-                    ) { icon() }
-                    Spacer(Modifier.width(20.dp))
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
         }
     }
 }
