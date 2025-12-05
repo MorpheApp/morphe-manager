@@ -1352,7 +1352,7 @@ private fun PatchesBundleJsonUrlDialog(
                     },
                     isError = showError,
                     singleLine = false,
-                    maxLines = 4,
+                    maxLines = 6,
                     modifier = Modifier.fillMaxWidth()
                 )
 

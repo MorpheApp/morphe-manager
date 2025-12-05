@@ -73,7 +73,7 @@
     <!-- Patches Repository Settings -->
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
-    <string name="patches_bundle_json_url_dialog_title">Configure Patches Bundle URL</string>
+    <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
     <string name="patches_bundle_json_url_dialog_description">Enter the URL to a JSON file that contains information about the patches bundle. The JSON should follow the required format</string>
     <string name="patches_bundle_json_url_label">JSON URL</string>
     <string name="patches_bundle_json_url_error">URL must start with http:// or https://</string>
