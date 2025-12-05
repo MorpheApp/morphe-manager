@@ -3,6 +3,7 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.text.format.DateUtils
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
@@ -34,6 +35,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.CalendarToday
@@ -684,9 +687,6 @@ private fun ApiPatchBundleCard(
     onOpenInBrowser: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Formatter with date + time: dd.MM.yy HH:mm
-    val fullDateTimeFormatter = remember { SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault()) }
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -713,7 +713,12 @@ private fun ApiPatchBundleCard(
                     modifier = Modifier.size(48.dp)
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                        Icon(Icons.Outlined.Source, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
+                        Icon(
+                            Icons.Outlined.Source,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
                     }
                 }
 
@@ -725,47 +730,111 @@ private fun ApiPatchBundleCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(
-                        text = stringResource(R.string.morphe_home_bundle_type_api),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.morphe_home_bundle_type_api),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text("•", style = MaterialTheme.typography.bodySmall)
+                        Text(
+                            text = bundle.updatedAt?.let { getRelativeTimeString(it) }
+                                ?: stringResource(R.string.morphe_home_unknown),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
 
                 IconButton(onClick = onOpenInBrowser) {
-                    Icon(Icons.Outlined.OpenInNew, contentDescription = stringResource(R.string.morphe_home_open_in_browser), tint = MaterialTheme.colorScheme.primary)
+                    Icon(
+                        Icons.Outlined.OpenInNew,
+                        contentDescription = stringResource(R.string.morphe_home_open_in_browser),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
 
-            // Patches
-            InfoRow(icon = Icons.Outlined.Info, label = stringResource(R.string.patches), value = patchCount.toString())
+            // Stats Row - компактніше
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                StatChip(
+                    icon = Icons.Outlined.Info,
+                    label = stringResource(R.string.patches),
+                    value = patchCount.toString(),
+                    modifier = Modifier.weight(1f)
+                )
 
-            // Version
-            InfoRow(
-                icon = Icons.Outlined.Update,
-                label = stringResource(R.string.version),
-                value = updateInfo?.latestVersion?.removePrefix("v")
-                    ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
-                    ?: "N/A"
-            )
+                StatChip(
+                    icon = Icons.Outlined.Update,
+                    label = stringResource(R.string.version),
+                    value = updateInfo?.latestVersion?.removePrefix("v")
+                        ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
+                        ?: "N/A",
+                    modifier = Modifier.weight(1f)
+                )
+            }
 
-            // Added — when bundle was first added
-            InfoRow(
-                icon = Icons.Outlined.CalendarToday,
-                label = stringResource(R.string.morphe_home_date_added),
-                value = fullDateTimeFormatter.format(bundle.createdAt)
-            )
+            // Expandable dates section
+            var showDates by remember { mutableStateOf(false) }
 
-            // Updated — when the bundle was last updated
-            InfoRow(
-                icon = Icons.Outlined.Refresh,
-                label = stringResource(R.string.morphe_home_date_updated),
-                value = fullDateTimeFormatter.format(bundle.updatedAt)
-            )
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { showDates = !showDates },
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.morphe_home_timeline),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Icon(
+                            imageVector = if (showDates)
+                                Icons.Default.KeyboardArrowUp
+                            else
+                                Icons.Default.KeyboardArrowDown,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
 
-            Divider(color = MaterialTheme.colorScheme.outlineVariant)
+                    AnimatedVisibility(visible = showDates) {
+                        Column(
+                            modifier = Modifier.padding(top = 12.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            TimelineItem(
+                                icon = Icons.Outlined.CalendarToday,
+                                label = stringResource(R.string.morphe_home_date_added),
+                                time = bundle.createdAt ?: 0L,
+                            )
 
-            // Update / Check updates button
+                            TimelineItem(
+                                icon = Icons.Outlined.Refresh,
+                                label = stringResource(R.string.morphe_home_date_updated),
+                                time = bundle.updatedAt ?: 0L,
+                                isLast = true
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Update button
             Button(
                 onClick = onRefresh,
                 enabled = !isRefreshing,
@@ -792,38 +861,117 @@ private fun ApiPatchBundleCard(
     }
 }
 
+// Helper composables
 @Composable
-private fun InfoRow(
+private fun StatChip(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     label: String,
     value: String,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(18.dp)
-        )
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.width(80.dp)
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.weight(1f)
-        )
+        Row(
+            modifier = Modifier.padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(18.dp)
+            )
+            Column {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = value,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
     }
+}
+
+@Composable
+private fun TimelineItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    time: Long?, // Зробити nullable
+    isLast: Boolean = false
+) {
+    val dateTimeFormatter = remember { SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault()) }
+
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.Top
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.size(32.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+            }
+
+            if (!isLast) {
+                Box(
+                    modifier = Modifier
+                        .width(2.dp)
+                        .height(24.dp)
+                        .background(MaterialTheme.colorScheme.outlineVariant)
+                )
+            }
+        }
+
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = time?.let { dateTimeFormatter.format(it) }
+                    ?: stringResource(R.string.morphe_home_unknown),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = time?.let { getRelativeTimeString(it) }
+                    ?: stringResource(R.string.morphe_home_unknown),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+
+// Helper function for relative time
+private fun getRelativeTimeString(timestamp: Long): String {
+    return DateUtils.getRelativeTimeSpanString(
+        timestamp,
+        System.currentTimeMillis(),
+        DateUtils.MINUTE_IN_MILLIS,
+        DateUtils.FORMAT_ABBREV_RELATIVE
+    ).toString()
 }
 
 @Composable

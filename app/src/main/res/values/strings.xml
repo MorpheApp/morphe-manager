@@ -28,6 +28,8 @@
     <string name="morphe_home_date_updated">Updated</string>
     <string name="morphe_home_check_updates">Check</string>
     <string name="morphe_home_bundle_update_completed">Update Completed</string>
+    <string name="morphe_home_unknown">Unknown</string>
+    <string name="morphe_home_timeline">Update History</string>
 
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_title">Patching</string>
