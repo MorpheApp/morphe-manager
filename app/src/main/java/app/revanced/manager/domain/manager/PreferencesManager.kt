@@ -20,7 +20,7 @@ class PreferencesManager(
 
     val patchesBundleJsonUrl = stringPreference(
         "patches_bundle_json_url",
-        "https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json"
+        "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
     )
 
     val useProcessRuntime = booleanPreference("use_process_runtime", false)
