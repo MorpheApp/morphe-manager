@@ -267,9 +267,6 @@ fun MorpheHomeScreen(
                                 }
                             }
                         },
-                        onCardClick = {
-                            // TODO: add onBundleSettingsClick(apiBundle.uid)
-                        },
                         onOpenInBrowser = {
                             val pageUrl = manualUpdateInfo[apiBundle.uid]?.pageUrl
                                 ?: "https://github.com/LisoUseInAIKyrios/revanced-patches/releases/latest" // FIXME
@@ -687,14 +684,12 @@ private fun ApiPatchBundleCard(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
-    onCardClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
-            .clickable(onClick = onCardClick),
+            .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
