@@ -14,7 +14,7 @@ interface ComplexParameter<T : Parcelable>
 object MorpheHomeScreen
 
 @Serializable
-object MorpheSettings
+data class MorpheSettings(val highlightSection: String? = null)
 
 @Serializable
 object Dashboard

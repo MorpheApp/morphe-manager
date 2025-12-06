@@ -124,7 +124,9 @@ private fun ReVancedManager(vm: MainViewModel) {
     ) {
         composable<MorpheHomeScreen> {
             MorpheHomeScreen(
-                onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
+                onMorpheSettingsClick = { highlightSection ->
+                    navController.navigate(MorpheSettings(highlightSection = highlightSection))
+                },
                 onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
                 onUpdateClick = { navController.navigate(Update()) },
@@ -382,8 +384,12 @@ private fun ReVancedManager(vm: MainViewModel) {
             }
 
             // Morphe Simplified Settings Screen
-            composable<MorpheSettings> {
-                MorpheSettingsScreen(onBackClick = navController::popBackStack)
+            composable<MorpheSettings> { backStackEntry ->
+                val args = backStackEntry.toRoute<MorpheSettings>()
+                MorpheSettingsScreen(
+                    onBackClick = navController::popBackStack,
+                    highlightSection = args.highlightSection
+                )
             }
         }
     }

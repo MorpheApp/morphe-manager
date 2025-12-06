@@ -120,7 +120,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheHomeScreen(
-    onMorpheSettingsClick: () -> Unit,
+    onMorpheSettingsClick: (String?) -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
@@ -330,7 +330,8 @@ fun MorpheHomeScreen(
                                 sheetState.hide()
                                 showBundlesSheet = false
                             }
-                            onDownloaderPluginClick()
+                            // Navigate to Morphe Settings and highlight plugins section
+                            onMorpheSettingsClick("plugins")
                         },
                         onDismiss = dashboardViewModel::ignoreNewDownloaderPlugins,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -514,7 +515,7 @@ fun MorpheHomeScreen(
                 }
 
                 FloatingActionButton(
-                    onClick = onMorpheSettingsClick,
+                    onClick = { onMorpheSettingsClick(null) },
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {

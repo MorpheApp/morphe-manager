@@ -7,6 +7,8 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,6 +33,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -62,6 +66,7 @@ import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import android.provider.Settings as AndroidSettings
@@ -84,6 +89,7 @@ import android.provider.Settings as AndroidSettings
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
+    highlightSection: String? = null,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     advancedViewModel: AdvancedSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
@@ -93,6 +99,21 @@ fun MorpheSettingsScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
+
+    // Track positions for sections
+    var pluginsSectionPosition by remember { mutableStateOf(0) }
+    var isBlinking by remember { mutableStateOf(false) }
+
+    // Scroll to plugins section if highlighted and trigger blink animation
+    LaunchedEffect(highlightSection) {
+        if (highlightSection == "plugins" && pluginsSectionPosition > 0) {
+            delay(300)
+            scrollState.animateScrollTo(pluginsSectionPosition)
+            isBlinking = true
+            delay(900)
+            isBlinking = false
+        }
+    }
 
     // General Settings - theme and appearance
     val theme by generalViewModel.prefs.theme.getAsState()
@@ -335,29 +356,54 @@ fun MorpheSettingsScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             // Downloader Plugins Section
-            SectionHeader(
-                icon = Icons.Filled.Download,
-                title = stringResource(R.string.downloader_plugins)
-            )
+            Column(
+                modifier = Modifier.onGloballyPositioned { coordinates ->
+                    pluginsSectionPosition = coordinates.positionInParent().y.toInt()
+                }
+            ) {
+                SectionHeader(
+                    icon = Icons.Filled.Download,
+                    title = stringResource(R.string.downloader_plugins)
+                )
 
-            SettingsCard {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    if (pluginStates.isEmpty()) {
-                        Text(
-                            text = stringResource(R.string.downloader_no_plugins_installed),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                val normalBorder = Color.Transparent
+                val highlightBorder = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
+
+                val animatedBorderColor by animateColorAsState(
+                    targetValue = if (isBlinking) highlightBorder else normalBorder,
+                    animationSpec = tween(durationMillis = 800),
+                    label = "cardBorderHighlight"
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 2.dp,
+                            color = animatedBorderColor,
+                            shape = RoundedCornerShape(16.dp)
                         )
-                    } else {
-                        pluginStates.forEach { (packageName, state) ->
-                            PluginItem(
-                                packageName = packageName,
-                                state = state,
-                                onClick = { showPluginDialog = packageName },
-                                modifier = Modifier.padding(vertical = 4.dp)
-                            )
+                ) {
+                    SettingsCard {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            if (pluginStates.isEmpty()) {
+                                Text(
+                                    text = stringResource(R.string.downloader_no_plugins_installed),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            } else {
+                                pluginStates.forEach { (packageName, state) ->
+                                    PluginItem(
+                                        packageName = packageName,
+                                        state = state,
+                                        onClick = { showPluginDialog = packageName },
+                                        modifier = Modifier.padding(vertical = 4.dp)
+                                    )
+                                }
+                            }
                         }
                     }
                 }
