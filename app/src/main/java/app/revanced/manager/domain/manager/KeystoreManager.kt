@@ -2,7 +2,7 @@ package app.revanced.manager.domain.manager
 
 import android.app.Application
 import android.content.Context
-import app.morphe.morphe.ApkSigner
+import app.morphe.library.ApkSigner
 import app.morphe.library.ApkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
