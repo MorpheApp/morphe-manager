@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
-import app.revanced.library.mostCommonCompatibleVersions
-import app.revanced.patcher.patch.Patch
+import app.morphe.library.mostCommonCompatibleVersions
+import app.morphe.patcher.patch.Patch
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.redux.Action

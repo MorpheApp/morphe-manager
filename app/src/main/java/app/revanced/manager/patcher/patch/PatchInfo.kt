@@ -1,9 +1,9 @@
 package app.revanced.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
-import app.revanced.patcher.patch.Patch
-import app.revanced.patcher.patch.Option as PatchOption
-import app.revanced.patcher.patch.resourcePatch
+import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.Option as PatchOption
+import app.morphe.patcher.patch.resourcePatch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList

@@ -2,8 +2,8 @@ package app.revanced.manager.domain.manager
 
 import android.app.Application
 import android.content.Context
-import app.revanced.library.ApkSigner
-import app.revanced.library.ApkUtils
+import app.morphe.morphe.ApkSigner
+import app.morphe.library.ApkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
