@@ -37,8 +37,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
@@ -74,6 +76,7 @@ import android.provider.Settings as AndroidSettings
  * - Installer settings
  * - Keystore import
  * - About dialog
+ * - Share APK functionality
  * - Interface switcher to return to original UI
  */
 @SuppressLint("BatteryLife")
@@ -467,50 +470,133 @@ fun MorpheSettingsScreen(
             )
 
             SettingsCard {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
-                        .clickable { showAboutDialog = true },
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                ) {
-                    Row(
+                Column(modifier = Modifier.padding(16.dp)) {
+                    // About item
+                    Surface(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { showAboutDialog = true },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                     ) {
-                        val icon = rememberDrawablePainter(
-                            drawable = remember {
-                                AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-                            }
-                        )
-                        Image(
-                            painter = icon,
-                            contentDescription = null,
+                        Row(
                             modifier = Modifier
-                                .size(40.dp)
-                                .clip(RoundedCornerShape(8.dp))
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.app_name),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            val icon = rememberDrawablePainter(
+                                drawable = remember {
+                                    AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                                }
                             )
-                            Text(
-                                text = "Version ${BuildConfig.VERSION_NAME}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            Image(
+                                painter = icon,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.app_name),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = "Version ${BuildConfig.VERSION_NAME}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
-                        Icon(
-                            Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Share APK item
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                // Share APK functionality
+                                try {
+                                    val packageInfo = context.packageManager.getPackageInfo(
+                                        context.packageName,
+                                        0
+                                    )
+                                    val apkPath = packageInfo.applicationInfo?.sourceDir
+
+                                    if (apkPath != null) {
+                                        val apkFile = java.io.File(apkPath)
+
+                                        val uri = FileProvider.getUriForFile(
+                                            context,
+                                            "${context.packageName}.provider",
+                                            apkFile
+                                        )
+
+                                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                            type = "application/vnd.android.package-archive"
+                                            putExtra(Intent.EXTRA_STREAM, uri)
+                                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                        }
+
+                                        context.startActivity(
+                                            Intent.createChooser(
+                                                shareIntent,
+                                                context.getString(R.string.morphe_share_apk_title)
+                                            )
+                                        )
+                                    } else {
+                                        context.toast("Failed to share APK: Application info not found")
+                                    }
+                                } catch (e: Exception) {
+                                    context.toast("Failed to share APK: ${e.message}")
+                                }
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Outlined.Share,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.morphe_share_apk_title),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.morphe_share_apk_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
                 }
             }
@@ -911,7 +997,7 @@ private fun PluginActionDialog(
                         }
                     }
 
-                    // Second row: Dismiss button (same style as Uninstall)
+                    // Second row: Dismiss button
                     OutlinedButton(
                         onClick = onDismiss,
                         modifier = Modifier.fillMaxWidth(0.5f)
@@ -925,8 +1011,7 @@ private fun PluginActionDialog(
 }
 
 /**
- * Beautiful About dialog with gradient background
- * Shows app icon, version, description, and GitHub links
+ * About dialog. Shows app icon, version, description, and GitHub links
  */
 @Composable
 private fun AboutDialog(onDismiss: () -> Unit) {
@@ -1047,8 +1132,7 @@ private fun AboutDialog(onDismiss: () -> Unit) {
 }
 
 /**
- * GitHub repository link button
- * Styled button for opening GitHub repositories
+ * GitHub repository link button. Styled button for opening GitHub repositories
  */
 @Composable
 private fun GitHubButton(
@@ -1062,21 +1146,27 @@ private fun GitHubButton(
         contentPadding = PaddingValues(16.dp)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(18.dp)
             )
-            Text(
-                text = text,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Start
-            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.labelLarge,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
@@ -1187,13 +1277,12 @@ private fun PatchesBundleJsonUrlDialog(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Buttons - two rows
-                Column(
+                // Buttons
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // First row: Save button
+                    // Save button
                     FilledTonalButton(
                         onClick = {
                             val trimmedUrl = url.trim()
@@ -1204,17 +1293,23 @@ private fun PatchesBundleJsonUrlDialog(
                             }
                         },
                         enabled = url.trim().isNotBlank(),
-                        modifier = Modifier.fillMaxWidth(0.5f)
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Text(stringResource(R.string.patches_bundle_json_dialog_save))
+                        Text(
+                            stringResource(R.string.patches_bundle_json_dialog_save),
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
 
-                    // Second row: Cancel button
+                    // Cancel button
                     OutlinedButton(
                         onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth(0.5f)
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Text(stringResource(R.string.cancel))
+                        Text(
+                            stringResource(R.string.cancel),
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
                 }
             }
@@ -1223,8 +1318,7 @@ private fun PatchesBundleJsonUrlDialog(
 }
 
 /**
- * Beautiful Keystore Credentials Dialog
- * Allows entering alias and password for keystore import
+ * Keystore Credentials Dialog. Allows entering alias and password for keystore import
  */
 @Composable
 private fun KeystoreCredentialsDialog(
@@ -1298,26 +1392,31 @@ private fun KeystoreCredentialsDialog(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Buttons - two rows
-                Column(
+                // Buttons
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // First row: Import button
+                    // Import button
                     FilledTonalButton(
                         onClick = { onSubmit(alias, pass) },
-                        modifier = Modifier.fillMaxWidth(0.5f)
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Text(stringResource(R.string.import_keystore_dialog_button))
+                        Text(
+                            stringResource(R.string.import_keystore_dialog_button),
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
 
-                    // Second row: Cancel button
+                    // Cancel button
                     OutlinedButton(
                         onClick = onDismissRequest,
-                        modifier = Modifier.fillMaxWidth(0.5f)
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Text(stringResource(R.string.cancel))
+                        Text(
+                            stringResource(R.string.cancel),
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
                 }
             }

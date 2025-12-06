@@ -70,7 +70,7 @@
     <string name="morphe_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
 
-    <!-- Patches Repository Settings -->
+    <!-- Morphe Settings Screen -->
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
@@ -80,14 +80,13 @@
     <string name="patches_bundle_json_url_invalid">Invalid URL format</string>
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
-
     <string name="morphe_settings_switch_to_original">Return to Original Interface</string>
     <string name="morphe_settings_switch_to_original_description">Switch back to the full-featured advanced interface</string>
-
-    <!-- About screen -->
     <string name="morphe_about_patches_github">Morphe Patches GitHub</string>
     <string name="morphe_about_manager_github">Morphe Manager GitHub</string>
     <string name="morphe_about_patcher_github">Morphe Patcher GitHub</string>
+    <string name="morphe_share_apk_title">Share APK</string>
+    <string name="morphe_share_apk_description">Share this app with others</string>
 
     <!-- Other strings -->
     <string name="app_name">Morphe</string>
