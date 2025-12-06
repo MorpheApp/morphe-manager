@@ -162,33 +162,9 @@ fun AboutSettingsScreen(
                         text = stringResource(R.string.about_revanced_manager),
                         style = MaterialTheme.typography.titleMedium
                     )
-                    val description = stringResource(R.string.revanced_manager_description)
-                    val uniqueFeaturesLabel = stringResource(R.string.unique_features_label)
-                    val uniqueFeaturesUrl = "https://github.com/Jman-Github/Universal-ReVanced-Manager#-unique-features"
-                    val annotatedDescription = buildAnnotatedString {
-                        append(description)
-                        append(" ")
-                        pushStringAnnotation(tag = "unique_features", annotation = uniqueFeaturesUrl)
-                        withStyle(
-                            SpanStyle(
-                                color = MaterialTheme.colorScheme.primary,
-                                fontWeight = FontWeight.Bold,
-                                textDecoration = TextDecoration.Underline
-                            )
-                        ) {
-                            append(uniqueFeaturesLabel)
-                        }
-                        pop()
-                    }
-                    val launchUrl = { url: String -> context.openUrl(url) }
-                    ClickableText(
-                        text = annotatedDescription,
+                    Text(
+                        text = stringResource(R.string.revanced_manager_description),
                         style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
-                        onClick = { offset ->
-                            annotatedDescription.getStringAnnotations("unique_features", offset, offset)
-                                .firstOrNull()
-                                ?.let { launchUrl(it.item) }
-                        }
                     )
                 }
             }
