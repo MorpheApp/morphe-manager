@@ -46,15 +46,19 @@ class AdvancedSettingsViewModel(
             return "revanced-manager_logcat_$time"
         }
 
-    fun setPatchesRepoOwner(value: String) = viewModelScope.launch(Dispatchers.Default) {
-        if (value == prefs.patchesRepoOwner.get()) return@launch
-        prefs.patchesRepoOwner.update(value)
-        patchBundleRepository.reloadApiBundles()
-    }
+    fun setPatchesBundleJsonUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
+        val trimmedValue = value.trim()
+        if (trimmedValue == prefs.patchesBundleJsonUrl.get()) return@launch
 
-    fun setPatchesRepoName(value: String) = viewModelScope.launch(Dispatchers.Default) {
-        if (value == prefs.patchesRepo.get()) return@launch
-        prefs.patchesRepo.update(value)
+        // Validate URL format
+        if (trimmedValue.isNotBlank() && !trimmedValue.startsWith("http")) {
+            withContext(Dispatchers.Main) {
+                app.toast(app.getString(R.string.patches_bundle_json_url_invalid))
+            }
+            return@launch
+        }
+
+        prefs.patchesBundleJsonUrl.update(trimmedValue)
         patchBundleRepository.reloadApiBundles()
     }
 
@@ -147,25 +151,25 @@ class AdvancedSettingsViewModel(
 
     fun removeCustomInstaller(component: ComponentName, onResult: (Boolean) -> Unit = {}) =
         viewModelScope.launch(Dispatchers.Default) {
-        val removed = installerManager.removeCustomInstaller(component)
-        if (removed) {
-            prefs.hideInstallerComponent(component)
-            val componentAvailable = installerManager.isComponentAvailable(component)
-            if (!componentAvailable) {
-                val currentPrimary = installerManager.getPrimaryToken()
-                if (currentPrimary is InstallerManager.Token.Component &&
-                    currentPrimary.componentName == component
-                ) {
-                    installerManager.updatePrimaryToken(InstallerManager.Token.Internal)
-                }
-                val currentFallback = installerManager.getFallbackToken()
-                if (currentFallback is InstallerManager.Token.Component &&
-                    currentFallback.componentName == component
-                ) {
-                    installerManager.updateFallbackToken(InstallerManager.Token.None)
+            val removed = installerManager.removeCustomInstaller(component)
+            if (removed) {
+                prefs.hideInstallerComponent(component)
+                val componentAvailable = installerManager.isComponentAvailable(component)
+                if (!componentAvailable) {
+                    val currentPrimary = installerManager.getPrimaryToken()
+                    if (currentPrimary is InstallerManager.Token.Component &&
+                        currentPrimary.componentName == component
+                    ) {
+                        installerManager.updatePrimaryToken(InstallerManager.Token.Internal)
+                    }
+                    val currentFallback = installerManager.getFallbackToken()
+                    if (currentFallback is InstallerManager.Token.Component &&
+                        currentFallback.componentName == component
+                    ) {
+                        installerManager.updateFallbackToken(InstallerManager.Token.None)
+                    }
                 }
             }
-        }
             withContext(Dispatchers.Main) {
                 onResult(removed)
             }

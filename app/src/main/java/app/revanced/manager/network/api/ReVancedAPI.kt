@@ -11,14 +11,25 @@ import io.ktor.client.request.url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 
 class ReVancedAPI(
     private val client: HttpService,
     private val prefs: PreferencesManager
 ) {
+    @Serializable
+    data class PatchBundleJson(
+        @SerialName("created_at") val createdAt: String,
+        val description: String,
+        @SerialName("download_url") val downloadUrl: String,
+        @SerialName("signature_download_url") val signatureDownloadUrl: String? = null,
+        val version: String
+    )
+
     private data class RepoConfig(
         val owner: String,
         val name: String,
@@ -27,21 +38,6 @@ class ReVancedAPI(
     )
 
     private fun managerRepoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
-
-    private suspend fun patchesRepoConfig(): RepoConfig {
-        val owner = prefs.patchesRepoOwner.get().trim()
-        val repoName = prefs.patchesRepo.get().trim()
-
-        val finalOwner = if (owner.isBlank()) DEFAULT_PATCHES_OWNER else owner
-        val finalName = if (repoName.isBlank()) DEFAULT_PATCHES_REPO else repoName
-
-        return RepoConfig(
-            owner = finalOwner,
-            name = finalName,
-            apiBase = "https://api.github.com/repos/$finalOwner/$finalName",
-            htmlUrl = "https://github.com/$finalOwner/$finalName"
-        )
-    }
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -148,12 +144,6 @@ class ReVancedAPI(
         asset.name.endsWith(".apk", ignoreCase = true) ||
                 asset.contentType?.contains("android.package-archive", ignoreCase = true) == true
 
-    private fun isPatchesAsset(asset: GitHubAsset): Boolean {
-        val name = asset.name.lowercase()
-        return name.endsWith(".rvp") ||
-                (name.contains("patches") && !name.endsWith(".asc") && !name.endsWith(".sig"))
-    }
-
     suspend fun getLatestAppInfo(): APIResponse<ReVancedAsset> {
         val config = managerRepoConfig()
         val includePrerelease = prefs.useManagerPrereleases.get()
@@ -166,13 +156,85 @@ class ReVancedAPI(
     }
 
     /**
-     * Fetches the latest patches bundle .rvp from the configured repository.
-     * Uses GitHub Releases only.
+     * Fetches the latest patches bundle from the JSON file URL.
+     * Uses direct JSON endpoint.
      */
     suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = withContext(Dispatchers.IO) {
-        val config = patchesRepoConfig()
-        val includePrerelease = prefs.usePatchesPrereleases.get()
-        fetchReleaseAsset(config, includePrerelease, ::isPatchesAsset)
+        val jsonUrl = prefs.patchesBundleJsonUrl.get().trim()
+
+        if (jsonUrl.isBlank()) {
+            return@withContext APIResponse.Failure(
+                APIFailure(IllegalStateException("Patches bundle JSON URL is not configured"), null)
+            )
+        }
+
+        return@withContext when (val response = client.request<PatchBundleJson> {
+            url(jsonUrl)
+        }) {
+            is APIResponse.Success -> {
+                val bundleData = response.data
+                val mapped = kotlin.runCatching {
+                    // Parse the created_at timestamp
+                    val createdAt = try {
+                        Instant.parse(bundleData.createdAt).toLocalDateTime(TimeZone.UTC)
+                    } catch (e: Exception) {
+                        // Try parsing without time zone if ISO format fails
+                        try {
+                            LocalDateTime.parse(bundleData.createdAt.replace(" ", "T"))
+                        } catch (e2: Exception) {
+                            throw IllegalStateException("Invalid timestamp format: ${bundleData.createdAt}")
+                        }
+                    }
+
+                    // Extract repository URL from the JSON URL
+                    val repoUrl = extractRepoUrlFromJsonUrl(jsonUrl)
+                    val pageUrl = "$repoUrl/releases/tag/${bundleData.version}"
+
+                    ReVancedAsset(
+                        downloadUrl = bundleData.downloadUrl,
+                        createdAt = createdAt,
+                        signatureDownloadUrl = bundleData.signatureDownloadUrl?.takeIf { it != "N/A" },
+                        pageUrl = pageUrl,
+                        description = bundleData.description,
+                        version = bundleData.version
+                    )
+                }
+
+                mapped.fold(
+                    onSuccess = { APIResponse.Success(it) },
+                    onFailure = { APIResponse.Failure(APIFailure(it, null)) }
+                )
+            }
+
+            is APIResponse.Error -> APIResponse.Error(response.error)
+            is APIResponse.Failure -> APIResponse.Failure(response.error)
+        }
+    }
+
+    private fun extractRepoUrlFromJsonUrl(jsonUrl: String): String {
+        // Extract repository URL from paths like:
+        // https://raw.githubusercontent.com/OWNER/REPO/refs/heads/BRANCH/...
+        // or https://github.com/OWNER/REPO/raw/BRANCH/...
+        return when {
+            jsonUrl.contains("raw.githubusercontent.com") -> {
+                val parts = jsonUrl.removePrefix("https://raw.githubusercontent.com/")
+                    .split("/")
+                if (parts.size >= 2) {
+                    "https://github.com/${parts[0]}/${parts[1]}"
+                } else {
+                    "https://github.com/LisoUseInAIKyrios/revanced-patches"
+                }
+            }
+            jsonUrl.contains("github.com") && jsonUrl.contains("/raw/") -> {
+                val match = Regex("https://github\\.com/([^/]+)/([^/]+)/raw/").find(jsonUrl)
+                if (match != null) {
+                    "https://github.com/${match.groupValues[1]}/${match.groupValues[2]}"
+                } else {
+                    "https://github.com/LisoUseInAIKyrios/revanced-patches"
+                }
+            }
+            else -> "https://github.com/LisoUseInAIKyrios/revanced-patches"
+        }
     }
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
@@ -198,10 +260,6 @@ class ReVancedAPI(
         }
     }
 
-    companion object {
-        // FIXME: Change this when released
-        private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
-        private const val DEFAULT_PATCHES_OWNER = "LisoUseInAIKyrios"
-        private const val DEFAULT_PATCHES_REPO = "revanced-patches"
-    }
+    // FIXME: Change this when released
+    private val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
 }

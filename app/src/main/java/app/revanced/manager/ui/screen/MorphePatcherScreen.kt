@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.screen
 
 import android.app.Activity
-import android.content.pm.PackageInstaller
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -30,7 +29,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -43,14 +41,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
-import app.revanced.manager.ui.component.ConfirmDialog
-import app.revanced.manager.ui.component.InstallerStatusDialog
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
-import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
 import app.morphe.manager.R
 import kotlinx.coroutines.delay
@@ -58,7 +53,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuickPatcherScreen(
+fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel
 ) {
@@ -232,7 +227,7 @@ fun QuickPatcherScreen(
             hasPatchingError = true
             val steps = viewModel.steps
             val failedStep = steps.firstOrNull { it.state == app.revanced.manager.ui.model.State.FAILED }
-            errorMessage = failedStep?.message ?: context.getString(R.string.quick_patcher_unknown_error)
+            errorMessage = failedStep?.message ?: context.getString(R.string.morphe_patcher_unknown_error)
             showErrorBottomSheet = true
         }
     }
@@ -293,9 +288,9 @@ fun QuickPatcherScreen(
                 Text(
                     stringResource(
                         when (installDialogState) {
-                            InstallDialogState.INITIAL -> R.string.quick_patcher_install_dialog_message
-                            InstallDialogState.CONFLICT -> R.string.quick_patcher_install_conflict_message
-                            InstallDialogState.READY_TO_INSTALL -> R.string.quick_patcher_install_ready_message
+                            InstallDialogState.INITIAL -> R.string.morphe_patcher_install_dialog_message
+                            InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
+                            InstallDialogState.READY_TO_INSTALL -> R.string.morphe_patcher_install_ready_message
                         }
                     )
                 )
@@ -376,7 +371,7 @@ fun QuickPatcherScreen(
                 )
 
                 Text(
-                    text = stringResource(R.string.quick_patcher_failed_dialog_title),
+                    text = stringResource(R.string.morphe_patcher_failed_dialog_title),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold
                 )
@@ -403,13 +398,13 @@ fun QuickPatcherScreen(
                 Button(
                     onClick = {
                         clipboardManager.setText(AnnotatedString(errorMessage))
-                        context.toast(context.getString(R.string.quick_patcher_error_copied))
+                        context.toast(context.getString(R.string.morphe_patcher_error_copied))
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Icon(Icons.Default.ContentCopy, null)
                     Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.quick_patcher_copy_error))
+                    Text(stringResource(R.string.morphe_patcher_copy_error))
                 }
             }
         }
@@ -584,7 +579,7 @@ fun QuickPatcherScreen(
                             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                         ) {
-                            Icon(Icons.Outlined.Save, stringResource(R.string.quick_patcher_save_apk))
+                            Icon(Icons.Outlined.Save, stringResource(R.string.morphe_patcher_save_apk))
                         }
                     }
                     patcherSucceeded == null -> {
@@ -627,7 +622,7 @@ fun QuickPatcherScreen(
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
                                 contentColor = MaterialTheme.colorScheme.onErrorContainer
                             ) {
-                                Icon(Icons.Default.Error, stringResource(R.string.quick_patcher_show_error))
+                                Icon(Icons.Default.Error, stringResource(R.string.morphe_patcher_show_error))
                             }
                         } else {
                             // Empty spacer for symmetry when error sheet is shown
@@ -712,21 +707,21 @@ private fun PatchingInProgress(
     // Funny message when patching
     val wittyMessages = remember {
         listOf(
-            R.string.quick_patcher_message_1,
-            R.string.quick_patcher_message_2,
-            R.string.quick_patcher_message_3,
-            R.string.quick_patcher_message_4,
-            R.string.quick_patcher_message_5,
-            R.string.quick_patcher_message_6,
-            R.string.quick_patcher_message_7,
-            R.string.quick_patcher_message_8,
-            R.string.quick_patcher_message_9,
-            R.string.quick_patcher_message_10,
-            R.string.quick_patcher_message_11,
-            R.string.quick_patcher_message_12,
-            R.string.quick_patcher_message_13,
-            R.string.quick_patcher_message_14,
-            R.string.quick_patcher_message_15,
+            R.string.morphe_patcher_message_1,
+            R.string.morphe_patcher_message_2,
+            R.string.morphe_patcher_message_3,
+            R.string.morphe_patcher_message_4,
+            R.string.morphe_patcher_message_5,
+            R.string.morphe_patcher_message_6,
+            R.string.morphe_patcher_message_7,
+            R.string.morphe_patcher_message_8,
+            R.string.morphe_patcher_message_9,
+            R.string.morphe_patcher_message_10,
+            R.string.morphe_patcher_message_11,
+            R.string.morphe_patcher_message_12,
+            R.string.morphe_patcher_message_13,
+            R.string.morphe_patcher_message_14,
+            R.string.morphe_patcher_message_15,
         )
     }
 
@@ -798,7 +793,7 @@ private fun PatchingInProgress(
             ) {
                 Text(
                     text = stringResource(
-                        R.string.quick_patcher_percentage,
+                        R.string.morphe_patcher_percentage,
                         (progress * 100).toInt()
                     ),
                     style = MaterialTheme.typography.displayLarge,
@@ -811,7 +806,7 @@ private fun PatchingInProgress(
 
                 Text(
                     text = stringResource(
-                        R.string.quick_patcher_patches_progress,
+                        R.string.morphe_patcher_patches_progress,
                         completed,
                         total
                     ),
@@ -949,10 +944,10 @@ private fun PatchingSuccess(
             Text(
                 text = stringResource(
                     when (state) {
-                        SuccessState.INSTALLING -> R.string.quick_patcher_installing
-                        SuccessState.INSTALLED -> R.string.quick_patcher_success_title
-                        SuccessState.INSTALL_CANCELLED -> R.string.quick_patcher_install_cancelled_title
-                        SuccessState.COMPLETED -> R.string.quick_patcher_complete_title
+                        SuccessState.INSTALLING -> R.string.morphe_patcher_installing
+                        SuccessState.INSTALLED -> R.string.morphe_patcher_success_title
+                        SuccessState.INSTALL_CANCELLED -> R.string.morphe_patcher_install_cancelled_title
+                        SuccessState.COMPLETED -> R.string.morphe_patcher_complete_title
                     }
                 ),
                 style = MaterialTheme.typography.headlineLarge,
@@ -984,10 +979,10 @@ private fun PatchingSuccess(
                 Text(
                     text = stringResource(
                         when (state) {
-                            SuccessState.INSTALLING -> R.string.quick_patcher_installing_subtitle
-                            SuccessState.INSTALLED -> R.string.quick_patcher_success_subtitle
-                            SuccessState.INSTALL_CANCELLED -> R.string.quick_patcher_install_cancelled_subtitle
-                            else -> R.string.quick_patcher_installing_subtitle // fallback
+                            SuccessState.INSTALLING -> R.string.morphe_patcher_installing_subtitle
+                            SuccessState.INSTALLED -> R.string.morphe_patcher_success_subtitle
+                            SuccessState.INSTALL_CANCELLED -> R.string.morphe_patcher_install_cancelled_subtitle
+                            else -> R.string.morphe_patcher_installing_subtitle // fallback
                         }
                     ),
                     style = MaterialTheme.typography.titleMedium,
@@ -1026,7 +1021,7 @@ private fun PatchingFailed() {
         Spacer(Modifier.height(24.dp))
 
         Text(
-            text = stringResource(R.string.quick_patcher_failed_title),
+            text = stringResource(R.string.morphe_patcher_failed_title),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -1036,7 +1031,7 @@ private fun PatchingFailed() {
         Spacer(Modifier.height(8.dp))
 
         Text(
-            text = stringResource(R.string.quick_patcher_failed_subtitle),
+            text = stringResource(R.string.morphe_patcher_failed_subtitle),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center

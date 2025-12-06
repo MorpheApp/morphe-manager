@@ -11,7 +11,10 @@ import kotlinx.serialization.Serializable
 interface ComplexParameter<T : Parcelable>
 
 @Serializable
-object CustomHome
+object MorpheHomeScreen
+
+@Serializable
+object MorpheSettings
 
 @Serializable
 object Dashboard

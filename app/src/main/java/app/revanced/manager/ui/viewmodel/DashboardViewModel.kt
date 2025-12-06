@@ -33,7 +33,7 @@ import java.io.FileNotFoundException
 
 class DashboardViewModel(
     private val app: Application,
-    private val patchBundleRepository: PatchBundleRepository,
+    val patchBundleRepository: PatchBundleRepository,
     private val downloaderPluginRepository: DownloaderPluginRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,
@@ -72,7 +72,7 @@ class DashboardViewModel(
             updateBatteryOptimizationsWarning()
 
             // Automatically update bundles when using custom home screen
-            if (prefs.useCustomHomeScreen.get()) {
+            if (prefs.useMorpheHomeScreen.get()) {
                 uiSafe(app, R.string.failed_to_check_updates, "Failed to check for bundle updates") {
                     patchBundleRepository.updateCheck()
                 }

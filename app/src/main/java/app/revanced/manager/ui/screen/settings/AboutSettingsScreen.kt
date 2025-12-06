@@ -62,17 +62,17 @@ fun AboutSettingsScreen(
         listOf(
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.patches_github),
+                context.getString(R.string.morphe_about_patches_github),
                 { context.openUrl("https://github.com/MorpheApp/Patches") }
             ),
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.manager_github),
+                context.getString(R.string.morphe_about_manager_github),
                 { context.openUrl("https://github.com/MorpheApp/Morphe-alpha") } // TODO: Remove "-alpha" when released.
             ),
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.patcher_github),
+                context.getString(R.string.morphe_about_patcher_github),
                 { context.openUrl("https://github.com/MorpheApp/Patcher") }
             )
         )
