@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -26,20 +25,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import androidx.compose.ui.graphics.vector.ImageVector
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
@@ -62,18 +56,18 @@ fun AboutSettingsScreen(
         listOf(
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.morphe_about_patches_github),
-                { context.openUrl("https://github.com/MorpheApp/Patches") }
+                context.getString(R.string.morphe_about_github),
+                { context.openUrl("https://github.com/MorpheApp") }
             ),
             Triple(
-                getSocialIcon("GitHub"),
-                context.getString(R.string.morphe_about_manager_github),
-                { context.openUrl("https://github.com/MorpheApp/Morphe-alpha") } // TODO: Remove "-alpha" when released.
+                getSocialIcon("X"),
+                context.getString(R.string.morphe_about_x),
+                { context.openUrl("https://x.com/MorpheApp") }
             ),
             Triple(
-                getSocialIcon("GitHub"),
-                context.getString(R.string.morphe_about_patcher_github),
-                { context.openUrl("https://github.com/MorpheApp/Patcher") }
+                getSocialIcon("Reddit"),
+                context.getString(R.string.morphe_about_reddit),
+                { context.openUrl("https://reddit.com/r/MorpheApp") }
             )
         )
     }

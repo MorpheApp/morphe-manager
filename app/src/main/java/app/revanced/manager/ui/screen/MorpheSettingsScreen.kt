@@ -14,6 +14,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -22,6 +24,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.ui.window.Dialog
 import androidx.compose.runtime.*
@@ -58,6 +61,7 @@ import app.revanced.manager.ui.component.PasswordField
 import app.revanced.manager.ui.component.settings.BooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.theme.Theme
+import app.revanced.manager.ui.viewmodel.AboutViewModel
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
@@ -1157,8 +1161,7 @@ private fun AboutDialog(onDismiss: () -> Unit) {
         Surface(
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp,
-            modifier = Modifier.fillMaxWidth(0.95f)
+            tonalElevation = 6.dp
         ) {
             Column(
                 modifier = Modifier
@@ -1214,45 +1217,50 @@ private fun AboutDialog(onDismiss: () -> Unit) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+                        text = "Version ${BuildConfig.VERSION_NAME}",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
                 // Description
-                Text(
-                    text = stringResource(R.string.revanced_manager_description),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
-
-                // GitHub Links
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = MaterialTheme.colorScheme.surfaceContainerLow,
+                    tonalElevation = 3.dp,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    GitHubButton(
-                        icon = getSocialIcon("GitHub"),
-                        text = stringResource(R.string.morphe_about_patches_github),
-                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Patches") }
-                    )
-                    GitHubButton(
-                        icon = getSocialIcon("GitHub"),
-                        text = stringResource(R.string.morphe_about_manager_github),
-                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Morphe-alpha") }
-                    )
-                    GitHubButton(
-                        icon = getSocialIcon("GitHub"),
-                        text = stringResource(R.string.morphe_about_patcher_github),
-                        onClick = { uriHandler.openUri("https://github.com/MorpheApp/Patcher") }
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = stringResource(R.string.revanced_manager_description),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center,
+                            lineHeight = 26.sp,
+                        )
+                    }
                 }
 
-                // Close button - centered
-                Spacer(modifier = Modifier.height(8.dp))
+                // Social Links
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    AboutViewModel.socials.forEach { link ->
+                        SocialIconButton(
+                            icon = AboutViewModel.getSocialIcon(link.name),
+                            contentDescription = link.name,
+                            onClick = { uriHandler.openUri(link.url) }
+                        )
+                    }
+                }
+
+                // Close button
                 Box(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
@@ -1267,41 +1275,33 @@ private fun AboutDialog(onDismiss: () -> Unit) {
 }
 
 /**
- * GitHub repository link button. Styled button for opening GitHub repositories
+ * Social link button. Styled button for opening social media links
  */
 @Composable
-private fun GitHubButton(
+private fun SocialIconButton(
     icon: ImageVector,
-    text: String,
+    contentDescription: String,
     onClick: () -> Unit
 ) {
-    FilledTonalButton(
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    Surface(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(16.dp)
+        modifier = Modifier.size(56.dp),
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        tonalElevation = if (isPressed) 12.dp else 4.dp,
+        shadowElevation = if (isPressed) 8.dp else 2.dp,
+        interactionSource = interactionSource
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Box(contentAlignment = Alignment.Center) {
             Icon(
                 imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
+                contentDescription = contentDescription,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(28.dp)
             )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = text,
-                    style = MaterialTheme.typography.labelLarge,
-                    textAlign = TextAlign.Center
-                )
-            }
         }
     }
 }
