@@ -3,10 +3,8 @@ package app.revanced.manager.domain.manager
 import android.content.ComponentName
 import android.content.Context
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
-import app.revanced.manager.domain.manager.base.EditorContext
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
-import app.revanced.manager.util.isDebuggable
 import kotlinx.serialization.Serializable
 
 class PreferencesManager(
@@ -23,7 +21,7 @@ class PreferencesManager(
         "https://raw.githubusercontent.com/LisoUseInAIKyrios/revanced-patches/refs/heads/dev/bundles/lisouseInaikyrios-latest-patches-bundle.json"
     )
 
-    val useProcessRuntime = booleanPreference("use_process_runtime", false)
+    val useProcessRuntime = booleanPreference("use_process_runtime", true)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
     val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 700)
     val patchedAppExportFormat = stringPreference(
