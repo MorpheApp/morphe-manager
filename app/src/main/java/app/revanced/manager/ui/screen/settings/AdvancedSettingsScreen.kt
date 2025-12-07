@@ -431,14 +431,13 @@ fun AdvancedSettingsScreen(
                 headline = R.string.process_runtime,
                 description = R.string.process_runtime_description,
             )
-            val recommendedProcessLimit = remember { 1500 }
             IntegerItem(
                 preference = viewModel.prefs.patcherProcessMemoryLimit,
                 coroutineScope = viewModel.viewModelScope,
                 headline = R.string.process_runtime_memory_limit,
                 description = R.string.process_runtime_memory_limit_description,
                 neutralButtonLabel = stringResource(R.string.reset_to_recommended),
-                neutralValueProvider = { recommendedProcessLimit }
+                neutralValueProvider = { viewModel.prefs.patcherProcessMemoryLimit.default }
             )
             BooleanItem(
                 preference = viewModel.prefs.autoCollapsePatcherSteps,
