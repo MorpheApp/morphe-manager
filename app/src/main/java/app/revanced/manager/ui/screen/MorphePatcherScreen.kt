@@ -412,33 +412,10 @@ fun MorphePatcherScreen(
 
     // Add handling for memory adjustment dialog
     viewModel.memoryAdjustmentDialog?.let { state ->
-        val message = if (state.adjusted) {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_reduced,
-                state.previousLimit,
-                state.newLimit
-            )
-        } else {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_no_change,
-                state.previousLimit
-            )
-        }
-        AlertDialog(
-            onDismissRequest = viewModel::dismissMemoryAdjustmentDialog,
-            title = { Text(stringResource(R.string.patcher_memory_adjustment_title)) },
-            text = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = viewModel::retryAfterMemoryAdjustment) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_retry))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::dismissMemoryAdjustmentDialog) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_dismiss))
-                }
-            }
-        )
+        // This could be handled more gracefully, but for now don't show any warnings and
+        // try again with a lower heap size.
+        viewModel.dismissMemoryAdjustmentDialog()
+        viewModel.retryAfterMemoryAdjustment()
     }
 
     // Add handling for missing patch dialog

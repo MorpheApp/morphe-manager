@@ -23,7 +23,7 @@ class PreferencesManager(
 
     val useProcessRuntime = booleanPreference("use_process_runtime", true)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
-    val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 700)
+    val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 1800)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE
