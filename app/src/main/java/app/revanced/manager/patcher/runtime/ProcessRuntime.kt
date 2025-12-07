@@ -72,6 +72,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
     ) = coroutineScope {
         val minMemoryLimit = 200
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
+        var retried = false
 
         while (true) {
             try {
@@ -87,20 +88,28 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     onProgress
                 )
                 // Success - update preference and return.
-                if (prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    Log.i(tag, "Updating memory limit setting to $memoryMB")
+                if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
+                    if (memoryMB < 500) {
+                        // Don't save a value lower than the expected minimum.
+                        // Instead allow discovering the actually memory limit again next time.
+                        memoryMB = 500
+                    }
+                    Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
                 }
+                
+                return@coroutineScope
             } catch (e: Exception) {
                 val isMemoryFailure = when (e) {
-                    is ProcessExitException -> e.exitCode == OOM_EXIT_CODE || e.exitCode == 137
+                    is ProcessExitException -> e.exitCode == OOM_EXIT_CODE || e.exitCode == SIGKILL_EXIT_CODE
                     is RemoteFailureException -> e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
                     else -> false
                 }
 
                 if (isMemoryFailure && memoryMB > minMemoryLimit) {
+                    retried = true
                     memoryMB -= 100
-                    Log.i(tag, "Memory limit failed, retrying with $memoryMB")
+                    Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
                     continue
                 }
                 throw e
@@ -122,12 +131,10 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
 
-        val memoryLimitString = "${memoryLimit}M"
-        Log.i(tag, "Using $memoryLimitString process heap size")
-
         val propOverride = resolvePropOverride(context)?.absolutePath
             ?: throw Exception("Couldn't find prop override library")
 
+        val heapSizeString = "${memoryLimit}M"
         val env =
             System.getenv().toMutableMap().apply {
                 putAll(
@@ -135,8 +142,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                         "CLASSPATH" to managerBaseApk,
                         // Override the props used by ART to set the memory limit.
                         "LD_PRELOAD" to propOverride,
-                        "PROP_dalvik.vm.heapgrowthlimit" to memoryLimitString,
-                        "PROP_dalvik.vm.heapsize" to memoryLimitString,
+                        "PROP_dalvik.vm.heapsize" to heapSizeString,
+                        "PROP_dalvik.vm.heapgrowthlimit" to heapSizeString,
                     )
                 )
             }
@@ -220,6 +227,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
     companion object : LibraryResolver() {
         private const val APP_PROCESS_BIN_PATH = "/system/bin/app_process"
         const val OOM_EXIT_CODE = 134
+        const val SIGKILL_EXIT_CODE = 137
 
         const val CONNECT_TO_APP_ACTION = "CONNECT_TO_APP_ACTION"
         const val INTENT_BUNDLE_KEY = "BUNDLE"
