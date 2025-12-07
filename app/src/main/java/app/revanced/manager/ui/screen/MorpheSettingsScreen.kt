@@ -72,17 +72,7 @@ import org.koin.androidx.compose.koinViewModel
 import android.provider.Settings as AndroidSettings
 
 /**
- * Morphe Simplified Settings Screen
- *
- * A streamlined settings interface for the Morphe home screen that includes:
- * - Theme settings (Light/Dark/System + Pure Black)
- * - Downloader plugins management
- * - Patches bundle JSON URL configuration
- * - Installer settings
- * - Keystore import
- * - About dialog
- * - Share APK functionality
- * - Interface switcher to return to original UI
+ * Morphe Settings Screen
  */
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -91,7 +81,6 @@ fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
     highlightSection: String? = null,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
-    advancedViewModel: AdvancedSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel()
 ) {
@@ -115,23 +104,18 @@ fun MorpheSettingsScreen(
         }
     }
 
-    // General Settings - theme and appearance
+    // Appearance
     val theme by generalViewModel.prefs.theme.getAsState()
     val pureBlackTheme by generalViewModel.prefs.pureBlackTheme.getAsState()
 
-    // Advanced Settings - patches and installers
-    val patchesBundleJsonUrl by advancedViewModel.prefs.patchesBundleJsonUrl.getAsState()
-    val primaryInstaller by advancedViewModel.prefs.installerPrimary.getAsState()
-    val fallbackInstaller by advancedViewModel.prefs.installerFallback.getAsState()
-
-    // Downloads - plugin states
+    // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
 
     // Dialog states
-    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
     var showPluginDialog by rememberSaveable { mutableStateOf<String?>(null) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
+    var showRegenerateKeystoreDialog by rememberSaveable { mutableStateOf(false) }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -142,22 +126,24 @@ fun MorpheSettingsScreen(
         }
     }
 
+    // Keystore export launcher
+    val exportKeystoreLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("*/*")
+    ) { uri ->
+        uri?.let { importExportViewModel.exportKeystore(it) }
+    }
+
+    // Show regenerate confirm dialog
+    if (showRegenerateKeystoreDialog) {
+        RegenerateKeystoreDialog(
+            onDismiss = { showRegenerateKeystoreDialog = false },
+            onConfirm = { importExportViewModel.regenerateKeystore() }
+        )
+    }
+
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
         showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
-    }
-
-    // Show patches bundle JSON URL dialog
-    if (showPatchesBundleJsonUrlDialog) {
-        PatchesBundleJsonUrlDialog(
-            currentUrl = patchesBundleJsonUrl,
-            defaultUrl = advancedViewModel.prefs.patchesBundleJsonUrl.default,
-            onDismiss = { showPatchesBundleJsonUrlDialog = false },
-            onSave = { url ->
-                advancedViewModel.setPatchesBundleJsonUrl(url.trim())
-                showPatchesBundleJsonUrlDialog = false
-            }
-        )
     }
 
     // Show about dialog
@@ -218,7 +204,7 @@ fun MorpheSettingsScreen(
                 .verticalScroll(scrollState)
                 .padding(vertical = 8.dp)
         ) {
-            // Theme Section
+            // Appearance
             SectionHeader(
                 icon = Icons.Outlined.Palette,
                 title = stringResource(R.string.appearance)
@@ -355,7 +341,7 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Downloader Plugins Section
+            // Plugins
             Column(
                 modifier = Modifier.onGloballyPositioned { coordinates ->
                     pluginsSectionPosition = coordinates.positionInParent().y.toInt()
@@ -411,58 +397,14 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Patches & Installation Section
+            // Import & export
             SectionHeader(
                 icon = Icons.Outlined.Build,
-                title = stringResource(R.string.patches_and_manager)
+                title = stringResource(R.string.import_export)
             )
 
             SettingsCard {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    // Patches Bundle JSON URL
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { showPatchesBundleJsonUrlDialog = true },
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Outlined.Api,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.patches_bundle_json_url),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.patches_bundle_json_url_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Icon(
-                                Icons.Outlined.ChevronRight,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
                     // Keystore Import
                     Surface(
                         modifier = Modifier
@@ -493,6 +435,100 @@ fun MorpheSettingsScreen(
                                 )
                                 Text(
                                     text = stringResource(R.string.import_keystore_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Keystore Export
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                if (!importExportViewModel.canExport()) {
+                                    context.toast(context.getString(R.string.export_keystore_unavailable))
+                                } else {
+                                    exportKeystoreLauncher.launch("Manager.keystore")
+                                }
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Outlined.Upload,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.export_keystore),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.export_keystore_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Icon(
+                                Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Keystore Regenerate
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { showRegenerateKeystoreDialog = true },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Outlined.Refresh,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.regenerate_keystore),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.regenerate_keystore_description),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -646,15 +682,12 @@ fun MorpheSettingsScreen(
                     }
                 }
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 /**
- * Section header with icon and title
- * Used to visually separate different settings categories
+ * Section header with icon and title. Used to visually separate different settings categories
  */
 @Composable
 private fun SectionHeader(
@@ -693,8 +726,7 @@ private fun SectionHeader(
 }
 
 /**
- * Card wrapper for settings sections
- * Provides consistent styling across all settings groups
+ * Card wrapper for settings sections. Provides consistent styling across all settings groups
  */
 @Composable
 private fun SettingsCard(
@@ -716,8 +748,7 @@ private fun SettingsCard(
 }
 
 /**
- * Individual theme selection button
- * Displays icon and label with visual feedback for selected state
+ * Individual theme selection button. Displays icon and label with visual feedback for selected state
  */
 @Composable
 private fun ThemeOption(
@@ -778,8 +809,7 @@ private fun ThemeOption(
 }
 
 /**
- * Individual plugin list item
- * Shows plugin name, status icon, and allows clicking for management
+ * Individual plugin list item. Shows plugin name, status icon, and allows clicking for management
  */
 @Composable
 private fun PluginItem(
@@ -855,8 +885,7 @@ private fun PluginItem(
 }
 
 /**
- * Plugin management dialog
- * Beautiful dialog for managing plugins with signature display
+ * Plugin management dialog for managing plugins with signature display
  */
 @Composable
 private fun PluginActionDialog(
@@ -1057,7 +1086,7 @@ private fun PluginActionDialog(
 }
 
 /**
- * About dialog. Shows app icon, version, description, and GitHub links
+ * About dialog. Shows app icon, version, description, and links
  */
 @Composable
 private fun AboutDialog(onDismiss: () -> Unit) {
@@ -1218,152 +1247,6 @@ private fun GitHubButton(
 }
 
 /**
- * Dialog for editing patches bundle JSON URL
- * Validates URL format and allows reset to default
- */
-@Composable
-private fun PatchesBundleJsonUrlDialog(
-    currentUrl: String,
-    defaultUrl: String,
-    onDismiss: () -> Unit,
-    onSave: (url: String) -> Unit
-) {
-    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
-    var showError by rememberSaveable { mutableStateOf(false) }
-
-    Dialog(onDismissRequest = onDismiss) {
-        Surface(
-            shape = RoundedCornerShape(24.dp),
-            color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Icon
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            Icons.Outlined.Api,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                // Title
-                Text(
-                    text = stringResource(R.string.patches_bundle_json_url_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-
-                // Description
-                Text(
-                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-
-                // URL Input
-                OutlinedTextField(
-                    value = url,
-                    onValueChange = {
-                        url = it
-                        if (showError) showError = false
-                    },
-                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
-                    supportingText = {
-                        if (showError) {
-                            Text(
-                                stringResource(R.string.patches_bundle_json_url_error),
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        } else {
-                            Text("e.g. https://.../bundle.json")
-                        }
-                    },
-                    isError = showError,
-                    singleLine = false,
-                    maxLines = 6,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                // Reset button
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
-                    TextButton(
-                        onClick = {
-                            url = defaultUrl
-                            showError = false
-                        }
-                    ) {
-                        Icon(
-                            Icons.Outlined.Restore,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(stringResource(R.string.patches_bundle_json_dialog_reset))
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Buttons
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Save button
-                    FilledTonalButton(
-                        onClick = {
-                            val trimmedUrl = url.trim()
-                            if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
-                                showError = true
-                            } else {
-                                onSave(trimmedUrl)
-                            }
-                        },
-                        enabled = url.trim().isNotBlank(),
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(
-                            stringResource(R.string.patches_bundle_json_dialog_save),
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
-                    // Cancel button
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(
-                            stringResource(R.string.cancel),
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
  * Keystore Credentials Dialog. Allows entering alias and password for keystore import
  */
 @Composable
@@ -1469,3 +1352,92 @@ private fun KeystoreCredentialsDialog(
         }
     }
 }
+
+/**
+ * Keystore regeneration confirmation dialog
+ */
+@Composable
+private fun RegenerateKeystoreDialog(
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.WarningAmber,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.regenerate_keystore),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description
+                Text(
+                    text = stringResource(R.string.regenerate_keystore_dialog_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Regenerate button
+                    FilledTonalButton(
+                        onClick = {
+                            onConfirm()
+                            onDismiss()
+                        },
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer,
+                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                        ),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.confirm))
+                    }
+
+                    // Cancel button
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
