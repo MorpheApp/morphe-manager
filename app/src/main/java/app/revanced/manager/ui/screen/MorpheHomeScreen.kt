@@ -1172,7 +1172,7 @@ private fun MainContent(
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .padding(horizontal = 32.dp, vertical = 32.dp)
-                .padding(bottom = 80.dp),
+                .padding(bottom = 100.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -1193,8 +1193,7 @@ private fun MainContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp)
-                    .padding(horizontal = 16.dp),
+                    .height(120.dp),
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(
@@ -1209,8 +1208,7 @@ private fun MainContent(
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
