@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
 import app.revanced.manager.util.openUrl
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -43,8 +42,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutSettingsScreen(
-    onBackClick: () -> Unit,
-    navigate: (Settings.Destination) -> Unit,
+    onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
     // painterResource() is broken on release builds for some reason.

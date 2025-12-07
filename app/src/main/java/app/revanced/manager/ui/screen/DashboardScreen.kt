@@ -27,6 +27,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Close
@@ -613,7 +614,7 @@ private fun BundleActionsFabRow(
                 Row(horizontalArrangement = Arrangement.spacedBy(spacing)) {
                     if (showSortButton) {
                         HapticFloatingActionButton(onClick = onSortClick) {
-                            Icon(Icons.Outlined.Sort, stringResource(R.string.bundle_reorder))
+                            Icon(Icons.AutoMirrored.Outlined.Sort, stringResource(R.string.bundle_reorder))
                         }
                     }
                     HapticFloatingActionButton(onClick = onAddClick) {
