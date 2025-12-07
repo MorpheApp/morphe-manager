@@ -89,10 +89,10 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                 )
                 // Success - update preference and return.
                 if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    if (memoryMB < 500) {
+                    if (memoryMB < 700) {
                         // Don't save a value lower than the expected minimum.
                         // Instead allow discovering the actually memory limit again next time.
-                        memoryMB = 500
+                        memoryMB = 700
                     }
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
