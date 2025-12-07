@@ -39,12 +39,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.InputStream
@@ -674,7 +676,20 @@ class PatchBundleRepository(
                     .filterNotNull()
                     .toMap()
             } finally {
-                bundleUpdateProgressFlow.value = null
+                // Ensure collectors see final "completed == total" state so UI can schedule auto-dismiss.
+                val totalCount = targets.size
+                // Emit final progress (mark as fully completed) so UI can react to completion.
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = totalCount,
+                    completed = totalCount
+                )
+
+                // Clear the progress shortly after so flows don't permanently hold onto the final value.
+                // Do this asynchronously so we do not block the current action; UI already scheduled dismiss.
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(400) // Small delay to ensure collectors receive the "completed" value
+                    bundleUpdateProgressFlow.value = null
+                }
             }
             if (updated.isEmpty()) {
                 if (showToast) toast(R.string.patches_update_unavailable)

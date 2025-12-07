@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -57,6 +58,7 @@ import app.revanced.manager.ui.screen.settings.update.ChangelogsSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
@@ -123,6 +125,9 @@ private fun ReVancedManager(vm: MainViewModel) {
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         composable<MorpheHomeScreen> {
+            val dashboardViewModel = koinViewModel<DashboardViewModel>()
+            val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+
             MorpheHomeScreen(
                 onMorpheSettingsClick = { highlightSection ->
                     navController.navigate(MorpheSettings(highlightSection = highlightSection))
@@ -140,7 +145,9 @@ private fun ReVancedManager(vm: MainViewModel) {
                             options = params.options
                         )
                     )
-                }
+                },
+                dashboardViewModel = dashboardViewModel,
+                bundleUpdateProgress = bundleUpdateProgress
             )
         }
 
