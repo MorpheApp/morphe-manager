@@ -166,6 +166,7 @@ fun PatcherScreen(
         InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
     }
 
+    // TODO: This code is dead and can be removed. Patching now automatically reduces max memory if needed.
     viewModel.memoryAdjustmentDialog?.let { state ->
         val message = if (state.adjusted) {
             stringResource(

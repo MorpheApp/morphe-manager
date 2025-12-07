@@ -70,12 +70,60 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
     ) = coroutineScope {
+        val minMemoryLimit = 200
+        var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
+
+        while (true) {
+            try {
+                executeWithMemory(
+                    memoryMB,
+                    inputFile,
+                    outputFile,
+                    packageName,
+                    selectedPatches,
+                    options,
+                    logger,
+                    onPatchCompleted,
+                    onProgress
+                )
+                // Success - update preference and return.
+                if (prefs.patcherProcessMemoryLimit.get() != memoryMB) {
+                    Log.i(tag, "Updating memory limit setting to $memoryMB")
+                    prefs.patcherProcessMemoryLimit.update(memoryMB)
+                }
+            } catch (e: Exception) {
+                val isMemoryFailure = when (e) {
+                    is ProcessExitException -> e.exitCode == OOM_EXIT_CODE || e.exitCode == 137
+                    is RemoteFailureException -> e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
+                    else -> false
+                }
+
+                if (isMemoryFailure && memoryMB > minMemoryLimit) {
+                    memoryMB -= 100
+                    Log.i(tag, "Memory limit failed, retrying with $memoryMB")
+                    continue
+                }
+                throw e
+            }
+        }
+    }
+
+    private suspend fun executeWithMemory(
+        memoryLimit: Int,
+        inputFile: String,
+        outputFile: String,
+        packageName: String,
+        selectedPatches: PatchSelection,
+        options: Options,
+        logger: Logger,
+        onPatchCompleted: suspend () -> Unit,
+        onProgress: ProgressEventHandler,
+    ) = coroutineScope {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
 
-        val limit = max(200, prefs.patcherProcessMemoryLimit.get())
-        val limitString = "${limit}M"
-        Log.i(tag, "Using $limitString process heap size")
+        val memoryLimitString = "${memoryLimit}M"
+        Log.i(tag, "Using $memoryLimitString process heap size")
 
         val propOverride = resolvePropOverride(context)?.absolutePath
             ?: throw Exception("Couldn't find prop override library")
@@ -87,8 +135,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                         "CLASSPATH" to managerBaseApk,
                         // Override the props used by ART to set the memory limit.
                         "LD_PRELOAD" to propOverride,
-                        "PROP_dalvik.vm.heapgrowthlimit" to limitString,
-                        "PROP_dalvik.vm.heapsize" to limitString,
+                        "PROP_dalvik.vm.heapgrowthlimit" to memoryLimitString,
+                        "PROP_dalvik.vm.heapsize" to memoryLimitString,
                     )
                 )
             }
