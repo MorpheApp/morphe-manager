@@ -1,5 +1,4 @@
 name: Test build
-
 on:
   workflow_dispatch:
   pull_request:
@@ -9,38 +8,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore signing keystore
+      - name: Restore release keystore
         run: |
-          echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > key.keystore
+          echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
+          ls -la app/keystore.jks
 
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+          cache: gradle
 
-      - name: Gradle cache
-        uses: burrunan/gradle-cache-action@v1
-
-      - name: Build & Sign Release APK
+      - name: Build and Sign Release APK
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
+          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease \
-            -Psigning.storeFile=${{ github.workspace }}/key.keystore \
-            -Psigning.storePassword="${{ secrets.KEYSTORE_PASSWORD }}" \
-            -Psigning.keyAlias="${{ secrets.KEYSTORE_ENTRY_ALIAS }}" \
-            -Psigning.keyPassword="${{ secrets.KEYSTORE_ENTRY_PASSWORD }}" \
-            --no-daemon --stacktrace
+          ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Morphe
-          path: |
-            app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/*.apk

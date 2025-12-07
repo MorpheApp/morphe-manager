@@ -7,10 +7,10 @@ import android.content.IntentFilter
 import android.util.Log
 import androidx.core.content.ContextCompat
 import app.morphe.manager.BuildConfig
-import app.revanced.manager.patcher.runtime.process.IPatcherEvents
-import app.revanced.manager.patcher.runtime.process.IPatcherProcess
 import app.revanced.manager.patcher.LibraryResolver
 import app.revanced.manager.patcher.logger.Logger
+import app.revanced.manager.patcher.runtime.process.IPatcherEvents
+import app.revanced.manager.patcher.runtime.process.IPatcherProcess
 import app.revanced.manager.patcher.runtime.process.Parameters
 import app.revanced.manager.patcher.runtime.process.PatchConfiguration
 import app.revanced.manager.patcher.runtime.process.PatcherProcess
@@ -28,6 +28,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 import org.koin.core.component.inject
+import kotlin.math.max
 
 /**
  * Runs the patcher in another process by using the app_process binary and IPC.
@@ -72,12 +73,10 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
 
-        val requestedLimit = prefs.patcherProcessMemoryLimit.get()
-        val sanitizedLimit = MemoryLimitConfig.clampLimitMb(context, requestedLimit)
-        if (sanitizedLimit != requestedLimit) {
-            Log.w(tag, "Requested process memory limit ${requestedLimit}MB exceeded device capabilities; clamped to ${sanitizedLimit}MB")
-        }
-        val limit = "${sanitizedLimit}M"
+        val limit = max(200, prefs.patcherProcessMemoryLimit.get())
+        val limitString = "${limit}M"
+        Log.i(tag, "Using $limitString process heap size")
+
         val propOverride = resolvePropOverride(context)?.absolutePath
             ?: throw Exception("Couldn't find prop override library")
 
@@ -88,8 +87,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                         "CLASSPATH" to managerBaseApk,
                         // Override the props used by ART to set the memory limit.
                         "LD_PRELOAD" to propOverride,
-                        "PROP_dalvik.vm.heapgrowthlimit" to limit,
-                        "PROP_dalvik.vm.heapsize" to limit,
+                        "PROP_dalvik.vm.heapgrowthlimit" to limitString,
+                        "PROP_dalvik.vm.heapsize" to limitString,
                     )
                 )
             }

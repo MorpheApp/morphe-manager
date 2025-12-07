@@ -41,8 +41,8 @@
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_install_dialog_message">Install patched app?</string>
-    <string name="morphe_patcher_install_conflict_message">A package conflict has been detected. To install the new version, you must first uninstall the previous version of the app</string>
-    <string name="morphe_patcher_install_ready_message">The previous version has been uninstalled. You can now install the patched app</string>
+    <string name="morphe_patcher_install_conflict_message">A package conflict has been detected. To install the new version, you must first uninstall the previous version of the app.</string>
+    <string name="morphe_patcher_install_ready_message">The previous version has been uninstalled. You can now install the patched app.</string>
     <string name="morphe_patcher_install_cancelled_title">Installation canceled</string>
     <string name="morphe_patcher_install_cancelled_subtitle">Click the install button to try again</string>
     <string name="morphe_patcher_installing">Installing…</string>
@@ -70,7 +70,7 @@
     <string name="morphe_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
 
-    <!-- Patches Repository Settings -->
+    <!-- Morphe Settings Screen -->
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
@@ -80,14 +80,13 @@
     <string name="patches_bundle_json_url_invalid">Invalid URL format</string>
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
-
     <string name="morphe_settings_switch_to_original">Return to Original Interface</string>
     <string name="morphe_settings_switch_to_original_description">Switch back to the full-featured advanced interface</string>
-
-    <!-- About screen -->
     <string name="morphe_about_patches_github">Morphe Patches GitHub</string>
     <string name="morphe_about_manager_github">Morphe Manager GitHub</string>
     <string name="morphe_about_patcher_github">Morphe Patcher GitHub</string>
+    <string name="morphe_share_apk_title">Share APK</string>
+    <string name="morphe_share_apk_description">Share this app with others</string>
 
     <!-- Other strings -->
     <string name="app_name">Morphe</string>
@@ -99,8 +98,8 @@
     <string name="cli">CLI</string>
     <string name="manager">Manager</string>
 
-    <string name="plugin_host_permission_label">Universal ReVanced Manager plugin host</string>
-    <string name="plugin_host_permission_description">Used to control access to Universal ReVanced Manager plugins. Only Universal ReVanced Manager has this.</string>
+    <string name="plugin_host_permission_label">Morphe Manager plugin host</string>
+    <string name="plugin_host_permission_description">Used to control access to Morphe Manager plugins. Only Morphe Manager has this.</string>
 
     <string name="toast_copied_to_clipboard">Copied!</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
@@ -206,9 +205,9 @@
     <string name="legacy_import_failed">Could not import legacy settings</string>
 
     <string name="auto_updates_dialog_title">Configure updates</string>
-    <string name="auto_updates_dialog_description">Do you want Universal ReVanced Manager to periodically check for updates for the following components?</string>
-    <string name="auto_updates_dialog_manager">Universal ReVanced Manager</string>
-    <string name="auto_updates_dialog_patches">ReVanced Patches</string>
+    <string name="auto_updates_dialog_description">Do you want Morphe Manager to periodically check for updates for the following components?</string>
+    <string name="auto_updates_dialog_manager">Morphe Manager</string>
+    <string name="auto_updates_dialog_patches">Morphe Patches</string>
     <string name="auto_updates_dialog_note">These settings can be changed later.</string>
 
     <string name="general">General</string>
@@ -532,8 +531,8 @@ Recommended for this device: %1$d MB.</string>
     <string name="api_url">API URL</string>
     <string name="api_url_description">The API used to download necessary files</string>
     <string name="api_url_dialog_title">Change API URL</string>
-    <string name="api_url_dialog_description">Change the API URL of Universal ReVanced Manager. Universal ReVanced Manager uses the API to download patches and updates.</string>
-    <string name="api_url_dialog_warning">Universal ReVanced Manager connects to the API to download patches and updates. Make sure that you trust it.</string>
+    <string name="api_url_dialog_description">Change the API URL of Morphe Manager. Morphe Manager uses the API to download patches and updates.</string>
+    <string name="api_url_dialog_warning">Morphe Manager connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
     <string name="device">Device</string>
@@ -709,7 +708,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again.</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Universal ReVanced Manager from the Shizuku app.</string>
+    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe Manager from the Shizuku app.</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported.</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_shizuku_launch_failed">Unable to open Shizuku. Launch it manually and try again.</string>
@@ -823,9 +822,6 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="permanent_dismiss">Do not show this again</string>
     <string name="donate">Donate</string>
     <string name="website">Website</string>
-    <string name="github">Universal ReVanced Manager GitHub</string>
-    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>
-    <string name="patch_bundle_urls">Get patch bundle imports</string>
     <string name="contact">Contact</string>
     <string name="version">Version</string>
     <string name="submit_feedback">Submit issue or feedback</string>
@@ -840,9 +836,8 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="patches_delete_single_dialog_description">Are you sure you want to delete \"%s\"?</string>
     <string name="patches_delete_multiple_dialog_description">Are you sure you want to delete the selected patch bundles?</string>
 
-    <string name="about_revanced_manager">About Universal ReVanced Manager</string>
-    <string name="revanced_manager_description">The Universal ReVanced Manager (URV Manager) is a fork of the Official ReVanced Manager. Both applications use the ReVanced Patcher which allows you to download and patch apps with custom patches and manage the patching process. The unique features included in the Universal ReVanced Manager are patch bundle display names, support for importing any third party patch bundles, and much more. See a full list of unique features the Universal ReVanced Manager has to offer</string>
-    <string name="unique_features_label">here.</string>
+    <string name="about_revanced_manager">About Morphe</string>
+    <string name="revanced_manager_description">Morphe is an experimental open-source project focused on creating a modern, streamlined patching manager for Android apps. It offers a simplified interface with quick patching for YouTube and YouTube Music. Community feedback and contributions are encouraged to shape its future development.</string>
     <string name="developer_options_enabled">Developer options enabled</string>
     <string name="developer_options_taps">%d taps remaining</string>
     <string name="developer_options_already_enabled">Developer options are already enabled</string>
@@ -858,11 +853,11 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="update_on_metered_connections">Update on metered connections</string>
     <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>
     <string name="update_checking_manager">Check for updates on launch</string>
-    <string name="update_checking_manager_description">Check for new versions of Universal ReVanced Manager when the application starts</string>
+    <string name="update_checking_manager_description">Check for new versions of Morphe Manager when the application starts</string>
     <string name="manager_prereleases">Use pre-releases</string>
-    <string name="manager_prereleases_description">Use pre-release versions of Universal ReVanced Manager</string>
+    <string name="manager_prereleases_description">Use pre-release versions of Morphe Manager</string>
     <string name="update_published">Published %s</string>
-    <string name="battery_optimization_notification">Battery optimizations must be turned off in order for Universal ReVanced Manager to work correctly in the background. Click here to turn off optimizations.</string>
+    <string name="battery_optimization_notification">Battery optimizations must be turned off in order for Morphe Manager to work correctly in the background. Click here to turn off optimizations.</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
     <string name="manager_update_banner_title">Downloading manager update</string>
@@ -873,7 +868,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
-    <string name="installing_message">Tap on <b>Update</b> when prompted.\nUniversal ReVanced Manager will close when updating.</string>
+    <string name="installing_message">Tap on <b>Update</b> when prompted.\nMorphe Manager will close when updating.</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
@@ -888,7 +883,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="no_update_available">No update available</string>
     <string name="update_check">Checking for updates…</string>
     <string name="dismiss_temporary">Not now</string>
-    <string name="update_available_dialog_description">A new version of Universal ReVanced Manager (%s) is available.</string>
+    <string name="update_available_dialog_description">A new version of Morphe Manager (%s) is available.</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>
     <string name="download">Download</string>
     <string name="resume_download">Resume download</string>

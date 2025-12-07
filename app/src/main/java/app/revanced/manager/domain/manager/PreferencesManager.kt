@@ -3,10 +3,8 @@ package app.revanced.manager.domain.manager
 import android.content.ComponentName
 import android.content.Context
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
-import app.revanced.manager.domain.manager.base.EditorContext
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
-import app.revanced.manager.util.isDebuggable
 import kotlinx.serialization.Serializable
 
 class PreferencesManager(
@@ -23,9 +21,9 @@ class PreferencesManager(
         "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
     )
 
-    val useProcessRuntime = booleanPreference("use_process_runtime", false)
+    val useProcessRuntime = booleanPreference("use_process_runtime", true)
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
-    val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 700)
+    val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 1800)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE
@@ -33,7 +31,7 @@ class PreferencesManager(
     val officialBundleRemoved = booleanPreference("official_bundle_removed", false)
     val autoCollapsePatcherSteps = booleanPreference("auto_collapse_patcher_steps", false)
 
-    val allowMeteredUpdates = booleanPreference("allow_metered_updates", false)
+    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
     val installerFallback = stringPreference("installer_fallback", InstallerPreferenceTokens.NONE)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())

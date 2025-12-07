@@ -412,33 +412,10 @@ fun MorphePatcherScreen(
 
     // Add handling for memory adjustment dialog
     viewModel.memoryAdjustmentDialog?.let { state ->
-        val message = if (state.adjusted) {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_reduced,
-                state.previousLimit,
-                state.newLimit
-            )
-        } else {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_no_change,
-                state.previousLimit
-            )
-        }
-        AlertDialog(
-            onDismissRequest = viewModel::dismissMemoryAdjustmentDialog,
-            title = { Text(stringResource(R.string.patcher_memory_adjustment_title)) },
-            text = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = viewModel::retryAfterMemoryAdjustment) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_retry))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::dismissMemoryAdjustmentDialog) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_dismiss))
-                }
-            }
-        )
+        // This could be handled more gracefully, but for now don't show any warnings and
+        // try again with a lower heap size.
+        viewModel.dismissMemoryAdjustmentDialog()
+        viewModel.retryAfterMemoryAdjustment()
     }
 
     // Add handling for missing patch dialog
@@ -541,7 +518,8 @@ fun MorphePatcherScreen(
                         PatchingInProgress(
                             progress = animatedProgress,
                             patchesProgress = patchesProgress,
-                            downloadProgress = viewModel.downloadProgress
+                            downloadProgress = viewModel.downloadProgress,
+                            viewModel = viewModel
                         )
                     }
                     patcherSucceeded == true -> {
@@ -681,7 +659,8 @@ private enum class InstallDialogState {
 private fun PatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
-    downloadProgress: Pair<Long, Long?>? = null
+    downloadProgress: Pair<Long, Long?>? = null,
+    viewModel: PatcherViewModel
 ) {
     val (completed, total) = patchesProgress
 
@@ -745,7 +724,8 @@ private fun PatchingInProgress(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp),
+                .height(120.dp)
+                .padding(horizontal = 16.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             AnimatedContent(
@@ -818,11 +798,11 @@ private fun PatchingInProgress(
 
         Spacer(Modifier.height(32.dp))
 
-        // Fixed space for download progress bar to prevent layout shifts
+        // Fixed space for download progress bar and current step to prevent layout shifts
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(80.dp),
+                .height(120.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -836,7 +816,7 @@ private fun PatchingInProgress(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 32.dp, vertical = 16.dp),
+                            .padding(horizontal = 32.dp, vertical = 8.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
@@ -866,6 +846,11 @@ private fun PatchingInProgress(
                     }
                 }
             }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Current step indicator
+            CurrentStepIndicator(viewModel = viewModel)
         }
     }
 }
@@ -1038,3 +1023,33 @@ private fun PatchingFailed() {
         )
     }
 }
+
+@Composable
+private fun CurrentStepIndicator(viewModel: PatcherViewModel) {
+    // Get current running step
+    val currentStep by remember {
+        derivedStateOf {
+            viewModel.steps.firstOrNull { it.state == app.revanced.manager.ui.model.State.RUNNING }
+        }
+    }
+
+    AnimatedContent(
+        targetState = currentStep?.name,
+        transitionSpec = {
+            fadeIn(animationSpec = tween(400)) togetherWith
+                    fadeOut(animationSpec = tween(400))
+        },
+        label = "step_animation"
+    ) { stepName ->
+        if (stepName != null) {
+            Text(
+                text = stepName,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 32.dp)
+            )
+        }
+    }
+}
+

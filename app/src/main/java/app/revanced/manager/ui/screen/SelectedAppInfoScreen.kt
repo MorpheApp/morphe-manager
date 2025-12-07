@@ -33,6 +33,8 @@ import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.UnfoldLess
+import androidx.compose.material.icons.outlined.UnfoldMore
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -71,6 +73,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
 import app.revanced.manager.data.room.apps.installed.InstallType
@@ -92,8 +95,9 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.consumeHorizontalScroll
+import app.revanced.manager.util.enabled
 import app.revanced.manager.util.toast
-import app.morphe.manager.R
+import app.revanced.manager.util.transparentListItemColors
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -126,6 +130,7 @@ fun SelectedAppInfoScreen(
     val bundleRecommendationsEnabled = allowIncompatiblePatches && !suggestedVersionSafeguard
     val patches = vm.getPatches(bundles, allowIncompatiblePatches)
     val selectedPatchCount = patches.values.sumOf { it.size }
+    val useMorpheUI by vm.prefs.useMorpheHomeScreen.getAsState()
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
@@ -210,28 +215,47 @@ fun SelectedAppInfoScreen(
                 if (bundleTargetsAllVersions && selectedBundleUid != null) null
                 else preferredBundleVersion ?: vm.desiredVersion
 
-            AppSourceSelectorDialog(
-                plugins = plugins,
-                installedApp = vm.installedAppData,
-                searchApp = SelectedApp.Search(
-                    vm.packageName,
-                    effectiveVersion
-                ),
-                activeSearchJob = vm.activePluginAction,
-                hasRoot = vm.hasRoot,
-                downloadedApps = downloadedApps,
-                includeAutoOption = !vm.sourceSelectionRequired,
-                includeInstalledOption = !vm.sourceSelectionRequired,
-                requiredVersion = requiredVersion,
-                onDismissRequest = vm::dismissSourceSelector,
-                onSelectPlugin = vm::searchUsingPlugin,
-                onSelectDownloaded = vm::selectDownloadedApp,
-                onSelectLocal = vm::requestLocalSelection,
-                onSelect = {
-                    vm.selectedApp = it
-                    vm.dismissSourceSelector()
-                }
-            )
+            if (useMorpheUI) {
+                MorpheAppSourceSelectorDialog(
+                    plugins = plugins,
+                    installedApp = vm.installedAppData,
+                    searchApp = SelectedApp.Search(vm.packageName, effectiveVersion),
+                    activeSearchJob = vm.activePluginAction,
+                    hasRoot = vm.hasRoot,
+                    downloadedApps = downloadedApps,
+                    includeAutoOption = !vm.sourceSelectionRequired,
+                    includeInstalledOption = !vm.sourceSelectionRequired,
+                    requiredVersion = requiredVersion,
+                    onDismissRequest = vm::dismissSourceSelector,
+                    onSelectPlugin = vm::searchUsingPlugin,
+                    onSelectDownloaded = vm::selectDownloadedApp,
+                    onSelectLocal = vm::requestLocalSelection,
+                    onSelect = {
+                        vm.selectedApp = it
+                        vm.dismissSourceSelector()
+                    }
+                )
+            } else {
+                AppSourceSelectorDialog(
+                    plugins = plugins,
+                    installedApp = vm.installedAppData,
+                    searchApp = SelectedApp.Search(vm.packageName, effectiveVersion),
+                    activeSearchJob = vm.activePluginAction,
+                    hasRoot = vm.hasRoot,
+                    downloadedApps = downloadedApps,
+                    includeAutoOption = !vm.sourceSelectionRequired,
+                    includeInstalledOption = !vm.sourceSelectionRequired,
+                    requiredVersion = requiredVersion,
+                    onDismissRequest = vm::dismissSourceSelector,
+                    onSelectPlugin = vm::searchUsingPlugin,
+                    onSelectDownloaded = vm::selectDownloadedApp,
+                    onSelectLocal = vm::requestLocalSelection,
+                    onSelect = {
+                        vm.selectedApp = it
+                        vm.dismissSourceSelector()
+                    }
+                )
+            }
         }
 
         ColumnWithScrollbar(
@@ -255,24 +279,19 @@ fun SelectedAppInfoScreen(
 
             PageItem(
                 R.string.patch_selector_item,
-                stringResource(
-                    R.string.patch_selector_item_description,
-                    selectedPatchCount
-                ),
+                stringResource(R.string.patch_selector_item_description, selectedPatchCount),
                 onClick = {
                     composableScope.launch {
                         val optionsSnapshot = vm.awaitOptions()
                         onPatchSelectorClick(
                             vm.selectedApp,
-                            vm.getCustomPatches(
-                                bundles,
-                                allowIncompatiblePatches
-                            ),
+                            vm.getCustomPatches(bundles, allowIncompatiblePatches),
                             optionsSnapshot
                         )
                     }
                 }
             )
+
             if (bundleRecommendationDetails.isNotEmpty()) {
                 val selectedDetail = bundleRecommendationDetails.firstOrNull { it.bundleUid == selectedBundleUid }
                 val overrideVersion = selectedBundleOverride
@@ -306,6 +325,7 @@ fun SelectedAppInfoScreen(
                     onClick = { showBundleRecommendationDialog = true }
                 )
             }
+
             PageItem(
                 R.string.apk_source_selector_item,
                 when (val app = vm.selectedApp) {
@@ -323,10 +343,9 @@ fun SelectedAppInfoScreen(
                         else
                             stringResource(R.string.apk_source_downloaded)
                 },
-                onClick = {
-                    vm.showSourceSelector()
-                }
+                onClick = { vm.showSourceSelector() }
             )
+
             error?.let {
                 Text(
                     stringResource(it.resourceId),
@@ -339,8 +358,9 @@ fun SelectedAppInfoScreen(
                 modifier = Modifier.padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                val needsInternet =
-                    vm.selectedApp.let { it is SelectedApp.Search || it is SelectedApp.Download }
+                val needsInternet = vm.selectedApp.let {
+                    it is SelectedApp.Search || it is SelectedApp.Download
+                }
 
                 when {
                     !needsInternet -> {}
@@ -785,8 +805,151 @@ private fun AppSourceSelectorDialog(
     onSelect: (SelectedApp) -> Unit,
 ) {
     val canSelect = activeSearchJob == null
+    var showDownloadedApps by remember { mutableStateOf(false) }
 
-    // Safe string resources inside composable context.
+    AlertDialogExtended(
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.cancel))
+            }
+        },
+        title = { Text(stringResource(R.string.app_source_dialog_title)) },
+        textHorizontalPadding = PaddingValues(horizontal = 0.dp),
+        text = {
+            LazyColumn {
+                if (downloadedApps.isNotEmpty()) {
+                    item(key = "downloaded_header") {
+                        val icon = if (showDownloadedApps) Icons.Outlined.UnfoldLess
+                        else Icons.Outlined.UnfoldMore
+                        ListItem(
+                            modifier = Modifier
+                                .clickable { showDownloadedApps = !showDownloadedApps }
+                                .enabled(downloadedApps.isNotEmpty()),
+                            headlineContent = { Text(stringResource(R.string.downloaded_apps)) },
+                            trailingContent = { Icon(icon, null) },
+                            colors = transparentListItemColors
+                        )
+                    }
+                    if (showDownloadedApps) {
+                        items(
+                            items = downloadedApps,
+                            key = { "downloaded_${it.packageName}_${it.version}" }
+                        ) { downloadedApp ->
+                            ListItem(
+                                modifier = Modifier
+                                    .clickable(enabled = canSelect) {
+                                        onSelectDownloaded(downloadedApp)
+                                    }
+                                    .padding(start = 16.dp),
+                                headlineContent = { Text(downloadedApp.version) },
+                                supportingContent = { Text(downloadedApp.packageName) },
+                                colors = transparentListItemColors
+                            )
+                        }
+                    }
+                }
+
+                if (includeAutoOption) {
+                    item(key = "auto") {
+                        val hasPlugins = plugins.isNotEmpty()
+                        ListItem(
+                            modifier = Modifier
+                                .clickable(enabled = canSelect && hasPlugins) {
+                                    onSelect(searchApp)
+                                }
+                                .enabled(hasPlugins),
+                            headlineContent = {
+                                Text(stringResource(R.string.app_source_dialog_option_auto))
+                            },
+                            supportingContent = {
+                                Text(
+                                    if (hasPlugins)
+                                        stringResource(R.string.app_source_dialog_option_auto_description)
+                                    else
+                                        stringResource(R.string.app_source_dialog_option_auto_unavailable)
+                                )
+                            },
+                            colors = transparentListItemColors
+                        )
+                    }
+                }
+
+                if (includeInstalledOption) installedApp?.let { (app, meta) ->
+                    item(key = "installed") {
+                        val (usable, text) = when {
+                            meta?.installType == InstallType.MOUNT && !hasRoot ->
+                                false to stringResource(R.string.app_source_dialog_option_installed_no_root)
+                            meta?.installType == InstallType.DEFAULT ->
+                                false to stringResource(R.string.already_patched)
+                            requiredVersion != null && app.version != requiredVersion ->
+                                false to stringResource(
+                                    R.string.app_source_dialog_option_installed_version_not_suggested,
+                                    app.version
+                                )
+                            else -> true to app.version
+                        }
+                        ListItem(
+                            modifier = Modifier
+                                .clickable(enabled = canSelect && usable) { onSelect(app) }
+                                .enabled(usable),
+                            headlineContent = { Text(stringResource(R.string.installed)) },
+                            supportingContent = { Text(text) },
+                            colors = transparentListItemColors
+                        )
+                    }
+                }
+
+                onSelectLocal?.let { selectLocal ->
+                    item(key = "storage") {
+                        ListItem(
+                            modifier = Modifier.clickable(enabled = canSelect) { selectLocal() },
+                            headlineContent = {
+                                Text(stringResource(R.string.app_source_dialog_option_storage))
+                            },
+                            supportingContent = {
+                                Text(stringResource(R.string.app_source_dialog_option_storage_description))
+                            },
+                            colors = transparentListItemColors
+                        )
+                    }
+                }
+
+                items(plugins, key = { "plugin_${it.packageName}" }) { plugin ->
+                    ListItem(
+                        modifier = Modifier.clickable(enabled = canSelect) {
+                            onSelectPlugin(plugin)
+                        },
+                        headlineContent = { Text(plugin.name) },
+                        trailingContent = (@Composable {
+                            LoadingIndicator()
+                        }).takeIf { activeSearchJob == plugin.packageName },
+                        colors = transparentListItemColors
+                    )
+                }
+            }
+        }
+    )
+}
+
+@Composable
+private fun MorpheAppSourceSelectorDialog(
+    plugins: List<LoadedDownloaderPlugin>,
+    installedApp: Pair<SelectedApp.Installed, InstalledApp?>?,
+    searchApp: SelectedApp.Search,
+    activeSearchJob: String?,
+    hasRoot: Boolean,
+    downloadedApps: List<DownloadedApp>,
+    includeAutoOption: Boolean = true,
+    includeInstalledOption: Boolean = true,
+    requiredVersion: String?,
+    onDismissRequest: () -> Unit,
+    onSelectPlugin: (LoadedDownloaderPlugin) -> Unit,
+    onSelectDownloaded: (DownloadedApp) -> Unit,
+    onSelectLocal: (() -> Unit)?,
+    onSelect: (SelectedApp) -> Unit,
+) {
+    val canSelect = activeSearchJob == null
     val noRootMessage = stringResource(R.string.app_source_dialog_option_installed_no_root)
     val alreadyPatchedMessage = stringResource(R.string.already_patched)
     val versionNotSuggestedFormat = stringResource(R.string.app_source_dialog_option_installed_version_not_suggested)
@@ -806,18 +969,23 @@ private fun AppSourceSelectorDialog(
             )
         },
         text = {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                // Downloaded apps.
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                // Downloaded apps
                 if (downloadedApps.isNotEmpty()) {
-                    item { SectionHeader(title = stringResource(R.string.downloaded_apps)) }
+                    item {
+                        SectionHeader(title = stringResource(R.string.downloaded_apps))
+                    }
                     items(downloadedApps) { app ->
                         SourceOptionButton(
                             text = app.version,
                             subtitle = app.packageName,
                             icon = {
-                                Icon(Icons.Outlined.Source, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                                Icon(
+                                    Icons.Outlined.Source,
+                                    null,
+                                    tint = Color.White,
+                                    modifier = Modifier.size(40.dp)
+                                )
                             },
                             backgroundColor = Color(0xFF1E88E5),
                             enabled = canSelect,
@@ -831,9 +999,16 @@ private fun AppSourceSelectorDialog(
                     item {
                         SourceOptionButton(
                             text = stringResource(R.string.app_source_dialog_option_auto),
-                            subtitle = stringResource(R.string.app_source_dialog_option_auto_description),
+                            subtitle = stringResource(
+                                R.string.app_source_dialog_option_auto_description
+                            ),
                             icon = {
-                                Icon(Icons.Filled.AutoFixHigh, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                                Icon(
+                                    Icons.Filled.AutoFixHigh,
+                                    null,
+                                    tint = Color.White,
+                                    modifier = Modifier.size(40.dp)
+                                )
                             },
                             backgroundColor = Color(0xFF00C853),
                             enabled = canSelect,
@@ -842,7 +1017,7 @@ private fun AppSourceSelectorDialog(
                     }
                 }
 
-                // Installed app.
+                // Installed app
                 if (includeInstalledOption) {
                     installedApp?.let { (app, meta) ->
                         val (usable, message) = when {
@@ -860,9 +1035,15 @@ private fun AppSourceSelectorDialog(
                                 text = stringResource(R.string.installed),
                                 subtitle = message,
                                 icon = {
-                                    Icon(Icons.Outlined.Apps, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                                    Icon(
+                                        Icons.Outlined.Apps,
+                                        null,
+                                        tint = Color.White,
+                                        modifier = Modifier.size(40.dp)
+                                    )
                                 },
-                                backgroundColor = if (usable) Color(0xFF2196F3) else Color(0xFF757575),
+                                backgroundColor = if (usable) Color(0xFF2196F3)
+                                else Color(0xFF757575),
                                 enabled = canSelect && usable,
                                 onClick = { onSelect(app) }
                             )
@@ -870,14 +1051,21 @@ private fun AppSourceSelectorDialog(
                     }
                 }
 
-                // Local storage.
+                // Local storage
                 onSelectLocal?.let { selectLocal ->
                     item {
                         SourceOptionButton(
                             text = stringResource(R.string.app_source_dialog_option_storage),
-                            subtitle = stringResource(R.string.app_source_dialog_option_storage_description),
+                            subtitle = stringResource(
+                                R.string.app_source_dialog_option_storage_description
+                            ),
                             icon = {
-                                Icon(Icons.Outlined.FolderOpen, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                                Icon(
+                                    Icons.Outlined.FolderOpen,
+                                    null,
+                                    tint = Color.White,
+                                    modifier = Modifier.size(40.dp)
+                                )
                             },
                             backgroundColor = Color(0xFFFF9800),
                             enabled = canSelect,
@@ -886,13 +1074,18 @@ private fun AppSourceSelectorDialog(
                     }
                 }
 
-                // Downloader plugins.
+                // Downloader plugins
                 items(plugins) { plugin ->
                     SourceOptionButton(
                         text = plugin.name,
                         subtitle = plugin.packageName,
                         icon = {
-                            Icon(Icons.Outlined.Download, null, tint = Color.White, modifier = Modifier.size(40.dp))
+                            Icon(
+                                Icons.Outlined.Download,
+                                null,
+                                tint = Color.White,
+                                modifier = Modifier.size(40.dp)
+                            )
                         },
                         backgroundColor = Color(0xFF9C27B0),
                         enabled = canSelect,

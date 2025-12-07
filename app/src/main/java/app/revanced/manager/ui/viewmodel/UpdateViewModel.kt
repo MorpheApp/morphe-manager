@@ -80,7 +80,7 @@ class UpdateViewModel(
 
     private val location = fs.tempDir.resolve("updater.apk")
     private val job = viewModelScope.launch {
-        uiSafe(app, R.string.download_manager_failed, "Failed to download Universal ReVanced Manager") {
+        uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
             releaseInfo = reVancedAPI.getAppUpdate() ?: throw Exception("No update available")
 
             if (downloadOnScreenEntry) {

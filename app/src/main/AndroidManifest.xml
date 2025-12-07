@@ -4,12 +4,13 @@
 
     <permission
         android:name="app.universal.revanced.manager.permission.PLUGIN_HOST"
-        android:protectionLevel="signature"
+        android:description="@string/plugin_host_permission_description"
         android:label="@string/plugin_host_permission_label"
-        android:description="@string/plugin_host_permission_description" />
+        android:protectionLevel="signature" />
 
     <uses-permission android:name="app.universal.revanced.manager.permission.PLUGIN_HOST" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,8 +19,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ENFORCE_UPDATE_OWNERSHIP" />
@@ -28,13 +32,13 @@
         android:name="app.revanced.manager.ManagerApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:largeHeap="true"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReVancedManager"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="34">
 
         <provider
@@ -56,20 +60,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity" android:exported="false" android:theme="@style/Theme.WebViewActivity" />
+        <activity
+            android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WebViewActivity" />
 
         <service android:name="app.revanced.manager.service.InstallService" />
         <service android:name="app.revanced.manager.service.UninstallService" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
-            android:foregroundServiceType="specialUse"
             android:exported="false"
+            android:foregroundServiceType="specialUse"
             tools:node="merge">
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="patching"
-                />
+                android:value="patching" />
         </service>
 
         <provider
@@ -79,14 +85,24 @@
             android:grantUriPermissions="true" />
 
         <provider
-                android:name="androidx.startup.InitializationProvider"
-                android:authorities="${applicationId}.androidx-startup"
-                android:exported="false"
-                tools:node="merge">
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
             <meta-data
-                    android:name="androidx.work.WorkManagerInitializer"
-                    android:value="androidx.startup"
-                    tools:node="remove" />
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 </manifest>

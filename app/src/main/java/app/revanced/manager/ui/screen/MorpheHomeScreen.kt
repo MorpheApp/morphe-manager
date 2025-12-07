@@ -9,6 +9,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -66,6 +70,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -120,7 +125,7 @@ private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheHomeScreen(
-    onMorpheSettingsClick: () -> Unit,
+    onMorpheSettingsClick: (String?) -> Unit,
     onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
@@ -267,9 +272,6 @@ fun MorpheHomeScreen(
                                 }
                             }
                         },
-                        onCardClick = {
-                            // TODO: add onBundleSettingsClick(apiBundle.uid)
-                        },
                         onOpenInBrowser = {
                             val pageUrl = manualUpdateInfo[apiBundle.uid]?.pageUrl
                                 ?: "https://github.com/HundEdFeteTree/HappyFunTest/releases/latest" // FIXME
@@ -330,7 +332,8 @@ fun MorpheHomeScreen(
                                 sheetState.hide()
                                 showBundlesSheet = false
                             }
-                            onDownloaderPluginClick()
+                            // Navigate to Morphe Settings and highlight plugins section
+                            onMorpheSettingsClick("plugins")
                         },
                         onDismiss = dashboardViewModel::ignoreNewDownloaderPlugins,
                         modifier = Modifier.padding(horizontal = 16.dp)
@@ -514,7 +517,7 @@ fun MorpheHomeScreen(
                 }
 
                 FloatingActionButton(
-                    onClick = onMorpheSettingsClick,
+                    onClick = { onMorpheSettingsClick(null) },
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {
@@ -686,14 +689,12 @@ private fun ApiPatchBundleCard(
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
-    onCardClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
-            .clickable(onClick = onCardClick),
+            .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -995,51 +996,174 @@ private fun MainContent(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor = MaterialTheme.colorScheme.tertiary
 
+    // Create animations for each circle
+    val infiniteTransition = rememberInfiniteTransition(label = "circles")
+
+    // Circle 1 - large top left
+    val circle1X = infiniteTransition.animateFloat(
+        initialValue = 0.15f,
+        targetValue = 0.25f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle1X"
+    )
+    val circle1Y = infiniteTransition.animateFloat(
+        initialValue = 0.25f,
+        targetValue = 0.2f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(7000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle1Y"
+    )
+
+    // Circle 2 - medium top right
+    val circle2X = infiniteTransition.animateFloat(
+        initialValue = 0.88f,
+        targetValue = 0.82f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(9000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle2X"
+    )
+    val circle2Y = infiniteTransition.animateFloat(
+        initialValue = 0.15f,
+        targetValue = 0.22f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(6500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle2Y"
+    )
+
+    // Circle 3 - small center right
+    val circle3X = infiniteTransition.animateFloat(
+        initialValue = 0.75f,
+        targetValue = 0.68f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(7500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle3X"
+    )
+    val circle3Y = infiniteTransition.animateFloat(
+        initialValue = 0.4f,
+        targetValue = 0.48f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle3Y"
+    )
+
+    // Circle 4 - medium bottom right
+    val circle4X = infiniteTransition.animateFloat(
+        initialValue = 0.85f,
+        targetValue = 0.78f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(9500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle4X"
+    )
+    val circle4Y = infiniteTransition.animateFloat(
+        initialValue = 0.75f,
+        targetValue = 0.82f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(7200),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle4Y"
+    )
+
+    // Circle 5 - small bottom left
+    val circle5X = infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 0.28f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8200),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle5X"
+    )
+    val circle5Y = infiniteTransition.animateFloat(
+        initialValue = 0.8f,
+        targetValue = 0.73f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(6800),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle5Y"
+    )
+
+    // Circle 6 - bottom center
+    val circle6X = infiniteTransition.animateFloat(
+        initialValue = 0.5f,
+        targetValue = 0.55f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8800),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle6X"
+    )
+    val circle6Y = infiniteTransition.animateFloat(
+        initialValue = 0.92f,
+        targetValue = 0.87f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(7800),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "circle6Y"
+    )
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Decorative circles in background (adapt to theme) - more subtle
+        // Animated circles in background
         Canvas(modifier = Modifier.fillMaxSize()) {
-            // Large circle on top left
+            // Circle 1 - large top left
             drawCircle(
                 color = primaryColor.copy(alpha = 0.03f),
                 radius = 400f,
-                center = Offset(size.width * 0.15f, size.height * 0.25f)
+                center = Offset(size.width * circle1X.value, size.height * circle1Y.value)
             )
 
-            // Medium circle on top right
+            // Circle 2 - medium top right
             drawCircle(
                 color = tertiaryColor.copy(alpha = 0.025f),
                 radius = 280f,
-                center = Offset(size.width * 0.88f, size.height * 0.15f)
+                center = Offset(size.width * circle2X.value, size.height * circle2Y.value)
             )
 
-            // Small circle in center right
+            // Circle 3 - small center right
             drawCircle(
                 color = tertiaryColor.copy(alpha = 0.02f),
                 radius = 200f,
-                center = Offset(size.width * 0.75f, size.height * 0.4f)
+                center = Offset(size.width * circle3X.value, size.height * circle3Y.value)
             )
 
-            // Medium circle on bottom right
+            // Circle 4 - medium bottom right
             drawCircle(
                 color = secondaryColor.copy(alpha = 0.025f),
                 radius = 320f,
-                center = Offset(size.width * 0.85f, size.height * 0.75f)
+                center = Offset(size.width * circle4X.value, size.height * circle4Y.value)
             )
 
-            // Small circle on bottom left
+            // Circle 5 - small bottom left
             drawCircle(
                 color = primaryColor.copy(alpha = 0.02f),
                 radius = 180f,
-                center = Offset(size.width * 0.2f, size.height * 0.8f)
+                center = Offset(size.width * circle5X.value, size.height * circle5Y.value)
             )
 
-            // Additional circle at bottom center
+            // Circle 6 - bottom center
             drawCircle(
                 color = secondaryColor.copy(alpha = 0.02f),
                 radius = 220f,
-                center = Offset(size.width * 0.5f, size.height * 0.92f)
+                center = Offset(size.width * circle6X.value, size.height * circle6Y.value)
             )
         }
 
@@ -1069,7 +1193,8 @@ private fun MainContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp),
+                    .height(120.dp)
+                    .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(
@@ -1117,8 +1242,7 @@ private fun MainContent(
 
                 Spacer(Modifier.height(8.dp))
 
-                // Other apps button
-                androidx.compose.material3.TextButton(onClick = onAllAppsClick) {
+                TextButton(onClick = onAllAppsClick) {
                     Text(
                         text = stringResource(R.string.morphe_home_advanced_mode),
                         style = MaterialTheme.typography.titleMedium,

@@ -3,6 +3,7 @@ package app.revanced.manager.patcher.runtime
 import android.content.Context
 import kotlin.math.max
 
+// TODO: Refactor or delete this.
 object MemoryLimitConfig {
     const val MIN_LIMIT_MB = 200
     private const val DEFAULT_FALLBACK_LIMIT_MB = 700
