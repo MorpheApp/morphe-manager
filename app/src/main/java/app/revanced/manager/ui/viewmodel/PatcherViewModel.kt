@@ -1229,7 +1229,7 @@ class PatcherViewModel(
     }
 
     private companion object {
-        const val TAG = "ReVanced Patcher"
+        const val TAG = "Morphe Patcher"
         private const val SYSTEM_INSTALL_TIMEOUT_MS = 15_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 25_000L
         private const val MEMORY_ADJUSTMENT_MB = 200
