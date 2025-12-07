@@ -410,13 +410,7 @@ fun MorphePatcherScreen(
         }
     }
 
-    // Add handling for memory adjustment dialog
-    viewModel.memoryAdjustmentDialog?.let { state ->
-        // This could be handled more gracefully, but for now don't show any warnings and
-        // try again with a lower heap size.
-        viewModel.dismissMemoryAdjustmentDialog()
-        viewModel.retryAfterMemoryAdjustment()
-    }
+    // Memory errors are automatically handled.
 
     // Add handling for missing patch dialog
     viewModel.missingPatchDialog?.let { state ->
