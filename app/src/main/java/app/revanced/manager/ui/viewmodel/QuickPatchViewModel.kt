@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloadedAppRepository
@@ -127,7 +128,7 @@ class QuickPatchViewModel(
         viewModelScope.launch {
             val local = withContext(Dispatchers.IO) { loadLocalApk(uri) }
             if (local == null) {
-                app.toast("Failed to load APK")
+                app.toast(app.getString(R.string.failed_to_load_apk))
                 return@launch
             }
             startQuickPatch(local)
@@ -174,7 +175,7 @@ class QuickPatchViewModel(
                 startQuickPatch(local)
             }.onFailure { throwable ->
                 Log.e(TAG, "Failed to select downloaded app", throwable)
-                app.toast("Failed to load APK")
+                app.toast(app.getString(R.string.failed_to_load_apk))
             }
         }
     }
@@ -227,7 +228,7 @@ class QuickPatchViewModel(
                     plugin.get(scope, packageName, targetVersion)
                 }?.let { (data, version) ->
                     if (targetVersion != null && version != targetVersion) {
-                        app.toast("Invalid version")
+                        app.toast(app.getString(R.string.downloader_invalid_version))
                         return@launch
                     }
                     startQuickPatch(
@@ -237,13 +238,13 @@ class QuickPatchViewModel(
                             ParceledDownloaderData(plugin, data)
                         )
                     )
-                } ?: app.toast("App not found")
+                } ?: app.toast(app.getString(R.string.downloader_app_not_found))
             } catch (e: UserInteractionException.Activity) {
                 app.toast(e.message!!)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                app.toast("Downloader error: ${e.simpleMessage()}")
+                app.toast(app.getString(R.string.downloader_error, e.simpleMessage()))
                 Log.e(TAG, "Downloader.get threw an exception", e)
             } finally {
                 pluginAction = null
