@@ -431,7 +431,7 @@ fun AdvancedSettingsScreen(
                 headline = R.string.process_runtime,
                 description = R.string.process_runtime_description,
             )
-            val recommendedProcessLimit = remember { 1800 }
+            val recommendedProcessLimit = remember { 1500 }
             IntegerItem(
                 preference = viewModel.prefs.patcherProcessMemoryLimit,
                 coroutineScope = viewModel.viewModelScope,
