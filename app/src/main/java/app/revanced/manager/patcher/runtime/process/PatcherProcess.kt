@@ -54,7 +54,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     events.log(level.name, message)
             }
 
-            logger.info("Memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+            logger.info("Process memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
 
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
