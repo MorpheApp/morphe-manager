@@ -1,7 +1,5 @@
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_screen">Use Morphe home screen</string>
-    <string name="morphe_home_screen_description">A simplified interface with quick patching YouTube and YouTube Music</string>
     <string name="morphe_home_youtube">YouTube</string>
     <string name="morphe_home_youtube_music">YouTube Music</string>
     <string name="morphe_home_advanced_mode">Advanced mode</string>
@@ -77,6 +75,10 @@
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
 
     <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
+    <string name="morphe_settings_return_to_morphe_description">Switch back to the simplified mode</string>
+    <string name="morphe_settings_return_to_advanced">Return to Advanced mode</string>
+    <string name="morphe_settings_return_to_advanced_description">Switch to the full-featured advanced mode</string>
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
@@ -86,11 +88,9 @@
     <string name="patches_bundle_json_url_invalid">Invalid URL format</string>
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
-    <string name="morphe_settings_switch_to_original">Return to Original Interface</string>
-    <string name="morphe_settings_switch_to_original_description">Switch back to the full-featured advanced interface</string>
-    <string name="morphe_about_patches_github">Morphe Patches GitHub</string>
-    <string name="morphe_about_manager_github">Morphe Manager GitHub</string>
-    <string name="morphe_about_patcher_github">Morphe Patcher GitHub</string>
+    <string name="morphe_about_patches_github">Morphe Patches</string>
+    <string name="morphe_about_manager_github">Morphe Manager</string>
+    <string name="morphe_about_patcher_github">Morphe Patcher</string>
     <string name="morphe_share_apk_title">Share APK</string>
     <string name="morphe_share_apk_description">Share this app with others</string>
 

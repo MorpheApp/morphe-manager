@@ -254,12 +254,12 @@ fun MorpheSettingsScreen(
                             )
                             Column {
                                 Text(
-                                    text = stringResource(R.string.morphe_settings_switch_to_original),
+                                    text = stringResource(R.string.morphe_settings_return_to_advanced),
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Medium
                                 )
                                 Text(
-                                    text = stringResource(R.string.morphe_settings_switch_to_original_description),
+                                    text = stringResource(R.string.morphe_settings_return_to_advanced_description),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
