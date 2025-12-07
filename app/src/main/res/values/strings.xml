@@ -782,12 +782,12 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="select_install_type">Select installation type</string>
 
     <string name="patcher_step_group_preparing">Preparing</string>
-    <string name="patcher_step_load_patches">Load patches</string>
-    <string name="patcher_step_unpack">Read APK file</string>
+    <string name="patcher_step_load_patches">Loading patches</string>
+    <string name="patcher_step_unpack">Reading APK file</string>
     <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Saving</string>
-    <string name="patcher_step_write_patched">Write patched APK file</string>
-    <string name="patcher_step_sign_apk">Sign patched APK file</string>
+    <string name="patcher_step_write_patched">Writing patched APK file</string>
+    <string name="patcher_step_sign_apk">Signing patched APK file</string>
     <string name="patcher_notification_title">Patching in progress…</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
