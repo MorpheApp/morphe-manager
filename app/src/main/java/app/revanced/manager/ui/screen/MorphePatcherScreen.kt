@@ -747,7 +747,8 @@ private fun PatchingInProgress(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp),
+                .height(120.dp)
+                .padding(horizontal = 16.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             AnimatedContent(
