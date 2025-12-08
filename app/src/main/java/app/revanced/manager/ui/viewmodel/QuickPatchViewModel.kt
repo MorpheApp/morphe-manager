@@ -114,7 +114,7 @@ class QuickPatchViewModel(
         val state = showUnsupportedVersionDialog ?: return
         showUnsupportedVersionDialog = null
         viewModelScope.launch {
-            forceStartQuickPatch(state.selectedApp)
+            forceStartQuickPatch(state.selectedApp, true)
         }
     }
 
@@ -329,13 +329,11 @@ class QuickPatchViewModel(
             return
         }
 
-        forceStartQuickPatch(selectedApp)
+        forceStartQuickPatch(selectedApp, allowIncompatible)
     }
 
     // Proceed without patch check
-    private suspend fun forceStartQuickPatch(selectedApp: SelectedApp) {
-        val allowIncompatible = prefs.disablePatchVersionCompatCheck.get()
-
+    private suspend fun forceStartQuickPatch(selectedApp: SelectedApp, allowIncompatible: Boolean) {
         val bundles = bundleRepository
             .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
             .first()
