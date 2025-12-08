@@ -25,7 +25,7 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     }
 
     private val keystorePath =
-        app.getDir("signing", Context.MODE_PRIVATE).resolve("manager.keystore")
+        app.getDir("signing", Context.MODE_PRIVATE).resolve("morphe.keystore")
 
     private suspend fun updatePrefs(alias: String, pass: String) = prefs.edit {
         prefs.keystoreAlias.value = alias

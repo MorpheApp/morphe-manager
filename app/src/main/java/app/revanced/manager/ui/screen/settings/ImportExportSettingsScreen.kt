@@ -236,7 +236,7 @@ fun ImportExportSettingsScreen(
                         context.toast(context.getString(R.string.export_keystore_unavailable))
                         return@GroupItem
                     }
-                    exportKeystoreLauncher.launch("Manager.keystore")
+                    exportKeystoreLauncher.launch("Morphe.keystore")
                 },
                 headline = R.string.export_keystore,
                 description = R.string.export_keystore_description
