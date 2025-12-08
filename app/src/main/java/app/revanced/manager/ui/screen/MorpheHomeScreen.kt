@@ -50,7 +50,6 @@ import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
@@ -106,6 +105,7 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
+import app.revanced.manager.ui.component.UnsupportedVersionWarningDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.util.APK_MIMETYPE
@@ -435,6 +435,15 @@ fun MorpheHomeScreen(
             onSelectLocal = { quickPatchViewModel.requestLocalSelection() },
             onSelectPlugin = { quickPatchViewModel.searchUsingPlugin(it) }
         )
+
+        quickPatchViewModel.showUnsupportedVersionDialog?.let { dialogState ->
+            UnsupportedVersionWarningDialog(
+                packageName = dialogState.packageName,
+                version = dialogState.version,
+                onDismiss = quickPatchViewModel::dismissUnsupportedVersionDialog,
+                onProceed = quickPatchViewModel::proceedWithUnsupportedVersion
+            )
+        }
     }
 
     Scaffold { paddingValues ->

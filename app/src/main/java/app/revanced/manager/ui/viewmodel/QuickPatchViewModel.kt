@@ -79,6 +79,27 @@ class QuickPatchViewModel(
     var suggestedVersion: String? by mutableStateOf(null)
         private set
 
+    var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
+        private set
+
+    data class UnsupportedVersionDialogState(
+        val packageName: String,
+        val version: String,
+        val selectedApp: SelectedApp
+    )
+
+    fun dismissUnsupportedVersionDialog() {
+        showUnsupportedVersionDialog = null
+    }
+
+    fun proceedWithUnsupportedVersion() {
+        val state = showUnsupportedVersionDialog ?: return
+        showUnsupportedVersionDialog = null
+        viewModelScope.launch {
+            forceStartQuickPatch(state.selectedApp)
+        }
+    }
+
     init {
         // Asynchronous initialization of all data
         viewModelScope.launch {
@@ -256,6 +277,34 @@ class QuickPatchViewModel(
     }
 
     private suspend fun startQuickPatch(selectedApp: SelectedApp) {
+        val allowIncompatible = prefs.disablePatchVersionCompatCheck.get()
+
+        val bundles = bundleRepository
+            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+            .first()
+
+        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+
+        // Check if there are any patches available
+        val totalPatches = patches.values.sumOf { it.size }
+
+        if (totalPatches == 0) {
+            // No patches available, show warning dialog
+            withContext(Dispatchers.Main) {
+                showUnsupportedVersionDialog = UnsupportedVersionDialogState(
+                    packageName = selectedApp.packageName,
+                    version = selectedApp.version ?: "Unknown",
+                    selectedApp = selectedApp
+                )
+            }
+            return
+        }
+
+        forceStartQuickPatch(selectedApp)
+    }
+
+    // Proceed without patch check
+    private suspend fun forceStartQuickPatch(selectedApp: SelectedApp) {
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.get()
 
         val bundles = bundleRepository
