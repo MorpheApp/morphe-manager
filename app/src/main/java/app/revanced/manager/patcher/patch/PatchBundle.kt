@@ -1,8 +1,8 @@
 package app.revanced.manager.patcher.patch
 
 import android.os.Parcelable
-import app.revanced.patcher.patch.Patch
-import app.revanced.patcher.patch.loadPatchesFromDex
+import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.loadPatchesFromDex
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.io.File
