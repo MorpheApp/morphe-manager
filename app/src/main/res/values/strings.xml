@@ -34,6 +34,16 @@
     <string name="morphe_home_bundle_update_completed">Update Completed</string>
     <string name="morphe_home_unknown">Unknown</string>
     <string name="morphe_home_timeline">Update History</string>
+    <string name="morphe_home_apk_availability_dialog_title">Do you have the APK?</string>
+    <string name="morphe_home_apk_availability_dialog_description">To patch %1$s, I need version %2$s (unpatched).</string>
+    <string name="morphe_home_apk_availability_dialog_info">Make sure you download the APK but DO NOT install it.</string>
+    <string name="morphe_home_apk_availability_yes">Yes, I have it</string>
+    <string name="morphe_home_apk_availability_no">No, help me find it</string>
+    <string name="morphe_home_wrong_package_selected">Expected package %1$s but got %2$s</string>
+    <string name="morphe_home_any_version">any version</string>
+    <string name="morphe_home_recommended_version">Recommended Version</string>
+    <string name="morphe_patcher_selected_version">Selected Version</string>
+    <string name="need_apk_instructions">Download (but do not install) %1$s version %2$s APK, and come back here when you have done that.</string>
 
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_title">Patching</string>

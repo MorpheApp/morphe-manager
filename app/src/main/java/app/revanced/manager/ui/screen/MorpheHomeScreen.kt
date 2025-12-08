@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -49,10 +50,13 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.Update
+import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
@@ -61,12 +65,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -92,31 +98,37 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.component.AvailableUpdateDialog
-import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
-import app.revanced.manager.ui.component.UnsupportedVersionWarningDialog
-import app.revanced.manager.ui.component.WrongPackageDialog
+import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.util.APK_MIMETYPE
-import app.revanced.manager.util.EventEffect
+import app.revanced.manager.util.Options
+import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
+import org.koin.compose.koinInject
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
 import android.provider.Settings as AndroidSettings
@@ -132,13 +144,31 @@ private enum class BundleUpdateStatus {
     Error        // Error occurred
 }
 
+// Quick patch parameters data class
+data class QuickPatchParams(
+    val selectedApp: SelectedApp,
+    val patches: PatchSelection,
+    val options: Options
+)
+
+data class UnsupportedVersionDialogState(
+    val packageName: String,
+    val version: String,
+    val recommendedVersion: String?
+)
+
+data class WrongPackageDialogState(
+    val expectedPackage: String,
+    val actualPackage: String
+)
+
 @SuppressLint("BatteryLife")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: (String?) -> Unit,
     onDownloaderPluginClick: () -> Unit,
-    onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
+    onStartQuickPatch: (QuickPatchParams) -> Unit,
     onUpdateClick: () -> Unit = {},
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress? = null
@@ -164,9 +194,103 @@ fun MorpheHomeScreen(
 
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     var showBundlesSheet by remember { mutableStateOf(false) }
-    var showQuickPatchDialog by rememberSaveable { mutableStateOf(false) }
-    var selectedPackageName by rememberSaveable { mutableStateOf<String?>(null) }
     var isRefreshingBundle by remember { mutableStateOf(false) }
+
+    var showUnsupportedVersionDialog by rememberSaveable { mutableStateOf<UnsupportedVersionDialogState?>(null) }
+    var showWrongPackageDialog by rememberSaveable { mutableStateOf<WrongPackageDialogState?>(null) }
+
+    // APK availability dialog state
+    var showApkAvailabilityDialog by rememberSaveable { mutableStateOf(false) }
+    var pendingPackageName by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingAppName by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingRecommendedVersion by rememberSaveable { mutableStateOf<String?>(null) }
+
+    // Helper function to get app name
+    fun getAppName(packageName: String): String {
+        return when (packageName) {
+            PACKAGE_YOUTUBE -> context.getString(R.string.morphe_home_youtube)
+            PACKAGE_YOUTUBE_MUSIC -> context.getString(R.string.morphe_home_youtube_music)
+            else -> packageName
+        }
+    }
+
+    val optionsRepository: PatchOptionsRepository = koinInject()
+
+    // File picker launcher for APK selection
+    val storagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        if (uri != null && pendingPackageName != null) {
+            scope.launch {
+                val selectedApp = withContext(Dispatchers.IO) {
+                    loadLocalApk(context, uri, pendingPackageName!!)
+                }
+
+                if (selectedApp != null) {
+                    // Check for wrong package
+                    if (selectedApp.packageName != pendingPackageName) {
+                        showWrongPackageDialog = WrongPackageDialogState(
+                            expectedPackage = pendingPackageName!!,
+                            actualPackage = selectedApp.packageName
+                        )
+                        pendingPackageName = null
+                        pendingAppName = null
+                        pendingRecommendedVersion = null
+                        return@launch
+                    }
+
+                    val allowIncompatible = dashboardViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
+
+                    val bundles = withContext(Dispatchers.IO) {
+                        dashboardViewModel.patchBundleRepository
+                            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+                            .first()
+                    }
+
+                    val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+                    val totalPatches = patches.values.sumOf { it.size }
+
+                    // Check for no patches (unsupported version)
+                    if (totalPatches == 0) {
+                        val recommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                        showUnsupportedVersionDialog = UnsupportedVersionDialogState(
+                            packageName = selectedApp.packageName,
+                            version = selectedApp.version,
+                            recommendedVersion = recommendedVersion
+                        )
+                        pendingPackageName = null
+                        pendingAppName = null
+                        pendingRecommendedVersion = null
+                        return@launch
+                    }
+
+                    val bundlePatches = bundles.associate { scoped ->
+                        scoped.uid to scoped.patches.associateBy { it.name }
+                    }
+
+                    val options = withContext(Dispatchers.IO) {
+                        optionsRepository.getOptions(selectedApp.packageName, bundlePatches)
+                    }
+
+                    val params = QuickPatchParams(
+                        selectedApp = selectedApp,
+                        patches = patches,
+                        options = options
+                    )
+
+                    onStartQuickPatch(params)
+                    pendingPackageName = null
+                    pendingAppName = null
+                    pendingRecommendedVersion = null
+                } else {
+                    context.toast(context.getString(R.string.failed_to_load_apk))
+                }
+            }
+        } else {
+            pendingPackageName = null
+            pendingAppName = null
+        }
+    }
 
     // Manager update dialog state
     var hasCheckedForUpdates by rememberSaveable { mutableStateOf(false) }
@@ -231,13 +355,13 @@ fun MorpheHomeScreen(
                 }
             }
         } else {
-        // Repository cleared progress, hide snackbar if it was visible
-        if (showBundleUpdateSnackbar) {
-            delay(3000)
-            showBundleUpdateSnackbar = false
-            hasShownInitialUpdate = true
+            // Repository cleared progress, hide snackbar if it was visible
+            if (showBundleUpdateSnackbar) {
+                delay(3000)
+                showBundleUpdateSnackbar = false
+                hasShownInitialUpdate = true
+            }
         }
-    }
     }
 
     // Show snackbar on initial launch after checking updates
@@ -383,75 +507,82 @@ fun MorpheHomeScreen(
             }
         }
     }
-    // Quick Patch Dialog
-    if (showQuickPatchDialog && selectedPackageName != null) {
-        // Use key to create a new ViewModel for each packageName
-        val quickPatchViewModel: QuickPatchViewModel = koinViewModel(
-            key = selectedPackageName
-        ) {
-            parametersOf(selectedPackageName)
+
+    // APK Availability Dialog
+    if (showApkAvailabilityDialog && pendingPackageName != null && pendingAppName != null) {
+        val currentRecommendedVersion = remember(manualUpdateInfo, pendingPackageName) {
+            manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
         }
 
-        val plugins by quickPatchViewModel.plugins.collectAsStateWithLifecycle(emptyList())
-        val requiredVersion by quickPatchViewModel.bundleRepository.suggestedVersions
-            .collectAsStateWithLifecycle(emptyMap())
-
-        val launcher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-            onResult = quickPatchViewModel::handlePluginActivityResult
-        )
-        EventEffect(flow = quickPatchViewModel.launchActivityFlow) { intent ->
-            launcher.launch(intent)
-        }
-
-        val storagePickerLauncher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.GetContent(),
-            onResult = quickPatchViewModel::handleStorageResult
-        )
-        EventEffect(flow = quickPatchViewModel.requestStorageSelection) {
-            storagePickerLauncher.launch(APK_MIMETYPE)
-        }
-
-        EventEffect(flow = quickPatchViewModel.startPatchingFlow) { params ->
-            showQuickPatchDialog = false
-            selectedPackageName = null
-            onStartQuickPatch(params)
-        }
-
-        QuickPatchSourceSelectorDialog(
-            plugins = plugins,
-            installedApp = quickPatchViewModel.installedAppData,
-            downloadedApps = quickPatchViewModel.downloadedApps,
-            hasRoot = quickPatchViewModel.hasRoot,
-            activeSearchJob = quickPatchViewModel.activePluginAction,
-            requiredVersion = requiredVersion[selectedPackageName],
-            onDismissRequest = {
-                showQuickPatchDialog = false
-                selectedPackageName = null
+        ApkAvailabilityDialog(
+            appName = pendingAppName!!,
+            packageName = pendingPackageName!!,
+            recommendedVersion = currentRecommendedVersion ?: pendingRecommendedVersion,
+            onDismiss = {
+                showApkAvailabilityDialog = false
+                pendingPackageName = null
+                pendingAppName = null
+                pendingRecommendedVersion = null
             },
-            onSelectAuto = { quickPatchViewModel.selectAuto() },
-            onSelectInstalled = { quickPatchViewModel.selectInstalledApp(it) },
-            onSelectDownloaded = { quickPatchViewModel.selectDownloadedApp(it) },
-            onSelectLocal = { quickPatchViewModel.requestLocalSelection() },
-            onSelectPlugin = { quickPatchViewModel.searchUsingPlugin(it) }
+            onHaveApk = {
+                // User has APK - open file picker
+                showApkAvailabilityDialog = false
+                storagePickerLauncher.launch(APK_MIMETYPE)
+                // Note: pendingPackageName is NOT cleared here, we need it for validation
+                // pendingRecommendedVersion is also kept for potential use
+            },
+            onNeedApk = {
+                // User doesn't have APK - open browser with search
+                showApkAvailabilityDialog = false
+                val version = currentRecommendedVersion ?: pendingRecommendedVersion ?: ""
+                val searchQuery = "apkmirror ${pendingPackageName} $version"
+                val searchUrl = "https://www.google.com/search?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+
+                try {
+                    uriHandler.openUri(searchUrl)
+                    // Show instructions toast
+                    context.toast(
+                        context.getString(
+                            R.string.need_apk_instructions,
+                            pendingAppName,
+                            version.ifEmpty { context.getString(R.string.any_version) }
+                        )
+                    )
+                } catch (e: Exception) {
+                    context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+                }
+
+                pendingPackageName = null
+                pendingAppName = null
+                pendingRecommendedVersion = null
+            }
         )
+    }
 
-        quickPatchViewModel.showUnsupportedVersionDialog?.let { dialogState ->
-            UnsupportedVersionWarningDialog(
-                packageName = dialogState.packageName,
-                version = dialogState.version,
-                onDismiss = quickPatchViewModel::dismissUnsupportedVersionDialog,
-                onProceed = quickPatchViewModel::proceedWithUnsupportedVersion
-            )
-        }
+    // Unsupported Version Dialog
+    showUnsupportedVersionDialog?.let { state ->
+        UnsupportedVersionWarningDialog(
+            packageName = state.packageName,
+            version = state.version,
+            recommendedVersion = state.recommendedVersion,
+            onDismiss = { showUnsupportedVersionDialog = null },
+            onProceed = {
+                showUnsupportedVersionDialog = null
+                // User wants to proceed anyway - show file picker again
+                pendingPackageName = state.packageName
+                pendingAppName = getAppName(state.packageName)
+                showApkAvailabilityDialog = true
+            }
+        )
+    }
 
-        quickPatchViewModel.showWrongPackageDialog?.let { dialogState ->
-            WrongPackageDialog(
-                expectedPackage = dialogState.expectedPackage,
-                actualPackage = dialogState.actualPackage,
-                onDismiss = quickPatchViewModel::dismissWrongPackageDialog
-            )
-        }
+    // Wrong Package Dialog
+    showWrongPackageDialog?.let { state ->
+        WrongPackageDialog(
+            expectedPackage = state.expectedPackage,
+            actualPackage = state.actualPackage,
+            onDismiss = { showWrongPackageDialog = null }
+        )
     }
 
     Scaffold { paddingValues ->
@@ -491,8 +622,11 @@ fun MorpheHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    selectedPackageName = PACKAGE_YOUTUBE
-                    showQuickPatchDialog = true
+                    // Show APK availability dialog
+                    pendingPackageName = PACKAGE_YOUTUBE
+                    pendingAppName = getAppName(PACKAGE_YOUTUBE)
+                    pendingRecommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                    showApkAvailabilityDialog = true
                 },
                 onYouTubeMusicClick = {
                     if (availablePatches < 1) {
@@ -504,8 +638,11 @@ fun MorpheHomeScreen(
                         showAndroid11Dialog = true
                         return@MainContent
                     }
-                    selectedPackageName = PACKAGE_YOUTUBE_MUSIC
-                    showQuickPatchDialog = true
+                    // Show APK availability dialog
+                    pendingPackageName = PACKAGE_YOUTUBE_MUSIC
+                    pendingAppName = getAppName(PACKAGE_YOUTUBE_MUSIC)
+                    pendingRecommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                    showApkAvailabilityDialog = true
                 }
             )
 
@@ -576,6 +713,515 @@ fun MorpheHomeScreen(
                         Icons.Default.Settings,
                         contentDescription = stringResource(R.string.settings)
                     )
+                }
+            }
+        }
+    }
+}
+
+// Helper function to load local APK
+private suspend fun loadLocalApk(
+    context: Context,
+    uri: Uri,
+    expectedPackageName: String
+): SelectedApp.Local? = withContext(Dispatchers.IO) {
+    try {
+        val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.apk")
+        context.contentResolver.openInputStream(uri)?.use { input ->
+            tempFile.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        }
+
+        val pm = context.packageManager
+        val packageInfo = pm.getPackageArchiveInfo(
+            tempFile.absolutePath,
+            android.content.pm.PackageManager.GET_META_DATA
+        )
+
+        if (packageInfo == null) {
+            tempFile.delete()
+            return@withContext null
+        }
+
+        // Don't validate here - let caller handle it
+        SelectedApp.Local(
+            packageName = packageInfo.packageName,
+            version = packageInfo.versionName ?: "unknown",
+            file = tempFile,
+            temporary = true
+        )
+    } catch (e: Exception) {
+        null
+    }
+}
+
+@Composable
+private fun ApkAvailabilityDialog(
+    appName: String,
+    packageName: String,
+    recommendedVersion: String?,
+    onDismiss: () -> Unit,
+    onHaveApk: () -> Unit,
+    onNeedApk: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.FolderOpen,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.morphe_home_apk_availability_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(
+                            R.string.morphe_home_apk_availability_dialog_description,
+                            appName,
+                            recommendedVersion ?: stringResource(R.string.any_version)
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Info Card
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            // Package Name
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.package_name),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = packageName,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    lineHeight = 20.sp
+                                )
+                            }
+
+                            // Version (if specified)
+                            if (recommendedVersion != null) {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.morphe_home_recommended_version),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = recommendedVersion,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    // Info message
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_home_apk_availability_dialog_info),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // "Yes, I have it" button
+                    Button(
+                        onClick = onHaveApk,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            Icons.Outlined.CheckCircle,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_apk_availability_yes))
+                    }
+
+                    // "No, need to download" button
+                    OutlinedButton(
+                        onClick = onNeedApk,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        Icon(
+                            Icons.Outlined.Download,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_apk_availability_no))
+                    }
+
+                    // Cancel button
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun UnsupportedVersionWarningDialog(
+    packageName: String,
+    version: String,
+    recommendedVersion: String?,
+    onDismiss: () -> Unit,
+    onProceed: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Warning,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                Text(
+                    text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_description),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            // Package Name
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.package_name),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = packageName,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    lineHeight = 20.sp
+                                )
+                            }
+
+                            // Selected Version
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.morphe_patcher_selected_version),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = version,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+
+                            // Recommended Version (if available)
+                            if (recommendedVersion != null) {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.morphe_home_recommended_version),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = recommendedVersion,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_warning),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    FilledTonalButton(
+                        onClick = onProceed,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer,
+                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                    ) {
+                        Text(stringResource(R.string.morphe_patcher_unsupported_version_dialog_proceed))
+                    }
+
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun WrongPackageDialog(
+    expectedPackage: String,
+    actualPackage: String,
+    onDismiss: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Warning,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                Text(
+                    text = stringResource(R.string.morphe_patcher_wrong_package_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.morphe_patcher_wrong_package_description),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.morphe_patcher_expected_package),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = expectedPackage,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    lineHeight = 20.sp
+                                )
+                            }
+
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.morphe_patcher_selected_package),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = actualPackage,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Button(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(stringResource(R.string.ok))
                 }
             }
         }
