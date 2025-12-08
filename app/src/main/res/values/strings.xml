@@ -884,9 +884,9 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="patches_delete_multiple_dialog_description">Are you sure you want to delete the selected patch bundles?</string>
 
     <string name="about_revanced_manager">About Morphe</string>
-    <string name="revanced_manager_description">"Morphe is an experimental open-source project focused on creating a modern, streamlined patching of popular Android apps.
+    <string name="revanced_manager_description">"Morphe is an experimental open-source project focused on creating a modern, streamlined patching of popular Android apps
 
-Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation."</string>
+Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation"</string>
     <string name="developer_options_enabled">Developer options enabled</string>
     <string name="developer_options_taps">%d taps remaining</string>
     <string name="developer_options_already_enabled">Developer options are already enabled</string>

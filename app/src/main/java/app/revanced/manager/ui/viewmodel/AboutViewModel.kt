@@ -5,12 +5,9 @@ import androidx.compose.material.icons.outlined.Language
 import androidx.lifecycle.ViewModel
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Brands
-import compose.icons.fontawesomeicons.brands.Discord
 import compose.icons.fontawesomeicons.brands.Github
-import compose.icons.fontawesomeicons.brands.Reddit
-import compose.icons.fontawesomeicons.brands.Telegram
+import compose.icons.fontawesomeicons.brands.RedditAlien
 import compose.icons.fontawesomeicons.brands.XTwitter
-import compose.icons.fontawesomeicons.brands.Youtube
 
 data class SocialLink(
     val name: String,
@@ -37,13 +34,9 @@ class AboutViewModel() : ViewModel() {
         )
 
         private val socialIcons = mapOf(
-            "Discord" to FontAwesomeIcons.Brands.Discord,
             "GitHub" to FontAwesomeIcons.Brands.Github,
-            "Reddit" to FontAwesomeIcons.Brands.Reddit,
-            "Telegram" to FontAwesomeIcons.Brands.Telegram,
-            "Twitter" to FontAwesomeIcons.Brands.XTwitter,
+            "Reddit" to FontAwesomeIcons.Brands.RedditAlien,
             "X" to FontAwesomeIcons.Brands.XTwitter,
-            "YouTube" to FontAwesomeIcons.Brands.Youtube,
         )
 
         fun getSocialIcon(name: String) = socialIcons[name] ?: Icons.Outlined.Language
