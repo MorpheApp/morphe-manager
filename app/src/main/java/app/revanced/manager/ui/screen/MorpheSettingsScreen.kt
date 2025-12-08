@@ -119,7 +119,6 @@ fun MorpheSettingsScreen(
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
     var showPluginDialog by rememberSaveable { mutableStateOf<String?>(null) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-    var showRegenerateKeystoreDialog by rememberSaveable { mutableStateOf(false) }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -135,14 +134,6 @@ fun MorpheSettingsScreen(
         contract = ActivityResultContracts.CreateDocument("*/*")
     ) { uri ->
         uri?.let { importExportViewModel.exportKeystore(it) }
-    }
-
-    // Show regenerate confirm dialog
-    if (showRegenerateKeystoreDialog) {
-        RegenerateKeystoreDialog(
-            onDismiss = { showRegenerateKeystoreDialog = false },
-            onConfirm = { importExportViewModel.regenerateKeystore() }
-        )
     }
 
     // Show keystore credentials dialog when needed
@@ -489,50 +480,6 @@ fun MorpheSettingsScreen(
                                 )
                                 Text(
                                     text = stringResource(R.string.export_keystore_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Icon(
-                                Icons.Outlined.ChevronRight,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    // Keystore Regenerate
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { showRegenerateKeystoreDialog = true },
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Outlined.Refresh,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.regenerate_keystore),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.regenerate_keystore_description),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -1412,92 +1359,3 @@ private fun KeystoreCredentialsDialog(
         }
     }
 }
-
-/**
- * Keystore regeneration confirmation dialog
- */
-@Composable
-private fun RegenerateKeystoreDialog(
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit
-) {
-    Dialog(onDismissRequest = onDismiss) {
-        Surface(
-            shape = RoundedCornerShape(24.dp),
-            color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Icon
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.errorContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.WarningAmber,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                // Title
-                Text(
-                    text = stringResource(R.string.regenerate_keystore),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-
-                // Description
-                Text(
-                    text = stringResource(R.string.regenerate_keystore_dialog_description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Buttons
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Regenerate button
-                    FilledTonalButton(
-                        onClick = {
-                            onConfirm()
-                            onDismiss()
-                        },
-                        colors = ButtonDefaults.filledTonalButtonColors(
-                            containerColor = MaterialTheme.colorScheme.errorContainer,
-                            contentColor = MaterialTheme.colorScheme.onErrorContainer
-                        ),
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.confirm))
-                    }
-
-                    // Cancel button
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
-            }
-        }
-    }
-}
-
