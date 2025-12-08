@@ -82,11 +82,29 @@ class QuickPatchViewModel(
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
         private set
 
+    data class QuickPatchParams(
+        val selectedApp: SelectedApp,
+        val patches: PatchSelection,
+        val options: Options
+    )
+
     data class UnsupportedVersionDialogState(
         val packageName: String,
         val version: String,
         val selectedApp: SelectedApp
     )
+
+    data class WrongPackageDialogState(
+        val expectedPackage: String,
+        val actualPackage: String
+    )
+
+    var showWrongPackageDialog by mutableStateOf<WrongPackageDialogState?>(null)
+        private set
+
+    fun dismissWrongPackageDialog() {
+        showWrongPackageDialog = null
+    }
 
     fun dismissUnsupportedVersionDialog() {
         showUnsupportedVersionDialog = null
@@ -277,6 +295,17 @@ class QuickPatchViewModel(
     }
 
     private suspend fun startQuickPatch(selectedApp: SelectedApp) {
+        // Validate package name matches the expected one
+        if (selectedApp.packageName != packageName) {
+            withContext(Dispatchers.Main) {
+                showWrongPackageDialog = WrongPackageDialogState(
+                    expectedPackage = packageName,
+                    actualPackage = selectedApp.packageName
+                )
+            }
+            return
+        }
+
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.get()
 
         val bundles = bundleRepository
@@ -326,12 +355,6 @@ class QuickPatchViewModel(
             )
         )
     }
-
-    data class QuickPatchParams(
-        val selectedApp: SelectedApp,
-        val patches: PatchSelection,
-        val options: Options
-    )
 
     companion object {
         private const val TAG = "QuickPatchViewModel"

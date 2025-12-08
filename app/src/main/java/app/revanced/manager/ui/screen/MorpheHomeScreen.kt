@@ -106,6 +106,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.component.QuickPatchSourceSelectorDialog
 import app.revanced.manager.ui.component.UnsupportedVersionWarningDialog
+import app.revanced.manager.ui.component.WrongPackageDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.QuickPatchViewModel
 import app.revanced.manager.util.APK_MIMETYPE
@@ -442,6 +443,14 @@ fun MorpheHomeScreen(
                 version = dialogState.version,
                 onDismiss = quickPatchViewModel::dismissUnsupportedVersionDialog,
                 onProceed = quickPatchViewModel::proceedWithUnsupportedVersion
+            )
+        }
+
+        quickPatchViewModel.showWrongPackageDialog?.let { dialogState ->
+            WrongPackageDialog(
+                expectedPackage = dialogState.expectedPackage,
+                actualPackage = dialogState.actualPackage,
+                onDismiss = quickPatchViewModel::dismissWrongPackageDialog
             )
         }
     }

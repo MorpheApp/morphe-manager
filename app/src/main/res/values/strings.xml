@@ -62,6 +62,10 @@
     <string name="morphe_patcher_unsupported_version_dialog_description">No patches are available for this version of the app. Proceeding may result in a non-functional app.</string>
     <string name="morphe_patcher_unsupported_version_dialog_warning">The patching process will continue without applying any patches. This may cause the app to malfunction or not work at all.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Proceed Anyway</string>
+    <string name="morphe_patcher_wrong_package_title">Wrong Package Selected</string>
+    <string name="morphe_patcher_wrong_package_description">The selected APK is not for the application you intended to patch.</string>
+    <string name="morphe_patcher_expected_package">Expected Package</string>
+    <string name="morphe_patcher_selected_package">Selected Package</string>
     <string name="morphe_patcher_message_1">Brewing some digital magic… ☕</string>
     <string name="morphe_patcher_message_2">Teaching old apps new tricks… 🎩</string>
     <string name="morphe_patcher_message_3">Sprinkling patches like fairy dust… ✨</string>
