@@ -1,14 +1,14 @@
 package app.revanced.manager.patcher
 
 import android.content.Context
-import app.revanced.library.ApkUtils.applyTo
+import app.morphe.library.ApkUtils.applyTo
 import app.morphe.manager.R
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.ui.model.State
-import app.revanced.patcher.Patcher
-import app.revanced.patcher.PatcherConfig
-import app.revanced.patcher.patch.Patch
-import app.revanced.patcher.patch.PatchResult
+import app.morphe.patcher.Patcher
+import app.morphe.patcher.PatcherConfig
+import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.PatchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.Closeable

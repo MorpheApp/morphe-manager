@@ -313,7 +313,7 @@ fun MorpheHomeScreen(
                         },
                         onOpenInBrowser = {
                             val pageUrl = manualUpdateInfo[apiBundle.uid]?.pageUrl
-                                ?: "https://github.com/LisoUseInAIKyrios/revanced-patches/releases/latest" // FIXME
+                                ?: "https://github.com/HundEdFeteTree/HappyFunTest/releases/latest" // FIXME
                             try {
                                 uriHandler.openUri(pageUrl)
                             } catch (e: Exception) {
