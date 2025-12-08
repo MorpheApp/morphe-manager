@@ -1264,7 +1264,7 @@ class PatcherViewModel(
                 ),
 
                 Step(
-                    context.getString(R.string.execute_patches),
+                    context.getString(R.string.applying_patches),
                     StepCategory.PATCHING
                 ),
 

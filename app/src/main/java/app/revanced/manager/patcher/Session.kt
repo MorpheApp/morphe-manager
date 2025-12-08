@@ -9,8 +9,10 @@ import app.morphe.patcher.Patcher
 import app.morphe.patcher.PatcherConfig
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.PatchResult
+import app.revanced.manager.domain.manager.PreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.koin.compose.koinInject
 import java.io.Closeable
 import java.io.File
 import java.nio.file.Files
@@ -45,7 +47,7 @@ class Session(
         var nextPatchIndex = 0
 
         updateProgress(
-            name = androidContext.getString(R.string.executing_patch, selectedPatches[nextPatchIndex]),
+            name = androidContext.getString(R.string.applying_patches),
             state = State.RUNNING
         )
 
@@ -68,10 +70,12 @@ class Session(
 
             onPatchCompleted()
 
-            selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
-                updateProgress(
-                    name = androidContext.getString(R.string.executing_patch, nextPatch.name)
-                )
+            if (false) { // TODO: Enable this only when using advanced mode.
+                selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
+                    updateProgress(
+                        name = androidContext.getString(R.string.applying_patch, nextPatch.name)
+                    )
+                }
             }
 
             logger.info("${patch.name} succeeded")

@@ -56,7 +56,6 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.viewmodel.BundleSourceType
 import app.revanced.manager.ui.viewmodel.BundleOptionDisplay
 import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
-import app.revanced.manager.ui.viewmodel.PatchProfileListItem
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel.RenameResult
 import app.revanced.manager.util.relativeTime

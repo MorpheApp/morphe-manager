@@ -814,9 +814,9 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
     <string name="patcher_install_in_progress">Installation is in progress. Please wait</string>
-    <string name="execute_patches">Execute patches</string>
-    <string name="executing_patch">Execute %s</string>
-    <string name="failed_to_execute_patch">Failed to execute %s</string>
+    <string name="applying_patches">Applying patches</string>
+    <string name="applying_patch">Applying %s</string>
+    <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="save_patched_app_dialog_title">Leave the patcher?</string>
     <string name="save_patched_app_dialog_message">You are about to leave the patcher. The patched app will be lost unless you save it for later.</string>
     <string name="save_patched_app_dialog_save">Save patched app</string>
