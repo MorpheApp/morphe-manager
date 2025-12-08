@@ -2,7 +2,7 @@
     <!-- Morphe Home Screen -->
     <string name="morphe_home_youtube">YouTube</string>
     <string name="morphe_home_youtube_music">YouTube Music</string>
-    <string name="morphe_home_advanced_mode">Advanced mode</string>
+    <string name="morphe_home_all_apps">All apps</string>
     <string name="morphe_home_bundles">Patch bundles</string>
     <string name="morphe_home_greeting_1">Ready to make YouTube legendary again?</string>
     <string name="morphe_home_greeting_2">What digital masterpiece are we crafting today?</string>
@@ -228,8 +228,8 @@
     <string name="legacy_import_failed">Could not import legacy settings</string>
 
     <string name="auto_updates_dialog_title">Configure updates</string>
-    <string name="auto_updates_dialog_description">Do you want Morphe Manager to periodically check for updates for the following components?</string>
-    <string name="auto_updates_dialog_manager">Morphe Manager</string>
+    <string name="auto_updates_dialog_description">Do you want Morphe to periodically check for updates for the following components?</string>
+    <string name="auto_updates_dialog_manager">Morphe</string>
     <string name="auto_updates_dialog_patches">Morphe Patches</string>
     <string name="auto_updates_dialog_note">These settings can be changed later.</string>
 
@@ -552,8 +552,8 @@ Patch profiles are not affected.</string>
     <string name="api_url">API URL</string>
     <string name="api_url_description">The API used to download necessary files</string>
     <string name="api_url_dialog_title">Change API URL</string>
-    <string name="api_url_dialog_description">Change the API URL of Morphe Manager. Morphe Manager uses the API to download patches and updates.</string>
-    <string name="api_url_dialog_warning">Morphe Manager connects to the API to download patches and updates. Make sure that you trust it.</string>
+    <string name="api_url_dialog_description">Change the API URL of Morphe. Morphe uses the API to download patches and updates.</string>
+    <string name="api_url_dialog_warning">Morphe connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
     <string name="device">Device</string>
@@ -729,7 +729,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again.</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe Manager from the Shizuku app.</string>
+    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app.</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported.</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_shizuku_launch_failed">Unable to open Shizuku. Launch it manually and try again.</string>
@@ -814,9 +814,9 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
     <string name="patcher_install_in_progress">Installation is in progress. Please wait</string>
-    <string name="execute_patches">Execute patches</string>
-    <string name="executing_patch">Execute %s</string>
-    <string name="failed_to_execute_patch">Failed to execute %s</string>
+    <string name="applying_patches">Applying patches</string>
+    <string name="applying_patch">Applying %s</string>
+    <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="save_patched_app_dialog_title">Leave the patcher?</string>
     <string name="save_patched_app_dialog_message">You are about to leave the patcher. The patched app will be lost unless you save it for later.</string>
     <string name="save_patched_app_dialog_save">Save patched app</string>
@@ -874,11 +874,11 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="update_on_metered_connections">Update on metered connections</string>
     <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>
     <string name="update_checking_manager">Check for updates on launch</string>
-    <string name="update_checking_manager_description">Check for new versions of Morphe Manager when the application starts</string>
+    <string name="update_checking_manager_description">Check for new versions of Morphe when the application starts</string>
     <string name="manager_prereleases">Use pre-releases</string>
-    <string name="manager_prereleases_description">Use pre-release versions of Morphe Manager</string>
+    <string name="manager_prereleases_description">Use pre-release versions of Morphe</string>
     <string name="update_published">Published %s</string>
-    <string name="battery_optimization_notification">Battery optimizations must be turned off in order for Morphe Manager to work correctly in the background. Click here to turn off optimizations.</string>
+    <string name="battery_optimization_notification">Battery optimizations must be turned off in order for Morphe to work correctly in the background. Click here to turn off optimizations.</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
     <string name="manager_update_banner_title">Downloading manager update</string>
@@ -889,7 +889,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
-    <string name="installing_message">Tap on <b>Update</b> when prompted.\nMorphe Manager will close when updating.</string>
+    <string name="installing_message">Tap on <b>Update</b> when prompted.\nMorphe will close when updating.</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
@@ -904,7 +904,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="no_update_available">No update available</string>
     <string name="update_check">Checking for updates…</string>
     <string name="dismiss_temporary">Not now</string>
-    <string name="update_available_dialog_description">A new version of Morphe Manager (%s) is available.</string>
+    <string name="update_available_dialog_description">A new version of Morphe (%s) is available.</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>
     <string name="download">Download</string>
     <string name="resume_download">Resume download</string>

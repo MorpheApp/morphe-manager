@@ -453,7 +453,7 @@ fun MorpheSettingsScreen(
                                 if (!importExportViewModel.canExport()) {
                                     context.toast(context.getString(R.string.export_keystore_unavailable))
                                 } else {
-                                    exportKeystoreLauncher.launch("Manager.keystore")
+                                    exportKeystoreLauncher.launch("Morphe.keystore")
                                 }
                             },
                         shape = RoundedCornerShape(12.dp),

@@ -29,5 +29,7 @@ data class Step(
     val category: StepCategory,
     val state: State = State.WAITING,
     val message: String? = null,
-    val progressKey: ProgressKey? = null
+    val progressKey: ProgressKey? = null,
+    /** How many substeps exist in this step. */
+    val subSteps : Int = 1
 ) : Parcelable

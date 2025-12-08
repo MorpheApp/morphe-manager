@@ -317,11 +317,16 @@ class PatcherViewModel(
     private var currentStepIndex = 0
 
     val progress by derivedStateOf {
-        val current = steps.count {
-            it.state == State.COMPLETED && it.category != StepCategory.PATCHING
+        // FIXME: Use step substep to track progress of individual patches.
+        val current = steps.sumOf {
+            if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
+                it.subSteps.toLong()
+            } else {
+                0L
+            }
         } + completedPatchCount
 
-        val total = steps.size - 1 + patchCount
+        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
 
         current.toFloat() / total.toFloat()
     }
@@ -1090,7 +1095,8 @@ class PatcherViewModel(
                         copy(
                             name = name ?: this.name,
                             state = state ?: this.state,
-                            message = message ?: this.message
+                            message = message ?: this.message,
+                            subSteps = subSteps ?: this.subSteps
                         )
                     }
 
@@ -1257,6 +1263,7 @@ class PatcherViewModel(
                     context.getString(R.string.patcher_step_load_patches),
                     StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
+                    subSteps = 2
                 ),
                 Step(
                     context.getString(R.string.patcher_step_unpack),
@@ -1264,12 +1271,20 @@ class PatcherViewModel(
                 ),
 
                 Step(
-                    context.getString(R.string.execute_patches),
+                    context.getString(R.string.applying_patches),
                     StepCategory.PATCHING
                 ),
 
-                Step(context.getString(R.string.patcher_step_write_patched), StepCategory.SAVING),
-                Step(context.getString(R.string.patcher_step_sign_apk), StepCategory.SAVING)
+                Step(
+                    context.getString(R.string.patcher_step_write_patched),
+                    StepCategory.SAVING,
+                    subSteps = 4
+                ),
+                Step(
+                    context.getString(R.string.patcher_step_sign_apk),
+                    StepCategory.SAVING,
+                    subSteps = 2
+                )
             )
         }
     }
