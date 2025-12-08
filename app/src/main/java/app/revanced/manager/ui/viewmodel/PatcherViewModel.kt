@@ -6,8 +6,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.ParcelUuid
 import android.util.Log
@@ -36,13 +36,14 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
-import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.worker.PatcherWorker
@@ -58,11 +59,10 @@ import app.revanced.manager.ui.model.Step
 import app.revanced.manager.ui.model.StepCategory
 import app.revanced.manager.ui.model.StepProgressProvider
 import app.revanced.manager.ui.model.navigation.Patcher
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.Options
+import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.patcher.patch.PatchBundleInfo
+import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.saveableVar
 import app.revanced.manager.util.saver.snapshotStateListSaver
 import app.revanced.manager.util.simpleMessage
@@ -72,12 +72,12 @@ import app.revanced.manager.util.uiSafe
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.withTimeout
 import kotlinx.coroutines.withContext
@@ -200,7 +200,10 @@ class PatcherViewModel(
             if (installStatus is InstallCompletionStatus.InProgress) {
                 logger.trace("install timeout for $packageName")
                 packageInstallerStatus = null
-                val message = timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
+                val message = when {
+                    prefs.useMorpheHomeScreen.get() -> app.getString(R.string.morphe_patcher_install_conflict_message)
+                    else -> timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
+                }
                 showInstallFailure(message)
             }
         }

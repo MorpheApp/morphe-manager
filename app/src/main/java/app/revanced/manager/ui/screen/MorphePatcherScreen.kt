@@ -1,8 +1,13 @@
 package app.revanced.manager.ui.screen
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.pm.PackageInstaller
 import android.net.Uri
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -85,6 +90,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.model.State
@@ -94,6 +100,8 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -135,6 +143,7 @@ fun MorphePatcherScreen(
     // Track install dialog state
     var installDialogState by rememberSaveable { mutableStateOf(InstallDialogState.INITIAL) }
     var isWaitingForUninstall by rememberSaveable { mutableStateOf(false) }
+    var installErrorMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     // Track if packageInstallerStatus was set
     var hadInstallerStatus by rememberSaveable { mutableStateOf(false) }
@@ -142,12 +151,12 @@ fun MorphePatcherScreen(
     // Monitor successful installation
     LaunchedEffect(viewModel.installedPackageName) {
         if (viewModel.installedPackageName != null) {
-            android.util.Log.d("QuickPatcher", "Installation successful: ${viewModel.installedPackageName}")
             // Installation succeeded, make sure dialog is closed
             showInstallDialog = false
             installDialogState = InstallDialogState.INITIAL
             isWaitingForUninstall = false
             hadInstallerStatus = false
+            installErrorMessage = null
         }
     }
 
@@ -157,38 +166,39 @@ fun MorphePatcherScreen(
             val status = viewModel.packageInstallerStatus
 
             // Check if there's a conflict
-            if (status == android.content.pm.PackageInstaller.STATUS_FAILURE_CONFLICT) {
-                android.util.Log.d("QuickPatcher", "Conflict detected, showing conflict dialog")
+            if (status == PackageInstaller.STATUS_FAILURE_CONFLICT) {
                 // Dismiss any failure message that might have been set
                 viewModel.dismissInstallFailureMessage()
                 // Change dialog state to show conflict message
                 installDialogState = InstallDialogState.CONFLICT
+                installErrorMessage = null
                 showInstallDialog = true // Show dialog with conflict message
                 viewModel.dismissPackageInstallerDialog()
-            } else {
-                // For other errors, keep the dialog hidden and let installFailureMessage handle it
-                android.util.Log.d("QuickPatcher", "Non-conflict error: $status")
+            } else if (status != PackageInstaller.STATUS_PENDING_USER_ACTION) {
+                // For other errors (except pending user action), keep the dialog hidden and let installFailureMessage handle it
                 viewModel.dismissPackageInstallerDialog()
+            } else {
+                // STATUS_PENDING_USER_ACTION - waiting for user to grant permission, don't treat as error
+                viewModel.dismissPackageInstallerDialog()
+                viewModel.dismissInstallFailureMessage() // Clear any premature error messages
             }
         }
     }
 
     // Monitor package removal during uninstall for reinstall
     DisposableEffect(Unit) {
-        val receiver = object : android.content.BroadcastReceiver() {
-            override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
-                android.util.Log.d("QuickPatcher", "Broadcast received: ${intent?.action}, pkg: ${intent?.data?.schemeSpecificPart}, isWaitingForUninstall: $isWaitingForUninstall")
-
-                if (intent?.action == android.content.Intent.ACTION_PACKAGE_REMOVED && isWaitingForUninstall) {
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == Intent.ACTION_PACKAGE_REMOVED && isWaitingForUninstall) {
                     val pkg = intent.data?.schemeSpecificPart
-                    if (pkg == viewModel.packageName) {
+                    val packageToUninstall = viewModel.exportMetadata?.packageName ?: viewModel.packageName
+                    if (pkg == packageToUninstall) {
                         // Package was removed, change dialog state to show install button
-                        android.util.Log.d("QuickPatcher", "Package removed, showing install button again")
-
-                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
-                            kotlinx.coroutines.delay(500) // Wait for system dialog to close
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(500) // Wait for system dialog to close
                             isWaitingForUninstall = false
                             installDialogState = InstallDialogState.READY_TO_INSTALL
+                            installErrorMessage = null
                             showInstallDialog = true
                         }
                     }
@@ -196,28 +206,28 @@ fun MorphePatcherScreen(
             }
         }
 
-        val filter = android.content.IntentFilter(android.content.Intent.ACTION_PACKAGE_REMOVED).apply {
+        val filter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply {
             addDataScheme("package")
         }
-        androidx.core.content.ContextCompat.registerReceiver(
+        ContextCompat.registerReceiver(
             context,
             receiver,
             filter,
-            androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
         onDispose {
             try {
                 context.unregisterReceiver(receiver)
             } catch (e: Exception) {
-                android.util.Log.e("QuickPatcher", "Failed to unregister receiver", e)
+                Log.e("MorphePatcherScreen", "Failed to unregister receiver", e)
             }
         }
     }
 
     val canInstall by remember {
         derivedStateOf {
-            patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling)
+            patcherSucceeded == true && !viewModel.isInstalling
         }
     }
 
@@ -283,6 +293,7 @@ fun MorphePatcherScreen(
         if (patcherSucceeded == true && !installDialogShownOnce && !hasPatchingError) {
             installDialogShownOnce = true
             installDialogState = InstallDialogState.INITIAL
+            installErrorMessage = null
             showInstallDialog = true
         }
     }
@@ -313,24 +324,28 @@ fun MorphePatcherScreen(
         InstallDialog(
             state = installDialogState,
             isWaitingForUninstall = isWaitingForUninstall,
+            errorMessage = installErrorMessage,
             onDismiss = {
                 showInstallDialog = false
-                userCancelledInstall = true
                 installDialogState = InstallDialogState.INITIAL
+                installErrorMessage = null
             },
             onInstall = {
-                android.util.Log.d("QuickPatcher", "Install button clicked, state: $installDialogState")
                 showInstallDialog = false
                 userCancelledInstall = false
+                installErrorMessage = null
                 viewModel.install()
             },
             onUninstall = {
-                android.util.Log.d("QuickPatcher", "Uninstall button clicked")
                 isWaitingForUninstall = true
                 hadInstallerStatus = false
 
+                // Uninstall the conflicting patched package
+                // exportMetadata contains info about the patched APK we're trying to install
+                val packageToUninstall = viewModel.exportMetadata?.packageName ?: viewModel.packageName
+
                 val intent = Intent(Intent.ACTION_DELETE).apply {
-                    data = Uri.parse("package:${viewModel.packageName}")
+                    data = Uri.parse("package:$packageToUninstall")
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 context.startActivity(intent)
@@ -338,9 +353,9 @@ fun MorphePatcherScreen(
             },
             onCancel = {
                 showInstallDialog = false
-                userCancelledInstall = true
                 installDialogState = InstallDialogState.INITIAL
                 isWaitingForUninstall = false
+                installErrorMessage = null
             }
         )
     }
@@ -406,53 +421,16 @@ fun MorphePatcherScreen(
         }
     }
 
-    // Memory errors are automatically handled.
-
-    // Add handling for missing patch dialog
-    viewModel.missingPatchDialog?.let { state ->
-        val patchList = state.patchNames.joinToString(separator = "\n• ", prefix = "• ")
-        AlertDialog(
-            onDismissRequest = viewModel::dismissMissingPatchDialog,
-            title = { Text(stringResource(R.string.patcher_missing_patch_title)) },
-            text = {
-                Text(
-                    text = stringResource(
-                        R.string.patcher_missing_patch_message,
-                        patchList
-                    )
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = viewModel::dismissMissingPatchDialog
-                ) {
-                    Text(stringResource(R.string.ok))
-                }
-            }
-        )
-    }
-
     // Add handling for install failure message (only if no packageInstallerStatus)
     // Don't show if we're showing conflict dialog
     if (viewModel.packageInstallerStatus == null && !hadInstallerStatus && !showInstallDialog) {
         viewModel.installFailureMessage?.let { message ->
-            AlertDialog(
-                onDismissRequest = viewModel::dismissInstallFailureMessage,
-                title = { Text(stringResource(R.string.install_app_fail_title)) },
-                text = { Text(message) },
-                confirmButton = {
-                    TextButton(onClick = {
-                        viewModel.dismissInstallFailureMessage()
-                    }) {
-                        Text(stringResource(R.string.ok))
-                    }
-                },
-                dismissButton = {
-                    TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
-            )
+            LaunchedEffect(message) {
+                installDialogState = InstallDialogState.ERROR
+                installErrorMessage = message
+                showInstallDialog = true
+                viewModel.dismissInstallFailureMessage()
+            }
         }
     }
 
@@ -606,6 +584,8 @@ fun MorphePatcherScreen(
                                     if (viewModel.installedPackageName == null) {
                                         // Reset state and show install dialog
                                         installDialogState = InstallDialogState.INITIAL
+                                        installErrorMessage = null
+                                        userCancelledInstall = false
                                         showInstallDialog = true
                                     } else {
                                         viewModel.open()
@@ -643,7 +623,8 @@ fun MorphePatcherScreen(
 private enum class InstallDialogState {
     INITIAL,            // First time showing dialog - "Install app?"
     CONFLICT,           // Conflict detected - "Package conflict, need to uninstall"
-    READY_TO_INSTALL    // After uninstall - "Ready to install, press Install"
+    READY_TO_INSTALL,   // After uninstall - "Ready to install, press Install"
+    ERROR               // Installation error - show error message with uninstall option
 }
 
 @Composable
@@ -1136,6 +1117,7 @@ private fun CancelPatchingDialog(
 private fun InstallDialog(
     state: InstallDialogState,
     isWaitingForUninstall: Boolean,
+    errorMessage: String?,
     onDismiss: () -> Unit,
     onInstall: () -> Unit,
     onUninstall: () -> Unit,
@@ -1158,7 +1140,7 @@ private fun InstallDialog(
                 Surface(
                     shape = CircleShape,
                     color = when (state) {
-                        InstallDialogState.CONFLICT -> MaterialTheme.colorScheme.errorContainer
+                        InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.errorContainer
                         else -> MaterialTheme.colorScheme.primaryContainer
                     },
                     modifier = Modifier.size(56.dp)
@@ -1166,12 +1148,12 @@ private fun InstallDialog(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = when (state) {
-                                InstallDialogState.CONFLICT -> Icons.Outlined.Warning
+                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
                                 else -> Icons.Outlined.FileDownload
                             },
                             contentDescription = null,
                             tint = when (state) {
-                                InstallDialogState.CONFLICT -> MaterialTheme.colorScheme.onErrorContainer
+                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.onErrorContainer
                                 else -> MaterialTheme.colorScheme.onPrimaryContainer
                             },
                             modifier = Modifier.size(32.dp)
@@ -1181,25 +1163,52 @@ private fun InstallDialog(
 
                 // Title
                 Text(
-                    text = stringResource(R.string.install_app),
+                    text = stringResource(
+                        when (state) {
+                            InstallDialogState.ERROR -> R.string.install_app_fail_title
+                            else -> R.string.install_app
+                        }
+                    ),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
 
-                // Description based on state
-                Text(
-                    text = stringResource(
-                        when (state) {
-                            InstallDialogState.INITIAL -> R.string.morphe_patcher_install_dialog_message
-                            InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
-                            InstallDialogState.READY_TO_INSTALL -> R.string.morphe_patcher_install_ready_message
+                // Description or error message
+                if (state == InstallDialogState.ERROR && errorMessage != null) {
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 300.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                    ) {
+                        Box(
+                            modifier = Modifier.verticalScroll(rememberScrollState())
+                        ) {
+                            Text(
+                                text = errorMessage,
+                                modifier = Modifier.padding(16.dp),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
                         }
-                    ),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
+                    }
+                } else {
+                    Text(
+                        text = stringResource(
+                            when (state) {
+                                InstallDialogState.INITIAL -> R.string.morphe_patcher_install_dialog_message
+                                InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
+                                InstallDialogState.READY_TO_INSTALL -> R.string.morphe_patcher_install_ready_message
+                                InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message // fallback
+                            }
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -1208,7 +1217,6 @@ private fun InstallDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-
                     // Action button (Install or Uninstall)
                     when (state) {
                         InstallDialogState.INITIAL, InstallDialogState.READY_TO_INSTALL -> {
@@ -1226,7 +1234,7 @@ private fun InstallDialog(
                                 Text(stringResource(R.string.install_app))
                             }
                         }
-                        InstallDialogState.CONFLICT -> {
+                        InstallDialogState.CONFLICT, InstallDialogState.ERROR -> {
                             Button(
                                 onClick = onUninstall,
                                 modifier = Modifier.weight(1f),
