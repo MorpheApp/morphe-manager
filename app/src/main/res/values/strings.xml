@@ -493,14 +493,12 @@ Patch profiles are not affected.</string>
     <string name="dark">Dark</string>
     <string name="appearance">Appearance</string>
     <string name="downloaded_apps">Downloaded apps</string>
-    <string name="process_runtime">Run Patcher in another process (experimental)</string>
-    <string name="process_runtime_description">This is faster and allows Patcher to use more memory</string>
+    <string name="process_runtime">Run Patcher in another process</string>
+    <string name="process_runtime_description">Speeds up patching, but may be incompatible with very old devices</string>
     <string name="strip_unused_libs">Remove unused native libraries</string>
     <string name="strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
     <string name="process_runtime_memory_limit">Patcher process memory limit</string>
     <string name="process_runtime_memory_limit_description">The max amount of memory that the Patcher process can use (in megabytes)</string>
-    <string name="process_runtime_memory_limit_description_detailed">The max amount of memory that the Patcher process can use (in megabytes).
-Recommended for this device: %1$d MB.</string>
     <string name="reset_to_recommended">Reset to recommended</string>
     <string name="patcher_auto_collapse_steps">Auto-collapse completed patcher steps</string>
     <string name="patcher_auto_collapse_steps_description">Automatically collapse each patcher progress widget after all of its steps finish.</string>
