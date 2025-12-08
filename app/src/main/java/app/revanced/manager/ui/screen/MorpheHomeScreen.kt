@@ -107,11 +107,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.model.SelectedApp
@@ -124,6 +126,8 @@ import app.revanced.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
@@ -186,6 +190,39 @@ fun MorpheHomeScreen(
     // Get only the API bundle (uid = 0)
     val apiBundle = remember(sources) { sources.firstOrNull { it.uid == 0 } }
 
+    // Get bundle info to extract recommended versions
+    val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+
+    // Get recommended versions for YouTube and YouTube Music from bundle info
+    val recommendedVersions = remember(bundleInfo) {
+        bundleInfo[0]?.let { apiBundleInfo ->
+            mapOf(
+                PACKAGE_YOUTUBE to apiBundleInfo.patches
+                    .filter { patch ->
+                        patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE } == true
+                    }
+                    .flatMap { patch ->
+                        patch.compatiblePackages
+                            ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE }
+                            ?.versions
+                            ?: emptyList()
+                    }
+                    .maxByOrNull { it },
+                PACKAGE_YOUTUBE_MUSIC to apiBundleInfo.patches
+                    .filter { patch ->
+                        patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC } == true
+                    }
+                    .flatMap { patch ->
+                        patch.compatiblePackages
+                            ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC }
+                            ?.versions
+                            ?: emptyList()
+                    }
+                    .maxByOrNull { it }
+            ).filterValues { it != null }
+        } ?: emptyMap()
+    }
+
     val hasSheetNotifications by remember {
         derivedStateOf {
             dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification
@@ -205,6 +242,9 @@ fun MorpheHomeScreen(
     var pendingAppName by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingRecommendedVersion by rememberSaveable { mutableStateOf<String?>(null) }
 
+    // Store the loaded app for unsupported version dialog
+    var pendingSelectedApp by remember { mutableStateOf<SelectedApp?>(null) }
+
     // Helper function to get app name
     fun getAppName(packageName: String): String {
         return when (packageName) {
@@ -215,6 +255,33 @@ fun MorpheHomeScreen(
     }
 
     val optionsRepository: PatchOptionsRepository = koinInject()
+
+    // Helper function to start patching with selected app
+    suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
+        val bundles = withContext(Dispatchers.IO) {
+            dashboardViewModel.patchBundleRepository
+                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+                .first()
+        }
+
+        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+
+        val bundlePatches = bundles.associate { scoped ->
+            scoped.uid to scoped.patches.associateBy { it.name }
+        }
+
+        val options = withContext(Dispatchers.IO) {
+            optionsRepository.getOptions(selectedApp.packageName, bundlePatches)
+        }
+
+        val params = QuickPatchParams(
+            selectedApp = selectedApp,
+            patches = patches,
+            options = options
+        )
+
+        onStartQuickPatch(params)
+    }
 
     // File picker launcher for APK selection
     val storagePickerLauncher = rememberLauncherForActivityResult(
@@ -236,6 +303,7 @@ fun MorpheHomeScreen(
                         pendingPackageName = null
                         pendingAppName = null
                         pendingRecommendedVersion = null
+                        pendingSelectedApp = null
                         return@launch
                     }
 
@@ -252,7 +320,8 @@ fun MorpheHomeScreen(
 
                     // Check for no patches (unsupported version)
                     if (totalPatches == 0) {
-                        val recommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                        val recommendedVersion = recommendedVersions[selectedApp.packageName]
+                        pendingSelectedApp = selectedApp
                         showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                             packageName = selectedApp.packageName,
                             version = selectedApp.version,
@@ -264,24 +333,14 @@ fun MorpheHomeScreen(
                         return@launch
                     }
 
-                    val bundlePatches = bundles.associate { scoped ->
-                        scoped.uid to scoped.patches.associateBy { it.name }
-                    }
+                    // Start patching normally
+                    startPatchingWithApp(selectedApp, allowIncompatible)
 
-                    val options = withContext(Dispatchers.IO) {
-                        optionsRepository.getOptions(selectedApp.packageName, bundlePatches)
-                    }
-
-                    val params = QuickPatchParams(
-                        selectedApp = selectedApp,
-                        patches = patches,
-                        options = options
-                    )
-
-                    onStartQuickPatch(params)
+                    // Cleanup all
                     pendingPackageName = null
                     pendingAppName = null
                     pendingRecommendedVersion = null
+                    pendingSelectedApp = null
                 } else {
                     context.toast(context.getString(R.string.failed_to_load_apk))
                 }
@@ -510,14 +569,10 @@ fun MorpheHomeScreen(
 
     // APK Availability Dialog
     if (showApkAvailabilityDialog && pendingPackageName != null && pendingAppName != null) {
-        val currentRecommendedVersion = remember(manualUpdateInfo, pendingPackageName) {
-            manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
-        }
-
         ApkAvailabilityDialog(
             appName = pendingAppName!!,
             packageName = pendingPackageName!!,
-            recommendedVersion = currentRecommendedVersion ?: pendingRecommendedVersion,
+            recommendedVersion = pendingRecommendedVersion,
             onDismiss = {
                 showApkAvailabilityDialog = false
                 pendingPackageName = null
@@ -528,13 +583,11 @@ fun MorpheHomeScreen(
                 // User has APK - open file picker
                 showApkAvailabilityDialog = false
                 storagePickerLauncher.launch(APK_MIMETYPE)
-                // Note: pendingPackageName is NOT cleared here, we need it for validation
-                // pendingRecommendedVersion is also kept for potential use
             },
             onNeedApk = {
                 // User doesn't have APK - open browser with search
                 showApkAvailabilityDialog = false
-                val version = currentRecommendedVersion ?: pendingRecommendedVersion ?: ""
+                val version = pendingRecommendedVersion ?: ""
                 val searchQuery = "apkmirror ${pendingPackageName} $version"
                 val searchUrl = "https://www.google.com/search?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
 
@@ -565,13 +618,25 @@ fun MorpheHomeScreen(
             packageName = state.packageName,
             version = state.version,
             recommendedVersion = state.recommendedVersion,
-            onDismiss = { showUnsupportedVersionDialog = null },
+            onDismiss = {
+                showUnsupportedVersionDialog = null
+                // Clean up the pending app
+                pendingSelectedApp?.let { app ->
+                    if (app is SelectedApp.Local && app.temporary) {
+                        app.file.delete()
+                    }
+                }
+                pendingSelectedApp = null
+            },
             onProceed = {
                 showUnsupportedVersionDialog = null
-                // User wants to proceed anyway - show file picker again
-                pendingPackageName = state.packageName
-                pendingAppName = getAppName(state.packageName)
-                showApkAvailabilityDialog = true
+                // Start patching with the already loaded app
+                pendingSelectedApp?.let { app ->
+                    scope.launch {
+                        startPatchingWithApp(app, true)
+                        pendingSelectedApp = null
+                    }
+                }
             }
         )
     }
@@ -625,7 +690,7 @@ fun MorpheHomeScreen(
                     // Show APK availability dialog
                     pendingPackageName = PACKAGE_YOUTUBE
                     pendingAppName = getAppName(PACKAGE_YOUTUBE)
-                    pendingRecommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE]  // <-- ЗМІНЕНО
                     showApkAvailabilityDialog = true
                 },
                 onYouTubeMusicClick = {
@@ -641,7 +706,7 @@ fun MorpheHomeScreen(
                     // Show APK availability dialog
                     pendingPackageName = PACKAGE_YOUTUBE_MUSIC
                     pendingAppName = getAppName(PACKAGE_YOUTUBE_MUSIC)
-                    pendingRecommendedVersion = manualUpdateInfo[0]?.latestVersion?.removePrefix("v")
+                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE_MUSIC]  // <-- ЗМІНЕНО
                     showApkAvailabilityDialog = true
                 }
             )
