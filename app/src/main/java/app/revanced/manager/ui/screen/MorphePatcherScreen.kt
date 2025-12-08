@@ -736,6 +736,12 @@ private fun PatchingInProgress(
             R.string.morphe_patcher_message_13,
             R.string.morphe_patcher_message_14,
             R.string.morphe_patcher_message_15,
+            R.string.morphe_patcher_message_16,
+            R.string.morphe_patcher_message_17,
+            R.string.morphe_patcher_message_18,
+            R.string.morphe_patcher_message_19,
+            R.string.morphe_patcher_message_20,
+            R.string.morphe_patcher_message_21,
         )
     }
 

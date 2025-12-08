@@ -61,7 +61,7 @@
     <string name="morphe_patcher_message_1">Brewing some digital magic… ☕</string>
     <string name="morphe_patcher_message_2">Teaching old apps new tricks… 🎩</string>
     <string name="morphe_patcher_message_3">Sprinkling patches like fairy dust… ✨</string>
-    <string name="morphe_patcher_message_4">Making your app awesome… 🏆</string>
+    <string name="morphe_patcher_message_4">Morphing your app into something awesome… 🏆</string>
     <string name="morphe_patcher_message_5">Coffee break recommended… ☕</string>
     <string name="morphe_patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
     <string name="morphe_patcher_message_7">Patch-o-matic 3000 in action… 🤖</string>
@@ -73,12 +73,26 @@
     <string name="morphe_patcher_message_13">Cooking up your patched app, hot and fresh… 🍳</string>
     <string name="morphe_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
+    <string name="morphe_patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
+    <string name="morphe_patcher_message_17">Optimizing ones and zeroes for improved harmony… ⚖️</string>
+    <string name="morphe_patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
+    <string name="morphe_patcher_message_19">Persuading the app superposition from unpatched to patched… 📦⚛️</string>
+    <string name="morphe_patcher_message_20">Your app has a fever, and the only cure is more patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_21">Great patches are worth the wait… ⏳</string>
 
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
-    <string name="morphe_settings_return_to_morphe_description">Switch back to the simplified mode</string>
-    <string name="morphe_settings_return_to_advanced">Return to Advanced mode</string>
+    <string name="morphe_settings_return_to_morphe_description">Return to simplified mode</string>
+    <string name="morphe_settings_return_to_advanced">Change to Advanced mode</string>
     <string name="morphe_settings_return_to_advanced_description">Switch to the full-featured advanced mode</string>
+    <string name="morphe_about_github">GitHub</string>
+    <string name="morphe_about_x">X</string>
+    <string name="morphe_about_reddit">Reddit</string>
+    <string name="morphe_share_apk_title">Share APK</string>
+    <string name="morphe_share_apk_description">Share this app with others</string>
+    <string name="morphe_share_website">Share Website</string>
+    <string name="morphe_share_website_description">Share the official Morphe website</string>
+
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
@@ -88,13 +102,6 @@
     <string name="patches_bundle_json_url_invalid">Invalid URL format</string>
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
-    <string name="morphe_share_apk_title">Share APK</string>
-    <string name="morphe_share_apk_description">Share this app with others</string>
-    <string name="morphe_share_website">Share Website</string>
-    <string name="morphe_share_website_description">Share the official Morphe website</string>
 
     <!-- Other strings -->
     <string name="app_name">Morphe</string>
