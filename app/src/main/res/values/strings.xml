@@ -509,9 +509,9 @@ Patch profiles are not affected.</string>
     <string name="patch_bundle_rename">Rename patch bundle</string>
     <string name="patch_profile_view_options">View options</string>
     <string name="patch_profile_patch_options_title">Options for %1$s</string>
-    <string name="restore_official_bundle">Restore pre-installed Official ReVanced patch bundle</string>
-    <string name="restore_official_bundle_description_missing">Reinstall the pre-installed Official ReVanced patches bundle</string>
-    <string name="restore_official_bundle_description_installed">The pre-installed Official ReVanced patches bundle is currently installed</string>
+    <string name="restore_official_bundle">Restore pre-installed Morphe patch bundle</string>
+    <string name="restore_official_bundle_description_missing">The official Morphe patches bundle is currently not installed</string>
+    <string name="restore_official_bundle_description_installed">The official Morphe patches bundle is currently installed</string>
     <string name="restore_official_bundle_success">Official ReVanced patch bundle restored</string>
     <string name="restore_official_bundle_failed">Failed to restore the Official ReVanced patch bundle: %1$s</string>
     <string name="restore_official_bundle_already">The Official ReVanced patch bundle is already installed</string>
@@ -858,7 +858,9 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="patches_delete_multiple_dialog_description">Are you sure you want to delete the selected patch bundles?</string>
 
     <string name="about_revanced_manager">About Morphe</string>
-    <string name="revanced_manager_description">Morphe is an experimental open-source project focused on creating a modern, streamlined patching manager for Android apps.\nIt offers a simplified interface with quick patching for YouTube and YouTube Music.\nCommunity feedback and contributions are encouraged to shape its future development.</string>
+    <string name="revanced_manager_description">"Morphe is an experimental open-source project focused on creating a modern, streamlined patching of popular Android apps.
+
+Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation."</string>
     <string name="developer_options_enabled">Developer options enabled</string>
     <string name="developer_options_taps">%d taps remaining</string>
     <string name="developer_options_already_enabled">Developer options are already enabled</string>
@@ -889,7 +891,6 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
-    <string name="installing_message">Tap on <b>Update</b> when prompted.\nMorphe will close when updating.</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
