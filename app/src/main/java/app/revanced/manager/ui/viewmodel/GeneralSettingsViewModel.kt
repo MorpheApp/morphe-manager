@@ -37,4 +37,11 @@ class GeneralSettingsViewModel(
         prefs.customThemeColor.update(value)
         resetListItemColorsCached()
     }
+
+    fun togglePatchesPrerelease(usePrerelease: Boolean) = viewModelScope.launch {
+        prefs.usePatchesPrereleases.update(usePrerelease)
+        prefs.patchesBundleJsonUrl.update(
+            PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
+        )
+    }
 }

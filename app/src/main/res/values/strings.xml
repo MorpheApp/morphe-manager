@@ -109,6 +109,11 @@
     <string name="morphe_share_website">Share Website</string>
     <string name="morphe_share_website_description">Share the official Morphe website</string>
 
+    <string name="morphe_update_use_patches_prereleases">Use pre-release patches</string>
+    <string name="morphe_update_use_patches_prereleases_description">Get the latest development patches (may be unstable)</string>
+    <string name="morphe_update_patches_prerelease_enabled">Pre-release patches enabled</string>
+    <string name="morphe_update_patches_prerelease_disabled">Stable patches enabled</string>
+
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>

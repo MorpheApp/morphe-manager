@@ -18,7 +18,7 @@ class PreferencesManager(
 
     val patchesBundleJsonUrl = stringPreference(
         "patches_bundle_json_url",
-        "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
+        PatchBundleConstants.STABLE_BUNDLE_URL
     )
 
     val useProcessRuntime = booleanPreference("use_process_runtime", true)
@@ -55,6 +55,15 @@ class PreferencesManager(
     val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
+
+    object PatchBundleConstants {
+        const val STABLE_BUNDLE_URL = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
+        const val DEV_BUNDLE_URL = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-dev-patches-bundle.json"
+
+        fun getBundleUrl(usePrerelease: Boolean): String {
+            return if (usePrerelease) DEV_BUNDLE_URL else STABLE_BUNDLE_URL
+        }
+    }
 
     @Serializable
     data class SettingsSnapshot(

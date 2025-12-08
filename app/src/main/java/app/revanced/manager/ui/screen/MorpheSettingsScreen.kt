@@ -336,6 +336,81 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // Updates Section
+            SectionHeader(
+                icon = Icons.Outlined.Update,
+                title = stringResource(R.string.updates)
+            )
+
+            SettingsCard {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    val usePrereleases by generalViewModel.prefs.usePatchesPrereleases.getAsState()
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                coroutineScope.launch {
+                                    val newValue = !usePrereleases
+                                    generalViewModel.togglePatchesPrerelease(newValue)
+
+                                    context.toast(
+                                        if (newValue)
+                                            context.getString(R.string.morphe_update_patches_prerelease_enabled)
+                                        else
+                                            context.getString(R.string.morphe_update_patches_prerelease_disabled)
+                                    )
+                                }
+                            }
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Science,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Column {
+                                Text(
+                                    text = stringResource(R.string.morphe_update_use_patches_prereleases),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = stringResource(R.string.morphe_update_use_patches_prereleases_description),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                        Switch(
+                            checked = usePrereleases,
+                            onCheckedChange = { newValue ->
+                                coroutineScope.launch {
+                                    generalViewModel.togglePatchesPrerelease(newValue)
+
+                                    context.toast(
+                                        if (newValue)
+                                            context.getString(R.string.morphe_update_patches_prerelease_enabled)
+                                        else
+                                            context.getString(R.string.morphe_update_patches_prerelease_disabled)
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             // Plugins
             Column(
                 modifier = Modifier.onGloballyPositioned { coordinates ->
