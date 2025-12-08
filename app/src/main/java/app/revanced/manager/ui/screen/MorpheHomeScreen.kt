@@ -1332,9 +1332,10 @@ private fun MainContent(
 
                 Spacer(Modifier.height(8.dp))
 
-                TextButton(onClick = onAllAppsClick) {
+                // For now, don't show all apps selection.
+                if (false) TextButton(onClick = onAllAppsClick) {
                     Text(
-                        text = stringResource(R.string.morphe_home_advanced_mode),
+                        text = stringResource(R.string.morphe_home_all_apps),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )

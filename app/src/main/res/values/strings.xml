@@ -2,7 +2,7 @@
     <!-- Morphe Home Screen -->
     <string name="morphe_home_youtube">YouTube</string>
     <string name="morphe_home_youtube_music">YouTube Music</string>
-    <string name="morphe_home_advanced_mode">Advanced mode</string>
+    <string name="morphe_home_all_apps">All apps</string>
     <string name="morphe_home_bundles">Patch bundles</string>
     <string name="morphe_home_greeting_1">Ready to make YouTube legendary again?</string>
     <string name="morphe_home_greeting_2">What digital masterpiece are we crafting today?</string>
