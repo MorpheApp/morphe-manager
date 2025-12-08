@@ -137,7 +137,6 @@ private enum class BundleUpdateStatus {
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: (String?) -> Unit,
-    onAllAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchViewModel.QuickPatchParams) -> Unit,
     onUpdateClick: () -> Unit = {},
@@ -482,7 +481,6 @@ fun MorpheHomeScreen(
 
             // Main centered content
             MainContent(
-                onAllAppsClick = onAllAppsClick,
                 onYouTubeClick = {
                     if (availablePatches < 1) {
                         context.toast(context.getString(R.string.no_patch_found))
@@ -1072,7 +1070,6 @@ private fun getRelativeTimeString(timestamp: Long): String {
 
 @Composable
 private fun MainContent(
-    onAllAppsClick: () -> Unit,
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit
 ) {
@@ -1263,8 +1260,8 @@ private fun MainContent(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState)
-                .padding(horizontal = 32.dp, vertical = 32.dp)
-                .padding(bottom = 100.dp),
+                .padding(32.dp)
+                .padding(bottom = 120.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -1329,17 +1326,6 @@ private fun MainContent(
                     gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
                     onClick = onYouTubeMusicClick
                 )
-
-                Spacer(Modifier.height(8.dp))
-
-                // For now, don't show all apps selection.
-                if (false) TextButton(onClick = onAllAppsClick) {
-                    Text(
-                        text = stringResource(R.string.morphe_home_all_apps),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
             }
         }
     }

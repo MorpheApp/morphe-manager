@@ -132,7 +132,6 @@ private fun ReVancedManager(vm: MainViewModel) {
                 onMorpheSettingsClick = { highlightSection ->
                     navController.navigate(MorpheSettings(highlightSection = highlightSection))
                 },
-                onAllAppsClick = { navController.navigate(AppSelector) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
                 onUpdateClick = { navController.navigate(Update()) },
                 onStartQuickPatch = { params ->
