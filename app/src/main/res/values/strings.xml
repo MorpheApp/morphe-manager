@@ -1,7 +1,5 @@
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_screen">Use Morphe home screen</string>
-    <string name="morphe_home_screen_description">A simplified interface with quick patching YouTube and YouTube Music</string>
     <string name="morphe_home_youtube">YouTube</string>
     <string name="morphe_home_youtube_music">YouTube Music</string>
     <string name="morphe_home_advanced_mode">Advanced mode</string>
@@ -77,6 +75,10 @@
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
 
     <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
+    <string name="morphe_settings_return_to_morphe_description">Switch back to the simplified mode</string>
+    <string name="morphe_settings_return_to_advanced">Return to Advanced mode</string>
+    <string name="morphe_settings_return_to_advanced_description">Switch to the full-featured advanced mode</string>
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>
     <string name="patches_bundle_json_url_dialog_title">Patches Bundle URL</string>
@@ -86,13 +88,13 @@
     <string name="patches_bundle_json_url_invalid">Invalid URL format</string>
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
-    <string name="morphe_settings_switch_to_original">Return to Original Interface</string>
-    <string name="morphe_settings_switch_to_original_description">Switch back to the full-featured advanced interface</string>
-    <string name="morphe_about_patches_github">Morphe Patches GitHub</string>
-    <string name="morphe_about_manager_github">Morphe Manager GitHub</string>
-    <string name="morphe_about_patcher_github">Morphe Patcher GitHub</string>
+    <string name="morphe_about_github">GitHub</string>
+    <string name="morphe_about_x">X</string>
+    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_apk_title">Share APK</string>
     <string name="morphe_share_apk_description">Share this app with others</string>
+    <string name="morphe_share_website">Share Website</string>
+    <string name="morphe_share_website_description">Share the official Morphe website</string>
 
     <!-- Other strings -->
     <string name="app_name">Morphe</string>
@@ -843,7 +845,7 @@ Enable them again (or pick alternatives) and then try patching once more.</strin
     <string name="patches_delete_multiple_dialog_description">Are you sure you want to delete the selected patch bundles?</string>
 
     <string name="about_revanced_manager">About Morphe</string>
-    <string name="revanced_manager_description">Morphe is an experimental open-source project focused on creating a modern, streamlined patching manager for Android apps. It offers a simplified interface with quick patching for YouTube and YouTube Music. Community feedback and contributions are encouraged to shape its future development.</string>
+    <string name="revanced_manager_description">Morphe is an experimental open-source project focused on creating a modern, streamlined patching manager for Android apps.\nIt offers a simplified interface with quick patching for YouTube and YouTube Music.\nCommunity feedback and contributions are encouraged to shape its future development.</string>
     <string name="developer_options_enabled">Developer options enabled</string>
     <string name="developer_options_taps">%d taps remaining</string>
     <string name="developer_options_already_enabled">Developer options are already enabled</string>

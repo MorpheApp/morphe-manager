@@ -3,7 +3,6 @@ package app.revanced.manager.ui.viewmodel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Language
 import androidx.lifecycle.ViewModel
-import app.revanced.manager.data.platform.NetworkInfo
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Brands
 import compose.icons.fontawesomeicons.brands.Discord
@@ -19,22 +18,24 @@ data class SocialLink(
     val preferred: Boolean = false,
 )
 
-class AboutViewModel(
-    private val network: NetworkInfo,
-) : ViewModel() {
-    val socials: List<SocialLink> = listOf(
-        SocialLink(
-            name = "GitHub",
-            url = "https://github.com/Jman-Github/universal-revanced-manager",
-            preferred = true
-        )
-    )
-    val contact: String? = null
-    val donate: String? = null
-    val isConnected: Boolean
-        get() = network.isConnected()
-
+class AboutViewModel() : ViewModel() {
     companion object {
+        val socials: List<SocialLink> = listOf(
+            SocialLink(
+                name = "GitHub",
+                url = "https://github.com/MorpheApp",
+                preferred = true
+            ),
+            SocialLink(
+                name = "X",
+                url = "https://x.com/MorpheApp"
+            ),
+            SocialLink(
+                name = "Reddit",
+                url = "https://reddit.com/r/MorpheApp"
+            )
+        )
+
         private val socialIcons = mapOf(
             "Discord" to FontAwesomeIcons.Brands.Discord,
             "GitHub" to FontAwesomeIcons.Brands.Github,

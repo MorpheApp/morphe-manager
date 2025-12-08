@@ -1,7 +1,18 @@
 package app.revanced.manager.ui.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -12,27 +23,29 @@ import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.network.downloader.LoadedDownloaderPlugin
 import app.revanced.manager.ui.model.SelectedApp
-import app.morphe.manager.R
 
 @Composable
 fun QuickPatchSourceSelectorDialog(
-    packageName: String,
-    suggestedVersion: String?,
     plugins: List<LoadedDownloaderPlugin>,
     installedApp: Pair<SelectedApp.Installed, app.revanced.manager.data.room.apps.installed.InstalledApp?>?,
     downloadedApps: List<DownloadedApp>,
@@ -47,7 +60,6 @@ fun QuickPatchSourceSelectorDialog(
     onSelectPlugin: (LoadedDownloaderPlugin) -> Unit
 ) {
     val canSelect = activeSearchJob == null
-    val context = LocalContext.current
 
     // String resources
     val noRootMessage = stringResource(R.string.app_source_dialog_option_installed_no_root)
@@ -73,7 +85,7 @@ fun QuickPatchSourceSelectorDialog(
                 verticalArrangement = Arrangement.spacedBy(6.dp),
                 contentPadding = PaddingValues(vertical = 4.dp)
             ) {
-                // Downloaded apps.
+                // Downloaded apps
                 if (downloadedApps.isNotEmpty()) {
                     item { SectionHeader(title = stringResource(R.string.downloaded_apps)) }
                     items(downloadedApps) { app ->

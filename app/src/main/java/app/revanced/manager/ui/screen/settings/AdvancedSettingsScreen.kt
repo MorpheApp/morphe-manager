@@ -151,12 +151,6 @@ fun AdvancedSettingsScreen(
                 .padding(paddingValues)
         ) {
             GroupHeader(stringResource(R.string.manager))
-            BooleanItem(
-                preference = viewModel.prefs.useMorpheHomeScreen,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.morphe_home_screen,
-                description = R.string.morphe_home_screen_description
-            )
 
             // Patches repository
             SettingsListItem(

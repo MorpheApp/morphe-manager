@@ -12,16 +12,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
+import app.revanced.manager.data.room.apps.installed.InstalledApp
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloadedAppRepository
 import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.domain.repository.PatchSelectionRepository
-import app.revanced.manager.data.platform.Filesystem
-import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.network.downloader.LoadedDownloaderPlugin
 import app.revanced.manager.network.downloader.ParceledDownloaderData
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -54,7 +54,6 @@ class QuickPatchViewModel(
 ) : ViewModel(), KoinComponent {
     private val app: Application = get()
     val bundleRepository: PatchBundleRepository = get()
-    private val selectionRepository: PatchSelectionRepository = get()
     private val optionsRepository: PatchOptionsRepository = get()
     private val pluginsRepository: DownloaderPluginRepository = get()
     private val downloadedAppRepository: DownloadedAppRepository = get()
@@ -71,7 +70,7 @@ class QuickPatchViewModel(
     private val storageSelectionChannel = Channel<Unit>(Channel.CONFLATED)
     val requestStorageSelection = storageSelectionChannel.receiveAsFlow()
 
-    var installedAppData: Pair<SelectedApp.Installed, app.revanced.manager.data.room.apps.installed.InstalledApp?>? by mutableStateOf(null)
+    var installedAppData: Pair<SelectedApp.Installed, InstalledApp?>? by mutableStateOf(null)
         private set
 
     var downloadedApps: List<DownloadedApp> by mutableStateOf(emptyList())
@@ -81,7 +80,7 @@ class QuickPatchViewModel(
         private set
 
     init {
-        // Asynchronous initialization of all data.
+        // Asynchronous initialization of all data
         viewModelScope.launch {
             downloadedApps = withContext(Dispatchers.IO) {
                 downloadedAppRepository.getAll()

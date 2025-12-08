@@ -41,6 +41,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -87,6 +88,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -417,8 +419,6 @@ fun MorpheHomeScreen(
         }
 
         QuickPatchSourceSelectorDialog(
-            packageName = selectedPackageName!!,
-            suggestedVersion = quickPatchViewModel.suggestedVersion,
             plugins = plugins,
             installedApp = quickPatchViewModel.installedAppData,
             downloadedApps = quickPatchViewModel.downloadedApps,
@@ -831,7 +831,7 @@ private fun ApiPatchBundleCard(
 
                 IconButton(onClick = onOpenInBrowser) {
                     Icon(
-                        Icons.Outlined.OpenInNew,
+                        Icons.AutoMirrored.Outlined.OpenInNew,
                         contentDescription = stringResource(R.string.morphe_home_open_in_browser),
                         tint = MaterialTheme.colorScheme.primary
                     )
@@ -941,10 +941,9 @@ private fun ApiPatchBundleCard(
     }
 }
 
-// Helper composables
 @Composable
 private fun StatChip(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     label: String,
     value: String,
     modifier: Modifier = Modifier
@@ -984,7 +983,7 @@ private fun StatChip(
 
 @Composable
 private fun TimelineItem(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     label: String,
     time: Long?,
     isLast: Boolean = false
@@ -1044,7 +1043,6 @@ private fun TimelineItem(
     }
 }
 
-// Helper function for relative time
 private fun getRelativeTimeString(timestamp: Long): String {
     return DateUtils.getRelativeTimeSpanString(
         timestamp,
