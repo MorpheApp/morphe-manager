@@ -703,7 +703,7 @@ fun MorpheHomeScreen(
                     // Show APK availability dialog
                     pendingPackageName = PACKAGE_YOUTUBE
                     pendingAppName = getAppName(PACKAGE_YOUTUBE)
-                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE]  // <-- ЗМІНЕНО
+                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE]
                     showApkAvailabilityDialog = true
                 },
                 onYouTubeMusicClick = {
@@ -719,7 +719,7 @@ fun MorpheHomeScreen(
                     // Show APK availability dialog
                     pendingPackageName = PACKAGE_YOUTUBE_MUSIC
                     pendingAppName = getAppName(PACKAGE_YOUTUBE_MUSIC)
-                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE_MUSIC]  // <-- ЗМІНЕНО
+                    pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE_MUSIC]
                     showApkAvailabilityDialog = true
                 }
             )
