@@ -72,6 +72,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -655,9 +656,11 @@ private fun PatchingInProgress(
         }
     }
 
-    // Funny message when patching
-    val wittyMessages = remember {
-        listOf(
+    // Witty messages to show while patching.
+    // First message is always shown as the first message for installations,
+    // and all other strings are randomly shown.
+    val wittyMessages = run {
+        val all = listOf(
             R.string.morphe_patcher_message_1,
             R.string.morphe_patcher_message_2,
             R.string.morphe_patcher_message_3,
@@ -678,11 +681,11 @@ private fun PatchingInProgress(
             R.string.morphe_patcher_message_18,
             R.string.morphe_patcher_message_19,
             R.string.morphe_patcher_message_20,
-            R.string.morphe_patcher_message_21,
         )
+        listOf(all.first()) + all.drop(1).shuffled()
     }
 
-    var currentMessageIndex by remember { mutableStateOf(0) }
+    var currentMessageIndex by rememberSaveable { mutableIntStateOf(0) }
 
     // Rotate messages every 10 seconds
     LaunchedEffect(Unit) {

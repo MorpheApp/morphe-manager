@@ -1976,19 +1976,22 @@ private fun MainContent(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Funny rotating greeting message
-            val greetingMessages = listOf(
-                R.string.morphe_home_greeting_1,
-                R.string.morphe_home_greeting_2,
-                R.string.morphe_home_greeting_3,
-                R.string.morphe_home_greeting_4,
-                R.string.morphe_home_greeting_5,
-                R.string.morphe_home_greeting_6,
-                R.string.morphe_home_greeting_7,
-            )
-            var currentGreetingIndex by rememberSaveable {
-                mutableIntStateOf((0..<greetingMessages.size).random())
+            // Witty rotating greeting messages
+            val shuffledGreetingMessages = run {
+                val all = listOf(
+                    R.string.morphe_home_greeting_1,
+                    R.string.morphe_home_greeting_2,
+                    R.string.morphe_home_greeting_3,
+                    R.string.morphe_home_greeting_4,
+                    R.string.morphe_home_greeting_5,
+                    R.string.morphe_home_greeting_6,
+                    R.string.morphe_home_greeting_7,
+                )
+                listOf(all.first()) + all.drop(1).shuffled()
             }
+
+            var currentGreetingIndex by rememberSaveable { mutableIntStateOf(0) }
+            val currentGreeting = shuffledGreetingMessages[currentGreetingIndex]
 
             Box(
                 modifier = Modifier
@@ -1997,7 +2000,7 @@ private fun MainContent(
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(
-                    targetState = greetingMessages[currentGreetingIndex],
+                    targetState = currentGreeting,
                     transitionSpec = {
                         fadeIn(tween(800)) togetherWith fadeOut(tween(800))
                     },
