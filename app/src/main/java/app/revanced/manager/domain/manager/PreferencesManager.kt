@@ -2,6 +2,7 @@ package app.revanced.manager.domain.manager
 
 import android.content.ComponentName
 import android.content.Context
+import android.os.Build
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
@@ -21,7 +22,11 @@ class PreferencesManager(
         PatchBundleConstants.STABLE_BUNDLE_URL
     )
 
-    val useProcessRuntime = booleanPreference("use_process_runtime", true)
+    val useProcessRuntime = booleanPreference(
+        "use_process_runtime",
+        // Use process runtime fails for Android 10 and lower
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+    )
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
     val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 1500)
     val patchedAppExportFormat = stringPreference(

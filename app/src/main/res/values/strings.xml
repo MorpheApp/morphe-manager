@@ -518,7 +518,8 @@ Signature (SHA-256): %2$s"</string>
     <string name="appearance">Appearance</string>
     <string name="downloaded_apps">Downloaded apps</string>
     <string name="process_runtime">Run Patcher in another process</string>
-    <string name="process_runtime_description">Speeds up patching, but may be incompatible with very old devices</string>
+    <string name="process_runtime_description">Speeds up patching by using a separate process</string>
+    <string name="process_runtime_description_not_available">This feature requires Android 11 or greater</string>
     <string name="strip_unused_libs">Remove unused native libraries</string>
     <string name="strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
     <string name="process_runtime_memory_limit">Patcher process memory limit</string>
