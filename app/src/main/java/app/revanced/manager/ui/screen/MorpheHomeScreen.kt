@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
@@ -123,6 +124,7 @@ import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.RequestInstallAppsContract
+import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -586,19 +588,21 @@ fun MorpheHomeScreen(
                 storagePickerLauncher.launch(APK_MIMETYPE)
             },
             onNeedApk = {
-                val architecture = "nodpi " +
-                        if (pendingPackageName?.endsWith("youtube.music") == true) {
-                            // YT Music requires architecture. This logic could be improved
-                            // Include actual device architecture such as arm64-v8a, or x86
-                            Build.SUPPORTED_ABIS.first()
-                        } else {
-                            "universal"
-                        }
+                val architecture =
+                    if (pendingPackageName?.endsWith("youtube.music") == true) {
+                        // YT Music requires architecture. This logic could be improved
+                        '"' + Build.SUPPORTED_ABIS.first() + '"'
+                    } else {
+                        "universal"
+                    }
 
                 val version = pendingRecommendedVersion ?: ""
                 // Backslash search parameter opens the first search result
-                val searchQuery = "\\ $pendingPackageName $version $architecture site:apkmirror.com"
+                // Some versions of YT Music don't show up unless "package:" is included.
+                // Use quotes to ensure it's an exact match of all search terms.
+                val searchQuery = "\\ package: $pendingPackageName $version \"nodpi\" $architecture site:apkmirror.com"
                 val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+                Log.d(tag, "Using search query: $searchQuery")
 
                 try {
                     uriHandler.openUri(searchUrl)
