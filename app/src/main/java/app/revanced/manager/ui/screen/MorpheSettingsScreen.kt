@@ -52,6 +52,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.AppTopBar
@@ -71,8 +72,10 @@ import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import android.provider.Settings as AndroidSettings
 
@@ -355,14 +358,28 @@ fun MorpheSettingsScreen(
                             .clickable {
                                 coroutineScope.launch {
                                     val newValue = !usePrereleases
+
+                                    // Update the preference
                                     generalViewModel.togglePatchesPrerelease(newValue)
 
+                                    // Show toast about preference change
                                     context.toast(
                                         if (newValue)
                                             context.getString(R.string.morphe_update_patches_prerelease_enabled)
                                         else
                                             context.getString(R.string.morphe_update_patches_prerelease_disabled)
                                     )
+
+                                    // Wait a bit for the preference to propagate
+                                    delay(300)
+
+                                    // Silently update the official bundle in background
+                                    withContext(Dispatchers.IO) {
+                                        dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                            showProgress = false, // Don't show progress
+                                            showToast = false     // Don't show toast
+                                        )
+                                    }
                                 }
                             }
                             .padding(12.dp),
@@ -396,16 +413,27 @@ fun MorpheSettingsScreen(
                             checked = usePrereleases,
                             onCheckedChange = { newValue ->
                                 coroutineScope.launch {
+                                    // Update the preference
                                     generalViewModel.togglePatchesPrerelease(newValue)
 
-                                    dashboardViewModel.patchBundleRepository.updateCheck()
-
+                                    // Show toast about preference change
                                     context.toast(
                                         if (newValue)
                                             context.getString(R.string.morphe_update_patches_prerelease_enabled)
                                         else
                                             context.getString(R.string.morphe_update_patches_prerelease_disabled)
                                     )
+
+                                    // Wait a bit for the preference to propagate
+                                    delay(300)
+
+                                    // Silently update the official bundle in background
+                                    withContext(Dispatchers.IO) {
+                                        dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                            showProgress = false, // Don't show progress
+                                            showToast = false     // Don't show toast
+                                        )
+                                    }
                                 }
                             }
                         )

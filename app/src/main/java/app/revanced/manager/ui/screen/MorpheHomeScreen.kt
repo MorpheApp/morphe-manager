@@ -144,11 +144,9 @@ private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
 private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
 
 private enum class BundleUpdateStatus {
-    Checking,    // Initial state
     Updating,    // Update in progress
-    Success,     // Update completed with changes
-    UpToDate,    // Already up to date
-    Error        // Error occurred
+    Success,     // Update completed successfully
+    Error        // Error occurred (including no internet)
 }
 
 // Quick patch parameters data class
@@ -389,57 +387,40 @@ fun MorpheHomeScreen(
         )
     }
 
-    // State for bundle update snackbar with minimum display time
+    // State for bundle update snackbar
     var showBundleUpdateSnackbar by remember { mutableStateOf(false) }
-    var snackbarStatus by remember { mutableStateOf<BundleUpdateStatus>(BundleUpdateStatus.Checking) }
-    var snackbarDismissJob by remember { mutableStateOf<kotlinx.coroutines.Job?>(null) }
+    var snackbarStatus by remember { mutableStateOf<BundleUpdateStatus>(BundleUpdateStatus.Updating) }
 
-    // Track if we've shown the initial update check
-    var hasShownInitialUpdate by rememberSaveable { mutableStateOf(false) }
-
-    // Control snackbar visibility and auto-dismiss
+    // Control snackbar visibility based on progress
     LaunchedEffect(bundleUpdateProgress) {
         val progress = bundleUpdateProgress
-        if (progress != null) {
-            snackbarDismissJob?.cancel() // Cancel any pending dismiss
-            showBundleUpdateSnackbar = true
-            snackbarStatus = when {
-                progress.completed < progress.total -> BundleUpdateStatus.Updating
-                progress.total > 0 -> BundleUpdateStatus.Success
-                else -> BundleUpdateStatus.UpToDate
-            }
-            // If update is complete, schedule auto-dismiss after 3 seconds
-            if (progress.completed >= progress.total) {
-                snackbarDismissJob = launch {
-                    delay(3000)
-                    showBundleUpdateSnackbar = false
-                    hasShownInitialUpdate = true
+
+        if (progress == null) {
+            // Progress cleared - hide snackbar
+            showBundleUpdateSnackbar = false
+            return@LaunchedEffect
+        }
+
+        // We have progress - decide what to show
+        when {
+            progress.result != null -> {
+                // Update completed with a result
+                showBundleUpdateSnackbar = true
+                snackbarStatus = when (progress.result) {
+                    PatchBundleRepository.UpdateResult.Success -> BundleUpdateStatus.Success
+                    PatchBundleRepository.UpdateResult.NoInternet,
+                    PatchBundleRepository.UpdateResult.Error -> BundleUpdateStatus.Error
                 }
             }
-        } else {
-            // Repository cleared progress, hide snackbar if it was visible
-            if (showBundleUpdateSnackbar) {
-                delay(3000)
-                showBundleUpdateSnackbar = false
-                hasShownInitialUpdate = true
+            progress.completed < progress.total -> {
+                // Still updating
+                showBundleUpdateSnackbar = true
+                snackbarStatus = BundleUpdateStatus.Updating
             }
-        }
-    }
-
-    // Show snackbar on initial launch after checking updates
-    LaunchedEffect(Unit) {
-        dashboardViewModel.patchBundleRepository.checkManualUpdates(0)
-        delay(500) // Wait a bit for the check to complete
-
-        if (!hasShownInitialUpdate && bundleUpdateProgress == null) {
-            // Show "up to date" message on first launch
-            showBundleUpdateSnackbar = true
-            snackbarStatus = BundleUpdateStatus.UpToDate
-
-            snackbarDismissJob = launch {
-                delay(3000)
-                showBundleUpdateSnackbar = false
-                hasShownInitialUpdate = true
+            else -> {
+                // Completed == total but no result yet - keep showing updating
+                showBundleUpdateSnackbar = true
+                snackbarStatus = BundleUpdateStatus.Updating
             }
         }
     }
@@ -483,14 +464,11 @@ fun MorpheHomeScreen(
                         onRefresh = {
                             scope.launch {
                                 isRefreshingBundle = true
-                                hasShownInitialUpdate = false
                                 try {
-                                    if (apiBundle is RemotePatchBundle) {
-                                        dashboardViewModel.patchBundleRepository.update(
-                                            apiBundle,
-                                            showToast = false // Disable toast, we're using snackbar
-                                        )
-                                    }
+                                    dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                        showProgress = true,  // Show progress in UI
+                                        showToast = false     // Don't show toast
+                                    )
                                 } finally {
                                     delay(500)
                                     isRefreshingBundle = false
@@ -1322,9 +1300,8 @@ private fun BundleUpdateSnackbar(
         colors = CardDefaults.cardColors(
             containerColor = when (status) {
                 BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
-                BundleUpdateStatus.UpToDate -> MaterialTheme.colorScheme.tertiaryContainer
                 BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
-                else -> MaterialTheme.colorScheme.surfaceVariant
+                BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
             }
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -1347,23 +1324,15 @@ private fun BundleUpdateSnackbar(
                         modifier = Modifier.size(24.dp)
                     )
                 }
-                BundleUpdateStatus.UpToDate -> {
-                    Icon(
-                        imageVector = Icons.Outlined.CheckCircle,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
                 BundleUpdateStatus.Error -> {
                     Icon(
-                        imageVector = Icons.Outlined.Info,
+                        imageVector = Icons.Outlined.Warning,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(24.dp)
                     )
                 }
-                BundleUpdateStatus.Updating, BundleUpdateStatus.Checking -> {
+                BundleUpdateStatus.Updating -> {
                     CircularProgressIndicator(
                         progress = { fraction },
                         modifier = Modifier.size(24.dp),
@@ -1377,10 +1346,8 @@ private fun BundleUpdateSnackbar(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = when (status) {
-                        BundleUpdateStatus.Checking -> stringResource(R.string.morphe_home_checking_updates)
                         BundleUpdateStatus.Updating -> stringResource(R.string.morphe_home_updating_patches)
                         BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_update_success)
-                        BundleUpdateStatus.UpToDate -> stringResource(R.string.morphe_home_patches_up_to_date)
                         BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error)
                     },
                     style = MaterialTheme.typography.titleMedium,
@@ -1389,9 +1356,8 @@ private fun BundleUpdateSnackbar(
                 )
                 Text(
                     text = when (status) {
-                        BundleUpdateStatus.Checking -> stringResource(R.string.morphe_home_checking_updates_subtitle)
                         BundleUpdateStatus.Updating -> {
-                            if (progress != null) {
+                            if (progress != null && progress.total > 0) {
                                 stringResource(
                                     R.string.bundle_update_progress,
                                     progress.completed,
@@ -1402,8 +1368,14 @@ private fun BundleUpdateSnackbar(
                             }
                         }
                         BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_patches_updated)
-                        BundleUpdateStatus.UpToDate -> stringResource(R.string.morphe_home_no_updates_available)
-                        BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error_subtitle)
+                        BundleUpdateStatus.Error -> {
+                            // Check if it's a no internet error
+                            if (progress?.result == PatchBundleRepository.UpdateResult.NoInternet) {
+                                stringResource(R.string.morphe_home_no_internet)
+                            } else {
+                                stringResource(R.string.morphe_home_update_error_subtitle)
+                            }
+                        }
                     },
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant

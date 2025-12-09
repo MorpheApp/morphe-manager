@@ -22,6 +22,7 @@ import app.revanced.manager.data.room.bundles.Source as SourceInfo
 import app.revanced.manager.domain.bundles.LocalPatchBundle
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.patcher.patch.PatchInfo
@@ -56,6 +57,7 @@ import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.Locale
 import kotlin.collections.LinkedHashSet
+import kotlin.collections.firstOrNull
 import kotlin.collections.joinToString
 import kotlin.collections.map
 import kotlin.text.ifEmpty
@@ -590,7 +592,7 @@ class PatchBundleRepository(
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+        store.dispatch(Update(showProgress = false) { it.autoUpdate })
         checkManualUpdates()
     }
 
@@ -616,9 +618,81 @@ class PatchBundleRepository(
         doReload()
     }
 
+    /**
+     * Shared function to update the official bundle (uid = 0)
+     * @param showProgress Whether to show progress updates
+     * @param showToast Whether to show toast notifications
+     * @return UpdateResult indicating success, no internet, or error
+     */
+    suspend fun updateOfficialBundle(
+        showProgress: Boolean = true,
+        showToast: Boolean = false
+    ): UpdateResult {
+        // Check network first
+        val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
+        if (!allowMeteredUpdates && !networkInfo.isSafe()) {
+            Log.d(tag, "No internet connection for bundle update")
+            if (showProgress) {
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    result = UpdateResult.NoInternet
+                )
+                // Schedule clear after delay
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(3500)
+                    bundleUpdateProgressFlow.value = null
+                }
+            }
+            return UpdateResult.NoInternet
+        }
+
+        // Start progress if needed
+        if (showProgress) {
+            bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                total = 1,
+                completed = 0,
+                result = null
+            )
+        }
+
+        // Use the existing Update action to perform the update
+        try {
+            store.dispatch(Update(
+                force = false,
+                showToast = showToast,
+                showProgress = showProgress
+            ) { it.uid == 0 })
+
+            // Wait a bit for the update to propagate
+            delay(1000)
+
+            // Check the current progress state to determine result
+            val currentProgress = bundleUpdateProgressFlow.value
+            val result = currentProgress?.result ?: UpdateResult.Success
+
+            return result
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to update official bundle", e)
+            if (showProgress) {
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    result = UpdateResult.Error
+                )
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(3500)
+                    bundleUpdateProgressFlow.value = null
+                }
+            }
+            return UpdateResult.Error
+        }
+    }
+
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
+        private val showProgress: Boolean = true,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
         private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
@@ -632,7 +706,17 @@ class PatchBundleRepository(
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
             if (!allowMeteredUpdates && !networkInfo.isSafe()) {
                 Log.d(tag, "Skipping update check because the network is down or metered.")
-                bundleUpdateProgressFlow.value = null
+                if (showProgress) {
+                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                        total = 1,
+                        completed = 1,
+                        result = UpdateResult.NoInternet
+                    )
+                    CoroutineScope(Dispatchers.Default).launch {
+                        delay(3500)
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
                 return@coroutineScope current
             }
 
@@ -642,14 +726,19 @@ class PatchBundleRepository(
 
             if (targets.isEmpty()) {
                 if (showToast) toast(R.string.patches_update_unavailable)
-                bundleUpdateProgressFlow.value = null
+                if (showProgress) {
+                    bundleUpdateProgressFlow.value = null
+                }
                 return@coroutineScope current
             }
 
-            bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                total = targets.size,
-                completed = 0
-            )
+            if (showProgress) {
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = targets.size,
+                    completed = 0,
+                    result = null
+                )
+            }
 
             val updated = try {
                 targets
@@ -661,10 +750,12 @@ class PatchBundleRepository(
                                 if (force) downloadLatest() else update()
                             }
 
-                            bundleUpdateProgressFlow.update { progress ->
-                                progress?.copy(
-                                    completed = (progress.completed + 1).coerceAtMost(progress.total)
-                                )
+                            if (showProgress) {
+                                bundleUpdateProgressFlow.update { progress ->
+                                    progress?.copy(
+                                        completed = (progress.completed + 1).coerceAtMost(progress.total)
+                                    )
+                                }
                             }
 
                             if (result == null) return@async null
@@ -675,24 +766,35 @@ class PatchBundleRepository(
                     .awaitAll()
                     .filterNotNull()
                     .toMap()
-            } finally {
-                // Ensure collectors see final "completed == total" state so UI can schedule auto-dismiss.
-                val totalCount = targets.size
-                // Emit final progress (mark as fully completed) so UI can react to completion.
-                bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                    total = totalCount,
-                    completed = totalCount
-                )
-
-                // Clear the progress shortly after so flows don't permanently hold onto the final value.
-                // Do this asynchronously so we do not block the current action; UI already scheduled dismiss.
-                CoroutineScope(Dispatchers.Default).launch {
-                    delay(400) // Small delay to ensure collectors receive the "completed" value
-                    bundleUpdateProgressFlow.value = null
+            } catch (e: Exception) {
+                Log.e(tag, "Error during bundle update", e)
+                if (showProgress) {
+                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                        total = targets.size,
+                        completed = targets.size,
+                        result = UpdateResult.Error
+                    )
+                    CoroutineScope(Dispatchers.Default).launch {
+                        delay(3500)
+                        bundleUpdateProgressFlow.value = null
+                    }
                 }
+                return@coroutineScope current
             }
+
             if (updated.isEmpty()) {
                 if (showToast) toast(R.string.patches_update_unavailable)
+                if (showProgress) {
+                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                        total = targets.size,
+                        completed = targets.size,
+                        result = UpdateResult.Success
+                    )
+                    CoroutineScope(Dispatchers.Default).launch {
+                        delay(3500)
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
                 return@coroutineScope current
             }
 
@@ -716,12 +818,40 @@ class PatchBundleRepository(
             }
 
             if (showToast) toast(R.string.patches_update_success)
+
+            if (showProgress) {
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = targets.size,
+                    completed = targets.size,
+                    result = UpdateResult.Success
+                )
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(3500)
+                    bundleUpdateProgressFlow.value = null
+                }
+            }
+
             doReload()
         }
 
         override suspend fun catch(exception: Exception) {
             Log.e(tag, "Failed to update patches", exception)
-            toast(R.string.patches_download_fail, exception.simpleMessage())
+            if (showProgress) {
+                bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    result = UpdateResult.Error
+                )
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(3500)
+                    bundleUpdateProgressFlow.value = null
+                }
+            }
+            if (showToast) {
+                withContext(Dispatchers.Main) {
+                    app.toast(app.getString(R.string.patches_download_fail, exception.simpleMessage()))
+                }
+            }
         }
     }
 
@@ -813,9 +943,16 @@ class PatchBundleRepository(
         val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf()
     )
 
+    sealed class UpdateResult {
+        object Success : UpdateResult()
+        object NoInternet : UpdateResult()
+        object Error : UpdateResult()
+    }
+
     data class BundleUpdateProgress(
         val total: Int,
         val completed: Int,
+        val result: UpdateResult? = null
     )
 
     data class ImportProgress(
