@@ -34,7 +34,7 @@
     <string name="morphe_home_bundle_update_completed">Update Completed</string>
     <string name="morphe_home_unknown">Unknown</string>
     <string name="morphe_home_timeline">Update History</string>
-    <string name="morphe_home_apk_availability_dialog_title">Do you have the APK?</string>
+    <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
     <string name="morphe_home_apk_availability_dialog_description">To patch %1$s, I need version %2$s (unpatched).</string>
     <string name="morphe_home_apk_availability_dialog_info">Make sure you download the APK but DO NOT install it.</string>
     <string name="morphe_home_apk_availability_yes">Yes, I have it</string>
