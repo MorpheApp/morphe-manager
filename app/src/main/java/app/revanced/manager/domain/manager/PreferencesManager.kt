@@ -19,7 +19,7 @@ class PreferencesManager(
 
     val patchesBundleJsonUrl = stringPreference(
         "patches_bundle_json_url",
-        PatchBundleConstants.STABLE_BUNDLE_URL
+        PatchBundleConstants.BUNDLE_URL_STABLE
     )
 
     val useProcessRuntime = booleanPreference(
@@ -62,11 +62,13 @@ class PreferencesManager(
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
 
     object PatchBundleConstants {
-        const val STABLE_BUNDLE_URL = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
-        const val DEV_BUNDLE_URL = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-dev-patches-bundle.json"
+        const val BUNDLE_URL_STABLE = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
+        const val BUNDLE_URL_LATEST = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
 
         fun getBundleUrl(usePrerelease: Boolean): String {
-            return if (usePrerelease) DEV_BUNDLE_URL else STABLE_BUNDLE_URL
+            // Latest will always be pre-release, or the latest stable
+            // which may contain additional changes not published in dev release
+            return if (usePrerelease) BUNDLE_URL_LATEST else BUNDLE_URL_STABLE
         }
     }
 
