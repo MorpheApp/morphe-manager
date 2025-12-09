@@ -665,7 +665,7 @@ class PatchBundleRepository(
             ) { it.uid == 0 })
 
             // Wait a bit for the update to propagate
-            delay(1000)
+            delay(1500)
 
             // Check the current progress state to determine result
             val currentProgress = bundleUpdateProgressFlow.value
@@ -810,6 +810,8 @@ class PatchBundleRepository(
                         updatedAt = now
                     )
                 }
+
+                src.clearChangelogCache()
             }
 
             if (updated.isNotEmpty()) {

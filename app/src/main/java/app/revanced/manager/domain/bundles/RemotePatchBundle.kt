@@ -96,6 +96,16 @@ sealed class RemotePatchBundle(
         return asset
     }
 
+    fun clearChangelogCache() {
+        val key = "$uid|$endpoint"
+        changelogCacheMutex.tryLock()
+        try {
+            changelogCache.remove(key)
+        } finally {
+            changelogCacheMutex.unlock()
+        }
+    }
+
     companion object {
         const val updateFailMsg = "Failed to update patches"
         private const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
