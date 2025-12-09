@@ -44,4 +44,8 @@ class GeneralSettingsViewModel(
             PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
         )
     }
+
+    fun toggleRootMode(enabled: Boolean) = viewModelScope.launch {
+        prefs.useRootMode.update(enabled)
+    }
 }

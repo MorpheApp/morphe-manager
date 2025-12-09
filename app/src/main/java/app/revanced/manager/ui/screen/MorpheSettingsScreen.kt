@@ -603,6 +603,86 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            SectionHeader(
+                icon = Icons.Outlined.DeveloperMode,
+                title = stringResource(R.string.debugging)
+            )
+
+            SettingsCard {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
+                    val hasRootAccess = remember { dashboardViewModel.rootInstaller?.hasRootAccess() ?: false }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable(enabled = hasRootAccess) {
+                                coroutineScope.launch {
+                                    val newValue = !hasRootAccess
+                                    generalViewModel.toggleRootMode(newValue)
+                                    context.toast(
+                                        if (newValue)
+                                            context.getString(R.string.morphe_root_mode_enabled)
+                                        else
+                                            context.getString(R.string.morphe_root_mode_disabled)
+                                    )
+                                }
+                            }
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Security,
+                                contentDescription = null,
+                                tint = if (hasRootAccess) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Column {
+                                Text(
+                                    text = stringResource(R.string.morphe_root_mode),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium,
+                                    color = if (hasRootAccess) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = if (hasRootAccess)
+                                        stringResource(R.string.morphe_root_mode_description)
+                                    else
+                                        stringResource(R.string.morphe_root_mode_unavailable),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                        Switch(
+                            checked = useRootMode,
+                            enabled = hasRootAccess,
+                            onCheckedChange = { newValue ->
+                                coroutineScope.launch {
+                                    generalViewModel.toggleRootMode(newValue)
+                                    context.toast(
+                                        if (newValue)
+                                            context.getString(R.string.morphe_root_mode_enabled)
+                                        else
+                                            context.getString(R.string.morphe_root_mode_disabled)
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             // About Section
             SectionHeader(
                 icon = Icons.Outlined.Info,

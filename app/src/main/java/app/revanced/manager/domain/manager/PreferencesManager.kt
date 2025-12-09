@@ -66,6 +66,8 @@ class PreferencesManager(
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
 
+    val useRootMode = booleanPreference("use_root_mode", false)
+
     init {
         runBlocking {
             if (installationTime.get() == 0L) {

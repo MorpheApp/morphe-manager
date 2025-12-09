@@ -49,8 +49,10 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.FileDownload
+import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -78,6 +80,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -116,6 +119,7 @@ fun MorphePatcherScreen(
     val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
+    val isRootMode by viewModel.prefs.useRootMode.getAsState()
 
     // Animated progress for smooth animation
     var targetProgress by remember { mutableStateOf(0f) }
@@ -325,6 +329,7 @@ fun MorphePatcherScreen(
         InstallDialog(
             state = installDialogState,
             isWaitingForUninstall = isWaitingForUninstall,
+            isRootMode = isRootMode,
             errorMessage = installErrorMessage,
             onDismiss = {
                 showInstallDialog = false
@@ -597,15 +602,17 @@ fun MorphePatcherScreen(
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                         ) {
                             Icon(
-                                if (viewModel.installedPackageName == null)
-                                    Icons.Outlined.FileDownload
-                                else
-                                    Icons.AutoMirrored.Outlined.OpenInNew,
+                                if (viewModel.installedPackageName == null) {
+                                    if (isRootMode) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
+                                } else {
+                                    Icons.AutoMirrored.Outlined.OpenInNew
+                                },
                                 stringResource(
-                                    if (viewModel.installedPackageName == null)
-                                        R.string.install_app
-                                    else
+                                    if (viewModel.installedPackageName == null) {
+                                        if (isRootMode) R.string.mount else R.string.install_app
+                                    } else {
                                         R.string.open_app
+                                    }
                                 )
                             )
                         }
@@ -1100,11 +1107,15 @@ private fun InstallDialog(
     state: InstallDialogState,
     isWaitingForUninstall: Boolean,
     errorMessage: String?,
+    isRootMode: Boolean,
     onDismiss: () -> Unit,
     onInstall: () -> Unit,
     onUninstall: () -> Unit,
     onCancel: () -> Unit
 ) {
+    val installButtonText = if (isRootMode) R.string.mount else R.string.install_app
+    val installIcon = if (isRootMode) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
+
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             shape = RoundedCornerShape(24.dp),
@@ -1131,7 +1142,7 @@ private fun InstallDialog(
                         Icon(
                             imageVector = when (state) {
                                 InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
-                                else -> Icons.Outlined.FileDownload
+                                else -> installIcon
                             },
                             contentDescription = null,
                             tint = when (state) {
@@ -1148,7 +1159,7 @@ private fun InstallDialog(
                     text = stringResource(
                         when (state) {
                             InstallDialogState.ERROR -> R.string.install_app_fail_title
-                            else -> R.string.install_app
+                            else -> installButtonText
                         }
                     ),
                     style = MaterialTheme.typography.headlineSmall,
@@ -1177,19 +1188,52 @@ private fun InstallDialog(
                         }
                     }
                 } else {
-                    Text(
-                        text = stringResource(
-                            when (state) {
-                                InstallDialogState.INITIAL -> R.string.morphe_patcher_install_dialog_message
-                                InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
-                                InstallDialogState.READY_TO_INSTALL -> R.string.morphe_patcher_install_ready_message
-                                InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message // fallback
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = stringResource(
+                                when (state) {
+                                    InstallDialogState.INITIAL -> if (isRootMode)
+                                        R.string.morphe_patcher_mount_dialog_message
+                                    else
+                                        R.string.morphe_patcher_install_dialog_message
+                                    InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
+                                    InstallDialogState.READY_TO_INSTALL -> if (isRootMode)
+                                        R.string.morphe_patcher_mount_ready_message
+                                    else
+                                        R.string.morphe_patcher_install_ready_message
+                                    InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message
+                                }
+                            ),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center
+                        )
+
+                        // Root mode warning
+                        if (isRootMode && state == InstallDialogState.INITIAL) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
+                                    .padding(8.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.Info,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Text(
+                                    text = stringResource(R.string.morphe_root_gmscore_excluded),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.weight(1f)
+                                )
                             }
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
+                        }
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -1199,7 +1243,7 @@ private fun InstallDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // Action button (Install or Uninstall)
+                    // Action button (Install/Mount or Uninstall)
                     when (state) {
                         InstallDialogState.INITIAL, InstallDialogState.READY_TO_INSTALL -> {
                             Button(
@@ -1208,12 +1252,12 @@ private fun InstallDialog(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Icon(
-                                    Icons.Outlined.FileDownload,
+                                    installIcon,
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Spacer(Modifier.width(4.dp))
-                                Text(stringResource(R.string.install_app))
+                                Text(stringResource(installButtonText))
                             }
                         }
                         InstallDialogState.CONFLICT, InstallDialogState.ERROR -> {

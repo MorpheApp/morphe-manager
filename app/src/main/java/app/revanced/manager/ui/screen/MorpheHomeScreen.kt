@@ -88,6 +88,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -173,6 +174,7 @@ fun MorpheHomeScreen(
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     onUpdateClick: () -> Unit = {},
     dashboardViewModel: DashboardViewModel = koinViewModel(),
+    prefs: PreferencesManager = koinInject(),
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress? = null
 ) {
     val context = LocalContext.current
@@ -184,6 +186,15 @@ fun MorpheHomeScreen(
     val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
+
+    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
+    val isRootMode by prefs.useRootMode.getAsState()
+
+    val hasRootAccess by remember {
+        derivedStateOf {
+            dashboardViewModel.rootInstaller?.hasRootAccess() ?: false
+        }
+    }
 
     // Get only the API bundle (uid = 0)
     val apiBundle = remember(sources) { sources.firstOrNull { it.uid == 0 } }
@@ -266,7 +277,14 @@ fun MorpheHomeScreen(
                 .first()
         }
 
-        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        // Exclude GmsCore support patch in root mode
+        val patches = if (isRootMode && hasRootAccess) {
+            bundles.toPatchSelection(allowIncompatible) { _, patch ->
+                patch.include && !patch.name.contains("GmsCore", ignoreCase = true)
+            }
+        } else {
+            bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        }
 
         val bundlePatches = bundles.associate { scoped ->
             scoped.uid to scoped.patches.associateBy { it.name }
@@ -560,6 +578,7 @@ fun MorpheHomeScreen(
             appName = pendingAppName!!,
             packageName = pendingPackageName!!,
             recommendedVersion = pendingRecommendedVersion,
+            isRootMode = isRootMode,
             onDismiss = {
                 showApkAvailabilityDialog = false
                 pendingPackageName = null
@@ -684,9 +703,6 @@ fun MorpheHomeScreen(
             onDismiss = { showWrongPackageDialog = null }
         )
     }
-
-    val prefs: PreferencesManager = koinInject()
-    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
 
     if (showPatchesDialog && apiBundle != null) {
         BundlePatchesDialog(
@@ -1963,6 +1979,7 @@ private fun ApkAvailabilityDialog(
     appName: String,
     packageName: String,
     recommendedVersion: String?,
+    isRootMode: Boolean,
     onDismiss: () -> Unit,
     onHaveApk: () -> Unit,
     onNeedApk: () -> Unit
@@ -2004,7 +2021,7 @@ private fun ApkAvailabilityDialog(
                     textAlign = TextAlign.Center
                 )
 
-                // Description - simplified, removed the "do not install" warning
+                // Description with root warning
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -2019,6 +2036,31 @@ private fun ApkAvailabilityDialog(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
+
+                    // Root mode warning
+                    if (isRootMode) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f))
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Warning,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.error,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.morphe_root_install_apk_required),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
 
                     // Info Card with package and version
                     Surface(

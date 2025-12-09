@@ -22,6 +22,7 @@ import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
 import app.morphe.manager.R
+import app.revanced.manager.domain.installer.RootInstaller
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
@@ -39,6 +40,7 @@ class DashboardViewModel(
     private val networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
     private val pm: PM,
+    val rootInstaller: RootInstaller? = null
 ) : ViewModel() {
     val availablePatches =
         patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }

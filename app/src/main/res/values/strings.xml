@@ -58,7 +58,17 @@
     <string name="morphe_home_any_version">any version</string>
     <string name="morphe_home_recommended_version">Recommended Version</string>
     <string name="morphe_patcher_selected_version">Selected Version</string>
-    <string name="need_apk_instructions">Download (but do not install) %1$s version %2$s APK, and come back here when you have done that.</string>
+
+    <!-- Root Mode -->
+    <string name="morphe_root_mode">Root Mode</string>
+    <string name="morphe_root_mode_description">Use root to mount patched apps (experimental)</string>
+    <string name="morphe_root_mode_unavailable">Root access not available</string>
+    <string name="morphe_root_mode_enabled">Root mode enabled</string>
+    <string name="morphe_root_mode_disabled">Root mode disabled</string>
+    <string name="morphe_root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
+    <string name="morphe_patcher_mount_dialog_message">Mount patched app?</string>
+    <string name="morphe_patcher_mount_ready_message">Ready to mount. The patched app will replace the installed version.</string>
 
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_title">Patching</string>
