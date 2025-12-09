@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <permission
-        android:name="app.universal.revanced.manager.permission.PLUGIN_HOST"
+        android:name="app.morphe.manager.permission.PLUGIN_HOST"
         android:description="@string/plugin_host_permission_description"
         android:label="@string/plugin_host_permission_label"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="app.universal.revanced.manager.permission.PLUGIN_HOST" />
+    <uses-permission android:name="app.morphe.manager.permission.PLUGIN_HOST" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
