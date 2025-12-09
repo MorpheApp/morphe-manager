@@ -10,7 +10,6 @@ import android.text.format.DateUtils
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -21,7 +20,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -78,13 +76,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -109,17 +105,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -129,8 +124,6 @@ import app.revanced.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
@@ -705,7 +698,8 @@ fun MorpheHomeScreen(
                     pendingAppName = getAppName(PACKAGE_YOUTUBE_MUSIC)
                     pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE_MUSIC]
                     showApkAvailabilityDialog = true
-                }
+                },
+                shuffleSeed = dashboardViewModel.prefs.installationTime.getBlocking(),
             )
 
             // Floating Action Buttons
@@ -1765,8 +1759,13 @@ private fun getRelativeTimeString(timestamp: Long): String {
 @Composable
 private fun MainContent(
     onYouTubeClick: () -> Unit,
-    onYouTubeMusicClick: () -> Unit
+    onYouTubeMusicClick: () -> Unit,
+    shuffleSeed: Long,
 ) {
+    val greeting = HomeAndPatcherMessages.getHomeMessage(
+        LocalContext.current, shuffleSeed
+    )
+
     val scrollState = rememberScrollState()
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -1959,44 +1958,19 @@ private fun MainContent(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Witty rotating greeting messages
-            val shuffledGreetingMessages = run {
-                val all = listOf(
-                    R.string.morphe_home_greeting_1,
-                    R.string.morphe_home_greeting_2,
-                    R.string.morphe_home_greeting_3,
-                    R.string.morphe_home_greeting_4,
-                    R.string.morphe_home_greeting_5,
-                    R.string.morphe_home_greeting_6,
-                    R.string.morphe_home_greeting_7,
-                )
-                listOf(all.first()) + all.drop(1).shuffled()
-            }
-
-            var currentGreetingIndex by rememberSaveable { mutableIntStateOf(0) }
-            val currentGreeting = shuffledGreetingMessages[currentGreetingIndex]
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),
                 contentAlignment = Alignment.Center
             ) {
-                AnimatedContent(
-                    targetState = currentGreeting,
-                    transitionSpec = {
-                        fadeIn(tween(800)) togetherWith fadeOut(tween(800))
-                    },
-                    label = "greeting_animation"
-                ) { resId ->
-                    Text(
-                        text = stringResource(resId),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                }
+                Text(
+                    text = stringResource(greeting),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
 
             Spacer(Modifier.height(32.dp))
