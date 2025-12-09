@@ -72,7 +72,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -95,6 +94,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.model.State
+import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.EventEffect
@@ -656,42 +656,21 @@ private fun PatchingInProgress(
         }
     }
 
-    // Witty messages to show while patching.
-    // First message is always shown as the first message for installations,
-    // and all other strings are randomly shown.
-    val wittyMessages = run {
-        val all = listOf(
-            R.string.morphe_patcher_message_1,
-            R.string.morphe_patcher_message_2,
-            R.string.morphe_patcher_message_3,
-            R.string.morphe_patcher_message_4,
-            R.string.morphe_patcher_message_5,
-            R.string.morphe_patcher_message_6,
-            R.string.morphe_patcher_message_7,
-            R.string.morphe_patcher_message_8,
-            R.string.morphe_patcher_message_9,
-            R.string.morphe_patcher_message_10,
-            R.string.morphe_patcher_message_11,
-            R.string.morphe_patcher_message_12,
-            R.string.morphe_patcher_message_13,
-            R.string.morphe_patcher_message_14,
-            R.string.morphe_patcher_message_15,
-            R.string.morphe_patcher_message_16,
-            R.string.morphe_patcher_message_17,
-            R.string.morphe_patcher_message_18,
-            R.string.morphe_patcher_message_19,
-            R.string.morphe_patcher_message_20,
+    val context = LocalContext.current
+    val shuffleSeed = viewModel.prefs.installationTime.getBlocking()
+    var currentMessage by remember {
+        mutableStateOf(
+            HomeAndPatcherMessages.getPatcherMessage(context, shuffleSeed)
         )
-        listOf(all.first()) + all.drop(1).shuffled()
     }
-
-    var currentMessageIndex by rememberSaveable { mutableIntStateOf(0) }
 
     // Rotate messages every 10 seconds
     LaunchedEffect(Unit) {
         while (true) {
             delay(10000)
-            currentMessageIndex = (currentMessageIndex + 1) % wittyMessages.size
+            currentMessage = HomeAndPatcherMessages.getPatcherMessage(
+                context, shuffleSeed
+            )
         }
     }
 
@@ -701,7 +680,7 @@ private fun PatchingInProgress(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        // Funny message
+        // Fun message
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -710,7 +689,7 @@ private fun PatchingInProgress(
             contentAlignment = Alignment.TopCenter
         ) {
             AnimatedContent(
-                targetState = wittyMessages[currentMessageIndex],
+                targetState = stringResource(currentMessage),
                 transitionSpec = {
                     fadeIn(animationSpec = tween(1000)) togetherWith
                             fadeOut(animationSpec = tween(1000))
@@ -718,7 +697,7 @@ private fun PatchingInProgress(
                 label = "message_animation"
             ) { messageResId ->
                 Text(
-                    text = stringResource(messageResId),
+                    text = messageResId,
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onBackground,

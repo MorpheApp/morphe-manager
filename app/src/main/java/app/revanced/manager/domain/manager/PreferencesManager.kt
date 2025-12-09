@@ -3,9 +3,12 @@ package app.revanced.manager.domain.manager
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
+import app.revanced.manager.util.tag
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class PreferencesManager(
@@ -51,6 +54,8 @@ class PreferencesManager(
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
 
+    val installationTime = longPreference("manager_installation_time", 0)
+
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
     val disableSelectionWarning = booleanPreference("disable_selection_warning", false)
     val disableUniversalPatchCheck = booleanPreference("disable_patch_universal_check", true)
@@ -60,6 +65,16 @@ class PreferencesManager(
     val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
+
+    init {
+        runBlocking {
+            if (installationTime.get() == 0L) {
+                val now = System.currentTimeMillis()
+                installationTime.update(now)
+                Log.d(tag, "Installation time set to $now")
+            }
+        }
+    }
 
     object PatchBundleConstants {
         const val BUNDLE_URL_STABLE = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
