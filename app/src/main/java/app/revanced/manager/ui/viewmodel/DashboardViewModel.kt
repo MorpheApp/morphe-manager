@@ -158,14 +158,4 @@ class DashboardViewModel(
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
     }
-
-    fun updatePatchBundleUrl(usePrerelease: Boolean) = viewModelScope.launch {
-        prefs.usePatchesPrereleases.update(usePrerelease)
-        prefs.patchesBundleJsonUrl.update(
-            PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
-        )
-
-        // Автоматично оновити бандли
-        patchBundleRepository.updateCheck()
-    }
 }

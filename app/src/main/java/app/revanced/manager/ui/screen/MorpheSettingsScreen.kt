@@ -64,6 +64,7 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.AboutViewModel
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
@@ -86,7 +87,8 @@ fun MorpheSettingsScreen(
     highlightSection: String? = null,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
-    importExportViewModel: ImportExportViewModel = koinViewModel()
+    importExportViewModel: ImportExportViewModel = koinViewModel(),
+    dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -395,6 +397,8 @@ fun MorpheSettingsScreen(
                             onCheckedChange = { newValue ->
                                 coroutineScope.launch {
                                     generalViewModel.togglePatchesPrerelease(newValue)
+
+                                    dashboardViewModel.patchBundleRepository.updateCheck()
 
                                     context.toast(
                                         if (newValue)
