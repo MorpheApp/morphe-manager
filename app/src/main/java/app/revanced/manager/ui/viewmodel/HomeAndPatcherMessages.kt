@@ -14,6 +14,9 @@ object HomeAndPatcherMessages {
 
     private lateinit var homeGreetingMessages: List<Int>
 
+    private fun shuffleAllExceptFirst(shuffleSeed: Long, vararg messages: Int) =
+        listOf(messages.first()) + messages.drop(1).shuffled(Random(shuffleSeed))
+
     /**
      * Witty greeting message.
      */
@@ -22,7 +25,8 @@ object HomeAndPatcherMessages {
         // and all other strings are randomly shown.
         // Use different seed on each install, but keep the same seed across sessions
         if (!::homeGreetingMessages.isInitialized) {
-            val messages = listOf(
+            homeGreetingMessages = shuffleAllExceptFirst(
+                shuffleSeed,
                 R.string.morphe_home_greeting_1,
                 R.string.morphe_home_greeting_2,
                 R.string.morphe_home_greeting_3,
@@ -31,28 +35,21 @@ object HomeAndPatcherMessages {
                 R.string.morphe_home_greeting_6,
                 R.string.morphe_home_greeting_7,
             )
-
-            // Home screen immediately refreshes itself on first launch.
-            // Use index 1 for the new install message.
-            val firstMessage = messages.first()
-            val shuffledMessages = messages.drop(1).shuffled(Random(shuffleSeed)).toMutableList()
-            shuffledMessages[1] = firstMessage
-
-            homeGreetingMessages = shuffledMessages
         }
 
         val messageIndexKey = "patching_home_message_index"
-        var currentMessageIndex = abs(
-            UIPersistentValues.getInt(context, messageIndexKey)
-        ) % homeGreetingMessages.size
+        // Home screen immediately refreshes itself on launch.
+        // Use default -1 so incremented it gives 0 index.
+        var currentMessageIndex =
+            UIPersistentValues.getInt(context, messageIndexKey, -1) % homeGreetingMessages.size
 
         if (!incrementedHomeMessage) {
             incrementedHomeMessage = true
-            currentMessageIndex++
+            currentMessageIndex++ // Increment returned index
             UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex)
         }
 
-        return homeGreetingMessages[currentMessageIndex]
+        return homeGreetingMessages[abs(currentMessageIndex)]
     }
 
     private lateinit var patcherMessages: List<Int>
@@ -62,7 +59,8 @@ object HomeAndPatcherMessages {
      */
     fun getPatcherMessage(context: Context, shuffleSeed: Long): Int {
         if (!::patcherMessages.isInitialized) {
-            val messages = listOf(
+            patcherMessages = shuffleAllExceptFirst(
+                shuffleSeed,
                 R.string.morphe_patcher_message_1,
                 R.string.morphe_patcher_message_2,
                 R.string.morphe_patcher_message_3,
@@ -84,17 +82,14 @@ object HomeAndPatcherMessages {
                 R.string.morphe_patcher_message_19,
                 R.string.morphe_patcher_message_20,
             )
-
-            patcherMessages = listOf(messages.first()) + messages.drop(1).shuffled(Random(shuffleSeed))
         }
 
         val messageIndexKey = "patching_patcher_message_index"
-        val currentMessageIndex = abs(
-            UIPersistentValues.getInt(context, messageIndexKey)
-        ) % patcherMessages.size
+        val currentMessageIndex =
+            UIPersistentValues.getInt(context, messageIndexKey) % patcherMessages.size
 
         UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex + 1)
 
-        return patcherMessages[currentMessageIndex]
+        return patcherMessages[abs(currentMessageIndex)]
     }
 }
