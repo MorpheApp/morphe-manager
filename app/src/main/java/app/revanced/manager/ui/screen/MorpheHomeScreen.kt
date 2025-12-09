@@ -588,19 +588,25 @@ fun MorpheHomeScreen(
                 storagePickerLauncher.launch(APK_MIMETYPE)
             },
             onNeedApk = {
-                val architecture =
-                    if (pendingPackageName?.endsWith("youtube.music") == true) {
-                        // YT Music requires architecture. This logic could be improved
-                        '"' + Build.SUPPORTED_ABIS.first() + '"'
+                val baseQuery =
+                    if (pendingPackageName == PACKAGE_YOUTUBE) {
+                        pendingPackageName
                     } else {
-                        "universal"
+                        // Some versions of YT Music don't show when the package name is used, use the app name instead
+                        "YouTube Music"
+                    }
+                val architecture =
+                    if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
+                        // YT Music requires architecture. This logic could be improved
+                        " (${Build.SUPPORTED_ABIS.first()})"
+                    } else {
+                        ""
                     }
 
                 val version = pendingRecommendedVersion ?: ""
                 // Backslash search parameter opens the first search result
-                // Some versions of YT Music don't show up unless "package:" is included.
-                // Use quotes to ensure it's an exact match of all search terms.
-                val searchQuery = "\\ package: $pendingPackageName $version \"nodpi\" $architecture site:apkmirror.com"
+                // Use quotes to ensure it's an exact match of all search terms
+                val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
                 val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
                 Log.d(tag, "Using search query: $searchQuery")
 
