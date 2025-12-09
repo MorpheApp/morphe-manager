@@ -188,7 +188,7 @@ fun MorpheSettingsScreen(
                 .verticalScroll(scrollState)
                 .padding(vertical = 8.dp)
         ) {
-            // Appearance
+            // Appearance Section
             SectionHeader(
                 icon = Icons.Outlined.Palette,
                 title = stringResource(R.string.appearance)
@@ -197,7 +197,7 @@ fun MorpheSettingsScreen(
             SettingsCard {
                 Column(modifier = Modifier.padding(16.dp)) {
                     // Interface switcher
-                    Row(
+                    Surface(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
@@ -207,22 +207,24 @@ fun MorpheSettingsScreen(
                                 }
                                 // Navigate back and let the app switch to original interface
                                 onBackClick()
-                            }
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                     ) {
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.SwapHoriz,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
                             )
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = stringResource(R.string.morphe_settings_return_to_advanced),
                                     style = MaterialTheme.typography.bodyMedium,
@@ -234,21 +236,19 @@ fun MorpheSettingsScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
+                            Icon(
+                                imageVector = Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
-                        Icon(
-                            imageVector = Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
                     }
-
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
 
                     Text(
                         text = stringResource(R.string.theme),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
                     )
 
                     Row(
@@ -283,7 +283,7 @@ fun MorpheSettingsScreen(
 
                     AnimatedVisibility(visible = theme != Theme.LIGHT) {
                         Column(modifier = Modifier.padding(top = 16.dp)) {
-                            Row(
+                            Surface(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clip(RoundedCornerShape(12.dp))
@@ -292,31 +292,44 @@ fun MorpheSettingsScreen(
                                             generalViewModel.prefs.pureBlackTheme
                                                 .update(!pureBlackTheme)
                                         }
-                                    }
-                                    .padding(12.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
+                                    },
+                                shape = RoundedCornerShape(12.dp),
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                             ) {
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(
-                                        text = stringResource(R.string.pure_black_theme),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        fontWeight = FontWeight.Medium
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(12.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Contrast,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(24.dp)
                                     )
-                                    Text(
-                                        text = stringResource(R.string.pure_black_theme_description),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(
+                                            text = stringResource(R.string.pure_black_theme),
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.pure_black_theme_description),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                    Switch(
+                                        checked = pureBlackTheme,
+                                        onCheckedChange = {
+                                            coroutineScope.launch {
+                                                generalViewModel.prefs.pureBlackTheme.update(it)
+                                            }
+                                        }
                                     )
                                 }
-                                Switch(
-                                    checked = pureBlackTheme,
-                                    onCheckedChange = {
-                                        coroutineScope.launch {
-                                            generalViewModel.prefs.pureBlackTheme.update(it)
-                                        }
-                                    }
-                                )
                             }
                         }
                     }
@@ -335,7 +348,7 @@ fun MorpheSettingsScreen(
                 Column(modifier = Modifier.padding(16.dp)) {
                     val usePrereleases by generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
-                    Row(
+                    Surface(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
@@ -365,22 +378,24 @@ fun MorpheSettingsScreen(
                                         )
                                     }
                                 }
-                            }
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                     ) {
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Science,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(24.dp)
                             )
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = stringResource(R.string.morphe_update_use_patches_prereleases),
                                     style = MaterialTheme.typography.bodyMedium,
@@ -392,35 +407,35 @@ fun MorpheSettingsScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
-                        }
-                        Switch(
-                            checked = usePrereleases,
-                            onCheckedChange = { newValue ->
-                                coroutineScope.launch {
-                                    // Update the preference
-                                    generalViewModel.togglePatchesPrerelease(newValue)
+                            Switch(
+                                checked = usePrereleases,
+                                onCheckedChange = { newValue ->
+                                    coroutineScope.launch {
+                                        // Update the preference
+                                        generalViewModel.togglePatchesPrerelease(newValue)
 
-                                    // Show toast about preference change
-                                    context.toast(
-                                        if (newValue)
-                                            context.getString(R.string.morphe_update_patches_prerelease_enabled)
-                                        else
-                                            context.getString(R.string.morphe_update_patches_prerelease_disabled)
-                                    )
-
-                                    // Wait a bit for the preference to propagate
-                                    delay(300)
-
-                                    // Silently update the official bundle in background
-                                    withContext(Dispatchers.IO) {
-                                        dashboardViewModel.patchBundleRepository.updateOfficialBundle(
-                                            showProgress = false, // Don't show progress
-                                            showToast = false     // Don't show toast
+                                        // Show toast about preference change
+                                        context.toast(
+                                            if (newValue)
+                                                context.getString(R.string.morphe_update_patches_prerelease_enabled)
+                                            else
+                                                context.getString(R.string.morphe_update_patches_prerelease_disabled)
                                         )
+
+                                        // Wait a bit for the preference to propagate
+                                        delay(300)
+
+                                        // Silently update the official bundle in background
+                                        withContext(Dispatchers.IO) {
+                                            dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                                showProgress = false, // Don't show progress
+                                                showToast = false     // Don't show toast
+                                            )
+                                        }
                                     }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
@@ -428,7 +443,7 @@ fun MorpheSettingsScreen(
             if (false) {
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Plugins
+                // Plugins Section
                 SectionHeader(
                     icon = Icons.Filled.Download,
                     title = stringResource(R.string.downloader_plugins)
@@ -460,7 +475,7 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Import & export
+            // Import & Export Section
             SectionHeader(
                 icon = Icons.Outlined.Build,
                 title = stringResource(R.string.import_export)
@@ -564,6 +579,7 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // Debugging Section
             SectionHeader(
                 icon = Icons.Outlined.DeveloperMode,
                 title = stringResource(R.string.debugging)
@@ -574,13 +590,13 @@ fun MorpheSettingsScreen(
                     val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
                     val hasRootAccess = remember { dashboardViewModel.rootInstaller?.hasRootAccess() ?: false }
 
-                    Row(
+                    Surface(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
                             .clickable(enabled = hasRootAccess) {
                                 coroutineScope.launch {
-                                    val newValue = !hasRootAccess
+                                    val newValue = !useRootMode
                                     generalViewModel.toggleRootMode(newValue)
                                     context.toast(
                                         if (newValue)
@@ -589,23 +605,25 @@ fun MorpheSettingsScreen(
                                             context.getString(R.string.morphe_root_mode_disabled)
                                     )
                                 }
-                            }
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
                     ) {
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Security,
                                 contentDescription = null,
                                 tint = if (hasRootAccess) MaterialTheme.colorScheme.primary
-                                else MaterialTheme.colorScheme.onSurfaceVariant
+                                else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(24.dp)
                             )
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = stringResource(R.string.morphe_root_mode),
                                     style = MaterialTheme.typography.bodyMedium,
@@ -622,22 +640,22 @@ fun MorpheSettingsScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
-                        }
-                        Switch(
-                            checked = useRootMode,
-                            enabled = hasRootAccess,
-                            onCheckedChange = { newValue ->
-                                coroutineScope.launch {
-                                    generalViewModel.toggleRootMode(newValue)
-                                    context.toast(
-                                        if (newValue)
-                                            context.getString(R.string.morphe_root_mode_enabled)
-                                        else
-                                            context.getString(R.string.morphe_root_mode_disabled)
-                                    )
+                            Switch(
+                                checked = useRootMode,
+                                enabled = hasRootAccess,
+                                onCheckedChange = { newValue ->
+                                    coroutineScope.launch {
+                                        generalViewModel.toggleRootMode(newValue)
+                                        context.toast(
+                                            if (newValue)
+                                                context.getString(R.string.morphe_root_mode_enabled)
+                                            else
+                                                context.getString(R.string.morphe_root_mode_disabled)
+                                        )
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
