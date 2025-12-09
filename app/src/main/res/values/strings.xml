@@ -8,8 +8,8 @@
     <string name="morphe_home_greeting_2">What digital masterpiece are we crafting today?</string>
     <string name="morphe_home_greeting_3">Because we are the champions, my patching friend</string>
     <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece</string>
-    <string name="morphe_home_greeting_5">Together, let\'s make the ad providers cry in 4K</string>
-    <string name="morphe_home_greeting_6">Want to watch ads? Me neither</string>
+    <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
+    <string name="morphe_home_greeting_6">Let\’s make your apps behave</string>
     <string name="morphe_home_greeting_7">Today’s forecast: 100% chance of patching</string>
     <string name="morphe_home_battery_optimization_warning_title">Battery Optimization</string>
     <string name="morphe_home_new_plugins_available">New Plugins Available</string>
@@ -76,15 +76,15 @@
     <string name="morphe_patcher_wrong_package_description">The selected APK is not for the application you intended to patch.</string>
     <string name="morphe_patcher_expected_package">Expected Package</string>
     <string name="morphe_patcher_selected_package">Selected Package</string>
-    <string name="morphe_patcher_message_1">Brewing some digital magic… ☕</string>
+    <string name="morphe_patcher_message_1">Morphing your app into something awesome… 🏆</string>
     <string name="morphe_patcher_message_2">Teaching old apps new tricks… 🎩</string>
     <string name="morphe_patcher_message_3">Sprinkling patches like fairy dust… ✨</string>
-    <string name="morphe_patcher_message_4">Morphing your app into something awesome… 🏆</string>
+    <string name="morphe_patcher_message_4">Brewing some digital magic… ☕</string>
     <string name="morphe_patcher_message_5">Coffee break recommended… ☕</string>
     <string name="morphe_patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
-    <string name="morphe_patcher_message_7">Patch-o-matic 3000 in action… 🤖</string>
+    <string name="morphe_patcher_message_7">Adjusting 1\'s and 0\'s… 🤖</string>
     <string name="morphe_patcher_message_8">Your app is getting a makeover… 💅</string>
-    <string name="morphe_patcher_message_9">Turning bugs into features… 🐛➡️✨</string>
+    <string name="morphe_patcher_message_9">Fixing bugs in the unpatched app… 🐞</string>
     <string name="morphe_patcher_message_10">Almost there… maybe… hopefully… 🤞</string>
     <string name="morphe_patcher_message_11">Polishing pixels until they shine… 💎</string>
     <string name="morphe_patcher_message_12">Please remain seated until the captain turns off the \“Patching in progress\” sign… 💺✈️</string>
@@ -92,11 +92,10 @@
     <string name="morphe_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
     <string name="morphe_patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
-    <string name="morphe_patcher_message_17">Optimizing ones and zeroes for improved harmony… ⚖️</string>
-    <string name="morphe_patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
-    <string name="morphe_patcher_message_19">Persuading the app superposition from unpatched to patched… 📦⚛️</string>
-    <string name="morphe_patcher_message_20">Your app has a fever, and the only cure is more patches… 🩺🔔</string>
-    <string name="morphe_patcher_message_21">Great patches are worth the wait… ⏳</string>
+    <string name="morphe_patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
+    <string name="morphe_patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
+    <string name="morphe_patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Great patches are worth the wait… ⏳</string>
 
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
@@ -110,7 +109,7 @@
     <string name="morphe_share_website_description">Share the official Morphe website</string>
 
     <string name="morphe_update_use_patches_prereleases">Use pre-release patches</string>
-    <string name="morphe_update_use_patches_prereleases_description">Get the latest development patches (may be unstable)</string>
+    <string name="morphe_update_use_patches_prereleases_description">Use the latest development patches</string>
     <string name="morphe_update_patches_prerelease_enabled">Pre-release patches enabled</string>
     <string name="morphe_update_patches_prerelease_disabled">Stable patches enabled</string>
 
@@ -129,10 +128,9 @@
     <string name="main_top_title">Morphe</string>
     <string name="patcher">Patcher</string>
     <string name="patches">Patches</string>
+    <string name="patch_bundle_installer">Bundle installer</string>
     <string name="patch_bundles">Patch Bundles</string>
     <string name="patch_bundle">Patch Bundle</string>
-    <string name="cli">CLI</string>
-    <string name="manager">Manager</string>
 
     <string name="plugin_host_permission_label">Morphe Manager plugin host</string>
     <string name="plugin_host_permission_description">Used to control access to Morphe Manager plugins. Only Morphe Manager has this.</string>

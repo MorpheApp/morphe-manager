@@ -150,7 +150,7 @@ fun AdvancedSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            GroupHeader(stringResource(R.string.manager))
+            GroupHeader(stringResource(R.string.patch_bundle_installer))
 
             // Patches repository
             SettingsListItem(

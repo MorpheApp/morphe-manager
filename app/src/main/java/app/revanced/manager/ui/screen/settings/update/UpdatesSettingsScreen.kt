@@ -59,7 +59,7 @@ fun UpdatesSettingsScreen(
                 description = R.string.update_on_metered_connections_description
             )
 
-            GroupHeader(stringResource(R.string.manager))
+            GroupHeader(stringResource(R.string.patch_bundle_installer))
 
             SettingsListItem(
                 modifier = Modifier.clickable {
