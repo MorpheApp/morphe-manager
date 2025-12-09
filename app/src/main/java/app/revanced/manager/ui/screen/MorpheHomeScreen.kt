@@ -1002,14 +1002,6 @@ private fun ApkAvailabilityDialog(
                         Spacer(Modifier.width(8.dp))
                         Text(stringResource(R.string.morphe_home_apk_availability_no))
                     }
-
-                    // Cancel button
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
                 }
             }
         }
