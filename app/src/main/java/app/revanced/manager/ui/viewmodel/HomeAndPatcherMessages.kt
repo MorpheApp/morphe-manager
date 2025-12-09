@@ -40,8 +40,7 @@ object HomeAndPatcherMessages {
         val messageIndexKey = "patching_home_message_index"
         // Home screen immediately refreshes itself on launch.
         // Use default -1 so incremented it gives 0 index.
-        var currentMessageIndex =
-            UIPersistentValues.getInt(context, messageIndexKey, -1) % homeGreetingMessages.size
+        var currentMessageIndex = UIPersistentValues.getInt(context, messageIndexKey, -1)
 
         if (!incrementedHomeMessage) {
             incrementedHomeMessage = true
@@ -49,7 +48,8 @@ object HomeAndPatcherMessages {
             UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex)
         }
 
-        return homeGreetingMessages[abs(currentMessageIndex)]
+        val safeIndex = abs(currentMessageIndex) % homeGreetingMessages.size
+        return homeGreetingMessages[safeIndex]
     }
 
     private lateinit var patcherMessages: List<Int>
@@ -85,11 +85,11 @@ object HomeAndPatcherMessages {
         }
 
         val messageIndexKey = "patching_patcher_message_index"
-        val currentMessageIndex =
-            UIPersistentValues.getInt(context, messageIndexKey) % patcherMessages.size
+        val currentMessageIndex = UIPersistentValues.getInt(context, messageIndexKey)
 
         UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex + 1)
 
-        return patcherMessages[abs(currentMessageIndex)]
+        val safeIndex = abs(currentMessageIndex) % patcherMessages.size
+        return patcherMessages[safeIndex]
     }
 }
