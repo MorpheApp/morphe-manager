@@ -7,16 +7,23 @@ import android.content.SharedPreferences
  * Very simple wrapper around preferences, to avoid using [androidx.datastore.core.DataStore] objects.
  */
 object UIPersistentValues {
+    private lateinit var prefs: SharedPreferences
 
-    private fun prefs(context: Context): SharedPreferences {
-        return context.getSharedPreferences("manager_ui_persistent_values", Context.MODE_PRIVATE)
+    private fun getPrefs(context: Context): SharedPreferences {
+        if (!::prefs.isInitialized) {
+            prefs = context.applicationContext.getSharedPreferences(
+                "manager_ui_persistent_values",
+                Context.MODE_PRIVATE
+            )
+        }
+        return prefs
     }
 
     fun putInt(context: Context, key: String, value: Int) {
-        prefs(context).edit().putInt(key, value).apply()
+        getPrefs(context).edit().putInt(key, value).apply()
     }
 
     fun getInt(context: Context, key: String, defaultValue: Int = 0): Int {
-        return prefs(context).getInt(key, defaultValue)
+        return getPrefs(context).getInt(key, defaultValue)
     }
 }
