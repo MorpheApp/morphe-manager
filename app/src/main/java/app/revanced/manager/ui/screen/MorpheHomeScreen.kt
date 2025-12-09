@@ -230,8 +230,10 @@ fun MorpheHomeScreen(
     var showUnsupportedVersionDialog by rememberSaveable { mutableStateOf<UnsupportedVersionDialogState?>(null) }
     var showWrongPackageDialog by rememberSaveable { mutableStateOf<WrongPackageDialogState?>(null) }
 
-    // APK availability dialog state
-    var showApkAvailabilityDialog by rememberSaveable { mutableStateOf(false) }
+    // APK availability dialog states
+    var showApkAvailabilityDialog by rememberSaveable { mutableStateOf(false) }      // Dialog 1
+    var showDownloadInstructionsDialog by rememberSaveable { mutableStateOf(false) } // Dialog 2
+    var showFilePickerPromptDialog by rememberSaveable { mutableStateOf(false) }     // Dialog 3
     var pendingPackageName by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingAppName by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingRecommendedVersion by rememberSaveable { mutableStateOf<String?>(null) }
@@ -342,6 +344,9 @@ fun MorpheHomeScreen(
         } else {
             pendingPackageName = null
             pendingAppName = null
+            pendingRecommendedVersion = null
+            showDownloadInstructionsDialog = false
+            showFilePickerPromptDialog = false
         }
     }
 
@@ -541,7 +546,7 @@ fun MorpheHomeScreen(
         }
     }
 
-    // APK Availability Dialog
+    // Dialog 1: Initial "Do you have the APK?" dialog
     if (showApkAvailabilityDialog && pendingPackageName != null && pendingAppName != null) {
         ApkAvailabilityDialog(
             appName = pendingAppName!!,
@@ -559,6 +564,26 @@ fun MorpheHomeScreen(
                 storagePickerLauncher.launch(APK_MIMETYPE)
             },
             onNeedApk = {
+                // User needs APK - show download instructions
+                showApkAvailabilityDialog = false
+                showDownloadInstructionsDialog = true
+            }
+        )
+    }
+
+    // Dialog 2: Download instructions dialog
+    if (showDownloadInstructionsDialog && pendingPackageName != null && pendingAppName != null) {
+        DownloadInstructionsDialog(
+            appName = pendingAppName!!,
+            packageName = pendingPackageName!!,
+            recommendedVersion = pendingRecommendedVersion,
+            onDismiss = {
+                showDownloadInstructionsDialog = false
+                pendingPackageName = null
+                pendingAppName = null
+                pendingRecommendedVersion = null
+            },
+            onContinue = {
                 val baseQuery =
                     if (pendingPackageName == PACKAGE_YOUTUBE) {
                         pendingPackageName
@@ -583,21 +608,33 @@ fun MorpheHomeScreen(
 
                 try {
                     uriHandler.openUri(searchUrl)
-                    // Show instructions toast
-                    context.toast(
-                        context.getString(
-                            R.string.need_apk_instructions,
-                            pendingAppName,
-                            version.ifEmpty { context.getString(R.string.any_version) }
-                        )
-                    )
+                    // After opening browser, show file picker prompt
+                    showDownloadInstructionsDialog = false
+                    showFilePickerPromptDialog = true
                 } catch (e: Exception) {
                     context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+                    showDownloadInstructionsDialog = false
+                    pendingPackageName = null
+                    pendingAppName = null
+                    pendingRecommendedVersion = null
                 }
+            }
+        )
+    }
 
+    // Dialog 3: File picker prompt dialog
+    if (showFilePickerPromptDialog && pendingPackageName != null && pendingAppName != null) {
+        FilePickerPromptDialog(
+            appName = pendingAppName!!,
+            onDismiss = {
+                showFilePickerPromptDialog = false
                 pendingPackageName = null
                 pendingAppName = null
                 pendingRecommendedVersion = null
+            },
+            onOpenFilePicker = {
+                showFilePickerPromptDialog = false
+                storagePickerLauncher.launch(APK_MIMETYPE)
             }
         )
     }
@@ -809,184 +846,6 @@ private suspend fun loadLocalApk(
         )
     } catch (e: Exception) {
         null
-    }
-}
-
-@Composable
-private fun ApkAvailabilityDialog(
-    appName: String,
-    packageName: String,
-    recommendedVersion: String?,
-    onDismiss: () -> Unit,
-    onHaveApk: () -> Unit,
-    onNeedApk: () -> Unit
-) {
-    Dialog(onDismissRequest = onDismiss) {
-        Surface(
-            shape = RoundedCornerShape(24.dp),
-            color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Icon
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                // Title
-                Text(
-                    text = stringResource(R.string.morphe_home_apk_availability_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-
-                // Description
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Text(
-                        text = stringResource(
-                            R.string.morphe_home_apk_availability_dialog_description,
-                            appName,
-                            recommendedVersion ?: stringResource(R.string.any_version)
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
-
-                    // Info Card
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainerLow,
-                        tonalElevation = 3.dp
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            // Package Name
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.package_name),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = packageName,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    fontFamily = FontFamily.Monospace,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                    lineHeight = 20.sp
-                                )
-                            }
-
-                            // Version (if specified)
-                            if (recommendedVersion != null) {
-                                Column(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.morphe_home_recommended_version),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                    Text(
-                                        text = recommendedVersion,
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        fontFamily = FontFamily.Monospace,
-                                        color = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    // Info message
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_home_apk_availability_dialog_info),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Buttons
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // "Yes, I have it" button
-                    Button(
-                        onClick = onHaveApk,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            Icons.Outlined.CheckCircle,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_apk_availability_yes))
-                    }
-
-                    // "No, need to download" button
-                    OutlinedButton(
-                        onClick = onNeedApk,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        Icon(
-                            Icons.Outlined.Download,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_apk_availability_no))
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -2045,6 +1904,464 @@ private fun AppButton(
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
+        }
+    }
+}
+
+// Dialog 1: Initial "Do you have the APK?" dialog
+@Composable
+private fun ApkAvailabilityDialog(
+    appName: String,
+    packageName: String,
+    recommendedVersion: String?,
+    onDismiss: () -> Unit,
+    onHaveApk: () -> Unit,
+    onNeedApk: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.FolderOpen,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.morphe_home_apk_availability_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description - simplified, removed the "do not install" warning
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(
+                            R.string.morphe_home_apk_availability_dialog_description_simple,
+                            appName,
+                            recommendedVersion ?: stringResource(R.string.any_version)
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Info Card with package and version
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            // Package Name
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.package_name),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = packageName,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    lineHeight = 20.sp
+                                )
+                            }
+
+                            // Version (if specified)
+                            if (recommendedVersion != null) {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.morphe_home_recommended_version),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = recommendedVersion,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // "Yes, I have it" button
+                    Button(
+                        onClick = onHaveApk,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            Icons.Outlined.CheckCircle,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_apk_availability_yes))
+                    }
+
+                    // "No, I need to download" button
+                    OutlinedButton(
+                        onClick = onNeedApk,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        Icon(
+                            Icons.Outlined.Download,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_apk_availability_no))
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Dialog 2: Download instructions dialog
+@Composable
+private fun DownloadInstructionsDialog(
+    appName: String,
+    packageName: String,
+    recommendedVersion: String?,
+    onDismiss: () -> Unit,
+    onContinue: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Download,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.morphe_home_download_instructions_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Instructions
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(
+                            R.string.morphe_home_download_instructions_description,
+                            appName,
+                            recommendedVersion ?: stringResource(R.string.any_version)
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Step-by-step instructions card
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.morphe_home_download_instructions_steps_title),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+
+                            // Step 1
+                            InstructionStep(
+                                number = "1",
+                                text = stringResource(R.string.morphe_home_download_instructions_step1)
+                            )
+
+                            // Step 2 - with styled "DOWNLOAD APK" text
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.Top
+                            ) {
+                                Text(
+                                    text = "2",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.morphe_home_download_instructions_step2_part1),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Spacer(Modifier.height(4.dp))
+                                    // Styled "DOWNLOAD APK" button
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = Color(0xFFE53935), // Red color matching APKMirror
+                                        modifier = Modifier.padding(vertical = 4.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.morphe_home_download_instructions_download_button),
+                                            style = MaterialTheme.typography.labelLarge,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White,
+                                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                                        )
+                                    }
+                                }
+                            }
+
+                            // Step 3
+                            InstructionStep(
+                                number = "3",
+                                text = stringResource(R.string.morphe_home_download_instructions_step3)
+                            )
+
+                            // Step 4
+                            InstructionStep(
+                                number = "4",
+                                text = stringResource(R.string.morphe_home_download_instructions_step4)
+                            )
+                        }
+                    }
+
+                    // Important note
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_home_download_instructions_note),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // "Continue" button - opens browser
+                    Button(
+                        onClick = onContinue,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Outlined.OpenInNew,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_download_instructions_continue))
+                    }
+
+                    // "Cancel" button
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Helper composable for instruction steps
+@Composable
+private fun InstructionStep(number: String, text: String) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.Top
+    ) {
+        Text(
+            text = number,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+// Dialog 3: File picker prompt dialog
+@Composable
+private fun FilePickerPromptDialog(
+    appName: String,
+    onDismiss: () -> Unit,
+    onOpenFilePicker: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surface,
+            tonalElevation = 6.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Icon
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.FolderOpen,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                // Title
+                Text(
+                    text = stringResource(R.string.morphe_home_file_picker_prompt_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+
+                // Description
+                Text(
+                    text = stringResource(R.string.morphe_home_file_picker_prompt_description, appName),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Buttons
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // "Open file picker" button
+                    Button(
+                        onClick = onOpenFilePicker,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            Icons.Outlined.FolderOpen,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.morphe_home_file_picker_prompt_open))
+                    }
+
+                    // "Cancel" button
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            }
         }
     }
 }
