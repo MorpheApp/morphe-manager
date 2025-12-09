@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
+import android.os.Build
 import android.text.format.DateUtils
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -585,11 +586,19 @@ fun MorpheHomeScreen(
                 storagePickerLauncher.launch(APK_MIMETYPE)
             },
             onNeedApk = {
-                // User doesn't have APK - open browser with search
-                showApkAvailabilityDialog = false
+                val architecture = "nodpi " +
+                        if (pendingPackageName?.endsWith("youtube.music") == true) {
+                            // YT Music requires architecture. This logic could be improved
+                            // Include actual device architecture such as arm64-v8a, or x86
+                            Build.SUPPORTED_ABIS.first()
+                        } else {
+                            "universal"
+                        }
+
                 val version = pendingRecommendedVersion ?: ""
-                val searchQuery = "apkmirror ${pendingPackageName} $version"
-                val searchUrl = "https://www.google.com/search?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+                // Backslash search parameter opens the first search result
+                val searchQuery = "\\ $pendingPackageName $version $architecture site:apkmirror.com"
+                val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
 
                 try {
                     uriHandler.openUri(searchUrl)
