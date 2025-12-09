@@ -705,9 +705,14 @@ fun MorpheHomeScreen(
             // Main centered content
             MainContent(
                 onYouTubeClick = {
-                    if (availablePatches < 1) {
-                        context.toast(context.getString(R.string.no_patch_found))
-                        scope.launch { showBundlesSheet = true }
+                    // Check if patches are being fetched or if no patches available
+                    if (bundleUpdateProgress != null || availablePatches < 1) {
+                        val message = if (bundleUpdateProgress != null) {
+                            context.getString(R.string.morphe_home_patches_are_loading)
+                        } else {
+                            context.getString(R.string.no_patch_found)
+                        }
+                        context.toast(message)
                         return@MainContent
                     }
                     if (dashboardViewModel.android11BugActive) {
@@ -721,9 +726,14 @@ fun MorpheHomeScreen(
                     showApkAvailabilityDialog = true
                 },
                 onYouTubeMusicClick = {
-                    if (availablePatches < 1) {
-                        context.toast(context.getString(R.string.no_patch_found))
-                        scope.launch { showBundlesSheet = true }
+                    // Check if patches are being fetched or if no patches available
+                    if (bundleUpdateProgress != null || availablePatches < 1) {
+                        val message = if (bundleUpdateProgress != null) {
+                            context.getString(R.string.morphe_home_patches_are_loading)
+                        } else {
+                            context.getString(R.string.no_patch_found)
+                        }
+                        context.toast(message)
                         return@MainContent
                     }
                     if (dashboardViewModel.android11BugActive) {

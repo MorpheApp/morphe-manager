@@ -21,6 +21,7 @@
     <string name="morphe_home_updating_patches">Updating patches…</string>
     <string name="morphe_home_update_success">Update complete</string>
     <string name="morphe_home_patches_updated">Your patches are up to date</string>
+    <string name="morphe_home_patches_are_loading">Patches are being loaded, please wait…</string>
     <string name="morphe_home_please_wait">Please wait…</string>
     <string name="morphe_home_notifications">Notifications</string>
     <string name="morphe_home_open_in_browser">Open in Browser</string>
