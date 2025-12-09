@@ -129,9 +129,7 @@ private fun ReVancedManager(vm: MainViewModel) {
             val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
             MorpheHomeScreen(
-                onMorpheSettingsClick = { highlightSection ->
-                    navController.navigate(MorpheSettings(highlightSection = highlightSection))
-                },
+                onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
                 onUpdateClick = { navController.navigate(Update()) },
                 onStartQuickPatch = { params ->
@@ -389,12 +387,8 @@ private fun ReVancedManager(vm: MainViewModel) {
             }
 
             // Morphe Simplified Settings Screen
-            composable<MorpheSettings> { backStackEntry ->
-                val args = backStackEntry.toRoute<MorpheSettings>()
-                MorpheSettingsScreen(
-                    onBackClick = navController::popBackStack,
-                    highlightSection = args.highlightSection
-                )
+            composable<MorpheSettings> {
+                MorpheSettingsScreen(onBackClick = navController::popBackStack)
             }
         }
     }

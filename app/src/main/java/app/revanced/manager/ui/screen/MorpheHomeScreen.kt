@@ -43,7 +43,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
-import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Settings
@@ -136,7 +135,6 @@ import org.koin.compose.koinInject
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
-import android.provider.Settings as AndroidSettings
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
 private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
@@ -147,7 +145,6 @@ private enum class BundleUpdateStatus {
     Error        // Error occurred (including no internet)
 }
 
-// Quick patch parameters data class
 data class QuickPatchParams(
     val selectedApp: SelectedApp,
     val patches: PatchSelection,
@@ -169,7 +166,7 @@ data class WrongPackageDialogState(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheHomeScreen(
-    onMorpheSettingsClick: (String?) -> Unit,
+    onMorpheSettingsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     onUpdateClick: () -> Unit = {},
@@ -182,7 +179,6 @@ fun MorpheHomeScreen(
     val uriHandler = LocalUriHandler.current
 
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    val showNewDownloaderPluginsNotification by dashboardViewModel.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(false)
     val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
@@ -230,12 +226,6 @@ fun MorpheHomeScreen(
                     .maxByOrNull { it }
             ).filterValues { it != null }
         } ?: emptyMap()
-    }
-
-    val hasSheetNotifications by remember {
-        derivedStateOf {
-            dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification
-        }
     }
 
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
@@ -464,20 +454,8 @@ fun MorpheHomeScreen(
                     .padding(bottom = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                val batteryLauncher =
-                    rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                        dashboardViewModel.updateBatteryOptimizationsWarning()
-                    }
-
                 // API Bundle Card
                 if (apiBundle != null) {
-                    Text(
-                        text = stringResource(R.string.morphe_home_patches_source),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-
                     ApiPatchBundleCard(
                         bundle = apiBundle,
                         patchCount = patchCounts[apiBundle.uid] ?: 0,
@@ -511,63 +489,6 @@ fun MorpheHomeScreen(
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
-
-                // Notifications section
-                if (dashboardViewModel.showBatteryOptimizationsWarning || showNewDownloaderPluginsNotification) {
-                    Text(
-                        text = stringResource(R.string.morphe_home_notifications),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                }
-
-                // Battery Optimization Warning
-                if (dashboardViewModel.showBatteryOptimizationsWarning) {
-                    ModernNotificationCard(
-                        icon = Icons.Default.BatteryAlert,
-                        title = stringResource(R.string.morphe_home_battery_optimization_warning_title),
-                        message = stringResource(R.string.battery_optimization_notification),
-                        backgroundColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer,
-                        onClick = {
-                            scope.launch {
-                                sheetState.hide()
-                                showBundlesSheet = false
-                            }
-                            batteryLauncher.launch(
-                                Intent(
-                                    AndroidSettings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                    Uri.fromParts("package", context.packageName, null)
-                                )
-                            )
-                        },
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                }
-
-                // Downloader Plugins Notification
-                if (showNewDownloaderPluginsNotification) {
-                    ModernNotificationCard(
-                        icon = Icons.Outlined.Download,
-                        title = stringResource(R.string.morphe_home_new_plugins_available),
-                        message = stringResource(R.string.new_downloader_plugins_notification),
-                        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        onClick = {
-                            scope.launch {
-                                sheetState.hide()
-                                showBundlesSheet = false
-                            }
-                            // Navigate to Morphe Settings and highlight plugins section
-                            onMorpheSettingsClick("plugins")
-                        },
-                        onDismiss = dashboardViewModel::ignoreNewDownloaderPlugins,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                }
-
-                Spacer(Modifier.height(8.dp))
             }
         }
     }
@@ -823,38 +744,20 @@ fun MorpheHomeScreen(
                     }
                 }
 
-                // Source FAB with notification dot
-                Box {
-                    FloatingActionButton(
-                        onClick = { showBundlesSheet = true },
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                    ) {
-                        Icon(
-                            Icons.Outlined.Source,
-                            contentDescription = stringResource(R.string.morphe_home_bundles)
-                        )
-                    }
-
-                    if (hasSheetNotifications) {
-                        Box(modifier = Modifier.align(Alignment.TopEnd)) {
-                            Box(
-                                modifier = Modifier
-                                    .size(14.dp)
-                                    .background(Color.White, CircleShape)
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .size(12.dp)
-                                    .align(Alignment.Center)
-                                    .background(Color.Red, CircleShape)
-                            )
-                        }
-                    }
+                // Source FAB
+                FloatingActionButton(
+                    onClick = { showBundlesSheet = true },
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                ) {
+                    Icon(
+                        Icons.Outlined.Source,
+                        contentDescription = stringResource(R.string.morphe_home_bundles)
+                    )
                 }
 
                 FloatingActionButton(
-                    onClick = { onMorpheSettingsClick(null) },
+                    onClick = onMorpheSettingsClick,
                     containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ) {

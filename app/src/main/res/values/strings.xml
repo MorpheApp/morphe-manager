@@ -2,8 +2,7 @@
     <!-- Morphe Home Screen -->
     <string name="morphe_home_youtube">YouTube</string>
     <string name="morphe_home_youtube_music">YouTube Music</string>
-    <string name="morphe_home_all_apps">All apps</string>
-    <string name="morphe_home_bundles">Patch bundles</string>
+    <string name="morphe_home_bundles">Patch bundle</string>
     <string name="morphe_home_greeting_1">Ready to make YouTube legendary again?</string>
     <string name="morphe_home_greeting_2">What digital masterpiece are we crafting today?</string>
     <string name="morphe_home_greeting_3">Because we are the champions, my patching friend</string>
@@ -11,9 +10,6 @@
     <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
     <string name="morphe_home_greeting_6">Let\’s make your apps behave</string>
     <string name="morphe_home_greeting_7">Today’s forecast: 100% chance of patching</string>
-    <string name="morphe_home_battery_optimization_warning_title">Battery Optimization</string>
-    <string name="morphe_home_new_plugins_available">New Plugins Available</string>
-    <string name="morphe_home_patches_source">Patches Source</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_no_internet">No internet connection</string>
     <string name="morphe_home_update_error">Update failed</string>
@@ -23,7 +19,6 @@
     <string name="morphe_home_patches_updated">Your patches are up to date</string>
     <string name="morphe_home_patches_are_loading">Patches are being loaded, please wait…</string>
     <string name="morphe_home_please_wait">Please wait…</string>
-    <string name="morphe_home_notifications">Notifications</string>
     <string name="morphe_home_open_in_browser">Open in Browser</string>
     <string name="morphe_home_failed_to_open_url">Failed to open URL</string>
     <string name="morphe_home_date_added">Added</string>

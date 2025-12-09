@@ -87,7 +87,6 @@ import android.provider.Settings as AndroidSettings
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
-    highlightSection: String? = null,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
@@ -97,21 +96,6 @@ fun MorpheSettingsScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-
-    // Track positions for sections
-    var pluginsSectionPosition by remember { mutableStateOf(0) }
-    var isBlinking by remember { mutableStateOf(false) }
-
-    // Scroll to plugins section if highlighted and trigger blink animation
-    LaunchedEffect(highlightSection) {
-        if (highlightSection == "plugins" && pluginsSectionPosition > 0) {
-            delay(300)
-            scrollState.animateScrollTo(pluginsSectionPosition)
-            isBlinking = true
-            delay(900)
-            isBlinking = false
-        }
-    }
 
     // Appearance
     val theme by generalViewModel.prefs.theme.getAsState()
@@ -441,56 +425,33 @@ fun MorpheSettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            if (false) {
+                Spacer(modifier = Modifier.height(24.dp))
 
-            // Plugins
-            Column(
-                modifier = Modifier.onGloballyPositioned { coordinates ->
-                    pluginsSectionPosition = coordinates.positionInParent().y.toInt()
-                }
-            ) {
+                // Plugins
                 SectionHeader(
                     icon = Icons.Filled.Download,
                     title = stringResource(R.string.downloader_plugins)
                 )
 
-                val normalBorder = Color.Transparent
-                val highlightBorder = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
-
-                val animatedBorderColor by animateColorAsState(
-                    targetValue = if (isBlinking) highlightBorder else normalBorder,
-                    animationSpec = tween(durationMillis = 800),
-                    label = "cardBorderHighlight"
-                )
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 2.dp,
-                            color = animatedBorderColor,
-                            shape = RoundedCornerShape(16.dp)
-                        )
-                ) {
-                    SettingsCard {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            if (pluginStates.isEmpty()) {
-                                Text(
-                                    text = stringResource(R.string.downloader_no_plugins_installed),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier.fillMaxWidth()
+                SettingsCard {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        if (pluginStates.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.downloader_no_plugins_installed),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        } else {
+                            pluginStates.forEach { (packageName, state) ->
+                                PluginItem(
+                                    packageName = packageName,
+                                    state = state,
+                                    onClick = { showPluginDialog = packageName },
+                                    modifier = Modifier.padding(vertical = 4.dp)
                                 )
-                            } else {
-                                pluginStates.forEach { (packageName, state) ->
-                                    PluginItem(
-                                        packageName = packageName,
-                                        state = state,
-                                        onClick = { showPluginDialog = packageName },
-                                        modifier = Modifier.padding(vertical = 4.dp)
-                                    )
-                                }
                             }
                         }
                     }
