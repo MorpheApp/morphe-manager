@@ -107,11 +107,15 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.component.AvailableUpdateDialog
+import app.revanced.manager.ui.component.bundle.BundleChangelogDialog
+import app.revanced.manager.ui.component.bundle.BundlePatchesDialog
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
@@ -226,6 +230,8 @@ fun MorpheHomeScreen(
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
     var showBundlesSheet by remember { mutableStateOf(false) }
     var isRefreshingBundle by remember { mutableStateOf(false) }
+    var showPatchesDialog by rememberSaveable { mutableStateOf(false) }
+    var showChangelogDialog by rememberSaveable { mutableStateOf(false) }
 
     var showUnsupportedVersionDialog by rememberSaveable { mutableStateOf<UnsupportedVersionDialogState?>(null) }
     var showWrongPackageDialog by rememberSaveable { mutableStateOf<WrongPackageDialogState?>(null) }
@@ -482,6 +488,8 @@ fun MorpheHomeScreen(
                                 context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
                             }
                         },
+                        onPatchesClick = { showPatchesDialog = true },
+                        onVersionClick = { showChangelogDialog = true },
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
@@ -675,6 +683,28 @@ fun MorpheHomeScreen(
             actualPackage = state.actualPackage,
             onDismiss = { showWrongPackageDialog = null }
         )
+    }
+
+    val prefs: PreferencesManager = koinInject()
+    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
+
+    if (showPatchesDialog && apiBundle != null) {
+        BundlePatchesDialog(
+            src = apiBundle,
+            onDismissRequest = { showPatchesDialog = false },
+            showTopBar = !useMorpheHomeScreen
+        )
+    }
+
+    if (showChangelogDialog && apiBundle != null) {
+        val remoteBundle = apiBundle.asRemoteOrNull
+        if (remoteBundle != null) {
+            BundleChangelogDialog(
+                src = remoteBundle,
+                onDismissRequest = { showChangelogDialog = false },
+                showTopBar = !useMorpheHomeScreen
+            )
+        }
     }
 
     Scaffold { paddingValues ->
@@ -1339,6 +1369,8 @@ private fun ApiPatchBundleCard(
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onOpenInBrowser: () -> Unit,
+    onPatchesClick: () -> Unit,
+    onVersionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -1420,7 +1452,10 @@ private fun ApiPatchBundleCard(
                     icon = Icons.Outlined.Info,
                     label = stringResource(R.string.patches),
                     value = patchCount.toString(),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable(onClick = onPatchesClick),
+                    clickable = patchCount > 0
                 )
 
                 StatChip(
@@ -1429,7 +1464,10 @@ private fun ApiPatchBundleCard(
                     value = updateInfo?.latestVersion?.removePrefix("v")
                         ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
                         ?: "N/A",
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable(onClick = onVersionClick),
+                    clickable = true
                 )
             }
 
@@ -1519,7 +1557,8 @@ private fun StatChip(
     icon: ImageVector,
     label: String,
     value: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    clickable: Boolean = false
 ) {
     Surface(
         modifier = modifier,

@@ -40,6 +40,7 @@ import org.koin.compose.koinInject
 fun BundlePatchesDialog(
     onDismissRequest: () -> Unit,
     src: PatchBundleSource,
+    showTopBar: Boolean = true
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val patches by remember(src.uid) {
@@ -51,22 +52,27 @@ fun BundlePatchesDialog(
     ) {
         Scaffold(
             topBar = {
-                BundleTopBar(
-                    title = stringResource(R.string.patches),
-                    onBackClick = onDismissRequest,
-                    backIcon = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back)
-                        )
-                    },
-                )
+                if (showTopBar) {
+                    BundleTopBar(
+                        title = stringResource(R.string.patches),
+                        onBackClick = onDismissRequest,
+                        backIcon = {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back)
+                            )
+                        },
+                    )
+                }
             },
         ) { paddingValues ->
             LazyColumnWithScrollbar(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(paddingValues),
+                    .then(
+                        if (showTopBar) Modifier.padding(paddingValues)
+                        else Modifier.statusBarsPadding()
+                    ),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {

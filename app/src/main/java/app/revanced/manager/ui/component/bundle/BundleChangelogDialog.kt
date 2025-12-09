@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -43,6 +44,7 @@ import app.morphe.manager.R
 fun BundleChangelogDialog(
     src: RemotePatchBundle,
     onDismissRequest: () -> Unit,
+    showTopBar: Boolean = true
 ) {
     var refreshKey by remember { mutableStateOf(0) }
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
@@ -62,28 +64,35 @@ fun BundleChangelogDialog(
     ) {
         Scaffold(
             topBar = {
-                BundleTopBar(
-                    title = stringResource(R.string.bundle_changelog),
-                    onBackClick = onDismissRequest,
-                    backIcon = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back)
-                        )
-                    }
-                )
+                if (showTopBar) {
+                    BundleTopBar(
+                        title = stringResource(R.string.bundle_changelog),
+                        onBackClick = onDismissRequest,
+                        backIcon = {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.back)
+                            )
+                        }
+                    )
+                }
             }
         ) { paddingValues ->
             when (val current = state) {
-                BundleChangelogState.Loading -> BundleChangelogLoading(paddingValues)
+                BundleChangelogState.Loading -> BundleChangelogLoading(
+                    paddingValues = if (showTopBar) paddingValues else PaddingValues(0.dp),
+                    showTopBar = showTopBar
+                )
                 is BundleChangelogState.Error -> BundleChangelogError(
-                    paddingValues = paddingValues,
+                    paddingValues = if (showTopBar) paddingValues else PaddingValues(0.dp),
                     error = current.throwable,
-                    onRetry = { refreshKey++ }
+                    onRetry = { refreshKey++ },
+                    showTopBar = showTopBar
                 )
                 is BundleChangelogState.Success -> BundleChangelogContent(
-                    paddingValues = paddingValues,
+                    paddingValues = if (showTopBar) paddingValues else PaddingValues(0.dp),
                     asset = current.asset,
+                    showTopBar = showTopBar
                 )
             }
         }
@@ -91,11 +100,18 @@ fun BundleChangelogDialog(
 }
 
 @Composable
-private fun BundleChangelogLoading(paddingValues: PaddingValues) {
+private fun BundleChangelogLoading(
+    paddingValues: PaddingValues,
+    showTopBar: Boolean = true
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues),
+            .padding(paddingValues)
+            .then(
+                if (!showTopBar) Modifier.statusBarsPadding()
+                else Modifier
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -117,12 +133,17 @@ private fun BundleChangelogLoading(paddingValues: PaddingValues) {
 private fun BundleChangelogError(
     paddingValues: PaddingValues,
     error: Throwable,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    showTopBar: Boolean = true
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues),
+            .padding(paddingValues)
+            .then(
+                if (!showTopBar) Modifier.statusBarsPadding()
+                else Modifier
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -148,7 +169,8 @@ private fun BundleChangelogError(
 @Composable
 private fun BundleChangelogContent(
     paddingValues: PaddingValues,
-    asset: ReVancedAsset
+    asset: ReVancedAsset,
+    showTopBar: Boolean = true
 ) {
     val context = LocalContext.current
     val publishDate = remember(asset.createdAt) {
@@ -164,15 +186,19 @@ private fun BundleChangelogContent(
         modifier = Modifier
             .fillMaxWidth()
             .padding(paddingValues)
+            .then(
+                if (!showTopBar) Modifier.statusBarsPadding()
+                else Modifier
+            )
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Changelog(
-                markdown = if (markdown.isBlank()) {
+                markdown = markdown.ifBlank {
                     stringResource(R.string.bundle_changelog_empty)
-                } else markdown,
+                },
                 version = asset.version,
                 publishDate = publishDate
             )
