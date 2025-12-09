@@ -14,6 +14,9 @@ object HomeAndPatcherMessages {
 
     private lateinit var homeGreetingMessages: List<Int>
 
+    private fun shuffleAllExceptFirst(shuffleSeed: Long, vararg messages: Int) =
+        listOf(messages.first()) + messages.drop(1).shuffled(Random(shuffleSeed))
+
     /**
      * Witty greeting message.
      */
@@ -22,7 +25,8 @@ object HomeAndPatcherMessages {
         // and all other strings are randomly shown.
         // Use different seed on each install, but keep the same seed across sessions
         if (!::homeGreetingMessages.isInitialized) {
-            val messages = listOf(
+            homeGreetingMessages = shuffleAllExceptFirst(
+                shuffleSeed,
                 R.string.morphe_home_greeting_1,
                 R.string.morphe_home_greeting_2,
                 R.string.morphe_home_greeting_3,
@@ -31,22 +35,16 @@ object HomeAndPatcherMessages {
                 R.string.morphe_home_greeting_6,
                 R.string.morphe_home_greeting_7,
             )
-            val firstMessage = messages.first()
-            val shuffledMessages = messages.drop(1).shuffled(Random(shuffleSeed)).toMutableList()
-            shuffledMessages[1] = firstMessage
-
-            homeGreetingMessages = shuffledMessages
         }
 
         val messageIndexKey = "patching_home_message_index"
-        var currentMessageIndex = abs(
+        val currentMessageIndex = abs(
             UIPersistentValues.getInt(context, messageIndexKey)
-        ) % homeGreetingMessages.lastIndex
+        ) % homeGreetingMessages.size
 
         if (!incrementedHomeMessage) {
             incrementedHomeMessage = true
-            currentMessageIndex++
-            UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex)
+            UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex + 1)
         }
 
         return homeGreetingMessages[currentMessageIndex]
@@ -59,7 +57,8 @@ object HomeAndPatcherMessages {
      */
     fun getPatcherMessage(context: Context, shuffleSeed: Long): Int {
         if (!::patcherMessages.isInitialized) {
-            val messages = listOf(
+            patcherMessages = shuffleAllExceptFirst(
+                shuffleSeed,
                 R.string.morphe_patcher_message_1,
                 R.string.morphe_patcher_message_2,
                 R.string.morphe_patcher_message_3,
@@ -81,11 +80,6 @@ object HomeAndPatcherMessages {
                 R.string.morphe_patcher_message_19,
                 R.string.morphe_patcher_message_20,
             )
-            val firstMessage = messages.first()
-            val shuffledMessages = messages.drop(1).shuffled(Random(shuffleSeed)).toMutableList()
-            shuffledMessages[1] = firstMessage
-
-            patcherMessages = shuffledMessages
         }
 
         val messageIndexKey = "patching_patcher_message_index"
