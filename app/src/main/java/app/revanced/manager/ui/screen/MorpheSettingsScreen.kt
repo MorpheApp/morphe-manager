@@ -51,6 +51,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
@@ -169,7 +170,7 @@ fun MorpheSettingsScreen(
     // Show keystore credentials dialog
     if (showKeystoreCredentialsDialog) {
         KeystoreCredentialsDialog(
-            onDismissRequest = {
+            onDismiss = {
                 importExportViewModel.cancelKeystoreImport()
                 showKeystoreCredentialsDialog = false
             },
@@ -1264,11 +1265,19 @@ private fun PluginActionDialog(
         }.getOrNull() ?: "Unknown"
     }
 
-    Dialog(onDismissRequest = onDismiss) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
         Surface(
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
+            tonalElevation = 6.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -1440,11 +1449,19 @@ private fun AboutDialog(onDismiss: () -> Unit) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
-    Dialog(onDismissRequest = onDismiss) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
         Surface(
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
+            tonalElevation = 6.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -1594,17 +1611,25 @@ private fun SocialIconButton(
  */
 @Composable
 private fun KeystoreCredentialsDialog(
-    onDismissRequest: () -> Unit,
+    onDismiss: () -> Unit,
     onSubmit: (String, String) -> Unit
 ) {
     var alias by rememberSaveable { mutableStateOf("") }
     var pass by rememberSaveable { mutableStateOf("") }
 
-    Dialog(onDismissRequest = onDismissRequest) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
         Surface(
             shape = RoundedCornerShape(24.dp),
             color = MaterialTheme.colorScheme.surface,
-            tonalElevation = 6.dp
+            tonalElevation = 6.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -1682,7 +1707,7 @@ private fun KeystoreCredentialsDialog(
 
                     // Cancel button
                     OutlinedButton(
-                        onClick = onDismissRequest,
+                        onClick = onDismiss,
                         modifier = Modifier.weight(1f)
                     ) {
                         Text(
