@@ -1,0 +1,45 @@
+name: Build pull request
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore release keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
+          ls -la app/keystore.jks
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Build and Sign Release APK
+        env:
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
+          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleRelease --no-daemon --stacktrace -Pgpr.user=${{ env.GPR_USER }} -Pgpr.key=${{ env.GPR_TOKEN }}
+#          ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Morphe
+          path: app/build/outputs/apk/release/*.apk
