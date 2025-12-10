@@ -183,7 +183,7 @@ fun MorphePatcherScreen(
                     }
                 } else {
                     // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.5f * tenthPercentage // 0.5% per second baseline crawl
+                    displayProgress += 0.25f * tenthPercentage // 0.25% per second baseline crawl
                 }
 
                 // Check if current step is taking too long (more than 30 seconds)
