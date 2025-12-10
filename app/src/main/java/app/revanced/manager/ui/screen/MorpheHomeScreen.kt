@@ -444,7 +444,8 @@ fun MorpheHomeScreen(
 
         ModalBottomSheet(
             onDismissRequest = { showBundlesSheet = false },
-            sheetState = sheetState
+            sheetState = sheetState,
+            scrimColor = Color.Transparent
         ) {
             Column(
                 modifier = Modifier
