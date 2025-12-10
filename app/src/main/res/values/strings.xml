@@ -728,9 +728,14 @@ You need to turn on \"Allow changing patch selection and options\" in the advanc
     <string name="patcher_memory_adjustment_retry">Try again</string>
     <string name="patcher_memory_adjustment_dismiss">Dismiss</string>
     <string name="patcher_missing_patch_title">Patch selection needs attention</string>
-    <string name="patcher_missing_patch_message">Patching failed because the following patches were not found in the current bundle:
+    <string name="patcher_preflight_missing_patch_remove">Remove missing patches</string>
+    <string name="patcher_preflight_missing_patch_proceed">Proceed anyway</string>
+    <string name="patcher_missing_patch_message">"Patching failed because the following patches were not found in the current bundle:
 %1$s
-Reopen the selection and reselect them (or choose replacements) before retrying.</string>
+Reopen the selection and reselect them (or choose replacements) before retrying."</string>
+    <string name="patcher_preflight_missing_patch_message">"The following patches aren’t available in the current bundle:
+%1$s
+You can remove them automatically, adjust the selection, or continue anyway."</string>
     <string name="patcher_missing_patch_review">Review selection</string>
     <string name="patch_selector_missing_patch_title">Re-select missing patches</string>
     <string name="patch_selector_missing_patch_message">These patches need to be reselected:
@@ -1003,6 +1008,7 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="revanced_manager_description">"Morphe is an experimental open-source project focused on creating a modern, streamlined patching of popular Android apps
 
 Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation"</string>
+    <string name="here">here.</string>
     <string name="developer_options_enabled">Developer options enabled</string>
     <string name="developer_options_taps">%d taps remaining</string>
     <string name="developer_options_already_enabled">Developer options are already enabled</string>
