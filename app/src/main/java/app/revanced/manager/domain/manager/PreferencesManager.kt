@@ -49,7 +49,7 @@ class PreferencesManager(
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
 
     val firstLaunch = booleanPreference("first_launch", true)
-    val managerAutoUpdates = booleanPreference("manager_auto_updates", false)
+    val managerAutoUpdates = booleanPreference("manager_auto_updates", true)
     val showManagerUpdateDialogOnLaunch = booleanPreference("show_manager_update_dialog_on_launch", true)
     val useManagerPrereleases = booleanPreference("manager_prereleases", false)
     val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
