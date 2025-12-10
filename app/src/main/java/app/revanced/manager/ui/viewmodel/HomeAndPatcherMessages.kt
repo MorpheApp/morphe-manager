@@ -1,7 +1,9 @@
 package app.revanced.manager.ui.viewmodel
 
 import android.content.Context
+import android.util.Log
 import app.morphe.manager.R
+import app.revanced.manager.util.tag
 import kotlin.random.Random
 
 /**
@@ -10,34 +12,37 @@ import kotlin.random.Random
 object HomeAndPatcherMessages {
 
     private fun updateValues(
-        context: Context,
-        messageIndexKey: String,
-        messageSeedKey: String,
+        messageIndex: PersistentValue<Int>,
+        messageSeed: PersistentValue<Long>,
         messages: List<Int>
     ): Int {
-        var seed = UIPersistentValues.getLong(context, messageSeedKey, 0)
+        var seed = messageSeed.get()
+        var updateSeed = false
+
         if (seed == 0L) {
             // First run of clean install.
-            seed = Random.nextInt().toLong()
-            UIPersistentValues.putLong(context, messageSeedKey, seed)
+            updateSeed = true
         }
 
-        var currentMessageIndex = UIPersistentValues.getInt(context, messageIndexKey, 0)
+        var currentMessageIndex = messageIndex.get() //PersistentValues.getInt(context, messageIndexKey, 0)
         if (currentMessageIndex > messages.lastIndex) {
             // All messages are exhausted. Reset the shuffle so the next batch is in random order.
             currentMessageIndex = 0
+            updateSeed = true
+        }
 
+        if (updateSeed) {
             seed = Random.nextInt().toLong()
-            UIPersistentValues.putLong(
-                context, messageSeedKey, Random.nextInt().toLong()
-            )
+            messageSeed.save(seed)
+            Log.d(tag, "Updated message seed: $messageSeed")
         }
 
         val shuffledMessages = listOf(messages.first()) + messages.drop(1).shuffled(Random(seed))
 
-        val greeting = shuffledMessages[currentMessageIndex++]
+        val greeting = shuffledMessages[currentMessageIndex]
 
-        UIPersistentValues.putInt(context, messageIndexKey, currentMessageIndex)
+        messageIndex.save(currentMessageIndex + 1)
+
         return greeting
     }
 
@@ -58,9 +63,8 @@ object HomeAndPatcherMessages {
 
         if (message == null) {
             message = updateValues(
-                context,
-                "patching_home_message_index",
-                "patching_home_message_seed",
+                PersistentValue(context, "patching_home_message_index", 0),
+                PersistentValue(context, "patching_home_message_seed", 0L),
                 listOf(
                     R.string.morphe_home_greeting_1,
                     R.string.morphe_home_greeting_2,
@@ -77,15 +81,24 @@ object HomeAndPatcherMessages {
         return message
     }
 
+    private lateinit var patcherMessageIndex : PersistentValue<Int>
+    private lateinit var patcherMessageSeed : PersistentValue<Long>
+
     /**
      * Witty patcher message.
      */
     fun getPatcherMessage(context: Context): Int {
+        if (!::patcherMessageIndex.isInitialized) {
+            patcherMessageIndex = PersistentValue(context, "patching_patcher_message_index", 0)
+        }
+        if (!::patcherMessageSeed.isInitialized) {
+            patcherMessageSeed = PersistentValue(context, "patching_patcher_message_seed", 0L)
+        }
+
         // Message changes each time called.
         return updateValues(
-            context,
-            "patching_patcher_message_index",
-            "patching_patcher_message_seed",
+            patcherMessageIndex,
+            patcherMessageSeed,
             listOf(
                 R.string.morphe_patcher_message_1,
                 R.string.morphe_patcher_message_2,
