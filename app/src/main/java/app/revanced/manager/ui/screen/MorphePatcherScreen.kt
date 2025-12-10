@@ -107,6 +107,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.min
 
 // Helper enum for install dialog states
 private enum class InstallDialogState {
@@ -150,6 +151,9 @@ fun MorphePatcherScreen(
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
+        val fastUpdateMilliseconds = 16L // 60 fps
+        val slowUpdateMilliseconds = 200L // 5 fps
+
         if (patcherSucceeded == null) {
             currentStepStartTime = System.currentTimeMillis()
 
@@ -163,49 +167,47 @@ fun MorphePatcherScreen(
                 // One tenth of 1%
                 val tenthPercentage = (1 / 10000f)
 
+                val nextUpdateMilliseconds : Long
+                val displayProgressChange : Float
+
                 if (distanceToActual > 0.01f) {
                     // Step completed! Fast catch-up mode with smooth deceleration
                     currentStepStartTime = System.currentTimeMillis()
                     showLongStepWarning = false
 
                     // Smoothly accelerate to catch up (creates excitement of progress spurts)
-                    val catchUpSpeed = when {
-                        distanceToActual > 0.1f -> 40 * tenthPercentage // Very fast: 4% per second
-                        distanceToActual > 0.05f -> 30 * tenthPercentage// Fast: 3% per second
+                    displayProgressChange = when {
+                        distanceToActual > 0.1f -> 80 * tenthPercentage // Very fast: 8% per second
+                        distanceToActual > 0.05f -> 40 * tenthPercentage// Fast: 4% per second
                         distanceToActual > 0.02f -> 20 * tenthPercentage// Medium: 2% per second
                         else -> 1 * tenthPercentage // Slower: 0.1% per second
                     }
-                    displayProgress += catchUpSpeed
 
-                    // Don't overshoot the actual progress
-                    if (displayProgress > actualProgress) {
-                        displayProgress = actualProgress
-                    }
+                    nextUpdateMilliseconds = fastUpdateMilliseconds
                 } else {
                     // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.15f * tenthPercentage + // 0.015% per second baseline crawl
-                            // Up to 0.01% variation of the crawl.
-                            (Math.random() * 0.05f * tenthPercentage).toFloat()
+                    displayProgressChange = 2.5f * tenthPercentage // 0.25% per second baseline crawl
+
+                    nextUpdateMilliseconds = slowUpdateMilliseconds
                 }
 
-                // Check if current step is taking too long (more than 30 seconds)
-                val stepDuration = System.currentTimeMillis() - currentStepStartTime
-                if (stepDuration > 50000 && !showLongStepWarning) {
+                // Don't go beyond 98% until actually complete.
+                displayProgress = min(displayProgress + displayProgressChange,0.98f)
+
+                // Check if current step is taking too long (more than 50 seconds)
+                if (!showLongStepWarning && System.currentTimeMillis() - currentStepStartTime > 50000) {
                     showLongStepWarning = true
                 }
 
-                // Never exceed 99% until actually complete
-                displayProgress = minOf(displayProgress, 0.99f)
-
-                delay(10) // Update every 10ms for smooth animation
+                delay(nextUpdateMilliseconds)
             }
         } else {
             // Patching finished - smoothly move to 100%
             showLongStepWarning = false
             while (displayProgress < 1f) {
-                displayProgress += 0.01f // Quick final animation
-                displayProgress = minOf(displayProgress, 1f)
-                delay(10)
+                // Quick final animation
+                displayProgress = min(displayProgress + 0.01f, 1f)
+                delay(fastUpdateMilliseconds)
             }
         }
     }
