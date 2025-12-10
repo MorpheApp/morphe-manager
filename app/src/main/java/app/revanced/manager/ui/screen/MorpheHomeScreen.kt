@@ -1106,17 +1106,23 @@ private fun BundleUpdateSnackbar(
         progress.completed.toFloat() / progress.total
     }
 
+    val containerColor = when (status) {
+        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
+        BundleUpdateStatus.Error   -> MaterialTheme.colorScheme.errorContainer
+        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
+    }
+
+    val contentColor = when (status) {
+        BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
+        BundleUpdateStatus.Error   -> MaterialTheme.colorScheme.onErrorContainer
+        BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = when (status) {
-                BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
-                BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
-                BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
-            }
-        ),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
@@ -1165,7 +1171,7 @@ private fun BundleUpdateSnackbar(
                     },
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = contentColor
                 )
                 Text(
                     text = when (status) {
@@ -1191,7 +1197,7 @@ private fun BundleUpdateSnackbar(
                         }
                     },
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = contentColor.copy(alpha = 0.8f)
                 )
             }
         }
