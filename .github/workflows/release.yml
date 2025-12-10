@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup keystore
         run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > "app/keystore.jks"
+          echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
 
       - name: Build release
         env:
