@@ -15,9 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -163,6 +160,9 @@ fun MorphePatcherScreen(
                 // Check if actual progress jumped ahead significantly
                 val distanceToActual = actualProgress - displayProgress
 
+                // One tenth of 1%
+                val tenthPercentage = (1 / 10000f)
+
                 if (distanceToActual > 0.01f) {
                     // Step completed! Fast catch-up mode with smooth deceleration
                     currentStepStartTime = System.currentTimeMillis()
@@ -170,10 +170,10 @@ fun MorphePatcherScreen(
 
                     // Smoothly accelerate to catch up (creates excitement of progress spurts)
                     val catchUpSpeed = when {
-                        distanceToActual > 0.1f -> 0.004f  // Very fast: 40% per second
-                        distanceToActual > 0.05f -> 0.003f // Fast: 30% per second
-                        distanceToActual > 0.02f -> 0.002f // Medium: 20% per second
-                        else -> 0.001f                     // Slower: 10% per second
+                        distanceToActual > 0.1f -> 40 * tenthPercentage // Very fast: 4% per second
+                        distanceToActual > 0.05f -> 30 * tenthPercentage// Fast: 3% per second
+                        distanceToActual > 0.02f -> 20 * tenthPercentage// Medium: 2% per second
+                        else -> 1 * tenthPercentage // Slower: 0.1% per second
                     }
                     displayProgress += catchUpSpeed
 
@@ -183,7 +183,7 @@ fun MorphePatcherScreen(
                     }
                 } else {
                     // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.00005f // 0.5% per second baseline crawl
+                    displayProgress += 0.5f * tenthPercentage // 0.5% per second baseline crawl
                 }
 
                 // Check if current step is taking too long (more than 30 seconds)
