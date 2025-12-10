@@ -1264,7 +1264,7 @@ class PatcherViewModel(
                     context.getString(R.string.patcher_step_load_patches),
                     StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
-                    subSteps = 2
+                    subSteps = 3
                 ),
                 Step(
                     context.getString(R.string.patcher_step_unpack),
@@ -1279,12 +1279,12 @@ class PatcherViewModel(
                 Step(
                     context.getString(R.string.patcher_step_write_patched),
                     StepCategory.SAVING,
-                    subSteps = 4
+                    subSteps = 5
                 ),
                 Step(
                     context.getString(R.string.patcher_step_sign_apk),
                     StepCategory.SAVING,
-                    subSteps = 2
+                    subSteps = 3
                 )
             )
         }

@@ -183,14 +183,14 @@ fun MorphePatcherScreen(
                     }
                 } else {
                     // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.25f * tenthPercentage + // 0.25% per second baseline crawl
-                            // Add a little randomness to the crawl
-                            (Math.random() * 0.1f * tenthPercentage).toFloat()
+                    displayProgress += 0.15f * tenthPercentage + // 0.015% per second baseline crawl
+                            // Up to 0.01% variation of the crawl.
+                            (Math.random() * 0.05f * tenthPercentage).toFloat()
                 }
 
                 // Check if current step is taking too long (more than 30 seconds)
                 val stepDuration = System.currentTimeMillis() - currentStepStartTime
-                if (stepDuration > 30000 && !showLongStepWarning) {
+                if (stepDuration > 50000 && !showLongStepWarning) {
                     showLongStepWarning = true
                 }
 
