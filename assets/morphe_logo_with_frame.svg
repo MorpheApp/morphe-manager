@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2025 Morphe. This is copyrighted content, and not licensed under open source terms. See https://github.com/Morphe/morphe-branding -->
+<svg
+    width="512"
+    height="512"
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+        <linearGradient id="linearGradient2" x1="83" y1="216" x2="429" y2="216" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#1E5AA8"/>
+            <stop offset="1" stop-color="#00AFAE"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Frame -->
+    <g id="Frame">
+        <path
+            id="Square"
+            d="M146,6 h220 c78,0 140,62 140,140 v220 c0,78 -62,140 -140,140 H146 C68,506 6,444 6,366 V146 C6,68 68,6 146,6 Z"
+            fill="#EEEEEE"/>
+    </g>
+
+    <!-- Letter -->
+    <g id="Letter">
+        <path
+            id="Left"
+            d="M123,140 c-21,0 -39,17 -40,38 v192 c1,21 19,38 40,38 21,0 39,-17 40,-38 V178 c-1,-21 -19,-38 -40,-38 z"
+            fill="#1E5AA8"/>
+        <path
+            id="Right"
+            d="M349,285 v85 c1,21 19,38 40,38 21,0 39,-17 40,-38 V182 c-11,-14 -74,63 -80,103 z"
+            fill="#00AFAE"/>
+        <path
+            id="Middle"
+            d="M127,108 c-34,0 -44,25 -44,40 v54 c30,-33 75,27 80,33 28,32 44,87 93,89 48,-2 67,-56 93,-89 0,0 45,-74 80,-80 0,-28 -11,-47 -44,-47 -34,0 -58,50 -75,72 -17,22 -25,46 -54,46 -29,0 -38,-25 -54,-46 -17,-22 -41,-72 -75,-72 z"
+            fill="url(#linearGradient2)"/>
+    </g>
+</svg>
