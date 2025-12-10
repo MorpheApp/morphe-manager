@@ -80,7 +80,6 @@ class HttpService(
             Log.w(tag, "request failed with HTTP 429 after retries")
             APIResponse.Error(APIError(HttpStatusCode.TooManyRequests, body))
         }
-        return response
     }
 
     suspend fun streamTo(
@@ -109,9 +108,6 @@ class HttpService(
                         else -> throw HttpException(httpResponse.status)
                     }
                 }
-
-            } else {
-                throw HttpException(httpResponse.status)
             }
         } catch (t: TooManyRequestsException) {
             throw HttpException(HttpStatusCode.TooManyRequests)
@@ -134,19 +130,19 @@ class HttpService(
                     when {
                         httpResponse.status == HttpStatusCode.TooManyRequests -> throw TooManyRequestsException(httpResponse.retryAfterMillis())
                         httpResponse.status.isSuccess() -> {
-                        if (httpResponse.status.isSuccess()) {
-                val channel: ByteReadChannel = httpResponse.body()
-                val append = resumeFrom > 0 && httpResponse.status == HttpStatusCode.PartialContent
-                if (resumeFrom > 0 && !append && saveLocation.exists()) {
-                    saveLocation.delete()
-                }
-                FileOutputStream(saveLocation, append).use { outputStream ->
-                    withContext(Dispatchers.IO) {
-                        while (!channel.isClosedForRead) {
-                            val packet = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
-                            while (packet.isNotEmpty) {
-                                val bytes = packet.readBytes()
-                                outputStream.write(bytes)}
+                            val channel: ByteReadChannel = httpResponse.body()
+                            val append = resumeFrom > 0 && httpResponse.status == HttpStatusCode.PartialContent
+                            if (resumeFrom > 0 && !append && saveLocation.exists()) {
+                                saveLocation.delete()
+                            }
+                            FileOutputStream(saveLocation, append).use { outputStream ->
+                                withContext(Dispatchers.IO) {
+                                    while (!channel.isClosedForRead) {
+                                        val packet = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
+                                        while (packet.isNotEmpty) {
+                                            val bytes = packet.readBytes()
+                                            outputStream.write(bytes)
+                                        }
                                     }
                                 }
                             }
@@ -154,8 +150,6 @@ class HttpService(
                         else -> throw HttpException(httpResponse.status)
                     }
                 }
-            } else {
-                throw HttpException(httpResponse.status)
             }
         } catch (t: TooManyRequestsException) {
             throw HttpException(HttpStatusCode.TooManyRequests)

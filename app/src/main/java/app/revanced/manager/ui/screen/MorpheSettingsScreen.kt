@@ -813,7 +813,7 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            if (dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) == true) {
+            if (dashboardViewModel.rootInstaller?.isDeviceRooted() /*requestRootAccessIfNotAskedYet(context)*/ == true) {
                 // Debugging Section
                 SectionHeader(
                     icon = Icons.Outlined.DeveloperMode,

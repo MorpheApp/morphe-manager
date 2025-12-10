@@ -63,18 +63,19 @@ import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionBut
 import app.revanced.manager.ui.component.patcher.Steps
 import app.revanced.manager.ui.model.StepCategory
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.viewmodel.PatcherViewModel
+import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.toast
 import org.koin.compose.koinInject
-
+import kotlin.contracts.contract
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatcherScreen(
@@ -254,17 +255,9 @@ fun PatcherScreen(
         )
     }
 
-    viewModel.missingPatchDialog?.let { state ->
-        // FIXME ORIGINAL
-        val patchList = state.patchNames.joinToString(separator = "\n• ", prefix = "• ")
-        // FIXME END
+    viewModel.missingPatchWarning?.let { state ->
         AlertDialog(
-            // FIXME UPSTREAM
-//            onDismissRequest = {},
-            // FIXME END
-            // FIXME ORIGINAL
-            onDismissRequest = viewModel::dismissMissingPatchDialog,
-            // FIXME END
+            onDismissRequest = {},
             title = { Text(stringResource(R.string.patcher_missing_patch_title)) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -276,9 +269,6 @@ fun PatcherScreen(
                                 append(state.patchNames.joinToString(separator = "\n• "))
                             }
                         )
-                    text = stringResource(
-                        R.string.patcher_missing_patch_message,
-                        patchList
                     )
                 }
             },
@@ -298,22 +288,17 @@ fun PatcherScreen(
                             val options = viewModel.currentOptionsSnapshot()
                             val patches = state.patchNames
                             viewModel.dismissMissingPatchWarning()
-                            viewModel.dismissMissingPatchDialog()
-                        onReviewSelection(
-                            viewModel.currentSelectedApp,
-                            selection,
-                            options,
-                            patches
-                        )
-                        onBackClick()
+                            onReviewSelection(
+                                viewModel.currentSelectedApp,
+                                selection,
+                                options,
+                                patches
+                            )
+                            onBackClick()
+                        }
+                    ) {
+                        Text(stringResource(R.string.patcher_missing_patch_review))
                     }
-                ) {
-                    Text(stringResource(R.string.patcher_missing_patch_review))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::dismissMissingPatchDialog) {
-                    Text(stringResource(R.string.cancel))
                 }
             }
         )

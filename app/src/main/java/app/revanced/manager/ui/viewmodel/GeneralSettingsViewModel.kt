@@ -114,6 +114,14 @@ class GeneralSettingsViewModel(
         prefs.dynamicColor.update(false)
         prefs.pureBlackTheme.update(false)
         resetTheme?.let { prefs.theme.update(it) }
+    }
+
+    private suspend fun getCurrentThemePreset(): ThemePreset? {
+        if (!prefs.themePresetSelectionEnabled.get()) return null
+        val storedName = prefs.themePresetSelectionName.get().takeIf { it.isNotBlank() }
+        return storedName?.let { runCatching { ThemePreset.valueOf(it) }.getOrNull() }
+    }
+
     fun togglePatchesPrerelease(usePrerelease: Boolean) = viewModelScope.launch {
         prefs.usePatchesPrereleases.update(usePrerelease)
         prefs.patchesBundleJsonUrl.update(
@@ -121,12 +129,6 @@ class GeneralSettingsViewModel(
         )
     }
 
-    private suspend fun getCurrentThemePreset(): ThemePreset? {
-        if (!prefs.themePresetSelectionEnabled.get()) return null
-        val storedName = prefs.themePresetSelectionName.get().takeIf { it.isNotBlank() }
-        return storedName?.let { runCatching { ThemePreset.valueOf(it) }.getOrNull() }
-
-    // FIXME: ORIGNAL
     fun toggleRootMode(enabled: Boolean) = viewModelScope.launch {
         prefs.useRootMode.update(enabled)
     }

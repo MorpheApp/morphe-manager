@@ -11,8 +11,6 @@ import app.revanced.manager.patcher.LibraryResolver
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.runtime.process.IPatcherEvents
 import app.revanced.manager.patcher.runtime.process.IPatcherProcess
-import app.revanced.manager.patcher.LibraryResolver
-import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.runtime.process.Parameters
 import app.revanced.manager.patcher.runtime.process.PatchConfiguration
 import app.revanced.manager.patcher.runtime.process.PatcherProcess
@@ -86,6 +84,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     packageName,
                     selectedPatches,
                     options,
+                    stripNativeLibs,
                     logger,
                     onPatchCompleted,
                     onProgress
@@ -127,6 +126,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         packageName: String,
         selectedPatches: PatchSelection,
         options: Options,
+        stripNativeLibs: Boolean,
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,

@@ -158,11 +158,8 @@ fun AboutSettingsScreen(
                         text = stringResource(R.string.about_revanced_manager),
                         style = MaterialTheme.typography.titleMedium
                     )
-                    // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
-                    AnnotatedLinkText(
+                    Text(
                         text = stringResource(R.string.revanced_manager_description),
-                        linkLabel = stringResource(R.string.here),
-                        url = "https://github.com/Jman-Github/Universal-ReVanced-Manager#-unique-features"
                     )
                 }
             }

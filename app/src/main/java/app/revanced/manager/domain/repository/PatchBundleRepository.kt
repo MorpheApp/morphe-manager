@@ -1098,7 +1098,10 @@ class PatchBundleRepository(
         fun defaultSource() = PatchBundleEntity(
             uid = DEFAULT_SOURCE_UID,
             name = "",
+            displayName = null,
             versionHash = null,
+            source = Source.API,
+            autoUpdate = false,
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis()

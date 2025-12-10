@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.horizontalScroll
-import app.revanced.manager.util.consumeHorizontalScroll
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -90,13 +87,9 @@ import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.NotificationCard
 import app.revanced.manager.ui.component.SafeguardHintCard
 import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
-import app.revanced.manager.ui.component.SafeguardHintCard
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
-import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.Alignment
 import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.Options
@@ -172,7 +165,6 @@ fun SelectedAppInfoScreen(
     val composableScope = rememberCoroutineScope()
 
     val error by vm.errorFlow.collectAsStateWithLifecycle(null)
-    val downloadedApps by vm.downloadedApps.collectAsStateWithLifecycle(emptyList())
     val profileLaunchState by vm.profileLaunchState.collectAsStateWithLifecycle(null)
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -263,10 +255,7 @@ fun SelectedAppInfoScreen(
                     plugins = plugins,
                     installedApp = vm.installedAppData,
                     searchApp = SelectedApp.Search(vm.packageName, effectiveVersion),
-                searchApp = SelectedApp.Search(
-                    vm.packageName,
-                    effectiveVersion
-                ),    activeSearchJob = vm.activePluginAction,
+                    activeSearchJob = vm.activePluginAction,
                     hasRoot = vm.hasRoot,
                     downloadedApps = downloadedApps,
                     includeAutoOption = !vm.sourceSelectionRequired,

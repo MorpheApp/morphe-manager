@@ -161,9 +161,6 @@ class DownloadedAppRepository(
             saveDir.deleteRecursively()
             throw e
         }
-
-        // Return the Apk file.
-        return getApkFileForDir(saveDir)
     }
 
     suspend fun get(packageName: String, version: String, markUsed: Boolean = false) =

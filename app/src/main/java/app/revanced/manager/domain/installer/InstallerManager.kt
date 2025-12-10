@@ -412,8 +412,6 @@ class InstallerManager(
                 icon = loadInstallerIcon(token.componentName)
             )
         }
-
-        Token.Root -> null
     }
 
     private fun copyToShareDir(source: File): File {

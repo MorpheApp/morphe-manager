@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageInfo
 import android.net.Uri
@@ -38,7 +37,6 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
@@ -46,7 +44,6 @@ import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
-import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
@@ -67,7 +64,6 @@ import app.revanced.manager.ui.model.navigation.Patcher
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.Options
-import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.util.saveableVar
@@ -82,11 +78,8 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -129,7 +122,6 @@ class PatcherViewModel(
     private var internalInstallMonitorJob: Job? = null
     private var installProgressToastJob: Job? = null
     private var installProgressToast: Toast? = null
-
 
     private var installedApp: InstalledApp? = null
     private val selectedApp = input.selectedApp
@@ -201,30 +193,30 @@ class PatcherViewModel(
             bundleOptions.mapValues { (_, patchOptions) -> patchOptions.toMap() }.toMap()
         }.toMap()
 
-fun dismissMissingPatchWarning() {
-    missingPatchWarning = null
-}
-
-fun proceedAfterMissingPatchWarning() {
-    if (missingPatchWarning == null) return
-    viewModelScope.launch {
+    fun dismissMissingPatchWarning() {
         missingPatchWarning = null
-        startWorker()
     }
-}
 
-fun removeMissingPatchesAndStart() {
-    val warning = missingPatchWarning ?: return
-    viewModelScope.launch {
-        val scopedBundles = gatherScopedBundles()
-        val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
-        val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
-        appliedSelection = sanitizedSelection
-        appliedOptions = sanitizedOptions
-        missingPatchWarning = null
-        startWorker()
+    fun proceedAfterMissingPatchWarning() {
+        if (missingPatchWarning == null) return
+        viewModelScope.launch {
+            missingPatchWarning = null
+            startWorker()
+        }
     }
-}
+
+    fun removeMissingPatchesAndStart() {
+        val warning = missingPatchWarning ?: return
+        viewModelScope.launch {
+            val scopedBundles = gatherScopedBundles()
+            val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
+            val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
+            appliedSelection = sanitizedSelection
+            appliedOptions = sanitizedOptions
+            missingPatchWarning = null
+            startWorker()
+        }
+    }
 
     private var currentActivityRequest: Pair<CompletableDeferred<Boolean>, String>? by mutableStateOf(
         null
@@ -276,23 +268,10 @@ fun removeMissingPatchesAndStart() {
             if (installStatus is InstallCompletionStatus.InProgress) {
                 logger.trace("install timeout for $packageName")
                 packageInstallerStatus = null
-                // FIXME UPSTREAM
-//                if (!tryMarkInstallIfPresent(packageName)) {
-//                    val message = timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
-//                    showInstallFailure(message)
-//                }
-                // FIXME END
-
-                // FIXME ORIGNAL
-                val message = when {
-                    prefs.useMorpheHomeScreen.get() -> app.getString(R.string.morphe_patcher_install_conflict_message)
-                    else -> timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
+                if (!tryMarkInstallIfPresent(packageName)) {
+                    val message = timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
+                    showInstallFailure(message)
                 }
-                showInstallFailure(message)
-                // FIXME END
-            }
-        }
-    }
             }
         }
     }
@@ -507,8 +486,8 @@ fun removeMissingPatchesAndStart() {
     data class MissingPatchWarningState(
         val patchNames: List<String>
     )
-var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
-    private set
+    var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
+        private set
 
     private suspend fun gatherScopedBundles(): Map<Int, PatchBundleInfo.Scoped> =
         patchBundleRepository.scopedBundleInfoFlow(
@@ -575,16 +554,11 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
     private var currentStepIndex = 0
 
     val progress by derivedStateOf {
-        // FIXME: Use step substep to track progress of individual patches.
-        val current = steps.sumOf {
-            if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
-                it.subSteps.toLong()
-            } else {
-                0L
-            }
+        val current = steps.count {
+            it.state == State.COMPLETED && it.category != StepCategory.PATCHING
         } + completedPatchCount
 
-        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
+        val total = steps.size - 1 + patchCount
 
         current.toFloat() / total.toFloat()
     }
@@ -752,7 +726,6 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                                 Log.w(TAG, "Failed to persist installed patched app metadata (package added broadcast)")
                             }
                         }
-                        app.toast(app.getString(R.string.install_app_success))
                         updateInstallingState(false)
                     } else {
                         // If we still have an external plan, mark success.
@@ -770,10 +743,8 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                         PackageInstaller.STATUS_FAILURE
                     )
 
-                intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
-                    ?.let(logger::trace)
-
-                updateInstallingState(false)
+                    intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
+                        ?.let(logger::trace)
 
                     if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
                         updateInstallingState(true)
@@ -795,7 +766,6 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                                 Log.w(TAG, "Failed to persist installed patched app metadata")
                             }
                         }
-                        app.toast(app.getString(R.string.install_app_success))
                         installStatus = InstallCompletionStatus.Success(packageName)
                         lastSuccessInstallType = installType
                         lastSuccessAtMs = System.currentTimeMillis()
@@ -804,7 +774,7 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                     } else {
                         val now = System.currentTimeMillis()
                         val recentShizukuSuccess = lastSuccessInstallType == InstallType.SHIZUKU &&
-                            now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
+                                now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
                         if (activeInstallType == InstallType.SHIZUKU || recentShizukuSuccess || installStatus is InstallCompletionStatus.Success) {
                             packageInstallerStatus = null
                             installFailureMessage = null
@@ -1121,19 +1091,19 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                 }
             }
         } catch (e: Exception) {
-                    Log.e(tag, "Failed to install", e)
-                    awaitingPackageInstall = null
-                    packageInstallerStatus = null
-                    showInstallFailure(
-                        app.getString(
-                            R.string.install_app_fail,
-                            e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
-                        )
-                    )
-                } finally {
-                    if (!pmInstallStarted) updateInstallingState(false)
-                }
-            }
+            Log.e(tag, "Failed to install", e)
+            awaitingPackageInstall = null
+            packageInstallerStatus = null
+            showInstallFailure(
+                app.getString(
+                    R.string.install_app_fail,
+                    e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
+                )
+            )
+        } finally {
+            if (!pmInstallStarted) updateInstallingState(false)
+        }
+    }
 
     private suspend fun performShizukuInstall() {
         activeInstallType = InstallType.SHIZUKU
@@ -1195,13 +1165,11 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                 )
             )
         } finally {
-            if (packageInstallerStatus != PackageInstaller.STATUS_SUCCESS) {
-                awaitingPackageInstall = nullif (packageInstallerStatus == PackageInstaller.STATUS_SUCCESS && installStatus !is InstallCompletionStatus.Success) {
+            awaitingPackageInstall = null
+            if (packageInstallerStatus == PackageInstaller.STATUS_SUCCESS && installStatus !is InstallCompletionStatus.Success) {
                 installStatus = InstallCompletionStatus.Success(installedPackageName ?: packageName)
             }
-            if (packageInstallerStatus == PackageInstaller.STATUS_SUCCESS) {
-                updateInstallingState(false)
-            }
+            updateInstallingState(false)
         }
     }
 
@@ -1265,7 +1233,6 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
 
         try {
             ContextCompat.startActivity(app, plan.intent, null)
-            app.toast(app.getString(R.string.installer_external_launched, plan.installerLabel))
         } catch (error: ActivityNotFoundException) {
             installerManager.cleanup(plan)
             pendingExternalInstall = null
@@ -1308,12 +1275,10 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                         Log.w(TAG, "Failed to persist installed patched app metadata (external installer)")
                     }
                 }
-                app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
             }
 
             InstallerManager.InstallTarget.SAVED_APP,
             InstallerManager.InstallTarget.MANAGER_UPDATE -> {
-                app.toast(app.getString(R.string.installer_external_success, plan.installerLabel))
             }
         }
         suppressFailureAfterSuccess = true
@@ -1497,8 +1462,7 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                         copy(
                             name = name ?: this.name,
                             state = state ?: this.state,
-                            message = message ?: this.message,
-                            subSteps = subSteps ?: this.subSteps
+                            message = message ?: this.message
                         )
                     }
 
@@ -1608,8 +1572,8 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
         merged: Boolean = false
     ) {
         val needsSplit = needsSplitOverride
-            ?: merged
-            || file?.let(SplitApkPreparer::isSplitArchive) == true
+                ?: merged
+                || file?.let(SplitApkPreparer::isSplitArchive) == true
         when {
             needsSplit && !requiresSplitPreparation -> {
                 requiresSplitPreparation = true
@@ -1705,7 +1669,7 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
     }
 
     private companion object {
-        const val TAG = "Morphe Patcher"
+        const val TAG = "ReVanced Patcher"
         private const val SYSTEM_INSTALL_TIMEOUT_MS = 15_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val INSTALL_MONITOR_POLL_MS = 500L
@@ -1741,7 +1705,6 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                     context.getString(R.string.patcher_step_load_patches),
                     StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
-                    subSteps = 2
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
                 Step(
@@ -1759,14 +1722,12 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
                 Step(
                     id = StepId.WRITE_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_write_patched),
-                    category = StepCategory.SAVING,
-                    subSteps = 4
+                    category = StepCategory.SAVING
                 ),
                 Step(
                     id = StepId.SIGN_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_sign_apk),
-                    category = StepCategory.SAVING,
-                    subSteps = 2
+                    category = StepCategory.SAVING
                 )
             )
         }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import app.morphe.manager.R
 import app.revanced.manager.domain.manager.base.Preference
 import app.revanced.manager.ui.component.ConfirmDialog
 import kotlinx.coroutines.CoroutineScope

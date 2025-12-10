@@ -1,17 +1,18 @@
 package app.revanced.manager.patcher
 
 import android.content.Context
-import app.revanced.library.ApkUtils.applyTo
-import app.universal.revanced.manager.R
+import app.morphe.library.ApkUtils.applyTo
+import app.morphe.manager.R
+import app.morphe.patcher.Patcher
+import app.morphe.patcher.PatcherConfig
+import app.morphe.patcher.patch.Patch
+import app.morphe.patcher.patch.PatchResult
+import app.revanced.manager.patcher.Session.Companion.component1
+import app.revanced.manager.patcher.Session.Companion.component2
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.ui.model.State
-import app.revanced.patcher.Patcher
-import app.revanced.patcher.PatcherConfig
-import app.revanced.patcher.patch.Patch
-import app.revanced.patcher.patch.PatchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.compose.koinInject
 import java.io.Closeable
 import java.io.File
 import java.nio.file.Files
@@ -46,7 +47,7 @@ class Session(
         var nextPatchIndex = 0
 
         updateProgress(
-            name = androidContext.getString(R.string.executing_patch, selectedPatches[nextPatchIndex]),
+            name = androidContext.getString(R.string.applying_patches, selectedPatches[nextPatchIndex]),
             state = State.RUNNING
         )
 
@@ -71,7 +72,7 @@ class Session(
 
             selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
                 updateProgress(
-                    name = androidContext.getString(R.string.executing_patch, nextPatch.name)
+                    name = androidContext.getString(R.string.applying_patches)
                 )
             }
 

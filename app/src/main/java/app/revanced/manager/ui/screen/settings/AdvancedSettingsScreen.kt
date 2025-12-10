@@ -34,7 +34,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -42,7 +41,6 @@ import androidx.compose.material.icons.automirrored.outlined.PlaylistAdd
 import androidx.compose.material.icons.automirrored.outlined.PlaylistAddCheck
 import androidx.compose.material.icons.automirrored.outlined.Redo
 import androidx.compose.material.icons.automirrored.outlined.Undo
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Api
 import androidx.compose.material.icons.outlined.Add
@@ -126,13 +124,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.content.getSystemService
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import app.universal.revanced.manager.BuildConfig
-import app.universal.revanced.manager.R
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
@@ -141,7 +135,6 @@ import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.ui.component.settings.TextItem
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
@@ -150,7 +143,6 @@ import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
 import app.revanced.manager.util.withHapticFeedback
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import kotlinx.coroutines.Dispatchers
@@ -171,11 +163,9 @@ fun AdvancedSettingsScreen(
 ) {
     val context = LocalContext.current
     val installerManager: InstallerManager = koinInject()
-
     var installerDialogTarget by rememberSaveable { mutableStateOf<InstallerDialogTarget?>(null) }
     var showCustomInstallerDialog by rememberSaveable { mutableStateOf(false) }
     val hasOfficialBundle by viewModel.hasOfficialBundle.collectAsStateWithLifecycle(true)
-
     val memoryLimit = remember {
         val activityManager = context.getSystemService<ActivityManager>()!!
         context.getString(
@@ -184,23 +174,7 @@ fun AdvancedSettingsScreen(
             activityManager.largeMemoryClass
         )
     }
-
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-
-    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
-    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
-
-    if (showPatchesBundleJsonUrlDialog) {
-        PatchesBundleJsonUrlDialog(
-            currentUrl = patchesBundleJsonUrl,
-            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
-            onDismiss = { showPatchesBundleJsonUrlDialog = false },
-            onSave = { url ->
-                viewModel.setPatchesBundleJsonUrl(url.trim())
-                showPatchesBundleJsonUrlDialog = false
-            }
-        )
-    }
 
     Scaffold(
         topBar = {
@@ -219,7 +193,6 @@ fun AdvancedSettingsScreen(
         ) {
             GroupHeader(stringResource(R.string.patch_bundle_installer))
 
-            // Patches repository
             val apiUrl by viewModel.prefs.api.getAsState()
             val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
             val includeGitHubPatInExports by viewModel.prefs.includeGitHubPatInExports.getAsState()
@@ -256,13 +229,9 @@ fun AdvancedSettingsScreen(
                 }
             )
             SettingsListItem(
-                headlineContent = stringResource(R.string.patches_bundle_json_url),
-                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
-                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
-                // FIXME UPSTREAM
-//                headlineContent = stringResource(R.string.github_pat),
-//                supportingContent = stringResource(R.string.github_pat_description),
-//                modifier = Modifier.clickable { showGitHubPatDialog = true }
+                headlineContent = stringResource(R.string.github_pat),
+                supportingContent = stringResource(R.string.github_pat_description),
+                modifier = Modifier.clickable { showGitHubPatDialog = true }
             )
 
             val installTarget = InstallerManager.InstallTarget.PATCHER
@@ -270,7 +239,6 @@ fun AdvancedSettingsScreen(
             val fallbackPreference by viewModel.prefs.installerFallback.getAsState()
             val primaryToken = remember(primaryPreference) { installerManager.parseToken(primaryPreference) }
             val fallbackToken = remember(fallbackPreference) { installerManager.parseToken(fallbackPreference) }
-
             fun ensureSelection(
                 entries: List<InstallerManager.Entry>,
                 token: InstallerManager.Token,
@@ -290,7 +258,6 @@ fun AdvancedSettingsScreen(
                 val ensured = if (
                     token == InstallerManager.Token.Internal ||
                     token == InstallerManager.Token.AutoSaved ||
-//                    token == InstallerManager.Token.Root ||  // FIXME EXISTING
                     (token == InstallerManager.Token.None && includeNone) ||
                     normalized.any { tokensEqual(it.token, token) }
                 ) {
@@ -369,7 +336,6 @@ fun AdvancedSettingsScreen(
 
             val primarySupporting = entrySupporting(primaryEntry)
             val fallbackSupporting = entrySupporting(fallbackEntry)
-
             fun installerLeadingContent(
                 entry: InstallerManager.Entry,
                 selected: Boolean
@@ -377,7 +343,6 @@ fun AdvancedSettingsScreen(
                 InstallerManager.Token.Internal,
                 InstallerManager.Token.None,
                 InstallerManager.Token.AutoSaved -> null
-//                InstallerManager.Token.Root -> null // FIXME ORIGINAL
                 InstallerManager.Token.Shizuku,
                 is InstallerManager.Token.Component -> entry.icon?.let { drawable ->
                     {
@@ -528,30 +493,21 @@ fun AdvancedSettingsScreen(
                 headline = R.string.strip_unused_libs,
                 description = R.string.strip_unused_libs_description,
             )
-
-            // Runtime process only works with Android 11 and higher.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                BooleanItem(
-                    preference = viewModel.prefs.useProcessRuntime,
-                    coroutineScope = viewModel.viewModelScope,
-                    headline = R.string.process_runtime,
-                    description = R.string.process_runtime_description,
-                )
-                IntegerItem(
-                    preference = viewModel.prefs.patcherProcessMemoryLimit,
-                    coroutineScope = viewModel.viewModelScope,
-                    headline = R.string.process_runtime_memory_limit,
-                    description = R.string.process_runtime_memory_limit_description,
-                    neutralButtonLabel = stringResource(R.string.reset_to_recommended),
-                    neutralValueProvider = { viewModel.prefs.patcherProcessMemoryLimit.default }
-                )
-            } else {
-                TextItem(
-                    headline = R.string.process_runtime,
-                    description = R.string.process_runtime_description_not_available
-                )
-            }
-
+            BooleanItem(
+                preference = viewModel.prefs.useProcessRuntime,
+                coroutineScope = viewModel.viewModelScope,
+                headline = R.string.process_runtime,
+                description = R.string.process_runtime_description,
+            )
+            val recommendedProcessLimit = remember { 700 }
+            IntegerItem(
+                preference = viewModel.prefs.patcherProcessMemoryLimit,
+                coroutineScope = viewModel.viewModelScope,
+                headline = R.string.process_runtime_memory_limit,
+                description = R.string.process_runtime_memory_limit_description,
+                neutralButtonLabel = stringResource(R.string.reset_to_recommended),
+                neutralValueProvider = { recommendedProcessLimit }
+            )
             BooleanItem(
                 preference = viewModel.prefs.autoCollapsePatcherSteps,
                 coroutineScope = viewModel.viewModelScope,
@@ -771,10 +727,6 @@ fun AdvancedSettingsScreen(
             }
 
             GroupHeader(stringResource(R.string.app_exporting))
-            val exportFormatSummary = buildString {
-                appendLine(stringResource(R.string.export_name_format_description))
-                append(stringResource(R.string.export_name_format_current, exportFormat))
-            }.trimEnd()
             SettingsListItem(
                 headlineContent = stringResource(R.string.export_name_format),
                 supportingContentSlot = {
@@ -797,8 +749,6 @@ fun AdvancedSettingsScreen(
                         }
                     }
                 },
-                // FIXME: Original
-//                supportingContent = exportFormatSummary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { showExportFormatDialog = true }
@@ -1255,20 +1205,20 @@ private fun CustomInstallerContent(
     val trimmedInput = remember(inputValue) { inputValue.trim() }
     var selectedTab by rememberSaveable { mutableStateOf(InstallerTab.Saved) }
     val scrollState = rememberScrollState()
-            val autoSavedEntries = remember(builtinComponents, installTarget) {
-                buildList {
-                    // Built-in system installers discovered automatically.
-                    addAll(
-                        builtinComponents.mapNotNull { component ->
-                            installerManager.describeEntry(InstallerManager.Token.Component(component), installTarget)
-                                ?.let { component to it }
-                        }
-                    )
-                    // Add mount installer as an auto-saved option.
-                    installerManager.describeEntry(InstallerManager.Token.AutoSaved, installTarget)
-                        ?.let { add(null to it) }
-                }.sortedBy { (_, entry) -> entry.label.lowercase() }
-            }
+    val autoSavedEntries = remember(builtinComponents, installTarget) {
+        buildList {
+            // Built-in system installers discovered automatically.
+            addAll(
+                builtinComponents.mapNotNull { component ->
+                    installerManager.describeEntry(InstallerManager.Token.Component(component), installTarget)
+                        ?.let { component to it }
+                }
+            )
+            // Add mount installer as an auto-saved option.
+            installerManager.describeEntry(InstallerManager.Token.AutoSaved, installTarget)
+                ?.let { add(null to it) }
+        }.sortedBy { (_, entry) -> entry.label.lowercase() }
+    }
 
     fun handleLookup(packageName: String) {
         coroutineScope.launch {
@@ -1392,7 +1342,7 @@ private fun CustomInstallerContent(
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         savedEntries.forEach { (component, entry) ->
                             val isBuiltinSaved = component in builtinComponents ||
-                                component.packageName == "com.google.android.packageinstaller"
+                                    component.packageName == "com.google.android.packageinstaller"
                             val badgeText = when {
                                 isBuiltinSaved -> stringResource(R.string.installer_custom_builtin_indicator)
                                 component.flattenToString() in savedComponents -> stringResource(R.string.installer_custom_saved_indicator)
@@ -1551,7 +1501,7 @@ private fun CustomInstallerContent(
                             val flattened = token.componentName.flattenToString()
                             val isSaved = flattened in savedComponents
                             val isBuiltin = token.componentName in builtinComponents ||
-                                token.componentName.packageName == "com.google.android.packageinstaller"
+                                    token.componentName.packageName == "com.google.android.packageinstaller"
                             val badgeText = when {
                                 isSaved -> stringResource(R.string.installer_custom_saved_indicator)
                                 isBuiltin -> stringResource(R.string.installer_custom_builtin_indicator)
@@ -1680,12 +1630,12 @@ private fun InstallerSelectionDialog(
             selection = options.firstOrNull {
                 !tokensEqual(it.token, blockedToken) && it.availability.available
             }?.token ?: options.firstOrNull { !tokensEqual(it.token, blockedToken) }?.token
-            ?: selection
+                    ?: selection
         }
         currentSelection = selection
     }
     val confirmEnabled = options.find { it.token == currentSelection }?.availability?.available != false &&
-        !(blockedToken != null && tokensEqual(currentSelection, blockedToken))
+            !(blockedToken != null && tokensEqual(currentSelection, blockedToken))
     val scrollState = rememberScrollState()
 
     AlertDialog(
@@ -1713,8 +1663,8 @@ private fun InstallerSelectionDialog(
                     val enabled = option.availability.available
                     val selectedOption = currentSelection == option.token
                     val showShizukuAction = option.token == InstallerManager.Token.Shizuku &&
-                        option.availability.reason in shizukuPromptReasons &&
-                        onOpenShizuku != null
+                            option.availability.reason in shizukuPromptReasons &&
+                            onOpenShizuku != null
                     ListItem(
                         modifier = Modifier.clickable(enabled = enabled) {
                             if (enabled) currentSelection = option.token
@@ -1856,7 +1806,6 @@ private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?):
 @Composable
 private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (String?) -> Unit) {
     var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
-    var showError by rememberSaveable { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = { onSubmit(null) },
@@ -2026,12 +1975,8 @@ private fun GitHubPatDialog(
                                 includePatInExport = false
                             }
                         }
-                    },
-                    isError = showError,
-                    singleLine = false,
-                    maxLines = 6,
-                    modifier = Modifier.fillMaxWidth()
-                )}
+                    )
+                }
             }
         }
     )
@@ -2067,90 +2012,4 @@ private fun GitHubPatDialog(
             }
         )
     }
-    )
-}
-
-// FIXME: ORIGINAL
-@Composable
-private fun PatchesBundleJsonUrlDialog(
-    currentUrl: String,
-    defaultUrl: String,
-    onDismiss: () -> Unit,
-    onSave: (url: String) -> Unit
-) {
-    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
-    var showError by rememberSaveable { mutableStateOf(false) }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    val trimmedUrl = url.trim()
-                    if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
-                        showError = true
-                    } else {
-                        onSave(trimmedUrl)
-                    }
-                },
-                enabled = url.trim().isNotBlank()
-            ) {
-                Text(stringResource(R.string.patches_bundle_json_dialog_save))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
-            }
-        },
-        icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
-        title = { Text(stringResource(R.string.patches_bundle_json_url_dialog_title)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                OutlinedTextField(
-                    value = url,
-                    onValueChange = {
-                        url = it
-                        if (showError) showError = false
-                    },
-                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
-                    supportingText = {
-                        if (showError) {
-                            Text(
-                                stringResource(R.string.patches_bundle_json_url_error),
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        } else {
-                            Text("e.g. https://.../bundle.json")
-                        }
-                    },
-                    isError = showError,
-                    singleLine = false,
-                    maxLines = 6,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    TextButton(
-                        onClick = {
-                            url = defaultUrl
-                            showError = false
-                        }
-                    ) {
-                        Icon(Icons.Outlined.Restore, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text(stringResource(R.string.patches_bundle_json_dialog_reset), modifier = Modifier.padding(start = 4.dp))
-                    }
-                }
-            }
-        }
-    )
 }

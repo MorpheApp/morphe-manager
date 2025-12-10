@@ -1,7 +1,7 @@
 package app.revanced.manager.ui.model
 
 import androidx.annotation.StringRes
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 
 enum class PatchSelectionActionKey(val storageId: String, @StringRes val labelRes: Int) {
     UNDO("undo", R.string.patch_selection_button_label_undo_action),

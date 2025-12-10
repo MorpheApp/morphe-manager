@@ -427,7 +427,7 @@ class ImportExportViewModel(
                                         if (defaultSource == null) {
                                             patchBundleRepository.restoreDefaultBundle()
                                             patchBundleRepository.refreshDefaultBundle()
-                                        defaultSource = patchBundleRepository.sources.first()
+                                            defaultSource = patchBundleRepository.sources.first()
                                                 .firstOrNull { it.isDefault }
                                             if (defaultSource != null) {
                                                 officialCreated = true
@@ -510,7 +510,6 @@ class ImportExportViewModel(
                                         endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
                                         else -> endpointToUid[endpoint]
                                     }
-                                    positionUid
                                 }.toMutableList()
 
                                 val sentinelIndex = orderedSnapshots.indexOfFirst { (snapshot, _) ->

@@ -3,7 +3,6 @@ package app.revanced.manager.ui.screen.settings
 import android.graphics.Color as AndroidColor
 import android.os.Build
 import androidx.annotation.StringRes
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -58,12 +57,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
-import app.revanced.manager.ui.component.settings.BooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
@@ -80,7 +77,6 @@ fun GeneralSettingsScreen(
     viewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val prefs = viewModel.prefs
-    val coroutineScope = viewModel.viewModelScope
     var showAccentPicker by rememberSaveable { mutableStateOf(false) }
     var showThemeColorPicker by rememberSaveable { mutableStateOf(false) }
 
@@ -106,14 +102,10 @@ fun GeneralSettingsScreen(
     val canAdjustAccentColor = selectedThemePreset != ThemePreset.DYNAMIC
     val themeControlsAlpha = if (canAdjustThemeColor) 1f else 0.5f
     val accentControlsAlpha = if (canAdjustAccentColor) 1f else 0.5f
+    // TODO: Hide this until the app is localized.
     val languageOptions = remember {
         listOf(
-            LanguageOption("en", R.string.language_option_english),
-            LanguageOption("zh-CN", R.string.language_option_chinese_simplified),
-            // From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38
-            LanguageOption("vi", R.string.language_option_vietnamese),
-            // From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42
-            LanguageOption("ko", R.string.language_option_korean)
+            LanguageOption("en", R.string.language_option_english)
         )
     }
 
@@ -229,14 +221,6 @@ fun GeneralSettingsScreen(
                 }
             }
 
-            AnimatedVisibility(theme != Theme.LIGHT) {
-                BooleanItem(
-                    preference = prefs.pureBlackTheme,
-                    coroutineScope = coroutineScope,
-                    headline = R.string.pure_black_theme,
-                    description = R.string.pure_black_theme_description
-                )
-            }
 
             SettingsListItem(
                 modifier = Modifier
@@ -261,6 +245,9 @@ fun GeneralSettingsScreen(
             )
 
             SettingsListItem(
+                modifier = Modifier
+                    .alpha(accentControlsAlpha)
+                    .clickable(enabled = canAdjustAccentColor) { showAccentPicker = true },
                 headlineContent = stringResource(R.string.accent_color),
                 supportingContent = stringResource(R.string.accent_color_description),
                 trailingContent = {
@@ -301,15 +288,23 @@ fun GeneralSettingsScreen(
                 text = stringResource(R.string.accent_color_presets),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .alpha(accentControlsAlpha)
             )
             Text(
                 text = stringResource(R.string.accent_color_presets_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .alpha(accentControlsAlpha)
             )
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .alpha(accentControlsAlpha),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -325,6 +320,7 @@ fun GeneralSettingsScreen(
                                 shape = RoundedCornerShape(14.dp)
                             )
                             .background(preset, RoundedCornerShape(12.dp))
+                            .clickable(enabled = canAdjustAccentColor) {
                                 viewModel.setCustomAccentColor(preset)
                             }
                     )
@@ -370,6 +366,8 @@ fun GeneralSettingsScreen(
     }
 }
 
+private data class ThemePresetSwatch(val preset: ThemePreset, @StringRes val labelRes: Int, val colors: List<Color>)
+private data class LanguageOption(val code: String, @StringRes val labelRes: Int)
 
 @Composable
 private fun ThemeSwatchChip(
@@ -383,11 +381,15 @@ private fun ThemeSwatchChip(
     val swatchAlpha = if (enabled) 1f else 0.5f
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
             .clip(RoundedCornerShape(16.dp))
+            .alpha(swatchAlpha)
+            .clickable(enabled = enabled, onClick = onClick)
             .padding(4.dp)
     ) {
         Box(
             modifier = Modifier
+                .size(40.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .border(
                     width = if (isSelected) 2.dp else 1.dp,
@@ -405,6 +407,10 @@ private fun ThemeSwatchChip(
             text = label,
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            textAlign = TextAlign.Center
         )
     }
 }

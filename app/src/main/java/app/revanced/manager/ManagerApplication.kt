@@ -15,7 +15,6 @@ import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.PatchListCatalog
 import app.revanced.manager.util.applyAppLanguage
-import kotlinx.coroutines.Dispatchers
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell

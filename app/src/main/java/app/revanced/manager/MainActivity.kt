@@ -28,7 +28,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.appcompat.app.AppCompatActivity
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
 import app.revanced.manager.ui.model.navigation.MorpheHomeScreen
