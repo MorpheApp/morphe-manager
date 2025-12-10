@@ -20,11 +20,21 @@ sealed class Source {
         override fun toString() = url.toString()
     }
 
+    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+    data class GitHubPullRequest(val url: Url) : Source() {
+        override fun toString() = url.toString()
+    }
+
     companion object {
+        private val gitHubPullRequestPattern =
+            Regex("^https://github\\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/pull/(\\d+)/?$")
+
         fun from(value: String) = when (value) {
             Local.SENTINEL -> Local
             API.SENTINEL -> API
-            else -> Remote(Url(value))
+            else -> if (gitHubPullRequestPattern.matches(value)) {
+                GitHubPullRequest(Url(value))
+            } else Remote(Url(value))
         }
     }
 }

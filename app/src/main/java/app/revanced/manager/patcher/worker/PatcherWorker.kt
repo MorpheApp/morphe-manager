@@ -25,6 +25,7 @@ import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.DownloadResult
 import app.revanced.manager.domain.repository.DownloadedAppRepository
 import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.InstalledAppRepository
@@ -32,8 +33,10 @@ import app.revanced.manager.domain.worker.Worker
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.network.downloader.LoadedDownloaderPlugin
 import app.revanced.manager.patcher.logger.Logger
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.runtime.CoroutineRuntime
 import app.revanced.manager.patcher.runtime.ProcessRuntime
+import app.revanced.manager.patcher.util.NativeLibStripper
 import app.revanced.manager.plugin.downloader.GetScope
 import app.revanced.manager.plugin.downloader.PluginHostApi
 import app.revanced.manager.plugin.downloader.UserInteractionException
@@ -80,7 +83,7 @@ class PatcherWorker(
         val onDownloadProgress: suspend (Pair<Long, Long?>?) -> Unit,
         val onPatchCompleted: suspend () -> Unit,
         val handleStartActivityRequest: suspend (LoadedDownloaderPlugin, Intent) -> ActivityResult,
-        val setInputFile: suspend (File) -> Unit,
+        val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler
     ) {
         val packageName get() = input.packageName
@@ -160,6 +163,8 @@ class PatcherWorker(
         val patchedApk = fs.tempDir.resolve("patched.apk")
 
         return try {
+            val startTime = System.currentTimeMillis()
+
             if (args.input is SelectedApp.Installed) {
                 installedAppRepository.get(args.packageName)?.let {
                     if (it.installType == InstallType.MOUNT) {
@@ -178,7 +183,7 @@ class PatcherWorker(
                     !prefs.disablePatchVersionCompatCheck.get(),
                     onDownload = args.onDownloadProgress
                 ).also {
-                    args.setInputFile(it)
+                    args.setInputFile(it.file, it.needsSplit, it.merged)
                     updateProgress(state = State.COMPLETED) // Download APK
                 }
 
@@ -223,15 +228,35 @@ class PatcherWorker(
                         } ?: throw Exception("App is not available.")
                 }
 
-                is SelectedApp.Local -> selectedApp.file.also { args.setInputFile(it) }
-                is SelectedApp.Installed -> File(pm.getPackageInfo(selectedApp.packageName)!!.applicationInfo!!.sourceDir)
-            }
+                is SelectedApp.Local -> {
+                    val needsSplit = SplitApkPreparer.isSplitArchive(selectedApp.file)
+                    args.setInputFile(selectedApp.file, needsSplit, false)
+                    DownloadResult(selectedApp.file, needsSplit)
+                }
+
+                is SelectedApp.Installed -> {
+                    val source = File(pm.getPackageInfo(selectedApp.packageName)!!.applicationInfo!!.sourceDir)
+                    args.setInputFile(source, false, false)
+                    DownloadResult(source, false)
+                }
+            }.file
 
             val runtime = if (prefs.useProcessRuntime.get()) {
                 ProcessRuntime(applicationContext)
             } else {
                 CoroutineRuntime(applicationContext)
             }
+
+            val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
+            val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
+            val selectedCount = args.selectedPatches.values.sumOf { it.size }
+
+            args.logger.info(
+                "Patching started at ${System.currentTimeMillis()} " +
+                        "pkg=${args.packageName} version=${args.input.version} " +
+                        "input=${inputFile.absolutePath} size=${inputFile.length()} " +
+                        "split=$inputIsSplitArchive patches=$selectedCount"
+            )
 
             runtime.execute(
                 inputFile.absolutePath,
@@ -241,15 +266,26 @@ class PatcherWorker(
                 args.options,
                 args.logger,
                 args.onPatchCompleted,
-                args.onProgress
+                args.onProgress,
+                stripNativeLibs
             )
 
-            if (prefs.stripUnusedNativeLibs.get()) {
-                stripUnusedNativeLibraries(patchedApk)
+            if (stripNativeLibs && !inputIsSplitArchive) {
+                NativeLibStripper.strip(patchedApk)
             }
 
             keystoreManager.sign(patchedApk, File(args.output))
             updateProgress(state = State.COMPLETED) // Signing
+
+            val elapsed = System.currentTimeMillis() - startTime
+            val rt = Runtime.getRuntime()
+            val usedMem = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
+            val totalMem = rt.totalMemory() / (1024 * 1024)
+
+            args.logger.info(
+                "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
+                        "elapsed=${elapsed}ms memory=${usedMem}MB/${totalMem}MB"
+            )
 
             Log.i(tag, "Patching succeeded".logFmt())
             Result.success()

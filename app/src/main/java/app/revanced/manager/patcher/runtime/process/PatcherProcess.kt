@@ -13,6 +13,7 @@ import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.patch.PatchBundle
 import app.revanced.manager.patcher.runtime.ProcessRuntime
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.ui.model.State
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -77,19 +78,34 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
 
             events.progress(null, State.COMPLETED.name, null) // Loading patches
 
-            Session(
-                cacheDir = parameters.cacheDir,
-                aaptPath = parameters.aaptPath,
-                frameworkDir = parameters.frameworkDir,
-                androidContext = context,
-                logger = logger,
-                input = File(parameters.inputFile),
+            val preparation = SplitApkPreparer.prepareIfNeeded(
+                File(parameters.inputFile),
+                File(parameters.cacheDir),
+                logger,
+                parameters.stripNativeLibs
+            )
+
+            try {
+                if (preparation.merged) {
+                    events.progress(null, State.COMPLETED.name, null)
+                }
+
+                Session(
+                    cacheDir = parameters.cacheDir,
+                    aaptPath = parameters.aaptPath,
+                    frameworkDir = parameters.frameworkDir,
+                    androidContext = context,
+                    logger = logger,
+                    input = preparation.file,
+                    input = File(parameters.inputFile),
                 onPatchCompleted = { events.patchSucceeded() },
                 onProgress = { name, state, message ->
                     events.progress(name, state?.name, message)
                 }
             ).use {
-                it.run(File(parameters.outputFile), patchList)
+                it.run(File(parameters.outputFile), patchList)}
+            } finally {
+                preparation.cleanup()
             }
 
             events.finished(null)

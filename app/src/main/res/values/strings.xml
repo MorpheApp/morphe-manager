@@ -150,6 +150,8 @@
     <string name="patch_bundle_installer">Bundle installer</string>
     <string name="patch_bundles">Patch Bundles</string>
     <string name="patch_bundle">Patch Bundle</string>
+<!--    <string name="cli">CLI</string>-->
+<!--    <string name="manager">Manager</string>-->
 
     <string name="plugin_host_permission_label">Morphe Manager plugin host</string>
     <string name="plugin_host_permission_description">Used to control access to Morphe Manager plugins. Only Morphe Manager has this.</string>
@@ -225,6 +227,10 @@
     <string name="bundle_release_page">Open release page</string>
     <string name="bundle_release_page_unavailable">Release page is not available for this bundle</string>
     <string name="bundle_release_page_error">Could not open release page: %s</string>
+    <string name="bundle_links_title">Links for %1$s</string>
+    <string name="bundle_link_release">GitHub release</string>
+    <string name="bundle_link_catalog">Patch list catalog</string>
+    <string name="bundle_catalog_unavailable">Patch list catalog unavailable</string>
     <string name="show_suggested_versions">Show suggested versions</string>
     <string name="hide_suggested_versions">Hide suggested versions</string>
     <string name="show_other_versions">Show other versions</string>
@@ -269,6 +275,9 @@
     <string name="updates_description">Check for updates and view changelog</string>
     <string name="downloads">Downloads</string>
     <string name="downloads_description">Downloader plugins and downloaded apps</string>
+    <!-- From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37 -->
+    <string name="plugins_help_title">What is a downloader?</string>
+    <string name="plugins_help_description">A downloader is a plugin which allows URV to download stock APKs from various sources. The downloaded APKs will be shown in the bottom section. During the patching process, you can choose an already downloaded APKs or you can download it via a plugin.\n\nThe list of supported downloader plugins can be found</string>
     <string name="import_export">Import &amp; export</string>
     <string name="import_export_description">Keystore, patch options and selection</string>
     <string name="changelog">View changelogs</string>
@@ -303,8 +312,8 @@
     <string name="theme_preview_title">Theme preview</string>
     <string name="theme_preview_description">Updates instantly when changing theme settings</string>
     <string name="theme_presets">Theme presets</string>
-    <string name="theme_presets_description">Quick switches for the most popular looks</string>
-    <string name="theme_preset_default">Default</string>
+    <string name="theme_presets_description">Pick how the app follows system, light, dark, Material You, or pure black</string>
+    <string name="theme_preset_default">Follow system</string>
     <string name="theme_preset_amoled">Pure black</string>
     <string name="theme_preset_sunset">Sunset</string>
     <string name="theme_preset_forest">Forest</string>
@@ -444,6 +453,16 @@ You will not be able to update the previously installed apps from this source."<
     <string name="disable_patch_selection_confirmations">Disable action confirmations</string>
     <string name="disable_patch_selection_confirmations_description">Skip confirmation dialogs for patch selection actions</string>
     <string name="disable_patch_selection_confirmations_warning">Disabling confirmations may cause unintended bulk changes.</string>
+    <string name="patch_selection_collapse_on_toggle">Collapse actions after toggling patches</string>
+    <string name="patch_selection_collapse_on_toggle_description">Automatically hide the patch selection action buttons whenever you select or deselect a patch</string>
+    <string name="patch_selection_action_order_title">Patch selection action buttons order</string>
+    <string name="patch_selection_action_order_description">Choose the layout order for the patch selection action buttons</string>
+    <string name="patch_selection_action_order_dialog_title">Reorder patch actions</string>
+    <string name="patch_selection_action_order_dialog_description">Move the entries to change how the patch selection action buttons are displayed. The preview updates live.</string>
+    <string name="patch_selection_action_order_preview_label">Preview</string>
+    <string name="patch_selection_action_order_reset">Reset to default order</string>
+    <string name="patch_selection_action_move_up">Move up</string>
+    <string name="patch_selection_action_move_down">Move down</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Deselect bundle?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Deselect all patches selected from %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Deselect all patches?</string>
@@ -543,9 +562,11 @@ Signature (SHA-256): %2$s"</string>
     <string name="strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
     <string name="process_runtime_memory_limit">Patcher process memory limit</string>
     <string name="process_runtime_memory_limit_description">The max amount of memory that the Patcher process can use (in megabytes)</string>
+    <string name="process_runtime_memory_limit_description_detailed">The max amount of memory that the Patcher process can use (in megabytes).
+Recommended for this device: %1$d MB.</string>
     <string name="reset_to_recommended">Reset to recommended</string>
     <string name="patcher_auto_collapse_steps">Auto-collapse completed patcher steps</string>
-    <string name="patcher_auto_collapse_steps_description">Automatically collapse each patcher progress widget after all of its steps finish.</string>
+    <string name="patcher_auto_collapse_steps_description">Automatically collapse each patcher progress widget after all of its steps finish</string>
     <string name="patch_bundle_rename">Rename patch bundle</string>
     <string name="patch_profile_view_options">View options</string>
     <string name="patch_profile_patch_options_title">Options for %1$s</string>
@@ -596,6 +617,24 @@ Signature (SHA-256): %2$s"</string>
     <string name="api_url_dialog_warning">Morphe connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
+    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
+    <string name="github_pat">GitHub PAT</string>
+    <string name="github_pat_description">GitHub Personal Access Token needed for GitHub integration</string>
+    <string name="set_github_pat_dialog_title">Set GitHub PAT</string>
+    <string name="set_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo</string>
+    <string name="include_github_pat_in_exports_label">Include in settings export</string>
+    <string name="include_github_pat_in_exports_supporting">Adds this PAT to exported manager settings</string>
+    <string name="include_github_pat_in_exports_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token.</string>
+    <string name="language_settings">Language</string>
+    <string name="app_language">App language</string>
+    <string name="language_dialog_title">Choose app language</string>
+    <string name="language_option_system">Use device language</string>
+    <string name="language_option_english">English</string>
+    <string name="language_option_chinese_simplified">Chinese (Simplified)</string>
+    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
+    <string name="language_option_korean">Korean</string>
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <string name="language_option_vietnamese">Vietnamese</string>
     <string name="device">Device</string>
     <string name="device_android_version">Android version</string>
     <string name="device_model">Model</string>
@@ -653,6 +692,19 @@ You need to turn on \"Allow changing patch selection and options\" in the advanc
     <string name="patch_profile_save_failed_toast">Failed to save patch profile</string>
     <string name="patch_profile_rename">Rename</string>
     <string name="patch_profile_rename_title">Rename patch profile</string>
+    <string name="patch_profile_version_override_action">Patch profile version settings</string>
+    <string name="patch_profile_version_override_title">Version settings for "%1$s"</string>
+    <string name="patch_profile_version_override_message">Set a specific app version to store with this profile, or target all versions.</string>
+    <string name="patch_profile_version_override_label">App version</string>
+    <string name="patch_profile_version_override_hint">e.g. 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">Use all versions</string>
+    <string name="patch_profile_version_override_saved_toast">Profile version updated</string>
+    <string name="patch_profile_version_override_failed_toast">Failed to update profile version</string>
+    <string name="patch_profile_version_override_set_to_all">No version entered, saved as "%1$s"</string>
+    <string name="patch_profile_version_conflict_title">Keep version override?</string>
+    <string name="patch_profile_version_conflict_message">Current version: %1$s\nIncoming version: %2$s\nWhich should be saved to this profile?</string>
+    <string name="patch_profile_version_conflict_use_new">Use incoming version</string>
+    <string name="patch_profile_version_conflict_keep_existing">Keep existing version</string>
     <string name="patch_profile_empty_state">Save a configuration from the patch selection screen to see it here.</string>
     <string name="patch_profile_missing_bundles_toast">Some bundles in this profile are not available and will be skipped.</string>
     <string name="patch_profile_changed_patches_toast">Some patches or options in this profile no longer match the bundle and were skipped.</string>
@@ -726,11 +778,17 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="applied_patches_bundle_missing">Bundle metadata unavailable. Showing saved patch names.</string>
     <string name="no_patch_bundles_tracked">No patch bundles recorded for this app</string>
     <string name="default_install">Default</string>
-    <string name="mount_install">Mount</string>
+    <string name="mount_install">Rooted mount installer</string>
     <string name="mounted">Mounted</string>
+    <string name="unmounted">Unmounted</string>
+    <string name="install_type_custom_installer">Custom installer</string>
+    <string name="install_type_system_installer">System installer</string>
+    <string name="install_type_mount_label">Rooted mount installer</string>
+    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Not mounted</string>
     <string name="mount">Mount</string>
     <string name="unmount">Unmount</string>
+    <string name="unmount_confirm_description">Do you want to unmount the app?</string>
     <string name="saved_install">Saved</string>
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
@@ -770,6 +828,8 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_fallback_description">Used automatically when the primary installer is unavailable.</string>
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Use the Android package installer</string>
+    <string name="installer_auto_saved_name">Rooted mount installer</string>
+    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app (root required).</string>
     <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Install silently using Shizuku or Sui.</string>
     <string name="installer_option_none">No fallback</string>
@@ -778,7 +838,17 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again.</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app.</string>
+    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Universal ReVanced Manager from the Shizuku app.</string>
+    <string name="installer_mount_warning_title">Rooted mount installer selected</string>
+    <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
+    <string name="installer_mount_warning_update">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
+    <string name="installer_mount_warning_uninstall">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
+    <string name="installer_mount_mismatch_title">Rooted mount installer not selected</string>
+    <string name="installer_mount_mismatch_install">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then mount.</string>
+    <string name="installer_mount_mismatch_update">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then remount.</string>
+    <string name="installer_mount_mismatch_uninstall">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then unmount.</string>
+    <string name="mount_version_mismatch_title">Mount failed</string>
+    <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again.</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported.</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_shizuku_launch_failed">Unable to open Shizuku. Launch it manually and try again.</string>
@@ -821,10 +891,15 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_external_launched">Opening %1$s…</string>
     <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again.</string>
     <string name="installer_external_success">%1$s reported a successful installation.</string>
+    <string name="installing_ellipsis">Installing…</string>
+    <string name="mounting_ellipsis">Mounting…</string>
+    <string name="unmounting">Unmounting…</string>
     <string name="install_app">Install</string>
-    <string name="install_app_success">App installed</string>
+    <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail_title">Installation failed</string>
     <string name="install_app_fail">Failed to install app: %s</string>
+    <string name="mount_app_fail_title">Mount failed</string>
+    <string name="mount_app_fail">Failed to mount app: %1$s</string>
     <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again.</string>
     <string name="reinstall_app_fail">Failed to reinstall app: %s</string>
     <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
@@ -841,9 +916,15 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="delete_saved_entry_description">This will remove the saved app entry and its saved APK. The app will remain installed.</string>
     <string name="saved_app_launch_unavailable">Install the app before opening it.</string>
     <string name="install_saved_app">Install</string>
+    <string name="remount_saved_app">Remount</string>
+    <string name="update_saved_app">Update</string>
     <string name="installing_saved_app">Installing saved app…</string>
     <string name="saved_app_install_success">Installed saved app</string>
     <string name="saved_app_install_failed">Failed to install saved app</string>
+    <string name="saved_app_uninstall_title">Uninstall installed copy?</string>
+    <string name="saved_app_unmount_title">Unmount installed copy?</string>
+    <string name="saved_app_uninstall_description">This removes the installed version only. Your saved APK stays intact.</string>
+    <string name="saved_app_unmount_description">This unmounts the patched APK. Your saved APK stays intact.</string>
     <string name="saved_app_install_missing">Saved APK not found</string>
     <string name="delete_saved_copy">Delete saved copy</string>
     <string name="sign_fail">Failed to sign APK: %s</string>
@@ -854,6 +935,8 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="patcher_step_group_preparing">Preparing</string>
     <string name="patcher_step_load_patches">Loading patches</string>
     <string name="patcher_step_unpack">Reading APK file</string>
+    <string name="patcher_step_prepare_split_apk">Merge split APK</string>
+    <string name="patcher_step_merge_not_required">No split merge required</string>
     <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Saving</string>
     <string name="patcher_step_write_patched">Writing patched APK file</string>
@@ -862,7 +945,14 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
+    <string name="patcher_install_in_progress_title">Installation in progress</string>
     <string name="patcher_install_in_progress">Installation is in progress. Please wait</string>
+    <string name="patcher_install_in_progress_leave">Leave anyway</string>
+    <string name="patcher_install_in_progress_stay">Stay here</string>
+    <string name="patcher_mount_in_progress_title">Mount in progress</string>
+    <string name="patcher_mount_in_progress">Mount is in progress. Please wait</string>
+<!--    <string name="execute_patches">Execute patches</string>-->
+<!--    <string name="executing_patch">Execute %s</string>-->
     <string name="applying_patches">Applying patches</string>
     <string name="applying_patch">Applying %s</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
@@ -892,6 +982,9 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="permanent_dismiss">Do not show this again</string>
     <string name="donate">Donate</string>
     <string name="website">Website</string>
+    <string name="github">Universal ReVanced Manager GitHub</string>
+    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>
+    <string name="patch_bundle_urls">Get patch bundle imports</string>
     <string name="contact">Contact</string>
     <string name="version">Version</string>
     <string name="submit_feedback">Submit issue or feedback</string>
@@ -940,6 +1033,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
+    <string name="installing_message">Tap on <b>Update</b> when prompted.\nUniversal ReVanced Manager will close when updating.</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
@@ -1013,3 +1107,5 @@ Click on the patches to see more details."</string>
     <string name="confirm">Confirm</string>
     <string name="saved_app_install_cancelled">Installation cancelled</string>
 </resources>
+
+

@@ -1,29 +1,48 @@
 package app.revanced.manager.ui.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import android.content.Intent
+import android.util.Base64
+import android.util.Log
+import androidx.activity.result.ActivityResult
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.universal.revanced.manager.R
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloadedAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
+import app.revanced.manager.domain.repository.SerializedSelection
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
+import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.PatchSelection
+import app.revanced.manager.util.tag
+import app.revanced.manager.util.toast
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
 
 class MainViewModel(
     private val patchBundleRepository: PatchBundleRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val downloadedAppRepository: DownloadedAppRepository,
+    private val keystoreManager: KeystoreManager,
     private val app: Application,
-    val prefs: PreferencesManager
+    val prefs: PreferencesManager,
+    private val json: Json
 ) : ViewModel() {
     private val appSelectChannel = Channel<SelectedApplicationInfo.ViewModelParams>()
     val appSelectFlow = appSelectChannel.receiveAsFlow()
+    private val legacyImportActivityChannel = Channel<Intent>()
+    val legacyImportActivityFlow = legacyImportActivityChannel.receiveAsFlow()
 
     private suspend fun suggestedVersion(packageName: String) =
         patchBundleRepository.suggestedVersions.first()[packageName]
@@ -39,7 +58,7 @@ class MainViewModel(
         return SelectedApp.Local(
             downloadedApp.packageName,
             downloadedApp.version,
-            downloadedAppRepository.getApkFileForApp(downloadedApp),
+            downloadedAppRepository.getPreparedApkFile(downloadedApp),
             false
         )
     }
@@ -71,7 +90,47 @@ class MainViewModel(
                 profileId = null,
                 requiresSourceSelection = false
             )
-        )
+            prefs.theme.update(themeMap[theme] ?: Theme.SYSTEM)
+        }
+        settings.useDynamicTheme?.let { dynamicColor ->
+            prefs.dynamicColor.update(dynamicColor)
+        }
+        settings.usePrereleases?.let { prereleases ->
+            prefs.useManagerPrereleases.update(prereleases)
+            prefs.usePatchesPrereleases.update(prereleases)
+        }
+        settings.apiUrl?.let { api ->
+            prefs.api.update(api.removeSuffix("/"))
+        }
+        settings.experimentalPatchesEnabled?.let { allowExperimental ->
+            prefs.disablePatchVersionCompatCheck.update(allowExperimental)
+        }
+        settings.patchesAutoUpdate?.let { autoUpdate ->
+            with(patchBundleRepository) {
+                sources
+                    .first()
+                    .find { it.uid == 0 }
+                    ?.asRemoteOrNull
+                    ?.setAutoUpdate(autoUpdate)
+
+                updateCheck()
+            }
+        }
+        settings.patchesChangeEnabled?.let { disableSelectionWarning ->
+            prefs.disableSelectionWarning.update(disableSelectionWarning)
+        }
+        settings.keystore?.let { keystore ->
+            val keystoreBytes = Base64.decode(keystore, Base64.DEFAULT)
+            keystoreManager.import(
+                "alias",
+                settings.keystorePassword,
+                keystoreBytes.inputStream()
+            )
+        }
+        settings.patches?.let { selection ->
+            patchSelectionRepository.import(0, selection)
+        }
+        Log.d(tag, "Imported legacy settings")
     }
 
     fun selectAppWithSourceSelection(packageName: String) = selectAppWithSourceSelection(packageName, null)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <plurals name="patch_count">
+        <item quantity="one">%d bản vá</item>
+        <item quantity="other">%d bản vá</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Thực thi %d bản vá</item>
+        <item quantity="other">Thực thi %d bản vá</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="other">%d đã chọn</item>
+    </plurals>
+</resources>

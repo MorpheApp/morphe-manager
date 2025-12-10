@@ -20,7 +20,7 @@ object MorpheSettings
 object Dashboard
 
 @Serializable
-object AppSelector
+data class AppSelector(val autoStorage: Boolean = false, val autoStorageReturn: Boolean = false)
 
 @Serializable
 data class InstalledApplicationInfo(val packageName: String)
@@ -48,7 +48,14 @@ data object SelectedApplicationInfo : ComplexParameter<SelectedApplicationInfo.V
             val app: SelectedApp,
             val currentSelection: PatchSelection?,
             val options: @RawValue Options,
-            val missingPatchNames: @RawValue List<String>? = null
+            val preferredAppVersion: String? = null,
+            val missingPatchNames: @RawValue List<String>? = null,
+            val preferredBundleVersion: String? = null,
+            val preferredBundleUid: Int? = null,
+            val preferredBundleOverride: String? = null,
+            val preferredBundleTargetsAllVersions: Boolean = false
+            // FIXME: ORIGINAL
+//            val missingPatchNames: @RawValue List<String>? = null
         ) : Parcelable
     }
 

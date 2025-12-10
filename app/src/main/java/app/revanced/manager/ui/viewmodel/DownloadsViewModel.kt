@@ -150,8 +150,7 @@ class DownloadsViewModel(
                         if (asArchive) {
                             ZipOutputStream(output).use { zipStream ->
                                 selection.forEach { app ->
-                                    val apkFile =
-                                        downloadedAppRepository.getApkFileForApp(app)
+                                    val apkFile = downloadedAppRepository.getPreparedApkFile(app)
                                     val baseName =
                                         "${app.packageName}_${app.version}".replace('/', '_')
                                     val entry = ZipEntry("$baseName.apk")
@@ -163,7 +162,7 @@ class DownloadsViewModel(
                         } else {
                             val app = selection.first()
                             val apkFile =
-                                downloadedAppRepository.getApkFileForApp(app)
+                                downloadedAppRepository.getPreparedApkFile(app)
                             apkFile.inputStream().use { input -> input.copyTo(output) }
                         }
                     } ?: error("Could not open output stream for export")

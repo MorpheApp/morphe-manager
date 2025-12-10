@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -34,6 +36,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -61,6 +64,7 @@ import app.revanced.manager.ui.component.patcher.Steps
 import app.revanced.manager.ui.model.StepCategory
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.domain.manager.PreferencesManager
@@ -79,6 +83,7 @@ fun PatcherScreen(
     viewModel: PatcherViewModel
 ) {
     fun onLeave() {
+        viewModel.suppressInstallProgressToasts()
         viewModel.onBack()
         onBackClick()
     }
@@ -102,13 +107,20 @@ fun PatcherScreen(
         rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE), viewModel::export)
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
+    val isMounting = viewModel.activeInstallType == InstallType.MOUNT
     val canInstall by remember { derivedStateOf { patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling) } }
     var showDismissConfirmationDialog by rememberSaveable { mutableStateOf(false) }
+    var showInstallInProgressDialog by rememberSaveable { mutableStateOf(false) }
     var showSavePatchedAppDialog by rememberSaveable { mutableStateOf(false) }
 
     fun onPageBack() = when {
         patcherSucceeded == null -> showDismissConfirmationDialog = true
+        // FIXME: ORIGINAL CHANGES
         viewModel.isInstalling -> context.toast(context.getString(R.string.patcher_install_in_progress))
+        // FIXME END
+        // FIXME: UPSTREAM
+        viewModel.isInstalling -> showInstallInProgressDialog = true
+        // FIXME END
         patcherSucceeded == true && viewModel.installedPackageName == null && !viewModel.hasSavedPatchedApp -> showSavePatchedAppDialog = true
         else -> onLeave()
     }
@@ -144,6 +156,47 @@ fun PatcherScreen(
         )
     }
 
+    if (showInstallInProgressDialog) {
+        AlertDialog(
+            onDismissRequest = { showInstallInProgressDialog = false },
+            icon = { Icon(Icons.Outlined.FileDownload, null) },
+            title = {
+                Text(
+                    stringResource(
+                        if (isMounting) R.string.patcher_mount_in_progress_title else R.string.patcher_install_in_progress_title
+                    )
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(
+                        if (isMounting) R.string.patcher_mount_in_progress else R.string.patcher_install_in_progress
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showInstallInProgressDialog = false
+                        viewModel.suppressInstallProgressToasts()
+                        onLeave()
+                    }
+                ) {
+                    Text(stringResource(R.string.patcher_install_in_progress_leave))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showInstallInProgressDialog = false }
+                ) {
+                    Text(stringResource(R.string.patcher_install_in_progress_stay))
+                }
+            }
+        )
+    }
+
     if (showSavePatchedAppDialog) {
         SavePatchedAppDialog(
             onDismiss = { showSavePatchedAppDialog = false },
@@ -163,7 +216,11 @@ fun PatcherScreen(
     }
 
     viewModel.packageInstallerStatus?.let {
-        InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
+        if (!viewModel.shouldSuppressPackageInstallerDialog()) {
+            InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
+        } else {
+            viewModel.dismissPackageInstallerDialog()
+        }
     }
 
     // TODO: This code is dead and can be removed. Patching now automatically reduces max memory if needed.
@@ -198,25 +255,50 @@ fun PatcherScreen(
     }
 
     viewModel.missingPatchDialog?.let { state ->
+        // FIXME ORIGINAL
         val patchList = state.patchNames.joinToString(separator = "\n• ", prefix = "• ")
+        // FIXME END
         AlertDialog(
+            // FIXME UPSTREAM
+//            onDismissRequest = {},
+            // FIXME END
+            // FIXME ORIGINAL
             onDismissRequest = viewModel::dismissMissingPatchDialog,
+            // FIXME END
             title = { Text(stringResource(R.string.patcher_missing_patch_title)) },
             text = {
-                Text(
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text(
+                        stringResource(
+                            R.string.patcher_preflight_missing_patch_message,
+                            buildString {
+                                append("• ")
+                                append(state.patchNames.joinToString(separator = "\n• "))
+                            }
+                        )
                     text = stringResource(
                         R.string.patcher_missing_patch_message,
                         patchList
                     )
-                )
+                }
             },
             confirmButton = {
-                TextButton(
-                    onClick = {
-                        val selection = viewModel.currentSelectionSnapshot()
-                        val options = viewModel.currentOptionsSnapshot()
-                        val patches = state.patchNames
-                        viewModel.dismissMissingPatchDialog()
+                TextButton(onClick = viewModel::removeMissingPatchesAndStart) {
+                    Text(stringResource(R.string.patcher_preflight_missing_patch_remove))
+                }
+            },
+            dismissButton = {
+                Column(horizontalAlignment = Alignment.End) {
+                    TextButton(onClick = viewModel::proceedAfterMissingPatchWarning) {
+                        Text(stringResource(R.string.patcher_preflight_missing_patch_proceed))
+                    }
+                    TextButton(
+                        onClick = {
+                            val selection = viewModel.currentSelectionSnapshot()
+                            val options = viewModel.currentOptionsSnapshot()
+                            val patches = state.patchNames
+                            viewModel.dismissMissingPatchWarning()
+                            viewModel.dismissMissingPatchDialog()
                         onReviewSelection(
                             viewModel.currentSelectedApp,
                             selection,
@@ -240,7 +322,13 @@ fun PatcherScreen(
     viewModel.installFailureMessage?.let { message ->
         AlertDialog(
             onDismissRequest = viewModel::dismissInstallFailureMessage,
-            title = { Text(stringResource(R.string.install_app_fail_title)) },
+            title = {
+                Text(
+                    stringResource(
+                        if (viewModel.lastInstallType == InstallType.MOUNT) R.string.mount_app_fail_title else R.string.install_app_fail_title
+                    )
+                )
+            },
             text = { Text(message) },
             confirmButton = {
                 TextButton(onClick = viewModel::dismissInstallFailureMessage) {
@@ -259,16 +347,47 @@ fun PatcherScreen(
             }
 
             is PatcherViewModel.InstallCompletionStatus.Success -> {
+                // FIXME UPSTREAM
+                AlertDialog(
+                    onDismissRequest = viewModel::clearInstallStatus,
+                    confirmButton = {
+                        TextButton(onClick = viewModel::clearInstallStatus) {
+                            Text(stringResource(R.string.ok))
+                        }
+                    },
+                    title = { Text(stringResource(R.string.install_app_success)) },
+                    text = {
+                        status.packageName?.let { Text(text = it) }
+                    }
+                )
+                // FIXME END
+
+                // FIXME ORIGNAL
                 LaunchedEffect(status) {
                     viewModel.clearInstallStatus()
                 }
+                // FIXME END
             }
 
             is PatcherViewModel.InstallCompletionStatus.Failure -> {
+                // FIXME UPSTREAM
+                if (viewModel.shouldSuppressInstallFailureDialog()) {
+                    viewModel.dismissInstallFailureMessage()
+                    viewModel.clearInstallStatus()
+                    return@let
+                }
+                // FIXME END
+
                 if (viewModel.installFailureMessage == null) {
                     AlertDialog(
                         onDismissRequest = viewModel::dismissInstallFailureMessage,
-                        title = { Text(stringResource(R.string.install_app_fail_title)) },
+                        title = {
+                            Text(
+                                stringResource(
+                                    if (viewModel.lastInstallType == InstallType.MOUNT) R.string.mount_app_fail_title else R.string.install_app_fail_title
+                                )
+                            )
+                        },
                         text = { Text(status.message) },
                         confirmButton = {
                             TextButton(onClick = viewModel::dismissInstallFailureMessage) {

@@ -3,12 +3,23 @@ package app.revanced.manager.ui.model
 import android.os.Parcelable
 import androidx.annotation.StringRes
 import app.morphe.manager.R
+import app.universal.revanced.manager.R
 import kotlinx.parcelize.Parcelize
 
 enum class StepCategory(@StringRes val displayName: Int) {
     PREPARING(R.string.patcher_step_group_preparing),
     PATCHING(R.string.patcher_step_group_patching),
     SAVING(R.string.patcher_step_group_saving)
+}
+
+enum class StepId {
+    DOWNLOAD_APK,
+    LOAD_PATCHES,
+    PREPARE_SPLIT_APK,
+    READ_APK,
+    EXECUTE_PATCHES,
+    WRITE_PATCHED_APK,
+    SIGN_PATCHED_APK
 }
 
 enum class State {
@@ -25,6 +36,7 @@ interface StepProgressProvider {
 
 @Parcelize
 data class Step(
+    val id: StepId,
     val name: String,
     val category: StepCategory,
     val state: State = State.WAITING,

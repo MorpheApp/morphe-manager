@@ -11,6 +11,8 @@ import app.revanced.manager.patcher.LibraryResolver
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.runtime.process.IPatcherEvents
 import app.revanced.manager.patcher.runtime.process.IPatcherProcess
+import app.revanced.manager.patcher.LibraryResolver
+import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.runtime.process.Parameters
 import app.revanced.manager.patcher.runtime.process.PatchConfiguration
 import app.revanced.manager.patcher.runtime.process.PatcherProcess
@@ -69,6 +71,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        stripNativeLibs: Boolean,
     ) = coroutineScope {
         val minMemoryLimit = 200
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
@@ -97,7 +100,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
                 }
-                
+
                 return@coroutineScope
             } catch (e: Exception) {
                 val isMemoryFailure = when (e) {
@@ -131,6 +134,12 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
 
+        val requestedLimit = prefs.patcherProcessMemoryLimit.get()
+        val sanitizedLimit = MemoryLimitConfig.clampLimitMb(context, requestedLimit)
+        if (sanitizedLimit != requestedLimit) {
+            Log.w(tag, "Requested process memory limit ${requestedLimit}MB exceeded device capabilities; clamped to ${sanitizedLimit}MB")
+        }
+        val limit = "${sanitizedLimit}M"
         val propOverride = resolvePropOverride(context)?.absolutePath
             ?: throw Exception("Couldn't find prop override library")
 
@@ -214,7 +223,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                         selectedPatches[uid].orEmpty(),
                         options[uid].orEmpty()
                     )
-                }
+                },
+                stripNativeLibs = stripNativeLibs
             )
 
             binder.start(parameters, eventHandler)

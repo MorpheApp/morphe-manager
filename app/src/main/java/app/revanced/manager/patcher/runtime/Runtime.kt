@@ -36,5 +36,6 @@ sealed class Runtime(context: Context) : KoinComponent {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        stripNativeLibs: Boolean,
     )
 }

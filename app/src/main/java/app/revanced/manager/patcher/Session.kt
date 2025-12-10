@@ -1,15 +1,14 @@
 package app.revanced.manager.patcher
 
 import android.content.Context
-import app.morphe.library.ApkUtils.applyTo
-import app.morphe.manager.R
+import app.revanced.library.ApkUtils.applyTo
+import app.universal.revanced.manager.R
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.ui.model.State
-import app.morphe.patcher.Patcher
-import app.morphe.patcher.PatcherConfig
-import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.PatchResult
-import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.patcher.Patcher
+import app.revanced.patcher.PatcherConfig
+import app.revanced.patcher.patch.Patch
+import app.revanced.patcher.patch.PatchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
@@ -47,7 +46,7 @@ class Session(
         var nextPatchIndex = 0
 
         updateProgress(
-            name = androidContext.getString(R.string.applying_patches),
+            name = androidContext.getString(R.string.executing_patch, selectedPatches[nextPatchIndex]),
             state = State.RUNNING
         )
 
@@ -70,12 +69,10 @@ class Session(
 
             onPatchCompleted()
 
-            if (false) { // TODO: Enable this only when using advanced mode.
-                selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
-                    updateProgress(
-                        name = androidContext.getString(R.string.applying_patch, nextPatch.name)
-                    )
-                }
+            selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
+                updateProgress(
+                    name = androidContext.getString(R.string.executing_patch, nextPatch.name)
+                )
             }
 
             logger.info("${patch.name} succeeded")

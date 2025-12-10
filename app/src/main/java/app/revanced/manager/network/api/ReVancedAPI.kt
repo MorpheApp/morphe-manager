@@ -2,11 +2,21 @@ package app.revanced.manager.network.api
 
 import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.network.dto.*
+import app.revanced.manager.network.dto.GitHubActionRun
+import app.revanced.manager.network.dto.GitHubActionRunArtifacts
+import app.revanced.manager.network.dto.GitHubActionRuns
+import app.revanced.manager.network.dto.GitHubAsset
+import app.revanced.manager.network.dto.GitHubContributor
+import app.revanced.manager.network.dto.GitHubPullRequest
+import app.revanced.manager.network.dto.GitHubRelease
+import app.revanced.manager.network.dto.ReVancedAsset
+import app.revanced.manager.network.dto.ReVancedContributor
+import app.revanced.manager.network.dto.ReVancedGitRepository
 import app.revanced.manager.network.service.HttpService
-import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.APIFailure
+import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
+import io.ktor.client.request.header
 import io.ktor.client.request.url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,8 +24,8 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 class ReVancedAPI(
     private val client: HttpService,
@@ -37,7 +47,7 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun managerRepoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
+    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -46,11 +56,13 @@ class ReVancedAPI(
                 val repoPath = trimmed.removePrefix("https://github.com/").removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 require(parts.size >= 2) { "Invalid GitHub repository URL: $raw" }
+                val owner = parts[0]
+                val name = parts[1]
                 RepoConfig(
-                    owner = parts[0],
-                    name = parts[1],
-                    apiBase = "https://api.github.com/repos/${parts[0]}/${parts[1]}",
-                    htmlUrl = "https://github.com/${parts[0]}/${parts[1]}"
+                    owner = owner,
+                    name = name,
+                    apiBase = "https://api.github.com/repos/$owner/$name",
+                    htmlUrl = "https://github.com/$owner/$name"
                 )
             }
 
@@ -58,10 +70,8 @@ class ReVancedAPI(
                 val repoPath = trimmed.removePrefix("https://api.github.com/").trim('/').removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 val reposIndex = parts.indexOf("repos")
-                val owner = parts.getOrNull(reposIndex + 1)
-                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
-                val name = parts.getOrNull(reposIndex + 2)
-                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val owner = parts.getOrNull(reposIndex + 1) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val name = parts.getOrNull(reposIndex + 2) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
                 RepoConfig(
                     owner = owner,
                     name = name,
@@ -76,8 +86,21 @@ class ReVancedAPI(
 
     private suspend inline fun <reified T> githubRequest(config: RepoConfig, path: String): APIResponse<T> {
         val normalizedPath = path.trimStart('/')
+        val pat = prefs.gitHubPat.get()
         return client.request {
+            // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+            pat.takeIf { it.isNotBlank() }?.let { header("Authorization", "Bearer $it") }
             url("${config.apiBase}/$normalizedPath")
+        }
+    }
+
+    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
+
+    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
+        val normalizedRoute = route.trimStart('/')
+        val baseUrl = apiUrl()
+        return client.request {
+            url("$baseUrl/v4/$normalizedRoute")
         }
     }
 
@@ -88,7 +111,7 @@ class ReVancedAPI(
     ): APIResponse<ReVancedAsset> {
         return when (val releasesResponse = githubRequest<List<GitHubRelease>>(config, "releases")) {
             is APIResponse.Success -> {
-                val mapped = kotlin.runCatching {
+                val mapped = runCatching {
                     val release = releasesResponse.data.firstOrNull { release ->
                         !release.draft && (includePrerelease || !release.prerelease) && release.assets.any(matcher)
                     } ?: throw IllegalStateException("No matching release found")
@@ -144,8 +167,9 @@ class ReVancedAPI(
         asset.name.endsWith(".apk", ignoreCase = true) ||
                 asset.contentType?.contains("android.package-archive", ignoreCase = true) == true
 
+
     suspend fun getLatestAppInfo(): APIResponse<ReVancedAsset> {
-        val config = managerRepoConfig()
+        val config = repoConfig()
         val includePrerelease = prefs.useManagerPrereleases.get()
         return fetchReleaseAsset(config, includePrerelease, ::isManagerAsset)
     }
@@ -155,6 +179,10 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
+    /**
+     * Fetches the latest patches bundle from the JSON file URL.
+     * Uses direct JSON endpoint.
+     */
     /**
      * Fetches the latest patches bundle from the JSON file URL.
      * Uses direct JSON endpoint.
@@ -238,7 +266,7 @@ class ReVancedAPI(
     }
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
-        val config = managerRepoConfig()
+        val config = repoConfig()
         return when (val response = githubRequest<List<GitHubContributor>>(config, "contributors")) {
             is APIResponse.Success -> {
                 val contributors = response.data.map {
@@ -260,6 +288,71 @@ class ReVancedAPI(
         }
     }
 
-    // FIXME: Change this when released
-    private val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
+    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+    suspend fun getAssetFromPullRequest(owner: String, repo: String, pullRequestNumber: String): ReVancedAsset {
+        suspend fun getPullWithRun(
+            pullRequestNumber: String,
+            config: RepoConfig
+        ): GitHubActionRun {
+            val pull = githubRequest<GitHubPullRequest>(config, "pulls/$pullRequestNumber")
+                .successOrThrow("PR #$pullRequestNumber")
+
+            val targetSha = pull.head.sha
+
+            var page = 1
+            while (true) {
+                val actionsRuns = githubRequest<GitHubActionRuns>(
+                    config,
+                    "actions/runs?per_page=100&page=$page"
+                ).successOrThrow("Workflow runs for PR #$pullRequestNumber (page $page)")
+
+                val match = actionsRuns.workflowRuns.firstOrNull { it.headSha == targetSha }
+                if (match != null) return match
+
+                if (actionsRuns.workflowRuns.isEmpty())
+                    throw Exception("No GitHub Actions run found for PR #$pullRequestNumber with SHA $targetSha")
+
+                page++
+            }
+        }
+
+        val config = RepoConfig(
+            owner = owner,
+            name = repo,
+            apiBase = "https://api.github.com/repos/$owner/$repo",
+            htmlUrl = "https://github.com/$owner/$repo"
+        )
+
+        val currentRun = getPullWithRun(pullRequestNumber, config)
+
+        val artifacts = githubRequest<GitHubActionRunArtifacts>(
+            config,
+            "actions/runs/${currentRun.id}/artifacts"
+        )
+            .successOrThrow("PR artifacts for PR #$pullRequestNumber")
+            .artifacts
+
+        val artifact = artifacts.firstOrNull()
+            ?: throw Exception("The lastest commit in this PR didn't have any artifacts. Did the GitHub action run correctly?")
+
+        return ReVancedAsset(
+            downloadUrl = artifact.archiveDownloadUrl,
+            createdAt = Instant.parse(artifact.createdAt).toLocalDateTime(TimeZone.UTC),
+            pageUrl = "${config.htmlUrl}/pull/$pullRequestNumber",
+            description = currentRun.displayTitle,
+            version = currentRun.headSha
+        )
+    }
 }
+
+// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+fun <T> APIResponse<T>.successOrThrow(context: String): T {
+    return when (this) {
+        is APIResponse.Success -> data
+        is APIResponse.Error -> throw Exception("Failed fetching $context: ${error.message}", error)
+        is APIResponse.Failure -> throw Exception("Failed fetching $context: ${error.message}", error)
+    }
+}
+
+// FIXME: Change this when released
+private val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"

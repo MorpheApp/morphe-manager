@@ -29,6 +29,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Apps
@@ -85,10 +86,14 @@ import app.revanced.manager.ui.component.bundle.ImportPatchBundleDialog
 import app.revanced.manager.ui.component.haptics.HapticFloatingActionButton
 import app.revanced.manager.ui.component.haptics.HapticTab
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
+import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
+import app.revanced.manager.util.APK_FILE_MIME_TYPES
+import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -108,6 +113,7 @@ enum class DashboardPage(
 fun DashboardScreen(
     vm: DashboardViewModel = koinViewModel(),
     onAppSelectorClick: () -> Unit,
+    onStorageSelect: (SelectedApp.Local) -> Unit,
     onSettingsClick: () -> Unit,
     onUpdateClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
@@ -124,6 +130,14 @@ fun DashboardScreen(
     val showNewDownloaderPluginsNotification by vm.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(
         false
     )
+    val storageVm: AppSelectorViewModel = koinViewModel()
+    EventEffect(flow = storageVm.storageSelectionFlow) { selected ->
+        onStorageSelect(selected)
+    }
+    val storagePickerLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            uri?.let(storageVm::handleStorageResult)
+        }
     val bundleUpdateProgress by vm.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val bundleImportProgress by vm.bundleImportProgress.collectAsStateWithLifecycle(null)
     val androidContext = LocalContext.current
@@ -169,8 +183,10 @@ fun DashboardScreen(
     }
 
     val firstLaunch by vm.prefs.firstLaunch.getAsState()
+    if (firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
+    // FXIME: ORIGINAL
     // Don't show autoupdate dialog.
-    if (false && firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
+//    if (false && firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
 
     var showAddBundleDialog by rememberSaveable { mutableStateOf(false) }
     if (showAddBundleDialog) {
@@ -202,19 +218,47 @@ fun DashboardScreen(
     }
 
     var showAndroid11Dialog by rememberSaveable { mutableStateOf(false) }
+    var pendingAppInputAction by remember { mutableStateOf<(() -> Unit)?>(null) }
     val installAppsPermissionLauncher =
         rememberLauncherForActivityResult(RequestInstallAppsContract) { granted ->
             showAndroid11Dialog = false
-            if (granted) onAppSelectorClick()
+            if (granted) {
+                (pendingAppInputAction ?: onAppSelectorClick)()
+                pendingAppInputAction = null
+            }
         }
     if (showAndroid11Dialog) Android11Dialog(
         onDismissRequest = {
             showAndroid11Dialog = false
+            pendingAppInputAction = null
         },
         onContinue = {
             installAppsPermissionLauncher.launch(androidContext.packageName)
         }
     )
+
+    fun attemptAppInput(action: () -> Unit) {
+        pendingAppInputAction = null
+        vm.cancelSourceSelection()
+        installedAppsViewModel.clearSelection()
+        patchProfilesViewModel.handleEvent(PatchProfilesViewModel.Event.CANCEL)
+
+        if (availablePatches < 1) {
+            androidContext.toast(androidContext.getString(R.string.no_patch_found))
+            composableScope.launch {
+                pagerState.animateScrollToPage(DashboardPage.BUNDLES.ordinal)
+            }
+            return
+        }
+
+        if (vm.android11BugActive) {
+            pendingAppInputAction = action
+            showAndroid11Dialog = true
+            return
+        }
+
+        action()
+    }
 
     var showDeleteSavedAppsDialog by rememberSaveable { mutableStateOf(false) }
     var showDeleteConfirmationDialog by rememberSaveable { mutableStateOf(false) }
@@ -355,6 +399,17 @@ fun DashboardScreen(
                                     }
                                 }
                             }
+                            if (pagerState.currentPage == DashboardPage.BUNDLES.ordinal && !bundlesSelectable) {
+                                IconButton(
+                                    onClick = {
+                                        installedAppsViewModel.clearSelection()
+                                        patchProfilesViewModel.handleEvent(PatchProfilesViewModel.Event.CANCEL)
+                                        showBundleOrderDialog = true
+                                    }
+                                ) {
+                                    Icon(Icons.Outlined.Sort, stringResource(R.string.bundle_reorder))
+                                }
+                            }
                             IconButton(onClick = onSettingsClick) {
                                 Icon(Icons.Outlined.Settings, stringResource(R.string.settings))
                             }
@@ -367,52 +422,30 @@ fun DashboardScreen(
         floatingActionButton = {
             when (pagerState.currentPage) {
                 DashboardPage.BUNDLES.ordinal -> {
-                    BundleActionsFabRow(
-                        expanded = bundleActionsExpanded,
-                        showSortButton = !bundlesSelectable,
-                        onToggle = {
-                            val next = !bundleActionsExpanded
-                            bundleActionsExpanded = next
-                            if (!next) restoreBundleActionsAfterScroll = false
-                        },
-                        onSortClick = {
-                            installedAppsViewModel.clearSelection()
-                            patchProfilesViewModel.handleEvent(PatchProfilesViewModel.Event.CANCEL)
-                            showBundleOrderDialog = true
-                        },
-                        onAddClick = {
-                            vm.cancelSourceSelection()
-                            installedAppsViewModel.clearSelection()
-                            patchProfilesViewModel.handleEvent(PatchProfilesViewModel.Event.CANCEL)
-                            showAddBundleDialog = true
-                        }
-                    )
-                }
-
-                DashboardPage.DASHBOARD.ordinal -> {
                     HapticFloatingActionButton(
                         onClick = {
                             vm.cancelSourceSelection()
                             installedAppsViewModel.clearSelection()
                             patchProfilesViewModel.handleEvent(PatchProfilesViewModel.Event.CANCEL)
-
-                            if (availablePatches < 1) {
-                                androidContext.toast(androidContext.getString(R.string.no_patch_found))
-                                composableScope.launch {
-                                    pagerState.animateScrollToPage(
-                                        DashboardPage.BUNDLES.ordinal
-                                    )
-                                }
-                                return@HapticFloatingActionButton
-                            }
-                            if (vm.android11BugActive) {
-                                showAndroid11Dialog = true
-                                return@HapticFloatingActionButton
-                            }
-
-                            onAppSelectorClick()
+                            showAddBundleDialog = true
                         }
                     ) { Icon(Icons.Default.Add, stringResource(R.string.add)) }
+                }
+
+                DashboardPage.DASHBOARD.ordinal -> {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HapticFloatingActionButton(
+                            onClick = { attemptAppInput { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) } }
+                        ) {
+                            Icon(Icons.Default.Storage, stringResource(R.string.select_from_storage))
+                        }
+                        HapticFloatingActionButton(
+                            onClick = { attemptAppInput(onAppSelectorClick) }
+                        ) { Icon(Icons.Default.Add, stringResource(R.string.add)) }
+                    }
                 }
 
                 else -> Unit
@@ -550,11 +583,13 @@ fun DashboardScreen(
                                 setSelectedSourceCount = { selectedSourceCount = it },
                                 showOrderDialog = showBundleOrderDialog,
                                 onDismissOrderDialog = { showBundleOrderDialog = false },
-                                onScrollStateChange = { isScrolling ->
-                                    if (pagerState.currentPage == DashboardPage.BUNDLES.ordinal) {
-                                        isBundleListScrolling = isScrolling
-                                    }
-                                }
+                                onScrollStateChange = {}
+                                // FIXME: ORIGINAL
+//                                onScrollStateChange = { isScrolling ->
+//                                    if (pagerState.currentPage == DashboardPage.BUNDLES.ordinal) {
+//                                        isBundleListScrolling = isScrolling
+//                                    }
+//                                }
                             )
                         }
 

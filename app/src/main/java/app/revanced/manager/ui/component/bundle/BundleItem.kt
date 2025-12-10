@@ -41,6 +41,7 @@ import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
+import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.DisplayNameUpdateResult
 import app.revanced.manager.ui.component.ConfirmDialog
@@ -49,6 +50,7 @@ import app.revanced.manager.ui.component.bundle.extractGithubReleaseUrlFromDownl
 import app.revanced.manager.ui.component.bundle.initialGithubReleaseUrl
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.util.consumeHorizontalScroll
+import app.revanced.manager.util.PatchListCatalog
 import app.revanced.manager.util.relativeTime
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
@@ -78,6 +80,10 @@ fun BundleItem(
     val networkInfo = koinInject<NetworkInfo>()
     val bundleRepo = koinInject<PatchBundleRepository>()
     val coroutineScope = rememberCoroutineScope()
+    val catalogUrl = remember(src) {
+        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
+    }
+    var showLinkSheet by rememberSaveable { mutableStateOf(false) }
     var showRenameDialog by rememberSaveable { mutableStateOf(false) }
 
     if (viewBundleDialogPage) {
@@ -299,16 +305,18 @@ fun BundleItem(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 ActionIconButton(
-                    onClick = {
-                        coroutineScope.launch {
-                            openBundleReleasePage(
-                                src = src,
-                                networkInfo = networkInfo,
-                                context = context,
-                                uriHandler = uriHandler
-                            )
-                        }
-                    }
+                    onClick = { showLinkSheet = true }
+                    // FIME: ORIGINAL
+//                    onClick = {
+//                        coroutineScope.launch {
+//                            openBundleReleasePage(
+//                                src = src,
+//                                networkInfo = networkInfo,
+//                                context = context,
+//                                uriHandler = uriHandler
+//                            )
+//                        }
+//                    }
                 ) {
                     Icon(
                         FontAwesomeIcons.Brands.Github,
@@ -335,6 +343,24 @@ fun BundleItem(
                 }
             }
         }
+    }
+
+    if (showLinkSheet) {
+        BundleLinksSheet(
+            bundleTitle = bundleTitle,
+            catalogUrl = catalogUrl,
+            onReleaseClick = {
+                coroutineScope.launch {
+                    openBundleReleasePage(src, networkInfo, context, uriHandler)
+                }
+            },
+            onCatalogClick = {
+                coroutineScope.launch {
+                    openBundleCatalogPage(catalogUrl, context, uriHandler)
+                }
+            },
+            onDismissRequest = { showLinkSheet = false }
+        )
     }
 }
 

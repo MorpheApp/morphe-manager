@@ -160,7 +160,7 @@ class UpdateViewModel(
                 pm.installApp(listOf(location))
             }
 
-            is InstallerManager.InstallPlan.Root -> {
+            is InstallerManager.InstallPlan.Mount -> {
                 val hint = app.getString(R.string.installer_status_not_supported)
                 app.toast(app.getString(R.string.install_app_fail, hint))
                 installError = hint

@@ -38,7 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.morphe.manager.R
+import app.universal.revanced.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.AppLabel
 import app.revanced.manager.ui.component.AppTopBar
@@ -50,6 +50,7 @@ import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.ui.component.AnnotatedLinkText // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
 import org.koin.androidx.compose.koinViewModel
 import java.security.MessageDigest
 import kotlin.text.HexFormat
@@ -64,6 +65,7 @@ fun DownloadsSettingsScreen(
     val pluginStates by viewModel.downloaderPluginStates.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     var showDeleteConfirmationDialog by rememberSaveable { mutableStateOf(false) }
+    var showHelpDialog by rememberSaveable { mutableStateOf(false) } // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
     val context = LocalContext.current
 
     val exportApkLauncher =
@@ -88,12 +90,33 @@ fun DownloadsSettingsScreen(
         )
     }
 
+    if (showHelpDialog) {
+        AlertDialog(
+            onDismissRequest = { showHelpDialog = false },
+            title = { Text(stringResource(R.string.plugins_help_title)) },
+            text = {
+                // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
+                AnnotatedLinkText(
+                    text = stringResource(R.string.plugins_help_description),
+                    linkLabel = stringResource(R.string.here),
+                    url = "https://github.com/Jman-Github/Universal-ReVanced-Manager?tab=readme-ov-file#-supported-downloader-plugins",
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = { showHelpDialog = false }) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             AppTopBar(
                 title = stringResource(R.string.downloads),
                 scrollBehavior = scrollBehavior,
                 onBackClick = onBackClick,
+                onHelpClick = { showHelpDialog = true }, // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
                 actions = {
                     if (viewModel.appSelection.isNotEmpty()) {
                         IconButton(onClick = {
