@@ -319,19 +319,25 @@ class PatcherViewModel(
     }
     private var currentStepIndex = 0
 
+    /**
+     * [0, 1.0] progress value
+     */
     val progress by derivedStateOf {
-        // FIXME: Use step substep to track progress of individual patches.
-        val current = steps.sumOf {
+        val currentStepIndex = getCurrentStepIndex()
+        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
+
+        currentStepIndex.toFloat() / total.toFloat()
+    }
+
+    fun getCurrentStepIndex() : Int {
+        return (steps.sumOf {
+            // FIXME: Use step substep to track progress of individual patches.
             if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
                 it.subSteps.toLong()
             } else {
                 0L
             }
-        } + completedPatchCount
-
-        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
-
-        current.toFloat() / total.toFloat()
+        } + completedPatchCount).toInt()
     }
 
     private val workManager = WorkManager.getInstance(app)
@@ -1263,12 +1269,12 @@ class PatcherViewModel(
                 Step(
                     context.getString(R.string.patcher_step_load_patches),
                     StepCategory.PREPARING,
-                    state = if (needsDownload) State.WAITING else State.RUNNING,
-                    subSteps = 3
+                    state = if (needsDownload) State.WAITING else State.RUNNING
                 ),
                 Step(
                     context.getString(R.string.patcher_step_unpack),
-                    StepCategory.PREPARING
+                    StepCategory.PREPARING,
+                    subSteps = 2
                 ),
 
                 Step(
@@ -1279,7 +1285,7 @@ class PatcherViewModel(
                 Step(
                     context.getString(R.string.patcher_step_write_patched),
                     StepCategory.SAVING,
-                    subSteps = 5
+                    subSteps = 6
                 ),
                 Step(
                     context.getString(R.string.patcher_step_sign_apk),

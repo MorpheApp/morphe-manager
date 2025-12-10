@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.screen
 
+import android.R.attr.x
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -15,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -93,6 +96,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat
+import androidx.core.math.MathUtils.clamp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.model.State
@@ -107,7 +111,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.min
+import kotlin.math.exp
+import kotlin.math.sqrt
 
 // Helper enum for install dialog states
 private enum class InstallDialogState {
@@ -145,70 +150,66 @@ fun MorphePatcherScreen(
     val isRootMode by viewModel.prefs.useRootMode.getAsState()
 
     // Animated progress with dual-mode animation: slow crawl + fast catch-up
-    var displayProgress by remember { mutableStateOf(0f) }
+    var displayProgress by remember { mutableStateOf(viewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
-    var currentStepStartTime by remember { mutableStateOf(0L) }
+
+    val displayProgressAnimate by animateFloatAsState(
+        targetValue = displayProgress,
+        animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
+        label = "progress_animation"
+    )
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
-        val fastUpdateMilliseconds = 16L // 60 fps
-        val slowUpdateMilliseconds = 200L // 5 fps
+        var lastCompletedStep  = 0
+        var currentStepStartTime = System.currentTimeMillis()
 
-        if (patcherSucceeded == null) {
-            currentStepStartTime = System.currentTimeMillis()
+        while (patcherSucceeded == null) {
+            val now = System.currentTimeMillis()
 
-            // Patching in progress - dual-mode animation
-            while (true) {
-                val actualProgress = viewModel.progress
+            val currentCompletedStep = viewModel.getCurrentStepIndex()
+            if (lastCompletedStep != currentCompletedStep) {
+                // New step!
+                lastCompletedStep = currentCompletedStep
+                currentStepStartTime = now
+                showLongStepWarning = false
+            }
 
-                // Check if actual progress jumped ahead significantly
-                val distanceToActual = actualProgress - displayProgress
+            val timeUntilStepShowsBePatient = 40 * 1000 // 40 seconds
+            val timeSinceStepStarted = now - currentStepStartTime
+            if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
+                showLongStepWarning = true
+            }
 
-                // One tenth of 1%
-                val tenthPercentage = (1 / 10000f)
-
-                val nextUpdateMilliseconds : Long
-                val displayProgressChange : Float
-
-                if (distanceToActual > 0.01f) {
-                    // Step completed! Fast catch-up mode with smooth deceleration
-                    currentStepStartTime = System.currentTimeMillis()
-                    showLongStepWarning = false
-
-                    // Smoothly accelerate to catch up (creates excitement of progress spurts)
-                    displayProgressChange = when {
-                        distanceToActual > 0.1f -> 80 * tenthPercentage // Very fast: 8% per second
-                        distanceToActual > 0.05f -> 40 * tenthPercentage// Fast: 4% per second
-                        distanceToActual > 0.02f -> 20 * tenthPercentage// Medium: 2% per second
-                        else -> 1 * tenthPercentage // Slower: 0.1% per second
-                    }
-
-                    nextUpdateMilliseconds = fastUpdateMilliseconds
-                } else {
-                    // Slow crawl mode (always present even when waiting)
-                    displayProgressChange = 2.5f * tenthPercentage // 0.25% per second baseline crawl
-
-                    nextUpdateMilliseconds = slowUpdateMilliseconds
+            val actualProgress = viewModel.progress
+            if (actualProgress >= 0.98f) {
+                displayProgress = actualProgress
+            } else {
+                // Over estimate the progress by about 1% per second, but decays to
+                // adding smaller adjustments each second until the current step completes
+                fun overEstimateProgressAdjustment(secondsElapsed: Long): Float {
+                    // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
+                    // https://desmos.com/calculator/nwnr70rqda
+                    val scale = 10.0f
+                    return scale * (1 - exp(-secondsElapsed / scale))
                 }
 
-                // Don't go beyond 98% until actually complete.
-                displayProgress = min(displayProgress + displayProgressChange,0.98f)
+                val secondsSinceStepStarted = timeSinceStepStarted / 1000
+                val overEstimatedProgress = actualProgress +  0.01f * overEstimateProgressAdjustment(
+                    secondsSinceStepStarted
+                )
 
-                // Check if current step is taking too long (more than 50 seconds)
-                if (!showLongStepWarning && System.currentTimeMillis() - currentStepStartTime > 50000) {
-                    showLongStepWarning = true
-                }
+                // Don't allow rolling back the progress if it went over,
+                // and don't go over 98% unless the actual progress is that far
+                displayProgress = clamp(
+                    displayProgress,
+                    overEstimatedProgress,
+                    0.98f
+                )
+            }
 
-                delay(nextUpdateMilliseconds)
-            }
-        } else {
-            // Patching finished - smoothly move to 100%
-            showLongStepWarning = false
-            while (displayProgress < 1f) {
-                // Quick final animation
-                displayProgress = min(displayProgress + 0.01f, 1f)
-                delay(fastUpdateMilliseconds)
-            }
+            // Update twice a second
+            delay(250)
         }
     }
 
@@ -567,9 +568,9 @@ fun MorphePatcherScreen(
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(
-                    targetState = when {
-                        patcherSucceeded == null -> PatcherState.IN_PROGRESS
-                        patcherSucceeded == true -> PatcherState.SUCCESS
+                    targetState = when (patcherSucceeded) {
+                        null -> PatcherState.IN_PROGRESS
+                        true -> PatcherState.SUCCESS
                         else -> PatcherState.FAILED
                     },
                     transitionSpec = {
@@ -581,7 +582,7 @@ fun MorphePatcherScreen(
                     when (state) {
                         PatcherState.IN_PROGRESS -> {
                             PatchingInProgress(
-                                progress = displayProgress,
+                                progress = displayProgressAnimate,
                                 patchesProgress = patchesProgress,
                                 downloadProgress = viewModel.downloadProgress,
                                 viewModel = viewModel,
