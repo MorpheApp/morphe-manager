@@ -184,16 +184,68 @@ private fun applyCustomThemeColor(
     themeColor: Color,
     darkTheme: Boolean
 ): ColorScheme {
-    val background = themeColor.adjustLightness(if (darkTheme) -0.45f else 0.55f)
-    val surface = themeColor.adjustLightness(if (darkTheme) -0.35f else 0.45f)
-    val surfaceVariant = themeColor.adjustLightness(if (darkTheme) -0.25f else 0.35f)
-    val containerLowest = themeColor.adjustLightness(if (darkTheme) -0.4f else 0.5f)
-    val containerLow = themeColor.adjustLightness(if (darkTheme) -0.38f else 0.48f)
-    val container = themeColor.adjustLightness(if (darkTheme) -0.32f else 0.42f)
-    val containerHigh = themeColor.adjustLightness(if (darkTheme) -0.24f else 0.34f)
-    val containerHighest = themeColor.adjustLightness(if (darkTheme) -0.18f else 0.28f)
-    val surfaceBright = themeColor.adjustLightness(if (darkTheme) -0.1f else 0.12f)
-    val surfaceDim = themeColor.adjustLightness(if (darkTheme) -0.5f else 0.6f)
+    // For dark theme, use the selected color directly without excessive darkening
+    // For light theme, lighten the color
+    val background = if (darkTheme) {
+        themeColor.adjustLightness(0.05f)
+    } else {
+        themeColor.adjustLightness(0.55f)
+    }
+
+    val surface = if (darkTheme) {
+        themeColor.adjustLightness(0.15f)
+    } else {
+        themeColor.adjustLightness(0.45f)
+    }
+
+    val surfaceVariant = if (darkTheme) {
+        themeColor.adjustLightness(0.25f)
+    } else {
+        themeColor.adjustLightness(0.35f)
+    }
+
+    val containerLowest = if (darkTheme) {
+        themeColor.adjustLightness(0.0f)
+    } else {
+        themeColor.adjustLightness(0.5f)
+    }
+
+    val containerLow = if (darkTheme) {
+        themeColor.adjustLightness(0.08f)
+    } else {
+        themeColor.adjustLightness(0.48f)
+    }
+
+    val container = if (darkTheme) {
+        themeColor.adjustLightness(0.18f)
+    } else {
+        themeColor.adjustLightness(0.42f)
+    }
+
+    val containerHigh = if (darkTheme) {
+        themeColor.adjustLightness(0.26f)
+    } else {
+        themeColor.adjustLightness(0.34f)
+    }
+
+    val containerHighest = if (darkTheme) {
+        themeColor.adjustLightness(0.32f)
+    } else {
+        themeColor.adjustLightness(0.28f)
+    }
+
+    val surfaceBright = if (darkTheme) {
+        themeColor.adjustLightness(0.4f)
+    } else {
+        themeColor.adjustLightness(0.12f)
+    }
+
+    val surfaceDim = if (darkTheme) {
+        themeColor.adjustLightness(-0.1f)
+    } else {
+        themeColor.adjustLightness(0.6f)
+    }
+
     val onBackground = background.contrastingForeground()
     val onSurface = surface.contrastingForeground()
     val onSurfaceVariant = surfaceVariant.contrastingForeground()
