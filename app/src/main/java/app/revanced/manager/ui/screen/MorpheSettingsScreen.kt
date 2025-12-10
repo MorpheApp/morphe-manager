@@ -3,6 +3,7 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
@@ -14,8 +15,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -35,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
@@ -71,6 +75,7 @@ import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
+import app.revanced.manager.util.toColorOrNull
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -100,6 +105,9 @@ fun MorpheSettingsScreen(
     // Appearance
     val theme by generalViewModel.prefs.theme.getAsState()
     val pureBlackTheme by generalViewModel.prefs.pureBlackTheme.getAsState()
+    val dynamicColor by generalViewModel.prefs.dynamicColor.getAsState()
+    val customAccentColorHex by generalViewModel.prefs.customAccentColor.getAsState()
+    val customThemeColorHex by generalViewModel.prefs.customThemeColor.getAsState()
 
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
@@ -328,6 +336,248 @@ fun MorpheSettingsScreen(
                                                 generalViewModel.prefs.pureBlackTheme.update(it)
                                             }
                                         }
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    // Dynamic Color (Android 12+)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
+                                    coroutineScope.launch {
+                                        generalViewModel.prefs.dynamicColor.update(!dynamicColor)
+                                    }
+                                },
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Palette,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.dynamic_color),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.dynamic_color_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = dynamicColor,
+                                    onCheckedChange = {
+                                        coroutineScope.launch {
+                                            generalViewModel.prefs.dynamicColor.update(it)
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    // Accent Color Presets
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(R.string.accent_color_presets),
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+
+                    val accentPresets = remember {
+                        listOf(
+                            Color(0xFF6750A4),
+                            Color(0xFF386641),
+                            Color(0xFF0061A4),
+                            Color(0xFF8E24AA),
+                            Color(0xFFEF6C00),
+                            Color(0xFF00897B),
+                            Color(0xFFD81B60),
+                            Color(0xFF5C6BC0),
+                            Color(0xFF43A047),
+                            Color(0xFFFF7043),
+                            Color(0xFF1DE9B6),
+                            Color(0xFFFFC400),
+                            Color(0xFF00B8D4),
+                            Color(0xFFBA68C8)
+                        )
+                    }
+
+                    val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        // Reset button (no color selected)
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(14.dp))
+                                .border(
+                                    width = if (selectedAccentArgb == null) 2.dp else 1.dp,
+                                    color = if (selectedAccentArgb == null)
+                                        MaterialTheme.colorScheme.primary
+                                    else
+                                        MaterialTheme.colorScheme.outline,
+                                    shape = RoundedCornerShape(14.dp)
+                                )
+                                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                                .clickable {
+                                    generalViewModel.setCustomAccentColor(null)
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Close,
+                                contentDescription = "Reset",
+                                modifier = Modifier.size(20.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
+                        accentPresets.forEach { preset ->
+                            val isSelected = selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+                            Box(
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .border(
+                                        width = if (isSelected) 2.dp else 1.dp,
+                                        color = if (isSelected)
+                                            MaterialTheme.colorScheme.primary
+                                        else
+                                            MaterialTheme.colorScheme.outline,
+                                        shape = RoundedCornerShape(14.dp)
+                                    )
+                                    .background(preset, RoundedCornerShape(12.dp))
+                                    .clickable {
+                                        generalViewModel.setCustomAccentColor(preset)
+                                    }
+                            )
+                        }
+                    }
+
+                    // Theme Color Presets
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    val isSystemInDarkTheme = isSystemInDarkTheme()
+                    val isDarkTheme = when (theme) {
+                        Theme.LIGHT -> false
+                        Theme.DARK -> true
+                        Theme.SYSTEM -> isSystemInDarkTheme
+                    }
+
+                    LaunchedEffect(isDarkTheme) {
+                        if (isDarkTheme && customThemeColorHex.toColorOrNull() != null) {
+                            generalViewModel.setCustomThemeColor(null)
+                        }
+                    }
+
+                    AnimatedVisibility(visible = !isDarkTheme) {
+                        Column {
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = stringResource(R.string.theme_color),
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+
+                            val themePresets = remember {
+                                listOf(
+                                    Color(0xFF1C1B1F),
+                                    Color(0xFF2D2A32),
+                                    Color(0xFF1A1A2E),
+                                    Color(0xFF0F0F1E),
+                                    Color(0xFF16213E),
+                                    Color(0xFF1F1B24),
+                                    Color(0xFF0A1929),
+                                    Color(0xFF1B1B2F),
+                                    Color(0xFF162447),
+                                    Color(0xFF1F1D2B),
+                                    Color(0xFF2C2C54),
+                                    Color(0xFF1E1E2E)
+                                )
+                            }
+
+                            val selectedThemeArgb = customThemeColorHex.toColorOrNull()?.toArgb()
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                // Кнопка скидання
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(RoundedCornerShape(14.dp))
+                                        .border(
+                                            width = if (selectedThemeArgb == null) 2.dp else 1.dp,
+                                            color = if (selectedThemeArgb == null)
+                                                MaterialTheme.colorScheme.primary
+                                            else
+                                                MaterialTheme.colorScheme.outline,
+                                            shape = RoundedCornerShape(14.dp)
+                                        )
+                                        .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                                        .clickable {
+                                            generalViewModel.setCustomThemeColor(null)
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Close,
+                                        contentDescription = "Reset",
+                                        modifier = Modifier.size(20.dp),
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+
+                                themePresets.forEach { preset ->
+                                    val isSelected = selectedThemeArgb != null && preset.toArgb() == selectedThemeArgb
+                                    Box(
+                                        modifier = Modifier
+                                            .size(40.dp)
+                                            .clip(RoundedCornerShape(14.dp))
+                                            .border(
+                                                width = if (isSelected) 2.dp else 1.dp,
+                                                color = if (isSelected)
+                                                    MaterialTheme.colorScheme.primary
+                                                else
+                                                    MaterialTheme.colorScheme.outline,
+                                                shape = RoundedCornerShape(14.dp)
+                                            )
+                                            .background(preset, RoundedCornerShape(12.dp))
+                                            .clickable {
+                                                generalViewModel.setCustomThemeColor(preset)
+                                            }
                                     )
                                 }
                             }
