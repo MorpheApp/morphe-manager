@@ -111,6 +111,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Helper enum for install dialog states
+private enum class InstallDialogState {
+    INITIAL,            // First time showing dialog - "Install app?"
+    CONFLICT,           // Conflict detected - "Package conflict, need to uninstall"
+    READY_TO_INSTALL,   // After uninstall - "Ready to install, press Install"
+    ERROR               // Installation error - show error message with uninstall option
+}
+
+// Helper enum for state tracking
+private enum class SuccessState {
+    INSTALLING,
+    INSTALLED,
+    INSTALL_CANCELLED,
+    COMPLETED
+}
+
 // Helper enum for patcher states
 private enum class PatcherState {
     IN_PROGRESS,
@@ -130,26 +146,44 @@ fun MorphePatcherScreen(
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
     val isRootMode by viewModel.prefs.useRootMode.getAsState()
 
-    // Animated progress with constant motion within each step
+    // Animated progress with dual-mode animation: slow crawl + fast catch-up
     var displayProgress by remember { mutableStateOf(0f) }
-    var targetProgress by remember { mutableStateOf(0f) }
     var showLongStepWarning by remember { mutableStateOf(false) }
     var currentStepStartTime by remember { mutableStateOf(0L) }
 
-// Continuous animation that always moves forward smoothly
+    // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == null) {
             currentStepStartTime = System.currentTimeMillis()
 
-            // Patching in progress - constantly move forward
+            // Patching in progress - dual-mode animation
             while (true) {
                 val actualProgress = viewModel.progress
 
-                // Update target if actual progress jumped ahead
-                if (actualProgress > targetProgress + 0.001f) {
-                    targetProgress = actualProgress
-                    currentStepStartTime = System.currentTimeMillis() // Reset timer for new step
-                    showLongStepWarning = false // Hide warning when moving to new step
+                // Check if actual progress jumped ahead significantly
+                val distanceToActual = actualProgress - displayProgress
+
+                if (distanceToActual > 0.01f) {
+                    // Step completed! Fast catch-up mode with smooth deceleration
+                    currentStepStartTime = System.currentTimeMillis()
+                    showLongStepWarning = false
+
+                    // Smoothly accelerate to catch up (creates excitement of progress spurts)
+                    val catchUpSpeed = when {
+                        distanceToActual > 0.1f -> 0.004f  // Very fast: 40% per second
+                        distanceToActual > 0.05f -> 0.003f // Fast: 30% per second
+                        distanceToActual > 0.02f -> 0.002f // Medium: 20% per second
+                        else -> 0.001f                     // Slower: 10% per second
+                    }
+                    displayProgress += catchUpSpeed
+
+                    // Don't overshoot the actual progress
+                    if (displayProgress > actualProgress) {
+                        displayProgress = actualProgress
+                    }
+                } else {
+                    // Slow crawl mode (always present even when waiting)
+                    displayProgress += 0.00005f // 0.5% per second baseline crawl
                 }
 
                 // Check if current step is taking too long (more than 30 seconds)
@@ -158,26 +192,8 @@ fun MorphePatcherScreen(
                     showLongStepWarning = true
                 }
 
-                // Calculate distance to target
-                val distanceToTarget = targetProgress - displayProgress
-
-                if (distanceToTarget > 0.001f) {
-                    // If far from target, move faster to catch up
-                    val catchUpSpeed = if (distanceToTarget > 0.05f) {
-                        0.0002f // 2% per second when far behind
-                    } else {
-                        0.0001f // 1% per second when close
-                    }
-                    displayProgress += catchUpSpeed
-                } else {
-                    // At target or very close - slow crawl forward
-                    displayProgress += 0.00005f // 0.5% per second
-                    targetProgress = displayProgress // Move target with us
-                }
-
                 // Never exceed 99% until actually complete
                 displayProgress = minOf(displayProgress, 0.99f)
-                targetProgress = minOf(targetProgress, 0.99f)
 
                 delay(10) // Update every 10ms for smooth animation
             }
@@ -699,14 +715,6 @@ fun MorphePatcherScreen(
     }
 }
 
-// Helper enum for install dialog states
-private enum class InstallDialogState {
-    INITIAL,            // First time showing dialog - "Install app?"
-    CONFLICT,           // Conflict detected - "Package conflict, need to uninstall"
-    READY_TO_INSTALL,   // After uninstall - "Ready to install, press Install"
-    ERROR               // Installation error - show error message with uninstall option
-}
-
 @Composable
 private fun PatchingInProgress(
     progress: Float,
@@ -1047,14 +1055,6 @@ private fun PatchingSuccess(
             }
         }
     }
-}
-
-// Helper enum for state tracking
-private enum class SuccessState {
-    INSTALLING,
-    INSTALLED,
-    INSTALL_CANCELLED,
-    COMPLETED
 }
 
 @Composable
