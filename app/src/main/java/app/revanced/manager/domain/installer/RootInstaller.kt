@@ -2,13 +2,16 @@ package app.revanced.manager.domain.installer
 
 import android.app.Application
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import app.revanced.manager.IRootSystemService
 import app.revanced.manager.service.ManagerRootService
+import app.revanced.manager.ui.viewmodel.PersistentValue
 import app.revanced.manager.util.PM
 import com.topjohnwu.superuser.Shell
+import com.topjohnwu.superuser.Shell.cmd
 import com.topjohnwu.superuser.ipc.RootService
 import com.topjohnwu.superuser.nio.FileSystemManager
 import kotlinx.coroutines.CompletableDeferred
@@ -56,13 +59,30 @@ class RootInstaller(
 
     suspend fun execute(vararg commands: String) = getShell().newJob().add(*commands).exec()
 
-    // TODO Temporary add this for testing
-    fun hasRootAccess(): Boolean = true // rootInstaller.hasRootAccess()
-    //fun hasRootAccess() = Shell.isAppGrantedRoot() ?: false
+    /**
+     * @return If root access has been attempted _and_ granted.
+     *         This will **not** request root if not yet granted.
+     * @see requestRootAccessIfNotAskedYet
+     */
+    fun hasRootAccess() = Shell.isAppGrantedRoot() ?: false
 
-    fun isDeviceRooted() = System.getenv("PATH")?.split(":")?.any { path ->
-        File(path, "su").canExecute()
-    } ?: false
+    /**
+     * Prompts the user for root access, but only prompts once per
+     * app installation and will not cause "root denied" toasts.
+     *
+     * @return If the user approved root access or was previously granted.
+     * @see hasRootAccess
+     */
+    fun requestRootAccessIfNotAskedYet(context: Context) : Boolean {
+        val attempted = getRootAccessAttempted(context)
+        if (!attempted.get()) {
+            attempted.save(true)
+            val result = cmd("id").exec()
+            return result.isSuccess
+        }
+
+        return hasRootAccess()
+    }
 
     suspend fun isAppInstalled(packageName: String) =
         awaitRemoteFS().getFile("$modulesPath/$packageName-revanced").exists()
@@ -176,6 +196,16 @@ class RootInstaller(
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
             if (!isSuccess) throw Exception(errorMessage)
+        }
+
+        private var rootAccessAttemptedValue : PersistentValue<Boolean>? = null
+
+        fun getRootAccessAttempted(context: Context): PersistentValue<Boolean> {
+            if (rootAccessAttemptedValue == null) {
+                rootAccessAttemptedValue =
+                    PersistentValue(context, "root_installer_root_access_attempted", false)
+            }
+            return rootAccessAttemptedValue!!
         }
     }
 }
