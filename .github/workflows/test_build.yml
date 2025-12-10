@@ -1,9 +1,10 @@
-name: Test build
+name: Build pull request
+
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
