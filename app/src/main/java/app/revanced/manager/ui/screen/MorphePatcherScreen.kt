@@ -183,7 +183,9 @@ fun MorphePatcherScreen(
                     }
                 } else {
                     // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.25f * tenthPercentage // 0.25% per second baseline crawl
+                    displayProgress += 0.25f * tenthPercentage + // 0.25% per second baseline crawl
+                            // Add a little randomness to the crawl
+                            (Math.random() * 0.1f * tenthPercentage).toFloat()
                 }
 
                 // Check if current step is taking too long (more than 30 seconds)
@@ -1335,7 +1337,11 @@ private fun InstallDialog(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clip(RoundedCornerShape(8.dp))
-                                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
+                                    .background(
+                                        MaterialTheme.colorScheme.primaryContainer.copy(
+                                            alpha = 0.3f
+                                        )
+                                    )
                                     .padding(8.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
