@@ -57,7 +57,6 @@
     <!-- Root Mode -->
     <string name="morphe_root_mode">Root Mode</string>
     <string name="morphe_root_mode_description">Use root to mount patched apps (experimental)</string>
-    <string name="morphe_root_mode_unavailable">Root access not available</string>
     <string name="morphe_root_mode_enabled">Root mode enabled</string>
     <string name="morphe_root_mode_disabled">Root mode disabled</string>
     <string name="morphe_root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>

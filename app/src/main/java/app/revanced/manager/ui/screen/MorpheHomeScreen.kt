@@ -2,7 +2,6 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
@@ -109,7 +108,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
-import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
@@ -189,7 +187,7 @@ fun MorpheHomeScreen(
 
     val hasRootAccess by remember {
         derivedStateOf {
-            dashboardViewModel.rootInstaller?.hasRootAccess() ?: false
+            dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) ?: false
         }
     }
 
@@ -269,7 +267,7 @@ fun MorpheHomeScreen(
         }
 
         // Exclude GmsCore support patch in root mode
-        val patches = if (isRootMode && hasRootAccess) {
+        val patches = if (hasRootAccess && isRootMode) {
             bundles.toPatchSelection(allowIncompatible) { _, patch ->
                 patch.include && !patch.name.contains("GmsCore", ignoreCase = true)
             }

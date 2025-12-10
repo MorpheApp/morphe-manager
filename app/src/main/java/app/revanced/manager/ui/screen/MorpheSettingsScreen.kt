@@ -2,14 +2,11 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,63 +24,49 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.ui.window.Dialog
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
-import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.component.ConfirmDialog
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.PasswordField
-import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.AboutViewModel
-import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
-import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
-import app.revanced.manager.util.openUrl
-import app.revanced.manager.util.toast
 import app.revanced.manager.util.toColorOrNull
+import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
-import android.provider.Settings as AndroidSettings
 
 /**
  * Morphe Settings Screen
@@ -830,72 +813,24 @@ fun MorpheSettingsScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Debugging Section
-            SectionHeader(
-                icon = Icons.Outlined.DeveloperMode,
-                title = stringResource(R.string.debugging)
-            )
+            if (dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) == true) {
+                // Debugging Section
+                SectionHeader(
+                    icon = Icons.Outlined.DeveloperMode,
+                    title = stringResource(R.string.debugging)
+                )
 
-            SettingsCard {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
-                    val hasRootAccess = remember { dashboardViewModel.rootInstaller?.hasRootAccess() ?: false }
+                SettingsCard {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
 
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable(enabled = hasRootAccess) {
-                                coroutineScope.launch {
-                                    val newValue = !useRootMode
-                                    generalViewModel.toggleRootMode(newValue)
-                                    context.toast(
-                                        if (newValue)
-                                            context.getString(R.string.morphe_root_mode_enabled)
-                                        else
-                                            context.getString(R.string.morphe_root_mode_disabled)
-                                    )
-                                }
-                            },
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                    ) {
-                        Row(
+                        Surface(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Security,
-                                contentDescription = null,
-                                tint = if (hasRootAccess) MaterialTheme.colorScheme.primary
-                                else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.morphe_root_mode),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium,
-                                    color = if (hasRootAccess) MaterialTheme.colorScheme.onSurface
-                                    else MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                Text(
-                                    text = if (hasRootAccess)
-                                        stringResource(R.string.morphe_root_mode_description)
-                                    else
-                                        stringResource(R.string.morphe_root_mode_unavailable),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Switch(
-                                checked = useRootMode,
-                                enabled = hasRootAccess,
-                                onCheckedChange = { newValue ->
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
                                     coroutineScope.launch {
+                                        val newValue = !useRootMode
                                         generalViewModel.toggleRootMode(newValue)
                                         context.toast(
                                             if (newValue)
@@ -904,8 +839,51 @@ fun MorpheSettingsScreen(
                                                 context.getString(R.string.morphe_root_mode_disabled)
                                         )
                                     }
+                                },
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Security,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.morphe_root_mode),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.morphe_root_mode_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
                                 }
-                            )
+                                Switch(
+                                    checked = useRootMode,
+                                    onCheckedChange = { newValue ->
+                                        coroutineScope.launch {
+                                            generalViewModel.toggleRootMode(newValue)
+                                            context.toast(
+                                                if (newValue)
+                                                    context.getString(R.string.morphe_root_mode_enabled)
+                                                else
+                                                    context.getString(R.string.morphe_root_mode_disabled)
+                                            )
+                                        }
+                                    }
+                                )
+                            }
                         }
                     }
                 }
