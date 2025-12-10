@@ -714,8 +714,7 @@ fun MorpheHomeScreen(
                     pendingAppName = getAppName(PACKAGE_YOUTUBE_MUSIC)
                     pendingRecommendedVersion = recommendedVersions[PACKAGE_YOUTUBE_MUSIC]
                     showApkAvailabilityDialog = true
-                },
-                shuffleSeed = dashboardViewModel.prefs.installationTime.getBlocking(),
+                }
             )
 
             // Floating Action Buttons
@@ -1611,11 +1610,8 @@ private fun getRelativeTimeString(timestamp: Long): String {
 private fun MainContent(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
-    shuffleSeed: Long,
 ) {
-    val greeting = HomeAndPatcherMessages.getHomeMessage(
-        LocalContext.current, shuffleSeed
-    )
+    val greeting = HomeAndPatcherMessages.getHomeMessage(LocalContext.current)
 
     val scrollState = rememberScrollState()
     val configuration = LocalConfiguration.current

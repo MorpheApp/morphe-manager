@@ -665,10 +665,9 @@ private fun PatchingInProgress(
     }
 
     val context = LocalContext.current
-    val shuffleSeed = viewModel.prefs.installationTime.getBlocking()
     var currentMessage by remember {
         mutableStateOf(
-            HomeAndPatcherMessages.getPatcherMessage(context, shuffleSeed)
+            HomeAndPatcherMessages.getPatcherMessage(context)
         )
     }
 
@@ -676,9 +675,7 @@ private fun PatchingInProgress(
     LaunchedEffect(Unit) {
         while (true) {
             delay(10000)
-            currentMessage = HomeAndPatcherMessages.getPatcherMessage(
-                context, shuffleSeed
-            )
+            currentMessage = HomeAndPatcherMessages.getPatcherMessage(context)
         }
     }
 

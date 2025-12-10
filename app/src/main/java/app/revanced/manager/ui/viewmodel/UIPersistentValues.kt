@@ -19,11 +19,15 @@ object UIPersistentValues {
         return prefs
     }
 
-    fun putInt(context: Context, key: String, value: Int) {
-        getPrefs(context).edit().putInt(key, value).apply()
-    }
+    fun getInt(context: Context, key: String, defaultValue: Int = 0) =
+        getPrefs(context).getInt(key, defaultValue)
 
-    fun getInt(context: Context, key: String, defaultValue: Int = 0): Int {
-        return getPrefs(context).getInt(key, defaultValue)
-    }
+    fun putInt(context: Context, key: String, value: Int) =
+        getPrefs(context).edit().putInt(key, value).apply()
+
+    fun getLong(context: Context, key: String, defaultValue: Long = 0) =
+        getPrefs(context).getLong(key, defaultValue)
+
+    fun putLong(context: Context, key: String, value: Long) =
+        getPrefs(context).edit().putLong(key, value).apply()
 }
