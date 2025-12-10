@@ -73,6 +73,7 @@
     <string name="morphe_patcher_error_copied">Error copied to clipboard</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
+    <string name="morphe_patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="morphe_patcher_install_dialog_message">Install patched app?</string>
     <string name="morphe_patcher_install_conflict_message">A package conflict has been detected. To install the new version, you must first uninstall the previous version of the app.</string>
     <string name="morphe_patcher_install_ready_message">The previous version has been uninstalled. You can now install the patched app.</string>

@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -110,6 +111,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Helper enum for patcher states
+private enum class PatcherState {
+    IN_PROGRESS,
+    SUCCESS,
+    FAILED
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorphePatcherScreen(
@@ -122,16 +130,66 @@ fun MorphePatcherScreen(
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
     val isRootMode by viewModel.prefs.useRootMode.getAsState()
 
-    // Animated progress for smooth animation
+    // Animated progress with constant motion within each step
+    var displayProgress by remember { mutableStateOf(0f) }
     var targetProgress by remember { mutableStateOf(0f) }
-    val animatedProgress by animateFloatAsState(
-        targetValue = targetProgress,
-        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
-        label = "progress_animation"
-    )
+    var showLongStepWarning by remember { mutableStateOf(false) }
+    var currentStepStartTime by remember { mutableStateOf(0L) }
 
-    LaunchedEffect(viewModel.progress) {
-        targetProgress = viewModel.progress
+// Continuous animation that always moves forward smoothly
+    LaunchedEffect(patcherSucceeded) {
+        if (patcherSucceeded == null) {
+            currentStepStartTime = System.currentTimeMillis()
+
+            // Patching in progress - constantly move forward
+            while (true) {
+                val actualProgress = viewModel.progress
+
+                // Update target if actual progress jumped ahead
+                if (actualProgress > targetProgress + 0.001f) {
+                    targetProgress = actualProgress
+                    currentStepStartTime = System.currentTimeMillis() // Reset timer for new step
+                    showLongStepWarning = false // Hide warning when moving to new step
+                }
+
+                // Check if current step is taking too long (more than 30 seconds)
+                val stepDuration = System.currentTimeMillis() - currentStepStartTime
+                if (stepDuration > 30000 && !showLongStepWarning) {
+                    showLongStepWarning = true
+                }
+
+                // Calculate distance to target
+                val distanceToTarget = targetProgress - displayProgress
+
+                if (distanceToTarget > 0.001f) {
+                    // If far from target, move faster to catch up
+                    val catchUpSpeed = if (distanceToTarget > 0.05f) {
+                        0.0002f // 2% per second when far behind
+                    } else {
+                        0.0001f // 1% per second when close
+                    }
+                    displayProgress += catchUpSpeed
+                } else {
+                    // At target or very close - slow crawl forward
+                    displayProgress += 0.00005f // 0.5% per second
+                    targetProgress = displayProgress // Move target with us
+                }
+
+                // Never exceed 99% until actually complete
+                displayProgress = minOf(displayProgress, 0.99f)
+                targetProgress = minOf(targetProgress, 0.99f)
+
+                delay(10) // Update every 10ms for smooth animation
+            }
+        } else {
+            // Patching finished - smoothly move to 100%
+            showLongStepWarning = false
+            while (displayProgress < 1f) {
+                displayProgress += 0.01f // Quick final animation
+                displayProgress = minOf(displayProgress, 1f)
+                delay(10)
+            }
+        }
     }
 
     val patchesProgress = viewModel.patchesProgress
@@ -488,25 +546,38 @@ fun MorphePatcherScreen(
                     .padding(bottom = 100.dp),
                 contentAlignment = Alignment.Center
             ) {
-                when {
-                    patcherSucceeded == null -> {
-                        PatchingInProgress(
-                            progress = animatedProgress,
-                            patchesProgress = patchesProgress,
-                            downloadProgress = viewModel.downloadProgress,
-                            viewModel = viewModel
-                        )
-                    }
-                    patcherSucceeded == true -> {
-                        PatchingSuccess(
-                            isInstalling = viewModel.isInstalling,
-                            installedPackageName = viewModel.installedPackageName,
-                            userCancelledInstall = userCancelledInstall
-                        )
-                    }
-                    else -> {
-                        // Patching failed
-                        PatchingFailed()
+                AnimatedContent(
+                    targetState = when {
+                        patcherSucceeded == null -> PatcherState.IN_PROGRESS
+                        patcherSucceeded == true -> PatcherState.SUCCESS
+                        else -> PatcherState.FAILED
+                    },
+                    transitionSpec = {
+                        fadeIn(animationSpec = tween(800)) togetherWith
+                                fadeOut(animationSpec = tween(800))
+                    },
+                    label = "patcher_state_animation"
+                ) { state ->
+                    when (state) {
+                        PatcherState.IN_PROGRESS -> {
+                            PatchingInProgress(
+                                progress = displayProgress,
+                                patchesProgress = patchesProgress,
+                                downloadProgress = viewModel.downloadProgress,
+                                viewModel = viewModel,
+                                showLongStepWarning = showLongStepWarning
+                            )
+                        }
+                        PatcherState.SUCCESS -> {
+                            PatchingSuccess(
+                                isInstalling = viewModel.isInstalling,
+                                installedPackageName = viewModel.installedPackageName,
+                                userCancelledInstall = userCancelledInstall
+                            )
+                        }
+                        PatcherState.FAILED -> {
+                            PatchingFailed()
+                        }
                     }
                 }
             }
@@ -641,7 +712,8 @@ private fun PatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
     downloadProgress: Pair<Long, Long?>? = null,
-    viewModel: PatcherViewModel
+    viewModel: PatcherViewModel,
+    showLongStepWarning: Boolean = false
 ) {
     val (completed, total) = patchesProgress
 
@@ -689,9 +761,9 @@ private fun PatchingInProgress(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp)
+                .height(150.dp) // Increased height
                 .padding(horizontal = 16.dp),
-            contentAlignment = Alignment.TopCenter
+            contentAlignment = Alignment.Center
         ) {
             AnimatedContent(
                 targetState = stringResource(currentMessage),
@@ -711,7 +783,7 @@ private fun PatchingInProgress(
             }
         }
 
-        Spacer(Modifier.height(48.dp))
+        Spacer(Modifier.height(32.dp))
 
         // Circular progress
         Box(
@@ -761,16 +833,49 @@ private fun PatchingInProgress(
             }
         }
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(24.dp))
 
-        // Fixed space for download progress bar and current step to prevent layout shifts
+        // Fixed space for long step warning, download progress bar and current step
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp),
+                .height(180.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            // Long step warning
+            AnimatedVisibility(
+                visible = showLongStepWarning,
+                enter = fadeIn(animationSpec = tween(500)) + expandVertically(animationSpec = tween(500)),
+                exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 32.dp, vertical = 8.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_patcher_long_step_warning),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            }
+
             // Download progress bar
             AnimatedVisibility(
                 visible = downloadProgress != null && !isDownloadComplete,
