@@ -13,6 +13,8 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -43,6 +45,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.core.math.MathUtils.clamp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.patcher.*
@@ -53,6 +56,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.exp
 
 /**
  * MorphePatcherScreen - Simplified patcher screen with progress tracking
@@ -74,69 +78,67 @@ fun MorphePatcherScreen(
     val state = rememberMorphePatcherState(viewModel)
 
     // Animated progress with dual-mode animation: slow crawl + fast catch-up
-    var displayProgress by rememberSaveable { mutableStateOf(0f) }
+    var displayProgress by remember { mutableStateOf(viewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
-    var currentStepStartTime by remember { mutableStateOf(0L) }
+
+    val displayProgressAnimate by animateFloatAsState(
+        targetValue = displayProgress,
+        animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
+        label = "progress_animation"
+    )
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
-        if (patcherSucceeded == null) {
-            currentStepStartTime = System.currentTimeMillis()
+        var lastCompletedStep  = 0
+        var currentStepStartTime = System.currentTimeMillis()
 
-            // Patching in progress - dual-mode animation
-            while (true) {
-                val actualProgress = viewModel.progress
+        while (patcherSucceeded == null) {
+            val now = System.currentTimeMillis()
 
-                // Check if actual progress jumped ahead significantly
-                val distanceToActual = actualProgress - displayProgress
+            val currentCompletedStep = viewModel.getCurrentStepIndex()
+            if (lastCompletedStep != currentCompletedStep) {
+                // New step!
+                lastCompletedStep = currentCompletedStep
+                currentStepStartTime = now
+                showLongStepWarning = false
+            }
 
-                // One tenth of 1%
-                val tenthPercentage = (1 / 10000f)
+            val timeUntilStepShowsBePatient = 40 * 1000 // 40 seconds
+            val timeSinceStepStarted = now - currentStepStartTime
+            if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
+                showLongStepWarning = true
+            }
 
-                if (distanceToActual > 0.01f) {
-                    // Step completed! Fast catch-up mode with smooth deceleration
-                    currentStepStartTime = System.currentTimeMillis()
-                    showLongStepWarning = false
-
-                    // Smoothly accelerate to catch up (creates excitement of progress spurts)
-                    val catchUpSpeed = when {
-                        distanceToActual > 0.1f -> 40 * tenthPercentage // Very fast: 4% per second
-                        distanceToActual > 0.05f -> 30 * tenthPercentage// Fast: 3% per second
-                        distanceToActual > 0.02f -> 20 * tenthPercentage// Medium: 2% per second
-                        else -> 1 * tenthPercentage // Slower: 0.1% per second
-                    }
-                    displayProgress += catchUpSpeed
-
-                    // Don't overshoot the actual progress
-                    if (displayProgress > actualProgress) {
-                        displayProgress = actualProgress
-                    }
-                } else {
-                    // Slow crawl mode (always present even when waiting)
-                    displayProgress += 0.15f * tenthPercentage + // 0.015% per second baseline crawl
-                            // Up to 0.01% variation of the crawl.
-                            (Math.random() * 0.05f * tenthPercentage).toFloat()
+            val actualProgress = viewModel.progress
+            if (actualProgress >= 0.98f) {
+                displayProgress = actualProgress
+            } else {
+                // Over estimate the progress by about 1% per second, but decays to
+                // adding smaller adjustments each second until the current step completes
+                fun overEstimateProgressAdjustment(secondsElapsed: Long): Float {
+                    // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
+                    // https://desmos.com/calculator/v4r2mslili
+                    val maximumValue = 10.0f // Up to 10% over correct
+                    val timeConstant = 20.0f // Larger value = longer time until plateau
+                    return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
                 }
 
-                // Check if current step is taking too long (more than 50 seconds)
-                val stepDuration = System.currentTimeMillis() - currentStepStartTime
-                if (stepDuration > 50000 && !showLongStepWarning) {
-                    showLongStepWarning = true
-                }
+                val secondsSinceStepStarted = timeSinceStepStarted / 1000
+                val overEstimatedProgress = actualProgress +  0.01f * overEstimateProgressAdjustment(
+                    secondsSinceStepStarted
+                )
 
-                // Never exceed 99% until actually complete
-                displayProgress = minOf(displayProgress, 0.99f)
+                // Don't allow rolling back the progress if it went over,
+                // and don't go over 98% unless the actual progress is that far
+                displayProgress = clamp(
+                    displayProgress,
+                    overEstimatedProgress,
+                    0.98f
+                )
+            }
 
-                delay(10) // Update every 10ms for smooth animation
-            }
-        } else {
-            // Patching finished - smoothly move to 100%
-            showLongStepWarning = false
-            while (displayProgress < 1f) {
-                displayProgress += 0.01f // Quick final animation
-                displayProgress = minOf(displayProgress, 1f)
-                delay(10)
-            }
+            // Update twice a second
+            delay(250)
         }
     }
 
@@ -473,7 +475,7 @@ fun MorphePatcherScreen(
                     when (patcherState) {
                         PatcherState.IN_PROGRESS -> {
                             PatchingInProgress(
-                                progress = displayProgress,
+                                progress = displayProgressAnimate,
                                 patchesProgress = patchesProgress,
                                 downloadProgress = viewModel.downloadProgress,
                                 viewModel = viewModel,
