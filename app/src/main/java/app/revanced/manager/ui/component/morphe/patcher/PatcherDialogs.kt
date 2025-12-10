@@ -1,0 +1,300 @@
+package app.revanced.manager.ui.component.morphe.patcher
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.FileDownload
+import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
+import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.home.MorpheDialog
+
+/**
+ * Cancel patching confirmation dialog
+ * Warns user about stopping patching process
+ */
+@Composable
+fun CancelPatchingDialog(
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    MorpheDialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Warning Icon
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.errorContainer,
+                modifier = Modifier.size(56.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Outlined.Warning,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onErrorContainer,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+            }
+
+            // Title
+            Text(
+                text = stringResource(R.string.patcher_stop_confirm_title),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+
+            // Description
+            Text(
+                text = stringResource(R.string.patcher_stop_confirm_description),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Buttons in one row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Stop button
+                Button(
+                    onClick = onConfirm,
+                    modifier = Modifier.weight(1f),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error,
+                        contentColor = MaterialTheme.colorScheme.onError
+                    )
+                ) {
+                    Text(stringResource(R.string.yes))
+                }
+
+                // Continue button
+                OutlinedButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(stringResource(R.string.no))
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Unified install dialog with state management
+ * Handles initial install, conflicts, ready to install, and errors
+ */
+@Composable
+fun InstallDialog(
+    state: InstallDialogState,
+    isWaitingForUninstall: Boolean,
+    errorMessage: String?,
+    isRootMode: Boolean,
+    onDismiss: () -> Unit,
+    onInstall: () -> Unit,
+    onUninstall: () -> Unit,
+    onCancel: () -> Unit
+) {
+    val installButtonText = if (isRootMode) R.string.mount else R.string.install_app
+    val installIcon = if (isRootMode) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
+
+    MorpheDialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Icon based on state
+            Surface(
+                shape = CircleShape,
+                color = when (state) {
+                    InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.errorContainer
+                    else -> MaterialTheme.colorScheme.primaryContainer
+                },
+                modifier = Modifier.size(56.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = when (state) {
+                            InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
+                            else -> installIcon
+                        },
+                        contentDescription = null,
+                        tint = when (state) {
+                            InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.onErrorContainer
+                            else -> MaterialTheme.colorScheme.onPrimaryContainer
+                        },
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+            }
+
+            // Title
+            Text(
+                text = stringResource(
+                    when (state) {
+                        InstallDialogState.ERROR -> R.string.install_app_fail_title
+                        else -> installButtonText
+                    }
+                ),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+
+            // Description or error message
+            if (state == InstallDialogState.ERROR && errorMessage != null) {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 300.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                ) {
+                    Box(
+                        modifier = Modifier.verticalScroll(rememberScrollState())
+                    ) {
+                        Text(
+                            text = errorMessage,
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            } else {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        text = stringResource(
+                            when (state) {
+                                InstallDialogState.INITIAL -> if (isRootMode)
+                                    R.string.morphe_patcher_mount_dialog_message
+                                else
+                                    R.string.morphe_patcher_install_dialog_message
+                                InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
+                                InstallDialogState.READY_TO_INSTALL -> if (isRootMode)
+                                    R.string.morphe_patcher_mount_ready_message
+                                else
+                                    R.string.morphe_patcher_install_ready_message
+                                InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message
+                            }
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Root mode warning
+                    if (isRootMode && state == InstallDialogState.INITIAL) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(
+                                    MaterialTheme.colorScheme.primaryContainer.copy(
+                                        alpha = 0.3f
+                                    )
+                                )
+                                .padding(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.morphe_root_gmscore_excluded),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Buttons in one row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Action button (Install/Mount or Uninstall)
+                when (state) {
+                    InstallDialogState.INITIAL, InstallDialogState.READY_TO_INSTALL -> {
+                        Button(
+                            onClick = onInstall,
+                            enabled = !isWaitingForUninstall,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                installIcon,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text(stringResource(installButtonText))
+                        }
+                    }
+                    InstallDialogState.CONFLICT, InstallDialogState.ERROR -> {
+                        Button(
+                            onClick = onUninstall,
+                            modifier = Modifier.weight(1f),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.error,
+                                contentColor = MaterialTheme.colorScheme.onError
+                            )
+                        ) {
+                            Icon(
+                                Icons.Default.Close,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text(stringResource(R.string.uninstall))
+                        }
+                    }
+                }
+
+                // Cancel button
+                OutlinedButton(
+                    onClick = onCancel,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        }
+    }
+}
