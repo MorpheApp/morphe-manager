@@ -32,7 +32,7 @@ import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
-import app.universal.revanced.manager.R
+import app.morphe.manager.R
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Brands
 import compose.icons.fontawesomeicons.brands.Github

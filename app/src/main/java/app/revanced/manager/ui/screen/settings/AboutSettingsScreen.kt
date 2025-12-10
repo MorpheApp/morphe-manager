@@ -38,8 +38,8 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
 import app.revanced.manager.util.openUrl
-import app.universal.revanced.manager.BuildConfig
-import app.universal.revanced.manager.R
+import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @OptIn(ExperimentalMaterial3Api::class)

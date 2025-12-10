@@ -50,8 +50,6 @@ import androidx.compose.material.icons.outlined.UnfoldLess
 import androidx.compose.material.icons.outlined.UnfoldMore
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material.icons.outlined.Save
-import androidx.compose.material.icons.outlined.Redo
-import androidx.compose.material.icons.outlined.Undo
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material.icons.outlined.SettingsBackupRestore
@@ -231,7 +229,6 @@ fun PatchesSelectorScreen(
     val patchLazyListStates = remember(bundles) { List(bundles.size) { LazyListState() } }
     val dialogsOpen = showBundleDialog || showProfileNameDialog
     var actionsExpanded by rememberSaveable { mutableStateOf(false) }
-    var shouldRestoreActions by rememberSaveable { mutableStateOf(false) }
     var showResetConfirmation by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(patchLazyListStates) {
         snapshotFlow { patchLazyListStates.any { it.isScrollInProgress } }
@@ -752,18 +749,18 @@ fun PatchesSelectorScreen(
 
                         val baseSpecs = orderedActionKeys.mapNotNull { key ->
                             when (key) {
-                                    PatchSelectionActionKey.UNDO -> PatchActionSpec(
-                                        key = key,
-                                        icon = Icons.AutoMirrored.Outlined.Undo,
+                                PatchSelectionActionKey.UNDO -> PatchActionSpec(
+                                    key = key,
+                                    icon = Icons.AutoMirrored.Outlined.Undo,
                                     contentDescription = R.string.patch_selection_button_label_undo_action,
                                     label = R.string.patch_selection_button_label_undo_action,
                                     enabled = viewModel.canUndo,
                                     onClick = viewModel::undoAction
                                 )
 
-                                    PatchSelectionActionKey.REDO -> PatchActionSpec(
-                                        key = key,
-                                        icon = Icons.AutoMirrored.Outlined.Redo,
+                                PatchSelectionActionKey.REDO -> PatchActionSpec(
+                                    key = key,
+                                    icon = Icons.AutoMirrored.Outlined.Redo,
                                     contentDescription = R.string.patch_selection_button_label_redo_action,
                                     label = R.string.patch_selection_button_label_redo_action,
                                     enabled = viewModel.canRedo,
@@ -810,11 +807,7 @@ fun PatchesSelectorScreen(
                                             onConfirm = viewModel::selectAll
                                         )
                                     }
-                                },
-                                enabled = bundles.isNotEmpty() && !warningEnabled,
-                                modifier = actionButtonModifier
-                            )
-                        }
+                                }
 
                                 PatchSelectionActionKey.DESELECT_BUNDLE -> PatchActionSpec(
                                     key = key,
@@ -856,11 +849,7 @@ fun PatchesSelectorScreen(
                                             onConfirm = viewModel::deselectAll
                                         )
                                     }
-                                },
-                                enabled = !warningEnabled,
-                                modifier = actionButtonModifier
-                            )
-                        }
+                                }
 
                                 PatchSelectionActionKey.BUNDLE_DEFAULTS -> PatchActionSpec(
                                     key = key,
@@ -898,10 +887,7 @@ fun PatchesSelectorScreen(
                                     } else {
                                         showResetConfirmation = true
                                     }
-                                },
-                                modifier = actionButtonModifier
-                            )
-                        }
+                                }
 
                                 PatchSelectionActionKey.SAVE_PROFILE -> PatchActionSpec(
                                     key = key,
@@ -1556,6 +1542,3 @@ private fun OptionsDialog(
         }
     }
 }
-
-
-
