@@ -117,8 +117,8 @@ fun MorphePatcherScreen(
                 // adding smaller adjustments each second until the current step completes
                 fun overEstimateProgressAdjustment(secondsElapsed: Long): Float {
                     // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
-                    // https://desmos.com/calculator/v4r2mslili
-                    val maximumValue = 10.0f // Up to 10% over correct
+                    // https://desmos.com/calculator/16p60zu48m
+                    val maximumValue = 15.0f // Up to 15% over correct
                     val timeConstant = 20.0f // Larger value = longer time until plateau
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
                 }
@@ -137,7 +137,7 @@ fun MorphePatcherScreen(
                 )
             }
 
-            // Update twice a second
+            // Update four times a second
             delay(250)
         }
     }
