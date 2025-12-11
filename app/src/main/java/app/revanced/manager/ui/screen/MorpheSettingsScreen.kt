@@ -6,15 +6,51 @@ import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.DeveloperMode
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Key
+import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Science
+import androidx.compose.material.icons.outlined.Security
+import androidx.compose.material.icons.outlined.Update
+import androidx.compose.material.icons.outlined.Upload
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,7 +64,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.settings.*
+import app.revanced.manager.ui.component.morphe.settings.AboutDialog
+import app.revanced.manager.ui.component.morphe.settings.AppearanceSection
+import app.revanced.manager.ui.component.morphe.settings.KeystoreCredentialsDialog
+import app.revanced.manager.ui.component.morphe.settings.PluginActionDialog
+import app.revanced.manager.ui.component.morphe.settings.PluginItem
+import app.revanced.manager.ui.component.morphe.settings.SettingsCard
+import app.revanced.manager.ui.component.morphe.settings.SettingsSectionHeader
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
@@ -202,7 +244,7 @@ fun MorpheSettingsScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     // Debugging Section (if root available)
-                    if (dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) == true) {
+                    if (dashboardViewModel.rootInstaller?.isDeviceRooted() == true) {
                         DebuggingSection(generalViewModel = generalViewModel)
                         Spacer(modifier = Modifier.height(16.dp))
                     }
@@ -271,7 +313,7 @@ fun MorpheSettingsScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // Debugging Section (if root available)
-                if (dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) == true) {
+                if (dashboardViewModel.rootInstaller?.isDeviceRooted() == true) {
                     DebuggingSection(generalViewModel = generalViewModel)
                     Spacer(modifier = Modifier.height(24.dp))
                 }
@@ -562,12 +604,11 @@ private fun DebuggingSection(
     val coroutineScope = rememberCoroutineScope()
     val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
 
-    if (generalViewModel.rootInstaller?.isDeviceRooted() /*requestRootAccessIfNotAskedYet(context)*/ == true) {
-        // Debugging Section
-        SectionHeader(
-            icon = Icons.Outlined.DeveloperMode,
-            title = stringResource(R.string.debugging)
-        )
+    // Debugging Section
+    SettingsSectionHeader(
+        icon = Icons.Outlined.DeveloperMode,
+        title = stringResource(R.string.debugging)
+    )
 
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {

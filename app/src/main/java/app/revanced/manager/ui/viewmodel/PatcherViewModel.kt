@@ -1706,40 +1706,42 @@ class PatcherViewModel(
             return listOfNotNull(
                 Step(
                     id = StepId.DOWNLOAD_APK,
-                    context.getString(R.string.download_apk),
-                    StepCategory.PREPARING,
+                    name = context.getString(R.string.download_apk),
+                    category = StepCategory.PREPARING,
                     state = State.RUNNING,
                     progressKey = ProgressKey.DOWNLOAD,
                 ).takeIf { needsDownload },
                 Step(
                     id = StepId.LOAD_PATCHES,
-                    context.getString(R.string.patcher_step_load_patches),
-                    StepCategory.PREPARING,
+                    name = context.getString(R.string.patcher_step_load_patches),
+                    category = StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
                     subSteps = 2
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
                 Step(
                     id = StepId.READ_APK,
-                    context.getString(R.string.patcher_step_unpack),
-                    StepCategory.PREPARING,
+                    name = context.getString(R.string.patcher_step_unpack),
+                    category = StepCategory.PREPARING,
                     subSteps = 2
                 ),
 
                 Step(
                     id = StepId.EXECUTE_PATCHES,
-                    context.getString(R.string.applying_patches),
-                    StepCategory.PATCHING
+                    name = context.getString(R.string.applying_patches),
+                    category = StepCategory.PATCHING
                 ),
 
                 Step(
-                    context.getString(R.string.patcher_step_write_patched),
-                    StepCategory.SAVING,
+                    id = StepId.WRITE_PATCHED_APK,
+                    name = context.getString(R.string.patcher_step_write_patched),
+                    category = StepCategory.SAVING,
                     subSteps = 4
                 ),
                 Step(
-                    context.getString(R.string.patcher_step_sign_apk),
-                    StepCategory.SAVING,
+                    id = StepId.SIGN_PATCHED_APK,
+                    name = context.getString(R.string.patcher_step_sign_apk),
+                    category = StepCategory.SAVING,
                     subSteps = 2
                 )
             )
