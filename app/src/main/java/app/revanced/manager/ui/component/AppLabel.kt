@@ -33,7 +33,14 @@ fun AppLabel(
 
     LaunchedEffect(packageInfo) {
         label = withContext(Dispatchers.IO) {
-            packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+            packageInfo?.applicationInfo?.loadLabel(context.packageManager)
+                ?.toString()
+                ?.let { raw ->
+                    val cleaned = cleanWeirdLabel(raw, packageInfo.packageName)
+                    cleaned.takeIf { it.isNotBlank() && cleaned != packageInfo.packageName }
+                }
+                ?: packageInfo?.applicationInfo?.nonLocalizedLabel?.toString()
+                ?.takeIf { it.isNotBlank() }
                 ?: defaultText
         }
     }
@@ -49,4 +56,19 @@ fun AppLabel(
             .then(modifier),
         style = style
     )
+}
+
+private fun cleanWeirdLabel(raw: String, packageName: String?): String {
+    val trimmed = raw.trim()
+    val pkg = packageName.orEmpty()
+    if (pkg.isNotEmpty() && (trimmed.startsWith(pkg) || trimmed.contains(pkg))) {
+        val candidate = trimmed.substringAfterLast('.')
+        val withoutSuffix = candidate.removeSuffix("Application")
+        return withoutSuffix.ifBlank { candidate }.ifBlank { trimmed }
+    }
+    if (trimmed.endsWith("Application")) {
+        val withoutSuffix = trimmed.removeSuffix("Application")
+        return withoutSuffix.substringAfterLast('.').ifBlank { withoutSuffix }
+    }
+    return trimmed
 }

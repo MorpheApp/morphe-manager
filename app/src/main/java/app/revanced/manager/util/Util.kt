@@ -66,8 +66,11 @@ fun Context.openUrl(url: String) {
     })
 }
 
+fun Context.toastHandle(string: String, duration: Int = Toast.LENGTH_SHORT): Toast =
+    Toast.makeText(this, string, duration).apply { show() }
+
 fun Context.toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, string, duration).show()
+    toastHandle(string, duration)
 }
 
 /**

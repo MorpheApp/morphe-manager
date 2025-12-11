@@ -69,6 +69,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        stripNativeLibs: Boolean,
     ) = coroutineScope {
         val minMemoryLimit = 200
         var memoryMB = max(minMemoryLimit, prefs.patcherProcessMemoryLimit.get())
@@ -83,6 +84,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     packageName,
                     selectedPatches,
                     options,
+                    stripNativeLibs,
                     logger,
                     onPatchCompleted,
                     onProgress
@@ -97,7 +99,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
                 }
-                
+
                 return@coroutineScope
             } catch (e: Exception) {
                 val isMemoryFailure = when (e) {
@@ -124,12 +126,22 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         packageName: String,
         selectedPatches: PatchSelection,
         options: Options,
+        stripNativeLibs: Boolean,
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
     ) = coroutineScope {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
+
+        if (false) { // Morphe begin. Memory limit is handled automatically
+        val requestedLimit = prefs.patcherProcessMemoryLimit.get()
+        val sanitizedLimit = MemoryLimitConfig.clampLimitMb(context, requestedLimit)
+        if (sanitizedLimit != requestedLimit) {
+            Log.w(tag, "Requested process memory limit ${requestedLimit}MB exceeded device capabilities; clamped to ${sanitizedLimit}MB")
+        }
+        val limit = "${sanitizedLimit}M"
+        } // Morphe end
 
         val propOverride = resolvePropOverride(context)?.absolutePath
             ?: throw Exception("Couldn't find prop override library")
@@ -214,7 +226,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                         selectedPatches[uid].orEmpty(),
                         options[uid].orEmpty()
                     )
-                }
+                },
+                stripNativeLibs = stripNativeLibs
             )
 
             binder.start(parameters, eventHandler)

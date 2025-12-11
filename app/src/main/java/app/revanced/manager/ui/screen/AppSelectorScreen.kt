@@ -74,7 +74,7 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.ui.viewmodel.BundleVersionSuggestion
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.consumeHorizontalScroll
 import app.revanced.manager.util.transparentListItemColors
@@ -87,6 +87,8 @@ fun AppSelectorScreen(
     onSelect: (String) -> Unit,
     onStorageSelect: (SelectedApp.Local) -> Unit,
     onBackClick: () -> Unit,
+    autoOpenStorage: Boolean = false,
+    returnToDashboardOnStorage: Boolean = false,
     vm: AppSelectorViewModel = koinViewModel()
 ) {
     val prefs = koinInject<PreferencesManager>()
@@ -96,12 +98,31 @@ fun AppSelectorScreen(
 
     EventEffect(flow = vm.storageSelectionFlow) {
         onStorageSelect(it)
+        if (returnToDashboardOnStorage) {
+            onBackClick()
+        }
     }
 
     val pickApkLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let(vm::handleStorageResult)
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) {
+                vm.handleStorageResult(uri)
+            } else if (returnToDashboardOnStorage) {
+                onBackClick()
+            }
         }
+    val quickStorageOnly = autoOpenStorage && returnToDashboardOnStorage
+    LaunchedEffect(autoOpenStorage) {
+        if (autoOpenStorage) {
+            pickApkLauncher.launch(APK_FILE_MIME_TYPES)
+        }
+    }
+
+    if (quickStorageOnly) {
+        // Skip rendering the selector UI; just trigger the picker and wait for result/back navigation.
+        androidx.compose.foundation.layout.Box(modifier = Modifier.fillMaxSize())
+        return
+    }
 
     val suggestedVersions by vm.suggestedAppVersions.collectAsStateWithLifecycle(emptyMap())
     val bundleSuggestionsByApp by vm.bundleSuggestionsByApp.collectAsStateWithLifecycle(emptyMap())
@@ -215,7 +236,7 @@ fun AppSelectorScreen(
             item {
                 ListItem(
                     modifier = Modifier.clickable {
-                        pickApkLauncher.launch(APK_MIMETYPE)
+                        pickApkLauncher.launch(APK_FILE_MIME_TYPES)
                     },
                     leadingContent = {
                         Box(Modifier.size(36.dp), Alignment.Center) {

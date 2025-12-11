@@ -562,10 +562,12 @@ private fun DebuggingSection(
     val coroutineScope = rememberCoroutineScope()
     val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
 
-    SettingsSectionHeader(
-        icon = Icons.Outlined.DeveloperMode,
-        title = stringResource(R.string.debugging)
-    )
+    if (generalViewModel.rootInstaller?.isDeviceRooted() /*requestRootAccessIfNotAskedYet(context)*/ == true) {
+        // Debugging Section
+        SectionHeader(
+            icon = Icons.Outlined.DeveloperMode,
+            title = stringResource(R.string.debugging)
+        )
 
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {
