@@ -651,15 +651,16 @@ fun InstalledAppInfoScreen(
                 SettingsListItem(
                     headlineContent = stringResource(R.string.install_type),
                     supportingContent = when (installedApp.installType) {
-            InstallType.MOUNT -> stringResource(R.string.install_type_mount_label)
-            InstallType.SHIZUKU -> stringResource(R.string.install_type_shizuku_label)
-            InstallType.DEFAULT, InstallType.CUSTOM -> when (viewModel.primaryInstallerToken) {
-                InstallerManager.Token.Internal -> stringResource(R.string.install_type_system_installer)
-                InstallerManager.Token.AutoSaved -> stringResource(R.string.install_type_mount_label)
-                is InstallerManager.Token.Component,
-                InstallerManager.Token.Shizuku,
-                InstallerManager.Token.None -> stringResource(R.string.install_type_custom_installer)
+                        InstallType.MOUNT -> stringResource(R.string.install_type_mount_label)
+                        InstallType.SHIZUKU -> stringResource(R.string.install_type_shizuku_label)
+                        InstallType.DEFAULT, InstallType.CUSTOM -> when (viewModel.primaryInstallerToken) {
+                            InstallerManager.Token.Internal -> stringResource(R.string.install_type_system_installer)
+                            InstallerManager.Token.AutoSaved -> stringResource(R.string.install_type_mount_label)
+                            is InstallerManager.Token.Component,
+                            InstallerManager.Token.Shizuku,
+                            InstallerManager.Token.None -> stringResource(R.string.install_type_custom_installer)
                         }
+
                         InstallType.SAVED -> stringResource(installedApp.installType.stringResource)
                     }
                 )
