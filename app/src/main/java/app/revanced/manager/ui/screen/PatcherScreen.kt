@@ -116,12 +116,9 @@ fun PatcherScreen(
 
     fun onPageBack() = when {
         patcherSucceeded == null -> showDismissConfirmationDialog = true
-        // FIXME: ORIGINAL CHANGES
-        viewModel.isInstalling -> context.toast(context.getString(R.string.patcher_install_in_progress))
-        // FIXME END
-        // FIXME: UPSTREAM
+        // FIXME? ORIGINAL CHANGES
+//        viewModel.isInstalling -> context.toast(context.getString(R.string.patcher_install_in_progress))
         viewModel.isInstalling -> showInstallInProgressDialog = true
-        // FIXME END
         patcherSucceeded == true && viewModel.installedPackageName == null && !viewModel.hasSavedPatchedApp -> showSavePatchedAppDialog = true
         else -> onLeave()
     }
@@ -332,7 +329,6 @@ fun PatcherScreen(
             }
 
             is PatcherViewModel.InstallCompletionStatus.Success -> {
-                // FIXME UPSTREAM
                 AlertDialog(
                     onDismissRequest = viewModel::clearInstallStatus,
                     confirmButton = {
@@ -345,25 +341,15 @@ fun PatcherScreen(
                         status.packageName?.let { Text(text = it) }
                     }
                 )
-                // FIXME END
-
-                // FIXME ORIGNAL
-                LaunchedEffect(status) {
-                    viewModel.clearInstallStatus()
-                }
-                // FIXME END
             }
 
             is PatcherViewModel.InstallCompletionStatus.Failure -> {
-                // FIXME UPSTREAM
                 if (viewModel.shouldSuppressInstallFailureDialog()) {
                     viewModel.dismissInstallFailureMessage()
                     viewModel.clearInstallStatus()
                     return@let
                 }
-                // FIXME END
-
-                if (viewModel.installFailureMessage == null) {
+                if (!viewModel.shouldSuppressInstallFailureDialog() && viewModel.installFailureMessage == null) {
                     AlertDialog(
                         onDismissRequest = viewModel::dismissInstallFailureMessage,
                         title = {
