@@ -583,12 +583,6 @@ fun DashboardScreen(
                                 showOrderDialog = showBundleOrderDialog,
                                 onDismissOrderDialog = { showBundleOrderDialog = false },
                                 onScrollStateChange = {}
-                                // FIXME: ORIGINAL
-//                                onScrollStateChange = { isScrolling ->
-//                                    if (pagerState.currentPage == DashboardPage.BUNDLES.ordinal) {
-//                                        isBundleListScrolling = isScrolling
-//                                    }
-//                                }
                             )
                         }
 
