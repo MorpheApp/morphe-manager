@@ -553,14 +553,25 @@ class PatcherViewModel(
     }
     private var currentStepIndex = 0
 
+    /**
+     * [0, 1.0] progress value
+     */
     val progress by derivedStateOf {
-        val current = steps.count {
-            it.state == State.COMPLETED && it.category != StepCategory.PATCHING
-        } + completedPatchCount
+        val currentStepIndex = getCurrentStepIndex()
+        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
 
-        val total = steps.size - 1 + patchCount
+        currentStepIndex.toFloat() / total.toFloat()
+    }
 
-        current.toFloat() / total.toFloat()
+    fun getCurrentStepIndex() : Int {
+        return (steps.sumOf {
+            // FIXME: Use step substep to track progress of individual patches.
+            if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
+                it.subSteps.toLong()
+            } else {
+                0L
+            }
+        } + completedPatchCount).toInt()
     }
 
     private val workManager = WorkManager.getInstance(app)
@@ -1695,42 +1706,43 @@ class PatcherViewModel(
             return listOfNotNull(
                 Step(
                     id = StepId.DOWNLOAD_APK,
-                    context.getString(R.string.download_apk),
-                    StepCategory.PREPARING,
+                    name = context.getString(R.string.download_apk),
+                    category = StepCategory.PREPARING,
                     state = State.RUNNING,
                     progressKey = ProgressKey.DOWNLOAD,
                 ).takeIf { needsDownload },
                 Step(
                     id = StepId.LOAD_PATCHES,
-                    context.getString(R.string.patcher_step_load_patches),
-                    StepCategory.PREPARING,
+                    name = context.getString(R.string.patcher_step_load_patches),
+                    category = StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
-                    subSteps = 2 // Morphe change
+                    subSteps = 2
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
                 Step(
                     id = StepId.READ_APK,
-                    context.getString(R.string.patcher_step_unpack),
-                    StepCategory.PREPARING
+                    name = context.getString(R.string.patcher_step_unpack),
+                    category = StepCategory.PREPARING,
+                    subSteps = 2
                 ),
 
                 Step(
                     id = StepId.EXECUTE_PATCHES,
-                    context.getString(R.string.applying_patches),
-                    StepCategory.PATCHING
+                    name = context.getString(R.string.applying_patches),
+                    category = StepCategory.PATCHING
                 ),
 
                 Step(
                     id = StepId.WRITE_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_write_patched),
                     category = StepCategory.SAVING,
-                    subSteps = 4 // Morphe change
+                    subSteps = 4
                 ),
                 Step(
                     id = StepId.SIGN_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_sign_apk),
                     category = StepCategory.SAVING,
-                    subSteps = 2 // Morphe change
+                    subSteps = 2
                 )
             )
         }
