@@ -2,6 +2,7 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -67,6 +68,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
+import java.security.MessageDigest
 
 /**
  * Morphe Settings Screen
@@ -468,102 +470,87 @@ fun MorpheSettingsScreen(
                     // Theme Color Presets
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    val isSystemInDarkTheme = isSystemInDarkTheme()
-                    val isDarkTheme = when (theme) {
-                        Theme.LIGHT -> false
-                        Theme.DARK -> true
-                        Theme.SYSTEM -> isSystemInDarkTheme
-                    }
+                    Column {
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    LaunchedEffect(isDarkTheme) {
-                        if (isDarkTheme && customThemeColorHex.toColorOrNull() != null) {
-                            generalViewModel.setCustomThemeColor(null)
-                        }
-                    }
+                        Text(
+                            text = stringResource(R.string.theme_color),
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
 
-                    AnimatedVisibility(visible = !isDarkTheme) {
-                        Column {
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            Text(
-                                text = stringResource(R.string.theme_color),
-                                style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.padding(bottom = 8.dp)
+                        val themePresets = remember {
+                            listOf(
+                                Color(0xFF1C1B1F),
+                                Color(0xFF2D2A32),
+                                Color(0xFF1A1A2E),
+                                Color(0xFF0F0F1E),
+                                Color(0xFF16213E),
+                                Color(0xFF1F1B24),
+                                Color(0xFF0A1929),
+                                Color(0xFF1B1B2F),
+                                Color(0xFF162447),
+                                Color(0xFF1F1D2B),
+                                Color(0xFF2C2C54),
+                                Color(0xFF1E1E2E)
                             )
+                        }
 
-                            val themePresets = remember {
-                                listOf(
-                                    Color(0xFF1C1B1F),
-                                    Color(0xFF2D2A32),
-                                    Color(0xFF1A1A2E),
-                                    Color(0xFF0F0F1E),
-                                    Color(0xFF16213E),
-                                    Color(0xFF1F1B24),
-                                    Color(0xFF0A1929),
-                                    Color(0xFF1B1B2F),
-                                    Color(0xFF162447),
-                                    Color(0xFF1F1D2B),
-                                    Color(0xFF2C2C54),
-                                    Color(0xFF1E1E2E)
+                        val selectedThemeArgb = customThemeColorHex.toColorOrNull()?.toArgb()
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            // Кнопка скидання
+                            Box(
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .border(
+                                        width = if (selectedThemeArgb == null) 2.dp else 1.dp,
+                                        color = if (selectedThemeArgb == null)
+                                            MaterialTheme.colorScheme.primary
+                                        else
+                                            MaterialTheme.colorScheme.outline,
+                                        shape = RoundedCornerShape(14.dp)
+                                    )
+                                    .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                                    .clickable {
+                                        generalViewModel.setCustomThemeColor(null)
+                                    },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Close,
+                                    contentDescription = "Reset",
+                                    modifier = Modifier.size(20.dp),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
 
-                            val selectedThemeArgb = customThemeColorHex.toColorOrNull()?.toArgb()
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .horizontalScroll(rememberScrollState()),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
-                            ) {
-                                // Кнопка скидання
+                            themePresets.forEach { preset ->
+                                val isSelected = selectedThemeArgb != null && preset.toArgb() == selectedThemeArgb
                                 Box(
                                     modifier = Modifier
                                         .size(40.dp)
                                         .clip(RoundedCornerShape(14.dp))
                                         .border(
-                                            width = if (selectedThemeArgb == null) 2.dp else 1.dp,
-                                            color = if (selectedThemeArgb == null)
+                                            width = if (isSelected) 2.dp else 1.dp,
+                                            color = if (isSelected)
                                                 MaterialTheme.colorScheme.primary
                                             else
                                                 MaterialTheme.colorScheme.outline,
                                             shape = RoundedCornerShape(14.dp)
                                         )
-                                        .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                                        .background(preset, RoundedCornerShape(12.dp))
                                         .clickable {
-                                            generalViewModel.setCustomThemeColor(null)
-                                        },
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Close,
-                                        contentDescription = "Reset",
-                                        modifier = Modifier.size(20.dp),
-                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-
-                                themePresets.forEach { preset ->
-                                    val isSelected = selectedThemeArgb != null && preset.toArgb() == selectedThemeArgb
-                                    Box(
-                                        modifier = Modifier
-                                            .size(40.dp)
-                                            .clip(RoundedCornerShape(14.dp))
-                                            .border(
-                                                width = if (isSelected) 2.dp else 1.dp,
-                                                color = if (isSelected)
-                                                    MaterialTheme.colorScheme.primary
-                                                else
-                                                    MaterialTheme.colorScheme.outline,
-                                                shape = RoundedCornerShape(14.dp)
-                                            )
-                                            .background(preset, RoundedCornerShape(12.dp))
-                                            .clickable {
-                                                generalViewModel.setCustomThemeColor(preset)
-                                            }
-                                    )
-                                }
+                                            generalViewModel.setCustomThemeColor(preset)
+                                        }
+                                )
                             }
                         }
                     }
@@ -887,9 +874,9 @@ fun MorpheSettingsScreen(
                         }
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(24.dp))
+            }
 
             // About Section
             SectionHeader(
@@ -1230,11 +1217,11 @@ private fun PluginActionDialog(
         runCatching {
             val androidSignature = pm.getPackageInfo(
                 packageName,
-                android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES
+                PackageManager.GET_SIGNING_CERTIFICATES
             ).signingInfo?.apkContentsSigners?.firstOrNull()
 
             if (androidSignature != null) {
-                val hash = java.security.MessageDigest.getInstance("SHA-256")
+                val hash = MessageDigest.getInstance("SHA-256")
                     .digest(androidSignature.toByteArray())
                 hash.joinToString(":") { "%02X".format(it) }
             } else {

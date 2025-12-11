@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Java
         id: setup-java
@@ -27,24 +25,21 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set Gradle Java Home
-        run: echo "ORG_GRADLE_JAVA_HOME=${{ steps.setup-java.outputs.path }}" >> "$GITHUB_ENV"
-
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
 
       - name: Setup keystore
         run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > "app/keystore.jks"
+          echo "${{ secrets.KEYSTORE_B64 }}" | base64 -d > app/keystore.jks
 
-      - name: Build release
+      - name: Build
         env:
           GPR_USER: ${{ secrets.GPR_USER }}
           GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
-        run: ./gradlew -Dorg.gradle.java.home="${{ steps.setup-java.outputs.path }}" --no-daemon assembleRelease -Pgpr.user=${{ env.GPR_USER }} -Pgpr.key=${{ env.GPR_TOKEN }}
+        run: ./gradlew --no-daemon assembleRelease -Pgpr.user=${{ env.GPR_USER }} -Pgpr.key=${{ env.GPR_TOKEN }}
 
 #        env:
 #          GITHUB_ACTOR: ${{ github.actor }}
@@ -54,17 +49,6 @@ jobs:
 #          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 #        run: |
 #          ./gradlew -Dorg.gradle.java.home="${{ steps.setup-java.outputs.path }}" --no-daemon assembleRelease
-
-      - name: Locate release artifact
-        id: artifact
-        run: |
-          APK_PATH="$(ls -t app/build/outputs/apk/release/*.apk 2>/dev/null | head -n 1)"
-          if [ -z "$APK_PATH" ]; then
-            echo "Unable to find release APK in app/build/outputs/apk/release"
-            exit 1
-          fi
-          echo "apk_path=$APK_PATH" >> "$GITHUB_OUTPUT"
-          echo "Found APK at $APK_PATH"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -85,70 +69,23 @@ jobs:
       - name: Release API
         run: npx multi-semantic-release --tag-format 'api@${version}' --ignore-packages app
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract release notes
-        id: changelog
-        run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const p = 'api/CHANGELOG.md';
-          if (!fs.existsSync(p)) throw new Error(`Changelog not found at ${p}`);
-          const lines = fs.readFileSync(p, 'utf8').split(/\r?\n/);
-          const section = [];
-          for (let i = 0; i < lines.length; i += 1) {
-            const line = lines[i];
-            if (i > 0 && /^#\s*v/i.test(line)) break;
-            section.push(line);
-          }
-          const content = section.join('\n').replace(/\s+$/, '');
-          if (!content.trim()) throw new Error('No release notes content extracted from changelog.');
-          const header = section.find((l) => /^#\s*v/i.test(l));
-          if (!header) throw new Error('Failed to locate version header in changelog.');
-          const m = header.match(/^#\s*(v[0-9]+\.[0-9]+\.[0-9]+)/i);
-          if (!m) throw new Error(`Unable to parse version from changelog header: "${header}"`);
-          const version = m[1];
-          fs.writeFileSync('release_notes.md', `${content}\n`, 'utf8');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `version=${version}\n`);
-          NODE
+          GITHUB_ACTOR: ${{ secrets.GPR_USER }}
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
 
       - name: Release
         id: release
-        env:
-          VERSION: ${{ steps.changelog.outputs.version }}
         run: |
-          if [ -z "${VERSION}" ]; then
-            echo "Version extracted from changelog is empty."
-            exit 1
-          fi
-          echo "NEW_TAG=${VERSION}" >> "$GITHUB_OUTPUT"
-
-      - name: Name GitHub Release
-        if: steps.release.outputs.NEW_TAG != ''
+          echo "NEW_TAG=$(npx multi-semantic-release --tag-format 'v${version}' --ignore-packages api | tee | grep 'Created tag ' | sed -E 's/.*Created tag ([^ ]+).*/\1/')" >> $GITHUB_OUTPUT
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.release.outputs.NEW_TAG }}
-          APK_PATH: ${{ steps.artifact.outputs.apk_path }}
-        run: |
-          if ! gh release view "$TAG" >/dev/null 2>&1; then
-            gh release create "$TAG" "$APK_PATH" --title "Universal ReVanced Manager $TAG" --notes-file release_notes.md
-          else
-            gh release edit "$TAG" --title "Universal ReVanced Manager $TAG" --notes-file release_notes.md
-          fi
+          GITHUB_ACTOR: ${{ secrets.GPR_USER }}
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
+          KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 
-      - name: Upload APK asset
-        if: steps.release.outputs.NEW_TAG != ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.release.outputs.NEW_TAG }}
-          APK_PATH: ${{ steps.artifact.outputs.apk_path }}
-        run: |
-          gh release upload "$TAG" "$APK_PATH" --clobber
-
-      - name: Attest
-        if: steps.release.outputs.NEW_TAG != ''
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: Universal ReVanced Manager ${{ steps.release.outputs.NEW_TAG }}
-          subject-path: ${{ steps.artifact.outputs.apk_path }}
+#      - name: Attest
+#        if: steps.semantic.outputs.new_release_published == 'true'
+#        uses: actions/attest-build-provenance@v2
+#        with:
+#          subject-name: 'Morphe Manager ${{ steps.release.outputs.new_release_git_tag }}'
+#          subject-path: app/build/outputs/apk/release/morphe-manager*.apk

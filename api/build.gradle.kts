@@ -63,7 +63,7 @@ publishing {
             name = "GitHubPackages"
             // Publish to the current GitHub repository packages by default.
             // Fallback keeps local publishing possible when the env var is absent.
-            val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "Jman-Github/Universal-ReVanced-Manager"
+            val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "MorpheApp/morphe-manager"
             url = uri("https://maven.pkg.github.com/$ghRepo")
             credentials {
                 // Priority: hardcoded fallback -> environment -> Gradle properties
@@ -112,7 +112,7 @@ publishing {
                 }
                 scm {
                     // FIXME
-                    val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "Jman-Github/Universal-ReVanced-Manager"
+                    val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "MorpheApp/morphe-manager"
                     connection = "scm:git:git://github.com/$ghRepo.git"
                     developerConnection = "scm:git:git@github.com:$ghRepo.git"
                     url = "https://github.com/$ghRepo"

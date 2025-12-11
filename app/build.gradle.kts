@@ -14,7 +14,7 @@ plugins {
     signing
 }
 
-val outputApkFileName = "morphe-manager-$version.apk"
+val outputApkFileName = "${rootProject.name}-$version.apk"
 
 val arscLib by configurations.creating
 

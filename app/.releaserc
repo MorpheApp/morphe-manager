@@ -16,15 +16,34 @@
       }
     ],
     "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "gradle-semantic-release-plugin",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "gradle.properties"
+        ],
+        "message": "chore: Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
     [
       "@semantic-release/github",
       {
         "assets": [
           {
-            "path": "build/outputs/apk/release/universal-revanced-manager*.apk?(.asc)"
+            "path": "build/outputs/apk/release/morphe-manager*.apk?(.asc)"
           }
         ],
         "successComment": false
+      }
+    ],
+    [
+      "@saithodev/semantic-release-backmerge",
+      {
+        "backmergeBranches": [{"from": "main", "to": "dev"}],
+        "clearWorkspace": true
       }
     ]
   ]
