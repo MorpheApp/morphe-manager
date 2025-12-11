@@ -11,6 +11,16 @@ enum class StepCategory(@StringRes val displayName: Int) {
     SAVING(R.string.patcher_step_group_saving)
 }
 
+enum class StepId {
+    DOWNLOAD_APK,
+    LOAD_PATCHES,
+    PREPARE_SPLIT_APK,
+    READ_APK,
+    EXECUTE_PATCHES,
+    WRITE_PATCHED_APK,
+    SIGN_PATCHED_APK
+}
+
 enum class State {
     WAITING, RUNNING, FAILED, COMPLETED
 }
@@ -25,6 +35,7 @@ interface StepProgressProvider {
 
 @Parcelize
 data class Step(
+    val id: StepId,
     val name: String,
     val category: StepCategory,
     val state: State = State.WAITING,

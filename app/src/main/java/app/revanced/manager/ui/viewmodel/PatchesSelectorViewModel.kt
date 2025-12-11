@@ -27,6 +27,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.DuplicatePatchProfileNameException
 import app.revanced.manager.domain.repository.PatchProfileRepository
 import app.revanced.manager.domain.repository.remapLocalBundles
+import app.revanced.manager.domain.repository.DownloadedAppRepository
 import app.revanced.manager.patcher.patch.Option
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -51,18 +52,20 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import kotlin.collections.ArrayDeque
 
-@OptIn(SavedStateHandleSaveableApi::class)
+@OptIn(SavedStateHandleSaveableApi::class, kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.ViewModelParams) :
     ViewModel(), KoinComponent {
     private val app: Application = get()
@@ -73,7 +76,16 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
     private val patchProfileRepository: PatchProfileRepository = get()
 
     private val packageName = input.app.packageName
-    val appVersion = input.app.version
+    private val downloadedAppRepository: DownloadedAppRepository = get()
+    private val preferredBundleUid = input.preferredBundleUid
+    private val preferredBundleOverride = input.preferredBundleOverride?.takeUnless { it.isNullOrBlank() }
+    private val preferredBundleTargetsAllVersions = input.preferredBundleTargetsAllVersions
+    private val preferredBundleVersion = input.preferredBundleVersion?.takeUnless { it.isNullOrBlank() }
+    private val preferredAppVersionHint = input.preferredAppVersion?.takeUnless { it.isBlank() }
+    private var appVersion: String? = null
+    private val appVersionState = MutableStateFlow<String?>(null)
+    val currentAppVersion: String?
+        get() = appVersion
     private var currentBundles: List<PatchBundleInfo.Scoped> = emptyList()
 
     var selectionWarningEnabled by mutableStateOf(true)
@@ -86,10 +98,11 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
     private val suggestedVersionSafeguardEnabled = prefs.suggestedVersionSafeguard.getBlocking()
     private val allowUniversalPatchesFlow = prefs.disableUniversalPatchCheck.flow
     val bundlesFlow =
-        patchBundleRepository.scopedBundleInfoFlow(packageName, input.app.version)
-            .combine(allowUniversalPatchesFlow) { bundles, allowUniversal ->
-                if (allowUniversal) bundles else bundles.map(PatchBundleInfo.Scoped::withoutUniversalPatches)
-            }
+        appVersionState.flatMapLatest { version ->
+            patchBundleRepository.scopedBundleInfoFlow(packageName, version)
+        }.combine(allowUniversalPatchesFlow) { bundles, allowUniversal ->
+            if (allowUniversal) bundles else bundles.map(PatchBundleInfo.Scoped::withoutUniversalPatches)
+        }
     val bundleDisplayNames =
         patchBundleRepository.sources.map { sources ->
             sources.associate { source ->
@@ -149,6 +162,12 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         }
 
     init {
+        setAppVersion(
+            input.app.version?.takeUnless { it.isBlank() }
+                ?: preferredBundleOverride
+                ?: preferredBundleVersion
+                ?: preferredAppVersionHint
+        )
         viewModelScope.launch {
             prefs.disablePatchVersionCompatCheck.flow
                 .distinctUntilChanged()
@@ -269,6 +288,11 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         bundle.patchSequence(allowIncompatiblePatches).any { patch ->
             isSelected(bundle.uid, patch)
         }
+    }
+
+    fun bundleHasSelection(bundleUid: Int): Boolean {
+        customPatchSelection?.get(bundleUid)?.let { return it.isNotEmpty() }
+        return customPatchSelection == null && (currentDefaultSelection[bundleUid]?.isNotEmpty() == true)
     }
 
     fun isSelected(bundle: Int, patch: PatchInfo): Boolean {
@@ -505,12 +529,70 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         }
     }
 
+    private suspend fun resolveAppVersion(
+        selectedBundles: Set<Int>,
+        keepExistingVersion: Boolean = false,
+        existingProfileVersion: String? = null
+    ): String? {
+        if (keepExistingVersion) {
+            // Honor the profile's stored version, including "all versions" (null).
+            return existingProfileVersion
+        }
+
+        val existing = appVersion?.takeUnless { it.isBlank() }
+        if (existing != null) return existing
+
+        downloadedAppRepository.getLatest(packageName)?.version?.takeUnless { it.isNullOrBlank() }?.let {
+            setAppVersion(it)
+            return it
+        }
+
+        if (preferredBundleUid != null && preferredBundleUid in selectedBundles) {
+            if (preferredBundleTargetsAllVersions) return null
+            preferredBundleOverride?.let { override ->
+                appVersion = override
+                return override
+            }
+            preferredBundleVersion?.let { version ->
+                appVersion = version
+                return version
+            }
+            val suggestedForPreferred =
+                patchBundleRepository.suggestedVersionsByBundle.first()[preferredBundleUid]?.get(packageName)
+            if (!suggestedForPreferred.isNullOrBlank()) {
+                setAppVersion(suggestedForPreferred)
+                return suggestedForPreferred
+            }
+        }
+
+        val preferred = preferredAppVersionHint?.takeUnless { it.isBlank() }
+        if (preferred != null) return preferred
+
+        val suggestedByBundle = patchBundleRepository.suggestedVersionsByBundle.first()
+        val suggested = selectedBundles.firstNotNullOfOrNull { bundleUid ->
+            suggestedByBundle[bundleUid]?.get(packageName)
+        } ?: preferredBundleVersion ?: patchBundleRepository.suggestedVersions.first()[packageName]
+
+        return suggested?.takeUnless { it.isBlank() }?.also { resolved ->
+            setAppVersion(resolved)
+        }
+    }
+
     suspend fun savePatchProfile(
         name: String,
         selectedBundles: Set<Int>,
-        existingProfileId: Int?
+        existingProfileId: Int?,
+        overrideAppVersion: String? = null,
+        keepExistingProfileVersion: Boolean = false,
+        existingProfileVersion: String? = null
     ): Boolean {
         if (selectedBundles.isEmpty()) return false
+        val resolvedAppVersion = overrideAppVersion
+            ?: resolveAppVersion(
+                selectedBundles,
+                keepExistingVersion = keepExistingProfileVersion,
+                existingProfileVersion = existingProfileVersion
+            )
         val selection = (customPatchSelection ?: currentDefaultSelection).toPatchSelection()
         val options = getOptions()
         val displayNames = bundleDisplayNames.first()
@@ -523,10 +605,11 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
             PatchProfilePayload.Bundle(
                 bundleUid = bundleUid,
                 patches = patches,
-                options = serializedOptions,
+                options = serializedOptions.values,
                 displayName = displayNames[bundleUid],
                 sourceEndpoint = endpoints[bundleUid],
-                sourceName = identifiers[bundleUid]
+                sourceName = identifiers[bundleUid],
+                optionDisplayInfo = serializedOptions.displayInfo
             )
         }
 
@@ -536,7 +619,7 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
                 val updated = patchProfileRepository.updateProfile(
                     uid = existingProfileId,
                     packageName = packageName,
-                    appVersion = appVersion,
+                    appVersion = resolvedAppVersion,
                     name = name,
                     payload = payload
                 )
@@ -545,7 +628,7 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
                 } else {
                     patchProfileRepository.createProfile(
                         packageName = packageName,
-                        appVersion = appVersion,
+                        appVersion = resolvedAppVersion,
                         name = name,
                         payload = payload
                     )
@@ -554,7 +637,7 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
             } else {
                 patchProfileRepository.createProfile(
                     packageName = packageName,
-                    appVersion = appVersion,
+                    appVersion = resolvedAppVersion,
                     name = name,
                     payload = payload
                 )
@@ -571,21 +654,37 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         }
     }
 
+    suspend fun previewResolvedAppVersion(selectedBundles: Set<Int>): String? =
+        resolveAppVersion(selectedBundles)
+
+    private data class SerializedOptions(
+        val values: Map<String, Map<String, StoredOption.SerializedValue>>,
+        val displayInfo: Map<String, Map<String, PatchProfilePayload.OptionDisplayInfo>>
+    )
+
     private fun serializeOptions(
         bundleUid: Int,
         selectedPatches: Set<String>,
         options: Options
-    ): Map<String, Map<String, StoredOption.SerializedValue>> {
-        val bundleOptions = options[bundleUid] ?: return emptyMap()
+    ): SerializedOptions {
+        val bundleOptions = options[bundleUid] ?: return SerializedOptions(emptyMap(), emptyMap())
         val serializedOptions = mutableMapOf<String, MutableMap<String, StoredOption.SerializedValue>>()
+        val displayInfo = mutableMapOf<String, MutableMap<String, PatchProfilePayload.OptionDisplayInfo>>()
+        val bundleMetadata = currentBundles.firstOrNull { it.uid == bundleUid }
+        val optionMetadataByPatch = bundleMetadata?.patches?.associateBy { it.name } ?: emptyMap()
 
         bundleOptions.forEach { (patchName, optionValues) ->
             if (selectedPatches.isNotEmpty() && patchName !in selectedPatches) return@forEach
             val serializedForPatch = mutableMapOf<String, StoredOption.SerializedValue>()
+            val displayInfoForPatch = mutableMapOf<String, PatchProfilePayload.OptionDisplayInfo>()
+            val optionMetadata = optionMetadataByPatch[patchName]?.options?.associateBy { it.key } ?: emptyMap()
 
             optionValues.forEach { (key, value) ->
                 try {
                     serializedForPatch[key] = StoredOption.SerializedValue.fromValue(value)
+                    val label = optionMetadata[key]?.title ?: key
+                    val displayValue = formatDisplayValue(value)
+                    displayInfoForPatch[key] = PatchProfilePayload.OptionDisplayInfo(label, displayValue)
                 } catch (e: StoredOption.SerializationException) {
                     Log.w(
                         tag,
@@ -597,10 +696,31 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
 
             if (serializedForPatch.isNotEmpty()) {
                 serializedOptions[patchName] = serializedForPatch
+                if (displayInfoForPatch.isNotEmpty()) {
+                    displayInfo[patchName] = displayInfoForPatch
+                }
             }
         }
 
-        return serializedOptions.mapValues { entry -> entry.value.toMap() }
+        return SerializedOptions(
+            values = serializedOptions.mapValues { entry -> entry.value.toMap() },
+            displayInfo = displayInfo.mapValues { entry -> entry.value.toMap() }
+        )
+    }
+
+    private fun formatDisplayValue(value: Any?): String = when (value) {
+        null -> ""
+        is Boolean, is Number -> value.toString()
+        is String -> value
+        is List<*> -> value.joinToString(", ", prefix = "[", postfix = "]")
+        else -> value.toString()
+    }
+
+    private fun setAppVersion(value: String?) {
+        val normalized = value?.takeUnless { it.isBlank() }
+        if (normalized == appVersion) return
+        appVersion = normalized
+        appVersionState.value = normalized
     }
 
     fun dismissDialogs() {

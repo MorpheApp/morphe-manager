@@ -4,6 +4,7 @@ import android.content.Context
 import app.revanced.manager.patcher.Session
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.patch.PatchBundle
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.worker.ProgressEventHandler
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.util.Options
@@ -23,6 +24,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         logger: Logger,
         onPatchCompleted: suspend () -> Unit,
         onProgress: ProgressEventHandler,
+        stripNativeLibs: Boolean,
     ) {
         val selectedBundles = selectedPatches.keys
         val bundles = bundles()
@@ -51,20 +53,34 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
 
         onProgress(null, State.COMPLETED, null) // Loading patches
 
-        Session(
-            cacheDir,
-            frameworkPath,
-            aaptPath,
-            context,
-            logger,
+        val preparation = SplitApkPreparer.prepareIfNeeded(
             File(inputFile),
-            onPatchCompleted = onPatchCompleted,
-            onProgress
-        ).use { session ->
-            session.run(
-                File(outputFile),
-                patchList
-            )
+            File(cacheDir),
+            logger,
+            stripNativeLibs
+        )
+        try {
+            if (preparation.merged) {
+                onProgress(null, State.COMPLETED, null)
+            }
+
+            Session(
+                cacheDir,
+                frameworkPath,
+                aaptPath,
+                context,
+                logger,
+                preparation.file,
+                onPatchCompleted = onPatchCompleted,
+                onProgress
+            ).use { session ->
+                session.run(
+                    File(outputFile),
+                    patchList
+                )
+            }
+        } finally {
+            preparation.cleanup()
         }
     }
 }

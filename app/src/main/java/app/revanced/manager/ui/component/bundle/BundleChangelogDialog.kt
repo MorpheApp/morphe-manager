@@ -196,9 +196,9 @@ private fun BundleChangelogContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Changelog(
-                markdown = markdown.ifBlank {
+                markdown = if (markdown.isBlank()) {
                     stringResource(R.string.bundle_changelog_empty)
-                },
+                } else markdown,
                 version = asset.version,
                 publishDate = publishDate
             )

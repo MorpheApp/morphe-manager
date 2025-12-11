@@ -1,20 +1,29 @@
 package app.revanced.manager.domain.bundles
 
 import app.revanced.manager.data.redux.ActionContext
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.network.dto.ReVancedAsset
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.getOrThrow
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.request.header
+import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
+import io.ktor.client.statement.bodyAsChannel
+import io.ktor.utils.io.jvm.javaio.toInputStream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
+import java.util.zip.ZipInputStream
 
 data class PatchBundleDownloadResult(
     val versionSignature: String,
@@ -53,7 +62,8 @@ sealed class RemotePatchBundle(
         updatedAt: Long?
     ): RemotePatchBundle = copy(error, name, displayName, createdAt, updatedAt, this.autoUpdate)
 
-    private suspend fun download(info: ReVancedAsset) = withContext(Dispatchers.IO) {
+    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+    protected open suspend fun download(info: ReVancedAsset) = withContext(Dispatchers.IO) {
         patchBundleOutputStream().use {
             http.streamTo(it) {
                 url(info.downloadUrl)
@@ -188,6 +198,95 @@ class APIPatchBundle(
         directory,
         endpoint,
         autoUpdate,
+    )
+}
+
+// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+class GitHubPullRequestBundle(
+    name: String,
+    uid: Int,
+    displayName: String?,
+    createdAt: Long?,
+    updatedAt: Long?,
+    installedVersionSignature: String?,
+    error: Throwable?,
+    directory: File,
+    endpoint: String,
+    autoUpdate: Boolean
+) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
+
+    private val api: ReVancedAPI by inject()
+
+    override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
+        val (owner, repo, prNumber) = endpoint.split("/").let { parts ->
+            Triple(parts[3], parts[4], parts[6])
+        }
+
+        api.getAssetFromPullRequest(owner, repo, prNumber)
+    }
+
+    override suspend fun download(info: ReVancedAsset) = withContext(Dispatchers.IO) {
+        val prefs: PreferencesManager by inject()
+        val gitHubPat = prefs.gitHubPat.get().also {
+            if (it.isBlank()) throw RuntimeException("PAT is required.")
+        }
+
+        val customHttpClient = HttpClient(OkHttp) {
+            engine {
+                config {
+                    followRedirects(true)
+                    followSslRedirects(true)
+                }
+            }
+        }
+
+        with(customHttpClient) {
+            prepareGet {
+                url(info.downloadUrl)
+                header("Authorization", "Bearer $gitHubPat")
+            }.execute { httpResponse ->
+                patchBundleOutputStream().use { patchOutput ->
+                    ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
+                        var entry = zis.nextEntry
+                        while (entry != null) {
+                            if (!entry.isDirectory && entry.name.endsWith(".rvp")) {
+                                zis.copyTo(patchOutput)
+                                break
+                            }
+                            zis.closeEntry()
+                            entry = zis.nextEntry
+                        }
+                    }
+                }
+            }
+        }
+
+        PatchBundleDownloadResult(
+            versionSignature = info.version,
+            assetCreatedAtMillis = runCatching {
+                info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
+            }.getOrNull()
+        )
+    }
+
+    override fun copy(
+        error: Throwable?,
+        name: String,
+        displayName: String?,
+        createdAt: Long?,
+        updatedAt: Long?,
+        autoUpdate: Boolean
+    ) = GitHubPullRequestBundle(
+        name,
+        uid,
+        displayName,
+        createdAt,
+        updatedAt,
+        installedVersionSignature,
+        error,
+        directory,
+        endpoint,
+        autoUpdate
     )
 }
 
