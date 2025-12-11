@@ -1705,6 +1705,7 @@ class PatcherViewModel(
                     context.getString(R.string.patcher_step_load_patches),
                     StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
+                    subSteps = 2 // Morphe change
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
                 Step(
@@ -1722,12 +1723,14 @@ class PatcherViewModel(
                 Step(
                     id = StepId.WRITE_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_write_patched),
-                    category = StepCategory.SAVING
+                    category = StepCategory.SAVING,
+                    subSteps = 4 // Morphe change
                 ),
                 Step(
                     id = StepId.SIGN_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_sign_apk),
-                    category = StepCategory.SAVING
+                    category = StepCategory.SAVING,
+                    subSteps = 2 // Morphe change
                 )
             )
         }
