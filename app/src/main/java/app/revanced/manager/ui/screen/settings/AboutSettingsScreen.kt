@@ -168,6 +168,7 @@ fun AboutSettingsScreen(
                     )
                     Text(
                         text = stringResource(R.string.revanced_manager_description),
+                        style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
                     )
                 }
             }
