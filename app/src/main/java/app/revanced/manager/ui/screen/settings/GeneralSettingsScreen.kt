@@ -355,6 +355,7 @@ fun GeneralSettingsScreen(
                 Text(stringResource(R.string.theme_reset))
             }
 
+            if (false) { // FIXME: App language setting is turned off until Crowdin is setup
             GroupHeader(stringResource(R.string.language_settings))
             SettingsListItem(
                 modifier = Modifier.clickable { showLanguageDialog = true },
@@ -362,6 +363,7 @@ fun GeneralSettingsScreen(
                 supportingContent = stringResource(selectedLanguageLabel)
             )
             Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }

@@ -80,15 +80,14 @@ class PreferencesManager(
     val suggestedVersionSafeguard = booleanPreference("suggested_version_safeguard", true)
     val disablePatchSelectionConfirmations = booleanPreference("disable_patch_selection_confirmations", false)
     val collapsePatchActionsOnSelection = booleanPreference("collapse_patch_actions_on_selection", true)
-    val patchSelectionActionOrder =
-        stringPreference("patch_selection_action_order", PATCH_ACTION_ORDER_DEFAULT)
+    val patchSelectionActionOrder = stringPreference("patch_selection_action_order", PATCH_ACTION_ORDER_DEFAULT)
 
     val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
 
-    // TODO: Figure out
+    // TODO: Figure out root mode with Morphe layer
     val useRootMode = booleanPreference("use_root_mode", false)
 
     init {
