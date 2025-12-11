@@ -220,41 +220,21 @@ private fun ReVancedManager(vm: MainViewModel) {
         }
 
         composable<Patcher> {
-            // FIXME: ORIGINAL
-//            val params = it.getComplexArg<Patcher.ViewModelParams>()
-//            val prefs: PreferencesManager = koinInject()
-//            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
-//
-//            val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
-//
-//            if (useMorpheHomeScreen) {
-//                // Use Morphe quick patcher screen
-//                MorphePatcherScreen(
-//                    onBackClick = navController::popBackStack,
-//                    viewModel = patcherViewModel
-//                )
-//            } else {
-//                // Use original patcher screen
-//                PatcherScreen(
-//                    onBackClick = navController::popBackStack,
-//                    onReviewSelection = { app, selection, options, missing ->
-//                        navController.navigateComplex(
-//                            SelectedApplicationInfo.PatchesSelector,
-//                            SelectedApplicationInfo.PatchesSelector.ViewModelParams(
-//                                app = app,
-//                                currentSelection = selection,
-//                                options = options,
-//                                missingPatchNames = missing
-//                            )
-//                        )
-//                    },
-//                    viewModel = patcherViewModel
-//                )
-//            }
-
-
-            // FIXME: UPSTREAM
             val params = it.getComplexArg<Patcher.ViewModelParams>()
+            val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
+
+            // Morphe changes begin
+            val prefs: PreferencesManager = koinInject()
+            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
+            if (useMorpheHomeScreen) {
+                MorphePatcherScreen(
+                    onBackClick = navController::popBackStack,
+                    viewModel = patcherViewModel
+                )
+                return@composable
+            }
+            // Morphe changes end
+
             PatcherScreen(
                 onBackClick = navController::popBackStack,
                 onReviewSelection = { app, selection, options, missing ->
