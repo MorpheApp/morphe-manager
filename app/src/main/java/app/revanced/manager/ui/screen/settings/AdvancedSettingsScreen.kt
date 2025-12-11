@@ -33,28 +33,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistAdd
 import androidx.compose.material.icons.automirrored.outlined.PlaylistAddCheck
 import androidx.compose.material.icons.automirrored.outlined.Redo
 import androidx.compose.material.icons.automirrored.outlined.Undo
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Api
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.DoneAll
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.LayersClear
-import androidx.compose.material.icons.outlined.Redo
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material.icons.outlined.SettingsBackupRestore
 import androidx.compose.material.icons.outlined.UnfoldLess
-import androidx.compose.material.icons.outlined.Undo
 import androidx.compose.material.icons.outlined.VpnKey
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.AlertDialog
@@ -69,38 +67,34 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.Switch
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -110,32 +104,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.content.getSystemService
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.consumeHorizontalScroll
@@ -143,14 +137,12 @@ import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
 import app.revanced.manager.util.withHapticFeedback
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.revanced.manager.ui.model.PatchSelectionActionKey
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.ceil
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.math.roundToInt
@@ -176,6 +168,21 @@ fun AdvancedSettingsScreen(
     }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
+    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
+    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
+
+    if (showPatchesBundleJsonUrlDialog) {
+        PatchesBundleJsonUrlDialog(
+            currentUrl = patchesBundleJsonUrl,
+            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
+            onDismiss = { showPatchesBundleJsonUrlDialog = false },
+            onSave = { url ->
+                viewModel.setPatchesBundleJsonUrl(url.trim())
+                showPatchesBundleJsonUrlDialog = false
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             AppTopBar(
@@ -193,22 +200,28 @@ fun AdvancedSettingsScreen(
         ) {
             GroupHeader(stringResource(R.string.patch_bundle_installer))
 
-            val apiUrl by viewModel.prefs.api.getAsState()
+//            val apiUrl by viewModel.prefs.api.getAsState()
             val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
             val includeGitHubPatInExports by viewModel.prefs.includeGitHubPatInExports.getAsState()
-            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
+//            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
             var showGitHubPatDialog by rememberSaveable { mutableStateOf(false) }
 
-            if (showApiUrlDialog) {
-                APIUrlDialog(
-                    currentUrl = apiUrl,
-                    defaultUrl = viewModel.prefs.api.default,
-                    onSubmit = {
-                        showApiUrlDialog = false
-                        it?.let(viewModel::setApiUrl)
-                    }
-                )
-            }
+//            if (showApiUrlDialog) {
+//                APIUrlDialog(
+//                    currentUrl = apiUrl,
+//                    defaultUrl = viewModel.prefs.api.default,
+//                    onSubmit = {
+//                        showApiUrlDialog = false
+//                        it?.let(viewModel::setApiUrl)
+//                    }
+//                )
+//            }
+            SettingsListItem(
+                headlineContent = stringResource(R.string.patches_bundle_json_url),
+                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
+                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
+            )
+
             if (showGitHubPatDialog) {
                 GitHubPatDialog(
                     currentPat = gitHubPat,
@@ -221,13 +234,13 @@ fun AdvancedSettingsScreen(
                     onDismiss = { showGitHubPatDialog = false }
                 )
             }
-            SettingsListItem(
-                headlineContent = stringResource(R.string.api_url),
-                supportingContent = stringResource(R.string.api_url_description),
-                modifier = Modifier.clickable {
-                    showApiUrlDialog = true
-                }
-            )
+//            SettingsListItem(
+//                headlineContent = stringResource(R.string.api_url),
+//                supportingContent = stringResource(R.string.api_url_description),
+//                modifier = Modifier.clickable {
+//                    showApiUrlDialog = true
+//                }
+//            )
             SettingsListItem(
                 headlineContent = stringResource(R.string.github_pat),
                 supportingContent = stringResource(R.string.github_pat_description),
@@ -1793,6 +1806,90 @@ private fun InstallerIcon(
             )
         }
     }
+}
+
+@Composable
+private fun PatchesBundleJsonUrlDialog(
+    currentUrl: String,
+    defaultUrl: String,
+    onDismiss: () -> Unit,
+    onSave: (url: String) -> Unit
+) {
+    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
+    var showError by rememberSaveable { mutableStateOf(false) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    val trimmedUrl = url.trim()
+                    if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
+                        showError = true
+                    } else {
+                        onSave(trimmedUrl)
+                    }
+                },
+                enabled = url.trim().isNotBlank()
+            ) {
+                Text(stringResource(R.string.patches_bundle_json_dialog_save))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.cancel))
+            }
+        },
+        icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
+        title = { Text(stringResource(R.string.patches_bundle_json_url_dialog_title)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Text(
+                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                OutlinedTextField(
+                    value = url,
+                    onValueChange = {
+                        url = it
+                        if (showError) showError = false
+                    },
+                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
+                    supportingText = {
+                        if (showError) {
+                            Text(
+                                stringResource(R.string.patches_bundle_json_url_error),
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        } else {
+                            Text("e.g. https://.../bundle.json")
+                        }
+                    },
+                    isError = showError,
+                    singleLine = false,
+                    maxLines = 6,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    TextButton(
+                        onClick = {
+                            url = defaultUrl
+                            showError = false
+                        }
+                    ) {
+                        Icon(Icons.Outlined.Restore, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Text(stringResource(R.string.patches_bundle_json_dialog_reset), modifier = Modifier.padding(start = 4.dp))
+                    }
+                }
+            }
+        }
+    )
 }
 
 private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {

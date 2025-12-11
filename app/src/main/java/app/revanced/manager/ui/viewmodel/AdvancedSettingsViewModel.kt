@@ -67,10 +67,10 @@ class AdvancedSettingsViewModel(
     }
 
     fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-        if (value == prefs.api.get()) return@launch
-
-        prefs.api.update(value)
-        patchBundleRepository.reloadApiBundles()
+//        if (value == prefs.api.get()) return@launch
+//
+//        prefs.api.update(value)
+//        patchBundleRepository.reloadApiBundles()
     }
 
     // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35

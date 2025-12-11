@@ -86,22 +86,22 @@ class MainActivity : AppCompatActivity() {
         val vm: MainViewModel = getActivityViewModel()
 
         setContent {
-            val launcher = rememberLauncherForActivityResult(
-                ActivityResultContracts.StartActivityForResult(),
-                onResult = vm::applyLegacySettings
-            )
+//            val launcher = rememberLauncherForActivityResult(
+//                ActivityResultContracts.StartActivityForResult(),
+//                onResult = vm::applyLegacySettings
+//            )
             val theme by vm.prefs.theme.getAsState()
             val dynamicColor by vm.prefs.dynamicColor.getAsState()
             val pureBlackTheme by vm.prefs.pureBlackTheme.getAsState()
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
 
-            EventEffect(vm.legacyImportActivityFlow) {
-                try {
-                    launcher.launch(it)
-                } catch (_: ActivityNotFoundException) {
-                }
-            }
+//            EventEffect(vm.legacyImportActivityFlow) {
+//                try {
+//                    launcher.launch(it)
+//                } catch (_: ActivityNotFoundException) {
+//                }
+//            }
 
             ReVancedManagerTheme(
                 darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,
@@ -133,7 +133,7 @@ private fun ReVancedManager(vm: MainViewModel) {
 
     NavHost(
         navController = navController,
-        startDestination = Dashboard,
+        startDestination = startDest,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { -it / 3 }) },
         popEnterTransition = { slideInHorizontally(initialOffsetX = { -it / 3 }) },

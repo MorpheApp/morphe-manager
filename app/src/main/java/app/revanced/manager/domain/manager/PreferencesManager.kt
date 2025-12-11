@@ -35,8 +35,7 @@ class PreferencesManager(
         "patches_bundle_json_url",
         PatchBundleConstants.BUNDLE_URL_STABLE
     )
-    // FIXME UPSTREAM
-    val api = stringPreference("api_url", "https://api.revanced.app")
+//    val api = stringPreference("api_url", "https://api.revanced.app")
     // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
@@ -89,6 +88,7 @@ class PreferencesManager(
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
 
+    // TODO: Figure out
     val useRootMode = booleanPreference("use_root_mode", false)
 
     init {
@@ -123,12 +123,10 @@ class PreferencesManager(
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
         val patchesBundleJsonUrl: String? = null,
-        // FIXME UPSTREAM
         val appLanguage: String? = null,
-        val api: String? = null,
+//        val api: String? = null,
         val gitHubPat: String? = null,
         val includeGitHubPatInExports: Boolean? = null,
-        // FIXME END
         val useProcessRuntime: Boolean? = null,
         val patcherProcessMemoryLimit: Int? = null,
         val autoCollapsePatcherSteps: Boolean? = null,
@@ -167,12 +165,10 @@ class PreferencesManager(
         themePresetSelectionEnabled = themePresetSelectionEnabled.get(),
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
-        // FIXME UPSTREAM
         appLanguage = appLanguage.get(),
-        api = api.get(),
+//        api = api.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
-        // FIXME END
         patchesBundleJsonUrl = patchesBundleJsonUrl.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
@@ -213,7 +209,7 @@ class PreferencesManager(
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.appLanguage?.let { appLanguage.value = it }
-        snapshot.api?.let { api.value = it }
+//        snapshot.api?.let { api.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.patchesBundleJsonUrl?.let { patchesBundleJsonUrl.value = it }

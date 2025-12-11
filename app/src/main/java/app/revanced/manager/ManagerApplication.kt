@@ -80,10 +80,10 @@ class ManagerApplication : Application() {
         // Preload preferences + initialize repositories
         scope.launch {
             prefs.preload()
-            val currentApi = prefs.api.get()
-            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
-                prefs.api.update(DEFAULT_API_URL)
-            }
+//            val currentApi = prefs.api.get()
+//            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
+//                prefs.api.update(DEFAULT_API_URL)
+//            }
             val desiredLanguage = prefs.appLanguage.get().let { if (it == "system") "en" else it }.ifBlank { "en" }
             if (desiredLanguage != prefs.appLanguage.get()) {
                 prefs.appLanguage.update(desiredLanguage)

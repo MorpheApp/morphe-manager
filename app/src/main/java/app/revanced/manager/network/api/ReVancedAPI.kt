@@ -94,15 +94,15 @@ class ReVancedAPI(
         }
     }
 
-    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
-
-    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
-        val normalizedRoute = route.trimStart('/')
-        val baseUrl = apiUrl()
-        return client.request {
-            url("$baseUrl/v4/$normalizedRoute")
-        }
-    }
+//    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
+//
+//    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
+//        val normalizedRoute = route.trimStart('/')
+//        val baseUrl = apiUrl()
+//        return client.request {
+//            url("$baseUrl/v4/$normalizedRoute")
+//        }
+//    }
 
     private suspend fun fetchReleaseAsset(
         config: RepoConfig,

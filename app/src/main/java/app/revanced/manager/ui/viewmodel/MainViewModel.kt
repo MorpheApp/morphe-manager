@@ -33,7 +33,7 @@ class MainViewModel(
     private val appSelectChannel = Channel<SelectedApplicationInfo.ViewModelParams>()
     val appSelectFlow = appSelectChannel.receiveAsFlow()
     private val legacyImportActivityChannel = Channel<Intent>()
-    val legacyImportActivityFlow = legacyImportActivityChannel.receiveAsFlow()
+//    val legacyImportActivityFlow = legacyImportActivityChannel.receiveAsFlow()
 
     private suspend fun suggestedVersion(packageName: String) =
         patchBundleRepository.suggestedVersions.first()[packageName]
