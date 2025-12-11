@@ -47,7 +47,6 @@ jobs:
           KEYSTORE_ENTRY_ALIAS: ${{ secrets.KEYSTORE_ENTRY_ALIAS }}
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
         run: ./gradlew assembleRelease --parallel --max-workers=4 -Pgpr.user=${{ env.GPR_USER }} -Pgpr.key=${{ env.GPR_TOKEN }}
-
 #        env:
 #          GITHUB_ACTOR: ${{ github.actor }}
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,7 +66,7 @@ jobs:
         run: npm install
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
+#        uses: cycjimmy/semantic-release-action@v4
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
@@ -76,6 +75,9 @@ jobs:
           KEYSTORE_ENTRY_PASSWORD: ${{ secrets.KEYSTORE_ENTRY_PASSWORD }}
 #          GITHUB_ACTOR: ${{ github.actor }}
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release
+          ./gradlew publish --no-configuration-cache
 
 #      - name: Attest
 #        if: steps.semantic.outputs.new_release_published == 'true'
