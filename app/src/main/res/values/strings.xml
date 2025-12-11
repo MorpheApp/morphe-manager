@@ -651,7 +651,7 @@ Recommended for this device: %1$d MB.</string>
     <string name="patching">Patching</string>
     <string name="signing">Signing</string>
     <string name="storage">Storage</string>
-    <string name="no_patch_found">No patch can be found. Check your patches</string>
+    <string name="no_patch_found">No patches can be found. Check your patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patch Bundles</string>
     <string name="tab_profiles">Patch Profiles</string>
