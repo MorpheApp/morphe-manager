@@ -12,7 +12,7 @@ plugins {
     signing
 }
 
-val outputApkFileName = "morphe-manager-$version.apk"
+val outputApkFileName = "${rootProject.name}-$version.apk"
 
 dependencies {
     // AndroidX Core
