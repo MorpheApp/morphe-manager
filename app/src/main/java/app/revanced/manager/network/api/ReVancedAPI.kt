@@ -354,5 +354,4 @@ fun <T> APIResponse<T>.successOrThrow(context: String): T {
     }
 }
 
-// FIXME: Change this when released
-private val MANAGER_REPO_URL = "https://github.com/MorpheApp/Morphe-alpha"
+private val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
