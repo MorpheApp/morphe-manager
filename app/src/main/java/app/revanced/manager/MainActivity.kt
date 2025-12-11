@@ -74,7 +74,9 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
-class MainActivity : AppCompatActivity() {
+// AppCompatActivity has issues of briefly showing a black screen on a new install.
+//class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
