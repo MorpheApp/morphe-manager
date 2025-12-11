@@ -1,4 +1,3 @@
-// From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
 package app.revanced.manager.ui.component
 
 import android.content.Context

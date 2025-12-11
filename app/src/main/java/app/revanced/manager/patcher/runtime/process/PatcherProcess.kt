@@ -96,7 +96,6 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     frameworkDir = parameters.frameworkDir,
                     androidContext = context,
                     logger = logger,
-//                    input = preparation.file,
                     input = File(parameters.inputFile),
                 onPatchCompleted = { events.patchSucceeded() },
                 onProgress = { name, state, message ->

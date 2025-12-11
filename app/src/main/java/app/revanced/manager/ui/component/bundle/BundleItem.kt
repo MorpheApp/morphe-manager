@@ -302,7 +302,7 @@ fun BundleItem(
             ) {
                 ActionIconButton(
                     onClick = { showLinkSheet = true }
-                    // FIME: ORIGINAL
+                    // FIXME? MORPHE ORIGINAL
 //                    onClick = {
 //                        coroutineScope.launch {
 //                            openBundleReleasePage(
@@ -372,47 +372,3 @@ private fun ActionIconButton(
         content()
     }
 }
-
-//suspend fun openBundleReleasePage(
-//    src: PatchBundleSource,
-//    networkInfo: NetworkInfo,
-//    context: android.content.Context,
-//    uriHandler: androidx.compose.ui.platform.UriHandler
-//) {
-//    val manifestSource = src.patchBundle?.manifestAttributes?.source
-//    val cached = initialGithubReleaseUrl(src, manifestSource)
-//    if (!cached.isNullOrBlank()) {
-//        uriHandler.openUri(cached)
-//        return
-//    }
-//
-//    val remote = src.asRemoteOrNull
-//    if (remote == null) {
-//        context.toast(context.getString(R.string.bundle_release_page_unavailable))
-//        return
-//    }
-//
-//    if (!networkInfo.isConnected()) {
-//        context.toast(context.getString(R.string.bundle_release_page_unavailable))
-//        return
-//    }
-//
-//    runCatching {
-//        val asset = remote.fetchLatestReleaseInfo()
-//        val url = extractGithubReleaseUrlFromDownload(asset.downloadUrl)
-//            ?: asset.pageUrl?.takeUnless { it.isBlank() }
-//            ?: extractGithubReleaseUrlFromDownload(remote.endpoint)
-//        if (url.isNullOrBlank()) {
-//            context.toast(context.getString(R.string.bundle_release_page_unavailable))
-//        } else {
-//            uriHandler.openUri(url)
-//        }
-//    }.onFailure { error ->
-//        context.toast(
-//            context.getString(
-//                R.string.bundle_release_page_error,
-//                error.simpleMessage().orEmpty()
-//            )
-//        )
-//    }
-//}

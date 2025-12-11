@@ -59,7 +59,7 @@ fun AppTopBar(
     actions: @Composable (RowScope.() -> Unit) = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
     applyContainerColor: Boolean = false,
-    onHelpClick: (() -> Unit)? = null // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
+    onHelpClick: (() -> Unit)? = null
 ) {
     val containerColor = if (applyContainerColor) {
         MaterialTheme.colorScheme.surfaceColorAtElevation(3.0.dp)
@@ -79,7 +79,6 @@ fun AppTopBar(
         },
         // FIXME: Upstream, verify this works here
         actions = {
-            // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
             if (onHelpClick != null) {
                 IconButton(onClick = onHelpClick) {
                     Icon(
@@ -111,7 +110,7 @@ fun AppTopBar(
     actions: @Composable (RowScope.() -> Unit) = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
     applyContainerColor: Boolean = false,
-    onHelpClick: (() -> Unit)? = null // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
+    onHelpClick: (() -> Unit)? = null
 ) {
     val containerColor = if (applyContainerColor) {
         MaterialTheme.colorScheme.surfaceColorAtElevation(3.0.dp)
@@ -130,7 +129,6 @@ fun AppTopBar(
             }
         },
         actions = {
-            // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
             if (onHelpClick != null) {
                 IconButton(onClick = onHelpClick) {
                     Icon(
