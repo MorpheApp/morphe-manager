@@ -161,9 +161,11 @@ class PatcherWorker(
             args.onProgress(name, state, message)
 
         val patchedApk = fs.tempDir.resolve("patched.apk")
+        var downloadCleanup: (() -> Unit)? = null
 
         return try {
             val startTime = System.currentTimeMillis()
+            val autoSaveDownloads = prefs.autoSaveDownloaderApks.get()
 
             if (args.input is SelectedApp.Installed) {
                 installedAppRepository.get(args.packageName)?.let {
@@ -181,13 +183,14 @@ class PatcherWorker(
                     args.input.version,
                     prefs.suggestedVersionSafeguard.get(),
                     !prefs.disablePatchVersionCompatCheck.get(),
-                    onDownload = args.onDownloadProgress
+                    onDownload = args.onDownloadProgress,
+                    persistDownload = autoSaveDownloads
                 ).also {
                     args.setInputFile(it.file, it.needsSplit, it.merged)
                     updateProgress(state = State.COMPLETED) // Download APK
                 }
 
-            val inputFile = when (val selectedApp = args.input) {
+            val downloadResult = when (val selectedApp = args.input) {
                 is SelectedApp.Download -> {
                     val (plugin, data) = downloaderPluginRepository.unwrapParceledData(selectedApp.data)
 
@@ -239,7 +242,9 @@ class PatcherWorker(
                     args.setInputFile(source, false, false)
                     DownloadResult(source, false)
                 }
-            }.file
+            }
+            downloadCleanup = downloadResult.cleanup
+            val inputFile = downloadResult.file
 
             val runtime = if (prefs.useProcessRuntime.get()) {
                 ProcessRuntime(applicationContext)
@@ -325,6 +330,7 @@ class PatcherWorker(
             )
         } finally {
             patchedApk.delete()
+            downloadCleanup?.invoke()
         }
     }
 

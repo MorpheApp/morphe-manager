@@ -85,6 +85,7 @@ class PreferencesManager(
         stringPreference("patch_selection_action_order", PATCH_ACTION_ORDER_DEFAULT)
 
     val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
+    val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
 
@@ -153,7 +154,8 @@ class PreferencesManager(
         val disablePatchSelectionConfirmations: Boolean? = null,
         val collapsePatchActionsOnSelection: Boolean? = null,
         val patchSelectionActionOrder: String? = null,
-        val acknowledgedDownloaderPlugins: Set<String>? = null
+        val acknowledgedDownloaderPlugins: Set<String>? = null,
+        val autoSaveDownloaderApks: Boolean? = null
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -197,7 +199,8 @@ class PreferencesManager(
         disablePatchSelectionConfirmations = disablePatchSelectionConfirmations.get(),
         collapsePatchActionsOnSelection = collapsePatchActionsOnSelection.get(),
         patchSelectionActionOrder = patchSelectionActionOrder.get(),
-        acknowledgedDownloaderPlugins = acknowledgedDownloaderPlugins.get()
+        acknowledgedDownloaderPlugins = acknowledgedDownloaderPlugins.get(),
+        autoSaveDownloaderApks = autoSaveDownloaderApks.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -242,6 +245,7 @@ class PreferencesManager(
         snapshot.collapsePatchActionsOnSelection?.let { collapsePatchActionsOnSelection.value = it }
         snapshot.patchSelectionActionOrder?.let { patchSelectionActionOrder.value = it }
         snapshot.acknowledgedDownloaderPlugins?.let { acknowledgedDownloaderPlugins.value = it }
+        snapshot.autoSaveDownloaderApks?.let { autoSaveDownloaderApks.value = it }
     }
 
 }

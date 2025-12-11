@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.AppLabel
@@ -47,10 +48,12 @@ import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.ConfirmDialog
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
+import app.revanced.manager.ui.component.settings.BooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.ui.component.AnnotatedLinkText // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
+import org.koin.compose.koinInject
 import org.koin.androidx.compose.koinViewModel
 import java.security.MessageDigest
 import kotlin.text.HexFormat
@@ -61,6 +64,7 @@ fun DownloadsSettingsScreen(
     onBackClick: () -> Unit,
     viewModel: DownloadsViewModel = koinViewModel()
 ) {
+    val prefs: PreferencesManager = koinInject()
     val downloadedApps by viewModel.downloadedApps.collectAsStateWithLifecycle(emptyList())
     val pluginStates by viewModel.downloaderPluginStates.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -150,6 +154,16 @@ fun DownloadsSettingsScreen(
             LazyColumnWithScrollbar(
                 modifier = Modifier.fillMaxSize()
             ) {
+                item {
+                    GroupHeader(stringResource(R.string.download_settings))
+                }
+                item {
+                    BooleanItem(
+                        preference = prefs.autoSaveDownloaderApks,
+                        headline = R.string.downloader_auto_save_title,
+                        description = R.string.downloader_auto_save_description
+                    )
+                }
                 item {
                     GroupHeader(stringResource(R.string.downloader_plugins))
                 }

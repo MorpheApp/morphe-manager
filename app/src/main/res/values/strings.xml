@@ -509,6 +509,9 @@ Patch profiles are not affected.</string>
 
 Patch profiles are not affected.</string>
     <string name="patch_options_reset_all_description">Resets all patch options</string>
+    <string name="download_settings">Download settings</string>
+    <string name="downloader_auto_save_title">Automatically save downloaded APKs</string>
+    <string name="downloader_auto_save_description">Keep APKs downloaded through plugins for reuse. Disable to delete them after patching.</string>
     <string name="downloader_plugins">Plugins</string>
     <string name="downloader_plugin_state_trusted">Trusted</string>
     <string name="downloader_plugin_state_failed">Failed to load. Click for more details</string>

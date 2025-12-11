@@ -7,6 +7,7 @@
 - Patch profiles now include a gear menu to set version overrides (or choose "All versions") per profile
 - Added Korean manager string localization https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42
 - Split APKs now save in Settings > Downloads as merged APks https://github.com/Jman-Github/Universal-ReVanced-Manager/issues/41
+- Added a toggle in Settings > Downloads to disable automatically saving APKs fetched via downloader plugins
 - Gave the GitHub PAT entry in Settings > Advanced the ability to be saved through the manager settings exports. This is a toggable feature and is not on by default
 - Updated the "Uninstall" button to "Unmount" and the "Update" button to "Remount" for saved patched apps in the "Apps" tab for apps installed by the rooted mount installer
 - Added ability for users with root to mount patched apps by changing your primary installer to "Rooted mount installer" https://github.com/Jman-Github/Universal-ReVanced-Manager/issues/40

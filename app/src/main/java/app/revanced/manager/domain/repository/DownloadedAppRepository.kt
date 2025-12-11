@@ -27,7 +27,8 @@ import kotlin.io.path.outputStream
 data class DownloadResult(
     val file: File,
     val needsSplit: Boolean,
-    val merged: Boolean = false
+    val merged: Boolean = false,
+    val cleanup: (() -> Unit)? = null
 )
 
 class DownloadedAppRepository(
@@ -36,6 +37,7 @@ class DownloadedAppRepository(
     private val pm: PM
 ) {
     private val dir = app.getDir("downloaded-apps", Context.MODE_PRIVATE)
+    private val tempDir = app.cacheDir.resolve("temp-downloaded-apps").apply { mkdirs() }
     private val dao = db.downloadedAppDao()
     private val splitWorkspace = app.cacheDir.resolve("downloaded-splits").apply { mkdirs() }
 
@@ -72,10 +74,12 @@ class DownloadedAppRepository(
         appCompatibilityCheck: Boolean,
         patchesCompatibilityCheck: Boolean,
         onDownload: suspend (downloadProgress: Pair<Long, Long?>) -> Unit,
+        persistDownload: Boolean = true,
     ): DownloadResult {
         // Converted integers cannot contain / or .. unlike the package name or version, so they are safer to use here.
         val relativePath = File(generateUid().toString())
-        val saveDir = dir.resolve(relativePath).also { it.mkdirs() }
+        val parentDir = if (persistDownload) dir else tempDir
+        val saveDir = parentDir.resolve(relativePath).also { it.mkdirs() }
         val targetFile = saveDir.resolve("base.apk").toPath()
 
         try {
@@ -136,26 +140,36 @@ class DownloadedAppRepository(
                 ) error("The selected app version ($pkgInfo.versionName) doesn't match the suggested version. Please use the suggested version ($expectedVersion), or adjust your settings by disabling \"Require suggested app version\" and enabling \"Disable version compatibility check\".")
             }
 
-            // Delete the previous copy (if present).
-            dao.get(pkgInfo.packageName, pkgInfo.versionName!!)?.directory?.let {
-                if (!dir.resolve(it).deleteRecursively()) throw Exception("Failed to delete existing directory")
-            }
-            dao.upsert(
-                DownloadedApp(
-                    packageName = pkgInfo.packageName,
-                    version = pkgInfo.versionName!!,
-                    directory = relativePath,
+            if (persistDownload) {
+                // Delete the previous copy (if present).
+                dao.get(pkgInfo.packageName, pkgInfo.versionName!!)?.directory?.let {
+                    if (!dir.resolve(it).deleteRecursively()) throw Exception("Failed to delete existing directory")
+                }
+                dao.upsert(
+                    DownloadedApp(
+                        packageName = pkgInfo.packageName,
+                        version = pkgInfo.versionName!!,
+                        directory = relativePath,
+                    )
                 )
-            )
+            }
 
             val needsSplit = SplitApkPreparer.isSplitArchive(workingFile)
             val storedFile = getApkFileForDir(saveDir)
 
             // Return the downloaded archive, noting if it will require a split merge later.
+            val cleanupAction = if (persistDownload) null else {
+                {
+                    saveDir.deleteRecursively()
+                    Unit
+                }
+            }
+
             return DownloadResult(
                 file = storedFile,
                 needsSplit = needsSplit,
-                merged = false
+                merged = false,
+                cleanup = cleanupAction
             )
         } catch (e: Exception) {
             saveDir.deleteRecursively()
