@@ -23,6 +23,7 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -95,133 +96,130 @@ fun AppearanceSection(
             // Theme options row
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                // System option
                 ThemeOption(
                     icon = Icons.Outlined.PhoneAndroid,
                     label = stringResource(R.string.system),
-                    selected = theme == Theme.SYSTEM,
-                    onClick = { viewModel.setTheme(Theme.SYSTEM) },
+                    selected = theme == Theme.SYSTEM && !pureBlackTheme,
+                    onClick = {
+                        viewModel.setTheme(Theme.SYSTEM)
+                        scope.launch {
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                    },
                     modifier = Modifier.weight(1f)
                 )
+                // Light option
                 ThemeOption(
                     icon = Icons.Outlined.LightMode,
                     label = stringResource(R.string.light),
                     selected = theme == Theme.LIGHT,
-                    onClick = { viewModel.setTheme(Theme.LIGHT) },
+                    onClick = {
+                        viewModel.setTheme(Theme.LIGHT)
+                        scope.launch {
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                    },
                     modifier = Modifier.weight(1f)
                 )
+                // Dark option
                 ThemeOption(
                     icon = Icons.Outlined.DarkMode,
                     label = stringResource(R.string.dark),
-                    selected = theme == Theme.DARK,
-                    onClick = { viewModel.setTheme(Theme.DARK) },
+                    selected = theme == Theme.DARK && !pureBlackTheme,
+                    onClick = {
+                        viewModel.setTheme(Theme.DARK)
+                        scope.launch {
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+                // Black option
+                ThemeOption(
+                    icon = Icons.Outlined.Contrast,
+                    label = stringResource(R.string.black),
+                    selected = pureBlackTheme,
+                    onClick = {
+                        scope.launch {
+                            viewModel.prefs.pureBlackTheme.update(true)
+                            viewModel.prefs.dynamicColor.update(false)
+                            // Reset custom theme color when Black is selected
+                            viewModel.setCustomThemeColor(null)
+                            // Ensure dark theme is selected
+                            if (theme == Theme.LIGHT) {
+                                viewModel.setTheme(Theme.DARK)
+                            }
+                        }
+                    },
                     modifier = Modifier.weight(1f)
                 )
             }
 
-            // Pure black theme option (only for dark themes)
-            AnimatedVisibility(visible = theme != Theme.LIGHT) {
-                Column(modifier = Modifier.padding(top = 16.dp)) {
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable {
-                                scope.launch {
-                                    viewModel.prefs.pureBlackTheme.update(!pureBlackTheme)
-                                }
-                            },
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                    ) {
-                        Row(
+            // Dynamic Color toggle (Android 12+) - only show when Black is not selected
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                AnimatedVisibility(visible = !pureBlackTheme) {
+                    Column {
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Surface(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Contrast,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.pure_black_theme),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.pure_black_theme_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Switch(
-                                checked = pureBlackTheme,
-                                onCheckedChange = {
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
                                     scope.launch {
-                                        viewModel.prefs.pureBlackTheme.update(it)
+                                        val newValue = !dynamicColor
+                                        viewModel.prefs.dynamicColor.update(newValue)
+                                        // Reset custom theme color when dynamic color is enabled
+                                        if (newValue) {
+                                            viewModel.setCustomThemeColor(null)
+                                        }
                                     }
+                                },
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Palette,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.dynamic_color),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.dynamic_color_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
                                 }
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Dynamic Color (Android 12+)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
-                        .clickable {
-                            scope.launch {
-                                viewModel.prefs.dynamicColor.update(!dynamicColor)
+                                Switch(
+                                    checked = dynamicColor,
+                                    onCheckedChange = {
+                                        scope.launch {
+                                            viewModel.prefs.dynamicColor.update(it)
+                                            // Reset custom theme color when dynamic color is enabled
+                                            if (it) {
+                                                viewModel.setCustomThemeColor(null)
+                                            }
+                                        }
+                                    }
+                                )
                             }
-                        },
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Palette,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.dynamic_color),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium
-                            )
-                            Text(
-                                text = stringResource(R.string.dynamic_color_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
                         }
-                        Switch(
-                            checked = dynamicColor,
-                            onCheckedChange = {
-                                scope.launch {
-                                    viewModel.prefs.dynamicColor.update(it)
-                                }
-                            }
-                        )
                     }
                 }
             }
@@ -239,7 +237,9 @@ fun AppearanceSection(
             ColorPresetsRow(
                 selectedColorHex = customAccentColorHex,
                 onColorSelected = { color -> viewModel.setCustomAccentColor(color) },
-                isAccent = true
+                isAccent = true,
+                viewModel = viewModel,
+                scope = scope
             )
 
             // Theme Color Presets
@@ -255,7 +255,9 @@ fun AppearanceSection(
             ColorPresetsRow(
                 selectedColorHex = customThemeColorHex,
                 onColorSelected = { color -> viewModel.setCustomThemeColor(color) },
-                isAccent = false
+                isAccent = false,
+                viewModel = viewModel,
+                scope = scope
             )
         }
     }
@@ -269,7 +271,9 @@ fun AppearanceSection(
 private fun ColorPresetsRow(
     selectedColorHex: String?,
     onColorSelected: (Color?) -> Unit,
-    isAccent: Boolean
+    isAccent: Boolean,
+    viewModel: GeneralSettingsViewModel,
+    scope: CoroutineScope
 ) {
     val presets = remember {
         if (isAccent) {
@@ -358,7 +362,16 @@ private fun ColorPresetsRow(
                         shape = RoundedCornerShape(14.dp)
                     )
                     .background(preset, RoundedCornerShape(12.dp))
-                    .clickable { onColorSelected(preset) }
+                    .clickable {
+                        onColorSelected(preset)
+                        // If this is theme color (not accent), reset Dynamic Color and Pure Black
+                        if (!isAccent) {
+                            scope.launch {
+                                viewModel.prefs.dynamicColor.update(false)
+                                viewModel.prefs.pureBlackTheme.update(false)
+                            }
+                        }
+                    }
             )
         }
     }

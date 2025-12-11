@@ -97,7 +97,7 @@ fun ThemeOption(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        modifier = modifier.height(80.dp),
+        modifier = modifier.fillMaxSize(),
         shape = RoundedCornerShape(12.dp),
         color = if (selected) {
             MaterialTheme.colorScheme.primaryContainer
@@ -134,12 +134,14 @@ fun ThemeOption(
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.labelSmall,
                 color = if (selected) {
                     MaterialTheme.colorScheme.onPrimaryContainer
                 } else {
                     MaterialTheme.colorScheme.onSurface
-                }
+                },
+                maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
         }
     }

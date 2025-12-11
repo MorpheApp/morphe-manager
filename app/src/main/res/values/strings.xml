@@ -557,6 +557,7 @@ Signature (SHA-256): %2$s"</string>
     <string name="system">System</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
+    <string name="black">Black</string>
     <string name="appearance">Appearance</string>
     <string name="downloaded_apps">Downloaded apps</string>
     <string name="process_runtime">Run Patcher in another process</string>
