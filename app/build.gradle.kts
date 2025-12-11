@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.devtools)
     alias(libs.plugins.about.libraries)
+    signing
 }
 
 val outputApkFileName = "morphe-manager-$version.apk"
@@ -246,6 +247,28 @@ tasks {
     whenTaskAdded {
         if (name.startsWith("lintVital")) {
             enabled = false
+        }
+    }
+
+    // Needed by gradle-semantic-release-plugin.
+    // Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
+    val publish by registering {
+        group = "publishing"
+        description = "Build the release APK"
+
+        dependsOn("assembleRelease")
+
+        val apk = project.layout.buildDirectory.file("outputs/apk/release/${outputApkFileName}")
+        val ascFile = apk.map { it.asFile.resolveSibling("${it.asFile.name}.asc") }
+
+        inputs.file(apk).withPropertyName("inputApk")
+        outputs.file(ascFile).withPropertyName("outputAsc")
+
+        doLast {
+            signing {
+                useGpgCmd()
+                sign(apk.get().asFile)
+            }
         }
     }
 }
