@@ -459,9 +459,7 @@ fun MorphePatcherScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             // Main content centered
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 100.dp),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(

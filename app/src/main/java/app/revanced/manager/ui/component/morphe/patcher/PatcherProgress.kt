@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
@@ -199,7 +200,6 @@ private fun LandscapeProgressLayout(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxSize()
-            .statusBarsPadding()
             .padding(horizontal = 32.dp, vertical = 16.dp)
     ) {
         // Left side - Message and details
@@ -429,7 +429,7 @@ fun CurrentStepIndicator(viewModel: PatcherViewModel) {
     // Get current running step
     val currentStep by remember {
         derivedStateOf {
-            viewModel.steps.firstOrNull { it.state == app.revanced.manager.ui.model.State.RUNNING }
+            viewModel.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
 
