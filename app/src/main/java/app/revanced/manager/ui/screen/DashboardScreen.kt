@@ -183,10 +183,9 @@ fun DashboardScreen(
     }
 
     val firstLaunch by vm.prefs.firstLaunch.getAsState()
+    if (false) // Morphe begin
     if (firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
-    // FXIME: ORIGINAL
-    // Don't show autoupdate dialog.
-//    if (false && firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
+    // Morphe end
 
     var showAddBundleDialog by rememberSaveable { mutableStateOf(false) }
     if (showAddBundleDialog) {

@@ -54,8 +54,6 @@ data object SelectedApplicationInfo : ComplexParameter<SelectedApplicationInfo.V
             val preferredBundleUid: Int? = null,
             val preferredBundleOverride: String? = null,
             val preferredBundleTargetsAllVersions: Boolean = false
-            // FIXME: ORIGINAL
-//            val missingPatchNames: @RawValue List<String>? = null
         ) : Parcelable
     }
 
