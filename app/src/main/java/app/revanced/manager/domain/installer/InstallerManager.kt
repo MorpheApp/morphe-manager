@@ -15,7 +15,6 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.StringRes
-import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.R
@@ -81,6 +80,8 @@ class InstallerManager(
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
+            InstallerPreferenceTokens.AUTO_SAVED,
+            InstallerPreferenceTokens.ROOT -> Token.AutoSaved
             InstallerPreferenceTokens.SYSTEM -> Token.Internal
             InstallerPreferenceTokens.NONE -> Token.None
             InstallerPreferenceTokens.SHIZUKU -> Token.Shizuku
@@ -163,7 +164,7 @@ class InstallerManager(
             val applicationInfo = info.applicationInfo
             val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
             val matches = packageName.contains(lower, ignoreCase = true) ||
-                label.contains(lower, ignoreCase = true)
+                    label.contains(lower, ignoreCase = true)
             if (!matches) return@forEach
 
             val activities = info.activities?.asSequence() ?: emptySequence()
@@ -281,7 +282,6 @@ class InstallerManager(
         runCatching {
             app.revokeUriPermission(plan.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        plan.sharedFile.delete()
     }
 
     private fun readCustomInstallerTokens(): List<Token.Component> =
@@ -318,9 +318,9 @@ class InstallerManager(
                         setDataAndType(uri, APK_MIME)
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
-                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                    Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                    Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
                         )
                         clipData = ClipData.newRawUri("APK", uri)
                         putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
@@ -331,8 +331,8 @@ class InstallerManager(
                         token.componentName.packageName,
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
                     )
                     InstallPlan.External(
                         target = target,
@@ -515,7 +515,7 @@ class InstallerManager(
 
     private fun isExcludedDuplicate(packageName: String, label: String): Boolean =
         packageName == AOSP_INSTALLER_PACKAGE &&
-            label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
+                label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
 
     private fun isInstallerCandidate(info: ResolveInfo): Boolean {
         if (!info.activityInfo.exported) return false
@@ -528,7 +528,7 @@ class InstallerManager(
 
         return requestedPermissions.any {
             it == Manifest.permission.REQUEST_INSTALL_PACKAGES ||
-                it == Manifest.permission.INSTALL_PACKAGES
+                    it == Manifest.permission.INSTALL_PACKAGES
         }
     }
 
