@@ -13,15 +13,19 @@ import java.util.Locale
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+// MORPHE FIXME: Figure out if we're going to have a centralized catalog of other repos,
+//               Or if we allow users to enter an outside catalog provider.
 object PatchListCatalog {
     private const val PREF_NAME = "patch_list_catalog"
     private const val KEY_DATA = "data"
     private const val KEY_TIMESTAMP = "timestamp"
     private const val CACHE_TTL = 24 * 60 * 60 * 1000L
+    // Needs a provider that uses Morphe patch bundles.
     private const val RAW_URL =
-        "https://raw.githubusercontent.com/Jman-Github/ReVanced-Patch-Bundles/bundles/patch-bundles/PATCH-LIST-CATALOG.md"
+        "https://raw.githubusercontent.com/FIXME"
+    // Needs a provider that uses Morphe patch bundles.
     private const val CATALOG_BASE_URL =
-        "https://github.com/Jman-Github/ReVanced-Patch-Bundles/blob/bundles/patch-bundles/PATCH-LIST-CATALOG.md"
+        "https://github.com/Jman-Github/FIXME"
     private const val FALLBACK_ANCHOR = "-patch-list-catalog-key"
     private const val REVANCED_ANCHOR = "-revanced-bundle-patch-list"
     private val REVANCED_SHORTCUT_KEY = normalize("ReVanced Bundle Patch List")
