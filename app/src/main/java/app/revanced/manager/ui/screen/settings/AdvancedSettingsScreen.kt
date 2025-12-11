@@ -129,6 +129,7 @@ import app.revanced.manager.ui.component.settings.BooleanItem
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
 import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.TextItem
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
@@ -506,21 +507,31 @@ fun AdvancedSettingsScreen(
                 headline = R.string.strip_unused_libs,
                 description = R.string.strip_unused_libs_description,
             )
-            BooleanItem(
-                preference = viewModel.prefs.useProcessRuntime,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.process_runtime,
-                description = R.string.process_runtime_description,
-            )
-            val recommendedProcessLimit = remember { 700 }
-            IntegerItem(
-                preference = viewModel.prefs.patcherProcessMemoryLimit,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.process_runtime_memory_limit,
-                description = R.string.process_runtime_memory_limit_description,
-                neutralButtonLabel = stringResource(R.string.reset_to_recommended),
-                neutralValueProvider = { recommendedProcessLimit }
-            )
+            // Morphe begin
+            // Runtime process only works with Android 11 and higher.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                BooleanItem(
+                    preference = viewModel.prefs.useProcessRuntime,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.process_runtime,
+                    description = R.string.process_runtime_description,
+                )
+                val recommendedProcessLimit = remember { 700 }
+                IntegerItem(
+                    preference = viewModel.prefs.patcherProcessMemoryLimit,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.process_runtime_memory_limit,
+                    description = R.string.process_runtime_memory_limit_description,
+                    neutralButtonLabel = stringResource(R.string.reset_to_recommended),
+                    neutralValueProvider = { recommendedProcessLimit }
+                )
+            }  else {
+                TextItem(
+                    headline = R.string.process_runtime,
+                    description = R.string.process_runtime_description_not_available
+                )
+            }
+            // Morphe end
             BooleanItem(
                 preference = viewModel.prefs.autoCollapsePatcherSteps,
                 coroutineScope = viewModel.viewModelScope,
