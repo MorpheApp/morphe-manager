@@ -152,9 +152,9 @@ class ManagerApplication : Application() {
         }
     }
 
-    private companion object {
-        private const val DEFAULT_API_URL = "https://api.revanced.app"
-        private const val LEGACY_MANAGER_REPO_URL = "https://github.com/Jman-Github/universal-revanced-manager"
-        private const val LEGACY_MANAGER_REPO_API_URL = "https://api.github.com/repos/Jman-Github/universal-revanced-manager"
-    }
+//    private companion object {
+//        private const val DEFAULT_API_URL = "https://api.revanced.app"
+//        private const val LEGACY_MANAGER_REPO_URL = "https://github.com/Jman-Github/universal-revanced-manager"
+//        private const val LEGACY_MANAGER_REPO_API_URL = "https://api.github.com/repos/Jman-Github/universal-revanced-manager"
+//    }
 }

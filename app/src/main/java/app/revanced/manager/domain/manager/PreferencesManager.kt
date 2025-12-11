@@ -39,7 +39,6 @@ class PreferencesManager(
     // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
-    // FIXME END
 
     val useProcessRuntime = booleanPreference(
         "use_process_runtime",
