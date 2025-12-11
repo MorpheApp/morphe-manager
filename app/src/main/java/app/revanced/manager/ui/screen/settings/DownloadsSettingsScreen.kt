@@ -103,6 +103,7 @@ fun DownloadsSettingsScreen(
                 AnnotatedLinkText(
                     text = stringResource(R.string.plugins_help_description),
                     linkLabel = stringResource(R.string.here),
+                    // FIXME: Use Morphe repo help file, if downloaders support is added
                     url = "https://github.com/Jman-Github/Universal-ReVanced-Manager?tab=readme-ov-file#-supported-downloader-plugins",
                 )
             },

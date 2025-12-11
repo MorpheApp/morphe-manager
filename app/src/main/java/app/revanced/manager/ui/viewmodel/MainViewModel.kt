@@ -84,21 +84,21 @@ class MainViewModel(
         }
     }
 
-    @Serializable
-    private data class LegacySettings(
-        val keystorePassword: String,
-        val themeMode: Int? = null,
-        val useDynamicTheme: Boolean? = null,
-        val usePrereleases: Boolean? = null,
-        val apiUrl: String? = null,
-        val experimentalPatchesEnabled: Boolean? = null,
-        val patchesAutoUpdate: Boolean? = null,
-        val patchesChangeEnabled: Boolean? = null,
-        val keystore: String? = null,
-        val patches: SerializedSelection? = null,
-    )
-
-    fun applyLegacySettings(result: ActivityResult) {
-
-    }
+//    @Serializable
+//    private data class LegacySettings(
+//        val keystorePassword: String,
+//        val themeMode: Int? = null,
+//        val useDynamicTheme: Boolean? = null,
+//        val usePrereleases: Boolean? = null,
+//        val apiUrl: String? = null,
+//        val experimentalPatchesEnabled: Boolean? = null,
+//        val patchesAutoUpdate: Boolean? = null,
+//        val patchesChangeEnabled: Boolean? = null,
+//        val keystore: String? = null,
+//        val patches: SerializedSelection? = null,
+//    )
+//
+//    fun applyLegacySettings(result: ActivityResult) {
+//
+//    }
 }
