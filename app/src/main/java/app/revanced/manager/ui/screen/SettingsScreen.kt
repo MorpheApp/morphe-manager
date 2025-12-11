@@ -62,12 +62,13 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
                 Icons.Outlined.Update,
                 Settings.Updates
             ),
-            Section(
-                R.string.downloads,
-                R.string.downloads_description,
-                Icons.Outlined.Download,
-                Settings.Downloads
-            ),
+            // FIXME: Figure out if downloader plugins are supported
+//            Section(
+//                R.string.downloads,
+//                R.string.downloads_description,
+//                Icons.Outlined.Download,
+//                Settings.Downloads
+//            ),
             Section(
                 R.string.import_export,
                 R.string.import_export_description,
