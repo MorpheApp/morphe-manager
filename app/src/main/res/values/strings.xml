@@ -988,10 +988,10 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="continue_">Continue</string>
     <string name="dismiss">Dismiss</string>
     <string name="permanent_dismiss">Do not show this again</string>
-    <string name="donate">Donate</string>
+<!--    <string name="donate">Donate</string>-->
     <string name="website">Website</string>
-    <string name="github">Universal ReVanced Manager GitHub</string>
-    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>
+<!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
+<!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
     <string name="patch_bundle_urls">Get patch bundle imports</string>
     <string name="contact">Contact</string>
     <string name="version">Version</string>

@@ -58,18 +58,26 @@ fun AboutSettingsScreen(
         listOf(
             Triple(
                 getSocialIcon("GitHub"),
-                context.getString(R.string.github),
-                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
+                context.getString(R.string.morphe_about_github),
+                { context.openUrl("https://github.com/MorpheApp") }
+//                context.getString(R.string.github),
+//                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
             ),
             Triple(
-                getSocialIcon("GitHub"),
-                context.getString(R.string.original_revanced_manager_github),
-                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
+                getSocialIcon("X"),
+                context.getString(R.string.morphe_about_x),
+                { context.openUrl("https://x.com/MorpheApp") }
+//                context.getString(R.string.original_revanced_manager_github),
+//                getSocialIcon("GitHub"),
+//                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
             ),
             Triple(
-                getSocialIcon("GitHub"),
-                context.getString(R.string.patch_bundle_urls),
-                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
+                getSocialIcon("Reddit"),
+                context.getString(R.string.morphe_about_reddit),
+                { context.openUrl("https://reddit.com/r/MorpheApp") }
+//                getSocialIcon("GitHub"),
+//                context.getString(R.string.patch_bundle_urls),
+//                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
             )
         )
     }
