@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.os.SystemClock
 import app.revanced.manager.IRootSystemService
 import app.revanced.manager.service.ManagerRootService
 import app.revanced.manager.ui.viewmodel.PersistentValue
@@ -26,6 +27,10 @@ class RootInstaller(
     private val pm: PM
 ) : ServiceConnection {
     private var remoteFS = CompletableDeferred<FileSystemManager>()
+    @Volatile
+    private var cachedHasRoot: Boolean? = null
+    @Volatile
+    private var lastRootCheck = 0L
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val ipc = IRootSystemService.Stub.asInterface(service)
@@ -59,30 +64,69 @@ class RootInstaller(
 
     suspend fun execute(vararg commands: String) = getShell().newJob().add(*commands).exec()
 
-    /**
-     * @return If root access has been attempted _and_ granted.
-     *         This will **not** request root if not yet granted.
-     * @see requestRootAccessIfNotAskedYet
-     */
-    fun hasRootAccess() = Shell.isAppGrantedRoot() ?: false
-
-    /**
-     * Prompts the user for root access, but only prompts once per
-     * app installation and will not cause "root denied" toasts.
-     *
-     * @return If the user approved root access or was previously granted.
-     * @see hasRootAccess
-     */
-    fun requestRootAccessIfNotAskedYet(context: Context) : Boolean {
-        val attempted = getRootAccessAttempted(context)
-        if (!attempted.get()) {
-            attempted.save(true)
-            val result = cmd("id").exec()
-            return result.isSuccess
+    fun hasRootAccess(): Boolean {
+        Shell.isAppGrantedRoot()?.let { granted ->
+            if (granted) cachedHasRoot = true
+            return granted
         }
 
-        return hasRootAccess()
+        cachedHasRoot?.let { cached ->
+            if (cached) return true
+            if (SystemClock.elapsedRealtime() - lastRootCheck < ROOT_CHECK_INTERVAL_MS) return false
+        }
+
+        synchronized(this) {
+            Shell.isAppGrantedRoot()?.let { granted ->
+                if (granted) cachedHasRoot = true
+                return granted
+            }
+
+            cachedHasRoot?.let { cached ->
+                if (cached) return true
+                if (SystemClock.elapsedRealtime() - lastRootCheck < ROOT_CHECK_INTERVAL_MS) return false
+            }
+
+            val probeResult = runCatching { Shell.cmd("id").exec() }.getOrNull()
+            lastRootCheck = SystemClock.elapsedRealtime()
+
+            val granted = Shell.isAppGrantedRoot() == true || probeResult?.hasRootUid() == true
+            cachedHasRoot = granted
+
+            return granted
+        }
     }
+
+    // FIXME ORIGNAL
+//
+//    /**
+//     * @return If root access has been attempted _and_ granted.
+//     *         This will **not** request root if not yet granted.
+//     * @see requestRootAccessIfNotAskedYet
+//     */
+//    fun hasRootAccess() = Shell.isAppGrantedRoot() ?: false
+//
+//    /**
+//     * Prompts the user for root access, but only prompts once per
+//     * app installation and will not cause "root denied" toasts.
+//     *
+//     * @return If the user approved root access or was previously granted.
+//     * @see hasRootAccess
+//     */
+//    fun requestRootAccessIfNotAskedYet(context: Context) : Boolean {
+//        val attempted = getRootAccessAttempted(context)
+//        if (!attempted.get()) {
+//            attempted.save(true)
+//            val result = cmd("id").exec()
+//            return result.isSuccess
+//        }
+//
+//        return hasRootAccess()
+//    }
+//    // FIXME END
+
+    fun isDeviceRooted() = System.getenv("PATH")?.split(":")?.any { path ->
+        File(path, "su").canExecute()
+    } ?: false
 
     suspend fun isAppInstalled(packageName: String) =
         awaitRemoteFS().getFile("$modulesPath/$packageName-revanced").exists()
@@ -187,8 +231,12 @@ class RootInstaller(
         if (isAppMounted(packageName))
             unmount(packageName)
 
-        remoteFS.getFile("$modulesPath/$packageName-revanced").deleteRecursively()
-            .also { if (!it) throw Exception("Failed to delete files") }
+        val moduleDir = remoteFS.getFile("$modulesPath/$packageName-revanced")
+        if (!moduleDir.exists()) return
+
+        moduleDir.deleteRecursively().also { deleted ->
+            if (!deleted) throw Exception("Failed to delete files")
+        }
     }
 
     companion object {
@@ -207,7 +255,13 @@ class RootInstaller(
             }
             return rootAccessAttemptedValue!!
         }
+
+        private const val ROOT_CHECK_INTERVAL_MS = 1_000L
     }
 }
 
 class RootServiceException : Exception("Root not available")
+
+private fun Shell.Result.hasRootUid() = isSuccess && out.any { line ->
+    line.contains("uid=0")
+}

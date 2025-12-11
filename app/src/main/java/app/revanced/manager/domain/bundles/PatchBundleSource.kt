@@ -23,10 +23,14 @@ sealed class PatchBundleSource(
 ) {
     protected val patchesFile = directory.resolve("patches.jar")
 
-    val state = when {
-        error != null -> State.Failed(error)
-        !hasInstalled() -> State.Missing
-        else -> State.Available(PatchBundle(patchesFile.absolutePath))
+    val state = runCatching {
+        when {
+            error != null -> State.Failed(error)
+            !hasInstalled() -> State.Missing
+            else -> State.Available(PatchBundle(patchesFile.absolutePath))
+        }
+    }.getOrElse { throwable ->
+        State.Failed(throwable)
     }
 
     val patchBundle get() = (state as? State.Available)?.bundle

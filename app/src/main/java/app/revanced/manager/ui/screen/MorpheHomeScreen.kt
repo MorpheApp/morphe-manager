@@ -187,7 +187,7 @@ fun MorpheHomeScreen(
 
     val hasRootAccess by remember {
         derivedStateOf {
-            dashboardViewModel.rootInstaller?.requestRootAccessIfNotAskedYet(context) ?: false
+            dashboardViewModel.rootInstaller?.isDeviceRooted() /*.requestRootAccessIfNotAskedYet(context)*/ ?: false
         }
     }
 

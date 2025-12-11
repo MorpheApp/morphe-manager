@@ -6,6 +6,7 @@ import app.morphe.library.ApkSigner
 import app.morphe.library.ApkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.InputStream
@@ -13,6 +14,9 @@ import java.io.OutputStream
 import java.nio.file.Files
 import java.security.UnrecoverableKeyException
 import java.util.Date
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 import kotlin.time.Duration.Companion.days
 
 class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
@@ -40,7 +44,9 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     )
 
     suspend fun sign(input: File, output: File) = withContext(Dispatchers.Default) {
-        ApkUtils.signApk(input, output, prefs.keystoreAlias.get(), signingDetails())
+        val sanitized = sanitizeZipIfNeeded(input)
+        ApkUtils.signApk(sanitized, output, prefs.keystoreAlias.get(), signingDetails())
+        if (sanitized != input) sanitized.delete()
     }
 
     suspend fun regenerate() = withContext(Dispatchers.Default) {
@@ -62,6 +68,40 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         }
 
         updatePrefs(DEFAULT, DEFAULT)
+    }
+
+    /**
+     * Some APKs (often from third-party downloads) contain malformed ZIP headers that trigger
+     * ApkSigner errors like "Data Descriptor presence mismatch". Repackage the archive to fix
+     * header inconsistencies before signing.
+     */
+    private suspend fun sanitizeZipIfNeeded(input: File): File = withContext(Dispatchers.IO) {
+        runCatching {
+            val tempFile = File.createTempFile("apk-sanitized-", ".apk", input.parentFile)
+            ZipFile(input).use { zip ->
+                ZipOutputStream(tempFile.outputStream()).use { zos ->
+                    zip.entries().asSequence().forEach { entry ->
+                        val cleanEntry = ZipEntry(entry.name).apply {
+                            method = entry.method
+                            time = entry.time
+                            comment = entry.comment
+                            size = entry.size
+                            compressedSize = -1 // let ZipOutputStream compute
+                            crc = entry.crc
+                            extra = entry.extra
+                        }
+                        zos.putNextEntry(cleanEntry)
+                        if (!entry.isDirectory) {
+                            zip.getInputStream(entry).use { inputStream ->
+                                BufferedInputStream(inputStream).copyTo(zos)
+                            }
+                        }
+                        zos.closeEntry()
+                    }
+                }
+            }
+            tempFile
+        }.getOrElse { input }
     }
 
     suspend fun import(alias: String, pass: String, keystore: InputStream): Boolean {

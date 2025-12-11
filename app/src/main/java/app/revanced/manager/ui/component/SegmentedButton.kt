@@ -2,6 +2,7 @@ package app.revanced.manager.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ fun RowScope.SegmentedButton(
     icon: Any,
     text: String,
     onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
     iconDescription: String? = null,
     enabled: Boolean = true
 ) {
@@ -43,7 +45,11 @@ fun RowScope.SegmentedButton(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
             modifier = Modifier
-                .clickable(enabled = enabled, onClick = onClick)
+                .combinedClickable(
+                    enabled = enabled,
+                    onClick = onClick,
+                    onLongClick = onLongClick
+                )
                 .background(
                     if (enabled)
                         MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)

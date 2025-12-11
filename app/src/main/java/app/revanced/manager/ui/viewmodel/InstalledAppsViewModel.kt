@@ -210,7 +210,12 @@ class InstalledAppsViewModel(
                     pm.getPackageInfo(savedFile)
                 }
 
-                else -> pm.getPackageInfo(packageName)
+                else -> {
+                    pm.getPackageInfo(packageName) ?: run {
+                        val savedFile = filesystem.getPatchedAppFile(packageName, installedApp.version)
+                        if (savedFile.exists()) pm.getPackageInfo(savedFile) else null
+                    }
+                }
             }
         }
 

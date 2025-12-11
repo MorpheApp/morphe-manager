@@ -1,3 +1,20 @@
+import java.util.Properties
+
+val localProps = Properties().apply {
+    val file = rootDir.resolve("local.properties")
+    if (file.exists()) file.inputStream().use(::load)
+}
+
+fun githubUser(): String? =
+    localProps.getProperty("gpr.user")
+        ?: providers.gradleProperty("gpr.user").orNull
+        ?: System.getenv("GITHUB_ACTOR")
+
+fun githubToken(): String? =
+    localProps.getProperty("gpr.key")
+        ?: providers.gradleProperty("gpr.key").orNull
+        ?: System.getenv("GITHUB_TOKEN")
+
 pluginManagement {
     repositories {
         mavenLocal()

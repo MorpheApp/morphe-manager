@@ -1,5 +1,7 @@
 import io.github.z4kn4fein.semver.toVersion
 import kotlin.random.Random
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.jvm.tasks.Jar
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,6 +15,17 @@ plugins {
 }
 
 val outputApkFileName = "${rootProject.name}-$version.apk"
+
+val arscLib by configurations.creating
+
+val strippedArscLib by tasks.registering(Jar::class) {
+    archiveFileName.set("ARSCLib-android.jar")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    doFirst {
+        from(arscLib.resolve().map { zipTree(it) })
+    }
+    exclude("android/**", "org/xmlpull/**")
+}
 
 dependencies {
     // AndroidX Core
@@ -59,6 +72,10 @@ dependencies {
     // Morphe
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
+
+    arscLib("io.github.reandroid:ARSCLib:1.3.8")
+    implementation(files(strippedArscLib))
+    implementation("androidx.documentfile:documentfile:1.0.1")
 
     // Downloader plugins
     implementation(project(":api"))
@@ -132,6 +149,7 @@ android {
 
     defaultConfig {
         applicationId = "app.morphe.manager"
+
         minSdk = 26
         targetSdk = 35
 

@@ -3,6 +3,7 @@ package app.revanced.manager.ui.screen.settings
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,24 +26,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import app.morphe.manager.BuildConfig
-import app.morphe.manager.R
+import app.revanced.manager.ui.component.AnnotatedLinkText // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
+import androidx.compose.ui.graphics.vector.ImageVector
 import app.revanced.manager.ui.component.AppTopBar
+import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
 import app.revanced.manager.util.openUrl
+import app.morphe.manager.BuildConfig
+import app.morphe.manager.R
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutSettingsScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    navigate: (Settings.Destination) -> Unit,
 ) {
     val context = LocalContext.current
     // painterResource() is broken on release builds for some reason.
@@ -56,16 +60,24 @@ fun AboutSettingsScreen(
                 getSocialIcon("GitHub"),
                 context.getString(R.string.morphe_about_github),
                 { context.openUrl("https://github.com/MorpheApp") }
+//                context.getString(R.string.github),
+//                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
             ),
             Triple(
                 getSocialIcon("X"),
                 context.getString(R.string.morphe_about_x),
                 { context.openUrl("https://x.com/MorpheApp") }
+//                context.getString(R.string.original_revanced_manager_github),
+//                getSocialIcon("GitHub"),
+//                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
             ),
             Triple(
                 getSocialIcon("Reddit"),
                 context.getString(R.string.morphe_about_reddit),
                 { context.openUrl("https://reddit.com/r/MorpheApp") }
+//                getSocialIcon("GitHub"),
+//                context.getString(R.string.patch_bundle_urls),
+//                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
             )
         )
     }

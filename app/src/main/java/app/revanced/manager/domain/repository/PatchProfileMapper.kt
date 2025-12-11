@@ -36,7 +36,8 @@ fun PatchSelection.toPayload(
                 displayName = source?.displayTitle ?: info?.name,
                 sourceEndpoint = (source as? RemotePatchBundle)?.endpoint,
                 sourceName = source?.patchBundle?.manifestAttributes?.name ?: source?.name ?: info?.name,
-                version = info?.version
+                version = info?.version,
+                optionDisplayInfo = emptyMap()
             )
         }
     )
@@ -194,7 +195,8 @@ fun PatchProfilePayload.remapLocalBundles(
                 bundleUid = direct.uid,
                 displayName = direct.displayTitle,
                 sourceName = direct.patchBundle?.manifestAttributes?.name ?: direct.name,
-                sourceEndpoint = null
+                sourceEndpoint = null,
+                optionDisplayInfo = bundle.optionDisplayInfo
             )
             if (updated != bundle) changed = true
             return@map updated
@@ -219,7 +221,8 @@ fun PatchProfilePayload.remapLocalBundles(
                 bundleUid = target.uid,
                 displayName = target.displayTitle,
                 sourceName = target.patchBundle?.manifestAttributes?.name ?: target.name,
-                sourceEndpoint = null
+                sourceEndpoint = null,
+                optionDisplayInfo = bundle.optionDisplayInfo
             )
             if (updated != bundle) changed = true
             return@map updated
@@ -248,7 +251,8 @@ fun PatchProfilePayload.remapLocalBundles(
                 bundleUid = signatureMatch.uid,
                 displayName = signatureMatch.displayTitle,
                 sourceName = signatureMatch.patchBundle?.manifestAttributes?.name ?: signatureMatch.name,
-                sourceEndpoint = null
+                sourceEndpoint = null,
+                optionDisplayInfo = bundle.optionDisplayInfo
             )
             if (updated != bundle) changed = true
             updated

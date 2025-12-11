@@ -90,7 +90,7 @@ import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionBut
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
-import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -132,6 +132,22 @@ fun SelectedAppInfoScreen(
     val selectedPatchCount = patches.values.sumOf { it.size }
     val useMorpheUI by vm.prefs.useMorpheHomeScreen.getAsState()
 
+    val downloadedApps by vm.downloadedApps.collectAsStateWithLifecycle(emptyList())
+    val resolveNavigationVersion: (SelectedApp) -> SelectedApp = remember(downloadedApps, vm.selectedAppInfo, vm.selectedApp) {
+        { app ->
+            val versionOverride = vm.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
+                ?: app.version?.takeUnless { it.isNullOrBlank() }
+                ?: downloadedApps.firstOrNull()?.version?.takeUnless { it.isNullOrBlank() }
+            if (versionOverride.isNullOrBlank()) return@remember app
+            when (app) {
+                is SelectedApp.Download -> app.copy(version = versionOverride)
+                is SelectedApp.Search -> app.copy(version = versionOverride)
+                is SelectedApp.Local -> app.copy(version = versionOverride)
+                is SelectedApp.Installed -> app.copy(version = versionOverride)
+            }
+        }
+    }
+
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = vm::handlePluginActivityResult
@@ -140,16 +156,15 @@ fun SelectedAppInfoScreen(
         launcher.launch(intent)
     }
     val storagePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
+        contract = ActivityResultContracts.OpenDocument(),
         onResult = vm::handleStorageResult
     )
     EventEffect(flow = vm.requestStorageSelection) {
-        storagePickerLauncher.launch(APK_MIMETYPE)
+        storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
     }
     val composableScope = rememberCoroutineScope()
 
     val error by vm.errorFlow.collectAsStateWithLifecycle(null)
-    val downloadedApps by vm.downloadedApps.collectAsStateWithLifecycle(emptyList())
     val profileLaunchState by vm.profileLaunchState.collectAsStateWithLifecycle(null)
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -160,7 +175,7 @@ fun SelectedAppInfoScreen(
         val appSource = vm.selectedApp
         if (appSource is SelectedApp.Search) return@LaunchedEffect
         vm.markProfileAutoLaunchConsumed()
-        onPatchSelectorClick(appSource, launchState.selection, launchState.options)
+        onPatchSelectorClick(resolveNavigationVersion(appSource), launchState.selection, launchState.options)
     }
 
     Scaffold(
@@ -279,13 +294,19 @@ fun SelectedAppInfoScreen(
 
             PageItem(
                 R.string.patch_selector_item,
-                stringResource(R.string.patch_selector_item_description, selectedPatchCount),
+                stringResource(
+                    R.string.patch_selector_item_description,
+                    selectedPatchCount
+                ),
                 onClick = {
                     composableScope.launch {
                         val optionsSnapshot = vm.awaitOptions()
                         onPatchSelectorClick(
-                            vm.selectedApp,
-                            vm.getCustomPatches(bundles, allowIncompatiblePatches),
+                            resolveNavigationVersion(vm.selectedApp),
+                            vm.getCustomPatches(
+                                bundles,
+                                allowIncompatiblePatches
+                            ),
                             optionsSnapshot
                         )
                     }
@@ -343,7 +364,9 @@ fun SelectedAppInfoScreen(
                         else
                             stringResource(R.string.apk_source_downloaded)
                 },
-                onClick = { vm.showSourceSelector() }
+                onClick = {
+                    vm.showSourceSelector()
+                }
             )
 
             error?.let {
@@ -358,9 +381,8 @@ fun SelectedAppInfoScreen(
                 modifier = Modifier.padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                val needsInternet = vm.selectedApp.let {
-                    it is SelectedApp.Search || it is SelectedApp.Download
-                }
+                val needsInternet =
+                    vm.selectedApp.let { it is SelectedApp.Search || it is SelectedApp.Download }
 
                 when {
                     !needsInternet -> {}
@@ -820,8 +842,7 @@ private fun AppSourceSelectorDialog(
             LazyColumn {
                 if (downloadedApps.isNotEmpty()) {
                     item(key = "downloaded_header") {
-                        val icon = if (showDownloadedApps) Icons.Outlined.UnfoldLess
-                        else Icons.Outlined.UnfoldMore
+                        val icon = if (showDownloadedApps) Icons.Outlined.UnfoldLess else Icons.Outlined.UnfoldMore
                         ListItem(
                             modifier = Modifier
                                 .clickable { showDownloadedApps = !showDownloadedApps }
@@ -838,9 +859,7 @@ private fun AppSourceSelectorDialog(
                         ) { downloadedApp ->
                             ListItem(
                                 modifier = Modifier
-                                    .clickable(enabled = canSelect) {
-                                        onSelectDownloaded(downloadedApp)
-                                    }
+                                    .clickable(enabled = canSelect) { onSelectDownloaded(downloadedApp) }
                                     .padding(start = 16.dp),
                                 headlineContent = { Text(downloadedApp.version) },
                                 supportingContent = { Text(downloadedApp.packageName) },
@@ -855,13 +874,9 @@ private fun AppSourceSelectorDialog(
                         val hasPlugins = plugins.isNotEmpty()
                         ListItem(
                             modifier = Modifier
-                                .clickable(enabled = canSelect && hasPlugins) {
-                                    onSelect(searchApp)
-                                }
+                                .clickable(enabled = canSelect && hasPlugins) { onSelect(searchApp) }
                                 .enabled(hasPlugins),
-                            headlineContent = {
-                                Text(stringResource(R.string.app_source_dialog_option_auto))
-                            },
+                            headlineContent = { Text(stringResource(R.string.app_source_dialog_option_auto)) },
                             supportingContent = {
                                 Text(
                                     if (hasPlugins)
@@ -878,9 +893,10 @@ private fun AppSourceSelectorDialog(
                 if (includeInstalledOption) installedApp?.let { (app, meta) ->
                     item(key = "installed") {
                         val (usable, text) = when {
-                            meta?.installType == InstallType.MOUNT && !hasRoot ->
-                                false to stringResource(R.string.app_source_dialog_option_installed_no_root)
-                            meta?.installType == InstallType.DEFAULT ->
+                            meta?.installType == InstallType.MOUNT && !hasRoot -> false to stringResource(
+                                R.string.app_source_dialog_option_installed_no_root
+                            )
+                            meta?.installType == InstallType.DEFAULT || meta?.installType == InstallType.CUSTOM ->
                                 false to stringResource(R.string.already_patched)
                             requiredVersion != null && app.version != requiredVersion ->
                                 false to stringResource(
@@ -904,9 +920,7 @@ private fun AppSourceSelectorDialog(
                     item(key = "storage") {
                         ListItem(
                             modifier = Modifier.clickable(enabled = canSelect) { selectLocal() },
-                            headlineContent = {
-                                Text(stringResource(R.string.app_source_dialog_option_storage))
-                            },
+                            headlineContent = { Text(stringResource(R.string.app_source_dialog_option_storage)) },
                             supportingContent = {
                                 Text(stringResource(R.string.app_source_dialog_option_storage_description))
                             },
@@ -917,13 +931,9 @@ private fun AppSourceSelectorDialog(
 
                 items(plugins, key = { "plugin_${it.packageName}" }) { plugin ->
                     ListItem(
-                        modifier = Modifier.clickable(enabled = canSelect) {
-                            onSelectPlugin(plugin)
-                        },
+                        modifier = Modifier.clickable(enabled = canSelect) { onSelectPlugin(plugin) },
                         headlineContent = { Text(plugin.name) },
-                        trailingContent = (@Composable {
-                            LoadingIndicator()
-                        }).takeIf { activeSearchJob == plugin.packageName },
+                        trailingContent = (@Composable { LoadingIndicator() }).takeIf { activeSearchJob == plugin.packageName },
                         colors = transparentListItemColors
                     )
                 }

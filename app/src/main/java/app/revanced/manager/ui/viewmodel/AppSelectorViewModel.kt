@@ -14,9 +14,14 @@ import androidx.lifecycle.viewmodel.compose.saveable
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import androidx.documentfile.provider.DocumentFile
+import android.webkit.MimeTypeMap
 import app.revanced.manager.ui.model.SelectedApp
+import app.revanced.manager.patcher.split.SplitApkInspector
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.toast
+import app.revanced.manager.util.saveableVar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
@@ -36,12 +41,10 @@ class AppSelectorViewModel(
     private val patchBundleRepository: PatchBundleRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val inputFile = savedStateHandle.saveable(key = "inputFile") {
-        File(
-            fs.uiTempDir,
-            "input.apk"
-        ).also(File::delete)
+    private var inputFile by savedStateHandle.saveableVar {
+        File(fs.uiTempDir, "input.apk").also(File::delete)
     }
+    private val splitWorkspace = fs.tempDir
     val appList = pm.appList
 
     private val storageSelectionChannel = Channel<SelectedApp.Local>()
@@ -126,21 +129,65 @@ class AppSelectorViewModel(
         }
     }
 
-    private fun loadSelectedFile(uri: Uri) =
+    private suspend fun loadSelectedFile(uri: Uri) =
         app.contentResolver.openInputStream(uri)?.use { stream ->
-            with(inputFile) {
-                delete()
-                Files.copy(stream, toPath())
+            val extension = resolveExtension(uri)
+            val destination = prepareInputFile(extension)
+            destination.delete()
+            Files.copy(stream, destination.toPath())
 
-                pm.getPackageInfo(this)?.let { packageInfo ->
+            if (SplitApkPreparer.isSplitArchive(destination)) {
+                SelectedApp.Local(
+                    packageName = destination.nameWithoutExtension,
+                    version = "unspecified",
+                    file = destination,
+                    temporary = true,
+                    resolved = false
+                )
+            } else {
+                resolvePackageInfo(destination)?.let { packageInfo ->
                     SelectedApp.Local(
                         packageName = packageInfo.packageName,
-                        version = packageInfo.versionName!!,
-                        file = this,
+                        version = packageInfo.versionName ?: "",
+                        file = destination,
                         temporary = true
                     )
                 }
             }
+        }
+
+    private fun resolveExtension(uri: Uri): String {
+        val document = DocumentFile.fromSingleUri(app, uri)
+        val nameExt = document?.name?.substringAfterLast('.', "")?.lowercase(Locale.ROOT)
+        if (!nameExt.isNullOrBlank()) return nameExt
+
+        val mime = app.contentResolver.getType(uri)
+        val resolved = mime?.let { MimeTypeMap.getSingleton().getExtensionFromMimeType(it) }
+        return resolved?.lowercase(Locale.ROOT).orEmpty()
+    }
+
+    private fun prepareInputFile(extension: String): File {
+        val sanitized = extension.lowercase(Locale.ROOT).takeIf { it.matches(Regex("^[a-z0-9]{1,10}$")) }
+            ?: "apk"
+        val destination = File(inputFile.parentFile, "input.$sanitized")
+        if (destination != inputFile) {
+            inputFile.delete()
+            inputFile = destination
+        }
+        return destination
+    }
+
+    private suspend fun resolvePackageInfo(file: File): PackageInfo? =
+        if (SplitApkPreparer.isSplitArchive(file)) {
+            val extracted = SplitApkInspector.extractRepresentativeApk(file, splitWorkspace)
+                ?: return null
+            try {
+                pm.getPackageInfo(extracted.file)
+            } finally {
+                extracted.cleanup()
+            }
+        } else {
+            pm.getPackageInfo(file)
         }
 }
 

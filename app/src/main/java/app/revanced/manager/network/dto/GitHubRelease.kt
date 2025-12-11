@@ -33,3 +33,44 @@ data class GitHubContributor(
     @SerialName("avatar_url")
     val avatarUrl: String,
 )
+
+// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+@Serializable
+data class GitHubPullRequest(
+    val url: String,
+    val head: GitHubPullRequestHead
+)
+
+@Serializable
+data class GitHubPullRequestHead(
+    val sha: String
+)
+
+@Serializable
+data class GitHubActionRuns(
+    @SerialName("workflow_runs")
+    val workflowRuns: List<GitHubActionRun> = emptyList()
+)
+
+@Serializable
+data class GitHubActionRun(
+    val id: String,
+    @SerialName("head_sha")
+    val headSha: String,
+    @SerialName("display_title")
+    val displayTitle: String
+)
+
+@Serializable
+data class GitHubActionRunArtifacts(
+    @SerialName("artifacts")
+    val artifacts: List<GitHubActionArtifact> = emptyList()
+)
+
+@Serializable
+data class GitHubActionArtifact(
+    @SerialName("archive_download_url")
+    val archiveDownloadUrl: String,
+    @SerialName("created_at")
+    val createdAt: String
+)

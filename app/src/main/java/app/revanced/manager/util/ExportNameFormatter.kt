@@ -30,14 +30,6 @@ object ExportNameFormatter {
         .withZone(ZoneId.systemDefault())
 
     fun availableVariables(): List<Variable> = listOf(
-        Variable("{app name}", app.morphe.manager.R.string.export_name_variable_app_name, app.morphe.manager.R.string.export_name_variable_app_name_description),
-        Variable("{package name}", app.morphe.manager.R.string.export_name_variable_package_name, app.morphe.manager.R.string.export_name_variable_package_name_description),
-        Variable("{app version}", app.morphe.manager.R.string.export_name_variable_app_version, app.morphe.manager.R.string.export_name_variable_app_version_description),
-        Variable("{patches version}", app.morphe.manager.R.string.export_name_variable_patches_version, app.morphe.manager.R.string.export_name_variable_patches_version_description),
-        Variable("{patch bundle names}", app.morphe.manager.R.string.export_name_variable_bundle_names, app.morphe.manager.R.string.export_name_variable_bundle_names_description),
-        Variable("{manager version}", app.morphe.manager.R.string.export_name_variable_manager_version, app.morphe.manager.R.string.export_name_variable_manager_version_description),
-        Variable("{timestamp}", app.morphe.manager.R.string.export_name_variable_timestamp, app.morphe.manager.R.string.export_name_variable_timestamp_description),
-        Variable("{date}", app.morphe.manager.R.string.export_name_variable_date, app.morphe.manager.R.string.export_name_variable_date_description)
     )
 
     fun format(template: String?, data: PatchedAppExportData): String {

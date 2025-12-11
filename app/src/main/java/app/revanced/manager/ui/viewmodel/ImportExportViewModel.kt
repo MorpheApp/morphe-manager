@@ -31,6 +31,7 @@ import app.revanced.manager.util.JSON_MIMETYPE
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.uiSafe
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.coroutineScope
@@ -303,14 +304,19 @@ class ImportExportViewModel(
                     withContext(Dispatchers.Main) { progressToast.show() }
 
                     val toastRepeater = launch(Dispatchers.Main) {
-                        while (isActive) {
-                            delay(1_750)
-                            progressToast.show()
+                        try {
+                            while (isActive) {
+                                delay(1_750)
+                                progressToast.show()
+                            }
+                        } catch (_: CancellationException) {
+                            // Ignore cancellation.
                         }
                     }
 
                     var officialCreated = false
                     var officialUpdated = false
+                    var hasOfficialSnapshot = false
                     var shouldRemoveOfficial = true
 
                     val summary = try {
@@ -341,6 +347,7 @@ class ImportExportViewModel(
                                 if (endpoint.equals(SourceInfo.API.SENTINEL, true)) {
                                     officialSnapshot = snapshot
                                     shouldRemoveOfficial = false
+                                    hasOfficialSnapshot = true
                                     continue
                                 }
                                 if (endpoint.isBlank()) continue
@@ -362,12 +369,15 @@ class ImportExportViewModel(
                                         }
                                         changed = true
                                     }
-                                    if (snapshot.createdAt != null || snapshot.updatedAt != null) {
+                                    val needsCreatedAtUpdate = snapshot.createdAt != null && snapshot.createdAt != current.createdAt
+                                    val needsUpdatedAtUpdate = snapshot.updatedAt != null && snapshot.updatedAt != current.updatedAt
+                                    if (needsCreatedAtUpdate || needsUpdatedAtUpdate) {
                                         patchBundleRepository.updateTimestamps(
                                             current,
                                             snapshot.createdAt,
                                             snapshot.updatedAt
                                         )
+                                        changed = true
                                     }
                                     if (changed) updatedCount += 1
                                     continue
@@ -409,12 +419,15 @@ class ImportExportViewModel(
                                 val desiredAutoUpdate = snapshot.officialAutoUpdate
                                 when (desiredState) {
                                     OfficialBundleState.PRESENT -> {
+                                        snapshot.position?.let { position ->
+                                            patchBundleRepository.setOfficialBundleSortOrder(position)
+                                        }
                                         var defaultSource = patchBundleRepository.sources.first()
                                             .firstOrNull { it.isDefault }
                                         if (defaultSource == null) {
                                             patchBundleRepository.restoreDefaultBundle()
                                             patchBundleRepository.refreshDefaultBundle()
-                                        defaultSource = patchBundleRepository.sources.first()
+                                            defaultSource = patchBundleRepository.sources.first()
                                                 .firstOrNull { it.isDefault }
                                             if (defaultSource != null) {
                                                 officialCreated = true
@@ -453,6 +466,7 @@ class ImportExportViewModel(
                                                 )
                                             }
                                         }
+                                        patchBundleRepository.enforceOfficialOrderPreference()
                                     }
                                     OfficialBundleState.ABSENT -> {
                                         patchBundleRepository.sources.first()
@@ -487,30 +501,57 @@ class ImportExportViewModel(
                                         source.asRemoteOrNull?.let { remote -> remote.endpoint to remote.uid }
                                     }
                                     .toMap()
-                                val defaultUid = latestSources.firstOrNull { it.isDefault }?.uid
+                                val actualDefaultUid = latestSources.firstOrNull { it.isDefault }?.uid
+                                val defaultUid = actualDefaultUid ?: PREINSTALLED_BUNDLE_UID
+                                val storedOfficialOrder = patchBundleRepository.getOfficialBundleSortOrder()
                                 val desiredOrder = orderedSnapshots.mapNotNull { (snapshot, _) ->
                                     val endpoint = snapshot.endpoint.trim()
-                                    val positionUid = if (endpoint.equals(SourceInfo.API.SENTINEL, true)) {
-                                        defaultUid ?: patchBundleRepository.sources.first()
-                                            .firstOrNull { it.isDefault }?.uid
-                                    } else {
-                                        endpointToUid[endpoint]
+                                    when {
+                                        endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
+                                        else -> endpointToUid[endpoint]
                                     }
-                                    positionUid
                                 }.toMutableList()
 
-                                val officialPosition = orderedSnapshots.firstOrNull { (snapshot, _) ->
+                                val sentinelIndex = orderedSnapshots.indexOfFirst { (snapshot, _) ->
                                     snapshot.endpoint.trim().equals(SourceInfo.API.SENTINEL, true)
-                                }?.first?.position
-                                if (officialPosition != null && defaultUid != null) {
-                                    if (defaultUid in desiredOrder) {
-                                        desiredOrder.remove(defaultUid)
-                                    }
-                                    val targetIndex = officialPosition.coerceIn(0, desiredOrder.size)
-                                    desiredOrder.add(targetIndex, defaultUid)
                                 }
+                                var officialPositionApplied = false
+                                if (sentinelIndex != -1) {
+                                    val resolvedBeforeOfficial = orderedSnapshots
+                                        .take(sentinelIndex)
+                                        .mapNotNull { (snapshot, _) ->
+                                            val endpoint = snapshot.endpoint.trim()
+                                            when {
+                                                endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
+                                                else -> endpointToUid[endpoint]
+                                            }
+                                        }
+                                        .size
+                                    val currentIndex = desiredOrder.indexOf(defaultUid)
+                                    val targetIndex = resolvedBeforeOfficial.coerceIn(0, desiredOrder.size)
+                                    if (currentIndex == -1) {
+                                        desiredOrder.add(targetIndex, defaultUid)
+                                    } else if (currentIndex != targetIndex) {
+                                        desiredOrder.removeAt(currentIndex)
+                                        desiredOrder.add(targetIndex.coerceIn(0, desiredOrder.size), defaultUid)
+                                    }
+                                    officialPositionApplied = true
+                                }
+
+                                if (!officialPositionApplied && sentinelIndex != -1 && storedOfficialOrder != null) {
+                                    val currentIndex = desiredOrder.indexOf(defaultUid)
+                                    val targetIndex = storedOfficialOrder.coerceIn(0, desiredOrder.size)
+                                    if (currentIndex == -1) {
+                                        desiredOrder.add(targetIndex, defaultUid)
+                                    } else if (currentIndex != targetIndex) {
+                                        desiredOrder.removeAt(currentIndex)
+                                        desiredOrder.add(targetIndex, defaultUid)
+                                    }
+                                }
+
                                 if (desiredOrder.isNotEmpty()) {
                                     patchBundleRepository.reorderBundles(desiredOrder)
+                                    patchBundleRepository.enforceOfficialOrderPreference()
                                 }
                             }
 
@@ -528,8 +569,10 @@ class ImportExportViewModel(
                     when {
                         totalCreated > 0 -> app.toast(app.getString(R.string.import_patch_bundles_success, totalCreated))
                         totalUpdated > 0 -> app.toast(app.getString(R.string.import_patch_bundles_updated, totalUpdated))
+                        hasOfficialSnapshot -> app.toast(app.getString(R.string.import_patch_bundles_success, 1))
                         else -> app.toast(app.getString(R.string.import_patch_bundles_none))
                     }
+                    patchBundleRepository.enforceOfficialOrderPreference()
                 }
             }
         }
@@ -749,6 +792,7 @@ class ImportExportViewModel(
     }
 
     private companion object {
+        private const val PREINSTALLED_BUNDLE_UID = 0
         val knownPasswords = arrayOf("ReVanced", "s3cur3p@ssw0rd")
         val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "ReVanced Key")
     }

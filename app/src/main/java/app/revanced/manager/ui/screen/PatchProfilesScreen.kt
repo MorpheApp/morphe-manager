@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bookmarks
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
@@ -30,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -56,6 +58,7 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.viewmodel.BundleSourceType
 import app.revanced.manager.ui.viewmodel.BundleOptionDisplay
 import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
+import app.revanced.manager.ui.viewmodel.PatchProfileListItem
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel.RenameResult
 import app.revanced.manager.util.relativeTime
@@ -82,6 +85,10 @@ fun PatchProfilesScreen(
     var blockedProfile by remember { mutableStateOf<PatchProfileLaunchData?>(null) }
     var renameProfileId by rememberSaveable { mutableStateOf<Int?>(null) }
     var renameProfileName by rememberSaveable { mutableStateOf("") }
+    var versionDialogProfile by remember { mutableStateOf<PatchProfileListItem?>(null) }
+    var versionDialogValue by rememberSaveable { mutableStateOf("") }
+    var versionDialogAllVersions by rememberSaveable { mutableStateOf(false) }
+    var versionDialogSaving by remember { mutableStateOf(false) }
     data class ChangeUidTarget(val profileId: Int, val bundleUid: Int, val bundleName: String?)
     var changeUidTarget by remember { mutableStateOf<ChangeUidTarget?>(null) }
     val expandedProfiles = remember { mutableStateMapOf<Int, Boolean>() }
@@ -196,9 +203,12 @@ fun PatchProfilesScreen(
             )
 
             val detailLine = buildList {
-                profile.appVersion?.let {
-                    val formatted = if (it.startsWith("v", ignoreCase = true)) it else "v$it"
-                    add(formatted)
+                when (val version = profile.appVersion) {
+                    null -> add(stringResource(R.string.bundle_version_all_versions))
+                    else -> {
+                        val formatted = if (version.startsWith("v", ignoreCase = true)) version else "v$version"
+                        add(formatted)
+                    }
                 }
                 add(bundleCountText)
             }.joinToString(" • ")
@@ -360,6 +370,19 @@ fun PatchProfilesScreen(
                                 renameProfileId = profile.id
                                 renameProfileName = profile.name
                             }
+                            Spacer(modifier = Modifier.size(8.dp))
+                            Icon(
+                                imageVector = Icons.Outlined.Settings,
+                                contentDescription = stringResource(R.string.patch_profile_version_override_action),
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .clickable {
+                                        versionDialogProfile = profile
+                                        versionDialogValue = profile.appVersion.orEmpty()
+                                        versionDialogAllVersions = profile.appVersion.isNullOrBlank()
+                                    }
+                            )
                         }
                     }
                     AnimatedVisibility(
@@ -489,10 +512,98 @@ fun PatchProfilesScreen(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     data.entries.forEach { entry ->
                         Text(
-                            text = "${entry.label}: ${entry.value}",
+                            text = "${entry.label}: ${entry.displayValue}",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
+                    }
+                }
+            }
+        )
+    }
+
+    versionDialogProfile?.let { profile ->
+        AlertDialog(
+            onDismissRequest = {
+                if (versionDialogSaving) return@AlertDialog
+                versionDialogProfile = null
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        if (versionDialogSaving) return@TextButton
+                        versionDialogSaving = true
+                        scope.launch {
+                            val versionToSave =
+                                if (versionDialogAllVersions) null else versionDialogValue.trim().takeUnless { it.isBlank() }
+                            if (versionToSave == null && !versionDialogAllVersions) {
+                                val quoted = "\"${context.getString(R.string.bundle_version_all_versions)}\""
+                                context.toast(context.getString(R.string.patch_profile_version_override_set_to_all, quoted))
+                            }
+                            try {
+                                when (viewModel.updateProfileVersion(profile.id, versionToSave)) {
+                                    PatchProfilesViewModel.VersionUpdateResult.SUCCESS -> context.toast(
+                                        context.getString(R.string.patch_profile_version_override_saved_toast)
+                                    )
+
+                                    PatchProfilesViewModel.VersionUpdateResult.PROFILE_NOT_FOUND -> context.toast(
+                                        context.getString(R.string.patch_profile_launch_error)
+                                    )
+
+                                    PatchProfilesViewModel.VersionUpdateResult.FAILED -> context.toast(
+                                        context.getString(R.string.patch_profile_version_override_failed_toast)
+                                    )
+                                }
+                            } finally {
+                                versionDialogSaving = false
+                                versionDialogProfile = null
+                            }
+                        }
+                    }
+                ) {
+                    Text(stringResource(R.string.save))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        if (versionDialogSaving) return@TextButton
+                        versionDialogProfile = null
+                    }
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            },
+            title = { Text(stringResource(R.string.patch_profile_version_override_title, profile.name)) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        text = stringResource(R.string.patch_profile_version_override_message),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    TextField(
+                        value = versionDialogValue,
+                        onValueChange = {
+                            versionDialogValue = it
+                            if (versionDialogAllVersions && it.isNotBlank()) {
+                                versionDialogAllVersions = false
+                            }
+                        },
+                        label = { Text(stringResource(R.string.patch_profile_version_override_label)) },
+                        placeholder = { Text(stringResource(R.string.patch_profile_version_override_hint)) },
+                        singleLine = true,
+                        enabled = !versionDialogAllVersions
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HapticCheckbox(
+                            checked = versionDialogAllVersions,
+                            onCheckedChange = { versionDialogAllVersions = it }
+                        )
+                        Text(text = stringResource(R.string.patch_profile_version_override_all_versions))
                     }
                 }
             }

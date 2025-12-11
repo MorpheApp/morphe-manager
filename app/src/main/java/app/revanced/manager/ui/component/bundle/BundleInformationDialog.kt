@@ -67,7 +67,10 @@ import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.FullscreenDialog
 import app.revanced.manager.ui.component.TextInputDialog
+import app.revanced.manager.ui.component.bundle.BundleLinksSheet
+import app.revanced.manager.ui.component.bundle.openBundleCatalogPage
 import app.revanced.manager.ui.component.haptics.HapticSwitch
+import app.revanced.manager.util.PatchListCatalog
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
@@ -98,9 +101,13 @@ fun BundleInformationDialog(
     val uriHandler = LocalUriHandler.current
     var viewCurrentBundlePatches by remember { mutableStateOf(false) }
     var viewBundleChangelog by remember { mutableStateOf(false) }
+    var showLinkSheet by rememberSaveable { mutableStateOf(false) }
     val isLocal = src is LocalPatchBundle
     val bundleManifestAttributes = src.patchBundle?.manifestAttributes
     val manifestSource = bundleManifestAttributes?.source
+    val catalogUrl = remember(src) {
+        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
+    }
     val (autoUpdate, endpoint) = src.asRemoteOrNull?.let { it.autoUpdate to it.endpoint }
         ?: (null to null)
     var showDisplayNameDialog by remember { mutableStateOf(false) }
@@ -193,6 +200,16 @@ fun BundleInformationDialog(
     FullscreenDialog(
         onDismissRequest = onDismissRequest,
     ) {
+        if (showLinkSheet) {
+            BundleLinksSheet(
+                bundleTitle = src.displayTitle,
+                catalogUrl = catalogUrl,
+                onReleaseClick = { openReleasePage() },
+                onCatalogClick = { openBundleCatalogPage(catalogUrl, context, uriHandler) },
+                onDismissRequest = { showLinkSheet = false }
+            )
+        }
+
         Scaffold(
             topBar = {
                 BundleTopBar(
@@ -205,10 +222,10 @@ fun BundleInformationDialog(
                         )
                     },
                     actions = {
-                        val githubButtonEnabled =
-                            (releasePageUrl != null || (!isLocal && hasNetwork)) && !releasePageLoading
+                        val releaseAvailable = releasePageUrl != null || (!isLocal && hasNetwork)
+                        val githubButtonEnabled = (releaseAvailable || catalogUrl != null) && !releasePageLoading
                         IconButton(
-                            onClick = { if (!releasePageLoading) openReleasePage() },
+                            onClick = { if (githubButtonEnabled) showLinkSheet = true },
                             enabled = githubButtonEnabled
                         ) {
                             Icon(
