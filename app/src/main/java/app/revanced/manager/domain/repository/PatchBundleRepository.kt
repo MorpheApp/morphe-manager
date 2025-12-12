@@ -189,7 +189,7 @@ class PatchBundleRepository(
         val info = loadMetadata(sources).toMutableMap()
 
         val officialSource = sources[0]
-        val officialDisplayName = "Official Morphe Patches"
+        val officialDisplayName = "Morphe Patches"
         if (officialSource != null) {
             val storedCustomName = prefs.officialBundleCustomDisplayName.get().takeIf { it.isNotBlank() }
             val currentName = officialSource.displayName

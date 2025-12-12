@@ -330,7 +330,10 @@ fun BundleItem(
                         )
                     }
                 }
-                ActionIconButton(onClick = { showDeleteConfirmationDialog = true }) {
+                ActionIconButton(
+                    enabled = !src.isDefault, // Morphe: For now, don't allow removing the only source of patches
+                    onClick = { showDeleteConfirmationDialog = true }
+                ) {
                     Icon(
                         Icons.Outlined.Delete,
                         contentDescription = stringResource(R.string.delete),
@@ -363,10 +366,12 @@ fun BundleItem(
 @Composable
 private fun ActionIconButton(
     onClick: () -> Unit,
+    enabled: Boolean = true,
     content: @Composable () -> Unit
 ) {
     IconButton(
         onClick = onClick,
+        enabled = enabled,
         modifier = Modifier.size(40.dp)
     ) {
         content()
