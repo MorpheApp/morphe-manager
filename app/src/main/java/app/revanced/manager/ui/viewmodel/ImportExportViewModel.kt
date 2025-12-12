@@ -344,12 +344,13 @@ class ImportExportViewModel(
                                     PatchBundleRepository.ImportProgress(processed, total)
                                 )
                                 val endpoint = snapshot.endpoint.trim()
-                                if (endpoint.equals(SourceInfo.API.SENTINEL, true)) {
-                                    officialSnapshot = snapshot
-                                    shouldRemoveOfficial = false
-                                    hasOfficialSnapshot = true
-                                    continue
-                                }
+                                // Morphe
+//                                if (endpoint.equals(SourceInfo.API.SENTINEL, true)) {
+//                                    officialSnapshot = snapshot
+//                                    shouldRemoveOfficial = false
+//                                    hasOfficialSnapshot = true
+//                                    continue
+//                                }
                                 if (endpoint.isBlank()) continue
 
                                 val targetDisplayName =
@@ -507,14 +508,18 @@ class ImportExportViewModel(
                                 val desiredOrder = orderedSnapshots.mapNotNull { (snapshot, _) ->
                                     val endpoint = snapshot.endpoint.trim()
                                     when {
-                                        endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
-                                        else -> endpointToUid[endpoint]
+                                         // Morphe
+//                                        endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
+                                        else ->
+                                            endpointToUid[endpoint]
                                     }
                                 }.toMutableList()
 
-                                val sentinelIndex = orderedSnapshots.indexOfFirst { (snapshot, _) ->
-                                    snapshot.endpoint.trim().equals(SourceInfo.API.SENTINEL, true)
-                                }
+                                val sentinelIndex = -1
+                                // Morphe
+//                                orderedSnapshots.indexOfFirst { (snapshot, _) ->
+//                                    snapshot.endpoint.trim().equals(SourceInfo.API.SENTINEL, true)
+//                                }
                                 var officialPositionApplied = false
                                 if (sentinelIndex != -1) {
                                     val resolvedBeforeOfficial = orderedSnapshots
@@ -522,7 +527,8 @@ class ImportExportViewModel(
                                         .mapNotNull { (snapshot, _) ->
                                             val endpoint = snapshot.endpoint.trim()
                                             when {
-                                                endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
+                                                // Morhe
+//                                                endpoint.equals(SourceInfo.API.SENTINEL, true) -> defaultUid
                                                 else -> endpointToUid[endpoint]
                                             }
                                         }
@@ -609,20 +615,21 @@ class ImportExportViewModel(
                         updatedAt = it.updatedAt
                     )
                 }
-                add(
-                    PatchBundleSnapshot(
-                        endpoint = SourceInfo.API.SENTINEL,
-                        name = "",
-                        displayName = officialDisplayName,
-                        autoUpdate = officialAutoUpdate,
-                        officialState = officialState,
-                        position = officialSource?.let { positionLookup[it.uid] },
-                        officialAutoUpdate = officialAutoUpdate,
-                        officialUsePrereleases = officialUsePrereleases,
-                        createdAt = officialSource?.createdAt,
-                        updatedAt = officialSource?.updatedAt
-                    )
-                )
+                // Morphe
+//                add(
+//                    PatchBundleSnapshot(
+//                        endpoint = SourceInfo.API.SENTINEL,
+//                        name = "",
+//                        displayName = officialDisplayName,
+//                        autoUpdate = officialAutoUpdate,
+//                        officialState = officialState,
+//                        position = officialSource?.let { positionLookup[it.uid] },
+//                        officialAutoUpdate = officialAutoUpdate,
+//                        officialUsePrereleases = officialUsePrereleases,
+//                        createdAt = officialSource?.createdAt,
+//                        updatedAt = officialSource?.updatedAt
+//                    )
+//                )
             }
 
             withContext(Dispatchers.IO) {

@@ -69,6 +69,18 @@ fun MorpheHomeScreen(
                 dashboardViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
 
+    var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
+
+    if (!hasDoneAppLaunchBundleUpdate) {
+        hasDoneAppLaunchBundleUpdate = true
+        scope.launch {
+            dashboardViewModel.patchBundleRepository.updateMorpheBundle(
+                showProgress = false,
+                showToast = false
+            )
+        }
+    }
+
     // Remember home state
     val homeState = rememberMorpheHomeState(
         dashboardViewModel = dashboardViewModel,
@@ -198,7 +210,7 @@ fun MorpheHomeScreen(
                 scope.launch {
                     homeState.isRefreshingBundle = true
                     try {
-                        dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                        dashboardViewModel.patchBundleRepository.updateMorpheBundle(
                             showProgress = true,
                             showToast = false
                         )

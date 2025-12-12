@@ -357,7 +357,7 @@ private fun UpdatesSection(
 
                             // Silently update the official bundle in background
                             withContext(Dispatchers.IO) {
-                                dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
                                     showProgress = false, // Don't show progress
                                     showToast = false     // Don't show toast
                                 )
@@ -412,7 +412,7 @@ private fun UpdatesSection(
 
                                 // Silently update the official bundle in background
                                 withContext(Dispatchers.IO) {
-                                    dashboardViewModel.patchBundleRepository.updateOfficialBundle(
+                                    dashboardViewModel.patchBundleRepository.updateMorpheBundle(
                                         showProgress = false, // Don't show progress
                                         showToast = false     // Don't show toast
                                     )

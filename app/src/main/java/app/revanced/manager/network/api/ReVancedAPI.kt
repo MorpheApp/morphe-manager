@@ -250,7 +250,7 @@ class ReVancedAPI(
                 if (parts.size >= 2) {
                     "https://github.com/${parts[0]}/${parts[1]}"
                 } else {
-                    "https://github.com/HundEdFeteTree/HappyFunTest"
+                    "https://github.com/MorpheApp/morphe-patches"
                 }
             }
             jsonUrl.contains("github.com") && jsonUrl.contains("/raw/") -> {
@@ -258,10 +258,10 @@ class ReVancedAPI(
                 if (match != null) {
                     "https://github.com/${match.groupValues[1]}/${match.groupValues[2]}"
                 } else {
-                    "https://github.com/HundEdFeteTree/HappyFunTest"
+                    "https://github.com/MorpheApp/morphe-patches"
                 }
             }
-            else -> "https://github.com/HundEdFeteTree/HappyFunTest"
+            else -> "https://github.com/MorpheApp/morphe-patches"
         }
     }
 

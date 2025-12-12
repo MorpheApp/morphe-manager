@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.util.toast
 import java.text.SimpleDateFormat
@@ -76,7 +77,7 @@ fun MorpheBundleSheet(
                     onRefresh = onRefresh,
                     onOpenInBrowser = {
                         val pageUrl = manualUpdateInfo[apiBundle.uid]?.pageUrl
-                            ?: "https://github.com/HundEdFeteTree/HappyFunTest/releases/latest"
+                            ?: BUNDLE_URL_RELEASES
                         try {
                             uriHandler.openUri(pageUrl)
                         } catch (_: Exception) {

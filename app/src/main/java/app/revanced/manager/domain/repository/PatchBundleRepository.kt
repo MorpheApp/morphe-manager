@@ -16,7 +16,6 @@ import app.revanced.manager.data.room.AppDatabase.Companion.generateUid
 import app.revanced.manager.data.room.bundles.PatchBundleEntity
 import app.revanced.manager.data.room.bundles.PatchBundleProperties
 import app.revanced.manager.data.room.bundles.Source
-import app.revanced.manager.domain.bundles.APIPatchBundle
 import app.revanced.manager.domain.bundles.GitHubPullRequestBundle
 import app.revanced.manager.domain.bundles.JsonPatchBundle
 import app.revanced.manager.data.room.bundles.Source as SourceInfo
@@ -26,6 +25,7 @@ import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_STABLE
 import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.patcher.patch.PatchBundle
 import app.revanced.manager.patcher.patch.PatchBundleInfo
@@ -298,18 +298,18 @@ class PatchBundleRepository(
 
         return when (source) {
             is SourceInfo.Local -> LocalPatchBundle(actualName, uid, normalizedDisplayName, createdAt, updatedAt, null, dir)
-            is SourceInfo.API -> APIPatchBundle(
-                actualName,
-                uid,
-                normalizedDisplayName,
-                createdAt,
-                updatedAt,
-                versionHash,
-                null,
-                dir,
-                SourceInfo.API.SENTINEL,
-                autoUpdate,
-            )
+//            is SourceInfo.API -> APIPatchBundle(
+//                actualName,
+//                uid,
+//                normalizedDisplayName,
+//                createdAt,
+//                updatedAt,
+//                versionHash,
+//                null,
+//                dir,
+//                SourceInfo.API.SENTINEL,
+//                autoUpdate,
+//            )
 
             is SourceInfo.Remote -> JsonPatchBundle(
                 actualName,
@@ -497,7 +497,7 @@ class PatchBundleRepository(
         doReload()
     }
 
-    suspend fun refreshDefaultBundle() = store.dispatch(Update(force = true) { it.uid == DEFAULT_SOURCE_UID })
+    suspend fun refreshDefaultBundle() = store.dispatch(UpdateMorphe(force = true) { it.uid == DEFAULT_SOURCE_UID })
 
     enum class DisplayNameUpdateResult {
         SUCCESS,
@@ -659,14 +659,14 @@ class PatchBundleRepository(
             state.copy(sources = state.sources.put(src.uid, src))
         }
 
-    suspend fun reloadApiBundles() = dispatchAction("Reload API bundles") {
-        this@PatchBundleRepository.sources.first().filterIsInstance<APIPatchBundle>().forEach {
-            with(it) { deleteLocalFile() }
-            updateDb(it.uid) { it.copy(versionHash = null) }
-        }
-
-        doReload()
-    }
+//    suspend fun reloadApiBundles() = dispatchAction("Reload API bundles") {
+//        this@PatchBundleRepository.sources.first().filterIsInstance<APIPatchBundle>().forEach {
+//            with(it) { deleteLocalFile() }
+//            updateDb(it.uid) { it.copy(versionHash = null) }
+//        }
+//
+//        doReload()
+//    }
 
     suspend fun RemotePatchBundle.setAutoUpdate(value: Boolean) {
         dispatchAction("Set auto update ($name, $value)") { state ->
@@ -690,16 +690,16 @@ class PatchBundleRepository(
         allowUnsafeNetwork: Boolean = false
     ) {
         val uids = sources.map { it.uid }.toSet()
-        store.dispatch(Update(showToast = showToast, allowUnsafeNetwork = allowUnsafeNetwork) { it.uid in uids })
+        store.dispatch(UpdateMorphe(showToast = showToast) { it.uid in uids })
     }
 
-    suspend fun redownloadRemoteBundles() = store.dispatch(Update(force = true))
+    suspend fun redownloadRemoteBundles() = store.dispatch(UpdateMorphe(force = true))
 
     /**
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+        store.dispatch(UpdateMorphe { it.autoUpdate })
         checkManualUpdates()
     }
 
@@ -734,18 +734,17 @@ class PatchBundleRepository(
     }
 
     /**
-     * Shared function to update the official bundle (uid = 0)
+     * Shared function to update the Morphe bundle (uid = 0)
      * @param showProgress Whether to show progress updates
      * @param showToast Whether to show toast notifications
      * @return UpdateResult indicating success, no internet, or error
      */
-    suspend fun updateOfficialBundle(
+    suspend fun updateMorpheBundle(
         showProgress: Boolean = true,
         showToast: Boolean = false
     ): UpdateResult {
         // Check network first
-        val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && !networkInfo.isSafe()) {
+        if (!networkInfo.isConnected()) {
             Log.d(tag, "No internet connection for bundle update")
             if (showProgress) {
                 bundleUpdateProgressFlow.value = BundleUpdateProgress(
@@ -771,9 +770,9 @@ class PatchBundleRepository(
             )
         }
 
-        // Use the existing Update action to perform the update
+        // Use our modified update method
         try {
-            store.dispatch(Update(
+            store.dispatch(UpdateMorphe(
                 force = false,
                 showToast = showToast,
                 showProgress = showProgress
@@ -804,13 +803,19 @@ class PatchBundleRepository(
         }
     }
 
+    @Deprecated("Use Morphe class")
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
         private val allowUnsafeNetwork: Boolean = false,
-        private val showProgress: Boolean = true,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
+        init {
+            // Morphe begin
+            // Prevent accidentally using non Morphe code
+            if (true) throw IllegalStateException("Use UpdateMorphe instead")
+            // Morphe end
+        }
         private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
             withContext(Dispatchers.Main) { app.toast(app.getString(id, *args)) }
 
@@ -822,12 +827,111 @@ class PatchBundleRepository(
             val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
             if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
                 Log.d(tag, "Skipping update check because the network is down or metered.")
+                bundleUpdateProgressFlow.value = null
+                return@coroutineScope current
+            }
+
+            val targets = current.sources.values
+                .filterIsInstance<RemotePatchBundle>()
+                .filter { predicate(it) }
+
+            if (targets.isEmpty()) {
+                if (showToast) toast(R.string.patches_update_unavailable)
+                bundleUpdateProgressFlow.value = null
+                return@coroutineScope current
+            }
+
+            bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                total = targets.size,
+                completed = 0
+            )
+
+            val updated = try {
+                targets
+                    .map { bundle ->
+                        async {
+                            Log.d(tag, "Updating patch bundle: ${bundle.name}")
+
+                            val result = with(bundle) {
+                                if (force) downloadLatest() else update()
+                            }
+
+                            bundleUpdateProgressFlow.update { progress ->
+                                progress?.copy(
+                                    completed = (progress.completed + 1).coerceAtMost(progress.total)
+                                )
+                            }
+
+                            if (result == null) return@async null
+
+                            bundle to result
+                        }
+                    }
+                    .awaitAll()
+                    .filterNotNull()
+                    .toMap()
+            } finally {
+                bundleUpdateProgressFlow.value = null
+            }
+            if (updated.isEmpty()) {
+                if (showToast) toast(R.string.patches_update_unavailable)
+                return@coroutineScope current
+            }
+
+            updated.forEach { (src, downloadResult) ->
+                val name = src.patchBundle?.manifestAttributes?.name ?: src.name
+                val now = System.currentTimeMillis()
+
+                updateDb(src.uid) {
+                    it.copy(
+                        versionHash = downloadResult.versionSignature,
+                        name = name,
+                        createdAt = downloadResult.assetCreatedAtMillis ?: it.createdAt,
+                        updatedAt = now
+                    )
+                }
+            }
+
+            if (updated.isNotEmpty()) {
+                val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
+                manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
+            }
+
+            if (showToast) toast(R.string.patches_update_success)
+            doReload()
+        }
+
+        override suspend fun catch(exception: Exception) {
+            Log.e(tag, "Failed to update patches", exception)
+            toast(R.string.patches_download_fail, exception.simpleMessage())
+        }
+    }
+
+    // Hard copy of original Update with our changes to solve upstream problems
+    private inner class UpdateMorphe(
+        private val force: Boolean = false,
+        private val showToast: Boolean = false,
+        private val showProgress: Boolean = true,
+        private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
+    ) : Action<State> {
+        private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
+            withContext(Dispatchers.Main) { app.toast(app.getString(id, *args)) }
+
+        override fun toString() = if (force) "Redownload remote bundles" else "Update check"
+
+        override suspend fun ActionContext.execute(
+            current: State
+        ) = coroutineScope {
+            // Check network connectivity first
+            if (!networkInfo.isConnected()) {
+                Log.d(tag, "Skipping update check because the network is down")
                 if (showProgress) {
                     bundleUpdateProgressFlow.value = BundleUpdateProgress(
                         total = 1,
                         completed = 1,
                         result = UpdateResult.NoInternet
                     )
+                    // Schedule automatic clear after delay
                     CoroutineScope(Dispatchers.Default).launch {
                         delay(3500)
                         bundleUpdateProgressFlow.value = null
@@ -836,6 +940,7 @@ class PatchBundleRepository(
                 return@coroutineScope current
             }
 
+            // Filter target bundles based on predicate
             val targets = current.sources.values
                 .filterIsInstance<RemotePatchBundle>()
                 .filter { predicate(it) }
@@ -848,6 +953,7 @@ class PatchBundleRepository(
                 return@coroutineScope current
             }
 
+            // Initialize progress tracking
             if (showProgress) {
                 bundleUpdateProgressFlow.value = BundleUpdateProgress(
                     total = targets.size,
@@ -856,6 +962,7 @@ class PatchBundleRepository(
                 )
             }
 
+            // Perform bundle updates
             val updated = try {
                 targets
                     .map { bundle ->
@@ -866,6 +973,7 @@ class PatchBundleRepository(
                                 if (force) downloadLatest() else update()
                             }
 
+                            // Update progress after each bundle completes
                             if (showProgress) {
                                 bundleUpdateProgressFlow.update { progress ->
                                     progress?.copy(
@@ -883,7 +991,6 @@ class PatchBundleRepository(
                     .filterNotNull()
                     .toMap()
             } catch (e: Exception) {
-                // FIXME: CHANGES NOT FOUND IN UPSTREAM
                 Log.e(tag, "Error during bundle update", e)
                 if (showProgress) {
                     bundleUpdateProgressFlow.value = BundleUpdateProgress(
@@ -897,12 +1004,9 @@ class PatchBundleRepository(
                     }
                 }
                 return@coroutineScope current
-                // FIXME: END CHANGES
-            } finally {
-                // FIXME: UPSTREAM CHANGES
-                bundleUpdateProgressFlow.value = null
-                // FIXME END CHANGES
             }
+
+            // Handle case where no updates were available
             if (updated.isEmpty()) {
                 if (showToast) toast(R.string.patches_update_unavailable)
                 if (showProgress) {
@@ -919,6 +1023,7 @@ class PatchBundleRepository(
                 return@coroutineScope current
             }
 
+            // Update database with new bundle information
             updated.forEach { (src, downloadResult) ->
                 val name = src.patchBundle?.manifestAttributes?.name ?: src.name
                 val now = System.currentTimeMillis()
@@ -935,11 +1040,13 @@ class PatchBundleRepository(
                 src.clearChangelogCache()
             }
 
+            // Clear manual update info for successfully updated bundles
             if (updated.isNotEmpty()) {
                 val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
                 manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
             }
 
+            // Show success feedback
             if (showToast) toast(R.string.patches_update_success)
 
             if (showProgress) {
@@ -1100,7 +1207,7 @@ class PatchBundleRepository(
             name = "",
             displayName = null,
             versionHash = null,
-            source = Source.API,
+            source = Source.from(BUNDLE_URL_STABLE), // Morphe
             autoUpdate = false,
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),

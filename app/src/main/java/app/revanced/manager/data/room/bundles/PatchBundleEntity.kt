@@ -10,11 +10,11 @@ sealed class Source {
         override fun toString() = SENTINEL
     }
 
-    object API : Source() {
-        const val SENTINEL = "api"
-
-        override fun toString() = SENTINEL
-    }
+//    object API : Source() {
+//        const val SENTINEL = "api"
+//
+//        override fun toString() = SENTINEL
+//    }
 
     data class Remote(val url: Url) : Source() {
         override fun toString() = url.toString()
@@ -31,7 +31,7 @@ sealed class Source {
 
         fun from(value: String) = when (value) {
             Local.SENTINEL -> Local
-            API.SENTINEL -> API
+//            API.SENTINEL -> API
             else -> if (gitHubPullRequestPattern.matches(value)) {
                 GitHubPullRequest(Url(value))
             } else Remote(Url(value))
