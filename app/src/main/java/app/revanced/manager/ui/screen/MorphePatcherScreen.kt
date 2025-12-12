@@ -66,15 +66,13 @@ import kotlin.math.exp
 @Composable
 fun MorphePatcherScreen(
     onBackClick: () -> Unit,
-    viewModel: PatcherViewModel
+    viewModel: PatcherViewModel,
+    usingMountInstall : Boolean
 ) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
-    // FIXME: Figure out how to pass the installer type
-    //        Set this to true to view mount installer prompt
-    val usingMountInstall = false
 
     // Remember patcher state
     val state = rememberMorphePatcherState(viewModel)

@@ -48,6 +48,7 @@ fun MorpheHomeScreen(
     onUpdateClick: () -> Unit = {},
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
+    usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress? = null
 ) {
     val context = LocalContext.current
@@ -64,9 +65,9 @@ fun MorpheHomeScreen(
 
     // Install type is needed for UI components.
     // Ideally this logic is part of some other code, but for now this is simple and works.
-    val usingMountInstall =
-        prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
+    val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
                 dashboardViewModel.rootInstaller.hasRootAccess()
+    usingMountInstallState.value = usingMountInstall
 
     // Remember home state
     val homeState = rememberMorpheHomeState(
