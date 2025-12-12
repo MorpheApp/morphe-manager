@@ -112,15 +112,15 @@ fun CancelPatchingDialog(
 fun InstallDialog(
     state: InstallDialogState,
     isWaitingForUninstall: Boolean,
+    usingMountInstall: Boolean,
     errorMessage: String?,
-    isRootMode: Boolean,
     onDismiss: () -> Unit,
     onInstall: () -> Unit,
     onUninstall: () -> Unit,
     onCancel: () -> Unit
 ) {
-    val installButtonText = if (isRootMode) R.string.mount else R.string.install_app
-    val installIcon = if (isRootMode) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
+    val installButtonText = if (usingMountInstall) R.string.mount else R.string.install_app
+    val installIcon = if (usingMountInstall) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
 
     MorpheDialog(onDismissRequest = onDismiss) {
         Column(
@@ -193,12 +193,12 @@ fun InstallDialog(
                     Text(
                         text = stringResource(
                             when (state) {
-                                InstallDialogState.INITIAL -> if (isRootMode)
+                                InstallDialogState.INITIAL -> if (usingMountInstall)
                                     R.string.morphe_patcher_mount_dialog_message
                                 else
                                     R.string.morphe_patcher_install_dialog_message
                                 InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
-                                InstallDialogState.READY_TO_INSTALL -> if (isRootMode)
+                                InstallDialogState.READY_TO_INSTALL -> if (usingMountInstall)
                                     R.string.morphe_patcher_mount_ready_message
                                 else
                                     R.string.morphe_patcher_install_ready_message
@@ -211,7 +211,7 @@ fun InstallDialog(
                     )
 
                     // Root mode warning
-                    if (isRootMode && state == InstallDialogState.INITIAL) {
+                    if (usingMountInstall && state == InstallDialogState.INITIAL) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()

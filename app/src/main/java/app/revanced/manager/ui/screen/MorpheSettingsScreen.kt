@@ -25,13 +25,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.DeveloperMode
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Science
-import androidx.compose.material.icons.outlined.Security
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -243,12 +241,6 @@ fun MorpheSettingsScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Debugging Section (if root available)
-                    if (dashboardViewModel.rootInstaller?.isDeviceRooted() == true) {
-                        DebuggingSection(generalViewModel = generalViewModel)
-                        Spacer(modifier = Modifier.height(16.dp))
-                    }
-
                     // About Section
                     AboutSection(
                         onAboutClick = { showAboutDialog = true }
@@ -311,12 +303,6 @@ fun MorpheSettingsScreen(
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
-
-                // Debugging Section (if root available)
-                if (dashboardViewModel.rootInstaller?.isDeviceRooted() == true) {
-                    DebuggingSection(generalViewModel = generalViewModel)
-                    Spacer(modifier = Modifier.height(24.dp))
-                }
 
                 // About Section
                 AboutSection(
@@ -585,91 +571,6 @@ private fun ImportExportSection(
                         Icons.Outlined.ChevronRight,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-    }
-}
-
-/**
- * Debugging section
- * Contains root mode toggle
- */
-@Composable
-private fun DebuggingSection(
-    generalViewModel: GeneralSettingsViewModel
-) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-    val useRootMode by generalViewModel.prefs.useRootMode.getAsState()
-
-    // Debugging Section
-    SettingsSectionHeader(
-        icon = Icons.Outlined.DeveloperMode,
-        title = stringResource(R.string.debugging)
-    )
-
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable {
-                        coroutineScope.launch {
-                            val newValue = !useRootMode
-                            generalViewModel.toggleRootMode(newValue)
-                            context.toast(
-                                if (newValue)
-                                    context.getString(R.string.morphe_root_mode_enabled)
-                                else
-                                    context.getString(R.string.morphe_root_mode_disabled)
-                            )
-                        }
-                    },
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Security,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.morphe_root_mode),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_root_mode_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Switch(
-                        checked = useRootMode,
-                        onCheckedChange = { newValue ->
-                            coroutineScope.launch {
-                                generalViewModel.toggleRootMode(newValue)
-                                context.toast(
-                                    if (newValue)
-                                        context.getString(R.string.morphe_root_mode_enabled)
-                                    else
-                                        context.getString(R.string.morphe_root_mode_disabled)
-                                )
-                            }
-                        }
                     )
                 }
             }

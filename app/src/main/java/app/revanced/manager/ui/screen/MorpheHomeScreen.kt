@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
@@ -60,22 +61,20 @@ fun MorpheHomeScreen(
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
-    val isRootMode by prefs.useRootMode.getAsState()
 
-    val hasRootAccess by remember {
-        derivedStateOf {
-            dashboardViewModel.rootInstaller?.isDeviceRooted() /*.requestRootAccessIfNotAskedYet(context)*/ ?: false
-        }
-    }
+    // Install type is needed for UI components.
+    // Ideally this logic is part of some other code, but for now this is simple and works.
+    val usingMountInstall =
+        prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
+                dashboardViewModel.rootInstaller?.hasRootAccess() == true
 
     // Remember home state
     val homeState = rememberMorpheHomeState(
         dashboardViewModel = dashboardViewModel,
         sources = sources,
         bundleInfo = bundleInfo,
-        isRootMode = isRootMode,
-        hasRootAccess = hasRootAccess,
-        onStartQuickPatch = onStartQuickPatch
+        onStartQuickPatch = onStartQuickPatch,
+        usingMountInstall = usingMountInstall
     )
 
     // Show manager update dialog
@@ -136,7 +135,8 @@ fun MorpheHomeScreen(
     // All dialogs
     MorpheHomeDialogs(
         state = homeState,
-        useMorpheHomeScreen = useMorpheHomeScreen
+        useMorpheHomeScreen = useMorpheHomeScreen,
+        usingMountInstall = usingMountInstall
     )
 
     // Main scaffold

@@ -29,6 +29,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.revanced.manager.ui.component.UnsupportedVersionWarningDialog
+import app.revanced.manager.ui.component.WrongPackageDialog
 import app.revanced.manager.ui.component.bundle.BundleChangelogDialog
 import app.revanced.manager.ui.component.bundle.BundlePatchesDialog
 import app.revanced.manager.ui.model.SelectedApp
@@ -102,7 +104,8 @@ fun MorpheDialog(
 @Composable
 fun MorpheHomeDialogs(
     state: MorpheHomeState,
-    useMorpheHomeScreen: Boolean
+    useMorpheHomeScreen: Boolean,
+    usingMountInstall: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
 
@@ -112,7 +115,7 @@ fun MorpheHomeDialogs(
             appName = state.pendingAppName!!,
             packageName = state.pendingPackageName!!,
             recommendedVersion = state.pendingRecommendedVersion,
-            isRootMode = state.isRootMode,
+            usingMountInstall = state.usingMountInstall,
             onDismiss = {
                 state.showApkAvailabilityDialog = false
                 state.cleanupPendingData()
@@ -135,14 +138,14 @@ fun MorpheHomeDialogs(
         DownloadInstructionsDialog(
             appName = state.pendingAppName!!,
             recommendedVersion = state.pendingRecommendedVersion,
+            usingMountInstall = usingMountInstall,
             onDismiss = {
                 state.showDownloadInstructionsDialog = false
                 state.cleanupPendingData()
-            },
-            onContinue = {
-                state.handleDownloadInstructionsContinue(uriHandler)
             }
-        )
+        ) {
+            state.handleDownloadInstructionsContinue(uriHandler)
+        }
     }
 
     // Dialog 3: File Picker Prompt
@@ -229,7 +232,7 @@ private fun ApkAvailabilityDialog(
     appName: String,
     packageName: String,
     recommendedVersion: String?,
-    isRootMode: Boolean,
+    usingMountInstall: Boolean,
     onDismiss: () -> Unit,
     onHaveApk: () -> Unit,
     onNeedApk: () -> Unit
@@ -283,7 +286,7 @@ private fun ApkAvailabilityDialog(
                 )
 
                 // Root mode warning
-                if (isRootMode) {
+                if (usingMountInstall) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -411,6 +414,7 @@ private fun ApkAvailabilityDialog(
 private fun DownloadInstructionsDialog(
     appName: String,
     recommendedVersion: String?,
+    usingMountInstall: Boolean,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
 ) {
@@ -525,34 +529,49 @@ private fun DownloadInstructionsDialog(
                         // Step 3
                         InstructionStep(
                             number = "3",
-                            text = stringResource(R.string.morphe_home_download_instructions_step3)
+                            text = stringResource(
+                                if (usingMountInstall) {
+                                    R.string.morphe_home_download_instructions_step3_mount
+                                } else {
+                                    R.string.morphe_home_download_instructions_step3
+                                }
+                            )
                         )
 
                         // Step 4
                         InstructionStep(
                             number = "4",
-                            text = stringResource(R.string.morphe_home_download_instructions_step4)
+                            text = stringResource(
+                                if (usingMountInstall) {
+                                    R.string.morphe_home_download_instructions_step4_mount
+                                } else {
+                                    R.string.morphe_home_download_instructions_step4
+                                }
+
+                            )
                         )
                     }
                 }
 
-                // Important note
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.morphe_home_download_instructions_note),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.weight(1f)
-                    )
+                // Important note for non-mount install
+                if (!usingMountInstall) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_home_download_instructions_note),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
 
