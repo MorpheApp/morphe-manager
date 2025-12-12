@@ -8,8 +8,8 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.applyAppLanguage
 import app.revanced.manager.util.resetListItemColorsCached
 import app.revanced.manager.util.toHexString
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 enum class ThemePreset {
@@ -124,9 +124,14 @@ class GeneralSettingsViewModel(
 
     fun togglePatchesPrerelease(usePrerelease: Boolean) = viewModelScope.launch {
         prefs.usePatchesPrereleases.update(usePrerelease)
-        prefs.patchesBundleJsonUrl.update(
-            PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
-        )
+
+        // FIXME: Refresh patches
+        // TODO: use reloadApiBundles?
+//        patchBundleRepository.update(src, showToast = true)
+
+//        prefs.patchesBundleJsonUrl.update(
+//            PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
+//        )
     }
 
     fun toggleRootMode(enabled: Boolean) = viewModelScope.launch {

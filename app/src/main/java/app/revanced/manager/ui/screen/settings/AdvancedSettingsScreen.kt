@@ -169,20 +169,20 @@ fun AdvancedSettingsScreen(
     }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
-    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
-    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
-
-    if (showPatchesBundleJsonUrlDialog) {
-        PatchesBundleJsonUrlDialog(
-            currentUrl = patchesBundleJsonUrl,
-            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
-            onDismiss = { showPatchesBundleJsonUrlDialog = false },
-            onSave = { url ->
-                viewModel.setPatchesBundleJsonUrl(url.trim())
-                showPatchesBundleJsonUrlDialog = false
-            }
-        )
-    }
+//    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
+//    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
+//
+//    if (showPatchesBundleJsonUrlDialog) {
+//        PatchesBundleJsonUrlDialog(
+//            currentUrl = patchesBundleJsonUrl,
+//            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
+//            onDismiss = { showPatchesBundleJsonUrlDialog = false },
+//            onSave = { url ->
+//                viewModel.setPatchesBundleJsonUrl(url.trim())
+//                showPatchesBundleJsonUrlDialog = false
+//            }
+//        )
+//    }
 
     Scaffold(
         topBar = {
@@ -217,11 +217,11 @@ fun AdvancedSettingsScreen(
 //                    }
 //                )
 //            }
-            SettingsListItem(
-                headlineContent = stringResource(R.string.patches_bundle_json_url),
-                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
-                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
-            )
+//            SettingsListItem(
+//                headlineContent = stringResource(R.string.patches_bundle_json_url),
+//                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
+//                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
+//            )
 
             if (showGitHubPatDialog) {
                 GitHubPatDialog(

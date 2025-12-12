@@ -41,6 +41,9 @@ class HttpService(
                 try {
                     val response = http.request {
                         builder()
+                        // Print URL for debugging
+                        Throwable().printStackTrace()
+                        println("HttpService.request: Connecting to URL: ${url.buildString()}")
                     }
 
                     if (response.status == HttpStatusCode.TooManyRequests) {
@@ -88,7 +91,11 @@ class HttpService(
     ) {
         try {
             runWith429Retry("streamTo") {
-                http.prepareGet(builder).execute { httpResponse ->
+                http.prepareGet {
+                    builder()
+                    Throwable().printStackTrace()
+                    println("HttpService.streamTo: Connecting to URL: ${url.buildString()}")
+                }.execute { httpResponse ->
                     when {
                         httpResponse.status == HttpStatusCode.TooManyRequests -> {
                             throw TooManyRequestsException(httpResponse.retryAfterMillis())
@@ -126,6 +133,9 @@ class HttpService(
                         header(HttpHeaders.Range, "bytes=$resumeFrom-")
                     }
                     builder()
+                    // Print URL for debugging
+                    Throwable().printStackTrace()
+                    println("HttpService.download: Connecting to URL: ${url.buildString()}")
                 }.execute { httpResponse ->
                     when {
                         httpResponse.status == HttpStatusCode.TooManyRequests -> throw TooManyRequestsException(httpResponse.retryAfterMillis())

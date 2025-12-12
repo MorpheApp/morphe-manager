@@ -10,11 +10,11 @@ sealed class Source {
         override fun toString() = SENTINEL
     }
 
-//    object API : Source() {
-//        const val SENTINEL = "api"
-//
-//        override fun toString() = SENTINEL
-//    }
+    object API : Source() {
+        const val SENTINEL = "api"
+
+        override fun toString() = SENTINEL
+    }
 
     data class Remote(val url: Url) : Source() {
         override fun toString() = url.toString()

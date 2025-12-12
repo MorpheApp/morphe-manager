@@ -81,22 +81,23 @@ fun MorpheHomeScreen(
     var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
 
-    if (!hasDoneAppLaunchBundleUpdate) {
-        hasDoneAppLaunchBundleUpdate = true
-        bundleUpdateInProgress = true
-        scope.launch {
-            homeState.isRefreshingBundle = true
-            try {
-                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
-                    showProgress = false,
-                    showToast = false
-                )
-            } finally {
-                homeState.isRefreshingBundle = false
-                bundleUpdateInProgress = false
-            }
-        }
-    }
+    // TODO: Allow bundles to autoupdate but don't allow snackbar to show
+//    if (!hasDoneAppLaunchBundleUpdate) {
+//        hasDoneAppLaunchBundleUpdate = true
+//        bundleUpdateInProgress = true
+//        scope.launch {
+//            homeState.isRefreshingBundle = true
+//            try {
+//                dashboardViewModel.patchBundleRepository.Update(
+//                    showProgress = false,
+//                    showToast = false
+//                )
+//            } finally {
+//                homeState.isRefreshingBundle = false
+//                bundleUpdateInProgress = false
+//            }
+//        }
+//    }
 
     // Show manager update dialog
     if (homeState.shouldShowUpdateDialog) {

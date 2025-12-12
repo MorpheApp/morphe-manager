@@ -50,21 +50,21 @@ class AdvancedSettingsViewModel(
         }
 
     // Morphe code
-    fun setPatchesBundleJsonUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-        val trimmedValue = value.trim()
-        if (trimmedValue == prefs.patchesBundleJsonUrl.get()) return@launch
-
-        // Validate URL format
-        if (trimmedValue.isNotBlank() && !trimmedValue.startsWith("http")) {
-            withContext(Dispatchers.Main) {
-                app.toast(app.getString(R.string.patches_bundle_json_url_invalid))
-            }
-            return@launch
-        }
-
-        prefs.patchesBundleJsonUrl.update(trimmedValue)
-//        patchBundleRepository.reloadApiBundles() // Morphe
-    }
+//    fun setPatchesBundleJsonUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
+//        val trimmedValue = value.trim()
+//        if (trimmedValue == prefs.patchesBundleJsonUrl.get()) return@launch
+//
+//        // Validate URL format
+//        if (trimmedValue.isNotBlank() && !trimmedValue.startsWith("http")) {
+//            withContext(Dispatchers.Main) {
+//                app.toast(app.getString(R.string.patches_bundle_json_url_invalid))
+//            }
+//            return@launch
+//        }
+//
+//        prefs.patchesBundleJsonUrl.update(trimmedValue)
+////        patchBundleRepository.reloadApiBundles() // Morphe
+//    }
 
 //    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
 //        if (value == prefs.api.get()) return@launch

@@ -18,28 +18,17 @@ import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
 import io.ktor.client.request.header
 import io.ktor.client.request.url
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+
+private const val MORPHE_MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
+private const val MORPHE_API_URL = "https://api.morphe.software"
 
 class ReVancedAPI(
     private val client: HttpService,
     private val prefs: PreferencesManager
 ) {
-    @Serializable
-    data class PatchBundleJson(
-        @SerialName("created_at") val createdAt: String,
-        val description: String,
-        @SerialName("download_url") val downloadUrl: String,
-        @SerialName("signature_download_url") val signatureDownloadUrl: String? = null,
-        val version: String
-    )
-
     private data class RepoConfig(
         val owner: String,
         val name: String,
@@ -47,7 +36,7 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
+    private fun repoConfig(): RepoConfig = parseRepoUrl(MORPHE_MANAGER_REPO_URL)
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -94,15 +83,15 @@ class ReVancedAPI(
         }
     }
 
-//    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
-//
-//    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
-//        val normalizedRoute = route.trimStart('/')
-//        val baseUrl = apiUrl()
-//        return client.request {
-//            url("$baseUrl/v4/$normalizedRoute")
-//        }
-//    }
+    private suspend fun apiUrl(): String = MORPHE_API_URL
+
+    private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
+        val normalizedRoute = route.trimStart('/')
+        val baseUrl = apiUrl()
+        return client.request {
+            url("$baseUrl/v1/$normalizedRoute")
+        }
+    }
 
     private suspend fun fetchReleaseAsset(
         config: RepoConfig,
@@ -179,91 +168,8 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
-    /**
-     * Fetches the latest patches bundle from the JSON file URL.
-     * Uses direct JSON endpoint.
-     */
-    /**
-     * Fetches the latest patches bundle from the JSON file URL.
-     * Uses direct JSON endpoint.
-     */
-    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = withContext(Dispatchers.IO) {
-        val jsonUrl = prefs.patchesBundleJsonUrl.get().trim()
-
-        if (jsonUrl.isBlank()) {
-            return@withContext APIResponse.Failure(
-                APIFailure(IllegalStateException("Patches bundle JSON URL is not configured"), null)
-            )
-        }
-
-        return@withContext when (val response = client.request<PatchBundleJson> {
-            url(jsonUrl)
-        }) {
-            is APIResponse.Success -> {
-                val bundleData = response.data
-                val mapped = kotlin.runCatching {
-                    // Parse the created_at timestamp
-                    val createdAt = try {
-                        Instant.parse(bundleData.createdAt).toLocalDateTime(TimeZone.UTC)
-                    } catch (e: Exception) {
-                        // Try parsing without time zone if ISO format fails
-                        try {
-                            LocalDateTime.parse(bundleData.createdAt.replace(" ", "T"))
-                        } catch (e2: Exception) {
-                            throw IllegalStateException("Invalid timestamp format: ${bundleData.createdAt}")
-                        }
-                    }
-
-                    // Extract repository URL from the JSON URL
-                    val repoUrl = extractRepoUrlFromJsonUrl(jsonUrl)
-                    val pageUrl = "$repoUrl/releases/tag/${bundleData.version}"
-
-                    ReVancedAsset(
-                        downloadUrl = bundleData.downloadUrl,
-                        createdAt = createdAt,
-                        signatureDownloadUrl = bundleData.signatureDownloadUrl?.takeIf { it != "N/A" },
-                        pageUrl = pageUrl,
-                        description = bundleData.description,
-                        version = bundleData.version
-                    )
-                }
-
-                mapped.fold(
-                    onSuccess = { APIResponse.Success(it) },
-                    onFailure = { APIResponse.Failure(APIFailure(it, null)) }
-                )
-            }
-
-            is APIResponse.Error -> APIResponse.Error(response.error)
-            is APIResponse.Failure -> APIResponse.Failure(response.error)
-        }
-    }
-
-    private fun extractRepoUrlFromJsonUrl(jsonUrl: String): String {
-        // Extract repository URL from paths like:
-        // https://raw.githubusercontent.com/OWNER/REPO/refs/heads/BRANCH/...
-        // or https://github.com/OWNER/REPO/raw/BRANCH/...
-        return when {
-            jsonUrl.contains("raw.githubusercontent.com") -> {
-                val parts = jsonUrl.removePrefix("https://raw.githubusercontent.com/")
-                    .split("/")
-                if (parts.size >= 2) {
-                    "https://github.com/${parts[0]}/${parts[1]}"
-                } else {
-                    "https://github.com/MorpheApp/morphe-patches"
-                }
-            }
-            jsonUrl.contains("github.com") && jsonUrl.contains("/raw/") -> {
-                val match = Regex("https://github\\.com/([^/]+)/([^/]+)/raw/").find(jsonUrl)
-                if (match != null) {
-                    "https://github.com/${match.groupValues[1]}/${match.groupValues[2]}"
-                } else {
-                    "https://github.com/MorpheApp/morphe-patches"
-                }
-            }
-            else -> "https://github.com/MorpheApp/morphe-patches"
-        }
-    }
+    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> =
+        apiRequest("patches?prerelease=${prefs.usePatchesPrereleases.get()}")
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
         val config = repoConfig()
@@ -353,5 +259,3 @@ fun <T> APIResponse<T>.successOrThrow(context: String): T {
         is APIResponse.Failure -> throw Exception("Failed fetching $context: ${error.message}", error)
     }
 }
-
-private val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"

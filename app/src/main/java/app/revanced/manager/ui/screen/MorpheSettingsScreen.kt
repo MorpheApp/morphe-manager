@@ -360,10 +360,13 @@ private fun UpdatesSection(
 
                             // Show toast about preference change
                             context.toast(
-                                if (newValue)
-                                    context.getString(R.string.morphe_update_patches_prerelease_enabled)
-                                else
-                                    context.getString(R.string.morphe_update_patches_prerelease_disabled)
+                                context.getString(
+                                    if (newValue) {
+                                        R.string.morphe_update_patches_prerelease_enabled
+                                    } else {
+                                        R.string.morphe_update_patches_prerelease_disabled
+                                    }
+                                )
                             )
 
                             // Wait a bit for the preference to propagate

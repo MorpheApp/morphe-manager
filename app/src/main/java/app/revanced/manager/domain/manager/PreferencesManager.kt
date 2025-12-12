@@ -31,12 +31,7 @@ class PreferencesManager(
     val theme = enumPreference("theme", Theme.SYSTEM)
     val appLanguage = stringPreference("app_language", "en")
 
-    val patchesBundleJsonUrl = stringPreference(
-        "patches_bundle_json_url",
-        PatchBundleConstants.BUNDLE_URL_STABLE
-    )
-//    val api = stringPreference("api_url", "https://api.revanced.app")
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
+//    val api = stringPreference("api_url", "https://api.morphe.app")
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
@@ -100,15 +95,7 @@ class PreferencesManager(
     }
 
     object PatchBundleConstants {
-        const val BUNDLE_URL_RELEASES = "https://github.com/HundEdFeteTree/HappyFunTest/releases/latest"
-        const val BUNDLE_URL_STABLE = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
-        const val BUNDLE_URL_LATEST = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
-
-        fun getBundleUrl(usePrerelease: Boolean): String {
-            // Latest will always be pre-release, or the latest stable
-            // which may contain additional changes not published in dev release
-            return if (usePrerelease) BUNDLE_URL_LATEST else BUNDLE_URL_STABLE
-        }
+        const val BUNDLE_URL_RELEASES = "https://github.com/MorpheApp/morphe-patches/releases/latest"
     }
 
     @Serializable
@@ -121,7 +108,6 @@ class PreferencesManager(
         val themePresetSelectionEnabled: Boolean? = null,
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
-        val patchesBundleJsonUrl: String? = null,
         val appLanguage: String? = null,
 //        val api: String? = null,
         val gitHubPat: String? = null,
@@ -168,7 +154,6 @@ class PreferencesManager(
 //        api = api.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
-        patchesBundleJsonUrl = patchesBundleJsonUrl.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
         autoCollapsePatcherSteps = autoCollapsePatcherSteps.get(),
@@ -211,7 +196,6 @@ class PreferencesManager(
 //        snapshot.api?.let { api.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
-        snapshot.patchesBundleJsonUrl?.let { patchesBundleJsonUrl.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
         snapshot.autoCollapsePatcherSteps?.let { autoCollapsePatcherSteps.value = it }

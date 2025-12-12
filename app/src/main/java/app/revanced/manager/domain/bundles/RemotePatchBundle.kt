@@ -165,41 +165,41 @@ class JsonPatchBundle(
     )
 }
 
-//class APIPatchBundle(
-//    name: String,
-//    uid: Int,
-//    displayName: String?,
-//    createdAt: Long?,
-//    updatedAt: Long?,
-//    installedVersionSignature: String?,
-//    error: Throwable?,
-//    directory: File,
-//    endpoint: String,
-//    autoUpdate: Boolean,
-//) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
-//    private val api: ReVancedAPI by inject()
-//
-//    override suspend fun getLatestInfo() = api.getPatchesUpdate().getOrThrow()
-//    override fun copy(
-//        error: Throwable?,
-//        name: String,
-//        displayName: String?,
-//        createdAt: Long?,
-//        updatedAt: Long?,
-//        autoUpdate: Boolean
-//    ) = APIPatchBundle(
-//        name,
-//        uid,
-//        displayName,
-//        createdAt,
-//        updatedAt,
-//        installedVersionSignature,
-//        error,
-//        directory,
-//        endpoint,
-//        autoUpdate,
-//    )
-//}
+class APIPatchBundle(
+    name: String,
+    uid: Int,
+    displayName: String?,
+    createdAt: Long?,
+    updatedAt: Long?,
+    installedVersionSignature: String?,
+    error: Throwable?,
+    directory: File,
+    endpoint: String,
+    autoUpdate: Boolean,
+) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
+    private val api: ReVancedAPI by inject()
+
+    override suspend fun getLatestInfo() = api.getPatchesUpdate().getOrThrow()
+    override fun copy(
+        error: Throwable?,
+        name: String,
+        displayName: String?,
+        createdAt: Long?,
+        updatedAt: Long?,
+        autoUpdate: Boolean
+    ) = APIPatchBundle(
+        name,
+        uid,
+        displayName,
+        createdAt,
+        updatedAt,
+        installedVersionSignature,
+        error,
+        directory,
+        endpoint,
+        autoUpdate,
+    )
+}
 
 class GitHubPullRequestBundle(
     name: String,
