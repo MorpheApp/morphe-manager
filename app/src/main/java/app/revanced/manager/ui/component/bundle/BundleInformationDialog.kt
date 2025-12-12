@@ -545,8 +545,8 @@ private fun Tag(
     }
 }
 
-internal const val DEFAULT_PATCH_RELEASES_URL = // FIXME
-    "https://github.com/HundEdFeteTree/HappyFunTest/releases"
+internal const val DEFAULT_PATCH_RELEASES_URL =
+    "https://github.com/MorpheApp/morphe-patches/releases"
 internal val GITHUB_SOURCE_REGEX =
     Regex("^(?:git@|ssh://git@|https?://|git://)?github\\.com[:/](.+)$", RegexOption.IGNORE_CASE)
 
