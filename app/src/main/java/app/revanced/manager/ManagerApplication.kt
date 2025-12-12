@@ -38,7 +38,7 @@ class ManagerApplication : Application() {
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val downloaderPluginRepository: DownloaderPluginRepository by inject()
     private val fs: Filesystem by inject()
-    private val httpService: HttpService by inject()
+//    private val httpService: HttpService by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -60,7 +60,7 @@ class ManagerApplication : Application() {
             )
         }
 
-        PatchListCatalog.initialize(this)
+//        PatchListCatalog.initialize(this)
 
         // App icon loader (Coil)
         val pixels = 512
@@ -94,9 +94,10 @@ class ManagerApplication : Application() {
         scope.launch(Dispatchers.Default) {
             downloaderPluginRepository.reload()
         }
-        scope.launch(Dispatchers.Default) {
-            PatchListCatalog.refreshIfNeeded(httpService)
-        }
+        // Morphe
+//        scope.launch(Dispatchers.Default) {
+//            PatchListCatalog.refreshIfNeeded(httpService)
+//        }
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
                 reload()        // This will use patchesRepoOwner + patchesRepo

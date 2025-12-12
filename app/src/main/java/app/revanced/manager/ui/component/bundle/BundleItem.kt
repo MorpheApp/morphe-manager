@@ -76,9 +76,9 @@ fun BundleItem(
     val networkInfo = koinInject<NetworkInfo>()
     val bundleRepo = koinInject<PatchBundleRepository>()
     val coroutineScope = rememberCoroutineScope()
-    val catalogUrl = remember(src) {
-        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
-    }
+//    val catalogUrl = remember(src) {
+//        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
+//    }
     var showLinkSheet by rememberSaveable { mutableStateOf(false) }
     var showRenameDialog by rememberSaveable { mutableStateOf(false) }
 
@@ -341,23 +341,23 @@ fun BundleItem(
         }
     }
 
-    if (showLinkSheet) {
-        BundleLinksSheet(
-            bundleTitle = bundleTitle,
-            catalogUrl = catalogUrl,
-            onReleaseClick = {
-                coroutineScope.launch {
-                    openBundleReleasePage(src, networkInfo, context, uriHandler)
-                }
-            },
-            onCatalogClick = {
-                coroutineScope.launch {
-                    openBundleCatalogPage(catalogUrl, context, uriHandler)
-                }
-            },
-            onDismissRequest = { showLinkSheet = false }
-        )
-    }
+//    if (showLinkSheet) {
+//        BundleLinksSheet(
+//            bundleTitle = bundleTitle,
+//            catalogUrl = catalogUrl,
+//            onReleaseClick = {
+//                coroutineScope.launch {
+//                    openBundleReleasePage(src, networkInfo, context, uriHandler)
+//                }
+//            },
+//            onCatalogClick = {
+//                coroutineScope.launch {
+//                    openBundleCatalogPage(catalogUrl, context, uriHandler)
+//                }
+//            },
+//            onDismissRequest = { showLinkSheet = false }
+//        )
+//    }
 }
 
 @Composable

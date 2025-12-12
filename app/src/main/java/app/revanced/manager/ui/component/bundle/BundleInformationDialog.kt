@@ -105,9 +105,9 @@ fun BundleInformationDialog(
     val isLocal = src is LocalPatchBundle
     val bundleManifestAttributes = src.patchBundle?.manifestAttributes
     val manifestSource = bundleManifestAttributes?.source
-    val catalogUrl = remember(src) {
-        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
-    }
+//    val catalogUrl = remember(src) {
+//        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
+//    }
     val (autoUpdate, endpoint) = src.asRemoteOrNull?.let { it.autoUpdate to it.endpoint }
         ?: (null to null)
     var showDisplayNameDialog by remember { mutableStateOf(false) }
@@ -200,15 +200,15 @@ fun BundleInformationDialog(
     FullscreenDialog(
         onDismissRequest = onDismissRequest,
     ) {
-        if (showLinkSheet) {
-            BundleLinksSheet(
-                bundleTitle = src.displayTitle,
-                catalogUrl = catalogUrl,
-                onReleaseClick = { openReleasePage() },
-                onCatalogClick = { openBundleCatalogPage(catalogUrl, context, uriHandler) },
-                onDismissRequest = { showLinkSheet = false }
-            )
-        }
+//        if (showLinkSheet) {
+//            BundleLinksSheet(
+//                bundleTitle = src.displayTitle,
+//                catalogUrl = catalogUrl,
+//                onReleaseClick = { openReleasePage() },
+//                onCatalogClick = { openBundleCatalogPage(catalogUrl, context, uriHandler) },
+//                onDismissRequest = { showLinkSheet = false }
+//            )
+//        }
 
         Scaffold(
             topBar = {
@@ -223,7 +223,7 @@ fun BundleInformationDialog(
                     },
                     actions = {
                         val releaseAvailable = releasePageUrl != null || (!isLocal && hasNetwork)
-                        val githubButtonEnabled = (releaseAvailable || catalogUrl != null) && !releasePageLoading
+                        val githubButtonEnabled = (releaseAvailable /* || catalogUrl != null */) && !releasePageLoading
                         IconButton(
                             onClick = { if (githubButtonEnabled) showLinkSheet = true },
                             enabled = githubButtonEnabled
