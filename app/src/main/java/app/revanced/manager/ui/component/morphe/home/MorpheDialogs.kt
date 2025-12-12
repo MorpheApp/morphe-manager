@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
@@ -142,7 +143,7 @@ fun MorpheDialog(
                         .verticalScroll(rememberScrollState())
                         .padding(horizontal = 24.dp)
                         .padding(
-                            top = if (header == null) 24.dp else 16.dp,
+                            top = if ((header == null) && (title == null)) 24.dp else 16.dp,
                             bottom = if (footer == null) 24.dp else 16.dp
                         )
                 ) {
@@ -152,7 +153,7 @@ fun MorpheDialog(
                 // Fixed footer
                 footer?.let {
                     Box(modifier = Modifier.padding(bottom = 24.dp, start = 24.dp, end = 24.dp)) {
-                        it()
+                        footer()
                     }
                 }
             }
@@ -613,36 +614,34 @@ private fun DownloadInstructionsDialog(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(Modifier.height(6.dp))
                             // Styled "DOWNLOAD APK" button - clickable with toast
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
+                                modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 Surface(
                                     onClick = {
                                         context.toast(context.getString(R.string.morphe_home_download_instructions_download_button_toast))
                                     },
-                                    shape = RoundedCornerShape(0.dp), // No rounding
+                                    shape = RoundedCornerShape(2.dp),
                                     color = Color(0xFFFF0034) // Red color matching APKMirror
                                 ) {
                                     Row(
-                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Icon(
-                                            imageVector = Icons.Outlined.Download,
+                                            imageVector = Icons.Filled.Download,
                                             contentDescription = null,
                                             tint = Color.White,
-                                            modifier = Modifier.size(18.dp)
+                                            modifier = Modifier.size(24.dp)
                                         )
                                         Text(
-                                            text = stringResource(R.string.morphe_home_download_instructions_download_button),
+                                            text = "DOWNLOAD APK", // APKMirror does not have localization
                                             style = MaterialTheme.typography.labelLarge,
-                                            fontWeight = FontWeight.Bold,
+                                            fontWeight = FontWeight.Normal,
                                             color = Color.White
                                         )
                                     }
