@@ -302,17 +302,6 @@ fun BundleItem(
             ) {
                 ActionIconButton(
                     onClick = { showLinkSheet = true }
-                    // FIXME? MORPHE ORIGINAL
-//                    onClick = {
-//                        coroutineScope.launch {
-//                            openBundleReleasePage(
-//                                src = src,
-//                                networkInfo = networkInfo,
-//                                context = context,
-//                                uriHandler = uriHandler
-//                            )
-//                        }
-//                    }
                 ) {
                     Icon(
                         FontAwesomeIcons.Brands.Github,
