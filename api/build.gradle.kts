@@ -107,11 +107,10 @@ publishing {
                     developer {
                         id = "Morphe"
                         name = "Morphe"
-                        email = "contact@morphe.software"
+                        url = "https://morphe.software"
                     }
                 }
                 scm {
-                    // FIXME
                     val ghRepo = System.getenv("GITHUB_REPOSITORY") ?: "MorpheApp/morphe-manager"
                     connection = "scm:git:git://github.com/$ghRepo.git"
                     developerConnection = "scm:git:git@github.com:$ghRepo.git"
