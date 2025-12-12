@@ -5,15 +5,12 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
-import app.revanced.manager.domain.manager.base.EditorContext
+import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
-import app.revanced.manager.util.isDebuggable
 import app.revanced.manager.util.tag
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-
-import app.revanced.manager.ui.model.PatchSelectionActionKey
 
 class PreferencesManager(
     context: Context
@@ -85,9 +82,6 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
-
-    // TODO: Figure out root mode with Morphe layer
-    val useRootMode = booleanPreference("use_root_mode", false)
 
     init {
         runBlocking {

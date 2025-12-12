@@ -26,7 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.mutableStateOf
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
@@ -141,6 +141,9 @@ private fun ReVancedManager(vm: MainViewModel) {
         popEnterTransition = { slideInHorizontally(initialOffsetX = { -it / 3 }) },
         popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
+        // Clunky work around to get a boolean calculated in the home screen
+        val usingMountInstallState = mutableStateOf(false)
+
         composable<MorpheHomeScreen> {
             val dashboardViewModel = koinViewModel<DashboardViewModel>()
             val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
@@ -161,6 +164,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                     )
                 },
                 dashboardViewModel = dashboardViewModel,
+                usingMountInstallState = usingMountInstallState,
                 bundleUpdateProgress = bundleUpdateProgress
             )
         }
@@ -231,7 +235,8 @@ private fun ReVancedManager(vm: MainViewModel) {
             if (useMorpheHomeScreen) {
                 MorphePatcherScreen(
                     onBackClick = navController::popBackStack,
-                    viewModel = patcherViewModel
+                    viewModel = patcherViewModel,
+                    usingMountInstall = usingMountInstallState.value
                 )
                 return@composable
             }

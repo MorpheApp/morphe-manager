@@ -66,13 +66,13 @@ import kotlin.math.exp
 @Composable
 fun MorphePatcherScreen(
     onBackClick: () -> Unit,
-    viewModel: PatcherViewModel
+    viewModel: PatcherViewModel,
+    usingMountInstall : Boolean
 ) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
-    val isRootMode by viewModel.prefs.useRootMode.getAsState()
 
     // Remember patcher state
     val state = rememberMorphePatcherState(viewModel)
@@ -354,7 +354,7 @@ fun MorphePatcherScreen(
         InstallDialog(
             state = state.installDialogState,
             isWaitingForUninstall = state.isWaitingForUninstall,
-            isRootMode = isRootMode,
+            usingMountInstall = usingMountInstall,
             errorMessage = state.installErrorMessage,
             onDismiss = {
                 state.showInstallDialog = false
@@ -380,14 +380,13 @@ fun MorphePatcherScreen(
                 }
                 context.startActivity(intent)
                 state.showInstallDialog = false
-            },
-            onCancel = {
-                state.showInstallDialog = false
-                state.installDialogState = InstallDialogState.INITIAL
-                state.isWaitingForUninstall = false
-                state.installErrorMessage = null
             }
-        )
+        ) {
+            state.showInstallDialog = false
+            state.installDialogState = InstallDialogState.INITIAL
+            state.isWaitingForUninstall = false
+            state.installErrorMessage = null
+        }
     }
 
     // Error bottom sheet
@@ -584,13 +583,13 @@ fun MorphePatcherScreen(
                         ) {
                             Icon(
                                 if (viewModel.installedPackageName == null) {
-                                    if (isRootMode) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
+                                    if (usingMountInstall) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
                                 } else {
                                     Icons.AutoMirrored.Outlined.OpenInNew
                                 },
                                 stringResource(
                                     if (viewModel.installedPackageName == null) {
-                                        if (isRootMode) R.string.mount else R.string.install_app
+                                        if (usingMountInstall) R.string.mount else R.string.install_app
                                     } else {
                                         R.string.open_app
                                     }

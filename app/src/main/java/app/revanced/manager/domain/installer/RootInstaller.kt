@@ -96,38 +96,6 @@ class RootInstaller(
         }
     }
 
-    // FIXME ORIGNAL
-//
-//    /**
-//     * @return If root access has been attempted _and_ granted.
-//     *         This will **not** request root if not yet granted.
-//     * @see requestRootAccessIfNotAskedYet
-//     */
-//    fun hasRootAccess() = Shell.isAppGrantedRoot() ?: false
-//
-//    /**
-//     * Prompts the user for root access, but only prompts once per
-//     * app installation and will not cause "root denied" toasts.
-//     *
-//     * @return If the user approved root access or was previously granted.
-//     * @see hasRootAccess
-//     */
-//    fun requestRootAccessIfNotAskedYet(context: Context) : Boolean {
-//        val attempted = getRootAccessAttempted(context)
-//        if (!attempted.get()) {
-//            attempted.save(true)
-//            val result = cmd("id").exec()
-//            return result.isSuccess
-//        }
-//
-//        return hasRootAccess()
-//    }
-//    // FIXME END
-
-    fun isDeviceRooted() = System.getenv("PATH")?.split(":")?.any { path ->
-        File(path, "su").canExecute()
-    } ?: false
-
     suspend fun isAppInstalled(packageName: String) =
         awaitRemoteFS().getFile("$modulesPath/$packageName-revanced").exists()
 
@@ -244,16 +212,6 @@ class RootInstaller(
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
             if (!isSuccess) throw Exception(errorMessage)
-        }
-
-        private var rootAccessAttemptedValue : PersistentValue<Boolean>? = null
-
-        fun getRootAccessAttempted(context: Context): PersistentValue<Boolean> {
-            if (rootAccessAttemptedValue == null) {
-                rootAccessAttemptedValue =
-                    PersistentValue(context, "root_installer_root_access_attempted", false)
-            }
-            return rootAccessAttemptedValue!!
         }
 
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L

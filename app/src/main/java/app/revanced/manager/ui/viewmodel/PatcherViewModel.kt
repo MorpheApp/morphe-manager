@@ -890,8 +890,6 @@ class PatcherViewModel(
         tempDir.deleteRecursively()
     }
 
-    fun isDeviceRooted() = rootInstaller.isDeviceRooted()
-
     fun rejectInteraction() {
         currentActivityRequest?.first?.complete(false)
     }

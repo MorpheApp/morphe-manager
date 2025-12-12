@@ -41,8 +41,11 @@
     <string name="morphe_home_download_instructions_step1">Press Continue to open APKMirror.com website</string>
     <string name="morphe_home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="morphe_home_download_instructions_download_button">DOWNLOAD APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Click download on the website, not here :-)</string>
     <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and do not install the APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Wait for the download to complete, and install the APK</string>
     <string name="morphe_home_download_instructions_step4">After the download finishes, open this app again</string>
+    <string name="morphe_home_download_instructions_step4_mount">After installing the original APK, open this app again</string>
     <string name="morphe_home_download_instructions_note">Important: Download the APK but do not install it on your device.</string>
     <string name="morphe_home_download_instructions_continue">Continue to APKMirror</string>
     <!-- Dialog 3: File Picker Prompt -->
@@ -650,7 +653,7 @@ Recommended for this device: %1$d MB.</string>
     <string name="patching">Patching</string>
     <string name="signing">Signing</string>
     <string name="storage">Storage</string>
-    <string name="no_patch_found">No patch can be found. Check your patches</string>
+    <string name="no_patch_found">No patches can be found. Check your patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patch Bundles</string>
     <string name="tab_profiles">Patch Profiles</string>

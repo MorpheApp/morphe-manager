@@ -12,11 +12,12 @@ import kotlin.random.Random
 object HomeAndPatcherMessages {
 
     private fun updateValues(
+        context: Context,
         messageIndex: PersistentValue<Int>,
         messageSeed: PersistentValue<Long>,
         messages: List<Int>
     ): Int {
-        var seed = messageSeed.get()
+        var seed = messageSeed.get(context)
         var updateSeed = false
 
         if (seed == 0L) {
@@ -24,7 +25,7 @@ object HomeAndPatcherMessages {
             updateSeed = true
         }
 
-        var currentMessageIndex = messageIndex.get() //PersistentValues.getInt(context, messageIndexKey, 0)
+        var currentMessageIndex = messageIndex.get(context)
         if (currentMessageIndex > messages.lastIndex) {
             // All messages are exhausted. Reset the shuffle so the next batch is in random order.
             currentMessageIndex = 0
@@ -33,7 +34,7 @@ object HomeAndPatcherMessages {
 
         if (updateSeed) {
             seed = Random.nextInt().toLong()
-            messageSeed.save(seed)
+            messageSeed.save(context, seed)
             Log.d(tag, "Updated message seed: $messageSeed")
         }
 
@@ -63,6 +64,7 @@ object HomeAndPatcherMessages {
 
         if (message == null) {
             message = updateValues(
+                context,
                 PersistentValue(context, "patching_home_message_index", 0),
                 PersistentValue(context, "patching_home_message_seed", 0L),
                 listOf(
@@ -81,22 +83,16 @@ object HomeAndPatcherMessages {
         return message
     }
 
-    private lateinit var patcherMessageIndex : PersistentValue<Int>
-    private lateinit var patcherMessageSeed : PersistentValue<Long>
+    private val patcherMessageIndex = PersistentValue("patching_patcher_message_index", 0)
+    private val patcherMessageSeed = PersistentValue("patching_patcher_message_seed", 0L)
 
     /**
      * Witty patcher message.
      */
     fun getPatcherMessage(context: Context): Int {
-        if (!::patcherMessageIndex.isInitialized) {
-            patcherMessageIndex = PersistentValue(context, "patching_patcher_message_index", 0)
-        }
-        if (!::patcherMessageSeed.isInitialized) {
-            patcherMessageSeed = PersistentValue(context, "patching_patcher_message_seed", 0L)
-        }
-
         // Message changes each time called.
         return updateValues(
+            context,
             patcherMessageIndex,
             patcherMessageSeed,
             listOf(

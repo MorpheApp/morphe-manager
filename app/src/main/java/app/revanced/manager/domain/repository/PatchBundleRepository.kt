@@ -1207,7 +1207,7 @@ class PatchBundleRepository(
             name = "",
             displayName = null,
             versionHash = null,
-            source = Source.from(BUNDLE_URL_STABLE),
+            source = Source.from(BUNDLE_URL_STABLE), // Morphe
             autoUpdate = false,
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),

@@ -9,7 +9,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.*
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
-import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
@@ -65,9 +64,8 @@ class MorpheHomeState(
     private val optionsRepository: PatchOptionsRepository,
     private val context: Context,
     private val scope: CoroutineScope,
-    val isRootMode: Boolean,
-    private val hasRootAccess: Boolean,
-    private val onStartQuickPatch: (QuickPatchParams) -> Unit
+    private val onStartQuickPatch: (QuickPatchParams) -> Unit,
+    val usingMountInstall: Boolean
 ) {
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
@@ -231,13 +229,11 @@ class MorpheHomeState(
                 .first()
         }
 
-        // Exclude GmsCore support patch in root mode
-        val patches = if (hasRootAccess && isRootMode) {
-            bundles.toPatchSelection(allowIncompatible) { _, patch ->
-                patch.include && !patch.name.contains("GmsCore", ignoreCase = true)
-            }
-        } else {
-            bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch ->
+            patch.include &&
+                    // Exclude GmsCore support patch in root mode
+                    // Eventually this will be improved with patcher changes
+                    (!usingMountInstall || !patch.name.equals("GmsCore support", ignoreCase = true))
         }
 
         val bundlePatches = bundles.associate { scoped ->
@@ -372,9 +368,8 @@ fun rememberMorpheHomeState(
     dashboardViewModel: DashboardViewModel,
     sources: List<PatchBundleSource>,
     bundleInfo: Map<Int, Any>,
-    isRootMode: Boolean,
-    hasRootAccess: Boolean,
-    onStartQuickPatch: (QuickPatchParams) -> Unit
+    onStartQuickPatch: (QuickPatchParams) -> Unit,
+    usingMountInstall : Boolean
 ): MorpheHomeState {
     val context = androidx.compose.ui.platform.LocalContext.current
     val scope = rememberCoroutineScope()
@@ -386,9 +381,8 @@ fun rememberMorpheHomeState(
             optionsRepository = optionsRepository,
             context = context,
             scope = scope,
-            isRootMode = isRootMode,
-            hasRootAccess = hasRootAccess,
-            onStartQuickPatch = onStartQuickPatch
+            onStartQuickPatch = onStartQuickPatch,
+            usingMountInstall = usingMountInstall
         )
     }
 
