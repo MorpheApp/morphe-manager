@@ -16,7 +16,6 @@ import app.revanced.manager.data.room.AppDatabase.Companion.generateUid
 import app.revanced.manager.data.room.bundles.PatchBundleEntity
 import app.revanced.manager.data.room.bundles.PatchBundleProperties
 import app.revanced.manager.data.room.bundles.Source
-import app.revanced.manager.domain.bundles.APIPatchBundle
 import app.revanced.manager.domain.bundles.GitHubPullRequestBundle
 import app.revanced.manager.domain.bundles.JsonPatchBundle
 import app.revanced.manager.data.room.bundles.Source as SourceInfo
@@ -26,6 +25,7 @@ import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_STABLE
 import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.patcher.patch.PatchBundle
 import app.revanced.manager.patcher.patch.PatchBundleInfo
@@ -298,18 +298,18 @@ class PatchBundleRepository(
 
         return when (source) {
             is SourceInfo.Local -> LocalPatchBundle(actualName, uid, normalizedDisplayName, createdAt, updatedAt, null, dir)
-            is SourceInfo.API -> APIPatchBundle(
-                actualName,
-                uid,
-                normalizedDisplayName,
-                createdAt,
-                updatedAt,
-                versionHash,
-                null,
-                dir,
-                SourceInfo.API.SENTINEL,
-                autoUpdate,
-            )
+//            is SourceInfo.API -> APIPatchBundle(
+//                actualName,
+//                uid,
+//                normalizedDisplayName,
+//                createdAt,
+//                updatedAt,
+//                versionHash,
+//                null,
+//                dir,
+//                SourceInfo.API.SENTINEL,
+//                autoUpdate,
+//            )
 
             is SourceInfo.Remote -> JsonPatchBundle(
                 actualName,
@@ -497,7 +497,7 @@ class PatchBundleRepository(
         doReload()
     }
 
-    suspend fun refreshDefaultBundle() = store.dispatch(Update(force = true) { it.uid == DEFAULT_SOURCE_UID })
+    suspend fun refreshDefaultBundle() = store.dispatch(UpdateMorphe(force = true) { it.uid == DEFAULT_SOURCE_UID })
 
     enum class DisplayNameUpdateResult {
         SUCCESS,
@@ -659,14 +659,14 @@ class PatchBundleRepository(
             state.copy(sources = state.sources.put(src.uid, src))
         }
 
-    suspend fun reloadApiBundles() = dispatchAction("Reload API bundles") {
-        this@PatchBundleRepository.sources.first().filterIsInstance<APIPatchBundle>().forEach {
-            with(it) { deleteLocalFile() }
-            updateDb(it.uid) { it.copy(versionHash = null) }
-        }
-
-        doReload()
-    }
+//    suspend fun reloadApiBundles() = dispatchAction("Reload API bundles") {
+//        this@PatchBundleRepository.sources.first().filterIsInstance<APIPatchBundle>().forEach {
+//            with(it) { deleteLocalFile() }
+//            updateDb(it.uid) { it.copy(versionHash = null) }
+//        }
+//
+//        doReload()
+//    }
 
     suspend fun RemotePatchBundle.setAutoUpdate(value: Boolean) {
         dispatchAction("Set auto update ($name, $value)") { state ->
@@ -690,16 +690,16 @@ class PatchBundleRepository(
         allowUnsafeNetwork: Boolean = false
     ) {
         val uids = sources.map { it.uid }.toSet()
-        store.dispatch(Update(showToast = showToast, allowUnsafeNetwork = allowUnsafeNetwork) { it.uid in uids })
+        store.dispatch(UpdateMorphe(showToast = showToast) { it.uid in uids })
     }
 
-    suspend fun redownloadRemoteBundles() = store.dispatch(Update(force = true))
+    suspend fun redownloadRemoteBundles() = store.dispatch(UpdateMorphe(force = true))
 
     /**
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+        store.dispatch(UpdateMorphe { it.autoUpdate })
         checkManualUpdates()
     }
 
@@ -744,8 +744,7 @@ class PatchBundleRepository(
         showToast: Boolean = false
     ): UpdateResult {
         // Check network first
-        val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && !networkInfo.isSafe()) {
+        if (!networkInfo.isConnected()) {
             Log.d(tag, "No internet connection for bundle update")
             if (showProgress) {
                 bundleUpdateProgressFlow.value = BundleUpdateProgress(
@@ -771,7 +770,7 @@ class PatchBundleRepository(
             )
         }
 
-        // Use the existing Update action to perform the update
+        // Use our modified update method
         try {
             store.dispatch(UpdateMorphe(
                 force = false,
@@ -804,12 +803,19 @@ class PatchBundleRepository(
         }
     }
 
+    @Deprecated("Use Morphe class")
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
         private val allowUnsafeNetwork: Boolean = false,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
+        init {
+            // Morphe begin
+            // Prevent accidentally using non Morphe code
+            if (true) throw IllegalStateException("Use UpdateMorphe instead")
+            // Morphe end
+        }
         private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
             withContext(Dispatchers.Main) { app.toast(app.getString(id, *args)) }
 
@@ -917,9 +923,8 @@ class PatchBundleRepository(
             current: State
         ) = coroutineScope {
             // Check network connectivity first
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowMeteredUpdates && !networkInfo.isSafe()) {
-                Log.d(tag, "Skipping update check because the network is down or metered.")
+            if (!networkInfo.isConnected()) {
+                Log.d(tag, "Skipping update check because the network is down")
                 if (showProgress) {
                     bundleUpdateProgressFlow.value = BundleUpdateProgress(
                         total = 1,
@@ -1202,7 +1207,7 @@ class PatchBundleRepository(
             name = "",
             displayName = null,
             versionHash = null,
-            source = Source.API,
+            source = Source.from(BUNDLE_URL_STABLE),
             autoUpdate = false,
             sortOrder = 0,
             createdAt = System.currentTimeMillis(),
