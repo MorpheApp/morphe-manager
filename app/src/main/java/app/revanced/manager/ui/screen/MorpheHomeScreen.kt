@@ -70,16 +70,6 @@ fun MorpheHomeScreen(
 
     var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
 
-    if (!hasDoneAppLaunchBundleUpdate) {
-        hasDoneAppLaunchBundleUpdate = true
-        scope.launch {
-            dashboardViewModel.patchBundleRepository.updateMorpheBundle(
-                showProgress = false,
-                showToast = false
-            )
-        }
-    }
-
     // Remember home state
     val homeState = rememberMorpheHomeState(
         dashboardViewModel = dashboardViewModel,
@@ -89,6 +79,21 @@ fun MorpheHomeScreen(
         hasRootAccess = hasRootAccess,
         onStartQuickPatch = onStartQuickPatch
     )
+
+    if (!hasDoneAppLaunchBundleUpdate) {
+        hasDoneAppLaunchBundleUpdate = true
+        scope.launch {
+            homeState.isRefreshingBundle = true
+            try {
+                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
+                    showProgress = false,
+                    showToast = false
+                )
+            } finally {
+                homeState.isRefreshingBundle = false
+            }
+        }
+    }
 
     // Show manager update dialog
     if (homeState.shouldShowUpdateDialog) {

@@ -276,7 +276,6 @@
     <string name="updates_description">Check for updates and view changelog</string>
     <string name="downloads">Downloads</string>
     <string name="downloads_description">Downloader plugins and downloaded apps</string>
-    <!-- From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37 -->
     <string name="plugins_help_title">What is a downloader?</string>
     <string name="plugins_help_description">A downloader is a plugin which allows URV to download stock APKs from various sources. The downloaded APKs will be shown in the bottom section. During the patching process, you can choose an already downloaded APKs or you can download it via a plugin.\n\nThe list of supported downloader plugins can be found</string>
     <string name="import_export">Import &amp; export</string>
@@ -1044,7 +1043,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
-    <string name="installing_message">Tap on <b>Update</b> when prompted.\nUniversal ReVanced Manager will close when updating.</string>
+    <string name="installing_message">Tap on <b>Update</b> when prompted.\Morphe will close when updating.</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
