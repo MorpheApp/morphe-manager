@@ -659,31 +659,37 @@ private fun DownloadInstructionsDialog(
                             )
                             Spacer(Modifier.height(8.dp))
                             // Styled "DOWNLOAD APK" button - clickable with toast
-                            Surface(
-                                onClick = {
-                                    context.toast(context.getString(R.string.morphe_home_download_instructions_download_button_toast))
-                                },
-                                shape = RoundedCornerShape(0.dp), // No rounding
-                                color = Color(0xFFE53935), // Red color matching APKMirror
-                                modifier = Modifier.padding(vertical = 4.dp)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.Center
                             ) {
-                                Row(
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalAlignment = Alignment.CenterVertically
+                                Surface(
+                                    onClick = {
+                                        context.toast(context.getString(R.string.morphe_home_download_instructions_download_button_toast))
+                                    },
+                                    shape = RoundedCornerShape(0.dp), // No rounding
+                                    color = Color(0xFFFF0034) // Red color matching APKMirror
                                 ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.FileDownload,
-                                        contentDescription = null,
-                                        tint = Color.White,
-                                        modifier = Modifier.size(18.dp)
-                                    )
-                                    Text(
-                                        text = stringResource(R.string.morphe_home_download_instructions_download_button),
-                                        style = MaterialTheme.typography.labelLarge,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.White
-                                    )
+                                    Row(
+                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Download,
+                                            contentDescription = null,
+                                            tint = Color.White,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.morphe_home_download_instructions_download_button),
+                                            style = MaterialTheme.typography.labelLarge,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
+                                    }
                                 }
                             }
                         }
