@@ -57,6 +57,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.exp
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * MorphePatcherScreen - Simplified patcher screen with progress tracking
@@ -115,25 +117,27 @@ fun MorphePatcherScreen(
             } else {
                 // Over estimate the progress by about 1% per second, but decays to
                 // adding smaller adjustments each second until the current step completes
-                fun overEstimateProgressAdjustment(secondsElapsed: Long): Float {
+                fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
                     // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
-                    // https://desmos.com/calculator/16p60zu48m
-                    val maximumValue = 15.0f // Up to 15% over correct
-                    val timeConstant = 20.0f // Larger value = longer time until plateau
+                    // https://desmos.com/calculator/fe53aoxhly
+                    val maximumValue = 15.0 // Up to 15% over correct
+                    val timeConstant = 30.0 // Larger value = longer time until plateau
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
                 }
 
-                val secondsSinceStepStarted = timeSinceStepStarted / 1000
-                val overEstimatedProgress = actualProgress +  0.01f * overEstimateProgressAdjustment(
-                    secondsSinceStepStarted
-                )
+                val secondsSinceStepStarted = timeSinceStepStarted / 1000.0
+                val overEstimatedProgress = min(
+                    0.98,
+                    actualProgress + 0.01 * overEstimateProgressAdjustment(
+                        secondsSinceStepStarted
+                    )
+                ).toFloat()
 
                 // Don't allow rolling back the progress if it went over,
                 // and don't go over 98% unless the actual progress is that far
-                displayProgress = clamp(
+                displayProgress = max(
                     displayProgress,
-                    overEstimatedProgress,
-                    0.98f
+                    overEstimatedProgress
                 )
             }
 

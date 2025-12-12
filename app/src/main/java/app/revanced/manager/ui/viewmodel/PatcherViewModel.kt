@@ -94,6 +94,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.time.Duration
 import java.util.UUID
+import kotlin.math.min
 
 @OptIn(SavedStateHandleSaveableApi::class, PluginHostApi::class)
 class PatcherViewModel(
@@ -560,7 +561,7 @@ class PatcherViewModel(
         val currentStepIndex = getCurrentStepIndex()
         val total = steps.sumOf{ it.subSteps } - 1 + patchCount
 
-        currentStepIndex.toFloat() / total.toFloat()
+        min(1.0, currentStepIndex / total.toDouble()).toFloat()
     }
 
     fun getCurrentStepIndex() : Int {
