@@ -801,104 +801,6 @@ class PatchBundleRepository(
         }
     }
 
-//    inner class Update(
-//        private val force: Boolean = false,
-//        private val showToast: Boolean = false,
-//        private val allowUnsafeNetwork: Boolean = false,
-//        private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
-//    ) : Action<State> {
-//
-//        private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
-//            withContext(Dispatchers.Main) { app.toast(app.getString(id, *args)) }
-//
-//        override fun toString() = if (force) "Redownload remote bundles" else "Update check"
-//
-//        override suspend fun ActionContext.execute(
-//            current: State
-//        ) = coroutineScope {
-//            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-//            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
-//                Log.d(tag, "Skipping update check because the network is down or metered.")
-//                bundleUpdateProgressFlow.value = null
-//                return@coroutineScope current
-//            }
-//
-//            val targets = current.sources.values
-//                .filterIsInstance<RemotePatchBundle>()
-//                .filter { predicate(it) }
-//
-//            if (targets.isEmpty()) {
-//                if (showToast) toast(R.string.patches_update_unavailable)
-//                bundleUpdateProgressFlow.value = null
-//                return@coroutineScope current
-//            }
-//
-//            bundleUpdateProgressFlow.value = BundleUpdateProgress(
-//                total = targets.size,
-//                completed = 0
-//            )
-//
-//            val updated = try {
-//                targets
-//                    .map { bundle ->
-//                        async {
-//                            Log.d(tag, "Updating patch bundle: ${bundle.name}")
-//
-//                            val result = with(bundle) {
-//                                if (force) downloadLatest() else update()
-//                            }
-//
-//                            bundleUpdateProgressFlow.update { progress ->
-//                                progress?.copy(
-//                                    completed = (progress.completed + 1).coerceAtMost(progress.total)
-//                                )
-//                            }
-//
-//                            if (result == null) return@async null
-//
-//                            bundle to result
-//                        }
-//                    }
-//                    .awaitAll()
-//                    .filterNotNull()
-//                    .toMap()
-//            } finally {
-//                bundleUpdateProgressFlow.value = null
-//            }
-//            if (updated.isEmpty()) {
-//                if (showToast) toast(R.string.patches_update_unavailable)
-//                return@coroutineScope current
-//            }
-//
-//            updated.forEach { (src, downloadResult) ->
-//                val name = src.patchBundle?.manifestAttributes?.name ?: src.name
-//                val now = System.currentTimeMillis()
-//
-//                updateDb(src.uid) {
-//                    it.copy(
-//                        versionHash = downloadResult.versionSignature,
-//                        name = name,
-//                        createdAt = downloadResult.assetCreatedAtMillis ?: it.createdAt,
-//                        updatedAt = now
-//                    )
-//                }
-//            }
-//
-//            if (updated.isNotEmpty()) {
-//                val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
-//                manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
-//            }
-//
-//            if (showToast) toast(R.string.patches_update_success)
-//            doReload()
-//        }
-//
-//        override suspend fun catch(exception: Exception) {
-//            Log.e(tag, "Failed to update patches", exception)
-//            toast(R.string.patches_download_fail, exception.simpleMessage())
-//        }
-//    }
-
     // Hard copy of original Update with our changes to solve upstream problems
     inner class Update(
         private val force: Boolean = false,
@@ -1076,6 +978,105 @@ class PatchBundleRepository(
             }
         }
     }
+
+//    inner class Update(
+//        private val force: Boolean = false,
+//        private val showToast: Boolean = false,
+//        private val allowUnsafeNetwork: Boolean = false,
+//        private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
+//    ) : Action<State> {
+//
+//        private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
+//            withContext(Dispatchers.Main) { app.toast(app.getString(id, *args)) }
+//
+//        override fun toString() = if (force) "Redownload remote bundles" else "Update check"
+//
+//        override suspend fun ActionContext.execute(
+//            current: State
+//        ) = coroutineScope {
+//            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
+//            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
+//                Log.d(tag, "Skipping update check because the network is down or metered.")
+//                bundleUpdateProgressFlow.value = null
+//                return@coroutineScope current
+//            }
+//
+//            val targets = current.sources.values
+//                .filterIsInstance<RemotePatchBundle>()
+//                .filter { predicate(it) }
+//
+//            if (targets.isEmpty()) {
+//                if (showToast) toast(R.string.patches_update_unavailable)
+//                bundleUpdateProgressFlow.value = null
+//                return@coroutineScope current
+//            }
+//
+//            bundleUpdateProgressFlow.value = BundleUpdateProgress(
+//                total = targets.size,
+//                completed = 0
+//            )
+//
+//            val updated = try {
+//                targets
+//                    .map { bundle ->
+//                        async {
+//                            Log.d(tag, "Updating patch bundle: ${bundle.name}")
+//
+//                            val result = with(bundle) {
+//                                if (force) downloadLatest() else update()
+//                            }
+//
+//                            bundleUpdateProgressFlow.update { progress ->
+//                                progress?.copy(
+//                                    completed = (progress.completed + 1).coerceAtMost(progress.total)
+//                                )
+//                            }
+//
+//                            if (result == null) return@async null
+//
+//                            bundle to result
+//                        }
+//                    }
+//                    .awaitAll()
+//                    .filterNotNull()
+//                    .toMap()
+//            } finally {
+//                bundleUpdateProgressFlow.value = null
+//            }
+//            if (updated.isEmpty()) {
+//                if (showToast) toast(R.string.patches_update_unavailable)
+//                return@coroutineScope current
+//            }
+//
+//            updated.forEach { (src, downloadResult) ->
+//                val name = src.patchBundle?.manifestAttributes?.name ?: src.name
+//                val now = System.currentTimeMillis()
+//
+//                updateDb(src.uid) {
+//                    it.copy(
+//                        versionHash = downloadResult.versionSignature,
+//                        name = name,
+//                        createdAt = downloadResult.assetCreatedAtMillis ?: it.createdAt,
+//                        updatedAt = now
+//                    )
+//                }
+//            }
+//
+//            if (updated.isNotEmpty()) {
+//                val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
+//                manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
+//            }
+//
+//            if (showToast) toast(R.string.patches_update_success)
+//            doReload()
+//        }
+//
+//        override suspend fun catch(exception: Exception) {
+//            Log.e(tag, "Failed to update patches", exception)
+//            toast(R.string.patches_download_fail, exception.simpleMessage())
+//        }
+//    }
+
 
     private inner class ManualUpdateCheck(
         private val targetUids: Set<Int>? = null
