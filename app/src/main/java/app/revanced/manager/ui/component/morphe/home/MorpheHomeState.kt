@@ -9,7 +9,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.*
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
-import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp

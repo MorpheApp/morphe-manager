@@ -30,12 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
-import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.PasswordField
 import app.revanced.manager.ui.component.morphe.home.MorpheDialog
 import app.revanced.manager.ui.viewmodel.AboutViewModel
@@ -51,67 +48,85 @@ fun AboutDialog(onDismiss: () -> Unit) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
-    MorpheDialog(onDismissRequest = onDismiss) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        header = {
+            // Fixed header
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // App Icon with gradient background
+                Box(
+                    modifier = Modifier.size(80.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    Brush.linearGradient(
+                                        listOf(
+                                            MaterialTheme.colorScheme.primaryContainer,
+                                            MaterialTheme.colorScheme.secondaryContainer
+                                        )
+                                    )
+                                )
+                        )
+                    }
+                    val icon = rememberDrawablePainter(
+                        drawable = remember {
+                            AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                        }
+                    )
+                    Image(
+                        painter = icon,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+
+                // App Name & Version
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Version ${BuildConfig.VERSION_NAME}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        },
+        footer = {
+            // Fixed footer - close button
+            FilledTonalButton(
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.close))
+            }
+        }
+    ) {
+        // Scrollable content
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // App Icon with gradient background
-            Box(
-                modifier = Modifier.size(80.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Surface(
-                    shape = RoundedCornerShape(20.dp),
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                Brush.linearGradient(
-                                    listOf(
-                                        MaterialTheme.colorScheme.primaryContainer,
-                                        MaterialTheme.colorScheme.secondaryContainer
-                                    )
-                                )
-                            )
-                    )
-                }
-                val icon = rememberDrawablePainter(
-                    drawable = remember {
-                        AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-                    }
-                )
-                Image(
-                    painter = icon,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                )
-            }
-
-            // App Name & Version
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.app_name),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "Version ${BuildConfig.VERSION_NAME}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-
             // Description
             Surface(
                 shape = RoundedCornerShape(16.dp),
@@ -146,16 +161,6 @@ fun AboutDialog(onDismiss: () -> Unit) {
                         contentDescription = link.name,
                         onClick = { uriHandler.openUri(link.url) }
                     )
-                }
-            }
-
-            // Close button
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                FilledTonalButton(onClick = onDismiss) {
-                    Text(stringResource(R.string.close))
                 }
             }
         }
@@ -207,41 +212,35 @@ fun PluginActionDialog(
     onDismiss: () -> Unit,
     onTrust: () -> Unit,
     onRevoke: () -> Unit,
-    onUninstall: () -> Unit
+    onUninstall: () -> Unit,
+    onViewError: () -> Unit
 ) {
     val context = LocalContext.current
     val pm = remember { context.packageManager }
 
-    var showExceptionViewer by remember { mutableStateOf(false) }
+    val signature = remember(packageName) {
+        runCatching {
+            val androidSignature = pm.getPackageInfo(
+                packageName,
+                PackageManager.GET_SIGNING_CERTIFICATES
+            ).signingInfo?.apkContentsSigners?.firstOrNull()
 
-    if (showExceptionViewer && state is DownloaderPluginState.Failed) {
-        ExceptionViewerDialog(
-            text = state.throwable.stackTraceToString(),
-            onDismiss = { showExceptionViewer = false }
-        )
-    } else {
-        val signature = remember(packageName) {
-            runCatching {
-                val androidSignature = pm.getPackageInfo(
-                    packageName,
-                    PackageManager.GET_SIGNING_CERTIFICATES
-                ).signingInfo?.apkContentsSigners?.firstOrNull()
+            if (androidSignature != null) {
+                val hash = MessageDigest.getInstance("SHA-256")
+                    .digest(androidSignature.toByteArray())
+                hash.joinToString(":") { "%02X".format(it) }
+            } else {
+                "Unknown"
+            }
+        }.getOrNull() ?: "Unknown"
+    }
 
-                if (androidSignature != null) {
-                    val hash = MessageDigest.getInstance("SHA-256")
-                        .digest(androidSignature.toByteArray())
-                    hash.joinToString(":") { "%02X".format(it) }
-                } else {
-                    "Unknown"
-                }
-            }.getOrNull() ?: "Unknown"
-        }
-
-        MorpheDialog(onDismissRequest = onDismiss) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        header = {
+            // Fixed header
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -288,112 +287,111 @@ fun PluginActionDialog(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-
-                // Content
-                Column(
+            }
+        },
+        footer = {
+            // Fixed footer - buttons
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Action and Uninstall buttons
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
                 ) {
+                    // Action button (Trust/Revoke/View Error)
                     when (state) {
+                        is DownloaderPluginState.Loaded -> {
+                            FilledTonalButton(
+                                onClick = {
+                                    onRevoke()
+                                    onDismiss()
+                                }
+                            ) {
+                                Text(stringResource(R.string.continue_))
+                            }
+                        }
+                        is DownloaderPluginState.Untrusted -> {
+                            FilledTonalButton(
+                                onClick = {
+                                    onTrust()
+                                    onDismiss()
+                                }
+                            ) {
+                                Text(stringResource(R.string.continue_))
+                            }
+                        }
                         is DownloaderPluginState.Failed -> {
-                            Text(
-                                text = stringResource(R.string.downloader_plugin_failed_dialog_body, packageName),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.fillMaxWidth()
-                            )
+                            FilledTonalButton(onClick = onViewError) {
+                                Text(stringResource(R.string.downloader_plugin_view_error))
+                            }
                         }
-                        else -> {
-                            Text(
-                                text = "Package:",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = packageName,
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontFamily = FontFamily.Monospace
-                            )
+                        else -> {}
+                    }
 
-                            Spacer(modifier = Modifier.height(4.dp))
-
-                            Text(
-                                text = "Signature (SHA-256):",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = signature,
-                                style = MaterialTheme.typography.bodySmall,
-                                fontFamily = FontFamily.Monospace,
-                                lineHeight = 20.sp
-                            )
+                    // Uninstall button
+                    OutlinedButton(
+                        onClick = {
+                            onUninstall()
+                            onDismiss()
                         }
+                    ) {
+                        Text(stringResource(R.string.uninstall))
                     }
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Buttons - two rows
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                // Dismiss button
+                OutlinedButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth(0.5f)
                 ) {
-                    // First row: Action and Uninstall
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
-                    ) {
-                        // Action button (Trust/Revoke/View Error)
-                        when (state) {
-                            is DownloaderPluginState.Loaded -> {
-                                FilledTonalButton(
-                                    onClick = {
-                                        onRevoke()
-                                        onDismiss()
-                                    }
-                                ) {
-                                    Text(stringResource(R.string.continue_))
-                                }
-                            }
-                            is DownloaderPluginState.Untrusted -> {
-                                FilledTonalButton(
-                                    onClick = {
-                                        onTrust()
-                                        onDismiss()
-                                    }
-                                ) {
-                                    Text(stringResource(R.string.continue_))
-                                }
-                            }
-                            is DownloaderPluginState.Failed -> {
-                                FilledTonalButton(onClick = { showExceptionViewer = true }) {
-                                    Text(stringResource(R.string.downloader_plugin_view_error))
-                                }
-                            }
-                            else -> {}
-                        }
+                    Text(stringResource(R.string.dismiss))
+                }
+            }
+        }
+    ) {
+        // Scrollable content
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            when (state) {
+                is DownloaderPluginState.Failed -> {
+                    Text(
+                        text = stringResource(R.string.downloader_plugin_failed_dialog_body, packageName),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                else -> {
+                    Text(
+                        text = "Package:",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = packageName,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontFamily = FontFamily.Monospace
+                    )
 
-                        // Uninstall button
-                        OutlinedButton(
-                            onClick = {
-                                onUninstall()
-                                onDismiss()
-                            }
-                        ) {
-                            Text(stringResource(R.string.uninstall))
-                        }
-                    }
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                    // Second row: Dismiss button
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth(0.5f)
-                    ) {
-                        Text(stringResource(R.string.dismiss))
-                    }
+                    Text(
+                        text = "Signature (SHA-256):",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = signature,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontFamily = FontFamily.Monospace,
+                        lineHeight = 20.sp
+                    )
                 }
             }
         }
@@ -412,39 +410,73 @@ fun KeystoreCredentialsDialog(
     var alias by rememberSaveable { mutableStateOf("") }
     var pass by rememberSaveable { mutableStateOf("") }
 
-    MorpheDialog(onDismissRequest = onDismiss) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Icon
-            Surface(
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.primaryContainer,
-                modifier = Modifier.size(56.dp)
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        header = {
+            // Fixed header
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        Icons.Outlined.Key,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.size(32.dp)
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Outlined.Key,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+                }
+
+                Text(
+                    text = stringResource(R.string.import_keystore_dialog_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
+        },
+        footer = {
+            // Fixed footer - buttons (always in row)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                FilledTonalButton(
+                    onClick = { onSubmit(alias, pass) },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        stringResource(R.string.import_keystore_dialog_button),
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                }
+
+                OutlinedButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        stringResource(R.string.cancel),
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
                     )
                 }
             }
-
-            // Title
-            Text(
-                text = stringResource(R.string.import_keystore_dialog_title),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-
-            // Description
+        }
+    ) {
+        // Scrollable content
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             Text(
                 text = stringResource(R.string.import_keystore_dialog_description),
                 style = MaterialTheme.typography.bodyMedium,
@@ -468,36 +500,6 @@ fun KeystoreCredentialsDialog(
                 label = { Text(stringResource(R.string.import_keystore_dialog_password_field)) },
                 modifier = Modifier.fillMaxWidth()
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // Import button
-                FilledTonalButton(
-                    onClick = { onSubmit(alias, pass) },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        stringResource(R.string.import_keystore_dialog_button),
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-
-                // Cancel button
-                OutlinedButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        stringResource(R.string.cancel),
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
         }
     }
 }

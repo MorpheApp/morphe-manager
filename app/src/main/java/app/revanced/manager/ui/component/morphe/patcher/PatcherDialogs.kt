@@ -2,10 +2,8 @@ package app.revanced.manager.ui.component.morphe.patcher
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.FileDownload
@@ -33,49 +31,40 @@ fun CancelPatchingDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    MorpheDialog(onDismissRequest = onDismiss) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Warning Icon
-            Surface(
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.errorContainer,
-                modifier = Modifier.size(56.dp)
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        header = {
+            // Fixed header
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Outlined.Warning,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onErrorContainer,
-                        modifier = Modifier.size(32.dp)
-                    )
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Warning,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
                 }
+
+                Text(
+                    text = stringResource(R.string.patcher_stop_confirm_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
             }
-
-            // Title
-            Text(
-                text = stringResource(R.string.patcher_stop_confirm_title),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-
-            // Description
-            Text(
-                text = stringResource(R.string.patcher_stop_confirm_description),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Buttons in one row
+        },
+        footer = {
+            // Fixed footer - buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -101,6 +90,14 @@ fun CancelPatchingDialog(
                 }
             }
         }
+    ) {
+        // Scrollable content
+        Text(
+            text = stringResource(R.string.patcher_stop_confirm_description),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -122,128 +119,54 @@ fun InstallDialog(
     val installButtonText = if (usingMountInstall) R.string.mount else R.string.install_app
     val installIcon = if (usingMountInstall) Icons.Outlined.FolderOpen else Icons.Outlined.FileDownload
 
-    MorpheDialog(onDismissRequest = onDismiss) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Icon based on state
-            Surface(
-                shape = CircleShape,
-                color = when (state) {
-                    InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.errorContainer
-                    else -> MaterialTheme.colorScheme.primaryContainer
-                },
-                modifier = Modifier.size(56.dp)
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        header = {
+            // Fixed header
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = when (state) {
-                            InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
-                            else -> installIcon
-                        },
-                        contentDescription = null,
-                        tint = when (state) {
-                            InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.onErrorContainer
-                            else -> MaterialTheme.colorScheme.onPrimaryContainer
-                        },
-                        modifier = Modifier.size(32.dp)
-                    )
-                }
-            }
-
-            // Title
-            Text(
-                text = stringResource(
-                    when (state) {
-                        InstallDialogState.ERROR -> R.string.install_app_fail_title
-                        else -> installButtonText
-                    }
-                ),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-
-            // Description or error message
-            if (state == InstallDialogState.ERROR && errorMessage != null) {
                 Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 300.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                    shape = CircleShape,
+                    color = when (state) {
+                        InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.errorContainer
+                        else -> MaterialTheme.colorScheme.primaryContainer
+                    },
+                    modifier = Modifier.size(56.dp)
                 ) {
-                    Box(
-                        modifier = Modifier.verticalScroll(rememberScrollState())
-                    ) {
-                        Text(
-                            text = errorMessage,
-                            modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = when (state) {
+                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
+                                else -> installIcon
+                            },
+                            contentDescription = null,
+                            tint = when (state) {
+                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.onErrorContainer
+                                else -> MaterialTheme.colorScheme.onPrimaryContainer
+                            },
+                            modifier = Modifier.size(32.dp)
                         )
                     }
                 }
-            } else {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = stringResource(
-                            when (state) {
-                                InstallDialogState.INITIAL -> if (usingMountInstall)
-                                    R.string.morphe_patcher_mount_dialog_message
-                                else
-                                    R.string.morphe_patcher_install_dialog_message
-                                InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
-                                InstallDialogState.READY_TO_INSTALL -> if (usingMountInstall)
-                                    R.string.morphe_patcher_mount_ready_message
-                                else
-                                    R.string.morphe_patcher_install_ready_message
-                                InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message
-                            }
-                        ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
 
-                    // Root mode warning
-                    if (usingMountInstall && state == InstallDialogState.INITIAL) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(
-                                    MaterialTheme.colorScheme.primaryContainer.copy(
-                                        alpha = 0.3f
-                                    )
-                                )
-                                .padding(8.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.Info,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.morphe_root_gmscore_excluded),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.weight(1f)
-                            )
+                Text(
+                    text = stringResource(
+                        when (state) {
+                            InstallDialogState.ERROR -> R.string.install_app_fail_title
+                            else -> installButtonText
                         }
-                    }
-                }
+                    ),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Buttons in one row
+        },
+        footer = {
+            // Fixed footer - buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -291,6 +214,77 @@ fun InstallDialog(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(stringResource(R.string.cancel))
+                }
+            }
+        }
+    ) {
+        // Scrollable content
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Description or error message
+            if (state == InstallDialogState.ERROR && errorMessage != null) {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                ) {
+                    Text(
+                        text = errorMessage,
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            } else {
+                Text(
+                    text = stringResource(
+                        when (state) {
+                            InstallDialogState.INITIAL -> if (usingMountInstall)
+                                R.string.morphe_patcher_mount_dialog_message
+                            else
+                                R.string.morphe_patcher_install_dialog_message
+                            InstallDialogState.CONFLICT -> R.string.morphe_patcher_install_conflict_message
+                            InstallDialogState.READY_TO_INSTALL -> if (usingMountInstall)
+                                R.string.morphe_patcher_mount_ready_message
+                            else
+                                R.string.morphe_patcher_install_ready_message
+                            InstallDialogState.ERROR -> R.string.morphe_patcher_install_dialog_message
+                        }
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                // Root mode warning
+                if (usingMountInstall && state == InstallDialogState.INITIAL) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(
+                                MaterialTheme.colorScheme.primaryContainer.copy(
+                                    alpha = 0.3f
+                                )
+                            )
+                            .padding(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_root_gmscore_excluded),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
         }
