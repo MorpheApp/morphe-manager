@@ -68,8 +68,6 @@ fun MorpheHomeScreen(
         }
     }
 
-    var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
-
     // Remember home state
     val homeState = rememberMorpheHomeState(
         dashboardViewModel = dashboardViewModel,
@@ -80,8 +78,12 @@ fun MorpheHomeScreen(
         onStartQuickPatch = onStartQuickPatch
     )
 
+    var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
+    var bundleUpdateInProgress by remember { mutableStateOf(false) }
+
     if (!hasDoneAppLaunchBundleUpdate) {
         hasDoneAppLaunchBundleUpdate = true
+        bundleUpdateInProgress = true
         scope.launch {
             homeState.isRefreshingBundle = true
             try {
@@ -91,6 +93,7 @@ fun MorpheHomeScreen(
                 )
             } finally {
                 homeState.isRefreshingBundle = false
+                bundleUpdateInProgress = false
             }
         }
     }
@@ -177,7 +180,7 @@ fun MorpheHomeScreen(
                     homeState.handleAppClick(
                         packageName = "com.google.android.youtube",
                         availablePatches = availablePatches,
-                        bundleUpdateProgress = bundleUpdateProgress,
+                        bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
                 },
@@ -185,7 +188,7 @@ fun MorpheHomeScreen(
                     homeState.handleAppClick(
                         packageName = "com.google.android.apps.youtube.music",
                         availablePatches = availablePatches,
-                        bundleUpdateProgress = bundleUpdateProgress,
+                        bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
                 }

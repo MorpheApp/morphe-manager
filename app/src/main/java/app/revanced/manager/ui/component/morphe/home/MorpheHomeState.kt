@@ -128,12 +128,12 @@ class MorpheHomeState(
     fun handleAppClick(
         packageName: String,
         availablePatches: Int,
-        bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+        bundleUpdateInProgress: Boolean,
         android11BugActive: Boolean
     ) {
         // Check if patches are being fetched or if no patches available
-        if (bundleUpdateProgress != null || availablePatches < 1) {
-            val message = if (bundleUpdateProgress != null) {
+        if (bundleUpdateInProgress || availablePatches < 1) {
+            val message = if (bundleUpdateInProgress) {
                 context.getString(R.string.morphe_home_patches_are_loading)
             } else {
                 context.getString(R.string.no_patch_found)
