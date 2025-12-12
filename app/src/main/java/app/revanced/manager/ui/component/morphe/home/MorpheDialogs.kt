@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -85,6 +84,7 @@ private fun Modifier.dialogHeight(): Modifier {
  * Supports scrollable content with fixed header and footer
  *
  * @param onDismissRequest Called when user dismisses the dialog
+ * @param title Optional title - stays fixed at top
  * @param header Optional header content (icon + title) - stays fixed at top
  * @param footer Optional footer content (buttons) - stays fixed at bottom
  * @param content Scrollable dialog content
@@ -92,6 +92,7 @@ private fun Modifier.dialogHeight(): Modifier {
 @Composable
 fun MorpheDialog(
     onDismissRequest: () -> Unit,
+    title: String? = null,
     header: (@Composable () -> Unit)? = null,
     footer: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit
@@ -115,9 +116,22 @@ fun MorpheDialog(
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 // Fixed header
-                header?.let {
-                    Box(modifier = Modifier.padding(top = 24.dp, start = 24.dp, end = 24.dp)) {
-                        it()
+                Box(modifier = Modifier.padding(top = 24.dp, start = 24.dp, end = 24.dp)) {
+                    when {
+                        header != null -> {
+                            Box(modifier = Modifier.padding(top = 24.dp)) {
+                                header()
+                            }
+                        }
+                        title != null -> {
+                            Text(
+                                text = title,
+                                style = MaterialTheme.typography.headlineSmall,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                     }
                 }
 
@@ -288,36 +302,7 @@ private fun ApkAvailabilityDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_home_apk_availability_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.morphe_home_apk_availability_dialog_title),
         footer = {
             // Fixed footer - buttons
             val configuration = LocalConfiguration.current
@@ -509,36 +494,7 @@ private fun DownloadInstructionsDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Download,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_home_download_instructions_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.morphe_home_download_instructions_title),
         footer = {
             // Fixed footer - buttons
             val configuration = LocalConfiguration.current
@@ -783,36 +739,7 @@ private fun FilePickerPromptDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_home_file_picker_prompt_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.morphe_home_file_picker_prompt_title),
         footer = {
             // Fixed footer - buttons
             val configuration = LocalConfiguration.current
@@ -897,36 +824,7 @@ private fun UnsupportedVersionWarningDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.errorContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Warning,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.morphe_patcher_unsupported_version_dialog_title),
         footer = {
             // Fixed footer - buttons
             val configuration = LocalConfiguration.current
@@ -1098,36 +996,7 @@ fun WrongPackageDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.errorContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Warning,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_patcher_wrong_package_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.morphe_patcher_wrong_package_title),
         footer = {
             // Fixed footer - button
             Button(

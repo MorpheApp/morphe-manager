@@ -33,36 +33,7 @@ fun CancelPatchingDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.errorContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Warning,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.patcher_stop_confirm_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.patcher_stop_confirm_title),
         footer = {
             // Fixed footer - buttons
             Row(
@@ -121,50 +92,12 @@ fun InstallDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = when (state) {
-                        InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.errorContainer
-                        else -> MaterialTheme.colorScheme.primaryContainer
-                    },
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = when (state) {
-                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> Icons.Outlined.Warning
-                                else -> installIcon
-                            },
-                            contentDescription = null,
-                            tint = when (state) {
-                                InstallDialogState.CONFLICT, InstallDialogState.ERROR -> MaterialTheme.colorScheme.onErrorContainer
-                                else -> MaterialTheme.colorScheme.onPrimaryContainer
-                            },
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(
-                        when (state) {
-                            InstallDialogState.ERROR -> R.string.install_app_fail_title
-                            else -> installButtonText
-                        }
-                    ),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
+        title = stringResource(
+            when (state) {
+                InstallDialogState.ERROR -> R.string.install_app_fail_title
+                else -> installButtonText
             }
-        },
+        ),
         footer = {
             // Fixed footer - buttons
             Row(

@@ -11,8 +11,6 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -237,57 +235,11 @@ fun PluginActionDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Icon
-                Surface(
-                    shape = CircleShape,
-                    color = when (state) {
-                        is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.primaryContainer
-                        is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.errorContainer
-                        is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.tertiaryContainer
-                        else -> MaterialTheme.colorScheme.surfaceVariant
-                    },
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = when (state) {
-                                is DownloaderPluginState.Loaded -> Icons.Outlined.CheckCircle
-                                is DownloaderPluginState.Failed -> Icons.Outlined.Error
-                                is DownloaderPluginState.Untrusted -> Icons.Outlined.Warning
-                                else -> Icons.Outlined.Info
-                            },
-                            contentDescription = null,
-                            tint = when (state) {
-                                is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.onPrimaryContainer
-                                is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.onErrorContainer
-                                is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.onTertiaryContainer
-                                else -> MaterialTheme.colorScheme.onSurfaceVariant
-                            },
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                // Title
-                Text(
-                    text = when (state) {
-                        is DownloaderPluginState.Loaded -> stringResource(R.string.downloader_plugin_revoke_trust_dialog_title)
-                        is DownloaderPluginState.Failed -> stringResource(R.string.downloader_plugin_state_failed)
-                        is DownloaderPluginState.Untrusted -> stringResource(R.string.downloader_plugin_trust_dialog_title)
-                        else -> packageName
-                    },
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
+        title = when (state) {
+            is DownloaderPluginState.Loaded -> stringResource(R.string.downloader_plugin_revoke_trust_dialog_title)
+            is DownloaderPluginState.Failed -> stringResource(R.string.downloader_plugin_state_failed)
+            is DownloaderPluginState.Untrusted -> stringResource(R.string.downloader_plugin_trust_dialog_title)
+            else -> packageName
         },
         footer = {
             // Fixed footer - buttons
@@ -412,36 +364,7 @@ fun KeystoreCredentialsDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(56.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            Icons.Outlined.Key,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.import_keystore_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
+        title = stringResource(R.string.import_keystore_dialog_title),
         footer = {
             // Fixed footer - buttons (always in row)
             Row(
