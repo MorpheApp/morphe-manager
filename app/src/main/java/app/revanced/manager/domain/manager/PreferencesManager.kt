@@ -100,6 +100,7 @@ class PreferencesManager(
     }
 
     object PatchBundleConstants {
+        const val BUNDLE_URL_RELEASES = "https://github.com/HundEdFeteTree/HappyFunTest/releases/latest"
         const val BUNDLE_URL_STABLE = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-stable-patches-bundle.json"
         const val BUNDLE_URL_LATEST = "https://raw.githubusercontent.com/HundEdFeteTree/HappyFunTest/refs/heads/main/bundles/test-latest-patches-bundle.json"
 
