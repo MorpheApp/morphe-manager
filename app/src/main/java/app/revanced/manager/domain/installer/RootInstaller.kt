@@ -214,16 +214,6 @@ class RootInstaller(
             if (!isSuccess) throw Exception(errorMessage)
         }
 
-        private var rootAccessAttemptedValue : PersistentValue<Boolean>? = null
-
-        fun getRootAccessAttempted(context: Context): PersistentValue<Boolean> {
-            if (rootAccessAttemptedValue == null) {
-                rootAccessAttemptedValue =
-                    PersistentValue(context, "root_installer_root_access_attempted", false)
-            }
-            return rootAccessAttemptedValue!!
-        }
-
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
     }
 }

@@ -11,10 +11,19 @@ import android.content.SharedPreferences
  * as lightweight and simple as possible and used only for non user settings.
  */
 class PersistentValue<T: Any>(
-    context: Context,
     val key: String,
     val defaultValue: T
 ) {
+
+    constructor(
+        context: Context,
+        key: String,
+        defaultValue: T
+    ) : this(key, defaultValue) {
+        getPrefs(context) // Initialize preferences if needed
+        contextWasProvidedBeforeUsing = true
+    }
+
     private companion object {
         private var prefs: SharedPreferences? = null
 
@@ -29,14 +38,51 @@ class PersistentValue<T: Any>(
             }
             return preferences
         }
+
+        private fun getPrefs() : SharedPreferences {
+            val currentPrefs = prefs
+            checkContextWasProvided(currentPrefs != null)
+            return currentPrefs!!
+        }
+
+        private fun checkContextWasProvided(provided: Boolean) {
+            require(provided) {
+                "Context has not been provided yet. Use constructor context or "
+            }
+        }
     }
+
+    /**
+     * SharedPreference object is shared so only the first instance needs the context,
+     * but check each instance to prevent hidden bugs.
+     */
+    private var contextWasProvidedBeforeUsing: Boolean = false
 
     private lateinit var value: T
 
-    private val prefs: SharedPreferences = getPrefs(context)
+    private fun setContext(context: Context) {
+        getPrefs(context)
+        contextWasProvidedBeforeUsing = true
+    }
+
+    /**
+     * @param context Required if the context was not set using the constructor
+     */
+    fun get(context: Context): T {
+        setContext(context)
+        return get()
+    }
+
+    fun save(context: Context, value: T) {
+        setContext(context)
+        save(value)
+    }
 
     fun get(): T {
+        checkContextWasProvided(contextWasProvidedBeforeUsing)
+
         if (!::value.isInitialized) {
+            val prefs = getPrefs()
             @Suppress("UNCHECKED_CAST")
             value = when (defaultValue) {
                 is Boolean -> prefs.getBoolean(key, defaultValue) as T
@@ -51,9 +97,10 @@ class PersistentValue<T: Any>(
     }
 
     fun save(value: T) {
+        checkContextWasProvided(contextWasProvidedBeforeUsing)
         this.value = value
 
-        with(prefs.edit()) {
+        with(getPrefs().edit()) {
             when (value) {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
