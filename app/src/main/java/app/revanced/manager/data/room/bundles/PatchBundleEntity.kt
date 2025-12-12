@@ -31,7 +31,7 @@ sealed class Source {
 
         fun from(value: String) = when (value) {
             Local.SENTINEL -> Local
-//            API.SENTINEL -> API
+            API.SENTINEL -> API
             else -> if (gitHubPullRequestPattern.matches(value)) {
                 GitHubPullRequest(Url(value))
             } else Remote(Url(value))
