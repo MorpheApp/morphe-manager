@@ -66,7 +66,7 @@ fun MorpheHomeScreen(
     // Ideally this logic is part of some other code, but for now this is simple and works.
     val usingMountInstall =
         prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
-                dashboardViewModel.rootInstaller?.hasRootAccess() == true
+                dashboardViewModel.rootInstaller.hasRootAccess()
 
     // Remember home state
     val homeState = rememberMorpheHomeState(

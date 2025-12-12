@@ -41,7 +41,7 @@ class DashboardViewModel(
     private val networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
     private val pm: PM,
-    val rootInstaller: RootInstaller? = null
+    val rootInstaller: RootInstaller
 ) : ViewModel() {
     val availablePatches =
         patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
