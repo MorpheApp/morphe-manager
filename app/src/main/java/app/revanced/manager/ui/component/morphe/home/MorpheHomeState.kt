@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.*
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
@@ -115,7 +116,7 @@ class MorpheHomeState(
      * Update bundle data when sources or bundle info changes
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
-        apiBundle = sources.firstOrNull { it.uid == 0 }
+        apiBundle = sources.firstOrNull { it.uid == DEFAULT_SOURCE_UID }
         recommendedVersions = extractRecommendedVersions(bundleInfo)
     }
 
