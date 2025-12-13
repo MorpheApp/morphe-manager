@@ -24,6 +24,7 @@ import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.RootInstaller
+import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
@@ -110,7 +111,7 @@ class DashboardViewModel(
             with(patchBundleRepository) {
                 sources
                     .first()
-                    .find { it.uid == 0 }
+                    .find { it.uid == DEFAULT_SOURCE_UID }
                     ?.asRemoteOrNull
                     ?.setAutoUpdate(true)
 

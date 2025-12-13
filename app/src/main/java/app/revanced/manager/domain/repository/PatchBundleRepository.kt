@@ -495,7 +495,9 @@ class PatchBundleRepository(
         doReload()
     }
 
-    suspend fun refreshDefaultBundle() = store.dispatch(Update(force = true) { it.uid == DEFAULT_SOURCE_UID })
+    suspend fun refreshDefaultBundle() = store.dispatch(
+        Update(force = true) { it.uid == DEFAULT_SOURCE_UID }
+    )
 
     enum class DisplayNameUpdateResult {
         SUCCESS,
@@ -708,7 +710,7 @@ class PatchBundleRepository(
                 force = force,
                 showToast = showToast,
                 showProgress = showProgress
-            ) { it.uid == 0 }
+            ) { it.uid == DEFAULT_SOURCE_UID }
         )
     }
 
@@ -833,7 +835,7 @@ class PatchBundleRepository(
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
-        private val showProgress: Boolean = true,
+        private val showProgress: Boolean = false,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
         private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
@@ -1119,9 +1121,10 @@ class PatchBundleRepository(
         val pageUrl: String?,
     )
 
-    private companion object {
+    companion object {
         const val DEFAULT_SOURCE_UID = 0
-        fun defaultSource() = PatchBundleEntity(
+
+        private fun defaultSource() = PatchBundleEntity(
             uid = DEFAULT_SOURCE_UID,
             name = "",
             displayName = null,
