@@ -125,27 +125,21 @@ fun MorpheSettingsScreen(
 
     fun updatePreRelease(newValue: Boolean) {
         coroutineScope.launch {
-            // Update the preference
-            generalViewModel.togglePatchesPrerelease(newValue)
+            generalViewModel.prefs.usePatchesPrereleases.update(newValue)
 
-            // Show toast about preference change
             context.toast(
-                if (newValue)
+                if (newValue) {
                     context.getString(R.string.morphe_update_patches_prerelease_enabled)
-                else
+                } else {
                     context.getString(R.string.morphe_update_patches_prerelease_disabled)
+                }
             )
 
-            // Wait a bit for the preference to propagate
-            delay(300)
-
             // Silently update the official bundle in background
-            withContext(Dispatchers.IO) {
-                dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
-                    showProgress = false,
-                    showToast = false
-                )
-            }
+            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
+                showProgress = false,
+                showToast = false
+            )
         }
     }
 
