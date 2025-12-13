@@ -132,8 +132,6 @@
 
     <string name="morphe_update_use_patches_prereleases">Use pre-release patches</string>
     <string name="morphe_update_use_patches_prereleases_description">Use the latest development patches</string>
-    <string name="morphe_update_patches_prerelease_enabled">Pre-release patches enabled</string>
-    <string name="morphe_update_patches_prerelease_disabled">Stable patches enabled</string>
 
     <string name="patches_bundle_json_url">Patches Bundle JSON URL</string>
     <string name="patches_bundle_json_url_description">URL to JSON file containing patches bundle information</string>

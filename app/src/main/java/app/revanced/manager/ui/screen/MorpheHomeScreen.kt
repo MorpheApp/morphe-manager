@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -49,7 +50,8 @@ fun MorpheHomeScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress? = null
+    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    preReleaseChangedModel: PreReleaseChangedModel
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -60,8 +62,6 @@ fun MorpheHomeScreen(
     val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
-
-    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
 
     // Install type is needed for UI components.
     // Ideally this logic is part of some other code, but for now this is simple and works.
@@ -78,26 +78,27 @@ fun MorpheHomeScreen(
         usingMountInstall = usingMountInstall
     )
 
-    var hasDoneAppLaunchBundleUpdate by remember { mutableStateOf(false) }
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
 
-    // TODO: Allow bundles to autoupdate but don't allow snackbar to show
-//    if (!hasDoneAppLaunchBundleUpdate) {
-//        hasDoneAppLaunchBundleUpdate = true
-//        bundleUpdateInProgress = true
-//        scope.launch {
-//            homeState.isRefreshingBundle = true
-//            try {
-//                dashboardViewModel.patchBundleRepository.Update(
-//                    showProgress = false,
-//                    showToast = false
-//                )
-//            } finally {
-//                homeState.isRefreshingBundle = false
-//                bundleUpdateInProgress = false
-//            }
-//        }
-//    }
+    suspend fun updateMorpheBundleAndUI() {
+        bundleUpdateInProgress = true
+        homeState.isRefreshingBundle = true
+        try {
+            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundleWithResult(
+                showProgress = true,
+                showToast = false
+            )
+        } finally {
+            delay(500)
+            bundleUpdateInProgress = false
+            homeState.isRefreshingBundle = false
+        }
+    }
+
+    preReleaseChangedModel.setEventHandler { usePreRelease ->
+        prefs.usePatchesPrereleases.update(usePreRelease)
+        updateMorpheBundleAndUI()
+    }
 
     // Show manager update dialog
     if (homeState.shouldShowUpdateDialog) {
@@ -216,16 +217,7 @@ fun MorpheHomeScreen(
             onDismiss = { homeState.showBundlesSheet = false },
             onRefresh = {
                 scope.launch {
-                    homeState.isRefreshingBundle = true
-                    try {
-                        dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundleWithResult(
-                            showProgress = true,
-                            showToast = false
-                        )
-                    } finally {
-                        delay(500)
-                        homeState.isRefreshingBundle = false
-                    }
+                    updateMorpheBundleAndUI()
                 }
             },
             onPatchesClick = {
