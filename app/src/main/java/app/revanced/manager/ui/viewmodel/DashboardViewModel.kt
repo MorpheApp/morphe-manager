@@ -24,6 +24,7 @@ import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.RootInstaller
+import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
@@ -110,7 +111,7 @@ class DashboardViewModel(
             with(patchBundleRepository) {
                 sources
                     .first()
-                    .find { it.uid == 0 }
+                    .find { it.uid == DEFAULT_SOURCE_UID }
                     ?.asRemoteOrNull
                     ?.setAutoUpdate(true)
 
@@ -159,17 +160,6 @@ class DashboardViewModel(
     fun createRemoteSource(apiUrl: String, autoUpdate: Boolean) = viewModelScope.launch {
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
-        }
-    }
-
-    /**
-     * Update the API patch bundle (uid = 0)
-     * @param showToast Whether to show a toast notification
-     */
-    fun updateApiBundle(showToast: Boolean = true) = viewModelScope.launch {
-        val apiBundle = patchBundleRepository.sources.first().firstOrNull { it.uid == 0 }
-        if (apiBundle is app.revanced.manager.domain.bundles.RemotePatchBundle) {
-            patchBundleRepository.update(apiBundle, showToast = showToast)
         }
     }
 }

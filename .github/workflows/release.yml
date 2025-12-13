@@ -57,11 +57,11 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
           fingerprint: ${{ vars.GPG_FINGERPRINT }}
 
-#      - name: Release API
-#        run: npx multi-semantic-release --tag-format 'api@${version}' --ignore-packages app
-#        env:
-#          GITHUB_ACTOR: ${{ github.actor }}
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release API
+        run: npx multi-semantic-release --tag-format 'api@${version}' --ignore-packages app
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         id: release
