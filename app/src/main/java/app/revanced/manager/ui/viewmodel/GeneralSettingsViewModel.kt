@@ -121,8 +121,4 @@ class GeneralSettingsViewModel(
         val storedName = prefs.themePresetSelectionName.get().takeIf { it.isNotBlank() }
         return storedName?.let { runCatching { ThemePreset.valueOf(it) }.getOrNull() }
     }
-
-    fun togglePatchesPrerelease(usePrerelease: Boolean) = viewModelScope.launch {
-        prefs.usePatchesPrereleases.update(usePrerelease)
-    }
 }
