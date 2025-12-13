@@ -762,9 +762,6 @@ class PatchBundleRepository(
                 showProgress = showProgress
             )
 
-            // Wait a bit for the update to propagate
-            delay(1500)
-
             // Check the current progress state to determine result
             val currentProgress = bundleUpdateProgressFlow.value
             val result = currentProgress?.result ?: UpdateResult.Success
