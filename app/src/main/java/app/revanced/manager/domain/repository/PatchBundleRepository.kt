@@ -698,6 +698,20 @@ class PatchBundleRepository(
         )
     }
 
+    suspend fun updateOnlyMorpheBundle(
+        force: Boolean = false,
+        showToast: Boolean = false,
+        showProgress: Boolean = false
+    ) {
+        store.dispatch(
+            Update(
+                force = force,
+                showToast = showToast,
+                showProgress = showProgress
+            ) { it.uid == 0 }
+        )
+    }
+
     /**
      * Morphe specific function build around [update] to return an update result
      *
@@ -705,7 +719,7 @@ class PatchBundleRepository(
      * @param showToast Whether to show toast notifications
      * @return UpdateResult indicating success, no internet, or error
      */
-    suspend fun updateMorpheBundle(
+    suspend fun updateOnlyMorpheBundleWithResult(
         showProgress: Boolean = true,
         showToast: Boolean = false
     ): UpdateResult {
@@ -742,11 +756,11 @@ class PatchBundleRepository(
 
         try {
             // Modified fetch to only update built in Morphe bundle
-            store.dispatch(Update(
+            updateOnlyMorpheBundle(
                 force = false,
                 showToast = showToast,
                 showProgress = showProgress
-            ) { it.uid == 0 })
+            )
 
             // Wait a bit for the update to propagate
             delay(1500)
