@@ -63,6 +63,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.AboutDialog
@@ -72,16 +73,12 @@ import app.revanced.manager.ui.component.morphe.settings.PluginActionDialog
 import app.revanced.manager.ui.component.morphe.settings.PluginItem
 import app.revanced.manager.ui.component.morphe.settings.SettingsCard
 import app.revanced.manager.ui.component.morphe.settings.SettingsSectionHeader
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -94,10 +91,10 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
+    preReleaseChangedModel: PreReleaseChangedModel,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
-    importExportViewModel: ImportExportViewModel = koinViewModel(),
-    dashboardViewModel: DashboardViewModel = koinViewModel()
+    importExportViewModel: ImportExportViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -122,26 +119,6 @@ fun MorpheSettingsScreen(
     var selectedPluginState by remember { mutableStateOf<DownloaderPluginState?>(null) }
     var showExceptionViewer by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-
-    fun updatePreRelease(newValue: Boolean) {
-        coroutineScope.launch {
-            generalViewModel.prefs.usePatchesPrereleases.update(newValue)
-
-            context.toast(
-                if (newValue) {
-                    context.getString(R.string.morphe_update_patches_prerelease_enabled)
-                } else {
-                    context.getString(R.string.morphe_update_patches_prerelease_disabled)
-                }
-            )
-
-            // Silently update the official bundle in background
-            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
-                showProgress = false,
-                showToast = false
-            )
-        }
-    }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -267,7 +244,7 @@ fun MorpheSettingsScreen(
                     UpdatesSection(
                         usePrereleases = usePrereleases,
                         onPreReleaseChanged = { newValue ->
-                            updatePreRelease(newValue)
+                            preReleaseChangedModel.preReleaseChanged(newValue)
                         }
                     )
                 }
@@ -328,7 +305,7 @@ fun MorpheSettingsScreen(
                 UpdatesSection(
                     usePrereleases = usePrereleases,
                     onPreReleaseChanged = { newValue ->
-                        updatePreRelease(newValue)
+                        preReleaseChangedModel.preReleaseChanged(newValue)
                     }
                 )
 
@@ -367,13 +344,9 @@ fun MorpheSettingsScreen(
  */
 @Composable
 private fun UpdatesSection(
-//    generalViewModel: GeneralSettingsViewModel,
-//    dashboardViewModel: DashboardViewModel,
     usePrereleases: State<Boolean>,
-    onPreReleaseChanged: (preReleaseNewValue: Boolean) -> Unit,
+    onPreReleaseChanged: (preReleaseNewValue: Boolean) -> Unit
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     SettingsSectionHeader(
         icon = Icons.Outlined.Update,
