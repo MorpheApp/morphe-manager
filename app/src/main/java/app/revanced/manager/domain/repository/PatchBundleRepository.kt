@@ -797,7 +797,8 @@ class PatchBundleRepository(
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        store.dispatch(Update { it.autoUpdate })
+        val useMorpheHomeScreen = prefs.useMorpheHomeScreen.getBlocking()
+        store.dispatch(Update(showProgress = !useMorpheHomeScreen) { it.autoUpdate })
         checkManualUpdates()
     }
 
@@ -835,7 +836,7 @@ class PatchBundleRepository(
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
-        private val showProgress: Boolean = false,
+        private val showProgress: Boolean = true,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },
     ) : Action<State> {
         private suspend fun toast(@StringRes id: Int, vararg args: Any?) =
