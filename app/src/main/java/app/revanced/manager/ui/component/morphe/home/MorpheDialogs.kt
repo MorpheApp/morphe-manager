@@ -174,7 +174,6 @@ fun MorpheHomeDialogs(
     if (state.showApkAvailabilityDialog && state.pendingPackageName != null && state.pendingAppName != null) {
         ApkAvailabilityDialog(
             appName = state.pendingAppName!!,
-            packageName = state.pendingPackageName!!,
             recommendedVersion = state.pendingRecommendedVersion,
             usingMountInstall = state.usingMountInstall,
             onDismiss = {
@@ -289,7 +288,6 @@ fun MorpheHomeDialogs(
 @Composable
 private fun ApkAvailabilityDialog(
     appName: String,
-    packageName: String,
     recommendedVersion: String?,
     usingMountInstall: Boolean,
     onDismiss: () -> Unit,
@@ -310,9 +308,12 @@ private fun ApkAvailabilityDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Button(
+                    OutlinedButton(
                         onClick = onHaveApk,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.primary
+                        )
                     ) {
                         Icon(
                             Icons.Outlined.CheckCircle,
@@ -323,12 +324,9 @@ private fun ApkAvailabilityDialog(
                         Text(stringResource(R.string.morphe_home_apk_availability_yes))
                     }
 
-                    OutlinedButton(
+                    Button(
                         onClick = onNeedApk,
-                        modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = MaterialTheme.colorScheme.primary
-                        )
+                        modifier = Modifier.weight(1f)
                     ) {
                         Icon(
                             Icons.Outlined.Download,
@@ -345,9 +343,12 @@ private fun ApkAvailabilityDialog(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Button(
+                    OutlinedButton(
                         onClick = onHaveApk,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.primary
+                        )
                     ) {
                         Icon(
                             Icons.Outlined.CheckCircle,
@@ -358,12 +359,9 @@ private fun ApkAvailabilityDialog(
                         Text(stringResource(R.string.morphe_home_apk_availability_yes))
                     }
 
-                    OutlinedButton(
+                    Button(
                         onClick = onNeedApk,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = MaterialTheme.colorScheme.primary
-                        )
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         Icon(
                             Icons.Outlined.Download,
@@ -379,7 +377,9 @@ private fun ApkAvailabilityDialog(
     ) {
         // Scrollable content
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
@@ -390,7 +390,8 @@ private fun ApkAvailabilityDialog(
                 ),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             // Root mode warning
@@ -417,59 +418,6 @@ private fun ApkAvailabilityDialog(
                     )
                 }
             }
-
-            // Info Card with package and version
-            Surface(
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surfaceContainerLow,
-                tonalElevation = 3.dp
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Package Name
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.package_name),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = packageName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontFamily = FontFamily.Monospace,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            lineHeight = 20.sp
-                        )
-                    }
-
-                    // Version (if specified)
-                    if (recommendedVersion != null) {
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.morphe_home_recommended_version),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = recommendedVersion,
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontFamily = FontFamily.Monospace,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -492,62 +440,18 @@ private fun DownloadInstructionsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.morphe_home_download_instructions_title),
         footer = {
-            // Fixed footer - buttons
-            val configuration = LocalConfiguration.current
-            val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
-            if (isLandscape) {
-                // Single row for landscape
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        onClick = onContinue,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Outlined.OpenInNew,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_download_instructions_continue))
-                    }
-
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
-            } else {
-                // Column for portrait
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        onClick = onContinue,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Outlined.OpenInNew,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_download_instructions_continue))
-                    }
-
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
+            // Fixed footer - button
+            Button(
+                onClick = onContinue,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Outlined.OpenInNew,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.morphe_home_download_instructions_continue))
             }
         }
     ) {
@@ -564,7 +468,8 @@ private fun DownloadInstructionsDialog(
                 ),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             // Step-by-step instructions card
@@ -619,7 +524,7 @@ private fun DownloadInstructionsDialog(
                                     onClick = {
                                         context.toast(context.getString(R.string.morphe_home_download_instructions_download_button_toast))
                                     },
-                                    shape = RoundedCornerShape(2.dp),
+                                    shape = RoundedCornerShape(1.dp),
                                     color = Color(0xFFFF0034) // Red color matching APKMirror
                                 ) {
                                     Row(
@@ -735,72 +640,35 @@ private fun FilePickerPromptDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.morphe_home_file_picker_prompt_title),
         footer = {
-            // Fixed footer - buttons
-            val configuration = LocalConfiguration.current
-            val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
-            if (isLandscape) {
-                // Single row for landscape
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        onClick = onOpenFilePicker,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Icon(
-                            Icons.Outlined.FolderOpen,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_file_picker_prompt_open))
-                    }
-
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
-            } else {
-                // Column for portrait
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        onClick = onOpenFilePicker,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            Icons.Outlined.FolderOpen,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.morphe_home_file_picker_prompt_open))
-                    }
-
-                    OutlinedButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                }
+            // Fixed footer - button
+            Button(
+                onClick = onOpenFilePicker,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    Icons.Outlined.FolderOpen,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.morphe_home_file_picker_prompt_open))
             }
         }
     ) {
         // Scrollable content
-        Text(
-            text = stringResource(R.string.morphe_home_file_picker_prompt_description, appName),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.morphe_home_file_picker_prompt_description, appName),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -877,14 +745,17 @@ private fun UnsupportedVersionWarningDialog(
     ) {
         // Scrollable content
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
                 text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             Surface(
@@ -1003,14 +874,17 @@ fun WrongPackageDialog(
     ) {
         // Scrollable content
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
                 text = stringResource(R.string.morphe_patcher_wrong_package_description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             Surface(
