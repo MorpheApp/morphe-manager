@@ -199,7 +199,6 @@ fun AdvancedSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            GroupHeader(stringResource(R.string.patch_bundle_installer))
 
 //            val apiUrl by viewModel.prefs.api.getAsState()
             val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
@@ -207,6 +206,7 @@ fun AdvancedSettingsScreen(
 //            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
             var showGitHubPatDialog by rememberSaveable { mutableStateOf(false) }
 
+//            GroupHeader(stringResource(R.string.patch_bundle_installer))
 //            if (showApiUrlDialog) {
 //                APIUrlDialog(
 //                    currentUrl = apiUrl,
