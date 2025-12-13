@@ -43,6 +43,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -102,8 +103,8 @@ fun MorpheSettingsScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
     val theme by generalViewModel.prefs.theme.getAsState()
@@ -121,6 +122,32 @@ fun MorpheSettingsScreen(
     var selectedPluginState by remember { mutableStateOf<DownloaderPluginState?>(null) }
     var showExceptionViewer by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
+
+    fun updatePreRelease(newValue: Boolean) {
+        coroutineScope.launch {
+            // Update the preference
+            generalViewModel.togglePatchesPrerelease(newValue)
+
+            // Show toast about preference change
+            context.toast(
+                if (newValue)
+                    context.getString(R.string.morphe_update_patches_prerelease_enabled)
+                else
+                    context.getString(R.string.morphe_update_patches_prerelease_disabled)
+            )
+
+            // Wait a bit for the preference to propagate
+            delay(300)
+
+            // Silently update the official bundle in background
+            withContext(Dispatchers.IO) {
+                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
+                    showProgress = false,
+                    showToast = false
+                )
+            }
+        }
+    }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -244,8 +271,10 @@ fun MorpheSettingsScreen(
 
                     // Updates Section
                     UpdatesSection(
-                        generalViewModel = generalViewModel,
-                        dashboardViewModel = dashboardViewModel
+                        usePrereleases = usePrereleases,
+                        onPreReleaseChanged = { newValue ->
+                            updatePreRelease(newValue)
+                        }
                     )
                 }
 
@@ -303,8 +332,10 @@ fun MorpheSettingsScreen(
 
                 // Updates Section
                 UpdatesSection(
-                    generalViewModel = generalViewModel,
-                    dashboardViewModel = dashboardViewModel
+                    usePrereleases = usePrereleases,
+                    onPreReleaseChanged = { newValue ->
+                        updatePreRelease(newValue)
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -342,12 +373,13 @@ fun MorpheSettingsScreen(
  */
 @Composable
 private fun UpdatesSection(
-    generalViewModel: GeneralSettingsViewModel,
-    dashboardViewModel: DashboardViewModel
+//    generalViewModel: GeneralSettingsViewModel,
+//    dashboardViewModel: DashboardViewModel,
+    usePrereleases: State<Boolean>,
+    onPreReleaseChanged: (preReleaseNewValue: Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val usePrereleases by generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
     SettingsSectionHeader(
         icon = Icons.Outlined.Update,
@@ -361,34 +393,7 @@ private fun UpdatesSection(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
                     .clickable {
-                        coroutineScope.launch {
-                            val newValue = !usePrereleases
-
-                            // Update the preference
-                            generalViewModel.togglePatchesPrerelease(newValue)
-
-                            // Show toast about preference change
-                            context.toast(
-                                context.getString(
-                                    if (newValue) {
-                                        R.string.morphe_update_patches_prerelease_enabled
-                                    } else {
-                                        R.string.morphe_update_patches_prerelease_disabled
-                                    }
-                                )
-                            )
-
-                            // Wait a bit for the preference to propagate
-                            delay(300)
-
-                            // Silently update the official bundle in background
-                            withContext(Dispatchers.IO) {
-                                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
-                                    showProgress = false, // Don't show progress
-                                    showToast = false     // Don't show toast
-                                )
-                            }
-                        }
+                        onPreReleaseChanged(!usePrereleases.value)
                     },
                 shape = RoundedCornerShape(12.dp),
                 color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
@@ -419,31 +424,9 @@ private fun UpdatesSection(
                         )
                     }
                     Switch(
-                        checked = usePrereleases,
+                        checked = usePrereleases.value,
                         onCheckedChange = { newValue ->
-                            coroutineScope.launch {
-                                // Update the preference
-                                generalViewModel.togglePatchesPrerelease(newValue)
-
-                                // Show toast about preference change
-                                context.toast(
-                                    if (newValue)
-                                        context.getString(R.string.morphe_update_patches_prerelease_enabled)
-                                    else
-                                        context.getString(R.string.morphe_update_patches_prerelease_disabled)
-                                )
-
-                                // Wait a bit for the preference to propagate
-                                delay(300)
-
-                                // Silently update the official bundle in background
-                                withContext(Dispatchers.IO) {
-                                    dashboardViewModel.patchBundleRepository.updateMorpheBundle(
-                                        showProgress = false, // Don't show progress
-                                        showToast = false     // Don't show toast
-                                    )
-                                }
-                            }
+                            onPreReleaseChanged(newValue)
                         }
                     )
                 }
