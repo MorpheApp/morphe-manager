@@ -11,6 +11,16 @@ import kotlin.random.Random
  */
 object HomeAndPatcherMessages {
 
+    /**
+     * Greeting message on the home screen. Same message shown for each app session.
+     */
+    private var homeGreetingMessage: Int? = null
+    private val homeGreetingMessageIndex = PersistentValue("patching_home_message_index", 0)
+    private val homeGreetingMessageSeed = PersistentValue("patching_home_message_seed", 0L)
+
+    private val patcherMessageIndex = PersistentValue("patching_patcher_message_index", 0)
+    private val patcherMessageSeed = PersistentValue("patching_patcher_message_seed", 0L)
+
     private fun updateValues(
         context: Context,
         messageIndex: PersistentValue<Int>,
@@ -39,19 +49,12 @@ object HomeAndPatcherMessages {
         }
 
         val shuffledMessages = listOf(messages.first()) + messages.drop(1).shuffled(Random(seed))
-
         val greeting = shuffledMessages[currentMessageIndex]
 
         messageIndex.save(currentMessageIndex + 1)
 
         return greeting
     }
-
-
-    /**
-     * Greeting message on the home screen. Same message shown for each app session.
-     */
-    private var homeGreetingMessage: Int? = null
 
     /**
      * Witty greeting message.
@@ -65,8 +68,8 @@ object HomeAndPatcherMessages {
         if (message == null) {
             message = updateValues(
                 context,
-                PersistentValue(context, "patching_home_message_index", 0),
-                PersistentValue(context, "patching_home_message_seed", 0L),
+                homeGreetingMessageIndex,
+                homeGreetingMessageSeed,
                 listOf(
                     R.string.morphe_home_greeting_1,
                     R.string.morphe_home_greeting_2,
@@ -74,7 +77,7 @@ object HomeAndPatcherMessages {
                     R.string.morphe_home_greeting_4,
                     R.string.morphe_home_greeting_5,
                     R.string.morphe_home_greeting_6,
-                    R.string.morphe_home_greeting_7
+                    R.string.morphe_home_greeting_7,
                 )
             )
             homeGreetingMessage = message
@@ -82,9 +85,6 @@ object HomeAndPatcherMessages {
 
         return message
     }
-
-    private val patcherMessageIndex = PersistentValue("patching_patcher_message_index", 0)
-    private val patcherMessageSeed = PersistentValue("patching_patcher_message_seed", 0L)
 
     /**
      * Witty patcher message.
@@ -115,7 +115,6 @@ object HomeAndPatcherMessages {
                 R.string.morphe_patcher_message_17,
                 R.string.morphe_patcher_message_18,
                 R.string.morphe_patcher_message_19,
-                R.string.morphe_patcher_message_20,
             )
         )
     }
