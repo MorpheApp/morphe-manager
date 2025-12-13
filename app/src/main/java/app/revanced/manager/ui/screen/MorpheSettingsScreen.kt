@@ -141,7 +141,7 @@ fun MorpheSettingsScreen(
 
             // Silently update the official bundle in background
             withContext(Dispatchers.IO) {
-                dashboardViewModel.patchBundleRepository.updateMorpheBundle(
+                dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
                     showProgress = false,
                     showToast = false
                 )

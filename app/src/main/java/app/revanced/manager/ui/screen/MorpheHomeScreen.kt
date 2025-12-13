@@ -219,7 +219,7 @@ fun MorpheHomeScreen(
                 scope.launch {
                     homeState.isRefreshingBundle = true
                     try {
-                        dashboardViewModel.patchBundleRepository.updateMorpheBundle(
+                        dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundleWithResult(
                             showProgress = true,
                             showToast = false
                         )
