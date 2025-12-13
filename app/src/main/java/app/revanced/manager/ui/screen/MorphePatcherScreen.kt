@@ -82,6 +82,7 @@ fun MorphePatcherScreen(
     // Animated progress with dual-mode animation: slow crawl + fast catch-up
     var displayProgress by remember { mutableStateOf(viewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
+    var showSuccessScreen by remember { mutableStateOf(false) }
 
     val displayProgressAnimate by animateFloatAsState(
         targetValue = displayProgress,
@@ -91,7 +92,7 @@ fun MorphePatcherScreen(
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
-        var lastCompletedStep  = 0
+        var lastCompletedStep = 0
         var currentStepStartTime = System.currentTimeMillis()
 
         while (patcherSucceeded == null) {
@@ -143,6 +144,17 @@ fun MorphePatcherScreen(
 
             // Update four times a second
             delay(250)
+        }
+
+        // Patching completed - ensure progress reaches 100%
+        if (patcherSucceeded == true) {
+            displayProgress = 1.0f
+            // Wait for animation to complete and add extra delay
+            delay(2000) // Wait 2 seconds at 100% before showing success screen
+            showSuccessScreen = true
+        } else {
+            // Failed - show immediately
+            showSuccessScreen = true
         }
     }
 
@@ -238,8 +250,10 @@ fun MorphePatcherScreen(
     }
 
     // Auto-show install dialog after successful patching (only once)
-    LaunchedEffect(patcherSucceeded, state.installDialogShownOnce) {
-        if (patcherSucceeded == true && !state.installDialogShownOnce && !state.hasPatchingError) {
+    LaunchedEffect(showSuccessScreen, state.installDialogShownOnce) {
+        if (showSuccessScreen && patcherSucceeded == true && !state.installDialogShownOnce && !state.hasPatchingError) {
+            // Add small delay before showing dialog to let success animation play
+            delay(2000)
             state.installDialogShownOnce = true
             state.installDialogState = InstallDialogState.INITIAL
             state.installErrorMessage = null
@@ -466,7 +480,7 @@ fun MorphePatcherScreen(
                 contentAlignment = Alignment.Center
             ) {
                 AnimatedContent(
-                    targetState = state.currentPatcherState,
+                    targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
                     transitionSpec = {
                         fadeIn(animationSpec = tween(800)) togetherWith
                                 fadeOut(animationSpec = tween(800))
