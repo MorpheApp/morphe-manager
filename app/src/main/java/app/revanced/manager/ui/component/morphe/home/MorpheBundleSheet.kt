@@ -57,6 +57,7 @@ fun MorpheBundleSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         scrimColor = Color.Transparent
     ) {
         Column(
@@ -64,12 +65,12 @@ fun MorpheBundleSheet(
                 .fillMaxWidth()
                 .navigationBarsPadding()
                 .verticalScroll(sheetScrollState)
-                .padding(bottom = 16.dp),
+                .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // API Bundle Card
+            // Content
             if (apiBundle != null) {
-                ApiPatchBundleCard(
+                BundleContent(
                     bundle = apiBundle,
                     patchCount = patchCounts[apiBundle.uid] ?: 0,
                     updateInfo = manualUpdateInfo[apiBundle.uid],
@@ -86,7 +87,6 @@ fun MorpheBundleSheet(
                     },
                     onPatchesClick = onPatchesClick,
                     onVersionClick = onVersionClick,
-                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
             }
         }
@@ -94,10 +94,10 @@ fun MorpheBundleSheet(
 }
 
 /**
- * Card displaying API bundle information with update controls
+ * Content of the bundle sheet
  */
 @Composable
-private fun ApiPatchBundleCard(
+private fun BundleContent(
     bundle: PatchBundleSource,
     patchCount: Int,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
@@ -108,130 +108,125 @@ private fun ApiPatchBundleCard(
     onVersionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Column(
+        // Header with bundle info
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(horizontal = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Header with bundle info
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                modifier = Modifier.size(48.dp)
             ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                    modifier = Modifier.size(48.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            Icons.Outlined.Source,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = bundle.displayTitle,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = stringResource(R.string.morphe_home_bundle_type_api),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text("•", style = MaterialTheme.typography.bodySmall)
-                        Text(
-                            text = bundle.updatedAt?.let { getRelativeTimeString(it) }
-                                ?: stringResource(R.string.morphe_home_unknown),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
-                IconButton(onClick = onOpenInBrowser) {
+                Box(contentAlignment = Alignment.Center) {
                     Icon(
-                        Icons.AutoMirrored.Outlined.OpenInNew,
-                        contentDescription = stringResource(R.string.morphe_home_open_in_browser),
-                        tint = MaterialTheme.colorScheme.primary
+                        Icons.Outlined.Source,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             }
 
-            // Stats Row - Patches and Version
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                StatChip(
-                    icon = Icons.Outlined.Info,
-                    label = stringResource(R.string.patches),
-                    value = patchCount.toString(),
-                    modifier = Modifier
-                        .weight(1f)
-                        .clickable(onClick = onPatchesClick)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = bundle.displayTitle,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-
-                StatChip(
-                    icon = Icons.Outlined.Update,
-                    label = stringResource(R.string.version),
-                    value = updateInfo?.latestVersion?.removePrefix("v")
-                        ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
-                        ?: "N/A",
-                    modifier = Modifier
-                        .weight(1f)
-                        .clickable(onClick = onVersionClick)
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = stringResource(R.string.morphe_home_bundle_type_api),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text("•", style = MaterialTheme.typography.bodySmall)
+                    Text(
+                        text = bundle.updatedAt?.let { getRelativeTimeString(it) }
+                            ?: stringResource(R.string.morphe_home_unknown),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
 
-            // Expandable timeline section
-            TimelineSection(
-                bundle = bundle,
-                modifier = Modifier.fillMaxWidth()
+            IconButton(onClick = onOpenInBrowser) {
+                Icon(
+                    Icons.AutoMirrored.Outlined.OpenInNew,
+                    contentDescription = stringResource(R.string.morphe_home_open_in_browser),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
+        // Stats Row - Patches and Version
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            StatChip(
+                icon = Icons.Outlined.Info,
+                label = stringResource(R.string.patches),
+                value = patchCount.toString(),
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable(onClick = onPatchesClick)
             )
 
-            // Update button
-            Button(
-                onClick = onRefresh,
-                enabled = !isRefreshing,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                if (isRefreshing) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(18.dp),
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
-                }
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    text = if (updateInfo != null) stringResource(R.string.update)
-                    else stringResource(R.string.morphe_home_check_updates),
-                    style = MaterialTheme.typography.labelLarge
+            StatChip(
+                icon = Icons.Outlined.Update,
+                label = stringResource(R.string.version),
+                value = updateInfo?.latestVersion?.removePrefix("v")
+                    ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
+                    ?: "N/A",
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable(onClick = onVersionClick)
+            )
+        }
+
+        // Expandable timeline section
+        TimelineSection(
+            bundle = bundle,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Update button
+        Button(
+            onClick = onRefresh,
+            enabled = !isRefreshing,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            if (isRefreshing) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(18.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    strokeWidth = 2.dp
                 )
+            } else {
+                Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
             }
+            Spacer(Modifier.width(8.dp))
+            Text(
+                text = if (updateInfo != null) stringResource(R.string.update)
+                else stringResource(R.string.morphe_home_check_updates),
+                style = MaterialTheme.typography.labelLarge
+            )
         }
     }
 }
@@ -250,7 +245,8 @@ private fun StatChip(
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shadowElevation = 4.dp
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -293,7 +289,8 @@ private fun TimelineSection(
     Surface(
         modifier = modifier.clickable { showDates = !showDates },
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shadowElevation = 4.dp
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(

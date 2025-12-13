@@ -66,7 +66,7 @@ fun MorpheHomeScreen(
     // Install type is needed for UI components.
     // Ideally this logic is part of some other code, but for now this is simple and works.
     val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
-                dashboardViewModel.rootInstaller.hasRootAccess()
+            dashboardViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
 
     // Remember home state
@@ -157,7 +157,6 @@ fun MorpheHomeScreen(
     // All dialogs
     MorpheHomeDialogs(
         state = homeState,
-        useMorpheHomeScreen = useMorpheHomeScreen,
         usingMountInstall = usingMountInstall
     )
 
@@ -229,8 +228,20 @@ fun MorpheHomeScreen(
                     }
                 }
             },
-            onPatchesClick = { homeState.showPatchesDialog = true },
-            onVersionClick = { homeState.showChangelogDialog = true }
+            onPatchesClick = {
+                scope.launch {
+                    homeState.showBundlesSheet = false
+                    delay(300)
+                    homeState.showPatchesSheet = true
+                }
+            },
+            onVersionClick = {
+                scope.launch {
+                    homeState.showBundlesSheet = false
+                    delay(300)
+                    homeState.showChangelogSheet = true
+                }
+            }
         )
     }
 }

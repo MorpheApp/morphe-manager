@@ -30,9 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import app.morphe.manager.R
-import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
-import app.revanced.manager.ui.component.bundle.BundleChangelogDialog
-import app.revanced.manager.ui.component.bundle.BundlePatchesDialog
+import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.toast
@@ -168,7 +166,6 @@ fun MorpheDialog(
 @Composable
 fun MorpheHomeDialogs(
     state: MorpheHomeState,
-    useMorpheHomeScreen: Boolean,
     usingMountInstall: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
@@ -265,23 +262,21 @@ fun MorpheHomeDialogs(
         )
     }
 
-    // Bundle Patches Dialog
-    if (state.showPatchesDialog && state.apiBundle != null) {
-        BundlePatchesDialog(
-            src = state.apiBundle!!,
-            onDismissRequest = { state.showPatchesDialog = false },
-            showTopBar = !useMorpheHomeScreen
+    // Patches bottom sheet
+    if (state.showPatchesSheet && state.apiBundle != null) {
+        MorpheBundlePatchesSheet(
+            onDismissRequest = { state.showPatchesSheet = false },
+            src = state.apiBundle!!
         )
     }
 
-    // Bundle Changelog Dialog
-    if (state.showChangelogDialog && state.apiBundle != null) {
-        val remoteBundle = state.apiBundle!!.asRemoteOrNull
+    // Changelog bottom sheet
+    if (state.showChangelogSheet && state.apiBundle != null) {
+        val remoteBundle = state.apiBundle as? RemotePatchBundle
         if (remoteBundle != null) {
-            BundleChangelogDialog(
+            MorpheBundleChangelogSheet(
                 src = remoteBundle,
-                onDismissRequest = { state.showChangelogDialog = false },
-                showTopBar = !useMorpheHomeScreen
+                onDismissRequest = { state.showChangelogSheet = false }
             )
         }
     }
