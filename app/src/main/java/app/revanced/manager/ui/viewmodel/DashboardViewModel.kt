@@ -161,15 +161,4 @@ class DashboardViewModel(
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
     }
-
-    /**
-     * Update the API patch bundle (uid = 0)
-     * @param showToast Whether to show a toast notification
-     */
-    fun updateApiBundle(showToast: Boolean = true) = viewModelScope.launch {
-        val apiBundle = patchBundleRepository.sources.first().firstOrNull { it.uid == 0 }
-        if (apiBundle is app.revanced.manager.domain.bundles.RemotePatchBundle) {
-            patchBundleRepository.update(apiBundle, showToast = showToast)
-        }
-    }
 }

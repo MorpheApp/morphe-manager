@@ -124,13 +124,5 @@ class GeneralSettingsViewModel(
 
     fun togglePatchesPrerelease(usePrerelease: Boolean) = viewModelScope.launch {
         prefs.usePatchesPrereleases.update(usePrerelease)
-
-        // FIXME: Refresh patches
-        // TODO: use reloadApiBundles?
-//        patchBundleRepository.update(src, showToast = true)
-
-//        prefs.patchesBundleJsonUrl.update(
-//            PreferencesManager.PatchBundleConstants.getBundleUrl(usePrerelease)
-//        )
     }
 }
