@@ -71,8 +71,8 @@ class MorpheHomeState(
     var showAndroid11Dialog by mutableStateOf(false)
     var showBundlesSheet by mutableStateOf(false)
     var isRefreshingBundle by mutableStateOf(false)
-    var showPatchesDialog by mutableStateOf(false)
-    var showChangelogDialog by mutableStateOf(false)
+    var showPatchesSheet by mutableStateOf(false)
+    var showChangelogSheet by mutableStateOf(false)
 
     // APK selection flow dialogs (3-step process)
     var showApkAvailabilityDialog by mutableStateOf(false)      // Step 1: "Do you have APK?"
