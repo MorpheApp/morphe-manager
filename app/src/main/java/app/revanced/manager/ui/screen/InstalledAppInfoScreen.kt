@@ -224,7 +224,7 @@ fun InstalledAppInfoScreen(
             onDismissRequest = viewModel::clearInstallResult,
             confirmButton = {
                 TextButton(onClick = viewModel::clearInstallResult) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             },
             title = { Text(stringResource(titleRes)) },
@@ -237,7 +237,7 @@ fun InstalledAppInfoScreen(
             onDismissRequest = viewModel::dismissMountVersionMismatch,
             confirmButton = {
                 TextButton(onClick = viewModel::dismissMountVersionMismatch) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             },
             title = { Text(stringResource(R.string.mount_version_mismatch_title)) },
@@ -267,7 +267,7 @@ fun InstalledAppInfoScreen(
             onDismissRequest = viewModel::clearMountWarning,
             confirmButton = {
                 TextButton(onClick = viewModel::clearMountWarning) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             },
             title = { Text(stringResource(titleRes)) },
@@ -724,14 +724,14 @@ fun UninstallDialog(
                 onDismiss()
             }
         ) {
-            Text(stringResource(R.string.ok))
+            Text(stringResource(android.R.string.ok))
         }
     },
     dismissButton = {
         TextButton(
             onClick = onDismiss
         ) {
-            Text(stringResource(R.string.cancel))
+            Text(stringResource(android.R.string.cancel))
         }
     }
 )

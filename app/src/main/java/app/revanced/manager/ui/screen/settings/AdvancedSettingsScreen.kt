@@ -1037,7 +1037,7 @@ private fun ExportNameFormatDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = { Text(stringResource(R.string.export_name_format_dialog_title)) },
@@ -1674,7 +1674,7 @@ private fun InstallerSelectionDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = { Text(title) },
@@ -1848,7 +1848,7 @@ private fun PatchesBundleJsonUrlDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
@@ -1928,7 +1928,7 @@ private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (Stri
         },
         dismissButton = {
             TextButton(onClick = { onSubmit(null) }) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         icon = {
@@ -2014,7 +2014,7 @@ private fun GitHubPatDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         icon = { Icon(Icons.Outlined.VpnKey, null) },
@@ -2104,7 +2104,7 @@ private fun GitHubPatDialog(
             },
             dismissButton = {
                 TextButton(onClick = { showIncludeWarning = false }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             icon = { Icon(Icons.Outlined.Warning, null) },

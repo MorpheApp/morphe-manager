@@ -30,7 +30,7 @@ fun ConfirmDialog(
                 horizontalArrangement = Arrangement.Center
             ) {
                 TextButton(onDismiss) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         },

@@ -387,7 +387,7 @@ fun KeystoreCredentialsDialog(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        stringResource(R.string.cancel),
+                        stringResource(android.R.string.cancel),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )

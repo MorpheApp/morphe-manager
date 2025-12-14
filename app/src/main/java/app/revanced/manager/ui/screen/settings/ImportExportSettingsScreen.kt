@@ -488,7 +488,7 @@ fun KeystoreCredentialsDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         icon = {

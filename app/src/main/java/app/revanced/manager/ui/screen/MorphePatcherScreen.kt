@@ -346,7 +346,7 @@ fun MorphePatcherScreen(
                 TextButton(
                     onClick = viewModel::rejectInteraction
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(title) },
@@ -543,7 +543,7 @@ fun MorphePatcherScreen(
                             containerColor = MaterialTheme.colorScheme.errorContainer,
                             contentColor = MaterialTheme.colorScheme.onErrorContainer
                         ) {
-                            Icon(Icons.Default.Close, stringResource(R.string.cancel))
+                            Icon(Icons.Default.Close, stringResource(android.R.string.cancel))
                         }
                     }
                     else -> {

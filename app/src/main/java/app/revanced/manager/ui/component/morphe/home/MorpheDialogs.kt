@@ -713,7 +713,7 @@ private fun UnsupportedVersionWarningDialog(
                         onClick = onDismiss,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(android.R.string.cancel))
                     }
                 }
             } else {
@@ -737,7 +737,7 @@ private fun UnsupportedVersionWarningDialog(
                         onClick = onDismiss,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(android.R.string.cancel))
                     }
                 }
             }
@@ -868,7 +868,7 @@ fun WrongPackageDialog(
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(stringResource(R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         }
     ) {

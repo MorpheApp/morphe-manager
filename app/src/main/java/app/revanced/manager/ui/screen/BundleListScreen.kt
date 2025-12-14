@@ -149,7 +149,7 @@ private fun BundleOrderDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(R.string.cancel))
+                Text(text = stringResource(android.R.string.cancel))
             }
         },
         title = { Text(text = stringResource(R.string.bundle_reorder_title)) },

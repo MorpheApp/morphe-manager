@@ -66,7 +66,7 @@ fun UpdateScreen(
                     Icons.Outlined.InstallMobile
                 )
 
-                State.DOWNLOADING -> Triple(onBackClick, R.string.cancel, Icons.Outlined.Cancel)
+                State.DOWNLOADING -> Triple(onBackClick, android.R.string.cancel, Icons.Outlined.Cancel)
                 State.CAN_INSTALL -> Triple(
                     { vm.installUpdate() },
                     R.string.install_app,
@@ -138,7 +138,7 @@ private fun MeteredDownloadConfirmationDialog(
         onDismissRequest = onDismiss,
         dismissButton = {
             TextButton(onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         confirmButton = {

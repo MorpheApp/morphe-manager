@@ -23,7 +23,7 @@ fun SafeguardDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         },
         icon = {

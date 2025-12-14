@@ -101,7 +101,7 @@ private inline fun <T> NumberInputDialog(
                     onClick = { onSubmit(null) }
                 ) {
                     Text(
-                        text = stringResource(R.string.cancel),
+                        text = stringResource(android.R.string.cancel),
                         maxLines = 1,
                         softWrap = false
                     )

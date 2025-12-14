@@ -112,7 +112,7 @@ fun InstallDialog(
                     onClick = onCancel,
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
 
                 // Action button (Install/Mount or Uninstall)

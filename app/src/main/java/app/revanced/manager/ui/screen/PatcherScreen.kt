@@ -314,7 +314,7 @@ fun PatcherScreen(
             text = { Text(message) },
             confirmButton = {
                 TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             }
         )
@@ -333,7 +333,7 @@ fun PatcherScreen(
                     onDismissRequest = viewModel::clearInstallStatus,
                     confirmButton = {
                         TextButton(onClick = viewModel::clearInstallStatus) {
-                            Text(stringResource(R.string.ok))
+                            Text(stringResource(android.R.string.ok))
                         }
                     },
                     title = { Text(stringResource(R.string.install_app_success)) },
@@ -362,7 +362,7 @@ fun PatcherScreen(
                         text = { Text(status.message) },
                         confirmButton = {
                             TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                                Text(stringResource(R.string.ok))
+                                Text(stringResource(android.R.string.ok))
                             }
                         }
                     )
@@ -393,7 +393,7 @@ fun PatcherScreen(
                 TextButton(
                     onClick = viewModel::rejectInteraction
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(title) },

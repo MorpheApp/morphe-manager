@@ -81,7 +81,7 @@ enum class DialogKind(
     val title: Int,
     @StringRes val contentStringResId: Int,
     val icon: ImageVector = Icons.Outlined.ErrorOutline,
-    val confirmButton: InstallerStatusDialogButton = installerStatusDialogButton(R.string.ok),
+    val confirmButton: InstallerStatusDialogButton = installerStatusDialogButton(android.R.string.ok),
     val dismissButton: InstallerStatusDialogButton? = null,
 ) {
     FAILURE(
@@ -112,7 +112,7 @@ enum class DialogKind(
         confirmButton = installerStatusDialogButton(R.string.reinstall) { model ->
             model.reinstall()
         },
-        dismissButton = installerStatusDialogButton(R.string.cancel),
+        dismissButton = installerStatusDialogButton(android.R.string.cancel),
     ),
     FAILURE_INCOMPATIBLE(
         flag = PackageInstaller.STATUS_FAILURE_INCOMPATIBLE,
@@ -126,7 +126,7 @@ enum class DialogKind(
         confirmButton = installerStatusDialogButton(R.string.reinstall) { model ->
             model.reinstall()
         },
-        dismissButton = installerStatusDialogButton(R.string.cancel),
+        dismissButton = installerStatusDialogButton(android.R.string.cancel),
     ),
     FAILURE_STORAGE(
         flag = PackageInstaller.STATUS_FAILURE_STORAGE,

@@ -571,7 +571,7 @@ fun PatchProfilesScreen(
                         versionDialogProfile = null
                     }
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(stringResource(R.string.patch_profile_version_override_title, profile.name)) },

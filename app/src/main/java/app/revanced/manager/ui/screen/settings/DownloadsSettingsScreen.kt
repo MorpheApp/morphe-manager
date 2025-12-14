@@ -109,7 +109,7 @@ fun DownloadsSettingsScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showHelpDialog = false }) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             }
         )

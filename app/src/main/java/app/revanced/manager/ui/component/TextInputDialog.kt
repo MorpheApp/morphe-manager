@@ -33,12 +33,12 @@ fun TextInputDialog(
                 onClick = { onConfirm(value) },
                 enabled = valid
             ) {
-                Text(stringResource(R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = {

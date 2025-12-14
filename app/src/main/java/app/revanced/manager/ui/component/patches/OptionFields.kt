@@ -312,7 +312,7 @@ private object StringOptionEditor : OptionEditor<String> {
             },
             dismissButton = {
                 TextButton(onClick = scope.dismissDialog) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
         )
@@ -452,7 +452,7 @@ private class PresetOptionEditor<T : Any>(private val innerEditor: OptionEditor<
                 },
                 dismissButton = {
                     TextButton(onClick = scope.dismissDialog) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(android.R.string.cancel))
                     }
                 },
                 title = { Text(scope.option.title) },
@@ -572,7 +572,7 @@ private class ListOptionEditor<T : Serializable>(private val elementEditor: Opti
                             if (deleteMode) {
                                 return@AppTopBar Icon(
                                     Icons.Filled.Close,
-                                    stringResource(R.string.cancel)
+                                    stringResource(android.R.string.cancel)
                                 )
                             }
 

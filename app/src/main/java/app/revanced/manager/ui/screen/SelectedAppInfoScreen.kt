@@ -833,7 +833,7 @@ private fun AppSourceSelectorDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = { Text(stringResource(R.string.app_source_dialog_title)) },
@@ -968,7 +968,7 @@ private fun MorpheAppSourceSelectorDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = {
