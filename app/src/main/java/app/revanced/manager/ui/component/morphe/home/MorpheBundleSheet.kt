@@ -52,21 +52,20 @@ fun MorpheBundleSheet(
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val sheetScrollState = rememberScrollState()
+    val scrollState = rememberScrollState()
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+        contentWindowInsets = { WindowInsets.systemBars },
         scrimColor = Color.Transparent
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsPadding()
-                .verticalScroll(sheetScrollState)
-                .padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .verticalScroll(scrollState)
+                .padding(start = 24.dp, bottom = 24.dp, end = 24.dp)
         ) {
             // Content
             if (apiBundle != null) {

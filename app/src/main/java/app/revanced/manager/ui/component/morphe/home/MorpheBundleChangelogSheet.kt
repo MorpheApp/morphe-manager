@@ -7,7 +7,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material3.*
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +46,7 @@ fun MorpheBundleChangelogSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+        contentWindowInsets = { WindowInsets.systemBars },
         scrimColor = Color.Transparent
     ) {
         when (val current = state) {
@@ -67,7 +67,6 @@ private fun BundleChangelogSheetLoading() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .navigationBarsPadding()
             .padding(horizontal = 24.dp)
             .padding(vertical = 48.dp),
         contentAlignment = Alignment.Center
@@ -94,7 +93,6 @@ private fun BundleChangelogSheetError(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .navigationBarsPadding()
             .padding(horizontal = 24.dp)
             .padding(vertical = 48.dp),
         contentAlignment = Alignment.Center
@@ -138,16 +136,14 @@ private fun BundleChangelogSheetContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .navigationBarsPadding()
             .verticalScroll(scrollState)
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(start = 24.dp, bottom = 24.dp, end = 24.dp)
     ) {
-        // Content
+        // Header Content
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp),
+                .padding(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Styled Header
@@ -185,10 +181,6 @@ private fun BundleChangelogSheetContent(
                     )
                 }
             }
-
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-            )
 
             // Changelog content
             Changelog(
