@@ -3,4 +3,10 @@
     <plurals name="patch_count">
         <item quantity="other">%d 个补丁</item>
     </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">执行 %d 个补丁</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="other">%d 个已选择</item>
+    </plurals>
 </resources>
