@@ -6,7 +6,8 @@ on:
     branches:
       - dev
     paths:
-      - /app/src/main/res/values/**
+      - app/src/main/res/values/plurals.xml
+      - app/src/main/res/values/strings.xml
 
 jobs:
   push:
