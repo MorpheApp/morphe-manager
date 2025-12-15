@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Paquete de parches</string>
+    <string name="morphe_home_greeting_1">¿Qué aplicación quieres parchear?</string>
+    <string name="morphe_home_greeting_2">¿Listo para hacer que YouTube vuelva a ser legendario?</string>
+    <string name="morphe_home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
+    <string name="morphe_home_greeting_4">Un día más, otra obra maestra bloqueada de anuncios</string>
+    <string name="morphe_home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
+    <string name="morphe_home_greeting_6">Hagamos que tus aplicaciones se comporten</string>
+    <string name="morphe_home_greeting_7">Pronóstico de hoy: 100% de probabilidad de parcheo</string>
+    <string name="morphe_home_bundle_type_api">Paquete de API</string>
+    <string name="morphe_home_no_internet">Sin conexión a internet</string>
+    <string name="morphe_home_update_error">Actualización fallida</string>
+    <string name="morphe_home_update_error_subtitle">Comprueba tu conexión e inténtalo de nuevo</string>
+    <string name="morphe_home_updating_patches">Actualizando parches…</string>
+    <string name="morphe_home_update_success">Actualización completa</string>
+    <string name="morphe_home_patches_updated">Tus parches están actualizados</string>
+    <string name="morphe_home_patches_are_loading">Los parches se están cargando, espera…</string>
+    <string name="morphe_home_please_wait">Espera…</string>
+    <string name="morphe_home_open_in_browser">Abrir en el navegador</string>
+    <string name="morphe_home_failed_to_open_url">Error al abrir la URL</string>
+    <string name="morphe_home_date_added">Añadido</string>
+    <string name="morphe_home_date_updated">Actualizado</string>
+    <string name="morphe_home_check_updates">Buscar actualizaciones</string>
+    <string name="morphe_home_bundle_update_completed">Actualización completada</string>
+    <string name="morphe_home_unknown">Desconocido</string>
+    <string name="morphe_home_timeline">Historial de actualizaciones</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">¿Tienes la APK original sin parches?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Para parchear %1$s, necesito la versión %2$s (sin parchear).</string>
+    <string name="morphe_home_apk_availability_yes">Sí, la tengo</string>
+    <string name="morphe_home_apk_availability_no">No, ayúdame a encontrarla</string>
+    <string name="morphe_home_apk_availability_dialog_description">Para parchear %1$s, necesito la versión %2$s (sin parchear).</string>
+    <string name="morphe_home_apk_availability_dialog_info">Asegúrate de descargar el APK pero NO lo instales.</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Descarga el APK original desde APKMirror</string>
+    <string name="morphe_home_download_instructions_description">Sigue estos pasos para descargar la versión %2$s de %1$s desde APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_steps_title">Instrucciones:</string>
+    <string name="morphe_home_download_instructions_step1">Pulsa Continuar para abrir el sitio web APKMirror.com</string>
+    <string name="morphe_home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Haz clic en descargar en el sitio web, y no aquí 😊</string>
+    <string name="morphe_home_download_instructions_step3">Espera a que se complete la descarga y no instales el APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Espera a que se complete la descarga e instala el APK</string>
+    <string name="morphe_home_download_instructions_step4">Después de que finalice la descarga, vuelve a abrir esta aplicación</string>
+    <string name="morphe_home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a abrir esta aplicación</string>
+    <string name="morphe_home_download_instructions_note">Importante: Descarga el APK pero no lo instales en tu dispositivo.</string>
+    <string name="morphe_home_download_instructions_continue">Continuar a APKMirror</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Selecciona el APK que descargaste</string>
+    <string name="morphe_home_file_picker_prompt_description">Ahora selecciona el archivo APK %1$s que acabas de descargar.</string>
+    <string name="morphe_home_file_picker_prompt_open">Abrir archivo APK que descargué</string>
+    <string name="morphe_home_wrong_package_selected">Paquete esperado %1$s pero se obtuvo %2$s</string>
+    <string name="morphe_home_any_version">cualquier versión</string>
+    <string name="morphe_home_recommended_version">Versión recomendada</string>
+    <string name="morphe_patcher_selected_version">Versión seleccionada</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">El modo Root requiere que el APK original esté instalado en tu dispositivo antes de aplicar el parche.</string>
+    <string name="morphe_root_gmscore_excluded">El parche de compatibilidad de GmsCore está excluido en el modo root</string>
+    <string name="morphe_patcher_mount_dialog_message">¿Montar aplicación parcheada?</string>
+    <string name="morphe_patcher_mount_ready_message">Listo para montar. La aplicación parcheada reemplazará la versión instalada.</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_title">Parcheando</string>
+    <string name="morphe_patcher_save_apk">Guardar APK</string>
+    <string name="morphe_patcher_copy_error">Error al copiar</string>
+    <string name="morphe_patcher_show_error">Mostrar error</string>
+    <string name="morphe_patcher_close">Cerrar</string>
+    <string name="morphe_patcher_error_copied">Error copiado al portapapeles</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d parches</string>
+    <string name="morphe_patcher_percentage">%1$d%%</string>
+    <string name="morphe_patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
+    <string name="morphe_patcher_install_dialog_message">¿Instalar la aplicación parcheada?</string>
+    <string name="morphe_patcher_install_conflict_message">Se ha detectado un conflicto de paquetes. Para instalar la nueva versión, primero debe desinstalar la versión anterior de la aplicación.</string>
+    <string name="morphe_patcher_install_ready_message">La versión anterior ha sido desinstalada. Ahora puede instalar la aplicación parcheada.</string>
+    <string name="morphe_patcher_install_cancelled_title">Instalación cancelada</string>
+    <string name="morphe_patcher_install_cancelled_subtitle">Haga clic en el botón de instalar para reintentar</string>
+    <string name="morphe_patcher_installing">Instalando…</string>
+    <string name="morphe_patcher_installing_subtitle">¡Casi listos! 🎸</string>
+    <string name="morphe_patcher_success_title">¡Todo listo! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">¡Tu aplicación está parcheada e instalada!</string>
+    <string name="morphe_patcher_complete_title">¡Parche completado! ✨</string>
+    <string name="morphe_patcher_failed_title">¡Ups! Algo salió mal</string>
+    <string name="morphe_patcher_failed_subtitle">Revisa los detalles del error a continuación</string>
+    <string name="morphe_patcher_failed_dialog_title">Parche fallido</string>
+    <string name="morphe_patcher_unknown_error">Ocurrió un error desconocido</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Versión no compatible</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">No hay parches disponibles para esta versión de la aplicación. Continuar podría resultar en una aplicación no funcional.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_warning">El proceso de parcheo continuará sin aplicar ningún parche. Esto podría causar que la aplicación funcione mal o no funcione en absoluto.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Continuar de todos modos</string>
+    <string name="morphe_patcher_wrong_package_title">Se seleccionó el paquete incorrecto</string>
+    <string name="morphe_patcher_wrong_package_description">El APK seleccionado no es para la aplicación que intentabas parchear.</string>
+    <string name="morphe_patcher_expected_package">Paquete esperado</string>
+    <string name="morphe_patcher_selected_package">Paquete seleccionado</string>
+    <string name="morphe_patcher_message_1">Convirtiendo tu app en algo increíble… 🏆</string>
+    <string name="morphe_patcher_message_2">Enseñando trucos nuevos a apps antiguas… 🎩</string>
+    <string name="morphe_patcher_message_3">Dando un repaso digital a tu app… 🔧</string>
+    <string name="morphe_patcher_message_4">Creando magia digital… ☕</string>
+    <string name="morphe_patcher_message_5">Se recomienda un descanso para el café… ☕</string>
+    <string name="morphe_patcher_message_6">Mira afuera, hace buen tiempo… 🌤️</string>
+    <string name="morphe_patcher_message_7">Ajustando 1s y 0s… 🤖</string>
+    <string name="morphe_patcher_message_8">Desenredando espaguetis digitales… 🍝</string>
+    <string name="morphe_patcher_message_9">Arreglando errores en la app sin parchear… 🐞</string>
+    <string name="morphe_patcher_message_10">Los buenos parches valen la pena... ⏳</string>
+    <string name="morphe_patcher_message_11">Pulido de píxeles hasta que brillen... 💎</string>
+    <string name="morphe_patcher_message_12">Por favor, permanezca sentado hasta que el capitán apague el letrero de \“Parche en curso\”… 💺✈️</string>
+    <!-- Morphe Settings Screen -->
+    <!-- Other strings -->
+    <!--    <string name="patch_bundle_installer">Bundle installer</string>-->
+    <!--    <string name="cli">CLI</string>-->
+    <!--    <string name="manager">Manager</string>-->
+    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
+    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <!--    <string name="execute_patches">Execute patches</string>-->
+    <!--    <string name="executing_patch">Execute %s</string>-->
+    <!--    <string name="donate">Donate</string>-->
+    <!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
+    <!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
+    <!--    <string name="patches_and_manager">Patch Bundles &amp; Manager</string>-->
+    <!--    <string name="update_on_metered_connections">Update on metered connections</string>-->
+    <!--    <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>-->
+</resources>
