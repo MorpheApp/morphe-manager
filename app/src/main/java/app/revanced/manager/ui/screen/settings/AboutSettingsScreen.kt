@@ -3,8 +3,10 @@ package app.revanced.manager.ui.screen.settings
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,41 +14,44 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import app.revanced.manager.ui.component.AnnotatedLinkText // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
-import androidx.compose.ui.graphics.vector.ImageVector
-import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.model.navigation.Settings
-import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
-import app.revanced.manager.util.openUrl
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.AppTopBar
+//import app.revanced.manager.ui.model.navigation.Settings
+import app.revanced.manager.ui.viewmodel.AboutViewModel.Companion.getSocialIcon
+import app.revanced.manager.util.openUrl
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutSettingsScreen(
     onBackClick: () -> Unit,
-    navigate: (Settings.Destination) -> Unit,
+//    navigate: (Settings.Destination) -> Unit,
 ) {
     val context = LocalContext.current
     // painterResource() is broken on release builds for some reason.
@@ -54,31 +59,41 @@ fun AboutSettingsScreen(
         AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
     })
 
-    val githubButtons: List<Triple<ImageVector, String, () -> Unit>> = remember(context) {
-        listOf(
-            Triple(
-                getSocialIcon("GitHub"),
-                context.getString(R.string.morphe_about_github),
-                { context.openUrl("https://github.com/MorpheApp") }
+//    val githubButtons: List<Triple<ImageVector, String, () -> Unit>> = remember(context) {
+//        listOf(
+//            Triple(
+//                getSocialIcon("GitHub"),
 //                context.getString(R.string.github),
 //                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
-            ),
-            Triple(
-                getSocialIcon("X"),
-                context.getString(R.string.morphe_about_x),
-                { context.openUrl("https://x.com/MorpheApp") }
-//                context.getString(R.string.original_revanced_manager_github),
+//            ),
+//            Triple(
 //                getSocialIcon("GitHub"),
+//                context.getString(R.string.original_revanced_manager_github),
 //                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
-            ),
-            Triple(
-                getSocialIcon("Reddit"),
-                context.getString(R.string.morphe_about_reddit),
-                { context.openUrl("https://reddit.com/r/MorpheApp") }
+//            ),
+//            Triple(
 //                getSocialIcon("GitHub"),
 //                context.getString(R.string.patch_bundle_urls),
 //                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
-            )
+//            )
+//        )
+//    }
+
+    val socialButtons: List<Pair<ImageVector, () -> Unit>> = remember(context) {
+        listOf(
+            Pair(
+                getSocialIcon("GitHub")
+            ) { context.openUrl("https://github.com/MorpheApp") },
+            Pair(
+                getSocialIcon("X")
+            ) { context.openUrl("https://x.com/MorpheApp") },
+            Pair(
+                getSocialIcon("Reddit")
+            ) { context.openUrl("https://reddit.com/r/MorpheApp") },
+            Pair(
+                Icons.Outlined.Language
+            ) // Crowdin icon
+            { context.openUrl("https://translate.morphe.software") }
         )
     }
 
@@ -126,34 +141,50 @@ fun AboutSettingsScreen(
                     color = MaterialTheme.colorScheme.outline
                 )
             }
-            Column(
+//            Column(
+//                modifier = Modifier
+//                    .padding(horizontal = 16.dp)
+//                    .fillMaxWidth(),
+//                verticalArrangement = Arrangement.spacedBy(8.dp)
+//            ) {
+//                githubButtons.forEach { (icon, text, onClick) ->
+//                    FilledTonalButton(
+//                        onClick = onClick,
+//                        modifier = Modifier.fillMaxWidth(),
+//                    ) {
+//                        Row(
+//                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+//                            verticalAlignment = Alignment.CenterVertically
+//                        ) {
+//                            Icon(
+//                                icon,
+//                                contentDescription = null,
+//                                modifier = Modifier.size(18.dp)
+//                            )
+//                            Text(
+//                                text,
+//                                style = MaterialTheme.typography.labelLarge
+//                            )
+//                        }
+//                    }
+//                }
+//            }
+
+            // Social Links
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                githubButtons.forEach { (icon, text, onClick) ->
-                    FilledTonalButton(
-                        onClick = onClick,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                icon,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Text(
-                                text,
-                                style = MaterialTheme.typography.labelLarge
-                            )
-                        }
-                    }
+                socialButtons.forEach { (icon, onClick) ->
+                    SocialIconButton(
+                        icon = icon,
+                        onClick = onClick
+                    )
                 }
             }
+
             OutlinedCard(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
@@ -172,6 +203,38 @@ fun AboutSettingsScreen(
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Social link button
+ * Styled button for opening social media links (matching MorpheDialog style)
+ */
+@Composable
+private fun SocialIconButton(
+    icon: ImageVector,
+    onClick: () -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.size(56.dp),
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        tonalElevation = if (isPressed) 12.dp else 4.dp,
+        shadowElevation = if (isPressed) 8.dp else 2.dp,
+        interactionSource = interactionSource
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(28.dp)
+            )
         }
     }
 }
