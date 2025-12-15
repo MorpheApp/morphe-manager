@@ -11,7 +11,10 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    env:
+      CROWDIN_ACTION_PAT: ${{ secrets.CROWDIN_ACTION_PAT }} # Personal Access Token with repo access
     steps:
+      # Step 1: Checkout dev branch (fully writable)
       - name: Checkout dev
         uses: actions/checkout@v5
         with:
@@ -19,21 +22,52 @@ jobs:
           fetch-depth: 0
           clean: true
 
-      - name: Pull strings from Crowdin
+      # Step 2: Pull Crowdin translations into a temporary folder
+      - name: Pull Crowdin translations
         uses: crowdin/github-action@v2
         with:
           config: crowdin.yml
           upload_sources: false
           download_translations: true
           skip_ref_checkout: true
-          localization_branch_name: crowdin
+          localization_branch_name: temp
           create_pull_request: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CROWDIN_ACTION_PAT }}
+          CROWDIN_PROJECT_ID: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
 
-      - name: Push crowdin branch
+      # Step 3: Copy translations into repo checkout
+      - name: Copy translations into repo
         run: |
-          git checkout -B crowdin
-          git push --force origin crowdin
+          rsync -a --exclude=".git" ./ ./  # copy all files safely into writable repo
+
+      # Step 4: Remove empty translation files
+      - name: Remove empty strings.xml and plurals.xml
+        run: |
+          find . -type f -name "strings.xml" ! -path "./.git/*" | while read f; do
+            if ! grep -q "<string" "$f"; then
+              echo "Deleting empty $f"
+              rm "$f"
+            fi
+          done
+          find . -type f -name "plurals.xml" ! -path "./.git/*" | while read f; do
+            if ! grep -q "<plurals" "$f"; then
+              echo "Deleting empty $f"
+              rm "$f"
+            fi
+          done
+
+      # Step 5: Commit and push to crowdin branch using PAT
+      - name: Commit and push to crowdin
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          # Always commit (even if no changes) to keep crowdin branch in sync
+          git commit --allow-empty -m "chore: Sync Crowdin translations"
+
+          # Push using PAT to crowdin branch
+          git push https://x-access-token:${CROWDIN_ACTION_PAT}@github.com/${GITHUB_REPOSITORY}.git HEAD:crowdin --force
