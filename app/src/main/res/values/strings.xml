@@ -86,6 +86,13 @@
     <string name="morphe_patcher_failed_subtitle">Check the error details below</string>
     <string name="morphe_patcher_failed_dialog_title">Patching Failed</string>
     <string name="morphe_patcher_unknown_error">Unknown error occurred</string>
+    <string name="morphe_patcher_mounting">Mounting…</string>
+    <string name="morphe_patcher_conflict_title">Package conflict</string>
+    <string name="morphe_patcher_conflict_subtitle">You need to uninstall the existing version</string>
+    <string name="morphe_patcher_install_error_title">Installation error</string>
+    <string name="morphe_patcher_install_error_subtitle">Try uninstalling and installing again</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Press the button below to install</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Unsupported Version</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">No patches are available for this version of the app. Proceeding may result in a non-functional app.</string>
     <string name="morphe_patcher_unsupported_version_dialog_warning">The patching process will continue without applying any patches. This may cause the app to malfunction or not work at all.</string>
