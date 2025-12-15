@@ -143,11 +143,8 @@
     <string name="main_top_title" translatable="false">Morphe</string>
     <string name="patcher">Patcher</string>
     <string name="patches">Patches</string>
-<!--    <string name="patch_bundle_installer">Bundle installer</string>-->
     <string name="patch_bundles">Patch Bundles</string>
     <string name="patch_bundle">Patch Bundle</string>
-<!--    <string name="cli">CLI</string>-->
-<!--    <string name="manager">Manager</string>-->
 
     <string name="plugin_host_permission_label">Morphe plugin host</string>
     <string name="plugin_host_permission_description">Used to control access to Morphe plugins. Only Morphe has this.</string>
@@ -282,11 +279,7 @@
     <string name="advanced">Advanced</string>
     <string name="advanced_description">API URL, memory limit, debugging</string>
     <string name="about">About</string>
-    <string name="opensource_licenses">Open source licenses</string>
-    <string name="opensource_licenses_description">View all the libraries used to make this application</string>
-
     <string name="contributors">Contributors</string>
-    <string name="contributors_description">View the contributors of ReVanced</string>
     <string name="dynamic_color">Dynamic color</string>
     <string name="dynamic_color_description">Adapt colors to the wallpaper</string>
     <string name="accent_color">Accent color</string>
@@ -472,36 +465,36 @@ You will not be able to update the previously installed apps from this source."<
     <string name="patch_selection_toggle_expand">Show actions</string>
     <string name="patch_selection_toggle_collapse">Hide actions</string>
     <string name="patch_selection_reset_all">Reset patch selection globally</string>
-    <string name="patch_selection_reset_all_dialog_description">You are about to reset all patch selections. You will need to manually select each patch again.
+    <string name="patch_selection_reset_all_dialog_description">"You are about to reset all patch selections. You will need to manually select each patch again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_selection_reset_all_description">Resets all patch selections</string>
     <string name="patch_selection_reset_dialog_title">Reset patch defaults?</string>
     <string name="patch_selection_reset_dialog_message">This will restore your patch selections and options to their recommended defaults.</string>
     <string name="patch_selection_reset_package">Reset patch selection for app</string>
-    <string name="patch_selection_reset_package_dialog_description">You are about to reset the patch selection for the app \"%s\". You will have to manually select each patch again.
+    <string name="patch_selection_reset_package_dialog_description">"You are about to reset the patch selection for the app \"%s\". You will have to manually select each patch again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_selection_reset_package_description">Resets patch selection for a single app</string>
     <string name="patch_selection_reset_patches">Reset patch selection (single)</string>
-    <string name="patch_selection_reset_patches_dialog_description">You are about to reset the patch selection for \"%s\". You will have to manually select each patch again.
+    <string name="patch_selection_reset_patches_dialog_description">"You are about to reset the patch selection for \"%s\". You will have to manually select each patch again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_selection_reset_patches_description">Resets the patch selection for a specific collection of patches</string>
     <string name="patch_options_reset_package">Reset patch options for app</string>
-    <string name="patch_options_reset_package_dialog_description">You are about to reset the patch options for the app \"%s\". You will have to reapply each option again.
+    <string name="patch_options_reset_package_dialog_description">"You are about to reset the patch options for the app \"%s\". You will have to reapply each option again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_options_reset_package_description">Resets patch options for a single app</string>
     <string name="patch_options_reset_patches">Reset patch options (single)</string>
-    <string name="patch_options_reset_patches_dialog_description">You are about to reset the patch options for \"%s\". You will have to reapply each option again.
+    <string name="patch_options_reset_patches_dialog_description">"You are about to reset the patch options for \"%s\". You will have to reapply each option again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_options_reset_patches_description">Resets the patch options for a specific collection of patches</string>
     <string name="patch_options_reset_all">Reset patch options globally</string>
-    <string name="patch_options_reset_all_dialog_description">You are about to reset all patch options. You will have to reapply each option again.
+    <string name="patch_options_reset_all_dialog_description">"You are about to reset all patch options. You will have to reapply each option again.
 
-Patch profiles are not affected.</string>
+Patch profiles are not affected."</string>
     <string name="patch_options_reset_all_description">Resets all patch options</string>
     <string name="download_settings">Download settings</string>
     <string name="downloader_auto_save_title">Automatically save downloaded APKs</string>
@@ -559,8 +552,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="strip_unused_libs_description">Delete native libraries for unsupported CPU architectures from patched apps</string>
     <string name="process_runtime_memory_limit">Patcher process memory limit</string>
     <string name="process_runtime_memory_limit_description">The max amount of memory that the Patcher process can use (in megabytes)</string>
-    <string name="process_runtime_memory_limit_description_detailed">The max amount of memory that the Patcher process can use (in megabytes).
-Recommended for this device: %1$d MB.</string>
     <string name="reset_to_recommended">Reset to recommended</string>
     <string name="patcher_auto_collapse_steps">Auto-collapse completed patcher steps</string>
     <string name="patcher_auto_collapse_steps_description">Automatically collapse each patcher progress widget after all of its steps finish</string>
@@ -570,9 +561,9 @@ Recommended for this device: %1$d MB.</string>
     <string name="restore_official_bundle">Restore pre-installed Morphe patch bundle</string>
     <string name="restore_official_bundle_description_missing">The official Morphe patches bundle is currently not installed</string>
     <string name="restore_official_bundle_description_installed">The official Morphe patches bundle is currently installed</string>
-    <string name="restore_official_bundle_success">Official ReVanced patch bundle restored</string>
-    <string name="restore_official_bundle_failed">Failed to restore the Official ReVanced patch bundle: %1$s</string>
-    <string name="restore_official_bundle_already">The Official ReVanced patch bundle is already installed</string>
+    <string name="restore_official_bundle_success">Official Morphe patch bundle restored</string>
+    <string name="restore_official_bundle_failed">Failed to restore the Official Morphe patch bundle: %1$s</string>
+    <string name="restore_official_bundle_already">The Official Morphe patch bundle is already installed</string>
 
     <string name="app_exporting">App exporting</string>
     <string name="export_name_format">Export filename format</string>
@@ -614,7 +605,6 @@ Recommended for this device: %1$d MB.</string>
     <string name="api_url_dialog_warning">Morphe connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
-    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
     <string name="github_pat">GitHub PAT</string>
     <string name="github_pat_description">GitHub Personal Access Token needed for GitHub integration</string>
     <string name="set_github_pat_dialog_title">Set GitHub PAT</string>
@@ -628,9 +618,7 @@ Recommended for this device: %1$d MB.</string>
     <string name="language_option_system">Use device language</string>
     <string name="language_option_english">English</string>
     <string name="language_option_chinese_simplified">Chinese (Simplified)</string>
-    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
     <string name="language_option_korean">Korean</string>
-    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
     <string name="language_option_vietnamese">Vietnamese</string>
     <string name="device">Device</string>
     <string name="device_android_version">Android version</string>
@@ -735,9 +723,9 @@ Reopen the selection and reselect them (or choose replacements) before retrying.
 You can remove them automatically, adjust the selection, or continue anyway."</string>
     <string name="patcher_missing_patch_review">Review selection</string>
     <string name="patch_selector_missing_patch_title">Re-select missing patches</string>
-    <string name="patch_selector_missing_patch_message">These patches need to be reselected:
+    <string name="patch_selector_missing_patch_message">"These patches need to be reselected:
 %1$s
-Enable them again (or pick alternatives) and then try patching once more.</string>
+Enable them again (or pick alternatives) and then try patching once more."</string>
     <string name="delete_profile_confirmation">Delete "%1$s"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Delete the selected patch profiles?</string>
     <plurals name="patch_profile_bundle_patch_count">
@@ -840,7 +828,7 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again.</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Universal ReVanced Manager from the Shizuku app.</string>
+    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app.</string>
     <string name="installer_mount_warning_title">Rooted mount installer selected</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
     <string name="installer_mount_warning_update">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
@@ -953,8 +941,6 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="patcher_install_in_progress_stay">Stay here</string>
     <string name="patcher_mount_in_progress_title">Mount in progress</string>
     <string name="patcher_mount_in_progress">Mount is in progress. Please wait</string>
-<!--    <string name="execute_patches">Execute patches</string>-->
-<!--    <string name="executing_patch">Execute %s</string>-->
     <string name="applying_patches">Applying patches</string>
     <string name="applying_patch">Applying %s</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
@@ -982,10 +968,7 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="continue_">Continue</string>
     <string name="dismiss">Dismiss</string>
     <string name="permanent_dismiss">Do not show this again</string>
-<!--    <string name="donate">Donate</string>-->
     <string name="website">Website</string>
-<!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
-<!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
     <string name="patch_bundle_urls">Get patch bundle imports</string>
     <string name="contact">Contact</string>
     <string name="version">Version</string>
@@ -1017,9 +1000,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="manual_update_check">Check for updates</string>
     <string name="manual_update_check_description">Manually check for updates</string>
-<!--    <string name="patches_and_manager">Patch Bundles &amp; Manager</string>-->
-<!--    <string name="update_on_metered_connections">Update on metered connections</string>-->
-<!--    <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>-->
     <string name="update_checking_manager">Check for updates on launch</string>
     <string name="update_checking_manager_description">Check for new versions of Morphe when the application starts</string>
     <string name="manager_prereleases">Use pre-releases</string>
@@ -1110,5 +1090,3 @@ Click on the patches to see more details."</string>
     <string name="confirm">Confirm</string>
     <string name="saved_app_install_cancelled">Installation cancelled</string>
 </resources>
-
-
