@@ -3,4 +3,10 @@
     <plurals name="patch_count">
         <item quantity="other">%d 개의 Patch</item>
     </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">%d개의 패치 실행</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="other">%d개 선택됨</item>
+    </plurals>
 </resources>
