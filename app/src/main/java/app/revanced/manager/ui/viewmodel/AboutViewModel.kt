@@ -30,6 +30,10 @@ class AboutViewModel() : ViewModel() {
             SocialLink(
                 name = "Reddit",
                 url = "https://reddit.com/r/MorpheApp"
+            ),
+            SocialLink(
+                name = "Crowdin",
+                url = "https://translate.morphe.software"
             )
         )
 
@@ -37,6 +41,7 @@ class AboutViewModel() : ViewModel() {
             "GitHub" to FontAwesomeIcons.Brands.Github,
             "Reddit" to FontAwesomeIcons.Brands.RedditAlien,
             "X" to FontAwesomeIcons.Brands.XTwitter,
+            "Crowdin" to Icons.Outlined.Language,
         )
 
         fun getSocialIcon(name: String) = socialIcons[name] ?: Icons.Outlined.Language

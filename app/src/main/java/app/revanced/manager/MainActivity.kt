@@ -458,7 +458,7 @@ private fun ReVancedManager(vm: MainViewModel) {
             composable<Settings.About> {
                 AboutSettingsScreen(
                     onBackClick = navController::popBackStack,
-                    navigate = navController::navigate
+//                    navigate = navController::navigate
                 )
             }
 
