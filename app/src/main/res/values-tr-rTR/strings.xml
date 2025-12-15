@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Yama paketi</string>
+    <string name="morphe_home_greeting_1">Hangi uygulamayı yama yapmak istiyorsun?</string>
+    <string name="morphe_home_greeting_2">YouTube\'u tekrar efsane yapmaya hazır mısın?</string>
+    <string name="morphe_home_greeting_3">Kemerlerinizi bağlayın, yama zamanı</string>
+    <string name="morphe_home_greeting_4">Bugün de reklamsız bir şaheser</string>
+    <string name="morphe_home_greeting_5">Reklam izlemek mi istiyorsun? Ben de istemem</string>
+    <string name="morphe_home_greeting_6">Uygulamalarını uslu durmaya alıştır</string>
+    <string name="morphe_home_greeting_7">Bugünün tahmini: %100 yama olasılığı</string>
+    <string name="morphe_home_bundle_type_api">API Paketi</string>
+    <string name="morphe_home_no_internet">İnternet bağlantısı yok</string>
+    <string name="morphe_home_update_error">Güncelleme başarısız oldu</string>
+    <string name="morphe_home_update_error_subtitle">Lütfen bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="morphe_home_updating_patches">Yama paketleri güncelleniyor…</string>
+    <string name="morphe_home_update_success">Güncelleme tamamlandı</string>
+    <string name="morphe_home_patches_updated">Yama paketleriniz güncel</string>
+    <string name="morphe_home_patches_are_loading">Yama paketleri yükleniyor, lütfen bekleyin…</string>
+    <string name="morphe_home_please_wait">Lütfen bekleyin…</string>
+    <string name="morphe_home_open_in_browser">Tarayıcıda Aç</string>
+    <string name="morphe_home_failed_to_open_url">URL açılamadı</string>
+    <string name="morphe_home_date_added">Eklendi</string>
+    <string name="morphe_home_date_updated">Güncellendi</string>
+    <string name="morphe_home_check_updates">Kontrol et</string>
+    <string name="morphe_home_bundle_update_completed">Güncelleme Tamamlandı</string>
+    <string name="morphe_home_unknown">Bilinmiyor</string>
+    <string name="morphe_home_timeline">Güncelleme Geçmişi</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s sürümünü yamalamak için %2$s (yamalanmamış) sürümüne ihtiyacım var.</string>
+    <string name="morphe_home_apk_availability_yes">Evet, bende var</string>
+    <string name="morphe_home_apk_availability_no">Hayır, bulmama yardım et</string>
+    <string name="morphe_home_apk_availability_dialog_description">%1$s sürümünü yamalamak için %2$s (yamalanmamış) sürümüne ihtiyacım var.</string>
+    <string name="morphe_home_apk_availability_dialog_info">APK\'yı indirdiğinizden emin olun ancak kurmayın.</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Orijinal APK\'yı APKMirror\'dan indirin</string>
+    <string name="morphe_home_download_instructions_description">%1$s sürüm %2$s\'yi APKMirror.com\'dan indirmek için bu adımları izleyin:</string>
+    <string name="morphe_home_download_instructions_steps_title">Talimatlar:</string>
+    <string name="morphe_home_download_instructions_step1">APKMirror.com web sitesini açmak için Devam\'a basın</string>
+    <string name="morphe_home_download_instructions_step2_part1">Web sayfasında aşağı kaydırın ve</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Web sitesinden indirme yapın, buradaki indirme butonundan değil 😊</string>
+    <string name="morphe_home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'yı kurmayın</string>
+    <string name="morphe_home_download_instructions_step3_mount">İndirme tamamlanana kadar bekleyin ve APK\'yı kurun</string>
+    <string name="morphe_home_download_instructions_step4">İndirme bittikten sonra bu uygulamayı tekrar açın</string>
+    <string name="morphe_home_download_instructions_step4_mount">Orijinal APK\'yı kurduktan sonra bu uygulamayı tekrar açın</string>
+    <string name="morphe_home_download_instructions_note">Önemli: APK\'yı indirin ancak cihazınıza kurmayın.</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror\'a devam et</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
+    <string name="morphe_home_file_picker_prompt_description">Şimdi indirdiğiniz %1$s APK dosyasını seçin.</string>
+    <string name="morphe_home_file_picker_prompt_open">İndirdiğim APK dosyasını aç</string>
+    <string name="morphe_home_wrong_package_selected">Beklenen paket %1$s ancak %2$s alındı</string>
+    <string name="morphe_home_any_version">herhangi bir sürüm</string>
+    <string name="morphe_home_recommended_version">Önerilen Sürüm</string>
+    <string name="morphe_patcher_selected_version">Seçilen Sürüm</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Yama öncesinde root modu, cihazınızda orijinal APK\'nın yüklü olmasını gerektirir.</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
+    <string name="morphe_patcher_mount_dialog_message">Yamalı uygulamayı bağla mı?</string>
+    <string name="morphe_patcher_mount_ready_message">Bağlamaya hazır. Yamalı uygulama yüklü olan sürümün yerini alacaktır.</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_title">Yama</string>
+    <string name="morphe_patcher_save_apk">APK Kaydet</string>
+    <string name="morphe_patcher_copy_error">Kopyalama Hatası</string>
+    <string name="morphe_patcher_show_error">Hatayı Göster</string>
+    <string name="morphe_patcher_close">Kapat</string>
+    <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d yamadan</string>
+    <string name="morphe_patcher_percentage">%1$d%%</string>
+    <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
+    <string name="morphe_patcher_install_dialog_message">Yamalı uygulamayı yükle?</string>
+    <string name="morphe_patcher_install_conflict_message">Bir paket çakışması tespit edildi. Yeni sürümü yüklemek için önce uygulamanın önceki sürümünü kaldırmanız gerekir.</string>
+    <string name="morphe_patcher_install_ready_message">Önceki sürüm kaldırıldı. Artık yamalı uygulamayı yükleyebilirsiniz.</string>
+    <string name="morphe_patcher_install_cancelled_title">Yükleme iptal edildi</string>
+    <string name="morphe_patcher_install_cancelled_subtitle">Tekrar denemek için yükle düğmesine tıklayın</string>
+    <string name="morphe_patcher_installing">Yükleniyor…</string>
+    <string name="morphe_patcher_installing_subtitle">Sıra hazır olmak üzere! 🎸</string>
+    <string name="morphe_patcher_success_title">Hepsi Bitti! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
+    <string name="morphe_patcher_complete_title">Yama Tamamlandı! ✨</string>
+    <string name="morphe_patcher_failed_title">Ay! Bir şeyler ters gitti</string>
+    <string name="morphe_patcher_failed_subtitle">Aşağıdan hata ayrıntılarını kontrol edin</string>
+    <string name="morphe_patcher_failed_dialog_title">Yama Başarısız</string>
+    <string name="morphe_patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Uygulamanın bu sürümü için yama mevcut değil. Devam etmek, işlevsel olmayan bir uygulamaya neden olabilir.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_warning">Yama işlemi, herhangi bir yama uygulanmadan devam edecektir. Bu, uygulamanın arızalanmasına veya hiç çalışmamasına neden olabilir.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Yine de Devam Et</string>
+    <string name="morphe_patcher_wrong_package_title">Yanlış Paket Seçildi</string>
+    <string name="morphe_patcher_wrong_package_description">Seçilen APK, yama yapmak istediğiniz uygulama için değil.</string>
+    <string name="morphe_patcher_expected_package">Beklenen Paket</string>
+    <string name="morphe_patcher_selected_package">Seçilen Paket</string>
+    <string name="morphe_patcher_message_1">Uygulamanızı harika bir şeye dönüştürüyor… 🏆</string>
+    <string name="morphe_patcher_message_2">Eski uygulamalara yeni numaralar öğretiyor… 🎩</string>
+    <string name="morphe_patcher_message_3">Uygulamanıza dijital bir bakım yapıyor… 🔧</string>
+    <string name="morphe_patcher_message_4">Dijital sihir demleniyor… ☕</string>
+    <string name="morphe_patcher_message_5">Kahve molası önerilir… ☕</string>
+    <string name="morphe_patcher_message_6">Dışarıya bakın, hava güzel… 🌤️</string>
+    <string name="morphe_patcher_message_7">1\'ler ve 0\'lar ayarlanıyor… 🤖</string>
+    <string name="morphe_patcher_message_8">Dijital spagetti çözülüyor… 🍝</string>
+    <string name="morphe_patcher_message_9">Yamalanmamış uygulamadaki hatalar düzeltiliyor… 🐞</string>
+    <string name="morphe_patcher_message_10">Harika yamalar beklemeye değer... ⏳</string>
+    <string name="morphe_patcher_message_11">Pikselleri parlayana kadar cilalıyoruz... 💎</string>
+    <!-- Morphe Settings Screen -->
+    <!-- Other strings -->
+    <!--    <string name="patch_bundle_installer">Bundle installer</string>-->
+    <!--    <string name="cli">CLI</string>-->
+    <!--    <string name="manager">Manager</string>-->
+    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
+    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <!--    <string name="execute_patches">Execute patches</string>-->
+    <!--    <string name="executing_patch">Execute %s</string>-->
+    <!--    <string name="donate">Donate</string>-->
+    <!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
+    <!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
+    <!--    <string name="patches_and_manager">Patch Bundles &amp; Manager</string>-->
+    <!--    <string name="update_on_metered_connections">Update on metered connections</string>-->
+    <!--    <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>-->
+</resources>
