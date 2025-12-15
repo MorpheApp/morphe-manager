@@ -1,13 +1,13 @@
-name: Pull strings
+name: Pull Crowdin Translations
 
 on:
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "0 */12 * * *" # every 12 hours
   workflow_dispatch:
 
 jobs:
   pull:
-    name: Pull strings
+    name: Pull translations from Crowdin
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -16,9 +16,10 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: dev
+          fetch-depth: 0
           clean: true
 
-      - name: Pull strings
+      - name: Pull strings from Crowdin
         uses: crowdin/github-action@v2
         with:
           config: crowdin.yml
@@ -32,14 +33,7 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      # On manual dispatch, squash merge crowdin into dev
-      - name: Squash merge crowdin into dev
-        if: github.event_name == 'workflow_dispatch'
+      - name: Push crowdin branch
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin crowdin
-          git checkout dev
-          git merge --squash origin/crowdin
-          git commit -m "chore: squash crowdin translations into dev"
-          git push origin dev
+          git checkout -B crowdin
+          git push --force origin crowdin
