@@ -33,7 +33,53 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Push crowdin branch
+      # TODO: Enable this to verify strings pass resource compilation
+  #      - name: Setup JDK 17
+  #        uses: actions/setup-java@v4
+  #        with:
+  #          distribution: temurin
+  #          java-version: 17
+  #          cache: gradle
+  #
+  #      - name: Verify resources compile
+  #        env:
+  #          GPR_USER: ${{ secrets.GPR_USER }}
+  #          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+  #        run: |
+  #          chmod +x ./gradlew
+  #          ./gradlew clean assembleDebug --stacktrace
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Checkout Crowdin branch
+        uses: actions/checkout@v5
+        with:
+          ref: crowdin
+          fetch-depth: 0
+          clean: true
+
+      - name: Remove empty strings.xml and plurals.xml
         run: |
-          git checkout -B crowdin
-          git push --force origin crowdin
+          find . -type f -name "strings.xml" ! -path "./.git/*" | while read f; do
+            if ! grep -q "<string" "$f"; then
+              echo "Deleting empty $f"
+              rm "$f"
+            fi
+          done
+          find . -type f -name "plurals.xml" ! -path "./.git/*" | while read f; do
+            if ! grep -q "<plurals" "$f"; then
+              echo "Deleting empty $f"
+              rm "$f"
+            fi
+          done
+
+      - name: Git commit and push
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          git commit -m "chore: Sync Crowdin translations" || true
+          git push origin crowdin
