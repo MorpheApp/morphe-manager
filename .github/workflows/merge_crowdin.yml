@@ -1,0 +1,34 @@
+name: Merge Crowdin Translations
+
+on:
+  workflow_dispatch:
+
+jobs:
+  merge:
+    name: Merge Crowdin into Dev
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      # Pull from Crowdin to ensure the branch is up to date
+      - name: Trigger pull_crowdin workflow
+        uses: peter-evans/workflow-dispatch@v2
+        with:
+          workflow: pull_crowdin.yml
+          ref: dev
+
+      - name: Checkout dev
+        uses: actions/checkout@v5
+        with:
+          ref: dev
+          fetch-depth: 0
+          clean: true
+
+      - name: Squash merge crowdin into dev
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin crowdin
+          git merge --squash origin/crowdin
+          git commit --allow-empty -m "chore: squash crowdin translations into dev"
+          git push origin dev
