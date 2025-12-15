@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <!-- Dialog 1: APK Availability -->
+    <!-- Dialog 2: Download Instructions -->
+    <!-- Dialog 3: File Picker Prompt -->
+    <!-- Root Mode -->
+    <!-- Morphe Patcher Screen -->
+    <!-- Morphe Settings Screen -->
+    <!-- Other strings -->
+    <!--    <string name="patch_bundle_installer">Bundle installer</string>-->
+    <!--    <string name="cli">CLI</string>-->
+    <!--    <string name="manager">Manager</string>-->
+    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
+    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <!--    <string name="execute_patches">Execute patches</string>-->
+    <!--    <string name="executing_patch">Execute %s</string>-->
+    <!--    <string name="donate">Donate</string>-->
+    <!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
+    <!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
+    <!--    <string name="patches_and_manager">Patch Bundles &amp; Manager</string>-->
+    <!--    <string name="update_on_metered_connections">Update on metered connections</string>-->
+    <!--    <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>-->
+</resources>
