@@ -1,3 +1,24 @@
+# app [1.0.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2025-12-15)
+
+
+### Bug Fixes
+
+* After changing pre-release, show snackbar and block starting patching until bundles are updated ([1fe7aa1](https://github.com/MorpheApp/morphe-manager/commit/1fe7aa1e69513e11b544d835e8239d5088f2f0ec))
+* Change first greeting message shown to be more traditional and easier to understand what to do ([c8f797f](https://github.com/MorpheApp/morphe-manager/commit/c8f797fcb0c1e4d400f5dbf8de5b46721a6d05de))
+* Correct rounding errors of progress value ([eb31b73](https://github.com/MorpheApp/morphe-manager/commit/eb31b73cb4e94f2754883656cb8642e913a741cc))
+* Do not show patches update snackbar unless user is manually refreshing ([8d35d28](https://github.com/MorpheApp/morphe-manager/commit/8d35d28d695ffb7a5d9145a5d3d4d1d9ea39efbe))
+* Fix app console warning of provider not found ([d2c76b7](https://github.com/MorpheApp/morphe-manager/commit/d2c76b7b51137fd88064e57f39e0abef948f109f))
+* Hide update on metered connection from advanced settings menu ([91ae275](https://github.com/MorpheApp/morphe-manager/commit/91ae2756b5f772c158156d0a22478eb43e34cfed))
+* Show patches update UI when using advanced mode ([309f7db](https://github.com/MorpheApp/morphe-manager/commit/309f7db68218956c3e9ac5f934466fd783931208))
+* Use Morphe patches API ([#12](https://github.com/MorpheApp/morphe-manager/issues/12)) ([01cdffc](https://github.com/MorpheApp/morphe-manager/commit/01cdffcf6b885780d9116dd2dbefa526c64053dd))
+
+
+### Features
+
+* Add a delay at 100% before showing success screen ([abb5ab5](https://github.com/MorpheApp/morphe-manager/commit/abb5ab523e30779d0c4b0ae25b977bd719d33962))
+* Adjust layout of patches list and change log in modal patches bundle ([#13](https://github.com/MorpheApp/morphe-manager/issues/13)) ([0dcf5b9](https://github.com/MorpheApp/morphe-manager/commit/0dcf5b9a1f6b354cb6f1921259d1540468db2800))
+* Morphe homepage root installation ([#10](https://github.com/MorpheApp/morphe-manager/issues/10)) ([8ed769f](https://github.com/MorpheApp/morphe-manager/commit/8ed769fe1a86a7a15fa4c46ccebdbf1c59e90786))
+
 # app 1.0.0-dev.1 (2025-12-12)
 
 
