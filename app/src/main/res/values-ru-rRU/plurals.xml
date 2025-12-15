@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d исправление</item>
+        <item quantity="few">%d исправления</item>
+        <item quantity="many">%d исправлений</item>
+        <item quantity="other">%d исправлений</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Выполнить %d исправление</item>
+        <item quantity="few">Выполнить %d исправления</item>
+        <item quantity="many">Выполнить %d исправлений</item>
+        <item quantity="other">Выполнить %d исправлений</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d выбрано</item>
+        <item quantity="few">%d выбрано</item>
+        <item quantity="many">%d выбрано</item>
+        <item quantity="other">%d выбрано</item>
+    </plurals>
+</resources>
