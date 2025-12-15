@@ -255,6 +255,10 @@ android {
             version = "3.22.1"
         }
     }
+
+    lint {
+        disable += setOf("MissingTranslation")
+    }
 }
 
 kotlin {
