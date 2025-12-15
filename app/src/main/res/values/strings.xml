@@ -10,7 +10,6 @@
     <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
     <string name="morphe_home_greeting_6">Let\’s make your apps behave</string>
     <string name="morphe_home_greeting_7">Today’s forecast: 100% chance of patching</string>
-
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_no_internet">No internet connection</string>
     <string name="morphe_home_update_error">Update failed</string>
