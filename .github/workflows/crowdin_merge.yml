@@ -1,4 +1,4 @@
-name: Merge Crowdin Translations
+name: Crowdin merge
 
 on:
   workflow_dispatch:

@@ -24,4 +24,8 @@ jobs:
           pr_title: 'chore: ${{ env.MESSAGE }}'
           pr_body: |
             This pull request will ${{ env.MESSAGE }}.
+
+            ## Before merging this PR
+
+            - [ ] Pull & merge translations from Crowdin
           pr_draft: true

@@ -1,4 +1,4 @@
-name: Push strings
+name: Crowdin push from GitHub
 
 on:
   workflow_dispatch:
