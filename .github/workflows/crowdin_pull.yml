@@ -1,4 +1,4 @@
-name: Pull Crowdin Translations
+name: Crowdin pull to GitHub
 
 on:
   schedule:
