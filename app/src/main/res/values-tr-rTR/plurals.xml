@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d yama</item>
+        <item quantity="other">%d yama</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%d yamayı çalıştır</item>
+        <item quantity="other">%d yamayı çalıştır</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d seçildi</item>
+        <item quantity="other">%d seçildi</item>
+    </plurals>
+</resources>
