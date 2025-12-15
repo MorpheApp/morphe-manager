@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Пакет патчів</string>
+    <string name="morphe_home_greeting_1">Який додаток ви хочете пропатчити?</string>
+    <string name="morphe_home_greeting_2">Готові зробити YouTube знову легендарним?</string>
+    <string name="morphe_home_greeting_3">Пристебніться - час патчити!</string>
+    <string name="morphe_home_greeting_4">Ще один день - ще один шедевр без реклами</string>
+    <string name="morphe_home_greeting_5">Бажаєте дивитися рекламу? Я теж ні</string>
+    <string name="morphe_home_greeting_6">Зробімо так, щоб ваші застосунки поводилися як слід</string>
+    <string name="morphe_home_greeting_7">Прогноз на сьогодні: 100% ймовірність патчінгу</string>
+    <string name="morphe_home_bundle_type_api">API пакету</string>
+    <string name="morphe_home_no_internet">Немає підключення до Інтернету</string>
+    <string name="morphe_home_update_error">Помилка оновлення</string>
+    <string name="morphe_home_update_error_subtitle">Перевірте підключення та спробуйте знову</string>
+    <string name="morphe_home_updating_patches">Оновлення патчів…</string>
+    <string name="morphe_home_update_success">Оновлення завершено</string>
+    <string name="morphe_home_patches_updated">Ваші патчі актуальні</string>
+    <string name="morphe_home_patches_are_loading">Патчі завантажуються, будь ласка, зачекайте…</string>
+    <string name="morphe_home_please_wait">Будь ласка, зачекайте…</string>
+    <string name="morphe_home_open_in_browser">Відкрити в браузері</string>
+    <string name="morphe_home_failed_to_open_url">Не вдалося відкрити URL</string>
+    <string name="morphe_home_date_added">Додано</string>
+    <string name="morphe_home_date_updated">Оновлено</string>
+    <string name="morphe_home_check_updates">Перевірити</string>
+    <string name="morphe_home_bundle_update_completed">Оновлення завершено</string>
+    <string name="morphe_home_unknown">Невідомо</string>
+    <string name="morphe_home_timeline">Історія оновлень</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">У вас є непатчений оригінальний APK?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Щоб пропатчити %1$s, потрібна версія %2$s (непатчена).</string>
+    <string name="morphe_home_apk_availability_yes">Так, у мене є</string>
+    <string name="morphe_home_apk_availability_no">Ні, допоможіть мені знайти її</string>
+    <string name="morphe_home_apk_availability_dialog_description">Щоб пропатчити %1$s, мені потрібна версія %2$s (непатчена).</string>
+    <string name="morphe_home_apk_availability_dialog_info">Завантажте APK, але НЕ встановлюйте його.</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Завантажте оригінальний APK з APKMirror</string>
+    <string name="morphe_home_download_instructions_description">Виконайте наступні кроки, щоб завантажити %1$s версію %2$s з APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_steps_title">Інструкції:</string>
+    <string name="morphe_home_download_instructions_step1">Натисніть \"Перейти на APKMirror\"</string>
+    <string name="morphe_home_download_instructions_step2_part1">Прокрутіть вниз і натисніть</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
+    <string name="morphe_home_download_instructions_step3">Дочекайтеся завершення завантаження та не встановлюйте APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Дочекайтеся завершення завантаження та встановіть APK.</string>
+    <string name="morphe_home_download_instructions_step4">Після завершення завантаження знову відкрийте цей додаток</string>
+    <string name="morphe_home_download_instructions_step4_mount">Після встановлення оригінального APK знову відкрийте цей додаток</string>
+    <string name="morphe_home_download_instructions_note">Важливо: Завантажте APK, але не встановлюйте його на свій пристрій.</string>
+    <string name="morphe_home_download_instructions_continue">Перейти на APKMirror</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Виберіть завантажений APK</string>
+    <string name="morphe_home_file_picker_prompt_description">Тепер виберіть файл %1$s APK, який ви щойно завантажили.</string>
+    <string name="morphe_home_file_picker_prompt_open">Відкрити завантажений APK</string>
+    <string name="morphe_home_wrong_package_selected">Очікувався пакет %1$s, але отримано %2$s</string>
+    <string name="morphe_home_any_version">будь-яка версія</string>
+    <string name="morphe_home_recommended_version">Рекомендована версія</string>
+    <string name="morphe_patcher_selected_version">Вибрана версія</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Режим root вимагає, щоб оригінальний APK був встановлений на вашому пристрої перед патчінгом.</string>
+    <string name="morphe_root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
+    <string name="morphe_patcher_mount_dialog_message">Монтувати патчений додаток?</string>
+    <string name="morphe_patcher_mount_ready_message">Готовий до монтування. Патчений додаток замінить встановлену версію.</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_title">Патчінг</string>
+    <string name="morphe_patcher_save_apk">Зберегти APK</string>
+    <string name="morphe_patcher_copy_error">Скопіювати помилку</string>
+    <string name="morphe_patcher_show_error">Показати помилку</string>
+    <string name="morphe_patcher_close">Закрити</string>
+    <string name="morphe_patcher_error_copied">Помилка скопійована у буфер обміну</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d патчів</string>
+    <string name="morphe_patcher_percentage">%1$d%%</string>
+    <string name="morphe_patcher_long_step_warning">Цей крок може зайняти деякий час. Будь ласка, зачекайте…</string>
+    <string name="morphe_patcher_install_dialog_message">Встановити пропатчений додаток?</string>
+    <string name="morphe_patcher_install_conflict_message">Виявлено конфлікт пакетів. Для встановлення нової версії потрібно спочатку видалити попередню версію додатка.</string>
+    <string name="morphe_patcher_install_ready_message">Попередня версія видалена. Тепер ви можете встановити пропатчений додаток.</string>
+    <string name="morphe_patcher_install_cancelled_title">Встановлення скасовано</string>
+    <string name="morphe_patcher_install_cancelled_subtitle">Натисніть кнопку встановлення, щоб спробувати ще раз</string>
+    <string name="morphe_patcher_installing">Встановлення…</string>
+    <string name="morphe_patcher_installing_subtitle">Майже готово до драйву! 🎸</string>
+    <string name="morphe_patcher_success_title">Все готово! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Ваш додаток пропатчено та встановлено!</string>
+    <string name="morphe_patcher_complete_title">Патчінг завершено! ✨</string>
+    <string name="morphe_patcher_failed_title">Ой! Щось пішло не так</string>
+    <string name="morphe_patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
+    <string name="morphe_patcher_failed_dialog_title">Помилка патчінгу</string>
+    <string name="morphe_patcher_unknown_error">Сталася невідома помилка</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Непідтримувана версія</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Для цієї версії додатку немає доступних патчів. Продовження може призвести до того, що додаток не працюватиме.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_warning">Процес патчінгу продовжиться без застосування патчів. Це може призвести до некоректної роботи або повної непрацездатності додатку.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продовжити в будь-якому випадку</string>
+    <string name="morphe_patcher_wrong_package_title">Вибрано невірний пакет</string>
+    <string name="morphe_patcher_wrong_package_description">Обраний APK не відповідає додатку, який ви збиралися патчити.</string>
+    <string name="morphe_patcher_expected_package">Очікуваний пакет</string>
+    <string name="morphe_patcher_selected_package">Обраний пакет</string>
+    <string name="morphe_patcher_message_1">Перетворення вашого додатка на щось дивовижне… 🏆</string>
+    <string name="morphe_patcher_message_2">Навчаємо старі додатки новим трюкам… 🎩</string>
+    <string name="morphe_patcher_message_3">Надаємо вашому додатку цифровий апгрейд… 🔧</string>
+    <string name="morphe_patcher_message_4">Заварюємо цифрову магію… ☕</string>
+    <string name="morphe_patcher_message_5">Рекомендується зробити перерву на каву… ☕</string>
+    <string name="morphe_patcher_message_6">Подивіться надвір, там гарно… 🌤️</string>
+    <string name="morphe_patcher_message_7">Налаштування 1 та 0… 🤖</string>
+    <string name="morphe_patcher_message_8">Розплутування цифрової спагетті… 🍝</string>
+    <string name="morphe_patcher_message_9">Виправлення помилок у непатченому додатку… 🐞</string>
+    <string name="morphe_patcher_message_10">Великі патчі варті очікування… ⏳</string>
+    <string name="morphe_patcher_message_11">Полірування пікселів до блиску… 💎</string>
+    <string name="morphe_patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак «Триває патчінг»… 💺✈️</string>
+    <string name="morphe_patcher_message_13">Готуємо ваш оновлений додаток, гарячий і свіжий… 🍳</string>
+    <string name="morphe_patcher_message_14">Крокуючи через двері патчінгу, і плаваючи по-особливому… 🚪👨‍🚀</string>
+    <string name="morphe_patcher_message_15">Всі системи в нормі… траєкторія патчінгу стабільна… 🚀</string>
+    <string name="morphe_patcher_message_16">Видушення додаткової потужності, як сік з цифрового лимона… 🍋</string>
+    <string name="morphe_patcher_message_17">Закликаємо програму прийняти свою нову, кращу сутність… 🌱</string>
+    <string name="morphe_patcher_message_18">Зміна стану програми з непатченого на патчений… 📦⚛️</string>
+    <string name="morphe_patcher_message_19">Ваш додаток має підвищену температуру, і єдиний рятунок — більше патчів… 🩺🔔</string>
+    <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Повернутися до Morphe</string>
+    <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
+    <string name="morphe_settings_return_to_advanced">Змінити на розширений режим</string>
+    <string name="morphe_settings_return_to_advanced_description">Перемикання на повнофункціональний розширений режим</string>
+    <string name="morphe_share_website">Поділитися вебсайтом</string>
+    <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
+    <string name="morphe_update_use_patches_prereleases">Використовувати передрелізні патчі</string>
+    <string name="morphe_update_use_patches_prereleases_description">Використовувати останні експериментальні патчі</string>
+    <!-- Other strings -->
+    <!--    <string name="patch_bundle_installer">Bundle installer</string>-->
+    <!--    <string name="cli">CLI</string>-->
+    <!--    <string name="manager">Manager</string>-->
+    <string name="close">Закрити</string>
+    <!-- PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35 -->
+    <!-- From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42 -->
+    <!-- From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38 -->
+    <string name="patching">Патчінг</string>
+    <string name="installer_custom_close">Закрити</string>
+    <string name="installing_ellipsis">Встановлення…</string>
+    <string name="save_apk">Зберегти APK</string>
+    <string name="patcher_step_group_patching">Патчінг</string>
+    <!--    <string name="execute_patches">Execute patches</string>-->
+    <!--    <string name="executing_patch">Execute %s</string>-->
+    <!--    <string name="donate">Donate</string>-->
+    <!--    <string name="github">Universal ReVanced Manager GitHub</string>-->
+    <!--    <string name="original_revanced_manager_github">Official ReVanced Manager GitHub</string>-->
+    <!--    <string name="patches_and_manager">Patch Bundles &amp; Manager</string>-->
+    <!--    <string name="update_on_metered_connections">Update on metered connections</string>-->
+    <!--    <string name="update_on_metered_connections_description">Allow patch and manager updates over metered networks</string>-->
+</resources>
