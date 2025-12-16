@@ -112,6 +112,7 @@ fun AppearanceSection(
                             BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
                             BackgroundType.WAVES -> Icons.Outlined.WaterDrop
                             BackgroundType.PARTICLES -> Icons.Outlined.ScatterPlot
+                            BackgroundType.MORPHE -> R.drawable.morphe_settings_icon_bold
                             BackgroundType.NONE -> Icons.Outlined.VisibilityOff
                         },
                         label = stringResource(bgType.displayNameResId),

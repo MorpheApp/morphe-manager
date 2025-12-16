@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Morphe. This is copyrighted content, and not licensed under open source terms. See https://github.com/Morphe/morphe-branding -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"
+        android:pathData="M5.089,3.99994 C3.3202,3.99994,2.99995,5.33328,2.99995,6.13329 L2.99995,17.9734 C3.05197,19.0934,3.68804,20.0001,4.78054,20.0001 C5.87303,20.0001,6.80945,19.0934,6.86148,17.9734 L6.86148,10.7733 C8.31812,12.48,9.45085,15.2133,12,15.32 C15.8273,15.1565,16.3974,8.02051,21.0001,6.207 C21.0001,4.88225,20.6278,3.99994,18.911,3.99994 C17.1422,3.99994,15.6937,6.66662,14.8093,7.83996 C13.9249,9.0133,13.5087,10.2933,12,10.2933 C10.4913,10.2933,10.0231,8.95996,9.19073,7.83995 C8.30633,6.66663,6.8578,3.99994,5.089,3.99994 Z" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"
+        android:pathData="M17.139,16.515 L17.1385,17.9734 C17.1905,19.0934,18.1269,20.0001,19.2194,20.0001 C20.3119,20.0001,20.948,19.0934,21,17.9734 L21,10.327 C21,9.07936,17.1393,15.3291,17.1389,16.515 Z" />
+</vector>
