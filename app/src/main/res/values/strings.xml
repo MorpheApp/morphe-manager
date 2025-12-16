@@ -87,8 +87,7 @@
     <string name="morphe_patcher_failed_dialog_title">Patching Failed</string>
     <string name="morphe_patcher_unknown_error">Unknown error occurred</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Unsupported Version</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">No patches are available for this version of the app. Proceeding may result in a non-functional app.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">The patching process will continue without applying any patches. This may cause the app to malfunction or not work at all.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">This APK is not a recommended app version. Proceeding may result in a non-functional app.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Proceed Anyway</string>
     <string name="morphe_patcher_wrong_package_title">Wrong Package Selected</string>
     <string name="morphe_patcher_wrong_package_description">The selected APK is not for the application you intended to patch.</string>
