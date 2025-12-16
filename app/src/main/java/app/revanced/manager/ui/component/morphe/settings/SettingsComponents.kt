@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
@@ -85,7 +86,7 @@ fun SettingsCard(
 }
 
 /**
- * Individual theme selection button
+ * Selection button for themes, backgrounds, and other options
  * Displays icon and label with visual feedback for selected state
  */
 @Composable
@@ -141,7 +142,7 @@ fun ThemeOption(
                     MaterialTheme.colorScheme.onSurface
                 },
                 maxLines = 1,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
