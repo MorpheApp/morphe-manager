@@ -1,24 +1,33 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 /**
  * Styled app selection button for YouTube and YouTube Music
- * Supports solid color or gradient background
+ * With haptic feedback and adaptive styling for light/dark themes
  */
 @Composable
 fun MorpheAppButton(
@@ -29,41 +38,69 @@ fun MorpheAppButton(
     modifier: Modifier = Modifier,
     gradientColors: List<Color>? = null
 ) {
-    Button(
-        onClick = onClick,
+    val shape = RoundedCornerShape(24.dp)
+    val colors = gradientColors ?: listOf(backgroundColor, backgroundColor)
+    val view = LocalView.current
+    val isDarkMode = isSystemInDarkTheme()
+
+    // Adaptive alpha values - higher opacity in light mode for better contrast
+    val backgroundAlpha = if (isDarkMode) 0.6f else 0.85f
+    val borderAlpha = if (isDarkMode) 0.8f else 0.9f
+
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(72.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
-            contentColor = contentColor
-        ),
-        shape = RoundedCornerShape(20.dp),
-        contentPadding = PaddingValues(0.dp),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 4.dp,
-            pressedElevation = 8.dp
-        )
+            .height(84.dp)
     ) {
-        Box(
+        // Main buttons
+        Surface(
+            onClick = {
+                // Trigger haptic feedback on click
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                onClick()
+            },
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    brush = if (gradientColors != null) {
-                        Brush.horizontalGradient(gradientColors)
-                    } else {
-                        Brush.horizontalGradient(listOf(backgroundColor, backgroundColor))
-                    },
-                    shape = RoundedCornerShape(20.dp)
+                .clip(shape)
+                .border(
+                    width = 1.5.dp,
+                    brush = Brush.linearGradient(
+                        colors = colors.map { it.copy(alpha = borderAlpha) },
+                        start = Offset(0f, 0f), // Top-left
+                        end = Offset.Infinite   // Bottom-right
+                    ),
+                    shape = shape
                 ),
-            contentAlignment = Alignment.Center
+            shape = shape,
+            color = Color.Transparent
         ) {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = colors.map { it.copy(alpha = backgroundAlpha) },
+                            start = Offset(0f, 0f), // Top-left
+                            end = Offset.Infinite   // Bottom-right
+                        )
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    style = TextStyle(
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        // Text shadow for better readability
+                        shadow = Shadow(
+                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                            offset = Offset(0f, 2f),
+                            blurRadius = 4f
+                        )
+                    ),
+                    color = contentColor
+                )
+            }
         }
     }
 }

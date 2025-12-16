@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 
 /**
@@ -193,42 +194,42 @@ private fun AnimatedBackgroundCircles() {
     Canvas(modifier = Modifier.fillMaxSize()) {
         // Circle 1 - large top left
         drawCircle(
-            color = primaryColor.copy(alpha = 0.03f),
+            color = primaryColor.copy(alpha = 0.05f),
             radius = 400f,
             center = Offset(size.width * circle1X.value, size.height * circle1Y.value)
         )
 
         // Circle 2 - medium top right
         drawCircle(
-            color = tertiaryColor.copy(alpha = 0.025f),
+            color = tertiaryColor.copy(alpha = 0.035f),
             radius = 280f,
             center = Offset(size.width * circle2X.value, size.height * circle2Y.value)
         )
 
         // Circle 3 - small center right
         drawCircle(
-            color = tertiaryColor.copy(alpha = 0.02f),
+            color = tertiaryColor.copy(alpha = 0.04f),
             radius = 200f,
             center = Offset(size.width * circle3X.value, size.height * circle3Y.value)
         )
 
         // Circle 4 - medium bottom right
         drawCircle(
-            color = secondaryColor.copy(alpha = 0.025f),
+            color = secondaryColor.copy(alpha = 0.035f),
             radius = 320f,
             center = Offset(size.width * circle4X.value, size.height * circle4Y.value)
         )
 
         // Circle 5 - small bottom left
         drawCircle(
-            color = primaryColor.copy(alpha = 0.02f),
+            color = primaryColor.copy(alpha = 0.04f),
             radius = 180f,
             center = Offset(size.width * circle5X.value, size.height * circle5Y.value)
         )
 
         // Circle 6 - bottom center
         drawCircle(
-            color = secondaryColor.copy(alpha = 0.02f),
+            color = secondaryColor.copy(alpha = 0.04f),
             radius = 220f,
             center = Offset(size.width * circle6X.value, size.height * circle6Y.value)
         )
@@ -256,7 +257,7 @@ private fun PortraitLayout(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Greeting message with fixed height for stability
+        // Greeting message
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -268,24 +269,34 @@ private fun PortraitLayout(
 
         Spacer(Modifier.height(32.dp))
 
-        // App selection buttons
         Column(
             modifier = Modifier.widthIn(max = 500.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            // YouTube button
             MorpheAppButton(
-                text = stringResource(app.morphe.manager.R.string.morphe_home_youtube),
+                text = stringResource(R.string.morphe_home_youtube),
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
+                gradientColors = listOf(
+                    Color(0xFFFF0033), // YouTube red
+                    Color(0xFF1E5AA8), // Brand blue
+                    Color(0xFF00AFAE)  // Brand teal
+                ),
                 onClick = onYouTubeClick
             )
 
+            // YouTube Music button
             MorpheAppButton(
-                text = stringResource(app.morphe.manager.R.string.morphe_home_youtube_music),
-                backgroundColor = Color(0xFF121212),
+                text = stringResource(R.string.morphe_home_youtube_music),
+                backgroundColor = Color(0xFFFF8C3E),
                 contentColor = Color.White,
-                gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
+                gradientColors = listOf(
+                    Color(0xFFFF8C3E), // Orange
+                    Color(0xFF1E5AA8), // Brand blue
+                    Color(0xFF00AFAE)  // Brand teal
+                ),
                 onClick = onYouTubeMusicClick
             )
         }
@@ -313,7 +324,7 @@ private fun LandscapeLayout(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Greeting on the left
+        // Greeting message on the left
         Box(
             modifier = Modifier
                 .weight(1f)
@@ -329,7 +340,6 @@ private fun LandscapeLayout(
             )
         }
 
-        // Buttons on the right - vertically centered
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -337,18 +347,29 @@ private fun LandscapeLayout(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
         ) {
+            // YouTube button
             MorpheAppButton(
-                text = stringResource(app.morphe.manager.R.string.morphe_home_youtube),
+                text = stringResource(R.string.morphe_home_youtube),
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
+                gradientColors = listOf(
+                    Color(0xFFFF0033), // YouTube red
+                    Color(0xFF1E5AA8), // Brand blue
+                    Color(0xFF00AFAE)  // Brand teal
+                ),
                 onClick = onYouTubeClick
             )
 
+            // YouTube Music button
             MorpheAppButton(
-                text = stringResource(app.morphe.manager.R.string.morphe_home_youtube_music),
-                backgroundColor = Color(0xFF121212),
+                text = stringResource(R.string.morphe_home_youtube_music),
+                backgroundColor = Color(0xFFFF8C3E),
                 contentColor = Color.White,
-                gradientColors = listOf(Color(0xFFFF3E5A), Color(0xFFFF8C3E), Color(0xFFFFD23E)),
+                gradientColors = listOf(
+                    Color(0xFFFF8C3E), // Orange
+                    Color(0xFF1E5AA8), // Brand blue
+                    Color(0xFF00AFAE)  // Brand teal
+                ),
                 onClick = onYouTubeMusicClick
             )
         }
