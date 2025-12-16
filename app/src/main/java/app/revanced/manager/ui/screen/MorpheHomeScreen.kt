@@ -16,9 +16,11 @@ import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
+import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.home.*
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import kotlinx.coroutines.delay
@@ -51,7 +53,8 @@ fun MorpheHomeScreen(
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    preReleaseChangedModel: PreReleaseChangedModel
+    preReleaseChangedModel: PreReleaseChangedModel,
+    generalViewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -79,6 +82,8 @@ fun MorpheHomeScreen(
     )
 
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
+
+    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
 
     suspend fun updateMorpheBundleAndUI() {
         bundleUpdateInProgress = true
@@ -193,7 +198,8 @@ fun MorpheHomeScreen(
                         bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
-                }
+                },
+                backgroundType = BackgroundType.valueOf(backgroundType)
             )
 
             // Floating Action Buttons

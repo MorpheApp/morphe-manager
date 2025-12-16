@@ -31,7 +31,8 @@ import app.morphe.manager.R
 import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
-import app.revanced.manager.ui.component.morphe.common.AnimatedBackgroundCircles
+import app.revanced.manager.ui.component.morphe.home.AnimatedBackground
+import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.settings.*
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
@@ -69,6 +70,7 @@ fun MorpheSettingsScreen(
     val dynamicColor by generalViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by generalViewModel.prefs.customAccentColor.getAsState()
     val customThemeColorHex by generalViewModel.prefs.customThemeColor.getAsState()
+    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
 
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
@@ -164,7 +166,9 @@ fun MorpheSettingsScreen(
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize()) {
             // Animated background circles
-            AnimatedBackgroundCircles()
+            AnimatedBackground(
+                type = BackgroundType.valueOf(backgroundType)
+            )
 
             // Main content
             if (isLandscape) {
@@ -194,6 +198,7 @@ fun MorpheSettingsScreen(
                             dynamicColor = dynamicColor,
                             customAccentColorHex = customAccentColorHex,
                             customThemeColorHex = customThemeColorHex,
+                            backgroundType = backgroundType,
                             onBackToAdvanced = {
                                 coroutineScope.launch {
                                     generalViewModel.prefs.useMorpheHomeScreen.update(false)
@@ -255,6 +260,7 @@ fun MorpheSettingsScreen(
                         dynamicColor = dynamicColor,
                         customAccentColorHex = customAccentColorHex,
                         customThemeColorHex = customThemeColorHex,
+                        backgroundType = backgroundType,
                         onBackToAdvanced = {
                             coroutineScope.launch {
                                 generalViewModel.prefs.useMorpheHomeScreen.update(false)

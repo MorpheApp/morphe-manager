@@ -2,7 +2,7 @@ package app.revanced.manager.ui.component.morphe.home
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.common.AnimatedBackgroundCircles
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 
 /**
@@ -35,13 +34,14 @@ import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 fun MorpheMainContent(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
+    backgroundType: BackgroundType = BackgroundType.CIRCLES
 ) {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Animated background circles - now as a separate component
-        AnimatedBackgroundCircles()
+        // Animated background
+        AnimatedBackground(type = backgroundType)
 
         // Adaptive layout based on orientation
         if (isLandscape) {

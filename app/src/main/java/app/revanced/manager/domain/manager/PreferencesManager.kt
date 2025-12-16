@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
+import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
@@ -77,6 +78,10 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
+    val backgroundType = stringPreference(
+        "background_type",
+        BackgroundType.CIRCLES.name
+    )
 
     init {
         runBlocking {
@@ -132,7 +137,8 @@ class PreferencesManager(
         val collapsePatchActionsOnSelection: Boolean? = null,
         val patchSelectionActionOrder: String? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
-        val autoSaveDownloaderApks: Boolean? = null
+        val autoSaveDownloaderApks: Boolean? = null,
+        val backgroundType: String? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -174,7 +180,8 @@ class PreferencesManager(
         collapsePatchActionsOnSelection = collapsePatchActionsOnSelection.get(),
         patchSelectionActionOrder = patchSelectionActionOrder.get(),
         acknowledgedDownloaderPlugins = acknowledgedDownloaderPlugins.get(),
-        autoSaveDownloaderApks = autoSaveDownloaderApks.get()
+        autoSaveDownloaderApks = autoSaveDownloaderApks.get(),
+        backgroundType = backgroundType.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -219,6 +226,7 @@ class PreferencesManager(
         snapshot.patchSelectionActionOrder?.let { patchSelectionActionOrder.value = it }
         snapshot.acknowledgedDownloaderPlugins?.let { acknowledgedDownloaderPlugins.value = it }
         snapshot.autoSaveDownloaderApks?.let { autoSaveDownloaderApks.value = it }
+        snapshot.backgroundType?.let { backgroundType.value = it }
     }
 
 }

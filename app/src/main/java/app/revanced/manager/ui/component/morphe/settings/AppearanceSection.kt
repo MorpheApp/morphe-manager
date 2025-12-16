@@ -16,10 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -28,7 +32,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Appearance settings section
- * Contains theme selection, dark mode options, and color customization
+ * Contains theme selection, dark mode options, background type, and color customization
  */
 @Composable
 fun AppearanceSection(
@@ -37,6 +41,7 @@ fun AppearanceSection(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     customThemeColorHex: String?,
+    backgroundType: String,
     onBackToAdvanced: () -> Unit,
     viewModel: GeneralSettingsViewModel
 ) {
@@ -85,6 +90,38 @@ fun AppearanceSection(
                     )
                 }
             }
+
+            // Background Type Selection
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = stringResource(R.string.morphe_background_type),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                BackgroundType.entries.forEach { bgType ->
+                    val isSelected = backgroundType == bgType.name
+                    BackgroundTypeOption(
+                        type = bgType,
+                        selected = isSelected,
+                        onClick = {
+                            scope.launch {
+                                viewModel.prefs.backgroundType.update(bgType.name)
+                            }
+                        }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 text = stringResource(R.string.theme),
@@ -261,6 +298,94 @@ fun AppearanceSection(
             )
         }
     }
+}
+
+/**
+ * Reusable selection option button
+ */
+@Composable
+private fun SelectionOption(
+    icon: ImageVector,
+    label: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier
+            .height(60.dp)
+            .width(72.dp),
+        shape = RoundedCornerShape(14.dp),
+        color = if (selected) {
+            MaterialTheme.colorScheme.primaryContainer
+        } else {
+            MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+        },
+        border = BorderStroke(
+            width = if (selected) 2.dp else 1.dp,
+            color = if (selected) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+            }
+        ),
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (selected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelSmall,
+                color = if (selected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
+                maxLines = 2,
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+/**
+ * Background type selection button
+ */
+@Composable
+private fun BackgroundTypeOption(
+    type: BackgroundType,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    SelectionOption(
+        icon = when (type) {
+            BackgroundType.CIRCLES -> Icons.Outlined.Circle
+            BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
+            BackgroundType.WAVES -> Icons.Outlined.WaterDrop
+            BackgroundType.PARTICLES -> Icons.Outlined.ScatterPlot
+            BackgroundType.NONE -> Icons.Outlined.VisibilityOff
+        },
+        label = stringResource(type.displayNameResId),
+        selected = selected,
+        onClick = onClick
+    )
 }
 
 /**

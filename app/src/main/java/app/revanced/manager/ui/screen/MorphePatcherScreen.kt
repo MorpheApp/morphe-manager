@@ -43,15 +43,18 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.common.AnimatedBackgroundCircles
+import app.revanced.manager.ui.component.morphe.home.AnimatedBackground
+import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.model.State
+import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
@@ -65,7 +68,8 @@ import kotlin.math.min
 fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel,
-    usingMountInstall: Boolean
+    usingMountInstall: Boolean,
+    generalViewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
@@ -85,6 +89,8 @@ fun MorphePatcherScreen(
         animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
         label = "progress_animation"
     )
+
+    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
@@ -422,7 +428,9 @@ fun MorphePatcherScreen(
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             // Add animated background circles
-            AnimatedBackgroundCircles()
+            AnimatedBackground(
+                type = BackgroundType.valueOf(backgroundType)
+            )
 
             // Existing content box
             Box(modifier = Modifier.fillMaxSize()) {
