@@ -31,9 +31,9 @@ import app.morphe.manager.R
 import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
-import app.revanced.manager.ui.component.morphe.home.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.settings.*
+import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel

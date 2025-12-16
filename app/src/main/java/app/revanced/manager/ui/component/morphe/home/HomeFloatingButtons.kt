@@ -15,10 +15,10 @@ import app.morphe.manager.R
 
 /**
  * Floating action buttons for MorpheHomeScreen
- * Displays update, bundles, and settings buttons
+ * Displays update, bundle, and settings button
  */
 @Composable
-fun MorpheFloatingButtons(
+fun HomeFloatingButtons(
     onUpdateClick: () -> Unit,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,

@@ -32,7 +32,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.PasswordField
-import app.revanced.manager.ui.component.morphe.home.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
 import app.revanced.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import java.security.MessageDigest

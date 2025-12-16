@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.home.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
 
 /**
  * Cancel patching confirmation dialog

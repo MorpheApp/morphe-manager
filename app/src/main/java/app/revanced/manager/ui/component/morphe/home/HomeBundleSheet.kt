@@ -39,7 +39,7 @@ import java.util.Locale
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MorpheBundleSheet(
+fun HomeBundleSheet(
     apiBundle: PatchBundleSource?,
     patchCounts: Map<Int, Int>,
     manualUpdateInfo: Map<Int, PatchBundleRepository.ManualBundleUpdateInfo?>,

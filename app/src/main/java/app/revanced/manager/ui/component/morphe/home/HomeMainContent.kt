@@ -23,6 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 
 /**
@@ -31,7 +33,7 @@ import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
  * Adapts layout based on device orientation
  */
 @Composable
-fun MorpheMainContent(
+fun HomeMainContent(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     backgroundType: BackgroundType = BackgroundType.CIRCLES
@@ -97,7 +99,7 @@ private fun PortraitLayout(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // YouTube button
-            MorpheAppButton(
+            HomeAppButton(
                 text = stringResource(R.string.morphe_home_youtube),
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
@@ -110,7 +112,7 @@ private fun PortraitLayout(
             )
 
             // YouTube Music button
-            MorpheAppButton(
+            HomeAppButton(
                 text = stringResource(R.string.morphe_home_youtube_music),
                 backgroundColor = Color(0xFFFF8C3E),
                 contentColor = Color.White,
@@ -170,7 +172,7 @@ private fun LandscapeLayout(
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
         ) {
             // YouTube button
-            MorpheAppButton(
+            HomeAppButton(
                 text = stringResource(R.string.morphe_home_youtube),
                 backgroundColor = Color(0xFFFF0033),
                 contentColor = Color.White,
@@ -183,7 +185,7 @@ private fun LandscapeLayout(
             )
 
             // YouTube Music button
-            MorpheAppButton(
+            HomeAppButton(
                 text = stringResource(R.string.morphe_home_youtube_music),
                 backgroundColor = Color(0xFFFF8C3E),
                 contentColor = Color.White,

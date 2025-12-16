@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
  * With haptic feedback and adaptive styling for light/dark themes
  */
 @Composable
-fun MorpheAppButton(
+fun HomeAppButton(
     text: String,
     backgroundColor: Color,
     contentColor: Color,

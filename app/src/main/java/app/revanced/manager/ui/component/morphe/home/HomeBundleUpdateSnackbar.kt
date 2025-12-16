@@ -21,7 +21,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
  * Snackbar showing bundle update progress and status
  */
 @Composable
-fun MorpheBundleUpdateSnackbar(
+fun HomeBundleUpdateSnackbar(
     visible: Boolean,
     status: BundleUpdateStatus,
     progress: PatchBundleRepository.BundleUpdateProgress?,

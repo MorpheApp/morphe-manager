@@ -43,9 +43,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.home.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.patcher.*
+import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel

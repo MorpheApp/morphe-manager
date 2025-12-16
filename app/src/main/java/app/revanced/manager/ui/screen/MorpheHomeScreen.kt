@@ -16,8 +16,8 @@ import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
-import app.revanced.manager.ui.component.morphe.home.BackgroundType
 import app.revanced.manager.ui.component.morphe.home.*
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
@@ -161,7 +161,7 @@ fun MorpheHomeScreen(
     }
 
     // All dialogs
-    MorpheHomeDialogs(
+    HomeDialogs(
         state = homeState,
         usingMountInstall = usingMountInstall
     )
@@ -174,7 +174,7 @@ fun MorpheHomeScreen(
                 .padding(paddingValues)
         ) {
             // Bundle update snackbar
-            MorpheBundleUpdateSnackbar(
+            HomeBundleUpdateSnackbar(
                 visible = homeState.showBundleUpdateSnackbar,
                 status = homeState.snackbarStatus,
                 progress = bundleUpdateProgress,
@@ -182,7 +182,7 @@ fun MorpheHomeScreen(
             )
 
             // Main content with app buttons
-            MorpheMainContent(
+            HomeMainContent(
                 onYouTubeClick = {
                     homeState.handleAppClick(
                         packageName = "com.google.android.youtube",
@@ -203,7 +203,7 @@ fun MorpheHomeScreen(
             )
 
             // Floating Action Buttons
-            MorpheFloatingButtons(
+            HomeFloatingButtons(
                 onUpdateClick = onUpdateClick,
                 onBundlesClick = { homeState.showBundlesSheet = true },
                 onSettingsClick = onMorpheSettingsClick,
@@ -215,7 +215,7 @@ fun MorpheHomeScreen(
 
     // Bundle sheet
     if (homeState.showBundlesSheet) {
-        MorpheBundleSheet(
+        HomeBundleSheet(
             apiBundle = homeState.apiBundle,
             patchCounts = patchCounts,
             manualUpdateInfo = manualUpdateInfo,

@@ -32,7 +32,7 @@ import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MorpheBundlePatchesSheet(
+fun HomeBundlePatchesSheet(
     onDismissRequest: () -> Unit,
     src: PatchBundleSource
 ) {

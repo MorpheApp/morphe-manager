@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.component.morphe.home
+package app.revanced.manager.ui.component.morphe.shared
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.*
