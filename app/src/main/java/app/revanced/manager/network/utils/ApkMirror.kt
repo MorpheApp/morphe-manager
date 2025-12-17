@@ -10,7 +10,6 @@ import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.random.Random
 
 internal class ApkMirror(
     private val org: String,
@@ -19,26 +18,12 @@ internal class ApkMirror(
     private val version: String,
     private val arch: String
 ) {
-    /**
-     * Generate a random User-Agent for Android Firefox
-     */
-    fun generateAndroidFirefoxUserAgent(): String {
-        // Android 10 ~ 16
-        val androidVersion = Random.nextInt(10, 17)
-        // Firefox 120 ~ 146
-        val firefoxVersion = Random.nextInt(120, 147)
-        val deviceType = if (Random.nextBoolean()) "Mobile" else "Tablet"
-
-        return "Mozilla/5.0 (Android $androidVersion; $deviceType; rv:$firefoxVersion.0) " +
-                "Gecko/$firefoxVersion.0 Firefox/$firefoxVersion.0"
-    }
-
     suspend fun fetchUrlSuspend(url: String): String =
         suspendCancellableCoroutine { cont ->
             val request = Request.Builder()
                 .url(url)
                 .header("Accept-Language", "en-US,en;q=0.9")
-                .header("User-Agent", generateAndroidFirefoxUserAgent())
+                .header("User-Agent", "APKUpdater-v3.0.0") // https://github.com/rumboalla/apkupdater/blob/dec84e6e3995492569a09966c950d2dbfb521efc/app/src/main/kotlin/com/apkupdater/service/ApkMirrorService.kt#L14
                 .build()
 
             val call = OkHttpClient().newCall(request)
