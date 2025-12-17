@@ -102,7 +102,9 @@ fun MorpheHomeScreen(
 
     preReleaseChangedModel.setEventHandler { usePreRelease ->
         prefs.usePatchesPrereleases.update(usePreRelease)
-        updateMorpheBundleAndUI()
+        scope.launch {
+            updateMorpheBundleAndUI()
+        }
     }
 
     // Show manager update dialog
@@ -215,6 +217,11 @@ fun MorpheHomeScreen(
 
     // Bundle sheet
     if (homeState.showBundlesSheet) {
+        // Update apiBundle every time sources change
+        LaunchedEffect(sources) {
+            homeState.updateBundleData(sources, bundleInfo)
+        }
+
         HomeBundleSheet(
             apiBundle = homeState.apiBundle,
             patchCounts = patchCounts,
