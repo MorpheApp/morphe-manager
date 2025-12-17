@@ -1,16 +1,21 @@
 package app.revanced.manager.ui.component.morphe.home
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.UriHandler
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
@@ -25,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
+import java.net.URLEncoder.encode
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
 private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
@@ -60,7 +66,7 @@ data class WrongPackageDialogState(
  * Manages all dialogs, user interactions, and APK processing
  */
 @Stable
-class MorpheHomeState(
+class HomeStates(
     private val dashboardViewModel: DashboardViewModel,
     private val optionsRepository: PatchOptionsRepository,
     private val context: Context,
@@ -258,7 +264,7 @@ class MorpheHomeState(
      * Handle download instructions dialog continue action
      * Opens browser to APKMirror search and shows file picker prompt
      */
-    fun handleDownloadInstructionsContinue(uriHandler: androidx.compose.ui.platform.UriHandler) {
+    fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
         val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
             pendingPackageName
         } else {
@@ -277,7 +283,7 @@ class MorpheHomeState(
         // Backslash search parameter opens the first search result
         // Use quotes to ensure it's an exact match of all search terms
         val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
-        val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+        val searchUrl = "https://duckduckgo.com/?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
 
         try {
@@ -328,7 +334,7 @@ class MorpheHomeState(
      */
     private fun extractRecommendedVersions(bundleInfo: Map<Int, Any>): Map<String, String> {
         return bundleInfo[0]?.let { apiBundleInfo ->
-            val info = apiBundleInfo as? app.revanced.manager.patcher.patch.PatchBundleInfo
+            val info = apiBundleInfo as? PatchBundleInfo
             info?.let { it ->
                 mapOf(
                     PACKAGE_YOUTUBE to it.patches
@@ -371,13 +377,13 @@ fun rememberMorpheHomeState(
     bundleInfo: Map<Int, Any>,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     usingMountInstall : Boolean
-): MorpheHomeState {
-    val context = androidx.compose.ui.platform.LocalContext.current
+): HomeStates {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val optionsRepository: PatchOptionsRepository = koinInject()
 
     val state = remember(dashboardViewModel) {
-        MorpheHomeState(
+        HomeStates(
             dashboardViewModel = dashboardViewModel,
             optionsRepository = optionsRepository,
             context = context,
@@ -393,7 +399,7 @@ fun rememberMorpheHomeState(
     ) { state.showAndroid11Dialog = false }
 
     state.storagePickerLauncher = rememberLauncherForActivityResult(
-        androidx.activity.result.contract.ActivityResultContracts.GetContent()
+        ActivityResultContracts.GetContent()
     ) { uri -> state.handleApkSelection(uri) }
 
     // Update bundle data when sources or bundleInfo changes
@@ -422,7 +428,7 @@ suspend fun loadLocalApk(
         val pm = context.packageManager
         val packageInfo = pm.getPackageArchiveInfo(
             tempFile.absolutePath,
-            android.content.pm.PackageManager.GET_META_DATA
+            PackageManager.GET_META_DATA
         )
 
         if (packageInfo == null) {

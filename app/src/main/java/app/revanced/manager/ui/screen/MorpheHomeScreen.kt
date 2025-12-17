@@ -1,24 +1,33 @@
 package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Source
+import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.morphe.manager.R
 import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.component.morphe.home.*
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
+import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import kotlinx.coroutines.delay
@@ -51,7 +60,8 @@ fun MorpheHomeScreen(
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    preReleaseChangedModel: PreReleaseChangedModel
+    preReleaseChangedModel: PreReleaseChangedModel,
+    generalViewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -80,6 +90,8 @@ fun MorpheHomeScreen(
 
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
 
+    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
+
     suspend fun updateMorpheBundleAndUI() {
         bundleUpdateInProgress = true
         homeState.isRefreshingBundle = true
@@ -92,6 +104,7 @@ fun MorpheHomeScreen(
             delay(500)
             bundleUpdateInProgress = false
             homeState.isRefreshingBundle = false
+            homeState.updateBundleData(sources, bundleInfo)
         }
     }
 
@@ -156,7 +169,7 @@ fun MorpheHomeScreen(
     }
 
     // All dialogs
-    MorpheHomeDialogs(
+    HomeDialogs(
         state = homeState,
         usingMountInstall = usingMountInstall
     )
@@ -168,16 +181,8 @@ fun MorpheHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Bundle update snackbar
-            MorpheBundleUpdateSnackbar(
-                visible = homeState.showBundleUpdateSnackbar,
-                status = homeState.snackbarStatus,
-                progress = bundleUpdateProgress,
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
-
             // Main content with app buttons
-            MorpheMainContent(
+            HomeMainContent(
                 onYouTubeClick = {
                     homeState.handleAppClick(
                         packageName = "com.google.android.youtube",
@@ -193,27 +198,65 @@ fun MorpheHomeScreen(
                         bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
-                }
+                },
+                backgroundType = BackgroundType.valueOf(backgroundType)
             )
 
+            val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
+
             // Floating Action Buttons
-            MorpheFloatingButtons(
-                onUpdateClick = onUpdateClick,
-                onBundlesClick = { homeState.showBundlesSheet = true },
-                onSettingsClick = onMorpheSettingsClick,
-                hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty(),
-                modifier = Modifier.align(Alignment.BottomEnd)
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp)
+                    .padding(bottom = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalAlignment = Alignment.End
+            ) {
+                // Settings FAB
+                MorpheFloatingButtons(
+                    onClick = onMorpheSettingsClick,
+                    icon = Icons.Default.Settings,
+                    contentDescription = stringResource(R.string.settings)
+                )
+
+                // Update FAB
+                if (hasManagerUpdate) {
+                    MorpheFloatingButtons(
+                        onClick = onUpdateClick,
+                        icon = Icons.Outlined.Update,
+                        contentDescription = stringResource(R.string.update),
+                        showBadge = true
+                    )
+                }
+
+                // Bundles FAB
+                MorpheFloatingButtons(
+                    onClick = { homeState.showBundlesSheet = true },
+                    icon = Icons.Outlined.Source,
+                    contentDescription = stringResource(R.string.morphe_home_bundles),
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                )
+            }
+
+            // Bundle update snackbar
+            HomeBundleUpdateSnackbar(
+                visible = homeState.showBundleUpdateSnackbar,
+                status = homeState.snackbarStatus,
+                progress = bundleUpdateProgress,
+                modifier = Modifier.align(Alignment.TopCenter)
             )
         }
     }
 
     // Bundle sheet
     if (homeState.showBundlesSheet) {
-        MorpheBundleSheet(
+        HomeBundleSheet(
             apiBundle = homeState.apiBundle,
             patchCounts = patchCounts,
             manualUpdateInfo = manualUpdateInfo,
-            isRefreshing = homeState.isRefreshingBundle,
+            isRefreshing = homeState.isRefreshingBundle || bundleUpdateProgress != null,
             onDismiss = { homeState.showBundlesSheet = false },
             onRefresh = {
                 scope.launch {

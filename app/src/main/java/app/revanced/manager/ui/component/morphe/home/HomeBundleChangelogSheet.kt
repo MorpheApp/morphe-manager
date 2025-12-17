@@ -24,7 +24,7 @@ import app.revanced.manager.util.simpleMessage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MorpheBundleChangelogSheet(
+fun HomeBundleChangelogSheet(
     src: RemotePatchBundle,
     onDismissRequest: () -> Unit
 ) {

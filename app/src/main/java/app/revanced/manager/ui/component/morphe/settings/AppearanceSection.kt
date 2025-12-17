@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -28,7 +29,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Appearance settings section
- * Contains theme selection, dark mode options, and color customization
+ * Contains theme selection, dark mode options, background type, and color customization
  */
 @Composable
 fun AppearanceSection(
@@ -37,6 +38,7 @@ fun AppearanceSection(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     customThemeColorHex: String?,
+    backgroundType: String,
     onBackToAdvanced: () -> Unit,
     viewModel: GeneralSettingsViewModel
 ) {
@@ -85,6 +87,47 @@ fun AppearanceSection(
                     )
                 }
             }
+
+            // Background Type Selection
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = stringResource(R.string.morphe_background_type),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                BackgroundType.entries.forEach { bgType ->
+                    val isSelected = backgroundType == bgType.name
+                    ThemeOption(
+                        icon = when (bgType) {
+                            BackgroundType.CIRCLES -> Icons.Outlined.Circle
+                            BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
+                            BackgroundType.WAVES -> Icons.Outlined.Waves
+                            BackgroundType.PARTICLES -> Icons.Outlined.ScatterPlot
+                            BackgroundType.SHAPES -> Icons.Outlined.Pentagon
+                            BackgroundType.NONE -> Icons.Outlined.VisibilityOff
+                        },
+                        label = stringResource(bgType.displayNameResId),
+                        selected = isSelected,
+                        onClick = {
+                            scope.launch {
+                                viewModel.prefs.backgroundType.update(bgType.name)
+                            }
+                        },
+                        modifier = Modifier.width(80.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 text = stringResource(R.string.theme),
@@ -279,36 +322,38 @@ private fun ColorPresetsRow(
         if (isAccent) {
             // Accent color presets
             listOf(
-                Color(0xFF6750A4),
-                Color(0xFF386641),
-                Color(0xFF0061A4),
-                Color(0xFF8E24AA),
-                Color(0xFFEF6C00),
-                Color(0xFF00897B),
-                Color(0xFFD81B60),
-                Color(0xFF5C6BC0),
-                Color(0xFF43A047),
-                Color(0xFFFF7043),
-                Color(0xFF1DE9B6),
-                Color(0xFFFFC400),
-                Color(0xFF00B8D4),
-                Color(0xFFBA68C8)
+                Color(0xFF7C4DFF), // Electric Purple
+                Color(0xFF536DFE), // Indigo Neon
+                Color(0xFF2979FF), // Hyper Blue
+                Color(0xFF00B0FF), // Cyan Pop
+                Color(0xFF00E5FF), // Aqua Glow
+                Color(0xFF1DE9B6), // Mint Neon
+                Color(0xFF00E676), // Green Flash
+                Color(0xFF76FF03), // Lime Shock
+                Color(0xFFFFD600), // Yellow Punch
+                Color(0xFFFF9100), // Orange Blast
+                Color(0xFFFF5252), // Red Pulse
+                Color(0xFFFF4081), // Pink Voltage
+                Color(0xFFE040FB), // Purple Pop
+                Color(0xFFB388FF)  // Lavender Glow
             )
         } else {
-            // Theme color presets (dark backgrounds)
+            // Theme color presets
             listOf(
-                Color(0xFF1C1B1F),
-                Color(0xFF2D2A32),
-                Color(0xFF1A1A2E),
-                Color(0xFF0F0F1E),
-                Color(0xFF16213E),
-                Color(0xFF1F1B24),
-                Color(0xFF0A1929),
-                Color(0xFF1B1B2F),
-                Color(0xFF162447),
-                Color(0xFF1F1D2B),
-                Color(0xFF2C2C54),
-                Color(0xFF1E1E2E)
+                Color(0xFF311B92), // Deep Purple
+                Color(0xFF1A237E), // Indigo
+                Color(0xFF0D47A1), // Blue
+                Color(0xFF01579B), // Light Blue (dark)
+                Color(0xFF004D40), // Teal
+                Color(0xFF1B5E20), // Green
+                Color(0xFF33691E), // Light Green (dark)
+                Color(0xFF827717), // Lime (dark)
+                Color(0xFFF57F17), // Yellow (dark)
+                Color(0xFFE65100), // Orange
+                Color(0xFFBF360C), // Deep Orange
+                Color(0xFFB71C1C), // Red
+                Color(0xFF880E4F), // Pink
+                Color(0xFF4A148C)  // Purple
             )
         }
     }

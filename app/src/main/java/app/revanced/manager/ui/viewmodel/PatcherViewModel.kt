@@ -442,11 +442,12 @@ class PatcherViewModel(
         }
     }
 
-    private var inputFile: File? by savedStateHandle.saveableVar()
+    var inputFile: File? by savedStateHandle.saveableVar()
+        private set
     private var requiresSplitPreparation by savedStateHandle.saveableVar {
         initialSplitRequirement(input.selectedApp)
     }
-    private val outputFile = tempDir.resolve("output.apk")
+    val outputFile = tempDir.resolve("output.apk")
 
     private val logs by savedStateHandle.saveable<MutableList<Pair<LogLevel, String>>> { mutableListOf() }
     private val logger = object : Logger() {
@@ -1272,7 +1273,7 @@ class PatcherViewModel(
         installerManager.cleanup(plan)
         updateInstallingState(false)
         stopInstallProgressToasts()
-        val installType = if (plan?.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
+        val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
         installStatus = InstallCompletionStatus.Success(packageName)
         suppressFailureAfterSuccess = true
 

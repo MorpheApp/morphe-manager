@@ -209,7 +209,6 @@ fun AboutSettingsScreen(
 
 /**
  * Social link button
- * Styled button for opening social media links (matching MorpheDialog style)
  */
 @Composable
 private fun SocialIconButton(
