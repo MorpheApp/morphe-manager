@@ -9,9 +9,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.*
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.repository.ApkMirrorRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.network.utils.ApkMirror
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
@@ -267,17 +267,17 @@ class MorpheHomeState(
         val deviceArch = Build.SUPPORTED_ABIS.first()
         val arch = if (isYouTubeMusic) deviceArch else "universal"
 
-        // Firefox: ApkMirror("mozilla", "firefox", "firefox-fast-private-browser", "146.0", "universal")
-        // WhatsApp: ApkMirror("whatsapp-inc", "whatsapp", "whatsapp-messenger", "2.25.37.73", "universal")
-        // YouTube: ApkMirror("google-inc", "youtube", "youtube", "20.21.37", "universal")
-        // YouTube Music: ApkMirror("google-inc", "youtube-music", "youtube-music", "8.10.52", "arm64-v8a")
-        val apkMirror = ApkMirror(org, name, name, version, arch)
+        // Firefox: ApkMirrorRepository("mozilla", "firefox", "firefox-fast-private-browser", "146.0", "universal")
+        // WhatsApp: ApkMirrorRepository("whatsapp-inc", "whatsapp", "whatsapp-messenger", "2.25.37.73", "universal")
+        // YouTube: ApkMirrorRepository("google-inc", "youtube", "youtube", "20.21.37", "universal")
+        // YouTube Music: ApkMirrorRepository("google-inc", "youtube-music", "youtube-music", "8.10.52", "arm64-v8a")
+        val apkMirrorRepository = ApkMirrorRepository(org, name, name, version, arch)
 
         scope.launch {
             var finalUrl: String
 
             val downloadPageUrl = withContext(Dispatchers.IO) {
-                apkMirror.getDownloadPageUrl()
+                apkMirrorRepository.getDownloadPageUrl()
             }
             if (downloadPageUrl != null) {
                 finalUrl = downloadPageUrl

@@ -1,5 +1,6 @@
-package app.revanced.manager.network.utils
+package app.revanced.manager.domain.repository
 
+import app.morphe.manager.BuildConfig
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
 import okhttp3.Callback
@@ -10,7 +11,7 @@ import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.coroutines.resume
 
-internal class ApkMirror(
+class ApkMirrorRepository(
     private val org: String,
     private val shortName: String,
     private val fullName: String,
@@ -21,8 +22,7 @@ internal class ApkMirror(
         suspendCancellableCoroutine { cont ->
             val request = Request.Builder()
                 .url(url)
-                .header("Accept-Language", "en-US,en;q=0.9")
-                .header("User-Agent", "APKUpdater-v3.0.0") // https://github.com/rumboalla/apkupdater/blob/dec84e6e3995492569a09966c950d2dbfb521efc/app/src/main/kotlin/com/apkupdater/service/ApkMirrorService.kt#L14
+                .header("User-Agent", "Morphe-Manager/${BuildConfig.VERSION_CODE}")
                 .build()
 
             val call = OkHttpClient().newCall(request)
