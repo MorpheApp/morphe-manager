@@ -40,6 +40,7 @@ import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
+import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
@@ -416,7 +417,8 @@ fun MorphePatcherScreen(
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
                         .navigationBarsPadding()
-                        .padding(16.dp),
+                        .padding(horizontal = 24.dp)
+                        .padding(bottom = 24.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Bottom
                 ) {
@@ -424,33 +426,33 @@ fun MorphePatcherScreen(
                     when {
                         patcherSucceeded == null -> {
                             // Cancel button during patching
-                            FloatingActionButton(
+                            MorpheFloatingButtons(
                                 onClick = { state.showCancelDialog = true },
+                                icon = Icons.Default.Close,
+                                contentDescription = stringResource(android.R.string.cancel),
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
                                 contentColor = MaterialTheme.colorScheme.onErrorContainer
-                            ) {
-                                Icon(Icons.Default.Close, stringResource(android.R.string.cancel))
-                            }
+                            )
                         }
 
                         else -> {
                             // Empty spacer for symmetry
-                            Spacer(Modifier.size(56.dp))
+                            Spacer(Modifier.size(64.dp))
                         }
                     }
 
                     // Center: Home button (only show when patching is complete)
                     if (patcherSucceeded != null) {
-                        FloatingActionButton(
+                        MorpheFloatingButtons(
                             onClick = onBackClick,
+                            icon = Icons.Default.Home,
+                            contentDescription = "Home",
                             containerColor = MaterialTheme.colorScheme.secondaryContainer,
                             contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                        ) {
-                            Icon(Icons.Default.Home, "Home")
-                        }
+                        )
                     } else {
                         // Empty spacer during patching
-                        Spacer(Modifier.size(56.dp))
+                        Spacer(Modifier.size(64.dp))
                     }
 
                     // Right: Save APK button or Show Error button
@@ -458,43 +460,35 @@ fun MorphePatcherScreen(
                         state.hasPatchingError -> {
                             // Show error button only for patching errors
                             if (!state.showErrorBottomSheet) {
-                                FloatingActionButton(
+                                MorpheFloatingButtons(
                                     onClick = { state.showErrorBottomSheet = true },
+                                    icon = Icons.Default.Error,
+                                    contentDescription = stringResource(R.string.morphe_patcher_show_error),
                                     containerColor = MaterialTheme.colorScheme.errorContainer,
                                     contentColor = MaterialTheme.colorScheme.onErrorContainer
-                                ) {
-                                    Icon(
-                                        Icons.Default.Error,
-                                        stringResource(R.string.morphe_patcher_show_error)
-                                    )
-                                }
+                                )
                             } else {
                                 // Empty spacer for symmetry when error sheet is shown
-                                Spacer(Modifier.size(56.dp))
+                                Spacer(Modifier.size(64.dp))
                             }
                         }
-
                         patcherSucceeded == true && !state.hasPatchingError -> {
                             // Save APK button
-                            FloatingActionButton(
+                            MorpheFloatingButtons(
                                 onClick = {
                                     if (!state.isSaving) {
                                         exportApkLauncher.launch(exportFileName)
                                     }
                                 },
+                                icon = Icons.Outlined.Save,
+                                contentDescription = stringResource(R.string.morphe_patcher_save_apk),
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                            ) {
-                                Icon(
-                                    Icons.Outlined.Save,
-                                    stringResource(R.string.morphe_patcher_save_apk)
-                                )
-                            }
+                            )
                         }
-
                         else -> {
                             // Empty spacer for symmetry
-                            Spacer(Modifier.size(56.dp))
+                            Spacer(Modifier.size(64.dp))
                         }
                     }
                 }
