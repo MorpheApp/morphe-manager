@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,7 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -101,7 +101,6 @@ fun HomeDialogs(
     // Unsupported Version Dialog
     state.showUnsupportedVersionDialog?.let { dialogState ->
         UnsupportedVersionWarningDialog(
-            packageName = dialogState.packageName,
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion,
             onDismiss = {
@@ -301,6 +300,7 @@ private fun ApkAvailabilityDialog(
  * Dialog 2: Download instructions dialog
  * Provides step-by-step guide for downloading APK from APKMirror
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun DownloadInstructionsDialog(
     appName: String,
@@ -553,7 +553,6 @@ private fun FilePickerPromptDialog(
  */
 @Composable
 private fun UnsupportedVersionWarningDialog(
-    packageName: String,
     version: String,
     recommendedVersion: String?,
     onDismiss: () -> Unit,
@@ -644,25 +643,6 @@ private fun UnsupportedVersionWarningDialog(
                         .padding(12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // Package Name
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.package_name),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = packageName,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontFamily = FontFamily.Monospace,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            lineHeight = 20.sp
-                        )
-                    }
-
                     // Selected Version
                     Column(
                         modifier = Modifier.fillMaxWidth(),
@@ -701,24 +681,6 @@ private fun UnsupportedVersionWarningDialog(
                         }
                     }
                 }
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Info,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.tertiary,
-                    modifier = Modifier.size(20.dp)
-                )
-                Text(
-                    text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_warning),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.weight(1f)
-                )
             }
         }
     }
