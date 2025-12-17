@@ -9,7 +9,6 @@ import okhttp3.Response
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 internal class ApkMirror(
     private val org: String,
@@ -18,7 +17,7 @@ internal class ApkMirror(
     private val version: String,
     private val arch: String
 ) {
-    suspend fun fetchUrlSuspend(url: String): String =
+    suspend fun fetchUrlSuspend(url: String): String? =
         suspendCancellableCoroutine { cont ->
             val request = Request.Builder()
                 .url(url)
@@ -31,18 +30,20 @@ internal class ApkMirror(
 
             call.enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    if (cont.isActive) cont.resumeWithException(e)
+                    if (cont.isActive) cont.resume(null)
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     response.use {
                         if (!response.isSuccessful) {
-                            cont.resumeWithException(
-                                IOException("HTTP ${response.code}")
-                            )
+                            if (cont.isActive) cont.resume(null)
                             return
                         }
-                        cont.resume(response.body!!.string())
+
+                        val body = response.body?.string()
+                        if (cont.isActive) {
+                            cont.resume(body)
+                        }
                     }
                 }
             })
@@ -54,7 +55,7 @@ internal class ApkMirror(
         // https://www.apkmirror.com/apk/mozilla/firefox/firefox-fast-private-browser-146-0-release
         val releaseUrl =
             "$baseUrl/apk/$org/$shortName/$fullName-${version.replace(".", "-")}-release"
-        val releaseHtml = fetchUrlSuspend(releaseUrl)
+        val releaseHtml = fetchUrlSuspend(releaseUrl) ?: return null
         val releaseDoc = Jsoup.parse(releaseHtml)
 
         val rows = releaseDoc.select("div.table-row")
