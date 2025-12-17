@@ -173,11 +173,11 @@ private fun ApkAvailabilityDialog(
         title = stringResource(R.string.morphe_home_apk_availability_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_home_apk_availability_no),
-                onPrimaryClick = onNeedApk,
-                primaryIcon = Icons.Outlined.Download,
-                secondaryText = stringResource(R.string.morphe_home_apk_availability_yes),
-                onSecondaryClick = onHaveApk
+                primaryText = stringResource(R.string.morphe_home_apk_availability_yes),
+                onPrimaryClick = onHaveApk,
+                secondaryText = stringResource(R.string.morphe_home_apk_availability_no),
+                onSecondaryClick = onNeedApk,
+                secondaryIcon = Icons.Outlined.Download,
             )
         }
     ) {
