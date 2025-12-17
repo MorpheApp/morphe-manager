@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -89,11 +88,10 @@ fun SettingsCard(
 /**
  * Selection button for themes, backgrounds, and other options
  * Displays icon and label with visual feedback for selected state
- * Supports both ImageVector and drawable resource icons
  */
 @Composable
 fun ThemeOption(
-    icon: Any,
+    icon: ImageVector,
     label: String,
     selected: Boolean,
     onClick: () -> Unit,
@@ -124,32 +122,16 @@ fun ThemeOption(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            when (icon) {
-                is ImageVector -> {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = if (selected) {
-                            MaterialTheme.colorScheme.onPrimaryContainer
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        },
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-                is Int -> {
-                    Icon(
-                        painter = painterResource(icon),
-                        contentDescription = null,
-                        tint = if (selected) {
-                            MaterialTheme.colorScheme.onPrimaryContainer
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        },
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (selected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
+                modifier = Modifier.size(24.dp)
+            )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = label,

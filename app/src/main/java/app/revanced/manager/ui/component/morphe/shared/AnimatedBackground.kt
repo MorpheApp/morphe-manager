@@ -26,7 +26,7 @@ enum class BackgroundType(val displayNameResId: Int) {
     RINGS(R.string.morphe_background_type_rings),
     WAVES(R.string.morphe_background_type_waves),
     PARTICLES(R.string.morphe_background_type_particles),
-    MORPHE(R.string.app_name),
+    SHAPES(R.string.morphe_background_type_shapes),
     NONE(R.string.morphe_background_type_none);
 
     companion object {
@@ -48,7 +48,7 @@ fun AnimatedBackground(
         BackgroundType.RINGS -> RingsBackground(modifier)
         BackgroundType.WAVES -> WavesBackground(modifier)
         BackgroundType.PARTICLES -> ParticlesBackground(modifier)
-        BackgroundType.MORPHE -> LogosBackground(modifier)
+        BackgroundType.SHAPES -> LogosBackground(modifier)
         BackgroundType.NONE -> {} // No background
     }
 }
@@ -738,7 +738,7 @@ private fun ParticlesBackground(modifier: Modifier = Modifier) {
 }
 
 /**
- * Morphe logos floating in space
+ * Geometric shapes floating in space
  */
 @Composable
 private fun LogosBackground(modifier: Modifier = Modifier) {
@@ -746,30 +746,30 @@ private fun LogosBackground(modifier: Modifier = Modifier) {
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor = MaterialTheme.colorScheme.tertiary
 
-    val infiniteTransition = rememberInfiniteTransition(label = "logos")
+    val infiniteTransition = rememberInfiniteTransition(label = "shapes")
 
-    // Create logos with varied trajectories
-    val logos = remember {
+    // Create shapes with varied trajectories
+    val shapes = remember {
         listOf(
             // Top area - horizontal movements
-            LogoConfig(0.1f, 0.15f, 0.3f, 0.2f, 30000, 0f),
-            LogoConfig(0.7f, 0.1f, 0.9f, 0.15f, 28000, 45f),
+            ShapeConfig(0.1f, 0.15f, 0.3f, 0.2f, 30000, 0f, ShapeType.TRIANGLE),
+            ShapeConfig(0.7f, 0.1f, 0.9f, 0.15f, 28000, 0f, ShapeType.SQUARE),
 
             // Upper middle - diagonal movements
-            LogoConfig(0.15f, 0.35f, 0.4f, 0.45f, 32000, 90f),
-            LogoConfig(0.85f, 0.4f, 0.65f, 0.3f, 29000, 135f),
+            ShapeConfig(0.15f, 0.35f, 0.4f, 0.45f, 32000, 0f, ShapeType.DIAMOND),
+            ShapeConfig(0.85f, 0.4f, 0.65f, 0.3f, 29000, 0f, ShapeType.TRIANGLE),
 
             // Lower middle - varied movements
-            LogoConfig(0.2f, 0.6f, 0.35f, 0.7f, 31000, 180f),
-            LogoConfig(0.8f, 0.65f, 0.6f, 0.55f, 27000, 225f),
+            ShapeConfig(0.2f, 0.6f, 0.35f, 0.7f, 31000, 180f, ShapeType.SQUARE),
+            ShapeConfig(0.8f, 0.65f, 0.6f, 0.55f, 27000, 0f, ShapeType.DIAMOND),
 
             // Bottom area - horizontal movements
-            LogoConfig(0.15f, 0.85f, 0.35f, 0.9f, 33000, 270f),
-            LogoConfig(0.75f, 0.9f, 0.55f, 0.85f, 26000, 315f)
+            ShapeConfig(0.15f, 0.85f, 0.35f, 0.9f, 33000, 180f, ShapeType.TRIANGLE),
+            ShapeConfig(0.75f, 0.9f, 0.55f, 0.85f, 26000, 0f, ShapeType.SQUARE)
         )
     }
 
-    val logoAnimations = logos.map { config ->
+    val shapeAnimations = shapes.map { config ->
         val x = infiniteTransition.animateFloat(
             initialValue = config.startX,
             targetValue = config.endX,
@@ -777,7 +777,7 @@ private fun LogosBackground(modifier: Modifier = Modifier) {
                 animation = tween(config.duration, easing = LinearEasing),
                 repeatMode = RepeatMode.Reverse
             ),
-            label = "logoX${config.startX}"
+            label = "shapeX${config.startX}"
         )
         val y = infiniteTransition.animateFloat(
             initialValue = config.startY,
@@ -786,7 +786,7 @@ private fun LogosBackground(modifier: Modifier = Modifier) {
                 animation = tween((config.duration * 1.1f).toInt(), easing = LinearEasing),
                 repeatMode = RepeatMode.Reverse
             ),
-            label = "logoY${config.startY}"
+            label = "shapeY${config.startY}"
         )
         val rotation = infiniteTransition.animateFloat(
             initialValue = config.initialRotation,
@@ -795,151 +795,135 @@ private fun LogosBackground(modifier: Modifier = Modifier) {
                 animation = tween((config.duration * 2), easing = LinearEasing),
                 repeatMode = RepeatMode.Restart
             ),
-            label = "logoRot${config.initialRotation}"
+            label = "shapeRot${config.initialRotation}"
         )
         Triple(x, y, rotation)
     }
 
     Canvas(modifier = modifier.fillMaxSize()) {
-        logoAnimations.forEachIndexed { index, (x, y, rotation) ->
+        shapeAnimations.forEachIndexed { index, (x, y, rotation) ->
             val color = when (index % 3) {
                 0 -> primaryColor
                 1 -> secondaryColor
                 else -> tertiaryColor
-            }.copy(alpha = 0.15f)
+            }.copy(alpha = 0.12f)
 
             val centerX = size.width * x.value
             val centerY = size.height * y.value
-            val logoSize = 180f
+            val shapeSize = 140f
 
-            // Rotate and draw logo
+            // Rotate and draw shape
             rotate(rotation.value, Offset(centerX, centerY)) {
-                drawMorpheLogo(centerX, centerY, logoSize, color)
+                when (shapes[index].type) {
+                    ShapeType.TRIANGLE -> drawTriangle(centerX, centerY, shapeSize, color)
+                    ShapeType.SQUARE -> drawSquare(centerX, centerY, shapeSize, color)
+                    ShapeType.DIAMOND -> drawDiamond(centerX, centerY, shapeSize, color)
+                }
             }
         }
     }
 }
 
 /**
- * Draw Morphe logo outline
+ * Draw triangle outline
  */
-private fun DrawScope.drawMorpheLogo(
+private fun DrawScope.drawTriangle(
     centerX: Float,
     centerY: Float,
     size: Float,
     color: Color
 ) {
-    val scale = size / 24f // Scale from 24dp viewBox to desired size
-
-    // Translate to center the logo
-    val offsetX = centerX - (24f * scale / 2f)
-    val offsetY = centerY - (24f * scale / 2f)
-
-    // Combined path - both M shape and right part
     val path = Path().apply {
-        // Path 1 - main M shape
-        moveTo(4.716f * scale + offsetX, 3.50031f * scale + offsetY)
+        val height = size * 0.866f // Height of equilateral triangle
+        val halfSize = size / 2f
 
-        cubicTo(
-            2.84895f * scale + offsetX, 3.50031f * scale + offsetY,
-            2.50031f * scale + offsetX, 4.91697f * scale + offsetY,
-            2.50031f * scale + offsetX, 5.76697f * scale + offsetY
-        )
-
-        lineTo(2.50031f * scale + offsetX, 18.347f * scale + offsetY)
-
-        cubicTo(
-            2.55522f * scale + offsetX, 19.5369f * scale + offsetY,
-            3.34356f * scale + offsetX, 20.5003f * scale + offsetY,
-            4.49674f * scale + offsetX, 20.5003f * scale + offsetY
-        )
-
-        cubicTo(
-            5.64992f * scale + offsetX, 20.5003f * scale + offsetY,
-            6.63835f * scale + offsetX, 19.537f * scale + offsetY,
-            6.69327f * scale + offsetX, 18.347f * scale + offsetY
-        )
-
-        lineTo(6.69327f * scale + offsetX, 10.697f * scale + offsetY)
-
-        cubicTo(
-            8.23084f * scale + offsetX, 12.5103f * scale + offsetY,
-            9.30955f * scale + offsetX, 15.627f * scale + offsetY,
-            12.0003f * scale + offsetX, 15.7403f * scale + offsetY
-        )
-
-        cubicTo(
-            15.7934f * scale + offsetX, 15.7403f * scale + offsetY,
-            17.9174f * scale + offsetX, 6.59783f * scale + offsetY,
-            21.5003f * scale + offsetX, 5.96401f * scale + offsetY
-        )
-
-        cubicTo(
-            21.4703f * scale + offsetX, 4.73698f * scale + offsetY,
-            21.0961f * scale + offsetX, 3.50031f * scale + offsetY,
-            19.284f * scale + offsetX, 3.50031f * scale + offsetY
-        )
-
-        cubicTo(
-            17.417f * scale + offsetX, 3.50031f * scale + offsetY,
-            15.8991f * scale + offsetX, 6.33364f * scale + offsetY,
-            14.9656f * scale + offsetX, 7.5803f * scale + offsetY
-        )
-
-        cubicTo(
-            14.0321f * scale + offsetX, 8.82696f * scale + offsetY,
-            13.5928f * scale + offsetX, 10.187f * scale + offsetY,
-            12.0003f * scale + offsetX, 10.187f * scale + offsetY
-        )
-
-        cubicTo(
-            10.4078f * scale + offsetX, 10.187f * scale + offsetY,
-            9.9136f * scale + offsetX, 8.77034f * scale + offsetY,
-            9.03499f * scale + offsetX, 7.58034f * scale + offsetY
-        )
-
-        cubicTo(
-            8.10146f * scale + offsetX, 6.33364f * scale + offsetY,
-            6.58305f * scale + offsetX, 3.50031f * scale + offsetY,
-            4.716f * scale + offsetX, 3.50031f * scale + offsetY
-        )
-
-        close()
-
-        // Path 2 - right part
-        moveTo(17.3067f * scale + offsetX, 15.8f * scale + offsetY)
-        lineTo(17.3067f * scale + offsetX, 18.347f * scale + offsetY)
-
-        cubicTo(
-            17.3616f * scale + offsetX, 19.537f * scale + offsetY,
-            18.35f * scale + offsetX, 20.5003f * scale + offsetY,
-            19.5032f * scale + offsetX, 20.5003f * scale + offsetY
-        )
-
-        cubicTo(
-            20.6564f * scale + offsetX, 20.5003f * scale + offsetY,
-            21.4453f * scale + offsetX, 19.537f * scale + offsetY,
-            21.5002f * scale + offsetX, 18.347f * scale + offsetY
-        )
-
-        lineTo(21.5002f * scale + offsetX, 9.2f * scale + offsetY)
-
-        cubicTo(
-            21.5002f * scale + offsetX, 7.8742f * scale + offsetY,
-            17.3067f * scale + offsetX, 13.9316f * scale + offsetY,
-            17.3067f * scale + offsetX, 15.8f * scale + offsetY
-        )
-
+        // Top point
+        moveTo(centerX, centerY - height / 2f)
+        // Bottom right
+        lineTo(centerX + halfSize, centerY + height / 2f)
+        // Bottom left
+        lineTo(centerX - halfSize, centerY + height / 2f)
         close()
     }
 
-    // Draw path with stroke
     drawPath(
         path = path,
         color = color,
-        style = Stroke(width = 3f)
+        style = Stroke(width = 4f)
     )
 }
+
+/**
+ * Draw square outline
+ */
+private fun DrawScope.drawSquare(
+    centerX: Float,
+    centerY: Float,
+    size: Float,
+    color: Color
+) {
+    val path = Path().apply {
+        val halfSize = size / 2f
+
+        moveTo(centerX - halfSize, centerY - halfSize)
+        lineTo(centerX + halfSize, centerY - halfSize)
+        lineTo(centerX + halfSize, centerY + halfSize)
+        lineTo(centerX - halfSize, centerY + halfSize)
+        close()
+    }
+
+    drawPath(
+        path = path,
+        color = color,
+        style = Stroke(width = 4f)
+    )
+}
+
+/**
+ * Draw diamond outline
+ */
+private fun DrawScope.drawDiamond(
+    centerX: Float,
+    centerY: Float,
+    size: Float,
+    color: Color
+) {
+    val path = Path().apply {
+        val halfSize = size / 2f
+
+        // Top point
+        moveTo(centerX, centerY - halfSize)
+        // Right point
+        lineTo(centerX + halfSize, centerY)
+        // Bottom point
+        lineTo(centerX, centerY + halfSize)
+        // Left point
+        lineTo(centerX - halfSize, centerY)
+        close()
+    }
+
+    drawPath(
+        path = path,
+        color = color,
+        style = Stroke(width = 4f)
+    )
+}
+
+private enum class ShapeType {
+    TRIANGLE,
+    SQUARE,
+    DIAMOND
+}
+
+private data class ShapeConfig(
+    val startX: Float,      // Starting X position (0-1)
+    val startY: Float,      // Starting Y position (0-1)
+    val endX: Float,        // Ending X position (0-1)
+    val endY: Float,        // Ending Y position (0-1)
+    val duration: Int,      // Animation duration in ms
+    val initialRotation: Float, // Starting rotation angle
+    val type: ShapeType     // Type of shape to draw
+)
 
 private data class ParticleConfig(
     val startX: Float,      // Starting X position (0-1)
@@ -948,13 +932,4 @@ private data class ParticleConfig(
     val endY: Float,        // Ending Y position (0-1)
     val size: Float,        // Particle size
     val duration: Int       // Animation duration in ms
-)
-
-private data class LogoConfig(
-    val startX: Float,      // Starting X position (0-1)
-    val startY: Float,      // Starting Y position (0-1)
-    val endX: Float,        // Ending X position (0-1)
-    val endY: Float,        // Ending Y position (0-1)
-    val duration: Int,      // Animation duration in ms
-    val initialRotation: Float // Starting rotation angle
 )
