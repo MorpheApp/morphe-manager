@@ -97,6 +97,7 @@ fun MorpheHomeScreen(
             delay(500)
             bundleUpdateInProgress = false
             homeState.isRefreshingBundle = false
+            homeState.updateBundleData(sources, bundleInfo)
         }
     }
 
@@ -215,16 +216,11 @@ fun MorpheHomeScreen(
 
     // Bundle sheet
     if (homeState.showBundlesSheet) {
-        // Update apiBundle every time sources change
-        LaunchedEffect(sources) {
-            homeState.updateBundleData(sources, bundleInfo)
-        }
-
         HomeBundleSheet(
             apiBundle = homeState.apiBundle,
             patchCounts = patchCounts,
             manualUpdateInfo = manualUpdateInfo,
-            isRefreshing = homeState.isRefreshingBundle,
+            isRefreshing = homeState.isRefreshingBundle || bundleUpdateProgress != null,
             onDismiss = { homeState.showBundlesSheet = false },
             onRefresh = {
                 scope.launch {
