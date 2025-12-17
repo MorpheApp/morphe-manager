@@ -286,8 +286,10 @@ class MorpheHomeState(
 
                 val appName = if (isYouTubeMusic) "YouTube Music" else "YouTube"
                 val architecture = if (isYouTubeMusic) "($deviceArch)" else ""
-                val searchQuery = "$appName $version $architecture (nodpi) site:apkmirror.com"
-                val searchUrl = "https://www.google.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+                // Backslash search parameter opens the first search result
+                // Use quotes to ensure it's an exact match of all search terms
+                val searchQuery = "\\$appName $version $architecture (nodpi) site:apkmirror.com"
+                val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
 
                 finalUrl = searchUrl
             }
