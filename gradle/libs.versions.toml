@@ -21,6 +21,7 @@ morphe-patcher = "1.0.0"
 morphe-library = "1.0.0"
 koin = "3.5.3"
 ktor = "2.3.9"
+jsoup = "1.21.2"
 markdown-renderer = "0.30.0"
 fading-edges = "1.0.4"
 kotlin = "2.1.10"
@@ -100,6 +101,9 @@ ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = 
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# Jsoup
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 
 # Markdown
 markdown-renderer = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "markdown-renderer" }

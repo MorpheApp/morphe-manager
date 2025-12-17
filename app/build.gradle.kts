@@ -112,6 +112,9 @@ dependencies {
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.serialization)
 
+    // Jsoup
+    implementation(libs.jsoup)
+
     // Markdown
     implementation(libs.markdown.renderer)
 

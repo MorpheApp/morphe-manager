@@ -11,6 +11,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.network.utils.ApkMirror
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
@@ -256,39 +257,53 @@ class MorpheHomeState(
 
     /**
      * Handle download instructions dialog continue action
-     * Opens browser to APKMirror search and shows file picker prompt
+     * Opens browser to APKMirror download page and shows file picker prompt
      */
     fun handleDownloadInstructionsContinue(uriHandler: androidx.compose.ui.platform.UriHandler) {
-        val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
-            pendingPackageName
-        } else {
-            // Some versions of YT Music don't show when the package name is used, use the app name instead
-            "YouTube Music"
-        }
-
-        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
-            // YT Music requires architecture. This logic could be improved
-            " (${Build.SUPPORTED_ABIS.first()})"
-        } else {
-            ""
-        }
-
+        val isYouTubeMusic = pendingPackageName == PACKAGE_YOUTUBE_MUSIC
+        val org = "google-inc"
+        val name = if (isYouTubeMusic) "youtube-music" else "youtube"
         val version = pendingRecommendedVersion ?: ""
-        // Backslash search parameter opens the first search result
-        // Use quotes to ensure it's an exact match of all search terms
-        val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
-        val searchUrl = "https://duckduckgo.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
-        Log.d(tag, "Using search query: $searchQuery")
+        val deviceArch = Build.SUPPORTED_ABIS.first()
+        val arch = if (isYouTubeMusic) deviceArch else "universal"
 
-        try {
-            uriHandler.openUri(searchUrl)
-            // After opening browser, show file picker prompt
-            showDownloadInstructionsDialog = false
-            showFilePickerPromptDialog = true
-        } catch (_: Exception) {
-            context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
-            showDownloadInstructionsDialog = false
-            cleanupPendingData()
+        // Firefox: ApkMirror("mozilla", "firefox", "firefox-fast-private-browser", "146.0", "universal")
+        // WhatsApp: ApkMirror("whatsapp-inc", "whatsapp", "whatsapp-messenger", "2.25.37.73", "universal")
+        // YouTube: ApkMirror("google-inc", "youtube", "youtube", "20.21.37", "universal")
+        // YouTube Music: ApkMirror("google-inc", "youtube-music", "youtube-music", "8.10.52", "arm64-v8a")
+        val apkMirror = ApkMirror(org, name, name, version, arch)
+
+        scope.launch {
+            var finalUrl: String
+
+            val downloadPageUrl = withContext(Dispatchers.IO) {
+                apkMirror.getDownloadPageUrl()
+            }
+            if (downloadPageUrl != null) {
+                finalUrl = downloadPageUrl
+            } else {
+                Log.d(tag, "Failed to get download url from APKMirror, Search url will be used")
+
+                val appName = if (isYouTubeMusic) "YouTube Music" else "YouTube"
+                val architecture = if (isYouTubeMusic) "($deviceArch)" else ""
+                val searchQuery = "$appName $version $architecture (nodpi) site:apkmirror.com"
+                val searchUrl = "https://www.google.com/?q=${java.net.URLEncoder.encode(searchQuery, "UTF-8")}"
+
+                finalUrl = searchUrl
+            }
+
+            Log.d(tag, "Using url: $finalUrl")
+
+            try {
+                uriHandler.openUri(finalUrl)
+                // After opening browser, show file picker prompt
+                showDownloadInstructionsDialog = false
+                showFilePickerPromptDialog = true
+            } catch (_: Exception) {
+                context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+                showDownloadInstructionsDialog = false
+                cleanupPendingData()
+            }
         }
     }
 
