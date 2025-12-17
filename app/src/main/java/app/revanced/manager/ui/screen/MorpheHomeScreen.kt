@@ -173,14 +173,6 @@ fun MorpheHomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Bundle update snackbar
-            HomeBundleUpdateSnackbar(
-                visible = homeState.showBundleUpdateSnackbar,
-                status = homeState.snackbarStatus,
-                progress = bundleUpdateProgress,
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
-
             // Main content with app buttons
             HomeMainContent(
                 onYouTubeClick = {
@@ -209,6 +201,14 @@ fun MorpheHomeScreen(
                 onSettingsClick = onMorpheSettingsClick,
                 hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty(),
                 modifier = Modifier.align(Alignment.BottomEnd)
+            )
+
+            // Bundle update snackbar
+            HomeBundleUpdateSnackbar(
+                visible = homeState.showBundleUpdateSnackbar,
+                status = homeState.snackbarStatus,
+                progress = bundleUpdateProgress,
+                modifier = Modifier.align(Alignment.TopCenter)
             )
         }
     }
