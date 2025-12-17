@@ -5,11 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,7 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -25,14 +21,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.PasswordField
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
 import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButton
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonColumn
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogOutlinedButton
 import app.revanced.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import java.security.MessageDigest
@@ -48,116 +49,74 @@ fun AboutDialog(onDismiss: () -> Unit) {
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        header = {
-            // Fixed header
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // App Icon with gradient background
-                Box(
-                    modifier = Modifier.size(80.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(20.dp),
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(
-                                    Brush.linearGradient(
-                                        listOf(
-                                            MaterialTheme.colorScheme.primaryContainer,
-                                            MaterialTheme.colorScheme.secondaryContainer
-                                        )
-                                    )
-                                )
-                        )
-                    }
-                    val icon = rememberDrawablePainter(
-                        drawable = remember {
-                            AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-                        }
-                    )
-                    Image(
-                        painter = icon,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(64.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                    )
-                }
-
-                // App Name & Version
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.app_name),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = "Version ${BuildConfig.VERSION_NAME}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        },
         footer = {
-            // Fixed footer - close button
-            FilledTonalButton(
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.close),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.close))
-            }
+            )
         }
     ) {
-        // Scrollable content
+        val textColor = LocalDialogTextColor.current
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // Description
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.surfaceContainerLow,
-                tonalElevation = 3.dp,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.revanced_manager_description),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 26.sp,
-                    )
+            // App Icon
+            val icon = rememberDrawablePainter(
+                drawable = remember {
+                    AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
                 }
+            )
+            Image(
+                painter = icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(80.dp)
+                    .clip(RoundedCornerShape(20.dp))
+            )
+
+            // App Name & Version
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.app_name),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = textColor
+                )
+                Text(
+                    text = "Version ${BuildConfig.VERSION_NAME}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = secondaryColor
+                )
             }
+
+            // Description
+            Text(
+                text = stringResource(R.string.revanced_manager_description),
+                style = MaterialTheme.typography.bodyLarge,
+                color = secondaryColor,
+                textAlign = TextAlign.Center,
+                lineHeight = 26.sp
+            )
 
             // Social Links
             Row(
-                horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 AboutViewModel.socials.forEach { link ->
                     SocialIconButton(
                         icon = AboutViewModel.getSocialIcon(link.name),
                         contentDescription = link.name,
-                        onClick = { uriHandler.openUri(link.url) }
+                        onClick = { uriHandler.openUri(link.url) },
+                        textColor = textColor
                     )
                 }
             }
@@ -173,26 +132,21 @@ fun AboutDialog(onDismiss: () -> Unit) {
 private fun SocialIconButton(
     icon: ImageVector,
     contentDescription: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    textColor: Color
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-
     Surface(
         onClick = onClick,
-        modifier = Modifier.size(56.dp),
-        shape = CircleShape,
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        tonalElevation = if (isPressed) 12.dp else 4.dp,
-        shadowElevation = if (isPressed) 8.dp else 2.dp,
-        interactionSource = interactionSource
+        modifier = Modifier.size(52.dp),
+        shape = RoundedCornerShape(14.dp),
+        color = textColor.copy(alpha = 0.1f)
     ) {
         Box(contentAlignment = Alignment.Center) {
             Icon(
                 imageVector = icon,
                 contentDescription = contentDescription,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(28.dp)
+                tint = textColor.copy(alpha = 0.8f),
+                modifier = Modifier.size(26.dp)
             )
         }
     }
@@ -242,108 +196,109 @@ fun PluginActionDialog(
             else -> packageName
         },
         footer = {
-            // Fixed footer - buttons
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                // Action and Uninstall buttons
+            MorpheDialogButtonColumn {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // Action button (Trust/Revoke/View Error)
                     when (state) {
                         is DownloaderPluginState.Loaded -> {
-                            FilledTonalButton(
+                            MorpheDialogButton(
+                                text = stringResource(R.string.continue_),
                                 onClick = {
                                     onRevoke()
                                     onDismiss()
-                                }
-                            ) {
-                                Text(stringResource(R.string.continue_))
-                            }
+                                },
+                                modifier = Modifier.weight(1f)
+                            )
                         }
                         is DownloaderPluginState.Untrusted -> {
-                            FilledTonalButton(
+                            MorpheDialogButton(
+                                text = stringResource(R.string.continue_),
                                 onClick = {
                                     onTrust()
                                     onDismiss()
-                                }
-                            ) {
-                                Text(stringResource(R.string.continue_))
-                            }
+                                },
+                                modifier = Modifier.weight(1f)
+                            )
                         }
                         is DownloaderPluginState.Failed -> {
-                            FilledTonalButton(onClick = onViewError) {
-                                Text(stringResource(R.string.downloader_plugin_view_error))
-                            }
+                            MorpheDialogButton(
+                                text = stringResource(R.string.downloader_plugin_view_error),
+                                onClick = onViewError,
+                                modifier = Modifier.weight(1f)
+                            )
                         }
                         else -> {}
                     }
 
-                    // Uninstall button
-                    OutlinedButton(
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(R.string.uninstall),
                         onClick = {
                             onUninstall()
                             onDismiss()
-                        }
-                    ) {
-                        Text(stringResource(R.string.uninstall))
-                    }
+                        },
+                        isDestructive = true,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
 
-                // Dismiss button
-                OutlinedButton(
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.dismiss),
                     onClick = onDismiss,
                     modifier = Modifier.fillMaxWidth(0.5f)
-                ) {
-                    Text(stringResource(R.string.dismiss))
-                }
+                )
             }
         }
     ) {
-        // Scrollable content
+        val textColor = LocalDialogTextColor.current
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             when (state) {
                 is DownloaderPluginState.Failed -> {
                     Text(
                         text = stringResource(R.string.downloader_plugin_failed_dialog_body, packageName),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = secondaryColor,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
                 else -> {
-                    Text(
-                        text = "Package:",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = packageName,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontFamily = FontFamily.Monospace
-                    )
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(
+                                text = "Package:",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = secondaryColor
+                            )
+                            Text(
+                                text = packageName,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontFamily = FontFamily.Monospace,
+                                color = textColor
+                            )
+                        }
 
-                    Spacer(modifier = Modifier.height(4.dp))
-
-                    Text(
-                        text = "Signature (SHA-256):",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = signature,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontFamily = FontFamily.Monospace,
-                        lineHeight = 20.sp
-                    )
+                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(
+                                text = "Signature (SHA-256):",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = secondaryColor
+                            )
+                            Text(
+                                text = signature,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontFamily = FontFamily.Monospace,
+                                lineHeight = 20.sp,
+                                color = textColor.copy(alpha = 0.8f)
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -366,44 +321,25 @@ fun KeystoreCredentialsDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.import_keystore_dialog_title),
         footer = {
-            // Fixed footer - buttons (always in row)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                FilledTonalButton(
-                    onClick = { onSubmit(alias, pass) },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        stringResource(R.string.import_keystore_dialog_button),
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
-                }
-
-                OutlinedButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        stringResource(android.R.string.cancel),
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
-                }
-            }
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.import_keystore_dialog_button),
+                onPrimaryClick = { onSubmit(alias, pass) },
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
         }
     ) {
-        // Scrollable content
+        val textColor = LocalDialogTextColor.current
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
                 text = stringResource(R.string.import_keystore_dialog_description),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyLarge,
+                color = secondaryColor,
                 textAlign = TextAlign.Center
             )
 
@@ -411,16 +347,34 @@ fun KeystoreCredentialsDialog(
             OutlinedTextField(
                 value = alias,
                 onValueChange = { alias = it },
-                label = { Text(stringResource(R.string.import_keystore_dialog_alias_field)) },
+                label = {
+                    Text(
+                        stringResource(R.string.import_keystore_dialog_alias_field),
+                        color = secondaryColor
+                    )
+                },
                 singleLine = true,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = textColor,
+                    unfocusedTextColor = textColor,
+                    focusedBorderColor = textColor.copy(alpha = 0.5f),
+                    unfocusedBorderColor = textColor.copy(alpha = 0.2f),
+                    cursorColor = textColor
+                )
             )
 
             // Password Input
             PasswordField(
                 value = pass,
                 onValueChange = { pass = it },
-                label = { Text(stringResource(R.string.import_keystore_dialog_password_field)) },
+                label = {
+                    Text(
+                        stringResource(R.string.import_keystore_dialog_password_field),
+                        color = secondaryColor
+                    )
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }
