@@ -102,9 +102,7 @@ fun MorpheHomeScreen(
 
     preReleaseChangedModel.setEventHandler { usePreRelease ->
         prefs.usePatchesPrereleases.update(usePreRelease)
-        scope.launch {
-            updateMorpheBundleAndUI()
-        }
+        updateMorpheBundleAndUI()
     }
 
     // Show manager update dialog
