@@ -155,9 +155,6 @@ class PatcherViewModel(
     var lastInstallType by mutableStateOf<InstallType?>(null)
         private set
 
-    // Track the timestamp when install was initiated to properly detect updates
-    private var installInitiatedAt: Long = 0L
-
     private fun updateInstallingState(value: Boolean) {
         ongoingPmSession = value
         isInstalling = value
@@ -176,8 +173,7 @@ class PatcherViewModel(
             suppressFailureAfterSuccess = false
             packageInstallerStatus = null
         } else {
-            installInitiatedAt = System.currentTimeMillis()
-//            startInstallProgressToasts()
+            startInstallProgressToasts()
             suppressFailureAfterSuccess = false
         }
     }
@@ -273,11 +269,10 @@ class PatcherViewModel(
             if (installStatus is InstallCompletionStatus.InProgress) {
                 logger.trace("install timeout for $packageName")
                 packageInstallerStatus = null
-                // Don't auto-detect install on timeout - just show timeout message
-//                if (!tryMarkInstallIfPresent(packageName)) {
+                if (!tryMarkInstallIfPresent(packageName)) {
                     val message = timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
                     showInstallFailure(message)
-//                }
+                }
             }
         }
     }
@@ -327,59 +322,39 @@ class PatcherViewModel(
         startExternalPresenceWatch(plan.expectedPackage)
     }
 
-//    MORPHE: Disabled monitorInternalInstall - we rely on broadcast receiver instead
-//    This was causing premature success detection when package was already installed
-//    private fun monitorInternalInstall(packageName: String) {
-//        internalInstallMonitorJob?.cancel()
-//        internalInstallMonitorJob = viewModelScope.launch {
-//            val timeoutAt = System.currentTimeMillis() + SYSTEM_INSTALL_TIMEOUT_MS
-//            while (isActive) {
-//                if (installStatus !is InstallCompletionStatus.InProgress) return@launch
-//                if (handleDetectedInstall(packageName)) return@launch
-//
-//                val remaining = timeoutAt - System.currentTimeMillis()
-//                if (remaining <= 0L) break
-//                delay(INSTALL_MONITOR_POLL_MS)
-//            }
-//        }
-//    }
+    private fun monitorInternalInstall(packageName: String) {
+        internalInstallMonitorJob?.cancel()
+        internalInstallMonitorJob = viewModelScope.launch {
+            val timeoutAt = System.currentTimeMillis() + SYSTEM_INSTALL_TIMEOUT_MS
+            while (isActive) {
+                if (installStatus !is InstallCompletionStatus.InProgress) return@launch
+                if (handleDetectedInstall(packageName)) return@launch
 
-    /**
-     * Check if package was updated since baseline.
-     * This now requires ACTUAL update - lastUpdateTime must be greater than baseline.
-     */
+                val remaining = timeoutAt - System.currentTimeMillis()
+                if (remaining <= 0L) break
+                delay(INSTALL_MONITOR_POLL_MS)
+            }
+        }
+    }
+
     private fun isUpdatedSinceBaseline(
         info: PackageInfo,
         baseline: Pair<Long?, Long?>?,
         startTime: Long?
     ): Boolean {
-        if (baseline == null) return true // No baseline = new install
-
         val vc = pm.getVersionCode(info)
         val updated = info.lastUpdateTime
-        val baseVc = baseline.first
-        val baseUpdated = baseline.second
-
-        // Version code changed = definitely updated
-        if (baseVc != null && vc != baseVc) return true
-
-        // lastUpdateTime must be GREATER than baseline (not just equal)
-        if (baseUpdated != null && updated > baseUpdated) return true
-
-        // Also check against install initiation time
-        val started = startTime ?: installInitiatedAt
-        if (started > 0L && updated > started) return true
-
-        return false
+        val baseVc = baseline?.first
+        val baseUpdated = baseline?.second
+        val versionChanged = baseVc != null && vc != baseVc
+        val timestampChanged = baseUpdated != null && updated > baseUpdated
+        val started = startTime ?: 0L
+        val updatedSinceStart = updated >= started && started > 0L
+        return baseline == null || versionChanged || timestampChanged || updatedSinceStart
     }
 
-    /**
-     * Mark installation as successful.
-     * Only called when we have definitive proof that installation succeeded.
-     */
-    private fun markInstallSuccess(packageName: String, installType: InstallType = InstallType.DEFAULT) {
+    private fun forceMarkInstallSuccess(packageName: String, installType: InstallType = InstallType.DEFAULT) {
         if (installStatus is InstallCompletionStatus.Success) return
-
         suppressFailureAfterSuccess = true
         pendingExternalInstall?.let(installerManager::cleanup)
         pendingExternalInstall = null
@@ -398,98 +373,58 @@ class PatcherViewModel(
         stopInstallProgressToasts()
         lastSuccessInstallType = installType
         lastSuccessAtMs = System.currentTimeMillis()
-
         viewModelScope.launch {
             val persisted = persistPatchedApp(packageName, installType)
             if (!persisted) {
-                Log.w(TAG, "Failed to persist installed patched app metadata")
+                Log.w(TAG, "Failed to persist installed patched app metadata (detected)")
             }
         }
     }
 
-//    MORPHE: Disabled handleDetectedInstall and related methods
-//    These were causing premature success detection due to allowByProgress logic
-//    private fun forceMarkInstallSuccess(packageName: String, installType: InstallType = InstallType.DEFAULT) {
-//        if (installStatus is InstallCompletionStatus.Success) return
-//        suppressFailureAfterSuccess = true
-//        pendingExternalInstall?.let(installerManager::cleanup)
-//        pendingExternalInstall = null
-//        externalInstallTimeoutJob?.cancel()
-//        externalInstallTimeoutJob = null
-//        externalInstallBaseline = null
-//        internalInstallMonitorJob?.cancel()
-//        internalInstallMonitorJob = null
-//        internalInstallBaseline = null
-//        awaitingPackageInstall = null
-//        installedPackageName = packageName
-//        installFailureMessage = null
-//        packageInstallerStatus = null
-//        installStatus = InstallCompletionStatus.Success(packageName)
-//        updateInstallingState(false)
-//        stopInstallProgressToasts()
-//        lastSuccessInstallType = installType
-//        lastSuccessAtMs = System.currentTimeMillis()
-//        viewModelScope.launch {
-//            val persisted = persistPatchedApp(packageName, installType)
-//            if (!persisted) {
-//                Log.w(TAG, "Failed to persist installed patched app metadata (detected)")
-//            }
-//        }
-//    }
-//
-//    private fun handleDetectedInstall(packageName: String): Boolean {
-//        val info = pm.getPackageInfo(packageName) ?: return false
-//        val updated = isUpdatedSinceBaseline(info, internalInstallBaseline ?: externalInstallBaseline, externalInstallStartTime)
-//        val silentSameVersion =
-//            !updated && pendingExternalInstall?.expectedPackage == packageName && installStatus is InstallCompletionStatus.InProgress
-//        val allowByProgress = !updated && pendingExternalInstall == null && installStatus is InstallCompletionStatus.InProgress
-//        if (!updated && !silentSameVersion && !allowByProgress) return false
-//
-//        forceMarkInstallSuccess(packageName)
-//        return true
-//    }
-//
-//    private fun tryMarkInstallIfPresent(packageName: String?): Boolean {
-//        if (packageName.isNullOrBlank()) return false
-//        return handleDetectedInstall(packageName)
-//    }
+    private fun handleDetectedInstall(packageName: String): Boolean {
+        val info = pm.getPackageInfo(packageName) ?: return false
+        val updated = isUpdatedSinceBaseline(info, internalInstallBaseline ?: externalInstallBaseline, externalInstallStartTime)
+        val silentSameVersion =
+            !updated && pendingExternalInstall?.expectedPackage == packageName && installStatus is InstallCompletionStatus.InProgress
+        val allowByProgress = !updated && pendingExternalInstall == null && installStatus is InstallCompletionStatus.InProgress
+        if (!updated && !silentSameVersion && !allowByProgress) return false
+
+        forceMarkInstallSuccess(packageName)
+        return true
+    }
 
     private fun startExternalPresenceWatch(packageName: String) {
         externalInstallPresenceJob?.cancel()
         externalInstallPresenceJob = viewModelScope.launch {
-            val startTime = System.currentTimeMillis()
-            val baseline = externalInstallBaseline
-
             while (isActive) {
                 if (pendingExternalInstall == null) return@launch
-
-                val info = pm.getPackageInfo(packageName)
-                if (info != null) {
-                    // Check if it was actually updated
-                    if (isUpdatedSinceBaseline(info, baseline, startTime)) {
-                        markInstallSuccess(packageName)
-                        return@launch
-                    }
+                if (pm.getPackageInfo(packageName) != null) {
+                    forceMarkInstallSuccess(packageName)
+                    return@launch
                 }
                 delay(INSTALL_MONITOR_POLL_MS)
             }
         }
     }
 
-//    MORPHE: Disabled install progress toasts - they loop continuously during install
-//    private fun startInstallProgressToasts() {
-//        if (installProgressToastJob?.isActive == true) return
-//        installProgressToastJob = viewModelScope.launch {
-//            while (isActive) {
-//                val messageRes =
-//                    if (activeInstallType == InstallType.MOUNT) R.string.mounting_ellipsis
-//                    else R.string.installing_ellipsis
-//                installProgressToast?.cancel()
-//                installProgressToast = app.toastHandle(app.getString(messageRes))
-//                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
-//            }
-//        }
-//    }
+    private fun tryMarkInstallIfPresent(packageName: String?): Boolean {
+        if (packageName.isNullOrBlank()) return false
+        return handleDetectedInstall(packageName)
+    }
+
+    private fun startInstallProgressToasts() {
+        if (installProgressToastJob?.isActive == true) return
+        installProgressToastJob = viewModelScope.launch {
+            while (isActive) {
+                val messageRes =
+                    if (activeInstallType == InstallType.MOUNT) R.string.mounting_ellipsis
+                    else R.string.installing_ellipsis
+                installProgressToast?.cancel()
+                installProgressToast = app.toastHandle(app.getString(messageRes))
+                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
+            }
+        }
+    }
 
     private fun stopInstallProgressToasts() {
         installProgressToastJob?.cancel()
@@ -507,11 +442,12 @@ class PatcherViewModel(
         }
     }
 
-    private var inputFile: File? by savedStateHandle.saveableVar()
+    var inputFile: File? by savedStateHandle.saveableVar()
+        private set
     private var requiresSplitPreparation by savedStateHandle.saveableVar {
         initialSplitRequirement(input.selectedApp)
     }
-    private val outputFile = tempDir.resolve("output.apk")
+    val outputFile = tempDir.resolve("output.apk")
 
     private val logs by savedStateHandle.saveable<MutableList<Pair<LogLevel, String>>> { mutableListOf() }
     private val logger = object : Logger() {
@@ -788,113 +724,30 @@ class PatcherViewModel(
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
                 Intent.ACTION_PACKAGE_ADDED,
-//                Intent.ACTION_PACKAGE_REPLACED -> {
-//                    val pkg = intent.data?.schemeSpecificPart ?: return
-//                    if (pkg == awaitingPackageInstall) {
-//                        awaitingPackageInstall = null
-//                        installedPackageName = pkg
-//                        internalInstallBaseline = null
-//                        internalInstallMonitorJob?.cancel()
-//                        internalInstallMonitorJob = null
-//                        val installType = activeInstallType ?: InstallType.DEFAULT
-//                        viewModelScope.launch {
-//                            val persisted = persistPatchedApp(pkg, installType)
-//                            if (!persisted) {
-//                                Log.w(TAG, "Failed to persist installed patched app metadata (package added broadcast)")
-//                            }
-//                        }
-//                        updateInstallingState(false)
-//                    } else {
-//                        // If we still have an external plan, mark success.
-//                        if (handleExternalInstallSuccess(pkg)) return
-//                        // Fallback: if we’re mid-install, mark any added package as success.
-//                        if (installStatus is InstallCompletionStatus.InProgress) {
-//                            forceMarkInstallSuccess(pkg)
-//                        }
-//                    }
-//                }
-//
-//                InstallService.APP_INSTALL_ACTION -> {
-//                    val pmStatus = intent.getIntExtra(
-//                        InstallService.EXTRA_INSTALL_STATUS,
-//                        PackageInstaller.STATUS_FAILURE
-//                    )
-//
-//                    intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
-//                        ?.let(logger::trace)
-//
-//                    if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
-//                        updateInstallingState(true)
-//                        return
-//                    }
-//
-//                    if (pmStatus == PackageInstaller.STATUS_SUCCESS) {
-//                        val packageName = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME)
-//                        awaitingPackageInstall = null
-//                        installedPackageName = packageName
-//                        internalInstallBaseline = null
-//                        internalInstallMonitorJob?.cancel()
-//                        internalInstallMonitorJob = null
-//                        val installType = activeInstallType ?: InstallType.DEFAULT
-//                        installFailureMessage = null
-//                        viewModelScope.launch {
-//                            val persisted = persistPatchedApp(installedPackageName, installType)
-//                            if (!persisted) {
-//                                Log.w(TAG, "Failed to persist installed patched app metadata")
-//                            }
-//                        }
-//                        installStatus = InstallCompletionStatus.Success(packageName)
-//                        lastSuccessInstallType = installType
-//                        lastSuccessAtMs = System.currentTimeMillis()
-//                        updateInstallingState(false)
-//                        packageInstallerStatus = null
-//                    } else {
-//                        val now = System.currentTimeMillis()
-//                        val recentShizukuSuccess = lastSuccessInstallType == InstallType.SHIZUKU &&
-//                                now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
-//                        if (activeInstallType == InstallType.SHIZUKU || recentShizukuSuccess || installStatus is InstallCompletionStatus.Success) {
-//                            packageInstallerStatus = null
-//                            installFailureMessage = null
-//                            if (installStatus !is InstallCompletionStatus.Success) {
-//                                installStatus = null
-//                            }
-//                            updateInstallingState(false)
-//                            return
-//                        }
-//                        // Hard block failure surfacing for Shizuku even if state was cleared.
-//                        if (lastSuccessInstallType == InstallType.SHIZUKU) {
-//                            packageInstallerStatus = null
-//                            installFailureMessage = null
-//                            installStatus = null
-//                            updateInstallingState(false)
-//                            return
-//                        }
-//                        awaitingPackageInstall = null
-//                        packageInstallerStatus = pmStatus
-//                        val expectedPkg = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME) ?: packageName
-//                        if (tryMarkInstallIfPresent(expectedPkg)) return
-//                        val rawMessage = intent.getStringExtra(InstallService.EXTRA_INSTALL_STATUS_MESSAGE)
-//                            ?.takeIf { it.isNotBlank() }
-//                        val formatted = installerManager.formatFailureHint(pmStatus, rawMessage)
-//                        val message = formatted
-//                            ?: rawMessage
-//                            ?: app.getString(R.string.install_app_fail, pmStatus.toString())
-//                        packageInstallerStatus = null
-//                        showInstallFailure(message)
-//                    }
-//                }
-
                 Intent.ACTION_PACKAGE_REPLACED -> {
                     val pkg = intent.data?.schemeSpecificPart ?: return
-
-                    // Only handle if we're waiting for this package AND we're in installing state
-                    if (pkg == awaitingPackageInstall && isInstalling) {
+                    if (pkg == awaitingPackageInstall) {
+                        awaitingPackageInstall = null
+                        installedPackageName = pkg
+                        internalInstallBaseline = null
+                        internalInstallMonitorJob?.cancel()
+                        internalInstallMonitorJob = null
                         val installType = activeInstallType ?: InstallType.DEFAULT
-                        markInstallSuccess(pkg, installType)
-                    } else if (pendingExternalInstall?.expectedPackage == pkg) {
-                        handleExternalInstallSuccess(pkg)
+                        viewModelScope.launch {
+                            val persisted = persistPatchedApp(pkg, installType)
+                            if (!persisted) {
+                                Log.w(TAG, "Failed to persist installed patched app metadata (package added broadcast)")
+                            }
+                        }
+                        updateInstallingState(false)
+                    } else {
+                        // If we still have an external plan, mark success.
+                        if (handleExternalInstallSuccess(pkg)) return
+                        // Fallback: if we’re mid-install, mark any added package as success.
+                        if (installStatus is InstallCompletionStatus.InProgress) {
+                            forceMarkInstallSuccess(pkg)
+                        }
                     }
-                    // Don't handle other packages - they're not our concern
                 }
 
                 InstallService.APP_INSTALL_ACTION -> {
@@ -907,25 +760,31 @@ class PatcherViewModel(
                         ?.let(logger::trace)
 
                     if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
-                        // User needs to confirm - keep installing state
                         updateInstallingState(true)
                         return
                     }
 
                     if (pmStatus == PackageInstaller.STATUS_SUCCESS) {
                         val packageName = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME)
+                        awaitingPackageInstall = null
+                        installedPackageName = packageName
+                        internalInstallBaseline = null
+                        internalInstallMonitorJob?.cancel()
+                        internalInstallMonitorJob = null
                         val installType = activeInstallType ?: InstallType.DEFAULT
-
-                        if (packageName != null) {
-                            markInstallSuccess(packageName, installType)
-                        } else {
-                            // No package name but success - try awaiting package
-                            awaitingPackageInstall?.let { pkg ->
-                                markInstallSuccess(pkg, installType)
+                        installFailureMessage = null
+                        viewModelScope.launch {
+                            val persisted = persistPatchedApp(installedPackageName, installType)
+                            if (!persisted) {
+                                Log.w(TAG, "Failed to persist installed patched app metadata")
                             }
                         }
+                        installStatus = InstallCompletionStatus.Success(packageName)
+                        lastSuccessInstallType = installType
+                        lastSuccessAtMs = System.currentTimeMillis()
+                        updateInstallingState(false)
+                        packageInstallerStatus = null
                     } else {
-                        // Installation failed
                         val now = System.currentTimeMillis()
                         val recentShizukuSuccess = lastSuccessInstallType == InstallType.SHIZUKU &&
                                 now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
@@ -946,17 +805,16 @@ class PatcherViewModel(
                             updateInstallingState(false)
                             return
                         }
-
                         awaitingPackageInstall = null
                         packageInstallerStatus = pmStatus
-
+                        val expectedPkg = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME) ?: packageName
+                        if (tryMarkInstallIfPresent(expectedPkg)) return
                         val rawMessage = intent.getStringExtra(InstallService.EXTRA_INSTALL_STATUS_MESSAGE)
                             ?.takeIf { it.isNotBlank() }
                         val formatted = installerManager.formatFailureHint(pmStatus, rawMessage)
                         val message = formatted
                             ?: rawMessage
                             ?: app.getString(R.string.install_app_fail, pmStatus.toString())
-
                         packageInstallerStatus = null
                         showInstallFailure(message)
                     }
@@ -1138,7 +996,6 @@ class PatcherViewModel(
                 if (pm.getVersionCode(currentPackageInfo) < pm.getVersionCode(existingPackageInfo)) {
                     // Exit if the selected app version is less than the installed version
                     packageInstallerStatus = PackageInstaller.STATUS_FAILURE_CONFLICT
-                    updateInstallingState(false)
                     return
                 }
             }
@@ -1151,7 +1008,7 @@ class PatcherViewModel(
                         rootInstaller.unmount(packageName)
                     }
 
-                    // Store baseline BEFORE starting install
+                    // Install regularly
                     internalInstallBaseline = pm.getPackageInfo(currentPackageInfo.packageName)?.let { info ->
                         pm.getVersionCode(info) to info.lastUpdateTime
                     }
@@ -1160,9 +1017,8 @@ class PatcherViewModel(
                         pm.installApp(listOf(outputFile))
                         pmInstallStarted = true
                         installStatus = InstallCompletionStatus.InProgress
-                        // Schedule timeout but don't start monitoring - rely on broadcast receiver
                         scheduleInstallTimeout(currentPackageInfo.packageName)
-//                        monitorInternalInstall(currentPackageInfo.packageName)
+                        monitorInternalInstall(currentPackageInfo.packageName)
                     } catch (installError: Exception) {
                         Log.e(TAG, "PackageInstaller.installApp failed", installError)
                         packageInstallerStatus = null
@@ -1203,7 +1059,6 @@ class PatcherViewModel(
                             if (currentPackageInfo.splitNames.isNotEmpty()) {
                                 // Exit if there is no base APK package
                                 packageInstallerStatus = PackageInstaller.STATUS_FAILURE_INVALID
-                                updateInstallingState(false)
                                 return
                             }
                         }
@@ -1227,10 +1082,9 @@ class PatcherViewModel(
 
                         rootInstaller.mount(packageName)
 
-//                        installedPackageName = packageName
-//                        installStatus = InstallCompletionStatus.Success(packageName)
-//                        updateInstallingState(false)
-                        markInstallSuccess(packageName, InstallType.MOUNT)
+                        installedPackageName = packageName
+                        installStatus = InstallCompletionStatus.Success(packageName)
+                        updateInstallingState(false)
                     } catch (e: Exception) {
                         Log.e(tag, "Failed to install as root", e)
                         packageInstallerStatus = null
@@ -1276,7 +1130,6 @@ class PatcherViewModel(
             if (existingPackageInfo != null) {
                 if (pm.getVersionCode(currentPackageInfo) < pm.getVersionCode(existingPackageInfo)) {
                     packageInstallerStatus = PackageInstaller.STATUS_FAILURE_CONFLICT
-                    updateInstallingState(false)
                     return
                 }
             }
@@ -1297,16 +1150,15 @@ class PatcherViewModel(
                 Log.w(TAG, "Failed to persist installed patched app metadata")
             }
 
-//            installedPackageName = currentPackageInfo.packageName
-//            packageInstallerStatus = null
-//            installFailureMessage = null
-//            installStatus = InstallCompletionStatus.Success(currentPackageInfo.packageName)
-//            awaitingPackageInstall = null
-//            updateInstallingState(false)
-//            suppressFailureAfterSuccess = true
-//            lastSuccessInstallType = InstallType.SHIZUKU
-//            lastSuccessAtMs = System.currentTimeMillis()
-            markInstallSuccess(currentPackageInfo.packageName, InstallType.SHIZUKU)
+            installedPackageName = currentPackageInfo.packageName
+            packageInstallerStatus = null
+            installFailureMessage = null
+            installStatus = InstallCompletionStatus.Success(currentPackageInfo.packageName)
+            awaitingPackageInstall = null
+            updateInstallingState(false)
+            suppressFailureAfterSuccess = true
+            lastSuccessInstallType = InstallType.SHIZUKU
+            lastSuccessAtMs = System.currentTimeMillis()
         } catch (error: ShizukuInstaller.InstallerOperationException) {
             Log.e(tag, "Failed to install via Shizuku", error)
             val message = error.message ?: app.getString(R.string.installer_hint_generic)
@@ -1328,9 +1180,7 @@ class PatcherViewModel(
             if (packageInstallerStatus == PackageInstaller.STATUS_SUCCESS && installStatus !is InstallCompletionStatus.Success) {
                 installStatus = InstallCompletionStatus.Success(installedPackageName ?: packageName)
             }
-            if (installStatus !is InstallCompletionStatus.Success) {
-                updateInstallingState(false)
-            }
+            updateInstallingState(false)
         }
     }
 
@@ -1411,43 +1261,6 @@ class PatcherViewModel(
         monitorExternalInstall(plan)
     }
 
-//    private fun handleExternalInstallSuccess(packageName: String): Boolean {
-//        val plan = pendingExternalInstall ?: return false
-//        if (plan.expectedPackage != packageName) return false
-//
-//        pendingExternalInstall = null
-//        externalInstallTimeoutJob?.cancel()
-//        externalInstallTimeoutJob = null
-//        externalInstallBaseline = null
-//        externalInstallStartTime = null
-//        installerManager.cleanup(plan)
-//        updateInstallingState(false)
-//        stopInstallProgressToasts()
-//        val installType = if (plan?.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
-//        installStatus = InstallCompletionStatus.Success(packageName)
-//        suppressFailureAfterSuccess = true
-//
-//        when (plan.target) {
-//            InstallerManager.InstallTarget.PATCHER -> {
-//                installedPackageName = packageName
-//                viewModelScope.launch {
-//                    val persisted = persistPatchedApp(packageName, installType)
-//                    if (!persisted) {
-//                        Log.w(TAG, "Failed to persist installed patched app metadata (external installer)")
-//                    }
-//                }
-//            }
-//
-//            InstallerManager.InstallTarget.SAVED_APP,
-//            InstallerManager.InstallTarget.MANAGER_UPDATE -> {
-//            }
-//        }
-//        suppressFailureAfterSuccess = true
-//        lastSuccessInstallType = installType
-//        lastSuccessAtMs = System.currentTimeMillis()
-//        return true
-//    }
-
     private fun handleExternalInstallSuccess(packageName: String): Boolean {
         val plan = pendingExternalInstall ?: return false
         if (plan.expectedPackage != packageName) return false
@@ -1458,20 +1271,35 @@ class PatcherViewModel(
         externalInstallBaseline = null
         externalInstallStartTime = null
         installerManager.cleanup(plan)
-
+        updateInstallingState(false)
+        stopInstallProgressToasts()
         val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
-        markInstallSuccess(packageName, installType)
+        installStatus = InstallCompletionStatus.Success(packageName)
+        suppressFailureAfterSuccess = true
+
+        when (plan.target) {
+            InstallerManager.InstallTarget.PATCHER -> {
+                installedPackageName = packageName
+                viewModelScope.launch {
+                    val persisted = persistPatchedApp(packageName, installType)
+                    if (!persisted) {
+                        Log.w(TAG, "Failed to persist installed patched app metadata (external installer)")
+                    }
+                }
+            }
+
+            InstallerManager.InstallTarget.SAVED_APP,
+            InstallerManager.InstallTarget.MANAGER_UPDATE -> {
+            }
+        }
+        suppressFailureAfterSuccess = true
+        lastSuccessInstallType = installType
+        lastSuccessAtMs = System.currentTimeMillis()
         return true
     }
 
     override fun install() {
         if (isInstalling) return
-
-        // Reset any previous failure state
-        installFailureMessage = null
-        packageInstallerStatus = null
-        installStatus = null
-
         viewModelScope.launch {
             val plan = installerManager.resolvePlan(
                 InstallerManager.InstallTarget.PATCHER,

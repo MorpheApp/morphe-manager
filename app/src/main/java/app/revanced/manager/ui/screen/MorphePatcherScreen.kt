@@ -1,12 +1,6 @@
 package app.revanced.manager.ui.screen
 
 import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.PackageInstaller
-import android.net.Uri
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
@@ -40,28 +34,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import java.io.File
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
 
 /**
  * MorphePatcherScreen - Simplified patcher screen with progress tracking
- * Shows patching progress, handles installation with inline buttons, and provides export functionality
+ * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,7 +63,8 @@ fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    generalViewModel: GeneralSettingsViewModel = koinViewModel()
+    generalViewModel: GeneralSettingsViewModel = koinViewModel(),
+    installViewModel: MorpheInstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
@@ -91,6 +86,9 @@ fun MorphePatcherScreen(
     )
 
     val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
+
+    // Get output file from viewModel
+    val outputFile = viewModel.outputFile
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
@@ -122,7 +120,6 @@ fun MorphePatcherScreen(
                 // adding smaller adjustments each second until the current step completes
                 fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
                     // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
-                    // https://desmos.com/calculator/fe53aoxhly
                     val maximumValue = 15.0 // Up to 15% over correct
                     val timeConstant = 30.0 // Larger value = longer time until plateau
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
@@ -171,99 +168,6 @@ fun MorphePatcherScreen(
             state.errorMessage =
                 failedStep?.message ?: context.getString(R.string.morphe_patcher_unknown_error)
             state.showErrorBottomSheet = true
-        }
-    }
-
-    // Monitor install status from ViewModel - this is the single source of truth
-    LaunchedEffect(viewModel.installStatus) {
-        when (val status = viewModel.installStatus) {
-            is PatcherViewModel.InstallCompletionStatus.InProgress -> {
-                state.installButtonState = InstallButtonState.INSTALLING
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Success -> {
-                state.installButtonState = InstallButtonState.INSTALLED
-                state.installErrorMessage = null
-                state.isWaitingForUninstall = false
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Failure -> {
-                // Check if it's a conflict error
-                if (viewModel.packageInstallerStatus == PackageInstaller.STATUS_FAILURE_CONFLICT) {
-                    state.installButtonState = InstallButtonState.CONFLICT
-                    state.installErrorMessage = null
-                } else {
-                    state.installButtonState = InstallButtonState.ERROR
-                    state.installErrorMessage = status.message
-                }
-            }
-
-            null -> {
-                // No install in progress - show ready state if we haven't installed yet
-                if (viewModel.installedPackageName == null && !state.isWaitingForUninstall) {
-                    state.installButtonState = InstallButtonState.READY_TO_INSTALL
-                    state.installErrorMessage = null
-                }
-            }
-        }
-    }
-
-    // Monitor package installer status for conflicts specifically
-    LaunchedEffect(viewModel.packageInstallerStatus) {
-        val status = viewModel.packageInstallerStatus
-        if (status == PackageInstaller.STATUS_FAILURE_CONFLICT) {
-            state.installButtonState = InstallButtonState.CONFLICT
-            state.installErrorMessage = null
-        }
-    }
-
-    // Monitor installedPackageName as backup verification
-    LaunchedEffect(viewModel.installedPackageName) {
-        if (viewModel.installedPackageName != null) {
-            state.installButtonState = InstallButtonState.INSTALLED
-            state.installErrorMessage = null
-            state.isWaitingForUninstall = false
-        }
-    }
-
-    // Monitor package removal during uninstall for reinstall
-    DisposableEffect(Unit) {
-        val receiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                if (intent?.action == Intent.ACTION_PACKAGE_REMOVED && state.isWaitingForUninstall) {
-                    val pkg = intent.data?.schemeSpecificPart
-                    val packageToUninstall =
-                        viewModel.exportMetadata?.packageName ?: viewModel.packageName
-                    if (pkg == packageToUninstall) {
-                        // Package was removed, reset to ready state
-                        CoroutineScope(Dispatchers.Main).launch {
-                            delay(500) // Wait for system dialog to close
-                            state.isWaitingForUninstall = false
-                            state.installButtonState = InstallButtonState.READY_TO_INSTALL
-                            state.installErrorMessage = null
-                            viewModel.dismissInstallFailureMessage()
-                        }
-                    }
-                }
-            }
-        }
-
-        val filter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply {
-            addDataScheme("package")
-        }
-        ContextCompat.registerReceiver(
-            context,
-            receiver,
-            filter,
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        )
-
-        onDispose {
-            try {
-                context.unregisterReceiver(receiver)
-            } catch (e: Exception) {
-                Log.e("MorphePatcherScreen", "Failed to unregister receiver", e)
-            }
         }
     }
 
@@ -460,30 +364,41 @@ fun MorphePatcherScreen(
 
                             PatcherState.SUCCESS -> {
                                 PatchingSuccess(
-                                    isInstalling = viewModel.isInstalling,
-                                    installedPackageName = viewModel.installedPackageName,
-                                    installButtonState = state.installButtonState,
-                                    installErrorMessage = state.installErrorMessage,
+                                    installViewModel = installViewModel,
                                     usingMountInstall = usingMountInstall,
                                     onInstall = {
-                                        state.installButtonState = InstallButtonState.INSTALLING
-                                        state.installErrorMessage = null
-                                        viewModel.dismissInstallFailureMessage()
-                                        viewModel.install()
-                                    },
-                                    onUninstall = {
-                                        state.isWaitingForUninstall = true
-                                        val packageToUninstall =
-                                            viewModel.exportMetadata?.packageName
-                                                ?: viewModel.packageName
-                                        val intent = Intent(Intent.ACTION_DELETE).apply {
-                                            data = Uri.parse("package:$packageToUninstall")
-                                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                        if (usingMountInstall) {
+                                            // Mount install
+                                            val inputVersion = viewModel.version
+                                                ?: viewModel.currentSelectedApp.version
+                                                ?: "unknown"
+                                            installViewModel.installMount(
+                                                outputFile = outputFile,
+                                                inputFile = viewModel.inputFile,
+                                                packageName = viewModel.packageName,
+                                                inputVersion = inputVersion,
+                                                onPersistApp = { pkg, type ->
+                                                    viewModel.savePatchedAppForLater(showToast = false)
+                                                    true
+                                                }
+                                            )
+                                        } else {
+                                            // Regular install with pre-conflict check
+                                            installViewModel.install(
+                                                outputFile = outputFile,
+                                                originalPackageName = viewModel.packageName,
+                                                onPersistApp = { pkg, type ->
+                                                    viewModel.savePatchedAppForLater(showToast = false)
+                                                    true
+                                                }
+                                            )
                                         }
-                                        context.startActivity(intent)
+                                    },
+                                    onUninstall = { packageName ->
+                                        installViewModel.requestUninstall(packageName)
                                     },
                                     onOpen = {
-                                        viewModel.open()
+                                        installViewModel.openApp()
                                     }
                                 )
                             }
@@ -560,7 +475,7 @@ fun MorphePatcherScreen(
                         }
 
                         patcherSucceeded == true && !state.hasPatchingError -> {
-                            // Save APK button (moved from left side)
+                            // Save APK button
                             FloatingActionButton(
                                 onClick = {
                                     if (!state.isSaving) {

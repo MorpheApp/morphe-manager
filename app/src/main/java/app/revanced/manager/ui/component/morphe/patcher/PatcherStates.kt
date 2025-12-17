@@ -35,18 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
-
-/**
- * Enum for success screen install state
- */
-enum class InstallButtonState {
-    READY_TO_INSTALL,   // Show Install/Mount button
-    INSTALLING,         // Show loading indicator
-    INSTALLED,          // Show Open button
-    CONFLICT,           // Show Uninstall button
-    ERROR               // Show error with Uninstall button
-}
 
 /**
  * Enum for patcher states
@@ -72,11 +62,6 @@ class MorphePatcherState(
 
     // Cancel dialog
     var showCancelDialog by mutableStateOf(false)
-
-    // Installation state (simplified - no dialog needed)
-    var installButtonState by mutableStateOf(InstallButtonState.READY_TO_INSTALL)
-    var installErrorMessage by mutableStateOf<String?>(null)
-    var isWaitingForUninstall by mutableStateOf(false)
 
     // Export state
     var isSaving by mutableStateOf(false)
@@ -107,25 +92,29 @@ fun rememberMorphePatcherState(
 
 /**
  * Patching success screen with inline install buttons
- * Shows different states: ready to install, installing, installed, conflict, or error
+ * Uses MorpheInstallViewModel for clean installation logic with pre-conflict detection
  * Adapts layout for landscape orientation with scrolling support
  */
 @Composable
 fun PatchingSuccess(
-    isInstalling: Boolean,
-    installedPackageName: String?,
-    installButtonState: InstallButtonState,
-    installErrorMessage: String?,
+    installViewModel: MorpheInstallViewModel,
     usingMountInstall: Boolean,
     onInstall: () -> Unit,
-    onUninstall: () -> Unit,
+    onUninstall: (String) -> Unit,
     onOpen: () -> Unit
 ) {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    // Icon and colors based on state
-    val isError = installButtonState == InstallButtonState.ERROR || installButtonState == InstallButtonState.CONFLICT
+    val installState = installViewModel.installState
+    val installedPackageName = installViewModel.installedPackageName
+
+    // Determine visual state
+    val isError = installState is MorpheInstallViewModel.InstallState.Error ||
+            installState is MorpheInstallViewModel.InstallState.Conflict
+    val isInstalling = installState is MorpheInstallViewModel.InstallState.Installing
+    val isInstalled = installState is MorpheInstallViewModel.InstallState.Installed
+
     val iconTint = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
     val iconBackgroundColor = if (isError) {
         MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
@@ -133,15 +122,28 @@ fun PatchingSuccess(
         MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
     }
     val icon = when {
-        installedPackageName != null -> Icons.Default.Check
+        isInstalled -> Icons.Default.Check
         isError -> Icons.Default.Close
         else -> Icons.Default.Check
     }
 
+    // Get error message if any
+    val errorMessage = when (installState) {
+        is MorpheInstallViewModel.InstallState.Error -> installState.message
+        else -> null
+    }
+
+    // Get conflict package name
+    val conflictPackageName = when (installState) {
+        is MorpheInstallViewModel.InstallState.Conflict -> installState.packageName
+        else -> null
+    }
+
     if (isLandscape) {
         LandscapeSuccessLayout(
-            installButtonState = installButtonState,
-            installErrorMessage = installErrorMessage,
+            installState = installState,
+            errorMessage = errorMessage,
+            conflictPackageName = conflictPackageName,
             usingMountInstall = usingMountInstall,
             isInstalling = isInstalling,
             installedPackageName = installedPackageName,
@@ -154,8 +156,9 @@ fun PatchingSuccess(
         )
     } else {
         PortraitSuccessLayout(
-            installButtonState = installButtonState,
-            installErrorMessage = installErrorMessage,
+            installState = installState,
+            errorMessage = errorMessage,
+            conflictPackageName = conflictPackageName,
             usingMountInstall = usingMountInstall,
             isInstalling = isInstalling,
             installedPackageName = installedPackageName,
@@ -174,8 +177,9 @@ fun PatchingSuccess(
  */
 @Composable
 private fun PortraitSuccessLayout(
-    installButtonState: InstallButtonState,
-    installErrorMessage: String?,
+    installState: MorpheInstallViewModel.InstallState,
+    errorMessage: String?,
+    conflictPackageName: String?,
     usingMountInstall: Boolean,
     isInstalling: Boolean,
     installedPackageName: String?,
@@ -183,7 +187,7 @@ private fun PortraitSuccessLayout(
     iconTint: Color,
     iconBackgroundColor: Color,
     onInstall: () -> Unit,
-    onUninstall: () -> Unit,
+    onUninstall: (String) -> Unit,
     onOpen: () -> Unit
 ) {
     Column(
@@ -218,7 +222,7 @@ private fun PortraitSuccessLayout(
 
         // Animated title text
         AnimatedContent(
-            targetState = getTitle(installButtonState, installedPackageName, isInstalling),
+            targetState = getTitleForState(installState, installedPackageName, isInstalling),
             transitionSpec = {
                 fadeIn(animationSpec = tween(500)) togetherWith
                         fadeOut(animationSpec = tween(500))
@@ -229,7 +233,8 @@ private fun PortraitSuccessLayout(
                 text = stringResource(titleRes),
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
-                color = if (installButtonState == InstallButtonState.ERROR || installButtonState == InstallButtonState.CONFLICT) {
+                color = if (installState is MorpheInstallViewModel.InstallState.Error ||
+                    installState is MorpheInstallViewModel.InstallState.Conflict) {
                     MaterialTheme.colorScheme.error
                 } else {
                     MaterialTheme.colorScheme.onBackground
@@ -242,7 +247,7 @@ private fun PortraitSuccessLayout(
 
         // Animated subtitle text
         AnimatedContent(
-            targetState = getSubtitle(installButtonState, installedPackageName, isInstalling, usingMountInstall),
+            targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
             transitionSpec = {
                 fadeIn(animationSpec = tween(500)) togetherWith
                         fadeOut(animationSpec = tween(500))
@@ -261,11 +266,11 @@ private fun PortraitSuccessLayout(
 
         // Error message if present
         AnimatedVisibility(
-            visible = installErrorMessage != null && installButtonState == InstallButtonState.ERROR,
+            visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
             enter = fadeIn(animationSpec = tween(300)),
             exit = fadeOut(animationSpec = tween(300))
         ) {
-            installErrorMessage?.let { message ->
+            errorMessage?.let { message ->
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -286,7 +291,7 @@ private fun PortraitSuccessLayout(
 
         // Root mode warning for mount install
         AnimatedVisibility(
-            visible = usingMountInstall && installButtonState == InstallButtonState.READY_TO_INSTALL,
+            visible = usingMountInstall && installState is MorpheInstallViewModel.InstallState.Ready,
             enter = fadeIn(animationSpec = tween(300)),
             exit = fadeOut(animationSpec = tween(300))
         ) {
@@ -317,10 +322,10 @@ private fun PortraitSuccessLayout(
         Spacer(Modifier.height(32.dp))
 
         // Install/Open/Uninstall button
-        InstallActionButton(
-            installButtonState = installButtonState,
+        InstallActionButtonNew(
+            installState = installState,
             isInstalling = isInstalling,
-            installedPackageName = installedPackageName,
+            conflictPackageName = conflictPackageName,
             usingMountInstall = usingMountInstall,
             onInstall = onInstall,
             onUninstall = onUninstall,
@@ -334,8 +339,9 @@ private fun PortraitSuccessLayout(
  */
 @Composable
 private fun LandscapeSuccessLayout(
-    installButtonState: InstallButtonState,
-    installErrorMessage: String?,
+    installState: MorpheInstallViewModel.InstallState,
+    errorMessage: String?,
+    conflictPackageName: String?,
     usingMountInstall: Boolean,
     isInstalling: Boolean,
     installedPackageName: String?,
@@ -343,7 +349,7 @@ private fun LandscapeSuccessLayout(
     iconTint: Color,
     iconBackgroundColor: Color,
     onInstall: () -> Unit,
-    onUninstall: () -> Unit,
+    onUninstall: (String) -> Unit,
     onOpen: () -> Unit
 ) {
     Box(
@@ -388,7 +394,7 @@ private fun LandscapeSuccessLayout(
             ) {
                 // Animated title text
                 AnimatedContent(
-                    targetState = getTitle(installButtonState, installedPackageName, isInstalling),
+                    targetState = getTitleForState(installState, installedPackageName, isInstalling),
                     transitionSpec = {
                         fadeIn(animationSpec = tween(500)) togetherWith
                                 fadeOut(animationSpec = tween(500))
@@ -399,7 +405,8 @@ private fun LandscapeSuccessLayout(
                         text = stringResource(titleRes),
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
-                        color = if (installButtonState == InstallButtonState.ERROR || installButtonState == InstallButtonState.CONFLICT) {
+                        color = if (installState is MorpheInstallViewModel.InstallState.Error ||
+                            installState is MorpheInstallViewModel.InstallState.Conflict) {
                             MaterialTheme.colorScheme.error
                         } else {
                             MaterialTheme.colorScheme.onBackground
@@ -411,7 +418,7 @@ private fun LandscapeSuccessLayout(
 
                 // Animated subtitle text
                 AnimatedContent(
-                    targetState = getSubtitle(installButtonState, installedPackageName, isInstalling, usingMountInstall),
+                    targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
                     transitionSpec = {
                         fadeIn(animationSpec = tween(500)) togetherWith
                                 fadeOut(animationSpec = tween(500))
@@ -429,11 +436,11 @@ private fun LandscapeSuccessLayout(
 
                 // Error message if present
                 AnimatedVisibility(
-                    visible = installErrorMessage != null && installButtonState == InstallButtonState.ERROR,
+                    visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
                     enter = fadeIn(animationSpec = tween(300)),
                     exit = fadeOut(animationSpec = tween(300))
                 ) {
-                    installErrorMessage?.let { message ->
+                    errorMessage?.let { message ->
                         Surface(
                             modifier = Modifier
                                 .widthIn(max = 300.dp)
@@ -454,10 +461,10 @@ private fun LandscapeSuccessLayout(
                 Spacer(Modifier.height(24.dp))
 
                 // Install/Open/Uninstall button
-                InstallActionButton(
-                    installButtonState = installButtonState,
+                InstallActionButtonNew(
+                    installState = installState,
                     isInstalling = isInstalling,
-                    installedPackageName = installedPackageName,
+                    conflictPackageName = conflictPackageName,
                     usingMountInstall = usingMountInstall,
                     onInstall = onInstall,
                     onUninstall = onUninstall,
@@ -470,26 +477,30 @@ private fun LandscapeSuccessLayout(
 }
 
 /**
- * Styled install action button
+ * Styled install action button using MorpheInstallViewModel state
  * Changes appearance based on current install state
  */
 @Composable
-private fun InstallActionButton(
-    installButtonState: InstallButtonState,
+private fun InstallActionButtonNew(
+    installState: MorpheInstallViewModel.InstallState,
     isInstalling: Boolean,
-    installedPackageName: String?,
+    conflictPackageName: String?,
     usingMountInstall: Boolean,
     onInstall: () -> Unit,
-    onUninstall: () -> Unit,
+    onUninstall: (String) -> Unit,
     onOpen: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val isConflict = installState is MorpheInstallViewModel.InstallState.Conflict
+    val isError = installState is MorpheInstallViewModel.InstallState.Error
+    val isInstalled = installState is MorpheInstallViewModel.InstallState.Installed
+
     val buttonColors = when {
-        installedPackageName != null -> ButtonDefaults.buttonColors(
+        isInstalled -> ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
         )
-        installButtonState == InstallButtonState.CONFLICT || installButtonState == InstallButtonState.ERROR -> ButtonDefaults.buttonColors(
+        isConflict || isError -> ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error,
             contentColor = MaterialTheme.colorScheme.onError
         )
@@ -502,8 +513,9 @@ private fun InstallActionButton(
     Button(
         onClick = {
             when {
-                installedPackageName != null -> onOpen()
-                installButtonState == InstallButtonState.CONFLICT || installButtonState == InstallButtonState.ERROR -> onUninstall()
+                isInstalled -> onOpen()
+                isConflict -> conflictPackageName?.let { onUninstall(it) }
+                isError -> onInstall() // Retry
                 else -> onInstall()
             }
         },
@@ -531,8 +543,9 @@ private fun InstallActionButton(
         } else {
             Icon(
                 imageVector = when {
-                    installedPackageName != null -> Icons.AutoMirrored.Outlined.OpenInNew
-                    installButtonState == InstallButtonState.CONFLICT || installButtonState == InstallButtonState.ERROR -> Icons.Default.Delete
+                    isInstalled -> Icons.AutoMirrored.Outlined.OpenInNew
+                    isConflict -> Icons.Default.Delete
+                    isError -> Icons.Outlined.FileDownload // Retry icon
                     usingMountInstall -> Icons.Outlined.FolderOpen
                     else -> Icons.Outlined.FileDownload
                 },
@@ -543,8 +556,9 @@ private fun InstallActionButton(
             Text(
                 text = stringResource(
                     when {
-                        installedPackageName != null -> R.string.open_app
-                        installButtonState == InstallButtonState.CONFLICT || installButtonState == InstallButtonState.ERROR -> R.string.uninstall
+                        isInstalled -> R.string.open_app
+                        isConflict -> R.string.uninstall
+                        isError -> R.string.install_app // Retry
                         usingMountInstall -> R.string.mount
                         else -> R.string.install_app
                     }
@@ -559,31 +573,31 @@ private fun InstallActionButton(
 /**
  * Get title resource based on state
  */
-private fun getTitle(
-    installButtonState: InstallButtonState,
+private fun getTitleForState(
+    installState: MorpheInstallViewModel.InstallState,
     installedPackageName: String?,
     isInstalling: Boolean
 ): Int = when {
     isInstalling -> R.string.morphe_patcher_installing
-    installedPackageName != null -> R.string.morphe_patcher_success_title
-    installButtonState == InstallButtonState.CONFLICT -> R.string.morphe_patcher_conflict_title
-    installButtonState == InstallButtonState.ERROR -> R.string.morphe_patcher_install_error_title
+    installedPackageName != null || installState is MorpheInstallViewModel.InstallState.Installed -> R.string.morphe_patcher_success_title
+    installState is MorpheInstallViewModel.InstallState.Conflict -> R.string.morphe_patcher_conflict_title
+    installState is MorpheInstallViewModel.InstallState.Error -> R.string.morphe_patcher_install_error_title
     else -> R.string.morphe_patcher_complete_title
 }
 
 /**
  * Get subtitle resource based on state
  */
-private fun getSubtitle(
-    installButtonState: InstallButtonState,
+private fun getSubtitleForState(
+    installState: MorpheInstallViewModel.InstallState,
     installedPackageName: String?,
     isInstalling: Boolean,
     usingMountInstall: Boolean
 ): Int = when {
     isInstalling -> R.string.morphe_patcher_installing_subtitle
-    installedPackageName != null -> R.string.morphe_patcher_success_subtitle
-    installButtonState == InstallButtonState.CONFLICT -> R.string.morphe_patcher_conflict_subtitle
-    installButtonState == InstallButtonState.ERROR -> R.string.morphe_patcher_install_error_subtitle
+    installedPackageName != null || installState is MorpheInstallViewModel.InstallState.Installed -> R.string.morphe_patcher_success_subtitle
+    installState is MorpheInstallViewModel.InstallState.Conflict -> R.string.morphe_patcher_conflict_subtitle
+    installState is MorpheInstallViewModel.InstallState.Error -> R.string.morphe_patcher_install_error_subtitle
     else -> if (usingMountInstall) R.string.morphe_patcher_ready_to_mount_subtitle else R.string.morphe_patcher_ready_to_install_subtitle
 }
 
