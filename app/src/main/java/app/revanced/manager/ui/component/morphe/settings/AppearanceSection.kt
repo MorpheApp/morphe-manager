@@ -111,7 +111,7 @@ fun AppearanceSection(
                             BackgroundType.CIRCLES -> Icons.Outlined.Circle
                             BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
                             BackgroundType.WAVES -> Icons.Outlined.Waves
-                            BackgroundType.PARTICLES -> Icons.Outlined.ScatterPlot
+                            BackgroundType.SPACE -> Icons.Outlined.AutoAwesome
                             BackgroundType.SHAPES -> Icons.Outlined.Pentagon
                             BackgroundType.NONE -> Icons.Outlined.VisibilityOff
                         },

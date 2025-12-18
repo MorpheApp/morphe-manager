@@ -127,7 +127,7 @@
     <string name="morphe_background_type_circles">Circles</string>
     <string name="morphe_background_type_rings">Rings</string>
     <string name="morphe_background_type_waves">Waves</string>
-    <string name="morphe_background_type_particles">Particles</string>
+    <string name="morphe_background_type_space">Space</string>
     <string name="morphe_background_type_shapes">Shapes</string>
     <string name="morphe_background_type_none">None</string>
 

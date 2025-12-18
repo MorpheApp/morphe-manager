@@ -13,7 +13,7 @@ enum class BackgroundType(val displayNameResId: Int) {
     CIRCLES(R.string.morphe_background_type_circles),
     RINGS(R.string.morphe_background_type_rings),
     WAVES(R.string.morphe_background_type_waves),
-    PARTICLES(R.string.morphe_background_type_particles),
+    SPACE(R.string.morphe_background_type_space),
     SHAPES(R.string.morphe_background_type_shapes),
     NONE(R.string.morphe_background_type_none);
 
@@ -36,7 +36,7 @@ fun AnimatedBackground(
         BackgroundType.CIRCLES -> CirclesBackground(modifier)
         BackgroundType.RINGS -> RingsBackground(modifier)
         BackgroundType.WAVES -> WavesBackground(modifier)
-        BackgroundType.PARTICLES -> ParticlesBackground(modifier)
+        BackgroundType.SPACE -> SpaceBackground(modifier)
         BackgroundType.SHAPES -> ShapesBackground(modifier)
         BackgroundType.NONE -> {} // No background
     }
