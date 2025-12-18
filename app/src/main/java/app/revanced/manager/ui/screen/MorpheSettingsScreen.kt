@@ -3,6 +3,7 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
@@ -21,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -169,6 +171,7 @@ fun MorpheSettingsScreen(
             AnimatedBackground(
                 type = BackgroundType.valueOf(backgroundType)
             )
+            val view = LocalView.current
 
             // Main content
             if (isLandscape) {
@@ -302,7 +305,11 @@ fun MorpheSettingsScreen(
 
                     // About Section
                     AboutSection(
-                        onAboutClick = { showAboutDialog = true }
+                        onAboutClick = {
+                            // Trigger haptic feedback on click
+                            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                            showAboutDialog = true
+                        }
                     )
                 }
             }

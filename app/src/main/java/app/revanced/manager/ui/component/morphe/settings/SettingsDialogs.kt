@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -13,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -27,13 +29,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.PasswordField
-import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
-import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButton
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonColumn
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogOutlinedButton
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import java.security.MessageDigest
@@ -65,19 +61,41 @@ fun AboutDialog(onDismiss: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // App Icon
-            val icon = rememberDrawablePainter(
-                drawable = remember {
-                    AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+            // App Icon with gradient background
+            Box(
+                modifier = Modifier.size(100.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(24.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(
+                                        MaterialTheme.colorScheme.primaryContainer,
+                                        MaterialTheme.colorScheme.secondaryContainer
+                                    )
+                                )
+                            )
+                    )
                 }
-            )
-            Image(
-                painter = icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(20.dp))
-            )
+                val icon = rememberDrawablePainter(
+                    drawable = remember {
+                        AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+                    }
+                )
+                Image(
+                    painter = icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                )
+            }
 
             // App Name & Version
             Column(
