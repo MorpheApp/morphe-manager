@@ -16,13 +16,22 @@
       }
     ],
     "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
+    [
+      "@MorpheApp/changelog", {
+        "releaseJson": {
+          "path": "app-release.json",
+          "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/morphe-manager-${version}.apk",
+          "signatureUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/morphe-manager-${version}.apk.asc"
+        }
+      }
+    ],
     "gradle-semantic-release-plugin",
     [
       "@semantic-release/git",
       {
         "assets": [
           "CHANGELOG.md",
+          "app-release.json",
           "gradle.properties"
         ],
         "message": "chore: Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
