@@ -142,14 +142,7 @@ private fun BundleUpdateSnackbarContent(
                                 }
                             }
                             BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_patches_updated)
-                            BundleUpdateStatus.Error -> {
-                                // Check if it's a no internet error
-                                if (progress?.result == PatchBundleRepository.UpdateResult.NoInternet) {
-                                    stringResource(R.string.morphe_home_no_internet)
-                                } else {
-                                    stringResource(R.string.morphe_home_update_error_subtitle)
-                                }
-                            }
+                            BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error_subtitle)
                         },
                         style = MaterialTheme.typography.bodyMedium,
                         color = contentColor.copy(alpha = 0.8f)

@@ -11,9 +11,8 @@
     <string name="morphe_home_greeting_6">Let\’s make your apps behave</string>
     <string name="morphe_home_greeting_7">Today’s forecast: 100% chance of patching</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
-    <string name="morphe_home_no_internet">No internet connection</string>
     <string name="morphe_home_update_error">Update failed</string>
-    <string name="morphe_home_update_error_subtitle">Please check your connection and try again</string>
+    <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="morphe_home_updating_patches">Updating patches…</string>
     <string name="morphe_home_update_success">Update complete</string>
     <string name="morphe_home_patches_updated">Your patches are up to date</string>
