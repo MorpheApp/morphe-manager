@@ -265,25 +265,41 @@ class HomeStates(
      * Opens browser to APKMirror search and shows file picker prompt
      */
     fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
-        val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
-            pendingPackageName
-        } else {
-            // Some versions of YT Music don't show when the package name is used, use the app name instead
-            "YouTube Music"
-        }
+        val isYouTubeMusic = pendingPackageName == PACKAGE_YOUTUBE_MUSIC
 
-        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
-            // YT Music requires architecture. This logic could be improved
-            " (${Build.SUPPORTED_ABIS.first()})"
-        } else {
-            ""
-        }
-
-        val version = pendingRecommendedVersion ?: ""
         // Backslash search parameter opens the first search result
         // Use quotes to ensure it's an exact match of all search terms
-        val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
-        val searchUrl = "https://duckduckgo.com/?q=${encode(searchQuery, "UTF-8")}"
+        val searchQueryBuilder = StringBuilder("\\")
+
+        // The title on APKMirror's download page uses the app name, not the package name
+        val appName = if (isYouTubeMusic) "YouTube Music" else "YouTube"
+
+        // Enclosing the search term in double quotes will only show exact matches
+        searchQueryBuilder.append("\"$appName $pendingRecommendedVersion\" ")
+
+        if (isYouTubeMusic) {
+            // APKMirror uses 'arm-v7a' instead of 'armeabi-v7a' in the title
+            val architecture = Build.SUPPORTED_ABIS.first()
+                .replace("armeabi-v7a", "arm-v7a")
+            searchQueryBuilder.append("\"($architecture)\" ")
+        }
+
+        // Does not show search results other than APKMirror
+        searchQueryBuilder.append("\"(nodpi)\" site:apkmirror.com")
+        val searchQuery = searchQueryBuilder.toString()
+
+        // This domain is for dinosaur devices that do not support JavaScript, and the response is slightly faster
+        val searchUrlBuilder = StringBuilder("https://html.duckduckgo.com/html/")
+
+        // Region query parameter is always set to 'US (English)'
+        searchUrlBuilder.append("?kl=us-en")
+
+        // Safe search query parameter is set to false (-1)
+        searchUrlBuilder.append("&kp=-1")
+
+        searchUrlBuilder.append("&q=${encode(searchQuery, "UTF-8")}")
+
+        val searchUrl = searchUrlBuilder.toString()
         Log.d(tag, "Using search query: $searchQuery")
 
         try {
