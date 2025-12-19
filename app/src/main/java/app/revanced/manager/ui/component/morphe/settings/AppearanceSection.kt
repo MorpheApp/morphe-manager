@@ -338,22 +338,21 @@ private fun ColorPresetsRow(
                 Color(0xFFB388FF)  // Lavender Glow
             )
         } else {
-            // Theme color presets
+            // Theme color presets (dark colors applied, lighter display variants shown)
             listOf(
-                Color(0xFF311B92), // Deep Purple
-                Color(0xFF1A237E), // Indigo
-                Color(0xFF0D47A1), // Blue
-                Color(0xFF01579B), // Light Blue (dark)
-                Color(0xFF004D40), // Teal
-                Color(0xFF1B5E20), // Green
-                Color(0xFF33691E), // Light Green (dark)
-                Color(0xFF827717), // Lime (dark)
-                Color(0xFFF57F17), // Yellow (dark)
-                Color(0xFFE65100), // Orange
-                Color(0xFFBF360C), // Deep Orange
-                Color(0xFFB71C1C), // Red
-                Color(0xFF880E4F), // Pink
-                Color(0xFF4A148C)  // Purple
+                Color(0xFF1C1B1F), // Obsidian Black
+                Color(0xFF2D2A32), // Dark Slate Purple
+                Color(0xFF1A1A2E), // Midnight Indigo
+                Color(0xFF0F0F1E), // Deep Void
+                Color(0xFF16213E), // Night Navy
+                Color(0xFF1F1B24), // Charcoal Plum
+                Color(0xFF0A1929), // Abyss Blue
+                Color(0xFF1B1B2F), // Shadow Indigo
+                Color(0xFF162447), // Deep Ocean Blue
+                Color(0xFF1F1D2B), // Dark Graphite Violet
+                Color(0xFF2C2C54), // Muted Royal Indigo
+                Color(0xFF1E1E2E)  // Eclipse Gray
+
             )
         }
     }
@@ -394,6 +393,7 @@ private fun ColorPresetsRow(
         // Color presets
         presets.forEach { preset ->
             val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
+            val displayColor = if (!isAccent) preset.lightenForDisplay() else preset
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -406,7 +406,7 @@ private fun ColorPresetsRow(
                             MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(14.dp)
                     )
-                    .background(preset, RoundedCornerShape(12.dp))
+                    .background(displayColor, RoundedCornerShape(12.dp))
                     .clickable {
                         onColorSelected(preset)
                         // If this is theme color (not accent), reset Dynamic Color and Pure Black
@@ -420,4 +420,16 @@ private fun ColorPresetsRow(
             )
         }
     }
+}
+
+/**
+ * Convert dark color to lighter display variant (lighten by ~20%)
+ */
+private fun Color.lightenForDisplay(): Color {
+    return Color(
+        red = (this.red + 0.2f).coerceAtMost(1f),
+        green = (this.green + 0.2f).coerceAtMost(1f),
+        blue = (this.blue + 0.2f).coerceAtMost(1f),
+        alpha = this.alpha
+    )
 }
