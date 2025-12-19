@@ -978,6 +978,7 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="patch_bundle_urls">Get patch bundle imports</string>
     <string name="contact">Contact</string>
     <string name="version">Version</string>
+    <string name="published">Published</string>
     <string name="submit_feedback">Submit issue or feedback</string>
     <string name="submit_feedback_description">Help us improve this application</string>
     <string name="developer_options">Developer options</string>

@@ -6,30 +6,31 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
  * Unified Morphe Floating Action Button component with morphing animation.
- * Supports regular and small sizes, with optional badge and custom icon size.
  *
  * @param onClick Action to perform on click.
  * @param icon The icon to display.
  * @param contentDescription Accessibility description.
  * @param modifier Modifier for the FAB.
- * @param isSmall Whether to use smaller size (default: false).
- * @param showBadge Whether to show a badge (default: false).
- * @param iconSize Size of the icon (default: 24.dp for regular, 20.dp for small).
  * @param containerColor Custom container color (default: theme primaryContainer).
  * @param contentColor Custom content color (default: theme onPrimaryContainer).
  */
@@ -39,13 +40,11 @@ fun MorpheFloatingButtons(
     icon: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    isSmall: Boolean = false,
-    showBadge: Boolean = false,
-    iconSize: Dp = if (isSmall) 20.dp else 24.dp,
     containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
     contentColor: Color = MaterialTheme.colorScheme.onPrimaryContainer
 ) {
-    val fabSize = if (isSmall) 48.dp else 64.dp
+    val fabSize = 64.dp
+    val iconSize = 24.dp
 
     // Track press state
     val interactionSource = remember { MutableInteractionSource() }
@@ -98,20 +97,12 @@ fun MorpheFloatingButtons(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            if (showBadge) {
-                BadgedBox(
-                    badge = {
-                        Badge(
-                            modifier = Modifier.size(10.dp),
-                            containerColor = MaterialTheme.colorScheme.error
-                        )
-                    }
-                ) {
-                    Icon(icon, contentDescription, Modifier.size(iconSize), tint = contentColor)
-                }
-            } else {
-                Icon(icon, contentDescription, Modifier.size(iconSize), tint = contentColor)
-            }
+            Icon(
+                imageVector = icon,
+                contentDescription = contentDescription,
+                modifier = Modifier.size(iconSize),
+                tint = contentColor
+            )
         }
     }
 }

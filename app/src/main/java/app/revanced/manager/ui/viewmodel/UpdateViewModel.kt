@@ -68,7 +68,7 @@ class UpdateViewModel(
     }
     var showInternetCheckDialog by mutableStateOf(false)
     var state by mutableStateOf(State.CAN_DOWNLOAD)
-        private set
+//        private set // Morphe
 
     var installError by mutableStateOf("")
 
@@ -322,5 +322,24 @@ class UpdateViewModel(
         INSTALLING(R.string.installing_manager_update),
         FAILED(R.string.install_update_manager_failed),
         SUCCESS(R.string.update_completed)
+    }
+
+    /**
+     * Reset state if installation was cancelled by user (dismissed system dialog)
+     * Called when dialog reopens to check if we need to reset
+     */
+    fun resetIfInstallCancelled() {
+        // If we're in INSTALLING state but the pending install was cancelled,
+        // reset to CAN_INSTALL so user can try again
+        if (state == State.INSTALLING && pendingExternalInstall == null) {
+            // Check if the APK file still exists
+            if (location.exists() && location.length() > 0) {
+                state = State.CAN_INSTALL
+            } else {
+                // File was deleted somehow, need to download again
+                state = State.CAN_DOWNLOAD
+                canResumeDownload = false
+            }
+        }
     }
 }

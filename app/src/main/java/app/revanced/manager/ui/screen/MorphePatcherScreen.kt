@@ -446,7 +446,7 @@ fun MorphePatcherScreen(
                         MorpheFloatingButtons(
                             onClick = onBackClick,
                             icon = Icons.Default.Home,
-                            contentDescription = "Home",
+                            contentDescription = stringResource(R.string.main_top_title),
                             containerColor = MaterialTheme.colorScheme.secondaryContainer,
                             contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                         )

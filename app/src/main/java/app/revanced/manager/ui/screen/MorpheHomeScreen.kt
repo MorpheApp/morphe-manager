@@ -21,19 +21,20 @@ import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.component.morphe.home.*
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 /**
  * Data class for quick patch parameters
@@ -89,6 +90,7 @@ fun MorpheHomeScreen(
     )
 
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
+    var showUpdateDetailsDialog by remember { mutableStateOf(false) }
 
     val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
 
@@ -113,22 +115,35 @@ fun MorpheHomeScreen(
         updateMorpheBundleAndUI()
     }
 
-    // Show manager update dialog
+    // Show manager update available dialog
     if (homeState.shouldShowUpdateDialog) {
-        AvailableUpdateDialog(
+        ManagerUpdateAvailableDialog(
             onDismiss = { homeState.hasCheckedForUpdates = true },
-            setShowManagerUpdateDialogOnLaunch = dashboardViewModel::setShowManagerUpdateDialogOnLaunch,
-            onConfirm = {
+            onShowDetails = {
                 homeState.hasCheckedForUpdates = true
-                onUpdateClick()
+                showUpdateDetailsDialog = true
             },
+            setShowManagerUpdateDialogOnLaunch = dashboardViewModel::setShowManagerUpdateDialogOnLaunch,
             newVersion = dashboardViewModel.updatedManagerVersion ?: "unknown"
+        )
+    }
+
+    // Show manager update details dialog
+    if (showUpdateDetailsDialog) {
+        // Create UpdateViewModel with downloadOnScreenEntry = false
+        // We don't want auto-download when dialog opens
+        val updateViewModel: UpdateViewModel = koinViewModel(
+            parameters = { parametersOf(false) }
+        )
+        ManagerUpdateDetailsDialog(
+            onDismiss = { showUpdateDetailsDialog = false },
+            updateViewModel = updateViewModel
         )
     }
 
     // Android 11 Dialog
     if (homeState.showAndroid11Dialog) {
-        Android11Dialog(
+        HomeAndroid11Dialog(
             onDismissRequest = { homeState.showAndroid11Dialog = false },
             onContinue = { homeState.installAppsPermissionLauncher.launch(context.packageName) }
         )
@@ -223,10 +238,11 @@ fun MorpheHomeScreen(
                 // Update FAB
                 if (hasManagerUpdate) {
                     MorpheFloatingButtons(
-                        onClick = onUpdateClick,
+                        onClick = { showUpdateDetailsDialog = true },
                         icon = Icons.Outlined.Update,
                         contentDescription = stringResource(R.string.update),
-                        showBadge = true
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                     )
                 }
 
