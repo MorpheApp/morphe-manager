@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.shared
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -22,10 +23,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 
 /**
- * Unified Morphe Floating Action Button component with morphing animation.
+ * Unified Morphe Floating Action Button component with morphing animation and haptic feedback.
  *
  * @param onClick Action to perform on click.
  * @param icon The icon to display.
@@ -45,6 +47,7 @@ fun MorpheFloatingButtons(
 ) {
     val fabSize = 64.dp
     val iconSize = 24.dp
+    val view = LocalView.current
 
     // Track press state
     val interactionSource = remember { MutableInteractionSource() }
@@ -72,7 +75,11 @@ fun MorpheFloatingButtons(
     )
 
     Surface(
-        onClick = onClick,
+        onClick = {
+            // Trigger haptic feedback on click
+            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            onClick()
+        },
         modifier = modifier
             .size(fabSize)
             .graphicsLayer {

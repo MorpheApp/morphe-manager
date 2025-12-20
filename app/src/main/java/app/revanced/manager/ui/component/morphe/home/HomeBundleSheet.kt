@@ -2,6 +2,7 @@ package app.revanced.manager.ui.component.morphe.home
 
 import android.annotation.SuppressLint
 import android.text.format.DateUtils
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -183,9 +185,8 @@ private fun BundleContent(
                 icon = Icons.Outlined.Info,
                 label = stringResource(R.string.patches),
                 value = patchCount.toString(),
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable(onClick = onPatchesClick)
+                modifier = Modifier.weight(1f),
+                onClick = onPatchesClick
             )
 
             StatChip(
@@ -194,9 +195,8 @@ private fun BundleContent(
                 value = updateInfo?.latestVersion?.removePrefix("v")
                     ?: bundle.patchBundle?.manifestAttributes?.version?.removePrefix("v")
                     ?: "N/A",
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable(onClick = onVersionClick)
+                modifier = Modifier.weight(1f),
+                onClick = onVersionClick
             )
         }
 
@@ -233,7 +233,7 @@ private fun BundleContent(
 }
 
 /**
- * Stat chip showing icon, label, and value
+ * Stat chip showing icon, label, and value with haptic feedback
  * Used for displaying patch count and version
  */
 @Composable
@@ -241,10 +241,18 @@ private fun StatChip(
     icon: ImageVector,
     label: String,
     value: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
+    val view = LocalView.current
+
     Surface(
         modifier = modifier,
+        onClick = {
+            // Trigger haptic feedback on click
+            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            onClick()
+        },
         shape = RoundedCornerShape(12.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
         shadowElevation = 4.dp
