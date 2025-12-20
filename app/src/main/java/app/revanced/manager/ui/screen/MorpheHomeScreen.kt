@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.PreReleaseChangedModel
+import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -102,6 +103,9 @@ fun MorpheHomeScreen(
                 showProgress = true,
                 showToast = false
             )
+
+            // Also clear changelog cache after bundle update
+            (homeState.apiBundle as? RemotePatchBundle)?.clearChangelogCache()
         } finally {
             delay(500)
             bundleUpdateInProgress = false

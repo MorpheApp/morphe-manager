@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.annotation.SuppressLint
 import android.text.format.DateUtils
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -37,6 +38,7 @@ import java.util.Locale
 /**
  * Bottom sheet displaying bundle information and update controls
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeBundleSheet(
