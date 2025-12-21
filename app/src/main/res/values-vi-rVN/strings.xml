@@ -10,9 +10,8 @@
     <string name="morphe_home_greeting_6">Hãy để ứng dụng của bạn cư xử</string>
     <string name="morphe_home_greeting_7">Dự báo hôm nay: 100% cơ hội vá lỗi</string>
     <string name="morphe_home_bundle_type_api">Gói API</string>
-    <string name="morphe_home_no_internet">Không có kết nối internet</string>
     <string name="morphe_home_update_error">Cập nhật thất bại</string>
-    <string name="morphe_home_update_error_subtitle">Vui lòng kiểm tra kết nối của bạn và thử lại</string>
+    <string name="morphe_home_update_error_subtitle">Kiểm tra kết nối internet của bạn và thử lại</string>
     <string name="morphe_home_updating_patches">Đang cập nhật các bản vá…</string>
     <string name="morphe_home_update_success">Cập nhật hoàn tất</string>
     <string name="morphe_home_patches_updated">Các bản vá của bạn đã được cập nhật</string>
@@ -57,14 +56,10 @@
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Chế độ gốc yêu cầu cài đặt APK gốc trên thiết bị của bạn trước khi vá.</string>
     <string name="morphe_root_gmscore_excluded">Bản vá hỗ trợ GmsCore bị loại trừ trong chế độ gốc</string>
-    <string name="morphe_patcher_mount_dialog_message">Gắn ứng dụng đã vá?</string>
-    <string name="morphe_patcher_mount_ready_message">Sẵn sàng để gắn. Ứng dụng đã vá sẽ thay thế phiên bản đã cài đặt.</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_title">Vá</string>
     <string name="morphe_patcher_save_apk">Lưu APK</string>
     <string name="morphe_patcher_copy_error">Lỗi sao chép</string>
     <string name="morphe_patcher_show_error">Hiển thị lỗi</string>
-    <string name="morphe_patcher_close">Đóng</string>
     <string name="morphe_patcher_error_copied">Lỗi đã được sao chép vào bảng nhớ tạm</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d bản vá</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
@@ -83,9 +78,15 @@
     <string name="morphe_patcher_failed_subtitle">Kiểm tra chi tiết lỗi bên dưới</string>
     <string name="morphe_patcher_failed_dialog_title">Vá lỗi thất bại</string>
     <string name="morphe_patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
+    <string name="morphe_patcher_mounting">Đang gắn kết…</string>
+    <string name="morphe_patcher_conflict_title">Xung đột gói</string>
+    <string name="morphe_patcher_conflict_subtitle">Bạn cần gỡ cài đặt phiên bản hiện có</string>
+    <string name="morphe_patcher_install_error_title">Lỗi cài đặt</string>
+    <string name="morphe_patcher_install_error_subtitle">Hãy thử gỡ cài đặt và cài đặt lại</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Nhấn nút bên dưới để cài đặt</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Nhấn nút bên dưới để gắn kết</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Phiên bản không được hỗ trợ</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Không có bản vá nào khả dụng cho phiên bản ứng dụng này. Tiếp tục có thể khiến ứng dụng không hoạt động.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">Quá trình vá sẽ tiếp tục mà không áp dụng bất kỳ bản vá nào. Điều này có thể khiến ứng dụng bị trục trặc hoặc không hoạt động chút nào.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">APK này không phải là phiên bản ứng dụng được đề xuất. Tiếp tục có thể dẫn đến ứng dụng không hoạt động.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Tiếp tục bất chấp</string>
     <string name="morphe_patcher_wrong_package_title">Đã chọn sai gói</string>
     <string name="morphe_patcher_wrong_package_description">APK đã chọn không dành cho ứng dụng bạn dự định vá.</string>
@@ -115,11 +116,15 @@
     <string name="morphe_settings_return_to_morphe_description">Quay lại chế độ đơn giản</string>
     <string name="morphe_settings_return_to_advanced">Chuyển sang chế độ Nâng cao</string>
     <string name="morphe_settings_return_to_advanced_description">Chuyển sang chế độ nâng cao đầy đủ tính năng</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_website">Chia sẻ trang web</string>
     <string name="morphe_share_website_description">Chia sẻ trang web chính thức của Morphe</string>
+    <string name="morphe_background_type">Hoạt ảnh nền</string>
+    <string name="morphe_background_type_circles">Hình tròn</string>
+    <string name="morphe_background_type_rings">Vòng tròn</string>
+    <string name="morphe_background_type_waves">Sóng</string>
+    <string name="morphe_background_type_space">Không gian</string>
+    <string name="morphe_background_type_shapes">Hình dạng</string>
+    <string name="morphe_background_type_none">Không có</string>
     <string name="morphe_update_use_patches_prereleases">Sử dụng bản vá thử nghiệm</string>
     <string name="morphe_update_use_patches_prereleases_description">Sử dụng các bản vá phát triển mới nhất</string>
     <string name="patches_bundle_json_url">URL gói bản vá JSON</string>
@@ -533,9 +538,9 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="export_name_variable_app_version">Phiên bản ứng dụng</string>
     <string name="export_name_variable_app_version_description">Được thay bằng tên phiên bản của ứng dụng.</string>
     <string name="export_name_variable_patches_version">Phiên bản bản vá</string>
-    <string name="export_name_variable_patches_version_description">Được thay thế bằng phiên bản(các) gói vá đã áp dụng.</string>
+    <string name="export_name_variable_patches_version_description">Được thay bằng phiên bản gói vá đã áp dụng.</string>
     <string name="export_name_variable_bundle_names">Tên gói vá</string>
-    <string name="export_name_variable_bundle_names_description">Được thay thế bằng tên(các) gói vá đã áp dụng.</string>
+    <string name="export_name_variable_bundle_names_description">Được thay bằng tên gói vá đã áp dụng.</string>
     <string name="export_name_variable_manager_version">Phiên bản trình quản lý</string>
     <string name="export_name_variable_manager_version_description">Được thay bằng phiên bản trình quản lý.</string>
     <string name="export_name_variable_timestamp">Dấu thời gian</string>
@@ -564,10 +569,6 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="app_language">Ngôn ngữ ứng dụng</string>
     <string name="language_dialog_title">Chọn ngôn ngữ ứng dụng</string>
     <string name="language_option_system">Sử dụng ngôn ngữ của thiết bị</string>
-    <string name="language_option_english">Tiếng Anh</string>
-    <string name="language_option_chinese_simplified">Tiếng Trung (Giản thể)</string>
-    <string name="language_option_korean">Tiếng Hàn</string>
-    <string name="language_option_vietnamese">Tiếng Việt</string>
     <string name="device">Thiết bị</string>
     <string name="device_android_version">Phiên bản Android</string>
     <string name="device_model">Mẫu</string>
@@ -593,6 +594,9 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="patches_replace_fail">Không thể nhập bản vá: %s</string>
     <string name="no_patched_apps_found">Trống</string>
     <string name="tap_on_patches">Nhấn vào bản vá để biết thêm chi tiết</string>
+    <string name="patches_selected">Đã chọn %s gói vá</string>
+    <string name="patch_profiles_selected">Đã chọn %1$d cấu hình vá</string>
+    <string name="selected_apps_count">Đã chọn %1$d ứng dụng</string>
     <string name="selected_apps_delete_dialog_description">Xoá ứng dụng đã chọn từ trình quản lý? Ứng dụng đã cài trên máy của bạn sẽ không bị ảnh hưởng.</string>
     <string name="incompatible_patches">Bản vá không tương thích</string>
     <string name="universal_patches">Bản vá phổ quát</string>
@@ -672,9 +676,15 @@ Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc ti
     <plurals name="patch_profile_bundle_count">
         <item quantity="other">%d gói</item>
     </plurals>
+    <string name="universal_patch_warning_description">"Các bản vá phổ quát có phạm vi sử dụng rộng hơn và không hoạt động ổn định bằng các bản vá nhắm mục tiêu ứng dụng cụ thể. Bạn có thể gặp sự cố khi sử dụng chúng.
+
+Bạn cần bật \"Hiển thị &amp; cho phép sử dụng bản vá phổ quát\" trong cài đặt nâng cao trước khi sử dụng bản vá phổ quát."</string>
     <string name="this_version">Phiên bản này</string>
     <string name="universal">Mọi ứng dụng</string>
     <string name="search_patches">Tìm kiếm bản vá</string>
+    <string name="app_version_not_compatible">"Bản vá này không tương thích với phiên bản ứng dụng đã chọn (%1$s).
+
+Nó chỉ tương thích với phiên bản sau: %2$s."</string>
     <string name="continue_with_version">Tiếp tục với phiên bản này?</string>
     <string name="version_not_compatible">Không phải tất cả các bản vá đều tương thích với phiên bản này (%s). Bạn có muốn tiếp tục không?</string>
     <string name="download_application">Tải xuống ứng dụng?</string>
@@ -717,9 +727,11 @@ Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc ti
     <string name="downloader_app_not_found">Trình tải xuống không tìm thấy ứng dụng nào</string>
     <string name="downloader_error">Lỗi trình tải xuống: %s</string>
     <string name="downloader_no_plugins_installed">Chưa có tiện ích nào được cài đặt.</string>
+    <string name="downloader_no_plugins_available">Bạn đã cài đặt tiện ích tải xuống, nhưng không cái nào đáng tin cậy. Hãy kiểm tra cài đặt của bạn.</string>
     <string name="downloader_plugin_uninstall_success">Đã gỡ cài đặt %1$s</string>
     <string name="downloader_plugin_uninstall_failed">Không thể gỡ cài đặt %1$s</string>
     <string name="downloaded_apps_export">Xuất ứng dụng đã chọn</string>
+    <string name="downloaded_apps_export_success">Đã xuất %1$d ứng dụng</string>
     <string name="downloaded_apps_export_failed">Không thể xuất ứng dụng đã tải về</string>
     <string name="already_patched">Đã vá</string>
     <string name="patch_selector_sheet_filter_title">Bộ lọc</string>
@@ -777,6 +789,7 @@ Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc ti
     <string name="installer_custom_lookup">Tìm trình cài đặt</string>
     <string name="installer_custom_lookup_empty">Nhập tên gói trước.</string>
     <string name="installer_custom_searching">Đang tìm hoạt động cài đặt…</string>
+    <string name="installer_custom_lookup_found">Đã tìm thấy %1$d trình cài đặt.</string>
     <string name="installer_custom_action_add">Lưu trình cài đặt</string>
     <string name="installer_custom_action_remove">Xoá trình cài đặt đã lưu</string>
     <string name="installer_custom_builtin_indicator">Đã tự động lưu</string>
@@ -797,7 +810,9 @@ Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc ti
     <string name="installer_hint_storage">Không đủ bộ nhớ trống để cài đặt.</string>
     <string name="installer_hint_timeout">Quá thời gian chờ cài đặt. Hãy thử lại.</string>
     <string name="installer_hint_aborted">Đã huỷ cài đặt.</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;Chi tiết: %2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Chi tiết: %2$s"</string>
     <string name="installer_external_launched">Đang mở %1$s…</string>
     <string name="installer_external_timeout">%1$s không xác nhận cài đặt. Kiểm tra ứng dụng khác và thử lại.</string>
     <string name="installer_external_success">%1$s báo đã cài đặt thành công.</string>
@@ -888,6 +903,7 @@ Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc ti
     <string name="patch_bundle_urls">URL gói vá</string>
     <string name="contact">Liên hệ</string>
     <string name="version">Phiên bản</string>
+    <string name="published">Đã phát hành</string>
     <string name="submit_feedback">Gửi phản hồi hoặc báo lỗi</string>
     <string name="submit_feedback_description">Giúp chúng tôi cải thiện ứng dụng này.</string>
     <string name="developer_options">Tùy chọn nhà phát triển</string>

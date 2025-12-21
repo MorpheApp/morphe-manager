@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="zero">%d تصحيحات</item>
+        <item quantity="one">%d تصحيح</item>
+        <item quantity="two">%d تصحيحان</item>
+        <item quantity="few">%d تصحيحات</item>
+        <item quantity="many">%d تصحيحات</item>
+        <item quantity="other">%d تصحيحات</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="zero">تنفيذ %d تصحيحات</item>
+        <item quantity="one">تنفيذ %d تصحيح</item>
+        <item quantity="two">تنفيذ %d تصحيحان</item>
+        <item quantity="few">تنفيذ %d تصحيحات</item>
+        <item quantity="many">تنفيذ %d تصحيحاً</item>
+        <item quantity="other">تنفيذ %d تصحيحات</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="zero">%d محدد</item>
+        <item quantity="one">%d تم تحديده</item>
+        <item quantity="two">%d تم تحديدهما</item>
+        <item quantity="few">%d تم تحديدهم</item>
+        <item quantity="many">%d تم تحديده</item>
+        <item quantity="other">%d تم تحديده</item>
+    </plurals>
+</resources>

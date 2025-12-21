@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d paiste</item>
+        <item quantity="two">%d paistí</item>
+        <item quantity="few">%d paistí</item>
+        <item quantity="many">%d paistí</item>
+        <item quantity="other">%d paiste</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Cuir %d paiste i bhfeidhm</item>
+        <item quantity="two">Cuir %d paistí i bhfeidhm</item>
+        <item quantity="few">Cuir %d paistí i bhfeidhm</item>
+        <item quantity="many">Cuir %d paistí i bhfeidhm</item>
+        <item quantity="other">Cuir %d paiste i bhfeidhm</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d roghnaithe</item>
+        <item quantity="two">%d roghnaithe</item>
+        <item quantity="few">%d roghnaithe</item>
+        <item quantity="many">%d roghnaithe</item>
+        <item quantity="other">%d roghnaithe</item>
+    </plurals>
+</resources>

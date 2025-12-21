@@ -10,9 +10,8 @@
     <string name="morphe_home_greeting_6">Ας κάνουμε τις εφαρμογές σας να συμπεριφέρονται σωστά</string>
     <string name="morphe_home_greeting_7">Η σημερινή πρόγνωση: 100% πιθανότητα ενημέρωσης</string>
     <string name="morphe_home_bundle_type_api">Πακέτο API</string>
-    <string name="morphe_home_no_internet">Χωρίς σύνδεση στο διαδίκτυο</string>
     <string name="morphe_home_update_error">Η ενημέρωση απέτυχε</string>
-    <string name="morphe_home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά</string>
+    <string name="morphe_home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="morphe_home_updating_patches">Ενημέρωση ενημερώσεων…</string>
     <string name="morphe_home_update_success">Η ενημέρωση ολοκληρώθηκε</string>
     <string name="morphe_home_patches_updated">Οι ενημερώσεις σας είναι πλήρεις</string>
@@ -57,14 +56,10 @@
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Η λειτουργία root απαιτεί την εγκατάσταση του αρχικού APK στη συσκευή σας πριν την εφαρμογή της ενημέρωσης.</string>
     <string name="morphe_root_gmscore_excluded">Η ενημέρωση GmsCore έχει εξαιρεθεί στη λειτουργία root</string>
-    <string name="morphe_patcher_mount_dialog_message">Να γίνει προσάρτηση της εφαρμογής μετά την ενημέρωση;</string>
-    <string name="morphe_patcher_mount_ready_message">Έτοιμο για προσάρτηση. Η ενημερωμένη εφαρμογή θα αντικαταστήσει την εγκατεστημένη έκδοση.</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_title">Ενημέρωση</string>
     <string name="morphe_patcher_save_apk">Αποθήκευση APK</string>
     <string name="morphe_patcher_copy_error">Σφάλμα αντιγραφής</string>
     <string name="morphe_patcher_show_error">Εμφάνιση σφάλματος</string>
-    <string name="morphe_patcher_close">Κλείσιμο</string>
     <string name="morphe_patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d ενημερώσεις</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
@@ -83,9 +78,15 @@
     <string name="morphe_patcher_failed_subtitle">Ελέγξτε τις λεπτομέρειες του σφάλματος παρακάτω</string>
     <string name="morphe_patcher_failed_dialog_title">Η εφαρμογή του patch απέτυχε</string>
     <string name="morphe_patcher_unknown_error">Παρουσιάστηκε άγνωστο σφάλμα</string>
+    <string name="morphe_patcher_mounting">Προσάρτηση…</string>
+    <string name="morphe_patcher_conflict_title">Σύγκρουση πακέτου</string>
+    <string name="morphe_patcher_conflict_subtitle">Πρέπει να απεγκαταστήσετε την υπάρχουσα έκδοση</string>
+    <string name="morphe_patcher_install_error_title">Σφάλμα εγκατάστασης</string>
+    <string name="morphe_patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Πατήστε το παρακάτω κουμπί για εγκατάσταση</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Μη υποστηριζόμενη έκδοση</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Δεν υπάρχουν διαθέσιμα patches για αυτήν την έκδοση της εφαρμογής. Η συνέχιση ενδέχεται να οδηγήσει σε μη λειτουργική εφαρμογή.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">Η διαδικασία εφαρμογής του patch θα συνεχιστεί χωρίς την εφαρμογή κανενός patch. Αυτό μπορεί να προκαλέσει δυσλειτουργία της εφαρμογής ή να μην λειτουργεί καθόλου.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Αυτό το APK δεν είναι συνιστώμενη έκδοση εφαρμογής. Η συνέχιση μπορεί να οδηγήσει σε μη λειτουργική εφαρμογή.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Συνέχεια Ούτως ή Άλλως</string>
     <string name="morphe_patcher_wrong_package_title">Επιλέχθηκε Λανθασμένο Πακέτο</string>
     <string name="morphe_patcher_wrong_package_description">Το επιλεγμένο APK δεν αφορά την εφαρμογή που προορίζατε να κάνετε patch.</string>
@@ -115,11 +116,15 @@
     <string name="morphe_settings_return_to_morphe_description">Επιστροφή στην απλοποιημένη λειτουργία</string>
     <string name="morphe_settings_return_to_advanced">Αλλαγή σε προηγμένη λειτουργία</string>
     <string name="morphe_settings_return_to_advanced_description">Μετάβαση στην πλήρως λειτουργική προηγμένη λειτουργία</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_website">Κοινοποίηση Ιστοτόπου</string>
     <string name="morphe_share_website_description">Κοινοποίηση του επίσημου ιστοτόπου του Morphe</string>
+    <string name="morphe_background_type">Κινούμενο Σχέδιο Φόντου</string>
+    <string name="morphe_background_type_circles">Κύκλοι</string>
+    <string name="morphe_background_type_rings">Δακτύλιοι</string>
+    <string name="morphe_background_type_waves">Κύματα</string>
+    <string name="morphe_background_type_space">Διάστημα</string>
+    <string name="morphe_background_type_shapes">Σχήματα</string>
+    <string name="morphe_background_type_none">Κανένα</string>
     <string name="morphe_update_use_patches_prereleases">Χρήση ενημερώσεων προ-κυκλοφορίας</string>
     <string name="morphe_update_use_patches_prereleases_description">Χρήση των τελευταίων ενημερώσεων ανάπτυξης</string>
     <string name="patches_bundle_json_url">URL JSON για πακέτο ενημερώσεων</string>
@@ -215,6 +220,7 @@
     <string name="bundle_version_dialog_selected_indicator_inline">%1$s (επιλεγμένο)</string>
     <string name="bundle_version_dialog_other_title">Επιλογή άλλης υποστηριζόμενης έκδοσης:</string>
     <string name="bundle_version_dialog_locked_title">Οι διασφαλίσεις έκδοσης είναι ενεργοποιημένες</string>
+    <string name="bundle_version_dialog_locked_hint">Μεταβείτε στις Ρυθμίσεις &gt; Για προχωρημένους &gt; Ασφάλειες και ορίστε και τα δύο «Απαιτείται έκδοση προτεινόμενης εφαρμογής» (απενεργοποίηση) και «Απενεργοποίηση ελέγχου συμβατότητας έκδοσης» (ενεργοποίηση) για να επιλέξετε εκδόσεις συγκεκριμένων πακέτων.</string>
     <string name="patch_item_description">Έναρξη εφαρμογής επιδιορθώσεων</string>
     <string name="patch_selector_item">Επιλογή επιδιορθώσεων</string>
     <string name="patch_selector_item_description">%d επιδιορθώσεις επιλέχθηκαν</string>
@@ -553,7 +559,9 @@
     <string name="export_name_variable_app_version">Έκδοση εφαρμογής</string>
     <string name="export_name_variable_app_version_description">Αντικαθίσταται με το όνομα έκδοσης της εφαρμογής.</string>
     <string name="export_name_variable_patches_version">Έκδοση ενημερώσεων κώδικα</string>
+    <string name="export_name_variable_patches_version_description">Αντικαταστάθηκε με την έκδοση του πακέτου επιδιόρθωσης που εφαρμόστηκε.</string>
     <string name="export_name_variable_bundle_names">Ονόματα πακέτων ενημερώσεων κώδικα</string>
+    <string name="export_name_variable_bundle_names_description">Αντικαταστάθηκε με το όνομα του πακέτου επιδιόρθωσης που εφαρμόστηκε.</string>
     <string name="export_name_variable_manager_version">Έκδοση διαχειριστή</string>
     <string name="export_name_variable_manager_version_description">Αντικαταστάθηκε με την έκδοση του διαχειριστή.</string>
     <string name="export_name_variable_timestamp">Χρονοσφραγίδα</string>
@@ -582,10 +590,6 @@
     <string name="app_language">Γλώσσα εφαρμογής</string>
     <string name="language_dialog_title">Επιλογή γλώσσας εφαρμογής</string>
     <string name="language_option_system">Χρήση γλώσσας συσκευής</string>
-    <string name="language_option_english">Αγγλικά</string>
-    <string name="language_option_chinese_simplified">Κινεζικά (Απλοποιημένα)</string>
-    <string name="language_option_korean">Κορεάτικα</string>
-    <string name="language_option_vietnamese">Βιετναμέζικα</string>
     <string name="device">Συσκευή</string>
     <string name="device_android_version">Έκδοση Android</string>
     <string name="device_model">Μοντέλο</string>
@@ -611,7 +615,9 @@
     <string name="patches_replace_fail">Αποτυχία εισαγωγής επιδιορθώσεων: %s</string>
     <string name="no_patched_apps_found">Δεν βρέθηκαν επιδιορθωμένες εφαρμογές</string>
     <string name="tap_on_patches">Πατήστε στις επιδιορθώσεις για περισσότερες πληροφορίες σχετικά με αυτές</string>
-    <string name="patches_selected">Επιλέχθηκαν %s πακέτο(α) επιδιορθώσεων</string>
+    <string name="patches_selected">Επιλέχθηκε πακέτο ενημερώσεων %s</string>
+    <string name="patch_profiles_selected">Επιλέχθηκαν %1$d προφίλ επιδιόρθωσης</string>
+    <string name="selected_apps_count">%1$d εφαρμογή επιλέχθηκε</string>
     <string name="selected_apps_delete_dialog_description">Αφαίρεση των επιλεγμένων εφαρμογών από τη διαχείριση; Οι εγκατεστημένες εφαρμογές στη συσκευή σας θα παραμείνουν αμετάβλητες.</string>
     <string name="incompatible_patches">Μη συμβατές επιδιορθώσεις</string>
     <string name="universal_patches">Καθολικές επιδιορθώσεις</string>
@@ -706,6 +712,9 @@
     <string name="this_version">Αυτή η έκδοση</string>
     <string name="universal">Οποιαδήποτε εφαρμογή</string>
     <string name="search_patches">Αναζήτηση patches</string>
+    <string name="app_version_not_compatible">"Αυτό το patch δεν είναι συμβατό με την επιλεγμένη έκδοση της εφαρμογής (%1$s).
+
+Είναι συμβατό μόνο με την ακόλουθη έκδοση: %2$s."</string>
     <string name="continue_with_version">Συνέχεια με αυτήν την έκδοση;</string>
     <string name="version_not_compatible">Δεν είναι όλες οι επιδιορθώσεις συμβατές με αυτήν την έκδοση (%s). Θέλετε να συνεχίσετε ούτως ή άλλως;</string>
     <string name="download_application">Λήψη εφαρμογής;</string>
@@ -748,10 +757,11 @@
     <string name="downloader_app_not_found">Το πρόγραμμα λήψης δεν βρήκε την εφαρμογή</string>
     <string name="downloader_error">Σφάλμα προγράμματος λήψης: %s</string>
     <string name="downloader_no_plugins_installed">Δεν υπάρχει εγκατεστημένο πρόγραμμα λήψης.</string>
+    <string name="downloader_no_plugins_available">Υπάρχουν εγκατεστημένοι προγραμματιστές λήψεων, αλλά κανένας δεν είναι αξιόπιστος. Ελέγξτε τις ρυθμίσεις σας.</string>
     <string name="downloader_plugin_uninstall_success">Απεγκαταστάθηκε το %1$s</string>
     <string name="downloader_plugin_uninstall_failed">Αδυναμία απεγκατάστασης του %1$s</string>
     <string name="downloaded_apps_export">Εξαγωγή επιλεγμένων εφαρμογών</string>
-    <string name="downloaded_apps_export_success">Εξήχθησαν %1$d εφαρμογή(ές)</string>
+    <string name="downloaded_apps_export_success">Εξήχθησαν %1$d εφαρμογές</string>
     <string name="downloaded_apps_export_failed">Αδυναμία εξαγωγής λήψεων εφαρμογών</string>
     <string name="already_patched">Έχει ήδη γίνει patch</string>
     <string name="patch_selector_sheet_filter_title">Φίλτρο</string>
@@ -809,6 +819,7 @@
     <string name="installer_custom_lookup">Εύρεση εγκαταστατών</string>
     <string name="installer_custom_lookup_empty">Εισαγάγετε πρώτα ένα όνομα πακέτου.</string>
     <string name="installer_custom_searching">Αναζήτηση δραστηριοτήτων εγκαταστάτη…</string>
+    <string name="installer_custom_lookup_found">Βρέθηκε %1$d εγκαταστάτης.</string>
     <string name="installer_custom_action_add">Αποθήκευση εγκαταστάτη</string>
     <string name="installer_custom_action_remove">Κατάργηση αποθηκευμένου εγκαταστάτη</string>
     <string name="installer_custom_builtin_indicator">Αυτόματη αποθήκευση</string>
@@ -829,7 +840,9 @@
     <string name="installer_hint_storage">Δεν υπάρχει αρκετός χώρος αποθήκευσης για την εγκατάσταση.</string>
     <string name="installer_hint_timeout">Η εγκατάσταση έληξε. Προσπαθήστε ξανά.</string>
     <string name="installer_hint_aborted">Η εγκατάσταση ακυρώθηκε.</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;Λεπτομέρειες: %2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Λεπτομέρειες: %2$s"</string>
     <string name="installer_external_launched">Άνοιγμα του %1$s…</string>
     <string name="installer_external_timeout">Το %1$s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά.</string>
     <string name="installer_external_success">Το %1$s ανέφερε επιτυχή εγκατάσταση.</string>
@@ -920,6 +933,7 @@
     <string name="patch_bundle_urls">Λήψη εισαγωγών δέσμης επιδιορθώσεων</string>
     <string name="contact">Επικοινωνία</string>
     <string name="version">Έκδοση</string>
+    <string name="published">Δημοσιεύτηκε</string>
     <string name="submit_feedback">Υποβολή ζητήματος ή σχολίων</string>
     <string name="submit_feedback_description">Βοηθήστε μας να βελτιώσουμε αυτήν την εφαρμογή</string>
     <string name="developer_options">Επιλογές προγραμματιστή</string>

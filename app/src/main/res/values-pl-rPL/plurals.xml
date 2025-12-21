@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d poprawka</item>
+        <item quantity="few">%d poprawki</item>
+        <item quantity="many">%d poprawek</item>
+        <item quantity="other">%d poprawek</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Wykonaj %d poprawkę</item>
+        <item quantity="few">Wykonaj %d poprawki</item>
+        <item quantity="many">Wykonaj %d poprawek</item>
+        <item quantity="other">Wykonaj %d poprawek</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d wybrane</item>
+        <item quantity="few">%d wybrane</item>
+        <item quantity="many">%d wybranych</item>
+        <item quantity="other">%d wybranych</item>
+    </plurals>
+</resources>

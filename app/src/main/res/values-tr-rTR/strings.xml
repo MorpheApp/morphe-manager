@@ -10,9 +10,8 @@
     <string name="morphe_home_greeting_6">Uygulamalarının uslu durmasını sağlayalım</string>
     <string name="morphe_home_greeting_7">Bugünkü tahmin: %100 yama olasılığı</string>
     <string name="morphe_home_bundle_type_api">API Paketi</string>
-    <string name="morphe_home_no_internet">İnternet bağlantısı yok</string>
     <string name="morphe_home_update_error">Güncelleme başarısız</string>
-    <string name="morphe_home_update_error_subtitle">Lütfen bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="morphe_home_updating_patches">Yama paketleri güncelleniyor…</string>
     <string name="morphe_home_update_success">Güncelleme tamamlandı</string>
     <string name="morphe_home_patches_updated">Yama paketleriniz güncel</string>
@@ -57,14 +56,10 @@
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Kök modun yamalanmadan önce cihazınıza yüklenmiş orijinal APK\'nın yüklü olmasını gerektirir.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
-    <string name="morphe_patcher_mount_dialog_message">Yamalı uygulamayı bağla mı?</string>
-    <string name="morphe_patcher_mount_ready_message">Bağlanmaya hazır. Yamalı uygulama yüklü sürümün yerini alacaktır.</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_title">Yamalanıyor</string>
     <string name="morphe_patcher_save_apk">APK Kaydet</string>
     <string name="morphe_patcher_copy_error">Kopyalama Hatası</string>
     <string name="morphe_patcher_show_error">Hatayı Göster</string>
-    <string name="morphe_patcher_close">Kapat</string>
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d yama</string>
     <string name="morphe_patcher_percentage">%1$d%</string>
@@ -83,9 +78,15 @@
     <string name="morphe_patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
     <string name="morphe_patcher_failed_dialog_title">Yama Başarısız</string>
     <string name="morphe_patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
+    <string name="morphe_patcher_mounting">Takılıyor…</string>
+    <string name="morphe_patcher_conflict_title">Paket çakışması</string>
+    <string name="morphe_patcher_conflict_subtitle">Mevcut sürümü kaldırmanız gerekiyor</string>
+    <string name="morphe_patcher_install_error_title">Yükleme hatası</string>
+    <string name="morphe_patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Bu uygulama sürümü için yama bulunmamaktadır. Devam etmek, çalışmayan bir uygulamaya neden olabilir.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">Yama işlemi, herhangi bir yama uygulanmadan devam edecektir. Bu, uygulamanın arızalanmasına veya hiç çalışmamasına neden olabilir.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK, önerilmeyen bir uygulama sürümüdür. Devam etmek işlevsel olmayan bir uygulamayla sonuçlanabilir.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Yine de Devam Et</string>
     <string name="morphe_patcher_wrong_package_title">Yanlış Paket Seçildi</string>
     <string name="morphe_patcher_wrong_package_description">Seçilen APK, yama yapmak istediğiniz uygulama için değildir.</string>
@@ -115,11 +116,15 @@
     <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
     <string name="morphe_settings_return_to_advanced">Gelişmiş moda geç</string>
     <string name="morphe_settings_return_to_advanced_description">Tam özellikli gelişmiş moda geçin</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_website">Websitesini Paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
+    <string name="morphe_background_type">Arka Plan Animasyonu</string>
+    <string name="morphe_background_type_circles">Daireler</string>
+    <string name="morphe_background_type_rings">Halkalar</string>
+    <string name="morphe_background_type_waves">Dalgalar</string>
+    <string name="morphe_background_type_space">Uzay</string>
+    <string name="morphe_background_type_shapes">Şekiller</string>
+    <string name="morphe_background_type_none">Yok</string>
     <string name="morphe_update_use_patches_prereleases">Sürüm öncesi yamaları kullan</string>
     <string name="morphe_update_use_patches_prereleases_description">En son geliştirme yamalarını kullanın</string>
     <string name="patches_bundle_json_url">Yamalar Paketi JSON URL\'si</string>
@@ -240,6 +245,7 @@
     <string name="downloads_description">İndirici eklentileri ve indirilen uygulamalar</string>
     <string name="plugins_help_title">İndirici nedir?</string>
     <string name="plugins_help_description">Bir indirici, URV\'nin çeşitli kaynaklardan APK indirmesine olanak tanıyan bir eklentidir. İndirilen APK\'lar alt bölümde gösterilecektir. Yamalama işlemi sırasında, önceden indirilmiş bir APK seçebilir veya bir eklenti aracılığıyla indirebilirsiniz.\n\nDesteklenen indirici eklentilerinin listesini şurada bulabilirsiniz</string>
+    <string name="import_export">İçe &amp; dışa aktar</string>
     <string name="import_export_description">Anahtar deposu, yama seçenekleri ve seçim</string>
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>
     <string name="changelog_loading">Değişiklik günlüğü yükleniyor</string>
@@ -301,6 +307,7 @@ Yine de devam etmek istiyor musunuz?"</string>
     <string name="patch_selection_safeguard_confirmation">"Yama seçimini değiştirmek beklenmeyen sorunlara neden olabilir.
 
 Yine de etkinleştirmek ister misiniz?"</string>
+    <string name="universal_patches_safeguard">Evrensel yamaları göster &amp; kullanmaya izin ver</string>
     <string name="universal_patches_safeguard_description">Evrensel yamaları gizleme veya kullanmalarını engelleme</string>
     <string name="universal_patches_profile_blocked_title">Evrensel yamalar devre dışı bırakıldı</string>
     <string name="universal_patches_profile_blocked_description">Bu yama profili, evrensel yamalar içerir. Kullanmak için gelişmiş ayarlarda \"%1$s\" seçeneğini etkinleştirin.</string>
@@ -550,7 +557,9 @@ Tüm yama profilleri etkilenmez."</string>
     <string name="export_name_variable_app_version">Uygulama sürümü</string>
     <string name="export_name_variable_app_version_description">Uygulamanın sürüm adıyla değiştirilir.</string>
     <string name="export_name_variable_patches_version">Yama sürümleri</string>
+    <string name="export_name_variable_patches_version_description">Uygulanan yama paketi sürümüyle değiştirildi.</string>
     <string name="export_name_variable_bundle_names">Yama paketi adları</string>
+    <string name="export_name_variable_bundle_names_description">Uygulanan yama paketi adıyla değiştirildi.</string>
     <string name="export_name_variable_manager_version">Yönetici sürümü</string>
     <string name="export_name_variable_manager_version_description">Yönetici sürümüyle değiştirildi.</string>
     <string name="export_name_variable_timestamp">Zaman Damgası</string>
@@ -579,10 +588,6 @@ Tüm yama profilleri etkilenmez."</string>
     <string name="app_language">Uygulama dili</string>
     <string name="language_dialog_title">Uygulama dilini seçin</string>
     <string name="language_option_system">Cihaz dilini kullan</string>
-    <string name="language_option_english">İngilizce</string>
-    <string name="language_option_chinese_simplified">Çince (Basitleştirilmiş)</string>
-    <string name="language_option_korean">Korece</string>
-    <string name="language_option_vietnamese">Vietnamca</string>
     <string name="device">Cihaz</string>
     <string name="device_android_version">Android sürümü</string>
     <string name="device_model">Model</string>
@@ -608,6 +613,9 @@ Tüm yama profilleri etkilenmez."</string>
     <string name="patches_replace_fail">Yamalar içe aktarılamadı: %s</string>
     <string name="no_patched_apps_found">Yama uygulanan uygulama bulunamadı</string>
     <string name="tap_on_patches">Yamalar hakkında daha fazla bilgi almak için dokunun</string>
+    <string name="patches_selected">%s yama paketi seçildi</string>
+    <string name="patch_profiles_selected">%1$d yama profili seçildi</string>
+    <string name="selected_apps_count">%1$d uygulama seçildi</string>
     <string name="selected_apps_delete_dialog_description">Seçilen uygulamalar yöneticiden kaldırılacak mı? Cihazınızdaki yüklü uygulamalar etkilenmeyecektir.</string>
     <string name="incompatible_patches">Uyumsuz yamalar</string>
     <string name="universal_patches">Evrensel yamalar</string>
@@ -696,12 +704,15 @@ Bunları tekrar etkinleştirin (veya alternatifleri seçin) ve ardından yamayı
         <item quantity="one">%d paket</item>
         <item quantity="other">%d paket</item>
     </plurals>
+    <string name="universal_patch_warning_description">"Evrensel yamalar daha genel bir kullanıma sahiptir ve belirli uygulamaları hedefleyen yamalar kadar güvenilir çalışmaz. Bunları kullanırken sorunlarla karşılaşabilirsiniz.
+
+Evrensel yamaları kullanmadan önce gelişmiş ayarlarda \"Evrensel yamaları göster &amp; kullanıma izin ver\" seçeneğini açmanız gerekir."</string>
     <string name="this_version">Bu sürüm</string>
     <string name="universal">Herhangi bir uygulama</string>
     <string name="search_patches">Yamaları ara</string>
-    <string name="app_version_not_compatible">"Bu yama, seçilen uygulama sürümüyle (%1$s) uyumlu değil.
+    <string name="app_version_not_compatible">"Bu yama seçilen uygulama sürümüyle (%1$s) uyumlu değil.
 
-Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
+Sadece aşağıdaki sürümle uyumludur: %2$s."</string>
     <string name="continue_with_version">Bu sürümle devam edilsin mi?</string>
     <string name="version_not_compatible">Tüm yamalar bu sürümle (%s) uyumlu değil. Devam etmek istiyor musunuz?</string>
     <string name="download_application">Uygulama indirilsin mi?</string>
@@ -744,10 +755,11 @@ Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
     <string name="downloader_app_not_found">İndirici uygulamayı bulamadı</string>
     <string name="downloader_error">İndirici hatası: %s</string>
     <string name="downloader_no_plugins_installed">İndirici yüklü değil.</string>
+    <string name="downloader_no_plugins_available">İndiriciler yüklü ancak hiçbiri güvenilir değil. Ayarlarınızı kontrol edin.</string>
     <string name="downloader_plugin_uninstall_success">%1$s kaldırıldı</string>
     <string name="downloader_plugin_uninstall_failed">%1$s kaldırılamadı</string>
     <string name="downloaded_apps_export">Seçilen uygulamaları dışa aktar</string>
-    <string name="downloaded_apps_export_success">%1$d uygulama(lar) dışa aktarıldı</string>
+    <string name="downloaded_apps_export_success">%1$d uygulama dışa aktarıldı</string>
     <string name="downloaded_apps_export_failed">İndirilen uygulamalar dışa aktarılamadı</string>
     <string name="already_patched">Zaten yamalı</string>
     <string name="patch_selector_sheet_filter_title">Filtre</string>
@@ -794,7 +806,9 @@ Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
     <string name="installer_custom_header">Özel yükleyiciler</string>
     <string name="installer_custom_manage_title">Özel yükleyicileri yönet</string>
     <string name="installer_custom_tab_saved">Kaydedildi</string>
+    <string name="installer_custom_saved_note">Kullanıcı tarafından Birincil &amp; Yedek yükleyici seçim menülerine manuel olarak eklenen yükleyiciler.</string>
     <string name="installer_custom_tab_auto_saved">Otomatik kaydedildi</string>
+    <string name="installer_custom_auto_note">Birincil &amp; Yedek yükleyici seçim menülerine otomatik olarak algılanan ve eklenen yükleyiciler.</string>
     <string name="installer_custom_tab_discover">Keşfet</string>
     <string name="installer_custom_close">Kapat</string>
     <string name="installer_custom_manage_description">Üçüncü taraf yükleyici etkinliklerini birincil veya yedek yükleyici olarak kullanmak üzere kaydedin</string>
@@ -803,6 +817,7 @@ Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
     <string name="installer_custom_lookup">Yükleyicileri bul</string>
     <string name="installer_custom_lookup_empty">Önce bir paket adı girin.</string>
     <string name="installer_custom_searching">Yükleyici etkinlikleri aranıyor…</string>
+    <string name="installer_custom_lookup_found">%1$d yükleyici bulundu.</string>
     <string name="installer_custom_action_add">Yükleyiciyi kaydet</string>
     <string name="installer_custom_action_remove">Kaydedilen yükleyiciyi kaldır</string>
     <string name="installer_custom_builtin_indicator">Otomatik kaydedildi</string>
@@ -823,7 +838,9 @@ Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
     <string name="installer_hint_storage">Yeterli depolama alanı yok.</string>
     <string name="installer_hint_timeout">Kurulum zaman aşımına uğradı. Lütfen tekrar deneyin.</string>
     <string name="installer_hint_aborted">Kurulum iptal edildi.</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;Detaylar: %2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Ayrıntılar: %2$s"</string>
     <string name="installer_external_launched">%1$s açılıyor…</string>
     <string name="installer_external_timeout">%1$s kurulumu onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin.</string>
     <string name="installer_external_success">%1$s başarılı bir kurulum bildirdi.</string>
@@ -914,6 +931,7 @@ Yalnızca aşağıdaki sürüm(ler) ile uyumludur: %2$s."</string>
     <string name="patch_bundle_urls">Yamalı paket içe aktarımlarını al</string>
     <string name="contact">İletişim</string>
     <string name="version">Sürüm</string>
+    <string name="published">Yayınlandı</string>
     <string name="submit_feedback">Sorun veya geri bildirim gönder</string>
     <string name="submit_feedback_description">Bu uygulamayı geliştirmemize yardımcı olun</string>
     <string name="developer_options">Geliştirici seçenekleri</string>

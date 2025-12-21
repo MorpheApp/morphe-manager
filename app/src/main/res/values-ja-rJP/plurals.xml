@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="other">%d 件のパッチ</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">%d 件のパッチを実行</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="other">%d 個選択中</item>
+    </plurals>
+</resources>

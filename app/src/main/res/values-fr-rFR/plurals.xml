@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d correctif</item>
+        <item quantity="other">%d correctifs</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Exécuter %d correctif</item>
+        <item quantity="other">Exécuter %d correctifs</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d sélectionné</item>
+        <item quantity="other">%d sélectionnés</item>
+    </plurals>
+</resources>

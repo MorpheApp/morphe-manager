@@ -7,11 +7,11 @@
     <string name="morphe_home_greeting_3">系好安全带，是时候打补丁了</string>
     <string name="morphe_home_greeting_4">又一天，又一件屏蔽广告的杰作</string>
     <string name="morphe_home_greeting_5">想看广告？我也不想</string>
+    <string name="morphe_home_greeting_6">让你的应用乖乖听话</string>
     <string name="morphe_home_greeting_7">今日预报：100% 概率打补丁</string>
     <string name="morphe_home_bundle_type_api">API 包</string>
-    <string name="morphe_home_no_internet">无可用网络连接</string>
     <string name="morphe_home_update_error">更新失败</string>
-    <string name="morphe_home_update_error_subtitle">请检查您的连接并重试</string>
+    <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
     <string name="morphe_home_updating_patches">正在更新补丁…</string>
     <string name="morphe_home_update_success">更新完成</string>
     <string name="morphe_home_patches_updated">您的补丁已是最新</string>
@@ -56,14 +56,10 @@
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root模式需要先在您的设备上安装原始APK，然后才能进行修补。</string>
     <string name="morphe_root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
-    <string name="morphe_patcher_mount_dialog_message">挂载已修补的应用?</string>
-    <string name="morphe_patcher_mount_ready_message">准备挂载。已修补的应用将替换已安装的版本。</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_title">修补中</string>
     <string name="morphe_patcher_save_apk">保存 APK</string>
     <string name="morphe_patcher_copy_error">复制错误</string>
     <string name="morphe_patcher_show_error">显示错误</string>
-    <string name="morphe_patcher_close">关闭</string>
     <string name="morphe_patcher_error_copied">错误已复制到剪贴板</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 个补丁</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
@@ -82,9 +78,15 @@
     <string name="morphe_patcher_failed_subtitle">请查看下方的错误详情</string>
     <string name="morphe_patcher_failed_dialog_title">修补失败</string>
     <string name="morphe_patcher_unknown_error">发生未知错误</string>
+    <string name="morphe_patcher_mounting">正在挂载…</string>
+    <string name="morphe_patcher_conflict_title">包冲突</string>
+    <string name="morphe_patcher_conflict_subtitle">您需要卸载现有版本</string>
+    <string name="morphe_patcher_install_error_title">安装错误</string>
+    <string name="morphe_patcher_install_error_subtitle">尝试重新卸载并安装</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">按下方按钮安装</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">不支持的版本</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">此应用版本没有可用的补丁。继续操作可能导致应用无法正常运行。</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">修补过程将继续进行，但不会应用任何补丁。这可能导致应用出现故障或根本无法工作。</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">此 APK 不是推荐的应用版本。继续操作可能导致应用无法正常运行。</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">仍要继续</string>
     <string name="morphe_patcher_wrong_package_title">选择了错误的程序包</string>
     <string name="morphe_patcher_wrong_package_description">选定的APK不是您打算修补的应用程序。</string>
@@ -114,11 +116,15 @@
     <string name="morphe_settings_return_to_morphe_description">返回简化模式</string>
     <string name="morphe_settings_return_to_advanced">切换到高级模式</string>
     <string name="morphe_settings_return_to_advanced_description">切换到功能齐全的高级模式</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_website">分享网站</string>
     <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
+    <string name="morphe_background_type">背景动画</string>
+    <string name="morphe_background_type_circles">圆圈</string>
+    <string name="morphe_background_type_rings">圆环</string>
+    <string name="morphe_background_type_waves">波浪</string>
+    <string name="morphe_background_type_space">空间</string>
+    <string name="morphe_background_type_shapes">形状</string>
+    <string name="morphe_background_type_none">无</string>
     <string name="morphe_update_use_patches_prereleases">使用预发布补丁</string>
     <string name="morphe_update_use_patches_prereleases_description">使用最新的开发补丁</string>
     <string name="patches_bundle_json_url">补丁包 JSON URL</string>
@@ -532,7 +538,9 @@
     <string name="export_name_variable_app_version">应用版本</string>
     <string name="export_name_variable_app_version_description">替换为应用的版本名称。</string>
     <string name="export_name_variable_patches_version">补丁版本</string>
+    <string name="export_name_variable_patches_version_description">替换为应用的补丁包版本。</string>
     <string name="export_name_variable_bundle_names">补丁包名称</string>
+    <string name="export_name_variable_bundle_names_description">替换为应用的补丁包名称。</string>
     <string name="export_name_variable_manager_version">管理器版本</string>
     <string name="export_name_variable_manager_version_description">替换为管理器版本。</string>
     <string name="export_name_variable_timestamp">时间戳</string>
@@ -561,9 +569,6 @@
     <string name="app_language">应用语言</string>
     <string name="language_dialog_title">选择应用语言</string>
     <string name="language_option_system">跟随设备语言</string>
-    <string name="language_option_english">英语</string>
-    <string name="language_option_korean">韩语</string>
-    <string name="language_option_vietnamese">越南语</string>
     <string name="device">设备</string>
     <string name="device_android_version">Android 版本</string>
     <string name="device_model">型号</string>
@@ -589,6 +594,9 @@
     <string name="patches_replace_fail">导入补丁失败：%s</string>
     <string name="no_patched_apps_found">未找到修补过的应用</string>
     <string name="tap_on_patches">点击补丁以获取有关它们的更多信息</string>
+    <string name="patches_selected">已选择 %s 个补丁包</string>
+    <string name="patch_profiles_selected">已选择 %1$d 个补丁配置文件</string>
+    <string name="selected_apps_count">已选择 %1$d 个应用</string>
     <string name="selected_apps_delete_dialog_description">从管理器中移除选中的应用？您设备上已安装的应用将保持不变。</string>
     <string name="incompatible_patches">不兼容的补丁</string>
     <string name="universal_patches">通用补丁</string>
@@ -672,6 +680,9 @@
     <string name="this_version">此版本</string>
     <string name="universal">任意应用</string>
     <string name="search_patches">搜索补丁</string>
+    <string name="app_version_not_compatible">"此补丁与选定的应用版本 (%1$s) 不兼容。
+
+它仅与以下版本兼容：%2$s。"</string>
     <string name="continue_with_version">使用此版本继续？</string>
     <string name="version_not_compatible">并非所有补丁都与此版本 (%s) 兼容。您确定要继续吗？</string>
     <string name="download_application">下载应用程序？</string>
@@ -714,9 +725,11 @@
     <string name="downloader_app_not_found">下载器未找到该应用</string>
     <string name="downloader_error">下载器错误：%s</string>
     <string name="downloader_no_plugins_installed">未安装下载器。</string>
+    <string name="downloader_no_plugins_available">已安装下载器，但没有受信任的。请检查您的设置。</string>
     <string name="downloader_plugin_uninstall_success">已卸载 %1$s</string>
     <string name="downloader_plugin_uninstall_failed">卸载 %1$s 失败</string>
     <string name="downloaded_apps_export">导出选中的应用</string>
+    <string name="downloaded_apps_export_success">已导出 %1$d 个应用</string>
     <string name="downloaded_apps_export_failed">导出下载的应用失败</string>
     <string name="already_patched">已修补</string>
     <string name="patch_selector_sheet_filter_title">筛选</string>
@@ -774,6 +787,7 @@
     <string name="installer_custom_lookup">查找安装程序</string>
     <string name="installer_custom_lookup_empty">请先输入包名。</string>
     <string name="installer_custom_searching">正在搜索安装程序活动…</string>
+    <string name="installer_custom_lookup_found">找到 %1$d 个安装程序。</string>
     <string name="installer_custom_action_add">保存安装程序</string>
     <string name="installer_custom_action_remove">移除已保存的安装程序</string>
     <string name="installer_custom_builtin_indicator">自动保存</string>
@@ -794,7 +808,9 @@
     <string name="installer_hint_storage">存储空间不足，无法安装。</string>
     <string name="installer_hint_timeout">安装超时。请重试。</string>
     <string name="installer_hint_aborted">安装已取消。</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;详情：%2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+详情：%2$s"</string>
     <string name="installer_external_launched">正在打开 %1$s…</string>
     <string name="installer_external_timeout">%1$s 未确认安装。请检查其他应用并重试。</string>
     <string name="installer_external_success">%1$s 报告安装成功。</string>
@@ -885,6 +901,7 @@
     <string name="patch_bundle_urls">获取补丁包导入链接</string>
     <string name="contact">联系</string>
     <string name="version">版本</string>
+    <string name="published">发布于</string>
     <string name="submit_feedback">提交问题或反馈</string>
     <string name="submit_feedback_description">帮助我们改进此应用程序</string>
     <string name="developer_options">开发者选项</string>

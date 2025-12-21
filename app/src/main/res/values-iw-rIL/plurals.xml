@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d תיקון</item>
+        <item quantity="two">%d תיקונים</item>
+        <item quantity="many">%d תיקונים</item>
+        <item quantity="other">%d תיקונים</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">הפעל %d תיקון</item>
+        <item quantity="two">הפעל %d תיקונים</item>
+        <item quantity="many">הפעל %d תיקונים</item>
+        <item quantity="other">הפעל %d תיקונים</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d נבחרו</item>
+        <item quantity="two">%d נבחרו</item>
+        <item quantity="many">%d נבחרו</item>
+        <item quantity="other">%d נבחרו</item>
+    </plurals>
+</resources>

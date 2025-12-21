@@ -10,9 +10,8 @@
     <string name="morphe_home_greeting_6">Зробімо так, щоб ваші застосунки поводилися як слід</string>
     <string name="morphe_home_greeting_7">Прогноз на сьогодні: 100% ймовірність патчінгу</string>
     <string name="morphe_home_bundle_type_api">API пакету</string>
-    <string name="morphe_home_no_internet">Немає підключення до Інтернету</string>
     <string name="morphe_home_update_error">Помилка оновлення</string>
-    <string name="morphe_home_update_error_subtitle">Перевірте підключення та спробуйте знову</string>
+    <string name="morphe_home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
     <string name="morphe_home_updating_patches">Оновлення патчів…</string>
     <string name="morphe_home_update_success">Оновлення завершено</string>
     <string name="morphe_home_patches_updated">Ваші патчі актуальні</string>
@@ -57,14 +56,10 @@
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Режим root вимагає, щоб оригінальний APK був встановлений на вашому пристрої перед патчінгом.</string>
     <string name="morphe_root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
-    <string name="morphe_patcher_mount_dialog_message">Монтувати патчений додаток?</string>
-    <string name="morphe_patcher_mount_ready_message">Готовий до монтування. Патчений додаток замінить встановлену версію.</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_title">Патчінг</string>
     <string name="morphe_patcher_save_apk">Зберегти APK</string>
     <string name="morphe_patcher_copy_error">Скопіювати помилку</string>
     <string name="morphe_patcher_show_error">Показати помилку</string>
-    <string name="morphe_patcher_close">Закрити</string>
     <string name="morphe_patcher_error_copied">Помилка скопійована у буфер обміну</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d патчів</string>
     <string name="morphe_patcher_percentage">%1$d%%</string>
@@ -83,9 +78,15 @@
     <string name="morphe_patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
     <string name="morphe_patcher_failed_dialog_title">Помилка патчінгу</string>
     <string name="morphe_patcher_unknown_error">Сталася невідома помилка</string>
+    <string name="morphe_patcher_mounting">Монтування…</string>
+    <string name="morphe_patcher_conflict_title">Конфлікт пакетів</string>
+    <string name="morphe_patcher_conflict_subtitle">Вам потрібно видалити існуючу версію</string>
+    <string name="morphe_patcher_install_error_title">Помилка встановлення</string>
+    <string name="morphe_patcher_install_error_subtitle">Спробуйте видалити та встановити знову</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Непідтримувана версія</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Для цієї версії додатку немає доступних патчів. Продовження може призвести до того, що додаток не працюватиме.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_warning">Процес патчінгу продовжиться без застосування патчів. Це може призвести до некоректної роботи або повної непрацездатності додатку.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Цей APK не є рекомендованою версією додатку. Подальші дії можуть призвести до непрацездатності додатку.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Продовжити в будь-якому випадку</string>
     <string name="morphe_patcher_wrong_package_title">Вибрано невірний пакет</string>
     <string name="morphe_patcher_wrong_package_description">Обраний APK не відповідає додатку, який ви збиралися патчити.</string>
@@ -115,11 +116,15 @@
     <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
     <string name="morphe_settings_return_to_advanced">Змінити на розширений режим</string>
     <string name="morphe_settings_return_to_advanced_description">Перемикання на повнофункціональний розширений режим</string>
-    <string name="morphe_about_github">GitHub</string>
-    <string name="morphe_about_x">X</string>
-    <string name="morphe_about_reddit">Reddit</string>
     <string name="morphe_share_website">Поділитися вебсайтом</string>
     <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
+    <string name="morphe_background_type">Фонова анімація</string>
+    <string name="morphe_background_type_circles">Кола</string>
+    <string name="morphe_background_type_rings">Кільця</string>
+    <string name="morphe_background_type_waves">Хвилі</string>
+    <string name="morphe_background_type_space">Простір</string>
+    <string name="morphe_background_type_shapes">Фігури</string>
+    <string name="morphe_background_type_none">Немає</string>
     <string name="morphe_update_use_patches_prereleases">Використовувати передрелізні патчі</string>
     <string name="morphe_update_use_patches_prereleases_description">Використовувати останні експериментальні патчі</string>
     <string name="patches_bundle_json_url">URL JSON пакета патчів</string>
@@ -242,6 +247,7 @@
     <string name="plugins_help_description">Завантажувач - це плагін, який дозволяє URV завантажувати стокові APK з різних джерел. Завантажені APK будуть показані в нижньому розділі. Під час процесу патчування ви можете обрати вже завантажені APK або ви можете завантажити їх через плагін.
 
 Перелік підтримуваних плагінів для завантаження можна знайти</string>
+    <string name="import_export">Імпорт &amp; eкспорт</string>
     <string name="import_export_description">Keystore, настройки патча та вибір</string>
     <string name="changelog">Переглянути списки змін</string>
     <string name="changelog_loading">Завантаження списку змін</string>
@@ -297,6 +303,7 @@
     <string name="patch_selection_safeguard">Дозволити зміну вибору патча та параметрів</string>
     <string name="patch_selection_safeguard_description">Не забороняти вибір або скасування вибору патчів і налаштувань параметрів</string>
     <string name="patch_selection_safeguard_confirmation">"Зміна вибору патчів може викликати несподівані проблеми.\n\nАктивувати в будь-якому випадку?"</string>
+    <string name="universal_patches_safeguard">Показати &amp; дозволити використання універсальних патчів</string>
     <string name="universal_patches_safeguard_description">Не приховувати універсальні патчі або не забороняти їх використання</string>
     <string name="universal_patches_profile_blocked_title">Універсальні патчі вимкнено</string>
     <string name="universal_patches_profile_blocked_description">Цей профіль патча містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб використовувати їх.</string>
@@ -545,8 +552,9 @@
     <string name="export_name_variable_app_version">Версія додатку</string>
     <string name="export_name_variable_app_version_description">Замінено на назву версії додатку.</string>
     <string name="export_name_variable_patches_version">Версія патчів</string>
+    <string name="export_name_variable_patches_version_description">Замінено версією застосованого пакету патчів.</string>
     <string name="export_name_variable_bundle_names">Назви пакетів патчів</string>
-    <string name="export_name_variable_bundle_names_description">Замінено на назву(и) застосованої інформації про пакет патчів.</string>
+    <string name="export_name_variable_bundle_names_description">Замінено назвою застосованого пакету патчів.</string>
     <string name="export_name_variable_manager_version">Версія менеджера</string>
     <string name="export_name_variable_manager_version_description">Замінено на версію менеджера.</string>
     <string name="export_name_variable_timestamp">Мітка часу</string>
@@ -575,10 +583,6 @@
     <string name="app_language">Мова додатку</string>
     <string name="language_dialog_title">Вибрати мову додатку</string>
     <string name="language_option_system">Використовувати мову пристрою</string>
-    <string name="language_option_english">Англійська</string>
-    <string name="language_option_chinese_simplified">Китайська (спрощена)</string>
-    <string name="language_option_korean">Корейська</string>
-    <string name="language_option_vietnamese">В\'єтнамська</string>
     <string name="device">Пристрій</string>
     <string name="device_android_version">Версія Android</string>
     <string name="device_model">Модель</string>
@@ -604,9 +608,9 @@
     <string name="patches_replace_fail">Не вдалося імпортувати патчі: %s</string>
     <string name="no_patched_apps_found">Виправлені додатки не знайдені</string>
     <string name="tap_on_patches">Натисніть на патчі, щоб отримати більше інформації про них</string>
-    <string name="patches_selected">%s пакет(ів) патчів вибрано</string>
-    <string name="patch_profiles_selected">%1$d профіль(ів) патчів вибрано</string>
-    <string name="selected_apps_count">%1$d додаток(ів) вибрано</string>
+    <string name="patches_selected">Вибрано %s пакет(ів) виправлень</string>
+    <string name="patch_profiles_selected">%1$d профіль патчів вибрано</string>
+    <string name="selected_apps_count">%1$d додаток вибрано</string>
     <string name="selected_apps_delete_dialog_description">Видалити вибрані додатки з менеджера? Встановлені додатки на вашому пристрої залишаться без змін.</string>
     <string name="incompatible_patches">Несумісні патчі</string>
     <string name="universal_patches">Універсальні патчі</string>
@@ -699,9 +703,15 @@
         <item quantity="many">%d пакетів</item>
         <item quantity="other">%d пакетів</item>
     </plurals>
+    <string name="universal_patch_warning_description">"Універсальні патчі мають більш узагальнене використання і працюють не так надійно, як патчі, що орієнтовані на певні програми. Ви можете зіткнутися з проблемами під час їх використання.
+
+Вам потрібно увімкнути \"Показувати &amp; дозволити використовувати універсальні патчі\" в розширених налаштуваннях перед використанням універсальних патчів."</string>
     <string name="this_version">Ця версія</string>
     <string name="universal">Будь-який додаток</string>
     <string name="search_patches">Пошук патчів</string>
+    <string name="app_version_not_compatible">"Ця виправлення несумісне з вибраною версією додатку (%1$s).
+
+Воно сумісне лише з наступною версією: %2$s."</string>
     <string name="continue_with_version">Продовжити із цією версією?</string>
     <string name="version_not_compatible">Не всі патчі сумісні з цією версією (%s). Ви хочете продовжити всупереч цьому?</string>
     <string name="download_application">Завантажити додаток?</string>
@@ -744,10 +754,11 @@
     <string name="downloader_app_not_found">Завантажувач не знайшов додаток</string>
     <string name="downloader_error">Помилка завантажувача: %s</string>
     <string name="downloader_no_plugins_installed">Не встановлено жодного завантажувача.</string>
+    <string name="downloader_no_plugins_available">Інстальовано завантажувачі, але жоден не є надійним. Перевірте налаштування.</string>
     <string name="downloader_plugin_uninstall_success">Деінстальовано %1$s</string>
     <string name="downloader_plugin_uninstall_failed">Не вдалося деінсталювати %1$s</string>
     <string name="downloaded_apps_export">Експортувати вибрані додатки</string>
-    <string name="downloaded_apps_export_success">Експортовано %1$d додатка(ів)</string>
+    <string name="downloaded_apps_export_success">Експортовано %1$d додатка</string>
     <string name="downloaded_apps_export_failed">Не вдалося експортувати завантажені додатки</string>
     <string name="already_patched">Вже патчено</string>
     <string name="patch_selector_sheet_filter_title">Фільтр</string>
@@ -794,7 +805,9 @@
     <string name="installer_custom_header">Індивідуальні інсталятори</string>
     <string name="installer_custom_manage_title">Управління індивідуальними інсталяторами</string>
     <string name="installer_custom_tab_saved">Збережено</string>
+    <string name="installer_custom_saved_note">Інсталятори, додані користувачем вручну до меню вибору основного &amp; резервного інсталятора.</string>
     <string name="installer_custom_tab_auto_saved">Автоматично збережено</string>
+    <string name="installer_custom_auto_note">Інсталятори, автоматично виявлені та додані до меню вибору основного &amp; резервного інсталятора.</string>
     <string name="installer_custom_tab_discover">Відкрити</string>
     <string name="installer_custom_close">Закрити</string>
     <string name="installer_custom_manage_description">Зберегти дії сторонніх інсталяторів для використання як основні або файлові інсталятори</string>
@@ -803,7 +816,7 @@
     <string name="installer_custom_lookup">Знайти інсталятори</string>
     <string name="installer_custom_lookup_empty">Введіть назву пакета спочатку.</string>
     <string name="installer_custom_searching">Пошук дій інсталятора…</string>
-    <string name="installer_custom_lookup_found">Знайдено %1$d інсталяцій(й).</string>
+    <string name="installer_custom_lookup_found">Знайдено %1$d інсталятор.</string>
     <string name="installer_custom_action_add">Зберегти інсталятор</string>
     <string name="installer_custom_action_remove">Видалити збережений інсталятор</string>
     <string name="installer_custom_builtin_indicator">Автоматично збережено</string>
@@ -824,7 +837,9 @@
     <string name="installer_hint_storage">Недостатньо місця для зберігання для інсталяції.</string>
     <string name="installer_hint_timeout">Виконання інсталяції зайняло багато часу. Спробуйте ще раз.</string>
     <string name="installer_hint_aborted">Інсталяцію скасовано.</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;Деталі: %2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Деталі: %2$s"</string>
     <string name="installer_external_launched">Відкриття %1$s…</string>
     <string name="installer_external_timeout">%1$s не підтвердив інсталяцію. Перевірте інший додаток і спробуйте знову.</string>
     <string name="installer_external_success">%1$s повідомив про успішну інсталяцію.</string>
@@ -915,6 +930,7 @@
     <string name="patch_bundle_urls">Отримати імпорти пакетів патчів</string>
     <string name="contact">Контакт</string>
     <string name="version">Версія</string>
+    <string name="published">Опубліковано</string>
     <string name="submit_feedback">Подати питання або відгук</string>
     <string name="submit_feedback_description">Допоможіть нам покращити цей додаток</string>
     <string name="developer_options">Опції розробника</string>
