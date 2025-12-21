@@ -248,7 +248,7 @@ class GitHubPullRequestBundle(
                     ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
                         var entry = zis.nextEntry
                         while (entry != null) {
-                            if (!entry.isDirectory && entry.name.endsWith(".rvp")) {
+                            if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
                                 zis.copyTo(patchOutput)
                                 break
                             }
