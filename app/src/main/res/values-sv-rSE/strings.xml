@@ -976,8 +976,6 @@ Open source i sin kärna, Morphe frodas på communityfeedback och bidrag för at
     <string name="save_with_count">Spara (%1$s)</string>
     <string name="update">Uppdatera</string>
     <string name="empty">Tom</string>
-    <string name="installing_message">"Tryck på <b>Uppdatera</b> när du uppmanas till det.
-Morphe stängs vid uppdatering."</string>
     <string name="just_now">Precis nu</string>
     <string name="minutes_ago">%s minuter sedan</string>
     <string name="hours_ago">%s timmar sedan</string>

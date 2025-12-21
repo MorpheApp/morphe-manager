@@ -976,8 +976,6 @@ Otvorenog koda u svojoj suštini, Morphe se oslanja na povratne informacije i do
     <string name="save_with_count">Sačuvaj (%1$s)</string>
     <string name="update">Ažuriraj</string>
     <string name="empty">Prazno</string>
-    <string name="installing_message">"Dodirnite <b>Ažuriraj</b> kada se to zatraži.
-Morphe će se zatvoriti prilikom ažuriranja."</string>
     <string name="just_now">Upravo sada</string>
     <string name="minutes_ago">%sm pre</string>
     <string name="hours_ago">%sh pre</string>

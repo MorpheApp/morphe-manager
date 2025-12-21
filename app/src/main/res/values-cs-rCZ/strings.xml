@@ -980,8 +980,6 @@ Jako open-source projekt staví Morphe na zpětné vazbě a příspěvcích komu
     <string name="save_with_count">Uložit (%1$s)</string>
     <string name="update">Aktualizovat</string>
     <string name="empty">Prázdný</string>
-    <string name="installing_message">"Klepněte na <b>Aktualizovat</b>, až se zobrazí výzva.
-Morphe se při aktualizaci zavře."</string>
     <string name="just_now">Před chvílí</string>
     <string name="minutes_ago">před %sm</string>
     <string name="hours_ago">před %sh</string>

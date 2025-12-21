@@ -974,8 +974,6 @@ Morphe เป็นโอเพนซอร์สในแก่นแท้ โ
     <string name="save_with_count">บันทึก (%1$s)</string>
     <string name="update">อัปเดต</string>
     <string name="empty">ว่างเปล่า</string>
-    <string name="installing_message">"แตะที่ <b>อัปเดต</b> เมื่อได้รับแจ้ง
-Morphe จะปิดเมื่อทำการอัปเดต"</string>
     <string name="just_now">เมื่อสักครู่</string>
     <string name="minutes_ago">เมื่อ %s นาทีที่แล้ว</string>
     <string name="hours_ago">เมื่อ %s ชั่วโมงที่แล้ว</string>

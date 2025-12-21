@@ -976,8 +976,6 @@ Avoimen lähdekoodin ytimessään Morphe kukoistaa yhteisön palautteen ja panos
     <string name="save_with_count">Tallenna (%1$s)</string>
     <string name="update">Päivitä</string>
     <string name="empty">Tyhjä</string>
-    <string name="installing_message">"Napauta <b>Päivitä</b> pyydettäessä.
-Morphe sulkeutuu päivitettäessä."</string>
     <string name="just_now">Juuri äsken</string>
     <string name="minutes_ago">%s minuuttia sitten</string>
     <string name="hours_ago">%s tuntia sitten</string>

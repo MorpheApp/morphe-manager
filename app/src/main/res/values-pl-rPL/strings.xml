@@ -982,8 +982,6 @@ Podstawą Morphe jest otwartość, a jego rozwój napędzany jest opiniami i wk�
     <string name="save_with_count">Zapisz (%1$s)</string>
     <string name="update">Zaktualizuj</string>
     <string name="empty">Puste</string>
-    <string name="installing_message">"Dotknij <b>Aktualizuj</b>, gdy pojawi się monit.
-Morphe zostanie zamknięty podczas aktualizacji."</string>
     <string name="just_now">Przed chwilą</string>
     <string name="minutes_ago">%s minut temu</string>
     <string name="hours_ago">%s godzin temu</string>

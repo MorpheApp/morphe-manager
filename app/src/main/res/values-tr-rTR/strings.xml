@@ -974,8 +974,6 @@ Ayrıntılar: %2$s"</string>
     <string name="save_with_count">Kaydet (%1$s)</string>
     <string name="update">Güncelle</string>
     <string name="empty">Boş</string>
-    <string name="installing_message">"İstenirse <b>Güncelle</b> seçeneğine dokunun.
-Morphe güncellenirken kapanacaktır."</string>
     <string name="just_now">Az önce</string>
     <string name="minutes_ago">%sm dakika önce</string>
     <string name="hours_ago">%sh saat önce</string>

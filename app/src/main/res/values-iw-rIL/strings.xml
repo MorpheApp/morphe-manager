@@ -980,8 +980,6 @@
     <string name="save_with_count">שמור (%1$s)</string>
     <string name="update">עדכון</string>
     <string name="empty">ריק</string>
-    <string name="installing_message">"הקש <b>עדכון</b> כאשר תתבקש.
-Morphe ייסגר בעת העדכון."</string>
     <string name="just_now">ממש עכשיו</string>
     <string name="minutes_ago">לפני %sm</string>
     <string name="hours_ago">לפני %sh</string>

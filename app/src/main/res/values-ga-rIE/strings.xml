@@ -980,8 +980,6 @@ Foinse oscailte ag a chroílár, tá Morphe ag brath ar aiseolas agus ar rannío
     <string name="save_with_count">Sábháil (%1$s)</string>
     <string name="update">Nuashonraigh</string>
     <string name="empty">Folamh</string>
-    <string name="installing_message">"Tapáil ar <b>Nuashonraigh</b> nuair a iarrtar ort.
-dúnfar Morphe agus é ag nuashonrú."</string>
     <string name="just_now">Anois féin</string>
     <string name="minutes_ago">Mion%s ó shin</string>
     <string name="hours_ago">Uair%s ó shin</string>

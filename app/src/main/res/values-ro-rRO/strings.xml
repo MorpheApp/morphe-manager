@@ -978,8 +978,6 @@ Open-source în esența sa, Morphe prosperă prin feedback și contribuții din 
     <string name="save_with_count">Salvați (%1$s)</string>
     <string name="update">Actualizare</string>
     <string name="empty">Gol</string>
-    <string name="installing_message">"Apăsați pe <b>Actualizare</b> când vi se solicită.
-Morphe se va închide la actualizare."</string>
     <string name="just_now">Chiar acum</string>
     <string name="minutes_ago">acum %s min</string>
     <string name="hours_ago">acum %s ore</string>

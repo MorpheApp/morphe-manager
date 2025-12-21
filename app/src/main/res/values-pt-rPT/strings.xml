@@ -974,8 +974,6 @@ Código aberto em sua essência, o Morphe prospera com o feedback e as contribui
     <string name="save_with_count">Salvar (%1$s)</string>
     <string name="update">Atualizar</string>
     <string name="empty">Vazio</string>
-    <string name="installing_message">"Toque em <b>Atualizar</b> quando solicitado.
-O Morphe fechará durante a atualização."</string>
     <string name="just_now">Agora mesmo</string>
     <string name="minutes_ago">há %s min</string>
     <string name="hours_ago">há %s h</string>

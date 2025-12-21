@@ -974,8 +974,6 @@ Açıq mənbəli əsaslarla yaradılan Morphe, gələcək yenilikləri irəli ap
     <string name="save_with_count">Yadda saxla (%1$s)</string>
     <string name="update">Yenilə</string>
     <string name="empty">Boş</string>
-    <string name="installing_message">"Sorulduqda <b>Yenilə</b> düyməsinə toxunun.
-Yenilənərkən Morphe bağlanacaq."</string>
     <string name="just_now">Bir an əvvəl</string>
     <string name="minutes_ago">%s dəqiqə əvvəl</string>
     <string name="hours_ago">%s saat əvvəl</string>

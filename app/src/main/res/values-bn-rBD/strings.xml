@@ -977,8 +977,6 @@
     <string name="save_with_count">সংরক্ষণ করুন (%1$s)</string>
     <string name="update">আপডেট</string>
     <string name="empty">খালি</string>
-    <string name="installing_message">"প্রম্পট করা হলে <b>আপডেট</b>-এ ট্যাপ করুন।
-আপডেট করার সময় Morphe বন্ধ হয়ে যাবে।"</string>
     <string name="just_now">এইমাত্র</string>
     <string name="minutes_ago">%s মিনিট আগে</string>
     <string name="hours_ago">%s ঘন্টা আগে</string>

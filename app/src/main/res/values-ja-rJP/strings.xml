@@ -974,8 +974,6 @@ Morpheは、コミュニティのフィードバックと貢献によって、�
     <string name="save_with_count">保存 (%1$s)</string>
     <string name="update">アップデート</string>
     <string name="empty">空</string>
-    <string name="installing_message">"促されたら<b>アップデート</b>をタップします。
-アップデート中はMorpheは閉じます。"</string>
     <string name="just_now">たった今</string>
     <string name="minutes_ago">%sm 前</string>
     <string name="hours_ago">%sh 前</string>

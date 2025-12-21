@@ -944,7 +944,6 @@ Morphe 的核心是开源的，依靠社区反馈和贡献来推动未来的创�
     <string name="save_with_count">保存 (%1$s)</string>
     <string name="update">更新</string>
     <string name="empty">空</string>
-    <string name="installing_message">"在提示时点击<b>更新</b>。\nUniversal ReVanced Manager 将在更新时关闭。"</string>
     <string name="just_now">刚刚</string>
     <string name="minutes_ago">%s 分钟前</string>
     <string name="hours_ago">%s 小时前</string>

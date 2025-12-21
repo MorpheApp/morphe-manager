@@ -974,8 +974,6 @@ Open-source dans son essence, Morphe prospère grâce aux commentaires et aux co
     <string name="save_with_count">Enregistrer (%1$s)</string>
     <string name="update">Mettre à jour</string>
     <string name="empty">Vide</string>
-    <string name="installing_message">"Appuyez sur <b>Mettre à jour</b> lorsque vous y êtes invité.
-Morphe se fermera lors de la mise à jour."</string>
     <string name="just_now">Maintenant</string>
     <string name="minutes_ago">%s minutes</string>
     <string name="hours_ago">%s heures</string>

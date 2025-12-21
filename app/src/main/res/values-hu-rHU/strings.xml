@@ -977,8 +977,6 @@ A Morphe a közösség visszajelzéseire és hozzájárulásaira támaszkodik a 
     <string name="save_with_count">Mentés (%1$s)</string>
     <string name="update">Frissítés</string>
     <string name="empty">Üres</string>
-    <string name="installing_message">"Koppintson a <b>Frissítés</b> elemre, amikor a rendszer kéri.
-A Morphe frissítés közben bezárul."</string>
     <string name="just_now">Most</string>
     <string name="minutes_ago">%s perccel ezelőtt</string>
     <string name="hours_ago">%s órával ezelőtt</string>

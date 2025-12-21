@@ -974,8 +974,6 @@ Im Kern ist Morphe Open Source und lebt von Community-Feedback und Beiträgen, u
     <string name="save_with_count">Speichern (%1$s)</string>
     <string name="update">Aktualisieren</string>
     <string name="empty">Leer</string>
-    <string name="installing_message">"Tippen Sie auf <b>Aktualisieren</b>, wenn Sie dazu aufgefordert werden.
-Morphe wird während der Aktualisierung geschlossen."</string>
     <string name="just_now">Gerade eben</string>
     <string name="minutes_ago">vor %s Minuten</string>
     <string name="hours_ago">vor %s Stunden</string>

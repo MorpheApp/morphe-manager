@@ -972,8 +972,6 @@ Sumber terbuka pada intinya, Morphe berkembang pesat pada umpan balik dan kontri
     <string name="save_with_count">Simpan (%1$s)</string>
     <string name="update">Perbarui</string>
     <string name="empty">Kosong</string>
-    <string name="installing_message">"Ketuk <b>Perbarui</b> saat diminta.
-Morphe akan ditutup saat memperbarui."</string>
     <string name="just_now">Baru saja</string>
     <string name="minutes_ago">%sm yang lalu</string>
     <string name="hours_ago">%sh yang lalu</string>

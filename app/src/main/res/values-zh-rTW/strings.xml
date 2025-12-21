@@ -976,8 +976,6 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <string name="save_with_count">儲存 (%1$s)</string>
     <string name="update">更新</string>
     <string name="empty">空白</string>
-    <string name="installing_message">"出現提示時，點選<b>更新</b>。
-Morphe 更新時將會關閉。"</string>
     <string name="just_now">剛才</string>
     <string name="minutes_ago">%s 分鐘前</string>
     <string name="hours_ago">%s 小時前</string>

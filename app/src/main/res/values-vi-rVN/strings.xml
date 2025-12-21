@@ -946,7 +946,6 @@ Mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản hồi v
     <string name="save_with_count">Lưu (%1$s)</string>
     <string name="update">Cập nhật</string>
     <string name="empty">Trống</string>
-    <string name="installing_message">"Nhấn <b>Cập nhật</b> khi được yêu cầu.\nUniversal ReVanced Manager sẽ tự đóng khi cập nhật."</string>
     <string name="just_now">Vừa mới đây</string>
     <string name="minutes_ago">%s phút trước</string>
     <string name="hours_ago">%s giờ trước</string>
