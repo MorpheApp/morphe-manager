@@ -591,9 +591,9 @@ Signature (SHA-256): %2$s"</string>
     <string name="export_name_variable_app_version">App version</string>
     <string name="export_name_variable_app_version_description">Replaced with the app\'s version name.</string>
     <string name="export_name_variable_patches_version">Patches version</string>
-    <string name="export_name_variable_patches_version_description">Replaced with the applied patch bundle version(s).</string>
+    <string name="export_name_variable_patches_version_description">Replaced with the applied patch bundle version.</string>
     <string name="export_name_variable_bundle_names">Patch bundle names</string>
-    <string name="export_name_variable_bundle_names_description">Replaced with the applied patch bundle name(s).</string>
+    <string name="export_name_variable_bundle_names_description">Replaced with the applied patch bundle name.</string>
     <string name="export_name_variable_manager_version">Manager version</string>
     <string name="export_name_variable_manager_version_description">Replaced with the manager version.</string>
     <string name="export_name_variable_timestamp">Timestamp</string>
@@ -622,10 +622,10 @@ Signature (SHA-256): %2$s"</string>
     <string name="app_language">App language</string>
     <string name="language_dialog_title">Choose app language</string>
     <string name="language_option_system">Use device language</string>
-    <string name="language_option_english">English</string>
-    <string name="language_option_chinese_simplified">Chinese (Simplified)</string>
-    <string name="language_option_korean">Korean</string>
-    <string name="language_option_vietnamese">Vietnamese</string>
+    <string name="language_option_english" translatable="false">English</string>
+    <string name="language_option_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_option_korean" translatable="false">한국어</string>
+    <string name="language_option_vietnamese" translatable="false">Tiếng Việt</string>
     <string name="device">Device</string>
     <string name="device_android_version">Android version</string>
     <string name="device_model">Model</string>
@@ -651,9 +651,9 @@ Signature (SHA-256): %2$s"</string>
     <string name="patches_replace_fail">Failed to import patches: %s</string>
     <string name="no_patched_apps_found">No patched apps found</string>
     <string name="tap_on_patches">Tap on the patches to get more information about them</string>
-    <string name="patches_selected">%s patch bundle(s) selected</string>
-    <string name="patch_profiles_selected">%1$d patch profile(s) selected</string>
-    <string name="selected_apps_count">%1$d app(s) selected</string>
+    <string name="patches_selected">%s patch bundle selected</string>
+    <string name="patch_profiles_selected">%1$d patch profile selected</string>
+    <string name="selected_apps_count">%1$d app selected</string>
     <string name="selected_apps_delete_dialog_description">Remove the selected apps from the manager? Installed apps on your device will stay untouched.</string>
     <string name="incompatible_patches">Incompatible patches</string>
     <string name="universal_patches">Universal patches</string>
@@ -750,7 +750,7 @@ You need to turn on "Show &amp; allow using universal patches" in the advanced s
     <string name="search_patches">Search patches</string>
     <string name="app_version_not_compatible">"This patch is not compatible with the selected app version (%1$s).
 
-It is only compatible with the following version(s): %2$s."</string>
+It is only compatible with the following version: %2$s."</string>
     <string name="continue_with_version">Continue with this version?</string>
     <string name="version_not_compatible">Not all patches are compatible with this version (%s). Do you want to continue anyway?</string>
     <string name="download_application">Download application?</string>
@@ -795,11 +795,11 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="downloader_app_not_found">Downloader did not find the app</string>
     <string name="downloader_error">Downloader error: %s</string>
     <string name="downloader_no_plugins_installed">No downloader installed.</string>
-    <string name="downloader_no_plugins_available">There are downloader(s) installed but none are trusted. Check your settings.</string>
+    <string name="downloader_no_plugins_available">There are downloaders installed but none are trusted. Check your settings.</string>
     <string name="downloader_plugin_uninstall_success">Uninstalled %1$s</string>
     <string name="downloader_plugin_uninstall_failed">Failed to uninstall %1$s</string>
     <string name="downloaded_apps_export">Export selected apps</string>
-    <string name="downloaded_apps_export_success">Exported %1$d app(s)</string>
+    <string name="downloaded_apps_export_success">Exported %1$d apps</string>
     <string name="downloaded_apps_export_failed">Failed to export downloaded apps</string>
     <string name="already_patched">Already patched</string>
 
@@ -862,7 +862,7 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_custom_lookup">Find installers</string>
     <string name="installer_custom_lookup_empty">Enter a package name first.</string>
     <string name="installer_custom_searching">Searching installer activities…</string>
-    <string name="installer_custom_lookup_found">Found %1$d installer(s).</string>
+    <string name="installer_custom_lookup_found">Found %1$d installer.</string>
     <string name="installer_custom_action_add">Save installer</string>
     <string name="installer_custom_action_remove">Remove saved installer</string>
     <string name="installer_custom_builtin_indicator">Auto saved</string>
@@ -883,7 +883,9 @@ It is only compatible with the following version(s): %2$s."</string>
     <string name="installer_hint_storage">There is not enough storage space for the installation.</string>
     <string name="installer_hint_timeout">The installation timed out. Try again.</string>
     <string name="installer_hint_aborted">The installation was cancelled.</string>
-    <string name="installer_hint_with_reason">%1$s&#10;&#10;Details: %2$s</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Details: %2$s"</string>
     <string name="installer_external_launched">Opening %1$s…</string>
     <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again.</string>
     <string name="installer_external_success">%1$s reported a successful installation.</string>
