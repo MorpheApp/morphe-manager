@@ -1024,8 +1024,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="save_with_count">Save (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Empty</string>
-    <string name="installing_message">"Tap on <b>Update</b> when prompted.
-Morphe will close when updating."</string>
     <string name="just_now">Just now</string>
     <string name="minutes_ago">%sm ago</string>
     <string name="hours_ago">%sh ago</string>
