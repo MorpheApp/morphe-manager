@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="other">%d 個修補程式</item>
+        <item quantity="other">%d tambalan</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">執行 %d 個修補程式</item>
+        <item quantity="other">Eksekusi %d tambalan</item>
     </plurals>
     <plurals name="selected_count">
-        <item quantity="other">已選取 %d 個</item>
+        <item quantity="other">%d terpilih</item>
     </plurals>
 </resources>

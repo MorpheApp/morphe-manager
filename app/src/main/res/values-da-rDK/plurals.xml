@@ -5,11 +5,11 @@
         <item quantity="other">%d patches</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Voer %d patch uit</item>
-        <item quantity="other">Voer %d patches uit</item>
+        <item quantity="one">Udfør %d patch</item>
+        <item quantity="other">Udfør %d patches</item>
     </plurals>
     <plurals name="selected_count">
-        <item quantity="one">%d geselecteerd</item>
-        <item quantity="other">%d geselecteerd</item>
+        <item quantity="one">%d valgt</item>
+        <item quantity="other">%d valgt</item>
     </plurals>
 </resources>
