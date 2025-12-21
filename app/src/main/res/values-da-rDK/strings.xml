@@ -976,8 +976,6 @@ Som open source trives Morphe med community-feedback og bidrag for at drive frem
     <string name="save_with_count">Gem (%1$s)</string>
     <string name="update">Opdater</string>
     <string name="empty">Tom</string>
-    <string name="installing_message">"Tryk på <b>Opdater</b>, når du bliver bedt om det.
-Morphe lukkes under opdatering."</string>
     <string name="just_now">Lige nu</string>
     <string name="minutes_ago">for %s minutter siden</string>
     <string name="hours_ago">for %s timer siden</string>

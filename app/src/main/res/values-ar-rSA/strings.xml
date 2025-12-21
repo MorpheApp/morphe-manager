@@ -984,8 +984,6 @@
     <string name="save_with_count">حفظ (%1$s)</string>
     <string name="update">تحديث</string>
     <string name="empty">فارغ</string>
-    <string name="installing_message">"انقر على <b>تحديث</b> عند المطالبة.
-سيتم إغلاق Morphe عند التحديث."</string>
     <string name="just_now">الآن</string>
     <string name="minutes_ago">قبل %s دقيقة</string>
     <string name="hours_ago">قبل %s ساعة</string>

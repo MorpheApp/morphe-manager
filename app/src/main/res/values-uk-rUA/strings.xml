@@ -973,8 +973,6 @@
     <string name="save_with_count">Зберегти (%1$s)</string>
     <string name="update">Оновити</string>
     <string name="empty">Порожньо</string>
-    <string name="installing_message">"Торкніться <b>Оновити</b> при запиті.
-Morphe закриється під час оновлення."</string>
     <string name="just_now">Зараз</string>
     <string name="minutes_ago">%s хв тому</string>
     <string name="hours_ago">%s год тому</string>

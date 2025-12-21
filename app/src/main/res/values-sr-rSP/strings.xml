@@ -976,8 +976,6 @@
     <string name="save_with_count">Сачувај (%1$s)</string>
     <string name="update">Ажурирај</string>
     <string name="empty">Празно</string>
-    <string name="installing_message">"Додирните <b>Ажурирај</b> када се то од вас затражи.
-Морфе ће се затворити приликом ажурирања."</string>
     <string name="just_now">Управо сада</string>
     <string name="minutes_ago">пре %s мин</string>
     <string name="hours_ago">%s сати пре</string>

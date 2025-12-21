@@ -296,14 +296,14 @@ L\'elenco dei plugin downloader supportati può essere trovato</string>
     <string name="safeguards">Misure di sicurezza</string>
     <string name="patch_compat_check">Disabilita controllo compatibilità versione</string>
     <string name="patch_compat_check_description">Non limitare i patch alle versioni di app compatibili</string>
-    <string name="patch_compat_check_confirmation">"La selezione di patch incompatibili può causare un\'app danneggiata.
+    <string name="patch_compat_check_confirmation">"La selezione di patch incompatibili può causare un'app danneggiata.
 
 Vuoi procedere comunque?"</string>
     <string name="suggested_version_safeguard">Richiedi versione app suggerita</string>
     <string name="suggested_version_safeguard_description">Applica la selezione della versione app suggerita</string>
-    <string name="suggested_version_safeguard_confirmation">"La selezione di un\'app che non è la versione suggerita potrebbe causare problemi imprevisti.
+    <string name="suggested_version_safeguard_confirmation">"La selezione di un'app che non è la versione suggerita potrebbe causare problemi imprevisti.
 
-Si desidera comunque procedere?"</string>
+Vuoi procedere comunque?"</string>
     <string name="patch_selection_safeguard">Consenti la modifica della selezione e delle opzioni delle patch</string>
     <string name="patch_selection_safeguard_description">Non impedire la selezione o la deselezione delle patch e la personalizzazione delle opzioni</string>
     <string name="patch_selection_safeguard_confirmation">"La modifica della selezione delle patch potrebbe causare problemi imprevisti.
@@ -450,7 +450,7 @@ I profili delle patch non sono interessati."</string>
     <string name="patch_selection_reset_dialog_title">Reimpostare le impostazioni predefinite delle patch?</string>
     <string name="patch_selection_reset_dialog_message">Questo ripristinerà le selezioni e le opzioni delle patch ai valori consigliati.</string>
     <string name="patch_selection_reset_package">Reimposta la selezione delle patch per l\'app</string>
-    <string name="patch_selection_reset_package_dialog_description">"Stai per reimpostare la selezione delle patch per l\'app \"%s\". Dovrai selezionare manualmente ogni patch di nuovo.
+    <string name="patch_selection_reset_package_dialog_description">"Stai per reimpostare la selezione delle patch per l'app \"%s\". Dovrai selezionare manualmente ogni patch di nuovo.
 
 I profili patch non sono interessati."</string>
     <string name="patch_selection_reset_package_description">Reimposta la selezione delle patch per una singola app</string>
@@ -460,7 +460,7 @@ I profili patch non sono interessati."</string>
 I profili patch non sono interessati."</string>
     <string name="patch_selection_reset_patches_description">Reimposta la selezione delle patch per una specifica raccolta di patch</string>
     <string name="patch_options_reset_package">Reimposta opzioni patch per app</string>
-    <string name="patch_options_reset_package_dialog_description">"Stai per reimpostare le opzioni delle patch per l\'app \"%s\". Dovrai riapplicare ogni opzione di nuovo.
+    <string name="patch_options_reset_package_dialog_description">"Stai per reimpostare le opzioni delle patch per l'app \"%s\". Dovrai riapplicare ogni opzione di nuovo.
 
 I profili patch non sono interessati."</string>
     <string name="patch_options_reset_package_description">Reimposta le opzioni delle patch per una singola app</string>
@@ -624,10 +624,10 @@ Firma (SHA-256): %2$s"</string>
     <string name="patch_selection_reset_toast">Selezione e opzioni patch reimpostate sui valori predefiniti consigliati</string>
     <string name="patch_options_reset_toast">Opzioni patch reimpostate</string>
     <string name="non_suggested_version_warning_title">Versione non suggerita</string>
-    <string name="non_suggested_version_warning_description">"La versione dell\'app selezionata non corrisponde alla versione suggerita.
+    <string name="non_suggested_version_warning_description">"La versione dell'app selezionata non corrisponde alla versione suggerita.
 Utilizzare la versione suggerita: %s
 
-Per continuare comunque, disattivare \"Richiedi versione app suggerita\" nelle impostazioni avanzate."</string>
+Per continuare comunque, disabilitare \"Richiedi versione app suggerita\" nelle impostazioni avanzate."</string>
     <string name="selection_warning_title">Smettere di usare i valori predefiniti?</string>
     <string name="selection_warning_description">"Si consiglia di utilizzare la selezione e le opzioni di patch predefinite. La modifica potrebbe causare problemi imprevisti.
 
@@ -706,15 +706,15 @@ Abilitalle di nuovo (o scegli delle alternative) e poi prova ad applicare le pat
         <item quantity="one">%d bundle</item>
         <item quantity="other">%d bundle</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Le patch universali hanno un uso più generalizzato e non funzionano in modo affidabile come le patch che si rivolgono ad app specifiche. Potresti riscontrare problemi durante il loro utilizzo.
+    <string name="universal_patch_warning_description">"Le patch universali hanno un uso più generalizzato e non funzionano in modo affidabile come le patch che mirano ad app specifiche. Potresti riscontrare problemi durante il loro utilizzo.
 
-Devi attivare \"Mostra &amp; consenti l\'uso di patch universali\" nelle impostazioni avanzate prima di utilizzare le patch universali."</string>
+Devi attivare \"Mostra e consenti l'uso di patch universali\" nelle impostazioni avanzate prima di utilizzare le patch universali."</string>
     <string name="this_version">Questa versione</string>
     <string name="universal">Qualsiasi app</string>
     <string name="search_patches">Cerca patch</string>
-    <string name="app_version_not_compatible">"Questa patch non è compatibile con la versione dell\'app selezionata (%1$s).
+    <string name="app_version_not_compatible">"Questa patch non è compatibile con la versione dell'app selezionata (%1$s).
 
-È compatibile solo con la seguente versione: %2$s."</string>
+È compatibile solo con la versione seguente: %2$s."</string>
     <string name="continue_with_version">Continuare con questa versione?</string>
     <string name="version_not_compatible">Non tutte le patch sono compatibili con questa versione (%s). Desideri continuare comunque?</string>
     <string name="download_application">Scarica applicazione?</string>
@@ -946,9 +946,9 @@ Dettagli: %2$s"</string>
     <string name="patches_delete_single_dialog_description">Sei sicuro di voler eliminare \"%s\"?</string>
     <string name="patches_delete_multiple_dialog_description">Sei sicuro di voler eliminare i bundle di patch selezionati?</string>
     <string name="about_revanced_manager">Informazioni su Morphe</string>
-    <string name="revanced_manager_description">"Morphe è un progetto open-source sperimentale incentrato sulla creazione di un patching moderno e semplificato di popolari app Android
+    <string name="revanced_manager_description">"Morphe è un progetto open-source sperimentale incentrato sulla creazione di un patching moderno e semplificato di app Android popolari
 
-Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi della community per guidare l\'innovazione futura"</string>
+Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi della community per guidare l'innovazione futura"</string>
     <string name="here">qui.</string>
     <string name="developer_options_enabled">Opzioni sviluppatore abilitate</string>
     <string name="developer_options_taps">%d tocchi rimanenti</string>
@@ -976,8 +976,6 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="save_with_count">Salva (%1$s)</string>
     <string name="update">Aggiorna</string>
     <string name="empty">Vuoto</string>
-    <string name="installing_message">"Tocca <b>Aggiorna</b> quando richiesto.
-Morphe si chiuderà durante l\'aggiornamento."</string>
     <string name="just_now">Appena ora</string>
     <string name="minutes_ago">%sm fa</string>
     <string name="hours_ago">%sh fa</string>
@@ -1036,9 +1034,9 @@ Vuoi comunque continuare?"</string>
     <string name="patches_prereleases">Usa anteprime</string>
     <string name="patches_prereleases_description">Usa versioni anteprime di %s</string>
     <string name="patches_url">URL del pacchetto patch</string>
-    <string name="incompatible_patches_dialog">"Queste patch non sono compatibili con la versione dell\'app selezionata (%1$s).
+    <string name="incompatible_patches_dialog">"Queste patch non sono compatibili con la versione dell'app selezionata (%1$s).
 
-Fare clic sulle patch per vedere maggiori dettagli."</string>
+Fare clic sulle patch per visualizzare maggiori dettagli."</string>
     <string name="incompatible_patch">Patch incompatibile</string>
     <string name="any_version">Qualsiasi</string>
     <string name="never_show_again">Non mostrare più</string>

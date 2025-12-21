@@ -978,8 +978,6 @@ Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdrage
     <string name="save_with_count">Opslaan (%1$s)</string>
     <string name="update">Update</string>
     <string name="empty">Leeg</string>
-    <string name="installing_message">"Tik op <b>Update</b> wanneer daarom wordt gevraagd.
-Morphe wordt gesloten tijdens het updaten."</string>
     <string name="just_now">Zojuist</string>
     <string name="minutes_ago">%sm minuten geleden</string>
     <string name="hours_ago">%sh uur geleden</string>

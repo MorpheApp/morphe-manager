@@ -961,7 +961,6 @@
     <string name="save_with_count">저장 (%1$s)</string>
     <string name="update">업데이트</string>
     <string name="empty">비어있음</string>
-    <string name="installing_message">"요청 메시지가 표시되면 <b>업데이트</b>를 탭하세요.\n업데이트가 진행되면 Universal ReVanced Manager가 종료됩니다."</string>
     <string name="just_now">방금</string>
     <string name="minutes_ago">%s 분 전</string>
     <string name="hours_ago">%s 시간 전</string>

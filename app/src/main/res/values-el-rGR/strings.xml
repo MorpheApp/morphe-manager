@@ -976,8 +976,6 @@
     <string name="save_with_count">Αποθήκευση (%1$s)</string>
     <string name="update">Ενημέρωση</string>
     <string name="empty">Κενό</string>
-    <string name="installing_message">"Πατήστε <b>Ενημέρωση</b> όταν σας ζητηθεί.
-Το Morphe θα κλείσει κατά την ενημέρωση."</string>
     <string name="just_now">Τώρα</string>
     <string name="minutes_ago">πριν από %s λεπτά</string>
     <string name="hours_ago">πριν από %s ώρες</string>

@@ -976,8 +976,6 @@ Como proyecto de código abierto en su esencia, Morphe prospera con los comentar
     <string name="save_with_count">Guardar (%1$s)</string>
     <string name="update">Actualizar</string>
     <string name="empty">Vacío</string>
-    <string name="installing_message">"Toca en <b>Actualizar</b> cuando se te indique.
-Morphe se cerrará al actualizar."</string>
     <string name="just_now">Justo ahora</string>
     <string name="minutes_ago">hace %s min</string>
     <string name="hours_ago">hace %s h</string>
