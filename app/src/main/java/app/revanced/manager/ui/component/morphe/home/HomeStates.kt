@@ -15,6 +15,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
@@ -30,6 +31,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
+import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
+import java.net.URL
 import java.net.URLEncoder.encode
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
@@ -95,6 +99,7 @@ class HomeStates(
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<String?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
+    var resolvedDownloadUrl by mutableStateOf<String?>(null)
 
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
@@ -255,38 +260,104 @@ class HomeStates(
         onStartQuickPatch(params)
     }
 
-    /**
-     * Handle download instructions dialog continue action
-     * Opens browser to APKMirror search and shows file picker prompt
-     */
-    fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
-        val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
-            pendingPackageName
-        } else {
-            // Some versions of YT Music don't show when the package name is used, use the app name instead
-            "YouTube Music"
+    // TODO: Move this logic somewhere more appropriate.
+    fun resolveDownloadRedirect() {
+        fun resolveUrlRedirect(url: String): String {
+            return try {
+                val originalUrl = URL(url)
+                val connection = originalUrl.openConnection() as HttpURLConnection
+                connection.instanceFollowRedirects = false
+                connection.requestMethod = "HEAD"
+                connection.connectTimeout = 5_000
+                connection.readTimeout = 5_000
+
+                val responseCode = connection.responseCode
+                if (responseCode in 300..399) {
+                    val location = connection.getHeaderField("Location")
+
+                    if (location.isNullOrBlank()) {
+                        Log.d(tag, "Location tag is blank: ${connection.responseMessage}")
+                        getApiOfflineWebSearchUrl()
+                    } else {
+                        val resolved =
+                            if (location.startsWith("http://") || location.startsWith("https://")) {
+                                location
+                            } else {
+                                val prefix = "${originalUrl.protocol}://${originalUrl.host}"
+                                if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
+                            }
+                        Log.d(tag, "Result: $resolved")
+                        resolved
+                    }
+                } else {
+                    Log.d(tag, "Unexpected response code: $responseCode")
+                    getApiOfflineWebSearchUrl()
+                }
+            } catch (ex: SocketTimeoutException) {
+                Log.d(tag, "Timeout while resolving search redirect: $ex")
+                // Timeout may be because the network is very slow.
+                // Still use web-search api call in external browser.
+                url
+            } catch (ex: Exception) {
+                Log.d(tag, "Exception while resolving search redirect: $ex")
+                getApiOfflineWebSearchUrl()
+            }
         }
 
+        // Must not escape colon search term separator, but recommended version must be escaped
+        // because Android version string can be almost anything.
+        val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
+        val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
+        // To test client fallback logic in getApiOfflineWebSearchUrl(), change this an invalid url.
+        val searchUrl = "$MORPHE_API_URL/v1/web-search/$searchQuery"
+        Log.d(tag, "Using search url: $searchUrl")
+
+        // Use API web-search if user clicks thru faster than redirect resolving can occur.
+        resolvedDownloadUrl = searchUrl
+
+        scope.launch(Dispatchers.IO) {
+            var resolved = resolveUrlRedirect(searchUrl)
+
+            // If redirect stays on api.morphe.software, try resolving again
+            if (resolved.startsWith(MORPHE_API_URL)) {
+                Log.d(tag, "Redirect still on API host, resolving again")
+                resolved = resolveUrlRedirect(resolved)
+            }
+
+            withContext(Dispatchers.Main) {
+                resolvedDownloadUrl = resolved
+            }
+        }
+    }
+
+    fun getApiOfflineWebSearchUrl(): String {
         val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
             // YT Music requires architecture. This logic could be improved
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
-            ""
+            "nodpi"
         }
 
-        val version = pendingRecommendedVersion ?: ""
-        // Backslash search parameter opens the first search result
-        // Use quotes to ensure it's an exact match of all search terms
-        val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
-        val searchUrl = "https://duckduckgo.com/?q=${encode(searchQuery, "UTF-8")}"
+        val searchQuery = "\"$pendingPackageName\" \"$pendingRecommendedVersion\" \"$architecture\" site:APKMirror.com"
+
+        val searchUrl = "https://google.com/search?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
+        return searchUrl
+    }
+
+    /**
+     * Handle download instructions dialog continue action
+     * Opens browser to APKMirror search and shows file picker prompt.
+     */
+    fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
+        val urlToOpen = resolvedDownloadUrl!!
 
         try {
-            uriHandler.openUri(searchUrl)
-            // After opening browser, show file picker prompt
+            uriHandler.openUri(urlToOpen)
             showDownloadInstructionsDialog = false
             showFilePickerPromptDialog = true
-        } catch (_: Exception) {
+        } catch (ex: Exception) {
+            Log.d(tag, "Failed to open URL: $ex")
             context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
@@ -311,6 +382,7 @@ class HomeStates(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
+        resolvedDownloadUrl = null
         if (!keepSelectedApp) {
             // Delete temporary file if exists
             pendingSelectedApp?.let { app ->

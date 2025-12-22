@@ -23,7 +23,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 private const val MORPHE_MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
-private const val MORPHE_API_URL = "https://api.morphe.software"
+internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 class ReVancedAPI(
     private val client: HttpService,
@@ -168,8 +168,9 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
-    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> =
-        apiRequest("patches?prerelease=${prefs.usePatchesPrereleases.get()}")
+    suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = apiRequest(
+        if (prefs.usePatchesPrereleases.get()) "patches/prerelease" else "patches"
+    )
 
     suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
         val config = repoConfig()
