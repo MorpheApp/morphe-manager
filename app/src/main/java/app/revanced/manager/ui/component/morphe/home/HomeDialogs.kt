@@ -40,8 +40,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun HomeDialogs(
-    state: HomeStates,
-    usingMountInstall: Boolean
+    state: HomeStates
 ) {
     val uriHandler = LocalUriHandler.current
 
@@ -63,7 +62,7 @@ fun HomeDialogs(
             onNeedApk = {
                 // User needs APK - show download instructions
                 state.showApkAvailabilityDialog = false
-                state.showDownloadInstructionsDialog = true
+                state.resolveDownloadRedirect()
             }
         )
     }
@@ -73,7 +72,7 @@ fun HomeDialogs(
         DownloadInstructionsDialog(
             appName = state.pendingAppName!!,
             recommendedVersion = state.pendingRecommendedVersion,
-            usingMountInstall = usingMountInstall,
+            usingMountInstall = state.usingMountInstall,
             onDismiss = {
                 state.showDownloadInstructionsDialog = false
                 state.cleanupPendingData()

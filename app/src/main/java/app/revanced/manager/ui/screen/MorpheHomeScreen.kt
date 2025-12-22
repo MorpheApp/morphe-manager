@@ -189,8 +189,7 @@ fun MorpheHomeScreen(
 
     // All dialogs
     HomeDialogs(
-        state = homeState,
-        usingMountInstall = usingMountInstall
+        state = homeState
     )
 
     // Main scaffold
