@@ -287,7 +287,7 @@ class HomeStates(
                                 location
                             } else {
                                 val prefix = "${originalUrl.protocol}://${originalUrl.host}"
-                                if (location.startsWith("/")) prefix + location else "$prefix/$location"
+                                if (location.startsWith("/")) "$prefix$location" else "$prefix/$location"
                             }
                         Log.d(tag, "Result: $resolved")
                         resolved
@@ -298,6 +298,8 @@ class HomeStates(
                 }
             } catch (ex: SocketTimeoutException) {
                 Log.d(tag, "Timeout while resolving search redirect: $ex")
+                // Timeout may be because the network is very slow.
+                // Still use web-search api call in external browser.
                 url
             } catch (ex: Exception) {
                 Log.d(tag, "Exception while resolving search redirect: $ex")
