@@ -265,10 +265,8 @@ class HomeStates(
         onStartQuickPatch(params)
     }
 
+    // TODO: Move this logic somewhere more appropriate.
     fun resolveDownloadRedirect() {
-        showDownloadInstructionsDialog = true
-
-        // TODO: Move this logic somewhere more appropriate.
         fun resolveUrlRedirect(url: String): String {
             return try {
                 val originalUrl = URL(url)

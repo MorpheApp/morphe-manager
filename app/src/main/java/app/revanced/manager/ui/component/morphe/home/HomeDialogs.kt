@@ -62,6 +62,7 @@ fun HomeDialogs(
             onNeedApk = {
                 // User needs APK - show download instructions
                 state.showApkAvailabilityDialog = false
+                state.showDownloadInstructionsDialog = true
                 state.resolveDownloadRedirect()
             }
         )
