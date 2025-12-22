@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Utiliser la recommandation par défaut</string>
     <string name="bundle_version_dialog_default_subtitle">Sélectionner automatiquement la version compatible la plus courante.</string>
     <string name="bundle_version_dialog_option_subtitle">Utiliser la version %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Toutes les versions</string>
     <string name="bundle_version_no_version">Aucune version suggérée</string>
     <string name="bundle_version_suggested_label">Version suggérée : %1$s</string>
@@ -666,7 +665,6 @@ Vous devez activer « Autoriser la modification de la sélection et des options 
     <string name="patch_profile_show_more">Afficher plus</string>
     <string name="patch_profile_show_less">Afficher moins</string>
     <string name="patch_profile_created_at">Créé le %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (indisponible)</string>
     <string name="patch_profile_bundle_uid_label">UID : %1$d</string>
     <string name="patch_profile_bundle_change_uid">Changer l’UID</string>
@@ -741,7 +739,6 @@ Il est uniquement compatible avec la version suivante : %2$s."</string>
     <string name="install_type_custom_installer">Installateur personnalisé</string>
     <string name="install_type_system_installer">Installateur système</string>
     <string name="install_type_mount_label">Installateur de montage rooté</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Non monté</string>
     <string name="mount">Monter</string>
     <string name="unmount">Démonter</string>
@@ -781,7 +778,6 @@ Il est uniquement compatible avec la version suivante : %2$s."</string>
     <string name="installer_internal_description">Utiliser l\'installateur de paquets Android</string>
     <string name="installer_auto_saved_name">Installateur monté root</string>
     <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée (root requis).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Installer silencieusement avec Shizuku ou Sui.</string>
     <string name="installer_option_none">Aucun système de secours</string>
     <string name="installer_none_description">Aucun installateur de secours configuré</string>

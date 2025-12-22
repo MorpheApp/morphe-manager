@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">デフォルトの推奨を使用</string>
     <string name="bundle_version_dialog_default_subtitle">最も一般的な互換性のあるバージョンを自動的に選択します。</string>
     <string name="bundle_version_dialog_option_subtitle">バージョン%1$sを使用</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">すべてのバージョン</string>
     <string name="bundle_version_no_version">推奨バージョンなし</string>
     <string name="bundle_version_suggested_label">推奨バージョン：%1$s</string>
@@ -668,7 +667,6 @@
     <string name="patch_profile_show_more">もっと表示</string>
     <string name="patch_profile_show_less">表示を減らす</string>
     <string name="patch_profile_created_at">%1$s に作成</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (利用不可)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">UIDを変更</string>
@@ -741,7 +739,6 @@
     <string name="install_type_custom_installer">カスタムインストーラー</string>
     <string name="install_type_system_installer">システムインストーラー</string>
     <string name="install_type_mount_label">ルート化マウントインストーラー</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">マウントされていません</string>
     <string name="mount">マウント</string>
     <string name="unmount">マウント解除</string>
@@ -781,7 +778,6 @@
     <string name="installer_internal_description">Android パッケージ インストーラーを使用します</string>
     <string name="installer_auto_saved_name">ルート化されたマウントインストーラー</string>
     <string name="installer_auto_saved_description">インストール済みのアプリの上にパッチ適用済みAPKをマウントします（rootが必要です）。</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">ShizukuまたはSuiを使用してサイレントインストールします。</string>
     <string name="installer_option_none">フォールバックなし</string>
     <string name="installer_none_description">フォールバックインストーラーが設定されていません</string>

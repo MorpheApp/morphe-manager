@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Käytä oletussuositusta</string>
     <string name="bundle_version_dialog_default_subtitle">Valitse automaattisesti yleisin yhteensopiva versio.</string>
     <string name="bundle_version_dialog_option_subtitle">Käytä versiota %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Kaikki versiot</string>
     <string name="bundle_version_no_version">Ei ehdotettua versiota</string>
     <string name="bundle_version_suggested_label">Ehdotettu versio: %1$s</string>
@@ -668,7 +667,6 @@ Sinun on otettava käyttöön \"Salli korjausvalintojen ja -asetusten muuttamine
     <string name="patch_profile_show_more">Näytä lisää</string>
     <string name="patch_profile_show_less">Näytä vähemmän</string>
     <string name="patch_profile_created_at">Luotu %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (ei saatavilla)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Vaihda UID</string>
@@ -743,7 +741,6 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="install_type_custom_installer">Mukautettu asennusohjelma</string>
     <string name="install_type_system_installer">Järjestelmäasennusohjelma</string>
     <string name="install_type_mount_label">Rootattu liitinasennusohjelma</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Ei liitetty</string>
     <string name="mount">Liitä</string>
     <string name="unmount">Poista liitoksesta</string>
@@ -783,7 +780,6 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="installer_internal_description">Käytä Android-pakettien asennusohjelmaa</string>
     <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
     <string name="installer_auto_saved_description">Liittää muokatun APK:n asennetun sovelluksen päälle (vaatii root-oikeudet).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Asenna hiljaa käyttämällä Shizukua tai Sui:ta.</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
     <string name="installer_none_description">Varajärjestelmää ei ole määritetty</string>

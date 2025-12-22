@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Bain úsáid as comhairle réamhshocraithe</string>
     <string name="bundle_version_dialog_default_subtitle">Roghnaigh an leagan comhoiriúnach is coitianta go huathoibríoch.</string>
     <string name="bundle_version_dialog_option_subtitle">Bain úsáid as leagan %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Gach leagan</string>
     <string name="bundle_version_no_version">Gan aon leagan molta</string>
     <string name="bundle_version_suggested_label">Leagan molta: %1$s</string>
@@ -666,7 +665,6 @@ Caithfidh tú \"Ceadaigh athrú ar roghnú paiste agus roghanna\" a chasadh air 
     <string name="patch_profile_show_more">Taispeáin níos mó</string>
     <string name="patch_profile_show_less">Taispeáin níos lú</string>
     <string name="patch_profile_created_at">Cruthaíodh %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (ascurrently unavailable)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Athraigh UID</string>
@@ -747,7 +745,6 @@ Níl sé ach comhoiriúnach leis an leagan seo a leanas: %2$s."</string>
     <string name="install_type_custom_installer">Suiteálaí saincheaptha</string>
     <string name="install_type_system_installer">Suiteálaí córais</string>
     <string name="install_type_mount_label">Suiteálaí sliabh fréamhaithe</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Ní sliabh</string>
     <string name="mount">Sliabh</string>
     <string name="unmount">Díshliabh</string>
@@ -787,7 +784,6 @@ Níl sé ach comhoiriúnach leis an leagan seo a leanas: %2$s."</string>
     <string name="installer_internal_description">Úsáid suiteálaí pacáiste Android</string>
     <string name="installer_auto_saved_name">Suiteálaí mount bunaithe</string>
     <string name="installer_auto_saved_description">Déanann an APK paisteáilte a mhuintir thar an aip suiteáilte (teastaíonn fréamh).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Suiteáil go ciúin ag úsáid Shizuku nó Sui.</string>
     <string name="installer_option_none">Ní bheidh aon rogha eile ann</string>
     <string name="installer_none_description">Níor socraíodh aon suiteálaí eile</string>

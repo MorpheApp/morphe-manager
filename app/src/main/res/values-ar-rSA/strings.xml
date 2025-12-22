@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">استخدام التوصية الافتراضية</string>
     <string name="bundle_version_dialog_default_subtitle">اختر تلقائيًا الإصدار الأكثر شيوعًا المتوافق.</string>
     <string name="bundle_version_dialog_option_subtitle">استخدام الإصدار %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">كافة الإصدارات</string>
     <string name="bundle_version_no_version">لا يوجد إصدار مقترح</string>
     <string name="bundle_version_suggested_label">إصدار مقترح: %1$s</string>
@@ -668,7 +667,6 @@
     <string name="patch_profile_show_more">عرض المزيد</string>
     <string name="patch_profile_show_less">عرض أقل</string>
     <string name="patch_profile_created_at">تم الإنشاء في %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (غير متوفر)</string>
     <string name="patch_profile_bundle_uid_label">معرف المستخدم: %1$d</string>
     <string name="patch_profile_bundle_change_uid">تغيير معرف المستخدم</string>
@@ -751,7 +749,6 @@
     <string name="install_type_custom_installer">مثبت مخصص</string>
     <string name="install_type_system_installer">مثبت النظام</string>
     <string name="install_type_mount_label">مثبت تحميل متجذر</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">غير محمل</string>
     <string name="mount">تحميل</string>
     <string name="unmount">إلغاء التحميل</string>
@@ -791,7 +788,6 @@
     <string name="installer_internal_description">استخدام مثبت حزم Android</string>
     <string name="installer_auto_saved_name">مثبت التحميل الجذري</string>
     <string name="installer_auto_saved_description">يقوم بتحميل ملف APK المعدل فوق التطبيق المثبت (يتطلب الجذر).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Install silently using Shizuku or Sui.</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>

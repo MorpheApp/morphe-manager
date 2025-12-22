@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Använd standardrekommendation</string>
     <string name="bundle_version_dialog_default_subtitle">Välj automatiskt den vanligaste kompatibla versionen.</string>
     <string name="bundle_version_dialog_option_subtitle">Använd version %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Alla versioner</string>
     <string name="bundle_version_no_version">Ingen föreslagen version</string>
     <string name="bundle_version_suggested_label">Föreslagen version: %1$s</string>
@@ -668,7 +667,6 @@ Du måste aktivera \"Tillåt ändring av urval av korrigeringar och alternativ\"
     <string name="patch_profile_show_more">Visa mer</string>
     <string name="patch_profile_show_less">Visa mindre</string>
     <string name="patch_profile_created_at">Skapad %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (ej tillgänglig)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Ändra UID</string>
@@ -743,7 +741,6 @@ Den är endast kompatibel med följande version: %2$s."</string>
     <string name="install_type_custom_installer">Anpassat installationsprogram</string>
     <string name="install_type_system_installer">Systeminstallationsprogram</string>
     <string name="install_type_mount_label">Roterad monteringsinstallationsprogram</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Inte monterad</string>
     <string name="mount">Montera</string>
     <string name="unmount">Avmontera</string>
@@ -783,7 +780,6 @@ Den är endast kompatibel med följande version: %2$s."</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
     <string name="installer_auto_saved_description">Monterar den patchade APK:n över den installerade appen (rot krävs).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui.</string>
     <string name="installer_option_none">Ingen återställning</string>
     <string name="installer_none_description">Ingen återställningsinstallerare är konfigurerad</string>

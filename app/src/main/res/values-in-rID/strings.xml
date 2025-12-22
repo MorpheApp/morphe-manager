@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Gunakan rekomendasi bawaan</string>
     <string name="bundle_version_dialog_default_subtitle">Secara otomatis memilih versi yang paling umum kompatibel.</string>
     <string name="bundle_version_dialog_option_subtitle">Gunakan versi %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Semua versi</string>
     <string name="bundle_version_no_version">Tidak ada versi yang disarankan</string>
     <string name="bundle_version_suggested_label">Versi yang disarankan: %1$s</string>
@@ -666,7 +665,6 @@ Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan opsi patch\" di pengatura
     <string name="patch_profile_show_more">Tampilkan lainnya</string>
     <string name="patch_profile_show_less">Tampilkan lebih sedikit</string>
     <string name="patch_profile_created_at">Dibuat %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (tidak tersedia)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Ubah UID</string>
@@ -739,7 +737,6 @@ Hanya kompatibel dengan versi berikut: %2$s."</string>
     <string name="install_type_custom_installer">Pemasang kustom</string>
     <string name="install_type_system_installer">Pemasang sistem</string>
     <string name="install_type_mount_label">Pemasang mount rooted</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Tidak terpasang</string>
     <string name="mount">Pasang</string>
     <string name="unmount">Lepas pasang</string>
@@ -779,7 +776,6 @@ Hanya kompatibel dengan versi berikut: %2$s."</string>
     <string name="installer_internal_description">Gunakan pemasang paket Android</string>
     <string name="installer_auto_saved_name">Pemasang kait perakaran</string>
     <string name="installer_auto_saved_description">Memasang APK yang ditambal di atas aplikasi yang terpasang (memerlukan root).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Instal secara senyap menggunakan Shizuku atau Sui.</string>
     <string name="installer_option_none">Tidak ada pemulihan</string>
     <string name="installer_none_description">Tidak ada penginstal pemulihan yang dikonfigurasi</string>

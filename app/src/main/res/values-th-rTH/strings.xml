@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">ใช้คำแนะนำเริ่มต้น</string>
     <string name="bundle_version_dialog_default_subtitle">เลือกเวอร์ชันที่เข้ากันได้ที่ใช้กันมากที่สุดโดยอัตโนมัติ</string>
     <string name="bundle_version_dialog_option_subtitle">ใช้เวอร์ชัน %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">ทุกเวอร์ชัน</string>
     <string name="bundle_version_no_version">ไม่มีเวอร์ชันที่แนะนำ</string>
     <string name="bundle_version_suggested_label">เวอร์ชันที่แนะนำ: %1$s</string>
@@ -668,7 +667,6 @@
     <string name="patch_profile_show_more">แสดงเพิ่มเติม</string>
     <string name="patch_profile_show_less">แสดงน้อยลง</string>
     <string name="patch_profile_created_at">สร้างเมื่อ %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (ไม่พร้อมใช้งาน)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">เปลี่ยน UID</string>
@@ -741,7 +739,6 @@
     <string name="install_type_custom_installer">ตัวติดตั้งแบบกำหนดเอง</string>
     <string name="install_type_system_installer">ตัวติดตั้งระบบ</string>
     <string name="install_type_mount_label">ตัวติดตั้งเมานต์รูท</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">ไม่ได้เมานต์</string>
     <string name="mount">เมานต์</string>
     <string name="unmount">ยกเลิกเมานต์</string>
@@ -781,7 +778,6 @@
     <string name="installer_internal_description">ใช้โปรแกรมติดตั้งแพ็คเกจ Android</string>
     <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
     <string name="installer_auto_saved_description">ติดตั้ง APK ที่แก้ไขแล้วทับแอปที่ติดตั้ง (ต้องใช้ root)</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
     <string name="installer_none_description">ไม่ได้กำหนดค่าตัวติดตั้งสำรอง</string>

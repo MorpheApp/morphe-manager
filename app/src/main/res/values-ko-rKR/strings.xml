@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">기본 추천 선택하기</string>
     <string name="bundle_version_dialog_default_subtitle">가장 일반적인 호환 버전을 자동으로 선택합니다.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s 버전 사용하기</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">모든 버전</string>
     <string name="bundle_version_no_version">권장되는 버전이 없습니다</string>
     <string name="bundle_version_suggested_label">권장 버전: %1$s</string>
@@ -655,7 +654,6 @@
     <string name="patch_profile_show_more">더보기</string>
     <string name="patch_profile_show_less">덜보기</string>
     <string name="patch_profile_created_at">%1$s 을 생성하였습니다</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (사용할 수 없음)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">UID 변경</string>
@@ -728,7 +726,6 @@
     <string name="install_type_custom_installer">사용자 정의 설치 프로그램</string>
     <string name="install_type_system_installer">시스템 설치 프로그램</string>
     <string name="install_type_mount_label">루팅된 마운트 설치 프로그램</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">마운트되지 않음</string>
     <string name="mount">마운트</string>
     <string name="unmount">마운트 해제</string>
@@ -768,7 +765,6 @@
     <string name="installer_internal_description">Android 패키지 설치 프로그램를 사용합니다</string>
     <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
     <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다(루트 권한이 요구됨).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다.</string>
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>

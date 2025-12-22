@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Varsayılan öneriyi kullan</string>
     <string name="bundle_version_dialog_default_subtitle">En yaygın uyumlu sürümü otomatik olarak seçin.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s sürümünü kullan</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Tüm sürümler</string>
     <string name="bundle_version_no_version">Önerilen sürüm yok</string>
     <string name="bundle_version_suggested_label">Önerilen sürüm: %1$s</string>
@@ -666,7 +665,6 @@ Yamaları değiştirmeden önce gelişmiş ayarlarda \"Yamalama seçimi ve seçe
     <string name="patch_profile_show_more">Daha fazla göster</string>
     <string name="patch_profile_show_less">Daha az göster</string>
     <string name="patch_profile_created_at">%1$s tarihinde oluşturuldu</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (kullanılamıyor)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">UID\'yi Değiştir</string>
@@ -741,7 +739,6 @@ Sadece aşağıdaki sürümle uyumludur: %2$s."</string>
     <string name="install_type_custom_installer">Özel yükleyici</string>
     <string name="install_type_system_installer">Sistem yükleyicisi</string>
     <string name="install_type_mount_label">Rootlu bağlama yükleyicisi</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Bağlanmadı</string>
     <string name="mount">Bağla</string>
     <string name="unmount">Bağlantıyı kaldır</string>
@@ -781,7 +778,6 @@ Sadece aşağıdaki sürümle uyumludur: %2$s."</string>
     <string name="installer_internal_description">Android paket yükleyicisini kullanın</string>
     <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
     <string name="installer_auto_saved_description">Yüklü uygulamaya yamalı APK\'yı bağlar (root gereklidir).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanarak sessizce yükleyin.</string>
     <string name="installer_option_none">Yedekleme yok</string>
     <string name="installer_none_description">Yedekleme yükleyici yapılandırılmamış</string>

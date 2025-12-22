@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Использовать рекомендацию по умолчанию</string>
     <string name="bundle_version_dialog_default_subtitle">Автоматически выбирать наиболее распространенную совместимую версию.</string>
     <string name="bundle_version_dialog_option_subtitle">Использовать версию %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Все версии</string>
     <string name="bundle_version_no_version">Нет предложенной версии</string>
     <string name="bundle_version_suggested_label">Предложенная версия: %1$s</string>
@@ -666,7 +665,6 @@
     <string name="patch_profile_show_more">Показать еще</string>
     <string name="patch_profile_show_less">Показать меньше</string>
     <string name="patch_profile_created_at">Создано %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (недоступно)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Изменить UID</string>
@@ -745,7 +743,6 @@
     <string name="install_type_custom_installer">Пользовательский установщик</string>
     <string name="install_type_system_installer">Системный установщик</string>
     <string name="install_type_mount_label">Установщик смонтированных приложений</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Не смонтировано</string>
     <string name="mount">Смонтировать</string>
     <string name="unmount">Размонтировать</string>
@@ -785,7 +782,6 @@
     <string name="installer_internal_description">Использовать установщик пакетов Android</string>
     <string name="installer_auto_saved_name">Установщик с root-доступом</string>
     <string name="installer_auto_saved_description">Монтирует пропатченный APK поверх установленного приложения (требуется root).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Устанавливать без уведомлений с помощью Shizuku или Sui.</string>
     <string name="installer_option_none">Без запасного установщика</string>
     <string name="installer_none_description">Запасной установщик не настроен</string>

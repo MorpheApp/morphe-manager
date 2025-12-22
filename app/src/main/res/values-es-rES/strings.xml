@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Usar recomendación predeterminada</string>
     <string name="bundle_version_dialog_default_subtitle">Selecciona automáticamente la versión compatible más común.</string>
     <string name="bundle_version_dialog_option_subtitle">Usar versión %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Todas las versiones</string>
     <string name="bundle_version_no_version">No hay versión sugerida</string>
     <string name="bundle_version_suggested_label">Versión sugerida: %1$s</string>
@@ -668,7 +667,6 @@ Versión entrante: %2$s
     <string name="patch_profile_show_more">Mostrar más</string>
     <string name="patch_profile_show_less">Mostrar menos</string>
     <string name="patch_profile_created_at">Creado el %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (no disponible)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Cambiar UID</string>
@@ -743,7 +741,6 @@ Solo es compatible con la siguiente versión: %2$s."</string>
     <string name="install_type_custom_installer">Instalador personalizado</string>
     <string name="install_type_system_installer">Instalador del sistema</string>
     <string name="install_type_mount_label">Instalador de montaje rooteado</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">No montado</string>
     <string name="mount">Montar</string>
     <string name="unmount">Desmontar</string>
@@ -783,7 +780,6 @@ Solo es compatible con la siguiente versión: %2$s."</string>
     <string name="installer_internal_description">Usar el instalador de paquetes de Android</string>
     <string name="installer_auto_saved_name">Instalador de montaje con root</string>
     <string name="installer_auto_saved_description">Monta la APK modificada sobre la app instalada (requiere root).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Instalar silenciosamente usando Shizuku o Sui.</string>
     <string name="installer_option_none">Sin opción de recuperación</string>
     <string name="installer_none_description">No hay instalador de recuperación configurado</string>

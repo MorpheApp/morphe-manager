@@ -7,10 +7,10 @@
         <item quantity="other">%d патчів</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Виконати %d виправлення</item>
-        <item quantity="few">Виконати %d виправлення</item>
-        <item quantity="many">Виконати %d виправлень</item>
-        <item quantity="other">Виконати %d виправлень</item>
+        <item quantity="one">Виконати %d патч</item>
+        <item quantity="few">Виконати %d патча</item>
+        <item quantity="many">Виконати %d патчів</item>
+        <item quantity="other">Виконати %d патчів</item>
     </plurals>
     <plurals name="selected_count">
         <item quantity="one">%d вибрано</item>
