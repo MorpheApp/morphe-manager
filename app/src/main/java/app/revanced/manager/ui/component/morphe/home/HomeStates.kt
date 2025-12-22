@@ -136,14 +136,9 @@ class HomeStates(
         bundleUpdateInProgress: Boolean,
         android11BugActive: Boolean
     ) {
-        // Check if patches are being fetched or if no patches available
-        if (bundleUpdateInProgress || availablePatches < 1) {
-            val message = if (bundleUpdateInProgress) {
-                context.getString(R.string.morphe_home_patches_are_loading)
-            } else {
-                context.getString(R.string.no_patch_found)
-            }
-            context.toast(message)
+        // Check if patches are being fetched
+        if (availablePatches <= 0 || bundleUpdateInProgress) {
+            context.toast(context.getString(R.string.morphe_home_patches_are_loading))
             return
         }
 
