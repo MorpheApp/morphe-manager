@@ -289,7 +289,7 @@ class HomeStates(
                                 val prefix = "${originalUrl.protocol}://${originalUrl.host}"
                                 if (location.startsWith("/")) prefix + location else "$prefix/$location"
                             }
-                        Log.d(tag, "Resolved redirect to: $resolved")
+                        Log.d(tag, "Result: $resolved")
                         resolved
                     }
                 } else {
@@ -308,6 +308,8 @@ class HomeStates(
         showDownloadInstructionsDialog = true
 
         val apiHost = "https://api.morphe.software"
+        // Must not escape colon search term separator, but recommended version must be escaped
+        // because Android version string can be almost anything.
         val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
         // To test client fallback logic in getApiOfflineWebSearchUrl(), change this an invalid url.
