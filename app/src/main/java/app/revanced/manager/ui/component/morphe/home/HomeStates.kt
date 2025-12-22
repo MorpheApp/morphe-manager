@@ -23,6 +23,7 @@ import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
+import com.topjohnwu.superuser.internal.Utils.ex
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -30,6 +31,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
+import java.net.HttpURLConnection
+import java.net.URL
 import java.net.URLEncoder.encode
 
 private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
@@ -262,7 +265,7 @@ class HomeStates(
 
     /**
      * Handle download instructions dialog continue action
-     * Opens browser to APKMirror search and shows file picker prompt
+     * Opens browser to APKMirror search and shows file picker prompt.
      */
     fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
         // Encode only the version name, because it may contain colons or other reserved characters.
@@ -274,15 +277,73 @@ class HomeStates(
         val searchUrl = "https://api.morphe.software/v1/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
-        try {
-            uriHandler.openUri(searchUrl)
-            showDownloadInstructionsDialog = false
-            showFilePickerPromptDialog = true
-        } catch (_: Exception) {
-            context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
-            showDownloadInstructionsDialog = false
-            cleanupPendingData()
+        // TODO: Refactor this so the redirect is resolved while the dialog is on screen
+        //       so there is no resolving delay when the user taps continue.
+        CoroutineScope(Dispatchers.IO).launch {
+            val urlToOpen = try {
+                val connection = URL(searchUrl).openConnection() as HttpURLConnection
+                connection.instanceFollowRedirects = false
+                connection.requestMethod = "HEAD"
+                connection.connectTimeout = 2_000
+                connection.readTimeout = 2_000
+
+                val responseCode = connection.responseCode
+                if (responseCode in 300..399) {
+                    val location = connection.getHeaderField("Location")
+                    if (location.isNullOrBlank()) {
+                        Log.d(tag, "Location tag is blank: ${connection.responseMessage}")
+                        getDuckDuckGoWebSearchUrl()
+                    } else {
+                        Log.d(tag, "Resolved redirect to: $location")
+                        location
+                   }
+                } else {
+                    Log.d(tag, "Unexpected response code: $responseCode")
+                    getDuckDuckGoWebSearchUrl()
+
+                }
+            } catch (ex: Exception) {
+                Log.d(tag, "Exception while resolving search redirect: $ex")
+                getDuckDuckGoWebSearchUrl()
+            }
+
+            // Switch back to main thread to open the URL and update UI state.
+            withContext(Dispatchers.Main) {
+                try {
+                    uriHandler.openUri(urlToOpen)
+                    showDownloadInstructionsDialog = false
+                    showFilePickerPromptDialog = true
+                } catch (_: Exception) {
+                    context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+                    showDownloadInstructionsDialog = false
+                    cleanupPendingData()
+                }
+            }
         }
+    }
+
+    fun getDuckDuckGoWebSearchUrl(): String {
+        val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
+            pendingPackageName
+        } else {
+            // Some versions of YT Music don't show when the package name is used, use the app name instead
+            "YouTube Music"
+        }
+
+        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
+            // YT Music requires architecture. This logic could be improved
+            " (${Build.SUPPORTED_ABIS.first()})"
+        } else {
+            ""
+        }
+
+        val version = pendingRecommendedVersion ?: ""
+        // Backslash search parameter opens the first search result
+        // Use quotes to ensure it's an exact match of all search terms
+        val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
+        val searchUrl = "https://duckduckgo.com/?q=${encode(searchQuery, "UTF-8")}"
+        Log.d(tag, "Using DuckDuckGo search query: $searchQuery")
+        return searchUrl
     }
 
     /**
