@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Użyj domyślnej rekomendacji</string>
     <string name="bundle_version_dialog_default_subtitle">Automatycznie wybierz najczęściej występującą kompatybilną wersję.</string>
     <string name="bundle_version_dialog_option_subtitle">Użyj wersji %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Wszystkie wersje</string>
     <string name="bundle_version_no_version">Brak sugerowanej wersji</string>
     <string name="bundle_version_suggested_label">Sugerowana wersja: %1$s</string>
@@ -670,7 +669,6 @@ Którą należy zapisać w tym profilu?</string>
     <string name="patch_profile_show_more">Pokaż więcej</string>
     <string name="patch_profile_show_less">Pokaż mniej</string>
     <string name="patch_profile_created_at">Utworzono %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (niedostępne)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Zmień UID</string>
@@ -749,7 +747,6 @@ Jest ona zgodna tylko z następującą wersją: %2$s."</string>
     <string name="install_type_custom_installer">Niestandardowy instalator</string>
     <string name="install_type_system_installer">Instalator systemowy</string>
     <string name="install_type_mount_label">Instalator z montowaniem roota</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Nie zamontowano</string>
     <string name="mount">Zamontuj</string>
     <string name="unmount">Odmontuj</string>
@@ -789,7 +786,6 @@ Jest ona zgodna tylko z następującą wersją: %2$s."</string>
     <string name="installer_internal_description">Użyj instalatora pakietów Android</string>
     <string name="installer_auto_saved_name">Instalator z zapisem</string>
     <string name="installer_auto_saved_description">Montuje załatany plik APK nad zainstalowaną aplikacją (wymaga uprawnień roota).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Instaluj cicho za pomocą Shizuku lub Sui.</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
     <string name="installer_none_description">Nie skonfigurowano instalatora zapasowego</string>

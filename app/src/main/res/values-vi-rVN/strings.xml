@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Dùng đề xuất mặc định</string>
     <string name="bundle_version_dialog_default_subtitle">Tự động chọn phiên bản tương thích thông dụng nhất.</string>
     <string name="bundle_version_dialog_option_subtitle">Dùng phiên bản %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Tất cả phiên bản</string>
     <string name="bundle_version_no_version">Không có phiên bản  đề xuất</string>
     <string name="bundle_version_suggested_label">phiên bản đề xuất: %1$s</string>
@@ -642,7 +641,6 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="patch_profile_show_more">Xem thêm</string>
     <string name="patch_profile_show_less">Thu gọn</string>
     <string name="patch_profile_created_at">Đã tạo %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (không có sẵn)</string>
     <string name="patch_profile_bundle_uid_label">Mã định danh: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Đổi mã định danh</string>
@@ -713,7 +711,6 @@ Nó chỉ tương thích với phiên bản sau: %2$s."</string>
     <string name="install_type_custom_installer">Trình cài đặt tùy chỉnh</string>
     <string name="install_type_system_installer">Trình cài đặt hệ thống</string>
     <string name="install_type_mount_label">Trình cài đặt gắn kết đã root</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Không gắn kết</string>
     <string name="mount">Gắn kết</string>
     <string name="unmount">Gỡ gắn kết</string>
@@ -753,7 +750,6 @@ Nó chỉ tương thích với phiên bản sau: %2$s."</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
     <string name="installer_auto_saved_description">Gắn kết APK đã vá lên trên ứng dụng đã cài đặt (yêu cầu root).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui.</string>
     <string name="installer_option_none">Không có</string>
     <string name="installer_none_description">Chưa cấu hình trình cài đặt dự phòng</string>

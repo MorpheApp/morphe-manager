@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Alapértelmezett ajánlás használata</string>
     <string name="bundle_version_dialog_default_subtitle">Automatikus kiválasztás a leggyakoribb kompatibilis verzió alapján.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s verzió használata</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Összes verzió</string>
     <string name="bundle_version_no_version">Nincs javasolt verzió</string>
     <string name="bundle_version_suggested_label">Javasolt verzió: %1$s</string>
@@ -668,7 +667,6 @@ A patch-ek kapcsolgatása előtt engedélyeznie kell a „Patch kiválasztás é
     <string name="patch_profile_show_more">Többet mutat</string>
     <string name="patch_profile_show_less">Kevesebbet mutat</string>
     <string name="patch_profile_created_at">Létrehozva: %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (nem érhető el)</string>
     <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">UID módosítása</string>
@@ -743,7 +741,6 @@ Csak a következő verzióval kompatibilis: %2$s."</string>
     <string name="install_type_custom_installer">Egyéni telepítő</string>
     <string name="install_type_system_installer">Rendszer telepítő</string>
     <string name="install_type_mount_label">Rootolt mount telepítő</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">Nincs csatlakoztatva</string>
     <string name="mount">Csatlakoztatás</string>
     <string name="unmount">Eltávolítás</string>
@@ -783,7 +780,6 @@ Csak a következő verzióval kompatibilis: %2$s."</string>
     <string name="installer_internal_description">Az Android csomagtelepítő használata</string>
     <string name="installer_auto_saved_name">Rootolt mount telepítő</string>
     <string name="installer_auto_saved_description">A javított APK-t a telepített alkalmazás fölé mountolja (root szükséges).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">Telepítés
 néma módban Shizuku vagy Sui használatával.</string>
     <string name="installer_option_none">Nincs tartalék</string>

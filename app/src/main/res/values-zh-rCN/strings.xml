@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">使用默认推荐</string>
     <string name="bundle_version_dialog_default_subtitle">自动选择最常见的兼容版本。</string>
     <string name="bundle_version_dialog_option_subtitle">使用版本 %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">所有版本</string>
     <string name="bundle_version_no_version">无建议版本</string>
     <string name="bundle_version_suggested_label">建议版本：%1$s</string>
@@ -642,7 +641,6 @@
     <string name="patch_profile_show_more">显示更多</string>
     <string name="patch_profile_show_less">显示更少</string>
     <string name="patch_profile_created_at">创建于 %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (不可用)</string>
     <string name="patch_profile_bundle_uid_label">UID：%1$d</string>
     <string name="patch_profile_bundle_change_uid">更改 UID</string>
@@ -711,7 +709,6 @@
     <string name="install_type_custom_installer">自定义安装程序</string>
     <string name="install_type_system_installer">系统安装程序</string>
     <string name="install_type_mount_label">Rooted 挂载安装器</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">未挂载</string>
     <string name="mount">挂载</string>
     <string name="unmount">取消挂载</string>
@@ -751,7 +748,6 @@
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
     <string name="installer_auto_saved_description">将修补后的APK挂载到已安装的应用上（需要root权限）。</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装。</string>
     <string name="installer_option_none">无备用</string>
     <string name="installer_none_description">未配置备用安装程序</string>

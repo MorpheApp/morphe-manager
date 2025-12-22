@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">Користи подразумевану препоруку</string>
     <string name="bundle_version_dialog_default_subtitle">Аутоматски бира најчешћу компатибилну верзију.</string>
     <string name="bundle_version_dialog_option_subtitle">Користи верзију %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">Све верзије</string>
     <string name="bundle_version_no_version">Нема предложене верзије</string>
     <string name="bundle_version_suggested_label">Предложена верзија: %1$s</string>
@@ -666,7 +665,6 @@
     <string name="patch_profile_show_more">Прикажи више</string>
     <string name="patch_profile_show_less">Прикажи мање</string>
     <string name="patch_profile_created_at">Креирано %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (недоступно)</string>
     <string name="patch_profile_bundle_uid_label">УИД: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Промени УИД</string>
@@ -743,7 +741,6 @@
     <string name="install_type_custom_installer">Прилагођени инсталатер</string>
     <string name="install_type_system_installer">Системски инсталатер</string>
     <string name="install_type_mount_label">Инсталатер са рут приступом</string>
-    <string name="install_type_shizuku_label">Шизуку</string>
     <string name="not_mounted">Није монтирано</string>
     <string name="mount">Монтирај</string>
     <string name="unmount">Демонтирај</string>
@@ -783,7 +780,6 @@
     <string name="installer_internal_description">Користите Андроид инсталатер пакета</string>
     <string name="installer_auto_saved_name">Инсталатер монтирања са рут приступом</string>
     <string name="installer_auto_saved_description">Монтира инсталирану апликацију преко закрпљене АПК (захтева рут приступ).</string>
-    <string name="installer_shizuku_name">Шизуку</string>
     <string name="installer_shizuku_description">Инсталирајте тихо помоћу Шизуку или Суи.</string>
     <string name="installer_option_none">Без резервне опције</string>
     <string name="installer_none_description">Није конфигурисан ниједан резервни инсталатер</string>

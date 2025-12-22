@@ -183,7 +183,6 @@
     <string name="bundle_version_dialog_default">השתמש בהמלצת ברירת מחדל</string>
     <string name="bundle_version_dialog_default_subtitle">בחר באופן אוטומטי את הגרסה הנפוצה ביותר התואמת.</string>
     <string name="bundle_version_dialog_option_subtitle">השתמש בגרסה %1$s</string>
-    <string name="bundle_version_line">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">כל הגרסאות</string>
     <string name="bundle_version_no_version">אין גרסה מוצעת</string>
     <string name="bundle_version_suggested_label">גרסה מוצעת: %1$s</string>
@@ -668,7 +667,6 @@
     <string name="patch_profile_show_more">הצג עוד</string>
     <string name="patch_profile_show_less">הצג פחות</string>
     <string name="patch_profile_created_at">נוצר בתאריך %1$s</string>
-    <string name="patch_profile_bundle_header">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (לא זמין)</string>
     <string name="patch_profile_bundle_uid_label">מזהה ייחודי: %1$d</string>
     <string name="patch_profile_bundle_change_uid">שנה מזהה ייחודי</string>
@@ -747,7 +745,6 @@
     <string name="install_type_custom_installer">מתקין מותאם אישית</string>
     <string name="install_type_system_installer">מתקין מערכת</string>
     <string name="install_type_mount_label">מתקין הרכבה עם Root</string>
-    <string name="install_type_shizuku_label">Shizuku</string>
     <string name="not_mounted">לא מורכב</string>
     <string name="mount">הרכבה</string>
     <string name="unmount">פירוק</string>
@@ -787,7 +784,6 @@
     <string name="installer_internal_description">השתמש במתקין החבילות של Android</string>
     <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
     <string name="installer_auto_saved_description">טוען את ה-APK המתוקן מעל האפליקציה המותקנת (נדרש root).</string>
-    <string name="installer_shizuku_name">Shizuku</string>
     <string name="installer_shizuku_description">התקן בשקט באמצעות Shizuku או Sui.</string>
     <string name="installer_option_none">אין חלופה</string>
     <string name="installer_none_description">לא הוגדר מתקין חלופי</string>
