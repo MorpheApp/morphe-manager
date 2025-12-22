@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Info
@@ -173,11 +174,12 @@ private fun ApkAvailabilityDialog(
         title = stringResource(R.string.morphe_home_apk_availability_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_home_apk_availability_yes),
-                onPrimaryClick = onHaveApk,
-                secondaryText = stringResource(R.string.morphe_home_apk_availability_no),
-                onSecondaryClick = onNeedApk,
-                secondaryIcon = Icons.Outlined.Download,
+                primaryText = stringResource(R.string.morphe_home_apk_availability_no),
+                onPrimaryClick = onNeedApk,
+                primaryIcon = Icons.Outlined.Download,
+                secondaryText = stringResource(R.string.morphe_home_apk_availability_yes),
+                onSecondaryClick = onHaveApk,
+                secondaryIcon = Icons.Outlined.Check,
             )
         }
     ) {
