@@ -15,6 +15,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.ui.model.SelectedApp
@@ -265,6 +266,9 @@ class HomeStates(
     }
 
     fun resolveDownloadRedirect() {
+        showDownloadInstructionsDialog = true
+
+        // TODO: Move this logic somewhere more appropriate.
         fun resolveUrlRedirect(url: String): String {
             return try {
                 val originalUrl = URL(url)
@@ -307,15 +311,12 @@ class HomeStates(
             }
         }
 
-        showDownloadInstructionsDialog = true
-
-        val apiHost = "https://api.morphe.software"
         // Must not escape colon search term separator, but recommended version must be escaped
         // because Android version string can be almost anything.
         val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
         // To test client fallback logic in getApiOfflineWebSearchUrl(), change this an invalid url.
-        val searchUrl = "$apiHost/v1/web-search/$searchQuery"
+        val searchUrl = "$MORPHE_API_URL/v1/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
         // Use API web-search if user clicks thru faster than redirect resolving can occur.
@@ -325,7 +326,7 @@ class HomeStates(
             var resolved = resolveUrlRedirect(searchUrl)
 
             // If redirect stays on api.morphe.software, try resolving again
-            if (resolved.startsWith(apiHost)) {
+            if (resolved.startsWith(MORPHE_API_URL)) {
                 Log.d(tag, "Redirect still on API host, resolving again")
                 resolved = resolveUrlRedirect(resolved)
             }

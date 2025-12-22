@@ -23,7 +23,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 private const val MORPHE_MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
-private const val MORPHE_API_URL = "https://api.morphe.software"
+internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 class ReVancedAPI(
     private val client: HttpService,
