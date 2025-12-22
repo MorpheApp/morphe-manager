@@ -80,3 +80,20 @@ jobs:
         with:
           subject-name: 'Morphe Manager ${{ steps.release.outputs.NEW_TAG }}'
           subject-path: app/build/outputs/apk/release/morphe-manager*.apk
+      - name: Re-deploy morphe-website deploy
+        if: success() && steps.release.outputs.NEW_TAG != ''
+        # This will run on both dev and main releases, but that's ok because
+        # the website deploy action picks main/dev based on what it wants.
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.MORPHE_WEBSITE_DISPATCH_TOKEN }}" \
+            https://api.github.com/repos/MorpheApps/morphe-website/dispatches \
+            -d '{
+              "event_type": "morphe-manager-release",
+              "client_payload": {
+                "tag": "${{ steps.release.outputs.NEW_TAG }}",
+                "source_repo": "${{ github.repository }}",
+                "run_id": "${{ github.run_id }}"
+              }
+            }'
