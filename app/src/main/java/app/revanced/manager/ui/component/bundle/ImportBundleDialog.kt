@@ -23,7 +23,6 @@ import app.revanced.manager.ui.component.AlertDialogExtended
 import app.revanced.manager.ui.component.TextHorizontalPadding
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.ui.component.haptics.HapticRadioButton
-import app.revanced.manager.util.BIN_MIMETYPE
 import app.revanced.manager.util.transparentListItemColors
 
 private enum class BundleType {
@@ -49,7 +48,7 @@ fun ImportPatchBundleDialog(
         }
 
     fun launchPatchActivity() {
-        patchActivityLauncher.launch(arrayOf(BIN_MIMETYPE))
+        patchActivityLauncher.launch(arrayOf("*/*")) // Android does not recognize .mpp as BIN file so we use all file types
     }
 
     val steps = listOf<@Composable () -> Unit>(
