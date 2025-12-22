@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
 
@@ -302,6 +303,10 @@ class HomeStates(
                     getDuckDuckGoWebSearchUrl()
 
                 }
+            } catch (ex: SocketTimeoutException) {
+                Log.d(tag, "Timeout while resolving search redirect: $ex")
+                // Timeout may be because the network is very slow. Still use web-search api call.
+                searchUrl
             } catch (ex: Exception) {
                 Log.d(tag, "Exception while resolving search redirect: $ex")
                 getDuckDuckGoWebSearchUrl()
