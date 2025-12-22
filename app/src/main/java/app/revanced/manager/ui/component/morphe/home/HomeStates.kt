@@ -265,30 +265,17 @@ class HomeStates(
      * Opens browser to APKMirror search and shows file picker prompt
      */
     fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
-        val baseQuery = if (pendingPackageName == PACKAGE_YOUTUBE) {
-            pendingPackageName
-        } else {
-            // Some versions of YT Music don't show when the package name is used, use the app name instead
-            "YouTube Music"
-        }
+        // Encode only the version name, because it may contain colons or other reserved characters.
+        val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
 
-        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
-            // YT Music requires architecture. This logic could be improved
-            " (${Build.SUPPORTED_ABIS.first()})"
-        } else {
-            ""
-        }
+        // Android package name is always safe to use as a url path without escaping.
+        val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
 
-        val version = pendingRecommendedVersion ?: ""
-        // Backslash search parameter opens the first search result
-        // Use quotes to ensure it's an exact match of all search terms
-        val searchQuery = "\\$baseQuery $version $architecture (nodpi) site:apkmirror.com".replace("  ", " ")
-        val searchUrl = "https://duckduckgo.com/?q=${encode(searchQuery, "UTF-8")}"
-        Log.d(tag, "Using search query: $searchQuery")
+        val searchUrl = "https://api.morphe.software/v1/web-search/$searchQuery"
+        Log.d(tag, "Using search url: $searchUrl")
 
         try {
             uriHandler.openUri(searchUrl)
-            // After opening browser, show file picker prompt
             showDownloadInstructionsDialog = false
             showFilePickerPromptDialog = true
         } catch (_: Exception) {
