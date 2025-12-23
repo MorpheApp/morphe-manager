@@ -103,17 +103,23 @@
     <string name="morphe_patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
     <string name="morphe_patcher_message_7">Adjusting 1\'s and 0\'s… 🤖</string>
     <string name="morphe_patcher_message_8">Untangling digital spaghetti… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Fixing bugs in the unpatched app… 🐞</string>
     <string name="morphe_patcher_message_10">Great patches are worth the wait… ⏳</string>
     <string name="morphe_patcher_message_11">Polishing pixels until they shine… 💎</string>
     <string name="morphe_patcher_message_12">Please remain seated until the captain turns off the \“Patching in progress\” sign… 💺✈️</string>
     <string name="morphe_patcher_message_13">Cooking up your patched app, hot and fresh… 🍳</string>
-    <string name="morphe_patcher_message_14">Stepping through the patching door, and floating in a most peculiar way… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Negotiating politely with bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
     <string name="morphe_patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
     <string name="morphe_patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>

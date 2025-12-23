@@ -115,6 +115,7 @@ object HomeAndPatcherMessages {
                 R.string.morphe_patcher_message_17,
                 R.string.morphe_patcher_message_18,
                 R.string.morphe_patcher_message_19,
+                R.string.morphe_patcher_message_20,
             )
         )
     }
