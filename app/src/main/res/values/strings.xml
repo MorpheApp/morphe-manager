@@ -8,8 +8,8 @@
     <string name="morphe_home_greeting_3">Buckle up, it\'s patching time</string>
     <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece</string>
     <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
-    <string name="morphe_home_greeting_6">Let\’s make your apps behave</string>
-    <string name="morphe_home_greeting_7">Today’s forecast: 100% chance of patching</string>
+    <string name="morphe_home_greeting_6">Let\'s make your apps behave</string>
+    <string name="morphe_home_greeting_7">Today\'s forecast: 100% chance of patching</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">Update failed</string>
     <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
@@ -205,7 +205,7 @@
     <string name="bundle_version_item_description_default">Using default recommendation</string>
     <string name="bundle_version_item_description_selected">Following %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Choose bundle recommendation</string>
-    <string name="bundle_version_dialog_description">Pick which bundle’s suggestion should be used when downloading an APK.</string>
+    <string name="bundle_version_dialog_description">Pick which bundle\'s suggestion should be used when downloading an APK.</string>
     <string name="bundle_version_dialog_default">Use default recommendation</string>
     <string name="bundle_version_dialog_default_subtitle">Automatically pick the most common compatible version.</string>
     <string name="bundle_version_dialog_option_subtitle">Use version %1$s</string>
@@ -351,7 +351,7 @@ Enable anyways?"</string>
     <string name="import_keystore">Import keystore</string>
     <string name="import_keystore_description">Import a custom keystore</string>
     <string name="import_keystore_dialog_title">Enter keystore credentials</string>
-    <string name="import_keystore_dialog_description">You\'ll need enter the keystore’s credentials to import it.</string>
+    <string name="import_keystore_dialog_description">You\'ll need enter the keystore\'s credentials to import it.</string>
     <string name="import_keystore_dialog_alias_field">Username (Alias)</string>
     <string name="import_keystore_dialog_password_field">Password</string>
     <string name="import_keystore_dialog_button">Import</string>
@@ -730,7 +730,7 @@ You need to turn on \"Allow changing patch selection and options\" in the advanc
     <string name="patcher_missing_patch_message">"Patching failed because the following patches were not found in the current bundle:
 %1$s
 Reopen the selection and reselect them (or choose replacements) before retrying."</string>
-    <string name="patcher_preflight_missing_patch_message">"The following patches aren’t available in the current bundle:
+    <string name="patcher_preflight_missing_patch_message">"The following patches aren\'t available in the current bundle:
 %1$s
 You can remove them automatically, adjust the selection, or continue anyway."</string>
     <string name="patcher_missing_patch_review">Review selection</string>
