@@ -39,8 +39,8 @@
     <string name="morphe_home_download_instructions_step1">Press the \'Continue to APKMirror.com\' button below</string>
     <string name="morphe_home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="morphe_home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
-    <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and &lt;b>do not install&lt;/b> the APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b>install the APK&lt;/b></string>
+    <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and <b>do not install</b> the APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Wait for the download to complete, then <b>install the APK</b></string>
     <string name="morphe_home_download_instructions_step4">After the download finishes, open this app again</string>
     <string name="morphe_home_download_instructions_step4_mount">After installing the original APK, open this app again</string>
     <string name="morphe_home_download_instructions_continue">Continue to APKMirror.com</string>
