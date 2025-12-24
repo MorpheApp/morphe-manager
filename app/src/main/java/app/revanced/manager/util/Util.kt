@@ -3,7 +3,10 @@ package app.revanced.manager.util
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.graphics.Typeface
+import android.text.Html
 import android.text.format.DateUtils
+import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.MainThread
@@ -25,7 +28,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -51,6 +60,7 @@ import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import java.util.Locale
+import kotlin.math.abs
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -230,7 +240,7 @@ fun LazyListState.isScrollingUp(): State<Boolean> {
         derivedStateOf {
             val indexChanged = previousIndex != firstVisibleItemIndex
             val offsetChanged =
-                kotlin.math.abs(previousScrollOffset - firstVisibleItemScrollOffset) > isScrollingUpSensitivity
+                abs(previousScrollOffset - firstVisibleItemScrollOffset) > isScrollingUpSensitivity
 
             if (indexChanged) {
                 previousIndex > firstVisibleItemIndex
@@ -281,6 +291,36 @@ fun <T, R> ((T) -> R).withHapticFeedback(constant: Int): (T) -> R {
         this(it)
     }
 }
+
+
+@Composable
+fun htmlAnnotatedString(htmlStringResourceId: Int): AnnotatedString =
+    htmlAnnotatedString(LocalContext.current.resources.getText(htmlStringResourceId))
+
+fun htmlAnnotatedString(html: CharSequence): AnnotatedString {
+    val spanned = Html.fromHtml(html.toString(), Html.FROM_HTML_MODE_LEGACY)
+
+    return buildAnnotatedString {
+        append(spanned.toString())
+
+        spanned.getSpans(0, spanned.length, Any::class.java).forEach { span ->
+            val start = spanned.getSpanStart(span)
+            val end = spanned.getSpanEnd(span)
+
+            when (span) {
+                is StyleSpan -> {
+                    when (span.style) {
+                        Typeface.BOLD ->
+                            addStyle(SpanStyle(fontWeight = FontWeight.Bold), start, end)
+                        Typeface.ITALIC ->
+                            addStyle(SpanStyle(fontStyle = FontStyle.Italic), start, end)
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 fun Modifier.enabled(condition: Boolean) = if (condition) this else alpha(0.5f)
 
