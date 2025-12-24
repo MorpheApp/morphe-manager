@@ -292,7 +292,9 @@ fun <T, R> ((T) -> R).withHapticFeedback(constant: Int): (T) -> R {
     }
 }
 
-
+/**
+ * Supports bold and italic html tags. Can be improved as needed to support more html functions.
+ */
 @Composable
 fun htmlAnnotatedString(htmlStringResourceId: Int): AnnotatedString =
     htmlAnnotatedString(LocalContext.current.resources.getText(htmlStringResourceId))
