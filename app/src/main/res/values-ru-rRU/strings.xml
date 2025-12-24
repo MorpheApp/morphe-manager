@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Пристегните ремни, время исправлений</string>
     <string name="morphe_home_greeting_4">Еще один день, еще один шедевр с заблокированной рекламой</string>
     <string name="morphe_home_greeting_5">Хотите смотреть рекламу? Я тоже нет</string>
-    <string name="morphe_home_greeting_6">Давайте заставим ваши приложения вести себя прилично</string>
-    <string name="morphe_home_greeting_7">Прогноз на сегодня: 100% вероятность исправлений</string>
+    <string name="morphe_home_greeting_6">Давайте сделаем ваши приложения вести себя</string>
+    <string name="morphe_home_greeting_7">Сегодня прогноз: 100% шанс patches</string>
     <string name="morphe_home_bundle_type_api">API пакет</string>
     <string name="morphe_home_update_error">Обновление не удалось</string>
     <string name="morphe_home_update_error_subtitle">Проверьте подключение к Интернету и повторите попытку</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Показать ошибку</string>
     <string name="morphe_patcher_error_copied">Ошибка скопирована в буфер обмена</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d исправлений</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Этот шаг может занять некоторое время. Пожалуйста, подождите…</string>
     <string name="morphe_patcher_install_dialog_message">Установить пропатченное приложение?</string>
     <string name="morphe_patcher_install_conflict_message">Обнаружен конфликт пакетов. Чтобы установить новую версию, сначала необходимо удалить предыдущую версию приложения.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Посмотрите в окно, там солнечно… 🌤️</string>
     <string name="morphe_patcher_message_7">Настраиваем 1 и 0… 🤖</string>
     <string name="morphe_patcher_message_8">Распутываем цифровые спагетти… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Исправляем ошибки в пропатченном приложении… 🐞</string>
     <string name="morphe_patcher_message_10">Хорошие патчи стоят ожидания… ⏳</string>
     <string name="morphe_patcher_message_11">Полируем пиксели до блеска… 💎</string>
     <string name="morphe_patcher_message_12">Пожалуйста, оставайтесь на своих местах, пока капитан не выключит знак «Патчинг в процессе»… 💺✈️</string>
     <string name="morphe_patcher_message_13">Готовим ваше пропатченное приложение, горячее и свежее… 🍳</string>
-    <string name="morphe_patcher_message_14">Проходим через дверь патчинга и парим самым необычным образом… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Вежливо договариваемся с байткодом… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Все системы в норме… траектория патчинга стабильна… 🚀</string>
     <string name="morphe_patcher_message_16">Выжимаем дополнительную мощность, как сок из цифрового лимона… 🍋</string>
     <string name="morphe_patcher_message_17">Поощряем приложение принять свою новую, улучшенную версию… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Изменяем суперпозицию приложения с «не пропатчено» на «пропатчено»… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">У вашего приложения жар, и единственное лекарство — больше патчей… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Убираем ерунду. Пожалуйста, подождите… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Вернуться в Morphe домой</string>
     <string name="morphe_settings_return_to_morphe_description">Вернуться в упрощенный режим</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Использование рекомендации по умолчанию</string>
     <string name="bundle_version_item_description_selected">Следуя %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Выберите рекомендацию пакета</string>
-    <string name="bundle_version_dialog_description">Выберите, чья рекомендация пакета должна использоваться при загрузке APK.</string>
+    <string name="bundle_version_dialog_description">Выберите, quale советы.use bundle should be used when downloading an APK.</string>
     <string name="bundle_version_dialog_default">Использовать рекомендацию по умолчанию</string>
     <string name="bundle_version_dialog_default_subtitle">Автоматически выбирать наиболее распространенную совместимую версию.</string>
     <string name="bundle_version_dialog_option_subtitle">Использовать версию %1$s</string>
@@ -314,7 +319,7 @@
     <string name="import_keystore">Импортировать хранилище ключей</string>
     <string name="import_keystore_description">Импортировать пользовательское хранилище ключей</string>
     <string name="import_keystore_dialog_title">Введите учетные данные хранилища ключей</string>
-    <string name="import_keystore_dialog_description">Чтобы импортировать хранилище ключей, вам потребуется ввести его учетные данные.</string>
+    <string name="import_keystore_dialog_description">Вам нужно податьumen credentials for importing it.</string>
     <string name="import_keystore_dialog_alias_field">Имя пользователя (псевдоним)</string>
     <string name="import_keystore_dialog_password_field">Пароль</string>
     <string name="import_keystore_dialog_button">Импортировать</string>
@@ -686,7 +691,7 @@
 Откройте окно выбора заново и выберите их еще раз (или выберите замены) перед повторной попыткой."</string>
     <string name="patcher_preflight_missing_patch_message">"Следующие патчи недоступны в текущем пакете:
 %1$s
-Вы можете удалить их автоматически, изменить выбор или продолжить."</string>
+Вы можете автоматически удалить их, изменить выбор, или продолжить работу."</string>
     <string name="patcher_missing_patch_review">Проверить выбор</string>
     <string name="patch_selector_missing_patch_title">Выбрать отсутствующие патчи заново</string>
     <string name="patch_selector_missing_patch_message">"Эти патчи необходимо выбрать повторно:

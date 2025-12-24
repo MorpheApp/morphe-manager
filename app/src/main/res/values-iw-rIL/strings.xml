@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">התכוננו, הגיע זמן התיקונים</string>
     <string name="morphe_home_greeting_4">עוד יום, עוד יצירת מופת ללא פרסומות</string>
     <string name="morphe_home_greeting_5">רוצים לצפות בפרסומות? גם אנחנו לא</string>
-    <string name="morphe_home_greeting_6">בואו נגרום לאפליקציות שלכם להתנהג יפה</string>
-    <string name="morphe_home_greeting_7">תחזית להיום: 100% סיכוי לתיקונים</string>
+    <string name="morphe_home_greeting_6">אסobleu halbuchina beivircha</string>
+    <string name="morphe_home_greeting_7">הסיכוי לתיקון היום: 100%</string>
     <string name="morphe_home_bundle_type_api">חבילת API</string>
     <string name="morphe_home_update_error">העדכון נכשל</string>
     <string name="morphe_home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">הצג שגיאה</string>
     <string name="morphe_patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d תיקונים</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
     <string name="morphe_patcher_install_dialog_message">התקנת האפליקציה המתוקנת?</string>
     <string name="morphe_patcher_install_conflict_message">זוהתה התנגשות חבילות. כדי להתקין את הגרסה החדשה, עליך תחילה להסיר את ההתקנה של הגרסה הקודמת של האפליקציה.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">הציצו החוצה, יפה שם בחוץ… 🌤️</string>
     <string name="morphe_patcher_message_7">מכווננים 1 ו-0… 🤖</string>
     <string name="morphe_patcher_message_8">מתירים ספגטי דיגיטלי… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">מתקנים באגים באפליקציה שלא תוקנה… 🐞</string>
     <string name="morphe_patcher_message_10">תיקונים מעולים שווים את ההמתנה… ⏳</string>
     <string name="morphe_patcher_message_11">מצחצחים פיקסלים עד שהם נוצצים… 💎</string>
     <string name="morphe_patcher_message_12">אנא הישארו במקומותיכם עד שהקפטן יכבה את השלט \"מתקנים בטיסה\"… 💺✈️</string>
     <string name="morphe_patcher_message_13">מבשלים את האפליקציה המתוקנת שלכם, חמה וטרייה… 🍳</string>
-    <string name="morphe_patcher_message_14">יוצא דרך דלת התיקון, וצף בצורה מוזרה במיוחד… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">משא ומתן בנימוס עם bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">כל המערכות תקינות… מסלול התיקון יציב… 🚀</string>
     <string name="morphe_patcher_message_16">סוחט כוח נוסף, כמו מיץ מלימון דיגיטלי… 🍋</string>
     <string name="morphe_patcher_message_17">מעודד את האפליקציה לקבל את עצמה החדשה והטובה יותר… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">משנה את הסופרפוזיציה של האפליקציה מלא מתוקנת למתוקנת… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">חזור לדף הבית של Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">חזור למצב פשוט</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">שימוש בהמלצת ברירת מחדל</string>
     <string name="bundle_version_item_description_selected">בעקבות %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">בחר המלצת חבילה</string>
-    <string name="bundle_version_dialog_description">בחר איזו המלצת חבילה יש להשתמש בה בעת הורדת קובץ APK.</string>
+    <string name="bundle_version_dialog_description">בחר באיזה אוסף הערות להורדה של APK</string>
     <string name="bundle_version_dialog_default">השתמש בהמלצת ברירת מחדל</string>
     <string name="bundle_version_dialog_default_subtitle">בחר באופן אוטומטי את הגרסה הנפוצה ביותר התואמת.</string>
     <string name="bundle_version_dialog_option_subtitle">השתמש בגרסה %1$s</string>
@@ -316,7 +321,7 @@
     <string name="import_keystore">ייבוא מפתח חנות</string>
     <string name="import_keystore_description">ייבא מפתח חנות מותאם אישית</string>
     <string name="import_keystore_dialog_title">הזן פרטי אימות למפתח חנות</string>
-    <string name="import_keystore_dialog_description">יהיה עליך להזין את פרטי הכניסה של קובץ המפתחות כדי לייבא אותו.</string>
+    <string name="import_keystore_dialog_description">יהיה עליך להזין את הפרטים של מפתח האחסון כדי לייבא אותו.</string>
     <string name="import_keystore_dialog_alias_field">שם משתמש (כינוי)</string>
     <string name="import_keystore_dialog_password_field">סיסמה</string>
     <string name="import_keystore_dialog_button">ייבוא</string>
@@ -686,9 +691,9 @@
     <string name="patcher_missing_patch_message">"התיקון נכשל מכיוון שהתיקונים הבאים לא נמצאו בחבילה הנוכחית:
 %1$s
 פתח מחדש את הבחירה ובחר אותם מחדש (או בחר תחליפים) לפני שתנסה שוב."</string>
-    <string name="patcher_preflight_missing_patch_message">"התיקונים הבאים אינם זמינים בחבילה הנוכחית:
-%1$s
-ניתן להסיר אותם באופן אוטומטי, להתאים את הבחירה, או להמשיך בכל זאת."</string>
+    <string name="patcher_preflight_missing_patch_message">"אין פיצג'{1}'呵 היזמין ב kịpך:
+לחץ על הערות惊喜 |
+אתם יכולים Para eliminarlos automáticamente, cambiar la selección o continuar igual."</string>
     <string name="patcher_missing_patch_review">סקור בחירה</string>
     <string name="patch_selector_missing_patch_title">בחר מחדש תיקונים חסרים</string>
     <string name="patch_selector_missing_patch_message">"נדרש לבחור מחדש את התיקונים הבאים:

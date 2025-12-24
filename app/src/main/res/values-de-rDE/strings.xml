@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Schnall dich an, es ist Patch-Zeit</string>
     <string name="morphe_home_greeting_4">Ein weiterer Tag, ein weiteres werbefreies Meisterwerk</string>
     <string name="morphe_home_greeting_5">Willst du Werbung sehen? Ich auch nicht</string>
-    <string name="morphe_home_greeting_6">Lass uns deine Apps brav machen</string>
-    <string name="morphe_home_greeting_7">Heutige Vorhersage: 100% Patch-Wahrscheinlichkeit</string>
+    <string name="morphe_home_greeting_6">Lassen Sie Ihre Apps so verhalten, dass</string>
+    <string name="morphe_home_greeting_7">Heutige Vorhersage: 100% Chance auf Behebung</string>
     <string name="morphe_home_bundle_type_api">API-Bundle</string>
     <string name="morphe_home_update_error">Update fehlgeschlagen</string>
     <string name="morphe_home_update_error_subtitle">Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Fehler anzeigen</string>
     <string name="morphe_patcher_error_copied">Fehler in die Zwischenablage kopiert</string>
     <string name="morphe_patcher_patches_progress">%1$d von %2$d Patches</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Dieser Schritt kann eine Weile dauern. Bitte warten…</string>
     <string name="morphe_patcher_install_dialog_message">Patched App installieren?</string>
     <string name="morphe_patcher_install_conflict_message">Ein Paketkonflikt wurde erkannt. Um die neue Version zu installieren, müssen Sie zuerst die vorherige Version der App deinstallieren.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Schau nach draußen, es ist schön dort… 🌤️</string>
     <string name="morphe_patcher_message_7">Justiere 1en und 0en… 🤖</string>
     <string name="morphe_patcher_message_8">Entwirre digitale Spaghetti… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Behebe Fehler in der ungepatchten App… 🐞</string>
     <string name="morphe_patcher_message_10">Großartige Patches sind das Warten wert… ⏳</string>
     <string name="morphe_patcher_message_11">Poliere Pixel, bis sie glänzen… 💎</string>
     <string name="morphe_patcher_message_12">Bitte sitzen bleiben, bis der Kapitän das \“Patching läuft\” Schild ausschaltet… 💺✈️</string>
     <string name="morphe_patcher_message_13">Wir kochen deine gepatchte App, heiß und frisch… 🍳</string>
-    <string name="morphe_patcher_message_14">Durch die Patching-Tür treten und auf sehr eigentümliche Weise schweben… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Höflich mit Bytecode verhandeln... 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Alle Systeme nominal… Patching-Flugbahn ist stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Quetsche zusätzliche Energie heraus, wie Saft aus einer digitalen Zitrone… 🍋</string>
     <string name="morphe_patcher_message_17">Ermutige die App, ihr neues, besseres Ich zu akzeptieren… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Ändere die App-Superposition von ungepatcht zu gepatcht… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Ihre App hat Fieber und die einzige Verschreibung sind mehr Patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Unsinn entfernen. Bitte warten Sie… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Zurück zu Morphe Home</string>
     <string name="morphe_settings_return_to_morphe_description">Zurück zum vereinfachten Modus</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Standardempfehlung verwenden</string>
     <string name="bundle_version_item_description_selected">Folge %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Bundle-Empfehlung auswählen</string>
-    <string name="bundle_version_dialog_description">Wählen Sie aus, welche Bundle-Empfehlung beim Herunterladen einer APK verwendet werden soll.</string>
+    <string name="bundle_version_dialog_description">Wählen Sie den Vorschlag der Bundel aus, wenn Sie eine APK herunterladen möchten</string>
     <string name="bundle_version_dialog_default">Standardempfehlung verwenden</string>
     <string name="bundle_version_dialog_default_subtitle">Wählen Sie automatisch die häufigste kompatible Version aus.</string>
     <string name="bundle_version_dialog_option_subtitle">Version %1$s verwenden</string>
@@ -314,7 +319,7 @@ Trotzdem aktivieren?"</string>
     <string name="import_keystore">Keystore importieren</string>
     <string name="import_keystore_description">Importieren Sie einen benutzerdefinierten Keystore</string>
     <string name="import_keystore_dialog_title">Keystore-Anmeldeinformationen eingeben</string>
-    <string name="import_keystore_dialog_description">Sie müssen die Anmeldeinformationen des Keystores eingeben, um ihn zu importieren.</string>
+    <string name="import_keystore_dialog_description">Sie benötigen die Zertifikatskredenziell zum Importieren des Zertifikats</string>
     <string name="import_keystore_dialog_alias_field">Benutzername (Alias)</string>
     <string name="import_keystore_dialog_password_field">Passwort</string>
     <string name="import_keystore_dialog_button">Importieren</string>
@@ -684,9 +689,9 @@ Sie müssen „Änderung der Patch-Auswahl und -Optionen zulassen“ in den erwe
     <string name="patcher_missing_patch_message">"Patching fehlgeschlagen, da die folgenden Patches nicht im aktuellen Bundle gefunden wurden:
 %1$s
 Öffnen Sie die Auswahl erneut und wählen Sie sie neu aus (oder wählen Sie Ersetzungen aus), bevor Sie es erneut versuchen."</string>
-    <string name="patcher_preflight_missing_patch_message">"Die folgenden Patches sind im aktuellen Bundle nicht verfügbar:
+    <string name="patcher_preflight_missing_patch_message">"Die folgenden Patches sind in der aktuellen Bundel nicht verfügbar:
 %1$s
-Sie können sie automatisch entfernen, die Auswahl anpassen oder trotzdem fortfahren."</string>
+Sie können sie automatisch entfernen, die Auswahl anpassen oder weitermachen"</string>
     <string name="patcher_missing_patch_review">Auswahl überprüfen</string>
     <string name="patch_selector_missing_patch_title">Fehlende Patches erneut auswählen</string>
     <string name="patch_selector_missing_patch_message">"Diese Patches müssen erneut ausgewählt werden:

@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Показати помилку</string>
     <string name="morphe_patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d патч(а)ів</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="morphe_patcher_install_dialog_message">Встановити пропатчений додаток?</string>
     <string name="morphe_patcher_install_conflict_message">Виявлено конфлікт пакетів. Для встановлення нової версії потрібно спочатку видалити попередню версію додатка.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Подивіться надвір, там гарно… 🌤️</string>
     <string name="morphe_patcher_message_7">Налаштування 1 та 0… 🤖</string>
     <string name="morphe_patcher_message_8">Розплутування цифрової спагетті… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Виправлення помилок у непатченому додатку… 🐞</string>
     <string name="morphe_patcher_message_10">Великі патчі варті очікування… ⏳</string>
     <string name="morphe_patcher_message_11">Полірування пікселів до блиску… 💎</string>
     <string name="morphe_patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак «Триває патчінг»… 💺✈️</string>
     <string name="morphe_patcher_message_13">Готуємо ваш оновлений додаток, гарячий і свіжий… 🍳</string>
-    <string name="morphe_patcher_message_14">Проходячи крізь двері патчення, Ви дивним чином ширяєте далі… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Ввічливо ведемо переговори з байткодом… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Всі системи в нормі… траєкторія патчінгу стабільна… 🚀</string>
     <string name="morphe_patcher_message_16">Видушення додаткової потужності, як сік з цифрового лимона… 🍋</string>
     <string name="morphe_patcher_message_17">Закликаємо додаток прийняти свою нову, кращу сутність… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Зміна стану додатку з непатченого на патчений… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Ваш додаток має підвищену температуру, і єдиний рятунок — більше патчів… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Видалення нісенітниці. Будь ласка, зачекайте… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Повернутися до Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Використання стандартних рекомендацій</string>
     <string name="bundle_version_item_description_selected">Після %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Виберіть рекомендацію пакета</string>
-    <string name="bundle_version_dialog_description">Виберіть, яка рекомендація пакета повинна бути використана при завантаженні APK.</string>
+    <string name="bundle_version_dialog_description">Виберіть, яку рекомендація пакета повинна бути використана при завантаженні APK</string>
     <string name="bundle_version_dialog_default">Використовувати стандартну рекомендацію</string>
     <string name="bundle_version_dialog_default_subtitle">Автоматично обрати найбільш поширену сумісну версію.</string>
     <string name="bundle_version_dialog_option_subtitle">Використовувати версію %1$s</string>
@@ -310,7 +315,7 @@
     <string name="import_keystore">Імпортувати keystore</string>
     <string name="import_keystore_description">Імпортувати кастомний keystore</string>
     <string name="import_keystore_dialog_title">Введіть облікові дані keystore</string>
-    <string name="import_keystore_dialog_description">Вам потрібно буде ввести облікові дані keystore, щоб імпортувати його.</string>
+    <string name="import_keystore_dialog_description">Вам потрібно буде ввести облікові дані keystore, щоб імпортувати його</string>
     <string name="import_keystore_dialog_alias_field">Ім\'я користувача (Аліас)</string>
     <string name="import_keystore_dialog_password_field">Пароль</string>
     <string name="import_keystore_dialog_button">Імпортувати</string>
@@ -681,7 +686,7 @@
 Знову відкрийте вибір і перевиберіть їх (або виберіть заміни) перед повторною спробою."</string>
     <string name="patcher_preflight_missing_patch_message">"Наступні патчі недоступні в поточному пакеті:
 %1$s
-Ви можете їх автоматично видалити, налаштувати вибір або продовжити всупереч цьому."</string>
+Ви можете їх автоматично видалити, налаштувати вибір або продовжити всупереччу %1$s"</string>
     <string name="patcher_missing_patch_review">Перегляд вибору</string>
     <string name="patch_selector_missing_patch_title">Знову вибрати відсутні патчі</string>
     <string name="patch_selector_missing_patch_message">"Ці патчі потрібно знову вибрати:

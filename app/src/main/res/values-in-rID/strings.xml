@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Bersiaplah, waktunya menambal</string>
     <string name="morphe_home_greeting_4">Hari lain, mahakarya lain yang diblokir iklannya</string>
     <string name="morphe_home_greeting_5">Ingin menonton iklan? Saya juga tidak</string>
-    <string name="morphe_home_greeting_6">Mari buat aplikasi Anda berperilaku baik</string>
-    <string name="morphe_home_greeting_7">Perkiraan hari ini: 100% kemungkinan menambal</string>
+    <string name="morphe_home_greeting_6">Biarkan aplikasi Anda berperilaku</string>
+    <string name="morphe_home_greeting_7">Sekarang periksa keadaan cuaca: 100% kemungkinan tiba-tiba tertutup</string>
     <string name="morphe_home_bundle_type_api">Paket API</string>
     <string name="morphe_home_update_error">Pembaruan gagal</string>
     <string name="morphe_home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Tampilkan Kesalahan</string>
     <string name="morphe_patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="morphe_patcher_install_dialog_message">Instal aplikasi yang ditambal?</string>
     <string name="morphe_patcher_install_conflict_message">Terdeteksi konflik paket. Untuk menginstal versi baru, Anda harus menghapus instalan versi aplikasi sebelumnya terlebih dahulu.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Lihat ke luar, indah sekali di sana… 🌤️</string>
     <string name="morphe_patcher_message_7">Menyesuaikan 1 dan 0… 🤖</string>
     <string name="morphe_patcher_message_8">Mengurai kekacauan digital… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Memperbaiki bug di aplikasi yang belum ditambal… 🐞</string>
     <string name="morphe_patcher_message_10">Tambalan hebat pantas ditunggu… ⏳</string>
     <string name="morphe_patcher_message_11">Memoles piksel hingga berkilau… 💎</string>
     <string name="morphe_patcher_message_12">Mohon tetap duduk sampai kapten mematikan tanda \“Menambal sedang berlangsung\” … 💺✈️</string>
     <string name="morphe_patcher_message_13">Memasak aplikasi tambalan Anda, panas dan segar… 🍳</string>
-    <string name="morphe_patcher_message_14">Melangkah melewati pintu penambalan, dan melayang dengan cara yang paling aneh… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Menjajakan dengan baik dengan kode bytecode... 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Semua sistem nominal… lintasan penambalan stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Memeras daya ekstra, seperti sari dari lemon digital… 🍋</string>
     <string name="morphe_patcher_message_17">Mendorong aplikasi untuk menerima dirinya yang baru dan lebih baik… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Mengubah superposisi aplikasi dari belum ditambal menjadi ditambal… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak patch… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Menghapus omong kosong. Mohon tunggu sebentar… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Kembali ke beranda Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Kembali ke mode yang disederhanakan</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Menggunakan rekomendasi bawaan</string>
     <string name="bundle_version_item_description_selected">Mengikuti %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Pilih rekomendasi bundel</string>
-    <string name="bundle_version_dialog_description">Pilih rekomendasi bundel mana yang akan digunakan saat mengunduh APK.</string>
+    <string name="bundle_version_dialog_description">Pilih rekomendasi paket yang ingin digunakan saat mengunduh aplikasi.</string>
     <string name="bundle_version_dialog_default">Gunakan rekomendasi bawaan</string>
     <string name="bundle_version_dialog_default_subtitle">Secara otomatis memilih versi yang paling umum kompatibel.</string>
     <string name="bundle_version_dialog_option_subtitle">Gunakan versi %1$s</string>
@@ -314,7 +319,7 @@ Aktifkan saja?"</string>
     <string name="import_keystore">Impor keystore</string>
     <string name="import_keystore_description">Impor keystore kustom</string>
     <string name="import_keystore_dialog_title">Masukkan kredensial keystore</string>
-    <string name="import_keystore_dialog_description">Anda perlu memasukkan kredensial keystore untuk mengimpornya.</string>
+    <string name="import_keystore_dialog_description">Anda perlu memasukkan kreditoris kekayaan untuk memasukkan aplikasi tersebut.</string>
     <string name="import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
     <string name="import_keystore_dialog_password_field">Kata sandi</string>
     <string name="import_keystore_dialog_button">Impor</string>
@@ -684,9 +689,9 @@ Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan opsi patch\" di pengatura
     <string name="patcher_missing_patch_message">"Penambalan gagal karena tambalan berikut tidak ditemukan dalam bundel saat ini:
 %1$s
 Buka kembali pilihan dan pilih kembali tambalan tersebut (atau pilih pengganti) sebelum mencoba lagi."</string>
-    <string name="patcher_preflight_missing_patch_message">"Tambalan berikut tidak tersedia dalam bundel saat ini:
+    <string name="patcher_preflight_missing_patch_message">"Pengeditan berikut tidak tersedia dalam paket saat ini:
 %1$s
-Anda dapat menghapusnya secara otomatis, menyesuaikan pilihan, atau melanjutkan."</string>
+Anda dapat menghapusnya secara otomatis, mengatur pilihan, atau terus menggunakan."</string>
     <string name="patcher_missing_patch_review">Tinjau pilihan</string>
     <string name="patch_selector_missing_patch_title">Pilih ulang tambalan yang hilang</string>
     <string name="patch_selector_missing_patch_message">"Patch ini perlu dipilih ulang:

@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">系好安全带，是时候打补丁了</string>
     <string name="morphe_home_greeting_4">又一天，又一件屏蔽广告的杰作</string>
     <string name="morphe_home_greeting_5">想看广告？我也不想</string>
-    <string name="morphe_home_greeting_6">让你的应用乖乖听话</string>
-    <string name="morphe_home_greeting_7">今日预报：100% 概率打补丁</string>
+    <string name="morphe_home_greeting_6">让我们让你的应用表现得更好</string>
+    <string name="morphe_home_greeting_7">今天的预报:100%的修补几率</string>
     <string name="morphe_home_bundle_type_api">API 包</string>
     <string name="morphe_home_update_error">更新失败</string>
     <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">显示错误</string>
     <string name="morphe_patcher_error_copied">错误已复制到剪贴板</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 个补丁</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="morphe_patcher_install_dialog_message">安装已修补的应用?</string>
     <string name="morphe_patcher_install_conflict_message">检测到程序包冲突。要安装新版本，您必须先卸载该应用的先前版本。</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">看看外面，天气真好… 🌤️</string>
     <string name="morphe_patcher_message_7">正在调整 1 和 0… 🤖</string>
     <string name="morphe_patcher_message_8">正在解开数字意大利面条… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">正在修复未修补应用中的错误… 🐞</string>
     <string name="morphe_patcher_message_10">精彩的补丁值得等待… ⏳</string>
     <string name="morphe_patcher_message_11">抛光像素直到它们闪耀… 💎</string>
     <string name="morphe_patcher_message_12">请保持就坐，直到机长关闭“正在修补”指示灯… 💺✈️</string>
     <string name="morphe_patcher_message_13">正在为您烹饪打好补丁的应用，热腾腾…… 🍳</string>
-    <string name="morphe_patcher_message_14">穿过打补丁的门，以一种最奇特的方式漂浮…… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">正在与字节码礼貌地协商… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">所有系统正常……打补丁轨迹稳定…… 🚀</string>
     <string name="morphe_patcher_message_16">榨取额外动力，就像从数字柠檬中榨取果汁一样…… 🍋</string>
     <string name="morphe_patcher_message_17">鼓励应用接受其全新、更好的自我…… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">将应用叠加从未打补丁更改为已打补丁…… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">返回 Morphe 主页</string>
     <string name="morphe_settings_return_to_morphe_description">返回简化模式</string>
@@ -660,9 +665,9 @@
     <string name="patcher_missing_patch_message">"由于在当前捆绑包中找不到以下补丁，因此修补失败：
 %1$s
 重新打开选择并重新选择它们（或选择替换项），然后重试。"</string>
-    <string name="patcher_preflight_missing_patch_message">"以下补丁在当前捆绑包中不可用：
-%1$s
-您可以自动删除它们，调整选择，或仍继续。"</string>
+    <string name="patcher_preflight_missing_patch_message">"%1$s
+您可以重新排列选项或继续。不提供任何提示。
+"</string>
     <string name="patcher_missing_patch_review">查看选择</string>
     <string name="patch_selector_missing_patch_title">重新选择缺失的补丁</string>
     <string name="patch_selector_missing_patch_message">"需要重新选择这些补丁：\n%1$s\n请再次启用它们（或选择替代品），然后再次尝试修补。"</string>

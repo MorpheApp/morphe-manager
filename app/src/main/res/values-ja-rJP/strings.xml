@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">シートベルトを締めて、パッチ適用時間です</string>
     <string name="morphe_home_greeting_4">また一日、また広告ブロックされた傑作</string>
     <string name="morphe_home_greeting_5">広告を見たいですか？私もです</string>
-    <string name="morphe_home_greeting_6">アプリの動作を改善しましょう</string>
-    <string name="morphe_home_greeting_7">今日の予報：パッチ適用の可能性100％</string>
+    <string name="morphe_home_greeting_6">アプリをスムーズに動作させるよう、共に協力しましょう。</string>
+    <string name="morphe_home_greeting_7">今日の予報: 100% 破局天候の確率</string>
     <string name="morphe_home_bundle_type_api">APIバンドル</string>
     <string name="morphe_home_update_error">更新に失敗しました</string>
     <string name="morphe_home_update_error_subtitle">インターネット接続を確認して、もう一度お試しください。</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">エラーを表示</string>
     <string name="morphe_patcher_error_copied">エラーがクリップボードにコピーされました</string>
     <string name="morphe_patcher_patches_progress">%2$d 件中 %1$d 件のパッチ</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">この手順にはしばらく時間がかかる場合があります。お待ちください…</string>
     <string name="morphe_patcher_install_dialog_message">パッチ適用済みアプリをインストールしますか？</string>
     <string name="morphe_patcher_install_conflict_message">パッケージの競合が検出されました。新しいバージョンをインストールするには、まず以前のバージョンのアプリをアンインストールする必要があります。</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">外を見てください、いい天気です… 🌤️</string>
     <string name="morphe_patcher_message_7">1と0を調整中… 🤖</string>
     <string name="morphe_patcher_message_8">デジタルのスパゲッティを解きほぐしています… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">パッチ未適用のアプリのバグを修正中… 🐞</string>
     <string name="morphe_patcher_message_10">素晴らしいパッチは待つ価値があります… ⏳</string>
     <string name="morphe_patcher_message_11">ピクセルが輝くまで磨いています… 💎</string>
     <string name="morphe_patcher_message_12">「パッチ適用中」のサインが消えるまで、お客様は着席していてください… 💺✈️</string>
     <string name="morphe_patcher_message_13">パッチ適用済みのアプリを熱々で調理しています… 🍳</string>
-    <string name="morphe_patcher_message_14">パッチングドアを通り抜け、非常に奇妙な方法で浮遊している… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">バイトコードと丁寧に交渉中… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">全システム正常… パッチング軌道は安定… 🚀</string>
     <string name="morphe_patcher_message_16">デジタルのレモンから絞り出すように、余分な電力を絞り出しています… 🍋</string>
     <string name="morphe_patcher_message_17">アプリが新しい、より良い自分自身を受け入れるように奨励しています… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">アプリの重ね合わせを、パッチなしからパッチありに変更しています… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">あなたのアプリは熱があります。唯一の処方箋は、より多くのパッチです… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">不要なノイズを除去しています。しばらくお待ちください… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morpheホームに戻る</string>
     <string name="morphe_settings_return_to_morphe_description">シンプルなモードに戻る</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">デフォルトの推奨を使用</string>
     <string name="bundle_version_item_description_selected">%1$s (%2$s) に従う</string>
     <string name="bundle_version_dialog_title">バンドル推奨を選択</string>
-    <string name="bundle_version_dialog_description">APKをダウンロードするときに使用するバンドルの推奨事項を選択します。</string>
+    <string name="bundle_version_dialog_description">APKをダウンロードする際に使用するバンドルの提案を選択してください。</string>
     <string name="bundle_version_dialog_default">デフォルトの推奨を使用</string>
     <string name="bundle_version_dialog_default_subtitle">最も一般的な互換性のあるバージョンを自動的に選択します。</string>
     <string name="bundle_version_dialog_option_subtitle">バージョン%1$sを使用</string>
@@ -316,7 +321,7 @@
     <string name="import_keystore">キーストアをインポート</string>
     <string name="import_keystore_description">カスタムキーストアをインポート</string>
     <string name="import_keystore_dialog_title">キーストアの資格情報を入力</string>
-    <string name="import_keystore_dialog_description">インポートするにはキーストアの認証情報を入力する必要があります。</string>
+    <string name="import_keystore_dialog_description">キーストアの資格情報を入力して、インポートする必要があります。</string>
     <string name="import_keystore_dialog_alias_field">ユーザー名（エイリアス）</string>
     <string name="import_keystore_dialog_password_field">パスワード</string>
     <string name="import_keystore_dialog_button">インポート</string>
@@ -686,9 +691,9 @@
     <string name="patcher_missing_patch_message">"現在のバンドルに次のパッチが見つからなかったため、パッチ適用に失敗しました:
 %1$s
 選択を再度開き、再試行する前にそれらを再選択 (または代替を選択) してください。"</string>
-    <string name="patcher_preflight_missing_patch_message">"以下のパッチは現在のバンドルで利用できません：
+    <string name="patcher_preflight_missing_patch_message">"以下のパッチは現在のバンドルで利用できません:
 %1$s
-自動的に削除するか、選択を調整するか、とにかく続行することができます。"</string>
+自動的に削除するか、選択を調整するか、そのまま続行することができます。"</string>
     <string name="patcher_missing_patch_review">選択を確認</string>
     <string name="patch_selector_missing_patch_title">不足しているパッチを再選択</string>
     <string name="patch_selector_missing_patch_message">"これらのパッチを再選択する必要があります：

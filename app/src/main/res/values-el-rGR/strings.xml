@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Περαστείτε, είναι ώρα για ενημέρωση</string>
     <string name="morphe_home_greeting_4">Άλλη μια μέρα, άλλο ένα αριστούργημα χωρίς διαφημίσεις</string>
     <string name="morphe_home_greeting_5">Θέλετε να παρακολουθήσετε διαφημίσεις; Ούτε εγώ.</string>
-    <string name="morphe_home_greeting_6">Ας κάνουμε τις εφαρμογές σας να συμπεριφέρονται σωστά</string>
-    <string name="morphe_home_greeting_7">Η σημερινή πρόγνωση: 100% πιθανότητα ενημέρωσης</string>
+    <string name="morphe_home_greeting_6">Ας κάνουμε τις εφαρμογές σας να συμπεριφέρονται σωστά.</string>
+    <string name="morphe_home_greeting_7">Χθές την πρόβλεψη: 100% πιθανότητας παροχής προβλήματος</string>
     <string name="morphe_home_bundle_type_api">Πακέτο API</string>
     <string name="morphe_home_update_error">Η ενημέρωση απέτυχε</string>
     <string name="morphe_home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Εμφάνιση σφάλματος</string>
     <string name="morphe_patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d ενημερώσεις</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
     <string name="morphe_patcher_install_dialog_message">Εγκατάσταση τροποποιημένης εφαρμογής;</string>
     <string name="morphe_patcher_install_conflict_message">Ανιχνεύτηκε σύγκρουση πακέτων. Για να εγκαταστήσετε τη νέα έκδοση, πρέπει πρώτα να απεγκαταστήσετε την προηγούμενη έκδοση της εφαρμογής.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Κοίτα έξω, ο καιρός είναι ωραίος… 🌤️</string>
     <string name="morphe_patcher_message_7">Ρυθμίζοντας 1 και 0… 🤖</string>
     <string name="morphe_patcher_message_8">Ξεμπλέκοντας ψηφιακά σπαγγέτι… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Διορθώνοντας σφάλματα στην μη τροποποιημένη εφαρμογή… 🐞</string>
     <string name="morphe_patcher_message_10">Οι σπουδαίες τροποποιήσεις αξίζουν την αναμονή… ⏳</string>
     <string name="morphe_patcher_message_11">Γυαλίζοντας τα pixel μέχρι να λάμψουν… 💎</string>
     <string name="morphe_patcher_message_12">Παρακαλώ παραμείνετε καθισμένοι μέχρι ο καπετάνιος να σβήσει την πινακίδα \“Εγκατάσταση σε εξέλιξη\”... 💺✈️</string>
     <string name="morphe_patcher_message_13">Ετοιμάζουμε την τροποποιημένη σας εφαρμογή, ζεστή και φρέσκια... 🍳</string>
-    <string name="morphe_patcher_message_14">Περπατώντας στην πόρτα της τροποποίησης, και αιωρούμενοι με έναν πολύ περίεργο τρόπο... 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Διαπραγματεύομαι ευγενικά με το bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Όλα τα συστήματα ονομαστικά... η τροχιά τροποποίησης είναι σταθερή... 🚀</string>
     <string name="morphe_patcher_message_16">Εξάγοντας επιπλέον ενέργεια, σαν χυμό από ψηφιακό λεμόνι... 🍋</string>
     <string name="morphe_patcher_message_17">Ενθαρρύνοντας την εφαρμογή να αποδεχτεί τον νέο, καλύτερο εαυτό της... 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Αλλάζοντας την υπέρθεση της εφαρμογής από μη τροποποιημένη σε τροποποιημένη... 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Η εφαρμογή σας έχει πυρετό, και η μόνη συνταγή είναι περισσότερες τροποποιήσεις... 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Αφαιρώ ανοησίες. Παρακαλούμε περιμένετε… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Επιστροφή στην αρχική σελίδα Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Επιστροφή στην απλοποιημένη λειτουργία</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Χρήση προεπιλεγμένης σύστασης</string>
     <string name="bundle_version_item_description_selected">Ακολουθώντας %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Επιλογή σύστασης πακέτου</string>
-    <string name="bundle_version_dialog_description">Επιλέξτε ποια σύσταση πακέτου θα χρησιμοποιηθεί κατά τη λήψη ενός APK.</string>
+    <string name="bundle_version_dialog_description">Επιλέξτε ποια υπόδειξη συστήματος να χρησιμοποιηθεί κατά το λήδονταν ενός ΑΡΚ.</string>
     <string name="bundle_version_dialog_default">Χρήση προεπιλεγμένης σύστασης</string>
     <string name="bundle_version_dialog_default_subtitle">Επιλογή αυτόματα της πιο κοινής συμβατής έκδοσης.</string>
     <string name="bundle_version_dialog_option_subtitle">Χρήση έκδοσης %1$s</string>
@@ -316,7 +321,7 @@
     <string name="import_keystore">Εισαγωγή keystore</string>
     <string name="import_keystore_description">Εισαγωγή ενός προσαρμοσμένου keystore</string>
     <string name="import_keystore_dialog_title">Εισαγωγή διαπιστευτηρίων keystore</string>
-    <string name="import_keystore_dialog_description">Θα χρειαστεί να εισαγάγετε τα διαπιστευτήρια του keystore για να το εισαγάγετε.</string>
+    <string name="import_keystore_dialog_description">Θα πρέπει να εισάγετε τις πιθανότητες του αποθήκευματος για να μπορέσετε να το εισάγετε.</string>
     <string name="import_keystore_dialog_alias_field">Όνομα χρήστη (Ψευδώνυμο)</string>
     <string name="import_keystore_dialog_password_field">Κωδικός πρόσβασης</string>
     <string name="import_keystore_dialog_button">Εισαγωγή</string>
@@ -686,9 +691,9 @@
     <string name="patcher_missing_patch_message">"Η εφαρμογή επιθέματος απέτυχε επειδή τα παρακάτω επιθέματα δεν βρέθηκαν στην τρέχουσα δέσμη:
 %1$s
 Επανανοίξτε την επιλογή και επιλέξτε τα ξανά (ή επιλέξτε αντικαταστάσεις) πριν προσπαθήσετε ξανά."</string>
-    <string name="patcher_preflight_missing_patch_message">"Τα παρακάτω επιθέματα δεν είναι διαθέσιμα στην τρέχουσα δέσμη:
+    <string name="patcher_preflight_missing_patch_message">"Τα παρακάτω προβλήματα δεν είναι διαθέσιμα στο σύνολο εγκαταστάσεων που υπάρχει τώρα:
 %1$s
-Μπορείτε να τα καταργήσετε αυτόματα, να προσαρμόσετε την επιλογή ή να συνεχίσετε ούτως ή άλλως."</string>
+Μπορείτε να τα αφαιρέσετε αυτόματα, να αλλάξετε την επιλογή ή να συνεχέσετε κατευθεία."</string>
     <string name="patcher_missing_patch_review">Αναθεώρηση επιλογής</string>
     <string name="patch_selector_missing_patch_title">Επανεπιλογή χαμένων επιθεμάτων</string>
     <string name="patch_selector_missing_patch_message">"Αυτά τα patches πρέπει να επιλεγούν ξανά:

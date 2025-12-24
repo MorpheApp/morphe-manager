@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Kiinnitä turvavyöt, on korjausaika</string>
     <string name="morphe_home_greeting_4">Toinen päivä, toinen mainoksilla estetty mestariteos</string>
     <string name="morphe_home_greeting_5">Haluatko katsoa mainoksia? En minäkään</string>
-    <string name="morphe_home_greeting_6">Tehdään sovelluksistasi tottelevaisia</string>
-    <string name="morphe_home_greeting_7">Tämän päivän ennuste: 100 % korjausmahdollisuus</string>
+    <string name="morphe_home_greeting_6">Hae yhteystiedot myömestasi</string>
+    <string name="morphe_home_greeting_7">Tänään ennustus: 100% todennäköisyys tukemisen</string>
     <string name="morphe_home_bundle_type_api">API-paketti</string>
     <string name="morphe_home_update_error">Päivitys epäonnistui</string>
     <string name="morphe_home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Näytä virhe</string>
     <string name="morphe_patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d korjausta</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
     <string name="morphe_patcher_install_dialog_message">Asennetaanko muokattu sovellus?</string>
     <string name="morphe_patcher_install_conflict_message">Törmäys pakettien välillä havaittu. Uuden version asentamiseksi sinun on ensin poistettava sovelluksen aiempi versio.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Katso ulos, siellä on kaunista… 🌤️</string>
     <string name="morphe_patcher_message_7">Säädetään ykkösiä ja nollia… 🤖</string>
     <string name="morphe_patcher_message_8">Selvitellään digitaalisia spagettikoodauksia… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Korjataan bugeja paikkaamattomassa sovelluksessa… 🐞</string>
     <string name="morphe_patcher_message_10">Hyvä paikkaus odotuksen arvoinen… ⏳</string>
     <string name="morphe_patcher_message_11">Kiillotetaan pikseleitä, kunnes ne loistavat… 💎</string>
     <string name="morphe_patcher_message_12">Pysykää paikoillanne, kunnes kapteeni sammuttaa \"Paikkaus käynnissä\" -kyltin… 💺✈️</string>
     <string name="morphe_patcher_message_13">Valmistetaan paikatun sovelluksesi, kuumana ja tuoreena… 🍳</string>
-    <string name="morphe_patcher_message_14">Astuessani korjausoveen ja leijuessani hyvin oudolla tavalla… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Kohteliaasti neuvotellen bytekoodin kanssa… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Kaikki järjestelmät nimellisiä… korjausrata on vakaa… 🚀</string>
     <string name="morphe_patcher_message_16">Puristan ylimääräistä tehoa, kuten mehua digitaalisesta sitruunasta… 🍋</string>
     <string name="morphe_patcher_message_17">Kannustan sovellusta hyväksymään uuden, paremman itsensä… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Muutan sovelluksen superposition korjaamattomasta korjatuksi… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Palaa Morphen kotisivulle</string>
     <string name="morphe_settings_return_to_morphe_description">Palaa yksinkertaistettuun tilaan</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Käytetään oletussuositusta</string>
     <string name="bundle_version_item_description_selected">Seuraa %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Valitse pakettisuositus</string>
-    <string name="bundle_version_dialog_description">Valitse, minkä paketin suositusta käytetään APK:ta ladattaessa.</string>
+    <string name="bundle_version_dialog_description">Pick which bundle\'s suggestion should be used when downloading an APK.</string>
     <string name="bundle_version_dialog_default">Käytä oletussuositusta</string>
     <string name="bundle_version_dialog_default_subtitle">Valitse automaattisesti yleisin yhteensopiva versio.</string>
     <string name="bundle_version_dialog_option_subtitle">Käytä versiota %1$s</string>
@@ -316,7 +321,7 @@ Mitä haluat jatkaa joka tapauksessa?"</string>
     <string name="import_keystore">Tuo allekirjoitusavain</string>
     <string name="import_keystore_description">Tuo mukautettu allekirjoitusavain</string>
     <string name="import_keystore_dialog_title">Anna allekirjoitusavaimen tunnistetiedot</string>
-    <string name="import_keystore_dialog_description">Sinun on syötettävä keystoren tunnistetiedot tuodaksesi sen.</string>
+    <string name="import_keystore_dialog_description">Sinun on syöttää varmenteeseen liittyvät tunnukset sen tuomiseen.</string>
     <string name="import_keystore_dialog_alias_field">Käyttäjätunnus (Alias)</string>
     <string name="import_keystore_dialog_password_field">Salasana</string>
     <string name="import_keystore_dialog_button">Tuo</string>
@@ -686,9 +691,9 @@ Sinun on otettava käyttöön \"Salli korjausvalintojen ja -asetusten muuttamine
     <string name="patcher_missing_patch_message">"Korjaus epäonnistui, koska seuraavia korjauksia ei löytynyt nykyisestä paketista:
 %1$s
 Avaa valinta uudelleen ja valitse ne (tai valitse korvaavia) ennen uudelleen yrittämistä."</string>
-    <string name="patcher_preflight_missing_patch_message">"Seuraavat korjaukset eivät ole saatavilla nykyisessä paketissa:
+    <string name="patcher_preflight_missing_patch_message">"
 %1$s
-Voit poistaa ne automaattisesti, säätää valintaa tai jatkaa joka tapauksessa."</string>
+You can remove them automatically, adjust the selection, or continue anyway."</string>
     <string name="patcher_missing_patch_review">Tarkista valinta</string>
     <string name="patch_selector_missing_patch_title">Valitse puuttuvat korjaukset uudelleen</string>
     <string name="patch_selector_missing_patch_message">"Nämä korjaukset on valittava uudelleen:

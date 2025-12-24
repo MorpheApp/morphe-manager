@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Spænd sikkerhedsselen, det er tid til patching</string>
     <string name="morphe_home_greeting_4">Endnu en dag, endnu et annonceblokeret mesterværk</string>
     <string name="morphe_home_greeting_5">Vil du se annoncer? Mig heller ikke</string>
-    <string name="morphe_home_greeting_6">Lad os få dine apps til at opføre sig ordentligt</string>
-    <string name="morphe_home_greeting_7">Dagens vejrudsigt: 100 % chance for patching</string>
+    <string name="morphe_home_greeting_6">Laødigne udvik bleve til din app</string>
+    <string name="morphe_home_greeting_7">I dagernes forholge: 100% chancer for omstilling</string>
     <string name="morphe_home_bundle_type_api">API-pakke</string>
     <string name="morphe_home_update_error">Opdatering mislykkedes</string>
     <string name="morphe_home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Vis fejl</string>
     <string name="morphe_patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="morphe_patcher_install_dialog_message">Installer patchet app?</string>
     <string name="morphe_patcher_install_conflict_message">Der er registreret en pakke-konflikt. For at installere den nye version skal du først afinstallere den tidligere version af appen.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Se ud, det er dejligt derude… 🌤️</string>
     <string name="morphe_patcher_message_7">Justerer 1-taller og 0-taller… 🤖</string>
     <string name="morphe_patcher_message_8">Redder digitale spaghetti ud… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Retter fejl i den upatchede app… 🐞</string>
     <string name="morphe_patcher_message_10">Store patches er ventetiden værd… ⏳</string>
     <string name="morphe_patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
     <string name="morphe_patcher_message_12">Bliv siddende, indtil kaptajnen slukker for \“Patching i gang\” skiltet… 💺✈️</string>
     <string name="morphe_patcher_message_13">Laver din patchede app, varm og frisk… 🍳</string>
-    <string name="morphe_patcher_message_14">Træder gennem patchendøren og svæver på en meget mærkelig måde… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Høfligt forhandler med bytekode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Alle systemer er nominelle… patche-bane er stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Presser ekstra strøm ud, som saft fra en digital citron… 🍋</string>
     <string name="morphe_patcher_message_17">Opfordrer appen til at acceptere sit nye, bedre jeg… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Ændrer appens superposition fra upatchet til patchet… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Fjerner vrøvl. Venligst vent… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Tilbage til Morphe hjem</string>
     <string name="morphe_settings_return_to_morphe_description">Tilbage til forenklet tilstand</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Bruger standardanbefaling</string>
     <string name="bundle_version_item_description_selected">Følger %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Vælg bundelanbefaling</string>
-    <string name="bundle_version_dialog_description">Vælg, hvilken bundt der skal bruges, når du downloader en APK.</string>
+    <string name="bundle_version_dialog_description">Vælg, hvilket bundle\'s forslag skal bruges, når du lastes ned en APK.</string>
     <string name="bundle_version_dialog_default">Brug standardanbefaling</string>
     <string name="bundle_version_dialog_default_subtitle">Vælg automatisk den mest almindelige kompatible version.</string>
     <string name="bundle_version_dialog_option_subtitle">Brug version %1$s</string>
@@ -316,7 +321,7 @@ Aktiver alligevel?"</string>
     <string name="import_keystore">Importér keystore</string>
     <string name="import_keystore_description">Importér en brugerdefineret keystore</string>
     <string name="import_keystore_dialog_title">Angiv keystore-legitimationsoplysninger</string>
-    <string name="import_keystore_dialog_description">Du skal angive keystorens legitimationsoplysninger for at importere den.</string>
+    <string name="import_keystore_dialog_description">Du skal indtaste keystoreets credenzialer for at importer den.</string>
     <string name="import_keystore_dialog_alias_field">Brugernavn (alias)</string>
     <string name="import_keystore_dialog_password_field">Adgangskode</string>
     <string name="import_keystore_dialog_button">Importér</string>
@@ -686,9 +691,9 @@ Du skal slå \"Tillad ændring af patch-udvælgelse og indstillinger\" til i de 
     <string name="patcher_missing_patch_message">"Patching mislykkedes, fordi følgende patches ikke blev fundet i det aktuelle bundle:
 %1$s
 Genåbn valget og vælg dem igen (eller vælg erstatninger), før du prøver igen."</string>
-    <string name="patcher_preflight_missing_patch_message">"Følgende patches er ikke tilgængelige i det aktuelle bundle:
+    <string name="patcher_preflight_missing_patch_message">"Følgende omstilling er ikke tilgængelig i den nuværende bundle:
 %1$s
-Du kan fjerne dem automatisk, justere valget eller fortsætte alligevel."</string>
+Du kan fjern dem automatisch, justere valget eller fortsætte, selvom."</string>
     <string name="patcher_missing_patch_review">Gennemgå valg</string>
     <string name="patch_selector_missing_patch_title">Vælg manglende patches igen</string>
     <string name="patch_selector_missing_patch_message">"Disse patches skal genvælges:

@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Thắt dây an toàn, đến giờ vá rồi</string>
     <string name="morphe_home_greeting_4">Ngày lại đến, một kiệt tác chặn quảng cáo khác</string>
     <string name="morphe_home_greeting_5">Muốn xem quảng cáo? Tôi cũng không</string>
-    <string name="morphe_home_greeting_6">Hãy để ứng dụng của bạn cư xử</string>
-    <string name="morphe_home_greeting_7">Dự báo hôm nay: 100% cơ hội vá lỗi</string>
+    <string name="morphe_home_greeting_6">Hãy cùng nhau làm cho ứng dụng của bạn hoạt động tốt hơn</string>
+    <string name="morphe_home_greeting_7">Dự báo hôm nay: 100% khả năng sửa chữa</string>
     <string name="morphe_home_bundle_type_api">Gói API</string>
     <string name="morphe_home_update_error">Cập nhật thất bại</string>
     <string name="morphe_home_update_error_subtitle">Kiểm tra kết nối internet của bạn và thử lại</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Hiển thị lỗi</string>
     <string name="morphe_patcher_error_copied">Lỗi đã được sao chép vào bảng nhớ tạm</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d bản vá</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Bước này có thể mất một lúc. Vui lòng chờ…</string>
     <string name="morphe_patcher_install_dialog_message">Cài đặt ứng dụng đã vá?</string>
     <string name="morphe_patcher_install_conflict_message">Đã phát hiện xung đột gói. Để cài đặt phiên bản mới, bạn phải gỡ cài đặt phiên bản ứng dụng trước đó trước.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Nhìn ra ngoài trời đi, đẹp lắm… 🌤️</string>
     <string name="morphe_patcher_message_7">Đang điều chỉnh 1 và 0… 🤖</string>
     <string name="morphe_patcher_message_8">Đang gỡ rối các đoạn mã phức tạp… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Đang sửa lỗi trong ứng dụng chưa được vá… 🐞</string>
     <string name="morphe_patcher_message_10">Các bản vá tuyệt vời rất đáng để chờ đợi… ⏳</string>
     <string name="morphe_patcher_message_11">Đang đánh bóng các điểm ảnh cho đến khi chúng tỏa sáng… 💎</string>
     <string name="morphe_patcher_message_12">Xin vui lòng giữ nguyên vị trí cho đến khi thuyền trưởng tắt biển báo \“Đang vá lỗi\”... 💺✈️</string>
     <string name="morphe_patcher_message_13">Đang nấu ứng dụng đã vá của bạn, nóng hổi và tươi mới… 🍳</string>
-    <string name="morphe_patcher_message_14">Bước qua cánh cửa vá lỗi, và trôi nổi theo một cách rất lạ lùng… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Đàm phán lịch sự với bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Tất cả hệ thống hoạt động bình thường… quỹ đạo vá lỗi ổn định… 🚀</string>
     <string name="morphe_patcher_message_16">Vắt kiệt thêm năng lượng, như vắt nước từ một quả chanh kỹ thuật số… 🍋</string>
     <string name="morphe_patcher_message_17">Khuyến khích ứng dụng chấp nhận bản thân mới, tốt đẹp hơn của nó… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Thay đổi trạng thái chồng chập của ứng dụng từ chưa vá sang đã vá… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Ứng dụng của bạn bị sốt, và phương pháp chữa trị duy nhất là thêm nhiều bản vá… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Loại bỏ những thứ vô nghĩa. Vui lòng đợi… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Quay lại Morphe home</string>
     <string name="morphe_settings_return_to_morphe_description">Quay lại chế độ đơn giản</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Đang dùng đề xuất mặc định</string>
     <string name="bundle_version_item_description_selected">Đã chọn gói %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Chọn đề xuất của gói</string>
-    <string name="bundle_version_dialog_description">Chọn phiên bản đề xuất từ gói để dùng khi tải APK.</string>
+    <string name="bundle_version_dialog_description">Chọn phiên bản đề xuất từ gói để dùng khi tải APK</string>
     <string name="bundle_version_dialog_default">Dùng đề xuất mặc định</string>
     <string name="bundle_version_dialog_default_subtitle">Tự động chọn phiên bản tương thích thông dụng nhất.</string>
     <string name="bundle_version_dialog_option_subtitle">Dùng phiên bản %1$s</string>
@@ -310,7 +315,7 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="import_keystore">Nhập kho khoá</string>
     <string name="import_keystore_description">Nhập kho khoá tuỳ chỉnh</string>
     <string name="import_keystore_dialog_title">Nhập thông tin xác thực kho khoá</string>
-    <string name="import_keystore_dialog_description">Bạn sẽ cần điền thông tin xác thực của kho khóa để nhập chúng.</string>
+    <string name="import_keystore_dialog_description">Bạn sẽ cần điền thông tin xác thực của kho khóa để nhập chúng</string>
     <string name="import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
     <string name="import_keystore_dialog_password_field">Mật khẩu</string>
     <string name="import_keystore_dialog_button">Nhập</string>
@@ -660,9 +665,8 @@ Danh sách các plugin trình tải xuống được hỗ trợ có thể đư�
     <string name="patcher_missing_patch_message">"Vá lỗi thất bại vì các bản vá sau không tìm thấy trong gói hiện tại:
 %1$s
 Mở lại lựa chọn và chọn lại chúng (hoặc chọn các bản vá thay thế) trước khi thử lại."</string>
-    <string name="patcher_preflight_missing_patch_message">"Các bản vá sau đây không có sẵn trong gói hiện tại:
-%1$s
-Bạn có thể xóa chúng tự động, điều chỉnh lựa chọn hoặc tiếp tục."</string>
+    <string name="patcher_preflight_missing_patch_message">"Dưới đây là những bản vá không có sẵn trong gói hiện tại%
+You can remove them automatically, adjust the selection, or continue anyway%"</string>
     <string name="patcher_missing_patch_review">Xem lại lựa chọn</string>
     <string name="patch_selector_missing_patch_title">Chọn lại bản vá bị thiếu</string>
     <string name="patch_selector_missing_patch_message">"Các bản vá dưới đây cần chọn lại:\n%1$s\nBật lại chúng (hoặc chọn bản vá thay thế) và thử vá lại."</string>

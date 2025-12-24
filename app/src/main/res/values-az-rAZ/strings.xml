@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Kəmərinizi bağlayın, yamama vaxtıdır</string>
     <string name="morphe_home_greeting_4">Başqa gün, başqa reklam bloklanmış baş əsər</string>
     <string name="morphe_home_greeting_5">Reklamlara baxmaq istəyirsən? Mən də yox</string>
-    <string name="morphe_home_greeting_6">Tətbiqlərinizin davranışını düzəldək</string>
-    <string name="morphe_home_greeting_7">Bugünkü proqnoz: 100% yamama şansı</string>
+    <string name="morphe_home_greeting_6">Uygulamanız dərhal çalışmağa təyyar!</string>
+    <string name="morphe_home_greeting_7">Odün forecast: 100% patching имkanı</string>
     <string name="morphe_home_bundle_type_api">API Paketi</string>
     <string name="morphe_home_update_error">Yeniləmə uğursuz oldu</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı yoxlayın və yenidən cəhd edin</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Səhvi Göstər</string>
     <string name="morphe_patcher_error_copied">Səhv buferə köçürüldü</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d düzəliş</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Bu addım bir müddət çəkə bilər. Zəhmət olmasa gözləyin…</string>
     <string name="morphe_patcher_install_dialog_message">Yama bənzədilmiş proqramı quraşdırırıq?</string>
     <string name="morphe_patcher_install_conflict_message">Paketlərin münaqişəsi aşkarlandı. Yeni versiyanı quraşdırmaq üçün əvvəlcə proqramın əvvəlki versiyasını silməlisiniz.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Bay\u0131ra bax\u0131n, orada\u00a0g\u00fcz\u0259ldir\u2026 \u2600}\ufe0f</string>
     <string name="morphe_patcher_message_7">1-l\u0259ri\u00a0v\u0259 0-lar\u0131\u00a0t\u0259nzimleyir\u2026 \ud83e\udd16</string>
     <string name="morphe_patcher_message_8">R\u0259q\u0259msal\u00a0spagetti\u00a0a\u00e7\u0131r\u0131r\u0131q\u2026 \ud83c\udf5d</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Yama olunmam\u0131\u015f\u00a0t\u0259tbiqd\u0259\u00a0s\u0259hvl\u0259r\u00a0d\u00fcz\u0259lir\u2026 \ud83d\udc1e</string>
     <string name="morphe_patcher_message_10">G\u00f6z\u0259l\u00a0yamalar\u00a0g\u00f6zl\u0259m\u0259y\u0259\u00a0d\u0259y\u0259r\u2026 \u23f3</string>
     <string name="morphe_patcher_message_11">Piksell\u0259ri\u00a0parlayana\u00a0kimi\u00a0cilalay\u0131r\u0131q\u2026 \ud83d\udc8e</string>
     <string name="morphe_patcher_message_12">Kapitan \“Yamalama davam edir\” işarəsini söndürənə qədər yerinizdə qalın… 💺✈️</string>
     <string name="morphe_patcher_message_13">Yamalanm\u0131\u015f\u00a0t\u0259tbiqinizi\u00a0isti\u00a0v\u0259\u00a0t\u0259z\u0259\u00a0bi\u015firiq\u2026 \ud83c\udf55</string>
-    <string name="morphe_patcher_message_14">Yama qapısından keçərək və olduqca qəribə bir şəkildə üzərək… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Bayt-kod ilə nəzakətlə danışıqlar aparılır… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Bütün sistemlər normaldır… Yama trayektoriyası sabitdir… 🚀</string>
     <string name="morphe_patcher_message_16">Əlavə gücü, rəqəmsal limondan çıxan şirə kimi sıxırıq… 🍋</string>
     <string name="morphe_patcher_message_17">Tətbiqi yeni, daha yaxşı özünü qəbul etməyə təşviq edirik… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Tətbiqin superpozisiyasını yamalanmamışdan yamalanmışa dəyişirik… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Sizin tətbiqinizin atəşi var və yeganə resept daha çox yamadır… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Boş sözlər aradan qaldırılır. Zəhmət olmasa gözləyin… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morphe-yə qayıt</string>
     <string name="morphe_settings_return_to_morphe_description">Sadələşdirilmiş rejimə qayıt</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">İlkin tövsiyədən istifadə</string>
     <string name="bundle_version_item_description_selected">%1$s (%2$s) təqib edilir</string>
     <string name="bundle_version_dialog_title">Paket tövsiyəsini seçin</string>
-    <string name="bundle_version_dialog_description">APK yükləyərkən hansı paket tövsiyəsindən istifadə ediləcəyini seçin.</string>
+    <string name="bundle_version_dialog_description">Yükləyərkən kontakt təklifinə bayram teyinləmək.</string>
     <string name="bundle_version_dialog_default">İlkin tövsiyədən istifadə et</string>
     <string name="bundle_version_dialog_default_subtitle">Ən çox yayılmış uyğun versiyanı avtomatik seçin.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s versiyasından istifadə et</string>
@@ -314,7 +319,7 @@ Buna baxmayaraq aktivləşdirilsin?"</string>
     <string name="import_keystore">Keystoré idxal et</string>
     <string name="import_keystore_description">Xüsusi keystoré idxal edin</string>
     <string name="import_keystore_dialog_title">Keystoré etimadnaməsini daxil edin</string>
-    <string name="import_keystore_dialog_description">Bunu idxal etmək üçün kilid anbarının etimadnamələrini daxil etməlisiniz.</string>
+    <string name="import_keystore_dialog_description">Keystore parolasını daxil etmək lazırm, because он import f  alsadn.</string>
     <string name="import_keystore_dialog_alias_field">İstifadəçi adı (Alias)</string>
     <string name="import_keystore_dialog_password_field">Parol</string>
     <string name="import_keystore_dialog_button">İdxal et</string>
@@ -684,9 +689,9 @@ Yamaları dəyişdirmək üçün qabaqcıl parametrlərdə \"Yama seçimi və pa
     <string name="patcher_missing_patch_message">"Aşağıdakı yamalar mövcud paketdə tapılmadığı üçün yama uğursuz oldu:
 %1$s
 Yenidən cəhd etməzdən əvvəl seçimi yenidən açın və onları yenidən seçin (və ya əvəzedicilər seçin)."</string>
-    <string name="patcher_preflight_missing_patch_message">"Aşağıdakı yamalar cari paketdə mövcud deyil:
+    <string name="patcher_preflight_missing_patch_message">"Xalıyım bil– patcheslar hazırda da odarcta: 
 %1$s
-Onları avtomatik silə, seçimi düzəldə və ya yenə də davam edə bilərsiniz."</string>
+Avtomatik silmək, selectni dəyişmək və ya davam etmək olar."</string>
     <string name="patcher_missing_patch_review">Seçimi nəzərdən keçirin</string>
     <string name="patch_selector_missing_patch_title">Əksik yamaları yenidən seçin</string>
     <string name="patch_selector_missing_patch_message">"Bu yamalar yenidən seçilməlidir:

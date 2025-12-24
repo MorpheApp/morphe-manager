@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Ceangail suas, tá am paiste ann</string>
     <string name="morphe_home_greeting_4">Lá eile, sárshaothar eile a bhacann fógraí</string>
     <string name="morphe_home_greeting_5">Ar mhaith leat fógraí a fheiceáil? Mise ach an oiread</string>
-    <string name="morphe_home_greeting_6">Déanaimis d’aipeanna iompar a dhéanamh</string>
-    <string name="morphe_home_greeting_7">Faisnéis an lae inniu: 100% seans paiste</string>
+    <string name="morphe_home_greeting_6">Léifimid go n-áifinn go mbeadh tu gacla a bheith i mbualach</string>
+    <string name="morphe_home_greeting_7">An t-athrú seo: 100% de shas ar an scéal meán na h-athrú a bhíos ar roll n-aicearm foirmléiri</string>
     <string name="morphe_home_bundle_type_api">Beart API</string>
     <string name="morphe_home_update_error">Theip ar nuashonrú</string>
     <string name="morphe_home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Taispeáin Earráid</string>
     <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Féadfaidh an chéim seo tamall a ghlacadh. Fan go cineálta…</string>
     <string name="morphe_patcher_install_dialog_message">Suiteáil an aip paisteáilte?</string>
     <string name="morphe_patcher_install_conflict_message">Aithníodh coinbhleacht pacáiste. Chun an leagan nua a shuiteáil, ní mór duit an leagan roimhe seo den aip a dhíshuiteáil ar dtús.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Breathnaigh amach, tá sé go deas lasmuigh... 🌤️</string>
     <string name="morphe_patcher_message_7">Ag coigeartú 1anna agus 0anna... 🤖</string>
     <string name="morphe_patcher_message_8">Ag díthaclaíocht spagetti digiteach... 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Ag ceartú fabhtanna san aip neamhpaisteáilte... 🐞</string>
     <string name="morphe_patcher_message_10">Is fiú fanacht le paistí móra... ⏳</string>
     <string name="morphe_patcher_message_11">Ag liodán picteilíní go dtí go lonraíonn siad... 💎</string>
     <string name="morphe_patcher_message_12">Fan i do shuí go dtí go múchfaidh an captaen an comhartha \“Paisteáil ar siúl\”… 💺✈️</string>
     <string name="morphe_patcher_message_13">Ag cócaireacht d\'aip phaiisteáilte, te agus úr... 🍳</string>
-    <string name="morphe_patcher_message_14">Ag céim tríd an doras paiste, agus ag snámh ar bhealach an-aisteach… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Ag idirphlé go béasach le bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Gach córas gnáth… paisteadh ar fionraí cobhsaí… 🚀</string>
     <string name="morphe_patcher_message_16">Ag brú amach cumhacht bhreise, cosúil le sú ó líomóid dhigiteach… 🍋</string>
     <string name="morphe_patcher_message_17">Ag spreagadh na haipe glacadh lena féin nua, níos fearr… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Ag athrú forluí na haipe ó neamhpháistí go páistí… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Baintear seafóideacht. Le do thoil, fan ar aghaidh… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Tionnadh go dtí baile Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Tionnadh go dtí mód simplí</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Ag úsáid comhairle réamhshocraithe</string>
     <string name="bundle_version_item_description_selected">Ag leanúint %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Roghnaigh comhairle pacáiste</string>
-    <string name="bundle_version_dialog_description">Roghnaigh cén pacáiste ba cheart a úsáid agus APK á íoslódáil.</string>
+    <string name="bundle_version_dialog_description">Leagan ar scéal mionchúilt: Iontráil mar a bhí ann é a l-bgainn siochaim! Go raibh áir ar import don roll</string>
     <string name="bundle_version_dialog_default">Bain úsáid as comhairle réamhshocraithe</string>
     <string name="bundle_version_dialog_default_subtitle">Roghnaigh an leagan comhoiriúnach is coitianta go huathoibríoch.</string>
     <string name="bundle_version_dialog_option_subtitle">Bain úsáid as leagan %1$s</string>
@@ -314,7 +319,7 @@ Cumasaigh ar aon nós?"</string>
     <string name="import_keystore">Iompórtáil eochairstóir</string>
     <string name="import_keystore_description">Iompórtáil eochairstóir saincheaptha</string>
     <string name="import_keystore_dialog_title">Cuir isteach dintiúir eochairstóir</string>
-    <string name="import_keystore_dialog_description">Beidh ort fáil réidh ar dhintií an stórais eochracha chun é a allmhairiú.</string>
+    <string name="import_keystore_dialog_description">Beiseg ó a bhfuilte credeintí an keystore chun é a saoladh.</string>
     <string name="import_keystore_dialog_alias_field">Leasainm (Alias)</string>
     <string name="import_keystore_dialog_password_field">Focal faire</string>
     <string name="import_keystore_dialog_button">Iompórtáil</string>
@@ -684,9 +689,9 @@ Caithfidh tú \"Ceadaigh athrú ar roghnú paiste agus roghanna\" a chasadh air 
     <string name="patcher_missing_patch_message">"Theip ar phaisteáil toisc nár aimsíodh na paistí seo a leanas sa bheart reatha:
 %1$s
 Athoscail an roghnú agus roghnaigh arís iad (nó roghnaigh ionadaithe) sula ndéanann tú iarracht arís."</string>
-    <string name="patcher_preflight_missing_patch_message">"Níl na paistí seo a leanas ar fáil sa bheart reatha:
+    <string name="patcher_preflight_missing_patch_message">"Na coscáltaí is coscailte in úr nach bhfuil áirimh ina chéann iomarbh an blásar:
 %1$s
-Is féidir leat iad a bhaint go huathoibríoch, an roghnú a choigeartú, nó leanúint ar aghaidh mar sin féin."</string>
+Go raibh áir ar chois mé:"</string>
     <string name="patcher_missing_patch_review">Athbhreithnigh an roghnú</string>
     <string name="patch_selector_missing_patch_title">Paistí ar iarraidh a roghnú arís</string>
     <string name="patch_selector_missing_patch_message">"Ní mór na paistí seo a roghnú arís:

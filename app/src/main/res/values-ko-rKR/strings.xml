@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">안전벨트 매세요, 패치 시간입니다</string>
     <string name="morphe_home_greeting_4">또 하루, 또 다른 광고 차단 명작</string>
     <string name="morphe_home_greeting_5">광고를 시청하고 싶으신가요? 저는 아닙니다</string>
-    <string name="morphe_home_greeting_6">앱이 제대로 작동하도록 해봅시다</string>
-    <string name="morphe_home_greeting_7">오늘의 예보: 100% 패치 예정</string>
+    <string name="morphe_home_greeting_6">자, 여러분의 앱이 정상적으로 동작하도록 해요.</string>
+    <string name="morphe_home_greeting_7">오늘의 예보: 패칭 확률 100%</string>
     <string name="morphe_home_bundle_type_api">API 번들</string>
     <string name="morphe_home_update_error">업데이트 실패</string>
     <string name="morphe_home_update_error_subtitle">인터넷 연결을 확인하고 다시 시도해 주세요.</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">오류 보기</string>
     <string name="morphe_patcher_error_copied">오류가 클립보드에 복사되었습니다</string>
     <string name="morphe_patcher_patches_progress">패치 %1$d / %2$d개</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
     <string name="morphe_patcher_install_dialog_message">패치된 앱 설치?</string>
     <string name="morphe_patcher_install_conflict_message">패키지 충돌이 감지되었습니다. 새 버전을 설치하려면 먼저 앱의 이전 버전을 제거해야 합니다.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">밖을 보세요, 날씨가 좋아요… 🌤️</string>
     <string name="morphe_patcher_message_7">1과 0을 조정 중… 🤖</string>
     <string name="morphe_patcher_message_8">디지털 스파게티를 푸는 중… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">패치되지 않은 앱의 버그 수정 중… 🐞</string>
     <string name="morphe_patcher_message_10">훌륭한 패치는 기다릴 가치가 있습니다… ⏳</string>
     <string name="morphe_patcher_message_11">픽셀을 반짝일 때까지 연마 중… 💎</string>
     <string name="morphe_patcher_message_12">기장님이 \"패치 중\" 사인을 끌 때까지 자리에 앉아 계십시오… 💺✈️</string>
     <string name="morphe_patcher_message_13">신선하고 뜨거운 패치된 앱을 요리 중… 🍳</string>
-    <string name="morphe_patcher_message_14">패치 도어를 통과하고, 아주 이상한 방식으로 떠다닙니다… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">바이트코드와 정중하게 협상 중… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">모든 시스템 정상… 패치 궤도 안정… 🚀</string>
     <string name="morphe_patcher_message_16">디지털 레몬에서 즙을 짜내듯 추가 전력을 짜내고 있습니다… 🍋</string>
     <string name="morphe_patcher_message_17">앱이 새롭고 더 나은 자신을 받아들이도록 격려하고 있습니다… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">앱 중첩을 패치되지 않음에서 패치됨으로 변경 중… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">앱에 열이 났고, 처방은 패치 추가뿐입니다… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">쓸데없는 소리 제거 중입니다. 잠시 대기해 주세요… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morphe 홈으로 돌아가기</string>
     <string name="morphe_settings_return_to_morphe_description">간소화 모드로 돌아가기</string>

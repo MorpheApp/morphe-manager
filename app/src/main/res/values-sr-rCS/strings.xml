@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Zakopčajte se, vreme je za krpljenje</string>
     <string name="morphe_home_greeting_4">Još jedan dan, još jedno remek-delo blokirano oglasima</string>
     <string name="morphe_home_greeting_5">Želite da gledate reklame? Ja ne</string>
-    <string name="morphe_home_greeting_6">Neka se vaše aplikacije ponašaju</string>
-    <string name="morphe_home_greeting_7">Današnja prognoza: 100% šanse za zakrpe</string>
+    <string name="morphe_home_greeting_6">Dajmo da vaših aplikacija ponašaju osobito</string>
+    <string name="morphe_home_greeting_7">Prognóza za dan: 100% šansi za popravku</string>
     <string name="morphe_home_bundle_type_api">API paket</string>
     <string name="morphe_home_update_error">Ažuriranje nije uspelo</string>
     <string name="morphe_home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Prikaži grešku</string>
     <string name="morphe_patcher_error_copied">Greška kopirana u privremenu memoriju</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d zakrpa</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
     <string name="morphe_patcher_install_dialog_message">Instalirati zakrpljenu aplikaciju?</string>
     <string name="morphe_patcher_install_conflict_message">Otkriveno je podudaranje paketa. Da biste instalirali novu verziju, prvo morate deinstalirati prethodnu verziju aplikacije.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Pogledajte napolje, lepo je tamo… 🌤️</string>
     <string name="morphe_patcher_message_7">Podešavanje 1 i 0… 🤖</string>
     <string name="morphe_patcher_message_8">Odvajanje digitalnih špageta… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Ispravljanje grešaka u nezapečenoj aplikaciji… 🐞</string>
     <string name="morphe_patcher_message_10">Vredi čekati sjajne zakrpe… ⏳</string>
     <string name="morphe_patcher_message_11">Poliranje piksela dok ne zasijaju… 💎</string>
     <string name="morphe_patcher_message_12">Molimo ostanite na mestu dok kapetan ne isključi znak \“Zakrpa je u toku\”… 💺✈️</string>
     <string name="morphe_patcher_message_13">Pripremamo vašu zakrpljenu aplikaciju, vruću i svežu… 🍳</string>
-    <string name="morphe_patcher_message_14">Prolazimo kroz vrata za zakrpe i lebdimo na najneobičniji način… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Ljubazno pregovaranje sa bajt-kodom</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Svi sistemi su normalni… putanja zakrpe je stabilna… 🚀</string>
     <string name="morphe_patcher_message_16">Iscedimo dodatnu snagu, poput soka iz digitalnog limuna… 🍋</string>
     <string name="morphe_patcher_message_17">Podstičemo aplikaciju da prihvati sebe, novu i bolju… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Menjamo superpoziciju aplikacije iz nezakrpljene u zakrpljenu… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Vaša aplikacija ima temperaturu, a jedini lek je više zakrpa… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Uklanjanje besmislica. Molimo pričekajte… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Povratak na Morphe početnu stranicu</string>
     <string name="morphe_settings_return_to_morphe_description">Povratak na pojednostavljeni režim</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Korišćenje podrazumevane preporuke</string>
     <string name="bundle_version_item_description_selected">Sledeći %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Izaberite preporuku paketa</string>
-    <string name="bundle_version_dialog_description">Odaberite čiju preporuku paketa treba koristiti prilikom preuzimanja APK-a.</string>
+    <string name="bundle_version_dialog_description">Izaberite koju opciju za preuzimanje bundla koristiti kada preuzimete APK-e</string>
     <string name="bundle_version_dialog_default">Koristi podrazumevanu preporuku</string>
     <string name="bundle_version_dialog_default_subtitle">Automatski odaberite najčešću kompatibilnu verziju.</string>
     <string name="bundle_version_dialog_option_subtitle">Koristi verziju %1$s</string>
@@ -314,7 +319,7 @@ Omogućiti uprkos tome?"</string>
     <string name="import_keystore">Uvezi keystore</string>
     <string name="import_keystore_description">Uvezi prilagođeni keystore</string>
     <string name="import_keystore_dialog_title">Unesite akreditive za keystore</string>
-    <string name="import_keystore_dialog_description">Unesite akreditive za keystore da biste ga uvezli.</string>
+    <string name="import_keystore_dialog_description">Za uvoz keystore-a, trebate uneti njegove autentične podatke</string>
     <string name="import_keystore_dialog_alias_field">Korisničko ime (Alias)</string>
     <string name="import_keystore_dialog_password_field">Lozinka</string>
     <string name="import_keystore_dialog_button">Uvezi</string>
@@ -684,9 +689,9 @@ Morate uključiti \"Dozvoli promenu izbora zakrpa i opcija\" u naprednim podeša
     <string name="patcher_missing_patch_message">"Pečovanje nije uspelo jer sledeći pečeve nisu pronađeni u trenutnom paketu:
 %1$s
 Ponovo otvori izbor i ponovo ih izaberi (ili izaberi zamene) pre ponovnog pokušaja."</string>
-    <string name="patcher_preflight_missing_patch_message">"Sledeći pečeve nisu dostupni u trenutnom paketu:
+    <string name="patcher_preflight_missing_patch_message">"Sljedeći popravci nisu dostupni u trenutnom paketu:
 %1$s
-Možete ih automatski ukloniti, prilagoditi izbor ili nastaviti uprkos tome."</string>
+Možete ih automatski ukloniti, prilagoditi izbor ili nastaviti bez obzira na to"</string>
     <string name="patcher_missing_patch_review">Pregledaj izbor</string>
     <string name="patch_selector_missing_patch_title">Ponovo izaberi nedostajuće pečeve</string>
     <string name="patch_selector_missing_patch_message">"Ove pečeve je potrebno ponovo izabrati:

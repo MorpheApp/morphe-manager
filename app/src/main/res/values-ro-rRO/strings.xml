@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Pune-ți centura, e timpul pentru patch-uri</string>
     <string name="morphe_home_greeting_4">Încă o zi, încă o capodoperă blocată de reclame</string>
     <string name="morphe_home_greeting_5">Vrei să vizionezi reclame? Nici eu</string>
-    <string name="morphe_home_greeting_6">Să facem aplicațiile tale să se comporte</string>
-    <string name="morphe_home_greeting_7">Prognoza de astăzi: 100% șanse de patch-uri</string>
+    <string name="morphe_home_greeting_6">Încercați să faceți aplicațiile dvs. să behave</string>
+    <string name="morphe_home_greeting_7">Vremea de astăzi: 100% șanse de remediere</string>
     <string name="morphe_home_bundle_type_api">Pachet API</string>
     <string name="morphe_home_update_error">Actualizarea a eșuat</string>
     <string name="morphe_home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Afișare eroare</string>
     <string name="morphe_patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch-uri</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="morphe_patcher_install_dialog_message">Instalați aplicația modificată?</string>
     <string name="morphe_patcher_install_conflict_message">A fost detectat un conflict de pachete. Pentru a instala noua versiune, trebuie mai întâi să dezinstalați versiunea anterioară a aplicației.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Privește pe fereastră, e frumos afară… 🌤️</string>
     <string name="morphe_patcher_message_7">Ajustare 1-uri și 0-uri… 🤖</string>
     <string name="morphe_patcher_message_8">Descurcarea spaghetti-ului digital… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Repararea bug-urilor în aplicația nepatch-uită… 🐞</string>
     <string name="morphe_patcher_message_10">Patch-urile grozave merită așteptarea… ⏳</string>
     <string name="morphe_patcher_message_11">Șlefuirea pixelilor până strălucesc… 💎</string>
     <string name="morphe_patcher_message_12">Vă rugăm să rămâneți așezați până când comandantul stinge semnul „Patching in progress”… 💺✈️</string>
     <string name="morphe_patcher_message_13">Gătim aplicația patch-uită, fierbinte și proaspătă… 🍳</string>
-    <string name="morphe_patcher_message_14">Trecând prin ușa de patch-uri și plutind într-un mod foarte ciudat… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Negociind politicos cu bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Toate sistemele nominale… traiectoria de patch-uri este stabilă… 🚀</string>
     <string name="morphe_patcher_message_16">Stoarcem putere suplimentară, ca suc dintr-o lămâie digitală… 🍋</string>
     <string name="morphe_patcher_message_17">Încurajăm aplicația să-și accepte noul eu, mai bun… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Schimbăm superpoziția aplicației de la nestergere la ștergere… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Întoarcere la pagina principală Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Reveniți la modul simplificat</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Folosind recomandarea implicită</string>
     <string name="bundle_version_item_description_selected">Urmând %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Alegeți recomandarea pachetului</string>
-    <string name="bundle_version_dialog_description">Alegeți ce recomandare a pachetului să fie utilizată la descărcarea unui APK.</string>
+    <string name="bundle_version_dialog_description">Să aleagă care sugestie de bundle se va utiliza atunci când se descarcă o aplicație.</string>
     <string name="bundle_version_dialog_default">Utilizați recomandarea implicită</string>
     <string name="bundle_version_dialog_default_subtitle">Selectați automat cea mai comună versiune compatibilă.</string>
     <string name="bundle_version_dialog_option_subtitle">Utilizați versiunea %1$s</string>
@@ -316,7 +321,7 @@ Activați oricum?"</string>
     <string name="import_keystore">Importă keystore</string>
     <string name="import_keystore_description">Importă un keystore personalizat</string>
     <string name="import_keystore_dialog_title">Introduceți credențialele keystore</string>
-    <string name="import_keystore_dialog_description">Va trebui să introduceți credențialele keystore-ului pentru a-l importa.</string>
+    <string name="import_keystore_dialog_description">Trebuie să introduceți credințele pentru aplicație înainte de a o importa.</string>
     <string name="import_keystore_dialog_alias_field">Nume de utilizator (Alias)</string>
     <string name="import_keystore_dialog_password_field">Parolă</string>
     <string name="import_keystore_dialog_button">Importare</string>
@@ -686,9 +691,8 @@ Trebuie să activați „Permite modificarea selecției și a opțiunilor de pat
     <string name="patcher_missing_patch_message">"Patch-uirea a eșuat deoarece următoarele patch-uri nu au fost găsite în pachetul curent:
 %1$s
 Rechideți selecția și reselectați-le (sau alegeți înlocuiri) înainte de a reîncerca."</string>
-    <string name="patcher_preflight_missing_patch_message">"Următoarele patch-uri nu sunt disponibile în pachetul curent:
-%1$s
-Le puteți elimina automat, ajusta selecția sau continua oricum."</string>
+    <string name="patcher_preflight_missing_patch_message">"Următoarele patch-uri nu sunt disponibile în curând actuală:
+%1$sPuteti elimina intotdeauna automat, ajustati selectia, sau continui oricum."</string>
     <string name="patcher_missing_patch_review">Revizuire selecție</string>
     <string name="patch_selector_missing_patch_title">Re-selectați patch-urile lipsă</string>
     <string name="patch_selector_missing_patch_message">"Aceste patch-uri trebuie reselectate:

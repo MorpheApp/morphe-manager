@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Zapnij pasy, czas na poprawki</string>
     <string name="morphe_home_greeting_4">Kolejny dzień, kolejne arcydzieło z zablokowanymi reklamami</string>
     <string name="morphe_home_greeting_5">Chcesz oglądać reklamy? Ja też nie</string>
-    <string name="morphe_home_greeting_6">Sprawmy, by Twoje aplikacje działały poprawnie</string>
-    <string name="morphe_home_greeting_7">Dzisiejsza prognoza: 100% szans na poprawki</string>
+    <string name="morphe_home_greeting_6">Zróbmy, by Twoje aplikacje działały poprawnie</string>
+    <string name="morphe_home_greeting_7">Dzisiejsza prognoza: 100% szans na załatanie</string>
     <string name="morphe_home_bundle_type_api">Pakiet API</string>
     <string name="morphe_home_update_error">Aktualizacja nie powiodła się</string>
     <string name="morphe_home_update_error_subtitle">Sprawdź swoje połączenie internetowe i spróbuj ponownie</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Pokaż błąd</string>
     <string name="morphe_patcher_error_copied">Błąd skopiowano do schowka</string>
     <string name="morphe_patcher_patches_progress">%1$d z %2$d łatki</string>
-    <string name="morphe_patcher_percentage">%1$d%</string>
     <string name="morphe_patcher_long_step_warning">Ten krok może potrwać chwilę. Proszę czekać…</string>
     <string name="morphe_patcher_install_dialog_message">Zainstalować zmodyfikowaną aplikację?</string>
     <string name="morphe_patcher_install_conflict_message">Wykryto konflikt pakietów. Aby zainstalować nową wersję, musisz najpierw odinstalować poprzednią wersję aplikacji.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Spójrz za okno, jest tam ładnie… 🌤️</string>
     <string name="morphe_patcher_message_7">Dostosowywanie 1 i 0… 🤖</string>
     <string name="morphe_patcher_message_8">Rozplątywanie cyfrowego spaghetti… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Naprawianie błędów w niezałatanej aplikacji… 🐞</string>
     <string name="morphe_patcher_message_10">Świetne łatki są warte czekania… ⏳</string>
     <string name="morphe_patcher_message_11">Polerowanie pikseli, aż zaczną lśnić… 💎</string>
     <string name="morphe_patcher_message_12">Proszę pozostać na miejscach, dopóki kapitan nie wyłączy znaku „Łatanie w toku”… 💺✈️</string>
     <string name="morphe_patcher_message_13">Gotowanie Twojej załatanej aplikacji, gorącej i świeżej… 🍳</string>
-    <string name="morphe_patcher_message_14">Przechodząc przez drzwi łatek i unosząc się w bardzo osobliwy sposób… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Uprzejme negocjowanie z kodem bajtowym… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Wszystkie systemy nominalne… trajektoria łatania jest stabilna… 🚀</string>
     <string name="morphe_patcher_message_16">Wyżymając dodatkową moc, jak sok z cyfrowej cytryny… 🍋</string>
     <string name="morphe_patcher_message_17">Zachęcanie aplikacji do zaakceptowania swojej nowej, lepszej wersji… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Zmiana superpozycji aplikacji z niezałatanego na załatany… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Twoja aplikacja ma gorączkę, a jedyną receptą jest więcej łatek… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Usuwanie bzdur. Proszę czekać… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Powrót do domu Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Powrót do uproszczonego trybu</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Używanie domyślnej rekomendacji</string>
     <string name="bundle_version_item_description_selected">Następująca wersja %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Wybierz rekomendację pakietu</string>
-    <string name="bundle_version_dialog_description">Wybierz, której rekomendacji pakietu należy użyć podczas pobierania APK.</string>
+    <string name="bundle_version_dialog_description">Wybierz, który z pakietów powinien być używany podczas pobierania APK.</string>
     <string name="bundle_version_dialog_default">Użyj domyślnej rekomendacji</string>
     <string name="bundle_version_dialog_default_subtitle">Automatycznie wybierz najczęściej występującą kompatybilną wersję.</string>
     <string name="bundle_version_dialog_option_subtitle">Użyj wersji %1$s</string>
@@ -316,7 +321,7 @@ Zezwolić mimo to?"</string>
     <string name="import_keystore">Importuj magazyn kluczy</string>
     <string name="import_keystore_description">Importuj niestandardowy magazyn kluczy</string>
     <string name="import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
-    <string name="import_keystore_dialog_description">Aby zaimportować magazyn kluczy, musisz podać jego dane uwierzytelniające.</string>
+    <string name="import_keystore_dialog_description">Musisz w(cp)heit klawisz do importu.</string>
     <string name="import_keystore_dialog_alias_field">Nazwa użytkownika (alias)</string>
     <string name="import_keystore_dialog_password_field">Hasło</string>
     <string name="import_keystore_dialog_button">Zaimportuj</string>
@@ -688,9 +693,9 @@ Którą należy zapisać w tym profilu?</string>
     <string name="patcher_missing_patch_message">"Proces łatania nie powiódł się, ponieważ następujące poprawki nie zostały znalezione w bieżącym pakiecie:
 %1$s
 Otwórz ponownie wybór i zaznacz je ponownie (lub wybierz zamienniki) przed ponowieniem próby."</string>
-    <string name="patcher_preflight_missing_patch_message">"Dostępne poprawki w bieżącym pakiecie:
+    <string name="patcher_preflight_missing_patch_message">"Poniższe aktualizacje nie są dostępne w currently bundle:
 %1$s
-Możesz je usunąć automatycznie, dostosować wybór lub kontynuować mimo wszystko."</string>
+Możesz usunąć je automatycznie, ureguluj wybór, lub kontynuuj teraz."</string>
     <string name="patcher_missing_patch_review">Przegląd zaznaczenia</string>
     <string name="patch_selector_missing_patch_title">Zaznacz ponownie brakujące poprawki</string>
     <string name="patch_selector_missing_patch_message">"Te poprawki wymagają ponownego zaznaczenia:

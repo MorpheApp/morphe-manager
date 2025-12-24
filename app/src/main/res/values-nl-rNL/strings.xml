@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Riemen vast, het is patchtijd</string>
     <string name="morphe_home_greeting_4">Nog een dag, nog een advertentieblokkerend meesterwerk</string>
     <string name="morphe_home_greeting_5">Wil je advertenties kijken? Ik ook niet</string>
-    <string name="morphe_home_greeting_6">Laten we je apps zich gedragen</string>
-    <string name="morphe_home_greeting_7">Huidige weersvoorspelling: 100% kans op patchen</string>
+    <string name="morphe_home_greeting_6">Laat ons uw apps zo gedragen</string>
+    <string name="morphe_home_greeting_7">Vandaag’s voorspelling: 100% kans op repareren</string>
     <string name="morphe_home_bundle_type_api">API-bundel</string>
     <string name="morphe_home_update_error">Update mislukt</string>
     <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Fout weergeven</string>
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="morphe_patcher_patches_progress">%2$d / %1$d patches</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="morphe_patcher_install_dialog_message">Gepatched app installeren?</string>
     <string name="morphe_patcher_install_conflict_message">Er is een pakketconflict gedetecteerd. Om de nieuwe versie te installeren, moet u eerst de vorige versie van de app verwijderen.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Kijk naar buiten, het is er mooi… 🌤️</string>
     <string name="morphe_patcher_message_7">1\'en en 0\'en aan het aanpassen… 🤖</string>
     <string name="morphe_patcher_message_8">Digitale spaghetti aan het ontwarren… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Bugs aan het repareren in de ongepatchte app… 🐞</string>
     <string name="morphe_patcher_message_10">Geweldige patches zijn het wachten waard… ⏳</string>
     <string name="morphe_patcher_message_11">Pixels aan het polijsten tot ze glimmen… 💎</string>
     <string name="morphe_patcher_message_12">Blijf zitten tot de piloot het \“Patching in progress\” teken uitschakelt… 💺✈️</string>
     <string name="morphe_patcher_message_13">Je gepatchte app aan het bereiden, heet en vers… 🍳</string>
-    <string name="morphe_patcher_message_14">Stap door de patchdeur, en zweef op een heel bijzondere manier… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Beleefd onderhandelen met bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Alle systemen nominaal… patchtraject is stabiel… 🚀</string>
     <string name="morphe_patcher_message_16">Extra stroom persen, als sap uit een digitale citroen… 🍋</string>
     <string name="morphe_patcher_message_17">De app aanmoedigen om zijn nieuwe, betere zelf te accepteren… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">De app-superpositie veranderen van ongepatcht naar gepatcht… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Uw app heeft koorts, en de enige remedie zijn meer patches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Verwijder onzin. Even geduld… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Terug naar Morphe-startscherm</string>
     <string name="morphe_settings_return_to_morphe_description">Terugkeren naar vereenvoudigde modus</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Standaard aanbeveling gebruiken</string>
     <string name="bundle_version_item_description_selected">Volgend %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Kies bundelaanbeveling</string>
-    <string name="bundle_version_dialog_description">Kies welke bundelsuggestie moet worden gebruikt bij het downloaden van een APK.</string>
+    <string name="bundle_version_dialog_description">Kies welk bundle’s voorstel je wilt gebruiken toen je een APK downloads.</string>
     <string name="bundle_version_dialog_default">Gebruik standaardaanbeveling</string>
     <string name="bundle_version_dialog_default_subtitle">Selecteer automatisch de meest voorkomende compatibele versie.</string>
     <string name="bundle_version_dialog_option_subtitle">Gebruik versie %1$s</string>
@@ -316,7 +321,7 @@ Toch inschakelen?"</string>
     <string name="import_keystore">Keystore importeren</string>
     <string name="import_keystore_description">Importeer een aangepaste keystore</string>
     <string name="import_keystore_dialog_title">Voer de keystore-gegevens in</string>
-    <string name="import_keystore_dialog_description">U hebt de referenties van de keystore nodig om deze te importeren.</string>
+    <string name="import_keystore_dialog_description">Je moet de credentiaelen van het keystore invoeren om het te importeren.</string>
     <string name="import_keystore_dialog_alias_field">Gebruikersnaam (alias)</string>
     <string name="import_keystore_dialog_password_field">Wachtwoord</string>
     <string name="import_keystore_dialog_button">Importeren</string>
@@ -688,9 +693,9 @@ Welke moet worden opgeslagen in dit profiel?</string>
     <string name="patcher_missing_patch_message">"Patching mislukt omdat de volgende patches niet werden gevonden in de huidige bundel:
 %1$s
 Open de selectie opnieuw en selecteer ze opnieuw (of kies vervangingen) voordat u het opnieuw probeert."</string>
-    <string name="patcher_preflight_missing_patch_message">"De volgende patches zijn niet beschikbaar in de huidige bundel:
+    <string name="patcher_preflight_missing_patch_message">"De volgende patches zijn niet beschikbaar in de huidige bundle:
 %1$s
-Je kunt ze automatisch verwijderen, de selectie aanpassen of toch doorgaan."</string>
+Je kunt ze verwijderen, de selectie aanpassen of verder gaan."</string>
     <string name="patcher_missing_patch_review">Selectie beoordelen</string>
     <string name="patch_selector_missing_patch_title">Ontbrekende patches opnieuw selecteren</string>
     <string name="patch_selector_missing_patch_message">"Deze patches moeten opnieuw geselecteerd worden:

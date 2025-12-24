@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Accrochez-vous, c\'est l\'heure des correctifs</string>
     <string name="morphe_home_greeting_4">Un jour de plus, un chef-d\'œuvre de blocage de publicités en plus</string>
     <string name="morphe_home_greeting_5">Envie de regarder des publicités ? Moi non plus</string>
-    <string name="morphe_home_greeting_6">Faisons en sorte que vos applications se comportent</string>
-    <string name="morphe_home_greeting_7">Prévisions du jour : 100 % de chances de correctifs</string>
+    <string name="morphe_home_greeting_6">Intéressons-nous à rendre vos applications plus réactives et fiables</string>
+    <string name="morphe_home_greeting_7">Aujourd\'hui, la prévision : 100 % de chance d\'application de patches.</string>
     <string name="morphe_home_bundle_type_api">Lot d\'API</string>
     <string name="morphe_home_update_error">Mise à jour échouée</string>
     <string name="morphe_home_update_error_subtitle">Vérifiez votre connexion Internet et réessayez</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Afficher l\'erreur</string>
     <string name="morphe_patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchs</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
     <string name="morphe_patcher_install_dialog_message">Installer l\'application patchée ?</string>
     <string name="morphe_patcher_install_conflict_message">Un conflit de paquets a été détecté. Pour installer la nouvelle version, vous devez d\'abord désinstaller la version précédente de l\'application.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Regardez dehors, il fait beau… 🌤️</string>
     <string name="morphe_patcher_message_7">Ajustement des 1 et des 0… 🤖</string>
     <string name="morphe_patcher_message_8">Démêlage des spaghettis numériques… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Correction des bugs dans l\'application non patchée… 🐞</string>
     <string name="morphe_patcher_message_10">Les bons correctifs valent l\'attente… ⏳</string>
     <string name="morphe_patcher_message_11">Polissage des pixels jusqu\'à ce qu\'ils brillent… 💎</string>
     <string name="morphe_patcher_message_12">Veuillez rester assis jusqu\'à ce que le commandant éteigne le panneau « Patching en cours »… 💺✈️</string>
     <string name="morphe_patcher_message_13">Préparation de votre application patchée, bien chaude et fraîche… 🍳</string>
-    <string name="morphe_patcher_message_14">En franchissant la porte de correctifs, et en flottant d\'une manière des plus particulières… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Négocier poliment avec le bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Tous les systèmes nominaux… la trajectoire de correctifs est stable… 🚀</string>
     <string name="morphe_patcher_message_16">Extraire de la puissance supplémentaire, comme du jus d\'un citron numérique… 🍋</string>
     <string name="morphe_patcher_message_17">Encourager l\'application à accepter son nouveau moi amélioré… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Changer la superposition de l\'application de non corrigée à corrigée… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Votre application a de la fièvre et la seule prescription est plus de correctifs… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Suppression des balivernes. Veuillez patienter… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Retour à l\'accueil Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Retour au mode simplifié</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Utilisation de la recommandation par défaut</string>
     <string name="bundle_version_item_description_selected">Suivant %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Choisir la recommandation de bundle</string>
-    <string name="bundle_version_dialog_description">Choisissez la suggestion du bundle à utiliser lors du téléchargement d\'une APK.</string>
+    <string name="bundle_version_dialog_description">Choisissez quelle suggestion de lot doit Ã tre utilisée lors du téléchargement d’un APK.</string>
     <string name="bundle_version_dialog_default">Utiliser la recommandation par défaut</string>
     <string name="bundle_version_dialog_default_subtitle">Sélectionner automatiquement la version compatible la plus courante.</string>
     <string name="bundle_version_dialog_option_subtitle">Utiliser la version %1$s</string>
@@ -314,7 +319,7 @@ Activer quand même ?"</string>
     <string name="import_keystore">Importer le keystore</string>
     <string name="import_keystore_description">Importer un keystore personnalisé</string>
     <string name="import_keystore_dialog_title">Entrez les informations d\'identification du keystore</string>
-    <string name="import_keystore_dialog_description">Vous devrez entrer les informations d\'identification du keystore pour l\'importer.</string>
+    <string name="import_keystore_dialog_description">Vous devrez entrer les identifiants du keystore pour effectuer l’importation.</string>
     <string name="import_keystore_dialog_alias_field">Nom d\'utilisateur (Alias)</string>
     <string name="import_keystore_dialog_password_field">Mot de passe</string>
     <string name="import_keystore_dialog_button">Importer</string>
@@ -684,9 +689,9 @@ Vous devez activer « Autoriser la modification de la sélection et des options 
     <string name="patcher_missing_patch_message">"La correction a échoué car les correctifs suivants n'ont pas été trouvés dans le bundle actuel :
 %1$s
 Rouvrez la sélection et re-sélectionnez-les (ou choisissez des remplacements) avant de réessayer."</string>
-    <string name="patcher_preflight_missing_patch_message">"Les correctifs suivants ne sont pas disponibles dans le regroupement actuel :
+    <string name="patcher_preflight_missing_patch_message">"Les correctifs suivants ne sont pas disponibles dans le lot actuel :
 %1$s
-Vous pouvez les supprimer automatiquement, ajuster la sélection ou continuer quand même."</string>
+Vous pouvez les supprimer automatiquement, ajuster la sélection ou continuer tout en ignorant."</string>
     <string name="patcher_missing_patch_review">Examiner la sélection</string>
     <string name="patch_selector_missing_patch_title">Réselectionner les correctifs manquants</string>
     <string name="patch_selector_missing_patch_message">"Ces correctifs doivent être reselectionnés :

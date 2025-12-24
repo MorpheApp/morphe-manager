@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Allaccia le cinture, è ora di applicare le patch</string>
     <string name="morphe_home_greeting_4">Un altro giorno, un altro capolavoro con ad-block</string>
     <string name="morphe_home_greeting_5">Vuoi guardare gli annunci? Neanche io</string>
-    <string name="morphe_home_greeting_6">Facciamo in modo che le tue app si comportino bene</string>
-    <string name="morphe_home_greeting_7">Previsioni di oggi: 100% di possibilità di patching</string>
+    <string name="morphe_home_greeting_6">Lettiam vedere come comportarsi le vostre app</string>
+    <string name="morphe_home_greeting_7">Previsioni di oggi: 100% di probabilità di aggiornamento</string>
     <string name="morphe_home_bundle_type_api">Pacchetto API</string>
     <string name="morphe_home_update_error">Aggiornamento non riuscito</string>
     <string name="morphe_home_update_error_subtitle">Verifica la tua connessione internet e riprova</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Mostra errore</string>
     <string name="morphe_patcher_error_copied">Errore copiato negli appunti</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Questo passaggio potrebbe richiedere del tempo. Attendere prego…</string>
     <string name="morphe_patcher_install_dialog_message">Installare l\'app patchata?</string>
     <string name="morphe_patcher_install_conflict_message">È stato rilevato un conflitto di pacchetti. Per installare la nuova versione, è necessario prima disinstallare la versione precedente dell\'app.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Guarda fuori, è bello là fuori… 🌤️</string>
     <string name="morphe_patcher_message_7">Regolazione di 1 e 0… 🤖</string>
     <string name="morphe_patcher_message_8">Districare spaghetti digitali… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Correzione di bug nell\'app non patchata… 🐞</string>
     <string name="morphe_patcher_message_10">Le grandi patch valgono l\'attesa… ⏳</string>
     <string name="morphe_patcher_message_11">Lucidatura dei pixel finché non brillano… 💎</string>
     <string name="morphe_patcher_message_12">Si prega di rimanere seduti finché il capitano non spegne il cartello \“Aggiornamento in corso\”… 💺✈️</string>
     <string name="morphe_patcher_message_13">Cucinando la tua app patchata, calda e fresca… 🍳</string>
-    <string name="morphe_patcher_message_14">Entrando nella porta di patching, e fluttuando in modo molto particolare… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Negoziando cortesemente con il bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Tutti i sistemi nominali… traiettoria di patching stabile… 🚀</string>
     <string name="morphe_patcher_message_16">Spremo potenza extra, come succo da un limone digitale… 🍋</string>
     <string name="morphe_patcher_message_17">Incoraggiando l\'app ad accettare il suo nuovo e migliore sé… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Cambiando la sovrapposizione dell\'app da non patchata a patchata… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">La tua app ha la febbre e l\'unica cura sono più patch… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Rimuovendo le sciocchezze. Attendere prego… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Ritorna alla home di Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Ritorna alla modalità semplificata</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Utilizzo della raccomandazione predefinita</string>
     <string name="bundle_version_item_description_selected">Seguendo %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Scegli la raccomandazione del bundle</string>
-    <string name="bundle_version_dialog_description">Scegli quale suggerimento del bundle utilizzare durante il download di un APK.</string>
+    <string name="bundle_version_dialog_description">Scegli quale suggerimento del bundle dovrebbe essere utilizzato durante il download di un APK</string>
     <string name="bundle_version_dialog_default">Usa la raccomandazione predefinita</string>
     <string name="bundle_version_dialog_default_subtitle">Scegli automaticamente la versione compatibile più comune.</string>
     <string name="bundle_version_dialog_option_subtitle">Usa la versione %1$s</string>
@@ -316,7 +321,7 @@ Abilitare comunque?"</string>
     <string name="import_keystore">Importa keystore</string>
     <string name="import_keystore_description">Importa un keystore personalizzato</string>
     <string name="import_keystore_dialog_title">Inserisci le credenziali del keystore</string>
-    <string name="import_keystore_dialog_description">Dovrai inserire le credenziali del keystore per importarlo.</string>
+    <string name="import_keystore_dialog_description">Dovrai inserire le credenziali del keystore per importarlo</string>
     <string name="import_keystore_dialog_alias_field">Nome utente (Alias)</string>
     <string name="import_keystore_dialog_password_field">Password</string>
     <string name="import_keystore_dialog_button">Importa</string>
@@ -686,9 +691,7 @@ Per continuare comunque, disabilitare \"Richiedi versione app suggerita\" nelle 
     <string name="patcher_missing_patch_message">"Il patching è fallito perché le seguenti patch non sono state trovate nel bundle corrente:
 %1$s
 Riapri la selezione e riselezionale (o scegli sostituzioni) prima di riprovare."</string>
-    <string name="patcher_preflight_missing_patch_message">"Le seguenti patch non sono disponibili nel bundle corrente:
-%1$s
-Puoi rimuoverle automaticamente, modificare la selezione o continuare comunque."</string>
+    <string name="patcher_preflight_missing_patch_message">"I seguenti patch non sono disponibili nel bundle corrente:\n%1$s\nPuoi rimuoverli automaticamente, modificare la selezione o continuare comunque"</string>
     <string name="patcher_missing_patch_review">Rivedi selezione</string>
     <string name="patch_selector_missing_patch_title">Ri-seleziona patch mancanti</string>
     <string name="patch_selector_missing_patch_message">"Queste patch devono essere ri-selezionate:

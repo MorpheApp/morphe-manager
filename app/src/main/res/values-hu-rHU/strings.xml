@@ -7,8 +7,6 @@
     <string name="morphe_home_greeting_3">Szíjj fel, itt a patchelés ideje</string>
     <string name="morphe_home_greeting_4">Egy új nap, egy újabb reklámblokkolt mestermű</string>
     <string name="morphe_home_greeting_5">Reklámokat akarsz nézni? Én sem</string>
-    <string name="morphe_home_greeting_6">Tegyük rendbe az alkalmazásaidat</string>
-    <string name="morphe_home_greeting_7">A mai előrejelzés: 100% esély a patchelésre</string>
     <string name="morphe_home_bundle_type_api">API csomag</string>
     <string name="morphe_home_update_error">Frissítés sikertelen</string>
     <string name="morphe_home_update_error_subtitle">Ellenőrizze internetkapcsolatát, és próbálja újra</string>
@@ -62,7 +60,6 @@
     <string name="morphe_patcher_show_error">Hiba megjelenítése</string>
     <string name="morphe_patcher_error_copied">Hiba másolva a vágólapra</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük, várjon…</string>
     <string name="morphe_patcher_install_dialog_message">Telepítse a javított alkalmazást?</string>
     <string name="morphe_patcher_install_conflict_message">Csomagkonfliktust észleltünk. Az új verzió telepítéséhez először el kell távolítania az alkalmazás előző verzióját.</string>
@@ -100,17 +97,23 @@
     <string name="morphe_patcher_message_6">Nézz ki, gyönyörű idő van… 🌤️</string>
     <string name="morphe_patcher_message_7">1-esek és 0-k beállítása… 🤖</string>
     <string name="morphe_patcher_message_8">Digitális spagetti kibogozása… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Hibák javítása a nem javított alkalmazásban… 🐞</string>
     <string name="morphe_patcher_message_10">A nagyszerű javítások megérik a várakozást… ⏳</string>
     <string name="morphe_patcher_message_11">Képpontok polírozása, amíg ragyognak… 💎</string>
     <string name="morphe_patcher_message_12">Kérjük, maradjon ülve, amíg a kapitány le nem kapcsolja a \“Javítás folyamatban\” jelzést… 💺✈️</string>
     <string name="morphe_patcher_message_13">A javított alkalmazás főzése, forrón és frissen… 🍳</string>
-    <string name="morphe_patcher_message_14">Belépés a javító ajtón, és lebegés egy egészen furcsa módon… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Udvariasan tárgyalva a bytekóddal… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Minden rendszer a normálison… javítási útvonal stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Extra teljesítmény kipréselése, mint a dzsúsz digitális citromból… 🍋</string>
     <string name="morphe_patcher_message_17">Az alkalmazás ösztönzése, hogy elfogadja az új, jobb énjét… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása kijavítatlanról kijavítottra… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Az alkalmazásodnak láza van, és az egyetlen orvosság a több javítás… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Hülyeség eltávolítása. Kérem, várjon… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Vissza a Morphe főoldalra</string>
     <string name="morphe_settings_return_to_morphe_description">Vissza az egyszerűsített módba</string>
@@ -179,7 +182,6 @@
     <string name="bundle_version_item_description_default">Alapértelmezett ajánlás használata</string>
     <string name="bundle_version_item_description_selected">Követés: %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Csomag ajánlás kiválasztása</string>
-    <string name="bundle_version_dialog_description">Válassza ki, hogy melyik csomag ajánlását használja az APK letöltésekor.</string>
     <string name="bundle_version_dialog_default">Alapértelmezett ajánlás használata</string>
     <string name="bundle_version_dialog_default_subtitle">Automatikus kiválasztás a leggyakoribb kompatibilis verzió alapján.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s verzió használata</string>
@@ -316,7 +318,6 @@ Engedélyezi így is?"</string>
     <string name="import_keystore">Kulcstároló importálása</string>
     <string name="import_keystore_description">Egyéni kulcstároló importálása</string>
     <string name="import_keystore_dialog_title">Kulcstároló hitelesítő adatainak megadása</string>
-    <string name="import_keystore_dialog_description">A kulcstartó importálásához meg kell adnia annak hitelesítő adatait.</string>
     <string name="import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="import_keystore_dialog_password_field">Jelszó</string>
     <string name="import_keystore_dialog_button">Importálás</string>
@@ -686,9 +687,6 @@ A patch-ek kapcsolgatása előtt engedélyeznie kell a „Patch kiválasztás é
     <string name="patcher_missing_patch_message">"A javítás azért hiúsult meg, mert a következő javítások nem találhatók az aktuális csomagban:
 %1$s
 Nyissa meg újra a kiválasztást, és válassza ki őket újra (vagy válasszon helyettesítőket), mielőtt újra próbálkozik."</string>
-    <string name="patcher_preflight_missing_patch_message">"A következő javítások nem érhetők el az aktuális csomagban:
-%1$s
-Ezeket automatikusan eltávolíthatja, módosíthatja a kiválasztást, vagy folytathatja a műveletet."</string>
     <string name="patcher_missing_patch_review">Kiválasztás áttekintése</string>
     <string name="patch_selector_missing_patch_title">Hiányzó javítások újbóli kiválasztása</string>
     <string name="patch_selector_missing_patch_message">"Ezeket a javításokat újra kell választani:

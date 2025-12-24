@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">繫好安全帶，該修補了</string>
     <string name="morphe_home_greeting_4">又一天，又一件廣告攔截傑作</string>
     <string name="morphe_home_greeting_5">想看廣告？我也不想</string>
-    <string name="morphe_home_greeting_6">讓我們讓您的應用程式乖乖聽話</string>
-    <string name="morphe_home_greeting_7">今日預報：100% 機率需要修補</string>
+    <string name="morphe_home_greeting_6">讓我們讓您的應用程式表現更好</string>
+    <string name="morphe_home_greeting_7">今日預報：機率 100% 要補丁</string>
     <string name="morphe_home_bundle_type_api">API 套件</string>
     <string name="morphe_home_update_error">更新失敗</string>
     <string name="morphe_home_update_error_subtitle">檢查您的網際網路連線，然後再試一次</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">顯示錯誤</string>
     <string name="morphe_patcher_error_copied">錯誤已複製到剪貼簿</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 個修補程式</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">此步驟可能需要一些時間。請稍候…</string>
     <string name="morphe_patcher_install_dialog_message">安裝已修補的應用程式？</string>
     <string name="morphe_patcher_install_conflict_message">偵測到套件衝突。若要安裝新版本，您必須先解除安裝應用程式的舊版本。</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">看看窗外，外面的天氣很好… 🌤️</string>
     <string name="morphe_patcher_message_7">正在調整 1 和 0… 🤖</string>
     <string name="morphe_patcher_message_8">正在解開雜亂的程式碼… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">正在修復未修補應用程式中的錯誤… 🐞</string>
     <string name="morphe_patcher_message_10">優質的修補值得等待… ⏳</string>
     <string name="morphe_patcher_message_11">正在打磨像素，直到它們閃閃發光… 💎</string>
     <string name="morphe_patcher_message_12">請保持坐姿，直到機長關閉「正在修補」指示燈… 💺✈️</string>
     <string name="morphe_patcher_message_13">正在烹製您的已修補應用程式，熱騰騰剛出爐… 🍳</string>
-    <string name="morphe_patcher_message_14">踏進修補門，並以一種非常奇特的方式漂浮… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">正在與位元碼禮貌地協商中… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">所有系統正常…修補軌跡穩定… 🚀</string>
     <string name="morphe_patcher_message_16">榨取額外的電力，就像從數位檸檬中榨取汁液一樣… 🍋</string>
     <string name="morphe_patcher_message_17">鼓勵應用程式接受其全新、更好的自我… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">將應用程式的疊加態從未修補變更為已修補… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">您的應用程式發燒了，唯一的處方是更多的修補程式… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">正在移除不必要的內容。請稍候… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">返回 Morphe 主頁</string>
     <string name="morphe_settings_return_to_morphe_description">返回簡化模式</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">使用預設建議</string>
     <string name="bundle_version_item_description_selected">遵循 %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">選擇套件建議</string>
-    <string name="bundle_version_dialog_description">下載 APK 時，選擇要使用的套件建議。</string>
+    <string name="bundle_version_dialog_description">選擇哪個存儲包的建議應該在下載APK時使用。</string>
     <string name="bundle_version_dialog_default">使用預設建議</string>
     <string name="bundle_version_dialog_default_subtitle">自動選取最常見的相容版本。</string>
     <string name="bundle_version_dialog_option_subtitle">使用版本 %1$s</string>
@@ -316,7 +321,7 @@
     <string name="import_keystore">匯入金鑰儲存庫</string>
     <string name="import_keystore_description">匯入自訂金鑰儲存庫</string>
     <string name="import_keystore_dialog_title">輸入金鑰儲存庫認證</string>
-    <string name="import_keystore_dialog_description">您需要輸入金鑰庫的憑證才能匯入。</string>
+    <string name="import_keystore_dialog_description">您需要輸入金鑰庫的憑據才能導入它。</string>
     <string name="import_keystore_dialog_alias_field">使用者名稱（別名）</string>
     <string name="import_keystore_dialog_password_field">密碼</string>
     <string name="import_keystore_dialog_button">匯入</string>
@@ -688,9 +693,9 @@
     <string name="patcher_missing_patch_message">"無法套用修補程式，因為在目前的套件中找不到下列修補程式：
 %1$s
 請重新開啟選取項目並重新選取它們（或選擇替代方案），然後再重試。"</string>
-    <string name="patcher_preflight_missing_patch_message">"下列修補程式在目前的套件中無法使用：
+    <string name="patcher_preflight_missing_patch_message">"目前捆綁中未包含以下補丁:
 %1$s
-您可以自動移除它們、調整選取項目，或繼續進行。"</string>
+您可以自動移除它們、調整選項，或繼續使用。"</string>
     <string name="patcher_missing_patch_review">檢閱選取項目</string>
     <string name="patch_selector_missing_patch_title">重新選取遺失的修補程式</string>
     <string name="patch_selector_missing_patch_message">"需要重新選取這些修補程式：

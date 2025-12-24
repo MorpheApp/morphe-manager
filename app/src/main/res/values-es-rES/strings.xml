@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
     <string name="morphe_home_greeting_4">Un día más, una obra maestra más sin anuncios</string>
     <string name="morphe_home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
-    <string name="morphe_home_greeting_6">Hagamos que tus aplicaciones se comporten</string>
-    <string name="morphe_home_greeting_7">Pronóstico de hoy: 100% de probabilidad de parcheo</string>
+    <string name="morphe_home_greeting_6">¡Vamos a hacer que tus aplicaciones comporten mejor</string>
+    <string name="morphe_home_greeting_7">Hoy hay una probabilidad del 100% de que pique</string>
     <string name="morphe_home_bundle_type_api">Paquete de API</string>
     <string name="morphe_home_update_error">Actualización fallida</string>
     <string name="morphe_home_update_error_subtitle">Comprueba tu conexión a internet e inténtalo de nuevo</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Mostrar error</string>
     <string name="morphe_patcher_error_copied">Error copiado al portapapeles</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d parches</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
     <string name="morphe_patcher_install_dialog_message">¿Instalar la aplicación parcheada?</string>
     <string name="morphe_patcher_install_conflict_message">Se ha detectado un conflicto de paquetes. Para instalar la nueva versión, primero debe desinstalar la versión anterior de la aplicación.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Mira afuera, hace buen tiempo… 🌤️</string>
     <string name="morphe_patcher_message_7">Ajustando 1s y 0s… 🤖</string>
     <string name="morphe_patcher_message_8">Deshaciendo el espagueti digital… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Corrigiendo errores en la aplicación sin parches… 🐞</string>
     <string name="morphe_patcher_message_10">Los buenos parches valen la pena esperar… ⏳</string>
     <string name="morphe_patcher_message_11">Pulir píxeles hasta que brillen… 💎</string>
     <string name="morphe_patcher_message_12">Por favor, permanezca sentado hasta que el capitán apague el letrero de \“Parcheando en progreso\” … 💺✈️</string>
     <string name="morphe_patcher_message_13">Cocinando tu aplicación parcheada, caliente y fresca… 🍳</string>
-    <string name="morphe_patcher_message_14">Entrando en la puerta de parcheo y flotando de una manera muy peculiar… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Negociando de forma educada con el código de la aplicación… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Todos los sistemas nominales… la trayectoria de parcheo es estable… 🚀</string>
     <string name="morphe_patcher_message_16">Exprimiendo potencia extra, como jugo de un limón digital… 🍋</string>
     <string name="morphe_patcher_message_17">Animando a la aplicación a aceptar su nuevo y mejor yo… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Cambiando la superposición de la aplicación de sin parchear a parcheada… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Tu aplicación tiene fiebre y la única receta son más parches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Volver a Morphe Inicio</string>
     <string name="morphe_settings_return_to_morphe_description">Volver al modo simplificado</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Usando la recomendación predeterminada</string>
     <string name="bundle_version_item_description_selected">Siguiendo %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Elegir recomendación de paquete</string>
-    <string name="bundle_version_dialog_description">Elige qué sugerencia de paquete se utilizará al descargar un APK.</string>
+    <string name="bundle_version_dialog_description">Elige qué bundle sugerido debes utilizar cuando descargues una APK.</string>
     <string name="bundle_version_dialog_default">Usar recomendación predeterminada</string>
     <string name="bundle_version_dialog_default_subtitle">Selecciona automáticamente la versión compatible más común.</string>
     <string name="bundle_version_dialog_option_subtitle">Usar versión %1$s</string>
@@ -314,7 +319,7 @@
     <string name="import_keystore">Importar keystore</string>
     <string name="import_keystore_description">Importar un keystore personalizado</string>
     <string name="import_keystore_dialog_title">Introducir credenciales del keystore</string>
-    <string name="import_keystore_dialog_description">Deberás introducir las credenciales del almacén de claves para importarlo.</string>
+    <string name="import_keystore_dialog_description">Necesitarás ingresar las credenciales del almacén para importarlo.</string>
     <string name="import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
     <string name="import_keystore_dialog_password_field">Contraseña</string>
     <string name="import_keystore_dialog_button">Importar</string>
@@ -688,7 +693,7 @@ Versión entrante: %2$s
 Vuelva a abrir la selección y vuelva a seleccionarlos (o elija reemplazos) antes de reintentar."</string>
     <string name="patcher_preflight_missing_patch_message">"Los siguientes parches no están disponibles en el paquete actual:
 %1$s
-Puedes eliminarlos automáticamente, ajustar la selección o continuar de todos modos."</string>
+Puedes eliminarlos automáticamente, ajustar la selección, o continuar de todos modos."</string>
     <string name="patcher_missing_patch_review">Revisar selección</string>
     <string name="patch_selector_missing_patch_title">Re-seleccionar parches faltantes</string>
     <string name="patch_selector_missing_patch_message">"Estos parches deben ser re-seleccionados:

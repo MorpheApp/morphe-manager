@@ -8,7 +8,7 @@
     <string name="morphe_home_greeting_4">Ännu en dag, ännu ett reklamfritt mästerverk</string>
     <string name="morphe_home_greeting_5">Vill du titta på annonser? Inte jag heller</string>
     <string name="morphe_home_greeting_6">Låt oss få dina appar att bete sig</string>
-    <string name="morphe_home_greeting_7">Dagens prognos: 100 % chans till patchning</string>
+    <string name="morphe_home_greeting_7">Idagens förutsägelse: 100% chans på patchering.</string>
     <string name="morphe_home_bundle_type_api">API-paket</string>
     <string name="morphe_home_update_error">Uppdateringen misslyckades</string>
     <string name="morphe_home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Visa fel</string>
     <string name="morphe_patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchar</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">Det här steget kan ta en stund. Vänligen vänta...</string>
     <string name="morphe_patcher_install_dialog_message">Installera anpassad app?</string>
     <string name="morphe_patcher_install_conflict_message">En paketkonflikt har upptäckts. För att installera den nya versionen måste du först avinstallera den tidigare versionen av appen.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Titta ut, det är fint där ute… 🌤️</string>
     <string name="morphe_patcher_message_7">Justerar 1:or och 0:or… 🤖</string>
     <string name="morphe_patcher_message_8">Redar ut digital spaghetti… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Fixar buggar i den opatchade appen… 🐞</string>
     <string name="morphe_patcher_message_10">Bra patchar är värda att vänta på… ⏳</string>
     <string name="morphe_patcher_message_11">Polerar pixlar tills de glänser… 💎</string>
     <string name="morphe_patcher_message_12">Vänligen sitt kvar tills kaptenen släcker skylten \"Patchning pågår\"… 💺✈️</string>
     <string name="morphe_patcher_message_13">Tillagar din patchade app, varm och färsk… 🍳</string>
-    <string name="morphe_patcher_message_14">Kliver genom patchningsdörren, och flyter på ett mycket märkligt sätt… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Förhandlar artigt med bytekod… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Alla system nominella… patchningsbanan är stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Pressar ut extra kraft, som juice från en digital citron… 🍋</string>
     <string name="morphe_patcher_message_17">Uppmuntra appen att acceptera sitt nya, bättre jag… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Ändrar appens superposition från opatchad till patchad… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Din app har feber, och den enda medicinen är fler patchar… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Tar bort nonsens. Vänligen vänta… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Återgå till Morphe-hem</string>
     <string name="morphe_settings_return_to_morphe_description">Återgå till förenklat läge</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Använder standardrekommendation</string>
     <string name="bundle_version_item_description_selected">Följer %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">Välj paketrekommendation</string>
-    <string name="bundle_version_dialog_description">Välj vilken paketrekommendation som ska användas vid nedladdning av en APK.</string>
+    <string name="bundle_version_dialog_description">Välj vilken buntens förslag som ska användas när du laddar ner en APK.</string>
     <string name="bundle_version_dialog_default">Använd standardrekommendation</string>
     <string name="bundle_version_dialog_default_subtitle">Välj automatiskt den vanligaste kompatibla versionen.</string>
     <string name="bundle_version_dialog_option_subtitle">Använd version %1$s</string>
@@ -316,7 +321,7 @@ Aktivera ändå?"</string>
     <string name="import_keystore">Importera nyckelarkiv</string>
     <string name="import_keystore_description">Importera ett anpassat nyckelarkiv</string>
     <string name="import_keystore_dialog_title">Ange nyckelarkivuppgifter</string>
-    <string name="import_keystore_dialog_description">Du behöver ange lagringsplatsens autentiseringsuppgifter för att importera den.</string>
+    <string name="import_keystore_dialog_description">Du kommer att behöva mata in keystorens autentikation för att importera den.</string>
     <string name="import_keystore_dialog_alias_field">Användarnamn (alias)</string>
     <string name="import_keystore_dialog_password_field">Lösenord</string>
     <string name="import_keystore_dialog_button">Importera</string>
@@ -686,9 +691,9 @@ Du måste aktivera \"Tillåt ändring av urval av korrigeringar och alternativ\"
     <string name="patcher_missing_patch_message">"Patchning misslyckades eftersom följande patchar inte hittades i den aktuella bundlen:
 %1$s
 Öppna valet igen och välj dem (eller välj ersättningar) innan du försöker igen."</string>
-    <string name="patcher_preflight_missing_patch_message">"Följande patchar är inte tillgängliga i det aktuella paketet:
+    <string name="patcher_preflight_missing_patch_message">"Följande patchar är inte tillgängliga i den aktuella buntens innehåll:
 %1$s
-Du kan ta bort dem automatiskt, justera urvalet eller fortsätta ändå."</string>
+Du kan ta bort dem automatiskt, ändra urvalet, eller fortsätta ändå."</string>
     <string name="patcher_missing_patch_review">Granska urval</string>
     <string name="patch_selector_missing_patch_title">Välj om patchar som saknas</string>
     <string name="patch_selector_missing_patch_message">"Dessa patchar behöver väljas om:

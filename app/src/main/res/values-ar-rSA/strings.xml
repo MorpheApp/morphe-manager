@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">شد حزامك، حان وقت التصحيح</string>
     <string name="morphe_home_greeting_4">يوم آخر، تحفة فنية أخرى تم حظر إعلاناتها</string>
     <string name="morphe_home_greeting_5">هل تريد مشاهدة الإعلانات؟ أنا أيضًا لا أريد</string>
-    <string name="morphe_home_greeting_6">دعنا نجعل تطبيقاتك تتصرف</string>
-    <string name="morphe_home_greeting_7">توقعات اليوم: فرصة 100% للتصحيح</string>
+    <string name="morphe_home_greeting_6">الآن نجعل تطبيقاتك تتصرف</string>
+    <string name="morphe_home_greeting_7">كسر الصيف: 100% فرصة للصرف</string>
     <string name="morphe_home_bundle_type_api">حزمة API</string>
     <string name="morphe_home_update_error">فشل التحديث</string>
     <string name="morphe_home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">إظهار الخطأ</string>
     <string name="morphe_patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d ترقيعات</string>
-    <string name="morphe_patcher_percentage">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="morphe_patcher_install_dialog_message">تثبيت التطبيق المرقّع؟</string>
     <string name="morphe_patcher_install_conflict_message">تم اكتشاف تعارض في الحزم. لتثبيت الإصدار الجديد، يجب عليك أولاً إلغاء تثبيت الإصدار السابق من التطبيق.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">انظر إلى الخارج، الجو جميل… 🌤️</string>
     <string name="morphe_patcher_message_7">جاري تعديل 1 و 0… 🤖</string>
     <string name="morphe_patcher_message_8">فك تشابك السباغيتي الرقمية… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">إصلاح الأخطاء في التطبيق غير المرقع… 🐞</string>
     <string name="morphe_patcher_message_10">الترقيعات الرائعة تستحق الانتظار… ⏳</string>
     <string name="morphe_patcher_message_11">تلميع وحدات البكسل حتى تلمع… 💎</string>
     <string name="morphe_patcher_message_12">يُرجى البقاء جالسين حتى يُطفئ القبطان لافتة \"جاري الترقيع\"… 💺✈️</string>
     <string name="morphe_patcher_message_13">جاري طبخ تطبيقك المرقع، ساخن وطازج… 🍳</string>
-    <string name="morphe_patcher_message_14">بالدخول عبر باب الترقيع، والطفو بطريقة غريبة للغاية… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">نتفاوض بأدب مع شيفرة بايت… 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">جميع الأنظمة اسمية… مسار الترقيع مستقر… 🚀</string>
     <string name="morphe_patcher_message_16">استخلاص طاقة إضافية، مثل العصير من ليمونة رقمية… 🍋</string>
     <string name="morphe_patcher_message_17">تشجيع التطبيق على قبول ذاته الجديدة والأفضل… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">تغيير تراكب التطبيق من غير مرقع إلى مرقع… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">تطبيقك يعاني من الحمى، والحل الوحيد هو المزيد من الرقع… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">العودة إلى الشاشة الرئيسية لـ Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">العودة إلى الوضع المبسط</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">استخدام التوصية الافتراضية</string>
     <string name="bundle_version_item_description_selected">متابعة %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">اختر توصية الحزمة</string>
-    <string name="bundle_version_dialog_description">اختر توصية الحزمة التي يجب استخدامها عند تنزيل ملف APK.</string>
+    <string name="bundle_version_dialog_description">اختر نوع الحزمة المطلوب استخدامه عند تحميل APK.</string>
     <string name="bundle_version_dialog_default">استخدام التوصية الافتراضية</string>
     <string name="bundle_version_dialog_default_subtitle">اختر تلقائيًا الإصدار الأكثر شيوعًا المتوافق.</string>
     <string name="bundle_version_dialog_option_subtitle">استخدام الإصدار %1$s</string>
@@ -316,7 +321,7 @@
     <string name="import_keystore">استيراد مخزن المفاتيح</string>
     <string name="import_keystore_description">استيراد مخزن مفاتيح مخصص</string>
     <string name="import_keystore_dialog_title">أدخل بيانات اعتماد مخزن المفاتيح</string>
-    <string name="import_keystore_dialog_description">ستحتاج إلى إدخال بيانات اعتماد مخزن المفاتيح لاستيراده.</string>
+    <string name="import_keystore_dialog_description">سوف تحتاج إلى إدخال بيانات اعتماد مخزن المفاتيح لاستيراده.</string>
     <string name="import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
     <string name="import_keystore_dialog_password_field">كلمة المرور</string>
     <string name="import_keystore_dialog_button">استيراد</string>
@@ -686,9 +691,9 @@
     <string name="patcher_missing_patch_message">"فشل التصحيح لأن التصحيحات التالية لم يتم العثور عليها في الحزمة الحالية:
 %1$s
 أعد فتح التحديد وأعد تحديدها (أو اختر بدائل) قبل إعادة المحاولة."</string>
-    <string name="patcher_preflight_missing_patch_message">"الترقيعات التالية غير متاحة في الحزمة الحالية:
+    <string name="patcher_preflight_missing_patch_message">"ليست المرقعات التالية متاحة في الحزمة الحالية:
 %1$s
-يمكنك إزالتها تلقائيًا، أو تعديل التحديد، أو المتابعة على أي حال."</string>
+يمكنك إزالتها تلقائيًا، أو ضبط الاختيار، أو المتابعة على أي حال."</string>
     <string name="patcher_missing_patch_review">مراجعة التحديد</string>
     <string name="patch_selector_missing_patch_title">إعادة تحديد الترقيعات المفقودة</string>
     <string name="patch_selector_missing_patch_message">"تحتاج هذه الترقيعات إلى إعادة تحديد:

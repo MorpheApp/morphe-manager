@@ -7,8 +7,8 @@
     <string name="morphe_home_greeting_3">Kemerlerinizi bağlayın, yamalama zamanı</string>
     <string name="morphe_home_greeting_4">Bugün de engellenmiş bir reklam başyapıtı</string>
     <string name="morphe_home_greeting_5">Reklam izlemek ister misin? Ben de istemem</string>
-    <string name="morphe_home_greeting_6">Uygulamalarının uslu durmasını sağlayalım</string>
-    <string name="morphe_home_greeting_7">Bugünkü tahmin: %100 yama olasılığı</string>
+    <string name="morphe_home_greeting_6">Uygulamalarınızın davranış şeklini ayarlayalım</string>
+    <string name="morphe_home_greeting_7">Bugünün tahmini: yama yapma ihtimali yüzde 100</string>
     <string name="morphe_home_bundle_type_api">API Paketi</string>
     <string name="morphe_home_update_error">Güncelleme başarısız</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
@@ -62,7 +62,6 @@
     <string name="morphe_patcher_show_error">Hatayı Göster</string>
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d yama</string>
-    <string name="morphe_patcher_percentage">%1$d%</string>
     <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
     <string name="morphe_patcher_install_dialog_message">Yamalı uygulamayı yükle mi?</string>
     <string name="morphe_patcher_install_conflict_message">Paket çakışması tespit edildi. Yeni sürümü yüklemek için önce uygulamanın önceki sürümünü kaldırmanız gerekir.</string>
@@ -100,17 +99,23 @@
     <string name="morphe_patcher_message_6">Dışarıya bakın, hava güzel… 🌤️</string>
     <string name="morphe_patcher_message_7">1\'leri ve 0\'ları ayarlıyoruz… 🤖</string>
     <string name="morphe_patcher_message_8">Dijital spagettiyi çözüyoruz… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Yamalanmamış uygulamadaki hataları düzeltiyoruz… 🐞</string>
     <string name="morphe_patcher_message_10">Harika yamalar beklemeye değer… ⏳</string>
     <string name="morphe_patcher_message_11">Pikselleri parlayana kadar parlatıyoruz… 💎</string>
     <string name="morphe_patcher_message_12">Lütfen kaptan \“Yama yükleniyor\” işaretini kapatana kadar oturmaya devam edin… 💺✈️</string>
     <string name="morphe_patcher_message_13">Yama yapılan uygulamanız pişiyor, sıcak ve taze… 🍳</string>
-    <string name="morphe_patcher_message_14">Yama kapısından adım atılıyor ve çok tuhaf bir şekilde süzülüyor… 🚪👨‍🚀</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Soğuk bir şekilde.bytecode ... 🤝</string>
+    <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Tüm sistemler normal… yama yörüngesi stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Dijital bir limondan suyu sıkmak gibi ekstra güç sıkılıyor… 🍋</string>
     <string name="morphe_patcher_message_17">Uygulamayı yeni, daha iyi benliğini kabul etmeye teşvik ediliyor… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Uygulama süperpozisyonu yamalıdan yamalanmamışa değiştiriliyor… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
     <string name="morphe_patcher_message_19">Uygulamanızın ateşi var ve tek reçete daha fazla yama… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Saçmalıklar kaldırılıyor. Lütfen bekleyin… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morphe ana sayfasına dön</string>
     <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
@@ -179,7 +184,7 @@
     <string name="bundle_version_item_description_default">Varsayılan öneriyi kullanma</string>
     <string name="bundle_version_item_description_selected">%1$s (%2$s) takip ediliyor</string>
     <string name="bundle_version_dialog_title">Paket önerisi seçin</string>
-    <string name="bundle_version_dialog_description">Bir APK indirilirken hangi paketin önerisinin kullanılacağını seçin.</string>
+    <string name="bundle_version_dialog_description">APK\'yi indirirken kullanılacak paket önerisini seçin</string>
     <string name="bundle_version_dialog_default">Varsayılan öneriyi kullan</string>
     <string name="bundle_version_dialog_default_subtitle">En yaygın uyumlu sürümü otomatik olarak seçin.</string>
     <string name="bundle_version_dialog_option_subtitle">%1$s sürümünü kullan</string>
@@ -314,7 +319,7 @@ Yine de etkinleştirmek ister misiniz?"</string>
     <string name="import_keystore">Anahtar deposunu içeri aktar</string>
     <string name="import_keystore_description">Özel bir anahtar deposu içeri aktarın</string>
     <string name="import_keystore_dialog_title">Anahtar deposu kimlik bilgilerini girin</string>
-    <string name="import_keystore_dialog_description">İçe aktarmak için anahtar deposunun kimlik bilgilerini girmeniz gerekecek.</string>
+    <string name="import_keystore_dialog_description">Keystore\'un girdilerini içe aktarmak için girdi gerekli.</string>
     <string name="import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
     <string name="import_keystore_dialog_password_field">Parola</string>
     <string name="import_keystore_dialog_button">İçeri Aktar</string>
@@ -684,9 +689,9 @@ Yamaları değiştirmeden önce gelişmiş ayarlarda \"Yamalama seçimi ve seçe
     <string name="patcher_missing_patch_message">"Aşağıdaki yamalar geçerli pakette bulunamadığı için yama başarısız oldu:
 %1$s
 Yeniden denemeden önce seçimi yeniden açın ve onları yeniden seçin (veya değiştirmeleri seçin)."</string>
-    <string name="patcher_preflight_missing_patch_message">"Aşağıdaki yamalar geçerli pakette mevcut değil:
+    <string name="patcher_preflight_missing_patch_message">"Şu anki pakette bulunmayan patch'ler aşağıdaki gibidir:
 %1$s
-Bunları otomatik olarak kaldırabilir, seçimi ayarlayabilir veya yine de devam edebilirsiniz."</string>
+Bu patch'leri otomatik olarak kaldırabilir, seçimi düzenleyebilir veya devam edebilirsiniz."</string>
     <string name="patcher_missing_patch_review">Seçimi gözden geçir</string>
     <string name="patch_selector_missing_patch_title">Eksik yamaları yeniden seçin</string>
     <string name="patch_selector_missing_patch_message">"Bu yamaların yeniden seçilmesi gerekiyor:
