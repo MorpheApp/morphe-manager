@@ -23,6 +23,7 @@ import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
 import app.morphe.manager.R
+import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import kotlinx.coroutines.NonCancellable
@@ -161,5 +162,17 @@ class DashboardViewModel(
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
+    }
+
+    suspend fun updateMorpheBundleWithChangelogClear() {
+        patchBundleRepository.updateOnlyMorpheBundleWithResult(
+            showProgress = true,
+            showToast = false
+        )
+
+        // Clear changelog cache
+        val sources = patchBundleRepository.sources.first()
+        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
+        apiBundle?.clearChangelogCache()
     }
 }

@@ -30,12 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.PreReleaseChangedModel
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.*
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
@@ -43,6 +44,7 @@ import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 /**
  * MorpheSettingsScreen - Simplified settings interface
@@ -54,16 +56,17 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
-    preReleaseChangedModel: PreReleaseChangedModel,
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
-    importExportViewModel: ImportExportViewModel = koinViewModel()
+    importExportViewModel: ImportExportViewModel = koinViewModel(),
+    dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val prefs: PreferencesManager = koinInject()
     val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
@@ -217,7 +220,10 @@ fun MorpheSettingsScreen(
                         UpdatesSection(
                             usePrereleases = usePrereleases,
                             onPreReleaseChanged = { newValue ->
-                                preReleaseChangedModel.preReleaseChanged(newValue)
+                                coroutineScope.launch {
+                                    prefs.usePatchesPrereleases.update(newValue)
+                                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                                }
                             }
                         )
                     }
@@ -279,7 +285,10 @@ fun MorpheSettingsScreen(
                     UpdatesSection(
                         usePrereleases = usePrereleases,
                         onPreReleaseChanged = { newValue ->
-                            preReleaseChangedModel.preReleaseChanged(newValue)
+                            coroutineScope.launch {
+                                prefs.usePatchesPrereleases.update(newValue)
+                                dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                            }
                         }
                     )
 

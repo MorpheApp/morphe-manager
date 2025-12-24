@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.revanced.manager.PreReleaseChangedModel
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
@@ -62,7 +61,6 @@ fun MorpheHomeScreen(
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    preReleaseChangedModel: PreReleaseChangedModel,
     generalViewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -99,24 +97,13 @@ fun MorpheHomeScreen(
         bundleUpdateInProgress = true
         homeState.isRefreshingBundle = true
         try {
-            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundleWithResult(
-                showProgress = true,
-                showToast = false
-            )
-
-            // Also clear changelog cache after bundle update
-            (homeState.apiBundle as? RemotePatchBundle)?.clearChangelogCache()
+            dashboardViewModel.updateMorpheBundleWithChangelogClear()
         } finally {
             delay(500)
             bundleUpdateInProgress = false
             homeState.isRefreshingBundle = false
             homeState.updateBundleData(sources, bundleInfo)
         }
-    }
-
-    preReleaseChangedModel.setEventHandler { usePreRelease ->
-        prefs.usePatchesPrereleases.update(usePreRelease)
-        updateMorpheBundleAndUI()
     }
 
     // Show manager update available dialog
