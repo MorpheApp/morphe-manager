@@ -1,3 +1,25 @@
+# app [1.0.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2025-12-24)
+
+
+### Bug Fixes
+
+* Allow all files as .mpp files are not available in file picker ([80ad1ec](https://github.com/MorpheApp/morphe-manager/commit/80ad1ec22b4ad42879267eb3f18d0e0caaffe248))
+* Remove blinking when opening dialog, use gradient instead of blur (works on A12+ but not well) ([b851913](https://github.com/MorpheApp/morphe-manager/commit/b85191354175f0690800854993a97f612696860f))
+* Show "Patches are loading" on fresh install ([170d17f](https://github.com/MorpheApp/morphe-manager/commit/170d17f91b0cbf35c14fcfd388376083fc60eecb))
+* Update changelog after bundle update ([ed9c173](https://github.com/MorpheApp/morphe-manager/commit/ed9c1730305161693bab124af9ea41e791ed1332))
+* Use the appropriate string ([7661989](https://github.com/MorpheApp/morphe-manager/commit/7661989b0fd0b9096c1330dfbed45afb78b3901d))
+
+
+### Features
+
+* Add haptic feedback to About setting item ([d3f8e33](https://github.com/MorpheApp/morphe-manager/commit/d3f8e3341e8d74a4be184b476b198fd1cc7f0728))
+* Add link to the Crowdin ([b0b94cb](https://github.com/MorpheApp/morphe-manager/commit/b0b94cb23e62deda3bfc6bfcd316cc191e839108))
+* Add more haptic feedback ([967f9ca](https://github.com/MorpheApp/morphe-manager/commit/967f9ca7ef8bbd2471a0ee4633f3d96f52146afd))
+* Change buttons priority ([85fdd86](https://github.com/MorpheApp/morphe-manager/commit/85fdd8680d2fe0a85dfc01ed5b7d123055614325))
+* Change Particles background to Space ([9575446](https://github.com/MorpheApp/morphe-manager/commit/95754462b8b0086752ff1858a3fe254c53b4a185))
+* UI & UX Improvements ([#17](https://github.com/MorpheApp/morphe-manager/issues/17)) ([9e72b08](https://github.com/MorpheApp/morphe-manager/commit/9e72b0853d1a2fadd92fca7239668d1b33e904a6))
+* Use fullscreen dialog for manager update ([91bb4d1](https://github.com/MorpheApp/morphe-manager/commit/91bb4d18e7338a0f313d397eaaa05eafa7df298f))
+
 # app [1.0.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2025-12-15)
 
 
