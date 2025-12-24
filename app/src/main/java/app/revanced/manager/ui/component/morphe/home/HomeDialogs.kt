@@ -326,11 +326,13 @@ private fun DownloadInstructionsDialog(
                 InstructionStep(
                     number = "3",
                     text = htmlAnnotatedString(
-                        if (usingMountInstall) {
-                            R.string.morphe_home_download_instructions_step3_mount
-                        } else {
-                            R.string.morphe_home_download_instructions_step3
-                        }
+                        stringResource(
+                            if (usingMountInstall) {
+                                R.string.morphe_home_download_instructions_step3_mount
+                            } else {
+                                R.string.morphe_home_download_instructions_step3
+                            }
+                        )
                     ),
                     textColor = textColor,
                     secondaryColor = secondaryColor
