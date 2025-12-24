@@ -28,24 +28,21 @@
     <string name="morphe_home_timeline">Update History</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched)</string>
     <string name="morphe_home_apk_availability_yes">Yes, I have it</string>
     <string name="morphe_home_apk_availability_no">No, help me find it</string>
-    <string name="morphe_home_apk_availability_dialog_description">To patch %1$s, you need version %2$s (unpatched).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Make sure you download the APK but DO NOT install it.</string>
+    <string name="morphe_home_apk_availability_dialog_description">To patch %1$s, you need version %2$s (unpatched)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Download original APK from APKMirror</string>
-    <string name="morphe_home_download_instructions_description">Follow these steps to download %1$s version %2$s from APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">Download the original APK</string>
     <string name="morphe_home_download_instructions_steps_title">Instructions:</string>
-    <string name="morphe_home_download_instructions_step1">Press Continue to open APKMirror.com website</string>
+    <string name="morphe_home_download_instructions_step1">Press the \'Continue to APKMirror.com\' button below</string>
     <string name="morphe_home_download_instructions_step2_part1">Scroll down the webpage and press</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Click download on the website, and not here 😊</string>
-    <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and do not install the APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Wait for the download to complete, and install the APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
+    <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and &lt;b>do not install&lt;/b> the APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Wait for the download to complete, then &lt;b>install the APK&lt;/b></string>
     <string name="morphe_home_download_instructions_step4">After the download finishes, open this app again</string>
     <string name="morphe_home_download_instructions_step4_mount">After installing the original APK, open this app again</string>
-    <string name="morphe_home_download_instructions_note">Important: Download the APK but do not install it on your device.</string>
-    <string name="morphe_home_download_instructions_continue">Continue to APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Continue to APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Select the APK you downloaded</string>
     <string name="morphe_home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded.</string>

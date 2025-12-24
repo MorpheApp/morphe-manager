@@ -9,7 +9,6 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,6 +31,7 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -259,18 +260,6 @@ private fun DownloadInstructionsDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            Text(
-                text = stringResource(
-                    R.string.morphe_home_download_instructions_description,
-                    appName,
-                    recommendedVersion ?: stringResource(R.string.any_version)
-                ),
-                style = MaterialTheme.typography.bodyLarge,
-                color = secondaryColor,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-
             // Steps
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -336,9 +325,14 @@ private fun DownloadInstructionsDialog(
                 // Step 3
                 InstructionStep(
                     number = "3",
-                    text = stringResource(
-                        if (usingMountInstall) R.string.morphe_home_download_instructions_step3_mount
-                        else R.string.morphe_home_download_instructions_step3
+                    text = htmlAnnotatedString(
+                        stringResource(
+                            if (usingMountInstall) {
+                                R.string.morphe_home_download_instructions_step3_mount
+                            } else {
+                                R.string.morphe_home_download_instructions_step3
+                            }
+                        )
                     ),
                     textColor = textColor,
                     secondaryColor = secondaryColor
@@ -355,27 +349,6 @@ private fun DownloadInstructionsDialog(
                     secondaryColor = secondaryColor
                 )
             }
-
-            // Important note for non-mount install
-            if (!usingMountInstall) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.Top
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = null,
-                        tint = secondaryColor,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.morphe_home_download_instructions_note),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = secondaryColor
-                    )
-                }
-            }
         }
     }
 }
@@ -387,7 +360,7 @@ private fun DownloadInstructionsDialog(
 @Composable
 private fun InstructionStep(
     number: String,
-    text: String,
+    text: AnnotatedString,
     textColor: Color,
     secondaryColor: Color
 ) {
@@ -409,6 +382,22 @@ private fun InstructionStep(
         )
     }
 }
+
+@Composable
+private fun InstructionStep(
+    number: String,
+    text: String,
+    textColor: Color,
+    secondaryColor: Color
+) {
+    InstructionStep(
+        number = number,
+        text = AnnotatedString(text),
+        textColor = textColor,
+        secondaryColor = secondaryColor
+    )
+}
+
 
 /**
  * Dialog 3: File picker prompt dialog
