@@ -23,7 +23,6 @@
     <string name="morphe_home_date_added">Added</string>
     <string name="morphe_home_date_updated">Updated</string>
     <string name="morphe_home_check_updates">Check</string>
-    <string name="morphe_home_bundle_update_completed">Update Completed</string>
     <string name="morphe_home_unknown">Unknown</string>
     <string name="morphe_home_timeline">Update History</string>
     <!-- Dialog 1: APK Availability -->
@@ -50,8 +49,6 @@
     <string name="morphe_home_file_picker_prompt_title">Select the APK you downloaded</string>
     <string name="morphe_home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded.</string>
     <string name="morphe_home_file_picker_prompt_open">Open APK file I downloaded</string>
-    <string name="morphe_home_wrong_package_selected">Expected package %1$s but got %2$s</string>
-    <string name="morphe_home_any_version">any version</string>
     <string name="morphe_home_recommended_version">Recommended Version</string>
     <string name="morphe_patcher_selected_version">Selected Version</string>
 
@@ -67,11 +64,6 @@
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_percentage" translatable="false">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">This step may take a while. Please wait…</string>
-    <string name="morphe_patcher_install_dialog_message">Install patched app?</string>
-    <string name="morphe_patcher_install_conflict_message">A package conflict has been detected. To install the new version, you must first uninstall the previous version of the app.</string>
-    <string name="morphe_patcher_install_ready_message">The previous version has been uninstalled. You can now install the patched app.</string>
-    <string name="morphe_patcher_install_cancelled_title">Installation canceled</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Click the install button to try again</string>
     <string name="morphe_patcher_installing">Installing…</string>
     <string name="morphe_patcher_installing_subtitle">Almost ready to rock! 🎸</string>
     <string name="morphe_patcher_success_title">All Done! 🎉</string>
@@ -164,7 +156,6 @@
     <string name="toast_copied_to_clipboard">Copied!</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
 
-    <string name="dashboard">Dashboard</string>
     <string name="settings">Settings</string>
     <string name="select_app">Select an app</string>
 
@@ -172,7 +163,6 @@
     <string name="unsupported_architecture_warning">Patching on this device architecture is unsupported and will most likely fail.</string>
 
     <string name="import_">Import</string>
-    <string name="import_patches">Import patches</string>
     <string name="file_field_set">Selected</string>
     <string name="file_field_not_set">Not selected</string>
 
@@ -208,13 +198,9 @@
     <string name="bundle_version_dialog_description">Pick which bundle\'s suggestion should be used when downloading an APK.</string>
     <string name="bundle_version_dialog_default">Use default recommendation</string>
     <string name="bundle_version_dialog_default_subtitle">Automatically pick the most common compatible version.</string>
-    <string name="bundle_version_dialog_option_subtitle">Use version %1$s</string>
     <string name="version_label" translatable="false">v%1$s</string>
-    <string name="bundle_version_line" translatable="false">%1$s: %2$s</string>
     <string name="bundle_version_all_versions">All versions</string>
     <string name="bundle_version_no_version">No suggested version</string>
-    <string name="bundle_version_suggested_label">Suggested version: %1$s</string>
-    <string name="bundle_version_other_heading">Other supported versions</string>
     <string name="bundle_update_manual_available">Update available</string>
     <string name="bundle_update_manual_available_with_version">Update available: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d bundles processed</string>
@@ -222,8 +208,6 @@
     <string name="bundle_reorder">Organize bundles</string>
     <string name="bundle_reorder_title">Organize patch bundles</string>
     <string name="bundle_reorder_description">Drag the handle to arrange the order bundles appear in the list and the patch selection menu.</string>
-    <string name="bundle_reorder_move_up">Move bundle up</string>
-    <string name="bundle_reorder_move_down">Move bundle down</string>
     <string name="bundle_actions_expand">Show bundle actions</string>
     <string name="bundle_actions_collapse">Hide bundle actions</string>
     <string name="patch_bundle_duplicate_name_error">A patch bundle with this name already exists</string>
@@ -244,12 +228,10 @@
     <string name="bundle_version_dialog_recommended">Suggested version: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Selected version: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Selected</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (selected)</string>
     <string name="bundle_version_dialog_other_title">Select another supported version:</string>
     <string name="bundle_version_dialog_locked_title">Version safeguards are enabled</string>
     <string name="bundle_version_dialog_locked_hint">Go to Settings &gt; Advanced &gt; Safeguards and set both \"Require suggested app version\" (toggle off) and \"Disable version compatibility check\" (toggle on) to choose bundle-specific versions.</string>
 
-    <string name="patch_item_description">Start patching the application</string>
     <string name="patch_selector_item">Select patches</string>
     <string name="patch_selector_item_description">%d patches selected</string>
     <string name="no_patches_selected">No patches selected</string>
@@ -263,9 +245,6 @@
     <string name="apk_source_installed">Using installed APK</string>
     <string name="apk_source_local">Using a local APK file</string>
     <string name="apk_source_downloaded">Using downloaded APK</string>
-    <string name="suggested_version_bundle_info" translatable="false">%1$s · v%2$s</string>
-
-    <string name="legacy_import_failed">Could not import legacy settings</string>
 
     <string name="auto_updates_dialog_title">Configure updates</string>
     <string name="auto_updates_dialog_description">Do you want Morphe to periodically check for updates for the following components?</string>
@@ -278,7 +257,6 @@
     <string name="updates">Updates</string>
     <string name="updates_description">Check for updates and view changelog</string>
     <string name="downloads">Downloads</string>
-    <string name="downloads_description">Downloader plugins and downloaded apps</string>
     <string name="plugins_help_title">What is a downloader?</string>
     <string name="plugins_help_description">A downloader is a plugin which allows URV to download stock APKs from various sources. The downloaded APKs will be shown in the bottom section. During the patching process, you can choose an already downloaded APKs or you can download it via a plugin.\n\nThe list of supported downloader plugins can be found</string>
     <string name="import_export">Import &amp; export</string>
@@ -287,7 +265,6 @@
     <string name="changelog_loading">Loading changelog</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
-    <string name="no_changelogs_found">No changelogs found</string>
     <string name="advanced">Advanced</string>
     <string name="advanced_description">API URL, memory limit, debugging</string>
     <string name="about">About</string>
@@ -306,27 +283,19 @@
     <string name="theme_color_picker_title">Theme color</string>
     <string name="theme_color_preview">Preview</string>
     <string name="theme_color_reset">Reset theme color</string>
-    <string name="theme_color_presets">Theme color presets</string>
-    <string name="theme_color_presets_description">Tap a color to recolor backgrounds and cards</string>
     <string name="theme_preview_title">Theme preview</string>
     <string name="theme_preview_description">Updates instantly when changing theme settings</string>
     <string name="theme_presets">Theme presets</string>
     <string name="theme_presets_description">Pick how the app follows system, light, dark, Material You, or pure black</string>
     <string name="theme_preset_default">Follow system</string>
     <string name="theme_preset_amoled">Pure black</string>
-    <string name="theme_preset_sunset">Sunset</string>
-    <string name="theme_preset_forest">Forest</string>
-    <string name="theme_preset_ocean">Ocean</string>
-    <string name="theme_preset_midnight">Midnight</string>
+
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Reset all theme settings</string>
     <string name="color_channel_red">Red</string>
     <string name="color_channel_green">Green</string>
     <string name="color_channel_blue">Blue</string>
-    <string name="pure_black_theme">Pure black theme</string>
-    <string name="pure_black_theme_description">Use pure black backgrounds for dark theme</string>
     <string name="theme">Theme</string>
-    <string name="theme_description">Choose between light or dark theme</string>
     <string name="safeguards">Safeguards</string>
     <string name="patch_compat_check">Disable version compatibility check</string>
     <string name="patch_compat_check_description">Do not restrict patches to compatible app versions</string>
@@ -398,10 +367,8 @@ You will not be able to update the previously installed apps from this source."<
     <string name="export_patch_bundles">Export patch bundles</string>
     <string name="export_patch_bundles_description">Save imported remote patch bundles to a JSON file</string>
     <string name="export_patch_bundles_fail">Could not export patch bundles: %s</string>
-    <string name="export_patch_bundles_empty">There are no patch bundles to export</string>
     <string name="export_patch_bundles_success">Exported %d patch bundles</string>
     <string name="export_patch_bundles_partial">Exported %1$d patch bundles. Some bundles could not be exported because they were added locally.</string>
-    <string name="export_patch_bundles_local_not_supported">Export is only available for patch bundles imported from URLs</string>
     <string name="bundle_type_remote">Remote</string>
     <string name="bundle_type_local">Local</string>
     <string name="bundle_type_preinstalled">Pre-installed</string>
@@ -456,12 +423,7 @@ You will not be able to update the previously installed apps from this source."<
     <string name="patch_selection_collapse_on_toggle_description">Automatically hide the patch selection action buttons whenever you select or deselect a patch</string>
     <string name="patch_selection_action_order_title">Patch selection action buttons order</string>
     <string name="patch_selection_action_order_description">Choose the layout order for the patch selection action buttons</string>
-    <string name="patch_selection_action_order_dialog_title">Reorder patch actions</string>
-    <string name="patch_selection_action_order_dialog_description">Move the entries to change how the patch selection action buttons are displayed. The preview updates live.</string>
-    <string name="patch_selection_action_order_preview_label">Preview</string>
     <string name="patch_selection_action_order_reset">Reset to default order</string>
-    <string name="patch_selection_action_move_up">Move up</string>
-    <string name="patch_selection_action_move_down">Move down</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Deselect bundle?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Deselect all patches selected from %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Deselect all patches?</string>
@@ -528,10 +490,7 @@ Signature (SHA-256): %2$s"</string>
     <string name="downloader_settings_no_apps">No downloaded apps found.</string>
 
     <string name="search_apps">Search apps…</string>
-    <string name="loading_body">Loading…</string>
-    <string name="downloading_patches">Downloading patches…</string>
 
-    <string name="options">Options</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="edit">Edit</string>
@@ -541,7 +500,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="patch">Patch</string>
     <string name="select_from_storage">Select from storage</string>
     <string name="select_from_storage_description">Select an APK file from storage using file picker</string>
-    <string name="suggested_version_info">Suggested version: %s</string>
     <string name="type_anything">Type anything to continue</string>
     <string name="search">Search patches…</string>
     <string name="apply">Apply</string>
@@ -582,7 +540,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Customize the default filename for exported patched apps</string>
     <string name="export_name_format_dialog_title">Export filename format</string>
     <string name="export_name_format_dialog_supporting">Use the placeholders below to build a filename. The .apk extension is added automatically if missing.</string>
-    <string name="export_name_format_preview">Preview: %1$s</string>
     <string name="export_name_format_preview_label">Preview</string>
     <string name="export_name_format_variables">Variables</string>
     <string name="export_name_format_reset">Reset to default</string>
@@ -590,22 +547,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="export_name_format_current">Current pattern: %1$s</string>
     <string name="export_name_format_insert">Insert</string>
 
-    <string name="export_name_variable_app_name">App name</string>
-    <string name="export_name_variable_app_name_description">Replaced with the app\'s display name.</string>
-    <string name="export_name_variable_package_name">Package name</string>
-    <string name="export_name_variable_package_name_description">Replaced with the app\'s package name.</string>
-    <string name="export_name_variable_app_version">App version</string>
-    <string name="export_name_variable_app_version_description">Replaced with the app\'s version name.</string>
-    <string name="export_name_variable_patches_version">Patches version</string>
-    <string name="export_name_variable_patches_version_description">Replaced with the applied patch bundle version.</string>
-    <string name="export_name_variable_bundle_names">Patch bundle names</string>
-    <string name="export_name_variable_bundle_names_description">Replaced with the applied patch bundle name.</string>
-    <string name="export_name_variable_manager_version">Manager version</string>
-    <string name="export_name_variable_manager_version_description">Replaced with the manager version.</string>
-    <string name="export_name_variable_timestamp">Timestamp</string>
-    <string name="export_name_variable_timestamp_description">Replaced with the current time (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">Date</string>
-    <string name="export_name_variable_date_description">Replaced with the current date (yyyyMMdd).</string>
     <string name="debug_logs_export">Export debug logs</string>
     <string name="debug_logs_export_read_failed">Failed to read logs (exit code %d)</string>
     <string name="debug_logs_export_failed">Failed to export logs</string>
@@ -632,31 +573,19 @@ Signature (SHA-256): %2$s"</string>
     <string name="language_option_chinese_simplified" translatable="false">简体中文</string>
     <string name="language_option_korean" translatable="false">한국어</string>
     <string name="language_option_vietnamese" translatable="false">Tiếng Việt</string>
-    <string name="device">Device</string>
-    <string name="device_android_version">Android version</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">CPU Architectures</string>
-    <string name="device_memory_limit">Memory limits</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Large)</string>
     <string name="patches_force_download">Force download all patch bundles</string>
     <string name="patches_reset">Reset patch bundles</string>
-    <string name="patching">Patching</string>
-    <string name="signing">Signing</string>
-    <string name="storage">Storage</string>
     <string name="no_patch_found">No patches can be found. Check your patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patch Bundles</string>
     <string name="tab_profiles">Patch Profiles</string>
     <string name="delete">Delete</string>
     <string name="refresh">Refresh</string>
-    <string name="continue_anyways">Continue anyways</string>
-    <string name="download_another_version">Download another version</string>
-    <string name="download_app">Download app</string>
     <string name="download_apk">Download APK file</string>
     <string name="patches_download_fail">Failed to download patches: %s</string>
     <string name="patches_replace_fail">Failed to import patches: %s</string>
     <string name="no_patched_apps_found">No patched apps found</string>
-    <string name="tap_on_patches">Tap on the patches to get more information about them</string>
     <string name="patches_selected">%s patch bundle selected</string>
     <string name="patch_profiles_selected">%1$d patch profile selected</string>
     <string name="selected_apps_count">%1$d app selected</string>
@@ -670,7 +599,6 @@ Signature (SHA-256): %2$s"</string>
 Please use the suggested version: %s
 
 To continue anyway, disable \"Require suggested app version\" in the advanced settings."</string>
-    <string name="selection_warning_title">Stop using defaults?</string>
     <string name="selection_warning_description">"It is recommended to use the default patch selection and options. Changing them may result in unexpected issues.
 
 You need to turn on \"Allow changing patch selection and options\" in the advanced settings before toggling patches."</string>
@@ -727,9 +655,6 @@ You need to turn on \"Allow changing patch selection and options\" in the advanc
     <string name="patcher_missing_patch_title">Patch selection needs attention</string>
     <string name="patcher_preflight_missing_patch_remove">Remove missing patches</string>
     <string name="patcher_preflight_missing_patch_proceed">Proceed anyway</string>
-    <string name="patcher_missing_patch_message">"Patching failed because the following patches were not found in the current bundle:
-%1$s
-Reopen the selection and reselect them (or choose replacements) before retrying."</string>
     <string name="patcher_preflight_missing_patch_message">"The following patches aren\'t available in the current bundle:
 %1$s
 You can remove them automatically, adjust the selection, or continue anyway."</string>
@@ -738,7 +663,6 @@ You can remove them automatically, adjust the selection, or continue anyway."</s
     <string name="patch_selector_missing_patch_message">"These patches need to be reselected:
 %1$s
 Enable them again (or pick alternatives) and then try patching once more."</string>
-    <string name="delete_profile_confirmation">Delete "%1$s"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Delete the selected patch profiles?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d patch</item>
@@ -748,19 +672,12 @@ Enable them again (or pick alternatives) and then try patching once more."</stri
         <item quantity="one">%d bundle</item>
         <item quantity="other">%d bundles</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Universal patches have a more generalized use and do not work as reliably as patches that target specific apps. You may encounter issues while using them.
-
-You need to turn on "Show &amp; allow using universal patches" in the advanced settings before using universal patches."</string>
     <string name="this_version">This version</string>
     <string name="universal">Any app</string>
     <string name="search_patches">Search patches</string>
     <string name="app_version_not_compatible">"This patch is not compatible with the selected app version (%1$s).
 
 It is only compatible with the following version: %2$s."</string>
-    <string name="continue_with_version">Continue with this version?</string>
-    <string name="version_not_compatible">Not all patches are compatible with this version (%s). Do you want to continue anyway?</string>
-    <string name="download_application">Download application?</string>
-    <string name="app_not_installed">The app you selected isn\'t installed. Do you want to download it?</string>
     <string name="failed_to_load_apk">Failed to load APK</string>
     <string name="loading">Loading…</string>
     <string name="not_installed">Not installed</string>
@@ -768,7 +685,6 @@ It is only compatible with the following version: %2$s."</string>
 
     <string name="app_info">App info</string>
     <string name="uninstall">Uninstall</string>
-    <string name="unpatch">Unpatch</string>
     <string name="repatch">Repatch</string>
     <string name="install_type">Installation type</string>
     <string name="package_name">Package name</string>
@@ -779,7 +695,6 @@ It is only compatible with the following version: %2$s."</string>
     <string name="applied_patches_empty">No patches recorded for this app</string>
     <string name="applied_patches_bundle_missing">Bundle metadata unavailable. Showing saved patch names.</string>
     <string name="no_patch_bundles_tracked">No patch bundles recorded for this app</string>
-    <string name="default_install">Default</string>
     <string name="mount_install">Rooted mount installer</string>
     <string name="mounted">Mounted</string>
     <string name="unmounted">Unmounted</string>
@@ -797,7 +712,6 @@ It is only compatible with the following version: %2$s."</string>
     <string name="unpatch_app">Unpatch app?</string>
     <string name="unpatch_description">Are you sure you want to unpatch this app?</string>
 
-    <string name="downloader_invalid_version">Downloader did not fetch the correct version</string>
     <string name="downloader_app_not_found">Downloader did not find the app</string>
     <string name="downloader_error">Downloader error: %s</string>
     <string name="downloader_no_plugins_installed">No downloader installed.</string>
@@ -823,7 +737,6 @@ It is only compatible with the following version: %2$s."</string>
     <string name="show_password_field">Show password</string>
     <string name="hide_password_field">Hide password</string>
 
-    <string name="installer">Installer</string>
     <string name="installer_primary_title">Primary installer</string>
     <string name="installer_primary_description">Used first when installing patched apps.</string>
     <string name="installer_fallback_title">Fallback installer</string>
@@ -903,7 +816,6 @@ Details: %2$s"</string>
     <string name="install_app_fail_title">Installation failed</string>
     <string name="install_app_fail">Failed to install app: %s</string>
     <string name="mount_app_fail_title">Mount failed</string>
-    <string name="mount_app_fail">Failed to mount app: %1$s</string>
     <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again.</string>
     <string name="reinstall_app_fail">Failed to reinstall app: %s</string>
     <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
@@ -922,16 +834,11 @@ Details: %2$s"</string>
     <string name="install_saved_app">Install</string>
     <string name="remount_saved_app">Remount</string>
     <string name="update_saved_app">Update</string>
-    <string name="installing_saved_app">Installing saved app…</string>
     <string name="saved_app_install_success">Installed saved app</string>
     <string name="saved_app_install_failed">Failed to install saved app</string>
     <string name="saved_app_uninstall_title">Uninstall installed copy?</string>
-    <string name="saved_app_unmount_title">Unmount installed copy?</string>
     <string name="saved_app_uninstall_description">This removes the installed version only. Your saved APK stays intact.</string>
-    <string name="saved_app_unmount_description">This unmounts the patched APK. Your saved APK stays intact.</string>
     <string name="saved_app_install_missing">Saved APK not found</string>
-    <string name="delete_saved_copy">Delete saved copy</string>
-    <string name="sign_fail">Failed to sign APK: %s</string>
     <string name="save_logs">Save logs</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin.</string>
     <string name="select_install_type">Select installation type</string>
@@ -940,7 +847,6 @@ Details: %2$s"</string>
     <string name="patcher_step_load_patches">Loading patches</string>
     <string name="patcher_step_unpack">Reading APK file</string>
     <string name="patcher_step_prepare_split_apk">Merge split APK</string>
-    <string name="patcher_step_merge_not_required">No split merge required</string>
     <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Saving</string>
     <string name="patcher_step_write_patched">Writing patched APK file</string>
@@ -981,14 +887,9 @@ Details: %2$s"</string>
     <string name="less">Less</string>
     <string name="continue_">Continue</string>
     <string name="dismiss">Dismiss</string>
-    <string name="permanent_dismiss">Do not show this again</string>
-    <string name="website">Website</string>
     <string name="patch_bundle_urls">Get patch bundle imports</string>
-    <string name="contact">Contact</string>
     <string name="version">Version</string>
     <string name="published">Published</string>
-    <string name="submit_feedback">Submit issue or feedback</string>
-    <string name="submit_feedback_description">Help us improve this application</string>
     <string name="developer_options">Developer options</string>
     <string name="developer_options_description">Options for debugging issues</string>
     <string name="patches_update_success">Update successful</string>
@@ -1004,12 +905,7 @@ Details: %2$s"</string>
 
 Open-source at its core, Morphe thrives on community feedback and contributions to drive future innovation"</string>
     <string name="here">here.</string>
-    <string name="developer_options_enabled">Developer options enabled</string>
-    <string name="developer_options_taps">%d taps remaining</string>
-    <string name="developer_options_already_enabled">Developer options are already enabled</string>
     <string name="update_available">An update is available</string>
-    <string name="current_version">Current version: %s</string>
-    <string name="new_version">New version: %s</string>
     <string name="ready_to_install_update">Ready to install update</string>
     <string name="update_completed">Update installed</string>
     <string name="install_update_manager_failed">Failed to install update</string>
@@ -1035,7 +931,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="hours_ago">%sh ago</string>
     <string name="days_ago">%sd ago</string>
     <string name="invalid_date">Invalid date</string>
-    <string name="disable_battery_optimization">Disable battery optimization</string>
     <string name="input_dialog_value_invalid">Invalid value</string>
     <string name="option_required">This option is required</string>
     <string name="required_options_screen">Required options</string>
@@ -1043,7 +938,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="failed_to_check_updates">Failed to check for updates: %s</string>
     <string name="no_update_available">No update available</string>
     <string name="update_check">Checking for updates…</string>
-    <string name="dismiss_temporary">Not now</string>
     <string name="update_available_dialog_description">A new version of Morphe (%s) is available.</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>
     <string name="download">Download</string>
@@ -1101,5 +995,4 @@ Click on the patches to see more details."</string>
     <string name="failed_to_import_keystore">Failed to import keystore</string>
     <string name="export">Export</string>
     <string name="confirm">Confirm</string>
-    <string name="saved_app_install_cancelled">Installation cancelled</string>
 </resources>
