@@ -1,10 +1,15 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -169,7 +174,7 @@ private fun ThemePresetItem(
 }
 
 /**
- * Custom branding dialog
+ * Custom branding dialog with folder picker
  */
 @Composable
 fun CustomBrandingDialog(
@@ -177,21 +182,19 @@ fun CustomBrandingDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    var appName by remember { mutableStateOf(patchOptionsPrefs.customAppName.getBlocking()) }
+    var iconPath by remember { mutableStateOf(patchOptionsPrefs.customIconPath.getBlocking()) }
 
-    // Get current values from preferences
-    val currentAppName by patchOptionsPrefs.customAppName.getAsState()
-    val currentIconPath by patchOptionsPrefs.customIconPath.getAsState()
-
-    // Local state for editing
-    var appName by remember { mutableStateOf(currentAppName) }
-    var iconPath by remember { mutableStateOf(currentIconPath) }
-
-    // Update local state when prefs change
-    LaunchedEffect(currentAppName) {
-        appName = currentAppName
-    }
-    LaunchedEffect(currentIconPath) {
-        iconPath = currentIconPath
+    // Folder picker launcher
+    val folderPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocumentTree()
+    ) { uri: Uri? ->
+        uri?.let {
+            // Convert content:// URI to file path
+            val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
+                ?: it.toString()
+            iconPath = path
+        }
     }
 
     MorpheDialog(
@@ -246,7 +249,7 @@ fun CustomBrandingDialog(
                 )
             )
 
-            // Icon Path
+            // Icon Path with Folder Picker Button
             OutlinedTextField(
                 value = iconPath,
                 onValueChange = { iconPath = it },
@@ -265,6 +268,19 @@ fun CustomBrandingDialog(
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
+                trailingIcon = {
+                    IconButton(
+                        onClick = { folderPickerLauncher.launch(null) },
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.FolderOpen,
+                            contentDescription = "Pick folder",
+                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedTextColor = LocalDialogTextColor.current,
                     unfocusedTextColor = LocalDialogTextColor.current,
@@ -284,7 +300,7 @@ fun CustomBrandingDialog(
 }
 
 /**
- * Custom header dialog (YouTube only)
+ * Custom header dialog with folder picker (YouTube only)
  */
 @Composable
 fun CustomHeaderDialog(
@@ -292,16 +308,18 @@ fun CustomHeaderDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
-    // Get current value from preferences
-    val currentHeaderPath by patchOptionsPrefs.customHeaderPath.getAsState()
-
-    // Local state for editing
-    var headerPath by remember { mutableStateOf(currentHeaderPath) }
-
-    // Update local state when prefs change
-    LaunchedEffect(currentHeaderPath) {
-        headerPath = currentHeaderPath
+    // Folder picker launcher
+    val folderPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocumentTree()
+    ) { uri: Uri? ->
+        uri?.let {
+            // Convert content:// URI to file path
+            val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
+                ?: it.toString()
+            headerPath = path
+        }
     }
 
     MorpheDialog(
@@ -343,6 +361,19 @@ fun CustomHeaderDialog(
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
+                trailingIcon = {
+                    IconButton(
+                        onClick = { folderPickerLauncher.launch(null) },
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.FolderOpen,
+                            contentDescription = "Pick folder",
+                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedTextColor = LocalDialogTextColor.current,
                     unfocusedTextColor = LocalDialogTextColor.current,

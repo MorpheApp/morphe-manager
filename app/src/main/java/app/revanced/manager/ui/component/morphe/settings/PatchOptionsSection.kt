@@ -36,13 +36,6 @@ fun PatchOptionsSection(
 
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = stringResource(R.string.morphe_patch_options_description),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
             // Theme Colors
             PatchOptionItem(
                 icon = Icons.Outlined.Palette,

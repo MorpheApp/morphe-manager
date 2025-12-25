@@ -153,7 +153,6 @@
 
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch Options</string>
-    <string name="morphe_patch_options_description">Advanced patch configurations</string>
     <!-- GmsCore -->
     <string name="morphe_gmscore_vendor">GmsCore Vendor</string>
     <string name="morphe_gmscore_vendor_description">The vendor\'s group ID for GmsCore</string>
