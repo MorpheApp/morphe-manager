@@ -551,7 +551,7 @@ class PatcherViewModel(
     /**
      * How much of the progress is allocated to executing patches.
      */
-    var patchesPercentage = 0.0
+    private var patchesPercentage = 0.0
 
     val steps by savedStateHandle.saveable(saver = snapshotStateListSaver()) {
         val stepsList = generateSteps(
@@ -581,12 +581,6 @@ class PatcherViewModel(
         } + ((completedPatchCount / patchCount.toDouble()) * patchesPercentage)
 
         min(1.0, currentProgress).toFloat()
-    }
-
-    fun getCurrentStepIndexPlusCompletedPatches() : Int {
-        return steps.count {
-            it.state == State.COMPLETED && it.category != StepCategory.PATCHING
-        } + completedPatchCount
     }
 
     private val workManager = WorkManager.getInstance(app)
