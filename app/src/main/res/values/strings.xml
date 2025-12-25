@@ -3,13 +3,24 @@
     <string name="morphe_home_youtube" translatable="false">YouTube</string>
     <string name="morphe_home_youtube_music" translatable="false">YouTube Music</string>
     <string name="morphe_home_bundles">Patch bundle</string>
-    <string name="morphe_home_greeting_1">What app do you want to patch?</string>
-    <string name="morphe_home_greeting_2">Ready to make YouTube legendary again?</string>
-    <string name="morphe_home_greeting_3">Buckle up, it\'s patching time</string>
-    <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece</string>
-    <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
-    <string name="morphe_home_greeting_6">Let\'s make your apps behave</string>
-    <string name="morphe_home_greeting_7">Today\'s forecast: 100% chance of patching</string>
+    <string name="morphe_home_greeting_1">What app do you want to patch? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Ready to make YouTube legendary again? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Buckle up, it\'s patching time 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece 😌🚫</string>
+    <string name="morphe_home_greeting_5">Want to watch ads? Me neither 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Let\'s make your apps behave 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Today\'s forecast: 100% chance of patching 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Patch responsibly… or don\'t 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Saving apps from themselves since today 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Powered by caffeine and good patches ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">Update failed</string>
     <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
@@ -96,7 +107,7 @@
     <string name="morphe_patcher_message_9">Fixing bugs in the unpatched app… 🐞</string>
     <string name="morphe_patcher_message_10">Great patches are worth the wait… ⏳</string>
     <string name="morphe_patcher_message_11">Polishing pixels until they shine… 💎</string>
-    <string name="morphe_patcher_message_12">Please remain seated until the captain turns off the \“Patching in progress\” sign… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Please remain seated until the captain turns off the \"Patching in progress\" sign… 💺✈️</string>
     <string name="morphe_patcher_message_13">Cooking up your patched app, hot and fresh… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Negotiating politely with bytecode… 🤝</string>
