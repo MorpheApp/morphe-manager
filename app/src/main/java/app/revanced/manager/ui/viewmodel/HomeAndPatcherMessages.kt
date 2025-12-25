@@ -78,6 +78,9 @@ object HomeAndPatcherMessages {
                     R.string.morphe_home_greeting_5,
                     R.string.morphe_home_greeting_6,
                     R.string.morphe_home_greeting_7,
+                    R.string.morphe_home_greeting_8,
+                    R.string.morphe_home_greeting_9,
+                    R.string.morphe_home_greeting_10,
                 )
             )
             homeGreetingMessage = message
