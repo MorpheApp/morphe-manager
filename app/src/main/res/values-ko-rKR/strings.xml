@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">패치 번들</string>
-    <string name="morphe_home_greeting_1">어떤 앱을 패치하시겠어요?</string>
-    <string name="morphe_home_greeting_2">YouTube를 다시 전설로 만들 준비 되셨나요?</string>
-    <string name="morphe_home_greeting_3">안전벨트 매세요, 패치 시간입니다</string>
-    <string name="morphe_home_greeting_4">또 하루, 또 다른 광고 차단 명작</string>
-    <string name="morphe_home_greeting_5">광고를 시청하고 싶으신가요? 저는 아닙니다</string>
-    <string name="morphe_home_greeting_6">자, 여러분의 앱이 정상적으로 동작하도록 해요.</string>
-    <string name="morphe_home_greeting_7">오늘의 예보: 패칭 확률 100%</string>
+    <string name="morphe_home_greeting_1">앱을 패치하고 싶으신가요? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">YouTube를 다시 전설적으로 만들고 싶으신가요? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">준비하세요, 패치 시간이에요 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">또 하루가 지났네, 광고 차단된 명작이군요 😌🚫</string>
+    <string name="morphe_home_greeting_5">광고를 보고 싶으신가요? 저도 아닙니다 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">앱이 제대로 작동하게 해볼까요 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">오늘의 예보: 패칭 확률 100% 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">책임감 있게 패칭하거나 아예 하지 마세요 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">오늘부터 앱을 구해내는 영웅이 되어볼까요 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">커피와 좋은 패치로 힘내세요 ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API 번들</string>
     <string name="morphe_home_update_error">업데이트 실패</string>
     <string name="morphe_home_update_error_subtitle">인터넷 연결을 확인하고 다시 시도해 주세요.</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">추가됨</string>
     <string name="morphe_home_date_updated">업데이트됨</string>
     <string name="morphe_home_check_updates">확인</string>
-    <string name="morphe_home_bundle_update_completed">업데이트 완료</string>
     <string name="morphe_home_unknown">알 수 없음</string>
     <string name="morphe_home_timeline">업데이트 기록</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">패치할 원본 APK가 있나요?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">패치할 %1$s에는 버전 %2$s(패치되지 않음)이 필요합니다.</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">\'%1$s\'을(를) 패치하려면 %2$s(unpatched) 버전이 필요합니다</string>
     <string name="morphe_home_apk_availability_yes">네, 가지고 있습니다</string>
     <string name="morphe_home_apk_availability_no">아니요, 찾는 데 도움을 주세요</string>
-    <string name="morphe_home_apk_availability_dialog_description">%1$s 패치하려면 %2$s 버전(패치되지 않은 상태)이 필요합니다.</string>
-    <string name="morphe_home_apk_availability_dialog_info">APK를 다운로드하되 설치하지는 마십시오.</string>
+    <string name="morphe_home_apk_availability_dialog_description">\'%1$s\'을(를) 패치하려면 %2$s(unpatched) 버전이 필요합니다</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">APKMirror에서 원본 APK 다운로드</string>
-    <string name="morphe_home_download_instructions_description">APKMirror.com에서 %1$s 버전 %2$s를 다운로드하려면 다음 단계를 따르세요.</string>
+    <string name="morphe_home_download_instructions_title">원본 APK 다운로드</string>
     <string name="morphe_home_download_instructions_steps_title">안내:</string>
-    <string name="morphe_home_download_instructions_step1">계속을 눌러 APKMirror.com 웹사이트를 엽니다.</string>
+    <string name="morphe_home_download_instructions_step1">아래 \'APKMirror.com 으로 계속하기\' 버튼을 누르세요</string>
     <string name="morphe_home_download_instructions_step2_part1">웹페이지를 아래로 스크롤한 다음</string>
-    <string name="morphe_home_download_instructions_download_button_toast">웹사이트에서 다운로드를 클릭하세요. 여기서는 누르지 마세요 😊</string>
-    <string name="morphe_home_download_instructions_step3">다운로드가 완료될 때까지 기다렸다가 APK를 설치하지 마세요.</string>
-    <string name="morphe_home_download_instructions_step3_mount">다운로드가 완료될 때까지 기다렸다가 APK를 설치하세요</string>
+    <string name="morphe_home_download_instructions_download_button_toast">이 페이지에서가 아닌 웹사이트에서 다운로드하세요 😊</string>
+    <string name="morphe_home_download_instructions_step3">다운로드가 완료되면 <b>APK를 설치하지 마세요</b></string>
+    <string name="morphe_home_download_instructions_step3_mount">다운로드가 완료되면 <b>APK를 설치하세요</b></string>
     <string name="morphe_home_download_instructions_step4">다운로드가 완료된 후 이 앱을 다시 여세요</string>
     <string name="morphe_home_download_instructions_step4_mount">원본 APK를 설치한 후 이 앱을 다시 여세요</string>
-    <string name="morphe_home_download_instructions_note">중요: APK를 다운로드하되 기기에 설치하지는 마세요.</string>
-    <string name="morphe_home_download_instructions_continue">APKMirror로 계속하기</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com 으로 계속하기</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">다운로드한 APK 선택</string>
     <string name="morphe_home_file_picker_prompt_description">이제 방금 다운로드한 %1$s APK 파일을 선택하세요.</string>
     <string name="morphe_home_file_picker_prompt_open">다운로드한 APK 파일 열기</string>
-    <string name="morphe_home_wrong_package_selected">예상 패키지 %1$s이지만 %2$s가 받았습니다</string>
-    <string name="morphe_home_any_version">모든 버전</string>
     <string name="morphe_home_recommended_version">권장 버전</string>
     <string name="morphe_patcher_selected_version">선택된 버전</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">오류가 클립보드에 복사되었습니다</string>
     <string name="morphe_patcher_patches_progress">패치 %1$d / %2$d개</string>
     <string name="morphe_patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
-    <string name="morphe_patcher_install_dialog_message">패치된 앱 설치?</string>
-    <string name="morphe_patcher_install_conflict_message">패키지 충돌이 감지되었습니다. 새 버전을 설치하려면 먼저 앱의 이전 버전을 제거해야 합니다.</string>
-    <string name="morphe_patcher_install_ready_message">이전 버전이 제거되었습니다. 이제 패치된 앱을 설치할 수 있습니다.</string>
-    <string name="morphe_patcher_install_cancelled_title">설치 취소됨</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">설치 버튼을 클릭하여 다시 시도하세요</string>
     <string name="morphe_patcher_installing">설치하는 중 ...</string>
     <string name="morphe_patcher_installing_subtitle">거의 준비 완료! 🎸</string>
     <string name="morphe_patcher_success_title">모두 완료! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">패치되지 않은 앱의 버그 수정 중… 🐞</string>
     <string name="morphe_patcher_message_10">훌륭한 패치는 기다릴 가치가 있습니다… ⏳</string>
     <string name="morphe_patcher_message_11">픽셀을 반짝일 때까지 연마 중… 💎</string>
-    <string name="morphe_patcher_message_12">기장님이 \"패치 중\" 사인을 끌 때까지 자리에 앉아 계십시오… 💺✈️</string>
+    <string name="morphe_patcher_message_12">\"패칭 진행 중\" 표시등이 꺼질 때까지 자리에 계세요 💺✈️</string>
     <string name="morphe_patcher_message_13">신선하고 뜨거운 패치된 앱을 요리 중… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">바이트코드와 정중하게 협상 중… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Universal ReVanced Manager 플러그인 접근 제어에 사용됩니다. Universal ReVanced Manager만 이 권한을 가집니다.</string>
     <string name="toast_copied_to_clipboard">복사하였습니다!</string>
     <string name="copy_to_clipboard">클립보드에 복사하였습니다</string>
-    <string name="dashboard">대시보드</string>
     <string name="settings">설정</string>
     <string name="select_app">앱 선택하기</string>
     <string name="new_downloader_plugins_notification">새로운 다운로더 플러그인을 사용할 수 있습니다. 탭하여 구성하세요.</string>
     <string name="unsupported_architecture_warning">이 기기 아키텍처에 대한 패치는 지원되지 않으며 실패할 가능성이 높습니다.</string>
     <string name="import_">가져오기</string>
-    <string name="import_patches">패치 가져오기</string>
     <string name="file_field_set">선택됨</string>
     <string name="file_field_not_set">선택되지 않음</string>
     <string name="field_not_set">설정되지 않음</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">APK를 다운로드할 때 사용할 번들 추천을 선택하세요.</string>
     <string name="bundle_version_dialog_default">기본 추천 선택하기</string>
     <string name="bundle_version_dialog_default_subtitle">가장 일반적인 호환 버전을 자동으로 선택합니다.</string>
-    <string name="bundle_version_dialog_option_subtitle">%1$s 버전 사용하기</string>
     <string name="bundle_version_all_versions">모든 버전</string>
     <string name="bundle_version_no_version">권장되는 버전이 없습니다</string>
-    <string name="bundle_version_suggested_label">권장 버전: %1$s</string>
-    <string name="bundle_version_other_heading">그 외 권장 버전</string>
     <string name="bundle_update_manual_available">업데이트 사용 가능</string>
     <string name="bundle_update_manual_available_with_version">업데이트 사용 가능: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d 번들을 처리하였습니다</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">번들 정리</string>
     <string name="bundle_reorder_title">패치 번들 정리</string>
     <string name="bundle_reorder_description">핸들을 드래그하여 목록과 패치 선택목록 메뉴에 나타나는 번들 순서를 정렬하세요.</string>
-    <string name="bundle_reorder_move_up">번들을 위로 이동</string>
-    <string name="bundle_reorder_move_down">번들을 아래로 이동</string>
     <string name="bundle_actions_expand">번들 동작 보기</string>
     <string name="bundle_actions_collapse">번들 동작 숨기기</string>
     <string name="patch_bundle_duplicate_name_error">이 이름의 패치 번들이 이미 있습니다</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">권장 버전: %1$s</string>
     <string name="bundle_version_dialog_selected_override">선택된 버전: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">선택됨</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (선택됨)</string>
     <string name="bundle_version_dialog_other_title">지원되는 다른 버전 선택:</string>
     <string name="bundle_version_dialog_locked_title">버전 보안 기능을 활성화하였습니다</string>
     <string name="bundle_version_dialog_locked_hint">\"설정 &gt; 고급 &gt; 보안\"으로 이동하여 \"권장 앱 버전 요구\" (토글 끄기)와 \"\'버전 호환성 검사 비활성화\" (토글 켜기)를 모두 설정하여 번들별 버전을 선택하세요.</string>
-    <string name="patch_item_description">애플리케이션 패치를 시작하였습니다</string>
     <string name="patch_selector_item">패치 선택하기</string>
     <string name="patch_selector_item_description">%d 개의 패치를 선택하였습니다</string>
     <string name="no_patches_selected">선택된 패치가 없습니다</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">설치된 APK를 사용하는 중</string>
     <string name="apk_source_local">로컬 APK 파일를 사용하는 중</string>
     <string name="apk_source_downloaded">다운로드된 APK 사용하는 중</string>
-    <string name="legacy_import_failed">기존 설정을 가져올 수 없습니다</string>
     <string name="auto_updates_dialog_title">업데이트 구성</string>
     <string name="auto_updates_dialog_description">Universal ReVanced Manager에서 다음 구성 요소에 대한 업데이트를 주기적으로 확인하시겠습니까?</string>
     <string name="auto_updates_dialog_patches">ReVanced 패치</string>
@@ -246,7 +236,6 @@
     <string name="updates">업데이트</string>
     <string name="updates_description">업데이트 확인 및 변경 사항을 볼 수 있습니다</string>
     <string name="downloads">다운로드</string>
-    <string name="downloads_description">다운로더 플러그인 및 다운로드된 앱을 설정할 수 있습니다</string>
     <string name="plugins_help_title">다운로더란 무엇인가요?</string>
     <string name="plugins_help_description">다운로더는 URV가 다양한 출처에서 순정 APK를 다운로드할 수 있게 해주는 플러그인입니다. 다운로드된 APK는 하단 섹션에 표시됩니다. 패치 과정에서 이미 다운로드된 APK를 선택하거나 플러그인을 통해 다운로드할 수 있습니다.\n\n지원되는 다운로더 플러그인 목록을 확인할 수 있습니다</string>
     <string name="import_export">가져오기 &amp; 내보내기</string>
@@ -255,7 +244,6 @@
     <string name="changelog_loading">변경 사항을 로드하는 중</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
     <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인하세요</string>
-    <string name="no_changelogs_found">변경 로그를 찾을 수 없습니다</string>
     <string name="advanced">고급</string>
     <string name="advanced_description">API URL, 메모리 제한 그리고 디버깅을 설정할 수 있습니다</string>
     <string name="about">정보</string>
@@ -274,27 +262,18 @@
     <string name="theme_color_picker_title">테마 색상</string>
     <string name="theme_color_preview">미리보기</string>
     <string name="theme_color_reset">테마 색상 초기화</string>
-    <string name="theme_color_presets">테마 색상 프리셋</string>
-    <string name="theme_color_presets_description">색상을 탭하여 배경과 카드 색상을 변경할 수 있습니다</string>
     <string name="theme_preview_title">테마 프리셋</string>
     <string name="theme_preview_description">테마 설정을 변경하면 즉시 업데이트됩니다</string>
     <string name="theme_presets">테마 프리셋</string>
     <string name="theme_presets_description">테마를 기기 테마, 밝은, 어두운, Material You 또는 검정색으로 선택하세요</string>
     <string name="theme_preset_default">기기 테마</string>
     <string name="theme_preset_amoled">검정</string>
-    <string name="theme_preset_sunset">일몰</string>
-    <string name="theme_preset_forest">숲</string>
-    <string name="theme_preset_ocean">바다</string>
-    <string name="theme_preset_midnight">자정</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">모든 테마 색상 초기화</string>
     <string name="color_channel_red">빨강</string>
     <string name="color_channel_green">초록</string>
     <string name="color_channel_blue">파란</string>
-    <string name="pure_black_theme">검정</string>
-    <string name="pure_black_theme_description">어두운 테마에는 검정색 배경을 적용합니다</string>
     <string name="theme">테마</string>
-    <string name="theme_description">밝은 테마 또는 어두운 테마를 선택하세요</string>
     <string name="safeguards">보안</string>
     <string name="patch_compat_check">버전 호환성 검사 비활성화</string>
     <string name="patch_compat_check_description">선택된 앱 버전과 호환되지 않는 패치를 선택할 수 없습니다</string>
@@ -359,10 +338,8 @@
     <string name="export_patch_bundles">패치 번들 내보내기</string>
     <string name="export_patch_bundles_description">JSON 파일에 가져온 원격 패치 번들을 저장합니다</string>
     <string name="export_patch_bundles_fail">패치 번들을 내보낼 수 없습니다: %s</string>
-    <string name="export_patch_bundles_empty">내보낼 수 있는 패치 번들이 없습니다</string>
     <string name="export_patch_bundles_success">%d 개의 패치 번들을 내보냈습니다</string>
     <string name="export_patch_bundles_partial">%1$d 개의 패치 번들을 내보냈습니다. 일부 번들은 로컬에 추가되었기 때문에 내보낼 수 없습니다.</string>
-    <string name="export_patch_bundles_local_not_supported">URL에서 가져온 패치 번들만 내보낼 수 있습다</string>
     <string name="bundle_type_remote">원격</string>
     <string name="bundle_type_local">로컬</string>
     <string name="bundle_type_preinstalled">사전에 설치됨</string>
@@ -417,12 +394,7 @@
     <string name="patch_selection_collapse_on_toggle_description">패치를 선택하거나 선택 해제할 때마다 패치 선택 동작 버튼을 자동으로 숨깁니다</string>
     <string name="patch_selection_action_order_title">패치 선택 동작 버튼 순서</string>
     <string name="patch_selection_action_order_description">패치 선택 동작 버튼에 대한 레이아웃 순서를 선택하세요</string>
-    <string name="patch_selection_action_order_dialog_title">패치 동작 다시 정렬</string>
-    <string name="patch_selection_action_order_dialog_description">항목을 이동하여 패치 선택 동작 버튼이 표시되는 방식을 변경하세요. 미리보기는 실시간으로 업데이트됩니다.</string>
-    <string name="patch_selection_action_order_preview_label">미리보기</string>
     <string name="patch_selection_action_order_reset">기본 순서로 초기화</string>
-    <string name="patch_selection_action_move_up">위로 이동</string>
-    <string name="patch_selection_action_move_down">아래로 이동</string>
     <string name="patch_selection_confirm_deselect_bundle_title">번들을 선택 해제하시겠습니까?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">%1$s 에서 선택된 모든 패치를 선택 해제하시겠습니까?</string>
     <string name="patch_selection_confirm_deselect_all_title">모든 패치를 선택 해제하시겠습니까?</string>
@@ -487,9 +459,6 @@
     <string name="downloader_plugin_delete_apps_description">선택된 앱을 삭제하시겠습니까?</string>
     <string name="downloader_settings_no_apps">다운로드한 앱을 찾을 수 없습니다.</string>
     <string name="search_apps">앱 검색 …</string>
-    <string name="loading_body">로드하는 중 …</string>
-    <string name="downloading_patches">패치를 다운로드하는 중 …</string>
-    <string name="options">옵션</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
     <string name="edit">편집</string>
@@ -499,7 +468,6 @@
     <string name="patch">패치</string>
     <string name="select_from_storage">기기 저장소에서 선택</string>
     <string name="select_from_storage_description">파일 선택기를 사용하여 기기 저장소에서 APK 파일을 선택합니다</string>
-    <string name="suggested_version_info">권장 버전: %s</string>
     <string name="type_anything">계속하려면 아무거나 입력하세요</string>
     <string name="search">패치 검색 …</string>
     <string name="apply">적용</string>
@@ -540,29 +508,12 @@
     <string name="export_name_format_dialog_title">내보낼 파일 이름 형식</string>
     <string name="export_name_format_dialog_supporting">아래에 있는 표시자를 사용하여 파일 이름을 만들 수 있습니다.
 .apk 확장자가 누락된 경우에는 자동으로 추가됩니다.</string>
-    <string name="export_name_format_preview">미리보기: %1$s</string>
     <string name="export_name_format_preview_label">미리보기</string>
     <string name="export_name_format_variables">변수</string>
     <string name="export_name_format_reset">기본값으로 초기화</string>
     <string name="export_name_format_error_blank">파일 이름 형식은 비워둘 수 없습니다.</string>
     <string name="export_name_format_current">현재 패턴: %1$s</string>
     <string name="export_name_format_insert">추가</string>
-    <string name="export_name_variable_app_name">앱 이름</string>
-    <string name="export_name_variable_app_name_description">앱 표시 이름을 변경하였습니다</string>
-    <string name="export_name_variable_package_name">패키지 이름</string>
-    <string name="export_name_variable_package_name_description">앱 패키지 이름을 변경하였습니다.</string>
-    <string name="export_name_variable_app_version">앱 버전</string>
-    <string name="export_name_variable_app_version_description">앱 버전 이름을 변경하였습니다.</string>
-    <string name="export_name_variable_patches_version">패치 버전</string>
-    <string name="export_name_variable_patches_version_description">적용된 패치 번들 버전으로 변경되었습니다.</string>
-    <string name="export_name_variable_bundle_names">패치 번들 이름</string>
-    <string name="export_name_variable_bundle_names_description">적용된 패치 번들 이름으로 변경되었습니다.</string>
-    <string name="export_name_variable_manager_version">매니저 버전</string>
-    <string name="export_name_variable_manager_version_description">매니저 버전을 변경하였습니다.</string>
-    <string name="export_name_variable_timestamp">타임스탬프</string>
-    <string name="export_name_variable_timestamp_description">현재 시간으로 변경하였습니다 (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">날짜</string>
-    <string name="export_name_variable_date_description">현재 날짜로 변경하였습니다 (yyyyMMdd).</string>
     <string name="debug_logs_export">디버그 로그 내보내기</string>
     <string name="debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %d)</string>
     <string name="debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
@@ -585,31 +536,19 @@
     <string name="app_language">앱 언어</string>
     <string name="language_dialog_title">앱 언어를 선택하세요</string>
     <string name="language_option_system">기기 언어 사용</string>
-    <string name="device">기기</string>
-    <string name="device_android_version">Android 버전</string>
-    <string name="device_model">모델</string>
-    <string name="device_architectures">CPU 아키텍처</string>
-    <string name="device_memory_limit">메모리 제한</string>
     <string name="device_memory_limit_format">%1$dMB (일반) - %2$dMB (대용)</string>
     <string name="patches_force_download">모든 패치 번들 강제 다운로드</string>
     <string name="patches_reset">패치 번들 초기화</string>
-    <string name="patching">패치</string>
-    <string name="signing">서명</string>
-    <string name="storage">기기 저장소</string>
     <string name="no_patch_found">찾을 수 있는 패치가 없습니다. 패치를 확인하세요</string>
     <string name="tab_apps">앱</string>
     <string name="tab_patches">패치 번들</string>
     <string name="tab_profiles">패치 프로필</string>
     <string name="delete">삭제</string>
     <string name="refresh">새로고침</string>
-    <string name="continue_anyways">계속</string>
-    <string name="download_another_version">다른 버전 다운로드</string>
-    <string name="download_app">앱 다운로드</string>
     <string name="download_apk">APK 파일 다운로드</string>
     <string name="patches_download_fail">패치를 다운로드할 수 없습니다: %s</string>
     <string name="patches_replace_fail">패치를 가져올 수 없습니다: %s</string>
     <string name="no_patched_apps_found">패치된 앱을 찾을 수 없습니다</string>
-    <string name="tap_on_patches">패치를 탭하여 자세한 정보를 확인하세요</string>
     <string name="patches_selected">%s개의 패치 번들이 선택되었습니다.</string>
     <string name="patch_profiles_selected">%1$d개의 패치 프로필이 선택되었습니다.</string>
     <string name="selected_apps_count">%1$d개의 앱이 선택되었습니다</string>
@@ -621,7 +560,6 @@
     <string name="patch_options_reset_toast">패치 옵션을 초기화하였습니다</string>
     <string name="non_suggested_version_warning_title">권장되지 않는 버전</string>
     <string name="non_suggested_version_warning_description">"선택된 버전이 권장 버전과 일치하지 않습니다.\n권장 버전을 사용하세요: %s\n\n계속하려면 고급 설정에서 \"권장 앱 버전 요구\"를 비활성화하세요."</string>
-    <string name="selection_warning_title">기본값 사용을 중지하시겠습니까?</string>
     <string name="selection_warning_description">"기본 패치 선택목록 및 옵션을 사용하는 것이 좋습니다. 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.\n\n패치를 전환하기 전에 고급 설정에서 \"패치 선택 및 옵션 변경 허용\"을 활성화해야 합니다."</string>
     <string name="patch_profile_save_action">패치 프로필 저장</string>
     <string name="patch_profile_select_bundles_title">패치 번들 선택</string>
@@ -675,9 +613,6 @@
     <string name="patcher_missing_patch_title">패치 선택에는 주의가 필요합니다</string>
     <string name="patcher_preflight_missing_patch_remove">누락된 패치 삭제</string>
     <string name="patcher_preflight_missing_patch_proceed">계속 진행</string>
-    <string name="patcher_missing_patch_message">"현재 번들에서 다음 패치를 찾을 수 없어 패치에 실패했습니다:
-%1$s
-재시도하기 전에 선택 사항을 다시 열고 다시 선택하거나(또는 대체 항목 선택) 하십시오."</string>
     <string name="patcher_preflight_missing_patch_message">"현재 번들에서 다음 패치는 사용할 수 없습니다:
 %1$s
 자동으로 삭제하거나, 선택을 조정하거나, 계속 진행할 수 있습니다."</string>
@@ -686,7 +621,6 @@
     <string name="patch_selector_missing_patch_message">"다음 패치를 다시 선택해야 합니다:
 %1$s
 다시 활성화하거나(또는 다른 패치 선택) 패치를 한 번 더 시도하세요."</string>
-    <string name="delete_profile_confirmation">\"%1$s\"를 삭제하시겠습니까?</string>
     <string name="patch_profile_delete_multiple_dialog_description">선택된 패치 프로필을 삭제하시겠습니까?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="other">%d 개의 Patch</item>
@@ -694,26 +628,18 @@
     <plurals name="patch_profile_bundle_count">
         <item quantity="other">%d 개의 번들</item>
     </plurals>
-    <string name="universal_patch_warning_description">"범용 패치는 더 일반적인 용도로 사용되므로 특정 앱을 대상으로 하는 패치만큼 안정적으로 작동하지 않습니다. 사용 시 문제가 발생할 수 있습니다.
-
-범용 패치를 사용하기 전에 고급 설정에서 \"범용 패치 표시 및 사용 허용\"을 켜야 합니다."</string>
     <string name="this_version">이 버전</string>
     <string name="universal">모든 앱</string>
     <string name="search_patches">패치 검색</string>
     <string name="app_version_not_compatible">"이 패치는 선택한 앱 버전(%1$s)과 호환되지 않습니다.
 
 다음 버전에서만 호환됩니다: %2$s."</string>
-    <string name="continue_with_version">이 버전으로 계속하시겠습니까?</string>
-    <string name="version_not_compatible">모든 패치가 이 버전 (%s) 과 호환되지 않습니다. 그래도 계속하시겠습니까?</string>
-    <string name="download_application">애플리케이션을 다운로드하시겠습니까?</string>
-    <string name="app_not_installed">선택된 앱이 설치되지 않았습니다. 다운로드하시겠습니까?</string>
     <string name="failed_to_load_apk">APK를 로드할 수 없습니다</string>
     <string name="loading">로드 중 …</string>
     <string name="not_installed">설치되지 않음</string>
     <string name="installed">설치됨</string>
     <string name="app_info">앱 정보</string>
     <string name="uninstall">제거</string>
-    <string name="unpatch">패치 해제</string>
     <string name="repatch">다시 패치</string>
     <string name="install_type">설치 유형</string>
     <string name="package_name">패키지 이름</string>
@@ -724,7 +650,6 @@
     <string name="applied_patches_empty">이 앱에 대한 기록된 패치가 없습니다</string>
     <string name="applied_patches_bundle_missing">번들 메타데이터를 사용할 수 없습니다. 저장된 패치 이름을 표시합니다.</string>
     <string name="no_patch_bundles_tracked">이 앱에 대한 기록된 패치 번들이 없습니다</string>
-    <string name="default_install">기본</string>
     <string name="mount_install">루팅된 마운트 설치 프로그램</string>
     <string name="mounted">마운트됨</string>
     <string name="unmounted">마운트 해제됨</string>
@@ -740,7 +665,6 @@
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
     <string name="unpatch_app">앱을 패치 해제하시겠습니까?</string>
     <string name="unpatch_description">이 앱을 패치 해제하시겠습니까?</string>
-    <string name="downloader_invalid_version">다운로더가 올바른 버전을 가져오지 못했습니다</string>
     <string name="downloader_app_not_found">다운로더가 앱을 찾을 수 없습니다</string>
     <string name="downloader_error">다운로더 오류: %s</string>
     <string name="downloader_no_plugins_installed">다운로더가 설치되지 않았습니다.</string>
@@ -761,7 +685,6 @@
     <string name="path_selector_files">파일</string>
     <string name="show_password_field">비밀번호 표시</string>
     <string name="hide_password_field">비밀번호 숨기기</string>
-    <string name="installer">설치 프로그램</string>
     <string name="installer_primary_title">기본 설치 프로그램</string>
     <string name="installer_primary_description">패치된 앱을 설치할 경우에 가장 먼저 사용됩니다.</string>
     <string name="installer_fallback_title">대체 설치 프로그램</string>
@@ -840,7 +763,6 @@
     <string name="install_app_fail_title">설치할 수 없습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
     <string name="mount_app_fail_title">마운트 실패</string>
-    <string name="mount_app_fail">앱을 마운트할 수 없습니다: %1$s</string>
     <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요.</string>
     <string name="reinstall_app_fail">앱을 다시 설치할 수 없습니다: %s</string>
     <string name="uninstall_app_fail">앱을 제거할 수 없습니다: %s</string>
@@ -859,16 +781,11 @@
     <string name="install_saved_app">설치</string>
     <string name="remount_saved_app">다시 마운트</string>
     <string name="update_saved_app">업데이트</string>
-    <string name="installing_saved_app">저장된 앱을 설치하는 중 ...</string>
     <string name="saved_app_install_success">저장된 앱을 설치하였습니다</string>
     <string name="saved_app_install_failed">저장된 앱을 설치할 수 없습니다</string>
     <string name="saved_app_uninstall_title">저장된 사본을 삭제하시겠습니까?</string>
-    <string name="saved_app_unmount_title">설치된 사본을 마운트 해제하시겠습니까?</string>
     <string name="saved_app_uninstall_description">설치된 버전만 제거합니다. 저장된 APK는 그대로 유지됩니다.</string>
-    <string name="saved_app_unmount_description">패치된 APK를 마운트 해제합니다. 저장된 APK는 그대로 유지됩니다.</string>
     <string name="saved_app_install_missing">저장된 APK를 찾을 수 없습니다</string>
-    <string name="delete_saved_copy">저장된 사본을 삭제하였습니다</string>
-    <string name="sign_fail">APK 서명을 할 수 없습니다: %s</string>
     <string name="save_logs">로그 저장</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 계속 사용하려면 사용자 상호작용이 필요합니다.</string>
     <string name="select_install_type">설치 유형 선택</string>
@@ -876,7 +793,6 @@
     <string name="patcher_step_load_patches">패치를 로드하는 중</string>
     <string name="patcher_step_unpack">APK 파일을 읽어오는 중</string>
     <string name="patcher_step_prepare_split_apk">분할 APK 병합</string>
-    <string name="patcher_step_merge_not_required">병합 분할이 필요 없습니다</string>
     <string name="patcher_step_group_patching">패치하는 중</string>
     <string name="patcher_step_group_saving">저장하는 중</string>
     <string name="patcher_step_write_patched">패치된 APK 파일을 작성하였습니다</string>
@@ -914,14 +830,9 @@
     <string name="less">접기</string>
     <string name="continue_">계속</string>
     <string name="dismiss">닫기</string>
-    <string name="permanent_dismiss">다시 표시 안함</string>
-    <string name="website">웹사이트</string>
     <string name="patch_bundle_urls">패치 번들 가져오기</string>
-    <string name="contact">문의</string>
     <string name="version">버전</string>
     <string name="published">게시됨</string>
-    <string name="submit_feedback">문제점 또는 피드백 제출</string>
-    <string name="submit_feedback_description">이 애플리케이션을 개선하는 데 도움을 주세요</string>
     <string name="developer_options">개발자 옵션</string>
     <string name="developer_options_description">문제점 디버깅 옵션</string>
     <string name="patches_update_success">업데이트를 성공하였습니다</string>
@@ -936,12 +847,7 @@
 
 핵심은 오픈 소스이며, Morphe는 미래 혁신을 주도하기 위해 커뮤니티 피드백과 기여를 통해 번성합니다."</string>
     <string name="here">여기.</string>
-    <string name="developer_options_enabled">개발자 옵션을 활성화하였습니다</string>
-    <string name="developer_options_taps">%d 번 더 탭해야 합니다</string>
-    <string name="developer_options_already_enabled">개발자 옵션이 이미 활성화되어 있습니다</string>
     <string name="update_available">업데이트를 할 수 있습니다</string>
-    <string name="current_version">현재 버전: %s</string>
-    <string name="new_version">새로운 버전: %s</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
     <string name="update_completed">업데이트하였습니다</string>
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>
@@ -967,14 +873,12 @@
     <string name="hours_ago">%s 시간 전</string>
     <string name="days_ago">%s 일 전</string>
     <string name="invalid_date">잘못된 날짜</string>
-    <string name="disable_battery_optimization">배터리 최적화 비활성화</string>
     <string name="input_dialog_value_invalid">잘못된 값</string>
     <string name="option_required">이 옵션은 필수입니다</string>
     <string name="required_options_screen">필수 옵션</string>
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="no_update_available">사용 가능한 업데이트가 없습니다</string>
     <string name="update_check">업데이트 확인하는 중 …</string>
-    <string name="dismiss_temporary">나중에</string>
     <string name="update_available_dialog_description">Universal ReVanced Manager (%s) 의 새로운 버전을 사용할 수 있습니다.</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="download">다운로드</string>
@@ -1027,5 +931,4 @@
     <string name="failed_to_import_keystore">키스토어를 가져올 수 없습니다</string>
     <string name="export">내보내기</string>
     <string name="confirm">확인</string>
-    <string name="saved_app_install_cancelled">설치를 취소하였습니다</string>
 </resources>

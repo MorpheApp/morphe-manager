@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Пакет закрпа</string>
-    <string name="morphe_home_greeting_1">{\rtf1\ansi\deff0{\fonttbl{\f0 Arial;}}{\*\generator RichEdit 5.5}{\*\f0\fs24\lang1024 Коју апликацију желите да пачем?}}</string>
-    <string name="morphe_home_greeting_2">Спремни да поново учиниш YouTube легендарним?</string>
-    <string name="morphe_home_greeting_3">Вежите појасеве, време је за закрпе</string>
-    <string name="morphe_home_greeting_4">Још један дан, још једно ремек-дело блокирано од реклама</string>
-    <string name="morphe_home_greeting_5">Желиш да гледаш рекламе? Ни ја не желим</string>
-    <string name="morphe_home_greeting_6">Hajde da podesimo ponašanje vaših aplikacija</string>
-    <string name="morphe_home_greeting_7">Данашња прогноза: 100% шанси за поправку</string>
+    <string name="morphe_home_greeting_1">Koju aplikaciju želiš da popraviš? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Spreman si da YouTube ponovo postane legendarni? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Pripremite se, dolazi vreme za popravku 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Još jedan dan, još jedna majstorija bez reklama 😌🚫</string>
+    <string name="morphe_home_greeting_5">Želiš da gledaš reklame? Ja takođe ne 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Хајде да се понашамо твоје апликације 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Данашња прогноза: 100% шанси за поправку 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Одговорно закрпљујте… или не 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Спашавамо апликације од самих себе од данас 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Напајано кафеином и добрим закрпама ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API пакет</string>
     <string name="morphe_home_update_error">Ажурирање није успело</string>
     <string name="morphe_home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Додато</string>
     <string name="morphe_home_date_updated">Ажурирано</string>
     <string name="morphe_home_check_updates">Провери</string>
-    <string name="morphe_home_bundle_update_completed">Ажурирање завршено</string>
     <string name="morphe_home_unknown">Непознато</string>
     <string name="morphe_home_timeline">Историјат ажурирања</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Да ли имате оригинални непромењени АПК?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Да бих изменио %1$s, потребна ми је верзија %2$s (непромењена).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">За закрпљивање %1$s, потребна вам је верзија %2$s (некрпљена)</string>
     <string name="morphe_home_apk_availability_yes">Да, имам га</string>
     <string name="morphe_home_apk_availability_no">Не, помозите ми да га нађем</string>
-    <string name="morphe_home_apk_availability_dialog_description">Да бихте закрпили %1$s, потребна ми је верзија %2$s (незакрпљена).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Уверите се да сте преузели АПК, али ГА НЕ инсталирајте.</string>
+    <string name="morphe_home_apk_availability_dialog_description">За закрпљивање %1$s, потребна вам је верзија %2$s (некрпљена)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Преузмите оригинални АПК са АПКМирор-а</string>
-    <string name="morphe_home_download_instructions_description">Пратите ове кораке да бисте преузели %1$s верзију %2$s са APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">Преузмите оригинални APK</string>
     <string name="morphe_home_download_instructions_steps_title">Инструкције:</string>
-    <string name="morphe_home_download_instructions_step1">Притисните Настави да бисте отворили веб страницу APKMirror.com</string>
+    <string name="morphe_home_download_instructions_step1">Притисните дугме \'Настави на APKMirror.com\' испод</string>
     <string name="morphe_home_download_instructions_step2_part1">Скролујте низ веб страницу и притисните</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Кликните на преузимање на веб страници, а не овде 😊</string>
-    <string name="morphe_home_download_instructions_step3">Сачекајте да се преузимање заврши и немојте инсталирати АПК</string>
-    <string name="morphe_home_download_instructions_step3_mount">Сачекајте да се преузимање заврши и инсталирајте АПК</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Притисните преузимање на веб локацији, а не овде 😊</string>
+    <string name="morphe_home_download_instructions_step3">Сачекајте да преузимање буде завршено, и &lt;b&gt;не инсталирајте&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Сачекајте да преузимање буде завршено, а затим &lt;b&gt;инсталирајте APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Након што се преузимање заврши, поново отворите ову апликацију</string>
     <string name="morphe_home_download_instructions_step4_mount">Након инсталације оригиналног АПК-а, поново отворите ову апликацију</string>
-    <string name="morphe_home_download_instructions_note">Важно: Преузмите АПК, али га немојте инсталирати на свој уређај.</string>
-    <string name="morphe_home_download_instructions_continue">Наставите на АПКМирор</string>
+    <string name="morphe_home_download_instructions_continue">Настави на APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Изаберите АПК који сте преузели</string>
     <string name="morphe_home_file_picker_prompt_description">Сада изаберите %1$s АПК датотеку коју сте управо преузели.</string>
     <string name="morphe_home_file_picker_prompt_open">Отвори АПК датотеку коју сам преузео</string>
-    <string name="morphe_home_wrong_package_selected">Очекивани пакет %1$s, али је добијен %2$s</string>
-    <string name="morphe_home_any_version">било која верзија</string>
     <string name="morphe_home_recommended_version">Препоручена верзија</string>
     <string name="morphe_patcher_selected_version">Изабрана верзија</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Грешка копирана у клипборд</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d печова</string>
     <string name="morphe_patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
-    <string name="morphe_patcher_install_dialog_message">Инсталирати печовану апликацију?</string>
-    <string name="morphe_patcher_install_conflict_message">Детектован је сукоб пакета. Да бисте инсталирали нову верзију, прво морате деинсталирати претходну верзију апликације.</string>
-    <string name="morphe_patcher_install_ready_message">Претходна верзија је деинсталирана. Сада можете да инсталирате печовану апликацију.</string>
-    <string name="morphe_patcher_install_cancelled_title">Инсталација отказана</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Кликните на дугме Инсталирај да бисте поново покушали</string>
     <string name="morphe_patcher_installing">Инсталира се…</string>
     <string name="morphe_patcher_installing_subtitle">Готово је да се затресемо! 🎸</string>
     <string name="morphe_patcher_success_title">Све готово! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Поправљамо грешке у некрпљеној апликацији… 🐞</string>
     <string name="morphe_patcher_message_10">Сјајне измене вредне су чекања… ⏳</string>
     <string name="morphe_patcher_message_11">Пеглање пиксела док не засијају… 💎</string>
-    <string name="morphe_patcher_message_12">Молимо останите седети док капитен не искључи знак \“Измена у току\”… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Молимо останите седети док се капетан не искључи \"Закрпљивање у току\" знак… 💺✈️</string>
     <string name="morphe_patcher_message_13">Кување ваше измењене апликације, вруће и свеже… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Љубазно преговарање са байткодом… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Користи се за контролу приступа Morphe додацима. Само Morphe ово има.</string>
     <string name="toast_copied_to_clipboard">Копирано!</string>
     <string name="copy_to_clipboard">Копирај у буфер</string>
-    <string name="dashboard">Контролна табла</string>
     <string name="settings">Поставке</string>
     <string name="select_app">Изабери апликацију</string>
     <string name="new_downloader_plugins_notification">Доступни су нови додаци за преузимање. Кликните овде да бисте их конфигурисали.</string>
     <string name="unsupported_architecture_warning">Закрпе на овој архитектури уређаја нису подржане и највероватније ће пропасти.</string>
     <string name="import_">Увези</string>
-    <string name="import_patches">Увези закрпе</string>
     <string name="file_field_set">Изабрано</string>
     <string name="file_field_not_set">Није изабрано</string>
     <string name="field_not_set">Није подешено</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Izaberite koja uzetka se smešta jošmena uključivanje APK-ja.</string>
     <string name="bundle_version_dialog_default">Користи подразумевану препоруку</string>
     <string name="bundle_version_dialog_default_subtitle">Аутоматски бира најчешћу компатибилну верзију.</string>
-    <string name="bundle_version_dialog_option_subtitle">Користи верзију %1$s</string>
     <string name="bundle_version_all_versions">Све верзије</string>
     <string name="bundle_version_no_version">Нема предложене верзије</string>
-    <string name="bundle_version_suggested_label">Предложена верзија: %1$s</string>
-    <string name="bundle_version_other_heading">Остале подржане верзије</string>
     <string name="bundle_update_manual_available">Доступно је ажурирање</string>
     <string name="bundle_update_manual_available_with_version">Доступно је ажурирање: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d обрађених пакета</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Организовање пакета</string>
     <string name="bundle_reorder_title">Организовање пакета закрпа</string>
     <string name="bundle_reorder_description">Повуците ручицу да бисте подесили редослед пакета који се појављују на листи и у менију за избор закрпа.</string>
-    <string name="bundle_reorder_move_up">Помери пакет нагоре</string>
-    <string name="bundle_reorder_move_down">Помери пакет надоле</string>
     <string name="bundle_actions_expand">Прикажи радње за пакет</string>
     <string name="bundle_actions_collapse">Сакриј радње за пакет</string>
     <string name="patch_bundle_duplicate_name_error">Пакет закрпа са овим именом већ постоји</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Предложена верзија: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Изабрана верзија: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Изабрано</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (изабрано)</string>
     <string name="bundle_version_dialog_other_title">Изабери другу подржану верзију:</string>
     <string name="bundle_version_dialog_locked_title">Заштита верзија је омогућена</string>
     <string name="bundle_version_dialog_locked_hint">Идите на Поставке &gt; Напредно &gt; Заштите и подесите оба „Захтевај предложену верзију апликације“ (искључи прекидач) и „Онемогући проверу компатибилности верзија“ (укључи прекидач) да бисте изабрали верзије специфичне за пакет.</string>
-    <string name="patch_item_description">Започни са применом измене на апликацију</string>
     <string name="patch_selector_item">Изабери измене</string>
     <string name="patch_selector_item_description">%d измена изабрано</string>
     <string name="no_patches_selected">Ниједна измена није изабрана</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Коришћење инсталираног АПК-а</string>
     <string name="apk_source_local">Коришћење локалне АПК датотеке</string>
     <string name="apk_source_downloaded">Коришћење преузетог АПК-а</string>
-    <string name="legacy_import_failed">Није могуће увести старе поставке</string>
     <string name="auto_updates_dialog_title">Конфигуриши ажурирања</string>
     <string name="auto_updates_dialog_description">Да ли желите да Morphe периодично проверава ажурирања за следеће компоненте?</string>
     <string name="auto_updates_dialog_patches">Morphe Патцхес</string>
@@ -246,7 +236,6 @@
     <string name="updates">Ажурирања</string>
     <string name="updates_description">Проверите ажурирања и прегледајте дневник промена</string>
     <string name="downloads">Преузимања</string>
-    <string name="downloads_description">Довнлоадер додаци и преузете апликације</string>
     <string name="plugins_help_title">Шта је довнлоадер?</string>
     <string name="plugins_help_description">Довнлоадер је додатак који омогућава УРВ-у да преузима стандардне АПК-ове са разних извора. Преузети АПК-ови ће бити приказани у доњем одељку. Током процеса патцхинг-а, можете изабрати већ преузети АПК или га можете преузети путем додатка.\n\nЛиста подржаних довнлоадер додатака може се наћи</string>
     <string name="import_export">Увоз &amp; извоз</string>
@@ -255,7 +244,6 @@
     <string name="changelog_loading">Учитавање дневника промена</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>
     <string name="changelog_description">Погледајте најновије промене у овом ажурирању</string>
-    <string name="no_changelogs_found">Нису пронађени дневници промена</string>
     <string name="advanced">Напредно</string>
     <string name="advanced_description">URL адреса АПИ-ја, ограничење меморије, отклањање грешака</string>
     <string name="about">О нама</string>
@@ -274,27 +262,18 @@
     <string name="theme_color_picker_title">Боја теме</string>
     <string name="theme_color_preview">Преглед</string>
     <string name="theme_color_reset">Врати боју теме</string>
-    <string name="theme_color_presets">Предлошци боја теме</string>
-    <string name="theme_color_presets_description">Додирните боју да бисте променили боју позадине и картица</string>
     <string name="theme_preview_title">Преглед теме</string>
     <string name="theme_preview_description">Ажурира се одмах приликом промене поставки теме</string>
     <string name="theme_presets">Предлошци теме</string>
     <string name="theme_presets_description">Изаберите како апликација прати систем, светло, тамно, Material You или чисту црну боју</string>
     <string name="theme_preset_default">Прати систем</string>
     <string name="theme_preset_amoled">Чисто црна</string>
-    <string name="theme_preset_sunset">Сумрак</string>
-    <string name="theme_preset_forest">Шума</string>
-    <string name="theme_preset_ocean">Океан</string>
-    <string name="theme_preset_midnight">Поноћ</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Поништи све поставке теме</string>
     <string name="color_channel_red">Црвена</string>
     <string name="color_channel_green">Зелена</string>
     <string name="color_channel_blue">Плава</string>
-    <string name="pure_black_theme">Чиста црна тема</string>
-    <string name="pure_black_theme_description">Користи црну позадину за тамну тему</string>
     <string name="theme">Тема</string>
-    <string name="theme_description">Изабери између светле или тамне теме</string>
     <string name="safeguards">Заштита</string>
     <string name="patch_compat_check">Онемогући проверу компатибилности верзија</string>
     <string name="patch_compat_check_description">Не ограничавајте закрпе на компатибилне верзије апликације</string>
@@ -366,10 +345,8 @@
     <string name="export_patch_bundles">Извези пакете пакета</string>
     <string name="export_patch_bundles_description">Сачувајте увезене удаљене пакете пакета у JSON датотеку</string>
     <string name="export_patch_bundles_fail">Није могуће извести пакете пакета: %s</string>
-    <string name="export_patch_bundles_empty">Нема пакета за исправке за извоз</string>
     <string name="export_patch_bundles_success">Извезено %d пакета за исправке</string>
     <string name="export_patch_bundles_partial">Извезено %1$d пакета за исправке. Неки пакети нису могли бити извезени јер су додати локално.</string>
-    <string name="export_patch_bundles_local_not_supported">Извоз је доступан само за пакете за исправке увезене са URL адреса</string>
     <string name="bundle_type_remote">Удаљени</string>
     <string name="bundle_type_local">Локални</string>
     <string name="bundle_type_preinstalled">Пре-инсталирани</string>
@@ -424,12 +401,7 @@
     <string name="patch_selection_collapse_on_toggle_description">Аутоматски сакриј дугмиће радњи за избор пакета кад год изаберете или поништите избор пакета</string>
     <string name="patch_selection_action_order_title">Редослед дугмића радњи за избор пакета</string>
     <string name="patch_selection_action_order_description">Изаберите редослед распореда за дугмиће радњи за избор пакета</string>
-    <string name="patch_selection_action_order_dialog_title">Поново поређајте радње за крпеље</string>
-    <string name="patch_selection_action_order_dialog_description">Померите ставке да бисте променили како се приказују дугмад за радње избора крпеља. Преглед се ажурира уживо.</string>
-    <string name="patch_selection_action_order_preview_label">Преглед</string>
     <string name="patch_selection_action_order_reset">Вратите на подразумевани редослед</string>
-    <string name="patch_selection_action_move_up">Помери горе</string>
-    <string name="patch_selection_action_move_down">Помери доле</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Означи пакет као неизабран?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Означити све крпеље изабране из %1$s као неизабране?</string>
     <string name="patch_selection_confirm_deselect_all_title">Означити све крпеље као неизабране?</string>
@@ -495,9 +467,6 @@
     <string name="downloader_plugin_delete_apps_description">Да ли сте сигурни да желите да избришете изабране апликације?</string>
     <string name="downloader_settings_no_apps">Ниједна преузета апликација није пронађена.</string>
     <string name="search_apps">Претражи апликације…</string>
-    <string name="loading_body">Учитавање…</string>
-    <string name="downloading_patches">Преузимање закрпа…</string>
-    <string name="options">Опције</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="edit">Уреди</string>
@@ -507,7 +476,6 @@
     <string name="patch">Печ</string>
     <string name="select_from_storage">Изабери из складишта</string>
     <string name="select_from_storage_description">Изаберите АПК датотеку из складишта помоћу бирача датотека</string>
-    <string name="suggested_version_info">Предложена верзија: %s</string>
     <string name="type_anything">Укуцајте било шта да наставите</string>
     <string name="search">Претражи печове…</string>
     <string name="apply">Примени</string>
@@ -547,29 +515,12 @@
     <string name="export_name_format_description">Прилагодите подразумевано име датотеке за извезене пачковане апликације</string>
     <string name="export_name_format_dialog_title">Формат имена датотеке за извоз</string>
     <string name="export_name_format_dialog_supporting">Користите доленаведене заменске знакове за креирање имена датотеке. Екстензија .apk се аутоматски додаје ако недостаје.</string>
-    <string name="export_name_format_preview">Преглед: %1$s</string>
     <string name="export_name_format_preview_label">Преглед</string>
     <string name="export_name_format_variables">Променљиве</string>
     <string name="export_name_format_reset">Ресетуј на подразумевано</string>
     <string name="export_name_format_error_blank">Формат имена датотеке не може бити празан.</string>
     <string name="export_name_format_current">Тренутни образац: %1$s</string>
     <string name="export_name_format_insert">Уметни</string>
-    <string name="export_name_variable_app_name">Име апликације</string>
-    <string name="export_name_variable_app_name_description">Замењено именом за приказ апликације.</string>
-    <string name="export_name_variable_package_name">Име пакета</string>
-    <string name="export_name_variable_package_name_description">Замењено именом пакета апликације.</string>
-    <string name="export_name_variable_app_version">Верзија апликације</string>
-    <string name="export_name_variable_app_version_description">Замењено именом верзије апликације.</string>
-    <string name="export_name_variable_patches_version">Верзија патча</string>
-    <string name="export_name_variable_patches_version_description">Замењено верзијом примећеног пакета за исправке.</string>
-    <string name="export_name_variable_bundle_names">Имена пакетa закрпа</string>
-    <string name="export_name_variable_bundle_names_description">Замењено именом примећеног пакета за исправке.</string>
-    <string name="export_name_variable_manager_version">Верзија менаџера</string>
-    <string name="export_name_variable_manager_version_description">Замењено верзијом менаџера.</string>
-    <string name="export_name_variable_timestamp">Временска ознака</string>
-    <string name="export_name_variable_timestamp_description">Замењено тренутним временом (ггггММdd-hhMM).</string>
-    <string name="export_name_variable_date">Датум</string>
-    <string name="export_name_variable_date_description">Замењено тренутним датумом (ггггММdd).</string>
     <string name="debug_logs_export">Извези записнике за отклањање грешака</string>
     <string name="debug_logs_export_read_failed">Није успело читање записа (излазни код %d)</string>
     <string name="debug_logs_export_failed">Није успео извоз записа</string>
@@ -592,31 +543,19 @@
     <string name="app_language">Језик апликације</string>
     <string name="language_dialog_title">Изабери језик апликације</string>
     <string name="language_option_system">Користи језик уређаја</string>
-    <string name="device">Уређај</string>
-    <string name="device_android_version">Андроид верзија</string>
-    <string name="device_model">Модел</string>
-    <string name="device_architectures">ЦПУ архитектуре</string>
-    <string name="device_memory_limit">Меморијска ограничења</string>
     <string name="device_memory_limit_format">%1$dMB (Нормално) - %2$dMB (Велико)</string>
     <string name="patches_force_download">Принудно преузимање свих пакета закрпа</string>
     <string name="patches_reset">Ресетовање пакета закрпа</string>
-    <string name="patching">Закрпе</string>
-    <string name="signing">Потписивање</string>
-    <string name="storage">Складиште</string>
     <string name="no_patch_found">Не могу се пронаћи закрпе. Проверите своје закрпе</string>
     <string name="tab_apps">Апликације</string>
     <string name="tab_patches">Пакети закрпа</string>
     <string name="tab_profiles">Профили закрпа</string>
     <string name="delete">Избриши</string>
     <string name="refresh">Освежи</string>
-    <string name="continue_anyways">Настави и поред тога</string>
-    <string name="download_another_version">Преузми другу верзију</string>
-    <string name="download_app">Преузми апликацију</string>
     <string name="download_apk">Преузми APK фајл</string>
     <string name="patches_download_fail">Није успело преузимање пакета: %s</string>
     <string name="patches_replace_fail">Није успело учитавање пакета: %s</string>
     <string name="no_patched_apps_found">Није пронађена ниједна прилагођена апликација</string>
-    <string name="tap_on_patches">Додирните пакете да бисте сазнали више информација о њима</string>
     <string name="patches_selected">Изабран је %s пакет закрпа</string>
     <string name="patch_profiles_selected">%1$d профил исправке изабран</string>
     <string name="selected_apps_count">%1$d апликација изабрано</string>
@@ -630,7 +569,6 @@
 Користите препоручену верзију: %s
 
 Да бисте наставили, искључите „Захтевај препоручену верзију апликације“ у напредним подешавањима."</string>
-    <string name="selection_warning_title">Престати са коришћењем подразумеваних вредности?</string>
     <string name="selection_warning_description">"Препоручује се коришћење подразумеваног избора и опција за фластере. Њихово мењање може довести до неочекиваних проблема.
 
 Морате укључити „Дозволи промену избора и опција фластера“ у напредним подешавањима пре него што укључите фластере."</string>
@@ -686,9 +624,6 @@
     <string name="patcher_missing_patch_title">Избор крпљења захтева пажњу</string>
     <string name="patcher_preflight_missing_patch_remove">Уклони недостајуће крпљење</string>
     <string name="patcher_preflight_missing_patch_proceed">Настави и поред тога</string>
-    <string name="patcher_missing_patch_message">"Крпљење није успело јер следеће крпљење нису пронађене у тренутном пакету:
-%1$s
-Поново отворите избор и поново их изаберите (или изаберите замене) пре поновног покушаја."</string>
     <string name="patcher_preflight_missing_patch_message">"Sledi su pregledni prica koje se nisu dostupne u aktuelnoj verziji 
 %1$s
 Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
@@ -697,7 +632,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="patch_selector_missing_patch_message">"Ово крпљење морају бити поново изабрана:
 %1$s
 Омогућите их поново (или изаберите алтернативе), а затим покушајте поново да крпите."</string>
-    <string name="delete_profile_confirmation">Избриши \"%1$s\"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Избриши изабране фластер профиле?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d фластер</item>
@@ -709,26 +643,18 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
         <item quantity="few">%d пакета</item>
         <item quantity="other">%d пакета</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Универзални фластери имају општију употребу и не раде поуздано као фластери који циљају специфичне апликације. Могуће је да наиђете на проблеме при њиховом коришћењу.
-
-Потребно је да укључите „Прикажи &amp; дозволи коришћење универзалних фластера“ у напредним подешавањима пре употребе универзалних фластера."</string>
     <string name="this_version">Ова верзија</string>
     <string name="universal">Било која апликација</string>
     <string name="search_patches">Претражи фластере</string>
     <string name="app_version_not_compatible">"Овај закрпа није компатибилан са изабраном верзијом апликације (%1$s).
 
 Компатибилан је само са следећом верзијом: %2$s."</string>
-    <string name="continue_with_version">Наставити са овом верзијом?</string>
-    <string name="version_not_compatible">Нису сви патенти компатибилни са овом верзијом (%s). Да ли желите да наставите?</string>
-    <string name="download_application">Преузети апликацију?</string>
-    <string name="app_not_installed">Изабрана апликација није инсталирана. Да ли желите да је преузмете?</string>
     <string name="failed_to_load_apk">Није успело учитавање АПК-а</string>
     <string name="loading">Учитавање…</string>
     <string name="not_installed">Није инсталирано</string>
     <string name="installed">Инсталирано</string>
     <string name="app_info">Информације о апликацији</string>
     <string name="uninstall">Деинсталирај</string>
-    <string name="unpatch">Поништи патч</string>
     <string name="repatch">Поново патч</string>
     <string name="install_type">Тип инсталације</string>
     <string name="package_name">Име пакета</string>
@@ -739,7 +665,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="applied_patches_empty">Нема забележених закрпа за ову апликацију</string>
     <string name="applied_patches_bundle_missing">Метаподаци пакета нису доступни. Приказују се сачувана имена закрпа.</string>
     <string name="no_patch_bundles_tracked">Нема забележених пакета закрпа за ову апликацију</string>
-    <string name="default_install">Подразумевано</string>
     <string name="mount_install">Инсталатер са рут приступом</string>
     <string name="mounted">Монтирано</string>
     <string name="unmounted">Демонтирано</string>
@@ -755,7 +680,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="failed_to_unmount">Није успело демонтирање: %s</string>
     <string name="unpatch_app">Уклонити пач са апликације?</string>
     <string name="unpatch_description">Да ли сте сигурни да желите да уклоните пач са ове апликације?</string>
-    <string name="downloader_invalid_version">Преузимач није преузео исправну верзију</string>
     <string name="downloader_app_not_found">Преузимач није пронашао апликацију</string>
     <string name="downloader_error">Грешка преузимача: %s</string>
     <string name="downloader_no_plugins_installed">Није инсталиран ниједан преузимач.</string>
@@ -776,7 +700,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="path_selector_files">Датотеке</string>
     <string name="show_password_field">Прикажи лозинку</string>
     <string name="hide_password_field">Сакриј лозинку</string>
-    <string name="installer">Инсталатер</string>
     <string name="installer_primary_title">Примарни инсталатер</string>
     <string name="installer_primary_description">Користи се прво приликом инсталирања закрпених апликација.</string>
     <string name="installer_fallback_title">Резервни инсталатер</string>
@@ -855,7 +778,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="install_app_fail_title">Инсталација није успела</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
     <string name="mount_app_fail_title">Монтирање није успело</string>
-    <string name="mount_app_fail">Није успело монтирање апликације: %1$s</string>
     <string name="install_timeout_message">Инсталација није завршена. Проверите дијалог системског инсталатера и покушајте поново.</string>
     <string name="reinstall_app_fail">Није успела поновна инсталација апликације: %s</string>
     <string name="uninstall_app_fail">Није успело деинсталирање апликације: %s</string>
@@ -874,16 +796,11 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="install_saved_app">Инсталирај</string>
     <string name="remount_saved_app">Поново монтирај</string>
     <string name="update_saved_app">Ажурирај</string>
-    <string name="installing_saved_app">Инсталира се сачувана апликација…</string>
     <string name="saved_app_install_success">Инсталирана сачувана апликација</string>
     <string name="saved_app_install_failed">Грешка при инсталирању сачуване апликације</string>
     <string name="saved_app_uninstall_title">Деинсталирај инсталирану копију?</string>
-    <string name="saved_app_unmount_title">Одмонтирај инсталирану копију?</string>
     <string name="saved_app_uninstall_description">Ово уклања само инсталирану верзију. Ваш сачувани АПК остаје непромењен.</string>
-    <string name="saved_app_unmount_description">Ово одмонтира пачковани АПК. Ваш сачувани АПК остаје непромењен.</string>
     <string name="saved_app_install_missing">Сачувани АПК није пронађен</string>
-    <string name="delete_saved_copy">Избриши сачувану копију</string>
-    <string name="sign_fail">Грешка при потписивању АПК-а: %s</string>
     <string name="save_logs">Сачувај логове</string>
     <string name="plugin_activity_dialog_body">Потребна је интеракција корисника да би се наставило са овим додатком.</string>
     <string name="select_install_type">Изаберите тип инсталације</string>
@@ -891,7 +808,6 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="patcher_step_load_patches">Учитавање закрпа</string>
     <string name="patcher_step_unpack">Читање АПК датотеке</string>
     <string name="patcher_step_prepare_split_apk">Спојити подељене АПК</string>
-    <string name="patcher_step_merge_not_required">Није потребно спајање подељених датотека</string>
     <string name="patcher_step_group_patching">Закрпљавање</string>
     <string name="patcher_step_group_saving">Чување</string>
     <string name="patcher_step_write_patched">Писање закрпљене АПК датотеке</string>
@@ -929,14 +845,9 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="less">Мање</string>
     <string name="continue_">Настави</string>
     <string name="dismiss">Одбаци</string>
-    <string name="permanent_dismiss">Не приказуј ово поново</string>
-    <string name="website">Веб-сајт</string>
     <string name="patch_bundle_urls">Преузми пакете за фластере</string>
-    <string name="contact">Контакт</string>
     <string name="version">Верзија</string>
     <string name="published">Објављено</string>
-    <string name="submit_feedback">Пошаљи проблем или повратну информацију</string>
-    <string name="submit_feedback_description">Помозите нам да побољшамо ову апликацију</string>
     <string name="developer_options">Опције за програмере</string>
     <string name="developer_options_description">Опције за отклањање грешака</string>
     <string name="patches_update_success">Ажурирање успешно</string>
@@ -951,12 +862,7 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
 
 Отворен код у својој суштини, Morphe напредује захваљујући повратним информацијама заједнице и доприносима за погон будућих иновација"</string>
     <string name="here">овде.</string>
-    <string name="developer_options_enabled">Опције програмера омогућене</string>
-    <string name="developer_options_taps">preostalo %d додира</string>
-    <string name="developer_options_already_enabled">Опције програмера су већ омогућене</string>
     <string name="update_available">Ажурирање је доступно</string>
-    <string name="current_version">Тренутна верзија: %s</string>
-    <string name="new_version">Нова верзија: %s</string>
     <string name="ready_to_install_update">Спреман за инсталирање ажурирања</string>
     <string name="update_completed">Ажурирање инсталирано</string>
     <string name="install_update_manager_failed">Неуспешно инсталирање ажурирања</string>
@@ -982,14 +888,12 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="hours_ago">%s сати пре</string>
     <string name="days_ago">%s дана пре</string>
     <string name="invalid_date">Неважећи датум</string>
-    <string name="disable_battery_optimization">Онемогући оптимизацију батерије</string>
     <string name="input_dialog_value_invalid">Неважећа вредност</string>
     <string name="option_required">Ова опција је обавезна</string>
     <string name="required_options_screen">Обавезне опције</string>
     <string name="failed_to_check_updates">Није успело провера ажурирања: %s</string>
     <string name="no_update_available">Нема доступних ажурирања</string>
     <string name="update_check">Проверава се ажурирање…</string>
-    <string name="dismiss_temporary">Не сада</string>
     <string name="update_available_dialog_description">Доступна је нова верзија Morphe (%s).</string>
     <string name="failed_to_download_update">Није успело преузимање ажурирања: %s</string>
     <string name="download">Преузми</string>
@@ -1046,5 +950,4 @@ Možete je izbaciti automatski, prilagoditi izbor ili nastaviti odmah."</string>
     <string name="failed_to_import_keystore">Неуспешно увожење кејстора</string>
     <string name="export">Извези</string>
     <string name="confirm">Потврди</string>
-    <string name="saved_app_install_cancelled">Инсталација отказана</string>
 </resources>
