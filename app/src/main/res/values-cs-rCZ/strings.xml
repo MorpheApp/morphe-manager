@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Balíček záplat</string>
-    <string name="morphe_home_greeting_1">Jakou aplikaci chcete záplatovat?</string>
-    <string name="morphe_home_greeting_2">Připraveni udělat YouTube legendárním znovu?</string>
-    <string name="morphe_home_greeting_3">Připoutejte se, je čas na záplaty</string>
-    <string name="morphe_home_greeting_4">Další den, další reklamami blokované mistrovské dílo</string>
-    <string name="morphe_home_greeting_5">Chcete sledovat reklamy? Já ne</string>
-    <string name="morphe_home_greeting_6">Udělejme si, aby vaše aplikace chovala dobře.</string>
-    <string name="morphe_home_greeting_7">Dnešní předpověď: 100% šance patchingu</string>
+    <string name="morphe_home_greeting_1">Kterou aplikaci chcete opravit? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Připraveni znovu učinit YouTube legendárním? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Připoutejte se, začínáme s opravami 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Další den, další mistrovské dílo bez reklam 😌🚫</string>
+    <string name="morphe_home_greeting_5">Chcete vidět reklamy? Já také ne 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Pojďme se postarat o chování vašich aplikací 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Dnešní předpověď: 100% šance na opravování 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Opravujte odpovědně... nebo ne 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Zachraňujeme aplikace od sebe samých již dnes 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Napájeno kávou a dobrými opravami ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API balíček</string>
     <string name="morphe_home_update_error">Aktualizace selhala</string>
     <string name="morphe_home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Přidáno</string>
     <string name="morphe_home_date_updated">Aktualizováno</string>
     <string name="morphe_home_check_updates">Kontrolovat</string>
-    <string name="morphe_home_bundle_update_completed">Aktualizace dokončena</string>
     <string name="morphe_home_unknown">Neznámé</string>
     <string name="morphe_home_timeline">Historie aktualizací</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Máte původní neupravenou APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Pro úpravu %1$s potřebuji verzi %2$s (neupravenou).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Pro opravení %1$s potřebujete verzi %2$s (neopraveno)</string>
     <string name="morphe_home_apk_availability_yes">Ano, mám ji</string>
     <string name="morphe_home_apk_availability_no">Ne, pomozte mi ji najít</string>
-    <string name="morphe_home_apk_availability_dialog_description">Pro zalepení %1$s potřebuji verzi %2$s (nezalepenou).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Ujistěte se, že stáhnete APK, ale NEINSTALUJTE ho.</string>
+    <string name="morphe_home_apk_availability_dialog_description">Pro opravení %1$s potřebujete verzi %2$s (neopraveno)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Stáhněte originální APK z APKMirror</string>
-    <string name="morphe_home_download_instructions_description">Postupujte podle těchto kroků k stažení verze %1$s %2$s z APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">Stáhněte si původní APK</string>
     <string name="morphe_home_download_instructions_steps_title">Postup:</string>
-    <string name="morphe_home_download_instructions_step1">Stiskněte Pokračovat pro otevření webu APKMirror.com</string>
+    <string name="morphe_home_download_instructions_step1">Stiskněte tlačítko \'Pokračovat na APKMirror.com\'</string>
     <string name="morphe_home_download_instructions_step2_part1">Projíždějte dolů webovou stránku a stiskněte</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Klikněte na stáhnout na webu, ne zde 😊</string>
-    <string name="morphe_home_download_instructions_step3">Počkejte, až se stažení dokončí, a neinstalujte APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Počkejte, až se stažení dokončí, a instalujte APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Stiskněte stažení na webu, ne zde 😊</string>
+    <string name="morphe_home_download_instructions_step3">Počkejte, až se stahování dokončí, a &lt;b&gt;APK neinstalujte&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">Počkejte, až se stahování dokončí, pak &lt;b&gt;nainstalujte APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Po dokončení stahování otevřete tuto aplikaci znovu</string>
     <string name="morphe_home_download_instructions_step4_mount">Po instalaci původní APK otevřete tuto aplikaci znovu</string>
-    <string name="morphe_home_download_instructions_note">Důležité: Stáhněte APK, ale neinsta lujte ji na svém zařízení.</string>
-    <string name="morphe_home_download_instructions_continue">Pokračovat na APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Pokračovat na APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Vyberte staženou APK</string>
     <string name="morphe_home_file_picker_prompt_description">Nyní vyberte soubor APK %1$s, který jste právě stáhli.</string>
     <string name="morphe_home_file_picker_prompt_open">Otevřít stažený soubor APK</string>
-    <string name="morphe_home_wrong_package_selected">Očekáván balíček %1$s, ale obdržen %2$s</string>
-    <string name="morphe_home_any_version">jakákoli verze</string>
     <string name="morphe_home_recommended_version">Doporučená verze</string>
     <string name="morphe_patcher_selected_version">Vybraná verze</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchů</string>
     <string name="morphe_patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
-    <string name="morphe_patcher_install_dialog_message">Nainstalovat upravenou aplikaci?</string>
-    <string name="morphe_patcher_install_conflict_message">Byl zjištěn konflikt balíčků. Pro instalaci nové verze musíte nejprve odinstalovat předchozí verzi aplikace.</string>
-    <string name="morphe_patcher_install_ready_message">Předchozí verze byla odinstalována. Nyní můžete nainstalovat upravenou aplikaci.</string>
-    <string name="morphe_patcher_install_cancelled_title">Instalace zrušena</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Klikněte na tlačítko instalace pro opakování</string>
     <string name="morphe_patcher_installing">Instaluje se…</string>
     <string name="morphe_patcher_installing_subtitle">Téměř připraveno na rock! 🎸</string>
     <string name="morphe_patcher_success_title">Vše hotovo! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Opravuji chyby v neopatchované aplikaci… 🐞</string>
     <string name="morphe_patcher_message_10">Skvělé patche stojí za čekání… ⏳</string>
     <string name="morphe_patcher_message_11">Leštím pixely, dokud nezačnou zářit… 💎</string>
-    <string name="morphe_patcher_message_12">Zůstaňte prosím sedět, dokud kapitán nevypne značku „Probíhá patchování“… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Prosím, zůstaňte sedět, dokud kapitán nevypne značku \"Probíhá připojování\"… 💺✈️</string>
     <string name="morphe_patcher_message_13">Vařím vaši patchovanou aplikaci, horkou a čerstvou… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Vyjednávání s bajtkódem zdvořile… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Používá se k ovládání přístupu k pluginům Morphe. Pouze Morphe to má.</string>
     <string name="toast_copied_to_clipboard">Zkopírováno!</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
-    <string name="dashboard">Přehled</string>
     <string name="settings">Nastavení</string>
     <string name="select_app">Vybrat aplikaci</string>
     <string name="new_downloader_plugins_notification">Dostupné nové zásuvné moduly stahovače. Klikněte zde pro jejich konfiguraci.</string>
     <string name="unsupported_architecture_warning">Patchování pro tuto architekturu zařízení není podporováno a s největší pravděpodobností selže.</string>
     <string name="import_">Importovat</string>
-    <string name="import_patches">Importovat patchy</string>
     <string name="file_field_set">Vybráno</string>
     <string name="file_field_not_set">Nevybráno</string>
     <string name="field_not_set">Nenastaveno</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Vyhledejte, quale balíček by mělo být použit When stahování APK.</string>
     <string name="bundle_version_dialog_default">Použít výchozí doporučení</string>
     <string name="bundle_version_dialog_default_subtitle">Automaticky vybrat nejběžnější kompatibilní verzi.</string>
-    <string name="bundle_version_dialog_option_subtitle">Použít verzi %1$s</string>
     <string name="bundle_version_all_versions">Všechny verze</string>
     <string name="bundle_version_no_version">Žádná navrhovaná verze</string>
-    <string name="bundle_version_suggested_label">Navrhovaná verze: %1$s</string>
-    <string name="bundle_version_other_heading">Další podporované verze</string>
     <string name="bundle_update_manual_available">Aktualizace k dispozici</string>
     <string name="bundle_update_manual_available_with_version">Aktualizace k dispozici: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d zpracovaných balíčků</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Uspořádat balíčky</string>
     <string name="bundle_reorder_title">Uspořádat sadu balíčků</string>
     <string name="bundle_reorder_description">Přetáhněte úchyt, abyste uspořádali pořadí, ve kterém se balíčky zobrazují ve seznamu a v nabídce výběru záplaty.</string>
-    <string name="bundle_reorder_move_up">Posunout balíček nahoru</string>
-    <string name="bundle_reorder_move_down">Posunout balíček dolů</string>
     <string name="bundle_actions_expand">Zobrazit akce balíčku</string>
     <string name="bundle_actions_collapse">Skrýt akce balíčku</string>
     <string name="patch_bundle_duplicate_name_error">Sada záplat s tímto názvem již existuje</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Navrhovaná verze: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Vybraná verze: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Vybrané</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (vybrané)</string>
     <string name="bundle_version_dialog_other_title">Vybrat jinou podporovanou verzi:</string>
     <string name="bundle_version_dialog_locked_title">Ochrany verzí jsou povoleny</string>
     <string name="bundle_version_dialog_locked_hint">Přejděte do Nastavení &gt; Pokročilé &gt; Ochrany a nastavte obě položky „Vyžadovat navrhovanou verzi aplikace“ (vypnout) a „Vypnout kontrolu kompatibility verze“ (zapnout), abyste mohli vybrat verze specifické pro balíček.</string>
-    <string name="patch_item_description">Začít aplikovat záplaty</string>
     <string name="patch_selector_item">Vybrat záplaty</string>
     <string name="patch_selector_item_description">%d vybraných záplat</string>
     <string name="no_patches_selected">Žádné záplaty nejsou vybrány</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Použít nainstalovanou APK</string>
     <string name="apk_source_local">Použít lokální soubor APK</string>
     <string name="apk_source_downloaded">Použít staženou APK</string>
-    <string name="legacy_import_failed">Nelze importovat staré nastavení</string>
     <string name="auto_updates_dialog_title">Nastavit aktualizace</string>
     <string name="auto_updates_dialog_description">Chcete, aby Morphe pravidelně kontroloval aktualizace následujících komponent?</string>
     <string name="auto_updates_dialog_patches">Záplaty Morphe</string>
@@ -246,7 +236,6 @@
     <string name="updates">Aktualizace</string>
     <string name="updates_description">Zkontrolovat aktualizace a zobrazit poznámky k vydání</string>
     <string name="downloads">Stažení</string>
-    <string name="downloads_description">Moduly stahovače a stažené aplikace</string>
     <string name="plugins_help_title">Co je stahovač?</string>
     <string name="plugins_help_description">Stahovač je modul, který umožňuje URV stahovat stock APK z různých zdrojů. Stažené APK se zobrazí v dolní části. Během procesu záplaty můžete vybrat již stažené APK nebo ho stáhnout prostřednictvím modulu.\n\nSeznam podporovaných modulů stahovače lze nalézt</string>
     <string name="import_export">Import &amp; export</string>
@@ -255,7 +244,6 @@
     <string name="changelog_loading">Načítání poznámek k vydání</string>
     <string name="changelog_download_fail">Selhání stažení poznámek k vydání: %s</string>
     <string name="changelog_description">Podívejte se na nejnovější změny v této aktualizaci</string>
-    <string name="no_changelogs_found">Nebyly nalezeny žádné poznámky k vydání</string>
     <string name="advanced">Pokročilé</string>
     <string name="advanced_description">URL API, limit paměti, ladění</string>
     <string name="about">O aplikaci</string>
@@ -274,27 +262,18 @@
     <string name="theme_color_picker_title">Barva motivu</string>
     <string name="theme_color_preview">Náhled</string>
     <string name="theme_color_reset">Obnovit barvu motivu</string>
-    <string name="theme_color_presets">Předvolby barvy motivu</string>
-    <string name="theme_color_presets_description">Klepněte na barvu pro změnu barvy pozadí a karet</string>
     <string name="theme_preview_title">Náhled tématu</string>
     <string name="theme_preview_description">Aktualizuje se okamžitě při změně nastavení tématu</string>
     <string name="theme_presets">Předvolby tématu</string>
     <string name="theme_presets_description">Vyberte, jak aplikace následuje systém, světlý, tmavý, Material You nebo čistě černý</string>
     <string name="theme_preset_default">Následovat systém</string>
     <string name="theme_preset_amoled">Čistě černý</string>
-    <string name="theme_preset_sunset">Západ slunce</string>
-    <string name="theme_preset_forest">Les</string>
-    <string name="theme_preset_ocean">Oceán</string>
-    <string name="theme_preset_midnight">Půlnoc</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Resetovat všechna nastavení tématu</string>
     <string name="color_channel_red">Červená</string>
     <string name="color_channel_green">Zelená</string>
     <string name="color_channel_blue">Modrá</string>
-    <string name="pure_black_theme">Čisté černé téma</string>
-    <string name="pure_black_theme_description">Používat čistě černé pozadí pro tmavé téma</string>
     <string name="theme">Téma</string>
-    <string name="theme_description">Vyberte mezi světlým nebo tmavým tématem</string>
     <string name="safeguards">Ochrany</string>
     <string name="patch_compat_check">Vypnout kontrolu kompatibility verze</string>
     <string name="patch_compat_check_description">Neomezovat patche na kompatibilní verze aplikace</string>
@@ -366,10 +345,8 @@ Nebudete schopni aktualizovat dříve nainstalované aplikace z tohoto zdroje."<
     <string name="export_patch_bundles">Export balíčků záplat</string>
     <string name="export_patch_bundles_description">Uložit importované vzdálené balíčky záplat do JSON souboru</string>
     <string name="export_patch_bundles_fail">Nelze exportovat balíčky záplat: %s</string>
-    <string name="export_patch_bundles_empty">Nejsou žádné balíčky záplat k exportu</string>
     <string name="export_patch_bundles_success">Exportováno %d balíčků záplat</string>
     <string name="export_patch_bundles_partial">Exportováno %1$d balíčků záplat. Některé balíčky se nepodařilo exportovat, protože byly přidány lokálně.</string>
-    <string name="export_patch_bundles_local_not_supported">Export je dostupný pouze pro balíčky záplat importované z URL</string>
     <string name="bundle_type_remote">Vzdálený</string>
     <string name="bundle_type_local">Lokální</string>
     <string name="bundle_type_preinstalled">Předinstalovaný</string>
@@ -424,12 +401,7 @@ Nebudete schopni aktualizovat dříve nainstalované aplikace z tohoto zdroje."<
     <string name="patch_selection_collapse_on_toggle_description">Automaticky skrýt tlačítka akcí výběru záplat, kdykoli vyberete nebo zrušíte výběr záplaty</string>
     <string name="patch_selection_action_order_title">Pořadí tlačítek akcí výběru záplat</string>
     <string name="patch_selection_action_order_description">Vyberte pořadí rozložení pro tlačítka akcí výběru záplat</string>
-    <string name="patch_selection_action_order_dialog_title">Přeuspořádat akce záplat</string>
-    <string name="patch_selection_action_order_dialog_description">Přesuňte položky, abyste změnili, jak se tlačítka akcí výběru záplat zobrazují. Náhled se aktualizuje v reálném čase.</string>
-    <string name="patch_selection_action_order_preview_label">Náhled</string>
     <string name="patch_selection_action_order_reset">Obnovit výchozí pořadí</string>
-    <string name="patch_selection_action_move_up">Posunout nahoru</string>
-    <string name="patch_selection_action_move_down">Posunout dolů</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Zrušit výběr balíčku?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Zrušit výběr všech záplat vybraných z %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Zrušit výběr všech záplat?</string>
@@ -495,9 +467,6 @@ Podpis (SHA-256): %2$s"</string>
     <string name="downloader_plugin_delete_apps_description">Jste si jisti, že chcete smazat vybrané aplikace?</string>
     <string name="downloader_settings_no_apps">Nebyly nalezeny žádné stažené aplikace.</string>
     <string name="search_apps">Hledat aplikace…</string>
-    <string name="loading_body">Načítání…</string>
-    <string name="downloading_patches">Stahování záplat…</string>
-    <string name="options">Možnosti</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="edit">Upravit</string>
@@ -507,7 +476,6 @@ Podpis (SHA-256): %2$s"</string>
     <string name="patch">Záplata</string>
     <string name="select_from_storage">Vybrat ze úložiště</string>
     <string name="select_from_storage_description">Vybrat soubor APK ze úložiště pomocí výběru souborů</string>
-    <string name="suggested_version_info">Navrhovaná verze: %s</string>
     <string name="type_anything">Napište cokoli pro pokračování</string>
     <string name="search">Hledat záplaty…</string>
     <string name="apply">Použít</string>
@@ -547,29 +515,12 @@ Podpis (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Přizpůsobte výchozí název souboru pro exportované upravené aplikace</string>
     <string name="export_name_format_dialog_title">Formát názvu exportovaného souboru</string>
     <string name="export_name_format_dialog_supporting">Použijte zástupné znaky níže k sestavení názvu souboru. Rozšíření .apk je přidáno automaticky, pokud chybí.</string>
-    <string name="export_name_format_preview">Náhled: %1$s</string>
     <string name="export_name_format_preview_label">Náhled</string>
     <string name="export_name_format_variables">Proměnné</string>
     <string name="export_name_format_reset">Obnovit výchozí</string>
     <string name="export_name_format_error_blank">Formát názvu souboru nemůže být prázdný.</string>
     <string name="export_name_format_current">Aktuální vzor: %1$s</string>
     <string name="export_name_format_insert">Vložit</string>
-    <string name="export_name_variable_app_name">Název aplikace</string>
-    <string name="export_name_variable_app_name_description">Nahrazeno zobrazeným názvem aplikace.</string>
-    <string name="export_name_variable_package_name">Název balíčku</string>
-    <string name="export_name_variable_package_name_description">Nahrazeno názvem balíčku aplikace.</string>
-    <string name="export_name_variable_app_version">Verze aplikace</string>
-    <string name="export_name_variable_app_version_description">Nahrazeno názvem verze aplikace.</string>
-    <string name="export_name_variable_patches_version">Verze záplat</string>
-    <string name="export_name_variable_patches_version_description">Nahrazeno verzí použitého balíčku patchů.</string>
-    <string name="export_name_variable_bundle_names">Názvy balíčků záplat</string>
-    <string name="export_name_variable_bundle_names_description">Nahrazeno názvem použitého balíčku patchů.</string>
-    <string name="export_name_variable_manager_version">Verze správce</string>
-    <string name="export_name_variable_manager_version_description">Nahrazeno verzí správce.</string>
-    <string name="export_name_variable_timestamp">Časová značka</string>
-    <string name="export_name_variable_timestamp_description">Nahrazeno aktuálním časem (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">Datum</string>
-    <string name="export_name_variable_date_description">Nahrazeno aktuálním datem (yyyyMMdd).</string>
     <string name="debug_logs_export">Exportovat ladicí protokoly</string>
     <string name="debug_logs_export_read_failed">Nepodařilo se přečíst protokoly (kód ukončení %d)</string>
     <string name="debug_logs_export_failed">Nepodařilo se exportovat protokoly</string>
@@ -592,31 +543,19 @@ Podpis (SHA-256): %2$s"</string>
     <string name="app_language">Jazyk aplikace</string>
     <string name="language_dialog_title">Vybrat jazyk aplikace</string>
     <string name="language_option_system">Použít jazyk zařízení</string>
-    <string name="device">Zařízení</string>
-    <string name="device_android_version">Verze Androidu</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">Architektury CPU</string>
-    <string name="device_memory_limit">Limity paměti</string>
     <string name="device_memory_limit_format">%1$d MB (Normální) - %2$d MB (Velký)</string>
     <string name="patches_force_download">Vynutit stažení všech balíčků záplat</string>
     <string name="patches_reset">Resetovat balíčky záplat</string>
-    <string name="patching">Patchování</string>
-    <string name="signing">Podpisování</string>
-    <string name="storage">Úložiště</string>
     <string name="no_patch_found">Nebyly nalezeny žádné záplaty. Zkontrolujte své záplaty</string>
     <string name="tab_apps">Aplikace</string>
     <string name="tab_patches">Balíčky záplat</string>
     <string name="tab_profiles">Profily záplat</string>
     <string name="delete">Smazat</string>
     <string name="refresh">Obnovit</string>
-    <string name="continue_anyways">Pokračovat stejně</string>
-    <string name="download_another_version">Stáhnout jinou verzi</string>
-    <string name="download_app">Stáhnout aplikaci</string>
     <string name="download_apk">Stáhnout soubor APK</string>
     <string name="patches_download_fail">Selhání stahování záplat: %s</string>
     <string name="patches_replace_fail">Nepodařilo se importovat záplaty: %s</string>
     <string name="no_patched_apps_found">Nebyla nalezena žádná upravená aplikace</string>
-    <string name="tap_on_patches">Klepněte na záplaty pro získání dalších informací o nich</string>
     <string name="patches_selected">Vybrán balíček %s patchů</string>
     <string name="patch_profiles_selected">Vybrán %1$d profil patchů</string>
     <string name="selected_apps_count">Vybráno %1$d aplikací</string>
@@ -630,7 +569,6 @@ Podpis (SHA-256): %2$s"</string>
 Použijte prosím doporučenou verzi: %s
 
 Pokud chcete pokračovat přesto, vypněte „Vyžadovat doporučenou verzi aplikace“ v pokročilých nastaveních."</string>
-    <string name="selection_warning_title">Zastavit používání výchozích hodnot?</string>
     <string name="selection_warning_description">"Je doporučeno používat výchozí výběr a volby záplat. Jejich změna může vést k neočekávaným problémům.
 
 Před přepnutím záplat musíte v pokročilých nastaveních zapnout „Povolit změnu výběru a voleb záplat“."</string>
@@ -688,9 +626,6 @@ Která má být uložena do tohoto profilu?</string>
     <string name="patcher_missing_patch_title">Výběr patchů vyžaduje pozornost</string>
     <string name="patcher_preflight_missing_patch_remove">Odstranit chybějící patche</string>
     <string name="patcher_preflight_missing_patch_proceed">Pokračovat stejně</string>
-    <string name="patcher_missing_patch_message">"Patchování selhalo, protože následující patche nebyly nalezeny v aktuálním balíčku:
-%1$s
-Před opakováním znovu otevřete výběr a vyberte je znovu (nebo zvolte náhrady)."</string>
     <string name="patcher_preflight_missing_patch_message">"Následující patchů nevidím v současném balíčku:
 %1$s
 Vocêůžete jej odstranit automaticky, odмінěnicovanie nebo závislo yaygın."</string>
@@ -699,7 +634,6 @@ Vocêůžete jej odstranit automaticky, odмінěnicovanie nebo závislo yaygı
     <string name="patch_selector_missing_patch_message">"Tyto záplaty je potřeba znovu vybrat:
 %1$s
 Znovu je povolte (nebo vyberte alternativy) a pak zkuste záplaty aplikovat znovu."</string>
-    <string name="delete_profile_confirmation">Smazat „%1$s“?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Smazat vybrané profily záplat?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d záplata</item>
@@ -713,26 +647,18 @@ Znovu je povolte (nebo vyberte alternativy) a pak zkuste záplaty aplikovat znov
         <item quantity="many">%d balíčků</item>
         <item quantity="other">%d balíčků</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Univerzální záplaty mají obecnější použití a nejsou tak spolehlivé jako záplaty cílené na konkrétní aplikace. Můžete narazit na problémy při jejich používání.
-
-Před použitím univerzálních záplat musíte v pokročilých nastaveních zapnout „Zobrazit a povolit použití univerzálních záplat“."</string>
     <string name="this_version">Tato verze</string>
     <string name="universal">Libovolná aplikace</string>
     <string name="search_patches">Hledat záplaty</string>
     <string name="app_version_not_compatible">"Tento patch není kompatibilní s vybranou verzí aplikace (%1$s).
 
 Je kompatibilní pouze s následující verzí: %2$s."</string>
-    <string name="continue_with_version">Pokračovat s touto verzí?</string>
-    <string name="version_not_compatible">Ne všechny záplaty jsou kompatibilní s touto verzí (%s). Chcete stejně pokračovat?</string>
-    <string name="download_application">Stáhnout aplikaci?</string>
-    <string name="app_not_installed">Vybraná aplikace není nainstalována. Chcete ji stáhnout?</string>
     <string name="failed_to_load_apk">Selhání načítání APK</string>
     <string name="loading">Načítání…</string>
     <string name="not_installed">Nenainstalováno</string>
     <string name="installed">Nainstalováno</string>
     <string name="app_info">Informace o aplikaci</string>
     <string name="uninstall">Odebrat</string>
-    <string name="unpatch">Odebrat záplatu</string>
     <string name="repatch">Znovu zalepit</string>
     <string name="install_type">Typ instalace</string>
     <string name="package_name">Název balíčku</string>
@@ -743,7 +669,6 @@ Je kompatibilní pouze s následující verzí: %2$s."</string>
     <string name="applied_patches_empty">Žádné záplaty zaznamenané pro tuto aplikaci</string>
     <string name="applied_patches_bundle_missing">Metadata balíčku není k dispozici. Zobrazují se uložené názvy záplat.</string>
     <string name="no_patch_bundles_tracked">Žádné balíčky záplat zaznamenané pro tuto aplikaci</string>
-    <string name="default_install">Výchozí</string>
     <string name="mount_install">Instalátor s připojením root</string>
     <string name="mounted">Připojeno</string>
     <string name="unmounted">Odpojeno</string>
@@ -759,7 +684,6 @@ Je kompatibilní pouze s následující verzí: %2$s."</string>
     <string name="failed_to_unmount">Selhalo odejmutí: %s</string>
     <string name="unpatch_app">Zrušit úpravu aplikace?</string>
     <string name="unpatch_description">Jste si jisti, že chcete zrušit úpravu této aplikace?</string>
-    <string name="downloader_invalid_version">Stahovač nenačetl správnou verzi</string>
     <string name="downloader_app_not_found">Stahovač nenašel aplikaci</string>
     <string name="downloader_error">Chyba stahovače: %s</string>
     <string name="downloader_no_plugins_installed">Není nainstalován žádný stahovač.</string>
@@ -780,7 +704,6 @@ Je kompatibilní pouze s následující verzí: %2$s."</string>
     <string name="path_selector_files">Soubory</string>
     <string name="show_password_field">Zobrazit heslo</string>
     <string name="hide_password_field">Skrýt heslo</string>
-    <string name="installer">Instalátor</string>
     <string name="installer_primary_title">Primární instalátor</string>
     <string name="installer_primary_description">Používá se jako první při instalaci upravených aplikací.</string>
     <string name="installer_fallback_title">Záložní instalátor</string>
@@ -859,7 +782,6 @@ Podrobnosti: %2$s"</string>
     <string name="install_app_fail_title">Instalace selhala</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
     <string name="mount_app_fail_title">Připojení selhalo</string>
-    <string name="mount_app_fail">Selhání připojení aplikace: %1$s</string>
     <string name="install_timeout_message">Instalace nebyla dokončena. Zkontrolujte dialog systémového instalátoru a zkuste to znovu.</string>
     <string name="reinstall_app_fail">Selhání reinstalace aplikace: %s</string>
     <string name="uninstall_app_fail">Selhání při odinstalování aplikace: %s</string>
@@ -878,16 +800,11 @@ Podrobnosti: %2$s"</string>
     <string name="install_saved_app">Nainstalovat</string>
     <string name="remount_saved_app">Připojit znovu</string>
     <string name="update_saved_app">Aktualizovat</string>
-    <string name="installing_saved_app">Instaluje se uložená aplikace…</string>
     <string name="saved_app_install_success">Uložená aplikace nainstalována</string>
     <string name="saved_app_install_failed">Selhala instalace uložené aplikace</string>
     <string name="saved_app_uninstall_title">Odinstalovat nainstalovanou kopii?</string>
-    <string name="saved_app_unmount_title">Odmontoovat nainstalovanou kopii?</string>
     <string name="saved_app_uninstall_description">Toto odstraní pouze nainstalovanou verzi. Vaše uložená APK zůstane nedotčena.</string>
-    <string name="saved_app_unmount_description">Toto odmontoovává upravenou APK. Vaše uložená APK zůstane nedotčena.</string>
     <string name="saved_app_install_missing">Uložená APK nenalezena</string>
-    <string name="delete_saved_copy">Smazat uloženou kopii</string>
-    <string name="sign_fail">Selhala signatura APK: %s</string>
     <string name="save_logs">Uložit protokoly</string>
     <string name="plugin_activity_dialog_body">Pro pokračování s tímto pluginem je vyžadována interakce uživatele.</string>
     <string name="select_install_type">Vybrat typ instalace</string>
@@ -895,7 +812,6 @@ Podrobnosti: %2$s"</string>
     <string name="patcher_step_load_patches">Načítání oprav</string>
     <string name="patcher_step_unpack">Čtení APK souboru</string>
     <string name="patcher_step_prepare_split_apk">Sloučení rozděleného APK</string>
-    <string name="patcher_step_merge_not_required">Není vyžadováno sloučení</string>
     <string name="patcher_step_group_patching">Patchování</string>
     <string name="patcher_step_group_saving">Ukládání</string>
     <string name="patcher_step_write_patched">Zápis opraveného APK souboru</string>
@@ -933,14 +849,9 @@ Podrobnosti: %2$s"</string>
     <string name="less">Méně</string>
     <string name="continue_">Pokračovat</string>
     <string name="dismiss">Zrušit</string>
-    <string name="permanent_dismiss">Toto už nezobrazovat</string>
-    <string name="website">Web</string>
     <string name="patch_bundle_urls">Získat importy balíčků záplat</string>
-    <string name="contact">Kontakt</string>
     <string name="version">Verze</string>
     <string name="published">Publikováno</string>
-    <string name="submit_feedback">Odeslat problém nebo zpětnou vazbu</string>
-    <string name="submit_feedback_description">Pomozte nám vylepšit tuto aplikaci</string>
     <string name="developer_options">Možnosti pro vývojáře</string>
     <string name="developer_options_description">Možnosti pro ladění problémů</string>
     <string name="patches_update_success">Aktualizace úspěšná</string>
@@ -955,12 +866,7 @@ Podrobnosti: %2$s"</string>
 
 Open-source v jádru, Morphe prospívá díky zpětné vazbě a příspěvkům komunity k budoucímu inovacím"</string>
     <string name="here">zde.</string>
-    <string name="developer_options_enabled">Možnosti pro vývojáře povoleny</string>
-    <string name="developer_options_taps">Zbývá %d poklepání</string>
-    <string name="developer_options_already_enabled">Možnosti pro vývojáře jsou již povoleny</string>
     <string name="update_available">Je k dispozici aktualizace</string>
-    <string name="current_version">Aktuální verze: %s</string>
-    <string name="new_version">Nová verze: %s</string>
     <string name="ready_to_install_update">Připraveno k instalaci aktualizace</string>
     <string name="update_completed">Aktualizace nainstalována</string>
     <string name="install_update_manager_failed">Selhání instalace aktualizace</string>
@@ -986,14 +892,12 @@ Open-source v jádru, Morphe prospívá díky zpětné vazbě a příspěvkům k
     <string name="hours_ago">před %sh</string>
     <string name="days_ago">před %sd</string>
     <string name="invalid_date">Neplatné datum</string>
-    <string name="disable_battery_optimization">Vypnout optimalizaci baterie</string>
     <string name="input_dialog_value_invalid">Neplatná hodnota</string>
     <string name="option_required">Tato volba je povinná</string>
     <string name="required_options_screen">Povinné volby</string>
     <string name="failed_to_check_updates">Selhání kontroly aktualizací: %s</string>
     <string name="no_update_available">Žádná aktualizace není k dispozici</string>
     <string name="update_check">Kontroluje se aktualizace…</string>
-    <string name="dismiss_temporary">Nyní ne</string>
     <string name="update_available_dialog_description">Je k dispozici nová verze Morphe (%s).</string>
     <string name="failed_to_download_update">Selhání stahování aktualizace: %s</string>
     <string name="download">Stáhnout</string>
@@ -1050,5 +954,4 @@ Klikněte na záplaty pro zobrazení dalších podrobností."</string>
     <string name="failed_to_import_keystore">Selhání importu úložiště klíčů</string>
     <string name="export">Export</string>
     <string name="confirm">Potvrdit</string>
-    <string name="saved_app_install_cancelled">Instalace zrušena</string>
 </resources>
