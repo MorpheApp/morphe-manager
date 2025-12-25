@@ -3,24 +3,25 @@
     <string name="morphe_home_youtube" translatable="false">YouTube</string>
     <string name="morphe_home_youtube_music" translatable="false">YouTube Music</string>
     <string name="morphe_home_bundles">Patch bundle</string>
-    <string name="morphe_home_greeting_1">What app do you want to patch? 🛠️</string>
+    <string name="morphe_home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Ready to make YouTube legendary again? 🔥📺</string>
-    <!-- Energetic, light-hearted joke to build excitement -->
-    <string name="morphe_home_greeting_3">Buckle up, it\'s patching time 🚀</string>
+    <string name="morphe_home_greeting_2">Ready to make YouTube legendary again?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Buckle up, it\'s patching time</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece 😌🚫</string>
-    <string name="morphe_home_greeting_5">Want to watch ads? Me neither 🙃❌</string>
+    <string name="morphe_home_greeting_4">Another day, another ad-blocked masterpiece</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Want to watch ads? Me neither</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Let\'s make your apps behave 😏📱</string>
+    <string name="morphe_home_greeting_6">Let\'s make your apps behave</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Today\'s forecast: 100% chance of patching 🌩️🧩</string>
-    <!-- Self-aware humorous greeting, breaking the fourth wall -->
-    <string name="morphe_home_greeting_8">Patch responsibly… or don\'t 😄⚙️</string>
+    <string name="morphe_home_greeting_7">Today\'s forecast: 100% chance of patching</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Ready to change underwhelming into awesome?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Saving apps from themselves since today 🦸‍♂️✨</string>
+    <string name="morphe_home_greeting_9">Saving apps from themselves since today</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Powered by caffeine and good patches ☕🧠</string>
+    <string name="morphe_home_greeting_10">Powered by caffeine and good patches</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">Update failed</string>
     <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
@@ -561,14 +562,14 @@ Signature (SHA-256): %2$s"</string>
     <string name="debug_logs_export_read_failed">Failed to read logs (exit code %d)</string>
     <string name="debug_logs_export_failed">Failed to export logs</string>
     <string name="debug_logs_export_success">Exported logs</string>
-    <string name="api_url">API URL</string>
+    <string name="api_url" translatable="false">API URL</string>
     <string name="api_url_description">The API used to download necessary files</string>
     <string name="api_url_dialog_title">Change API URL</string>
     <string name="api_url_dialog_description">Change the API URL of Morphe. Morphe uses the API to download patches and updates.</string>
     <string name="api_url_dialog_warning">Morphe connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
-    <string name="github_pat">GitHub PAT</string>
+    <string name="github_pat" translatable="false">GitHub PAT</string>
     <string name="github_pat_description">GitHub Personal Access Token needed for GitHub integration</string>
     <string name="set_github_pat_dialog_title">Set GitHub PAT</string>
     <string name="set_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo</string>
@@ -652,7 +653,7 @@ Which should be saved to this profile?"</string>
     <string name="patch_profile_created_at">Created %1$s</string>
     <string name="patch_profile_bundle_header" translatable="false">%1$s • %2$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (unavailable)</string>
-    <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
+    <string name="patch_profile_bundle_uid_label" translatable="false">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">Change UID</string>
     <string name="patch_profile_bundle_change_uid_title">Change UID for %1$s</string>
     <string name="patch_profile_bundle_change_uid_invalid">Enter a valid numeric UID.</string>
@@ -660,8 +661,10 @@ Which should be saved to this profile?"</string>
     <string name="patch_profile_bundle_change_uid_not_found">No local patch bundle found with UID %1$d.</string>
     <string name="patcher_process_exit_message">Patcher process exited with code %1$d.</string>
     <string name="patcher_memory_adjustment_title">The patcher ran out of memory</string>
-    <string name="patcher_memory_adjustment_message_reduced">The experimental patcher process stopped because it ran out of memory. We lowered its memory limit from %1$d MB to %2$d MB so you can try again immediately.</string>
-    <string name="patcher_memory_adjustment_message_no_change">The experimental patcher process stopped because it ran out of memory, but the memory limit is already at %1$d MB. Try lowering it further in Advanced settings or disable the experimental mode before retrying.</string>
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_message_reduced" translatable="false">The experimental patcher process stopped because it ran out of memory. We lowered its memory limit from %1$d MB to %2$d MB so you can try again immediately.</string>
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_message_no_change" translatable="false">The experimental patcher process stopped because it ran out of memory, but the memory limit is already at %1$d MB. Try lowering it further in Advanced settings or disable the experimental mode before retrying.</string>
     <string name="patcher_memory_adjustment_retry">Try again</string>
     <string name="patcher_memory_adjustment_dismiss">Dismiss</string>
     <string name="patcher_missing_patch_title">Patch selection needs attention</string>
@@ -676,14 +679,6 @@ You can remove them automatically, adjust the selection, or continue anyway."</s
 %1$s
 Enable them again (or pick alternatives) and then try patching once more."</string>
     <string name="patch_profile_delete_multiple_dialog_description">Delete the selected patch profiles?</string>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d patch</item>
-        <item quantity="other">%d patches</item>
-    </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d bundle</item>
-        <item quantity="other">%d bundles</item>
-    </plurals>
     <string name="this_version">This version</string>
     <string name="universal">Any app</string>
     <string name="search_patches">Search patches</string>
@@ -932,7 +927,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
     <string name="manager_update_banner_title">Downloading manager update</string>
-    <string name="manager_update_progress_detail">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="download_manager_failed">Failed to download update: %s</string>
     <string name="save">Save</string>
     <string name="save_with_count">Save (%1$s)</string>
