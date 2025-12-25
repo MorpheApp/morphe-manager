@@ -1,11 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
 import android.content.res.Configuration
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -45,7 +40,7 @@ fun HomeMainContent(
         // Animated background
         AnimatedBackground(type = backgroundType)
 
-        // Adaptive layout based on orientation
+        // Adaptive layout based on device orientation
         if (isLandscape) {
             LandscapeLayout(
                 onYouTubeClick = onYouTubeClick,
@@ -88,7 +83,14 @@ private fun PortraitLayout(
                 .height(120.dp),
             contentAlignment = Alignment.Center
         ) {
-            AnimatedGreeting(greeting)
+            Text(
+                text = stringResource(greeting),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
 
         Spacer(Modifier.height(32.dp))
@@ -197,30 +199,5 @@ private fun LandscapeLayout(
                 onClick = onYouTubeMusicClick
             )
         }
-    }
-}
-
-/**
- * Animated greeting message with fade transitions
- * Changes every 10 seconds
- */
-@Composable
-private fun AnimatedGreeting(greeting: Int) {
-    AnimatedContent(
-        targetState = stringResource(greeting),
-        transitionSpec = {
-            fadeIn(animationSpec = tween(1000)) togetherWith
-                    fadeOut(animationSpec = tween(1000))
-        },
-        label = "message_animation"
-    ) { messageText ->
-        Text(
-            text = messageText,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
