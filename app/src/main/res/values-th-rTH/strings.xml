@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">ชุดแพตช์</string>
-    <string name="morphe_home_greeting_1">คุณต้องการแพตช์แอปใด</string>
-    <string name="morphe_home_greeting_2">พร้อมที่จะทำให้ YouTube กลับมายิ่งใหญ่อีกครั้งแล้วหรือยัง?</string>
-    <string name="morphe_home_greeting_3">รัดเข็มขัดได้เลย ถึงเวลาแพตช์แล้ว</string>
-    <string name="morphe_home_greeting_4">อีกวัน กับผลงานชิ้นเอกที่บล็อกโฆษณากันอีก</string>
-    <string name="morphe_home_greeting_5">อยากดูโฆษณาไหม? เราก็ไม่อยาก</string>
-    <string name="morphe_home_greeting_6">ผู้คนให้แน่ใจว่าแอปของคุณใช้งานได้ดี</string>
-    <string name="morphe_home_greeting_7">อาการบẩmะเร็งสำหรับวันนี้มีโอกาส 100% ที่จะผ่าตัด</string>
+    <string name="morphe_home_greeting_1">คุณต้องการแพทช์แอปใด? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">พร้อมที่จะทำให้ YouTube ตำนานอีกครั้ง? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">จับสายรัด เวลาแพทช์แล้ว 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">อีกวันหนึ่ง อีกผลงานเชิดชูความไร้โฆษณา 😌🚫</string>
+    <string name="morphe_home_greeting_5">อยากดูโฆษณา? ผมก็ไม่</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">ให้เราทำให้แอปของคุณมีพฤติกรรม 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">คาดการณ์สำหรับวันนี้: มีโอกาสแก้ไขแอป 100% 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">แก้ไขอย่างมีความรับผิดชอบ... หรือไม่ 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">ช่วยแอปให้พ้นจากปัญหาตั้งแต่วันนี้ 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">มีพลังจากคาเฟอีนและการแก้ไขที่ดี ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">การอัปเดตล้มเหลว</string>
     <string name="morphe_home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">เพิ่มแล้ว</string>
     <string name="morphe_home_date_updated">อัปเดตแล้ว</string>
     <string name="morphe_home_check_updates">ตรวจสอบ</string>
-    <string name="morphe_home_bundle_update_completed">การอัปเดตเสร็จสมบูรณ์</string>
     <string name="morphe_home_unknown">ไม่รู้จัก</string>
     <string name="morphe_home_timeline">ประวัติการอัปเดต</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">คุณมี APK ต้นฉบับที่ยังไม่ได้แพตช์หรือไม่?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">หากต้องการแพตช์ %1$s ฉันต้องการเวอร์ชัน %2$s (ยังไม่ได้แพตช์)</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
     <string name="morphe_home_apk_availability_yes">ใช่ ฉันมีมัน</string>
     <string name="morphe_home_apk_availability_no">ไม่ ช่วยฉันหา</string>
-    <string name="morphe_home_apk_availability_dialog_description">ในการแพตช์ %1$s ฉันต้องการเวอร์ชัน %2$s (ยังไม่ได้แพตช์)</string>
-    <string name="morphe_home_apk_availability_dialog_info">ตรวจสอบให้แน่ใจว่าคุณดาวน์โหลด APK แต่ **อย่า** ติดตั้ง</string>
+    <string name="morphe_home_apk_availability_dialog_description">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับจาก APKMirror</string>
-    <string name="morphe_home_download_instructions_description">ทำตามขั้นตอนเหล่านี้เพื่อดาวน์โหลด %1$s เวอร์ชัน %2$s จาก APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
     <string name="morphe_home_download_instructions_steps_title">คำแนะนำ:</string>
-    <string name="morphe_home_download_instructions_step1">กดดำเนินการต่อเพื่อเปิดเว็บไซต์ APKMirror.com</string>
+    <string name="morphe_home_download_instructions_step1">กดปุ่ม \'ไปที่ APKMirror.com\' ด้านล่าง</string>
     <string name="morphe_home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกด</string>
-    <string name="morphe_home_download_instructions_download_button_toast">คลิกดาวน์โหลดบนเว็บไซต์ ไม่ใช่ที่นี่ 😊</string>
-    <string name="morphe_home_download_instructions_step3">รอจนกว่าการดาวน์โหลดจะเสร็จสมบูรณ์ และอย่าติดตั้ง APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">รอจนการดาวน์โหลดเสร็จสมบูรณ์ แล้วติดตั้ง APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
+    <string name="morphe_home_download_instructions_step3">รอให้การดาวน์โหลดเสร็จสิ้น และ &lt;b&gt;อย่าติดตั้ง&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
     <string name="morphe_home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
-    <string name="morphe_home_download_instructions_note">สำคัญ: ดาวน์โหลด APK แต่อย่าติดตั้งลงในอุปกรณ์ของคุณ</string>
-    <string name="morphe_home_download_instructions_continue">ดำเนินการต่อที่ APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">ไปที่ APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
     <string name="morphe_home_file_picker_prompt_description">ตอนนี้ ให้เลือกไฟล์ APK %1$s ที่คุณเพิ่งดาวน์โหลด</string>
     <string name="morphe_home_file_picker_prompt_open">เปิดไฟล์ APK ที่ฉันดาวน์โหลด</string>
-    <string name="morphe_home_wrong_package_selected">คาดว่าเป็นแพ็คเกจ %1$s แต่ได้รับ %2$s</string>
-    <string name="morphe_home_any_version">เวอร์ชันใดก็ได้</string>
     <string name="morphe_home_recommended_version">เวอร์ชันที่แนะนำ</string>
     <string name="morphe_patcher_selected_version">เวอร์ชันที่เลือก</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d แพตช์</string>
     <string name="morphe_patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
-    <string name="morphe_patcher_install_dialog_message">ติดตั้งแอปที่ถูกแพตช์หรือไม่?</string>
-    <string name="morphe_patcher_install_conflict_message">ตรวจพบข้อขัดแย้งของแพ็กเกจ หากต้องการติดตั้งเวอร์ชันใหม่ คุณต้องถอนการติดตั้งแอปเวอร์ชันก่อนหน้าก่อน</string>
-    <string name="morphe_patcher_install_ready_message">ได้ถอนการติดตั้งเวอร์ชันก่อนหน้าแล้ว ตอนนี้คุณสามารถติดตั้งแอปที่ถูกแพตช์ได้แล้ว</string>
-    <string name="morphe_patcher_install_cancelled_title">ยกเลิกการติดตั้งแล้ว</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">คลิกปุ่มติดตั้งเพื่อลองอีกครั้ง</string>
     <string name="morphe_patcher_installing">กำลังติดตั้ง…</string>
     <string name="morphe_patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
     <string name="morphe_patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">กำลังแก้ไขข้อบกพร่องในแอปที่ยังไม่ได้แก้ไข… 🐞</string>
     <string name="morphe_patcher_message_10">แพตช์ดีๆ คุ้มค่ากับการรอคอย… ⏳</string>
     <string name="morphe_patcher_message_11">กำลังขัดเกลาพิกเซลให้เปล่งประกาย… 💎</string>
-    <string name="morphe_patcher_message_12">โปรดนั่งประจำที่จนกว่ากัปตันจะปิดป้าย “กำลังดำเนินการแพตช์”… 💺✈️</string>
+    <string name="morphe_patcher_message_12">โปรดนั่งรอจนกว่าลูกเรือจะปิดป้ายบอกว่า \'กำลังแก้ไข\' 💺✈️</string>
     <string name="morphe_patcher_message_13">กำลังปรุงแอปที่แพตช์แล้วของคุณ ร้อนๆ สดๆ… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">กำลังเจรจาอย่างสุภาพกับไบต์โค้ด… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">ใช้เพื่อควบคุมการเข้าถึงปลั๊กอิน Morphe มีเพียง Morphe เท่านั้นที่มีสิ่งนี้</string>
     <string name="toast_copied_to_clipboard">คัดลอกแล้ว!</string>
     <string name="copy_to_clipboard">คัดลอกไปยังคลิปบอร์ด</string>
-    <string name="dashboard">แดชบอร์ด</string>
     <string name="settings">การตั้งค่า</string>
     <string name="select_app">เลือกแอป</string>
     <string name="new_downloader_plugins_notification">มีปลั๊กอินดาวน์โหลดใหม่ คลิกที่นี่เพื่อกำหนดค่า</string>
     <string name="unsupported_architecture_warning">การแพตช์บนสถาปัตยกรรมอุปกรณ์นี้ไม่ได้รับการสนับสนุนและน่าจะล้มเหลว</string>
     <string name="import_">นำเข้า</string>
-    <string name="import_patches">นำเข้าแพตช์</string>
     <string name="file_field_set">เลือกแล้ว</string>
     <string name="file_field_not_set">ไม่ได้เลือก</string>
     <string name="field_not_set">ไม่ได้ตั้งค่า</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">เลือกคำแนะนำของชุดซอฟต์แวร์ที่จะใช้เมื่อโหลดแอป</string>
     <string name="bundle_version_dialog_default">ใช้คำแนะนำเริ่มต้น</string>
     <string name="bundle_version_dialog_default_subtitle">เลือกเวอร์ชันที่เข้ากันได้ที่ใช้กันมากที่สุดโดยอัตโนมัติ</string>
-    <string name="bundle_version_dialog_option_subtitle">ใช้เวอร์ชัน %1$s</string>
     <string name="bundle_version_all_versions">ทุกเวอร์ชัน</string>
     <string name="bundle_version_no_version">ไม่มีเวอร์ชันที่แนะนำ</string>
-    <string name="bundle_version_suggested_label">เวอร์ชันที่แนะนำ: %1$s</string>
-    <string name="bundle_version_other_heading">เวอร์ชันอื่นๆ ที่รองรับ</string>
     <string name="bundle_update_manual_available">มีอัปเดตพร้อมใช้งาน</string>
     <string name="bundle_update_manual_available_with_version">มีอัปเดตพร้อมใช้งาน: %1$s</string>
     <string name="bundle_update_progress">ประมวลผล %1$d/%2$d ชุดข้อมูลแล้ว</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">จัดเรียงชุดข้อมูล</string>
     <string name="bundle_reorder_title">จัดเรียงชุดข้อมูลแพตช์</string>
     <string name="bundle_reorder_description">ลากที่จับเพื่อจัดลำดับชุดข้อมูลที่จะแสดงในรายการและเมนูเลือกแพตช์</string>
-    <string name="bundle_reorder_move_up">เลื่อนชุดข้อมูลขึ้น</string>
-    <string name="bundle_reorder_move_down">เลื่อนชุดข้อมูลลง</string>
     <string name="bundle_actions_expand">แสดงการดำเนินการของชุดข้อมูล</string>
     <string name="bundle_actions_collapse">ซ่อนการดำเนินการของชุดข้อมูล</string>
     <string name="patch_bundle_duplicate_name_error">มีชุดข้อมูลแพตช์ที่มีชื่อนี้อยู่แล้ว</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">เวอร์ชันที่แนะนำ: %1$s</string>
     <string name="bundle_version_dialog_selected_override">เวอร์ชันที่เลือก: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">เลือกแล้ว</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (เลือกแล้ว)</string>
     <string name="bundle_version_dialog_other_title">เลือกเวอร์ชันอื่นที่รองรับ:</string>
     <string name="bundle_version_dialog_locked_title">ระบบป้องกันเวอร์ชันเปิดใช้งานอยู่</string>
     <string name="bundle_version_dialog_locked_hint">ไปที่ การตั้งค่า > ขั้นสูง > การป้องกัน และตั้งค่า \"ต้องใช้เวอร์ชันแอปที่แนะนำ\" (ปิด) และ \"ปิดใช้งานการตรวจสอบความเข้ากันได้ของเวอร์ชัน\" (เปิด) เพื่อเลือกเวอร์ชันเฉพาะของชุดโปรแกรม</string>
-    <string name="patch_item_description">เริ่มการแพตช์แอปพลิเคชัน</string>
     <string name="patch_selector_item">เลือกแพตช์</string>
     <string name="patch_selector_item_description">เลือกแพตช์แล้ว %d รายการ</string>
     <string name="no_patches_selected">ยังไม่ได้เลือกแพตช์</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">กำลังใช้ APK ที่ติดตั้งไว้</string>
     <string name="apk_source_local">กำลังใช้ไฟล์ APK ในเครื่อง</string>
     <string name="apk_source_downloaded">กำลังใช้ APK ที่ดาวน์โหลดไว้</string>
-    <string name="legacy_import_failed">ไม่สามารถนำเข้าการตั้งค่าเดิมได้</string>
     <string name="auto_updates_dialog_title">กำหนดค่าการอัปเดต</string>
     <string name="auto_updates_dialog_description">คุณต้องการให้ Morphe ตรวจสอบการอัปเดตสำหรับองค์ประกอบต่อไปนี้เป็นประจำหรือไม่</string>
     <string name="auto_updates_dialog_patches">แพตช์ Morphe</string>
@@ -246,7 +236,6 @@
     <string name="updates">อัปเดต</string>
     <string name="updates_description">ตรวจสอบการอัปเดตและดูบันทึกการเปลี่ยนแปลง</string>
     <string name="downloads">ดาวน์โหลด</string>
-    <string name="downloads_description">ปลั๊กอินตัวดาวน์โหลดและแอปที่ดาวน์โหลดแล้ว</string>
     <string name="plugins_help_title">ตัวดาวน์โหลดคืออะไร</string>
     <string name="plugins_help_description">ตัวดาวน์โหลดคือปลั๊กอินที่ช่วยให้ URV สามารถดาวน์โหลด APK จากแหล่งต่างๆ ได้ APK ที่ดาวน์โหลดจะแสดงในส่วนด้านล่าง ในระหว่างกระบวนการแพตช์ คุณสามารถเลือก APK ที่ดาวน์โหลดไว้แล้ว หรือดาวน์โหลดผ่านปลั๊กอินก็ได้
 
@@ -257,7 +246,6 @@
     <string name="changelog_loading">กำลังโหลดบันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>
     <string name="changelog_description">ตรวจสอบการเปลี่ยนแปลงล่าสุดในการอัปเดตนี้</string>
-    <string name="no_changelogs_found">ไม่พบบันทึกการเปลี่ยนแปลง</string>
     <string name="advanced">ขั้นสูง</string>
     <string name="advanced_description">URL API, ขีดจำกัดหน่วยความจำ, การดีบัก</string>
     <string name="about">เกี่ยวกับ</string>
@@ -276,27 +264,18 @@
     <string name="theme_color_picker_title">สีธีม</string>
     <string name="theme_color_preview">แสดงตัวอย่าง</string>
     <string name="theme_color_reset">รีเซ็ตสีธีม</string>
-    <string name="theme_color_presets">ค่าสีธีมที่ตั้งไว้ล่วงหน้า</string>
-    <string name="theme_color_presets_description">แตะที่สีเพื่อเปลี่ยนสีพื้นหลังและการ์ด</string>
     <string name="theme_preview_title">แสดงตัวอย่างธีม</string>
     <string name="theme_preview_description">อัปเดตทันทีเมื่อเปลี่ยนการตั้งค่าธีม</string>
     <string name="theme_presets">ค่าธีมที่ตั้งไว้ล่วงหน้า</string>
     <string name="theme_presets_description">เลือกว่าแอปจะแสดงผลตามระบบ, แบบสว่าง, แบบมืด, Material You หรือสีดำสนิท</string>
     <string name="theme_preset_default">ตามระบบ</string>
     <string name="theme_preset_amoled">สีดำสนิท</string>
-    <string name="theme_preset_sunset">พระอาทิตย์ตก</string>
-    <string name="theme_preset_forest">ป่า</string>
-    <string name="theme_preset_ocean">มหาสมุทร</string>
-    <string name="theme_preset_midnight">เที่ยงคืน</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">รีเซ็ตการตั้งค่าธีมทั้งหมด</string>
     <string name="color_channel_red">สีแดง</string>
     <string name="color_channel_green">สีเขียว</string>
     <string name="color_channel_blue">สีน้ำเงิน</string>
-    <string name="pure_black_theme">ธีมสีดำสนิท</string>
-    <string name="pure_black_theme_description">ใช้พื้นหลังสีดำสนิทสำหรับธีมมืด</string>
     <string name="theme">ธีม</string>
-    <string name="theme_description">เลือกระหว่างธีมสว่างหรือธีมมืด</string>
     <string name="safeguards">การป้องกัน</string>
     <string name="patch_compat_check">ปิดการตรวจสอบความเข้ากันได้ของเวอร์ชัน</string>
     <string name="patch_compat_check_description">ไม่อนุญาตให้จำกัดแพตช์สำหรับแอปเวอร์ชันที่เข้ากันได้</string>
@@ -368,10 +347,8 @@
     <string name="export_patch_bundles">ส่งออกชุดแพตช์</string>
     <string name="export_patch_bundles_description">บันทึกชุดแพตช์ระยะไกลที่นำเข้าแล้วไปยังไฟล์ JSON</string>
     <string name="export_patch_bundles_fail">ไม่สามารถส่งออกชุดแพตช์ได้: %s</string>
-    <string name="export_patch_bundles_empty">ไม่มีชุดแพตช์ให้ส่งออก</string>
     <string name="export_patch_bundles_success">ส่งออกชุดแพตช์แล้ว %d รายการ</string>
     <string name="export_patch_bundles_partial">ส่งออกชุดแพตช์แล้ว %1$d รายการ บางรายการไม่สามารถส่งออกได้เนื่องจากถูกเพิ่มในเครื่อง</string>
-    <string name="export_patch_bundles_local_not_supported">สามารถส่งออกได้เฉพาะชุดแพตช์ที่นำเข้าจาก URL</string>
     <string name="bundle_type_remote">ระยะไกล</string>
     <string name="bundle_type_local">ในเครื่อง</string>
     <string name="bundle_type_preinstalled">ติดตั้งไว้ล่วงหน้า</string>
@@ -426,12 +403,7 @@
     <string name="patch_selection_collapse_on_toggle_description">ซ่อนปุ่มการดำเนินการเลือกแพตช์โดยอัตโนมัติทุกครั้งที่คุณเลือกหรือยกเลิกการเลือกแพตช์</string>
     <string name="patch_selection_action_order_title">ลำดับปุ่มการดำเนินการเลือกแพตช์</string>
     <string name="patch_selection_action_order_description">เลือก ลำดับ เลย์เอาต์ สำหรับ ปุ่ม การดำเนินการ เลือก แพตช์</string>
-    <string name="patch_selection_action_order_dialog_title">จัดลำดับการดำเนินการแพตช์ใหม่</string>
-    <string name="patch_selection_action_order_dialog_description">ย้ายรายการเพื่อเปลี่ยนวิธีการแสดงปุ่มการดำเนินการเลือกแพตช์ ตัวอย่างจะอัปเดตสด</string>
-    <string name="patch_selection_action_order_preview_label">แสดงตัวอย่าง</string>
     <string name="patch_selection_action_order_reset">กู้คืนลำดับเริ่มต้น</string>
-    <string name="patch_selection_action_move_up">เลื่อนขึ้น</string>
-    <string name="patch_selection_action_move_down">เลื่อนลง</string>
     <string name="patch_selection_confirm_deselect_bundle_title">ยกเลิกการเลือกชุดหรือไม่?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">ยกเลิกการเลือกแพตช์ทั้งหมดที่เลือกจาก %1$s หรือไม่?</string>
     <string name="patch_selection_confirm_deselect_all_title">ยกเลิกการเลือกแพตช์ทั้งหมดหรือไม่?</string>
@@ -497,9 +469,6 @@
     <string name="downloader_plugin_delete_apps_description">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่เลือก?</string>
     <string name="downloader_settings_no_apps">ไม่พบแอปที่ดาวน์โหลด</string>
     <string name="search_apps">ค้นหาแอป…</string>
-    <string name="loading_body">กำลังโหลด…</string>
-    <string name="downloading_patches">กำลังดาวน์โหลดแพตช์…</string>
-    <string name="options">ตัวเลือก</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
     <string name="edit">แก้ไข</string>
@@ -509,7 +478,6 @@
     <string name="patch">แพตช์</string>
     <string name="select_from_storage">เลือกจากที่จัดเก็บ</string>
     <string name="select_from_storage_description">เลือกไฟล์ APK จากที่จัดเก็บโดยใช้ตัวเลือกไฟล์</string>
-    <string name="suggested_version_info">เวอร์ชันที่แนะนำ: %s</string>
     <string name="type_anything">พิมพ์อะไรก็ได้เพื่อดำเนินการต่อ</string>
     <string name="search">ค้นหาแพตช์…</string>
     <string name="apply">นำไปใช้</string>
@@ -549,29 +517,12 @@
     <string name="export_name_format_description">ปรับแต่งชื่อไฟล์เริ่มต้นสำหรับแอปที่แก้ไขซึ่งส่งออกแล้ว</string>
     <string name="export_name_format_dialog_title">รูปแบบชื่อไฟล์ที่ส่งออก</string>
     <string name="export_name_format_dialog_supporting">ใช้ตัวยึดตำแหน่งด้านล่างเพื่อสร้างชื่อไฟล์ ระบบจะเพิ่มส่วนขยาย .apk โดยอัตโนมัติหากไม่มี</string>
-    <string name="export_name_format_preview">ตัวอย่าง: %1$s</string>
     <string name="export_name_format_preview_label">ตัวอย่าง</string>
     <string name="export_name_format_variables">ตัวแปร</string>
     <string name="export_name_format_reset">รีเซ็ตเป็นค่าเริ่มต้น</string>
     <string name="export_name_format_error_blank">รูปแบบชื่อไฟล์ต้องไม่ว่างเปล่า</string>
     <string name="export_name_format_current">รูปแบบปัจจุบัน: %1$s</string>
     <string name="export_name_format_insert">แทรก</string>
-    <string name="export_name_variable_app_name">ชื่อแอป</string>
-    <string name="export_name_variable_app_name_description">แทนที่ด้วยชื่อที่แสดงของแอป</string>
-    <string name="export_name_variable_package_name">ชื่อแพ็กเกจ</string>
-    <string name="export_name_variable_package_name_description">แทนที่ด้วยชื่อแพ็กเกจของแอป</string>
-    <string name="export_name_variable_app_version">เวอร์ชันแอป</string>
-    <string name="export_name_variable_app_version_description">แทนที่ด้วยชื่อเวอร์ชันของแอป</string>
-    <string name="export_name_variable_patches_version">เวอร์ชันแพตช์</string>
-    <string name="export_name_variable_patches_version_description">แทนที่ด้วยเวอร์ชันแพตช์บันเดิลที่ใช้</string>
-    <string name="export_name_variable_bundle_names">ชื่อบันเดิลแพตช์</string>
-    <string name="export_name_variable_bundle_names_description">แทนที่ด้วยชื่อแพตช์บันเดิลที่ใช้</string>
-    <string name="export_name_variable_manager_version">เวอร์ชัน Manager</string>
-    <string name="export_name_variable_manager_version_description">แทนที่ด้วยเวอร์ชัน Manager</string>
-    <string name="export_name_variable_timestamp">เวลาประทับ</string>
-    <string name="export_name_variable_timestamp_description">แทนที่ด้วยเวลาปัจจุบัน (yyyyMMdd-HHmmss)</string>
-    <string name="export_name_variable_date">วันที่</string>
-    <string name="export_name_variable_date_description">แทนที่ด้วยวันที่ปัจจุบัน (yyyyMMdd)</string>
     <string name="debug_logs_export">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
     <string name="debug_logs_export_read_failed">ไม่สามารถอ่านบันทึก (รหัสออก %d)</string>
     <string name="debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
@@ -594,31 +545,19 @@
     <string name="app_language">ภาษาของแอป</string>
     <string name="language_dialog_title">เลือกภาษาของแอป</string>
     <string name="language_option_system">ใช้ภาษาของอุปกรณ์</string>
-    <string name="device">อุปกรณ์</string>
-    <string name="device_android_version">เวอร์ชัน Android</string>
-    <string name="device_model">รุ่น</string>
-    <string name="device_architectures">สถาปัตยกรรม CPU</string>
-    <string name="device_memory_limit">ขีดจำกัดหน่วยความจำ</string>
     <string name="device_memory_limit_format">%1$dMB (ปกติ) - %2$dMB (ใหญ่)</string>
     <string name="patches_force_download">บังคับดาวน์โหลดชุดแพตช์ทั้งหมด</string>
     <string name="patches_reset">รีเซ็ตชุดแพตช์</string>
-    <string name="patching">การแพตช์</string>
-    <string name="signing">การลงนาม</string>
-    <string name="storage">พื้นที่เก็บข้อมูล</string>
     <string name="no_patch_found">ไม่พบแพตช์ โปรดตรวจสอบแพตช์ของคุณ</string>
     <string name="tab_apps">แอป</string>
     <string name="tab_patches">ชุดแพตช์</string>
     <string name="tab_profiles">โปรไฟล์แพตช์</string>
     <string name="delete">ลบ</string>
     <string name="refresh">รีเฟรช</string>
-    <string name="continue_anyways">ดำเนินการต่อ</string>
-    <string name="download_another_version">ดาวน์โหลดเวอร์ชันอื่น</string>
-    <string name="download_app">ดาวน์โหลดแอป</string>
     <string name="download_apk">ดาวน์โหลดไฟล์ APK</string>
     <string name="patches_download_fail">ดาวน์โหลดแพตช์ล้มเหลว: %s</string>
     <string name="patches_replace_fail">นำเข้าแพตช์ล้มเหลว: %s</string>
     <string name="no_patched_apps_found">ไม่พบแอปที่ได้รับการแพตช์</string>
-    <string name="tap_on_patches">แตะที่แพตช์เพื่อดูข้อมูลเพิ่มเติมเกี่ยวกับแพตช์</string>
     <string name="patches_selected">เลือกชุดแพตช์ %s แล้ว</string>
     <string name="patch_profiles_selected">เลือกโปรไฟล์แพตช์ %1$d รายการ</string>
     <string name="selected_apps_count">%1$d แอปพลิเคชันที่เลือก</string>
@@ -632,7 +571,6 @@
 โปรดใช้เวอร์ชันที่แนะนำ: %s
 
 หากต้องการดำเนินการต่อ ให้ปิดใช้งาน \"ต้องใช้เวอร์ชันแอปที่แนะนำ\" ในการตั้งค่าขั้นสูง"</string>
-    <string name="selection_warning_title">หยุดใช้ค่าเริ่มต้นหรือไม่</string>
     <string name="selection_warning_description">"ขอแนะนำให้ใช้การเลือกและตัวเลือกแพตช์เริ่มต้น การเปลี่ยนแปลงอาจส่งผลให้เกิดปัญหาที่ไม่คาดคิด
 
 คุณต้องเปิดใช้งาน \"อนุญาตให้เปลี่ยนการเลือกและตัวเลือกแพตช์\" ในการตั้งค่าขั้นสูงก่อนจึงจะสามารถสลับแพตช์ได้"</string>
@@ -688,9 +626,6 @@
     <string name="patcher_missing_patch_title">การเลือก Patch ต้องการความสนใจ</string>
     <string name="patcher_preflight_missing_patch_remove">นำ Patch ที่ขาดหายไปออก</string>
     <string name="patcher_preflight_missing_patch_proceed">ดำเนินการต่อ</string>
-    <string name="patcher_missing_patch_message">"การ Patch ล้มเหลวเนื่องจากไม่พบ Patch ต่อไปนี้ใน Bundle ปัจจุบัน:
-%1$s
-เปิดการเลือกอีกครั้งและเลือกใหม่ (หรือเลือกอันอื่น) ก่อนลองอีกครั้ง"</string>
     <string name="patcher_preflight_missing_patch_message">"patches ที่จะถูกลบไม่สามารถนำมาใช้ในชุดปัจจุบันได้
 %1$s
 คุณสามารถลบพวกมันออกได้เอง หรือเปลี่ยนการเลือก หรือดำเนินการต่อด้วย"</string>
@@ -699,7 +634,6 @@
     <string name="patch_selector_missing_patch_message">"แพตช์เหล่านี้ต้องเลือกอีกครั้ง:
 %1$s
 เปิดใช้งานอีกครั้ง (หรือเลือกรายการอื่น) แล้วลองใช้แพตช์อีกครั้ง"</string>
-    <string name="delete_profile_confirmation">ลบ \"%1$s\"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">ลบโปรไฟล์แพตช์ที่เลือกหรือไม่?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="other">%d แพตช์</item>
@@ -707,26 +641,18 @@
     <plurals name="patch_profile_bundle_count">
         <item quantity="other">%d ชุดรวม</item>
     </plurals>
-    <string name="universal_patch_warning_description">"แพตช์สากลมีการใช้งานทั่วไปมากกว่า และไม่น่าเชื่อถือเท่าแพตช์ที่กำหนดเป้าหมายแอปที่เฉพาะเจาะจง คุณอาจพบปัญหาระหว่างการใช้งาน
-
-คุณต้องเปิด \"แสดง &amp; อนุญาตให้ใช้แพตช์สากล\" ในการตั้งค่าขั้นสูงก่อนที่จะใช้แพตช์สากล"</string>
     <string name="this_version">เวอร์ชันนี้</string>
     <string name="universal">แอปใดก็ได้</string>
     <string name="search_patches">ค้นหาแพตช์</string>
     <string name="app_version_not_compatible">"แพตช์นี้ไม่สามารถใช้งานร่วมกับแอปเวอร์ชันที่เลือก (%1$s).
 
 ใช้งานได้กับเวอร์ชันต่อไปนี้เท่านั้น: %2$s"</string>
-    <string name="continue_with_version">ดำเนินการต่อด้วยเวอร์ชันนี้หรือไม่</string>
-    <string name="version_not_compatible">แพตช์ทั้งหมดไม่สามารถใช้งานร่วมกับเวอร์ชันนี้ (%s) ได้ คุณต้องการดำเนินการต่อหรือไม่</string>
-    <string name="download_application">ดาวน์โหลดแอปพลิเคชันหรือไม่</string>
-    <string name="app_not_installed">แอปที่คุณเลือกไม่ได้ติดตั้ง คุณต้องการดาวน์โหลดหรือไม่</string>
     <string name="failed_to_load_apk">ไม่สามารถโหลด APK ได้</string>
     <string name="loading">กำลังโหลด…</string>
     <string name="not_installed">ไม่ได้ติดตั้ง</string>
     <string name="installed">ติดตั้งแล้ว</string>
     <string name="app_info">ข้อมูลแอป</string>
     <string name="uninstall">ถอนการติดตั้ง</string>
-    <string name="unpatch">ยกเลิกแพตช์</string>
     <string name="repatch">ติดตั้งแพตช์ใหม่</string>
     <string name="install_type">ประเภทการติดตั้ง</string>
     <string name="package_name">ชื่อแพ็กเกจ</string>
@@ -737,7 +663,6 @@
     <string name="applied_patches_empty">ไม่มีแพตช์บันทึกไว้สำหรับแอปนี้</string>
     <string name="applied_patches_bundle_missing">ข้อมูลเมตาของชุดไม่พร้อมใช้งาน กำลังแสดงชื่อแพตช์ที่บันทึกไว้</string>
     <string name="no_patch_bundles_tracked">ไม่มีชุดแพตช์ที่บันทึกไว้สำหรับแอปนี้</string>
-    <string name="default_install">ค่าเริ่มต้น</string>
     <string name="mount_install">ตัวติดตั้งเมานต์รูท</string>
     <string name="mounted">เมานต์แล้ว</string>
     <string name="unmounted">ไม่ได้เมานต์</string>
@@ -753,7 +678,6 @@
     <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
     <string name="unpatch_app">ยกเลิกการแก้ไขแอปหรือไม่?</string>
     <string name="unpatch_description">คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการแก้ไขแอปนี้?</string>
-    <string name="downloader_invalid_version">โปรแกรมดาวน์โหลดไม่ได้ดึงเวอร์ชันที่ถูกต้องมา</string>
     <string name="downloader_app_not_found">โปรแกรมดาวน์โหลดไม่พบแอป</string>
     <string name="downloader_error">ข้อผิดพลาดของโปรแกรมดาวน์โหลด: %s</string>
     <string name="downloader_no_plugins_installed">ไม่มีโปรแกรมดาวน์โหลดติดตั้งอยู่</string>
@@ -774,7 +698,6 @@
     <string name="path_selector_files">ไฟล์</string>
     <string name="show_password_field">แสดงรหัสผ่าน</string>
     <string name="hide_password_field">ซ่อนรหัสผ่าน</string>
-    <string name="installer">โปรแกรมติดตั้ง</string>
     <string name="installer_primary_title">โปรแกรมติดตั้งหลัก</string>
     <string name="installer_primary_description">ใช้ก่อนเมื่อติดตั้งแอปที่ถูกแพตช์</string>
     <string name="installer_fallback_title">โปรแกรมติดตั้งสำรอง</string>
@@ -853,7 +776,6 @@
     <string name="install_app_fail_title">การติดตั้งล้มเหลว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
     <string name="mount_app_fail_title">การติดตั้งล้มเหลว</string>
-    <string name="mount_app_fail">ไม่สามารถติดตั้งแอปได้: %1$s</string>
     <string name="install_timeout_message">การติดตั้งไม่เสร็จสมบูรณ์ โปรดตรวจสอบหน้าต่างตัวติดตั้งของระบบแล้วลองอีกครั้ง</string>
     <string name="reinstall_app_fail">ไม่สามารถติดตั้งแอปใหม่ได้: %s</string>
     <string name="uninstall_app_fail">ไม่สามารถถอนการติดตั้งแอปได้: %s</string>
@@ -872,16 +794,11 @@
     <string name="install_saved_app">ติดตั้ง</string>
     <string name="remount_saved_app">เมานต์</string>
     <string name="update_saved_app">อัปเดต</string>
-    <string name="installing_saved_app">กำลังติดตั้งแอปที่บันทึกไว้…</string>
     <string name="saved_app_install_success">ติดตั้งแอปที่บันทึกไว้สำเร็จแล้ว</string>
     <string name="saved_app_install_failed">ติดตั้งแอปที่บันทึกไว้ไม่สำเร็จ</string>
     <string name="saved_app_uninstall_title">ถอนการติดตั้งเวอร์ชันที่ติดตั้งแล้วหรือไม่?</string>
-    <string name="saved_app_unmount_title">ยกเลิกการเมานต์เวอร์ชันที่ติดตั้งแล้วหรือไม่?</string>
     <string name="saved_app_uninstall_description">นี่จะเป็นการลบเฉพาะเวอร์ชันที่ติดตั้งเท่านั้น APK ที่บันทึกไว้ของคุณจะยังคงอยู่</string>
-    <string name="saved_app_unmount_description">นี่จะเป็นการยกเลิกการเมานต์ APK ที่แก้ไขแล้วเท่านั้น APK ที่บันทึกไว้ของคุณจะยังคงอยู่</string>
     <string name="saved_app_install_missing">ไม่พบ APK ที่บันทึกไว้</string>
-    <string name="delete_saved_copy">ลบสำเนาที่บันทึกไว้</string>
-    <string name="sign_fail">ไม่สามารถลงนาม APK: %s</string>
     <string name="save_logs">บันทึก</string>
     <string name="plugin_activity_dialog_body">ต้องมีการโต้ตอบจากผู้ใช้เพื่อดำเนินการกับปลั๊กอินนี้ต่อไป</string>
     <string name="select_install_type">เลือกประเภทการติดตั้ง</string>
@@ -889,7 +806,6 @@
     <string name="patcher_step_load_patches">กำลังโหลดแพตช์</string>
     <string name="patcher_step_unpack">กำลังอ่านไฟล์ APK</string>
     <string name="patcher_step_prepare_split_apk">รวม APK ที่แบ่งส่วน</string>
-    <string name="patcher_step_merge_not_required">ไม่จำเป็นต้องรวมส่วนที่แบ่ง</string>
     <string name="patcher_step_group_patching">กำลังแพตช์</string>
     <string name="patcher_step_group_saving">กำลังบันทึก</string>
     <string name="patcher_step_write_patched">กำลังเขียนไฟล์ APK ที่ได้รับการแพตช์</string>
@@ -927,14 +843,9 @@
     <string name="less">น้อยลง</string>
     <string name="continue_">ดำเนินการต่อ</string>
     <string name="dismiss">ปิด</string>
-    <string name="permanent_dismiss">อย่าแสดงอีก</string>
-    <string name="website">เว็บไซต์</string>
     <string name="patch_bundle_urls">รับการนำเข้าชุดแพตช์</string>
-    <string name="contact">ติดต่อ</string>
     <string name="version">เวอร์ชัน</string>
     <string name="published">เผยแพร่แล้ว</string>
-    <string name="submit_feedback">ส่งปัญหาหรือข้อเสนอแนะ</string>
-    <string name="submit_feedback_description">ช่วยเราปรับปรุงแอปพลิเคชันนี้</string>
     <string name="developer_options">ตัวเลือกนักพัฒนา</string>
     <string name="developer_options_description">ตัวเลือกสำหรับการแก้ไขปัญหา</string>
     <string name="patches_update_success">อัปเดตสำเร็จ</string>
@@ -949,12 +860,7 @@
 
 Morphe เป็นโอเพนซอร์สในแก่นแท้ โดยอาศัยข้อเสนอแนะและการสนับสนุนจากชุมชนเพื่อขับเคลื่อนนวัตกรรมในอนาคต"</string>
     <string name="here">ที่นี่</string>
-    <string name="developer_options_enabled">เปิดใช้งานตัวเลือกนักพัฒนาแล้ว</string>
-    <string name="developer_options_taps">เหลือ %d ครั้ง</string>
-    <string name="developer_options_already_enabled">เปิดใช้งานตัวเลือกนักพัฒนาแล้ว</string>
     <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
-    <string name="current_version">เวอร์ชันปัจจุบัน: %s</string>
-    <string name="new_version">เวอร์ชันใหม่: %s</string>
     <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>
     <string name="update_completed">ติดตั้งอัปเดตแล้ว</string>
     <string name="install_update_manager_failed">ล้มเหลวในการติดตั้งอัปเดต</string>
@@ -980,14 +886,12 @@ Morphe เป็นโอเพนซอร์สในแก่นแท้ โ
     <string name="hours_ago">เมื่อ %s ชั่วโมงที่แล้ว</string>
     <string name="days_ago">เมื่อ %s วันที่แล้ว</string>
     <string name="invalid_date">วันที่ไม่ถูกต้อง</string>
-    <string name="disable_battery_optimization">ปิดใช้งานการเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="input_dialog_value_invalid">ค่าไม่ถูกต้อง</string>
     <string name="option_required">ตัวเลือกนี้จำเป็น</string>
     <string name="required_options_screen">ตัวเลือกที่จำเป็น</string>
     <string name="failed_to_check_updates">ไม่สามารถตรวจสอบการอัปเดตได้: %s</string>
     <string name="no_update_available">ไม่มีการอัปเดตพร้อมใช้งาน</string>
     <string name="update_check">กำลังตรวจสอบการอัปเดต…</string>
-    <string name="dismiss_temporary">ไม่ใช่วันนี้</string>
     <string name="update_available_dialog_description">Morphe เวอร์ชันใหม่ (%s) พร้อมใช้งานแล้ว</string>
     <string name="failed_to_download_update">ไม่สามารถดาวน์โหลดอัปเดตได้: %s</string>
     <string name="download">ดาวน์โหลด</string>
@@ -1044,5 +948,4 @@ Morphe เป็นโอเพนซอร์สในแก่นแท้ โ
     <string name="failed_to_import_keystore">นำเข้าคีย์สโตร์ไม่สำเร็จ</string>
     <string name="export">ส่งออก</string>
     <string name="confirm">ยืนยัน</string>
-    <string name="saved_app_install_cancelled">การติดตั้งถูกยกเลิก</string>
 </resources>

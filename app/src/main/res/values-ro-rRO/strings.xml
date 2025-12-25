@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Pachet de patch-uri</string>
-    <string name="morphe_home_greeting_1">Ce aplicație doriți să aplicați patch-ul?</string>
-    <string name="morphe_home_greeting_2">Pregătit să faci YouTube legendar din nou?</string>
-    <string name="morphe_home_greeting_3">Pune-ți centura, e timpul pentru patch-uri</string>
-    <string name="morphe_home_greeting_4">Încă o zi, încă o capodoperă blocată de reclame</string>
-    <string name="morphe_home_greeting_5">Vrei să vizionezi reclame? Nici eu</string>
-    <string name="morphe_home_greeting_6">Încercați să faceți aplicațiile dvs. să behave</string>
-    <string name="morphe_home_greeting_7">Vremea de astăzi: 100% șanse de remediere</string>
+    <string name="morphe_home_greeting_1">Ce aplicație vrei să repari? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Gata să faci YouTube legendar din nou? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Întinde-te, e timpul reparării 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Altă zi, altă capodoperă blocată de reclame 😌🚫</string>
+    <string name="morphe_home_greeting_5">Vrei să vezi reclame? Nici eu 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Să facem aplicațiile tale să se comporte 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Vremea de astăzi: 100% șanse de remediere 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Repară cu responsabilitate... sau nu 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Salvând aplicațiile de la ele însele de astăzi 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Alimentat de cafea și bune reparații ☕🧠</string>
     <string name="morphe_home_bundle_type_api">Pachet API</string>
     <string name="morphe_home_update_error">Actualizarea a eșuat</string>
     <string name="morphe_home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Adăugat</string>
     <string name="morphe_home_date_updated">Actualizat</string>
     <string name="morphe_home_check_updates">Verifică</string>
-    <string name="morphe_home_bundle_update_completed">Actualizare finalizată</string>
     <string name="morphe_home_unknown">Necunoscut</string>
     <string name="morphe_home_timeline">Istoric actualizări</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Pentru a patch-ui %1$s, am nevoie de versiunea %2$s (ne-patch-uit).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>
     <string name="morphe_home_apk_availability_yes">Da, o am</string>
     <string name="morphe_home_apk_availability_no">Nu, ajută-mă să o găsesc</string>
-    <string name="morphe_home_apk_availability_dialog_description">Pentru a aplica patch la %1$s, am nevoie de versiunea %2$s (neaplicată).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Asigură-te că descarci APK-ul, dar NU îl instala.</string>
+    <string name="morphe_home_apk_availability_dialog_description">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Descarcă APK-ul original de pe APKMirror</string>
-    <string name="morphe_home_download_instructions_description">Urmează acești pași pentru a descărca versiunea %2$s a %1$s de pe APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">Descărcați APK-ul original</string>
     <string name="morphe_home_download_instructions_steps_title">Instrucțiuni:</string>
-    <string name="morphe_home_download_instructions_step1">Apasă pe Continuare pentru a deschide site-ul APKMirror.com</string>
+    <string name="morphe_home_download_instructions_step1">Apăsați butonul \'Continuați la APKMirror.com\' de mai jos</string>
     <string name="morphe_home_download_instructions_step2_part1">Derulează în jos pagina web și apasă pe</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Apasă pe descărcare pe site, nu aici 😊</string>
-    <string name="morphe_home_download_instructions_step3">Așteaptă finalizarea descărcării și nu instala APK-ul</string>
-    <string name="morphe_home_download_instructions_step3_mount">Așteaptă finalizarea descărcării și instalează fișierul APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Apăsați descărcarea pe site, și nu aici 😊</string>
+    <string name="morphe_home_download_instructions_step3">Așteptați ca descărcarea să se finalizeze, și &lt;b&gt;nu instalați&lt;/b&gt; APK-ul</string>
+    <string name="morphe_home_download_instructions_step3_mount">Așteptați ca descărcarea să se finalizeze, apoi &lt;b&gt;instalați APK-ul&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">După ce se finalizează descărcarea, redeschide această aplicație</string>
     <string name="morphe_home_download_instructions_step4_mount">După instalarea fișierului APK original, redeschide această aplicație</string>
-    <string name="morphe_home_download_instructions_note">Important: Descarcă fișierul APK, dar nu-l instala pe dispozitivul tău.</string>
-    <string name="morphe_home_download_instructions_continue">Continuă către APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Continuați la APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
     <string name="morphe_home_file_picker_prompt_description">Acum selectează fișierul APK %1$s pe care tocmai l-ai descărcat.</string>
     <string name="morphe_home_file_picker_prompt_open">Deschide fișierul APK pe care l-am descărcat</string>
-    <string name="morphe_home_wrong_package_selected">Pachet așteptat %1$s dar s-a obținut %2$s</string>
-    <string name="morphe_home_any_version">orice versiune</string>
     <string name="morphe_home_recommended_version">Versiune recomandată</string>
     <string name="morphe_patcher_selected_version">Versiune selectată</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch-uri</string>
     <string name="morphe_patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
-    <string name="morphe_patcher_install_dialog_message">Instalați aplicația modificată?</string>
-    <string name="morphe_patcher_install_conflict_message">A fost detectat un conflict de pachete. Pentru a instala noua versiune, trebuie mai întâi să dezinstalați versiunea anterioară a aplicației.</string>
-    <string name="morphe_patcher_install_ready_message">Versiunea anterioară a fost dezinstalată. Acum puteți instala aplicația modificată.</string>
-    <string name="morphe_patcher_install_cancelled_title">Instalare anulată</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Faceți clic pe butonul de instalare pentru a încerca din nou</string>
     <string name="morphe_patcher_installing">Se instalează…</string>
     <string name="morphe_patcher_installing_subtitle">Aproape gata de distracție! 🎸</string>
     <string name="morphe_patcher_success_title">Totul gata! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Repararea bug-urilor în aplicația nepatch-uită… 🐞</string>
     <string name="morphe_patcher_message_10">Patch-urile grozave merită așteptarea… ⏳</string>
     <string name="morphe_patcher_message_11">Șlefuirea pixelilor până strălucesc… 💎</string>
-    <string name="morphe_patcher_message_12">Vă rugăm să rămâneți așezați până când comandantul stinge semnul „Patching in progress”… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Vă rugăm să rămâneți așezați până când pilotul oprește semnul \"Repararea este în curs\"... 💺✈️</string>
     <string name="morphe_patcher_message_13">Gătim aplicația patch-uită, fierbinte și proaspătă… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Negociind politicos cu bytecode… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Folosit pentru a controla accesul la pluginurile Morphe. Doar Morphe deține acest lucru.</string>
     <string name="toast_copied_to_clipboard">Copiat!</string>
     <string name="copy_to_clipboard">Copiați în clipboard</string>
-    <string name="dashboard">Panou de control</string>
     <string name="settings">Setări</string>
     <string name="select_app">Selectați o aplicație</string>
     <string name="new_downloader_plugins_notification">Sunt disponibile noi pluginuri de descărcare. Faceți clic aici pentru a le configura.</string>
     <string name="unsupported_architecture_warning">Aplicarea patch-urilor pe această arhitectură de dispozitiv nu este acceptată și cel mai probabil va eșua.</string>
     <string name="import_">Importare</string>
-    <string name="import_patches">Importați patch-uri</string>
     <string name="file_field_set">Selectat</string>
     <string name="file_field_not_set">Neselectat</string>
     <string name="field_not_set">Neselectat</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Să aleagă care sugestie de bundle se va utiliza atunci când se descarcă o aplicație.</string>
     <string name="bundle_version_dialog_default">Utilizați recomandarea implicită</string>
     <string name="bundle_version_dialog_default_subtitle">Selectați automat cea mai comună versiune compatibilă.</string>
-    <string name="bundle_version_dialog_option_subtitle">Utilizați versiunea %1$s</string>
     <string name="bundle_version_all_versions">Toate versiunile</string>
     <string name="bundle_version_no_version">Nicio versiune sugerată</string>
-    <string name="bundle_version_suggested_label">Versiune sugerată: %1$s</string>
-    <string name="bundle_version_other_heading">Alte versiuni suportate</string>
     <string name="bundle_update_manual_available">Actualizare disponibilă</string>
     <string name="bundle_update_manual_available_with_version">Actualizare disponibilă: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d pachete procesate</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Organizați pachetele</string>
     <string name="bundle_reorder_title">Organizați pachetele de corecție</string>
     <string name="bundle_reorder_description">Trageți mânerul pentru a aranja ordinea în care pachetele apar în listă și în meniul de selectare a corecției.</string>
-    <string name="bundle_reorder_move_up">Mutare pachet în sus</string>
-    <string name="bundle_reorder_move_down">Mutare pachet în jos</string>
     <string name="bundle_actions_expand">Afișați acțiunile pachetului</string>
     <string name="bundle_actions_collapse">Ascundeți acțiunile pachetului</string>
     <string name="patch_bundle_duplicate_name_error">Există deja un pachet de corecție cu acest nume</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Versiune sugerată: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Versiune selectată: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Selectat</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (selectat)</string>
     <string name="bundle_version_dialog_other_title">Selectați o altă versiune acceptată:</string>
     <string name="bundle_version_dialog_locked_title">Protecțiile versiunii sunt activate</string>
     <string name="bundle_version_dialog_locked_hint">Accesați Setări &gt; Avansat &gt; Protecții și setați ambele opțiuni „Necesită versiunea de aplicație sugerată” (dezactivat) și „Dezactivare verificare compatibilitate versiune” (activat) pentru a alege versiuni specifice pachetului.</string>
-    <string name="patch_item_description">Începeți aplicarea patch-urilor aplicației</string>
     <string name="patch_selector_item">Selectați patch-uri</string>
     <string name="patch_selector_item_description">%d patch-uri selectate</string>
     <string name="no_patches_selected">Niciun patch selectat</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Se utilizează APK instalat</string>
     <string name="apk_source_local">Se utilizează un fișier APK local</string>
     <string name="apk_source_downloaded">Se utilizează APK descărcat</string>
-    <string name="legacy_import_failed">Nu s-au putut importa setările vechi</string>
     <string name="auto_updates_dialog_title">Configurare actualizări</string>
     <string name="auto_updates_dialog_description">Doriți ca Morphe să verifice periodic dacă există actualizări pentru următorii componenți?</string>
     <string name="auto_updates_dialog_patches">Notificare Morphe</string>
@@ -246,7 +236,6 @@
     <string name="updates">Actualizări</string>
     <string name="updates_description">Verificați actualizările și vizualizați jurnalul modificărilor</string>
     <string name="downloads">Descărcări</string>
-    <string name="downloads_description">Pluginuri de descărcare și aplicații descărcate</string>
     <string name="plugins_help_title">Ce este un plugin de descărcare?</string>
     <string name="plugins_help_description">Un plugin de descărcare este un plugin care permite URV să descarce APK-uri din diverse surse. APK-urile descărcate vor fi afișate în secțiunea inferioară. În timpul procesului de aplicare a patch-urilor, puteți alege un APK deja descărcat sau îl puteți descărca printr-un plugin.
 
@@ -257,7 +246,6 @@ Lista pluginurilor de descărcare suportate poate fi găsită</string>
     <string name="changelog_loading">Se încarcă jurnalul de modificări</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_description">Consultați cele mai recente modificări din această actualizare</string>
-    <string name="no_changelogs_found">Nu au fost găsite jurnale de modificări</string>
     <string name="advanced">Avansat</string>
     <string name="advanced_description">URL API, limită de memorie, depanare</string>
     <string name="about">Despre</string>
@@ -276,27 +264,18 @@ Lista pluginurilor de descărcare suportate poate fi găsită</string>
     <string name="theme_color_picker_title">Culoarea temei</string>
     <string name="theme_color_preview">Previzualizare</string>
     <string name="theme_color_reset">Resetează culoarea temei</string>
-    <string name="theme_color_presets">Setări implicite pentru culoarea temei</string>
-    <string name="theme_color_presets_description">Atinge o culoare pentru a redenumi fundalurile și cardurile</string>
     <string name="theme_preview_title">Previzualizare temă</string>
     <string name="theme_preview_description">Actualizări instantanee la schimbarea setărilor temei</string>
     <string name="theme_presets">Setări implicite temă</string>
     <string name="theme_presets_description">Alege cum aplicația urmează sistemul, lumină, întuneric, Material You sau negru pur</string>
     <string name="theme_preset_default">Urmează sistemul</string>
     <string name="theme_preset_amoled">Negru pur</string>
-    <string name="theme_preset_sunset">Amurg</string>
-    <string name="theme_preset_forest">Pădure</string>
-    <string name="theme_preset_ocean">Ocean</string>
-    <string name="theme_preset_midnight">Miez de noapte</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Resetează toate setările temei</string>
     <string name="color_channel_red">Roșu</string>
     <string name="color_channel_green">Verde</string>
     <string name="color_channel_blue">Albastru</string>
-    <string name="pure_black_theme">Temă negru pur</string>
-    <string name="pure_black_theme_description">Utilizează fundaluri negru pur pentru tema întunecată</string>
     <string name="theme">Temă</string>
-    <string name="theme_description">Alege între tema deschisă sau întunecată</string>
     <string name="safeguards">Protecții</string>
     <string name="patch_compat_check">Dezactivează verificarea compatibilității versiunii</string>
     <string name="patch_compat_check_description">Nu restricționa patch-urile la versiuni compatibile ale aplicației</string>
@@ -368,10 +347,8 @@ Nu veți putea actualiza aplicațiile instalate anterior din această sursă."</
     <string name="export_patch_bundles">Export pachete patch</string>
     <string name="export_patch_bundles_description">Salvare pachete patch remote importate într-un fișier JSON</string>
     <string name="export_patch_bundles_fail">Nu s-au putut exporta pachetele de modificări: %s</string>
-    <string name="export_patch_bundles_empty">Nu există pachete de modificări de exportat</string>
     <string name="export_patch_bundles_success">Au fost exportate %d pachete de modificări</string>
     <string name="export_patch_bundles_partial">Au fost exportate %1$d pachete de modificări. Unele pachete nu au putut fi exportate deoarece au fost adăugate local.</string>
-    <string name="export_patch_bundles_local_not_supported">Exportul este disponibil numai pentru pachetele de modificări importate de pe URL-uri</string>
     <string name="bundle_type_remote">La distanță</string>
     <string name="bundle_type_local">Local</string>
     <string name="bundle_type_preinstalled">Preinstalat</string>
@@ -426,12 +403,7 @@ Nu veți putea actualiza aplicațiile instalate anterior din această sursă."</
     <string name="patch_selection_collapse_on_toggle_description">Ascundeți automat butoanele de acțiune pentru selecția pachetelor ori de câte ori selectați sau deselectați un pachet</string>
     <string name="patch_selection_action_order_title">Ordinea butoanelor de acțiune pentru selecția pachetelor</string>
     <string name="patch_selection_action_order_description">Alege ordinea aspectului pentru butoanele de acțiune la selecția de patch-uri</string>
-    <string name="patch_selection_action_order_dialog_title">Reordonează acțiunile patch-urilor</string>
-    <string name="patch_selection_action_order_dialog_description">Mută intrările pentru a schimba modul în care sunt afișate butoanele de acțiune la selecția de patch-uri. Previzualizarea se actualizează în timp real.</string>
-    <string name="patch_selection_action_order_preview_label">Previzualizare</string>
     <string name="patch_selection_action_order_reset">Resetează la ordinea implicită</string>
-    <string name="patch_selection_action_move_up">Mută sus</string>
-    <string name="patch_selection_action_move_down">Mută jos</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Anulezi selecția pachetului?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Anulezi selecția tuturor patch-urilor selectate din %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Anulezi selecția tuturor patch-urilor?</string>
@@ -497,9 +469,6 @@ Semnătură (SHA-256): %2$s"</string>
     <string name="downloader_plugin_delete_apps_description">Sigur doriți să ștergeți aplicațiile selectate?</string>
     <string name="downloader_settings_no_apps">Nu au fost găsite aplicații descărcate.</string>
     <string name="search_apps">Căutați aplicații…</string>
-    <string name="loading_body">Se încarcă…</string>
-    <string name="downloading_patches">Se descarcă patch-urile…</string>
-    <string name="options">Opțiuni</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="edit">Editați</string>
@@ -509,7 +478,6 @@ Semnătură (SHA-256): %2$s"</string>
     <string name="patch">Patch</string>
     <string name="select_from_storage">Selectați din stocare</string>
     <string name="select_from_storage_description">Selectați un fișier APK din stocare folosind selectorul de fișiere</string>
-    <string name="suggested_version_info">Versiune sugerată: %s</string>
     <string name="type_anything">Tastați orice pentru a continua</string>
     <string name="search">Căutați patch-uri…</string>
     <string name="apply">Aplicare</string>
@@ -549,29 +517,12 @@ Semnătură (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Personalizați numele implicit al fișierului pentru aplicațiile patch-uite exportate</string>
     <string name="export_name_format_dialog_title">Formatul numelui fișierului de export</string>
     <string name="export_name_format_dialog_supporting">Utilizați spațiul de substituție de mai jos pentru a crea un nume de fișier. Extensia .apk este adăugată automat dacă lipsește.</string>
-    <string name="export_name_format_preview">Previzualizare: %1$s</string>
     <string name="export_name_format_preview_label">Previzualizare</string>
     <string name="export_name_format_variables">Variabile</string>
     <string name="export_name_format_reset">Resetare la valorile implicite</string>
     <string name="export_name_format_error_blank">Formatul numelui fișierului nu poate fi gol.</string>
     <string name="export_name_format_current">Model curent: %1$s</string>
     <string name="export_name_format_insert">Inserare</string>
-    <string name="export_name_variable_app_name">Numele aplicației</string>
-    <string name="export_name_variable_app_name_description">Înlocuit cu numele de afișare al aplicației.</string>
-    <string name="export_name_variable_package_name">Nume pachet</string>
-    <string name="export_name_variable_package_name_description">Înlocuit cu numele pachetului aplicației.</string>
-    <string name="export_name_variable_app_version">Versiune aplicație</string>
-    <string name="export_name_variable_app_version_description">Înlocuit cu numele versiunii aplicației.</string>
-    <string name="export_name_variable_patches_version">Versiune patch-uri</string>
-    <string name="export_name_variable_patches_version_description">Înlocuit cu versiunea aplicată a pachetului de patch-uri.</string>
-    <string name="export_name_variable_bundle_names">Nume bundle patch-uri</string>
-    <string name="export_name_variable_bundle_names_description">Înlocuit cu numele aplicat al pachetului de patch-uri.</string>
-    <string name="export_name_variable_manager_version">Versiune manager</string>
-    <string name="export_name_variable_manager_version_description">Înlocuit cu versiunea managerului.</string>
-    <string name="export_name_variable_timestamp">Timestamp</string>
-    <string name="export_name_variable_timestamp_description">Înlocuit cu ora curentă (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">Dată</string>
-    <string name="export_name_variable_date_description">Înlocuit cu data curentă (yyyyMMdd).</string>
     <string name="debug_logs_export">Exportare jurnale de depanare</string>
     <string name="debug_logs_export_read_failed">Nu s-au putut citi jurnalele (cod de ieșire %d)</string>
     <string name="debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
@@ -594,31 +545,19 @@ Semnătură (SHA-256): %2$s"</string>
     <string name="app_language">Limba aplicației</string>
     <string name="language_dialog_title">Alege limba aplicației</string>
     <string name="language_option_system">Utilizează limba dispozitivului</string>
-    <string name="device">Dispozitiv</string>
-    <string name="device_android_version">Versiune Android</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">Arhitecturi CPU</string>
-    <string name="device_memory_limit">Limite de memorie</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Mare)</string>
     <string name="patches_force_download">Forțează descărcarea tuturor pachetelor de patch-uri</string>
     <string name="patches_reset">Resetează pachetele de patch-uri</string>
-    <string name="patching">Patching</string>
-    <string name="signing">Semnare</string>
-    <string name="storage">Stocare</string>
     <string name="no_patch_found">Nu s-au găsit patch-uri. Verifică patch-urile</string>
     <string name="tab_apps">Aplicații</string>
     <string name="tab_patches">Pachete de patch-uri</string>
     <string name="tab_profiles">Profiluri de patch-uri</string>
     <string name="delete">Șterge</string>
     <string name="refresh">Reîmprospătare</string>
-    <string name="continue_anyways">Continuă oricum</string>
-    <string name="download_another_version">Descarcă o altă versiune</string>
-    <string name="download_app">Descarcă aplicația</string>
     <string name="download_apk">Descarcă fișierul APK</string>
     <string name="patches_download_fail">Nu s-au putut descărca patch-urile: %s</string>
     <string name="patches_replace_fail">Nu s-a putut importa: %s</string>
     <string name="no_patched_apps_found">Nu s-au găsit aplicații patch-uite</string>
-    <string name="tap_on_patches">Atinge patch-urile pentru mai multe informații despre acestea</string>
     <string name="patches_selected">%s pachet de patch-uri selectat</string>
     <string name="patch_profiles_selected">%1$d profil de patch selectat</string>
     <string name="selected_apps_count">%1$d aplicație selectată</string>
@@ -632,7 +571,6 @@ Semnătură (SHA-256): %2$s"</string>
 Vă rugăm să utilizați versiunea sugerată: %s
 
 Pentru a continua oricum, dezactivați „Necesită versiunea sugerată a aplicației” din setările avansate."</string>
-    <string name="selection_warning_title">Opriți utilizarea valorilor implicite?</string>
     <string name="selection_warning_description">"Se recomandă utilizarea selecției și a opțiunilor implicite de patch-uri. Modificarea acestora poate duce la probleme neașteptate.
 
 Trebuie să activați „Permite modificarea selecției și a opțiunilor de patch-uri” din setările avansate înainte de a comuta patch-urile."</string>
@@ -688,9 +626,6 @@ Trebuie să activați „Permite modificarea selecției și a opțiunilor de pat
     <string name="patcher_missing_patch_title">Selecția de patch-uri necesită atenție</string>
     <string name="patcher_preflight_missing_patch_remove">Eliminați patch-urile lipsă</string>
     <string name="patcher_preflight_missing_patch_proceed">Continuați oricum</string>
-    <string name="patcher_missing_patch_message">"Patch-uirea a eșuat deoarece următoarele patch-uri nu au fost găsite în pachetul curent:
-%1$s
-Rechideți selecția și reselectați-le (sau alegeți înlocuiri) înainte de a reîncerca."</string>
     <string name="patcher_preflight_missing_patch_message">"Următoarele patch-uri nu sunt disponibile în curând actuală:
 %1$sPuteti elimina intotdeauna automat, ajustati selectia, sau continui oricum."</string>
     <string name="patcher_missing_patch_review">Revizuire selecție</string>
@@ -698,7 +633,6 @@ Rechideți selecția și reselectați-le (sau alegeți înlocuiri) înainte de a
     <string name="patch_selector_missing_patch_message">"Aceste patch-uri trebuie reselectate:
 %1$s
 Activați-le din nou (sau alegeți alternative) și apoi încercați din nou să aplicați patch-urile."</string>
-    <string name="delete_profile_confirmation">Ștergeți \"%1$s\"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Ștergeți profilurile de patch selectate?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d patch</item>
@@ -710,26 +644,18 @@ Activați-le din nou (sau alegeți alternative) și apoi încercați din nou să
         <item quantity="few">%d pachete</item>
         <item quantity="other">%d pachete</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Patch-urile universale au o utilizare mai generalizată și nu funcționează la fel de fiabil ca patch-urile care vizează aplicații specifice. Este posibil să întâmpinați probleme în timpul utilizării lor.
-
-Trebuie să activați \"Afișați &amp; permiteți utilizarea patch-urilor universale\" în setările avansate înainte de a utiliza patch-uri universale."</string>
     <string name="this_version">Această versiune</string>
     <string name="universal">Orice aplicație</string>
     <string name="search_patches">Caută patch-uri</string>
     <string name="app_version_not_compatible">"Această modificare nu este compatibilă cu versiunea selectată a aplicației (%1$s).
 
 Este compatibilă doar cu următoarea versiune: %2$s."</string>
-    <string name="continue_with_version">Continuați cu această versiune?</string>
-    <string name="version_not_compatible">Nu toate patch-urile sunt compatibile cu această versiune (%s). Doriți să continuați oricum?</string>
-    <string name="download_application">Descărcați aplicația?</string>
-    <string name="app_not_installed">Aplicația selectată nu este instalată. Doriți să o descărcați?</string>
     <string name="failed_to_load_apk">Nu a reușit să încarce APK</string>
     <string name="loading">Se încarcă…</string>
     <string name="not_installed">Neinstalată</string>
     <string name="installed">Instalat</string>
     <string name="app_info">Informații despre aplicație</string>
     <string name="uninstall">Dezinstalați</string>
-    <string name="unpatch">Anulare patch</string>
     <string name="repatch">Repatch</string>
     <string name="install_type">Tip de instalare</string>
     <string name="package_name">Nume pachet</string>
@@ -740,7 +666,6 @@ Este compatibilă doar cu următoarea versiune: %2$s."</string>
     <string name="applied_patches_empty">Nu există patch-uri înregistrate pentru această aplicație</string>
     <string name="applied_patches_bundle_missing">Metadate pachet indisponibile. Se afișează numele patch-urilor salvate.</string>
     <string name="no_patch_bundles_tracked">Nu există pachete de patch-uri urmărite pentru această aplicație</string>
-    <string name="default_install">Implicit</string>
     <string name="mount_install">Instalator montat cu root</string>
     <string name="mounted">Montat</string>
     <string name="unmounted">Demontat</string>
@@ -756,7 +681,6 @@ Este compatibilă doar cu următoarea versiune: %2$s."</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
     <string name="unpatch_app">Dezasamblare aplicație?</string>
     <string name="unpatch_description">Sigur doriți să dezasamblați această aplicație?</string>
-    <string name="downloader_invalid_version">Descărcătorul nu a preluat versiunea corectă</string>
     <string name="downloader_app_not_found">Descărcătorul nu a găsit aplicația</string>
     <string name="downloader_error">Eroare descărcător: %s</string>
     <string name="downloader_no_plugins_installed">Niciun descărcător instalat.</string>
@@ -777,7 +701,6 @@ Este compatibilă doar cu următoarea versiune: %2$s."</string>
     <string name="path_selector_files">Fișiere</string>
     <string name="show_password_field">Afișare parolă</string>
     <string name="hide_password_field">Ascundere parolă</string>
-    <string name="installer">Instalator</string>
     <string name="installer_primary_title">Instalator primar</string>
     <string name="installer_primary_description">Folosit prima dată la instalarea aplicațiilor modificate.</string>
     <string name="installer_fallback_title">Instalator de rezervă</string>
@@ -856,7 +779,6 @@ Detalii: %2$s"</string>
     <string name="install_app_fail_title">Instalare eșuată</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
     <string name="mount_app_fail_title">Montare eșuată</string>
-    <string name="mount_app_fail">Nu s-a putut monta aplicația: %1$s</string>
     <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul de instalare al sistemului și încercați din nou.</string>
     <string name="reinstall_app_fail">Nu s-a putut reinstala aplicația: %s</string>
     <string name="uninstall_app_fail">Nu s-a putut dezinstala aplicația: %s</string>
@@ -875,16 +797,11 @@ Detalii: %2$s"</string>
     <string name="install_saved_app">Instalează</string>
     <string name="remount_saved_app">Remontează</string>
     <string name="update_saved_app">Actualizează</string>
-    <string name="installing_saved_app">Se instalează aplicația salvată…</string>
     <string name="saved_app_install_success">Aplicație salvată instalată</string>
     <string name="saved_app_install_failed">Instalarea aplicației salvate a eșuat</string>
     <string name="saved_app_uninstall_title">Dezinstalează copia instalată?</string>
-    <string name="saved_app_unmount_title">Demontare copie instalată?</string>
     <string name="saved_app_uninstall_description">Aceasta elimină doar versiunea instalată. Fișierul APK salvat rămâne intact.</string>
-    <string name="saved_app_unmount_description">Acesta dezinstalează APK-ul modificat. APK-ul salvat de dvs. rămâne intact.</string>
     <string name="saved_app_install_missing">APK salvat negăsit</string>
-    <string name="delete_saved_copy">Șterge copia salvată</string>
-    <string name="sign_fail">Nu s-a putut semna APK-ul: %s</string>
     <string name="save_logs">Salvează logurile</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin.</string>
     <string name="select_install_type">Selectați tipul de instalare</string>
@@ -892,7 +809,6 @@ Detalii: %2$s"</string>
     <string name="patcher_step_load_patches">Se încarcă modificările</string>
     <string name="patcher_step_unpack">Se citește fișierul APK</string>
     <string name="patcher_step_prepare_split_apk">Se combină APK-ul divizat</string>
-    <string name="patcher_step_merge_not_required">Nu este necesară combinarea divizării</string>
     <string name="patcher_step_group_patching">Modificare</string>
     <string name="patcher_step_group_saving">Se salvează</string>
     <string name="patcher_step_write_patched">Se scrie fișierul APK modificat</string>
@@ -930,14 +846,9 @@ Detalii: %2$s"</string>
     <string name="less">Mai puțin</string>
     <string name="continue_">Continuă</string>
     <string name="dismiss">Anulare</string>
-    <string name="permanent_dismiss">Nu mai afișa</string>
-    <string name="website">Website</string>
     <string name="patch_bundle_urls">Obține importuri pachet de corecții</string>
-    <string name="contact">Contact</string>
     <string name="version">Versiune</string>
     <string name="published">Publicat</string>
-    <string name="submit_feedback">Trimite o problemă sau feedback</string>
-    <string name="submit_feedback_description">Ajută-ne să îmbunătățim această aplicație</string>
     <string name="developer_options">Opțiuni dezvoltator</string>
     <string name="developer_options_description">Opțiuni pentru depanarea problemelor</string>
     <string name="patches_update_success">Actualizare reușită</string>
@@ -952,12 +863,7 @@ Detalii: %2$s"</string>
 
 Open-source în esența sa, Morphe prosperă prin feedback și contribuții din partea comunității pentru a stimula inovația viitoare"</string>
     <string name="here">aici.</string>
-    <string name="developer_options_enabled">Opțiuni dezvoltator activate</string>
-    <string name="developer_options_taps">%d atingeri rămase</string>
-    <string name="developer_options_already_enabled">Opțiunile dezvoltatorului sunt deja activate</string>
     <string name="update_available">Este disponibilă o actualizare</string>
-    <string name="current_version">Versiune curentă: %s</string>
-    <string name="new_version">Versiune nouă: %s</string>
     <string name="ready_to_install_update">Actualizare pregătită pentru instalare</string>
     <string name="update_completed">Actualizare instalată</string>
     <string name="install_update_manager_failed">Eroare la instalarea actualizării</string>
@@ -983,14 +889,12 @@ Open-source în esența sa, Morphe prosperă prin feedback și contribuții din 
     <string name="hours_ago">acum %s ore</string>
     <string name="days_ago">acum %s zile</string>
     <string name="invalid_date">Dată invalidă</string>
-    <string name="disable_battery_optimization">Dezactivați optimizarea bateriei</string>
     <string name="input_dialog_value_invalid">Valoare invalidă</string>
     <string name="option_required">Această opțiune este obligatorie</string>
     <string name="required_options_screen">Opțiuni obligatorii</string>
     <string name="failed_to_check_updates">Nu s-a putut verifica existența actualizărilor: %s</string>
     <string name="no_update_available">Nu există nicio actualizare disponibilă</string>
     <string name="update_check">Se verifică actualizările…</string>
-    <string name="dismiss_temporary">Nu acum</string>
     <string name="update_available_dialog_description">Este disponibilă o nouă versiune a Morphe (%s).</string>
     <string name="failed_to_download_update">Nu s-a putut descărca actualizarea: %s</string>
     <string name="download">Descărcare</string>
@@ -1047,5 +951,4 @@ Faceți clic pe patch-uri pentru a vedea mai multe detalii."</string>
     <string name="failed_to_import_keystore">Nu s-a putut importa keystore-ul</string>
     <string name="export">Export</string>
     <string name="confirm">Confirmare</string>
-    <string name="saved_app_install_cancelled">Instalare anulată</string>
 </resources>

@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Patch-pakke</string>
-    <string name="morphe_home_greeting_1">Hvilken app vil du patche?</string>
-    <string name="morphe_home_greeting_2">Klar til at gøre YouTube legendarisk igen?</string>
-    <string name="morphe_home_greeting_3">Spænd sikkerhedsselen, det er tid til patching</string>
-    <string name="morphe_home_greeting_4">Endnu en dag, endnu et annonceblokeret mesterværk</string>
-    <string name="morphe_home_greeting_5">Vil du se annoncer? Mig heller ikke</string>
-    <string name="morphe_home_greeting_6">Laødigne udvik bleve til din app</string>
-    <string name="morphe_home_greeting_7">I dagernes forholge: 100% chancer for omstilling</string>
+    <string name="morphe_home_greeting_1">Hvilken app vil du patchet? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Klar til at gøre YouTube legendarisk igen? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Spænd sikkerhedsselen, nu patcher vi 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Endnu en dag, endnu et ad-blokket mesterværk 😌🚫</string>
+    <string name="morphe_home_greeting_5">Vil du se reklamer? Det gør jeg heller ikke 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Lad os få dine apps til at opføre sig 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Dagens prognose: 100% chance for udbedring 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Udbed ansvarligt... eller gør det ikke 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Redder apps fra sig selv siden i dag 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Drevet af koffein og gode rettelser ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API-pakke</string>
     <string name="morphe_home_update_error">Opdatering mislykkedes</string>
     <string name="morphe_home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Tilføjet</string>
     <string name="morphe_home_date_updated">Opdateret</string>
     <string name="morphe_home_check_updates">Tjek</string>
-    <string name="morphe_home_bundle_update_completed">Opdatering fuldført</string>
     <string name="morphe_home_unknown">Ukendt</string>
     <string name="morphe_home_timeline">Opdateringshistorik</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den originale upatchede APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">For at patche %1$s har jeg brug for version %2$s (upatchet).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
     <string name="morphe_home_apk_availability_yes">Ja, jeg har den</string>
     <string name="morphe_home_apk_availability_no">Nej, hjælp mig med at finde den</string>
-    <string name="morphe_home_apk_availability_dialog_description">For at patche %1$s, skal jeg bruge version %2$s (u-patchet).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Sørg for at downloade APK\'en, men installer den IKKE.</string>
+    <string name="morphe_home_apk_availability_dialog_description">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Download original APK fra APKMirror</string>
-    <string name="morphe_home_download_instructions_description">Følg disse trin for at downloade %1$s version %2$s fra APKMirror.com:</string>
+    <string name="morphe_home_download_instructions_title">Download den originale APK</string>
     <string name="morphe_home_download_instructions_steps_title">Instruktioner:</string>
-    <string name="morphe_home_download_instructions_step1">Tryk Fortsæt for at åbne APKMirror.com-webstedet</string>
+    <string name="morphe_home_download_instructions_step1">Tryk på \'Fortsæt til APKMirror.com\' knappen nedenfor</string>
     <string name="morphe_home_download_instructions_step2_part1">Rul ned på websiden og tryk</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Klik på download på webstedet, og ikke her 😊</string>
-    <string name="morphe_home_download_instructions_step3">Vent på, at downloaden er færdig, og installer ikke APK\'en</string>
-    <string name="morphe_home_download_instructions_step3_mount">Vent på at downloaden bliver færdig, og installer APK\'en</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Tryk på download på hjemmesiden, og ikke her 😊</string>
+    <string name="morphe_home_download_instructions_step3">Vent på at downloaden er færdig, og &lt;b&gt;installer ikke&lt;/b&gt; APK\'en</string>
+    <string name="morphe_home_download_instructions_step3_mount">Vent på at downloaden er færdig, og &lt;b&gt;installer APK\'en&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Efter downloaden er færdig, åbn denne app igen</string>
     <string name="morphe_home_download_instructions_step4_mount">Efter installation af den oprindelige APK, åbn denne app igen</string>
-    <string name="morphe_home_download_instructions_note">Vigtigt: Download APK\'en, men installer den ikke på din enhed.</string>
-    <string name="morphe_home_download_instructions_continue">Fortsæt til APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Fortsæt til APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Vælg den APK du har downloadet</string>
     <string name="morphe_home_file_picker_prompt_description">Vælg nu %1$s APK-filen, som du lige har downloadet.</string>
     <string name="morphe_home_file_picker_prompt_open">Åbn APK-fil jeg downloadede</string>
-    <string name="morphe_home_wrong_package_selected">Forventet pakke %1$s men fik %2$s</string>
-    <string name="morphe_home_any_version">enhver version</string>
     <string name="morphe_home_recommended_version">Anbefalet version</string>
     <string name="morphe_patcher_selected_version">Valgt version</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
-    <string name="morphe_patcher_install_dialog_message">Installer patchet app?</string>
-    <string name="morphe_patcher_install_conflict_message">Der er registreret en pakke-konflikt. For at installere den nye version skal du først afinstallere den tidligere version af appen.</string>
-    <string name="morphe_patcher_install_ready_message">Den tidligere version er blevet afinstalleret. Du kan nu installere den patchede app.</string>
-    <string name="morphe_patcher_install_cancelled_title">Installation annulleret</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Klik på installationsknappen for at prøve igen</string>
     <string name="morphe_patcher_installing">Installerer...</string>
     <string name="morphe_patcher_installing_subtitle">Næsten klar til at rocke! 🎸</string>
     <string name="morphe_patcher_success_title">Alt færdigt! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Retter fejl i den upatchede app… 🐞</string>
     <string name="morphe_patcher_message_10">Store patches er ventetiden værd… ⏳</string>
     <string name="morphe_patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
-    <string name="morphe_patcher_message_12">Bliv siddende, indtil kaptajnen slukker for \“Patching i gang\” skiltet… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker for \"Udbedring i gang\" skiltet... 💺✈️</string>
     <string name="morphe_patcher_message_13">Laver din patchede app, varm og frisk… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Høfligt forhandler med bytekode… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Bruges til at styre adgangen til Morphe-plugins. Kun Morphe har denne.</string>
     <string name="toast_copied_to_clipboard">Kopieret!</string>
     <string name="copy_to_clipboard">Kopier til udklipsholder</string>
-    <string name="dashboard">Dashboard</string>
     <string name="settings">Indstillinger</string>
     <string name="select_app">Vælg en app</string>
     <string name="new_downloader_plugins_notification">Nye downloader-plugins er tilgængelige. Klik her for at konfigurere dem.</string>
     <string name="unsupported_architecture_warning">Patching på denne enhedsarkitektur understøttes ikke og vil højst sandsynligt mislykkes.</string>
     <string name="import_">Importer</string>
-    <string name="import_patches">Importer patches</string>
     <string name="file_field_set">Valgt</string>
     <string name="file_field_not_set">Ikke valgt</string>
     <string name="field_not_set">Ikke indstillet</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Vælg, hvilket bundle\'s forslag skal bruges, når du lastes ned en APK.</string>
     <string name="bundle_version_dialog_default">Brug standardanbefaling</string>
     <string name="bundle_version_dialog_default_subtitle">Vælg automatisk den mest almindelige kompatible version.</string>
-    <string name="bundle_version_dialog_option_subtitle">Brug version %1$s</string>
     <string name="bundle_version_all_versions">Alle versioner</string>
     <string name="bundle_version_no_version">Ingen foreslået version</string>
-    <string name="bundle_version_suggested_label">Foreslået version: %1$s</string>
-    <string name="bundle_version_other_heading">Andre understøttede versioner</string>
     <string name="bundle_update_manual_available">Opdatering tilgængelig</string>
     <string name="bundle_update_manual_available_with_version">Opdatering tilgængelig: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d bundter behandlet</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Organiser bundter</string>
     <string name="bundle_reorder_title">Organiser patch-bundter</string>
     <string name="bundle_reorder_description">Træk i håndtaget for at arrangere den rækkefølge, bundter vises i listen og i menuen til valg af patch.</string>
-    <string name="bundle_reorder_move_up">Flyt bundt op</string>
-    <string name="bundle_reorder_move_down">Flyt bundt ned</string>
     <string name="bundle_actions_expand">Vis bundthandlinger</string>
     <string name="bundle_actions_collapse">Skjul bundthandlinger</string>
     <string name="patch_bundle_duplicate_name_error">En patchbundle med dette navn findes allerede</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Foreslået version: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Valgt version: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Valgt</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (valgt)</string>
     <string name="bundle_version_dialog_other_title">Vælg en anden understøttet version:</string>
     <string name="bundle_version_dialog_locked_title">Versionssikkerhed er aktiveret</string>
     <string name="bundle_version_dialog_locked_hint">Gå til Indstillinger &gt; Avanceret &gt; Sikkerhedsforanstaltninger, og indstil både \"Kræv foreslået appversion\" (slå fra) og \"Deaktiver versionskompatibilitetstjek\" (slå til) for at vælge bundtspecifikke versioner.</string>
-    <string name="patch_item_description">Begynd at patche applikationen</string>
     <string name="patch_selector_item">Vælg patches</string>
     <string name="patch_selector_item_description">%d patches valgt</string>
     <string name="no_patches_selected">Ingen patches valgt</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Bruger installeret APK</string>
     <string name="apk_source_local">Bruger en lokal APK-fil</string>
     <string name="apk_source_downloaded">Bruger downloadet APK</string>
-    <string name="legacy_import_failed">Kunne ikke importere ældre indstillinger</string>
     <string name="auto_updates_dialog_title">Konfigurer opdateringer</string>
     <string name="auto_updates_dialog_description">Vil du have Morphe til periodisk at søge efter opdateringer til følgende komponenter?</string>
     <string name="auto_updates_dialog_patches">Morphe Patches</string>
@@ -246,7 +236,6 @@
     <string name="updates">Opdateringer</string>
     <string name="updates_description">Søg efter opdateringer og se ændringslog</string>
     <string name="downloads">Downloads</string>
-    <string name="downloads_description">Downloader-plugins og downloadede apps</string>
     <string name="plugins_help_title">Hvad er en downloader?</string>
     <string name="plugins_help_description">En downloader er et plugin, der giver URV mulighed for at downloade lager-APK\'er fra forskellige kilder. De downloadede APK\'er vises i bundsektionen. Under patch-processen kan du vælge en allerede downloadet APK eller downloade den via et plugin.
 
@@ -257,7 +246,6 @@ Listen over understøttede downloader-plugins kan findes</string>
     <string name="changelog_loading">Indlæser ændringslogfil</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslogfil: %s</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
-    <string name="no_changelogs_found">Ingen ændringslogfiler fundet</string>
     <string name="advanced">Avanceret</string>
     <string name="advanced_description">API URL, hukommelsesgrænse, debugging</string>
     <string name="about">Om</string>
@@ -276,27 +264,18 @@ Listen over understøttede downloader-plugins kan findes</string>
     <string name="theme_color_picker_title">Temafarve</string>
     <string name="theme_color_preview">Eksempel</string>
     <string name="theme_color_reset">Nulstil temafarve</string>
-    <string name="theme_color_presets">Temafarve-forudindstillinger</string>
-    <string name="theme_color_presets_description">Tryk på en farve for at omfarve baggrunde og kort</string>
     <string name="theme_preview_title">Temapræsentation</string>
     <string name="theme_preview_description">Opdateres øjeblikkeligt, når temaindstillingerne ændres</string>
     <string name="theme_presets">Temapræsentationer</string>
     <string name="theme_presets_description">Vælg hvordan appen følger system, lys, mørk, Material You eller ren sort</string>
     <string name="theme_preset_default">Følg system</string>
     <string name="theme_preset_amoled">Ren sort</string>
-    <string name="theme_preset_sunset">Solnedgang</string>
-    <string name="theme_preset_forest">Skov</string>
-    <string name="theme_preset_ocean">Hav</string>
-    <string name="theme_preset_midnight">Midnat</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Nulstil alle temaindstillinger</string>
     <string name="color_channel_red">Rød</string>
     <string name="color_channel_green">Grøn</string>
     <string name="color_channel_blue">Blå</string>
-    <string name="pure_black_theme">Ren sort tema</string>
-    <string name="pure_black_theme_description">Brug ren sorte baggrunde til mørkt tema</string>
     <string name="theme">Tema</string>
-    <string name="theme_description">Vælg mellem lyst eller mørkt tema</string>
     <string name="safeguards">Sikkerhedsforanstaltninger</string>
     <string name="patch_compat_check">Deaktiver kompatibilitetstjek af version</string>
     <string name="patch_compat_check_description">Begræns ikke patches til kompatible app-versioner</string>
@@ -368,10 +347,8 @@ Du vil ikke kunne opdatere de tidligere installerede apps fra denne kilde."</str
     <string name="export_patch_bundles">Eksporter patch-pakker</string>
     <string name="export_patch_bundles_description">Gem importerede eksterne patch-pakker i en JSON-fil</string>
     <string name="export_patch_bundles_fail">Kunne ikke eksportere patch-pakker: %s</string>
-    <string name="export_patch_bundles_empty">Der er ingen patch-pakker at eksportere</string>
     <string name="export_patch_bundles_success">Eksporterede %d patch-pakker</string>
     <string name="export_patch_bundles_partial">Eksporterede %1$d patch-pakker. Nogle pakker kunne ikke eksporteres, da de blev tilføjet lokalt.</string>
-    <string name="export_patch_bundles_local_not_supported">Eksport er kun tilgængelig for patch-pakker importeret fra URL\'er</string>
     <string name="bundle_type_remote">Ekstern</string>
     <string name="bundle_type_local">Lokal</string>
     <string name="bundle_type_preinstalled">Forudinstalleret</string>
@@ -426,12 +403,7 @@ Du vil ikke kunne opdatere de tidligere installerede apps fra denne kilde."</str
     <string name="patch_selection_collapse_on_toggle_description">Skjul automatisk knapperne til patch-valg, når du vælger eller fravælger en patch</string>
     <string name="patch_selection_action_order_title">Rækkefølge af knapper til patch-valg</string>
     <string name="patch_selection_action_order_description">Vælg layoutrækkefølgen for knapperne til patch-valg</string>
-    <string name="patch_selection_action_order_dialog_title">Omarranger patch-handlinger</string>
-    <string name="patch_selection_action_order_dialog_description">Flyt elementerne for at ændre, hvordan knapperne til patch-valg vises. Forhåndsvisningen opdateres live.</string>
-    <string name="patch_selection_action_order_preview_label">Forhåndsvisning</string>
     <string name="patch_selection_action_order_reset">Nulstil til standardrækkefølge</string>
-    <string name="patch_selection_action_move_up">Flyt op</string>
-    <string name="patch_selection_action_move_down">Flyt ned</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Fjern markering af bundt?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Fjern markering af alle patches valgt fra %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Fjern markering af alle patches?</string>
@@ -497,9 +469,6 @@ Signatur (SHA-256): %2$s"</string>
     <string name="downloader_plugin_delete_apps_description">Er du sikker på, at du vil slette de valgte apps?</string>
     <string name="downloader_settings_no_apps">Ingen downloadede apps fundet.</string>
     <string name="search_apps">Søg apps…</string>
-    <string name="loading_body">Indlæser…</string>
-    <string name="downloading_patches">Downloader patches…</string>
-    <string name="options">Valgmuligheder</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="edit">Rediger</string>
@@ -509,7 +478,6 @@ Signatur (SHA-256): %2$s"</string>
     <string name="patch">Patch</string>
     <string name="select_from_storage">Vælg fra lager</string>
     <string name="select_from_storage_description">Vælg en APK-fil fra lageret ved hjælp af filvælgeren</string>
-    <string name="suggested_version_info">Foreslået version: %s</string>
     <string name="type_anything">Skriv hvad som helst for at fortsætte</string>
     <string name="search">Søg efter patches…</string>
     <string name="apply">Anvend</string>
@@ -549,29 +517,12 @@ Signatur (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Tilpas standardfilnavnet for eksporterede patchede apps</string>
     <string name="export_name_format_dialog_title">Filnavnsformat for eksport</string>
     <string name="export_name_format_dialog_supporting">Brug pladsholderne nedenfor til at opbygge et filnavn. .apk-udvidelsen tilføjes automatisk, hvis den mangler.</string>
-    <string name="export_name_format_preview">Eksempel: %1$s</string>
     <string name="export_name_format_preview_label">Forhåndsvisning</string>
     <string name="export_name_format_variables">Variabler</string>
     <string name="export_name_format_reset">Nulstil til standard</string>
     <string name="export_name_format_error_blank">Filnavnformatet kan ikke være tomt.</string>
     <string name="export_name_format_current">Nuværende mønster: %1$s</string>
     <string name="export_name_format_insert">Indsæt</string>
-    <string name="export_name_variable_app_name">Appnavn</string>
-    <string name="export_name_variable_app_name_description">Erstattet med appens visningsnavn.</string>
-    <string name="export_name_variable_package_name">Pakkenavn</string>
-    <string name="export_name_variable_package_name_description">Erstattet med appens pakkenavn.</string>
-    <string name="export_name_variable_app_version">Appversion</string>
-    <string name="export_name_variable_app_version_description">Erstattet med appens versionsnavn.</string>
-    <string name="export_name_variable_patches_version">Patch-version</string>
-    <string name="export_name_variable_patches_version_description">Erstattet med den anvendte patch bundle-version.</string>
-    <string name="export_name_variable_bundle_names">Patch-bundle-navne</string>
-    <string name="export_name_variable_bundle_names_description">Erstattet med det anvendte patch bundle-navn.</string>
-    <string name="export_name_variable_manager_version">Managerversion</string>
-    <string name="export_name_variable_manager_version_description">Erstattet med managerversionen.</string>
-    <string name="export_name_variable_timestamp">Tidsstempel</string>
-    <string name="export_name_variable_timestamp_description">Erstattet med det aktuelle tidspunkt (ååååmmdd-ttmmss).</string>
-    <string name="export_name_variable_date">Dato</string>
-    <string name="export_name_variable_date_description">Erstattet med den aktuelle dato (ååååmmdd).</string>
     <string name="debug_logs_export">Eksportér fejlsøgningslogfiler</string>
     <string name="debug_logs_export_read_failed">Kunne ikke læse logfiler (afslutningskode %d)</string>
     <string name="debug_logs_export_failed">Kunne ikke eksportere logfiler</string>
@@ -594,31 +545,19 @@ Signatur (SHA-256): %2$s"</string>
     <string name="app_language">App-sprog</string>
     <string name="language_dialog_title">Vælg app-sprog</string>
     <string name="language_option_system">Brug enhedens sprog</string>
-    <string name="device">Enhed</string>
-    <string name="device_android_version">Android-version</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">CPU-arkitekturer</string>
-    <string name="device_memory_limit">Hukommelsesbegrænsninger</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Stor)</string>
     <string name="patches_force_download">Tving download af alle patch-pakker</string>
     <string name="patches_reset">Nulstil patch-pakker</string>
-    <string name="patching">Patching</string>
-    <string name="signing">Signering</string>
-    <string name="storage">Lager</string>
     <string name="no_patch_found">Ingen patches kan findes. Tjek dine patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patch-pakker</string>
     <string name="tab_profiles">Patch profiler</string>
     <string name="delete">Slet</string>
     <string name="refresh">Opdater</string>
-    <string name="continue_anyways">Fortsæt alligevel</string>
-    <string name="download_another_version">Download en anden version</string>
-    <string name="download_app">Download app</string>
     <string name="download_apk">Download APK-fil</string>
     <string name="patches_download_fail">Kunne ikke downloade patches: %s</string>
     <string name="patches_replace_fail">Kunne ikke importere patches: %s</string>
     <string name="no_patched_apps_found">Ingen patchede apps fundet</string>
-    <string name="tap_on_patches">Tryk på patches for at få mere information om dem</string>
     <string name="patches_selected">%s patch bundle valgt</string>
     <string name="patch_profiles_selected">%1$d patchprofil valgt</string>
     <string name="selected_apps_count">%1$d app valgt</string>
@@ -632,7 +571,6 @@ Signatur (SHA-256): %2$s"</string>
 Brug venligst den foreslåede version: %s
 
 For at fortsætte alligevel, deaktiver \"Kræv foreslået app-version\" i avancerede indstillinger."</string>
-    <string name="selection_warning_title">Stop med at bruge standardindstillinger?</string>
     <string name="selection_warning_description">"Det anbefales at bruge standard patch-udvælgelse og indstillinger. Ændring af dem kan resultere i uventede problemer.
 
 Du skal slå \"Tillad ændring af patch-udvælgelse og indstillinger\" til i de avancerede indstillinger, før du kan skifte patches."</string>
@@ -688,9 +626,6 @@ Du skal slå \"Tillad ændring af patch-udvælgelse og indstillinger\" til i de 
     <string name="patcher_missing_patch_title">Patch-valg kræver opmærksomhed</string>
     <string name="patcher_preflight_missing_patch_remove">Fjern manglende patches</string>
     <string name="patcher_preflight_missing_patch_proceed">Fortsæt alligevel</string>
-    <string name="patcher_missing_patch_message">"Patching mislykkedes, fordi følgende patches ikke blev fundet i det aktuelle bundle:
-%1$s
-Genåbn valget og vælg dem igen (eller vælg erstatninger), før du prøver igen."</string>
     <string name="patcher_preflight_missing_patch_message">"Følgende omstilling er ikke tilgængelig i den nuværende bundle:
 %1$s
 Du kan fjern dem automatisch, justere valget eller fortsætte, selvom."</string>
@@ -699,7 +634,6 @@ Du kan fjern dem automatisch, justere valget eller fortsætte, selvom."</string>
     <string name="patch_selector_missing_patch_message">"Disse patches skal genvælges:
 %1$s
 Genaktiver dem (eller vælg alternativer) og prøv derefter at patche igen."</string>
-    <string name="delete_profile_confirmation">Slet \"%1$s\"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Slet de valgte patchprofiler?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d patch</item>
@@ -709,26 +643,18 @@ Genaktiver dem (eller vælg alternativer) og prøv derefter at patche igen."</st
         <item quantity="one">%d bundt</item>
         <item quantity="other">%d bundter</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Universelle patches har en mere generel anvendelse og fungerer ikke så pålideligt som patches, der er målrettet specifikke apps. Du kan støde på problemer, mens du bruger dem.
-
-Du skal aktivere \"Vis &amp; tillad brug af universelle patches\" i de avancerede indstillinger, før du bruger universelle patches."</string>
     <string name="this_version">Denne version</string>
     <string name="universal">Enhver app</string>
     <string name="search_patches">Søg efter patches</string>
     <string name="app_version_not_compatible">"Denne patch er ikke kompatibel med den valgte appversion (%1$s).
 
 Den er kun kompatibel med følgende version: %2$s."</string>
-    <string name="continue_with_version">Fortsæt med denne version?</string>
-    <string name="version_not_compatible">Ikke alle patches er kompatible med denne version (%s). Vil du fortsætte alligevel?</string>
-    <string name="download_application">Download applikation?</string>
-    <string name="app_not_installed">Den valgte app er ikke installeret. Vil du downloade den?</string>
     <string name="failed_to_load_apk">Kunne ikke indlæse APK</string>
     <string name="loading">Indlæser…</string>
     <string name="not_installed">Ikke installeret</string>
     <string name="installed">Installeret</string>
     <string name="app_info">Appinfo</string>
     <string name="uninstall">Afinstaller</string>
-    <string name="unpatch">Fjern patch</string>
     <string name="repatch">Genanvend patch</string>
     <string name="install_type">Installationstype</string>
     <string name="package_name">Pakkenavn</string>
@@ -739,7 +665,6 @@ Den er kun kompatibel med følgende version: %2$s."</string>
     <string name="applied_patches_empty">Ingen patches registreret for denne app</string>
     <string name="applied_patches_bundle_missing">Bundelmetadata utilgængelig. Viser gemte patchnavne.</string>
     <string name="no_patch_bundles_tracked">Ingen patch-bundter registreret for denne app</string>
-    <string name="default_install">Standard</string>
     <string name="mount_install">Rooted mount installer</string>
     <string name="mounted">Monteret</string>
     <string name="unmounted">Afmonteret</string>
@@ -755,7 +680,6 @@ Den er kun kompatibel med følgende version: %2$s."</string>
     <string name="failed_to_unmount">Kunne ikke afmontere: %s</string>
     <string name="unpatch_app">Fjern patch fra app?</string>
     <string name="unpatch_description">Er du sikker på, at du vil fjerne patchen fra denne app?</string>
-    <string name="downloader_invalid_version">Downloaderen hentede ikke den korrekte version</string>
     <string name="downloader_app_not_found">Downloaderen fandt ikke appen</string>
     <string name="downloader_error">Downloader-fejl: %s</string>
     <string name="downloader_no_plugins_installed">Ingen downloader installeret.</string>
@@ -776,7 +700,6 @@ Den er kun kompatibel med følgende version: %2$s."</string>
     <string name="path_selector_files">Filer</string>
     <string name="show_password_field">Vis adgangskode</string>
     <string name="hide_password_field">Skjul adgangskode</string>
-    <string name="installer">Installationsprogram</string>
     <string name="installer_primary_title">Primært installationsprogram</string>
     <string name="installer_primary_description">Bruges først ved installation af patcherede apps.</string>
     <string name="installer_fallback_title">Sekundært installationsprogram</string>
@@ -855,7 +778,6 @@ Detaljer: %2$s"</string>
     <string name="install_app_fail_title">Installation mislykkedes</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
     <string name="mount_app_fail_title">Montering mislykkedes</string>
-    <string name="mount_app_fail">Kunne ikke montere app: %1$s</string>
     <string name="install_timeout_message">Installationen blev ikke fuldført. Tjek systemets installationsdialog og prøv igen.</string>
     <string name="reinstall_app_fail">Kunne ikke geninstallere app: %s</string>
     <string name="uninstall_app_fail">Kunne ikke afinstallere app: %s</string>
@@ -874,16 +796,11 @@ Detaljer: %2$s"</string>
     <string name="install_saved_app">Installer</string>
     <string name="remount_saved_app">Genmonter</string>
     <string name="update_saved_app">Opdater</string>
-    <string name="installing_saved_app">Installerer gemt app…</string>
     <string name="saved_app_install_success">Installeret gemt app</string>
     <string name="saved_app_install_failed">Kunne ikke installere gemt app</string>
     <string name="saved_app_uninstall_title">Afinstaller installeret kopi?</string>
-    <string name="saved_app_unmount_title">Afmonter installeret kopi?</string>
     <string name="saved_app_uninstall_description">Dette fjerner kun den installerede version. Din gemte APK forbliver intakt.</string>
-    <string name="saved_app_unmount_description">Dette afmonterer den patch\'ede APK. Din gemte APK forbliver intakt.</string>
     <string name="saved_app_install_missing">Gemt APK blev ikke fundet</string>
-    <string name="delete_saved_copy">Slet gemt kopi</string>
-    <string name="sign_fail">Kunne ikke signere APK: %s</string>
     <string name="save_logs">Gem logs</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er påkrævet for at fortsætte med dette plugin.</string>
     <string name="select_install_type">Vælg installationstype</string>
@@ -891,7 +808,6 @@ Detaljer: %2$s"</string>
     <string name="patcher_step_load_patches">Indlæser patches</string>
     <string name="patcher_step_unpack">Læser APK-fil</string>
     <string name="patcher_step_prepare_split_apk">Flet delt APK</string>
-    <string name="patcher_step_merge_not_required">Ingen delvis fletning påkrævet</string>
     <string name="patcher_step_group_patching">Patche</string>
     <string name="patcher_step_group_saving">Gemmer</string>
     <string name="patcher_step_write_patched">Skriver patchet APK-fil</string>
@@ -929,14 +845,9 @@ Detaljer: %2$s"</string>
     <string name="less">Mindre</string>
     <string name="continue_">Fortsæt</string>
     <string name="dismiss">Luk</string>
-    <string name="permanent_dismiss">Vis ikke dette igen</string>
-    <string name="website">Websted</string>
     <string name="patch_bundle_urls">Hent patch-bundt-imports</string>
-    <string name="contact">Kontakt</string>
     <string name="version">Version</string>
     <string name="published">Udgivet</string>
-    <string name="submit_feedback">Indsend problem eller feedback</string>
-    <string name="submit_feedback_description">Hjælp os med at forbedre denne applikation</string>
     <string name="developer_options">Udviklerindstillinger</string>
     <string name="developer_options_description">Indstillinger til fejlfinding</string>
     <string name="patches_update_success">Opdatering lykkedes</string>
@@ -951,12 +862,7 @@ Detaljer: %2$s"</string>
 
 Som open source trives Morphe med community-feedback og bidrag for at drive fremtidig innovation"</string>
     <string name="here">her.</string>
-    <string name="developer_options_enabled">Udviklerindstillinger aktiveret</string>
-    <string name="developer_options_taps">%d tryk tilbage</string>
-    <string name="developer_options_already_enabled">Udviklerindstillinger er allerede aktiveret</string>
     <string name="update_available">En opdatering er tilgængelig</string>
-    <string name="current_version">Nuværende version: %s</string>
-    <string name="new_version">Ny version: %s</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>
     <string name="update_completed">Opdatering installeret</string>
     <string name="install_update_manager_failed">Kunne ikke installere opdatering</string>
@@ -982,14 +888,12 @@ Som open source trives Morphe med community-feedback og bidrag for at drive frem
     <string name="hours_ago">for %s timer siden</string>
     <string name="days_ago">for %s dage siden</string>
     <string name="invalid_date">Ugyldig dato</string>
-    <string name="disable_battery_optimization">Deaktiver batterioptimering</string>
     <string name="input_dialog_value_invalid">Ugyldig værdi</string>
     <string name="option_required">Denne indstilling er påkrævet</string>
     <string name="required_options_screen">Påkærede indstillinger</string>
     <string name="failed_to_check_updates">Kunne ikke søge efter opdateringer: %s</string>
     <string name="no_update_available">Ingen opdatering tilgængelig</string>
     <string name="update_check">Søger efter opdateringer…</string>
-    <string name="dismiss_temporary">Ikke nu</string>
     <string name="update_available_dialog_description">En ny version af Morphe (%s) er tilgængelig.</string>
     <string name="failed_to_download_update">Kunne ikke downloade opdatering: %s</string>
     <string name="download">Download</string>
@@ -1046,5 +950,4 @@ Klik på patches for at se flere detaljer."</string>
     <string name="failed_to_import_keystore">Kunne ikke importere keystore</string>
     <string name="export">Eksporter</string>
     <string name="confirm">Bekræft</string>
-    <string name="saved_app_install_cancelled">Installation annulleret</string>
 </resources>

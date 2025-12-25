@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Korjauspaketti</string>
-    <string name="morphe_home_greeting_1">Minkä sovelluksen haluat korjata?</string>
-    <string name="morphe_home_greeting_2">Valmiina tekemään YouTubesta jälleen legendaarisen?</string>
-    <string name="morphe_home_greeting_3">Kiinnitä turvavyöt, on korjausaika</string>
-    <string name="morphe_home_greeting_4">Toinen päivä, toinen mainoksilla estetty mestariteos</string>
-    <string name="morphe_home_greeting_5">Haluatko katsoa mainoksia? En minäkään</string>
-    <string name="morphe_home_greeting_6">Hae yhteystiedot myömestasi</string>
-    <string name="morphe_home_greeting_7">Tänään ennustus: 100% todennäköisyys tukemisen</string>
+    <string name="morphe_home_greeting_1">Mitä sovellusta haluat korjata? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Valmis tekemään YouTube:sta taas legendaarisen? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Valjastu, korjaamisen aika on koittanut 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Toinen päivä, toinen mainosten estotyönäytelmä 😌🚫</string>
+    <string name="morphe_home_greeting_5">Haluatko katsoa mainoksia? En minäkään 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Luodaan apps-sovelluksista sopeutuvia 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Tänään ennustus: 100% todennäköisyys tukemisen 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Korjaa vastuullisesti... tai älä 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Pelastavat sovelluksia itseltään jo tänään 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Toimii kahvilla ja hyvien korjausten avulla ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API-paketti</string>
     <string name="morphe_home_update_error">Päivitys epäonnistui</string>
     <string name="morphe_home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Lisätty</string>
     <string name="morphe_home_date_updated">Päivitetty</string>
     <string name="morphe_home_check_updates">Tarkista</string>
-    <string name="morphe_home_bundle_update_completed">Päivitys valmis</string>
     <string name="morphe_home_unknown">Tuntematon</string>
     <string name="morphe_home_timeline">Päivityshistoria</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Jotta voin laikkaa %1$s-version, tarvitsen version %2$s (laikkaamaton).</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>
     <string name="morphe_home_apk_availability_yes">Kyllä, minulla on se</string>
     <string name="morphe_home_apk_availability_no">Ei, auta minua löytämään se</string>
-    <string name="morphe_home_apk_availability_dialog_description">Jotta voin korjata %1$s:n, tarvitsen version %2$s (korjaamaton).</string>
-    <string name="morphe_home_apk_availability_dialog_info">Varmista, että lataat APK:n, mutta ÄLÄ asenna sitä.</string>
+    <string name="morphe_home_apk_availability_dialog_description">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Lataa alkuperäinen APK APKMirrorista</string>
-    <string name="morphe_home_download_instructions_description">Noudata näitä ohjeita ladataksesi %1$s-version %2$s APKMirror.comista:</string>
+    <string name="morphe_home_download_instructions_title">Lataa alkuperäinen APK</string>
     <string name="morphe_home_download_instructions_steps_title">Ohjeet:</string>
-    <string name="morphe_home_download_instructions_step1">Paina Jatka avataksesi APKMirror.com-sivuston</string>
+    <string name="morphe_home_download_instructions_step1">Paina \'Jatka APKMirror.com\'-painiketta alla</string>
     <string name="morphe_home_download_instructions_step2_part1">Vieritä verkkosivua alaspäin ja paina</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Napsauta latausta verkkosivustolla, älä täällä 😊</string>
-    <string name="morphe_home_download_instructions_step3">Odota, kunnes lataus on valmis, äläkä asenna APK:ta</string>
-    <string name="morphe_home_download_instructions_step3_mount">Odota latauksen valmistumista ja asenna APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Paina lataa verkkosivulla, ei täällä 😊</string>
+    <string name="morphe_home_download_instructions_step3">Odota latauksen valmistumista ja &lt;b&gt;älä asenna&lt;/b&gt; APK:ta</string>
+    <string name="morphe_home_download_instructions_step3_mount">Odota latauksen valmistumista, sitten &lt;b&gt;asenna APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Kun lataus on valmis, avaa tämä sovellus uudelleen</string>
     <string name="morphe_home_download_instructions_step4_mount">Kun alkuperäinen APK on asennettu, avaa tämä sovellus uudelleen</string>
-    <string name="morphe_home_download_instructions_note">Tärkeää: Lataa APK, mutta älä asenna sitä laitteellesi.</string>
-    <string name="morphe_home_download_instructions_continue">Jatka APKMirroriin</string>
+    <string name="morphe_home_download_instructions_continue">Jatka APKMirror.com:iin</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Valitse lataamasi APK</string>
     <string name="morphe_home_file_picker_prompt_description">Valitse nyt lataamasi %1$s APK-tiedosto.</string>
     <string name="morphe_home_file_picker_prompt_open">Avaa lataamani APK-tiedosto</string>
-    <string name="morphe_home_wrong_package_selected">Odotettu paketti %1$s mutta saatu %2$s</string>
-    <string name="morphe_home_any_version">mikä tahansa versio</string>
     <string name="morphe_home_recommended_version">Suositeltu versio</string>
     <string name="morphe_patcher_selected_version">Valittu versio</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d korjausta</string>
     <string name="morphe_patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
-    <string name="morphe_patcher_install_dialog_message">Asennetaanko muokattu sovellus?</string>
-    <string name="morphe_patcher_install_conflict_message">Törmäys pakettien välillä havaittu. Uuden version asentamiseksi sinun on ensin poistettava sovelluksen aiempi versio.</string>
-    <string name="morphe_patcher_install_ready_message">Edellinen versio on poistettu. Voit nyt asentaa muokatun sovelluksen.</string>
-    <string name="morphe_patcher_install_cancelled_title">Asennus peruutettu</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Yritä uudelleen napsauttamalla asennuspainiketta</string>
     <string name="morphe_patcher_installing">Asennetaan…</string>
     <string name="morphe_patcher_installing_subtitle">Melkein valmista! 🎸</string>
     <string name="morphe_patcher_success_title">Valmis! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Korjataan bugeja paikkaamattomassa sovelluksessa… 🐞</string>
     <string name="morphe_patcher_message_10">Hyvä paikkaus odotuksen arvoinen… ⏳</string>
     <string name="morphe_patcher_message_11">Kiillotetaan pikseleitä, kunnes ne loistavat… 💎</string>
-    <string name="morphe_patcher_message_12">Pysykää paikoillanne, kunnes kapteeni sammuttaa \"Paikkaus käynnissä\" -kyltin… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Pysy paikallasi, kunnes kapteeni sammuttaa \'Korjaus meneillään\' -merkin... 💺✈️</string>
     <string name="morphe_patcher_message_13">Valmistetaan paikatun sovelluksesi, kuumana ja tuoreena… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Kohteliaasti neuvotellen bytekoodin kanssa… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Käytetään Morphe-laajennosten käyttöoikeuksien hallintaan. Vain Morphella on tämä.</string>
     <string name="toast_copied_to_clipboard">Kopioitu!</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
-    <string name="dashboard">Kojelauta</string>
     <string name="settings">Asetukset</string>
     <string name="select_app">Valitse sovellus</string>
     <string name="new_downloader_plugins_notification">Uusia latauslaajennoksia saatavilla. Napsauta tästä määrittääksesi ne.</string>
     <string name="unsupported_architecture_warning">Tämän laitteen arkkitehtuurin korjaaminen ei ole tuettua ja epäonnistuu todennäköisimmin.</string>
     <string name="import_">Tuo</string>
-    <string name="import_patches">Tuo korjaustiedostoja</string>
     <string name="file_field_set">Valittu</string>
     <string name="file_field_not_set">Ei valittu</string>
     <string name="field_not_set">Ei asetettu</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Pick which bundle\'s suggestion should be used when downloading an APK.</string>
     <string name="bundle_version_dialog_default">Käytä oletussuositusta</string>
     <string name="bundle_version_dialog_default_subtitle">Valitse automaattisesti yleisin yhteensopiva versio.</string>
-    <string name="bundle_version_dialog_option_subtitle">Käytä versiota %1$s</string>
     <string name="bundle_version_all_versions">Kaikki versiot</string>
     <string name="bundle_version_no_version">Ei ehdotettua versiota</string>
-    <string name="bundle_version_suggested_label">Ehdotettu versio: %1$s</string>
-    <string name="bundle_version_other_heading">Muut tuetut versiot</string>
     <string name="bundle_update_manual_available">Päivitys saatavilla</string>
     <string name="bundle_update_manual_available_with_version">Päivitys saatavilla: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d pakettia käsitelty</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Järjestä paketteja</string>
     <string name="bundle_reorder_title">Järjestä korjauspaketteja</string>
     <string name="bundle_reorder_description">Vedä kahvaa järjestääksesi pakettien järjestyksen luettelossa ja korjauksenselection-valikossa.</string>
-    <string name="bundle_reorder_move_up">Siirrä pakettia ylöspäin</string>
-    <string name="bundle_reorder_move_down">Siirrä pakettia alaspäin</string>
     <string name="bundle_actions_expand">Näytä pakettitoiminnot</string>
     <string name="bundle_actions_collapse">Piilota pakettitoiminnot</string>
     <string name="patch_bundle_duplicate_name_error">Paketti tällä nimellä on jo olemassa</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Ehdotettu versio: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Valittu versio: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Valittu</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (valittu)</string>
     <string name="bundle_version_dialog_other_title">Valitse toinen tuettu versio:</string>
     <string name="bundle_version_dialog_locked_title">Version suojaukset ovat käytössä</string>
     <string name="bundle_version_dialog_locked_hint">Siirry asetuksiin &gt; Lisäasetukset &gt; Suojaukset ja aseta sekä \"Vaadi ehdotettu sovellusversio\" (kytkin pois päältä) että \"Poista version yhteensopivuustarkistus käytöstä\" (kytkin päälle) valitaksesi pakettikohtaisia versioita.</string>
-    <string name="patch_item_description">Käynnistä sovelluksen korjaaminen</string>
     <string name="patch_selector_item">Valitse korjaukset</string>
     <string name="patch_selector_item_description">%d korjausta valittuna</string>
     <string name="no_patches_selected">Ei korjauksia valittuna</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Käytetään asennettua APK:ta</string>
     <string name="apk_source_local">Käytetään paikallista APK-tiedostoa</string>
     <string name="apk_source_downloaded">Käytetään ladattua APK:ta</string>
-    <string name="legacy_import_failed">Vientialojen asetusten tuonti epäonnistui</string>
     <string name="auto_updates_dialog_title">Määritä päivitykset</string>
     <string name="auto_updates_dialog_description">Haluatko Morphen tarkistavan säännöllisesti seuraavien komponenttien päivityksiä?</string>
     <string name="auto_updates_dialog_patches">Morphe-korjaukset</string>
@@ -246,7 +236,6 @@
     <string name="updates">Päivitykset</string>
     <string name="updates_description">Tarkista päivitykset ja katso muutoshistoria</string>
     <string name="downloads">Lataukset</string>
-    <string name="downloads_description">Lataajalaajennukset ja ladatut sovellukset</string>
     <string name="plugins_help_title">Mikä on lataaja?</string>
     <string name="plugins_help_description">Lataaja on laajennus, jonka avulla URV voi ladata APK-tiedostoja eri lähteistä. Ladatut APK-tiedostot näytetään alaosassa. Korjausprosessin aikana voit valita jo ladatun APK-tiedoston tai ladata sen laajennuksen kautta.
 
@@ -257,7 +246,6 @@ Tuettujen lataajalaajennusten luettelo löytyy</string>
     <string name="changelog_loading">Ladataan muutostietoja</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>
     <string name="changelog_description">Tarkista tämän päivityksen uusimmat muutokset</string>
-    <string name="no_changelogs_found">Muutostietoja ei löytynyt</string>
     <string name="advanced">Lisäasetukset</string>
     <string name="advanced_description">API-URL, muistiraja, virheenkorjaus</string>
     <string name="about">Tietoja</string>
@@ -276,27 +264,18 @@ Tuettujen lataajalaajennusten luettelo löytyy</string>
     <string name="theme_color_picker_title">Teeman väri</string>
     <string name="theme_color_preview">Esikatselu</string>
     <string name="theme_color_reset">Nollaa teeman väri</string>
-    <string name="theme_color_presets">Teeman väriasetukset</string>
-    <string name="theme_color_presets_description">Napauta väriä muuttaaksesi taustojen ja korttien väriä</string>
     <string name="theme_preview_title">Teeman esikatselu</string>
     <string name="theme_preview_description">Päivittyy välittömästi, kun muutat teema-asetuksia</string>
     <string name="theme_presets">Teeman asetukset</string>
     <string name="theme_presets_description">Valitse, kuinka sovellus noudattaa järjestelmän, vaaleaa, tummaa, Material You -teemaa tai puhdasta mustaa</string>
     <string name="theme_preset_default">Järjestelmän mukaan</string>
     <string name="theme_preset_amoled">Puhdas musta</string>
-    <string name="theme_preset_sunset">Auringonlasku</string>
-    <string name="theme_preset_forest">Metsä</string>
-    <string name="theme_preset_ocean">Valtameri</string>
-    <string name="theme_preset_midnight">Keskiyö</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Nollaa kaikki teema-asetukset</string>
     <string name="color_channel_red">Punainen</string>
     <string name="color_channel_green">Vihreä</string>
     <string name="color_channel_blue">Sininen</string>
-    <string name="pure_black_theme">Puhdas musta teema</string>
-    <string name="pure_black_theme_description">Käytä puhtaita mustia taustoja pimeälle teemalle</string>
     <string name="theme">Teema</string>
-    <string name="theme_description">Valitse vaalea tai pimeä teema</string>
     <string name="safeguards">Suojaukset</string>
     <string name="patch_compat_check">Poista käytöstä versioyhteensopivuuden tarkistus</string>
     <string name="patch_compat_check_description">Älä rajoita korjauksia yhteensopiviin sovellusversioihin</string>
@@ -368,10 +347,8 @@ Et voi päivittää aiemmin asennettuja sovelluksia tästä lähteestä."</strin
     <string name="export_patch_bundles">Vie viankorjauspaketteja</string>
     <string name="export_patch_bundles_description">Tallenna tuodut etäviankorjauspaketit JSON-tiedostoon</string>
     <string name="export_patch_bundles_fail">Ei voitu viedä korjauspaketteja: %s</string>
-    <string name="export_patch_bundles_empty">Vientiä varten ei ole korjauspaketteja</string>
     <string name="export_patch_bundles_success">Vienti %d korjauspakettiin</string>
     <string name="export_patch_bundles_partial">Vienti %1$d korjauspakettiin. Joitakin paketteja ei voitu viedä, koska ne lisättiin paikallisesti.</string>
-    <string name="export_patch_bundles_local_not_supported">Vienti on saatavilla vain URL-osoitteista tuoduille korjauspaketeille</string>
     <string name="bundle_type_remote">Etä</string>
     <string name="bundle_type_local">Paikallinen</string>
     <string name="bundle_type_preinstalled">Esiasennettu</string>
@@ -426,12 +403,7 @@ Et voi päivittää aiemmin asennettuja sovelluksia tästä lähteestä."</strin
     <string name="patch_selection_collapse_on_toggle_description">Piilota korjausvalinnan toimintopainikkeet automaattisesti aina, kun valitset tai poistat korjauksen valinnan</string>
     <string name="patch_selection_action_order_title">Korjausvalinnan toimintopainikkeiden järjestys</string>
     <string name="patch_selection_action_order_description">Valitse patch-valinnan toimintopainikkeiden asettelun järjestys</string>
-    <string name="patch_selection_action_order_dialog_title">Järjestä patch-toiminnot uudelleen</string>
-    <string name="patch_selection_action_order_dialog_description">Muuta patch-valinnan toimintopainikkeiden näyttötapaa siirtämällä kohteita. Esikatselu päivittyy reaaliajassa.</string>
-    <string name="patch_selection_action_order_preview_label">Esikatselu</string>
     <string name="patch_selection_action_order_reset">Palauta oletusjärjestys</string>
-    <string name="patch_selection_action_move_up">Siirrä ylös</string>
-    <string name="patch_selection_action_move_down">Siirrä alas</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Poistetaanko nipu?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Poistetaanko kaikki %1$s:stä valitut patchit?</string>
     <string name="patch_selection_confirm_deselect_all_title">Poistetaanko kaikki patchit?</string>
@@ -497,9 +469,6 @@ Allekirjoitus (SHA-256): %2$s"</string>
     <string name="downloader_plugin_delete_apps_description">Haluatko varmasti poistaa valitut sovellukset?</string>
     <string name="downloader_settings_no_apps">Ei ladattuja sovelluksia löytynyt.</string>
     <string name="search_apps">Etsi sovelluksia…</string>
-    <string name="loading_body">Ladataan…</string>
-    <string name="downloading_patches">Ladataan korjauksia…</string>
-    <string name="options">Asetukset</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
     <string name="edit">Muokkaa</string>
@@ -509,7 +478,6 @@ Allekirjoitus (SHA-256): %2$s"</string>
     <string name="patch">Korjaus</string>
     <string name="select_from_storage">Valitse tallennustilasta</string>
     <string name="select_from_storage_description">Valitse APK-tiedosto tallennustilasta tiedostonvalitsimella</string>
-    <string name="suggested_version_info">Ehdotettu versio: %s</string>
     <string name="type_anything">Kirjoita mitä tahansa jatkaaksesi</string>
     <string name="search">Hae korjauksia…</string>
     <string name="apply">Käytä</string>
@@ -549,29 +517,12 @@ Allekirjoitus (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Mukauta vietyjen korjattujen sovellusten oletustiedostonimeä</string>
     <string name="export_name_format_dialog_title">Vientitiedoston nimen muoto</string>
     <string name="export_name_format_dialog_supporting">Käytä alla olevia paikkamerkkejä nimen luomiseen. .apk-pääte lisätään automaattisesti, jos se puuttuu.</string>
-    <string name="export_name_format_preview">Esikatselu: %1$s</string>
     <string name="export_name_format_preview_label">Esikatselu</string>
     <string name="export_name_format_variables">Muuttujat</string>
     <string name="export_name_format_reset">Palauta oletukset</string>
     <string name="export_name_format_error_blank">Tiedostonimen muoto ei voi olla tyhjä.</string>
     <string name="export_name_format_current">Nykyinen malli: %1$s</string>
     <string name="export_name_format_insert">Lisää</string>
-    <string name="export_name_variable_app_name">Sovelluksen nimi</string>
-    <string name="export_name_variable_app_name_description">Korvattu sovelluksen näyttönimellä.</string>
-    <string name="export_name_variable_package_name">Paketin nimi</string>
-    <string name="export_name_variable_package_name_description">Korvattu sovelluksen paketin nimellä.</string>
-    <string name="export_name_variable_app_version">Sovelluksen versio</string>
-    <string name="export_name_variable_app_version_description">Korvattu sovelluksen versionimellä.</string>
-    <string name="export_name_variable_patches_version">Korjausversio</string>
-    <string name="export_name_variable_patches_version_description">Korvattu käytetyllä patch-pakettiversiolla.</string>
-    <string name="export_name_variable_bundle_names">Korjauspakettien nimet</string>
-    <string name="export_name_variable_bundle_names_description">Korvattu käytetyllä patch-paketin nimellä.</string>
-    <string name="export_name_variable_manager_version">Hallinnan versio</string>
-    <string name="export_name_variable_manager_version_description">Korvattu hallinnan versiolla.</string>
-    <string name="export_name_variable_timestamp">Tähtiaika</string>
-    <string name="export_name_variable_timestamp_description">Korvattu nykyisellä ajalla (vvkkpp-ttkkss).</string>
-    <string name="export_name_variable_date">Päivämäärä</string>
-    <string name="export_name_variable_date_description">Korvattu nykyisellä päivämäärällä (vvvvkkpp).</string>
     <string name="debug_logs_export">Vie virheenkorjauslokit</string>
     <string name="debug_logs_export_read_failed">Lokien lukeminen epäonnistui (poistumiskoodi %d)</string>
     <string name="debug_logs_export_failed">Lokien vienti epäonnistui</string>
@@ -594,31 +545,19 @@ Allekirjoitus (SHA-256): %2$s"</string>
     <string name="app_language">Sovelluksen kieli</string>
     <string name="language_dialog_title">Valitse sovelluksen kieli</string>
     <string name="language_option_system">Käytä laitteen kieltä</string>
-    <string name="device">Laite</string>
-    <string name="device_android_version">Android-versio</string>
-    <string name="device_model">Malli</string>
-    <string name="device_architectures">CPU-arkkitehtuurit</string>
-    <string name="device_memory_limit">Muistirajat</string>
     <string name="device_memory_limit_format">%1$dMt (normaali) - %2$dMt (suuri)</string>
     <string name="patches_force_download">Pakota kaikkien korjauspakettien lataus</string>
     <string name="patches_reset">Nollaa korjaustiedostopaketit</string>
-    <string name="patching">Paikkaus</string>
-    <string name="signing">Allekirjoitus</string>
-    <string name="storage">Tallennustila</string>
     <string name="no_patch_found">Korjaustiedostoja ei löydy. Tarkista korjaustiedostosi</string>
     <string name="tab_apps">Sovellukset</string>
     <string name="tab_patches">Korjaustiedostopaketit</string>
     <string name="tab_profiles">Korjaustiedostoprofiilit</string>
     <string name="delete">Poista</string>
     <string name="refresh">Päivitä</string>
-    <string name="continue_anyways">Jatka silti</string>
-    <string name="download_another_version">Lataa toinen versio</string>
-    <string name="download_app">Lataa sovellus</string>
     <string name="download_apk">Lataa APK-tiedosto</string>
     <string name="patches_download_fail">Korjaustiedostojen lataus epäonnistui: %s</string>
     <string name="patches_replace_fail">Korjaustiedostojen tuonti epäonnistui: %s</string>
     <string name="no_patched_apps_found">Korjattuja sovelluksia ei löydy</string>
-    <string name="tap_on_patches">Napauta korjaustiedostoja saadaksesi lisätietoja niistä</string>
     <string name="patches_selected">%s korjauspaketti valittu</string>
     <string name="patch_profiles_selected">%1$d patch-profiili valittuna</string>
     <string name="selected_apps_count">%1$d sovellus valittu</string>
@@ -632,7 +571,6 @@ Allekirjoitus (SHA-256): %2$s"</string>
 Käytä suositeltua versiota: %s
 
 Jatkaaksesi joka tapauksessa, poista käytöstä \"Vaadi suositeltu sovellusversio\" lisäasetuksista."</string>
-    <string name="selection_warning_title">Lopetetaanko oletusarvojen käyttö?</string>
     <string name="selection_warning_description">"On suositeltavaa käyttää oletusarvoisia korjausvalintoja ja -asetuksia. Niiden muuttaminen voi aiheuttaa odottamattomia ongelmia.
 
 Sinun on otettava käyttöön \"Salli korjausvalintojen ja -asetusten muuttaminen\" lisäasetuksissa ennen korjausten kytkemistä päälle."</string>
@@ -688,9 +626,6 @@ Sinun on otettava käyttöön \"Salli korjausvalintojen ja -asetusten muuttamine
     <string name="patcher_missing_patch_title">Korjausvalinta vaatii huomiota</string>
     <string name="patcher_preflight_missing_patch_remove">Poista puuttuvat korjaukset</string>
     <string name="patcher_preflight_missing_patch_proceed">Jatka silti</string>
-    <string name="patcher_missing_patch_message">"Korjaus epäonnistui, koska seuraavia korjauksia ei löytynyt nykyisestä paketista:
-%1$s
-Avaa valinta uudelleen ja valitse ne (tai valitse korvaavia) ennen uudelleen yrittämistä."</string>
     <string name="patcher_preflight_missing_patch_message">"
 %1$s
 You can remove them automatically, adjust the selection, or continue anyway."</string>
@@ -699,7 +634,6 @@ You can remove them automatically, adjust the selection, or continue anyway."</s
     <string name="patch_selector_missing_patch_message">"Nämä korjaukset on valittava uudelleen:
 %1$s
 Ota ne käyttöön uudelleen (tai valitse vaihtoehtoisia) ja yritä korjata uudelleen."</string>
-    <string name="delete_profile_confirmation">Poistetaanko \"%1$s\"?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Poistetaanko valitut korjausprofiilit?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d korjaus</item>
@@ -709,26 +643,18 @@ Ota ne käyttöön uudelleen (tai valitse vaihtoehtoisia) ja yritä korjata uude
         <item quantity="one">%d paketti</item>
         <item quantity="other">%d pakettia</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Yleiskäyttöisillä patch-paketeilla on yleisempi käyttötarkoitus, eivätkä ne toimi yhtä luotettavasti kuin tiettyihin sovelluksiin kohdistetut patch-paketit. Niiden käytössä voi ilmetä ongelmia.
-
-Sinun on otettava käyttöön \"Näytä &amp; käytä yleiskäyttöisiä patch-paketteja\" lisäasetuksissa ennen yleiskäyttöisten patch-pakettien käyttöä."</string>
     <string name="this_version">Tämä versio</string>
     <string name="universal">Mikä tahansa sovellus</string>
     <string name="search_patches">Hae korjauksia</string>
     <string name="app_version_not_compatible">"Tämä korjaustiedosto ei ole yhteensopiva valitun sovellusversion (%1$s) kanssa.
 
 Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
-    <string name="continue_with_version">Jatketaanko tällä versiolla?</string>
-    <string name="version_not_compatible">Kaikki korjaukset eivät ole yhteensopivia tämän version (%s) kanssa. Haluatko jatkaa silti?</string>
-    <string name="download_application">Ladataanko sovellus?</string>
-    <string name="app_not_installed">Valitsemaasi sovellusta ei ole asennettu. Haluatko ladata sen?</string>
     <string name="failed_to_load_apk">APK:n lataaminen epäonnistui</string>
     <string name="loading">Ladataan…</string>
     <string name="not_installed">Ei asennettu</string>
     <string name="installed">Asennettu</string>
     <string name="app_info">Sovelluksen tiedot</string>
     <string name="uninstall">Poista asennus</string>
-    <string name="unpatch">Poista korjaus</string>
     <string name="repatch">Korjaa uudelleen</string>
     <string name="install_type">Asennustyyppi</string>
     <string name="package_name">Paketin nimi</string>
@@ -739,7 +665,6 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="applied_patches_empty">Tälle sovellukselle ei ole tallennettu korjauksia</string>
     <string name="applied_patches_bundle_missing">Paketin metatiedot eivät saatavilla. Näytetään tallennetut korjausten nimet.</string>
     <string name="no_patch_bundles_tracked">Tälle sovellukselle ei ole tallennettu korjauspaketteja</string>
-    <string name="default_install">Oletus</string>
     <string name="mount_install">Rootattu liitinasennusohjelma</string>
     <string name="mounted">Liitetty</string>
     <string name="unmounted">Irrotettu</string>
@@ -755,7 +680,6 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="failed_to_unmount">Liitoksen poistaminen epäonnistui: %s</string>
     <string name="unpatch_app">Poistetaanko sovelluksen korjaus?</string>
     <string name="unpatch_description">Haluatko varmasti poistaa tämän sovelluksen korjauksen?</string>
-    <string name="downloader_invalid_version">Lataaja ei noutanut oikeaa versiota</string>
     <string name="downloader_app_not_found">Lataaja ei löytänyt sovellusta</string>
     <string name="downloader_error">Lataajan virhe: %s</string>
     <string name="downloader_no_plugins_installed">Lataajaa ei asennettu.</string>
@@ -776,7 +700,6 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="path_selector_files">Tiedostot</string>
     <string name="show_password_field">Näytä salasana</string>
     <string name="hide_password_field">Piilota salasana</string>
-    <string name="installer">Asennusohjelma</string>
     <string name="installer_primary_title">Ensisijainen asennusohjelma</string>
     <string name="installer_primary_description">Käytetään ensin korjattujen sovellusten asennuksessa.</string>
     <string name="installer_fallback_title">Vara-asennusohjelma</string>
@@ -855,7 +778,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="install_app_fail_title">Asennus epäonnistui</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
     <string name="mount_app_fail_title">Liittäminen epäonnistui</string>
-    <string name="mount_app_fail">Sovelluksen liittäminen epäonnistui: %1$s</string>
     <string name="install_timeout_message">Asennus ei valmistunut. Tarkista järjestelmän asennusvalintaikkuna ja yritä uudelleen.</string>
     <string name="reinstall_app_fail">Sovelluksen uudelleenasennus epäonnistui: %s</string>
     <string name="uninstall_app_fail">Sovelluksen poistaminen epäonnistui: %s</string>
@@ -874,16 +796,11 @@ Yksityiskohdat: %2$s"</string>
     <string name="install_saved_app">Asenna</string>
     <string name="remount_saved_app">Liitä uudelleen</string>
     <string name="update_saved_app">Päivitä</string>
-    <string name="installing_saved_app">Asennetaan tallennettua sovellusta...</string>
     <string name="saved_app_install_success">Asennettu tallennettu sovellus</string>
     <string name="saved_app_install_failed">Tallennnetun sovelluksen asentaminen epäonnistui</string>
     <string name="saved_app_uninstall_title">Poistetaanko asennettu kopio?</string>
-    <string name="saved_app_unmount_title">Poistetaanko liitetty kopio?</string>
     <string name="saved_app_uninstall_description">Tämä poistaa vain asennetun version. Tallennettu APK-tiedostosi säilyy ennallaan.</string>
-    <string name="saved_app_unmount_description">Tämä irrottaa muokatun APK-tiedoston. Tallennettu APK-tiedostosi säilyy ennallaan.</string>
     <string name="saved_app_install_missing">Tallennettua APK-tiedostoa ei löydy</string>
-    <string name="delete_saved_copy">Poista tallennettu kopio</string>
-    <string name="sign_fail">APK:n allekirjoitus epäonnistui: %s</string>
     <string name="save_logs">Tallenna lokit</string>
     <string name="plugin_activity_dialog_body">Tämän laajennuksen jatkamiseksi vaaditaan käyttäjän toimia.</string>
     <string name="select_install_type">Valitse asennustyyppi</string>
@@ -891,7 +808,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="patcher_step_load_patches">Ladataan korjauksia</string>
     <string name="patcher_step_unpack">Luetaan APK-tiedostoa</string>
     <string name="patcher_step_prepare_split_apk">Yhdistä jaetut APK:t</string>
-    <string name="patcher_step_merge_not_required">Jaettua yhdistämistä ei tarvita</string>
     <string name="patcher_step_group_patching">Korjataan</string>
     <string name="patcher_step_group_saving">Tallennetaan</string>
     <string name="patcher_step_write_patched">Kirjoitetaan korjattu APK-tiedosto</string>
@@ -929,14 +845,9 @@ Yksityiskohdat: %2$s"</string>
     <string name="less">Vähemmän</string>
     <string name="continue_">Jatka</string>
     <string name="dismiss">Hylkää</string>
-    <string name="permanent_dismiss">Älä näytä tätä uudelleen</string>
-    <string name="website">Verkkosivusto</string>
     <string name="patch_bundle_urls">Hae paikkapakettien tuonnit</string>
-    <string name="contact">Ota yhteyttä</string>
     <string name="version">Versio</string>
     <string name="published">Julkaistu</string>
-    <string name="submit_feedback">Lähetä ongelma tai palaute</string>
-    <string name="submit_feedback_description">Auta meitä parantamaan tätä sovellusta</string>
     <string name="developer_options">Kehittäjäasetukset</string>
     <string name="developer_options_description">Asetukset virheiden vianmääritykseen</string>
     <string name="patches_update_success">Päivitys onnistui</string>
@@ -951,12 +862,7 @@ Yksityiskohdat: %2$s"</string>
 
 Avoimen lähdekoodin ytimessään Morphe kukoistaa yhteisön palautteen ja panosten avulla tulevaisuuden innovaatioiden edistämiseksi."</string>
     <string name="here">tässä.</string>
-    <string name="developer_options_enabled">Kehittäjäasetukset otettu käyttöön</string>
-    <string name="developer_options_taps">%d napautusta jäljellä</string>
-    <string name="developer_options_already_enabled">Kehittäjäasetukset ovat jo käytössä</string>
     <string name="update_available">Päivitys saatavilla</string>
-    <string name="current_version">Nykyinen versio: %s</string>
-    <string name="new_version">Uusi versio: %s</string>
     <string name="ready_to_install_update">Valmis asentamaan päivityksen</string>
     <string name="update_completed">Päivitys asennettu</string>
     <string name="install_update_manager_failed">Päivityksen asentaminen epäonnistui</string>
@@ -982,14 +888,12 @@ Avoimen lähdekoodin ytimessään Morphe kukoistaa yhteisön palautteen ja panos
     <string name="hours_ago">%s tuntia sitten</string>
     <string name="days_ago">%sd sitten</string>
     <string name="invalid_date">Virheellinen päivämäärä</string>
-    <string name="disable_battery_optimization">Poista akun optimointi käytöstä</string>
     <string name="input_dialog_value_invalid">Virheellinen arvo</string>
     <string name="option_required">Tämä vaihtoehto on pakollinen</string>
     <string name="required_options_screen">Pakolliset vaihtoehdot</string>
     <string name="failed_to_check_updates">Päivitysten tarkistaminen epäonnistui: %s</string>
     <string name="no_update_available">Päivitystä ei saatavilla</string>
     <string name="update_check">Tarkistetaan päivityksiä…</string>
-    <string name="dismiss_temporary">Ei nyt</string>
     <string name="update_available_dialog_description">Uusi versio Morphesta (%s) on saatavilla.</string>
     <string name="failed_to_download_update">Päivityksen lataaminen epäonnistui: %s</string>
     <string name="download">Lataa</string>
@@ -1046,5 +950,4 @@ Napsauta korjauspaketteja nähdäksesi lisätietoja."</string>
     <string name="failed_to_import_keystore">Keystore-tiedoston tuonti epäonnistui</string>
     <string name="export">Vie</string>
     <string name="confirm">Vahvista</string>
-    <string name="saved_app_install_cancelled">Asennus peruutettu</string>
 </resources>

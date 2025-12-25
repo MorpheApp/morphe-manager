@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Yama paketi</string>
-    <string name="morphe_home_greeting_1">Hansı tətbiqi yamalamaq istəyirsiniz?</string>
-    <string name="morphe_home_greeting_2">YouTube-u yenidən əfsanəvi etməyə hazırsınız?</string>
-    <string name="morphe_home_greeting_3">Kəmərinizi bağlayın, yamama vaxtıdır</string>
-    <string name="morphe_home_greeting_4">Başqa gün, başqa reklam bloklanmış baş əsər</string>
-    <string name="morphe_home_greeting_5">Reklamlara baxmaq istəyirsən? Mən də yox</string>
-    <string name="morphe_home_greeting_6">Uygulamanız dərhal çalışmağa təyyar!</string>
-    <string name="morphe_home_greeting_7">Odün forecast: 100% patching имkanı</string>
+    <string name="morphe_home_greeting_1">Hansı tətbiqi yeniləmək istəyirsən? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">YouTube-u yenidən əfsanəvi etməyə hazırsan? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Kəmərini bağla, yeniləmə vaxtıdır 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Başqa gün, başqa reklamsız sənət əsəri 😌🚫</string>
+    <string name="morphe_home_greeting_5">Reklam izləmək istəyirsən? Mən də istəmirəm 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Tətbiqlərinizin davranışını dəyişək 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Bu günki proqnoz: yamaq etmək üçün 100% şans 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Məsuliyyətlə yamaq etməyə çalışın... və ya etməyin 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Tətbiqləri özlərindən xilas edirəm, bu gündən etibarən 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Kofeinlə və yaxşı yamaqlarla güclənmişik ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API Paketi</string>
     <string name="morphe_home_update_error">Yeniləmə uğursuz oldu</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı yoxlayın və yenidən cəhd edin</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Əlavə edildi</string>
     <string name="morphe_home_date_updated">Yeniləndi</string>
     <string name="morphe_home_check_updates">Yoxla</string>
-    <string name="morphe_home_bundle_update_completed">Yeniləmə tamamlandı</string>
     <string name="morphe_home_unknown">Naməlum</string>
     <string name="morphe_home_timeline">Yeniləmə tarixi</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Orijinal yamalanmamış APK sizdədir?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Yama %1$s üçün mənə %2$s versiyası (yamalanmamış) lazımdır.</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s yaması üçün %2$s (yamamanmış) versiyası lazımdır</string>
     <string name="morphe_home_apk_availability_yes">Bəli, məndə var</string>
     <string name="morphe_home_apk_availability_no">Xeyr, mənə tapmaqda kömək et</string>
-    <string name="morphe_home_apk_availability_dialog_description">%1$s-i yamamaq üçün mənə %2$s (yamalanmamış) versiyası lazımdır.</string>
-    <string name="morphe_home_apk_availability_dialog_info">APK-nı endirdiyinizə əmin olun, lakin onu QURAŞDIRMAYIN.</string>
+    <string name="morphe_home_apk_availability_dialog_description">%1$s yaması üçün %2$s (yamamanmış) versiyası lazımdır</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Orijinal APK-nı APKMirror-dan endirin</string>
-    <string name="morphe_home_download_instructions_description">%1$s versiya %2$s-i APKMirror.com-dan endirmək üçün bu addımları izləyin:</string>
+    <string name="morphe_home_download_instructions_title">Əsl APK-nı endirin</string>
     <string name="morphe_home_download_instructions_steps_title">Təlimatlar:</string>
-    <string name="morphe_home_download_instructions_step1">APKMirror.com veb-saytını açmaq üçün Davam et düyməsini basın</string>
+    <string name="morphe_home_download_instructions_step1">Aşağıdakı \'APKMirror.com saytına keçid\' düyməsinə basın</string>
     <string name="morphe_home_download_instructions_step2_part1">Veb səhifəni aşağı fırladın və basın</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Veb saytda endirmə düyməsini basın, burada deyil 😊</string>
-    <string name="morphe_home_download_instructions_step3">Endirmənin tamamlanmasını gözləyin və APK-nı quraşdırmayın</string>
-    <string name="morphe_home_download_instructions_step3_mount">Endirilmənin tamamlanmasını gözləyin və APK-nı quraşdırın</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Burada deyil, vebsaytda endirməyə basın 😊</string>
+    <string name="morphe_home_download_instructions_step3">Endirmə tamamlanana qədər gözləyin və &lt;b&gt;APK-nı quraşdırmayın&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">Endirmə tamamlanandan sonra &lt;b&gt;APK-nı quraşdırın&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Endirmə başa çatdıqdan sonra bu proqramı yenidən açın</string>
     <string name="morphe_home_download_instructions_step4_mount">Orijinal APK-nı quraşdırdıqdan sonra bu proqramı yenidən açın</string>
-    <string name="morphe_home_download_instructions_note">Vacibdir: APK-nı endirin, lakin onu cihazınıza quraşdırmayın.</string>
-    <string name="morphe_home_download_instructions_continue">APKMirror-a davam edin</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com saytına keçid</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Endirdiyiniz APK-nı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">İndi az əvvəl endirdiyiniz %1$s APK faylını seçin.</string>
     <string name="morphe_home_file_picker_prompt_open">Endirdiyim APK faylını açın</string>
-    <string name="morphe_home_wrong_package_selected">Gözlənilən paket %1$s, lakin %2$s əldə olundu</string>
-    <string name="morphe_home_any_version">istənilən versiya</string>
     <string name="morphe_home_recommended_version">Tövsiyə olunan Versiya</string>
     <string name="morphe_patcher_selected_version">Seçilmiş Versiya</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Səhv buferə köçürüldü</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d düzəliş</string>
     <string name="morphe_patcher_long_step_warning">Bu addım bir müddət çəkə bilər. Zəhmət olmasa gözləyin…</string>
-    <string name="morphe_patcher_install_dialog_message">Yama bənzədilmiş proqramı quraşdırırıq?</string>
-    <string name="morphe_patcher_install_conflict_message">Paketlərin münaqişəsi aşkarlandı. Yeni versiyanı quraşdırmaq üçün əvvəlcə proqramın əvvəlki versiyasını silməlisiniz.</string>
-    <string name="morphe_patcher_install_ready_message">Əvvəlki versiya silindi. İndi yama bənzədilmiş proqramı quraşdıra bilərsiniz.</string>
-    <string name="morphe_patcher_install_cancelled_title">Quraşdırma ləğv edildi</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Yenidən cəhd etmək üçün quraşdırma düyməsini basın</string>
     <string name="morphe_patcher_installing">Quraşdırılır…</string>
     <string name="morphe_patcher_installing_subtitle">Hazır olmaq üzrədir! 🎸</string>
     <string name="morphe_patcher_success_title">Hər şey hazırdır! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Yama olunmam\u0131\u015f\u00a0t\u0259tbiqd\u0259\u00a0s\u0259hvl\u0259r\u00a0d\u00fcz\u0259lir\u2026 \ud83d\udc1e</string>
     <string name="morphe_patcher_message_10">G\u00f6z\u0259l\u00a0yamalar\u00a0g\u00f6zl\u0259m\u0259y\u0259\u00a0d\u0259y\u0259r\u2026 \u23f3</string>
     <string name="morphe_patcher_message_11">Piksell\u0259ri\u00a0parlayana\u00a0kimi\u00a0cilalay\u0131r\u0131q\u2026 \ud83d\udc8e</string>
-    <string name="morphe_patcher_message_12">Kapitan \“Yamalama davam edir\” işarəsini söndürənə qədər yerinizdə qalın… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Lütfən, \"Yamaq prosesi\" işığı sönənədək oturmağa davam edin... 💺✈️</string>
     <string name="morphe_patcher_message_13">Yamalanm\u0131\u015f\u00a0t\u0259tbiqinizi\u00a0isti\u00a0v\u0259\u00a0t\u0259z\u0259\u00a0bi\u015firiq\u2026 \ud83c\udf55</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Bayt-kod ilə nəzakətlə danışıqlar aparılır… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Morphe plugin-lərinə girişi idarə etmək üçün istifadə olunur. Yalnız Morphe-nin bu var.</string>
     <string name="toast_copied_to_clipboard">Köçürüldü!</string>
     <string name="copy_to_clipboard">Panoya köçür</string>
-    <string name="dashboard">Təqdimat paneli</string>
     <string name="settings">Tənzimləmələr</string>
     <string name="select_app">Proqram seçin</string>
     <string name="new_downloader_plugins_notification">Yeni endirici plugin-lər mövcuddur. Onları konfiqurasiya etmək üçün buraya klikləyin.</string>
     <string name="unsupported_architecture_warning">Bu cihaz arxitekturasında yamalama dəstəklənmir və çox güman ki, uğursuz olacaq.</string>
     <string name="import_">İdxal et</string>
-    <string name="import_patches">Yamaları idxal et</string>
     <string name="file_field_set">Seçilmiş</string>
     <string name="file_field_not_set">Seçilməyib</string>
     <string name="field_not_set">Təyin olunmayıb</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Yükləyərkən kontakt təklifinə bayram teyinləmək.</string>
     <string name="bundle_version_dialog_default">İlkin tövsiyədən istifadə et</string>
     <string name="bundle_version_dialog_default_subtitle">Ən çox yayılmış uyğun versiyanı avtomatik seçin.</string>
-    <string name="bundle_version_dialog_option_subtitle">%1$s versiyasından istifadə et</string>
     <string name="bundle_version_all_versions">Bütün versiyalar</string>
     <string name="bundle_version_no_version">Tövsiyə olunan versiya yoxdur</string>
-    <string name="bundle_version_suggested_label">Təklif olunan versiya: %1$s</string>
-    <string name="bundle_version_other_heading">Digər dəstəklənən versiyalar</string>
     <string name="bundle_update_manual_available">Yeniləmə mövcuddur</string>
     <string name="bundle_update_manual_available_with_version">Yeniləmə mövcuddur: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d paketlər emal edildi</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Paketləri təşkil et</string>
     <string name="bundle_reorder_title">Yama paketlərini təşkil et</string>
     <string name="bundle_reorder_description">Paketlərin siyahıda və yama seçim menyusunda görünmə sırasını tənzimləmək üçün tutacaqdan sürükləyin.</string>
-    <string name="bundle_reorder_move_up">Paketi yuxarı apar</string>
-    <string name="bundle_reorder_move_down">Paketi aşağı apar</string>
     <string name="bundle_actions_expand">Paket əməliyyətlərini göstər</string>
     <string name="bundle_actions_collapse">Cəld əməliyyətləri gizlət</string>
     <string name="patch_bundle_duplicate_name_error">Bu ada malik yama paketi artıq mövcuddur</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Təklif olunan versiya: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Seçilmiş versiya: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Seçilib</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (seçildi)</string>
     <string name="bundle_version_dialog_other_title">Başqa dəstəklənən versiyanı seçin:</string>
     <string name="bundle_version_dialog_locked_title">Versiya qoruyucuları aktivdir</string>
     <string name="bundle_version_dialog_locked_hint">Parametrlər &gt; Qabaqcıl &gt; Qoruyucular bölməsinə keçin və paketə xas versiyaları seçmək üçün \"Təklif olunan tətbiq versiyasını tələb et\" (keçidinizi söndürün) və \"Versiya uyumluluğu yoxlamasını deaktiv et\" (keçidinizi yandırın) parametrlərini təyin edin.</string>
-    <string name="patch_item_description">Tətbiqi yamalamağa başlayın</string>
     <string name="patch_selector_item">Yama seçin</string>
     <string name="patch_selector_item_description">%d yama seçildi</string>
     <string name="no_patches_selected">Heç bir yama seçilməyib</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Quraşdırılmış APK istifadə edilir</string>
     <string name="apk_source_local">Yerli APK faylından istifadə edilir</string>
     <string name="apk_source_downloaded">Yüklənmiş APK istifadə edilir</string>
-    <string name="legacy_import_failed">Köhnə parametrləri idxal etmək mümkün olmadı</string>
     <string name="auto_updates_dialog_title">Yeniləmələri konfiqurasiya et</string>
     <string name="auto_updates_dialog_description">Morphe-nin aşağıdakı komponentlər üçün yeniləmələri dövri olaraq yoxlamasını istəyirsinizmi?</string>
     <string name="auto_updates_dialog_patches">Morphe Yamaları</string>
@@ -246,7 +236,6 @@
     <string name="updates">Yeniləmələr</string>
     <string name="updates_description">Yeniləmələri yoxlayın və dəyişikliklər jurnalını görüntüleyin</string>
     <string name="downloads">Yükləmələr</string>
-    <string name="downloads_description">Yükləyici pluginlər və yüklənmiş tətbiqlər</string>
     <string name="plugins_help_title">Yükləyici nədir?</string>
     <string name="plugins_help_description">Yükləyici, URV-nin müxtəlif mənbələrdən APK-ları endirməsinə imkan verən bir plugin-dir. Yüklənmiş APK-lar aşağı hissədə göstəriləcək. Yamalama prosesi zamanı, artıq yüklənmiş bir APK seçə bilərsiniz və ya onu bir plugin vasitəsilə endirə bilərsiniz.\n\nDəstəklənən yükləyici pluginlərin siyahısını tapa bilərsiniz</string>
     <string name="import_export">İdxal &amp; ixrac</string>
@@ -255,7 +244,6 @@
     <string name="changelog_loading">Dəyişikliklərin qeydi yüklənir</string>
     <string name="changelog_download_fail">Dəyişikliklərin qeydini endirmək mümkün olmadı: %s</string>
     <string name="changelog_description">Bu yeniləmədəki son dəyişikliklərə nəzər salın</string>
-    <string name="no_changelogs_found">Dəyişiklik qeydləri tapılmadı</string>
     <string name="advanced">Qabaqcıl</string>
     <string name="advanced_description">API URL, yaddaş həddi, sazlama</string>
     <string name="about">Haqqında</string>
@@ -274,27 +262,18 @@
     <string name="theme_color_picker_title">Tema rəngi</string>
     <string name="theme_color_preview">Əvvəlcədən baxış</string>
     <string name="theme_color_reset">Tema rəngini sıfırla</string>
-    <string name="theme_color_presets">Tema rəngi parametrləri</string>
-    <string name="theme_color_presets_description">Arxa planları və kartları yenidən rəngləmək üçün bir rəngə toxunun</string>
     <string name="theme_preview_title">Tema önizləməsi</string>
     <string name="theme_preview_description">Tema parametrlərini dəyişdirərkən dərhal yenilənir</string>
     <string name="theme_presets">Tema parametrləri</string>
     <string name="theme_presets_description">Tətbiqin sistemə, işığa, qaranlığa, Material You və ya tam qara necə uyğunlaşdığını seçin</string>
     <string name="theme_preset_default">Sistemə uyğun</string>
     <string name="theme_preset_amoled">Tam qara</string>
-    <string name="theme_preset_sunset">Gün batımı</string>
-    <string name="theme_preset_forest">Meşə</string>
-    <string name="theme_preset_ocean">Okean</string>
-    <string name="theme_preset_midnight">Gecə yarısı</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Bütün mövzu parametrlərini sıfırla</string>
     <string name="color_channel_red">Qırmızı</string>
     <string name="color_channel_green">Yaşıl</string>
     <string name="color_channel_blue">Mavi</string>
-    <string name="pure_black_theme">Saf qara mövzu</string>
-    <string name="pure_black_theme_description">Qaranlıq tema üçün saf qara fonlardan istifadə edin</string>
     <string name="theme">Mövzu</string>
-    <string name="theme_description">Açıq və ya qaranlıq mövzu arasında seçim edin</string>
     <string name="safeguards">Təhlükəsizlik tədbirləri</string>
     <string name="patch_compat_check">Versiya uyğunluğu yoxlamasını deaktiv edin</string>
     <string name="patch_compat_check_description">Yamaqları uyumlu tətbiq versiyaları ilə məhdudlaşdırmayın</string>
@@ -366,10 +345,8 @@ Bu mənbədən əvvəllər quraşdırılmış tətbiqləri yeniləyə bilməyəc
     <string name="export_patch_bundles">Yama dəstlərini ixrac et</string>
     <string name="export_patch_bundles_description">İdxal edilmiş uzaq yama dəstlərini JSON faylına saxlayın</string>
     <string name="export_patch_bundles_fail">Yama dəstələrini ixrac etmək mümkün olmadı: %s</string>
-    <string name="export_patch_bundles_empty">Export üçün heç bir yama dəsti yoxdur</string>
     <string name="export_patch_bundles_success">%d yama dəsti ixrac edildi</string>
     <string name="export_patch_bundles_partial">%1$d yama dəsti ixrac edildi. Bəzi dəstlər yerli olaraq əlavə edildiyi üçün ixrac edilə bilmədi.</string>
-    <string name="export_patch_bundles_local_not_supported">Export yalnız URL-lərdən idxal olunan yama dəstləri üçün mövcuddur</string>
     <string name="bundle_type_remote">Uzaq</string>
     <string name="bundle_type_local">Yerli</string>
     <string name="bundle_type_preinstalled">Əvvəlcədən quraşdırılmış</string>
@@ -424,12 +401,7 @@ Bu mənbədən əvvəllər quraşdırılmış tətbiqləri yeniləyə bilməyəc
     <string name="patch_selection_collapse_on_toggle_description">Yamaq seçdiyiniz və ya seçimi ləğv etdiyiniz zaman yamaq seçimi fəaliyyət düymələrini avtomatik gizlədin</string>
     <string name="patch_selection_action_order_title">Yamaq seçimi fəaliyyət düymələrinin sırası</string>
     <string name="patch_selection_action_order_description">Yama seçimi əməliyyat düymələri üçün düzənləmə sırasını seçin</string>
-    <string name="patch_selection_action_order_dialog_title">Yama əməliyyatlarını yenidən sıralayın</string>
-    <string name="patch_selection_action_order_dialog_description">Yama seçimi əməliyyat düymələrinin necə göstəriləcəyini dəyişdirmək üçün girişləri hərəkətə gətirin. Önizləmə canlı yenilənir.</string>
-    <string name="patch_selection_action_order_preview_label">Önizləmə</string>
     <string name="patch_selection_action_order_reset">Defolt sıraya sıfırlayın</string>
-    <string name="patch_selection_action_move_up">Yuxarı hərəkət etdirin</string>
-    <string name="patch_selection_action_move_down">Aşağı hərəkət etdirin</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Paketi ləğv etmək istəyirsiniz?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">%1$s-dən seçilmiş bütün yamaları ləğv etmək istəyirsiniz?</string>
     <string name="patch_selection_confirm_deselect_all_title">Bütün yamaları ləğv etmək istəyirsiniz?</string>
@@ -495,9 +467,6 @@ Yama profillərinə təsir edilmir."</string>
     <string name="downloader_plugin_delete_apps_description">Seçilmiş proqramları silmək istədiyinizə əminsiniz?</string>
     <string name="downloader_settings_no_apps">Heç bir yüklənmiş proqram tapılmadı.</string>
     <string name="search_apps">Proqramları axtarın…</string>
-    <string name="loading_body">Yüklənir…</string>
-    <string name="downloading_patches">Yama yüklənir…</string>
-    <string name="options">Seçimlər</string>
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
     <string name="edit">Redaktə et</string>
@@ -507,7 +476,6 @@ Yama profillərinə təsir edilmir."</string>
     <string name="patch">Yama</string>
     <string name="select_from_storage">Saxlağın</string>
     <string name="select_from_storage_description">Fayl seçicisi istifadə edərək APK faylını saxlağından seçin</string>
-    <string name="suggested_version_info">Tövsiyə olunan versiya: %s</string>
     <string name="type_anything">Davam etmək üçün istəniləni yazın</string>
     <string name="search">Yama axtarın…</string>
     <string name="apply">Tətbiq et</string>
@@ -547,29 +515,12 @@ Yama profillərinə təsir edilmir."</string>
     <string name="export_name_format_description">Yama tətbiqlərinin ixracı üçün standart fayl adını fərdiləşdirin</string>
     <string name="export_name_format_dialog_title">İxrac fayl adı formatı</string>
     <string name="export_name_format_dialog_supporting">Fayl adı yaratmaq üçün aşağıdakı yer tutuculardan istifadə edin. .apk genişləndirilməsi əgər yoxdursa avtomatik əlavə olunur.</string>
-    <string name="export_name_format_preview">Podakt: %1$s</string>
     <string name="export_name_format_preview_label">Podakt</string>
     <string name="export_name_format_variables">Dəyişənlər</string>
     <string name="export_name_format_reset">Defolt hala qaytar</string>
     <string name="export_name_format_error_blank">Fayl adı formatı boş ola bilməz.</string>
     <string name="export_name_format_current">Cari nümunə: %1$s</string>
     <string name="export_name_format_insert">Əlavə et</string>
-    <string name="export_name_variable_app_name">Tətbiq adı</string>
-    <string name="export_name_variable_app_name_description">Tətbiqin adı ilə əvəz olunub.</string>
-    <string name="export_name_variable_package_name">Paket adı</string>
-    <string name="export_name_variable_package_name_description">Tətbiqin paket adı ilə əvəz olunub.</string>
-    <string name="export_name_variable_app_version">Tətbiq versiyası</string>
-    <string name="export_name_variable_app_version_description">Tətbiqin versiya adı ilə əvəz olunub.</string>
-    <string name="export_name_variable_patches_version">Yama versiyası</string>
-    <string name="export_name_variable_patches_version_description">Tətbiq edilmiş yama paketinin versiyası ilə əvəz olunub.</string>
-    <string name="export_name_variable_bundle_names">Yama dəsti adları</string>
-    <string name="export_name_variable_bundle_names_description">Tətbiq edilmiş yama paketinin adı ilə əvəz olunub.</string>
-    <string name="export_name_variable_manager_version">Menecer versiyası</string>
-    <string name="export_name_variable_manager_version_description">Menecer versiyası ilə əvəz olunub.</string>
-    <string name="export_name_variable_timestamp">Vaxt qeydi</string>
-    <string name="export_name_variable_timestamp_description">Cari vaxtla əvəz olunub (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">Tarix</string>
-    <string name="export_name_variable_date_description">Cari tarixə uyğunlaşdırılıb (yyyyMMdd).</string>
     <string name="debug_logs_export">Sazlama qeydlərini ixrac edin</string>
     <string name="debug_logs_export_read_failed">Jurnal oxuna bilmədi (çıxış kodu %d)</string>
     <string name="debug_logs_export_failed">Qeydləri ixrac etmək alınmadı</string>
@@ -592,31 +543,19 @@ Yama profillərinə təsir edilmir."</string>
     <string name="app_language">Tətbiq dili</string>
     <string name="language_dialog_title">Tətbiqin dilini seçin</string>
     <string name="language_option_system">Cihaz dilindən istifadə edin</string>
-    <string name="device">Cihaz</string>
-    <string name="device_android_version">Android versiyası</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">CPU Arxitekturaları</string>
-    <string name="device_memory_limit">Yaddaş limitləri</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Geniş)</string>
     <string name="patches_force_download">Bütün yama dəstlərinin endirilməsini məcburi et</string>
     <string name="patches_reset">Yama paketlərini sıfırla</string>
-    <string name="patching">Yama</string>
-    <string name="signing">İmzalanma</string>
-    <string name="storage">Saxlama</string>
     <string name="no_patch_found">Heç bir yama tapılmadı. Yamalarınızı yoxlayın</string>
     <string name="tab_apps">Proqramlar</string>
     <string name="tab_patches">Yama Paketləri</string>
     <string name="tab_profiles">Yama Profilləri</string>
     <string name="delete">Sil</string>
     <string name="refresh">Yenilə</string>
-    <string name="continue_anyways">Yenə də davam et</string>
-    <string name="download_another_version">Başqa bir versiya yükləyin</string>
-    <string name="download_app">Proqramı yükləyin</string>
     <string name="download_apk">APK faylını yükləyin</string>
     <string name="patches_download_fail">Yamaların yüklənməsi uğursuz oldu: %s</string>
     <string name="patches_replace_fail">Yamaların idxalı uğursuz oldu: %s</string>
     <string name="no_patched_apps_found">Heç bir yamalanmış proqram tapılmadı</string>
-    <string name="tap_on_patches">Onlar haqqında daha ətraflı məlumat almaq üçün yamalara toxunun</string>
     <string name="patches_selected">%s yığım dəsti seçildi</string>
     <string name="patch_profiles_selected">%1$d yama profili seçildi</string>
     <string name="selected_apps_count">%1$d əd aplikasiya seçildi</string>
@@ -630,7 +569,6 @@ Yama profillərinə təsir edilmir."</string>
 Xahiş edirik təklif olunan versiyadan istifadə edin: %s
 
 Fərqli versiya ilə davam etmək üçün, qabaqcıl parametrlərdə \"Təklif olunan proqram versiyasını tələb et\" seçiminə keçin."</string>
-    <string name="selection_warning_title">Standart parametrlərdən istifadəni dayandırmaq?</string>
     <string name="selection_warning_description">"Standart yama seçimi və parametrlərinin istifadəsi tövsiyə olunur. Onları dəyişdirmək gözlənilməz problemlərə səbəb ola bilər.
 
 Yamaları dəyişdirmək üçün qabaqcıl parametrlərdə \"Yama seçimi və parametrlərini dəyişdirməyə icazə ver\" seçiminə keçməlisiniz."</string>
@@ -686,9 +624,6 @@ Yamaları dəyişdirmək üçün qabaqcıl parametrlərdə \"Yama seçimi və pa
     <string name="patcher_missing_patch_title">Yama seçimi diqqət tələb edir</string>
     <string name="patcher_preflight_missing_patch_remove">Əksik yamaları silin</string>
     <string name="patcher_preflight_missing_patch_proceed">Yenə də davam et</string>
-    <string name="patcher_missing_patch_message">"Aşağıdakı yamalar mövcud paketdə tapılmadığı üçün yama uğursuz oldu:
-%1$s
-Yenidən cəhd etməzdən əvvəl seçimi yenidən açın və onları yenidən seçin (və ya əvəzedicilər seçin)."</string>
     <string name="patcher_preflight_missing_patch_message">"Xalıyım bil– patcheslar hazırda da odarcta: 
 %1$s
 Avtomatik silmək, selectni dəyişmək və ya davam etmək olar."</string>
@@ -697,7 +632,6 @@ Avtomatik silmək, selectni dəyişmək və ya davam etmək olar."</string>
     <string name="patch_selector_missing_patch_message">"Bu yamalar yenidən seçilməlidir:
 %1$s
 Onları yenidən aktivləşdirin (və ya alternativlərini seçin), sonra yenidən yamalamağa cəhd edin."</string>
-    <string name="delete_profile_confirmation">\"%1$s\" silinsin?</string>
     <string name="patch_profile_delete_multiple_dialog_description">Seçilmiş yama profilləri silinsin?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d yama</item>
@@ -707,26 +641,18 @@ Onları yenidən aktivləşdirin (və ya alternativlərini seçin), sonra yenid�
         <item quantity="one">%d paket</item>
         <item quantity="other">%d paket</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Universal yamaqlar daha ümumi istifadəyə malikdir və müəyyən proqramları hədəf alan yamaqlar qədər etibarlı işləmir. Onları istifadə edərkən problemlərlə qarşılaşa bilərsiniz.
-
-Universal yamaqlardan istifadə etməzdən əvvəl qabaqcıl parametrlərdə \"Universal yamaqları göstər &amp; istifadə etməyə icazə ver\" seçimini aktiv etməlisiniz."</string>
     <string name="this_version">Bu versiya</string>
     <string name="universal">İstənilən tətbiq</string>
     <string name="search_patches">Yama axtar</string>
     <string name="app_version_not_compatible">"Bu yama seçilən tətbiq versiyası (%1$s) ilə uyğun deyil.
 
 Bu yalnız aşağıdakı versiya ilə uyğundur: %2$s."</string>
-    <string name="continue_with_version">Bu versiya ilə davam et?</string>
-    <string name="version_not_compatible">Bütün yamalar bu versiya ilə uyğun deyil (%s). Yenə də davam etmək istəyirsiniz?</string>
-    <string name="download_application">Tətbiqi endirmək?</string>
-    <string name="app_not_installed">Seçdiyiniz tətbiq quraşdırılmayıb. Onu endirmək istəyirsiniz?</string>
     <string name="failed_to_load_apk">APK-nı yükləmək alınmadı</string>
     <string name="loading">Yüklənir…</string>
     <string name="not_installed">Quraşdırılmayıb</string>
     <string name="installed">Quraşdırılıb</string>
     <string name="app_info">Tətbiq məlumatı</string>
     <string name="uninstall">Quraşdırmanı sil</string>
-    <string name="unpatch">Yamanı sil</string>
     <string name="repatch">Yenidən yama et</string>
     <string name="install_type">Quraşdırma növü</string>
     <string name="package_name">Paket adı</string>
@@ -737,7 +663,6 @@ Bu yalnız aşağıdakı versiya ilə uyğundur: %2$s."</string>
     <string name="applied_patches_empty">Bu tətbiq üçün heç bir yama qeydə alınmayıb</string>
     <string name="applied_patches_bundle_missing">Paket metamaveri mövcud deyil. Saxlanmış yama adları göstərilir.</string>
     <string name="no_patch_bundles_tracked">Bu tətbiq üçün heç bir yama paketi qeydə alınmayıb</string>
-    <string name="default_install">İlkin</string>
     <string name="mount_install">Root edilmiş mount quraşdırıcısı</string>
     <string name="mounted">Mount edilmiş</string>
     <string name="unmounted">Mount edilməmiş</string>
@@ -753,7 +678,6 @@ Bu yalnız aşağıdakı versiya ilə uyğundur: %2$s."</string>
     <string name="failed_to_unmount">Sökülmə alınmadı: %s</string>
     <string name="unpatch_app">Tətbiqi ləğv etmək?</string>
     <string name="unpatch_description">Bu tətbiqi ləğv etmək istədiyinizə əminsiniz?</string>
-    <string name="downloader_invalid_version">Yükləyici düzgün versiyanı yükləmədi</string>
     <string name="downloader_app_not_found">Yükləyici proqramı tapmadı</string>
     <string name="downloader_error">Yükləyici xətası: %s</string>
     <string name="downloader_no_plugins_installed">Heç bir yükləyici quraşdırılmayıb.</string>
@@ -774,7 +698,6 @@ Bu yalnız aşağıdakı versiya ilə uyğundur: %2$s."</string>
     <string name="path_selector_files">Fayllar</string>
     <string name="show_password_field">Şifrəni göstər</string>
     <string name="hide_password_field">Şifrəni gizlət</string>
-    <string name="installer">Quraşdırıcı</string>
     <string name="installer_primary_title">Əsas quraşdırıcı</string>
     <string name="installer_primary_description">Yamaqlı tətbiqləri quraşdırarkən ilk növbədə istifadə olunur.</string>
     <string name="installer_fallback_title">Ehtiyat quraşdırıcı</string>
@@ -853,7 +776,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="install_app_fail_title">Quraşdırma uğursuz oldu</string>
     <string name="install_app_fail">Proqramı quraşdırmaq mümkün olmadı: %s</string>
     <string name="mount_app_fail_title">Quraşdırma uğursuz oldu</string>
-    <string name="mount_app_fail">Proqramı quraşdırmaq mümkün olmadı: %1$s</string>
     <string name="install_timeout_message">Quraşdırma başa çatmadı. Sistem quraşdırıcısının dialoq qutusuna baxın və yenidən cəhd edin.</string>
     <string name="reinstall_app_fail">Proqramı yenidən quraşdırmaq mümkün olmadı: %s</string>
     <string name="uninstall_app_fail">Proqramı silmək mümkün olmadı: %s</string>
@@ -872,16 +794,11 @@ Təfərrüatlar: %2$s"</string>
     <string name="install_saved_app">Quraşdırın</string>
     <string name="remount_saved_app">Yenidən quraşdırın</string>
     <string name="update_saved_app">Yeniləyin</string>
-    <string name="installing_saved_app">Saxlanılan tətbiq quraşdırılır…</string>
     <string name="saved_app_install_success">Saxlanılan tətbiq quraşdırıldı</string>
     <string name="saved_app_install_failed">Saxlanılan tətbiq quraşdırıla bilmədi</string>
     <string name="saved_app_uninstall_title">Quraşdırılmış surəti silin?</string>
-    <string name="saved_app_unmount_title">Quraşdırılmış surəti köçürməyi ləğv edin?</string>
     <string name="saved_app_uninstall_description">Bu yalnız quraşdırılmış versiyanı silir. Saxlanılan APK-nız toxunulmaz qalır.</string>
-    <string name="saved_app_unmount_description">Bu, yamalanmış APK-nın köçürülməsini ləğv edir. Saxlanılan APK-nız toxunulmaz qalır.</string>
     <string name="saved_app_install_missing">Saxlanılan APK tapılmadı</string>
-    <string name="delete_saved_copy">Saxlanmış nüsxəni silin</string>
-    <string name="sign_fail">APK imzalama uğursuz oldu: %s</string>
     <string name="save_logs">Logları saxla</string>
     <string name="plugin_activity_dialog_body">Bu eklenti ilə davam etmək üçün istifadəçi qarşılıqlı əlaqəsi tələb olunur.</string>
     <string name="select_install_type">Quraşdırma növünü seçin</string>
@@ -889,7 +806,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="patcher_step_load_patches">Yama yüklənir</string>
     <string name="patcher_step_unpack">APK faylı oxunur</string>
     <string name="patcher_step_prepare_split_apk">Split APK-nı birləşdirin</string>
-    <string name="patcher_step_merge_not_required">Split birləşməsi tələb olunmur</string>
     <string name="patcher_step_group_patching">Yama tətbiq olunur</string>
     <string name="patcher_step_group_saving">Saxlanılır</string>
     <string name="patcher_step_write_patched">Yama tətbiq edilmiş APK faylı yazılır</string>
@@ -927,14 +843,9 @@ Təfərrüatlar: %2$s"</string>
     <string name="less">Daha az</string>
     <string name="continue_">Davam et</string>
     <string name="dismiss">Ləğv et</string>
-    <string name="permanent_dismiss">Bir daha göstərmə</string>
-    <string name="website">Veb sayt</string>
     <string name="patch_bundle_urls">Yama dəsti idxallarını əldə edin</string>
-    <string name="contact">Əlaqə</string>
     <string name="version">Versiya</string>
     <string name="published">Nəşr olunub</string>
-    <string name="submit_feedback">Məsələ və ya rəy təqdim edin</string>
-    <string name="submit_feedback_description">Bu tətbiqi təkmilləşdirməyə kömək edin</string>
     <string name="developer_options">Gelişdirici seçimləri</string>
     <string name="developer_options_description">Problem ayıklama seçimləri</string>
     <string name="patches_update_success">Güncəlləmə uğurlu oldu</string>
@@ -949,12 +860,7 @@ Təfərrüatlar: %2$s"</string>
 
 Açıq mənbəli əsaslarla yaradılan Morphe, gələcək yenilikləri irəli aparmaq üçün icma rəylərinə və töhfələrinə güvənir"</string>
     <string name="here">burada.</string>
-    <string name="developer_options_enabled">Tərtibatçı seçimləri aktivləşdirilib</string>
-    <string name="developer_options_taps">%d toxunuş qaldı</string>
-    <string name="developer_options_already_enabled">Tərtibatçı seçimləri artıq aktivləşdirilib</string>
     <string name="update_available">Yeniləmə mövcuddur</string>
-    <string name="current_version">Cari versiya: %s</string>
-    <string name="new_version">Yeni versiya: %s</string>
     <string name="ready_to_install_update">Yeniləmə quraşdırmağa hazırdır</string>
     <string name="update_completed">Yeniləmə quraşdırıldı</string>
     <string name="install_update_manager_failed">Yeniləmə quraşdırılması uğursuz oldu</string>
@@ -980,14 +886,12 @@ Açıq mənbəli əsaslarla yaradılan Morphe, gələcək yenilikləri irəli ap
     <string name="hours_ago">%s saat əvvəl</string>
     <string name="days_ago">%sd əvvəl</string>
     <string name="invalid_date">Yanlış tarix</string>
-    <string name="disable_battery_optimization">Batareya optimallaşdırmasını söndür</string>
     <string name="input_dialog_value_invalid">Yanlış dəyər</string>
     <string name="option_required">Bu seçim tələb olunur</string>
     <string name="required_options_screen">Tələb olunan seçimlər</string>
     <string name="failed_to_check_updates">Yeniləmələri yoxlamaq alınmadı: %s</string>
     <string name="no_update_available">Yeniləmə mövcud deyil</string>
     <string name="update_check">Yeniləmələr yoxlanılır...</string>
-    <string name="dismiss_temporary">Sonra yox</string>
     <string name="update_available_dialog_description">Morphe-nin yeni versiyası (%s) mövcuddur.</string>
     <string name="failed_to_download_update">Yeniləməni endirmək alınmadı: %s</string>
     <string name="download">Endir</string>
@@ -1044,5 +948,4 @@ Hələ də davam etmək istəyirsiniz?"</string>
     <string name="failed_to_import_keystore">Keystorun idxalı uğursuz oldu</string>
     <string name="export">İxrac et</string>
     <string name="confirm">Təsdiq et</string>
-    <string name="saved_app_install_cancelled">Quraşdırma ləğv edildi</string>
 </resources>

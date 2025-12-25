@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">প্যাচ বান্ডিল</string>
-    <string name="morphe_home_greeting_1">আপনি কোন অ্যাপটি প্যাচ করতে চান?</string>
-    <string name="morphe_home_greeting_2">ইউটিউবকে আবার কিংবদন্তি করে তুলতে প্রস্তুত?</string>
-    <string name="morphe_home_greeting_3">তৈরি হয়ে যান, এটা প্যাচিং এর সময়</string>
-    <string name="morphe_home_greeting_4">আরেকটা দিন, আরেকটা বিজ্ঞাপন-ব্লক করা মাস্টারপিস</string>
-    <string name="morphe_home_greeting_5">বিজ্ঞাপন দেখতে চান? আমিও না</string>
-    <string name="morphe_home_greeting_6">আপনার অ্যাপগুলিকে আচরণ করতে দিন</string>
+    <string name="morphe_home_greeting_1">আপনি কোন অ্যাপ্লিকেশন পাচ করতে চান? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">ইউটিউব কে আবার সাবলীল করার জন্য প্রস্তুত? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">বাকলাপ, এটা পাচের সময় 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">আরেকদিন, আরেকটি অ্যাড-বন্ধ মাস্টারপিস 😌🚫</string>
+    <string name="morphe_home_greeting_5">বিজ্ঞাপন দেখতে চান? আমিও নই 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">আপনার অ্যাপগুলিকে আচরণ করতে দিন 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">আজকের পূর্বাভাস: পার্চিংয়ের 100% সম্ভাবনা</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">দায়িত্বশীলভাবে পার্চ করুন... অথবা না করুন 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">আজ থেকে নিজেদের অ্যাপগুলোকে বাঁচানোর প্রচেষ্টা 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">কফি ও ভালো পার্চ দিয়ে চালিত ☕🧠</string>
     <string name="morphe_home_bundle_type_api">এপিআই বান্ডিল</string>
     <string name="morphe_home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="morphe_home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">যোগ করা হয়েছে</string>
     <string name="morphe_home_date_updated">আপডেট করা হয়েছে</string>
     <string name="morphe_home_check_updates">চেক করুন</string>
-    <string name="morphe_home_bundle_update_completed">আপডেট সম্পন্ন</string>
     <string name="morphe_home_unknown">অজানা</string>
     <string name="morphe_home_timeline">আপডেট হিস্টোরি</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s প্যাচ করার জন্য, আমার %2$s সংস্করণ (আনপ্যাচড) প্রয়োজন।</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s পার্চ করতে, আপনার %2$s (পার্চ না করা) সংস্করণ প্রয়োজন</string>
     <string name="morphe_home_apk_availability_yes">হ্যাঁ, আমার আছে</string>
     <string name="morphe_home_apk_availability_no">না, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
-    <string name="morphe_home_apk_availability_dialog_description">প্যাচ করার জন্য %1$s, আমার সংস্করণ %2$s (আনপ্যাচড) প্রয়োজন।</string>
-    <string name="morphe_home_apk_availability_dialog_info">নিশ্চিত করুন যে আপনি APK ডাউনলোড করেছেন তবে এটি ইনস্টল করবেন না।</string>
+    <string name="morphe_home_apk_availability_dialog_description">%1$s পার্চ করতে, আপনার %2$s (পার্চ না করা) সংস্করণ প্রয়োজন</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">APKMirror থেকে আসল APK ডাউনলোড করুন</string>
-    <string name="morphe_home_download_instructions_description">APKMirror.com থেকে %1$s সংস্করণ %2$s ডাউনলোড করতে এই পদক্ষেপগুলি অনুসরণ করুন:</string>
+    <string name="morphe_home_download_instructions_title">মূল APK ডাউনলোড করুন</string>
     <string name="morphe_home_download_instructions_steps_title">নির্দেশাবলী:</string>
-    <string name="morphe_home_download_instructions_step1">APKMirror.com ওয়েবসাইট খুলতে Continue চাপুন</string>
+    <string name="morphe_home_download_instructions_step1">নীচের \'APKMirror.com-এ চালিয়ে যান\' বোতামটি ক্লিক করুন</string>
     <string name="morphe_home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
-    <string name="morphe_home_download_instructions_download_button_toast">ওয়েবসাইটে ডাউনলোড ক্লিক করুন, এখানে নয় 😊</string>
-    <string name="morphe_home_download_instructions_step3">ডাউনলোড সম্পূর্ণ হওয়ার জন্য অপেক্ষা করুন, এবং APK ইনস্টল করবেন না</string>
-    <string name="morphe_home_download_instructions_step3_mount">ডাউনলোড সম্পূর্ণ হওয়ার জন্য অপেক্ষা করুন এবং APK ইনস্টল করুন</string>
+    <string name="morphe_home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
+    <string name="morphe_home_download_instructions_step3">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, এবং &lt;b&gt;APK ইনস্টল করবেন না&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">ডাউনলোড শেষ হওয়ার অপেক্ষা করুন, তারপর &lt;b&gt;APK ইনস্টল করুন&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">ডাউনলোড শেষ হওয়ার পর, আবার এই অ্যাপটি খুলুন</string>
     <string name="morphe_home_download_instructions_step4_mount">মূল APK ইনস্টল করার পর, আবার এই অ্যাপটি খুলুন</string>
-    <string name="morphe_home_download_instructions_note">গুরুত্বপূর্ণ: APK ডাউনলোড করুন কিন্তু আপনার ডিভাইসে এটি ইনস্টল করবেন না।</string>
-    <string name="morphe_home_download_instructions_continue">APKMirror-এ যান</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com-এ চালিয়ে যান</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">আপনি যে APK ডাউনলোড করেছেন সেটি নির্বাচন করুন</string>
     <string name="morphe_home_file_picker_prompt_description">এখন আপনি যে %1$s APK ফাইলটি ডাউনলোড করেছেন সেটি নির্বাচন করুন।</string>
     <string name="morphe_home_file_picker_prompt_open">আমি যে APK ফাইলটি ডাউনলোড করেছি সেটি খুলুন</string>
-    <string name="morphe_home_wrong_package_selected">প্রত্যাশিত প্যাকেজ %1$s কিন্তু পাওয়া গেছে %2$s</string>
-    <string name="morphe_home_any_version">যেকোনো সংস্করণ</string>
     <string name="morphe_home_recommended_version">প্রস্তাবিত সংস্করণ</string>
     <string name="morphe_patcher_selected_version">নির্বাচিত সংস্করণ</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="morphe_patcher_patches_progress">%2$d টির মধ্যে %1$d টি প্যাচ</string>
     <string name="morphe_patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
-    <string name="morphe_patcher_install_dialog_message">প্যাচ করা অ্যাপটি ইনস্টল করবেন?</string>
-    <string name="morphe_patcher_install_conflict_message">একটি প্যাকেজ কনফ্লিক্ট সনাক্ত করা হয়েছে। নতুন সংস্করণ ইনস্টল করার জন্য, আপনাকে প্রথমে অ্যাপটির পূর্ববর্তী সংস্করণ আনইনস্টল করতে হবে।</string>
-    <string name="morphe_patcher_install_ready_message">পূর্ববর্তী সংস্করণটি আনইনস্টল করা হয়েছে। আপনি এখন প্যাচ করা অ্যাপটি ইনস্টল করতে পারেন।</string>
-    <string name="morphe_patcher_install_cancelled_title">ইনস্টলেশন বাতিল করা হয়েছে</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">আবার চেষ্টা করার জন্য ইনস্টল বোতামে ক্লিক করুন</string>
     <string name="morphe_patcher_installing">ইনস্টল করা হচ্ছে…</string>
     <string name="morphe_patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="morphe_patcher_success_title">সব হয়ে গেছে! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">আনপ্যাচড অ্যাপে বাগ ঠিক করা হচ্ছে… 🐞</string>
     <string name="morphe_patcher_message_10">অপেক্ষার যোগ্য দারুণ প্যাচ… ⏳</string>
     <string name="morphe_patcher_message_11">পিক্সেল পালিশ করা হচ্ছে যতক্ষণ না সেগুলো চকচক করে… 💎</string>
-    <string name="morphe_patcher_message_12">ক্যাপ্টেন \"প্যাচিং চলছে\" সাইন বন্ধ না করা পর্যন্ত বসে থাকুন… 💺✈️</string>
+    <string name="morphe_patcher_message_12">প্যাচিং চলাকালীন \"পাইলট পার্চিং চালু\" চিহ্ন নেভে না যাওয়া পর্যন্ত দয়া করে আপনার আসন থেকে না নামাই... 💺✈️</string>
     <string name="morphe_patcher_message_13">আপনার প্যাচ করা অ্যাপ রান্না হচ্ছে, গরম এবং তাজা… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">bytecode এর সাথে নম্রভাবে আলোচনা করা হচ্ছে... 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Morphe প্লাগইনে অ্যাক্সেস নিয়ন্ত্রণ করতে ব্যবহৃত হয়। শুধুমাত্র Morphe-এর এটি আছে।</string>
     <string name="toast_copied_to_clipboard">কপি করা হয়েছে!</string>
     <string name="copy_to_clipboard">ক্লিপবোর্ডে অনুলিপি করুন</string>
-    <string name="dashboard">ড্যাশবোর্ড</string>
     <string name="settings">সেটিংস</string>
     <string name="select_app">একটি অ্যাপ নির্বাচন করুন</string>
     <string name="new_downloader_plugins_notification">নতুন ডাউনলোডার প্লাগইন উপলব্ধ। সেগুলি কনফিগার করতে এখানে ক্লিক করুন।</string>
     <string name="unsupported_architecture_warning">এই ডিভাইসের আর্কিটেকচারে প্যাচিং অসমর্থিত এবং সম্ভবত ব্যর্থ হবে।</string>
     <string name="import_">আমদানি করুন</string>
-    <string name="import_patches">প্যাচ আমদানি করুন</string>
     <string name="file_field_set">নির্বাচিত</string>
     <string name="file_field_not_set">নির্বাচিত নয়</string>
     <string name="field_not_set">সেট করা নেই</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">เลือกใช้ข้อเสนอแนะของชุดเวอร์ชันใดในการดาวน์โหลด APK</string>
     <string name="bundle_version_dialog_default">ডিফল্ট সুপারিশ ব্যবহার করুন</string>
     <string name="bundle_version_dialog_default_subtitle">সবচেয়ে সাধারণ সামঞ্জস্যপূর্ণ সংস্করণ স্বয়ংক্রিয়ভাবে বাছাই করুন।</string>
-    <string name="bundle_version_dialog_option_subtitle">সংস্করণ %1$s ব্যবহার করুন</string>
     <string name="bundle_version_all_versions">সমস্ত সংস্করণ</string>
     <string name="bundle_version_no_version">কোনো প্রস্তাবিত সংস্করণ নেই</string>
-    <string name="bundle_version_suggested_label">প্রস্তাবিত সংস্করণ: %1$s</string>
-    <string name="bundle_version_other_heading">অন্যান্য সমর্থিত সংস্করণ</string>
     <string name="bundle_update_manual_available">আপডেট উপলব্ধ</string>
     <string name="bundle_update_manual_available_with_version">আপডেট উপলব্ধ: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d বান্ডিল প্রক্রিয়াজাত</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">বান্ডিল সাজান</string>
     <string name="bundle_reorder_title">প্যাচ বান্ডিল সাজান</string>
     <string name="bundle_reorder_description">তালিকা এবং প্যাচ নির্বাচন মেনুতে বান্ডিলগুলি কীভাবে উপস্থিত হবে তা সাজাতে হ্যান্ডেলটি টেনে আনুন।</string>
-    <string name="bundle_reorder_move_up">বান্ডিল উপরে সরান</string>
-    <string name="bundle_reorder_move_down">বান্ডিল নিচে সরান</string>
     <string name="bundle_actions_expand">বান্ডিল অ্যাকশন দেখান</string>
     <string name="bundle_actions_collapse">দ্রুত অ্যাকশন লুকান</string>
     <string name="patch_bundle_duplicate_name_error">এই নামের একটি প্যাচ বান্ডিল ইতিমধ্যে বিদ্যমান</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">প্রস্তাবিত সংস্করণ: %1$s</string>
     <string name="bundle_version_dialog_selected_override">নির্বাচিত সংস্করণ: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">নির্বাচিত</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (নির্বাচিত)</string>
     <string name="bundle_version_dialog_other_title">অন্য একটি সমর্থিত সংস্করণ নির্বাচন করুন:</string>
     <string name="bundle_version_dialog_locked_title">সংস্করণ সুরক্ষা সক্রিয় আছে</string>
     <string name="bundle_version_dialog_locked_hint">সেটিংসে যান &gt; অ্যাডভান্সড &gt; সেফগার্ডস এবং বান্ডিল-নির্দিষ্ট সংস্করণগুলি চয়ন করতে \"প্রস্তাবিত অ্যাপ সংস্করণ প্রয়োজন\" (টগল বন্ধ) এবং \"সংস্করণ সামঞ্জস্যপূর্ণতা পরীক্ষা নিষ্ক্রিয় করুন\" (টগল চালু) উভয়ই সেট করুন।</string>
-    <string name="patch_item_description">অ্যাপ্লিকেশন প্যাচ করা শুরু করুন</string>
     <string name="patch_selector_item">প্যাচ নির্বাচন করুন</string>
     <string name="patch_selector_item_description">%d টি প্যাচ নির্বাচন করা হয়েছে</string>
     <string name="no_patches_selected">কোনো প্যাচ নির্বাচন করা হয়নি</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">ইনস্টল করা APK ব্যবহার করে</string>
     <string name="apk_source_local">একটি স্থানীয় APK ফাইল ব্যবহার করে</string>
     <string name="apk_source_downloaded">ডাউনলোড করা APK ব্যবহার করে</string>
-    <string name="legacy_import_failed">লেগাসি সেটিংস আমদানি করা যায়নি</string>
     <string name="auto_updates_dialog_title">আপডেট কনফিগার করুন</string>
     <string name="auto_updates_dialog_description">Morphe কি নিম্নলিখিত উপাদানগুলির জন্য পর্যায়ক্রমে আপডেটের জন্য পরীক্ষা করবে?</string>
     <string name="auto_updates_dialog_patches">Morphe প্যাচ</string>
@@ -246,7 +236,6 @@
     <string name="updates">আপডেট</string>
     <string name="updates_description">আপডেটগুলির জন্য পরীক্ষা করুন এবং পরিবর্তনলগ দেখুন</string>
     <string name="downloads">ডাউনলোড</string>
-    <string name="downloads_description">ডাউনলোডার প্লাগইন এবং ডাউনলোড করা অ্যাপ</string>
     <string name="plugins_help_title">ডাউনলোডার কি?</string>
     <string name="plugins_help_description">একটি ডাউনলোডার হলো একটি প্লাগইন যা URV কে বিভিন্ন উত্স থেকে স্টক APK ডাউনলোড করার অনুমতি দেয়। ডাউনলোড করা APK গুলি নীচের বিভাগে দেখানো হবে। প্যাচিং প্রক্রিয়ার সময়, আপনি একটি ইতিমধ্যে ডাউনলোড করা APK বেছে নিতে পারেন অথবা আপনি একটি প্লাগইনের মাধ্যমে এটি ডাউনলোড করতে পারেন।\n\nসাপোর্ট করা ডাউনলোডার প্লাগইনগুলির তালিকা পাওয়া যাবে</string>
     <string name="import_export">আমদানি এবং রপ্তানি</string>
@@ -255,7 +244,6 @@
     <string name="changelog_loading">চেঞ্জলগ লোড হচ্ছে</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_description">এই আপডেটের সর্বশেষ পরিবর্তনগুলি দেখুন</string>
-    <string name="no_changelogs_found">কোনো চেঞ্জলগ পাওয়া যায়নি</string>
     <string name="advanced">উন্নত</string>
     <string name="advanced_description">এপিআই ইউআরএল, মেমরি সীমা, ডিবাগিং</string>
     <string name="about">সম্পর্কিত</string>
@@ -274,27 +262,18 @@
     <string name="theme_color_picker_title">থিম রঙ</string>
     <string name="theme_color_preview">প্রাকদর্শন</string>
     <string name="theme_color_reset">থিমের রঙ রিসেট করুন</string>
-    <string name="theme_color_presets">থিমের রঙের প্রিসেট</string>
-    <string name="theme_color_presets_description">পটভূমি এবং কার্ডগুলির রঙ পরিবর্তন করতে একটি রঙে ট্যাপ করুন</string>
     <string name="theme_preview_title">থিমের প্রাকদর্শন</string>
     <string name="theme_preview_description">থিমের সেটিংস পরিবর্তন করার সময় তাৎক্ষণিকভাবে আপডেট হয়</string>
     <string name="theme_presets">থিম প্রিসেট</string>
     <string name="theme_presets_description">সিস্টেম, হালকা, অন্ধকার, ম্যাটেরিয়াল ইউ, বা পিওর ব্ল্যাক অনুসরণ করতে অ্যাপটি কীভাবে বেছে নিন</string>
     <string name="theme_preset_default">সিস্টেম অনুসরণ করুন</string>
     <string name="theme_preset_amoled">পিওর ব্ল্যাক</string>
-    <string name="theme_preset_sunset">সানসেট</string>
-    <string name="theme_preset_forest">ফরেস্ট</string>
-    <string name="theme_preset_ocean">ওশান</string>
-    <string name="theme_preset_midnight">মিডনাইট</string>
     <string name="theme_preset_dynamic">মেটেরিয়াল ইউ</string>
     <string name="theme_reset">সমস্ত থিম সেটিংস রিসেট করুন</string>
     <string name="color_channel_red">লাল</string>
     <string name="color_channel_green">সবুজ</string>
     <string name="color_channel_blue">নীল</string>
-    <string name="pure_black_theme">পিওর ব্ল্যাক থিম</string>
-    <string name="pure_black_theme_description">ডার্ক থিমের জন্য পিওর ব্ল্যাক ব্যাকগ্রাউন্ড ব্যবহার করুন</string>
     <string name="theme">থিম</string>
-    <string name="theme_description">লাইট বা ডার্ক থিমের মধ্যে বেছে নিন</string>
     <string name="safeguards">সুরক্ষা</string>
     <string name="patch_compat_check">সংস্করণ সামঞ্জস্য পরীক্ষা অক্ষম করুন</string>
     <string name="patch_compat_check_description">প্যাচগুলি সামঞ্জস্যপূর্ণ অ্যাপ সংস্করণগুলিতে সীমাবদ্ধ করবেন না</string>
@@ -366,10 +345,8 @@
     <string name="export_patch_bundles">প্যাচ বান্ডিল রপ্তানি করুন</string>
     <string name="export_patch_bundles_description">আমদানি করা রিমোট প্যাচ বান্ডিল একটি JSON ফাইলে সংরক্ষণ করুন</string>
     <string name="export_patch_bundles_fail">%s টি প্যাচ বান্ডিল রপ্তানি করা যায়নি</string>
-    <string name="export_patch_bundles_empty">রপ্তানি করার জন্য কোনও প্যাচ বান্ডিল নেই</string>
     <string name="export_patch_bundles_success">%d টি প্যাচ বান্ডিল রপ্তানি করা হয়েছে</string>
     <string name="export_patch_bundles_partial">%1$d টি প্যাচ বান্ডিল রপ্তানি করা হয়েছে। কিছু বান্ডিল রপ্তানি করা যায়নি কারণ সেগুলি স্থানীয়ভাবে যুক্ত করা হয়েছিল।</string>
-    <string name="export_patch_bundles_local_not_supported">রপ্তানি শুধুমাত্র URL থেকে আমদানি করা প্যাচ বান্ডিলগুলির জন্য উপলব্ধ</string>
     <string name="bundle_type_remote">দূরবর্তী</string>
     <string name="bundle_type_local">স্থানীয়</string>
     <string name="bundle_type_preinstalled">প্রি-ইন্সটল করা</string>
@@ -424,12 +401,7 @@
     <string name="patch_selection_collapse_on_toggle_description">আপনি একটি প্যাচ নির্বাচন বা নির্বাচনমুক্ত করার সময় স্বয়ংক্রিয়ভাবে প্যাচ নির্বাচন অ্যাকশন বোতামগুলি লুকান</string>
     <string name="patch_selection_action_order_title">প্যাচ নির্বাচন অ্যাকশন বোতামের ক্রম</string>
     <string name="patch_selection_action_order_description">প্যাচ নির্বাচন অ্যাকশন বোতামগুলির জন্য লেআউট ক্রম চয়ন করুন</string>
-    <string name="patch_selection_action_order_dialog_title">প্যাচ অ্যাকশনগুলি পুনরায় সাজান</string>
-    <string name="patch_selection_action_order_dialog_description">প্যাচ নির্বাচন অ্যাকশন বোতামগুলি কীভাবে প্রদর্শিত হবে তা পরিবর্তন করতে এন্ট্রিগুলি সরান। প্রিভিউ লাইভ আপডেট হয়।</string>
-    <string name="patch_selection_action_order_preview_label">প্রিভিউ</string>
     <string name="patch_selection_action_order_reset">ডিফল্ট ক্রমে রিসেট করুন</string>
-    <string name="patch_selection_action_move_up">ওপরে সরান</string>
-    <string name="patch_selection_action_move_down">নিচে সরান</string>
     <string name="patch_selection_confirm_deselect_bundle_title">বান্ডিলটি ডিসিলেক্ট করবেন?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">%1$s থেকে নির্বাচিত সমস্ত প্যাচ ডিসিলেক্ট করবেন?</string>
     <string name="patch_selection_confirm_deselect_all_title">সমস্ত প্যাচ ডিসিলেক্ট করবেন?</string>
@@ -495,9 +467,6 @@
     <string name="downloader_plugin_delete_apps_description">আপনি কি নির্বাচিত অ্যাপগুলি মুছতে চান?</string>
     <string name="downloader_settings_no_apps">কোন ডাউনলোড করা অ্যাপ পাওয়া যায়নি।</string>
     <string name="search_apps">অ্যাপ অনুসন্ধান করুন…</string>
-    <string name="loading_body">লোড হচ্ছে…</string>
-    <string name="downloading_patches">প্যাচ ডাউনলোড হচ্ছে…</string>
-    <string name="options">অপশন</string>
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
     <string name="edit">সম্পাদনা করুন</string>
@@ -507,7 +476,6 @@
     <string name="patch">প্যাচ</string>
     <string name="select_from_storage">স্টোরেজ থেকে নির্বাচন করুন</string>
     <string name="select_from_storage_description">ফাইল পিকার ব্যবহার করে স্টোরেজ থেকে একটি APK ফাইল নির্বাচন করুন</string>
-    <string name="suggested_version_info">প্রস্তাবিত সংস্করণ: %s</string>
     <string name="type_anything">চালিয়ে যেতে কিছু টাইপ করুন</string>
     <string name="search">প্যাচ খুঁজুন…</string>
     <string name="apply">প্রয়োগ করুন</string>
@@ -547,29 +515,12 @@
     <string name="export_name_format_description">এক্সপোর্ট করা প্যাচ করা অ্যাপগুলির জন্য ডিফল্ট ফাইলের নাম কাস্টমাইজ করুন</string>
     <string name="export_name_format_dialog_title">এক্সপোর্ট ফাইলের নাম ফরম্যাট</string>
     <string name="export_name_format_dialog_supporting">ফাইলের নাম তৈরি করতে নীচের প্লেসহোল্ডারগুলি ব্যবহার করুন। .apk এক্সটেনশনটি অনুপস্থিত থাকলে স্বয়ংক্রিয়ভাবে যুক্ত করা হয়।</string>
-    <string name="export_name_format_preview">প্রিভিউ: %1$s</string>
     <string name="export_name_format_preview_label">প্রিভিউ</string>
     <string name="export_name_format_variables">ভেরিয়েবল</string>
     <string name="export_name_format_reset">ডিফল্টে রিসেট করুন</string>
     <string name="export_name_format_error_blank">ফাইলের নাম ফরম্যাট খালি হতে পারে না।</string>
     <string name="export_name_format_current">বর্তমান প্যাটার্ন: %1$s</string>
     <string name="export_name_format_insert">সন্নিবেশ</string>
-    <string name="export_name_variable_app_name">অ্যাপের নাম</string>
-    <string name="export_name_variable_app_name_description">অ্যাপের ডিসপ্লে নাম দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_package_name">প্যাকেজের নাম</string>
-    <string name="export_name_variable_package_name_description">অ্যাপের প্যাকেজ নাম দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_app_version">অ্যাপের ভার্সন</string>
-    <string name="export_name_variable_app_version_description">অ্যাপের ভার্সন নাম দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_patches_version">প্যাচগুলির ভার্সন</string>
-    <string name="export_name_variable_patches_version_description">প্রয়োগ করা প্যাচ বান্ডিল সংস্করণ দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_bundle_names">প্যাচ বান্ডিলের নাম</string>
-    <string name="export_name_variable_bundle_names_description">প্রয়োগ করা প্যাচ বান্ডিলের নাম দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_manager_version">ম্যানেজারের ভার্সন</string>
-    <string name="export_name_variable_manager_version_description">ম্যানেজারের ভার্সন দিয়ে প্রতিস্থাপিত।</string>
-    <string name="export_name_variable_timestamp">টাইমস্ট্যাম্প</string>
-    <string name="export_name_variable_timestamp_description">বর্তমান সময় দিয়ে প্রতিস্থাপিত (yyyyMMdd-HHmmss)।</string>
-    <string name="export_name_variable_date">তারিখ</string>
-    <string name="export_name_variable_date_description">বর্তমান তারিখ দিয়ে প্রতিস্থাপিত (yyyyMMdd)।</string>
     <string name="debug_logs_export">ডিবাগ লগগুলি রফতানি করুন</string>
     <string name="debug_logs_export_read_failed">লগ পড়তে ব্যর্থ (প্রস্থান কোড %d)</string>
     <string name="debug_logs_export_failed">লগ এক্সপোর্ট করতে ব্যর্থ</string>
@@ -592,31 +543,19 @@
     <string name="app_language">অ্যাপ্লিকেশনের ভাষা</string>
     <string name="language_dialog_title">অ্যাপের ভাষা নির্বাচন করুন</string>
     <string name="language_option_system">ডিভাইস ভাষা ব্যবহার করুন</string>
-    <string name="device">ডিভাইস</string>
-    <string name="device_android_version">Android সংস্করণ</string>
-    <string name="device_model">মডেল</string>
-    <string name="device_architectures">CPU আর্কিটেকচার</string>
-    <string name="device_memory_limit">মেমরি সীমা</string>
     <string name="device_memory_limit_format">%1$dMB (স্বাভাবিক) - %2$dMB (বড়)</string>
     <string name="patches_force_download">সমস্ত প্যাচ বান্ডিল জোর করে ডাউনলোড করুন</string>
     <string name="patches_reset">প্যাচ বান্ডিল রিসেট করুন</string>
-    <string name="patching">প্যাচিং</string>
-    <string name="signing">সাইনিং</string>
-    <string name="storage">স্টোরেজ</string>
     <string name="no_patch_found">কোনো প্যাচ খুঁজে পাওয়া যায়নি। আপনার প্যাচগুলি পরীক্ষা করুন</string>
     <string name="tab_apps">অ্যাপস</string>
     <string name="tab_patches">প্যাচ বান্ডিল</string>
     <string name="tab_profiles">প্যাচ প্রোফাইল</string>
     <string name="delete">মুছুন</string>
     <string name="refresh">রিফ্রেশ</string>
-    <string name="continue_anyways">তবুও চালিয়ে যান</string>
-    <string name="download_another_version">অন্য একটি সংস্করণ ডাউনলোড করুন</string>
-    <string name="download_app">অ্যাপ ডাউনলোড করুন</string>
     <string name="download_apk">APK ফাইল ডাউনলোড করুন</string>
     <string name="patches_download_fail">প্যাচ ডাউনলোড ব্যর্থ হয়েছে: %s</string>
     <string name="patches_replace_fail">%s আমদানি করতে ব্যর্থ হয়েছে</string>
     <string name="no_patched_apps_found">কোনও প্যাচ করা অ্যাপ খুঁজে পাওয়া যায়নি</string>
-    <string name="tap_on_patches">সেগুলি সম্পর্কে আরও তথ্য পেতে প্যাচগুলিতে আলতো চাপুন</string>
     <string name="patches_selected">%s টি প্যাচ বান্ডিল নির্বাচিত</string>
     <string name="patch_profiles_selected">%1$d টি প্যাচ প্রোফাইল নির্বাচিত</string>
     <string name="selected_apps_count">%1$d টি অ্যাপ নির্বাচন করা হয়েছে</string>
@@ -631,7 +570,6 @@
 অনুগ্রহ করে প্রস্তাবিত সংস্করণটি ব্যবহার করুন: %s
 
 তবুও চালিয়ে যেতে, উন্নত সেটিংসে \"প্রস্তাবিত অ্যাপ সংস্করণ প্রয়োজন\" অক্ষম করুন।"</string>
-    <string name="selection_warning_title">ডিফল্ট ব্যবহার বন্ধ করবেন?</string>
     <string name="selection_warning_description">"ডিফল্ট প্যাচ নির্বাচন এবং বিকল্পগুলি ব্যবহার করার পরামর্শ দেওয়া হচ্ছে।
 
 এগুলি পরিবর্তন করলে অপ্রত্যাশিত সমস্যা হতে পারে।
@@ -689,9 +627,6 @@
     <string name="patcher_missing_patch_title">প্যাচ নির্বাচনটির মনোযোগ প্রয়োজন</string>
     <string name="patcher_preflight_missing_patch_remove">অনুপস্থিত প্যাচগুলি সরান</string>
     <string name="patcher_preflight_missing_patch_proceed">তথাপি চালিয়ে যান</string>
-    <string name="patcher_missing_patch_message">"বর্তমান বান্ডিলে নিম্নলিখিত প্যাচগুলি খুঁজে না পাওয়ার কারণে প্যাচিং ব্যর্থ হয়েছে:
-%1$s
-পুনরায় নির্বাচন করুন এবং পুনরায় নির্বাচন করুন (অথবা প্রতিস্থাপন চয়ন করুন) পুনরায় চেষ্টা করার আগে।"</string>
     <string name="patcher_preflight_missing_patch_message">"এসে প্যাচেসগুলি বর্তমান বর্তমান বাণ্ডলে মেলে না:
 %1$s
 আপনি আত্মনাইকভাবে তা জুনে করে চলবেন, নির্বাচন সম্পাদন করে কাচরে নির্বাচন করুন ও সামনে চলে যান।"</string>
@@ -700,7 +635,6 @@
     <string name="patch_selector_missing_patch_message">"এই প্যাচগুলি পুনরায় নির্বাচন করতে হবে:
 %1$s
 আবার সক্ষম করুন (অথবা বিকল্পগুলি বাছাই করুন) এবং তারপরে আবার প্যাচ করার চেষ্টা করুন।"</string>
-    <string name="delete_profile_confirmation">\"%1$s\" মুছবেন?</string>
     <string name="patch_profile_delete_multiple_dialog_description">নির্বাচিত প্যাচ প্রোফাইলগুলি মুছবেন?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d টি প্যাচ</item>
@@ -710,26 +644,18 @@
         <item quantity="one">%d টি বান্ডিল</item>
         <item quantity="other">%d টি বান্ডিল</item>
     </plurals>
-    <string name="universal_patch_warning_description">"সর্বজনীন প্যাচগুলির আরও সাধারণ ব্যবহার রয়েছে এবং নির্দিষ্ট অ্যাপগুলিকে লক্ষ্য করে প্যাচগুলির মতো নির্ভরযোগ্যভাবে কাজ করে না। সেগুলি ব্যবহার করার সময় আপনি সমস্যার সম্মুখীন হতে পারেন।
-
-আপনি সর্বজনীন প্যাচগুলি ব্যবহার করার আগে উন্নত সেটিংসে \"সর্বজনীন প্যাচগুলি দেখান এবং ব্যবহার করার অনুমতি দিন\" চালু করতে হবে।"</string>
     <string name="this_version">এই সংস্করণ</string>
     <string name="universal">যেকোনো অ্যাপ</string>
     <string name="search_patches">প্যাচ খুঁজুন</string>
     <string name="app_version_not_compatible">"এই প্যাচটি নির্বাচিত অ্যাপ সংস্করণের (%1$s) সাথে সামঞ্জস্যপূর্ণ নয়।
 
 এটি কেবল নিম্নলিখিত সংস্করণের সাথে সামঞ্জস্যপূর্ণ: %2$s।"</string>
-    <string name="continue_with_version">এই সংস্করণ দিয়ে চালিয়ে যাবেন?</string>
-    <string name="version_not_compatible">সব প্যাচ কি এই সংস্করণের (%s) সাথে সামঞ্জস্যপূর্ণ নয়। আপনি কি তবুও চালিয়ে যেতে চান?</string>
-    <string name="download_application">অ্যাপ ডাউনলোড করবেন?</string>
-    <string name="app_not_installed">আপনি যে অ্যাপটি নির্বাচন করেছেন তা ইনস্টল করা নেই। আপনি কি এটি ডাউনলোড করতে চান?</string>
     <string name="failed_to_load_apk">APK লোড করা যায়নি</string>
     <string name="loading">লোড হচ্ছে…</string>
     <string name="not_installed">ইনস্টল করা নেই</string>
     <string name="installed">ইনস্টল করা হয়েছে</string>
     <string name="app_info">অ্যাপ তথ্য</string>
     <string name="uninstall">আনইনস্টল</string>
-    <string name="unpatch">আনপ্যাচ</string>
     <string name="repatch">রিপ্যাচ</string>
     <string name="install_type">ইনস্টলেশনের ধরণ</string>
     <string name="package_name">প্যাকেজের নাম</string>
@@ -740,7 +666,6 @@
     <string name="applied_patches_empty">এই অ্যাপের জন্য কোনো প্যাচ রেকর্ড করা নেই</string>
     <string name="applied_patches_bundle_missing">বান্ডিল মেটাডেটা উপলব্ধ নেই। সংরক্ষিত প্যাচের নাম দেখানো হচ্ছে।</string>
     <string name="no_patch_bundles_tracked">এই অ্যাপের জন্য কোনো প্যাচ বান্ডিল ট্র্যাক করা নেই</string>
-    <string name="default_install">ডিফল্ট</string>
     <string name="mount_install">রুটেড মাউন্ট ইনস্টলার</string>
     <string name="mounted">মাউন্ট করা</string>
     <string name="unmounted">আনমাউন্ট করা</string>
@@ -756,7 +681,6 @@
     <string name="failed_to_unmount">আনমাউন্ট করতে ব্যর্থ: %s</string>
     <string name="unpatch_app">অ্যাপ আনপ্যাচ করবেন?</string>
     <string name="unpatch_description">আপনি কি নিশ্চিত যে আপনি এই অ্যাপটি আনপ্যাচ করতে চান?</string>
-    <string name="downloader_invalid_version">ডাউনলোডার সঠিক সংস্করণ আনেনি</string>
     <string name="downloader_app_not_found">ডাউনলোডার অ্যাপটি খুঁজে পায়নি</string>
     <string name="downloader_error">ডাউনলোডার ত্রুটি: %s</string>
     <string name="downloader_no_plugins_installed">কোন ডাউনলোডার ইনস্টল করা নেই।</string>
@@ -777,7 +701,6 @@
     <string name="path_selector_files">ফাইল</string>
     <string name="show_password_field">পাসওয়ার্ড দেখান</string>
     <string name="hide_password_field">পাসওয়ার্ড লুকান</string>
-    <string name="installer">ইনস্টলার</string>
     <string name="installer_primary_title">প্রাথমিক ইনস্টলার</string>
     <string name="installer_primary_description">প্যাচযুক্ত অ্যাপ ইনস্টল করার সময় এটি প্রথম ব্যবহৃত হয়।</string>
     <string name="installer_fallback_title">ফলব্যাক ইনস্টলার</string>
@@ -856,7 +779,6 @@
     <string name="install_app_fail_title">ইনস্টল ব্যর্থ হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
     <string name="mount_app_fail_title">মাউন্ট ব্যর্থ হয়েছে</string>
-    <string name="mount_app_fail">অ্যাপ মাউন্ট করতে ব্যর্থ: %1$s</string>
     <string name="install_timeout_message">ইনস্টলেশন শেষ হয়নি। সিস্টেম ইনস্টলার ডায়ালগটি পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
     <string name="reinstall_app_fail">অ্যাপ পুনরায় ইনস্টল করতে ব্যর্থ: %s</string>
     <string name="uninstall_app_fail">অ্যাপ আনইনস্টল করতে ব্যর্থ: %s</string>
@@ -875,16 +797,11 @@
     <string name="install_saved_app">ইনস্টল করুন</string>
     <string name="remount_saved_app">পুনরায় মাউন্ট করুন</string>
     <string name="update_saved_app">আপডেট</string>
-    <string name="installing_saved_app">সংরক্ষিত অ্যাপ ইনস্টল করা হচ্ছে…</string>
     <string name="saved_app_install_success">সংরক্ষিত অ্যাপ ইনস্টল করা হয়েছে</string>
     <string name="saved_app_install_failed">সংরক্ষিত অ্যাপ ইনস্টল করতে ব্যর্থ</string>
     <string name="saved_app_uninstall_title">ইনস্টল করা কপি আনইনস্টল করবেন?</string>
-    <string name="saved_app_unmount_title">ইনস্টল করা কপি আনমাউন্ট করবেন?</string>
     <string name="saved_app_uninstall_description">এটি কেবল ইনস্টল করা সংস্করণটি সরিয়ে দেয়। আপনার সংরক্ষিত APK অক্ষত থাকবে।</string>
-    <string name="saved_app_unmount_description">এই প্যাচযুক্ত APK আনমাউন্ট হচ্ছে। আপনার সংরক্ষিত APK অক্ষত থাকবে।</string>
     <string name="saved_app_install_missing">সংরক্ষিত APK খুঁজে পাওয়া যায়নি</string>
-    <string name="delete_saved_copy">সংরক্ষিত কপি মুছুন</string>
-    <string name="sign_fail">APK স্বাক্ষর করতে ব্যর্থ: %s</string>
     <string name="save_logs">লগ সংরক্ষণ করুন</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইনটি চালিয়ে যাওয়ার জন্য ব্যবহারকারীর মিথস্ক্রিয়া প্রয়োজন।</string>
     <string name="select_install_type">ইনস্টলেশনের ধরন নির্বাচন করুন</string>
@@ -892,7 +809,6 @@
     <string name="patcher_step_load_patches">প্যাচ লোড হচ্ছে</string>
     <string name="patcher_step_unpack">APK ফাইল পড়া হচ্ছে</string>
     <string name="patcher_step_prepare_split_apk">স্প্লিট APK মার্জ করুন</string>
-    <string name="patcher_step_merge_not_required">স্প্লিট মার্জ করার প্রয়োজন নেই</string>
     <string name="patcher_step_group_patching">প্যাচিং</string>
     <string name="patcher_step_group_saving">সংরক্ষণ</string>
     <string name="patcher_step_write_patched">প্যাচযুক্ত APK ফাইল লেখা হচ্ছে</string>
@@ -930,14 +846,9 @@
     <string name="less">কম</string>
     <string name="continue_">এগিয়ে যান</string>
     <string name="dismiss">বাতিল করুন</string>
-    <string name="permanent_dismiss">এটি আবার দেখাবেন না</string>
-    <string name="website">ওয়েবসাইট</string>
     <string name="patch_bundle_urls">প্যাচ বান্ডিল আমদানি পান</string>
-    <string name="contact">যোগাযোগ</string>
     <string name="version">সংস্করণ</string>
     <string name="published">প্রকাশিত</string>
-    <string name="submit_feedback">সমস্যা বা মতামত জমা দিন</string>
-    <string name="submit_feedback_description">এই অ্যাপ্লিকেশনটি উন্নত করতে আমাদের সহায়তা করুন</string>
     <string name="developer_options">ডেভেলপার বিকল্প</string>
     <string name="developer_options_description">সমস্যা ডিবাগ করার জন্য বিকল্প</string>
     <string name="patches_update_success">আপডেট সফল</string>
@@ -952,12 +863,7 @@
 
 এর মূলে ওপেন-সোর্স, Morphe ভবিষ্যৎ উদ্ভাবনকে চালিত করার জন্য কমিউনিটির প্রতিক্রিয়া এবং অবদানের উপর নির্ভর করে"</string>
     <string name="here">এখানে।</string>
-    <string name="developer_options_enabled">ডেভেলপার অপশন সক্ষম করা হয়েছে</string>
-    <string name="developer_options_taps">%d বার ট্যাপ বাকি</string>
-    <string name="developer_options_already_enabled">ডেভেলপার অপশন ইতিমধ্যেই সক্ষম করা আছে</string>
     <string name="update_available">একটি আপডেট উপলব্ধ</string>
-    <string name="current_version">বর্তমান সংস্করণ: %s</string>
-    <string name="new_version">নতুন সংস্করণ: %s</string>
     <string name="ready_to_install_update">আপডেট ইনস্টল করার জন্য প্রস্তুত</string>
     <string name="update_completed">আপডেট ইনস্টল করা হয়েছে</string>
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
@@ -983,14 +889,12 @@
     <string name="hours_ago">%s ঘন্টা আগে</string>
     <string name="days_ago">%s দিন আগে</string>
     <string name="invalid_date">অবৈধ তারিখ</string>
-    <string name="disable_battery_optimization">ব্যাটারি অপ্টিমাইজেশন অক্ষম করুন</string>
     <string name="input_dialog_value_invalid">অবৈধ মান</string>
     <string name="option_required">এই বিকল্পটি আবশ্যক</string>
     <string name="required_options_screen">প্রয়োজনীয় বিকল্প</string>
     <string name="failed_to_check_updates">আপডেটগুলি পরীক্ষা করতে ব্যর্থ: %s</string>
     <string name="no_update_available">কোনও আপডেট উপলব্ধ নেই</string>
     <string name="update_check">আপডেটগুলির জন্য পরীক্ষা করা হচ্ছে...</string>
-    <string name="dismiss_temporary">এখন নয়</string>
     <string name="update_available_dialog_description">Morphe (%s) এর একটি নতুন সংস্করণ উপলব্ধ।</string>
     <string name="failed_to_download_update">আপডেট ডাউনলোড করতে ব্যর্থ: %s</string>
     <string name="download">ডাউনলোড</string>
@@ -1047,5 +951,4 @@
     <string name="failed_to_import_keystore">কীস্টোর আমদানি করতে ব্যর্থ</string>
     <string name="export">রপ্তানি করুন</string>
     <string name="confirm">নিশ্চিত করুন</string>
-    <string name="saved_app_install_cancelled">ইনস্টলেশন বাতিল করা হয়েছে</string>
 </resources>

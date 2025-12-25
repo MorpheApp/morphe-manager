@@ -2,13 +2,24 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Patch-bundel</string>
-    <string name="morphe_home_greeting_1">Welke app wil je patchen?</string>
-    <string name="morphe_home_greeting_2">Klaar om YouTube weer legendarisch te maken?</string>
-    <string name="morphe_home_greeting_3">Riemen vast, het is patchtijd</string>
-    <string name="morphe_home_greeting_4">Nog een dag, nog een advertentieblokkerend meesterwerk</string>
-    <string name="morphe_home_greeting_5">Wil je advertenties kijken? Ik ook niet</string>
-    <string name="morphe_home_greeting_6">Laat ons uw apps zo gedragen</string>
-    <string name="morphe_home_greeting_7">Vandaag’s voorspelling: 100% kans op repareren</string>
+    <string name="morphe_home_greeting_1">Welke app wilt u patchen? 🛠️</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Klaar om YouTube weer legendarisch te maken? 🔥📺</string>
+    <!-- Energetic, light-hearted joke to build excitement -->
+    <string name="morphe_home_greeting_3">Maak je maar klaar, het is patchentijd 🚀</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Weer een dag, weer een meesterwerk zonder reclames 😌🚫</string>
+    <string name="morphe_home_greeting_5">Wil je reclames zien? Ik ook niet 🙃❌</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Laten we je apps gedragen 😏📱</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Verwacht vandaag: 100% kans op patches 🌩️🧩</string>
+    <!-- Self-aware humorous greeting, breaking the fourth wall -->
+    <string name="morphe_home_greeting_8">Patch verantwoordelijk... of niet 😄⚙️</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Apps redden van zichzelf sinds vandaag 🦸‍♂️✨</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Aangedreven door cafeïne en goede patches ☕🧠</string>
     <string name="morphe_home_bundle_type_api">API-bundel</string>
     <string name="morphe_home_update_error">Update mislukt</string>
     <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
@@ -22,35 +33,29 @@
     <string name="morphe_home_date_added">Toegevoegd</string>
     <string name="morphe_home_date_updated">Bijgewerkt</string>
     <string name="morphe_home_check_updates">Controleren</string>
-    <string name="morphe_home_bundle_update_completed">Update voltooid</string>
     <string name="morphe_home_unknown">Onbekend</string>
     <string name="morphe_home_timeline">Updategeschiedenis</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb ik versie %2$s (ongepatcht) nodig.</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
     <string name="morphe_home_apk_availability_yes">Ja, ik heb het</string>
     <string name="morphe_home_apk_availability_no">Nee, help me het te vinden</string>
-    <string name="morphe_home_apk_availability_dialog_description">Om %1$s te patchen, heb ik versie %2$s (ongepatched) nodig.</string>
-    <string name="morphe_home_apk_availability_dialog_info">Zorg ervoor dat je de APK downloadt, maar installeer deze NIET.</string>
+    <string name="morphe_home_apk_availability_dialog_description">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Download originele APK van APKMirror</string>
-    <string name="morphe_home_download_instructions_description">Volg deze stappen om versie %2$s van %1$s van APKMirror.com te downloaden:</string>
+    <string name="morphe_home_download_instructions_title">Download de originele APK</string>
     <string name="morphe_home_download_instructions_steps_title">Instructies:</string>
-    <string name="morphe_home_download_instructions_step1">Druk op Doorgaan om de website APKMirror.com te openen</string>
+    <string name="morphe_home_download_instructions_step1">Druk op de knop \'Doorgaan naar APKMirror.com\' hieronder</string>
     <string name="morphe_home_download_instructions_step2_part1">Scroll naar beneden op de webpagina en druk op</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Klik op download op de website, en niet hier 😊</string>
-    <string name="morphe_home_download_instructions_step3">Wacht tot de download voltooid is en installeer de APK niet</string>
-    <string name="morphe_home_download_instructions_step3_mount">Wacht tot de download is voltooid en installeer de APK</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
+    <string name="morphe_home_download_instructions_step3">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK niet&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">Wacht tot de download is voltooid, en &lt;b&gt;installeer de APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Nadat de download is voltooid, open je deze app opnieuw</string>
     <string name="morphe_home_download_instructions_step4_mount">Nadat de oorspronkelijke APK is geïnstalleerd, open je deze app opnieuw</string>
-    <string name="morphe_home_download_instructions_note">Belangrijk: Download de APK, maar installeer deze niet op je apparaat.</string>
-    <string name="morphe_home_download_instructions_continue">Ga verder naar APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Doorgaan naar APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selecteer de APK die je hebt gedownload</string>
     <string name="morphe_home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat je zojuist hebt gedownload.</string>
     <string name="morphe_home_file_picker_prompt_open">Open gedownloade APK-bestand</string>
-    <string name="morphe_home_wrong_package_selected">Verwacht pakket %1$s maar kreeg %2$s</string>
-    <string name="morphe_home_any_version">elke versie</string>
     <string name="morphe_home_recommended_version">Aanbevolen versie</string>
     <string name="morphe_patcher_selected_version">Geselecteerde versie</string>
     <!-- Root Mode -->
@@ -63,11 +68,6 @@
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="morphe_patcher_patches_progress">%2$d / %1$d patches</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
-    <string name="morphe_patcher_install_dialog_message">Gepatched app installeren?</string>
-    <string name="morphe_patcher_install_conflict_message">Er is een pakketconflict gedetecteerd. Om de nieuwe versie te installeren, moet u eerst de vorige versie van de app verwijderen.</string>
-    <string name="morphe_patcher_install_ready_message">De vorige versie is verwijderd. U kunt nu de gepatched app installeren.</string>
-    <string name="morphe_patcher_install_cancelled_title">Installatie geannuleerd</string>
-    <string name="morphe_patcher_install_cancelled_subtitle">Klik op de installatieknop om het opnieuw te proberen</string>
     <string name="morphe_patcher_installing">Installeren...</string>
     <string name="morphe_patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
     <string name="morphe_patcher_success_title">Klaar! 🎉</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Bugs aan het repareren in de ongepatchte app… 🐞</string>
     <string name="morphe_patcher_message_10">Geweldige patches zijn het wachten waard… ⏳</string>
     <string name="morphe_patcher_message_11">Pixels aan het polijsten tot ze glimmen… 💎</string>
-    <string name="morphe_patcher_message_12">Blijf zitten tot de piloot het \“Patching in progress\” teken uitschakelt… 💺✈️</string>
+    <string name="morphe_patcher_message_12">Blijf zitten totdat de kapitein het \"Patching in progress\"-teken uitschakelt... 💺✈️</string>
     <string name="morphe_patcher_message_13">Je gepatchte app aan het bereiden, heet en vers… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Beleefd onderhandelen met bytecode… 🤝</string>
@@ -150,13 +150,11 @@
     <string name="plugin_host_permission_description">Wordt gebruikt om toegang tot Morphe-plugins te beheren. Alleen Morphe heeft deze.</string>
     <string name="toast_copied_to_clipboard">Gekopieerd!</string>
     <string name="copy_to_clipboard">Kopiëren naar klembord</string>
-    <string name="dashboard">Dashboard</string>
     <string name="settings">Instellingen</string>
     <string name="select_app">Selecteer een app</string>
     <string name="new_downloader_plugins_notification">Nieuwe downloader-plugins beschikbaar. Klik hier om ze te configureren.</string>
     <string name="unsupported_architecture_warning">Patchen op deze apparaatarchitectuur wordt niet ondersteund en zal hoogstwaarschijnlijk mislukken.</string>
     <string name="import_">Importeren</string>
-    <string name="import_patches">Patches importeren</string>
     <string name="file_field_set">Geselecteerd</string>
     <string name="file_field_not_set">Niet geselecteerd</string>
     <string name="field_not_set">Niet ingesteld</string>
@@ -187,11 +185,8 @@
     <string name="bundle_version_dialog_description">Kies welk bundle’s voorstel je wilt gebruiken toen je een APK downloads.</string>
     <string name="bundle_version_dialog_default">Gebruik standaardaanbeveling</string>
     <string name="bundle_version_dialog_default_subtitle">Selecteer automatisch de meest voorkomende compatibele versie.</string>
-    <string name="bundle_version_dialog_option_subtitle">Gebruik versie %1$s</string>
     <string name="bundle_version_all_versions">Alle versies</string>
     <string name="bundle_version_no_version">Geen aanbevolen versie</string>
-    <string name="bundle_version_suggested_label">Voorgestelde versie: %1$s</string>
-    <string name="bundle_version_other_heading">Andere ondersteunde versies</string>
     <string name="bundle_update_manual_available">Update beschikbaar</string>
     <string name="bundle_update_manual_available_with_version">Update beschikbaar: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d bundels verwerkt</string>
@@ -199,8 +194,6 @@
     <string name="bundle_reorder">Bundels organiseren</string>
     <string name="bundle_reorder_title">Patchbundels organiseren</string>
     <string name="bundle_reorder_description">Sleep de greep om de volgorde te bepalen waarin bundels in de lijst en het patchselectiemenu worden weergegeven.</string>
-    <string name="bundle_reorder_move_up">Bundel omhoog verplaatsen</string>
-    <string name="bundle_reorder_move_down">Bundel omlaag verplaatsen</string>
     <string name="bundle_actions_expand">Bundelacties weergeven</string>
     <string name="bundle_actions_collapse">Snelle acties verbergen</string>
     <string name="patch_bundle_duplicate_name_error">Een patchbundel met deze naam bestaat al</string>
@@ -221,11 +214,9 @@
     <string name="bundle_version_dialog_recommended">Voorgestelde versie: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Geselecteerde versie: %1$s</string>
     <string name="bundle_version_dialog_selected_indicator">Geselecteerd</string>
-    <string name="bundle_version_dialog_selected_indicator_inline">%1$s (geselecteerd)</string>
     <string name="bundle_version_dialog_other_title">Selecteer een andere ondersteunde versie:</string>
     <string name="bundle_version_dialog_locked_title">Versiebeveiligingen zijn ingeschakeld</string>
     <string name="bundle_version_dialog_locked_hint">Ga naar Instellingen &gt; Geavanceerd &gt; Beveiligingen en stel zowel \"Voorgestelde app-versie vereisen\" (uitschakelen) als \"Compatibiliteitscontrole versie uitschakelen\" (inschakelen) in om bundel-specifieke versies te kiezen.</string>
-    <string name="patch_item_description">Begin met het patchen van de applicatie</string>
     <string name="patch_selector_item">Selecteer patches</string>
     <string name="patch_selector_item_description">%d patches geselecteerd</string>
     <string name="no_patches_selected">Geen patches geselecteerd</string>
@@ -236,7 +227,6 @@
     <string name="apk_source_installed">Gebruik van geïnstalleerde APK</string>
     <string name="apk_source_local">Gebruik van een lokale APK-bestand</string>
     <string name="apk_source_downloaded">Gebruik van gedownloade APK</string>
-    <string name="legacy_import_failed">Kan oude instellingen niet importeren</string>
     <string name="auto_updates_dialog_title">Updates configureren</string>
     <string name="auto_updates_dialog_description">Wil je dat Morphe periodiek controleert op updates voor de volgende onderdelen?</string>
     <string name="auto_updates_dialog_patches">Morphe Meldingen</string>
@@ -246,7 +236,6 @@
     <string name="updates">Updates</string>
     <string name="updates_description">Controleren op updates en wijzigingslogboek bekijken</string>
     <string name="downloads">Downloads</string>
-    <string name="downloads_description">Downloader-plugins en gedownloade apps</string>
     <string name="plugins_help_title">Wat is een downloader?</string>
     <string name="plugins_help_description">Een downloader is een plugin waarmee URV stock APK\'s uit verschillende bronnen kan downloaden. De gedownloade APK\'s worden weergegeven in het onderste gedeelte. Tijdens het patchproces kun je een reeds gedownloade APK kiezen of je kunt deze downloaden via een plugin.
 
@@ -257,7 +246,6 @@ De lijst met ondersteunde downloader-plugins vind je</string>
     <string name="changelog_loading">Changelog laden</string>
     <string name="changelog_download_fail">Fout bij het downloaden van de wijzigingslogboek: %s</string>
     <string name="changelog_description">Bekijk de laatste wijzigingen in deze update</string>
-    <string name="no_changelogs_found">Geen wijzigingslogboeken gevonden</string>
     <string name="advanced">Geavanceerd</string>
     <string name="advanced_description">API URL, geheugenlimiet, debuggen</string>
     <string name="about">Over</string>
@@ -276,27 +264,18 @@ De lijst met ondersteunde downloader-plugins vind je</string>
     <string name="theme_color_picker_title">Themakleur</string>
     <string name="theme_color_preview">Voorbeeld</string>
     <string name="theme_color_reset">Themakleur opnieuw instellen</string>
-    <string name="theme_color_presets">Themakleur-voorinstellingen</string>
-    <string name="theme_color_presets_description">Tik op een kleur om achtergronden en kaarten opnieuw in te kleuren</string>
     <string name="theme_preview_title">Themavoorbeeld</string>
     <string name="theme_preview_description">Wordt direct bijgewerkt bij het wijzigen van de thema-instellingen</string>
     <string name="theme_presets">Themavoorinstellingen</string>
     <string name="theme_presets_description">Kies hoe de app het systeem, licht, donker, Material You of puur zwart volgt</string>
     <string name="theme_preset_default">Systeem volgen</string>
     <string name="theme_preset_amoled">Puur zwart</string>
-    <string name="theme_preset_sunset">Zonsondergang</string>
-    <string name="theme_preset_forest">Bos</string>
-    <string name="theme_preset_ocean">Oceaan</string>
-    <string name="theme_preset_midnight">Middernacht</string>
     <string name="theme_preset_dynamic">Material You</string>
     <string name="theme_reset">Alle thema-instellingen opnieuw instellen</string>
     <string name="color_channel_red">Rood</string>
     <string name="color_channel_green">Groen</string>
     <string name="color_channel_blue">Blauw</string>
-    <string name="pure_black_theme">Puurnachtema</string>
-    <string name="pure_black_theme_description">Gebruik pure zwarte achtergronden voor het donkere thema</string>
     <string name="theme">Thema</string>
-    <string name="theme_description">Kies tussen een licht of donker thema</string>
     <string name="safeguards">Veiligheidsmaatregelen</string>
     <string name="patch_compat_check">Controle op versiecompatibiliteit uitschakelen</string>
     <string name="patch_compat_check_description">Beperk patches niet tot compatibele app-versies</string>
@@ -368,10 +347,8 @@ U kunt de eerder geïnstalleerde apps van deze bron niet meer bijwerken."</strin
     <string name="export_patch_bundles">Patchbundels exporteren</string>
     <string name="export_patch_bundles_description">Geïmporteerde externe patchbundels opslaan in een JSON-bestand</string>
     <string name="export_patch_bundles_fail">Kon patchbundels niet exporteren: %s</string>
-    <string name="export_patch_bundles_empty">Er zijn geen patchbundels om te exporteren</string>
     <string name="export_patch_bundles_success">Geëxporteerd %d patchbundels</string>
     <string name="export_patch_bundles_partial">Geëxporteerde %1$d patchbundels. Sommige bundels konden niet worden geëxporteerd omdat ze lokaal waren toegevoegd.</string>
-    <string name="export_patch_bundles_local_not_supported">Exporteren is alleen beschikbaar voor patchbundels die zijn geïmporteerd uit URL\'s</string>
     <string name="bundle_type_remote">Extern</string>
     <string name="bundle_type_local">Lokaal</string>
     <string name="bundle_type_preinstalled">Vooraf geïnstalleerd</string>
@@ -426,12 +403,7 @@ U kunt de eerder geïnstalleerde apps van deze bron niet meer bijwerken."</strin
     <string name="patch_selection_collapse_on_toggle_description">Verberg automatisch de knoppen voor patchselectie telkens wanneer u een patch selecteert of deselecteert</string>
     <string name="patch_selection_action_order_title">Volgorde van knoppen voor patchselectie</string>
     <string name="patch_selection_action_order_description">Kies de lay-outvolgorde voor de patchselectie-actieknoppen</string>
-    <string name="patch_selection_action_order_dialog_title">Patchacties opnieuw ordenen</string>
-    <string name="patch_selection_action_order_dialog_description">Verplaats de vermeldingen om te wijzigen hoe de patchselectie-actieknoppen worden weergegeven. Het voorbeeld wordt live bijgewerkt.</string>
-    <string name="patch_selection_action_order_preview_label">Voorbeeld</string>
     <string name="patch_selection_action_order_reset">Terugzetten naar standaardvolgorde</string>
-    <string name="patch_selection_action_move_up">Omhoog verplaatsen</string>
-    <string name="patch_selection_action_move_down">Omlaag verplaatsen</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Bundel deselecteren?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Alle patches die zijn geselecteerd uit %1$s, deselecteren?</string>
     <string name="patch_selection_confirm_deselect_all_title">Alle patches deselecteren?</string>
@@ -497,9 +469,6 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="downloader_plugin_delete_apps_description">Weet u zeker dat u de geselecteerde apps wilt verwijderen?</string>
     <string name="downloader_settings_no_apps">Geen gedownloade apps gevonden.</string>
     <string name="search_apps">Apps zoeken…</string>
-    <string name="loading_body">Laden…</string>
-    <string name="downloading_patches">Patches downloaden…</string>
-    <string name="options">Opties</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="edit">Bewerken</string>
@@ -509,7 +478,6 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="patch">Patch</string>
     <string name="select_from_storage">Selecteren uit opslag</string>
     <string name="select_from_storage_description">Selecteer een APK-bestand uit opslag met de bestandskiezer</string>
-    <string name="suggested_version_info">Voorgestelde versie: %s</string>
     <string name="type_anything">Typ iets om door te gaan</string>
     <string name="search">Zoek naar patches…</string>
     <string name="apply">Toepassen</string>
@@ -549,29 +517,12 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="export_name_format_description">Pas de standaardbestandsnaam aan voor geëxporteerde gepatchte apps</string>
     <string name="export_name_format_dialog_title">Indeling van exportbestandsnaam</string>
     <string name="export_name_format_dialog_supporting">Gebruik de onderstaande plaatsaanduidingen om een bestandsnaam te maken. De .apk-extensie wordt automatisch toegevoegd als deze ontbreekt.</string>
-    <string name="export_name_format_preview">Voorbeeld: %1$s</string>
     <string name="export_name_format_preview_label">Voorbeeld</string>
     <string name="export_name_format_variables">Variabelen</string>
     <string name="export_name_format_reset">Terugzetten naar standaardinstellingen</string>
     <string name="export_name_format_error_blank">Bestandsnaamindeling mag niet leeg zijn.</string>
     <string name="export_name_format_current">Huidig patroon: %1$s</string>
     <string name="export_name_format_insert">Invoegen</string>
-    <string name="export_name_variable_app_name">Appnaam</string>
-    <string name="export_name_variable_app_name_description">Vervangen door de weergavenaam van de app.</string>
-    <string name="export_name_variable_package_name">Pakketnaam</string>
-    <string name="export_name_variable_package_name_description">Vervangen door de pakketnaam van de app.</string>
-    <string name="export_name_variable_app_version">App-versie</string>
-    <string name="export_name_variable_app_version_description">Vervangen door de versienaam van de app.</string>
-    <string name="export_name_variable_patches_version">Patchversie</string>
-    <string name="export_name_variable_patches_version_description">Vervangen door de toegepaste patchbundelversie.</string>
-    <string name="export_name_variable_bundle_names">Patchpakketnamen</string>
-    <string name="export_name_variable_bundle_names_description">Vervangen door de toegepaste patchbundelnaam.</string>
-    <string name="export_name_variable_manager_version">Managerversie</string>
-    <string name="export_name_variable_manager_version_description">Vervangen door de managerversie.</string>
-    <string name="export_name_variable_timestamp">Tijdstempel</string>
-    <string name="export_name_variable_timestamp_description">Vervangen door de huidige tijd (jjjjmmdd-uu:mm:ss).</string>
-    <string name="export_name_variable_date">Datum</string>
-    <string name="export_name_variable_date_description">Vervangen door de huidige datum (jjjjmmdd).</string>
     <string name="debug_logs_export">Foutopsporingslogboeken exporteren</string>
     <string name="debug_logs_export_read_failed">Kon er niet voor zorgen dat de logboeken werden gelezen (exit code %d)</string>
     <string name="debug_logs_export_failed">Mislukt om logboeken te exporteren</string>
@@ -594,31 +545,19 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="app_language">App-taal</string>
     <string name="language_dialog_title">Kies app-taal</string>
     <string name="language_option_system">Apparaattaal gebruiken</string>
-    <string name="device">Apparaat</string>
-    <string name="device_android_version">Android-versie</string>
-    <string name="device_model">Model</string>
-    <string name="device_architectures">CPU-architecturen</string>
-    <string name="device_memory_limit">Geheugenlimieten</string>
     <string name="device_memory_limit_format">%1$dMB (Normaal) - %2$dMB (Groot)</string>
     <string name="patches_force_download">Alle patchbundels geforceerd downloaden</string>
     <string name="patches_reset">Patchbundels opnieuw instellen</string>
-    <string name="patching">Patchen</string>
-    <string name="signing">Ondertekenen</string>
-    <string name="storage">Opslag</string>
     <string name="no_patch_found">Er kunnen geen patches worden gevonden. Controleer uw patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patchbundels</string>
     <string name="tab_profiles">Patchprofielen</string>
     <string name="delete">Verwijderen</string>
     <string name="refresh">Vernieuwen</string>
-    <string name="continue_anyways">Toch doorgaan</string>
-    <string name="download_another_version">Download een andere versie</string>
-    <string name="download_app">App downloaden</string>
     <string name="download_apk">APK-bestand downloaden</string>
     <string name="patches_download_fail">Kan patches niet downloaden: %s</string>
     <string name="patches_replace_fail">Kan patches niet importeren: %s</string>
     <string name="no_patched_apps_found">Geen gepatchte apps gevonden</string>
-    <string name="tap_on_patches">Tik op de patches voor meer informatie over hen</string>
     <string name="patches_selected">%s patchbundel geselecteerd</string>
     <string name="patch_profiles_selected">%1$d patchprofiel geselecteerd</string>
     <string name="selected_apps_count">%1$d app geselecteerd</string>
@@ -632,7 +571,6 @@ Handtekening (SHA-256): %2$s"</string>
 Gebruik de voorgestelde versie: %s
 
 Om toch door te gaan, schakelt u \"Vereis voorgestelde app-versie\" uit in de geavanceerde instellingen."</string>
-    <string name="selection_warning_title">Stoppen met het gebruik van standaardinstellingen?</string>
     <string name="selection_warning_description">"Het wordt aanbevolen om de standaard patchselectie en opties te gebruiken. Het wijzigen ervan kan onverwachte problemen veroorzaken.
 
 U moet \"Wijzigen van patchselectie en opties toestaan\" inschakelen in de geavanceerde instellingen voordat u patches kunt schakelen."</string>
@@ -690,9 +628,6 @@ Welke moet worden opgeslagen in dit profiel?</string>
     <string name="patcher_missing_patch_title">Patchselectie vereist aandacht</string>
     <string name="patcher_preflight_missing_patch_remove">Ontbrekende patches verwijderen</string>
     <string name="patcher_preflight_missing_patch_proceed">Toch doorgaan</string>
-    <string name="patcher_missing_patch_message">"Patching mislukt omdat de volgende patches niet werden gevonden in de huidige bundel:
-%1$s
-Open de selectie opnieuw en selecteer ze opnieuw (of kies vervangingen) voordat u het opnieuw probeert."</string>
     <string name="patcher_preflight_missing_patch_message">"De volgende patches zijn niet beschikbaar in de huidige bundle:
 %1$s
 Je kunt ze verwijderen, de selectie aanpassen of verder gaan."</string>
@@ -701,7 +636,6 @@ Je kunt ze verwijderen, de selectie aanpassen of verder gaan."</string>
     <string name="patch_selector_missing_patch_message">"Deze patches moeten opnieuw geselecteerd worden:
 %1$s
 Schakel ze opnieuw in (of kies alternatieven) en probeer dan opnieuw te patchen."</string>
-    <string name="delete_profile_confirmation">\"%1$s\" verwijderen?</string>
     <string name="patch_profile_delete_multiple_dialog_description">De geselecteerde patchprofielen verwijderen?</string>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="one">%d patch</item>
@@ -711,26 +645,18 @@ Schakel ze opnieuw in (of kies alternatieven) en probeer dan opnieuw te patchen.
         <item quantity="one">%d bundel</item>
         <item quantity="other">%d bundels</item>
     </plurals>
-    <string name="universal_patch_warning_description">"Universele patches hebben een meer algemene toepassing en werken niet zo betrouwbaar als patches die gericht zijn op specifieke apps. U kunt problemen ondervinden bij het gebruik ervan.
-
-U moet \"Universele patches tonen &amp; toestaan\" inschakelen in de geavanceerde instellingen voordat u universele patches gebruikt."</string>
     <string name="this_version">Deze versie</string>
     <string name="universal">Elke app</string>
     <string name="search_patches">Zoek patches</string>
     <string name="app_version_not_compatible">"Deze patch is niet compatibel met de geselecteerde app-versie (%1$s).
 
 Deze is alleen compatibel met de volgende versie: %2$s."</string>
-    <string name="continue_with_version">Doorgaan met deze versie?</string>
-    <string name="version_not_compatible">Niet alle patches zijn compatibel met deze versie (%s). Wil je toch doorgaan?</string>
-    <string name="download_application">Applicatie downloaden?</string>
-    <string name="app_not_installed">De door u geselecteerde app is niet geïnstalleerd. Wilt u deze downloaden?</string>
     <string name="failed_to_load_apk">APK kon niet worden geladen</string>
     <string name="loading">Bezig met laden…</string>
     <string name="not_installed">Niet geïnstalleerd</string>
     <string name="installed">Geïnstalleerd</string>
     <string name="app_info">App-info</string>
     <string name="uninstall">Verwijderen</string>
-    <string name="unpatch">Unpatchen</string>
     <string name="repatch">Repatchen</string>
     <string name="install_type">Installatietype</string>
     <string name="package_name">Pakketnaam</string>
@@ -741,7 +667,6 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="applied_patches_empty">Geen patches vastgelegd voor deze app</string>
     <string name="applied_patches_bundle_missing">Bundelmetadata niet beschikbaar. Worden opgeslagen patchnamen weergegeven.</string>
     <string name="no_patch_bundles_tracked">Geen patchbundels vastgelegd voor deze app</string>
-    <string name="default_install">Standaard</string>
     <string name="mount_install">Rooted mount-installatieprogramma</string>
     <string name="mounted">Gemonteerd</string>
     <string name="unmounted">Niet gemonteerd</string>
@@ -757,7 +682,6 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="failed_to_unmount">Kon %s niet ontkoppelen</string>
     <string name="unpatch_app">App-patch verwijderen?</string>
     <string name="unpatch_description">Weet je zeker dat je de patch van deze app wilt verwijderen?</string>
-    <string name="downloader_invalid_version">Downloader heeft niet de juiste versie opgehaald</string>
     <string name="downloader_app_not_found">Downloader heeft de app niet gevonden</string>
     <string name="downloader_error">Downloaderfout: %s</string>
     <string name="downloader_no_plugins_installed">Geen downloader geïnstalleerd.</string>
@@ -778,7 +702,6 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="path_selector_files">Bestanden</string>
     <string name="show_password_field">Wachtwoord tonen</string>
     <string name="hide_password_field">Wachtwoord verbergen</string>
-    <string name="installer">Installer</string>
     <string name="installer_primary_title">Primaire installer</string>
     <string name="installer_primary_description">Wordt eerst gebruikt bij het installeren van gepatched apps.</string>
     <string name="installer_fallback_title">Fallback installer</string>
@@ -857,7 +780,6 @@ Details: %2$s"</string>
     <string name="install_app_fail_title">Installatie mislukt</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
     <string name="mount_app_fail_title">Koppelen mislukt</string>
-    <string name="mount_app_fail">Kon app niet koppelen: %1$s</string>
     <string name="install_timeout_message">Installatie is niet voltooid. Controleer het systeemeigenaardialoogvenster en probeer het opnieuw.</string>
     <string name="reinstall_app_fail">Kon app niet opnieuw installeren: %s</string>
     <string name="uninstall_app_fail">Kon app niet verwijderen: %s</string>
@@ -876,16 +798,11 @@ Details: %2$s"</string>
     <string name="install_saved_app">Installeren</string>
     <string name="remount_saved_app">Herkoppelen</string>
     <string name="update_saved_app">Bijwerken</string>
-    <string name="installing_saved_app">Opgeslagen app wordt geïnstalleerd…</string>
     <string name="saved_app_install_success">Opgeslagen app geïnstalleerd</string>
     <string name="saved_app_install_failed">Fout bij installeren van opgeslagen app</string>
     <string name="saved_app_uninstall_title">Geïnstalleerde kopie verwijderen?</string>
-    <string name="saved_app_unmount_title">Geïnstalleerde kopie ontkoppelen?</string>
     <string name="saved_app_uninstall_description">Dit verwijdert alleen de geïnstalleerde versie. Uw opgeslagen APK blijft intact.</string>
-    <string name="saved_app_unmount_description">Dit koppelt de gepatchte APK los. Uw opgeslagen APK blijft intact.</string>
     <string name="saved_app_install_missing">Opgeslagen APK niet gevonden</string>
-    <string name="delete_saved_copy">Opgeslagen kopie verwijderen</string>
-    <string name="sign_fail">APK ondertekenen mislukt: %s</string>
     <string name="save_logs">Logboeken opslaan</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om door te gaan met deze plugin.</string>
     <string name="select_install_type">Instellingstype selecteren</string>
@@ -893,7 +810,6 @@ Details: %2$s"</string>
     <string name="patcher_step_load_patches">Patches laden</string>
     <string name="patcher_step_unpack">APK-bestand lezen</string>
     <string name="patcher_step_prepare_split_apk">Gesplitste APK samenvoegen</string>
-    <string name="patcher_step_merge_not_required">Samenvoegen van gesplitste bestanden niet vereist</string>
     <string name="patcher_step_group_patching">Patchen</string>
     <string name="patcher_step_group_saving">Opslaan</string>
     <string name="patcher_step_write_patched">Gepatched APK-bestand schrijven</string>
@@ -931,14 +847,9 @@ Details: %2$s"</string>
     <string name="less">Minder</string>
     <string name="continue_">Doorgaan</string>
     <string name="dismiss">Afwijzen</string>
-    <string name="permanent_dismiss">Niet meer tonen</string>
-    <string name="website">Website</string>
     <string name="patch_bundle_urls">Ophalen patchbundel-imports</string>
-    <string name="contact">Contact</string>
     <string name="version">Versie</string>
     <string name="published">Gepubliceerd</string>
-    <string name="submit_feedback">Probleem of feedback indienen</string>
-    <string name="submit_feedback_description">Help ons deze applicatie te verbeteren</string>
     <string name="developer_options">Ontwikkelaarsopties</string>
     <string name="developer_options_description">Opties voor het debuggen van problemen</string>
     <string name="patches_update_success">Update succesvol</string>
@@ -953,12 +864,7 @@ Details: %2$s"</string>
 
 Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdragen om toekomstige innovatie aan te drijven"</string>
     <string name="here">hier.</string>
-    <string name="developer_options_enabled">Ontwikkelaarsopties ingeschakeld</string>
-    <string name="developer_options_taps">%d tikken resterend</string>
-    <string name="developer_options_already_enabled">Ontwikkelaarsopties zijn al ingeschakeld</string>
     <string name="update_available">Een update is beschikbaar</string>
-    <string name="current_version">Huidige versie: %s</string>
-    <string name="new_version">Nieuwe versie: %s</string>
     <string name="ready_to_install_update">Klaar om update te installeren</string>
     <string name="update_completed">Update geïnstalleerd</string>
     <string name="install_update_manager_failed">Fout bij het installeren van update</string>
@@ -984,14 +890,12 @@ Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdrage
     <string name="hours_ago">%sh uur geleden</string>
     <string name="days_ago">%sd geleden</string>
     <string name="invalid_date">Ongeldige datum</string>
-    <string name="disable_battery_optimization">Batterij-optimalisatie uitschakelen</string>
     <string name="input_dialog_value_invalid">Ongeldige waarde</string>
     <string name="option_required">Deze optie is vereist</string>
     <string name="required_options_screen">Vereiste opties</string>
     <string name="failed_to_check_updates">Controleren op updates mislukt: %s</string>
     <string name="no_update_available">Geen update beschikbaar</string>
     <string name="update_check">Controleren op updates…</string>
-    <string name="dismiss_temporary">Nu niet</string>
     <string name="update_available_dialog_description">Een nieuwe versie van Morphe (%s) is beschikbaar.</string>
     <string name="failed_to_download_update">Download van update mislukt: %s</string>
     <string name="download">Download</string>
@@ -1048,5 +952,4 @@ Klik op de patches voor meer details."</string>
     <string name="failed_to_import_keystore">Kan keystore niet importeren</string>
     <string name="export">Exporteren</string>
     <string name="confirm">Bevestigen</string>
-    <string name="saved_app_install_cancelled">Installatie geannuleerd</string>
 </resources>
