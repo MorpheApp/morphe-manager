@@ -1,3 +1,10 @@
+# app [1.0.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2025-12-25)
+
+
+### Bug Fixes
+
+* Fix `lateinit property eventHandler has not been initialized` ([#25](https://github.com/MorpheApp/morphe-manager/issues/25)) ([d074a14](https://github.com/MorpheApp/morphe-manager/commit/d074a14e8aa22dcaa3e4b5408f2c7623c33e770b))
+
 # app [1.0.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2025-12-24)
 
 
