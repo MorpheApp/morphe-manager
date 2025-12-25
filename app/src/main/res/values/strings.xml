@@ -151,6 +151,61 @@
     <string name="patches_bundle_json_dialog_reset">Reset to default</string>
     <string name="patches_bundle_json_dialog_save">Save</string>
 
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Patch Options</string>
+    <string name="morphe_patch_options_description">Advanced patch configurations</string>
+    <!-- GmsCore -->
+    <string name="morphe_gmscore_vendor">GmsCore Vendor</string>
+    <string name="morphe_gmscore_vendor_description">The vendor\'s group ID for GmsCore</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">App Theme Colors</string>
+    <string name="morphe_theme_dark_color">Dark Theme Background</string>
+    <string name="morphe_theme_dark_color_description">Background color for dark theme</string>
+    <string name="morphe_theme_light_color">Light Theme Background</string>
+    <string name="morphe_theme_light_color_description">Background color for light theme (YouTube only)</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">Custom Branding</string>
+    <string name="morphe_custom_app_name">Custom App Name</string>
+    <string name="morphe_custom_app_name_description">Change the app display name</string>
+    <string name="morphe_custom_app_name_hint">Enter custom name</string>
+    <string name="morphe_custom_icon_path">Custom Icon Path</string>
+    <string name="morphe_custom_icon_path_description">Folder path containing custom icon images</string>
+    <string name="morphe_custom_icon_path_hint">/storage/emulated/0/icons</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">Custom Header Logo</string>
+    <string name="morphe_custom_header_description">Folder path containing custom header images</string>
+    <string name="morphe_custom_header_hint">/storage/emulated/0/header</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">Hide Shorts Features</string>
+    <string name="morphe_hide_shorts_app_shortcut">Hide Shorts App Shortcut</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
+    <string name="morphe_hide_shorts_widget">Hide Shorts Widget</string>
+    <string name="morphe_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
+    <!-- Theme Presets -->
+    <string name="morphe_theme_preset_pure_black">Pure Black</string>
+    <string name="morphe_theme_preset_material_you">Material You</string>
+    <string name="morphe_theme_preset_classic">Classic (old YouTube)</string>
+    <string name="morphe_theme_preset_catppuccin_mocha">Catppuccin (Mocha)</string>
+    <string name="morphe_theme_preset_catppuccin_latte">Catppuccin (Latte)</string>
+    <string name="morphe_theme_preset_dark_pink">Dark Pink</string>
+    <string name="morphe_theme_preset_dark_blue">Dark Blue</string>
+    <string name="morphe_theme_preset_dark_green">Dark Green</string>
+    <string name="morphe_theme_preset_dark_yellow">Dark Yellow</string>
+    <string name="morphe_theme_preset_dark_orange">Dark Orange</string>
+    <string name="morphe_theme_preset_dark_red">Dark Red</string>
+    <string name="morphe_theme_preset_white">White</string>
+    <string name="morphe_theme_preset_light_pink">Light Pink</string>
+    <string name="morphe_theme_preset_light_blue">Light Blue</string>
+    <string name="morphe_theme_preset_light_green">Light Green</string>
+    <string name="morphe_theme_preset_light_yellow">Light Yellow</string>
+    <string name="morphe_theme_preset_light_orange">Light Orange</string>
+    <string name="morphe_theme_preset_light_red">Light Red</string>
+    <!-- Dialogs -->
+    <string name="morphe_patch_options_restart_required">Restart Required</string>
+    <string name="morphe_patch_options_restart_message">These options require re-patching the app to take effect. Your current settings will be saved.</string>
+    <string name="morphe_patch_options_saved">Patch options saved successfully</string>
+    <string name="morphe_patch_options_save_failed">Failed to save patch options</string>
+
     <!-- Other strings -->
     <string name="app_name" translatable="false">Morphe</string>
     <string name="main_top_title" translatable="false">Morphe</string>

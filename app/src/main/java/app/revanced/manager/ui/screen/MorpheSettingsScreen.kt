@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
@@ -67,6 +68,7 @@ fun MorpheSettingsScreen(
     val coroutineScope = rememberCoroutineScope()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val prefs: PreferencesManager = koinInject()
+    val patchOptionsPrefs: PatchOptionsPreferencesManager = koinInject()
     val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
@@ -290,6 +292,18 @@ fun MorpheSettingsScreen(
                                 dashboardViewModel.updateMorpheBundleWithChangelogClear()
                             }
                         }
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    // Patch Options Section
+                    SettingsSectionHeader(
+                        icon = Icons.Outlined.Tune,
+                        title = stringResource(R.string.morphe_patch_options)
+                    )
+                    PatchOptionsSection(
+                        patchOptionsPrefs = patchOptionsPrefs,
+                        isYouTube = true // Set to false for YouTube Music
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
