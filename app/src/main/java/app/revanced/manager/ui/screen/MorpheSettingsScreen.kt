@@ -228,6 +228,17 @@ fun MorpheSettingsScreen(
                                 }
                             }
                         )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        // Patch Options Section
+                        SettingsSectionHeader(
+                            icon = Icons.Outlined.Tune,
+                            title = stringResource(R.string.morphe_patch_options)
+                        )
+                        PatchOptionsSection(
+                            patchOptionsPrefs = patchOptionsPrefs
+                        )
                     }
 
                     // Right column
@@ -302,8 +313,7 @@ fun MorpheSettingsScreen(
                         title = stringResource(R.string.morphe_patch_options)
                     )
                     PatchOptionsSection(
-                        patchOptionsPrefs = patchOptionsPrefs,
-                        isYouTube = true // Set to false for YouTube Music
+                        patchOptionsPrefs = patchOptionsPrefs
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))

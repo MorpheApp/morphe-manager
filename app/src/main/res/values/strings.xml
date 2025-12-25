@@ -153,9 +153,8 @@
 
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch Options</string>
-    <!-- GmsCore -->
-    <string name="morphe_gmscore_vendor">GmsCore Vendor</string>
-    <string name="morphe_gmscore_vendor_description">The vendor\'s group ID for GmsCore</string>
+    <string name="morphe_patch_options_youtube">YouTube Options</string>
+    <string name="morphe_patch_options_youtube_music">YouTube Music Options</string>
     <!-- Theme Colors -->
     <string name="morphe_theme_colors">App Theme Colors</string>
     <string name="morphe_theme_dark_color">Dark Theme Background</string>

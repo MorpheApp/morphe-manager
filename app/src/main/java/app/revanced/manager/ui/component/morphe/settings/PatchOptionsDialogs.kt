@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ThemeColorDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    isYouTube: Boolean,
+    appType: AppType,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -105,7 +105,7 @@ fun ThemeColorDialog(
             }
 
             // Light Theme Section (YouTube only)
-            if (isYouTube) {
+            if (appType == AppType.YOUTUBE) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
