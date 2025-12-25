@@ -117,31 +117,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// Work around to solve issue of the settings menu needing to trigger an event
-// in the main screen. But since the setting menu is not a child of the main screen,
-// it's tricky passing the event from one UI sibling to another.
-// Use this event work around to propagate the change to the main screen.
-class PreReleaseChangedModel : ViewModel() {
-    private lateinit var eventHandler: (suspend (Boolean) -> Unit)
-
-    fun setEventHandler(handler: suspend (Boolean) -> Unit) {
-        eventHandler = handler
-    }
-
-    fun preReleaseChanged(preReleaseValue: Boolean) {
-        viewModelScope.launch {
-            eventHandler.invoke(preReleaseValue)
-        }
-    }
-}
-
 @Composable
 private fun ReVancedManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
     val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
-    val preReleaseChangedModel = PreReleaseChangedModel()
-
     val startDest = if (useMorpheHomeScreen) MorpheHomeScreen else Dashboard
 
     EventEffect(vm.appSelectFlow) { params ->
@@ -183,8 +163,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                 },
                 dashboardViewModel = dashboardViewModel,
                 usingMountInstallState = usingMountInstallState,
-                bundleUpdateProgress = bundleUpdateProgress,
-                preReleaseChangedModel = preReleaseChangedModel
+                bundleUpdateProgress = bundleUpdateProgress
             )
         }
 
@@ -473,8 +452,7 @@ private fun ReVancedManager(vm: MainViewModel) {
             // Morphe Simplified Settings Screen
             composable<MorpheSettings> {
                 MorpheSettingsScreen(
-                    onBackClick = navController::popBackStack,
-                    preReleaseChangedModel = preReleaseChangedModel
+                    onBackClick = navController::popBackStack
                 )
             }
         }
