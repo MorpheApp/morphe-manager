@@ -266,7 +266,9 @@
     <string name="updates_description">Check for updates and view changelog</string>
     <string name="downloads">Downloads</string>
     <string name="plugins_help_title">What is a downloader?</string>
-    <string name="plugins_help_description">A downloader is a plugin which allows URV to download stock APKs from various sources. The downloaded APKs will be shown in the bottom section. During the patching process, you can choose an already downloaded APKs or you can download it via a plugin.\n\nThe list of supported downloader plugins can be found</string>
+    <string name="plugins_help_description">"A downloader is a plugin which allows URV to download stock APKs from various sources. The downloaded APKs will be shown in the bottom section. During the patching process, you can choose an already downloaded APKs or you can download it via a plugin.
+
+The list of supported downloader plugins can be found"</string>
     <string name="import_export">Import &amp; export</string>
     <string name="import_export_description">Keystore, patch options and selection</string>
     <string name="changelog">View changelogs</string>
@@ -635,7 +637,9 @@ You need to turn on \"Allow changing patch selection and options\" in the advanc
     <string name="patch_profile_version_override_failed_toast">Failed to update profile version</string>
     <string name="patch_profile_version_override_set_to_all">No version entered, saved as "%1$s"</string>
     <string name="patch_profile_version_conflict_title">Keep version override?</string>
-    <string name="patch_profile_version_conflict_message">Current version: %1$s\nIncoming version: %2$s\nWhich should be saved to this profile?</string>
+    <string name="patch_profile_version_conflict_message">"Current version: %1$s
+Incoming version: %2$s
+Which should be saved to this profile?"</string>
     <string name="patch_profile_version_conflict_use_new">Use incoming version</string>
     <string name="patch_profile_version_conflict_keep_existing">Keep existing version</string>
     <string name="patch_profile_empty_state">Save a configuration from the patch selection screen to see it here.</string>
