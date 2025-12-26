@@ -32,8 +32,15 @@ fun ThemeColorDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val darkColor by patchOptionsPrefs.darkThemeBackgroundColor.getAsState()
-    val lightColor by patchOptionsPrefs.lightThemeBackgroundColor.getAsState()
+
+    // Get appropriate preferences based on app type
+    val darkColor by when (appType) {
+        AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.getAsState()
+        AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.getAsState()
+    }
+
+    // Light theme only for YouTube
+    val lightColor by patchOptionsPrefs.lightThemeBackgroundColorYouTube.getAsState()
 
     // Dark theme presets
     val darkPresets = remember {
@@ -98,7 +105,10 @@ fun ThemeColorDialog(
                     isSelected = darkColor == value,
                     onClick = {
                         scope.launch {
-                            patchOptionsPrefs.darkThemeBackgroundColor.update(value)
+                            when (appType) {
+                                AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(value)
+                                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(value)
+                            }
                         }
                     }
                 )
@@ -121,7 +131,7 @@ fun ThemeColorDialog(
                         isSelected = lightColor == value,
                         onClick = {
                             scope.launch {
-                                patchOptionsPrefs.lightThemeBackgroundColor.update(value)
+                                patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(value)
                             }
                         }
                     )
@@ -179,11 +189,29 @@ private fun ThemePresetItem(
 @Composable
 fun CustomBrandingDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
+    appType: AppType,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    var appName by remember { mutableStateOf(patchOptionsPrefs.customAppName.getBlocking()) }
-    var iconPath by remember { mutableStateOf(patchOptionsPrefs.customIconPath.getBlocking()) }
+
+    // Get appropriate preferences based on app type
+    var appName by remember {
+        mutableStateOf(
+            when (appType) {
+                AppType.YOUTUBE -> patchOptionsPrefs.customAppNameYouTube.getBlocking()
+                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.customAppNameYouTubeMusic.getBlocking()
+            }
+        )
+    }
+
+    var iconPath by remember {
+        mutableStateOf(
+            when (appType) {
+                AppType.YOUTUBE -> patchOptionsPrefs.customIconPathYouTube.getBlocking()
+                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.customIconPathYouTubeMusic.getBlocking()
+            }
+        )
+    }
 
     // Folder picker launcher
     val folderPickerLauncher = rememberLauncherForActivityResult(
@@ -206,8 +234,16 @@ fun CustomBrandingDialog(
                 onPrimaryClick = {
                     scope.launch {
                         patchOptionsPrefs.edit {
-                            patchOptionsPrefs.customAppName.value = appName
-                            patchOptionsPrefs.customIconPath.value = iconPath
+                            when (appType) {
+                                AppType.YOUTUBE -> {
+                                    patchOptionsPrefs.customAppNameYouTube.value = appName
+                                    patchOptionsPrefs.customIconPathYouTube.value = iconPath
+                                }
+                                AppType.YOUTUBE_MUSIC -> {
+                                    patchOptionsPrefs.customAppNameYouTubeMusic.value = appName
+                                    patchOptionsPrefs.customIconPathYouTubeMusic.value = iconPath
+                                }
+                            }
                         }
                         onDismiss()
                     }

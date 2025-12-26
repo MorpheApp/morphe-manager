@@ -104,6 +104,7 @@ fun PatchOptionsSection(
     showBrandingDialog?.let { appType ->
         CustomBrandingDialog(
             patchOptionsPrefs = patchOptionsPrefs,
+            appType = appType,
             onDismiss = { showBrandingDialog = null }
         )
     }

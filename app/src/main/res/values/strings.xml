@@ -155,6 +155,7 @@
     <string name="morphe_patch_options">Patch Options</string>
     <string name="morphe_patch_options_youtube">YouTube Options</string>
     <string name="morphe_patch_options_youtube_music">YouTube Music Options</string>
+    <string name="morphe_patch_options_restart_message">These options require re-patching the app to take effect. Your current settings will be saved.</string>
     <!-- Theme Colors -->
     <string name="morphe_theme_colors">App Theme Colors</string>
     <string name="morphe_theme_dark_color">Dark Theme Background</string>
@@ -198,11 +199,6 @@
     <string name="morphe_theme_preset_light_yellow">Light Yellow</string>
     <string name="morphe_theme_preset_light_orange">Light Orange</string>
     <string name="morphe_theme_preset_light_red">Light Red</string>
-    <!-- Dialogs -->
-    <string name="morphe_patch_options_restart_required">Restart Required</string>
-    <string name="morphe_patch_options_restart_message">These options require re-patching the app to take effect. Your current settings will be saved.</string>
-    <string name="morphe_patch_options_saved">Patch options saved successfully</string>
-    <string name="morphe_patch_options_save_failed">Failed to save patch options</string>
 
     <!-- Other strings -->
     <string name="app_name" translatable="false">Morphe</string>

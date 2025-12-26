@@ -11,36 +11,32 @@ class PatchOptionsPreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "patch_options") {
 
-    // GmsCore Support
-    val gmsCoreVendorGroupId = stringPreference(
-        "gmscore_vendor_group_id",
-        "app.revanced"
-    )
+    // ==================== YouTube Options ====================
 
     // Theme - Dark
-    val darkThemeBackgroundColor = stringPreference(
-        "dark_theme_background_color",
+    val darkThemeBackgroundColorYouTube = stringPreference(
+        "dark_theme_background_color_youtube",
         "@android:color/black"
     )
 
-    // Theme - Light (YouTube only)
-    val lightThemeBackgroundColor = stringPreference(
-        "light_theme_background_color",
+    // Theme - Light
+    val lightThemeBackgroundColorYouTube = stringPreference(
+        "light_theme_background_color_youtube",
         "@android:color/white"
     )
 
     // Custom Branding
-    val customAppName = stringPreference(
-        "custom_app_name",
+    val customAppNameYouTube = stringPreference(
+        "custom_app_name_youtube",
         ""
     )
 
-    val customIconPath = stringPreference(
-        "custom_icon_path",
+    val customIconPathYouTube = stringPreference(
+        "custom_icon_path_youtube",
         ""
     )
 
-    // Custom Header (YouTube only)
+    // Custom Header
     val customHeaderPath = stringPreference(
         "custom_header_path",
         ""
@@ -57,6 +53,25 @@ class PatchOptionsPreferencesManager(
         false
     )
 
+    // ==================== YouTube Music Options ====================
+
+    // Theme - Dark
+    val darkThemeBackgroundColorYouTubeMusic = stringPreference(
+        "dark_theme_background_color_youtube_music",
+        "@android:color/black"
+    )
+
+    // Custom Branding
+    val customAppNameYouTubeMusic = stringPreference(
+        "custom_app_name_youtube_music",
+        ""
+    )
+
+    val customIconPathYouTubeMusic = stringPreference(
+        "custom_icon_path_youtube_music",
+        ""
+    )
+
     /**
      * Export all patch options as a map
      * This is used by the patcher to apply options to patches
@@ -66,36 +81,31 @@ class PatchOptionsPreferencesManager(
             // Note: Bundle UID 0 is the default Morphe bundle
             val bundleOptions = mutableMapOf<String, MutableMap<String, Any?>>()
 
-            // GmsCore Support patch options
-            bundleOptions["GmsCore support"] = mutableMapOf(
-                "gmsCoreVendorGroupId" to gmsCoreVendorGroupId.get()
-            )
-
             // Theme patch options
-            val themeOptions = mutableMapOf<String, Any?>()
-            darkThemeBackgroundColor.get().takeIf { it.isNotBlank() }?.let {
-                themeOptions["darkThemeBackgroundColor"] = it
+            val themeOptionsYouTube = mutableMapOf<String, Any?>()
+            darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }?.let {
+                themeOptionsYouTube["darkThemeBackgroundColor"] = it
             }
-            lightThemeBackgroundColor.get().takeIf { it.isNotBlank() }?.let {
-                themeOptions["lightThemeBackgroundColor"] = it
+            lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }?.let {
+                themeOptionsYouTube["lightThemeBackgroundColor"] = it
             }
-            if (themeOptions.isNotEmpty()) {
-                bundleOptions["Theme"] = themeOptions
+            if (themeOptionsYouTube.isNotEmpty()) {
+                bundleOptions["Theme"] = themeOptionsYouTube
             }
 
             // Custom Branding patch options
-            val brandingOptions = mutableMapOf<String, Any?>()
-            customAppName.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptions["customName"] = it
+            val brandingOptionsYouTube = mutableMapOf<String, Any?>()
+            customAppNameYouTube.get().takeIf { it.isNotBlank() }?.let {
+                brandingOptionsYouTube["customName"] = it
             }
-            customIconPath.get().takeIf { it.isNotBlank() }?.let {
-                brandingOptions["customIcon"] = it
+            customIconPathYouTube.get().takeIf { it.isNotBlank() }?.let {
+                brandingOptionsYouTube["customIcon"] = it
             }
-            if (brandingOptions.isNotEmpty()) {
-                bundleOptions["Custom branding"] = brandingOptions
+            if (brandingOptionsYouTube.isNotEmpty()) {
+                bundleOptions["Custom branding"] = brandingOptionsYouTube
             }
 
-            // Change Header patch options (YouTube only)
+            // Change Header patch options
             customHeaderPath.get().takeIf { it.isNotBlank() }?.let {
                 bundleOptions["Change header"] = mutableMapOf(
                     "custom" to it
@@ -114,7 +124,43 @@ class PatchOptionsPreferencesManager(
                 bundleOptions["Hide Shorts components"] = shortsOptions
             }
 
-            // Bundle ID 0 = default Morphe bundle (using Int key)
+            // Bundle ID 0 = default Morphe bundle
+            if (bundleOptions.isNotEmpty()) {
+                put(0, bundleOptions)
+            }
+        }
+    }
+
+    /**
+     * Export YouTube Music specific patch options
+     */
+    suspend fun exportYouTubeMusicPatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
+        return buildMap {
+            val bundleOptions = mutableMapOf<String, MutableMap<String, Any?>>()
+
+            // Theme patch options
+            val themeOptionsYouTubeMusic = mutableMapOf<String, Any?>()
+            darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() }?.let {
+                themeOptionsYouTubeMusic["darkThemeBackgroundColor"] = it
+            }
+            // YouTube Music doesn't have light theme option in patches
+            if (themeOptionsYouTubeMusic.isNotEmpty()) {
+                bundleOptions["Theme"] = themeOptionsYouTubeMusic
+            }
+
+            // Custom Branding patch options
+            val brandingOptionsYouTubeMusic = mutableMapOf<String, Any?>()
+            customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }?.let {
+                brandingOptionsYouTubeMusic["customName"] = it
+            }
+            customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }?.let {
+                brandingOptionsYouTubeMusic["customIcon"] = it
+            }
+            if (brandingOptionsYouTubeMusic.isNotEmpty()) {
+                bundleOptions["Custom branding"] = brandingOptionsYouTubeMusic
+            }
+
+            // Bundle ID 0 = default Morphe bundle
             if (bundleOptions.isNotEmpty()) {
                 put(0, bundleOptions)
             }
@@ -125,13 +171,18 @@ class PatchOptionsPreferencesManager(
      * Reset all patch options to defaults
      */
     suspend fun resetToDefaults() = edit {
-        gmsCoreVendorGroupId.value = "app.revanced"
-        darkThemeBackgroundColor.value = "@android:color/black"
-        lightThemeBackgroundColor.value = "@android:color/white"
-        customAppName.value = ""
-        customIconPath.value = ""
+        // YouTube
+        darkThemeBackgroundColorYouTube.value = "@android:color/black"
+        lightThemeBackgroundColorYouTube.value = "@android:color/white"
+        customAppNameYouTube.value = ""
+        customIconPathYouTube.value = ""
         customHeaderPath.value = ""
         hideShortsAppShortcut.value = false
         hideShortsWidget.value = false
+
+        // YouTube Music
+        darkThemeBackgroundColorYouTubeMusic.value = "@android:color/black"
+        customAppNameYouTubeMusic.value = ""
+        customIconPathYouTubeMusic.value = ""
     }
 }
