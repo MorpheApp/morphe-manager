@@ -16,5 +16,5 @@ val managerModule = module {
     singleOf(::RootInstaller)
     singleOf(::ShizukuInstaller)
     singleOf(::InstallerManager)
-    single { PatchOptionsPreferencesManager(get()) }
+    singleOf(::PatchOptionsPreferencesManager)
 }
