@@ -244,8 +244,7 @@ fun ColorPreviewDot(
         }
         // Hex color
         else -> {
-            val color = parseHexToRgb(colorValue.removePrefix("#FF").let { if (it.startsWith("#")) it else "#$it" })
-                ?.let { (r, g, b) -> Color(r, g, b) }
+            val color = parseHexToRgb(colorValue)?.let { (r, g, b) -> Color(r, g, b) }
             if (color != null) {
                 Surface(
                     modifier = dotModifier,
@@ -280,16 +279,29 @@ fun parseColorToRgb(color: String): Triple<Float, Float, Float> {
 
 /**
  * Parse hex color string to RGB float values
+ * Supports both #RRGGBB and #AARRGGBB formats
  */
 fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
     val cleanHex = hex.removePrefix("#")
-    if (cleanHex.length != 6) return null
 
     return try {
-        val r = cleanHex.substring(0, 2).toInt(16) / 255f
-        val g = cleanHex.substring(2, 4).toInt(16) / 255f
-        val b = cleanHex.substring(4, 6).toInt(16) / 255f
-        Triple(r, g, b)
+        when (cleanHex.length) {
+            6 -> {
+                // #RRGGBB format
+                val r = cleanHex.substring(0, 2).toInt(16) / 255f
+                val g = cleanHex.substring(2, 4).toInt(16) / 255f
+                val b = cleanHex.substring(4, 6).toInt(16) / 255f
+                Triple(r, g, b)
+            }
+            8 -> {
+                // #AARRGGBB format - skip alpha channel
+                val r = cleanHex.substring(2, 4).toInt(16) / 255f
+                val g = cleanHex.substring(4, 6).toInt(16) / 255f
+                val b = cleanHex.substring(6, 8).toInt(16) / 255f
+                Triple(r, g, b)
+            }
+            else -> null
+        }
     } catch (e: Exception) {
         null
     }
