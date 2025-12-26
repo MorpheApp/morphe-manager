@@ -23,6 +23,7 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
+import app.revanced.manager.ui.component.morphe.shared.lighten
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -363,7 +364,7 @@ private fun ColorPresetsRow(
         // Color presets
         presets.forEach { preset ->
             val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
-            val displayColor = if (!isAccent) preset.lightenForDisplay() else preset
+            val displayColor = if (!isAccent) preset.lighten(0.2f) else preset
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -390,13 +391,4 @@ private fun ColorPresetsRow(
             )
         }
     }
-}
-
-private fun Color.lightenForDisplay(): Color {
-    return Color(
-        red = (this.red + 0.2f).coerceAtMost(1f),
-        green = (this.green + 0.2f).coerceAtMost(1f),
-        blue = (this.blue + 0.2f).coerceAtMost(1f),
-        alpha = this.alpha
-    )
 }
