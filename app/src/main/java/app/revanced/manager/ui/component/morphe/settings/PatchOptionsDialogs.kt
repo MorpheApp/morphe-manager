@@ -3,24 +3,31 @@ package app.revanced.manager.ui.component.morphe.settings
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.*
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 /**
  * Theme color selection dialog
@@ -184,7 +191,7 @@ private fun ThemePresetItem(
 }
 
 /**
- * Custom branding dialog with folder picker
+ * Custom branding dialog with folder picker and instructions
  */
 @Composable
 fun CustomBrandingDialog(
@@ -193,6 +200,7 @@ fun CustomBrandingDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val bundleRepository: PatchBundleRepository = koinInject()
 
     // Get appropriate preferences based on app type
     var appName by remember {
@@ -211,6 +219,46 @@ fun CustomBrandingDialog(
                 AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.customIconPathYouTubeMusic.getBlocking()
             }
         )
+    }
+
+    // State for expandable instructions
+    var showInstructions by remember { mutableStateOf(false) }
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (showInstructions) 180f else 0f,
+        animationSpec = tween(durationMillis = 300)
+    )
+
+    // Load full description from bundle repository
+    var iconDescription by remember { mutableStateOf<String?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        try {
+            val bundleInfo = bundleRepository.bundleInfoFlow.first()
+            val defaultBundle = bundleInfo[PatchBundleRepository.DEFAULT_SOURCE_UID]
+
+            // Find "Custom branding" patch based on app type
+            val packageName = when (appType) {
+                AppType.YOUTUBE -> "com.google.android.youtube"
+                AppType.YOUTUBE_MUSIC -> "com.google.android.apps.youtube.music"
+            }
+
+            val customBrandingPatch = defaultBundle?.patches?.find { patch ->
+                patch.name.equals("Custom branding", ignoreCase = true) &&
+                        patch.compatiblePackages?.any { it.packageName == packageName } == true
+            }
+
+            // Get customIcon option description
+            val iconOption = customBrandingPatch?.options?.find {
+                it.key.equals("customIcon", ignoreCase = true)
+            }
+
+            iconDescription = iconOption?.description
+        } catch (e: Exception) {
+            iconDescription = null
+        } finally {
+            isLoading = false
+        }
     }
 
     // Folder picker launcher
@@ -326,17 +374,121 @@ fun CustomBrandingDialog(
                 )
             )
 
-            Text(
-                text = stringResource(R.string.morphe_custom_icon_path_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = LocalDialogSecondaryTextColor.current
-            )
+            // Expandable Instructions Section
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable { showInstructions = !showInstructions },
+                shape = RoundedCornerShape(12.dp),
+                color = LocalDialogTextColor.current.copy(alpha = 0.05f)
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    // Header
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.morphe_icon_instructions_title),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium,
+                                color = LocalDialogTextColor.current
+                            )
+                        }
+                        Icon(
+                            imageVector = Icons.Outlined.ExpandMore,
+                            contentDescription = if (showInstructions) "Collapse" else "Expand",
+                            modifier = Modifier
+                                .size(20.dp)
+                                .rotate(rotationAngle),
+                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
+                        )
+                    }
+
+                    // Expandable Content
+                    AnimatedVisibility(
+                        visible = showInstructions,
+                        enter = expandVertically(
+                            animationSpec = tween(durationMillis = 300)
+                        ) + fadeIn(
+                            animationSpec = tween(durationMillis = 300)
+                        ),
+                        exit = shrinkVertically(
+                            animationSpec = tween(durationMillis = 300)
+                        ) + fadeOut(
+                            animationSpec = tween(durationMillis = 300)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                .heightIn(max = 300.dp)
+                                .verticalScroll(rememberScrollState()),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            HorizontalDivider(
+                                color = LocalDialogTextColor.current.copy(alpha = 0.1f),
+                                modifier = Modifier.padding(bottom = 4.dp)
+                            )
+
+                            when {
+                                isLoading -> {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 16.dp),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(24.dp),
+                                            color = MaterialTheme.colorScheme.primary,
+                                            strokeWidth = 2.dp
+                                        )
+                                    }
+                                }
+                                iconDescription != null -> {
+                                    Text(
+                                        text = iconDescription!!,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = LocalDialogSecondaryTextColor.current,
+                                        lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
+                                    )
+                                }
+                                else -> {
+                                    Text(
+                                        text = stringResource(R.string.morphe_icon_instructions_unavailable),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                                        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 /**
- * Custom header dialog with folder picker (YouTube only)
+ * Custom header dialog with folder picker and instructions
  */
 @Composable
 fun CustomHeaderDialog(
@@ -344,7 +496,43 @@ fun CustomHeaderDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val bundleRepository: PatchBundleRepository = koinInject()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
+
+    // State for expandable instructions
+    var showInstructions by remember { mutableStateOf(false) }
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (showInstructions) 180f else 0f,
+        animationSpec = tween(durationMillis = 300)
+    )
+
+    // Load full description from bundle repository
+    var headerDescription by remember { mutableStateOf<String?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        try {
+            val bundleInfo = bundleRepository.bundleInfoFlow.first()
+            val defaultBundle = bundleInfo[PatchBundleRepository.DEFAULT_SOURCE_UID]
+
+            // Find "Change header" patch for YouTube
+            val changeHeaderPatch = defaultBundle?.patches?.find { patch ->
+                patch.name.equals("Change header", ignoreCase = true) &&
+                        patch.compatiblePackages?.any { it.packageName == "com.google.android.youtube" } == true
+            }
+
+            // Get custom header option description
+            val headerOption = changeHeaderPatch?.options?.find {
+                it.key.equals("custom", ignoreCase = true)
+            }
+
+            headerDescription = headerOption?.description
+        } catch (e: Exception) {
+            headerDescription = null
+        } finally {
+            isLoading = false
+        }
+    }
 
     // Folder picker launcher
     val folderPickerLauncher = rememberLauncherForActivityResult(
@@ -419,11 +607,115 @@ fun CustomHeaderDialog(
                 )
             )
 
-            Text(
-                text = stringResource(R.string.morphe_custom_header_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = LocalDialogSecondaryTextColor.current
-            )
+            // Expandable Instructions Section
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable { showInstructions = !showInstructions },
+                shape = RoundedCornerShape(12.dp),
+                color = LocalDialogTextColor.current.copy(alpha = 0.05f)
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    // Header
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.morphe_header_instructions_title),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium,
+                                color = LocalDialogTextColor.current
+                            )
+                        }
+                        Icon(
+                            imageVector = Icons.Outlined.ExpandMore,
+                            contentDescription = if (showInstructions) "Collapse" else "Expand",
+                            modifier = Modifier
+                                .size(20.dp)
+                                .rotate(rotationAngle),
+                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
+                        )
+                    }
+
+                    // Expandable Content
+                    AnimatedVisibility(
+                        visible = showInstructions,
+                        enter = expandVertically(
+                            animationSpec = tween(durationMillis = 300)
+                        ) + fadeIn(
+                            animationSpec = tween(durationMillis = 300)
+                        ),
+                        exit = shrinkVertically(
+                            animationSpec = tween(durationMillis = 300)
+                        ) + fadeOut(
+                            animationSpec = tween(durationMillis = 300)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                .heightIn(max = 300.dp)
+                                .verticalScroll(rememberScrollState()),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            HorizontalDivider(
+                                color = LocalDialogTextColor.current.copy(alpha = 0.1f),
+                                modifier = Modifier.padding(bottom = 4.dp)
+                            )
+
+                            when {
+                                isLoading -> {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 16.dp),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(24.dp),
+                                            color = MaterialTheme.colorScheme.primary,
+                                            strokeWidth = 2.dp
+                                        )
+                                    }
+                                }
+                                headerDescription != null -> {
+                                    Text(
+                                        text = headerDescription!!,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = LocalDialogSecondaryTextColor.current,
+                                        lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
+                                    )
+                                }
+                                else -> {
+                                    Text(
+                                        text = stringResource(R.string.morphe_header_instructions_unavailable),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                                        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

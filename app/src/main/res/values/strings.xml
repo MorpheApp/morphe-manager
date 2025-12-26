@@ -156,6 +156,10 @@
     <string name="morphe_patch_options_youtube_description">Theme, branding, header, and Shorts options</string>
     <string name="morphe_patch_options_youtube_music_description">Theme and branding options</string>
     <string name="morphe_patch_options_restart_message">These options require re-patching the app to take effect. Your current settings will be saved.</string>
+    <string name="morphe_icon_instructions_title">Icon format instructions</string>
+    <string name="morphe_icon_instructions_unavailable">Instructions not available. Please check the patch documentation.</string>
+    <string name="morphe_header_instructions_title">Header format instructions</string>
+    <string name="morphe_header_instructions_unavailable">Instructions not available. Please check the patch documentation.</string>
     <!-- Theme Colors -->
     <string name="morphe_theme_colors">App Theme Colors</string>
     <string name="morphe_theme_dark_color">Dark Theme Background</string>
