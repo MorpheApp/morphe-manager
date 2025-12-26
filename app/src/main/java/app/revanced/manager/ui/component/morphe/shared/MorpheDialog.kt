@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -70,6 +69,7 @@ fun MorpheDialog(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .then(
                     if (dismissOnClickOutside) {
                         Modifier.pointerInput(Unit) {
@@ -78,14 +78,6 @@ fun MorpheDialog(
                     } else Modifier
                 )
         ) {
-            // Background overlay with its own fade animation
-            AnimatedVisibility(
-                visible = visible,
-                enter = fadeIn(animationSpec = tween(300)),
-                exit = fadeOut(animationSpec = tween(200))
-            ) {
-                DialogBackgroundOverlay(isDarkTheme = isDarkTheme)
-            }
 
             AnimatedVisibility(
                 visible = visible,
@@ -112,34 +104,6 @@ fun MorpheDialog(
             }
         }
     }
-}
-
-/**
- * Background overlay with enhanced gradient
- */
-@Composable
-private fun DialogBackgroundOverlay(isDarkTheme: Boolean) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = if (isDarkTheme) {
-                        listOf(
-                            Color(0xE6000000), // 90% black
-                            Color(0xF2000000), // 95% black
-                            Color(0xE6000000)  // 90% black
-                        )
-                    } else {
-                        listOf(
-                            Color(0xE6FFFFFF), // 90% white
-                            Color(0xF2FFFFFF), // 95% white
-                            Color(0xE6FFFFFF)  // 90% white
-                        )
-                    }
-                )
-            )
-    )
 }
 
 /**
