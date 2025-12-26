@@ -36,7 +36,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
@@ -49,7 +48,6 @@ import app.revanced.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import java.io.File
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
@@ -93,42 +91,47 @@ fun MorphePatcherScreen(
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
     LaunchedEffect(patcherSucceeded) {
-        var lastCompletedStep = 0
+        var lastProgressUpdate = 0.0f
         var currentStepStartTime = System.currentTimeMillis()
 
         while (patcherSucceeded == null) {
             val now = System.currentTimeMillis()
 
-            val currentCompletedStep = viewModel.getCurrentStepIndex()
-            if (lastCompletedStep != currentCompletedStep) {
-                // New step!
-                lastCompletedStep = currentCompletedStep
+            val actualProgress = viewModel.progress
+            if (lastProgressUpdate != actualProgress) {
+                // Progress updated!
+                lastProgressUpdate = actualProgress
                 currentStepStartTime = now
                 showLongStepWarning = false
+                if (Log.isLoggable(tag, Log.DEBUG)) {
+                    Log.d(tag, "Real progress update: ${(actualProgress * 1000).toInt() / 10.0f}%")
+                }
             }
 
-            val timeUntilStepShowsBePatient = 40 * 1000 // 40 seconds
+            val timeUntilStepShowsBePatient = 60 * 1000 // 60 seconds
             val timeSinceStepStarted = now - currentStepStartTime
             if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
                 showLongStepWarning = true
             }
 
-            val actualProgress = viewModel.progress
-            if (actualProgress >= 0.98f) {
+            // When to stop using overcorrection of progress and always use the actual progress.
+            val maxOverCorrectPercentage = 0.97
+
+            if (actualProgress >= maxOverCorrectPercentage) {
                 displayProgress = actualProgress
             } else {
                 // Over estimate the progress by about 1% per second, but decays to
                 // adding smaller adjustments each second until the current step completes
                 fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
-                    // Sigmoid curve. Allows up to 10% over actual progress then flattens off.
-                    val maximumValue = 15.0 // Up to 15% over correct
-                    val timeConstant = 30.0 // Larger value = longer time until plateau
+                    // Sigmoid curve. Give larger correct soon after the step starts but then flattens off.
+                    val maximumValue = 25.0 // Up to 25% over correct
+                    val timeConstant = 50.0 // Larger value = longer time until plateau
                     return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
                 }
 
                 val secondsSinceStepStarted = timeSinceStepStarted / 1000.0
                 val overEstimatedProgress = min(
-                    0.98,
+                    maxOverCorrectPercentage,
                     actualProgress + 0.01 * overEstimateProgressAdjustment(
                         secondsSinceStepStarted
                     )

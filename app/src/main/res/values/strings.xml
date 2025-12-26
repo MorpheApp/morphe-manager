@@ -118,7 +118,7 @@
     <string name="morphe_patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 

@@ -97,19 +97,19 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     androidContext = context,
                     logger = logger,
                     input = File(parameters.inputFile),
-                onPatchCompleted = { events.patchSucceeded() },
-                onProgress = { name, state, message ->
-                    events.progress(name, state?.name, message)
-                }
+                    onPatchCompleted = { events.patchSucceeded() },
+                    onProgress = { name, state, message ->
+                        events.progress(name, state?.name, message)
+                    }
             ).use {
                 it.run(File(parameters.outputFile), patchList)}
             } finally {
                 preparation.cleanup()
             }
 
-            events.finished(null)
-
             logger.info("Patching completed in: ${(System.currentTimeMillis() - start) / 1000}s")
+
+            events.finished(null)
         }
     }
 

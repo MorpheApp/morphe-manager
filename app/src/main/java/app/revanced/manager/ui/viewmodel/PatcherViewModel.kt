@@ -6,8 +6,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageInstaller
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
 import android.net.Uri
 import android.os.ParcelUuid
 import android.util.Log
@@ -37,13 +37,14 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
-import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
@@ -61,11 +62,10 @@ import app.revanced.manager.ui.model.StepCategory
 import app.revanced.manager.ui.model.StepId
 import app.revanced.manager.ui.model.StepProgressProvider
 import app.revanced.manager.ui.model.navigation.Patcher
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.Options
+import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.patcher.patch.PatchBundleInfo
+import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.saveableVar
 import app.revanced.manager.util.saver.snapshotStateListSaver
 import app.revanced.manager.util.simpleMessage
@@ -76,14 +76,14 @@ import app.revanced.manager.util.uiSafe
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.withTimeout
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -94,6 +94,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.time.Duration
 import java.util.UUID
+import kotlin.math.max
 import kotlin.math.min
 
 @OptIn(SavedStateHandleSaveableApi::class, PluginHostApi::class)
@@ -546,34 +547,40 @@ class PatcherViewModel(
             exportMetadata = metadata
         }
     }
+
+    /**
+     * How much of the progress is allocated to executing patches.
+     */
+    private var patchesPercentage = 0.0
+
     val steps by savedStateHandle.saveable(saver = snapshotStateListSaver()) {
-        generateSteps(
+        val stepsList = generateSteps(
             app,
             input.selectedApp,
             requiresSplitPreparation
         ).toMutableStateList()
+
+        // Patches use the remaining unallocated percentage.
+        patchesPercentage = max(0.0, 1.0 - stepsList.sumOf { it.progressPercentage })
+
+        stepsList
     }
+
     private var currentStepIndex = 0
 
     /**
-     * [0, 1.0] progress value
+     * [0, 1.0] progress value.
      */
     val progress by derivedStateOf {
-        val currentStepIndex = getCurrentStepIndex()
-        val total = steps.sumOf{ it.subSteps } - 1 + patchCount
-
-        min(1.0, currentStepIndex / total.toDouble()).toFloat()
-    }
-
-    fun getCurrentStepIndex() : Int {
-        return (steps.sumOf {
-            // FIXME: Use step substep to track progress of individual patches.
+        val currentProgress = steps.sumOf {
             if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
-                it.subSteps.toLong()
+                it.progressPercentage
             } else {
-                0L
+                0.0
             }
-        } + completedPatchCount).toInt()
+        } + ((completedPatchCount / patchCount.toDouble()) * patchesPercentage)
+
+        min(1.0, currentProgress).toFloat()
     }
 
     private val workManager = WorkManager.getInstance(app)
@@ -1680,7 +1687,7 @@ class PatcherViewModel(
     }
 
     private companion object {
-        const val TAG = "ReVanced Patcher"
+        private const val TAG = "Morphe Patcher"
         private const val SYSTEM_INSTALL_TIMEOUT_MS = 15_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val INSTALL_MONITOR_POLL_MS = 500L
@@ -1710,43 +1717,45 @@ class PatcherViewModel(
                     category = StepCategory.PREPARING,
                     state = State.RUNNING,
                     progressKey = ProgressKey.DOWNLOAD,
+                    progressPercentage = 0.1
                 ).takeIf { needsDownload },
                 Step(
                     id = StepId.LOAD_PATCHES,
                     name = context.getString(R.string.patcher_step_load_patches),
                     category = StepCategory.PREPARING,
                     state = if (needsDownload) State.WAITING else State.RUNNING,
-                    subSteps = 2
+                    progressPercentage = 0.05
                 ),
                 buildSplitStep(context).takeIf { splitStepActive },
                 Step(
                     id = StepId.READ_APK,
                     name = context.getString(R.string.patcher_step_unpack),
                     category = StepCategory.PREPARING,
-                    subSteps = 2
+                    progressPercentage = 0.05
                 ),
 
                 Step(
                     id = StepId.EXECUTE_PATCHES,
                     name = context.getString(R.string.applying_patches),
-                    category = StepCategory.PATCHING
+                    category = StepCategory.PATCHING,
+                    // progress percentage is calculated as all remaining percentages not declared here.
+                    progressPercentage = 0.0
                 ),
 
                 Step(
                     id = StepId.WRITE_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_write_patched),
                     category = StepCategory.SAVING,
-                    subSteps = 4
+                    progressPercentage = 0.4
                 ),
                 Step(
                     id = StepId.SIGN_PATCHED_APK,
                     name = context.getString(R.string.patcher_step_sign_apk),
                     category = StepCategory.SAVING,
-                    subSteps = 2
+                    progressPercentage = 0.1
                 )
             )
         }
-
     }
 }
 
@@ -1759,5 +1768,6 @@ private fun buildSplitStep(
     name = context.getString(R.string.patcher_step_prepare_split_apk),
     category = StepCategory.PREPARING,
     state = state,
-    message = message
+    message = message,
+    progressPercentage = 0.1
 )
