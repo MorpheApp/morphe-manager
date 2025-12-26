@@ -56,7 +56,6 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             }
 
             logger.info("Process heap memory limit: ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
-            val start = System.currentTimeMillis()
 
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
@@ -106,8 +105,6 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             } finally {
                 preparation.cleanup()
             }
-
-            logger.info("Patching completed in: ${(System.currentTimeMillis() - start) / 1000}s")
 
             events.finished(null)
         }

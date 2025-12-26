@@ -289,7 +289,7 @@ class PatcherWorker(
 
             args.logger.info(
                 "Patching succeeded: output=${args.output} size=${File(args.output).length()} " +
-                        "elapsed=${elapsed}ms memory=${usedMem}MB/${totalMem}MB"
+                        "elapsed=${elapsed/1000}s memory=${usedMem}MB/${totalMem}MB"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
