@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.*
@@ -201,6 +202,7 @@ fun CustomBrandingDialog(
 ) {
     val scope = rememberCoroutineScope()
     val bundleRepository: PatchBundleRepository = koinInject()
+    val fs: Filesystem = koinInject()
 
     // Get appropriate preferences based on app type
     var appName by remember {
@@ -225,7 +227,8 @@ fun CustomBrandingDialog(
     var showInstructions by remember { mutableStateOf(false) }
     val rotationAngle by animateFloatAsState(
         targetValue = if (showInstructions) 180f else 0f,
-        animationSpec = tween(durationMillis = 300)
+        animationSpec = tween(durationMillis = 300),
+        label = "instruction_rotation"
     )
 
     // Load full description from bundle repository
@@ -270,6 +273,16 @@ fun CustomBrandingDialog(
             val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
                 ?: it.toString()
             iconPath = path
+        }
+    }
+
+    // Get permission contract and name
+    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+
+    // Permission launcher - launches folder picker after permission is granted
+    val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
+        if (granted) {
+            folderPickerLauncher.launch(null)
         }
     }
 
@@ -354,7 +367,15 @@ fun CustomBrandingDialog(
                 shape = RoundedCornerShape(12.dp),
                 trailingIcon = {
                     IconButton(
-                        onClick = { folderPickerLauncher.launch(null) },
+                        onClick = {
+                            // Check if storage permission is granted
+                            if (fs.hasStoragePermission()) {
+                                folderPickerLauncher.launch(null)
+                            } else {
+                                // Request storage permission
+                                permissionLauncher.launch(permissionName)
+                            }
+                        },
                         modifier = Modifier.size(40.dp)
                     ) {
                         Icon(
@@ -497,13 +518,15 @@ fun CustomHeaderDialog(
 ) {
     val scope = rememberCoroutineScope()
     val bundleRepository: PatchBundleRepository = koinInject()
+    val fs: Filesystem = koinInject()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
     // State for expandable instructions
     var showInstructions by remember { mutableStateOf(false) }
     val rotationAngle by animateFloatAsState(
         targetValue = if (showInstructions) 180f else 0f,
-        animationSpec = tween(durationMillis = 300)
+        animationSpec = tween(durationMillis = 300),
+        label = "instruction_rotation"
     )
 
     // Load full description from bundle repository
@@ -543,6 +566,16 @@ fun CustomHeaderDialog(
             val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
                 ?: it.toString()
             headerPath = path
+        }
+    }
+
+    // Get permission contract and name
+    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+
+    // Permission launcher - launches folder picker after permission is granted
+    val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
+        if (granted) {
+            folderPickerLauncher.launch(null)
         }
     }
 
@@ -587,7 +620,15 @@ fun CustomHeaderDialog(
                 shape = RoundedCornerShape(12.dp),
                 trailingIcon = {
                     IconButton(
-                        onClick = { folderPickerLauncher.launch(null) },
+                        onClick = {
+                            // Check if storage permission is granted
+                            if (fs.hasStoragePermission()) {
+                                folderPickerLauncher.launch(null)
+                            } else {
+                                // Request storage permission
+                                permissionLauncher.launch(permissionName)
+                            }
+                        },
                         modifier = Modifier.size(40.dp)
                     ) {
                         Icon(
