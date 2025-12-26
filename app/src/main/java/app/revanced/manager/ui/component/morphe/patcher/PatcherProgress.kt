@@ -1,6 +1,5 @@
 package app.revanced.manager.ui.component.morphe.patcher
 
-import android.content.res.Configuration
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
@@ -12,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,9 +18,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.AdaptiveLayout
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
+import app.revanced.manager.util.formatBytes
 import kotlinx.coroutines.delay
 
 /**
@@ -39,8 +39,6 @@ fun PatchingInProgress(
     showLongStepWarning: Boolean = false
 ) {
     val (completed, total) = patchesProgress
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     // Track when download is complete to hide progress smoothly
     var isDownloadComplete by remember { mutableStateOf(false) }
@@ -76,29 +74,32 @@ fun PatchingInProgress(
         }
     }
 
-    if (isLandscape) {
-        LandscapeProgressLayout(
-            progress = progress,
-            completed = completed,
-            total = total,
-            currentMessage = currentMessage,
-            showLongStepWarning = showLongStepWarning,
-            downloadProgress = downloadProgress,
-            isDownloadComplete = isDownloadComplete,
-            viewModel = viewModel
-        )
-    } else {
-        PortraitProgressLayout(
-            progress = progress,
-            completed = completed,
-            total = total,
-            currentMessage = currentMessage,
-            showLongStepWarning = showLongStepWarning,
-            downloadProgress = downloadProgress,
-            isDownloadComplete = isDownloadComplete,
-            viewModel = viewModel
-        )
-    }
+    AdaptiveLayout(
+        portraitContent = {
+            PortraitProgressLayout(
+                progress = progress,
+                completed = completed,
+                total = total,
+                currentMessage = currentMessage,
+                showLongStepWarning = showLongStepWarning,
+                downloadProgress = downloadProgress,
+                isDownloadComplete = isDownloadComplete,
+                viewModel = viewModel
+            )
+        },
+        landscapeContent = {
+            LandscapeProgressLayout(
+                progress = progress,
+                completed = completed,
+                total = total,
+                currentMessage = currentMessage,
+                showLongStepWarning = showLongStepWarning,
+                downloadProgress = downloadProgress,
+                isDownloadComplete = isDownloadComplete,
+                viewModel = viewModel
+            )
+        }
+    )
 }
 
 /**
@@ -450,17 +451,5 @@ fun CurrentStepIndicator(viewModel: PatcherViewModel) {
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
-    }
-}
-
-/**
- * Format bytes into readable format (B, KB, MB, GB)
- */
-fun formatBytes(bytes: Long): String {
-    return when {
-        bytes < 1024 -> "$bytes B"
-        bytes < 1024 * 1024 -> "%.2f KB".format(bytes / 1024.0)
-        bytes < 1024 * 1024 * 1024 -> "%.2f MB".format(bytes / (1024.0 * 1024.0))
-        else -> "%.2f GB".format(bytes / (1024.0 * 1024.0 * 1024.0))
     }
 }

@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,7 +40,7 @@ fun MorpheDialog(
     dismissOnClickOutside: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val isDarkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
     var visible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -116,9 +115,7 @@ private fun DialogContent(
     isDarkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
-    val configuration = LocalConfiguration.current
-    val isLandscape =
-        configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = isLandscape()
 
     // Text colors based on theme
     val textColor = if (isDarkTheme) Color.White else Color.Black
@@ -196,10 +193,3 @@ private fun DialogContent(
  */
 val LocalDialogTextColor = compositionLocalOf { Color.White }
 val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
-
-/**
- * Get luminance from a Color
- */
-private fun Color.luminance(): Float {
-    return 0.299f * red + 0.587f * green + 0.114f * blue
-}

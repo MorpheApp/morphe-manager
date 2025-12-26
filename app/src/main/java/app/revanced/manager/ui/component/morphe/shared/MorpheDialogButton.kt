@@ -26,8 +26,7 @@ fun MorpheDialogButton(
     val primaryColor = MaterialTheme.colorScheme.primary
     val textColor = LocalDialogTextColor.current
 
-    // Determine if we're on dark or light background based on text color
-    val isDarkBackground = textColor == Color.White
+    val isDarkBackground = textColor.isDarkBackground()
 
     val containerColor = when {
         isDestructive -> Color.Red.copy(alpha = if (isDarkBackground) 0.25f else 0.2f)
@@ -37,11 +36,9 @@ fun MorpheDialogButton(
     val contentColor = when {
         isDestructive -> if (isDarkBackground) Color(0xFFFF6B6B) else Color(0xFFD32F2F)
         else -> if (isDarkBackground) {
-            // Lighten primary for dark background
-            primaryColor.copy(alpha = 1f).lighten(0.3f)
+            primaryColor.lighten(0.3f)
         } else {
-            // Darken primary for light background
-            primaryColor.copy(alpha = 1f).darken(0.1f)
+            primaryColor.darken(0.1f)
         }
     }
 
@@ -80,30 +77,6 @@ fun MorpheDialogButton(
 }
 
 /**
- * Lighten a color by mixing with white
- */
-private fun Color.lighten(factor: Float): Color {
-    return Color(
-        red = red + (1f - red) * factor,
-        green = green + (1f - green) * factor,
-        blue = blue + (1f - blue) * factor,
-        alpha = alpha
-    )
-}
-
-/**
- * Darken a color by mixing with black
- */
-private fun Color.darken(factor: Float): Color {
-    return Color(
-        red = red * (1f - factor),
-        green = green * (1f - factor),
-        blue = blue * (1f - factor),
-        alpha = alpha
-    )
-}
-
-/**
  * Semi-transparent outlined button for dialogs
  */
 @Composable
@@ -118,7 +91,7 @@ fun MorpheDialogOutlinedButton(
     val primaryColor = MaterialTheme.colorScheme.primary
     val textColor = LocalDialogTextColor.current
 
-    val isDarkBackground = textColor == Color.White
+    val isDarkBackground = textColor.isDarkBackground()
 
     val borderColor = when {
         isDestructive -> Color.Red.copy(alpha = if (isDarkBackground) 0.35f else 0.3f)

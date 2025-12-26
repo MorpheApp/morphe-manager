@@ -16,6 +16,9 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
+/**
+ * Space background with twinkling stars and shooting meteors
+ */
 @Composable
 fun SpaceBackground(modifier: Modifier = Modifier) {
     val colorScheme = MaterialTheme.colorScheme
@@ -40,8 +43,9 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
     val globalProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(15000, easing = LinearEasing),
+        animationSpec = BackgroundAnimationSpecs.floatAnimation(
+            duration = 15000,
+            easing = LinearEasing,
             repeatMode = RepeatMode.Restart
         ),
         label = "globalProgress"

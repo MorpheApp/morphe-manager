@@ -6,7 +6,6 @@ import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.util.PM
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 

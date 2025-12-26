@@ -16,9 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
-import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
 import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
 import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogTextField
 
 /**
  * Color picker dialog for custom color selection
@@ -91,7 +91,7 @@ fun ColorPickerDialog(
             }
 
             // Hex input
-            OutlinedTextField(
+            MorpheDialogTextField(
                 value = hexInput,
                 onValueChange = { input ->
                     hexInput = input
@@ -119,17 +119,7 @@ fun ColorPickerDialog(
                     )
                 },
                 isError = isHexError,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = LocalDialogTextColor.current,
-                    unfocusedTextColor = LocalDialogTextColor.current,
-                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                    cursorColor = LocalDialogTextColor.current,
-                    errorBorderColor = MaterialTheme.colorScheme.error
-                )
+                modifier = Modifier.fillMaxWidth()
             )
 
             // RGB Sliders
