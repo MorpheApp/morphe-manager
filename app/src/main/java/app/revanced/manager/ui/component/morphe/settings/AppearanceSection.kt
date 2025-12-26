@@ -128,22 +128,11 @@ private fun AppearanceContent(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         // Background Type Selection
-        Text(
-            text = stringResource(R.string.morphe_background_type),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            BackgroundType.entries.forEach { bgType ->
-                val isSelected = backgroundType == bgType.name
-                ThemeOption(
+        SelectorSection(
+            title = stringResource(R.string.morphe_background_type),
+            items = BackgroundType.entries.map { bgType ->
+                SelectorItem(
+                    key = bgType.name,
                     icon = when (bgType) {
                         BackgroundType.CIRCLES -> Icons.Outlined.Circle
                         BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
@@ -152,150 +141,144 @@ private fun AppearanceContent(
                         BackgroundType.SHAPES -> Icons.Outlined.Pentagon
                         BackgroundType.NONE -> Icons.Outlined.VisibilityOff
                     },
-                    label = stringResource(bgType.displayNameResId),
-                    selected = isSelected,
-                    onClick = {
-                        scope.launch {
-                            viewModel.prefs.backgroundType.update(bgType.name)
-                        }
-                    },
-                    modifier = Modifier.width(80.dp)
+                    label = stringResource(bgType.displayNameResId)
                 )
-            }
-        }
-
-        // Theme Selection
-        Text(
-            text = stringResource(R.string.theme),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+            },
+            selectedItem = backgroundType,
+            onItemSelected = { selectedType ->
+                scope.launch {
+                    viewModel.prefs.backgroundType.update(selectedType)
+                }
+            },
+            columns = null // Horizontal scroll
         )
 
-        // Theme options row
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            // System option
-            ThemeOption(
-                icon = Icons.Outlined.PhoneAndroid,
-                label = stringResource(R.string.system),
-                selected = theme == Theme.SYSTEM && !pureBlackTheme,
-                onClick = {
-                    viewModel.setTheme(Theme.SYSTEM)
-                    scope.launch {
-                        viewModel.prefs.pureBlackTheme.update(false)
-                    }
-                },
-                modifier = Modifier.weight(1f)
-            )
-            // Light option
-            ThemeOption(
-                icon = Icons.Outlined.LightMode,
-                label = stringResource(R.string.light),
-                selected = theme == Theme.LIGHT,
-                onClick = {
-                    viewModel.setTheme(Theme.LIGHT)
-                    scope.launch {
-                        viewModel.prefs.pureBlackTheme.update(false)
-                    }
-                },
-                modifier = Modifier.weight(1f)
-            )
-            // Dark option
-            ThemeOption(
-                icon = Icons.Outlined.DarkMode,
-                label = stringResource(R.string.dark),
-                selected = theme == Theme.DARK && !pureBlackTheme,
-                onClick = {
-                    viewModel.setTheme(Theme.DARK)
-                    scope.launch {
-                        viewModel.prefs.pureBlackTheme.update(false)
-                    }
-                },
-                modifier = Modifier.weight(1f)
-            )
-            // Black option
-            ThemeOption(
-                icon = Icons.Outlined.Contrast,
-                label = stringResource(R.string.black),
-                selected = pureBlackTheme,
-                onClick = {
-                    scope.launch {
-                        viewModel.prefs.pureBlackTheme.update(true)
-                        viewModel.prefs.dynamicColor.update(false)
-                        // Reset custom theme color when Black is selected
-                        viewModel.setCustomThemeColor(null)
-                        // Ensure dark theme is selected
-                        if (theme == Theme.LIGHT) {
+        // Theme Selection
+        SelectorSection(
+            title = stringResource(R.string.theme),
+            items = buildList {
+                add(
+                    SelectorItem(
+                        key = "SYSTEM",
+                        icon = Icons.Outlined.PhoneAndroid,
+                        label = stringResource(R.string.system)
+                    )
+                )
+                add(
+                    SelectorItem(
+                        key = "LIGHT",
+                        icon = Icons.Outlined.LightMode,
+                        label = stringResource(R.string.light)
+                    )
+                )
+                add(
+                    SelectorItem(
+                        key = "DARK",
+                        icon = Icons.Outlined.DarkMode,
+                        label = stringResource(R.string.dark)
+                    )
+                )
+                add(
+                    SelectorItem(
+                        key = "BLACK",
+                        icon = Icons.Outlined.Contrast,
+                        label = stringResource(R.string.black)
+                    )
+                )
+            },
+            selectedItem = when {
+                pureBlackTheme -> "BLACK"
+                theme == Theme.SYSTEM -> "SYSTEM"
+                theme == Theme.LIGHT -> "LIGHT"
+                theme == Theme.DARK -> "DARK"
+                else -> "SYSTEM"
+            },
+            onItemSelected = { selectedTheme ->
+                scope.launch {
+                    when (selectedTheme) {
+                        "SYSTEM" -> {
+                            viewModel.setTheme(Theme.SYSTEM)
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                        "LIGHT" -> {
+                            viewModel.setTheme(Theme.LIGHT)
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                        "DARK" -> {
                             viewModel.setTheme(Theme.DARK)
+                            viewModel.prefs.pureBlackTheme.update(false)
+                        }
+                        "BLACK" -> {
+                            viewModel.prefs.pureBlackTheme.update(true)
+                            viewModel.prefs.dynamicColor.update(false)
+                            viewModel.setCustomThemeColor(null)
+                            if (theme == Theme.LIGHT) {
+                                viewModel.setTheme(Theme.DARK)
+                            }
                         }
                     }
-                },
-                modifier = Modifier.weight(1f)
-            )
-        }
+                }
+            },
+            columns = null // Horizontal scroll
+        )
 
         // Dynamic Color toggle (Android 12+) - only show when Black is not selected
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             AnimatedVisibility(visible = !pureBlackTheme) {
-                Column {
-                    Surface(
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable {
+                            scope.launch {
+                                val newValue = !dynamicColor
+                                viewModel.prefs.dynamicColor.update(newValue)
+                                // Reset custom theme color when dynamic color is enabled
+                                if (newValue) {
+                                    viewModel.setCustomThemeColor(null)
+                                }
+                            }
+                        },
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                ) {
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable {
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Palette,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = stringResource(R.string.dynamic_color),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Text(
+                                text = stringResource(R.string.dynamic_color_description),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Switch(
+                            checked = dynamicColor,
+                            onCheckedChange = {
                                 scope.launch {
-                                    val newValue = !dynamicColor
-                                    viewModel.prefs.dynamicColor.update(newValue)
+                                    viewModel.prefs.dynamicColor.update(it)
                                     // Reset custom theme color when dynamic color is enabled
-                                    if (newValue) {
+                                    if (it) {
                                         viewModel.setCustomThemeColor(null)
                                     }
                                 }
-                            },
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Palette,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.dynamic_color),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Text(
-                                    text = stringResource(R.string.dynamic_color_description),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
                             }
-                            Switch(
-                                checked = dynamicColor,
-                                onCheckedChange = {
-                                    scope.launch {
-                                        viewModel.prefs.dynamicColor.update(it)
-                                        // Reset custom theme color when dynamic color is enabled
-                                        if (it) {
-                                            viewModel.setCustomThemeColor(null)
-                                        }
-                                    }
-                                }
-                            )
-                        }
+                        )
                     }
                 }
             }

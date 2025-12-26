@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.component.morphe.shared
+package app.revanced.manager.ui.component.morphe.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,6 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
 
 /**
  * Color picker dialog for custom color selection
