@@ -50,7 +50,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
         private val ALLOWED_PATCHES = setOf(
             "Custom branding",
             "Change header",
-            "Theme"
+            "Theme",
+            "Hide Shorts components"
         )
     }
 
