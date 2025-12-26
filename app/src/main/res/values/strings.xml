@@ -162,6 +162,9 @@
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
     <string name="morphe_no_patch_options">No patch options available. Make sure a patch bundle is loaded.</string>
     <string name="morphe_no_options_available">No options available for this patch</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">Custom color</string>
+    <string name="morphe_hex_color">Hex color</string>
     <!-- Theme Colors -->
     <string name="morphe_theme_colors">App Theme Colors</string>
     <string name="morphe_theme_dark_color">Dark Theme Background</string>

@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -51,6 +52,12 @@ fun ThemeColorDialog(
     }
 
     val lightColor by patchOptionsPrefs.lightThemeBackgroundColorYouTube.getAsState()
+
+    // Local state for custom color input
+    var showDarkColorPicker by remember { mutableStateOf(false) }
+    var showLightColorPicker by remember { mutableStateOf(false) }
+    var customDarkColor by remember { mutableStateOf(darkColor) }
+    var customLightColor by remember { mutableStateOf(lightColor) }
 
     // Get theme options from bundle
     val packageName = when (appType) {
@@ -86,15 +93,15 @@ fun ThemeColorDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Dark Theme Section
-            if (darkPresets.isNotEmpty()) {
+            if (darkThemeOption != null) {
                 Text(
-                    text = darkThemeOption?.title ?: stringResource(R.string.morphe_theme_dark_color),
+                    text = darkThemeOption.title,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
-                darkThemeOption?.description?.let { desc ->
+                darkThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
                     Text(
                         text = desc,
                         style = MaterialTheme.typography.bodySmall,
@@ -102,10 +109,12 @@ fun ThemeColorDialog(
                     )
                 }
 
+                // Presets
                 darkPresets.forEach { (label, value) ->
                     val colorValue = value?.toString() ?: return@forEach
                     ThemePresetItem(
                         label = label,
+                        colorValue = colorValue,
                         isSelected = darkColor == colorValue,
                         onClick = {
                             scope.launch {
@@ -117,20 +126,28 @@ fun ThemeColorDialog(
                         }
                     )
                 }
+
+                // Custom color option
+                CustomColorItem(
+                    label = stringResource(R.string.morphe_custom_color),
+                    currentColor = darkColor,
+                    isCustomSelected = darkPresets.values.none { it?.toString() == darkColor },
+                    onClick = { showDarkColorPicker = true }
+                )
             }
 
-            // Light Theme Section (YouTube only)
-            if (appType == AppType.YOUTUBE && lightPresets.isNotEmpty()) {
+            // Light Theme Section (YouTube only, if available)
+            if (appType == AppType.YOUTUBE && lightThemeOption != null) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = lightThemeOption?.title ?: stringResource(R.string.morphe_theme_light_color),
+                    text = lightThemeOption.title,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
-                lightThemeOption?.description?.let { desc ->
+                lightThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
                     Text(
                         text = desc,
                         style = MaterialTheme.typography.bodySmall,
@@ -138,10 +155,12 @@ fun ThemeColorDialog(
                     )
                 }
 
+                // Presets
                 lightPresets.forEach { (label, value) ->
                     val colorValue = value?.toString() ?: return@forEach
                     ThemePresetItem(
                         label = label,
+                        colorValue = colorValue,
                         isSelected = lightColor == colorValue,
                         onClick = {
                             scope.launch {
@@ -150,10 +169,18 @@ fun ThemeColorDialog(
                         }
                     )
                 }
+
+                // Custom color option
+                CustomColorItem(
+                    label = stringResource(R.string.morphe_custom_color),
+                    currentColor = lightColor,
+                    isCustomSelected = lightPresets.values.none { it?.toString() == lightColor },
+                    onClick = { showLightColorPicker = true }
+                )
             }
 
             // Show message if no options available
-            if (darkPresets.isEmpty() && lightPresets.isEmpty()) {
+            if (darkThemeOption == null && lightThemeOption == null) {
                 Text(
                     text = stringResource(R.string.morphe_no_options_available),
                     style = MaterialTheme.typography.bodyMedium,
@@ -163,14 +190,261 @@ fun ThemeColorDialog(
             }
         }
     }
+
+    // Dark Color Picker Dialog
+    if (showDarkColorPicker) {
+        ColorPickerDialog(
+            title = stringResource(R.string.morphe_theme_dark_color),
+            currentColor = darkColor,
+            onColorSelected = { color ->
+                scope.launch {
+                    when (appType) {
+                        AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(color)
+                        AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(color)
+                    }
+                }
+                showDarkColorPicker = false
+            },
+            onDismiss = { showDarkColorPicker = false }
+        )
+    }
+
+    // Light Color Picker Dialog
+    if (showLightColorPicker) {
+        ColorPickerDialog(
+            title = stringResource(R.string.morphe_theme_light_color),
+            currentColor = lightColor,
+            onColorSelected = { color ->
+                scope.launch {
+                    patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(color)
+                }
+                showLightColorPicker = false
+            },
+            onDismiss = { showLightColorPicker = false }
+        )
+    }
+}
+
+/**
+ * Color picker dialog for custom color selection
+ */
+@Composable
+private fun ColorPickerDialog(
+    title: String,
+    currentColor: String,
+    onColorSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    // Parse current color to RGB values
+    val initialColor = remember(currentColor) {
+        parseColorToRgb(currentColor)
+    }
+
+    var red by remember { mutableFloatStateOf(initialColor.first) }
+    var green by remember { mutableFloatStateOf(initialColor.second) }
+    var blue by remember { mutableFloatStateOf(initialColor.third) }
+    var hexInput by remember { mutableStateOf(rgbToHex(initialColor.first, initialColor.second, initialColor.third)) }
+    var isHexError by remember { mutableStateOf(false) }
+
+    // Update hex when sliders change
+    LaunchedEffect(red, green, blue) {
+        hexInput = rgbToHex(red, green, blue)
+        isHexError = false
+    }
+
+    val previewColor = Color(red, green, blue)
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = title,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.save),
+                onPrimaryClick = {
+                    onColorSelected(hexInput)
+                },
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Color preview
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                color = previewColor,
+                shape = RoundedCornerShape(12.dp),
+                tonalElevation = 2.dp
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = hexInput,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = if (red + green + blue > 1.5f) Color.Black else Color.White
+                    )
+                }
+            }
+
+            // Hex input
+            OutlinedTextField(
+                value = hexInput,
+                onValueChange = { input ->
+                    hexInput = input
+                    // Try to parse hex and update sliders
+                    val parsed = parseHexToRgb(input)
+                    if (parsed != null) {
+                        red = parsed.first
+                        green = parsed.second
+                        blue = parsed.third
+                        isHexError = false
+                    } else {
+                        isHexError = input.isNotEmpty() && !input.startsWith("@")
+                    }
+                },
+                label = {
+                    Text(
+                        stringResource(R.string.morphe_hex_color),
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                },
+                placeholder = {
+                    Text(
+                        "#RRGGBB",
+                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
+                    )
+                },
+                isError = isHexError,
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = LocalDialogTextColor.current,
+                    unfocusedTextColor = LocalDialogTextColor.current,
+                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
+                    cursorColor = LocalDialogTextColor.current,
+                    errorBorderColor = MaterialTheme.colorScheme.error
+                )
+            )
+
+            // RGB Sliders
+            ColorSlider(
+                label = "R",
+                value = red,
+                onValueChange = { red = it },
+                color = Color.Red
+            )
+
+            ColorSlider(
+                label = "G",
+                value = green,
+                onValueChange = { green = it },
+                color = Color.Green
+            )
+
+            ColorSlider(
+                label = "B",
+                value = blue,
+                onValueChange = { blue = it },
+                color = Color.Blue
+            )
+        }
+    }
+}
+
+@Composable
+private fun ColorSlider(
+    label: String,
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    color: Color
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            color = color,
+            modifier = Modifier.width(24.dp)
+        )
+        Slider(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier.weight(1f),
+            colors = SliderDefaults.colors(
+                thumbColor = color,
+                activeTrackColor = color,
+                inactiveTrackColor = color.copy(alpha = 0.3f)
+            )
+        )
+        Text(
+            text = (value * 255).toInt().toString(),
+            style = MaterialTheme.typography.bodySmall,
+            color = LocalDialogSecondaryTextColor.current,
+            modifier = Modifier.width(32.dp)
+        )
+    }
+}
+
+/**
+ * Parse color string to RGB float values (0-1 range)
+ */
+private fun parseColorToRgb(color: String): Triple<Float, Float, Float> {
+    return parseHexToRgb(color) ?: Triple(0f, 0f, 0f)
+}
+
+/**
+ * Parse hex color string to RGB float values
+ */
+private fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
+    val cleanHex = hex.removePrefix("#")
+    if (cleanHex.length != 6) return null
+
+    return try {
+        val r = cleanHex.substring(0, 2).toInt(16) / 255f
+        val g = cleanHex.substring(2, 4).toInt(16) / 255f
+        val b = cleanHex.substring(4, 6).toInt(16) / 255f
+        Triple(r, g, b)
+    } catch (e: Exception) {
+        null
+    }
+}
+
+/**
+ * Convert RGB float values to hex string
+ */
+private fun rgbToHex(r: Float, g: Float, b: Float): String {
+    val rInt = (r * 255).toInt().coerceIn(0, 255)
+    val gInt = (g * 255).toInt().coerceIn(0, 255)
+    val bInt = (b * 255).toInt().coerceIn(0, 255)
+    return "#%02X%02X%02X".format(rInt, gInt, bInt)
 }
 
 @Composable
 private fun ThemePresetItem(
     label: String,
+    colorValue: String,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val previewColor = remember(colorValue) {
+        parseHexToRgb(colorValue)?.let { (r, g, b) -> Color(r, g, b) }
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -187,22 +461,108 @@ private fun ThemePresetItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            // Color preview circle
+            previewColor?.let { color ->
+                Surface(
+                    modifier = Modifier.size(24.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = color,
+                    tonalElevation = 1.dp
+                ) {}
+            }
+
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodyMedium,
                 color = LocalDialogTextColor.current,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                modifier = Modifier.weight(1f)
             )
+
             if (isSelected) {
-                Text(
-                    text = "✓",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
+                Icon(
+                    imageVector = Icons.Outlined.Check,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun CustomColorItem(
+    label: String,
+    currentColor: String,
+    isCustomSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val previewColor = remember(currentColor) {
+        parseHexToRgb(currentColor)?.let { (r, g, b) -> Color(r, g, b) }
+    }
+
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(8.dp),
+        color = if (isCustomSelected) {
+            LocalDialogTextColor.current.copy(alpha = 0.1f)
+        } else {
+            LocalDialogTextColor.current.copy(alpha = 0.05f)
+        }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Color picker icon or preview
+            if (isCustomSelected && previewColor != null) {
+                Surface(
+                    modifier = Modifier.size(24.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = previewColor,
+                    tonalElevation = 1.dp
+                ) {}
+            } else {
+                Icon(
+                    imageVector = Icons.Outlined.Palette,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogTextColor.current,
+                    fontWeight = if (isCustomSelected) FontWeight.Bold else FontWeight.Normal
+                )
+                if (isCustomSelected) {
+                    Text(
+                        text = currentColor,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            Icon(
+                imageVector = Icons.Outlined.ChevronRight,
+                contentDescription = null,
+                tint = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }
