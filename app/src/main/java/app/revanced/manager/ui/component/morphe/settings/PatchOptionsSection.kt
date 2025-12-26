@@ -140,8 +140,13 @@ private fun ExpandableAppSection(
     )
 
     val title = when (appType) {
-        AppType.YOUTUBE -> stringResource(R.string.morphe_patch_options_youtube)
-        AppType.YOUTUBE_MUSIC -> stringResource(R.string.morphe_patch_options_youtube_music)
+        AppType.YOUTUBE -> stringResource(R.string.morphe_home_youtube)
+        AppType.YOUTUBE_MUSIC -> stringResource(R.string.morphe_home_youtube_music)
+    }
+
+    val description = when (appType) {
+        AppType.YOUTUBE -> stringResource(R.string.morphe_patch_options_youtube_description)
+        AppType.YOUTUBE_MUSIC -> stringResource(R.string.morphe_patch_options_youtube_music_description)
     }
 
     val icon = when (appType) {
@@ -167,7 +172,8 @@ private fun ExpandableAppSection(
             ) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.weight(1f)
                 ) {
                     Icon(
                         imageVector = icon,
@@ -175,11 +181,18 @@ private fun ExpandableAppSection(
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(24.dp)
                     )
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Column {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                        Text(
+                            text = description,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
                 Icon(
                     imageVector = Icons.Outlined.ExpandMore,
@@ -280,7 +293,7 @@ private fun ExpandableAppSection(
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
                                             text = stringResource(R.string.morphe_hide_shorts_app_shortcut),
-                                            style = MaterialTheme.typography.bodySmall,
+                                            style = MaterialTheme.typography.bodyMedium,
                                             fontWeight = FontWeight.Medium
                                         )
                                         Text(
@@ -316,7 +329,7 @@ private fun ExpandableAppSection(
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
                                             text = stringResource(R.string.morphe_hide_shorts_widget),
-                                            style = MaterialTheme.typography.bodySmall,
+                                            style = MaterialTheme.typography.bodyMedium,
                                             fontWeight = FontWeight.Medium
                                         )
                                         Text(
@@ -374,7 +387,7 @@ private fun PatchOptionItem(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium
                 )
                 Text(

@@ -153,8 +153,8 @@
 
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch Options</string>
-    <string name="morphe_patch_options_youtube">YouTube Options</string>
-    <string name="morphe_patch_options_youtube_music">YouTube Music Options</string>
+    <string name="morphe_patch_options_youtube_description">Theme, branding, header, and Shorts options</string>
+    <string name="morphe_patch_options_youtube_music_description">Theme and branding options</string>
     <string name="morphe_patch_options_restart_message">These options require re-patching the app to take effect. Your current settings will be saved.</string>
     <!-- Theme Colors -->
     <string name="morphe_theme_colors">App Theme Colors</string>
