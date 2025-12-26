@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,10 +18,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
+import app.revanced.manager.ui.component.morphe.shared.IconTextRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -46,45 +50,23 @@ fun AppearanceSection(
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {
             // Interface switcher
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable(onClick = onBackToAdvanced),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+            MorpheClickableCard(
+                onClick = onBackToAdvanced,
+                cornerRadius = 12.dp
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.SwapHoriz,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.morphe_settings_return_to_advanced),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_settings_return_to_advanced_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                IconTextRow(
+                    icon = Icons.Outlined.SwapHoriz,
+                    title = stringResource(R.string.morphe_settings_return_to_advanced),
+                    description = stringResource(R.string.morphe_settings_return_to_advanced_description),
+                    modifier = Modifier.padding(12.dp),
+                    trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                )
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -225,61 +207,37 @@ private fun AppearanceContent(
         // Dynamic Color toggle (Android 12+) - only show when Black is not selected
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             AnimatedVisibility(visible = !pureBlackTheme) {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
-                        .clickable {
-                            scope.launch {
-                                val newValue = !dynamicColor
-                                viewModel.prefs.dynamicColor.update(newValue)
-                                // Reset custom theme color when dynamic color is enabled
-                                if (newValue) {
-                                    viewModel.setCustomThemeColor(null)
-                                }
+                MorpheClickableCard(
+                    onClick = {
+                        scope.launch {
+                            val newValue = !dynamicColor
+                            viewModel.prefs.dynamicColor.update(newValue)
+                            if (newValue) {
+                                viewModel.setCustomThemeColor(null)
                             }
-                        },
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Palette,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.dynamic_color),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium
-                            )
-                            Text(
-                                text = stringResource(R.string.dynamic_color_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
                         }
-                        Switch(
-                            checked = dynamicColor,
-                            onCheckedChange = {
-                                scope.launch {
-                                    viewModel.prefs.dynamicColor.update(it)
-                                    // Reset custom theme color when dynamic color is enabled
-                                    if (it) {
-                                        viewModel.setCustomThemeColor(null)
+                    },
+                    cornerRadius = 12.dp
+                ) {
+                    IconTextRow(
+                        icon = Icons.Outlined.Palette,
+                        title = stringResource(R.string.dynamic_color),
+                        description = stringResource(R.string.dynamic_color_description),
+                        modifier = Modifier.padding(12.dp),
+                        trailingContent = {
+                            Switch(
+                                checked = dynamicColor,
+                                onCheckedChange = {
+                                    scope.launch {
+                                        viewModel.prefs.dynamicColor.update(it)
+                                        if (it) {
+                                            viewModel.setCustomThemeColor(null)
+                                        }
                                     }
                                 }
-                            }
-                        )
-                    }
+                            )
+                        }
+                    )
                 }
             }
         }
@@ -434,9 +392,6 @@ private fun ColorPresetsRow(
     }
 }
 
-/**
- * Convert dark color to lighter display variant (lighten by ~20%)
- */
 private fun Color.lightenForDisplay(): Color {
     return Color(
         red = (this.red + 0.2f).coerceAtMost(1f),

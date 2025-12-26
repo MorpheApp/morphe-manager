@@ -9,10 +9,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.ui.component.morphe.shared.IconTextRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
@@ -313,95 +314,58 @@ private fun HideShortsSection(
     val appShortcutOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT)
     val widgetOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
 
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.3f)
+    MorpheCard(
+        cornerRadius = 8.dp,
+        alpha = 0.3f
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.VisibilityOff,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
-                )
-                Text(
-                    text = stringResource(R.string.morphe_hide_shorts_features),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+            IconTextRow(
+                icon = Icons.Outlined.VisibilityOff,
+                title = stringResource(R.string.morphe_hide_shorts_features)
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             // Hide App Shortcut
             if (hasAppShortcutOption) {
                 val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = appShortcutOption?.title ?: stringResource(R.string.morphe_hide_shorts_app_shortcut),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = appShortcutOption?.description ?: stringResource(R.string.morphe_hide_shorts_app_shortcut_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                IconTextRow(
+                    icon = Icons.Outlined.VisibilityOff,
+                    title = appShortcutOption?.title ?: stringResource(R.string.morphe_hide_shorts_app_shortcut),
+                    description = appShortcutOption?.description ?: stringResource(R.string.morphe_hide_shorts_app_shortcut_description),
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    trailingContent = {
+                        Switch(
+                            checked = hideShortsAppShortcut,
+                            onCheckedChange = {
+                                scope.launch {
+                                    patchOptionsPrefs.hideShortsAppShortcut.update(it)
+                                }
+                            }
                         )
                     }
-                    Switch(
-                        checked = hideShortsAppShortcut,
-                        onCheckedChange = {
-                            scope.launch {
-                                patchOptionsPrefs.hideShortsAppShortcut.update(it)
-                            }
-                        }
-                    )
-                }
+                )
             }
 
             // Hide Widget
             if (hasWidgetOption) {
                 val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = widgetOption?.title ?: stringResource(R.string.morphe_hide_shorts_widget),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = widgetOption?.description ?: stringResource(R.string.morphe_hide_shorts_widget_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                IconTextRow(
+                    icon = Icons.Outlined.VisibilityOff,
+                    title = widgetOption?.title ?: stringResource(R.string.morphe_hide_shorts_widget),
+                    description = widgetOption?.description ?: stringResource(R.string.morphe_hide_shorts_widget_description),
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    trailingContent = {
+                        Switch(
+                            checked = hideShortsWidget,
+                            onCheckedChange = {
+                                scope.launch {
+                                    patchOptionsPrefs.hideShortsWidget.update(it)
+                                }
+                            }
                         )
                     }
-                    Switch(
-                        checked = hideShortsWidget,
-                        onCheckedChange = {
-                            scope.launch {
-                                patchOptionsPrefs.hideShortsWidget.update(it)
-                            }
-                        }
-                    )
-                }
+                )
             }
         }
     }

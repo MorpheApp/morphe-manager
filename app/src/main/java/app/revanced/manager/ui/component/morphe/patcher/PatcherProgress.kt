@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.AdaptiveLayout
+import app.revanced.manager.ui.component.morphe.shared.formatBytes
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
-import app.revanced.manager.util.formatBytes
 import kotlinx.coroutines.delay
 
 /**

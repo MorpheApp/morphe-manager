@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
 import android.annotation.SuppressLint
-import android.text.format.DateUtils
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -33,6 +32,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.component.morphe.shared.getRelativeTimeString
 import app.revanced.manager.util.toast
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -409,16 +409,4 @@ private fun TimelineItem(
             )
         }
     }
-}
-
-/**
- * Get relative time string (e.g., "2 hours ago")
- */
-private fun getRelativeTimeString(timestamp: Long): String {
-    return DateUtils.getRelativeTimeSpanString(
-        timestamp,
-        System.currentTimeMillis(),
-        DateUtils.MINUTE_IN_MILLIS,
-        DateUtils.FORMAT_ABBREV_RELATIVE
-    ).toString()
 }

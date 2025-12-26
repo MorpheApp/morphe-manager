@@ -1,4 +1,6 @@
-package app.revanced.manager.util
+package app.revanced.manager.ui.component.morphe.shared
+
+import android.text.format.DateUtils
 
 /**
  * Format bytes into readable format (B, KB, MB, GB)
@@ -17,3 +19,15 @@ fun formatBytes(bytes: Long): String {
  */
 fun formatMegabytes(bytes: Long): Float =
     if (bytes <= 0) 0f else bytes / 1_000_000f
+
+/**
+ * Get relative time string (e.g., "2 hours ago")
+ */
+fun getRelativeTimeString(timestamp: Long): String {
+    return DateUtils.getRelativeTimeSpanString(
+        timestamp,
+        System.currentTimeMillis(),
+        DateUtils.MINUTE_IN_MILLIS,
+        DateUtils.FORMAT_ABBREV_RELATIVE
+    ).toString()
+}

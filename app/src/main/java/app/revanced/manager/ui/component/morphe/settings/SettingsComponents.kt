@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.network.downloader.DownloaderPluginState
+import app.revanced.manager.ui.component.morphe.shared.IconTextRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
 
 /**
  * Section header with icon and title
@@ -169,59 +171,39 @@ fun PluginItem(
         }
     }
 
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
-        onClick = onClick
+    MorpheClickableCard(
+        onClick = onClick,
+        cornerRadius = 12.dp,
+        modifier = modifier
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = when (state) {
-                    is DownloaderPluginState.Loaded -> Icons.Outlined.CheckCircle
-                    is DownloaderPluginState.Failed -> Icons.Outlined.Error
-                    is DownloaderPluginState.Untrusted -> Icons.Outlined.Warning
-                },
-                contentDescription = null,
-                tint = when (state) {
-                    is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.primary
-                    is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.error
-                    is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.tertiary
-                },
-                modifier = Modifier.size(24.dp)
-            )
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-                        ?: packageName,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                Text(
-                    text = stringResource(
-                        when (state) {
-                            is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
-                            is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
-                            is DownloaderPluginState.Untrusted -> R.string.downloader_plugin_state_untrusted
-                        }
-                    ),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+        IconTextRow(
+            icon = when (state) {
+                is DownloaderPluginState.Loaded -> Icons.Outlined.CheckCircle
+                is DownloaderPluginState.Failed -> Icons.Outlined.Error
+                is DownloaderPluginState.Untrusted -> Icons.Outlined.Warning
+            },
+            title = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+                ?: packageName,
+            description = stringResource(
+                when (state) {
+                    is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
+                    is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
+                    is DownloaderPluginState.Untrusted -> R.string.downloader_plugin_state_untrusted
+                }
+            ),
+            iconTint = when (state) {
+                is DownloaderPluginState.Loaded -> MaterialTheme.colorScheme.primary
+                is DownloaderPluginState.Failed -> MaterialTheme.colorScheme.error
+                is DownloaderPluginState.Untrusted -> MaterialTheme.colorScheme.tertiary
+            },
+            modifier = Modifier.padding(12.dp),
+            trailingContent = {
+                Icon(
+                    imageVector = Icons.Outlined.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-
-            Icon(
-                imageVector = Icons.Outlined.ChevronRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
+        )
     }
 }

@@ -232,17 +232,10 @@ private fun ThemePresetItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(8.dp),
-        color = if (isSelected) {
-            LocalDialogTextColor.current.copy(alpha = 0.1f)
-        } else {
-            LocalDialogTextColor.current.copy(alpha = 0.05f)
-        }
+    MorpheClickableCard(
+        onClick = onClick,
+        cornerRadius = 8.dp,
+        alpha = if (isSelected) 0.1f else 0.05f
     ) {
         Row(
             modifier = Modifier
@@ -281,17 +274,10 @@ private fun CustomColorItem(
     isCustomSelected: Boolean,
     onClick: () -> Unit
 ) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(8.dp),
-        color = if (isCustomSelected) {
-            LocalDialogTextColor.current.copy(alpha = 0.1f)
-        } else {
-            LocalDialogTextColor.current.copy(alpha = 0.05f)
-        }
+    MorpheClickableCard(
+        onClick = onClick,
+        cornerRadius = 8.dp,
+        alpha = if (isCustomSelected) 0.1f else 0.05f
     ) {
         Row(
             modifier = Modifier
