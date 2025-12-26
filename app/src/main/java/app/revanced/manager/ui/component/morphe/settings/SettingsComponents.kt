@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -204,7 +205,7 @@ fun PluginItem(
                     fontWeight = FontWeight.Medium
                 )
                 Text(
-                    text = androidx.compose.ui.res.stringResource(
+                    text = stringResource(
                         when (state) {
                             is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
                             is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
