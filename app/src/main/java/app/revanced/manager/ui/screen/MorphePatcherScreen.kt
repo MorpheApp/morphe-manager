@@ -108,7 +108,7 @@ fun MorphePatcherScreen(
                 }
             }
 
-            val timeUntilStepShowsBePatient = 50 * 1000 // 50 seconds
+            val timeUntilStepShowsBePatient = 60 * 1000 // 60 seconds
             val timeSinceStepStarted = now - currentStepStartTime
             if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
                 showLongStepWarning = true
