@@ -24,62 +24,48 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
-import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.*
-import kotlinx.coroutines.flow.first
+import app.revanced.manager.ui.viewmodel.OptionInfo
+import app.revanced.manager.ui.viewmodel.PatchOptionInfo
+import app.revanced.manager.ui.viewmodel.PatchOptionKeys
+import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 /**
- * Theme color selection dialog
+ * Theme color selection dialog with dynamic options from bundle
  */
 @Composable
 fun ThemeColorDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
+    viewModel: PatchOptionsViewModel,
     appType: AppType,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
-    // Get appropriate preferences based on app type
+    // Get current values from preferences
     val darkColor by when (appType) {
         AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.getAsState()
         AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.getAsState()
     }
 
-    // Light theme only for YouTube
     val lightColor by patchOptionsPrefs.lightThemeBackgroundColorYouTube.getAsState()
 
-    // Dark theme presets
-    val darkPresets = remember {
-        mapOf(
-            "@android:color/black" to R.string.morphe_theme_preset_pure_black,
-            "@android:color/system_neutral1_900" to R.string.morphe_theme_preset_material_you,
-            "#212121" to R.string.morphe_theme_preset_classic,
-            "#181825" to R.string.morphe_theme_preset_catppuccin_mocha,
-            "#290025" to R.string.morphe_theme_preset_dark_pink,
-            "#001029" to R.string.morphe_theme_preset_dark_blue,
-            "#002905" to R.string.morphe_theme_preset_dark_green,
-            "#282900" to R.string.morphe_theme_preset_dark_yellow,
-            "#291800" to R.string.morphe_theme_preset_dark_orange,
-            "#290000" to R.string.morphe_theme_preset_dark_red
-        )
+    // Get theme options from bundle
+    val packageName = when (appType) {
+        AppType.YOUTUBE -> PatchOptionsViewModel.YOUTUBE_PACKAGE
+        AppType.YOUTUBE_MUSIC -> PatchOptionsViewModel.YOUTUBE_MUSIC_PACKAGE
     }
+    val themeOptions = viewModel.getThemeOptions(packageName)
 
-    // Light theme presets (YouTube only)
-    val lightPresets = remember {
-        mapOf(
-            "@android:color/white" to R.string.morphe_theme_preset_white,
-            "@android:color/system_neutral1_50" to R.string.morphe_theme_preset_material_you,
-            "#E6E9EF" to R.string.morphe_theme_preset_catppuccin_latte,
-            "#FCCFF3" to R.string.morphe_theme_preset_light_pink,
-            "#D1E0FF" to R.string.morphe_theme_preset_light_blue,
-            "#CCFFCC" to R.string.morphe_theme_preset_light_green,
-            "#FDFFCC" to R.string.morphe_theme_preset_light_yellow,
-            "#FFE6CC" to R.string.morphe_theme_preset_light_orange,
-            "#FFD6D6" to R.string.morphe_theme_preset_light_red
-        )
-    }
+    // Get dark theme option with its presets
+    val darkThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
+    val darkPresets = darkThemeOption?.let { viewModel.getOptionPresetsMap(it) } ?: emptyMap()
+
+    // Get light theme option (YouTube only)
+    val lightThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
+    val lightPresets = lightThemeOption?.let { viewModel.getOptionPresetsMap(it) } ?: emptyMap()
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -100,50 +86,80 @@ fun ThemeColorDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Dark Theme Section
-            Text(
-                text = stringResource(R.string.morphe_theme_dark_color),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold,
-                color = LocalDialogTextColor.current
-            )
-
-            darkPresets.forEach { (value, labelRes) ->
-                ThemePresetItem(
-                    label = stringResource(labelRes),
-                    isSelected = darkColor == value,
-                    onClick = {
-                        scope.launch {
-                            when (appType) {
-                                AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(value)
-                                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(value)
-                            }
-                        }
-                    }
-                )
-            }
-
-            // Light Theme Section (YouTube only)
-            if (appType == AppType.YOUTUBE) {
-                Spacer(modifier = Modifier.height(8.dp))
-
+            if (darkPresets.isNotEmpty()) {
                 Text(
-                    text = stringResource(R.string.morphe_theme_light_color),
+                    text = darkThemeOption?.title ?: stringResource(R.string.morphe_theme_dark_color),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
-                lightPresets.forEach { (value, labelRes) ->
+                darkThemeOption?.description?.let { desc ->
+                    Text(
+                        text = desc,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+
+                darkPresets.forEach { (label, value) ->
+                    val colorValue = value?.toString() ?: return@forEach
                     ThemePresetItem(
-                        label = stringResource(labelRes),
-                        isSelected = lightColor == value,
+                        label = label,
+                        isSelected = darkColor == colorValue,
                         onClick = {
                             scope.launch {
-                                patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(value)
+                                when (appType) {
+                                    AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(colorValue)
+                                    AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(colorValue)
+                                }
                             }
                         }
                     )
                 }
+            }
+
+            // Light Theme Section (YouTube only)
+            if (appType == AppType.YOUTUBE && lightPresets.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = lightThemeOption?.title ?: stringResource(R.string.morphe_theme_light_color),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = LocalDialogTextColor.current
+                )
+
+                lightThemeOption?.description?.let { desc ->
+                    Text(
+                        text = desc,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                }
+
+                lightPresets.forEach { (label, value) ->
+                    val colorValue = value?.toString() ?: return@forEach
+                    ThemePresetItem(
+                        label = label,
+                        isSelected = lightColor == colorValue,
+                        onClick = {
+                            scope.launch {
+                                patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(colorValue)
+                            }
+                        }
+                    )
+                }
+            }
+
+            // Show message if no options available
+            if (darkPresets.isEmpty() && lightPresets.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.morphe_no_options_available),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                )
             }
         }
     }
@@ -192,19 +208,19 @@ private fun ThemePresetItem(
 }
 
 /**
- * Custom branding dialog with folder picker and instructions
+ * Custom branding dialog with folder picker and dynamic instructions from bundle
  */
 @Composable
 fun CustomBrandingDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
+    viewModel: PatchOptionsViewModel,
     appType: AppType,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val bundleRepository: PatchBundleRepository = koinInject()
     val fs: Filesystem = koinInject()
 
-    // Get appropriate preferences based on app type
+    // Get current values from preferences
     var appName by remember {
         mutableStateOf(
             when (appType) {
@@ -223,6 +239,15 @@ fun CustomBrandingDialog(
         )
     }
 
+    // Get branding options from bundle
+    val packageName = when (appType) {
+        AppType.YOUTUBE -> PatchOptionsViewModel.YOUTUBE_PACKAGE
+        AppType.YOUTUBE_MUSIC -> PatchOptionsViewModel.YOUTUBE_MUSIC_PACKAGE
+    }
+    val brandingOptions = viewModel.getBrandingOptions(packageName)
+    val appNameOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
+    val iconOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
+
     // State for expandable instructions
     var showInstructions by remember { mutableStateOf(false) }
     val rotationAngle by animateFloatAsState(
@@ -230,39 +255,6 @@ fun CustomBrandingDialog(
         animationSpec = tween(durationMillis = 300),
         label = "instruction_rotation"
     )
-
-    // Load full description from bundle repository
-    var iconDescription by remember { mutableStateOf<String?>(null) }
-    var isLoading by remember { mutableStateOf(true) }
-
-    LaunchedEffect(Unit) {
-        try {
-            val bundleInfo = bundleRepository.bundleInfoFlow.first()
-            val defaultBundle = bundleInfo[PatchBundleRepository.DEFAULT_SOURCE_UID]
-
-            // Find "Custom branding" patch based on app type
-            val packageName = when (appType) {
-                AppType.YOUTUBE -> "com.google.android.youtube"
-                AppType.YOUTUBE_MUSIC -> "com.google.android.apps.youtube.music"
-            }
-
-            val customBrandingPatch = defaultBundle?.patches?.find { patch ->
-                patch.name.equals("Custom branding", ignoreCase = true) &&
-                        patch.compatiblePackages?.any { it.packageName == packageName } == true
-            }
-
-            // Get customIcon option description
-            val iconOption = customBrandingPatch?.options?.find {
-                it.key.equals("customIcon", ignoreCase = true)
-            }
-
-            iconDescription = iconOption?.description
-        } catch (e: Exception) {
-            iconDescription = null
-        } finally {
-            isLoading = false
-        }
-    }
 
     // Folder picker launcher
     val folderPickerLauncher = rememberLauncherForActivityResult(
@@ -318,185 +310,156 @@ fun CustomBrandingDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // App Name
-            OutlinedTextField(
-                value = appName,
-                onValueChange = { appName = it },
-                label = {
-                    Text(
-                        stringResource(R.string.morphe_custom_app_name),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                },
-                placeholder = {
-                    Text(
-                        stringResource(R.string.morphe_custom_app_name_hint),
-                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                    )
-                },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = LocalDialogTextColor.current,
-                    unfocusedTextColor = LocalDialogTextColor.current,
-                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                    cursorColor = LocalDialogTextColor.current
-                )
-            )
-
-            // Icon Path with Folder Picker Button
-            OutlinedTextField(
-                value = iconPath,
-                onValueChange = { iconPath = it },
-                label = {
-                    Text(
-                        stringResource(R.string.morphe_custom_icon_path),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                },
-                placeholder = {
-                    Text(
-                        stringResource(R.string.morphe_custom_icon_path_hint),
-                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                    )
-                },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
-                            // Check if storage permission is granted
-                            if (fs.hasStoragePermission()) {
-                                folderPickerLauncher.launch(null)
-                            } else {
-                                // Request storage permission
-                                permissionLauncher.launch(permissionName)
-                            }
-                        },
-                        modifier = Modifier.size(40.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = "Pick folder",
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                            modifier = Modifier.size(20.dp)
+            // App Name field
+            if (appNameOption != null) {
+                OutlinedTextField(
+                    value = appName,
+                    onValueChange = { appName = it },
+                    label = {
+                        Text(
+                            appNameOption.title,
+                            color = LocalDialogSecondaryTextColor.current
                         )
-                    }
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = LocalDialogTextColor.current,
-                    unfocusedTextColor = LocalDialogTextColor.current,
-                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                    cursorColor = LocalDialogTextColor.current
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.morphe_custom_app_name_hint),
+                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
+                        )
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = LocalDialogTextColor.current,
+                        unfocusedTextColor = LocalDialogTextColor.current,
+                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
+                        cursorColor = LocalDialogTextColor.current
+                    )
                 )
-            )
+            }
 
-            // Expandable Instructions Section
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable { showInstructions = !showInstructions },
-                shape = RoundedCornerShape(12.dp),
-                color = LocalDialogTextColor.current.copy(alpha = 0.05f)
-            ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    // Header
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
+            // Icon Path field with Folder Picker
+            if (iconOption != null) {
+                OutlinedTextField(
+                    value = iconPath,
+                    onValueChange = { iconPath = it },
+                    label = {
+                        Text(
+                            iconOption.title,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.morphe_custom_icon_path_hint),
+                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
+                        )
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    trailingIcon = {
+                        IconButton(
+                            onClick = {
+                                if (fs.hasStoragePermission()) {
+                                    folderPickerLauncher.launch(null)
+                                } else {
+                                    permissionLauncher.launch(permissionName)
+                                }
+                            },
+                            modifier = Modifier.size(40.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = "Pick folder",
+                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(
-                                text = stringResource(R.string.morphe_icon_instructions_title),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium,
-                                color = LocalDialogTextColor.current
-                            )
                         }
-                        Icon(
-                            imageVector = Icons.Outlined.ExpandMore,
-                            contentDescription = if (showInstructions) "Collapse" else "Expand",
-                            modifier = Modifier
-                                .size(20.dp)
-                                .rotate(rotationAngle),
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                        )
-                    }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = LocalDialogTextColor.current,
+                        unfocusedTextColor = LocalDialogTextColor.current,
+                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
+                        cursorColor = LocalDialogTextColor.current
+                    )
+                )
 
-                    // Expandable Content
-                    AnimatedVisibility(
-                        visible = showInstructions,
-                        enter = expandVertically(
-                            animationSpec = tween(durationMillis = 300)
-                        ) + fadeIn(
-                            animationSpec = tween(durationMillis = 300)
-                        ),
-                        exit = shrinkVertically(
-                            animationSpec = tween(durationMillis = 300)
-                        ) + fadeOut(
-                            animationSpec = tween(durationMillis = 300)
-                        )
+                // Expandable Instructions Section
+                iconOption.description.let { description ->
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { showInstructions = !showInstructions },
+                        shape = RoundedCornerShape(12.dp),
+                        color = LocalDialogTextColor.current.copy(alpha = 0.05f)
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
-                                .heightIn(max = 300.dp)
-                                .verticalScroll(rememberScrollState()),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            HorizontalDivider(
-                                color = LocalDialogTextColor.current.copy(alpha = 0.1f),
-                                modifier = Modifier.padding(bottom = 4.dp)
-                            )
-
-                            when {
-                                isLoading -> {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(vertical = 16.dp),
-                                        horizontalArrangement = Arrangement.Center
-                                    ) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(24.dp),
-                                            color = MaterialTheme.colorScheme.primary,
-                                            strokeWidth = 2.dp
-                                        )
-                                    }
-                                }
-                                iconDescription != null -> {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            // Header
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Info,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
                                     Text(
-                                        text = iconDescription!!,
+                                        text = stringResource(R.string.morphe_icon_instructions_title),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium,
+                                        color = LocalDialogTextColor.current
+                                    )
+                                }
+                                Icon(
+                                    imageVector = Icons.Outlined.ExpandMore,
+                                    contentDescription = if (showInstructions) "Collapse" else "Expand",
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .rotate(rotationAngle),
+                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
+                                )
+                            }
+
+                            // Expandable Content with description from bundle
+                            AnimatedVisibility(
+                                visible = showInstructions,
+                                enter = expandVertically(animationSpec = tween(durationMillis = 300)) +
+                                        fadeIn(animationSpec = tween(durationMillis = 300)),
+                                exit = shrinkVertically(animationSpec = tween(durationMillis = 300)) +
+                                        fadeOut(animationSpec = tween(durationMillis = 300))
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                        .heightIn(max = 300.dp)
+                                        .verticalScroll(rememberScrollState()),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    HorizontalDivider(
+                                        color = LocalDialogTextColor.current.copy(alpha = 0.1f),
+                                        modifier = Modifier.padding(bottom = 4.dp)
+                                    )
+                                    Text(
+                                        text = description,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = LocalDialogSecondaryTextColor.current,
                                         lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
-                                    )
-                                }
-                                else -> {
-                                    Text(
-                                        text = stringResource(R.string.morphe_icon_instructions_unavailable),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
-                                        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
                                     )
                                 }
                             }
@@ -504,22 +467,36 @@ fun CustomBrandingDialog(
                     }
                 }
             }
+
+            // Show message if no options available
+            if (appNameOption == null && iconOption == null) {
+                Text(
+                    text = stringResource(R.string.morphe_no_options_available),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                )
+            }
         }
     }
 }
 
 /**
- * Custom header dialog with folder picker and instructions
+ * Custom header dialog with folder picker and dynamic instructions from bundle
  */
 @Composable
 fun CustomHeaderDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
+    viewModel: PatchOptionsViewModel,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val bundleRepository: PatchBundleRepository = koinInject()
     val fs: Filesystem = koinInject()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
+
+    // Get header options from bundle
+    val headerOptions = viewModel.getHeaderOptions()
+    val customOption = viewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
 
     // State for expandable instructions
     var showInstructions by remember { mutableStateOf(false) }
@@ -528,34 +505,6 @@ fun CustomHeaderDialog(
         animationSpec = tween(durationMillis = 300),
         label = "instruction_rotation"
     )
-
-    // Load full description from bundle repository
-    var headerDescription by remember { mutableStateOf<String?>(null) }
-    var isLoading by remember { mutableStateOf(true) }
-
-    LaunchedEffect(Unit) {
-        try {
-            val bundleInfo = bundleRepository.bundleInfoFlow.first()
-            val defaultBundle = bundleInfo[PatchBundleRepository.DEFAULT_SOURCE_UID]
-
-            // Find "Change header" patch for YouTube
-            val changeHeaderPatch = defaultBundle?.patches?.find { patch ->
-                patch.name.equals("Change header", ignoreCase = true) &&
-                        patch.compatiblePackages?.any { it.packageName == "com.google.android.youtube" } == true
-            }
-
-            // Get custom header option description
-            val headerOption = changeHeaderPatch?.options?.find {
-                it.key.equals("custom", ignoreCase = true)
-            }
-
-            headerDescription = headerOption?.description
-        } catch (e: Exception) {
-            headerDescription = null
-        } finally {
-            isLoading = false
-        }
-    }
 
     // Folder picker launcher
     val folderPickerLauncher = rememberLauncherForActivityResult(
@@ -600,162 +549,139 @@ fun CustomHeaderDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            OutlinedTextField(
-                value = headerPath,
-                onValueChange = { headerPath = it },
-                label = {
-                    Text(
-                        stringResource(R.string.morphe_custom_header),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                },
-                placeholder = {
-                    Text(
-                        stringResource(R.string.morphe_custom_header_hint),
-                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                    )
-                },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
-                            // Check if storage permission is granted
-                            if (fs.hasStoragePermission()) {
-                                folderPickerLauncher.launch(null)
-                            } else {
-                                // Request storage permission
-                                permissionLauncher.launch(permissionName)
-                            }
-                        },
-                        modifier = Modifier.size(40.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = "Pick folder",
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                            modifier = Modifier.size(20.dp)
+            if (customOption != null) {
+                OutlinedTextField(
+                    value = headerPath,
+                    onValueChange = { headerPath = it },
+                    label = {
+                        Text(
+                            customOption.title,
+                            color = LocalDialogSecondaryTextColor.current
                         )
-                    }
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = LocalDialogTextColor.current,
-                    unfocusedTextColor = LocalDialogTextColor.current,
-                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                    cursorColor = LocalDialogTextColor.current
-                )
-            )
-
-            // Expandable Instructions Section
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable { showInstructions = !showInstructions },
-                shape = RoundedCornerShape(12.dp),
-                color = LocalDialogTextColor.current.copy(alpha = 0.05f)
-            ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    // Header
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.morphe_custom_header_hint),
+                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
+                        )
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    trailingIcon = {
+                        IconButton(
+                            onClick = {
+                                if (fs.hasStoragePermission()) {
+                                    folderPickerLauncher.launch(null)
+                                } else {
+                                    permissionLauncher.launch(permissionName)
+                                }
+                            },
+                            modifier = Modifier.size(40.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = "Pick folder",
+                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(
-                                text = stringResource(R.string.morphe_header_instructions_title),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium,
-                                color = LocalDialogTextColor.current
-                            )
                         }
-                        Icon(
-                            imageVector = Icons.Outlined.ExpandMore,
-                            contentDescription = if (showInstructions) "Collapse" else "Expand",
-                            modifier = Modifier
-                                .size(20.dp)
-                                .rotate(rotationAngle),
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                        )
-                    }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = LocalDialogTextColor.current,
+                        unfocusedTextColor = LocalDialogTextColor.current,
+                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
+                        cursorColor = LocalDialogTextColor.current
+                    )
+                )
 
-                    // Expandable Content
-                    AnimatedVisibility(
-                        visible = showInstructions,
-                        enter = expandVertically(
-                            animationSpec = tween(durationMillis = 300)
-                        ) + fadeIn(
-                            animationSpec = tween(durationMillis = 300)
-                        ),
-                        exit = shrinkVertically(
-                            animationSpec = tween(durationMillis = 300)
-                        ) + fadeOut(
-                            animationSpec = tween(durationMillis = 300)
-                        )
+                // Expandable Instructions Section
+                customOption.description.let { description ->
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable { showInstructions = !showInstructions },
+                        shape = RoundedCornerShape(12.dp),
+                        color = LocalDialogTextColor.current.copy(alpha = 0.05f)
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
-                                .heightIn(max = 300.dp)
-                                .verticalScroll(rememberScrollState()),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            HorizontalDivider(
-                                color = LocalDialogTextColor.current.copy(alpha = 0.1f),
-                                modifier = Modifier.padding(bottom = 4.dp)
-                            )
-
-                            when {
-                                isLoading -> {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(vertical = 16.dp),
-                                        horizontalArrangement = Arrangement.Center
-                                    ) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(24.dp),
-                                            color = MaterialTheme.colorScheme.primary,
-                                            strokeWidth = 2.dp
-                                        )
-                                    }
-                                }
-                                headerDescription != null -> {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            // Header
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Info,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
                                     Text(
-                                        text = headerDescription!!,
+                                        text = stringResource(R.string.morphe_header_instructions_title),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Medium,
+                                        color = LocalDialogTextColor.current
+                                    )
+                                }
+                                Icon(
+                                    imageVector = Icons.Outlined.ExpandMore,
+                                    contentDescription = if (showInstructions) "Collapse" else "Expand",
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .rotate(rotationAngle),
+                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
+                                )
+                            }
+
+                            // Expandable Content with description from bundle
+                            AnimatedVisibility(
+                                visible = showInstructions,
+                                enter = expandVertically(animationSpec = tween(durationMillis = 300)) +
+                                        fadeIn(animationSpec = tween(durationMillis = 300)),
+                                exit = shrinkVertically(animationSpec = tween(durationMillis = 300)) +
+                                        fadeOut(animationSpec = tween(durationMillis = 300))
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                        .heightIn(max = 300.dp)
+                                        .verticalScroll(rememberScrollState()),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    HorizontalDivider(
+                                        color = LocalDialogTextColor.current.copy(alpha = 0.1f),
+                                        modifier = Modifier.padding(bottom = 4.dp)
+                                    )
+                                    Text(
+                                        text = description,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = LocalDialogSecondaryTextColor.current,
                                         lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
-                                    )
-                                }
-                                else -> {
-                                    Text(
-                                        text = stringResource(R.string.morphe_header_instructions_unavailable),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
-                                        fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
                                     )
                                 }
                             }
                         }
                     }
                 }
+            } else {
+                // No option available
+                Text(
+                    text = stringResource(R.string.morphe_no_options_available),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                )
             }
         }
     }

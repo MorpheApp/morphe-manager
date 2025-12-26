@@ -41,6 +41,7 @@ import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
+import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
@@ -60,7 +61,8 @@ fun MorpheSettingsScreen(
     generalViewModel: GeneralSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
-    dashboardViewModel: DashboardViewModel = koinViewModel()
+    dashboardViewModel: DashboardViewModel = koinViewModel(),
+    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -68,7 +70,6 @@ fun MorpheSettingsScreen(
     val coroutineScope = rememberCoroutineScope()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val prefs: PreferencesManager = koinInject()
-    val patchOptionsPrefs: PatchOptionsPreferencesManager = koinInject()
     val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
@@ -225,6 +226,7 @@ fun MorpheSettingsScreen(
                                 coroutineScope.launch {
                                     prefs.usePatchesPrereleases.update(newValue)
                                     dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                                    patchOptionsViewModel.refresh()
                                 }
                             }
                         )
@@ -237,7 +239,8 @@ fun MorpheSettingsScreen(
                             title = stringResource(R.string.morphe_patch_options)
                         )
                         PatchOptionsSection(
-                            patchOptionsPrefs = patchOptionsPrefs
+                            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
+                            viewModel = patchOptionsViewModel
                         )
                     }
 
@@ -301,6 +304,7 @@ fun MorpheSettingsScreen(
                             coroutineScope.launch {
                                 prefs.usePatchesPrereleases.update(newValue)
                                 dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                                patchOptionsViewModel.refresh()
                             }
                         }
                     )
@@ -313,7 +317,8 @@ fun MorpheSettingsScreen(
                         title = stringResource(R.string.morphe_patch_options)
                     )
                     PatchOptionsSection(
-                        patchOptionsPrefs = patchOptionsPrefs
+                        patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
+                        viewModel = patchOptionsViewModel
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
