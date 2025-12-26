@@ -225,215 +225,6 @@ fun ThemeColorDialog(
     }
 }
 
-/**
- * Color picker dialog for custom color selection
- */
-@Composable
-private fun ColorPickerDialog(
-    title: String,
-    currentColor: String,
-    onColorSelected: (String) -> Unit,
-    onDismiss: () -> Unit
-) {
-    // Parse current color to RGB values
-    val initialColor = remember(currentColor) {
-        parseColorToRgb(currentColor)
-    }
-
-    var red by remember { mutableFloatStateOf(initialColor.first) }
-    var green by remember { mutableFloatStateOf(initialColor.second) }
-    var blue by remember { mutableFloatStateOf(initialColor.third) }
-    var hexInput by remember { mutableStateOf(rgbToHex(initialColor.first, initialColor.second, initialColor.third)) }
-    var isHexError by remember { mutableStateOf(false) }
-
-    // Update hex when sliders change
-    LaunchedEffect(red, green, blue) {
-        hexInput = rgbToHex(red, green, blue)
-        isHexError = false
-    }
-
-    val previewColor = Color(red, green, blue)
-
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = title,
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.save),
-                onPrimaryClick = {
-                    onColorSelected(hexInput)
-                },
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Color preview
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                color = previewColor,
-                shape = RoundedCornerShape(12.dp),
-                tonalElevation = 2.dp
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = hexInput,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = if (red + green + blue > 1.5f) Color.Black else Color.White
-                    )
-                }
-            }
-
-            // Hex input
-            OutlinedTextField(
-                value = hexInput,
-                onValueChange = { input ->
-                    hexInput = input
-                    // Try to parse hex and update sliders
-                    val parsed = parseHexToRgb(input)
-                    if (parsed != null) {
-                        red = parsed.first
-                        green = parsed.second
-                        blue = parsed.third
-                        isHexError = false
-                    } else {
-                        isHexError = input.isNotEmpty() && !input.startsWith("@")
-                    }
-                },
-                label = {
-                    Text(
-                        stringResource(R.string.morphe_hex_color),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                },
-                placeholder = {
-                    Text(
-                        "#RRGGBB",
-                        color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                    )
-                },
-                isError = isHexError,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = LocalDialogTextColor.current,
-                    unfocusedTextColor = LocalDialogTextColor.current,
-                    focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                    unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                    cursorColor = LocalDialogTextColor.current,
-                    errorBorderColor = MaterialTheme.colorScheme.error
-                )
-            )
-
-            // RGB Sliders
-            ColorSlider(
-                label = "R",
-                value = red,
-                onValueChange = { red = it },
-                color = Color.Red
-            )
-
-            ColorSlider(
-                label = "G",
-                value = green,
-                onValueChange = { green = it },
-                color = Color.Green
-            )
-
-            ColorSlider(
-                label = "B",
-                value = blue,
-                onValueChange = { blue = it },
-                color = Color.Blue
-            )
-        }
-    }
-}
-
-@Composable
-private fun ColorSlider(
-    label: String,
-    value: Float,
-    onValueChange: (Float) -> Unit,
-    color: Color
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = color,
-            modifier = Modifier.width(24.dp)
-        )
-        Slider(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.weight(1f),
-            colors = SliderDefaults.colors(
-                thumbColor = color,
-                activeTrackColor = color,
-                inactiveTrackColor = color.copy(alpha = 0.3f)
-            )
-        )
-        Text(
-            text = (value * 255).toInt().toString(),
-            style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current,
-            modifier = Modifier.width(32.dp)
-        )
-    }
-}
-
-/**
- * Parse color string to RGB float values (0-1 range)
- */
-private fun parseColorToRgb(color: String): Triple<Float, Float, Float> {
-    return parseHexToRgb(color) ?: Triple(0f, 0f, 0f)
-}
-
-/**
- * Parse hex color string to RGB float values
- */
-private fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
-    val cleanHex = hex.removePrefix("#")
-    if (cleanHex.length != 6) return null
-
-    return try {
-        val r = cleanHex.substring(0, 2).toInt(16) / 255f
-        val g = cleanHex.substring(2, 4).toInt(16) / 255f
-        val b = cleanHex.substring(4, 6).toInt(16) / 255f
-        Triple(r, g, b)
-    } catch (e: Exception) {
-        null
-    }
-}
-
-/**
- * Convert RGB float values to hex string
- */
-private fun rgbToHex(r: Float, g: Float, b: Float): String {
-    val rInt = (r * 255).toInt().coerceIn(0, 255)
-    val gInt = (g * 255).toInt().coerceIn(0, 255)
-    val bInt = (b * 255).toInt().coerceIn(0, 255)
-    return "#%02X%02X%02X".format(rInt, gInt, bInt)
-}
-
 @Composable
 private fun ThemePresetItem(
     label: String,
@@ -441,10 +232,6 @@ private fun ThemePresetItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    val previewColor = remember(colorValue) {
-        parseHexToRgb(colorValue)?.let { (r, g, b) -> Color(r, g, b) }
-    }
-
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -464,15 +251,8 @@ private fun ThemePresetItem(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Color preview circle
-            previewColor?.let { color ->
-                Surface(
-                    modifier = Modifier.size(24.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = color,
-                    tonalElevation = 1.dp
-                ) {}
-            }
+            // Color preview dot
+            ColorPreviewDot(colorValue = colorValue)
 
             Text(
                 text = label,
@@ -501,10 +281,6 @@ private fun CustomColorItem(
     isCustomSelected: Boolean,
     onClick: () -> Unit
 ) {
-    val previewColor = remember(currentColor) {
-        parseHexToRgb(currentColor)?.let { (r, g, b) -> Color(r, g, b) }
-    }
-
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -525,13 +301,8 @@ private fun CustomColorItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Color picker icon or preview
-            if (isCustomSelected && previewColor != null) {
-                Surface(
-                    modifier = Modifier.size(24.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = previewColor,
-                    tonalElevation = 1.dp
-                ) {}
+            if (isCustomSelected) {
+                ColorPreviewDot(colorValue = currentColor)
             } else {
                 Icon(
                     imageVector = Icons.Outlined.Palette,
