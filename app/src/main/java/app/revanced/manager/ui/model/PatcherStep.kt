@@ -38,9 +38,9 @@ data class Step(
     val id: StepId,
     val name: String,
     val category: StepCategory,
+    /** [0, 1] Percentage of the total operation */
+    val progressPercentage : Double,
     val state: State = State.WAITING,
     val message: String? = null,
-    val progressKey: ProgressKey? = null,
-    /** How many substeps exist in this step. */
-    val subSteps : Int = 1
+    val progressKey: ProgressKey? = null
 ) : Parcelable
