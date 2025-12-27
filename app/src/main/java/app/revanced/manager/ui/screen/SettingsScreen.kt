@@ -33,6 +33,7 @@ import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
+import app.revanced.manager.ui.component.settings.SettingsListItem
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import kotlinx.coroutines.launch
@@ -115,6 +116,21 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
+                // Morphe begin
+                ExpressiveSettingsItem(
+                    modifier = Modifier.clickable {
+                        advancedViewModel.viewModelScope.launch {
+                            advancedViewModel.prefs.useMorpheHomeScreen.update(!useMorpheHomeScreen)
+                        }
+                    },
+                    headlineContent = stringResource(R.string.morphe_settings_return_to_morphe),
+                    supportingContent = stringResource(R.string.morphe_settings_return_to_morphe_description),
+                    leadingContent = { Icon(Icons.Outlined.SwapHoriz, null) },
+                    trailingContent = { Icon(Icons.AutoMirrored.Outlined.ArrowForwardIos, null) }
+                )
+                ExpressiveSettingsDivider()
+                // Morphe end
+
                 settingsSections.forEachIndexed { index, (name, description, icon, destination) ->
                     ExpressiveSettingsItem(
                         headlineContent = stringResource(name),
