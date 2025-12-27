@@ -46,7 +46,7 @@
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Download the original APK</string>
     <string name="morphe_home_download_instructions_steps_title">Instructions:</string>
-    <string name="morphe_home_download_instructions_step1">Press the \'Continue to APKMirror.com\' button below</string>
+    <string name="morphe_home_download_instructions_step1">Press the \'%1$s\' button below</string>
     <string name="morphe_home_download_instructions_step2_part1">Scroll down the webpage and press</string>
     <string name="morphe_home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
     <string name="morphe_home_download_instructions_step3">Wait for the download to complete, and &lt;b>do not install&lt;/b> the APK</string>

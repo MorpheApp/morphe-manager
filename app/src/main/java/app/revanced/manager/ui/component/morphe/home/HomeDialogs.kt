@@ -275,7 +275,10 @@ private fun DownloadInstructionsDialog(
                 // Step 1
                 InstructionStep(
                     number = "1",
-                    text = stringResource(R.string.morphe_home_download_instructions_step1),
+                    text = stringResource(
+                        R.string.morphe_home_download_instructions_step1,
+                        stringResource(R.string.morphe_home_download_instructions_continue)
+                    ),
                     textColor = textColor,
                     secondaryColor = secondaryColor
                 )
