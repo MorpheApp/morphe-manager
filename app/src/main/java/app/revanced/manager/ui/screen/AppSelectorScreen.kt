@@ -5,7 +5,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import android.content.pm.PackageInfo
 import android.net.Uri
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +19,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -73,7 +71,6 @@ import app.revanced.manager.ui.component.CheckedFilterChip
 import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.NonSuggestedVersionDialog
-import app.revanced.manager.ui.component.patches.PathSelectorDialog
 import app.revanced.manager.ui.component.SafeguardHintCard
 import app.revanced.manager.ui.component.SearchView
 import app.revanced.manager.ui.model.SelectedApp
@@ -82,10 +79,8 @@ import app.revanced.manager.ui.viewmodel.BundleVersionSuggestion
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
-import app.revanced.manager.util.isAllowedApkFile
 import app.revanced.manager.util.consumeHorizontalScroll
 import app.revanced.manager.util.openUrl
-import java.io.File
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -133,17 +128,21 @@ fun AppSelectorScreen(
         }
     )
 
+    fun launchStoragePicker() {
+        storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+    }
+
     val permissionLauncher =
         rememberLauncherForActivityResult(permissionContract) { granted ->
             if (granted) {
-                storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+                launchStoragePicker()
             } else if (returnToDashboardOnStorage) {
                 onBackClick()
             }
         }
     val openStoragePicker = {
         if (fs.hasStoragePermission()) {
-            storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+            launchStoragePicker()
         } else {
             permissionLauncher.launch(permissionName)
         }

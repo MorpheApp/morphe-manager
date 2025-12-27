@@ -49,18 +49,8 @@ fun ImportPatchBundleDialog(
 ) {
     var currentStep by rememberSaveable { mutableIntStateOf(0) }
     var bundleType by rememberSaveable { mutableStateOf(BundleType.Remote) }
-    var patchBundle by rememberSaveable { mutableStateOf<Uri?>(null) }
     var remoteUrl by rememberSaveable { mutableStateOf("") }
     var autoUpdate by rememberSaveable { mutableStateOf(true) }
-
-    val patchActivityLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-            uri?.let { patchBundle = it }
-        }
-
-    fun launchPatchActivity() {
-        patchActivityLauncher.launch(arrayOf("*/*")) // Android does not recognize .mpp as BIN file so we use all file types
-    }
 
     val steps = listOf<@Composable () -> Unit>(
         {

@@ -80,7 +80,6 @@ import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.patcher.aapt.Aapt
 import app.revanced.manager.ui.component.AlertDialogExtended
 import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.component.AutoUpdatesDialog
 import app.revanced.manager.ui.component.AvailableUpdateDialog
 import app.revanced.manager.ui.component.DownloadProgressBanner
 import app.revanced.manager.ui.component.NotificationCard
@@ -89,7 +88,6 @@ import app.revanced.manager.ui.component.bundle.BundleTopBar
 import app.revanced.manager.ui.component.bundle.ImportPatchBundleDialog
 import app.revanced.manager.ui.component.haptics.HapticFloatingActionButton
 import app.revanced.manager.ui.component.haptics.HapticTab
-import app.revanced.manager.ui.component.patches.PathSelectorDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
@@ -99,12 +97,9 @@ import app.revanced.manager.domain.repository.PatchBundleRepository.BundleImport
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
-import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
-import app.revanced.manager.util.isAllowedApkFile
-import app.revanced.manager.util.isAllowedMppFile
+import app.revanced.manager.util.MPP_FILE_MIME_TYPES
 import app.revanced.manager.util.toast
-import java.io.File
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -159,7 +154,7 @@ fun DashboardScreen(
         uri?.let { selectedBundlePath = it.toString() }
     }
     fun showStorageDialog() {
-        storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+        storagePickerLauncher.launch(MPP_FILE_MIME_TYPES)
     }
     // Morphe end
 

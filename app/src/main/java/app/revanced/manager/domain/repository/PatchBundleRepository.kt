@@ -1300,7 +1300,7 @@ class PatchBundleRepository(
                         val useMorpheMode = prefs.useMorpheHomeScreen.get()
 
                         if (useMorpheMode) {
-                            // Use Morphe performRemoteUpdate with result tracking
+                            // Morphe performRemoteUpdate with result tracking
                             performRemoteUpdateWithResult(
                                 force = request.force,
                                 showToast = request.showToast,
