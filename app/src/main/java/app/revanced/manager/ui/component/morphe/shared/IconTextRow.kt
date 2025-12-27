@@ -13,13 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 /**
- * Row with icon and text content (title + optional description)
+ * Row with optional icon and text content
  */
 @Composable
 fun IconTextRow(
-    icon: ImageVector,
     title: String,
     modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
     description: String? = null,
     iconTint: Color = MaterialTheme.colorScheme.primary,
     iconSize: Int = 24,
@@ -32,12 +32,14 @@ fun IconTextRow(
         horizontalArrangement = Arrangement.spacedBy(spacing.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = iconTint,
-            modifier = Modifier.size(iconSize.dp)
-        )
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = iconTint,
+                modifier = Modifier.size(iconSize.dp)
+            )
+        }
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
@@ -55,47 +57,5 @@ fun IconTextRow(
         }
 
         trailingContent?.invoke()
-    }
-}
-
-/**
- * Vertical variant with icon on top
- */
-@Composable
-fun IconTextColumn(
-    icon: ImageVector,
-    title: String,
-    modifier: Modifier = Modifier,
-    description: String? = null,
-    iconTint: Color = MaterialTheme.colorScheme.primary,
-    iconSize: Int = 24,
-    spacing: Int = 8,
-    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = horizontalAlignment,
-        verticalArrangement = Arrangement.spacedBy(spacing.dp)
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = iconTint,
-            modifier = Modifier.size(iconSize.dp)
-        )
-
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Medium
-        )
-
-        if (description != null) {
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
     }
 }

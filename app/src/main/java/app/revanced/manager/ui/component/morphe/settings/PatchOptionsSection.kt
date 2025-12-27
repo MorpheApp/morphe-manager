@@ -365,7 +365,6 @@ private fun HideShortsSection(
             if (hasAppShortcutOption) {
                 val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()
                 IconTextRow(
-                    icon = Icons.Outlined.VisibilityOff,
                     title = appShortcutOption?.title ?: stringResource(R.string.morphe_hide_shorts_app_shortcut),
                     description = appShortcutOption?.description ?: stringResource(R.string.morphe_hide_shorts_app_shortcut_description),
                     modifier = Modifier.padding(vertical = 8.dp),
@@ -386,7 +385,6 @@ private fun HideShortsSection(
             if (hasWidgetOption) {
                 val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
                 IconTextRow(
-                    icon = Icons.Outlined.VisibilityOff,
                     title = widgetOption?.title ?: stringResource(R.string.morphe_hide_shorts_widget),
                     description = widgetOption?.description ?: stringResource(R.string.morphe_hide_shorts_widget_description),
                     modifier = Modifier.padding(vertical = 8.dp),
