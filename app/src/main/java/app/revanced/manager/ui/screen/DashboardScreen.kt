@@ -144,21 +144,35 @@ fun DashboardScreen(
     )
     val storageVm: AppSelectorViewModel = koinViewModel()
     val fs = koinInject<Filesystem>()
-    val storageRoots = remember { fs.storageRoots() }
+
+    // val storageRoots = remember { fs.storageRoots() }
     EventEffect(flow = storageVm.storageSelectionFlow) { selected ->
         onStorageSelect(selected)
     }
-    var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    // var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
+
+    // Morphe begin
+    val storagePickerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let { selectedBundlePath = it.toString() }
+    }
+    fun showStorageDialog() {
+        storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+    }
+    // Morphe end
+
     val (permissionContract, permissionName) = remember { fs.permissionContract() }
     val permissionLauncher =
         rememberLauncherForActivityResult(permissionContract) { granted ->
             if (granted) {
-                showStorageDialog = true
+                showStorageDialog()
             }
         }
     val openStoragePicker = {
         if (fs.hasStoragePermission()) {
-            showStorageDialog = true
+            showStorageDialog()
         } else {
             permissionLauncher.launch(permissionName)
         }
@@ -178,18 +192,23 @@ fun DashboardScreen(
     val appsSelectionActive = installedAppsViewModel.selectedApps.isNotEmpty()
     val selectedAppCount = installedAppsViewModel.selectedApps.size
 
-    var showBundleFilePicker by rememberSaveable { mutableStateOf(false) }
-    var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
+    // Morphe
+//    var showBundleFilePicker by rememberSaveable { mutableStateOf(false) }
+
     val (bundlePermissionContract, bundlePermissionName) = remember { fs.permissionContract() }
     val bundlePermissionLauncher =
         rememberLauncherForActivityResult(bundlePermissionContract) { granted ->
             if (granted) {
-                showBundleFilePicker = true
+                openStoragePicker()
+//                // Morphe
+//                showBundleFilePicker = true
             }
         }
     fun requestBundleFilePicker() {
         if (fs.hasStoragePermission()) {
-            showBundleFilePicker = true
+            openStoragePicker()
+            // Morphe
+//            showBundleFilePicker = true
         } else {
             bundlePermissionLauncher.launch(bundlePermissionName)
         }
@@ -224,33 +243,38 @@ fun DashboardScreen(
         }
     }
 
-    val firstLaunch by vm.prefs.firstLaunch.getAsState()
-    if (false) // Morphe begin
-    if (firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
-    // Morphe end
 
-    if (showStorageDialog) {
-        PathSelectorDialog(
-            roots = storageRoots,
-            onSelect = { path ->
-                showStorageDialog = false
-                path?.let { storageVm.handleStorageFile(File(it.toString())) }
-            },
-            fileFilter = ::isAllowedApkFile,
-            allowDirectorySelection = false
-        )
-    }
-    if (showBundleFilePicker) {
-        PathSelectorDialog(
-            roots = storageRoots,
-            onSelect = { path ->
-                showBundleFilePicker = false
-                path?.let { selectedBundlePath = it.toString() }
-            },
-            fileFilter = ::isAllowedMppFile,
-            allowDirectorySelection = false
-        )
-    }
+
+    // Morphe begin
+//    val firstLaunch by vm.prefs.firstLaunch.getAsState()
+//    if (firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
+//
+//    if (showStorageDialog) {
+//        showStorageDialog()
+//        showStorageDialog = false
+//        PathSelectorDialog(
+//            roots = storageRoots,
+//            onSelect = { path ->
+//                showStorageDialog = false
+//                path?.let { storageVm.handleStorageFile(File(it.toString())) }
+//            },
+//            fileFilter = ::isAllowedApkFile,
+//            allowDirectorySelection = false
+//        )
+//    }
+
+//    if (showBundleFilePicker) {
+//        PathSelectorDialog(
+//            roots = storageRoots,
+//            onSelect = { path ->
+//                showBundleFilePicker = false
+//                path?.let { selectedBundlePath = it.toString() }
+//            },
+//            fileFilter = ::isAllowedMppFile,
+//            allowDirectorySelection = false
+//        )
+//    }
+    // Morphe end
 
     var showAddBundleDialog by rememberSaveable { mutableStateOf(false) }
     if (showAddBundleDialog) {
@@ -259,7 +283,9 @@ fun DashboardScreen(
             onLocalSubmit = { path ->
                 showAddBundleDialog = false
                 selectedBundlePath = null
-                vm.createLocalSourceFromFile(path)
+                // Morphe
+                vm.createLocalSource(Uri.parse(path))
+                // vm.createLocalSourceFromFile(path)
             },
             onRemoteSubmit = { url, autoUpdate ->
                 showAddBundleDialog = false
