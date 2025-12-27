@@ -41,7 +41,6 @@ import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.State
-import app.revanced.manager.ui.model.StepId
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
@@ -74,15 +73,6 @@ fun MorphePatcherScreen(
     // Remember patcher state
     val state = rememberMorphePatcherState(viewModel)
 
-    // Early completion detection - don't wait for process cleanup
-    val patchingCompleted by remember {
-        derivedStateOf {
-            val steps = viewModel.steps
-            val signStep = steps.lastOrNull { it.id == StepId.SIGN_PATCHED_APK }
-            signStep?.state == State.COMPLETED
-        }
-    }
-
     // Animated progress with dual-mode animation: slow crawl + fast catch-up
     var displayProgress by remember { mutableStateOf(viewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
@@ -100,12 +90,11 @@ fun MorphePatcherScreen(
     val outputFile = viewModel.outputFile
 
     // Dual-mode animation: always crawls forward, but accelerates when catching up
-    LaunchedEffect(patcherSucceeded, patchingCompleted) {
+    LaunchedEffect(patcherSucceeded) {
         var lastProgressUpdate = 0.0f
         var currentStepStartTime = System.currentTimeMillis()
 
-        // Wait until patching completes (either by step completion or worker result)
-        while (!patchingCompleted && patcherSucceeded == null) {
+        while (patcherSucceeded == null) {
             val now = System.currentTimeMillis()
 
             val actualProgress = viewModel.progress
@@ -161,13 +150,12 @@ fun MorphePatcherScreen(
         }
 
         // Patching completed - ensure progress reaches 100%
-        val success = patchingCompleted || patcherSucceeded == true
-        if (success) {
+        if (patcherSucceeded == true) {
             displayProgress = 1.0f
-            // Short delay for animation to catch up
-            delay(500)
+            // Wait for animation to complete and add extra delay
+            delay(2000) // Wait 2 seconds at 100% before showing success screen
             showSuccessScreen = true
-        } else if (patcherSucceeded == false) {
+        } else {
             // Failed - show immediately
             showSuccessScreen = true
         }
@@ -188,7 +176,7 @@ fun MorphePatcherScreen(
     }
 
     BackHandler {
-        if (patcherSucceeded == null && !patchingCompleted) {
+        if (patcherSucceeded == null) {
             // Show cancel dialog if patching is in progress
             state.showCancelDialog = true
         } else {
@@ -198,7 +186,7 @@ fun MorphePatcherScreen(
     }
 
     // Keep screen on during patching
-    if (patcherSucceeded == null && !patchingCompleted) {
+    if (patcherSucceeded == null) {
         DisposableEffect(Unit) {
             val window = (context as Activity).window
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -341,9 +329,6 @@ fun MorphePatcherScreen(
         }
     }
 
-    // Determine if patching is still in progress
-    val isPatching = patcherSucceeded == null && !patchingCompleted
-
     // Main content
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -442,7 +427,7 @@ fun MorphePatcherScreen(
                 ) {
                     // Left: Cancel button during patching or empty space
                     when {
-                        isPatching -> {
+                        patcherSucceeded == null -> {
                             // Cancel button during patching
                             MorpheFloatingButtons(
                                 onClick = { state.showCancelDialog = true },
@@ -460,7 +445,7 @@ fun MorphePatcherScreen(
                     }
 
                     // Center: Home button (only show when patching is complete)
-                    if (!isPatching) {
+                    if (patcherSucceeded != null) {
                         MorpheFloatingButtons(
                             onClick = onBackClick,
                             icon = Icons.Default.Home,
@@ -490,7 +475,7 @@ fun MorphePatcherScreen(
                                 Spacer(Modifier.size(64.dp))
                             }
                         }
-                        (patchingCompleted || patcherSucceeded == true) && !state.hasPatchingError -> {
+                        patcherSucceeded == true && !state.hasPatchingError -> {
                             // Save APK button
                             MorpheFloatingButtons(
                                 onClick = {
