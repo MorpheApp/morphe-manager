@@ -1188,15 +1188,13 @@ class PatchBundleRepository(
     suspend fun update(
         vararg sources: RemotePatchBundle,
         showToast: Boolean = false,
-        showProgress: Boolean = false,// Morphe
-        allowUnsafeNetwork: Boolean = true,
+        allowUnsafeNetwork: Boolean = false,
         onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
     ) {
         val uids = sources.map { it.uid }.toSet()
         store.dispatch(
             Update(
                 showToast = showToast,
-                showProgress = showProgress,
                 allowUnsafeNetwork = allowUnsafeNetwork,
                 onPerBundleProgress = onPerBundleProgress,
             ) { it.uid in uids }
@@ -1215,87 +1213,6 @@ class PatchBundleRepository(
                 showProgress = showProgress
             ) { it.uid == DEFAULT_SOURCE_UID }
         )
-    }
-
-    /**
-     * Morphe specific function build around [update] to return an update result
-     *
-     * @param showProgress Whether to show progress updates
-     * @param showToast Whether to show toast notifications
-     * @return UpdateResult indicating success, no internet, or error
-     */
-    suspend fun updateOnlyMorpheBundleWithResult(
-        showProgress: Boolean = true,
-        showToast: Boolean = false
-    ) /*: UpdateResult*/ {
-        // Check network first
-        if (!networkInfo.isConnected()) {
-            Log.d(tag, "No internet connection for bundle update")
-            if (showProgress) {
-                val progressFlow = BundleUpdateProgress(
-                    total = 1,
-                    completed = 1,
-//                    phase = BundleUpdatePhase. .NoInternet
-                )
-                bundleUpdateProgressFlow.value = progressFlow
-
-                // Schedule clear after delay
-                CoroutineScope(Dispatchers.Default).launch {
-                    delay(3500)
-                    if (bundleUpdateProgressFlow.value == progressFlow) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
-            }
-            // FIXME
-//            return UpdateResult.NoInternet
-        }
-
-        // Start progress if needed
-        if (showProgress) {
-            bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                total = 1,
-                completed = 0,
-                // FIXME
-//                result = null
-            )
-        }
-
-        try {
-            // Modified fetch to only update built in Morphe bundle
-            updateOnlyMorpheBundle(
-                force = false,
-                showToast = showToast,
-                showProgress = showProgress
-            )
-
-            // MORFIXME
-            // Check the current progress state to determine result
-//            val currentProgress = bundleUpdateProgressFlow.value
-//            val result = currentProgress?.result ?: UpdateResult.Success
-//
-//            return result
-        } catch (e: Exception) {
-            Log.e(tag, "Failed to update official bundle", e)
-            if (showProgress) {
-                val updateProgress = BundleUpdateProgress(
-                    total = 1,
-                    completed = 1,
-                    // FIXME
-//                    result = UpdateResult.Error
-                )
-                bundleUpdateProgressFlow.value = updateProgress
-
-                CoroutineScope(Dispatchers.Default).launch {
-                    delay(3500)
-                    if (bundleUpdateProgressFlow.value == updateProgress) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
-            }
-            // FIXME
-//            return UpdateResult.Error
-        }
     }
 
     suspend fun redownloadRemoteBundles() = store.dispatch(Update(force = true))
@@ -1382,13 +1299,27 @@ class PatchBundleRepository(
             } else {
                 updateJob = scope.launch {
                     try {
-                        performRemoteUpdate(
-                            force = request.force,
-                            showToast = request.showToast,
-                            allowUnsafeNetwork = request.allowUnsafeNetwork,
-                            onPerBundleProgress = request.onPerBundleProgress,
-                            predicate = request.predicate
-                        )
+                        val useMorpheMode = prefs.useMorpheHomeScreen.get()
+
+                        if (useMorpheMode) {
+                            // Use Morphe performRemoteUpdate with result tracking
+                            performRemoteUpdateWithResult(
+                                force = request.force,
+                                showToast = request.showToast,
+                                allowUnsafeNetwork = request.allowUnsafeNetwork,
+                                onPerBundleProgress = request.onPerBundleProgress,
+                                predicate = request.predicate
+                            )
+                        } else {
+                            // Use standard upstream behavior
+                            performRemoteUpdate(
+                                force = request.force,
+                                showToast = request.showToast,
+                                allowUnsafeNetwork = request.allowUnsafeNetwork,
+                                onPerBundleProgress = request.onPerBundleProgress,
+                                predicate = request.predicate
+                            )
+                        }
                     } finally {
                         updateJobMutex.withLock {
                             updateJob = null
@@ -1561,6 +1492,229 @@ class PatchBundleRepository(
         }
     }
 
+    /**
+     * Morphe: Hardcoded performRemoteUpdate that adds result tracking
+     */
+    private suspend fun performRemoteUpdateWithResult(
+        force: Boolean,
+        showToast: Boolean,
+        allowUnsafeNetwork: Boolean,
+        onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)?,
+        predicate: (bundle: RemotePatchBundle) -> Boolean,
+    ) = coroutineScope {
+        try {
+            // Check network connectivity first
+            if (!networkInfo.isConnected()) {
+                Log.d(tag, "No internet connection for bundle update")
+
+                // Show "No Internet" state
+                val noInternetProgress = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    phase = BundleUpdatePhase.Checking,
+                    result = BundleUpdateResult.NoInternet,
+                )
+                bundleUpdateProgressFlow.value = noInternetProgress
+
+                scope.launch {
+                    delay(3500)
+                    if (bundleUpdateProgressFlow.value == noInternetProgress) {
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
+                return@coroutineScope
+            }
+
+            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
+            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
+                Log.d(tag, "Skipping update check because the network is metered.")
+                bundleUpdateProgressFlow.value = null
+                return@coroutineScope
+            }
+
+            val targets = store.state.value.sources.values
+                .filterIsInstance<RemotePatchBundle>()
+                .filter { predicate(it) }
+
+            if (targets.isEmpty()) {
+                if (showToast) toast(R.string.patches_update_unavailable)
+                bundleUpdateProgressFlow.value = null
+                return@coroutineScope
+            }
+
+            markActiveUpdateUids(targets.map(RemotePatchBundle::uid).toSet())
+
+            bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                total = currentUpdateTotal(targets.size),
+                completed = 0,
+                phase = BundleUpdatePhase.Checking,
+                result = BundleUpdateResult.None,
+            )
+
+            val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
+                val results = LinkedHashMap<RemotePatchBundle, PatchBundleDownloadResult>()
+                var completed = 0
+
+                for (bundle in targets) {
+                    val total = currentUpdateTotal(targets.size)
+                    if (total <= 0) {
+                        bundleUpdateProgressFlow.value = null
+                        return@coroutineScope
+                    }
+                    if (isRemoteUpdateCancelled(bundle.uid)) {
+                        continue
+                    }
+
+                    Log.d(tag, "Updating patch bundle: ${bundle.name}")
+
+                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
+                        total = total,
+                        completed = completed.coerceAtMost(total),
+                        currentBundleName = progressLabelFor(bundle),
+                        phase = BundleUpdatePhase.Checking,
+                        bytesRead = 0L,
+                        bytesTotal = null,
+                        result = BundleUpdateResult.None,
+                    )
+
+                    val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
+                        if (isRemoteUpdateCancelled(bundle.uid)) {
+                            throw BundleUpdateCancelled(bundle.uid)
+                        }
+                        bundleUpdateProgressFlow.update { progress ->
+                            progress?.copy(
+                                currentBundleName = progressLabelFor(bundle),
+                                phase = BundleUpdatePhase.Downloading,
+                                bytesRead = bytesRead,
+                                bytesTotal = bytesTotal,
+                            )
+                        }
+                        onPerBundleProgress?.invoke(bundle, bytesRead, bytesTotal)
+                    }
+
+                    val result = try {
+                        if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
+                    } catch (e: BundleUpdateCancelled) {
+                        continue
+                    }
+
+                    val downloadedName = runCatching {
+                        PatchBundle(bundle.patchesJarFile.absolutePath).manifestAttributes?.name
+                    }.getOrNull()?.trim().takeUnless { it.isNullOrBlank() }
+                    if (downloadedName != null) {
+                        bundleUpdateProgressFlow.update { progress ->
+                            progress?.copy(currentBundleName = downloadedName)
+                        }
+                    }
+
+                    val nextTotal = currentUpdateTotal(targets.size)
+                    completed = (completed + 1).coerceAtMost(nextTotal)
+                    bundleUpdateProgressFlow.update { progress ->
+                        progress?.copy(
+                            completed = completed,
+                            currentBundleName = downloadedName ?: progressLabelFor(bundle),
+                            phase = BundleUpdatePhase.Finalizing,
+                            bytesRead = 0L,
+                            bytesTotal = null,
+                        )
+                    }
+
+                    if (result != null) {
+                        results[bundle] = result
+                    }
+                }
+
+                results
+            } catch (e: Exception) {
+                Log.e(tag, "Failed to update patches", e)
+
+                // Show error state
+                val errorProgress = BundleUpdateProgress(
+                    total = 1,
+                    completed = 1,
+                    phase = BundleUpdatePhase.Finalizing,
+                    result = BundleUpdateResult.Error,
+                )
+                bundleUpdateProgressFlow.value = errorProgress
+
+                scope.launch {
+                    delay(3500)
+                    if (bundleUpdateProgressFlow.value == errorProgress) {
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
+
+                toast(R.string.patches_download_fail, e.simpleMessage())
+                return@coroutineScope
+            }
+
+            if (updated.isEmpty()) {
+                if (showToast) toast(R.string.patches_update_unavailable)
+
+                // No updates available - already up to date
+                val noUpdatesProgress = BundleUpdateProgress(
+                    total = targets.size,
+                    completed = targets.size,
+                    phase = BundleUpdatePhase.Checking,
+                    result = BundleUpdateResult.NoUpdates,
+                )
+                bundleUpdateProgressFlow.value = noUpdatesProgress
+
+                scope.launch {
+                    delay(3500)
+                    if (bundleUpdateProgressFlow.value == noUpdatesProgress) {
+                        bundleUpdateProgressFlow.value = null
+                    }
+                }
+                return@coroutineScope
+            }
+
+            dispatchAction("Apply updated bundles") {
+                updated.forEach { (src, downloadResult) ->
+                    if (dao.getProps(src.uid) == null) return@forEach
+                    val rawName = runCatching {
+                        PatchBundle(src.patchesJarFile.absolutePath).manifestAttributes?.name
+                    }.getOrNull()?.trim().takeUnless { it.isNullOrBlank() } ?: src.name
+                    val name = if (src.uid == DEFAULT_SOURCE_UID) rawName else ensureUniqueName(rawName, src.uid)
+                    val now = System.currentTimeMillis()
+
+                    updateDb(src.uid) {
+                        it.copy(
+                            versionHash = downloadResult.versionSignature,
+                            name = name,
+                            createdAt = downloadResult.assetCreatedAtMillis ?: it.createdAt,
+                            updatedAt = now
+                        )
+                    }
+                }
+
+                doReload()
+            }
+
+            val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
+            manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
+            if (showToast) toast(R.string.patches_update_success)
+
+            // Show success state
+            val successProgress = BundleUpdateProgress(
+                total = targets.size,
+                completed = targets.size,
+                phase = BundleUpdatePhase.Finalizing,
+                result = BundleUpdateResult.Success,
+            )
+            bundleUpdateProgressFlow.value = successProgress
+
+            scope.launch {
+                delay(3500)
+                if (bundleUpdateProgressFlow.value == successProgress) {
+                    bundleUpdateProgressFlow.value = null
+                }
+            }
+        } finally {
+            clearActiveUpdateState()
+        }
+    }
+
     private class BundleUpdateCancelled(val uid: Int) : Exception()
 
     private inner class ManualUpdateCheck(
@@ -1651,6 +1805,15 @@ class PatchBundleRepository(
         val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf()
     )
 
+    // Morphe
+    enum class BundleUpdateResult {
+        None,           // Update in progress
+        Success,        // Successfully updated
+        NoUpdates,      // Already up to date
+        NoInternet,     // No internet connection
+        Error,          // Error occurred
+    }
+
     data class BundleUpdateProgress(
         val total: Int,
         val completed: Int,
@@ -1658,6 +1821,7 @@ class PatchBundleRepository(
         val phase: BundleUpdatePhase = BundleUpdatePhase.Checking,
         val bytesRead: Long = 0L,
         val bytesTotal: Long? = null,
+        val result: BundleUpdateResult = BundleUpdateResult.None, // Morphe
     )
 
     enum class BundleUpdatePhase {

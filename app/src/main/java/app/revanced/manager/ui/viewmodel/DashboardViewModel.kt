@@ -222,19 +222,6 @@ class DashboardViewModel(
         }
     }
 
-    // Morphe
-    suspend fun updateMorpheBundleWithChangelogClear() {
-        patchBundleRepository.updateOnlyMorpheBundleWithResult(
-            showProgress = true,
-            showToast = false
-        )
-
-        // Clear changelog cache
-        val sources = patchBundleRepository.sources.first()
-        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
-        apiBundle?.clearChangelogCache()
-    }
-
     fun createLocalSourceFromFile(path: String) = viewModelScope.launch {
         withContext(NonCancellable) {
             withPersistentImportToast {
@@ -245,17 +232,17 @@ class DashboardViewModel(
                 }
             }
         }
+    }
 
-//        suspend fun updateMorpheBundleWithChangelogClear() {
-//            patchBundleRepository.updateOnlyMorpheBundleWithResult(
-//                showProgress = true,
-//                showToast = false
-//            )
-//
-//            // Clear changelog cache
-//            val sources = patchBundleRepository.sources.first()
-//            val apiBundle = sources.firstOrNull() as? RemotePatchBundle
-//            apiBundle?.clearChangelogCache()
-//        }
+    suspend fun updateMorpheBundleWithChangelogClear() {
+        patchBundleRepository.updateOnlyMorpheBundle(
+            force = false,
+            showToast = false,
+            showProgress = true
+        )
+        // Clear changelog cache
+        val sources = patchBundleRepository.sources.first()
+        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
+        apiBundle?.clearChangelogCache()
     }
 }
