@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.screen
 
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import android.content.pm.PackageInfo
 import android.net.Uri
@@ -79,6 +80,7 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.ui.viewmodel.BundleVersionSuggestion
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.isAllowedApkFile
 import app.revanced.manager.util.consumeHorizontalScroll
@@ -100,7 +102,8 @@ fun AppSelectorScreen(
 ) {
     val prefs = koinInject<PreferencesManager>()
     val fs = koinInject<Filesystem>()
-    val storageRoots = remember { fs.storageRoots() }
+    // Morphe
+//    val storageRoots = remember { fs.storageRoots() }
     val allowIncompatiblePatches by prefs.disablePatchVersionCompatCheck.getAsState()
     val suggestedVersionSafeguard by prefs.suggestedVersionSafeguard.getAsState()
     val bundleRecommendationsEnabled = allowIncompatiblePatches && !suggestedVersionSafeguard
@@ -113,19 +116,34 @@ fun AppSelectorScreen(
         }
     }
 
-    var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    // Morphe
+//    var showStorageDialog by rememberSaveable { mutableStateOf(false) }
     val (permissionContract, permissionName) = remember { fs.permissionContract() }
+
+    val storagePickerLauncher = rememberLauncherForActivityResult(
+        // Morphe
+        contract = ActivityResultContracts.OpenDocument(), //ActivityResultContracts.GetContent(),
+        onResult = {
+            // Morphe
+            // it?.let(vm::handleStorageFile)
+            it?.let(vm::handleStorageResult)
+            if (it == null && returnToDashboardOnStorage) {
+                onBackClick()
+            }
+        }
+    )
+
     val permissionLauncher =
         rememberLauncherForActivityResult(permissionContract) { granted ->
             if (granted) {
-                showStorageDialog = true
+                storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
             } else if (returnToDashboardOnStorage) {
                 onBackClick()
             }
         }
     val openStoragePicker = {
         if (fs.hasStoragePermission()) {
-            showStorageDialog = true
+            storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
         } else {
             permissionLauncher.launch(permissionName)
         }
@@ -143,20 +161,21 @@ fun AppSelectorScreen(
         return
     }
 
-    if (showStorageDialog) {
-        PathSelectorDialog(
-            roots = storageRoots,
-            onSelect = { path ->
-                showStorageDialog = false
-                path?.let { vm.handleStorageFile(File(it.toString())) }
-                if (path == null && returnToDashboardOnStorage) {
-                    onBackClick()
-                }
-            },
-            fileFilter = ::isAllowedApkFile,
-            allowDirectorySelection = false
-        )
-    }
+    // Morphe
+//    if (showStorageDialog) {
+//        PathSelectorDialog(
+//            roots = storageRoots,
+//            onSelect = { path ->
+//                showStorageDialog = false
+//                path?.let { vm.handleStorageFile(File(it.toString())) }
+//                if (path == null && returnToDashboardOnStorage) {
+//                    onBackClick()
+//                }
+//            },
+//            fileFilter = ::isAllowedApkFile,
+//            allowDirectorySelection = false
+//        )
+//    }
 
     val suggestedVersions by vm.suggestedAppVersions.collectAsStateWithLifecycle(emptyMap())
     val bundleSuggestionsByApp by vm.bundleSuggestionsByApp.collectAsStateWithLifecycle(emptyMap())
