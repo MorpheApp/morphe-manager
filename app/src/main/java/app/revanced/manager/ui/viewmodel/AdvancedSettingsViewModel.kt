@@ -56,7 +56,6 @@ class AdvancedSettingsViewModel(
 //        patchBundleRepository.reloadApiBundles()
 //    }
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     fun setGitHubPat(value: String) = viewModelScope.launch(Dispatchers.Default) {
         prefs.gitHubPat.update(value.trim())
     }

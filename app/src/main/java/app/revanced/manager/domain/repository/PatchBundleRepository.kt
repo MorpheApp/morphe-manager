@@ -545,7 +545,6 @@ class PatchBundleRepository(
                 autoUpdate,
                 enabled,
             )
-            // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
             is SourceInfo.GitHubPullRequest -> GitHubPullRequestBundle(
                 actualName,
                 uid,
@@ -1209,8 +1208,7 @@ class PatchBundleRepository(
         store.dispatch(
             Update(
                 force = force,
-                showToast = showToast,
-                showProgress = showProgress
+                showToast = showToast
             ) { it.uid == DEFAULT_SOURCE_UID }
         )
     }
@@ -1222,7 +1220,7 @@ class PatchBundleRepository(
      */
     suspend fun updateCheck() {
         val useMorpheHomeScreen = prefs.useMorpheHomeScreen.getBlocking()
-        store.dispatch(Update(showProgress = !useMorpheHomeScreen) { it.autoUpdate })
+        store.dispatch(Update { it.autoUpdate })
         checkManualUpdates()
     }
 
@@ -1259,7 +1257,6 @@ class PatchBundleRepository(
     private inner class Update(
         private val force: Boolean = false,
         private val showToast: Boolean = false,
-        private val showProgress: Boolean = true, // Morphe
         private val allowUnsafeNetwork: Boolean = true,
         private val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
         private val predicate: (bundle: RemotePatchBundle) -> Boolean = { true },

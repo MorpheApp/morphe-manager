@@ -69,7 +69,6 @@ class ReVancedAPI(
         val normalizedPath = path.trimStart('/')
         val pat = prefs.gitHubPat.get()
         return client.request {
-            // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
             pat.takeIf { it.isNotBlank() }?.let { header("Authorization", "Bearer $it") }
             url("${config.apiBase}/$normalizedPath")
         }
@@ -191,7 +190,6 @@ class ReVancedAPI(
         }
     }
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     suspend fun getAssetFromPullRequest(owner: String, repo: String, pullRequestNumber: String): ReVancedAsset {
         suspend fun getPullWithRun(
             pullRequestNumber: String,

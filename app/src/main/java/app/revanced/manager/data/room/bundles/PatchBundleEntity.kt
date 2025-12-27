@@ -20,7 +20,6 @@ sealed class Source {
         override fun toString() = url.toString()
     }
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     data class GitHubPullRequest(val url: Url) : Source() {
         override fun toString() = url.toString()
     }

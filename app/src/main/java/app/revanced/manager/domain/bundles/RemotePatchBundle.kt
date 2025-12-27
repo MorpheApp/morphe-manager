@@ -70,7 +70,6 @@ sealed class RemotePatchBundle(
         enabled: Boolean
     ): RemotePatchBundle = copy(error, name, displayName, createdAt, updatedAt, this.autoUpdate, enabled)
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     protected open suspend fun download(info: ReVancedAsset, onProgress: PatchBundleDownloadProgress? = null) =
         withContext(Dispatchers.IO) {
             try {
