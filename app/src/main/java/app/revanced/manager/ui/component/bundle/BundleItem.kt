@@ -387,6 +387,8 @@ fun BundleItem(
                 val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
                 val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
                 ActionButtonPair(
+                    // Morphe: For now, don't allow removing the only source of patches
+                    enabled = !src.isDefault,
                     leadingOnClick = {
                         if (src.enabled) {
                             showDisableConfirmationDialog = true
@@ -444,11 +446,13 @@ fun BundleItem(
 
 @Composable
 private fun ActionIconButton(
+    enabled: Boolean = true,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     IconButton(
+        enabled = enabled,
         onClick = onClick,
         modifier = modifier.size(ActionButtonSize)
     ) {
@@ -463,6 +467,7 @@ private val ActionButtonOffset = ActionButtonSize + ActionButtonSpacing
 
 @Composable
 private fun ActionButtonPair(
+    enabled: Boolean = true,
     leadingOnClick: () -> Unit,
     leadingIcon: androidx.compose.ui.graphics.vector.ImageVector,
     leadingDescription: String,
@@ -472,6 +477,7 @@ private fun ActionButtonPair(
 ) {
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         ActionIconButton(
+            enabled = enabled,
             onClick = trailingOnClick,
             modifier = Modifier.align(Alignment.Center)
         ) {
