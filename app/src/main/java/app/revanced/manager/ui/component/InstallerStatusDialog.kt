@@ -87,7 +87,7 @@ enum class DialogKind(
     val title: Int,
     @StringRes val contentStringResId: Int,
     val icon: ImageVector = Icons.Outlined.ErrorOutline,
-    val confirmButton: InstallerStatusDialogButton = installerStatusDialogButton(R.string.ok),
+    val confirmButton: InstallerStatusDialogButton = installerStatusDialogButton(android.R.string.ok),
     val dismissButton: InstallerStatusDialogButton? = null,
 ) {
     FAILURE(

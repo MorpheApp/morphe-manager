@@ -559,7 +559,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="downloading_patches">Downloading patches…</string>
 
     <string name="options">Options</string>
-    <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="edit">Edit</string>

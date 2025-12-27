@@ -586,7 +586,7 @@ fun PatchesSelectorScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showMissingPatchReminder = false }) {
-                    Text(stringResource(R.string.ok))
+                    Text(stringResource(android.R.string.ok))
                 }
             }
         )
@@ -1465,7 +1465,7 @@ private fun PatchVersionsDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.ok))
+                Text(stringResource(android.R.string.ok))
             }
         },
         title = {
@@ -2052,7 +2052,7 @@ private fun IncompatiblePatchesDialog(
     onDismissRequest = onDismissRequest,
     confirmButton = {
         TextButton(onClick = onDismissRequest) {
-            Text(stringResource(R.string.ok))
+            Text(stringResource(android.R.string.ok))
         }
     },
     title = { Text(stringResource(R.string.incompatible_patches)) },
@@ -2078,7 +2078,7 @@ private fun IncompatiblePatchDialog(
     onDismissRequest = onDismissRequest,
     confirmButton = {
         TextButton(onClick = onDismissRequest) {
-            Text(stringResource(R.string.ok))
+            Text(stringResource(android.R.string.ok))
         }
     },
     title = { Text(stringResource(R.string.incompatible_patch)) },
