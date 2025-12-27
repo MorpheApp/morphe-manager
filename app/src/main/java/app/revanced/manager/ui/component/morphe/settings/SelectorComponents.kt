@@ -67,7 +67,7 @@ fun SelectorGrid(
                     label = item.label,
                     selected = selectedItem == item.key,
                     onClick = { onItemSelected(item.key) },
-                    modifier = Modifier.width(80.dp)
+                    modifier = Modifier.width(72.dp)
                 )
             }
         }
@@ -88,8 +88,7 @@ private fun SelectorOption(
 ) {
     Surface(
         modifier = modifier
-            .aspectRatio(1f)
-            .heightIn(min = 60.dp),
+            .height(72.dp),
         shape = RoundedCornerShape(12.dp),
         color = if (selected) {
             MaterialTheme.colorScheme.primaryContainer

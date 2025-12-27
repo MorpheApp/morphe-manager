@@ -202,7 +202,7 @@ private fun AppearanceContent(
                     }
                 }
             },
-            columns = null // Horizontal scroll
+            columns = 4
         )
 
         // Dynamic Color toggle (Android 12+) - only show when Black is not selected
