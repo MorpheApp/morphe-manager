@@ -11,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import app.revanced.manager.util.toast
@@ -31,7 +31,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PatchOptionsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    viewModel: PatchOptionsViewModel = koinViewModel()
+    viewModel: PatchOptionsViewModel = koinViewModel(),
+    dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -46,17 +47,30 @@ fun PatchOptionsSection(
     // Collect patch options from ViewModel
     val youtubePatches by viewModel.youtubePatches.collectAsState()
     val youtubeMusicPatches by viewModel.youtubeMusicPatches.collectAsState()
-    val isLoading = viewModel.isLoading
     val loadError = viewModel.loadError
 
+    // Track bundle update progress to show loading state
+    val bundleUpdateProgress by dashboardViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+    val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == null
+
+    // Collect bundle info to detect changes
+    val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+
+    // Refresh patch options when bundle info changes
+    LaunchedEffect(bundleInfo) {
+        if (bundleInfo.isNotEmpty()) {
+            viewModel.refresh()
+        }
+    }
+
     // Check if patches are completely unavailable
-    val noPatchesAvailable = !isLoading && loadError == null &&
+    val noPatchesAvailable = !isBundleUpdating && loadError == null &&
             youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()
 
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {
-            // Loading state
-            if (isLoading) {
+            // Loading state - show when bundle is updating
+            if (isBundleUpdating) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -131,8 +145,11 @@ fun PatchOptionsSection(
                             )
                         }
                         IconButton(onClick = {
-                            viewModel.refresh()
-                            context.toast(context.getString(R.string.morphe_home_updating_patches))
+                            scope.launch {
+                                dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                                viewModel.refresh()
+                                context.toast(context.getString(R.string.morphe_home_updating_patches))
+                            }
                         }) {
                             Icon(
                                 imageVector = Icons.Outlined.Refresh,
