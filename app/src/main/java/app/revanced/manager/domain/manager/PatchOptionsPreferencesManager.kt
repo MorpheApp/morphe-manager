@@ -16,9 +16,9 @@ class PatchOptionsPreferencesManager(
 ) : BasePreferencesManager(context, "patch_options") {
 
     companion object {
-        // Package identifiers for storage keys
-        const val YOUTUBE = "youtube"
-        const val YOUTUBE_MUSIC = "youtube_music"
+        // Package identifiers
+        const val PACKAGE_YOUTUBE = "com.google.android.youtube"
+        const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
 
         // Patch names (must match exactly with bundle)
         const val PATCH_THEME = "Theme"
@@ -44,43 +44,43 @@ class PatchOptionsPreferencesManager(
 
     // Theme - Dark
     val darkThemeBackgroundColorYouTube = stringPreference(
-        "${YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
+        "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
         DEFAULT_DARK_THEME
     )
 
     // Theme - Light
     val lightThemeBackgroundColorYouTube = stringPreference(
-        "${YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}",
+        "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}",
         DEFAULT_LIGHT_THEME
     )
 
     // Custom Branding - App Name
     val customAppNameYouTube = stringPreference(
-        "${YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
+        "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
         ""
     )
 
     // Custom Branding - Icon Path
     val customIconPathYouTube = stringPreference(
-        "${YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
+        "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
         ""
     )
 
     // Change Header - Custom Header Path
     val customHeaderPath = stringPreference(
-        "${YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
+        "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}",
         ""
     )
 
     // Hide Shorts - App Shortcut
     val hideShortsAppShortcut = booleanPreference(
-        "${YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
+        "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}",
         false
     )
 
     // Hide Shorts - Widget
     val hideShortsWidget = booleanPreference(
-        "${YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
+        "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}",
         false
     )
 
@@ -88,19 +88,19 @@ class PatchOptionsPreferencesManager(
 
     // Theme - Dark
     val darkThemeBackgroundColorYouTubeMusic = stringPreference(
-        "${YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
+        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}",
         DEFAULT_DARK_THEME
     )
 
     // Custom Branding - App Name
     val customAppNameYouTubeMusic = stringPreference(
-        "${YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
+        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}",
         ""
     )
 
     // Custom Branding - Icon Path
     val customIconPathYouTubeMusic = stringPreference(
-        "${YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
+        "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}",
         ""
     )
 
@@ -117,35 +117,35 @@ class PatchOptionsPreferencesManager(
 
         return when {
             // YouTube Theme
-            prefKey == "${YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
                 darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
-            prefKey == "${YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}" ->
                 lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
 
             // YouTube Custom Branding
-            prefKey == "${YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
                 customAppNameYouTube.get().takeIf { it.isNotBlank() }
-            prefKey == "${YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
                 customIconPathYouTube.get().takeIf { it.isNotBlank() }
 
             // YouTube Change Header
-            prefKey == "${YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}" ->
                 customHeaderPath.get().takeIf { it.isNotBlank() }
 
             // YouTube Hide Shorts
-            prefKey == "${YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}" ->
                 hideShortsAppShortcut.get().takeIf { it }
-            prefKey == "${YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}" ->
+            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}" ->
                 hideShortsWidget.get().takeIf { it }
 
             // YouTube Music Theme
-            prefKey == "${YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
+            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
                 darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() }
 
             // YouTube Music Custom Branding
-            prefKey == "${YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
+            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
                 customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }
-            prefKey == "${YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
+            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
                 customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }
 
             else -> null
@@ -153,10 +153,10 @@ class PatchOptionsPreferencesManager(
     }
 
     /**
-     * Export all patch options as a map for the patcher.
+     * Export YouTube specific patch options
      * Format: Map<BundleUid, Map<PatchName, Map<OptionKey, Value>>>
      */
-    suspend fun exportPatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
+    suspend fun exportYouTubePatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
         return buildMap {
             // Note: Bundle UID 0 is the default Morphe bundle
             val bundleOptions = mutableMapOf<String, MutableMap<String, Any?>>()
@@ -213,6 +213,7 @@ class PatchOptionsPreferencesManager(
 
     /**
      * Export YouTube Music specific patch options
+     * Format: Map<BundleUid, Map<PatchName, Map<OptionKey, Value>>>
      */
     suspend fun exportYouTubeMusicPatchOptions(): Map<Int, Map<String, Map<String, Any?>>> {
         return buildMap {

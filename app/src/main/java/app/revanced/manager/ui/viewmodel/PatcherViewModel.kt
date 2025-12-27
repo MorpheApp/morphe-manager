@@ -37,6 +37,7 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -1423,8 +1424,13 @@ class PatcherViewModel(
         val shouldPreserveInput =
             selectedForRun is SelectedApp.Local && (selectedForRun.temporary || forceKeepLocalInput)
 
-        // Get patch options from PatchOptionsPreferencesManager
-        val patchOptions = runBlocking { patchOptionsPrefs.exportPatchOptions() }
+        // Get patch options from PatchOptionsPreferencesManager based on package name
+        val patchOptions = runBlocking {
+            when (packageName) {
+                PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
+                else -> patchOptionsPrefs.exportYouTubePatchOptions()
+            }
+        }
 
         // Merge with existing options from input
         val mergedOptions = input.options.toMutableMap()

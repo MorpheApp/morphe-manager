@@ -7,6 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_CHANGE_HEADER
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_CUSTOM_BRANDING
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_HIDE_SHORTS
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_THEME
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.patcher.patch.PatchInfo
 import kotlinx.coroutines.Dispatchers
@@ -42,16 +48,12 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
     val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
 
     companion object {
-        // Package names
-        const val YOUTUBE_PACKAGE = "com.google.android.youtube"
-        const val YOUTUBE_MUSIC_PACKAGE = "com.google.android.apps.youtube.music"
-
         // Patch names to show options for
         private val ALLOWED_PATCHES = setOf(
-            "Custom branding",
-            "Change header",
-            "Theme",
-            "Hide Shorts components"
+            PATCH_CUSTOM_BRANDING,
+            PATCH_CHANGE_HEADER,
+            PATCH_THEME,
+            PATCH_HIDE_SHORTS
         )
     }
 
@@ -102,8 +104,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
                     val compatiblePackages = patch.compatiblePackages ?: return@forEach
 
                     // Check if patch is for YouTube
-                    val isForYouTube = compatiblePackages.any { it.packageName == YOUTUBE_PACKAGE }
-                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == YOUTUBE_MUSIC_PACKAGE }
+                    val isForYouTube = compatiblePackages.any { it.packageName == PACKAGE_YOUTUBE }
+                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == PACKAGE_YOUTUBE_MUSIC }
 
                     val options = patch.options?.map { option ->
                         OptionInfo(
@@ -147,8 +149,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
      */
     fun getThemeOptions(packageName: String): PatchOptionInfo? {
         val patches = when (packageName) {
-            YOUTUBE_PACKAGE -> _youtubePatches.value
-            YOUTUBE_MUSIC_PACKAGE -> _youtubeMusicPatches.value
+            PACKAGE_YOUTUBE -> _youtubePatches.value
+            PACKAGE_YOUTUBE_MUSIC -> _youtubeMusicPatches.value
             else -> emptyList()
         }
         return patches.find { it.patchName == "Theme" }
@@ -159,8 +161,8 @@ class PatchOptionsViewModel : ViewModel(), KoinComponent {
      */
     fun getBrandingOptions(packageName: String): PatchOptionInfo? {
         val patches = when (packageName) {
-            YOUTUBE_PACKAGE -> _youtubePatches.value
-            YOUTUBE_MUSIC_PACKAGE -> _youtubeMusicPatches.value
+            PACKAGE_YOUTUBE -> _youtubePatches.value
+            PACKAGE_YOUTUBE_MUSIC -> _youtubeMusicPatches.value
             else -> emptyList()
         }
         return patches.find { it.patchName == "Custom branding" }

@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.OptionInfo
 import app.revanced.manager.ui.viewmodel.PatchOptionInfo
@@ -61,8 +63,8 @@ fun ThemeColorDialog(
 
     // Get theme options from bundle
     val packageName = when (appType) {
-        AppType.YOUTUBE -> PatchOptionsViewModel.YOUTUBE_PACKAGE
-        AppType.YOUTUBE_MUSIC -> PatchOptionsViewModel.YOUTUBE_MUSIC_PACKAGE
+        AppType.YOUTUBE -> PACKAGE_YOUTUBE
+        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
     }
     val themeOptions = viewModel.getThemeOptions(packageName)
 
@@ -358,8 +360,8 @@ fun CustomBrandingDialog(
 
     // Get branding options from bundle
     val packageName = when (appType) {
-        AppType.YOUTUBE -> PatchOptionsViewModel.YOUTUBE_PACKAGE
-        AppType.YOUTUBE_MUSIC -> PatchOptionsViewModel.YOUTUBE_MUSIC_PACKAGE
+        AppType.YOUTUBE -> PACKAGE_YOUTUBE
+        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
     }
     val brandingOptions = viewModel.getBrandingOptions(packageName)
     val appNameOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)

@@ -12,6 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
@@ -236,8 +238,8 @@ private fun AppPatchOptionsContent(
 
     // Get available patches for this app type
     val packageName = when (appType) {
-        AppType.YOUTUBE -> PatchOptionsViewModel.YOUTUBE_PACKAGE
-        AppType.YOUTUBE_MUSIC -> PatchOptionsViewModel.YOUTUBE_MUSIC_PACKAGE
+        AppType.YOUTUBE -> PACKAGE_YOUTUBE
+        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
     }
 
     val hasTheme = viewModel.getThemeOptions(packageName) != null
