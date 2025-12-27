@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
+import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
@@ -62,11 +63,7 @@ fun ThemeColorDialog(
     var customLightColor by remember { mutableStateOf(lightColor) }
 
     // Get theme options from bundle
-    val packageName = when (appType) {
-        AppType.YOUTUBE -> PACKAGE_YOUTUBE
-        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
-    }
-    val themeOptions = viewModel.getThemeOptions(packageName)
+    val themeOptions = viewModel.getThemeOptions(appType.packageName)
 
     // Get dark theme option with its presets
     val darkThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
@@ -359,11 +356,7 @@ fun CustomBrandingDialog(
     }
 
     // Get branding options from bundle
-    val packageName = when (appType) {
-        AppType.YOUTUBE -> PACKAGE_YOUTUBE
-        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
-    }
-    val brandingOptions = viewModel.getBrandingOptions(packageName)
+    val brandingOptions = viewModel.getBrandingOptions(appType.packageName)
     val appNameOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
     val iconOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
 

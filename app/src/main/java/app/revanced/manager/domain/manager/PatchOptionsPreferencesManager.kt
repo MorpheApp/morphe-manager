@@ -4,6 +4,23 @@ import android.content.Context
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
 
 /**
+ * App type enum for patch options
+ */
+enum class AppType {
+    YOUTUBE,
+    YOUTUBE_MUSIC;
+
+    /**
+     * Get the package name for this app type
+     */
+    val packageName: String
+        get() = when (this) {
+            YOUTUBE -> PatchOptionsPreferencesManager.PACKAGE_YOUTUBE
+            YOUTUBE_MUSIC -> PatchOptionsPreferencesManager.PACKAGE_YOUTUBE_MUSIC
+        }
+}
+
+/**
  * Manages patch-specific option values that are applied during patching.
  * This manager only stores the values - the available options are fetched
  * dynamically from the patch bundle repository.

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
@@ -217,11 +218,6 @@ fun PatchOptionsSection(
     }
 }
 
-enum class AppType {
-    YOUTUBE,
-    YOUTUBE_MUSIC
-}
-
 /**
  * Content for each app's patch options
  */
@@ -237,13 +233,8 @@ private fun AppPatchOptionsContent(
     val scope = rememberCoroutineScope()
 
     // Get available patches for this app type
-    val packageName = when (appType) {
-        AppType.YOUTUBE -> PACKAGE_YOUTUBE
-        AppType.YOUTUBE_MUSIC -> PACKAGE_YOUTUBE_MUSIC
-    }
-
-    val hasTheme = viewModel.getThemeOptions(packageName) != null
-    val hasBranding = viewModel.getBrandingOptions(packageName) != null
+    val hasTheme = viewModel.getThemeOptions(appType.packageName) != null
+    val hasBranding = viewModel.getBrandingOptions(appType.packageName) != null
     val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
     val hasHideShorts = appType == AppType.YOUTUBE && viewModel.getHideShortsOptions() != null
 
