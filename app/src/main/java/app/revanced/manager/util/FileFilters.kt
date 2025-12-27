@@ -11,5 +11,5 @@ fun isAllowedApkFile(path: Path): Boolean {
 
 fun isAllowedRvpFile(path: Path): Boolean {
     val extension = path.name.substringAfterLast('.', "").lowercase(Locale.ROOT)
-    return extension == "rvp"
+    return extension == "mpp"
 }
