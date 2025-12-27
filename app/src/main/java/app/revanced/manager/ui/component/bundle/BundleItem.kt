@@ -291,12 +291,6 @@ fun BundleItem(
                                 )
                             }
                         }
-                        IconButton(onClick = { showRenameDialog = true }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Edit,
-                                contentDescription = stringResource(R.string.patch_bundle_rename)
-                            )
-                        }
                     }
                     val hasCustomName =
                         src.displayName?.takeUnless { it.isBlank() } != null && src.displayTitle != src.name
