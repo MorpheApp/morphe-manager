@@ -292,7 +292,7 @@ class GitHubPullRequestBundle(
 
                             var entry = zis.nextEntry
                             while (entry != null) {
-                                if (!entry.isDirectory && entry.name.endsWith(".rvp")) {
+                                if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
                                     extractedTotal = entry.size.takeIf { it > 0 }
                                     while (true) {
                                         val read = zis.read(buffer)
@@ -313,7 +313,7 @@ class GitHubPullRequestBundle(
                             }
 
                             if (copiedBytes <= 0L) {
-                                throw IOException("No .rvp file found in the pull request artifact.")
+                                throw IOException("No .mpp file found in the pull request artifact.")
                             }
                             onProgress?.invoke(copiedBytes, extractedTotal)
                         }
