@@ -512,7 +512,7 @@ fun removeMissingPatchesAndStart() {
         installedPackageName = packageName
         installFailureMessage = null
         packageInstallerStatus = null
-                    markInstallSuccess(packageName)
+        markInstallSuccess(packageName)
         updateInstallingState(false)
         stopInstallProgressToasts()
         lastSuccessInstallType = installType
@@ -742,8 +742,8 @@ fun removeMissingPatchesAndStart() {
     data class MissingPatchWarningState(
         val patchNames: List<String>
     )
-var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
-    private set
+    var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
+        private set
 
     private suspend fun gatherScopedBundles(): Map<Int, PatchBundleInfo.Scoped> =
         patchBundleRepository.scopedBundleInfoFlow(
@@ -807,11 +807,16 @@ var missingPatchWarning by mutableStateOf<MissingPatchWarningState?>(null)
     private var patchesPercentage = 0.0
 
     val steps by savedStateHandle.saveable(saver = snapshotStateListSaver()) {
-        generateSteps(
+        val stepsList = generateSteps(
             app,
             input.selectedApp,
             requiresSplitPreparation
         ).toMutableStateList()
+
+        // Patches use the remaining unallocated percentage.
+        patchesPercentage = max(0.0, 1.0 - stepsList.sumOf { it.progressPercentage })
+
+        stepsList
     }
 
     private var currentStepIndex = 0
