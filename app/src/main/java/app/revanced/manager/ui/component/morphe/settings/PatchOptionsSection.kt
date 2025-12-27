@@ -46,6 +46,10 @@ fun PatchOptionsSection(
     val isLoading = viewModel.isLoading
     val loadError = viewModel.loadError
 
+    // Check if patches are completely unavailable
+    val noPatchesAvailable = !isLoading && loadError == null &&
+            youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()
+
     SettingsCard {
         Column(modifier = Modifier.padding(16.dp)) {
             // Loading state
@@ -68,8 +72,33 @@ fun PatchOptionsSection(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+            } else if (noPatchesAvailable) {
+                // No patches available (bundle not loaded yet) - show waiting message
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = stringResource(R.string.morphe_patch_options_waiting_for_bundle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
             } else if (loadError != null) {
-                // Error state
+                // Actual error state (network issue, parsing error, etc.)
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
@@ -148,16 +177,6 @@ fun PatchOptionsSection(
                             onHeaderClick = null // No header for YouTube Music
                         )
                     }
-                }
-
-                // Show message if no patches available
-                if (youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()) {
-                    Text(
-                        text = stringResource(R.string.morphe_no_patch_options),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(vertical = 16.dp)
-                    )
                 }
             }
 

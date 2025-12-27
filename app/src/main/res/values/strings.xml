@@ -161,6 +161,7 @@
     <string name="morphe_icon_instructions_title">Icon format instructions</string>
     <string name="morphe_header_instructions_title">Header format instructions</string>
     <string name="morphe_loading_patch_options">Loading patch options…</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
     <string name="morphe_no_patch_options">No patch options available. Make sure a patch bundle is loaded.</string>
     <string name="morphe_no_options_available">No options available for this patch</string>
