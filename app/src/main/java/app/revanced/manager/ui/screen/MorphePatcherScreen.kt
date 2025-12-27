@@ -335,7 +335,7 @@ fun MorphePatcherScreen(
         color = MaterialTheme.colorScheme.background
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // Add animated background circles
+            // Add animated background
             AnimatedBackground(
                 type = BackgroundType.valueOf(backgroundType)
             )

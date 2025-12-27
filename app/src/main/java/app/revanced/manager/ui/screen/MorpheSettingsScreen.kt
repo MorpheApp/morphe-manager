@@ -173,7 +173,7 @@ fun MorpheSettingsScreen(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize()) {
-            // Animated background circles
+            // Animated background
             AnimatedBackground(
                 type = BackgroundType.valueOf(backgroundType)
             )

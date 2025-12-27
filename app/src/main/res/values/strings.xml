@@ -138,6 +138,7 @@
     <string name="morphe_background_type_waves">Waves</string>
     <string name="morphe_background_type_space">Space</string>
     <string name="morphe_background_type_shapes">Shapes</string>
+    <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
     <!-- Update Section -->
     <string name="morphe_update_use_patches_prereleases">Use pre-release patches</string>

@@ -122,6 +122,7 @@ private fun AppearanceContent(
                         BackgroundType.WAVES -> Icons.Outlined.Waves
                         BackgroundType.SPACE -> Icons.Outlined.AutoAwesome
                         BackgroundType.SHAPES -> Icons.Outlined.Pentagon
+                        BackgroundType.SNOW -> Icons.Outlined.AcUnit
                         BackgroundType.NONE -> Icons.Outlined.VisibilityOff
                     },
                     label = stringResource(bgType.displayNameResId)
