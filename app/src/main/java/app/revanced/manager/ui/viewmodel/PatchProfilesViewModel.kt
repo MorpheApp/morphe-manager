@@ -261,17 +261,21 @@ class PatchProfilesViewModel(
         val sources = sourcesList.associateBy { it.uid }
         val configuration = workingProfile.toConfiguration(scopedBundles, sources)
         val availableBundles = workingProfile.payload.bundles.size - configuration.missingBundles.size
-        val universalPatchNames = bundleInfoSnapshot
-            .values
-            .flatMap { it.patches }
-            .filter { it.compatiblePackages == null }
-            .mapTo(mutableSetOf()) { it.name.lowercase() }
+        val universalPatchNamesByUid = bundleInfoSnapshot.mapValues { (_, info) ->
+            info.patches
+                .asSequence()
+                .filter { it.compatiblePackages == null }
+                .mapTo(mutableSetOf()) { it.name.trim().lowercase() }
+        }
         val containsUniversalPatches = workingProfile.payload.bundles.any { bundle ->
             val info = scopedBundles[bundle.bundleUid]
+            val universalNames = universalPatchNamesByUid[bundle.bundleUid].orEmpty()
             bundle.patches.any { patchName ->
-                val normalized = patchName.lowercase()
-                val matchesScoped = info?.patches?.any { it.name.equals(patchName, true) && it.compatiblePackages == null } == true
-                matchesScoped || universalPatchNames.contains(normalized)
+                val normalized = patchName.trim().lowercase()
+                val matchesScoped = info?.patches?.any {
+                    it.name.equals(patchName, true) && it.compatiblePackages == null
+                } == true
+                matchesScoped || universalNames.contains(normalized)
             }
         }
         return PatchProfileLaunchData(

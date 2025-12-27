@@ -25,11 +25,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
-import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import kotlinx.coroutines.launch
@@ -109,25 +112,20 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            SettingsListItem(
-                modifier = Modifier.clickable {
-                    advancedViewModel.viewModelScope.launch {
-                        advancedViewModel.prefs.useMorpheHomeScreen.update(!useMorpheHomeScreen)
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                settingsSections.forEachIndexed { index, (name, description, icon, destination) ->
+                    ExpressiveSettingsItem(
+                        headlineContent = stringResource(name),
+                        supportingContent = stringResource(description),
+                        leadingContent = { Icon(icon, null) },
+                        onClick = { navigate(destination) }
+                    )
+                    if (index != settingsSections.lastIndex) {
+                        ExpressiveSettingsDivider()
                     }
-                },
-                headlineContent = stringResource(R.string.morphe_settings_return_to_morphe),
-                supportingContent = stringResource(R.string.morphe_settings_return_to_morphe_description),
-                leadingContent = { Icon(Icons.Outlined.SwapHoriz, null) },
-                trailingContent = { Icon(Icons.AutoMirrored.Outlined.ArrowForwardIos, null) }
-            )
-
-            settingsSections.forEach { (name, description, icon, destination) ->
-                SettingsListItem(
-                    modifier = Modifier.clickable { navigate(destination) },
-                    headlineContent = stringResource(name),
-                    supportingContent = stringResource(description),
-                    leadingContent = { Icon(icon, null) }
-                )
+                }
             }
         }
     }

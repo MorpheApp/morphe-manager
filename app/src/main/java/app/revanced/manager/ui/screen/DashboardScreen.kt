@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.text.format.Formatter
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,6 +34,8 @@ import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Block
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.Delete
@@ -73,6 +76,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.patcher.aapt.Aapt
 import app.revanced.manager.ui.component.AlertDialogExtended
 import app.revanced.manager.ui.component.AppTopBar
@@ -85,18 +89,25 @@ import app.revanced.manager.ui.component.bundle.BundleTopBar
 import app.revanced.manager.ui.component.bundle.ImportPatchBundleDialog
 import app.revanced.manager.ui.component.haptics.HapticFloatingActionButton
 import app.revanced.manager.ui.component.haptics.HapticTab
+import app.revanced.manager.ui.component.patches.PathSelectorDialog
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
+import app.revanced.manager.domain.repository.PatchBundleRepository.BundleUpdatePhase
+import app.revanced.manager.domain.repository.PatchBundleRepository.BundleImportPhase
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.EventEffect
+import app.revanced.manager.util.isAllowedApkFile
+import app.revanced.manager.util.isAllowedRvpFile
 import app.revanced.manager.util.toast
+import java.io.File
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 enum class DashboardPage(
     val titleResId: Int,
@@ -123,6 +134,7 @@ fun DashboardScreen(
     val installedAppsViewModel: InstalledAppsViewModel = koinViewModel()
     val patchProfilesViewModel: PatchProfilesViewModel = koinViewModel()
     var selectedSourceCount by rememberSaveable { mutableIntStateOf(0) }
+    var selectedSourcesHasEnabled by rememberSaveable { mutableStateOf(true) }
     val bundlesSelectable by remember { derivedStateOf { selectedSourceCount > 0 } }
     val selectedProfileCount by remember { derivedStateOf { patchProfilesViewModel.selectedProfiles.size } }
     val profilesSelectable = selectedProfileCount > 0
@@ -131,13 +143,26 @@ fun DashboardScreen(
         false
     )
     val storageVm: AppSelectorViewModel = koinViewModel()
+    val fs = koinInject<Filesystem>()
+    val storageRoots = remember { fs.storageRoots() }
     EventEffect(flow = storageVm.storageSelectionFlow) { selected ->
         onStorageSelect(selected)
     }
-    val storagePickerLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-            uri?.let(storageVm::handleStorageResult)
+    var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+    val permissionLauncher =
+        rememberLauncherForActivityResult(permissionContract) { granted ->
+            if (granted) {
+                showStorageDialog = true
+            }
         }
+    val openStoragePicker = {
+        if (fs.hasStoragePermission()) {
+            showStorageDialog = true
+        } else {
+            permissionLauncher.launch(permissionName)
+        }
+    }
     val bundleUpdateProgress by vm.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val bundleImportProgress by vm.bundleImportProgress.collectAsStateWithLifecycle(null)
     val androidContext = LocalContext.current
@@ -152,6 +177,23 @@ fun DashboardScreen(
     ) { DashboardPage.entries.size }
     val appsSelectionActive = installedAppsViewModel.selectedApps.isNotEmpty()
     val selectedAppCount = installedAppsViewModel.selectedApps.size
+
+    var showBundleFilePicker by rememberSaveable { mutableStateOf(false) }
+    var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
+    val (bundlePermissionContract, bundlePermissionName) = remember { fs.permissionContract() }
+    val bundlePermissionLauncher =
+        rememberLauncherForActivityResult(bundlePermissionContract) { granted ->
+            if (granted) {
+                showBundleFilePicker = true
+            }
+        }
+    fun requestBundleFilePicker() {
+        if (fs.hasStoragePermission()) {
+            showBundleFilePicker = true
+        } else {
+            bundlePermissionLauncher.launch(bundlePermissionName)
+        }
+    }
 
     LaunchedEffect(pagerState.currentPage) {
         if (pagerState.currentPage != DashboardPage.DASHBOARD.ordinal) {
@@ -187,18 +229,46 @@ fun DashboardScreen(
     if (firstLaunch) AutoUpdatesDialog(vm::applyAutoUpdatePrefs)
     // Morphe end
 
+    if (showStorageDialog) {
+        PathSelectorDialog(
+            roots = storageRoots,
+            onSelect = { path ->
+                showStorageDialog = false
+                path?.let { storageVm.handleStorageFile(File(it.toString())) }
+            },
+            fileFilter = ::isAllowedApkFile,
+            allowDirectorySelection = false
+        )
+    }
+    if (showBundleFilePicker) {
+        PathSelectorDialog(
+            roots = storageRoots,
+            onSelect = { path ->
+                showBundleFilePicker = false
+                path?.let { selectedBundlePath = it.toString() }
+            },
+            fileFilter = ::isAllowedRvpFile,
+            allowDirectorySelection = false
+        )
+    }
+
     var showAddBundleDialog by rememberSaveable { mutableStateOf(false) }
     if (showAddBundleDialog) {
         ImportPatchBundleDialog(
             onDismiss = { showAddBundleDialog = false },
-            onLocalSubmit = { patches ->
+            onLocalSubmit = { path ->
                 showAddBundleDialog = false
-                vm.createLocalSource(patches)
+                selectedBundlePath = null
+                vm.createLocalSourceFromFile(path)
             },
             onRemoteSubmit = { url, autoUpdate ->
                 showAddBundleDialog = false
                 vm.createRemoteSource(url, autoUpdate)
-            }
+            },
+            onLocalPick = {
+                requestBundleFilePicker()
+            },
+            selectedLocalPath = selectedBundlePath
         )
     }
 
@@ -347,6 +417,17 @@ fun DashboardScreen(
                                 )
                             }
                             IconButton(
+                                onClick = {
+                                    vm.disableSources()
+                                    vm.cancelSourceSelection()
+                                }
+                              ) {
+                                  Icon(
+                                      if (selectedSourcesHasEnabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle,
+                                      stringResource(if (selectedSourcesHasEnabled) R.string.disable else R.string.enable)
+                                  )
+                              }
+                            IconButton(
                                 onClick = vm::updateSources
                             ) {
                                 Icon(
@@ -437,7 +518,7 @@ fun DashboardScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         HapticFloatingActionButton(
-                            onClick = { attemptAppInput { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) } }
+                            onClick = { attemptAppInput(openStoragePicker) }
                         ) {
                             Icon(Icons.Default.Storage, stringResource(R.string.select_from_storage))
                         }
@@ -453,13 +534,49 @@ fun DashboardScreen(
     ) { paddingValues ->
         Column(Modifier.padding(paddingValues)) {
             bundleImportProgress?.let { progress ->
+                val context = LocalContext.current
+                val subtitleParts = buildList {
+                    val total = progress.total.coerceAtLeast(1)
+                    val stepLabel = if (progress.isStepBased) {
+                        val step = (progress.processed + 1).coerceAtMost(total)
+                        stringResource(R.string.import_patch_bundles_banner_steps, step, total)
+                    } else {
+                        stringResource(R.string.import_patch_bundles_banner_subtitle, progress.processed, total)
+                    }
+                    add(stepLabel)
+                    val name = progress.currentBundleName?.takeIf { it.isNotBlank() } ?: return@buildList
+                    val phaseText = if (progress.isStepBased) {
+                        when (progress.phase) {
+                            BundleImportPhase.Downloading -> "Copying bundle"
+                            BundleImportPhase.Processing -> "Writing bundle"
+                            BundleImportPhase.Finalizing -> "Finalizing import"
+                        }
+                    } else {
+                        when (progress.phase) {
+                            BundleImportPhase.Processing -> "Processing"
+                            BundleImportPhase.Downloading -> "Downloading"
+                            BundleImportPhase.Finalizing -> "Finalizing"
+                        }
+                    }
+                    val detail = buildString {
+                        append(phaseText)
+                        append(": ")
+                        append(name)
+                        if (progress.bytesTotal?.takeIf { it > 0L } != null) {
+                            append(" (")
+                            append(Formatter.formatShortFileSize(context, progress.bytesRead))
+                            progress.bytesTotal?.takeIf { it > 0L }?.let { total ->
+                                append("/")
+                                append(Formatter.formatShortFileSize(context, total))
+                            }
+                            append(")")
+                        }
+                    }
+                    add(detail)
+                }
                 DownloadProgressBanner(
                     title = stringResource(R.string.import_patch_bundles_banner_title),
-                    subtitle = stringResource(
-                        R.string.import_patch_bundles_banner_subtitle,
-                        progress.processed,
-                        progress.total
-                    ),
+                    subtitle = subtitleParts.joinToString(" • "),
                     progress = progress.ratio,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -468,15 +585,54 @@ fun DashboardScreen(
             }
             if (bundleImportProgress == null) {
                 bundleUpdateProgress?.let { progress ->
-                    val progressFraction =
-                        if (progress.total == 0) 0f else progress.completed.toFloat() / progress.total
+                    val context = LocalContext.current
+                    val perBundleFraction = progress.bytesTotal
+                        ?.takeIf { it > 0L }
+                        ?.let { total -> (progress.bytesRead.toFloat() / total).coerceIn(0f, 1f) }
+
+                    val progressFraction: Float? = when {
+                        progress.total == 0 -> 0f
+                        progress.phase == BundleUpdatePhase.Downloading && perBundleFraction == null -> null
+                        progress.phase == BundleUpdatePhase.Downloading && perBundleFraction != null ->
+                            ((progress.completed.toFloat() + perBundleFraction) / progress.total).coerceIn(0f, 1f)
+
+                        else -> (progress.completed.toFloat() / progress.total).coerceIn(0f, 1f)
+                    }
+
+                    val subtitleParts = buildList {
+                        add(
+                            stringResource(
+                                R.string.bundle_update_progress,
+                                progress.completed,
+                                progress.total
+                            )
+                        )
+                        val name = progress.currentBundleName?.takeIf { it.isNotBlank() } ?: return@buildList
+                        val phaseText = when (progress.phase) {
+                            BundleUpdatePhase.Checking -> "Checking"
+                            BundleUpdatePhase.Downloading -> "Downloading"
+                            BundleUpdatePhase.Finalizing -> "Finalizing"
+                        }
+
+                        val detail = buildString {
+                            append(phaseText)
+                            append(": ")
+                            append(name)
+                            if (progress.phase == BundleUpdatePhase.Downloading && progress.bytesRead > 0L) {
+                                append(" (")
+                                append(Formatter.formatShortFileSize(context, progress.bytesRead))
+                                progress.bytesTotal?.takeIf { it > 0L }?.let { total ->
+                                    append("/")
+                                    append(Formatter.formatShortFileSize(context, total))
+                                }
+                                append(")")
+                            }
+                        }
+                        add(detail)
+                    }
                     DownloadProgressBanner(
                         title = stringResource(R.string.bundle_update_banner_title),
-                        subtitle = stringResource(
-                            R.string.bundle_update_progress,
-                            progress.completed,
-                            progress.total
-                        ),
+                        subtitle = subtitleParts.joinToString(" • "),
                         progress = progressFraction,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -580,6 +736,7 @@ fun DashboardScreen(
                             BundleListScreen(
                                 eventsFlow = vm.bundleListEventsFlow,
                                 setSelectedSourceCount = { selectedSourceCount = it },
+                                setSelectedSourceHasEnabled = { selectedSourcesHasEnabled = it },
                                 showOrderDialog = showBundleOrderDialog,
                                 onDismissOrderDialog = { showBundleOrderDialog = false },
                                 onScrollStateChange = {}

@@ -8,12 +8,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Topic
+import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
@@ -23,6 +31,7 @@ import app.revanced.manager.ui.component.AlertDialogExtended
 import app.revanced.manager.ui.component.TextHorizontalPadding
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.ui.component.haptics.HapticRadioButton
+import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.transparentListItemColors
 
 private enum class BundleType {
@@ -34,7 +43,9 @@ private enum class BundleType {
 fun ImportPatchBundleDialog(
     onDismiss: () -> Unit,
     onRemoteSubmit: (String, Boolean) -> Unit,
-    onLocalSubmit: (Uri) -> Unit
+    onLocalSubmit: (String) -> Unit,
+    onLocalPick: () -> Unit,
+    selectedLocalPath: String?
 ) {
     var currentStep by rememberSaveable { mutableIntStateOf(0) }
     var bundleType by rememberSaveable { mutableStateOf(BundleType.Remote) }
@@ -60,20 +71,20 @@ fun ImportPatchBundleDialog(
         {
             ImportBundleStep(
                 bundleType,
-                patchBundle,
+                selectedLocalPath,
                 remoteUrl,
                 autoUpdate,
-                { launchPatchActivity() },
+                onLocalPick,
                 { remoteUrl = it },
                 { autoUpdate = it }
             )
         }
     )
 
-    val inputsAreValid by remember {
+    val inputsAreValid by remember(bundleType, selectedLocalPath, remoteUrl) {
         derivedStateOf {
-            (bundleType == BundleType.Local && patchBundle != null) ||
-                    (bundleType == BundleType.Remote && remoteUrl.isNotEmpty())
+            (bundleType == BundleType.Local && !selectedLocalPath.isNullOrBlank()) ||
+                (bundleType == BundleType.Remote && remoteUrl.isNotBlank())
         }
     }
 
@@ -91,7 +102,7 @@ fun ImportPatchBundleDialog(
                     enabled = inputsAreValid,
                     onClick = {
                         when (bundleType) {
-                            BundleType.Local -> patchBundle?.let(onLocalSubmit)
+                            BundleType.Local -> selectedLocalPath?.let(onLocalSubmit)
                             BundleType.Remote -> onRemoteSubmit(remoteUrl, autoUpdate)
                         }
                     }
@@ -173,13 +184,14 @@ private fun SelectBundleTypeStep(
 @Composable
 private fun ImportBundleStep(
     bundleType: BundleType,
-    patchBundle: Uri?,
+    patchBundlePath: String?,
     remoteUrl: String,
     autoUpdate: Boolean,
     launchPatchActivity: () -> Unit,
     onRemoteUrlChange: (String) -> Unit,
     onAutoUpdateChange: (Boolean) -> Unit
 ) {
+    val context = LocalContext.current
     Column {
         when (bundleType) {
             BundleType.Local -> {
@@ -190,7 +202,9 @@ private fun ImportBundleStep(
                         headlineContent = {
                             Text(stringResource(R.string.patch_bundle))
                         },
-                        supportingContent = { Text(stringResource(if (patchBundle != null) R.string.file_field_set else R.string.file_field_not_set)) },
+                        supportingContent = {
+                            Text(text = patchBundlePath ?: stringResource(R.string.file_field_not_set))
+                        },
                         trailingContent = {
                             IconButton(onClick = launchPatchActivity) {
                                 Icon(imageVector = Icons.Default.Topic, contentDescription = null)
@@ -210,6 +224,14 @@ private fun ImportBundleStep(
                         value = remoteUrl,
                         onValueChange = onRemoteUrlChange,
                         label = { Text(stringResource(R.string.patches_url)) }
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    PatchBundleUrlsCard(
+                        onClick = {
+                            context.openUrl(
+                                "https://github.com/Jman-Github/ReVanced-Patch-Bundles/tree/bundles#-patch-bundles-urls"
+                            )
+                        }
                     )
                 }
                 Column(
@@ -235,6 +257,44 @@ private fun ImportBundleStep(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun PatchBundleUrlsCard(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        onClick = onClick,
+        tonalElevation = 1.dp,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+        border = ButtonDefaults.outlinedButtonBorder,
+        modifier = modifier
+            .padding(top = 12.dp)
+            .clip(MaterialTheme.shapes.medium)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Link,
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                // Morphe
+                text = "", // stringResource(R.string.patch_bundle_urls_link),
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = Icons.Outlined.OpenInNew,
+                contentDescription = null
+            )
         }
     }
 }

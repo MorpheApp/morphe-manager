@@ -49,23 +49,6 @@ class AdvancedSettingsViewModel(
             return "revanced-manager_logcat_$time"
         }
 
-    // Morphe code
-//    fun setPatchesBundleJsonUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-//        val trimmedValue = value.trim()
-//        if (trimmedValue == prefs.patchesBundleJsonUrl.get()) return@launch
-//
-//        // Validate URL format
-//        if (trimmedValue.isNotBlank() && !trimmedValue.startsWith("http")) {
-//            withContext(Dispatchers.Main) {
-//                app.toast(app.getString(R.string.patches_bundle_json_url_invalid))
-//            }
-//            return@launch
-//        }
-//
-//        prefs.patchesBundleJsonUrl.update(trimmedValue)
-////        patchBundleRepository.reloadApiBundles() // Morphe
-//    }
-
 //    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
 //        if (value == prefs.api.get()) return@launch
 //
@@ -146,6 +129,11 @@ class AdvancedSettingsViewModel(
             prefs.patchSelectionActionOrder.update(serialized)
         }
 
+    fun setPatchSelectionHiddenActions(hidden: Set<String>) =
+        viewModelScope.launch(Dispatchers.Default) {
+            prefs.patchSelectionHiddenActions.update(hidden)
+        }
+
     fun restoreOfficialBundle() = viewModelScope.launch(Dispatchers.Default) {
         val hasBundle = patchBundleRepository.sources.first().any { it.isDefault }
         if (hasBundle) {
@@ -187,15 +175,30 @@ class AdvancedSettingsViewModel(
         val removed = installerManager.removeCustomInstaller(component)
         if (removed) {
             prefs.hideInstallerComponent(component)
+            val removedPackage = component.packageName
+            val currentPrimary = installerManager.getPrimaryToken()
+            val currentFallback = installerManager.getFallbackToken()
+            val primaryMatchesRemoved =
+                currentPrimary is InstallerManager.Token.Component &&
+                    currentPrimary.componentName.packageName == removedPackage
+            val fallbackMatchesRemoved =
+                currentFallback is InstallerManager.Token.Component &&
+                    currentFallback.componentName.packageName == removedPackage
+
+            if (primaryMatchesRemoved) {
+                installerManager.updatePrimaryToken(InstallerManager.Token.Internal)
+            }
+            if (fallbackMatchesRemoved) {
+                installerManager.updateFallbackToken(InstallerManager.Token.None)
+            }
+
             val componentAvailable = installerManager.isComponentAvailable(component)
             if (!componentAvailable) {
-                val currentPrimary = installerManager.getPrimaryToken()
                 if (currentPrimary is InstallerManager.Token.Component &&
                     currentPrimary.componentName == component
                 ) {
                     installerManager.updatePrimaryToken(InstallerManager.Token.Internal)
                 }
-                val currentFallback = installerManager.getFallbackToken()
                 if (currentFallback is InstallerManager.Token.Component &&
                     currentFallback.componentName == component
                 ) {

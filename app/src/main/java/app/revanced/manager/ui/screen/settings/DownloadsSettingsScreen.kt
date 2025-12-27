@@ -49,7 +49,9 @@ import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.ConfirmDialog
 import app.revanced.manager.ui.component.haptics.HapticCheckbox
 import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.viewmodel.DownloadsViewModel
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.ui.component.AnnotatedLinkText // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
@@ -109,7 +111,7 @@ fun DownloadsSettingsScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showHelpDialog = false }) {
-                    Text(stringResource(android.R.string.ok))
+                    Text(stringResource(R.string.ok))
                 }
             }
         )
@@ -159,11 +161,15 @@ fun DownloadsSettingsScreen(
                     GroupHeader(stringResource(R.string.download_settings))
                 }
                 item {
-                    BooleanItem(
-                        preference = prefs.autoSaveDownloaderApks,
-                        headline = R.string.downloader_auto_save_title,
-                        description = R.string.downloader_auto_save_description
-                    )
+                    ExpressiveSettingsCard(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        BooleanItem(
+                            preference = prefs.autoSaveDownloaderApks,
+                            headline = R.string.downloader_auto_save_title,
+                            description = R.string.downloader_auto_save_description
+                        )
+                    }
                 }
                 item {
                     GroupHeader(stringResource(R.string.downloader_plugins))
@@ -267,29 +273,34 @@ fun DownloadsSettingsScreen(
                             )
                         }
 
-                        SettingsListItem(
-                            modifier = Modifier.clickable {
-                                dialogType = when (state) {
-                                    is DownloaderPluginState.Loaded -> PluginDialogType.Revoke
-                                    is DownloaderPluginState.Failed -> PluginDialogType.Failed
-                                    is DownloaderPluginState.Untrusted -> PluginDialogType.Trust
+                        ExpressiveSettingsCard(
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
+                            contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                        ) {
+                            ExpressiveSettingsItem(
+                                headlineContent = {
+                                    AppLabel(
+                                        packageInfo = packageInfo,
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+                                },
+                                supportingContent = stringResource(
+                                    when (state) {
+                                        is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
+                                        is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
+                                        is DownloaderPluginState.Untrusted -> R.string.downloader_plugin_state_untrusted
+                                    }
+                                ),
+                                trailingContent = { Text(packageInfo.versionName!!) },
+                                onClick = {
+                                    dialogType = when (state) {
+                                        is DownloaderPluginState.Loaded -> PluginDialogType.Revoke
+                                        is DownloaderPluginState.Failed -> PluginDialogType.Failed
+                                        is DownloaderPluginState.Untrusted -> PluginDialogType.Trust
+                                    }
                                 }
-                            },
-                            headlineContent = {
-                                AppLabel(
-                                    packageInfo = packageInfo,
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                            },
-                            supportingContent = stringResource(
-                                when (state) {
-                                    is DownloaderPluginState.Loaded -> R.string.downloader_plugin_state_trusted
-                                    is DownloaderPluginState.Failed -> R.string.downloader_plugin_state_failed
-                                    is DownloaderPluginState.Untrusted -> R.string.downloader_plugin_state_untrusted
-                                }
-                            ),
-                            trailingContent = { Text(packageInfo.versionName!!) }
-                        )
+                            )
+                        }
                     }
                 }
                 if (pluginStates.isEmpty()) {
@@ -308,18 +319,28 @@ fun DownloadsSettingsScreen(
                 items(downloadedApps, key = { it.packageName to it.version }) { app ->
                     val selected = app in viewModel.appSelection
 
-                    SettingsListItem(
-                        modifier = Modifier.clickable { viewModel.toggleApp(app) },
-                        headlineContent = app.packageName,
-                        leadingContent = (@Composable {
-                            HapticCheckbox(
-                                checked = selected,
-                                onCheckedChange = { viewModel.toggleApp(app) }
-                            )
-                        }).takeIf { viewModel.appSelection.isNotEmpty() },
-                        supportingContent = app.version,
-                        tonalElevation = if (selected) 8.dp else 0.dp
-                    )
+                    ExpressiveSettingsCard(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
+                        containerColor = if (selected) {
+                            MaterialTheme.colorScheme.surfaceContainerHighest
+                        } else {
+                            MaterialTheme.colorScheme.surfaceContainerHigh
+                        },
+                        shadowElevation = if (selected) 6.dp else 2.dp,
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                    ) {
+                        ExpressiveSettingsItem(
+                            headlineContent = app.packageName,
+                            supportingContent = app.version,
+                            leadingContent = (@Composable {
+                                HapticCheckbox(
+                                    checked = selected,
+                                    onCheckedChange = { viewModel.toggleApp(app) }
+                                )
+                            }).takeIf { viewModel.appSelection.isNotEmpty() },
+                            onClick = { viewModel.toggleApp(app) }
+                        )
+                    }
                 }
                 if (downloadedApps.isEmpty()) {
                     item {

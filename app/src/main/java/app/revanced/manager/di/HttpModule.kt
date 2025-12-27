@@ -11,6 +11,7 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import okhttp3.Cache
 import okhttp3.Dns
+import okhttp3.Protocol
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -31,6 +32,9 @@ val httpModule = module {
                         }
                     }
                 })
+                // Force HTTP/1.1 to avoid intermittent HTTP/2 PROTOCOL_ERROR stream resets when
+                // downloading patch bundles from GitHub-backed endpoints.
+                protocols(listOf(Protocol.HTTP_1_1))
                 cache(Cache(context.cacheDir.resolve("cache").also { it.mkdirs() }, 1024 * 1024 * 100))
                 followRedirects(true)
                 followSslRedirects(true)
@@ -40,7 +44,9 @@ val httpModule = module {
             json(json)
         }
         install(HttpTimeout) {
-            socketTimeoutMillis = 10000
+            connectTimeoutMillis = 10_000
+            socketTimeoutMillis = 60_000
+            requestTimeoutMillis = 5 * 60_000
         }
         install(UserAgent) {
             agent = "ReVanced-Manager/${BuildConfig.VERSION_CODE}"

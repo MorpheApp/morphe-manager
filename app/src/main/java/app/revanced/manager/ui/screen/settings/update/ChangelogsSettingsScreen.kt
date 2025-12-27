@@ -1,11 +1,16 @@
 package app.revanced.manager.ui.screen.settings.update
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -21,6 +26,9 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.settings.Changelog
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.viewmodel.ChangelogsViewModel
 import app.revanced.manager.util.relativeTime
 import org.koin.androidx.compose.koinViewModel
@@ -55,18 +63,27 @@ fun ChangelogsSettingsScreen(
         ) {
             vm.releaseInfo?.let { info ->
                 val uriHandler = LocalUriHandler.current
-                Column(
+                ExpressiveSettingsCard(
                     modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    contentPadding = PaddingValues(0.dp)
                 ) {
-                    Changelog(
-                        markdown = info.description.replace("`", ""),
-                        version = info.version,
-                        publishDate = info.createdAt.relativeTime(LocalContext.current)
-                    )
-                    info.pageUrl?.let { url ->
-                        TextButton(onClick = { uriHandler.openUri(url) }) {
-                            Text(stringResource(R.string.changelog))
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Changelog(
+                            markdown = info.description.replace("`", ""),
+                            version = info.version,
+                            publishDate = info.createdAt.relativeTime(LocalContext.current)
+                        )
+                        info.pageUrl?.let { url ->
+                            ExpressiveSettingsDivider()
+                            ExpressiveSettingsItem(
+                                headlineContent = stringResource(R.string.changelog),
+                                supportingContent = url,
+                                trailingContent = { Icon(Icons.AutoMirrored.Outlined.OpenInNew, contentDescription = null) },
+                                onClick = { uriHandler.openUri(url) }
+                            )
                         }
                     }
                 }

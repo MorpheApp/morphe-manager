@@ -2,16 +2,7 @@ package app.revanced.manager.network.api
 
 import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.network.dto.GitHubActionRun
-import app.revanced.manager.network.dto.GitHubActionRunArtifacts
-import app.revanced.manager.network.dto.GitHubActionRuns
-import app.revanced.manager.network.dto.GitHubAsset
-import app.revanced.manager.network.dto.GitHubContributor
-import app.revanced.manager.network.dto.GitHubPullRequest
-import app.revanced.manager.network.dto.GitHubRelease
-import app.revanced.manager.network.dto.ReVancedAsset
-import app.revanced.manager.network.dto.ReVancedContributor
-import app.revanced.manager.network.dto.ReVancedGitRepository
+import app.revanced.manager.network.dto.*
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.APIFailure
 import app.revanced.manager.network.utils.APIResponse
@@ -21,6 +12,7 @@ import io.ktor.client.request.url
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.runCatching
 
 private const val MORPHE_MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 internal const val MORPHE_API_URL = "https://api.morphe.software"
@@ -36,7 +28,7 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun repoConfig(): RepoConfig = parseRepoUrl(MORPHE_MANAGER_REPO_URL)
+    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -83,12 +75,15 @@ class ReVancedAPI(
         }
     }
 
-    private suspend fun apiUrl(): String = MORPHE_API_URL
+    // Morphe
+    private fun apiUrl(): String = MORPHE_API_URL
+//    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
 
     private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
         val normalizedRoute = route.trimStart('/')
         val baseUrl = apiUrl()
         return client.request {
+            // Morphe
             url("$baseUrl/v1/$normalizedRoute")
         }
     }
@@ -168,6 +163,7 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
+    // Morphe
     suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = apiRequest(
         if (prefs.usePatchesPrereleases.get()) "patches/prerelease" else "patches"
     )
@@ -260,3 +256,5 @@ fun <T> APIResponse<T>.successOrThrow(context: String): T {
         is APIResponse.Failure -> throw Exception("Failed fetching $context: ${error.message}", error)
     }
 }
+
+private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"

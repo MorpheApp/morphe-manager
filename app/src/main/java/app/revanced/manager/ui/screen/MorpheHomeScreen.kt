@@ -152,14 +152,16 @@ fun MorpheHomeScreen(
 
         // We have progress - decide what to show
         when {
-            progress.result != null -> {
+            // FIXME was (result != null)
+            (progress.completed == progress.total) -> {
                 // Update completed with a result
                 homeState.showBundleUpdateSnackbar = true
-                homeState.snackbarStatus = when (progress.result) {
-                    PatchBundleRepository.UpdateResult.Success -> BundleUpdateStatus.Success
-                    PatchBundleRepository.UpdateResult.NoInternet,
-                    PatchBundleRepository.UpdateResult.Error -> BundleUpdateStatus.Error
-                }
+                // FIXME
+//                homeState.snackbarStatus = when (progress.result) {
+//                    PatchBundleRepository.UpdateResult.Success -> BundleUpdateStatus.Success
+//                    PatchBundleRepository.UpdateResult.NoInternet,
+//                    PatchBundleRepository.UpdateResult.Error -> BundleUpdateStatus.Error
+//                }
             }
             progress.completed < progress.total -> {
                 // Still updating

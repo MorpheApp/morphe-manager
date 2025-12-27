@@ -232,6 +232,7 @@ private object StringOptionEditor : OptionEditor<String> {
         }
 
         val fs: Filesystem = koinInject()
+        val storageRoots = remember { fs.storageRoots() }
         val (contract, permissionName) = fs.permissionContract()
         val permissionLauncher = rememberLauncherForActivityResult(contract = contract) {
             showFileDialog = it
@@ -239,13 +240,13 @@ private object StringOptionEditor : OptionEditor<String> {
 
         if (showFileDialog) {
             PathSelectorDialog(
-                root = fs.externalFilesDir()
-            ) {
+                roots = storageRoots,
+                onSelect = {
                 showFileDialog = false
                 it?.let { path ->
                     fieldValue = path.toString()
                 }
-            }
+            })
         }
 
         AlertDialog(
