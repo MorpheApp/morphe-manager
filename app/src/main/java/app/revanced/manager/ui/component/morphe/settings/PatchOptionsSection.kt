@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -19,6 +20,7 @@ import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
+import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,6 +34,7 @@ fun PatchOptionsSection(
     viewModel: PatchOptionsViewModel = koinViewModel()
 ) {
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     var youtubeExpanded by remember { mutableStateOf(false) }
     var youtubeMusicExpanded by remember { mutableStateOf(false) }
@@ -127,7 +130,10 @@ fun PatchOptionsSection(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
-                        IconButton(onClick = { viewModel.refresh() }) {
+                        IconButton(onClick = {
+                            viewModel.refresh()
+                            context.toast(context.getString(R.string.morphe_home_updating_patches))
+                        }) {
                             Icon(
                                 imageVector = Icons.Outlined.Refresh,
                                 contentDescription = "Retry",
