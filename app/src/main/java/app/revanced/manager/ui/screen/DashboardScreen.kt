@@ -134,9 +134,9 @@ fun DashboardScreen(
     val selectedProfileCount by remember { derivedStateOf { patchProfilesViewModel.selectedProfiles.size } }
     val profilesSelectable = selectedProfileCount > 0
     val availablePatches by vm.availablePatches.collectAsStateWithLifecycle(0)
-    val showNewDownloaderPluginsNotification by vm.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(
-        false
-    )
+//    val showNewDownloaderPluginsNotification by vm.newDownloaderPluginsAvailable.collectAsStateWithLifecycle(
+//        false
+//    )
     val storageVm: AppSelectorViewModel = koinViewModel()
     val fs = koinInject<Filesystem>()
 
@@ -678,53 +678,53 @@ fun DashboardScreen(
                 }
             }
 
-            Notifications(
-                if (!Aapt.supportsDevice()) {
-                    {
-                        NotificationCard(
-                            isWarning = true,
-                            icon = Icons.Outlined.WarningAmber,
-                            text = stringResource(R.string.unsupported_architecture_warning),
-                            onDismiss = null
-                        )
-                    }
-                } else null,
-                if (vm.showBatteryOptimizationsWarning) {
-                    {
-                        val batteryOptimizationsLauncher =
-                            rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                                vm.updateBatteryOptimizationsWarning()
-                            }
-                        NotificationCard(
-                            isWarning = true,
-                            icon = Icons.Default.BatteryAlert,
-                            text = stringResource(R.string.battery_optimization_notification),
-                            onClick = {
-                                batteryOptimizationsLauncher.launch(
-                                    Intent(
-                                        Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                        Uri.fromParts("package", androidContext.packageName, null)
-                                    )
-                                )
-                            }
-                        )
-                    }
-                } else null,
-                if (showNewDownloaderPluginsNotification) {
-                    {
-                        NotificationCard(
-                            text = stringResource(R.string.new_downloader_plugins_notification),
-                            icon = Icons.Outlined.Download,
-                            modifier = Modifier.clickable(onClick = onDownloaderPluginClick),
-                            actions = {
-                                TextButton(onClick = vm::ignoreNewDownloaderPlugins) {
-                                    Text(stringResource(R.string.dismiss))
-                                }
-                            }
-                        )
-                    }
-                } else null
-            )
+//            Notifications(
+//                if (!Aapt.supportsDevice()) {
+//                    {
+//                        NotificationCard(
+//                            isWarning = true,
+//                            icon = Icons.Outlined.WarningAmber,
+//                            text = stringResource(R.string.unsupported_architecture_warning),
+//                            onDismiss = null
+//                        )
+//                    }
+//                } else null,
+//                if (vm.showBatteryOptimizationsWarning) {
+//                    {
+//                        val batteryOptimizationsLauncher =
+//                            rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+//                                vm.updateBatteryOptimizationsWarning()
+//                            }
+//                        NotificationCard(
+//                            isWarning = true,
+//                            icon = Icons.Default.BatteryAlert,
+//                            text = stringResource(R.string.battery_optimization_notification),
+//                            onClick = {
+//                                batteryOptimizationsLauncher.launch(
+//                                    Intent(
+//                                        Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+//                                        Uri.fromParts("package", androidContext.packageName, null)
+//                                    )
+//                                )
+//                            }
+//                        )
+//                    }
+//                } else null,
+//                if (showNewDownloaderPluginsNotification) {
+//                    {
+//                        NotificationCard(
+//                            text = stringResource(R.string.new_downloader_plugins_notification),
+//                            icon = Icons.Outlined.Download,
+//                            modifier = Modifier.clickable(onClick = onDownloaderPluginClick),
+//                            actions = {
+//                                TextButton(onClick = vm::ignoreNewDownloaderPlugins) {
+//                                    Text(stringResource(R.string.dismiss))
+//                                }
+//                            }
+//                        )
+//                    }
+//                } else null
+//            )
 
             HorizontalPager(
                 state = pagerState,
