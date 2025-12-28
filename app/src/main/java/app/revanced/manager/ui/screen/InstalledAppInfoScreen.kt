@@ -253,7 +253,7 @@ fun InstalledAppInfoScreen(
             },
             dismissButton = {
                 TextButton(onClick = viewModel::dismissSignatureMismatchPrompt) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(stringResource(R.string.installation_signature_mismatch_dialog_title)) },

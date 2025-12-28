@@ -230,7 +230,7 @@ fun PatcherScreen(
             },
             dismissButton = {
                 TextButton(onClick = viewModel::dismissSignatureMismatchPrompt) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         )
