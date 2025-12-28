@@ -46,7 +46,7 @@ class AdvancedSettingsViewModel(
         get() {
             val time = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
 
-            return "revanced-manager_logcat_$time"
+            return "morphe_logcat_$time"
         }
 
 //    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
