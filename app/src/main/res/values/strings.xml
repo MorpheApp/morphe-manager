@@ -171,11 +171,11 @@
     <string name="morphe_custom_app_name_hint">Enter custom name</string>
     <string name="morphe_custom_icon_path">Custom Icon Path</string>
     <string name="morphe_custom_icon_path_description">Folder path containing custom icon images</string>
-    <string name="morphe_custom_icon_path_hint">/storage/emulated/0/icons</string>
+    <string name="morphe_custom_icon_path_hint" translatable="false">/storage/emulated/0/icons</string>
     <!-- Custom Header (YouTube) -->
     <string name="morphe_custom_header">Custom Header Logo</string>
     <string name="morphe_custom_header_description">Folder path containing custom header images</string>
-    <string name="morphe_custom_header_hint">/storage/emulated/0/header</string>
+    <string name="morphe_custom_header_hint" translatable="false">/storage/emulated/0/header</string>
     <!-- Hide Shorts -->
     <string name="morphe_hide_shorts_features">Hide Shorts Features</string>
     <string name="morphe_hide_shorts_app_shortcut">Hide Shorts App Shortcut</string>

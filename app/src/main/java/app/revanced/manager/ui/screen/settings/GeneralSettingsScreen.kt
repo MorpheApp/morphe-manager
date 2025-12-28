@@ -441,21 +441,8 @@ fun GeneralSettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            GroupHeader(stringResource(R.string.theme_preview_title))
 
-            Text(
-                text = stringResource(R.string.theme_preview_title),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            // Morphe
-//            Text(
-//                text = stringResource(R.string.theme_preview_description),
-//                style = MaterialTheme.typography.bodySmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-//            )
             ExpressiveThemePreview(
                 modifier = Modifier
                     .fillMaxWidth()
