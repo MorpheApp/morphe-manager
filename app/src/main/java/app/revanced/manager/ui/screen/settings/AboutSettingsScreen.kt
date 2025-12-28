@@ -136,7 +136,7 @@ fun AboutSettingsScreen(
                     }
                 )
                 Text(
-                    text = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")",
+                    text = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline
                 )
