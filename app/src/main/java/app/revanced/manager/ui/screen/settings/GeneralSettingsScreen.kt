@@ -74,6 +74,7 @@ import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import app.revanced.manager.util.toHexString
 import org.koin.androidx.compose.koinViewModel
+import kotlin.apply
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -380,15 +381,10 @@ fun GeneralSettingsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
             )
-            ThemePreview(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            )
             ExpressiveThemePreview(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 0.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             )
 
             FilledTonalButton(
@@ -715,73 +711,6 @@ private fun ColorChannelSlider(
                 thumbColor = trackColor
             )
         )
-    }
-}
-
-@Composable
-private fun ThemePreview(modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(18.dp)
-    Surface(
-        modifier = modifier
-            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape)
-            .clip(shape),
-        shape = shape,
-        tonalElevation = 1.dp,
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .background(
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.18f),
-                            RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    Text(
-                        text = "UR",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.app_name),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = stringResource(R.string.theme_preview_description),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                OutlinedButton(onClick = { }) {
-                    Text(stringResource(R.string.apply))
-                }
-                TextButton(onClick = { }) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-            }
-        }
     }
 }
 
