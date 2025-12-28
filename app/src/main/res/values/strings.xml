@@ -400,9 +400,10 @@ Enable anyways?"</string>
     <string name="export_keystore_description">Export the current keystore</string>
     <string name="export_keystore_unavailable">No keystore to export</string>
     <string name="export_keystore_success">Exported keystore</string>
-    <string name="regenerate_keystore">Regenerate keystore</string>
-    <string name="regenerate_keystore_description">Generate a new keystore</string>
-    <string name="regenerate_keystore_dialog_description">"You are about to regenerate your keystore the manager will use during the patching process.
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore" translatable="false">Regenerate keystore</string>
+    <string name="regenerate_keystore_description" translatable="false">Generate a new keystore</string>
+    <string name="regenerate_keystore_dialog_description" translatable="false">"You are about to regenerate your keystore the manager will use during the patching process.
 
 You will not be able to update the previously installed apps from this source."</string>
     <string name="regenerate_keystore_success">The keystore has been successfully replaced</string>
