@@ -11,15 +11,18 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.luminance
+import app.revanced.manager.ui.component.morphe.shared.isDarkBackground
 import kotlinx.coroutines.delay
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
+/**
+ * Space background with twinkling stars and shooting meteors
+ */
 @Composable
 fun SpaceBackground(modifier: Modifier = Modifier) {
-    val colorScheme = MaterialTheme.colorScheme
-    val isDarkTheme = colorScheme.background.luminance() < 0.5f
+    val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
     val starColor = if (isDarkTheme) Color.White else Color(0xFF1A2530)
 
     // Memoize star data to prevent recalculation on every recomposition
@@ -28,7 +31,7 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
             StarData(
                 x = Random.nextFloat(),
                 y = Random.nextFloat(),
-                size = 2f + Random.nextFloat() * 3f,
+                size = 3f + Random.nextFloat() * 3f,
                 baseAlpha = 0.4f + Random.nextFloat() * 0.6f,
                 phaseShift = Random.nextFloat() * Math.PI.toFloat() * 2f
             )
@@ -40,8 +43,9 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
     val globalProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(15000, easing = LinearEasing),
+        animationSpec = BackgroundAnimationSpecs.floatAnimation(
+            duration = 15000,
+            easing = LinearEasing,
             repeatMode = RepeatMode.Restart
         ),
         label = "globalProgress"

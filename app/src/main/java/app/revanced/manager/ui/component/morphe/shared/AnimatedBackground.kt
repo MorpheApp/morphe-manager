@@ -15,6 +15,7 @@ enum class BackgroundType(val displayNameResId: Int) {
     WAVES(R.string.morphe_background_type_waves),
     SPACE(R.string.morphe_background_type_space),
     SHAPES(R.string.morphe_background_type_shapes),
+    SNOW(R.string.morphe_background_type_snow),
     NONE(R.string.morphe_background_type_none);
 
     companion object {
@@ -38,6 +39,7 @@ fun AnimatedBackground(
         BackgroundType.WAVES -> WavesBackground(modifier)
         BackgroundType.SPACE -> SpaceBackground(modifier)
         BackgroundType.SHAPES -> ShapesBackground(modifier)
+        BackgroundType.SNOW -> SnowBackground(modifier)
         BackgroundType.NONE -> {} // No background
     }
 }

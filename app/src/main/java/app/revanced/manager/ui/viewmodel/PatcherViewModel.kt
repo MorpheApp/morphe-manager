@@ -39,6 +39,8 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -87,6 +89,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.time.withTimeout
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -116,6 +119,7 @@ class PatcherViewModel(
     private val shizukuInstaller: ShizukuInstaller by inject()
     private val installerManager: InstallerManager by inject()
     val prefs: PreferencesManager by inject()
+    private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val savedStateHandle: SavedStateHandle = get()
 
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null
@@ -1834,11 +1838,34 @@ fun removeMissingPatchesAndStart() {
         val shouldPreserveInput =
             selectedForRun is SelectedApp.Local && (selectedForRun.temporary || forceKeepLocalInput)
 
+        // Get patch options from PatchOptionsPreferencesManager based on package name
+        val patchOptions = runBlocking {
+            when (packageName) {
+                PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
+                else -> patchOptionsPrefs.exportYouTubePatchOptions()
+            }
+        }
+
+        // Merge with existing options from input
+        val mergedOptions = input.options.toMutableMap()
+        patchOptions.forEach { (bundleUid, bundlePatchOptions) ->
+            val existing = mergedOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
+
+            bundlePatchOptions.forEach { (patchName, patchOptionValues) ->
+                val existingPatch = existing[patchName]?.toMutableMap() ?: mutableMapOf()
+                existingPatch.putAll(patchOptionValues)
+                existing[patchName] = existingPatch
+            }
+
+            mergedOptions[bundleUid] = existing
+        }
+
         return PatcherWorker.Args(
             selectedForRun,
             outputFile.path,
             input.selectedPatches,
-            input.options,
+            // input.options,
+            mergedOptions,
             logger,
             onDownloadProgress = {
                 withContext(Dispatchers.Main) {

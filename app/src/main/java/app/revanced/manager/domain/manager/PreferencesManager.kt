@@ -29,7 +29,8 @@ class PreferencesManager(
     val theme = enumPreference("theme", Theme.SYSTEM)
     val appLanguage = stringPreference("app_language", "system")
 
-//    val api = stringPreference("api_url", "https://api.morphe.app")
+    // Morphe: API preferene is currently hidden
+    val api = stringPreference("api_url", "https://api.morphe.software")
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
@@ -85,10 +86,7 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
-    val backgroundType = stringPreference(
-        "background_type",
-        BackgroundType.CIRCLES.name
-    )
+    val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
 
     init {
         runBlocking {
@@ -115,7 +113,7 @@ class PreferencesManager(
         val stripUnusedNativeLibs: Boolean? = null,
         val theme: Theme? = null,
         val appLanguage: String? = null,
-//        val api: String? = null,
+        val api: String? = null,
         val gitHubPat: String? = null,
         val includeGitHubPatInExports: Boolean? = null,
         val useProcessRuntime: Boolean? = null,
@@ -149,7 +147,7 @@ class PreferencesManager(
         val patchSelectionHiddenActions: Set<String>? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
-        val backgroundType: String? = null, // Morphe
+        val backgroundType: BackgroundType? = null, // Morphe
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -162,7 +160,7 @@ class PreferencesManager(
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
         appLanguage = appLanguage.get(),
-//        api = api.get(),
+        api = api.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
         useProcessRuntime = useProcessRuntime.get(),
@@ -209,7 +207,7 @@ class PreferencesManager(
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.appLanguage?.let { appLanguage.value = it }
-//        snapshot.api?.let { api.value = it }
+        snapshot.api?.let { api.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }

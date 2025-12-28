@@ -44,17 +44,17 @@ class AdvancedSettingsViewModel(
 
     val debugLogFileName: String
         get() {
-            val time = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
+            val time = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())
 
-            return "revanced-manager_logcat_$time"
+            return "morphe_logcat_$time.log"
         }
 
-//    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-//        if (value == prefs.api.get()) return@launch
-//
-//        prefs.api.update(value)
-//        patchBundleRepository.reloadApiBundles()
-//    }
+    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
+        if (value == prefs.api.get()) return@launch
+
+        prefs.api.update(value)
+        patchBundleRepository.reloadApiBundles()
+    }
 
     fun setGitHubPat(value: String) = viewModelScope.launch(Dispatchers.Default) {
         prefs.gitHubPat.update(value.trim())

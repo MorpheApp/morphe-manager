@@ -1,18 +1,11 @@
 package app.revanced.manager.ui.component.morphe.patcher
 
-import android.content.res.Configuration
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Check
@@ -29,12 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 
@@ -91,9 +84,9 @@ fun rememberMorphePatcherState(
 }
 
 /**
- * Patching success screen with inline install buttons
+ * Patching success screen with adaptive layout
  * Uses MorpheInstallViewModel for clean installation logic with pre-conflict detection
- * Adapts layout for landscape orientation with scrolling support
+ * Left: Icon + Status Text | Right: Instructions + Button
  */
 @Composable
 fun PatchingSuccess(
@@ -103,9 +96,7 @@ fun PatchingSuccess(
     onUninstall: (String) -> Unit,
     onOpen: () -> Unit
 ) {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
+    val windowSize = rememberWindowSize()
     val installState = installViewModel.installState
     val installedPackageName = installViewModel.installedPackageName
 
@@ -139,349 +130,316 @@ fun PatchingSuccess(
         else -> null
     }
 
-    if (isLandscape) {
-        LandscapeSuccessLayout(
-            installState = installState,
-            errorMessage = errorMessage,
-            conflictPackageName = conflictPackageName,
-            usingMountInstall = usingMountInstall,
-            isInstalling = isInstalling,
-            installedPackageName = installedPackageName,
-            icon = icon,
-            iconTint = iconTint,
-            iconBackgroundColor = iconBackgroundColor,
-            onInstall = onInstall,
-            onUninstall = onUninstall,
-            onOpen = onOpen
-        )
+    // Use adaptive layout
+    if (windowSize.useTwoColumnLayout) {
+        // Two-column layout
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 96.dp),
+            horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
+        ) {
+            // Left column - Icon and status text
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                ) {
+                    SuccessIcon(
+                        icon = icon,
+                        iconTint = iconTint,
+                        iconBackgroundColor = iconBackgroundColor,
+                        windowSize = windowSize
+                    )
+
+                    SuccessStatusText(
+                        installState = installState,
+                        installedPackageName = installedPackageName,
+                        isInstalling = isInstalling,
+                        windowSize = windowSize
+                    )
+                }
+            }
+
+            // Right column - Instructions and button
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                ) {
+                    SuccessInstructionsText(
+                        installState = installState,
+                        installedPackageName = installedPackageName,
+                        isInstalling = isInstalling,
+                        usingMountInstall = usingMountInstall,
+                        windowSize = windowSize
+                    )
+
+                    SuccessErrorMessage(
+                        errorMessage = errorMessage,
+                        installState = installState
+                    )
+
+                    SuccessRootWarning(
+                        usingMountInstall = usingMountInstall,
+                        installState = installState
+                    )
+
+                    InstallActionButton(
+                        installState = installState,
+                        isInstalling = isInstalling,
+                        conflictPackageName = conflictPackageName,
+                        usingMountInstall = usingMountInstall,
+                        onInstall = onInstall,
+                        onUninstall = onUninstall,
+                        onOpen = onOpen,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+        }
     } else {
-        PortraitSuccessLayout(
-            installState = installState,
-            errorMessage = errorMessage,
-            conflictPackageName = conflictPackageName,
-            usingMountInstall = usingMountInstall,
-            isInstalling = isInstalling,
-            installedPackageName = installedPackageName,
-            icon = icon,
-            iconTint = iconTint,
-            iconBackgroundColor = iconBackgroundColor,
-            onInstall = onInstall,
-            onUninstall = onUninstall,
-            onOpen = onOpen
+        // Single-column layout
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = windowSize.contentPadding)
+                .padding(top = 24.dp, bottom = 120.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
+        ) {
+            SuccessIcon(
+                icon = icon,
+                iconTint = iconTint,
+                iconBackgroundColor = iconBackgroundColor,
+                windowSize = windowSize
+            )
+
+            SuccessStatusText(
+                installState = installState,
+                installedPackageName = installedPackageName,
+                isInstalling = isInstalling,
+                windowSize = windowSize
+            )
+
+            SuccessInstructionsText(
+                installState = installState,
+                installedPackageName = installedPackageName,
+                isInstalling = isInstalling,
+                usingMountInstall = usingMountInstall,
+                windowSize = windowSize
+            )
+
+            SuccessErrorMessage(
+                errorMessage = errorMessage,
+                installState = installState
+            )
+
+            SuccessRootWarning(
+                usingMountInstall = usingMountInstall,
+                installState = installState
+            )
+
+            InstallActionButton(
+                installState = installState,
+                isInstalling = isInstalling,
+                conflictPackageName = conflictPackageName,
+                usingMountInstall = usingMountInstall,
+                onInstall = onInstall,
+                onUninstall = onUninstall,
+                onOpen = onOpen
+            )
+        }
+    }
+}
+
+/**
+ * Success screen icon
+ */
+@Composable
+private fun SuccessIcon(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    iconTint: Color,
+    iconBackgroundColor: Color,
+    windowSize: WindowSize
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) 200.dp else 160.dp)
+            .background(
+                brush = Brush.radialGradient(
+                    colors = listOf(iconBackgroundColor, Color.Transparent)
+                ),
+                shape = CircleShape
+            )
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) 120.dp else 100.dp),
+            tint = iconTint
         )
     }
 }
 
 /**
- * Portrait layout for success screen
+ * Success screen status text (title only - success/error/installing)
  */
 @Composable
-private fun PortraitSuccessLayout(
+private fun SuccessStatusText(
     installState: MorpheInstallViewModel.InstallState,
-    errorMessage: String?,
-    conflictPackageName: String?,
-    usingMountInstall: Boolean,
-    isInstalling: Boolean,
     installedPackageName: String?,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    iconTint: Color,
-    iconBackgroundColor: Color,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onOpen: () -> Unit
+    isInstalling: Boolean,
+    windowSize: WindowSize
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(32.dp)
-    ) {
-        // Icon with gradient background
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(200.dp)
-                .background(
-                    brush = Brush.radialGradient(
-                        colors = listOf(iconBackgroundColor, Color.Transparent)
-                    ),
-                    shape = CircleShape
-                )
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(120.dp),
-                tint = iconTint
-            )
-        }
-
-        Spacer(Modifier.height(24.dp))
-
-        // Animated title text
-        AnimatedContent(
-            targetState = getTitleForState(installState, installedPackageName, isInstalling),
-            transitionSpec = {
-                fadeIn(animationSpec = tween(500)) togetherWith
-                        fadeOut(animationSpec = tween(500))
+    AnimatedContent(
+        targetState = getTitleForState(installState, installedPackageName, isInstalling),
+        transitionSpec = {
+            fadeIn(animationSpec = tween(500)) togetherWith
+                    fadeOut(animationSpec = tween(500))
+        },
+        label = "title_animation"
+    ) { titleRes ->
+        Text(
+            text = stringResource(titleRes),
+            style = if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
+                MaterialTheme.typography.headlineLarge
+            } else {
+                MaterialTheme.typography.headlineMedium
             },
-            label = "title_animation"
-        ) { titleRes ->
+            fontWeight = FontWeight.Bold,
+            color = if (installState is MorpheInstallViewModel.InstallState.Error ||
+                installState is MorpheInstallViewModel.InstallState.Conflict) {
+                MaterialTheme.colorScheme.error
+            } else {
+                MaterialTheme.colorScheme.onBackground
+            },
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+/**
+ * Success screen instructions text (what to do next)
+ */
+@Composable
+private fun SuccessInstructionsText(
+    installState: MorpheInstallViewModel.InstallState,
+    installedPackageName: String?,
+    isInstalling: Boolean,
+    usingMountInstall: Boolean,
+    windowSize: WindowSize
+) {
+    AnimatedContent(
+        targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
+        transitionSpec = {
+            fadeIn(animationSpec = tween(500)) togetherWith
+                    fadeOut(animationSpec = tween(500))
+        },
+        label = "subtitle_animation"
+    ) { subtitleRes ->
+        if (subtitleRes != 0) {
             Text(
-                text = stringResource(titleRes),
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                color = if (installState is MorpheInstallViewModel.InstallState.Error ||
-                    installState is MorpheInstallViewModel.InstallState.Conflict) {
-                    MaterialTheme.colorScheme.error
-                } else {
-                    MaterialTheme.colorScheme.onBackground
-                },
-                textAlign = TextAlign.Center
+                text = stringResource(subtitleRes),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
 
-        Spacer(Modifier.height(8.dp))
-
-        // Animated subtitle text
-        AnimatedContent(
-            targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
-            transitionSpec = {
-                fadeIn(animationSpec = tween(500)) togetherWith
-                        fadeOut(animationSpec = tween(500))
-            },
-            label = "subtitle_animation"
-        ) { subtitleRes ->
-            if (subtitleRes != 0) {
+/**
+ * Success screen error message
+ */
+@Composable
+private fun SuccessErrorMessage(
+    errorMessage: String?,
+    installState: MorpheInstallViewModel.InstallState
+) {
+    AnimatedVisibility(
+        visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(300))
+    ) {
+        errorMessage?.let { message ->
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            ) {
                 Text(
-                    text = stringResource(subtitleRes),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = message,
+                    modifier = Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center
                 )
             }
         }
-
-        // Error message if present
-        AnimatedVisibility(
-            visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
-            enter = fadeIn(animationSpec = tween(300)),
-            exit = fadeOut(animationSpec = tween(300))
-        ) {
-            errorMessage?.let { message ->
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                ) {
-                    Text(
-                        text = message,
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-        }
-
-        // Root mode warning for mount install
-        AnimatedVisibility(
-            visible = usingMountInstall && installState is MorpheInstallViewModel.InstallState.Ready,
-            enter = fadeIn(animationSpec = tween(300)),
-            exit = fadeOut(animationSpec = tween(300))
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
-                    .padding(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Info,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
-                )
-                Text(
-                    text = stringResource(R.string.morphe_root_gmscore_excluded),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-
-        Spacer(Modifier.height(32.dp))
-
-        // Install/Open/Uninstall button
-        InstallActionButtonNew(
-            installState = installState,
-            isInstalling = isInstalling,
-            conflictPackageName = conflictPackageName,
-            usingMountInstall = usingMountInstall,
-            onInstall = onInstall,
-            onUninstall = onUninstall,
-            onOpen = onOpen
-        )
     }
 }
 
 /**
- * Landscape layout for success screen
+ * Success screen root warning
  */
 @Composable
-private fun LandscapeSuccessLayout(
-    installState: MorpheInstallViewModel.InstallState,
-    errorMessage: String?,
-    conflictPackageName: String?,
+private fun SuccessRootWarning(
     usingMountInstall: Boolean,
-    isInstalling: Boolean,
-    installedPackageName: String?,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    iconTint: Color,
-    iconBackgroundColor: Color,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onOpen: () -> Unit
+    installState: MorpheInstallViewModel.InstallState
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
-        contentAlignment = Alignment.Center
+    AnimatedVisibility(
+        visible = usingMountInstall && installState is MorpheInstallViewModel.InstallState.Ready,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(300))
     ) {
         Row(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 32.dp, vertical = 24.dp),
-            horizontalArrangement = Arrangement.Center,
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Icon on the left
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(160.dp)
-                    .background(
-                        brush = Brush.radialGradient(
-                            colors = listOf(iconBackgroundColor, Color.Transparent)
-                        ),
-                        shape = CircleShape
-                    )
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(100.dp),
-                    tint = iconTint
-                )
-            }
-
-            Spacer(Modifier.width(32.dp))
-
-            // Text content and button on the right
-            Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                // Animated title text
-                AnimatedContent(
-                    targetState = getTitleForState(installState, installedPackageName, isInstalling),
-                    transitionSpec = {
-                        fadeIn(animationSpec = tween(500)) togetherWith
-                                fadeOut(animationSpec = tween(500))
-                    },
-                    label = "title_animation"
-                ) { titleRes ->
-                    Text(
-                        text = stringResource(titleRes),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = if (installState is MorpheInstallViewModel.InstallState.Error ||
-                            installState is MorpheInstallViewModel.InstallState.Conflict) {
-                            MaterialTheme.colorScheme.error
-                        } else {
-                            MaterialTheme.colorScheme.onBackground
-                        }
-                    )
-                }
-
-                Spacer(Modifier.height(8.dp))
-
-                // Animated subtitle text
-                AnimatedContent(
-                    targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
-                    transitionSpec = {
-                        fadeIn(animationSpec = tween(500)) togetherWith
-                                fadeOut(animationSpec = tween(500))
-                    },
-                    label = "subtitle_animation"
-                ) { subtitleRes ->
-                    if (subtitleRes != 0) {
-                        Text(
-                            text = stringResource(subtitleRes),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-
-                // Error message if present
-                AnimatedVisibility(
-                    visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
-                    enter = fadeIn(animationSpec = tween(300)),
-                    exit = fadeOut(animationSpec = tween(300))
-                ) {
-                    errorMessage?.let { message ->
-                        Surface(
-                            modifier = Modifier
-                                .widthIn(max = 300.dp)
-                                .padding(top = 12.dp),
-                            shape = RoundedCornerShape(12.dp),
-                            color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                        ) {
-                            Text(
-                                text = message,
-                                modifier = Modifier.padding(12.dp),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                    }
-                }
-
-                Spacer(Modifier.height(24.dp))
-
-                // Install/Open/Uninstall button
-                InstallActionButtonNew(
-                    installState = installState,
-                    isInstalling = isInstalling,
-                    conflictPackageName = conflictPackageName,
-                    usingMountInstall = usingMountInstall,
-                    onInstall = onInstall,
-                    onUninstall = onUninstall,
-                    onOpen = onOpen,
-                    modifier = Modifier.widthIn(min = 200.dp)
-                )
-            }
+            Icon(
+                imageVector = Icons.Rounded.Info,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                text = stringResource(R.string.morphe_root_gmscore_excluded),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
+
 
 /**
  * Styled install action button using MorpheInstallViewModel state
  * Changes appearance based on current install state
  */
 @Composable
-private fun InstallActionButtonNew(
+private fun InstallActionButton(
     installState: MorpheInstallViewModel.InstallState,
     isInstalling: Boolean,
     conflictPackageName: String?,
@@ -602,97 +560,41 @@ private fun getSubtitleForState(
 }
 
 /**
- * Patching failed screen
- * Shows error icon and messages
- * Adapts layout for landscape orientation with scrolling support
+ * Patching failed screen with adaptive layout
  */
 @Composable
 fun PatchingFailed() {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val windowSize = rememberWindowSize()
 
-    if (isLandscape) {
-        // Landscape layout - horizontal arrangement centered with scrolling
-        Box(
+    AdaptiveCenteredLayout(windowSize = windowSize) {
+        Icon(
+            imageVector = Icons.Default.Error,
+            contentDescription = null,
             modifier = Modifier
-                .fillMaxSize()
-                .statusBarsPadding(),
-            contentAlignment = Alignment.Center
-        ) {
-            Row(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 32.dp, vertical = 24.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Error icon on the left
-                Icon(
-                    imageVector = Icons.Default.Error,
-                    contentDescription = null,
-                    modifier = Modifier.size(100.dp),
-                    tint = MaterialTheme.colorScheme.error
-                )
+                .size(if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) 120.dp else 100.dp)
+                .align(Alignment.CenterHorizontally),
+            tint = MaterialTheme.colorScheme.error
+        )
 
-                Spacer(Modifier.width(32.dp))
+        Spacer(Modifier.height(windowSize.itemSpacing * 2))
 
-                // Text content on the right
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.morphe_patcher_failed_title),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+        Text(
+            text = stringResource(R.string.morphe_patcher_failed_title),
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
 
-                    Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(windowSize.itemSpacing))
 
-                    Text(
-                        text = stringResource(R.string.morphe_patcher_failed_subtitle),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-    } else {
-        // Portrait layout - vertical arrangement
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(32.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Error,
-                contentDescription = null,
-                modifier = Modifier.size(120.dp),
-                tint = MaterialTheme.colorScheme.error
-            )
-
-            Spacer(Modifier.height(24.dp))
-
-            Text(
-                text = stringResource(R.string.morphe_patcher_failed_title),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Spacer(Modifier.height(8.dp))
-
-            Text(
-                text = stringResource(R.string.morphe_patcher_failed_subtitle),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
-        }
+        Text(
+            text = stringResource(R.string.morphe_patcher_failed_subtitle),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
     }
 }

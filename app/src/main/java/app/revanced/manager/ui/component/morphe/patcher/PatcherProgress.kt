@@ -1,6 +1,5 @@
 package app.revanced.manager.ui.component.morphe.patcher
 
-import android.content.res.Configuration
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
@@ -12,14 +11,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 /**
  * Patching in progress screen with animated progress indicator
  * Shows current step, download progress, and rotating messages
- * Adapts layout for landscape orientation
+ * Uses adaptive layout for different screen sizes
  */
 @Composable
 fun PatchingInProgress(
@@ -38,9 +38,8 @@ fun PatchingInProgress(
     viewModel: PatcherViewModel,
     showLongStepWarning: Boolean = false
 ) {
+    val windowSize = rememberWindowSize()
     val (completed, total) = patchesProgress
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     // Track when download is complete to hide progress smoothly
     var isDownloadComplete by remember { mutableStateOf(false) }
@@ -76,192 +75,145 @@ fun PatchingInProgress(
         }
     }
 
-    if (isLandscape) {
-        LandscapeProgressLayout(
-            progress = progress,
-            completed = completed,
-            total = total,
-            currentMessage = currentMessage,
-            showLongStepWarning = showLongStepWarning,
-            downloadProgress = downloadProgress,
-            isDownloadComplete = isDownloadComplete,
-            viewModel = viewModel
-        )
+    if (windowSize.useTwoColumnLayout) {
+        // Two-column layout for medium/expanded screens
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 24.dp),
+            horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
+        ) {
+            // Left column - Message and details
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                ) {
+                    ProgressMessageSection(currentMessage)
+
+                    ProgressDetailsSection(
+                        showLongStepWarning = showLongStepWarning,
+                        downloadProgress = downloadProgress,
+                        isDownloadComplete = isDownloadComplete,
+                        viewModel = viewModel,
+                        windowSize = windowSize
+                    )
+                }
+            }
+
+            // Right column - Circular progress
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentSize(Alignment.Center),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressWithStats(
+                    progress = progress,
+                    completed = completed,
+                    total = total,
+                    modifier = Modifier.size(280.dp)
+                )
+            }
+        }
     } else {
-        PortraitProgressLayout(
-            progress = progress,
-            completed = completed,
-            total = total,
-            currentMessage = currentMessage,
-            showLongStepWarning = showLongStepWarning,
-            downloadProgress = downloadProgress,
-            isDownloadComplete = isDownloadComplete,
-            viewModel = viewModel
-        )
-    }
-}
-
-/**
- * Portrait layout for patching progress
- * Vertical arrangement with message on top, progress in center, details below
- */
-@Composable
-private fun PortraitProgressLayout(
-    progress: Float,
-    completed: Int,
-    total: Int,
-    currentMessage: Int,
-    showLongStepWarning: Boolean,
-    downloadProgress: Pair<Long, Long?>?,
-    isDownloadComplete: Boolean,
-    viewModel: PatcherViewModel
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // Fun message
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-                .padding(horizontal = 16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            AnimatedMessage(currentMessage)
-        }
-
-        Spacer(Modifier.height(32.dp))
-
-        // Circular progress
-        CircularProgressWithStats(
-            progress = progress,
-            completed = completed,
-            total = total,
-            modifier = Modifier.size(280.dp)
-        )
-
-        Spacer(Modifier.height(24.dp))
-
-        // Fixed space for warnings, download progress and current step
+        // Single-column layout
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp),
+                .fillMaxSize()
+                .padding(horizontal = windowSize.contentPadding)
+                .padding(top = 24.dp, bottom = 120.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
         ) {
-            // Long step warning
-            AnimatedVisibility(
-                visible = showLongStepWarning,
-                enter = fadeIn(animationSpec = tween(500)) + expandVertically(animationSpec = tween(500)),
-                exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
-            ) {
-                LongStepWarningCard()
-            }
+            ProgressMessageSection(currentMessage)
 
-            // Download progress bar
-            AnimatedVisibility(
-                visible = downloadProgress != null && !isDownloadComplete,
-                enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
-                exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
-            ) {
-                downloadProgress?.let { (downloaded, total) ->
-                    DownloadProgressCard(downloaded = downloaded, total = total)
-                }
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            // Current step indicator
-            CurrentStepIndicator(viewModel = viewModel)
-        }
-    }
-}
-
-/**
- * Landscape layout for patching progress
- * Horizontal arrangement with details on left, progress on right
- */
-@Composable
-private fun LandscapeProgressLayout(
-    progress: Float,
-    completed: Int,
-    total: Int,
-    currentMessage: Int,
-    showLongStepWarning: Boolean,
-    downloadProgress: Pair<Long, Long?>?,
-    isDownloadComplete: Boolean,
-    viewModel: PatcherViewModel
-) {
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp, vertical = 16.dp)
-    ) {
-        // Left side - Message and details
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 32.dp, end = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Fun message
-            AnimatedMessage(currentMessage)
-
-            Spacer(Modifier.height(24.dp))
-
-            // Download progress and current step
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                // Long step warning
-                AnimatedVisibility(
-                    visible = showLongStepWarning,
-                    enter = fadeIn(animationSpec = tween(500)) + expandVertically(animationSpec = tween(500)),
-                    exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
-                ) {
-                    LongStepWarningCard()
-                }
-
-                // Download progress bar
-                AnimatedVisibility(
-                    visible = downloadProgress != null && !isDownloadComplete,
-                    enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
-                    exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
-                ) {
-                    downloadProgress?.let { (downloaded, total) ->
-                        DownloadProgressCard(downloaded = downloaded, total = total)
-                    }
-                }
-
-                Spacer(Modifier.height(16.dp))
-
-                // Current step indicator
-                CurrentStepIndicator(viewModel = viewModel)
-            }
-        }
-
-        // Right side - Circular progress
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .wrapContentSize(Alignment.Center),
-            contentAlignment = Alignment.Center
-        ) {
             CircularProgressWithStats(
                 progress = progress,
                 completed = completed,
                 total = total,
-                modifier = Modifier.size(280.dp)
+                modifier = Modifier.size(280.dp),
+            )
+
+            ProgressDetailsSection(
+                showLongStepWarning = showLongStepWarning,
+                downloadProgress = downloadProgress,
+                isDownloadComplete = isDownloadComplete,
+                viewModel = viewModel,
+                windowSize = windowSize
             )
         }
+    }
+}
+
+/**
+ * Progress message section
+ */
+@Composable
+private fun ProgressMessageSection(currentMessage: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        AnimatedMessage(currentMessage)
+    }
+}
+
+/**
+ * Progress details section - warnings, download progress, current step
+ */
+@Composable
+private fun ProgressDetailsSection(
+    showLongStepWarning: Boolean,
+    downloadProgress: Pair<Long, Long?>?,
+    isDownloadComplete: Boolean,
+    viewModel: PatcherViewModel,
+    windowSize: WindowSize
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
+    ) {
+        // Long step warning
+        AnimatedVisibility(
+            visible = showLongStepWarning,
+            enter = fadeIn(animationSpec = tween(500)) + expandVertically(animationSpec = tween(500)),
+            exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
+        ) {
+            LongStepWarningCard()
+        }
+
+        // Download progress bar
+        AnimatedVisibility(
+            visible = downloadProgress != null && !isDownloadComplete,
+            enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
+            exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
+        ) {
+            downloadProgress?.let { (downloaded, total) ->
+                DownloadProgressCard(
+                    downloaded = downloaded,
+                    total = total,
+                    windowSize = windowSize
+                )
+            }
+        }
+
+        // Current step indicator
+        CurrentStepIndicator(
+            viewModel = viewModel,
+            windowSize = windowSize
+        )
     }
 }
 
@@ -283,7 +235,9 @@ private fun AnimatedMessage(messageResId: Int) {
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 4,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
@@ -302,6 +256,7 @@ private fun CircularProgressWithStats(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
+        // Background track
         CircularProgressIndicator(
             progress = { 1f },
             modifier = Modifier.fillMaxSize(),
@@ -309,6 +264,7 @@ private fun CircularProgressWithStats(
             strokeWidth = 12.dp,
         )
 
+        // Active progress
         CircularProgressIndicator(
             progress = { progress },
             modifier = Modifier.fillMaxSize(),
@@ -316,6 +272,7 @@ private fun CircularProgressWithStats(
             strokeCap = StrokeCap.Round,
         )
 
+        // Stats in center
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -353,9 +310,7 @@ private fun CircularProgressWithStats(
 @Composable
 private fun LongStepWarningCard() {
     Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp, vertical = 8.dp),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
     ) {
@@ -386,14 +341,13 @@ private fun LongStepWarningCard() {
 @Composable
 private fun DownloadProgressCard(
     downloaded: Long,
-    total: Long?
+    total: Long?,
+    windowSize: WindowSize
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp, vertical = 8.dp),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing / 2)
     ) {
         LinearProgressIndicator(
             progress = {
@@ -425,8 +379,10 @@ private fun DownloadProgressCard(
  * Current step indicator with animation
  */
 @Composable
-fun CurrentStepIndicator(viewModel: PatcherViewModel) {
-    // Get current running step
+fun CurrentStepIndicator(
+    viewModel: PatcherViewModel,
+    windowSize: WindowSize
+) {
     val currentStep by remember {
         derivedStateOf {
             viewModel.steps.firstOrNull { it.state == State.RUNNING }
@@ -444,23 +400,14 @@ fun CurrentStepIndicator(viewModel: PatcherViewModel) {
         if (stepName != null) {
             Text(
                 text = stepName,
-                style = MaterialTheme.typography.bodyLarge,
+                style = when (windowSize.widthSizeClass) {
+                    WindowWidthSizeClass.Compact -> MaterialTheme.typography.bodyLarge
+                    else -> MaterialTheme.typography.titleMedium
+                },
                 color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 32.dp)
+                modifier = Modifier.fillMaxWidth()
             )
         }
-    }
-}
-
-/**
- * Format bytes into readable format (B, KB, MB, GB)
- */
-fun formatBytes(bytes: Long): String {
-    return when {
-        bytes < 1024 -> "$bytes B"
-        bytes < 1024 * 1024 -> "%.2f KB".format(bytes / 1024.0)
-        bytes < 1024 * 1024 * 1024 -> "%.2f MB".format(bytes / (1024.0 * 1024.0))
-        else -> "%.2f GB".format(bytes / (1024.0 * 1024.0 * 1024.0))
     }
 }

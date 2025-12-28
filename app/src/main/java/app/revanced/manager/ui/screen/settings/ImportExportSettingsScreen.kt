@@ -326,6 +326,8 @@ fun ImportExportSettingsScreen(
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
+                // Morphe being hide this because users can break updating their existing apps if they don't understand what they're doing.
+                if (false) {
                 GroupItem(
                     onClick = {
                         vm.resetDialogState = ResetDialogState.Keystore {
@@ -336,6 +338,7 @@ fun ImportExportSettingsScreen(
                     description = R.string.regenerate_keystore_description
                 )
                 ExpressiveSettingsDivider()
+                } // Morphe end
 
                 ExpandableSettingListItem(
                     headlineContent = stringResource(R.string.reset_patch_selection),

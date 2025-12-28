@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.component.morphe.shared.backgrounds
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -47,28 +48,19 @@ fun ShapesBackground(modifier: Modifier = Modifier) {
         val x = infiniteTransition.animateFloat(
             initialValue = config.startX,
             targetValue = config.endX,
-            animationSpec = infiniteRepeatable(
-                animation = tween(config.duration, easing = LinearEasing),
-                repeatMode = RepeatMode.Reverse
-            ),
+            animationSpec = BackgroundAnimationSpecs.verySlowFloat(config.duration),
             label = "shapeX${config.startX}"
         )
         val y = infiniteTransition.animateFloat(
             initialValue = config.startY,
             targetValue = config.endY,
-            animationSpec = infiniteRepeatable(
-                animation = tween((config.duration * 1.1f).toInt(), easing = LinearEasing),
-                repeatMode = RepeatMode.Reverse
-            ),
+            animationSpec = BackgroundAnimationSpecs.verySlowFloat((config.duration * 1.1f).toInt()),
             label = "shapeY${config.startY}"
         )
         val rotation = infiniteTransition.animateFloat(
             initialValue = config.initialRotation,
             targetValue = config.initialRotation + 360f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(config.duration * 2, easing = LinearEasing),
-                repeatMode = RepeatMode.Restart
-            ),
+            animationSpec = BackgroundAnimationSpecs.rotationAnimation(config.duration * 2),
             label = "shapeRot${config.initialRotation}"
         )
         Triple(x, y, rotation)

@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.component.morphe.shared.backgrounds
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -38,19 +39,13 @@ fun RingsBackground(modifier: Modifier = Modifier) {
         val x = infiniteTransition.animateFloat(
             initialValue = config.startX,
             targetValue = config.endX,
-            animationSpec = infiniteRepeatable(
-                animation = tween(config.durationX),
-                repeatMode = RepeatMode.Reverse
-            ),
+            animationSpec = BackgroundAnimationSpecs.slowFloat(config.durationX),
             label = "ringX${config.startX}"
         )
         val y = infiniteTransition.animateFloat(
             initialValue = config.startY,
             targetValue = config.endY,
-            animationSpec = infiniteRepeatable(
-                animation = tween(config.durationY),
-                repeatMode = RepeatMode.Reverse
-            ),
+            animationSpec = BackgroundAnimationSpecs.mediumFloat(config.durationY),
             label = "ringY${config.startY}"
         )
         Pair(x, y)

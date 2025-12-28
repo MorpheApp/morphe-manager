@@ -55,9 +55,9 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
     val settingsSections = remember {
         listOf(
             Section(
-                R.string.general,
-                R.string.general_description,
-                Icons.Outlined.Settings,
+                R.string.appearance,
+                R.string.appearance_description,
+                Icons.Outlined.Palette,
                 Settings.General
             ),
             Section(
@@ -66,7 +66,7 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
                 Icons.Outlined.Update,
                 Settings.Updates
             ),
-            // FIXME: Figure out if downloader plugins are supported
+            // Morphe: Figure out if downloader plugins are supported
 //            Section(
 //                R.string.downloads,
 //                R.string.downloads_description,

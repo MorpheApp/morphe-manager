@@ -96,14 +96,20 @@ class GeneralSettingsViewModel(
         }
     }
 
-    private suspend fun applyThemePreset(preset: ThemePreset) {
-        val config = presetConfigs[preset] ?: return
+    fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {
+        val config = presetConfigs[preset] ?: return@launch
         prefs.themePresetSelectionEnabled.update(true)
         prefs.theme.update(config.theme)
         prefs.dynamicColor.update(config.dynamicColor)
         prefs.pureBlackTheme.update(config.pureBlackTheme)
-        prefs.customAccentColor.update(config.customAccentHex)
-        prefs.customThemeColor.update(config.customThemeHex)
+
+        // Only reset colors for DYNAMIC preset, preserve for others
+        if (preset == ThemePreset.DYNAMIC) {
+            prefs.customAccentColor.update("")
+            prefs.customThemeColor.update("")
+        }
+        // For other presets, keep existing custom colors
+
         prefs.themePresetSelectionName.update(preset.name)
         resetListItemColorsCached()
     }

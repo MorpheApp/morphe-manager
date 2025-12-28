@@ -19,6 +19,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
@@ -182,7 +184,7 @@ fun MorpheHomeScreen(
             HomeMainContent(
                 onYouTubeClick = {
                     homeState.handleAppClick(
-                        packageName = "com.google.android.youtube",
+                        packageName = PACKAGE_YOUTUBE,
                         availablePatches = availablePatches,
                         bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
@@ -190,13 +192,13 @@ fun MorpheHomeScreen(
                 },
                 onYouTubeMusicClick = {
                     homeState.handleAppClick(
-                        packageName = "com.google.android.apps.youtube.music",
+                        packageName = PACKAGE_YOUTUBE_MUSIC,
                         availablePatches = availablePatches,
                         bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
                 },
-                backgroundType = BackgroundType.valueOf(backgroundType)
+                backgroundType = backgroundType
             )
 
             val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()

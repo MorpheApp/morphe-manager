@@ -13,6 +13,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.UriHandler
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
@@ -35,9 +37,6 @@ import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
-
-private const val PACKAGE_YOUTUBE = "com.google.android.youtube"
-private const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
 
 /**
  * Bundle update status for snackbar display

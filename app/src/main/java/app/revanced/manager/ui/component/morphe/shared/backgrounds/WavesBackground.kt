@@ -1,6 +1,9 @@
 package app.revanced.manager.ui.component.morphe.shared.backgrounds
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -40,8 +43,9 @@ fun WavesBackground(modifier: Modifier = Modifier) {
         infiniteTransition.animateFloat(
             initialValue = 0f,
             targetValue = 2f * PI.toFloat(),
-            animationSpec = infiniteRepeatable(
-                animation = tween(config.duration, easing = LinearEasing),
+            animationSpec = BackgroundAnimationSpecs.floatAnimation(
+                duration = config.duration,
+                easing = LinearEasing,
                 repeatMode = RepeatMode.Restart
             ),
             label = "phase${config.yPosition}"
