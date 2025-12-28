@@ -603,12 +603,13 @@ Signature (SHA-256): %2$s"</string>
     <string name="patch_bundle_rename">Rename patch bundle</string>
     <string name="patch_profile_view_options">View options</string>
     <string name="patch_profile_patch_options_title">Options for %1$s</string>
-    <string name="restore_official_bundle">Restore pre-installed Morphe patch bundle</string>
-    <string name="restore_official_bundle_description_missing">The official Morphe patches bundle is currently not installed</string>
-    <string name="restore_official_bundle_description_installed">The official Morphe patches bundle is currently installed</string>
-    <string name="restore_official_bundle_success">Official Morphe patch bundle restored</string>
-    <string name="restore_official_bundle_failed">Failed to restore the Official Morphe patch bundle: %1$s</string>
-    <string name="restore_official_bundle_already">The Official Morphe patch bundle is already installed</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="restore_official_bundle" translatable="false">Restore pre-installed Morphe patch bundle</string>
+    <string name="restore_official_bundle_description_missing" translatable="false">The official Morphe patches bundle is currently not installed</string>
+    <string name="restore_official_bundle_description_installed" translatable="false">The official Morphe patches bundle is currently installed</string>
+    <string name="restore_official_bundle_success" translatable="false">Official Morphe patch bundle restored</string>
+    <string name="restore_official_bundle_failed" translatable="false">Failed to restore the Official Morphe patch bundle: %1$s</string>
+    <string name="restore_official_bundle_already" translatable="false">The Official Morphe patch bundle is already installed</string>
 
     <string name="app_exporting">App exporting</string>
     <string name="export_name_format">Export filename format</string>

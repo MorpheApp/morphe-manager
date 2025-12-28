@@ -508,6 +508,8 @@ fun AdvancedSettingsScreen(
                     headline = R.string.universal_patches_safeguard,
                     description = R.string.universal_patches_safeguard_description,
                 )
+
+                if (false) { // Morphe begin
                 ExpressiveSettingsDivider()
 
                 val restoreDescription = if (hasOfficialBundle) {
@@ -516,14 +518,14 @@ fun AdvancedSettingsScreen(
                     stringResource(R.string.restore_official_bundle_description_missing)
                 }
                 val installedTrailingContent: (@Composable () -> Unit)? = if (hasOfficialBundle) {
-                    {
-                        Text(
-                            text = stringResource(R.string.installed),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                } else null
+                        {
+                            Text(
+                                text = stringResource(R.string.installed),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    } else null
                 ExpressiveSettingsItem(
                     headlineContent = stringResource(R.string.restore_official_bundle),
                     supportingContent = restoreDescription,
@@ -532,6 +534,7 @@ fun AdvancedSettingsScreen(
                     onClick = if (hasOfficialBundle) null else ({ viewModel.restoreOfficialBundle() })
                 )
             }
+            } // Morphe end
 
             GroupHeader(stringResource(R.string.patcher))
             ExpressiveSettingsCard(
