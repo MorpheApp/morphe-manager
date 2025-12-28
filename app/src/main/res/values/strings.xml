@@ -153,7 +153,6 @@
     <string name="morphe_loading_patch_options">Loading patch options…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
-    <string name="morphe_no_patch_options">No patch options available. Make sure a patch bundle is loaded.</string>
     <string name="morphe_no_options_available">No options available for this patch</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Custom color</string>
@@ -163,14 +162,10 @@
     <string name="morphe_theme_dark_color">Dark Theme Background</string>
     <string name="morphe_theme_dark_color_description">Background color for dark theme</string>
     <string name="morphe_theme_light_color">Light Theme Background</string>
-    <string name="morphe_theme_light_color_description">Background color for light theme (YouTube only)</string>
     <!-- Custom Branding -->
     <string name="morphe_custom_branding">Custom Branding</string>
-    <string name="morphe_custom_app_name">Custom App Name</string>
     <string name="morphe_custom_app_name_description">Change the app display name</string>
     <string name="morphe_custom_app_name_hint">Enter custom name</string>
-    <string name="morphe_custom_icon_path">Custom Icon Path</string>
-    <string name="morphe_custom_icon_path_description">Folder path containing custom icon images</string>
     <string name="morphe_custom_icon_path_hint" translatable="false">/storage/emulated/0/icons</string>
     <!-- Custom Header (YouTube) -->
     <string name="morphe_custom_header">Custom Header Logo</string>
@@ -322,14 +317,8 @@ The list of supported downloader plugins can be found"</string>
     <string name="advanced_description">API URL, memory limit, debugging</string>
     <string name="about">About</string>
 
-    <string name="contributors">Contributors</string>
-    <string name="dynamic_color">Dynamic color</string>
-    <string name="dynamic_color_description">Adapt colors to the wallpaper</string>
-    <string name="accent_color">Accent color</string>
-    <string name="accent_color_description">Choose a custom accent color for the app</string>
-    <string name="accent_color_picker_title">Accent color</string>
-    <string name="accent_color_preview">Preview</string>
-    <string name="accent_color_reset">Reset accent</string>
+    <!-- Morphe -->
+    <string name="contributors" translatable="false">Contributors</string>
     <string name="accent_color_presets">Accent</string>
     <!-- Morphe -->
     <string name="accent_color_presets_description" translatable="false">Tap a color to apply it instantly</string>
@@ -352,7 +341,8 @@ The list of supported downloader plugins can be found"</string>
     <string name="theme_preset_default">Follow system</string>
     <string name="theme_preset_amoled">Pure black</string>
     <string name="theme_preset_dynamic">Material You</string>
-    <string name="theme_reset">Reset all theme settings</string>
+    <!-- Morphe -->
+    <string name="theme_reset" translatable="false">Reset all theme settings</string>
     <string name="color_channel_red">Red</string>
     <string name="color_channel_green">Green</string>
     <string name="color_channel_blue">Blue</string>
@@ -635,8 +625,10 @@ Signature (SHA-256): %2$s"</string>
     <string name="debug_logs_export_failed">Failed to export logs</string>
     <string name="debug_logs_export_success">Exported logs</string>
     <string name="api_url" translatable="false">API URL</string>
+    <!-- Morphe -->
     <string name="api_url_description" translatable="false">The API used to download necessary files</string>
-    <string name="api_url_dialog_title">Change API URL</string>
+    <!-- Morphe -->
+    <string name="api_url_dialog_title" translatable="false">Change API URL</string>
     <string name="api_url_dialog_description">Change the API URL of Morphe. Morphe uses the API to download patches and updates.</string>
     <string name="api_url_dialog_warning">Morphe connects to the API to download patches and updates. Make sure that you trust it.</string>
     <string name="api_url_dialog_save">Set</string>
@@ -650,13 +642,19 @@ Signature (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Include in settings export</string>
     <string name="include_github_pat_in_exports_supporting">Adds this PAT to exported manager settings</string>
     <string name="include_github_pat_in_exports_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token.</string>
-    <!-- Morphe currently hidden -->
+    <!-- Morphe -->
     <string name="app_language" translatable="false">App language</string>
+    <!-- Morphe -->
     <string name="language_dialog_title" translatable="false">Choose app language</string>
+    <!-- Morphe -->
     <string name="language_option_system" translatable="false">Use device language</string>
+    <!-- Morphe -->
     <string name="language_option_english" translatable="false">English</string>
+    <!-- Morphe -->
     <string name="language_option_chinese_simplified" translatable="false">简体中文</string>
+    <!-- Morphe -->
     <string name="language_option_korean" translatable="false">한국어</string>
+    <!-- Morphe -->
     <string name="language_option_vietnamese" translatable="false">Tiếng Việt</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Large)</string>
     <string name="patches_force_download">Force download all patch bundles</string>
@@ -857,8 +855,10 @@ It is only compatible with the following version: %2$s."</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported.</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_shizuku_launch_failed">Unable to open Shizuku. Launch it manually and try again.</string>
-    <string name="installer_custom_header">Custom installers</string>
-    <string name="installer_custom_manage_title">Manage custom installers</string>
+    <!-- Morphe -->
+    <string name="installer_custom_header" translatable="false">Custom installers</string>
+    <!-- Morphe -->
+    <string name="installer_custom_manage_title" translatable="false">Manage custom installers</string>
     <string name="installer_custom_tab_saved">Saved</string>
     <string name="installer_custom_saved_note">Installers manually added by the user to the Primary &amp; Fallback installer selection menus.</string>
     <string name="installer_custom_tab_auto_saved">Auto saved</string>
@@ -1005,8 +1005,11 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="manual_update_check">Check for updates</string>
     <string name="manual_update_check_description">Manually check for updates</string>
+    <!-- Morphe -->
     <string name="patches_and_manager" translatable="false">Patch Bundles &amp; Manager</string>
+    <!-- Morphe -->
     <string name="update_on_metered_connections" translatable="false">Update on metered connections</string>
+    <!-- Morphe -->
     <string name="update_on_metered_connections_description" translatable="false">Allow patch and manager updates over metered networks</string>
     <string name="update_checking_manager">Check for updates on launch</string>
     <string name="update_checking_manager_description">Check for new versions of Morphe when the application starts</string>

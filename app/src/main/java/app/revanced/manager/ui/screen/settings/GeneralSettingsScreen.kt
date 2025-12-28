@@ -173,9 +173,9 @@ fun GeneralSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            GroupHeader(stringResource(R.string.appearance))
-
             // Morphe
+//            GroupHeader(stringResource(R.string.appearance))
+//
 //            val selectedLanguageLabel = when (appLanguage) {
 //                "system" -> R.string.language_option_system
 //                else -> languageOptions.firstOrNull { it.code == appLanguage }?.labelRes
@@ -212,7 +212,7 @@ fun GeneralSettingsScreen(
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.theme_presets),
+                    text = stringResource(R.string.theme),
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -441,7 +441,8 @@ fun GeneralSettingsScreen(
                 }
             }
 
-            GroupHeader(stringResource(R.string.theme_preview_title))
+            // Morphe
+//            GroupHeader(stringResource(R.string.theme_preview_title))
 
             ExpressiveThemePreview(
                 modifier = Modifier
@@ -450,23 +451,24 @@ fun GeneralSettingsScreen(
             )
 
             Spacer(modifier = Modifier.height(20.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .height(1.dp)
-                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FilledTonalButton(
-                onClick = { viewModel.resetThemeSettings() },
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.theme_reset))
-            }
+            // Morphe
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 16.dp)
+//                    .height(1.dp)
+//                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
+//            )
+//            Spacer(modifier = Modifier.height(16.dp))
+//
+//            FilledTonalButton(
+//                onClick = { viewModel.resetThemeSettings() },
+//                modifier = Modifier
+//                    .padding(horizontal = 16.dp)
+//                    .fillMaxWidth()
+//            ) {
+//                Text(stringResource(R.string.theme_reset))
+//            }
 
             // FIXME: Hide this until we can add all Crowdin languages
 //            GroupHeader(stringResource(R.string.language_settings))
@@ -480,7 +482,7 @@ fun GeneralSettingsScreen(
 //                    onClick = { showLanguageDialog = true }
 //                )
 //            }
-            Spacer(modifier = Modifier.height(16.dp))
+//            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

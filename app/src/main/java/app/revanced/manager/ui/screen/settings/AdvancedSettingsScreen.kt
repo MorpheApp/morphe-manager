@@ -409,12 +409,14 @@ fun AdvancedSettingsScreen(
                     leadingContent = fallbackLeadingContent,
                     onClick = { installerDialogTarget = InstallerDialogTarget.Fallback }
                 )
+                if (false) { // Morphe
                 ExpressiveSettingsDivider()
                 ExpressiveSettingsItem(
                     headlineContent = stringResource(R.string.installer_custom_manage_title),
                     supportingContent = stringResource(R.string.installer_custom_manage_description),
                     onClick = { showCustomInstallerDialog = true }
                 )
+                }
             }
 
             if (showCustomInstallerDialog) {
@@ -558,7 +560,7 @@ fun AdvancedSettingsScreen(
                     description = R.string.process_runtime_description,
                 )
                 ExpressiveSettingsDivider()
-                val recommendedProcessLimit = remember { 700 }
+                val recommendedProcessLimit = 1500 //= remember { 700 } // Morphe
                 IntegerItem(
                     preference = viewModel.prefs.patcherProcessMemoryLimit,
                     coroutineScope = viewModel.viewModelScope,
