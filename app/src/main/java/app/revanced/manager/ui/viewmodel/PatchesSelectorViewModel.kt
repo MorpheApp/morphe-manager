@@ -84,6 +84,8 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
     private val preferredAppVersionHint = input.preferredAppVersion?.takeUnless { it.isBlank() }
     private var appVersion: String? = null
     private val appVersionState = MutableStateFlow<String?>(null)
+    val appPackageName: String
+        get() = packageName
     val currentAppVersion: String?
         get() = appVersion
     private var currentBundles: List<PatchBundleInfo.Scoped> = emptyList()
@@ -153,15 +155,24 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         selection.values.sumOf { it.size }
     }
 
-    private val filterState = mutableStateOf(resolveInitialFilter(savedStateHandle))
+    private val filterState = mutableStateOf(resolveInitialFilter(savedStateHandle, prefs))
     var filter: Int
         get() = filterState.value
         private set(value) {
             filterState.value = value
             savedStateHandle["filter"] = value
+            viewModelScope.launch {
+                prefs.patchSelectionFilterFlags.update(value)
+            }
         }
+    val suggestedVersionsByBundle = patchBundleRepository.suggestedVersionsByBundle
 
     init {
+        if (prefs.patchSelectionFilterFlags.getBlocking() < 0) {
+            viewModelScope.launch {
+                prefs.patchSelectionFilterFlags.update(filterState.value)
+            }
+        }
         setAppVersion(
             input.app.version?.takeUnless { it.isBlank() }
                 ?: preferredBundleOverride
@@ -736,12 +747,17 @@ class PatchesSelectorViewModel(input: SelectedApplicationInfo.PatchesSelector.Vi
         filter = filter xor flag
     }
 
-    private fun resolveInitialFilter(handle: SavedStateHandle): Int {
+    private fun resolveInitialFilter(handle: SavedStateHandle, prefs: PreferencesManager): Int {
+        val prefValue = prefs.patchSelectionFilterFlags.getBlocking()
         val stored = handle.get<Any?>("filter")
-        val resolved = when (stored) {
-            is Int -> stored
-            is MutableState<*> -> defaultFilterFlags()
-            else -> defaultFilterFlags()
+        val resolved = if (prefValue >= 0) {
+            prefValue
+        } else {
+            when (stored) {
+                is Int -> stored
+                is MutableState<*> -> defaultFilterFlags()
+                else -> defaultFilterFlags()
+            }
         }
         handle["filter"] = resolved
         return resolved

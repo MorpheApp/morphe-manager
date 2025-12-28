@@ -82,7 +82,7 @@ class InstalledAppsViewModel(
         viewModelScope.launch {
             combine(
                 apps,
-                patchBundleRepository.bundleInfoFlow,
+                patchBundleRepository.allBundlesInfoFlow,
                 patchBundleRepository.sources
             ) { installedApps, bundleInfo, sources ->
                 Triple(installedApps, bundleInfo, sources)

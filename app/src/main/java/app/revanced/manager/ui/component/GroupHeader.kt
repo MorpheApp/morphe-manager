@@ -17,7 +17,10 @@ fun GroupHeader(
     Text(
         text = title,
         color = MaterialTheme.colorScheme.primary,
-        style = MaterialTheme.typography.labelLarge,
-        modifier = Modifier.padding(24.dp).semantics { heading() }.then(modifier)
+        style = MaterialTheme.typography.titleSmall,
+        modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 8.dp)
+            .semantics { heading() }
+            .then(modifier)
     )
 }

@@ -38,14 +38,14 @@ fun BooleanItem(
     onValueChange: (Boolean) -> Unit,
     @StringRes headline: Int,
     @StringRes description: Int
-) = SettingsListItem(
+) = ExpressiveSettingsItem(
     modifier = Modifier
         .clickable { onValueChange(!value) }
         .then(modifier),
     headlineContent = stringResource(headline),
     supportingContent = stringResource(description),
     trailingContent = {
-        HapticSwitch(
+        ExpressiveSettingsSwitch(
             checked = value,
             onCheckedChange = onValueChange,
         )

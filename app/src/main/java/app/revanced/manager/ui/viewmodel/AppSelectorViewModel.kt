@@ -20,6 +20,7 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.patcher.split.SplitApkInspector
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.util.PM
+import app.revanced.manager.util.APK_FILE_EXTENSIONS
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.saveableVar
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import java.util.Locale
 
 @OptIn(SavedStateHandleSaveableApi::class)
@@ -129,9 +131,27 @@ class AppSelectorViewModel(
         }
     }
 
+    fun handleStorageFile(file: File) = viewModelScope.launch {
+        val selectedApp = withContext(Dispatchers.IO) {
+            loadSelectedFile(file)
+        }
+
+        if (selectedApp == null) {
+            app.toast(app.getString(R.string.failed_to_load_apk))
+            return@launch
+        }
+
+        if (patchBundleRepository.isVersionAllowed(selectedApp.packageName, selectedApp.version)) {
+            storageSelectionChannel.send(selectedApp)
+        } else {
+            nonSuggestedVersionDialogSubject = selectedApp
+        }
+    }
+
     private suspend fun loadSelectedFile(uri: Uri) =
         app.contentResolver.openInputStream(uri)?.use { stream ->
             val extension = resolveExtension(uri)
+            if (extension !in APK_FILE_EXTENSIONS) return@use null
             val destination = prepareInputFile(extension)
             destination.delete()
             Files.copy(stream, destination.toPath())
@@ -155,6 +175,35 @@ class AppSelectorViewModel(
                 }
             }
         }
+
+    private suspend fun loadSelectedFile(file: File): SelectedApp.Local? {
+        if (!file.exists()) return null
+        val extension = file.extension.lowercase(Locale.ROOT)
+        if (extension !in APK_FILE_EXTENSIONS) return null
+
+        val destination = prepareInputFile(extension)
+        destination.delete()
+        Files.copy(file.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING)
+
+        return if (SplitApkPreparer.isSplitArchive(destination)) {
+            SelectedApp.Local(
+                packageName = destination.nameWithoutExtension,
+                version = "unspecified",
+                file = destination,
+                temporary = true,
+                resolved = false
+            )
+        } else {
+            resolvePackageInfo(destination)?.let { packageInfo ->
+                SelectedApp.Local(
+                    packageName = packageInfo.packageName,
+                    version = packageInfo.versionName ?: "",
+                    file = destination,
+                    temporary = true
+                )
+            }
+        }
+    }
 
     private fun resolveExtension(uri: Uri): String {
         val document = DocumentFile.fromSingleUri(app, uri)

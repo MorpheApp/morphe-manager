@@ -13,7 +13,6 @@ import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.util.tag
-import app.revanced.manager.util.PatchListCatalog
 import app.revanced.manager.util.applyAppLanguage
 import coil.Coil
 import coil.ImageLoader
@@ -84,11 +83,11 @@ class ManagerApplication : Application() {
 //            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
 //                prefs.api.update(DEFAULT_API_URL)
 //            }
-            val desiredLanguage = prefs.appLanguage.get().let { if (it == "system") "en" else it }.ifBlank { "en" }
-            if (desiredLanguage != prefs.appLanguage.get()) {
-                prefs.appLanguage.update(desiredLanguage)
-            }
-            applyAppLanguage(desiredLanguage)
+//            val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
+//            if (storedLanguage != prefs.appLanguage.get()) {
+//                prefs.appLanguage.update(storedLanguage)
+//            }
+//            appLanguageyAppLanguage(storedLanguage)
         }
 
         scope.launch(Dispatchers.Default) {
@@ -100,8 +99,8 @@ class ManagerApplication : Application() {
 //        }
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
-                reload()        // This will use patchesRepoOwner + patchesRepo
-                updateCheck()   // Check for new patches bundle
+                reload()
+                updateCheck()
             }
         }
 

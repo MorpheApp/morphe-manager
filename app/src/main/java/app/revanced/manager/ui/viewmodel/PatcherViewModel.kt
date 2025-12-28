@@ -8,7 +8,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
+import android.content.pm.PackageManager
+import android.content.pm.Signature
 import android.net.Uri
+import android.os.Build
 import android.os.ParcelUuid
 import android.util.Log
 import android.widget.Toast
@@ -44,7 +47,6 @@ import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
-import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
@@ -66,6 +68,7 @@ import app.revanced.manager.util.Options
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.PatchedAppExportData
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.util.saveableVar
 import app.revanced.manager.util.saver.snapshotStateListSaver
 import app.revanced.manager.util.simpleMessage
@@ -80,10 +83,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.time.withTimeout
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -118,12 +121,21 @@ class PatcherViewModel(
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null
     private var externalInstallBaseline: Pair<Long?, Long?>? = null
     private var externalInstallStartTime: Long? = null
+    private var externalPackageWasPresentAtStart: Boolean = false
     private var externalInstallTimeoutJob: Job? = null
     private var externalInstallPresenceJob: Job? = null
+    private var expectedInstallSignature: ByteArray? = null
+    private var baselineInstallSignature: ByteArray? = null
     private var internalInstallBaseline: Pair<Long?, Long?>? = null
     private var internalInstallMonitorJob: Job? = null
+    private var postTimeoutGraceJob: Job? = null
     private var installProgressToastJob: Job? = null
     private var installProgressToast: Toast? = null
+    private var uninstallProgressToastJob: Job? = null
+    private var uninstallProgressToast: Toast? = null
+    private var pendingSignatureMismatchPlan: InstallerManager.InstallPlan? = null
+    private var pendingSignatureMismatchPackage: String? = null
+    private var signatureMismatchUninstallJob: Job? = null
 
     private var installedApp: InstalledApp? = null
     private val selectedApp = input.selectedApp
@@ -151,6 +163,8 @@ class PatcherViewModel(
         private set
     var installStatus by mutableStateOf<InstallCompletionStatus?>(null)
         private set
+    var signatureMismatchPackage by mutableStateOf<String?>(null)
+        private set
     var activeInstallType by mutableStateOf<InstallType?>(null)
         private set
     var lastInstallType by mutableStateOf<InstallType?>(null)
@@ -173,11 +187,38 @@ class PatcherViewModel(
             activeInstallType = null
             suppressFailureAfterSuccess = false
             packageInstallerStatus = null
+            expectedInstallSignature = null
+            baselineInstallSignature = null
+            pendingSignatureMismatchPlan = null
+            pendingSignatureMismatchPackage = null
+            signatureMismatchPackage = null
+            signatureMismatchUninstallJob?.cancel()
+            signatureMismatchUninstallJob = null
+            stopUninstallProgressToasts()
         } else {
+            postTimeoutGraceJob?.cancel()
+            postTimeoutGraceJob = null
             startInstallProgressToasts()
             suppressFailureAfterSuccess = false
         }
     }
+
+    private fun markInstallSuccess(packageName: String?) {
+        if (installStatus is InstallCompletionStatus.Success) return
+        installStatus = InstallCompletionStatus.Success(packageName)
+        app.toast(app.getString(R.string.install_app_success))
+    }
+
+    private fun handleUninstallFailure(message: String) {
+        pendingSignatureMismatchPlan = null
+        pendingSignatureMismatchPackage = null
+        signatureMismatchPackage = null
+        stopUninstallProgressToasts()
+        showInstallFailure(message)
+    }
+
+    private fun uninstallTimeoutMessage(): String =
+        app.getString(R.string.uninstall_timeout_message)
     private var savedPatchedApp by savedStateHandle.saveableVar { false }
     val hasSavedPatchedApp get() = savedPatchedApp
 
@@ -195,30 +236,30 @@ class PatcherViewModel(
             bundleOptions.mapValues { (_, patchOptions) -> patchOptions.toMap() }.toMap()
         }.toMap()
 
-    fun dismissMissingPatchWarning() {
+fun dismissMissingPatchWarning() {
+    missingPatchWarning = null
+}
+
+fun proceedAfterMissingPatchWarning() {
+    if (missingPatchWarning == null) return
+    viewModelScope.launch {
         missingPatchWarning = null
+        startWorker()
     }
+}
 
-    fun proceedAfterMissingPatchWarning() {
-        if (missingPatchWarning == null) return
-        viewModelScope.launch {
-            missingPatchWarning = null
-            startWorker()
-        }
+fun removeMissingPatchesAndStart() {
+    val warning = missingPatchWarning ?: return
+    viewModelScope.launch {
+        val scopedBundles = gatherScopedBundles()
+        val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
+        val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
+        appliedSelection = sanitizedSelection
+        appliedOptions = sanitizedOptions
+        missingPatchWarning = null
+        startWorker()
     }
-
-    fun removeMissingPatchesAndStart() {
-        val warning = missingPatchWarning ?: return
-        viewModelScope.launch {
-            val scopedBundles = gatherScopedBundles()
-            val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
-            val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
-            appliedSelection = sanitizedSelection
-            appliedOptions = sanitizedOptions
-            missingPatchWarning = null
-            startWorker()
-        }
-    }
+}
 
     private var currentActivityRequest: Pair<CompletableDeferred<Boolean>, String>? by mutableStateOf(
         null
@@ -256,7 +297,61 @@ class PatcherViewModel(
         stopInstallProgressToasts()
         pendingExternalInstall?.let(installerManager::cleanup)
         pendingExternalInstall = null
+        externalInstallBaseline = null
+        externalInstallStartTime = null
+        externalPackageWasPresentAtStart = false
+        expectedInstallSignature = null
+        baselineInstallSignature = null
         packageInstallerStatus = null
+    }
+
+    private fun showSignatureMismatchPrompt(
+        packageName: String,
+        plan: InstallerManager.InstallPlan
+    ) {
+        stopInstallProgressToasts()
+        if (isInstalling || installStatus != null) {
+            updateInstallingState(false)
+        } else {
+            installStatus = null
+            packageInstallerStatus = null
+            installFailureMessage = null
+        }
+        pendingSignatureMismatchPlan = plan
+        pendingSignatureMismatchPackage = packageName
+        signatureMismatchPackage = packageName
+    }
+
+    private fun startSignatureMismatchUninstallTimeout(targetPackage: String) {
+        signatureMismatchUninstallJob?.cancel()
+        signatureMismatchUninstallJob = viewModelScope.launch {
+            val deadline = System.currentTimeMillis() + SIGNATURE_MISMATCH_UNINSTALL_TIMEOUT_MS
+            while (isActive && System.currentTimeMillis() < deadline) {
+                val pendingPlan = pendingSignatureMismatchPlan
+                val pendingPackage = pendingSignatureMismatchPackage
+                if (pendingPlan == null || pendingPackage.isNullOrBlank() || pendingPackage != targetPackage) {
+                    return@launch
+                }
+                if (pm.getPackageInfo(targetPackage) == null) {
+                    pendingSignatureMismatchPlan = null
+                    pendingSignatureMismatchPackage = null
+                    signatureMismatchPackage = null
+                    signatureMismatchUninstallJob = null
+                    stopUninstallProgressToasts()
+                    executeInstallPlan(pendingPlan)
+                    return@launch
+                }
+                delay(SIGNATURE_MISMATCH_UNINSTALL_POLL_MS)
+            }
+            if (pendingSignatureMismatchPackage == targetPackage) {
+                stopUninstallProgressToasts()
+                val failureMessage = app.getString(
+                    R.string.uninstall_app_fail,
+                    uninstallTimeoutMessage()
+                )
+                handleUninstallFailure(failureMessage)
+            }
+        }
     }
 
     private fun scheduleInstallTimeout(
@@ -269,11 +364,69 @@ class PatcherViewModel(
             delay(durationMs)
             if (installStatus is InstallCompletionStatus.InProgress) {
                 logger.trace("install timeout for $packageName")
+                val baselineSnapshot = internalInstallBaseline ?: externalInstallBaseline
+                val startTimeSnapshot = externalInstallStartTime
+                val expectedSignatureSnapshot = expectedInstallSignature
+                val baselineSignatureSnapshot = baselineInstallSignature
+                val packageWasPresentAtStartSnapshot = externalPackageWasPresentAtStart
+                val installTypeSnapshot = pendingExternalInstall
+                    ?.takeIf { it.expectedPackage == packageName }
+                    ?.let { plan ->
+                        if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
+                    }
+                    ?: activeInstallType
+                    ?: InstallType.DEFAULT
+
                 packageInstallerStatus = null
                 if (!tryMarkInstallIfPresent(packageName)) {
                     val message = timeoutMessage?.invoke() ?: app.getString(R.string.install_timeout_message)
                     showInstallFailure(message)
+                    startPostTimeoutGraceWatch(
+                        packageName = packageName,
+                        installType = installTypeSnapshot,
+                        baseline = baselineSnapshot,
+                        startTimeMs = startTimeSnapshot,
+                        expectedSignature = expectedSignatureSnapshot,
+                        baselineSignature = baselineSignatureSnapshot,
+                        packageWasPresentAtStart = packageWasPresentAtStartSnapshot
+                    )
                 }
+            }
+        }
+    }
+
+    private fun startPostTimeoutGraceWatch(
+        packageName: String,
+        installType: InstallType,
+        baseline: Pair<Long?, Long?>?,
+        startTimeMs: Long?,
+        expectedSignature: ByteArray?,
+        baselineSignature: ByteArray?,
+        packageWasPresentAtStart: Boolean
+    ) {
+        postTimeoutGraceJob?.cancel()
+        postTimeoutGraceJob = viewModelScope.launch {
+            val deadline = System.currentTimeMillis() + POST_TIMEOUT_GRACE_MS
+            while (isActive && System.currentTimeMillis() < deadline) {
+                val info = pm.getPackageInfo(packageName)
+                if (info != null) {
+                    val updated = isUpdatedSinceBaseline(info, baseline, startTimeMs)
+                    val signatureChangedToExpected = if (expectedSignature != null) {
+                        val current = readInstalledSignatureBytes(packageName)
+                        current != null &&
+                            current.contentEquals(expectedSignature) &&
+                            (!packageWasPresentAtStart || baselineSignature != null) &&
+                            (baselineSignature == null || !baselineSignature.contentEquals(current))
+                    } else {
+                        false
+                    }
+
+                    if (updated || signatureChangedToExpected) {
+                        forceMarkInstallSuccess(packageName, installType)
+                        return@launch
+                    }
+                }
+                delay(INSTALL_MONITOR_POLL_MS)
             }
         }
     }
@@ -288,16 +441,7 @@ class PatcherViewModel(
 
                 val currentInfo = pm.getPackageInfo(plan.expectedPackage)
                 if (currentInfo != null) {
-                    presentSeen = true
-                    val baseline = externalInstallBaseline
-                    val updatedSinceStart = isUpdatedSinceBaseline(
-                        currentInfo,
-                        baseline,
-                        externalInstallStartTime
-                    )
-                    val baselineMissing = baseline == null
-                    if (updatedSinceStart || baselineMissing) {
-                        handleExternalInstallSuccess(plan.expectedPackage)
+                    if (tryHandleExternalInstallSuccess(plan, currentInfo)) {
                         return@launch
                     }
                 }
@@ -309,14 +453,7 @@ class PatcherViewModel(
 
             if (pendingExternalInstall == plan && installStatus is InstallCompletionStatus.InProgress) {
                 val info = pm.getPackageInfo(plan.expectedPackage)
-                val baseline = externalInstallBaseline
-                val updatedSinceStart = info?.let {
-                    isUpdatedSinceBaseline(it, baseline, externalInstallStartTime)
-                } ?: false
-                if ((info != null && (baseline == null || updatedSinceStart)) || (presentSeen && updatedSinceStart)) {
-                    handleExternalInstallSuccess(plan.expectedPackage)
-                    return@launch
-                }
+                if (info != null && tryHandleExternalInstallSuccess(plan, info)) return@launch
                 showInstallFailure(app.getString(R.string.installer_external_timeout, plan.installerLabel))
             }
         }
@@ -357,11 +494,17 @@ class PatcherViewModel(
     private fun forceMarkInstallSuccess(packageName: String, installType: InstallType = InstallType.DEFAULT) {
         if (installStatus is InstallCompletionStatus.Success) return
         suppressFailureAfterSuccess = true
+        postTimeoutGraceJob?.cancel()
+        postTimeoutGraceJob = null
         pendingExternalInstall?.let(installerManager::cleanup)
         pendingExternalInstall = null
         externalInstallTimeoutJob?.cancel()
         externalInstallTimeoutJob = null
         externalInstallBaseline = null
+        externalInstallStartTime = null
+        externalPackageWasPresentAtStart = false
+        expectedInstallSignature = null
+        baselineInstallSignature = null
         internalInstallMonitorJob?.cancel()
         internalInstallMonitorJob = null
         internalInstallBaseline = null
@@ -369,7 +512,7 @@ class PatcherViewModel(
         installedPackageName = packageName
         installFailureMessage = null
         packageInstallerStatus = null
-        installStatus = InstallCompletionStatus.Success(packageName)
+        markInstallSuccess(packageName)
         updateInstallingState(false)
         stopInstallProgressToasts()
         lastSuccessInstallType = installType
@@ -384,13 +527,31 @@ class PatcherViewModel(
 
     private fun handleDetectedInstall(packageName: String): Boolean {
         val info = pm.getPackageInfo(packageName) ?: return false
-        val updated = isUpdatedSinceBaseline(info, internalInstallBaseline ?: externalInstallBaseline, externalInstallStartTime)
-        val silentSameVersion =
-            !updated && pendingExternalInstall?.expectedPackage == packageName && installStatus is InstallCompletionStatus.InProgress
-        val allowByProgress = !updated && pendingExternalInstall == null && installStatus is InstallCompletionStatus.InProgress
-        if (!updated && !silentSameVersion && !allowByProgress) return false
+        val externalPlan = pendingExternalInstall?.takeIf { it.expectedPackage == packageName }
+        val updated =
+            if (externalPlan != null) {
+                isUpdatedSinceExternalBaseline(info, externalInstallBaseline, externalInstallStartTime)
+            } else {
+                val baseline = internalInstallBaseline ?: externalInstallBaseline
+                isUpdatedSinceBaseline(info, baseline, externalInstallStartTime)
+            }
+        val signatureChangedToExpected =
+            if (externalPlan != null) {
+                shouldTreatAsInstalledBySignature(packageName, externalPackageWasPresentAtStart)
+            } else {
+                false
+            }
+        if (!updated && !signatureChangedToExpected) return false
 
-        forceMarkInstallSuccess(packageName)
+        val installType = pendingExternalInstall
+            ?.takeIf { it.expectedPackage == packageName }
+            ?.let { plan ->
+                if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
+            }
+            ?: activeInstallType
+            ?: InstallType.DEFAULT
+
+        forceMarkInstallSuccess(packageName, installType)
         return true
     }
 
@@ -398,19 +559,94 @@ class PatcherViewModel(
         externalInstallPresenceJob?.cancel()
         externalInstallPresenceJob = viewModelScope.launch {
             while (isActive) {
-                if (pendingExternalInstall == null) return@launch
-                if (pm.getPackageInfo(packageName) != null) {
-                    forceMarkInstallSuccess(packageName)
-                    return@launch
+                val plan = pendingExternalInstall ?: return@launch
+                if (plan.expectedPackage != packageName) return@launch
+
+                val info = pm.getPackageInfo(packageName)
+                if (info != null) {
+                    if (tryHandleExternalInstallSuccess(plan, info)) {
+                        return@launch
+                    }
                 }
                 delay(INSTALL_MONITOR_POLL_MS)
             }
         }
     }
 
+    private fun shouldTreatAsInstalledBySignature(packageName: String, packageWasPresentAtStart: Boolean): Boolean {
+        val expected = expectedInstallSignature ?: return false
+        val current = readInstalledSignatureBytes(packageName) ?: return false
+        if (!current.contentEquals(expected)) return false
+        val baseline = baselineInstallSignature
+        if (packageWasPresentAtStart && baseline == null) return false
+        return baseline == null || !baseline.contentEquals(current)
+    }
+
+    private fun readInstalledSignatureBytes(packageName: String): ByteArray? = runCatching {
+        pm.getSignature(packageName).toByteArray()
+    }.getOrNull()
+
+    private fun readArchiveSignatureBytes(file: File): ByteArray? = runCatching {
+        @Suppress("DEPRECATION")
+        val flags = PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
+        @Suppress("DEPRECATION")
+        val pkgInfo = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
+
+        val signature: Signature? =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                pkgInfo.signingInfo?.apkContentsSigners?.firstOrNull()
+                    ?: pkgInfo.signatures?.firstOrNull()
+            } else {
+                pkgInfo.signatures?.firstOrNull()
+            }
+
+        signature?.toByteArray()
+    }.getOrNull()
+
+    private fun hasSignatureMismatch(packageName: String, file: File): Boolean {
+        val installed = readInstalledSignatureBytes(packageName) ?: return false
+        val expected = readArchiveSignatureBytes(file) ?: return false
+        return !installed.contentEquals(expected)
+    }
     private fun tryMarkInstallIfPresent(packageName: String?): Boolean {
         if (packageName.isNullOrBlank()) return false
+        val externalPlan = pendingExternalInstall?.takeIf { it.expectedPackage == packageName }
+        val info = if (externalPlan != null) pm.getPackageInfo(packageName) else null
+        if (externalPlan != null && info != null) {
+            return tryHandleExternalInstallSuccess(externalPlan, info)
+        }
         return handleDetectedInstall(packageName)
+    }
+
+    private fun isUpdatedSinceExternalBaseline(
+        info: PackageInfo,
+        baseline: Pair<Long?, Long?>?,
+        startTime: Long?
+    ): Boolean {
+        val vc = pm.getVersionCode(info)
+        val updated = info.lastUpdateTime
+        val baseVc = baseline?.first
+        val baseUpdated = baseline?.second
+        val versionChanged = baseVc != null && vc != baseVc
+        val timestampChanged = baseUpdated != null && updated > baseUpdated
+        val started = startTime ?: 0L
+        val updatedSinceStart = updated >= started && started > 0L
+        return versionChanged || timestampChanged || updatedSinceStart
+    }
+
+    private fun tryHandleExternalInstallSuccess(
+        plan: InstallerManager.InstallPlan.External,
+        info: PackageInfo
+    ): Boolean {
+        if (pendingExternalInstall != plan) return false
+        val updatedSinceStart = isUpdatedSinceExternalBaseline(info, externalInstallBaseline, externalInstallStartTime)
+        val signatureChangedToExpected =
+            shouldTreatAsInstalledBySignature(plan.expectedPackage, externalPackageWasPresentAtStart)
+        if (updatedSinceStart || signatureChangedToExpected) {
+            handleExternalInstallSuccess(plan.expectedPackage)
+            return true
+        }
+        return false
     }
 
     private fun startInstallProgressToasts() {
@@ -434,6 +670,24 @@ class PatcherViewModel(
         installProgressToast = null
     }
 
+    private fun startUninstallProgressToasts() {
+        if (uninstallProgressToastJob?.isActive == true) return
+        uninstallProgressToastJob = viewModelScope.launch {
+            while (isActive) {
+                uninstallProgressToast?.cancel()
+                uninstallProgressToast = app.toastHandle(app.getString(R.string.uninstalling_ellipsis))
+                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
+            }
+        }
+    }
+
+    private fun stopUninstallProgressToasts() {
+        uninstallProgressToastJob?.cancel()
+        uninstallProgressToastJob = null
+        uninstallProgressToast?.cancel()
+        uninstallProgressToast = null
+    }
+
     fun suppressInstallProgressToasts() = stopInstallProgressToasts()
 
     private val tempDir = savedStateHandle.saveable(key = "tempDir") {
@@ -444,7 +698,6 @@ class PatcherViewModel(
     }
 
     var inputFile: File? by savedStateHandle.saveableVar()
-        private set
     private var requiresSplitPreparation by savedStateHandle.saveableVar {
         initialSplitRequirement(input.selectedApp)
     }
@@ -572,6 +825,7 @@ class PatcherViewModel(
      * [0, 1.0] progress value.
      */
     val progress by derivedStateOf {
+        // Morphe
         val currentProgress = steps.sumOf {
             if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
                 it.progressPercentage
@@ -763,13 +1017,13 @@ class PatcherViewModel(
                         PackageInstaller.STATUS_FAILURE
                     )
 
-                    intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
-                        ?.let(logger::trace)
+                intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
+                    ?.let(logger::trace)
 
-                    if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
-                        updateInstallingState(true)
-                        return
-                    }
+                if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
+                    updateInstallingState(true)
+                    return
+                }
 
                     if (pmStatus == PackageInstaller.STATUS_SUCCESS) {
                         val packageName = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME)
@@ -786,7 +1040,7 @@ class PatcherViewModel(
                                 Log.w(TAG, "Failed to persist installed patched app metadata")
                             }
                         }
-                        installStatus = InstallCompletionStatus.Success(packageName)
+                        markInstallSuccess(packageName)
                         lastSuccessInstallType = installType
                         lastSuccessAtMs = System.currentTimeMillis()
                         updateInstallingState(false)
@@ -794,7 +1048,7 @@ class PatcherViewModel(
                     } else {
                         val now = System.currentTimeMillis()
                         val recentShizukuSuccess = lastSuccessInstallType == InstallType.SHIZUKU &&
-                                now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
+                            now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
                         if (activeInstallType == InstallType.SHIZUKU || recentShizukuSuccess || installStatus is InstallCompletionStatus.Success) {
                             packageInstallerStatus = null
                             installFailureMessage = null
@@ -818,6 +1072,18 @@ class PatcherViewModel(
                         if (tryMarkInstallIfPresent(expectedPkg)) return
                         val rawMessage = intent.getStringExtra(InstallService.EXTRA_INSTALL_STATUS_MESSAGE)
                             ?.takeIf { it.isNotBlank() }
+                        if (activeInstallType != InstallType.MOUNT &&
+                            installerManager.isSignatureMismatch(rawMessage)
+                        ) {
+                            val plan = installerManager.resolvePlan(
+                                InstallerManager.InstallTarget.PATCHER,
+                                outputFile,
+                                expectedPkg,
+                                null
+                            )
+                            showSignatureMismatchPrompt(expectedPkg, plan)
+                            return
+                        }
                         val formatted = installerManager.formatFailureHint(pmStatus, rawMessage)
                         val message = formatted
                             ?: rawMessage
@@ -832,12 +1098,51 @@ class PatcherViewModel(
                         UninstallService.EXTRA_UNINSTALL_STATUS,
                         PackageInstaller.STATUS_FAILURE
                     )
+                    val targetPackage = intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_PACKAGE_NAME)
+                    val statusMessage = intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
 
-                    intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
-                        ?.let(logger::trace)
+                    statusMessage?.let(logger::trace)
 
-                    if (pmStatus != PackageInstaller.STATUS_SUCCESS)
-                        packageInstallerStatus = pmStatus
+                    val pendingPlan = pendingSignatureMismatchPlan
+                    val pendingPackage = pendingSignatureMismatchPackage
+                    if (pendingPlan != null && !pendingPackage.isNullOrBlank() && pendingPackage == targetPackage) {
+                        signatureMismatchUninstallJob?.cancel()
+                        signatureMismatchUninstallJob = null
+                        pendingSignatureMismatchPlan = null
+                        pendingSignatureMismatchPackage = null
+                        stopUninstallProgressToasts()
+                        if (pmStatus == PackageInstaller.STATUS_SUCCESS) {
+                            val stillPresent = pm.getPackageInfo(targetPackage) != null
+                            if (stillPresent) {
+                                val failureMessage = app.getString(
+                                    R.string.uninstall_app_fail,
+                                    app.getString(R.string.uninstall_timeout_message)
+                                )
+                                handleUninstallFailure(failureMessage)
+                                return
+                            }
+                            viewModelScope.launch {
+                                executeInstallPlan(pendingPlan)
+                            }
+                        } else {
+                            val failureMessage = app.getString(
+                                R.string.uninstall_app_fail,
+                                statusMessage ?: pmStatus.toString()
+                            )
+                            handleUninstallFailure(failureMessage)
+                        }
+                        return
+                    }
+
+                    if (pmStatus != PackageInstaller.STATUS_SUCCESS) {
+                        stopUninstallProgressToasts()
+                        val failureMessage = app.getString(
+                            R.string.uninstall_app_fail,
+                            statusMessage ?: pmStatus.toString()
+                        )
+                        handleUninstallFailure(failureMessage)
+                        return
+                    }
                 }
             }
         }
@@ -898,6 +1203,8 @@ class PatcherViewModel(
         // tempDir cannot be deleted inside onCleared because it gets called on system-initiated process death.
         tempDir.deleteRecursively()
     }
+
+    fun isDeviceRooted() = rootInstaller.isDeviceRooted()
 
     fun rejectInteraction() {
         currentActivityRequest?.first?.complete(false)
@@ -993,6 +1300,7 @@ class PatcherViewModel(
             updateInstallingState(true)
             installStatus = InstallCompletionStatus.InProgress
 
+            Log.d(TAG, "performInstall(type=$installType, outputExists=${outputFile.exists()}, output=${outputFile.absolutePath})")
             val currentPackageInfo = pm.getPackageInfo(outputFile)
                 ?: throw Exception("Failed to load application info")
 
@@ -1001,8 +1309,9 @@ class PatcherViewModel(
             if (existingPackageInfo != null) {
                 // Check if the app version is less than the installed version
                 if (pm.getVersionCode(currentPackageInfo) < pm.getVersionCode(existingPackageInfo)) {
-                    // Exit if the selected app version is less than the installed version
-                    packageInstallerStatus = PackageInstaller.STATUS_FAILURE_CONFLICT
+                    val hint = installerManager.formatFailureHint(PackageInstaller.STATUS_FAILURE_CONFLICT, null)
+                        ?: app.getString(R.string.installer_hint_conflict)
+                    showInstallFailure(app.getString(R.string.install_app_fail, hint))
                     return
                 }
             }
@@ -1021,6 +1330,7 @@ class PatcherViewModel(
                     }
                     awaitingPackageInstall = currentPackageInfo.packageName
                     try {
+                        Log.d(TAG, "Starting PackageInstaller session for ${currentPackageInfo.packageName}")
                         pm.installApp(listOf(outputFile))
                         pmInstallStarted = true
                         installStatus = InstallCompletionStatus.InProgress
@@ -1064,8 +1374,16 @@ class PatcherViewModel(
                         if (existingPackageInfo == null) {
                             // If the app is not installed, check if the output file is a base apk
                             if (currentPackageInfo.splitNames.isNotEmpty()) {
-                                // Exit if there is no base APK package
-                                packageInstallerStatus = PackageInstaller.STATUS_FAILURE_INVALID
+                                val hint =
+                                    installerManager.formatFailureHint(PackageInstaller.STATUS_FAILURE_INVALID, null)
+                                        ?: app.getString(R.string.installer_hint_invalid)
+                                showInstallFailure(app.getString(R.string.install_app_fail, hint))
+                                return
+                            }
+                            // If the original input is a split APK, bail out because mount cannot install splits.
+                            val inputInfo = inputFile?.let(pm::getPackageInfo)
+                            if (inputInfo?.splitNames?.isNotEmpty() == true) {
+                                showInstallFailure(app.getString(R.string.mount_split_not_supported))
                                 return
                             }
                         }
@@ -1074,10 +1392,20 @@ class PatcherViewModel(
                             ?: inputFile?.let(pm::getPackageInfo)?.versionName
                             ?: throw Exception("Failed to determine input APK version")
 
+                        // Only reinstall stock when the app is not currently installed.
+                        val stockForMount = if (existingPackageInfo == null) {
+                            inputFile ?: run {
+                                showInstallFailure(app.getString(R.string.install_app_fail, "Missing original APK for mount install"))
+                                return
+                            }
+                        } else {
+                            null
+                        }
+
                         // Install as root
                         rootInstaller.install(
                             outputFile,
-                            inputFile,
+                            stockForMount,
                             packageName,
                             inputVersion,
                             label
@@ -1090,7 +1418,7 @@ class PatcherViewModel(
                         rootInstaller.mount(packageName)
 
                         installedPackageName = packageName
-                        installStatus = InstallCompletionStatus.Success(packageName)
+            markInstallSuccess(packageName)
                         updateInstallingState(false)
                     } catch (e: Exception) {
                         Log.e(tag, "Failed to install as root", e)
@@ -1109,19 +1437,19 @@ class PatcherViewModel(
                 }
             }
         } catch (e: Exception) {
-            Log.e(tag, "Failed to install", e)
-            awaitingPackageInstall = null
-            packageInstallerStatus = null
-            showInstallFailure(
-                app.getString(
-                    R.string.install_app_fail,
-                    e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
-                )
-            )
-        } finally {
-            if (!pmInstallStarted) updateInstallingState(false)
-        }
-    }
+                    Log.e(tag, "Failed to install", e)
+                    awaitingPackageInstall = null
+                    packageInstallerStatus = null
+                    showInstallFailure(
+                        app.getString(
+                            R.string.install_app_fail,
+                            e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
+                        )
+                    )
+                } finally {
+                    if (!pmInstallStarted) updateInstallingState(false)
+                }
+            }
 
     private suspend fun performShizukuInstall() {
         activeInstallType = InstallType.SHIZUKU
@@ -1136,7 +1464,9 @@ class PatcherViewModel(
             val existingPackageInfo = pm.getPackageInfo(currentPackageInfo.packageName)
             if (existingPackageInfo != null) {
                 if (pm.getVersionCode(currentPackageInfo) < pm.getVersionCode(existingPackageInfo)) {
-                    packageInstallerStatus = PackageInstaller.STATUS_FAILURE_CONFLICT
+                    val hint = installerManager.formatFailureHint(PackageInstaller.STATUS_FAILURE_CONFLICT, null)
+                        ?: app.getString(R.string.installer_hint_conflict)
+                    showInstallFailure(app.getString(R.string.install_app_fail, hint))
                     return
                 }
             }
@@ -1185,13 +1515,14 @@ class PatcherViewModel(
         } finally {
             awaitingPackageInstall = null
             if (packageInstallerStatus == PackageInstaller.STATUS_SUCCESS && installStatus !is InstallCompletionStatus.Success) {
-                installStatus = InstallCompletionStatus.Success(installedPackageName ?: packageName)
+                markInstallSuccess(installedPackageName ?: packageName)
             }
             updateInstallingState(false)
         }
     }
 
     private suspend fun executeInstallPlan(plan: InstallerManager.InstallPlan) {
+        Log.d(TAG, "executeInstallPlan(plan=${plan::class.java.simpleName})")
         when (plan) {
             is InstallerManager.InstallPlan.Internal -> {
                 pendingExternalInstall?.let(installerManager::cleanup)
@@ -1227,16 +1558,20 @@ class PatcherViewModel(
         InstallerManager.InstallTarget.MANAGER_UPDATE -> InstallType.DEFAULT
     }
 
-    private fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
+    private suspend fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
         pendingExternalInstall?.let { installerManager.cleanup(it) }
         externalInstallTimeoutJob?.cancel()
         externalInstallTimeoutJob = null
 
         pendingExternalInstall = plan
         externalInstallStartTime = System.currentTimeMillis()
-        externalInstallBaseline = pm.getPackageInfo(plan.expectedPackage)?.let { info ->
+        val baselineInfo = pm.getPackageInfo(plan.expectedPackage)
+        externalPackageWasPresentAtStart = baselineInfo != null
+        externalInstallBaseline = baselineInfo?.let { info ->
             pm.getVersionCode(info) to info.lastUpdateTime
         }
+        baselineInstallSignature = readInstalledSignatureBytes(plan.expectedPackage)
+        expectedInstallSignature = readArchiveSignatureBytes(plan.sharedFile)
         internalInstallBaseline = null
         internalInstallMonitorJob?.cancel()
         internalInstallMonitorJob = null
@@ -1248,6 +1583,36 @@ class PatcherViewModel(
             durationMs = EXTERNAL_INSTALL_TIMEOUT_MS,
             timeoutMessage = { app.getString(R.string.installer_external_timeout, plan.installerLabel) }
         )
+
+        if (isInstallerX(plan) && launchedActivity == null) {
+            val activityDeferred = CompletableDeferred<ActivityResult>()
+            launchedActivity = activityDeferred
+            val launchIntent = Intent(plan.intent).apply { removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+            launchActivityChannel.send(launchIntent)
+            monitorExternalInstall(plan)
+            viewModelScope.launch {
+                try {
+                    activityDeferred.await()
+                    delay(EXTERNAL_INSTALLER_RESULT_GRACE_MS)
+                    if (pendingExternalInstall != plan) return@launch
+                    val deadline = System.currentTimeMillis() + EXTERNAL_INSTALLER_POST_CLOSE_TIMEOUT_MS
+                    while (pendingExternalInstall == plan && System.currentTimeMillis() < deadline) {
+                        if (tryMarkInstallIfPresent(plan.expectedPackage)) return@launch
+                        delay(INSTALL_MONITOR_POLL_MS)
+                    }
+                    if (pendingExternalInstall != plan) return@launch
+                    showInstallFailure(
+                        app.getString(
+                            R.string.install_app_fail,
+                            app.getString(R.string.installer_external_finished_no_change, plan.installerLabel)
+                        )
+                    )
+                } finally {
+                    if (launchedActivity === activityDeferred) launchedActivity = null
+                }
+            }
+            return
+        }
 
         try {
             ContextCompat.startActivity(app, plan.intent, null)
@@ -1268,6 +1633,15 @@ class PatcherViewModel(
         monitorExternalInstall(plan)
     }
 
+    private fun isInstallerX(plan: InstallerManager.InstallPlan.External): Boolean {
+        fun normalize(value: String): String = value.lowercase().filter { it.isLetterOrDigit() }
+        val label = normalize(plan.installerLabel)
+        val tokenPkg = (plan.token as? InstallerManager.Token.Component)?.componentName?.packageName.orEmpty()
+        val componentPkg = plan.intent.component?.packageName.orEmpty()
+        val pkg = normalize(if (tokenPkg.isNotBlank()) tokenPkg else componentPkg)
+        return "installerx" in label || "installerx" in pkg || pkg.startsWith("comrosaninstaller")
+    }
+
     private fun handleExternalInstallSuccess(packageName: String): Boolean {
         val plan = pendingExternalInstall ?: return false
         if (plan.expectedPackage != packageName) return false
@@ -1277,11 +1651,14 @@ class PatcherViewModel(
         externalInstallTimeoutJob = null
         externalInstallBaseline = null
         externalInstallStartTime = null
+        externalPackageWasPresentAtStart = false
+        expectedInstallSignature = null
+        baselineInstallSignature = null
         installerManager.cleanup(plan)
         updateInstallingState(false)
         stopInstallProgressToasts()
-        val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
-        installStatus = InstallCompletionStatus.Success(packageName)
+        val installType = if (plan?.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
+        markInstallSuccess(packageName)
         suppressFailureAfterSuccess = true
 
         when (plan.target) {
@@ -1308,23 +1685,44 @@ class PatcherViewModel(
     override fun install() {
         if (isInstalling) return
         viewModelScope.launch {
-            val plan = installerManager.resolvePlan(
-                InstallerManager.InstallTarget.PATCHER,
-                outputFile,
-                packageName,
-                null
+            runCatching {
+                val expectedPackage = pm.getPackageInfo(outputFile)?.packageName ?: packageName
+                Log.d(TAG, "install() requested, expected=$expectedPackage, outputExists=${outputFile.exists()}")
+                val plan = installerManager.resolvePlan(
+                    InstallerManager.InstallTarget.PATCHER,
+                    outputFile,
+                    expectedPackage,
+                    packageName,
+//                null
             )
-            executeInstallPlan(plan)
+            Log.d(TAG, "install() resolved plan=${plan::class.java.simpleName}")
+                if (plan !is InstallerManager.InstallPlan.Mount &&
+                    hasSignatureMismatch(expectedPackage, outputFile)
+                ) {
+                    showSignatureMismatchPrompt(expectedPackage, plan)
+                    return@runCatching
+                }
+                executeInstallPlan(plan)
+            }.onFailure { error ->
+                Log.e(TAG, "install() failed to start", error)
+                showInstallFailure(
+                    app.getString(
+                        R.string.install_app_fail,
+                        error.simpleMessage() ?: error.javaClass.simpleName.orEmpty()
+                    )
+                )
+            }
         }
     }
 
     override fun reinstall() {
         if (isInstalling) return
         viewModelScope.launch {
+            val expectedPackage = pm.getPackageInfo(outputFile)?.packageName ?: packageName
             val plan = installerManager.resolvePlan(
                 InstallerManager.InstallTarget.PATCHER,
                 outputFile,
-                packageName,
+                expectedPackage,
                 null
             )
             when (plan) {
@@ -1364,6 +1762,23 @@ class PatcherViewModel(
 
     fun dismissPackageInstallerDialog() {
         packageInstallerStatus = null
+    }
+
+    fun dismissSignatureMismatchPrompt() {
+        signatureMismatchPackage = null
+        pendingSignatureMismatchPlan = null
+        pendingSignatureMismatchPackage = null
+        signatureMismatchUninstallJob?.cancel()
+        signatureMismatchUninstallJob = null
+    }
+
+    fun confirmSignatureMismatchInstall() {
+        val targetPackage = pendingSignatureMismatchPackage ?: return
+        signatureMismatchPackage = null
+        stopInstallProgressToasts()
+        startUninstallProgressToasts()
+        startSignatureMismatchUninstallTimeout(targetPackage)
+        pm.uninstallPackage(targetPackage)
     }
 
     fun shouldSuppressPackageInstallerDialog(): Boolean {
@@ -1590,8 +2005,8 @@ class PatcherViewModel(
         merged: Boolean = false
     ) {
         val needsSplit = needsSplitOverride
-                ?: merged
-                || file?.let(SplitApkPreparer::isSplitArchive) == true
+            ?: merged
+            || file?.let(SplitApkPreparer::isSplitArchive) == true
         when {
             needsSplit && !requiresSplitPreparation -> {
                 requiresSplitPreparation = true
@@ -1660,10 +2075,22 @@ class PatcherViewModel(
         bundles: Map<Int, PatchBundleInfo.Scoped>
     ): PatchSelection = buildMap {
         selection.forEach { (uid, patches) ->
-            val bundle = bundles[uid] ?: return@forEach
+            val bundle = bundles[uid]
+            if (bundle == null) {
+                // Keep unknown bundles so applied patches stay visible even if the source is missing.
+                if (patches.isNotEmpty()) put(uid, patches.toSet())
+                return@forEach
+            }
+
             val valid = bundle.patches.map { it.name }.toSet()
             val kept = patches.filter { it in valid }.toSet()
-            if (kept.isNotEmpty()) put(uid, kept)
+            if (kept.isNotEmpty()) {
+                put(uid, kept)
+            } else if (patches.isNotEmpty()) {
+                // If everything was filtered out by compatibility, still keep the original set so
+                // the app info screen can show the applied bundle/patch names.
+                put(uid, patches.toSet())
+            }
         }
     }
 
@@ -1688,10 +2115,15 @@ class PatcherViewModel(
 
     private companion object {
         private const val TAG = "Morphe Patcher"
-        private const val SYSTEM_INSTALL_TIMEOUT_MS = 15_000L
+        private const val SYSTEM_INSTALL_TIMEOUT_MS = 60_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
+        private const val POST_TIMEOUT_GRACE_MS = 5_000L
+        private const val EXTERNAL_INSTALLER_RESULT_GRACE_MS = 1500L
+        private const val EXTERNAL_INSTALLER_POST_CLOSE_TIMEOUT_MS = 30_000L
         private const val INSTALL_MONITOR_POLL_MS = 500L
         private const val INSTALL_PROGRESS_TOAST_INTERVAL_MS = 2500L
+        private const val SIGNATURE_MISMATCH_UNINSTALL_TIMEOUT_MS = 30_000L
+        private const val SIGNATURE_MISMATCH_UNINSTALL_POLL_MS = 750L
         private const val MEMORY_ADJUSTMENT_MB = 200
         private const val SUPPRESS_FAILURE_AFTER_SUCCESS_MS = 5000L
 
@@ -1756,6 +2188,7 @@ class PatcherViewModel(
                 )
             )
         }
+
     }
 }
 
@@ -1769,5 +2202,6 @@ private fun buildSplitStep(
     category = StepCategory.PREPARING,
     state = state,
     message = message,
+    // Morphe
     progressPercentage = 0.1
 )

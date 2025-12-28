@@ -5,29 +5,23 @@
 
     <permission
         android:name="app.morphe.manager.permission.PLUGIN_HOST"
-        android:description="@string/plugin_host_permission_description"
+        android:protectionLevel="signature"
         android:label="@string/plugin_host_permission_label"
-        android:protectionLevel="signature" />
+        android:description="@string/plugin_host_permission_description" />
 
     <uses-permission android:name="app.morphe.manager.permission.PLUGIN_HOST" />
-    <uses-permission
-        android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="PackageVisibilityPolicy,QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
-        tools:ignore="RequestInstallPackagesPolicy" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"
-        tools:ignore="ForegroundServicesPolicy" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="AllFilesAccessPolicy,ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ENFORCE_UPDATE_OWNERSHIP" />
 
@@ -64,13 +58,17 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity"
-            android:exported="false"
-            android:theme="@style/Theme.WebViewActivity" />
+<!--        <activity android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity" android:exported="false" android:theme="@style/Theme.WebViewActivity" />-->
 
         <service android:name="app.revanced.manager.service.InstallService" />
         <service android:name="app.revanced.manager.service.UninstallService" />
+
+        <receiver
+            android:name="app.revanced.manager.receiver.InstallReceiver"
+            android:exported="false" />
+        <receiver
+            android:name="app.revanced.manager.receiver.UninstallReceiver"
+            android:exported="false" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

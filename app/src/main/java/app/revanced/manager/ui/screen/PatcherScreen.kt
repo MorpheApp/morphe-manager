@@ -46,7 +46,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -63,7 +62,6 @@ import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionBut
 import app.revanced.manager.ui.component.patcher.Steps
 import app.revanced.manager.ui.model.StepCategory
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -73,9 +71,8 @@ import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.PatchedAppExportData
-import app.revanced.manager.util.toast
 import org.koin.compose.koinInject
-import kotlin.contracts.contract
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatcherScreen(
@@ -219,6 +216,24 @@ fun PatcherScreen(
         } else {
             viewModel.dismissPackageInstallerDialog()
         }
+    }
+
+    viewModel.signatureMismatchPackage?.let {
+        AlertDialog(
+            onDismissRequest = viewModel::dismissSignatureMismatchPrompt,
+            title = { Text(stringResource(R.string.installation_signature_mismatch_dialog_title)) },
+            text = { Text(stringResource(R.string.installation_signature_mismatch_description)) },
+            confirmButton = {
+                TextButton(onClick = viewModel::confirmSignatureMismatchInstall) {
+                    Text(stringResource(R.string.installation_signature_mismatch_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::dismissSignatureMismatchPrompt) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
     }
 
     // TODO: This code is dead and can be removed. Patching now automatically reduces max memory if needed.

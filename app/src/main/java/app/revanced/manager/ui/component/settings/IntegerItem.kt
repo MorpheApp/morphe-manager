@@ -76,7 +76,7 @@ fun IntegerItem(
         )
     }
 
-    SettingsListItem(
+    ExpressiveSettingsItem(
         modifier = Modifier
             .clickable { dialogOpen = true }
             .then(modifier),

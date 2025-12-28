@@ -2,6 +2,7 @@ package app.revanced.manager.ui.screen
 
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +33,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -64,6 +66,7 @@ import app.revanced.manager.ui.viewmodel.InstallResult
 import app.revanced.manager.ui.viewmodel.MountWarningAction
 import app.revanced.manager.ui.viewmodel.MountWarningReason
 import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.PatchedAppExportData
 import app.revanced.manager.util.PatchSelection
@@ -80,7 +83,7 @@ fun InstalledAppInfoScreen(
     val context = LocalContext.current
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val prefs: PreferencesManager = koinInject()
-    val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val bundleSources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val allowUniversalPatches by prefs.disableUniversalPatchCheck.getAsState()
     val exportFormat by prefs.patchedAppExportFormat.getAsState()
@@ -173,6 +176,14 @@ fun InstalledAppInfoScreen(
             viewModel.exportSavedApp(uri)
         }
 
+    val activityLauncher = rememberLauncherForActivityResult(
+        contract = StartActivityForResult(),
+        onResult = viewModel::handleActivityResult
+    )
+    EventEffect(flow = viewModel.launchActivityFlow) { intent ->
+        activityLauncher.launch(intent)
+    }
+
     SideEffect {
         viewModel.onBackClick = onBackClick
     }
@@ -229,6 +240,24 @@ fun InstalledAppInfoScreen(
             },
             title = { Text(stringResource(titleRes)) },
             text = { Text(message) }
+        )
+    }
+
+    viewModel.signatureMismatchPackage?.let {
+        AlertDialog(
+            onDismissRequest = viewModel::dismissSignatureMismatchPrompt,
+            confirmButton = {
+                TextButton(onClick = viewModel::confirmSignatureMismatchInstall) {
+                    Text(stringResource(R.string.installation_signature_mismatch_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::dismissSignatureMismatchPrompt) {
+                    Text(stringResource(R.string.cancel))
+                }
+            },
+            title = { Text(stringResource(R.string.installation_signature_mismatch_dialog_title)) },
+            text = { Text(stringResource(R.string.installation_signature_mismatch_description)) }
         )
     }
 
@@ -356,17 +385,25 @@ fun InstalledAppInfoScreen(
             .padding(horizontal = 16.dp)
             .clip(RoundedCornerShape(24.dp))
     ) {
-        val installType = installedApp.installType
         val hasRoot = viewModel.rootInstaller.hasRootAccess()
+        val installType = remember(installedApp.installType, viewModel.primaryInstallerIsMount, hasRoot) {
+            if (installedApp.installType == InstallType.SAVED && viewModel.primaryInstallerIsMount && hasRoot) {
+                InstallType.MOUNT
+            } else {
+                installedApp.installType
+            }
+        }
         val rootRequiredText = stringResource(R.string.installer_status_requires_root)
 
         if (viewModel.appInfo != null) {
-            SegmentedButton(
-                icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                text = stringResource(R.string.open_app),
-                onClick = viewModel::launch,
-                enabled = isInstalledOnDevice
-            )
+            key("open") {
+                SegmentedButton(
+                    icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                    text = stringResource(R.string.open_app),
+                    onClick = viewModel::launch,
+                    enabled = isInstalledOnDevice
+                )
+            }
         }
 
         when (installType) {
@@ -383,38 +420,22 @@ fun InstalledAppInfoScreen(
                         }
                     }
 
-                    SegmentedButton(
-                        icon = if (isInstalledOnDevice) Icons.Outlined.Update else Icons.Outlined.InstallMobile,
-                        text = if (isInstalledOnDevice) stringResource(R.string.update) else stringResource(R.string.install_saved_app),
-                        onClick = installAction,
-                        onLongClick = if (isInstalledOnDevice) viewModel::uninstall else null
-                    )
-                    SegmentedButton(
-                        icon = Icons.Outlined.Save,
-                        text = stringResource(R.string.export),
-                        onClick = { exportSavedLauncher.launch(exportFileName) }
-                    )
-                } else {
-                    if (isInstalledOnDevice) {
+                    key("export") {
                         SegmentedButton(
-                            icon = Icons.Outlined.Delete,
-                            text = stringResource(R.string.uninstall),
-                            onClick = viewModel::uninstall
+                            icon = Icons.Outlined.Save,
+                            text = stringResource(R.string.export),
+                            onClick = { exportSavedLauncher.launch(exportFileName) }
                         )
                     }
-                }
-                SegmentedButton(
-                    icon = Icons.Outlined.Update,
-                    text = stringResource(R.string.repatch),
-                    onClick = {
-                        if (!allowUniversalPatches && (appliedBundlesContainUniversal || appliedSelectionContainsUniversal)) {
-                            showUniversalBlockedDialog = true
-                        } else {
-                            onPatchClick(installedApp.originalPackageName, appliedSelection)
-                        }
+                    key("update_or_install") {
+                        SegmentedButton(
+                            icon = Icons.Outlined.InstallMobile,
+                            text = if (isInstalledOnDevice) stringResource(R.string.update) else stringResource(R.string.install_saved_app),
+                            onClick = installAction,
+                            onLongClick = if (isInstalledOnDevice) viewModel::uninstall else null
+                        )
                     }
-                )
-                if (viewModel.hasSavedCopy) {
+
                     var showDeleteConfirmation by rememberSaveable { mutableStateOf(false) }
                     if (showDeleteConfirmation) {
                         ConfirmDialog(
@@ -428,10 +449,34 @@ fun InstalledAppInfoScreen(
                             icon = Icons.Outlined.Delete
                         )
                     }
+                    key("delete_entry") {
+                        SegmentedButton(
+                            icon = Icons.Outlined.Delete,
+                            text = stringResource(R.string.delete),
+                            onClick = { showDeleteConfirmation = true }
+                        )
+                    }
+                } else {
+                    if (isInstalledOnDevice) {
+                        SegmentedButton(
+                            icon = Icons.Outlined.Delete,
+                            text = stringResource(R.string.uninstall),
+                            onClick = viewModel::uninstall
+                        )
+                    }
+                }
+
+                key("repatch") {
                     SegmentedButton(
-                        icon = Icons.Outlined.Delete,
-                        text = stringResource(R.string.delete),
-                        onClick = { showDeleteConfirmation = true }
+                        icon = Icons.Outlined.Update,
+                        text = stringResource(R.string.repatch),
+                        onClick = {
+                            if (!allowUniversalPatches && (appliedBundlesContainUniversal || appliedSelectionContainsUniversal)) {
+                                showUniversalBlockedDialog = true
+                            } else {
+                                onPatchClick(installedApp.originalPackageName, appliedSelection)
+                            }
+                        }
                     )
                 }
             }
@@ -519,14 +564,27 @@ fun InstalledAppInfoScreen(
                     text = stringResource(R.string.delete),
                     onClick = { showDeleteConfirmation = true }
                 )
+                SegmentedButton(
+                    icon = Icons.Outlined.Update,
+                    text = stringResource(R.string.repatch),
+                    onClick = {
+                        if (!allowUniversalPatches && (appliedBundlesContainUniversal || appliedSelectionContainsUniversal)) {
+                            showUniversalBlockedDialog = true
+                        } else {
+                            onPatchClick(installedApp.originalPackageName, appliedSelection)
+                        }
+                    }
+                )
             }
 
             InstallType.SAVED -> {
-                SegmentedButton(
-                    icon = Icons.Outlined.Save,
-                    text = stringResource(R.string.export),
-                    onClick = { exportSavedLauncher.launch(exportFileName) }
-                )
+                key("export") {
+                    SegmentedButton(
+                        icon = Icons.Outlined.Save,
+                        text = stringResource(R.string.export),
+                        onClick = { exportSavedLauncher.launch(exportFileName) }
+                    )
+                }
 
                 var showSavedUninstallDialog by rememberSaveable { mutableStateOf(false) }
                 if (showSavedUninstallDialog) {
@@ -549,27 +607,29 @@ fun InstalledAppInfoScreen(
                 } else {
                     stringResource(R.string.install_saved_app)
                 }
-                SegmentedButton(
-                    icon = Icons.Outlined.InstallMobile,
-                    text = installText,
-                    onClick = {
-                        if (viewModel.primaryInstallerIsMount) {
-                            val action = if (isInstalledOnDevice) MountWarningAction.UPDATE else MountWarningAction.INSTALL
-                            viewModel.showMountWarning(action, MountWarningReason.PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP)
-                        } else {
-                            viewModel.installSavedApp()
-                        }
-                    },
-                    onLongClick = if (isInstalledOnDevice) {
-                        {
+                key("update_or_install") {
+                    SegmentedButton(
+                        icon = Icons.Outlined.InstallMobile,
+                        text = installText,
+                        onClick = {
                             if (viewModel.primaryInstallerIsMount) {
-                                viewModel.showMountWarning(MountWarningAction.UNINSTALL, MountWarningReason.PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP)
+                                val action = if (isInstalledOnDevice) MountWarningAction.UPDATE else MountWarningAction.INSTALL
+                                viewModel.showMountWarning(action, MountWarningReason.PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP)
                             } else {
-                                showSavedUninstallDialog = true
+                                viewModel.installSavedApp()
                             }
-                        }
-                    } else null
-                )
+                        },
+                        onLongClick = if (isInstalledOnDevice) {
+                            {
+                                if (viewModel.primaryInstallerIsMount) {
+                                    viewModel.showMountWarning(MountWarningAction.UNINSTALL, MountWarningReason.PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP)
+                                } else {
+                                    showSavedUninstallDialog = true
+                                }
+                            }
+                        } else null
+                    )
+                }
 
                 val deleteAction = viewModel::removeSavedApp
                 val deleteTitle = stringResource(R.string.delete_saved_app_title)
@@ -588,23 +648,27 @@ fun InstalledAppInfoScreen(
                         icon = Icons.Outlined.Delete
                     )
                 }
-                SegmentedButton(
-                    icon = Icons.Outlined.Delete,
-                    text = deleteLabel,
-                    onClick = { showDeleteConfirmation = true }
-                )
+                key("delete_entry") {
+                    SegmentedButton(
+                        icon = Icons.Outlined.Delete,
+                        text = deleteLabel,
+                        onClick = { showDeleteConfirmation = true }
+                    )
+                }
 
-                SegmentedButton(
-                    icon = Icons.Outlined.Update,
-                    text = stringResource(R.string.repatch),
-                    onClick = {
-                        if (!allowUniversalPatches && (appliedBundlesContainUniversal || appliedSelectionContainsUniversal)) {
-                            showUniversalBlockedDialog = true
-                        } else {
-                            onPatchClick(installedApp.originalPackageName, appliedSelection)
+                key("repatch") {
+                    SegmentedButton(
+                        icon = Icons.Outlined.Update,
+                        text = stringResource(R.string.repatch),
+                        onClick = {
+                            if (!allowUniversalPatches && (appliedBundlesContainUniversal || appliedSelectionContainsUniversal)) {
+                                showUniversalBlockedDialog = true
+                            } else {
+                                onPatchClick(installedApp.originalPackageName, appliedSelection)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }
@@ -651,14 +715,14 @@ fun InstalledAppInfoScreen(
                 SettingsListItem(
                     headlineContent = stringResource(R.string.install_type),
                     supportingContent = when (installedApp.installType) {
-                        InstallType.MOUNT -> stringResource(R.string.install_type_mount_label)
-                        InstallType.SHIZUKU -> stringResource(R.string.install_type_shizuku_label)
-                        InstallType.DEFAULT, InstallType.CUSTOM -> when (viewModel.primaryInstallerToken) {
-                            InstallerManager.Token.Internal -> stringResource(R.string.install_type_system_installer)
-                            InstallerManager.Token.AutoSaved -> stringResource(R.string.install_type_mount_label)
-                            is InstallerManager.Token.Component,
-                            InstallerManager.Token.Shizuku,
-                            InstallerManager.Token.None -> stringResource(R.string.install_type_custom_installer)
+            InstallType.MOUNT -> stringResource(R.string.install_type_mount_label)
+            InstallType.SHIZUKU -> stringResource(R.string.install_type_shizuku_label)
+            InstallType.DEFAULT, InstallType.CUSTOM -> when (viewModel.primaryInstallerToken) {
+                InstallerManager.Token.Internal -> stringResource(R.string.install_type_system_installer)
+                InstallerManager.Token.AutoSaved -> stringResource(R.string.install_type_mount_label)
+                is InstallerManager.Token.Component,
+                InstallerManager.Token.Shizuku,
+                InstallerManager.Token.None -> stringResource(R.string.install_type_custom_installer)
                         }
 
                         InstallType.SAVED -> stringResource(installedApp.installType.stringResource)

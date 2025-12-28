@@ -44,7 +44,7 @@ fun BundlePatchesDialog(
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val patches by remember(src.uid) {
-        patchBundleRepository.bundleInfoFlow.mapNotNull { it[src.uid]?.patches }
+        patchBundleRepository.allBundlesInfoFlow.mapNotNull { it[src.uid]?.patches }
     }.collectAsStateWithLifecycle(emptyList())
 
     FullscreenDialog(
@@ -69,10 +69,7 @@ fun BundlePatchesDialog(
             LazyColumnWithScrollbar(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .then(
-                        if (showTopBar) Modifier.padding(paddingValues)
-                        else Modifier.statusBarsPadding()
-                    ),
+                    .padding(paddingValues),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {

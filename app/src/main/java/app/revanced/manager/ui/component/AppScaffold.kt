@@ -79,6 +79,7 @@ fun AppTopBar(
         },
         // FIXME: Upstream, verify this works here
         actions = {
+            // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
             if (onHelpClick != null) {
                 IconButton(onClick = onHelpClick) {
                     Icon(
@@ -129,6 +130,7 @@ fun AppTopBar(
             }
         },
         actions = {
+            // From PR #37: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/37
             if (onHelpClick != null) {
                 IconButton(onClick = onHelpClick) {
                     Icon(

@@ -102,9 +102,8 @@ fun ExpandableSettingListItem(
             .fillMaxWidth()
             .animateContentSize()
     ) {
-        SettingsListItem(
-            modifier = Modifier
-                .clickable{ expanded = !expanded },
+        ExpressiveSettingsItem(
+            modifier = Modifier.clickable { expanded = !expanded },
             headlineContent = headlineContent,
             supportingContent = supportingContent,
             trailingContent = {

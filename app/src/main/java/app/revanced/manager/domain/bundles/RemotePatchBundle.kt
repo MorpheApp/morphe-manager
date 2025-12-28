@@ -8,6 +8,7 @@ import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.getOrThrow
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
@@ -23,12 +24,16 @@ import kotlinx.datetime.toInstant
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
+import java.io.IOException
 import java.util.zip.ZipInputStream
+import okhttp3.Protocol
 
 data class PatchBundleDownloadResult(
     val versionSignature: String,
     val assetCreatedAtMillis: Long?
 )
+
+typealias PatchBundleDownloadProgress = (bytesRead: Long, bytesTotal: Long?) -> Unit
 
 sealed class RemotePatchBundle(
     name: String,
@@ -41,7 +46,8 @@ sealed class RemotePatchBundle(
     directory: File,
     val endpoint: String,
     val autoUpdate: Boolean,
-) : PatchBundleSource(name, uid, displayName, createdAt, updatedAt, error, directory), KoinComponent {
+    enabled: Boolean,
+) : PatchBundleSource(name, uid, displayName, createdAt, updatedAt, error, directory, enabled), KoinComponent {
     protected val http: HttpService by inject()
 
     protected abstract suspend fun getLatestInfo(): ReVancedAsset
@@ -51,7 +57,8 @@ sealed class RemotePatchBundle(
         displayName: String? = this.displayName,
         createdAt: Long? = this.createdAt,
         updatedAt: Long? = this.updatedAt,
-        autoUpdate: Boolean = this.autoUpdate
+        autoUpdate: Boolean = this.autoUpdate,
+        enabled: Boolean = this.enabled
     ): RemotePatchBundle
 
     override fun copy(
@@ -59,36 +66,49 @@ sealed class RemotePatchBundle(
         name: String,
         displayName: String?,
         createdAt: Long?,
-        updatedAt: Long?
-    ): RemotePatchBundle = copy(error, name, displayName, createdAt, updatedAt, this.autoUpdate)
+        updatedAt: Long?,
+        enabled: Boolean
+    ): RemotePatchBundle = copy(error, name, displayName, createdAt, updatedAt, this.autoUpdate, enabled)
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
-    protected open suspend fun download(info: ReVancedAsset) = withContext(Dispatchers.IO) {
-        patchBundleOutputStream().use {
-            http.streamTo(it) {
-                url(info.downloadUrl)
+    protected open suspend fun download(info: ReVancedAsset, onProgress: PatchBundleDownloadProgress? = null) =
+        withContext(Dispatchers.IO) {
+            try {
+                patchesFile.parentFile?.mkdirs()
+                patchesFile.setWritable(true, true)
+                http.downloadToFile(
+                    saveLocation = patchesFile,
+                    builder = { url(info.downloadUrl) },
+                    onProgress = onProgress
+                )
+                patchesFile.setReadOnly()
+                requireNonEmptyPatchesFile("Downloading patch bundle")
+            } catch (t: Throwable) {
+                runCatching { patchesFile.setWritable(true, true) }
+                runCatching { patchesFile.delete() }
+                throw t
             }
-        }
 
-        PatchBundleDownloadResult(
-            versionSignature = info.version,
-            assetCreatedAtMillis = runCatching {
-                info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
-            }.getOrNull()
-        )
-    }
+            PatchBundleDownloadResult(
+                versionSignature = info.version,
+                assetCreatedAtMillis = runCatching {
+                    info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
+                }.getOrNull()
+            )
+        }
 
     /**
      * Downloads the latest version regardless if there is a new update available.
      */
-    suspend fun ActionContext.downloadLatest(): PatchBundleDownloadResult = download(getLatestInfo())
+    suspend fun downloadLatest(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult =
+        download(getLatestInfo(), onProgress)
 
-    suspend fun ActionContext.update(): PatchBundleDownloadResult? = withContext(Dispatchers.IO) {
+    suspend fun update(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult? =
+        withContext(Dispatchers.IO) {
         val info = getLatestInfo()
         if (hasInstalled() && info.version == installedVersionSignatureInternal)
             return@withContext null
 
-        download(info)
+        download(info, onProgress)
     }
 
     suspend fun fetchLatestReleaseInfo(): ReVancedAsset {
@@ -137,7 +157,8 @@ class JsonPatchBundle(
     directory: File,
     endpoint: String,
     autoUpdate: Boolean,
-) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
+    enabled: Boolean,
+) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
         http.request<ReVancedAsset> {
             url(endpoint)
@@ -150,7 +171,8 @@ class JsonPatchBundle(
         displayName: String?,
         createdAt: Long?,
         updatedAt: Long?,
-        autoUpdate: Boolean
+        autoUpdate: Boolean,
+        enabled: Boolean
     ) = JsonPatchBundle(
         name,
         uid,
@@ -162,6 +184,7 @@ class JsonPatchBundle(
         directory,
         endpoint,
         autoUpdate,
+        enabled
     )
 }
 
@@ -176,7 +199,8 @@ class APIPatchBundle(
     directory: File,
     endpoint: String,
     autoUpdate: Boolean,
-) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
+    enabled: Boolean,
+) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
     private val api: ReVancedAPI by inject()
 
     override suspend fun getLatestInfo() = api.getPatchesUpdate().getOrThrow()
@@ -186,7 +210,8 @@ class APIPatchBundle(
         displayName: String?,
         createdAt: Long?,
         updatedAt: Long?,
-        autoUpdate: Boolean
+        autoUpdate: Boolean,
+        enabled: Boolean
     ) = APIPatchBundle(
         name,
         uid,
@@ -198,9 +223,11 @@ class APIPatchBundle(
         directory,
         endpoint,
         autoUpdate,
+        enabled
     )
 }
 
+// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
 class GitHubPullRequestBundle(
     name: String,
     uid: Int,
@@ -211,8 +238,9 @@ class GitHubPullRequestBundle(
     error: Throwable?,
     directory: File,
     endpoint: String,
-    autoUpdate: Boolean
-) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate) {
+    autoUpdate: Boolean,
+    enabled: Boolean
+) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
 
     private val api: ReVancedAPI by inject()
 
@@ -224,7 +252,7 @@ class GitHubPullRequestBundle(
         api.getAssetFromPullRequest(owner, repo, prNumber)
     }
 
-    override suspend fun download(info: ReVancedAsset) = withContext(Dispatchers.IO) {
+    override suspend fun download(info: ReVancedAsset, onProgress: PatchBundleDownloadProgress?) = withContext(Dispatchers.IO) {
         val prefs: PreferencesManager by inject()
         val gitHubPat = prefs.gitHubPat.get().also {
             if (it.isBlank()) throw RuntimeException("PAT is required.")
@@ -233,31 +261,70 @@ class GitHubPullRequestBundle(
         val customHttpClient = HttpClient(OkHttp) {
             engine {
                 config {
+                    // Force HTTP/1.1 to avoid HTTP/2 PROTOCOL_ERROR stream resets when fetching
+                    // PR artifacts from GitHub.
+                    protocols(listOf(Protocol.HTTP_1_1))
                     followRedirects(true)
                     followSslRedirects(true)
                 }
             }
+            install(HttpTimeout) {
+                connectTimeoutMillis = 10_000
+                socketTimeoutMillis = 10_000
+                requestTimeoutMillis = 5 * 60_000
+            }
         }
 
-        with(customHttpClient) {
-            prepareGet {
-                url(info.downloadUrl)
-                header("Authorization", "Bearer $gitHubPat")
-            }.execute { httpResponse ->
-                patchBundleOutputStream().use { patchOutput ->
-                    ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
-                        var entry = zis.nextEntry
-                        while (entry != null) {
-                            if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
-                                zis.copyTo(patchOutput)
-                                break
+        try {
+            with(customHttpClient) {
+                prepareGet {
+                    url(info.downloadUrl)
+                    header("Authorization", "Bearer $gitHubPat")
+                }.execute { httpResponse ->
+                    patchBundleOutputStream().use { patchOutput ->
+                        ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
+                            val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                            var copiedBytes = 0L
+                            var lastReportedBytes = 0L
+                            var lastReportedAt = 0L
+                            var extractedTotal: Long? = null
+
+                            var entry = zis.nextEntry
+                            while (entry != null) {
+                                if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
+                                    extractedTotal = entry.size.takeIf { it > 0 }
+                                    while (true) {
+                                        val read = zis.read(buffer)
+                                        if (read == -1) break
+                                        patchOutput.write(buffer, 0, read)
+                                        copiedBytes += read.toLong()
+                                        val now = System.currentTimeMillis()
+                                        if (copiedBytes - lastReportedBytes >= 64 * 1024 || now - lastReportedAt >= 200) {
+                                            lastReportedBytes = copiedBytes
+                                            lastReportedAt = now
+                                            onProgress?.invoke(copiedBytes, extractedTotal)
+                                        }
+                                    }
+                                    break
+                                }
+                                zis.closeEntry()
+                                entry = zis.nextEntry
                             }
-                            zis.closeEntry()
-                            entry = zis.nextEntry
+
+                            if (copiedBytes <= 0L) {
+                                throw IOException("No .mpp file found in the pull request artifact.")
+                            }
+                            onProgress?.invoke(copiedBytes, extractedTotal)
                         }
                     }
                 }
             }
+            requireNonEmptyPatchesFile("Downloading patch bundle")
+        } catch (t: Throwable) {
+            runCatching { patchesFile.delete() }
+            throw t
+        } finally {
+            runCatching { customHttpClient.close() }
         }
 
         PatchBundleDownloadResult(
@@ -274,7 +341,8 @@ class GitHubPullRequestBundle(
         displayName: String?,
         createdAt: Long?,
         updatedAt: Long?,
-        autoUpdate: Boolean
+        autoUpdate: Boolean,
+        enabled: Boolean
     ) = GitHubPullRequestBundle(
         name,
         uid,
@@ -285,7 +353,8 @@ class GitHubPullRequestBundle(
         error,
         directory,
         endpoint,
-        autoUpdate
+        autoUpdate,
+        enabled
     )
 }
 

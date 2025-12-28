@@ -8,8 +8,8 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.applyAppLanguage
 import app.revanced.manager.util.resetListItemColorsCached
 import app.revanced.manager.util.toHexString
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 enum class ThemePreset {
@@ -58,7 +58,7 @@ class GeneralSettingsViewModel(
 
     fun resetThemeSettings() = viewModelScope.launch {
         prefs.theme.update(Theme.SYSTEM)
-        prefs.dynamicColor.update(true)
+        prefs.dynamicColor.update(false)
         prefs.pureBlackTheme.update(false)
         prefs.themePresetSelectionEnabled.update(true)
         prefs.themePresetSelectionName.update(ThemePreset.DEFAULT.name)

@@ -8,7 +8,6 @@
 -keepnames class com.android.apksig.internal.** { *; }
 -keepnames class org.xmlpull.** { *; }
 
--dontwarn android.content.res.**
 -dontwarn com.google.j2objc.annotations.*
 -dontwarn java.awt.**
 -dontwarn javax.**

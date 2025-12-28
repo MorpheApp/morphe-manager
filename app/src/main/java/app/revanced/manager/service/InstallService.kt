@@ -3,8 +3,11 @@ package app.revanced.manager.service
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageInstaller
+import android.net.Uri
 import android.os.Build
 import android.os.IBinder
+import android.provider.Settings
+import android.util.Log
 
 @Suppress("DEPRECATION")
 class InstallService : Service() {
@@ -17,13 +20,32 @@ class InstallService : Service() {
         val extraPackageName = intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME)
         when (extraStatus) {
             PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                startActivity(if (Build.VERSION.SDK_INT >= 33) {
+                val userActionIntent = if (Build.VERSION.SDK_INT >= 33) {
                     intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
                 } else {
-                    intent.getParcelableExtra(Intent.EXTRA_INTENT)
-                }.apply {
-                    this?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableExtra(Intent.EXTRA_INTENT) as? Intent
+                }
+
+                if (!tryStartUserAction(userActionIntent)) {
+                    val fallback = Intent(
+                        Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                        Uri.parse("package:$packageName")
+                    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                    if (!tryStartUserAction(fallback)) {
+                        sendBroadcast(Intent().apply {
+                            action = APP_INSTALL_ACTION
+                            `package` = packageName
+                            putExtra(EXTRA_INSTALL_STATUS, PackageInstaller.STATUS_FAILURE_BLOCKED)
+                            putExtra(
+                                EXTRA_INSTALL_STATUS_MESSAGE,
+                                extraStatusMessage ?: "Unable to launch installer confirmation."
+                            )
+                            putExtra(EXTRA_PACKAGE_NAME, extraPackageName)
+                        })
+                    }
+                }
             }
 
             else -> {
@@ -41,6 +63,16 @@ class InstallService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
+
+    private fun tryStartUserAction(action: Intent?): Boolean {
+        if (action == null) return false
+        return runCatching {
+            action.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(action)
+        }.onFailure {
+            Log.w("InstallService", "Failed to start installer user action", it)
+        }.isSuccess
+    }
 
     companion object {
         const val APP_INSTALL_ACTION = "APP_INSTALL_ACTION"

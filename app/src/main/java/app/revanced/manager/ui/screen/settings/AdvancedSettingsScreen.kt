@@ -19,11 +19,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.awaitLongPressOrCancellation
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,27 +41,33 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistAdd
 import androidx.compose.material.icons.automirrored.outlined.PlaylistAddCheck
 import androidx.compose.material.icons.automirrored.outlined.Redo
 import androidx.compose.material.icons.automirrored.outlined.Undo
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.Api
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.DoneAll
+import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.LayersClear
+import androidx.compose.material.icons.outlined.Redo
 import androidx.compose.material.icons.outlined.Restore
+import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.SettingsBackupRestore
 import androidx.compose.material.icons.outlined.UnfoldLess
+import androidx.compose.material.icons.outlined.Undo
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material.icons.outlined.VpnKey
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.AlertDialog
@@ -67,70 +82,84 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerId
+import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.content.getSystemService
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.BooleanItem
+import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.ui.component.settings.IntegerItem
 import app.revanced.manager.ui.component.settings.SafeguardBooleanItem
-import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.ui.component.settings.TextItem
-import app.revanced.manager.ui.model.PatchSelectionActionKey
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsSwitch
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.consumeHorizontalScroll
@@ -138,12 +167,17 @@ import app.revanced.manager.util.openUrl
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
 import app.revanced.manager.util.withHapticFeedback
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.ui.component.settings.TextItem
+import app.revanced.manager.ui.model.PatchSelectionActionKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.ceil
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.math.roundToInt
@@ -169,21 +203,6 @@ fun AdvancedSettingsScreen(
     }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
-//    val patchesBundleJsonUrl by viewModel.prefs.patchesBundleJsonUrl.getAsState()
-//    var showPatchesBundleJsonUrlDialog by rememberSaveable { mutableStateOf(false) }
-//
-//    if (showPatchesBundleJsonUrlDialog) {
-//        PatchesBundleJsonUrlDialog(
-//            currentUrl = patchesBundleJsonUrl,
-//            defaultUrl = viewModel.prefs.patchesBundleJsonUrl.default,
-//            onDismiss = { showPatchesBundleJsonUrlDialog = false },
-//            onSave = { url ->
-//                viewModel.setPatchesBundleJsonUrl(url.trim())
-//                showPatchesBundleJsonUrlDialog = false
-//            }
-//        )
-//    }
-
     Scaffold(
         topBar = {
             AppTopBar(
@@ -199,6 +218,7 @@ fun AdvancedSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+//            GroupHeader(stringResource(R.string.manager))
 
 //            val apiUrl by viewModel.prefs.api.getAsState()
             val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
@@ -206,7 +226,6 @@ fun AdvancedSettingsScreen(
 //            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
             var showGitHubPatDialog by rememberSaveable { mutableStateOf(false) }
 
-//            GroupHeader(stringResource(R.string.patch_bundle_installer))
 //            if (showApiUrlDialog) {
 //                APIUrlDialog(
 //                    currentUrl = apiUrl,
@@ -217,11 +236,6 @@ fun AdvancedSettingsScreen(
 //                    }
 //                )
 //            }
-//            SettingsListItem(
-//                headlineContent = stringResource(R.string.patches_bundle_json_url),
-//                supportingContent = stringResource(R.string.patches_bundle_json_url_description),
-//                modifier = Modifier.clickable { showPatchesBundleJsonUrlDialog = true }
-//            )
 
             if (showGitHubPatDialog) {
                 GitHubPatDialog(
@@ -235,18 +249,22 @@ fun AdvancedSettingsScreen(
                     onDismiss = { showGitHubPatDialog = false }
                 )
             }
-//            SettingsListItem(
-//                headlineContent = stringResource(R.string.api_url),
-//                supportingContent = stringResource(R.string.api_url_description),
-//                modifier = Modifier.clickable {
-//                    showApiUrlDialog = true
-//                }
-//            )
-            SettingsListItem(
-                headlineContent = stringResource(R.string.github_pat),
-                supportingContent = stringResource(R.string.github_pat_description),
-                modifier = Modifier.clickable { showGitHubPatDialog = true }
-            )
+//            ExpressiveSettingsCard(
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+//            ) {
+//                ExpressiveSettingsItem(
+//                    headlineContent = stringResource(R.string.api_url),
+//                    supportingContent = stringResource(R.string.api_url_description),
+//                    onClick = { showApiUrlDialog = true }
+//                )
+//                ExpressiveSettingsDivider()
+//                ExpressiveSettingsItem(
+//                    headlineContent = stringResource(R.string.github_pat),
+//                    supportingContent = stringResource(R.string.github_pat_description),
+//                    onClick = { showGitHubPatDialog = true }
+//                )
+//            }
 
             val installTarget = InstallerManager.InstallTarget.PATCHER
             val primaryPreference by viewModel.prefs.installerPrimary.getAsState()
@@ -372,24 +390,30 @@ fun AdvancedSettingsScreen(
             val primaryLeadingContent = installerLeadingContent(primaryEntry, primaryEntry.token == primaryToken)
             val fallbackLeadingContent = installerLeadingContent(fallbackEntry, fallbackEntry.token == fallbackToken)
 
-            SettingsListItem(
-                headlineContent = stringResource(R.string.installer_primary_title),
-                supportingContent = primarySupporting,
-                modifier = Modifier.clickable { installerDialogTarget = InstallerDialogTarget.Primary },
-                leadingContent = primaryLeadingContent
-            )
-            SettingsListItem(
-                headlineContent = stringResource(R.string.installer_fallback_title),
-                supportingContent = fallbackSupporting,
-                modifier = Modifier.clickable { installerDialogTarget = InstallerDialogTarget.Fallback },
-                leadingContent = fallbackLeadingContent
-            )
-
-            SettingsListItem(
-                headlineContent = stringResource(R.string.installer_custom_manage_title),
-                supportingContent = stringResource(R.string.installer_custom_manage_description),
-                modifier = Modifier.clickable { showCustomInstallerDialog = true }
-            )
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.installer_primary_title),
+                    supportingContent = primarySupporting,
+                    leadingContent = primaryLeadingContent,
+                    onClick = { installerDialogTarget = InstallerDialogTarget.Primary }
+                )
+                ExpressiveSettingsDivider()
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.installer_fallback_title),
+                    supportingContent = fallbackSupporting,
+                    leadingContent = fallbackLeadingContent,
+                    onClick = { installerDialogTarget = InstallerDialogTarget.Fallback }
+                )
+                ExpressiveSettingsDivider()
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.installer_custom_manage_title),
+                    supportingContent = stringResource(R.string.installer_custom_manage_description),
+                    onClick = { showCustomInstallerDialog = true }
+                )
+            }
 
             if (showCustomInstallerDialog) {
                 CustomInstallerManagerDialog(
@@ -442,54 +466,56 @@ fun AdvancedSettingsScreen(
             }
 
             GroupHeader(stringResource(R.string.safeguards))
-            SafeguardBooleanItem(
-                preference = viewModel.prefs.disablePatchVersionCompatCheck,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.patch_compat_check,
-                description = R.string.patch_compat_check_description,
-                confirmationText = R.string.patch_compat_check_confirmation
-            )
-            SafeguardBooleanItem(
-                preference = viewModel.prefs.suggestedVersionSafeguard,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.suggested_version_safeguard,
-                description = R.string.suggested_version_safeguard_description,
-                confirmationText = R.string.suggested_version_safeguard_confirmation
-            )
-            SafeguardBooleanItem(
-                preference = viewModel.prefs.disableSelectionWarning,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.patch_selection_safeguard,
-                description = R.string.patch_selection_safeguard_description,
-                confirmationText = R.string.patch_selection_safeguard_confirmation
-            )
-            SafeguardBooleanItem(
-                preference = viewModel.prefs.disablePatchSelectionConfirmations,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.disable_patch_selection_confirmations,
-                description = R.string.disable_patch_selection_confirmations_description,
-                confirmationText = R.string.disable_patch_selection_confirmations_warning
-            )
-            BooleanItem(
-                preference = viewModel.prefs.disableUniversalPatchCheck,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.universal_patches_safeguard,
-                description = R.string.universal_patches_safeguard_description,
-            )
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                SafeguardBooleanItem(
+                    preference = viewModel.prefs.disablePatchVersionCompatCheck,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.patch_compat_check,
+                    description = R.string.patch_compat_check_description,
+                    confirmationText = R.string.patch_compat_check_confirmation
+                )
+                ExpressiveSettingsDivider()
+                SafeguardBooleanItem(
+                    preference = viewModel.prefs.suggestedVersionSafeguard,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.suggested_version_safeguard,
+                    description = R.string.suggested_version_safeguard_description,
+                    confirmationText = R.string.suggested_version_safeguard_confirmation
+                )
+                ExpressiveSettingsDivider()
+                SafeguardBooleanItem(
+                    preference = viewModel.prefs.disableSelectionWarning,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.patch_selection_safeguard,
+                    description = R.string.patch_selection_safeguard_description,
+                    confirmationText = R.string.patch_selection_safeguard_confirmation
+                )
+                ExpressiveSettingsDivider()
+                SafeguardBooleanItem(
+                    preference = viewModel.prefs.disablePatchSelectionConfirmations,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.disable_patch_selection_confirmations,
+                    description = R.string.disable_patch_selection_confirmations_description,
+                    confirmationText = R.string.disable_patch_selection_confirmations_warning
+                )
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = viewModel.prefs.disableUniversalPatchCheck,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.universal_patches_safeguard,
+                    description = R.string.universal_patches_safeguard_description,
+                )
+                ExpressiveSettingsDivider()
 
-            val restoreDescription = if (hasOfficialBundle) {
-                stringResource(R.string.restore_official_bundle_description_installed)
-            } else {
-                stringResource(R.string.restore_official_bundle_description_missing)
-            }
-            val restoreModifier = if (hasOfficialBundle) Modifier else Modifier.clickable {
-                viewModel.restoreOfficialBundle()
-            }
-            SettingsListItem(
-                headlineContent = stringResource(R.string.restore_official_bundle),
-                supportingContent = restoreDescription,
-                modifier = restoreModifier,
-                trailingContent = if (hasOfficialBundle) {
+                val restoreDescription = if (hasOfficialBundle) {
+                    stringResource(R.string.restore_official_bundle_description_installed)
+                } else {
+                    stringResource(R.string.restore_official_bundle_description_missing)
+                }
+                val installedTrailingContent: (@Composable () -> Unit)? = if (hasOfficialBundle) {
                     {
                         Text(
                             text = stringResource(R.string.installed),
@@ -498,24 +524,35 @@ fun AdvancedSettingsScreen(
                         )
                     }
                 } else null
-            )
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.restore_official_bundle),
+                    supportingContent = restoreDescription,
+                    trailingContent = installedTrailingContent,
+                    enabled = !hasOfficialBundle,
+                    onClick = if (hasOfficialBundle) null else ({ viewModel.restoreOfficialBundle() })
+                )
+            }
 
             GroupHeader(stringResource(R.string.patcher))
-            BooleanItem(
-                preference = viewModel.prefs.stripUnusedNativeLibs,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.strip_unused_libs,
-                description = R.string.strip_unused_libs_description,
-            )
-            // Morphe begin
-            // Runtime process only works with Android 11 and higher.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                BooleanItem(
+                    preference = viewModel.prefs.stripUnusedNativeLibs,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.strip_unused_libs,
+                    description = R.string.strip_unused_libs_description,
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ExpressiveSettingsDivider()
                 BooleanItem(
                     preference = viewModel.prefs.useProcessRuntime,
                     coroutineScope = viewModel.viewModelScope,
                     headline = R.string.process_runtime,
                     description = R.string.process_runtime_description,
                 )
+                ExpressiveSettingsDivider()
                 val recommendedProcessLimit = remember { 700 }
                 IntegerItem(
                     preference = viewModel.prefs.patcherProcessMemoryLimit,
@@ -525,26 +562,29 @@ fun AdvancedSettingsScreen(
                     neutralButtonLabel = stringResource(R.string.reset_to_recommended),
                     neutralValueProvider = { recommendedProcessLimit }
                 )
-            }  else {
-                TextItem(
-                    headline = R.string.process_runtime,
-                    description = R.string.process_runtime_description_not_available
+                }  else {
+                    TextItem(
+                        headline = R.string.process_runtime,
+                        description = R.string.process_runtime_description_not_available
+                    )
+                } // Morphe end
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = viewModel.prefs.autoCollapsePatcherSteps,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.patcher_auto_collapse_steps,
+                    description = R.string.patcher_auto_collapse_steps_description,
+                )
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = viewModel.prefs.collapsePatchActionsOnSelection,
+                    coroutineScope = viewModel.viewModelScope,
+                    headline = R.string.patch_selection_collapse_on_toggle,
+                    description = R.string.patch_selection_collapse_on_toggle_description,
                 )
             }
-            // Morphe end
-            BooleanItem(
-                preference = viewModel.prefs.autoCollapsePatcherSteps,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.patcher_auto_collapse_steps,
-                description = R.string.patcher_auto_collapse_steps_description,
-            )
-            BooleanItem(
-                preference = viewModel.prefs.collapsePatchActionsOnSelection,
-                coroutineScope = viewModel.viewModelScope,
-                headline = R.string.patch_selection_collapse_on_toggle,
-                description = R.string.patch_selection_collapse_on_toggle_description,
-            )
             val actionOrderPref by viewModel.prefs.patchSelectionActionOrder.getAsState()
+            val hiddenActionsPref by viewModel.prefs.patchSelectionHiddenActions.getAsState()
             val actionOrderList = remember(actionOrderPref) {
                 val parsed = actionOrderPref
                     .split(',')
@@ -564,6 +604,8 @@ fun AdvancedSettingsScreen(
             var dragStartRect by remember { mutableStateOf<Rect?>(null) }
             var lastDragPosition by remember { mutableStateOf<Offset?>(null) }
             val dragAnimatable = remember { Animatable(Offset.Zero, Offset.VectorConverter) }
+            var dragDesiredTopLeft by remember { mutableStateOf<Offset?>(null) }
+            var isReturningToStart by remember { mutableStateOf(false) }
             var previewOrigin by remember { mutableStateOf(Offset.Zero) }
             val coroutineScope = rememberCoroutineScope()
 
@@ -573,222 +615,441 @@ fun AdvancedSettingsScreen(
                 val toIndex = workingOrder.indexOf(target)
                 if (fromIndex == -1 || toIndex == -1) return
                 val removed = workingOrder.removeAt(fromIndex)
-                val insertionIndex = toIndex.coerceIn(0, workingOrder.size)
-                workingOrder.add(insertionIndex, removed)
+                val updatedTargetIndex = workingOrder.indexOf(target).takeIf { it >= 0 } ?: run {
+                    workingOrder.add(fromIndex.coerceIn(0, workingOrder.size), removed)
+                    return
+                }
+
+                val insertionIndex = if (fromIndex < toIndex) {
+                    // Moving "forward": place after the target.
+                    updatedTargetIndex + 1
+                } else {
+                    // Moving "backward": place before the target.
+                    updatedTargetIndex
+                }
+
+                workingOrder.add(insertionIndex.coerceIn(0, workingOrder.size), removed)
             }
 
-            Surface(
-                shape = RoundedCornerShape(20.dp),
-                color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+            LaunchedEffect(Unit) {
+                snapshotFlow { dragDesiredTopLeft }
+                    .filterNotNull()
+                    .collectLatest { desired ->
+                        if (draggingKey == null || isReturningToStart) return@collectLatest
+                        dragAnimatable.snapTo(desired)
+                    }
+            }
+
+            ExpressiveSettingsCard(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { actionsExpanded = !actionsExpanded }
-                            .padding(horizontal = 8.dp, vertical = 6.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier.weight(1f),
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.patch_selection_action_order_title),
-                                style = MaterialTheme.typography.titleMedium
-                            )
-                            Text(
-                                text = stringResource(R.string.patch_selection_action_order_description),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.patch_selection_action_order_title),
+                    supportingContent = stringResource(R.string.patch_selection_action_order_description),
+                    trailingContent = {
                         Icon(
                             imageVector = if (actionsExpanded) Icons.Outlined.KeyboardArrowUp else Icons.Outlined.KeyboardArrowDown,
                             contentDescription = null
                         )
-                    }
+                    },
+                    onClick = { actionsExpanded = !actionsExpanded }
+                )
 
-                    if (actionsExpanded) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .onGloballyPositioned { previewOrigin = it.positionInRoot() },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            fun findSlot(position: Offset): PatchSelectionActionKey? {
-                                val rows = workingOrder.chunked(2)
-                                val rowRects = rows.map { row ->
-                                    row.mapNotNull { key -> boundsMap[key]?.let { key to it } }
-                                }
-                                var bestRowIndex = -1
-                                var bestRowDistance = Float.MAX_VALUE
-                                rowRects.forEachIndexed { index, rects ->
-                                    if (rects.isEmpty()) return@forEachIndexed
-                                    val minTop = rects.minOf { it.second.top }
-                                    val maxBottom = rects.maxOf { it.second.bottom }
-                                    val distance = when {
-                                        position.y < minTop -> minTop - position.y
-                                        position.y > maxBottom -> position.y - maxBottom
-                                        else -> 0f
-                                    }
-                                    if (distance < bestRowDistance) {
-                                        bestRowDistance = distance
-                                        bestRowIndex = index
-                                    }
-                                }
-                                if (bestRowIndex == -1) return null
-                                val rects = rowRects[bestRowIndex]
-                                if (rects.isEmpty()) return null
-                                if (rects.size == 1) return rects.first().first
-                                val sortedRects = rects.sortedBy { it.second.left }
-                                val splitX = (sortedRects[0].second.center.x + sortedRects[1].second.center.x) / 2f
-                                return if (position.x <= splitX) sortedRects[0].first else sortedRects[1].first
+                if (actionsExpanded) {
+                    ExpressiveSettingsDivider()
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .onGloballyPositioned { previewOrigin = it.positionInRoot() },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        val firstRowState = rememberLazyListState()
+                        val secondRowState = rememberLazyListState()
+                        var popupBounds by remember { mutableStateOf<Rect?>(null) }
+
+                        fun findSlot(
+                            position: Offset,
+                            excludeKey: PatchSelectionActionKey? = null
+                        ): PatchSelectionActionKey? {
+                            val rects = workingOrder.mapNotNull { key ->
+                                if (key == excludeKey) return@mapNotNull null
+                                boundsMap[key]?.let { rect -> key to rect }
                             }
-                            PatchSelectionActionPreview(
-                                order = workingOrder,
-                                centerContent = true,
-                                reorderable = true,
-                                draggingKey = draggingKey,
-                                highlightKey = hoverTarget,
-                                onBoundsChanged = { key, rect -> boundsMap[key] = rect },
-                                onDragStart = { key, pointerOffset, rect ->
-                                    draggingKey = key
-                                    hoverTarget = null
-                                    dragPointerOffset = pointerOffset
-                                    dragStartRect = rect
-                                    lastDragPosition = rect.center
-                                    coroutineScope.launch {
-                                        dragAnimatable.snapTo(rect.topLeft)
-                                    }
-                                },
-                                onDrag = { key, position ->
-                                    val pointerOffset = dragPointerOffset ?: return@PatchSelectionActionPreview
-                                    lastDragPosition = position
-                                    coroutineScope.launch {
-                                        dragAnimatable.snapTo(position - pointerOffset)
-                                    }
-                                    hoverTarget = findSlot(position).takeIf { it != key }
-                                },
-                                onDragEnd = {
-                                    val currentKey = draggingKey
-                                    val startRect = dragStartRect
-                                    val pointerOffset = dragPointerOffset
-                                    val target = lastDragPosition?.let { findSlot(it) }?.takeIf { it != currentKey }
-                                    if (currentKey == null || startRect == null || pointerOffset == null) {
-                                        draggingKey = null
-                                        hoverTarget = null
-                                        dragPointerOffset = null
-                                        dragStartRect = null
-                                        lastDragPosition = null
-                                        return@PatchSelectionActionPreview
-                                    }
-                                    if (target != null) {
-                                        moveAction(currentKey, target)
-                                        draggingKey = null
-                                        hoverTarget = null
-                                        dragPointerOffset = null
-                                        dragStartRect = null
-                                        lastDragPosition = null
-                                        viewModel.setPatchSelectionActionOrder(workingOrder.toList())
-                                    } else {
-                                        coroutineScope.launch {
-                                            dragAnimatable.animateTo(
-                                                startRect.topLeft,
-                                                tween(durationMillis = 220)
-                                            )
-                                            draggingKey = null
-                                            hoverTarget = null
-                                            dragPointerOffset = null
-                                            dragStartRect = null
-                                            lastDragPosition = null
-                                        }
-                                    }
+                            if (rects.isEmpty()) return null
+
+                            rects.firstOrNull { (_, rect) ->
+                                position.x >= rect.left &&
+                                        position.x <= rect.right &&
+                                        position.y >= rect.top &&
+                                        position.y <= rect.bottom
+                            }?.let { (key, _) -> return key }
+
+                            fun distanceSqToRect(rect: Rect): Float {
+                                val dx = when {
+                                    position.x < rect.left -> rect.left - position.x
+                                    position.x > rect.right -> position.x - rect.right
+                                    else -> 0f
                                 }
-                            )
-                            val activeKey = draggingKey
+                                val dy = when {
+                                    position.y < rect.top -> rect.top - position.y
+                                    position.y > rect.bottom -> position.y - rect.bottom
+                                    else -> 0f
+                                }
+                                return dx * dx + dy * dy
+                            }
+
+                            return rects.minBy { (_, rect) -> distanceSqToRect(rect) }.first
+                        }
+
+                        val density = LocalDensity.current
+                        val edgeThresholdPx = remember(density) { with(density) { 28.dp.toPx() } }
+                        val maxScrollPx = remember(density) { with(density) { 16.dp.toPx() } }
+
+                        fun finishDrag(releasePosition: Offset? = null) {
+                            val currentKey = draggingKey
+                            val startRect = dragStartRect
                             val pointerOffset = dragPointerOffset
-                            if (activeKey != null && pointerOffset != null) {
-                                val overlayOffset = dragAnimatable.value - previewOrigin
-                                SelectionActionPreviewButton(
-                                    icon = previewIconForAction(activeKey),
-                                    label = stringResource(activeKey.labelRes),
-                                    width = 132.dp,
-                                    floating = true,
-                                    reorderable = false,
-                                    modifier = Modifier
-                                        .align(Alignment.TopStart)
-                                        .offset {
-                                            IntOffset(
-                                                overlayOffset.x.roundToInt(),
-                                                overlayOffset.y.roundToInt()
-                                            )
-                                        }
-                                )
+                            val target = releasePosition?.let { findSlot(it, excludeKey = currentKey) }?.takeIf { it != currentKey }
+                                ?: hoverTarget?.takeIf { it != currentKey }
+                                ?: lastDragPosition?.let { findSlot(it, excludeKey = currentKey) }?.takeIf { it != currentKey }
+                            if (currentKey == null || startRect == null || pointerOffset == null) {
+                                draggingKey = null
+                                hoverTarget = null
+                                dragDesiredTopLeft = null
+                                isReturningToStart = false
+                                dragPointerOffset = null
+                                dragStartRect = null
+                                lastDragPosition = null
+                                return
+                            }
+                            if (target != null) {
+                                moveAction(currentKey, target)
+                                draggingKey = null
+                                hoverTarget = null
+                                dragDesiredTopLeft = null
+                                isReturningToStart = false
+                                dragPointerOffset = null
+                                dragStartRect = null
+                                lastDragPosition = null
+                                viewModel.setPatchSelectionActionOrder(workingOrder.toList())
+                            } else {
+                                isReturningToStart = true
+                                dragDesiredTopLeft = null
+                                coroutineScope.launch {
+                                    dragAnimatable.animateTo(
+                                        startRect.topLeft,
+                                        tween(durationMillis = 220)
+                                    )
+                                    draggingKey = null
+                                    hoverTarget = null
+                                    dragPointerOffset = null
+                                    dragStartRect = null
+                                    lastDragPosition = null
+                                    isReturningToStart = false
+                                }
                             }
                         }
-                        TextButton(
-                            onClick = {
-                                workingOrder.clear()
-                                workingOrder.addAll(PatchSelectionActionKey.DefaultOrder)
-                                viewModel.setPatchSelectionActionOrder(PatchSelectionActionKey.DefaultOrder)
-                            },
-                            modifier = Modifier.align(Alignment.End)
+
+                        LaunchedEffect(draggingKey) {
+                            while (true) {
+                                val activeKey = draggingKey ?: break
+                                val pos = lastDragPosition
+                                val bounds = popupBounds
+
+                                val dx = if (pos != null && bounds != null && pos.y >= bounds.top && pos.y <= bounds.bottom) {
+                                    when {
+                                        pos.x < bounds.left + edgeThresholdPx -> {
+                                            val t = ((pos.x - bounds.left) / edgeThresholdPx).coerceIn(0f, 1f)
+                                            -maxScrollPx * (1f - t)
+                                        }
+                                        pos.x > bounds.right - edgeThresholdPx -> {
+                                            val t = ((bounds.right - pos.x) / edgeThresholdPx).coerceIn(0f, 1f)
+                                            maxScrollPx * (1f - t)
+                                        }
+                                        else -> 0f
+                                    }
+                                } else {
+                                    0f
+                                }
+
+                                if (dx != 0f) {
+                                    firstRowState.scrollBy(dx)
+                                    secondRowState.scrollBy(dx)
+                                    if (pos != null) {
+                                        hoverTarget = findSlot(pos, excludeKey = activeKey).takeIf { it != activeKey }
+                                    }
+                                }
+
+                                kotlinx.coroutines.delay(16)
+                            }
+                        }
+
+                        val dragGestureModifier = Modifier.pointerInput(actionsExpanded, workingOrder.size) {
+                            if (!actionsExpanded) return@pointerInput
+                            awaitEachGesture {
+                                if (draggingKey != null) return@awaitEachGesture
+
+                                val down = awaitFirstDown(requireUnconsumed = false)
+                                val globalDown = previewOrigin + down.position
+                                val key = boundsMap.entries.firstOrNull { (_, rect) ->
+                                    globalDown.x >= rect.left &&
+                                            globalDown.x <= rect.right &&
+                                            globalDown.y >= rect.top &&
+                                            globalDown.y <= rect.bottom
+                                }?.key ?: return@awaitEachGesture
+
+                                val rect = boundsMap[key] ?: return@awaitEachGesture
+                                val pointerOffset = globalDown - rect.topLeft
+
+                                awaitLongPressOrCancellation(down.id) ?: return@awaitEachGesture
+
+                                draggingKey = key
+                                hoverTarget = null
+                                isReturningToStart = false
+                                dragPointerOffset = pointerOffset
+                                dragStartRect = rect
+                                lastDragPosition = globalDown
+                                dragDesiredTopLeft = rect.topLeft
+
+                                var didFinish = false
+                                while (true) {
+                                    val event = awaitPointerEvent(PointerEventPass.Main)
+                                    val change = event.changes.firstOrNull { it.id == down.id } ?: break
+
+                                    if (!change.pressed) {
+                                        val upPosition = previewOrigin + change.position
+                                        lastDragPosition = upPosition
+                                        finishDrag(releasePosition = upPosition)
+                                        didFinish = true
+                                        break
+                                    }
+
+                                    val global = previewOrigin + change.position
+                                    lastDragPosition = global
+                                    dragDesiredTopLeft = global - pointerOffset
+                                    hoverTarget = findSlot(global, excludeKey = key).takeIf { it != key }
+                                    change.consume()
+                                }
+
+                                if (!didFinish && draggingKey == key) {
+                                    finishDrag()
+                                }
+                            }
+                        }
+                        PatchSelectionActionPreview(
+                            order = workingOrder,
+                            hiddenActions = hiddenActionsPref,
+                            modifier = dragGestureModifier,
+                            centerContent = true,
+                            draggingKey = draggingKey,
+                            highlightKey = hoverTarget,
+                            firstRowState = firstRowState,
+                            secondRowState = secondRowState,
+                            userScrollEnabled = draggingKey == null,
+                            onPopupBoundsChanged = { popupBounds = it },
+                            onBoundsChanged = { key, rect -> boundsMap[key] = rect },
+                            onBoundsDisposed = { key -> boundsMap.remove(key) },
+                        )
+                        val activeKey = draggingKey
+                        val pointerOffset = dragPointerOffset
+                        if (activeKey != null && pointerOffset != null) {
+                            val overlayOffset = dragAnimatable.value - previewOrigin
+                            val bounds = popupBounds
+                            val startRect = dragStartRect
+                            val constrainedOffset = if (bounds != null && startRect != null) {
+                                val minX = bounds.left - previewOrigin.x
+                                val maxX = (bounds.right - previewOrigin.x - startRect.width).coerceAtLeast(minX)
+                                val minY = bounds.top - previewOrigin.y
+                                val maxY = (bounds.bottom - previewOrigin.y - startRect.height).coerceAtLeast(minY)
+                                Offset(
+                                    x = overlayOffset.x.coerceIn(minX, maxX),
+                                    y = overlayOffset.y.coerceIn(minY, maxY)
+                                )
+                            } else {
+                                overlayOffset
+                            }
+                            SelectionActionPreviewChip(
+                                icon = previewIconForAction(activeKey),
+                                label = stringResource(activeKey.labelRes),
+                                hidden = activeKey.storageId in hiddenActionsPref,
+                                floating = true,
+                                modifier = Modifier
+                                    .align(Alignment.TopStart)
+                                    .offset {
+                                        IntOffset(
+                                            constrainedOffset.x.roundToInt(),
+                                            constrainedOffset.y.roundToInt()
+                                        )
+                                    }
+                            )
+                        }
+
+                    }
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.patch_selection_action_visibility_title),
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                        Text(
+                            text = stringResource(R.string.patch_selection_action_visibility_description),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            PatchSelectionActionKey.values()
+                                .toList()
+                                .chunked(2)
+                                .forEach { keys ->
+                                    if (keys.size == 1) {
+                                        val key = keys.first()
+                                        val visible = key.storageId !in hiddenActionsPref
+                                        val setVisible: (Boolean) -> Unit = { isVisible ->
+                                            val updated = hiddenActionsPref.toMutableSet()
+                                            if (isVisible) updated.remove(key.storageId) else updated.add(key.storageId)
+                                            viewModel.setPatchSelectionHiddenActions(updated)
+                                        }
+
+                                        Box(modifier = Modifier.fillMaxWidth()) {
+                                            Row(
+                                                modifier = Modifier
+                                                    .align(Alignment.Center)
+                                                    .fillMaxWidth(0.5f)
+                                                    .clip(RoundedCornerShape(12.dp))
+                                                    .clickable { setVisible(!visible) }
+                                                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                Text(
+                                                    text = stringResource(key.labelRes),
+                                                    modifier = Modifier.weight(1f),
+                                                    style = MaterialTheme.typography.bodyMedium,
+                                                    maxLines = 1
+                                                )
+                                                ExpressiveSettingsSwitch(
+                                                    checked = visible,
+                                                    onCheckedChange = setVisible
+                                                )
+                                            }
+                                        }
+                                    } else {
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                        ) {
+                                            keys.forEach { key ->
+                                                val visible = key.storageId !in hiddenActionsPref
+                                                val setVisible: (Boolean) -> Unit = { isVisible ->
+                                                    val updated = hiddenActionsPref.toMutableSet()
+                                                    if (isVisible) updated.remove(key.storageId) else updated.add(key.storageId)
+                                                    viewModel.setPatchSelectionHiddenActions(updated)
+                                                }
+
+                                                Row(
+                                                    modifier = Modifier
+                                                        .weight(1f)
+                                                        .clip(RoundedCornerShape(12.dp))
+                                                        .clickable { setVisible(!visible) }
+                                                        .padding(horizontal = 10.dp, vertical = 6.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Text(
+                                                        text = stringResource(key.labelRes),
+                                                        modifier = Modifier.weight(1f),
+                                                        style = MaterialTheme.typography.bodyMedium,
+                                                        maxLines = 1
+                                                    )
+                                                    ExpressiveSettingsSwitch(
+                                                        checked = visible,
+                                                        onCheckedChange = setVisible
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(stringResource(R.string.patch_selection_action_order_reset))
+                            TextButton(
+                                onClick = { viewModel.setPatchSelectionHiddenActions(emptySet()) }
+                            ) {
+                                Text(stringResource(R.string.patch_selection_action_visibility_reset))
+                            }
+                            TextButton(
+                                onClick = {
+                                    workingOrder.clear()
+                                    workingOrder.addAll(PatchSelectionActionKey.DefaultOrder)
+                                    viewModel.setPatchSelectionActionOrder(PatchSelectionActionKey.DefaultOrder)
+                                }
+                            ) {
+                                Text(stringResource(R.string.patch_selection_action_order_reset))
+                            }
                         }
                     }
                 }
             }
 
             GroupHeader(stringResource(R.string.app_exporting))
-            SettingsListItem(
-                headlineContent = stringResource(R.string.export_name_format),
-                supportingContentSlot = {
-                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(
-                            text = stringResource(R.string.export_name_format_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
-                        ) {
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.export_name_format),
+                    supportingContentSlot = {
+                        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(
-                                text = stringResource(R.string.export_name_format_current, exportFormat),
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                                style = MaterialTheme.typography.labelMedium.copy(fontFamily = FontFamily.Monospace),
-                                color = MaterialTheme.colorScheme.onSurface
+                                text = stringResource(R.string.export_name_format_description),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.export_name_format_current, exportFormat),
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                    style = MaterialTheme.typography.labelMedium.copy(fontFamily = FontFamily.Monospace),
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
                         }
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { showExportFormatDialog = true }
-            )
+                    },
+                    onClick = { showExportFormatDialog = true }
+                )
+            }
 
             GroupHeader(stringResource(R.string.debugging))
             val exportDebugLogsLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) {
                     it?.let(viewModel::exportDebugLogs)
                 }
-            SettingsListItem(
-                headlineContent = stringResource(R.string.debug_logs_export),
-                modifier = Modifier.clickable { exportDebugLogsLauncher.launch(viewModel.debugLogFileName) }
-            )
-            val clipboard = remember { context.getSystemService<ClipboardManager>()!! }
-            val deviceContent = """
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.debug_logs_export),
+                    onClick = { exportDebugLogsLauncher.launch(viewModel.debugLogFileName) }
+                )
+                ExpressiveSettingsDivider()
+                val clipboard = remember { context.getSystemService<ClipboardManager>()!! }
+                val deviceContent = """
                     Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})
                     Build type: ${BuildConfig.BUILD_TYPE}
                     Model: ${Build.MODEL}
@@ -796,21 +1057,22 @@ fun AdvancedSettingsScreen(
                     Supported Archs: ${Build.SUPPORTED_ABIS.joinToString(", ")}
                     Memory limit: $memoryLimit
                 """.trimIndent()
-            SettingsListItem(
-                modifier = Modifier.combinedClickable(
-                    onClick = { },
-                    onLongClickLabel = stringResource(R.string.copy_to_clipboard),
-                    onLongClick = {
-                        clipboard.setPrimaryClip(
-                            ClipData.newPlainText("Device Information", deviceContent)
-                        )
+                ExpressiveSettingsItem(
+                    modifier = Modifier.combinedClickable(
+                        onClick = { },
+                        onLongClickLabel = stringResource(R.string.copy_to_clipboard),
+                        onLongClick = {
+                            clipboard.setPrimaryClip(
+                                ClipData.newPlainText("Device Information", deviceContent)
+                            )
 
-                        context.toast(context.getString(R.string.toast_copied_to_clipboard))
-                    }.withHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                ),
-                headlineContent = stringResource(R.string.about_device),
-                supportingContent = deviceContent
-            )
+                            context.toast(context.getString(R.string.toast_copied_to_clipboard))
+                        }.withHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    ),
+                    headlineContent = stringResource(R.string.about_device),
+                    supportingContent = deviceContent
+                )
+            }
         }
     }
 }
@@ -820,130 +1082,163 @@ private enum class InstallerDialogTarget {
     Fallback
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PatchSelectionActionPreview(
     order: List<PatchSelectionActionKey>,
+    hiddenActions: Set<String> = emptySet(),
     modifier: Modifier = Modifier,
     centerContent: Boolean = false,
-    reorderable: Boolean = false,
     draggingKey: PatchSelectionActionKey? = null,
     highlightKey: PatchSelectionActionKey? = null,
-    onBoundsChanged: ((PatchSelectionActionKey, Rect) -> Unit)? = null,
-    onDragStart: ((PatchSelectionActionKey, Offset, Rect) -> Unit)? = null,
-    onDrag: ((PatchSelectionActionKey, Offset) -> Unit)? = null,
-    onDragEnd: (() -> Unit)? = null
+    firstRowState: LazyListState = rememberLazyListState(),
+    secondRowState: LazyListState = rememberLazyListState(),
+    userScrollEnabled: Boolean = true,
+    onPopupBoundsChanged: ((Rect) -> Unit)? = null,
+    onBoundsDisposed: ((PatchSelectionActionKey) -> Unit)? = null,
+    onBoundsChanged: ((PatchSelectionActionKey, Rect) -> Unit)? = null
 ) {
-    val buttonWidth = 132.dp
-    val rowArrangement = if (centerContent) {
-        Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally)
-    } else {
-        Arrangement.spacedBy(6.dp)
-    }
-    var hideButtonPlaced = false
-    val chunks = order.chunked(2)
+    val splitIndex = (order.size + 1) / 2
+    val firstRow = remember(order) { order.take(splitIndex) }
+    val secondRow = remember(order) { order.drop(splitIndex) }
+    val density = LocalDensity.current
+    val glowRadiusPx = remember(density) { with(density) { 220.dp.toPx() } }
+
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        chunks.forEachIndexed { index, row ->
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = rowArrangement
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = if (centerContent) Alignment.Center else Alignment.CenterEnd
+        ) {
+            Surface(
+                shape = RoundedCornerShape(18.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.55f),
+                tonalElevation = 0.dp,
+                shadowElevation = 6.dp,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.14f)),
+                modifier = Modifier
+                    .widthIn(max = 520.dp)
+                    .onGloballyPositioned { coords ->
+                        onPopupBoundsChanged?.invoke(coords.boundsInRoot())
+                    }
             ) {
-                row.forEach { key ->
-                    SelectionActionPreviewButton(
-                        icon = previewIconForAction(key),
-                        label = stringResource(key.labelRes),
-                        width = buttonWidth,
-                        dragging = draggingKey == key,
-                        highlighted = highlightKey == key,
-                        ghost = draggingKey == key,
-                        reorderable = reorderable,
-                        onBoundsChanged = { rect -> onBoundsChanged?.invoke(key, rect) },
-                        onDragStart = { pointerOffset, rect ->
-                            onDragStart?.invoke(key, pointerOffset, rect)
-                        },
-                        onDrag = { position -> onDrag?.invoke(key, position) },
-                        onDragEnd = { onDragEnd?.invoke() }
+                Box {
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .blur(26.dp)
+                            .background(
+                                Brush.radialGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                        Color.Transparent
+                                    ),
+                                    radius = glowRadiusPx
+                                )
+                            )
                     )
-                }
-                repeat(2 - row.size) { fillerIndex ->
-                    if (!hideButtonPlaced && index == chunks.lastIndex && row.size == 1 && fillerIndex == 0) {
-                        SelectionActionPreviewButton(
-                            icon = Icons.Outlined.UnfoldLess,
-                            label = stringResource(R.string.patch_selection_toggle_collapse),
-                            width = buttonWidth,
-                            reorderable = false
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.16f))
+                    )
+
+                    Column(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        SelectionActionPreviewRow(
+                            keys = firstRow,
+                            hiddenActions = hiddenActions,
+                            draggingKey = draggingKey,
+                            highlightKey = highlightKey,
+                            state = firstRowState,
+                            userScrollEnabled = userScrollEnabled,
+                            onBoundsDisposed = onBoundsDisposed,
+                            onBoundsChanged = onBoundsChanged
                         )
-                        hideButtonPlaced = true
-                    } else {
-                        Spacer(modifier = Modifier.width(buttonWidth))
+                        if (secondRow.isNotEmpty()) {
+                            SelectionActionPreviewRow(
+                                keys = secondRow,
+                                hiddenActions = hiddenActions,
+                                draggingKey = draggingKey,
+                                highlightKey = highlightKey,
+                                state = secondRowState,
+                                userScrollEnabled = userScrollEnabled,
+                                onBoundsDisposed = onBoundsDisposed,
+                                onBoundsChanged = onBoundsChanged
+                            )
+                        }
                     }
                 }
-            }
-        }
-
-        if (!hideButtonPlaced) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = rowArrangement
-            ) {
-                Spacer(modifier = Modifier.width(buttonWidth))
-                SelectionActionPreviewButton(
-                    icon = Icons.Outlined.UnfoldLess,
-                    label = stringResource(R.string.patch_selection_toggle_collapse),
-                    width = buttonWidth,
-                    reorderable = false
-                )
             }
         }
     }
 }
 
 @Composable
-private fun SelectionActionPreviewButton(
+private fun SelectionActionPreviewRow(
+    keys: List<PatchSelectionActionKey>,
+    hiddenActions: Set<String>,
+    draggingKey: PatchSelectionActionKey?,
+    highlightKey: PatchSelectionActionKey?,
+    state: LazyListState,
+    userScrollEnabled: Boolean,
+    onBoundsDisposed: ((PatchSelectionActionKey) -> Unit)?,
+    onBoundsChanged: ((PatchSelectionActionKey, Rect) -> Unit)?
+) {
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        state = state,
+        userScrollEnabled = userScrollEnabled,
+        horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.End)
+    ) {
+        items(
+            items = keys,
+            key = { key -> key.storageId }
+        ) { key ->
+            DisposableEffect(key) {
+                onDispose { onBoundsDisposed?.invoke(key) }
+            }
+            SelectionActionPreviewChip(
+                icon = previewIconForAction(key),
+                label = stringResource(key.labelRes),
+                hidden = key.storageId in hiddenActions,
+                dragging = draggingKey == key,
+                highlighted = highlightKey == key,
+                ghost = draggingKey == key,
+                onBoundsChanged = { rect -> onBoundsChanged?.invoke(key, rect) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun SelectionActionPreviewChip(
     icon: ImageVector,
     label: String,
-    width: Dp,
+    hidden: Boolean = false,
     modifier: Modifier = Modifier,
     dragging: Boolean = false,
     highlighted: Boolean = false,
     ghost: Boolean = false,
     floating: Boolean = false,
-    reorderable: Boolean = false,
-    onBoundsChanged: ((Rect) -> Unit)? = null,
-    onDragStart: ((Offset, Rect) -> Unit)? = null,
-    onDrag: ((Offset) -> Unit)? = null,
-    onDragEnd: (() -> Unit)? = null
+    onBoundsChanged: ((Rect) -> Unit)? = null
 ) {
     var layoutCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
-    val dragModifier = if (reorderable && onDrag != null) {
-        Modifier.pointerInput(label) {
-            detectDragGesturesAfterLongPress(
-                onDragStart = { startOffset ->
-                    val rect = layoutCoordinates?.boundsInRoot()
-                    if (rect != null) {
-                        onDragStart?.invoke(startOffset, rect)
-                    }
-                },
-                onDrag = { change, _ ->
-                    val coords = layoutCoordinates ?: return@detectDragGesturesAfterLongPress
-                    val global = coords.positionInRoot() + change.position
-                    change.consume()
-                    onDrag(global)
-                },
-                onDragEnd = { onDragEnd?.invoke() },
-                onDragCancel = { onDragEnd?.invoke() }
-            )
-        }
-    } else {
-        Modifier
-    }
 
-    Column(
+    Surface(
+        shape = RoundedCornerShape(999.dp),
+        color = MaterialTheme.colorScheme.tertiaryContainer,
+        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+        tonalElevation = if (dragging) 8.dp else 4.dp,
+        shadowElevation = if (dragging) 4.dp else 1.dp,
+        border = if (highlighted && !floating) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null,
         modifier = modifier
-            .width(width)
             .onGloballyPositioned { coords ->
                 layoutCoordinates = coords
                 onBoundsChanged?.invoke(coords.boundsInRoot())
@@ -951,47 +1246,36 @@ private fun SelectionActionPreviewButton(
             .graphicsLayer {
                 when {
                     floating -> {
-                        alpha = 0.85f
-                        scaleX = 1.05f
-                        scaleY = 1.05f
+                        alpha = 0.9f
+                        scaleX = 1.03f
+                        scaleY = 1.03f
                         shadowElevation = 24f
                     }
-                    ghost -> alpha = 0.1f
+                    ghost -> alpha = 0.12f
+                    hidden -> alpha = 0.55f
                 }
             }
-            .then(dragModifier),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        Surface(
-            color = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-            tonalElevation = if (dragging) 8.dp else 6.dp,
-            shadowElevation = if (dragging) 4.dp else 2.dp,
-            shape = RoundedCornerShape(18.dp),
-            modifier = Modifier.size(52.dp)
+        Row(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp))
-            }
-        }
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp).copy(alpha = 0.85f),
-            shape = RoundedCornerShape(999.dp),
-            tonalElevation = if (dragging) 2.dp else 1.dp,
-            border = if (highlighted && !floating) BorderStroke(1.dp, MaterialTheme.colorScheme.primary) else null,
-            modifier = Modifier.fillMaxWidth()
-        ) {
+            Icon(icon, contentDescription = null, modifier = Modifier.size(16.dp))
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 2.dp),
                 maxLines = 1
             )
+            if (hidden) {
+                Spacer(modifier = Modifier.width(2.dp))
+                Icon(
+                    imageVector = Icons.Outlined.VisibilityOff,
+                    contentDescription = null,
+                    modifier = Modifier.size(14.dp),
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                )
+            }
         }
     }
 }
@@ -1037,7 +1321,7 @@ private fun ExportNameFormatDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(R.string.cancel))
             }
         },
         title = { Text(stringResource(R.string.export_name_format_dialog_title)) },
@@ -1674,7 +1958,7 @@ private fun InstallerSelectionDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(R.string.cancel))
             }
         },
         title = { Text(title) },
@@ -1819,90 +2103,6 @@ private fun InstallerIcon(
     }
 }
 
-@Composable
-private fun PatchesBundleJsonUrlDialog(
-    currentUrl: String,
-    defaultUrl: String,
-    onDismiss: () -> Unit,
-    onSave: (url: String) -> Unit
-) {
-    var url by rememberSaveable(currentUrl) { mutableStateOf(currentUrl) }
-    var showError by rememberSaveable { mutableStateOf(false) }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    val trimmedUrl = url.trim()
-                    if (trimmedUrl.isBlank() || !trimmedUrl.startsWith("http")) {
-                        showError = true
-                    } else {
-                        onSave(trimmedUrl)
-                    }
-                },
-                enabled = url.trim().isNotBlank()
-            ) {
-                Text(stringResource(R.string.patches_bundle_json_dialog_save))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(android.R.string.cancel))
-            }
-        },
-        icon = { Icon(Icons.Outlined.Api, contentDescription = null) },
-        title = { Text(stringResource(R.string.patches_bundle_json_url_dialog_title)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = stringResource(R.string.patches_bundle_json_url_dialog_description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                OutlinedTextField(
-                    value = url,
-                    onValueChange = {
-                        url = it
-                        if (showError) showError = false
-                    },
-                    label = { Text(stringResource(R.string.patches_bundle_json_url_label)) },
-                    supportingText = {
-                        if (showError) {
-                            Text(
-                                stringResource(R.string.patches_bundle_json_url_error),
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        } else {
-                            Text("e.g. https://.../bundle.json")
-                        }
-                    },
-                    isError = showError,
-                    singleLine = false,
-                    maxLines = 6,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    TextButton(
-                        onClick = {
-                            url = defaultUrl
-                            showError = false
-                        }
-                    ) {
-                        Icon(Icons.Outlined.Restore, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text(stringResource(R.string.patches_bundle_json_dialog_reset), modifier = Modifier.padding(start = 4.dp))
-                    }
-                }
-            }
-        }
-    )
-}
-
 private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
     a === b -> true
     a == null || b == null -> false
@@ -1928,7 +2128,7 @@ private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (Stri
         },
         dismissButton = {
             TextButton(onClick = { onSubmit(null) }) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(R.string.cancel))
             }
         },
         icon = {
@@ -2014,7 +2214,7 @@ private fun GitHubPatDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(R.string.cancel))
             }
         },
         icon = { Icon(Icons.Outlined.VpnKey, null) },
@@ -2104,7 +2304,7 @@ private fun GitHubPatDialog(
             },
             dismissButton = {
                 TextButton(onClick = { showIncludeWarning = false }) {
-                    Text(stringResource(android.R.string.cancel))
+                    Text(stringResource(R.string.cancel))
                 }
             },
             icon = { Icon(Icons.Outlined.Warning, null) },

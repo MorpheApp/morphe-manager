@@ -59,3 +59,9 @@ val MIGRATION_5_6 = object : Migration(5, 6) {
         db.execSQL("UPDATE patch_bundles SET updated_at = ? WHERE updated_at IS NULL", arrayOf(now))
     }
 }
+
+val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE patch_bundles ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1")
+    }
+}

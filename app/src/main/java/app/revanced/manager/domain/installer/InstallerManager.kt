@@ -6,6 +6,7 @@ import android.content.ClipData
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
@@ -21,6 +22,7 @@ import app.morphe.manager.R
 import java.io.File
 import java.io.IOException
 import java.util.LinkedHashMap
+import java.util.Locale
 import java.util.UUID
 
 class InstallerManager(
@@ -35,13 +37,19 @@ class InstallerManager(
     private val dummyUri: Uri = InstallerFileProvider.buildUri(app, "dummy.apk")
     private val defaultInstallerComponent: ComponentName? by lazy { resolveDefaultInstallerComponent() }
     private val defaultInstallerPackage: String? get() = defaultInstallerComponent?.packageName
+    private val hiddenInstallerPackages: Set<String>
+        get() = prefs.installerHiddenComponents.getBlocking()
+            .mapNotNull(ComponentName::unflattenFromString)
+            .map { it.packageName }
+            .toSet()
 
     fun listEntries(target: InstallTarget, includeNone: Boolean): List<Entry> {
+        val hiddenPackages = hiddenInstallerPackages
         val entries = mutableListOf<Entry>()
 
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.AutoSaved, target, checkRoot = true)?.let(entries::add)
+        entryFor(Token.Shizuku, target, checkRoot = true)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -49,6 +57,7 @@ class InstallerManager(
             .mapNotNull { info ->
                 val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
                 if (isDefaultComponent(component)) return@mapNotNull null
+                if (component.packageName in hiddenPackages) return@mapNotNull null
                 if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager)?.toString() ?: info.activityInfo.packageName)) {
                     return@mapNotNull null
                 }
@@ -61,6 +70,10 @@ class InstallerManager(
         val customEntries = readCustomInstallerTokens()
             .mapNotNull { token ->
                 entryFor(token, target, checkRoot = false)
+            }
+            .filterNot { entry ->
+                val componentToken = entry.token as? Token.Component ?: return@filterNot false
+                componentToken.componentName.packageName in hiddenPackages
             }
             .filterNot { customEntry ->
                 entries.any { tokensEqual(it.token, customEntry.token) }
@@ -164,7 +177,7 @@ class InstallerManager(
             val applicationInfo = info.applicationInfo
             val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
             val matches = packageName.contains(lower, ignoreCase = true) ||
-                    label.contains(lower, ignoreCase = true)
+                label.contains(lower, ignoreCase = true)
             if (!matches) return@forEach
 
             val activities = info.activities?.asSequence() ?: emptySequence()
@@ -318,9 +331,9 @@ class InstallerManager(
                         setDataAndType(uri, APK_MIME)
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                    Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                                    Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
-                                    Intent.FLAG_ACTIVITY_NEW_TASK
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
+                                Intent.FLAG_ACTIVITY_NEW_TASK
                         )
                         clipData = ClipData.newRawUri("APK", uri)
                         putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
@@ -331,8 +344,8 @@ class InstallerManager(
                         token.componentName.packageName,
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
                     )
                     InstallPlan.External(
                         target = target,
@@ -493,14 +506,32 @@ class InstallerManager(
         )
 
     private fun resolveDefaultInstallerComponent(): ComponentName? {
-        val resolveInfo = packageManager.resolveActivity(
-            Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(dummyUri, APK_MIME)
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            },
-            PackageManager.MATCH_DEFAULT_ONLY
-        ) ?: return null
-        val activityInfo = resolveInfo.activityInfo ?: return null
+        fun isSystemApp(packageName: String): Boolean {
+            val info = runCatching { packageManager.getApplicationInfo(packageName, 0) }.getOrNull()
+                ?: return false
+            val flags = ApplicationInfo.FLAG_SYSTEM or ApplicationInfo.FLAG_UPDATED_SYSTEM_APP
+            return info.flags and flags != 0
+        }
+
+        val candidates = queryInstallerActivities()
+            .filter(::isInstallerCandidate)
+            .filter { isSystemApp(it.activityInfo.packageName) }
+
+        if (candidates.isEmpty()) return null
+
+        val preferredPackages = listOf(
+            "com.google.android.packageinstaller",
+            "com.android.packageinstaller"
+        )
+
+        val chosen = preferredPackages.firstNotNullOfOrNull { pkg ->
+            candidates.firstOrNull { it.activityInfo.packageName == pkg }
+        } ?: candidates.firstOrNull { info ->
+            info.loadLabel(packageManager)?.toString()
+                ?.equals(AOSP_INSTALLER_LABEL, ignoreCase = true) == true
+        } ?: candidates.first()
+
+        val activityInfo = chosen.activityInfo
         return ComponentName(activityInfo.packageName, activityInfo.name)
     }
 
@@ -515,7 +546,7 @@ class InstallerManager(
 
     private fun isExcludedDuplicate(packageName: String, label: String): Boolean =
         packageName == AOSP_INSTALLER_PACKAGE &&
-                label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
+            label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
 
     private fun isInstallerCandidate(info: ResolveInfo): Boolean {
         if (!info.activityInfo.exported) return false
@@ -528,7 +559,7 @@ class InstallerManager(
 
         return requestedPermissions.any {
             it == Manifest.permission.REQUEST_INSTALL_PACKAGES ||
-                    it == Manifest.permission.INSTALL_PACKAGES
+                it == Manifest.permission.INSTALL_PACKAGES
         }
     }
 
@@ -611,6 +642,15 @@ class InstallerManager(
             normalizedExtra == null -> base
             else -> app.getString(R.string.installer_hint_with_reason, base, normalizedExtra)
         }
+    }
+
+    fun isSignatureMismatch(message: String?): Boolean {
+        val normalized = message?.lowercase(Locale.ROOT)?.trim().orEmpty()
+        if (normalized.isEmpty()) return false
+        return normalized.contains("install_failed_update_incompatible") ||
+            normalized.contains("install_failed_signature_inconsistent") ||
+            normalized.contains("signatures do not match") ||
+            normalized.contains("signature mismatch")
     }
 }
 

@@ -239,7 +239,7 @@ fun LazyListState.isScrollingUp(): State<Boolean> {
         derivedStateOf {
             val indexChanged = previousIndex != firstVisibleItemIndex
             val offsetChanged =
-                abs(previousScrollOffset - firstVisibleItemScrollOffset) > isScrollingUpSensitivity
+                kotlin.math.abs(previousScrollOffset - firstVisibleItemScrollOffset) > isScrollingUpSensitivity
 
             if (indexChanged) {
                 previousIndex > firstVisibleItemIndex

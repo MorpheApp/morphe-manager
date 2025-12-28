@@ -20,6 +20,8 @@ import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Block
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Sell
 import androidx.compose.material.icons.outlined.Update
@@ -88,6 +90,7 @@ fun BundleInformationDialog(
     patchCount: Int,
     onDismissRequest: () -> Unit,
     onDeleteRequest: () -> Unit,
+    onDisableRequest: () -> Unit,
     onUpdate: () -> Unit,
     autoOpenReleaseRequest: Int? = null,
 ) {
@@ -105,6 +108,7 @@ fun BundleInformationDialog(
     val isLocal = src is LocalPatchBundle
     val bundleManifestAttributes = src.patchBundle?.manifestAttributes
     val manifestSource = bundleManifestAttributes?.source
+    // Morphe
 //    val catalogUrl = remember(src) {
 //        if (src.isDefault) PatchListCatalog.revancedCatalogUrl() else PatchListCatalog.resolveCatalogUrl(src)
 //    }
@@ -200,7 +204,9 @@ fun BundleInformationDialog(
     FullscreenDialog(
         onDismissRequest = onDismissRequest,
     ) {
-//        if (showLinkSheet) {
+        // Morphe
+        if (showLinkSheet) {
+            // Morphe
 //            BundleLinksSheet(
 //                bundleTitle = src.displayTitle,
 //                catalogUrl = catalogUrl,
@@ -208,7 +214,7 @@ fun BundleInformationDialog(
 //                onCatalogClick = { openBundleCatalogPage(catalogUrl, context, uriHandler) },
 //                onDismissRequest = { showLinkSheet = false }
 //            )
-//        }
+        }
 
         Scaffold(
             topBar = {
@@ -232,6 +238,14 @@ fun BundleInformationDialog(
                                 imageVector = FontAwesomeIcons.Brands.Github,
                                 contentDescription = stringResource(R.string.bundle_release_page),
                                 modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
+                        val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
+                        IconButton(onClick = onDisableRequest) {
+                            Icon(
+                                toggleIcon,
+                                stringResource(toggleLabel)
                             )
                         }
                         IconButton(onClick = onDeleteRequest) {
@@ -546,8 +560,7 @@ private fun Tag(
 }
 
 internal const val DEFAULT_PATCH_RELEASES_URL =
-//    "https://github.com/MorpheApp/morphe-patches/releases"
-    "https://github.com/HundEdFeteTree/HappyFunTest/releases"
+    "https://github.com/MorpheApp/morphe-patches/releases"
 internal val GITHUB_SOURCE_REGEX =
     Regex("^(?:git@|ssh://git@|https?://|git://)?github\\.com[:/](.+)$", RegexOption.IGNORE_CASE)
 

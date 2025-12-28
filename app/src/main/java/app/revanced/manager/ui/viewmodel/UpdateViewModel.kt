@@ -117,11 +117,22 @@ class UpdateViewModel(
                     state = State.DOWNLOADING
 
                     try {
-                        http.download(location, resumeOffset) {
-                            url(release.downloadUrl)
-                            onDownload { bytesSentTotal, contentLength ->
-                                downloadedSize = resumeOffset + bytesSentTotal
-                                totalSize = resumeOffset + contentLength
+                        if (resumeOffset == 0L) {
+                            http.downloadToFile(
+                                saveLocation = location,
+                                builder = { url(release.downloadUrl) },
+                                onProgress = { bytesRead, contentLength ->
+                                    downloadedSize = bytesRead
+                                    totalSize = contentLength ?: totalSize
+                                }
+                            )
+                        } else {
+                            http.download(location, resumeOffset) {
+                                url(release.downloadUrl)
+                                onDownload { bytesSentTotal, contentLength ->
+                                    downloadedSize = resumeOffset + bytesSentTotal
+                                    totalSize = resumeOffset + contentLength
+                                }
                             }
                         }
                         canResumeDownload = false
