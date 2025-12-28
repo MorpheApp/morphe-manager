@@ -73,22 +73,22 @@ class DashboardViewModel(
 
     var updatedManagerVersion: String? by mutableStateOf(null)
         private set
-    var showBatteryOptimizationsWarning by mutableStateOf(false)
-        private set
+//    var showBatteryOptimizationsWarning by mutableStateOf(false)
+//        private set
 
     private val bundleListEventsChannel = Channel<BundleListViewModel.Event>()
     val bundleListEventsFlow = bundleListEventsChannel.receiveAsFlow()
 
-    init {
-        viewModelScope.launch {
-            checkForManagerUpdates()
-            updateBatteryOptimizationsWarning()
-        }
-    }
-
-    fun ignoreNewDownloaderPlugins() = viewModelScope.launch {
-        downloaderPluginRepository.acknowledgeAllNewPlugins()
-    }
+//    init {
+//        viewModelScope.launch {
+//            checkForManagerUpdates()
+//            updateBatteryOptimizationsWarning()
+//        }
+//    }
+//
+//    fun ignoreNewDownloaderPlugins() = viewModelScope.launch {
+//        downloaderPluginRepository.acknowledgeAllNewPlugins()
+//    }
 
     private suspend fun checkForManagerUpdates() {
         if (!prefs.managerAutoUpdates.get() || !networkInfo.isConnected()) return
@@ -98,10 +98,10 @@ class DashboardViewModel(
         }
     }
 
-    fun updateBatteryOptimizationsWarning() {
-        showBatteryOptimizationsWarning =
-            !powerManager.isIgnoringBatteryOptimizations(app.packageName)
-    }
+//    fun updateBatteryOptimizationsWarning() {
+//        showBatteryOptimizationsWarning =
+//            !powerManager.isIgnoringBatteryOptimizations(app.packageName)
+//    }
 
     fun setShowManagerUpdateDialogOnLaunch(value: Boolean) {
         viewModelScope.launch {
