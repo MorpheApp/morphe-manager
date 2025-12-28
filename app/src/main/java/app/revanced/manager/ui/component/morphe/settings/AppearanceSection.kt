@@ -21,6 +21,7 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
+import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -238,8 +239,6 @@ private fun AppearanceContent(
         AccentColorPresetsRow(
             selectedColorHex = customAccentColorHex,
             onColorSelected = { color -> viewModel.setCustomAccentColor(color) },
-            viewModel = viewModel,
-            scope = scope,
             dynamicColorEnabled = dynamicColor
         )
     }
@@ -252,30 +251,8 @@ private fun AppearanceContent(
 private fun AccentColorPresetsRow(
     selectedColorHex: String?,
     onColorSelected: (Color?) -> Unit,
-    viewModel: GeneralSettingsViewModel,
-    scope: CoroutineScope,
     dynamicColorEnabled: Boolean
 ) {
-    // Accent color presets
-    val accentPresets = remember {
-        listOf(
-            Color(0xFF6750A4),
-            Color(0xFF386641),
-            Color(0xFF0061A4),
-            Color(0xFF8E24AA),
-            Color(0xFFEF6C00),
-            Color(0xFF00897B),
-            Color(0xFFD81B60),
-            Color(0xFF5C6BC0),
-            Color(0xFF43A047),
-            Color(0xFFFF7043),
-            Color(0xFF1DE9B6),
-            Color(0xFFFFC400),
-            Color(0xFF00B8D4),
-            Color(0xFFBA68C8)
-        )
-    }
-
     val selectedArgb = selectedColorHex.toColorOrNull()?.toArgb()
     val isEnabled = !dynamicColorEnabled
 
@@ -317,7 +294,7 @@ private fun AccentColorPresetsRow(
         }
 
         // Color presets
-        accentPresets.forEach { preset ->
+        THEME_PRESET_COLORS.forEach { preset ->
             val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
             Box(
                 modifier = Modifier

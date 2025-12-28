@@ -96,8 +96,8 @@ class GeneralSettingsViewModel(
         }
     }
 
-    private suspend fun applyThemePreset(preset: ThemePreset) {
-        val config = presetConfigs[preset] ?: return
+    fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {
+        val config = presetConfigs[preset] ?: return@launch
         prefs.themePresetSelectionEnabled.update(true)
         prefs.theme.update(config.theme)
         prefs.dynamicColor.update(config.dynamicColor)

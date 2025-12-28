@@ -3,7 +3,6 @@ package app.revanced.manager.ui.screen.settings
 import android.graphics.Color as AndroidColor
 import android.os.Build
 import androidx.annotation.StringRes
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -42,7 +41,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,24 +56,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
-import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
-import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
-import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import app.revanced.manager.util.toHexString
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import kotlin.apply
 import kotlin.math.roundToInt
+
+val THEME_PRESET_COLORS = listOf(
+    Color(0xFF6750A4),
+    Color(0xFF386641),
+    Color(0xFF0061A4),
+    Color(0xFF8E24AA),
+    Color(0xFFEF6C00),
+    Color(0xFF00897B),
+    Color(0xFFD81B60),
+    Color(0xFF5C6BC0),
+    Color(0xFF43A047),
+    Color(0xFFFF7043),
+    Color(0xFF1DE9B6),
+    Color(0xFFFFC400),
+    Color(0xFF00B8D4),
+    Color(0xFFBA68C8)
+)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -84,18 +96,19 @@ fun GeneralSettingsScreen(
     viewModel: GeneralSettingsViewModel = koinViewModel()
 ) {
     val prefs = viewModel.prefs
-    var showAccentPicker by rememberSaveable { mutableStateOf(false) }
-    var showThemeColorPicker by rememberSaveable { mutableStateOf(false) }
+    // Morphe
+//    var showAccentPicker by rememberSaveable { mutableStateOf(false) }
+//    var showThemeColorPicker by rememberSaveable { mutableStateOf(false) }
 
     val customAccentColorHex by prefs.customAccentColor.getAsState()
-    val customThemeColorHex by prefs.customThemeColor.getAsState()
-    val theme by prefs.theme.getAsState()
-    val appLanguage by prefs.appLanguage.getAsState()
-    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
+//    val customThemeColorHex by prefs.customThemeColor.getAsState()
+//    val theme by prefs.theme.getAsState()
+//    val appLanguage by prefs.appLanguage.getAsState()
+//    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
     // Allow selecting the AMOLED preset regardless of the current theme since selecting it switches to dark mode anyway.
     val allowPureBlackPreset = true
-    val dynamicColorEnabled by prefs.dynamicColor.getAsState()
-    val pureBlackThemeEnabled by prefs.pureBlackTheme.getAsState()
+//    val dynamicColorEnabled by prefs.dynamicColor.getAsState()
+//    val pureBlackThemeEnabled by prefs.pureBlackTheme.getAsState()
     val themePresetSelectionEnabled by prefs.themePresetSelectionEnabled.getAsState()
     val selectedThemePresetName by prefs.themePresetSelectionName.getAsState()
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -105,11 +118,12 @@ fun GeneralSettingsScreen(
             if (!supportsDynamicColor && preset == ThemePreset.DYNAMIC) ThemePreset.DEFAULT else preset
         }
     }
-    val canAdjustThemeColor = selectedThemePreset == null
+//    val canAdjustThemeColor = selectedThemePreset == null
     val canAdjustAccentColor = selectedThemePreset != ThemePreset.DYNAMIC
-    val themeControlsAlpha = if (canAdjustThemeColor) 1f else 0.5f
+//    val themeControlsAlpha = if (canAdjustThemeColor) 1f else 0.5f
     val accentControlsAlpha = if (canAdjustAccentColor) 1f else 0.5f
-    // TODO: Hide this until the app is localized.
+
+    // Morphe For now hide this
 //    val languageOptions = remember {
 //        listOf(
 //            LanguageOption("system", R.string.language_option_system),
@@ -124,36 +138,37 @@ fun GeneralSettingsScreen(
 //            LanguageOption("uk", R.string.language_option_ukrainian)
 //        )
 //    }
-
-    if (!canAdjustThemeColor && showThemeColorPicker) showThemeColorPicker = false
-    if (!canAdjustAccentColor && showAccentPicker) showAccentPicker = false
-    if (showThemeColorPicker) {
-        val currentThemeColor = customThemeColorHex.toColorOrNull()
-        ColorPickerDialog(
-            titleRes = R.string.theme_color_picker_title,
-            previewLabelRes = R.string.theme_color_preview,
-            resetLabelRes = R.string.theme_color_reset,
-            initialColor = currentThemeColor ?: MaterialTheme.colorScheme.surface,
-            allowReset = currentThemeColor != null,
-            onReset = { viewModel.setCustomThemeColor(null) },
-            onConfirm = { color -> viewModel.setCustomThemeColor(color) },
-            onDismiss = { showThemeColorPicker = false }
-        )
-    }
-    if (showAccentPicker) {
-        val currentAccent = customAccentColorHex.toColorOrNull()
-        ColorPickerDialog(
-            titleRes = R.string.accent_color_picker_title,
-            previewLabelRes = R.string.accent_color_preview,
-            resetLabelRes = R.string.accent_color_reset,
-            initialColor = currentAccent ?: MaterialTheme.colorScheme.primary,
-            allowReset = currentAccent != null,
-            onReset = { viewModel.setCustomAccentColor(null) },
-            onConfirm = { color -> viewModel.setCustomAccentColor(color) },
-            onDismiss = { showAccentPicker = false }
-        )
-    }
-    val context = LocalContext.current
+//
+//    if (!canAdjustThemeColor && showThemeColorPicker) showThemeColorPicker = false
+//    if (!canAdjustAccentColor && showAccentPicker) showAccentPicker = false
+//    if (showThemeColorPicker) {
+//        val currentThemeColor = customThemeColorHex.toColorOrNull()
+//        ColorPickerDialog(
+//            titleRes = R.string.theme_color_picker_title,
+//            previewLabelRes = R.string.theme_color_preview,
+//            resetLabelRes = R.string.theme_color_reset,
+//            initialColor = currentThemeColor ?: MaterialTheme.colorScheme.surface,
+//            allowReset = currentThemeColor != null,
+//            onReset = { viewModel.setCustomThemeColor(null) },
+//            onConfirm = { color -> viewModel.setCustomThemeColor(color) },
+//            onDismiss = { showThemeColorPicker = false }
+//        )
+//    }
+//    if (showAccentPicker) {
+//        val currentAccent = customAccentColorHex.toColorOrNull()
+//        ColorPickerDialog(
+//            titleRes = R.string.accent_color_picker_title,
+//            previewLabelRes = R.string.accent_color_preview,
+//            resetLabelRes = R.string.accent_color_reset,
+//            initialColor = currentAccent ?: MaterialTheme.colorScheme.primary,
+//            allowReset = currentAccent != null,
+//            onReset = { viewModel.setCustomAccentColor(null) },
+//            onConfirm = { color -> viewModel.setCustomAccentColor(color) },
+//            onDismiss = { showAccentPicker = false }
+//        )
+//    }
+//
+//    val context = LocalContext.current
 //    if (showLanguageDialog) {
 //        LanguageDialog(
 //            options = languageOptions,
@@ -251,7 +266,9 @@ fun GeneralSettingsScreen(
                                 colors = option.colors,
                                 isSelected = selectedThemePreset == option.preset,
                                 enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
-                                onClick = { viewModel.toggleThemePreset(option.preset) }
+                                // Morphe
+                                onClick = { viewModel.applyThemePreset(option.preset) }
+//                                onClick = { viewModel.toggleThemePreset(option.preset) }
                             )
                         }
                     }
@@ -259,73 +276,57 @@ fun GeneralSettingsScreen(
             }
 
 
-            ExpressiveSettingsCard(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-            ) {
-                ExpressiveSettingsItem(
-                    modifier = Modifier
-                        .alpha(themeControlsAlpha),
-                    headlineContent = stringResource(R.string.theme_color),
-                    supportingContent = stringResource(R.string.theme_color_description),
-                    trailingContent = {
-                        val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
-                        Box(
-                            modifier = Modifier
-                                .size(32.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .border(
-                                    width = 1.dp,
-                                    color = MaterialTheme.colorScheme.outline,
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .background(previewColor, RoundedCornerShape(12.dp))
-                        )
-                    },
-                    enabled = canAdjustThemeColor,
-                    onClick = { showThemeColorPicker = true }
-                )
-                ExpressiveSettingsDivider()
-                ExpressiveSettingsItem(
-                    modifier = Modifier.alpha(accentControlsAlpha),
-                    headlineContent = stringResource(R.string.accent_color),
-                    supportingContent = stringResource(R.string.accent_color_description),
-                    trailingContent = {
-                        val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
-                        Box(
-                            modifier = Modifier
-                                .size(32.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .border(
-                                    width = 1.dp,
-                                    color = MaterialTheme.colorScheme.outline,
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .background(previewColor, RoundedCornerShape(12.dp))
-                        )
-                    },
-                    enabled = canAdjustAccentColor,
-                    onClick = { showAccentPicker = true }
-                )
-            }
-            val accentPresets = remember {
-                listOf(
-                    Color(0xFF6750A4),
-                    Color(0xFF386641),
-                    Color(0xFF0061A4),
-                    Color(0xFF8E24AA),
-                    Color(0xFFEF6C00),
-                    Color(0xFF00897B),
-                    Color(0xFFD81B60),
-                    Color(0xFF5C6BC0),
-                    Color(0xFF43A047),
-                    Color(0xFFFF7043),
-                    Color(0xFF1DE9B6),
-                    Color(0xFFFFC400),
-                    Color(0xFF00B8D4),
-                    Color(0xFFBA68C8)
-                )
-            }
+            // Morphe
+//            ExpressiveSettingsCard(
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+//            ) {
+//                ExpressiveSettingsItem(
+//                    modifier = Modifier
+//                        .alpha(themeControlsAlpha),
+//                    headlineContent = stringResource(R.string.theme_color),
+//                    supportingContent = stringResource(R.string.theme_color_description),
+//                    trailingContent = {
+//                        val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
+//                        Box(
+//                            modifier = Modifier
+//                                .size(32.dp)
+//                                .clip(RoundedCornerShape(12.dp))
+//                                .border(
+//                                    width = 1.dp,
+//                                    color = MaterialTheme.colorScheme.outline,
+//                                    shape = RoundedCornerShape(12.dp)
+//                                )
+//                                .background(previewColor, RoundedCornerShape(12.dp))
+//                        )
+//                    },
+//                    enabled = canAdjustThemeColor,
+//                    onClick = { showThemeColorPicker = true }
+//                )
+//                ExpressiveSettingsDivider()
+//                ExpressiveSettingsItem(
+//                    modifier = Modifier.alpha(accentControlsAlpha),
+//                    headlineContent = stringResource(R.string.accent_color),
+//                    supportingContent = stringResource(R.string.accent_color_description),
+//                    trailingContent = {
+//                        val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
+//                        Box(
+//                            modifier = Modifier
+//                                .size(32.dp)
+//                                .clip(RoundedCornerShape(12.dp))
+//                                .border(
+//                                    width = 1.dp,
+//                                    color = MaterialTheme.colorScheme.outline,
+//                                    shape = RoundedCornerShape(12.dp)
+//                                )
+//                                .background(previewColor, RoundedCornerShape(12.dp))
+//                        )
+//                    },
+//                    enabled = canAdjustAccentColor,
+//                    onClick = { showAccentPicker = true }
+//                )
+//            }
+
             val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
             Text(
                 text = stringResource(R.string.accent_color_presets),
@@ -352,8 +353,9 @@ fun GeneralSettingsScreen(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                accentPresets.forEach { preset ->
-                    val isSelected = selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+                THEME_PRESET_COLORS.forEach { preset ->
+                    val isSelected =
+                        selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
                     Box(
                         modifier = Modifier
                             .size(40.dp)

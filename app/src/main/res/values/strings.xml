@@ -327,15 +327,20 @@ The list of supported downloader plugins can be found"</string>
     <string name="accent_color_picker_title">Accent color</string>
     <string name="accent_color_preview">Preview</string>
     <string name="accent_color_reset">Reset accent</string>
-    <string name="accent_color_presets">Accent presets</string>
+    <string name="accent_color_presets">Accent</string>
     <!-- Morphe -->
     <string name="accent_color_presets_description" translatable="false">Tap a color to apply it instantly</string>
-    <string name="theme_color">Theme color</string>
-    <string name="theme_color_description">Tint surfaces and backgrounds with your own color</string>
-    <string name="theme_color_picker_title">Theme color</string>
-    <string name="theme_color_preview">Preview</string>
-    <string name="theme_color_reset">Reset theme color</string>
-    <string name="theme_preview_title">Theme preview</string>
+    <!-- Morphe -->
+    <string name="theme_color" translatable="false">Theme color</string>
+    <!-- Morphe -->
+    <string name="theme_color_description" translatable="false">Tint surfaces and backgrounds with your own color</string>
+    <!-- Morphe -->
+    <string name="theme_color_picker_title" translatable="false">Theme color</string>
+    <!-- Morphe -->
+    <string name="theme_color_preview" translatable="false">Preview</string>
+    <!-- Morphe -->
+    <string name="theme_color_reset" translatable="false">Reset theme color</string>
+    <string name="theme_preview_title">Appearance preview</string>
     <!-- Morphe -->
     <string name="theme_preview_description" translatable="false">Preview of the theme settings above</string>
     <string name="theme_presets">Theme presets</string>
