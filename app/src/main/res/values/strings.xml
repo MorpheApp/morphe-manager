@@ -354,7 +354,7 @@ The list of supported downloader plugins can be found"</string>
     <string name="theme_color_preview">Preview</string>
     <string name="theme_color_reset">Reset theme color</string>
     <string name="theme_preview_title">Theme preview</string>
-    <string name="theme_preview_description">Updates instantly when changing theme settings</string>
+    <string name="theme_preview_description">Preview of the theme settings above</string>
     <string name="theme_presets">Theme presets</string>
     <string name="theme_presets_description">Pick how the app follows system, light, dark, Material You, or pure black</string>
     <string name="theme_preset_default">Follow system</string>
