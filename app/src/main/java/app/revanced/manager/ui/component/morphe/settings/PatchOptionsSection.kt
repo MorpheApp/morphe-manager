@@ -208,7 +208,7 @@ fun PatchOptionsSection(
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                color = MaterialTheme.colorScheme.tertiaryContainer
             ) {
                 Row(
                     modifier = Modifier.padding(12.dp),
@@ -217,13 +217,13 @@ fun PatchOptionsSection(
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
                         text = stringResource(R.string.morphe_patch_options_restart_message),
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
                     )
                 }
             }
