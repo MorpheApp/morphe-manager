@@ -510,7 +510,7 @@ private fun LanguageDialog(
                     onClick = onDismiss,
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         }
@@ -657,7 +657,7 @@ private fun ColorPickerDialog(
                             onClick = onDismiss
                         ) {
                             Text(
-                                text = stringResource(R.string.cancel),
+                                text = stringResource(android.R.string.cancel),
                                 maxLines = 1,
                                 softWrap = false
                             )
@@ -778,7 +778,7 @@ private fun ThemePreview(modifier: Modifier = Modifier) {
                     Text(stringResource(R.string.apply))
                 }
                 TextButton(onClick = { }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         }
@@ -877,7 +877,7 @@ private fun ExpressiveThemePreview(modifier: Modifier = Modifier) {
                     Text(stringResource(R.string.apply))
                 }
                 OutlinedButton(onClick = { }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             }
         }

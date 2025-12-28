@@ -66,8 +66,8 @@ fun UpdatesSettingsScreen(
 //                    description = R.string.update_on_metered_connections_description
 //                )
 //            }
-
-            GroupHeader(stringResource(R.string.manager))
+//
+//            GroupHeader(stringResource(R.string.manager))
 
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)

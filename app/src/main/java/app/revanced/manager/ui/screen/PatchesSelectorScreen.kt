@@ -633,7 +633,7 @@ fun PatchesSelectorScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showResetConfirmation = false }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
             icon = { Icon(Icons.Outlined.Restore, null) },
@@ -656,7 +656,7 @@ fun PatchesSelectorScreen(
                 },
                 dismissButton = {
                     TextButton(onClick = { pendingSelectionConfirmation = null }) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(android.R.string.cancel))
                     }
                 },
                 title = { Text(stringResource(confirmation.title)) },
@@ -1613,7 +1613,7 @@ private fun PatchProfileBundleDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = { Text(stringResource(R.string.patch_profile_select_bundles_title)) },
@@ -1707,7 +1707,7 @@ private fun PatchProfileNameDialog(
         },
         dismissButton = {
             TextButton(onClick = onDismiss, enabled = !isSaving) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(android.R.string.cancel))
             }
         },
         title = { Text(stringResource(R.string.patch_profile_name_title)) },
