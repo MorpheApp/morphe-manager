@@ -201,7 +201,13 @@ fun GeneralSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            GroupHeader(stringResource(R.string.appearance))
+            // Morphe
+            Text(
+                text = stringResource(R.string.theme),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
             // Morphe
 //            val selectedLanguageLabel = when (appLanguage) {
@@ -239,11 +245,12 @@ fun GeneralSettingsScreen(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.theme_presets),
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                // Morphe
+//                Text(
+//                    text = stringResource(R.string.theme),
+//                    style = MaterialTheme.typography.titleSmall,
+//                    color = MaterialTheme.colorScheme.onSurface
+//                )
                 // Morphe
 //                Text(
 //                    text = stringResource(R.string.theme_presets_description),
@@ -275,105 +282,43 @@ fun GeneralSettingsScreen(
                         }
                     }
                 }
-            }
 
-
-            // Morphe
-//            ExpressiveSettingsCard(
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-//            ) {
-//                ExpressiveSettingsItem(
-//                    modifier = Modifier
-//                        .alpha(themeControlsAlpha),
-//                    headlineContent = stringResource(R.string.theme_color),
-//                    supportingContent = stringResource(R.string.theme_color_description),
-//                    trailingContent = {
-//                        val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
-//                        Box(
-//                            modifier = Modifier
-//                                .size(32.dp)
-//                                .clip(RoundedCornerShape(12.dp))
-//                                .border(
-//                                    width = 1.dp,
-//                                    color = MaterialTheme.colorScheme.outline,
-//                                    shape = RoundedCornerShape(12.dp)
-//                                )
-//                                .background(previewColor, RoundedCornerShape(12.dp))
-//                        )
-//                    },
-//                    enabled = canAdjustThemeColor,
-//                    onClick = { showThemeColorPicker = true }
-//                )
-//                ExpressiveSettingsDivider()
-//                ExpressiveSettingsItem(
-//                    modifier = Modifier.alpha(accentControlsAlpha),
-//                    headlineContent = stringResource(R.string.accent_color),
-//                    supportingContent = stringResource(R.string.accent_color_description),
-//                    trailingContent = {
-//                        val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
-//                        Box(
-//                            modifier = Modifier
-//                                .size(32.dp)
-//                                .clip(RoundedCornerShape(12.dp))
-//                                .border(
-//                                    width = 1.dp,
-//                                    color = MaterialTheme.colorScheme.outline,
-//                                    shape = RoundedCornerShape(12.dp)
-//                                )
-//                                .background(previewColor, RoundedCornerShape(12.dp))
-//                        )
-//                    },
-//                    enabled = canAdjustAccentColor,
-//                    onClick = { showAccentPicker = true }
-//                )
-//            }
 
             val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
-            Text(
-                text = stringResource(R.string.accent_color_presets),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .alpha(accentControlsAlpha)
-            )
-            // Morphe
-//            Text(
-//                text = stringResource(R.string.accent_color_presets_description),
-//                style = MaterialTheme.typography.bodySmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier
-//                    .padding(horizontal = 16.dp)
-//                    .alpha(accentControlsAlpha)
-//            )
-            FlowRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-                    .alpha(accentControlsAlpha),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                THEME_PRESET_COLORS.forEach { preset ->
-                    val isSelected =
-                        selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(14.dp))
-                            .border(
-                                width = if (isSelected) 2.dp else 1.dp,
-                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
-                                shape = RoundedCornerShape(14.dp)
-                            )
-                            .background(preset, RoundedCornerShape(12.dp))
-                            .clickable(enabled = canAdjustAccentColor) {
-                                viewModel.setCustomAccentColor(preset)
-                            }
-                    )
+//            ExpressiveSettingsCard(
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+//                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+//            ) {
+                Spacer(modifier = Modifier.height(12.dp))
+                FlowRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .alpha(accentControlsAlpha),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    THEME_PRESET_COLORS.forEach { preset ->
+                        val isSelected =
+                            selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(14.dp))
+                                .border(
+                                    width = if (isSelected) 2.dp else 1.dp,
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+                                    shape = RoundedCornerShape(14.dp)
+                                )
+                                .background(preset, RoundedCornerShape(12.dp))
+                                .clickable(enabled = canAdjustAccentColor) {
+                                    viewModel.setCustomAccentColor(preset)
+                                }
+                        )
+                    }
                 }
             }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
