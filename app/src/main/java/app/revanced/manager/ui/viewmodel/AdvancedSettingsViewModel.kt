@@ -49,12 +49,12 @@ class AdvancedSettingsViewModel(
             return "morphe_logcat_$time.log"
         }
 
-//    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
-//        if (value == prefs.api.get()) return@launch
-//
-//        prefs.api.update(value)
-//        patchBundleRepository.reloadApiBundles()
-//    }
+    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
+        if (value == prefs.api.get()) return@launch
+
+        prefs.api.update(value)
+        patchBundleRepository.reloadApiBundles()
+    }
 
     fun setGitHubPat(value: String) = viewModelScope.launch(Dispatchers.Default) {
         prefs.gitHubPat.update(value.trim())

@@ -218,24 +218,22 @@ fun AdvancedSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-//            GroupHeader(stringResource(R.string.manager))
-
-//            val apiUrl by viewModel.prefs.api.getAsState()
+            val apiUrl by viewModel.prefs.api.getAsState()
             val gitHubPat by viewModel.prefs.gitHubPat.getAsState()
             val includeGitHubPatInExports by viewModel.prefs.includeGitHubPatInExports.getAsState()
-//            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
+            var showApiUrlDialog by rememberSaveable { mutableStateOf(false) }
             var showGitHubPatDialog by rememberSaveable { mutableStateOf(false) }
 
-//            if (showApiUrlDialog) {
-//                APIUrlDialog(
-//                    currentUrl = apiUrl,
-//                    defaultUrl = viewModel.prefs.api.default,
-//                    onSubmit = {
-//                        showApiUrlDialog = false
-//                        it?.let(viewModel::setApiUrl)
-//                    }
-//                )
-//            }
+            if (showApiUrlDialog) {
+                APIUrlDialog(
+                    currentUrl = apiUrl,
+                    defaultUrl = viewModel.prefs.api.default,
+                    onSubmit = {
+                        showApiUrlDialog = false
+                        it?.let(viewModel::setApiUrl)
+                    }
+                )
+            }
 
             if (showGitHubPatDialog) {
                 GitHubPatDialog(
@@ -249,22 +247,25 @@ fun AdvancedSettingsScreen(
                     onDismiss = { showGitHubPatDialog = false }
                 )
             }
-//            ExpressiveSettingsCard(
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-//            ) {
+
+            GroupHeader(stringResource(R.string.github))
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                // Morphe
 //                ExpressiveSettingsItem(
 //                    headlineContent = stringResource(R.string.api_url),
 //                    supportingContent = stringResource(R.string.api_url_description),
 //                    onClick = { showApiUrlDialog = true }
 //                )
 //                ExpressiveSettingsDivider()
-//                ExpressiveSettingsItem(
-//                    headlineContent = stringResource(R.string.github_pat),
-//                    supportingContent = stringResource(R.string.github_pat_description),
-//                    onClick = { showGitHubPatDialog = true }
-//                )
-//            }
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.github_pat),
+                    supportingContent = stringResource(R.string.github_pat_description),
+                    onClick = { showGitHubPatDialog = true }
+                )
+            }
 
             val installTarget = InstallerManager.InstallTarget.PATCHER
             val primaryPreference by viewModel.prefs.installerPrimary.getAsState()
@@ -390,6 +391,7 @@ fun AdvancedSettingsScreen(
             val primaryLeadingContent = installerLeadingContent(primaryEntry, primaryEntry.token == primaryToken)
             val fallbackLeadingContent = installerLeadingContent(fallbackEntry, fallbackEntry.token == fallbackToken)
 
+            GroupHeader(stringResource(R.string.installer))
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
@@ -2174,7 +2176,6 @@ private fun APIUrlDialog(currentUrl: String, defaultUrl: String, onSubmit: (Stri
     )
 }
 
-// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
 @Composable
 private fun GitHubPatDialog(
     currentPat: String,

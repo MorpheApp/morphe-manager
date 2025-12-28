@@ -246,7 +246,6 @@ class ReVancedAPI(
     }
 }
 
-// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
 fun <T> APIResponse<T>.successOrThrow(context: String): T {
     return when (this) {
         is APIResponse.Success -> data

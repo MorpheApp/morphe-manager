@@ -34,7 +34,6 @@ data class GitHubContributor(
     val avatarUrl: String,
 )
 
-// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
 @Serializable
 data class GitHubPullRequest(
     val url: String,

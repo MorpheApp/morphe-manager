@@ -227,7 +227,6 @@ class APIPatchBundle(
     )
 }
 
-// PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
 class GitHubPullRequestBundle(
     name: String,
     uid: Int,
