@@ -89,6 +89,8 @@ val THEME_PRESET_COLORS = listOf(
     Color(0xFFBA68C8)
 )
 
+// Morphe: This is presented in the UI as "Appearance"
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun GeneralSettingsScreen(
@@ -187,7 +189,7 @@ fun GeneralSettingsScreen(
     Scaffold(
         topBar = {
             AppTopBar(
-                title = stringResource(R.string.general),
+                title = stringResource(R.string.appearance),
                 scrollBehavior = scrollBehavior,
                 onBackClick = onBackClick
             )

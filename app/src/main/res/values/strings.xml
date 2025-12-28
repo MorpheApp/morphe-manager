@@ -301,8 +301,8 @@
     <string name="auto_updates_dialog_patches">Morphe Patches</string>
     <string name="auto_updates_dialog_note">These settings can be changed later.</string>
 
-    <string name="general">General</string>
-    <string name="general_description">Theme, dynamic color</string>
+    <string name="appearance">Appearance</string>
+    <string name="appearance_description">Theme, dynamic color</string>
     <string name="updates">Updates</string>
     <string name="updates_description">Check for updates and view changelog</string>
     <string name="downloads">Downloads</string>
@@ -580,7 +580,6 @@ Signature (SHA-256): %2$s"</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="black">Black</string>
-    <string name="appearance">Appearance</string>
     <string name="downloaded_apps">Downloaded apps</string>
     <string name="process_runtime">Run Patcher in another process</string>
     <string name="process_runtime_description">Speeds up patching by using a separate process</string>
