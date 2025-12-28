@@ -48,6 +48,7 @@ import app.revanced.manager.network.dto.ReVancedContributor
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
 import app.revanced.manager.ui.viewmodel.ContributorViewModel
 import coil.compose.AsyncImage
 import org.koin.androidx.compose.koinViewModel
@@ -131,15 +132,9 @@ fun ContributorsCard(
     }
     val pagerState = rememberPagerState { contributorsByPage.size }
 
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                shape = MaterialTheme.shapes.medium
-            ),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+    ExpressiveSettingsCard(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),

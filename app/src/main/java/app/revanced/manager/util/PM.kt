@@ -16,6 +16,8 @@ import android.os.Build
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.receiver.InstallReceiver
+import app.revanced.manager.receiver.UninstallReceiver
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.service.UninstallService
 import kotlinx.coroutines.CoroutineScope
@@ -45,7 +47,7 @@ class PM(
     private val scope = CoroutineScope(Dispatchers.IO)
     val application: Application get() = app
 
-    val appList = patchBundleRepository.bundleInfoFlow.map { bundles ->
+    val appList = patchBundleRepository.enabledBundlesInfoFlow.map { bundles ->
         val compatibleApps = scope.async {
             val compatiblePackages = bundles
                 .flatMap { (_, bundle) -> bundle.patches }
@@ -207,18 +209,18 @@ class PM(
     }
 
     private val Context.installIntentSender
-        get() = PendingIntent.getService(
+        get() = PendingIntent.getBroadcast(
             this,
             0,
-            Intent(this, InstallService::class.java),
-            intentFlags
+            Intent(this, InstallReceiver::class.java),
+            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
         ).intentSender
 
     private val Context.uninstallIntentSender
-        get() = PendingIntent.getService(
+        get() = PendingIntent.getBroadcast(
             this,
             0,
-            Intent(this, UninstallService::class.java),
-            intentFlags
+            Intent(this, UninstallReceiver::class.java),
+            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
         ).intentSender
 }

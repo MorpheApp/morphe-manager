@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -28,6 +29,11 @@ private typealias InstallerStatusDialogButton = @Composable (model: InstallerMod
 
 @Composable
 fun InstallerStatusDialog(installerStatus: Int, model: InstallerModel, onDismiss: () -> Unit) {
+    if (installerStatus == PackageInstaller.STATUS_SUCCESS) {
+        LaunchedEffect(installerStatus) { onDismiss() }
+        return
+    }
+
     val dialogKind = remember {
         DialogKind.fromValue(installerStatus) ?: DialogKind.FAILURE
     }

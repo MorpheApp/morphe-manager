@@ -22,6 +22,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material3.Icon
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -61,7 +65,9 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
-import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
@@ -85,8 +91,8 @@ fun GeneralSettingsScreen(
     val theme by prefs.theme.getAsState()
     val appLanguage by prefs.appLanguage.getAsState()
     var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
-    // PR #30: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/30
-    val allowPureBlackPreset = theme == Theme.DARK || (theme == Theme.SYSTEM && isSystemInDarkTheme())
+    // Allow selecting the AMOLED preset regardless of the current theme since selecting it switches to dark mode anyway.
+    val allowPureBlackPreset = true
     val dynamicColorEnabled by prefs.dynamicColor.getAsState()
     val pureBlackThemeEnabled by prefs.pureBlackTheme.getAsState()
     val themePresetSelectionEnabled by prefs.themePresetSelectionEnabled.getAsState()
@@ -103,11 +109,20 @@ fun GeneralSettingsScreen(
     val themeControlsAlpha = if (canAdjustThemeColor) 1f else 0.5f
     val accentControlsAlpha = if (canAdjustAccentColor) 1f else 0.5f
     // TODO: Hide this until the app is localized.
-    val languageOptions = remember {
-        listOf(
-            LanguageOption("en", R.string.language_option_english)
-        )
-    }
+//    val languageOptions = remember {
+//        listOf(
+//            LanguageOption("system", R.string.language_option_system),
+//            LanguageOption("en", R.string.language_option_english),
+//            LanguageOption("zh-CN", R.string.language_option_chinese_simplified),
+//            // From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38
+//            LanguageOption("vi", R.string.language_option_vietnamese),
+//            // From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42
+//            LanguageOption("ko", R.string.language_option_korean),
+//            LanguageOption("ja", R.string.language_option_japanese),
+//            LanguageOption("ru", R.string.language_option_russian),
+//            LanguageOption("uk", R.string.language_option_ukrainian)
+//        )
+//    }
 
     if (!canAdjustThemeColor && showThemeColorPicker) showThemeColorPicker = false
     if (!canAdjustAccentColor && showAccentPicker) showAccentPicker = false
@@ -138,19 +153,19 @@ fun GeneralSettingsScreen(
         )
     }
     val context = LocalContext.current
-    if (showLanguageDialog) {
-        LanguageDialog(
-            options = languageOptions,
-            selectedCode = appLanguage,
-            onSelect = {
-                viewModel.setAppLanguage(it)
-                // Force activity recreation so every screen picks up the new locale immediately.
-                (context as? android.app.Activity)?.recreate()
-                showLanguageDialog = false
-            },
-            onDismiss = { showLanguageDialog = false }
-        )
-    }
+//    if (showLanguageDialog) {
+//        LanguageDialog(
+//            options = languageOptions,
+//            selectedCode = appLanguage,
+//            onSelect = {
+//                viewModel.setAppLanguage(it)
+//                // Force activity recreation so every screen picks up the new locale immediately.
+//                (context as? android.app.Activity)?.recreate()
+//                showLanguageDialog = false
+//            },
+//            onDismiss = { showLanguageDialog = false }
+//        )
+//    }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -170,8 +185,11 @@ fun GeneralSettingsScreen(
         ) {
             GroupHeader(stringResource(R.string.appearance))
 
-            val selectedLanguageLabel = languageOptions.firstOrNull { it.code == appLanguage }?.labelRes
-                ?: R.string.language_option_english
+//            val selectedLanguageLabel = when (appLanguage) {
+//                "system" -> R.string.language_option_system
+//                else -> languageOptions.firstOrNull { it.code == appLanguage }?.labelRes
+//                    ?: R.string.language_option_english
+//            }
 
             Text(
                 text = stringResource(R.string.theme_presets),
@@ -198,73 +216,95 @@ fun GeneralSettingsScreen(
                 }
             }
 
-            Row(
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.theme_presets),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = stringResource(R.string.theme_presets_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                baseThemeSwatches.forEach { option ->
-                    Box(
-                        modifier = Modifier.weight(1f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        ThemeSwatchChip(
-                            modifier = Modifier.fillMaxWidth(),
-                            label = stringResource(option.labelRes),
-                            colors = option.colors,
-                            isSelected = selectedThemePreset == option.preset,
-                            enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
-                            onClick = { viewModel.toggleThemePreset(option.preset) }
-                        )
+                ) {
+                    baseThemeSwatches.forEach { option ->
+                        Box(
+                            modifier = Modifier.weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            ThemeSwatchChip(
+                                modifier = Modifier.fillMaxWidth(),
+                                label = stringResource(option.labelRes),
+                                colors = option.colors,
+                                isSelected = selectedThemePreset == option.preset,
+                                enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
+                                onClick = { viewModel.toggleThemePreset(option.preset) }
+                            )
+                        }
                     }
                 }
             }
 
 
-            SettingsListItem(
-                modifier = Modifier
-                    .alpha(themeControlsAlpha)
-                    .clickable(enabled = canAdjustThemeColor) { showThemeColorPicker = true },
-                headlineContent = stringResource(R.string.theme_color),
-                supportingContent = stringResource(R.string.theme_color_description),
-                trailingContent = {
-                    val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
-                    Box(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.outline,
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                            .background(previewColor, RoundedCornerShape(12.dp))
-                    )
-                }
-            )
-
-            SettingsListItem(
-                modifier = Modifier
-                    .alpha(accentControlsAlpha)
-                    .clickable(enabled = canAdjustAccentColor) { showAccentPicker = true },
-                headlineContent = stringResource(R.string.accent_color),
-                supportingContent = stringResource(R.string.accent_color_description),
-                trailingContent = {
-                    val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
-                    Box(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.outline,
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                            .background(previewColor, RoundedCornerShape(12.dp))
-                    )
-                }
-            )
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    modifier = Modifier
+                        .alpha(themeControlsAlpha),
+                    headlineContent = stringResource(R.string.theme_color),
+                    supportingContent = stringResource(R.string.theme_color_description),
+                    trailingContent = {
+                        val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .border(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.outline,
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .background(previewColor, RoundedCornerShape(12.dp))
+                        )
+                    },
+                    enabled = canAdjustThemeColor,
+                    onClick = { showThemeColorPicker = true }
+                )
+                ExpressiveSettingsDivider()
+                ExpressiveSettingsItem(
+                    modifier = Modifier.alpha(accentControlsAlpha),
+                    headlineContent = stringResource(R.string.accent_color),
+                    supportingContent = stringResource(R.string.accent_color_description),
+                    trailingContent = {
+                        val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .border(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.outline,
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .background(previewColor, RoundedCornerShape(12.dp))
+                        )
+                    },
+                    enabled = canAdjustAccentColor,
+                    onClick = { showAccentPicker = true }
+                )
+            }
             val accentPresets = remember {
                 listOf(
                     Color(0xFF6750A4),
@@ -345,6 +385,11 @@ fun GeneralSettingsScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             )
+            ExpressiveThemePreview(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 0.dp)
+            )
 
             FilledTonalButton(
                 onClick = { viewModel.resetThemeSettings() },
@@ -355,15 +400,19 @@ fun GeneralSettingsScreen(
                 Text(stringResource(R.string.theme_reset))
             }
 
-            if (false) { // FIXME: App language setting is turned off until Crowdin is setup
-            GroupHeader(stringResource(R.string.language_settings))
-            SettingsListItem(
-                modifier = Modifier.clickable { showLanguageDialog = true },
-                headlineContent = stringResource(R.string.app_language),
-                supportingContent = stringResource(selectedLanguageLabel)
-            )
+            // FIXME: Hide this until we can add all Crowdin languages
+//            GroupHeader(stringResource(R.string.language_settings))
+//            ExpressiveSettingsCard(
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+//            ) {
+//                ExpressiveSettingsItem(
+//                    headlineContent = stringResource(R.string.app_language),
+//                    supportingContent = stringResource(selectedLanguageLabel),
+//                    onClick = { showLanguageDialog = true }
+//                )
+//            }
             Spacer(modifier = Modifier.height(16.dp))
-            }
         }
     }
 }
@@ -671,33 +720,163 @@ private fun ColorChannelSlider(
 
 @Composable
 private fun ThemePreview(modifier: Modifier = Modifier) {
+    val shape = RoundedCornerShape(18.dp)
     Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
-        tonalElevation = 4.dp,
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape)
+            .clip(shape),
+        shape = shape,
+        tonalElevation = 1.dp,
+        color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.18f),
+                            RoundedCornerShape(8.dp)
+                        )
+                ) {
+                    Text(
+                        text = "UR",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = stringResource(R.string.theme_preview_description),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
             )
-            Text(
-                text = stringResource(R.string.theme_preview_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                OutlinedButton(onClick = { }) {
+                    Text(stringResource(R.string.apply))
+                }
+                TextButton(onClick = { }) {
+                    Text(stringResource(android.R.string.cancel))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ExpressiveThemePreview(modifier: Modifier = Modifier) {
+    ExpressiveSettingsCard(
+        modifier = modifier,
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(6.dp)
+                    .clip(RoundedCornerShape(999.dp))
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(
+                                MaterialTheme.colorScheme.primary,
+                                MaterialTheme.colorScheme.tertiary
+                            )
+                        )
+                    )
             )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(14.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tonalElevation = 2.dp
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Icons.Outlined.Palette, contentDescription = null)
+                    }
+                }
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = stringResource(R.string.theme_preview_description),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Surface(
+                    shape = RoundedCornerShape(999.dp),
+                    color = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Icon(Icons.Outlined.AutoAwesome, contentDescription = null, modifier = Modifier.size(14.dp))
+                        Text(
+                            text = stringResource(R.string.theme_preview_title),
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }
+                }
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf(
+                    MaterialTheme.colorScheme.primary,
+                    MaterialTheme.colorScheme.secondary,
+                    MaterialTheme.colorScheme.tertiary
+                ).forEach { swatch ->
+                    Surface(
+                        shape = RoundedCornerShape(10.dp),
+                        color = swatch,
+                        tonalElevation = 1.dp,
+                        modifier = Modifier.size(18.dp)
+                    ) {}
+                }
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 FilledTonalButton(onClick = { }) {
                     Text(stringResource(R.string.apply))
                 }
-                TextButton(onClick = { }) {
+                OutlinedButton(onClick = { }) {
                     Text(stringResource(android.R.string.cancel))
                 }
             }

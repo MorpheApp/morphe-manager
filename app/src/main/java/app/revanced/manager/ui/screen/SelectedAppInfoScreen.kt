@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import app.revanced.manager.util.consumeHorizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,9 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowRight
 import androidx.compose.material.icons.filled.AutoFixHigh
@@ -73,6 +73,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.revanced.manager.data.platform.Filesystem
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.room.apps.downloaded.DownloadedApp
@@ -85,19 +86,22 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.component.NotificationCard
-import app.revanced.manager.ui.component.SafeguardHintCard
 import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
+import app.revanced.manager.ui.component.SafeguardHintCard
+import app.revanced.manager.ui.component.patches.PathSelectorDialog
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
-import app.revanced.manager.util.APK_FILE_MIME_TYPES
+import app.revanced.manager.ui.viewmodel.BundleRecommendationDetail
+import androidx.compose.foundation.shape.RoundedCornerShape
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.consumeHorizontalScroll
+
 import app.revanced.manager.util.enabled
+import app.revanced.manager.util.isAllowedApkFile
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.transparentListItemColors
+import java.io.File
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -155,12 +159,36 @@ fun SelectedAppInfoScreen(
     EventEffect(flow = vm.launchActivityFlow) { intent ->
         launcher.launch(intent)
     }
-    val storagePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-        onResult = vm::handleStorageResult
-    )
+    val fs = koinInject<Filesystem>()
+    val storageRoots = remember { fs.storageRoots() }
+    var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+    val permissionLauncher =
+        rememberLauncherForActivityResult(permissionContract) { granted ->
+            if (granted) {
+                showStorageDialog = true
+            }
+        }
+    val openStoragePicker = {
+        if (fs.hasStoragePermission()) {
+            showStorageDialog = true
+        } else {
+            permissionLauncher.launch(permissionName)
+        }
+    }
     EventEffect(flow = vm.requestStorageSelection) {
-        storagePickerLauncher.launch(APK_FILE_MIME_TYPES)
+        openStoragePicker()
+    }
+    if (showStorageDialog) {
+        PathSelectorDialog(
+            roots = storageRoots,
+            onSelect = { path ->
+                showStorageDialog = false
+                vm.handleStorageFile(path?.let { File(it.toString()) })
+            },
+            fileFilter = ::isAllowedApkFile,
+            allowDirectorySelection = false
+        )
     }
     val composableScope = rememberCoroutineScope()
 

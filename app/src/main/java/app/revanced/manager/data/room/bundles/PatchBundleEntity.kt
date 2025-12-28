@@ -20,7 +20,6 @@ sealed class Source {
         override fun toString() = url.toString()
     }
 
-    // PR #35: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/35
     data class GitHubPullRequest(val url: Url) : Source() {
         override fun toString() = url.toString()
     }
@@ -47,6 +46,7 @@ data class PatchBundleEntity(
     @ColumnInfo(name = "version") val versionHash: String? = null,
     @ColumnInfo(name = "source") val source: Source,
     @ColumnInfo(name = "auto_update") val autoUpdate: Boolean,
+    @ColumnInfo(name = "enabled") val enabled: Boolean = true,
     @ColumnInfo(name = "sort_order") val sortOrder: Int,
     @ColumnInfo(name = "created_at") val createdAt: Long? = null,
     @ColumnInfo(name = "updated_at") val updatedAt: Long? = null
@@ -58,6 +58,7 @@ data class PatchBundleProperties(
     @ColumnInfo(name = "version") val versionHash: String? = null,
     @ColumnInfo(name = "source") val source: Source,
     @ColumnInfo(name = "auto_update") val autoUpdate: Boolean,
+    @ColumnInfo(name = "enabled") val enabled: Boolean = true,
     @ColumnInfo(name = "sort_order") val sortOrder: Int,
     @ColumnInfo(name = "created_at") val createdAt: Long? = null,
     @ColumnInfo(name = "updated_at") val updatedAt: Long? = null
