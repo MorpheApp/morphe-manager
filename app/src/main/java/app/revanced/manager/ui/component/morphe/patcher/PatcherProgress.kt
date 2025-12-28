@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.utils.formatBytes
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.PatcherViewModel

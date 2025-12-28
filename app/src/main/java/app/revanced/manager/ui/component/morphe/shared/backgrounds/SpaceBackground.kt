@@ -10,8 +10,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.luminance
-import app.revanced.manager.ui.component.morphe.shared.isDarkBackground
+import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
 import kotlinx.coroutines.delay
 import kotlin.math.cos
 import kotlin.math.sin

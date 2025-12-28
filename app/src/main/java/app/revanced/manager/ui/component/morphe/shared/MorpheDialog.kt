@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
 
 /**
  * Unified fullscreen dialog component for Morphe UI

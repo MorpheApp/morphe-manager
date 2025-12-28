@@ -54,6 +54,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -94,6 +95,8 @@ import app.revanced.manager.ui.viewmodel.PatchProfileLaunchData
 import app.revanced.manager.ui.viewmodel.PatchProfilesViewModel
 import app.revanced.manager.domain.repository.PatchBundleRepository.BundleUpdatePhase
 import app.revanced.manager.domain.repository.PatchBundleRepository.BundleImportPhase
+import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
+import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
 import app.revanced.manager.util.RequestInstallAppsContract
@@ -145,33 +148,34 @@ fun DashboardScreen(
         onStorageSelect(selected)
     }
     // var showStorageDialog by rememberSaveable { mutableStateOf(false) }
+    // Store both Uri for file operations and human-readable path for display
+    var selectedBundleUri by rememberSaveable { mutableStateOf<Uri?>(null) }
     var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
 
     // Morphe begin
-    val storagePickerLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocument()
-    ) { uri ->
-        uri?.let { selectedBundlePath = it.toString() }
-    }
-    fun showStorageDialog() {
-        storagePickerLauncher.launch(MPP_FILE_MIME_TYPES)
-    }
+    val openStoragePicker = rememberFilePickerWithPermission(
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        onFilePicked = { uri ->
+            selectedBundleUri = uri  // Keep content:// URI for actual file operations
+            selectedBundlePath = uri.toFilePath()  // Convert to readable path for UI display
+        }
+    )
     // Morphe end
 
-    val (permissionContract, permissionName) = remember { fs.permissionContract() }
-    val permissionLauncher =
-        rememberLauncherForActivityResult(permissionContract) { granted ->
-            if (granted) {
-                showStorageDialog()
-            }
-        }
-    val openStoragePicker = {
-        if (fs.hasStoragePermission()) {
-            showStorageDialog()
-        } else {
-            permissionLauncher.launch(permissionName)
-        }
-    }
+//    val (permissionContract, permissionName) = remember { fs.permissionContract() }
+//    val permissionLauncher =
+//        rememberLauncherForActivityResult(permissionContract) { granted ->
+//            if (granted) {
+//                showStorageDialog()
+//            }
+//        }
+//    val openStoragePicker = {
+//        if (fs.hasStoragePermission()) {
+//            showStorageDialog()
+//        } else {
+//            permissionLauncher.launch(permissionName)
+//        }
+//    }
     val bundleUpdateProgress by vm.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val bundleImportProgress by vm.bundleImportProgress.collectAsStateWithLifecycle(null)
     val androidContext = LocalContext.current
@@ -275,11 +279,14 @@ fun DashboardScreen(
     if (showAddBundleDialog) {
         ImportPatchBundleDialog(
             onDismiss = { showAddBundleDialog = false },
-            onLocalSubmit = { path ->
+            // Morphe
+            onLocalSubmit = { _ ->
                 showAddBundleDialog = false
+                selectedBundleUri?.let { uri ->
+                    vm.createLocalSource(uri)
+                }
+                selectedBundleUri = null
                 selectedBundlePath = null
-                // Morphe
-                vm.createLocalSource(Uri.parse(path))
                 // vm.createLocalSourceFromFile(path)
             },
             onRemoteSubmit = { url, autoUpdate ->
@@ -508,7 +515,7 @@ fun DashboardScreen(
                                         showBundleOrderDialog = true
                                     }
                                 ) {
-                                    Icon(Icons.Outlined.Sort, stringResource(R.string.bundle_reorder))
+                                    Icon(Icons.AutoMirrored.Outlined.Sort, stringResource(R.string.bundle_reorder))
                                 }
                             }
                             IconButton(onClick = onSettingsClick) {
@@ -586,7 +593,7 @@ fun DashboardScreen(
                         if (progress.bytesTotal?.takeIf { it > 0L } != null) {
                             append(" (")
                             append(Formatter.formatShortFileSize(context, progress.bytesRead))
-                            progress.bytesTotal?.takeIf { it > 0L }?.let { total ->
+                            progress.bytesTotal.takeIf { it > 0L }?.let { total ->
                                 append("/")
                                 append(Formatter.formatShortFileSize(context, total))
                             }
@@ -662,7 +669,7 @@ fun DashboardScreen(
                 }
             }
 
-            TabRow(
+            SecondaryTabRow(
                 selectedTabIndex = pagerState.currentPage,
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.0.dp)
             ) {

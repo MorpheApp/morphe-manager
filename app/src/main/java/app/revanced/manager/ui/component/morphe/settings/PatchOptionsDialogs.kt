@@ -29,6 +29,7 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.utils.rememberFolderPickerWithPermission
 import app.revanced.manager.ui.viewmodel.OptionInfo
 import app.revanced.manager.ui.viewmodel.PatchOptionInfo
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
@@ -368,27 +369,12 @@ fun CustomBrandingDialog(
         label = "instruction_rotation"
     )
 
-    // Folder picker launcher
-    val folderPickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri: Uri? ->
-        uri?.let {
-            // Convert content:// URI to file path
-            val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
-                ?: it.toString()
+    // Folder picker with permission handling
+    val openFolderPicker = rememberFolderPickerWithPermission(
+        onFolderPicked = { path ->
             iconPath = path
         }
-    }
-
-    // Get permission contract and name
-    val (permissionContract, permissionName) = remember { fs.permissionContract() }
-
-    // Permission launcher - launches folder picker after permission is granted
-    val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
-        if (granted) {
-            folderPickerLauncher.launch(null)
-        }
-    }
+    )
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -474,13 +460,7 @@ fun CustomBrandingDialog(
                     shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
                         IconButton(
-                            onClick = {
-                                if (fs.hasStoragePermission()) {
-                                    folderPickerLauncher.launch(null)
-                                } else {
-                                    permissionLauncher.launch(permissionName)
-                                }
-                            },
+                            onClick = openFolderPicker,
                             modifier = Modifier.size(40.dp)
                         ) {
                             Icon(
@@ -618,27 +598,12 @@ fun CustomHeaderDialog(
         label = "instruction_rotation"
     )
 
-    // Folder picker launcher
-    val folderPickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri: Uri? ->
-        uri?.let {
-            // Convert content:// URI to file path
-            val path = it.path?.replace("/tree/primary:", "/storage/emulated/0/")
-                ?: it.toString()
+    // Folder picker with permission handling
+    val openFolderPicker = rememberFolderPickerWithPermission(
+        onFolderPicked = { path ->
             headerPath = path
         }
-    }
-
-    // Get permission contract and name
-    val (permissionContract, permissionName) = remember { fs.permissionContract() }
-
-    // Permission launcher - launches folder picker after permission is granted
-    val permissionLauncher = rememberLauncherForActivityResult(contract = permissionContract) { granted ->
-        if (granted) {
-            folderPickerLauncher.launch(null)
-        }
-    }
+    )
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -682,13 +647,7 @@ fun CustomHeaderDialog(
                     shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
                         IconButton(
-                            onClick = {
-                                if (fs.hasStoragePermission()) {
-                                    folderPickerLauncher.launch(null)
-                                } else {
-                                    permissionLauncher.launch(permissionName)
-                                }
-                            },
+                            onClick = openFolderPicker,
                             modifier = Modifier.size(40.dp)
                         ) {
                             Icon(

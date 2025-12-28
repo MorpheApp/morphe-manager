@@ -10,6 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import app.revanced.manager.ui.component.morphe.utils.darken
+import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
+import app.revanced.manager.ui.component.morphe.utils.lighten
 
 /**
  * Semi-transparent primary button for dialogs

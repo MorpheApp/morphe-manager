@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.component.morphe.shared
+package app.revanced.manager.ui.component.morphe.utils
 
 import androidx.compose.ui.graphics.Color
 

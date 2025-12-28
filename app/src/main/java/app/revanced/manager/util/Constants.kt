@@ -2,7 +2,7 @@ package app.revanced.manager.util
 
 const val tag = "Morphe Manager"
 
-const val JAR_MIMETYPE = "application/java-archive"
+//const val JAR_MIMETYPE = "application/java-archive"
 const val APK_MIMETYPE = "application/vnd.android.package-archive"
 
 val APK_FILE_MIME_TYPES = arrayOf(
@@ -32,5 +32,6 @@ const val BIN_MIMETYPE = "application/octet-stream"
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
-    "application/x-zip-compressed"
+//    "application/x-zip-compressed"
+    "*/*"
 )

@@ -34,8 +34,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
-import app.revanced.manager.ui.component.GroupHeader
-import app.revanced.manager.ui.component.morphe.shared.darken
+import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset

@@ -32,7 +32,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.morphe.shared.getRelativeTimeString
+import app.revanced.manager.ui.component.morphe.utils.getRelativeTimeString
 import app.revanced.manager.util.toast
 import java.text.SimpleDateFormat
 import java.util.Locale

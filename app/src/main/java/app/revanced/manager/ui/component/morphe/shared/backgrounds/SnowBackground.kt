@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
-import app.revanced.manager.ui.component.morphe.shared.isDarkBackground
+import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
