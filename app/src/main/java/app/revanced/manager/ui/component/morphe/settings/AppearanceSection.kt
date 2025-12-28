@@ -38,7 +38,7 @@ fun AppearanceSection(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     customThemeColorHex: String?,
-    backgroundType: String,
+    backgroundType: BackgroundType,
     onBackToAdvanced: () -> Unit,
     viewModel: GeneralSettingsViewModel
 ) {
@@ -103,7 +103,7 @@ private fun AppearanceContent(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     customThemeColorHex: String?,
-    backgroundType: String,
+    backgroundType: BackgroundType,
     viewModel: GeneralSettingsViewModel,
     scope: CoroutineScope
 ) {
@@ -128,10 +128,10 @@ private fun AppearanceContent(
                     label = stringResource(bgType.displayNameResId)
                 )
             },
-            selectedItem = backgroundType,
+            selectedItem = backgroundType.name,
             onItemSelected = { selectedType ->
                 scope.launch {
-                    viewModel.prefs.backgroundType.update(selectedType)
+                    viewModel.prefs.backgroundType.update(BackgroundType.valueOf(selectedType))
                 }
             },
             columns = null // Horizontal scroll

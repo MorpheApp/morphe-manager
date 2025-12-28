@@ -198,7 +198,7 @@ fun MorpheHomeScreen(
                         android11BugActive = dashboardViewModel.android11BugActive
                     )
                 },
-                backgroundType = BackgroundType.valueOf(backgroundType)
+                backgroundType = backgroundType
             )
 
             val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()

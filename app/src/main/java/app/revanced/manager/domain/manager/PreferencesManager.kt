@@ -85,10 +85,7 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
-    val backgroundType = stringPreference(
-        "background_type",
-        BackgroundType.CIRCLES.name
-    )
+    val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
 
     init {
         runBlocking {
@@ -149,7 +146,7 @@ class PreferencesManager(
         val patchSelectionHiddenActions: Set<String>? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
-        val backgroundType: String? = null, // Morphe
+        val backgroundType: BackgroundType? = null, // Morphe
     )
 
     suspend fun exportSettings() = SettingsSnapshot(

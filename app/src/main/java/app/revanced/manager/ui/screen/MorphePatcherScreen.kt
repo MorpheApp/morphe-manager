@@ -337,7 +337,7 @@ fun MorphePatcherScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             // Add animated background
             AnimatedBackground(
-                type = BackgroundType.valueOf(backgroundType)
+                type = backgroundType
             )
 
             // Existing content box

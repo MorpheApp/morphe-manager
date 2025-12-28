@@ -175,7 +175,7 @@ fun MorpheSettingsScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             // Animated background
             AnimatedBackground(
-                type = BackgroundType.valueOf(backgroundType)
+                type = backgroundType
             )
             val view = LocalView.current
 
