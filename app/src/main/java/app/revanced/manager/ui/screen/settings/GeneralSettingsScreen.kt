@@ -1,52 +1,20 @@
 package app.revanced.manager.ui.screen.settings
 
-import android.graphics.Color as AndroidColor
 import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material3.Icon
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -58,19 +26,16 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
+import app.revanced.manager.ui.component.morphe.shared.darken
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
-import app.revanced.manager.util.toHexString
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import kotlin.math.roundToInt
 
 val THEME_PRESET_COLORS = listOf(
     Color(0xFF6750A4),
@@ -108,7 +73,7 @@ fun GeneralSettingsScreen(
 //    val appLanguage by prefs.appLanguage.getAsState()
 //    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
     // Allow selecting the AMOLED preset regardless of the current theme since selecting it switches to dark mode anyway.
-    val allowPureBlackPreset = true
+//    val allowPureBlackPreset = true
 //    val dynamicColorEnabled by prefs.dynamicColor.getAsState()
 //    val pureBlackThemeEnabled by prefs.pureBlackTheme.getAsState()
     val themePresetSelectionEnabled by prefs.themePresetSelectionEnabled.getAsState()
@@ -252,10 +217,10 @@ fun GeneralSettingsScreen(
 //                )
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     baseThemeSwatches.forEach { option ->
                         Box(
@@ -267,8 +232,9 @@ fun GeneralSettingsScreen(
                                 label = stringResource(option.labelRes),
                                 colors = option.colors,
                                 isSelected = selectedThemePreset == option.preset,
-                                enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
                                 // Morphe
+                                enabled = true,
+//                                enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
                                 onClick = { viewModel.applyThemePreset(option.preset) }
 //                                onClick = { viewModel.toggleThemePreset(option.preset) }
                             )
@@ -328,17 +294,34 @@ fun GeneralSettingsScreen(
 //                    onClick = { showAccentPicker = true }
 //                )
 //            }
-
-            val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
-            Text(
-                text = stringResource(R.string.accent_color_presets),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .alpha(accentControlsAlpha)
-            )
-            // Morphe
+//
+//            val accentPresets = remember {
+//                listOf(
+//                    Color(0xFF6750A4),
+//                    Color(0xFF386641),
+//                    Color(0xFF0061A4),
+//                    Color(0xFF8E24AA),
+//                    Color(0xFFEF6C00),
+//                    Color(0xFF00897B),
+//                    Color(0xFFD81B60),
+//                    Color(0xFF5C6BC0),
+//                    Color(0xFF43A047),
+//                    Color(0xFFFF7043),
+//                    Color(0xFF1DE9B6),
+//                    Color(0xFFFFC400),
+//                    Color(0xFF00B8D4),
+//                    Color(0xFFBA68C8)
+//                )
+//            }
+//            val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
+//            Text(
+//                text = stringResource(R.string.accent_color_presets),
+//                style = MaterialTheme.typography.titleSmall,
+//                color = MaterialTheme.colorScheme.onSurface,
+//                modifier = Modifier
+//                    .padding(horizontal = 16.dp, vertical = 8.dp)
+//                    .alpha(accentControlsAlpha)
+//            )
 //            Text(
 //                text = stringResource(R.string.accent_color_presets_description),
 //                style = MaterialTheme.typography.bodySmall,
@@ -347,33 +330,110 @@ fun GeneralSettingsScreen(
 //                    .padding(horizontal = 16.dp)
 //                    .alpha(accentControlsAlpha)
 //            )
-            FlowRow(
+//            FlowRow(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 16.dp, vertical = 12.dp)
+//                    .alpha(accentControlsAlpha),
+//                horizontalArrangement = Arrangement.spacedBy(12.dp),
+//                verticalArrangement = Arrangement.spacedBy(12.dp)
+//            ) {
+//                accentPresets.forEach { preset ->
+//                    val isSelected = selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+//                    Box(
+//                        modifier = Modifier
+//                            .size(40.dp)
+//                            .clip(RoundedCornerShape(14.dp))
+//                            .border(
+//                                width = if (isSelected) 2.dp else 1.dp,
+//                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+//                                shape = RoundedCornerShape(14.dp)
+//                            )
+//                            .background(preset, RoundedCornerShape(12.dp))
+//                            .clickable(enabled = canAdjustAccentColor) {
+//                                viewModel.setCustomAccentColor(preset)
+//                            }
+//                    )
+//                }
+//            }
+//            Spacer(modifier = Modifier.height(16.dp))
+
+            // Accent Color Section with Expressive Style
+            val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
+            ExpressiveSettingsCard(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
                     .alpha(accentControlsAlpha),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
             ) {
-                THEME_PRESET_COLORS.forEach { preset ->
-                    val isSelected =
-                        selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+                Text(
+                    text = stringResource(R.string.accent_color_presets),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    // Reset button
                     Box(
                         modifier = Modifier
                             .size(40.dp)
                             .clip(RoundedCornerShape(14.dp))
                             .border(
-                                width = if (isSelected) 2.dp else 1.dp,
-                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+                                width = if (selectedAccentArgb == null) 2.dp else 1.dp,
+                                color = if (selectedAccentArgb == null)
+                                    MaterialTheme.colorScheme.primary
+                                else
+                                    MaterialTheme.colorScheme.outline,
                                 shape = RoundedCornerShape(14.dp)
                             )
-                            .background(preset, RoundedCornerShape(12.dp))
+                            .background(
+                                MaterialTheme.colorScheme.surfaceVariant,
+                                RoundedCornerShape(12.dp)
+                            )
                             .clickable(enabled = canAdjustAccentColor) {
-                                viewModel.setCustomAccentColor(preset)
-                            }
-                    )
+                                if (canAdjustAccentColor) {
+                                    viewModel.setCustomAccentColor(null)
+                                }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = "Reset accent color",
+                            modifier = Modifier.size(20.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    // Color presets
+                    THEME_PRESET_COLORS.forEach { preset ->
+                        val isSelected = selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
+                        Box(
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(14.dp))
+                                .border(
+                                    width = if (isSelected) 2.dp else 1.dp,
+                                    color = if (isSelected)
+                                        preset.darken(0.4f) // Darker version of the color
+                                    else
+                                        MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                                    shape = RoundedCornerShape(14.dp)
+                                )
+                                .background(preset, RoundedCornerShape(12.dp))
+                                .clickable(enabled = canAdjustAccentColor) {
+                                    viewModel.setCustomAccentColor(preset)
+                                }
+                        )
+                    }
                 }
             }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
@@ -432,7 +492,6 @@ fun GeneralSettingsScreen(
 }
 
 private data class ThemePresetSwatch(val preset: ThemePreset, @StringRes val labelRes: Int, val colors: List<Color>)
-private data class LanguageOption(val code: String, @StringRes val labelRes: Int)
 
 @Composable
 private fun ThemeSwatchChip(
@@ -475,259 +534,10 @@ private fun ThemeSwatchChip(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-private fun LanguageDialog(
-    options: List<LanguageOption>,
-    selectedCode: String,
-    onSelect: (String) -> Unit,
-    onDismiss: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {},
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(
-                    text = stringResource(R.string.language_dialog_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-                options.forEach { option ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { onSelect(option.code) }
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(
-                            selected = option.code == selectedCode,
-                            onClick = { onSelect(option.code) }
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = stringResource(option.labelRes),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                }
-                TextButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.align(Alignment.End)
-                ) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-            }
-        }
-    )
-}
-
-private fun hexToComposeColor(input: String): Color? {
-    val normalized = input.trim().let { if (it.startsWith("#")) it else "#" + it }
-    return runCatching { Color(AndroidColor.parseColor(normalized)) }.getOrNull()
-}
-
-@Composable
-private fun ColorPickerDialog(
-    @StringRes titleRes: Int,
-    @StringRes previewLabelRes: Int,
-    @StringRes resetLabelRes: Int,
-    initialColor: Color,
-    allowReset: Boolean,
-    onReset: () -> Unit,
-    onConfirm: (Color) -> Unit,
-    onDismiss: () -> Unit
-) {
-    var red by rememberSaveable(initialColor) { mutableStateOf((initialColor.red * 255).roundToInt()) }
-    var green by rememberSaveable(initialColor) { mutableStateOf((initialColor.green * 255).roundToInt()) }
-    var blue by rememberSaveable(initialColor) { mutableStateOf((initialColor.blue * 255).roundToInt()) }
-    var hexInput by rememberSaveable(initialColor) { mutableStateOf(initialColor.toHexString().uppercase()) }
-
-    fun rgbToColor(r: Int, g: Int, b: Int) = Color(
-        red = r.coerceIn(0, 255) / 255f,
-        green = g.coerceIn(0, 255) / 255f,
-        blue = b.coerceIn(0, 255) / 255f
-    )
-
-    val previewColor = rgbToColor(red, green, blue)
-    fun updateHexFromRgb(r: Int = red, g: Int = green, b: Int = blue) {
-        hexInput = rgbToColor(r, g, b).toHexString().uppercase()
-    }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(titleRes)) },
-        text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Text(
-                    text = stringResource(previewLabelRes),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(80.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.outline,
-                            shape = RoundedCornerShape(12.dp)
-                        )
-                        .background(previewColor)
-                )
-                TextField(
-                    value = hexInput,
-                    onValueChange = { value ->
-                        val input = value.trim().uppercase().let {
-                            if (it.startsWith("#")) it else "#" + it
-                        }
-                        hexInput = input
-                        hexToComposeColor(input)?.let { color ->
-                            red = (color.red * 255).roundToInt()
-                            green = (color.green * 255).roundToInt()
-                            blue = (color.blue * 255).roundToInt()
-                        }
-                    },
-                    singleLine = true,
-                    textStyle = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp)),
-                    shape = RoundedCornerShape(12.dp)
-                )
-                ColorChannelSlider(
-                    label = stringResource(R.string.color_channel_red),
-                    value = red,
-                    trackColor = Color.Red,
-                    onValueChange = {
-                        red = it
-                        updateHexFromRgb(it, green, blue)
-                    }
-                )
-                ColorChannelSlider(
-                    label = stringResource(R.string.color_channel_green),
-                    value = green,
-                    trackColor = Color.Green,
-                    onValueChange = {
-                        green = it
-                        updateHexFromRgb(red, it, blue)
-                    }
-                )
-                ColorChannelSlider(
-                    label = stringResource(R.string.color_channel_blue),
-                    value = blue,
-                    trackColor = Color.Blue,
-                    onValueChange = {
-                        blue = it
-                        updateHexFromRgb(red, green, it)
-                    }
-                )
-                Spacer(Modifier.height(8.dp))
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
-                    FlowRow(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        maxItemsInEachRow = 2
-                    ) {
-                        if (allowReset) {
-                            OutlinedButton(
-                                modifier = Modifier.defaultMinSize(
-                                    minWidth = ButtonDefaults.MinWidth,
-                                    minHeight = ButtonDefaults.MinHeight
-                                ),
-                                onClick = {
-                                    onReset()
-                                    onDismiss()
-                                }
-                            ) {
-                                Text(
-                                    text = stringResource(resetLabelRes),
-                                    maxLines = 1,
-                                    softWrap = false
-                                )
-                            }
-                        }
-                        TextButton(
-                            modifier = Modifier.defaultMinSize(
-                                minWidth = ButtonDefaults.MinWidth,
-                                minHeight = ButtonDefaults.MinHeight
-                            ),
-                            onClick = onDismiss
-                        ) {
-                            Text(
-                                text = stringResource(android.R.string.cancel),
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        }
-                        FilledTonalButton(
-                            modifier = Modifier.defaultMinSize(
-                                minWidth = ButtonDefaults.MinWidth,
-                                minHeight = ButtonDefaults.MinHeight
-                            ),
-                            onClick = {
-                                onConfirm(previewColor)
-                                onDismiss()
-                            }
-                        ) {
-                            Text(
-                                text = stringResource(R.string.apply),
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = {}
-    )
-}
-
-@Composable
-private fun ColorChannelSlider(
-    label: String,
-    value: Int,
-    trackColor: Color,
-    onValueChange: (Int) -> Unit
-) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(label, style = MaterialTheme.typography.labelLarge)
-            Text(value.toString(), style = MaterialTheme.typography.labelMedium)
-        }
-        Slider(
-            value = value.toFloat(),
-            onValueChange = { onValueChange(it.roundToInt()) },
-            valueRange = 0f..255f,
-            colors = SliderDefaults.colors(
-                activeTrackColor = trackColor,
-                inactiveTrackColor = trackColor.copy(alpha = 0.3f),
-                thumbColor = trackColor
-            )
+            textAlign = TextAlign.Center,
+            maxLines = 2,   // Allow wrapping to 2 lines
+            minLines = 2,   // Keep consistent height
+            softWrap = true // Allow words wrapping to a new line
         )
     }
 }
@@ -768,8 +578,7 @@ private fun ExpressiveThemePreview(modifier: Modifier = Modifier) {
                     tonalElevation = 2.dp
                 ) {
                     Box(
-                        modifier = Modifier
-                            .size(36.dp),
+                        modifier = Modifier.size(36.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(Icons.Outlined.Palette, contentDescription = null)

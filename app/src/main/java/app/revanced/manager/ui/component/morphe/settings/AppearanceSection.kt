@@ -21,6 +21,7 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
+import app.revanced.manager.ui.component.morphe.shared.darken
 import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
@@ -300,7 +301,7 @@ private fun AccentColorPresetsRow(
                     .border(
                         width = if (isSelected) 2.dp else 1.dp,
                         color = if (isSelected)
-                            MaterialTheme.colorScheme.primary
+                            preset.darken(0.4f) // Darker version of the color
                         else
                             MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(14.dp)
