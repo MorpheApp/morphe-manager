@@ -182,25 +182,6 @@
     <string name="morphe_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
     <string name="morphe_hide_shorts_widget">Hide Shorts Widget</string>
     <string name="morphe_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
-    <!-- Theme Presets -->
-    <string name="morphe_theme_preset_pure_black">Pure Black</string>
-    <string name="morphe_theme_preset_material_you">Material You</string>
-    <string name="morphe_theme_preset_classic">Classic (old YouTube)</string>
-    <string name="morphe_theme_preset_catppuccin_mocha">Catppuccin (Mocha)</string>
-    <string name="morphe_theme_preset_catppuccin_latte">Catppuccin (Latte)</string>
-    <string name="morphe_theme_preset_dark_pink">Dark Pink</string>
-    <string name="morphe_theme_preset_dark_blue">Dark Blue</string>
-    <string name="morphe_theme_preset_dark_green">Dark Green</string>
-    <string name="morphe_theme_preset_dark_yellow">Dark Yellow</string>
-    <string name="morphe_theme_preset_dark_orange">Dark Orange</string>
-    <string name="morphe_theme_preset_dark_red">Dark Red</string>
-    <string name="morphe_theme_preset_white">White</string>
-    <string name="morphe_theme_preset_light_pink">Light Pink</string>
-    <string name="morphe_theme_preset_light_blue">Light Blue</string>
-    <string name="morphe_theme_preset_light_green">Light Green</string>
-    <string name="morphe_theme_preset_light_yellow">Light Yellow</string>
-    <string name="morphe_theme_preset_light_orange">Light Orange</string>
-    <string name="morphe_theme_preset_light_red">Light Red</string>
 
     <!-- Other strings -->
     <string name="app_name" translatable="false">Morphe</string>

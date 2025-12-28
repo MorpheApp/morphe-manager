@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.component.morphe.settings
 
 import android.os.Build
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,7 +21,6 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
-import app.revanced.manager.ui.component.morphe.shared.lighten
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
 import app.revanced.manager.util.toColorOrNull
@@ -53,7 +50,8 @@ fun AppearanceSection(
             // Interface switcher
             MorpheClickableCard(
                 onClick = onBackToAdvanced,
-                cornerRadius = 12.dp
+                cornerRadius = 12.dp,
+                alpha = 0.33f
             ) {
                 IconTextRow(
                     icon = Icons.Outlined.SwapHoriz,
@@ -109,6 +107,8 @@ private fun AppearanceContent(
     viewModel: GeneralSettingsViewModel,
     scope: CoroutineScope
 ) {
+    val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         // Background Type Selection
         SelectorSection(
@@ -169,8 +169,19 @@ private fun AppearanceContent(
                         label = stringResource(R.string.black)
                     )
                 )
+                // Add Material You option for Android 12+
+                if (supportsDynamicColor) {
+                    add(
+                        SelectorItem(
+                            key = "DYNAMIC",
+                            icon = Icons.Outlined.AutoAwesome,
+                            label = stringResource(R.string.theme_preset_dynamic)
+                        )
+                    )
+                }
             },
             selectedItem = when {
+                dynamicColor && supportsDynamicColor -> "DYNAMIC"
                 pureBlackTheme -> "BLACK"
                 theme == Theme.SYSTEM -> "SYSTEM"
                 theme == Theme.LIGHT -> "LIGHT"
@@ -183,14 +194,17 @@ private fun AppearanceContent(
                         "SYSTEM" -> {
                             viewModel.setTheme(Theme.SYSTEM)
                             viewModel.prefs.pureBlackTheme.update(false)
+                            viewModel.prefs.dynamicColor.update(false)
                         }
                         "LIGHT" -> {
                             viewModel.setTheme(Theme.LIGHT)
                             viewModel.prefs.pureBlackTheme.update(false)
+                            viewModel.prefs.dynamicColor.update(false)
                         }
                         "DARK" -> {
                             viewModel.setTheme(Theme.DARK)
                             viewModel.prefs.pureBlackTheme.update(false)
+                            viewModel.prefs.dynamicColor.update(false)
                         }
                         "BLACK" -> {
                             viewModel.prefs.pureBlackTheme.update(true)
@@ -200,49 +214,18 @@ private fun AppearanceContent(
                                 viewModel.setTheme(Theme.DARK)
                             }
                         }
+                        "DYNAMIC" -> {
+                            viewModel.setTheme(Theme.SYSTEM)
+                            viewModel.prefs.dynamicColor.update(true)
+                            viewModel.prefs.pureBlackTheme.update(false)
+                            viewModel.setCustomThemeColor(null)
+                            viewModel.setCustomAccentColor(null)
+                        }
                     }
                 }
             },
-            columns = 4
+            columns = null // Horizontal scroll
         )
-
-        // Dynamic Color toggle (Android 12+) - only show when Black is not selected
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            AnimatedVisibility(visible = !pureBlackTheme) {
-                MorpheClickableCard(
-                    onClick = {
-                        scope.launch {
-                            val newValue = !dynamicColor
-                            viewModel.prefs.dynamicColor.update(newValue)
-                            if (newValue) {
-                                viewModel.setCustomThemeColor(null)
-                            }
-                        }
-                    },
-                    cornerRadius = 12.dp
-                ) {
-                    IconTextRow(
-                        icon = Icons.Outlined.Palette,
-                        title = stringResource(R.string.dynamic_color),
-                        description = stringResource(R.string.dynamic_color_description),
-                        modifier = Modifier.padding(12.dp),
-                        trailingContent = {
-                            Switch(
-                                checked = dynamicColor,
-                                onCheckedChange = {
-                                    scope.launch {
-                                        viewModel.prefs.dynamicColor.update(it)
-                                        if (it) {
-                                            viewModel.setCustomThemeColor(null)
-                                        }
-                                    }
-                                }
-                            )
-                        }
-                    )
-                }
-            }
-        }
 
         // Accent Color Presets
         Text(
@@ -252,84 +235,49 @@ private fun AppearanceContent(
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        ColorPresetsRow(
+        AccentColorPresetsRow(
             selectedColorHex = customAccentColorHex,
             onColorSelected = { color -> viewModel.setCustomAccentColor(color) },
-            isAccent = true,
             viewModel = viewModel,
-            scope = scope
-        )
-
-        // Theme Color Presets
-        Text(
-            text = stringResource(R.string.theme_color),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        ColorPresetsRow(
-            selectedColorHex = customThemeColorHex,
-            onColorSelected = { color -> viewModel.setCustomThemeColor(color) },
-            isAccent = false,
-            viewModel = viewModel,
-            scope = scope
+            scope = scope,
+            dynamicColorEnabled = dynamicColor
         )
     }
 }
 
 /**
- * Row of color preset buttons
- * Shows reset button and color swatches
+ * Row of accent color preset buttons
  */
 @Composable
-private fun ColorPresetsRow(
+private fun AccentColorPresetsRow(
     selectedColorHex: String?,
     onColorSelected: (Color?) -> Unit,
-    isAccent: Boolean,
     viewModel: GeneralSettingsViewModel,
-    scope: CoroutineScope
+    scope: CoroutineScope,
+    dynamicColorEnabled: Boolean
 ) {
-    val presets = remember {
-        if (isAccent) {
-            // Accent color presets
-            listOf(
-                Color(0xFF7C4DFF), // Electric Purple
-                Color(0xFF536DFE), // Indigo Neon
-                Color(0xFF2979FF), // Hyper Blue
-                Color(0xFF00B0FF), // Cyan Pop
-                Color(0xFF00E5FF), // Aqua Glow
-                Color(0xFF1DE9B6), // Mint Neon
-                Color(0xFF00E676), // Green Flash
-                Color(0xFF76FF03), // Lime Shock
-                Color(0xFFFFD600), // Yellow Punch
-                Color(0xFFFF9100), // Orange Blast
-                Color(0xFFFF5252), // Red Pulse
-                Color(0xFFFF4081), // Pink Voltage
-                Color(0xFFE040FB), // Purple Pop
-                Color(0xFFB388FF)  // Lavender Glow
-            )
-        } else {
-            // Theme color presets (dark colors applied, lighter display variants shown)
-            listOf(
-                Color(0xFF1C1B1F), // Obsidian Black
-                Color(0xFF2D2A32), // Dark Slate Purple
-                Color(0xFF1A1A2E), // Midnight Indigo
-                Color(0xFF0F0F1E), // Deep Void
-                Color(0xFF16213E), // Night Navy
-                Color(0xFF1F1B24), // Charcoal Plum
-                Color(0xFF0A1929), // Abyss Blue
-                Color(0xFF1B1B2F), // Shadow Indigo
-                Color(0xFF162447), // Deep Ocean Blue
-                Color(0xFF1F1D2B), // Dark Graphite Violet
-                Color(0xFF2C2C54), // Muted Royal Indigo
-                Color(0xFF1E1E2E)  // Eclipse Gray
-
-            )
-        }
+    // Accent color presets
+    val accentPresets = remember {
+        listOf(
+            Color(0xFF6750A4),
+            Color(0xFF386641),
+            Color(0xFF0061A4),
+            Color(0xFF8E24AA),
+            Color(0xFFEF6C00),
+            Color(0xFF00897B),
+            Color(0xFFD81B60),
+            Color(0xFF5C6BC0),
+            Color(0xFF43A047),
+            Color(0xFFFF7043),
+            Color(0xFF1DE9B6),
+            Color(0xFFFFC400),
+            Color(0xFF00B8D4),
+            Color(0xFFBA68C8)
+        )
     }
 
     val selectedArgb = selectedColorHex.toColorOrNull()?.toArgb()
+    val isEnabled = !dynamicColorEnabled
 
     Row(
         modifier = Modifier
@@ -351,21 +299,26 @@ private fun ColorPresetsRow(
                     shape = RoundedCornerShape(14.dp)
                 )
                 .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
-                .clickable { onColorSelected(null) },
+                .clickable(enabled = isEnabled) {
+                    if (isEnabled) {
+                        onColorSelected(null)
+                    }
+                },
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = Icons.Outlined.Close,
                 contentDescription = "Reset",
                 modifier = Modifier.size(20.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                    alpha = if (isEnabled) 1f else 0.5f
+                )
             )
         }
 
         // Color presets
-        presets.forEach { preset ->
+        accentPresets.forEach { preset ->
             val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
-            val displayColor = if (!isAccent) preset.lighten(0.2f) else preset
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -378,15 +331,13 @@ private fun ColorPresetsRow(
                             MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(14.dp)
                     )
-                    .background(displayColor, RoundedCornerShape(12.dp))
-                    .clickable {
-                        onColorSelected(preset)
-                        // If this is theme color (not accent), reset Dynamic Color and Pure Black
-                        if (!isAccent) {
-                            scope.launch {
-                                viewModel.prefs.dynamicColor.update(false)
-                                viewModel.prefs.pureBlackTheme.update(false)
-                            }
+                    .background(
+                        preset.copy(alpha = if (isEnabled) 1f else 0.5f),
+                        RoundedCornerShape(12.dp)
+                    )
+                    .clickable(enabled = isEnabled) {
+                        if (isEnabled) {
+                            onColorSelected(preset)
                         }
                     }
             )

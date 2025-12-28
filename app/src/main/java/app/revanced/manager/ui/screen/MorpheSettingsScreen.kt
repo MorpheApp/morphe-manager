@@ -380,7 +380,7 @@ private fun UpdatesSection(
                         onPreReleaseChanged(!usePrereleases.value)
                     },
                 shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
             ) {
                 Row(
                     modifier = Modifier

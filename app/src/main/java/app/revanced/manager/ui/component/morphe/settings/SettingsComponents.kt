@@ -80,7 +80,7 @@ fun SettingsCard(
             .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {

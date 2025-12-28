@@ -351,7 +351,7 @@ private fun HideShortsSection(
 
     MorpheCard(
         cornerRadius = 8.dp,
-        alpha = 0.3f
+        alpha = 0.33f
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             IconTextRow(

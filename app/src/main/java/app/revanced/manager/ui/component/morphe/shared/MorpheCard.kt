@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +31,7 @@ fun MorpheClickableCard(
             .clip(RoundedCornerShape(cornerRadius))
             .clickable(enabled = enabled, onClick = onClick),
         shape = RoundedCornerShape(cornerRadius),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = alpha)
+        color = MaterialTheme.colorScheme.surfaceColorAtElevation((3 * alpha).dp)
     ) {
         content()
     }
@@ -50,7 +51,7 @@ fun MorpheCard(
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(cornerRadius),
-        color = color ?: MaterialTheme.colorScheme.surface.copy(alpha = alpha)
+        color = color ?: MaterialTheme.colorScheme.surfaceColorAtElevation((3 * alpha).dp)
     ) {
         content()
     }

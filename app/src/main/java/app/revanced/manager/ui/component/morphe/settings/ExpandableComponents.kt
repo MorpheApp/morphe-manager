@@ -45,7 +45,8 @@ fun ExpandableSection(
 
     MorpheCard(
         modifier = modifier,
-        cornerRadius = 12.dp
+        cornerRadius = 12.dp,
+        alpha = 0.33f
     ) {
         Column {
             // Header
@@ -108,7 +109,7 @@ fun SettingsItem(
     MorpheClickableCard(
         onClick = onClick,
         cornerRadius = 8.dp,
-        alpha = 0.3f,
+        alpha = 0.33f,
         modifier = modifier
     ) {
         IconTextRow(

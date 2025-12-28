@@ -67,7 +67,7 @@ fun SelectorGrid(
                     label = item.label,
                     selected = selectedItem == item.key,
                     onClick = { onItemSelected(item.key) },
-                    modifier = Modifier.width(72.dp)
+                    modifier = Modifier.width(80.dp)
                 )
             }
         }
