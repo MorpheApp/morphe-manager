@@ -84,7 +84,7 @@ fun BundleChangelogDialog(
                     showTopBar = showTopBar
                 )
                 is BundleChangelogState.Error -> BundleChangelogError(
-                    paddingValues = if (showTopBar) paddingValues else PaddingValues(0.dp),
+                    paddingValues = paddingValues,
                     error = current.throwable,
                     onRetry = { refreshKey++ },
                     showTopBar = showTopBar
@@ -102,13 +102,13 @@ fun BundleChangelogDialog(
 @Composable
 private fun BundleChangelogLoading(
     paddingValues: PaddingValues,
-    showTopBar: Boolean = true
+    showTopBar: Boolean = true // Morphe
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .then(
+            .then( // Morphe
                 if (!showTopBar) Modifier.statusBarsPadding()
                 else Modifier
             ),
@@ -134,13 +134,13 @@ private fun BundleChangelogError(
     paddingValues: PaddingValues,
     error: Throwable,
     onRetry: () -> Unit,
-    showTopBar: Boolean = true
+    showTopBar: Boolean = true // Morphe
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .then(
+            .then( // Morphe
                 if (!showTopBar) Modifier.statusBarsPadding()
                 else Modifier
             ),
@@ -170,7 +170,7 @@ private fun BundleChangelogError(
 private fun BundleChangelogContent(
     paddingValues: PaddingValues,
     asset: ReVancedAsset,
-    showTopBar: Boolean = true
+    showTopBar: Boolean = true // Morphe
 ) {
     val context = LocalContext.current
     val publishDate = remember(asset.createdAt) {

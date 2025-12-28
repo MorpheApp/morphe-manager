@@ -7,8 +7,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import android.provider.OpenableColumns
+import android.widget.Toast
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
@@ -26,11 +27,18 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import java.io.File
+import java.io.FileInputStream
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.FileNotFoundException
@@ -128,30 +136,80 @@ class DashboardViewModel(
     fun cancelSourceSelection() = sendEvent(BundleListViewModel.Event.CANCEL)
     fun updateSources() = sendEvent(BundleListViewModel.Event.UPDATE_SELECTED)
     fun deleteSources() = sendEvent(BundleListViewModel.Event.DELETE_SELECTED)
+    fun disableSources() = sendEvent(BundleListViewModel.Event.DISABLE_SELECTED)
+
+    private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
+        val progressToast = withContext(Dispatchers.Main) {
+            Toast.makeText(
+                app,
+                app.getString(R.string.import_patch_bundles_in_progress),
+                Toast.LENGTH_SHORT
+            )
+        }
+        withContext(Dispatchers.Main) { progressToast.show() }
+
+        val toastRepeater = launch(Dispatchers.Main) {
+            try {
+                while (isActive) {
+                    delay(1_750)
+                    progressToast.show()
+                }
+            } catch (_: CancellationException) {
+                // Ignore cancellation.
+            }
+        }
+
+        try {
+            block()
+        } finally {
+            toastRepeater.cancel()
+            withContext(Dispatchers.Main) { progressToast.cancel() }
+        }
+    }
 
     @SuppressLint("Recycle")
     fun createLocalSource(patchBundle: Uri) = viewModelScope.launch {
         withContext(NonCancellable) {
-            val permissionFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            var persistedPermission = false
-            try {
-                contentResolver.takePersistableUriPermission(patchBundle, permissionFlags)
-                persistedPermission = true
-            } catch (_: SecurityException) {
-                // Provider may not support persistable permissions; fall back to transient grant.
-            }
-
-            try {
-                patchBundleRepository.createLocal {
-                    contentResolver.openInputStream(patchBundle)
-                        ?: throw FileNotFoundException("Unable to open $patchBundle")
+            withPersistentImportToast {
+                val permissionFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                var persistedPermission = false
+                val size = runCatching {
+                    contentResolver.openFileDescriptor(patchBundle, "r")
+                        ?.use { it.statSize.takeIf { sz -> sz > 0 } }
+                        ?: contentResolver.query(
+                            patchBundle,
+                            arrayOf(OpenableColumns.SIZE),
+                            null,
+                            null,
+                            null
+                        )
+                            ?.use { cursor ->
+                                val index = cursor.getColumnIndex(OpenableColumns.SIZE)
+                                if (index != -1 && cursor.moveToFirst()) cursor.getLong(index) else null
+                            }
+                }.getOrNull()?.takeIf { it > 0L }
+                try {
+                    contentResolver.takePersistableUriPermission(patchBundle, permissionFlags)
+                    persistedPermission = true
+                } catch (_: SecurityException) {
+                    // Provider may not support persistable permissions; fall back to transient grant.
                 }
-            } finally {
-                if (persistedPermission) {
-                    try {
-                        contentResolver.releasePersistableUriPermission(patchBundle, permissionFlags)
-                    } catch (_: SecurityException) {
-                        // Ignore if provider revoked or already released.
+
+                try {
+                    patchBundleRepository.createLocal(size) {
+                        contentResolver.openInputStream(patchBundle)
+                            ?: throw FileNotFoundException("Unable to open $patchBundle")
+                    }
+                } finally {
+                    if (persistedPermission) {
+                        try {
+                            contentResolver.releasePersistableUriPermission(
+                                patchBundle,
+                                permissionFlags
+                            )
+                        } catch (_: SecurityException) {
+                            // Ignore if provider revoked or already released.
+                        }
                     }
                 }
             }
@@ -164,12 +222,24 @@ class DashboardViewModel(
         }
     }
 
-    suspend fun updateMorpheBundleWithChangelogClear() {
-        patchBundleRepository.updateOnlyMorpheBundleWithResult(
-            showProgress = true,
-            showToast = false
-        )
+    fun createLocalSourceFromFile(path: String) = viewModelScope.launch {
+        withContext(NonCancellable) {
+            withPersistentImportToast {
+                val file = File(path)
+                val length = file.length().takeIf { it > 0L }
+                patchBundleRepository.createLocal(length) {
+                    FileInputStream(file)
+                }
+            }
+        }
+    }
 
+    suspend fun updateMorpheBundleWithChangelogClear() {
+        patchBundleRepository.updateOnlyMorpheBundle(
+            force = false,
+            showToast = false,
+            showProgress = true
+        )
         // Clear changelog cache
         val sources = patchBundleRepository.sources.first()
         val apiBundle = sources.firstOrNull() as? RemotePatchBundle

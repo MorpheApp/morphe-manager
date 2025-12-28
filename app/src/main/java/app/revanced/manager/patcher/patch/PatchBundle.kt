@@ -55,7 +55,12 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
 
     object Loader {
         private fun loadBundle(bundle: PatchBundle): Collection<Patch<*>> {
-            val patchFiles = loadPatchesFromDex(setOf(File(bundle.patchesJar))).byPatchesFile
+            validateDexEntries(bundle.patchesJar)
+            val patchFiles = runCatching {
+                loadPatchesFromDex(setOf(File(bundle.patchesJar))).byPatchesFile
+            }.getOrElse { error ->
+                throw IllegalStateException("Patch bundle is corrupted or incomplete", error)
+            }
             val entry = patchFiles.entries.singleOrNull()
                 ?: throw IllegalStateException("Unexpected patch bundle load result for ${bundle.patchesJar}")
 
@@ -78,5 +83,21 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
                     compatiblePackages.any { (name, _) -> name == packageName }
                 }.toSet()
             }
+
+        private fun validateDexEntries(jarPath: String) {
+            JarFile(jarPath).use { jar ->
+                val dexEntries = jar.entries().toList().filter { entry ->
+                    val name = entry.name.lowercase()
+                    name.endsWith(".dex")
+                }
+                if (dexEntries.isEmpty()) {
+                    throw IllegalStateException("Patch bundle is missing dex entries")
+                }
+                val hasEmptyDex = dexEntries.any { it.size <= 0L }
+                if (hasEmptyDex) {
+                    throw IllegalStateException("Patch bundle contains empty dex entries")
+                }
+            }
+        }
     }
 }

@@ -97,7 +97,11 @@ fun MorpheHomeScreen(
         bundleUpdateInProgress = true
         homeState.isRefreshingBundle = true
         try {
-            dashboardViewModel.updateMorpheBundleWithChangelogClear()
+            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
+                force = false,
+                showToast = false,
+                showProgress = true
+            )
         } finally {
             delay(500)
             bundleUpdateInProgress = false
@@ -150,27 +154,15 @@ fun MorpheHomeScreen(
             return@LaunchedEffect
         }
 
-        // We have progress - decide what to show
-        when {
-            progress.result != null -> {
-                // Update completed with a result
-                homeState.showBundleUpdateSnackbar = true
-                homeState.snackbarStatus = when (progress.result) {
-                    PatchBundleRepository.UpdateResult.Success -> BundleUpdateStatus.Success
-                    PatchBundleRepository.UpdateResult.NoInternet,
-                    PatchBundleRepository.UpdateResult.Error -> BundleUpdateStatus.Error
-                }
-            }
-            progress.completed < progress.total -> {
-                // Still updating
-                homeState.showBundleUpdateSnackbar = true
-                homeState.snackbarStatus = BundleUpdateStatus.Updating
-            }
-            else -> {
-                // Completed == total but no result yet - keep showing updating
-                homeState.showBundleUpdateSnackbar = true
-                homeState.snackbarStatus = BundleUpdateStatus.Updating
-            }
+        homeState.showBundleUpdateSnackbar = true
+        homeState.snackbarStatus = when (progress.result) {
+            PatchBundleRepository.BundleUpdateResult.Success,
+            PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
+
+            PatchBundleRepository.BundleUpdateResult.NoInternet,
+            PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
+
+            PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
         }
     }
 

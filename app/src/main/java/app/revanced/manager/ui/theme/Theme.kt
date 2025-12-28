@@ -184,6 +184,7 @@ private fun applyCustomThemeColor(
     themeColor: Color,
     darkTheme: Boolean
 ): ColorScheme {
+    // Morphe
     // For dark theme, use the selected color directly without excessive darkening
     // For light theme, lighten the color
     val background = if (darkTheme) {

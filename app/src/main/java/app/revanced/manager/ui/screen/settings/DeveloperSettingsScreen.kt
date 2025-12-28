@@ -11,10 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.GroupHeader
-import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.viewmodel.DeveloperOptionsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -38,14 +41,19 @@ fun DeveloperSettingsScreen(
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             GroupHeader(stringResource(R.string.patch_bundles))
-            SettingsListItem(
-                headlineContent = stringResource(R.string.patches_force_download),
-                modifier = Modifier.clickable(onClick = vm::redownloadBundles)
-            )
-            SettingsListItem(
-                headlineContent = stringResource(R.string.patches_reset),
-                modifier = Modifier.clickable(onClick = vm::redownloadBundles)
-            )
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.patches_force_download),
+                    modifier = Modifier.clickable(onClick = vm::redownloadBundles)
+                )
+                ExpressiveSettingsDivider()
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.patches_reset),
+                    modifier = Modifier.clickable(onClick = vm::redownloadBundles)
+                )
+            }
         }
     }
 }

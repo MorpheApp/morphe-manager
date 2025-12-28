@@ -42,12 +42,20 @@ fun DownloadProgressBanner(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            LinearProgressIndicator(
-                progress = { clampedProgress ?: 0f },
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .fillMaxWidth()
-            )
+            if (clampedProgress == null) {
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                )
+            } else {
+                LinearProgressIndicator(
+                    progress = { clampedProgress },
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }

@@ -13,12 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.settings.BooleanItem
-import app.revanced.manager.ui.component.settings.SettingsListItem
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.viewmodel.UpdatesSettingsViewModel
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
@@ -51,59 +54,68 @@ fun UpdatesSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            // Morphe
 //            GroupHeader(stringResource(R.string.patches_and_manager))
 //
-//            BooleanItem(
-//                preference = vm.allowMeteredUpdates,
-//                headline = R.string.update_on_metered_connections,
-//                description = R.string.update_on_metered_connections_description
-//            )
-//
-//            GroupHeader(stringResource(R.string.patch_bundle_installer))
+//            ExpressiveSettingsCard(
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+//            ) {
+//                BooleanItem(
+//                    preference = vm.allowMeteredUpdates,
+//                    headline = R.string.update_on_metered_connections,
+//                    description = R.string.update_on_metered_connections_description
+//                )
+//            }
 
-            SettingsListItem(
-                modifier = Modifier.clickable {
-                    coroutineScope.launch {
+            GroupHeader(stringResource(R.string.manager))
+
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.manual_update_check),
+                    supportingContent = stringResource(R.string.manual_update_check_description),
+                    onClick = {
+                        coroutineScope.launch {
+                            if (!vm.isConnected) {
+                                context.toast(context.getString(R.string.no_network_toast))
+                                return@launch
+                            }
+                            if (vm.checkForUpdates()) onUpdateClick()
+                        }
+                    }
+                )
+                ExpressiveSettingsDivider()
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.changelog),
+                    supportingContent = stringResource(R.string.changelog_description),
+                    onClick = {
                         if (!vm.isConnected) {
                             context.toast(context.getString(R.string.no_network_toast))
-                            return@launch
+                            return@ExpressiveSettingsItem
                         }
-                        if (vm.checkForUpdates()) onUpdateClick()
+                        onChangelogClick()
                     }
-                },
-                headlineContent = stringResource(R.string.manual_update_check),
-                supportingContent = stringResource(R.string.manual_update_check_description)
-            )
-
-            SettingsListItem(
-                modifier = Modifier.clickable {
-                    if (!vm.isConnected) {
-                        context.toast(context.getString(R.string.no_network_toast))
-                        return@clickable
-                    }
-                    onChangelogClick()
-                },
-                headlineContent = stringResource(R.string.changelog),
-                supportingContent = stringResource(R.string.changelog_description)
-            )
-
-            BooleanItem(
-                preference = vm.managerAutoUpdates,
-                headline = R.string.update_checking_manager,
-                description = R.string.update_checking_manager_description
-            )
-
-            BooleanItem(
-                preference = vm.showManagerUpdateDialogOnLaunch,
-                headline = R.string.show_manager_update_dialog_on_launch,
-                description = R.string.show_manager_update_dialog_on_launch_description
-            )
-
-            BooleanItem(
-                preference = vm.useManagerPrereleases,
-                headline = R.string.manager_prereleases,
-                description = R.string.manager_prereleases_description
-            )
+                )
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = vm.managerAutoUpdates,
+                    headline = R.string.update_checking_manager,
+                    description = R.string.update_checking_manager_description
+                )
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = vm.showManagerUpdateDialogOnLaunch,
+                    headline = R.string.show_manager_update_dialog_on_launch,
+                    description = R.string.show_manager_update_dialog_on_launch_description
+                )
+                ExpressiveSettingsDivider()
+                BooleanItem(
+                    preference = vm.useManagerPrereleases,
+                    headline = R.string.manager_prereleases,
+                    description = R.string.manager_prereleases_description
+                )
+            }
         }
     }
 }

@@ -96,6 +96,10 @@ class RootInstaller(
         }
     }
 
+    fun isDeviceRooted() = System.getenv("PATH")?.split(":")?.any { path ->
+        File(path, "su").canExecute()
+    } ?: false
+
     suspend fun isAppInstalled(packageName: String) =
         awaitRemoteFS().getFile("$modulesPath/$packageName-revanced").exists()
 
