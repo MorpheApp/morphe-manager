@@ -69,9 +69,9 @@ class PreferencesManager(
     val installationTime = longPreference("manager_installation_time", 0)
 
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
-    val disableSelectionWarning = booleanPreference("disable_selection_warning", false)
-    val disableUniversalPatchCheck = booleanPreference("disable_patch_universal_check", true)
-    val suggestedVersionSafeguard = booleanPreference("suggested_version_safeguard", true)
+    val disableSelectionWarning = booleanPreference("disable_selection_warning", true)
+    val disableUniversalPatchCheck = booleanPreference("disable_patch_universal_check", false)
+    val suggestedVersionSafeguard = booleanPreference("suggested_version_safeguard", false)
     val disablePatchSelectionConfirmations = booleanPreference("disable_patch_selection_confirmations", false)
     val collapsePatchActionsOnSelection = booleanPreference("collapse_patch_actions_on_selection", true)
     val patchSelectionFilterFlags = intPreference("patch_selection_filter_flags", -1)
