@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.component.morphe.home
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -299,7 +300,12 @@ private fun DownloadInstructionsDialog(
                     ) {
                         Surface(
                             onClick = {
-                                context.toast(context.getString(R.string.morphe_home_download_instructions_download_button_toast))
+                                context.toast(
+                                    string = context.getString(
+                                        R.string.morphe_home_download_instructions_download_button_toast
+                                    ),
+                                    duration = Toast.LENGTH_LONG
+                                )
                             },
                             shape = RoundedCornerShape(1.dp),
                             color = Color(0xFFFF0034)
