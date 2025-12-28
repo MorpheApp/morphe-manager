@@ -384,24 +384,23 @@ fun BundleItem(
                         )
                     }
                 }
-                val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
-                val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
-                ActionButtonPair(
-                    // Morphe: For now, don't allow removing the only source of patches
-                    enabled = !src.isDefault,
-                    leadingOnClick = {
-                        if (src.enabled) {
-                            showDisableConfirmationDialog = true
-                        } else {
-                            showEnableConfirmationDialog = true
-                        }
-                    },
-                    leadingIcon = toggleIcon,
-                    leadingDescription = stringResource(toggleLabel),
-                    trailingOnClick = { showDeleteConfirmationDialog = true },
-                    trailingIcon = Icons.Outlined.Delete,
-                    trailingDescription = stringResource(R.string.delete),
-                )
+                // Morphe: For now, don't allow removing or disable the bundle of patches
+//                val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
+//                val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
+//                ActionButtonPair(
+//                    leadingOnClick = {
+//                        if (src.enabled) {
+//                            showDisableConfirmationDialog = true
+//                        } else {
+//                            showEnableConfirmationDialog = true
+//                        }
+//                    },
+//                    leadingIcon = toggleIcon,
+//                    leadingDescription = stringResource(toggleLabel),
+//                    trailingOnClick = { showDeleteConfirmationDialog = true },
+//                    trailingIcon = Icons.Outlined.Delete,
+//                    trailingDescription = stringResource(R.string.delete),
+//                )
             }
         }
     }
