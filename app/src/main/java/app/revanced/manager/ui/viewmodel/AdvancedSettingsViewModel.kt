@@ -44,9 +44,9 @@ class AdvancedSettingsViewModel(
 
     val debugLogFileName: String
         get() {
-            val time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(LocalDateTime.now())
+            val time = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())
 
-            return "morphe_logcat_$time"
+            return "morphe_logcat_$time.log"
         }
 
 //    fun setApiUrl(value: String) = viewModelScope.launch(Dispatchers.Default) {
