@@ -15,6 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
@@ -51,7 +52,7 @@ fun PatchOptionsSection(
 
     // Track bundle update progress to show loading state
     val bundleUpdateProgress by dashboardViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
-    val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == null
+    val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == PatchBundleRepository.BundleUpdateResult.None
 
     // Collect bundle info to detect changes
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
