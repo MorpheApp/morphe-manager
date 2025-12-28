@@ -38,7 +38,6 @@ fun AppearanceSection(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    customThemeColorHex: String?,
     backgroundType: BackgroundType,
     onBackToAdvanced: () -> Unit,
     viewModel: GeneralSettingsViewModel
@@ -84,7 +83,6 @@ fun AppearanceSection(
                     pureBlackTheme = pureBlackTheme,
                     dynamicColor = dynamicColor,
                     customAccentColorHex = customAccentColorHex,
-                    customThemeColorHex = customThemeColorHex,
                     backgroundType = backgroundType,
                     viewModel = viewModel,
                     scope = scope
@@ -103,7 +101,6 @@ private fun AppearanceContent(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    customThemeColorHex: String?,
     backgroundType: BackgroundType,
     viewModel: GeneralSettingsViewModel,
     scope: CoroutineScope

@@ -2,12 +2,11 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Configuration
-import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -20,9 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,18 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.*
+import app.revanced.manager.ui.component.morphe.shared.AdaptiveLayout
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.shared.BackgroundType
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.DownloadsViewModel
-import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
-import app.revanced.manager.ui.viewmodel.ImportExportViewModel
-import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
+import app.revanced.manager.ui.component.morphe.shared.rememberWindowSize
+import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
@@ -66,9 +59,8 @@ fun MorpheSettingsScreen(
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
     val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
 
@@ -77,7 +69,6 @@ fun MorpheSettingsScreen(
     val pureBlackTheme by generalViewModel.prefs.pureBlackTheme.getAsState()
     val dynamicColor by generalViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by generalViewModel.prefs.customAccentColor.getAsState()
-    val customThemeColorHex by generalViewModel.prefs.customThemeColor.getAsState()
     val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
 
     // Plugins
@@ -174,106 +165,15 @@ fun MorpheSettingsScreen(
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize()) {
             // Animated background
-            AnimatedBackground(
-                type = backgroundType
-            )
-            val view = LocalView.current
+            AnimatedBackground(type = backgroundType)
 
-            // Main content
-            if (isLandscape) {
-                // Two-column layout for landscape
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .horizontalScroll(rememberScrollState())
-                        .padding(vertical = 8.dp, horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    // Left column
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        // Appearance Section
-                        SettingsSectionHeader(
-                            icon = Icons.Outlined.Palette,
-                            title = stringResource(R.string.appearance)
-                        )
-                        AppearanceSection(
-                            theme = theme,
-                            pureBlackTheme = pureBlackTheme,
-                            dynamicColor = dynamicColor,
-                            customAccentColorHex = customAccentColorHex,
-                            customThemeColorHex = customThemeColorHex,
-                            backgroundType = backgroundType,
-                            onBackToAdvanced = {
-                                coroutineScope.launch {
-                                    generalViewModel.prefs.useMorpheHomeScreen.update(false)
-                                }
-                                onBackClick()
-                            },
-                            viewModel = generalViewModel
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        // Updates Section
-                        UpdatesSection(
-                            usePrereleases = usePrereleases,
-                            onPreReleaseChanged = { newValue ->
-                                coroutineScope.launch {
-                                    prefs.usePatchesPrereleases.update(newValue)
-                                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                                    patchOptionsViewModel.refresh()
-                                }
-                            }
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        // Patch Options Section
-                        SettingsSectionHeader(
-                            icon = Icons.Outlined.Tune,
-                            title = stringResource(R.string.morphe_patch_options)
-                        )
-                        PatchOptionsSection(
-                            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-                            viewModel = patchOptionsViewModel
-                        )
-                    }
-
-                    // Right column
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        // Import & Export Section
-                        ImportExportSection(
-                            importExportViewModel = importExportViewModel,
-                            onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                            onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") }
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        // About Section
-                        AboutSection(
-                            onAboutClick = { showAboutDialog = true }
-                        )
-                    }
-                }
-            } else {
-                // Single column layout for portrait
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .verticalScroll(scrollState)
-                        .padding(vertical = 8.dp)
-                ) {
+            // Use adaptive layout system
+            AdaptiveLayout(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                windowSize = windowSize,
+                leftContent = {
                     // Appearance Section
                     SettingsSectionHeader(
                         icon = Icons.Outlined.Palette,
@@ -284,7 +184,6 @@ fun MorpheSettingsScreen(
                         pureBlackTheme = pureBlackTheme,
                         dynamicColor = dynamicColor,
                         customAccentColorHex = customAccentColorHex,
-                        customThemeColorHex = customThemeColorHex,
                         backgroundType = backgroundType,
                         onBackToAdvanced = {
                             coroutineScope.launch {
@@ -294,8 +193,6 @@ fun MorpheSettingsScreen(
                         },
                         viewModel = generalViewModel
                     )
-
-                    Spacer(modifier = Modifier.height(24.dp))
 
                     // Updates Section
                     UpdatesSection(
@@ -309,8 +206,6 @@ fun MorpheSettingsScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
-
                     // Patch Options Section
                     SettingsSectionHeader(
                         icon = Icons.Outlined.Tune,
@@ -320,18 +215,8 @@ fun MorpheSettingsScreen(
                         patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
                         viewModel = patchOptionsViewModel
                     )
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    // Plugins Section (optional - currently disabled with if(false))
-                    if (false) {
-                        PluginsSection(
-                            pluginStates = pluginStates,
-                            onPluginClick = { packageName -> showPluginDialog = packageName }
-                        )
-                        Spacer(modifier = Modifier.height(24.dp))
-                    }
-
+                },
+                rightContent = {
                     // Import & Export Section
                     ImportExportSection(
                         importExportViewModel = importExportViewModel,
@@ -339,18 +224,12 @@ fun MorpheSettingsScreen(
                         onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") }
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
-
                     // About Section
                     AboutSection(
-                        onAboutClick = {
-                            // Trigger haptic feedback on click
-                            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                            showAboutDialog = true
-                        }
+                        onAboutClick = { showAboutDialog = true }
                     )
                 }
-            }
+            )
         }
     }
 }
