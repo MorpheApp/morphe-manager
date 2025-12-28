@@ -25,6 +25,7 @@ import app.revanced.manager.ui.component.morphe.shared.darken
 import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -190,36 +191,11 @@ private fun AppearanceContent(
             onItemSelected = { selectedTheme ->
                 scope.launch {
                     when (selectedTheme) {
-                        "SYSTEM" -> {
-                            viewModel.setTheme(Theme.SYSTEM)
-                            viewModel.prefs.pureBlackTheme.update(false)
-                            viewModel.prefs.dynamicColor.update(false)
-                        }
-                        "LIGHT" -> {
-                            viewModel.setTheme(Theme.LIGHT)
-                            viewModel.prefs.pureBlackTheme.update(false)
-                            viewModel.prefs.dynamicColor.update(false)
-                        }
-                        "DARK" -> {
-                            viewModel.setTheme(Theme.DARK)
-                            viewModel.prefs.pureBlackTheme.update(false)
-                            viewModel.prefs.dynamicColor.update(false)
-                        }
-                        "BLACK" -> {
-                            viewModel.prefs.pureBlackTheme.update(true)
-                            viewModel.prefs.dynamicColor.update(false)
-                            viewModel.setCustomThemeColor(null)
-                            if (theme == Theme.LIGHT) {
-                                viewModel.setTheme(Theme.DARK)
-                            }
-                        }
-                        "DYNAMIC" -> {
-                            viewModel.setTheme(Theme.SYSTEM)
-                            viewModel.prefs.dynamicColor.update(true)
-                            viewModel.prefs.pureBlackTheme.update(false)
-                            viewModel.setCustomThemeColor(null)
-                            viewModel.setCustomAccentColor(null)
-                        }
+                        "SYSTEM" -> viewModel.applyThemePreset(ThemePreset.DEFAULT)
+                        "LIGHT" -> viewModel.applyThemePreset(ThemePreset.LIGHT)
+                        "DARK" -> viewModel.applyThemePreset(ThemePreset.DARK)
+                        "BLACK" -> viewModel.applyThemePreset(ThemePreset.PURE_BLACK)
+                        "DYNAMIC" -> viewModel.applyThemePreset(ThemePreset.DYNAMIC)
                     }
                 }
             },
