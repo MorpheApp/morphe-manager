@@ -186,34 +186,35 @@ fun GeneralSettingsScreen(
         ) {
             GroupHeader(stringResource(R.string.appearance))
 
+            // Morphe
 //            val selectedLanguageLabel = when (appLanguage) {
 //                "system" -> R.string.language_option_system
 //                else -> languageOptions.firstOrNull { it.code == appLanguage }?.labelRes
 //                    ?: R.string.language_option_english
 //            }
-
-            Text(
-                text = stringResource(R.string.theme_presets),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-            )
-            Text(
-                text = stringResource(R.string.theme_presets_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
+//
+//            Text(
+//                text = stringResource(R.string.theme_presets),
+//                style = MaterialTheme.typography.titleSmall,
+//                color = MaterialTheme.colorScheme.onSurface,
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+//            )
+//            Text(
+//                text = stringResource(R.string.theme_presets_description),
+//                style = MaterialTheme.typography.bodySmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                modifier = Modifier.padding(horizontal = 16.dp)
+//            )
 
             val baseThemeSwatches = remember(supportsDynamicColor) {
                 buildList {
                     add(ThemePresetSwatch(ThemePreset.DEFAULT, R.string.theme_preset_default, listOf(Color(0xFF4CD964), Color(0xFF4A90E2))))
                     add(ThemePresetSwatch(ThemePreset.LIGHT, R.string.light, listOf(Color(0xFFEEF2FF), Color(0xFFE2E6FB))))
                     add(ThemePresetSwatch(ThemePreset.DARK, R.string.dark, listOf(Color(0xFF1C1B1F), Color(0xFF2A2830))))
+                    add(ThemePresetSwatch(ThemePreset.PURE_BLACK, R.string.theme_preset_amoled, listOf(Color(0xFF000000), Color(0xFF1C1B1F))))
                     if (supportsDynamicColor) {
                         add(ThemePresetSwatch(ThemePreset.DYNAMIC, R.string.theme_preset_dynamic, listOf(Color(0xFF6750A4), Color(0xFF4285F4))))
                     }
-                    add(ThemePresetSwatch(ThemePreset.PURE_BLACK, R.string.theme_preset_amoled, listOf(Color(0xFF000000), Color(0xFF1C1B1F))))
                 }
             }
 
@@ -226,11 +227,12 @@ fun GeneralSettingsScreen(
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(
-                    text = stringResource(R.string.theme_presets_description),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                // Morphe
+//                Text(
+//                    text = stringResource(R.string.theme_presets_description),
+//                    style = MaterialTheme.typography.bodySmall,
+//                    color = MaterialTheme.colorScheme.onSurfaceVariant
+//                )
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
                 modifier = Modifier
@@ -333,14 +335,15 @@ fun GeneralSettingsScreen(
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .alpha(accentControlsAlpha)
             )
-            Text(
-                text = stringResource(R.string.accent_color_presets_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .alpha(accentControlsAlpha)
-            )
+            // Morphe
+//            Text(
+//                text = stringResource(R.string.accent_color_presets_description),
+//                style = MaterialTheme.typography.bodySmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                modifier = Modifier
+//                    .padding(horizontal = 16.dp)
+//                    .alpha(accentControlsAlpha)
+//            )
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -375,12 +378,13 @@ fun GeneralSettingsScreen(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
-            Text(
-                text = stringResource(R.string.theme_preview_description),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-            )
+            // Morphe
+//            Text(
+//                text = stringResource(R.string.theme_preview_description),
+//                style = MaterialTheme.typography.bodySmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+//            )
             ExpressiveThemePreview(
                 modifier = Modifier
                     .fillMaxWidth()
