@@ -346,6 +346,7 @@ The list of supported downloader plugins can be found"</string>
     <string name="theme_preview_title">Appearance preview</string>
     <!-- Morphe -->
     <string name="theme_preview_description" translatable="false">Preview of the theme settings above</string>
+    <string name="theme_presets">Theme presets</string>
     <!-- Morphe -->
     <string name="theme_presets_description" translatable="false">Pick how the app follows system, light, dark, Material You, or pure black</string>
     <string name="theme_preset_default">Follow system</string>
