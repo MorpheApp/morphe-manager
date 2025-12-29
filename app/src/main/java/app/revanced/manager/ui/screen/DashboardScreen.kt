@@ -99,6 +99,7 @@ import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPerm
 import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.AppSelectorViewModel
+import app.revanced.manager.util.APK_FILE_MIME_TYPES
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.MPP_FILE_MIME_TYPES
@@ -153,11 +154,20 @@ fun DashboardScreen(
     var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
 
     // Morphe begin
+    // For APK file selection (storage picker)
     val openStoragePicker = rememberFilePickerWithPermission(
+        mimeTypes = APK_FILE_MIME_TYPES,
+        onFilePicked = { uri ->
+            storageVm.handleStorageResult(uri)
+        }
+    )
+
+    // For bundle file selection (.mpp files)
+    val openBundlePicker = rememberFilePickerWithPermission(
         mimeTypes = MPP_FILE_MIME_TYPES,
         onFilePicked = { uri ->
-            selectedBundleUri = uri  // Keep content:// URI for actual file operations
-            selectedBundlePath = uri.toFilePath()  // Convert to readable path for UI display
+            selectedBundleUri = uri
+            selectedBundlePath = uri.toFilePath()
         }
     )
     // Morphe end
@@ -166,12 +176,12 @@ fun DashboardScreen(
 //    val permissionLauncher =
 //        rememberLauncherForActivityResult(permissionContract) { granted ->
 //            if (granted) {
-//                showStorageDialog()
+//                showStorageDialog = true
 //            }
 //        }
 //    val openStoragePicker = {
 //        if (fs.hasStoragePermission()) {
-//            showStorageDialog()
+//            showStorageDialog = true
 //        } else {
 //            permissionLauncher.launch(permissionName)
 //        }
@@ -191,27 +201,22 @@ fun DashboardScreen(
     val appsSelectionActive = installedAppsViewModel.selectedApps.isNotEmpty()
     val selectedAppCount = installedAppsViewModel.selectedApps.size
 
-    // Morphe
 //    var showBundleFilePicker by rememberSaveable { mutableStateOf(false) }
-
-    val (bundlePermissionContract, bundlePermissionName) = remember { fs.permissionContract() }
-    val bundlePermissionLauncher =
-        rememberLauncherForActivityResult(bundlePermissionContract) { granted ->
-            if (granted) {
-                openStoragePicker()
-//                // Morphe
+//    var selectedBundlePath by rememberSaveable { mutableStateOf<String?>(null) }
+//    val (bundlePermissionContract, bundlePermissionName) = remember { fs.permissionContract() }
+//    val bundlePermissionLauncher =
+//        rememberLauncherForActivityResult(bundlePermissionContract) { granted ->
+//            if (granted) {
 //                showBundleFilePicker = true
-            }
-        }
-    fun requestBundleFilePicker() {
-        if (fs.hasStoragePermission()) {
-            openStoragePicker()
-            // Morphe
+//            }
+//        }
+//    fun requestBundleFilePicker() {
+//        if (fs.hasStoragePermission()) {
 //            showBundleFilePicker = true
-        } else {
-            bundlePermissionLauncher.launch(bundlePermissionName)
-        }
-    }
+//        } else {
+//            bundlePermissionLauncher.launch(bundlePermissionName)
+//        }
+//    }
 
     LaunchedEffect(pagerState.currentPage) {
         if (pagerState.currentPage != DashboardPage.DASHBOARD.ordinal) {
@@ -294,7 +299,7 @@ fun DashboardScreen(
                 vm.createRemoteSource(url, autoUpdate)
             },
             onLocalPick = {
-                requestBundleFilePicker()
+                openBundlePicker()
             },
             selectedLocalPath = selectedBundlePath
         )
