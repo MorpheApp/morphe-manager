@@ -505,12 +505,14 @@ class SelectedAppInfoViewModel(
     private val launchActivityChannel = Channel<Intent>()
     val launchActivityFlow = launchActivityChannel.receiveAsFlow()
 
-    val errorFlow = combine(plugins, snapshotFlow { selectedApp }) { pluginsList, app ->
-        when {
-            app is SelectedApp.Search && pluginsList.isEmpty() -> Error.NoPlugins
-            else -> null
-        }
-    }
+    // Morphe: Do not show the message "Downloaders installed but none are trusted"
+//    val errorFlow = combine(plugins, snapshotFlow { selectedApp }) { pluginsList, app ->
+//        when {
+//            app is SelectedApp.Search && pluginsList.isEmpty() -> Error.NoPlugins
+//            else -> null
+//        }
+//    }
+    val errorFlow = MutableStateFlow<Error?>(null).asStateFlow()
 
     fun showSourceSelector() {
         dismissSourceSelector()
@@ -798,7 +800,6 @@ class SelectedAppInfoViewModel(
                 }
                 downloaded?.let { resolvePackageInfo(downloadedAppRepository.getPreparedApkFile(it)) }
             }
-            else -> null
         }
 
         selectedAppInfo = info
@@ -976,7 +977,7 @@ class SelectedAppInfoViewModel(
         }
 
         candidates.firstNotNullOfOrNull { candidate ->
-            candidate?.let(::extractVersionCandidate)
+            candidate.let(::extractVersionCandidate)
         }
     }
 
