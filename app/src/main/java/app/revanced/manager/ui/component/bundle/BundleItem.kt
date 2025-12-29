@@ -228,7 +228,7 @@ fun BundleItem(
             .clip(cardShape)
             .combinedClickable(
                 onClick = { viewBundleDialogPage = true },
-                onLongClick = onSelect,
+//                onLongClick = onSelect,
             ),
         shape = cardShape,
         tonalElevation = 2.dp

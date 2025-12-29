@@ -166,8 +166,8 @@ fun DashboardScreen(
     val openBundlePicker = rememberFilePickerWithPermission(
         mimeTypes = MPP_FILE_MIME_TYPES,
         onFilePicked = { uri ->
-            selectedBundleUri = uri
-            selectedBundlePath = uri.toFilePath()
+            selectedBundleUri = uri  // Keep content:// URI for actual file operations
+            selectedBundlePath = uri.toFilePath()  // Convert to readable path for UI display
         }
     )
     // Morphe end
