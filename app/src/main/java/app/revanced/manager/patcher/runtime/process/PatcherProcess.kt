@@ -60,12 +60,12 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
                 val patches = (allPatches[config.bundle] ?: return@flatMap emptyList())
-                        .filter { it.name in config.patches }
-                        .associateBy { it.name }
+                    .filter { it.name in config.patches }
+                    .associateBy { it.name }
 
                 config.options.forEach { (patchName, opts) ->
-                    val patchOptions = patches[patchName]?.options
-                        ?: throw Exception("Patch with name $patchName does not exist.")
+                    // Morphe: Skip if patch doesn't exist in this bundle
+                    val patchOptions = patches[patchName]?.options ?: return@forEach
 
                     opts.forEach { (key, value) ->
                         patchOptions[key] = value
