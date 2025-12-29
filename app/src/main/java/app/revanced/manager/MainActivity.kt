@@ -1,13 +1,10 @@
 package app.revanced.manager
 
-import android.content.ActivityNotFoundException
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -26,10 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.model.navigation.AppSelector
 import app.revanced.manager.ui.model.navigation.ComplexParameter
@@ -59,7 +53,7 @@ import app.revanced.manager.ui.screen.settings.AdvancedSettingsScreen
 import app.revanced.manager.ui.screen.settings.ContributorSettingsScreen
 import app.revanced.manager.ui.screen.settings.DeveloperSettingsScreen
 import app.revanced.manager.ui.screen.settings.DownloadsSettingsScreen
-import app.revanced.manager.ui.screen.settings.GeneralSettingsScreen
+import app.revanced.manager.ui.screen.settings.MorpheThemeSettingsScreen
 import app.revanced.manager.ui.screen.settings.ImportExportSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.ChangelogsSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
@@ -410,8 +404,8 @@ private fun ReVancedManager(vm: MainViewModel) {
                 )
             }
 
-            composable<Settings.General> {
-                GeneralSettingsScreen(onBackClick = navController::popBackStack)
+            composable<Settings.Theme> {
+                MorpheThemeSettingsScreen(onBackClick = navController::popBackStack)
             }
 
             composable<Settings.Advanced> {

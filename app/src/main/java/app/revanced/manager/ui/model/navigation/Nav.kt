@@ -78,8 +78,9 @@ object Settings {
     @Serializable
     data object Main : Destination
 
+    // Morphe. Was General setting
     @Serializable
-    data object General : Destination
+    data object Theme : Destination
 
     @Serializable
     data object Advanced : Destination

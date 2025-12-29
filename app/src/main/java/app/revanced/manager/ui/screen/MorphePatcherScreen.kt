@@ -38,10 +38,9 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.State
-import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
@@ -62,7 +61,7 @@ fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    generalViewModel: GeneralSettingsViewModel = koinViewModel(),
+    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
     installViewModel: MorpheInstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -84,7 +83,7 @@ fun MorphePatcherScreen(
         label = "progress_animation"
     )
 
-    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
+    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     // Get output file from viewModel
     val outputFile = viewModel.outputFile

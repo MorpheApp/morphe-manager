@@ -58,7 +58,7 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
                 R.string.appearance,
                 R.string.appearance_description,
                 Icons.Outlined.Palette,
-                Settings.General
+                Settings.Theme
             ),
             Section(
                 R.string.updates,

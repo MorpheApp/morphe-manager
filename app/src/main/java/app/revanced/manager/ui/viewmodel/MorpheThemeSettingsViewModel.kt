@@ -28,14 +28,12 @@ private data class ThemePresetConfig(
     val customThemeHex: String = ""
 )
 
-class GeneralSettingsViewModel(
+/**
+ * Original was GeneralSettingsViewModel until changed to just "Theme" for Morphe advanced mode.
+ */
+class MorpheThemeSettingsViewModel(
     val prefs: PreferencesManager
 ) : ViewModel() {
-    fun setTheme(theme: Theme) = viewModelScope.launch {
-        prefs.theme.update(theme)
-        resetListItemColorsCached()
-    }
-
     private val presetConfigs = mapOf(
         ThemePreset.DEFAULT to ThemePresetConfig(
             theme = Theme.SYSTEM
@@ -86,16 +84,6 @@ class GeneralSettingsViewModel(
         }
     }
 
-    fun toggleThemePreset(preset: ThemePreset) = viewModelScope.launch {
-        val current = getCurrentThemePreset()
-        if (current == preset) {
-            val resetTheme = if (preset == ThemePreset.LIGHT) Theme.SYSTEM else null
-            clearThemePresetSelection(resetTheme)
-        } else {
-            applyThemePreset(preset)
-        }
-    }
-
     fun applyThemePreset(preset: ThemePreset) = viewModelScope.launch {
         val config = presetConfigs[preset] ?: return@launch
         prefs.themePresetSelectionEnabled.update(true)
@@ -112,14 +100,6 @@ class GeneralSettingsViewModel(
 
         prefs.themePresetSelectionName.update(preset.name)
         resetListItemColorsCached()
-    }
-
-    private suspend fun clearThemePresetSelection(resetTheme: Theme? = null) {
-        prefs.themePresetSelectionEnabled.update(false)
-        prefs.themePresetSelectionName.update("")
-        prefs.dynamicColor.update(false)
-        prefs.pureBlackTheme.update(false)
-        resetTheme?.let { prefs.theme.update(it) }
     }
 
     private suspend fun getCurrentThemePreset(): ThemePreset? {

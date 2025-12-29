@@ -36,7 +36,7 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
 import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
-import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import app.revanced.manager.util.toHexString
@@ -60,28 +60,15 @@ val THEME_PRESET_COLORS = listOf(
     Color(0xFFBA68C8)
 )
 
-// Morphe: This is presented in the UI as "Appearance"
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun GeneralSettingsScreen(
+fun MorpheThemeSettingsScreen(
     onBackClick: () -> Unit,
-    viewModel: GeneralSettingsViewModel = koinViewModel()
+    viewModel: MorpheThemeSettingsViewModel = koinViewModel()
 ) {
     val prefs = viewModel.prefs
-    // Morphe
-//    var showAccentPicker by rememberSaveable { mutableStateOf(false) }
-//    var showThemeColorPicker by rememberSaveable { mutableStateOf(false) }
 
     val customAccentColorHex by prefs.customAccentColor.getAsState()
-//    val customThemeColorHex by prefs.customThemeColor.getAsState()
-//    val theme by prefs.theme.getAsState()
-//    val appLanguage by prefs.appLanguage.getAsState()
-//    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
-    // Allow selecting the AMOLED preset regardless of the current theme since selecting it switches to dark mode anyway.
-//    val allowPureBlackPreset = true
-//    val dynamicColorEnabled by prefs.dynamicColor.getAsState()
-//    val pureBlackThemeEnabled by prefs.pureBlackTheme.getAsState()
     val themePresetSelectionEnabled by prefs.themePresetSelectionEnabled.getAsState()
     val selectedThemePresetName by prefs.themePresetSelectionName.getAsState()
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -91,9 +78,7 @@ fun GeneralSettingsScreen(
             if (!supportsDynamicColor && preset == ThemePreset.DYNAMIC) ThemePreset.DEFAULT else preset
         }
     }
-//    val canAdjustThemeColor = selectedThemePreset == null
     val canAdjustAccentColor = selectedThemePreset != ThemePreset.DYNAMIC
-//    val themeControlsAlpha = if (canAdjustThemeColor) 1f else 0.5f
     val accentControlsAlpha = if (canAdjustAccentColor) 1f else 0.5f
 
     // Morphe For now hide this
@@ -102,42 +87,11 @@ fun GeneralSettingsScreen(
 //            LanguageOption("system", R.string.language_option_system),
 //            LanguageOption("en", R.string.language_option_english),
 //            LanguageOption("zh-CN", R.string.language_option_chinese_simplified),
-//            // From PR #38: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/38
 //            LanguageOption("vi", R.string.language_option_vietnamese),
-//            // From PR #42: https://github.com/Jman-Github/Universal-ReVanced-Manager/pull/42
 //            LanguageOption("ko", R.string.language_option_korean),
 //            LanguageOption("ja", R.string.language_option_japanese),
 //            LanguageOption("ru", R.string.language_option_russian),
 //            LanguageOption("uk", R.string.language_option_ukrainian)
-//        )
-//    }
-//
-//    if (!canAdjustThemeColor && showThemeColorPicker) showThemeColorPicker = false
-//    if (!canAdjustAccentColor && showAccentPicker) showAccentPicker = false
-//    if (showThemeColorPicker) {
-//        val currentThemeColor = customThemeColorHex.toColorOrNull()
-//        ColorPickerDialog(
-//            titleRes = R.string.theme_color_picker_title,
-//            previewLabelRes = R.string.theme_color_preview,
-//            resetLabelRes = R.string.theme_color_reset,
-//            initialColor = currentThemeColor ?: MaterialTheme.colorScheme.surface,
-//            allowReset = currentThemeColor != null,
-//            onReset = { viewModel.setCustomThemeColor(null) },
-//            onConfirm = { color -> viewModel.setCustomThemeColor(color) },
-//            onDismiss = { showThemeColorPicker = false }
-//        )
-//    }
-//    if (showAccentPicker) {
-//        val currentAccent = customAccentColorHex.toColorOrNull()
-//        ColorPickerDialog(
-//            titleRes = R.string.accent_color_picker_title,
-//            previewLabelRes = R.string.accent_color_preview,
-//            resetLabelRes = R.string.accent_color_reset,
-//            initialColor = currentAccent ?: MaterialTheme.colorScheme.primary,
-//            allowReset = currentAccent != null,
-//            onReset = { viewModel.setCustomAccentColor(null) },
-//            onConfirm = { color -> viewModel.setCustomAccentColor(color) },
-//            onDismiss = { showAccentPicker = false }
 //        )
 //    }
 //
@@ -155,6 +109,7 @@ fun GeneralSettingsScreen(
 //            onDismiss = { showLanguageDialog = false }
 //        )
 //    }
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -172,28 +127,6 @@ fun GeneralSettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Morphe
-//            GroupHeader(stringResource(R.string.appearance))
-//
-//            val selectedLanguageLabel = when (appLanguage) {
-//                "system" -> R.string.language_option_system
-//                else -> languageOptions.firstOrNull { it.code == appLanguage }?.labelRes
-//                    ?: R.string.language_option_english
-//            }
-//
-//            Text(
-//                text = stringResource(R.string.theme_presets),
-//                style = MaterialTheme.typography.titleSmall,
-//                color = MaterialTheme.colorScheme.onSurface,
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-//            )
-//            Text(
-//                text = stringResource(R.string.theme_presets_description),
-//                style = MaterialTheme.typography.bodySmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier.padding(horizontal = 16.dp)
-//            )
-
             val baseThemeSwatches = remember(supportsDynamicColor) {
                 buildList {
                     add(ThemePresetSwatch(ThemePreset.DEFAULT, R.string.theme_preset_default, listOf(Color(0xFF4CD964), Color(0xFF4A90E2))))
@@ -215,12 +148,6 @@ fun GeneralSettingsScreen(
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                // Morphe
-//                Text(
-//                    text = stringResource(R.string.theme_presets_description),
-//                    style = MaterialTheme.typography.bodySmall,
-//                    color = MaterialTheme.colorScheme.onSurfaceVariant
-//                )
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
                     modifier = Modifier
@@ -238,131 +165,12 @@ fun GeneralSettingsScreen(
                                 label = stringResource(option.labelRes),
                                 colors = option.colors,
                                 isSelected = selectedThemePreset == option.preset,
-                                // Morphe
-                                enabled = true,
-//                                enabled = option.preset != ThemePreset.PURE_BLACK || allowPureBlackPreset,
                                 onClick = { viewModel.applyThemePreset(option.preset) }
-//                                onClick = { viewModel.toggleThemePreset(option.preset) }
                             )
                         }
                     }
                 }
             }
-
-
-            // Morphe
-//            ExpressiveSettingsCard(
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-//            ) {
-//                ExpressiveSettingsItem(
-//                    modifier = Modifier
-//                        .alpha(themeControlsAlpha),
-//                    headlineContent = stringResource(R.string.theme_color),
-//                    supportingContent = stringResource(R.string.theme_color_description),
-//                    trailingContent = {
-//                        val previewColor = customThemeColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.surface
-//                        Box(
-//                            modifier = Modifier
-//                                .size(32.dp)
-//                                .clip(RoundedCornerShape(12.dp))
-//                                .border(
-//                                    width = 1.dp,
-//                                    color = MaterialTheme.colorScheme.outline,
-//                                    shape = RoundedCornerShape(12.dp)
-//                                )
-//                                .background(previewColor, RoundedCornerShape(12.dp))
-//                        )
-//                    },
-//                    enabled = canAdjustThemeColor,
-//                    onClick = { showThemeColorPicker = true }
-//                )
-//                ExpressiveSettingsDivider()
-//                ExpressiveSettingsItem(
-//                    modifier = Modifier.alpha(accentControlsAlpha),
-//                    headlineContent = stringResource(R.string.accent_color),
-//                    supportingContent = stringResource(R.string.accent_color_description),
-//                    trailingContent = {
-//                        val previewColor = customAccentColorHex.toColorOrNull() ?: MaterialTheme.colorScheme.primary
-//                        Box(
-//                            modifier = Modifier
-//                                .size(32.dp)
-//                                .clip(RoundedCornerShape(12.dp))
-//                                .border(
-//                                    width = 1.dp,
-//                                    color = MaterialTheme.colorScheme.outline,
-//                                    shape = RoundedCornerShape(12.dp)
-//                                )
-//                                .background(previewColor, RoundedCornerShape(12.dp))
-//                        )
-//                    },
-//                    enabled = canAdjustAccentColor,
-//                    onClick = { showAccentPicker = true }
-//                )
-//            }
-//
-//            val accentPresets = remember {
-//                listOf(
-//                    Color(0xFF6750A4),
-//                    Color(0xFF386641),
-//                    Color(0xFF0061A4),
-//                    Color(0xFF8E24AA),
-//                    Color(0xFFEF6C00),
-//                    Color(0xFF00897B),
-//                    Color(0xFFD81B60),
-//                    Color(0xFF5C6BC0),
-//                    Color(0xFF43A047),
-//                    Color(0xFFFF7043),
-//                    Color(0xFF1DE9B6),
-//                    Color(0xFFFFC400),
-//                    Color(0xFF00B8D4),
-//                    Color(0xFFBA68C8)
-//                )
-//            }
-//            val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
-//            Text(
-//                text = stringResource(R.string.accent_color_presets),
-//                style = MaterialTheme.typography.titleSmall,
-//                color = MaterialTheme.colorScheme.onSurface,
-//                modifier = Modifier
-//                    .padding(horizontal = 16.dp, vertical = 8.dp)
-//                    .alpha(accentControlsAlpha)
-//            )
-//            Text(
-//                text = stringResource(R.string.accent_color_presets_description),
-//                style = MaterialTheme.typography.bodySmall,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier
-//                    .padding(horizontal = 16.dp)
-//                    .alpha(accentControlsAlpha)
-//            )
-//            FlowRow(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp, vertical = 12.dp)
-//                    .alpha(accentControlsAlpha),
-//                horizontalArrangement = Arrangement.spacedBy(12.dp),
-//                verticalArrangement = Arrangement.spacedBy(12.dp)
-//            ) {
-//                accentPresets.forEach { preset ->
-//                    val isSelected = selectedAccentArgb != null && preset.toArgb() == selectedAccentArgb
-//                    Box(
-//                        modifier = Modifier
-//                            .size(40.dp)
-//                            .clip(RoundedCornerShape(14.dp))
-//                            .border(
-//                                width = if (isSelected) 2.dp else 1.dp,
-//                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
-//                                shape = RoundedCornerShape(14.dp)
-//                            )
-//                            .background(preset, RoundedCornerShape(12.dp))
-//                            .clickable(enabled = canAdjustAccentColor) {
-//                                viewModel.setCustomAccentColor(preset)
-//                            }
-//                    )
-//                }
-//            }
-//            Spacer(modifier = Modifier.height(16.dp))
 
             // Accent Color Section with Expressive Style
             val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
@@ -440,9 +248,6 @@ fun GeneralSettingsScreen(
                 }
             }
 
-            // Morphe
-//            GroupHeader(stringResource(R.string.theme_preview_title))
-
             ExpressiveThemePreview(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -450,24 +255,6 @@ fun GeneralSettingsScreen(
             )
 
             Spacer(modifier = Modifier.height(20.dp))
-            // Morphe
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp)
-//                    .height(1.dp)
-//                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
-//            )
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            FilledTonalButton(
-//                onClick = { viewModel.resetThemeSettings() },
-//                modifier = Modifier
-//                    .padding(horizontal = 16.dp)
-//                    .fillMaxWidth()
-//            ) {
-//                Text(stringResource(R.string.theme_reset))
-//            }
 
             // FIXME: Hide this until we can add all Crowdin languages
 //            GroupHeader(stringResource(R.string.language_settings))
@@ -486,8 +273,8 @@ fun GeneralSettingsScreen(
     }
 }
 
-private data class ThemePresetSwatch(val preset: ThemePreset, @StringRes val labelRes: Int, val colors: List<Color>)
-private data class LanguageOption(val code: String, @StringRes val labelRes: Int)
+private data class ThemePresetSwatch(val preset: ThemePreset, @param:StringRes val labelRes: Int, val colors: List<Color>)
+private data class LanguageOption(val code: String, @param:StringRes val labelRes: Int)
 
 
 @Composable
@@ -496,16 +283,15 @@ private fun ThemeSwatchChip(
     label: String,
     colors: List<Color>,
     isSelected: Boolean,
-    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
-    val swatchAlpha = if (enabled) 1f else 0.5f
+    val swatchAlpha = 1f
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .alpha(swatchAlpha)
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(onClick = onClick)
             .padding(4.dp)
     ) {
         Box(
@@ -788,73 +574,6 @@ private fun ColorChannelSlider(
                 thumbColor = trackColor
             )
         )
-    }
-}
-
-@Composable
-private fun ThemePreview(modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(18.dp)
-    Surface(
-        modifier = modifier
-            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape)
-            .clip(shape),
-        shape = shape,
-        tonalElevation = 1.dp,
-        color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .background(
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.18f),
-                            RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    Text(
-                        text = "UR",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.app_name),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = stringResource(R.string.theme_preview_description),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.6f))
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                OutlinedButton(onClick = { }) {
-                    Text(stringResource(R.string.apply))
-                }
-                TextButton(onClick = { }) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-            }
-        }
     }
 }
 

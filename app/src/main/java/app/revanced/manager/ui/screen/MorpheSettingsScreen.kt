@@ -51,7 +51,7 @@ import org.koin.compose.koinInject
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
-    generalViewModel: GeneralSettingsViewModel = koinViewModel(),
+    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     dashboardViewModel: DashboardViewModel = koinViewModel(),
@@ -62,14 +62,14 @@ fun MorpheSettingsScreen(
     val coroutineScope = rememberCoroutineScope()
     val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
-    val usePrereleases = generalViewModel.prefs.usePatchesPrereleases.getAsState()
+    val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
-    val theme by generalViewModel.prefs.theme.getAsState()
-    val pureBlackTheme by generalViewModel.prefs.pureBlackTheme.getAsState()
-    val dynamicColor by generalViewModel.prefs.dynamicColor.getAsState()
-    val customAccentColorHex by generalViewModel.prefs.customAccentColor.getAsState()
-    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
+    val theme by themeViewModel.prefs.theme.getAsState()
+    val pureBlackTheme by themeViewModel.prefs.pureBlackTheme.getAsState()
+    val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
+    val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
+    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
@@ -187,11 +187,11 @@ fun MorpheSettingsScreen(
                         backgroundType = backgroundType,
                         onBackToAdvanced = {
                             coroutineScope.launch {
-                                generalViewModel.prefs.useMorpheHomeScreen.update(false)
+                                themeViewModel.prefs.useMorpheHomeScreen.update(false)
                             }
                             onBackClick()
                         },
-                        viewModel = generalViewModel
+                        viewModel = themeViewModel
                     )
 
                     // Updates Section

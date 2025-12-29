@@ -17,18 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
-import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -63,7 +61,7 @@ fun MorpheHomeScreen(
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    generalViewModel: GeneralSettingsViewModel = koinViewModel()
+    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -93,7 +91,7 @@ fun MorpheHomeScreen(
     var bundleUpdateInProgress by remember { mutableStateOf(false) }
     var showUpdateDetailsDialog by remember { mutableStateOf(false) }
 
-    val backgroundType by generalViewModel.prefs.backgroundType.getAsState()
+    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     suspend fun updateMorpheBundleAndUI() {
         bundleUpdateInProgress = true

@@ -15,7 +15,7 @@ val viewModelModule = module {
     viewModel { (params: SelectedApplicationInfo.PatchesSelector.ViewModelParams) ->
         PatchesSelectorViewModel(params)
     }
-    viewModelOf(::GeneralSettingsViewModel)
+    viewModelOf(::MorpheThemeSettingsViewModel)
     viewModelOf(::AdvancedSettingsViewModel)
     viewModelOf(::AppSelectorViewModel)
     viewModelOf(::PatcherViewModel)

@@ -24,7 +24,7 @@ import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
 import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
-import app.revanced.manager.ui.viewmodel.GeneralSettingsViewModel
+import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +42,7 @@ fun AppearanceSection(
     customAccentColorHex: String?,
     backgroundType: BackgroundType,
     onBackToAdvanced: () -> Unit,
-    viewModel: GeneralSettingsViewModel
+    viewModel: MorpheThemeSettingsViewModel
 ) {
     val scope = rememberCoroutineScope()
     var expanded by remember { mutableStateOf(false) }
@@ -104,7 +104,7 @@ private fun AppearanceContent(
     dynamicColor: Boolean,
     customAccentColorHex: String?,
     backgroundType: BackgroundType,
-    viewModel: GeneralSettingsViewModel,
+    viewModel: MorpheThemeSettingsViewModel,
     scope: CoroutineScope
 ) {
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
