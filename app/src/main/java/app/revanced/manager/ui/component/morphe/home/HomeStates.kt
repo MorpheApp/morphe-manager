@@ -15,6 +15,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
+import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
@@ -229,11 +230,14 @@ class HomeStates(
      * Start patching process with selected app
      */
     suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
-        val bundles = withContext(Dispatchers.IO) {
+        val allBundles = withContext(Dispatchers.IO) {
             dashboardViewModel.patchBundleRepository
                 .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
                 .first()
         }
+
+        // Filter to only use default bundle (bundle 0) in Morphe mode to prevent conflicts with custom patch bundles
+        val bundles = allBundles.filter { it.uid == PatchBundleRepository.DEFAULT_SOURCE_UID }
 
         val patches = bundles.toPatchSelection(allowIncompatible) { _, patch ->
             patch.include &&
