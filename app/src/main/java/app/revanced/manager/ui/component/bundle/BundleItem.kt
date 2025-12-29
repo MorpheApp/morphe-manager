@@ -401,6 +401,17 @@ fun BundleItem(
 //                    trailingIcon = Icons.Outlined.Delete,
 //                    trailingDescription = stringResource(R.string.delete),
 //                )
+
+                // Show delete button only for non-default bundles
+                if (!src.isDefault) {
+                    ActionIconButton(onClick = { showDeleteConfirmationDialog = true }) {
+                        Icon(
+                            Icons.Outlined.Delete,
+                            contentDescription = stringResource(R.string.delete),
+                            modifier = Modifier.size(ActionIconSize)
+                        )
+                    }
+                }
             }
         }
     }
