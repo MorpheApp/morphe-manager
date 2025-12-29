@@ -43,10 +43,14 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         // Set all patch options.
         options.forEach { (bundle, bundlePatchOptions) ->
             val patches = allPatches[bundle] ?: return@forEach
+            val patchesByName = patches.associateBy { it.name }
+
             bundlePatchOptions.forEach { (patchName, configuredPatchOptions) ->
-                val patchOptions = patches.single { it.name == patchName }.options
+                // Morphe: Skip if patch doesn't exist in this bundle
+                val patch = patchesByName[patchName] ?: return@forEach
+
                 configuredPatchOptions.forEach { (key, value) ->
-                    patchOptions[key] = value
+                    patch.options[key] = value
                 }
             }
         }
