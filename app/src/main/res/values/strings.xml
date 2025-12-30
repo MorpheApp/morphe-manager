@@ -187,7 +187,6 @@
     <string name="patch_bundle">Patch Bundle</string>
     <!-- Morphe -->
     <string name="manager" translatable="false">Manager</string>
-    <!-- Morphe -->
     <string name="installer">Installer</string>
 
     <string name="plugin_host_permission_label">Morphe plugin host</string>
@@ -634,7 +633,7 @@ Signature (SHA-256): %2$s"</string>
     <string name="api_url_dialog_save">Set</string>
     <string name="api_url_dialog_reset">Reset API URL</string>
     <!-- Morphe -->
-    <string name="github">GitHub</string>
+    <string name="github" translatable="false">GitHub</string>
     <string name="github_pat" translatable="false">GitHub PAT</string>
     <string name="github_pat_description">GitHub Personal Access Token needed for GitHub integration</string>
     <string name="set_github_pat_dialog_title">Set GitHub PAT</string>
