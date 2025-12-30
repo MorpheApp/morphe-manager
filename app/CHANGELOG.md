@@ -1,3 +1,18 @@
+# app [1.0.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2025-12-30)
+
+
+### Bug Fixes
+
+* Fix `isBundleUpdating` state after merge upstream changes ([7598e6d](https://github.com/MorpheApp/morphe-manager/commit/7598e6d49a570b7bfcfaecedf771ac79c3163a85))
+* Fix apk picker ([ae813d6](https://github.com/MorpheApp/morphe-manager/commit/ae813d6861879e0f4ef286360f095658394e94b8))
+* Restore only delete button ([bf7c045](https://github.com/MorpheApp/morphe-manager/commit/bf7c045758f7c40d19b9e87680cbe13aa87035ee))
+* Skip if patch doesn't exist in this bundle ([6482987](https://github.com/MorpheApp/morphe-manager/commit/6482987fe6b578ef4bef8f73071194a3507afee0))
+
+
+### Features
+
+* Add in-app patches options ([#27](https://github.com/MorpheApp/morphe-manager/issues/27)) ([2ce57a7](https://github.com/MorpheApp/morphe-manager/commit/2ce57a7e772608a7faa406ea6c45061a7c7566ca))
+
 # app [1.0.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2025-12-25)
 
 
