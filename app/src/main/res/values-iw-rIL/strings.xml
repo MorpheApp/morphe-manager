@@ -2,24 +2,25 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">חבילת תיקון</string>
-    <string name="morphe_home_greeting_1">איזו יישומון אתה רוצה לשדרג? 🛠️</string>
+    <string name="morphe_home_greeting_1">אילו יישומון אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">מוכן להפוך את YouTube למיתולוגי שוב? 🔥📺</string>
-    <!-- Energetic, light-hearted joke to build excitement -->
-    <string name="morphe_home_greeting_3">חגרו חגורות, זמן השידרוג כאן 🚀</string>
+    <string name="morphe_home_greeting_2">מוכן להפוך את YouTube למיתולוגי שוב?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">הדק את חגורות, הגיע זמן התיקונים</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">עוד יום, עוד יצירת מופת חסומת פרסומות 😌🚫</string>
-    <string name="morphe_home_greeting_5">רוצה לצפות בפרסומות? גם אני לא 🙃❌</string>
+    <string name="morphe_home_greeting_4">עוד יום, עוד יצירת מופת עם חסימת פרסומות</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">רוצה לצפות בפרסומות? גם אני לא</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">לנו להפוך את היישומים שלך להתנהג 😏📱</string>
+    <string name="morphe_home_greeting_6">בואו נגרום לאפליקציות שלך להתנהג</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">תחזית היום: סיכוי של 100% לתיקון 🌩️🧩</string>
-    <!-- Self-aware humorous greeting, breaking the fourth wall -->
-    <string name="morphe_home_greeting_8">תיקנים באחריות... או לא 😄⚙️</string>
+    <string name="morphe_home_greeting_7">הסיכוי לתיקון היום: 100%</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">מוכן להפוך את המאכזב לנפלא?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">הצלת אפליקציות מעצמן מאז היום 🦸‍♂️✨</string>
+    <string name="morphe_home_greeting_9">מצילים אפליקציות מעצמן מהיום</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">מופעל באמצעות קפאין ותיקונים טובים ☕🧠</string>
+    <string name="morphe_home_greeting_10">מופעל על ידי קפאין ותיקונים טובים</string>
     <string name="morphe_home_bundle_type_api">חבילת API</string>
     <string name="morphe_home_update_error">העדכון נכשל</string>
     <string name="morphe_home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
@@ -40,11 +41,10 @@
     <string name="morphe_home_apk_availability_dialog_description_simple">כדי לתקן את %1$s, אתה צריך את הגרסה %2$s (לא מתוקנת)</string>
     <string name="morphe_home_apk_availability_yes">כן, יש לי את זה</string>
     <string name="morphe_home_apk_availability_no">לא, עזור לי למצוא את זה</string>
-    <string name="morphe_home_apk_availability_dialog_description">כדי לתקן את %1$s, אתה צריך את הגרסה %2$s (לא מתוקנת)</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">הורד את ה-APK המקורי</string>
     <string name="morphe_home_download_instructions_steps_title">הוראות:</string>
-    <string name="morphe_home_download_instructions_step1">לחץ על הכפתור \'המשך ל-APKMirror.com\' למטה</string>
+    <string name="morphe_home_download_instructions_step1">กด \'%1$s\' buttox Shirah</string>
     <string name="morphe_home_download_instructions_step2_part1">גלול מטה בדף האינטרנט ולחץ על</string>
     <string name="morphe_home_download_instructions_download_button_toast">לחץ הורד באתר, ולא כאן 😊</string>
     <string name="morphe_home_download_instructions_step3">המתן להשלמת ההורדה, ו&lt;b&gt;אל תתקין&lt;/b&gt; את ה-APK</string>
@@ -113,7 +113,7 @@
     <string name="morphe_patcher_message_17">מעודד את האפליקציה לקבל את עצמה החדשה והטובה יותר… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">משנה את הסופרפוזיציה של האפליקציה מלא מתוקנת למתוקנת… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
     <string name="morphe_patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
     <!-- Morphe Settings Screen -->
@@ -123,45 +123,78 @@
     <string name="morphe_settings_return_to_advanced_description">עבור למצב המתקדם בעל תכונות מלאות</string>
     <string name="morphe_share_website">שתף אתר אינטרנט</string>
     <string name="morphe_share_website_description">שתף את אתר האינטרנט הרשמי של Morphe</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">אפשרויות ההגשות</string>
+    <string name="morphe_appearance_options_description">תכשולים בהגשות, צבעים ואפורים</string>
     <string name="morphe_background_type">אנימציית רקע</string>
     <string name="morphe_background_type_circles">עיגולים</string>
     <string name="morphe_background_type_rings">טבעות</string>
     <string name="morphe_background_type_waves">גלים</string>
     <string name="morphe_background_type_space">חלל</string>
     <string name="morphe_background_type_shapes">צורות</string>
+    <string name="morphe_background_type_snow">גשם</string>
     <string name="morphe_background_type_none">ללא</string>
+    <!-- Update Section -->
     <string name="morphe_update_use_patches_prereleases">השתמש בתיקוני גרסאות מוקדמות</string>
     <string name="morphe_update_use_patches_prereleases_description">השתמש בתיקוני הפיתוח האחרונים</string>
-    <string name="patches_bundle_json_url">כתובת URL של קובץ JSON של חבילת תיקונים</string>
-    <string name="patches_bundle_json_url_description">כתובת URL לקובץ JSON המכיל מידע על חבילת התיקונים</string>
-    <string name="patches_bundle_json_url_dialog_title">כתובת URL של חבילת תיקונים</string>
-    <string name="patches_bundle_json_url_dialog_description">הזן את כתובת ה-URL לקובץ JSON המכיל מידע על חבילת התיקונים. ה-JSON צריך לעקוב אחר הפורמט הנדרש</string>
-    <string name="patches_bundle_json_url_label">כתובת URL של JSON</string>
-    <string name="patches_bundle_json_url_error">כתובת ה-URL חייבת להתחיל ב-http:// או https://</string>
-    <string name="patches_bundle_json_url_invalid">פורמט כתובת URL שגוי</string>
-    <string name="patches_bundle_json_dialog_reset">אפס לברירת מחדל</string>
-    <string name="patches_bundle_json_dialog_save">שמור</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">אפשרויות תיקון</string>
+    <string name="morphe_patch_options_youtube_description">Тема, маркетинг, хедер, а также опции для Shorts</string>
+    <string name="morphe_patch_options_youtube_music_description">Опции темы и брендинга</string>
+    <string name="morphe_patch_options_restart_message">Изменение опций патча требует переустановки приложения для применения изменений</string>
+    <string name="morphe_icon_instructions_title">Инструкции по формату иконки</string>
+    <string name="morphe_header_instructions_title">Инструкции по формату хедера</string>
+    <string name="morphe_loading_patch_options">Загрузка опций патча...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Ждите, пока пакет патча будет обновлен</string>
+    <string name="morphe_patch_options_load_error">Ошибка загрузки опций патча</string>
+    <string name="morphe_no_options_available">Для этого патча недоступны опции.</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">Цвет \"изготовителя\"</string>
+    <string name="morphe_hex_color">Цвет в формате HEX</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">Цвета темы приложения</string>
+    <string name="morphe_theme_dark_color">Цвет фона для темной темы</string>
+    <string name="morphe_theme_dark_color_description">Цвет фона для темной темы</string>
+    <string name="morphe_theme_light_color">Цвет фона для светлой темы</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">Пользовательский брендирование</string>
+    <string name="morphe_custom_app_name_description">Изменить отображаемое имя приложения</string>
+    <string name="morphe_custom_app_name_hint">Введите пользовательское имя</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">Пользовательский заголовочный логотип</string>
+    <string name="morphe_custom_header_description">Путь к папке с файлами пользовательского хедера</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">Скрыть функции Shorts</string>
+    <string name="morphe_hide_shorts_app_shortcut">Скрыть ярлык Shorts</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">Убрать Shorts из меню долгого нажатия в запуске</string>
+    <string name="morphe_hide_shorts_widget">Скрыть виджет Shorts</string>
+    <string name="morphe_hide_shorts_widget_description">Убрать кнопку Shorts из виджета запуска</string>
     <!-- Other strings -->
     <string name="patcher">מכוון</string>
     <string name="patches">תיקונים</string>
     <string name="patch_bundles">חבילות תיקון</string>
     <string name="patch_bundle">חבילת תיקון</string>
+    <!-- Morphe -->
+    <string name="installer">Установщик</string>
     <string name="plugin_host_permission_label">מארח פלאגין של Morphe</string>
     <string name="plugin_host_permission_description">משמש לשליטה בגישה לפלאגינים של Morphe. רק ל-Morphe יש זאת.</string>
     <string name="toast_copied_to_clipboard">הועתק!</string>
     <string name="copy_to_clipboard">העתק ללוח</string>
     <string name="settings">הגדרות</string>
     <string name="select_app">בחר אפליקציה</string>
+    <string name="app_filter_title">סינון יישומים</string>
+    <string name="app_filter_installed_only">התקן כעת</string>
+    <string name="app_filter_patches_available">إصدارات להתקנים פועלות</string>
+    <string name="app_filter_no_results">אין יישומים התקיימו את bộ市政筛选器</string>
     <string name="new_downloader_plugins_notification">זמינים פלאגינים חדשים להורדה. לחץ כאן כדי להגדיר אותם.</string>
     <string name="unsupported_architecture_warning">תיקון בארכיטקטורת מכשיר זו אינו נתמך וככל הנראה ייכשל.</string>
     <string name="import_">ייבוא</string>
-    <string name="file_field_set">נבחר</string>
     <string name="file_field_not_set">לא נבחר</string>
     <string name="field_not_set">לא הוגדר</string>
     <string name="patches_missing">חסר</string>
     <string name="patches_error">שגיאה</string>
     <string name="patches_error_description">לא ניתן היה לטעון את התיקונים. לחץ להצגת השגיאה</string>
-    <string name="patches_not_downloaded">התיקונים לא הורדו. לחץ כאן כדי להוריד אותם</string>
+    <string name="patches_not_downloaded">לא הורידו התיקונים. ל苍南 להוריד</string>
     <string name="patches_name_default">תיקונים</string>
     <string name="patches_name_fallback">ללא שם</string>
     <string name="bundle_uid">מזהה חבילה</string>
@@ -187,6 +220,7 @@
     <string name="bundle_version_dialog_default_subtitle">בחר באופן אוטומטי את הגרסה הנפוצה ביותר התואמת.</string>
     <string name="bundle_version_all_versions">כל הגרסאות</string>
     <string name="bundle_version_no_version">אין גרסה מוצעת</string>
+    <string name="bundle_version_suggested_label">גרסה הומנית: %1$s</string>
     <string name="bundle_update_manual_available">עדכון זמין</string>
     <string name="bundle_update_manual_available_with_version">עדכון זמין: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d חבילות עובדו</string>
@@ -217,6 +251,7 @@
     <string name="bundle_version_dialog_other_title">בחר גרסה נתמכת אחרת:</string>
     <string name="bundle_version_dialog_locked_title">אמצעי הגנה על גרסאות מופעלים</string>
     <string name="bundle_version_dialog_locked_hint">עבור אל הגדרות &gt; מתקדם &gt; אמצעי הגנה והגדר \"דרושה גרסת אפליקציה מוצעת\" (כיבוי מתג) ו\"השבתת בדיקת תאימות גרסאות\" (הדלקת מתג) כדי לבחור גרסאות ספציפיות לחבילה.</string>
+    <string name="patch_versions_dialog_title">إصدارات נתמכות עבור %1$s</string>
     <string name="patch_selector_item">בחר תיקונים</string>
     <string name="patch_selector_item_description">%d תיקונים נבחרו</string>
     <string name="no_patches_selected">לא נבחרו תיקונים</string>
@@ -231,15 +266,12 @@
     <string name="auto_updates_dialog_description">האם ברצונך שמורף יבדוק באופן תקופתי עדכונים עבור הרכיבים הבאים?</string>
     <string name="auto_updates_dialog_patches">תיקוני Morphe</string>
     <string name="auto_updates_dialog_note">ניתן לשנות הגדרות אלו מאוחר יותר.</string>
-    <string name="general">כללי</string>
-    <string name="general_description">ערכת נושא, צבע דינמי</string>
+    <string name="appearance">מראה</string>
+    <string name="appearance_description">Тема, цветовая схема динамическая</string>
     <string name="updates">עדכונים</string>
     <string name="updates_description">בדוק עדכונים והצג יומן שינויים</string>
     <string name="downloads">הורדות</string>
-    <string name="plugins_help_title">מהו מוריד?</string>
-    <string name="plugins_help_description">מוריד הוא פלאגין המאפשר ל-URV להוריד קבצי APK ממקורות שונים. קבצי ה-APK שהורדו יוצגו בחלק התחתון. במהלך תהליך התיקון, תוכל לבחור קובץ APK שכבר הורד או להוריד אותו דרך פלאגין.
-
-ניתן למצוא את רשימת הפלאגינים הנתמכים להורדה כאן</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">ייבוא &amp; ייצוא</string>
     <string name="import_export_description">מאגר מפתחות, אפשרויות תיקון ובחירה</string>
     <string name="changelog">הצג יומני שינויים</string>
@@ -249,29 +281,22 @@
     <string name="advanced">מתקדם</string>
     <string name="advanced_description">כתובת URL של API, מגבלת זיכרון, ניפוי באגים</string>
     <string name="about">אודות</string>
-    <string name="contributors">תורמים</string>
-    <string name="dynamic_color">צבע דינמי</string>
-    <string name="dynamic_color_description">התאם צבעים לטפט</string>
-    <string name="accent_color">צבע הדגשה</string>
-    <string name="accent_color_description">בחר צבע הדגשה מותאם אישית עבור האפליקציה</string>
-    <string name="accent_color_picker_title">צבע הדגשה</string>
-    <string name="accent_color_preview">תצוגה מקדימה</string>
-    <string name="accent_color_reset">אפס הדגשה</string>
-    <string name="accent_color_presets">הגדרות קבועות מראש של צבע הדגשה</string>
-    <string name="accent_color_presets_description">הקש על צבע כדי להחיל אותו באופן מיידי</string>
-    <string name="theme_color">צבע ערכת נושא</string>
-    <string name="theme_color_description">הצבע משטחים ורקעים בצבע משלך</string>
-    <string name="theme_color_picker_title">צבע ערכת נושא</string>
-    <string name="theme_color_preview">תצוגה מקדימה</string>
-    <string name="theme_color_reset">אפס צבע ערכת נושא</string>
-    <string name="theme_preview_title">תצוגה מקדימה של ערכת נושא</string>
-    <string name="theme_preview_description">מתעדכן באופן מיידי בעת שינוי הגדרות ערכת נושא</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">Акцентный цвет</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">Предварительный просмотр темы</string>
+    <!-- Morphe -->
     <string name="theme_presets">קביעות מוגדרות מראש של ערכות נושא</string>
-    <string name="theme_presets_description">בחר כיצד האפליקציה עוקבת אחר המערכת, אור, כהה, Material You, או שחור טהור</string>
+    <!-- Morphe -->
     <string name="theme_preset_default">עקוב אחר המערכת</string>
     <string name="theme_preset_amoled">שחור טהור</string>
-    <string name="theme_preset_dynamic">Material You</string>
-    <string name="theme_reset">אפס את כל הגדרות הנושא</string>
+    <string name="theme_preset_dynamic">חזות Material</string>
+    <!-- Morphe -->
     <string name="color_channel_red">אדום</string>
     <string name="color_channel_green">ירוק</string>
     <string name="color_channel_blue">כחול</string>
@@ -310,11 +335,7 @@
     <string name="export_keystore_description">ייצא את האישור הנוכחי</string>
     <string name="export_keystore_unavailable">אין אישור לייצא</string>
     <string name="export_keystore_success">אישור יצא</string>
-    <string name="regenerate_keystore">יצירה מחדש של אישור</string>
-    <string name="regenerate_keystore_description">צור אישור חדש</string>
-    <string name="regenerate_keystore_dialog_description">"אתה עומד ליצור מחדש את האישור שהמנהל ישתמש בו במהלך תהליך התיקון.
-
-לא תוכל לעדכן את האפליקציות המותקנות קודם לכן ממקור זה."</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">האישור הוחלף בהצלחה</string>
     <string name="import_patch_selection">ייבוא בחירת תיקון</string>
     <string name="import_patch_selection_description">ייבוא בחירת תיקונים מקובץ JSON</string>
@@ -329,6 +350,7 @@
     <string name="import_patch_bundles_none">לא יובאו חבילות תיקונים חדשות</string>
     <string name="import_patch_bundles_banner_title">ייבוא חבילות תיקונים</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d מתוך %2$d מעובדים</string>
+    <string name="import_patch_bundles_banner_steps">Шаг %1$d out of %2$d</string>
     <string name="import_patch_profiles">ייבוא פרופילי תיקונים</string>
     <string name="import_patch_profiles_description">ייבוא פרופילי תיקונים שמורים מקובץ JSON</string>
     <string name="import_patch_profiles_fail">לא ניתן לייבא פרופילי תיקון: %s</string>
@@ -380,6 +402,7 @@
     <string name="patch_selection_select_all_empty_toast">אין תיקונים זמינים לבחירה</string>
     <string name="patch_selection_selected_bundle_toast">כל התיקונים ב-%s נבחרו</string>
     <string name="patch_selection_select_bundle_empty_toast">אין תיקונים זמינים לבחירה ב-%s</string>
+    <string name="patch_selection_all_actions_hidden_toast">모든 כפתורים בסכמת הבחירה wurden скрыты, הפעל至少 אחדSETTINGS</string>
     <string name="patch_selection_reset_bundle_toast">איפוס ברירות מחדל עבור %s</string>
     <string name="patch_selection_button_label_all">ביטול בחירה בכל</string>
     <string name="patch_selection_button_label_bundle">ביטול בחירת חבילה</string>
@@ -403,6 +426,9 @@
     <string name="patch_selection_collapse_on_toggle_description">הסתר אוטומטית את לחצני הפעולה לבחירת תיקון בכל פעם שתבחר או תבטל בחירה של תיקון</string>
     <string name="patch_selection_action_order_title">סדר לחצני הפעולה לבחירת תיקון</string>
     <string name="patch_selection_action_order_description">בחר את סדר הפריסה עבור לחצני הפעולה של בחירת התיקון</string>
+    <string name="patch_selection_action_visibility_title">צפתיים כפתורי פעולה בסכמת הבחירה</string>
+    <string name="patch_selection_action_visibility_description">בחרьте welche כפתורי פעולה להראות בסכמת הבחירה</string>
+    <string name="patch_selection_action_visibility_reset">הראהו wszystkie כפתורי操作</string>
     <string name="patch_selection_action_order_reset">אפס לסדר ברירת המחדל</string>
     <string name="patch_selection_confirm_deselect_bundle_title">בטל בחירת חבילה?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">בטל בחירה בכל התיקונים שנבחרו מ-%1$s?</string>
@@ -491,7 +517,6 @@
     <string name="light">בהיר</string>
     <string name="dark">כהה</string>
     <string name="black">שחור</string>
-    <string name="appearance">מראה</string>
     <string name="downloaded_apps">אפליקציות שהורדו</string>
     <string name="process_runtime">הפעל Patcher בתהליך אחר</string>
     <string name="process_runtime_description">מאיץ את תהליך התיקון על ידי שימוש בתהליך נפרד</string>
@@ -506,12 +531,7 @@
     <string name="patch_bundle_rename">שנה את שם חבילת התיקונים</string>
     <string name="patch_profile_view_options">אפשרויות תצוגה</string>
     <string name="patch_profile_patch_options_title">אפשרויות עבור %1$s</string>
-    <string name="restore_official_bundle">שחזר חבילת תיקוני Morphe שהותקנה מראש</string>
-    <string name="restore_official_bundle_description_missing">חבילת התיקונים הרשמית של Morphe אינה מותקנת כרגע</string>
-    <string name="restore_official_bundle_description_installed">חבילת התיקונים הרשמית של Morphe מותקנת כרגע</string>
-    <string name="restore_official_bundle_success">חבילת התיקונים הרשמית של Morphe שוחזרה</string>
-    <string name="restore_official_bundle_failed">כשל בשחזור חבילת התיקונים הרשמית של Morphe: %1$s</string>
-    <string name="restore_official_bundle_already">חבילת התיקונים הרשמית של Morphe כבר מותקנת</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
     <string name="app_exporting">ייצוא אפליקציה</string>
     <string name="export_name_format">פורמט שם קובץ לייצוא</string>
     <string name="export_name_format_description">התאם אישית את שם ברירת המחדל של הקובץ עבור אפליקציות מתוקנות מיוצאות</string>
@@ -523,42 +543,67 @@
     <string name="export_name_format_error_blank">פורמט שם קובץ אינו יכול להיות ריק.</string>
     <string name="export_name_format_current">תבנית נוכחית: %1$s</string>
     <string name="export_name_format_insert">הוספה</string>
+    <string name="export_name_variable_app_name">שם האפליקציה</string>
+    <string name="export_name_variable_app_name_description">Повторения аксессуаров прилагаются в название телевизора.</string>
+    <string name="export_name_variable_package_name">Имя пакета</string>
+    <string name="export_name_variable_package_name_description">заменяется Имя пакета приложения.</string>
+    <string name="export_name_variable_app_version">Версия приложения</string>
+    <string name="export_name_variable_app_version_description">заменяется Версия приложения приложения.</string>
+    <string name="export_name_variable_patches_version">Версия патчей</string>
+    <string name="export_name_variable_patches_version_description">заменяется версиями aplicados пакетов патчей.</string>
+    <string name="export_name_variable_bundle_names">Названия пакетов патчей</string>
+    <string name="export_name_variable_bundle_names_description">заменяется названиями aplicados пакетов патчей.</string>
+    <string name="export_name_variable_manager_version">Версия инструментера</string>
+    <string name="export_name_variable_manager_version_description">заменяется Версией инструментера.</string>
+    <string name="export_name_variable_timestamp">Временная метка</string>
+    <string name="export_name_variable_timestamp_description">заменяется current time (yyyyMMdd-HHmmss).</string>
+    <string name="export_name_variable_date">дата</string>
+    <string name="export_name_variable_date_description">заменяется current date (yyyyMMdd).</string>
     <string name="debug_logs_export">ייצוא יומני איתור באגים</string>
     <string name="debug_logs_export_read_failed">נכשל בקריאת יומנים (קוד יציאה %d)</string>
     <string name="debug_logs_export_failed">נכשל לייצא יומנים</string>
     <string name="debug_logs_export_success">יומנים יובאו</string>
-    <string name="api_url">כתובת API</string>
-    <string name="api_url_description">ה-API המשמש להורדת קבצים נחוצים</string>
-    <string name="api_url_dialog_title">שנה כתובת API</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="api_url_dialog_description">שנה את כתובת ה-API של Morphe. Morphe משתמש ב-API כדי להוריד תיקונים ועדכונים.</string>
     <string name="api_url_dialog_warning">Morphe מתחבר ל-API כדי להוריד תיקונים ועדכונים. ודא שאתה סומך עליו.</string>
     <string name="api_url_dialog_save">קבע</string>
     <string name="api_url_dialog_reset">אפס כתובת API</string>
-    <string name="github_pat">GitHub PAT</string>
+    <!-- Morphe -->
     <string name="github_pat_description">אסימון גישה אישי של GitHub הנדרש לאינטגרציה של GitHub</string>
     <string name="set_github_pat_dialog_title">הגדר GitHub PAT</string>
     <string name="set_github_pat_dialog_description">הגדר אסימון גישה אישי של GitHub כדי שתוכל להוסיף בקשות משיכה כמקורות חיצוניים. צור PAT עם היקף public_repo</string>
     <string name="include_github_pat_in_exports_label">כלול בהגדרות ייצוא</string>
     <string name="include_github_pat_in_exports_supporting">מוסיף PAT זה להגדרות המנהל המיוצאות</string>
     <string name="include_github_pat_in_exports_warning">אל תשתף את ה-PAT שלך. אם אתה כולל אותו בייצוא הגדרות, שמור על קובץ זה פרטי מכיוון שהוא מכיל את האסימון.</string>
-    <string name="language_settings">שפה</string>
-    <string name="app_language">שפת היישום</string>
-    <string name="language_dialog_title">בחר שפת אפליקציה</string>
-    <string name="language_option_system">השתמש בשפת המכשיר</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="device_memory_limit_format">%1$dMB (רגיל) - %2$dMB (גדול)</string>
     <string name="patches_force_download">אכיפת הורדה של כל אצוות התיקונים</string>
     <string name="patches_reset">איפוס חבילות טלאים</string>
+    <string name="storage">Хранилище</string>
     <string name="no_patch_found">לא נמצאו טלאים. בדוק את הטלאים שלך</string>
     <string name="tab_apps">אפליקציות</string>
     <string name="tab_patches">חבילות טלאים</string>
     <string name="tab_profiles">פרופילי טלאים</string>
     <string name="delete">מחק</string>
+    <string name="disable">השבת</string>
+    <string name="enable">Включить</string>
+    <string name="patch_bundle_disabled_toast">Отключено %d пакет(ов)</string>
+    <string name="patch_bundle_enabled_toast">Включено %d пакет(ов)</string>
+    <string name="patches_disable_single_dialog_description">Отключить \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">\"%s\" enable?</string>
     <string name="refresh">רענן</string>
     <string name="download_apk">הורד קובץ APK</string>
     <string name="patches_download_fail">נכשלה הורדת טלאים: %s</string>
     <string name="patches_replace_fail">נכשל לייבא טלאים: %s</string>
     <string name="no_patched_apps_found">לא נמצאו אפליקציות מתוקנות</string>
-    <string name="patches_selected">נבחר מאגר תיקונים %s</string>
+    <string name="patches_selected">%s пакетов патчей выбрано</string>
     <string name="patch_profiles_selected">%1$d פרופילי תיקון נבחרו</string>
     <string name="selected_apps_count">%1$d אפליקציה נבחרה</string>
     <string name="selected_apps_delete_dialog_description">הסרת האפליקציות שנבחרו מהמנהל? אפליקציות מותקנות במכשירך יישארו ללא שינוי.</string>
@@ -599,7 +644,9 @@
     <string name="patch_profile_version_override_failed_toast">שגיאה בעדכון גרסת הפרופיל</string>
     <string name="patch_profile_version_override_set_to_all">לא הוזנה גרסה, נשמר כ\"%1$s\"</string>
     <string name="patch_profile_version_conflict_title">שמירת דריסת גרסה?</string>
-    <string name="patch_profile_version_conflict_message">גרסה נוכחית: %1$s\nגרסה נכנסת: %2$s\nבאיזו להשתמש עבור פרופיל זה?</string>
+    <string name="patch_profile_version_conflict_message">"הגרסה הנוכחית: %1$s
+הגרסה הנכנסת: %2$s
+איזו צריכה להישמר לפרופיל זה?"</string>
     <string name="patch_profile_version_conflict_use_new">השתמש בגרסה הנכנסת</string>
     <string name="patch_profile_version_conflict_keep_existing">שמור גרסה קיימת</string>
     <string name="patch_profile_empty_state">שמור תצורה ממסך בחירת התיקונים כדי לראות אותה כאן.</string>
@@ -611,7 +658,6 @@
     <string name="patch_profile_show_less">הצג פחות</string>
     <string name="patch_profile_created_at">נוצר בתאריך %1$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (לא זמין)</string>
-    <string name="patch_profile_bundle_uid_label">מזהה ייחודי: %1$d</string>
     <string name="patch_profile_bundle_change_uid">שנה מזהה ייחודי</string>
     <string name="patch_profile_bundle_change_uid_title">שנה מזהה ייחודי עבור %1$s</string>
     <string name="patch_profile_bundle_change_uid_invalid">הזן מזהה ייחודי מספרי תקין.</string>
@@ -619,8 +665,8 @@
     <string name="patch_profile_bundle_change_uid_not_found">לא נמצאה חבילת תיקון מקומית עם UID %1$d.</string>
     <string name="patcher_process_exit_message">תהליך ה-Patcher הסתיים עם קוד %1$d.</string>
     <string name="patcher_memory_adjustment_title">תהליך ה-Patcher אזל מהזיכרון</string>
-    <string name="patcher_memory_adjustment_message_reduced">תהליך ה-Patcher הניסיוני נעצר מכיוון שאזל לו הזיכרון. הורדנו את מגבלת הזיכרון שלו מ-%1$d MB ל-%2$d MB כדי שתוכל לנסות שוב באופן מיידי.</string>
-    <string name="patcher_memory_adjustment_message_no_change">תהליך ה-Patcher הניסיוני נעצר מכיוון שאזל לו הזיכרון, אך מגבלת הזיכרון כבר עומדת על %1$d MB. נסה להוריד אותה עוד יותר בהגדרות מתקדמות או בטל את מצב הניסוי לפני שתנסה שוב.</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
     <string name="patcher_memory_adjustment_retry">נסה שוב</string>
     <string name="patcher_memory_adjustment_dismiss">דחה</string>
     <string name="patcher_missing_patch_title">בחירת התיקון דורשת תשומת לב</string>
@@ -635,18 +681,6 @@
 %1$s
 הפעל אותם שוב (או בחר חלופות) ואז נסה לתקן שוב."</string>
     <string name="patch_profile_delete_multiple_dialog_description">מחק את פרופילי התיקונים שנבחרו?</string>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="one">%d תיקון</item>
-        <item quantity="two">%d תיקונים</item>
-        <item quantity="many">%d תיקונים</item>
-        <item quantity="other">%d תיקונים</item>
-    </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="one">%d חבילה</item>
-        <item quantity="two">%d חבילות</item>
-        <item quantity="many">%d מאגדים</item>
-        <item quantity="other">%d מאגד</item>
-    </plurals>
     <string name="this_version">גרסה זו</string>
     <string name="universal">כל אפליקציה</string>
     <string name="search_patches">חפש טלאים</string>
@@ -696,6 +730,10 @@
     <string name="already_patched">כבר תוקן</string>
     <string name="patch_selector_sheet_filter_title">סינון</string>
     <string name="patch_selector_sheet_filter_compat_title">תאימות</string>
+    <string name="patch_selector_sheet_filter_sort_title">Сортировка</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Алфавитная</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Имеет настройки</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">Нет настроек</string>
     <string name="string_option_menu_description">אפשרויות נוספות</string>
     <string name="option_preset_custom_value">ערך מותאם אישית</string>
     <string name="path_selector">בחר מהאחסון</string>
@@ -705,9 +743,7 @@
     <string name="show_password_field">הצג סיסמה</string>
     <string name="hide_password_field">הסתר סיסמה</string>
     <string name="installer_primary_title">מתקין ראשי</string>
-    <string name="installer_primary_description">השתמש תחילה בעת התקנת אפליקציות מתוקנות.</string>
     <string name="installer_fallback_title">מתקין חלופי</string>
-    <string name="installer_fallback_description">בשימוש אוטומטי כאשר המתקין הראשי אינו זמין.</string>
     <string name="installer_internal_name">מתקין מערכת</string>
     <string name="installer_internal_description">השתמש במתקין החבילות של Android</string>
     <string name="installer_auto_saved_name">מתקין מאונטר עם רוט</string>
@@ -733,8 +769,8 @@
     <string name="installer_status_shizuku_unsupported">גרסת Shizuku המותקנת אינה נתמכת.</string>
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_shizuku_launch_failed">לא ניתן לפתוח את Shizuku. הפעל אותו ידנית ונסה שוב.</string>
-    <string name="installer_custom_header">מתקינים מותאמים אישית</string>
-    <string name="installer_custom_manage_title">נהל מתקינים מותאמים אישית</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="installer_custom_tab_saved">שמור</string>
     <string name="installer_custom_saved_note">מתקינים שנוספו ידנית על ידי המשתמש לתפריטי בחירת המתקין הראשי &amp; ומתקין החירום.</string>
     <string name="installer_custom_tab_auto_saved">נשמר אוטומטית</string>
@@ -774,15 +810,20 @@
     <string name="installer_external_launched">פותח את %1$s...</string>
     <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב.</string>
     <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת.</string>
+    <string name="installer_external_finished_no_change">%1$s завершено без instalación la app. Verificar el instalador para un mensaje de error y volver a intentarlo.</string>
     <string name="installing_ellipsis">מתקין…</string>
+    <string name="uninstalling_ellipsis">Desinstalación...</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting">מנתק…</string>
     <string name="install_app">התקן</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail_title">ההתקנה נכשלה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
+    <string name="install_app_fail_missing_stock">No hay APK original para instalación по монтированию.</string>
+    <string name="mount_split_not_supported">Приложение включает разъединение APK. Используйте приложение для системных монтажников.</string>
     <string name="mount_app_fail_title">צירוף נכשל</string>
     <string name="install_timeout_message">ההתקנה לא הסתיימה. בדוק את תיבת הדו-שיח של מתקין המערכת ונסה שוב.</string>
+    <string name="uninstall_timeout_message">Начало операции отмены не закончилось. Осмотрите привязку отмены и попробуйте ещё раз.</string>
     <string name="reinstall_app_fail">נכשל להתקין מחדש את האפליקציה: %s</string>
     <string name="uninstall_app_fail">נכשל להסיר את האפליקציה: %s</string>
     <string name="open_app">פתח</string>
@@ -810,8 +851,8 @@
     <string name="select_install_type">בחר סוג התקנה</string>
     <string name="patcher_step_group_preparing">מכין</string>
     <string name="patcher_step_load_patches">טוען תיקונים</string>
-    <string name="patcher_step_unpack">קריאת קובץ APK</string>
     <string name="patcher_step_prepare_split_apk">מיזוג קובץ APK מפוצל</string>
+    <string name="patcher_step_unpack">Прочитать файл APK</string>
     <string name="patcher_step_group_patching">תיקון</string>
     <string name="patcher_step_group_saving">שמירה</string>
     <string name="patcher_step_write_patched">כתיבת קובץ APK מתוקן</string>
@@ -849,7 +890,6 @@
     <string name="less">פחות</string>
     <string name="continue_">המשך</string>
     <string name="dismiss">דחה</string>
-    <string name="patch_bundle_urls">קבל ייבוא של חבילת תיקונים</string>
     <string name="version">גרסה</string>
     <string name="published">פורסם</string>
     <string name="developer_options">אפשרויות למפתחים</string>
@@ -872,6 +912,9 @@
     <string name="install_update_manager_failed">שגיאה בהתקנת עדכון</string>
     <string name="manual_update_check">בדוק עדכונים</string>
     <string name="manual_update_check_description">בדוק עדכונים באופן ידני</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="update_checking_manager">בדוק עדכונים בהפעלה</string>
     <string name="update_checking_manager_description">בדוק אם יש גרסאות חדשות של Morphe כשהאפליקציה מופעלת</string>
     <string name="manager_prereleases">השתמש בגרסאות מוקדמות</string>
@@ -881,7 +924,6 @@
     <string name="installing_manager_update">מתקין עדכון…</string>
     <string name="downloading_manager_update">מוריד עדכון…</string>
     <string name="manager_update_banner_title">מוריד עדכון מנהל</string>
-    <string name="manager_update_progress_detail">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="save">שמור</string>
     <string name="save_with_count">שמור (%1$s)</string>
@@ -899,7 +941,7 @@
     <string name="no_update_available">אין עדכון זמין</string>
     <string name="update_check">בודק עדכונים…</string>
     <string name="update_available_dialog_description">גרסה חדשה של Morphe (%s) זמינה.</string>
-    <string name="failed_to_download_update">Failed to download update: %s</string>
+    <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>
     <string name="download">הורדה</string>
     <string name="resume_download">המשך הורדה</string>
     <string name="download_confirmation_metered">"אתה מחובר כעת לחיבור מוגבל בנפח נתונים, וייתכן שיחולו חיובי נתונים מספק השירות שלך.
@@ -927,11 +969,14 @@
     <string name="installation_aborted_description">ההתקנה בוטלה ידנית. נסה שוב?</string>
     <string name="installation_blocked_description">ההתקנה נחסמה. סקור את הגדרות האבטחה של המכשיר ונסה שוב.</string>
     <string name="installation_conflict_description">ההתקנה נמנעה על ידי התקנה קיימת של האפליקציה. הסר את האפליקציה המותקנת ונסה שוב?</string>
+    <string name="installation_signature_mismatch_dialog_title">Несоответствие подписи</string>
+    <string name="installation_signature_mismatch_description">Версия установленного приложения довольна другим путём подписи. Отмените установленное приложение и установите это как!</string>
     <string name="installation_incompatible_description">האפליקציה אינה תואמת למכשיר זה. השתמש בקובץ APK התואם למכשיר זה ונסה שוב.</string>
     <string name="installation_invalid_description">האפליקציה אינה חוקית. הסר את האפליקציה ונסה שוב?</string>
     <string name="installation_storage_issue_description">לא ניתן היה להתקין את האפליקציה עקב מחסור באחסון. פנה קצת מקום ונסה שוב.</string>
     <string name="installation_timeout_description">ההתקנה ארכה זמן רב מדי. נסה שוב?</string>
     <string name="reinstall">התקן מחדש</string>
+    <string name="installation_signature_mismatch_confirm">Отменить и установить заново</string>
     <string name="show">הצג</string>
     <string name="debugging">איתור באגים</string>
     <string name="about_device">אודות המכשיר</string>

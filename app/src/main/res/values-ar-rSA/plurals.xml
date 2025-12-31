@@ -24,4 +24,20 @@
         <item quantity="many">%d تم تحديده</item>
         <item quantity="other">%d تم تحديده</item>
     </plurals>
+    <plurals name="patch_profile_bundle_patch_count">
+        <item quantity="zero">%d قطع</item>
+        <item quantity="one">%d قطعة</item>
+        <item quantity="two">%d قطعتان</item>
+        <item quantity="few">%d قطع</item>
+        <item quantity="many">%d قطع</item>
+        <item quantity="other">%d قطع</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_count">
+        <item quantity="zero">%d حزم</item>
+        <item quantity="one">%d حزمة</item>
+        <item quantity="two">%d حزمتان</item>
+        <item quantity="few">%d حزم</item>
+        <item quantity="many">%d حزم</item>
+        <item quantity="other">%d حزم</item>
+    </plurals>
 </resources>

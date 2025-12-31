@@ -2,24 +2,25 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">パッチバンドル</string>
-    <string name="morphe_home_greeting_1">アプリを修正しますか? 🛠️</string>
+    <string name="morphe_home_greeting_1">何のアプリを修正したいですか?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">YouTubeを再び偉大にしましょうか? 🔥📺</string>
-    <!-- Energetic, light-hearted joke to build excitement -->
-    <string name="morphe_home_greeting_3">ワクワク、修正タイムです 🚀</string>
+    <string name="morphe_home_greeting_2">YouTubeを再び伝説的にする準備はできていますか?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">しっかり座り、修正の時間です</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">もう一日、広告ブロックの傑作 😌🚫</string>
-    <string name="morphe_home_greeting_5">広告を見たいですか? 私も見たくありません 🙃❌</string>
+    <string name="morphe_home_greeting_4">また別の日、別の広告遮断の傑作</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">広告を見たくない? 私もそう思う</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">アプリの動作を操ります😏📱</string>
+    <string name="morphe_home_greeting_6">アプリの動作をコントロールしましょう</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">今日の予報: 100% 破局天候の確率 🌩️🧩</string>
-    <!-- Self-aware humorous greeting, breaking the fourth wall -->
-    <string name="morphe_home_greeting_8">責任持って修正するか、しないかは自分で決めましょう😄⚙️</string>
+    <string name="morphe_home_greeting_7">今日の予報: 100% 破局天候の確率</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">平凡なものを素晴らしいものに変えましょうか?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">今日からアプリを自分の手で救う🦸‍♂️✨</string>
+    <string name="morphe_home_greeting_9">今日から自分を助けるアプリの救世主に</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">コーヒーと良質なパッチで支えられています☕🧠</string>
+    <string name="morphe_home_greeting_10">カフェインと優れたパッチで支えられて</string>
     <string name="morphe_home_bundle_type_api">APIバンドル</string>
     <string name="morphe_home_update_error">更新に失敗しました</string>
     <string name="morphe_home_update_error_subtitle">インターネット接続を確認して、もう一度お試しください。</string>
@@ -40,11 +41,10 @@
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$sをパッチするには、%2$s(パッチ前)バージョンが必要です</string>
     <string name="morphe_home_apk_availability_yes">はい、あります</string>
     <string name="morphe_home_apk_availability_no">いいえ、見つけるのを手伝ってください</string>
-    <string name="morphe_home_apk_availability_dialog_description">%1$sをパッチするには、%2$s(パッチ前)バージョンが必要です</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">元のAPKをダウンロードする</string>
     <string name="morphe_home_download_instructions_steps_title">手順：</string>
-    <string name="morphe_home_download_instructions_step1">下の「APKMirror.comに続行」ボタンを押してください</string>
+    <string name="morphe_home_download_instructions_step1">下の \'%1$s\' ボタンを押してください</string>
     <string name="morphe_home_download_instructions_step2_part1">ウェブページを下にスクロールして「</string>
     <string name="morphe_home_download_instructions_download_button_toast">ここではなく、Webサイトでダウンロードしてください😊</string>
     <string name="morphe_home_download_instructions_step3">ダウンロードが完了したら、APKを<b>インストールしないでください</b></string>
@@ -113,7 +113,7 @@
     <string name="morphe_patcher_message_17">アプリが新しい、より良い自分自身を受け入れるように奨励しています… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">アプリの重ね合わせを、パッチなしからパッチありに変更しています… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">あなたのアプリは熱があります。唯一の処方箋は、より多くのパッチです… 🩺🔔</string>
     <string name="morphe_patcher_message_20">不要なノイズを除去しています。しばらくお待ちください… 🗑️</string>
     <!-- Morphe Settings Screen -->
@@ -123,45 +123,78 @@
     <string name="morphe_settings_return_to_advanced_description">フル機能の高度なモードに切り替える</string>
     <string name="morphe_share_website">ウェブサイトを共有</string>
     <string name="morphe_share_website_description">公式Morpheウェブサイトを共有</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">アペアランスオプション</string>
+    <string name="morphe_appearance_options_description">テーマ、カラーテーマ、背景をカスタマイズ</string>
     <string name="morphe_background_type">背景アニメーション</string>
     <string name="morphe_background_type_circles">円</string>
     <string name="morphe_background_type_rings">リング</string>
     <string name="morphe_background_type_waves">波</string>
     <string name="morphe_background_type_space">スペース</string>
     <string name="morphe_background_type_shapes">図形</string>
+    <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
+    <!-- Update Section -->
     <string name="morphe_update_use_patches_prereleases">プレリリースパッチを使用</string>
     <string name="morphe_update_use_patches_prereleases_description">最新の開発パッチを使用</string>
-    <string name="patches_bundle_json_url">パッチバンドルJSON URL</string>
-    <string name="patches_bundle_json_url_description">パッチバンドル情報を含むJSONファイルのURL</string>
-    <string name="patches_bundle_json_url_dialog_title">パッチバンドルURL</string>
-    <string name="patches_bundle_json_url_dialog_description">パッチバンドルに関する情報を含むJSONファイルへのURLを入力してください。JSONは必須の形式に従う必要があります</string>
-    <string name="patches_bundle_json_url_label">JSON URL</string>
-    <string name="patches_bundle_json_url_error">URLはhttp://またはhttps://で始まる必要があります</string>
-    <string name="patches_bundle_json_url_invalid">無効なURL形式</string>
-    <string name="patches_bundle_json_dialog_reset">デフォルトに戻す</string>
-    <string name="patches_bundle_json_dialog_save">保存</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">パッチ設定オプション</string>
+    <string name="morphe_patch_options_youtube_description">テーマ、 ブランドイメージ、 ヘッダー、 および Shorts のオプション</string>
+    <string name="morphe_patch_options_youtube_music_description">テーマとブランドイメージのオプション</string>
+    <string name="morphe_patch_options_restart_message">パッチ設定オプションの変更を適用するには、アプリを再パッチングする必要があります</string>
+    <string name="morphe_icon_instructions_title">アイコン形式の指示</string>
+    <string name="morphe_header_instructions_title">ヘッダー形式の指示</string>
+    <string name="morphe_loading_patch_options">パッチ設定オプションを読み込み中…</string>
+    <string name="morphe_patch_options_waiting_for_bundle">パッチバンドルが更新されるまでお待ちください</string>
+    <string name="morphe_patch_options_load_error">パッチ設定オプションの読み込みに失敗しました</string>
+    <string name="morphe_no_options_available">このパッチには利用可能なオプションがありません</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">カスタムカラー</string>
+    <string name="morphe_hex_color">Hex カラー</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">アプリテーマカラー</string>
+    <string name="morphe_theme_dark_color">ダークテーマ背景色</string>
+    <string name="morphe_theme_dark_color_description">ダークテーマ用の背景色</string>
+    <string name="morphe_theme_light_color">ライトテーマ背景色</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">カスタムブランド</string>
+    <string name="morphe_custom_app_name_description">アプリ表示名を変更</string>
+    <string name="morphe_custom_app_name_hint">カスタム名を入力</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">カスタムヘッダー</string>
+    <string name="morphe_custom_header_description">カスタムヘッダー画像が格納されているフォルダーパス</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">ショート機能を非表示</string>
+    <string name="morphe_hide_shorts_app_shortcut">ショートアプリShortcutを隠す</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">ランチャーロングプレスメニューからショートを削除</string>
+    <string name="morphe_hide_shorts_widget">ショートウィジェットを非表示</string>
+    <string name="morphe_hide_shorts_widget_description">ランチャーヘッダーのショートボタンを削除</string>
     <!-- Other strings -->
-    <string name="patcher">Patcher</string>
+    <string name="patcher">パッチャー</string>
     <string name="patches">パッチ</string>
     <string name="patch_bundles">パッチバンドル</string>
     <string name="patch_bundle">パッチバンドル</string>
+    <!-- Morphe -->
+    <string name="installer">インストーラー</string>
     <string name="plugin_host_permission_label">Morpheプラグインホスト</string>
     <string name="plugin_host_permission_description">Morpheプラグインへのアクセスを制御するために使用されます。Morpheのみがこれを所有します。</string>
     <string name="toast_copied_to_clipboard">コピーしました！</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <string name="settings">設定</string>
     <string name="select_app">アプリを選択</string>
+    <string name="app_filter_title">アプリをフィルタリングする</string>
+    <string name="app_filter_installed_only">インストール済みのみ</string>
+    <string name="app_filter_patches_available">パッチが利用可能</string>
+    <string name="app_filter_no_results">フィルタに該当するアプリはありません</string>
     <string name="new_downloader_plugins_notification">新しいダウンローダープラグインが利用可能です。ここをクリックして設定してください。</string>
     <string name="unsupported_architecture_warning">このデバイスアーキテクチャでのパッチ適用はサポートされておらず、失敗する可能性が非常に高いです。</string>
     <string name="import_">インポート</string>
-    <string name="file_field_set">選択済み</string>
     <string name="file_field_not_set">未選択</string>
     <string name="field_not_set">未設定</string>
     <string name="patches_missing">不足</string>
     <string name="patches_error">エラー</string>
     <string name="patches_error_description">パッチを読み込めませんでした。エラーを表示するにはクリックしてください</string>
-    <string name="patches_not_downloaded">パッチはダウンロードされていません。ダウンロードするにはここをクリックしてください</string>
+    <string name="patches_not_downloaded">パッチがダウンロードされていません。ここをクリックしてダウンロードしてください</string>
     <string name="patches_name_default">パッチ</string>
     <string name="patches_name_fallback">名前なし</string>
     <string name="bundle_uid">バンドルUID</string>
@@ -187,6 +220,7 @@
     <string name="bundle_version_dialog_default_subtitle">最も一般的な互換性のあるバージョンを自動的に選択します。</string>
     <string name="bundle_version_all_versions">すべてのバージョン</string>
     <string name="bundle_version_no_version">推奨バージョンなし</string>
+    <string name="bundle_version_suggested_label">推奨されるバージョン: %1$s</string>
     <string name="bundle_update_manual_available">アップデートが利用可能です</string>
     <string name="bundle_update_manual_available_with_version">アップデートが利用可能です：%1$s</string>
     <string name="bundle_update_progress">処理済みバンドル：%1$d/%2$d</string>
@@ -217,6 +251,7 @@
     <string name="bundle_version_dialog_other_title">別の対応バージョンを選択:</string>
     <string name="bundle_version_dialog_locked_title">バージョン保護が有効です</string>
     <string name="bundle_version_dialog_locked_hint">設定 &gt; 詳細設定 &gt; 保護機能に移動し、「推奨アプリバージョンを要求」（オフ）と「バージョン互換性チェックを無効にする」（オン）の両方を設定して、バンドル固有のバージョンを選択します。</string>
+    <string name="patch_versions_dialog_title">%1$s に対応するパッチ バージョン</string>
     <string name="patch_selector_item">パッチを選択</string>
     <string name="patch_selector_item_description">%d 個のパッチが選択されました</string>
     <string name="no_patches_selected">パッチが選択されていません</string>
@@ -231,15 +266,12 @@
     <string name="auto_updates_dialog_description">Morphe は以下のコンポーネントのアップデートを定期的にチェックしますか？</string>
     <string name="auto_updates_dialog_patches">Morphe パッチ</string>
     <string name="auto_updates_dialog_note">これらの設定は後で変更できます。</string>
-    <string name="general">その他</string>
-    <string name="general_description">テーマ、ダイナミックカラー</string>
+    <string name="appearance">外観</string>
+    <string name="appearance_description">テーマ、動的カラー</string>
     <string name="updates">アップデート</string>
     <string name="updates_description">アップデートをチェックし、変更履歴を表示します</string>
     <string name="downloads">ダウンロード</string>
-    <string name="plugins_help_title">ダウンローダーとは？</string>
-    <string name="plugins_help_description">ダウンローダーは、URV がさまざまなソースからストック APK をダウンロードできるプラグインです。ダウンロードされた APK は下部に表示されます。パッチ適用プロセス中に、すでにダウンロードした APK を選択するか、プラグイン経由でダウンロードできます。
-
-サポートされているダウンローダー プラグインのリストは、</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">インポート &amp; エクスポート</string>
     <string name="import_export_description">キーストア、パッチオプション、および選択</string>
     <string name="changelog">変更履歴を表示</string>
@@ -249,29 +281,22 @@
     <string name="advanced">高度な設定</string>
     <string name="advanced_description">API URL、メモリ制限、デバッグ</string>
     <string name="about">SponsorBlock について</string>
-    <string name="contributors">コントリビューター</string>
-    <string name="dynamic_color">ダイナミックカラー</string>
-    <string name="dynamic_color_description">壁紙に合わせて色を調整する</string>
-    <string name="accent_color">アクセントカラー</string>
-    <string name="accent_color_description">アプリのカスタムアクセントカラーを選択する</string>
-    <string name="accent_color_picker_title">アクセントカラー</string>
-    <string name="accent_color_preview">プレビュー</string>
-    <string name="accent_color_reset">アクセントをリセット</string>
-    <string name="accent_color_presets">アクセントプリセット</string>
-    <string name="accent_color_presets_description">色をタップしてすぐに適用</string>
-    <string name="theme_color">テーマカラー</string>
-    <string name="theme_color_description">独自のカラーでサーフェスや背景を彩る</string>
-    <string name="theme_color_picker_title">テーマカラー</string>
-    <string name="theme_color_preview">プレビュー</string>
-    <string name="theme_color_reset">テーマカラーをリセット</string>
-    <string name="theme_preview_title">テーマプレビュー</string>
-    <string name="theme_preview_description">テーマ設定を変更すると即座に更新されます</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">アクセント</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">外観の予習</string>
+    <!-- Morphe -->
     <string name="theme_presets">テーマプリセット</string>
-    <string name="theme_presets_description">システム、ライト、ダーク、Material You、または純黒のいずれかにアプリを合わせる方法を選択します</string>
+    <!-- Morphe -->
     <string name="theme_preset_default">システムに従う</string>
     <string name="theme_preset_amoled">純黒</string>
     <string name="theme_preset_dynamic">マテリアルユー</string>
-    <string name="theme_reset">すべてのテーマ設定をリセット</string>
+    <!-- Morphe -->
     <string name="color_channel_red">赤</string>
     <string name="color_channel_green">緑</string>
     <string name="color_channel_blue">青</string>
@@ -310,11 +335,7 @@
     <string name="export_keystore_description">現在のキーストアをエクスポートします</string>
     <string name="export_keystore_unavailable">エクスポートするキーストアがありません</string>
     <string name="export_keystore_success">キーストアをエクスポートしました</string>
-    <string name="regenerate_keystore">キーストアの再生成</string>
-    <string name="regenerate_keystore_description">新しいキーストアを生成します</string>
-    <string name="regenerate_keystore_dialog_description">"パッチプロセス中にマネージャーが使用するキーストアを再生成しようとしています。
-
-このソースからは、以前にインストールしたアプリを更新できなくなります。"</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">キーストアが正常に置き換えられました</string>
     <string name="import_patch_selection">パッチの選択をインポート</string>
     <string name="import_patch_selection_description">JSONファイルからパッチ選択をインポート</string>
@@ -329,6 +350,7 @@
     <string name="import_patch_bundles_none">新しいパッチバンドルはインポートされませんでした</string>
     <string name="import_patch_bundles_banner_title">パッチバンドルをインポート中</string>
     <string name="import_patch_bundles_banner_subtitle">%2$d 件中 %1$d 件処理済み</string>
+    <string name="import_patch_bundles_banner_steps">%2$d ステップ中 %1$d</string>
     <string name="import_patch_profiles">パッチプロファイルをインポート</string>
     <string name="import_patch_profiles_description">JSONファイルから保存されたパッチプロファイルをインポート</string>
     <string name="import_patch_profiles_fail">パッチプロファイルをインポートできませんでした: %s</string>
@@ -380,6 +402,7 @@
     <string name="patch_selection_select_all_empty_toast">選択できるパッチがありません</string>
     <string name="patch_selection_selected_bundle_toast">%s のすべてのパッチを選択しました</string>
     <string name="patch_selection_select_bundle_empty_toast">%s には選択可能なパッチがありません</string>
+    <string name="patch_selection_all_actions_hidden_toast">すべての操作ボタンが非表示になっています。設定で少なくとも1つを開示してください</string>
     <string name="patch_selection_reset_bundle_toast">%s のデフォルトをリセット</string>
     <string name="patch_selection_button_label_all">すべて選択解除</string>
     <string name="patch_selection_button_label_bundle">バンドル選択解除</string>
@@ -403,6 +426,9 @@
     <string name="patch_selection_collapse_on_toggle_description">パッチを選択または選択解除したときに、パッチ選択アクションボタンを自動的に非表示にします</string>
     <string name="patch_selection_action_order_title">パッチ選択アクションボタンの順序</string>
     <string name="patch_selection_action_order_description">パッチ選択アクションボタンのレイアウト順序を選択してください</string>
+    <string name="patch_selection_action_visibility_title">パッチ選択操作の表示</string>
+    <string name="patch_selection_action_visibility_description">表示するパッチ選択操作を選びます</string>
+    <string name="patch_selection_action_visibility_reset">すべての操作ボタンを表示</string>
     <string name="patch_selection_action_order_reset">デフォルトの順序にリセット</string>
     <string name="patch_selection_confirm_deselect_bundle_title">バンドルを解除しますか？</string>
     <string name="patch_selection_confirm_deselect_bundle_message">%1$s から選択されたすべてのパッチを解除しますか？</string>
@@ -491,7 +517,6 @@
     <string name="light">ライト</string>
     <string name="dark">ダーク</string>
     <string name="black">ブラック</string>
-    <string name="appearance">外観</string>
     <string name="downloaded_apps">ダウンロードしたアプリ</string>
     <string name="process_runtime">別のプロセスでPatcherを実行</string>
     <string name="process_runtime_description">別のプロセスを使用することで、パッチ適用が高速化されます</string>
@@ -506,12 +531,7 @@
     <string name="patch_bundle_rename">パッチバンドル名の変更</string>
     <string name="patch_profile_view_options">オプションを表示</string>
     <string name="patch_profile_patch_options_title">%1$s のオプション</string>
-    <string name="restore_official_bundle">プリインストールされたMorpheパッチバンドルを復元</string>
-    <string name="restore_official_bundle_description_missing">公式のMorpheパッチバンドルは現在インストールされていません</string>
-    <string name="restore_official_bundle_description_installed">公式のMorpheパッチバンドルは現在インストールされています</string>
-    <string name="restore_official_bundle_success">Official Morpheパッチバンドルが復元されました</string>
-    <string name="restore_official_bundle_failed">Official Morpheパッチバンドルの復元に失敗しました: %1$s</string>
-    <string name="restore_official_bundle_already">Official Morpheパッチバンドルは既にインストールされています</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
     <string name="app_exporting">アプリのエクスポート</string>
     <string name="export_name_format">エクスポートファイル名形式</string>
     <string name="export_name_format_description">パッチ適用済みアプリのエクスポート時のデフォルトファイル名をカスタマイズします</string>
@@ -523,42 +543,67 @@
     <string name="export_name_format_error_blank">ファイル名形式は空白にできません。</string>
     <string name="export_name_format_current">現在のパターン: %1$s</string>
     <string name="export_name_format_insert">挿入</string>
+    <string name="export_name_variable_app_name">アプリ名</string>
+    <string name="export_name_variable_app_name_description">アプリの表示名に置き換えられます</string>
+    <string name="export_name_variable_package_name">パッケージ名</string>
+    <string name="export_name_variable_package_name_description">パッケージ名に置き換えられます</string>
+    <string name="export_name_variable_app_version">アプリのバージョン</string>
+    <string name="export_name_variable_app_version_description">アプリのバージョン名に置き換えられます</string>
+    <string name="export_name_variable_patches_version">パッチのバージョン</string>
+    <string name="export_name_variable_patches_version_description">適用されているパッチ バンクのバージョンに置き換えられます</string>
+    <string name="export_name_variable_bundle_names">パッチ バンクの名称</string>
+    <string name="export_name_variable_bundle_names_description">適用されているパッチ バンクの名称に置き換えられます</string>
+    <string name="export_name_variable_manager_version">管理器のバージョン</string>
+    <string name="export_name_variable_manager_version_description">管理器のバージョンに置き換えられます</string>
+    <string name="export_name_variable_timestamp">タイムスタンプ</string>
+    <string name="export_name_variable_timestamp_description">現在の時刻 (yyyyMMdd-HHmmss)に置き換えられます</string>
+    <string name="export_name_variable_date">日付</string>
+    <string name="export_name_variable_date_description">現在の日付 (yyyyMMdd)に置き換えられます</string>
     <string name="debug_logs_export">デバッグログのエクスポート</string>
     <string name="debug_logs_export_read_failed">ログの読み込みに失敗しました (終了コード %d)</string>
     <string name="debug_logs_export_failed">ログのエクスポートに失敗しました</string>
     <string name="debug_logs_export_success">ログをエクスポートしました</string>
-    <string name="api_url">API URL</string>
-    <string name="api_url_description">必要なファイルをダウンロードするために使用されるAPI</string>
-    <string name="api_url_dialog_title">API URL を変更</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="api_url_dialog_description">MorpheのAPI URLを変更します。MorpheはパッチやアップデートをダウンロードするためにAPIを使用します。</string>
     <string name="api_url_dialog_warning">MorpheはパッチやアップデートをダウンロードするためにAPIに接続します。信頼できることを確認してください。</string>
     <string name="api_url_dialog_save">設定</string>
     <string name="api_url_dialog_reset">API URLをリセット</string>
-    <string name="github_pat">GitHub PAT</string>
+    <!-- Morphe -->
     <string name="github_pat_description">GitHub連携に必要なGitHub Personal Access Token</string>
     <string name="set_github_pat_dialog_title">GitHub PATを設定</string>
     <string name="set_github_pat_dialog_description">プルリクエストを外部ソースとして追加できるように、GitHub Personal Access Tokenを設定してください。スコープpublic_repoでPATを作成してください。</string>
     <string name="include_github_pat_in_exports_label">設定のエクスポートに含める</string>
     <string name="include_github_pat_in_exports_supporting">このPATをエクスポートされたマネージャー設定に追加</string>
     <string name="include_github_pat_in_exports_warning">PATを共有しないでください。設定のエクスポートに含める場合は、トークンが含まれているため、そのファイルを非公開にしてください。</string>
-    <string name="language_settings">言語</string>
-    <string name="app_language">アプリの言語</string>
-    <string name="language_dialog_title">アプリの言語を選択</string>
-    <string name="language_option_system">デバイスの言語を使用</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="device_memory_limit_format">%1$dMB（標準） - %2$dMB（大）</string>
     <string name="patches_force_download">すべてのパッチバンドルを強制的にダウンロード</string>
     <string name="patches_reset">パッチバンドルをリセット</string>
+    <string name="storage">ストレージ</string>
     <string name="no_patch_found">パッチが見つかりません。パッチを確認してください</string>
     <string name="tab_apps">アプリ</string>
     <string name="tab_patches">パッチバンドル</string>
     <string name="tab_profiles">パッチプロファイル</string>
     <string name="delete">削除</string>
+    <string name="disable">無効</string>
+    <string name="enable">有効にする</string>
+    <string name="patch_bundle_disabled_toast">%d バンクを無効化しました</string>
+    <string name="patch_bundle_enabled_toast">%d バンクを有効化しました</string>
+    <string name="patches_disable_single_dialog_description">\"%s\" を無効化しますか？</string>
+    <string name="patches_enable_single_dialog_description">\"%s\" を有効化しますか？</string>
     <string name="refresh">更新</string>
     <string name="download_apk">APKファイルをダウンロード</string>
     <string name="patches_download_fail">パッチのダウンロードに失敗しました: %s</string>
     <string name="patches_replace_fail">パッチのインポートに失敗しました: %s</string>
     <string name="no_patched_apps_found">パッチ適用済みアプリが見つかりません</string>
-    <string name="patches_selected">%s パッチバンドルが選択されました</string>
+    <string name="patches_selected">%s パッチ バンクが選択されました</string>
     <string name="patch_profiles_selected">%1$d個のパッチプロファイルが選択されています</string>
     <string name="selected_apps_count">%1$d 件のアプリが選択されました</string>
     <string name="selected_apps_delete_dialog_description">選択したアプリをマネージャーから削除しますか？デバイスにインストールされているアプリはそのまま残ります。</string>
@@ -599,7 +644,9 @@
     <string name="patch_profile_version_override_failed_toast">プロファイルバージョンの更新に失敗しました</string>
     <string name="patch_profile_version_override_set_to_all">バージョンが入力されなかったため、「%1$s」として保存されました</string>
     <string name="patch_profile_version_conflict_title">バージョンの上書きを維持しますか？</string>
-    <string name="patch_profile_version_conflict_message">現在のバージョン: %1$s\n受信バージョン: %2$s\nこのプロファイルに保存するのはどちらですか？</string>
+    <string name="patch_profile_version_conflict_message">"現在のバージョン: %1$s
+新しいバージョン: %2$s
+どちらのバージョンをこのプロファイルに保存しますか?"</string>
     <string name="patch_profile_version_conflict_use_new">受信バージョンを使用</string>
     <string name="patch_profile_version_conflict_keep_existing">既存のバージョンを維持</string>
     <string name="patch_profile_empty_state">ここに表示するには、パッチ選択画面から設定を保存してください。</string>
@@ -611,7 +658,6 @@
     <string name="patch_profile_show_less">表示を減らす</string>
     <string name="patch_profile_created_at">%1$s に作成</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (利用不可)</string>
-    <string name="patch_profile_bundle_uid_label">UID: %1$d</string>
     <string name="patch_profile_bundle_change_uid">UIDを変更</string>
     <string name="patch_profile_bundle_change_uid_title">%1$s のUIDを変更</string>
     <string name="patch_profile_bundle_change_uid_invalid">有効な数値UIDを入力してください。</string>
@@ -619,8 +665,8 @@
     <string name="patch_profile_bundle_change_uid_not_found">UID %1$d のローカルパッチバンドルが見つかりません。</string>
     <string name="patcher_process_exit_message">Patcherプロセスがコード %1$d で終了しました。</string>
     <string name="patcher_memory_adjustment_title">Patcherがメモリ不足になりました</string>
-    <string name="patcher_memory_adjustment_message_reduced">実験的なPatcherプロセスは、メモリ不足のために停止しました。メモリ制限を %1$d MB から %2$d MB に下げたので、すぐに再試行できます。</string>
-    <string name="patcher_memory_adjustment_message_no_change">実験的なPatcherプロセスは、メモリ不足のために停止しましたが、メモリ制限はすでに %1$d MB です。詳細設定でさらに下げるか、再試行する前に実験モードを無効にしてください。</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
     <string name="patcher_memory_adjustment_retry">再試行</string>
     <string name="patcher_memory_adjustment_dismiss">閉じる</string>
     <string name="patcher_missing_patch_title">パッチの選択に注意が必要です</string>
@@ -635,12 +681,6 @@
 %1$s
 それらを再度有効にする（または代替を選択する）してから、もう一度パッチを適用してみてください。"</string>
     <string name="patch_profile_delete_multiple_dialog_description">選択したパッチプロファイルを削除しますか？</string>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="other">%d 個のパッチ</item>
-    </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="other">%d 個のバンドル</item>
-    </plurals>
     <string name="this_version">このバージョン</string>
     <string name="universal">任意のアプリ</string>
     <string name="search_patches">パッチを検索</string>
@@ -690,6 +730,10 @@
     <string name="already_patched">既にパッチ適用済み</string>
     <string name="patch_selector_sheet_filter_title">フィルター</string>
     <string name="patch_selector_sheet_filter_compat_title">互換性</string>
+    <string name="patch_selector_sheet_filter_sort_title">ソート</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">アルファベット順</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">設定があるもの</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">設定がないもの</string>
     <string name="string_option_menu_description">その他のオプション</string>
     <string name="option_preset_custom_value">カスタム値</string>
     <string name="path_selector">ストレージから選択</string>
@@ -699,9 +743,7 @@
     <string name="show_password_field">パスワードを表示</string>
     <string name="hide_password_field">パスワードを非表示</string>
     <string name="installer_primary_title">プライマリ インストーラー</string>
-    <string name="installer_primary_description">パッチ適用済みアプリのインストール時に最初に適用されます。</string>
     <string name="installer_fallback_title">フォールバック インストーラー</string>
-    <string name="installer_fallback_description">プライマリ インストーラーが利用できない場合に自動的に使用されます。</string>
     <string name="installer_internal_name">システム インストーラー</string>
     <string name="installer_internal_description">Android パッケージ インストーラーを使用します</string>
     <string name="installer_auto_saved_name">ルート化されたマウントインストーラー</string>
@@ -727,8 +769,8 @@
     <string name="installer_status_shizuku_unsupported">インストールされているShizukuのバージョンはサポートされていません。</string>
     <string name="installer_action_open_shizuku">Shizukuを開く</string>
     <string name="installer_shizuku_launch_failed">Shizukuを開けませんでした。手動で起動してから、もう一度試してください。</string>
-    <string name="installer_custom_header">カスタムインストーラー</string>
-    <string name="installer_custom_manage_title">カスタムインストーラーの管理</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="installer_custom_tab_saved">保存済み</string>
     <string name="installer_custom_saved_note">ユーザーがプライマリ&amp;フォールバックのインストーラー選択メニューに手動で追加したインストーラー。</string>
     <string name="installer_custom_tab_auto_saved">自動保存</string>
@@ -768,15 +810,20 @@
     <string name="installer_external_launched">%1$sを開いています…</string>
     <string name="installer_external_timeout">%1$sはインストールを確定しませんでした。別のアプリを確認してから、もう一度お試しください。</string>
     <string name="installer_external_success">%1$sはインストールの成功を報告しました。</string>
+    <string name="installer_external_finished_no_change">%1$s がアプリケーションのインストールなく終了しました。インストーラーでエラーメッセージを確認し、再試行してください</string>
     <string name="installing_ellipsis">インストール中…</string>
+    <string name="uninstalling_ellipsis">アンインストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
     <string name="unmounting">アンマウント中…</string>
     <string name="install_app">インストール</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail_title">アプリのインストールに失敗しました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
+    <string name="install_app_fail_missing_stock">マウント時のインストールに必要な元のAPKが見つかりません</string>
+    <string name="mount_split_not_supported">修正されたマウント インストーラーでは split APK はサポートされていません。システムのインストーラーを使用してください</string>
     <string name="mount_app_fail_title">マウントに失敗しました</string>
     <string name="install_timeout_message">インストールが完了しませんでした。システムインストーラーのダイアログを確認して、もう一度お試しください。</string>
+    <string name="uninstall_timeout_message">アンインストールが完了しません。アンインストールのダイヤログを確認し、再試行してください</string>
     <string name="reinstall_app_fail">アプリの再インストールに失敗しました: %s</string>
     <string name="uninstall_app_fail">アプリのアンインストールに失敗しました: %s</string>
     <string name="open_app">開く</string>
@@ -804,8 +851,8 @@
     <string name="select_install_type">インストールタイプの選択</string>
     <string name="patcher_step_group_preparing">準備中</string>
     <string name="patcher_step_load_patches">パッチの読み込み</string>
-    <string name="patcher_step_unpack">APKファイルを読み込み中</string>
     <string name="patcher_step_prepare_split_apk">分割APKのマージ</string>
+    <string name="patcher_step_unpack">APK ファイルを読み込む</string>
     <string name="patcher_step_group_patching">パッチ適用中</string>
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">パッチ適用済みAPKファイルを書き込み中</string>
@@ -843,7 +890,6 @@
     <string name="less">少なく</string>
     <string name="continue_">続行</string>
     <string name="dismiss">閉じる</string>
-    <string name="patch_bundle_urls">パッチバンドルインポートを取得</string>
     <string name="version">バージョン</string>
     <string name="published">公開済み</string>
     <string name="developer_options">開発者オプション</string>
@@ -866,6 +912,9 @@ Morpheは、コミュニティのフィードバックと貢献によって、�
     <string name="install_update_manager_failed">アップデートのインストールに失敗しました</string>
     <string name="manual_update_check">アップデートをチェック</string>
     <string name="manual_update_check_description">手動でアップデートをチェック</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="update_checking_manager">起動時にアップデートをチェック</string>
     <string name="update_checking_manager_description">アプリケーションの起動時に Morphe の新しいバージョンをチェックします</string>
     <string name="manager_prereleases">プレリリース版を使用</string>
@@ -875,7 +924,6 @@ Morpheは、コミュニティのフィードバックと貢献によって、�
     <string name="installing_manager_update">アップデートをインストールしています…</string>
     <string name="downloading_manager_update">アップデートをダウンロードしています…</string>
     <string name="manager_update_banner_title">マネージャーのアップデートをダウンロード中</string>
-    <string name="manager_update_progress_detail">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="download_manager_failed">アップデートのダウンロードに失敗しました: %s</string>
     <string name="save">保存</string>
     <string name="save_with_count">保存 (%1$s)</string>
@@ -921,11 +969,14 @@ Morpheは、コミュニティのフィードバックと貢献によって、�
     <string name="installation_aborted_description">インストールは手動でキャンセルされました。もう一度試しますか？</string>
     <string name="installation_blocked_description">インストールがブロックされました。デバイスのセキュリティ設定を確認してから、もう一度お試しください。</string>
     <string name="installation_conflict_description">アプリの既存のインストールにより、インストールが防止されました。インストール済みのアプリをアンインストールしてから、もう一度お試しください。</string>
+    <string name="installation_signature_mismatch_dialog_title">署名不一致</string>
+    <string name="installation_signature_mismatch_description">インストールされたアプリは異なる署名です。インストールされたアプリをアンインストールし、このものをインストールしますか？</string>
     <string name="installation_incompatible_description">このアプリは、このデバイスとは互換性がありません。このデバイスと互換性のあるAPKを使用して、もう一度お試しください。</string>
     <string name="installation_invalid_description">アプリが無効です。アプリをアンインストールしてから、もう一度お試しください。</string>
     <string name="installation_storage_issue_description">ストレージ容量が不足しているため、アプリをインストールできませんでした。空き容量を増やしてから、もう一度お試しください。</string>
     <string name="installation_timeout_description">インストールに時間がかかりすぎました。もう一度お試しください。</string>
     <string name="reinstall">再インストール</string>
+    <string name="installation_signature_mismatch_confirm">アンインストールしてインストール</string>
     <string name="show">表示</string>
     <string name="debugging">デバッグ</string>
     <string name="about_device">デバイスについて</string>

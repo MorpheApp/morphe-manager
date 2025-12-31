@@ -2,24 +2,25 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">补丁包</string>
-    <string name="morphe_home_greeting_1">你想修补哪个应用程序? 🛠️</string>
+    <string name="morphe_home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">准备让YouTube再次传奇吗? 🔥📺</string>
-    <!-- Energetic, light-hearted joke to build excitement -->
-    <string name="morphe_home_greeting_3">系好安全带,修补时间到了 🚀</string>
+    <string name="morphe_home_greeting_2">准备让YouTube再次传奇吗？</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">系好安全带,开始修补了</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">又是一天,又是一个屏蔽广告的杰作 😌🚫</string>
-    <string name="morphe_home_greeting_5">想看广告吗? 我也不想 🙃❌</string>
+    <string name="morphe_home_greeting_4">又一天,又一件屏蔽广告的杰作</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">想看广告吗？我也不想</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">让我们让你的应用程序行为变得更好 😏📱</string>
+    <string name="morphe_home_greeting_6">让我们让你的应用程序更好地运行</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">今天的预报:100%的修补几率 🌩️🧩</string>
-    <!-- Self-aware humorous greeting, breaking the fourth wall -->
-    <string name="morphe_home_greeting_8">有责任地修补... 或者不修补 😄⚙️</string>
+    <string name="morphe_home_greeting_7">今天的预报:100%的修补几率</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">准备把平庸变成出众吗？</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">自今天起拯救应用程序于自身 🦸‍♂️✨</string>
+    <string name="morphe_home_greeting_9">从今天开始,拯救应用程序</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">由咖啡因和优质修补驱动 ☕🧠</string>
+    <string name="morphe_home_greeting_10">靠咖啡因和好的补丁供电</string>
     <string name="morphe_home_bundle_type_api">API 包</string>
     <string name="morphe_home_update_error">更新失败</string>
     <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
@@ -40,11 +41,10 @@
     <string name="morphe_home_apk_availability_dialog_description_simple">要修补 %1$s，您需要版本 %2$s（未修补）</string>
     <string name="morphe_home_apk_availability_yes">是的，我有</string>
     <string name="morphe_home_apk_availability_no">没有，帮我找一下</string>
-    <string name="morphe_home_apk_availability_dialog_description">要修补 %1$s，您需要版本 %2$s（未修补）</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">下载原始 APK</string>
     <string name="morphe_home_download_instructions_steps_title">说明：</string>
-    <string name="morphe_home_download_instructions_step1">按下下方的\"继续进入 APKMirror.com\"按钮</string>
+    <string name="morphe_home_download_instructions_step1">点击下方的 \'%1$s\' 按钮</string>
     <string name="morphe_home_download_instructions_step2_part1">向下滚动网页并按</string>
     <string name="morphe_home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
     <string name="morphe_home_download_instructions_step3">等待下载完成，并 &lt;b&gt;不要安装&lt;/b&gt; APK</string>
@@ -113,7 +113,7 @@
     <string name="morphe_patcher_message_17">鼓励应用接受其全新、更好的自我…… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">将应用叠加从未打补丁更改为已打补丁…… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
     <string name="morphe_patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
     <!-- Morphe Settings Screen -->
@@ -123,39 +123,72 @@
     <string name="morphe_settings_return_to_advanced_description">切换到功能齐全的高级模式</string>
     <string name="morphe_share_website">分享网站</string>
     <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">外观选项</string>
+    <string name="morphe_appearance_options_description">自定义主题、颜色和背景</string>
     <string name="morphe_background_type">背景动画</string>
     <string name="morphe_background_type_circles">圆圈</string>
     <string name="morphe_background_type_rings">圆环</string>
     <string name="morphe_background_type_waves">波浪</string>
     <string name="morphe_background_type_space">空间</string>
     <string name="morphe_background_type_shapes">形状</string>
+    <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">无</string>
+    <!-- Update Section -->
     <string name="morphe_update_use_patches_prereleases">使用预发布补丁</string>
     <string name="morphe_update_use_patches_prereleases_description">使用最新的开发补丁</string>
-    <string name="patches_bundle_json_url">补丁包 JSON URL</string>
-    <string name="patches_bundle_json_url_description">包含补丁包信息的 JSON 文件的 URL</string>
-    <string name="patches_bundle_json_url_dialog_title">补丁包 URL</string>
-    <string name="patches_bundle_json_url_dialog_description">输入一个包含补丁包信息的 JSON 文件的 URL。JSON 应遵循要求的格式</string>
-    <string name="patches_bundle_json_url_label">JSON URL</string>
-    <string name="patches_bundle_json_url_error">URL必须以 http:// 或 https:// 开头</string>
-    <string name="patches_bundle_json_url_invalid">无效的 URL 格式</string>
-    <string name="patches_bundle_json_dialog_reset">重置为默认值</string>
-    <string name="patches_bundle_json_dialog_save">保存</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">补丁选项</string>
+    <string name="morphe_patch_options_youtube_description">主题、品牌、顶部栏以及 Shorts 的选项</string>
+    <string name="morphe_patch_options_youtube_music_description">主题和品牌选项</string>
+    <string name="morphe_patch_options_restart_message">更改补丁选项需要重新应用补丁才能生效</string>
+    <string name="morphe_icon_instructions_title">图标格式说明</string>
+    <string name="morphe_header_instructions_title">顶部栏格式说明</string>
+    <string name="morphe_loading_patch_options">正在加载补丁选项...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">请等待补丁包更新</string>
+    <string name="morphe_patch_options_load_error">加载补丁选项失败</string>
+    <string name="morphe_no_options_available">此补丁中没有任何选项可修改</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">自定义颜色</string>
+    <string name="morphe_hex_color">十六进制颜色</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">应用主题颜色</string>
+    <string name="morphe_theme_dark_color">深色主题背景色</string>
+    <string name="morphe_theme_dark_color_description">深色主题的背景颜色</string>
+    <string name="morphe_theme_light_color">浅色主题背景色</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">自定义应用名称</string>
+    <string name="morphe_custom_app_name_description">输入自定义名称</string>
+    <string name="morphe_custom_app_name_hint">自定义图标路径</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">包含自定义顶部栏图片的文件夹路径</string>
+    <string name="morphe_custom_header_description">/storage/emulated/0/header</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">隐藏 Shorts 应用快捷方式</string>
+    <string name="morphe_hide_shorts_app_shortcut">隐藏 Launcher 长按菜单中的 Shorts</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">隐藏 Shorts 小部件</string>
+    <string name="morphe_hide_shorts_widget">从 Launcher 小部件中移除 Shorts 按钮</string>
+    <string name="morphe_hide_shorts_widget_description">从启动器小部件中移除 Shorts 按钮</string>
     <!-- Other strings -->
     <string name="patcher">修补程序</string>
     <string name="patches">补丁</string>
     <string name="patch_bundles">补丁包</string>
     <string name="patch_bundle">补丁包</string>
+    <!-- Morphe -->
+    <string name="installer">安装程序</string>
     <string name="plugin_host_permission_label">Universal ReVanced Manager 插件宿主</string>
     <string name="plugin_host_permission_description">用于控制对 Universal ReVanced Manager 插件的访问。仅 Universal ReVanced Manager 拥有此权限。</string>
     <string name="toast_copied_to_clipboard">已复制！</string>
     <string name="copy_to_clipboard">复制到剪贴板</string>
     <string name="settings">设置</string>
     <string name="select_app">选择一个应用</string>
+    <string name="app_filter_title">筛选应用</string>
+    <string name="app_filter_installed_only">仅已安装</string>
+    <string name="app_filter_patches_available">有更新补丁</string>
+    <string name="app_filter_no_results">未发现符合条件的应用。请修改筛选条件后再试。</string>
     <string name="new_downloader_plugins_notification">有新的下载器插件可用。点击此处进行配置。</string>
     <string name="unsupported_architecture_warning">此设备架构上的修补不受支持，很可能会失败。</string>
     <string name="import_">导入</string>
-    <string name="file_field_set">已选择</string>
     <string name="file_field_not_set">未选择</string>
     <string name="field_not_set">未设置</string>
     <string name="patches_missing">缺失</string>
@@ -187,6 +220,7 @@
     <string name="bundle_version_dialog_default_subtitle">自动选择最常见的兼容版本。</string>
     <string name="bundle_version_all_versions">所有版本</string>
     <string name="bundle_version_no_version">无建议版本</string>
+    <string name="bundle_version_suggested_label">建议版本：%1$s</string>
     <string name="bundle_update_manual_available">有可用更新</string>
     <string name="bundle_update_manual_available_with_version">有可用更新：%1$s</string>
     <string name="bundle_update_progress">已处理 %1$d/%2$d 个包</string>
@@ -217,6 +251,7 @@
     <string name="bundle_version_dialog_other_title">选择其他支持的版本：</string>
     <string name="bundle_version_dialog_locked_title">版本保护已启用</string>
     <string name="bundle_version_dialog_locked_hint">前往 设置 &gt; 高级 &gt; 保护措施，并将“要求使用建议的应用版本”（关闭）和“禁用版本兼容性检查”（开启）都设置好，才能选择特定包的版本。</string>
+    <string name="patch_versions_dialog_title">%1$s支持的版本</string>
     <string name="patch_selector_item">选择补丁</string>
     <string name="patch_selector_item_description">已选择 %d 个补丁</string>
     <string name="no_patches_selected">未选择任何补丁</string>
@@ -231,15 +266,12 @@
     <string name="auto_updates_dialog_description">您希望 Universal ReVanced Manager 定期检查以下组件的更新吗？</string>
     <string name="auto_updates_dialog_patches">ReVanced 补丁</string>
     <string name="auto_updates_dialog_note">这些设置以后可以更改。</string>
-    <string name="general">通用</string>
-    <string name="general_description">主题，动态颜色</string>
+    <string name="appearance">外观</string>
+    <string name="appearance_description">主题，动态颜色</string>
     <string name="updates">更新</string>
     <string name="updates_description">检查更新并查看更新日志</string>
     <string name="downloads">下载</string>
-    <string name="plugins_help_title">什么是下载器？</string>
-    <string name="plugins_help_description">下载器是一个插件，它允许 URV 从各种来源下载官方 APK。下载的 APK 将显示在底部。在打补丁过程中，您可以选择一个已下载的 APK，或者通过插件下载它。
-
-支持的下载器插件列表可在</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">导入 &amp; 导出</string>
     <string name="import_export_description">密钥库、补丁选项和选择</string>
     <string name="changelog">查看更新日志</string>
@@ -249,29 +281,21 @@
     <string name="advanced">高级</string>
     <string name="advanced_description">API URL，内存限制，调试</string>
     <string name="about">关于</string>
-    <string name="contributors">贡献者</string>
-    <string name="dynamic_color">动态颜色</string>
-    <string name="dynamic_color_description">使颜色适应壁纸</string>
-    <string name="accent_color">强调色</string>
-    <string name="accent_color_description">为应用选择自定义强调色</string>
-    <string name="accent_color_picker_title">强调色</string>
-    <string name="accent_color_preview">预览</string>
-    <string name="accent_color_reset">重置强调色</string>
-    <string name="accent_color_presets">强调色预设</string>
-    <string name="accent_color_presets_description">点击颜色立即应用</string>
-    <string name="theme_color">主题色</string>
-    <string name="theme_color_description">使用您自己的颜色为界面和背景着色</string>
-    <string name="theme_color_picker_title">主题色</string>
-    <string name="theme_color_preview">预览</string>
-    <string name="theme_color_reset">重置主题色</string>
-    <string name="theme_preview_title">主题预览</string>
-    <string name="theme_preview_description">更改主题设置时即时更新</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">外观预览</string>
+    <!-- Morphe -->
     <string name="theme_presets">主题预设</string>
-    <string name="theme_presets_description">最流行外观的快速切换</string>
+    <!-- Morphe -->
     <string name="theme_preset_default">默认</string>
     <string name="theme_preset_amoled">纯黑</string>
     <string name="theme_preset_dynamic">Material You</string>
-    <string name="theme_reset">重置所有主题设置</string>
+    <!-- Morphe -->
     <string name="color_channel_red">红色</string>
     <string name="color_channel_green">绿色</string>
     <string name="color_channel_blue">蓝色</string>
@@ -304,9 +328,7 @@
     <string name="export_keystore_description">导出当前密钥库</string>
     <string name="export_keystore_unavailable">无密钥库可导出</string>
     <string name="export_keystore_success">已导出密钥库</string>
-    <string name="regenerate_keystore">重新生成密钥库</string>
-    <string name="regenerate_keystore_description">生成新密钥库</string>
-    <string name="regenerate_keystore_dialog_description">"您即将重新生成管理器在修补过程中将使用的密钥库。\n\n您将无法更新从此来源先前安装的应用。"</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">密钥库已成功替换</string>
     <string name="import_patch_selection">导入补丁选择</string>
     <string name="import_patch_selection_description">从 JSON 文件导入补丁选择</string>
@@ -321,6 +343,7 @@
     <string name="import_patch_bundles_none">没有导入新的补丁包</string>
     <string name="import_patch_bundles_banner_title">正在导入补丁包</string>
     <string name="import_patch_bundles_banner_subtitle">已处理 %1$d / %2$d</string>
+    <string name="import_patch_bundles_banner_steps">第 %1$d/%2$d 步</string>
     <string name="import_patch_profiles">导入补丁配置文件</string>
     <string name="import_patch_profiles_description">从 JSON 文件导入保存的补丁配置文件</string>
     <string name="import_patch_profiles_fail">无法导入补丁配置文件：%s</string>
@@ -372,6 +395,7 @@
     <string name="patch_selection_select_all_empty_toast">没有可用的补丁供选择</string>
     <string name="patch_selection_selected_bundle_toast">已选择 %s 中的所有补丁</string>
     <string name="patch_selection_select_bundle_empty_toast">%s 中没有可选择的补丁</string>
+    <string name="patch_selection_all_actions_hidden_toast">所有操作按钮均已隐藏，请在设置中至少启用一项功能</string>
     <string name="patch_selection_reset_bundle_toast">已重置 %s 的默认值</string>
     <string name="patch_selection_button_label_all">取消全选</string>
     <string name="patch_selection_button_label_bundle">取消选择包</string>
@@ -393,9 +417,12 @@
     <string name="disable_patch_selection_confirmations_warning">禁用确认可能导致意外的批量更改。</string>
     <string name="patch_selection_collapse_on_toggle">切换补丁后折叠操作</string>
     <string name="patch_selection_collapse_on_toggle_description">选择或取消选择补丁时自动隐藏补丁选择操作按钮</string>
-    <string name="patch_selection_action_order_title">Patch selection action buttons order</string>
-    <string name="patch_selection_action_order_description">Choose the layout order for the patch selection action buttons</string>
-    <string name="patch_selection_action_order_reset">Reset to default order</string>
+    <string name="patch_selection_action_order_title">修补程序选择操作按钮顺序</string>
+    <string name="patch_selection_action_order_description">选择修补程序选择操作按钮的布局顺序</string>
+    <string name="patch_selection_action_visibility_title">显示补丁选择操作按钮</string>
+    <string name="patch_selection_action_visibility_description">选择显示哪些补丁选择操作按钮</string>
+    <string name="patch_selection_action_visibility_reset">显示所有操作按钮</string>
+    <string name="patch_selection_action_order_reset">重置为默认顺序</string>
     <string name="patch_selection_confirm_deselect_bundle_title">取消选择包？</string>
     <string name="patch_selection_confirm_deselect_bundle_message">取消选择 %1$s 中所有已选择的补丁？</string>
     <string name="patch_selection_confirm_deselect_all_title">取消选择所有补丁？</string>
@@ -430,9 +457,9 @@
     <string name="patch_options_reset_all">全局重置补丁选项</string>
     <string name="patch_options_reset_all_dialog_description">"您即将重置所有补丁选项。您将需要重新应用每个选项。\n\n补丁配置文件不受影响。"</string>
     <string name="patch_options_reset_all_description">重置所有补丁选项</string>
-    <string name="download_settings">Download settings</string>
-    <string name="downloader_auto_save_title">Automatically save downloaded APKs</string>
-    <string name="downloader_auto_save_description">Keep APKs downloaded through plugins for reuse. Disable to delete them after patching.</string>
+    <string name="download_settings">下载设置</string>
+    <string name="downloader_auto_save_title">自动保存下载的 APK</string>
+    <string name="downloader_auto_save_description">保留通过插件下载的 APK 以供重复使用。禁用后将在修补后删除它们。</string>
     <string name="downloader_plugins">插件</string>
     <string name="downloader_plugin_state_trusted">受信任</string>
     <string name="downloader_plugin_state_failed">加载失败。点击查看更多详情</string>
@@ -469,12 +496,11 @@
     <string name="system">系统</string>
     <string name="light">浅色</string>
     <string name="dark">深色</string>
-    <string name="black">Black</string>
-    <string name="appearance">外观</string>
+    <string name="black">黑色</string>
     <string name="downloaded_apps">已下载的应用</string>
-    <string name="process_runtime">Run Patcher in another process</string>
+    <string name="process_runtime">在另一个进程中运行修补程序（实验性）</string>
     <string name="process_runtime_description">这速度更快，并允许修补程序使用更多内存</string>
-    <string name="process_runtime_description_not_available">This feature requires Android 11 or greater</string>
+    <string name="process_runtime_description_not_available">此功能需要 Android 11 或更高版本</string>
     <string name="strip_unused_libs">移除未使用的原生库</string>
     <string name="strip_unused_libs_description">从修补的应用中删除不支持 CPU 架构的原生库</string>
     <string name="process_runtime_memory_limit">修补程序进程内存限制</string>
@@ -485,12 +511,7 @@
     <string name="patch_bundle_rename">重命名补丁包</string>
     <string name="patch_profile_view_options">查看选项</string>
     <string name="patch_profile_patch_options_title">%1$s 的选项</string>
-    <string name="restore_official_bundle">恢复预安装的官方 ReVanced 补丁包</string>
-    <string name="restore_official_bundle_description_missing">重新安装预安装的官方 ReVanced 补丁包</string>
-    <string name="restore_official_bundle_description_installed">预安装的官方 ReVanced 补丁包当前已安装</string>
-    <string name="restore_official_bundle_success">Official Morphe patch bundle restored</string>
-    <string name="restore_official_bundle_failed">无法恢复官方 Morphe 补丁包：%1$s</string>
-    <string name="restore_official_bundle_already">官方 Morphe 补丁包已安装</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
     <string name="app_exporting">应用导出</string>
     <string name="export_name_format">导出文件名格式</string>
     <string name="export_name_format_description">自定义导出修补应用的默认文件名</string>
@@ -502,36 +523,61 @@
     <string name="export_name_format_error_blank">文件名格式不能为空。</string>
     <string name="export_name_format_current">当前模式：%1$s</string>
     <string name="export_name_format_insert">插入</string>
+    <string name="export_name_variable_app_name">应用名称</string>
+    <string name="export_name_variable_app_name_description">替换为应用的显示名称。</string>
+    <string name="export_name_variable_package_name">包名</string>
+    <string name="export_name_variable_package_name_description">替换为应用的包名。</string>
+    <string name="export_name_variable_app_version">应用版本</string>
+    <string name="export_name_variable_app_version_description">替换为应用的版本名称。</string>
+    <string name="export_name_variable_patches_version">补丁版本</string>
+    <string name="export_name_variable_patches_version_description">替换为应用的补丁包版本。</string>
+    <string name="export_name_variable_bundle_names">补丁包名称</string>
+    <string name="export_name_variable_bundle_names_description">替换为应用的补丁包名称。</string>
+    <string name="export_name_variable_manager_version">管理器版本</string>
+    <string name="export_name_variable_manager_version_description">替换为管理器版本。</string>
+    <string name="export_name_variable_timestamp">时间戳</string>
+    <string name="export_name_variable_timestamp_description">替换为当前时间 (yyyyMMdd-HHmmss)。</string>
+    <string name="export_name_variable_date">日期</string>
+    <string name="export_name_variable_date_description">替换为当前日期 (yyyyMMdd)。</string>
     <string name="debug_logs_export">导出调试日志</string>
     <string name="debug_logs_export_read_failed">读取日志失败 (退出代码 %d)</string>
     <string name="debug_logs_export_failed">导出日志失败</string>
     <string name="debug_logs_export_success">已导出日志</string>
-    <string name="api_url">API URL</string>
-    <string name="api_url_description">用于下载必要文件的 API</string>
-    <string name="api_url_dialog_title">更改 API URL</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="api_url_dialog_description">更改 Universal ReVanced Manager 的 API URL。Universal ReVanced Manager 使用 API 来下载补丁和更新。</string>
     <string name="api_url_dialog_warning">Universal ReVanced Manager 连接到 API 以下载补丁和更新。请确保您信任它。</string>
     <string name="api_url_dialog_save">设置</string>
     <string name="api_url_dialog_reset">重置 API URL</string>
-    <string name="github_pat">GitHub PAT</string>
+    <!-- Morphe -->
     <string name="github_pat_description">GitHub 集成所需的 GitHub 个人访问令牌</string>
     <string name="set_github_pat_dialog_title">设置 GitHub PAT</string>
     <string name="set_github_pat_dialog_description">设置 GitHub 个人访问令牌，以便将拉取请求添加为外部源。创建具有 public_repo 范围的 PAT</string>
     <string name="include_github_pat_in_exports_label">包含在设置导出中</string>
     <string name="include_github_pat_in_exports_supporting">将此 PAT 添加到导出的管理器设置</string>
     <string name="include_github_pat_in_exports_warning">请勿共享您的 PAT。如果您将其包含在设置导出中，请将该文件保密，因为它包含令牌。</string>
-    <string name="language_settings">语言</string>
-    <string name="app_language">应用语言</string>
-    <string name="language_dialog_title">选择应用语言</string>
-    <string name="language_option_system">跟随设备语言</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="device_memory_limit_format">%1$dMB (正常) - %2$dMB (大)</string>
     <string name="patches_force_download">强制下载所有补丁包</string>
     <string name="patches_reset">重置补丁包</string>
+    <string name="storage">存储</string>
     <string name="no_patch_found">找不到任何补丁。请检查您的补丁</string>
     <string name="tab_apps">应用</string>
     <string name="tab_patches">补丁包</string>
     <string name="tab_profiles">补丁配置文件</string>
     <string name="delete">删除</string>
+    <string name="disable">禁用</string>
+    <string name="enable">启用</string>
+    <string name="patch_bundle_disabled_toast">已禁用 %d 个补丁包</string>
+    <string name="patch_bundle_enabled_toast">已启用 %d 个补丁包</string>
+    <string name="patches_disable_single_dialog_description">禁用 \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">启用 \"%s\"?</string>
     <string name="refresh">刷新</string>
     <string name="download_apk">下载 APK 文件</string>
     <string name="patches_download_fail">下载补丁失败：%s</string>
@@ -573,7 +619,9 @@
     <string name="patch_profile_version_override_failed_toast">更新配置文件版本失败</string>
     <string name="patch_profile_version_override_set_to_all">未输入版本，已保存为“%1$s”</string>
     <string name="patch_profile_version_conflict_title">保留版本覆盖？</string>
-    <string name="patch_profile_version_conflict_message">当前版本：%1$s\n传入版本：%2$s\n应将哪个保存到此配置文件？</string>
+    <string name="patch_profile_version_conflict_message">"当前版本: %1$s
+即将到来的版本: %2$s
+应该保存到此配置文件中的是哪个?"</string>
     <string name="patch_profile_version_conflict_use_new">使用传入版本</string>
     <string name="patch_profile_version_conflict_keep_existing">保留现有版本</string>
     <string name="patch_profile_empty_state">从补丁选择屏幕保存配置后，将在此处看到它。</string>
@@ -585,7 +633,6 @@
     <string name="patch_profile_show_less">显示更少</string>
     <string name="patch_profile_created_at">创建于 %1$s</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (不可用)</string>
-    <string name="patch_profile_bundle_uid_label">UID：%1$d</string>
     <string name="patch_profile_bundle_change_uid">更改 UID</string>
     <string name="patch_profile_bundle_change_uid_title">更改 %1$s 的 UID</string>
     <string name="patch_profile_bundle_change_uid_invalid">请输入有效的数字 UID。</string>
@@ -593,8 +640,8 @@
     <string name="patch_profile_bundle_change_uid_not_found">未找到 UID 为 %1$d 的本地补丁包。</string>
     <string name="patcher_process_exit_message">修补程序进程退出，代码为 %1$d。</string>
     <string name="patcher_memory_adjustment_title">修补程序内存不足</string>
-    <string name="patcher_memory_adjustment_message_reduced">实验性修补程序进程因内存不足而停止。我们将其内存限制从 %1$d MB 降低到 %2$d MB，以便您可以立即重试。</string>
-    <string name="patcher_memory_adjustment_message_no_change">实验性修补程序进程因内存不足而停止，但内存限制已为 %1$d MB。请尝试在高级设置中进一步降低它，或在重试前禁用实验模式。</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
     <string name="patcher_memory_adjustment_retry">重试</string>
     <string name="patcher_memory_adjustment_dismiss">忽略</string>
     <string name="patcher_missing_patch_title">补丁选择需要注意</string>
@@ -607,12 +654,6 @@
     <string name="patch_selector_missing_patch_title">重新选择缺失的补丁</string>
     <string name="patch_selector_missing_patch_message">"需要重新选择这些补丁：\n%1$s\n请再次启用它们（或选择替代品），然后再次尝试修补。"</string>
     <string name="patch_profile_delete_multiple_dialog_description">删除选中的补丁配置文件？</string>
-    <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="other">%d 个补丁</item>
-    </plurals>
-    <plurals name="patch_profile_bundle_count">
-        <item quantity="other">%d 个包</item>
-    </plurals>
     <string name="this_version">此版本</string>
     <string name="universal">任意应用</string>
     <string name="search_patches">搜索补丁</string>
@@ -635,7 +676,7 @@
     <string name="applied_patches_empty">此应用无补丁记录</string>
     <string name="applied_patches_bundle_missing">包元数据不可用。显示保存的补丁名称。</string>
     <string name="no_patch_bundles_tracked">此应用无补丁包记录</string>
-    <string name="mount_install">Rooted mount installer</string>
+    <string name="mount_install">已加载的安装程序</string>
     <string name="mounted">已挂载</string>
     <string name="unmounted">已取消挂载</string>
     <string name="install_type_custom_installer">自定义安装程序</string>
@@ -662,6 +703,10 @@
     <string name="already_patched">已修补</string>
     <string name="patch_selector_sheet_filter_title">筛选</string>
     <string name="patch_selector_sheet_filter_compat_title">兼容性</string>
+    <string name="patch_selector_sheet_filter_sort_title">排序</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">按名称排序</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">有设置项</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">无设置项</string>
     <string name="string_option_menu_description">更多选项</string>
     <string name="option_preset_custom_value">自定义值</string>
     <string name="path_selector">从存储中选择</string>
@@ -671,9 +716,7 @@
     <string name="show_password_field">显示密码</string>
     <string name="hide_password_field">隐藏密码</string>
     <string name="installer_primary_title">主要安装程序</string>
-    <string name="installer_primary_description">安装修补应用时首先使用。</string>
     <string name="installer_fallback_title">备用安装程序</string>
-    <string name="installer_fallback_description">当主要安装程序不可用时自动使用。</string>
     <string name="installer_internal_name">系统安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_auto_saved_name">Rooted 挂载安装器</string>
@@ -699,8 +742,8 @@
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持。</string>
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
     <string name="installer_shizuku_launch_failed">无法打开 Shizuku。请手动启动它并重试。</string>
-    <string name="installer_custom_header">自定义安装程序</string>
-    <string name="installer_custom_manage_title">管理自定义安装程序</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="installer_custom_tab_saved">已保存</string>
     <string name="installer_custom_saved_note">用户手动添加到“主要 &amp; 备用安装程序”选择菜单中的安装程序。</string>
     <string name="installer_custom_tab_auto_saved">自动保存</string>
@@ -740,15 +783,20 @@
     <string name="installer_external_launched">正在打开 %1$s…</string>
     <string name="installer_external_timeout">%1$s 未确认安装。请检查其他应用并重试。</string>
     <string name="installer_external_success">%1$s 报告安装成功。</string>
+    <string name="installer_external_finished_no_change">%1$s 完成，未安装应用。请检查安装器中的错误信息，然后重试。</string>
     <string name="installing_ellipsis">正在安装…</string>
+    <string name="uninstalling_ellipsis">正在卸载...</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting">正在取消挂载…</string>
     <string name="install_app">安装</string>
     <string name="install_app_success">安装成功</string>
     <string name="install_app_fail_title">安装失败</string>
     <string name="install_app_fail">应用安装失败：%s</string>
+    <string name="install_app_fail_missing_stock">挂载安装程序缺少原始APK文件。</string>
+    <string name="mount_split_not_supported">根权限挂载安装器不支持拆分APK。请改用系统安装器。</string>
     <string name="mount_app_fail_title">挂载失败</string>
     <string name="install_timeout_message">安装未完成。请检查系统安装程序对话框并重试。</string>
+    <string name="uninstall_timeout_message">卸载未完成。请检查卸载对话框并重试。</string>
     <string name="reinstall_app_fail">重新安装应用失败：%s</string>
     <string name="uninstall_app_fail">卸载应用失败：%s</string>
     <string name="open_app">打开</string>
@@ -776,8 +824,8 @@
     <string name="select_install_type">选择安装类型</string>
     <string name="patcher_step_group_preparing">准备中</string>
     <string name="patcher_step_load_patches">加载补丁</string>
-    <string name="patcher_step_unpack">读取 APK 文件</string>
     <string name="patcher_step_prepare_split_apk">合并分块 APK</string>
+    <string name="patcher_step_unpack">读取APK文件</string>
     <string name="patcher_step_group_patching">修补中</string>
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">写入修补后的 APK 文件</string>
@@ -815,7 +863,6 @@
     <string name="less">更少</string>
     <string name="continue_">继续</string>
     <string name="dismiss">忽略</string>
-    <string name="patch_bundle_urls">获取补丁包导入链接</string>
     <string name="version">版本</string>
     <string name="published">发布于</string>
     <string name="developer_options">开发者选项</string>
@@ -838,6 +885,9 @@ Morphe 的核心是开源的，依靠社区反馈和贡献来推动未来的创�
     <string name="install_update_manager_failed">安装更新失败</string>
     <string name="manual_update_check">检查更新</string>
     <string name="manual_update_check_description">手动检查更新</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
     <string name="update_checking_manager">启动时检查更新</string>
     <string name="update_checking_manager_description">在应用程序启动时检查 Universal ReVanced Manager 的新版本</string>
     <string name="manager_prereleases">使用预发布版本</string>
@@ -847,7 +897,6 @@ Morphe 的核心是开源的，依靠社区反馈和贡献来推动未来的创�
     <string name="installing_manager_update">正在安装更新…</string>
     <string name="downloading_manager_update">正在下载更新…</string>
     <string name="manager_update_banner_title">正在下载管理器更新</string>
-    <string name="manager_update_progress_detail">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="download_manager_failed">下载更新失败：%s</string>
     <string name="save">保存</string>
     <string name="save_with_count">保存 (%1$s)</string>
@@ -891,11 +940,14 @@ Morphe 的核心是开源的，依靠社区反馈和贡献来推动未来的创�
     <string name="installation_aborted_description">安装被手动取消。要重试吗？</string>
     <string name="installation_blocked_description">安装被阻止。请检查您的设备安全设置并重试。</string>
     <string name="installation_conflict_description">安装被应用的现有安装阻止。要卸载已安装的应用并重试吗？</string>
+    <string name="installation_signature_mismatch_dialog_title">签名不匹配</string>
+    <string name="installation_signature_mismatch_description">已安装的应用签名与当前不同。是否卸载已安装应用并安装此版本？</string>
     <string name="installation_incompatible_description">应用与此设备不兼容。请使用与此设备兼容的 APK 并重试。</string>
     <string name="installation_invalid_description">应用无效。要卸载该应用并重试吗？</string>
     <string name="installation_storage_issue_description">由于存储空间不足，无法安装应用。请释放一些空间后重试。</string>
     <string name="installation_timeout_description">安装耗时过长。要重试吗？</string>
     <string name="reinstall">重新安装</string>
+    <string name="installation_signature_mismatch_confirm">卸载并安装</string>
     <string name="show">显示</string>
     <string name="debugging">调试</string>
     <string name="about_device">关于设备</string>
