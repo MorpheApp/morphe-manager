@@ -239,7 +239,7 @@ private fun AccentColorPresetsRow(
         // Reset button (no color selected)
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(56.dp)
                 .clip(RoundedCornerShape(14.dp))
                 .border(
                     width = if (selectedArgb == null) 2.dp else 1.dp,
@@ -249,7 +249,7 @@ private fun AccentColorPresetsRow(
                         MaterialTheme.colorScheme.outline,
                     shape = RoundedCornerShape(14.dp)
                 )
-                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(14.dp))
                 .clickable(enabled = isEnabled) {
                     if (isEnabled) {
                         onColorSelected(null)
@@ -260,7 +260,7 @@ private fun AccentColorPresetsRow(
             Icon(
                 imageVector = Icons.Outlined.Close,
                 contentDescription = "Reset",
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                     alpha = if (isEnabled) 1f else 0.5f
                 )
@@ -272,7 +272,7 @@ private fun AccentColorPresetsRow(
             val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(56.dp)
                     .clip(RoundedCornerShape(14.dp))
                     .border(
                         width = if (isSelected) 2.dp else 1.dp,
@@ -284,7 +284,7 @@ private fun AccentColorPresetsRow(
                     )
                     .background(
                         preset.copy(alpha = if (isEnabled) 1f else 0.5f),
-                        RoundedCornerShape(12.dp)
+                        RoundedCornerShape(14.dp)
                     )
                     .clickable(enabled = isEnabled) {
                         if (isEnabled) {
