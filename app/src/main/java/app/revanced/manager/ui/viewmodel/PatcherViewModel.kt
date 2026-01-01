@@ -2141,11 +2141,11 @@ fun removeMissingPatchesAndStart() {
 
     private companion object {
         private const val TAG = "Morphe Patcher"
-        private const val SYSTEM_INSTALL_TIMEOUT_MS = 180_000L
-        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 180_000L
+        private const val SYSTEM_INSTALL_TIMEOUT_MS = 60_000L
+        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val POST_TIMEOUT_GRACE_MS = 5_000L
         private const val EXTERNAL_INSTALLER_RESULT_GRACE_MS = 1500L
-        private const val EXTERNAL_INSTALLER_POST_CLOSE_TIMEOUT_MS = 90_000L
+        private const val EXTERNAL_INSTALLER_POST_CLOSE_TIMEOUT_MS = 30_000L
         private const val INSTALL_MONITOR_POLL_MS = 500L
         private const val INSTALL_PROGRESS_TOAST_INTERVAL_MS = 2500L
         private const val SIGNATURE_MISMATCH_UNINSTALL_TIMEOUT_MS = 30_000L
