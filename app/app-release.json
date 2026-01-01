@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-01-01T06:15:07.112Z",
-  "description": "# app [1.0.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2026-01-01)\n\n\n### Bug Fixes\n\n* Increase installer timeout ([934305b](https://github.com/MorpheApp/morphe-manager/commit/934305bd6bfbda17d225e6e314e0ee4cd17147cc))\n\n\n### Features\n\n* Refactor color row elements ([86b11b6](https://github.com/MorpheApp/morphe-manager/commit/86b11b66d234113a22b94e128d25acc7e699410e))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.0.0-dev.6/morphe-manager-1.0.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.0.0-dev.6/morphe-manager-1.0.0-dev.6.apk.asc",
-  "version": "1.0.0-dev.6"
+  "created_at": "2026-01-01T10:15:18.315Z",
+  "description": "# app [1.0.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2026-01-01)\n\n\n### Bug Fixes\n\n* Increase installer timeout wait time ([648f22b](https://github.com/MorpheApp/morphe-manager/commit/648f22b808cf359d276ccae5bc7b4c639d3e0db6))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.0.0-dev.7/morphe-manager-1.0.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.0.0-dev.7/morphe-manager-1.0.0-dev.7.apk.asc",
+  "version": "1.0.0-dev.7"
 }
