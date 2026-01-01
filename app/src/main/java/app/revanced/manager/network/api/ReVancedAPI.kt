@@ -28,7 +28,7 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun repoConfig(): RepoConfig = parseRepoUrl(MORPHE_MANAGER_REPO_URL)
+    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
 
     private fun parseRepoUrl(raw: String): RepoConfig {
         val trimmed = raw.removeSuffix("/")
@@ -253,3 +253,5 @@ fun <T> APIResponse<T>.successOrThrow(context: String): T {
         is APIResponse.Failure -> throw Exception("Failed fetching $context: ${error.message}", error)
     }
 }
+
+private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
