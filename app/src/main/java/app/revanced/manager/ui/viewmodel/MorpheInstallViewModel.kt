@@ -486,6 +486,6 @@ class MorpheInstallViewModel : ViewModel(), KoinComponent {
 
     companion object {
         private const val TAG = "MorpheInstallViewModel"
-        private const val INSTALL_TIMEOUT_MS = 30_000L
+        private const val INSTALL_TIMEOUT_MS = 240_000L
     }
 }
