@@ -1,3 +1,10 @@
+# app [1.0.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2026-01-01)
+
+
+### Bug Fixes
+
+* Increase installer timeout wait time ([648f22b](https://github.com/MorpheApp/morphe-manager/commit/648f22b808cf359d276ccae5bc7b4c639d3e0db6))
+
 # app [1.0.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2026-01-01)
 
 
