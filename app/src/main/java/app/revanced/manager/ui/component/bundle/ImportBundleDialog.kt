@@ -215,14 +215,15 @@ private fun ImportBundleStep(
                         onValueChange = onRemoteUrlChange,
                         label = { Text(stringResource(R.string.patches_url)) }
                     )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    PatchBundleUrlsCard(
-                        onClick = {
-                            context.openUrl(
-                                "https://github.com/Jman-Github/ReVanced-Patch-Bundles/tree/bundles#-patch-bundles-urls"
-                            )
-                        }
-                    )
+                    // Morphe
+//                    Spacer(modifier = Modifier.height(10.dp))
+//                    PatchBundleUrlsCard(
+//                        onClick = {
+//                            context.openUrl(
+//                                "https://github.com/Jman-Github/ReVanced-Patch-Bundles/tree/bundles#-patch-bundles-urls"
+//                            )
+//                        }
+//                    )
                 }
                 Column(
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp)
