@@ -10,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
-import app.revanced.manager.ui.component.morphe.utils.lighten
 
 /**
  * Semi-transparent primary button for dialogs
@@ -38,11 +36,7 @@ fun MorpheDialogButton(
 
     val contentColor = when {
         isDestructive -> if (isDarkBackground) Color(0xFFFF6B6B) else Color(0xFFD32F2F)
-        else -> if (isDarkBackground) {
-            primaryColor.lighten(0.3f)
-        } else {
-            primaryColor.darken(0.1f)
-        }
+        else -> textColor
     }
 
     val borderColor = when {
