@@ -83,7 +83,7 @@ class ReVancedAPI(
         val baseUrl = apiUrl()
         return client.request {
             // Morphe
-            url("$baseUrl/v1/$normalizedRoute")
+            url("$baseUrl/v2/$normalizedRoute")
         }
     }
 

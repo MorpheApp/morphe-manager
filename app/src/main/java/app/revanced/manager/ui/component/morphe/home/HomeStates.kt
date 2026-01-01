@@ -312,7 +312,7 @@ class HomeStates(
         val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
         // To test client fallback logic in getApiOfflineWebSearchUrl(), change this an invalid url.
-        val searchUrl = "$MORPHE_API_URL/v1/web-search/$searchQuery"
+        val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
         // Use API web-search if user clicks thru faster than redirect resolving can occur.
