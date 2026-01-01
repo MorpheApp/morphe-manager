@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d Patch</item>
+        <item quantity="other">%d Patches</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Führe %d Patch aus</item>
+        <item quantity="other">Führe %d Patches aus</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_patch_count">
+        <item quantity="one">%d Patch</item>
+        <item quantity="other">%d Patches</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_count">
+        <item quantity="one">%d Paket</item>
+        <item quantity="other">%d Pakete</item>
+    </plurals>
+</resources>

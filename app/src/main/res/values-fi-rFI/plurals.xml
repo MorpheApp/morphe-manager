@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d korjaustiedosto</item>
+        <item quantity="other">%d korjaustiedostoa</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Suorita %d korjaustiedosto</item>
+        <item quantity="other">Suorita %d korjaustiedostoa</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d valittuna</item>
+        <item quantity="other">%d valittuna</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_patch_count">
+        <item quantity="one">%d paikka</item>
+        <item quantity="other">%d paikkaa</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_count">
+        <item quantity="one">%d nippu</item>
+        <item quantity="other">%d nippua</item>
+    </plurals>
+</resources>

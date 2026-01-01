@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Patch-paket</string>
+    <string name="morphe_home_greeting_1">Vilken app vill du patcha?</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Redo att göra YouTube legendar igen?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Spänna fast dig, det är dags för patchar</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">En annan dag, en annan mästarverk blockerad av annonser</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Vill du se annonser? Inte jag heller</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Låt oss få dina appar att bete sig</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Dagens prognos: 100% chans för uppdateringar</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Redo att förvandla det medelgiltiga till det fantastiska?</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Räddar appar från sig själva sedan idag</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Driven av koffein och bra uppdateringar</string>
+    <string name="morphe_home_bundle_type_api">API-paket</string>
+    <string name="morphe_home_update_error">Uppdateringen misslyckades</string>
+    <string name="morphe_home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
+    <string name="morphe_home_updating_patches">Uppdaterar patchar…</string>
+    <string name="morphe_home_update_success">Uppdateringen klar</string>
+    <string name="morphe_home_patches_updated">Dina patchar är uppdaterade</string>
+    <string name="morphe_home_patches_are_loading">Patchar laddas, vänligen vänta…</string>
+    <string name="morphe_home_please_wait">Vänligen vänta…</string>
+    <string name="morphe_home_open_in_browser">Öppna i webbläsaren</string>
+    <string name="morphe_home_failed_to_open_url">Det gick inte att öppna URL</string>
+    <string name="morphe_home_date_added">Lades till</string>
+    <string name="morphe_home_date_updated">Uppdaterades</string>
+    <string name="morphe_home_check_updates">Kontrollera</string>
+    <string name="morphe_home_unknown">Okänd</string>
+    <string name="morphe_home_timeline">Uppdateringshistorik</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Har du den ursprungliga opatchade APK:n?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">För att uppdatera %1$s behöver du version %2$s (ouppdaterad)</string>
+    <string name="morphe_home_apk_availability_yes">Ja, jag har den</string>
+    <string name="morphe_home_apk_availability_no">Nej, hjälp mig att hitta den</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Ladda ned den ursprungliga APK:n</string>
+    <string name="morphe_home_download_instructions_steps_title">Instruktioner:</string>
+    <string name="morphe_home_download_instructions_step1">Tryck på \'%1$s\'-knappen nedan</string>
+    <string name="morphe_home_download_instructions_step2_part1">Skrolla ner på webbsidan och tryck på</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Tryck på nedladdning på webbsidan, och inte här 😊</string>
+    <string name="morphe_home_download_instructions_step3">Vänta tills nedladdningen är klar, och &lt;b&gt;installera inte&lt;/b&gt; APK:n</string>
+    <string name="morphe_home_download_instructions_step3_mount">Vänta tills nedladdningen är klar, sedan &lt;b&gt;installera APK:n&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">När nedladdningen är klar, öppna den här appen igen</string>
+    <string name="morphe_home_download_instructions_step4_mount">Efter att ha installerat den ursprungliga APK-filen, öppna den här appen igen</string>
+    <string name="morphe_home_download_instructions_continue">Fortsätt till APKMirror.com</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Välj den APK-fil du laddade ner</string>
+    <string name="morphe_home_file_picker_prompt_description">Välj nu %1$s APK-filen som du just laddade ner.</string>
+    <string name="morphe_home_file_picker_prompt_open">Öppna APK-fil jag laddade ner</string>
+    <string name="morphe_home_recommended_version">Rekommenderad version</string>
+    <string name="morphe_patcher_selected_version">Vald version</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Rotläge kräver att den ursprungliga APK:n är installerad på din enhet innan patchning.</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore supportpatch är exkluderad i rotläge</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">Spara APK</string>
+    <string name="morphe_patcher_copy_error">Kopieringsfel</string>
+    <string name="morphe_patcher_show_error">Visa fel</string>
+    <string name="morphe_patcher_error_copied">Fel kopierat till urklipp</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d patchar</string>
+    <string name="morphe_patcher_long_step_warning">Det här steget kan ta en stund. Vänligen vänta...</string>
+    <string name="morphe_patcher_installing">Installerar...</string>
+    <string name="morphe_patcher_installing_subtitle">Nästan redo att köra igång! 🎸</string>
+    <string name="morphe_patcher_success_title">Klart! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Din app är anpassad och installerad!</string>
+    <string name="morphe_patcher_complete_title">Anpassning slutförd! ✨</string>
+    <string name="morphe_patcher_failed_title">Hoppsan! Något gick fel</string>
+    <string name="morphe_patcher_failed_subtitle">Kontrollera felinformationen nedan</string>
+    <string name="morphe_patcher_failed_dialog_title">Patchning misslyckades</string>
+    <string name="morphe_patcher_unknown_error">Okänt fel uppstod</string>
+    <string name="morphe_patcher_mounting">Monterar…</string>
+    <string name="morphe_patcher_conflict_title">Paketkonflikt</string>
+    <string name="morphe_patcher_conflict_subtitle">Du måste avinstallera den befintliga versionen</string>
+    <string name="morphe_patcher_install_error_title">Installationsfel</string>
+    <string name="morphe_patcher_install_error_subtitle">Försök att avinstallera och installera igen</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">O stödde version</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Denna APK är inte en rekommenderad appversion. Att fortsätta kan leda till att appen inte fungerar.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Fortsätt ändå</string>
+    <string name="morphe_patcher_wrong_package_title">Fel paket valt</string>
+    <string name="morphe_patcher_wrong_package_description">Den valda APK:n är inte för applikationen du avsåg att patcha.</string>
+    <string name="morphe_patcher_expected_package">Förväntat paket</string>
+    <string name="morphe_patcher_selected_package">Valt paket</string>
+    <string name="morphe_patcher_message_1">Morphar din app till något fantastiskt… 🏆</string>
+    <string name="morphe_patcher_message_2">Lär gamla appar nya knep… 🎩</string>
+    <string name="morphe_patcher_message_3">Ger din app en digital service… 🔧</string>
+    <string name="morphe_patcher_message_4">Brygger digital magi… ☕</string>
+    <string name="morphe_patcher_message_5">Kaffepaus rekommenderas… ☕</string>
+    <string name="morphe_patcher_message_6">Titta ut, det är fint där ute… 🌤️</string>
+    <string name="morphe_patcher_message_7">Justerar 1:or och 0:or… 🤖</string>
+    <string name="morphe_patcher_message_8">Redar ut digital spaghetti… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Fixar buggar i den opatchade appen… 🐞</string>
+    <string name="morphe_patcher_message_10">Bra patchar är värda att vänta på… ⏳</string>
+    <string name="morphe_patcher_message_11">Polerar pixlar tills de glänser… 💎</string>
+    <string name="morphe_patcher_message_12">Var snäll och sitt kvar tills kapten stänger av \"Uppdatering pågår\"-skylten... 💺✈️</string>
+    <string name="morphe_patcher_message_13">Tillagar din patchade app, varm och färsk… 🍳</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Förhandlar artigt med bytekod… 🤝</string>
+    <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Alla system nominella… patchningsbanan är stabil… 🚀</string>
+    <string name="morphe_patcher_message_16">Pressar ut extra kraft, som juice från en digital citron… 🍋</string>
+    <string name="morphe_patcher_message_17">Uppmuntra appen att acceptera sitt nya, bättre jag… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Ändrar appens superposition från opatchad till patchad… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">Din app har feber, och den enda medicinen är fler patchar… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Tar bort nonsens. Vänligen vänta… 🗑️</string>
+    <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Återgå till Morphe-hem</string>
+    <string name="morphe_settings_return_to_morphe_description">Återgå till förenklat läge</string>
+    <string name="morphe_settings_return_to_advanced">Växla till Avancerat läge</string>
+    <string name="morphe_settings_return_to_advanced_description">Växla till det fullt utrustade avancerade läget</string>
+    <string name="morphe_share_website">Dela webbplatsen</string>
+    <string name="morphe_share_website_description">Dela den officiella Morphe-webbplatsen</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">Inställningsalternativ för utseende</string>
+    <string name="morphe_appearance_options_description">Anpassa teman, färger och bakgrunder</string>
+    <string name="morphe_background_type">Bakgrundsanimation</string>
+    <string name="morphe_background_type_circles">Cirklar</string>
+    <string name="morphe_background_type_rings">Ringar</string>
+    <string name="morphe_background_type_waves">Vågor</string>
+    <string name="morphe_background_type_space">Rymden</string>
+    <string name="morphe_background_type_shapes">Former</string>
+    <string name="morphe_background_type_snow">Snö</string>
+    <string name="morphe_background_type_none">Ingen</string>
+    <!-- Update Section -->
+    <string name="morphe_update_use_patches_prereleases">Använd förhandsversioner av korrigeringar</string>
+    <string name="morphe_update_use_patches_prereleases_description">Använd de senaste utvecklingskorrigeringarna</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Patchalternativ</string>
+    <string name="morphe_patch_options_youtube_description">Tema, branding, rubrik och Shorts-alternativ</string>
+    <string name="morphe_patch_options_youtube_music_description">Tema- och brandingalternativ</string>
+    <string name="morphe_patch_options_restart_message">Ändring av patchalternativ kräver återinstallering för att ändringarna ska börja gälla</string>
+    <string name="morphe_icon_instructions_title">Instruktioner för ikonformat</string>
+    <string name="morphe_header_instructions_title">Instruktioner för rubrikformat</string>
+    <string name="morphe_loading_patch_options">Läser in patchalternativ...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Vänta tills patchburden uppdateras</string>
+    <string name="morphe_patch_options_load_error">Misslyckades med att läsa in patchalternativ</string>
+    <string name="morphe_no_options_available">Inga alternativ tillgängliga för denna patch</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">Anpassad färg</string>
+    <string name="morphe_hex_color">HEX-färg</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">App-Temafärgar</string>
+    <string name="morphe_theme_dark_color">Temafärg för mörkerläge</string>
+    <string name="morphe_theme_dark_color_description">Bakgrundsfärg för mörkerläge</string>
+    <string name="morphe_theme_light_color">Temafärg för ljust läge</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">Anpassad branding</string>
+    <string name="morphe_custom_app_name_description">Ändra appens visningsnamn</string>
+    <string name="morphe_custom_app_name_hint">Ange anpassat namn</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">Anpassad rubriklogga</string>
+    <string name="morphe_custom_header_description">Mappruta som innehåller anpassade rubrikbilder</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">Dölj Shorts-funktioner</string>
+    <string name="morphe_hide_shorts_app_shortcut">Dölj Shorts-appsnabbkommando</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">Ta bort Shorts från lanschens långhållmenu</string>
+    <string name="morphe_hide_shorts_widget">Dölj Shorts-widget</string>
+    <string name="morphe_hide_shorts_widget_description">Ta bort Shorts-knapp från lanschens widget</string>
+    <!-- Other strings -->
+    <string name="patcher">Patcher</string>
+    <string name="patches">Patchar</string>
+    <string name="patch_bundles">Patchpaket</string>
+    <string name="patch_bundle">Patchpaket</string>
+    <!-- Morphe -->
+    <string name="installer">Installator</string>
+    <string name="plugin_host_permission_label">Morphe-pluginvärd</string>
+    <string name="plugin_host_permission_description">Används för att styra åtkomsten till Morphe-plugins. Endast Morphe har detta.</string>
+    <string name="toast_copied_to_clipboard">Kopierat!</string>
+    <string name="copy_to_clipboard">Kopiera till urklipp</string>
+    <string name="settings">Inställningar</string>
+    <string name="select_app">Välj en app</string>
+    <string name="app_filter_title">Filtrera appar</string>
+    <string name="app_filter_installed_only">Endast installerade</string>
+    <string name="app_filter_patches_available">Updateringar tillgängliga</string>
+    <string name="app_filter_no_results">Inga appar matchar dina filtret.</string>
+    <string name="new_downloader_plugins_notification">Nya nedladdningsplugins tillgängliga. Klicka här för att konfigurera dem.</string>
+    <string name="unsupported_architecture_warning">Patchning på denna enhetsarkitektur stöds inte och kommer med största sannolikhet att misslyckas.</string>
+    <string name="import_">Importera</string>
+    <string name="file_field_not_set">Inte vald</string>
+    <string name="field_not_set">Inte angivet</string>
+    <string name="patches_missing">Saknas</string>
+    <string name="patches_error">Fel</string>
+    <string name="patches_error_description">Kunde inte ladda korrigeringar. Klicka för att se felet</string>
+    <string name="patches_not_downloaded">Patches har inte hämtats. Klicka här för att hämta</string>
+    <string name="patches_name_default">Korrigeringar</string>
+    <string name="patches_name_fallback">Namnlös</string>
+    <string name="bundle_uid">Bundel-ID</string>
+    <string name="patches_display_name">Visningsnamn</string>
+    <string name="android_11_bug_dialog_title">Bug i Android 11</string>
+    <string name="android_11_bug_dialog_description">Appinstallationsbehörigheten måste beviljas i förväg för att undvika en bugg i Android 11-systemet som negativt påverkar användarupplevelsen.</string>
+    <string name="no_network_toast">Ingen internetanslutning tillgänglig</string>
+    <string name="selected_app_meta_any_version">Alla tillgängliga versioner</string>
+    <string name="app_source_dialog_title">Välj källa</string>
+    <string name="app_source_dialog_option_auto">Automatiskt</string>
+    <string name="app_source_dialog_option_auto_description">Använd alla tillgängliga nedladdare för att ladda ned appen</string>
+    <string name="app_source_dialog_option_auto_unavailable">Inga tillägg tillgängliga</string>
+    <string name="app_source_dialog_option_storage">Lagring</string>
+    <string name="app_source_dialog_option_storage_description">Välj en APK från lokal lagring</string>
+    <string name="app_source_dialog_option_installed_no_root">Monterade appar kan inte patchas igen utan root-åtkomst</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">Version %s matchar inte den föreslagna versionen</string>
+    <string name="bundle_version_item">Paketrekommendation</string>
+    <string name="bundle_version_item_description_default">Använder standardrekommendation</string>
+    <string name="bundle_version_item_description_selected">Följer %1$s (%2$s)</string>
+    <string name="bundle_version_dialog_title">Välj paketrekommendation</string>
+    <string name="bundle_version_dialog_description">Välj vilken buntens förslag som ska användas när du laddar ner en APK.</string>
+    <string name="bundle_version_dialog_default">Använd standardrekommendation</string>
+    <string name="bundle_version_dialog_default_subtitle">Välj automatiskt den vanligaste kompatibla versionen.</string>
+    <string name="bundle_version_all_versions">Alla versioner</string>
+    <string name="bundle_version_no_version">Ingen föreslagen version</string>
+    <string name="bundle_version_suggested_label">Föreslagen version: %1$s</string>
+    <string name="bundle_update_manual_available">Uppdatering tillgänglig</string>
+    <string name="bundle_update_manual_available_with_version">Uppdatering tillgänglig: %1$s</string>
+    <string name="bundle_update_progress">%1$d av %2$d paket behandlade</string>
+    <string name="bundle_update_banner_title">Uppdaterar paket</string>
+    <string name="bundle_reorder">Sortera paket</string>
+    <string name="bundle_reorder_title">Sortera paket</string>
+    <string name="bundle_reorder_description">Dra i handtaget för att ändra ordningen som paket visas i listan och i menyn för pakerval.</string>
+    <string name="bundle_actions_expand">Visa pakethanteringar</string>
+    <string name="bundle_actions_collapse">Dölj pakethanteringar</string>
+    <string name="patch_bundle_duplicate_name_error">Ett paket med detta namn finns redan</string>
+    <string name="patch_bundle_missing_error">Kunde inte uppdatera detta paket.</string>
+    <string name="bundle_release_page">Öppna releasesidan</string>
+    <string name="bundle_release_page_unavailable">Releasesidan är inte tillgänglig för det här paketet</string>
+    <string name="bundle_release_page_error">Kunde inte öppna releasesidan: %s</string>
+    <string name="bundle_links_title">Länkar för %1$s</string>
+    <string name="bundle_link_release">GitHub-utgivning</string>
+    <string name="bundle_link_catalog">Patchlistkatalog</string>
+    <string name="bundle_catalog_unavailable">Patchlistkatalog ej tillgänglig</string>
+    <string name="show_suggested_versions">Visa föreslagna versioner</string>
+    <string name="hide_suggested_versions">Dölj föreslagna versioner</string>
+    <string name="show_other_versions">Visa andra versioner</string>
+    <string name="other_supported_versions_title">Andra understödda versioner (%1$s)</string>
+    <string name="other_supported_versions_empty">Inga andra understödda versioner tillgängliga.</string>
+    <string name="other_supported_versions_all">Stöder alla versioner.</string>
+    <string name="bundle_version_dialog_recommended">Föreslagen version: %1$s</string>
+    <string name="bundle_version_dialog_selected_override">Vald version: %1$s</string>
+    <string name="bundle_version_dialog_selected_indicator">Vald</string>
+    <string name="bundle_version_dialog_other_title">Välj en annan kompatibel version:</string>
+    <string name="bundle_version_dialog_locked_title">Versionsskydd är aktiverat</string>
+    <string name="bundle_version_dialog_locked_hint">Gå till Inställningar &gt; Avancerat &gt; Säkerhetsåtgärder och ställ in både \"Kräv föreslagen appversion\" (växla av) och \"Inaktivera versionskompatibilitetskontroll\" (växla på) för att välja paketspecifika versioner.</string>
+    <string name="patch_versions_dialog_title">Stödda versioner för %1$s</string>
+    <string name="patch_selector_item">Välj patchar</string>
+    <string name="patch_selector_item_description">%d patchar valda</string>
+    <string name="no_patches_selected">Inga patchar valda</string>
+    <string name="network_unavailable_warning">Din enhet är inte ansluten till internet. Nedladdning kommer att misslyckas senare.</string>
+    <string name="apk_source_selector_item">Välj APK-källa</string>
+    <string name="apk_source_auto">Använder alla APK-nedladdare</string>
+    <string name="apk_source_downloader">Använder %s</string>
+    <string name="apk_source_installed">Använder installerad APK</string>
+    <string name="apk_source_local">Använder en lokal APK-fil</string>
+    <string name="apk_source_downloaded">Använder nedladdad APK</string>
+    <string name="auto_updates_dialog_title">Konfigurera uppdateringar</string>
+    <string name="auto_updates_dialog_description">Vill du att Morphe regelbundet ska söka efter uppdateringar för följande komponenter?</string>
+    <string name="auto_updates_dialog_patches">Morphe-korrigeringar</string>
+    <string name="auto_updates_dialog_note">Dessa inställningar kan ändras senare.</string>
+    <string name="appearance">Utseende</string>
+    <string name="appearance_description">Tema, dynamisk färg</string>
+    <string name="updates">Uppdateringar</string>
+    <string name="updates_description">Sök efter uppdateringar och visa ändringslogg</string>
+    <string name="downloads">Nedladdningar</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <string name="import_export">Importera &amp; exportera</string>
+    <string name="import_export_description">Nyckelarkiv, korrigeringsalternativ och urval</string>
+    <string name="changelog">Visa ändringsloggar</string>
+    <string name="changelog_loading">Läser in ändringslogg</string>
+    <string name="changelog_download_fail">Kunde inte ladda ner ändringslogg: %s</string>
+    <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
+    <string name="advanced">Avancerat</string>
+    <string name="advanced_description">API-URL, minnesgräns, felsökning</string>
+    <string name="about">Om</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">Huvudfärg</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">Utkik på utseende</string>
+    <!-- Morphe -->
+    <string name="theme_presets">Temaförinställningar</string>
+    <!-- Morphe -->
+    <string name="theme_preset_default">Följ system</string>
+    <string name="theme_preset_amoled">Ren svart</string>
+    <string name="theme_preset_dynamic">Material You</string>
+    <!-- Morphe -->
+    <string name="color_channel_red">Röd</string>
+    <string name="color_channel_green">Grön</string>
+    <string name="color_channel_blue">Blå</string>
+    <string name="theme">Tema</string>
+    <string name="safeguards">Skyddsåtgärder</string>
+    <string name="patch_compat_check">Inaktivera versionskompatibilitetskontroll</string>
+    <string name="patch_compat_check_description">Begränsa inte patchar till kompatibla appversioner</string>
+    <string name="patch_compat_check_confirmation">"Att välja inkompatibla patchar kan resultera i en trasig app.
+
+Vill du fortsätta ändå?"</string>
+    <string name="suggested_version_safeguard">Kräv föreslagen appversion</string>
+    <string name="suggested_version_safeguard_description">Framtvinga val av den föreslagna appversionen</string>
+    <string name="suggested_version_safeguard_confirmation">"Att välja en app som inte är den föreslagna versionen kan orsaka oväntade problem.
+
+Vill du fortsätta ändå?"</string>
+    <string name="patch_selection_safeguard">Tillåt ändring av patchval och alternativ</string>
+    <string name="patch_selection_safeguard_description">Förhindra inte val eller avmarkering av patchar och anpassning av alternativ</string>
+    <string name="patch_selection_safeguard_confirmation">"Att ändra valet av patchar kan orsaka oväntade problem.
+
+Aktivera ändå?"</string>
+    <string name="universal_patches_safeguard">Visa &amp; tillåt användning av universella patchar</string>
+    <string name="universal_patches_safeguard_description">Dölj inte universella patchar eller förhindra användningen av dem</string>
+    <string name="universal_patches_profile_blocked_title">Universella patchar inaktiverade</string>
+    <string name="universal_patches_profile_blocked_description">Den här patchprofilen innehåller universella patchar. Aktivera ”%1$s” i avancerade inställningar för att använda den.</string>
+    <string name="universal_patches_app_blocked_description">Den här appen innehåller universella patchar. Aktivera ”%1$s” i avancerade inställningar för att fortsätta.</string>
+    <string name="import_keystore">Importera nyckelarkiv</string>
+    <string name="import_keystore_description">Importera ett anpassat nyckelarkiv</string>
+    <string name="import_keystore_dialog_title">Ange nyckelarkivuppgifter</string>
+    <string name="import_keystore_dialog_description">Du kommer att behöva mata in keystorens autentikation för att importera den.</string>
+    <string name="import_keystore_dialog_alias_field">Användarnamn (alias)</string>
+    <string name="import_keystore_dialog_password_field">Lösenord</string>
+    <string name="import_keystore_dialog_button">Importera</string>
+    <string name="import_keystore_wrong_credentials">Felaktiga autentiseringsuppgifter för lagringsplatsen</string>
+    <string name="import_keystore_success">Importerad lagringsplats</string>
+    <string name="export_keystore">Exportera lagringsplats</string>
+    <string name="export_keystore_description">Exportera den aktuella lagringsplatsen</string>
+    <string name="export_keystore_unavailable">Ingen lagringsplats att exportera</string>
+    <string name="export_keystore_success">Exporterad lagringsplats</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore_success">Lagringsplatsen har bytts ut med framgång</string>
+    <string name="import_patch_selection">Importera patchval</string>
+    <string name="import_patch_selection_description">Importera patchurval från en JSON-fil</string>
+    <string name="import_patch_selection_fail">Kunde inte importera patchurval: %s</string>
+    <string name="import_patch_selection_success">Patchurval importerat</string>
+    <string name="import_patch_bundles">Importera patchpaket</string>
+    <string name="import_patch_bundles_description">Återställ fjärr-patchpaket från en JSON-fil</string>
+    <string name="import_patch_bundles_fail">Kunde inte importera patchpaket: %s</string>
+    <string name="import_patch_bundles_in_progress">Importera...</string>
+    <string name="import_patch_bundles_success">Importerade %d patchpaket</string>
+    <string name="import_patch_bundles_updated">Uppdaterade %d patchpaket</string>
+    <string name="import_patch_bundles_none">Inga nya patchpaket importerades</string>
+    <string name="import_patch_bundles_banner_title">Importera patchpaket</string>
+    <string name="import_patch_bundles_banner_subtitle">%1$d av %2$d bearbetade</string>
+    <string name="import_patch_bundles_banner_steps">Steg %1$d av %2$d</string>
+    <string name="import_patch_profiles">Importera patchprofiler</string>
+    <string name="import_patch_profiles_description">Importera sparade patchprofiler från en JSON-fil</string>
+    <string name="import_patch_profiles_fail">Kunde inte importera patchprofiler: %s</string>
+    <string name="import_patch_profiles_success">Importerade %d patchprofiler</string>
+    <string name="import_patch_profiles_partial">Importerade %1$d patchprofiler med %2$d hoppade över</string>
+    <string name="import_patch_profiles_skipped">Hoppade över %d dubblett-patchprofiler</string>
+    <string name="import_patch_profiles_none">Inga patchprofiler importerades</string>
+    <string name="import_manager_settings">Importera inställningar för hanteraren</string>
+    <string name="import_manager_settings_description">Återställ sparade inställningar för hanteraren från en JSON-fil</string>
+    <string name="import_manager_settings_fail">Kunde inte importera inställningar för hanteraren: %s</string>
+    <string name="import_manager_settings_success">Importerade inställningar för hanteraren</string>
+    <string name="export_patch_selection">Exportera patchurval</string>
+    <string name="export_patch_selection_description">Exportera patchurval till en JSON-fil</string>
+    <string name="export_patch_selection_fail">Kunde inte exportera patchurval: %s</string>
+    <string name="export_patch_selection_success">Exporterade patchurval</string>
+    <string name="export_patch_bundles">Exportera patchbuntar</string>
+    <string name="export_patch_bundles_description">Spara importerade fjärrpatchbuntar till en JSON-fil</string>
+    <string name="export_patch_bundles_fail">Kunde inte exportera patchpaket: %s</string>
+    <string name="export_patch_bundles_success">Exporterade %d patchpaket</string>
+    <string name="export_patch_bundles_partial">Exporterade %1$d patchpaket. Vissa paket kunde inte exporteras eftersom de lades till lokalt.</string>
+    <string name="bundle_type_remote">Fjärr</string>
+    <string name="bundle_type_local">Lokal</string>
+    <string name="bundle_type_preinstalled">Förinstallerad</string>
+    <string name="bundle_created_at">Skapad %1$s</string>
+    <string name="bundle_updated_at">Uppdaterad %1$s</string>
+    <string name="bundle_changelog">Ändringslogg</string>
+    <string name="bundle_view_changelog">Visa den senaste ändringsloggen</string>
+    <string name="bundle_changelog_error">Misslyckades med att läsa in ändringslogg: %s</string>
+    <string name="bundle_changelog_retry">Försök igen</string>
+    <string name="bundle_changelog_empty">Ingen ändringslogg tillgänglig</string>
+    <string name="export_patch_profiles">Exportera patchprofiler</string>
+    <string name="export_patch_profiles_description">Exportera alla patchprofiler till en JSON-fil</string>
+    <string name="export_patch_profiles_fail">Kunde inte exportera patchprofiler: %s</string>
+    <string name="export_patch_profiles_success">Exporterade %d patchprofiler</string>
+    <string name="export_patch_profiles_empty">Det finns inga patchprofiler att exportera</string>
+    <string name="export_manager_settings">Exportera managerinställningar</string>
+    <string name="export_manager_settings_description">Spara alla managerinställningar till en JSON-fil</string>
+    <string name="export_manager_settings_fail">Kunde inte exportera managerinställningar: %s</string>
+    <string name="export_manager_settings_success">Exporterade managerinställningar</string>
+    <string name="reset_patch_selection">Återställ patchval</string>
+    <string name="reset_patch_selection_description">Återställ det lagrade patchvalet</string>
+    <string name="reset_patch_options">Återställ patchalternativ</string>
+    <string name="reset_patch_options_description">Återställ de lagrade patchalternativen</string>
+    <string name="reset_patch_selection_success">Patchvalet har återställts</string>
+    <string name="patch_selection_deselected_all_toast">Avmarkerade alla patchar</string>
+    <string name="patch_selection_deselected_bundle_toast">Deselect alla patchar i %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">Inga patchar att avmarkera i %s</string>
+    <string name="patch_selection_selected_all_toast">Valda alla patchar</string>
+    <string name="patch_selection_select_all_empty_toast">Inga patchar tillgängliga att välja</string>
+    <string name="patch_selection_selected_bundle_toast">Valda alla patchar i %s</string>
+    <string name="patch_selection_select_bundle_empty_toast">Inga valbara patchar i %s</string>
+    <string name="patch_selection_all_actions_hidden_toast">Alla åtgärdsfärger är dolda, aktivera minst en i inställningarna</string>
+    <string name="patch_selection_reset_bundle_toast">Återställ standardvärden för %s</string>
+    <string name="patch_selection_button_label_all">Avmarkera alla</string>
+    <string name="patch_selection_button_label_bundle">Avmarkera paket</string>
+    <string name="patch_selection_button_label_defaults">Alla standardvärden</string>
+    <string name="patch_selection_button_label_select_bundle">Välj paket</string>
+    <string name="patch_selection_button_label_select_all">Välj alla</string>
+    <string name="patch_selection_button_label_undo_action">Ångra åtgärd</string>
+    <string name="patch_selection_button_label_redo_action">Gör om åtgärd</string>
+    <string name="patch_selection_history_undo">Ångrade %1$s</string>
+    <string name="patch_selection_history_redo">Tog igen %1$s</string>
+    <string name="patch_selection_action_all_defaults">alla standardvärden</string>
+    <string name="patch_selection_action_deselect_all">avmarkera alla</string>
+    <string name="patch_selection_action_select_all">markera alla</string>
+    <string name="patch_selection_action_select_bundle">markera paket “%1$s”</string>
+    <string name="patch_selection_action_deselect_bundle">avmarkera paket “%1$s”</string>
+    <string name="patch_selection_action_bundle_defaults">standardvärden för paket “%1$s”</string>
+    <string name="disable_patch_selection_confirmations">Inaktivera bekräftelser för patchval</string>
+    <string name="disable_patch_selection_confirmations_description">Hoppa över bekräftelsedialoger för patchvalsåtgärder</string>
+    <string name="disable_patch_selection_confirmations_warning">Inaktivering av bekräftelser kan orsaka oavsiktliga massändringar.</string>
+    <string name="patch_selection_collapse_on_toggle">Dölj åtgärder efter att ha växlat patchar</string>
+    <string name="patch_selection_collapse_on_toggle_description">Dölj automatiskt knapparna för åtgärder för patchval när du markerar eller avmarkerar en patch</string>
+    <string name="patch_selection_action_order_title">Ordning på knappar för åtgärder för patchval</string>
+    <string name="patch_selection_action_order_description">Välj layoutordningen för knapparna för patchvalsåtgärder</string>
+    <string name="patch_selection_action_visibility_title">Dölj patchval-åtgärdsfärgar</string>
+    <string name="patch_selection_action_visibility_description">Välj vilka patchval-åtgärdsfärger som ska visas</string>
+    <string name="patch_selection_action_visibility_reset">Visa alla åtgärdsfärger</string>
+    <string name="patch_selection_action_order_reset">Återställ till standardordning</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Avmarkera paket?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">Avmarkera alla patchar som valts från %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Avmarkera alla patchar?</string>
+    <string name="patch_selection_confirm_deselect_all_message">Detta rensar varje vald patch i alla paket.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Återställ paketstandarder?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Detta återställer de rekommenderade standardinställningarna för %1$s.</string>
+    <string name="patch_selection_confirm_select_bundle_title">Välj paket?</string>
+    <string name="patch_selection_confirm_select_bundle_message">Välj varje patch som tillhandahålls av %1$s?</string>
+    <string name="patch_selection_confirm_select_all_title">Välj alla patchar?</string>
+    <string name="patch_selection_confirm_select_all_message">Detta väljer varje patch i alla paket.</string>
+    <string name="patch_selection_button_label_reset_bundle">Paketinställningar</string>
+    <string name="patch_profile_save_label">Spara profil</string>
+    <string name="patch_selection_toggle_expand">Visa åtgärder</string>
+    <string name="patch_selection_toggle_collapse">Dölj åtgärder</string>
+    <string name="patch_selection_reset_all">Återställ alla patchval globalt</string>
+    <string name="patch_selection_reset_all_dialog_description">"Du kommer att återställa alla patchval. Du måste manuellt välja varje patch igen.
+
+Patchprofiler påverkas inte."</string>
+    <string name="patch_selection_reset_all_description">Återställer alla patchval</string>
+    <string name="patch_selection_reset_dialog_title">Återställ standardpatchar?</string>
+    <string name="patch_selection_reset_dialog_message">Detta återställer dina patchval och alternativ till deras rekommenderade standardinställningar.</string>
+    <string name="patch_selection_reset_package">Återställ patchval för app</string>
+    <string name="patch_selection_reset_package_dialog_description">"Du håller på att återställa lappvalet för appen \"%s\". Du måste välja varje lapp manuellt igen.
+
+Lappprofiler påverkas inte."</string>
+    <string name="patch_selection_reset_package_description">Återställer lappval för en enskild app</string>
+    <string name="patch_selection_reset_patches">Återställ lappval (enskilt)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"Du håller på att återställa lappvalet för \"%s\". Du måste välja varje lapp manuellt igen.
+
+Lappprofiler påverkas inte."</string>
+    <string name="patch_selection_reset_patches_description">Återställer lappvalet för en specifik samling av lappar</string>
+    <string name="patch_options_reset_package">Återställ lappalternativ för app</string>
+    <string name="patch_options_reset_package_dialog_description">"Du håller på att återställa lappalternativen för appen \"%s\". Du måste använda varje alternativ igen.
+
+Lappprofiler påverkas inte."</string>
+    <string name="patch_options_reset_package_description">Återställer lappalternativ för en enskild app</string>
+    <string name="patch_options_reset_patches">Återställ lappalternativ (enskilt)</string>
+    <string name="patch_options_reset_patches_dialog_description">"Du håller på att återställa lappalternativen för \"%s\". Du måste använda varje alternativ igen.
+
+Lappprofiler påverkas inte."</string>
+    <string name="patch_options_reset_patches_description">Återställer lappalternativen för en specifik samling av lappar</string>
+    <string name="patch_options_reset_all">Återställ patchalternativ globalt</string>
+    <string name="patch_options_reset_all_dialog_description">"Du är på väg att återställa alla patchalternativ. Du måste tillämpa varje alternativ igen.
+
+Patchprofiler påverkas inte."</string>
+    <string name="patch_options_reset_all_description">Återställer alla patchalternativ</string>
+    <string name="download_settings">Hämtningsinställningar</string>
+    <string name="downloader_auto_save_title">Spara APK-filer som laddats ner automatiskt</string>
+    <string name="downloader_auto_save_description">Behåll APK-filer som laddats ner via plugins för återanvändning. Inaktivera för att ta bort dem efter patchning.</string>
+    <string name="downloader_plugins">Instick</string>
+    <string name="downloader_plugin_state_trusted">Betrodd</string>
+    <string name="downloader_plugin_state_failed">Kunde inte laddas. Klicka för mer information</string>
+    <string name="downloader_plugin_state_untrusted">Ej betrodd</string>
+    <string name="downloader_plugin_trust_dialog_title">Lita på plugin?</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">Återkalla förtroende?</string>
+    <string name="downloader_plugin_trust_dialog_body">"Paketnamn: %1$s
+Signatur (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_view_error">Visa feldetaljer</string>
+    <string name="downloader_plugin_failed_dialog_body">Kunde inte ladda \"%1$s\". Du kan visa feldetaljer eller avinstallera tillägget.</string>
+    <string name="downloader_plugin_uninstall_title">Avinstallera tillägget?</string>
+    <string name="downloader_plugin_uninstall_description">Är du säker på att du vill avinstallera \"%1$s\"?</string>
+    <string name="downloader_plugin_delete_apps_title">Ta bort markerade appar</string>
+    <string name="downloader_plugin_delete_apps_description">Är du säker på att du vill ta bort de markerade apparna?</string>
+    <string name="downloader_settings_no_apps">Inga nedladdade appar hittades.</string>
+    <string name="search_apps">Sök appar…</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    <string name="edit">Redigera</string>
+    <string name="dialog_input_placeholder">Värde</string>
+    <string name="reset">Återställ</string>
+    <string name="share">Dela</string>
+    <string name="patch">Uppdatering</string>
+    <string name="select_from_storage">Välj från lagring</string>
+    <string name="select_from_storage_description">Välj en APK-fil från lagringen med filväljaren</string>
+    <string name="type_anything">Skriv vad som helst för att fortsätta</string>
+    <string name="search">Sök efter patchar…</string>
+    <string name="apply">Verkställ</string>
+    <string name="help">Hjälp</string>
+    <string name="back">Tillbaka</string>
+    <string name="warning">Varning</string>
+    <string name="add">Lägg till</string>
+    <string name="close">Stäng</string>
+    <string name="clear">Rensa</string>
+    <string name="system">System</string>
+    <string name="light">Ljus</string>
+    <string name="dark">Mörkt</string>
+    <string name="black">Svart</string>
+    <string name="downloaded_apps">Nedladdade appar</string>
+    <string name="process_runtime">Kör Patcher i en annan process</string>
+    <string name="process_runtime_description">Skyndar på patchning genom att använda en separat process</string>
+    <string name="process_runtime_description_not_available">Den här funktionen kräver Android 11 eller senare</string>
+    <string name="strip_unused_libs">Ta bort oanvända bibliotek</string>
+    <string name="strip_unused_libs_description">Ta bort bibliotek för inkompatibla CPU-arkitekturer från modifierade appar</string>
+    <string name="process_runtime_memory_limit">Minnesgräns för Patcher-processen</string>
+    <string name="process_runtime_memory_limit_description">Maximalt minne som Patcher-processen kan använda (i megabyte)</string>
+    <string name="reset_to_recommended">Återställ till rekommenderade</string>
+    <string name="patcher_auto_collapse_steps">Dra automatiskt ihop slutförda Patcher-steg</string>
+    <string name="patcher_auto_collapse_steps_description">Dra automatiskt ihop varje Patcher-widget efter att alla dess steg har slutförts</string>
+    <string name="patch_bundle_rename">Byt namn på patch-paket</string>
+    <string name="patch_profile_view_options">Visa alternativ</string>
+    <string name="patch_profile_patch_options_title">Alternativ för %1$s</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="app_exporting">App-export</string>
+    <string name="export_name_format">Filnamnsformat för export</string>
+    <string name="export_name_format_description">Anpassa standardfilnamnet för exporterade patchade appar</string>
+    <string name="export_name_format_dialog_title">Filnamnsformat för export</string>
+    <string name="export_name_format_dialog_supporting">Använd platshållarna nedan för att skapa ett filnamn. Filändelsen .apk läggs till automatiskt om den saknas.</string>
+    <string name="export_name_format_preview_label">Förhandsgranskning</string>
+    <string name="export_name_format_variables">Variabler</string>
+    <string name="export_name_format_reset">Återställ till standard</string>
+    <string name="export_name_format_error_blank">Filnamnsformatet får inte vara tomt.</string>
+    <string name="export_name_format_current">Nuvarande mönster: %1$s</string>
+    <string name="export_name_format_insert">Infoga</string>
+    <string name="export_name_variable_app_name">Appnamn</string>
+    <string name="export_name_variable_app_name_description">Ersätts med appens visningsnamn.</string>
+    <string name="export_name_variable_package_name">Pakett名</string>
+    <string name="export_name_variable_package_name_description">Ersätts med appens pakett名.</string>
+    <string name="export_name_variable_app_version">Appversion</string>
+    <string name="export_name_variable_app_version_description">Ersätts med appens versions名.</string>
+    <string name="export_name_variable_patches_version">Patchversioner</string>
+    <string name="export_name_variable_patches_version_description">Ersätts med den applicerade patch-bundens versionsnummer.</string>
+    <string name="export_name_variable_bundle_names">Patch-bundens namn</string>
+    <string name="export_name_variable_bundle_names_description">Ersätts med den applicerade patch-bundens namn.</string>
+    <string name="export_name_variable_manager_version">Hemsidans version</string>
+    <string name="export_name_variable_manager_version_description">Ersätts med hemsidans version.</string>
+    <string name="export_name_variable_timestamp">Tidsstämpel</string>
+    <string name="export_name_variable_timestamp_description">Ersätts med aktuellt datum och tid (YYYYMMDD-HHMMSS).</string>
+    <string name="export_name_variable_date">Datum</string>
+    <string name="export_name_variable_date_description">Ersätts med aktuellt datum (YYYYMMDD).</string>
+    <string name="debug_logs_export">Exportera felsökningsloggar</string>
+    <string name="debug_logs_export_read_failed">Kunde inte läsa loggar (avslutningskod %d)</string>
+    <string name="debug_logs_export_failed">Det gick inte att exportera loggar</string>
+    <string name="debug_logs_export_success">Exporterade loggar</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="api_url_dialog_description">Ändra API-URL för Morphe. Morphe använder API:et för att ladda ner patchar och uppdateringar.</string>
+    <string name="api_url_dialog_warning">Morphe ansluter till API:et för att ladda ner patchar och uppdateringar. Kontrollera att du litar på det.</string>
+    <string name="api_url_dialog_save">Ange</string>
+    <string name="api_url_dialog_reset">Återställ API-URL</string>
+    <!-- Morphe -->
+    <string name="github_pat_description">GitHub personlig åtkomsttoken som krävs för GitHub-integration</string>
+    <string name="set_github_pat_dialog_title">Ange GitHub PAT</string>
+    <string name="set_github_pat_dialog_description">Ange en GitHub personlig åtkomsttoken för att kunna lägga till Pull Requests som externa källor. Skapa en PAT med omfånget public_repo</string>
+    <string name="include_github_pat_in_exports_label">Inkludera i export av inställningar</string>
+    <string name="include_github_pat_in_exports_supporting">Lägger till denna PAT i exporterade hanteringsinställningar</string>
+    <string name="include_github_pat_in_exports_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport, behåll den filen privat eftersom den innehåller token.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Stor)</string>
+    <string name="patches_force_download">Tvinga nedladdning av alla patchpaket</string>
+    <string name="patches_reset">Återställ patch-paket</string>
+    <string name="storage">Lagring</string>
+    <string name="no_patch_found">Inga patchar kan hittas. Kontrollera dina patchar</string>
+    <string name="tab_apps">Appar</string>
+    <string name="tab_patches">Patch-paket</string>
+    <string name="tab_profiles">Patch-profiler</string>
+    <string name="delete">Ta bort</string>
+    <string name="disable">Inaktivera</string>
+    <string name="enable">Aktivera</string>
+    <string name="patch_bundle_disabled_toast">Inaktiverat %d paket/bund</string>
+    <string name="patch_bundle_enabled_toast">Aktiverat %d paket/bund</string>
+    <string name="patches_disable_single_dialog_description">Inaktivera \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">Aktivera \"%s\"?</string>
+    <string name="refresh">Uppdatera</string>
+    <string name="download_apk">Ladda ner APK-fil</string>
+    <string name="patches_download_fail">Det gick inte att ladda ner patchar: %s</string>
+    <string name="patches_replace_fail">Det gick inte att importera patchar: %s</string>
+    <string name="no_patched_apps_found">Inga patchade appar hittades</string>
+    <string name="patches_selected">%s patch-bund(n) valda</string>
+    <string name="patch_profiles_selected">%1$d patchprofil vald</string>
+    <string name="selected_apps_count">%1$d appar valda</string>
+    <string name="selected_apps_delete_dialog_description">Ta bort de valda apparna från hanteraren? Installera appar på enheten kommer att förbli orörda.</string>
+    <string name="incompatible_patches">Inkompatibla korrigeringar</string>
+    <string name="universal_patches">Universella korrigeringar</string>
+    <string name="patch_selection_reset_toast">Urval av korrigeringar och alternativ har återställts till rekommenderade standardvärden</string>
+    <string name="patch_options_reset_toast">Korrigeringsalternativ har återställts</string>
+    <string name="non_suggested_version_warning_title">Icke-föreslagen version</string>
+    <string name="non_suggested_version_warning_description">"Versionen av appen du har valt matchar inte den föreslagna versionen.
+Använd den föreslagna versionen: %s
+
+För att fortsätta ändå, inaktivera \"Kräv föreslagen appversion\" i avancerade inställningar."</string>
+    <string name="selection_warning_description">"Det rekommenderas att använda standardvalet av korrigeringar och alternativ. Att ändra dem kan leda till oväntade problem.
+
+Du måste aktivera \"Tillåt ändring av urval av korrigeringar och alternativ\" i avancerade inställningar innan du växlar korrigeringar."</string>
+    <string name="patch_profile_save_action">Spara korrigeringsprofil</string>
+    <string name="patch_profile_select_bundles_title">Välj patchpaket</string>
+    <string name="patch_profile_select_bundles_description">Välj de patchpaket som ska inkluderas i den här profilen.</string>
+    <string name="patch_profile_select_bundles_empty">Inga patchpaket är tillgängliga för att spara.</string>
+    <string name="patch_profile_name_title">Namnge patchprofil</string>
+    <string name="patch_profile_name_description">Ange ett namn för den här patchprofilen eller välj en nedan för att uppdatera den</string>
+    <string name="patch_profile_update_existing_title">Uppdatera befintlig profil</string>
+    <string name="patch_profile_update_existing_description">Tryck på en sparad profil för att skriva över den, eller lämna allt omarkerat för att skapa en ny profil.</string>
+    <string name="patch_profile_name_hint">Profilnamn</string>
+    <string name="patch_profile_saved_toast">Patchprofilen \"%1$s\" sparades</string>
+    <string name="patch_profile_duplicate_toast">Patchprofilen \"%1$s\" finns redan för den här appen</string>
+    <string name="patch_profile_updated_toast">Patchprofilen \"%1$s\" uppdaterades</string>
+    <string name="patch_profile_save_failed_toast">Kunde inte spara patchprofilen</string>
+    <string name="patch_profile_rename">Byt namn</string>
+    <string name="patch_profile_rename_title">Byt namn på patchprofil</string>
+    <string name="patch_profile_version_override_action">Åtgärda profilversionsinställningar</string>
+    <string name="patch_profile_version_override_title">Versionsinställningar för \"%1$s\"</string>
+    <string name="patch_profile_version_override_message">Ange en specifik appversion som ska lagras med den här profilen, eller rikta in dig på alla versioner.</string>
+    <string name="patch_profile_version_override_label">Appversion</string>
+    <string name="patch_profile_version_override_hint">t.ex. 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">Använd alla versioner</string>
+    <string name="patch_profile_version_override_saved_toast">Profilversion uppdaterad</string>
+    <string name="patch_profile_version_override_failed_toast">Det gick inte att uppdatera profilversionen</string>
+    <string name="patch_profile_version_override_set_to_all">Ingen version angiven, sparad som \"%1$s\"</string>
+    <string name="patch_profile_version_conflict_title">Behåll versionsåterställning?</string>
+    <string name="patch_profile_version_conflict_message">"Nuvarande version: %1$s
+Inkommande version: %2$s
+Vilken ska sparas till denna profil?"</string>
+    <string name="patch_profile_version_conflict_use_new">Använd inkommande version</string>
+    <string name="patch_profile_version_conflict_keep_existing">Behåll befintlig version</string>
+    <string name="patch_profile_empty_state">Spara en konfiguration från skärmen för patchval för att se den här.</string>
+    <string name="patch_profile_missing_bundles_toast">Vissa paket i den här profilen är inte tillgängliga och kommer att hoppas över.</string>
+    <string name="patch_profile_changed_patches_toast">Vissa patchar eller alternativ i den här profilen matchar inte längre paketet och har hoppats över.</string>
+    <string name="patch_profile_no_available_bundles_toast">Inga paket i den här profilen är tillgängliga. Uppdatera dina paket och försök igen.</string>
+    <string name="patch_profile_launch_error">Det gick inte att öppna den här patchprofilen.</string>
+    <string name="patch_profile_show_more">Visa mer</string>
+    <string name="patch_profile_show_less">Visa mindre</string>
+    <string name="patch_profile_created_at">Skapad %1$s</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (ej tillgänglig)</string>
+    <string name="patch_profile_bundle_change_uid">Ändra UID</string>
+    <string name="patch_profile_bundle_change_uid_title">Ändra UID för %1$s</string>
+    <string name="patch_profile_bundle_change_uid_invalid">Ange ett giltigt numeriskt UID.</string>
+    <string name="patch_profile_bundle_change_uid_success">Bundle-UID uppdaterad till %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">Ingen lokal patch-bundle hittades med UID %1$d.</string>
+    <string name="patcher_process_exit_message">Patcher-processen avslutades med kod %1$d.</string>
+    <string name="patcher_memory_adjustment_title">Patcharen fick slut på minne</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_retry">Försök igen</string>
+    <string name="patcher_memory_adjustment_dismiss">Avfärda</string>
+    <string name="patcher_missing_patch_title">Patchval behöver uppmärksamhet</string>
+    <string name="patcher_preflight_missing_patch_remove">Ta bort saknade patchar</string>
+    <string name="patcher_preflight_missing_patch_proceed">Fortsätt ändå</string>
+    <string name="patcher_preflight_missing_patch_message">"Följande patchar är inte tillgängliga i den aktuella buntens innehåll:
+%1$s
+Du kan ta bort dem automatiskt, ändra urvalet, eller fortsätta ändå."</string>
+    <string name="patcher_missing_patch_review">Granska urval</string>
+    <string name="patch_selector_missing_patch_title">Välj om patchar som saknas</string>
+    <string name="patch_selector_missing_patch_message">"Dessa patchar behöver väljas om:
+%1$s
+Aktivera dem igen (eller välj alternativ) och försök sedan patcha en gång till."</string>
+    <string name="patch_profile_delete_multiple_dialog_description">Ta bort de valda patchprofilerna?</string>
+    <string name="this_version">Den här versionen</string>
+    <string name="universal">Valfri app</string>
+    <string name="search_patches">Sök efter patchar</string>
+    <string name="app_version_not_compatible">"Den här patchen är inte kompatibel med den valda appversionen (%1$s).
+
+Den är endast kompatibel med följande version: %2$s."</string>
+    <string name="failed_to_load_apk">Kunde inte läsa in APK</string>
+    <string name="loading">Läser in…</string>
+    <string name="not_installed">Inte installerad</string>
+    <string name="installed">Installerad</string>
+    <string name="app_info">Appinformation</string>
+    <string name="uninstall">Avinstallera</string>
+    <string name="repatch">Patcha om</string>
+    <string name="install_type">Installationstyp</string>
+    <string name="package_name">Paketnamn</string>
+    <string name="original_package_name">Ursprungligt paketnamn</string>
+    <string name="applied_patches">Tillämpade patchar</string>
+    <string name="view_applied_patches">Visa tillämpade patchar</string>
+    <string name="patch_bundles_used">Använda patch-paket</string>
+    <string name="applied_patches_empty">Inga patchar registrerade för den här appen</string>
+    <string name="applied_patches_bundle_missing">Paketmetadata ej tillgängliga. Visar sparade patchnamn.</string>
+    <string name="no_patch_bundles_tracked">Inga patch-paket registrerade för den här appen</string>
+    <string name="mount_install">Roterad monteringsinstallationsprogram</string>
+    <string name="mounted">Monterad</string>
+    <string name="unmounted">Avmonterad</string>
+    <string name="install_type_custom_installer">Anpassat installationsprogram</string>
+    <string name="install_type_system_installer">Systeminstallationsprogram</string>
+    <string name="install_type_mount_label">Roterad monteringsinstallationsprogram</string>
+    <string name="not_mounted">Inte monterad</string>
+    <string name="mount">Montera</string>
+    <string name="unmount">Avmontera</string>
+    <string name="unmount_confirm_description">Vill du avmontera appen?</string>
+    <string name="saved_install">Sparad</string>
+    <string name="failed_to_mount">Det gick inte att montera: %s</string>
+    <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
+    <string name="unpatch_app">Avpatcha app?</string>
+    <string name="unpatch_description">Är du säker på att du vill avpatcha den här appen?</string>
+    <string name="downloader_app_not_found">Ladda ner hittade inte appen</string>
+    <string name="downloader_error">Ladda ner-fel: %s</string>
+    <string name="downloader_no_plugins_installed">Ingen nedladdare installerad.</string>
+    <string name="downloader_no_plugins_available">Det finns installerade nedladdare men ingen är betrodd. Kontrollera dina inställningar.</string>
+    <string name="downloader_plugin_uninstall_success">Avinstallerad %1$s</string>
+    <string name="downloader_plugin_uninstall_failed">Kunde inte avinstallera %1$s</string>
+    <string name="downloaded_apps_export">Exportera valda appar</string>
+    <string name="downloaded_apps_export_success">Exporterade %1$d appar</string>
+    <string name="downloaded_apps_export_failed">Det gick inte att exportera nedladdade appar</string>
+    <string name="already_patched">Redan patchad</string>
+    <string name="patch_selector_sheet_filter_title">Filter</string>
+    <string name="patch_selector_sheet_filter_compat_title">Kompatibilitet</string>
+    <string name="patch_selector_sheet_filter_sort_title">Sortering</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabetiskt</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Har inställningar</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">Inga inställningar</string>
+    <string name="string_option_menu_description">Fler alternativ</string>
+    <string name="option_preset_custom_value">Anpassat värde</string>
+    <string name="path_selector">Välj från lagring</string>
+    <string name="path_selector_parent_dir">Föregående katalog</string>
+    <string name="path_selector_dirs">Kataloger</string>
+    <string name="path_selector_files">Filer</string>
+    <string name="show_password_field">Visa lösenord</string>
+    <string name="hide_password_field">Dölj lösenord</string>
+    <string name="installer_primary_title">Primärt installationsprogram</string>
+    <string name="installer_fallback_title">Reserv-installationsprogram</string>
+    <string name="installer_internal_name">Systeminstallationsprogram</string>
+    <string name="installer_internal_description">Använd Androids pakethanterare</string>
+    <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
+    <string name="installer_auto_saved_description">Monterar den patchade APK:n över den installerade appen (rot krävs).</string>
+    <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui.</string>
+    <string name="installer_option_none">Ingen återställning</string>
+    <string name="installer_none_description">Ingen återställningsinstallerare är konfigurerad</string>
+    <string name="installer_status_requires_root">Kräver root-åtkomst</string>
+    <string name="installer_status_not_supported">Stöds inte för denna åtgärd.</string>
+    <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda detta alternativ.</string>
+    <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen.</string>
+    <string name="installer_status_shizuku_permission">Ge Shizuku-behörighet till Morphe från Shizuku-appen.</string>
+    <string name="installer_mount_warning_title">Rootad monteringsinstallationsprogram vald</string>
+    <string name="installer_mount_warning_install">Ditt primära installationsprogram är inställt på den rotade monteringsinstallationsprogrammet. Den här sparade appen installerades inte med hjälp av monteringen.</string>
+    <string name="installer_mount_warning_update">Ditt primära installationsprogram är inställt på den rotade monteringsinstallationsprogrammet. Den här sparade appen installerades inte med hjälp av monteringen.</string>
+    <string name="installer_mount_warning_uninstall">Ditt primära installationsprogram är inställt på den rotade monteringsinstallationsprogrammet. Den här sparade appen installerades inte med hjälp av monteringen.</string>
+    <string name="installer_mount_mismatch_title">Rootad monteringsinstallationsprogram inte vald</string>
+    <string name="installer_mount_mismatch_install">Den här appen installerades med den rotade monteringsinstallationsprogrammet. Byt tillbaka ditt primära installationsprogram för att använda monteringsåtgärder och montera sedan.</string>
+    <string name="installer_mount_mismatch_update">Den här appen installerades med den rotade monteringsinstallationsprogrammet. Byt tillbaka ditt primära installationsprogram för att använda monteringsåtgärder och montera sedan igen.</string>
+    <string name="installer_mount_mismatch_uninstall">Den här appen installerades med den rotade monteringsinstallationsprogrammet. Byt tillbaka ditt primära installationsprogram för att använda monteringsåtgärder och avmontera sedan.</string>
+    <string name="mount_version_mismatch_title">Montering misslyckades</string>
+    <string name="mount_version_mismatch_message">Lagringsappversionen (%2$s) matchar inte den patchade appversionen (%1$s). Montera den matchande lagringsversionen och försök sedan igen.</string>
+    <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte.</string>
+    <string name="installer_action_open_shizuku">Öppna Shizuku</string>
+    <string name="installer_shizuku_launch_failed">Kunde inte öppna Shizuku. Starta det manuellt och försök igen.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="installer_custom_tab_saved">Sparade</string>
+    <string name="installer_custom_saved_note">Installationsprogram som manuellt lagts till av användaren i urvalsmenyerna för primära &amp; återställningsinstallationsprogram.</string>
+    <string name="installer_custom_tab_auto_saved">Autosparade</string>
+    <string name="installer_custom_auto_note">Installationsprogram som automatiskt upptäckts och lagts till i urvalsmenyerna för primära &amp; återställningsinstallationsprogram.</string>
+    <string name="installer_custom_tab_discover">Upptäck</string>
+    <string name="installer_custom_close">Stäng</string>
+    <string name="installer_custom_manage_description">Spara tredjeparts installationsprogramaktiviteter för användning som primära eller reservinstallationsprogram</string>
+    <string name="installer_custom_input_label">Paketnamn</string>
+    <string name="installer_custom_package_hint">Skriv ett paketnamn och tryck på \"Hitta installationsprogram\" för att upptäcka installationsprogramaktiviteter</string>
+    <string name="installer_custom_lookup">Hitta installationsprogram</string>
+    <string name="installer_custom_lookup_empty">Ange ett paketnamn först.</string>
+    <string name="installer_custom_searching">Söker efter installationsprogrammets aktiviteter...</string>
+    <string name="installer_custom_lookup_found">Hittade %1$d installationsprogram.</string>
+    <string name="installer_custom_action_add">Spara installationsprogram</string>
+    <string name="installer_custom_action_remove">Ta bort sparade installationsprogram</string>
+    <string name="installer_custom_builtin_indicator">Autosparad</string>
+    <string name="installer_custom_saved_indicator">Sparad</string>
+    <string name="installer_custom_lookup_none">Inga installationsprogrammets aktiviteter hittades för %1$s.</string>
+    <string name="installer_custom_candidates_title">Tillgängliga aktiviteter för %1$s</string>
+    <string name="installer_custom_saved_header">Sparade installationsprogram</string>
+    <string name="installer_custom_empty">Inga anpassade installationsprogram sparade ännu.</string>
+    <string name="installer_custom_added">Anpassat installationsprogram sparades.</string>
+    <string name="installer_custom_exists">Det installationsprogrammet är redan sparat.</string>
+    <string name="installer_custom_removed">Anpassat installationsprogram togs bort.</string>
+    <string name="installer_custom_remove_failed">Kunde inte ta bort installationsprogrammet. Försök igen.</string>
+    <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till ett annat installationsprogram.</string>
+    <string name="installer_hint_blocked">Installationen blockerades av Android. Kontrollera Play Protect eller säkerhetsinställningar.</string>
+    <string name="installer_hint_conflict">En annan app med detta paketet namn är redan installerad. Avinstallera den innan du fortsätter.</string>
+    <string name="installer_hint_incompatible">APK är inte kompatibel med den här enheten eller Android-versionen.</string>
+    <string name="installer_hint_invalid">APK är ogiltig eller skadad.</string>
+    <string name="installer_hint_storage">Det finns inte tillräckligt med lagringsutrymme för installationen.</string>
+    <string name="installer_hint_timeout">Installationen tog för lång tid. Försök igen.</string>
+    <string name="installer_hint_aborted">Installationen avbröts.</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Detaljer: %2$s"</string>
+    <string name="installer_external_launched">Öppnar %1$s…</string>
+    <string name="installer_external_timeout">%1$s bekräftade inte installationen. Kontrollera den andra appen och försök igen.</string>
+    <string name="installer_external_success">%1$s rapporterade en lyckad installation.</string>
+    <string name="installer_external_finished_no_change">%1$s klart utan att installera appen. Kontrollera installatoren efter en felmeddelande och försök igen.</string>
+    <string name="installing_ellipsis">Installerar…</string>
+    <string name="uninstalling_ellipsis">Avinstallation...</string>
+    <string name="mounting_ellipsis">Monterar…</string>
+    <string name="unmounting">Avmonterar…</string>
+    <string name="install_app">Installera</string>
+    <string name="install_app_success">Installationen lyckades</string>
+    <string name="install_app_fail_title">Installationen misslyckades</string>
+    <string name="install_app_fail">Det gick inte att installera appen: %s</string>
+    <string name="install_app_fail_missing_stock">Missar den opraktade APK:n för installation via mount.</string>
+    <string name="mount_split_not_supported">Installeren för roökad mount stöder inte delbara APK:n. Använd system-installed instead.</string>
+    <string name="mount_app_fail_title">Montering misslyckades</string>
+    <string name="install_timeout_message">Installationen slutfördes inte. Kontrollera systemets installationsdialogruta och försök igen.</string>
+    <string name="uninstall_timeout_message">Avinstallationen klarställde inte. Kontrollera avinstallatordialogen och försök igen.</string>
+    <string name="reinstall_app_fail">Det gick inte att installera om appen: %s</string>
+    <string name="uninstall_app_fail">Det gick inte att avinstallera appen: %s</string>
+    <string name="open_app">Öppna</string>
+    <string name="save_apk">Spara APK</string>
+    <string name="save_apk_success">APK sparad</string>
+    <string name="saved_app_export_success">Exporterad modifierad app</string>
+    <string name="saved_app_export_failed">Det gick inte att exportera den modifierade appen</string>
+    <string name="saved_app_removed_toast">Sparad modifierad app borttagen</string>
+    <string name="saved_app_copy_removed_toast">Sparad kopia borttagen</string>
+    <string name="delete_saved_app_title">Ta bort sparad app</string>
+    <string name="delete_saved_app_description">Detta tar bort den sparade app-posten och dess lagrade APK.</string>
+    <string name="delete_saved_entry_title">Ta bort sparad app-post</string>
+    <string name="delete_saved_entry_description">Detta tar bort den sparade app-posten och dess sparade APK. Appen förblir installerad.</string>
+    <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den.</string>
+    <string name="install_saved_app">Installera</string>
+    <string name="remount_saved_app">Montera om</string>
+    <string name="update_saved_app">Uppdatera</string>
+    <string name="saved_app_install_success">Sparad app installerad</string>
+    <string name="saved_app_install_failed">Det gick inte att installera sparad app</string>
+    <string name="saved_app_uninstall_title">Avinstallera installerad kopia?</string>
+    <string name="saved_app_uninstall_description">Detta tar endast bort den installerade versionen. Din sparade APK förblir intakt.</string>
+    <string name="saved_app_install_missing">Sparad APK hittades inte</string>
+    <string name="save_logs">Spara loggar</string>
+    <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med detta plugin.</string>
+    <string name="select_install_type">Välj installationstyp</string>
+    <string name="patcher_step_group_preparing">Förbereder</string>
+    <string name="patcher_step_load_patches">Läser in patchar</string>
+    <string name="patcher_step_prepare_split_apk">Slå samman delad APK</string>
+    <string name="patcher_step_unpack">Läser APK-fil</string>
+    <string name="patcher_step_group_patching">Patchar</string>
+    <string name="patcher_step_group_saving">Sparar</string>
+    <string name="patcher_step_write_patched">Skriver patchad APK-fil</string>
+    <string name="patcher_step_sign_apk">Signerar patchad APK-fil</string>
+    <string name="patcher_notification_title">Patchning pågår…</string>
+    <string name="patcher_notification_text">Tryck för att återgå till patcharen</string>
+    <string name="patcher_stop_confirm_title">Stoppa patcharen</string>
+    <string name="patcher_stop_confirm_description">Är du säker på att du vill stoppa patchningsprocessen?</string>
+    <string name="patcher_install_in_progress_title">Installation pågår</string>
+    <string name="patcher_install_in_progress">Installationen pågår. Vänligen vänta</string>
+    <string name="patcher_install_in_progress_leave">Avsluta ändå</string>
+    <string name="patcher_install_in_progress_stay">Stanna kvar</string>
+    <string name="patcher_mount_in_progress_title">Montering pågår</string>
+    <string name="patcher_mount_in_progress">Monteringen pågår. Vänligen vänta</string>
+    <string name="applying_patches">Applicerar patchar</string>
+    <string name="applying_patch">Applicerar %s</string>
+    <string name="failed_to_execute_patch">Kunde inte applicera %s</string>
+    <string name="save_patched_app_dialog_title">Lämna patcharen?</string>
+    <string name="save_patched_app_dialog_message">Du är på väg att lämna patcharen. Den patchade appen kommer att förloras om du inte sparar den till senare.</string>
+    <string name="save_patched_app_dialog_save">Spara patchad app</string>
+    <string name="save_patched_app_dialog_leave">Lämna utan att spara</string>
+    <string name="save_patched_app_dialog_cancel">Stanna i patcharen</string>
+    <string name="save_patched_app_dialog_hint_save">Behåller den patchade APK:n tillgänglig från fliken Appar för framtida installation.</string>
+    <string name="save_patched_app_dialog_hint_leave">Kasserar den patchade APK:n och återgår till föregående skärm.</string>
+    <string name="patched_app_saved_toast">Patchad app sparad för senare</string>
+    <string name="patched_app_save_failed_toast">Kunde inte spara patchad app</string>
+    <string name="step_completed">slutförd</string>
+    <string name="step_failed">misslyckades</string>
+    <string name="step_running">körs</string>
+    <string name="step_waiting">väntar</string>
+    <string name="expand_content">expandera</string>
+    <string name="collapse_content">fäll ihop</string>
+    <string name="drag_handle">ändra ordning</string>
+    <string name="more">Mer</string>
+    <string name="less">Mindre</string>
+    <string name="continue_">Fortsätt</string>
+    <string name="dismiss">Avfärda</string>
+    <string name="version">Version</string>
+    <string name="published">Publicerad</string>
+    <string name="developer_options">Utvecklaralternativ</string>
+    <string name="developer_options_description">Alternativ för felsökning av problem</string>
+    <string name="patches_update_success">Uppdatering lyckades</string>
+    <string name="patches_update_unavailable">Ingen uppdatering tillgänglig</string>
+    <string name="view_patches">Visa patchar</string>
+    <string name="patches_view_any_version">Alla versioner</string>
+    <string name="patches_view_any_package">Alla paket</string>
+    <string name="patches_delete_single_dialog_description">Är du säker på att du vill ta bort \"%s\"?</string>
+    <string name="patches_delete_multiple_dialog_description">Är du säker på att du vill ta bort de valda patchpaketen?</string>
+    <string name="about_revanced_manager">Om Morphe</string>
+    <string name="revanced_manager_description">"Morphe är ett experimentellt open source-projekt fokuserat på att skapa en modern, strömlinjeformad patchning av populära Android-appar
+
+Open source i sin kärna, Morphe frodas på communityfeedback och bidrag för att driva framtida innovation."</string>
+    <string name="here">här.</string>
+    <string name="update_available">En uppdatering är tillgänglig</string>
+    <string name="ready_to_install_update">Redo att installera uppdatering</string>
+    <string name="update_completed">Uppdatering installerad</string>
+    <string name="install_update_manager_failed">Det gick inte att installera uppdateringen</string>
+    <string name="manual_update_check">Sök efter uppdateringar</string>
+    <string name="manual_update_check_description">Kontrollera manuellt efter uppdateringar</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="update_checking_manager">Sök efter uppdateringar vid start</string>
+    <string name="update_checking_manager_description">Kontrollera efter nya versioner av Morphe när applikationen startar</string>
+    <string name="manager_prereleases">Använd förhandsversioner</string>
+    <string name="manager_prereleases_description">Använd förhandsversioner av Morphe</string>
+    <string name="update_published">Publicerad %s</string>
+    <string name="battery_optimization_notification">Batterioptimeringar måste inaktiveras för att Morphe ska fungera korrekt i bakgrunden. Klicka här för att inaktivera optimeringar.</string>
+    <string name="installing_manager_update">Installerar uppdatering…</string>
+    <string name="downloading_manager_update">Laddar ner uppdatering…</string>
+    <string name="manager_update_banner_title">Laddar ner hanteraruppdatering</string>
+    <string name="download_manager_failed">Kunde inte ladda ner uppdateringen: %s</string>
+    <string name="save">Spara</string>
+    <string name="save_with_count">Spara (%1$s)</string>
+    <string name="update">Uppdatera</string>
+    <string name="empty">Tom</string>
+    <string name="just_now">Precis nu</string>
+    <string name="minutes_ago">%s minuter sedan</string>
+    <string name="hours_ago">%s timmar sedan</string>
+    <string name="days_ago">%sd sedan</string>
+    <string name="invalid_date">Ogiltigt datum</string>
+    <string name="input_dialog_value_invalid">Ogiltigt värde</string>
+    <string name="option_required">Det här alternativet krävs</string>
+    <string name="required_options_screen">Nödvändiga alternativ</string>
+    <string name="failed_to_check_updates">Kunde inte söka efter uppdateringar: %s</string>
+    <string name="no_update_available">Ingen uppdatering tillgänglig</string>
+    <string name="update_check">Söker efter uppdateringar...</string>
+    <string name="update_available_dialog_description">En ny version av Morphe (%s) är tillgänglig.</string>
+    <string name="failed_to_download_update">Kunde inte ladda ned uppdatering: %s</string>
+    <string name="download">Ladda ned</string>
+    <string name="resume_download">Återuppta nedladdning</string>
+    <string name="download_confirmation_metered">"Du använder för närvarande en anslutning med begränsad data, och dataavgifter från din tjänsteleverantör kan tillkomma.
+
+Vill du fortfarande fortsätta?"</string>
+    <string name="download_update_confirmation">Ladda ned uppdatering?</string>
+    <string name="no_contributors_found">Inga bidragsgivare hittades</string>
+    <string name="select">Välj</string>
+    <string name="select_deselect_all">Välj eller avmarkera alla</string>
+    <string name="deselect_all">Avmarkera alla</string>
+    <string name="deselect_bundle">Avmarkera aktuell bunt</string>
+    <string name="select_patches_type_dialog_description">Lägg till nya patch-buntar från URL eller lokala filer</string>
+    <string name="local_patches_description">Lägg till patch-buntar från lokal lagring.</string>
+    <string name="remote_patches_description">Lägg till patch-buntar från URL. Patch-buntar kan uppdateras automatiskt.</string>
+    <string name="recommended">Rekommenderade</string>
+    <string name="installation_failed_dialog_title">Installationen misslyckades</string>
+    <string name="installation_cancelled_dialog_title">Installationen avbröts</string>
+    <string name="installation_blocked_dialog_title">Installationen blockerades</string>
+    <string name="installation_conflict_dialog_title">Installationskonflikt</string>
+    <string name="installation_incompatible_dialog_title">Installationen är inkompatibel</string>
+    <string name="installation_invalid_dialog_title">Installationen är ogiltig</string>
+    <string name="installation_storage_issue_dialog_title">Inte tillräckligt med lagringsutrymme</string>
+    <string name="installation_timeout_dialog_title">Installation tidsgräns överskriden</string>
+    <string name="installation_failed_description">Installationen misslyckades av okänd anledning. Försök igen?</string>
+    <string name="installation_aborted_description">Installationen avbröts manuellt. Försök igen?</string>
+    <string name="installation_blocked_description">Installationen blockerades. Granska enhetens säkerhetsinställningar och försök igen.</string>
+    <string name="installation_conflict_description">Installationen förhindrades av en befintlig installation av appen. Avinstallera den installerade appen och försök igen?</string>
+    <string name="installation_signature_mismatch_dialog_title">Signaturmatchning misslyckades</string>
+    <string name="installation_signature_mismatch_description">Den redan installerade appen har en annan signatur. Döma den installerade appen och installera den här istället?</string>
+    <string name="installation_incompatible_description">Appen är inkompatibel med den här enheten. Använd en APK som är kompatibel med den här enheten och försök igen.</string>
+    <string name="installation_invalid_description">Appen är ogiltig. Avinstallera appen och försök igen?</string>
+    <string name="installation_storage_issue_description">Appen kunde inte installeras på grund av otillräckligt lagringsutrymme. Frigör utrymme och försök igen.</string>
+    <string name="installation_timeout_description">Installationen tog för lång tid. Försök igen?</string>
+    <string name="reinstall">Installera om</string>
+    <string name="installation_signature_mismatch_confirm">Döma och installera</string>
+    <string name="show">Visa</string>
+    <string name="debugging">Felsökning</string>
+    <string name="about_device">Om enheten</string>
+    <string name="enter_url">Ange URL</string>
+    <string name="next">Nästa</string>
+    <string name="auto_update">Automatisk uppdatering</string>
+    <string name="add_patches">Lägg till patch-paket</string>
+    <string name="auto_update_description">Uppdatera automatiskt när en ny version är tillgänglig</string>
+    <string name="patches_prereleases">Använd förhandsversioner</string>
+    <string name="patches_prereleases_description">Använd förhandsversioner av %s</string>
+    <string name="patches_url">URL för patchpaket</string>
+    <string name="incompatible_patches_dialog">"Dessa patchar är inte kompatibla med den valda appversionen (%1$s).
+
+Klicka på patcharna för att se mer information."</string>
+    <string name="incompatible_patch">Inkompatibel patch</string>
+    <string name="any_version">Valfri</string>
+    <string name="never_show_again">Visa aldrig igen</string>
+    <string name="show_manager_update_dialog_on_launch">Visa uppdateringsmeddelande vid start</string>
+    <string name="show_manager_update_dialog_on_launch_description">Visa ett popup-meddelande när en ny uppdatering är tillgänglig vid start</string>
+    <string name="failed_to_import_keystore">Det gick inte att importera nyckelarkivet</string>
+    <string name="export">Exportera</string>
+    <string name="confirm">Bekräfta</string>
+</resources>
