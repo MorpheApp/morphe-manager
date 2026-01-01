@@ -1,3 +1,15 @@
+# app [1.0.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2026-01-01)
+
+
+### Bug Fixes
+
+* Increase installer timeout ([934305b](https://github.com/MorpheApp/morphe-manager/commit/934305bd6bfbda17d225e6e314e0ee4cd17147cc))
+
+
+### Features
+
+* Refactor color row elements ([86b11b6](https://github.com/MorpheApp/morphe-manager/commit/86b11b66d234113a22b94e128d25acc7e699410e))
+
 # app [1.0.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2025-12-30)
 
 
