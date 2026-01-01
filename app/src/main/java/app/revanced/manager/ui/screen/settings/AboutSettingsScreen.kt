@@ -59,26 +59,6 @@ fun AboutSettingsScreen(
         AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
     })
 
-//    val githubButtons: List<Triple<ImageVector, String, () -> Unit>> = remember(context) {
-//        listOf(
-//            Triple(
-//                getSocialIcon("GitHub"),
-//                context.getString(R.string.github),
-//                { context.openUrl("https://github.com/Jman-Github/universal-revanced-manager") }
-//            ),
-//            Triple(
-//                getSocialIcon("GitHub"),
-//                context.getString(R.string.original_revanced_manager_github),
-//                { context.openUrl("https://github.com/ReVanced/revanced-manager") }
-//            ),
-//            Triple(
-//                getSocialIcon("GitHub"),
-//                context.getString(R.string.patch_bundle_urls),
-//                { context.openUrl("https://github.com/Jman-Github/ReVanced-Patch-Bundles#-patch-bundles-urls") }
-//            )
-//        )
-//    }
-
     val socialButtons: List<Pair<ImageVector, () -> Unit>> = remember(context) {
         listOf(
             Pair(
@@ -93,7 +73,7 @@ fun AboutSettingsScreen(
             Pair(
                 Icons.Outlined.Language
             ) // Crowdin icon
-            { context.openUrl("https://translate.morphe.software") }
+            { context.openUrl("https://morphe.software/translate") }
         )
     }
 
