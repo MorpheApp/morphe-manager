@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.CUSTOM_HEADER_INSTRUCTION
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.CUSTOM_ICON_INSTRUCTION
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.DARK_THEME_COLOR_DESC
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.DARK_THEME_COLOR_TITLE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_DESC
@@ -356,6 +358,7 @@ fun CustomBrandingDialog(
     appType: AppType,
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // Get current values from preferences
@@ -503,6 +506,13 @@ fun CustomBrandingDialog(
 
                 // Expandable Instructions Section
                 iconOption.description.let { description ->
+                    val localizedDescription = getLocalizedOrCustomText(
+                        context,
+                        description,
+                        CUSTOM_ICON_INSTRUCTION,
+                        R.string.morphe_patch_options_custom_branding_custom_icon_instruction
+                    )
+
                     Surface(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -569,7 +579,7 @@ fun CustomBrandingDialog(
                                         modifier = Modifier.padding(bottom = 4.dp)
                                     )
                                     Text(
-                                        text = description,
+                                        text = localizedDescription,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = LocalDialogSecondaryTextColor.current,
                                         lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
@@ -603,6 +613,7 @@ fun CustomHeaderDialog(
     viewModel: PatchOptionsViewModel,
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
@@ -689,6 +700,13 @@ fun CustomHeaderDialog(
 
                 // Expandable Instructions Section
                 customOption.description.let { description ->
+                    val localizedDescription = getLocalizedOrCustomText(
+                        context,
+                        description,
+                        CUSTOM_HEADER_INSTRUCTION,
+                        R.string.morphe_patch_options_custom_header_instruction
+                    )
+
                     Surface(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -755,7 +773,7 @@ fun CustomHeaderDialog(
                                         modifier = Modifier.padding(bottom = 4.dp)
                                     )
                                     Text(
-                                        text = description,
+                                        text = localizedDescription,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = LocalDialogSecondaryTextColor.current,
                                         lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f

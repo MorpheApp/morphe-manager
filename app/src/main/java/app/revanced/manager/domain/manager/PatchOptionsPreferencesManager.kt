@@ -67,6 +67,50 @@ class PatchOptionsPreferencesManager(
         const val DARK_THEME_COLOR_DESC = "Can be a hex color (#RRGGBB) or a color resource reference."
         const val LIGHT_THEME_COLOR_TITLE = "Light theme background color"
         const val LIGHT_THEME_COLOR_DESC = "Can be a hex color (#RRGGBB) or a color resource reference."
+
+        // Custom branding icon instructions
+        const val CUSTOM_ICON_INSTRUCTION = """Folder with images to use as a custom icon.
+
+The folder must contain one or more of the following folders, depending on the DPI of the device:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Each of the folders must contain all of the following files:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+The image dimensions must be as follows:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Optionally, the path contains a 'drawable' folder with any of the monochrome icon files:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"""
+
+        // Custom header instructions
+        const val CUSTOM_HEADER_INSTRUCTION = """Folder with images to use as a custom header logo.
+
+The folder must contain one or more of the following folders, depending on the DPI of the device:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Each of the folders must contain all of the following files:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png 
+
+The image dimensions must be as follows:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"""
     }
 
     // ==================== YouTube Options ====================
