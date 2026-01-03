@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -15,6 +16,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_APP_SHORTCUT_DESC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_APP_SHORTCUT_TITLE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_WIDGET_DESC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_WIDGET_TITLE
+import app.revanced.manager.domain.manager.getLocalizedOrCustomText
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
@@ -29,6 +35,7 @@ import org.koin.androidx.compose.koinViewModel
  * Advanced patch options section with expandable YouTube and YouTube Music sections
  * Options are dynamically loaded from the patch bundle repository
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun PatchOptionsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
@@ -85,7 +92,7 @@ fun PatchOptionsSection(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = stringResource(R.string.morphe_loading_patch_options),
+                        text = stringResource(R.string.morphe_patch_options_loading),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -273,8 +280,6 @@ private fun AppPatchOptionsContent(
     onBrandingClick: () -> Unit,
     onHeaderClick: (() -> Unit)?
 ) {
-    val scope = rememberCoroutineScope()
-
     // Get available patches for this app type
     val hasTheme = viewModel.getThemeOptions(appType.packageName) != null
     val hasBranding = viewModel.getBrandingOptions(appType.packageName) != null
@@ -286,8 +291,8 @@ private fun AppPatchOptionsContent(
         if (hasTheme) {
             SettingsItem(
                 icon = Icons.Outlined.Palette,
-                title = stringResource(R.string.morphe_theme_colors),
-                description = stringResource(R.string.morphe_theme_dark_color_description),
+                title = stringResource(R.string.morphe_patch_options_theme_colors),
+                description = stringResource(R.string.morphe_patch_options_theme_colors_description),
                 onClick = onThemeClick
             )
         }
@@ -296,8 +301,8 @@ private fun AppPatchOptionsContent(
         if (hasBranding) {
             SettingsItem(
                 icon = Icons.Outlined.Style,
-                title = stringResource(R.string.morphe_custom_branding),
-                description = stringResource(R.string.morphe_custom_app_name_description),
+                title = stringResource(R.string.morphe_patch_options_custom_branding),
+                description = stringResource(R.string.morphe_patch_options_custom_branding_description),
                 onClick = onBrandingClick
             )
         }
@@ -306,8 +311,8 @@ private fun AppPatchOptionsContent(
         if (hasHeader && onHeaderClick != null) {
             SettingsItem(
                 icon = Icons.Outlined.Image,
-                title = stringResource(R.string.morphe_custom_header),
-                description = stringResource(R.string.morphe_custom_header_description),
+                title = stringResource(R.string.morphe_patch_options_custom_header),
+                description = stringResource(R.string.morphe_patch_options_custom_header_description),
                 onClick = onHeaderClick
             )
         }
@@ -325,7 +330,7 @@ private fun AppPatchOptionsContent(
         // Show message if no options available for this app
         if (!hasTheme && !hasBranding && !hasHeader && !hasHideShorts) {
             Text(
-                text = stringResource(R.string.morphe_no_options_available),
+                text = stringResource(R.string.morphe_patch_options_no_available),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -339,6 +344,7 @@ private fun HideShortsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     viewModel: PatchOptionsViewModel
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val hideShortsOptions = viewModel.getHideShortsOptions()
 
@@ -357,17 +363,30 @@ private fun HideShortsSection(
         Column(modifier = Modifier.padding(12.dp)) {
             IconTextRow(
                 icon = Icons.Outlined.VisibilityOff,
-                title = stringResource(R.string.morphe_hide_shorts_features)
+                title = stringResource(R.string.morphe_patch_options_hide_shorts_features)
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             // Hide App Shortcut
-            if (hasAppShortcutOption) {
+            if (hasAppShortcutOption && appShortcutOption != null) {
                 val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()
+                val title = getLocalizedOrCustomText(
+                    context,
+                    appShortcutOption.title,
+                    HIDE_SHORTS_APP_SHORTCUT_TITLE,
+                    R.string.morphe_patch_options_hide_shorts_app_shortcut
+                )
+                val description = getLocalizedOrCustomText(
+                    context,
+                    appShortcutOption.description,
+                    HIDE_SHORTS_APP_SHORTCUT_DESC,
+                    R.string.morphe_patch_options_hide_shorts_app_shortcut_description
+                )
+
                 IconTextRow(
-                    title = appShortcutOption?.title ?: stringResource(R.string.morphe_hide_shorts_app_shortcut),
-                    description = appShortcutOption?.description ?: stringResource(R.string.morphe_hide_shorts_app_shortcut_description),
+                    title = title,
+                    description = description,
                     modifier = Modifier.padding(vertical = 8.dp),
                     trailingContent = {
                         Switch(
@@ -383,11 +402,24 @@ private fun HideShortsSection(
             }
 
             // Hide Widget
-            if (hasWidgetOption) {
+            if (hasWidgetOption && widgetOption != null) {
                 val hideShortsWidget by patchOptionsPrefs.hideShortsWidget.getAsState()
+                val title = getLocalizedOrCustomText(
+                    context,
+                    widgetOption.title,
+                    HIDE_SHORTS_WIDGET_TITLE,
+                    R.string.morphe_patch_options_hide_shorts_widget
+                )
+                val description = getLocalizedOrCustomText(
+                    context,
+                    widgetOption.description,
+                    HIDE_SHORTS_WIDGET_DESC,
+                    R.string.morphe_patch_options_hide_shorts_widget_description
+                )
+
                 IconTextRow(
-                    title = widgetOption?.title ?: stringResource(R.string.morphe_hide_shorts_widget),
-                    description = widgetOption?.description ?: stringResource(R.string.morphe_hide_shorts_widget_description),
+                    title = title,
+                    description = description,
                     modifier = Modifier.padding(vertical = 8.dp),
                     trailingContent = {
                         Switch(

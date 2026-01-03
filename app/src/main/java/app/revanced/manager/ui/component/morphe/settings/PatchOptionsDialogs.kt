@@ -1,10 +1,8 @@
 package app.revanced.manager.ui.component.morphe.settings
 
-import android.net.Uri
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -18,24 +16,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.DARK_THEME_COLOR_DESC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.DARK_THEME_COLOR_TITLE
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_DESC
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_TITLE
+import app.revanced.manager.domain.manager.getLocalizedOrCustomText
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.utils.rememberFolderPickerWithPermission
-import app.revanced.manager.ui.viewmodel.OptionInfo
-import app.revanced.manager.ui.viewmodel.PatchOptionInfo
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
 
 /**
  * Theme color selection dialog with dynamic options from bundle
@@ -47,6 +44,7 @@ fun ThemeColorDialog(
     appType: AppType,
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // Get current values from preferences
@@ -76,7 +74,7 @@ fun ThemeColorDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_theme_colors),
+        title = stringResource(R.string.morphe_patch_options_theme_colors),
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -94,16 +92,28 @@ fun ThemeColorDialog(
         ) {
             // Dark Theme Section
             if (darkThemeOption != null) {
+                val localizedTitle = getLocalizedOrCustomText(
+                    context,
+                    darkThemeOption.title,
+                    DARK_THEME_COLOR_TITLE,
+                    R.string.morphe_patch_options_dark_theme_color
+                )
                 Text(
-                    text = darkThemeOption.title,
+                    text = localizedTitle,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
                 darkThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
+                    val localizedDesc = getLocalizedOrCustomText(
+                        context,
+                        desc,
+                        DARK_THEME_COLOR_DESC,
+                        R.string.morphe_patch_options_dark_theme_color_description
+                    )
                     Text(
-                        text = desc,
+                        text = localizedDesc,
                         style = MaterialTheme.typography.bodySmall,
                         color = LocalDialogSecondaryTextColor.current
                     )
@@ -140,16 +150,28 @@ fun ThemeColorDialog(
             if (appType == AppType.YOUTUBE && lightThemeOption != null) {
                 Spacer(modifier = Modifier.height(8.dp))
 
+                val localizedTitle = getLocalizedOrCustomText(
+                    context,
+                    lightThemeOption.title,
+                    LIGHT_THEME_COLOR_TITLE,
+                    R.string.morphe_patch_options_light_theme_color
+                )
                 Text(
-                    text = lightThemeOption.title,
+                    text = localizedTitle,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     color = LocalDialogTextColor.current
                 )
 
                 lightThemeOption.description.takeIf { it.isNotEmpty() }?.let { desc ->
+                    val localizedDesc = getLocalizedOrCustomText(
+                        context,
+                        desc,
+                        LIGHT_THEME_COLOR_DESC,
+                        R.string.morphe_patch_options_light_theme_color_description
+                    )
                     Text(
-                        text = desc,
+                        text = localizedDesc,
                         style = MaterialTheme.typography.bodySmall,
                         color = LocalDialogSecondaryTextColor.current
                     )
@@ -182,7 +204,7 @@ fun ThemeColorDialog(
             // Show message if no options available
             if (darkThemeOption == null && lightThemeOption == null) {
                 Text(
-                    text = stringResource(R.string.morphe_no_options_available),
+                    text = stringResource(R.string.morphe_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
@@ -194,7 +216,7 @@ fun ThemeColorDialog(
     // Dark Color Picker Dialog
     if (showDarkColorPicker) {
         ColorPickerDialog(
-            title = stringResource(R.string.morphe_theme_dark_color),
+            title = stringResource(R.string.morphe_patch_options_dark_theme_color),
             currentColor = darkColor,
             onColorSelected = { color ->
                 scope.launch {
@@ -212,7 +234,7 @@ fun ThemeColorDialog(
     // Light Color Picker Dialog
     if (showLightColorPicker) {
         ColorPickerDialog(
-            title = stringResource(R.string.morphe_theme_light_color),
+            title = stringResource(R.string.morphe_patch_options_light_theme_color),
             currentColor = lightColor,
             onColorSelected = { color ->
                 scope.launch {
@@ -335,7 +357,6 @@ fun CustomBrandingDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val fs: Filesystem = koinInject()
 
     // Get current values from preferences
     var appName by remember {
@@ -378,7 +399,7 @@ fun CustomBrandingDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_custom_branding),
+        title = stringResource(R.string.morphe_patch_options_custom_branding),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -421,7 +442,7 @@ fun CustomBrandingDialog(
                     },
                     placeholder = {
                         Text(
-                            stringResource(R.string.morphe_custom_app_name_hint),
+                            stringResource(R.string.morphe_patch_options_custom_branding_app_name_hint),
                             color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
                         )
                     },
@@ -451,7 +472,7 @@ fun CustomBrandingDialog(
                     },
                     placeholder = {
                         Text(
-                            stringResource(R.string.morphe_custom_icon_path_hint),
+                            "/storage/emulated/0/icons", // No need localization
                             color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
                         )
                     },
@@ -511,7 +532,7 @@ fun CustomBrandingDialog(
                                         modifier = Modifier.size(20.dp)
                                     )
                                     Text(
-                                        text = stringResource(R.string.morphe_icon_instructions_title),
+                                        text = stringResource(R.string.morphe_patch_options_icon_instructions_title),
                                         style = MaterialTheme.typography.bodyMedium,
                                         fontWeight = FontWeight.Medium,
                                         color = LocalDialogTextColor.current
@@ -563,7 +584,7 @@ fun CustomBrandingDialog(
             // Show message if no options available
             if (appNameOption == null && iconOption == null) {
                 Text(
-                    text = stringResource(R.string.morphe_no_options_available),
+                    text = stringResource(R.string.morphe_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
@@ -583,7 +604,6 @@ fun CustomHeaderDialog(
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val fs: Filesystem = koinInject()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
     // Get header options from bundle
@@ -607,7 +627,7 @@ fun CustomHeaderDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_custom_header),
+        title = stringResource(R.string.morphe_patch_options_custom_header),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -638,7 +658,7 @@ fun CustomHeaderDialog(
                     },
                     placeholder = {
                         Text(
-                            stringResource(R.string.morphe_custom_header_hint),
+                            "/storage/emulated/0/header", // No need localization
                             color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
                         )
                     },
@@ -698,7 +718,7 @@ fun CustomHeaderDialog(
                                         modifier = Modifier.size(20.dp)
                                     )
                                     Text(
-                                        text = stringResource(R.string.morphe_header_instructions_title),
+                                        text = stringResource(R.string.morphe_patch_options_header_instructions_title),
                                         style = MaterialTheme.typography.bodyMedium,
                                         fontWeight = FontWeight.Medium,
                                         color = LocalDialogTextColor.current
@@ -748,7 +768,7 @@ fun CustomHeaderDialog(
             } else {
                 // No option available
                 Text(
-                    text = stringResource(R.string.morphe_no_options_available),
+                    text = stringResource(R.string.morphe_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic

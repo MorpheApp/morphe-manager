@@ -55,6 +55,18 @@ class PatchOptionsPreferencesManager(
         // Default values
         const val DEFAULT_DARK_THEME = "@android:color/black"
         const val DEFAULT_LIGHT_THEME = "@android:color/white"
+
+        // Hide Shorts options
+        const val HIDE_SHORTS_APP_SHORTCUT_TITLE = "Hide Shorts app shortcut"
+        const val HIDE_SHORTS_APP_SHORTCUT_DESC = "Permanently hides the shortcut to open Shorts when long pressing the app icon in your launcher."
+        const val HIDE_SHORTS_WIDGET_TITLE = "Hide Shorts widget"
+        const val HIDE_SHORTS_WIDGET_DESC = "Permanently hides the launcher widget Shorts button."
+
+        // Theme options
+        const val DARK_THEME_COLOR_TITLE = "Dark theme background color"
+        const val DARK_THEME_COLOR_DESC = "Can be a hex color (#RRGGBB) or a color resource reference."
+        const val LIGHT_THEME_COLOR_TITLE = "Light theme background color"
+        const val LIGHT_THEME_COLOR_DESC = "Can be a hex color (#RRGGBB) or a color resource reference."
     }
 
     // ==================== YouTube Options ====================
@@ -281,5 +293,22 @@ class PatchOptionsPreferencesManager(
         darkThemeBackgroundColorYouTubeMusic.value = DEFAULT_DARK_THEME
         customAppNameYouTubeMusic.value = ""
         customIconPathYouTubeMusic.value = ""
+    }
+}
+
+/**
+ * Gets localized text if it matches original English text,
+ * otherwise returns the custom text from patch
+ */
+fun getLocalizedOrCustomText(
+    context: Context,
+    currentText: String,
+    originalEnglishText: String,
+    localizedResId: Int
+): String {
+    return if (currentText == originalEnglishText) {
+        context.getString(localizedResId)
+    } else {
+        currentText
     }
 }
