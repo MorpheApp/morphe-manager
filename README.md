@@ -19,9 +19,9 @@
 Morphe Manager
 
 &nbsp;
-## 📜 Licence
+## 📜 License
 
-Morphe Manager is licensed under the [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html), with additional conditions under Section 7:
+Morphe Patches are licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:
 
 - **Attribution (7b):** Any use of this code, including derivatives, must display a visible notice:
 
@@ -30,4 +30,4 @@ Morphe Manager is licensed under the [GNU GPL v3.0](https://www.gnu.org/licenses
 - **Name Restriction (7c):** The name **"Morphe"** may not be used for derivative works.  
   Derivatives must adopt a distinct identity unrelated to "Morphe."
 
-See the [LICENSE](./LICENSE) file for full terms.
+See the [LICENSE](LICENSE) file for the full GPLv3 terms and the [NOTICE](NOTICE) file for full conditions of GPLv3 Section 7
