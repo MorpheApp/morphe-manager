@@ -3,6 +3,7 @@ package app.revanced.manager.ui.component.morphe.settings
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,9 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
@@ -561,30 +565,10 @@ fun CustomBrandingDialog(
                             // Expandable Content with description from bundle
                             AnimatedVisibility(
                                 visible = showInstructions,
-                                enter = expandVertically(animationSpec = tween(durationMillis = 300)) +
-                                        fadeIn(animationSpec = tween(durationMillis = 300)),
-                                exit = shrinkVertically(animationSpec = tween(durationMillis = 300)) +
-                                        fadeOut(animationSpec = tween(durationMillis = 300))
+                                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
+                                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
                             ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
-                                        .heightIn(max = 300.dp)
-                                        .verticalScroll(rememberScrollState()),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    HorizontalDivider(
-                                        color = LocalDialogTextColor.current.copy(alpha = 0.1f),
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Text(
-                                        text = localizedDescription,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = LocalDialogSecondaryTextColor.current,
-                                        lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
-                                    )
-                                }
+                                ScrollableInstruction(description = localizedDescription)
                             }
                         }
                     }
@@ -755,30 +739,10 @@ fun CustomHeaderDialog(
                             // Expandable Content with description from bundle
                             AnimatedVisibility(
                                 visible = showInstructions,
-                                enter = expandVertically(animationSpec = tween(durationMillis = 300)) +
-                                        fadeIn(animationSpec = tween(durationMillis = 300)),
-                                exit = shrinkVertically(animationSpec = tween(durationMillis = 300)) +
-                                        fadeOut(animationSpec = tween(durationMillis = 300))
+                                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
+                                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
                             ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
-                                        .heightIn(max = 300.dp)
-                                        .verticalScroll(rememberScrollState()),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    HorizontalDivider(
-                                        color = LocalDialogTextColor.current.copy(alpha = 0.1f),
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
-                                    Text(
-                                        text = localizedDescription,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = LocalDialogSecondaryTextColor.current,
-                                        lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
-                                    )
-                                }
+                                ScrollableInstruction(description = localizedDescription)
                             }
                         }
                     }
@@ -792,6 +756,65 @@ fun CustomHeaderDialog(
                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
                 )
             }
+        }
+    }
+}
+
+/**
+ * Scrollable instructions box with fade at bottom
+ */
+@Composable
+fun ScrollableInstruction(
+    description: String,
+    modifier: Modifier = Modifier,
+    maxHeight: Dp = 300.dp
+) {
+    val scrollState = rememberScrollState()
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(max = maxHeight)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
+            )
+        }
+
+        // Fade at bottom
+        val showFade by remember {
+            derivedStateOf { scrollState.value < scrollState.maxValue }
+        }
+
+        if (showFade) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(24.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.surface
+                            )
+                        )
+                    )
+            )
         }
     }
 }
