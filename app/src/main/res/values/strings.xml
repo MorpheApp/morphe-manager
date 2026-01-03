@@ -140,8 +140,8 @@
     <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Use pre-release patches</string>
-    <string name="morphe_update_use_patches_prereleases_description">Use the latest development patches</string>
+    <string name="morphe_update_use_prereleases">Use pre-release versions</string>
+    <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>
 
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
