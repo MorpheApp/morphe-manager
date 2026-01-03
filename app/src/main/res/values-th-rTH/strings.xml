@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">ชุดแพตช์</string>
+    <string name="morphe_home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">พร้อมหรือยังที่จะให้ YouTube กลับมาเป็นตำนานอีกครั้ง</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">คาดเข็มขัดนะ เวลาเพิ่มแพ็ตช์แล้ว</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">อีกวันหนึ่งผ่านไป อีกผลงานระดับมาสเตอร์กับการบล็อกโฆษณา</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">อยากดูโฆษณาไหม? ผมไม่เอาล่ะหนึ่ง</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">มาทำให้แอปพลิเคชันของคุณมีพฤติกรรมที่ดีขึ้นกันเถอะ</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">พยากรณ์วันนี้: การแพตซ์แอปพลิเคชันมีโอกาสทั้งหมด 100%</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">พร้อมที่จะเปลี่ยนสิ่งที่ไม่น่าประทับใจให้กลายเป็นสุดยอดไหม?</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">ช่วยแอปพลิเคชันให้รอดตัวตั้งแต่วันนี้</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">ขับเคลื่อนด้วยคาเฟอีนและแพทช์ที่ดี</string>
+    <string name="morphe_home_bundle_type_api">API Bundle</string>
+    <string name="morphe_home_update_error">การอัปเดตล้มเหลว</string>
+    <string name="morphe_home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
+    <string name="morphe_home_updating_patches">กำลังอัปเดตแพตช์…</string>
+    <string name="morphe_home_update_success">อัปเดตเสร็จสมบูรณ์</string>
+    <string name="morphe_home_patches_updated">แพตช์ของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="morphe_home_patches_are_loading">แพตช์กำลังโหลด โปรดรอสักครู่…</string>
+    <string name="morphe_home_please_wait">โปรดรอสักครู่…</string>
+    <string name="morphe_home_open_in_browser">เปิดในเบราว์เซอร์</string>
+    <string name="morphe_home_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
+    <string name="morphe_home_date_added">เพิ่มแล้ว</string>
+    <string name="morphe_home_date_updated">อัปเดตแล้ว</string>
+    <string name="morphe_home_check_updates">ตรวจสอบ</string>
+    <string name="morphe_home_unknown">ไม่รู้จัก</string>
+    <string name="morphe_home_timeline">ประวัติการอัปเดต</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">คุณมี APK ต้นฉบับที่ยังไม่ได้แพตช์หรือไม่?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
+    <string name="morphe_home_apk_availability_yes">ใช่ ฉันมีมัน</string>
+    <string name="morphe_home_apk_availability_no">ไม่ ช่วยฉันหา</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
+    <string name="morphe_home_download_instructions_steps_title">คำแนะนำ:</string>
+    <string name="morphe_home_download_instructions_step1">กดปุ่ม \'%1$s\' ด้านล่าง</string>
+    <string name="morphe_home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกด</string>
+    <string name="morphe_home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
+    <string name="morphe_home_download_instructions_step3">รอให้การดาวน์โหลดเสร็จสิ้น และ &lt;b&gt;อย่าติดตั้ง&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
+    <string name="morphe_home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
+    <string name="morphe_home_download_instructions_continue">ไปที่ APKMirror.com</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
+    <string name="morphe_home_file_picker_prompt_description">ตอนนี้ ให้เลือกไฟล์ APK %1$s ที่คุณเพิ่งดาวน์โหลด</string>
+    <string name="morphe_home_file_picker_prompt_open">เปิดไฟล์ APK ที่ฉันดาวน์โหลด</string>
+    <string name="morphe_home_recommended_version">เวอร์ชันที่แนะนำ</string>
+    <string name="morphe_patcher_selected_version">เวอร์ชันที่เลือก</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">โหมด Root จำเป็นต้องติดตั้ง APK ต้นฉบับไว้ในอุปกรณ์ของคุณก่อนทำการแพตช์</string>
+    <string name="morphe_root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">บันทึกไฟล์ APK</string>
+    <string name="morphe_patcher_copy_error">ข้อผิดพลาดในการคัดลอก</string>
+    <string name="morphe_patcher_show_error">แสดงข้อผิดพลาด</string>
+    <string name="morphe_patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d แพตช์</string>
+    <string name="morphe_patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
+    <string name="morphe_patcher_installing">กำลังติดตั้ง…</string>
+    <string name="morphe_patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
+    <string name="morphe_patcher_success_title">เสร็จสิ้นแล้ว! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">แอปของคุณถูกแพตช์และติดตั้งแล้ว!</string>
+    <string name="morphe_patcher_complete_title">การแพตช์เสร็จสมบูรณ์แล้ว! ✨</string>
+    <string name="morphe_patcher_failed_title">อุ๊ย! เกิดข้อผิดพลาดบางอย่างขึ้น</string>
+    <string name="morphe_patcher_failed_subtitle">ตรวจสอบรายละเอียดข้อผิดพลาดด้านล่าง</string>
+    <string name="morphe_patcher_failed_dialog_title">การแพตช์ล้มเหลว</string>
+    <string name="morphe_patcher_unknown_error">เกิดข้อผิดพลาดที่ไม่รู้จัก</string>
+    <string name="morphe_patcher_mounting">กำลังเมานต์...</string>
+    <string name="morphe_patcher_conflict_title">ข้อขัดแย้งของแพ็กเกจ</string>
+    <string name="morphe_patcher_conflict_subtitle">คุณต้องถอนการติดตั้งเวอร์ชันที่มีอยู่</string>
+    <string name="morphe_patcher_install_error_title">ข้อผิดพลาดในการติดตั้ง</string>
+    <string name="morphe_patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">กดปุ่มด้านล่างเพื่อติดตั้ง</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อเมานต์</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">เวอร์ชันไม่รองรับ</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">APK นี้ไม่ใช่แอปเวอร์ชันที่แนะนำ การดำเนินการต่ออาจส่งผลให้แอปไม่สามารถทำงานได้</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">ดำเนินการต่อ</string>
+    <string name="morphe_patcher_wrong_package_title">เลือกแพ็คเกจผิด</string>
+    <string name="morphe_patcher_wrong_package_description">APK ที่เลือกไม่ใช่สำหรับแอปพลิเคชันที่คุณต้องการแพตช์</string>
+    <string name="morphe_patcher_expected_package">แพ็คเกจที่คาดไว้</string>
+    <string name="morphe_patcher_selected_package">แพ็คเกจที่เลือก</string>
+    <string name="morphe_patcher_message_1">กำลังแปลงแอปของคุณให้เป็นสิ่งที่ยอดเยี่ยม… 🏆</string>
+    <string name="morphe_patcher_message_2">กำลังสอนแอปเก่าให้ทำสิ่งใหม่ๆ… 🎩</string>
+    <string name="morphe_patcher_message_3">กำลังปรับปรุงแอปของคุณแบบดิจิทัล… 🔧</string>
+    <string name="morphe_patcher_message_4">กำลังปรุงเวทมนตร์ดิจิทัล… ☕</string>
+    <string name="morphe_patcher_message_5">แนะนำให้พักดื่มกาแฟ… ☕</string>
+    <string name="morphe_patcher_message_6">มองออกไปข้างนอกสิ อากาศดีนะ… 🌤️</string>
+    <string name="morphe_patcher_message_7">กำลังปรับ 1 และ 0… 🤖</string>
+    <string name="morphe_patcher_message_8">กำลังคลายปมสปาเก็ตตี้ดิจิทัล… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">กำลังแก้ไขข้อบกพร่องในแอปที่ยังไม่ได้แก้ไข… 🐞</string>
+    <string name="morphe_patcher_message_10">แพตช์ดีๆ คุ้มค่ากับการรอคอย… ⏳</string>
+    <string name="morphe_patcher_message_11">กำลังขัดเกลาพิกเซลให้เปล่งประกาย… 💎</string>
+    <string name="morphe_patcher_message_12">โปรดนั่งรอจนกว่าลูกเรือจะปิดป้ายบอกว่า \'กำลังแก้ไข\' 💺✈️</string>
+    <string name="morphe_patcher_message_13">กำลังปรุงแอปที่แพตช์แล้วของคุณ ร้อนๆ สดๆ… 🍳</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">กำลังเจรจาอย่างสุภาพกับไบต์โค้ด… 🤝</string>
+    <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">ระบบทั้งหมดทำงานปกติ... เส้นทางการแพตชิ่งเสถียร... 🚀</string>
+    <string name="morphe_patcher_message_16">รีดพลังงานพิเศษออกมา เหมือนคั้นน้ำจากมะนาวดิจิทัล... 🍋</string>
+    <string name="morphe_patcher_message_17">ส่งเสริมให้แอปยอมรับตัวเองในเวอร์ชันใหม่ที่ดีกว่า... 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">เปลี่ยนสถานะซ้อนทับของแอปจากที่ยังไม่ได้แพตช์เป็นแพตช์แล้ว... 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
+    <string name="morphe_patcher_message_20">กำลังลบข้อความที่ไร้สาระ กรุณารอ… 🗑️</string>
+    <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">กลับหน้าหลัก Morphe</string>
+    <string name="morphe_settings_return_to_morphe_description">กลับสู่โหมดธรรมดา</string>
+    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
+    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
+    <string name="morphe_share_website">แชร์เว็บไซต์</string>
+    <string name="morphe_share_website_description">แชร์เว็บไซต์ทางการของ Morphe</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">ตัวเลือกการปรากฏตัว</string>
+    <string name="morphe_appearance_options_description">ปรับแต่งธีม,สี,และพื้นหลัง</string>
+    <string name="morphe_background_type">ภาพเคลื่อนไหวพื้นหลัง</string>
+    <string name="morphe_background_type_circles">วงกลม</string>
+    <string name="morphe_background_type_rings">วงแหวน</string>
+    <string name="morphe_background_type_waves">คลื่น</string>
+    <string name="morphe_background_type_space">อวกาศ</string>
+    <string name="morphe_background_type_shapes">รูปร่าง</string>
+    <string name="morphe_background_type_snow">눈 (Snow)</string>
+    <string name="morphe_background_type_none">ไม่มี</string>
+    <!-- Update Section -->
+    <string name="morphe_update_use_patches_prereleases">ใช้แพตช์เวอร์ชันทดลอง</string>
+    <string name="morphe_update_use_patches_prereleases_description">ใช้แพตช์ล่าสุดสำหรับการพัฒนา</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">ตัวเลือก Morphe Patch</string>
+    <string name="morphe_patch_options_youtube_description">ธีมส่วนบุคคล, สติ๊กเกอร์ส่วนบุคคล, ตัวเลือกหัวเรื่อง, และตัวเลือก Shorts</string>
+    <string name="morphe_patch_options_youtube_music_description">ตัวเลือกธีมและสติ๊กเกอร์ส่วนบุคคล</string>
+    <string name="morphe_patch_options_restart_message">การเปลี่ยนตัวเลือก Morphe Patch ต้อง reinstall aplikasi untuk berlaku</string>
+    <string name="morphe_icon_instructions_title">instruksi format ikon</string>
+    <string name="morphe_header_instructions_title">instruksi format header</string>
+    <string name="morphe_loading_patch_options">กำลังโหลดตัวเลือกการติดตั้ง…</string>
+    <string name="morphe_patch_options_waiting_for_bundle">รอให้การติดตั้งส่งกลับข้อมูลส่วนเสริม</string>
+    <string name="morphe_patch_options_load_error">การโหลดตัวเลือกการติดตั้งล้มเหลว</string>
+    <string name="morphe_no_options_available">ไม่มีตัวเลือกสำหรับตัวติดตั้งนี้</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">สีแบบกำหนดเอง</string>
+    <string name="morphe_hex_color">สี hexadecimal</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">สีธีมแอปพลิเคชัน</string>
+    <string name="morphe_theme_dark_color">สีพื้นหลังธีมเข้ม</string>
+    <string name="morphe_theme_dark_color_description">สีพื้นหลังสำหรับธีมเข้ม</string>
+    <string name="morphe_theme_light_color">สีพื้นหลังธีมสว่าง</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">การปรับแต่งแอปพลิเคชันแบบกำหนดเอง</string>
+    <string name="morphe_custom_app_name_description">เปลี่ยนชื่อที่แสดงของแอปพลิเคชัน</string>
+    <string name="morphe_custom_app_name_hint">ป้อนชื่อแบบกำหนดเอง</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">โลโก้ป้อนข้อมูลแบบกำหนดเอง</string>
+    <string name="morphe_custom_header_description">ตำแหน่งโฟลเดอร์ที่มีไฟล์ภาพป้อนข้อมูลแบบกำหนดเอง</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">ซ่อนคุณสมบัติของ Shorts</string>
+    <string name="morphe_hide_shorts_app_shortcut">ซ่อนลิ้งก์ขั้นเร็วของ Shorts บนหน้าหลักแอปพลิเคชัน</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">เอา Shorts ออกจากเมนูการขึ้นรูป (long-press) บนหน้าหลักแอปพลิเคชัน</string>
+    <string name="morphe_hide_shorts_widget">ซ่อนส่วนติดตั้งของ Shorts</string>
+    <string name="morphe_hide_shorts_widget_description">เอาปุ่ม Shorts ออกจากส่วนประกอบของแอปพลิเคชันบนหน้าหลัก</string>
+    <!-- Other strings -->
+    <string name="patcher">ผู้แก้ไข</string>
+    <string name="patches">แพตช์</string>
+    <string name="patch_bundles">ชุดแพตช์</string>
+    <string name="patch_bundle">ชุดแพตช์</string>
+    <!-- Morphe -->
+    <string name="installer">การติดตั้ง</string>
+    <string name="plugin_host_permission_label">โฮสต์ปลั๊กอิน Morphe</string>
+    <string name="plugin_host_permission_description">ใช้เพื่อควบคุมการเข้าถึงปลั๊กอิน Morphe มีเพียง Morphe เท่านั้นที่มีสิ่งนี้</string>
+    <string name="toast_copied_to_clipboard">คัดลอกแล้ว!</string>
+    <string name="copy_to_clipboard">คัดลอกไปยังคลิปบอร์ด</string>
+    <string name="settings">การตั้งค่า</string>
+    <string name="select_app">เลือกแอป</string>
+    <string name="app_filter_title">ตัวกรองแอปพลิเคชัน</string>
+    <string name="app_filter_installed_only">เฉพาะแอปพลิเคชันที่ติดตั้ง</string>
+    <string name="app_filter_patches_available">มีแพ็คเกจอัปเดตพร้อมใช้งาน</string>
+    <string name="app_filter_no_results">ไม่มีแอปพลิเคชันตรงกับตัวกรองของคุณ</string>
+    <string name="new_downloader_plugins_notification">มีปลั๊กอินดาวน์โหลดใหม่ คลิกที่นี่เพื่อกำหนดค่า</string>
+    <string name="unsupported_architecture_warning">การแพตช์บนสถาปัตยกรรมอุปกรณ์นี้ไม่ได้รับการสนับสนุนและน่าจะล้มเหลว</string>
+    <string name="import_">นำเข้า</string>
+    <string name="file_field_not_set">ไม่ได้เลือก</string>
+    <string name="field_not_set">ไม่ได้ตั้งค่า</string>
+    <string name="patches_missing">ขาดหายไป</string>
+    <string name="patches_error">ข้อผิดพลาด</string>
+    <string name="patches_error_description">ไม่สามารถโหลดแพตช์ได้ คลิกเพื่อดูข้อผิดพลาด</string>
+    <string name="patches_not_downloaded">การดาวน์โหลดแพ็กเกจล้มเหลว โปรดคลิกที่นี่เพื่อดาวن์โหลด</string>
+    <string name="patches_name_default">แพตช์</string>
+    <string name="patches_name_fallback">ไม่มีชื่อ</string>
+    <string name="bundle_uid">รหัสของแพ็คเกจ</string>
+    <string name="patches_display_name">ชื่อที่แสดง</string>
+    <string name="android_11_bug_dialog_title">ข้อผิดพลาด Android 11</string>
+    <string name="android_11_bug_dialog_description">ต้องได้รับอนุญาตการติดตั้งแอปล่วงหน้าเพื่อหลีกเลี่ยงข้อผิดพลาดในระบบ Android 11 ซึ่งจะส่งผลเสียต่อประสบการณ์ผู้ใช้</string>
+    <string name="no_network_toast">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
+    <string name="selected_app_meta_any_version">เวอร์ชันที่พร้อมใช้งานใดๆ</string>
+    <string name="app_source_dialog_title">เลือกแหล่งที่มา</string>
+    <string name="app_source_dialog_option_auto">อัตโนมัติ</string>
+    <string name="app_source_dialog_option_auto_description">ใช้ตัวดาวน์โหลดที่มีอยู่ทั้งหมดเพื่อดาวน์โหลดแอป</string>
+    <string name="app_source_dialog_option_auto_unavailable">ไม่มีปลั๊กอินให้ใช้งาน</string>
+    <string name="app_source_dialog_option_storage">พื้นที่เก็บข้อมูล</string>
+    <string name="app_source_dialog_option_storage_description">เลือก APK จากที่เก็บข้อมูลภายใน</string>
+    <string name="app_source_dialog_option_installed_no_root">แอปที่ติดตั้งแล้วไม่สามารถแก้ไขได้อีกหากไม่มีสิทธิ์ root</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">เวอร์ชัน %s ไม่ตรงกับเวอร์ชันที่แนะนำ</string>
+    <string name="bundle_version_item">คำแนะนำ Bundle</string>
+    <string name="bundle_version_item_description_default">ใช้คำแนะนำเริ่มต้น</string>
+    <string name="bundle_version_item_description_selected">ตาม %1$s (%2$s)</string>
+    <string name="bundle_version_dialog_title">เลือกคำแนะนำ Bundle</string>
+    <string name="bundle_version_dialog_description">เลือกคำแนะนำของชุดซอฟต์แวร์ที่จะใช้เมื่อโหลดแอป</string>
+    <string name="bundle_version_dialog_default">ใช้คำแนะนำเริ่มต้น</string>
+    <string name="bundle_version_dialog_default_subtitle">เลือกเวอร์ชันที่เข้ากันได้ที่ใช้กันมากที่สุดโดยอัตโนมัติ</string>
+    <string name="bundle_version_all_versions">ทุกเวอร์ชัน</string>
+    <string name="bundle_version_no_version">ไม่มีเวอร์ชันที่แนะนำ</string>
+    <string name="bundle_version_suggested_label">เวอร์ชันแนะนำ: %1$s</string>
+    <string name="bundle_update_manual_available">มีอัปเดตพร้อมใช้งาน</string>
+    <string name="bundle_update_manual_available_with_version">มีอัปเดตพร้อมใช้งาน: %1$s</string>
+    <string name="bundle_update_progress">ประมวลผล %1$d/%2$d ชุดข้อมูลแล้ว</string>
+    <string name="bundle_update_banner_title">กำลังอัปเดตชุดข้อมูลแพตช์</string>
+    <string name="bundle_reorder">จัดเรียงชุดข้อมูล</string>
+    <string name="bundle_reorder_title">จัดเรียงชุดข้อมูลแพตช์</string>
+    <string name="bundle_reorder_description">ลากที่จับเพื่อจัดลำดับชุดข้อมูลที่จะแสดงในรายการและเมนูเลือกแพตช์</string>
+    <string name="bundle_actions_expand">แสดงการดำเนินการของชุดข้อมูล</string>
+    <string name="bundle_actions_collapse">ซ่อนการดำเนินการของชุดข้อมูล</string>
+    <string name="patch_bundle_duplicate_name_error">มีชุดข้อมูลแพตช์ที่มีชื่อนี้อยู่แล้ว</string>
+    <string name="patch_bundle_missing_error">ไม่สามารถอัปเดตชุดข้อมูลแพตช์นี้ได้</string>
+    <string name="bundle_release_page">เปิดหน้าเวอร์ชัน</string>
+    <string name="bundle_release_page_unavailable">ไม่สามารถแสดงหน้าเวอร์ชันสำหรับ Bundle นี้ได้</string>
+    <string name="bundle_release_page_error">ไม่สามารถเปิดหน้าเวอร์ชันได้: %s</string>
+    <string name="bundle_links_title">ลิงก์สำหรับ %1$s</string>
+    <string name="bundle_link_release">ปล่อยของ GitHub</string>
+    <string name="bundle_link_catalog">แค็ตตาล็อกรายการ Patch</string>
+    <string name="bundle_catalog_unavailable">แค็ตตาล็อกรายการ Patch ไม่พร้อมใช้งาน</string>
+    <string name="show_suggested_versions">แสดงเวอร์ชันที่แนะนำ</string>
+    <string name="hide_suggested_versions">ซ่อนเวอร์ชันที่แนะนำ</string>
+    <string name="show_other_versions">แสดงเวอร์ชันอื่นๆ</string>
+    <string name="other_supported_versions_title">เวอร์ชันที่รองรับอื่นๆ (%1$s)</string>
+    <string name="other_supported_versions_empty">ไม่มีเวอร์ชันที่รองรับอื่นๆ</string>
+    <string name="other_supported_versions_all">รองรับทุกเวอร์ชัน</string>
+    <string name="bundle_version_dialog_recommended">เวอร์ชันที่แนะนำ: %1$s</string>
+    <string name="bundle_version_dialog_selected_override">เวอร์ชันที่เลือก: %1$s</string>
+    <string name="bundle_version_dialog_selected_indicator">เลือกแล้ว</string>
+    <string name="bundle_version_dialog_other_title">เลือกเวอร์ชันอื่นที่รองรับ:</string>
+    <string name="bundle_version_dialog_locked_title">ระบบป้องกันเวอร์ชันเปิดใช้งานอยู่</string>
+    <string name="bundle_version_dialog_locked_hint">ไปที่ การตั้งค่า &gt; ขั้นสูง &gt; การป้องกัน และตั้งค่า \"ต้องใช้เวอร์ชันแอปที่แนะนำ\" (ปิด) และ \"ปิดใช้งานการตรวจสอบความเข้ากันได้ของเวอร์ชัน\" (เปิด) เพื่อเลือกเวอร์ชันเฉพาะของชุดโปรแกรม</string>
+    <string name="patch_versions_dialog_title">เวอร์ชันที่รองรับสำหรับ %1$s</string>
+    <string name="patch_selector_item">เลือกแพตช์</string>
+    <string name="patch_selector_item_description">เลือกแพตช์แล้ว %d รายการ</string>
+    <string name="no_patches_selected">ยังไม่ได้เลือกแพตช์</string>
+    <string name="network_unavailable_warning">อุปกรณ์ของคุณไม่ได้เชื่อมต่ออินเทอร์เน็ต การดาวน์โหลดจะล้มเหลวในภายหลัง</string>
+    <string name="apk_source_selector_item">เลือกแหล่งที่มาของ APK</string>
+    <string name="apk_source_auto">กำลังใช้ APK Downloader ทั้งหมด</string>
+    <string name="apk_source_downloader">กำลังใช้ %s</string>
+    <string name="apk_source_installed">กำลังใช้ APK ที่ติดตั้งไว้</string>
+    <string name="apk_source_local">กำลังใช้ไฟล์ APK ในเครื่อง</string>
+    <string name="apk_source_downloaded">กำลังใช้ APK ที่ดาวน์โหลดไว้</string>
+    <string name="auto_updates_dialog_title">กำหนดค่าการอัปเดต</string>
+    <string name="auto_updates_dialog_description">คุณต้องการให้ Morphe ตรวจสอบการอัปเดตสำหรับองค์ประกอบต่อไปนี้เป็นประจำหรือไม่</string>
+    <string name="auto_updates_dialog_patches">แพตช์ Morphe</string>
+    <string name="auto_updates_dialog_note">สามารถเปลี่ยนแปลงการตั้งค่าเหล่านี้ได้ในภายหลัง</string>
+    <string name="appearance">หน้าตา</string>
+    <string name="appearance_description">การปรับแต่ง見たทางการ, สีแบบ dynamic</string>
+    <string name="updates">อัปเดต</string>
+    <string name="updates_description">ตรวจสอบการอัปเดตและดูบันทึกการเปลี่ยนแปลง</string>
+    <string name="downloads">ดาวน์โหลด</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <string name="import_export">นำเข้า / ส่งออก</string>
+    <string name="import_export_description">คีย์สโตร์, ตัวเลือกแพตช์และการเลือก</string>
+    <string name="changelog">ดูบันทึกการเปลี่ยนแปลง</string>
+    <string name="changelog_loading">กำลังโหลดบันทึกการเปลี่ยนแปลง</string>
+    <string name="changelog_download_fail">ดาวน์โหลดบันทึกการเปลี่ยนแปลงไม่สำเร็จ: %s</string>
+    <string name="changelog_description">ตรวจสอบการเปลี่ยนแปลงล่าสุดในการอัปเดตนี้</string>
+    <string name="advanced">ขั้นสูง</string>
+    <string name="advanced_description">URL API, ขีดจำกัดหน่วยความจำ, การดีบัก</string>
+    <string name="about">เกี่ยวกับ</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">สีข highligh</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">ตà»åãäóäñâïîÞ¸</string>
+    <!-- Morphe -->
+    <string name="theme_presets">ค่าธีมที่ตั้งไว้ล่วงหน้า</string>
+    <!-- Morphe -->
+    <string name="theme_preset_default">ตามระบบ</string>
+    <string name="theme_preset_amoled">สีดำสนิท</string>
+    <string name="theme_preset_dynamic">Material You</string>
+    <!-- Morphe -->
+    <string name="color_channel_red">สีแดง</string>
+    <string name="color_channel_green">สีเขียว</string>
+    <string name="color_channel_blue">สีน้ำเงิน</string>
+    <string name="theme">ธีม</string>
+    <string name="safeguards">การป้องกัน</string>
+    <string name="patch_compat_check">ปิดการตรวจสอบความเข้ากันได้ของเวอร์ชัน</string>
+    <string name="patch_compat_check_description">ไม่อนุญาตให้จำกัดแพตช์สำหรับแอปเวอร์ชันที่เข้ากันได้</string>
+    <string name="patch_compat_check_confirmation">"การเลือกแพตช์ที่ไม่เข้ากันอาจส่งผลให้แอปเสีย
+
+คุณต้องการดำเนินการต่อหรือไม่?"</string>
+    <string name="suggested_version_safeguard">บังคับใช้เวอร์ชันแอปที่แนะนำ</string>
+    <string name="suggested_version_safeguard_description">บังคับใช้การเลือกเวอร์ชันแอปที่แนะนำ</string>
+    <string name="suggested_version_safeguard_confirmation">"การเลือกแอปที่ไม่ใช่เวอร์ชันที่แนะนำอาจทำให้เกิดปัญหาที่ไม่คาดคิด
+
+คุณต้องการดำเนินการต่อหรือไม่?"</string>
+    <string name="patch_selection_safeguard">อนุญาตให้เปลี่ยนการเลือกแพตช์และตัวเลือก</string>
+    <string name="patch_selection_safeguard_description">ห้ามป้องกันการเลือกหรือไม่เลือกแพตช์และการปรับแต่งตัวเลือก</string>
+    <string name="patch_selection_safeguard_confirmation">"การเปลี่ยนการเลือกแพตช์อาจทำให้เกิดปัญหาที่ไม่คาดคิด
+
+เปิดใช้งานต่อไปหรือไม่?"</string>
+    <string name="universal_patches_safeguard">แสดงและอนุญาตให้ใช้แพตช์สากล</string>
+    <string name="universal_patches_safeguard_description">อย่าซ่อนแพตช์สากลหรือป้องกันการใช้งาน</string>
+    <string name="universal_patches_profile_blocked_title">ปิดใช้งานแพตช์สากล</string>
+    <string name="universal_patches_profile_blocked_description">โปรไฟล์แพตช์นี้มีแพตช์สากล เปิดใช้งาน “%1$s” ในการตั้งค่าขั้นสูงเพื่อใช้งาน</string>
+    <string name="universal_patches_app_blocked_description">แอปนี้มีแพตช์สากล เปิดใช้งาน “%1$s” ในการตั้งค่าขั้นสูงเพื่อดำเนินการต่อ</string>
+    <string name="import_keystore">นำเข้าคีย์สโตร์</string>
+    <string name="import_keystore_description">นำเข้าคีย์สโตร์ที่กำหนดเอง</string>
+    <string name="import_keystore_dialog_title">ป้อนข้อมูลประจำตัวคีย์สโตร์</string>
+    <string name="import_keystore_dialog_description">คุณต้องขึ้นเครื่องหมายชื่อคลิงค์สำหรับการนำเข้า</string>
+    <string name="import_keystore_dialog_alias_field">ชื่อผู้ใช้ (นามแฝง)</string>
+    <string name="import_keystore_dialog_password_field">รหัสผ่าน</string>
+    <string name="import_keystore_dialog_button">นำเข้า</string>
+    <string name="import_keystore_wrong_credentials">ข้อมูลประจำตัวคีย์สโตร์ไม่ถูกต้อง</string>
+    <string name="import_keystore_success">นำเข้าคีย์สโตร์แล้ว</string>
+    <string name="export_keystore">ส่งออกคีย์สโตร์</string>
+    <string name="export_keystore_description">ส่งออกคีย์สโตร์ปัจจุบัน</string>
+    <string name="export_keystore_unavailable">ไม่มีคีย์สโตร์ให้ส่งออก</string>
+    <string name="export_keystore_success">ส่งออกคีย์สโตร์แล้ว</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore_success">ได้ทำการแทนที่คีย์สโตร์สำเร็จแล้ว</string>
+    <string name="import_patch_selection">นำเข้าการเลือกแพตช์</string>
+    <string name="import_patch_selection_description">นำเข้าการเลือกแพตช์จากไฟล์ JSON</string>
+    <string name="import_patch_selection_fail">ไม่สามารถนำเข้าการเลือกแพตช์ได้: %s</string>
+    <string name="import_patch_selection_success">นำเข้าการเลือกแพตช์แล้ว</string>
+    <string name="import_patch_bundles">นำเข้าชุดแพตช์</string>
+    <string name="import_patch_bundles_description">กู้คืนชุดแพตช์ระยะไกลจากไฟล์ JSON</string>
+    <string name="import_patch_bundles_fail">ไม่สามารถนำเข้าชุดแพตช์ได้: %s</string>
+    <string name="import_patch_bundles_in_progress">กำลังนำเข้า…</string>
+    <string name="import_patch_bundles_success">นำเข้าชุดแพตช์ %d แล้ว</string>
+    <string name="import_patch_bundles_updated">อัปเดตชุดแพตช์ %d แล้ว</string>
+    <string name="import_patch_bundles_none">ไม่มีชุดแพตช์ใหม่ถูกนำเข้า</string>
+    <string name="import_patch_bundles_banner_title">กำลังนำเข้าชุดแพตช์</string>
+    <string name="import_patch_bundles_banner_subtitle">%1$d จาก %2$d ที่ประมวลผลแล้ว</string>
+    <string name="import_patch_bundles_banner_steps">ขั้นตอนที่ %1$d จาก %2$d</string>
+    <string name="import_patch_profiles">นำเข้าโปรไฟล์แพตช์</string>
+    <string name="import_patch_profiles_description">นำเข้าโปรไฟล์แพตช์ที่บันทึกไว้จากไฟล์ JSON</string>
+    <string name="import_patch_profiles_fail">ไม่สามารถนำเข้าโปรไฟล์แพตช์: %s</string>
+    <string name="import_patch_profiles_success">นำเข้าโปรไฟล์แพตช์ %d รายการแล้ว</string>
+    <string name="import_patch_profiles_partial">นำเข้าโปรไฟล์แพตช์ %1$d รายการ โดยข้ามไป %2$d รายการ</string>
+    <string name="import_patch_profiles_skipped">ข้ามโปรไฟล์แพตช์ที่ซ้ำกัน %d รายการ</string>
+    <string name="import_patch_profiles_none">ไม่มีการนำเข้าโปรไฟล์แพตช์</string>
+    <string name="import_manager_settings">การตั้งค่าตัวจัดการการนำเข้า</string>
+    <string name="import_manager_settings_description">กู้คืนการตั้งค่าตัวจัดการที่บันทึกไว้จากไฟล์ JSON</string>
+    <string name="import_manager_settings_fail">ไม่สามารถนำเข้าการตั้งค่าตัวจัดการ: %s</string>
+    <string name="import_manager_settings_success">นำเข้าการตั้งค่าตัวจัดการแล้ว</string>
+    <string name="export_patch_selection">ส่งออกการเลือกแพตช์</string>
+    <string name="export_patch_selection_description">ส่งออกการเลือกแพตช์ไปยังไฟล์ JSON</string>
+    <string name="export_patch_selection_fail">ไม่สามารถส่งออกการเลือกแพตช์: %s</string>
+    <string name="export_patch_selection_success">ส่งออกการเลือกแพตช์แล้ว</string>
+    <string name="export_patch_bundles">ส่งออกชุดแพตช์</string>
+    <string name="export_patch_bundles_description">บันทึกชุดแพตช์ระยะไกลที่นำเข้าแล้วไปยังไฟล์ JSON</string>
+    <string name="export_patch_bundles_fail">ไม่สามารถส่งออกชุดแพตช์ได้: %s</string>
+    <string name="export_patch_bundles_success">ส่งออกชุดแพตช์แล้ว %d รายการ</string>
+    <string name="export_patch_bundles_partial">ส่งออกชุดแพตช์แล้ว %1$d รายการ บางรายการไม่สามารถส่งออกได้เนื่องจากถูกเพิ่มในเครื่อง</string>
+    <string name="bundle_type_remote">ระยะไกล</string>
+    <string name="bundle_type_local">ในเครื่อง</string>
+    <string name="bundle_type_preinstalled">ติดตั้งไว้ล่วงหน้า</string>
+    <string name="bundle_created_at">สร้างเมื่อ %1$s</string>
+    <string name="bundle_updated_at">อัปเดตเมื่อ %1$s</string>
+    <string name="bundle_changelog">บันทึกการเปลี่ยนแปลง</string>
+    <string name="bundle_view_changelog">ดูบันทึกการเปลี่ยนแปลงล่าสุด</string>
+    <string name="bundle_changelog_error">ไม่สามารถโหลดบันทึกการเปลี่ยนแปลงได้: %s</string>
+    <string name="bundle_changelog_retry">ลองอีกครั้ง</string>
+    <string name="bundle_changelog_empty">ไม่มีบันทึกการเปลี่ยนแปลง</string>
+    <string name="export_patch_profiles">ส่งออกโปรไฟล์แพตช์</string>
+    <string name="export_patch_profiles_description">ส่งออกโปรไฟล์แพตช์ทั้งหมดไปยังไฟล์ JSON</string>
+    <string name="export_patch_profiles_fail">ไม่สามารถส่งออกโปรไฟล์แพตช์: %s</string>
+    <string name="export_patch_profiles_success">ส่งออกโปรไฟล์แพตช์ %d รายการแล้ว</string>
+    <string name="export_patch_profiles_empty">ไม่มีโปรไฟล์แพตช์ให้ส่งออก</string>
+    <string name="export_manager_settings">ส่งออกการตั้งค่าตัวจัดการ</string>
+    <string name="export_manager_settings_description">บันทึกการตั้งค่าตัวจัดการทั้งหมดไปยังไฟล์ JSON</string>
+    <string name="export_manager_settings_fail">ไม่สามารถส่งออกการตั้งค่าตัวจัดการ: %s</string>
+    <string name="export_manager_settings_success">ส่งออกการตั้งค่าตัวจัดการแล้ว</string>
+    <string name="reset_patch_selection">รีเซ็ตการเลือกแพตช์</string>
+    <string name="reset_patch_selection_description">รีเซ็ตการเลือกแพตช์ที่เก็บไว้</string>
+    <string name="reset_patch_options">รีเซ็ตตัวเลือกแพตช์</string>
+    <string name="reset_patch_options_description">รีเซ็ตตัวเลือกแพตช์ที่เก็บไว้</string>
+    <string name="reset_patch_selection_success">การเลือกแพตช์ถูกรีเซ็ตแล้ว</string>
+    <string name="patch_selection_deselected_all_toast">ยกเลิกการเลือกแพตช์ทั้งหมดแล้ว</string>
+    <string name="patch_selection_deselected_bundle_toast">ยกเลิกการเลือกแพตช์ทั้งหมดใน %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">ไม่มีแพตช์ให้ยกเลิกการเลือกใน %s</string>
+    <string name="patch_selection_selected_all_toast">เลือกแพตช์ทั้งหมดแล้ว</string>
+    <string name="patch_selection_select_all_empty_toast">ไม่มีแพตช์ให้เลือก</string>
+    <string name="patch_selection_selected_bundle_toast">เลือกแพตช์ทั้งหมดใน %s แล้ว</string>
+    <string name="patch_selection_select_bundle_empty_toast">ไม่มีแพตช์ให้เลือกใน %s</string>
+    <string name="patch_selection_all_actions_hidden_toast">ทั้งหมดของปุ่มตัวกระตุ้นซ่อนอยู่ เริ่มตั้งแต่หนึ่งในตั้งต้น</string>
+    <string name="patch_selection_reset_bundle_toast">คืนค่าเริ่มต้นสำหรับ %s</string>
+    <string name="patch_selection_button_label_all">ยกเลิกการเลือกทั้งหมด</string>
+    <string name="patch_selection_button_label_bundle">ยกเลิกการเลือกชุด</string>
+    <string name="patch_selection_button_label_defaults">ค่าเริ่มต้นทั้งหมด</string>
+    <string name="patch_selection_button_label_select_bundle">เลือกชุด</string>
+    <string name="patch_selection_button_label_select_all">เลือกทั้งหมด</string>
+    <string name="patch_selection_button_label_undo_action">เลิกทำการดำเนินการ</string>
+    <string name="patch_selection_button_label_redo_action">ทำซ้ำการดำเนินการ</string>
+    <string name="patch_selection_history_undo">เลิกทำการเปลี่ยนแปลง %1$s</string>
+    <string name="patch_selection_history_redo">ทำซ้ำการเปลี่ยนแปลง %1$s</string>
+    <string name="patch_selection_action_all_defaults">ค่าเริ่มต้นทั้งหมด</string>
+    <string name="patch_selection_action_deselect_all">ยกเลิกการเลือกทั้งหมด</string>
+    <string name="patch_selection_action_select_all">เลือกทั้งหมด</string>
+    <string name="patch_selection_action_select_bundle">เลือกชุด \"%1$s\"</string>
+    <string name="patch_selection_action_deselect_bundle">ยกเลิกการเลือกชุด \"%1$s\"</string>
+    <string name="patch_selection_action_bundle_defaults">ค่าเริ่มต้นของชุด \"%1$s\"</string>
+    <string name="disable_patch_selection_confirmations">ปิดใช้งานการยืนยันการดำเนินการ</string>
+    <string name="disable_patch_selection_confirmations_description">ข้ามกล่องโต้ตอบการยืนยันสำหรับการดำเนินการเลือกแพตช์</string>
+    <string name="disable_patch_selection_confirmations_warning">การปิดใช้งานการยืนยันอาจทำให้เกิดการเปลี่ยนแปลงจำนวนมากโดยไม่ได้ตั้งใจ</string>
+    <string name="patch_selection_collapse_on_toggle">ยุบการดำเนินการหลังจากสลับแพตช์</string>
+    <string name="patch_selection_collapse_on_toggle_description">ซ่อนปุ่มการดำเนินการเลือกแพตช์โดยอัตโนมัติทุกครั้งที่คุณเลือกหรือยกเลิกการเลือกแพตช์</string>
+    <string name="patch_selection_action_order_title">ลำดับปุ่มการดำเนินการเลือกแพตช์</string>
+    <string name="patch_selection_action_order_description">เลือก ลำดับ เลย์เอาต์ สำหรับ ปุ่ม การดำเนินการ เลือก แพตช์</string>
+    <string name="patch_selection_action_visibility_title">ควบคุมการเห็นของปุ่มตัวกระตุ้นแอปพลิเคชัน</string>
+    <string name="patch_selection_action_visibility_description">เลือกปุ่มใดบ้างที่จะปรากฏในหน้านี้</string>
+    <string name="patch_selection_action_visibility_reset"> hiển thị semua ปุ่มตัวกระตุ้น</string>
+    <string name="patch_selection_action_order_reset">กู้คืนลำดับเริ่มต้น</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">ยกเลิกการเลือกชุดหรือไม่?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">ยกเลิกการเลือกแพตช์ทั้งหมดที่เลือกจาก %1$s หรือไม่?</string>
+    <string name="patch_selection_confirm_deselect_all_title">ยกเลิกการเลือกแพตช์ทั้งหมดหรือไม่?</string>
+    <string name="patch_selection_confirm_deselect_all_message">สิ่งนี้จะล้างแพตช์ที่เลือกทั้งหมดในทุกชุด</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">กู้คืนค่าเริ่มต้นของชุดหรือไม่?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">สิ่งนี้จะกู้คืนค่าเริ่มต้นที่แนะนำสำหรับ %1$s</string>
+    <string name="patch_selection_confirm_select_bundle_title">เลือกชุดหรือไม่?</string>
+    <string name="patch_selection_confirm_select_bundle_message">เลือกแพตช์ทั้งหมดที่มีให้โดย %1$s หรือไม่?</string>
+    <string name="patch_selection_confirm_select_all_title">เลือกแพตช์ทั้งหมดหรือไม่?</string>
+    <string name="patch_selection_confirm_select_all_message">นี่คือการเลือกแพตช์ทั้งหมดในทุกชุด</string>
+    <string name="patch_selection_button_label_reset_bundle">ค่าเริ่มต้นของชุด</string>
+    <string name="patch_profile_save_label">บันทึกโปรไฟล์</string>
+    <string name="patch_selection_toggle_expand">แสดงการดำเนินการ</string>
+    <string name="patch_selection_toggle_collapse">ซ่อนการดำเนินการ</string>
+    <string name="patch_selection_reset_all">รีเซ็ตการเลือกแพตช์ทั้งหมด</string>
+    <string name="patch_selection_reset_all_dialog_description">"คุณกำลังจะรีเซ็ตการเลือกแพตช์ทั้งหมด คุณจะต้องเลือกแพตช์แต่ละรายการด้วยตนเองอีกครั้ง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_selection_reset_all_description">รีเซ็ตการเลือกแพตช์ทั้งหมด</string>
+    <string name="patch_selection_reset_dialog_title">รีเซ็ตค่าเริ่มต้นของแพตช์หรือไม่?</string>
+    <string name="patch_selection_reset_dialog_message">การดำเนินการนี้จะกู้คืนการเลือกและตัวเลือกแพตช์ของคุณให้เป็นค่าเริ่มต้นที่แนะนำ</string>
+    <string name="patch_selection_reset_package">รีเซ็ตการเลือกแพตช์สำหรับแอป</string>
+    <string name="patch_selection_reset_package_dialog_description">"คุณกำลังจะรีเซ็ตการเลือกแพตช์สำหรับแอป \"%s\" คุณจะต้องเลือกแพตช์แต่ละรายการอีกครั้งด้วยตนเอง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_selection_reset_package_description">รีเซ็ตการเลือกแพตช์สำหรับแอปเดียว</string>
+    <string name="patch_selection_reset_patches">รีเซ็ตการเลือกแพตช์ (เดี่ยว)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"คุณกำลังจะรีเซ็ตการเลือกแพตช์สำหรับ \"%s\" คุณจะต้องเลือกแพตช์แต่ละรายการอีกครั้งด้วยตนเอง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_selection_reset_patches_description">รีเซ็ตการเลือกแพตช์สำหรับชุดแพตช์ที่ระบุ</string>
+    <string name="patch_options_reset_package">รีเซ็ตตัวเลือกแพตช์สำหรับแอป</string>
+    <string name="patch_options_reset_package_dialog_description">"คุณกำลังจะรีเซ็ตตัวเลือกแพตช์สำหรับแอป \"%s\" คุณจะต้องใช้ตัวเลือกแต่ละรายการอีกครั้ง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_options_reset_package_description">รีเซ็ตตัวเลือกแพตช์สำหรับแอปเดียว</string>
+    <string name="patch_options_reset_patches">รีเซ็ตตัวเลือกแพตช์ (เดี่ยว)</string>
+    <string name="patch_options_reset_patches_dialog_description">"คุณกำลังจะรีเซ็ตตัวเลือกแพตช์สำหรับ \"%s\" คุณจะต้องใช้ตัวเลือกแต่ละรายการอีกครั้ง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_options_reset_patches_description">รีเซ็ตตัวเลือกแพตช์สำหรับชุดแพตช์ที่ระบุ</string>
+    <string name="patch_options_reset_all">รีเซ็ตตัวเลือกแพตช์ทั่วโลก</string>
+    <string name="patch_options_reset_all_dialog_description">"คุณกำลังจะรีเซ็ตตัวเลือกแพตช์ทั้งหมด คุณจะต้องใช้ตัวเลือกแต่ละรายการอีกครั้ง
+
+โปรไฟล์แพตช์จะไม่ได้รับผลกระทบ"</string>
+    <string name="patch_options_reset_all_description">รีเซ็ตตัวเลือกแพตช์ทั้งหมด</string>
+    <string name="download_settings">การตั้งค่าดาวน์โหลด</string>
+    <string name="downloader_auto_save_title">บันทึก APK ที่ดาวน์โหลดโดยอัตโนมัติ</string>
+    <string name="downloader_auto_save_description">เก็บ APK ที่ดาวน์โหลดผ่านปลั๊กอินไว้เพื่อใช้ซ้ำ ปิดใช้งานเพื่อลบออกหลังจากการแพตช์</string>
+    <string name="downloader_plugins">ปลั๊กอิน</string>
+    <string name="downloader_plugin_state_trusted">เชื่อถือได้</string>
+    <string name="downloader_plugin_state_failed">ไม่สามารถโหลดได้ คลิกเพื่อดูรายละเอียดเพิ่มเติม</string>
+    <string name="downloader_plugin_state_untrusted">ไม่น่าเชื่อถือ</string>
+    <string name="downloader_plugin_trust_dialog_title">เชื่อถือปลั๊กอินหรือไม่?</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">เพิกถอนความเชื่อถือ?</string>
+    <string name="downloader_plugin_trust_dialog_body">"ชื่อแพ็กเกจ: %1$s
+ลายเซ็น (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_view_error">ดูรายละเอียดข้อผิดพลาด</string>
+    <string name="downloader_plugin_failed_dialog_body">ไม่สามารถโหลด \"%1$s\" ได้ คุณสามารถดูรายละเอียดข้อผิดพลาดหรือถอนการติดตั้งปลั๊กอินได้</string>
+    <string name="downloader_plugin_uninstall_title">ถอนการติดตั้งปลั๊กอินหรือไม่?</string>
+    <string name="downloader_plugin_uninstall_description">คุณแน่ใจหรือไม่ว่าต้องการถอนการติดตั้ง \"%1$s\"?</string>
+    <string name="downloader_plugin_delete_apps_title">ลบแอปที่เลือก</string>
+    <string name="downloader_plugin_delete_apps_description">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่เลือก?</string>
+    <string name="downloader_settings_no_apps">ไม่พบแอปที่ดาวน์โหลด</string>
+    <string name="search_apps">ค้นหาแอป…</string>
+    <string name="yes">ใช่</string>
+    <string name="no">ไม่</string>
+    <string name="edit">แก้ไข</string>
+    <string name="dialog_input_placeholder">ค่า</string>
+    <string name="reset">รีเซ็ต</string>
+    <string name="share">แชร์</string>
+    <string name="patch">แพตช์</string>
+    <string name="select_from_storage">เลือกจากที่จัดเก็บ</string>
+    <string name="select_from_storage_description">เลือกไฟล์ APK จากที่จัดเก็บโดยใช้ตัวเลือกไฟล์</string>
+    <string name="type_anything">พิมพ์อะไรก็ได้เพื่อดำเนินการต่อ</string>
+    <string name="search">ค้นหาแพตช์…</string>
+    <string name="apply">นำไปใช้</string>
+    <string name="help">ช่วยเหลือ</string>
+    <string name="back">ย้อนกลับ</string>
+    <string name="warning">คำเตือน</string>
+    <string name="add">เพิ่ม</string>
+    <string name="close">ปิด</string>
+    <string name="clear">ล้าง</string>
+    <string name="system">ระบบ</string>
+    <string name="light">สว่าง</string>
+    <string name="dark">มืด</string>
+    <string name="black">ดำ</string>
+    <string name="downloaded_apps">แอปที่ดาวน์โหลด</string>
+    <string name="process_runtime">รัน Patcher ในกระบวนการอื่น</string>
+    <string name="process_runtime_description">เร่งความเร็วการแพตช์โดยใช้กระบวนการแยกต่างหาก</string>
+    <string name="process_runtime_description_not_available">ฟีเจอร์นี้ต้องใช้ Android 11 หรือใหม่กว่า</string>
+    <string name="strip_unused_libs">ลบไลบรารีเนทีฟที่ไม่ได้ใช้งาน</string>
+    <string name="strip_unused_libs_description">ลบไลบรารีเนทีฟสำหรับสถาปัตยกรรม CPU ที่ไม่รองรับออกจากแอปที่แก้ไขแล้ว</string>
+    <string name="process_runtime_memory_limit">ขีดจำกัดหน่วยความจำของกระบวนการ Patcher</string>
+    <string name="process_runtime_memory_limit_description">ปริมาณหน่วยความจำสูงสุดที่กระบวนการ Patcher สามารถใช้ได้ (ในหน่วยเมกะไบต์)</string>
+    <string name="reset_to_recommended">รีเซ็ตเป็นค่าที่แนะนำ</string>
+    <string name="patcher_auto_collapse_steps">ยุบขั้นตอน Patcher ที่เสร็จสมบูรณ์โดยอัตโนมัติ</string>
+    <string name="patcher_auto_collapse_steps_description">ยุบวิดเจ็ตความคืบหน้าของ Patcher แต่ละรายการโดยอัตโนมัติหลังจากขั้นตอนทั้งหมดเสร็จสิ้น</string>
+    <string name="patch_bundle_rename">เปลี่ยนชื่อชุดแพตช์</string>
+    <string name="patch_profile_view_options">ดูตัวเลือก</string>
+    <string name="patch_profile_patch_options_title">ตัวเลือกสำหรับ %1$s</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="app_exporting">กำลังส่งออกแอป</string>
+    <string name="export_name_format">รูปแบบชื่อไฟล์ที่ส่งออก</string>
+    <string name="export_name_format_description">ปรับแต่งชื่อไฟล์เริ่มต้นสำหรับแอปที่แก้ไขซึ่งส่งออกแล้ว</string>
+    <string name="export_name_format_dialog_title">รูปแบบชื่อไฟล์ที่ส่งออก</string>
+    <string name="export_name_format_dialog_supporting">ใช้ตัวยึดตำแหน่งด้านล่างเพื่อสร้างชื่อไฟล์ ระบบจะเพิ่มส่วนขยาย .apk โดยอัตโนมัติหากไม่มี</string>
+    <string name="export_name_format_preview_label">ตัวอย่าง</string>
+    <string name="export_name_format_variables">ตัวแปร</string>
+    <string name="export_name_format_reset">รีเซ็ตเป็นค่าเริ่มต้น</string>
+    <string name="export_name_format_error_blank">รูปแบบชื่อไฟล์ต้องไม่ว่างเปล่า</string>
+    <string name="export_name_format_current">รูปแบบปัจจุบัน: %1$s</string>
+    <string name="export_name_format_insert">แทรก</string>
+    <string name="export_name_variable_app_name">ชื่อแอป</string>
+    <string name="export_name_variable_app_name_description">ยืนยันที่จะใช้ชื่อน显\u30FBabble แทน</string>
+    <string name="export_name_variable_package_name">ชื่อแพ็คเกจ</string>
+    <string name="export_name_variable_package_name_description">ยืนยันที่จะใช้ชื่อแพ็คเกจแทน</string>
+    <string name="export_name_variable_app_version">เวอร์ชันแอปพลิเคชัน</string>
+    <string name="export_name_variable_app_version_description">ยืนยันที่จะใช้ชื่อเวอร์ชันของแอปพลิเคชันแทน</string>
+    <string name="export_name_variable_patches_version">เวอร์ชันแพ็คเกจของอัปเดต</string>
+    <string name="export_name_variable_patches_version_description">ยืนยันที่จะใช้เวอร์ชันของแพ็คเกจอัปเดตที่ใช้แทน</string>
+    <string name="export_name_variable_bundle_names">ชื่อวิดีโอ\u306Bแพ็คเกจของอัปเดต</string>
+    <string name="export_name_variable_bundle_names_description">ยืนยันที่จะใช้ชื่อวิดีโอ\u306Bแพ็คเกจที่ใช้แทน</string>
+    <string name="export_name_variable_manager_version">เวอร์ชันของม\u30ABonent</string>
+    <string name="export_name_variable_manager_version_description">ยืนยันที่จะใช้เวอร์ชันของ\u30ABonentแทน</string>
+    <string name="export_name_variable_timestamp">ลงเวลา</string>
+    <string name="export_name_variable_timestamp_description">ยืนยันที่จะใช้วัน\u30ABonentเวลาปัจจุบัน (yyyyMMdd-HHmmss)แทน</string>
+    <string name="export_name_variable_date">วัน\u30ABonent</string>
+    <string name="export_name_variable_date_description">ยืนยันที่จะใช้วัน\u30ABonentปัจจุบัน (yyyyMMdd)แทน</string>
+    <string name="debug_logs_export">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
+    <string name="debug_logs_export_read_failed">ไม่สามารถอ่านบันทึก (รหัสออก %d)</string>
+    <string name="debug_logs_export_failed">ส่งออกบันทึกไม่สำเร็จ</string>
+    <string name="debug_logs_export_success">ส่งออกบันทึกแล้ว</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="api_url_dialog_description">เปลี่ยน URL ของ API ของ Morphe Morphe ใช้ API เพื่อดาวน์โหลดแพตช์และการอัปเดต</string>
+    <string name="api_url_dialog_warning">Morphe เชื่อมต่อกับ API เพื่อดาวน์โหลดแพตช์และการอัปเดต ตรวจสอบให้แน่ใจว่าคุณเชื่อถือ</string>
+    <string name="api_url_dialog_save">ตั้งค่า</string>
+    <string name="api_url_dialog_reset">รีเซ็ต URL ของ API</string>
+    <!-- Morphe -->
+    <string name="github_pat_description">โทเค็นการเข้าถึงส่วนตัวของ GitHub ที่จำเป็นสำหรับการผสานรวม GitHub</string>
+    <string name="set_github_pat_dialog_title">ตั้งค่า GitHub PAT</string>
+    <string name="set_github_pat_dialog_description">ตั้งค่าโทเค็นการเข้าถึงส่วนตัวของ GitHub เพื่อให้สามารถเพิ่ม Pull Requests เป็นแหล่งข้อมูลภายนอกได้ สร้าง PAT ด้วยขอบเขต public_repo</string>
+    <string name="include_github_pat_in_exports_label">รวมในการส่งออกการตั้งค่า</string>
+    <string name="include_github_pat_in_exports_supporting">เพิ่ม PAT นี้ไปยังค่าที่ส่งออกของตัวจัดการ</string>
+    <string name="include_github_pat_in_exports_warning">อย่าแชร์ PAT ของคุณ หากคุณรวมไว้ในการส่งออกการตั้งค่า ให้เก็บไฟล์นั้นเป็นส่วนตัวเพราะมีโทเค็นอยู่</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="device_memory_limit_format">%1$dMB (ปกติ) - %2$dMB (ใหญ่)</string>
+    <string name="patches_force_download">บังคับดาวน์โหลดชุดแพตช์ทั้งหมด</string>
+    <string name="patches_reset">รีเซ็ตชุดแพตช์</string>
+    <string name="storage">ที่เก็บข้อมูล</string>
+    <string name="no_patch_found">ไม่พบแพตช์ โปรดตรวจสอบแพตช์ของคุณ</string>
+    <string name="tab_apps">แอป</string>
+    <string name="tab_patches">ชุดแพตช์</string>
+    <string name="tab_profiles">โปรไฟล์แพตช์</string>
+    <string name="delete">ลบ</string>
+    <string name="disable">ปิดการใช้งาน</string>
+    <string name="enable">อนุญาต</string>
+    <string name="patch_bundle_disabled_toast">ปิด %d แพ็คเกจ</string>
+    <string name="patch_bundle_enabled_toast">เปิด %d แพ็คเกจ</string>
+    <string name="patches_disable_single_dialog_description">ปิด \'%s\'?</string>
+    <string name="patches_enable_single_dialog_description">เปิด \'%s\'?</string>
+    <string name="refresh">รีเฟรช</string>
+    <string name="download_apk">ดาวน์โหลดไฟล์ APK</string>
+    <string name="patches_download_fail">ดาวน์โหลดแพตช์ล้มเหลว: %s</string>
+    <string name="patches_replace_fail">นำเข้าแพตช์ล้มเหลว: %s</string>
+    <string name="no_patched_apps_found">ไม่พบแอปที่ได้รับการแพตช์</string>
+    <string name="patches_selected">%s แพ็คเกจอัปเดตเลือก</string>
+    <string name="patch_profiles_selected">เลือกโปรไฟล์แพตช์ %1$d รายการ</string>
+    <string name="selected_apps_count">%1$d แอปพลิเคชันที่เลือก</string>
+    <string name="selected_apps_delete_dialog_description">ลบแอปที่เลือกออกจากตัวจัดการหรือไม่ แอปที่ติดตั้งบนอุปกรณ์ของคุณจะยังคงอยู่</string>
+    <string name="incompatible_patches">แพตช์ที่ไม่เข้ากัน</string>
+    <string name="universal_patches">แพตช์สากล</string>
+    <string name="patch_selection_reset_toast">การเลือกและตัวเลือกแพตช์ถูกรีเซ็ตเป็นการตั้งค่าเริ่มต้นที่แนะนำแล้ว</string>
+    <string name="patch_options_reset_toast">ตัวเลือกแพตช์ได้รับการรีเซ็ตแล้ว</string>
+    <string name="non_suggested_version_warning_title">เวอร์ชันที่ไม่แนะนำ</string>
+    <string name="non_suggested_version_warning_description">"เวอร์ชันของแอปที่คุณเลือกไม่ตรงกับเวอร์ชันที่แนะนำ
+โปรดใช้เวอร์ชันที่แนะนำ: %s
+
+หากต้องการดำเนินการต่อ ให้ปิดใช้งาน \"ต้องใช้เวอร์ชันแอปที่แนะนำ\" ในการตั้งค่าขั้นสูง"</string>
+    <string name="selection_warning_description">"ขอแนะนำให้ใช้การเลือกและตัวเลือกแพตช์เริ่มต้น การเปลี่ยนแปลงอาจส่งผลให้เกิดปัญหาที่ไม่คาดคิด
+
+คุณต้องเปิดใช้งาน \"อนุญาตให้เปลี่ยนการเลือกและตัวเลือกแพตช์\" ในการตั้งค่าขั้นสูงก่อนจึงจะสามารถสลับแพตช์ได้"</string>
+    <string name="patch_profile_save_action">บันทึกโปรไฟล์แพตช์</string>
+    <string name="patch_profile_select_bundles_title">เลือกชุดแพตช์</string>
+    <string name="patch_profile_select_bundles_description">เลือกชุดแพตช์ที่จะรวมอยู่ในโปรไฟล์นี้</string>
+    <string name="patch_profile_select_bundles_empty">ไม่มีชุดแพตช์พร้อมให้บันทึก</string>
+    <string name="patch_profile_name_title">ตั้งชื่อโปรไฟล์แพตช์</string>
+    <string name="patch_profile_name_description">ป้อนชื่อสำหรับโปรไฟล์แพตช์นี้ หรือเลือกชื่อด้านล่างเพื่ออัปเดต</string>
+    <string name="patch_profile_update_existing_title">อัปเดตโปรไฟล์ที่มีอยู่</string>
+    <string name="patch_profile_update_existing_description">แตะโปรไฟล์ที่บันทึกไว้เพื่อเขียนทับ หรือปล่อยไว้โดยไม่ต้องเลือกเพื่อสร้างโปรไฟล์ใหม่</string>
+    <string name="patch_profile_name_hint">ชื่อโปรไฟล์</string>
+    <string name="patch_profile_saved_toast">บันทึกโปรไฟล์แพตช์ \"%1$s\" แล้ว</string>
+    <string name="patch_profile_duplicate_toast">โปรไฟล์แพตช์ \"%1$s\" มีอยู่แล้วสำหรับแอปนี้</string>
+    <string name="patch_profile_updated_toast">อัปเดตโปรไฟล์แพตช์ \"%1$s\" แล้ว</string>
+    <string name="patch_profile_save_failed_toast">ไม่สามารถบันทึกโปรไฟล์แพตช์ได้</string>
+    <string name="patch_profile_rename">เปลี่ยนชื่อ</string>
+    <string name="patch_profile_rename_title">เปลี่ยนชื่อโปรไฟล์แพตช์</string>
+    <string name="patch_profile_version_override_action">แก้ไขการตั้งค่าเวอร์ชันโปรไฟล์</string>
+    <string name="patch_profile_version_override_title">การตั้งค่าเวอร์ชันสำหรับ \"%1$s\"</string>
+    <string name="patch_profile_version_override_message">ตั้งค่าเวอร์ชันแอปที่เฉพาะเจาะจงเพื่อจัดเก็บในโปรไฟล์นี้ หรือกำหนดเป้าหมายทุกเวอร์ชัน</string>
+    <string name="patch_profile_version_override_label">เวอร์ชันแอป</string>
+    <string name="patch_profile_version_override_hint">เช่น 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">ใช้ทุกเวอร์ชัน</string>
+    <string name="patch_profile_version_override_saved_toast">อัปเดตเวอร์ชันโปรไฟล์แล้ว</string>
+    <string name="patch_profile_version_override_failed_toast">ไม่สามารถอัปเดตเวอร์ชันโปรไฟล์ได้</string>
+    <string name="patch_profile_version_override_set_to_all">ไม่ได้ป้อนเวอร์ชัน บันทึกเป็น \"%1$s\"</string>
+    <string name="patch_profile_version_conflict_title">เก็บการแทนที่เวอร์ชันหรือไม่?</string>
+    <string name="patch_profile_version_conflict_message">"เวอร์ชันปัจจุบัน: %1$s
+เวอร์ชันที่จะเข้ามา: %2$s
+ควรบันทึกลงในโปรไฟล์นี้?"</string>
+    <string name="patch_profile_version_conflict_use_new">ใช้เวอร์ชันที่เข้ามา</string>
+    <string name="patch_profile_version_conflict_keep_existing">เก็บเวอร์ชันที่มีอยู่</string>
+    <string name="patch_profile_empty_state">บันทึกการกำหนดค่าจากหน้าจอเลือกแพตช์เพื่อดูที่นี่</string>
+    <string name="patch_profile_missing_bundles_toast">แพ็กเกจบางรายการในโปรไฟล์นี้ไม่พร้อมใช้งานและจะถูกข้ามไป</string>
+    <string name="patch_profile_changed_patches_toast">แพตช์หรือตัวเลือกบางรายการในโปรไฟล์นี้ไม่ตรงกับแพ็กเกจแล้วและจะถูกข้ามไป</string>
+    <string name="patch_profile_no_available_bundles_toast">ไม่มีแพ็กเกจใดในโปรไฟล์นี้พร้อมใช้งาน โปรดอัปเดตแพ็กเกจของคุณแล้วลองอีกครั้ง</string>
+    <string name="patch_profile_launch_error">ไม่สามารถเปิดโปรไฟล์แพตช์นี้ได้</string>
+    <string name="patch_profile_show_more">แสดงเพิ่มเติม</string>
+    <string name="patch_profile_show_less">แสดงน้อยลง</string>
+    <string name="patch_profile_created_at">สร้างเมื่อ %1$s</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (ไม่พร้อมใช้งาน)</string>
+    <string name="patch_profile_bundle_change_uid">เปลี่ยน UID</string>
+    <string name="patch_profile_bundle_change_uid_title">เปลี่ยน UID สำหรับ %1$s</string>
+    <string name="patch_profile_bundle_change_uid_invalid">ป้อน UID ตัวเลขที่ถูกต้อง</string>
+    <string name="patch_profile_bundle_change_uid_success">อัปเดต Bundle UID เป็น %1$d สำเร็จแล้ว</string>
+    <string name="patch_profile_bundle_change_uid_not_found">ไม่พบ patch bundle ในเครื่องที่มี UID %1$d</string>
+    <string name="patcher_process_exit_message">กระบวนการ Patcher สิ้นสุดลงด้วยโค้ด %1$d</string>
+    <string name="patcher_memory_adjustment_title">Patcher ใช้หน่วยความจำเกิน</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_retry">ลองอีกครั้ง</string>
+    <string name="patcher_memory_adjustment_dismiss">ปิด</string>
+    <string name="patcher_missing_patch_title">การเลือก Patch ต้องการความสนใจ</string>
+    <string name="patcher_preflight_missing_patch_remove">นำ Patch ที่ขาดหายไปออก</string>
+    <string name="patcher_preflight_missing_patch_proceed">ดำเนินการต่อ</string>
+    <string name="patcher_preflight_missing_patch_message">"patches ที่จะถูกลบไม่สามารถนำมาใช้ในชุดปัจจุบันได้
+%1$s
+คุณสามารถลบพวกมันออกได้เอง หรือเปลี่ยนการเลือก หรือดำเนินการต่อด้วย"</string>
+    <string name="patcher_missing_patch_review">ตรวจสอบการเลือก</string>
+    <string name="patch_selector_missing_patch_title">เลือกแพตช์ที่ขาดหายไปอีกครั้ง</string>
+    <string name="patch_selector_missing_patch_message">"แพตช์เหล่านี้ต้องเลือกอีกครั้ง:
+%1$s
+เปิดใช้งานอีกครั้ง (หรือเลือกรายการอื่น) แล้วลองใช้แพตช์อีกครั้ง"</string>
+    <string name="patch_profile_delete_multiple_dialog_description">ลบโปรไฟล์แพตช์ที่เลือกหรือไม่?</string>
+    <string name="this_version">เวอร์ชันนี้</string>
+    <string name="universal">แอปใดก็ได้</string>
+    <string name="search_patches">ค้นหาแพตช์</string>
+    <string name="app_version_not_compatible">"แพตช์นี้ไม่สามารถใช้งานร่วมกับแอปเวอร์ชันที่เลือก (%1$s).
+
+ใช้งานได้กับเวอร์ชันต่อไปนี้เท่านั้น: %2$s"</string>
+    <string name="failed_to_load_apk">ไม่สามารถโหลด APK ได้</string>
+    <string name="loading">กำลังโหลด…</string>
+    <string name="not_installed">ไม่ได้ติดตั้ง</string>
+    <string name="installed">ติดตั้งแล้ว</string>
+    <string name="app_info">ข้อมูลแอป</string>
+    <string name="uninstall">ถอนการติดตั้ง</string>
+    <string name="repatch">ติดตั้งแพตช์ใหม่</string>
+    <string name="install_type">ประเภทการติดตั้ง</string>
+    <string name="package_name">ชื่อแพ็กเกจ</string>
+    <string name="original_package_name">ชื่อแพ็กเกจเดิม</string>
+    <string name="applied_patches">แพตช์ที่ใช้แล้ว</string>
+    <string name="view_applied_patches">ดูแพตช์ที่ใช้แล้ว</string>
+    <string name="patch_bundles_used">ชุดแพตช์ที่ใช้</string>
+    <string name="applied_patches_empty">ไม่มีแพตช์บันทึกไว้สำหรับแอปนี้</string>
+    <string name="applied_patches_bundle_missing">ข้อมูลเมตาของชุดไม่พร้อมใช้งาน กำลังแสดงชื่อแพตช์ที่บันทึกไว้</string>
+    <string name="no_patch_bundles_tracked">ไม่มีชุดแพตช์ที่บันทึกไว้สำหรับแอปนี้</string>
+    <string name="mount_install">ตัวติดตั้งเมานต์รูท</string>
+    <string name="mounted">เมานต์แล้ว</string>
+    <string name="unmounted">ไม่ได้เมานต์</string>
+    <string name="install_type_custom_installer">ตัวติดตั้งแบบกำหนดเอง</string>
+    <string name="install_type_system_installer">ตัวติดตั้งระบบ</string>
+    <string name="install_type_mount_label">ตัวติดตั้งเมานต์รูท</string>
+    <string name="not_mounted">ไม่ได้เมานต์</string>
+    <string name="mount">เมานต์</string>
+    <string name="unmount">ยกเลิกเมานต์</string>
+    <string name="unmount_confirm_description">คุณต้องการยกเลิกการเมานต์แอปหรือไม่</string>
+    <string name="saved_install">บันทึก</string>
+    <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
+    <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
+    <string name="unpatch_app">ยกเลิกการแก้ไขแอปหรือไม่?</string>
+    <string name="unpatch_description">คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการแก้ไขแอปนี้?</string>
+    <string name="downloader_app_not_found">โปรแกรมดาวน์โหลดไม่พบแอป</string>
+    <string name="downloader_error">ข้อผิดพลาดของโปรแกรมดาวน์โหลด: %s</string>
+    <string name="downloader_no_plugins_installed">ไม่มีโปรแกรมดาวน์โหลดติดตั้งอยู่</string>
+    <string name="downloader_no_plugins_available">มีตัวดาวน์โหลดติดตั้งอยู่ แต่ไม่มีตัวใดที่เชื่อถือได้ โปรดตรวจสอบการตั้งค่าของคุณ</string>
+    <string name="downloader_plugin_uninstall_success">ถอนการติดตั้ง %1$s แล้ว</string>
+    <string name="downloader_plugin_uninstall_failed">ไม่สามารถถอนการติดตั้ง %1$s ได้</string>
+    <string name="downloaded_apps_export">ส่งออกแอปที่เลือก</string>
+    <string name="downloaded_apps_export_success">ส่งออกแอป %1$d รายการ</string>
+    <string name="downloaded_apps_export_failed">ไม่สามารถส่งออกแอปที่ดาวน์โหลดได้</string>
+    <string name="already_patched">แก้ไขแล้ว</string>
+    <string name="patch_selector_sheet_filter_title">ตัวกรอง</string>
+    <string name="patch_selector_sheet_filter_compat_title">ความเข้ากันได้</string>
+    <string name="patch_selector_sheet_filter_sort_title">การจัดเรียง</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">ตัวอักษ៍</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">มีการตั้งค่า</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">ไม่มีการตั้งค่า</string>
+    <string name="string_option_menu_description">ตัวเลือกเพิ่มเติม</string>
+    <string name="option_preset_custom_value">ค่าที่กำหนดเอง</string>
+    <string name="path_selector">เลือกจากที่เก็บข้อมูล</string>
+    <string name="path_selector_parent_dir">ไดเรกทอรีเดิม</string>
+    <string name="path_selector_dirs">ไดเรกทอรี</string>
+    <string name="path_selector_files">ไฟล์</string>
+    <string name="show_password_field">แสดงรหัสผ่าน</string>
+    <string name="hide_password_field">ซ่อนรหัสผ่าน</string>
+    <string name="installer_primary_title">โปรแกรมติดตั้งหลัก</string>
+    <string name="installer_fallback_title">โปรแกรมติดตั้งสำรอง</string>
+    <string name="installer_internal_name">โปรแกรมติดตั้งระบบ</string>
+    <string name="installer_internal_description">ใช้โปรแกรมติดตั้งแพ็คเกจ Android</string>
+    <string name="installer_auto_saved_name">ตัวติดตั้งแบบ Rooted mount</string>
+    <string name="installer_auto_saved_description">ติดตั้ง APK ที่แก้ไขแล้วทับแอปที่ติดตั้ง (ต้องใช้ root)</string>
+    <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
+    <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
+    <string name="installer_none_description">ไม่ได้กำหนดค่าตัวติดตั้งสำรอง</string>
+    <string name="installer_status_requires_root">ต้องได้รับสิทธิ์ root</string>
+    <string name="installer_status_not_supported">ไม่รองรับการดำเนินการนี้</string>
+    <string name="installer_status_shizuku_not_installed">ติดตั้ง Shizuku หรือ Sui เพื่อใช้ตัวเลือกนี้</string>
+    <string name="installer_status_shizuku_not_running">เริ่ม Shizuku หรือ Sui แล้วลองอีกครั้ง</string>
+    <string name="installer_status_shizuku_permission">ให้สิทธิ์ Shizuku แก่ Morphe จากแอป Shizuku</string>
+    <string name="installer_mount_warning_title">เลือกตัวติดตั้งแบบ Rooted mount</string>
+    <string name="installer_mount_warning_install">ตัวติดตั้งหลักของคุณตั้งค่าเป็นตัวติดตั้งแบบ Rooted mount แอปที่บันทึกนี้ไม่ได้ติดตั้งโดยใช้ mount</string>
+    <string name="installer_mount_warning_update">โปรแกรมติดตั้งหลักของคุณถูกตั้งค่าเป็นโปรแกรมติดตั้งเมาท์ที่มี root แอปที่บันทึกไว้่นี้ไม่ได้ติดตั้งโดยใช้เมาท์</string>
+    <string name="installer_mount_warning_uninstall">โปรแกรมติดตั้งหลักของคุณถูกตั้งค่าเป็นโปรแกรมติดตั้งเมาท์ที่มี root แอปที่บันทึกไว้่นี้ไม่ได้ติดตั้งโดยใช้เมาท์</string>
+    <string name="installer_mount_mismatch_title">ไม่ได้เลือกโปรแกรมติดตั้งเมาท์ที่มี root</string>
+    <string name="installer_mount_mismatch_install">แอปนี้ติดตั้งโดยใช้โปรแกรมติดตั้งเมาท์ที่มี root สลับโปรแกรมติดตั้งหลักของคุณกลับไปใช้การดำเนินการเมาท์ จากนั้นเมาท์</string>
+    <string name="installer_mount_mismatch_update">แอปนี้ติดตั้งโดยใช้โปรแกรมติดตั้งเมาท์ที่มี root สลับโปรแกรมติดตั้งหลักของคุณกลับไปใช้การดำเนินการเมาท์ จากนั้นเมาท์อีกครั้ง</string>
+    <string name="installer_mount_mismatch_uninstall">แอปนี้ติดตั้งโดยใช้โปรแกรมติดตั้งเมาท์ที่มี root สลับโปรแกรมติดตั้งหลักของคุณกลับไปใช้การดำเนินการเมาท์ จากนั้นยกเลิกการเมาท์</string>
+    <string name="mount_version_mismatch_title">การเมาท์ล้มเหลว</string>
+    <string name="mount_version_mismatch_message">เวอร์ชันแอปสต็อก (%2$s) ไม่ตรงกับเวอร์ชันแอปที่แพตช์แล้ว (%1$s) เมาท์เวอร์ชันสต็อกที่ตรงกัน จากนั้นลองอีกครั้ง</string>
+    <string name="installer_status_shizuku_unsupported">เวอร์ชัน Shizuku ที่ติดตั้งไม่รองรับ</string>
+    <string name="installer_action_open_shizuku">เปิด Shizuku</string>
+    <string name="installer_shizuku_launch_failed">ไม่สามารถเปิด Shizuku ได้ เปิดแอปด้วยตนเองและลองอีกครั้ง</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="installer_custom_tab_saved">บันทึก</string>
+    <string name="installer_custom_saved_note">โปรแกรมติดตั้งที่ผู้ใช้เพิ่มด้วยตนเองไปยังเมนูเลือกโปรแกรมติดตั้งหลัก &amp; สำรอง</string>
+    <string name="installer_custom_tab_auto_saved">บันทึกอัตโนมัติ</string>
+    <string name="installer_custom_auto_note">โปรแกรมติดตั้งที่ตรวจพบและเพิ่มโดยอัตโนมัติไปยังเมนูเลือกโปรแกรมติดตั้งหลัก &amp; สำรอง</string>
+    <string name="installer_custom_tab_discover">ค้นพบ</string>
+    <string name="installer_custom_close">ปิด</string>
+    <string name="installer_custom_manage_description">บันทึกกิจกรรมตัวติดตั้งของบุคคลที่สามเพื่อใช้เป็นตัวติดตั้งหลักหรือตัวสำรอง</string>
+    <string name="installer_custom_input_label">ชื่อแพ็กเกจ</string>
+    <string name="installer_custom_package_hint">พิมพ์ชื่อแพ็กเกจแล้วแตะ \"ค้นหาตัวติดตั้ง\" เพื่อค้นหากิจกรรมตัวติดตั้ง</string>
+    <string name="installer_custom_lookup">ค้นหาตัวติดตั้ง</string>
+    <string name="installer_custom_lookup_empty">ป้อนชื่อแพ็กเกจก่อน</string>
+    <string name="installer_custom_searching">กำลังค้นหากิจกรรมตัวติดตั้ง…</string>
+    <string name="installer_custom_lookup_found">พบตัวติดตั้ง %1$d รายการ</string>
+    <string name="installer_custom_action_add">บันทึกตัวติดตั้ง</string>
+    <string name="installer_custom_action_remove">ลบตัวติดตั้งที่บันทึกไว้</string>
+    <string name="installer_custom_builtin_indicator">บันทึกอัตโนมัติ</string>
+    <string name="installer_custom_saved_indicator">บันทึกแล้ว</string>
+    <string name="installer_custom_lookup_none">ไม่พบกิจกรรมตัวติดตั้งสำหรับ %1$s</string>
+    <string name="installer_custom_candidates_title">กิจกรรมที่มีอยู่สำหรับ %1$s</string>
+    <string name="installer_custom_saved_header">ตัวติดตั้งที่บันทึกไว้</string>
+    <string name="installer_custom_empty">ยังไม่มีตัวติดตั้งที่กำหนดเองถูกบันทึกไว้</string>
+    <string name="installer_custom_added">บันทึกตัวติดตั้งที่กำหนดเองแล้ว</string>
+    <string name="installer_custom_exists">ตัวติดตั้งนี้ถูกบันทึกไว้แล้ว</string>
+    <string name="installer_custom_removed">ลบตัวติดตั้งที่กำหนดเองแล้ว</string>
+    <string name="installer_custom_remove_failed">ไม่สามารถลบตัวติดตั้งได้ โปรดลองอีกครั้ง</string>
+    <string name="installer_hint_generic">การติดตั้งล้มเหลว โปรดลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
+    <string name="installer_hint_blocked">การติดตั้งถูกบล็อกโดย Android โปรดตรวจสอบ Play Protect หรือการตั้งค่าความปลอดภัย</string>
+    <string name="installer_hint_conflict">แอปอื่นที่มีชื่อแพ็กเกจนี้ติดตั้งอยู่แล้ว โปรดยกเลิกการติดตั้งก่อนดำเนินการต่อ</string>
+    <string name="installer_hint_incompatible">APK นี้ไม่สามารถใช้งานร่วมกับอุปกรณ์หรือเวอร์ชัน Android นี้ได้</string>
+    <string name="installer_hint_invalid">APK นี้ไม่ถูกต้องหรือเสียหาย</string>
+    <string name="installer_hint_storage">พื้นที่เก็บข้อมูลไม่เพียงพอสำหรับการติดตั้ง</string>
+    <string name="installer_hint_timeout">การติดตั้งหมดเวลา ลองอีกครั้ง</string>
+    <string name="installer_hint_aborted">การติดตั้งถูกยกเลิก</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+รายละเอียด: %2$s"</string>
+    <string name="installer_external_launched">กำลังเปิด %1$s…</string>
+    <string name="installer_external_timeout">%1$s ไม่ได้ยืนยันการติดตั้ง โปรดตรวจสอบแอปอื่นแล้วลองอีกครั้ง</string>
+    <string name="installer_external_success">%1$s รายงานว่าติดตั้งสำเร็จแล้ว</string>
+    <string name="installer_external_finished_no_change">%s การติดตั้งสำเร็จโดยไม่ต้องติดตั้งแอปพลิเคชัน โปรดตรวจสอบข้อความผิดพลาดในตัวติดตั้งและลองอีกครั้ง</string>
+    <string name="installing_ellipsis">กำลังติดตั้ง…</string>
+    <string name="uninstalling_ellipsis">กำลังถก uninstall…</string>
+    <string name="mounting_ellipsis">กำลังเมานท์…</string>
+    <string name="unmounting">กำลังยกเลิกการเมานท์…</string>
+    <string name="install_app">ติดตั้ง</string>
+    <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
+    <string name="install_app_fail_title">การติดตั้งล้มเหลว</string>
+    <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
+    <string name="install_app_fail_missing_stock">ไม่พบ APK ต้นฉบับสำหรับการติดตั้งของระบบ.</string>
+    <string name="mount_split_not_supported">ตัวติดตั้งระบบ rooting ไม่สามารถใช้งาน APK อาร์เคดแบดส่วนต\u30BBត.</string>
+    <string name="mount_app_fail_title">การติดตั้งล้มเหลว</string>
+    <string name="install_timeout_message">การติดตั้งไม่เสร็จสมบูรณ์ โปรดตรวจสอบหน้าต่างตัวติดตั้งของระบบแล้วลองอีกครั้ง</string>
+    <string name="uninstall_timeout_message">การถอนติดตั้งเสร็จสิ้นผิดพลาด โปรดตรวจสอบข้อความในหน้าต dialогถอนติดตั้งและลองอีกครั้ง.</string>
+    <string name="reinstall_app_fail">ไม่สามารถติดตั้งแอปใหม่ได้: %s</string>
+    <string name="uninstall_app_fail">ไม่สามารถถอนการติดตั้งแอปได้: %s</string>
+    <string name="open_app">เปิด</string>
+    <string name="save_apk">บันทึก APK</string>
+    <string name="save_apk_success">บันทึก APK สำเร็จ</string>
+    <string name="saved_app_export_success">ส่งออกแอปที่แก้ไขแล้ว</string>
+    <string name="saved_app_export_failed">ส่งออกแอปที่แก้ไขแล้วไม่สำเร็จ</string>
+    <string name="saved_app_removed_toast">ลบแอปที่บันทึกไว้แล้ว</string>
+    <string name="saved_app_copy_removed_toast">ลบคู่มือที่บันทึกไว้</string>
+    <string name="delete_saved_app_title">ลบแอปที่บันทึกไว้</string>
+    <string name="delete_saved_app_description">การดำเนินการนี้จะลบรายการแอปที่บันทึกไว้และ APK ที่เก็บไว้</string>
+    <string name="delete_saved_entry_title">ลบรายการแอปที่บันทึกไว้</string>
+    <string name="delete_saved_entry_description">นี่จะเป็นการลบรายการแอปที่บันทึกไว้และ APK ที่บันทึกไว้ แอปจะยังคงติดตั้งอยู่</string>
+    <string name="saved_app_launch_unavailable">ติดตั้งแอปก่อนเปิด</string>
+    <string name="install_saved_app">ติดตั้ง</string>
+    <string name="remount_saved_app">เมานต์</string>
+    <string name="update_saved_app">อัปเดต</string>
+    <string name="saved_app_install_success">ติดตั้งแอปที่บันทึกไว้สำเร็จแล้ว</string>
+    <string name="saved_app_install_failed">ติดตั้งแอปที่บันทึกไว้ไม่สำเร็จ</string>
+    <string name="saved_app_uninstall_title">ถอนการติดตั้งเวอร์ชันที่ติดตั้งแล้วหรือไม่?</string>
+    <string name="saved_app_uninstall_description">นี่จะเป็นการลบเฉพาะเวอร์ชันที่ติดตั้งเท่านั้น APK ที่บันทึกไว้ของคุณจะยังคงอยู่</string>
+    <string name="saved_app_install_missing">ไม่พบ APK ที่บันทึกไว้</string>
+    <string name="save_logs">บันทึก</string>
+    <string name="plugin_activity_dialog_body">ต้องมีการโต้ตอบจากผู้ใช้เพื่อดำเนินการกับปลั๊กอินนี้ต่อไป</string>
+    <string name="select_install_type">เลือกประเภทการติดตั้ง</string>
+    <string name="patcher_step_group_preparing">กำลังเตรียม</string>
+    <string name="patcher_step_load_patches">กำลังโหลดแพตช์</string>
+    <string name="patcher_step_prepare_split_apk">รวม APK ที่แบ่งส่วน</string>
+    <string name="patcher_step_unpack">อ่านไฟl์ APK</string>
+    <string name="patcher_step_group_patching">กำลังแพตช์</string>
+    <string name="patcher_step_group_saving">กำลังบันทึก</string>
+    <string name="patcher_step_write_patched">กำลังเขียนไฟล์ APK ที่ได้รับการแพตช์</string>
+    <string name="patcher_step_sign_apk">กำลังลงนามไฟล์ APK ที่ได้รับการแพตช์</string>
+    <string name="patcher_notification_title">กำลังดำเนินการแพตช์…</string>
+    <string name="patcher_notification_text">แตะเพื่อกลับไปยัง Patcher</string>
+    <string name="patcher_stop_confirm_title">หยุด Patcher</string>
+    <string name="patcher_stop_confirm_description">คุณแน่ใจหรือไม่ว่าต้องการหยุดกระบวนการแพตช์?</string>
+    <string name="patcher_install_in_progress_title">กำลังติดตั้ง</string>
+    <string name="patcher_install_in_progress">กำลังติดตั้ง โปรดรอสักครู่</string>
+    <string name="patcher_install_in_progress_leave">ออกไปเลย</string>
+    <string name="patcher_install_in_progress_stay">อยู่ที่นี่</string>
+    <string name="patcher_mount_in_progress_title">กำลังเมาท์</string>
+    <string name="patcher_mount_in_progress">กำลังเมาท์ โปรดรอสักครู่</string>
+    <string name="applying_patches">กำลังใช้แพตช์</string>
+    <string name="applying_patch">กำลังใช้ %s</string>
+    <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
+    <string name="save_patched_app_dialog_title">ออกจาก Patcher?</string>
+    <string name="save_patched_app_dialog_message">คุณกำลังจะออกจาก Patcher แอปที่แพตช์แล้วจะสูญหายไป เว้นแต่คุณจะบันทึกไว้สำหรับภายหลัง</string>
+    <string name="save_patched_app_dialog_save">บันทึกแอปที่แพตช์แล้ว</string>
+    <string name="save_patched_app_dialog_leave">ออกไปโดยไม่บันทึก</string>
+    <string name="save_patched_app_dialog_cancel">คงอยู่ในการแก้ไข</string>
+    <string name="save_patched_app_dialog_hint_save">เก็บ APK ที่แก้ไขแล้วไว้ในแท็บแอปเพื่อการติดตั้งในอนาคต</string>
+    <string name="save_patched_app_dialog_hint_leave">ทิ้ง APK ที่แก้ไขแล้วและกลับไปยังหน้าจอก่อนหน้า</string>
+    <string name="patched_app_saved_toast">บันทึกแอปที่แก้ไขแล้วสำหรับภายหลัง</string>
+    <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
+    <string name="step_completed">เสร็จสมบูรณ์</string>
+    <string name="step_failed">ล้มเหลว</string>
+    <string name="step_running">กำลังทำงาน</string>
+    <string name="step_waiting">รออยู่</string>
+    <string name="expand_content">ขยาย</string>
+    <string name="collapse_content">ย่อ</string>
+    <string name="drag_handle">จัดลำดับใหม่</string>
+    <string name="more">เพิ่มเติม</string>
+    <string name="less">น้อยลง</string>
+    <string name="continue_">ดำเนินการต่อ</string>
+    <string name="dismiss">ปิด</string>
+    <string name="version">เวอร์ชัน</string>
+    <string name="published">เผยแพร่แล้ว</string>
+    <string name="developer_options">ตัวเลือกนักพัฒนา</string>
+    <string name="developer_options_description">ตัวเลือกสำหรับการแก้ไขปัญหา</string>
+    <string name="patches_update_success">อัปเดตสำเร็จ</string>
+    <string name="patches_update_unavailable">ไม่มีอัปเดตให้ใช้งาน</string>
+    <string name="view_patches">ดูแพตช์</string>
+    <string name="patches_view_any_version">ทุกเวอร์ชัน</string>
+    <string name="patches_view_any_package">ทุกแพ็กเกจ</string>
+    <string name="patches_delete_single_dialog_description">คุณแน่ใจหรือไม่ว่าต้องการลบ \"%s\"?</string>
+    <string name="patches_delete_multiple_dialog_description">คุณแน่ใจหรือไม่ว่าต้องการลบชุดแพตช์ที่เลือก?</string>
+    <string name="about_revanced_manager">เกี่ยวกับ Morphe</string>
+    <string name="revanced_manager_description">"Morphe เป็นโครงการโอเพนซอร์สเชิงทดลองที่มุ่งเน้นไปที่การสร้างการแพตช์แอป Android ยอดนิยมที่ทันสมัยและคล่องตัว
+
+Morphe เป็นโอเพนซอร์สในแก่นแท้ โดยอาศัยข้อเสนอแนะและการสนับสนุนจากชุมชนเพื่อขับเคลื่อนนวัตกรรมในอนาคต"</string>
+    <string name="here">ที่นี่</string>
+    <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
+    <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>
+    <string name="update_completed">ติดตั้งอัปเดตแล้ว</string>
+    <string name="install_update_manager_failed">ล้มเหลวในการติดตั้งอัปเดต</string>
+    <string name="manual_update_check">ตรวจสอบอัปเดต</string>
+    <string name="manual_update_check_description">ตรวจสอบอัปเดตด้วยตนเอง</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="update_checking_manager">ตรวจสอบอัปเดตเมื่อเปิดแอป</string>
+    <string name="update_checking_manager_description">ตรวจสอบเวอร์ชันใหม่ของ Morphe เมื่อแอปพลิเคชันเริ่มทำงาน</string>
+    <string name="manager_prereleases">ใช้เวอร์ชันทดลอง</string>
+    <string name="manager_prereleases_description">ใช้เวอร์ชันทดลองของ Morphe</string>
+    <string name="update_published">เผยแพร่เมื่อ %s</string>
+    <string name="battery_optimization_notification">ต้องปิดการใช้งานการเพิ่มประสิทธิภาพแบตเตอรี่เพื่อให้ Morphe ทำงานได้อย่างถูกต้องในเบื้องหลัง คลิกที่นี่เพื่อปิดการใช้งานการเพิ่มประสิทธิภาพ</string>
+    <string name="installing_manager_update">กำลังติดตั้งอัปเดต…</string>
+    <string name="downloading_manager_update">กำลังดาวน์โหลดอัปเดต…</string>
+    <string name="manager_update_banner_title">กำลังดาวน์โหลดอัปเดตตัวจัดการ</string>
+    <string name="download_manager_failed">ดาวน์โหลดอัปเดตไม่สำเร็จ: %s</string>
+    <string name="save">บันทึก</string>
+    <string name="save_with_count">บันทึก (%1$s)</string>
+    <string name="update">อัปเดต</string>
+    <string name="empty">ว่างเปล่า</string>
+    <string name="just_now">เมื่อสักครู่</string>
+    <string name="minutes_ago">เมื่อ %s นาทีที่แล้ว</string>
+    <string name="hours_ago">เมื่อ %s ชั่วโมงที่แล้ว</string>
+    <string name="days_ago">เมื่อ %s วันที่แล้ว</string>
+    <string name="invalid_date">วันที่ไม่ถูกต้อง</string>
+    <string name="input_dialog_value_invalid">ค่าไม่ถูกต้อง</string>
+    <string name="option_required">ตัวเลือกนี้จำเป็น</string>
+    <string name="required_options_screen">ตัวเลือกที่จำเป็น</string>
+    <string name="failed_to_check_updates">ไม่สามารถตรวจสอบการอัปเดตได้: %s</string>
+    <string name="no_update_available">ไม่มีการอัปเดตพร้อมใช้งาน</string>
+    <string name="update_check">กำลังตรวจสอบการอัปเดต…</string>
+    <string name="update_available_dialog_description">Morphe เวอร์ชันใหม่ (%s) พร้อมใช้งานแล้ว</string>
+    <string name="failed_to_download_update">ไม่สามารถดาวน์โหลดอัปเดตได้: %s</string>
+    <string name="download">ดาวน์โหลด</string>
+    <string name="resume_download">ดำเนินการดาวน์โหลดต่อ</string>
+    <string name="download_confirmation_metered">"ขณะนี้คุณกำลังเชื่อมต่อแบบจำกัดปริมาณข้อมูล และอาจมีค่าบริการข้อมูลจากผู้ให้บริการของคุณ
+
+คุณยังต้องการดำเนินการต่อหรือไม่?"</string>
+    <string name="download_update_confirmation">ดาวน์โหลดอัปเดตหรือไม่?</string>
+    <string name="no_contributors_found">ไม่พบผู้ร่วมให้ข้อมูล</string>
+    <string name="select">เลือก</string>
+    <string name="select_deselect_all">เลือกหรือยกเลิกการเลือกทั้งหมด</string>
+    <string name="deselect_all">ยกเลิกการเลือกทั้งหมด</string>
+    <string name="deselect_bundle">ยกเลิกการเลือกชุดปัจจุบัน</string>
+    <string name="select_patches_type_dialog_description">เพิ่มชุดแพตช์ใหม่จาก URL หรือไฟล์ในเครื่อง</string>
+    <string name="local_patches_description">เพิ่มชุดแพตช์จากที่เก็บในเครื่อง</string>
+    <string name="remote_patches_description">เพิ่มชุดแพตช์จาก URL ชุดแพตช์สามารถอัปเดตได้โดยอัตโนมัติ</string>
+    <string name="recommended">แนะนำ</string>
+    <string name="installation_failed_dialog_title">การติดตั้งล้มเหลว</string>
+    <string name="installation_cancelled_dialog_title">การติดตั้งถูกยกเลิก</string>
+    <string name="installation_blocked_dialog_title">การติดตั้งถูกบล็อก</string>
+    <string name="installation_conflict_dialog_title">การติดตั้งขัดแย้งกัน</string>
+    <string name="installation_incompatible_dialog_title">การติดตั้งเข้ากันไม่ได้</string>
+    <string name="installation_invalid_dialog_title">การติดตั้งไม่ถูกต้อง</string>
+    <string name="installation_storage_issue_dialog_title">พื้นที่เก็บข้อมูลไม่เพียงพอ</string>
+    <string name="installation_timeout_dialog_title">การติดตั้งหมดเวลา</string>
+    <string name="installation_failed_description">การติดตั้งล้มเหลวเนื่องจากเหตุผลที่ไม่ทราบ ลองอีกครั้งหรือไม่</string>
+    <string name="installation_aborted_description">การติดตั้งถูกยกเลิกด้วยตนเอง ลองอีกครั้งหรือไม่</string>
+    <string name="installation_blocked_description">การติดตั้งถูกบล็อก โปรดตรวจสอบ การตั้งค่าความปลอดภัยของอุปกรณ์ แล้วลองอีกครั้ง</string>
+    <string name="installation_conflict_description">การติดตั้งถูกป้องกันโดยแอปพลิเคชันที่มีอยู่แล้ว ถอนการติดตั้งแอปพลิเคชันที่มีอยู่ แล้วลองอีกครั้งหรือไม่</string>
+    <string name="installation_signature_mismatch_dialog_title">ทับซ้อนกัน</string>
+    <string name="installation_signature_mismatch_description">アプリインストール\u306EПодписьต่างจากตนที่มีอยู่แล้ว เคอร์\u30ABonent vô hiệu hóaอุปกรณ์เดิมแล้วต้องติดตั้งใหม่?</string>
+    <string name="installation_incompatible_description">แอปพลิเคชันนี้ไม่เข้ากันกับอุปกรณ์นี้ ใช้ APK ที่เข้ากันได้กับอุปกรณ์นี้ แล้วลองอีกครั้ง</string>
+    <string name="installation_invalid_description">แอปพลิเคชันไม่ถูกต้อง ถอนการติดตั้งแอปพลิเคชัน แล้วลองอีกครั้งหรือไม่</string>
+    <string name="installation_storage_issue_description">ไม่สามารถติดตั้งแอปพลิเคชันได้เนื่องจากพื้นที่เก็บข้อมูลไม่เพียงพอ ล้างพื้นที่ แล้วลองอีกครั้ง</string>
+    <string name="installation_timeout_description">การติดตั้งใช้เวลานานเกินไป ลองอีกครั้งหรือไม่</string>
+    <string name="reinstall">ติดตั้งใหม่</string>
+    <string name="installation_signature_mismatch_confirm">Unloadและโหลดใหม่</string>
+    <string name="show">แสดง</string>
+    <string name="debugging">ดีบัก</string>
+    <string name="about_device">เกี่ยวกับอุปกรณ์</string>
+    <string name="enter_url">ป้อน URL</string>
+    <string name="next">ถัดไป</string>
+    <string name="auto_update">อัปเดตอัตโนมัติ</string>
+    <string name="add_patches">เพิ่มชุดแพตช์</string>
+    <string name="auto_update_description">อัปเดตอัตโนมัติเมื่อมีเวอร์ชันใหม่</string>
+    <string name="patches_prereleases">ใช้เวอร์ชันก่อนเผยแพร่</string>
+    <string name="patches_prereleases_description">ใช้เวอร์ชันพรีรีลีสของ %s</string>
+    <string name="patches_url">URL ของชุดแพตช์</string>
+    <string name="incompatible_patches_dialog">"แพตช์เหล่านี้ไม่สามารถใช้งานร่วมกับแอปเวอร์ชันที่เลือก (%1$s) ได้
+
+คลิกที่แพตช์เพื่อดูรายละเอียดเพิ่มเติม"</string>
+    <string name="incompatible_patch">แพตช์ที่ไม่เข้ากัน</string>
+    <string name="any_version">เวอร์ชันใดก็ได้</string>
+    <string name="never_show_again">อย่าแสดงอีก</string>
+    <string name="show_manager_update_dialog_on_launch">แสดงข้อความอัปเดตเมื่อเปิดแอป</string>
+    <string name="show_manager_update_dialog_on_launch_description">แสดงการแจ้งเตือนแบบป๊อปอัปทุกครั้งที่มีการอัปเดตใหม่พร้อมใช้งานเมื่อเปิดแอป</string>
+    <string name="failed_to_import_keystore">นำเข้าคีย์สโตร์ไม่สำเร็จ</string>
+    <string name="export">ส่งออก</string>
+    <string name="confirm">ยืนยัน</string>
+</resources>

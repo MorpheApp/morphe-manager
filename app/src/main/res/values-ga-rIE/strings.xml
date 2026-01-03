@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Paiste Beart</string>
+    <string name="morphe_home_greeting_1">Cén aip ar mian leat í a phatráil?</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Réidh chun YouTube a dhéanamh legendary arís?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Ceangail suas, tá sé am patráil</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Lá eile, meaisín meara-ghléasaithe eile</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">An bhfuil tú ag iarraidh fógraí a fheiceáil? Ní hea mé ach a chóiríocht araon</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Déanaimis do aipeanna iompar</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">An réamhaisnéis inniu: 100% deis do chóiriú</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Réidh le hathrú tarcaisneach go hiontach?</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">A shábháil aipeanna ó iad féin ó inniu</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Cumhachtaithe ag caifé agus cóiriú maith</string>
+    <string name="morphe_home_bundle_type_api">Beart API</string>
+    <string name="morphe_home_update_error">Theip ar nuashonrú</string>
+    <string name="morphe_home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
+    <string name="morphe_home_updating_patches">Ag nuashonrú paistí…</string>
+    <string name="morphe_home_update_success">Nuashonrú críochnaithe</string>
+    <string name="morphe_home_patches_updated">Tá do paistí suas chun dáta</string>
+    <string name="morphe_home_patches_are_loading">Tá paistí á luchtú, fan go gnách…</string>
+    <string name="morphe_home_please_wait">Fan go gnách…</string>
+    <string name="morphe_home_open_in_browser">Oscail sa bhrabhsálaí</string>
+    <string name="morphe_home_failed_to_open_url">Teip ar URL a oscailt</string>
+    <string name="morphe_home_date_added">Cuireadh leis</string>
+    <string name="morphe_home_date_updated">Nuashonraithe</string>
+    <string name="morphe_home_check_updates">Seiceáil</string>
+    <string name="morphe_home_unknown">Anaithnid</string>
+    <string name="morphe_home_timeline">Stair Nuashonruithe</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">An bhfuil an APK bunaidh neamhpaisteáilte agat?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a chóiriú, tá leagan %2$s (gan chóiriú) uait</string>
+    <string name="morphe_home_apk_availability_yes">Sea, tá sé agam</string>
+    <string name="morphe_home_apk_availability_no">Ní hea, cuidigh liom é a aimsiú</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Íoslódáil an APK bunaidh</string>
+    <string name="morphe_home_download_instructions_steps_title">Nósanna imeachta:</string>
+    <string name="morphe_home_download_instructions_step1">Tabair an \'\'%1$s\'\' goilte is fota</string>
+    <string name="morphe_home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Brúigh íoslódáil ar an suíomh gréasáin, agus ná déan é anseo 😊</string>
+    <string name="morphe_home_download_instructions_step3">Fan go mbíonn an íoslódáil críochnaithe, agus &lt;b&gt;ná suiteáil&lt;/b&gt; an APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Fan go mbíonn an íoslódáil críochnaithe, ansin &lt;b&gt;suiteáil an APK&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">Tar éis don íoslódáil críochnú, oscail an aip seo arís</string>
+    <string name="morphe_home_download_instructions_step4_mount">Tar éis an APK bunaidh a shuiteáil, oscail an aip seo arís</string>
+    <string name="morphe_home_download_instructions_continue">Lean ar aghaidh go dtí APKMirror.com</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Roghnaigh an APK a d\'íoslódáil tú</string>
+    <string name="morphe_home_file_picker_prompt_description">Anois roghnaigh an comhad APK %1$s a d\'íoslódáil tú díreach.</string>
+    <string name="morphe_home_file_picker_prompt_open">Oscail an comhad APK a d\'íoslódáil mé</string>
+    <string name="morphe_home_recommended_version">Leagan Molta</string>
+    <string name="morphe_patcher_selected_version">Leagan Roghnaithe</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Teastaíonn an bun-APK ar do ghléas sula ndéantar paisteáil le mód fréimhe.</string>
+    <string name="morphe_root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">Sábháil APK</string>
+    <string name="morphe_patcher_copy_error">Earráid Cóipeála</string>
+    <string name="morphe_patcher_show_error">Taispeáin Earráid</string>
+    <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
+    <string name="morphe_patcher_long_step_warning">Féadfaidh an chéim seo tamall a ghlacadh. Fan go cineálta…</string>
+    <string name="morphe_patcher_installing">Ag suiteáil…</string>
+    <string name="morphe_patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
+    <string name="morphe_patcher_success_title">Críochnaithe! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Tá do aip paisteáilte agus suiteáilte!</string>
+    <string name="morphe_patcher_complete_title">Paisteáilte Críochnaithe! ✨</string>
+    <string name="morphe_patcher_failed_title">Ouch! Tharla rud éigin mícheart</string>
+    <string name="morphe_patcher_failed_subtitle">Seiceáil na sonraí earráide thíos</string>
+    <string name="morphe_patcher_failed_dialog_title">Theip ar Paisteáil</string>
+    <string name="morphe_patcher_unknown_error">Tharla earráid anaithnid</string>
+    <string name="morphe_patcher_mounting">Ag gléasadh…</string>
+    <string name="morphe_patcher_conflict_title">Coinbhleacht pacáiste</string>
+    <string name="morphe_patcher_conflict_subtitle">Ní mór duit an leagan reatha a dhíshuiteáil</string>
+    <string name="morphe_patcher_install_error_title">Earráid suiteála</string>
+    <string name="morphe_patcher_install_error_subtitle">Déan iarracht é a dhíshuiteáil agus a shuiteáil arís</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Brúigh an cnaipe thíos chun é a shuiteáil</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Leagan Gan Tacú</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Ní leagan molta den aip é an APK seo. D’fhéadfadh sé nach n-oibreodh an aip má leanann tú ar aghaidh.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Lean Ar Aghaidh Ar Aon Chuma</string>
+    <string name="morphe_patcher_wrong_package_title">Pacáiste Cearr Roghnaithe</string>
+    <string name="morphe_patcher_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air.</string>
+    <string name="morphe_patcher_expected_package">Pacáiste Ionchais</string>
+    <string name="morphe_patcher_selected_package">Pacáiste Roghnaithe</string>
+    <string name="morphe_patcher_message_1">Ag athrú do aip go rud éigin iontach… 🏆</string>
+    <string name="morphe_patcher_message_2">Ag múineadh cleasanna nua d’aipeanna d’aois… 🎩</string>
+    <string name="morphe_patcher_message_3">Ag tabhairt socrúcháin dhigiteach do d’aipeanna… 🔧</string>
+    <string name="morphe_patcher_message_4">Ag déanamh draíocht dhigiteach... ☕</string>
+    <string name="morphe_patcher_message_5">Moltar sos caife... ☕</string>
+    <string name="morphe_patcher_message_6">Breathnaigh amach, tá sé go deas lasmuigh... 🌤️</string>
+    <string name="morphe_patcher_message_7">Ag coigeartú 1anna agus 0anna... 🤖</string>
+    <string name="morphe_patcher_message_8">Ag díthaclaíocht spagetti digiteach... 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Ag ceartú fabhtanna san aip neamhpaisteáilte... 🐞</string>
+    <string name="morphe_patcher_message_10">Is fiú fanacht le paistí móra... ⏳</string>
+    <string name="morphe_patcher_message_11">Ag liodán picteilíní go dtí go lonraíonn siad... 💎</string>
+    <string name="morphe_patcher_message_12">Fan ina suí go múchadh an captaen an comhartha \"Cóiriú ar siúl\"... 💺✈️</string>
+    <string name="morphe_patcher_message_13">Ag cócaireacht d\'aip phaiisteáilte, te agus úr... 🍳</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Ag idirphlé go béasach le bytecode… 🤝</string>
+    <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Gach córas gnáth… paisteadh ar fionraí cobhsaí… 🚀</string>
+    <string name="morphe_patcher_message_16">Ag brú amach cumhacht bhreise, cosúil le sú ó líomóid dhigiteach… 🍋</string>
+    <string name="morphe_patcher_message_17">Ag spreagadh na haipe glacadh lena féin nua, níos fearr… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Ag athrú forluí na haipe ó neamhpháistí go páistí… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Baintear seafóideacht. Le do thoil, fan ar aghaidh… 🗑️</string>
+    <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Tionnadh go dtí baile Morphe</string>
+    <string name="morphe_settings_return_to_morphe_description">Tionnadh go dtí mód simplí</string>
+    <string name="morphe_settings_return_to_expert">Chúig an mod chosái seo chun an mód tóirisc thú bhí bhíos ag baint úsáide</string>
+    <string name="morphe_settings_return_to_expert_description">Shuas craoligh an mod éigeanta mar thoradh iarmhar</string>
+    <string name="morphe_share_website">Roghnaigh Gréasán</string>
+    <string name="morphe_share_website_description">Roinn an láithreán gréasáin oifigiúil Morphe</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">Coisialta na Roghairt</string>
+    <string name="morphe_appearance_options_description">Anog na coisialta, na dearcadaí, agus na tinte</string>
+    <string name="morphe_background_type">Beochan Cúlra</string>
+    <string name="morphe_background_type_circles">Ciorcail</string>
+    <string name="morphe_background_type_rings">Fáinní</string>
+    <string name="morphe_background_type_waves">Tonnánna</string>
+    <string name="morphe_background_type_space">Spás</string>
+    <string name="morphe_background_type_shapes">Cruthanna</string>
+    <string name="morphe_background_type_snow">Aillid</string>
+    <string name="morphe_background_type_none">Dada</string>
+    <!-- Update Section -->
+    <string name="morphe_update_use_patches_prereleases">Úsáid paistí réamhscaoilte</string>
+    <string name="morphe_update_use_patches_prereleases_description">Úsáid na paistí forbartha is déanaí</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Opcionsíos Chomhalaidh</string>
+    <string name="morphe_patch_options_youtube_description">Téamaí, bráiding, an deisceála, agus na heolaíochtaí Shorts</string>
+    <string name="morphe_patch_options_youtube_music_description">Téamaí agus bráiding</string>
+    <string name="morphe_patch_options_restart_message">Nuíche an bhogaidh sonraí na ccomhalaidh a athbhueráil iad ar an mbogaidh</string>
+    <string name="morphe_icon_instructions_title">Cúpas instructionsíos Comhaladha</string>
+    <string name="morphe_header_instructions_title">Formáta instructionsíos an deisceála</string>
+    <string name="morphe_loading_patch_options">Loisinne na ccomhalaidh...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Teast a fhioidh an bunaláin ccomhalaidh a tsuipheadh</string>
+    <string name="morphe_patch_options_load_error">Thall an bhogaidh na ccomhalaidh sloinniu</string>
+    <string name="morphe_no_options_available">Níl ccomhaladh ag anseo.</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">Dath Saincheaptha</string>
+    <string name="morphe_hex_color">Dath an Forún Buidéal</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">Nascnótaína</string>
+    <string name="morphe_theme_dark_color">Dath an Bhord na Teama Dàomhán</string>
+    <string name="morphe_theme_dark_color_description">Dath an bhord don fhadhbhar an uile théama dàomhán</string>
+    <string name="morphe_theme_light_color">Dath an Bhord na Teama Leathdhaidhe</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">Bráiding Saincheaptha</string>
+    <string name="morphe_custom_app_name_description">Baoil an teaghlabacht an App a thaitneamh</string>
+    <string name="morphe_custom_app_name_hint">Slán le teachtaireacht saincheaptha</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">Logo Cusach Header</string>
+    <string name="morphe_custom_header_description">Caidomán bhordchomhpháirtí a bhíos ann</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">Folaigh na heolaíochtaí Shorts</string>
+    <string name="morphe_hide_shorts_app_shortcut">Folaigh an gceangal app Short</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">Bain Shortse ag an mbord agus ar an deisceála chomhal</string>
+    <string name="morphe_hide_shorts_widget">Folaigh na heolaíochtaí Widgets Shorts</string>
+    <string name="morphe_hide_shorts_widget_description">Bain isteach an tógán Shorts a bhíos ar na Widgetiaí</string>
+    <!-- Other strings -->
+    <string name="patcher">Paisteálaí</string>
+    <string name="patches">Paistí</string>
+    <string name="patch_bundles">Bailte Paistí</string>
+    <string name="patch_bundle">Baile Paiste</string>
+    <!-- Morphe -->
+    <string name="installer">Nascadóir</string>
+    <string name="plugin_host_permission_label">Óstach breiseán Morphe</string>
+    <string name="plugin_host_permission_description">Úsáidtear chun rochtain ar bhreiseáin Morphe a rialú. Ní Morphe amháin atá seo.</string>
+    <string name="toast_copied_to_clipboard">Cóipeáilte!</string>
+    <string name="copy_to_clipboard">Cóipeáil chuig an ngearrliosta</string>
+    <string name="settings">Socruithe</string>
+    <string name="select_app">Roghnaigh aip</string>
+    <string name="app_filter_title">Cataire na cend</string>
+    <string name="app_filter_installed_only">Cead anocht</string>
+    <string name="app_filter_patches_available">Céli fosgála</string>
+    <string name="app_filter_no_results">Cend a bhaineann na cataireochtaí orthu.</string>
+    <string name="new_downloader_plugins_notification">Tá breiseáin nua comhbhrúite ar fáil. Cliceáil anseo chun iad a chumrú.</string>
+    <string name="unsupported_architecture_warning">Ní thacaítear le paisteáil ar an ailtireacht gléis seo agus is dócha go dteipfidh uirthi.</string>
+    <string name="import_">Iompórtáil</string>
+    <string name="file_field_not_set">Ní roghnaithe</string>
+    <string name="field_not_set">Ní socraithe</string>
+    <string name="patches_missing">Ar iarraidh</string>
+    <string name="patches_error">Earráid</string>
+    <string name="patches_error_description">Níorbh fhéidir na paistí a luchtú. Cliceáil chun an earráid a fheiceáil</string>
+    <string name="patches_not_downloaded">Níl an próg a dlúthadh. Cliceáil anseo chun a tógáil a dhéanáil</string>
+    <string name="patches_name_default">Paistí</string>
+    <string name="patches_name_fallback">Gan ainm</string>
+    <string name="bundle_uid">UID an Bheartáin</string>
+    <string name="patches_display_name">Ainm taispeána</string>
+    <string name="android_11_bug_dialog_title">Earráid Android 11</string>
+    <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora.</string>
+    <string name="no_network_toast">Níl aon nasc idirlín ar fáil</string>
+    <string name="selected_app_meta_any_version">Aon leagan ar fáil</string>
+    <string name="app_source_dialog_title">Roghnaigh foinse</string>
+    <string name="app_source_dialog_option_auto">Uathoibríoch</string>
+    <string name="app_source_dialog_option_auto_description">Úsáid na tosaitheoirí go léir atá ar fáil chun an aip a íoslódáil</string>
+    <string name="app_source_dialog_option_auto_unavailable">Níl aon phloc ann ar fáil</string>
+    <string name="app_source_dialog_option_storage">Stóras</string>
+    <string name="app_source_dialog_option_storage_description">Roghnaigh APK ó stóras áitiúil</string>
+    <string name="app_source_dialog_option_installed_no_root">Ní féidir aipeanna atá suiteáilte a paisteáil arís gan rochtain fréamhshamhlacha</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">Leagan %s ní mheaitseálann an leagan molta</string>
+    <string name="bundle_version_item">Comhairle pacáiste</string>
+    <string name="bundle_version_item_description_default">Ag úsáid comhairle réamhshocraithe</string>
+    <string name="bundle_version_item_description_selected">Ag leanúint %1$s (%2$s)</string>
+    <string name="bundle_version_dialog_title">Roghnaigh comhairle pacáiste</string>
+    <string name="bundle_version_dialog_description">Leagan ar scéal mionchúilt: Iontráil mar a bhí ann é a l-bgainn siochaim! Go raibh áir ar import don roll</string>
+    <string name="bundle_version_dialog_default">Bain úsáid as comhairle réamhshocraithe</string>
+    <string name="bundle_version_dialog_default_subtitle">Roghnaigh an leagan comhoiriúnach is coitianta go huathoibríoch.</string>
+    <string name="bundle_version_all_versions">Gach leagan</string>
+    <string name="bundle_version_no_version">Gan aon leagan molta</string>
+    <string name="bundle_version_suggested_label">Punktaí tionscalta: %1$s</string>
+    <string name="bundle_update_manual_available">Nuashonrú ar fáil</string>
+    <string name="bundle_update_manual_available_with_version">Nuashonrú ar fáil: %1$s</string>
+    <string name="bundle_update_progress">Próiseáladh %1$d/%2$d beart</string>
+    <string name="bundle_update_banner_title">Ag nuashonrú paiste beart</string>
+    <string name="bundle_reorder">Eagraigh bearta</string>
+    <string name="bundle_reorder_title">Eagraigh paiste beart</string>
+    <string name="bundle_reorder_description">Tarraing an láimhseáil chun ord na mbeart a shocrú mar a thaispeántar iad sa liosta agus sa roghchlár roghnú paiste.</string>
+    <string name="bundle_actions_expand">Taispeáin gníomhartha beart</string>
+    <string name="bundle_actions_collapse">Folaigh gníomhartha beart</string>
+    <string name="patch_bundle_duplicate_name_error">Tá paiste beart leis an ainm seo ann cheana féin</string>
+    <string name="patch_bundle_missing_error">Níorbh fhéidir an paiste beart seo a nuashonrú.</string>
+    <string name="bundle_release_page">Oscail leathanach eisithe</string>
+    <string name="bundle_release_page_unavailable">Níl leathanach eisithe ar fáil don bheart seo</string>
+    <string name="bundle_release_page_error">Níorbh fhéidir leathanach eisithe a oscailt: %s</string>
+    <string name="bundle_links_title">Naisc do %1$s</string>
+    <string name="bundle_link_release">Eisíocaíocht GitHub</string>
+    <string name="bundle_link_catalog">Catalóg liosta paiste</string>
+    <string name="bundle_catalog_unavailable">Níl catalóg liosta paiste ar fáil</string>
+    <string name="show_suggested_versions">Taispeáin leaganacha molta</string>
+    <string name="hide_suggested_versions">Folaigh leaganacha molta</string>
+    <string name="show_other_versions">Taispeáin leaganacha eile</string>
+    <string name="other_supported_versions_title">Leaganacha eile tacaithe (%1$s)</string>
+    <string name="other_supported_versions_empty">Níl aon leaganacha eile tacaithe ar fáil.</string>
+    <string name="other_supported_versions_all">Tacaíonn sé le gach leagan.</string>
+    <string name="bundle_version_dialog_recommended">Leagan molta: %1$s</string>
+    <string name="bundle_version_dialog_selected_override">Leagan roghnaithe: %1$s</string>
+    <string name="bundle_version_dialog_selected_indicator">Roghchláraithe</string>
+    <string name="bundle_version_dialog_other_title">Roghnaigh leagan eile tacaithe:</string>
+    <string name="bundle_version_dialog_locked_title">Tá cosaintí leagan cumasaithe</string>
+    <string name="bundle_version_dialog_locked_hint">Téigh go Socruithe &gt; Casta &gt; Cosaintí agus socraigh \"Ceanglais leagan aip molta\" (lasc as) agus \"Díchumasaigh seiceáil comhoiriúnachta leagan\" (lasc air) araon chun leaganacha sonracha cuimsithe a roghnú.</string>
+    <string name="patch_versions_dialog_title">Roinneacht bunaithe do %1$s</string>
+    <string name="patch_selector_item">Roghnaigh paistí</string>
+    <string name="patch_selector_item_description">%d paistí roghnaithe</string>
+    <string name="no_patches_selected">Ní roghnaíodh paistí</string>
+    <string name="network_unavailable_warning">Níl do ghléas ceangailte leis an idirlíon. Teipfidh ar an íoslódáil níos déanaí.</string>
+    <string name="apk_source_selector_item">Roghnaigh foinse APK</string>
+    <string name="apk_source_auto">Ag úsáid gach íoslódálaí APK</string>
+    <string name="apk_source_downloader">Ag úsáid %s</string>
+    <string name="apk_source_installed">Ag úsáid APK suiteáilte</string>
+    <string name="apk_source_local">Ag úsáid comhad APK áitiúil</string>
+    <string name="apk_source_downloaded">Ag úsáid APK íoslódáilte</string>
+    <string name="auto_updates_dialog_title">Cumraigh nuashonruithe</string>
+    <string name="auto_updates_dialog_description">Ar mhaith leat go seiceálfadh Morphe go tréimhsiúil le haghaidh nuashonruithe ar na comhpháirteanna seo a leanas?</string>
+    <string name="auto_updates_dialog_patches">Paistí Morphe</string>
+    <string name="auto_updates_dialog_note">Is féidir na socruithe seo a athrú níos déanaí.</string>
+    <string name="appearance">Dealramh</string>
+    <string name="appearance_description">Teama, dath níallaithe</string>
+    <string name="updates">Nuashonruithe</string>
+    <string name="updates_description">Seiceáil le haghaidh nuashonruithe agus féach ar an logáil athraithe</string>
+    <string name="downloads">Íoslódálacha</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <string name="import_export">Iompórtáil &amp; Easpórtáil</string>
+    <string name="import_export_description">Eochairstór, roghanna paiste agus roghnú</string>
+    <string name="changelog">Féach ar logálacha athraithe</string>
+    <string name="changelog_loading">Agus an logála na hathruithe á luchtú</string>
+    <string name="changelog_download_fail">Theip ar an logála hathruithe a íoslódáil: %s</string>
+    <string name="changelog_description">Seiceáil na hathruithe is déanaí sa nuashonrú seo</string>
+    <string name="advanced">Ardráta</string>
+    <string name="advanced_description">URL API, teorainn chuimhne, díchreimeadh</string>
+    <string name="about">Maidir</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">Color accent</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">Priontáil Téama</string>
+    <!-- Morphe -->
+    <string name="theme_presets">Réamhshocruithe téama</string>
+    <!-- Morphe -->
+    <string name="theme_preset_default">Lean an córas</string>
+    <string name="theme_preset_amoled">Dubh íon</string>
+    <string name="theme_preset_dynamic">Ábhar Tú</string>
+    <!-- Morphe -->
+    <string name="color_channel_red">Dearg</string>
+    <string name="color_channel_green">Glas</string>
+    <string name="color_channel_blue">Gorm</string>
+    <string name="theme">Téama</string>
+    <string name="safeguards">Gardaí</string>
+    <string name="patch_compat_check">Díchumasaigh seiceáil comhoiriúnachta leagain</string>
+    <string name="patch_compat_check_description">Ná srianta paistí le leaganacha comhoiriúnacha aipe</string>
+    <string name="patch_compat_check_confirmation">"Is féidir le paistí neamh-chomhoiriúnacha a roghnú a bheith ina gcúis le mífheidhm an aip.
+
+Ar mhaith leat leanúint ar aon nós?"</string>
+    <string name="suggested_version_safeguard">Ceanglais leagan molta aip</string>
+    <string name="suggested_version_safeguard_description">Cuir i bhfeidhm roghnú an leagain molta aip</string>
+    <string name="suggested_version_safeguard_confirmation">"D'fhéadfadh saincheisteanna gan choinne a bheith ann má roghnaíonn tú aip nach é an leagan a mholtar.
+
+An bhfuil tú ag iarraidh dul ar aghaidh ar aon nós?"</string>
+    <string name="patch_selection_safeguard">Ceadaigh athrú ar roghnú paiste agus ar roghanna</string>
+    <string name="patch_selection_safeguard_description">Ná cosc ar phaistí a roghnú nó a dhíthosadh agus ar shaincheapadh roghanna</string>
+    <string name="patch_selection_safeguard_confirmation">"D'fhéadfadh saincheisteanna gan choinne a bheith ann má athraíonn tú an roghnú paistí.
+
+Cumasaigh ar aon nós?"</string>
+    <string name="universal_patches_safeguard">Taispeáin &amp; lig d\'úsáid paistí uilcheartacha a úsáid</string>
+    <string name="universal_patches_safeguard_description">Ná folaigh paistí uilcheartacha ná cosc ar a n-úsáid</string>
+    <string name="universal_patches_profile_blocked_title">Paistí uilcheartacha díchumasaithe</string>
+    <string name="universal_patches_profile_blocked_description">Tá paistí uilcheartacha sa phróifíl paiste seo. Cumasaigh “%1$s” i socruithe ar ardráta chun é a úsáid.</string>
+    <string name="universal_patches_app_blocked_description">Tá paistí uilcheartacha san aip seo. Cumasaigh “%1$s” i socruithe ar ardráta chun leanúint ar aghaidh.</string>
+    <string name="import_keystore">Iompórtáil eochairstóir</string>
+    <string name="import_keystore_description">Iompórtáil eochairstóir saincheaptha</string>
+    <string name="import_keystore_dialog_title">Cuir isteach dintiúir eochairstóir</string>
+    <string name="import_keystore_dialog_description">Beiseg ó a bhfuilte credeintí an keystore chun é a saoladh.</string>
+    <string name="import_keystore_dialog_alias_field">Leasainm (Alias)</string>
+    <string name="import_keystore_dialog_password_field">Focal faire</string>
+    <string name="import_keystore_dialog_button">Iompórtáil</string>
+    <string name="import_keystore_wrong_credentials">Dintiúir stórais eochracha mícheart</string>
+    <string name="import_keystore_success">Stór eochracha allmhairithe</string>
+    <string name="export_keystore">Easpórtáil stór eochracha</string>
+    <string name="export_keystore_description">Easpórtáil an stór eochracha reatha</string>
+    <string name="export_keystore_unavailable">Níl stór eochracha le heaspórtáil</string>
+    <string name="export_keystore_success">Stór eochracha easpórtáilte</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore_success">Cuireadh an stór eochracha ina ionad go rathúil</string>
+    <string name="import_patch_selection">Roghnú paiste allmhairithe</string>
+    <string name="import_patch_selection_description">Iompórtáil roghnú paiste ó chomhad JSON</string>
+    <string name="import_patch_selection_fail">Níorbh fhéidir roghnú paiste a iompórtáil: %s</string>
+    <string name="import_patch_selection_success">Iompórtáladh roghnú paiste</string>
+    <string name="import_patch_bundles">Iompórtáil paicéid phaistí</string>
+    <string name="import_patch_bundles_description">Athchóirigh paicéid phaistí iargúlta ó chomhad JSON</string>
+    <string name="import_patch_bundles_fail">Níorbh fhéidir paicéid phaistí a iompórtáil: %s</string>
+    <string name="import_patch_bundles_in_progress">Ag iompórtáil…</string>
+    <string name="import_patch_bundles_success">Iompórtáladh %d paicéad paiste</string>
+    <string name="import_patch_bundles_updated">Nuashonraíodh %d paicéad paiste</string>
+    <string name="import_patch_bundles_none">Níor iompórtáladh paicéid phaistí nua ar bith</string>
+    <string name="import_patch_bundles_banner_title">Ag iompórtáil paicéid phaistí</string>
+    <string name="import_patch_bundles_banner_subtitle">%1$d de %2$d próiseálta</string>
+    <string name="import_patch_bundles_banner_steps">Córas %1$d ar %2$d</string>
+    <string name="import_patch_profiles">Iompórtáil próifílí paiste</string>
+    <string name="import_patch_profiles_description">Iompórtáil próifílí paiste sábháilte ó chomhad JSON</string>
+    <string name="import_patch_profiles_fail">Níorbh fhéidir paistí paiste a iompórtáil: %s</string>
+    <string name="import_patch_profiles_success">Iompórtáladh %d paistí paiste</string>
+    <string name="import_patch_profiles_partial">Iompórtáladh %1$d paistí paiste agus %2$d arna scipeáil</string>
+    <string name="import_patch_profiles_skipped">Scipeáladh %d paistí paiste dúblacha</string>
+    <string name="import_patch_profiles_none">Níor iompórtáladh aon phaiste paiste</string>
+    <string name="import_manager_settings">Socruithe an bhainisteora iompórtála</string>
+    <string name="import_manager_settings_description">Taisceadh socruithe bainisteora ar ais ó chomhad JSON</string>
+    <string name="import_manager_settings_fail">Níorbh fhéidir socruithe an bhainisteora a iompórtáil: %s</string>
+    <string name="import_manager_settings_success">Iompórtáladh socruithe an bhainisteora</string>
+    <string name="export_patch_selection">Rogh roghnaithe paiste a e a e a a e</string>
+    <string name="export_patch_selection_description">Easpórtáil roghnú paiste chuig comhad JSON</string>
+    <string name="export_patch_selection_fail">Níorbh fhéidir roghnú paiste a easpórtáil: %s</string>
+    <string name="export_patch_selection_success">Roghnú paiste easpórtáilte</string>
+    <string name="export_patch_bundles">Easpórtáil paiste paistí</string>
+    <string name="export_patch_bundles_description">Sábháil paiste paistí iargúlta a allmhairítear chuig comhad JSON</string>
+    <string name="export_patch_bundles_fail">Níorbh fhéidir paicéid paiste a onnmhairiú: %s</string>
+    <string name="export_patch_bundles_success">Onnmhairíodh %d paicéid paiste</string>
+    <string name="export_patch_bundles_partial">Onnmhairíodh %1$d paicéid paiste. Níorbh fhéidir roinnt paicéid a onnmhairiú mar gur cuireadh leis go háitiúil iad.</string>
+    <string name="bundle_type_remote">Cianda</string>
+    <string name="bundle_type_local">Áitiúil</string>
+    <string name="bundle_type_preinstalled">Réamhshuiteáilte</string>
+    <string name="bundle_created_at">Cruthaithe %1$s</string>
+    <string name="bundle_updated_at">Nuashonraithe %1$s</string>
+    <string name="bundle_changelog">Clogcharta</string>
+    <string name="bundle_view_changelog">Féach an clogcharta is déanaí</string>
+    <string name="bundle_changelog_error">Theip ar an clogcharta a luchtú: %s</string>
+    <string name="bundle_changelog_retry">Ríomh arís</string>
+    <string name="bundle_changelog_empty">Níl clogcharta ar fáil</string>
+    <string name="export_patch_profiles">Easpórtáil próifílí paiste</string>
+    <string name="export_patch_profiles_description">Easpórtáil gach próifíl paiste chuig comhad JSON</string>
+    <string name="export_patch_profiles_fail">Níorbh fhéidir próifílí paiste a easpórtáil: %s</string>
+    <string name="export_patch_profiles_success">Easpórtáladh %d próifíl paiste</string>
+    <string name="export_patch_profiles_empty">Níl próifílí paiste ar bith le heaspórtáil</string>
+    <string name="export_manager_settings">Easpórtáil socruithe bainisteora</string>
+    <string name="export_manager_settings_description">Sábháil gach socruithe bainisteora chuig comhad JSON</string>
+    <string name="export_manager_settings_fail">Níorbh fhéidir socruithe bainisteora a easpórtáil: %s</string>
+    <string name="export_manager_settings_success">Easpórtáladh socruithe bainisteora</string>
+    <string name="reset_patch_selection">Athshocraigh roghnú paiste</string>
+    <string name="reset_patch_selection_description">Athshocraigh an roghnú paiste stóráilte</string>
+    <string name="reset_patch_options">Athshocraigh roghanna paiste</string>
+    <string name="reset_patch_options_description">Athshocraigh na roghanna paiste stóráilte</string>
+    <string name="reset_patch_selection_success">Athshocraíodh roghnú paiste</string>
+    <string name="patch_selection_deselected_all_toast">Díthoghadh gach paiste</string>
+    <string name="patch_selection_deselected_bundle_toast">Deselected gach paiste i %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">Níl paistí le díthoghadh i %s</string>
+    <string name="patch_selection_selected_all_toast">Roghnadh gach paiste</string>
+    <string name="patch_selection_select_all_empty_toast">Níl paistí ar fáil le roghnú</string>
+    <string name="patch_selection_selected_bundle_toast">Roghnadh gach paiste i %s</string>
+    <string name="patch_selection_select_bundle_empty_toast">Níl paistí infheidhmithe le roghnú i %s</string>
+    <string name="patch_selection_all_actions_hidden_toast">Cuir le hacheist riamh mar is gníollte, iolcaigh tł a ar theicthe i n-aistiúchán</string>
+    <string name="patch_selection_reset_bundle_toast">Athshocraigh réamhshocruithe do %s</string>
+    <string name="patch_selection_button_label_all">Díthoghaigh gach ceann</string>
+    <string name="patch_selection_button_label_bundle">Díthoghaigh an beart</string>
+    <string name="patch_selection_button_label_defaults">Gach réamhshocrú</string>
+    <string name="patch_selection_button_label_select_bundle">Roghnaigh an beart</string>
+    <string name="patch_selection_button_label_select_all">Roghnaigh gach ceann</string>
+    <string name="patch_selection_button_label_undo_action">Cealaigh gníomh</string>
+    <string name="patch_selection_button_label_redo_action">Athdhéan gníomh</string>
+    <string name="patch_selection_history_undo">Chuaigh %1$s ar neamh</string>
+    <string name="patch_selection_history_redo">Atógadh %1$s</string>
+    <string name="patch_selection_action_all_defaults">gach réamhshocrú</string>
+    <string name="patch_selection_action_deselect_all">díchraig an rogha go léir</string>
+    <string name="patch_selection_action_select_all">roghnaigh gach ceann</string>
+    <string name="patch_selection_action_select_bundle">roghnaigh beart “%1$s”</string>
+    <string name="patch_selection_action_deselect_bundle">díchraig beart “%1$s”</string>
+    <string name="patch_selection_action_bundle_defaults">réamhshocruithe beart do “%1$s”</string>
+    <string name="disable_patch_selection_confirmations">Díchumasaigh deimhniú gníomhartha</string>
+    <string name="disable_patch_selection_confirmations_description">Déan neamhaird ar na dialógaí deimhnithe do ghníomhartha roghnaithe paiste</string>
+    <string name="disable_patch_selection_confirmations_warning">Is féidir le díchumasaigh deimhniúcháin athruithe neamhbheartaithe a dhéanamh.</string>
+    <string name="patch_selection_collapse_on_toggle">Filligh gníomhartha tar éis paistí a thrasnú</string>
+    <string name="patch_selection_collapse_on_toggle_description">Folaigh go huathoibríoch na cnaipí gníomhaíochta roghnaithe paiste nuair a roghnaíonn nó a dhí-roghnaíonn tú paiste</string>
+    <string name="patch_selection_action_order_title">Ord na gcnaipe gníomhaíochta roghnaithe paiste</string>
+    <string name="patch_selection_action_order_description">Roghnaigh an t-ord leagain le haghaidh cnaipí gníomhartha roghnú paiste</string>
+    <string name="patch_selection_action_visibility_title">Socruithe catairechta bunaithe</string>
+    <string name="patch_selection_action_visibility_description">Dún nióilte i leathbhéal na caighdeá sloinneadh bunaithe chaidreamh os comhón</string>
+    <string name="patch_selection_action_visibility_reset">Taispeáin na caighdeá go léir</string>
+    <string name="patch_selection_action_order_reset">Athshocraigh go dtí an t-ord réamhshocraithe</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Díroghnódh an bailiúchán?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">Díroghnódh na paistí go léir a roghnaíodh ó %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Díroghnódh na paistí go léir?</string>
+    <string name="patch_selection_confirm_deselect_all_message">Cuirfidh sé seo gach paiste roghnaithe ar fud gach bailiúchán ar ceal.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Athshocródh na réamhshocruithe bailiúcháin?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Cuirfidh sé seo na réamhshocruithe molta ar ais do %1$s.</string>
+    <string name="patch_selection_confirm_select_bundle_title">Roghnaigh paiste?</string>
+    <string name="patch_selection_confirm_select_bundle_message">Roghnaigh gach paiste a sholáthraíonn %1$s?</string>
+    <string name="patch_selection_confirm_select_all_title">Roghnaigh na paistí go léir?</string>
+    <string name="patch_selection_confirm_select_all_message">Roghnaíonn sé seo gach paiste thar na paistí go léir.</string>
+    <string name="patch_selection_button_label_reset_bundle">Réamhshocruithe paiste</string>
+    <string name="patch_profile_save_label">Sábháil próifíl</string>
+    <string name="patch_selection_toggle_expand">Taispeáin gníomhartha</string>
+    <string name="patch_selection_toggle_collapse">Folaigh gníomhartha</string>
+    <string name="patch_selection_reset_all">Athshocraigh roghnú paiste go ginearálta</string>
+    <string name="patch_selection_reset_all_dialog_description">"Tá tú ar tí gach roghnú paiste a athshocrú. Beidh ort gach paiste a roghnú de láimh arís.
+
+Ní dhéantar difear do phróifílí paiste."</string>
+    <string name="patch_selection_reset_all_description">Athshocraíonn sé gach roghnú paiste</string>
+    <string name="patch_selection_reset_dialog_title">Athshocraigh réamhshocruithe paiste?</string>
+    <string name="patch_selection_reset_dialog_message">Cuirfidh sé seo do roghnú paistí agus do roghanna ar ais ina réamhshocruithe molta.</string>
+    <string name="patch_selection_reset_package">Athshocraigh roghnú paiste don aip</string>
+    <string name="patch_selection_reset_package_dialog_description">"Tá tú ar tí roghnú paiste an aip \"%s\" a athshocrú. Beidh ort gach paiste a roghnú de láimh arís.
+
+Níl tionchar ag próifílí paistí."</string>
+    <string name="patch_selection_reset_package_description">Athshocraíonn roghnú paiste do aip amháin</string>
+    <string name="patch_selection_reset_patches">Athshocraigh roghnú paiste (aonair)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"Tá tú ar tí roghnú paiste \"%s\" a athshocrú. Beidh ort gach paiste a roghnú de láimh arís.
+
+Níl tionchar ag próifílí paistí."</string>
+    <string name="patch_selection_reset_patches_description">Athshocraíonn roghnú paiste do bhailiúchán sonrach paistí</string>
+    <string name="patch_options_reset_package">Athshocraigh roghanna paiste don aip</string>
+    <string name="patch_options_reset_package_dialog_description">"Tá tú ar tí roghanna paiste an aip \"%s\" a athshocrú. Beidh ort gach rogha a chur i bhfeidhm arís.
+
+Níl tionchar ag próifílí paistí."</string>
+    <string name="patch_options_reset_package_description">Athshocraíonn roghanna paiste do aip amháin</string>
+    <string name="patch_options_reset_patches">Athshocraigh roghanna paiste (aonair)</string>
+    <string name="patch_options_reset_patches_dialog_description">"Tá tú ar tí roghanna paiste \"%s\" a athshocrú. Beidh ort gach rogha a chur i bhfeidhm arís.
+
+Níl tionchar ag próifílí paistí."</string>
+    <string name="patch_options_reset_patches_description">Athshocraíonn roghanna paiste do bhailiúchán sonrach paistí</string>
+    <string name="patch_options_reset_all">Athshocraigh roghanna paiste go ginearálta</string>
+    <string name="patch_options_reset_all_dialog_description">"Tá tú ar tí gach rogha paiste a athshocrú. Beidh ort gach rogha a chur i bhfeidhm arís.
+
+Níl próifílí paiste i bhfeidhm."</string>
+    <string name="patch_options_reset_all_description">Athshocraíonn sé gach rogha paiste</string>
+    <string name="download_settings">Socruithe íoslódála</string>
+    <string name="downloader_auto_save_title">Sábháil APKanna a íoslódáladh go huathoibríoch</string>
+    <string name="downloader_auto_save_description">Coinnigh APKanna a íoslódáladh trí phlocóidí le haghaidh athúsáide. Díchumasaigh chun iad a scriosadh tar éis paisteála.</string>
+    <string name="downloader_plugins">Plocóidí</string>
+    <string name="downloader_plugin_state_trusted">Iontaofa</string>
+    <string name="downloader_plugin_state_failed">Teip ar luchtú. Cliceáil chun tuilleadh sonraí</string>
+    <string name="downloader_plugin_state_untrusted">Neamhionta</string>
+    <string name="downloader_plugin_trust_dialog_title">Muinnigh as an phloc?</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">Aisghairm an mhuinighin?</string>
+    <string name="downloader_plugin_trust_dialog_body">"Ainm an phacáiste: %1$s
+Síniú (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_view_error">Féach sonraí an earráid</string>
+    <string name="downloader_plugin_failed_dialog_body">Theip ar \"%1$s\" a luchtú. Is féidir leat sonraí an earráid a fheiceáil nó an phloc a dhíshuiteáil.</string>
+    <string name="downloader_plugin_uninstall_title">Díshuiteáil an phloc?</string>
+    <string name="downloader_plugin_uninstall_description">An bhfuil tú cinnte gur mhaith leat \"%1$s\" a dhíshuiteáil?</string>
+    <string name="downloader_plugin_delete_apps_title">Scrios na haipeanna roghnaithe</string>
+    <string name="downloader_plugin_delete_apps_description">An bhfuil tú cinnte gur mhaith leat na haipeanna roghnaithe a scriosadh?</string>
+    <string name="downloader_settings_no_apps">Ní bhfuarthas aon aipeanna a íoslódáladh.</string>
+    <string name="search_apps">Aipeanna a chuardach…</string>
+    <string name="yes">Sea</string>
+    <string name="no">Ní</string>
+    <string name="edit">Cuir in Eagar</string>
+    <string name="dialog_input_placeholder">Luach</string>
+    <string name="reset">Athshocrú</string>
+    <string name="share">Comhroinn</string>
+    <string name="patch">Paiste</string>
+    <string name="select_from_storage">Roghnaigh ó stóras</string>
+    <string name="select_from_storage_description">Roghnaigh comhad APK ó stóras ag úsáid an roghnóra comhad</string>
+    <string name="type_anything">Clóscríobh rud ar bith chun leanúint</string>
+    <string name="search">Cuardaigh paistí…</string>
+    <string name="apply">Cuir i bhfeidhm</string>
+    <string name="help">Cabhair</string>
+    <string name="back">Ar ais</string>
+    <string name="warning">Rabhadh</string>
+    <string name="add">Cuir leis</string>
+    <string name="close">Dún</string>
+    <string name="clear">Glan</string>
+    <string name="system">Córas</string>
+    <string name="light">Solas</string>
+    <string name="dark">Dorcha</string>
+    <string name="black">Dubh</string>
+    <string name="downloaded_apps">Aipeanna Íoslódáilte</string>
+    <string name="process_runtime">Rith Paisteoir i bpróiseas eile</string>
+    <string name="process_runtime_description">Luasghéarann paisteáil trí phróiseas ar leith a úsáid</string>
+    <string name="process_runtime_description_not_available">Ní mór do Android 11 nó níos airde a bheith ag an ngné seo</string>
+    <string name="strip_unused_libs">Bain leabharlanna neamhúsáidte</string>
+    <string name="strip_unused_libs_description">Scrios leabharlanna dúchasacha d’ailtireachtaí CPU nach dtacaítear leo ó aipeanna paisteáilte</string>
+    <string name="process_runtime_memory_limit">Téarma cuimhne próisis paisteála</string>
+    <string name="process_runtime_memory_limit_description">An méid uasta cuimhne is féidir leis an bpróiseas paisteála a úsáid (i meigeabheart)</string>
+    <string name="reset_to_recommended">Athshocraigh go dtí an moladh</string>
+    <string name="patcher_auto_collapse_steps">Cétoireacht uathoibríoch ar chéimeanna paisteála críochnaithe</string>
+    <string name="patcher_auto_collapse_steps_description">Go huathoibríoch céimniú gach giuirléid próisis paisteála tar éis do gach céim críochnú</string>
+    <string name="patch_bundle_rename">Athainmnigh beart paiste</string>
+    <string name="patch_profile_view_options">Roghanna féachana</string>
+    <string name="patch_profile_patch_options_title">Roghanna do %1$s</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="app_exporting">Easpórtáil aip</string>
+    <string name="export_name_format">Formáid ainm comhaid easpórtála</string>
+    <string name="export_name_format_description">Saincheap an t-ainm comhaid réamhshocraithe d’aipeanna paisteáilte easpórtáilte</string>
+    <string name="export_name_format_dialog_title">Formáid ainm comhaid easpórtála</string>
+    <string name="export_name_format_dialog_supporting">Úsáid na háiteanna coimeádta thíos chun ainm comhaid a thógáil. Cuirtear síneadh .apk leis go huathoibríoch mura bhfuil sé ann.</string>
+    <string name="export_name_format_preview_label">Réamhamharc</string>
+    <string name="export_name_format_variables">Athróga</string>
+    <string name="export_name_format_reset">Athshocraigh go dtí an réamhshocrú</string>
+    <string name="export_name_format_error_blank">Ní féidir an fhoirm ainm comhaid a bheith folamh.</string>
+    <string name="export_name_format_current">Pátrún reatha: %1$s</string>
+    <string name="export_name_format_insert">Cuir isteach</string>
+    <string name="export_name_variable_app_name">Ainm an aip</string>
+    <string name="export_name_variable_app_name_description">H-Apéirir béal</string>
+    <string name="export_name_variable_package_name">Francail</string>
+    <string name="export_name_variable_package_name_description">H-Apéirir Francail</string>
+    <string name="export_name_variable_app_version">Punktaí réit</string>
+    <string name="export_name_variable_app_version_description">H-An (cend réit civile)</string>
+    <string name="export_name_variable_patches_version">Roinneacht bunaithe</string>
+    <string name="export_name_variable_patches_version_description">H-An (scéalacht re: scioblaí citreachta bunaithe)</string>
+    <string name="export_name_variable_bundle_names">Teachtaireacht bunaithe</string>
+    <string name="export_name_variable_bundle_names_description">H-An (teachtaireacht re: siopa bunaithe)</string>
+    <string name="export_name_variable_manager_version">Phriontáil réit</string>
+    <string name="export_name_variable_manager_version_description">H-An appl (phróinéal réit civile)</string>
+    <string name="export_name_variable_timestamp">Teidil ar beart</string>
+    <string name="export_name_variable_timestamp_description">H-An chríost (teidil ar beart: yyyymm-ddd-HHmmss)</string>
+    <string name="export_name_variable_date">Beart</string>
+    <string name="export_name_variable_date_description">H-An chríost (beart: yyyymm-ddd)</string>
+    <string name="debug_logs_export">Easpórtáil logaí dífhabhtaithe</string>
+    <string name="debug_logs_export_read_failed">Teip a léamh logaí (cóid eitilte %d)</string>
+    <string name="debug_logs_export_failed">Theip ar logaí a easpórtáil</string>
+    <string name="debug_logs_export_success">Easpórtáladh logaí</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="api_url_dialog_description">Athraigh URL API Morphe. Úsáideann Morphe an API chun paistí agus nuashonruithe a íoslódáil.</string>
+    <string name="api_url_dialog_warning">Ceanglaíonn Morphe leis an API chun paistí agus nuashonruithe a íoslódáil. Déan cinnte go bhfuil muinín agat as.</string>
+    <string name="api_url_dialog_save">Socrú</string>
+    <string name="api_url_dialog_reset">Athshocraigh URL API</string>
+    <!-- Morphe -->
+    <string name="github_pat_description">GitHub Personal Access Token is needed for GitHub integration</string>
+    <string name="set_github_pat_dialog_title">Socrú GitHub PAT</string>
+    <string name="set_github_pat_dialog_description">Socrú GitHub Personal Access Token chun a bheith in ann iarratais tarraingthe a chur leis mar fhoinsí seachtracha. Cruthaigh PAT le raon poiblí_repo</string>
+    <string name="include_github_pat_in_exports_label">Áireamh i socruithe easpórtála</string>
+    <string name="include_github_pat_in_exports_supporting">Cuireann sé an PAT seo leis na socruithe bainisteora atá easpórtáilte</string>
+    <string name="include_github_pat_in_exports_warning">Ná roinn do PAT. Má chuimsíonn tú é in easpórtáil socruithe, coinnigh an comhad sin faoi rún mar go bhfuil an comhartha ann.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="device_memory_limit_format">%1$dMB (Gnáth) - %2$dMB (Mór)</string>
+    <string name="patches_force_download">Íoslódáil gach paiste go forneartach</string>
+    <string name="patches_reset">Athshocraigh paiste-bheartáin</string>
+    <string name="storage">SAOB</string>
+    <string name="no_patch_found">Ní féidir paistí ar bith a fháil. Seiceáil do phaistí</string>
+    <string name="tab_apps">Aipeanna</string>
+    <string name="tab_patches">Paiste-bheartáin</string>
+    <string name="tab_profiles">Próifílí paiste</string>
+    <string name="delete">Scrios</string>
+    <string name="disable">Díchumasaigh</string>
+    <string name="enable">Os comhad</string>
+    <string name="patch_bundle_disabled_toast">Curtach %d scéalacht</string>
+    <string name="patch_bundle_enabled_toast">Dolbhchleithead %d scéalacht</string>
+    <string name="patches_disable_single_dialog_description">Curt (%1$s)?</string>
+    <string name="patches_enable_single_dialog_description">Dolbhchleithead (%1$s)?</string>
+    <string name="refresh">Athnuachan</string>
+    <string name="download_apk">Íoslódáil comhad APK</string>
+    <string name="patches_download_fail">Theip ar paistí a íoslódáil: %s</string>
+    <string name="patches_replace_fail">Theip ar paistí a iompórtáil: %s</string>
+    <string name="no_patched_apps_found">Ní bhfuarthas aon aipeanna paisteáilte</string>
+    <string name="patches_selected">%s scéalacht bunaithe túsachta</string>
+    <string name="patch_profiles_selected">%1$d phróifíl paiste roghnaithe</string>
+    <string name="selected_apps_count">%1$d aip roghnaithe</string>
+    <string name="selected_apps_delete_dialog_description">Bain na haipeanna roghnaithe as an mbainisteoir? Fanfaidh aipeanna suiteáilte ar do ghléas gan athrú.</string>
+    <string name="incompatible_patches">Paistí neamh-chomhoiriúnacha</string>
+    <string name="universal_patches">Paistí uilíocha</string>
+    <string name="patch_selection_reset_toast">Athshocraíodh roghnú agus roghanna paistí go dtí na réamhshocruithe molta</string>
+    <string name="patch_options_reset_toast">Athshocraíodh roghanna paistí</string>
+    <string name="non_suggested_version_warning_title">Leagan nach moltar</string>
+    <string name="non_suggested_version_warning_description">"An leagan den aip atá roghnaithe agat ní meaitseálann sé an leagan molta.
+Úsáid an leagan molta: %s
+
+Chun leanúint ar aghaidh, díchumasaigh \"Ceanglais leagan molta aip\" sna socruithe ardleibhéil."</string>
+    <string name="selection_warning_description">"Moltar an roghnú paiste agus na roghanna réamhshocraithe a úsáid. D’fhéadfadh saincheisteanna gan choinne a bheith mar thoradh ar iad a athrú.
+
+Caithfidh tú \"Ceadaigh athrú ar roghnú paiste agus roghanna\" a chasadh air sna socruithe ardleibhéil sula ngluaiseann tú paistí."</string>
+    <string name="patch_profile_save_action">Sábháil próifíl paiste</string>
+    <string name="patch_profile_select_bundles_title">Roghnaigh baisceanna paiste</string>
+    <string name="patch_profile_select_bundles_description">Roghnaigh na baisceanna paiste a chuimseofar sa phróifíl seo.</string>
+    <string name="patch_profile_select_bundles_empty">Níl aon bhaisceanna paiste ar fáil le sábháil.</string>
+    <string name="patch_profile_name_title">Ainmnigh próifíl paiste</string>
+    <string name="patch_profile_name_description">Cuir isteach ainm don phróifíl paiste seo nó roghnaigh ceann thíos chun é a nuashonrú</string>
+    <string name="patch_profile_update_existing_title">Nuashonraigh próifíl atá ann cheana</string>
+    <string name="patch_profile_update_existing_description">Tapáil próifíl shábháilte chun é a fhorscríobh, nó fág gach rud neamhroghnaithe chun próifíl nua a chruthú.</string>
+    <string name="patch_profile_name_hint">Ainm na próifíle</string>
+    <string name="patch_profile_saved_toast">Sábháladh próifíl paiste \"%1$s\"</string>
+    <string name="patch_profile_duplicate_toast">Tá próifíl paiste \"%1$s\" ann cheana féin don aip seo</string>
+    <string name="patch_profile_updated_toast">Nuashonraíodh próifíl paiste \"%1$s\"</string>
+    <string name="patch_profile_save_failed_toast">Theip ar phróifíl paiste a shábháil</string>
+    <string name="patch_profile_rename">Athainmnigh</string>
+    <string name="patch_profile_rename_title">Athainmnigh próifíl paiste</string>
+    <string name="patch_profile_version_override_action">Socruithe leagan próifíle paiste</string>
+    <string name="patch_profile_version_override_title">Socruithe leagan do \"%1$s\"</string>
+    <string name="patch_profile_version_override_message">Sainmhínigh leagan ar leith den aip le stóráil leis an bpróifíl seo, nó díriú ar gach leagan.</string>
+    <string name="patch_profile_version_override_label">Leagan aip</string>
+    <string name="patch_profile_version_override_hint">m.sh. 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">Úsáid gach leagan</string>
+    <string name="patch_profile_version_override_saved_toast">Nuashonraíodh leagan próifíle</string>
+    <string name="patch_profile_version_override_failed_toast">Theip ar leagan próifíle a nuashonrú</string>
+    <string name="patch_profile_version_override_set_to_all">Níor cuireadh isteach aon leagan, sábháladh mar \"%1$s\"</string>
+    <string name="patch_profile_version_conflict_title">An bhfuil an forluí leagain le coinneáil?</string>
+    <string name="patch_profile_version_conflict_message">"Leagan reatha: %1$s
+Leagan ag teacht: %2$s
+Cén ceann a ba chóir a shábháil do an próifíl seo?"</string>
+    <string name="patch_profile_version_conflict_use_new">Úsáid an leagan atá ag teacht isteach</string>
+    <string name="patch_profile_version_conflict_keep_existing">Coinnigh an leagan atá ann cheana</string>
+    <string name="patch_profile_empty_state">Sábháil cumraíocht ó scáileán roghnú paiste chun é a fheiceáil anseo.</string>
+    <string name="patch_profile_missing_bundles_toast">Níl roinnt paicéid sa phróifíl seo ar fáil agus déanfar neamhaird orthu.</string>
+    <string name="patch_profile_changed_patches_toast">Ní mheaitseálann roinnt paistí nó roghanna sa phróifíl seo an paicéad a thuilleadh agus rinneadh neamhaird orthu.</string>
+    <string name="patch_profile_no_available_bundles_toast">Níl aon phaicéid ar fáil sa phróifíl seo. Nuashonraigh do phaicéid agus bain triail eile as.</string>
+    <string name="patch_profile_launch_error">Níorbh fhéidir an phróifíl paiste seo a oscailt.</string>
+    <string name="patch_profile_show_more">Taispeáin níos mó</string>
+    <string name="patch_profile_show_less">Taispeáin níos lú</string>
+    <string name="patch_profile_created_at">Cruthaíodh %1$s</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (ascurrently unavailable)</string>
+    <string name="patch_profile_bundle_change_uid">Athraigh UID</string>
+    <string name="patch_profile_bundle_change_uid_title">Athraigh UID do %1$s</string>
+    <string name="patch_profile_bundle_change_uid_invalid">Iontrál an t-aonad uimhreach bailí.</string>
+    <string name="patch_profile_bundle_change_uid_success">Nuashonraíodh an t-aonad paiste go %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">Ní bhfuarthas aon phaiste áitiúil le huimhir %1$d.</string>
+    <string name="patcher_process_exit_message">Chuaigh próiseas an phaiste amach le cód %1$d.</string>
+    <string name="patcher_memory_adjustment_title">Rith an paiste amach as cuimhne</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_retry">Déan iarracht arís</string>
+    <string name="patcher_memory_adjustment_dismiss">Díbhe</string>
+    <string name="patcher_missing_patch_title">Tá aird tuillte ag roghnú paiste</string>
+    <string name="patcher_preflight_missing_patch_remove">Bain paistí ar iarraidh</string>
+    <string name="patcher_preflight_missing_patch_proceed">Lean ar aghaidh mar sin féin</string>
+    <string name="patcher_preflight_missing_patch_message">"Na coscáltaí is coscailte in úr nach bhfuil áirimh ina chéann iomarbh an blásar:
+%1$s
+Go raibh áir ar chois mé:"</string>
+    <string name="patcher_missing_patch_review">Athbhreithnigh an roghnú</string>
+    <string name="patch_selector_missing_patch_title">Paistí ar iarraidh a roghnú arís</string>
+    <string name="patch_selector_missing_patch_message">"Ní mór na paistí seo a roghnú arís:
+%1$s
+Cumasaigh arís iad (nó pioc malairtí) agus ansin déan iarracht ar phaisteáil arís."</string>
+    <string name="patch_profile_delete_multiple_dialog_description">Scrios na próifílí paiste roghnaithe?</string>
+    <string name="this_version">An leagan seo</string>
+    <string name="universal">Aip ar bith</string>
+    <string name="search_patches">Cuardaigh paistí</string>
+    <string name="app_version_not_compatible">"Níl an paiste seo comhoiriúnach leis an leagan aip roghnaithe (%1$s).
+
+Níl sé ach comhoiriúnach leis an leagan seo a leanas: %2$s."</string>
+    <string name="failed_to_load_apk">Teip orthu an APK a luchtú</string>
+    <string name="loading">Ag lódáil…</string>
+    <string name="not_installed">Níl suiteáilte</string>
+    <string name="installed">Suiteáilte</string>
+    <string name="app_info">Eolas aip</string>
+    <string name="uninstall">Díshuiteáil</string>
+    <string name="repatch">Athphais</string>
+    <string name="install_type">Cineál suiteála</string>
+    <string name="package_name">Ainm an phacáiste</string>
+    <string name="original_package_name">Ainm bunaidh an phacáiste</string>
+    <string name="applied_patches">Paistí curtha i bhfeidhm</string>
+    <string name="view_applied_patches">Féach ar paistí curtha i bhfeidhm</string>
+    <string name="patch_bundles_used">Boinn paistí in úsáid</string>
+    <string name="applied_patches_empty">Níor taifeadadh paistí don aip seo</string>
+    <string name="applied_patches_bundle_missing">Ní féidir metadata an bhun a thaispeáint. Ag taispeáint ainmneacha paistí sábháilte.</string>
+    <string name="no_patch_bundles_tracked">Níor taifeadadh aon bhun paistí don aip seo</string>
+    <string name="mount_install">Suiteálaí sliabh fréamhaithe</string>
+    <string name="mounted">Sliabh</string>
+    <string name="unmounted">Díshliabh</string>
+    <string name="install_type_custom_installer">Suiteálaí saincheaptha</string>
+    <string name="install_type_system_installer">Suiteálaí córais</string>
+    <string name="install_type_mount_label">Suiteálaí sliabh fréamhaithe</string>
+    <string name="not_mounted">Ní sliabh</string>
+    <string name="mount">Sliabh</string>
+    <string name="unmount">Díshliabh</string>
+    <string name="unmount_confirm_description">Ar mhaith leat an aip a dhíshliabhú?</string>
+    <string name="saved_install">Sábháilte</string>
+    <string name="failed_to_mount">Theip ar mountáil: %s</string>
+    <string name="failed_to_unmount">Theip ar unmountáil: %s</string>
+    <string name="unpatch_app">Díchácaigh an aip?</string>
+    <string name="unpatch_description">An bhfuil tú cinnte gur mhaith leat an aip seo a dhíchácaigh?</string>
+    <string name="downloader_app_not_found">Ní bhfuair anuaslódálaí an aip</string>
+    <string name="downloader_error">Earráid anuaslódálaí: %s</string>
+    <string name="downloader_no_plugins_installed">Gan aon uaslódálaí suiteáilte.</string>
+    <string name="downloader_no_plugins_available">Tá íosluchtairí suiteáilte ach níl aon cheann acu iontaofa. Seiceáil do socruithe.</string>
+    <string name="downloader_plugin_uninstall_success">Uninstalled %1$s</string>
+    <string name="downloader_plugin_uninstall_failed">Theip ar %1$s a dhíshuiteáil</string>
+    <string name="downloaded_apps_export">Aipeanna roghnaithe a onnmhairiú</string>
+    <string name="downloaded_apps_export_success">D’onnmhairigh mé %1$d aipeanna</string>
+    <string name="downloaded_apps_export_failed">Theip ar aipeanna íoslódáilte a onnmhairiú</string>
+    <string name="already_patched">Paistithe cheana féin</string>
+    <string name="patch_selector_sheet_filter_title">Scagthair</string>
+    <string name="patch_selector_sheet_filter_compat_title">Comhoiriúnacht</string>
+    <string name="patch_selector_sheet_filter_sort_title">Ribhs na réit</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Acsaimintial</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Has socruithe</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">Go háthuighe</string>
+    <string name="string_option_menu_description">Tuilleadh roghanna</string>
+    <string name="option_preset_custom_value">Luach saincheaptha</string>
+    <string name="path_selector">Roghnaigh ón stóras</string>
+    <string name="path_selector_parent_dir">Eolaire roimhe seo</string>
+    <string name="path_selector_dirs">Eolairí</string>
+    <string name="path_selector_files">Comhaid</string>
+    <string name="show_password_field">Taispeáin pasfhocal</string>
+    <string name="hide_password_field">Folaigh pasfhocal</string>
+    <string name="installer_primary_title">Suiteálaí príomhúil</string>
+    <string name="installer_fallback_title">Suiteálaí cúltaca</string>
+    <string name="installer_internal_name">Suiteálaí córais</string>
+    <string name="installer_internal_description">Úsáid suiteálaí pacáiste Android</string>
+    <string name="installer_auto_saved_name">Suiteálaí mount bunaithe</string>
+    <string name="installer_auto_saved_description">Déanann an APK paisteáilte a mhuintir thar an aip suiteáilte (teastaíonn fréamh).</string>
+    <string name="installer_shizuku_description">Suiteáil go ciúin ag úsáid Shizuku nó Sui.</string>
+    <string name="installer_option_none">Ní bheidh aon rogha eile ann</string>
+    <string name="installer_none_description">Níor socraíodh aon suiteálaí eile</string>
+    <string name="installer_status_requires_root">Teastaíonn rochtain fhréamh</string>
+    <string name="installer_status_not_supported">Ní thacaítear leis an ngníomh seo.</string>
+    <string name="installer_status_shizuku_not_installed">Suiteáil Shizuku nó Sui chun an rogha seo a úsáid.</string>
+    <string name="installer_status_shizuku_not_running">Tosaigh Shizuku nó Sui agus déan iarracht arís.</string>
+    <string name="installer_status_shizuku_permission">Deonaigh cead Shizuku do Morphe ón aip Shizuku.</string>
+    <string name="installer_mount_warning_title">Roghnaíodh suiteálaí gléasta fréamhaithe</string>
+    <string name="installer_mount_warning_install">Tá do phríomh-suiteálaí socraithe ar an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as mount.</string>
+    <string name="installer_mount_warning_update">Tá do phríomh-suiteálaí socraithe ar an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as mount.</string>
+    <string name="installer_mount_warning_uninstall">Tá do phríomh-suiteálaí socraithe ar an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as mount.</string>
+    <string name="installer_mount_mismatch_title">Suiteálaí gléasta fréamhaithe nach roghnaithe</string>
+    <string name="installer_mount_mismatch_install">Suiteáladh an aip seo ag baint úsáide as an suiteálaí gléasta fréamhaithe. Athraigh do phríomh-suiteálaí ar ais chun gníomhartha mount a úsáid, ansin mount.</string>
+    <string name="installer_mount_mismatch_update">suiteáladh an aip seo ag úsáideoir suiteála mount fréamhaithe. Athraigh do phríomh-suiteálaí ar ais chun gníomhartha mount a úsáid, ansin déan ath-mount.</string>
+    <string name="installer_mount_mismatch_uninstall">suiteáladh an aip seo ag úsáideoir suiteála mount fréamhaithe. Athraigh do phríomh-suiteálaí ar ais chun gníomhartha mount a úsáid, ansin dí-mount.</string>
+    <string name="mount_version_mismatch_title">Theip ar mount</string>
+    <string name="mount_version_mismatch_message">Leagan stoic an aip (%2$s) ní hionann agus leagan paisteáilte an aip (%1$s). Mount an leagan stoic comhoiriúnach, ansin bain triail eile as.</string>
+    <string name="installer_status_shizuku_unsupported">Níl leagan suiteáilte de Shizuku tacaithe.</string>
+    <string name="installer_action_open_shizuku">Oscail Shizuku</string>
+    <string name="installer_shizuku_launch_failed">Ní féidir Shizuku a oscailt. Seol é de láimh agus bain triail eile as.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="installer_custom_tab_saved">Sábháilte</string>
+    <string name="installer_custom_saved_note">Suiteálaithe a chuir an t-úsáideoir de láimh leis na roghchláir roghnaithe suiteálaí Príomh &amp; Cúlchiste.</string>
+    <string name="installer_custom_tab_auto_saved">Sábháilte go huathoibríoch</string>
+    <string name="installer_custom_auto_note">Suiteáladh na suiteálaithe go huathoibríoch agus cuireadh leis iad chuig na biachláir rogha Suiteálaí Bunscoile &amp; Aighneachta.</string>
+    <string name="installer_custom_tab_discover">Faigh amach</string>
+    <string name="installer_custom_close">Dún</string>
+    <string name="installer_custom_manage_description">Sábháil gníomhaíochtaí suiteálaí tríú páirtí le húsáid mar shuiteálaithe bunscoile nó aighneachta</string>
+    <string name="installer_custom_input_label">Ainm an phacáiste</string>
+    <string name="installer_custom_package_hint">Cineál ainm an phacáiste agus tapáil \"Faigh suiteálaithe\" chun gníomhaíochtaí suiteálaí a aimsiú</string>
+    <string name="installer_custom_lookup">Faigh suiteálaithe</string>
+    <string name="installer_custom_lookup_empty">Iontráil ainm an phacáiste ar dtús.</string>
+    <string name="installer_custom_searching">Ag cuardach gníomhaíochtaí suiteálaí...</string>
+    <string name="installer_custom_lookup_found">Fuarthas %1$d suite.</string>
+    <string name="installer_custom_action_add">Sábháil suiteálaí</string>
+    <string name="installer_custom_action_remove">Bain suiteálaí sábháilte</string>
+    <string name="installer_custom_builtin_indicator">Uathshábháilte</string>
+    <string name="installer_custom_saved_indicator">Sábháilte</string>
+    <string name="installer_custom_lookup_none">Níor aimsíodh aon ghníomhaíochtaí suiteálaí do %1$s.</string>
+    <string name="installer_custom_candidates_title">Gníomhaíochtaí ar fáil do %1$s</string>
+    <string name="installer_custom_saved_header">Suiteálaithe sábháilte</string>
+    <string name="installer_custom_empty">Níl aon suiteálaithe saincheaptha sábháilte go fóill.</string>
+    <string name="installer_custom_added">Suiteálaí saincheaptha sábháilte.</string>
+    <string name="installer_custom_exists">Tá an suiteálaí sin sábháilte cheana féin.</string>
+    <string name="installer_custom_removed">Suiteálaí saincheaptha bainte.</string>
+    <string name="installer_custom_remove_failed">Níorbh fhéidir an suiteálaí a bhaint. Bain triail eile as.</string>
+    <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile.</string>
+    <string name="installer_hint_blocked">Cuireadh bac ar an suiteáil ag Android. Seiceáil Play Protect nó socruithe slándála.</string>
+    <string name="installer_hint_conflict">Tá aip eile leis an ainm pacáiste seo suiteáilte cheana féin. Díchumasaigh é sula leanann tú ar aghaidh.</string>
+    <string name="installer_hint_incompatible">Níl an APK comhoiriúnach leis an bhfeiste seo nó leis an leagan Android seo.</string>
+    <string name="installer_hint_invalid">Tá an APK neamhbhailí nó millte.</string>
+    <string name="installer_hint_storage">Níl dóthain spáis stórála ann don suiteáil.</string>
+    <string name="installer_hint_timeout">Theip ar an suiteáil de bharr ama. Bain triail eile as.</string>
+    <string name="installer_hint_aborted">Cealaíodh an suiteáil.</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Sonraí: %2$s"</string>
+    <string name="installer_external_launched">Ag oscailt %1$s…</string>
+    <string name="installer_external_timeout">Ní dhearbhaigh %1$s an suiteáil. Seiceáil an aip eile agus bain triail eile as.</string>
+    <string name="installer_external_success">Thuairiscigh %1$s suiteáil rathúil.</string>
+    <string name="installer_external_finished_no_change">%1$s buairt an chéad bná %1$s gan sheachrán na cend a bhí i cónaí. Cuardaigh na múli a léiríodh ar bhualadh agus triail iarracht arís.</string>
+    <string name="installing_ellipsis">Ag suiteáil…</string>
+    <string name="uninstalling_ellipsis">Ceacht...</string>
+    <string name="mounting_ellipsis">Ag mountáil…</string>
+    <string name="unmounting">Ag unmountáil…</string>
+    <string name="install_app">Suiteáil</string>
+    <string name="install_app_success">Suiteáladh go rathúil</string>
+    <string name="install_app_fail_title">Theip ar suiteáil</string>
+    <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
+    <string name="install_app_fail_missing_stock">Ní lige an APK orighṫ a chur chun rith a sheachrán a dúnadh.</string>
+    <string name="mount_split_not_supported">Na cinntiúcháin busálaíbh ar bhedrún ar leith ní hé sin amhárán. Bain úsáid as an cinntiúchán sisead.</string>
+    <string name="mount_app_fail_title">Teip ar Mount</string>
+    <string name="install_timeout_message">Níor chríochnaigh an suiteáil. Seiceáil fuinneog d\'fheiste agus bain triail eile as.</string>
+    <string name="uninstall_timeout_message">Ní sheachrán was gan tuisle. Cuardaigh an dúshlán cinntiúcháin agus triail iarracht arís.</string>
+    <string name="reinstall_app_fail">Theip ar aip a athshuiteáil: %s</string>
+    <string name="uninstall_app_fail">Theip ar aip a dhíshuiteáil: %s</string>
+    <string name="open_app">Oscail</string>
+    <string name="save_apk">Sábháil APK</string>
+    <string name="save_apk_success">Sábháiltear APK</string>
+    <string name="saved_app_export_success">Aip paisteáilte a d\'onnmhairigh</string>
+    <string name="saved_app_export_failed">Theip ar aip paisteáilte a easpórtáil</string>
+    <string name="saved_app_removed_toast">Cóip paisteáilte sábháilte a bhaint</string>
+    <string name="saved_app_copy_removed_toast">Cóip sábháilte a bhaint</string>
+    <string name="delete_saved_app_title">Cóip paisteáilte sábháilte a bhaint</string>
+    <string name="delete_saved_app_description">Bainfidh sé seo an iontráil aipe a sábháladh agus a APK a stóráil.</string>
+    <string name="delete_saved_entry_title">Bain an iontráil aipe sábháilte</string>
+    <string name="delete_saved_entry_description">Bainfidh sé seo an iontráil feidhmchláir a sábháladh agus a APK a sábháladh. Fanfaidh an aip suiteáilte.</string>
+    <string name="saved_app_launch_unavailable">Suiteáil an aip sula n-osclaíonn tú é.</string>
+    <string name="install_saved_app">Suiteáil</string>
+    <string name="remount_saved_app">Athshuighigh</string>
+    <string name="update_saved_app">Nuashonraigh</string>
+    <string name="saved_app_install_success">Suiteáladh aip shábháilte</string>
+    <string name="saved_app_install_failed">Theip ar aip shábháilte a shuiteáil</string>
+    <string name="saved_app_uninstall_title">Díshuiteáil cóip shuiteáilte?</string>
+    <string name="saved_app_uninstall_description">Bainfidh sé seo an leagan suiteáilte amháin. Fanann do APK sábháilte slán.</string>
+    <string name="saved_app_install_missing">Ní bhfuarthas APK sábháilte</string>
+    <string name="save_logs">Sábháil logaí</string>
+    <string name="plugin_activity_dialog_body">Is gá idirghníomhú úsáideora chun dul ar aghaidh leis an breiseán seo.</string>
+    <string name="select_install_type">Roghnaigh cineál suiteála</string>
+    <string name="patcher_step_group_preparing">Ag ullmhú</string>
+    <string name="patcher_step_load_patches">Ag luchtú paistí</string>
+    <string name="patcher_step_prepare_split_apk">Comhdhlúthú APK deighilte</string>
+    <string name="patcher_step_unpack">Bailliúcaire i genail</string>
+    <string name="patcher_step_group_patching">Paisteáil</string>
+    <string name="patcher_step_group_saving">Sábháil</string>
+    <string name="patcher_step_write_patched">Ag scríobh comhaid APK paistithe</string>
+    <string name="patcher_step_sign_apk">Ag sínigh comhaid APK paistithe</string>
+    <string name="patcher_notification_title">Paisteáil ar siúl…</string>
+    <string name="patcher_notification_text">Tapáil chun filleadh ar an paisteálaí</string>
+    <string name="patcher_stop_confirm_title">Stop an paisteálaí</string>
+    <string name="patcher_stop_confirm_description">An bhfuil tú cinnte gur mhaith leat stop a chur leis an bpróiseas paistithe?</string>
+    <string name="patcher_install_in_progress_title">A shuiteáil ar siúl</string>
+    <string name="patcher_install_in_progress">Tá suiteáil ar siúl. Fan go cineálta</string>
+    <string name="patcher_install_in_progress_leave">Fág ar aon nós</string>
+    <string name="patcher_install_in_progress_stay">Fan anseo</string>
+    <string name="patcher_mount_in_progress_title">Ceapadh ar siúl</string>
+    <string name="patcher_mount_in_progress">Tá an ceapadh ar siúl. Fan go foighneach</string>
+    <string name="applying_patches">Ag cur paistí i bhfeidhm</string>
+    <string name="applying_patch">Ag cur %s i bhfeidhm</string>
+    <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
+    <string name="save_patched_app_dialog_title">Fág an paisteoir?</string>
+    <string name="save_patched_app_dialog_message">Tá tú ar tí an paisteoir a fhágáil. Caillfear an aip phaistí mura sábhálann tú é don todhchaí.</string>
+    <string name="save_patched_app_dialog_save">Sábháil an aip phaistí</string>
+    <string name="save_patched_app_dialog_leave">Fág gan sábháil</string>
+    <string name="save_patched_app_dialog_cancel">Fan ar an bpaisteoir</string>
+    <string name="save_patched_app_dialog_hint_save">Coimeádann an APK phaistí infhaighte ón táb Aipeanna le haghaidh suiteáil sa todhchaí.</string>
+    <string name="save_patched_app_dialog_hint_leave">Scriosann an APK phaistí agus tugann ar ais tú go dtí an scáileán roimhe seo.</string>
+    <string name="patched_app_saved_toast">Comhadaithe aip sábháilte le haghaidh níos déanaí</string>
+    <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
+    <string name="step_completed">críochnaithe</string>
+    <string name="step_failed">theip</string>
+    <string name="step_running">ag rith</string>
+    <string name="step_waiting">ag feitheamh</string>
+    <string name="expand_content">leathnú</string>
+    <string name="collapse_content">crapadh</string>
+    <string name="drag_handle">atógáil</string>
+    <string name="more">Níos mó</string>
+    <string name="less">Níos lú</string>
+    <string name="continue_">Lean ar aghaidh</string>
+    <string name="dismiss">Díbhe</string>
+    <string name="version">Leagan</string>
+    <string name="published">Foilsithe</string>
+    <string name="developer_options">Roghanna forbróra</string>
+    <string name="developer_options_description">Roghanna chun saincheisteanna a dhífhabhtáil</string>
+    <string name="patches_update_success">Nuashonrú rathúil</string>
+    <string name="patches_update_unavailable">Níl aon nuashonrú ar fáil</string>
+    <string name="view_patches">Féach paistí</string>
+    <string name="patches_view_any_version">Aon leagan</string>
+    <string name="patches_view_any_package">Aon phacáiste</string>
+    <string name="patches_delete_single_dialog_description">An bhfuil tú cinnte gur mhaith leat \"%s\" a scriosadh?</string>
+    <string name="patches_delete_multiple_dialog_description">An bhfuil tú cinnte gur mhaith leat na paiste-bundeais roghnaithe a scriosadh?</string>
+    <string name="about_revanced_manager">Maidir le Morphe</string>
+    <string name="revanced_manager_description">"Is tionscadal turgnamhach foinse oscailte é Morphe atá dírithe ar paisteáil nua-aimseartha, sruthlínithe d’aipeanna Android móréilimh a chruthú
+
+Foinse oscailte ag a chroílár, tá Morphe ag brath ar aiseolas agus ar ranníocaíochtaí an phobail chun nuálaíocht sa todhchaí a thiomáint"</string>
+    <string name="here">anseo.</string>
+    <string name="update_available">Tá nuashonrú ar fáil</string>
+    <string name="ready_to_install_update">Réidh le nuashonrú a shuiteáil</string>
+    <string name="update_completed">Suiteáladh an nuashonrú</string>
+    <string name="install_update_manager_failed">Teip ar nuashonrú a shuiteáil</string>
+    <string name="manual_update_check">Seiceáil le haghaidh nuashonruithe</string>
+    <string name="manual_update_check_description">Seiceáil de láimh le haghaidh nuashonruithe</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="update_checking_manager">Seiceáil le haghaidh nuashonruithe ar lainseáil</string>
+    <string name="update_checking_manager_description">Seiceáil le haghaidh leaganacha nua de Morphe nuair a thosaíonn an feidhmchlár</string>
+    <string name="manager_prereleases">Bain úsáid as réamh-eisiúintí</string>
+    <string name="manager_prereleases_description">Bain úsáid as leaganacha réamh-eisiúna de Morphe</string>
+    <string name="update_published">Foilsithe %s</string>
+    <string name="battery_optimization_notification">Caithfear uasmhéadú ceallraí a mhúchadh ionas gur féidir le Morphe oibriú i gceart sa chúlra. Cliceáil anseo chun uasmhéadú a mhúchadh.</string>
+    <string name="installing_manager_update">Ag suiteáil nuashonraithe…</string>
+    <string name="downloading_manager_update">Ag íoslódáil nuashonraithe…</string>
+    <string name="manager_update_banner_title">Ag íoslódáil nuashonraithe bainisteora</string>
+    <string name="download_manager_failed">Theiptear an íoslódáil nuashonraithe: %s</string>
+    <string name="save">Sábháil</string>
+    <string name="save_with_count">Sábháil (%1$s)</string>
+    <string name="update">Nuashonraigh</string>
+    <string name="empty">Folamh</string>
+    <string name="just_now">Anois féin</string>
+    <string name="minutes_ago">Mion%s ó shin</string>
+    <string name="hours_ago">Uair%s ó shin</string>
+    <string name="days_ago">Lá%s ó shin</string>
+    <string name="invalid_date">Dáta neamhbhailí</string>
+    <string name="input_dialog_value_invalid">Luach neamhbhailí</string>
+    <string name="option_required">Tá an rogha seo ag teastáil</string>
+    <string name="required_options_screen">Roghanna riachtanacha</string>
+    <string name="failed_to_check_updates">Theiptear ar sheiceáil le haghaidh nuashonruithe: %s</string>
+    <string name="no_update_available">Níl aon nuashonrú ar fáil</string>
+    <string name="update_check">Ag seiceáil an bhfuil nuashonruithe ann…</string>
+    <string name="update_available_dialog_description">Tá leagan nua de Morphe (%s) ar fáil.</string>
+    <string name="failed_to_download_update">Theip ar an nuashonrú a íoslódáil: %s</string>
+    <string name="download">Íoslódáil</string>
+    <string name="resume_download">Ar ais ag íoslódáil</string>
+    <string name="download_confirmation_metered">"Tá tú ar nasc méadraithe faoi láthair, agus d’fhéadfadh táillí sonraí ó do sholáthraí seirbhíse a bheith i gceist.
+
+Ar mhaith leat leanúint ort fós?"</string>
+    <string name="download_update_confirmation">An mian leat an nuashonrú a íoslódáil?</string>
+    <string name="no_contributors_found">Ní bhfuarthas aon ranníocóirí</string>
+    <string name="select">Roghnaigh</string>
+    <string name="select_deselect_all">Roghnaigh nó díthoghnaigh iad uile</string>
+    <string name="deselect_all">Díthoghnaigh iad uile</string>
+    <string name="deselect_bundle">Díthoghnaigh an bundle reatha</string>
+    <string name="select_patches_type_dialog_description">Cuir pacáistí paiste nua leis ó URL nó comhaid áitiúla</string>
+    <string name="local_patches_description">Cuir pacáistí paiste leis ón stóras áitiúil.</string>
+    <string name="remote_patches_description">Cuir pacáistí paiste leis ó URL. Is féidir le pacáistí paiste nuashonrú go huathoibríoch.</string>
+    <string name="recommended">N mholta</string>
+    <string name="installation_failed_dialog_title">Theip ar an suiteáil</string>
+    <string name="installation_cancelled_dialog_title">Cealaíodh an tsuiteáil</string>
+    <string name="installation_blocked_dialog_title">Cuireadh bac ar an suiteáil</string>
+    <string name="installation_conflict_dialog_title">Conspóid suiteála</string>
+    <string name="installation_incompatible_dialog_title">Comhoiriúnachas suiteála</string>
+    <string name="installation_invalid_dialog_title">Suiteáil neamhbhailí</string>
+    <string name="installation_storage_issue_dialog_title">Nó-go leor stórála</string>
+    <string name="installation_timeout_dialog_title">Theip ar an suiteáil de bharr amshocrú</string>
+    <string name="installation_failed_description">Theip ar an suiteáil de bharr cúis anaithnid. Bain triail eile as?</string>
+    <string name="installation_aborted_description">Cealaíodh an tsuiteáil de láimh. Bain triail eile as?</string>
+    <string name="installation_blocked_description">Cuireadh bac ar an suiteáil. Athbhreithnigh socruithe slándála do ghléis agus bain triail eile as.</string>
+    <string name="installation_conflict_description">Cuireadh cosc ar an suiteáil de bharr suiteáil den aip atá ann cheana. Díchumasaigh an aip atá suiteáilte agus bain triail eile as?</string>
+    <string name="installation_signature_mismatch_dialog_title">Rinneal torthaíocht na couchten</string>
+    <string name="installation_signature_mismatch_description">Is ciallaí on cend i bhfeiceadh i láthbhinn a bhí ar an roinn agus an ceangal a throidh i n-aistiúchán é. Buiú agus ciontag an ceangal réalta agus a chaoinneen (teach)?</string>
+    <string name="installation_incompatible_description">Tá an aip neamh-chomhoiriúnach leis an ngléas seo. Bain úsáid as APK atá comhoiriúnach leis an ngléas seo agus bain triail eile as.</string>
+    <string name="installation_invalid_description">Tá an aip neamhbhailí. Díchumasaigh an aip agus bain triail eile as?</string>
+    <string name="installation_storage_issue_description">Níorbh fhéidir an aip a shuiteáil mar gheall ar stóráil neamhleorach. Saor in aisce spás agus déan iarracht arís.</string>
+    <string name="installation_timeout_description">Ghlac an tsuiteáil an iomarca ama. Bain triail as arís?</string>
+    <string name="reinstall">Athshuiteáil</string>
+    <string name="installation_signature_mismatch_confirm">Bui agus cin</string>
+    <string name="show">Taispeáin</string>
+    <string name="debugging">Dífhabhtú</string>
+    <string name="about_device">Maidir le feiste</string>
+    <string name="enter_url">Cuir isteach URL</string>
+    <string name="next">Ar Aghaidh</string>
+    <string name="auto_update">Uath-nuashonrú</string>
+    <string name="add_patches">Cuir leabaithe paiste leis</string>
+    <string name="auto_update_description">Nuashonraigh go huathoibríoch nuair a bhíonn leagan nua ar fáil</string>
+    <string name="patches_prereleases">Úsáid réamhscaoileadh</string>
+    <string name="patches_prereleases_description">Úsáid leaganacha réamhscaoilte de %s</string>
+    <string name="patches_url">URL leabaithe paiste</string>
+    <string name="incompatible_patches_dialog">"Níl na paistí seo comhoiriúnach leis an leagan a roghnaíodh den aip (%1$s).
+
+Cliceáil ar na paistí chun tuilleadh sonraí a fheiceáil."</string>
+    <string name="incompatible_patch">Paiste neamh-chomhoiriúnach</string>
+    <string name="any_version">Aon</string>
+    <string name="never_show_again">Ná taispeáin arís</string>
+    <string name="show_manager_update_dialog_on_launch">Taispeáin teachtaireacht nuashonraithe ag tosú</string>
+    <string name="show_manager_update_dialog_on_launch_description">Taispeáin fógra aníos aon uair a bhíonn nuashonrú nua ar fáil ag tosú</string>
+    <string name="failed_to_import_keystore">Theip ar iompórtáil an eochairchló</string>
+    <string name="export">Easpórtáil</string>
+    <string name="confirm">Deimhnigh</string>
+</resources>

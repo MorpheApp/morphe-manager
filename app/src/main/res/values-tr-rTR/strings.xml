@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Yama paketi</string>
+    <string name="morphe_home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">YouTube\'u tekrar efsane yapmaya hazır mısınız?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Hazır olun, yamalama zamanı geldi</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Başka bir gün, başka bir reklamlı başyapıt</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Reklamlar mı izlemek istiyorsun? Ben de istemiyorum</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Uygulamalarınızı davranışlı hale getirelim</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Bugünün tahmini: yama yapma ihtimali yüzde 100</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Hayal kırıklığından harikaya geçmeye hazır mısın?</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Bugünden beri kendini kurtaran uygulamalar</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
+    <string name="morphe_home_bundle_type_api">API Paketi</string>
+    <string name="morphe_home_update_error">Güncelleme başarısız</string>
+    <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
+    <string name="morphe_home_updating_patches">Yama paketleri güncelleniyor…</string>
+    <string name="morphe_home_update_success">Güncelleme tamamlandı</string>
+    <string name="morphe_home_patches_updated">Yama paketleriniz güncel</string>
+    <string name="morphe_home_patches_are_loading">Yama paketleri yükleniyor, lütfen bekleyin…</string>
+    <string name="morphe_home_please_wait">Lütfen bekleyin…</string>
+    <string name="morphe_home_open_in_browser">Tarayıcıda Aç</string>
+    <string name="morphe_home_failed_to_open_url">URL Açılamadı</string>
+    <string name="morphe_home_date_added">Eklendi</string>
+    <string name="morphe_home_date_updated">Güncellendi</string>
+    <string name="morphe_home_check_updates">Kontrol Et</string>
+    <string name="morphe_home_unknown">Bilinmeyen</string>
+    <string name="morphe_home_timeline">Güncelleme Geçmişi</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s\'i yamak için %2$s (yamasız) sürümüne ihtiyacınız var</string>
+    <string name="morphe_home_apk_availability_yes">Evet, bende var</string>
+    <string name="morphe_home_apk_availability_no">Hayır, bulmama yardım et</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Orijinal APK\'yı indir</string>
+    <string name="morphe_home_download_instructions_steps_title">Talimatlar:</string>
+    <string name="morphe_home_download_instructions_step1">Aşağıdaki \'%1$s\' düğmesine tıklayın</string>
+    <string name="morphe_home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
+    <string name="morphe_home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'yı &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">İndirme tamamlanınca APK\'yı &lt;b&gt;yükleyin&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">İndirme bittikten sonra bu uygulamayı tekrar açın</string>
+    <string name="morphe_home_download_instructions_step4_mount">Orijinal APK\'yı yükledikten sonra bu uygulamayı tekrar açın</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com\'a Devam Et</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
+    <string name="morphe_home_file_picker_prompt_description">Şimdi yeni indirdiğiniz %1$s APK dosyasını seçin.</string>
+    <string name="morphe_home_file_picker_prompt_open">İndirdiğim APK dosyasını aç</string>
+    <string name="morphe_home_recommended_version">Önerilen Sürüm</string>
+    <string name="morphe_patcher_selected_version">Seçilen Sürüm</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Kök modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">APK Kaydet</string>
+    <string name="morphe_patcher_copy_error">Kopyalama Hatası</string>
+    <string name="morphe_patcher_show_error">Hatayı Göster</string>
+    <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
+    <string name="morphe_patcher_patches_progress">%2$d / %1$d yama</string>
+    <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
+    <string name="morphe_patcher_installing">Yükleniyor…</string>
+    <string name="morphe_patcher_installing_subtitle">Rock\'a hazır olmak üzere! 🎸</string>
+    <string name="morphe_patcher_success_title">Hepsi Bitti! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
+    <string name="morphe_patcher_complete_title">Yamalama Tamamlandı! ✨</string>
+    <string name="morphe_patcher_failed_title">Eyvah! Bir şeyler ters gitti</string>
+    <string name="morphe_patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
+    <string name="morphe_patcher_failed_dialog_title">Yama Başarısız</string>
+    <string name="morphe_patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
+    <string name="morphe_patcher_mounting">Takılıyor…</string>
+    <string name="morphe_patcher_conflict_title">Paket çakışması</string>
+    <string name="morphe_patcher_conflict_subtitle">Mevcut sürümü kaldırmanız gerekiyor</string>
+    <string name="morphe_patcher_install_error_title">Yükleme hatası</string>
+    <string name="morphe_patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Yüklemek için aşağıdaki düğmeye basın</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK, önerilmeyen bir uygulama sürümüdür. Devam etmek işlevsel olmayan bir uygulamayla sonuçlanabilir.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Yine de Devam Et</string>
+    <string name="morphe_patcher_wrong_package_title">Yanlış Paket Seçildi</string>
+    <string name="morphe_patcher_wrong_package_description">Seçilen APK, yama yapmak istediğiniz uygulama için değildir.</string>
+    <string name="morphe_patcher_expected_package">Beklenen Paket</string>
+    <string name="morphe_patcher_selected_package">Seçilen Paket</string>
+    <string name="morphe_patcher_message_1">Uygulamanızı harika bir şeye dönüştürüyoruz… 🏆</string>
+    <string name="morphe_patcher_message_2">Eski uygulamalara yeni numaralar öğretiyoruz… 🎩</string>
+    <string name="morphe_patcher_message_3">Uygulamanıza dijital bir bakım yapıyoruz… 🔧</string>
+    <string name="morphe_patcher_message_4">Dijital sihir hazırlıyoruz… ☕</string>
+    <string name="morphe_patcher_message_5">Kahve molası önerilir… ☕</string>
+    <string name="morphe_patcher_message_6">Dışarıya bakın, hava güzel… 🌤️</string>
+    <string name="morphe_patcher_message_7">1\'leri ve 0\'ları ayarlıyoruz… 🤖</string>
+    <string name="morphe_patcher_message_8">Dijital spagettiyi çözüyoruz… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Yamalanmamış uygulamadaki hataları düzeltiyoruz… 🐞</string>
+    <string name="morphe_patcher_message_10">Harika yamalar beklemeye değer… ⏳</string>
+    <string name="morphe_patcher_message_11">Pikselleri parlayana kadar parlatıyoruz… 💎</string>
+    <string name="morphe_patcher_message_12">Pilot \'Yamalama işlemi devam ediyor\' ışığını söndürene kadar lütfen yerinizde kalın... 💺✈️</string>
+    <string name="morphe_patcher_message_13">Yama yapılan uygulamanız pişiyor, sıcak ve taze… 🍳</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Bytecode ile nazikçe pazarlık yapıyoruz... 🤝</string>
+    <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Tüm sistemler normal… yama yörüngesi stabil… 🚀</string>
+    <string name="morphe_patcher_message_16">Dijital bir limondan suyu sıkmak gibi ekstra güç sıkılıyor… 🍋</string>
+    <string name="morphe_patcher_message_17">Uygulamayı yeni, daha iyi benliğini kabul etmeye teşvik ediliyor… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Uygulama süperpozisyonu yamalıdan yamalanmamışa değiştiriliyor… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">Uygulamanızın ateşi var ve tek reçete daha fazla yama… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Saçmalıklar kaldırılıyor. Lütfen bekleyin… 🗑️</string>
+    <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Morphe ana sayfasına dön</string>
+    <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
+    <string name="morphe_settings_return_to_expert">Uzman yap&#305;gorunu degi&#350;tir</string>
+    <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
+    <string name="morphe_share_website">Websitesini Paylaş</string>
+    <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
+    <!-- Appearance Section -->
+    <string name="morphe_appearance_options">Görünüm Seçenekleri</string>
+    <string name="morphe_appearance_options_description">Tema, renk ve arka planları özelleştirin</string>
+    <string name="morphe_background_type">Arka Plan Animasyonu</string>
+    <string name="morphe_background_type_circles">Daireler</string>
+    <string name="morphe_background_type_rings">Halkalar</string>
+    <string name="morphe_background_type_waves">Dalgalar</string>
+    <string name="morphe_background_type_space">Uzay</string>
+    <string name="morphe_background_type_shapes">Şekiller</string>
+    <string name="morphe_background_type_snow">Kar</string>
+    <string name="morphe_background_type_none">Yok</string>
+    <!-- Update Section -->
+    <string name="morphe_update_use_patches_prereleases">Sürüm öncesi yamaları kullan</string>
+    <string name="morphe_update_use_patches_prereleases_description">En son geliştirme yamalarını kullanın</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Yama Seçenekleri</string>
+    <string name="morphe_patch_options_youtube_description">Tema, marka, başlık ve Shorts seçenekleri</string>
+    <string name="morphe_patch_options_youtube_music_description">Tema ve marka seçenekleri</string>
+    <string name="morphe_patch_options_restart_message">Yama seçeneklerini değiştirmek, uygulamayı yeniden indirmeyi gerektirir</string>
+    <string name="morphe_icon_instructions_title">Simge formatı talimatları</string>
+    <string name="morphe_header_instructions_title">Başlık formatı talimatları</string>
+    <string name="morphe_loading_patch_options">Yama seçenekleri yükleniyor...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Yama paketi güncellenene kadar bekleyin</string>
+    <string name="morphe_patch_options_load_error">Yama seçenekleri yüklenemedi</string>
+    <string name="morphe_no_options_available">Bu yamaya ait seçenekler bulunmuyor</string>
+    <!-- Color Picker -->
+    <string name="morphe_custom_color">Özel renk</string>
+    <string name="morphe_hex_color">Hex rengi</string>
+    <!-- Theme Colors -->
+    <string name="morphe_theme_colors">Uygulama Tema Renkleri</string>
+    <string name="morphe_theme_dark_color">Koyu Tema Arka Plan Rengi</string>
+    <string name="morphe_theme_dark_color_description">Koyu tema için arka plan rengi</string>
+    <string name="morphe_theme_light_color">Açık Tema Arka Plan Rengi</string>
+    <!-- Custom Branding -->
+    <string name="morphe_custom_branding">Özel Marka</string>
+    <string name="morphe_custom_app_name_description">Uygulama gösterim adını değiştirin</string>
+    <string name="morphe_custom_app_name_hint">Özel adı girin</string>
+    <!-- Custom Header (YouTube) -->
+    <string name="morphe_custom_header">Özel Başlık Logosu</string>
+    <string name="morphe_custom_header_description">Özel başlık resimlerini içeren klasör yolu</string>
+    <!-- Hide Shorts -->
+    <string name="morphe_hide_shorts_features">Shorts Özelliklerini Gizle</string>
+    <string name="morphe_hide_shorts_app_shortcut">Shorts Uygulama Kısayolunu Gizle</string>
+    <string name="morphe_hide_shorts_app_shortcut_description">Shorts\'u Başlatıcıdaki Uzun Basma Menüsünden Kaldır</string>
+    <string name="morphe_hide_shorts_widget">Shorts Araç Takımını Gizle</string>
+    <string name="morphe_hide_shorts_widget_description">Başlatıcı Araç Takımında Shorts Düğmesini Kaldır</string>
+    <!-- Other strings -->
+    <string name="patcher">Yamalayıcı</string>
+    <string name="patches">Yamalar</string>
+    <string name="patch_bundles">Yama Paketleri</string>
+    <string name="patch_bundle">Yama Paketi</string>
+    <!-- Morphe -->
+    <string name="installer">Kurucu</string>
+    <string name="plugin_host_permission_label">Morphe eklenti barındırıcısı</string>
+    <string name="plugin_host_permission_description">Morphe eklentilerine erişimi kontrol etmek için kullanılır. Yalnızca Morphe\'nun buna erişimi vardır.</string>
+    <string name="toast_copied_to_clipboard">Kopyalandı!</string>
+    <string name="copy_to_clipboard">Panoya kopyala</string>
+    <string name="settings">Ayarlar</string>
+    <string name="select_app">Uygulama seçin</string>
+    <string name="app_filter_title">Uygulamaları filtrele</string>
+    <string name="app_filter_installed_only">Sadece kurulmuşlar</string>
+    <string name="app_filter_patches_available">Yamalar mevcut</string>
+    <string name="app_filter_no_results">Filtrelerinize uyan bir uygulama yok.</string>
+    <string name="new_downloader_plugins_notification">Yeni indirici eklentileri mevcut. Yapılandırmak için buraya tıklayın.</string>
+    <string name="unsupported_architecture_warning">Bu cihaz mimarisinde uygulama yamama desteklenmiyor ve büyük olasılıkla başarısız olacaktır.</string>
+    <string name="import_">İçe Aktar</string>
+    <string name="file_field_not_set">Seçilmedi</string>
+    <string name="field_not_set">Ayarlanmamış</string>
+    <string name="patches_missing">Eksik</string>
+    <string name="patches_error">Hata</string>
+    <string name="patches_error_description">Yamalar yüklenemedi. Hatayı görmek için tıklayın</string>
+    <string name="patches_not_downloaded">Yamalar henüz indirilmemiştir. İndirmek için buraya tıklayın</string>
+    <string name="patches_name_default">Yamalar</string>
+    <string name="patches_name_fallback">İsimsiz</string>
+    <string name="bundle_uid">Paket UID</string>
+    <string name="patches_display_name">Görünen ad</string>
+    <string name="android_11_bug_dialog_title">Android 11 hatası</string>
+    <string name="android_11_bug_dialog_description">Kullanıcı deneyimini olumsuz etkileyecek bir Android 11 sistemi hatasını önlemek için uygulama yükleme izninin önceden verilmesi gerekir.</string>
+    <string name="no_network_toast">İnternet bağlantısı yok</string>
+    <string name="selected_app_meta_any_version">Kullanılabilir herhangi bir sürüm</string>
+    <string name="app_source_dialog_title">Kaynak seçin</string>
+    <string name="app_source_dialog_option_auto">Otomatik</string>
+    <string name="app_source_dialog_option_auto_description">Uygulamayı indirmek için mevcut tüm indiricileri kullanın</string>
+    <string name="app_source_dialog_option_auto_unavailable">Eklenti yok</string>
+    <string name="app_source_dialog_option_storage">Depolama</string>
+    <string name="app_source_dialog_option_storage_description">Yerel depolamadan bir APK seçin</string>
+    <string name="app_source_dialog_option_installed_no_root">Yüklü uygulamalar kök erişimi olmadan tekrar yamalanamaz</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">Sürüm %s önerilen sürümle eşleşmiyor</string>
+    <string name="bundle_version_item">Paket önerisi</string>
+    <string name="bundle_version_item_description_default">Varsayılan öneriyi kullanarak</string>
+    <string name="bundle_version_item_description_selected">%1$s (%2$s) takip ediliyor</string>
+    <string name="bundle_version_dialog_title">Paket önerisi seçin</string>
+    <string name="bundle_version_dialog_description">APK\'yı indirirken kullanılacak paket önerisini seçin</string>
+    <string name="bundle_version_dialog_default">Varsayılan öneriyi kullan</string>
+    <string name="bundle_version_dialog_default_subtitle">En yaygın uyumlu sürümü otomatik olarak seçin.</string>
+    <string name="bundle_version_all_versions">Tüm sürümler</string>
+    <string name="bundle_version_no_version">Önerilen sürüm yok</string>
+    <string name="bundle_version_suggested_label">Önerilen sürüm: %1$s</string>
+    <string name="bundle_update_manual_available">Güncelleme mevcut</string>
+    <string name="bundle_update_manual_available_with_version">Güncelleme mevcut: %1$s</string>
+    <string name="bundle_update_progress">%2$d/%1$d paket işlendi</string>
+    <string name="bundle_update_banner_title">Yama paketleri güncelleniyor</string>
+    <string name="bundle_reorder">Paketleri düzenleyin</string>
+    <string name="bundle_reorder_title">Yama paketlerini düzenleyin</string>
+    <string name="bundle_reorder_description">Paketlerin listede ve yama seçim menüsünde görünme sırasını ayarlamak için tutamağı sürükleyin.</string>
+    <string name="bundle_actions_expand">Paket eylemlerini göster</string>
+    <string name="bundle_actions_collapse">Paket eylemlerini gizle</string>
+    <string name="patch_bundle_duplicate_name_error">Bu isme sahip bir yama paketi zaten mevcut</string>
+    <string name="patch_bundle_missing_error">Bu yama paketi güncellenemedi.</string>
+    <string name="bundle_release_page">Sürüm sayfasını aç</string>
+    <string name="bundle_release_page_unavailable">Bu paket için sürüm sayfası kullanılamıyor</string>
+    <string name="bundle_release_page_error">Sürüm sayfası açılamadı: %s</string>
+    <string name="bundle_links_title">%1$s için Bağlantılar</string>
+    <string name="bundle_link_release">GitHub sürümü</string>
+    <string name="bundle_link_catalog">Yama listesi kataloğu</string>
+    <string name="bundle_catalog_unavailable">Yama listesi kataloğu kullanılamıyor</string>
+    <string name="show_suggested_versions">Önerilen sürümleri göster</string>
+    <string name="hide_suggested_versions">Önerilen sürümleri gizle</string>
+    <string name="show_other_versions">Diğer sürümleri göster</string>
+    <string name="other_supported_versions_title">Desteklenen diğer sürümler (%1$s)</string>
+    <string name="other_supported_versions_empty">Desteklenen başka sürüm yok.</string>
+    <string name="other_supported_versions_all">Tüm sürümleri destekler.</string>
+    <string name="bundle_version_dialog_recommended">Önerilen sürüm: %1$s</string>
+    <string name="bundle_version_dialog_selected_override">Seçilen sürüm: %1$s</string>
+    <string name="bundle_version_dialog_selected_indicator">Seçilen</string>
+    <string name="bundle_version_dialog_other_title">Desteklenen başka bir sürüm seçin:</string>
+    <string name="bundle_version_dialog_locked_title">Sürüm güvenceleri etkinleştirildi</string>
+    <string name="bundle_version_dialog_locked_hint">Ayarlar &gt; Gelişmiş &gt; Güvenceler bölümüne gidin ve paket-özel sürümleri seçmek için hem \"Önerilen uygulama sürümünü gerektir\" (kapat) hem de \"Sürüm uyumluluk denetimini devre dışı bırak\" (aç) seçeneklerini ayarlayın.</string>
+    <string name="patch_versions_dialog_title">%1$s için desteklenen versiyonlar</string>
+    <string name="patch_selector_item">Yama seç</string>
+    <string name="patch_selector_item_description">%d yama seçildi</string>
+    <string name="no_patches_selected">Hiç yama seçilmedi</string>
+    <string name="network_unavailable_warning">Cihazınız internete bağlı değil. İndirme daha sonra başarısız olacaktır.</string>
+    <string name="apk_source_selector_item">APK kaynağı seç</string>
+    <string name="apk_source_auto">Tüm APK indiricileri kullanılıyor</string>
+    <string name="apk_source_downloader">%s kullanılıyor</string>
+    <string name="apk_source_installed">Yüklü APK kullanılıyor</string>
+    <string name="apk_source_local">Yerel bir APK dosyası kullanılıyor</string>
+    <string name="apk_source_downloaded">İndirilmiş APK kullanılıyor</string>
+    <string name="auto_updates_dialog_title">Güncellemeleri yapılandır</string>
+    <string name="auto_updates_dialog_description">Morphe\'nin aşağıdaki bileşenler için periyodik olarak güncelleme kontrol etmesini ister misiniz?</string>
+    <string name="auto_updates_dialog_patches">Morphe Yamaları</string>
+    <string name="auto_updates_dialog_note">Bu ayarlar daha sonra değiştirilebilir.</string>
+    <string name="appearance">Görünüm</string>
+    <string name="appearance_description">Tema, değişen renk</string>
+    <string name="updates">Güncellemeler</string>
+    <string name="updates_description">Güncellemeleri kontrol et ve değişiklik günlüğünü görüntüle</string>
+    <string name="downloads">İndirilenler</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <string name="import_export">İçe &amp; dışa aktar</string>
+    <string name="import_export_description">Anahtar deposu, yama seçenekleri ve seçim</string>
+    <string name="changelog">Değişiklik günlüklerini görüntüle</string>
+    <string name="changelog_loading">Değişiklik günlüğü yükleniyor</string>
+    <string name="changelog_download_fail">Değişiklik günlüğü indirilemedi: %s</string>
+    <string name="changelog_description">Bu güncellemedeki en son değişiklikleri inceleyin</string>
+    <string name="advanced">Gelişmiş</string>
+    <string name="advanced_description">API URL\'si, bellek sınırı, hata ayıklama</string>
+    <string name="about">Hakkında</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">Yeşilay (Vurgusal)</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">Tema önizlemesi</string>
+    <!-- Morphe -->
+    <string name="theme_presets">Tema ön ayarları</string>
+    <!-- Morphe -->
+    <string name="theme_preset_default">Sistemi izle</string>
+    <string name="theme_preset_amoled">Saf siyah</string>
+    <string name="theme_preset_dynamic">Malzeme Sen</string>
+    <!-- Morphe -->
+    <string name="color_channel_red">Kırmızı</string>
+    <string name="color_channel_green">Yeşil</string>
+    <string name="color_channel_blue">Mavi</string>
+    <string name="theme">Tema</string>
+    <string name="safeguards">Korumalar</string>
+    <string name="patch_compat_check">Sürüm uyumluluğu kontrolünü devre dışı bırak</string>
+    <string name="patch_compat_check_description">Yama dosyalarını uyumlu uygulama sürümleriyle sınırlama</string>
+    <string name="patch_compat_check_confirmation">"Uyumsuz yama dosyaları seçmek uygulamanın bozulmasına neden olabilir.
+
+Yine de devam etmek istiyor musunuz?"</string>
+    <string name="suggested_version_safeguard">Önerilen uygulama sürümünü gerektir</string>
+    <string name="suggested_version_safeguard_description">Önerilen uygulama sürümünün seçimini zorla</string>
+    <string name="suggested_version_safeguard_confirmation">"Önerilmeyen bir sürüm seçmek beklenmeyen sorunlara yol açabilir.
+
+Yine de devam etmek istiyor musunuz?"</string>
+    <string name="patch_selection_safeguard">Yama seçimini ve seçeneklerini değiştirmeye izin ver</string>
+    <string name="patch_selection_safeguard_description">Yama seçimini veya seçimini kaldırmayı ve seçenekleri özelleştirmeyi engelleme</string>
+    <string name="patch_selection_safeguard_confirmation">"Yama seçimini değiştirmek beklenmeyen sorunlara neden olabilir.
+
+Yine de etkinleştirmek ister misiniz?"</string>
+    <string name="universal_patches_safeguard">Evrensel yamaları göster &amp; kullanmaya izin ver</string>
+    <string name="universal_patches_safeguard_description">Evrensel yamaları gizleme veya kullanmalarını engelleme</string>
+    <string name="universal_patches_profile_blocked_title">Evrensel yamalar devre dışı bırakıldı</string>
+    <string name="universal_patches_profile_blocked_description">Bu yama profili, evrensel yamalar içerir. Kullanmak için gelişmiş ayarlarda \"%1$s\" seçeneğini etkinleştirin.</string>
+    <string name="universal_patches_app_blocked_description">Bu uygulama evrensel yamalar içerir. Devam etmek için gelişmiş ayarlarda \"%1$s\" seçeneğini etkinleştirin.</string>
+    <string name="import_keystore">Anahtar deposunu içeri aktar</string>
+    <string name="import_keystore_description">Özel bir anahtar deposu içeri aktarın</string>
+    <string name="import_keystore_dialog_title">Anahtar deposu kimlik bilgilerini girin</string>
+    <string name="import_keystore_dialog_description">Keystore\'un girdilerini içe aktarmak için girdi gerekli.</string>
+    <string name="import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
+    <string name="import_keystore_dialog_password_field">Parola</string>
+    <string name="import_keystore_dialog_button">İçeri Aktar</string>
+    <string name="import_keystore_wrong_credentials">Yanlış anahtar deposu kimlik bilgileri</string>
+    <string name="import_keystore_success">Anahtar deposu içe aktarıldı</string>
+    <string name="export_keystore">Anahtar deposunu dışa aktar</string>
+    <string name="export_keystore_description">Geçerli anahtar deposunu dışa aktarın</string>
+    <string name="export_keystore_unavailable">Dışa aktarılacak anahtar deposu yok</string>
+    <string name="export_keystore_success">Dışa aktarılan anahtar deposu</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore_success">Anahtar deposu başarıyla değiştirildi</string>
+    <string name="import_patch_selection">Yama seçimini içe aktar</string>
+    <string name="import_patch_selection_description">Yama seçimini bir JSON dosyasından içe aktarın</string>
+    <string name="import_patch_selection_fail">Yama seçimi içe aktarılamadı: %s</string>
+    <string name="import_patch_selection_success">Yama seçimi içe aktarıldı</string>
+    <string name="import_patch_bundles">Yama paketlerini içe aktar</string>
+    <string name="import_patch_bundles_description">Uzak yama paketlerini bir JSON dosyasından geri yükleyin</string>
+    <string name="import_patch_bundles_fail">Yama paketleri içe aktarılamadı: %s</string>
+    <string name="import_patch_bundles_in_progress">İçe aktarılıyor...</string>
+    <string name="import_patch_bundles_success">%d yama paketi içe aktarıldı</string>
+    <string name="import_patch_bundles_updated">%d yama paketi güncellendi</string>
+    <string name="import_patch_bundles_none">Hiçbir yeni yama paketi içe aktarılmadı</string>
+    <string name="import_patch_bundles_banner_title">Yama paketleri içe aktarılıyor</string>
+    <string name="import_patch_bundles_banner_subtitle">%1$d / %2$d işlendi</string>
+    <string name="import_patch_bundles_banner_steps">Adım %1$d / %2$d</string>
+    <string name="import_patch_profiles">Yama profilleri içe aktar</string>
+    <string name="import_patch_profiles_description">Kaydedilmiş yama profillerini bir JSON dosyasından içe aktarın</string>
+    <string name="import_patch_profiles_fail">Yama profilleri içe aktarılamadı: %s</string>
+    <string name="import_patch_profiles_success">%d yama profili içe aktarıldı</string>
+    <string name="import_patch_profiles_partial">%1$d yama profili içe aktarıldı, %2$d atlandı</string>
+    <string name="import_patch_profiles_skipped">%d yinelenen yama profili atlandı</string>
+    <string name="import_patch_profiles_none">Hiçbir yama profili içe aktarılmadı</string>
+    <string name="import_manager_settings">Yönetici ayarlarını içe aktar</string>
+    <string name="import_manager_settings_description">Kaydedilmiş yönetici ayarlarını bir JSON dosyasından geri yükleyin</string>
+    <string name="import_manager_settings_fail">Yönetici ayarları içe aktarılamadı: %s</string>
+    <string name="import_manager_settings_success">Yönetici ayarları içe aktarıldı</string>
+    <string name="export_patch_selection">Yama seçimi dışa aktar</string>
+    <string name="export_patch_selection_description">Yama seçimi bir JSON dosyasına dışa aktar</string>
+    <string name="export_patch_selection_fail">Yama seçimi dışa aktarılamadı: %s</string>
+    <string name="export_patch_selection_success">Yama seçimi dışa aktarıldı</string>
+    <string name="export_patch_bundles">Yama paketlerini dışa aktar</string>
+    <string name="export_patch_bundles_description">İçe aktarılan uzak yama paketlerini bir JSON dosyasına kaydet</string>
+    <string name="export_patch_bundles_fail">Yama paketleri dışa aktarılamadı: %s</string>
+    <string name="export_patch_bundles_success">%d yama paketi dışa aktarıldı</string>
+    <string name="export_patch_bundles_partial">%1$d yama paketi dışa aktarıldı. Bazı paketler yerel olarak eklendiği için dışa aktarılamadı.</string>
+    <string name="bundle_type_remote">Uzak</string>
+    <string name="bundle_type_local">Yerel</string>
+    <string name="bundle_type_preinstalled">Önceden yüklenmiş</string>
+    <string name="bundle_created_at">%1$s tarihinde oluşturuldu</string>
+    <string name="bundle_updated_at">%1$s tarihinde güncellendi</string>
+    <string name="bundle_changelog">Değişiklik Günlüğü</string>
+    <string name="bundle_view_changelog">En son değişiklik günlüğünü görüntüleyin</string>
+    <string name="bundle_changelog_error">Değişiklik günlüğü yüklenemedi: %s</string>
+    <string name="bundle_changelog_retry">Tekrar Dene</string>
+    <string name="bundle_changelog_empty">Kullanılabilir değişiklik günlüğü yok</string>
+    <string name="export_patch_profiles">Yama profillerini dışa aktar</string>
+    <string name="export_patch_profiles_description">Tüm yama profillerini bir JSON dosyasına aktarın</string>
+    <string name="export_patch_profiles_fail">Yama profilleri dışa aktarılamadı: %s</string>
+    <string name="export_patch_profiles_success">%d yama profili dışa aktarıldı</string>
+    <string name="export_patch_profiles_empty">Dışa aktarılacak yama profili yok</string>
+    <string name="export_manager_settings">Yönetici ayarlarını dışa aktar</string>
+    <string name="export_manager_settings_description">Tüm yönetici ayarlarını bir JSON dosyasına kaydedin</string>
+    <string name="export_manager_settings_fail">Yönetici ayarları dışa aktarılamadı: %s</string>
+    <string name="export_manager_settings_success">Yönetici ayarları dışa aktarıldı</string>
+    <string name="reset_patch_selection">Yama seçimini sıfırla</string>
+    <string name="reset_patch_selection_description">Kaydedilen yama seçimini sıfırla</string>
+    <string name="reset_patch_options">Yama seçeneklerini sıfırla</string>
+    <string name="reset_patch_options_description">Kaydedilen yama seçeneklerini sıfırla</string>
+    <string name="reset_patch_selection_success">Yama seçimi sıfırlandı</string>
+    <string name="patch_selection_deselected_all_toast">Tüm yamalar seçimi kaldırıldı</string>
+    <string name="patch_selection_deselected_bundle_toast">%s içindeki tüm yamalar seçimi kaldırıldı</string>
+    <string name="patch_selection_no_selected_bundle_toast">%s içindeki seçilecek yama yok</string>
+    <string name="patch_selection_selected_all_toast">Tüm yamalar seçildi</string>
+    <string name="patch_selection_select_all_empty_toast">Seçilecek yama yok</string>
+    <string name="patch_selection_selected_bundle_toast">%s içindeki tüm yamalar seçildi</string>
+    <string name="patch_selection_select_bundle_empty_toast">%s içinde seçilebilecek yama yok</string>
+    <string name="patch_selection_all_actions_hidden_toast">Bütün eylem düğmeleri gizli, en az biri ayarı açın</string>
+    <string name="patch_selection_reset_bundle_toast">%s için varsayılanları sıfırla</string>
+    <string name="patch_selection_button_label_all">Tümünü seçimden çıkar</string>
+    <string name="patch_selection_button_label_bundle">Yama grubunu seçimden çıkar</string>
+    <string name="patch_selection_button_label_defaults">Tüm varsayılanlar</string>
+    <string name="patch_selection_button_label_select_bundle">Paket seç</string>
+    <string name="patch_selection_button_label_select_all">Tümünü seç</string>
+    <string name="patch_selection_button_label_undo_action">Eylemi geri al</string>
+    <string name="patch_selection_button_label_redo_action">Eylemi yinele</string>
+    <string name="patch_selection_history_undo">%1$s geri alındı</string>
+    <string name="patch_selection_history_redo">%1$s yinelendi</string>
+    <string name="patch_selection_action_all_defaults">tüm varsayılanlar</string>
+    <string name="patch_selection_action_deselect_all">tümünü kaldır</string>
+    <string name="patch_selection_action_select_all">tümünü seç</string>
+    <string name="patch_selection_action_select_bundle">“%1$s” paketini seç</string>
+    <string name="patch_selection_action_deselect_bundle">“%1$s” paketini kaldır</string>
+    <string name="patch_selection_action_bundle_defaults">“%1$s” için paket varsayılanları</string>
+    <string name="disable_patch_selection_confirmations">Eylem onaylarını devre dışı bırak</string>
+    <string name="disable_patch_selection_confirmations_description">Yama seçimi işlemleri için onay iletişim kutularını atla</string>
+    <string name="disable_patch_selection_confirmations_warning">Onayların devre dışı bırakılması istenmeyen toplu değişikliklere neden olabilir.</string>
+    <string name="patch_selection_collapse_on_toggle">Yamaları değiştirdikten sonra eylemleri daralt</string>
+    <string name="patch_selection_collapse_on_toggle_description">Bir yama seçtiğinizde veya seçimini kaldırdığınızda yama seçimi eylem düğmelerini otomatik olarak gizle</string>
+    <string name="patch_selection_action_order_title">Yama seçimi eylem düğmeleri sırası</string>
+    <string name="patch_selection_action_order_description">Yama seçimi eylem düğmeleri için düzen sırasını seçin</string>
+    <string name="patch_selection_action_visibility_title">Güncelleme seçimi için eylem görünürlüğü</string>
+    <string name="patch_selection_action_visibility_description">Açılabilir güncelleme eylem düğmelerini seçin</string>
+    <string name="patch_selection_action_visibility_reset">Tüm eylem düğmelerini göster</string>
+    <string name="patch_selection_action_order_reset">Varsayılan sıraya sıfırla</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Paketi kaldır?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">%1$s adresinden seçilen tüm yamaları kaldır?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Tüm yamaları kaldır?</string>
+    <string name="patch_selection_confirm_deselect_all_message">Bu, tüm paketlerde seçili olan her yamayı temizler.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Paket varsayılanlarını geri yükle?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Bu, %1$s için önerilen varsayılanları geri yükler.</string>
+    <string name="patch_selection_confirm_select_bundle_title">Paketi seç?</string>
+    <string name="patch_selection_confirm_select_bundle_message">%1$s tarafından sağlanan her yamayı seç?</string>
+    <string name="patch_selection_confirm_select_all_title">Tüm yamaları seç?</string>
+    <string name="patch_selection_confirm_select_all_message">Bu, tüm paketlerdeki her yamayı seçer.</string>
+    <string name="patch_selection_button_label_reset_bundle">Paket varsayılanları</string>
+    <string name="patch_profile_save_label">Profili kaydet</string>
+    <string name="patch_selection_toggle_expand">Eylemleri göster</string>
+    <string name="patch_selection_toggle_collapse">Eylemleri gizle</string>
+    <string name="patch_selection_reset_all">Yama seçimini global olarak sıfırla</string>
+    <string name="patch_selection_reset_all_dialog_description">"Tüm yama seçimlerini sıfırlamak üzeresiniz. Her yamayı tekrar manuel olarak seçmeniz gerekecek.
+
+Yama profilleri etkilenmez."</string>
+    <string name="patch_selection_reset_all_description">Tüm yama seçimlerini sıfırlar</string>
+    <string name="patch_selection_reset_dialog_title">Yama varsayılanlarını sıfırla?</string>
+    <string name="patch_selection_reset_dialog_message">Bu, yama seçimlerinizi ve seçeneklerinizi önerilen varsayılanlarına geri yükleyecektir.</string>
+    <string name="patch_selection_reset_package">Uygulama için yama seçimini sıfırla</string>
+    <string name="patch_selection_reset_package_dialog_description">"\"%s\" uygulaması için yama seçimini sıfırlamak üzeresiniz. Her yamayı tekrar manuel olarak seçmeniz gerekecektir.
+
+Yama profilleri etkilenmez."</string>
+    <string name="patch_selection_reset_package_description">Tek bir uygulama için yama seçimini sıfırlar</string>
+    <string name="patch_selection_reset_patches">Yama seçimini sıfırla (tek)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"\"%s\" için yama seçimini sıfırlamak üzeresiniz. Her yamayı tekrar manuel olarak seçmeniz gerekecektir.
+
+Yama profilleri etkilenmez."</string>
+    <string name="patch_selection_reset_patches_description">Belirli bir yama koleksiyonu için yama seçimini sıfırlar</string>
+    <string name="patch_options_reset_package">Uygulama için yama seçeneklerini sıfırla</string>
+    <string name="patch_options_reset_package_dialog_description">"\"%s\" uygulaması için yama seçeneklerini sıfırlamak üzeresiniz. Her seçeneği tekrar uygulamanız gerekecektir.
+
+Yama profilleri etkilenmez."</string>
+    <string name="patch_options_reset_package_description">Tek bir uygulama için yama seçeneklerini sıfırlar</string>
+    <string name="patch_options_reset_patches">Yama seçeneklerini sıfırla (tekil)</string>
+    <string name="patch_options_reset_patches_dialog_description">"\"%s\" için yama seçeneklerini sıfırlamak üzeresiniz. Her seçeneği tekrar uygulamanız gerekecektir.
+
+Yama profilleri etkilenmez."</string>
+    <string name="patch_options_reset_patches_description">Belirli bir yama koleksiyonu için yama seçeneklerini sıfırlar</string>
+    <string name="patch_options_reset_all">Yama seçeneklerini global olarak sıfırla</string>
+    <string name="patch_options_reset_all_dialog_description">"Tüm yama seçeneklerini sıfırlamak üzeresiniz. Her seçeneği tekrar uygulamanız gerekecektir.
+
+Tüm yama profilleri etkilenmez."</string>
+    <string name="patch_options_reset_all_description">Tüm yama seçeneklerini sıfırlar</string>
+    <string name="download_settings">İndirme ayarları</string>
+    <string name="downloader_auto_save_title">İndirilen APK\'ları otomatik kaydet</string>
+    <string name="downloader_auto_save_description">Yeniden kullanmak için eklentiler aracılığıyla indirilen APK\'ları saklayın. Yamaladıktan sonra silmek için devre dışı bırakın.</string>
+    <string name="downloader_plugins">Eklentiler</string>
+    <string name="downloader_plugin_state_trusted">Güvenilir</string>
+    <string name="downloader_plugin_state_failed">Yüklenemedi. Daha fazla ayrıntı için tıklayın</string>
+    <string name="downloader_plugin_state_untrusted">Güvenilmeyen</string>
+    <string name="downloader_plugin_trust_dialog_title">Eklentiyi güvenle kullan?</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">Güveni iptal et?</string>
+    <string name="downloader_plugin_trust_dialog_body">"Paket adı: %1$s
+İmza (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_view_error">Hata ayrıntılarını görüntüle</string>
+    <string name="downloader_plugin_failed_dialog_body">\"%1$s\" yüklenemedi. Hata ayrıntılarını görüntüleyebilir veya eklentiyi kaldırabilirsiniz.</string>
+    <string name="downloader_plugin_uninstall_title">Eklentiyi kaldır?</string>
+    <string name="downloader_plugin_uninstall_description">\"%1$s\" uygulamasını kaldırmak istediğinizden emin misiniz?</string>
+    <string name="downloader_plugin_delete_apps_title">Seçilen uygulamaları sil</string>
+    <string name="downloader_plugin_delete_apps_description">Seçilen uygulamaları silmek istediğinizden emin misiniz?</string>
+    <string name="downloader_settings_no_apps">İndirilen uygulama bulunamadı.</string>
+    <string name="search_apps">Uygulamaları ara…</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="edit">Düzenle</string>
+    <string name="dialog_input_placeholder">Değer</string>
+    <string name="reset">Sıfırla</string>
+    <string name="share">Paylaş</string>
+    <string name="patch">Yama</string>
+    <string name="select_from_storage">Depodan seç</string>
+    <string name="select_from_storage_description">Dosya seçiciyi kullanarak depodan bir APK dosyası seçin</string>
+    <string name="type_anything">Devam etmek için herhangi bir şey yazın</string>
+    <string name="search">Yamaları ara…</string>
+    <string name="apply">Uygula</string>
+    <string name="help">Yardım</string>
+    <string name="back">Geri</string>
+    <string name="warning">Uyarı</string>
+    <string name="add">Ekle</string>
+    <string name="close">Kapat</string>
+    <string name="clear">Temizle</string>
+    <string name="system">Sistem</string>
+    <string name="light">Açık</string>
+    <string name="dark">Koyu</string>
+    <string name="black">Siyah</string>
+    <string name="downloaded_apps">İndirilen uygulamalar</string>
+    <string name="process_runtime">Yama yapılandırıcısını başka bir işlemde çalıştır</string>
+    <string name="process_runtime_description">Ayrı bir işlem kullanarak yamayı hızlandırır</string>
+    <string name="process_runtime_description_not_available">Bu özellik Android 11 veya daha yenisini gerektirir</string>
+    <string name="strip_unused_libs">Kullanılmayan yerel kitaplıkları kaldır</string>
+    <string name="strip_unused_libs_description">Yama yapılan uygulamalardaki desteklenmeyen CPU mimarileri için yerel kitaplıkları sil</string>
+    <string name="process_runtime_memory_limit">Yama yapılandırıcısı bellek sınırı</string>
+    <string name="process_runtime_memory_limit_description">Yama yapılandırıcısı işleminin kullanabileceği maksimum bellek miktarı (megabayt cinsinden)</string>
+    <string name="reset_to_recommended">Önerilenlere sıfırla</string>
+    <string name="patcher_auto_collapse_steps">Tamamlanan yama yapılandırıcısı adımlarını otomatik daralt</string>
+    <string name="patcher_auto_collapse_steps_description">Her yama yapılandırıcısı ilerleme penceresini, tüm adımları bittikten sonra otomatik olarak daralt</string>
+    <string name="patch_bundle_rename">Yama paketini yeniden adlandır</string>
+    <string name="patch_profile_view_options">Seçenekleri görüntüle</string>
+    <string name="patch_profile_patch_options_title">%1$s için Seçenekler</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="app_exporting">Uygulama dışa aktarımı</string>
+    <string name="export_name_format">Dışa aktarılan dosya adı biçimi</string>
+    <string name="export_name_format_description">Yama uygulanmış uygulamaların varsayılan dosya adını özelleştirin</string>
+    <string name="export_name_format_dialog_title">Dışa aktarılan dosya adı biçimi</string>
+    <string name="export_name_format_dialog_supporting">Dosya adı oluşturmak için aşağıdaki yer tutucuları kullanın. Eksikse .apk uzantısı otomatik olarak eklenir.</string>
+    <string name="export_name_format_preview_label">Önizleme</string>
+    <string name="export_name_format_variables">Değişkenler</string>
+    <string name="export_name_format_reset">Varsayılana sıfırla</string>
+    <string name="export_name_format_error_blank">Dosya adı biçimi boş olamaz.</string>
+    <string name="export_name_format_current">Mevcut desen: %1$s</string>
+    <string name="export_name_format_insert">Ekle</string>
+    <string name="export_name_variable_app_name">Uygulama adı</string>
+    <string name="export_name_variable_app_name_description">Uygulamanın bildirimiyle değiştirilecek.</string>
+    <string name="export_name_variable_package_name">Paket adı</string>
+    <string name="export_name_variable_package_name_description">Uygulamanın paket adıyla değiştirilecek.</string>
+    <string name="export_name_variable_app_version">Uygulama versiyonu</string>
+    <string name="export_name_variable_app_version_description">Uygulamanın versiyon adıyla değiştirilecek.</string>
+    <string name="export_name_variable_patches_version">Güncelleme versiyonu</string>
+    <string name="export_name_variable_patches_version_description">Uygulanan güncelleme paketi/leriyle değiştirilecek.</string>
+    <string name="export_name_variable_bundle_names">Güncelleme paketi adları</string>
+    <string name="export_name_variable_bundle_names_description">Uygulanan güncelleme paketi/adiyla değiştirilecek.</string>
+    <string name="export_name_variable_manager_version">Yönetici versiyonu</string>
+    <string name="export_name_variable_manager_version_description">Yönetici versiyonuyla değiştirilecek.</string>
+    <string name="export_name_variable_timestamp">Zaman damgası</string>
+    <string name="export_name_variable_timestamp_description">Geçerli zamanla değiştirilecek (yyyyMMdd-HHmmss).</string>
+    <string name="export_name_variable_date">Tarih</string>
+    <string name="export_name_variable_date_description">Geçerli tarihe değiştirilecek (yyyyMMdd).</string>
+    <string name="debug_logs_export">Hata ayıklama günlüklerini dışa aktar</string>
+    <string name="debug_logs_export_read_failed">Günlükler okunamadı (çıkış kodu %d)</string>
+    <string name="debug_logs_export_failed">Günlükler dışa aktarılamadı</string>
+    <string name="debug_logs_export_success">Günlükler dışa aktarıldı</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="api_url_dialog_description">Morphe\'nin API URL\'sini değiştirin. Morphe, yama ve güncelleştirmeleri indirmek için API\'yi kullanır.</string>
+    <string name="api_url_dialog_warning">Morphe, yama ve güncelleştirmeleri indirmek için API\'ye bağlanır. Güvendiğinizden emin olun.</string>
+    <string name="api_url_dialog_save">Ayarlar</string>
+    <string name="api_url_dialog_reset">API URL\'sini Sıfırla</string>
+    <!-- Morphe -->
+    <string name="github_pat_description">GitHub entegrasyonu için GitHub Kişisel Erişim Belirteci gerekiyor</string>
+    <string name="set_github_pat_dialog_title">GitHub PAT\'yi Ayarla</string>
+    <string name="set_github_pat_dialog_description">Çekme İsteklerini harici kaynaklar olarak ekleyebilmek için bir GitHub Kişisel Erişim Belirteci ayarlayın. `public_repo` kapsamıyla bir PAT oluşturun</string>
+    <string name="include_github_pat_in_exports_label">Ayarlar dışa aktarımına dahil et</string>
+    <string name="include_github_pat_in_exports_supporting">Bu PAT\'yi dışa aktarılan yönetici ayarlarına ekler</string>
+    <string name="include_github_pat_in_exports_warning">PAT\'nizi paylaşmayın. Ayarlar dışa aktarımına dahil ederseniz, belirteci içerdiği için o dosyayı özel tutun.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Büyük)</string>
+    <string name="patches_force_download">Tüm yama paketlerini indir</string>
+    <string name="patches_reset">Yama paketlerini sıfırla</string>
+    <string name="storage">Depolama</string>
+    <string name="no_patch_found">Hiç yama bulunamadı. Yamalarınızı kontrol edin</string>
+    <string name="tab_apps">Uygulamalar</string>
+    <string name="tab_patches">Yama Paketleri</string>
+    <string name="tab_profiles">Yama Profilleri</string>
+    <string name="delete">Sil</string>
+    <string name="disable">Devre dışı bırak</string>
+    <string name="enable">Aç</string>
+    <string name="patch_bundle_disabled_toast">Devre dışı bırakılan %d paket</string>
+    <string name="patch_bundle_enabled_toast">AÇILDI %d paket</string>
+    <string name="patches_disable_single_dialog_description">Devre dışı bırak \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">Aktifleştir \"%s\"?</string>
+    <string name="refresh">Yenile</string>
+    <string name="download_apk">APK dosyasını indir</string>
+    <string name="patches_download_fail">Yamalar indirilemedi: %s</string>
+    <string name="patches_replace_fail">Yamalar içe aktarılamadı: %s</string>
+    <string name="no_patched_apps_found">Yama uygulanan uygulama bulunamadı</string>
+    <string name="patches_selected">%s paket seçildi</string>
+    <string name="patch_profiles_selected">%1$d yama profili seçildi</string>
+    <string name="selected_apps_count">%1$d uygulama seçildi</string>
+    <string name="selected_apps_delete_dialog_description">Seçilen uygulamalar yöneticiden kaldırılacak mı? Cihazınızdaki yüklü uygulamalar etkilenmeyecektir.</string>
+    <string name="incompatible_patches">Uyumsuz yamalar</string>
+    <string name="universal_patches">Evrensel yamalar</string>
+    <string name="patch_selection_reset_toast">Yamalama seçimi ve seçenekleri önerilen varsayılanlara sıfırlandı</string>
+    <string name="patch_options_reset_toast">Yamalama seçenekleri sıfırlandı</string>
+    <string name="non_suggested_version_warning_title">Önerilmeyen sürüm</string>
+    <string name="non_suggested_version_warning_description">"Seçtiğiniz uygulamanın sürümü önerilen sürümle eşleşmiyor.
+Lütfen önerilen sürümü kullanın: %s
+
+Yine de devam etmek için gelişmiş ayarlarda \"Önerilen uygulama sürümünü gerektir\" seçeneğini devre dışı bırakın."</string>
+    <string name="selection_warning_description">"Varsayılan yamalama seçimi ve seçeneklerinin kullanılması önerilir. Bunları değiştirmek beklenmeyen sorunlara neden olabilir.
+
+Yamaları değiştirmeden önce gelişmiş ayarlarda \"Yamalama seçimi ve seçeneklerini değiştirmeye izin ver\" seçeneğini etkinleştirmeniz gerekir."</string>
+    <string name="patch_profile_save_action">Yamalama profilini kaydet</string>
+    <string name="patch_profile_select_bundles_title">Yamalama paketlerini seçin</string>
+    <string name="patch_profile_select_bundles_description">Bu profile dahil edilecek yamalama paketlerini seçin.</string>
+    <string name="patch_profile_select_bundles_empty">Kaydedilecek yamalama paketi yok.</string>
+    <string name="patch_profile_name_title">Yamalama profiline ad verin</string>
+    <string name="patch_profile_name_description">Bu yamalama profili için bir ad girin veya güncellemek için aşağıdan birini seçin</string>
+    <string name="patch_profile_update_existing_title">Mevcut profili güncelle</string>
+    <string name="patch_profile_update_existing_description">Üzerine yazmak için kayıtlı bir profile dokunun veya yeni bir profil oluşturmak için her şeyi seçili bırakın.</string>
+    <string name="patch_profile_name_hint">Profil adı</string>
+    <string name="patch_profile_saved_toast">Yama profili \"%1$s\" kaydedildi</string>
+    <string name="patch_profile_duplicate_toast">Yama profili \"%1$s\" bu uygulama için zaten mevcut</string>
+    <string name="patch_profile_updated_toast">Yama profili \"%1$s\" güncellendi</string>
+    <string name="patch_profile_save_failed_toast">Yama profili kaydedilemedi</string>
+    <string name="patch_profile_rename">Yeniden adlandır</string>
+    <string name="patch_profile_rename_title">Yama profilini yeniden adlandır</string>
+    <string name="patch_profile_version_override_action">Yama profili sürüm ayarları</string>
+    <string name="patch_profile_version_override_title">\"%1$s\" için sürüm ayarları</string>
+    <string name="patch_profile_version_override_message">Bu profil ile saklanacak belirli bir uygulama sürümü ayarlayın veya tüm sürümleri hedefleyin.</string>
+    <string name="patch_profile_version_override_label">Uygulama sürümü</string>
+    <string name="patch_profile_version_override_hint">Örn. 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">Tüm sürümleri kullan</string>
+    <string name="patch_profile_version_override_saved_toast">Profil sürümü güncellendi</string>
+    <string name="patch_profile_version_override_failed_toast">Profil sürümü güncellenemedi</string>
+    <string name="patch_profile_version_override_set_to_all">Sürüm girilmedi, \"%1$s\" olarak kaydedildi</string>
+    <string name="patch_profile_version_conflict_title">Sürüm geçersiz kılmayı tut?</string>
+    <string name="patch_profile_version_conflict_message">"Geçerli sürüm: %1$s
+Gelen sürüm: %2$s
+Hangi profilin kaydedilmesi gerekir?"</string>
+    <string name="patch_profile_version_conflict_use_new">Gelen sürümü kullan</string>
+    <string name="patch_profile_version_conflict_keep_existing">Mevcut sürümü tut</string>
+    <string name="patch_profile_empty_state">Yapılandırmayı yamalar seçim ekranından kaydedip burada görmek için kullanın.</string>
+    <string name="patch_profile_missing_bundles_toast">Bu profildeki bazı paketler kullanılamıyor ve atlanacaktır.</string>
+    <string name="patch_profile_changed_patches_toast">Bu profildeki bazı yamalar veya seçenekler artık paketle eşleşmiyor ve atlandı.</string>
+    <string name="patch_profile_no_available_bundles_toast">Bu profilde hiçbir paket kullanılamıyor. Paketlerinizi güncelleyin ve tekrar deneyin.</string>
+    <string name="patch_profile_launch_error">Bu yama profili açılamadı.</string>
+    <string name="patch_profile_show_more">Daha fazla göster</string>
+    <string name="patch_profile_show_less">Daha az göster</string>
+    <string name="patch_profile_created_at">%1$s tarihinde oluşturuldu</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (kullanılamıyor)</string>
+    <string name="patch_profile_bundle_change_uid">UID\'yi Değiştir</string>
+    <string name="patch_profile_bundle_change_uid_title">%1$s için UID\'yi Değiştir</string>
+    <string name="patch_profile_bundle_change_uid_invalid">Geçerli sayısal bir UID girin.</string>
+    <string name="patch_profile_bundle_change_uid_success">Paket UID\'si %1$d olarak güncellendi.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">UID %1$d olan yerel yama paketi bulunamadı.</string>
+    <string name="patcher_process_exit_message">Yama işleci %1$d koduyla sonlandı.</string>
+    <string name="patcher_memory_adjustment_title">Yama programı belleği tükendi</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_retry">Tekrar dene</string>
+    <string name="patcher_memory_adjustment_dismiss">Kapat</string>
+    <string name="patcher_missing_patch_title">Yama seçimi dikkat gerektiriyor</string>
+    <string name="patcher_preflight_missing_patch_remove">Eksik yamaları kaldır</string>
+    <string name="patcher_preflight_missing_patch_proceed">Yine de devam et</string>
+    <string name="patcher_preflight_missing_patch_message">"Şu anki pakette bulunmayan patch'ler aşağıdaki gibidir:
+%1$s
+Bu patch'leri otomatik olarak kaldırabilir, seçimi düzenleyebilir veya devam edebilirsiniz."</string>
+    <string name="patcher_missing_patch_review">Seçimi gözden geçir</string>
+    <string name="patch_selector_missing_patch_title">Eksik yamaları yeniden seçin</string>
+    <string name="patch_selector_missing_patch_message">"Bu yamaların yeniden seçilmesi gerekiyor:
+%1$s
+Bunları tekrar etkinleştirin (veya alternatifleri seçin) ve ardından yamayı bir kez daha deneyin."</string>
+    <string name="patch_profile_delete_multiple_dialog_description">Seçili yama profilleri silinsin mi?</string>
+    <string name="this_version">Bu sürüm</string>
+    <string name="universal">Herhangi bir uygulama</string>
+    <string name="search_patches">Yamaları ara</string>
+    <string name="app_version_not_compatible">"Bu yama seçilen uygulama sürümüyle (%1$s) uyumlu değil.
+
+Sadece aşağıdaki sürümle uyumludur: %2$s."</string>
+    <string name="failed_to_load_apk">APK yüklenemedi</string>
+    <string name="loading">Yükleniyor…</string>
+    <string name="not_installed">Yüklü değil</string>
+    <string name="installed">Yüklü</string>
+    <string name="app_info">Uygulama bilgileri</string>
+    <string name="uninstall">Kaldır</string>
+    <string name="repatch">Yeniden yama</string>
+    <string name="install_type">Yükleme türü</string>
+    <string name="package_name">Paket adı</string>
+    <string name="original_package_name">Orijinal paket adı</string>
+    <string name="applied_patches">Uygulanan yamalar</string>
+    <string name="view_applied_patches">Uygulanan yamaları görüntüle</string>
+    <string name="patch_bundles_used">Kullanılan yama paketleri</string>
+    <string name="applied_patches_empty">Bu uygulama için kaydedilmiş yama yok</string>
+    <string name="applied_patches_bundle_missing">Paket meta verileri kullanılamıyor. Kaydedilen yama adları gösteriliyor.</string>
+    <string name="no_patch_bundles_tracked">Bu uygulama için kaydedilmiş yama paketi yok</string>
+    <string name="mount_install">Rootlu bağlama yükleyicisi</string>
+    <string name="mounted">Bağlandı</string>
+    <string name="unmounted">Bağlantı kaldırıldı</string>
+    <string name="install_type_custom_installer">Özel yükleyici</string>
+    <string name="install_type_system_installer">Sistem yükleyicisi</string>
+    <string name="install_type_mount_label">Rootlu bağlama yükleyicisi</string>
+    <string name="not_mounted">Bağlanmadı</string>
+    <string name="mount">Bağla</string>
+    <string name="unmount">Bağlantıyı kaldır</string>
+    <string name="unmount_confirm_description">Uygulamanın bağlantısını kaldırmak istiyor musunuz?</string>
+    <string name="saved_install">Kaydedildi</string>
+    <string name="failed_to_mount">Bağlanamadı: %s</string>
+    <string name="failed_to_unmount">%s: Kaldırılamadı</string>
+    <string name="unpatch_app">Uygulama yaması kaldırılır mı?</string>
+    <string name="unpatch_description">Bu uygulamanın yamasını kaldırmak istediğinizden emin misiniz?</string>
+    <string name="downloader_app_not_found">İndirici uygulamayı bulamadı</string>
+    <string name="downloader_error">İndirici hatası: %s</string>
+    <string name="downloader_no_plugins_installed">İndirici yüklü değil.</string>
+    <string name="downloader_no_plugins_available">İndiriciler yüklü ancak hiçbiri güvenilir değil. Ayarlarınızı kontrol edin.</string>
+    <string name="downloader_plugin_uninstall_success">%1$s kaldırıldı</string>
+    <string name="downloader_plugin_uninstall_failed">%1$s kaldırılamadı</string>
+    <string name="downloaded_apps_export">Seçilen uygulamaları dışa aktar</string>
+    <string name="downloaded_apps_export_success">%1$d uygulama dışa aktarıldı</string>
+    <string name="downloaded_apps_export_failed">İndirilen uygulamalar dışa aktarılamadı</string>
+    <string name="already_patched">Zaten yamalı</string>
+    <string name="patch_selector_sheet_filter_title">Filtre</string>
+    <string name="patch_selector_sheet_filter_compat_title">Uyumluluk</string>
+    <string name="patch_selector_sheet_filter_sort_title">Sıralama</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabetik Sıralama</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Ayarlara Sahip</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">Ayarlarında Olmayan</string>
+    <string name="string_option_menu_description">Daha fazla seçenek</string>
+    <string name="option_preset_custom_value">Özel değer</string>
+    <string name="path_selector">Depolama alanından seçin</string>
+    <string name="path_selector_parent_dir">Önceki dizin</string>
+    <string name="path_selector_dirs">Dizinler</string>
+    <string name="path_selector_files">Dosyalar</string>
+    <string name="show_password_field">Parolayı göster</string>
+    <string name="hide_password_field">Parolayı gizle</string>
+    <string name="installer_primary_title">Birincil yükleyici</string>
+    <string name="installer_fallback_title">Yedekleyici yükleyici</string>
+    <string name="installer_internal_name">Sistem yükleyicisi</string>
+    <string name="installer_internal_description">Android paket yükleyicisini kullanın</string>
+    <string name="installer_auto_saved_name">Rootlu bağlama yükleyicisi</string>
+    <string name="installer_auto_saved_description">Yüklü uygulamaya yamalı APK\'yı bağlar (root gereklidir).</string>
+    <string name="installer_shizuku_description">Shizuku veya Sui kullanarak sessizce yükleyin.</string>
+    <string name="installer_option_none">Yedekleme yok</string>
+    <string name="installer_none_description">Yedekleme yükleyici yapılandırılmamış</string>
+    <string name="installer_status_requires_root">Root erişimi gerektirir</string>
+    <string name="installer_status_not_supported">Bu işlem için desteklenmiyor.</string>
+    <string name="installer_status_shizuku_not_installed">Bu seçeneği kullanmak için Shizuku veya Sui yükleyin.</string>
+    <string name="installer_status_shizuku_not_running">Shizuku veya Sui\'yi başlatıp tekrar deneyin.</string>
+    <string name="installer_status_shizuku_permission">Shizuku uygulamasından Morphe\'ye Shizuku izni verin.</string>
+    <string name="installer_mount_warning_title">Root bağlama yükleyicisi seçildi</string>
+    <string name="installer_mount_warning_install">Birincil yükleyiciniz root bağlama yükleyicisine ayarlanmıştır. Bu kaydedilen uygulama bağlama kullanılarak yüklenmedi.</string>
+    <string name="installer_mount_warning_update">Birincil yükleyiciniz root bağlama yükleyicisine ayarlanmıştır. Bu kaydedilen uygulama bağlama kullanılarak yüklenmedi.</string>
+    <string name="installer_mount_warning_uninstall">Birincil yükleyiciniz köklü bağlama yükleyicisi olarak ayarlanmış. Bu kaydedilen uygulama bağlama kullanılarak yüklenmedi.</string>
+    <string name="installer_mount_mismatch_title">Köklü bağlama yükleyicisi seçilmedi</string>
+    <string name="installer_mount_mismatch_install">Bu uygulama köklü bağlama yükleyicisi kullanılarak yüklendi. Bağlama eylemlerini kullanmak için birincil yükleyicinizi geri değiştirin, ardından bağlayın.</string>
+    <string name="installer_mount_mismatch_update">Bu uygulama köklü bağlama yükleyicisi kullanılarak yüklendi. Bağlama eylemlerini kullanmak için birincil yükleyicinizi geri değiştirin, ardından yeniden bağlayın.</string>
+    <string name="installer_mount_mismatch_uninstall">Bu uygulama köklü bağlama yükleyicisi kullanılarak yüklendi. Bağlama eylemlerini kullanmak için birincil yükleyicinizi geri değiştirin, ardından ayırın.</string>
+    <string name="mount_version_mismatch_title">Bağlama başarısız</string>
+    <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s), yamalı uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümünü bağlayın, ardından tekrar deneyin.</string>
+    <string name="installer_status_shizuku_unsupported">Yüklü Shizuku sürümü desteklenmiyor.</string>
+    <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
+    <string name="installer_shizuku_launch_failed">Shizuku açılamadı. Manuel olarak başlatın ve tekrar deneyin.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="installer_custom_tab_saved">Kaydedildi</string>
+    <string name="installer_custom_saved_note">Kullanıcı tarafından Birincil &amp; Yedek yükleyici seçim menülerine manuel olarak eklenen yükleyiciler.</string>
+    <string name="installer_custom_tab_auto_saved">Otomatik kaydedildi</string>
+    <string name="installer_custom_auto_note">Birincil &amp; Yedek yükleyici seçim menülerine otomatik olarak algılanan ve eklenen yükleyiciler.</string>
+    <string name="installer_custom_tab_discover">Keşfet</string>
+    <string name="installer_custom_close">Kapat</string>
+    <string name="installer_custom_manage_description">Üçüncü taraf yükleyici etkinliklerini birincil veya yedek yükleyici olarak kullanmak üzere kaydedin</string>
+    <string name="installer_custom_input_label">Paket adı</string>
+    <string name="installer_custom_package_hint">Bir paket adı yazın ve yükleyici etkinliklerini keşfetmek için \"Yükleyicileri bul\" seçeneğine dokunun</string>
+    <string name="installer_custom_lookup">Yükleyicileri bul</string>
+    <string name="installer_custom_lookup_empty">Önce bir paket adı girin.</string>
+    <string name="installer_custom_searching">Yükleyici etkinlikleri aranıyor…</string>
+    <string name="installer_custom_lookup_found">%1$d yükleyici bulundu.</string>
+    <string name="installer_custom_action_add">Yükleyiciyi kaydet</string>
+    <string name="installer_custom_action_remove">Kaydedilen yükleyiciyi kaldır</string>
+    <string name="installer_custom_builtin_indicator">Otomatik kaydedildi</string>
+    <string name="installer_custom_saved_indicator">Kaydedildi</string>
+    <string name="installer_custom_lookup_none">%1$s için yükleyici etkinliği bulunamadı.</string>
+    <string name="installer_custom_candidates_title">%1$s için kullanılabilir etkinlikler</string>
+    <string name="installer_custom_saved_header">Kaydedilmiş yükleyiciler</string>
+    <string name="installer_custom_empty">Henüz özel yükleyici kaydedilmedi.</string>
+    <string name="installer_custom_added">Özel yükleyici kaydedildi.</string>
+    <string name="installer_custom_exists">Bu yükleyici zaten kaydedilmiş.</string>
+    <string name="installer_custom_removed">Özel yükleyici kaldırıldı.</string>
+    <string name="installer_custom_remove_failed">Yükleyici kaldırılamadı. Lütfen tekrar deneyin.</string>
+    <string name="installer_hint_generic">Kurulum başarısız oldu. Lütfen tekrar deneyin veya farklı bir yükleyiciye geçin.</string>
+    <string name="installer_hint_blocked">Kurulum Android tarafından engellendi. Play Protect veya güvenlik ayarlarını kontrol edin.</string>
+    <string name="installer_hint_conflict">Bu paket adına sahip başka bir uygulama zaten yüklü. Devam etmeden önce kaldırın.</string>
+    <string name="installer_hint_incompatible">APK bu cihaza veya Android sürümüne uyumlu değil.</string>
+    <string name="installer_hint_invalid">APK geçersiz veya bozuk.</string>
+    <string name="installer_hint_storage">Yeterli depolama alanı yok.</string>
+    <string name="installer_hint_timeout">Kurulum zaman aşımına uğradı. Lütfen tekrar deneyin.</string>
+    <string name="installer_hint_aborted">Kurulum iptal edildi.</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Ayrıntılar: %2$s"</string>
+    <string name="installer_external_launched">%1$s açılıyor…</string>
+    <string name="installer_external_timeout">%1$s kurulumu onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin.</string>
+    <string name="installer_external_success">%1$s başarılı bir kurulum bildirdi.</string>
+    <string name="installer_external_finished_no_change">%1$s uygulama kurulumu tamamlandı ancak kurulum yapılmadı. Hata mesajını kurulum arayüzüne bakın ve tekrar deneyin.</string>
+    <string name="installing_ellipsis">Kuruluyor…</string>
+    <string name="uninstalling_ellipsis">Kurulumda...</string>
+    <string name="mounting_ellipsis">Bağlanıyor…</string>
+    <string name="unmounting">Ayrılıyor…</string>
+    <string name="install_app">Kur</string>
+    <string name="install_app_success">Başarıyla kuruldu</string>
+    <string name="install_app_fail_title">Kurulum başarısız oldu</string>
+    <string name="install_app_fail">Uygulama kurulamadı: %s</string>
+    <string name="install_app_fail_missing_stock">Bağlama (mount) kurulumu için orijinal APK bulunamadı.</string>
+    <string name="mount_split_not_supported">Bağlama (mount) kurulumu, bölünmüş APK\'leri desteklememektedir. Sistem kurulumunu kullanın.</string>
+    <string name="mount_app_fail_title">Bağlama başarısız oldu</string>
+    <string name="install_timeout_message">Kurulum tamamlanamadı. Sistem yükleyici iletişim kutusunu kontrol edin ve tekrar deneyin.</string>
+    <string name="uninstall_timeout_message">Kurulum tamamlanamadı. Kurulum diyalogunu kontrol edin ve tekrar deneyin.</string>
+    <string name="reinstall_app_fail">Uygulama yeniden yüklenemedi: %s</string>
+    <string name="uninstall_app_fail">Uygulama kaldırılamadı: %s</string>
+    <string name="open_app">Aç</string>
+    <string name="save_apk">APK Kaydet</string>
+    <string name="save_apk_success">APK Kaydedildi</string>
+    <string name="saved_app_export_success">Yamalanmış uygulama dışa aktarıldı</string>
+    <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
+    <string name="saved_app_removed_toast">Kaydedilen uygulama kaldırıldı</string>
+    <string name="saved_app_copy_removed_toast">Kaydedilen kopya kaldırıldı</string>
+    <string name="delete_saved_app_title">Kaydedilen uygulamayı sil</string>
+    <string name="delete_saved_app_description">Bu işlem, kaydedilen uygulama girişini ve depolanan APK\'sını kaldıracaktır.</string>
+    <string name="delete_saved_entry_title">Kaydedilen uygulama girişini kaldır</string>
+    <string name="delete_saved_entry_description">Bu işlem, kaydedilen uygulama girişini ve kaydedilen APK\'sını kaldıracaktır. Uygulama yüklü kalacaktır.</string>
+    <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin.</string>
+    <string name="install_saved_app">Yükle</string>
+    <string name="remount_saved_app">Yeniden bağla</string>
+    <string name="update_saved_app">Güncelle</string>
+    <string name="saved_app_install_success">Kaydedilen uygulama yüklendi</string>
+    <string name="saved_app_install_failed">Kaydedilen uygulama yüklenemedi</string>
+    <string name="saved_app_uninstall_title">Yüklü kopyayı kaldır?</string>
+    <string name="saved_app_uninstall_description">Bu, yalnızca yüklü sürümü kaldırır. Kaydedilen APK\'nız bozulmadan kalır.</string>
+    <string name="saved_app_install_missing">Kaydedilen APK bulunamadı</string>
+    <string name="save_logs">Günlükleri kaydet</string>
+    <string name="plugin_activity_dialog_body">Bu eklentiyle devam etmek için kullanıcı etkileşimi gerekiyor.</string>
+    <string name="select_install_type">Yükleme türünü seçin</string>
+    <string name="patcher_step_group_preparing">Hazırlanıyor</string>
+    <string name="patcher_step_load_patches">Yamalar yükleniyor</string>
+    <string name="patcher_step_prepare_split_apk">Bölünmüş APK\'yı birleştir</string>
+    <string name="patcher_step_unpack">APK Dosyasını Okuyun</string>
+    <string name="patcher_step_group_patching">Yama yapılıyor</string>
+    <string name="patcher_step_group_saving">Kaydediliyor</string>
+    <string name="patcher_step_write_patched">Yama yapılmış APK dosyası yazılıyor</string>
+    <string name="patcher_step_sign_apk">Yama yapılmış APK dosyası imzalanıyor</string>
+    <string name="patcher_notification_title">Yama işlemi devam ediyor…</string>
+    <string name="patcher_notification_text">Yama işlemcisine dönmek için dokunun</string>
+    <string name="patcher_stop_confirm_title">Yama işlemcisi durdurulsun</string>
+    <string name="patcher_stop_confirm_description">Yama işlemini durdurmak istediğinizden emin misiniz?</string>
+    <string name="patcher_install_in_progress_title">Kurulum devam ediyor</string>
+    <string name="patcher_install_in_progress">Kurulum devam ediyor. Lütfen bekleyin</string>
+    <string name="patcher_install_in_progress_leave">Yine de çık</string>
+    <string name="patcher_install_in_progress_stay">Burada kal</string>
+    <string name="patcher_mount_in_progress_title">Montaj işlemi sürüyor</string>
+    <string name="patcher_mount_in_progress">Montaj işlemi sürüyor. Lütfen bekleyin</string>
+    <string name="applying_patches">Yama uygulanıyor</string>
+    <string name="applying_patch">%s uygulanıyor</string>
+    <string name="failed_to_execute_patch">%s uygulanamadı</string>
+    <string name="save_patched_app_dialog_title">Yamayı kapatmak mı istiyorsunuz?</string>
+    <string name="save_patched_app_dialog_message">Yamacı kapatmak üzeresiniz. Yamalı uygulama kaydedilmezse kaybolacaktır.</string>
+    <string name="save_patched_app_dialog_save">Yamalı uygulamayı kaydet</string>
+    <string name="save_patched_app_dialog_leave">Kaydetmeden çık</string>
+    <string name="save_patched_app_dialog_cancel">Yamacıda kal</string>
+    <string name="save_patched_app_dialog_hint_save">Gelecekteki kurulum için uygulamalar sekmesinden yamalı APK\'ya erişilebilir tutar.</string>
+    <string name="save_patched_app_dialog_hint_leave">Yamalı APK\'yı atar ve önceki ekrana dönersiniz.</string>
+    <string name="patched_app_saved_toast">Yamalanan uygulama daha sonra kaydedilmek üzere kaydedildi</string>
+    <string name="patched_app_save_failed_toast">Yamalanan uygulama kaydedilemedi</string>
+    <string name="step_completed">tamamlandı</string>
+    <string name="step_failed">başarısız</string>
+    <string name="step_running">çalışıyor</string>
+    <string name="step_waiting">bekliyor</string>
+    <string name="expand_content">genişlet</string>
+    <string name="collapse_content">daralt</string>
+    <string name="drag_handle">yeniden sırala</string>
+    <string name="more">Daha Fazla</string>
+    <string name="less">Daha Az</string>
+    <string name="continue_">Devam et</string>
+    <string name="dismiss">Kapat</string>
+    <string name="version">Sürüm</string>
+    <string name="published">Yayınlandı</string>
+    <string name="developer_options">Geliştirici seçenekleri</string>
+    <string name="developer_options_description">Hata ayıklama sorunları için seçenekler</string>
+    <string name="patches_update_success">Güncelleme başarılı</string>
+    <string name="patches_update_unavailable">Güncelleme mevcut değil</string>
+    <string name="view_patches">Yama görünümü</string>
+    <string name="patches_view_any_version">Herhangi bir sürüm</string>
+    <string name="patches_view_any_package">Herhangi bir paket</string>
+    <string name="patches_delete_single_dialog_description">\"%s\" öğesini silmek istediğinizden emin misiniz?</string>
+    <string name="patches_delete_multiple_dialog_description">Seçilen yama paketlerini silmek istediğinizden emin misiniz?</string>
+    <string name="about_revanced_manager">Morphe Hakkında</string>
+    <string name="revanced_manager_description">"Morphe, popüler Android uygulamalarının modern, akıcı bir yamasını oluşturmaya odaklanan deneysel bir açık kaynak projesidir
+
+Özünde açık kaynak olan Morphe, gelecekteki yenilikleri yönlendirmek için topluluk geri bildirimlerine ve katkılarına dayanır"</string>
+    <string name="here">burada.</string>
+    <string name="update_available">Bir güncelleme mevcut</string>
+    <string name="ready_to_install_update">Güncelleme yüklenmeye hazır</string>
+    <string name="update_completed">Güncelleme yüklendi</string>
+    <string name="install_update_manager_failed">Güncelleme yüklenemedi</string>
+    <string name="manual_update_check">Güncellemeleri kontrol et</string>
+    <string name="manual_update_check_description">Güncellemeleri manuel olarak kontrol et</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="update_checking_manager">Başlatıldığında güncellemeleri kontrol et</string>
+    <string name="update_checking_manager_description">Uygulama başladığında Morphe için yeni sürümleri kontrol et</string>
+    <string name="manager_prereleases">Sürüm adaylarını kullan</string>
+    <string name="manager_prereleases_description">Morphe\'nin sürüm adayı sürümlerini kullan</string>
+    <string name="update_published">%s tarihinde yayınlandı</string>
+    <string name="battery_optimization_notification">Morphe\'nin arka planda düzgün çalışması için pil optimizasyonlarının kapatılması gerekir. Optimizasyonları kapatmak için buraya tıklayın.</string>
+    <string name="installing_manager_update">Güncelleme yükleniyor…</string>
+    <string name="downloading_manager_update">Güncelleme indiriliyor…</string>
+    <string name="manager_update_banner_title">Yönetici güncellemesi indiriliyor</string>
+    <string name="download_manager_failed">Güncelleme indirilemedi: %s</string>
+    <string name="save">Kaydet</string>
+    <string name="save_with_count">Kaydet (%1$s)</string>
+    <string name="update">Güncelle</string>
+    <string name="empty">Boş</string>
+    <string name="just_now">Az önce</string>
+    <string name="minutes_ago">%sm dakika önce</string>
+    <string name="hours_ago">%sh saat önce</string>
+    <string name="days_ago">%sd gün önce</string>
+    <string name="invalid_date">Geçersiz tarih</string>
+    <string name="input_dialog_value_invalid">Geçersiz değer</string>
+    <string name="option_required">Bu seçenek zorunludur</string>
+    <string name="required_options_screen">Gerekli seçenekler</string>
+    <string name="failed_to_check_updates">Güncellemeler kontrol edilemedi: %s</string>
+    <string name="no_update_available">Güncelleme mevcut değil</string>
+    <string name="update_check">Güncellemeler kontrol ediliyor…</string>
+    <string name="update_available_dialog_description">Morphe\'nin yeni bir sürümü (%s) mevcut.</string>
+    <string name="failed_to_download_update">Güncelleme indirilemedi: %s</string>
+    <string name="download">İndir</string>
+    <string name="resume_download">İndirmeyi sürdür</string>
+    <string name="download_confirmation_metered">"Şu anda kotalı bir bağlantıdasınız ve servis sağlayıcınızdan veri ücretleri uygulanabilir.
+
+Devam etmek istiyor musunuz?"</string>
+    <string name="download_update_confirmation">Güncelleme indirilsin mi?</string>
+    <string name="no_contributors_found">Katkıda bulunan bulunamadı</string>
+    <string name="select">Seç</string>
+    <string name="select_deselect_all">Tümünü seç veya seçimini kaldır</string>
+    <string name="deselect_all">Tümünü seçimden çıkar</string>
+    <string name="deselect_bundle">Geçerli paketin seçimini kaldır</string>
+    <string name="select_patches_type_dialog_description">URL\'den veya yerel dosyalardan yeni yama paketleri ekleyin</string>
+    <string name="local_patches_description">Yamaları yerel depolama alanından ekleyin.</string>
+    <string name="remote_patches_description">URL\'den yama paketleri ekleyin. Yama paketleri otomatik olarak güncellenebilir.</string>
+    <string name="recommended">Önerilen</string>
+    <string name="installation_failed_dialog_title">Kurulum başarısız oldu</string>
+    <string name="installation_cancelled_dialog_title">Kurulum iptal edildi</string>
+    <string name="installation_blocked_dialog_title">Kurulum engellendi</string>
+    <string name="installation_conflict_dialog_title">Kurulum çakışması</string>
+    <string name="installation_incompatible_dialog_title">Kurulum uyumsuz</string>
+    <string name="installation_invalid_dialog_title">Kurulum geçersiz</string>
+    <string name="installation_storage_issue_dialog_title">Yeterli depolama alanı yok</string>
+    <string name="installation_timeout_dialog_title">Kurulum zaman aşımına uğradı</string>
+    <string name="installation_failed_description">Bilinmeyen bir nedenle kurulum başarısız oldu. Tekrar denemek ister misiniz?</string>
+    <string name="installation_aborted_description">Kurulum manuel olarak iptal edildi. Tekrar denemek ister misiniz?</string>
+    <string name="installation_blocked_description">Kurulum engellendi. Cihazınızın güvenlik ayarlarını gözden geçirin ve tekrar deneyin.</string>
+    <string name="installation_conflict_description">Uygulamanın mevcut bir kurulumu tarafından engellendi. Yüklü uygulamayı kaldırıp tekrar dener misiniz?</string>
+    <string name="installation_signature_mismatch_dialog_title">İmza Eşleştirme Hatası</string>
+    <string name="installation_signature_mismatch_description">Yüklendiği takiben farklı imzalı uygulama yüklendi. Yüklenen uygulamayı kaldırın ve bunu yükleyin mi?</string>
+    <string name="installation_incompatible_description">Uygulama bu cihazla uyumlu değil. Bu cihazla uyumlu bir APK kullanıp tekrar dener misiniz.</string>
+    <string name="installation_invalid_description">Uygulama geçersiz. Uygulamayı kaldırıp tekrar dener misiniz?</string>
+    <string name="installation_storage_issue_description">Yetersiz depolama alanı nedeniyle uygulama yüklenemedi. Bir miktar yer açıp tekrar dener misiniz.</string>
+    <string name="installation_timeout_description">Yükleme çok uzun sürdü. Tekrar dener misiniz?</string>
+    <string name="reinstall">Yeniden yükle</string>
+    <string name="installation_signature_mismatch_confirm">Kurulumu Kaldır ve Yükle</string>
+    <string name="show">Göster</string>
+    <string name="debugging">Hata ayıklama</string>
+    <string name="about_device">Cihaz hakkında</string>
+    <string name="enter_url">URL girin</string>
+    <string name="next">Sonraki</string>
+    <string name="auto_update">Otomatik güncelleme</string>
+    <string name="add_patches">Yama paketi ekle</string>
+    <string name="auto_update_description">Yeni bir sürüm kullanılabilir olduğunda otomatik olarak güncelle</string>
+    <string name="patches_prereleases">Ön sürümleri kullan</string>
+    <string name="patches_prereleases_description">%s sürümünün ön sürümlerini kullan</string>
+    <string name="patches_url">Yama URL\'si</string>
+    <string name="incompatible_patches_dialog">"Bu yamalar seçilen uygulama sürümüyle (%1$s) uyumlu değil.
+
+Daha fazla ayrıntı görmek için yamalara tıklayın."</string>
+    <string name="incompatible_patch">Uyumsuz yama</string>
+    <string name="any_version">Herhangi</string>
+    <string name="never_show_again">Tekrar gösterme</string>
+    <string name="show_manager_update_dialog_on_launch">Başlatıldığında güncelleme mesajını göster</string>
+    <string name="show_manager_update_dialog_on_launch_description">Başlatıldığında yeni bir güncelleme mevcut olduğunda bir açılır bildirim göster</string>
+    <string name="failed_to_import_keystore">Anahtar deposu içe aktarılamadı</string>
+    <string name="export">Dışa aktar</string>
+    <string name="confirm">Onayla</string>
+</resources>
