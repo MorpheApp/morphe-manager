@@ -436,7 +436,7 @@ fun CustomBrandingDialog(
                     onValueChange = { appName = it },
                     label = {
                         Text(
-                            appNameOption.title,
+                            stringResource(R.string.morphe_patch_options_custom_branding_app_name),
                             color = LocalDialogSecondaryTextColor.current
                         )
                     },
@@ -466,7 +466,7 @@ fun CustomBrandingDialog(
                     onValueChange = { iconPath = it },
                     label = {
                         Text(
-                            iconOption.title,
+                            stringResource(R.string.morphe_patch_options_custom_branding_custom_icon),
                             color = LocalDialogSecondaryTextColor.current
                         )
                     },
@@ -652,7 +652,7 @@ fun CustomHeaderDialog(
                     onValueChange = { headerPath = it },
                     label = {
                         Text(
-                            customOption.title,
+                            stringResource(R.string.morphe_patch_options_custom_header),
                             color = LocalDialogSecondaryTextColor.current
                         )
                     },
