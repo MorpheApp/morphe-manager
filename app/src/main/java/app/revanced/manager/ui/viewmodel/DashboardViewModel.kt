@@ -15,32 +15,25 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.morphe.manager.R
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.uiSafe
-import app.morphe.manager.R
-import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.domain.installer.RootInstaller
-import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
-import java.io.File
-import java.io.FileInputStream
-import kotlinx.coroutines.NonCancellable
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
 
 class DashboardViewModel(
@@ -79,18 +72,18 @@ class DashboardViewModel(
     private val bundleListEventsChannel = Channel<BundleListViewModel.Event>()
     val bundleListEventsFlow = bundleListEventsChannel.receiveAsFlow()
 
-//    init {
-//        viewModelScope.launch {
-//            checkForManagerUpdates()
+    init {
+        viewModelScope.launch {
+            checkForManagerUpdates()
 //            updateBatteryOptimizationsWarning()
-//        }
-//    }
+        }
+    }
 //
 //    fun ignoreNewDownloaderPlugins() = viewModelScope.launch {
 //        downloaderPluginRepository.acknowledgeAllNewPlugins()
 //    }
 
-    private suspend fun checkForManagerUpdates() {
+    suspend fun checkForManagerUpdates() {
         if (!prefs.managerAutoUpdates.get() || !networkInfo.isConnected()) return
 
         uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {

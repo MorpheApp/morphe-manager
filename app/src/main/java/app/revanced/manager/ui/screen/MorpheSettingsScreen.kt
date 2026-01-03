@@ -62,7 +62,6 @@ fun MorpheSettingsScreen(
     val coroutineScope = rememberCoroutineScope()
     val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
-    val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
@@ -73,6 +72,9 @@ fun MorpheSettingsScreen(
 
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
+
+    // Update
+    val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
@@ -200,7 +202,12 @@ fun MorpheSettingsScreen(
                         onPreReleaseChanged = { newValue ->
                             coroutineScope.launch {
                                 prefs.usePatchesPrereleases.update(newValue)
+                                prefs.useManagerPrereleases.update(newValue)
+                                prefs.managerAutoUpdates.update(newValue)
+                                // Update patches bundle and clear changelog cache
                                 dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                                // Check for manager updates
+                                dashboardViewModel.checkForManagerUpdates()
                                 patchOptionsViewModel.refresh()
                             }
                         }
@@ -236,7 +243,7 @@ fun MorpheSettingsScreen(
 
 /**
  * Updates section
- * Contains prereleases toggle with automatic bundle update
+ * Contains unified prereleases toggle with automatic checks
  */
 @Composable
 private fun UpdatesSection(
@@ -276,12 +283,12 @@ private fun UpdatesSection(
                     )
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = stringResource(R.string.morphe_update_use_patches_prereleases),
+                            text = stringResource(R.string.morphe_update_use_prereleases),
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = stringResource(R.string.morphe_update_use_patches_prereleases_description),
+                            text = stringResource(R.string.morphe_update_use_prereleases_description),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
