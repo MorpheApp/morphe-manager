@@ -12,7 +12,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Voulez-vous regarder des pubs ? Moi non plus</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Disciplinons vos applis</string>
+    <string name="morphe_home_greeting_6">Faisons fonctionner vos applications.</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">Prévisions du jour : 100% de chance de patchs</string>
     <!-- From mediocrity to amazing -->

@@ -25,7 +25,7 @@
     <string name="morphe_home_update_error">Không thể cập nhật</string>
     <string name="morphe_home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="morphe_home_updating_patches">Đang cập nhật bản vá…</string>
-    <string name="morphe_home_update_success">Đã cập nhật xong</string>
+    <string name="morphe_home_update_success">Cập nhật hoàn tất</string>
     <string name="morphe_home_patches_updated">Đã cập nhật các bản vá</string>
     <string name="morphe_home_patches_are_loading">Đang tải bản vá, vui lòng chờ…</string>
     <string name="morphe_home_please_wait">Vui lòng chờ…</string>
@@ -115,13 +115,13 @@
     <string name="morphe_patcher_message_18">Đang chuyển trạng thái ứng dụng từ chưa vá sang đã vá… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Ứng dụng bị sốt rồi, và phương pháp điều trị duy nhất là vá thêm thôi… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Đang dọn dẹp mớ hỗn độn. Vui lòng đợi… 🗑️</string>
+    <string name="morphe_patcher_message_20">Đang dọn dẹp mớ hỗn độn. Vui lòng chờ… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Trang chủ Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Quay lại chế độ đơn giản</string>
     <string name="morphe_settings_return_to_expert">Chế độ chuyên gia</string>
     <string name="morphe_settings_return_to_expert_description">Chuyển sang chế độ chuyên gia với đầy đủ tính năng</string>
-    <string name="morphe_share_website">Chia sẻ trang web</string>
+    <string name="morphe_share_website">Chia sẻ</string>
     <string name="morphe_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Cài đặt giao diện</string>
@@ -135,15 +135,15 @@
     <string name="morphe_background_type_snow">Tuyết</string>
     <string name="morphe_background_type_none">Không</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">Sử dụng phiên bản phát hành trước</string>
-    <string name="morphe_update_use_prereleases_description">Nhận quyền truy cập sớm vào các bản cập nhật và tính năng quản lý mới</string>
+    <string name="morphe_update_use_prereleases">Bản phát hành trước</string>
+    <string name="morphe_update_use_prereleases_description">Truy cập sớm các bản vá và tính năng mới của trình quản lý</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Tùy chỉnh bản vá</string>
     <string name="morphe_patch_options_youtube_description">Tùy chỉnh chủ đề, thương hiệu, logo và Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Tùy chỉnh chủ đề và thương hiệu</string>
-    <string name="morphe_patch_options_restart_message">Sau khi tùy chỉnh bản vá bạn cần vá lại ứng dụng để áp dụng chúng</string>
+    <string name="morphe_patch_options_restart_message">Sau khi tùy chỉnh bạn cần vá lại ứng dụng để áp dụng những thay đổi</string>
     <!-- Theme Colors -->
-    <string name="morphe_patch_options_theme_colors">Màu chủ đề ứng dụng</string>
+    <string name="morphe_patch_options_theme_colors">Màu chủ đề</string>
     <string name="morphe_patch_options_theme_colors_description">Đổi màu nền</string>
     <string name="morphe_patch_options_dark_theme_color">Màu nền chủ đề tối</string>
     <string name="morphe_patch_options_dark_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
@@ -159,7 +159,7 @@
     <string name="morphe_custom_color">Tùy chỉnh màu</string>
     <string name="morphe_hex_color">Mã hex</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Thương hiệu tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_branding">Thương hiệu</string>
     <string name="morphe_patch_options_custom_branding_description">Đổi tên hiển thị của ứng dụng</string>
     <string name="morphe_patch_options_custom_branding_app_name">Tên ứng dụng</string>
     <string name="morphe_patch_options_custom_branding_app_name_hint">Nhập tên tùy chỉnh</string>
@@ -188,7 +188,7 @@ Tùy chọn, đường dẫn có thể chứa thêm một thư mục drawable v�
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">Logo đầu trang tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_header">Logo đầu trang</string>
     <string name="morphe_patch_options_custom_header_description">Tùy chỉnh logo đầu trang</string>
     <string name="morphe_patch_options_custom_header_instruction">"Thư mục chứa hình ảnh sử dụng làm logo đầu trang tùy chỉnh.
 
@@ -209,7 +209,7 @@ Kích thước hình ảnh yêu cầu:
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Ẩn tính năng Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">Hide lối tắt Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Ẩn lối tắt Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Gỡ Shorts khỏi menu khi ấn giữ ứng dụng ngoài màn hình chính</string>
     <string name="morphe_patch_options_hide_shorts_widget">Ẩn tiện ích Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
@@ -732,8 +732,8 @@ Nó chỉ tương thích với phiên bản sau: %2$s."</string>
     <string name="saved_install">Đã lưu</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
-    <string name="unpatch_app">Huỷ vá ứng dụng?</string>
-    <string name="unpatch_description">Bạn có chắc chắn muốn huỷ vá ứng dụng này?</string>
+    <string name="unpatch_app">Hủy vá ứng dụng?</string>
+    <string name="unpatch_description">Bạn có chắc chắn muốn hủy vá ứng dụng này?</string>
     <string name="downloader_app_not_found">Trình tải không tìm thấy ứng dụng nào</string>
     <string name="downloader_error">Lỗi trình tải: %s</string>
     <string name="downloader_no_plugins_installed">Chưa có plugin nào được cài đặt.</string>

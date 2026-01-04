@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Simpan APK</string>
-    <string name="morphe_patcher_copy_error">Kesalahan salin</string>
+    <string name="morphe_patcher_copy_error">Kesalahan penyalinan</string>
     <string name="morphe_patcher_show_error">Tampilkan kesalahan</string>
     <string name="morphe_patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d tambalan</string>
@@ -114,7 +114,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Mengubah superposisi aplikasi dari belum ditambal menjadi ditambal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak patch… 🩺🔔</string>
+    <string name="morphe_patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak tambalan… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Menghapus omong kosong. Mohon tunggu sebentar… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Kembali ke beranda Morphe</string>
@@ -136,7 +136,7 @@
     <string name="morphe_background_type_none">Tidak Ada</string>
     <!-- Update Section -->
     <string name="morphe_update_use_prereleases">Gunakan versi pra-rilis</string>
-    <string name="morphe_update_use_prereleases_description">Dapatkan akses awal ke patch baru dan fitur manajer</string>
+    <string name="morphe_update_use_prereleases_description">Dapatkan akses awal ke tambalan baru dan fitur manajer</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Pilihan tambalan</string>
     <string name="morphe_patch_options_youtube_description">Pilihan Tema, Branding, Header, dan Shorts</string>
@@ -227,25 +227,25 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings">Pengaturan</string>
     <string name="select_app">Pilih aplikasi</string>
     <string name="app_filter_title">Saring aplikasi</string>
-    <string name="app_filter_installed_only">Terinstall saja</string>
-    <string name="app_filter_patches_available">Pembaruan tersedia</string>
-    <string name="app_filter_no_results">Tidak ada aplikasi yang cocok dengan filter Anda.</string>
-    <string name="new_downloader_plugins_notification">Plugin pengunduh baru tersedia. Klik di sini untuk mengonfigurasinya.</string>
+    <string name="app_filter_installed_only">Terpasang saja</string>
+    <string name="app_filter_patches_available">Tambalan tersedia</string>
+    <string name="app_filter_no_results">Tidak ada aplikasi yang cocok dengan penyaringan Anda.</string>
+    <string name="new_downloader_plugins_notification">Plugin pengunduh baru tersedia. Klik di sini untuk mengaturnya.</string>
     <string name="unsupported_architecture_warning">Penambalan pada arsitektur perangkat ini tidak didukung dan kemungkinan besar akan gagal.</string>
     <string name="import_">Impor</string>
     <string name="file_field_not_set">Tidak terpilih</string>
     <string name="field_not_set">Tidak diatur</string>
     <string name="patches_missing">Hilang</string>
     <string name="patches_error">Kesalahan</string>
-    <string name="patches_error_description">Patch tidak dapat dimuat. Ketuk untuk melihat kesalahan</string>
-    <string name="patches_not_downloaded">Patch belum diunduh. Klik di sini untuk mengunduh.</string>
-    <string name="patches_name_default">Patch</string>
+    <string name="patches_error_description">Tambalan tidak dapat dimuat. Ketuk untuk melihat kesalahan</string>
+    <string name="patches_not_downloaded">Tambalan belum diunduh. Klik di sini untuk mengunduh.</string>
+    <string name="patches_name_default">Tambalan</string>
     <string name="patches_name_fallback">Tanpa nama</string>
-    <string name="bundle_uid">UID Bundel</string>
-    <string name="patches_display_name">Nama Tampilan</string>
+    <string name="bundle_uid">UID Paket</string>
+    <string name="patches_display_name">Nama tampilan</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
-    <string name="android_11_bug_dialog_description">Izin instalasi aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna.</string>
-    <string name="no_network_toast">Tidak ada koneksi internet yang tersedia</string>
+    <string name="android_11_bug_dialog_description">Izin pemasangan aplikasi harus diberikan terlebih dahulu untuk menghindari bug pada sistem Android 11 yang akan berdampak negatif pada pengalaman pengguna.</string>
+    <string name="no_network_toast">Tidak ada sambungan internet yang tersedia</string>
     <string name="selected_app_meta_any_version">Versi apa pun yang tersedia</string>
     <string name="app_source_dialog_title">Pilih sumber</string>
     <string name="app_source_dialog_option_auto">Otomatis</string>
@@ -255,29 +255,29 @@ Ukuran gambar harus sebagai berikut:
     <string name="app_source_dialog_option_storage_description">Pilih APK dari penyimpanan lokal</string>
     <string name="app_source_dialog_option_installed_no_root">Aplikasi yang terpasang tidak dapat ditambal lagi tanpa akses root</string>
     <string name="app_source_dialog_option_installed_version_not_suggested">Versi %s tidak cocok dengan versi yang disarankan</string>
-    <string name="bundle_version_item">Rekomendasi bundel</string>
+    <string name="bundle_version_item">Rekomendasi paket</string>
     <string name="bundle_version_item_description_default">Menggunakan rekomendasi bawaan</string>
     <string name="bundle_version_item_description_selected">Mengikuti %1$s (%2$s)</string>
-    <string name="bundle_version_dialog_title">Pilih rekomendasi bundel</string>
+    <string name="bundle_version_dialog_title">Pilih rekomendasi paket</string>
     <string name="bundle_version_dialog_description">Pilih rekomendasi paket yang ingin digunakan saat mengunduh aplikasi.</string>
     <string name="bundle_version_dialog_default">Gunakan rekomendasi bawaan</string>
-    <string name="bundle_version_dialog_default_subtitle">Secara otomatis memilih versi yang paling umum kompatibel.</string>
+    <string name="bundle_version_dialog_default_subtitle">Secara otomatis memilih versi yang paling umum cocok.</string>
     <string name="bundle_version_all_versions">Semua versi</string>
     <string name="bundle_version_no_version">Tidak ada versi yang disarankan</string>
     <string name="bundle_version_suggested_label">Versi disarankan: %1$s</string>
     <string name="bundle_update_manual_available">Pembaruan tersedia</string>
     <string name="bundle_update_manual_available_with_version">Pembaruan tersedia: %1$s</string>
-    <string name="bundle_update_progress">%1$d/%2$d bundel diproses</string>
+    <string name="bundle_update_progress">%1$d/%2$d paket diproses</string>
     <string name="bundle_update_banner_title">Memperbarui paket tambalan</string>
-    <string name="bundle_reorder">Atur bundel</string>
+    <string name="bundle_reorder">Atur paket</string>
     <string name="bundle_reorder_title">Atur paket tambalan</string>
     <string name="bundle_reorder_description">Seret pegangan untuk mengatur urutan paket yang muncul di daftar dan menu pemilihan tambalan.</string>
-    <string name="bundle_actions_expand">Tampilkan tindakan bundle</string>
-    <string name="bundle_actions_collapse">Sembunyikan tindakan bundle</string>
+    <string name="bundle_actions_expand">Tampilkan tindakan paket</string>
+    <string name="bundle_actions_collapse">Sembunyikan tindakan paket</string>
     <string name="patch_bundle_duplicate_name_error">Paket tambalan dengan nama ini sudah ada</string>
     <string name="patch_bundle_missing_error">Tidak dapat memperbarui paket tambalan ini.</string>
     <string name="bundle_release_page">Buka halaman rilis</string>
-    <string name="bundle_release_page_unavailable">Halaman rilis tidak tersedia untuk bundle ini</string>
+    <string name="bundle_release_page_unavailable">Halaman rilis tidak tersedia untuk paket ini</string>
     <string name="bundle_release_page_error">Tidak dapat membuka halaman rilis: %s</string>
     <string name="bundle_links_title">Tautan untuk %1$s</string>
     <string name="bundle_link_release">Rilis GitHub</string>
@@ -294,11 +294,11 @@ Ukuran gambar harus sebagai berikut:
     <string name="bundle_version_dialog_selected_indicator">Dipilih</string>
     <string name="bundle_version_dialog_other_title">Pilih versi lain yang didukung:</string>
     <string name="bundle_version_dialog_locked_title">Perlindungan versi diaktifkan</string>
-    <string name="bundle_version_dialog_locked_hint">Buka Setelan &gt; Lanjutan &gt; Perlindungan dan atur \"Wajibkan versi aplikasi yang disarankan\" (nonaktifkan) serta \"Nonaktifkan pemeriksaan kompatibilitas versi\" (aktifkan) untuk memilih versi spesifik bundel.</string>
+    <string name="bundle_version_dialog_locked_hint">Buka Setelan &gt; Lanjutan &gt; Perlindungan dan atur \"Wajibkan versi aplikasi yang disarankan\" (nonaktifkan) serta \"Nonaktifkan pemeriksaan kococokan versi\" (aktifkan) untuk memilih versi spesifik paket.</string>
     <string name="patch_versions_dialog_title">Versi dukungan untuk %1$s</string>
-    <string name="patch_selector_item">Pilih patch</string>
-    <string name="patch_selector_item_description">%d patch dipilih</string>
-    <string name="no_patches_selected">Tidak ada patch yang dipilih</string>
+    <string name="patch_selector_item">Pilih tambalan</string>
+    <string name="patch_selector_item_description">%d tambalan dipilih</string>
+    <string name="no_patches_selected">Tidak ada tambalan yang dipilih</string>
     <string name="network_unavailable_warning">Perangkat Anda tidak terhubung ke internet. Pengunduhan akan gagal nanti.</string>
     <string name="apk_source_selector_item">Pilih sumber APK</string>
     <string name="apk_source_auto">Menggunakan semua pengunduh APK</string>
@@ -308,7 +308,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="apk_source_downloaded">Menggunakan APK yang diunduh</string>
     <string name="auto_updates_dialog_title">Konfigurasikan pembaruan</string>
     <string name="auto_updates_dialog_description">Apakah Anda ingin Morphe secara berkala memeriksa pembaruan untuk komponen berikut?</string>
-    <string name="auto_updates_dialog_patches">Patch Morphe</string>
+    <string name="auto_updates_dialog_patches">Tambalan Morphe</string>
     <string name="auto_updates_dialog_note">Pengaturan ini dapat diubah nanti.</string>
     <string name="appearance">Tampilan</string>
     <string name="appearance_description">Tema, warna dinamis</string>
@@ -347,8 +347,8 @@ Ukuran gambar harus sebagai berikut:
     <string name="theme">Tema</string>
     <string name="safeguards">Perlindungan</string>
     <string name="patch_compat_check">Nonaktifkan pemeriksaan kompatibilitas versi</string>
-    <string name="patch_compat_check_description">Jangan batasi patch ke versi aplikasi yang kompatibel</string>
-    <string name="patch_compat_check_confirmation">"Memilih patch yang tidak kompatibel dapat mengakibatkan aplikasi rusak.
+    <string name="patch_compat_check_description">Jangan batasi tambalan ke versi aplikasi yang cocok</string>
+    <string name="patch_compat_check_confirmation">"Memilih tambalan yang tidak cocok dapat mengakibatkan aplikasi rusak.
 
 Apakah Anda ingin melanjutkan?"</string>
     <string name="suggested_version_safeguard">Perlu versi aplikasi yang disarankan</string>
@@ -358,11 +358,11 @@ Apakah Anda ingin melanjutkan?"</string>
 Apakah Anda ingin melanjutkan?"</string>
     <string name="patch_selection_safeguard">Izinkan pengubahan pilihan patch dan opsi</string>
     <string name="patch_selection_safeguard_description">Jangan mencegah pemilihan atau pembatalan pilihan tambalan dan kustomisasi pilihan</string>
-    <string name="patch_selection_safeguard_confirmation">"Mengubah pilihan patch dapat menyebabkan masalah tak terduga.
+    <string name="patch_selection_safeguard_confirmation">"Mengubah pilihan tambalan dapat menyebabkan masalah tak terduga.
 
-Aktifkan saja?"</string>
-    <string name="universal_patches_safeguard">Tampilkan &amp; izinkan penggunaan patch universal</string>
-    <string name="universal_patches_safeguard_description">Jangan sembunyikan patch universal atau mencegah penggunaannya</string>
+Tetap aktifkan?"</string>
+    <string name="universal_patches_safeguard">Tampilkan &amp; izinkan penggunaan tambalan universal</string>
+    <string name="universal_patches_safeguard_description">Jangan sembunyikan tambalan universal atau mencegah penggunaannya</string>
     <string name="universal_patches_profile_blocked_title">Tambalan universal dinonaktifkan</string>
     <string name="universal_patches_profile_blocked_description">Profil tambalan ini berisi tambalan universal. Aktifkan “%1$s” di pengaturan lanjutan untuk menggunakannya.</string>
     <string name="universal_patches_app_blocked_description">Aplikasi ini berisi tambalan universal. Aktifkan “%1$s” di pengaturan lanjutan untuk melanjutkan.</string>
@@ -414,10 +414,10 @@ Aktifkan saja?"</string>
     <string name="export_patch_bundles_description">Simpan paket tambalan jarak jauh yang diimpor ke berkas JSON</string>
     <string name="export_patch_bundles_fail">Tidak dapat mengekspor paket tambalan: %s</string>
     <string name="export_patch_bundles_success">Berhasil mengekspor %d paket tambalan</string>
-    <string name="export_patch_bundles_partial">Berhasil mengekspor %1$d bundel patch. Beberapa bundel tidak dapat diekspor karena ditambahkan secara lokal.</string>
+    <string name="export_patch_bundles_partial">Berhasil mengekspor %1$d paket tambalan. Beberapa paket tidak dapat diekspor karena ditambahkan secara lokal.</string>
     <string name="bundle_type_remote">Jarak jauh</string>
     <string name="bundle_type_local">Lokal</string>
-    <string name="bundle_type_preinstalled">Pra-instal</string>
+    <string name="bundle_type_preinstalled">Sudah dipasang sebelumnya</string>
     <string name="bundle_created_at">Dibuat %1$s</string>
     <string name="bundle_updated_at">Diperbarui %1$s</string>
     <string name="bundle_changelog">Catatan Perubahan</string>
@@ -439,16 +439,16 @@ Aktifkan saja?"</string>
     <string name="reset_patch_options">Atur ulang opsi tambalan</string>
     <string name="reset_patch_options_description">Atur ulang opsi tambalan yang tersimpan</string>
     <string name="reset_patch_selection_success">Pilihan tambalan telah diatur ulang</string>
-    <string name="patch_selection_deselected_all_toast">Menghilangkan pilihan semua tambalan</string>
-    <string name="patch_selection_deselected_bundle_toast">Membatalkan pilihan semua tambalan di %s</string>
-    <string name="patch_selection_no_selected_bundle_toast">Tidak ada tambalan untuk dihilangkan di %s</string>
+    <string name="patch_selection_deselected_all_toast">Membatalkan semua tambalan</string>
+    <string name="patch_selection_deselected_bundle_toast">Membatalkan semua tambalan di %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">Tidak ada tambalan untuk dibatalkan di %s</string>
     <string name="patch_selection_selected_all_toast">Memilih semua tambalan</string>
     <string name="patch_selection_select_all_empty_toast">Tidak ada tambalan yang tersedia untuk dipilih</string>
     <string name="patch_selection_selected_bundle_toast">Memilih semua tambalan di %s</string>
     <string name="patch_selection_select_bundle_empty_toast">Tidak ada tambalan yang dapat dipilih di %s</string>
     <string name="patch_selection_all_actions_hidden_toast">Semua tombol aksi disembunyikan, aktifkan minimal satu di pengaturan</string>
-    <string name="patch_selection_reset_bundle_toast">Atur ulang default untuk %s</string>
-    <string name="patch_selection_button_label_all">Hapus pilihan semua</string>
+    <string name="patch_selection_reset_bundle_toast">Atur ulang bawaan untuk %s</string>
+    <string name="patch_selection_button_label_all">Batalkan semua pilihan</string>
     <string name="patch_selection_button_label_bundle">Membatalkan paket</string>
     <string name="patch_selection_button_label_defaults">Semua default</string>
     <string name="patch_selection_button_label_select_bundle">Pilih paket</string>
@@ -458,31 +458,31 @@ Aktifkan saja?"</string>
     <string name="patch_selection_history_undo">Membatalkan %1$s</string>
     <string name="patch_selection_history_redo">Mengulangi %1$s</string>
     <string name="patch_selection_action_all_defaults">semua default</string>
-    <string name="patch_selection_action_deselect_all">batalkan pilihan semua</string>
+    <string name="patch_selection_action_deselect_all">batalkan semua pilihan</string>
     <string name="patch_selection_action_select_all">pilih semua</string>
     <string name="patch_selection_action_select_bundle">pilih paket “%1$s”</string>
-    <string name="patch_selection_action_deselect_bundle">batalkan pilihan paket “%1$s”</string>
+    <string name="patch_selection_action_deselect_bundle">batalkan paket “%1$s”</string>
     <string name="patch_selection_action_bundle_defaults">paket bawaan untuk “%1$s”</string>
     <string name="disable_patch_selection_confirmations">Nonaktifkan konfirmasi tindakan</string>
     <string name="disable_patch_selection_confirmations_description">Lewati dialog konfirmasi untuk tindakan pemilihan patch</string>
     <string name="disable_patch_selection_confirmations_warning">Menonaktifkan konfirmasi dapat menyebabkan perubahan massal yang tidak disengaja.</string>
-    <string name="patch_selection_collapse_on_toggle">Ciutkan tindakan setelah mengganti patch</string>
-    <string name="patch_selection_collapse_on_toggle_description">Sembunyikan tombol tindakan pemilihan patch secara otomatis setiap kali Anda memilih atau membatalkan pilihan patch</string>
+    <string name="patch_selection_collapse_on_toggle">Ciutkan tindakan setelah mengganti tambalan</string>
+    <string name="patch_selection_collapse_on_toggle_description">Sembunyikan tombol tindakan pemilihan tambalan secara otomatis setiap kali Anda memilih atau membatalkan pilihan tambalan</string>
     <string name="patch_selection_action_order_title">Urutan tombol tindakan pemilihan patch</string>
     <string name="patch_selection_action_order_description">Pilih urutan tata letak untuk tombol tindakan pemilihan patch</string>
     <string name="patch_selection_action_visibility_title">Sembunyikan tombol aksi pemilihan patch</string>
     <string name="patch_selection_action_visibility_description">Pilih mana tombol aksi pemilihan patch yang ditampilkan</string>
     <string name="patch_selection_action_visibility_reset">Tampilkan semua tombol aksi</string>
     <string name="patch_selection_action_order_reset">Atur ulang ke urutan default</string>
-    <string name="patch_selection_confirm_deselect_bundle_title">Batalkan pilihan paket?</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Batalkan paket?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Batalkan pilihan semua tambalan yang dipilih dari %1$s?</string>
-    <string name="patch_selection_confirm_deselect_all_title">Batalkan pilihan semua patch?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Batalkan semua tambalan?</string>
     <string name="patch_selection_confirm_deselect_all_message">Ini akan menghapus setiap tambalan yang dipilih di semua paket.</string>
     <string name="patch_selection_confirm_bundle_defaults_title">Pulihkan pengaturan paket bawaan?</string>
     <string name="patch_selection_confirm_bundle_defaults_message">Ini akan memulihkan pengaturan bawaan yang direkomendasikan untuk %1$s.</string>
     <string name="patch_selection_confirm_select_bundle_title">Pilih paket?</string>
     <string name="patch_selection_confirm_select_bundle_message">Pilih setiap tambalan yang disediakan oleh %1$s?</string>
-    <string name="patch_selection_confirm_select_all_title">Pilih semua patch?</string>
+    <string name="patch_selection_confirm_select_all_title">Pilih semua tambalan?</string>
     <string name="patch_selection_confirm_select_all_message">Ini akan memilih setiap tambalan di semua paket.</string>
     <string name="patch_selection_button_label_reset_bundle">Pengaturan paket bawaan</string>
     <string name="patch_profile_save_label">Simpan profil</string>
@@ -500,21 +500,21 @@ Profil tambalan tidak terpengaruh."</string>
 
 Profil patch tidak terpengaruh."</string>
     <string name="patch_selection_reset_package_description">Menyetel ulang pilihan patch untuk satu aplikasi</string>
-    <string name="patch_selection_reset_patches">Setel ulang pilihan patch (tunggal)</string>
+    <string name="patch_selection_reset_patches">Setel ulang pilihan tambalan (tunggal)</string>
     <string name="patch_selection_reset_patches_dialog_description">"Anda akan mengatur ulang pilihan tambalan untuk \"%s\". Anda harus memilih setiap tambalan secara manual lagi.
 
 Profil tambalan tidak terpengaruh."</string>
-    <string name="patch_selection_reset_patches_description">Menyetel ulang pilihan patch untuk kumpulan patch tertentu</string>
+    <string name="patch_selection_reset_patches_description">Menyetel ulang pilihan tambalan untuk kumpulan tambalan tertentu</string>
     <string name="patch_options_reset_package">Setel ulang opsi patch untuk aplikasi</string>
     <string name="patch_options_reset_package_dialog_description">"Anda akan mengatur ulang pilihan tambalan untuk aplikasi \"%s\". Anda harus menerapkan kembali setiap pilihan lagi.
 
 Profil tambalan tidak terpengaruh."</string>
     <string name="patch_options_reset_package_description">Menyetel ulang opsi patch untuk satu aplikasi</string>
-    <string name="patch_options_reset_patches">Setel ulang opsi patch (tunggal)</string>
+    <string name="patch_options_reset_patches">Setel ulang pilihan tambalan (tunggal)</string>
     <string name="patch_options_reset_patches_dialog_description">"Anda akan mengatur ulang pilihan tambalan untuk \"%s\". Anda harus menerapkan kembali setiap pilihan.
 
 Profil tambalan tidak terpengaruh."</string>
-    <string name="patch_options_reset_patches_description">Mengatur ulang opsi patch untuk kumpulan patch tertentu</string>
+    <string name="patch_options_reset_patches_description">Mengatur ulang pilihan tambalan untuk kumpulan tambalan tertentu</string>
     <string name="patch_options_reset_all">Setel ulang opsi patch secara global</string>
     <string name="patch_options_reset_all_dialog_description">"Anda akan mengatur ulang semua pilihan tambalan. Anda harus menerapkan kembali setiap  pilihan.
 
@@ -593,9 +593,9 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="export_name_variable_package_name_description">Diganti dengan nama paket aplikasi.</string>
     <string name="export_name_variable_app_version">Versi aplikasi</string>
     <string name="export_name_variable_app_version_description">Diganti dengan nama versi aplikasi.</string>
-    <string name="export_name_variable_patches_version">Versi pembaruan</string>
+    <string name="export_name_variable_patches_version">Versi tambalan</string>
     <string name="export_name_variable_patches_version_description">Diganti dengan versi paket tambalan yang diterapkan.</string>
-    <string name="export_name_variable_bundle_names">Nama paket pembaruan</string>
+    <string name="export_name_variable_bundle_names">Nama paket tambalan</string>
     <string name="export_name_variable_bundle_names_description">Diganti dengan nama paket pembaruan yang diterapkan.</string>
     <string name="export_name_variable_manager_version">Versi manajer</string>
     <string name="export_name_variable_manager_version_description">Diganti dengan versi manajer.</string>
@@ -609,8 +609,8 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="debug_logs_export_success">Log diekspor</string>
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="api_url_dialog_description">Ubah URL API Morphe. Morphe menggunakan API untuk mengunduh patch dan pembaruan.</string>
-    <string name="api_url_dialog_warning">Morphe terhubung ke API untuk mengunduh patch dan pembaruan. Pastikan Anda mempercayainya.</string>
+    <string name="api_url_dialog_description">Ubah URL API Morphe. Morphe menggunakan API untuk mengunduh tambalan dan pembaruan.</string>
+    <string name="api_url_dialog_warning">Morphe terhubung ke API untuk mengunduh tambalan dan pembaruan. Pastikan Anda mempercayainya.</string>
     <string name="api_url_dialog_save">Atur</string>
     <string name="api_url_dialog_reset">Atur Ulang URL API</string>
     <!-- Morphe -->
@@ -631,7 +631,7 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="patches_force_download">Paksa unduh semua paket tambalan</string>
     <string name="patches_reset">Setel ulang paket tambalan</string>
     <string name="storage">Penyimpanan</string>
-    <string name="no_patch_found">Tidak ada patch yang dapat ditemukan. Periksa patch Anda</string>
+    <string name="no_patch_found">Tidak ada tambalan yang dapat ditemukan. Periksa tambalan Anda</string>
     <string name="tab_apps">Aplikasi</string>
     <string name="tab_patches">Paket Tambalan</string>
     <string name="tab_profiles">Profil Tambalan</string>
@@ -640,18 +640,18 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="enable">Diaktifkan</string>
     <string name="patch_bundle_disabled_toast">Menonaktifkan %d paket</string>
     <string name="patch_bundle_enabled_toast">Mengaktifkan %d paket</string>
-    <string name="patches_disable_single_dialog_description">\"%s\" dinonaktifkan?</string>
-    <string name="patches_enable_single_dialog_description">\"%s\" diaktifkan?</string>
+    <string name="patches_disable_single_dialog_description">Nonaktifkan \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">Aktifkan \"%s\"?</string>
     <string name="refresh">Segarkan</string>
     <string name="download_apk">Unduh berkas APK</string>
-    <string name="patches_download_fail">Gagal mengunduh patch: %s</string>
-    <string name="patches_replace_fail">Gagal mengimpor patch: %s</string>
+    <string name="patches_download_fail">Gagal mengunduh tambalan: %s</string>
+    <string name="patches_replace_fail">Gagal mengimpor tambalan: %s</string>
     <string name="no_patched_apps_found">Tidak ada aplikasi yang ditambal ditemukan</string>
     <string name="patches_selected">%s paket tambalan dipilih</string>
     <string name="patch_profiles_selected">%1$d profil tambalan dipilih</string>
     <string name="selected_apps_count">%1$d aplikasi dipilih</string>
     <string name="selected_apps_delete_dialog_description">Hapus aplikasi yang dipilih dari manajer? Aplikasi yang terinstal di perangkat Anda akan tetap utuh.</string>
-    <string name="incompatible_patches">Tambalan yang tidak kompatibel</string>
+    <string name="incompatible_patches">Tambalan yang tidak cocok</string>
     <string name="universal_patches">Tambalan universal</string>
     <string name="patch_selection_reset_toast">Pilihan dan opsi patch telah direset ke default yang direkomendasikan</string>
     <string name="patch_options_reset_toast">Opsi patch telah direset</string>
@@ -660,13 +660,13 @@ Sidik jari (SHA-256): %2$s"</string>
 Silakan gunakan versi yang disarankan: %s
 
 Untuk melanjutkan, nonaktifkan \"Perlu versi aplikasi yang disarankan\" di pengaturan lanjutan."</string>
-    <string name="selection_warning_description">"Direkomendasikan untuk menggunakan pilihan dan opsi patch default. Mengubahnya dapat menyebabkan masalah tak terduga.
+    <string name="selection_warning_description">"Direkomendasikan untuk menggunakan pilihan dan pilihan tambalan bawaan. Mengubahnya dapat menyebabkan masalah tak terduga.
 
-Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan opsi patch\" di pengaturan lanjutan sebelum mengganti patch."</string>
+Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan pilihan tambalan\" di pengaturan lanjutan sebelum mengganti tambalan."</string>
     <string name="patch_profile_save_action">Simpan profil tambalan</string>
     <string name="patch_profile_select_bundles_title">Pilih paket tambalan</string>
     <string name="patch_profile_select_bundles_description">Pilih paket tambalan yang akan dimasukkan dalam profil ini.</string>
-    <string name="patch_profile_select_bundles_empty">Tidak ada tambalan bundel yang tersedia untuk disimpan.</string>
+    <string name="patch_profile_select_bundles_empty">Tidak ada paket tambalan yang tersedia untuk disimpan.</string>
     <string name="patch_profile_name_title">Beri nama profil tambalan</string>
     <string name="patch_profile_name_description">Masukkan nama untuk profil tambalan ini atau pilih salah satu di bawah ini untuk memperbaruinya</string>
     <string name="patch_profile_update_existing_title">Perbarui profil yang ada</string>
@@ -694,9 +694,9 @@ Manakah yang harus disimpan ke profil ini?"</string>
     <string name="patch_profile_version_conflict_use_new">Gunakan versi yang masuk</string>
     <string name="patch_profile_version_conflict_keep_existing">Pertahankan versi yang ada</string>
     <string name="patch_profile_empty_state">Simpan konfigurasi dari layar pemilihan tambalan untuk melihatnya di sini.</string>
-    <string name="patch_profile_missing_bundles_toast">Beberapa bundel dalam profil ini tidak tersedia dan akan dilewati.</string>
-    <string name="patch_profile_changed_patches_toast">Beberapa tambalan atau pilihan dalam profil ini tidak lagi cocok dengan bundel dan dilewati.</string>
-    <string name="patch_profile_no_available_bundles_toast">Tidak ada bundel dalam profil ini yang tersedia. Perbarui bundel Anda dan coba lagi.</string>
+    <string name="patch_profile_missing_bundles_toast">Beberapa paket dalam profil ini tidak tersedia dan akan dilewati.</string>
+    <string name="patch_profile_changed_patches_toast">Beberapa tambalan atau pilihan dalam profil ini tidak lagi cocok dengan paket dan dilewati.</string>
+    <string name="patch_profile_no_available_bundles_toast">Tidak ada paket dalam profil ini yang tersedia. Perbarui paket Anda dan coba lagi.</string>
     <string name="patch_profile_launch_error">Tidak dapat membuka profil tambalan ini.</string>
     <string name="patch_profile_show_more">Tampilkan lainnya</string>
     <string name="patch_profile_show_less">Tampilkan lebih sedikit</string>
@@ -705,8 +705,8 @@ Manakah yang harus disimpan ke profil ini?"</string>
     <string name="patch_profile_bundle_change_uid">Ubah UID</string>
     <string name="patch_profile_bundle_change_uid_title">Ubah UID untuk %1$s</string>
     <string name="patch_profile_bundle_change_uid_invalid">Masukkan UID numerik yang sah.</string>
-    <string name="patch_profile_bundle_change_uid_success">UID bundel diperbarui menjadi %1$d.</string>
-    <string name="patch_profile_bundle_change_uid_not_found">Tidak ditemukan tambalan bundel lokal dengan UID %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_success">UID paket diperbarui menjadi %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">Tidak ditemukan paket tambalan lokal dengan UID %1$d.</string>
     <string name="patcher_process_exit_message">Proses penambal keluar dengan kode %1$d.</string>
     <string name="patcher_memory_adjustment_title">Penambal kehabisan memori</string>
     <!-- Dormant code and not used -->
@@ -716,18 +716,18 @@ Manakah yang harus disimpan ke profil ini?"</string>
     <string name="patcher_missing_patch_title">Pemilihan tambalan memerlukan perhatian</string>
     <string name="patcher_preflight_missing_patch_remove">Hapus tambalan yang hilang</string>
     <string name="patcher_preflight_missing_patch_proceed">Lanjutkan saja</string>
-    <string name="patcher_preflight_missing_patch_message">"Pengeditan berikut tidak tersedia dalam paket saat ini:
+    <string name="patcher_preflight_missing_patch_message">"Tambalan berikut tidak tersedia dalam paket saat ini:
 %1$s
 Anda dapat menghapusnya secara otomatis, mengatur pilihan, atau terus menggunakan."</string>
     <string name="patcher_missing_patch_review">Tinjau pilihan</string>
     <string name="patch_selector_missing_patch_title">Pilih ulang tambalan yang hilang</string>
-    <string name="patch_selector_missing_patch_message">"Patch ini perlu dipilih ulang:
+    <string name="patch_selector_missing_patch_message">"Tambalan ini perlu dipilih ulang:
 %1$s
-Aktifkan kembali (atau pilih alternatif) lalu coba terapkan patch lagi."</string>
+Aktifkan kembali (atau pilih alternatif) lalu coba terapkan tambalan lagi."</string>
     <string name="patch_profile_delete_multiple_dialog_description">Hapus profil tambalan yang dipilih?</string>
     <string name="this_version">Versi ini</string>
     <string name="universal">Aplikasi apa pun</string>
-    <string name="search_patches">Cari patch</string>
+    <string name="search_patches">Cari tambalan</string>
     <string name="app_version_not_compatible">"Patch ini tidak kompatibel dengan versi aplikasi yang dipilih (%1$s).
 
 Hanya kompatibel dengan versi berikut: %2$s."</string>
@@ -741,12 +741,12 @@ Hanya kompatibel dengan versi berikut: %2$s."</string>
     <string name="install_type">Jenis pemasangan</string>
     <string name="package_name">Nama paket</string>
     <string name="original_package_name">Nama paket asli</string>
-    <string name="applied_patches">Patch yang diterapkan</string>
-    <string name="view_applied_patches">Lihat patch yang diterapkan</string>
-    <string name="patch_bundles_used">Bundel patch yang digunakan</string>
-    <string name="applied_patches_empty">Tidak ada patch yang direkam untuk aplikasi ini</string>
-    <string name="applied_patches_bundle_missing">Metadata bundel tidak tersedia. Menampilkan nama patch yang disimpan.</string>
-    <string name="no_patch_bundles_tracked">Tidak ada bundel patch yang tercatat untuk aplikasi ini</string>
+    <string name="applied_patches">Tambalan yang diterapkan</string>
+    <string name="view_applied_patches">Lihat tambalan yang diterapkan</string>
+    <string name="patch_bundles_used">Paket tambalan yang digunakan</string>
+    <string name="applied_patches_empty">Tidak ada tambalan yang dicatat untuk aplikasi ini</string>
+    <string name="applied_patches_bundle_missing">Metadata paket tidak tersedia. Menampilkan nama tambalan yang disimpan.</string>
+    <string name="no_patch_bundles_tracked">Tidak ada paket tambalan yang tercatat untuk aplikasi ini</string>
     <string name="mount_install">Pemasang mount rooted</string>
     <string name="mounted">Terpasang</string>
     <string name="unmounted">Belum terpasang</string>
@@ -894,7 +894,7 @@ Detail: %2$s"</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan dengan plugin ini.</string>
     <string name="select_install_type">Pilih jenis pemasangan</string>
     <string name="patcher_step_group_preparing">Mempersiapkan</string>
-    <string name="patcher_step_load_patches">Memuat patch</string>
+    <string name="patcher_step_load_patches">Memuat tambalan</string>
     <string name="patcher_step_prepare_split_apk">Gabungkan APK split</string>
     <string name="patcher_step_unpack">Membaca berkas APK</string>
     <string name="patcher_step_group_patching">Penyematan</string>
@@ -911,7 +911,7 @@ Detail: %2$s"</string>
     <string name="patcher_install_in_progress_stay">Tetap di sini</string>
     <string name="patcher_mount_in_progress_title">Pemasangan sedang berlangsung</string>
     <string name="patcher_mount_in_progress">Pemasangan sedang berlangsung. Harap tunggu</string>
-    <string name="applying_patches">Menerapkan patch</string>
+    <string name="applying_patches">Menerapkan tambalan</string>
     <string name="applying_patch">Menerapkan %s</string>
     <string name="failed_to_execute_patch">Gagal menerapkan %s</string>
     <string name="save_patched_app_dialog_title">Tinggalkan penambal?</string>
@@ -940,11 +940,11 @@ Detail: %2$s"</string>
     <string name="developer_options_description">Opsi untuk men-debug masalah</string>
     <string name="patches_update_success">Pembaruan berhasil</string>
     <string name="patches_update_unavailable">Tidak ada pembaruan yang tersedia</string>
-    <string name="view_patches">Lihat patch</string>
+    <string name="view_patches">Lihat tambalan</string>
     <string name="patches_view_any_version">Versi apa saja</string>
     <string name="patches_view_any_package">Paket apa saja</string>
     <string name="patches_delete_single_dialog_description">Apakah Anda yakin ingin menghapus \"%s\"?</string>
-    <string name="patches_delete_multiple_dialog_description">Apakah Anda yakin ingin menghapus bundel patch yang dipilih?</string>
+    <string name="patches_delete_multiple_dialog_description">Apakah Anda yakin ingin menghapus paket tambalan yang dipilih?</string>
     <string name="about_revanced_manager">Tentang Morphe</string>
     <string name="revanced_manager_description">"Morphe adalah proyek sumber terbuka eksperimental yang berfokus pada pembuatan penambalan aplikasi Android populer yang modern dan ramping
 
@@ -995,11 +995,11 @@ Apakah Anda masih ingin melanjutkan?"</string>
     <string name="no_contributors_found">Tidak ada kontributor yang ditemukan</string>
     <string name="select">Pilih</string>
     <string name="select_deselect_all">Pilih atau batal pilih semua</string>
-    <string name="deselect_all">Batal pilih semua</string>
-    <string name="deselect_bundle">Batal pilih bundel saat ini</string>
-    <string name="select_patches_type_dialog_description">Tambahkan tambalan bundel baru dari URL atau berkas lokal</string>
-    <string name="local_patches_description">Tambahkan bundel patch dari penyimpanan lokal.</string>
-    <string name="remote_patches_description">Tambahkan bundel patch dari URL. Bundel patch dapat diperbarui secara otomatis.</string>
+    <string name="deselect_all">Batalkan semua pilihan</string>
+    <string name="deselect_bundle">Batalkan pilih paket saat ini</string>
+    <string name="select_patches_type_dialog_description">Tambah paket tambalan baru dari URL atau berkas lokal</string>
+    <string name="local_patches_description">Tambah paket tambalan dari penyimpanan lokal.</string>
+    <string name="remote_patches_description">Tambah paket tambalan dari URL. Paket tambalan dapat diperbarui secara otomatis.</string>
     <string name="recommended">Rekomendasi</string>
     <string name="installation_failed_dialog_title">Pemasangan gagal</string>
     <string name="installation_cancelled_dialog_title">Pemasangan dibatalkan</string>
@@ -1027,14 +1027,14 @@ Apakah Anda masih ingin melanjutkan?"</string>
     <string name="enter_url">Masukkan URL</string>
     <string name="next">Berikutnya</string>
     <string name="auto_update">Pembaruan Otomatis</string>
-    <string name="add_patches">Tambahkan bundel patch</string>
+    <string name="add_patches">Tambah paket tambalan</string>
     <string name="auto_update_description">Perbarui secara otomatis saat versi baru tersedia</string>
     <string name="patches_prereleases">Gunakan rilis pra</string>
     <string name="patches_prereleases_description">Gunakan versi pra-rilis dari %s</string>
-    <string name="patches_url">URL Bundel Patch</string>
-    <string name="incompatible_patches_dialog">"Patch ini tidak kompatibel dengan versi aplikasi yang dipilih (%1$s).
+    <string name="patches_url">URL Paket Tambalan</string>
+    <string name="incompatible_patches_dialog">"Tambalan ini tidak cocok dengan versi aplikasi yang dipilih (%1$s).
 
-Klik pada patch untuk melihat detail selengkapnya."</string>
+Klik pada tambalan untuk melihat detail selengkapnya."</string>
     <string name="incompatible_patch">Patch Tidak Kompatibel</string>
     <string name="any_version">Apa pun</string>
     <string name="never_show_again">Jangan tampilkan lagi</string>

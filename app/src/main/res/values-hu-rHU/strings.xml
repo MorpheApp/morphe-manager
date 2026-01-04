@@ -638,8 +638,8 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="delete">Törlés</string>
     <string name="disable">Letiltás</string>
     <string name="enable">Kikapcsolás engedélyezése</string>
-    <string name="patch_bundle_disabled_toast">%d%s Verpackungsdatei wurde deaktiviert.</string>
-    <string name="patch_bundle_enabled_toast">%d%s Verpackungsdatei wurde aktiviert.</string>
+    <string name="patch_bundle_disabled_toast">Letiltva %d csomag(ok)</string>
+    <string name="patch_bundle_enabled_toast">Engedélyezett %d csomag(ok)</string>
     <string name="patches_disable_single_dialog_description">\"%s\" deaktivieren?</string>
     <string name="patches_enable_single_dialog_description">\"%s\" aktivieren?</string>
     <string name="refresh">Frissítés</string>
@@ -647,7 +647,7 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="patches_download_fail">Nem sikerült a pótlások letöltése: %s</string>
     <string name="patches_replace_fail">Nem sikerült a pótlások importálása: %s</string>
     <string name="no_patched_apps_found">Nincs pótlásként kezelt alkalmazás</string>
-    <string name="patches_selected">%s%s %d%s wurde ausgewählt.</string>
+    <string name="patches_selected">%s \'patcher\' kiválasztva</string>
     <string name="patch_profiles_selected">%1$d javítóprofil kiválasztva</string>
     <string name="selected_apps_count">%1$d alkalmazás kiválasztva</string>
     <string name="selected_apps_delete_dialog_description">Eltávolítja a kiválasztott alkalmazásokat a kezelőből? A készüléken telepített alkalmazások érintetlenek maradnak.</string>
