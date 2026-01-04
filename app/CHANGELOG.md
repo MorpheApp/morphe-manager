@@ -1,3 +1,10 @@
+## app [1.1.1-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2026-01-04)
+
+
+### Bug Fixes
+
+* Fix crash on Android 10 when selecting APK in Expert mode ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([faa5290](https://github.com/MorpheApp/morphe-manager/commit/faa5290abe3409f7208eeac46d0c3dbc5deb6d9a))
+
 ## app [1.1.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.0...v1.1.1-dev.1) (2026-01-04)
 
 
