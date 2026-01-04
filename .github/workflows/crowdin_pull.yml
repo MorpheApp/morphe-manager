@@ -58,7 +58,15 @@ jobs:
       - name: Fetch crowdin branch
         run: git fetch origin crowdin
 
-      # Step 3: Squash merge crowdin into dev
+      # Step 3: Compile Android app to check string resources
+      - name: Compile Android app to check resources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:assembleDebug
+
+      # Step 4: Squash merge Crowdin into dev
       - name: Squash merge crowdin into dev
         run: |
           git config --local user.name "Crowdin Bot"

@@ -146,15 +146,15 @@
     <string name="morphe_patch_options_theme_colors">앱 테마 색상</string>
     <string name="morphe_patch_options_theme_colors_description">배경 색상을 변경해 보세요</string>
     <string name="morphe_patch_options_dark_theme_color">어두운 테마 배경 색상</string>
-    <string name="morphe_patch_options_dark_theme_color_description">색상을 참조하거나 헥스 색상 코드를 변경하여 원하는 색상으로 변경해 보세요</string>
+    <string name="morphe_patch_options_dark_theme_color_description">색상 리소스를 참조하거나 헥스 색상 코드를 변경하여 원하는 테마 색상으로 변경해 보세요</string>
     <string name="morphe_patch_options_light_theme_color">밝은 테마 배경 색상</string>
-    <string name="morphe_patch_options_light_theme_color_description">색상을 참조하거나 헥스 색상 코드를 변경하여 원하는 색상으로 변경해 보세요</string>
+    <string name="morphe_patch_options_light_theme_color_description">색상 리소스를 참조하거나 헥스 색상 코드를 변경하여 원하는 테마 색상으로 변경해 보세요</string>
     <string name="morphe_patch_options_icon_instructions_title">아이콘 형식 설명서</string>
     <string name="morphe_patch_options_header_instructions_title">헤더 형식 설명서</string>
     <string name="morphe_patch_options_loading">패치 옵션을 불러오는 중 …</string>
     <string name="morphe_patch_options_waiting_for_bundle">패치 번들 업데이트를 기다리는 중</string>
     <string name="morphe_patch_options_load_error">패치 옵션을 불러올 수 없습니다</string>
-    <string name="morphe_patch_options_no_available">이 패치에 사용할 수 있는 옵션이 없습니다</string>
+    <string name="morphe_patch_options_no_available">이 패치에 사용 가능한 옵션이 없습니다</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">커스텀 색상</string>
     <string name="morphe_hex_color">헥스 색상 코드</string>
@@ -166,7 +166,7 @@
     <string name="morphe_patch_options_custom_branding_custom_icon">커스텀 아이콘</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"커스텀 아이콘으로 사용될 이미지가 있는 폴더.
 
-폴더에는 장치의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
+폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
@@ -184,7 +184,7 @@ morphe_adaptive_forground_custom.png
 - mipmap-xxhdpi: 324x324 px
 - mipmap-xxxhdpi: 432x432 px
 
-선택적으로 경로에는 단색 아이콘 파일이 있는 'drawable' 폴더가 포함되어 있습니다:
+선택적으로, 경로에는 단색 아이콘 파일 중 하나가 포함된 ‘drawable’ 폴더가 있을 수 있습니다:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
@@ -192,7 +192,7 @@ morphe_notification_icon_custom.xml"</string>
     <string name="morphe_patch_options_custom_header_description">헤더 로그를 변경해 보세요</string>
     <string name="morphe_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더.
 
-폴더에는 장치의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
+폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
@@ -228,7 +228,7 @@ morphe_header_custom_dark.png
     <string name="select_app">앱 선택하기</string>
     <string name="app_filter_title">앱 필터</string>
     <string name="app_filter_installed_only">설치된 앱만</string>
-    <string name="app_filter_patches_available">사용 가능한 패치</string>
+    <string name="app_filter_patches_available">패치 가능한 앱만</string>
     <string name="app_filter_no_results">필터와 일치하는 앱이 없습니다.</string>
     <string name="new_downloader_plugins_notification">새로운 다운로더 플러그인을 사용할 수 있습니다. 설정하려면 여기를 탭하세요.</string>
     <string name="unsupported_architecture_warning">이 기기 아키텍처에 대한 패치는 지원되지 않으므로 실패할 가능성이 높습니다.</string>
@@ -265,8 +265,8 @@ morphe_header_custom_dark.png
     <string name="bundle_version_all_versions">모든 버전</string>
     <string name="bundle_version_no_version">권장되는 버전이 없습니다</string>
     <string name="bundle_version_suggested_label">권장 버전: %1$s</string>
-    <string name="bundle_update_manual_available">업데이트 가능</string>
-    <string name="bundle_update_manual_available_with_version">업데이트 가능: %1$s</string>
+    <string name="bundle_update_manual_available">업데이트 사용 가능</string>
+    <string name="bundle_update_manual_available_with_version">업데이트 사용 가능: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d 개의 번들이 처리됨</string>
     <string name="bundle_update_banner_title">패치 번들을 업데이트하는 중</string>
     <string name="bundle_reorder">번들 정리</string>
@@ -287,7 +287,7 @@ morphe_header_custom_dark.png
     <string name="hide_suggested_versions">권장 버전 숨기기</string>
     <string name="show_other_versions">다른 버전 보기</string>
     <string name="other_supported_versions_title">다른 지원 버전 (%1$s)</string>
-    <string name="other_supported_versions_empty">사용할 수 있는 다른 지원 버전이 없습니다.</string>
+    <string name="other_supported_versions_empty">사용 가능한 다른 지원 버전이 없습니다.</string>
     <string name="other_supported_versions_all">모든 버전을 지원합니다.</string>
     <string name="bundle_version_dialog_recommended">권장 버전: %1$s</string>
     <string name="bundle_version_dialog_selected_override">선택된 버전: %1$s</string>
@@ -568,7 +568,7 @@ morphe_header_custom_dark.png
     <string name="strip_unused_libs">사용되지 않는 네이티브 라이브러리 삭제</string>
     <string name="strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
     <string name="process_runtime_memory_limit">패처 프로세스 메모리 제한</string>
-    <string name="process_runtime_memory_limit_description">패처 프로세스가 사용할 수 있는 최대 메모리 용량을 지정할 수 있습니다 (메가바이트)</string>
+    <string name="process_runtime_memory_limit_description">패처 프로세스가 사용 가능한 최대 메모리 용량을 지정할 수 있습니다 (메가바이트)</string>
     <string name="reset_to_recommended">권장값으로 초기화</string>
     <string name="patcher_auto_collapse_steps">완료된 패처 단계 자동 접기</string>
     <string name="patcher_auto_collapse_steps_description">모든 단계가 완료된 후에 각 패처 진행 위젯을 자동으로 접습니다</string>
@@ -697,7 +697,7 @@ morphe_header_custom_dark.png
     <string name="patch_profile_empty_state">패치 선택 화면에서 프로필 설정을 저장하면 여기에서 확인할 수 있습니다.</string>
     <string name="patch_profile_missing_bundles_toast">이 프로필의 일부 번들을 사용할 수 없으므로 건너뜁니다.</string>
     <string name="patch_profile_changed_patches_toast">이 프로필의 일부 패치 또는 옵션이 더 이상 번들과 일치하지 않아서 건너뜁니다.</string>
-    <string name="patch_profile_no_available_bundles_toast">이 프로필에는 사용할 수 있는 번들이 없습니다. 번들을 업데이트하고 다시 시도하세요.</string>
+    <string name="patch_profile_no_available_bundles_toast">이 프로필에는 사용 가능한 번들이 없습니다. 번들을 업데이트하고 다시 시도하세요.</string>
     <string name="patch_profile_launch_error">이 패치 프로필을 열 수 없습니다.</string>
     <string name="patch_profile_show_more">자세히 보기</string>
     <string name="patch_profile_show_less">간략히 보기</string>
@@ -777,8 +777,8 @@ morphe_header_custom_dark.png
     <string name="patch_selector_sheet_filter_compat_title">호환성</string>
     <string name="patch_selector_sheet_filter_sort_title">정렬</string>
     <string name="patch_selector_sheet_filter_sort_alphabetical">알파벳순</string>
-    <string name="patch_selector_sheet_filter_sort_has_settings">설정 있음</string>
-    <string name="patch_selector_sheet_filter_sort_no_settings">설정 없음</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">옵션 있음</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">옵션 없음</string>
     <string name="string_option_menu_description">더 많은 옵션</string>
     <string name="option_preset_custom_value">커스텀 값</string>
     <string name="path_selector">기기 저장소에서 선택</string>

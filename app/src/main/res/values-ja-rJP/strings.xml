@@ -135,6 +135,7 @@
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
     <!-- Update Section -->
+    <string name="morphe_update_use_prereleases">のプレリリース版を使う</string>
     <string name="morphe_update_use_prereleases_description">既発のパッチやマネージャーフィーチャーに早期アクセスする</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
@@ -161,6 +162,7 @@
     <string name="morphe_patch_options_custom_branding">Custom branding</string>
     <string name="morphe_patch_options_custom_branding_description">アプリの名前を変更</string>
     <string name="morphe_patch_options_custom_branding_app_name">アプリ名</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">カスタム名を入力</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">カスタム アイコン</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"画像をカスタムアイコンとして使用するためのフォルダです。
 
@@ -188,9 +190,28 @@ morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
     <string name="morphe_patch_options_custom_header">カスタムヘッダー ロゴ</string>
     <string name="morphe_patch_options_custom_header_description">ヘッダーのロゴを変更する</string>
+    <string name="morphe_patch_options_custom_header_instruction">"画像を使用するためのフォルダー。
+
+DPIに応じて、次のフォルダーのいずれかを含む必要があります:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+各フォルダーには、次のファイルが含まれている必要があります:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+画像サイズは次のようにしてください:
+- drawable-hdpi: 194x72 ピクセル
+- drawable-xhdpi: 258x96 ピクセル
+- drawable-xxhdpi: 387x144 ピクセル
+- drawable-xxxhdpi: 512x192 ピクセル"</string>
     <!-- Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_features">ショート機能を隠す</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">ショートの項目を隠す</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">ホーム画面を長押ししたときのメニューからショートの項目を消す</string>
+    <string name="morphe_patch_options_hide_shorts_widget">ショートウィジェットを隠す</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">ホーム画面のウィジェットからショートボタンを消す</string>
     <!-- Other strings -->
     <string name="patcher">パッチャー</string>
