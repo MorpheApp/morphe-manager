@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">تم تحديث التعديلات الخاصة بك</string>
     <string name="morphe_home_patches_are_loading">يتم تحميل التعديلات، يرجى الانتظار…</string>
     <string name="morphe_home_please_wait">يرجى الانتظار…</string>
-    <string name="morphe_home_open_in_browser">فتح في المتصفح</string>
+    <string name="morphe_home_open_in_browser">Open in browser</string>
     <string name="morphe_home_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="morphe_home_date_added">تمت الإضافة</string>
     <string name="morphe_home_date_updated">محدَّث</string>
     <string name="morphe_home_check_updates">تحقق</string>
     <string name="morphe_home_unknown">غير معروف</string>
-    <string name="morphe_home_timeline">سجل التحديثات</string>
+    <string name="morphe_home_timeline">Update history</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">لتعديل %1$s ، تحتاج إلى الإصدار %2$s (غير المعدل)</string>
@@ -56,22 +56,22 @@
     <string name="morphe_home_file_picker_prompt_title">تحديد ملف APK الذي قمت بتنزيله</string>
     <string name="morphe_home_file_picker_prompt_description">الآن حدد ملف %1$s APK الذي قمت بتنزيله للتو.</string>
     <string name="morphe_home_file_picker_prompt_open">فتح ملف APK الذي قمت بتنزيله</string>
-    <string name="morphe_home_recommended_version">الإصدار الموصى به</string>
-    <string name="morphe_patcher_selected_version">الإصدار المحدد</string>
+    <string name="morphe_home_recommended_version">Recommended version</string>
+    <string name="morphe_patcher_selected_version">الْوERSION-selected version</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">يتطلب وضع الروت تثبيت ملف APK الأصلي على جهازك قبل التعديل.</string>
     <string name="morphe_root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع الروت</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">حفظ ملف APK</string>
-    <string name="morphe_patcher_copy_error">خطأ في النسخ</string>
-    <string name="morphe_patcher_show_error">عرض الخطأ</string>
+    <string name="morphe_patcher_copy_error">Copy error</string>
+    <string name="morphe_patcher_show_error">إظهار الخطأ</string>
     <string name="morphe_patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d تعديلات</string>
     <string name="morphe_patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
     <string name="morphe_patcher_installing">جارٍ التثبيت…</string>
     <string name="morphe_patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="morphe_patcher_success_title">تم الانتهاء! 🎉</string>
-    <string name="morphe_patcher_success_subtitle">تم ترقيع تطبيقك وتثبيته!</string>
+    <string name="morphe_patcher_success_subtitle">تم تعديل تطبيقك وتثبيته!</string>
     <string name="morphe_patcher_complete_title">اكتمل التعديل! ✨</string>
     <string name="morphe_patcher_failed_title">عفوًا! حدث خطأ ما</string>
     <string name="morphe_patcher_failed_subtitle">تحقق من تفاصيل الخطأ أدناه</string>
@@ -81,94 +81,135 @@
     <string name="morphe_patcher_conflict_title">تعارض الحزمة</string>
     <string name="morphe_patcher_conflict_subtitle">تحتاج إلى إلغاء تثبيت الإصدار الحالي</string>
     <string name="morphe_patcher_install_error_title">خطأ في التثبيت</string>
-    <string name="morphe_patcher_install_error_subtitle">حاول إلغاء التثبيت والتثبيت مرة أخرى</string>
+    <string name="morphe_patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="morphe_patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتحميل</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">إصدار غير مدعوم</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">هذا الـ APK ليس إصدارًا موصى به للتطبيق. قد يؤدي المتابعة إلى تطبيق غير فعال.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">هذا الـ APK ليس إصدارًا موصى به للتطبيق. قد تؤدي المتابعة إلى تطبيق غير فعال.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">المتابعة على أي حال</string>
-    <string name="morphe_patcher_wrong_package_title">تم تحديد حزمة خاطئة</string>
-    <string name="morphe_patcher_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي حاولت تعديله.</string>
-    <string name="morphe_patcher_expected_package">الحزمة المتوقعة</string>
+    <string name="morphe_patcher_wrong_package_title">تم اختيار حزمة تطبيق خاطئة</string>
+    <string name="morphe_patcher_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي كنت تنوي تعديله.</string>
+    <string name="morphe_patcher_expected_package">\"حزمة التطبيق المتوقعة\"</string>
     <string name="morphe_patcher_selected_package">الحزمة المحددة</string>
     <string name="morphe_patcher_message_1">تحويل تطبيقك إلى شيء رائع… 🏆</string>
     <string name="morphe_patcher_message_2">تعليم التطبيقات القديمة حيلًا جديدة… 🎩</string>
-    <string name="morphe_patcher_message_3">إجراء تحديث رقمي لتطبيقك… 🔧</string>
-    <string name="morphe_patcher_message_4">جاري تحضير السحر الرقمي… ☕</string>
-    <string name="morphe_patcher_message_5">يُنصح بأخذ استراحة قهوة… ☕</string>
+    <string name="morphe_patcher_message_3">إجراء تحسين رقمي لتطبيقك… 🔧</string>
+    <string name="morphe_patcher_message_4">جارٍ تحضير سحرًا رقميًا… ☕</string>
+    <string name="morphe_patcher_message_5">يوصى بأخذ استراحة قهوة… ☕</string>
     <string name="morphe_patcher_message_6">انظر إلى الخارج، الجو جميل… 🌤️</string>
-    <string name="morphe_patcher_message_7">جاري تعديل 1 و 0… 🤖</string>
-    <string name="morphe_patcher_message_8">فك تشابك السباغيتي الرقمية… 🍝</string>
+    <string name="morphe_patcher_message_7">جارٍ تعديل 1 و 0… 🤖</string>
+    <string name="morphe_patcher_message_8">فك تشابك السباغيتي رقميًا… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">إصلاح الأخطاء في التطبيق غير المرقع… 🐞</string>
-    <string name="morphe_patcher_message_10">الترقيعات الرائعة تستحق الانتظار… ⏳</string>
-    <string name="morphe_patcher_message_11">تلميع وحدات البكسل حتى تلمع… 💎</string>
-    <string name="morphe_patcher_message_12">يرجى البقاء في مقعدك حتى يطفئ القبطان علامة \"جاري الإصلاح\"... 💺✈️</string>
-    <string name="morphe_patcher_message_13">جاري طبخ تطبيقك المرقع، ساخن وطازج… 🍳</string>
+    <string name="morphe_patcher_message_9">إصلاح الأخطاء في التطبيق غير المعدل… 🐞</string>
+    <string name="morphe_patcher_message_10">التعديلات الرائعة تستحق الانتظار… ⏳</string>
+    <string name="morphe_patcher_message_11">تلميع البكسلات حتى تلمع… 💎</string>
+    <string name="morphe_patcher_message_12">يرجى البقاء في مقعدك حتى يطفئ القبطان علامة \"جارٍ الإصلاح\"... 💺✈️</string>
+    <string name="morphe_patcher_message_13">جارٍ طبخ تطبيقك المعدل، ساخن وطازج… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">نتفاوض بأدب مع شيفرة بايت… 🤝</string>
+    <string name="morphe_patcher_message_14">نتفاوض بلطف مع شيفرة بايت… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">جميع الأنظمة فعالة… مسار التعديل مستقر… 🚀</string>
+    <string name="morphe_patcher_message_15">جميع الأنظمة تعمل بشكل طبيعي… مسار التعديل مستقر… 🚀</string>
     <string name="morphe_patcher_message_16">استخلاص طاقة إضافية، مثل العصير من ليمونة رقمية… 🍋</string>
     <string name="morphe_patcher_message_17">تشجيع التطبيق على قبول ذاته الجديدة والأفضل… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">تغيير تراكب التطبيق من غير مرقع إلى مرقع… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">تغيير وضع التطبيق من غير معدل إلى معدل… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">تطبيقك يعاني من الحمى، والحل الوحيد هو المزيد من التعديل… 🩺🔔</string>
+    <string name="morphe_patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
     <string name="morphe_patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">العودة إلى الشاشة الرئيسية لـ Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">العودة إلى الوضع المبسط</string>
+    <string name="morphe_settings_return_to_morphe">الرجوع إلى الصفحة الرئيسية لـ Morphe</string>
+    <string name="morphe_settings_return_to_morphe_description">الرجوع إلى الوضع المبسط</string>
     <string name="morphe_settings_return_to_expert">تبديل إلى وضع الخبير</string>
-    <string name="morphe_settings_return_to_expert_description">الпереход إلى وضع الخبير الكامل الميزات</string>
-    <string name="morphe_share_website">مشاركة الموقع</string>
+    <string name="morphe_settings_return_to_expert_description">التبديل إلى وضع الخبير كامل الميزات</string>
+    <string name="morphe_share_website">مشاركة الموقع الإلكتروني</string>
     <string name="morphe_share_website_description">شارك موقع Morphe الرسمي</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">خيارات المظهر</string>
-    <string name="morphe_appearance_options_description">قم بتخصيص أشكال والوان الخلفيات</string>
-    <string name="morphe_background_type">رسوم متحركة للخلفية</string>
+    <string name="morphe_appearance_options_description">تخصيص أشكال وألوان الخلفيات</string>
+    <string name="morphe_background_type">خلفيّات مُتحرِّكة</string>
     <string name="morphe_background_type_circles">دوائر</string>
     <string name="morphe_background_type_rings">حلقات</string>
     <string name="morphe_background_type_waves">أمواج</string>
     <string name="morphe_background_type_space">فضاء</string>
     <string name="morphe_background_type_shapes">أشكال</string>
-    <string name="morphe_background_type_snow">الثلج</string>
+    <string name="morphe_background_type_snow">ثلج</string>
     <string name="morphe_background_type_none">لا شيء</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">استخدام تعديلات الإصدارات التجريبية</string>
-    <string name="morphe_update_use_patches_prereleases_description">استخدام أحدث تعديلات التطوير</string>
+    <string name="morphe_update_use_prereleases">استخدام إصدارات ما قبل الإطلاق</string>
+    <string name="morphe_update_use_prereleases_description">احصل على الوصول المبكر إلى التعديلات الجديدة وميزات الإدارة</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">خيارات التحديث</string>
-    <string name="morphe_patch_options_youtube_description">الثيم، الشعار، المقدمة، و خيارات Shorts</string>
-    <string name="morphe_patch_options_youtube_music_description">خيارات الثيم و الشعار</string>
-    <string name="morphe_patch_options_restart_message">يتطلب تغيير إعدادات التعديل إعادة تطبيق التعديلات مرة أخرى لتنفيذ التغييرات</string>
-    <string name="morphe_icon_instructions_title">تعليمات تنسيق الأيقونة</string>
-    <string name="morphe_header_instructions_title">تعليمات تنسيق المقدمة</string>
-    <string name="morphe_loading_patch_options">تحميل إعدادات التعديلات</string>
-    <string name="morphe_patch_options_waiting_for_bundle">انتظر حتى يتم تحديث حزمة التحديث</string>
-    <string name="morphe_patch_options_load_error">فشل في تحميل خيارات التعديلات</string>
-    <string name="morphe_no_options_available">لا توجد خيارات متاحة لهذا التعديل</string>
+    <string name="morphe_patch_options">خيارات التعديل</string>
+    <string name="morphe_patch_options_youtube_description">المظهر، الشعار، الهوية، وخيارات Shorts</string>
+    <string name="morphe_patch_options_youtube_music_description">خيارات المظهر و الشعار</string>
+    <string name="morphe_patch_options_restart_message">يتطلب تغيير خيارات التعديل إعادة تعديل التطبيق حتى تسري التغييرات</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">ألوان مظهر التطبيق</string>
+    <string name="morphe_patch_options_theme_colors_description">تغيير لون الخلفية</string>
+    <string name="morphe_patch_options_dark_theme_color">لون خلفية الوضع الداكن</string>
+    <string name="morphe_patch_options_dark_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
+    <string name="morphe_patch_options_light_theme_color">لون خلفية المظهر الفاتح</string>
+    <string name="morphe_patch_options_light_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
+    <string name="morphe_patch_options_icon_instructions_title">تعليمات تنسيق الأيقونة</string>
+    <string name="morphe_patch_options_header_instructions_title">تعليمات تنسيق الشعار</string>
+    <string name="morphe_patch_options_loading">تحميل خيارات التعديل...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">انتظر حتى يتم تحديث حزمة التعديل</string>
+    <string name="morphe_patch_options_load_error">فشل في تحميل خيارات التعديل</string>
+    <string name="morphe_patch_options_no_available">لا توجد خيارات متاحة لهذا التعديل</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">اللون المخصص</string>
-    <string name="morphe_hex_color">Hex Color</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">الألوانTheme</string>
-    <string name="morphe_theme_dark_color">خلفية الوضع المظلم</string>
-    <string name="morphe_theme_dark_color_description">لون الخلفية للوضع المظلم</string>
-    <string name="morphe_theme_light_color">خلفية الوضع المضئ</string>
+    <string name="morphe_hex_color">صيغة اللون</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">التسمية المخصصة</string>
-    <string name="morphe_custom_app_name_description">تغيير الاسم المعروض للتطبيق</string>
-    <string name="morphe_custom_app_name_hint">أدخل الاسم المخصص</string>
+    <string name="morphe_patch_options_custom_branding">\"ال\"\\u0627\\u0644\\u0642\\u0631\\u0636\\u0647\" المخصص\"</string>
+    <string name="morphe_patch_options_custom_branding_description">تغيير الاسم المعروض للتطبيق</string>
+    <string name="morphe_patch_options_custom_branding_app_name">اسم التطبيق</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">أدخل اسمًا مخصصًا</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">أيقونة مخصصة</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"\\n\\n\"\"\\u0639\\u0631\\u0633\\u0645\\u0646\\u0647\\u0644\\xA0\لا\\u0647\\u0644\\u0645\\"\"\\u0627\\u0644\\u0635\\u0641\\u0631\\u062E\\u062F\\u0627\\u0621\\u0639\\u0644\\u062F\\u0645\\u064A\\u0627\\u0644\\u0625\\u0627\\u0644\\u062D\\u062F\\u0645\\u0647\\u0645\\u0627\\u0644\\u0644\\u062A\\u062F:
+-\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u0628\\u0643\\u064B\\u0645\\u063A\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u062D\\u0623\\u0644\\u0645\\u064B\\u0639\\u0645\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0634\\u062D\\u0648\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0638\\u0644\\u0649\\u0645\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0639\\u0644-xhdpi\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0639\\u0644-xxxhdpi\\"\"
+
+\"\"\\u0628\\u0643\\u064B\\u0645\\u063A\\"\"拜师学艺\"\" Ã những đỗ\"
+\"\"\\u062B\\u0643\\u064B\\u0645\\u0649\\u0639\\u0644\\u0645\"\"f:\\u0646\"\" س\t\uc\veح
+\"\"\\u0643\\u064B\\u0645\"\" زار
+\"\"\\u0645\\u0646\\u0647\\u0644\"\" الج
+\"\"\\u0645\\u064A\\u0627\\u0644\"\" Sikhicia
+لكل دليل يجب أن يحتوي على الملفات التالية (في ارتفاع dpi المضغوط):
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+\"\"\"\"\"\"水\"\" بحجم:
+- م.mipmap-mdpi: 108x108 px
+- م.mipmap-hdpi: 162x162 px
+- م.mipmap-xhdpi: 216x216 px
+- م.mipmap-xxhdpi: 324x324 px
+- م.mipmap-xxxhdpi: 432x432 px
+
+\"\"\"\"\"・ علماً بأن المسار المشار إليه أعلاه يحتوي بلاز الأولوية \“drawable\u201D مع أي ملف تعريف صورة أحادية اللون :
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml\""</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">الشعار المخصص</string>
-    <string name="morphe_custom_header_description">مسار المجلد الذي يحتوي على صور الشعار المخصص</string>
+    <string name="morphe_patch_options_custom_header">\"\"\"\\u0627\\u0644\\u0642\\u0631\\u0636\\u0647\"\"\\u062E\\u0644\\u062F\\"\"\'\'</string>
+    <string name="morphe_patch_options_custom_header_description">\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"\'\'\"\"\\u0647\\u064A\\"\"\\u062E\\u0644\\u062F\"\"</string>
+    <string name="morphe_patch_options_custom_header_instruction">"\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"''\"\"\\u062E\\u0644\\u062F\\"\"\n\"\"\\u0639\\u0631\\u0633\\u0645\\u0646\\u0647\\u0644\\xA0\لا\\u0647\\u0644\\u0645\\"\"\n\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u062D\\u0623\\u0644\\u0645\\u064B\\u0639\\u0645\"\" الإلكترونية :
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+\"\"拜师学艺\u063A ('drawable') يجب أن يحتوي على الملفات التالية (ل каждом):
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+\"\"\u6F14\u6625\"\":
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px\""</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">إخفاء الميزات kısa</string>
-    <string name="morphe_hide_shorts_app_shortcut">إخفاء اختصار التطبيقshort</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">إزالة Shorts من قائمة الضغطة المطولة للتطبيق في اللانشر </string>
-    <string name="morphe_hide_shorts_widget">إخفاء ويدجيت Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">إزالة زر shorts من widget Launcher</string>
+    <string name="morphe_patch_options_hide_shorts_features">\"\"\"\\u0627\\u0644\"\"ال\"\"\\u0634\\u0647\"\"\'\'\"\"\"\"\"用\"归شorts\"\" özelli Ajl</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"\归شorts application shortcut\"\" قدم Useful Hills초기</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">إزالة Shorts من قائمة الضغطة المطولة للتطبيق في اللانشر </string>
+    <string name="morphe_patch_options_hide_shorts_widget">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"n مزدوجة لنظام تشغيل Android خلال？</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"\归شorts кнопка من و \"\"用\"归شorts\"\" من Launcher의 \"\"归\"\"荋On</string>
     <!-- Other strings -->
     <string name="patcher">برنامج الرقع</string>
     <string name="patches">رقع</string>

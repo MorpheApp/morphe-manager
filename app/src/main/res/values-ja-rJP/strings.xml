@@ -4,7 +4,7 @@
     <string name="morphe_home_bundles">パッチソース</string>
     <string name="morphe_home_greeting_1">どのアプリをパッチしますか？</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">YouTubeを再び伝説的にする準備はできていますか?</string>
+    <string name="morphe_home_greeting_2">YouTube を再び伝説的にする準備はできていますか?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <string name="morphe_home_greeting_3">しっかり座り、修正の時間です</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -35,7 +35,7 @@
     <string name="morphe_home_date_updated">更新済み</string>
     <string name="morphe_home_check_updates">確認</string>
     <string name="morphe_home_unknown">不明</string>
-    <string name="morphe_home_timeline">アップデート履歴</string>
+    <string name="morphe_home_timeline">更新履歴</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">未パッチのオリジナル APK ファイルをお持ちですか？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">未パッチのバージョン %2$s が %1$s のパッチに必要です</string>
@@ -43,7 +43,7 @@
     <string name="morphe_home_apk_availability_no">いいえ、探すのを手伝って</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">オリジナル APK をダウンロード</string>
-    <string name="morphe_home_download_instructions_steps_title">手順：</string>
+    <string name="morphe_home_download_instructions_steps_title">操作手順:</string>
     <string name="morphe_home_download_instructions_step1">下の \"%1$s\" ボタンを押してください</string>
     <string name="morphe_home_download_instructions_step2_part1">スクロールしてこのボタンを押してください</string>
     <string name="morphe_home_download_instructions_download_button_toast">ここではなく、Web サイトにあるボタンを押してください😊</string>
@@ -57,14 +57,14 @@
     <string name="morphe_home_file_picker_prompt_description">ダウンロードした%1$s APK ファイルを選んでください。</string>
     <string name="morphe_home_file_picker_prompt_open">ダウンロードした APK ファイルを開く</string>
     <string name="morphe_home_recommended_version">推奨バージョン</string>
-    <string name="morphe_patcher_selected_version">選んだバージョン</string>
+    <string name="morphe_patcher_selected_version">Selected version</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root モードでは、パッチ前の APK を先にインストールする必要があります。</string>
     <string name="morphe_root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK を保存</string>
-    <string name="morphe_patcher_copy_error">コピーエラー</string>
-    <string name="morphe_patcher_show_error">エラーを表示</string>
+    <string name="morphe_patcher_copy_error">Copy error</string>
+    <string name="morphe_patcher_show_error">Show error</string>
     <string name="morphe_patcher_error_copied">コピーしました</string>
     <string name="morphe_patcher_patches_progress">%2$d 件中 %1$d 件のパッチ</string>
     <string name="morphe_patcher_long_step_warning">これには時間がかかる場合があります。お待ちください…</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">サポートされていないバージョン</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">この APK のバージョンは推奨されていません。続行しても、アプリが機能しない場合があります。</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">続行</string>
-    <string name="morphe_patcher_wrong_package_title">このパッケージは無効です</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Proceed anyway</string>
+    <string name="morphe_patcher_wrong_package_title">Wrong package selected</string>
     <string name="morphe_patcher_wrong_package_description">選択されたAPKは、パッチ対象のアプリのものではありません。</string>
-    <string name="morphe_patcher_expected_package">必要なパッケージ</string>
-    <string name="morphe_patcher_selected_package">選択されたパッケージ</string>
+    <string name="morphe_patcher_expected_package">Expected package</string>
+    <string name="morphe_patcher_selected_package">Selected package</string>
     <string name="morphe_patcher_message_1">アプリを素晴らしいものにモーフ中… 🏆</string>
     <string name="morphe_patcher_message_2">古いアプリに新しいトリックを教えています… 🎩</string>
     <string name="morphe_patcher_message_3">アプリのデジタルトンアップを実行中… 🔧</string>
@@ -121,12 +121,12 @@
     <string name="morphe_settings_return_to_morphe_description">シンプルモードに切り替える</string>
     <string name="morphe_settings_return_to_expert">Expertモードに切り替え</string>
     <string name="morphe_settings_return_to_expert_description">完全機能搭載のExpertモードに切り替え</string>
-    <string name="morphe_share_website">ウェブサイトを共有</string>
+    <string name="morphe_share_website">Share website</string>
     <string name="morphe_share_website_description">公式 Morphe ウェブサイトを共有</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">外観設定</string>
+    <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">テーマ、カラー、背景をカスタマイズ</string>
-    <string name="morphe_background_type">背景アニメーション</string>
+    <string name="morphe_background_type">Background animation</string>
     <string name="morphe_background_type_circles">円</string>
     <string name="morphe_background_type_rings">リング</string>
     <string name="morphe_background_type_waves">波</string>
@@ -135,40 +135,63 @@
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">プレリリースパッチ</string>
-    <string name="morphe_update_use_patches_prereleases_description">最新の開発パッチを使う</string>
+    <string name="morphe_update_use_prereleases_description">既発のパッチやマネージャーフィーチャーに早期アクセスする</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">パッチ設定</string>
+    <string name="morphe_patch_options">Patch options</string>
     <string name="morphe_patch_options_youtube_description">テーマ、 ブランディング、 ヘッダー、 ショートの設定</string>
     <string name="morphe_patch_options_youtube_music_description">テーマとブランディングの設定</string>
     <string name="morphe_patch_options_restart_message">パッチ設定の変更は、アプリの再パッチ後に反映されます</string>
-    <string name="morphe_icon_instructions_title">アイコンの形式について</string>
-    <string name="morphe_header_instructions_title">ヘッダーの形式について</string>
-    <string name="morphe_loading_patch_options">パッチ設定を読み込み中…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">App theme colors</string>
+    <string name="morphe_patch_options_theme_colors_description">Change background color</string>
+    <string name="morphe_patch_options_dark_theme_color">Dark theme background color</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
+    <string name="morphe_patch_options_light_theme_color">Light theme background color</string>
+    <string name="morphe_patch_options_light_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
+    <string name="morphe_patch_options_icon_instructions_title">アイコンの形式について</string>
+    <string name="morphe_patch_options_header_instructions_title">ヘッダーの形式について</string>
+    <string name="morphe_patch_options_loading">パッチ設定を読み込み中…</string>
     <string name="morphe_patch_options_waiting_for_bundle">パッチバンドルが更新されるまでお待ちください</string>
     <string name="morphe_patch_options_load_error">パッチ設定を読み込めませんでした</string>
-    <string name="morphe_no_options_available">このパッチには利用可能なオプションがありません</string>
+    <string name="morphe_patch_options_no_available">No options available for this patch</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">カスタムカラー</string>
     <string name="morphe_hex_color">Hex カラー</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">テーマカラー</string>
-    <string name="morphe_theme_dark_color">ダークテーマ背景色</string>
-    <string name="morphe_theme_dark_color_description">ダークテーマの背景色</string>
-    <string name="morphe_theme_light_color">ライトテーマ背景色</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">カスタムブランディング</string>
-    <string name="morphe_custom_app_name_description">アプリの名前を変更</string>
-    <string name="morphe_custom_app_name_hint">カスタム名を入力</string>
+    <string name="morphe_patch_options_custom_branding">Custom branding</string>
+    <string name="morphe_patch_options_custom_branding_description">アプリの名前を変更</string>
+    <string name="morphe_patch_options_custom_branding_app_name">アプリ名</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">カスタム アイコン</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"画像をカスタムアイコンとして使用するためのフォルダです。
+
+デバイスのDPIに応じて、以下のフォルダの1つ以上が必要です：
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+各フォルダには、以下のファイルが必要です：
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+画像サイズは以下のようにする必要があります：
+- mipmap-mdpi: 108x108 ピクセル
+- mipmap-hdpi: 162x162 ピクセル
+- mipmap-xhdpi: 216x216 ピクセル
+- mipmap-xxhdpi: 324x324 ピクセル
+- mipmap-xxxhdpi: 432x432 ピクセル
+
+オプションとして、パスに'drawable'フォルダがあり、以下のモノクロアイコンファイルのいずれかを含むことができます：
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">カスタムヘッダー</string>
-    <string name="morphe_custom_header_description">カスタムヘッダー画像が格納されているフォルダーパス</string>
+    <string name="morphe_patch_options_custom_header">カスタムヘッダー ロゴ</string>
+    <string name="morphe_patch_options_custom_header_description">ヘッダーのロゴを変更する</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">ショート機能を隠す</string>
-    <string name="morphe_hide_shorts_app_shortcut">ショートの項目を隠す</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">ホーム画面を長押ししたときのメニューからショートの項目を消す</string>
-    <string name="morphe_hide_shorts_widget">ショートウィジェットを隠す</string>
-    <string name="morphe_hide_shorts_widget_description">ホーム画面のウィジェットからショートボタンを消す</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">ショートの項目を隠す</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">ホーム画面を長押ししたときのメニューからショートの項目を消す</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">ホーム画面のウィジェットからショートボタンを消す</string>
     <!-- Other strings -->
     <string name="patcher">パッチャー</string>
     <string name="patches">パッチ</string>
@@ -902,9 +925,9 @@
     <string name="patches_delete_single_dialog_description">\"%s\"を削除してもよろしいですか？</string>
     <string name="patches_delete_multiple_dialog_description">選択したパッチバンドルを削除してもよろしいですか？</string>
     <string name="about_revanced_manager">Morpheについて</string>
-    <string name="revanced_manager_description">"Morpheは、人気のあるAndroidアプリの最新化された合理化されたパッチ作成に焦点を当てた実験的なオープンソースプロジェクトです。
+    <string name="revanced_manager_description">"Morphe は、人気のある Android アプリの最新化された合理化されたパッチ作成に焦点を当てた実験的なオープンソースプロジェクトです。
 
-Morpheは、コミュニティのフィードバックと貢献によって、将来のイノベーションを推進しています。"</string>
+Morphe は、コミュニティのフィードバックと貢献によって、将来のイノベーションを推進しています。"</string>
     <string name="here">こちら</string>
     <string name="update_available">アップデートが利用可能です</string>
     <string name="ready_to_install_update">アップデートをインストールする準備ができました</string>

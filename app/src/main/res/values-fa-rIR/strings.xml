@@ -28,13 +28,11 @@
     <string name="morphe_home_patches_updated">پچ‌های شما به روز هستند</string>
     <string name="morphe_home_patches_are_loading">پچ‌ها در حال بارگذاری هستند، لطفا صبر کنید...</string>
     <string name="morphe_home_please_wait">لطفا صبر کنید...</string>
-    <string name="morphe_home_open_in_browser">باز کردن در مرورگر</string>
     <string name="morphe_home_failed_to_open_url">باز کردن لینک ناموفق بود</string>
     <string name="morphe_home_date_added">افزوده شد</string>
     <string name="morphe_home_date_updated">به روزرسانی شد</string>
     <string name="morphe_home_check_updates">بررسی</string>
     <string name="morphe_home_unknown">ناشناخته</string>
-    <string name="morphe_home_timeline">تاریخچه بروزرسانی‌ها</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">فایل apk پچ نشده رو داری؟</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">برای پچ‌ کردن %1$s، به نسخه %2$s نیاز داری (پچ نشده)</string>
@@ -58,8 +56,8 @@
     <!-- Appearance Section -->
     <!-- Update Section -->
     <!-- Patch Options Section -->
-    <!-- Color Picker -->
     <!-- Theme Colors -->
+    <!-- Color Picker -->
     <!-- Custom Branding -->
     <!-- Custom Header (YouTube) -->
     <!-- Hide Shorts -->

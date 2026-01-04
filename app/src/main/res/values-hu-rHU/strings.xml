@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">A javításaid naprakészek</string>
     <string name="morphe_home_patches_are_loading">A javítások betöltése folyamatban, kérlek várj…</string>
     <string name="morphe_home_please_wait">Kérlek várj…</string>
-    <string name="morphe_home_open_in_browser">Megnyitás a böngészőben</string>
+    <string name="morphe_home_open_in_browser">Böngészőben megnyitás</string>
     <string name="morphe_home_failed_to_open_url">Hiba történt a URL megnyitásakor</string>
     <string name="morphe_home_date_added">Hozzáadva</string>
     <string name="morphe_home_date_updated">Frissítve</string>
     <string name="morphe_home_check_updates">Frissítések keresése</string>
     <string name="morphe_home_unknown">Ismeretlen</string>
-    <string name="morphe_home_timeline">Frissítési előzmények</string>
+    <string name="morphe_home_timeline">Frissítési napló</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Rendelkezel az eredeti, javítatlan APK-val?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s frissítéséhez a %2$s (nem frissített) verziót kell használnod</string>
@@ -64,7 +64,7 @@
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK mentése</string>
     <string name="morphe_patcher_copy_error">Másolási hiba</string>
-    <string name="morphe_patcher_show_error">Hiba megjelenítése</string>
+    <string name="morphe_patcher_show_error">Hibakeresés</string>
     <string name="morphe_patcher_error_copied">Hiba másolva a vágólapra</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
     <string name="morphe_patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük, várjon…</string>
@@ -86,8 +86,8 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Nem támogatott verzió</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ez az APK nem egy ajánlott alkalmazásverzió. A folytatás az alkalmazás nem megfelelő működését eredményezheti.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Folytatom mindenképp</string>
-    <string name="morphe_patcher_wrong_package_title">Rossz csomag van kiválasztva</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Továbbmegy így is</string>
+    <string name="morphe_patcher_wrong_package_title">Hibás csomag kiválasztva</string>
     <string name="morphe_patcher_wrong_package_description">A kiválasztott APK nem ahhoz az alkalmazáshoz tartozik, amelyet módosítani szeretnél.</string>
     <string name="morphe_patcher_expected_package">Elvárt csomag</string>
     <string name="morphe_patcher_selected_package">Kiválasztott csomag</string>
@@ -124,9 +124,9 @@
     <string name="morphe_share_website">Webhely megosztása</string>
     <string name="morphe_share_website_description">Oszd meg a hivatalos Morphe webhelyet</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Erscheinungsoptionen</string>
+    <string name="morphe_appearance_options">Kijelző beállítások</string>
     <string name="morphe_appearance_options_description">Benutzerdefinierte Themes, Farben und Hintergründe</string>
-    <string name="morphe_background_type">Háttéranimáció</string>
+    <string name="morphe_background_type">Háttérminta</string>
     <string name="morphe_background_type_circles">Körök</string>
     <string name="morphe_background_type_rings">Gyűrűk</string>
     <string name="morphe_background_type_waves">Hullámok</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Schnee</string>
     <string name="morphe_background_type_none">Nincs</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Kiadás előtti javítások használata</string>
-    <string name="morphe_update_use_patches_prereleases_description">Használja a legújabb fejlesztői javításokat</string>
+    <string name="morphe_update_use_prereleases">A próbaverziók használata</string>
+    <string name="morphe_update_use_prereleases_description">Szerezzen előzetes hozzáférést új frissítésekre és menedzserekre.</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patch-Optionen</string>
+    <string name="morphe_patch_options">Patches beállítások</string>
     <string name="morphe_patch_options_youtube_description">\"%s\" Patch-Optionen können verwendet werden, um das Äußere von YouTube anzuzeigen zu ändern.</string>
     <string name="morphe_patch_options_youtube_music_description">\"%s\" Patch-Optionen können verwendet werden, um das Äußere von YouTube Music anzuzeigen zu ändern.</string>
     <string name="morphe_patch_options_restart_message">Änderungen an den Patch-Optionen erfordern ein erneutes Anwenden des Patches, um die Änderungen wirksam zu machen.</string>
-    <string name="morphe_icon_instructions_title">Icon-Format-Anweisungen</string>
-    <string name="morphe_header_instructions_title">Hintergrundformat-Anweisungen</string>
-    <string name="morphe_loading_patch_options">Lade Patch-Optionen...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Kijelző témás színek</string>
+    <string name="morphe_patch_options_theme_colors_description">Háttérszín megváltoztatása</string>
+    <string name="morphe_patch_options_dark_theme_color">Sötét téma háttérszíne</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy szín-kiemelési referencia</string>
+    <string name="morphe_patch_options_light_theme_color">Értékes téma háttérszíne</string>
+    <string name="morphe_patch_options_light_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy szín-kiemelési referencia</string>
+    <string name="morphe_patch_options_icon_instructions_title">Ikon formátum-instrukciók</string>
+    <string name="morphe_patch_options_header_instructions_title">Címke formátum-instrukciók</string>
+    <string name="morphe_patch_options_loading">Betöltés paches beállítások…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Várjon, amíg a frissítési csomag még létre nem képződik.</string>
     <string name="morphe_patch_options_load_error">Laden der Patch-Optionen fehlgeschlagen</string>
-    <string name="morphe_no_options_available">Keine Optionen für diesen Patch verfügbar</string>
+    <string name="morphe_patch_options_no_available">Ehhez a pachthez nem áll rendelkezésre beállítás</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Benutzerdefinierter Farbbezeichner</string>
     <string name="morphe_hex_color">Hex-Farbcode</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">\"Morphe\" témakorok</string>
-    <string name="morphe_theme_dark_color">\"%s\" Dunkel Thema-Hintergrund</string>
-    <string name="morphe_theme_dark_color_description">Sötét téma hátalegyrétegző színe</string>
-    <string name="morphe_theme_light_color">\"Morphe\" világos téma hátalegyrétegző színe</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Benutzerdefinierter Branding</string>
-    <string name="morphe_custom_app_name_description">Den App-Display-Namen ändern</string>
-    <string name="morphe_custom_app_name_hint">Benutzerdefinierter Name eingeben</string>
+    <string name="morphe_patch_options_custom_branding">Egyedi gyártói brand</string>
+    <string name="morphe_patch_options_custom_branding_description">Változtassa meg az alkalmazás megjelenítési nevét</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Alkalmazás neve</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Add meg a egyedi név</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Egyedi ikon</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappa, mely tartalmazza a egyedi ikonok használata céljából szükséges képeket.
+
+A mappa tartalmazhat egy vagy több könyvtárat a DPI alapján:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Mind a fenti könyvtárakban a következő fájlok jelennek meg:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+A képek méretei a következőknek kell legyenek:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+A könyvtárhoz csak egy monokrómus ikon megadása nem elég, csak ha van '//drawable' mappa is a következő monokrómus fájlok valamelyikével:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Benutzerdefinierter Header-Logo</string>
-    <string name="morphe_custom_header_description">Ordnerpfad für benutzerdefinierte Header-Bilder</string>
+    <string name="morphe_patch_options_custom_header">Egyedi fejléc logó</string>
+    <string name="morphe_patch_options_custom_header_description">Fejléc logó megváltoztatása</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Mappa, mely tartalmazza a egyedi fejléc logó használata céljából szükséges képeket.
+
+A mappa tartalmazhat egy vagy több könyvtárat a DPI alapján:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Mind a fenti könyvtárakban a következő fájlok jelennek meg:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+A képek méretei a következőknek kell legyenek:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">YouTube Shorts ausblenden</string>
-    <string name="morphe_hide_shorts_app_shortcut">YouTube Shorts-Shortcut ausblenden</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">YouTube Shorts aus dem Lang-Press-Menü des Launchers entfernen</string>
-    <string name="morphe_hide_shorts_widget">YouTube Shorts Widget ausblenden</string>
-    <string name="morphe_hide_shorts_widget_description">YouTube Shorts-Button aus dem Launcher-Widget entfernen</string>
+    <string name="morphe_patch_options_hide_shorts_features">YouTube Shorts eltávolítása</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">YouTube Shorts rövidcsúcs hitelesítői menü eltávolítása</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Hozzáfűzési menüből történő eltávolítás</string>
+    <string name="morphe_patch_options_hide_shorts_widget">YouTube Shorts widget eltávolítása</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Hozzáfűzési menüből történő eltávolítás description</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Pacek</string>

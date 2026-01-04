@@ -56,15 +56,15 @@
     <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">Şimdi yeni indirdiğiniz %1$s APK dosyasını seçin.</string>
     <string name="morphe_home_file_picker_prompt_open">İndirdiğim APK dosyasını aç</string>
-    <string name="morphe_home_recommended_version">Önerilen Sürüm</string>
-    <string name="morphe_patcher_selected_version">Seçilen Sürüm</string>
+    <string name="morphe_home_recommended_version">Tavsiye Edilen Sürüm</string>
+    <string name="morphe_patcher_selected_version">Seçilen sürüm</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Kök modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK Kaydet</string>
-    <string name="morphe_patcher_copy_error">Kopyalama Hatası</string>
-    <string name="morphe_patcher_show_error">Hatayı Göster</string>
+    <string name="morphe_patcher_copy_error">Kopya hatası</string>
+    <string name="morphe_patcher_show_error">Hata göster</string>
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="morphe_patcher_patches_progress">%2$d / %1$d yama</string>
     <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK, önerilmeyen bir uygulama sürümüdür. Devam etmek işlevsel olmayan bir uygulamayla sonuçlanabilir.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Yine de Devam Et</string>
-    <string name="morphe_patcher_wrong_package_title">Yanlış Paket Seçildi</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Herhangi bir şekilde devam et</string>
+    <string name="morphe_patcher_wrong_package_title">Yanlış paket seçildi</string>
     <string name="morphe_patcher_wrong_package_description">Seçilen APK, yama yapmak istediğiniz uygulama için değildir.</string>
-    <string name="morphe_patcher_expected_package">Beklenen Paket</string>
-    <string name="morphe_patcher_selected_package">Seçilen Paket</string>
+    <string name="morphe_patcher_expected_package">Beklenen paket</string>
+    <string name="morphe_patcher_selected_package">Seçilen paket</string>
     <string name="morphe_patcher_message_1">Uygulamanızı harika bir şeye dönüştürüyoruz… 🏆</string>
     <string name="morphe_patcher_message_2">Eski uygulamalara yeni numaralar öğretiyoruz… 🎩</string>
     <string name="morphe_patcher_message_3">Uygulamanıza dijital bir bakım yapıyoruz… 🔧</string>
@@ -121,12 +121,12 @@
     <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
     <string name="morphe_settings_return_to_expert">Uzman yap&#305;gorunu degi&#350;tir</string>
     <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
-    <string name="morphe_share_website">Websitesini Paylaş</string>
+    <string name="morphe_share_website">Web sitesini paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Görünüm Seçenekleri</string>
+    <string name="morphe_appearance_options">Görünüm seçenekleri</string>
     <string name="morphe_appearance_options_description">Tema, renk ve arka planları özelleştirin</string>
-    <string name="morphe_background_type">Arka Plan Animasyonu</string>
+    <string name="morphe_background_type">Arka plan animasyonu</string>
     <string name="morphe_background_type_circles">Daireler</string>
     <string name="morphe_background_type_rings">Halkalar</string>
     <string name="morphe_background_type_waves">Dalgalar</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Kar</string>
     <string name="morphe_background_type_none">Yok</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Sürüm öncesi yamaları kullan</string>
-    <string name="morphe_update_use_patches_prereleases_description">En son geliştirme yamalarını kullanın</string>
+    <string name="morphe_update_use_prereleases">Ön yayın sürümlerini kullan</string>
+    <string name="morphe_update_use_prereleases_description">Yeni düzeltmeleri ve yönetici özellikleri erken deneyin</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Yama Seçenekleri</string>
+    <string name="morphe_patch_options">Yama seçenekleri</string>
     <string name="morphe_patch_options_youtube_description">Tema, marka, başlık ve Shorts seçenekleri</string>
     <string name="morphe_patch_options_youtube_music_description">Tema ve marka seçenekleri</string>
     <string name="morphe_patch_options_restart_message">Yama seçeneklerini değiştirmek, uygulamayı yeniden indirmeyi gerektirir</string>
-    <string name="morphe_icon_instructions_title">Simge formatı talimatları</string>
-    <string name="morphe_header_instructions_title">Başlık formatı talimatları</string>
-    <string name="morphe_loading_patch_options">Yama seçenekleri yükleniyor...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Uygulama tema renkleri</string>
+    <string name="morphe_patch_options_theme_colors_description">Arka plan rengini değiştir</string>
+    <string name="morphe_patch_options_dark_theme_color">Koyu tema arka plan rengi</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
+    <string name="morphe_patch_options_light_theme_color">Açık tema arka plan rengi</string>
+    <string name="morphe_patch_options_light_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
+    <string name="morphe_patch_options_icon_instructions_title">Simge formatı talimatları</string>
+    <string name="morphe_patch_options_header_instructions_title">Başlık formatı talimatları</string>
+    <string name="morphe_patch_options_loading">Yama seçenekleri yükleniyor...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Yama paketi güncellenene kadar bekleyin</string>
     <string name="morphe_patch_options_load_error">Yama seçenekleri yüklenemedi</string>
-    <string name="morphe_no_options_available">Bu yamaya ait seçenekler bulunmuyor</string>
+    <string name="morphe_patch_options_no_available">Bu yamaya ait seçenekler bulunmuyor</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Özel renk</string>
     <string name="morphe_hex_color">Hex rengi</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Uygulama Tema Renkleri</string>
-    <string name="morphe_theme_dark_color">Koyu Tema Arka Plan Rengi</string>
-    <string name="morphe_theme_dark_color_description">Koyu tema için arka plan rengi</string>
-    <string name="morphe_theme_light_color">Açık Tema Arka Plan Rengi</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Özel Marka</string>
-    <string name="morphe_custom_app_name_description">Uygulama gösterim adını değiştirin</string>
-    <string name="morphe_custom_app_name_hint">Özel adı girin</string>
+    <string name="morphe_patch_options_custom_branding">Özel marka tanıtımı</string>
+    <string name="morphe_patch_options_custom_branding_description">Uygulama gösterim adını değiştir</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Uygulama adı</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Özel adı girin</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Özel simge</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Özel simge için görüntülerin olduğu klasörün
+
+Cihaz DPI'sine bağlı olarak, bu klasörden bir veya daha fazlasını içerilmeli:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Her bir klasör şu dosyaları içermek zorundadır:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Görüntü boyutları şu şekilde olmalıdır:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+İsteğe bağlı olarak, yolu 'drawable' klasörü ile monochrome simge dosyalarından birini içerebilir:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Özel Başlık Logosu</string>
-    <string name="morphe_custom_header_description">Özel başlık resimlerini içeren klasör yolu</string>
+    <string name="morphe_patch_options_custom_header">Özel başlık logosu</string>
+    <string name="morphe_patch_options_custom_header_description">Başlık logosunu değiştir</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Özel başlık logosu için resimlerin olduğu klasöre
+
+Cihaz DPI'sine bağlı olarak, bu klasörlerden bir veya daha fazlasını içerilmeli:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Her bir klasör şu dosyaları içermek zorundadır:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Görüntü boyutları şu şekilde olmalıdır:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Shorts Özelliklerini Gizle</string>
-    <string name="morphe_hide_shorts_app_shortcut">Shorts Uygulama Kısayolunu Gizle</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Shorts\'u Başlatıcıdaki Uzun Basma Menüsünden Kaldır</string>
-    <string name="morphe_hide_shorts_widget">Shorts Araç Takımını Gizle</string>
-    <string name="morphe_hide_shorts_widget_description">Başlatıcı Araç Takımında Shorts Düğmesini Kaldır</string>
+    <string name="morphe_patch_options_hide_shorts_features">Shorts özelliklerini gizle</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Shorts uygulama kısayolunu gizle</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Shorts\'u Başlatıcıdaki Uzun Basma Menüsünden Kaldır</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Shorts araç takımını gizle</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Başlatıcı Araç Takımında Shorts Düğmesini Kaldır</string>
     <!-- Other strings -->
     <string name="patcher">Yamalayıcı</string>
     <string name="patches">Yamalar</string>

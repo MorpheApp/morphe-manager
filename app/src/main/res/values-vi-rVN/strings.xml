@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">Đã cập nhật các bản vá</string>
     <string name="morphe_home_patches_are_loading">Đang tải bản vá, vui lòng chờ…</string>
     <string name="morphe_home_please_wait">Vui lòng chờ…</string>
-    <string name="morphe_home_open_in_browser">Mở bằng Trình duyệt</string>
+    <string name="morphe_home_open_in_browser">Mở trong trình duyệt</string>
     <string name="morphe_home_failed_to_open_url">Không thể mở URL</string>
     <string name="morphe_home_date_added">Đã thêm</string>
     <string name="morphe_home_date_updated">Đã cập nhật</string>
     <string name="morphe_home_check_updates">Kiểm tra</string>
     <string name="morphe_home_unknown">Không xác định</string>
-    <string name="morphe_home_timeline">Lịch sử cập nhật</string>
+    <string name="morphe_home_timeline">Cập nhật lịch sử</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Để vá %1$s, bạn cần phiên bản %2$s (chưa được vá)</string>
@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Lưu APK</string>
-    <string name="morphe_patcher_copy_error">Lỗi sao chép</string>
+    <string name="morphe_patcher_copy_error">Chép lỗi</string>
     <string name="morphe_patcher_show_error">Hiện lỗi</string>
     <string name="morphe_patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="morphe_patcher_patches_progress">%1$d/%2$d bản vá</string>
@@ -89,7 +89,7 @@
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Vẫn tiếp tục</string>
     <string name="morphe_patcher_wrong_package_title">Đã chọn sai gói</string>
     <string name="morphe_patcher_wrong_package_description">APK đã chọn không dành cho ứng dụng bạn dự định vá.</string>
-    <string name="morphe_patcher_expected_package">Gói mong đợi</string>
+    <string name="morphe_patcher_expected_package">Gói yêu cầu</string>
     <string name="morphe_patcher_selected_package">Gói đã chọn</string>
     <string name="morphe_patcher_message_1">Biến ứng dụng của bạn thành bản xịn hơn… 🏆</string>
     <string name="morphe_patcher_message_2">Dạy ứng dụng cũ chiêu mới… 🎩</string>
@@ -126,7 +126,7 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Cài đặt giao diện</string>
     <string name="morphe_appearance_options_description">Tùy chỉnh chủ đề, màu sắc và hình nền</string>
-    <string name="morphe_background_type">Hoạt ảnh nền</string>
+    <string name="morphe_background_type">Hiệu ứng nền</string>
     <string name="morphe_background_type_circles">Hình tròn</string>
     <string name="morphe_background_type_rings">Vòng tròn</string>
     <string name="morphe_background_type_waves">Sóng</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Tuyết</string>
     <string name="morphe_background_type_none">Không</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Dùng bản vá thử nghiệm</string>
-    <string name="morphe_update_use_patches_prereleases_description">Sử dụng các bản vá phát triển mới nhất</string>
+    <string name="morphe_update_use_prereleases">Sử dụng phiên bản phát hành trước</string>
+    <string name="morphe_update_use_prereleases_description">Nhận quyền truy cập sớm vào các bản cập nhật và tính năng quản lý mới</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Tùy chỉnh bản vá</string>
     <string name="morphe_patch_options_youtube_description">Tùy chỉnh chủ đề, thương hiệu, logo và Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Tùy chỉnh chủ đề và thương hiệu</string>
     <string name="morphe_patch_options_restart_message">Sau khi tùy chỉnh bản vá bạn cần vá lại ứng dụng để áp dụng chúng</string>
-    <string name="morphe_icon_instructions_title">Hướng dẫn về định dạng biểu tượng</string>
-    <string name="morphe_header_instructions_title">Hướng dẫn về định dạng logo đầu trang chủ</string>
-    <string name="morphe_loading_patch_options">Đang tải tùy chỉnh bản vá…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Màu chủ đề ứng dụng</string>
+    <string name="morphe_patch_options_theme_colors_description">Đổi màu nền</string>
+    <string name="morphe_patch_options_dark_theme_color">Màu nền chủ đề tối</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
+    <string name="morphe_patch_options_light_theme_color">Màu nền chủ đề sáng</string>
+    <string name="morphe_patch_options_light_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
+    <string name="morphe_patch_options_icon_instructions_title">Hướng dẫn về định dạng biểu tượng</string>
+    <string name="morphe_patch_options_header_instructions_title">Hướng dẫn về định dạng logo đầu trang chủ</string>
+    <string name="morphe_patch_options_loading">Đang tải tùy chỉnh bản vá…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Chờ cho gói vá cập nhật xong</string>
     <string name="morphe_patch_options_load_error">Không thể tải tùy chỉnh bản vá</string>
-    <string name="morphe_no_options_available">Không chỉnh được bản vá này</string>
+    <string name="morphe_patch_options_no_available">Không chỉnh được bản vá này</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Tùy chỉnh màu</string>
     <string name="morphe_hex_color">Mã hex</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Màu chủ đề ứng dụng</string>
-    <string name="morphe_theme_dark_color">Nền chủ đề tối</string>
-    <string name="morphe_theme_dark_color_description">Màu nền cho chủ đề tối</string>
-    <string name="morphe_theme_light_color">Nền chủ đề sáng</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Tùy chỉnh thương hiệu</string>
-    <string name="morphe_custom_app_name_description">Đổi tên hiển thị của ứng dụng</string>
-    <string name="morphe_custom_app_name_hint">Nhập tên</string>
+    <string name="morphe_patch_options_custom_branding">Thương hiệu tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_branding_description">Đổi tên hiển thị của ứng dụng</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Tên ứng dụng</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Nhập tên tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Biểu tượng tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Thư mục chứa các hình ảnh sử dụng làm biểu tượng tùy chỉnh.
+
+Thư mục này phải chứa một hoặc nhiều thư mục sau, tùy theo DPI của thiết bị:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Mỗi thư mục trên bắt buộc phải chứa đầy đủ các tệp sau:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Kích thước hình ảnh yêu cầu:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Tùy chọn, đường dẫn có thể chứa thêm một thư mục drawable với các tệp biểu tượng đơn sắc sau:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Tùy chỉnh logo đầu trang</string>
-    <string name="morphe_custom_header_description">Đường dẫn tới thư mục chứa hình ảnh logo</string>
+    <string name="morphe_patch_options_custom_header">Logo đầu trang tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_header_description">Tùy chỉnh logo đầu trang</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Thư mục chứa hình ảnh sử dụng làm logo đầu trang tùy chỉnh.
+
+Thư mục này phải chứa một hoặc nhiều thư mục sau, tùy theo DPI của thiết bị:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Mỗi thư mục trên bắt buộc phải chứa đầy đủ các tệp sau:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Kích thước hình ảnh yêu cầu:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Ẩn tính năng Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Hide lối tắt Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Gỡ Shorts khỏi menu khi ấn giữ ứng dụng ngoài màn hình chính</string>
-    <string name="morphe_hide_shorts_widget">Ẩn tiện ích Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
+    <string name="morphe_patch_options_hide_shorts_features">Ẩn tính năng Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Hide lối tắt Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Gỡ Shorts khỏi menu khi ấn giữ ứng dụng ngoài màn hình chính</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Ẩn tiện ích Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
     <!-- Other strings -->
     <string name="patcher">Trình vá</string>
     <string name="patches">Bản vá</string>
