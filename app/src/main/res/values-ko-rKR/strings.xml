@@ -353,10 +353,14 @@ morphe_header_custom_dark.png
 그래도 계속하시겠습니까?"</string>
     <string name="suggested_version_safeguard">권장 앱 버전 요구</string>
     <string name="suggested_version_safeguard_description">권장되지 않는 앱 버전은 선택할 수 없습니다</string>
-    <string name="suggested_version_safeguard_confirmation">"권장 버전이 아닌 앱을 선택하는 경우에는 예상되지 않은 문제점이 발생할 수 있습니다.\n\n그래도 계속하시겠습니까?"</string>
+    <string name="suggested_version_safeguard_confirmation">"권장 버전이 아닌 앱을 선택하는 경우에는 예상되지 않은 문제점이 발생할 수 있습니다.
+
+그래도 계속하시겠습니까?"</string>
     <string name="patch_selection_safeguard">패치 선택 및 옵션 변경 허용</string>
     <string name="patch_selection_safeguard_description">패치를 선택하거나 선택 해제할 수 있고 옵션을 변경할 수 있습니다</string>
-    <string name="patch_selection_safeguard_confirmation">"패치 선택목록을 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.\n\n그래도 활성화하시겠습니까?"</string>
+    <string name="patch_selection_safeguard_confirmation">"패치 선택목록을 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
+
+그래도 활성화하시겠습니까?"</string>
     <string name="universal_patches_safeguard">범용 패치 표시 및 사용 허용</string>
     <string name="universal_patches_safeguard_description">범용 패치를 표시하거나 사용할 수 있습니다</string>
     <string name="universal_patches_profile_blocked_title">범용 패치가 비활성화되어 있음</string>
@@ -653,8 +657,13 @@ morphe_header_custom_dark.png
     <string name="patch_selection_reset_toast">패치 선택목록 및 옵션을 권장되는 기본값으로 초기화하였습니다</string>
     <string name="patch_options_reset_toast">패치 옵션을 초기화하였습니다</string>
     <string name="non_suggested_version_warning_title">권장되지 않는 버전</string>
-    <string name="non_suggested_version_warning_description">"선택된 버전이 권장 버전과 일치하지 않습니다.\n권장 버전을 사용하세요: %s\n\n계속하려면 고급 설정에서 \"권장 앱 버전 요구\"를 비활성화하세요."</string>
-    <string name="selection_warning_description">"기본 패치 선택목록 및 옵션을 사용하는 것이 좋습니다. 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.\n\n패치를 전환하기 전에 고급 설정에서 \"패치 선택 및 옵션 변경 허용\"을 활성화해야 합니다."</string>
+    <string name="non_suggested_version_warning_description">"선택된 버전이 권장 버전과 일치하지 않습니다.
+권장 버전을 사용하세요: %s
+
+계속하려면 고급 설정에서 \"권장 앱 버전 요구\"를 비활성화하세요."</string>
+    <string name="selection_warning_description">"기본 패치 선택목록 및 옵션을 사용하는 것이 좋습니다. 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
+
+패치를 전환하기 전에 고급 설정에서 \"패치 선택 및 옵션 변경 허용\"을 활성화해야 합니다."</string>
     <string name="patch_profile_save_action">패치 프로필 저장</string>
     <string name="patch_profile_select_bundles_title">패치 번들 선택</string>
     <string name="patch_profile_select_bundles_description">이 프로필에 포함될 패치 번들을 선택할 수 있습니다.</string>
@@ -680,7 +689,9 @@ morphe_header_custom_dark.png
     <string name="patch_profile_version_override_failed_toast">프로필 버전을 업데이트할 수 없습니다</string>
     <string name="patch_profile_version_override_set_to_all">입력된 버전이 없으므로 \"%1$s\"로 저장하였습니다</string>
     <string name="patch_profile_version_conflict_title">버전 재정의를 유지하시겠습니까?</string>
-    <string name="patch_profile_version_conflict_message">"현재 버전: %1$s\n수신 버전: %2$s\n이 프로필에 무엇을 저장해야 합니까?"</string>
+    <string name="patch_profile_version_conflict_message">"현재 버전: %1$s
+수신 버전: %2$s
+이 프로필에 무엇을 저장해야 합니까?"</string>
     <string name="patch_profile_version_conflict_use_new">수신 버전 사용</string>
     <string name="patch_profile_version_conflict_keep_existing">기존 버전 유지</string>
     <string name="patch_profile_empty_state">패치 선택 화면에서 프로필 설정을 저장하면 여기에서 확인할 수 있습니다.</string>
@@ -718,7 +729,9 @@ morphe_header_custom_dark.png
     <string name="this_version">이 버전</string>
     <string name="universal">모든 앱</string>
     <string name="search_patches">패치 검색</string>
-    <string name="app_version_not_compatible">"이 패치는 선택된 앱 버전 (%1$s) 과 호환되지 않습니다.\n\n다음 앱 버전에만 호환됩니다: %2$s."</string>
+    <string name="app_version_not_compatible">"이 패치는 선택한 앱 버전(%1$s)과 호환되지 않습니다.
+
+다음 버전에서만 호환됩니다: %2$s."</string>
     <string name="failed_to_load_apk">APK를 불러올 수 없습니다</string>
     <string name="loading">불러오는 중 …</string>
     <string name="not_installed">설치되지 않음</string>
@@ -976,7 +989,9 @@ morphe_header_custom_dark.png
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="download">다운로드</string>
     <string name="resume_download">다운로드 재개</string>
-    <string name="download_confirmation_metered">"현재 모바일 네트워크에 연결되어 있습니다. 통신사 데이터 요금이 부과될 수 있습니다.\n\n그래도 계속하시겠습니까?"</string>
+    <string name="download_confirmation_metered">"현재 모바일 네트워크에 연결되어 있습니다. 통신사 데이터 요금이 부과될 수 있습니다.
+
+그래도 계속하시겠습니까?"</string>
     <string name="download_update_confirmation">업데이트를 다운로드하시겠습니까?</string>
     <string name="no_contributors_found">도움을 주신 분들을 찾을 수 없습니다</string>
     <string name="select">선택하기</string>

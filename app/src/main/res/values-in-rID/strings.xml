@@ -462,7 +462,7 @@ Aktifkan saja?"</string>
     <string name="patch_selection_action_select_all">pilih semua</string>
     <string name="patch_selection_action_select_bundle">pilih paket “%1$s”</string>
     <string name="patch_selection_action_deselect_bundle">batalkan pilihan paket “%1$s”</string>
-    <string name="patch_selection_action_bundle_defaults">default bundel untuk “%1$s”</string>
+    <string name="patch_selection_action_bundle_defaults">paket bawaan untuk “%1$s”</string>
     <string name="disable_patch_selection_confirmations">Nonaktifkan konfirmasi tindakan</string>
     <string name="disable_patch_selection_confirmations_description">Lewati dialog konfirmasi untuk tindakan pemilihan patch</string>
     <string name="disable_patch_selection_confirmations_warning">Menonaktifkan konfirmasi dapat menyebabkan perubahan massal yang tidak disengaja.</string>
@@ -474,17 +474,17 @@ Aktifkan saja?"</string>
     <string name="patch_selection_action_visibility_description">Pilih mana tombol aksi pemilihan patch yang ditampilkan</string>
     <string name="patch_selection_action_visibility_reset">Tampilkan semua tombol aksi</string>
     <string name="patch_selection_action_order_reset">Atur ulang ke urutan default</string>
-    <string name="patch_selection_confirm_deselect_bundle_title">Batalkan pilihan bundel?</string>
-    <string name="patch_selection_confirm_deselect_bundle_message">Batalkan pilihan semua patch yang dipilih dari %1$s?</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Batalkan pilihan paket?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">Batalkan pilihan semua tambalan yang dipilih dari %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Batalkan pilihan semua patch?</string>
-    <string name="patch_selection_confirm_deselect_all_message">Ini akan menghapus setiap patch yang dipilih di semua bundel.</string>
-    <string name="patch_selection_confirm_bundle_defaults_title">Pulihkan pengaturan default bundel?</string>
-    <string name="patch_selection_confirm_bundle_defaults_message">Ini akan memulihkan pengaturan default yang direkomendasikan untuk %1$s.</string>
-    <string name="patch_selection_confirm_select_bundle_title">Pilih bundel?</string>
-    <string name="patch_selection_confirm_select_bundle_message">Pilih setiap patch yang disediakan oleh %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_message">Ini akan menghapus setiap tambalan yang dipilih di semua paket.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Pulihkan pengaturan paket bawaan?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Ini akan memulihkan pengaturan bawaan yang direkomendasikan untuk %1$s.</string>
+    <string name="patch_selection_confirm_select_bundle_title">Pilih paket?</string>
+    <string name="patch_selection_confirm_select_bundle_message">Pilih setiap tambalan yang disediakan oleh %1$s?</string>
     <string name="patch_selection_confirm_select_all_title">Pilih semua patch?</string>
-    <string name="patch_selection_confirm_select_all_message">Ini akan memilih setiap patch di semua bundel.</string>
-    <string name="patch_selection_button_label_reset_bundle">Pengaturan default bundel</string>
+    <string name="patch_selection_confirm_select_all_message">Ini akan memilih setiap tambalan di semua paket.</string>
+    <string name="patch_selection_button_label_reset_bundle">Pengaturan paket bawaan</string>
     <string name="patch_profile_save_label">Simpan profil</string>
     <string name="patch_selection_toggle_expand">Tampilkan tindakan</string>
     <string name="patch_selection_toggle_collapse">Sembunyikan tindakan</string>
@@ -572,7 +572,7 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="reset_to_recommended">Setel ulang ke rekomendasi</string>
     <string name="patcher_auto_collapse_steps">Otomatis lipat langkah patcher yang selesai</string>
     <string name="patcher_auto_collapse_steps_description">Otomatis melipat setiap widget kemajuan patcher setelah semua langkahnya selesai</string>
-    <string name="patch_bundle_rename">Ubah nama bundel patch</string>
+    <string name="patch_bundle_rename">Ubah nama paket tambalan</string>
     <string name="patch_profile_view_options">Lihat pilihan</string>
     <string name="patch_profile_patch_options_title">Pilihan untuk %1$s</string>
     <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
@@ -594,9 +594,9 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="export_name_variable_app_version">Versi aplikasi</string>
     <string name="export_name_variable_app_version_description">Diganti dengan nama versi aplikasi.</string>
     <string name="export_name_variable_patches_version">Versi pembaruan</string>
-    <string name="export_name_variable_patches_version_description">Diganti dengan versi bundel pembaruan yang diterapkan.</string>
-    <string name="export_name_variable_bundle_names">Nama-nama bundel pembaruan</string>
-    <string name="export_name_variable_bundle_names_description">Diganti dengan nama bundel pembaruan yang diterapkan.</string>
+    <string name="export_name_variable_patches_version_description">Diganti dengan versi paket tambalan yang diterapkan.</string>
+    <string name="export_name_variable_bundle_names">Nama paket pembaruan</string>
+    <string name="export_name_variable_bundle_names_description">Diganti dengan nama paket pembaruan yang diterapkan.</string>
     <string name="export_name_variable_manager_version">Versi manajer</string>
     <string name="export_name_variable_manager_version_description">Diganti dengan versi manajer.</string>
     <string name="export_name_variable_timestamp">Timestamp</string>
@@ -628,18 +628,18 @@ Sidik jari (SHA-256): %2$s"</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Besar)</string>
-    <string name="patches_force_download">Paksa unduh semua bundel patch</string>
-    <string name="patches_reset">Setel ulang bundel patch</string>
+    <string name="patches_force_download">Paksa unduh semua paket tambalan</string>
+    <string name="patches_reset">Setel ulang paket tambalan</string>
     <string name="storage">Penyimpanan</string>
     <string name="no_patch_found">Tidak ada patch yang dapat ditemukan. Periksa patch Anda</string>
     <string name="tab_apps">Aplikasi</string>
-    <string name="tab_patches">Bundel Patch</string>
+    <string name="tab_patches">Paket Tambalan</string>
     <string name="tab_profiles">Profil Tambalan</string>
     <string name="delete">Hapus</string>
     <string name="disable">Nonaktifkan</string>
     <string name="enable">Diaktifkan</string>
-    <string name="patch_bundle_disabled_toast">Mematikan %d bundel</string>
-    <string name="patch_bundle_enabled_toast">Menaktifkan %d bundel</string>
+    <string name="patch_bundle_disabled_toast">Menonaktifkan %d paket</string>
+    <string name="patch_bundle_enabled_toast">Mengaktifkan %d paket</string>
     <string name="patches_disable_single_dialog_description">\"%s\" dinonaktifkan?</string>
     <string name="patches_enable_single_dialog_description">\"%s\" diaktifkan?</string>
     <string name="refresh">Segarkan</string>
@@ -647,7 +647,7 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="patches_download_fail">Gagal mengunduh patch: %s</string>
     <string name="patches_replace_fail">Gagal mengimpor patch: %s</string>
     <string name="no_patched_apps_found">Tidak ada aplikasi yang ditambal ditemukan</string>
-    <string name="patches_selected">%s bundel pembaruan dipilih</string>
+    <string name="patches_selected">%s paket tambalan dipilih</string>
     <string name="patch_profiles_selected">%1$d profil tambalan dipilih</string>
     <string name="selected_apps_count">%1$d aplikasi dipilih</string>
     <string name="selected_apps_delete_dialog_description">Hapus aplikasi yang dipilih dari manajer? Aplikasi yang terinstal di perangkat Anda akan tetap utuh.</string>
@@ -664,8 +664,8 @@ Untuk melanjutkan, nonaktifkan \"Perlu versi aplikasi yang disarankan\" di penga
 
 Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan opsi patch\" di pengaturan lanjutan sebelum mengganti patch."</string>
     <string name="patch_profile_save_action">Simpan profil tambalan</string>
-    <string name="patch_profile_select_bundles_title">Pilih tambalan bundel</string>
-    <string name="patch_profile_select_bundles_description">Pilih tambalan bundel yang akan dimasukkan dalam profil ini.</string>
+    <string name="patch_profile_select_bundles_title">Pilih paket tambalan</string>
+    <string name="patch_profile_select_bundles_description">Pilih paket tambalan yang akan dimasukkan dalam profil ini.</string>
     <string name="patch_profile_select_bundles_empty">Tidak ada tambalan bundel yang tersedia untuk disimpan.</string>
     <string name="patch_profile_name_title">Beri nama profil tambalan</string>
     <string name="patch_profile_name_description">Masukkan nama untuk profil tambalan ini atau pilih salah satu di bawah ini untuk memperbaruinya</string>

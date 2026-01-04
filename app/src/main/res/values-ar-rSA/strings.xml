@@ -159,62 +159,64 @@
     <string name="morphe_custom_color">اللون المخصص</string>
     <string name="morphe_hex_color">صيغة اللون</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">\"ال\"\\u0627\\u0644\\u0642\\u0631\\u0636\\u0647\" المخصص\"</string>
     <string name="morphe_patch_options_custom_branding_description">تغيير الاسم المعروض للتطبيق</string>
     <string name="morphe_patch_options_custom_branding_app_name">اسم التطبيق</string>
     <string name="morphe_patch_options_custom_branding_app_name_hint">أدخل اسمًا مخصصًا</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">أيقونة مخصصة</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"\\n\\n\"\"\\u0639\\u0631\\u0633\\u0645\\u0646\\u0647\\u0644\\xA0\لا\\u0647\\u0644\\u0645\\"\"\\u0627\\u0644\\u0635\\u0641\\u0631\\u062E\\u062F\\u0627\\u0621\\u0639\\u0644\\u062F\\u0645\\u064A\\u0627\\u0644\\u0625\\u0627\\u0644\\u062D\\u062F\\u0645\\u0647\\u0645\\u0627\\u0644\\u0644\\u062A\\u062F:
--\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u0628\\u0643\\u064B\\u0645\\u063A\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u062D\\u0623\\u0644\\u0645\\u064B\\u0639\\u0645\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0634\\u062D\\u0648\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0638\\u0644\\u0649\\u0645\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0639\\u0644-xhdpi\\"\"\n-\"\"\\u0650\\u064B\\u0645\\u0647\\u0648\\u0646\\u0645\\u064B\\u0639\\u0644-xxxhdpi\\"\"
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"مجلد يحتوي على صور لاستخدامها كأيقونة مخصّصة.
 
-\"\"\\u0628\\u0643\\u064B\\u0645\\u063A\\"\"拜师学艺\"\" Ã những đỗ\"
-\"\"\\u062B\\u0643\\u064B\\u0645\\u0649\\u0639\\u0644\\u0645\"\"f:\\u0646\"\" س\t\uc\veح
-\"\"\\u0643\\u064B\\u0645\"\" زار
-\"\"\\u0645\\u0646\\u0647\\u0644\"\" الج
-\"\"\\u0645\\u064A\\u0627\\u0644\"\" Sikhicia
-لكل دليل يجب أن يحتوي على الملفات التالية (في ارتفاع dpi المضغوط):
-morphe_adaptive_background_custom.png
-morphe_adaptive_foreground_custom.png
+يجب أن يحتوي المجلد على مجلد واحد أو أكثر من المجلدات التالية، حسب كثافة شاشة الجهاز (DPI):
+• mipmap-mdpi
+• mipmap-hdpi
+• mipmap-xhdpi
+• mipmap-xxhdpi
+• mipmap-xxxhdpi
 
-\"\"\"\"\"\"水\"\" بحجم:
-- م.mipmap-mdpi: 108x108 px
-- م.mipmap-hdpi: 162x162 px
-- م.mipmap-xhdpi: 216x216 px
-- م.mipmap-xxhdpi: 324x324 px
-- م.mipmap-xxxhdpi: 432x432 px
+يجب أن يحتوي كل مجلد منها على جميع الملفات التالية:
+• morphe_adaptive_background_custom.png 
+• morphe_adaptive_foreground_custom.png
 
-\"\"\"\"\"・ علماً بأن المسار المشار إليه أعلاه يحتوي بلاز الأولوية \“drawable\u201D مع أي ملف تعريف صورة أحادية اللون :
-morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml\""</string>
+يجب أن تكون أبعاد الصورة كما يلي:
+• mipmap-mdpi: 108x108 px
+• mipmap-hdpi: 162x162 px
+• mipmap-xhdpi: 216x216 px
+• mipmap-xxhdpi: 324x324 px
+• mipmap-xxxhdpi: 432x432 px
+
+اختياريًا، يمكن أن يحتوي المسار على مجلد باسم drawable يضم أيًا من ملفات أيقونة 'أحادية اللون':
+• morphe_adaptive_monochrome_custom.xml
+• morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">\"\"\"\\u0627\\u0644\\u0642\\u0631\\u0636\\u0647\"\"\\u062E\\u0644\\u062F\\"\"\'\'</string>
-    <string name="morphe_patch_options_custom_header_description">\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"\'\'\"\"\\u0647\\u064A\\"\"\\u062E\\u0644\\u062F\"\"</string>
-    <string name="morphe_patch_options_custom_header_instruction">"\"\"\"\\u0627\\u0644\\u0633\\u067E\\u0644\\u0631\\u062D\\"''\"\"\\u062E\\u0644\\u062F\\"\"\n\"\"\\u0639\\u0631\\u0633\\u0645\\u0646\\u0647\\u0644\\xA0\لا\\u0647\\u0644\\u0645\\"\"\n\"\"\\u0650\\u064B\\u0645\\u0647\\u0646\\u0645\\u064B\\u062D\\u0623\\u0644\\u0645\\u064B\\u0639\\u0645\"\" الإلكترونية :
-- drawable-hdpi
-- drawable-xhdpi
-- drawable-xxhdpi
-- drawable-xxxhdpi
+    <string name="morphe_patch_options_custom_header">علامة شعار مخصصة</string>
+    <string name="morphe_patch_options_custom_header_description">تغيير علامة الشعار</string>
+    <string name="morphe_patch_options_custom_header_instruction">"مجلد يحتوي على صور لاستخدامها كشعار مخصّص للشريط العلوي.
 
-\"\"拜师学艺\u063A ('drawable') يجب أن يحتوي على الملفات التالية (ل каждом):
-morphe_header_custom_light.png
-morphe_header_custom_dark.png
+يجب أن يحتوي المجلد على مجلد واحد أو أكثر من المجلدات التالية، حسب كثافة شاشة الجهاز (DPI):
+• drawable-hdpi
+• drawable-xhdpi
+• drawable-xxhdpi
+• drawable-xxxhdpi
 
-\"\"\u6F14\u6625\"\":
-- drawable-hdpi: 194x72 px
-- drawable-xhdpi: 258x96 px
-- drawable-xxhdpi: 387x144 px
-- drawable-xxxhdpi: 512x192 px\""</string>
+يجب أن يحتوي كل مجلد منها على جميع الملفات التالية:
+• morphe_header_custom_light.png
+• morphe_header_custom_dark.png
+
+يجب أن تكون أبعاد الصورة كما يلي:
+• drawable-hdpi: 194x72 px
+• drawable-xhdpi: 258x96 px
+• drawable-xxhdpi: 387x144 px
+• drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_patch_options_hide_shorts_features">\"\"\"\\u0627\\u0644\"\"ال\"\"\\u0634\\u0647\"\"\'\'\"\"\"\"\"用\"归شorts\"\" özelli Ajl</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"\归شorts application shortcut\"\" قدم Useful Hills초기</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">إزالة Shorts من قائمة الضغطة المطولة للتطبيق في اللانشر </string>
-    <string name="morphe_patch_options_hide_shorts_widget">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"n مزدوجة لنظام تشغيل Android خلال？</string>
-    <string name="morphe_patch_options_hide_shorts_widget_description">\"\"\"\\u0627\\u0644\"\"\ⱗ지 앙쉳섽꽍까리앙쉳섽\"\"\归شorts кнопка من و \"\"用\"归شorts\"\" من Launcher의 \"\"归\"\"荋On</string>
+    <string name="morphe_patch_options_hide_shorts_features">إخفاء ميزات Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">إخفاء اختصار تطبيق Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">إزالة Shorts من قائمة الضغط المطوّل على الأيقونة في الشاشة الرئيسية</string>
+    <string name="morphe_patch_options_hide_shorts_widget">إخفاء التطبيق المصغّر لـ Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">إزالة زر Shorts من Widget الشاشة الرئيسية</string>
     <!-- Other strings -->
-    <string name="patcher">برنامج الرقع</string>
-    <string name="patches">رقع</string>
-    <string name="patch_bundles">حزم الرقع</string>
-    <string name="patch_bundle">حزمة الرقع</string>
+    <string name="patcher">أداة التعديل</string>
+    <string name="patches">تعديلات</string>
+    <string name="patch_bundles">حزمة التعديل</string>
+    <string name="patch_bundle">حزمة التعديل</string>
     <!-- Morphe -->
     <string name="installer">المثبت</string>
     <string name="plugin_host_permission_label">مضيف بلاجين Morphe</string>
@@ -391,7 +393,7 @@ morphe_header_custom_dark.png
     <string name="import_patch_bundles_none">لم يتم استيراد حزم تصحيح جديدة</string>
     <string name="import_patch_bundles_banner_title">استيراد حزم التصحيح</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d من %2$d تمت معالجتها</string>
-    <string name="import_patch_bundles_banner_steps">\u062dي ‎%1$d ‎الصموم (%2$d)</string>
+    <string name="import_patch_bundles_banner_steps">ﺗﺸﻐ %1$d ﻟﻸ ﻣﻦ %2$d</string>
     <string name="import_patch_profiles">استيراد ملفات تعريف التصحيح</string>
     <string name="import_patch_profiles_description">استيراد ملفات تعريف التصحيح المحفوظة من ملف JSON</string>
     <string name="import_patch_profiles_fail">تعذر استيراد ملفات تعريف التصحيح: %s</string>
@@ -443,7 +445,6 @@ morphe_header_custom_dark.png
     <string name="patch_selection_select_all_empty_toast">لا توجد رقع متاحة للتحديد</string>
     <string name="patch_selection_selected_bundle_toast">تم تحديد جميع الرقع في %s</string>
     <string name="patch_selection_select_bundle_empty_toast">لا توجد رقع قابلة للتحديد في %s</string>
-    <string name="patch_selection_all_actions_hidden_toast">\u0644ارئ الہیده تگشمی صفواراغ الك</string>
     <string name="patch_selection_reset_bundle_toast">إعادة تعيين الإعدادات الافتراضية لـ %s</string>
     <string name="patch_selection_button_label_all">إلغاء تحديد الكل</string>
     <string name="patch_selection_button_label_bundle">إلغاء تحديد الحزمة</string>
@@ -468,8 +469,8 @@ morphe_header_custom_dark.png
     <string name="patch_selection_action_order_title">ترتيب أزرار إجراءات تحديد الرقعة</string>
     <string name="patch_selection_action_order_description">اختر ترتيب التخطيط لأزرار إجراء تحديد الرقعة</string>
     <string name="patch_selection_action_visibility_title">\u062cلغی کند الہیده تزغ تظی خضنّ الصموم</string>
-    <string name="patch_selection_action_visibility_description">\u0645پ کند تزد لصموم الزغ صفوار,ا لکن الہیده تزا کند کن?</string>
-    <string name="patch_selection_action_visibility_reset">\u062dي پٽ کند کن</string>
+    <string name="patch_selection_action_visibility_description">اختر أي زر عمل للاختيار المحدد</string>
+    <string name="patch_selection_action_visibility_reset">عرض جميع أزرار الإجراء</string>
     <string name="patch_selection_action_order_reset">إعادة الضبط إلى الترتيب الافتراضي</string>
     <string name="patch_selection_confirm_deselect_bundle_title">إلغاء تحديد الحزمة؟</string>
     <string name="patch_selection_confirm_deselect_bundle_message">إلغاء تحديد جميع الرقع المحددة من %1$s؟</string>
@@ -585,10 +586,8 @@ morphe_header_custom_dark.png
     <string name="export_name_format_current">النمط الحالي: %1$s</string>
     <string name="export_name_format_insert">إدراج</string>
     <string name="export_name_variable_app_name">اسم التطبيق</string>
-    <string name="export_name_variable_app_name_description">\u0627فك: الئَ샞녷의 ڗإز</string>
     <string name="export_name_variable_package_name">\u0627فك: الئَ샞녷의 ڗإز (ڗإز)</string>
     <string name="export_name_variable_package_name_description">يتم استبدالها بالاسم الرسمي للتطبيق</string>
-    <string name="export_name_variable_app_version">\u0627فك: الئَ샞녷의 لڨس خض٬</string>
     <string name="export_name_variable_app_version_description">يتم استبدالها بالاسم المركوز لهاتفك</string>
     <string name="export_name_variable_patches_version">إصدارات الحزم</string>
     <string name="export_name_variable_patches_version_description">يتم استبدالها بإصدارات حزم الإنتشار</string>
