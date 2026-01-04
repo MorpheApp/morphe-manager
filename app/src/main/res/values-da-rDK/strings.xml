@@ -35,7 +35,7 @@
     <string name="morphe_home_date_updated">Opdateret</string>
     <string name="morphe_home_check_updates">Tjek</string>
     <string name="morphe_home_unknown">Ukendt</string>
-    <string name="morphe_home_timeline">Opdateringshistorik</string>
+    <string name="morphe_home_timeline">Historik for opdateringer</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den originale upatchede APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
@@ -57,13 +57,13 @@
     <string name="morphe_home_file_picker_prompt_description">Vælg nu %1$s APK-filen, som du lige har downloadet.</string>
     <string name="morphe_home_file_picker_prompt_open">Åbn APK-fil jeg downloadede</string>
     <string name="morphe_home_recommended_version">Anbefalet version</string>
-    <string name="morphe_patcher_selected_version">Valgt version</string>
+    <string name="morphe_patcher_selected_version">Valgte version</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root-tilstand kræver, at den originale APK er installeret på din enhed, før der kan lappes.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Gem APK</string>
-    <string name="morphe_patcher_copy_error">Kopieringsfejl</string>
+    <string name="morphe_patcher_copy_error">Kopierfejl</string>
     <string name="morphe_patcher_show_error">Vis fejl</string>
     <string name="morphe_patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d pletter</string>
@@ -86,7 +86,7 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Understøtter ikke version</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Denne APK er ikke en anbefalet appversion. Fortsætter du, kan det resultere i en ikke-funktionel app.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Fortsæt alligevel</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Fortsæt iornuv</string>
     <string name="morphe_patcher_wrong_package_title">Forkert pakke valgt</string>
     <string name="morphe_patcher_wrong_package_description">Den valgte APK er ikke til den app, du havde til hensigt at patche.</string>
     <string name="morphe_patcher_expected_package">Forventet pakke</string>
@@ -119,12 +119,12 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Tilbage til Morphe hjem</string>
     <string name="morphe_settings_return_to_morphe_description">Tilbage til forenklet tilstand</string>
-    <string name="morphe_settings_return_to_advanced">Skift til Avanceret tilstand</string>
-    <string name="morphe_settings_return_to_advanced_description">Skift til den fuldt udstyrede avancerede tilstand</string>
+    <string name="morphe_settings_return_to_expert">Skift til ekspertmodus</string>
+    <string name="morphe_settings_return_to_expert_description">Skift til den fuldudviklede ekspertmodus</string>
     <string name="morphe_share_website">Del hjemmeside</string>
     <string name="morphe_share_website_description">Del den officielle Morphe-hjemmeside</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Indstillinger</string>
+    <string name="morphe_appearance_options">Visuel præferencer</string>
     <string name="morphe_appearance_options_description">Tilpas emnefarver, farver og baggrunde</string>
     <string name="morphe_background_type">Baggrundsanimation</string>
     <string name="morphe_background_type_circles">Cirkler</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Sne</string>
     <string name="morphe_background_type_none">Ingen</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Brug pre-release patches</string>
-    <string name="morphe_update_use_patches_prereleases_description">Brug de seneste udviklings-patches</string>
+    <string name="morphe_update_use_prereleases">Brug prerelease-versioner</string>
+    <string name="morphe_update_use_prereleases_description">Få tidlig adgang til nye patches og manager-funktioner</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patch Options</string>
+    <string name="morphe_patch_options">Pakkeindstillinger</string>
     <string name="morphe_patch_options_youtube_description">Tema, branding, header, og Shorts indstillinger</string>
     <string name="morphe_patch_options_youtube_music_description">Tema og brandingindstillinger</string>
     <string name="morphe_patch_options_restart_message">Ændring af patchindstillinger kræver geninstallering af appen for at træffe virkning.</string>
-    <string name="morphe_icon_instructions_title">Ikon format vejledning</string>
-    <string name="morphe_header_instructions_title">Header format vejledning</string>
-    <string name="morphe_loading_patch_options">Indlæser patchindstillinger...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Appemotivfarver</string>
+    <string name="morphe_patch_options_theme_colors_description">Skift baggrunds farve</string>
+    <string name="morphe_patch_options_dark_theme_color">Dunk version baggrunds farve</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
+    <string name="morphe_patch_options_light_theme_color">Lys version baggrunds farve</string>
+    <string name="morphe_patch_options_light_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
+    <string name="morphe_patch_options_icon_instructions_title">Instruktioner for ikoner</string>
+    <string name="morphe_patch_options_header_instructions_title">Instruktioner for header</string>
+    <string name="morphe_patch_options_loading">Henter pakkeindstillinger...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Vent til patch pakken opdateres</string>
     <string name="morphe_patch_options_load_error">Fejled ved indlæsning af patchindstillinger</string>
-    <string name="morphe_no_options_available">Ingen indstillinger tilgængelige for denne patch</string>
+    <string name="morphe_patch_options_no_available">Der er ikke tilgængelige indstillinger til denne patch</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Bruglig farve</string>
     <string name="morphe_hex_color">Hex farve</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">App Tema Farver</string>
-    <string name="morphe_theme_dark_color">Styregråd for mørkt tema</string>
-    <string name="morphe_theme_dark_color_description">Baggrundsfarve for mørkt tema</string>
-    <string name="morphe_theme_light_color">Styregråd for lys tema</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Bruglig Branding</string>
-    <string name="morphe_custom_app_name_description">Skift app-navn for visning</string>
-    <string name="morphe_custom_app_name_hint">Skriv brugligt navn</string>
+    <string name="morphe_patch_options_custom_branding">Tilpasset markering</string>
+    <string name="morphe_patch_options_custom_branding_description">Skift app visningsnavn</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Appnavn</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Indtast brugernavn</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Tilpasset ikon</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappe med billeder, der skal bruges som tilpasset ikon.
+
+Mappen skal indeholde én eller flere af følgende mapper, efterhånden som DPI på enheden tillader det:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Hver af mapperne skal indeholde alle følgende filer:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Bildets dimensioner skal være som følger:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Valgfri: stien indeholder en 'drawable' mappe med en hvit ikonfil (eller en gemtik fil):
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Bruglig Header Logo</string>
-    <string name="morphe_custom_header_description">Mappesti til bruglig header billeder</string>
+    <string name="morphe_patch_options_custom_header">Tilpasset headerlog</string>
+    <string name="morphe_patch_options_custom_header_description">Skift headerlog</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Mappe med billeder, der skal bruges som tilpasset headerlog.
+
+Mappen skal indeholde én eller flere af følgende mapper, efterhånden som DPI på enheden tillader det:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Hver af mapperne skal indeholde alle følgende filer:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Bildets dimensioner skal være som følger:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Skjul Shorts Funktioner</string>
-    <string name="morphe_hide_shorts_app_shortcut">Skjul Shorts App Shortcut</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Fjern Shorts fra lågertastersmenu</string>
-    <string name="morphe_hide_shorts_widget">Skjul Shorts Widget</string>
-    <string name="morphe_hide_shorts_widget_description">Fjern Shorts knap fra launcher widget</string>
+    <string name="morphe_patch_options_hide_shorts_features">Skjul Shorts-features</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Skjul Shorts-programlets genvejstast</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Fjern Shorts fra langtrykkningsmenu i launcheren</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Skjul Shorts-widget</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Fjern Shorts-knap fra launcher-widget</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Pletter</string>

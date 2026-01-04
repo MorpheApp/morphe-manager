@@ -10,7 +10,7 @@
         <item quantity="other">%d terpilih</item>
     </plurals>
     <plurals name="patch_profile_bundle_patch_count">
-        <item quantity="other">%d tambal</item>
+        <item quantity="other">%d tambalan</item>
     </plurals>
     <plurals name="patch_profile_bundle_count">
         <item quantity="other">%d bundel</item>

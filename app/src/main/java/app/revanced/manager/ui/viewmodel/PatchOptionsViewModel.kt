@@ -1,6 +1,5 @@
 package app.revanced.manager.ui.viewmodel
 
-import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,14 +13,11 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Compan
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_HIDE_SHORTS
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PATCH_THEME
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.patcher.patch.PatchInfo
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -42,8 +38,6 @@ object PatchOptionKeys {
  * ViewModel for managing patch options dynamically loaded from bundle repository.
  */
 class PatchOptionsViewModel : ViewModel(), KoinComponent {
-
-    private val app: Application by inject()
     private val bundleRepository: PatchBundleRepository by inject()
     val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
 

@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">Tá do paistí suas chun dáta</string>
     <string name="morphe_home_patches_are_loading">Tá paistí á luchtú, fan go gnách…</string>
     <string name="morphe_home_please_wait">Fan go gnách…</string>
-    <string name="morphe_home_open_in_browser">Oscail sa bhrabhsálaí</string>
+    <string name="morphe_home_open_in_browser">Ocainn ar an bhbrabhsál</string>
     <string name="morphe_home_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="morphe_home_date_added">Cuireadh leis</string>
     <string name="morphe_home_date_updated">Nuashonraithe</string>
     <string name="morphe_home_check_updates">Seiceáil</string>
     <string name="morphe_home_unknown">Anaithnid</string>
-    <string name="morphe_home_timeline">Stair Nuashonruithe</string>
+    <string name="morphe_home_timeline">Leaganfé lní</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">An bhfuil an APK bunaidh neamhpaisteáilte agat?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a chóiriú, tá leagan %2$s (gan chóiriú) uait</string>
@@ -56,15 +56,15 @@
     <string name="morphe_home_file_picker_prompt_title">Roghnaigh an APK a d\'íoslódáil tú</string>
     <string name="morphe_home_file_picker_prompt_description">Anois roghnaigh an comhad APK %1$s a d\'íoslódáil tú díreach.</string>
     <string name="morphe_home_file_picker_prompt_open">Oscail an comhad APK a d\'íoslódáil mé</string>
-    <string name="morphe_home_recommended_version">Leagan Molta</string>
-    <string name="morphe_patcher_selected_version">Leagan Roghnaithe</string>
+    <string name="morphe_home_recommended_version">Leagan tábhacta</string>
+    <string name="morphe_patcher_selected_version">Nasc solasaílte</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Teastaíonn an bun-APK ar do ghléas sula ndéantar paisteáil le mód fréimhe.</string>
     <string name="morphe_root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Sábháil APK</string>
-    <string name="morphe_patcher_copy_error">Earráid Cóipeála</string>
-    <string name="morphe_patcher_show_error">Taispeáin Earráid</string>
+    <string name="morphe_patcher_copy_error">Rudaí copaiste</string>
+    <string name="morphe_patcher_show_error">Amhsor an rudaí</string>
     <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
     <string name="morphe_patcher_long_step_warning">Féadfaidh an chéim seo tamall a ghlacadh. Fan go cineálta…</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Leagan Gan Tacú</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ní leagan molta den aip é an APK seo. D’fhéadfadh sé nach n-oibreodh an aip má leanann tú ar aghaidh.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Lean Ar Aghaidh Ar Aon Chuma</string>
-    <string name="morphe_patcher_wrong_package_title">Pacáiste Cearr Roghnaithe</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Táras ar scannán</string>
+    <string name="morphe_patcher_wrong_package_title">Rangaimpíl suite chunradh</string>
     <string name="morphe_patcher_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air.</string>
-    <string name="morphe_patcher_expected_package">Pacáiste Ionchais</string>
-    <string name="morphe_patcher_selected_package">Pacáiste Roghnaithe</string>
+    <string name="morphe_patcher_expected_package">Rang shocraithe suite</string>
+    <string name="morphe_patcher_selected_package">Rang solasaílte</string>
     <string name="morphe_patcher_message_1">Ag athrú do aip go rud éigin iontach… 🏆</string>
     <string name="morphe_patcher_message_2">Ag múineadh cleasanna nua d’aipeanna d’aois… 🎩</string>
     <string name="morphe_patcher_message_3">Ag tabhairt socrúcháin dhigiteach do d’aipeanna… 🔧</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Tionnadh go dtí baile Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Tionnadh go dtí mód simplí</string>
-    <string name="morphe_settings_return_to_advanced">Athraigh go Mód Ardleibhéil</string>
-    <string name="morphe_settings_return_to_advanced_description">Aistrigh go dtí an modh ardleibhéil lánfheidhmiúil</string>
-    <string name="morphe_share_website">Roghnaigh Gréasán</string>
+    <string name="morphe_settings_return_to_expert">Chúig an mod chosái seo chun an mód tóirisc thú bhí bhíos ag baint úsáide</string>
+    <string name="morphe_settings_return_to_expert_description">Shuas craoligh an mod éigeanta mar thoradh iarmhar</string>
+    <string name="morphe_share_website">Seol an suíomh gréasáin</string>
     <string name="morphe_share_website_description">Roinn an láithreán gréasáin oifigiúil Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Coisialta na Roghairt</string>
+    <string name="morphe_appearance_options">Roinn briseadh</string>
     <string name="morphe_appearance_options_description">Anog na coisialta, na dearcadaí, agus na tinte</string>
-    <string name="morphe_background_type">Beochan Cúlra</string>
+    <string name="morphe_background_type">Clonaigh an ábhar</string>
     <string name="morphe_background_type_circles">Ciorcail</string>
     <string name="morphe_background_type_rings">Fáinní</string>
     <string name="morphe_background_type_waves">Tonnánna</string>
@@ -135,40 +135,46 @@
     <string name="morphe_background_type_snow">Aillid</string>
     <string name="morphe_background_type_none">Dada</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Úsáid paistí réamhscaoilte</string>
-    <string name="morphe_update_use_patches_prereleases_description">Úsáid na paistí forbartha is déanaí</string>
+    <string name="morphe_update_use_prereleases">Uset fórsaí/ard-án nua</string>
+    <string name="morphe_update_use_prereleases_description">&#38; Dúlaigh scéal le lámhcheall suite nua agus trecantaí bhaimpéal</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Opcionsíos Chomhalaidh</string>
+    <string name="morphe_patch_options">Roinn briseadh</string>
     <string name="morphe_patch_options_youtube_description">Téamaí, bráiding, an deisceála, agus na heolaíochtaí Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Téamaí agus bráiding</string>
     <string name="morphe_patch_options_restart_message">Nuíche an bhogaidh sonraí na ccomhalaidh a athbhueráil iad ar an mbogaidh</string>
-    <string name="morphe_icon_instructions_title">Cúpas instructionsíos Comhaladha</string>
-    <string name="morphe_header_instructions_title">Formáta instructionsíos an deisceála</string>
-    <string name="morphe_loading_patch_options">Loisinne na ccomhalaidh...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Dathanna toiseach an chlonaigh</string>
+    <string name="morphe_patch_options_theme_colors_description">Bhrend an deiseol dath</string>
+    <string name="morphe_patch_options_dark_theme_color">Dath toiseach théama dhármar an chlonaigh</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Láimhe heiceach</string>
+    <string name="morphe_patch_options_light_theme_color">Dath toiseach théama riorpail an chlonaigh</string>
+    <string name="morphe_patch_options_light_theme_color_description">Láimhe heiceach</string>
+    <string name="morphe_patch_options_icon_instructions_title">Cineál aibiucáilteoir aclaíochán</string>
+    <string name="morphe_patch_options_header_instructions_title">Cineál aibiucáilteoir ríomhphóst</string>
+    <string name="morphe_patch_options_loading">Íoschur ar bortha</string>
     <string name="morphe_patch_options_waiting_for_bundle">Teast a fhioidh an bunaláin ccomhalaidh a tsuipheadh</string>
     <string name="morphe_patch_options_load_error">Thall an bhogaidh na ccomhalaidh sloinniu</string>
-    <string name="morphe_no_options_available">Níl ccomhaladh ag anseo.</string>
+    <string name="morphe_patch_options_no_available">Nasc anscraithe is ea</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Dath Saincheaptha</string>
     <string name="morphe_hex_color">Dath an Forún Buidéal</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Nascnótaína</string>
-    <string name="morphe_theme_dark_color">Dath an Bhord na Teama Dàomhán</string>
-    <string name="morphe_theme_dark_color_description">Dath an bhord don fhadhbhar an uile théama dàomhán</string>
-    <string name="morphe_theme_light_color">Dath an Bhord na Teama Leathdhaidhe</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Bráiding Saincheaptha</string>
-    <string name="morphe_custom_app_name_description">Baoil an teaghlabacht an App a thaitneamh</string>
-    <string name="morphe_custom_app_name_hint">Slán le teachtaireacht saincheaptha</string>
+    <string name="morphe_patch_options_custom_branding">Bruachán roimpi</string>
+    <string name="morphe_patch_options_custom_branding_description">Bhriú an teaghlaigh diligthe</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Ainm an aip</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Slánfa idir</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Scagaire scolánaí agus cuardaigh neodán ar sonraí omidlugh</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Scéimgear le formlaí scolánaí dathanna theanglacha is fearr"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Logo Cusach Header</string>
-    <string name="morphe_custom_header_description">Caidomán bhordchomhpháirtí a bhíos ann</string>
+    <string name="morphe_patch_options_custom_header">Cuir an auraí in éad</string>
+    <string name="morphe_patch_options_custom_header_description">Bheoch iasc phríomhphóst</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Hodhla"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Folaigh na heolaíochtaí Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Folaigh an gceangal app Short</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Bain Shortse ag an mbord agus ar an deisceála chomhal</string>
-    <string name="morphe_hide_shorts_widget">Folaigh na heolaíochtaí Widgets Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">Bain isteach an tógán Shorts a bhíos ar na Widgetiaí</string>
+    <string name="morphe_patch_options_hide_shorts_features">Folaigh Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Oscrú obaircheall ar Scríbhín</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Beoch Scríbhin</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Rangaigh Scríbhín ar scannán rompa</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Beoch bréag Scríbhin</string>
     <!-- Other strings -->
     <string name="patcher">Paisteálaí</string>
     <string name="patches">Paistí</string>

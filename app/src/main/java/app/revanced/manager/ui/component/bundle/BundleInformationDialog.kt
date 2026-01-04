@@ -359,21 +359,22 @@ fun BundleInformationDialog(
                     )
                 }
 
-                if (autoUpdate != null) {
-                    BundleListItem(
-                        headlineText = stringResource(auto_update),
-                        supportingText = stringResource(auto_update_description),
-                        trailingContent = {
-                            HapticSwitch(
-                                checked = autoUpdate,
-                                onCheckedChange = ::onAutoUpdateChange
-                            )
-                        },
-                        modifier = Modifier.clickable {
-                            onAutoUpdateChange(!autoUpdate)
-                        }
-                    )
-                }
+                // Morphe: This switch is not needed for now, as Morphe always uses auto-update
+//                if (autoUpdate != null) {
+//                    BundleListItem(
+//                        headlineText = stringResource(auto_update),
+//                        supportingText = stringResource(auto_update_description),
+//                        trailingContent = {
+//                            HapticSwitch(
+//                                checked = autoUpdate,
+//                                onCheckedChange = ::onAutoUpdateChange
+//                            )
+//                        },
+//                        modifier = Modifier.clickable {
+//                            onAutoUpdateChange(!autoUpdate)
+//                        }
+//                    )
+//                }
 
                 if (src.isDefault) {
                     val useBundlePrerelease by prefs.usePatchesPrereleases.getAsState()

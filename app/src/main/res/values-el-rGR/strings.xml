@@ -29,7 +29,7 @@
     <string name="morphe_home_patches_updated">Οι ενημερώσεις σας είναι πλήρεις</string>
     <string name="morphe_home_patches_are_loading">Οι ενημερώσεις φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="morphe_home_please_wait">Παρακαλώ περιμένετε…</string>
-    <string name="morphe_home_open_in_browser">Άνοιγμα στο πρόγραμμα περιήγησης</string>
+    <string name="morphe_home_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="morphe_home_failed_to_open_url">Αδυναμία ανοίγματος URL</string>
     <string name="morphe_home_date_added">Προστέθηκε</string>
     <string name="morphe_home_date_updated">Ενημερώθηκε</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Μη υποστηριζόμενη έκδοση</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Αυτό το APK δεν είναι συνιστώμενη έκδοση εφαρμογής. Η συνέχιση μπορεί να οδηγήσει σε μη λειτουργική εφαρμογή.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Συνέχεια Ούτως ή Άλλως</string>
-    <string name="morphe_patcher_wrong_package_title">Επιλέχθηκε Λανθασμένο Πακέτο</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Συνέχεια παρ’ όλα αυτά</string>
+    <string name="morphe_patcher_wrong_package_title">Επιλέχθηκε λάθος πακέτο</string>
     <string name="morphe_patcher_wrong_package_description">Το επιλεγμένο APK δεν αφορά την εφαρμογή που προορίζατε να κάνετε patch.</string>
-    <string name="morphe_patcher_expected_package">Αναμενόμενο Πακέτο</string>
-    <string name="morphe_patcher_selected_package">Επιλεγμένο Πακέτο</string>
+    <string name="morphe_patcher_expected_package">Αναμενόμενο πακέτο</string>
+    <string name="morphe_patcher_selected_package">Επιλεγμένο πακέτο</string>
     <string name="morphe_patcher_message_1">Μεταμορφώνοντας την εφαρμογή σας σε κάτι καταπληκτικό… 🏆</string>
     <string name="morphe_patcher_message_2">Διδάσκοντας νέες συνήθειες σε παλιές εφαρμογές… 🎩</string>
     <string name="morphe_patcher_message_3">Κάνοντας ένα ψηφιακό σερβις στην εφαρμογή σας… 🔧</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Επιστροφή στην αρχική σελίδα Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Επιστροφή στην απλοποιημένη λειτουργία</string>
-    <string name="morphe_settings_return_to_advanced">Αλλαγή σε προηγμένη λειτουργία</string>
-    <string name="morphe_settings_return_to_advanced_description">Μετάβαση στην πλήρως λειτουργική προηγμένη λειτουργία</string>
-    <string name="morphe_share_website">Κοινοποίηση Ιστοτόπου</string>
+    <string name="morphe_settings_return_to_expert">Μετάβαση στο Προηγμένο Μο ρφέ</string>
+    <string name="morphe_settings_return_to_expert_description">Μετάβαση στο πλήρως εξοπλισμένο Προηγμένο Μορφέ</string>
+    <string name="morphe_share_website">Κοινοποίηση ιστότοπου</string>
     <string name="morphe_share_website_description">Κοινοποίηση του επίσημου ιστοτόπου του Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Επιλογές Διαδρασιμότητας</string>
+    <string name="morphe_appearance_options">Επιλογές εμφάνισης</string>
     <string name="morphe_appearance_options_description">Προσαρμόστε θέματα, χρώματα και φόντα</string>
-    <string name="morphe_background_type">Κινούμενο Σχέδιο Φόντου</string>
+    <string name="morphe_background_type">Πραγματεία φόντου</string>
     <string name="morphe_background_type_circles">Κύκλοι</string>
     <string name="morphe_background_type_rings">Δακτύλιοι</string>
     <string name="morphe_background_type_waves">Κύματα</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Υάλωμα</string>
     <string name="morphe_background_type_none">Κανένα</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Χρήση ενημερώσεων προ-κυκλοφορίας</string>
-    <string name="morphe_update_use_patches_prereleases_description">Χρήση των τελευταίων ενημερώσεων ανάπτυξης</string>
+    <string name="morphe_update_use_prereleases">Χρήση προ-βήτυχων εκδόσεων</string>
+    <string name="morphe_update_use_prereleases_description">Απόκτηση νωρίτερης πρόσβασης σε νέες αναθηρώσεις και διαχειριστικές λειτουργίες</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Επιλογές Δεδομένων</string>
+    <string name="morphe_patch_options">Επιλογές τροποποιήσεων</string>
     <string name="morphe_patch_options_youtube_description">Επιλογές θέματος, ταυτότητας, κεφαλίδας και Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Επιλογές θέματος καὶ ταυτότητας</string>
     <string name="morphe_patch_options_restart_message">Η αλλαγή των επιλογών δεδομένων απαιτεί ξανάεφαρμογή της εφαρμογής για να ισχύσει</string>
-    <string name="morphe_icon_instructions_title">Οδηγίες μορφής εικονιδίου</string>
-    <string name="morphe_header_instructions_title">Οδηγίες μορφής κεφαλίδας</string>
-    <string name="morphe_loading_patch_options">Φόρτωση επιλογών δεδομένων…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Χρώματα θέματος εφαρμογής</string>
+    <string name="morphe_patch_options_theme_colors_description">Αλλαγή χρώματος φόντου</string>
+    <string name="morphe_patch_options_dark_theme_color">Χρώμα φόντου σκοτεινού θέματος</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Μπορεί να είναι ένα δεκαεξαδικό χρώμα (#RRGGBB) ή μια αναφορά πόρτας χρωμάτων</string>
+    <string name="morphe_patch_options_light_theme_color">Χρώμα φόντου φωτεινού θέματος</string>
+    <string name="morphe_patch_options_light_theme_color_description">Μπορεί να είναι ένα δεκαεξαδικό χρώμα (#RRGGBB) ή μια αναφορά πόρτας χρωμάτων</string>
+    <string name="morphe_patch_options_icon_instructions_title">Προδιαγραφές του τύπου εικονιδίου</string>
+    <string name="morphe_patch_options_header_instructions_title">Προδιαγραφές του τύπου τίτλου</string>
+    <string name="morphe_patch_options_loading">Φόρτωση επιλογών ενότητας προσαρμογής…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Μέχρι το πακέτο δεδομένων να ενημερωθεί</string>
     <string name="morphe_patch_options_load_error">Αποτυχία φόρτωσης επιλογών δεδομένων</string>
-    <string name="morphe_no_options_available">Για αυτό το πακέτο δεδομένων, δεν υπάρχουν διαθέσιμες επιλογές</string>
+    <string name="morphe_patch_options_no_available">Δεν υπάρχουν διαθέσιμες επιλογές για αυτή την ενότητα</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Προσαρμοσμένο χρώμα</string>
     <string name="morphe_hex_color">Χρώμα HEX</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Χρώματα θέματος της εφαρμογής</string>
-    <string name="morphe_theme_dark_color">Φόντος χρώματος για θέμα σκοτεινό</string>
-    <string name="morphe_theme_dark_color_description">Φόντος χρώματος για θέμα σκοτεινό</string>
-    <string name="morphe_theme_light_color">Φόντος χρώματος για θέμα φωτεινό</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Προσαρμοσμένη Ταυτότητα</string>
-    <string name="morphe_custom_app_name_description">Αλλάξτε το όνομα Εμφάνισης της εφαρμογής</string>
-    <string name="morphe_custom_app_name_hint">Εισάγετε προσαρμοσμένο όνομα</string>
+    <string name="morphe_patch_options_custom_branding">Προσαρμοσμένη επωνυμία</string>
+    <string name="morphe_patch_options_custom_branding_description">Αλλαγή του εμφανιζόμενου ονόματος εφαρμογής</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Όνομα εφαρμογής</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Εισαγάγετε προσαρμοσμένο όνομα</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Προσαρμοσμένο εικονίδιο</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Φάκελος με εικόνες για χρήση ως προσαρμοσμένο εικονίδιο.
+
+Ο φάκελος πρέπει να περιέχει έναν ή περισσότερους από τους ακόλουθους φακέλους, ανάλογα με το DPI της συσκευής:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Κάθε ένας από τους φακέλους πρέπει να περιέχει όλα τα ακόλουθα αρχεία:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Οι διαστάσεις της εικόνας πρέπει να είναι οι εξής:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Προαιρετικά, η διαδρομή περιέχει έναν 'σχεδιαζόμενο' φάκελο με οποιοδήποτε από τα μονόχρωμα αρχεία εικονιδίων:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Προσαρμοσμένη Κεφαλίδα (YouTube)</string>
-    <string name="morphe_custom_header_description">Μονοπάτι φακέλου που περιέχει εικόνες κεφαλίδας</string>
+    <string name="morphe_patch_options_custom_header">Προσαρμοσμένο λογότυπο κεφαλίδας</string>
+    <string name="morphe_patch_options_custom_header_description">Αλλαγή λογότυπου κεφαλίδας</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Φάκελος με εικόνες για χρήση ως λογότυπο προσαρμοσμένης κεφαλίδας.
+
+Ο φάκελος πρέπει να περιέχει έναν ή περισσότερους από τους ακόλουθους φακέλους, ανάλογα με το DPI της συσκευής:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Κάθε ένας από τους φακέλους πρέπει να περιέχει όλα τα ακόλουθα αρχεία:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Οι διαστάσεις της εικόνας πρέπει να είναι οι εξής:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Απόκρυψη Επιλογών Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Απόκρυψη Επιλογών Shorts App Shortcut</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Αφαίρεση Shorts από το μενού κατάκλισης σελιδωτής</string>
-    <string name="morphe_hide_shorts_widget">Απόκρυψη Κουμπιού Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">Αφαίρεση κουμπιού Shorts από το widget σελιδωτής</string>
+    <string name="morphe_patch_options_hide_shorts_features">Απόκρυψη χαρακτηριστικών Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Απόκρυψη του επικουρούς Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Αφαίρεση του Shorts από τον μενού μακριού κλικ του λογισμικού</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Κρύψι του widget Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Αφαίρεση του κουμπιού Shorts από το widget του λογισμικού</string>
     <!-- Other strings -->
     <string name="patcher">Εφαρμογή επιδιορθώσεων</string>
     <string name="patches">Επιδιορθώσεις</string>

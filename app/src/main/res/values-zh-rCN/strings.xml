@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">您的补丁已是最新</string>
     <string name="morphe_home_patches_are_loading">补丁正在加载，请稍候…</string>
     <string name="morphe_home_please_wait">请稍候…</string>
-    <string name="morphe_home_open_in_browser">在浏览器中打开</string>
+    <string name="morphe_home_open_in_browser">在浏览器中打开链接</string>
     <string name="morphe_home_failed_to_open_url">无法打开网址</string>
     <string name="morphe_home_date_added">已添加</string>
     <string name="morphe_home_date_updated">更新于</string>
     <string name="morphe_home_check_updates">检查更新</string>
     <string name="morphe_home_unknown">未知</string>
-    <string name="morphe_home_timeline">更新历史</string>
+    <string name="morphe_home_timeline">更新历史记录</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始未打补丁的 APK 吗？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修补 %1$s，您需要版本 %2$s（未修补）</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">不支持的版本</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">此 APK 不是推荐的应用版本。继续操作可能导致应用无法正常运行。</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">仍要继续</string>
-    <string name="morphe_patcher_wrong_package_title">选择了错误的程序包</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">无论如何继续</string>
+    <string name="morphe_patcher_wrong_package_title">选择错误的包</string>
     <string name="morphe_patcher_wrong_package_description">选定的APK不是您打算修补的应用程序。</string>
-    <string name="morphe_patcher_expected_package">预期的程序包</string>
-    <string name="morphe_patcher_selected_package">选定的程序包</string>
+    <string name="morphe_patcher_expected_package">预期的包</string>
+    <string name="morphe_patcher_selected_package">已选包</string>
     <string name="morphe_patcher_message_1">正在将您的应用塑造成令人赞叹的样子… 🏆</string>
     <string name="morphe_patcher_message_2">教旧应用新技巧… 🎩</string>
     <string name="morphe_patcher_message_3">正在为您的应用进行数字调优… 🔧</string>
@@ -119,8 +119,8 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">返回 Morphe 主页</string>
     <string name="morphe_settings_return_to_morphe_description">返回简化模式</string>
-    <string name="morphe_settings_return_to_advanced">切换到高级模式</string>
-    <string name="morphe_settings_return_to_advanced_description">切换到功能齐全的高级模式</string>
+    <string name="morphe_settings_return_to_expert">切换至专家模式</string>
+    <string name="morphe_settings_return_to_expert_description">切换至功能完整的专家模式</string>
     <string name="morphe_share_website">分享网站</string>
     <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
     <!-- Appearance Section -->
@@ -135,40 +135,83 @@
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">无</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">使用预发布补丁</string>
-    <string name="morphe_update_use_patches_prereleases_description">使用最新的开发补丁</string>
+    <string name="morphe_update_use_prereleases">使用预发布版本</string>
+    <string name="morphe_update_use_prereleases_description">早期获取新补丁和管理器功能</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">补丁选项</string>
     <string name="morphe_patch_options_youtube_description">主题、品牌、顶部栏以及 Shorts 的选项</string>
     <string name="morphe_patch_options_youtube_music_description">主题和品牌选项</string>
     <string name="morphe_patch_options_restart_message">更改补丁选项需要重新应用补丁才能生效</string>
-    <string name="morphe_icon_instructions_title">图标格式说明</string>
-    <string name="morphe_header_instructions_title">顶部栏格式说明</string>
-    <string name="morphe_loading_patch_options">正在加载补丁选项...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">应用主题颜色</string>
+    <string name="morphe_patch_options_theme_colors_description">更改背景颜色</string>
+    <string name="morphe_patch_options_dark_theme_color">深色主题背景色</string>
+    <string name="morphe_patch_options_dark_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
+    <string name="morphe_patch_options_light_theme_color">浅色主题背景色</string>
+    <string name="morphe_patch_options_light_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
+    <string name="morphe_patch_options_icon_instructions_title">图标格式说明</string>
+    <string name="morphe_patch_options_header_instructions_title">标题栏格式说明</string>
+    <string name="morphe_patch_options_loading">正在加载补丁选项…</string>
     <string name="morphe_patch_options_waiting_for_bundle">请等待补丁包更新</string>
     <string name="morphe_patch_options_load_error">加载补丁选项失败</string>
-    <string name="morphe_no_options_available">此补丁中没有任何选项可修改</string>
+    <string name="morphe_patch_options_no_available">对此补丁没有可用选项</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">自定义颜色</string>
     <string name="morphe_hex_color">十六进制颜色</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">应用主题颜色</string>
-    <string name="morphe_theme_dark_color">深色主题背景色</string>
-    <string name="morphe_theme_dark_color_description">深色主题的背景颜色</string>
-    <string name="morphe_theme_light_color">浅色主题背景色</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">自定义应用名称</string>
-    <string name="morphe_custom_app_name_description">输入自定义名称</string>
-    <string name="morphe_custom_app_name_hint">自定义图标路径</string>
+    <string name="morphe_patch_options_custom_branding">自定义品牌</string>
+    <string name="morphe_patch_options_custom_branding_description">更改应用显示名称</string>
+    <string name="morphe_patch_options_custom_branding_app_name">应用名称</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">输入自定义名称</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">自定义图标</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"用于自定义图标的图像文件夹。
+
+文件夹必须包含以下文件夹（根据设备的 DPI 不同）:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+每个文件夹都必须包含以下所有文件:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+图像尺寸必须如下:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+此外，路径下可以包含 'drawable' 文件夹以及以下任意一种单色图标文件:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">包含自定义顶部栏图片的文件夹路径</string>
-    <string name="morphe_custom_header_description">/storage/emulated/0/header</string>
+    <string name="morphe_patch_options_custom_header">自定义顶部标题图片</string>
+    <string name="morphe_patch_options_custom_header_description">更改顶部标题图片</string>
+    <string name="morphe_patch_options_custom_header_instruction">"用于自定义标题栏图片的文件夹。
+
+文件夹必须包含以下文件夹（取决于设备的 DPI）:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+每个文件夹必须包含以下所有文件:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+图像尺寸必须如下:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">隐藏 Shorts 应用快捷方式</string>
-    <string name="morphe_hide_shorts_app_shortcut">隐藏 Launcher 长按菜单中的 Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">隐藏 Shorts 小部件</string>
-    <string name="morphe_hide_shorts_widget">从 Launcher 小部件中移除 Shorts 按钮</string>
-    <string name="morphe_hide_shorts_widget_description">从启动器小部件中移除 Shorts 按钮</string>
+    <string name="morphe_patch_options_hide_shorts_features">隐藏 Shorts 功能</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">隐藏 Shorts 应用快捷方式</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">从启动器长按菜单中删除 Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget">隐藏 Shorts 网格图标的部件（小部件？）</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">从启动器小部件中移除 Shorts 按钮</string>
     <!-- Other strings -->
     <string name="patcher">修补程序</string>
     <string name="patches">补丁</string>
@@ -282,6 +325,7 @@
     <string name="advanced_description">API URL，内存限制，调试</string>
     <string name="about">关于</string>
     <!-- Morphe -->
+    <string name="accent_color_presets">表西颜</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->

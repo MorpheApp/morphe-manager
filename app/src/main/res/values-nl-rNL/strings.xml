@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">Uw patches zijn up-to-date</string>
     <string name="morphe_home_patches_are_loading">Patches worden geladen, een ogenblik geduld...</string>
     <string name="morphe_home_please_wait">Een ogenblik geduld...</string>
-    <string name="morphe_home_open_in_browser">Openen in browser</string>
+    <string name="morphe_home_open_in_browser">Open in de browser</string>
     <string name="morphe_home_failed_to_open_url">Kan URL niet openen</string>
     <string name="morphe_home_date_added">Toegevoegd</string>
     <string name="morphe_home_date_updated">Bijgewerkt</string>
     <string name="morphe_home_check_updates">Controleren</string>
     <string name="morphe_home_unknown">Onbekend</string>
-    <string name="morphe_home_timeline">Updategeschiedenis</string>
+    <string name="morphe_home_timeline">Update geschiedenis</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
@@ -57,14 +57,14 @@
     <string name="morphe_home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat je zojuist hebt gedownload.</string>
     <string name="morphe_home_file_picker_prompt_open">Open gedownloade APK-bestand</string>
     <string name="morphe_home_recommended_version">Aanbevolen versie</string>
-    <string name="morphe_patcher_selected_version">Geselecteerde versie</string>
+    <string name="morphe_patcher_selected_version">Gekozen versie</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Rootmodus vereist dat de originele APK op uw apparaat is geïnstalleerd voordat u gaat patchen.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK opslaan</string>
     <string name="morphe_patcher_copy_error">Kopieerfout</string>
-    <string name="morphe_patcher_show_error">Fout weergeven</string>
+    <string name="morphe_patcher_show_error">Toon fout</string>
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="morphe_patcher_patches_progress">%2$d / %1$d patches</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Niet-ondersteunde versie</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Dit APK is geen aanbevolen appversie. Doorgaan kan resulteren in een niet-functionerende app.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Toch doorgaan</string>
-    <string name="morphe_patcher_wrong_package_title">Verkeerd pakket geselecteerd</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Doorgaan ondanks dit</string>
+    <string name="morphe_patcher_wrong_package_title">Verkeerd pakket gekozen</string>
     <string name="morphe_patcher_wrong_package_description">De geselecteerde APK is niet voor de toepassing die u wilde patchen.</string>
-    <string name="morphe_patcher_expected_package">Verwacht pakket</string>
-    <string name="morphe_patcher_selected_package">Geselecteerd pakket</string>
+    <string name="morphe_patcher_expected_package">Geëxpectede pakket</string>
+    <string name="morphe_patcher_selected_package">Gekozen pakket</string>
     <string name="morphe_patcher_message_1">Uw app omtoveren tot iets geweldigs… 🏆</string>
     <string name="morphe_patcher_message_2">Oude apps nieuwe trucjes leren… 🎩</string>
     <string name="morphe_patcher_message_3">Uw app een digitale onderhoudsbeurt geven… 🔧</string>
@@ -119,12 +119,12 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Terug naar Morphe-startscherm</string>
     <string name="morphe_settings_return_to_morphe_description">Terugkeren naar vereenvoudigde modus</string>
-    <string name="morphe_settings_return_to_advanced">Omschakelen naar Geavanceerde modus</string>
-    <string name="morphe_settings_return_to_advanced_description">Schakelen naar de geavanceerde modus met alle functies</string>
-    <string name="morphe_share_website">Website delen</string>
+    <string name="morphe_settings_return_to_expert">Schakel over naar Expertmodus</string>
+    <string name="morphe_settings_return_to_expert_description">Schakel over naar de volledig ondersteunde expertmodus</string>
+    <string name="morphe_share_website">Deel website</string>
     <string name="morphe_share_website_description">De officiële Morphe website delen</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Uiterlijksopties</string>
+    <string name="morphe_appearance_options">Uitzettingsvoorkeuren</string>
     <string name="morphe_appearance_options_description">Aanpassen van thema\'s, kleuren en achtergronden</string>
     <string name="morphe_background_type">Achtergrondanimatie</string>
     <string name="morphe_background_type_circles">Cirkels</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Sneeuw</string>
     <string name="morphe_background_type_none">Geen</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Pre-release patches gebruiken</string>
-    <string name="morphe_update_use_patches_prereleases_description">Gebruik de nieuwste ontwikkelingspatches</string>
+    <string name="morphe_update_use_prereleases">Gebruik voor-release-versies</string>
+    <string name="morphe_update_use_prereleases_description">Krijg vroege toegang tot nieuwe patches en beheerdersfuncties</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Opties voor patch</string>
+    <string name="morphe_patch_options">Patchvoorkeuren</string>
     <string name="morphe_patch_options_youtube_description">Thema, branding, header en Shorts-opties</string>
     <string name="morphe_patch_options_youtube_music_description">Thema- en brandingopties</string>
     <string name="morphe_patch_options_restart_message">Wijziging van patchopties vereist herinstallatie van de app om in te werken</string>
-    <string name="morphe_icon_instructions_title">Optie-instructies voor icoontjes</string>
-    <string name="morphe_header_instructions_title">Instructies voor headerformaat</string>
-    <string name="morphe_loading_patch_options">Patchopties wordt geladen...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">App-themetekens</string>
+    <string name="morphe_patch_options_theme_colors_description">Verander achtergrondkleur</string>
+    <string name="morphe_patch_options_dark_theme_color">Donkere themeka: Kleur</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
+    <string name="morphe_patch_options_light_theme_color">Lichte themeka: Kleur</string>
+    <string name="morphe_patch_options_light_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
+    <string name="morphe_patch_options_icon_instructions_title">Icoonindelingstitel</string>
+    <string name="morphe_patch_options_header_instructions_title">Hooftitelindelingstitel</string>
+    <string name="morphe_patch_options_loading">Patchvoorkeuren worden geladen...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Wacht tot het patchpakket wordt bijgewerkt</string>
     <string name="morphe_patch_options_load_error">Mislukt om patchopties te laden</string>
-    <string name="morphe_no_options_available">Geen opties beschikbaar voor deze patch</string>
+    <string name="morphe_patch_options_no_available">Geen beschikbare opties voor deze patch</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Aangepaste kleur</string>
     <string name="morphe_hex_color">Hex-kleur</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Thema-kleuren</string>
-    <string name="morphe_theme_dark_color">Themabg (donker)</string>
-    <string name="morphe_theme_dark_color_description">Achtergrondkleur voor donker thema</string>
-    <string name="morphe_theme_light_color">Themabg (licht)</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Aangepaste branding</string>
-    <string name="morphe_custom_app_name_description">Pas de weergavenaam van de app aan</string>
-    <string name="morphe_custom_app_name_hint">Geef een aangepaste naam op</string>
+    <string name="morphe_patch_options_custom_branding">Aangepast merkf</string>
+    <string name="morphe_patch_options_custom_branding_description">Verander toon van de app</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Appnaam</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Geef aangepaste naam op</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Aangepast icoon</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappenmap met afbeeldingen voor het gebruik als aangepast icoon.
+
+De map moet één of meer van de volgende mappen bevatten, afhankelijk van de DPI van het apparaat:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Elke map moet alle volgende bestanden bevatten:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+De afmetingen van de afbeeldingen moeten het volgende zijn:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Optioneel is het pad uitgerust met een 'drawable' map die enkele van de zwart-witte icoon-bestanden bevat:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Aangepaste headerlogo/afbeelding</string>
-    <string name="morphe_custom_header_description">Pad naar map met aangepaste headerafbeeldingen</string>
+    <string name="morphe_patch_options_custom_header">Aangepaste kophooglogo</string>
+    <string name="morphe_patch_options_custom_header_description">Verander kophooglogo</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Mappenmap met afbeeldingen voor het gebruik als aangepast kophooglogo.
+
+De map moet één of meer van de volgende mappen bevatten, afhankelijk van de DPI van het apparaat:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Elke map moet alle volgende bestanden bevatten:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+De afmetingen van de afbeeldingen moeten het volgende zijn:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Verberg Shorts-opties</string>
-    <string name="morphe_hide_shorts_app_shortcut">Verberg de direct startkortsluiting/v sneltoets van Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Verwijder Shorts uit het langdrukslepen-menus van de launcher</string>
-    <string name="morphe_hide_shorts_widget">Verberg de Shorts-widget</string>
-    <string name="morphe_hide_shorts_widget_description">Verwijder de knop voor Shorts uit de launcher-widget</string>
+    <string name="morphe_patch_options_hide_shorts_features">Verberg Shorts-functies</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Verberg Shorts-app-shortcut</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Verwijder Shorts uit het lang-drukmenu van de launcher</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Verberg Shorts-widget</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Verwijder de Shorts-knop uit het launcher-widget</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patches</string>

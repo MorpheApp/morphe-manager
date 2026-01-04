@@ -86,7 +86,7 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Непідтримувана версія</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Версія APK не є рекомендованою. Продовження може призвести до некоректної роботи додатку.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продовжити в будь-якому випадку</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продовжити в будь-якому разі</string>
     <string name="morphe_patcher_wrong_package_title">Вибрано невірний пакет</string>
     <string name="morphe_patcher_wrong_package_description">Вибраний APK не відповідає додатку, який Ви збиралися патчити.</string>
     <string name="morphe_patcher_expected_package">Очікуваний пакет</string>
@@ -119,12 +119,12 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Повернутися до Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
-    <string name="morphe_settings_return_to_advanced">Змінити на розширений режим</string>
-    <string name="morphe_settings_return_to_advanced_description">Перемикання на повнофункціональний розширений режим</string>
+    <string name="morphe_settings_return_to_expert">Змінити на експертний режим</string>
+    <string name="morphe_settings_return_to_expert_description">Перемкнути до повнофункціонального експертного режиму</string>
     <string name="morphe_share_website">Поділитися вебсайтом</string>
     <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Варіанти зовнішнього вигляду</string>
+    <string name="morphe_appearance_options">Налаштування вигляду</string>
     <string name="morphe_appearance_options_description">Налаштуйте теми, кольори та фонові колірні схеми</string>
     <string name="morphe_background_type">Фонова анімація</string>
     <string name="morphe_background_type_circles">Кола</string>
@@ -135,40 +135,50 @@
     <string name="morphe_background_type_snow">Сніг</string>
     <string name="morphe_background_type_none">Немає</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Використовувати передрелізні патчі</string>
-    <string name="morphe_update_use_patches_prereleases_description">Використовувати останні експериментальні патчі</string>
+    <string name="morphe_update_use_prereleases">Використовувати тестові версії</string>
+    <string name="morphe_update_use_prereleases_description">Отримати раніше доступ до нових патчів та функцій менеджера</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Параметри патчу</string>
+    <string name="morphe_patch_options">Параметри патчів</string>
     <string name="morphe_patch_options_youtube_description">Тема, брендинг, заголовок, і опції Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Параметри теми та брендингу</string>
     <string name="morphe_patch_options_restart_message">Зміна параметрів патчу потребує перепаковки додатку для вступлення в силу</string>
-    <string name="morphe_icon_instructions_title">Інструкції формату іконки</string>
-    <string name="morphe_header_instructions_title">Інструкції формату заголовка</string>
-    <string name="morphe_loading_patch_options">Завантаження параметрів патчу…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Кольори теми</string>
+    <string name="morphe_patch_options_theme_colors_description">Змінити кольор фону</string>
+    <string name="morphe_patch_options_dark_theme_color">Кольор фону темної теми</string>
+    <string name="morphe_patch_options_dark_theme_color_description">\"RRGGBB\" колір у форматі #hex або посилання на ресурс кольору</string>
+    <string name="morphe_patch_options_light_theme_color">Кольор фону світлої теми</string>
+    <string name="morphe_patch_options_light_theme_color_description">\"RRGGBB\" колір у форматі #hex або посилання на ресурс кольору</string>
+    <string name="morphe_patch_options_icon_instructions_title">Інструкції формату значк</string>
+    <string name="morphe_patch_options_header_instructions_title">Інструкції формату головної частини</string>
+    <string name="morphe_patch_options_loading">Завантаження параметрів патчів...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Почекайте, поки пакунок патчу оновлюється</string>
     <string name="morphe_patch_options_load_error">Не вдалося завантажити параметри патчу</string>
-    <string name="morphe_no_options_available">Немає доступних опцій для цього патчу</string>
+    <string name="morphe_patch_options_no_available">Параметри відсутні для цього патчу</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Колір користувача</string>
     <string name="morphe_hex_color">Колір у форматі HEX</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Коліри теми додатку</string>
-    <string name="morphe_theme_dark_color">Фон темної теми</string>
-    <string name="morphe_theme_dark_color_description">Колір фону для темної теми</string>
-    <string name="morphe_theme_light_color">Фон світлої теми</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Кастомний брендинг</string>
-    <string name="morphe_custom_app_name_description">Замінити відображуване ім\'я додатку</string>
-    <string name="morphe_custom_app_name_hint">Ввести кастомне ім\'я</string>
+    <string name="morphe_patch_options_custom_branding">Налаштування бренду</string>
+    <string name="morphe_patch_options_custom_branding_description">Замінити відображувальне ім\'я додатку</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Назва додатку</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Вказати назву пристрою</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Користувацький значок</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Фодер, що містить зображення для використання як користувацький значок.
+
+Спад mentioned folders starter solution color. themed here because"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Кастомний заголовок</string>
-    <string name="morphe_custom_header_description">Шлях до папки з кастомними зображеннями заголовка</string>
+    <string name="morphe_patch_options_custom_header">Користувацький логотип головної частини</string>
+    <string name="morphe_patch_options_custom_header_description">Замінити логотип головної частини</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Фодер, що містить зображення для використання як користувацький логотип головної частини.
+
+Each folder must contain all files pointed flaking for base game styles or modded resources, consider styles can have"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Приховати функції Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Видалити Shorts з довгого тиску запуску в Launcher</string>
-    <string name="morphe_hide_shorts_widget">Приховати виджет Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">Видалити кнопку Shorts з виджета Launcher</string>
+    <string name="morphe_patch_options_hide_shorts_features">Приховати функціонал Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Приховатити ярлик Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Видалити ярлик Shorts з меню довгого натискання запускача</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Приховати виджет Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Видалити кнопку Shorts з виджета запускача</string>
     <!-- Other strings -->
     <string name="patcher">Патчер</string>
     <string name="patches">Патчі</string>

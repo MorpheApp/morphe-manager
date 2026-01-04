@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">Vaše záplaty jsou aktuální</string>
     <string name="morphe_home_patches_are_loading">Záplaty se načítají, prosím čekejte…</string>
     <string name="morphe_home_please_wait">Čekejte, prosím…</string>
-    <string name="morphe_home_open_in_browser">Otevřít v prohlížeči</string>
+    <string name="morphe_home_open_in_browser">Otev\u0159\u0165\u010dit v prohl\u0159\u017ee\u010d\u0165\u0122i</string>
     <string name="morphe_home_failed_to_open_url">Selhání otevření URL</string>
     <string name="morphe_home_date_added">Přidáno</string>
     <string name="morphe_home_date_updated">Aktualizováno</string>
     <string name="morphe_home_check_updates">Kontrolovat</string>
     <string name="morphe_home_unknown">Neznámé</string>
-    <string name="morphe_home_timeline">Historie aktualizací</string>
+    <string name="morphe_home_timeline">Historie aktualizac\u00EC</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Máte původní neupravenou APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pro opravení %1$s potřebujete verzi %2$s (neopraveno)</string>
@@ -56,14 +56,14 @@
     <string name="morphe_home_file_picker_prompt_title">Vyberte staženou APK</string>
     <string name="morphe_home_file_picker_prompt_description">Nyní vyberte soubor APK %1$s, který jste právě stáhli.</string>
     <string name="morphe_home_file_picker_prompt_open">Otevřít stažený soubor APK</string>
-    <string name="morphe_home_recommended_version">Doporučená verze</string>
+    <string name="morphe_home_recommended_version">Doporu\u010den\u0110 verze</string>
     <string name="morphe_patcher_selected_version">Vybraná verze</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Režim root vyžaduje, aby byl před patchováním nainstalován původní APK na vašem zařízení.</string>
     <string name="morphe_root_gmscore_excluded">Patch podpory GmsCore je v root módu vyloučen</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Uložit APK</string>
-    <string name="morphe_patcher_copy_error">Kopírovat chybu</string>
+    <string name="morphe_patcher_copy_error">Chyba při kopírování</string>
     <string name="morphe_patcher_show_error">Zobrazit chybu</string>
     <string name="morphe_patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchů</string>
@@ -86,8 +86,8 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro připojení</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Nepodporovaná verze</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Tato APK není doporučenou verzí aplikace. Pokračování může vést k nefunkční aplikaci.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Pokračovat přesto</string>
-    <string name="morphe_patcher_wrong_package_title">Vybrán špatný balíček</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Pokračovat</string>
+    <string name="morphe_patcher_wrong_package_title">Špatně vybraný balíček</string>
     <string name="morphe_patcher_wrong_package_description">Vybraný APK není pro aplikaci, kterou jste chtěli opravit.</string>
     <string name="morphe_patcher_expected_package">Očekávaný balíček</string>
     <string name="morphe_patcher_selected_package">Vybraný balíček</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Návrat na domovskou stránku Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Návrat do zjednodušeného režimu</string>
-    <string name="morphe_settings_return_to_advanced">Přepnout do pokročilého režimu</string>
-    <string name="morphe_settings_return_to_advanced_description">Přepnout do plně vybaveného pokročilého režimu</string>
-    <string name="morphe_share_website">Sdílet webovou stránku</string>
+    <string name="morphe_settings_return_to_expert">Přepnout na specializovaný režim</string>
+    <string name="morphe_settings_return_to_expert_description">Přepnout na plný výprovozkový specializovaný režim</string>
+    <string name="morphe_share_website">Setwitter / sdélat web</string>
     <string name="morphe_share_website_description">Sdílet oficiální webovou stránku Morphe</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Možnosti vzhledu</string>
     <string name="morphe_appearance_options_description">Personalizujte si motivy, barvy a pozadí.</string>
-    <string name="morphe_background_type">Animace na pozadí</string>
+    <string name="morphe_background_type">Animovaný pozadí</string>
     <string name="morphe_background_type_circles">Kruhy</string>
     <string name="morphe_background_type_rings">Kroužky</string>
     <string name="morphe_background_type_waves">Vlny</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Sněh</string>
     <string name="morphe_background_type_none">Žádná</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Používat pre-release patchy</string>
-    <string name="morphe_update_use_patches_prereleases_description">Používat nejnovější vývojové patchy</string>
+    <string name="morphe_update_use_prereleases">Používejte předprodukční verze</string>
+    <string name="morphe_update_use_prereleases_description">Získejte raný přístup k novým patchům a úpravám manažera</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Nastavení oprav</string>
+    <string name="morphe_patch_options">Možnosti patchování</string>
     <string name="morphe_patch_options_youtube_description">Téma, branding, hlavní menu a možnosti pro Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Možnosti pro téma a branding</string>
     <string name="morphe_patch_options_restart_message">Pro změnu možností opravy je nutno znovu aplikovat opravu.</string>
-    <string name="morphe_icon_instructions_title">Návod k formátu ikony</string>
-    <string name="morphe_header_instructions_title">Návod k formátu hlavního menu</string>
-    <string name="morphe_loading_patch_options">Načtení možností opravs...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Barvy motivu</string>
+    <string name="morphe_patch_options_theme_colors_description">Změnit barvu pozadí</string>
+    <string name="morphe_patch_options_dark_theme_color">Barva pozadí tmavého motivu</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Může být hexová barva (#RRGGBB) nebo odkaz na prostředek barvy</string>
+    <string name="morphe_patch_options_light_theme_color">Barva pozadí světlého motivu</string>
+    <string name="morphe_patch_options_light_theme_color_description">Může být hexová barva (#RRGGBB) nebo odkaz na prostředek barvy</string>
+    <string name="morphe_patch_options_icon_instructions_title">Návody pro formát ikon</string>
+    <string name="morphe_patch_options_header_instructions_title">Návody pro formát hlavičky</string>
+    <string name="morphe_patch_options_loading">Načítám možnosti...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Počkejte, než je balíček oprav aktualizován</string>
     <string name="morphe_patch_options_load_error">Nastavení možností oprav selhalo</string>
-    <string name="morphe_no_options_available">Možnosti nejsou k dispozici pro tuto opravu</string>
+    <string name="morphe_patch_options_no_available">Pro tento patch nejsou k dispozici žádné možnosti</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Vlastní barva</string>
     <string name="morphe_hex_color">Barva ve formátu Hex</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Barvy pro téma</string>
-    <string name="morphe_theme_dark_color">Pozadí pro tmavé téma</string>
-    <string name="morphe_theme_dark_color_description">Požadovaná barva pozadí pro tmavé téma</string>
-    <string name="morphe_theme_light_color">Pozadí pro světlé téma</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Vlastní branding</string>
-    <string name="morphe_custom_app_name_description">Změnit zobrazený název aplikace</string>
-    <string name="morphe_custom_app_name_hint">Zadejte vlastní název</string>
+    <string name="morphe_patch_options_custom_branding">Vlastní branding</string>
+    <string name="morphe_patch_options_custom_branding_description">Změnit název aplikace</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Název aplikace</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Zadejte vlastní název</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Vlastní ikona</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Skladba s obrázky pro použití jako vlastní ikona.
+
+Skladba musí obsahovat jeden nebo více z následujících adresářů, v závislosti na DPI zařízení:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Každý z těchto adresářů musí obsahovat všechny následující soubory:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Rozměry obrázků musí být následující:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Volitelně, cesta může obsahovat složku 'drawable' s cokoli z monokromních souborů ikon:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Vlastní logo hlavního menu</string>
-    <string name="morphe_custom_header_description">Cesta k adresáři obsahujícímu vlastní obrázky hlavního menu</string>
+    <string name="morphe_patch_options_custom_header">Vlastní logotyp hlavičky</string>
+    <string name="morphe_patch_options_custom_header_description">Změnit logotyp hlavičky</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Skladba s obrázky pro použití jako vlastní logotyp hlavičky.
+
+Skladba musí obsahovat jeden nebo více z následujících adresářů, v závislosti na DPI zařízení:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Každý z těchto adresářů musí obsahovat všechny následující soubory:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Rozměry obrázků musí být následující:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Skrýt možnosti Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Skrýt zkratku aplikace Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Odebírajíc způsobí se zkratka Shorts změní v případě dlouhého stisku na úvodní obrazovce.</string>
-    <string name="morphe_hide_shorts_widget">Skrýt živý widget Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">Odebírajíc způsobí se tlačítko pro Shorts v živém widgetu na úvodní obrazovce odstraní.</string>
+    <string name="morphe_patch_options_hide_shorts_features">Skrýt účinky Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Skrýt odkaz aplikace Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Odebrat příkaz Shorts z dlouhého stisku na lodičce</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Skrýt widget Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Odebrat tlačítko Shorts z widgetu lodičky</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Záplaty</string>
