@@ -182,6 +182,7 @@ private fun ApkAvailabilityDialog(
                 secondaryText = stringResource(R.string.morphe_home_apk_availability_yes),
                 onSecondaryClick = onHaveApk,
                 secondaryIcon = Icons.Outlined.Check,
+                layout = DialogButtonLayout.Vertical
             )
         }
     ) {

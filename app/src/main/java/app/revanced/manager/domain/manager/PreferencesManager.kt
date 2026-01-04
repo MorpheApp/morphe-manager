@@ -29,7 +29,7 @@ class PreferencesManager(
     val theme = enumPreference("theme", Theme.SYSTEM)
     val appLanguage = stringPreference("app_language", "system")
 
-    // Morphe: API preferene is currently hidden
+    // Morphe: API preference is currently hidden
     val api = stringPreference("api_url", "https://api.morphe.software")
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
@@ -41,7 +41,9 @@ class PreferencesManager(
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
     )
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
-    val patcherProcessMemoryLimit = intPreference("process_runtime_memory_limit", 1500)
+    // Morphe default value has changed since release and
+    // a different key is needed to ensure old saved data isn't used.
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", 700)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE

@@ -2,11 +2,11 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Yama paketi</string>
-    <string name="morphe_home_greeting_1">Hangi uygulamayı yamak istiyorsunuz?</string>
+    <string name="morphe_home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">YouTube\'u tekrar efsane yapmaya hazır mısınız?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Hazır olun, yamama zamanı geldi</string>
+    <string name="morphe_home_greeting_3">Hazır olun, yamalama zamanı geldi</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Başka bir gün, başka bir reklamlı başyapıt</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -20,7 +20,7 @@
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="morphe_home_greeting_9">Bugünden beri kendini kurtaran uygulamalar</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiş</string>
+    <string name="morphe_home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
     <string name="morphe_home_bundle_type_api">API Paketi</string>
     <string name="morphe_home_update_error">Güncelleme başarısız</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
@@ -46,27 +46,27 @@
     <string name="morphe_home_download_instructions_steps_title">Talimatlar:</string>
     <string name="morphe_home_download_instructions_step1">Aşağıdaki \'%1$s\' düğmesine tıklayın</string>
     <string name="morphe_home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
-    <string name="morphe_home_download_instructions_download_button_toast">İndirmeyi burada değil, web sitesinde yapın 😊</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="morphe_home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'yı &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step3_mount">İndirme tamamlanınca APK\'yı &lt;b&gt;yükleyin&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">İndirme bittikten sonra bu uygulamayı tekrar açın</string>
-    <string name="morphe_home_download_instructions_step4_mount">Orijinal APK\'yi yükledikten sonra bu uygulamayı tekrar açın</string>
+    <string name="morphe_home_download_instructions_step4_mount">Orijinal APK\'yı yükledikten sonra bu uygulamayı tekrar açın</string>
     <string name="morphe_home_download_instructions_continue">APKMirror.com\'a Devam Et</string>
     <!-- Dialog 3: File Picker Prompt -->
-    <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yi seçin</string>
+    <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">Şimdi yeni indirdiğiniz %1$s APK dosyasını seçin.</string>
     <string name="morphe_home_file_picker_prompt_open">İndirdiğim APK dosyasını aç</string>
-    <string name="morphe_home_recommended_version">Önerilen Sürüm</string>
-    <string name="morphe_patcher_selected_version">Seçilen Sürüm</string>
+    <string name="morphe_home_recommended_version">Tavsiye Edilen Sürüm</string>
+    <string name="morphe_patcher_selected_version">Seçilen sürüm</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Kök modun yamalanmadan önce cihazınıza yüklenmiş orijinal APK\'nın yüklü olmasını gerektirir.</string>
+    <string name="morphe_root_install_apk_required">Kök modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK Kaydet</string>
-    <string name="morphe_patcher_copy_error">Kopyalama Hatası</string>
-    <string name="morphe_patcher_show_error">Hatayı Göster</string>
+    <string name="morphe_patcher_copy_error">Kopya hatası</string>
+    <string name="morphe_patcher_show_error">Hata göster</string>
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
-    <string name="morphe_patcher_patches_progress">%1$d / %2$d yama</string>
+    <string name="morphe_patcher_patches_progress">%2$d / %1$d yama</string>
     <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
     <string name="morphe_patcher_installing">Yükleniyor…</string>
     <string name="morphe_patcher_installing_subtitle">Rock\'a hazır olmak üzere! 🎸</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Takmak için aşağıdaki düğmeye basın</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Desteklenmeyen Sürüm</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK, önerilmeyen bir uygulama sürümüdür. Devam etmek işlevsel olmayan bir uygulamayla sonuçlanabilir.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Yine de Devam Et</string>
-    <string name="morphe_patcher_wrong_package_title">Yanlış Paket Seçildi</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Herhangi bir şekilde devam et</string>
+    <string name="morphe_patcher_wrong_package_title">Yanlış paket seçildi</string>
     <string name="morphe_patcher_wrong_package_description">Seçilen APK, yama yapmak istediğiniz uygulama için değildir.</string>
-    <string name="morphe_patcher_expected_package">Beklenen Paket</string>
-    <string name="morphe_patcher_selected_package">Seçilen Paket</string>
+    <string name="morphe_patcher_expected_package">Beklenen paket</string>
+    <string name="morphe_patcher_selected_package">Seçilen paket</string>
     <string name="morphe_patcher_message_1">Uygulamanızı harika bir şeye dönüştürüyoruz… 🏆</string>
     <string name="morphe_patcher_message_2">Eski uygulamalara yeni numaralar öğretiyoruz… 🎩</string>
     <string name="morphe_patcher_message_3">Uygulamanıza dijital bir bakım yapıyoruz… 🔧</string>
@@ -106,7 +106,7 @@
     <string name="morphe_patcher_message_12">Pilot \'Yamalama işlemi devam ediyor\' ışığını söndürene kadar lütfen yerinizde kalın... 💺✈️</string>
     <string name="morphe_patcher_message_13">Yama yapılan uygulamanız pişiyor, sıcak ve taze… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Soğuk bir şekilde.bytecode ... 🤝</string>
+    <string name="morphe_patcher_message_14">Bytecode ile nazikçe pazarlık yapıyoruz... 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Tüm sistemler normal… yama yörüngesi stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Dijital bir limondan suyu sıkmak gibi ekstra güç sıkılıyor… 🍋</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morphe ana sayfasına dön</string>
     <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
-    <string name="morphe_settings_return_to_advanced">Gelişmiş moda geç</string>
-    <string name="morphe_settings_return_to_advanced_description">Tam özellikli gelişmiş moda geçin</string>
-    <string name="morphe_share_website">Websitesini Paylaş</string>
+    <string name="morphe_settings_return_to_expert">Uzman yap&#305;gorunu degi&#350;tir</string>
+    <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
+    <string name="morphe_share_website">Web sitesini paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Görünüm Seçenekleri</string>
+    <string name="morphe_appearance_options">Görünüm seçenekleri</string>
     <string name="morphe_appearance_options_description">Tema, renk ve arka planları özelleştirin</string>
-    <string name="morphe_background_type">Arka Plan Animasyonu</string>
+    <string name="morphe_background_type">Arka plan animasyonu</string>
     <string name="morphe_background_type_circles">Daireler</string>
     <string name="morphe_background_type_rings">Halkalar</string>
     <string name="morphe_background_type_waves">Dalgalar</string>
@@ -135,66 +135,110 @@
     <string name="morphe_background_type_snow">Kar</string>
     <string name="morphe_background_type_none">Yok</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Sürüm öncesi yamaları kullan</string>
-    <string name="morphe_update_use_patches_prereleases_description">En son geliştirme yamalarını kullanın</string>
+    <string name="morphe_update_use_prereleases">Ön yayın sürümlerini kullan</string>
+    <string name="morphe_update_use_prereleases_description">Yeni düzeltmeleri ve yönetici özellikleri erken deneyin</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Beden Sihirbazı Seçenekleri</string>
-    <string name="morphe_patch_options_youtube_description">Tema, marka, başlık ve Hafta Sonu seçenekleri</string>
+    <string name="morphe_patch_options">Yama seçenekleri</string>
+    <string name="morphe_patch_options_youtube_description">Tema, marka, başlık ve Shorts seçenekleri</string>
     <string name="morphe_patch_options_youtube_music_description">Tema ve marka seçenekleri</string>
-    <string name="morphe_patch_options_restart_message">Beden seçeneklerini değiştirmek, uygulamayı yeniden indirmeyi gerektirir</string>
-    <string name="morphe_icon_instructions_title">Beden görüntüsü talimatları</string>
-    <string name="morphe_header_instructions_title">Başlık formatı talimatları</string>
-    <string name="morphe_loading_patch_options">Beden seçeneklerini yüklüyor...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Beden paketini güncellemek için bekleyin</string>
-    <string name="morphe_patch_options_load_error">Beden seçeneklerini yüklemeyi başaramadı</string>
-    <string name="morphe_no_options_available">Bu bedene ait seçenekler bulunmuyor</string>
+    <string name="morphe_patch_options_restart_message">Yama seçeneklerini değiştirmek, uygulamayı yeniden indirmeyi gerektirir</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Uygulama tema renkleri</string>
+    <string name="morphe_patch_options_theme_colors_description">Arka plan rengini değiştir</string>
+    <string name="morphe_patch_options_dark_theme_color">Koyu tema arka plan rengi</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
+    <string name="morphe_patch_options_light_theme_color">Açık tema arka plan rengi</string>
+    <string name="morphe_patch_options_light_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
+    <string name="morphe_patch_options_icon_instructions_title">Simge formatı talimatları</string>
+    <string name="morphe_patch_options_header_instructions_title">Başlık formatı talimatları</string>
+    <string name="morphe_patch_options_loading">Yama seçenekleri yükleniyor...</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Yama paketi güncellenene kadar bekleyin</string>
+    <string name="morphe_patch_options_load_error">Yama seçenekleri yüklenemedi</string>
+    <string name="morphe_patch_options_no_available">Bu yamaya ait seçenekler bulunmuyor</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Özel renk</string>
-    <string name="morphe_hex_color">Alt sekizlik (Hex) renk</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Uygulama Tema Renkleri</string>
-    <string name="morphe_theme_dark_color">Koyu Tema Arka Plan Rengi</string>
-    <string name="morphe_theme_dark_color_description">Koyu tema için arka plan rengi</string>
-    <string name="morphe_theme_light_color">Açık Tema Arka Plan Rengi</string>
+    <string name="morphe_hex_color">Hex rengi</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Özel Marka</string>
-    <string name="morphe_custom_app_name_description">Uygulama gösterim adını değiştirin</string>
-    <string name="morphe_custom_app_name_hint">Özel adı girin</string>
+    <string name="morphe_patch_options_custom_branding">Özel marka tanıtımı</string>
+    <string name="morphe_patch_options_custom_branding_description">Uygulama gösterim adını değiştir</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Uygulama adı</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Özel adı girin</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Özel simge</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Özel simge için görüntülerin olduğu klasörün
+
+Cihaz DPI'sine bağlı olarak, bu klasörden bir veya daha fazlasını içerilmeli:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Her bir klasör şu dosyaları içermek zorundadır:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Görüntü boyutları şu şekilde olmalıdır:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+İsteğe bağlı olarak, yolu 'drawable' klasörü ile monochrome simge dosyalarından birini içerebilir:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Özel Başlık Logosu</string>
-    <string name="morphe_custom_header_description">Özel başlık resimler içeren klasör yolu</string>
+    <string name="morphe_patch_options_custom_header">Özel başlık logosu</string>
+    <string name="morphe_patch_options_custom_header_description">Başlık logosunu değiştir</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Özel başlık logosu için resimlerin olduğu klasöre
+
+Cihaz DPI'sine bağlı olarak, bu klasörlerden bir veya daha fazlasını içerilmeli:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Her bir klasör şu dosyaları içermek zorundadır:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Görüntü boyutları şu şekilde olmalıdır:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Hafta Sonu Özelliklerini Gizle</string>
-    <string name="morphe_hide_shorts_app_shortcut">Hafta Sonu Uygulama Yer İçi Menüsü Nelgesi</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Yer İçi menüde Uygulama’ya uzun basmayı kaldırın</string>
-    <string name="morphe_hide_shorts_widget">Hafta Sonu Ayna\'yı Gizle</string>
-    <string name="morphe_hide_shorts_widget_description">Yer İçi aygıtta Hafta Sonu butonunu kaldırın</string>
+    <string name="morphe_patch_options_hide_shorts_features">Shorts özelliklerini gizle</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Shorts uygulama kısayolunu gizle</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Shorts\'u Başlatıcıdaki Uzun Basma Menüsünden Kaldır</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Shorts araç takımını gizle</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Başlatıcı Araç Takımında Shorts Düğmesini Kaldır</string>
     <!-- Other strings -->
-    <string name="patcher">Yamaleyici</string>
+    <string name="patcher">Yamalayıcı</string>
     <string name="patches">Yamalar</string>
     <string name="patch_bundles">Yama Paketleri</string>
     <string name="patch_bundle">Yama Paketi</string>
     <!-- Morphe -->
     <string name="installer">Kurucu</string>
     <string name="plugin_host_permission_label">Morphe eklenti barındırıcısı</string>
-    <string name="plugin_host_permission_description">Morphe eklentilerine erişimi kontrol etmek için kullanılır. Yalnızca Morphe\'nin buna erişimi vardır.</string>
+    <string name="plugin_host_permission_description">Morphe eklentilerine erişimi kontrol etmek için kullanılır. Yalnızca Morphe\'nun buna erişimi vardır.</string>
     <string name="toast_copied_to_clipboard">Kopyalandı!</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <string name="settings">Ayarlar</string>
     <string name="select_app">Uygulama seçin</string>
     <string name="app_filter_title">Uygulamaları filtrele</string>
-    <string name="app_filter_installed_only">Sadece yüklenmiş</string>
-    <string name="app_filter_patches_available">Güncelleme mevcut</string>
-    <string name="app_filter_no_results">Filtrelerinize uymayan uygulama yok.</string>
+    <string name="app_filter_installed_only">Sadece kurulmuşlar</string>
+    <string name="app_filter_patches_available">Yamalar mevcut</string>
+    <string name="app_filter_no_results">Filtrelerinize uyan bir uygulama yok.</string>
     <string name="new_downloader_plugins_notification">Yeni indirici eklentileri mevcut. Yapılandırmak için buraya tıklayın.</string>
-    <string name="unsupported_architecture_warning">Bu cihaz mimarisinde yama uygulama desteklenmiyor ve büyük olasılıkla başarısız olacaktır.</string>
+    <string name="unsupported_architecture_warning">Bu cihaz mimarisinde uygulama yamama desteklenmiyor ve büyük olasılıkla başarısız olacaktır.</string>
     <string name="import_">İçe Aktar</string>
-    <string name="file_field_not_set">Seçili değil</string>
+    <string name="file_field_not_set">Seçilmedi</string>
     <string name="field_not_set">Ayarlanmamış</string>
     <string name="patches_missing">Eksik</string>
     <string name="patches_error">Hata</string>
-    <string name="patches_error_description">Yama dosyaları yüklenemedi. Hatayı görmek için tıklayın</string>
-    <string name="patches_not_downloaded">Yüklemeler henüz indirilmemiştir. İndirmek için buraya tıklayın</string>
+    <string name="patches_error_description">Yamalar yüklenemedi. Hatayı görmek için tıklayın</string>
+    <string name="patches_not_downloaded">Yamalar henüz indirilmemiştir. İndirmek için buraya tıklayın</string>
     <string name="patches_name_default">Yamalar</string>
     <string name="patches_name_fallback">İsimsiz</string>
     <string name="bundle_uid">Paket UID</string>
@@ -210,27 +254,27 @@
     <string name="app_source_dialog_option_storage">Depolama</string>
     <string name="app_source_dialog_option_storage_description">Yerel depolamadan bir APK seçin</string>
     <string name="app_source_dialog_option_installed_no_root">Yüklü uygulamalar kök erişimi olmadan tekrar yamalanamaz</string>
-    <string name="app_source_dialog_option_installed_version_not_suggested">Sürüm %s, önerilen sürümle eşleşmiyor</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">Sürüm %s önerilen sürümle eşleşmiyor</string>
     <string name="bundle_version_item">Paket önerisi</string>
-    <string name="bundle_version_item_description_default">Varsayılan öneriyi kullanma</string>
+    <string name="bundle_version_item_description_default">Varsayılan öneriyi kullanarak</string>
     <string name="bundle_version_item_description_selected">%1$s (%2$s) takip ediliyor</string>
     <string name="bundle_version_dialog_title">Paket önerisi seçin</string>
-    <string name="bundle_version_dialog_description">APK\'yi indirirken kullanılacak paket önerisini seçin</string>
+    <string name="bundle_version_dialog_description">APK\'yı indirirken kullanılacak paket önerisini seçin</string>
     <string name="bundle_version_dialog_default">Varsayılan öneriyi kullan</string>
     <string name="bundle_version_dialog_default_subtitle">En yaygın uyumlu sürümü otomatik olarak seçin.</string>
     <string name="bundle_version_all_versions">Tüm sürümler</string>
     <string name="bundle_version_no_version">Önerilen sürüm yok</string>
-    <string name="bundle_version_suggested_label">Önerilen versiyon: %1$s</string>
+    <string name="bundle_version_suggested_label">Önerilen sürüm: %1$s</string>
     <string name="bundle_update_manual_available">Güncelleme mevcut</string>
     <string name="bundle_update_manual_available_with_version">Güncelleme mevcut: %1$s</string>
-    <string name="bundle_update_progress">%1$d/%2$d paket işlendi</string>
+    <string name="bundle_update_progress">%2$d/%1$d paket işlendi</string>
     <string name="bundle_update_banner_title">Yama paketleri güncelleniyor</string>
     <string name="bundle_reorder">Paketleri düzenleyin</string>
     <string name="bundle_reorder_title">Yama paketlerini düzenleyin</string>
     <string name="bundle_reorder_description">Paketlerin listede ve yama seçim menüsünde görünme sırasını ayarlamak için tutamağı sürükleyin.</string>
     <string name="bundle_actions_expand">Paket eylemlerini göster</string>
     <string name="bundle_actions_collapse">Paket eylemlerini gizle</string>
-    <string name="patch_bundle_duplicate_name_error">Bu ada sahip bir yama paketi zaten mevcut</string>
+    <string name="patch_bundle_duplicate_name_error">Bu isme sahip bir yama paketi zaten mevcut</string>
     <string name="patch_bundle_missing_error">Bu yama paketi güncellenemedi.</string>
     <string name="bundle_release_page">Sürüm sayfasını aç</string>
     <string name="bundle_release_page_unavailable">Bu paket için sürüm sayfası kullanılamıyor</string>

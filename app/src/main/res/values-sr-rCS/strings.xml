@@ -29,7 +29,7 @@
     <string name="morphe_home_patches_updated">Vaše zakrpe su ažurirane</string>
     <string name="morphe_home_patches_are_loading">Zakrpe se učitavaju, molimo sačekajte…</string>
     <string name="morphe_home_please_wait">Molimo sačekajte…</string>
-    <string name="morphe_home_open_in_browser">Otvori u pregledaču</string>
+    <string name="morphe_home_open_in_browser">Otvori u pregledačāku</string>
     <string name="morphe_home_failed_to_open_url">Neuspešno otvaranje URL-a</string>
     <string name="morphe_home_date_added">Dodato</string>
     <string name="morphe_home_date_updated">Ažurirano</string>
@@ -86,8 +86,8 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Nepodržana verzija</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ovaj APK nije preporučena verzija aplikacije. Nastavak može rezultirati nefunkcionalnom aplikacijom.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Nastavi uprkos svemu</string>
-    <string name="morphe_patcher_wrong_package_title">Pogrešan paket je izabran</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Nastavi ipak</string>
+    <string name="morphe_patcher_wrong_package_title">Pogrešno izabrani paket</string>
     <string name="morphe_patcher_wrong_package_description">Izabrani APK nije za aplikaciju koju ste nameravali da zakrpite.</string>
     <string name="morphe_patcher_expected_package">Očekivani paket</string>
     <string name="morphe_patcher_selected_package">Izabrani paket</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Povratak na Morphe početnu stranicu</string>
     <string name="morphe_settings_return_to_morphe_description">Povratak na pojednostavljeni režim</string>
-    <string name="morphe_settings_return_to_advanced">Pređite na Napredni režim</string>
-    <string name="morphe_settings_return_to_advanced_description">Prebacite se u napredni način rada sa svim funkcijama</string>
-    <string name="morphe_share_website">Podeli veb-sajt</string>
+    <string name="morphe_settings_return_to_expert">Promijeni u ekspertski nač Čarad</string>
+    <string name="morphe_settings_return_to_expert_description">Prebaci na punofunkcionalni ekspertski nač</string>
+    <string name="morphe_share_website">Deli veb-sajt</string>
     <string name="morphe_share_website_description">Podelite zvanični Morphe veb-sajt</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opcije izgleda</string>
     <string name="morphe_appearance_options_description">Prilagođaj teme, boje i pozadinske likove</string>
-    <string name="morphe_background_type">Pozadinska animacija</string>
+    <string name="morphe_background_type">Animacija pozadine</string>
     <string name="morphe_background_type_circles">Krugovi</string>
     <string name="morphe_background_type_rings">Prstenovi</string>
     <string name="morphe_background_type_waves">Talasi</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Sneg</string>
     <string name="morphe_background_type_none">Nijedan</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Koristite pretpreglede zakrpa</string>
-    <string name="morphe_update_use_patches_prereleases_description">Koristite najnovije razvojne zakrpe</string>
+    <string name="morphe_update_use_prereleases">Koristi preizdanja verzije</string>
+    <string name="morphe_update_use_prereleases_description">Dohvatite ranji pristup nošim ispravkama i menadžerskim značajkama</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Izmjene opcija za patch</string>
+    <string name="morphe_patch_options">Opcije začinjavanja</string>
     <string name="morphe_patch_options_youtube_description">Tema, branding, header i opcije za Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opcije za temu i branding</string>
     <string name="morphe_patch_options_restart_message">Ponovno patchovanje aplikacije je potrebno da bi izmjene učinile učinkovitim</string>
-    <string name="morphe_icon_instructions_title">Upute za format ikone</string>
-    <string name="morphe_header_instructions_title">Upute za format header-a</string>
-    <string name="morphe_loading_patch_options">Učitavanje opcija za patch…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Boje teme</string>
+    <string name="morphe_patch_options_theme_colors_description">Izmeni boju pozadine</string>
+    <string name="morphe_patch_options_dark_theme_color">Boja pozadine tamne teme</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Može biti hex boja (#RRGGBB) ili referenca na resurs boje</string>
+    <string name="morphe_patch_options_light_theme_color">Boja pozadine svetle osećajne teme</string>
+    <string name="morphe_patch_options_light_theme_color_description">Može biti hex boja (#RRGGBB) ili referenca na resurs boje</string>
+    <string name="morphe_patch_options_icon_instructions_title">Instrukcije za format ikone</string>
+    <string name="morphe_patch_options_header_instructions_title">Instrukcije za format naslova</string>
+    <string name="morphe_patch_options_loading">Učitavanje opcija začinjavanja…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Izčitavanje sučeka za bundle</string>
     <string name="morphe_patch_options_load_error">Neuspjelo učitavanje opcija za patch</string>
-    <string name="morphe_no_options_available">Nisu dostupne opcije za ovaj patch.</string>
+    <string name="morphe_patch_options_no_available">Nema dostupnih opcija za ovaj začinjivač</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Prilagođena boja</string>
     <string name="morphe_hex_color">Boja u heksadecimalnom formatu</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Boje izgleda</string>
-    <string name="morphe_theme_dark_color">Početna pozadinska boja za tamni izgled</string>
-    <string name="morphe_theme_dark_color_description">Pozadinska boja za tamni izgled aplikacije</string>
-    <string name="morphe_theme_light_color">Početna pozadinska boja za svijetli izgled</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Prilagođeno brandiranje</string>
-    <string name="morphe_custom_app_name_description">Promijeni prikazano ime aplikacije</string>
-    <string name="morphe_custom_app_name_hint">Unesite prilagođeno ime</string>
+    <string name="morphe_patch_options_custom_branding">Prilagođene markiranje</string>
+    <string name="morphe_patch_options_custom_branding_description">Izmeni ime prikaza aplikacije</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Naziv aplikacije</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Unesi prilagođeno ime</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Prilagođena ikona</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Foldjer sa slikama za korišćenje kao prilagođena ikona.
+
+Foldjer mora da sadrži jedan ili više od sledećih foldjeva, zavisno od DPI uređaja:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Svaki od foldjeva mora da sadrži sledeće fajlove:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Dimenzije slika moraju da budu sledeće:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Ispostavqeno, putanja sadrži foldjer 'drawable' sa monohromaticnim datotečima ikona:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Prilagođeni logotip header-a</string>
-    <string name="morphe_custom_header_description">Put do mape koja sadrži prilagođene slike za header</string>
+    <string name="morphe_patch_options_custom_header">Prilagođeno naslovno logo</string>
+    <string name="morphe_patch_options_custom_header_description">Izmeni naslovno logo</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Foldjer sa slikama za korišćenje kao prilagođeno naslovno logo.
+
+Foldjer mora da sadrži jedan ili više od sledećih foldjeva, zavisno od DPI uređaja:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Svaki od foldjeva mora da sadrži sledeće fajlove:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Dimenzije slika moraju da budu sledeće:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Sakrij značajke Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">Sakrij Shorts aplikacijski shortcut</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Uklonite Shorts iz pojavnog menija</string>
-    <string name="morphe_hide_shorts_widget">Sakrij Shorts widget</string>
-    <string name="morphe_hide_shorts_widget_description">Uklonite gum button za Shorts iz launcher widgeta</string>
+    <string name="morphe_patch_options_hide_shorts_features">Sakrij Shorts funkcije</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Sakrij Shorts aplikacijski skraćivač</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Ukloni Shorts iz menija dužine pritiska launcher</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Sakrij Shorts widget</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Ukloni dugme za Shorts iz launcher widgeta</string>
     <!-- Other strings -->
     <string name="patcher">Alat za zakrpljavanje</string>
     <string name="patches">Zakrpe</string>

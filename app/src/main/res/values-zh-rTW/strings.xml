@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">您的修補程式已是最新版本</string>
     <string name="morphe_home_patches_are_loading">正在載入修補程式，請稍候…</string>
     <string name="morphe_home_please_wait">請稍候…</string>
-    <string name="morphe_home_open_in_browser">在瀏覽器中開啟</string>
+    <string name="morphe_home_open_in_browser">在瀏覽器中開啟連結</string>
     <string name="morphe_home_failed_to_open_url">無法開啟網址</string>
     <string name="morphe_home_date_added">已新增</string>
     <string name="morphe_home_date_updated">已更新</string>
     <string name="morphe_home_check_updates">檢查更新</string>
     <string name="morphe_home_unknown">未知</string>
-    <string name="morphe_home_timeline">更新歷程記錄</string>
+    <string name="morphe_home_timeline">更新歷史</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始的未修補 APK 嗎？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修補%1$s,您需要%2$s版本(未修補)</string>
@@ -57,7 +57,7 @@
     <string name="morphe_home_file_picker_prompt_description">現在請選取您剛下載的 %1$s APK 檔案。</string>
     <string name="morphe_home_file_picker_prompt_open">開啟我下載的 APK 檔案</string>
     <string name="morphe_home_recommended_version">建議版本</string>
-    <string name="morphe_patcher_selected_version">選取版本</string>
+    <string name="morphe_patcher_selected_version">所選版本</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root 模式需要裝置上先安裝原始 APK 才能進行修補。</string>
     <string name="morphe_root_gmscore_excluded">GmsCore 支援性修補在 Root 模式中已排除</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">按下下方按鈕即可掛載</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">不支援的版本</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">此 APK 並非建議的應用程式版本。繼續進行可能會導致應用程式無法運作。</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">仍要繼續</string>
-    <string name="morphe_patcher_wrong_package_title">選取的套件錯誤</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">繼續</string>
+    <string name="morphe_patcher_wrong_package_title">選擇錯誤</string>
     <string name="morphe_patcher_wrong_package_description">選取的 APK 並非您打算修補的應用程式。</string>
-    <string name="morphe_patcher_expected_package">預期套件</string>
-    <string name="morphe_patcher_selected_package">選取的套件</string>
+    <string name="morphe_patcher_expected_package">預期的包</string>
+    <string name="morphe_patcher_selected_package">所選包</string>
     <string name="morphe_patcher_message_1">正在將您的應用程式轉變成令人驚豔的內容… 🏆</string>
     <string name="morphe_patcher_message_2">教導舊應用程式新技巧… 🎩</string>
     <string name="morphe_patcher_message_3">為您的應用程式進行數位調校… 🔧</string>
@@ -119,12 +119,12 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">返回 Morphe 主頁</string>
     <string name="morphe_settings_return_to_morphe_description">返回簡化模式</string>
-    <string name="morphe_settings_return_to_advanced">變更為進階模式</string>
-    <string name="morphe_settings_return_to_advanced_description">切換到功能齊全的進階模式</string>
+    <string name="morphe_settings_return_to_expert">切换至專家模式</string>
+    <string name="morphe_settings_return_to_expert_description">切換至功能完整的專家模式</string>
     <string name="morphe_share_website">分享網站</string>
     <string name="morphe_share_website_description">分享官方 Morphe 網站</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">外觀選項</string>
+    <string name="morphe_appearance_options">外觀設定</string>
     <string name="morphe_appearance_options_description">自定義主題、顏色與背景</string>
     <string name="morphe_background_type">背景動畫</string>
     <string name="morphe_background_type_circles">圓圈</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">键盘</string>
     <string name="morphe_background_type_none">無</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">使用預發行版本套件</string>
-    <string name="morphe_update_use_patches_prereleases_description">使用最新的開發套件</string>
+    <string name="morphe_update_use_prereleases">Use 預發版本</string>
+    <string name="morphe_update_use_prereleases_description">及早使用最新的補丁與管理員功能</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">補丁選項</string>
+    <string name="morphe_patch_options">修補選項</string>
     <string name="morphe_patch_options_youtube_description">主題、品牌標題、縮短片選項</string>
     <string name="morphe_patch_options_youtube_music_description">主題和品牌標題選項</string>
     <string name="morphe_patch_options_restart_message">變更補丁選項需要重新安裝應用才能生效</string>
-    <string name="morphe_icon_instructions_title">圖示格式說明</string>
-    <string name="morphe_header_instructions_title">標題列格式說明</string>
-    <string name="morphe_loading_patch_options">正在載入補丁選項中...</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">應用主題顏色</string>
+    <string name="morphe_patch_options_theme_colors_description">變更背景顏色</string>
+    <string name="morphe_patch_options_dark_theme_color">深色主題背景顏色</string>
+    <string name="morphe_patch_options_dark_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
+    <string name="morphe_patch_options_light_theme_color">淺色主題背景顏色</string>
+    <string name="morphe_patch_options_light_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
+    <string name="morphe_patch_options_icon_instructions_title">圖標格式說明</string>
+    <string name="morphe_patch_options_header_instructions_title">標題格式說明</string>
+    <string name="morphe_patch_options_loading">正在載入修補選項…</string>
     <string name="morphe_patch_options_waiting_for_bundle">請等待補丁程式包更新</string>
     <string name="morphe_patch_options_load_error">載入補丁選項失敗</string>
-    <string name="morphe_no_options_available">此補丁沒有可用的選項</string>
+    <string name="morphe_patch_options_no_available">此修補程式無可用選項</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">自定義顏色</string>
     <string name="morphe_hex_color">十六進制顏色</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">應用程式主題顏色</string>
-    <string name="morphe_theme_dark_color">深色主題背景</string>
-    <string name="morphe_theme_dark_color_description">深色主題的背景顏色</string>
-    <string name="morphe_theme_light_color">淺色主題背景</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">自定義品牌</string>
-    <string name="morphe_custom_app_name_description">變更應用程式顯示名稱</string>
-    <string name="morphe_custom_app_name_hint">輸入自定義名稱</string>
+    <string name="morphe_patch_options_custom_branding">自定義品牌</string>
+    <string name="morphe_patch_options_custom_branding_description">變更應用顯示名稱</string>
+    <string name="morphe_patch_options_custom_branding_app_name">應用程式名稱</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">輸入自定義名稱</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">自定義圖標</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"用於自定義圖标的圖像文件夾。
+
+此文件夾必須包含以下一個或多個文件夾，具體取決於設備的 DPI：
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+每個文件夾必須包含以下所有文件：
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+圖像尺寸必須如下：
+- mipmap-mdpi: 108x108 像素
+- mipmap-hdpi: 162x162 像素
+- mipmap-xhdpi: 216x216 像素
+- mipmap-xxhdpi: 324x324 像素
+- mipmap-xxxhdpi: 432x432 像素
+
+選項性地，路徑中包含一個 'drawable' 文件夾，其中包含任何單色圖标文件：
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">自定義標題列圖標</string>
-    <string name="morphe_custom_header_description">包含自定義標題列影像的資料夾路徑</string>
+    <string name="morphe_patch_options_custom_header">自定義標題圖標</string>
+    <string name="morphe_patch_options_custom_header_description">變更標題圖標</string>
+    <string name="morphe_patch_options_custom_header_instruction">"用於自定義標題圖标的圖像文件夾。
+
+此文件夾必須包含以下一個或多個文件夾，具體取決於設備的 DPI：
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+每個文件夾必須包含以下所有文件：
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+圖像尺寸必須如下：
+- drawable-hdpi: 194x72 像素
+- drawable-xhdpi: 258x96 像素
+- drawable-xxhdpi: 387x144 像素
+- drawable-xxxhdpi: 512x192 像素"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">隱藏縮短片功能</string>
-    <string name="morphe_hide_shorts_app_shortcut">隱藏縮短片捷徑</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">從圖示長按選單移除縮短片</string>
-    <string name="morphe_hide_shorts_widget">隱藏縮短片小部件</string>
-    <string name="morphe_hide_shorts_widget_description">從圖示小部件中移除縮短片按鈕</string>
+    <string name="morphe_patch_options_hide_shorts_features">隱藏 Shorts 功能</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">隱藏 Shorts 應用快捷方式</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">將 Shorts 從發起者長按菜單中移除</string>
+    <string name="morphe_patch_options_hide_shorts_widget">隱藏 Shorts 畫廊部件</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">將發起者部件上的 Shorts 按鈕移除</string>
     <!-- Other strings -->
     <string name="patcher">修補程式</string>
     <string name="patches">修補程式</string>

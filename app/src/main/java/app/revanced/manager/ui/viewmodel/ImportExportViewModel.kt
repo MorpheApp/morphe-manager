@@ -894,7 +894,7 @@ class ImportExportViewModel(
 
     private inner class Export : SelectionAction {
         override val activityContract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
-        override val activityArg = "urv_patch_selection.json"
+        override val activityArg = "morphe_patch_selection.json"
         override suspend fun execute(bundleUid: Int, location: Uri) = uiSafe(
             app,
             R.string.export_patch_selection_fail,

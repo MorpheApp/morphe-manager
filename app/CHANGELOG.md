@@ -1,3 +1,27 @@
+# app [1.1.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-01-04)
+
+
+### Bug Fixes
+
+* Change process runtime memory limit ([e17ac20](https://github.com/MorpheApp/morphe-manager/commit/e17ac200ac5fe0407be7f78b1d64a144402438cf))
+
+
+### Features
+
+* Change home screen pre-release setting to include Manager updates ([#53](https://github.com/MorpheApp/morphe-manager/issues/53)) ([f2397da](https://github.com/MorpheApp/morphe-manager/commit/f2397da0eb6c12dc8c00d50b58aa7f46e648e191))
+
+# app [1.1.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0...v1.1.0-dev.1) (2026-01-03)
+
+
+### Bug Fixes
+
+* Always use a vertical button layout ([e6f69c8](https://github.com/MorpheApp/morphe-manager/commit/e6f69c82bf0dcc6a832166523e15401886c26e1c))
+
+
+### Features
+
+* Add localization to patch options ([#48](https://github.com/MorpheApp/morphe-manager/issues/48)) ([0e7a203](https://github.com/MorpheApp/morphe-manager/commit/0e7a203819e629f231293896396d5154585dc402))
+
 # app 1.0.0 (2026-01-01)
 
 

@@ -57,8 +57,8 @@ fun AppearanceSection(
             ) {
                 IconTextRow(
                     icon = Icons.Outlined.SwapHoriz,
-                    title = stringResource(R.string.morphe_settings_return_to_advanced),
-                    description = stringResource(R.string.morphe_settings_return_to_advanced_description),
+                    title = stringResource(R.string.morphe_settings_return_to_expert),
+                    description = stringResource(R.string.morphe_settings_return_to_expert_description),
                     modifier = Modifier.padding(12.dp),
                     trailingContent = {
                         Icon(

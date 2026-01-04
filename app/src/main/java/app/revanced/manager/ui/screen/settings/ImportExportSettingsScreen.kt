@@ -299,7 +299,7 @@ fun ImportExportSettingsScreen(
                 ExpressiveSettingsDivider()
                 GroupItem(
                     onClick = {
-                        exportBundlesLauncher.launch("urv_patch_bundles.json")
+                        exportBundlesLauncher.launch("morphe_patch_bundles.json")
                     },
                     headline = R.string.export_patch_bundles,
                     description = R.string.export_patch_bundles_description
@@ -307,7 +307,7 @@ fun ImportExportSettingsScreen(
                 ExpressiveSettingsDivider()
                 GroupItem(
                     onClick = {
-                        exportProfilesLauncher.launch("urv_patch_profiles.json")
+                        exportProfilesLauncher.launch("morphe_patch_profiles.json")
                     },
                     headline = R.string.export_patch_profiles,
                     description = R.string.export_patch_profiles_description
@@ -315,7 +315,7 @@ fun ImportExportSettingsScreen(
                 ExpressiveSettingsDivider()
                 GroupItem(
                     onClick = {
-                        exportSettingsLauncher.launch("urv_settings.json")
+                        exportSettingsLauncher.launch("morphe_settings.json")
                     },
                     headline = R.string.export_manager_settings,
                     description = R.string.export_manager_settings_description

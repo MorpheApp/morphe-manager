@@ -29,13 +29,13 @@
     <string name="morphe_home_patches_updated">Ihre Patches sind auf dem neuesten Stand</string>
     <string name="morphe_home_patches_are_loading">Patches werden geladen, bitte warten Sie...</string>
     <string name="morphe_home_please_wait">Bitte warten Sie...</string>
-    <string name="morphe_home_open_in_browser">Im Browser öffnen</string>
+    <string name="morphe_home_open_in_browser">In Browser öffnen</string>
     <string name="morphe_home_failed_to_open_url">URL konnte nicht geöffnet werden</string>
     <string name="morphe_home_date_added">Hinzugefügt</string>
     <string name="morphe_home_date_updated">Aktualisiert</string>
     <string name="morphe_home_check_updates">Prüfen</string>
     <string name="morphe_home_unknown">Unbekannt</string>
-    <string name="morphe_home_timeline">Update-Verlauf</string>
+    <string name="morphe_home_timeline">Versionshistorie</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Haben Sie die ursprüngliche, unveränderte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Um %1$s zu patchen, benötigst du Version %2$s (ungepatcht)</string>
@@ -57,7 +57,7 @@
     <string name="morphe_home_file_picker_prompt_description">Wählen Sie nun die %1$s APK-Datei aus, die Sie gerade heruntergeladen haben.</string>
     <string name="morphe_home_file_picker_prompt_open">APK-Datei öffnen, die ich heruntergeladen habe</string>
     <string name="morphe_home_recommended_version">Empfohlene Version</string>
-    <string name="morphe_patcher_selected_version">Ausgewählte Version</string>
+    <string name="morphe_patcher_selected_version">Wähle eine Version aus</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root-Modus erfordert, dass die ursprüngliche APK-Datei auf Ihrem Gerät installiert ist, bevor Sie mit dem Patchen beginnen.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore-Unterstützungspatch ist im Root-Modus ausgeschlossen</string>
@@ -86,8 +86,8 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Drücken Sie die Schaltfläche unten, um zu mounten</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Nicht unterstützte Version</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Diese APK ist keine empfohlene App-Version. Das Fortfahren kann zu einer nicht funktionierenden App führen.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Trotzdem fortfahren</string>
-    <string name="morphe_patcher_wrong_package_title">Falsches Paket ausgewählt</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Dennoch fortfahren</string>
+    <string name="morphe_patcher_wrong_package_title">Falscher Pakettyp ausgewählt</string>
     <string name="morphe_patcher_wrong_package_description">Die ausgewählte APK ist nicht für die Anwendung bestimmt, die Sie patchen wollten.</string>
     <string name="morphe_patcher_expected_package">Erwartetes Paket</string>
     <string name="morphe_patcher_selected_package">Ausgewähltes Paket</string>
@@ -119,12 +119,12 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Zurück zu Morphe Home</string>
     <string name="morphe_settings_return_to_morphe_description">Zurück zum vereinfachten Modus</string>
-    <string name="morphe_settings_return_to_advanced">Wechseln Sie in den erweiterten Modus</string>
-    <string name="morphe_settings_return_to_advanced_description">Wechseln Sie in den voll ausgestatteten erweiterten Modus</string>
+    <string name="morphe_settings_return_to_expert">Wechsel zu Experten-Modus</string>
+    <string name="morphe_settings_return_to_expert_description">Wechsle zum vollständig ausgestatteten Experten-Modus</string>
     <string name="morphe_share_website">Website teilen</string>
     <string name="morphe_share_website_description">Teile die offizielle Morphe-Website</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Erscheinungsoptionen</string>
+    <string name="morphe_appearance_options">Aussehen-Optionen</string>
     <string name="morphe_appearance_options_description">Anpassen von Themes, Farben und Hintergründen</string>
     <string name="morphe_background_type">Hintergrundanimation</string>
     <string name="morphe_background_type_circles">Kreise</string>
@@ -135,41 +135,84 @@
     <string name="morphe_background_type_snow">Schnee</string>
     <string name="morphe_background_type_none">Keine</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Pre-Release-Patches verwenden</string>
-    <string name="morphe_update_use_patches_prereleases_description">Verwende die neuesten Entwicklungs-Patches</string>
+    <string name="morphe_update_use_prereleases">Verwenden Sie Prereleaseversionen.</string>
+    <string name="morphe_update_use_prereleases_description">Erhalten Sie einen ÂfrÂigen Zugang zu neuen Patches und Manager-Funktionen.</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch-Optionen</string>
     <string name="morphe_patch_options_youtube_description">Theme, Branding, Header und Shorts-Optionen</string>
     <string name="morphe_patch_options_youtube_music_description">Theme- und Branding-Optionen</string>
     <string name="morphe_patch_options_restart_message">Änderungen an den Patch-Optionen erfordern einen erneuten Patchvorgang, um angewendet zu werden.</string>
-    <string name="morphe_icon_instructions_title">Symbolformatanweisungen</string>
-    <string name="morphe_header_instructions_title">Headerformatanweisungen</string>
-    <string name="morphe_loading_patch_options">Lade Patch-Optionen…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">App-Ãtöne</string>
+    <string name="morphe_patch_options_theme_colors_description">Hintergrundfarbe ändern</string>
+    <string name="morphe_patch_options_dark_theme_color">Hintergrundfarbe des dunklen Themas</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Kann eine hexadezimale Farbe (#RRGGBB) oder eine Referenz auf ein Farbressource sein</string>
+    <string name="morphe_patch_options_light_theme_color">Hintergrundfarbe des hellen Themas</string>
+    <string name="morphe_patch_options_light_theme_color_description">Kann eine hexadezimale Farbe (#RRGGBB) oder eine Referenz auf ein Farbressource sein</string>
+    <string name="morphe_patch_options_icon_instructions_title">Symbolanleitung</string>
+    <string name="morphe_patch_options_header_instructions_title">Titelansichtsanleitung</string>
+    <string name="morphe_patch_options_loading">Lade Patch-Optionen\u2026</string>
     <string name="morphe_patch_options_waiting_for_bundle">Warten Sie, bis das Patch-Bundle aktualisiert wurde</string>
     <string name="morphe_patch_options_load_error">Fehler beim Laden der Patch-Optionen</string>
-    <string name="morphe_no_options_available">Keine Optionen für diesen Patch verfügbar.</string>
+    <string name="morphe_patch_options_no_available">Keineoptionenfür diesen Patch verfügbar.</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Eigener Farbton</string>
     <string name="morphe_hex_color">Hex-Farbcode</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">App-Thema-Farben</string>
-    <string name="morphe_theme_dark_color">Hintergrundfarbe für dunkles Thema</string>
-    <string name="morphe_theme_dark_color_description">Hintergrundfarbe für dunkles Thema</string>
-    <string name="morphe_theme_light_color">Hintergrundfarbe für helles Thema (nur YouTube)</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Benutzername der App</string>
-    <string name="morphe_custom_app_name_description">Geben Sie einen benutzerdefinierten Namen ein</string>
-    <string name="morphe_custom_app_name_hint">Benutzerdefinierter Icon-Pfad</string>
+    <string name="morphe_patch_options_custom_branding">Benutzerdefinierter&#13;ichtlinien</string>
+    <string name="morphe_patch_options_custom_branding_description">App-Anzeigename ändern</string>
+    <string name="morphe_patch_options_custom_branding_app_name">App-Name</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Benutzerdefinierter Name eingeben</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Benutzerdefinierte Symbolleiste</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Ordner mit Symbolbildern zur Verwendung als benutzerdefiniertes Symbol.
+
+Dieser Ordner muss mindestens einen der folgenden Ordner enthalten, entsprechend der DPI-Einstellung des Geräts:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Jeder dieser Ordner muss alle folgenden Dateien enthalten:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Die Bildabmessungen müssen wie folgt sein:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Optional enthält der Pfad einen 'drawable'-Ordner mit einer der folgenden monochromen Symboldateien:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Benutzerdefinierter Header-Logo
-Benutzerdefinierter Header (YouTube)</string>
-    <string name="morphe_custom_header_description">Der Pfad zum Verzeichnis, der benutzerdefinierte Header-Bilder enthält</string>
+    <string name="morphe_patch_options_custom_header">Benutzerdefiniertes Headerlogo</string>
+    <string name="morphe_patch_options_custom_header_description">Headerlogo ändern</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Ordner mit Bildern zur Verwendung als benutzerdefiniertes Headerlogo.
+
+Dieser Ordner muss mindestens einen der folgenden Ordner enthalten, entsprechend der DPI-Einstellung des Geräts:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Jeder dieser Ordner muss alle folgenden Dateien enthalten:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Die Bildabmessungen müssen wie folgt sein:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Shorts-Funktionen ausblenden</string>
-    <string name="morphe_hide_shorts_app_shortcut">Shorts-App-Launcher-Shortcut ausblenden</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Entferne den Shorts-Button aus dem langen Menü des Launchers</string>
-    <string name="morphe_hide_shorts_widget">Shorts-Widget ausblenden</string>
-    <string name="morphe_hide_shorts_widget_description">Entferne den Shorts-Button aus dem Launcher-Widget</string>
+    <string name="morphe_patch_options_hide_shorts_features">YouTube Shorts-Funktionen ausblenden</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">YouTube Shorts-Shortcut ausblenden</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">YouTube Shorts aus dem Lang-Press-Menü des Start-Managers entfernen</string>
+    <string name="morphe_patch_options_hide_shorts_widget">YouTube Shorts-Widget ausblenden</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">YouTube Shorts-Button aus dem Launcher-Widget entfernen</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patches</string>

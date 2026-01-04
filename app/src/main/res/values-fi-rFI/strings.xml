@@ -35,7 +35,7 @@
     <string name="morphe_home_date_updated">Päivitetty</string>
     <string name="morphe_home_check_updates">Tarkista</string>
     <string name="morphe_home_unknown">Tuntematon</string>
-    <string name="morphe_home_timeline">Päivityshistoria</string>
+    <string name="morphe_home_timeline">Muokkaushistoria</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>
@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Tallenna APK</string>
-    <string name="morphe_patcher_copy_error">Kopiointivirhe</string>
+    <string name="morphe_patcher_copy_error">Kopioivahtikuvausvirhe</string>
     <string name="morphe_patcher_show_error">Näytä virhe</string>
     <string name="morphe_patcher_error_copied">Virhe kopioitu leikepöydälle</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d korjausta</string>
@@ -86,10 +86,10 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Paina alla olevaa painiketta liittääksesi</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Tuetun version vika</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Tämä APK ei ole suositeltu sovellusversio. Jatkamalla sovellus ei välttämättä toimi.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Jatka joka tapauksessa</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Jatka kaikinpuiksi</string>
     <string name="morphe_patcher_wrong_package_title">Väärä paketti valittu</string>
     <string name="morphe_patcher_wrong_package_description">Valittu APK ei ole tarkoitettu sovellukselle, jota yritit paikata.</string>
-    <string name="morphe_patcher_expected_package">Odotettu paketti</string>
+    <string name="morphe_patcher_expected_package">Odottava paketti</string>
     <string name="morphe_patcher_selected_package">Valittu paketti</string>
     <string name="morphe_patcher_message_1">Muunnetaan sovelluksesi mahtavaksi… 🏆</string>
     <string name="morphe_patcher_message_2">Opetetaan vanhoille sovelluksille uusia temppuja… 🎩</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Palaa Morphen kotisivulle</string>
     <string name="morphe_settings_return_to_morphe_description">Palaa yksinkertaistettuun tilaan</string>
-    <string name="morphe_settings_return_to_advanced">Vaihda edistyneeseen tilaan</string>
-    <string name="morphe_settings_return_to_advanced_description">Vaihda täysin varusteltuun edistyneeseen tilaan</string>
+    <string name="morphe_settings_return_to_expert">Vaihda experttimoodiin</string>
+    <string name="morphe_settings_return_to_expert_description">Siirry täysiarvoiseen experttimodeeseen</string>
     <string name="morphe_share_website">Jaa verkkosivusto</string>
     <string name="morphe_share_website_description">Jaa virallinen Morphe-verkkosivusto</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Käyttöliittymäasetukset</string>
+    <string name="morphe_appearance_options">Asetusmuodot</string>
     <string name="morphe_appearance_options_description">Mukaila teemoja, värejä ja tauleviä</string>
-    <string name="morphe_background_type">Taustaanimaatio</string>
+    <string name="morphe_background_type">Taustan animointi</string>
     <string name="morphe_background_type_circles">Ympyrät</string>
     <string name="morphe_background_type_rings">Renkaat</string>
     <string name="morphe_background_type_waves">Aallot</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Lumimaalia</string>
     <string name="morphe_background_type_none">Ei mitään</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Käytä esijulkaisuversioiden korjauspäivityksiä</string>
-    <string name="morphe_update_use_patches_prereleases_description">Käytä uusimpia kehitysversioiden korjauspäivityksiä</string>
+    <string name="morphe_update_use_prereleases">Käytä beta-versiota</string>
+    <string name="morphe_update_use_prereleases_description">Pääset käyttämään uusia korjauksia ja hallintaominaisuksia jo ennen virallista julkaisua</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patch-valinnat</string>
+    <string name="morphe_patch_options">Patch-asetukset</string>
     <string name="morphe_patch_options_youtube_description">Teema, brändi, pääte, ja Shorts-valinnat</string>
     <string name="morphe_patch_options_youtube_music_description">Teema- ja brändivalinnat</string>
     <string name="morphe_patch_options_restart_message">Patch-valintojen muutos vaatii sovelluksen uusikäynnistyksen uusien asetusten effectöimiseksi.</string>
-    <string name="morphe_icon_instructions_title">Kukkainfoormanaukset</string>
-    <string name="morphe_header_instructions_title">Pääte-kuvafoormanaukset</string>
-    <string name="morphe_loading_patch_options">Ladataan patch-valintoja…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Sovelluksen teeman värit</string>
+    <string name="morphe_patch_options_theme_colors_description">Muuta taustan väri</string>
+    <string name="morphe_patch_options_dark_theme_color">Tumman teeman taustaväri</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Vaihtoehtona voi olla myös heksaväri (#RRGGBB) tai väripoikanen</string>
+    <string name="morphe_patch_options_light_theme_color">Käyttäjän määritetty taustaväri</string>
+    <string name="morphe_patch_options_light_theme_color_description">Vaihtoehtona voi olla myös heksaväri (#RRGGBB) tai väripoikanen</string>
+    <string name="morphe_patch_options_icon_instructions_title">Ikonien muotoilutiedo</string>
+    <string name="morphe_patch_options_header_instructions_title">Otsikon muotoilutiedo</string>
+    <string name="morphe_patch_options_loading">Ladataan patch-asetuksia...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Odota patch-kansion päivitystä</string>
     <string name="morphe_patch_options_load_error">Patch-valintojen lataus epäonnistui.</string>
-    <string name="morphe_no_options_available">Tälle patchille ei ole saatavilla valintoja.</string>
+    <string name="morphe_patch_options_no_available">Tälle patchille ei ole saatavilla asetuksia</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Mukautettu väri</string>
     <string name="morphe_hex_color">HEX-väri</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">Sovelluksen teeman värit</string>
-    <string name="morphe_theme_dark_color">Tumman teeman taustaväri</string>
-    <string name="morphe_theme_dark_color_description">Taustaväri tummalle teemalle</string>
-    <string name="morphe_theme_light_color">Kohtalaisen teeman taustaväri</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Mukautettu brändi</string>
-    <string name="morphe_custom_app_name_description">Muuta sovelluksen näyttönimeä</string>
-    <string name="morphe_custom_app_name_hint">Syötä mukainen nimi</string>
+    <string name="morphe_patch_options_custom_branding">Mukauta brändiä</string>
+    <string name="morphe_patch_options_custom_branding_description">Muuta sovelluksen näyttöimeen</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Sovelluksen nimi</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Kirjoita mukainen nimi</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Mukainen ikoni</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Hakemisto kuvilla, jotka käytetään mukaan ikonnina.
+
+Hakemisto täytyy sisältää joko yhden tai useampia alla olevia hakemistoja sen mukaan millainen DPI-aste yksiköllä on laite:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Kussakin hakemistossa on oltava kaikki alla olevat tiedostot (muoto PNG):
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Kuvien koot tulee olla seuraavat:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Toivomaltaan, osoitteessa on 'drawable' hakemisto monokroma-ikonitiedoilla:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Mukainen päätekuva</string>
-    <string name="morphe_custom_header_description">Mukaiset päätekuva-ikoniit sisältävä kansio</string>
+    <string name="morphe_patch_options_custom_header">Mukainen headerlogi</string>
+    <string name="morphe_patch_options_custom_header_description">Muuta headerlogia</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Hakemisto kuvilla, jotka käytetään mukaan headerlogina.
+
+Hakemisto täytyy sisältää joko yhden tai useampia alla olevia hakemistoja sen mukaan millainen DPI-aste yksiköllä on laite:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Kussakin hakemistossa on oltava kaikki alla olevat tiedostot (muoto PNG):
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Kuvien koot tulee olla seuraavat:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Piilota Shorts-ominaisuudet</string>
-    <string name="morphe_hide_shorts_app_shortcut">Piilota Shorts-sovellusliukku</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Poista Shorts-laajennus käyttöliittymän pitkän painallusvalikon.</string>
-    <string name="morphe_hide_shorts_widget">Piilota Shorts-ikkunakuva</string>
-    <string name="morphe_hide_shorts_widget_description">Poista Shorts-painike käyttöliittymän widget-asiakkaasta.</string>
+    <string name="morphe_patch_options_hide_shorts_features">Piilottele Shorts-ominaisuudet</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Piilottele Shorts-sovellusliukun</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Poista Shorts-laajakäyttäjän pitävä liukun</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Piilota Shorts-ikkuna</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Poista Shorts-painike laajakäyttäjän pitävästä liukusta</string>
     <!-- Other strings -->
     <string name="patcher">Paikkaaja</string>
     <string name="patches">Korjaustiedostot</string>

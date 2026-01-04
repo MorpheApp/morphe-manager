@@ -4,17 +4,17 @@
     <string name="morphe_home_bundles">ชุดแพตช์</string>
     <string name="morphe_home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">พร้อมแล้วที่จะทำให้ YouTube กลับมาเป็นตำนานอีกครั้งหรือไม่</string>
+    <string name="morphe_home_greeting_2">พร้อมหรือยังที่จะให้ YouTube กลับมาเป็นตำนานอีกครั้ง</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <string name="morphe_home_greeting_3">คาดเข็มขัดนะ เวลาเพิ่มแพ็ตช์แล้ว</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">อีกวันหนึ่งผ่านไป อีกผลงานระดับมาสเตอร์กับการบล็อกโฆษณา</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">อยากดูโฆษณาหรือ? ผมก็ไม่ใช่</string>
+    <string name="morphe_home_greeting_5">อยากดูโฆษณาไหม? ผมไม่เอาล่ะหนึ่ง</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">มาทำให้แอปพลิเคชันของคุณมีพฤติกรรมที่ดีขึ้นกันเถอะ</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">คาดการณ์ของวันนี้: โอกาสแก้ไขแอปพลิเคชันร้อยเปอร์เซ็นต์</string>
+    <string name="morphe_home_greeting_7">พยากรณ์วันนี้: การแพตซ์แอปพลิเคชันมีโอกาสทั้งหมด 100%</string>
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">พร้อมที่จะเปลี่ยนสิ่งที่ไม่น่าประทับใจให้กลายเป็นสุดยอดไหม?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -29,7 +29,7 @@
     <string name="morphe_home_patches_updated">แพตช์ของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="morphe_home_patches_are_loading">แพตช์กำลังโหลด โปรดรอสักครู่…</string>
     <string name="morphe_home_please_wait">โปรดรอสักครู่…</string>
-    <string name="morphe_home_open_in_browser">เปิดในเบราว์เซอร์</string>
+    <string name="morphe_home_open_in_browser">Open in browser</string>
     <string name="morphe_home_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="morphe_home_date_added">เพิ่มแล้ว</string>
     <string name="morphe_home_date_updated">อัปเดตแล้ว</string>
@@ -56,14 +56,14 @@
     <string name="morphe_home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
     <string name="morphe_home_file_picker_prompt_description">ตอนนี้ ให้เลือกไฟล์ APK %1$s ที่คุณเพิ่งดาวน์โหลด</string>
     <string name="morphe_home_file_picker_prompt_open">เปิดไฟล์ APK ที่ฉันดาวน์โหลด</string>
-    <string name="morphe_home_recommended_version">เวอร์ชันที่แนะนำ</string>
+    <string name="morphe_home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="morphe_patcher_selected_version">เวอร์ชันที่เลือก</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">โหมด Root จำเป็นต้องติดตั้ง APK ต้นฉบับไว้ในอุปกรณ์ของคุณก่อนทำการแพตช์</string>
     <string name="morphe_root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">บันทึก APK</string>
-    <string name="morphe_patcher_copy_error">ข้อผิดพลาดในการคัดลอก</string>
+    <string name="morphe_patcher_save_apk">บันทึกไฟล์ APK</string>
+    <string name="morphe_patcher_copy_error">ข้อผิดพลาดในการสำรองข้อมูล</string>
     <string name="morphe_patcher_show_error">แสดงข้อผิดพลาด</string>
     <string name="morphe_patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d แพตช์</string>
@@ -86,11 +86,11 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อเมานต์</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">เวอร์ชันไม่รองรับ</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">APK นี้ไม่ใช่แอปเวอร์ชันที่แนะนำ การดำเนินการต่ออาจส่งผลให้แอปไม่สามารถทำงานได้</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">ดำเนินการต่อ</string>
-    <string name="morphe_patcher_wrong_package_title">เลือกแพ็คเกจผิด</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">ดำเนินการต่อไปอย่างไร</string>
+    <string name="morphe_patcher_wrong_package_title">แอปพลิเคชันที่เลือกผิด</string>
     <string name="morphe_patcher_wrong_package_description">APK ที่เลือกไม่ใช่สำหรับแอปพลิเคชันที่คุณต้องการแพตช์</string>
-    <string name="morphe_patcher_expected_package">แพ็คเกจที่คาดไว้</string>
-    <string name="morphe_patcher_selected_package">แพ็คเกจที่เลือก</string>
+    <string name="morphe_patcher_expected_package">แอปพลิเคชันที่คาดหวัง</string>
+    <string name="morphe_patcher_selected_package">แอปพลิเคชันที่เลือก</string>
     <string name="morphe_patcher_message_1">กำลังแปลงแอปของคุณให้เป็นสิ่งที่ยอดเยี่ยม… 🏆</string>
     <string name="morphe_patcher_message_2">กำลังสอนแอปเก่าให้ทำสิ่งใหม่ๆ… 🎩</string>
     <string name="morphe_patcher_message_3">กำลังปรับปรุงแอปของคุณแบบดิจิทัล… 🔧</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">กลับหน้าหลัก Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">กลับสู่โหมดธรรมดา</string>
-    <string name="morphe_settings_return_to_advanced">เปลี่ยนเป็นโหมดขั้นสูง</string>
-    <string name="morphe_settings_return_to_advanced_description">สลับไปยังโหมดขั้นสูงที่พร้อมใช้งานเต็มรูปแบบ</string>
+    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
+    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
     <string name="morphe_share_website">แชร์เว็บไซต์</string>
     <string name="morphe_share_website_description">แชร์เว็บไซต์ทางการของ Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">ตัวเลือกการปรากฏตัว</string>
+    <string name="morphe_appearance_options">ตัวเลือกการดู</string>
     <string name="morphe_appearance_options_description">ปรับแต่งธีม,สี,และพื้นหลัง</string>
-    <string name="morphe_background_type">ภาพเคลื่อนไหวพื้นหลัง</string>
+    <string name="morphe_background_type">การเคลื่อนไหวของพื้นหลัง</string>
     <string name="morphe_background_type_circles">วงกลม</string>
     <string name="morphe_background_type_rings">วงแหวน</string>
     <string name="morphe_background_type_waves">คลื่น</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">눈 (Snow)</string>
     <string name="morphe_background_type_none">ไม่มี</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">ใช้แพตช์เวอร์ชันทดลอง</string>
-    <string name="morphe_update_use_patches_prereleases_description">ใช้แพตช์ล่าสุดสำหรับการพัฒนา</string>
+    <string name="morphe_update_use_prereleases">การใช้ ร่างทางการ ให้คะแนน</string>
+    <string name="morphe_update_use_prereleases_description">ทดลองใช้ early access ต่อร่างทางการต่างๆ และฟีเจอร์ที่ผู้จัดการ</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">ตัวเลือก Morphe Patch</string>
+    <string name="morphe_patch_options">ตัวเลือกการซ่อมแซม (Patch)</string>
     <string name="morphe_patch_options_youtube_description">ธีมส่วนบุคคล, สติ๊กเกอร์ส่วนบุคคล, ตัวเลือกหัวเรื่อง, และตัวเลือก Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">ตัวเลือกธีมและสติ๊กเกอร์ส่วนบุคคล</string>
     <string name="morphe_patch_options_restart_message">การเปลี่ยนตัวเลือก Morphe Patch ต้อง reinstall aplikasi untuk berlaku</string>
-    <string name="morphe_icon_instructions_title">instruksi format ikon</string>
-    <string name="morphe_header_instructions_title">instruksi format header</string>
-    <string name="morphe_loading_patch_options">กำลังโหลดตัวเลือกการติดตั้ง…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">สีของธีมแอปพลิเคชัน</string>
+    <string name="morphe_patch_options_theme_colors_description">เปลี่ยนสีพื้นหลัง</string>
+    <string name="morphe_patch_options_dark_theme_color">สีพื้นหลังธีมที่มืด</string>
+    <string name="morphe_patch_options_dark_theme_color_description">สามารถเป็นสีในรูปแบบ헥ซาดีเซමอล (#RRGGBB) หรืออ้างอิงทรัพยากรสี</string>
+    <string name="morphe_patch_options_light_theme_color">สีพื้นหลังธีมที่สว่าง</string>
+    <string name="morphe_patch_options_light_theme_color_description">สามารถเป็นสีในรูปแบบ헥ซาดีเซමอล (#RRGGBB) หรืออ้างอิงทรัพยากรสี</string>
+    <string name="morphe_patch_options_icon_instructions_title">ข้อบังคับสำหรับรูปภาพไอคอน</string>
+    <string name="morphe_patch_options_header_instructions_title">ข้อบังคับสำหรับรูปภาพหัวข้อ</string>
+    <string name="morphe_patch_options_loading">Loading ตัวเลือกการซ่อมแซม…</string>
     <string name="morphe_patch_options_waiting_for_bundle">รอให้การติดตั้งส่งกลับข้อมูลส่วนเสริม</string>
     <string name="morphe_patch_options_load_error">การโหลดตัวเลือกการติดตั้งล้มเหลว</string>
-    <string name="morphe_no_options_available">ไม่มีตัวเลือกสำหรับตัวติดตั้งนี้</string>
+    <string name="morphe_patch_options_no_available">ไม่มีตัวเลือกที่พร้อมใช้งานสำหรับการซ่อมแซมนี้</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">สีแบบกำหนดเอง</string>
     <string name="morphe_hex_color">สี hexadecimal</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">สีธีมแอปพลิเคชัน</string>
-    <string name="morphe_theme_dark_color">สีพื้นหลังธีมเข้ม</string>
-    <string name="morphe_theme_dark_color_description">สีพื้นหลังสำหรับธีมเข้ม</string>
-    <string name="morphe_theme_light_color">สีพื้นหลังธีมสว่าง</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">การปรับแต่งแอปพลิเคชันแบบกำหนดเอง</string>
-    <string name="morphe_custom_app_name_description">เปลี่ยนชื่อที่แสดงของแอปพลิเคชัน</string>
-    <string name="morphe_custom_app_name_hint">ป้อนชื่อแบบกำหนดเอง</string>
+    <string name="morphe_patch_options_custom_branding">ยี่ห brands แบบกำหนดเอง</string>
+    <string name="morphe_patch_options_custom_branding_description">เปลี่ยนชื่อการติดตั้งแอปพลิเคชัน</string>
+    <string name="morphe_patch_options_custom_branding_app_name">ชื่อแอป</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">ป้อนชื่อแบบกำหนดเอง</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">ไอคอนแบบกำหนดเอง</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"โฟlder се відповідає зображеннями для користувача.
+
+Цей каталог має містити один або кілька з наступних каталогів, залежно від DPI пристрою:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+У кожного каталогу має містити всі наступні файли:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Виміри зображень мають бути такі:
+- mipmap-mdpi: 108x108 пікселей
+- mipmap-hdpi: 162x162 пікселей
+- mipmap-xhdpi: 216x216 пікселей
+- mipmap-xxhdpi: 324x324 пікселей
+- mipmap-xxxhdpi: 432x432 пікселей
+
+Опційно, шлях містить каталог 'drawable' з будь-якими файлами іконок у форматі монохромних SVG векторних graphics:
+morphe_adaptive_monochrome_custom.svg
+morphe_notification_icon_custom.svg명"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">โลโก้ป้อนข้อมูลแบบกำหนดเอง</string>
-    <string name="morphe_custom_header_description">ตำแหน่งโฟลเดอร์ที่มีไฟล์ภาพป้อนข้อมูลแบบกำหนดเอง</string>
+    <string name="morphe_patch_options_custom_header">Логотип головного меню користувача (Header)</string>
+    <string name="morphe_patch_options_custom_header_description">Змінити логотип головного меню</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Catalog с зображеннями для користувача.
+
+Цей каталог має містити один або кілька з наступних каталогів, залежно від DPI пристрою:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+У кожного каталогу має містити всі наступні файли:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Виміри зображень мають бути такі:
+- drawable-hdpi: 194x72 пікселей
+- drawable-xhdpi: 258x96 пікселей
+- drawable-xxhdpi: 387x144 пікселей
+- drawable-xxxhdpi: 512x192 пікселей"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">ซ่อนคุณสมบัติของ Shorts</string>
-    <string name="morphe_hide_shorts_app_shortcut">ซ่อนลิ้งก์ขั้นเร็วของ Shorts บนหน้าหลักแอปพลิเคชัน</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">เอา Shorts ออกจากเมนูการขึ้นรูป (long-press) บนหน้าหลักแอปพลิเคชัน</string>
-    <string name="morphe_hide_shorts_widget">ซ่อนส่วนติดตั้งของ Shorts</string>
-    <string name="morphe_hide_shorts_widget_description">เอาปุ่ม Shorts ออกจากส่วนประกอบของแอปพลิเคชันบนหน้าหลัก</string>
+    <string name="morphe_patch_options_hide_shorts_features">Приховати функції Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Видалити Shorts з довгою нажаттям в Launcher</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Приховати виджет Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Приховати кнопку Shorts у виджеті Launcher</string>
     <!-- Other strings -->
     <string name="patcher">ผู้แก้ไข</string>
     <string name="patches">แพตช์</string>
@@ -586,12 +630,14 @@
     <string name="device_memory_limit_format">%1$dMB (ปกติ) - %2$dMB (ใหญ่)</string>
     <string name="patches_force_download">บังคับดาวน์โหลดชุดแพตช์ทั้งหมด</string>
     <string name="patches_reset">รีเซ็ตชุดแพตช์</string>
+    <string name="storage">ที่เก็บข้อมูล</string>
     <string name="no_patch_found">ไม่พบแพตช์ โปรดตรวจสอบแพตช์ของคุณ</string>
     <string name="tab_apps">แอป</string>
     <string name="tab_patches">ชุดแพตช์</string>
     <string name="tab_profiles">โปรไฟล์แพตช์</string>
     <string name="delete">ลบ</string>
     <string name="disable">ปิดการใช้งาน</string>
+    <string name="enable">อนุญาต</string>
     <string name="patch_bundle_disabled_toast">ปิด %d แพ็คเกจ</string>
     <string name="patch_bundle_enabled_toast">เปิด %d แพ็คเกจ</string>
     <string name="patches_disable_single_dialog_description">ปิด \'%s\'?</string>

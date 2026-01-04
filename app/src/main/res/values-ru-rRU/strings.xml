@@ -86,8 +86,8 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Нажмите кнопку ниже, чтобы смонтировать</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Неподдерживаемая версия</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Этот APK не является рекомендуемой версией приложения. Продолжение может привести к неработоспособности приложения.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продолжить в любом случае</string>
-    <string name="morphe_patcher_wrong_package_title">Выбран неверный пакет</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продолжить по-любому</string>
+    <string name="morphe_patcher_wrong_package_title">Неверно выбранный пакет</string>
     <string name="morphe_patcher_wrong_package_description">Выбранный APK предназначен не для того приложения, которое вы намеревались исправить.</string>
     <string name="morphe_patcher_expected_package">Ожидаемый пакет</string>
     <string name="morphe_patcher_selected_package">Выбранный пакет</string>
@@ -119,14 +119,14 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Вернуться в Morphe домой</string>
     <string name="morphe_settings_return_to_morphe_description">Вернуться в упрощенный режим</string>
-    <string name="morphe_settings_return_to_advanced">Переключиться в расширенный режим</string>
-    <string name="morphe_settings_return_to_advanced_description">Переключитесь в полнофункциональный расширенный режим</string>
+    <string name="morphe_settings_return_to_expert">Сменить на режим эксперта</string>
+    <string name="morphe_settings_return_to_expert_description">Переключиться на полномасштабный режим эксперта</string>
     <string name="morphe_share_website">Поделиться веб-сайтом</string>
     <string name="morphe_share_website_description">Поделитесь официальным веб-сайтом Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Настройки внешнего вида</string>
+    <string name="morphe_appearance_options">Настройки оформления</string>
     <string name="morphe_appearance_options_description">Настройте темы, цвета и фоны</string>
-    <string name="morphe_background_type">Фоновая анимация</string>
+    <string name="morphe_background_type">Анимация фона</string>
     <string name="morphe_background_type_circles">Круги</string>
     <string name="morphe_background_type_rings">Кольца</string>
     <string name="morphe_background_type_waves">Волны</string>
@@ -135,40 +135,84 @@
     <string name="morphe_background_type_snow">Снег</string>
     <string name="morphe_background_type_none">Нет</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Использовать предварительные исправления</string>
-    <string name="morphe_update_use_patches_prereleases_description">Используйте последние исправления для разработки</string>
+    <string name="morphe_update_use_prereleases">Использовать предварительные релизы</string>
+    <string name="morphe_update_use_prereleases_description">Получить ранний доступ к новым патчам и функциям продвинутого менеджера</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Патч-опции</string>
+    <string name="morphe_patch_options">Настройки патча</string>
     <string name="morphe_patch_options_youtube_description">Тема, branding, заголовок и опции Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Опции темы и branding</string>
     <string name="morphe_patch_options_restart_message">Изменение параметров патча требует переустановки приложения для применения</string>
-    <string name="morphe_icon_instructions_title">Инструкции по формату иконки</string>
-    <string name="morphe_header_instructions_title">Инструкции по формату заголовка</string>
-    <string name="morphe_loading_patch_options">Загрузка параметров патча…</string>
+    <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Цвета темы</string>
+    <string name="morphe_patch_options_theme_colors_description">Изменить цвет фона</string>
+    <string name="morphe_patch_options_dark_theme_color">Цвет фона для темной темы</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Может быть цветом в формате HEX (#RRGGBB) или ссылкой на ресурс цвета</string>
+    <string name="morphe_patch_options_light_theme_color">Цвет фона для светлой темы</string>
+    <string name="morphe_patch_options_light_theme_color_description">Может быть цветом в формате HEX (#RRGGBB) или ссылкой на ресурс цвета</string>
+    <string name="morphe_patch_options_icon_instructions_title">Инструкции по формату иконки</string>
+    <string name="morphe_patch_options_header_instructions_title">Инструкции по формату заголовка</string>
+    <string name="morphe_patch_options_loading">Загрузка настроек патча...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Ожидание обновления пакета патча</string>
     <string name="morphe_patch_options_load_error">Ошибка загрузки параметров патча</string>
-    <string name="morphe_no_options_available">Нет доступных опций для этого патча</string>
+    <string name="morphe_patch_options_no_available">Нет доступных настроек для этого патча</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Custom color</string>
     <string name="morphe_hex_color">Hex color</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">App Theme Colors</string>
-    <string name="morphe_theme_dark_color">Dark Theme Background</string>
-    <string name="morphe_theme_dark_color_description">Background color for dark theme</string>
-    <string name="morphe_theme_light_color">Light Theme Background</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Custom Branding</string>
-    <string name="morphe_custom_app_name_description">Назначить custom name</string>
-    <string name="morphe_custom_app_name_hint">Введите custom name</string>
+    <string name="morphe_patch_options_custom_branding">Кастомное брендинг</string>
+    <string name="morphe_patch_options_custom_branding_description">Изменить отображаемое имя приложения</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Название приложения</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Введите кастомное имя</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Кастомная иконка</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Папка с изображениями для использования в качестве кастомной иконки.
+
+Папка должна содержать один или несколько из следующих папок, в зависимости от DPI устройства:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+В каждой из папок должны присутствовать все следующие файлы:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Размеры изображений должны соответствовать следующим требованиям:
+- mipmap-mdpi: 108x108 пикс.
+- mipmap-hdpi: 162x162 пикс.
+- mipmap-xhdpi: 216x216 пикс.
+- mipmap-xxhdpi: 324x324 пикс.
+- mipmap-xxxhdpi: 432x432 пикс.
+
+Напольным образом может быть указан также путь к папке 'drawable', содержащей один из файлов монотонных иконок:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Custom Header Logo</string>
-    <string name="morphe_custom_header_description">Путь к папке с custom header images</string>
+    <string name="morphe_patch_options_custom_header">Кастомный заголовок</string>
+    <string name="morphe_patch_options_custom_header_description">Изменить заголовок</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Папка с изображениями для использования в качестве кастомного заголовка.
+
+Папка должна содержать один или несколько из следующих папок, в зависимости от DPI устройства:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+В каждой из папок должны присутствовать все следующие файлы:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Размеры изображений должны соответствовать следующим требованиям:
+- drawable-hdpi: 194x72 пикс.
+- drawable-xhdpi: 258x96 пикс.
+- drawable-xxhdpi: 387x144 пикс.
+- drawable-xxxhdpi: 512x192 пикс"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Скрыть Shorts Features</string>
-    <string name="morphe_hide_shorts_app_shortcut">Скрыть Shorts App Shortcut</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
-    <string name="morphe_hide_shorts_widget">Скрыть Shorts Widget</string>
-    <string name="morphe_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
+    <string name="morphe_patch_options_hide_shorts_features">Скрыть функции Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Скрыть ярлык Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Убрать Shorts из меню долгого нажатия запуска</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Скрыть виджет Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Убрать кнопку Shorts из виджета запуска</string>
     <!-- Other strings -->
     <string name="patcher">Патчер</string>
     <string name="patches">Патчи</string>
