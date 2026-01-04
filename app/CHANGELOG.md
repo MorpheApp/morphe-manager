@@ -1,3 +1,10 @@
+## app [1.1.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.0...v1.1.1-dev.1) (2026-01-04)
+
+
+### Bug Fixes
+
+* Import keystore using default password ([1c0c1f6](https://github.com/MorpheApp/morphe-manager/commit/1c0c1f6799762946574d3eb54b0ea433145fe469))
+
 # app [1.1.0](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0...v1.1.0) (2026-01-04)
 
 
