@@ -1,5 +1,4 @@
 name: Crowdin pull and merge
-
 on:
   schedule:
     - cron: "0 */12 * * *" # every 12 hours
@@ -13,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout dev
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: dev
           fetch-depth: 0
@@ -37,7 +36,6 @@ jobs:
         run: |
           git checkout -B crowdin
           git push --force origin crowdin
-
   merge:
     name: Squash merge Crowdin into Dev
     if: github.event_name == 'workflow_dispatch'
@@ -46,27 +44,35 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout dev branch
-      - name: Checkout dev
-        uses: actions/checkout@v5
+      # Step 1: Checkout crowdin branch to run checks on it
+      - name: Checkout crowdin branch
+        uses: actions/checkout@v6
         with:
-          ref: dev
+          ref: crowdin
           fetch-depth: 0
           clean: true
 
-      # Step 2: Fetch the latest crowdin branch
-      - name: Fetch crowdin branch
-        run: git fetch origin crowdin
-
-      # Step 3: Compile Android app to check string resources
+      # Step 2: Compile Android app to check string resources
       - name: Compile Android app to check resources
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew :app:assembleDebug
+          ./gradlew :app:build
 
-      # Step 4: Squash merge Crowdin into dev
+      # Step 3: Checkout dev branch to prepare for merging
+      - name: Checkout dev branch for merge
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+          fetch-depth: 0
+          clean: true
+
+      # Step 4: Fetch the latest crowdin branch (already checked)
+      - name: Fetch crowdin branch
+        run: git fetch origin crowdin
+
+      # Step 5: Squash merge crowdin into dev
       - name: Squash merge crowdin into dev
         run: |
           git config --local user.name "Crowdin Bot"
