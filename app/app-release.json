@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-01-04T01:55:28.399Z",
-  "description": "# app [1.1.0](https://github.com/MorpheApp/morphe-manager/compare/v1.0.0...v1.1.0) (2026-01-04)\n\n\n### Bug Fixes\n\n* Always use a vertical button layout ([e6f69c8](https://github.com/MorpheApp/morphe-manager/commit/e6f69c82bf0dcc6a832166523e15401886c26e1c))\n* Change process runtime memory limit ([e17ac20](https://github.com/MorpheApp/morphe-manager/commit/e17ac200ac5fe0407be7f78b1d64a144402438cf))\n\n\n### Features\n\n* Add localization to patch options ([#48](https://github.com/MorpheApp/morphe-manager/issues/48)) ([0e7a203](https://github.com/MorpheApp/morphe-manager/commit/0e7a203819e629f231293896396d5154585dc402))\n* Change home screen pre-release setting to include Manager updates ([#53](https://github.com/MorpheApp/morphe-manager/issues/53)) ([f2397da](https://github.com/MorpheApp/morphe-manager/commit/f2397da0eb6c12dc8c00d50b58aa7f46e648e191))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.0/morphe-manager-1.1.0.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.0/morphe-manager-1.1.0.apk.asc",
-  "version": "1.1.0"
+  "created_at": "2026-01-04T18:05:30.877Z",
+  "description": "## app [1.1.1-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2026-01-04)\n\n\n### Bug Fixes\n\n* Fix crash on Android 10 when selecting APK in Expert mode ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([faa5290](https://github.com/MorpheApp/morphe-manager/commit/faa5290abe3409f7208eeac46d0c3dbc5deb6d9a))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.1-dev.2/morphe-manager-1.1.1-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.1-dev.2/morphe-manager-1.1.1-dev.2.apk.asc",
+  "version": "1.1.1-dev.2"
 }

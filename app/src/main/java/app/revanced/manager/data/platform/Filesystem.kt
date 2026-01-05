@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
 import android.os.storage.StorageManager
+import android.os.storage.StorageVolume
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import app.revanced.manager.util.FilenameUtils
@@ -40,17 +41,22 @@ class Filesystem(private val app: Application) {
 
     fun storageRoots(): List<StorageRoot> {
         val roots = LinkedHashMap<String, StorageRoot>()
-        val storageManager = app.getSystemService(Context.STORAGE_SERVICE) as StorageManager
-        storageManager.storageVolumes.forEach { volume ->
-            val directory = volume.directory ?: return@forEach
-            val path = directory.toPath()
-            val label = volume.getDescription(app).takeIf { it.isNotBlank() } ?: path.toString()
-            roots.putIfAbsent(
-                path.toString(),
-                StorageRoot(path = path, label = label, isRemovable = volume.isRemovable)
-            )
+
+        // Only use StorageManager API on Android 11+ where getDirectory() is available
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val storageManager = app.getSystemService(Context.STORAGE_SERVICE) as StorageManager
+            storageManager.storageVolumes.forEach { volume ->
+                val directory = volume.directory ?: return@forEach
+                val path = directory.toPath()
+                val label = volume.getDescription(app).takeIf { it.isNotBlank() } ?: path.toString()
+                roots.putIfAbsent(
+                    path.toString(),
+                    StorageRoot(path = path, label = label, isRemovable = volume.isRemovable)
+                )
+            }
         }
 
+        // Always add primary external storage as fallback
         val primaryPath = Environment.getExternalStorageDirectory().toPath()
         roots.putIfAbsent(
             primaryPath.toString(),

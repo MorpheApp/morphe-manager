@@ -47,7 +47,7 @@
     <string name="morphe_home_download_instructions_step1">下の \"%1$s\" ボタンを押してください</string>
     <string name="morphe_home_download_instructions_step2_part1">スクロールしてこのボタンを押してください</string>
     <string name="morphe_home_download_instructions_download_button_toast">ここではなく、Web サイトにあるボタンを押してください😊</string>
-    <string name="morphe_home_download_instructions_step3">ダウンロードしても、APK を<b>インストールしないでください</b></string>
+    <string name="morphe_home_download_instructions_step3">「ダウンロードが終わるまで待って、APK は  &lt;b&gt;絶対にインストールしないで&lt;b&gt;</string>
     <string name="morphe_home_download_instructions_step3_mount">ダウンロードしたら、APK を &lt;b&gt;インストールしてください&lt;b&gt;</string>
     <string name="morphe_home_download_instructions_step4">ダウンロードしたら、このアプリを再度開いてください</string>
     <string name="morphe_home_download_instructions_step4_mount">APK をインストールした後、このアプリを再度開いてください</string>
@@ -135,6 +135,7 @@
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
     <!-- Update Section -->
+    <string name="morphe_update_use_prereleases">のプレリリース版を使う</string>
     <string name="morphe_update_use_prereleases_description">既発のパッチやマネージャーフィーチャーに早期アクセスする</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
@@ -161,6 +162,7 @@
     <string name="morphe_patch_options_custom_branding">Custom branding</string>
     <string name="morphe_patch_options_custom_branding_description">アプリの名前を変更</string>
     <string name="morphe_patch_options_custom_branding_app_name">アプリ名</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">カスタム名を入力</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">カスタム アイコン</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"画像をカスタムアイコンとして使用するためのフォルダです。
 
@@ -188,9 +190,28 @@ morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
     <string name="morphe_patch_options_custom_header">カスタムヘッダー ロゴ</string>
     <string name="morphe_patch_options_custom_header_description">ヘッダーのロゴを変更する</string>
+    <string name="morphe_patch_options_custom_header_instruction">"画像を使用するためのフォルダー。
+
+DPIに応じて、次のフォルダーのいずれかを含む必要があります:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+各フォルダーには、次のファイルが含まれている必要があります:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+画像サイズは次のようにしてください:
+- drawable-hdpi: 194x72 ピクセル
+- drawable-xhdpi: 258x96 ピクセル
+- drawable-xxhdpi: 387x144 ピクセル
+- drawable-xxxhdpi: 512x192 ピクセル"</string>
     <!-- Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_features">ショート機能を隠す</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">ショートの項目を隠す</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">ホーム画面を長押ししたときのメニューからショートの項目を消す</string>
+    <string name="morphe_patch_options_hide_shorts_widget">ショートウィジェットを隠す</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">ホーム画面のウィジェットからショートボタンを消す</string>
     <!-- Other strings -->
     <string name="patcher">パッチャー</string>
@@ -343,7 +364,7 @@ morphe_notification_icon_custom.xml"</string>
     <string name="universal_patches_safeguard">ユニバーサルパッチの使用・表示</string>
     <string name="universal_patches_safeguard_description">ユニバーサルパッチを表示し、使用を許可する</string>
     <string name="universal_patches_profile_blocked_title">ユニバーサルパッチが無効です</string>
-    <string name="universal_patches_profile_blocked_description">このパッチプロファイルにはユニバーサルパッチが含まれています。「%1$s」を高度な設定で有効にして使用してください。</string>
+    <string name="universal_patches_profile_blocked_description">このパッチ設定にはユニバーサルパッチが含まれています。「%1$s」を高度な設定で有効にして使用してください。</string>
     <string name="universal_patches_app_blocked_description">このアプリにはユニバーサルパッチが含まれています。「%1$s」を高度な設定で有効にして続行してください。</string>
     <string name="import_keystore">キーストアをインポート</string>
     <string name="import_keystore_description">キーストアをインポート</string>
@@ -374,13 +395,13 @@ morphe_notification_icon_custom.xml"</string>
     <string name="import_patch_bundles_banner_title">パッチソースをインポート中</string>
     <string name="import_patch_bundles_banner_subtitle">%2$d 件中 %1$d 件処理済み</string>
     <string name="import_patch_bundles_banner_steps">%2$d ステップ中 %1$d</string>
-    <string name="import_patch_profiles">パッチプロファイルをインポート</string>
-    <string name="import_patch_profiles_description">JSON ファイルからパッチプロファイルをインポート</string>
-    <string name="import_patch_profiles_fail">パッチプロファイルをインポートできませんでした： %s</string>
-    <string name="import_patch_profiles_success">%d 件のパッチプロファイルをインポートしました</string>
-    <string name="import_patch_profiles_partial">%1$d 件のパッチプロファイルをインポートし、%2$d 件をスキップしました</string>
-    <string name="import_patch_profiles_skipped">%d 件の重複パッチプロファイルをスキップしました</string>
-    <string name="import_patch_profiles_none">パッチプロファイルはインポートされませんでした</string>
+    <string name="import_patch_profiles">パッチ設定をインポート</string>
+    <string name="import_patch_profiles_description">JSON ファイルからパッチ設定をインポート</string>
+    <string name="import_patch_profiles_fail">パッチ設定をインポートできませんでした： %s</string>
+    <string name="import_patch_profiles_success">%d 件のパッチ設定をインポートしました</string>
+    <string name="import_patch_profiles_partial">%1$d 件のパッチ設定をインポートし、%2$d 件をスキップしました</string>
+    <string name="import_patch_profiles_skipped">%d 件の重複パッチ設定をスキップしました</string>
+    <string name="import_patch_profiles_none">パッチ設定はインポートされませんでした</string>
     <string name="import_manager_settings">マネージャー設定をインポート</string>
     <string name="import_manager_settings_description">JSON ファイルからマネージャー設定をインポート</string>
     <string name="import_manager_settings_fail">マネージャー設定をインポートできませんでした： %s</string>
@@ -404,11 +425,11 @@ morphe_notification_icon_custom.xml"</string>
     <string name="bundle_changelog_error">変更履歴を読み込めませんでした: %s</string>
     <string name="bundle_changelog_retry">再試行</string>
     <string name="bundle_changelog_empty">変更履歴がありません</string>
-    <string name="export_patch_profiles">パッチプロファイルをエクスポート</string>
-    <string name="export_patch_profiles_description">JSON ファイルに全てのパッチプロファイルをエクスポート</string>
-    <string name="export_patch_profiles_fail">パッチプロファイルをエクスポートできませんでした： %s</string>
-    <string name="export_patch_profiles_success">%d 個のパッチプロファイルをエクスポートしました</string>
-    <string name="export_patch_profiles_empty">エクスポートするパッチプロファイルがありません</string>
+    <string name="export_patch_profiles">パッチ設定をエクスポート</string>
+    <string name="export_patch_profiles_description">JSON ファイルに全てのパッチ設定をエクスポート</string>
+    <string name="export_patch_profiles_fail">パッチ設定をエクスポートできませんでした： %s</string>
+    <string name="export_patch_profiles_success">%d 個のパッチ設定をエクスポートしました</string>
+    <string name="export_patch_profiles_empty">エクスポートするパッチ設定がありません</string>
     <string name="export_manager_settings">マネージャー設定のエクスポート</string>
     <string name="export_manager_settings_description">JSON ファイルに全てのマネージャー設定をエクスポート</string>
     <string name="export_manager_settings_fail">マネージャー設定をエクスポートできませんでした： %s</string>
@@ -470,34 +491,34 @@ morphe_notification_icon_custom.xml"</string>
     <string name="patch_selection_reset_all">すべてのパッチ選択をリセット</string>
     <string name="patch_selection_reset_all_dialog_description">"すべてのパッチ選択をリセットしようとしています。各パッチを再度手動で選択する必要があります。
 
-パッチプロファイルには影響しません。"</string>
+パッチ設定には影響しません。"</string>
     <string name="patch_selection_reset_all_description">すべてのパッチ選択をリセット</string>
     <string name="patch_selection_reset_dialog_title">パッチのデフォルトをリセットしますか？</string>
     <string name="patch_selection_reset_dialog_message">これにより、パッチの選択とオプションが推奨されるデフォルトに復元されます。</string>
     <string name="patch_selection_reset_package">アプリのパッチ選択をリセット</string>
     <string name="patch_selection_reset_package_dialog_description">"アプリ「%s」のパッチ選択をリセットしようとしています。各パッチを再度手動で選択する必要があります。
 
-パッチプロファイルには影響しません。"</string>
+パッチ設定には影響しません。"</string>
     <string name="patch_selection_reset_package_description">単一アプリのパッチ選択をリセット</string>
     <string name="patch_selection_reset_patches">パッチ選択をリセット（単一）</string>
     <string name="patch_selection_reset_patches_dialog_description">"「%s」のパッチ選択をリセットしようとしています。各パッチを再度手動で選択する必要があります。
 
-パッチプロファイルには影響しません。"</string>
+パッチ設定には影響しません。"</string>
     <string name="patch_selection_reset_patches_description">特定のコレクションのパッチ選択をリセット</string>
     <string name="patch_options_reset_package">アプリのパッチ設定をリセット</string>
     <string name="patch_options_reset_package_dialog_description">"アプリ「%s」のパッチオプションをリセットしようとしています。各オプションを再度適用する必要があります。
 
-パッチプロファイルには影響しません。"</string>
+パッチ設定には影響しません。"</string>
     <string name="patch_options_reset_package_description">単一アプリのパッチ設定をリセット</string>
     <string name="patch_options_reset_patches">パッチ設定をリセット（単一）</string>
     <string name="patch_options_reset_patches_dialog_description">"「%s」のパッチオプションをリセットしようとしています。各オプションを再度適用する必要があります。
 
-パッチプロファイルには影響しません。"</string>
+パッチ設定には影響しません。"</string>
     <string name="patch_options_reset_patches_description">特定のコレクションのパッチ設定をリセット</string>
     <string name="patch_options_reset_all">パッチ設定を一括でリセット</string>
     <string name="patch_options_reset_all_dialog_description">"すべてのパッチオプションをリセットしようとしています。各オプションを再度適用する必要があります。
 
-パッチプロファイルは影響を受けません。"</string>
+パッチ設定は影響を受けません。"</string>
     <string name="patch_options_reset_all_description">すべてのパッチ設定をリセット</string>
     <string name="download_settings">ダウンロード設定</string>
     <string name="downloader_auto_save_title">ダウンロードしたAPKを自動保存</string>
@@ -613,7 +634,7 @@ morphe_notification_icon_custom.xml"</string>
     <string name="no_patch_found">パッチが見つかりません。パッチを確認してください</string>
     <string name="tab_apps">アプリ</string>
     <string name="tab_patches">パッチソース</string>
-    <string name="tab_profiles">パッチプロファイル</string>
+    <string name="tab_profiles">パッチ設定</string>
     <string name="delete">削除</string>
     <string name="disable">無効</string>
     <string name="enable">有効にする</string>
@@ -627,7 +648,7 @@ morphe_notification_icon_custom.xml"</string>
     <string name="patches_replace_fail">パッチのインポートに失敗しました: %s</string>
     <string name="no_patched_apps_found">パッチ済みアプリがありません</string>
     <string name="patches_selected">%s パッチ バンクが選択されました</string>
-    <string name="patch_profiles_selected">%1$d個のパッチプロファイルが選択されています</string>
+    <string name="patch_profiles_selected">%1$d個のパッチ設定が選択されています</string>
     <string name="selected_apps_count">%1$d 件のアプリが選択されました</string>
     <string name="selected_apps_delete_dialog_description">選択したアプリをマネージャーから削除しますか？デバイスにインストールされているアプリはそのまま残ります。</string>
     <string name="incompatible_patches">互換性のないパッチ</string>
@@ -642,21 +663,21 @@ morphe_notification_icon_custom.xml"</string>
     <string name="selection_warning_description">"デフォルトのパッチ選択とオプションの使用をお勧めします。変更すると予期しない問題が発生する可能性があります。
 
 パッチの切り替えを行う前に、詳細設定で「パッチ選択とオプションの変更を許可する」をオンにする必要があります。"</string>
-    <string name="patch_profile_save_action">パッチプロファイルを保存</string>
+    <string name="patch_profile_save_action">パッチ設定を保存</string>
     <string name="patch_profile_select_bundles_title">パッチソースを選択</string>
     <string name="patch_profile_select_bundles_description">このプロファイルに含めるパッチソースを選択してください。</string>
     <string name="patch_profile_select_bundles_empty">保存できるパッチソースがありません。</string>
-    <string name="patch_profile_name_title">パッチプロファイルに名前を付ける</string>
-    <string name="patch_profile_name_description">このパッチプロファイルの名前を入力するか、以下から選択して更新してください</string>
+    <string name="patch_profile_name_title">パッチ設定に名前を付ける</string>
+    <string name="patch_profile_name_description">このパッチ設定の名前を入力するか、以下から選択して更新してください</string>
     <string name="patch_profile_update_existing_title">既存のプロファイルを更新</string>
     <string name="patch_profile_update_existing_description">保存済みのプロファイルをタップして上書きするか、すべて選択解除して新しいプロファイルを作成します。</string>
     <string name="patch_profile_name_hint">プロファイル名</string>
-    <string name="patch_profile_saved_toast">パッチプロファイル「%1$s」を保存しました</string>
-    <string name="patch_profile_duplicate_toast">このアプリではパッチプロファイル「%1$s」が既に存在します</string>
-    <string name="patch_profile_updated_toast">パッチプロファイル「%1$s」を更新しました</string>
-    <string name="patch_profile_save_failed_toast">パッチプロファイルの保存に失敗しました</string>
+    <string name="patch_profile_saved_toast">パッチ設定「%1$s」を保存しました</string>
+    <string name="patch_profile_duplicate_toast">このアプリではパッチ設定「%1$s」が既に存在します</string>
+    <string name="patch_profile_updated_toast">パッチ設定「%1$s」を更新しました</string>
+    <string name="patch_profile_save_failed_toast">パッチ設定の保存に失敗しました</string>
     <string name="patch_profile_rename">名前の変更</string>
-    <string name="patch_profile_rename_title">パッチプロファイルの名前を変更</string>
+    <string name="patch_profile_rename_title">パッチ設定の名前を変更</string>
     <string name="patch_profile_version_override_action">プロファイルバージョンの設定をパッチ</string>
     <string name="patch_profile_version_override_title">\"%1$s\" のバージョン設定</string>
     <string name="patch_profile_version_override_message">このプロファイルに保存する特定のアプリバージョンを設定するか、すべてのバージョンを対象とします。</string>
@@ -703,7 +724,7 @@ morphe_notification_icon_custom.xml"</string>
     <string name="patch_selector_missing_patch_message">"これらのパッチを再選択する必要があります：
 %1$s
 それらを再度有効にする（または代替を選択する）してから、もう一度パッチを適用してみてください。"</string>
-    <string name="patch_profile_delete_multiple_dialog_description">選択したパッチプロファイルを削除しますか？</string>
+    <string name="patch_profile_delete_multiple_dialog_description">選択したパッチ設定を削除しますか？</string>
     <string name="this_version">このバージョン</string>
     <string name="universal">任意のアプリ</string>
     <string name="search_patches">パッチを検索</string>

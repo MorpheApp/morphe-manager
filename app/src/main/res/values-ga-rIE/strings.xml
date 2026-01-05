@@ -2,69 +2,69 @@
 <resources>
     <!-- Morphe Home Screen -->
     <string name="morphe_home_bundles">Paiste Beart</string>
-    <string name="morphe_home_greeting_1">Cén aip ar mian leat í a phatráil?</string>
+    <string name="morphe_home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Réidh chun YouTube a dhéanamh legendary arís?</string>
+    <string name="morphe_home_greeting_2">Réidh le YouTube a dhéanamh finscéalach arís?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Ceangail suas, tá sé am patráil</string>
+    <string name="morphe_home_greeting_3">Cuir ort do chriosanna, tá sé in am na paistí a dhéanamh.</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Lá eile, meaisín meara-ghléasaithe eile</string>
+    <string name="morphe_home_greeting_4">Lá eile, saothar ealaíne eile atá blocáilte le fógraí</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">An bhfuil tú ag iarraidh fógraí a fheiceáil? Ní hea mé ach a chóiríocht araon</string>
+    <string name="morphe_home_greeting_5">Ar mhaith leat fógraí a fheiceáil? Mise ach an oiread.</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">Déanaimis do aipeanna iompar</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">An réamhaisnéis inniu: 100% deis do chóiriú</string>
+    <string name="morphe_home_greeting_7">Réamhaisnéis an lae inniu: seans 100% go ndéanfar paisteáil</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Réidh le hathrú tarcaisneach go hiontach?</string>
+    <string name="morphe_home_greeting_8">Réidh le hathrú neamhshuimiúil go hiontach?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">A shábháil aipeanna ó iad féin ó inniu</string>
+    <string name="morphe_home_greeting_9">Aipeanna á sábháil uathu féin ó inniu</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Cumhachtaithe ag caifé agus cóiriú maith</string>
+    <string name="morphe_home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
     <string name="morphe_home_bundle_type_api">Beart API</string>
     <string name="morphe_home_update_error">Theip ar nuashonrú</string>
     <string name="morphe_home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
     <string name="morphe_home_updating_patches">Ag nuashonrú paistí…</string>
     <string name="morphe_home_update_success">Nuashonrú críochnaithe</string>
     <string name="morphe_home_patches_updated">Tá do paistí suas chun dáta</string>
-    <string name="morphe_home_patches_are_loading">Tá paistí á luchtú, fan go gnách…</string>
-    <string name="morphe_home_please_wait">Fan go gnách…</string>
-    <string name="morphe_home_open_in_browser">Ocainn ar an bhbrabhsál</string>
+    <string name="morphe_home_patches_are_loading">Tá na paistí ag lódáil, fan le do thoil…</string>
+    <string name="morphe_home_please_wait">Fan le do thoil…</string>
+    <string name="morphe_home_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="morphe_home_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="morphe_home_date_added">Cuireadh leis</string>
     <string name="morphe_home_date_updated">Nuashonraithe</string>
     <string name="morphe_home_check_updates">Seiceáil</string>
     <string name="morphe_home_unknown">Anaithnid</string>
-    <string name="morphe_home_timeline">Leaganfé lní</string>
+    <string name="morphe_home_timeline">Stair nuashonraithe</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">An bhfuil an APK bunaidh neamhpaisteáilte agat?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a chóiriú, tá leagan %2$s (gan chóiriú) uait</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a phaisteáil, ní mór duit leagan %2$s (gan phaisteáil) a úsáid</string>
     <string name="morphe_home_apk_availability_yes">Sea, tá sé agam</string>
     <string name="morphe_home_apk_availability_no">Ní hea, cuidigh liom é a aimsiú</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Íoslódáil an APK bunaidh</string>
-    <string name="morphe_home_download_instructions_steps_title">Nósanna imeachta:</string>
-    <string name="morphe_home_download_instructions_step1">Tabair an \'\'%1$s\'\' goilte is fota</string>
+    <string name="morphe_home_download_instructions_steps_title">Treoracha:</string>
+    <string name="morphe_home_download_instructions_step1">Brúigh an cnaipe \'%1$s\' thíos</string>
     <string name="morphe_home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Brúigh íoslódáil ar an suíomh gréasáin, agus ná déan é anseo 😊</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Brúigh íoslódáil ar an suíomh gréasáin, agus ní anseo 😊</string>
     <string name="morphe_home_download_instructions_step3">Fan go mbíonn an íoslódáil críochnaithe, agus &lt;b&gt;ná suiteáil&lt;/b&gt; an APK</string>
     <string name="morphe_home_download_instructions_step3_mount">Fan go mbíonn an íoslódáil críochnaithe, ansin &lt;b&gt;suiteáil an APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Tar éis don íoslódáil críochnú, oscail an aip seo arís</string>
     <string name="morphe_home_download_instructions_step4_mount">Tar éis an APK bunaidh a shuiteáil, oscail an aip seo arís</string>
-    <string name="morphe_home_download_instructions_continue">Lean ar aghaidh go dtí APKMirror.com</string>
+    <string name="morphe_home_download_instructions_continue">Lean ar aghaidh go APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Roghnaigh an APK a d\'íoslódáil tú</string>
     <string name="morphe_home_file_picker_prompt_description">Anois roghnaigh an comhad APK %1$s a d\'íoslódáil tú díreach.</string>
     <string name="morphe_home_file_picker_prompt_open">Oscail an comhad APK a d\'íoslódáil mé</string>
-    <string name="morphe_home_recommended_version">Leagan tábhacta</string>
-    <string name="morphe_patcher_selected_version">Nasc solasaílte</string>
+    <string name="morphe_home_recommended_version">Leagan molta</string>
+    <string name="morphe_patcher_selected_version">Leagan roghnaithe</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Teastaíonn an bun-APK ar do ghléas sula ndéantar paisteáil le mód fréimhe.</string>
+    <string name="morphe_root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil.</string>
     <string name="morphe_root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Sábháil APK</string>
-    <string name="morphe_patcher_copy_error">Rudaí copaiste</string>
-    <string name="morphe_patcher_show_error">Amhsor an rudaí</string>
+    <string name="morphe_patcher_copy_error">Earráid chóipeála</string>
+    <string name="morphe_patcher_show_error">Taispeáin earráid</string>
     <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
     <string name="morphe_patcher_long_step_warning">Féadfaidh an chéim seo tamall a ghlacadh. Fan go cineálta…</string>
