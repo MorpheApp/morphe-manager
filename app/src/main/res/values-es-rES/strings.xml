@@ -29,7 +29,7 @@
     <string name="morphe_home_patches_updated">Tus parches están al día</string>
     <string name="morphe_home_patches_are_loading">Los parches se están cargando, espera…</string>
     <string name="morphe_home_please_wait">Por favor espera...</string>
-    <string name="morphe_home_open_in_browser">Abre en el navegador</string>
+    <string name="morphe_home_open_in_browser">Abrir en el navegador</string>
     <string name="morphe_home_failed_to_open_url">Error al abrir la URL</string>
     <string name="morphe_home_date_added">Añadido</string>
     <string name="morphe_home_date_updated">Actualizado</string>

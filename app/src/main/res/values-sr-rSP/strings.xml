@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Пакет закрпа</string>
-    <string name="morphe_home_greeting_1">Коју апликацију желите да преправите?</string>
+    <string name="morphe_home_bundles">Пакет печева</string>
+    <string name="morphe_home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Спремни да учините YouTube легендарним поново?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Стегните сигурносни појас, време је за преправку</string>
+    <string name="morphe_home_greeting_3">Вежите се, време је за печовање</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Још један дан, још једно ремек-дело са блокираним огласима</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Желите ли да гледате рекламе? Ни ја</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Учинимо да се ваше апликације понашају</string>
+    <string name="morphe_home_greeting_6">Учинимо да ваше апликације буду добре</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Данашња прогноза: 100% шанси за поправку</string>
+    <string name="morphe_home_greeting_7">Данашња прогноза: 100% шанси за печовање</string>
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">Спремни сте да из просечног створите невероватно?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Спасавамо апликације од њих самих од дан-данас</string>
+    <string name="morphe_home_greeting_9">Спасавамо апликације од њих самих од данас</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Покретани кафеином и добрим исправкама</string>
+    <string name="morphe_home_greeting_10">Покренуто кафеином и добрим печовима</string>
     <string name="morphe_home_bundle_type_api">API пакет</string>
     <string name="morphe_home_update_error">Ажурирање није успело</string>
     <string name="morphe_home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
-    <string name="morphe_home_updating_patches">Ажурирање закрпа…</string>
+    <string name="morphe_home_updating_patches">Ажурирање печева…</string>
     <string name="morphe_home_update_success">Ажурирање завршено</string>
-    <string name="morphe_home_patches_updated">Ваше закрпе су ажурне</string>
-    <string name="morphe_home_patches_are_loading">Закрпе се учитавају, молимо сачекајте…</string>
+    <string name="morphe_home_patches_updated">Ваши печеви су ажурни</string>
+    <string name="morphe_home_patches_are_loading">Печеви се учитавају, молимо сачекајте…</string>
     <string name="morphe_home_please_wait">Молимо сачекајте…</string>
-    <string name="morphe_home_open_in_browser">Otvori u pregledačĐaču</string>
-    <string name="morphe_home_failed_to_open_url">Неуспешно отварање URL-а</string>
+    <string name="morphe_home_open_in_browser">Отвори у прегледачу</string>
+    <string name="morphe_home_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="morphe_home_date_added">Додато</string>
     <string name="morphe_home_date_updated">Ажурирано</string>
     <string name="morphe_home_check_updates">Провери</string>
     <string name="morphe_home_unknown">Непознато</string>
-    <string name="morphe_home_timeline">Istorija ažuriranja</string>
+    <string name="morphe_home_timeline">Историја ажурирања</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Да ли имате оригинални непромењени АПК?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">За закрпљивање %1$s, потребна вам је верзија %2$s (некрпљена)</string>
+    <string name="morphe_home_apk_availability_dialog_title">Имате ли оригинални непромењени APK?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">За печовање %1$s, потребна вам је верзија %2$s (непечована)</string>
     <string name="morphe_home_apk_availability_yes">Да, имам га</string>
     <string name="morphe_home_apk_availability_no">Не, помозите ми да га нађем</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Преузмите оригинални APK</string>
-    <string name="morphe_home_download_instructions_steps_title">Инструкције:</string>
-    <string name="morphe_home_download_instructions_step1">Kliknite na \'%1$s\' dugme ispod</string>
-    <string name="morphe_home_download_instructions_step2_part1">Скролујте низ веб страницу и притисните</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Притисните преузимање на веб локацији, а не овде 😊</string>
+    <string name="morphe_home_download_instructions_steps_title">Упутства:</string>
+    <string name="morphe_home_download_instructions_step1">Кликните на дугме „%1$s” испод</string>
+    <string name="morphe_home_download_instructions_step2_part1">Скролујте низ веб-страницу и притисните</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Притисните преузимање на веб-сајту, а не овде 😊</string>
     <string name="morphe_home_download_instructions_step3">Сачекајте да преузимање буде завршено, и &lt;b&gt;не инсталирајте&lt;/b&gt; APK</string>
     <string name="morphe_home_download_instructions_step3_mount">Сачекајте да преузимање буде завршено, а затим &lt;b&gt;инсталирајте APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Након што се преузимање заврши, поново отворите ову апликацију</string>
-    <string name="morphe_home_download_instructions_step4_mount">Након инсталације оригиналног АПК-а, поново отворите ову апликацију</string>
+    <string name="morphe_home_download_instructions_step4_mount">Након инсталирања оригиналног АПК-а, поново отворите ову апликацију</string>
     <string name="morphe_home_download_instructions_continue">Настави на APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
-    <string name="morphe_home_file_picker_prompt_title">Изаберите АПК који сте преузели</string>
-    <string name="morphe_home_file_picker_prompt_description">Сада изаберите %1$s АПК датотеку коју сте управо преузели.</string>
-    <string name="morphe_home_file_picker_prompt_open">Отвори АПК датотеку коју сам преузео</string>
-    <string name="morphe_home_recommended_version">Preporučena verzija</string>
+    <string name="morphe_home_file_picker_prompt_title">Изаберите APK који сте преузели</string>
+    <string name="morphe_home_file_picker_prompt_description">Сада изаберите APK фајл %1$s који сте управо преузели.</string>
+    <string name="morphe_home_file_picker_prompt_open">Отвори преузети APK фајл</string>
+    <string name="morphe_home_recommended_version">Препоручена верзија</string>
     <string name="morphe_patcher_selected_version">Изабрана верзија</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Роот режим захтева да оригинални АПК буде инсталиран на вашем уређају пре печовања.</string>
-    <string name="morphe_root_gmscore_excluded">GmsCore подморничка закрпа је искључена у роот моду</string>
+    <string name="morphe_root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања.</string>
+    <string name="morphe_root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Сачувај АПК</string>
+    <string name="morphe_patcher_save_apk">Сачувај APK</string>
     <string name="morphe_patcher_copy_error">Грешка приликом копирања</string>
-    <string name="morphe_patcher_show_error">Искази грешку</string>
-    <string name="morphe_patcher_error_copied">Грешка копирана у клипборд</string>
-    <string name="morphe_patcher_patches_progress">%1$d / %2$d печова</string>
+    <string name="morphe_patcher_show_error">Прикажи грешку</string>
+    <string name="morphe_patcher_error_copied">Грешка је копирана у привремену меморију</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d печева</string>
     <string name="morphe_patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
-    <string name="morphe_patcher_installing">Инсталира се…</string>
-    <string name="morphe_patcher_installing_subtitle">Готово је да се затресемо! 🎸</string>
+    <string name="morphe_patcher_installing">Инсталирање…</string>
+    <string name="morphe_patcher_installing_subtitle">Скоро спремно за рад! 🎸</string>
     <string name="morphe_patcher_success_title">Све готово! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Ваша апликација је печована и инсталирана!</string>
-    <string name="morphe_patcher_complete_title">Pačovanje završeno! ✨</string>
-    <string name="morphe_patcher_failed_title">Ау, нешто је пошло наопако</string>
+    <string name="morphe_patcher_complete_title">Печовање завршено! ✨</string>
+    <string name="morphe_patcher_failed_title">Упс! Дошло је до грешке</string>
     <string name="morphe_patcher_failed_subtitle">Проверите детаље грешке испод</string>
-    <string name="morphe_patcher_failed_dialog_title">Pačovanje nije uspelo</string>
+    <string name="morphe_patcher_failed_dialog_title">Печовање није успело</string>
     <string name="morphe_patcher_unknown_error">Дошло је до непознате грешке</string>
     <string name="morphe_patcher_mounting">Монтирање…</string>
     <string name="morphe_patcher_conflict_title">Конфликт пакета</string>
     <string name="morphe_patcher_conflict_subtitle">Морате деинсталирати постојећу верзију</string>
     <string name="morphe_patcher_install_error_title">Грешка при инсталацији</string>
-    <string name="morphe_patcher_install_error_subtitle">Покушајте да деинсталирате па поново инсталирате</string>
-    <string name="morphe_patcher_ready_to_install_subtitle">Притисните дугме испод за инсталацију</string>
+    <string name="morphe_patcher_install_error_subtitle">Покушајте деинсталирати па поново инсталирати</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Притисните дугме испод за инсталирање</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">Притисните дугме испод за монтирање</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Неподржана верзија</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Овај АПК није препоручена верзија апликације. Настављање може резултирати нефункционалном апликацијом.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Настави ipak</string>
-    <string name="morphe_patcher_wrong_package_title">Погрешно изабран пакет</string>
-    <string name="morphe_patcher_wrong_package_description">Изабрани АПК није за апликацију коју сте намеравали да измените.</string>
-    <string name="morphe_patcher_expected_package">Одабрани пакет</string>
-    <string name="morphe_patcher_selected_package">Очекивани пакет</string>
-    <string name="morphe_patcher_message_1">Морамо да трансформишемо вашу апликацију у нешто невероватно… 🏆</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Овај APK није препоручена верзија апликације. Настављање може резултирати нефункционалном апликацијом.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Ипак настави</string>
+    <string name="morphe_patcher_wrong_package_title">Изабран је погрешан пакет</string>
+    <string name="morphe_patcher_wrong_package_description">Изабрани APK није за апликацију коју сте намеравали да печујете.</string>
+    <string name="morphe_patcher_expected_package">Очекивани пакет</string>
+    <string name="morphe_patcher_selected_package">Изабрани пакет</string>
+    <string name="morphe_patcher_message_1">Преображавамо вашу апликацију у нешто невероватно… 🏆</string>
     <string name="morphe_patcher_message_2">Учимо старе апликације новим триковима… 🎩</string>
     <string name="morphe_patcher_message_3">Пружамо вашој апликацији дигитално подешавање… 🔧</string>
     <string name="morphe_patcher_message_4">Кувамо дигиталну магију… ☕</string>

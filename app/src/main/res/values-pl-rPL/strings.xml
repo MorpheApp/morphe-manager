@@ -258,7 +258,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="bundle_version_item">Rekomendacja pakietu</string>
     <string name="bundle_version_item_description_default">Używając domyślnej rekomendacji</string>
     <string name="bundle_version_item_description_selected">Następująca wersja %1$s (%2$s)</string>
-    <string name="bundle_version_dialog_title">Wybierz rekomendację pakietu</string>
+    <string name="bundle_version_dialog_title">Wybierz pakiet</string>
     <string name="bundle_version_dialog_description">Wybierz, który z pakietów powinien być używany podczas pobierania APK.</string>
     <string name="bundle_version_dialog_default">Użyj domyślnej rekomendacji</string>
     <string name="bundle_version_dialog_default_subtitle">Automatycznie wybierz najczęściej używaną kompatybilną wersję.</string>
@@ -545,7 +545,7 @@ Podpis (SHA-256): %2$s"</string>
     <string name="dialog_input_placeholder">Wartość</string>
     <string name="reset">Zresetuj</string>
     <string name="share">Udostępnij</string>
-    <string name="patch">Modyfikacja</string>
+    <string name="patch">Modyfikuj</string>
     <string name="select_from_storage">Wybierz z pamięci</string>
     <string name="select_from_storage_description">Wybierz plik APK z pamięci za pomocą selektora plików</string>
     <string name="type_anything">Wpisz cokolwiek, aby kontynuować</string>
@@ -1041,6 +1041,6 @@ Kliknij te modyfikacje, aby zobaczyć więcej szczegółów."</string>
     <string name="show_manager_update_dialog_on_launch">Pokaż komunikat o aktualizacji przy uruchomieniu</string>
     <string name="show_manager_update_dialog_on_launch_description">Pokaż powiadomienie wyskakujące, gdy przy uruchomieniu jest dostępna nowa aktualizacja</string>
     <string name="failed_to_import_keystore">Nie udało się zaimportować magazynu kluczy</string>
-    <string name="export">Wyeksportuj</string>
+    <string name="export">Eksportuj</string>
     <string name="confirm">Potwierdź</string>
 </resources>

@@ -4,7 +4,7 @@
         <item quantity="other">%d tambalan</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">Eksekusi %d tambalan</item>
+        <item quantity="other">Menerapkan %d tambalan</item>
     </plurals>
     <plurals name="selected_count">
         <item quantity="other">%d terpilih</item>
@@ -13,6 +13,6 @@
         <item quantity="other">%d tambalan</item>
     </plurals>
     <plurals name="patch_profile_bundle_count">
-        <item quantity="other">%d bundel</item>
+        <item quantity="other">%d paket</item>
     </plurals>
 </resources>

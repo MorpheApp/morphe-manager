@@ -12,7 +12,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Voulez-vous regarder des pubs ? Moi non plus</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Disciplinons vos applis</string>
+    <string name="morphe_home_greeting_6">Faisons fonctionner vos applications.</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">Prévisions du jour : 100% de chance de patchs</string>
     <!-- From mediocrity to amazing -->
@@ -135,7 +135,7 @@
     <string name="morphe_background_type_snow">Neige</string>
     <string name="morphe_background_type_none">Aucun</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">Utiliser les versions préliminaires</string>
+    <string name="morphe_update_use_prereleases">Utiliser les versions pré-versions</string>
     <string name="morphe_update_use_prereleases_description">Obtenir un accès anticipé aux nouveaux patches et aux fonctions du gestionnaire</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Options de patch</string>

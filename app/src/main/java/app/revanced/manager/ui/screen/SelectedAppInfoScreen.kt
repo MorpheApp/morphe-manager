@@ -139,9 +139,9 @@ fun SelectedAppInfoScreen(
     val downloadedApps by vm.downloadedApps.collectAsStateWithLifecycle(emptyList())
     val resolveNavigationVersion: (SelectedApp) -> SelectedApp = remember(downloadedApps, vm.selectedAppInfo, vm.selectedApp) {
         { app ->
-            val versionOverride = vm.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
-                ?: app.version?.takeUnless { it.isNullOrBlank() }
-                ?: downloadedApps.firstOrNull()?.version?.takeUnless { it.isNullOrBlank() }
+            val versionOverride = vm.selectedAppInfo?.versionName?.takeUnless { it.isBlank() }
+                ?: app.version?.takeUnless { it.isBlank() }
+                ?: downloadedApps.firstOrNull()?.version?.takeUnless { it.isBlank() }
             if (versionOverride.isNullOrBlank()) return@remember app
             when (app) {
                 is SelectedApp.Download -> app.copy(version = versionOverride)
@@ -286,7 +286,8 @@ fun SelectedAppInfoScreen(
                     activeSearchJob = vm.activePluginAction,
                     hasRoot = vm.hasRoot,
                     downloadedApps = downloadedApps,
-                    includeAutoOption = !vm.sourceSelectionRequired,
+                    includeAutoOption = false, // Morphe: Do not show Auto option in dialog
+//                  includeAutoOption = !vm.sourceSelectionRequired,
                     includeInstalledOption = !vm.sourceSelectionRequired,
                     requiredVersion = requiredVersion,
                     onDismissRequest = vm::dismissSourceSelector,
@@ -378,7 +379,9 @@ fun SelectedAppInfoScreen(
             PageItem(
                 R.string.apk_source_selector_item,
                 when (val app = vm.selectedApp) {
-                    is SelectedApp.Search -> stringResource(R.string.apk_source_auto)
+                    // Morphe: Do not show downloaders in description
+//                    is SelectedApp.Search -> stringResource(R.string.apk_source_auto)
+                    is SelectedApp.Search -> stringResource(R.string.apk_source_local)
                     is SelectedApp.Installed -> stringResource(R.string.apk_source_installed)
                     is SelectedApp.Download -> stringResource(
                         R.string.apk_source_downloader,
