@@ -1,4 +1,9 @@
 name: Crowdin pull and merge
+
+concurrency:
+  group: release-lock
+  cancel-in-progress: false
+
 on:
   schedule:
     - cron: "0 */12 * * *" # every 12 hours
@@ -58,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew :app:build
+          ./gradlew :app:assembleDebug
 
       # Step 3: Checkout dev branch to prepare for merging
       - name: Checkout dev branch for merge
