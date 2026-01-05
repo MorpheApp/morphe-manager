@@ -141,7 +141,7 @@
     <string name="morphe_patch_options">Opzioni di patching</string>
     <string name="morphe_patch_options_youtube_description">Temi, branding, intestazione e opzioni per Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opzioni per tema e branding</string>
-    <string name="morphe_patch_options_restart_message">Modificare le opzioni del patch richiede di ripuplicare l\'applicazione per applicarle</string>
+    <string name="morphe_patch_options_restart_message">Modificare le opzioni del patch richiede di ripatchare l\'applicazione per applicarle</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Colori del tema dell\'app</string>
     <string name="morphe_patch_options_theme_colors_description">Cambia colore di sfondo</string>

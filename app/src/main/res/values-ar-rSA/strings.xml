@@ -145,7 +145,7 @@
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">ألوان مظهر التطبيق</string>
     <string name="morphe_patch_options_theme_colors_description">تغيير لون الخلفية</string>
-    <string name="morphe_patch_options_dark_theme_color">لون خلفية الوضع الداكن</string>
+    <string name="morphe_patch_options_dark_theme_color">لون خلفية المظهر الداكن</string>
     <string name="morphe_patch_options_dark_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
     <string name="morphe_patch_options_light_theme_color">لون خلفية المظهر الفاتح</string>
     <string name="morphe_patch_options_light_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
@@ -778,7 +778,7 @@ Morphe فقط لديه هذا.</string>
     <string name="patch_selector_sheet_filter_sort_title">فرز</string>
     <string name="patch_selector_sheet_filter_sort_alphabetical">أبجديًا</string>
     <string name="patch_selector_sheet_filter_sort_has_settings">تحتوي أعدادات</string>
-    <string name="patch_selector_sheet_filter_sort_no_settings">لا توجد إعدادات</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">لا تحتوي إعدادات</string>
     <string name="string_option_menu_description">خيارات إضافية</string>
     <string name="option_preset_custom_value">قيمة مخصصة</string>
     <string name="path_selector">تحديد من التخزين</string>
@@ -802,9 +802,9 @@ Morphe فقط لديه هذا.</string>
     <string name="installer_status_shizuku_not_running">ابدأ Shizuku أو Sui وحاول مرة أخرى</string>
     <string name="installer_status_shizuku_permission">امنح Shizuku إذن للوصول إلى Morphe من تطبيق Shizuku</string>
     <string name="installer_mount_warning_title">تم تحديد أداة تثبيت Rooted mount</string>
-    <string name="installer_mount_warning_install">أداة التثبيت الرئيسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
-    <string name="installer_mount_warning_update">أداة التثبيت الرئيسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
-    <string name="installer_mount_warning_uninstall">أداة التثبيت الرئيسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
+    <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
+    <string name="installer_mount_warning_update">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
+    <string name="installer_mount_warning_uninstall">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت Rooted mount. لم يتم تثبيت التطبيق المحفوظ باستخدام mount</string>
     <string name="installer_mount_mismatch_title">لم يتم تحديد أداة تثبيت Rooted mount</string>
     <string name="installer_mount_mismatch_install">تم تثبيت هذا التطبيق باستخدام أداة تثبيت Rooted mount. قم بتبديل أداة التثبيت الأساسية الخاصة بك مرة أخرى لاستخدام إجراءات التثبيت، ثم قم بالتثبيت.</string>
     <string name="installer_mount_mismatch_update">تم تثبيت هذا التطبيق باستخدام أداة تثبيت Rooted mount. قم بتبديل أداة التثبيت الأساسية الخاصة بك مرة أخرى لاستخدام إجراءات التثبيت، ثم قم بإعادة التثبيت.</string>
@@ -855,7 +855,7 @@ Morphe فقط لديه هذا.</string>
     <string name="installer_external_launched">جارٍ فتح %1$s…</string>
     <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى.</string>
     <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت.</string>
-    <string name="installer_external_finished_no_change">%1$s انتهى التثبيت دون تثبيت التطبيق. تحقق من برنامج التثبيت بحثًا عن رسالة خطأ وحاول مرة أخرى.</string>
+    <string name="installer_external_finished_no_change">%1$s انتهى دون تثبيت التطبيق. تحقق من أداة التثبيت بحثًا عن رسالة خطأ وحاول مرة أخرى.</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="uninstalling_ellipsis">جارٍ إلغاء التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التحميل…</string>
