@@ -913,7 +913,7 @@ class ImportExportViewModel(
 
     private companion object {
         private const val PREINSTALLED_BUNDLE_UID = 0
-        val knownPasswords = arrayOf("ReVanced", "s3cur3p@ssw0rd")
-        val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "ReVanced Key")
+        val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
+        val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
     }
 }

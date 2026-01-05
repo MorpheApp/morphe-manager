@@ -1,9 +1,14 @@
 name: Release
 
+concurrency:
+  group: release-lock
+  cancel-in-progress: false
+
 on:
   workflow_dispatch:
   pull_request:
     branches:
+      - main
       - dev
 
 jobs:

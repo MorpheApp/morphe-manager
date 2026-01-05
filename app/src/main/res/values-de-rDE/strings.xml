@@ -6,41 +6,41 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Bereit, YouTube wieder legendär zu machen?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Gürten Sie sich an, es ist Patchzeit</string>
+    <string name="morphe_home_greeting_3">Schnallen Sie sich an, es ist Patchzeit</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Ein weiterer Tag, ein weiteres werbeblockiertes Meisterwerk</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Willst du Werbung sehen? Ich auch nicht</string>
+    <string name="morphe_home_greeting_5">Willst du dir Werbung anschauen? Ich auch nicht</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Lass uns deine Apps benehmen</string>
+    <string name="morphe_home_greeting_6">Lassen wir deine Apps agieren</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Heutige Vorhersage: 100% Chance auf Behebung</string>
+    <string name="morphe_home_greeting_7">Heutige Vorhersage: 100%ige Chance auf Behebung</string>
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">Bereit, Unterwältigendes in Geniales zu verwandeln?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Apps vor sich selbst retten, seit heute</string>
+    <string name="morphe_home_greeting_9">Apps von sich selbst retten, seit heute</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Angetrieben von Koffein und guten Patches</string>
     <string name="morphe_home_bundle_type_api">API-Bundle</string>
     <string name="morphe_home_update_error">Update fehlgeschlagen</string>
-    <string name="morphe_home_update_error_subtitle">Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>
+    <string name="morphe_home_update_error_subtitle">Überprüfe deine Internetverbindung und versuchen es erneut</string>
     <string name="morphe_home_updating_patches">Patches werden aktualisiert…</string>
     <string name="morphe_home_update_success">Update abgeschlossen</string>
-    <string name="morphe_home_patches_updated">Ihre Patches sind auf dem neuesten Stand</string>
-    <string name="morphe_home_patches_are_loading">Patches werden geladen, bitte warten Sie...</string>
+    <string name="morphe_home_patches_updated">Deine Patches sind auf dem neuesten Stand</string>
+    <string name="morphe_home_patches_are_loading">Patches werden geladen, bitte warten...</string>
     <string name="morphe_home_please_wait">Bitte warten Sie...</string>
-    <string name="morphe_home_open_in_browser">In Browser öffnen</string>
+    <string name="morphe_home_open_in_browser">Im Browser öffnen</string>
     <string name="morphe_home_failed_to_open_url">URL konnte nicht geöffnet werden</string>
     <string name="morphe_home_date_added">Hinzugefügt</string>
     <string name="morphe_home_date_updated">Aktualisiert</string>
     <string name="morphe_home_check_updates">Prüfen</string>
     <string name="morphe_home_unknown">Unbekannt</string>
-    <string name="morphe_home_timeline">Versionshistorie</string>
+    <string name="morphe_home_timeline">Versionsverlauf</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Haben Sie die ursprüngliche, unveränderte APK?</string>
+    <string name="morphe_home_apk_availability_dialog_title">Haben Sie die ursprüngliche und unveränderte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Um %1$s zu patchen, benötigst du Version %2$s (ungepatcht)</string>
     <string name="morphe_home_apk_availability_yes">Ja, ich habe es</string>
-    <string name="morphe_home_apk_availability_no">Nein, helfen Sie mir, sie zu finden</string>
+    <string name="morphe_home_apk_availability_no">Nein, hilf mir, es zu finden</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Lade die originale APK herunter</string>
     <string name="morphe_home_download_instructions_steps_title">Anleitung:</string>

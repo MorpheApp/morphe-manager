@@ -25,7 +25,7 @@
     <string name="morphe_home_update_error">Không thể cập nhật</string>
     <string name="morphe_home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
     <string name="morphe_home_updating_patches">Đang cập nhật bản vá…</string>
-    <string name="morphe_home_update_success">Đã cập nhật xong</string>
+    <string name="morphe_home_update_success">Cập nhật hoàn tất</string>
     <string name="morphe_home_patches_updated">Đã cập nhật các bản vá</string>
     <string name="morphe_home_patches_are_loading">Đang tải bản vá, vui lòng chờ…</string>
     <string name="morphe_home_please_wait">Vui lòng chờ…</string>
@@ -115,13 +115,13 @@
     <string name="morphe_patcher_message_18">Đang chuyển trạng thái ứng dụng từ chưa vá sang đã vá… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Ứng dụng bị sốt rồi, và phương pháp điều trị duy nhất là vá thêm thôi… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Đang dọn dẹp mớ hỗn độn. Vui lòng đợi… 🗑️</string>
+    <string name="morphe_patcher_message_20">Đang dọn dẹp mớ hỗn độn. Vui lòng chờ… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Trang chủ Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Quay lại chế độ đơn giản</string>
     <string name="morphe_settings_return_to_expert">Chế độ chuyên gia</string>
     <string name="morphe_settings_return_to_expert_description">Chuyển sang chế độ chuyên gia với đầy đủ tính năng</string>
-    <string name="morphe_share_website">Chia sẻ trang web</string>
+    <string name="morphe_share_website">Chia sẻ</string>
     <string name="morphe_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Cài đặt giao diện</string>
@@ -135,15 +135,15 @@
     <string name="morphe_background_type_snow">Tuyết</string>
     <string name="morphe_background_type_none">Không</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">Sử dụng phiên bản phát hành trước</string>
-    <string name="morphe_update_use_prereleases_description">Nhận quyền truy cập sớm vào các bản cập nhật và tính năng quản lý mới</string>
+    <string name="morphe_update_use_prereleases">Bản phát hành trước</string>
+    <string name="morphe_update_use_prereleases_description">Truy cập sớm các bản vá và tính năng mới của trình quản lý</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Tùy chỉnh bản vá</string>
     <string name="morphe_patch_options_youtube_description">Tùy chỉnh chủ đề, thương hiệu, logo và Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Tùy chỉnh chủ đề và thương hiệu</string>
-    <string name="morphe_patch_options_restart_message">Sau khi tùy chỉnh bản vá bạn cần vá lại ứng dụng để áp dụng chúng</string>
+    <string name="morphe_patch_options_restart_message">Sau khi tùy chỉnh bạn cần vá lại ứng dụng để áp dụng những thay đổi</string>
     <!-- Theme Colors -->
-    <string name="morphe_patch_options_theme_colors">Màu chủ đề ứng dụng</string>
+    <string name="morphe_patch_options_theme_colors">Màu chủ đề</string>
     <string name="morphe_patch_options_theme_colors_description">Đổi màu nền</string>
     <string name="morphe_patch_options_dark_theme_color">Màu nền chủ đề tối</string>
     <string name="morphe_patch_options_dark_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
@@ -159,7 +159,7 @@
     <string name="morphe_custom_color">Tùy chỉnh màu</string>
     <string name="morphe_hex_color">Mã hex</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Thương hiệu tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_branding">Thương hiệu</string>
     <string name="morphe_patch_options_custom_branding_description">Đổi tên hiển thị của ứng dụng</string>
     <string name="morphe_patch_options_custom_branding_app_name">Tên ứng dụng</string>
     <string name="morphe_patch_options_custom_branding_app_name_hint">Nhập tên tùy chỉnh</string>
@@ -188,7 +188,7 @@ Tùy chọn, đường dẫn có thể chứa thêm một thư mục drawable v�
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">Logo đầu trang tùy chỉnh</string>
+    <string name="morphe_patch_options_custom_header">Logo đầu trang</string>
     <string name="morphe_patch_options_custom_header_description">Tùy chỉnh logo đầu trang</string>
     <string name="morphe_patch_options_custom_header_instruction">"Thư mục chứa hình ảnh sử dụng làm logo đầu trang tùy chỉnh.
 
@@ -209,7 +209,7 @@ Kích thước hình ảnh yêu cầu:
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Ẩn tính năng Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">Hide lối tắt Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Ẩn lối tắt Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Gỡ Shorts khỏi menu khi ấn giữ ứng dụng ngoài màn hình chính</string>
     <string name="morphe_patch_options_hide_shorts_widget">Ẩn tiện ích Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
@@ -317,7 +317,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="downloads">Tải xuống</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">Xuất &amp; Nhập</string>
-    <string name="import_export_description">Kho khoá, lựa chọn và tùy chọn bản vá</string>
+    <string name="import_export_description">Kho khoá, chọn và tùy chỉnh bản vá</string>
     <string name="changelog">Xem nhật ký thay đổi</string>
     <string name="changelog_loading">Đang tải nhật ký thay đổi</string>
     <string name="changelog_download_fail">Không thể tải nhật ký thay đổi: %s</string>
@@ -430,8 +430,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="export_manager_settings_success">Đã xuất cài đặt trình quản lý</string>
     <string name="reset_patch_selection">Đặt lại lựa chọn bản vá</string>
     <string name="reset_patch_selection_description">Đặt lại lựa chọn bản vá đã lưu</string>
-    <string name="reset_patch_options">Đặt lại tùy chọn bản vá</string>
-    <string name="reset_patch_options_description">Đặt lại các tùy chọn bản vá đã lưu</string>
+    <string name="reset_patch_options">Đặt lại tùy chỉnh bản vá</string>
+    <string name="reset_patch_options_description">Đặt lại các tùy chỉnh bản vá đã lưu</string>
     <string name="reset_patch_selection_success">Đã đặt lại lựa chọn bản vá</string>
     <string name="patch_selection_deselected_all_toast">Đã bỏ chọn tất cả bản vá</string>
     <string name="patch_selection_deselected_bundle_toast">Đã bỏ chọn tất cả bản vá trong %s</string>
@@ -486,21 +486,21 @@ Kích thước hình ảnh yêu cầu:
     <string name="patch_selection_reset_all_dialog_description">"Bạn sắp đặt lại toàn bộ lựa chọn bản vá. Bạn sẽ phải chọn thủ công từng bản vá lại một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
     <string name="patch_selection_reset_all_description">Đặt lại tất cả lựa chọn bản vá</string>
     <string name="patch_selection_reset_dialog_title">Đặt về mặc định bản vá?</string>
-    <string name="patch_selection_reset_dialog_message">Thao tác này sẽ đưa các lựa chọn và tùy chọn bản vá về mặc định được đề xuất ban đầu.</string>
+    <string name="patch_selection_reset_dialog_message">Thao tác này sẽ đưa các lựa chọn và tùy chỉnh bản vá về mặc định được đề xuất ban đầu.</string>
     <string name="patch_selection_reset_package">Đặt lại lựa chọn bản vá cho ứng dụng</string>
     <string name="patch_selection_reset_package_dialog_description">"Bạn sắp đặt lại lựa chọn bản vá cho ứng dụng \"%s\". Bạn sẽ phải chọn thủ công lại từng bản vá một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
     <string name="patch_selection_reset_package_description">Đặt lại lựa chọn bản vá cho một ứng dụng</string>
     <string name="patch_selection_reset_patches">Đặt lại lựa chọn bản vá (riêng lẻ)</string>
     <string name="patch_selection_reset_patches_dialog_description">"Bạn sắp đặt lại lựa chọn bản vá cho \"%s\". Bạn sẽ phải chọn lại từng bản vá một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
     <string name="patch_selection_reset_patches_description">Đặt lại các lựa chọn bản vá cho một nhóm bản vá cụ thể</string>
-    <string name="patch_options_reset_package">Đặt lại tùy chọn bản vá cho ứng dụng</string>
-    <string name="patch_options_reset_package_dialog_description">"Bạn sắp đặt lại các tùy chọn bản vá cho ứng dụng \"%s\". Bạn sẽ phải áp dụng lại từng tuỳ chọn một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
-    <string name="patch_options_reset_package_description">Đặt lại tùy chọn bản vá cho một ứng dụng</string>
-    <string name="patch_options_reset_patches">Đặt lại tùy chọn bản vá (riêng lẻ)</string>
-    <string name="patch_options_reset_patches_dialog_description">"Bạn sắp đặt lại tùy chọn bản vá cho \"%s\". Bạn sẽ cần áp dụng lại từng tùy chỉnh một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
-    <string name="patch_options_reset_patches_description">Đặt lại các tùy chọn bản vá cho một nhóm bản vá cụ thể</string>
-    <string name="patch_options_reset_all">Đặt lại tùy chọn bản vá toàn cục</string>
-    <string name="patch_options_reset_all_dialog_description">"Bạn sắp đặt lại toàn bộ tùy chọn bản vá. Bạn sẽ phải áp dụng lại từng tùy chọn một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
+    <string name="patch_options_reset_package">Đặt lại tùy chỉnh bản vá cho ứng dụng</string>
+    <string name="patch_options_reset_package_dialog_description">"Bạn sắp đặt lại các tùy chỉnh bản vá cho ứng dụng \"%s\". Bạn sẽ phải áp dụng lại từng tuỳ chỉnh một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
+    <string name="patch_options_reset_package_description">Đặt lại tùy chỉnh bản vá cho một ứng dụng</string>
+    <string name="patch_options_reset_patches">Đặt lại tùy chỉnh bản vá (riêng lẻ)</string>
+    <string name="patch_options_reset_patches_dialog_description">"Bạn sắp đặt lại tùy chỉnh bản vá cho \"%s\". Bạn sẽ cần áp dụng lại từng tùy chỉnh một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
+    <string name="patch_options_reset_patches_description">Đặt lại các tùy chỉnh bản vá cho một nhóm bản vá cụ thể</string>
+    <string name="patch_options_reset_all">Đặt lại tùy chỉnh bản vá toàn cục</string>
+    <string name="patch_options_reset_all_dialog_description">"Bạn sắp đặt lại toàn bộ tùy chỉnh bản vá. Bạn sẽ phải áp dụng lại từng tùy chỉnh một lần nữa.\n\nCấu hình vá không bị ảnh hưởng."</string>
     <string name="patch_options_reset_all_description">Đặt lại toàn bộ tuỳ chọn bản vá</string>
     <string name="download_settings">Cài đặt tải</string>
     <string name="downloader_auto_save_title">Tự động lưu APK đã tải xuống</string>
@@ -635,10 +635,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="incompatible_patches">Bản vá không tương thích</string>
     <string name="universal_patches">Bản vá phổ quát</string>
     <string name="patch_selection_reset_toast">Các lựa chọn và tuỳ chọn bản vá đã được đặt lại về mặc định</string>
-    <string name="patch_options_reset_toast">Tùy chọn bản vá đã được đặt lại</string>
+    <string name="patch_options_reset_toast">Tùy chỉnh bản vá đã được đặt lại</string>
     <string name="non_suggested_version_warning_title">Phiên bản không được đề xuất</string>
     <string name="non_suggested_version_warning_description">"Phiên bản ứng dụng mà bạn đã chọn không khớp với phiên bản được đề xuất.\nVui lòng sử dụng phiên bản đề xuất: %s\n\nNếu bạn vẫn muốn tiếp tục, hãy tắt tùy chọn \"Yêu cầu phiên bản ứng dụng được đề xuất\" trong cài đặt nâng cao."</string>
-    <string name="selection_warning_description">"Bạn nên dùng các lựa chọn và tùy chọn bản vá mặc định. Vì thay đổi chúng có thể phát sinh sự cố không mong muốn.\n\nBạn cần bật tùy chọn \"Cho thay đổi lựa chọn và tùy chọn bản vá\" trong cài đặt nâng cao trước khi thay đổi bản vá."</string>
+    <string name="selection_warning_description">"Bạn nên dùng các lựa chọn và tùy chỉnh bản vá mặc định. Vì thay đổi chúng có thể phát sinh sự cố không mong muốn.\n\nBạn cần bật tùy chọn \"Cho chọn và tùy chỉnh bản vá\" trong cài đặt nâng cao trước khi thay đổi bản vá."</string>
     <string name="patch_profile_save_action">Lưu cấu hình vá</string>
     <string name="patch_profile_select_bundles_title">Chọn gói vá</string>
     <string name="patch_profile_select_bundles_description">Chọn gói vá để đưa cấu hình này vào.</string>
@@ -671,7 +671,7 @@ Phiên bản nào nên được lưu vào hồ sơ này?"</string>
     <string name="patch_profile_version_conflict_keep_existing">Giữ phiên bản hiện có</string>
     <string name="patch_profile_empty_state">Lưu cấu hình từ màn hình chọn bản vá để xem chúng ở đây.</string>
     <string name="patch_profile_missing_bundles_toast">Một số gói trong cấu hình này có thể không còn tồn tại và sẽ bị bỏ qua.</string>
-    <string name="patch_profile_changed_patches_toast">Một số bản vá và tùy chọn trong cấu hình này không còn khớp với gói và đã bị bỏ qua.</string>
+    <string name="patch_profile_changed_patches_toast">Một số bản vá và tùy chỉnh trong cấu hình này không còn khớp với gói và đã bị bỏ qua.</string>
     <string name="patch_profile_no_available_bundles_toast">Không có gói nào trong cấu hình này. Cập nhật gói và thử lại.</string>
     <string name="patch_profile_launch_error">Không thể mở cấu hình vá này.</string>
     <string name="patch_profile_show_more">Thêm</string>
@@ -732,8 +732,8 @@ Nó chỉ tương thích với phiên bản sau: %2$s."</string>
     <string name="saved_install">Đã lưu</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
-    <string name="unpatch_app">Huỷ vá ứng dụng?</string>
-    <string name="unpatch_description">Bạn có chắc chắn muốn huỷ vá ứng dụng này?</string>
+    <string name="unpatch_app">Hủy vá ứng dụng?</string>
+    <string name="unpatch_description">Bạn có chắc chắn muốn hủy vá ứng dụng này?</string>
     <string name="downloader_app_not_found">Trình tải không tìm thấy ứng dụng nào</string>
     <string name="downloader_error">Lỗi trình tải: %s</string>
     <string name="downloader_no_plugins_installed">Chưa có plugin nào được cài đặt.</string>
