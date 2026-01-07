@@ -1,3 +1,10 @@
+## app [1.1.2-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.1...v1.1.2-dev.2) (2026-01-07)
+
+
+### Bug Fixes
+
+* Change to time based version code to resolve pre-release Manager unable to update to latest stable release ([97ec26e](https://github.com/MorpheApp/morphe-manager/commit/97ec26e3b11e0133873b5a8cae3dcb4a0a45c239))
+
 ## app [1.1.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1...v1.1.2-dev.1) (2026-01-07)
 
 
