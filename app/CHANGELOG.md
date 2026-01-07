@@ -1,3 +1,10 @@
+## app [1.1.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1...v1.1.2-dev.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* Some apk files are not selectable in expert mode ([aa8c3ce](https://github.com/MorpheApp/morphe-manager/commit/aa8c3cea4a9e331d2dae09c65e3c1cd76bc2c618))
+
 ## app [1.1.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.0...v1.1.1) (2026-01-05)
 
 

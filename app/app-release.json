@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-01-05T19:11:03.989Z",
-  "description": "## app [1.1.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.0...v1.1.1) (2026-01-05)\n\n\n### Bug Fixes\n\n* Fix crash on Android 10 when selecting APK in Expert mode ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([#64](https://github.com/MorpheApp/morphe-manager/issues/64)) ([faa5290](https://github.com/MorpheApp/morphe-manager/commit/faa5290abe3409f7208eeac46d0c3dbc5deb6d9a))\n* Import keystore using default password ([1c0c1f6](https://github.com/MorpheApp/morphe-manager/commit/1c0c1f6799762946574d3eb54b0ea433145fe469))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.1/morphe-manager-1.1.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.1/morphe-manager-1.1.1.apk.asc",
-  "version": "1.1.1"
+  "created_at": "2026-01-07T22:07:25.959Z",
+  "description": "## app [1.1.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1...v1.1.2-dev.1) (2026-01-07)\n\n\n### Bug Fixes\n\n* Some apk files are not selectable in expert mode ([aa8c3ce](https://github.com/MorpheApp/morphe-manager/commit/aa8c3cea4a9e331d2dae09c65e3c1cd76bc2c618))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.2-dev.1/morphe-manager-1.1.2-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.2-dev.1/morphe-manager-1.1.2-dev.1.apk.asc",
+  "version": "1.1.2-dev.1"
 }
