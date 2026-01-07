@@ -1,9 +1,5 @@
 name: Release
 
-concurrency:
-  group: release-lock
-  cancel-in-progress: false
-
 on:
   workflow_dispatch:
   push:
