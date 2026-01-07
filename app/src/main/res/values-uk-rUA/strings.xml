@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Пакет патчів</string>
+    <string name="morphe_home_bundles">Пакет патчу</string>
     <string name="morphe_home_greeting_1">Який додаток ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Готові зробити YouTube знову легендарним?</string>
@@ -20,7 +20,7 @@
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="morphe_home_greeting_9">Рятуємо додатки від них самих, починаючи з сьогодні</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">На каві і хороших оновленнях</string>
+    <string name="morphe_home_greeting_10">На каві та хороших оновленнях</string>
     <string name="morphe_home_bundle_type_api">Пакет API</string>
     <string name="morphe_home_update_error">Помилка оновлення</string>
     <string name="morphe_home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
@@ -47,11 +47,11 @@
     <string name="morphe_home_download_instructions_step1">Натисніть кнопку \'%1$s\' нижче.</string>
     <string name="morphe_home_download_instructions_step2_part1">Прокрутіть вниз і натисніть</string>
     <string name="morphe_home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
-    <string name="morphe_home_download_instructions_step3">Дочекайтеся завершення завантаження та не встановлюйте APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Дочекайтеся завершення завантаження та встановіть APK</string>
+    <string name="morphe_home_download_instructions_step3">Дочекайтеся завершення завантаження та &lt;b&gt;не встановлюйте&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Дочекайтеся завершення завантаження та &lt;b&gt;встановіть APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Після завершення завантаження знову відкрийте цей додаток</string>
     <string name="morphe_home_download_instructions_step4_mount">Після встановлення оригінального APK знову відкрийте цей додаток</string>
-    <string name="morphe_home_download_instructions_continue">Перейти на APKMirror</string>
+    <string name="morphe_home_download_instructions_continue">Перейти на APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Виберіть завантажений APK</string>
     <string name="morphe_home_file_picker_prompt_description">Тепер виберіть файл %1$s APK, який ви щойно завантажили.</string>
@@ -66,7 +66,7 @@
     <string name="morphe_patcher_copy_error">Скопіювати помилку</string>
     <string name="morphe_patcher_show_error">Показати помилку</string>
     <string name="morphe_patcher_error_copied">Помилку скопійовано у буфер обміну</string>
-    <string name="morphe_patcher_patches_progress">%1$d / %2$d патч(а)ів</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d патчів</string>
     <string name="morphe_patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="morphe_patcher_installing">Встановлення…</string>
     <string name="morphe_patcher_installing_subtitle">Майже готово до драйву! 🎸</string>
@@ -119,7 +119,7 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Повернутися до Morphe</string>
     <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
-    <string name="morphe_settings_return_to_expert">Змінити на експертний режим</string>
+    <string name="morphe_settings_return_to_expert">Змінити на Експертний режим</string>
     <string name="morphe_settings_return_to_expert_description">Перемкнути до повнофункціонального експертного режиму</string>
     <string name="morphe_share_website">Поділитися вебсайтом</string>
     <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
@@ -136,49 +136,83 @@
     <string name="morphe_background_type_none">Немає</string>
     <!-- Update Section -->
     <string name="morphe_update_use_prereleases">Використовувати тестові версії</string>
-    <string name="morphe_update_use_prereleases_description">Отримати раніше доступ до нових патчів та функцій менеджера</string>
+    <string name="morphe_update_use_prereleases_description">Отримуйте ранній доступ до нових патчів та функцій менеджера</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Параметри патчів</string>
-    <string name="morphe_patch_options_youtube_description">Тема, брендинг, заголовок, і опції Shorts</string>
+    <string name="morphe_patch_options_youtube_description">Тема, брендинг, заголовок та параметри Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Параметри теми та брендингу</string>
-    <string name="morphe_patch_options_restart_message">Зміна параметрів патчу потребує перепаковки додатку для вступлення в силу</string>
+    <string name="morphe_patch_options_restart_message">Зміна параметрів патчу потребує повторного патчінгу додатка для застосування змін</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Кольори теми</string>
-    <string name="morphe_patch_options_theme_colors_description">Змінити кольор фону</string>
-    <string name="morphe_patch_options_dark_theme_color">Кольор фону темної теми</string>
-    <string name="morphe_patch_options_dark_theme_color_description">\"RRGGBB\" колір у форматі #hex або посилання на ресурс кольору</string>
-    <string name="morphe_patch_options_light_theme_color">Кольор фону світлої теми</string>
-    <string name="morphe_patch_options_light_theme_color_description">\"RRGGBB\" колір у форматі #hex або посилання на ресурс кольору</string>
-    <string name="morphe_patch_options_icon_instructions_title">Інструкції формату значк</string>
-    <string name="morphe_patch_options_header_instructions_title">Інструкції формату головної частини</string>
+    <string name="morphe_patch_options_theme_colors_description">Змінити колір фону</string>
+    <string name="morphe_patch_options_dark_theme_color">Колір фону темної теми</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Може бути шістнадцятковим кольором (#RRGGBB) або посиланням на ресурс кольору</string>
+    <string name="morphe_patch_options_light_theme_color">Колір фону світлої теми</string>
+    <string name="morphe_patch_options_light_theme_color_description">Може бути шістнадцятковим кольором (#RRGGBB) або посиланням на ресурс кольору</string>
+    <string name="morphe_patch_options_icon_instructions_title">Інструкції щодо формату іконки</string>
+    <string name="morphe_patch_options_header_instructions_title">Інструкції щодо формату логотипу заголовку</string>
     <string name="morphe_patch_options_loading">Завантаження параметрів патчів...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Почекайте, поки пакунок патчу оновлюється</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Зачекайте, поки пакет патчів буде оновлено</string>
     <string name="morphe_patch_options_load_error">Не вдалося завантажити параметри патчу</string>
-    <string name="morphe_patch_options_no_available">Параметри відсутні для цього патчу</string>
+    <string name="morphe_patch_options_no_available">Для цього патчу немає доступних параметрів</string>
     <!-- Color Picker -->
-    <string name="morphe_custom_color">Колір користувача</string>
-    <string name="morphe_hex_color">Колір у форматі HEX</string>
+    <string name="morphe_custom_color">Користувацький колір</string>
+    <string name="morphe_hex_color">Шістнадцятковий колір</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Налаштування бренду</string>
-    <string name="morphe_patch_options_custom_branding_description">Замінити відображувальне ім\'я додатку</string>
+    <string name="morphe_patch_options_custom_branding">Користувацький брендинг</string>
+    <string name="morphe_patch_options_custom_branding_description">Змінити ім’я додатка</string>
     <string name="morphe_patch_options_custom_branding_app_name">Назва додатку</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">Вказати назву пристрою</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon">Користувацький значок</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Фодер, що містить зображення для використання як користувацький значок.
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Введіть користувацьке ім’я</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Користувацька іконка</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Папка з зображеннями для використання користувацької іконки.
 
-Спад mentioned folders starter solution color. themed here because"</string>
+Папка повинна містити одну або кілька з наступних папок, залежно від DPI пристрою:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Кожна з папок повинна містити всі наступні файли:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Розміри зображень повинні бути такими:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+За бажанням, шлях може містити папку drawable з будь-яким із файлів монохромної іконки:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">Користувацький логотип головної частини</string>
-    <string name="morphe_patch_options_custom_header_description">Замінити логотип головної частини</string>
-    <string name="morphe_patch_options_custom_header_instruction">"Фодер, що містить зображення для використання як користувацький логотип головної частини.
+    <string name="morphe_patch_options_custom_header">Користувацький логотип заголовку</string>
+    <string name="morphe_patch_options_custom_header_description">Замінити логотип заголовку</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Папка з зображеннями для використання користувацького логотипу заголовку.
 
-Each folder must contain all files pointed flaking for base game styles or modded resources, consider styles can have"</string>
+Папка повинна містити одну або кілька з наступних папок, залежно від DPI пристрою:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Кожна з папок повинна містити всі наступні файли:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Розміри зображень повинні бути такими:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Приховати функціонал Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">Приховатити ярлик Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Видалити ярлик Shorts з меню довгого натискання запускача</string>
-    <string name="morphe_patch_options_hide_shorts_widget">Приховати виджет Shorts</string>
-    <string name="morphe_patch_options_hide_shorts_widget_description">Видалити кнопку Shorts з виджета запускача</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню довгого натискання у лаунчері</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Приховати віджет Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Прибрати кнопку Shorts з віджета лаунчера</string>
     <!-- Other strings -->
     <string name="patcher">Патчер</string>
     <string name="patches">Патчі</string>
@@ -274,7 +308,7 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="apk_source_downloaded">Використання завантаженого APK</string>
     <string name="auto_updates_dialog_title">Налаштувати оновлення</string>
     <string name="auto_updates_dialog_description">Ви хочете, щоб Morphe періодично перевіряв оновлення для наступних компонентів?</string>
-    <string name="auto_updates_dialog_patches">Morphe Патчі</string>
+    <string name="auto_updates_dialog_patches">Патчі Morphe</string>
     <string name="auto_updates_dialog_note">Ці налаштування можна змінити пізніше.</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="appearance_description">Тема, динамічний колір</string>
@@ -282,8 +316,8 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="updates_description">Перевірити оновлення та переглянути перелік змін</string>
     <string name="downloads">Завантаження</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Імпорт &amp; eкспорт</string>
-    <string name="import_export_description">Keystore, настройки патча та вибір</string>
+    <string name="import_export">Імпорт та eкспорт</string>
+    <string name="import_export_description">Keystore, параметри патчів та вибір</string>
     <string name="changelog">Переглянути списки змін</string>
     <string name="changelog_loading">Завантаження списку змін</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>
@@ -292,20 +326,20 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="advanced_description">API URL, ліміт пам\'яті, налагодження</string>
     <string name="about">Про програму</string>
     <!-- Morphe -->
-    <string name="accent_color_presets">Акцент</string>
+    <string name="accent_color_presets">Акцентний колір</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="theme_preview_title">Передбачення вигляду теми</string>
+    <string name="theme_preview_title">Попередній перегляд</string>
     <!-- Morphe -->
-    <string name="theme_presets">Налаштування теми</string>
+    <string name="theme_presets">Колір теми</string>
     <!-- Morphe -->
-    <string name="theme_preset_default">Слідувати за системою</string>
+    <string name="theme_preset_default">Системний</string>
     <string name="theme_preset_amoled">Чисто чорний</string>
-    <string name="theme_preset_dynamic">Матеріал Ти</string>
+    <string name="theme_preset_dynamic">Material You</string>
     <!-- Morphe -->
     <string name="color_channel_red">Червоний</string>
     <string name="color_channel_green">Зелений</string>
@@ -314,7 +348,9 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="safeguards">Засоби захисту</string>
     <string name="patch_compat_check">Вимкнути перевірку сумісності версії</string>
     <string name="patch_compat_check_description">Не обмежувати патчі для сумісних версій додатків</string>
-    <string name="patch_compat_check_confirmation">"Вибір несумісних патчів може призвести до зламаного додатку.\n\nБажаєте продовжити?"</string>
+    <string name="patch_compat_check_confirmation">"Вибір несумісних патчів може призвести до некоректної роботи додатка.
+
+Бажаєте продовжити?"</string>
     <string name="suggested_version_safeguard">Вимагати запропоновану версію додатку</string>
     <string name="suggested_version_safeguard_description">Примусити вибір запропонованої версії додатку</string>
     <string name="suggested_version_safeguard_confirmation">"Вибір додатку, що не є запропонованою версією, може викликати несподівані проблеми.\n\nБажаєте продовжити?"</string>
@@ -489,7 +525,8 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="downloader_plugin_state_untrusted">Ненадійний</string>
     <string name="downloader_plugin_trust_dialog_title">Довірити плагіну?</string>
     <string name="downloader_plugin_revoke_trust_dialog_title">Відкликати довіру?</string>
-    <string name="downloader_plugin_trust_dialog_body">"Ім'я пакету: %1$s\nПідпис (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_trust_dialog_body">"Ім'я пакету: %1$s
+Підпис (SHA-256): %2$s"</string>
     <string name="downloader_plugin_view_error">Переглянути деталі помилки</string>
     <string name="downloader_plugin_failed_dialog_body">Не вдалося завантажити \"%1$s\". Ви можете переглянути деталі помилки або видалити плагін.</string>
     <string name="downloader_plugin_uninstall_title">Видалити плагін?</string>
@@ -553,7 +590,7 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="export_name_variable_app_version">Версія додатку</string>
     <string name="export_name_variable_app_version_description">Замінено на назву версії додатку.</string>
     <string name="export_name_variable_patches_version">Версія патчів</string>
-    <string name="export_name_variable_patches_version_description">Замінено на версію пакета патчів, який застосовується.</string>
+    <string name="export_name_variable_patches_version_description">Замінено на версію(ї) пакета патчів, що застосована.</string>
     <string name="export_name_variable_bundle_names">Назви пакетів патчів</string>
     <string name="export_name_variable_bundle_names_description">Замінено на назву(и) застосованої інформації про пакет патчів.</string>
     <string name="export_name_variable_manager_version">Версія менеджера</string>
@@ -677,7 +714,7 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="patcher_preflight_missing_patch_proceed">Продовжити в будь-якому разі</string>
     <string name="patcher_preflight_missing_patch_message">"Наступні патчі недоступні в поточному пакеті:
 %1$s
-Ви можете їх автоматично видалити, налаштувати вибір або продовжити всупереччу %1$s"</string>
+Ви можете їх автоматично видалити, налаштувати вибір або продовжити всупереч цьому."</string>
     <string name="patcher_missing_patch_review">Перегляд вибору</string>
     <string name="patch_selector_missing_patch_title">Знову вибрати відсутні патчі</string>
     <string name="patch_selector_missing_patch_message">"Ці патчі потрібно знову вибрати:
@@ -758,7 +795,7 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="installer_status_not_supported">Не підтримується для цієї операції.</string>
     <string name="installer_status_shizuku_not_installed">Встановіть Shizuku або Sui для використання цього варіанту.</string>
     <string name="installer_status_shizuku_not_running">Запустіть Shizuku або Sui та спробуйте знову.</string>
-    <string name="installer_status_shizuku_permission">Надайте Shizuku дозволи для Universal ReVanced Manager у додатку Shizuku.</string>
+    <string name="installer_status_shizuku_permission">Надайте дозвіл Shizuku для Morphe у додатку Shizuku.</string>
     <string name="installer_mount_warning_title">Вибрано інсталятор з рутом</string>
     <string name="installer_mount_warning_install">Ваш основний інсталятор налаштований на інсталятор з рутом. У цей збережений додаток не встановлено за допомогою монтованої установки.</string>
     <string name="installer_mount_warning_update">Ваш основний інсталятор налаштовано на інсталятор із монтованим рутом. Цей збережений додаток не встановлено за допомогою монтованої установки.</string>
@@ -972,8 +1009,8 @@ Each folder must contain all files pointed flaking for base game styles or modde
     <string name="installation_aborted_description">Встановлення було скасовано вручну. Спробувати ще раз?</string>
     <string name="installation_blocked_description">Встановлення було заблоковано. Перевірте свої налаштування безпеки пристрою та спробуйте ще раз.</string>
     <string name="installation_conflict_description">Встановлення запобігло існуванням іншої версії додатку. Видаліть встановлений додаток і спробуйте ще раз?</string>
-    <string name="installation_signature_mismatch_dialog_title">Непідхожа пара ключа та сертифіката</string>
-    <string name="installation_signature_mismatch_description">Звільнений додаток має інший підпис. Видаліть встановлений пакет і встановіть цей?</string>
+    <string name="installation_signature_mismatch_dialog_title">Невідповідність підпису</string>
+    <string name="installation_signature_mismatch_description">Встановлений додаток підписано іншим підписом. Видалити встановлений додаток і встановити цей?</string>
     <string name="installation_incompatible_description">Додаток несумісний із цим пристроєм. Використовуйте APK, що сумісне з цим пристроєм, та спробуйте ще раз.</string>
     <string name="installation_invalid_description">Додаток неприпустимий. Видаліть додаток і спробуйте ще раз?</string>
     <string name="installation_storage_issue_description">Додаток не вдалося встановити через недостатнє місце. Звільніть простір і спробуйте ще раз.</string>

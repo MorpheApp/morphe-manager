@@ -308,7 +308,7 @@ Morphe فقط لديه هذا.</string>
     <string name="apk_source_local">استخدام ملف APK محلي</string>
     <string name="apk_source_downloaded">استخدام APK تم تنزيله</string>
     <string name="auto_updates_dialog_title">تكوين التحديثات</string>
-    <string name="auto_updates_dialog_description">هل تريد أن يتحقق Morphe بشكل دوري من وجود تحديثات للمكونات التالية؟</string>
+    <string name="auto_updates_dialog_description">هل تريد أن يتحقق Morphe بشكل دوري من توفر تحديثات للمكونات التالية؟</string>
     <string name="auto_updates_dialog_patches">تعديلات Morphe</string>
     <string name="auto_updates_dialog_note">يمكن تغيير هذه الإعدادات لاحقًا.</string>
     <string name="appearance">المظهر</string>
@@ -319,7 +319,7 @@ Morphe فقط لديه هذا.</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">استيراد &amp; تصدير</string>
     <string name="import_export_description">مفتاح التخزين، خيارات التعديل والتحديد</string>
-    <string name="changelog">عرض سجلات التغيير</string>
+    <string name="changelog">عرض سجل التغييرات</string>
     <string name="changelog_loading">جارٍ تحميل سجل التغييرات</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
@@ -955,13 +955,13 @@ Morphe فقط لديه هذا.</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>
     <string name="update_completed">تم تثبيت التحديث</string>
     <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
-    <string name="manual_update_check">التحقق من وجود تحديثات</string>
-    <string name="manual_update_check_description">التحقق يدويًا من وجود تحديثات</string>
+    <string name="manual_update_check">التحقق من توفر تحديثات</string>
+    <string name="manual_update_check_description">التحقق يدويًا من توفر تحديثات</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="update_checking_manager">التحقق من وجود تحديثات عند بدء التشغيل</string>
-    <string name="update_checking_manager_description">التحقق من وجود إصدارات جديدة من Morphe عند بدء تشغيل التطبيق</string>
+    <string name="update_checking_manager">التحقق من توفر تحديثات عند بدء التشغيل</string>
+    <string name="update_checking_manager_description">التحقق من توفر إصدارات جديدة من Morphe عند بدء تشغيل التطبيق</string>
     <string name="manager_prereleases">استخدام إصدارات ما قبل الإطلاق</string>
     <string name="manager_prereleases_description">استخدام إصدارات ما قبل الإطلاق من Morphe</string>
     <string name="update_published">تم النشر %s</string>

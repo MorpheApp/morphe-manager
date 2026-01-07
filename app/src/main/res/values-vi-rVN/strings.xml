@@ -150,7 +150,7 @@
     <string name="morphe_patch_options_light_theme_color">Màu nền chủ đề sáng</string>
     <string name="morphe_patch_options_light_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
     <string name="morphe_patch_options_icon_instructions_title">Hướng dẫn về định dạng biểu tượng</string>
-    <string name="morphe_patch_options_header_instructions_title">Hướng dẫn về định dạng logo đầu trang chủ</string>
+    <string name="morphe_patch_options_header_instructions_title">Hướng dẫn về định dạng logo</string>
     <string name="morphe_patch_options_loading">Đang tải tùy chỉnh bản vá…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Chờ cho gói vá cập nhật xong</string>
     <string name="morphe_patch_options_load_error">Không thể tải tùy chỉnh bản vá</string>

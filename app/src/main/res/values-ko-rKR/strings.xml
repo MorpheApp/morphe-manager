@@ -416,7 +416,7 @@ morphe_header_custom_dark.png
     <string name="export_patch_bundles_success">%d 개의 패치 번들을 내보냈습니다</string>
     <string name="export_patch_bundles_partial">%1$d 개의 패치 번들을 내보냈습니다. 일부 번들은 기기에 추가되어있기 때문에 내보낼 수 없습니다.</string>
     <string name="bundle_type_remote">수동 설치됨</string>
-    <string name="bundle_type_local">기기</string>
+    <string name="bundle_type_local">기기 저장소</string>
     <string name="bundle_type_preinstalled">미리 설치됨</string>
     <string name="bundle_created_at">%1$s 생성됨</string>
     <string name="bundle_updated_at">%1$s 업데이트됨</string>
@@ -565,7 +565,7 @@ morphe_header_custom_dark.png
     <string name="process_runtime">다른 프로세스에서 패처 실행</string>
     <string name="process_runtime_description">별도 프로세스를 사용하여 패치 속도를 향상시킬 수 있습니다</string>
     <string name="process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
-    <string name="strip_unused_libs">사용되지 않는 네이티브 라이브러리 삭제</string>
+    <string name="strip_unused_libs">사용되지 않는 라이브러리 삭제</string>
     <string name="strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
     <string name="process_runtime_memory_limit">패처 프로세스 메모리 제한</string>
     <string name="process_runtime_memory_limit_description">패처 프로세스가 사용 가능한 최대 메모리 용량을 지정할 수 있습니다 (메가바이트)</string>
@@ -1022,7 +1022,7 @@ morphe_header_custom_dark.png
     <string name="installation_timeout_description">설치하는 데 시간이 너무 오래 걸렸습니다. 다시 시도하시겠습니까?</string>
     <string name="reinstall">다시 설치</string>
     <string name="installation_signature_mismatch_confirm">삭제 후 설치</string>
-    <string name="show">표시</string>
+    <string name="show">보기</string>
     <string name="debugging">디버그</string>
     <string name="about_device">기기 정보</string>
     <string name="enter_url">URL 입력</string>
@@ -1038,7 +1038,7 @@ morphe_header_custom_dark.png
 자세한 정보를 보려면 패치를 탭하세요."</string>
     <string name="incompatible_patch">호환되지 않는 패치</string>
     <string name="any_version">모든 앱 버전</string>
-    <string name="never_show_again">다시 표시 안 함</string>
+    <string name="never_show_again">다시 보지 않기</string>
     <string name="show_manager_update_dialog_on_launch">시작 시 업데이트 메시지 표시</string>
     <string name="show_manager_update_dialog_on_launch_description">새로운 업데이트가 있을 경우에 시작 시 팝업 메시지를 표시합니다</string>
     <string name="failed_to_import_keystore">키스토어를 가져올 수 없습니다</string>

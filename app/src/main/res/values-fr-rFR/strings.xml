@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch bundle</string>
+    <string name="morphe_home_bundles">Bundle de patch</string>
     <string name="morphe_home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Prêt à rendre YouTube légendaire à nouveau ?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <string name="morphe_home_greeting_3">Attachez vos ceintures, c\'est l\'heure du patchage</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Un autre jour, un autre chef-d\'œuvre grâce au blocage de publicités</string>
+    <string name="morphe_home_greeting_4">Un autre jour, un autre chef-d\'œuvre grâce au blocage des pubs</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Voulez-vous regarder des pubs ? Moi non plus</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">Faisons fonctionner vos applications.</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Prévisions du jour : 100% de chance de patchs</string>
+    <string name="morphe_home_greeting_7">Prévisions du jour : 100% de chance de patchage</string>
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">Prêt à transformer le médiocre en extraordinaire ?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -50,7 +50,7 @@
     <string name="morphe_home_download_instructions_step3">Attendez que le téléchargement ce terminé, et &lt;b&gt; n\'installez pas&lt;/b&gt; l\'APK</string>
     <string name="morphe_home_download_instructions_step3_mount">Attendez que le téléchargement ce terminé, puis &lt;b&gt;installez l\'APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Une fois le téléchargement terminé, ouvrez à nouveau cette application.</string>
-    <string name="morphe_home_download_instructions_step4_mount">Après avoir installé l\'APK d\'origine, ouvrez à nouveau cette application.</string>
+    <string name="morphe_home_download_instructions_step4_mount">Après avoir installé l\'APK d\'origine, ouvrez à nouveau cette application</string>
     <string name="morphe_home_download_instructions_continue">Continuer vers APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Sélectionnez l\'APK que vous avez téléchargée</string>
@@ -59,8 +59,8 @@
     <string name="morphe_home_recommended_version">Version recommandée</string>
     <string name="morphe_patcher_selected_version">Version sélectionnée</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant l\'application des patchs.</string>
-    <string name="morphe_root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root.</string>
+    <string name="morphe_root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage.</string>
+    <string name="morphe_root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Enregistrer l\'APK</string>
     <string name="morphe_patcher_copy_error">Copier l\'erreur</string>
@@ -75,7 +75,7 @@
     <string name="morphe_patcher_complete_title">Patchage terminé ! ✨</string>
     <string name="morphe_patcher_failed_title">Oups ! Quelque chose s\'est mal passé</string>
     <string name="morphe_patcher_failed_subtitle">Vérifiez les détails de l\'erreur ci-dessous</string>
-    <string name="morphe_patcher_failed_dialog_title">Échec de l\'application des patchs</string>
+    <string name="morphe_patcher_failed_dialog_title">Échec du patchage</string>
     <string name="morphe_patcher_unknown_error">Une erreur inconnue s\'est produite</string>
     <string name="morphe_patcher_mounting">Montage…</string>
     <string name="morphe_patcher_conflict_title">Package en conflit</string>
@@ -108,11 +108,11 @@
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Négocier poliment avec le bytecode… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Tous les systèmes sont nominaux… trajectoire de patch stable… 🚀</string>
+    <string name="morphe_patcher_message_15">Tous les systèmes sont nominaux… trajectoire de patchage stable… 🚀</string>
     <string name="morphe_patcher_message_16">Tirer le maximum de puissance, comme le jus d\'un citron numérique... 🍋</string>
     <string name="morphe_patcher_message_17">Encourager l\'application à accepter sa nouvelle version améliorée... 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Changer la superposition de l\'application de non corrigée à corrigée… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">Changer la superposition de l\'application de non patchée à patchée… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Votre application a de la fièvre et la seule prescription est plus de patchs… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
@@ -135,8 +135,8 @@
     <string name="morphe_background_type_snow">Neige</string>
     <string name="morphe_background_type_none">Aucun</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">Utiliser les versions pré-versions</string>
-    <string name="morphe_update_use_prereleases_description">Obtenir un accès anticipé aux nouveaux patches et aux fonctions du gestionnaire</string>
+    <string name="morphe_update_use_prereleases">Utiliser les pré-versions</string>
+    <string name="morphe_update_use_prereleases_description">Obtenir un accès anticipé aux nouveaux patchs et aux fonctions du gestionnaire</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Options de patch</string>
     <string name="morphe_patch_options_youtube_description">Thème, branding, en-tête et options Shorts</string>
@@ -146,9 +146,9 @@
     <string name="morphe_patch_options_theme_colors">Couleurs du thème de l\'application</string>
     <string name="morphe_patch_options_theme_colors_description">Changer la couleur d\'arrière-plan</string>
     <string name="morphe_patch_options_dark_theme_color">Arrière-plan du thème sombre</string>
-    <string name="morphe_patch_options_dark_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur.</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
     <string name="morphe_patch_options_light_theme_color">Arrière-plan du thème clair</string>
-    <string name="morphe_patch_options_light_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur.</string>
+    <string name="morphe_patch_options_light_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
     <string name="morphe_patch_options_icon_instructions_title">Instructions de format d\'icône</string>
     <string name="morphe_patch_options_header_instructions_title">Instructions de format d\'en-tête</string>
     <string name="morphe_patch_options_loading">Chargement des options du patch…</string>
@@ -184,12 +184,11 @@ Les dimensions des images doivent respecter les valeurs suivantes :
 - mipmap-xxhdpi : 324×324 px
 - mipmap-xxxhdpi : 432×432 px
 
-Optionnellement, le chemin peut contenir un dossier 'drawable' avec l’un ou plusieurs des fichiers d’icône monochrome suivants: morphe_adaptive_monochrome_custom.xml
-morphe_notification_icon_custom.xml
-
-"</string>
+Optionnellement, le chemin peut contenir un dossier 'drawable' avec l’un ou plusieurs des fichiers d’icône monochrome suivants: 
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">Changer le logo de l\'en-tête</string>
+    <string name="morphe_patch_options_custom_header">Logo d’en-tête personnalisé</string>
     <string name="morphe_patch_options_custom_header_description">Changer le logo de l\'en-tête</string>
     <string name="morphe_patch_options_custom_header_instruction">"Dossier contenant les images à utiliser comme logo d’en-tête personnalisé.
 
@@ -217,8 +216,8 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Other strings -->
     <string name="patcher">Patcheur</string>
     <string name="patches">Patchs</string>
-    <string name="patch_bundles">Patch Bundles</string>
-    <string name="patch_bundle">Patch Bundle</string>
+    <string name="patch_bundles">Bundles de patch</string>
+    <string name="patch_bundle">Bundle de patch</string>
     <!-- Morphe -->
     <string name="installer">Installateur</string>
     <string name="plugin_host_permission_label">Hôte de plugin Morphe</string>
@@ -231,15 +230,15 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="app_filter_installed_only">Installé uniquement</string>
     <string name="app_filter_patches_available">Patchs disponibles </string>
     <string name="app_filter_no_results">Aucune application ne correspond à vos filtres.</string>
-    <string name="new_downloader_plugins_notification">De nouveaux plugins de téléchargement sont disponibles. Cliquez ici pour les configurer.</string>
+    <string name="new_downloader_plugins_notification">De nouveaux plugins de téléchargeur sont disponibles. Appuyez ici pour les configurer.</string>
     <string name="unsupported_architecture_warning">Le patchage sur cette architecture d\'appareil n\'est pas prise en charge et échouera très probablement.</string>
     <string name="import_">Importer</string>
     <string name="file_field_not_set">Non sélectionné</string>
     <string name="field_not_set">Non défini</string>
     <string name="patches_missing">Manquant</string>
     <string name="patches_error">Erreur</string>
-    <string name="patches_error_description">Les patchs n\'ont pas pu être chargés. Cliquez pour afficher l\'erreur</string>
-    <string name="patches_not_downloaded">Les patchs n\'ont pas été téléchargés. Cliquez ici pour télécharger.</string>
+    <string name="patches_error_description">Les patchs n\'ont pas pu être chargés. Appuyez pour afficher l\'erreur</string>
+    <string name="patches_not_downloaded">Les patchs n\'ont pas été téléchargés. Appuyez ici pour télécharger</string>
     <string name="patches_name_default">Patchs</string>
     <string name="patches_name_fallback">Sans nom</string>
     <string name="bundle_uid">ID Bundle</string>
@@ -271,19 +270,19 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="bundle_update_progress">%1$d/%2$d bundles traités</string>
     <string name="bundle_update_banner_title">Mise à jour des bundles de patchs</string>
     <string name="bundle_reorder">Organiser les bundles</string>
-    <string name="bundle_reorder_title">Organiser les bundles de patchs</string>
-    <string name="bundle_reorder_description">Faites glisser la poignée pour organiser l\'ordre d\'apparition des bundles dans la liste et le menu de sélection des patchs.</string>
+    <string name="bundle_reorder_title">Organiser les bundles de patch</string>
+    <string name="bundle_reorder_description">Faites glisser la poignée pour organiser l’ordre d’apparition des bundles dans la liste et dans le menu de sélection des patchs.</string>
     <string name="bundle_actions_expand">Afficher les actions du bundle</string>
     <string name="bundle_actions_collapse">Masquer les actions du bundle</string>
-    <string name="patch_bundle_duplicate_name_error">Un patch bundle portant ce nom existe déjà</string>
+    <string name="patch_bundle_duplicate_name_error">Un bundle de patch portant ce nom existe déjà</string>
     <string name="patch_bundle_missing_error">Impossible de mettre à jour ce bundle de patch.</string>
     <string name="bundle_release_page">Ouvrir la page de publication</string>
     <string name="bundle_release_page_unavailable">La page de publication n\'est pas disponible pour ce bundle</string>
     <string name="bundle_release_page_error">Impossible d\'ouvrir la page de publication : %s</string>
     <string name="bundle_links_title">Liens pour %1$s</string>
     <string name="bundle_link_release">Publication GitHub</string>
-    <string name="bundle_link_catalog">Catalogue de la liste des patchs</string>
-    <string name="bundle_catalog_unavailable">Catalogue de la liste des patchs indisponible</string>
+    <string name="bundle_link_catalog">Catalogue de la liste de patch</string>
+    <string name="bundle_catalog_unavailable">Catalogue de la liste de patch indisponible</string>
     <string name="show_suggested_versions">Afficher les versions suggérées</string>
     <string name="hide_suggested_versions">Masquer les versions suggérées</string>
     <string name="show_other_versions">Afficher d\'autres versions</string>
@@ -347,7 +346,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="color_channel_blue">Bleu</string>
     <string name="theme">Thème</string>
     <string name="safeguards">Mesures de protection</string>
-    <string name="patch_compat_check">Désactiver la vérification de compatibilité des versions</string>
+    <string name="patch_compat_check">Désactiver la vérification de compatibilité de version</string>
     <string name="patch_compat_check_description">Ne pas restreindre les patchs aux versions d\'application compatibles</string>
     <string name="patch_compat_check_confirmation">"La sélection des patchs incompatibles peut entraîner une application défectueuse.
 
@@ -384,14 +383,14 @@ Activer quand même ?"</string>
     <string name="regenerate_keystore_success">Le keystore a été remplacé avec succès</string>
     <string name="import_patch_selection">Importation de la sélection de patch</string>
     <string name="import_patch_selection_description">Importer la sélection de patch à partir d\'un fichier JSON</string>
-    <string name="import_patch_selection_fail">Impossible d\'importer la sélection de patchs : %s</string>
+    <string name="import_patch_selection_fail">Impossible d\'importer la sélection de patch : %s</string>
     <string name="import_patch_selection_success">Sélection de patch importée</string>
     <string name="import_patch_bundles">Importer des bundles de patch</string>
     <string name="import_patch_bundles_description">Restaurer des bundles de patch à distance à partir d\'un fichier JSON</string>
     <string name="import_patch_bundles_fail">Impossible d\'importer les bundles de patch : %s</string>
     <string name="import_patch_bundles_in_progress">Importation…</string>
     <string name="import_patch_bundles_success">Importer %d bundles de patch</string>
-    <string name="import_patch_bundles_updated">Mise à jour de %d bundles de patchs</string>
+    <string name="import_patch_bundles_updated">Mise à jour de %d bundles de patch</string>
     <string name="import_patch_bundles_none">Aucun nouveau bundles de patch n\'a été importé</string>
     <string name="import_patch_bundles_banner_title">Importation des bundles de patch</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d sur %2$d traités</string>
@@ -403,7 +402,7 @@ Activer quand même ?"</string>
     <string name="import_patch_profiles_partial">%1$d profils de patch importés avec %2$d ignorés</string>
     <string name="import_patch_profiles_skipped">%d profils de patch en double ignorés</string>
     <string name="import_patch_profiles_none">Aucun profil de patch n\'a été importé</string>
-    <string name="import_manager_settings">Paramètres du gestionnaire d\'importation</string>
+    <string name="import_manager_settings">Importer les paramètres du gestionnaire</string>
     <string name="import_manager_settings_description">Restaurez les paramètres du gestionnaire enregistrés à partir d\'un fichier JSON</string>
     <string name="import_manager_settings_fail">Impossible d\'importer les paramètres du gestionnaire : %s</string>
     <string name="import_manager_settings_success">Paramètres du gestionnaire importés</string>
@@ -412,7 +411,7 @@ Activer quand même ?"</string>
     <string name="export_patch_selection_fail">Impossible d\'exporter la sélection de patch : %s</string>
     <string name="export_patch_selection_success">Sélection de patch exportée</string>
     <string name="export_patch_bundles">Exporter les bundles de patch</string>
-    <string name="export_patch_bundles_description">Enregistrez les bundles de patch à distance importés dans un fichier JSON</string>
+    <string name="export_patch_bundles_description">Enregistrez les bundles de patch à distance importé dans un fichier JSON</string>
     <string name="export_patch_bundles_fail">Impossible d\'exporter les bundles de patch : %s</string>
     <string name="export_patch_bundles_success">%d bundles de patch exporté</string>
     <string name="export_patch_bundles_partial">%1$d bundles de patch exporté. Certains bundles n\'ont pas pu être exportés car ils ont été ajoutés localement.</string>
@@ -431,7 +430,7 @@ Activer quand même ?"</string>
     <string name="export_patch_profiles_fail">Impossible d\'exporter les profils de patch : %s</string>
     <string name="export_patch_profiles_success">%d profils de patch exportés</string>
     <string name="export_patch_profiles_empty">Aucun profil de patch à exporter</string>
-    <string name="export_manager_settings">Importer/Exporter les paramètres</string>
+    <string name="export_manager_settings">Exporter les paramètres du gestionnaire</string>
     <string name="export_manager_settings_description">Enregistrer tous les paramètres du gestionnaire dans un fichier JSON</string>
     <string name="export_manager_settings_fail">Impossible d\'exporter les paramètres du gestionnaire : %s</string>
     <string name="export_manager_settings_success">Paramètres du gestionnaire exportés</string>
@@ -451,7 +450,7 @@ Activer quand même ?"</string>
     <string name="patch_selection_reset_bundle_toast">Rétablir les paramètres par défaut pour %s</string>
     <string name="patch_selection_button_label_all">Tout désélectionner</string>
     <string name="patch_selection_button_label_bundle">Désélectionner le bundle</string>
-    <string name="patch_selection_button_label_defaults">Tous les paramètres par défaut</string>
+    <string name="patch_selection_button_label_defaults">Tous par défauts</string>
     <string name="patch_selection_button_label_select_bundle">Sélectionner le bundle</string>
     <string name="patch_selection_button_label_select_all">Tout sélectionner</string>
     <string name="patch_selection_button_label_undo_action">Annuler l\'action</string>
@@ -526,7 +525,7 @@ Les profils de patch ne sont pas affectés."</string>
     <string name="downloader_auto_save_description">Conservez les fichiers APK téléchargés via les plugins afin de pouvoir les réutiliser. Désactivez cette option pour les supprimer après le patchage.</string>
     <string name="downloader_plugins">Plugins</string>
     <string name="downloader_plugin_state_trusted">Approuvé</string>
-    <string name="downloader_plugin_state_failed">Échec du chargement. Cliquez pour plus de détails</string>
+    <string name="downloader_plugin_state_failed">Échec du chargement. Appuyez pour plus de détails</string>
     <string name="downloader_plugin_state_untrusted">Non approuvé</string>
     <string name="downloader_plugin_trust_dialog_title">Approuver le plugin ?</string>
     <string name="downloader_plugin_revoke_trust_dialog_title">Révoquer l\'approbation ?</string>
@@ -965,7 +964,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="manager_prereleases">Utiliser les pré-versions</string>
     <string name="manager_prereleases_description">Utilisez les versions préliminaires de Morphe</string>
     <string name="update_published">Publié le %s</string>
-    <string name="battery_optimization_notification">Les optimisations de la batterie doivent être désactivées pour que Morphe fonctionne correctement en arrière-plan. Cliquez ici pour désactiver les optimisations.</string>
+    <string name="battery_optimization_notification">Les optimisations de la batterie doivent être désactivées pour que Morphe fonctionne correctement en arrière-plan. Appuyez ici pour désactiver les optimisations. </string>
     <string name="installing_manager_update">Installation de la mise à jour…</string>
     <string name="downloading_manager_update">Téléchargement de la mise à jour…</string>
     <string name="manager_update_banner_title">Téléchargement de la mise à jour du gestionnaire</string>
@@ -1035,7 +1034,7 @@ Voulez-vous tout de même continuer ?"</string>
     <string name="patches_url">URL du bundle de patch</string>
     <string name="incompatible_patches_dialog">"Ces patchs ne sont pas compatibles avec la version de l'application sélectionnée (%1$s).
 
-Cliquez sur les patchs pour plus de détails."</string>
+Appuyez sur les patchs pour plus de détails."</string>
     <string name="incompatible_patch">Patch incompatible</string>
     <string name="any_version">N\'importe laquelle</string>
     <string name="never_show_again">Ne plus afficher</string>
