@@ -10,25 +10,109 @@
     <!-- From mediocrity to amazing -->
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_open_in_browser">Отваряне в браузър</string>
+    <string name="morphe_home_timeline">История на обновленията</string>
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
     <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_recommended_version">Рекомендирана версия</string>
+    <string name="morphe_patcher_selected_version">Избрана версия</string>
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">Съхрани APK</string>
+    <string name="morphe_patcher_copy_error">Грешка при копиране</string>
+    <string name="morphe_patcher_show_error">Покажи грешките</string>
+    <string name="morphe_patcher_installing">Инсталиране…</string>
+    <string name="morphe_patcher_success_title">Всичко е готово! 🎉</string>
+    <string name="morphe_patcher_mounting">Монтиране…</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продължи все пак</string>
+    <string name="morphe_patcher_wrong_package_title">Избрана неподходяща пакет</string>
+    <string name="morphe_patcher_expected_package">Очакван пакет</string>
+    <string name="morphe_patcher_selected_package">Избран пакет</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_expert">Превключване към експерт режим</string>
+    <string name="morphe_settings_return_to_expert_description">Превключване към експерт режим с пълни възможности</string>
+    <string name="morphe_share_website">Сподели уебсайт</string>
     <!-- Appearance Section -->
+    <string name="morphe_appearance_options">Опции за външен вид</string>
+    <string name="morphe_background_type">Фонова анимация</string>
     <!-- Update Section -->
+    <string name="morphe_update_use_prereleases">Използване на предварителни версии</string>
+    <string name="morphe_update_use_prereleases_description">Получете ранно достъп до нови заплащания и функции на мениджъра</string>
     <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Опции за заплащане</string>
     <!-- Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Цветове на темата на приложението</string>
+    <string name="morphe_patch_options_theme_colors_description">Променете фоновия цвят</string>
+    <string name="morphe_patch_options_dark_theme_color">Темен фонов цвят</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Може да бъде хекс цвят (#RRGGBB) или рефереция към ресурс на цвят</string>
+    <string name="morphe_patch_options_light_theme_color">Светъл фонов цвят</string>
+    <string name="morphe_patch_options_light_theme_color_description">Може да бъде хекс цвят (#RRGGBB) или рефереция към ресурс на цвят</string>
+    <string name="morphe_patch_options_icon_instructions_title">Инструкции за формат на иконите</string>
+    <string name="morphe_patch_options_header_instructions_title">Инструкции за формат на заглавията</string>
+    <string name="morphe_patch_options_loading">Зарежда се опции за заплащане…</string>
+    <string name="morphe_patch_options_no_available">Няма налични опции за това заплащане</string>
     <!-- Color Picker -->
     <!-- Custom Branding -->
+    <string name="morphe_patch_options_custom_branding">Собствени марки</string>
+    <string name="morphe_patch_options_custom_branding_description">Променете името на приложението</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Име на приложението</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Въведете собствено име</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Собствен икони</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Папка с изображения, които да се използват като собствени икони.
+
+Папката трябва да съдържа една или повече от следните папки, в зависимост от DPI на устройството:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Следните папки трябва да съдържат всичките следните файлове:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Размерите на изображението трябва да бъдат както следва:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Допълнително, пътя съдържа папка 'drawable' с един от монохромните файлове на иконите:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
+    <string name="morphe_patch_options_custom_header">Собствен лого за заглавие</string>
+    <string name="morphe_patch_options_custom_header_description">Променете логото за заглавие</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Папка с изображения, които да се използват като собствени лого за заглавие.
+
+Папката трябва да съдържа една или повече от следните папки, в зависимост от DPI на устройството:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Следните папки трябва да съдържат всичките следните файлове:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Размерите на изображението трябва да бъдат както следва:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_features">Скриване на функциите за кратки видеоклипове</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Скриване на иконата за кратки видеоклипове</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Премахване на кратки видеоклипове от менюто за дълго натискване на стартер</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Скриване на виджет за кратки видеоклипове</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Премахване на бутона за кратки видеоклипове от виджет</string>
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->

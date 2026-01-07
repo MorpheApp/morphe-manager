@@ -67,13 +67,13 @@
     <string name="morphe_patcher_show_error">Taispeáin earráid</string>
     <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
-    <string name="morphe_patcher_long_step_warning">Féadfaidh an chéim seo tamall a ghlacadh. Fan go cineálta…</string>
+    <string name="morphe_patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
     <string name="morphe_patcher_installing">Ag suiteáil…</string>
     <string name="morphe_patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
-    <string name="morphe_patcher_success_title">Críochnaithe! 🎉</string>
+    <string name="morphe_patcher_success_title">Gach rud déanta! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Tá do aip paisteáilte agus suiteáilte!</string>
     <string name="morphe_patcher_complete_title">Paisteáilte Críochnaithe! ✨</string>
-    <string name="morphe_patcher_failed_title">Ouch! Tharla rud éigin mícheart</string>
+    <string name="morphe_patcher_failed_title">Úps! Chuaigh rud éigin mícheart.</string>
     <string name="morphe_patcher_failed_subtitle">Seiceáil na sonraí earráide thíos</string>
     <string name="morphe_patcher_failed_dialog_title">Theip ar Paisteáil</string>
     <string name="morphe_patcher_unknown_error">Tharla earráid anaithnid</string>
@@ -84,43 +84,43 @@
     <string name="morphe_patcher_install_error_subtitle">Déan iarracht é a dhíshuiteáil agus a shuiteáil arís</string>
     <string name="morphe_patcher_ready_to_install_subtitle">Brúigh an cnaipe thíos chun é a shuiteáil</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
-    <string name="morphe_patcher_unsupported_version_dialog_title">Leagan Gan Tacú</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Leagan Gan Tacaíocht</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ní leagan molta den aip é an APK seo. D’fhéadfadh sé nach n-oibreodh an aip má leanann tú ar aghaidh.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Táras ar scannán</string>
-    <string name="morphe_patcher_wrong_package_title">Rangaimpíl suite chunradh</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Lean ar aghaidh ar aon nós</string>
+    <string name="morphe_patcher_wrong_package_title">Pacáiste mícheart roghnaithe</string>
     <string name="morphe_patcher_wrong_package_description">Níl an APK roghnaithe don fheidhmchlár arbh eol duit paiste a chur air.</string>
-    <string name="morphe_patcher_expected_package">Rang shocraithe suite</string>
-    <string name="morphe_patcher_selected_package">Rang solasaílte</string>
+    <string name="morphe_patcher_expected_package">Pacáiste ionchais</string>
+    <string name="morphe_patcher_selected_package">Pacáiste roghnaithe</string>
     <string name="morphe_patcher_message_1">Ag athrú do aip go rud éigin iontach… 🏆</string>
-    <string name="morphe_patcher_message_2">Ag múineadh cleasanna nua d’aipeanna d’aois… 🎩</string>
+    <string name="morphe_patcher_message_2">Cleasanna nua á múineadh ag sean-aipeanna… 🎩</string>
     <string name="morphe_patcher_message_3">Ag tabhairt socrúcháin dhigiteach do d’aipeanna… 🔧</string>
-    <string name="morphe_patcher_message_4">Ag déanamh draíocht dhigiteach... ☕</string>
-    <string name="morphe_patcher_message_5">Moltar sos caife... ☕</string>
+    <string name="morphe_patcher_message_4">Ag grúdáil draíocht dhigiteach… ☕</string>
+    <string name="morphe_patcher_message_5">Sos caife molta… ☕</string>
     <string name="morphe_patcher_message_6">Breathnaigh amach, tá sé go deas lasmuigh... 🌤️</string>
     <string name="morphe_patcher_message_7">Ag coigeartú 1anna agus 0anna... 🤖</string>
     <string name="morphe_patcher_message_8">Ag díthaclaíocht spagetti digiteach... 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Ag ceartú fabhtanna san aip neamhpaisteáilte... 🐞</string>
     <string name="morphe_patcher_message_10">Is fiú fanacht le paistí móra... ⏳</string>
-    <string name="morphe_patcher_message_11">Ag liodán picteilíní go dtí go lonraíonn siad... 💎</string>
-    <string name="morphe_patcher_message_12">Fan ina suí go múchadh an captaen an comhartha \"Cóiriú ar siúl\"... 💺✈️</string>
+    <string name="morphe_patcher_message_11">Ag snasú picteilíní go dtí go lonraíonn siad… 💎</string>
+    <string name="morphe_patcher_message_12">Fan i do shuí go dtí go múchfaidh an captaen an comhartha \"Paisteáil ar siúl\"… 💺✈️</string>
     <string name="morphe_patcher_message_13">Ag cócaireacht d\'aip phaiisteáilte, te agus úr... 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Ag idirphlé go béasach le bytecode… 🤝</string>
+    <string name="morphe_patcher_message_14">Ag idirbheartaíocht go béasach le cód-bheart… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Gach córas gnáth… paisteadh ar fionraí cobhsaí… 🚀</string>
+    <string name="morphe_patcher_message_15">Gach córas gnáth… tá an treocht paisteála cobhsaí… 🚀</string>
     <string name="morphe_patcher_message_16">Ag brú amach cumhacht bhreise, cosúil le sú ó líomóid dhigiteach… 🍋</string>
     <string name="morphe_patcher_message_17">Ag spreagadh na haipe glacadh lena féin nua, níos fearr… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Ag athrú forluí na haipe ó neamhpháistí go páistí… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Baintear seafóideacht. Le do thoil, fan ar aghaidh… 🗑️</string>
+    <string name="morphe_patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Tionnadh go dtí baile Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Tionnadh go dtí mód simplí</string>
-    <string name="morphe_settings_return_to_expert">Chúig an mod chosái seo chun an mód tóirisc thú bhí bhíos ag baint úsáide</string>
-    <string name="morphe_settings_return_to_expert_description">Shuas craoligh an mod éigeanta mar thoradh iarmhar</string>
+    <string name="morphe_settings_return_to_morphe_description">Fill ar ais go mód simplithe</string>
+    <string name="morphe_settings_return_to_expert">Athraigh go mód saineolaithe</string>
+    <string name="morphe_settings_return_to_expert_description">Athraigh go dtí an mód saineolaithe lánghnéitheach</string>
     <string name="morphe_share_website">Seol an suíomh gréasáin</string>
     <string name="morphe_share_website_description">Roinn an láithreán gréasáin oifigiúil Morphe</string>
     <!-- Appearance Section -->

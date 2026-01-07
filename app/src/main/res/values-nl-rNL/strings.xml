@@ -66,12 +66,12 @@
     <string name="morphe_patcher_copy_error">Kopieerfout</string>
     <string name="morphe_patcher_show_error">Toon fout</string>
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
-    <string name="morphe_patcher_patches_progress">%2$d / %1$d patches</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="morphe_patcher_installing">Installeren...</string>
     <string name="morphe_patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
     <string name="morphe_patcher_success_title">Klaar! 🎉</string>
-    <string name="morphe_patcher_success_subtitle">Uw app is gepatched en geïnstalleerd!</string>
+    <string name="morphe_patcher_success_subtitle">Je app is gepatcht en geïnstalleerd!</string>
     <string name="morphe_patcher_complete_title">Patching Voltooid! ✨</string>
     <string name="morphe_patcher_failed_title">Oeps! Er ging iets mis</string>
     <string name="morphe_patcher_failed_subtitle">Controleer de onderstaande foutdetails</string>
@@ -253,7 +253,7 @@ De afmetingen van de afbeeldingen moeten het volgende zijn:
     <string name="app_source_dialog_option_auto_unavailable">Geen plugins beschikbaar</string>
     <string name="app_source_dialog_option_storage">Opslag</string>
     <string name="app_source_dialog_option_storage_description">Selecteer een APK uit lokale opslag</string>
-    <string name="app_source_dialog_option_installed_no_root">Geïnstalleerde apps kunnen niet opnieuw worden gepatched zonder root-toegang</string>
+    <string name="app_source_dialog_option_installed_no_root">Gemounte apps kunnen niet opnieuw worden gepatcht zonder root-toegang</string>
     <string name="app_source_dialog_option_installed_version_not_suggested">Versie %s komt niet overeen met de voorgestelde versie</string>
     <string name="bundle_version_item">Aanbeveling bundel</string>
     <string name="bundle_version_item_description_default">Standaard aanbeveling gebruiken</string>
@@ -771,7 +771,7 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="downloaded_apps_export">Selectie apps exporteren</string>
     <string name="downloaded_apps_export_success">%1$d apps geëxporteerd</string>
     <string name="downloaded_apps_export_failed">Kon gedownloade apps niet exporteren</string>
-    <string name="already_patched">Al gepatched</string>
+    <string name="already_patched">Al gepatcht</string>
     <string name="patch_selector_sheet_filter_title">Filter</string>
     <string name="patch_selector_sheet_filter_compat_title">Compatibiliteit</string>
     <string name="patch_selector_sheet_filter_sort_title">Beheer opties</string>
@@ -873,9 +873,9 @@ Details: %2$s"</string>
     <string name="open_app">Openen</string>
     <string name="save_apk">APK opslaan</string>
     <string name="save_apk_success">APK opgeslagen</string>
-    <string name="saved_app_export_success">Gepatched-app geëxporteerd</string>
-    <string name="saved_app_export_failed">Kon gepatched-app niet exporteren</string>
-    <string name="saved_app_removed_toast">Opgeslagen gepatched-app verwijderd</string>
+    <string name="saved_app_export_success">Gepatchte app geëxporteerd</string>
+    <string name="saved_app_export_failed">Kan gepatchte app niet exporteren</string>
+    <string name="saved_app_removed_toast">Opgeslagen gepatchte app verwijderd</string>
     <string name="saved_app_copy_removed_toast">Opgeslagen kopie verwijderd</string>
     <string name="delete_saved_app_title">Opgeslagen app verwijderen</string>
     <string name="delete_saved_app_description">Dit verwijdert de opgeslagen app-vermelding en de bijbehorende APK.</string>
@@ -899,8 +899,8 @@ Details: %2$s"</string>
     <string name="patcher_step_unpack">\"APK-bestand\" lezen</string>
     <string name="patcher_step_group_patching">Patchen</string>
     <string name="patcher_step_group_saving">Opslaan</string>
-    <string name="patcher_step_write_patched">Gepatched APK-bestand schrijven</string>
-    <string name="patcher_step_sign_apk">Gepatched APK-bestand ondertekenen</string>
+    <string name="patcher_step_write_patched">Gepatcht APK-bestand schrijven</string>
+    <string name="patcher_step_sign_apk">Gepatcht APK-bestand ondertekenen</string>
     <string name="patcher_notification_title">Patchen bezig…</string>
     <string name="patcher_notification_text">Tik om terug te keren naar de patcher</string>
     <string name="patcher_stop_confirm_title">Patcher stoppen</string>

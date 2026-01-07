@@ -136,7 +136,7 @@
     <string name="morphe_background_type_none">কিছুই না</string>
     <!-- Update Section -->
     <string name="morphe_update_use_prereleases">වերը छापार वर्जन का उपयोग करें</string>
-    <string name="morphe_update_use_prereleases_description">नए पैकेज और प्रबंधक की विशेष विधान के माध्यम से जल्दी एक्सेस करें</string>
+    <string name="morphe_update_use_prereleases_description">নতুন প্যাচ ও ম্যানেজার ফিচার গুলি আগে পান</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">প্যাচ বিকল্প</string>
     <string name="morphe_patch_options_youtube_description">థీమ్‌, బ్‌ర్డ్‌క్‌రింగ్‌, హెడర్‌, మరియు స్‌HORTS వ్యవస్థలోని ఆప్‌షన్‌లు</string>
