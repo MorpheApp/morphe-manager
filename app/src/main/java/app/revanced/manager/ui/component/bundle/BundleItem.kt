@@ -386,7 +386,6 @@ fun BundleItem(
                     }
                 }
 
-                // Morphe: For now, don't allow removing the built in patches bundles
                 val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
                 val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
