@@ -1,6 +1,7 @@
 package app.revanced.manager.ui.component.morphe.shared
 
 import android.content.Context
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -19,6 +20,13 @@ data class LanguageOption(
 )
 
 object LanguageRepository {
+    // Languages that require region/country to be displayed
+    private val languagesRequiringRegion = setOf(
+        "pt", // Portuguese: pt-BR / pt-PT
+        "zh", // Chinese: zh-CN / zh-TW
+        "sr", // Serbian: sr-CS / sr-SP
+    )
+
     /**
      * Get display name for a language code with proper localization
      */
@@ -28,9 +36,13 @@ object LanguageRepository {
             "en" -> "English"
             else -> {
                 val locale = parseLocaleCode(code)
-                locale.getDisplayName(locale).replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(locale) else it.toString()
+                val currentLocale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    context.resources.configuration.locales[0]
+                } else {
+                    @Suppress("DEPRECATION")
+                    context.resources.configuration.locale
                 }
+                getDisplayNameSmart(locale, currentLocale)
             }
         }
     }
@@ -68,12 +80,19 @@ object LanguageRepository {
             "zh-rCN","zh-rTW","zu-rZA"
         )
 
+        val currentLocale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.resources.configuration.locales[0]
+        } else {
+            @Suppress("DEPRECATION")
+            context.resources.configuration.locale
+        }
+
         val otherLanguages = languageCodes.map { code ->
             val locale = parseLocaleCode(code)
             LanguageOption(
                 code = code,
-                displayName = locale.getDisplayName(Locale.ENGLISH).capitalize(locale),
-                nativeName = locale.getDisplayName(locale).capitalize(locale),
+                displayName = getDisplayNameSmart(locale, currentLocale),
+                nativeName = getDisplayNameSmart(locale, locale),
                 flag = getFlagEmoji(code)
             )
         }.sortedBy { it.displayName }
@@ -102,6 +121,27 @@ object LanguageRepository {
         } catch (_: Exception) {
             "🌐"
         }
+    }
+
+    /**
+     * Shows the country/region only for languages with multiple regional variants.
+     * For all other languages, only the language name is shown.
+     */
+    private fun getDisplayNameSmart(locale: Locale, displayLocale: Locale): String {
+        val language = locale.language
+
+        val baseName = locale.getDisplayLanguage(displayLocale)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(displayLocale) else it.toString() }
+
+        // Show country only if language requires it and country is present
+        if (language !in languagesRequiringRegion || locale.country.isEmpty()) {
+            return baseName
+        }
+
+        val country = locale.getDisplayCountry(displayLocale)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(displayLocale) else it.toString() }
+
+        return "$baseName ($country)"
     }
 }
 
