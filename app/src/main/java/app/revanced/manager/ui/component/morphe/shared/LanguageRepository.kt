@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.component.morphe.shared
 
 import android.content.Context
-import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -31,18 +30,15 @@ object LanguageRepository {
      * Get display name for a language code with proper localization
      */
     fun getLanguageDisplayName(code: String, context: Context): String {
+        val currentLocale = context.resources.configuration.locales[0]
+
         return when (code) {
             "system" -> context.getString(R.string.system)
-            "en" -> "English"
             else -> {
                 val locale = parseLocaleCode(code)
-                val currentLocale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    context.resources.configuration.locales[0]
-                } else {
-                    @Suppress("DEPRECATION")
-                    context.resources.configuration.locale
+                locale.getDisplayLanguage(currentLocale).replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(currentLocale) else it.toString()
                 }
-                getDisplayNameSmart(locale, currentLocale)
             }
         }
     }
@@ -51,6 +47,8 @@ object LanguageRepository {
      * Get list of all supported languages
      */
     fun getSupportedLanguages(context: Context): List<LanguageOption> {
+        val currentLocale = context.resources.configuration.locales[0]
+
         val systemOption = LanguageOption(
             code = "system",
             displayName = context.getString(R.string.system),
@@ -60,8 +58,12 @@ object LanguageRepository {
 
         val englishOption = LanguageOption(
             code = "en",
-            displayName = "English",
-            nativeName = "English",
+            displayName = Locale("en").getDisplayLanguage(currentLocale).replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(currentLocale) else it.toString()
+            },
+            nativeName = Locale("en").getDisplayLanguage(Locale("en")).replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale("en")) else it.toString()
+            },
             flag = "🇺🇸"
         )
 
@@ -79,13 +81,6 @@ object LanguageRepository {
             "th-rTH","tr-rTR","uk-rUA","ur-rIN","uz-rUZ","vi-rVN",
             "zh-rCN","zh-rTW","zu-rZA"
         )
-
-        val currentLocale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            context.resources.configuration.locales[0]
-        } else {
-            @Suppress("DEPRECATION")
-            context.resources.configuration.locale
-        }
 
         val otherLanguages = languageCodes.map { code ->
             val locale = parseLocaleCode(code)
