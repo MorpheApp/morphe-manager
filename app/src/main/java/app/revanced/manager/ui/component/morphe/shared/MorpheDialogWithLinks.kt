@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
  *
  * @param title Dialog title
  * @param message Main message text before the link
- * @param urlText Text shown for the clickable link
  * @param urlLink URL to open in browser
  * @param onDismiss Callback when OK is pressed
  */
@@ -31,14 +30,23 @@ import androidx.compose.ui.unit.dp
 fun MorpheDialogWithLinks(
     title: String,
     message: String,
-    urlText: String,
     urlLink: String,
     onDismiss: () -> Unit
 ) {
     val uriHandler = LocalUriHandler.current
 
     val annotatedMessage = buildAnnotatedString {
-        append("$message ")
+        val linkMatch = Regex("""\S+\.\S+""").find(message)
+
+        if (linkMatch == null) {
+            append(message)
+            return@buildAnnotatedString
+        }
+
+        val start = linkMatch.range.first
+        val end = linkMatch.range.last + 1
+
+        append(message.take(start))
 
         pushStringAnnotation(tag = "URL", annotation = urlLink)
         withStyle(
@@ -48,9 +56,11 @@ fun MorpheDialogWithLinks(
                 textDecoration = TextDecoration.Underline
             )
         ) {
-            append(urlText)
+            append(message.substring(start, end))
         }
         pop()
+
+        append(message.substring(end))
     }
 
     MorpheDialog(
@@ -71,16 +81,16 @@ fun MorpheDialogWithLinks(
         ) {
             @Suppress("DEPRECATION")
             ClickableText(
+                modifier = Modifier.fillMaxWidth(),
                 text = annotatedMessage,
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    color = LocalDialogSecondaryTextColor.current,
-                    lineHeight = MaterialTheme.typography.bodyLarge.lineHeight
+                    color = LocalDialogSecondaryTextColor.current
                 ),
                 onClick = { offset ->
-                    annotatedMessage.getStringAnnotations(tag = "URL", start = offset, end = offset)
-                        .firstOrNull()?.let { stringAnnotation ->
-                            uriHandler.openUri(stringAnnotation.item)
-                        }
+                    annotatedMessage
+                        .getStringAnnotations("URL", offset, offset)
+                        .firstOrNull()
+                        ?.let { uriHandler.openUri(it.item) }
                 }
             )
         }

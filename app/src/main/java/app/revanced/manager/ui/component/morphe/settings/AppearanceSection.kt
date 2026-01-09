@@ -253,8 +253,10 @@ private fun AppearanceContent(
     if (showTranslationInfoDialog) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.morphe_appearance_translations_info_title),
-            message = stringResource(R.string.morphe_appearance_translations_info_text),
-            urlText = stringResource(R.string.morphe_appearance_translations_info_url),
+            message = stringResource(
+                R.string.morphe_appearance_translations_info_text,
+                stringResource(R.string.morphe_appearance_translations_info_url)
+            ),
             urlLink = "https://morphe.software/translate",
             onDismiss = {
                 showTranslationInfoDialog = false
