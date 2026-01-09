@@ -115,6 +115,7 @@ private fun AppearanceContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by viewModel.prefs.appLanguage.getAsState()
     var showLanguageDialog by remember { mutableStateOf(false) }
+    var showTranslationInfoDialog by remember { mutableStateOf(false) }
     val currentLanguage = remember(appLanguage, context) {
         getLanguageDisplayName(appLanguage, context)
     }
@@ -122,7 +123,7 @@ private fun AppearanceContent(
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         // Language Selection
         MorpheClickableCard(
-            onClick = { showLanguageDialog = true },
+            onClick = { showTranslationInfoDialog = true },
             cornerRadius = 12.dp,
             alpha = 0.33f
         ) {
@@ -245,6 +246,20 @@ private fun AppearanceContent(
             selectedColorHex = customAccentColorHex,
             onColorSelected = { color -> viewModel.setCustomAccentColor(color) },
             dynamicColorEnabled = dynamicColor
+        )
+    }
+
+    // Translation Info Dialog
+    if (showTranslationInfoDialog) {
+        MorpheDialogWithLinks(
+            title = stringResource(R.string.morphe_appearance_translations_info_title),
+            message = stringResource(R.string.morphe_appearance_translations_info_text),
+            urlText = stringResource(R.string.morphe_appearance_translations_info_url),
+            urlLink = "https://morphe.software/translate",
+            onDismiss = {
+                showTranslationInfoDialog = false
+                showLanguageDialog = true
+            }
         )
     }
 
