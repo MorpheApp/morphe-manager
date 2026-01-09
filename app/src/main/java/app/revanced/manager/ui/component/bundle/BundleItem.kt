@@ -385,23 +385,27 @@ fun BundleItem(
                         )
                     }
                 }
-                // Morphe: For now, don't allow removing or disable the bundle of patches
-//                val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
-//                val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
-//                ActionButtonPair(
-//                    leadingOnClick = {
-//                        if (src.enabled) {
-//                            showDisableConfirmationDialog = true
-//                        } else {
-//                            showEnableConfirmationDialog = true
-//                        }
-//                    },
-//                    leadingIcon = toggleIcon,
-//                    leadingDescription = stringResource(toggleLabel),
-//                    trailingOnClick = { showDeleteConfirmationDialog = true },
-//                    trailingIcon = Icons.Outlined.Delete,
-//                    trailingDescription = stringResource(R.string.delete),
-//                )
+
+                val toggleIcon = if (src.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle
+                val toggleLabel = if (src.enabled) R.string.disable else R.string.enable
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    ActionIconButton(
+                        onClick = {
+                            if (src.enabled) {
+                                showDisableConfirmationDialog = true
+                            } else {
+                                showEnableConfirmationDialog = true
+                            }
+                        },
+                        modifier = Modifier.align(Alignment.Center)
+                    ) {
+                        Icon(
+                            toggleIcon,
+                            contentDescription = stringResource(toggleLabel),
+                            modifier = Modifier.size(ActionIconSize)
+                        )
+                    }
+                }
 
                 // Show delete button only for non-default bundles
                 if (!src.isDefault) {
