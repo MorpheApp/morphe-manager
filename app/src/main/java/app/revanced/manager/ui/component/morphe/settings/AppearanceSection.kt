@@ -2,6 +2,10 @@ package app.revanced.manager.ui.component.morphe.settings
 
 import android.app.Activity
 import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,6 +36,7 @@ import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -250,7 +255,11 @@ private fun AppearanceContent(
     }
 
     // Translation Info Dialog
-    if (showTranslationInfoDialog) {
+    AnimatedVisibility(
+        visible = showTranslationInfoDialog,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(if (showLanguageDialog) 0 else 200))
+    ) {
         MorpheDialogWithLinks(
             title = stringResource(R.string.morphe_appearance_translations_info_title),
             message = stringResource(
@@ -260,13 +269,20 @@ private fun AppearanceContent(
             urlLink = "https://morphe.software/translate",
             onDismiss = {
                 showTranslationInfoDialog = false
-                showLanguageDialog = true
+                scope.launch {
+                    delay(50)
+                    showLanguageDialog = true
+                }
             }
         )
     }
 
     // Language Picker Dialog
-    if (showLanguageDialog) {
+    AnimatedVisibility(
+        visible = showLanguageDialog,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
         LanguagePickerDialog(
             currentLanguage = appLanguage,
             onLanguageSelected = { languageCode ->
