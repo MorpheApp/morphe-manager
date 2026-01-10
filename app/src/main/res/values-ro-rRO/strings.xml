@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opțiuni de aparență</string>
     <string name="morphe_appearance_options_description">Personalizați teme, culori și fundaluri</string>
+    <string name="morphe_appearance_app_language">Limba aplicației</string>
+    <string name="morphe_appearance_search">Caută</string>
+    <string name="morphe_appearance_no_results">Nu s-au găsit rezultate</string>
+    <string name="morphe_appearance_translations_info_title">Traduceri pentru unele limbi pot fi lipsă sau incomplete</string>
+    <string name="morphe_appearance_translations_info_text">Pentru a traduce noi limbaje sau îmbunătăți traducerile existente, vizitează %s</string>
     <string name="morphe_background_type">Animație fundal</string>
     <string name="morphe_background_type_circles">Cercuri</string>
     <string name="morphe_background_type_rings">Inele</string>

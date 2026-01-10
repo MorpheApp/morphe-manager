@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Visuel præferencer</string>
     <string name="morphe_appearance_options_description">Tilpas emnefarver, farver og baggrunde</string>
+    <string name="morphe_appearance_app_language">App-sprog</string>
+    <string name="morphe_appearance_search">Søg</string>
+    <string name="morphe_appearance_no_results">Ingen resultater fundet</string>
+    <string name="morphe_appearance_translations_info_title">Oversættelser for nogle sprog kan mangle eller være ufuldstændige</string>
+    <string name="morphe_appearance_translations_info_text">For at oversætte nye sprog eller forbedre de eksisterende oversættelser, besøg %s</string>
     <string name="morphe_background_type">Baggrundsanimation</string>
     <string name="morphe_background_type_circles">Cirkler</string>
     <string name="morphe_background_type_rings">Ringe</string>

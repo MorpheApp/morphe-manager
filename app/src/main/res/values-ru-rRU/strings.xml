@@ -6,9 +6,9 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Готовы снова сделать YouTube легендарным?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Пристегнитесь, наступает время обновлений</string>
+    <string name="morphe_home_greeting_3">Пристегнитесь, время патчить</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Еще один день, еще один шедевр с блокировкой рекламы</string>
+    <string name="morphe_home_greeting_4">Еще один день, еще один шедевр без рекламы</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Хотите смотреть рекламу? Я тоже нет</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Настройки оформления</string>
     <string name="morphe_appearance_options_description">Настройте темы, цвета и фоны</string>
+    <string name="morphe_appearance_app_language">Язык приложения</string>
+    <string name="morphe_appearance_search">Поиск</string>
+    <string name="morphe_appearance_no_results">По запросу \"\" ничего не найдено</string>
+    <string name="morphe_appearance_translations_info_title">Переводы для некоторых языков могут отсутствовать или быть неполными</string>
+    <string name="morphe_appearance_translations_info_text">Чтобы перевести новые языки или улучшить существующие переводы, посетите %s</string>
     <string name="morphe_background_type">Анимация фона</string>
     <string name="morphe_background_type_circles">Круги</string>
     <string name="morphe_background_type_rings">Кольца</string>

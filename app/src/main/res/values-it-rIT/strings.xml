@@ -92,7 +92,7 @@
     <string name="morphe_patcher_expected_package">Pacchetto previsto</string>
     <string name="morphe_patcher_selected_package">Pacchetto selezionato</string>
     <string name="morphe_patcher_message_1">Trasformazione della tua app in qualcosa di fantastico… 🏆</string>
-    <string name="morphe_patcher_message_2">Insegnare ai vecchi app nuovi trucchi… 🎩</string>
+    <string name="morphe_patcher_message_2">Insegnando alla vecchia app nuovi trucchi… 🎩</string>
     <string name="morphe_patcher_message_3">Dare alla tua app una messa a punto digitale… 🔧</string>
     <string name="morphe_patcher_message_4">Creazione magica digitale… ☕</string>
     <string name="morphe_patcher_message_5">Pausa caffè consigliata… ☕</string>
@@ -103,7 +103,7 @@
     <string name="morphe_patcher_message_9">Correzione di bug nell\'app non patchata… 🐞</string>
     <string name="morphe_patcher_message_10">Le grandi patch valgono l\'attesa… ⏳</string>
     <string name="morphe_patcher_message_11">Lucidatura dei pixel finché non brillano… 💎</string>
-    <string name="morphe_patcher_message_12">Per favore resta seduto finché il capitano non spegne il segnale \"Patch in corso\"... 💺✈️</string>
+    <string name="morphe_patcher_message_12">Si prega di rimanere seduti fino a quando il capitano non spegne il cartello \"Patching in progress\"... 💺✈️</string>
     <string name="morphe_patcher_message_13">Cucinando la tua app patchata, calda e fresca… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Negoziando cortesemente con il bytecode… 🤝</string>
@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opzioni di aspetto</string>
     <string name="morphe_appearance_options_description">Personalizza temi, colori e sfondi</string>
+    <string name="morphe_appearance_app_language">Lingua dell\'app</string>
+    <string name="morphe_appearance_search">Cerca</string>
+    <string name="morphe_appearance_no_results">Nessun risultato trovato per \"\"</string>
+    <string name="morphe_appearance_translations_info_title">Le traduzioni per alcune lingue potrebbero essere incomplete o mancanti</string>
+    <string name="morphe_appearance_translations_info_text">Per tradurre nuove lingue o migliorare le traduzioni esistenti, visita %s</string>
     <string name="morphe_background_type">Animazione di sfondo</string>
     <string name="morphe_background_type_circles">Cerchi</string>
     <string name="morphe_background_type_rings">Anelli</string>
@@ -141,7 +146,7 @@
     <string name="morphe_patch_options">Opzioni di patching</string>
     <string name="morphe_patch_options_youtube_description">Temi, branding, intestazione e opzioni per Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opzioni per tema e branding</string>
-    <string name="morphe_patch_options_restart_message">Modificare le opzioni del patch richiede di ripatchare l\'applicazione per applicarle</string>
+    <string name="morphe_patch_options_restart_message">Modificare le opzioni di patching richiede di ripatchare l\'applicazione per applicarle</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Colori del tema dell\'app</string>
     <string name="morphe_patch_options_theme_colors_description">Cambia colore di sfondo</string>
@@ -238,7 +243,7 @@ Dimensioni immagine:
     <string name="patches_missing">Mancante</string>
     <string name="patches_error">Errore</string>
     <string name="patches_error_description">Impossibile caricare le patch. Fare clic per visualizzare l\'errore</string>
-    <string name="patches_not_downloaded">Non sono stati scaricati patch. Clicca qui per scaricare</string>
+    <string name="patches_not_downloaded">Non sono stati scaricate patch. Clicca qui per scaricare</string>
     <string name="patches_name_default">Patch</string>
     <string name="patches_name_fallback">Senza nome</string>
     <string name="bundle_uid">UID del pacchetto</string>

@@ -1,24 +1,22 @@
 package app.revanced.manager.ui.screen.settings
 
-import android.graphics.Color.parseColor
+import android.app.Activity
 import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -27,6 +25,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
@@ -34,14 +33,17 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
+import app.revanced.manager.ui.component.GroupHeader
+import app.revanced.manager.ui.component.morphe.shared.LanguageOption
+import app.revanced.manager.ui.component.morphe.shared.LanguageRepository
+import app.revanced.manager.ui.component.morphe.shared.rememberSelectedLanguageLabel
 import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
+import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
 import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
-import app.revanced.manager.util.toHexString
 import org.koin.androidx.compose.koinViewModel
-import kotlin.math.roundToInt
 
 val THEME_PRESET_COLORS = listOf(
     Color(0xFF6750A4),
@@ -81,34 +83,26 @@ fun MorpheThemeSettingsScreen(
     val canAdjustAccentColor = selectedThemePreset != ThemePreset.DYNAMIC
     val accentControlsAlpha = if (canAdjustAccentColor) 1f else 0.5f
 
-    // Morphe For now hide this
-//    val languageOptions = remember {
-//        listOf(
-//            LanguageOption("system", R.string.language_option_system),
-//            LanguageOption("en", R.string.language_option_english),
-//            LanguageOption("zh-CN", R.string.language_option_chinese_simplified),
-//            LanguageOption("vi", R.string.language_option_vietnamese),
-//            LanguageOption("ko", R.string.language_option_korean),
-//            LanguageOption("ja", R.string.language_option_japanese),
-//            LanguageOption("ru", R.string.language_option_russian),
-//            LanguageOption("uk", R.string.language_option_ukrainian)
-//        )
-//    }
-//
-//    val context = LocalContext.current
-//    if (showLanguageDialog) {
-//        LanguageDialog(
-//            options = languageOptions,
-//            selectedCode = appLanguage,
-//            onSelect = {
-//                viewModel.setAppLanguage(it)
-//                // Force activity recreation so every screen picks up the new locale immediately.
-//                (context as? android.app.Activity)?.recreate()
-//                showLanguageDialog = false
-//            },
-//            onDismiss = { showLanguageDialog = false }
-//        )
-//    }
+    val appLanguage by prefs.appLanguage.getAsState()
+    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val languageOptions = remember(context) {
+        LanguageRepository.getSupportedLanguages(context)
+    }
+
+    if (showLanguageDialog) {
+        LanguageDialog(
+            options = languageOptions,
+            selectedCode = appLanguage,
+            onSelect = {
+                viewModel.setAppLanguage(it)
+                (context as? Activity)?.recreate()
+                showLanguageDialog = false
+            },
+            onDismiss = { showLanguageDialog = false }
+        )
+    }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -290,25 +284,23 @@ fun MorpheThemeSettingsScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // FIXME: Hide this until we can add all Crowdin languages
-//            GroupHeader(stringResource(R.string.language_settings))
-//            ExpressiveSettingsCard(
-//                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-//                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-//            ) {
-//                ExpressiveSettingsItem(
-//                    headlineContent = stringResource(R.string.app_language),
-//                    supportingContent = stringResource(selectedLanguageLabel),
-//                    onClick = { showLanguageDialog = true }
-//                )
-//            }
-//            Spacer(modifier = Modifier.height(16.dp))
+            GroupHeader(stringResource(R.string.morphe_appearance_app_language))
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+            ) {
+                ExpressiveSettingsItem(
+                    headlineContent = stringResource(R.string.app_language),
+                    supportingContent = rememberSelectedLanguageLabel(appLanguage),
+                    onClick = { showLanguageDialog = true }
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 private data class ThemePresetSwatch(val preset: ThemePreset, @param:StringRes val labelRes: Int, val colors: List<Color>)
-private data class LanguageOption(val code: String, @param:StringRes val labelRes: Int)
 
 
 @Composable
@@ -362,41 +354,50 @@ private fun LanguageDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {},
+        title = {
+            Text(
+                text = stringResource(R.string.language_dialog_title),
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(
-                    text = stringResource(R.string.language_dialog_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-                options.forEach { option ->
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 400.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(options) { option ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
                             .clickable { onSelect(option.code) }
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
                             selected = option.code == selectedCode,
                             onClick = { onSelect(option.code) }
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = stringResource(option.labelRes),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurface
+                            text = "${option.flag} ${option.displayName}",
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     }
                 }
-                TextButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.align(Alignment.End)
-                ) {
-                    Text(stringResource(android.R.string.cancel))
+
+                item {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    ) {
+                        Text(stringResource(android.R.string.cancel))
+                    }
                 }
             }
         }

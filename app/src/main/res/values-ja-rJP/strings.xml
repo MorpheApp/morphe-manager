@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">テーマ、カラー、背景をカスタマイズ</string>
+    <string name="morphe_appearance_app_language">アプリ言語</string>
+    <string name="morphe_appearance_search">検索</string>
+    <string name="morphe_appearance_no_results">「」に対する検索結果は見つかりませんでした</string>
+    <string name="morphe_appearance_translations_info_title">一部の言語の翻訳が欠落しているか不完全である可能性があります</string>
+    <string name="morphe_appearance_translations_info_text">新しい言語を翻訳するか、既存の翻訳を改善するには、%s を訪問してください。</string>
     <string name="morphe_background_type">Background animation</string>
     <string name="morphe_background_type_circles">円</string>
     <string name="morphe_background_type_rings">リング</string>
@@ -135,7 +140,7 @@
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">のプレリリース版を使う</string>
+    <string name="morphe_update_use_prereleases">プレリリース版</string>
     <string name="morphe_update_use_prereleases_description">既発のパッチやマネージャーフィーチャーに早期アクセスする</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
@@ -648,7 +653,7 @@ morphe_header_custom_dark.png
     <string name="patches_replace_fail">パッチのインポートに失敗しました: %s</string>
     <string name="no_patched_apps_found">パッチ済みアプリがありません</string>
     <string name="patches_selected">%s パッチ バンクが選択されました</string>
-    <string name="patch_profiles_selected">%1$d個のパッチ設定が選択されています</string>
+    <string name="patch_profiles_selected">%1$d 個のパッチ設定が選択されています</string>
     <string name="selected_apps_count">%1$d 件のアプリが選択されました</string>
     <string name="selected_apps_delete_dialog_description">選択したアプリをマネージャーから削除しますか？デバイスにインストールされているアプリはそのまま残ります。</string>
     <string name="incompatible_patches">互換性のないパッチ</string>

@@ -83,11 +83,11 @@ class ManagerApplication : Application() {
 //            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
 //                prefs.api.update(DEFAULT_API_URL)
 //            }
-//            val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
-//            if (storedLanguage != prefs.appLanguage.get()) {
-//                prefs.appLanguage.update(storedLanguage)
-//            }
-//            appLanguageyAppLanguage(storedLanguage)
+            val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
+            if (storedLanguage != prefs.appLanguage.get()) {
+                prefs.appLanguage.update(storedLanguage)
+            }
+            applyAppLanguage(storedLanguage)
         }
 
         scope.launch(Dispatchers.Default) {
@@ -135,9 +135,10 @@ class ManagerApplication : Application() {
         // Apply stored app language as early as possible using DataStore, but never crash startup.
         val storedLang = runCatching {
             base?.let {
-                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "en" }
+                runBlocking { PreferencesManager(it).appLanguage.get() }.ifBlank { "system" }
             }
-        }.getOrNull() ?: "en"
+        }.getOrNull() ?: "system"
+
         applyAppLanguage(storedLang)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
