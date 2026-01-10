@@ -10,7 +10,6 @@ on:
 jobs:
   release:
     name: Release
-    if: ${{ github.event_name == 'workflow_dispatch' }}
     permissions:
       contents: write
       packages: write
