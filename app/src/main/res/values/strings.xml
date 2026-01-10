@@ -134,10 +134,10 @@
     <string name="morphe_app_icon_selector_info">The app icon will update after you close and reopen the app from your launcher.</string>
     <string name="morphe_app_icon_default">Default</string>
     <string name="morphe_app_icon_light_2">Sky</string>
-    <string name="morphe_app_icon_light_3">Frost</string>
+    <string name="morphe_app_icon_light_3">Sunset</string>
     <string name="morphe_app_icon_dark_1">Ocean</string>
     <string name="morphe_app_icon_dark_2">Void</string>
-    <string name="morphe_app_icon_dark_3">Abyss</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
     <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
     <string name="morphe_app_icon_change_dialog_message">Change to \'%1$s\' and restart?</string>
     <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>

@@ -34,7 +34,7 @@ class AppIconManager(private val context: Context) {
             previewIconResId = R.mipmap.ic_launcher_light_2
         ),
 
-        // Light variant 3 (Frost theme)
+        // Light variant 3 (Sunset theme)
         LIGHT_3(
             aliasName = "app.revanced.manager.MainActivity_Light_3",
             displayNameResId = R.string.morphe_app_icon_light_3,
@@ -55,7 +55,7 @@ class AppIconManager(private val context: Context) {
             previewIconResId = R.mipmap.ic_launcher_dark_2
         ),
 
-        // Dark variant 3 (Abyss theme)
+        // Dark variant 3 (Indigo theme)
         DARK_3(
             aliasName = "app.revanced.manager.MainActivity_Dark_3",
             displayNameResId = R.string.morphe_app_icon_dark_3,
