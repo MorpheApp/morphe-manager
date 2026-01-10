@@ -139,9 +139,8 @@
     <string name="morphe_app_icon_void">Void</string>
     <string name="morphe_app_icon_abyss">Abyss</string>
     <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
-    <string name="morphe_app_icon_change_dialog_message">Switch to the "%1$s" icon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Change to \'%1$s\' and restart?</string>
     <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>
-    <string name="morphe_app_icon_change_dialog_warning">The icon will appear in your launcher after closing the app.</string>
 
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>

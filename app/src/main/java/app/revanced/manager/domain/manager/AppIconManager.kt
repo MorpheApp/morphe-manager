@@ -74,22 +74,20 @@ class AppIconManager(private val context: Context) {
      * Note: This will restart the app to apply changes
      */
     fun setIcon(icon: AppIcon) {
-        // Disable all other icons
+        // Disable all icons
         AppIcon.entries.forEach { otherIcon ->
-            if (otherIcon != icon) {
-                packageManager.setComponentEnabledSetting(
-                    otherIcon.getComponentName(context),
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP
-                )
-            }
+            packageManager.setComponentEnabledSetting(
+                otherIcon.getComponentName(context),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+            )
         }
 
-        // Enable selected icon
+        // Enable the selected icon
         packageManager.setComponentEnabledSetting(
             icon.getComponentName(context),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            0
         )
     }
 
