@@ -22,35 +22,44 @@ class AppIconManager(private val context: Context) {
         @DrawableRes val previewIconResId: Int
     ) {
         DEFAULT(
-            aliasName = "app.revanced.manager.MainActivityDefault",
+            aliasName = "app.revanced.manager.MainActivity_Default",
             displayNameResId = R.string.morphe_app_icon_default,
             previewIconResId = R.mipmap.ic_launcher
         ),
-        SKY(
-            aliasName = "app.revanced.manager.MainActivitySky",
-            displayNameResId = R.string.morphe_app_icon_sky,
-            previewIconResId = R.mipmap.ic_launcher_sky
-        ),
-        FROST(
-            aliasName = "app.revanced.manager.MainActivityFrost",
-            displayNameResId = R.string.morphe_app_icon_frost,
-            previewIconResId = R.mipmap.ic_launcher_frost
+
+        // Light variant 2 (Sky theme)
+        LIGHT_2(
+            aliasName = "app.revanced.manager.MainActivity_Light_2",
+            displayNameResId = R.string.morphe_app_icon_light_2,
+            previewIconResId = R.mipmap.ic_launcher_light_2
         ),
 
-        OCEAN(
-            aliasName = "app.revanced.manager.MainActivityOcean",
-            displayNameResId = R.string.morphe_app_icon_ocean,
-            previewIconResId = R.mipmap.ic_launcher_ocean
+        // Light variant 3 (Frost theme)
+        LIGHT_3(
+            aliasName = "app.revanced.manager.MainActivity_Light_3",
+            displayNameResId = R.string.morphe_app_icon_light_3,
+            previewIconResId = R.mipmap.ic_launcher_light_3
         ),
-        VOID(
-            aliasName = "app.revanced.manager.MainActivityVoid",
-            displayNameResId = R.string.morphe_app_icon_void,
-            previewIconResId = R.mipmap.ic_launcher_void
+
+        // Dark variant 1 (Ocean theme)
+        DARK_1(
+            aliasName = "app.revanced.manager.MainActivity_Dark_1",
+            displayNameResId = R.string.morphe_app_icon_dark_1,
+            previewIconResId = R.mipmap.ic_launcher_dark_1
         ),
-        ABYSS(
-            aliasName = "app.revanced.manager.MainActivityAbyss",
-            displayNameResId = R.string.morphe_app_icon_abyss,
-            previewIconResId = R.mipmap.ic_launcher_abyss
+
+        // Dark variant 2 (Void theme)
+        DARK_2(
+            aliasName = "app.revanced.manager.MainActivity_Dark_2",
+            displayNameResId = R.string.morphe_app_icon_dark_2,
+            previewIconResId = R.mipmap.ic_launcher_dark_2
+        ),
+
+        // Dark variant 3 (Abyss theme)
+        DARK_3(
+            aliasName = "app.revanced.manager.MainActivity_Dark_3",
+            displayNameResId = R.string.morphe_app_icon_dark_3,
+            previewIconResId = R.mipmap.ic_launcher_dark_3
         );
 
         fun getComponentName(context: Context): ComponentName {

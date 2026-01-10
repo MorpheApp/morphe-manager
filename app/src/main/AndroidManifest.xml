@@ -74,7 +74,7 @@
 
         <!-- Default launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivityDefault"
+            android:name="app.revanced.manager.MainActivity_Default"
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
@@ -87,13 +87,13 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Sky launcher icon -->
+        <!-- Alternative launcher icons -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivitySky"
+            android:name="app.revanced.manager.MainActivity_Light_2"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_sky"
-            android:roundIcon="@mipmap/ic_launcher_sky"
+            android:icon="@mipmap/ic_launcher_light_2"
+            android:roundIcon="@mipmap/ic_launcher_light_2"
             android:label="@string/app_name"
             android:targetActivity="app.revanced.manager.MainActivity">
             <intent-filter>
@@ -102,13 +102,12 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Frost launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivityFrost"
+            android:name="app.revanced.manager.MainActivity_Light_3"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_frost"
-            android:roundIcon="@mipmap/ic_launcher_frost"
+            android:icon="@mipmap/ic_launcher_light_3"
+            android:roundIcon="@mipmap/ic_launcher_light_3"
             android:label="@string/app_name"
             android:targetActivity="app.revanced.manager.MainActivity">
             <intent-filter>
@@ -117,13 +116,12 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Ocean launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivityOcean"
+            android:name="app.revanced.manager.MainActivity_Dark_1"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_ocean"
-            android:roundIcon="@mipmap/ic_launcher_ocean"
+            android:icon="@mipmap/ic_launcher_dark_1"
+            android:roundIcon="@mipmap/ic_launcher_dark_1"
             android:label="@string/app_name"
             android:targetActivity="app.revanced.manager.MainActivity">
             <intent-filter>
@@ -132,13 +130,12 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Void launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivityVoid"
+            android:name="app.revanced.manager.MainActivity_Dark_2"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_void"
-            android:roundIcon="@mipmap/ic_launcher_void"
+            android:icon="@mipmap/ic_launcher_dark_2"
+            android:roundIcon="@mipmap/ic_launcher_dark_2"
             android:label="@string/app_name"
             android:targetActivity="app.revanced.manager.MainActivity">
             <intent-filter>
@@ -147,13 +144,12 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Abyss launcher icon -->
         <activity-alias
-            android:name="app.revanced.manager.MainActivityAbyss"
+            android:name="app.revanced.manager.MainActivity_Dark_3"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher_abyss"
-            android:roundIcon="@mipmap/ic_launcher_abyss"
+            android:icon="@mipmap/ic_launcher_dark_3"
+            android:roundIcon="@mipmap/ic_launcher_dark_3"
             android:label="@string/app_name"
             android:targetActivity="app.revanced.manager.MainActivity">
             <intent-filter>

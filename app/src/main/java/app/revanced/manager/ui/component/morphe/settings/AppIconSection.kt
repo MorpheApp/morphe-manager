@@ -45,65 +45,61 @@ fun AppIconSection(
     var showConfirmDialog by remember { mutableStateOf<AppIconManager.AppIcon?>(null) }
     var expanded by remember { mutableStateOf(false) }
 
-    SettingsCard(modifier = modifier) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            ExpandableSection(
-                icon = Icons.Outlined.Apps,
-                title = stringResource(R.string.morphe_app_icon_selector_title),
-                description = stringResource(R.string.morphe_app_icon_selector_description),
-                expanded = expanded,
-                onExpandChange = { expanded = it }
+    ExpandableSection(
+        icon = Icons.Outlined.Apps,
+        title = stringResource(R.string.morphe_app_icon_selector_title),
+        description = stringResource(R.string.morphe_app_icon_selector_description),
+        expanded = expanded,
+        onExpandChange = { expanded = it }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Info message
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Info message
-                    Surface(
+                    Text(
+                        text = stringResource(R.string.morphe_app_icon_selector_info),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+                    )
+                }
+            }
+
+            // Icon grid
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Row(
-                            modifier = Modifier.padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = stringResource(R.string.morphe_app_icon_selector_info),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+                        rowIcons.forEach { icon ->
+                            AppIconOption(
+                                icon = icon,
+                                isSelected = currentIcon == icon,
+                                onClick = {
+                                    if (currentIcon != icon) {
+                                        showConfirmDialog = icon
+                                    }
+                                },
+                                modifier = Modifier.weight(1f)
                             )
                         }
-                    }
-
-                    // Icon grid
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
-                            ) {
-                                rowIcons.forEach { icon ->
-                                    AppIconOption(
-                                        icon = icon,
-                                        isSelected = currentIcon == icon,
-                                        onClick = {
-                                            if (currentIcon != icon) {
-                                                showConfirmDialog = icon
-                                            }
-                                        },
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                                // Fill remaining space if row is incomplete
-                                repeat(3 - rowIcons.size) {
-                                    Spacer(modifier = Modifier.weight(1f))
-                                }
-                            }
+                        // Fill remaining space if row is incomplete
+                        repeat(3 - rowIcons.size) {
+                            Spacer(modifier = Modifier.weight(1f))
                         }
                     }
                 }

@@ -235,9 +235,6 @@ fun MorpheSettingsScreen(
                     AboutSection(
                         onAboutClick = { showAboutDialog = true }
                     )
-
-                    // App Icon Section
-                    AppIconSection()
                 }
             )
         }

@@ -99,6 +99,11 @@ fun AppearanceSection(
                     scope = scope
                 )
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // App Icon Section
+            AppIconSection()
         }
     }
 }
