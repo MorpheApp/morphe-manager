@@ -128,6 +128,21 @@
     <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
     <string name="morphe_share_website">Share website</string>
     <string name="morphe_share_website_description">Share the official Morphe website</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">App Icon</string>
+    <string name="morphe_app_icon_selector_description">Change the app launcher icon</string>
+    <string name="morphe_app_icon_selector_info">The app icon will update after you close and reopen the app from your launcher.</string>
+    <string name="morphe_app_icon_default">Default</string>
+    <string name="morphe_app_icon_sky">Sky</string>
+    <string name="morphe_app_icon_frost">Frost</string>
+    <string name="morphe_app_icon_ocean">Ocean</string>
+    <string name="morphe_app_icon_void">Void</string>
+    <string name="morphe_app_icon_abyss">Abyss</string>
+    <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Switch to the "%1$s" icon?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>
+    <string name="morphe_app_icon_change_dialog_warning">The icon will appear in your launcher after closing the app.</string>
+
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">Customize themes, colors, and backgrounds</string>
@@ -139,6 +154,7 @@
     <string name="morphe_background_type_shapes">Shapes</string>
     <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
+
     <!-- Update Section -->
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>
     <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>

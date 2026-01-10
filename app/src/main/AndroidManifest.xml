@@ -47,6 +47,20 @@
             android:multiprocess="false"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
+        <!--
+            <activity
+                android:name="app.revanced.manager.MainActivity"
+                android:exported="true"
+                android:theme="@style/Theme.ReVancedManager">
+
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+        -->
+
+        <!-- Main Activity without launcher -->
         <activity
             android:name="app.revanced.manager.MainActivity"
             android:exported="true"
@@ -54,9 +68,99 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Default launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivityDefault"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Sky launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivitySky"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_sky"
+            android:roundIcon="@mipmap/ic_launcher_sky"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Frost launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivityFrost"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_frost"
+            android:roundIcon="@mipmap/ic_launcher_frost"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Ocean launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivityOcean"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_ocean"
+            android:roundIcon="@mipmap/ic_launcher_ocean"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Void launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivityVoid"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_void"
+            android:roundIcon="@mipmap/ic_launcher_void"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Abyss launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivityAbyss"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_abyss"
+            android:roundIcon="@mipmap/ic_launcher_abyss"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
 <!--        <activity android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity" android:exported="false" android:theme="@style/Theme.WebViewActivity" />-->
 
