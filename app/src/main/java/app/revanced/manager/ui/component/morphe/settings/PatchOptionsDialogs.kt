@@ -434,7 +434,7 @@ fun CustomBrandingDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // App Name field
             if (appNameOption != null) {
@@ -507,6 +507,8 @@ fun CustomBrandingDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 iconOption.description.let { description ->
@@ -639,7 +641,7 @@ fun CustomHeaderDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (customOption != null) {
                 OutlinedTextField(
@@ -681,6 +683,8 @@ fun CustomHeaderDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 customOption.description.let { description ->

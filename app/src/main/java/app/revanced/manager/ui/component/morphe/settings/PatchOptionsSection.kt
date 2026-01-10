@@ -106,7 +106,7 @@ fun PatchOptionsSection(
                 color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
             ) {
                 Row(
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -131,7 +131,7 @@ fun PatchOptionsSection(
                 color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
             ) {
                 Row(
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -217,7 +217,7 @@ fun PatchOptionsSection(
             color = MaterialTheme.colorScheme.tertiaryContainer
         ) {
             Row(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.padding(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Icon(
@@ -283,10 +283,7 @@ private fun AppPatchOptionsContent(
     val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
     val hasHideShorts = appType == AppType.YOUTUBE && viewModel.getHideShortsOptions() != null
 
-    Column(
-        modifier = Modifier.padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         // Theme Colors
         if (hasTheme) {
             SettingsItem(
