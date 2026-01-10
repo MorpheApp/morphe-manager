@@ -1,3 +1,10 @@
+# app [1.2.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2026-01-10)
+
+
+### Bug Fixes
+
+* Completely isolate patch options in Morphe and Expert modes ([#90](https://github.com/MorpheApp/morphe-manager/issues/90)) ([c96fcd9](https://github.com/MorpheApp/morphe-manager/commit/c96fcd9c1c24cbe2afc835b41737c351fb226f58))
+
 # app [1.2.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.2...v1.2.0-dev.1) (2026-01-10)
 
 
