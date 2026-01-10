@@ -1,26 +1,34 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.app.Activity
 import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.shared.BackgroundType
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
+import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.shared.LanguageRepository.getLanguageDisplayName
 import app.revanced.manager.ui.component.morphe.utils.darken
 import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
@@ -28,6 +36,7 @@ import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -107,9 +116,37 @@ private fun AppearanceContent(
     viewModel: MorpheThemeSettingsViewModel,
     scope: CoroutineScope
 ) {
+    val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+    val appLanguage by viewModel.prefs.appLanguage.getAsState()
+    var showLanguageDialog by remember { mutableStateOf(false) }
+    var showTranslationInfoDialog by remember { mutableStateOf(false) }
+    val currentLanguage = remember(appLanguage, context) {
+        getLanguageDisplayName(appLanguage, context)
+    }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        // Language Selection
+        MorpheClickableCard(
+            onClick = { showTranslationInfoDialog = true },
+            cornerRadius = 12.dp,
+            alpha = 0.33f
+        ) {
+            IconTextRow(
+                icon = Icons.Outlined.Language,
+                title = stringResource(R.string.app_language),
+                description = currentLanguage,
+                modifier = Modifier.padding(12.dp),
+                trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            )
+        }
+
         // Background Type Selection
         SelectorSection(
             title = stringResource(R.string.morphe_background_type),
@@ -216,6 +253,49 @@ private fun AppearanceContent(
             dynamicColorEnabled = dynamicColor
         )
     }
+
+    // Translation Info Dialog
+    AnimatedVisibility(
+        visible = showTranslationInfoDialog,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(if (showLanguageDialog) 0 else 200))
+    ) {
+        MorpheDialogWithLinks(
+            title = stringResource(R.string.morphe_appearance_translations_info_title),
+            message = stringResource(
+                R.string.morphe_appearance_translations_info_text,
+                stringResource(R.string.morphe_appearance_translations_info_url)
+            ),
+            urlLink = "https://morphe.software/translate",
+            onDismiss = {
+                showTranslationInfoDialog = false
+                scope.launch {
+                    delay(50)
+                    showLanguageDialog = true
+                }
+            }
+        )
+    }
+
+    // Language Picker Dialog
+    AnimatedVisibility(
+        visible = showLanguageDialog,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        LanguagePickerDialog(
+            currentLanguage = appLanguage,
+            onLanguageSelected = { languageCode ->
+                scope.launch {
+                    viewModel.setAppLanguage(languageCode)
+                    // Force activity recreation to apply new locale
+                    (context as? Activity)?.recreate()
+                }
+                showLanguageDialog = false
+            },
+            onDismiss = { showLanguageDialog = false }
+        )
+    }
 }
 
 /**
@@ -292,6 +372,185 @@ private fun AccentColorPresetsRow(
                         }
                     }
             )
+        }
+    }
+}
+
+/**
+ * Language picker dialog with searchable list
+ */
+@Composable
+private fun LanguagePickerDialog(
+    currentLanguage: String,
+    onLanguageSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    var searchQuery by remember { mutableStateOf("") }
+
+    val allLanguages = remember(context) {
+        LanguageRepository.getSupportedLanguages(context)
+    }
+
+    val filteredLanguages = remember(searchQuery, allLanguages) {
+        if (searchQuery.isBlank()) {
+            allLanguages
+        } else {
+            allLanguages.filter { language ->
+                language.displayName.contains(searchQuery, ignoreCase = true) ||
+                        language.nativeName.contains(searchQuery, ignoreCase = true) ||
+                        language.code.contains(searchQuery, ignoreCase = true)
+            }
+        }
+    }
+
+    val listState = rememberLazyListState()
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.app_language),
+        footer = {
+            MorpheDialogOutlinedButton(
+                text = stringResource(android.R.string.cancel),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Search field
+            MorpheDialogTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                label = {
+                    Text(
+                        stringResource(R.string.morphe_appearance_search),
+                        color = LocalDialogSecondaryTextColor.current
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Search,
+                        contentDescription = null,
+                        tint = LocalDialogSecondaryTextColor.current
+                    )
+                },
+                trailingIcon = {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Close,
+                                contentDescription = "Clear search",
+                                tint = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Language list
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 400.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(filteredLanguages) { language ->
+                    LanguageItem(
+                        language = language,
+                        isSelected = currentLanguage == language.code,
+                        onClick = { onLanguageSelected(language.code) }
+                    )
+                }
+
+                if (filteredLanguages.isEmpty()) {
+                    item {
+                        Text(
+                            text = stringResource(R.string.morphe_appearance_no_results),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 32.dp),
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Individual language item in the list
+ */
+@Composable
+private fun LanguageItem(
+    language: LanguageOption,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    MorpheClickableCard(
+        onClick = onClick,
+        cornerRadius = 8.dp,
+        alpha = if (isSelected) 0.1f else 0.05f
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Flag/Language icon
+            Surface(
+                shape = RoundedCornerShape(6.dp),
+                color = if (isSelected) {
+                    MaterialTheme.colorScheme.primaryContainer
+                } else {
+                    LocalDialogTextColor.current.copy(alpha = 0.1f)
+                },
+                modifier = Modifier.size(40.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(
+                        text = language.flag,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = language.displayName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogTextColor.current,
+                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = language.nativeName,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = LocalDialogSecondaryTextColor.current,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+
+            if (isSelected) {
+                Icon(
+                    imageVector = Icons.Outlined.Check,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
         }
     }
 }

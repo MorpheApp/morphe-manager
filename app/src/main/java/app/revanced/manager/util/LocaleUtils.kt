@@ -4,66 +4,41 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import java.util.Locale
 
-private val supportedLanguages = setOf(
-    "system",
-    "en",
-    "zh-cn",
-    "vi",
-    "ko",
-    "ja",
-    "ru",
-    "uk"
-)
-
-private fun normalizeTag(tag: String): String =
-    tag.trim()
-        .replace('_', '-')
-        .lowercase(Locale.ROOT)
-
-fun resolveAppLanguageCode(preference: String): String {
-    val pref = normalizeTag(preference)
-    if (pref.isBlank() || pref == "system") {
-        val sysLocale = LocaleListCompat.getAdjustedDefault().get(0)
-        val systemTag = sysLocale?.toLanguageTag()?.let(::normalizeTag)
-
-        // Exact tag match
-        if (systemTag != null && supportedLanguages.contains(systemTag)) return systemTag
-
-        // Language-only match (e.g., en-GB -> en)
-        val systemLang = systemTag?.substringBefore('-')
-        if (systemLang != null) {
-            supportedLanguages.firstOrNull { it.substringBefore('-') == systemLang }?.let { return it }
+/**
+ * Parse locale code from Android resource format
+ * Examples:
+ * - "uk-rUA" -> Locale("uk", "UA")
+ * - "uk_UA" -> Locale("uk", "UA")
+ * - "en" -> Locale("en")
+ */
+fun parseLocaleCode(code: String): Locale =
+    when {
+        code.contains("-r") -> {
+            val (l, c) = code.split("-r")
+            Locale(l, c)
         }
-
-        // Fallback to English if the system locale is unsupported.
-        return "en"
+        code.contains("_") -> {
+            val (l, c) = code.split("_")
+            Locale(l, c)
+        }
+        else -> Locale(code)
     }
 
-    if (supportedLanguages.contains(pref)) return pref
-
-    val prefLang = pref.substringBefore('-')
-    return supportedLanguages.firstOrNull { it.substringBefore('-') == prefLang } ?: "en"
-}
-
+/**
+ * Apply app language setting to the entire application
+ * @param code Language code in Android resource format (e.g., "uk-rUA", "en", "system")
+ */
 fun applyAppLanguage(code: String) {
-    val normalized = normalizeTag(code)
+    val normalized = code.trim()
 
-    // If user picked system, try the device locale first, otherwise fall back to English.
-    val target = if (normalized == "system" || normalized.isBlank()) {
-        // Reset to follow the device (AppCompat will use system locales if we set an empty list).
+    // System default
+    if (normalized.isBlank() || normalized == "system") {
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
-        LocaleListCompat.getAdjustedDefault().get(0)?.let { Locale.setDefault(it) }
         return
-    } else {
-        resolveAppLanguageCode(code)
     }
 
-    val localeList = when (target.lowercase(Locale.ROOT)) {
-        "zh", "zh-cn", "zh_cn", "zh-hans" -> LocaleListCompat.create(Locale.SIMPLIFIED_CHINESE)
-        "en", "en-us", "en_gb" -> LocaleListCompat.create(Locale.ENGLISH)
-        else -> LocaleListCompat.forLanguageTags(target)
-    }
-
-    localeList.get(0)?.let { Locale.setDefault(it) }
-    AppCompatDelegate.setApplicationLocales(localeList)
+    // Parse and apply locale
+    val locale = parseLocaleCode(normalized)
+    Locale.setDefault(locale)
+    AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
 }
