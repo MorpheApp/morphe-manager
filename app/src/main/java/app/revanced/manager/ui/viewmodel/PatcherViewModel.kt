@@ -595,7 +595,7 @@ fun removeMissingPatchesAndStart() {
         val flags = PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
         @Suppress("DEPRECATION")
         val pkgInfo = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
-
+        @Suppress("DEPRECATION")
         val signature: Signature? =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 pkgInfo.signingInfo?.apkContentsSigners?.firstOrNull()
@@ -1619,6 +1619,7 @@ fun removeMissingPatchesAndStart() {
         }
 
         try {
+            @Suppress("DEPRECATION")
             ContextCompat.startActivity(app, plan.intent, null)
         } catch (error: ActivityNotFoundException) {
             installerManager.cleanup(plan)
@@ -1661,7 +1662,7 @@ fun removeMissingPatchesAndStart() {
         installerManager.cleanup(plan)
         updateInstallingState(false)
         stopInstallProgressToasts()
-        val installType = if (plan?.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
+        val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
         markInstallSuccess(packageName)
         suppressFailureAfterSuccess = true
 
@@ -1837,26 +1838,20 @@ fun removeMissingPatchesAndStart() {
         val shouldPreserveInput =
             selectedForRun is SelectedApp.Local && (selectedForRun.temporary || forceKeepLocalInput)
 
-        // Get patch options from PatchOptionsPreferencesManager based on package name
-        val patchOptions = runBlocking {
-            when (packageName) {
-                PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
-                else -> patchOptionsPrefs.exportYouTubePatchOptions()
+        // Completely isolate Morphe and Expert modes
+        val useMorpheMode = prefs.useMorpheHomeScreen.getBlocking()
+
+        val mergedOptions = if (useMorpheMode) {
+            // Morphe mode: Use ONLY preferences manager options
+            runBlocking {
+                when (packageName) {
+                    PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
+                    else -> patchOptionsPrefs.exportYouTubePatchOptions()
+                }
             }
-        }
-
-        // Merge with existing options from input
-        val mergedOptions = input.options.toMutableMap()
-        patchOptions.forEach { (bundleUid, bundlePatchOptions) ->
-            val existing = mergedOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
-
-            bundlePatchOptions.forEach { (patchName, patchOptionValues) ->
-                val existingPatch = existing[patchName]?.toMutableMap() ?: mutableMapOf()
-                existingPatch.putAll(patchOptionValues)
-                existing[patchName] = existingPatch
-            }
-
-            mergedOptions[bundleUid] = existing
+        } else {
+            // Expert mode: Use ONLY input options
+            input.options
         }
 
         return PatcherWorker.Args(
