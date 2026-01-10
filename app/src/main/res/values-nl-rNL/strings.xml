@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Uitzettingsvoorkeuren</string>
     <string name="morphe_appearance_options_description">Aanpassen van thema\'s, kleuren en achtergronden</string>
+    <string name="morphe_appearance_app_language">App-taal</string>
+    <string name="morphe_appearance_search">Zoeken</string>
+    <string name="morphe_appearance_no_results">Geen resultaten gevonden</string>
+    <string name="morphe_appearance_translations_info_title">Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn</string>
+    <string name="morphe_appearance_translations_info_text">Om nieuwe talen te vertalen of de bestaande vertalingen te verbeteren, bezoek %s</string>
     <string name="morphe_background_type">Achtergrondanimatie</string>
     <string name="morphe_background_type_circles">Cirkels</string>
     <string name="morphe_background_type_rings">Ringen</string>

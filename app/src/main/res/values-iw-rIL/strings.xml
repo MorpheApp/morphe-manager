@@ -127,6 +127,11 @@
     <string name="morphe_appearance_options">אפשרויות茍:
 Настройки в 外れҰҡ or hate banех...</string>
     <string name="morphe_appearance_options_description">תכשולים בהגשות, צבעים ואפורים</string>
+    <string name="morphe_appearance_app_language">שפת היישום</string>
+    <string name="morphe_appearance_search">חיפוש</string>
+    <string name="morphe_appearance_no_results">לא נמצאו תוצאות</string>
+    <string name="morphe_appearance_translations_info_title">התרגומים של חלק מהשפות עשויים להיות חסרים או לא מלאים</string>
+    <string name="morphe_appearance_translations_info_text">לתרגם שפות חדשות או לשפר את התרגומים הקיימים, ביקרו ב- %s</string>
     <string name="morphe_background_type"> animац̣ཅ̣ж̣ה̣ ה̊基本面</string>
     <string name="morphe_background_type_circles">עיגולים</string>
     <string name="morphe_background_type_rings">טבעות</string>

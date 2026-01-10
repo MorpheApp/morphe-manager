@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">ตัวเลือกการดู</string>
     <string name="morphe_appearance_options_description">ปรับแต่งธีม,สี,และพื้นหลัง</string>
+    <string name="morphe_appearance_app_language">ภาษาของแอป</string>
+    <string name="morphe_appearance_search">ค้นหา</string>
+    <string name="morphe_appearance_no_results">ไม่พบผลลัพธ์สำหรับ \"\"</string>
+    <string name="morphe_appearance_translations_info_title">การแปลสำหรับบางภาษาอาจขาดหรือไม่สมบูรณ์</string>
+    <string name="morphe_appearance_translations_info_text">เพื่อแปลภาษาใหม่หรือปรับปรุงการแปลที่มีอยู่แล้ว โปรดเยี่ยมชม %s</string>
     <string name="morphe_background_type">การเคลื่อนไหวของพื้นหลัง</string>
     <string name="morphe_background_type_circles">วงกลม</string>
     <string name="morphe_background_type_rings">วงแหวน</string>

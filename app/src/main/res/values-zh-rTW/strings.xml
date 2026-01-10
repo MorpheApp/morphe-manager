@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外觀設定</string>
     <string name="morphe_appearance_options_description">自定義主題、顏色與背景</string>
+    <string name="morphe_appearance_app_language">應用程式語言</string>
+    <string name="morphe_appearance_search">搜尋</string>
+    <string name="morphe_appearance_no_results">沒有找到\"\"的結果</string>
+    <string name="morphe_appearance_translations_info_title">某些語言的翻譯可能缺失或不完整</string>
+    <string name="morphe_appearance_translations_info_text">要翻譯新語言或改進現有翻譯，請訪問 %s</string>
     <string name="morphe_background_type">背景動畫</string>
     <string name="morphe_background_type_circles">圓圈</string>
     <string name="morphe_background_type_rings">圓環</string>

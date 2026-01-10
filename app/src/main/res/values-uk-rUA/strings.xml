@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Налаштування вигляду</string>
     <string name="morphe_appearance_options_description">Налаштуйте теми, кольори та фонові колірні схеми</string>
+    <string name="morphe_appearance_app_language">Мова застосунку</string>
+    <string name="morphe_appearance_search">Пошук на YouTube</string>
+    <string name="morphe_appearance_no_results">За запитом \'\' нічого не знайдено</string>
+    <string name="morphe_appearance_translations_info_title">Переклади для деяких мов можуть бути відсутніми або неповними</string>
+    <string name="morphe_appearance_translations_info_text">Щоб перекласти нові мови або покращити існуючі переклади, відвідайте %s</string>
     <string name="morphe_background_type">Фонова анімація</string>
     <string name="morphe_background_type_circles">Кола</string>
     <string name="morphe_background_type_rings">Кільця</string>
@@ -324,7 +329,7 @@ morphe_header_custom_dark.png
     <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
     <string name="advanced">Розширені</string>
     <string name="advanced_description">API URL, ліміт пам\'яті, налагодження</string>
-    <string name="about">Про програму</string>
+    <string name="about">Про нас</string>
     <!-- Morphe -->
     <string name="accent_color_presets">Акцентний колір</string>
     <!-- Morphe -->
@@ -338,22 +343,24 @@ morphe_header_custom_dark.png
     <string name="theme_presets">Колір теми</string>
     <!-- Morphe -->
     <string name="theme_preset_default">Системний</string>
-    <string name="theme_preset_amoled">Чисто чорний</string>
+    <string name="theme_preset_amoled">Чорний</string>
     <string name="theme_preset_dynamic">Material You</string>
     <!-- Morphe -->
     <string name="color_channel_red">Червоний</string>
     <string name="color_channel_green">Зелений</string>
     <string name="color_channel_blue">Синій</string>
     <string name="theme">Тема</string>
-    <string name="safeguards">Засоби захисту</string>
+    <string name="safeguards">Заходи захисту</string>
     <string name="patch_compat_check">Вимкнути перевірку сумісності версії</string>
-    <string name="patch_compat_check_description">Не обмежувати патчі для сумісних версій додатків</string>
+    <string name="patch_compat_check_description">Не обмежувати патчі для сумісних версій застосунків</string>
     <string name="patch_compat_check_confirmation">"Вибір несумісних патчів може призвести до некоректної роботи додатка.
 
 Бажаєте продовжити?"</string>
-    <string name="suggested_version_safeguard">Вимагати запропоновану версію додатку</string>
-    <string name="suggested_version_safeguard_description">Примусити вибір запропонованої версії додатку</string>
-    <string name="suggested_version_safeguard_confirmation">"Вибір додатку, що не є запропонованою версією, може викликати несподівані проблеми.\n\nБажаєте продовжити?"</string>
+    <string name="suggested_version_safeguard">Вимагати запропоновану версію застосунку</string>
+    <string name="suggested_version_safeguard_description">Примусово вибрати запропоновану версію застосунку</string>
+    <string name="suggested_version_safeguard_confirmation">"Вибір застосунку, що не є запропонованою версією, може викликати несподівані проблеми.
+
+Бажаєте продовжити?"</string>
     <string name="patch_selection_safeguard">Дозволити зміну вибору патча та параметрів</string>
     <string name="patch_selection_safeguard_description">Не забороняти вибір або скасування вибору патчів і налаштувань параметрів</string>
     <string name="patch_selection_safeguard_confirmation">"Зміна вибору патчів може викликати несподівані проблеми.\n\nАктивувати в будь-якому випадку?"</string>
@@ -361,28 +368,28 @@ morphe_header_custom_dark.png
     <string name="universal_patches_safeguard_description">Не приховувати універсальні патчі або не забороняти їх використання</string>
     <string name="universal_patches_profile_blocked_title">Універсальні патчі вимкнено</string>
     <string name="universal_patches_profile_blocked_description">Цей профіль патча містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб використовувати їх.</string>
-    <string name="universal_patches_app_blocked_description">Цей додаток містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб продовжити.</string>
-    <string name="import_keystore">Імпортувати keystore</string>
-    <string name="import_keystore_description">Імпортувати кастомний keystore</string>
-    <string name="import_keystore_dialog_title">Введіть облікові дані keystore</string>
-    <string name="import_keystore_dialog_description">Вам потрібно буде ввести облікові дані keystore, щоб імпортувати його</string>
-    <string name="import_keystore_dialog_alias_field">Ім\'я користувача (Аліас)</string>
+    <string name="universal_patches_app_blocked_description">Цей застосунок містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб продовжити.</string>
+    <string name="import_keystore">Імпортувати сховище ключів</string>
+    <string name="import_keystore_description">Імпортуйте сховище ключів користувача</string>
+    <string name="import_keystore_dialog_title">Введіть облікові дані сховища ключів</string>
+    <string name="import_keystore_dialog_description">Вам потрібно буде ввести облікові дані сховища ключів, щоб імпортувати його.</string>
+    <string name="import_keystore_dialog_alias_field">Ім\'я користувача (псевдонім)</string>
     <string name="import_keystore_dialog_password_field">Пароль</string>
     <string name="import_keystore_dialog_button">Імпортувати</string>
-    <string name="import_keystore_wrong_credentials">Неправильні облікові дані keystore</string>
-    <string name="import_keystore_success">Імпортовано keystore</string>
-    <string name="export_keystore">Експортувати keystore</string>
-    <string name="export_keystore_description">Експортувати поточний keystore</string>
-    <string name="export_keystore_unavailable">Немає keystore для експорту</string>
-    <string name="export_keystore_success">Експортовано keystore</string>
+    <string name="import_keystore_wrong_credentials">Неправильні облікові дані сховища ключів</string>
+    <string name="import_keystore_success">Сховище ключів імпортовано</string>
+    <string name="export_keystore">Експортувати сховище ключів</string>
+    <string name="export_keystore_description">Експортувати поточне сховище ключів</string>
+    <string name="export_keystore_unavailable">Немає сховища ключів для експорту</string>
+    <string name="export_keystore_success">Сховище ключів експортовано</string>
     <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
-    <string name="regenerate_keystore_success">Keystore успішно замінено</string>
-    <string name="import_patch_selection">Імпортувати вибір патчу</string>
-    <string name="import_patch_selection_description">Імпортувати вибір патчу з JSON файлу</string>
-    <string name="import_patch_selection_fail">Не вдалося імпортувати вибір патчу: %s</string>
-    <string name="import_patch_selection_success">Імпортовано вибір патчу</string>
+    <string name="regenerate_keystore_success">Сховище ключів успішно замінено</string>
+    <string name="import_patch_selection">Імпортувати вибір патчів</string>
+    <string name="import_patch_selection_description">Імпортувати вибір патчів із файлу JSON</string>
+    <string name="import_patch_selection_fail">Не вдалося імпортувати вибір патчів: %s</string>
+    <string name="import_patch_selection_success">Імпортовано вибір патчів</string>
     <string name="import_patch_bundles">Імпортувати пакети патчів</string>
-    <string name="import_patch_bundles_description">Відновити віддалені пакети патчів з JSON файлу</string>
+    <string name="import_patch_bundles_description">Імпортувати віддалені пакети патчів із файлу JSON</string>
     <string name="import_patch_bundles_fail">Не вдалося імпортувати пакети патчів: %s</string>
     <string name="import_patch_bundles_in_progress">Імпортується…</string>
     <string name="import_patch_bundles_success">Імпортовано %d пакети патчів</string>
@@ -392,22 +399,22 @@ morphe_header_custom_dark.png
     <string name="import_patch_bundles_banner_subtitle">%1$d з %2$d оброблено</string>
     <string name="import_patch_bundles_banner_steps">Крок %1$d з %2$d</string>
     <string name="import_patch_profiles">Імпортувати профілі патчів</string>
-    <string name="import_patch_profiles_description">Імпортувати збережені профілі патчів з JSON файлу</string>
+    <string name="import_patch_profiles_description">Імпортувати збережені профілі патчів з файлу JSON</string>
     <string name="import_patch_profiles_fail">Не вдалося імпортувати профілі патчів: %s</string>
     <string name="import_patch_profiles_success">Імпортовано %d профілі патчів</string>
     <string name="import_patch_profiles_partial">Імпортовано %1$d профілі патчів та %2$d пропущено</string>
     <string name="import_patch_profiles_skipped">Пропущено %d дублікати профілів патчів</string>
-    <string name="import_patch_profiles_none">Жоден профіль патчу не було імпортовано</string>
+    <string name="import_patch_profiles_none">Профілі патчів не були імпортовані</string>
     <string name="import_manager_settings">Імпортувати налаштування менеджера</string>
-    <string name="import_manager_settings_description">Відновити збережені налаштування менеджера з JSON файлу</string>
+    <string name="import_manager_settings_description">Імпортувати збережені налаштування менеджера з файлу JSON </string>
     <string name="import_manager_settings_fail">Не вдалося імпортувати налаштування менеджера: %s</string>
     <string name="import_manager_settings_success">Імпортовано налаштування менеджера</string>
-    <string name="export_patch_selection">Експортувати вибір патчу</string>
-    <string name="export_patch_selection_description">Експортувати вибір патчу в JSON файл</string>
-    <string name="export_patch_selection_fail">Не вдалося експортувати вибір патчу: %s</string>
-    <string name="export_patch_selection_success">Експортовано вибір патчу</string>
+    <string name="export_patch_selection">Експортувати вибір патчів</string>
+    <string name="export_patch_selection_description">Експортувати вибір патчів у файл JSON</string>
+    <string name="export_patch_selection_fail">Не вдалося експортувати вибір патчів: %s</string>
+    <string name="export_patch_selection_success">Вибір патчів експортовано</string>
     <string name="export_patch_bundles">Експортувати пакети патчів</string>
-    <string name="export_patch_bundles_description">Зберегти імпортовані віддалені пакети патчів у JSON файл</string>
+    <string name="export_patch_bundles_description">Зберегти імпортовані віддалені пакети патчів у файл JSON</string>
     <string name="export_patch_bundles_fail">Не вдалося експортувати пакети патчів: %s</string>
     <string name="export_patch_bundles_success">Експортовано %d пакети патчів</string>
     <string name="export_patch_bundles_partial">Експортовано %1$d пакети патчів. Деякі пакети не могли бути експортовані, тому що вони були додані локально.</string>
@@ -443,22 +450,22 @@ morphe_header_custom_dark.png
     <string name="patch_selection_selected_bundle_toast">Вибрані всі патчі у %s</string>
     <string name="patch_selection_select_bundle_empty_toast">Немає жодного патчу для вибору у %s</string>
     <string name="patch_selection_all_actions_hidden_toast">Усі дії приховані, увімкніть хоча б одну у налаштуваннях</string>
-    <string name="patch_selection_reset_bundle_toast">Скинути налаштування за замовчуванням для %s</string>
+    <string name="patch_selection_reset_bundle_toast">Скинути до типових налаштувань для %s</string>
     <string name="patch_selection_button_label_all">Деселектувати все</string>
     <string name="patch_selection_button_label_bundle">Скасувати вибір пакету</string>
-    <string name="patch_selection_button_label_defaults">Усі налаштування за замовчуванням</string>
+    <string name="patch_selection_button_label_defaults">Усе типово</string>
     <string name="patch_selection_button_label_select_bundle">Вибрати пакет</string>
     <string name="patch_selection_button_label_select_all">Вибрати все</string>
     <string name="patch_selection_button_label_undo_action">Скасувати дію</string>
     <string name="patch_selection_button_label_redo_action">Повторити дію</string>
     <string name="patch_selection_history_undo">Скасовано %1$s</string>
     <string name="patch_selection_history_redo">Повторено %1$s</string>
-    <string name="patch_selection_action_all_defaults">всі налаштування за замовчуванням</string>
+    <string name="patch_selection_action_all_defaults">усе типово</string>
     <string name="patch_selection_action_deselect_all">деселектувати все</string>
     <string name="patch_selection_action_select_all">вибрати все</string>
     <string name="patch_selection_action_select_bundle">вибрати пакет «%1$s»</string>
     <string name="patch_selection_action_deselect_bundle">деселектувати пакет «%1$s»</string>
-    <string name="patch_selection_action_bundle_defaults">налаштування пакета за замовчуванням для «%1$s»</string>
+    <string name="patch_selection_action_bundle_defaults">типові налаштування пакета для «%1$s»</string>
     <string name="disable_patch_selection_confirmations">Вимкнути підтвердження дій</string>
     <string name="disable_patch_selection_confirmations_description">Пропускати діалогові вікна підтвердження для вибору патчів</string>
     <string name="disable_patch_selection_confirmations_warning">Вимкнення підтверджень може викликати небажані масові зміни.</string>
@@ -467,20 +474,20 @@ morphe_header_custom_dark.png
     <string name="patch_selection_action_order_title">Порядок кнопок дій вибору патчів</string>
     <string name="patch_selection_action_order_description">Виберіть порядок розташування кнопок дій вибору патчів</string>
     <string name="patch_selection_action_visibility_title">Приховати дії вибору патчів</string>
-    <string name="patch_selection_action_visibility_description">Вибірка патчів з додатками</string>
+    <string name="patch_selection_action_visibility_description">Виберіть, які кнопки дії вибору патча показуються</string>
     <string name="patch_selection_action_visibility_reset">Показати всі дії</string>
-    <string name="patch_selection_action_order_reset">Скинути порядок за замовчуванням</string>
+    <string name="patch_selection_action_order_reset">Скинути типовий порядок</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Деселектувати пакет?</string>
     <string name="patch_selection_confirm_deselect_bundle_message">Деселектувати всі патчі, вибрані з %1$s?</string>
     <string name="patch_selection_confirm_deselect_all_title">Деселектувати всі патчі?</string>
     <string name="patch_selection_confirm_deselect_all_message">Це очищає всі вибрані патчі по всіх пакетах.</string>
-    <string name="patch_selection_confirm_bundle_defaults_title">Відновити налаштування пакета за замовчуванням?</string>
-    <string name="patch_selection_confirm_bundle_defaults_message">Це відновлює рекомендовані налаштування за замовчуванням для %1$s.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Відновити типові налаштування пакета?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Це відновлює рекомендовані типові налаштування для %1$s.</string>
     <string name="patch_selection_confirm_select_bundle_title">Вибрати пакет?</string>
     <string name="patch_selection_confirm_select_bundle_message">Вибрати кожен патч, наданий %1$s?</string>
     <string name="patch_selection_confirm_select_all_title">Вибрати всі патчі?</string>
     <string name="patch_selection_confirm_select_all_message">Це вибирає всі патчі по всіх пакетах.</string>
-    <string name="patch_selection_button_label_reset_bundle">Налаштування за замовчуванням</string>
+    <string name="patch_selection_button_label_reset_bundle">Типові налаштування пакета</string>
     <string name="patch_profile_save_label">Зберегти профіль</string>
     <string name="patch_selection_toggle_expand">Показати дії</string>
     <string name="patch_selection_toggle_collapse">Сховати дії</string>
@@ -489,23 +496,23 @@ morphe_header_custom_dark.png
 
 Профілі патчів не впливають."</string>
     <string name="patch_selection_reset_all_description">Скидає всі вибори патчів</string>
-    <string name="patch_selection_reset_dialog_title">Скинути налаштування патчів за замовчуванням?</string>
+    <string name="patch_selection_reset_dialog_title">Скинути типові налаштування патчів?</string>
     <string name="patch_selection_reset_dialog_message">Це відновить ваші вибори патчів і параметри до рекомендованих налаштувань.</string>
-    <string name="patch_selection_reset_package">Скинути вибір патчів для додатку</string>
-    <string name="patch_selection_reset_package_dialog_description">"Ви збираєтеся скинути вибір патчів для додатку \"%s\". Вам потрібно буде вибрати кожен патч знову вручну.
+    <string name="patch_selection_reset_package">Скинути вибір патчів для застосунку</string>
+    <string name="patch_selection_reset_package_dialog_description">"Ви збираєтеся скинути вибір патчів для застосунку «%s». Вам потрібно буде вибрати кожен патч знову вручну.
 
-Профілі патчів не впливають."</string>
-    <string name="patch_selection_reset_package_description">Скидає вибір патчів для одного додатку</string>
+На профілі патчів це не впливає."</string>
+    <string name="patch_selection_reset_package_description">Скидає вибір патчів для одного застосунку</string>
     <string name="patch_selection_reset_patches">Скинути вибір патчів (один)</string>
     <string name="patch_selection_reset_patches_dialog_description">"Ви збираєтеся скинути вибір патчів для \"%s\". Вам потрібно буде вибрати кожен патч знову вручну.
 
 Профілі патчів не впливають."</string>
     <string name="patch_selection_reset_patches_description">Скидає вибір патчів для конкретної колекції патчів</string>
-    <string name="patch_options_reset_package">Скинути параметри патчів для додатку</string>
-    <string name="patch_options_reset_package_dialog_description">"Ви збираєтеся скинути параметри патчів для додатку \"%s\". Вам потрібно буде повторно застосувати кожен параметр знову.
+    <string name="patch_options_reset_package">Скинути параметри патчів для застосунку</string>
+    <string name="patch_options_reset_package_dialog_description">"Ви збираєтеся скинути параметри патчів для застосунку «%s». Вам потрібно буде повторно застосувати кожен параметр знову.
 
-Профілі патчів не впливають."</string>
-    <string name="patch_options_reset_package_description">Скидає параметри патчів для одного додатку</string>
+На профілі патчів це не впливає."</string>
+    <string name="patch_options_reset_package_description">Скидає параметри патчів для одного застосунку</string>
     <string name="patch_options_reset_patches">Скинути параметри патчів (один)</string>
     <string name="patch_options_reset_patches_dialog_description">"Ви збираєтеся скинути параметри патчів для \"%s\". Вам потрібно буде повторно застосувати кожен параметр знову.
 
@@ -531,10 +538,10 @@ morphe_header_custom_dark.png
     <string name="downloader_plugin_failed_dialog_body">Не вдалося завантажити \"%1$s\". Ви можете переглянути деталі помилки або видалити плагін.</string>
     <string name="downloader_plugin_uninstall_title">Видалити плагін?</string>
     <string name="downloader_plugin_uninstall_description">Ви впевнені, що хочете видалити \"%1$s\"?</string>
-    <string name="downloader_plugin_delete_apps_title">Видалити вибрані додатки</string>
-    <string name="downloader_plugin_delete_apps_description">Ви впевнені, що хочете видалити вибрані додатки?</string>
-    <string name="downloader_settings_no_apps">Завантажені додатки не знайдені.</string>
-    <string name="search_apps">Пошук додатків…</string>
+    <string name="downloader_plugin_delete_apps_title">Видалити вибрані застосунки</string>
+    <string name="downloader_plugin_delete_apps_description">Упевнені, що хочете видалити вибрані застосунки?</string>
+    <string name="downloader_settings_no_apps">Не знайдено завантажених застосунків.</string>
+    <string name="search_apps">Пошук застосунків…</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
     <string name="edit">Редагувати</string>
@@ -557,12 +564,12 @@ morphe_header_custom_dark.png
     <string name="light">Світлий</string>
     <string name="dark">Темний</string>
     <string name="black">Чорний</string>
-    <string name="downloaded_apps">Завантажені додатки</string>
+    <string name="downloaded_apps">Завантажені застосунки</string>
     <string name="process_runtime">Запустити патчер в іншому процесі</string>
     <string name="process_runtime_description">Прискорює патчування, використовуючи окремий процес</string>
     <string name="process_runtime_description_not_available">Ця функція вимагає Android 11 або вище</string>
     <string name="strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
-    <string name="strip_unused_libs_description">Видалення нативних бібліотек для непідтримуваних архітектур процесорів з виправлених додатків</string>
+    <string name="strip_unused_libs_description">Видалення нативних бібліотек для непідтримуваних архітектур процесорів з патчених застосунків</string>
     <string name="process_runtime_memory_limit">Ліміт пам\'яті процесу патчера</string>
     <string name="process_runtime_memory_limit_description">Максимальна кількість пам\'яті, яку може використовувати процес патчера (у мегабайтах)</string>
     <string name="reset_to_recommended">Скинути до рекомендованого</string>
@@ -572,9 +579,9 @@ morphe_header_custom_dark.png
     <string name="patch_profile_view_options">Переглянути опції</string>
     <string name="patch_profile_patch_options_title">Опції для %1$s</string>
     <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
-    <string name="app_exporting">Експорт додатків</string>
+    <string name="app_exporting">Експорт застосунків</string>
     <string name="export_name_format">Формат імені файлу експорту</string>
-    <string name="export_name_format_description">Налаштуйте типову назву файлу для експортованих виправлених додатків</string>
+    <string name="export_name_format_description">Налаштуйте типову назву файлу для експортованих виправлених застосунків</string>
     <string name="export_name_format_dialog_title">Формат імені файлу експорту</string>
     <string name="export_name_format_dialog_supporting">Використовуйте нижченаведені заповнювачі для створення імені файлу. Розширення .apk додається автоматично, якщо відсутнє.</string>
     <string name="export_name_format_preview_label">Попередній перегляд</string>
@@ -583,12 +590,12 @@ morphe_header_custom_dark.png
     <string name="export_name_format_error_blank">Формат імені файлу не може бути порожнім.</string>
     <string name="export_name_format_current">Поточний шаблон: %1$s</string>
     <string name="export_name_format_insert">Вставити</string>
-    <string name="export_name_variable_app_name">Назва додатку</string>
-    <string name="export_name_variable_app_name_description">Замінено на відображуване ім\'я додатку.</string>
+    <string name="export_name_variable_app_name">Назва застосунку</string>
+    <string name="export_name_variable_app_name_description">Замінено на показувану назву застосунку.</string>
     <string name="export_name_variable_package_name">Назва пакета</string>
-    <string name="export_name_variable_package_name_description">Замінено на ім\'я пакету додатку.</string>
-    <string name="export_name_variable_app_version">Версія додатку</string>
-    <string name="export_name_variable_app_version_description">Замінено на назву версії додатку.</string>
+    <string name="export_name_variable_package_name_description">Замінено на назву пакету застосунку.</string>
+    <string name="export_name_variable_app_version">Версія застосунку</string>
+    <string name="export_name_variable_app_version_description">Замінено на назву версії застосунку.</string>
     <string name="export_name_variable_patches_version">Версія патчів</string>
     <string name="export_name_variable_patches_version_description">Замінено на версію(ї) пакета патчів, що застосована.</string>
     <string name="export_name_variable_bundle_names">Назви пакетів патчів</string>
@@ -628,7 +635,7 @@ morphe_header_custom_dark.png
     <string name="patches_reset">Скинути пакети патчів</string>
     <string name="storage">Сховище</string>
     <string name="no_patch_found">Патчі не знайдені. Перевірте свої патчі</string>
-    <string name="tab_apps">Додатки</string>
+    <string name="tab_apps">Застосунки</string>
     <string name="tab_patches">Пакети патчів</string>
     <string name="tab_profiles">Профілі патчів</string>
     <string name="delete">Видалити</string>
@@ -642,20 +649,20 @@ morphe_header_custom_dark.png
     <string name="download_apk">Завантажити файл APK</string>
     <string name="patches_download_fail">Не вдалося завантажити патчі: %s</string>
     <string name="patches_replace_fail">Не вдалося імпортувати патчі: %s</string>
-    <string name="no_patched_apps_found">Виправлені додатки не знайдені</string>
+    <string name="no_patched_apps_found">Не знайдено патчених застосунків</string>
     <string name="patches_selected">%s пакет(ів) патчів вибрано</string>
     <string name="patch_profiles_selected">%1$d профіль патчів вибрано</string>
-    <string name="selected_apps_count">%1$d додатків вибрано</string>
-    <string name="selected_apps_delete_dialog_description">Видалити вибрані додатки з менеджера? Встановлені додатки на вашому пристрої залишаться без змін.</string>
+    <string name="selected_apps_count">%1$d застосунків вибрано</string>
+    <string name="selected_apps_delete_dialog_description">Видалити вибрані застосунки з менеджера? Встановлені застосунки на вашому пристрої залишаться без змін.</string>
     <string name="incompatible_patches">Несумісні патчі</string>
     <string name="universal_patches">Універсальні патчі</string>
     <string name="patch_selection_reset_toast">Вибір патчів скинуто на рекомендовані налаштування</string>
     <string name="patch_options_reset_toast">Опції патча були скинуті</string>
     <string name="non_suggested_version_warning_title">Версія не рекомендована</string>
-    <string name="non_suggested_version_warning_description">"Версія додатку, яку ви обрали, не відповідає рекомендованій версії.
-Будь ласка, використовуйте рекомендовану версію: %s
+    <string name="non_suggested_version_warning_description">"Версія застосунку, яку ви обрали, не відповідає рекомендованій версії.
+Використовуйте рекомендовану версію: %s
 
-Щоб продовжити, вимкніть \"Вимагати рекомендовану версію додатка\" в розширених налаштуваннях."</string>
+Щоб продовжити, вимкніть «Вимагати рекомендовану версію застосунку» в розширених налаштуваннях."</string>
     <string name="selection_warning_description">"Рекомендується використовувати типову вибірку патчів і опції. Зміна їх може призвести до несподіваних проблем.
 
 Вам потрібно ввімкнути \"Дозволити зміну вибору патчів та опцій\" у розширених налаштуваннях перед переключенням патчів."</string>
@@ -669,15 +676,15 @@ morphe_header_custom_dark.png
     <string name="patch_profile_update_existing_description">Торкніться збереженого профілю, щоб перезаписати його, або залиште все не вибраним, щоб створити новий профіль.</string>
     <string name="patch_profile_name_hint">Ім’я профілю</string>
     <string name="patch_profile_saved_toast">Профіль патча \"%1$s\" збережено</string>
-    <string name="patch_profile_duplicate_toast">Профіль патча \"%1$s\" вже існує для цього додатку</string>
+    <string name="patch_profile_duplicate_toast">Профіль патча «%1$s» вже існує для цього застосунку</string>
     <string name="patch_profile_updated_toast">Профіль патча \"%1$s\" оновлено</string>
     <string name="patch_profile_save_failed_toast">Не вдалося зберегти профіль патча</string>
     <string name="patch_profile_rename">Перейменувати</string>
     <string name="patch_profile_rename_title">Перейменувати профіль патча</string>
     <string name="patch_profile_version_override_action">Налаштування версії профілю патча</string>
     <string name="patch_profile_version_override_title">Налаштування версії для \"%1$s\"</string>
-    <string name="patch_profile_version_override_message">Встановити певну версію додатку для збереження у цьому профілі або цільте на всі версії.</string>
-    <string name="patch_profile_version_override_label">Версія додатку</string>
+    <string name="patch_profile_version_override_message">Встановіть конкретну версію застосунку для зберігання в цьому профілі або виберіть всі версії</string>
+    <string name="patch_profile_version_override_label">Версія застосунку</string>
     <string name="patch_profile_version_override_hint">наприклад, 18.27.35</string>
     <string name="patch_profile_version_override_all_versions">Використовуйте всі версії</string>
     <string name="patch_profile_version_override_saved_toast">Оновлено версію профілю</string>
@@ -722,16 +729,16 @@ morphe_header_custom_dark.png
 Увімкніть їх знову (або виберіть альтернативи) і потім спробуйте ще раз."</string>
     <string name="patch_profile_delete_multiple_dialog_description">Видалити вибрані патч-профілі?</string>
     <string name="this_version">Ця версія</string>
-    <string name="universal">Будь-який додаток</string>
+    <string name="universal">Будь-який застосунок</string>
     <string name="search_patches">Пошук патчів</string>
-    <string name="app_version_not_compatible">"Цей патч несумісний з вибраною версією додатку (%1$s).
+    <string name="app_version_not_compatible">"Цей патч несумісний з вибраною версією застосунку (%1$s).
 
 Він сумісний лише з наступною версією: %2$s."</string>
     <string name="failed_to_load_apk">Не вдалося завантажити APK</string>
     <string name="loading">Завантаження…</string>
     <string name="not_installed">Не встановлено</string>
     <string name="installed">Встановлено</string>
-    <string name="app_info">Інформація про додаток</string>
+    <string name="app_info">Інформація про застосунок</string>
     <string name="uninstall">Видалити</string>
     <string name="repatch">Перепатчено</string>
     <string name="install_type">Тип встановлення</string>
@@ -740,9 +747,9 @@ morphe_header_custom_dark.png
     <string name="applied_patches">Застосовані патчі</string>
     <string name="view_applied_patches">Переглянути застосовані патчі</string>
     <string name="patch_bundles_used">Використані патч-бандли</string>
-    <string name="applied_patches_empty">Для цього додатку не записано патчів</string>
+    <string name="applied_patches_empty">Для цього застосунку не записано патчів</string>
     <string name="applied_patches_bundle_missing">Метадані бандла недоступні. Відображаються збережені назви патчів.</string>
-    <string name="no_patch_bundles_tracked">Для цього додатку не записано патч-бандлів</string>
+    <string name="no_patch_bundles_tracked">Для цього застосунку не записано пакети патчів</string>
     <string name="mount_install">Інсталятор з монтованим рутом</string>
     <string name="mounted">Монтовано</string>
     <string name="unmounted">Демонтово</string>
@@ -752,21 +759,21 @@ morphe_header_custom_dark.png
     <string name="not_mounted">Не змонтовано</string>
     <string name="mount">Монтувати</string>
     <string name="unmount">Демонтувати</string>
-    <string name="unmount_confirm_description">Ви хочете демонтувати додаток?</string>
+    <string name="unmount_confirm_description">Ви хочете демонтувати застосунок?</string>
     <string name="saved_install">Збережено</string>
     <string name="failed_to_mount">Не вдалося смонтовано: %s</string>
     <string name="failed_to_unmount">Не вдалося демонтувати: %s</string>
-    <string name="unpatch_app">Розпакувати додаток?</string>
-    <string name="unpatch_description">Ви впевнені, що хочете розпакувати цей додаток?</string>
-    <string name="downloader_app_not_found">Завантажувач не знайшов додаток</string>
+    <string name="unpatch_app">Розпатчити застосунок?</string>
+    <string name="unpatch_description">Упевнені, що хочете розпатчити цей застосунок?</string>
+    <string name="downloader_app_not_found">Завантажувач не знайшов застосунок</string>
     <string name="downloader_error">Помилка завантажувача: %s</string>
     <string name="downloader_no_plugins_installed">Не встановлено жодного завантажувача.</string>
     <string name="downloader_no_plugins_available">Інстальовано завантажувачі, але жоден не є надійним. Перевірте налаштування.</string>
     <string name="downloader_plugin_uninstall_success">Деінстальовано %1$s</string>
     <string name="downloader_plugin_uninstall_failed">Не вдалося деінсталювати %1$s</string>
-    <string name="downloaded_apps_export">Експортувати вибрані додатки</string>
-    <string name="downloaded_apps_export_success">Експортовано %1$d додатків</string>
-    <string name="downloaded_apps_export_failed">Не вдалося експортувати завантажені додатки</string>
+    <string name="downloaded_apps_export">Експортувати вибрані застосунки</string>
+    <string name="downloaded_apps_export_success">Експортовано %1$d застосунків</string>
+    <string name="downloaded_apps_export_failed">Не вдалося експортувати завантажені застосунки</string>
     <string name="already_patched">Вже патчено</string>
     <string name="patch_selector_sheet_filter_title">Фільтр</string>
     <string name="patch_selector_sheet_filter_compat_title">Сумісність</string>
@@ -787,7 +794,7 @@ morphe_header_custom_dark.png
     <string name="installer_internal_name">Системний інсталятор</string>
     <string name="installer_internal_description">Використовувати менеджер пакетів Android</string>
     <string name="installer_auto_saved_name">Інсталятор з рутом</string>
-    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого додатка (вимагається root).</string>
+    <string name="installer_auto_saved_description">Монтує патчений APK поверх встановленого застосунку (вимагається root).</string>
     <string name="installer_shizuku_description">Встановити тихо за допомогою Shizuku або Sui.</string>
     <string name="installer_option_none">Файловий відкат відсутній</string>
     <string name="installer_none_description">Конфігуровано жодного інсталятора файлового відкату</string>
@@ -797,15 +804,15 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">Запустіть Shizuku або Sui та спробуйте знову.</string>
     <string name="installer_status_shizuku_permission">Надайте дозвіл Shizuku для Morphe у додатку Shizuku.</string>
     <string name="installer_mount_warning_title">Вибрано інсталятор з рутом</string>
-    <string name="installer_mount_warning_install">Ваш основний інсталятор налаштований на інсталятор з рутом. У цей збережений додаток не встановлено за допомогою монтованої установки.</string>
-    <string name="installer_mount_warning_update">Ваш основний інсталятор налаштовано на інсталятор із монтованим рутом. Цей збережений додаток не встановлено за допомогою монтованої установки.</string>
-    <string name="installer_mount_warning_uninstall">Ваш основний інсталятор налаштовано на інсталятор із монтованим рутом. Цей збережений додаток не встановлено за допомогою монтованої установки.</string>
+    <string name="installer_mount_warning_install">Ваш основний встановлювач налаштований на встановлювач із рутом. У цей збережений застосунок не було встановлено за допомогою монтування.</string>
+    <string name="installer_mount_warning_update">Ваш основний встановлювач налаштовано на встановлювач з умонтованим рутом. Цей збережений застосунок не було встановлено за допомогою монтування.</string>
+    <string name="installer_mount_warning_uninstall">Ваш основний встановлювач налаштовано на встановлювач з умонтованим рутом. Цей збережений застосунок не встановлено за допомогою монтування.</string>
     <string name="installer_mount_mismatch_title">Інсталятор з рутом не вибрано</string>
-    <string name="installer_mount_mismatch_install">Цей додаток встановлено за допомогою інсталятора із монтованим рутом. Переключіть основний інсталятор назад на використання монтувальних дій, а потім демонтуйте.</string>
-    <string name="installer_mount_mismatch_update">Цей додаток встановлено за допомогою інсталятора з монтованим рутом. Переключіть основний інсталятор назад на використання монтувальних дій, а потім перемонтуйте.</string>
-    <string name="installer_mount_mismatch_uninstall">Цей додаток встановлено за допомогою інсталятора з монтованим рутом. Переключіть основний інсталятор назад на використання монтувальних дій, а потім демонтуйте.</string>
+    <string name="installer_mount_mismatch_install">Цей застосунок встановлено за допомогою встановлювача з умонтованим рутом. Перемкніть основний встановлювач назад на використання монтувальних дій, а потім демонтуйте.</string>
+    <string name="installer_mount_mismatch_update">Цей застосунок встановлено за допомогою встановлювача з умонтованим рутом. Перемкніть основний встановлювач назад на використання монтувальних дій, а потім перемонтуйте.</string>
+    <string name="installer_mount_mismatch_uninstall">Цей застосунок встановлено за допомогою встановлювача з умонтованим рутом. Перемкніть основний встановлювач назад на використання монтувальних дій, а потім демонтуйте.</string>
     <string name="mount_version_mismatch_title">Помилка монтування</string>
-    <string name="mount_version_mismatch_message">Версія стокового додатку (%2$s) не відповідає версії патченого додатку (%1$s). Смонтовано відповідну стокову версію, а потім спробуйте знову.</string>
+    <string name="mount_version_mismatch_message">Версія стокового застосунку (%2$s) не відповідає версії патченого (%1$s). Змонтуйте відповідну стокову версію, а потім спробуйте знову.</string>
     <string name="installer_status_shizuku_unsupported">Версія встановленого Shizuku не підтримується.</string>
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
     <string name="installer_shizuku_launch_failed">Не вдається відкрити Shizuku. Запустіть його вручну і повторіть спробу.</string>
@@ -838,7 +845,7 @@ morphe_header_custom_dark.png
     <string name="installer_custom_remove_failed">Не вдалося видалити інсталятор. Спробуйте знову.</string>
     <string name="installer_hint_generic">Інсталяція не вдалася. Спробуйте ще раз або перемкніть на інший інсталятор.</string>
     <string name="installer_hint_blocked">Інсталяція була заблокована Android. Перевірте Play Protect чи налаштування безпеки.</string>
-    <string name="installer_hint_conflict">Інший додаток з цією назвою пакета вже встановлений. Видаліть його, перш ніж продовжити.</string>
+    <string name="installer_hint_conflict">Інший застосунок із цією назвою пакета вже встановлений. Видаліть його, перш ніж продовжити.</string>
     <string name="installer_hint_incompatible">Цей APK не сумісний з цим пристроєм або версією Android.</string>
     <string name="installer_hint_invalid">Цей APK невидатний або пошкоджений.</string>
     <string name="installer_hint_storage">Недостатньо місця для зберігання для інсталяції.</string>
@@ -848,7 +855,7 @@ morphe_header_custom_dark.png
 
 Деталі: %2$s"</string>
     <string name="installer_external_launched">Відкриття %1$s…</string>
-    <string name="installer_external_timeout">%1$s не підтвердив інсталяцію. Перевірте інший додаток і спробуйте знову.</string>
+    <string name="installer_external_timeout">%1$s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову.</string>
     <string name="installer_external_success">%1$s повідомив про успішну інсталяцію.</string>
     <string name="installer_external_finished_no_change">%1$s завершено без встановлення додатку. Перевірте іnstaller на помилкове повідомлення та спробуйте знову.</string>
     <string name="installing_ellipsis">Інсталяція…</string>

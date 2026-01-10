@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opcije izgleda</string>
     <string name="morphe_appearance_options_description">Prilagođaj teme, boje i pozadinske likove</string>
+    <string name="morphe_appearance_app_language">Jezik aplikacije</string>
+    <string name="morphe_appearance_search">Pretraga</string>
+    <string name="morphe_appearance_no_results">Nisu pronađeni rezultati</string>
+    <string name="morphe_appearance_translations_info_title">Prevodima za neke jezike mogu nedostajati ili biti nepopuni</string>
+    <string name="morphe_appearance_translations_info_text">Da prevelaete nove jezike ili poboljšate postojeće prevele, posetite %s</string>
     <string name="morphe_background_type">Animacija pozadine</string>
     <string name="morphe_background_type_circles">Krugovi</string>
     <string name="morphe_background_type_rings">Prstenovi</string>

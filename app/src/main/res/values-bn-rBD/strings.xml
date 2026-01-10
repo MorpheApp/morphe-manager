@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">আকৃতি ও রঙের বিকল্প</string>
     <string name="morphe_appearance_options_description">\"Personalize themes, colors, and backgrounds\"</string>
+    <string name="morphe_appearance_app_language">অ্যাপ্লিকেশনের ভাষা</string>
+    <string name="morphe_appearance_search">অনুসন্ধান</string>
+    <string name="morphe_appearance_no_results">কোন ফলাফল পাওয়া যায়নি</string>
+    <string name="morphe_appearance_translations_info_title">কয়েকটি ভাষার অনুবাদ অনুপস্থিত বা অসম্পূর্ণ হতে পারে</string>
+    <string name="morphe_appearance_translations_info_text">নতুন ভাষা অনুবাদ করতে বা বিদ্যমান অনুবাদ উন্নত করতে, %s দেখুন</string>
     <string name="morphe_background_type">পেইন্টের নিচের অনিমেশন</string>
     <string name="morphe_background_type_circles">বৃত্ত</string>
     <string name="morphe_background_type_rings">রিং</string>

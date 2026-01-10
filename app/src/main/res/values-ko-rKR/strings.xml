@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">루트 모드에서는 GmsCore support 패치가 제외됩니다.</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK 저장</string>
-    <string name="morphe_patcher_copy_error">복사 오류</string>
+    <string name="morphe_patcher_copy_error">오류 복사</string>
     <string name="morphe_patcher_show_error">오류 보기</string>
     <string name="morphe_patcher_error_copied">오류를 클립보드에 복사하였습니다</string>
     <string name="morphe_patcher_patches_progress">패치 %1$d / %2$d  개</string>
@@ -83,7 +83,7 @@
     <string name="morphe_patcher_install_error_title">설치 오류</string>
     <string name="morphe_patcher_install_error_subtitle">삭제한 후에 다시 설치하세요</string>
     <string name="morphe_patcher_ready_to_install_subtitle">설치하려면 아래 버튼을 탭하세요</string>
-    <string name="morphe_patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 턉하세요</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속하면 앱이 제대로 작동하지 않을 수 있습니다.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">계속 진행</string>
@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">레이아웃 옵션</string>
     <string name="morphe_appearance_options_description">테마, 색상 그리고 배경을 커스텀 해보세요</string>
+    <string name="morphe_appearance_app_language">앱 언어</string>
+    <string name="morphe_appearance_search">검색</string>
+    <string name="morphe_appearance_no_results">결과가 없습니다</string>
+    <string name="morphe_appearance_translations_info_title">일부 언어의 번역이 누락되었거나 불완전할 수 있습니다</string>
+    <string name="morphe_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
     <string name="morphe_background_type">배경 애니메이션</string>
     <string name="morphe_background_type_circles">원</string>
     <string name="morphe_background_type_rings">링</string>
@@ -516,7 +521,7 @@ morphe_header_custom_dark.png
 패치 프로필은 영향을 받지 않습니다."</string>
     <string name="patch_options_reset_patches_description">단일 패치 번들에 대한 패치 옵션을 초기화합니다</string>
     <string name="patch_options_reset_all">모든 패치 옵션 초기화</string>
-    <string name="patch_options_reset_all_dialog_description">"모든 패치 옵션을 초기화하려고 합니다. 개별적으로 옵션을 다시 적용해야 합니다.
+    <string name="patch_options_reset_all_dialog_description">"모든 패치 옵션을 초기화합니다. 개별적으로 옵션을 다시 적용해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
     <string name="patch_options_reset_all_description">모든 패치 옵션을 초기화합니다</string>
@@ -557,7 +562,7 @@ morphe_header_custom_dark.png
     <string name="add">추가</string>
     <string name="close">닫기</string>
     <string name="clear">지우기</string>
-    <string name="system">기기 테마</string>
+    <string name="system">시스템 기본값</string>
     <string name="light">밝은</string>
     <string name="dark">어두운</string>
     <string name="black">검은</string>

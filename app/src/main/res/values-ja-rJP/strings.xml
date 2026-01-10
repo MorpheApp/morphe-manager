@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">テーマ、カラー、背景をカスタマイズ</string>
+    <string name="morphe_appearance_app_language">アプリ言語</string>
+    <string name="morphe_appearance_search">検索</string>
+    <string name="morphe_appearance_no_results">「」に対する検索結果は見つかりませんでした</string>
+    <string name="morphe_appearance_translations_info_title">一部の言語の翻訳が欠落しているか不完全である可能性があります</string>
+    <string name="morphe_appearance_translations_info_text">新しい言語を翻訳するか、既存の翻訳を改善するには、%s を訪問してください。</string>
     <string name="morphe_background_type">Background animation</string>
     <string name="morphe_background_type_circles">円</string>
     <string name="morphe_background_type_rings">リング</string>
