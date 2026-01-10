@@ -12,6 +12,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_step4">Nakon što se preuzimanje završi, ponovo pokrenite ovu aplikaciju</string>
     <!-- Dialog 3: File Picker Prompt -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->

@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d zakrpa</item>
+        <item quantity="few">%d zakrpe</item>
+        <item quantity="other">%d zakrpe</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Izvrši %d popravku</item>
+        <item quantity="few">Izvrši %d popravku</item>
+        <item quantity="other">Izvrši %d popravke</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%d odabrano</item>
+        <item quantity="few">%d odabrano</item>
+        <item quantity="other">%d odabrano</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_patch_count">
+        <item quantity="one">%d popravka</item>
+        <item quantity="few">%d patch</item>
+        <item quantity="other">%d patch</item>
+    </plurals>
+    <plurals name="patch_profile_bundle_count">
+        <item quantity="one">%d paket</item>
+        <item quantity="few">%d paket</item>
+        <item quantity="other">%d paketa</item>
+    </plurals>
+</resources>

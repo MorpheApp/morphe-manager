@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Пакет патчаў</string>
+    <string name="morphe_home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Гатовыя зноў зрабіць YouTube легендарным?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Прышпіліце рамяні, час латаць</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Яшчэ адзін дзень, яшчэ адзін шэдэўр з блакіроўкай рэкламы</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Хочаце глядзець рэкламу? Я таксама не хачу.</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Давайце зробім так, каб вашы праграмы паводзілі сябе добра</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Прагноз на сёння: 100% верагоднасць выпраўлення</string>
     <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Гатовыя змяніць непрыемнае на цудоўнае?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Працуе на кафеіне і добрых патчах</string>
+    <string name="morphe_home_bundle_type_api">API пакет</string>
+    <string name="morphe_home_update_error">Абнаўленне не ўдалося</string>
+    <string name="morphe_home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
+    <string name="morphe_home_updating_patches">Абнаўленне патчаў…</string>
+    <string name="morphe_home_update_success">Абнаўленне завершана</string>
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
     <!-- Dialog 3: File Picker Prompt -->

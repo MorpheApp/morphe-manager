@@ -26,6 +26,8 @@ jobs:
             This pull request will ${{ env.MESSAGE }}.
 
             ## Before merging this PR
-
             - [ ] Pull & merge translations from Crowdin
+            
+            ## After merging this PR
+            - [ ] Deploy website
           pr_draft: true

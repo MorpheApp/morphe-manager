@@ -131,6 +131,12 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">Customize themes, colors, and backgrounds</string>
+    <string name="morphe_appearance_app_language">App Language</string>
+    <string name="morphe_appearance_search">Search</string>
+    <string name="morphe_appearance_no_results">No results found</string>
+    <string name="morphe_appearance_translations_info_title">Translations for some languages may be missing or incomplete</string>
+    <string name="morphe_appearance_translations_info_text">To translate new languages or improve the existing translations, visit %s</string>
+    <string name="morphe_appearance_translations_info_url" translatable="false">morphe.software/translate</string>
     <string name="morphe_background_type">Background animation</string>
     <string name="morphe_background_type_circles">Circles</string>
     <string name="morphe_background_type_rings">Rings</string>

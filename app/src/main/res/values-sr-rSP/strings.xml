@@ -100,32 +100,37 @@
     <string name="morphe_patcher_message_7">Подешавамо 1 и 0… 🤖</string>
     <string name="morphe_patcher_message_8">Распетљавамо дигитални шпагети… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Поправљамо грешке у некрпљеној апликацији… 🐞</string>
+    <string name="morphe_patcher_message_9">Поправљамо грешке у непечованој апликацији… 🐞</string>
     <string name="morphe_patcher_message_10">Сјајне измене вредне су чекања… ⏳</string>
-    <string name="morphe_patcher_message_11">Пеглање пиксела док не засијају… 💎</string>
-    <string name="morphe_patcher_message_12">Молимо останите седети док се капетан не искључи \"Закрпљивање у току\" знак… 💺✈️</string>
-    <string name="morphe_patcher_message_13">Кување ваше измењене апликације, вруће и свеже… 🍳</string>
+    <string name="morphe_patcher_message_11">Полирање пиксела док не засијају… 💎</string>
+    <string name="morphe_patcher_message_12">Молимо останите седети док капетан не искључи знак „Печовање у току”… 💺✈️</string>
+    <string name="morphe_patcher_message_13">Кување ваше печоване апликације, вруће и свеже… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Љубазно преговарање са байткодом… 🤝</string>
+    <string name="morphe_patcher_message_14">Љубазно преговарање са бајткодом… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Сви системи су у нормали… путања измена је стабилна… 🚀</string>
+    <string name="morphe_patcher_message_15">Сви системи су у нормали… путања печовања је стабилна… 🚀</string>
     <string name="morphe_patcher_message_16">Истискавање додатне снаге, попут сока из дигиталног лимуна… 🍋</string>
     <string name="morphe_patcher_message_17">Подстицање апликације да прихвати своје ново, боље ја… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Промена суперпозиције апликације из измењене у измењену… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">Промена суперпозиције апликације из непечоване у печовану… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Ваша апликација има температуру, а једини лек су додатне закрпе… 🩺🔔</string>
+    <string name="morphe_patcher_message_19">Ваша апликација има повишену температуру, а једини лек су додатни печеви… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Уклањање глупости. Молимо сачекајте… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Врати се на почетну страницу Морфе</string>
-    <string name="morphe_settings_return_to_morphe_description">Врати се на поједностављени режим</string>
-    <string name="morphe_settings_return_to_expert">Promijeni na ekspertski načan</string>
-    <string name="morphe_settings_return_to_expert_description">Promijeni na punofunkcionalni ekspertski načan</string>
-    <string name="morphe_share_website">Подели веб-сајт</string>
-    <string name="morphe_share_website_description">Делите званични веб-сајт Морфе</string>
+    <string name="morphe_settings_return_to_morphe">Повратак на почетну страницу Morphe</string>
+    <string name="morphe_settings_return_to_morphe_description">Ппвратак на поједностављени режим</string>
+    <string name="morphe_settings_return_to_expert">Промени на режим експерта</string>
+    <string name="morphe_settings_return_to_expert_description">Промени на потпуно опремљен режим експерта</string>
+    <string name="morphe_share_website">Дели веб-сајт</string>
+    <string name="morphe_share_website_description">Делите званични веб-сајт Morphe</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Прикazна подешavanja излазних података</string>
-    <string name="morphe_appearance_options_description">Prilagodite temama, bojama i pozadinskim slikama</string>
+    <string name="morphe_appearance_options">Подешавања изгледа</string>
+    <string name="morphe_appearance_options_description">Прилагодите теме, боје и позадине</string>
+    <string name="morphe_appearance_app_language">Језик апликације</string>
+    <string name="morphe_appearance_search">Претрага</string>
+    <string name="morphe_appearance_no_results">Нису пронађени резултати</string>
+    <string name="morphe_appearance_translations_info_title">Може да не понделе или да нису комплетне преводе за неке језике</string>
+    <string name="morphe_appearance_translations_info_text">Da prevelaete nove jezike ili poboljshate postojece prevoce, posetite %s</string>
     <string name="morphe_background_type">Анимација позадине</string>
     <string name="morphe_background_type_circles">Кругови</string>
     <string name="morphe_background_type_rings">Прстенови</string>

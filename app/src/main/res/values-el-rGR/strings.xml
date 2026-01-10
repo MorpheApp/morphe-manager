@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Επιλογές εμφάνισης</string>
     <string name="morphe_appearance_options_description">Προσαρμόστε θέματα, χρώματα και φόντα</string>
+    <string name="morphe_appearance_app_language">Γλώσσα εφαρμογής</string>
+    <string name="morphe_appearance_search">Αναζήτηση</string>
+    <string name="morphe_appearance_no_results">Δεν βρέθηκαν αποτελέσματα</string>
+    <string name="morphe_appearance_translations_info_title">Οι μεταφράσεις για κάποιες γλώσσες μπορεί να λείπουν ή να είναι μη ολοκληρωμένες</string>
+    <string name="morphe_appearance_translations_info_text">Για την μετάφραση νέων γλώσσων ή την βελτίωση των υπάρχουσών μεταφράσεων, επισκεφθείτε %s</string>
     <string name="morphe_background_type">Πραγματεία φόντου</string>
     <string name="morphe_background_type_circles">Κύκλοι</string>
     <string name="morphe_background_type_rings">Δακτύλιοι</string>

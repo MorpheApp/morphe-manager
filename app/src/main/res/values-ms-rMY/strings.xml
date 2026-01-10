@@ -1,24 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Tampal Pekej</string>
+    <string name="morphe_home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Sedia untuk membuat YouTube menjadi legenda semula? </string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Bersedia, waktunya untuk menampal</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Hari baru, satu lagi karya agung yang menyekat iklan</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Mahu menonton iklan? Saya juga</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Mari jadikan aplikasi kamu berkelakuan baik</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Cuaca hari ini: 100% peluang untuk menampal</string>
     <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Bersedia untuk menukar ketidakpuasan kepada sesuatu yang hebat?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Menyimpan aplikasi daripada diri mereka sendiri sejak hari ini</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Dikuasakan oleh kafein dan tampalan yang bagus</string>
+    <string name="morphe_home_bundle_type_api">Pekej API</string>
+    <string name="morphe_home_update_error">Kemas kini gagal</string>
+    <string name="morphe_home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
+    <string name="morphe_home_updating_patches">Mengemas kini tampalan…</string>
+    <string name="morphe_home_update_success">Kemas kini selesai</string>
+    <string name="morphe_home_patches_updated">Tampalan kamu adalah yang terkini </string>
+    <string name="morphe_home_patches_are_loading">Tampalan sedang dimuatkan, sila tunggu…</string>
+    <string name="morphe_home_please_wait">Sila tunggu…</string>
+    <string name="morphe_home_open_in_browser">Buka dalam pelayar web</string>
+    <string name="morphe_home_failed_to_open_url">Gagal untuk membuka URL</string>
+    <string name="morphe_home_date_added">Tambah</string>
+    <string name="morphe_home_date_updated">Kemas kini</string>
+    <string name="morphe_home_check_updates">Semak</string>
+    <string name="morphe_home_unknown">Tidak diketahui</string>
+    <string name="morphe_home_timeline">Sejarah kemas kini</string>
     <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Adakah kamu mempunyai APK asal yang belum ditampal?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Untuk menampal %1$s, kamu memerlukan versi %2$s (belum ditampal)</string>
+    <string name="morphe_home_apk_availability_yes">Ya, saya mempunyainya</string>
+    <string name="morphe_home_apk_availability_no">Tidak, bantu saya mencarinya</string>
     <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Muat turun APK asal</string>
+    <string name="morphe_home_download_instructions_steps_title">Arahan</string>
+    <string name="morphe_home_download_instructions_step1">Tekan butang \'%1$s\' dibawah</string>
+    <string name="morphe_home_download_instructions_step2_part1">Gerak ke bawah laman web dan tekan</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Tekan muat turun di laman web, dan bukan di sini 😊</string>
+    <string name="morphe_home_download_instructions_step3">Tunggu untuk muat turun selesai, dan &lt;b&gt;jangan muat turun&lt;/b&gt; APK itu</string>
+    <string name="morphe_home_download_instructions_step3_mount">Tunggu untuk mhat turun selesai, kemudian &lt;b&gt;instal APK itu&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">Selepas muat turun selesai, buka semula aplikasi ini</string>
+    <string name="morphe_home_download_instructions_step4_mount">Selepas APK asal diinstal, buka semula aplikasi ini</string>
+    <string name="morphe_home_download_instructions_continue">Teruskan ke APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Pilih APK yang telah kamu muat turun</string>
+    <string name="morphe_home_file_picker_prompt_description">Sekarang pilih %1$s fail APK yang kamu baru muat turun. </string>
+    <string name="morphe_home_file_picker_prompt_open">Buka fail APK yang saya muat turun</string>
+    <string name="morphe_home_recommended_version">Versi yang disyorkan</string>
+    <string name="morphe_patcher_selected_version">Versi terpilih</string>
     <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal.</string>
+    <string name="morphe_root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
     <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">Simpan APK</string>
+    <string name="morphe_patcher_copy_error"> Salin ralat</string>
+    <string name="morphe_patcher_show_error">Tunjuk ralat</string>
+    <string name="morphe_patcher_error_copied">Ralat disalin ke papan keratan</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d ditampal</string>
+    <string name="morphe_patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
+    <string name="morphe_patcher_installing">Memasang…</string>
+    <string name="morphe_patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
+    <string name="morphe_patcher_success_title">Semua Selesai! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Apl anda ditampal dan dipasang!</string>
+    <string name="morphe_patcher_complete_title">Tampalan Selesai! ✨</string>
+    <string name="morphe_patcher_failed_title">Oops! Ada sesuatu yang tidak kena</string>
+    <string name="morphe_patcher_failed_subtitle">Semak butiran ralat di bawah</string>
+    <string name="morphe_patcher_failed_dialog_title">Tampalan Gagal</string>
+    <string name="morphe_patcher_unknown_error">Ralat yang tidak diketahui berlaku</string>
+    <string name="morphe_patcher_mounting">Pemasangan…</string>
+    <string name="morphe_patcher_conflict_title">Konflik pakej</string>
+    <string name="morphe_patcher_conflict_subtitle">Anda perlu menyahpasang versi sedia ada</string>
+    <string name="morphe_patcher_install_error_title">Ralat pemasangan</string>
+    <string name="morphe_patcher_install_error_subtitle">Cuba nyahpasang dan pasang semula</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Tekan butang dibawah untung pasang</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Tekan butang dibawah untuk memasang</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Versi tidak disokong</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">APK ini bukan versi aplikasi yang disyorkan. Aplikasi mungkin gagal berfungsi jika diteruskan. </string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Teruskan juga</string>
+    <string name="morphe_patcher_wrong_package_title">Pakej yang dipilih salah</string>
+    <string name="morphe_patcher_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal.</string>
+    <string name="morphe_patcher_expected_package">Pakej yang dijangkakan</string>
+    <string name="morphe_patcher_selected_package">Pakej terpilih</string>
+    <string name="morphe_patcher_message_1">Mengubah aplikasi kamu kepada sesuatu yang menakjubkan… 🏆</string>
+    <string name="morphe_patcher_message_2">Mengajar aplikasi lama helah baharu… 🎩</string>
+    <string name="morphe_patcher_message_3">Memberikan aplikasi kamu penalaan digital… 🔧</string>
+    <string name="morphe_patcher_message_4">Membancuh magik digital… ☕</string>
+    <string name="morphe_patcher_message_5">Rehat berserta kopi disyorkan… ☕</string>
+    <string name="morphe_patcher_message_6">Pandang ke luar, ia bagus di luar sana… 🌤️</string>
+    <string name="morphe_patcher_message_7">Melaraskan 1 dan 0… 🤖</string>
+    <string name="morphe_patcher_message_8">Menguraikan spageti digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Membetulkan pepijat dalam aplikasi yang belum ditampal… 🐞</string>
+    <string name="morphe_patcher_message_10">Tampalan yang hebat berbaloi untuk ditunggu… ⏳</string>
+    <string name="morphe_patcher_message_11">Menggilap piksel sehingga ia bersinar… 💎</string>
+    <string name="morphe_patcher_message_12">Sila kekal duduk sehingga kapten mematikan tanda \"Tampalan sedang dijalankan\"… 💺✈️</string>
+    <string name="morphe_patcher_message_13">Memasak aplikasi kamu yang telah ditampal, panas dan segar… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Berunding dengan sopan dengan kod bait… 🤝</string>
     <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Semua sistem nominal… Trajektori tampalan stabil… 🚀</string>
+    <string name="morphe_patcher_message_16">Memerah kuasa tambahan, seperti jus daripada lemon digital… 🍋</string>
+    <string name="morphe_patcher_message_17">Menggalakkan aplikasi untuk menerima diri baharu yang lebih baik… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Morphe Settings Screen -->
     <!-- Appearance Section -->
@@ -29,8 +123,58 @@
     <!-- Custom Branding -->
     <!-- Custom Header (YouTube) -->
     <!-- Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Buang butang Shorts dari widget pelancar</string>
     <!-- Other strings -->
+    <string name="patcher">Penampal</string>
+    <string name="patches">Tampalan</string>
+    <string name="patch_bundles">Pakej-pakej Tampalan</string>
+    <string name="patch_bundle">Pakej Tampalan</string>
     <!-- Morphe -->
+    <string name="installer">Pemasang</string>
+    <string name="plugin_host_permission_label">Hos pemalam Morphe</string>
+    <string name="plugin_host_permission_description">Digunakan untuk mengawal akses kepada pemalam Morphe. Hanya Morphe yang mempunyai ini.</string>
+    <string name="toast_copied_to_clipboard">Disalin! </string>
+    <string name="copy_to_clipboard">Salin ke papan keratan</string>
+    <string name="settings">Pengaturan</string>
+    <string name="select_app">Pilih aplikasi</string>
+    <string name="app_filter_title">Tapis aplikasi </string>
+    <string name="app_filter_installed_only">Dipasang sahaja</string>
+    <string name="app_filter_patches_available">Tampalan tersedia </string>
+    <string name="app_filter_no_results">Tiada aplikasi yang sepadan dengan penapis kamu.</string>
+    <string name="new_downloader_plugins_notification">Pemalam pemuat turun baharu tersedia. Klik di sini untuk mengkonfigurasinya.</string>
+    <string name="unsupported_architecture_warning">Menampal pada seni bina peranti ini tidak disokong dan kemungkinan besar akan gagal.</string>
+    <string name="import_">Import</string>
+    <string name="file_field_not_set">Tidak dipilih</string>
+    <string name="field_not_set">Tidak ditetapkan </string>
+    <string name="patches_missing">Hilang</string>
+    <string name="patches_error">Ralat</string>
+    <string name="patches_error_description">Tampalan tidak boleh dimuatkan. Klik untuk melihat ralat</string>
+    <string name="patches_not_downloaded">Tampalan belum dimuat turun. Klik di sini untuk memuat turun</string>
+    <string name="patches_name_default">Tampalan</string>
+    <string name="patches_name_fallback">Tidak dinamakan</string>
+    <string name="bundle_uid">Bundle UID</string>
+    <string name="patches_display_name">Nama paparan</string>
+    <string name="android_11_bug_dialog_title">Pepijat Android 11</string>
+    <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif.</string>
+    <string name="no_network_toast">Tiada sambungan internet tersedia</string>
+    <string name="selected_app_meta_any_version">Mana-mana versi yang tersedia</string>
+    <string name="app_source_dialog_title">Pilih sumber</string>
+    <string name="app_source_dialog_option_auto">Auto</string>
+    <string name="app_source_dialog_option_auto_description">Gunakan semua pemuat turun yang tersedia untuk memuat turun aplikasi </string>
+    <string name="app_source_dialog_option_auto_unavailable">Tiada pemalam tersedia</string>
+    <string name="app_source_dialog_option_storage">Storan</string>
+    <string name="app_source_dialog_option_storage_description">Pilih APK daripada storan tempatan</string>
+    <string name="app_source_dialog_option_installed_no_root">Aplikasi yang dipasang tidak boleh ditampal semula tanpa akses root</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">Versi %s tidak sepadan dengan versi yang dicadangkan</string>
+    <string name="bundle_version_item">Pengesyoran bundle</string>
+    <string name="bundle_version_item_description_default">Menggunakan pengesyoran lalai</string>
+    <string name="bundle_version_item_description_selected">Mengikut %1$s (%2$s)</string>
+    <string name="bundle_version_dialog_title">Pilih pengesyoran bundle</string>
+    <string name="bundle_version_dialog_description">Pilih cadangan bundle mana yang harus digunakan semasa memuat turun APK.</string>
+    <string name="bundle_version_dialog_default">Gunakan pengesyoran lalai</string>
+    <string name="bundle_version_dialog_default_subtitle">Pilih versi serasi yang paling biasa secara automatik.</string>
+    <string name="bundle_version_all_versions">Semua versi</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <!-- Morphe -->
     <!-- Morphe -->

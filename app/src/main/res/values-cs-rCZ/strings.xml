@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Možnosti vzhledu</string>
     <string name="morphe_appearance_options_description">Personalizujte si motivy, barvy a pozadí.</string>
+    <string name="morphe_appearance_app_language">Jazyk aplikace</string>
+    <string name="morphe_appearance_search">Hledat</string>
+    <string name="morphe_appearance_no_results">Nebyly nalezeny žádné výsledky</string>
+    <string name="morphe_appearance_translations_info_title">Pro některé jazyky mohou být překlady chybějící nebo neúplné</string>
+    <string name="morphe_appearance_translations_info_text">Chcete přeložit nové jazyky nebo vylepšit existující překlady? Navštivte %s.</string>
     <string name="morphe_background_type">Animovaný pozadí</string>
     <string name="morphe_background_type_circles">Kruhy</string>
     <string name="morphe_background_type_rings">Kroužky</string>

@@ -18,7 +18,12 @@
 # 💊 Morphe
 Morphe Manager
 
-&nbsp;
+## ❓ About
+
+Morphe Manager is based off the work of [URV](https://github.com/Jman-Github/Universal-ReVanced-Manager)
+and [ReVanced](https://github.com/ReVanced/revanced-manager).
+All modifications made by Morphe, along with their dates, can be found in the Git history.
+
 ## 📜 License
 
 Morphe Patches are licensed under the [GNU General Public License v3.0](LICENSE), with additional conditions under GPLv3 Section 7:

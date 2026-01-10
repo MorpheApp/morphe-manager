@@ -1,12 +1,8 @@
 name: Release
 
-concurrency:
-  group: release-lock
-  cancel-in-progress: false
-
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches:
       - main
       - dev
@@ -14,7 +10,6 @@ on:
 jobs:
   release:
     name: Release
-    if: ${{ github.event_name == 'workflow_dispatch' }}
     permissions:
       contents: write
       packages: write

@@ -18,9 +18,10 @@ fun MorpheDialogTextField(
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
     singleLine: Boolean = true,
-    trailingIcon: @Composable (() -> Unit)? = null,
     enabled: Boolean = true
 ) {
     val textColor = LocalDialogTextColor.current
@@ -30,9 +31,10 @@ fun MorpheDialogTextField(
         onValueChange = onValueChange,
         label = label,
         placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
         isError = isError,
         singleLine = singleLine,
-        trailingIcon = trailingIcon,
         enabled = enabled,
         modifier = modifier,
         shape = RoundedCornerShape(12.dp),
