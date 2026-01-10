@@ -170,6 +170,7 @@ import app.revanced.manager.util.withHapticFeedback
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.revanced.manager.ui.component.settings.TextItem
 import app.revanced.manager.ui.model.PatchSelectionActionKey
+import app.revanced.manager.util.isArmV7
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -177,7 +178,6 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.ceil
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.math.roundToInt
@@ -560,7 +560,7 @@ fun AdvancedSettingsScreen(
                     description = R.string.process_runtime_description,
                 )
                 ExpressiveSettingsDivider()
-                val recommendedProcessLimit = 1500 //= remember { 700 } // Morphe
+                val recommendedProcessLimit = 700 //= remember { 700 } // Morphe
                 IntegerItem(
                     preference = viewModel.prefs.patcherProcessMemoryLimit,
                     coroutineScope = viewModel.viewModelScope,
@@ -569,7 +569,7 @@ fun AdvancedSettingsScreen(
                     neutralButtonLabel = stringResource(R.string.reset_to_recommended),
                     neutralValueProvider = { recommendedProcessLimit }
                 )
-                }  else {
+                } else {
                     TextItem(
                         headline = R.string.process_runtime,
                         description = R.string.process_runtime_description_not_available

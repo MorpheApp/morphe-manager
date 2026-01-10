@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.graphics.Typeface
+import android.os.Build
 import android.text.Html
 import android.text.format.DateUtils
 import android.text.style.StyleSpan
@@ -66,6 +67,11 @@ import kotlin.reflect.KProperty
 
 typealias PatchSelection = Map<Int, Set<String>>
 typealias Options = Map<Int, Map<String, Map<String, Any?>>>
+
+fun isArmV7(): Boolean {
+    val abis = Build.SUPPORTED_ABIS.map { it.lowercase() }
+    return abis.any { it.contains("armeabi-v7a") }
+}
 
 val Context.isDebuggable get() = 0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
 
