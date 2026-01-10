@@ -1,3 +1,15 @@
+# app [1.2.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.2...v1.2.0-dev.1) (2026-01-10)
+
+
+### Bug Fixes
+
+* Allow disabling built-in bundle ([#87](https://github.com/MorpheApp/morphe-manager/issues/87)) ([8673d14](https://github.com/MorpheApp/morphe-manager/commit/8673d14081d770f9cc53ccc0dc2d93da7903f581))
+
+
+### Features
+
+* Add language picker ([#93](https://github.com/MorpheApp/morphe-manager/issues/93)) ([dc2058a](https://github.com/MorpheApp/morphe-manager/commit/dc2058aad729689814e54302d14a55ae7f849754))
+
 ## app [1.1.2-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.1...v1.1.2-dev.2) (2026-01-07)
 
 
