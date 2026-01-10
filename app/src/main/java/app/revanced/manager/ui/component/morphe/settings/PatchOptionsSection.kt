@@ -75,165 +75,162 @@ fun PatchOptionsSection(
     val noPatchesAvailable = !isBundleUpdating && loadError == null &&
             youtubePatches.isEmpty() && youtubeMusicPatches.isEmpty()
 
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            // Loading state - show when bundle is updating
-            if (isBundleUpdating) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        strokeWidth = 2.dp
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        text = stringResource(R.string.morphe_patch_options_loading),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            } else if (noPatchesAvailable) {
-                // No patches available (bundle not loaded yet) - show waiting message
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_patch_options_waiting_for_bundle),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            } else if (loadError != null) {
-                // Actual error state (network issue, parsing error, etc.)
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Error,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = stringResource(R.string.morphe_patch_options_load_error),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                            Text(
-                                text = loadError,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                        IconButton(onClick = {
-                            scope.launch {
-                                dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                                viewModel.refresh()
-                                context.toast(context.getString(R.string.morphe_home_updating_patches))
-                            }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Refresh,
-                                contentDescription = "Retry",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                }
-            } else {
-                // YouTube Section
-                if (youtubePatches.isNotEmpty()) {
-                    ExpandableSection(
-                        icon = Icons.Outlined.VideoLibrary,
-                        title = stringResource(R.string.morphe_home_youtube),
-                        description = stringResource(R.string.morphe_patch_options_youtube_description),
-                        expanded = youtubeExpanded,
-                        onExpandChange = { youtubeExpanded = it }
-                    ) {
-                        AppPatchOptionsContent(
-                            appType = AppType.YOUTUBE,
-                            patchOptionsPrefs = patchOptionsPrefs,
-                            viewModel = viewModel,
-                            onThemeClick = { showThemeDialog = AppType.YOUTUBE },
-                            onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
-                            onHeaderClick = { showHeaderDialog = true }
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-
-                // YouTube Music Section
-                if (youtubeMusicPatches.isNotEmpty()) {
-                    ExpandableSection(
-                        icon = Icons.Outlined.LibraryMusic,
-                        title = stringResource(R.string.morphe_home_youtube_music),
-                        description = stringResource(R.string.morphe_patch_options_youtube_music_description),
-                        expanded = youtubeMusicExpanded,
-                        onExpandChange = { youtubeMusicExpanded = it }
-                    ) {
-                        AppPatchOptionsContent(
-                            appType = AppType.YOUTUBE_MUSIC,
-                            patchOptionsPrefs = patchOptionsPrefs,
-                            viewModel = viewModel,
-                            onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
-                            onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
-                            onHeaderClick = null // No header for YouTube Music
-                        )
-                    }
-                }
+    Column(
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        // Loading state - show when bundle is updating
+        if (isBundleUpdating) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp),
+                    strokeWidth = 2.dp
+                )
+                Text(
+                    text = stringResource(R.string.morphe_patch_options_loading),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
-
-            // Warning
-            Spacer(modifier = Modifier.height(16.dp))
+        } else if (noPatchesAvailable) {
+            // No patches available (bundle not loaded yet) - show waiting message
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.tertiaryContainer
+                color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
             ) {
                 Row(
                     modifier = Modifier.padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.morphe_patch_options_restart_message),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                        text = stringResource(R.string.morphe_patch_options_waiting_for_bundle),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+            }
+        } else if (loadError != null) {
+            // Actual error state (network issue, parsing error, etc.)
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Error,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(R.string.morphe_patch_options_load_error),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                        Text(
+                            text = loadError,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    IconButton(onClick = {
+                        scope.launch {
+                            dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                            viewModel.refresh()
+                            context.toast(context.getString(R.string.morphe_home_updating_patches))
+                        }
+                    }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Refresh,
+                            contentDescription = "Retry",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+        } else {
+            // YouTube Section
+            if (youtubePatches.isNotEmpty()) {
+                ExpandableSection(
+                    icon = Icons.Outlined.VideoLibrary,
+                    title = stringResource(R.string.morphe_home_youtube),
+                    description = stringResource(R.string.morphe_patch_options_youtube_description),
+                    expanded = youtubeExpanded,
+                    onExpandChange = { youtubeExpanded = it }
+                ) {
+                    AppPatchOptionsContent(
+                        appType = AppType.YOUTUBE,
+                        patchOptionsPrefs = patchOptionsPrefs,
+                        viewModel = viewModel,
+                        onThemeClick = { showThemeDialog = AppType.YOUTUBE },
+                        onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
+                        onHeaderClick = { showHeaderDialog = true }
+                    )
+                }
+            }
+
+            // YouTube Music Section
+            if (youtubeMusicPatches.isNotEmpty()) {
+                ExpandableSection(
+                    icon = Icons.Outlined.LibraryMusic,
+                    title = stringResource(R.string.morphe_home_youtube_music),
+                    description = stringResource(R.string.morphe_patch_options_youtube_music_description),
+                    expanded = youtubeMusicExpanded,
+                    onExpandChange = { youtubeMusicExpanded = it }
+                ) {
+                    AppPatchOptionsContent(
+                        appType = AppType.YOUTUBE_MUSIC,
+                        patchOptionsPrefs = patchOptionsPrefs,
+                        viewModel = viewModel,
+                        onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
+                        onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
+                        onHeaderClick = null // No header for YouTube Music
+                    )
+                }
+            }
+        }
+
+        // Warning
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            color = MaterialTheme.colorScheme.tertiaryContainer
+        ) {
+            Row(
+                modifier = Modifier.padding(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = stringResource(R.string.morphe_patch_options_restart_message),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                )
             }
         }
     }
@@ -286,7 +283,10 @@ private fun AppPatchOptionsContent(
     val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
     val hasHideShorts = appType == AppType.YOUTUBE && viewModel.getHideShortsOptions() != null
 
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         // Theme Colors
         if (hasTheme) {
             SettingsItem(
@@ -319,8 +319,6 @@ private fun AppPatchOptionsContent(
 
         // Hide Shorts Features (YouTube only)
         if (hasHideShorts) {
-            Spacer(modifier = Modifier.height(4.dp))
-
             HideShortsSection(
                 patchOptionsPrefs = patchOptionsPrefs,
                 viewModel = viewModel
@@ -360,13 +358,14 @@ private fun HideShortsSection(
         cornerRadius = 8.dp,
         alpha = 0.33f
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             IconTextRow(
                 icon = Icons.Outlined.VisibilityOff,
                 title = stringResource(R.string.morphe_patch_options_hide_shorts_features)
             )
-
-            Spacer(modifier = Modifier.height(12.dp))
 
             // Hide App Shortcut
             if (hasAppShortcutOption && appShortcutOption != null) {

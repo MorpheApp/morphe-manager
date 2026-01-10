@@ -56,49 +56,48 @@ fun AppearanceSection(
     val scope = rememberCoroutineScope()
     var expanded by remember { mutableStateOf(false) }
 
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            // Interface switcher
-            MorpheClickableCard(
-                onClick = onBackToAdvanced,
-                cornerRadius = 12.dp,
-                alpha = 0.33f
-            ) {
-                IconTextRow(
-                    icon = Icons.Outlined.SwapHoriz,
-                    title = stringResource(R.string.morphe_settings_return_to_expert),
-                    description = stringResource(R.string.morphe_settings_return_to_expert_description),
-                    modifier = Modifier.padding(12.dp),
-                    trailingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                )
-            }
+    Column(
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        // Interface switcher
+        MorpheClickableCard(
+            onClick = onBackToAdvanced,
+            cornerRadius = 12.dp,
+            alpha = 0.33f
+        ) {
+            IconTextRow(
+                icon = Icons.Outlined.SwapHoriz,
+                title = stringResource(R.string.morphe_settings_return_to_expert),
+                description = stringResource(R.string.morphe_settings_return_to_expert_description),
+                modifier = Modifier.padding(12.dp),
+                trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            )
+        }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Expandable appearance options
-            ExpandableSection(
-                icon = Icons.Outlined.Palette,
-                title = stringResource(R.string.morphe_appearance_options),
-                description = stringResource(R.string.morphe_appearance_options_description),
-                expanded = expanded,
-                onExpandChange = { expanded = it }
-            ) {
-                AppearanceContent(
-                    theme = theme,
-                    pureBlackTheme = pureBlackTheme,
-                    dynamicColor = dynamicColor,
-                    customAccentColorHex = customAccentColorHex,
-                    backgroundType = backgroundType,
-                    viewModel = viewModel,
-                    scope = scope
-                )
-            }
+        // Expandable appearance options
+        ExpandableSection(
+            icon = Icons.Outlined.Palette,
+            title = stringResource(R.string.morphe_appearance_options),
+            description = stringResource(R.string.morphe_appearance_options_description),
+            expanded = expanded,
+            onExpandChange = { expanded = it }
+        ) {
+            AppearanceContent(
+                theme = theme,
+                pureBlackTheme = pureBlackTheme,
+                dynamicColor = dynamicColor,
+                customAccentColorHex = customAccentColorHex,
+                backgroundType = backgroundType,
+                viewModel = viewModel,
+                scope = scope
+            )
         }
     }
 }
@@ -125,7 +124,7 @@ private fun AppearanceContent(
         getLanguageDisplayName(appLanguage, context)
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         // Language Selection
         MorpheClickableCard(
             onClick = { showTranslationInfoDialog = true },
