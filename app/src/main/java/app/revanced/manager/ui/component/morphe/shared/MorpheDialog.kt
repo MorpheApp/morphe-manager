@@ -25,6 +25,12 @@ import androidx.compose.ui.window.DialogWindowProvider
 import app.revanced.manager.ui.component.morphe.utils.isDarkBackground
 
 /**
+ * CompositionLocal for dialog text colors
+ */
+val LocalDialogTextColor = compositionLocalOf { Color.White }
+val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
+
+/**
  * Unified fullscreen dialog component for Morphe UI
  *
  * @param onDismissRequest Called when user dismisses the dialog
@@ -188,9 +194,3 @@ private fun DialogContent(
         }
     }
 }
-
-/**
- * CompositionLocal for dialog text colors
- */
-val LocalDialogTextColor = compositionLocalOf { Color.White }
-val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }

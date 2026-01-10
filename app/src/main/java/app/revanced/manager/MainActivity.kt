@@ -2,15 +2,16 @@ package app.revanced.manager
 
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -23,38 +24,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import androidx.compose.runtime.mutableStateOf
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.model.navigation.AppSelector
-import app.revanced.manager.ui.model.navigation.ComplexParameter
-import app.revanced.manager.ui.model.navigation.MorpheHomeScreen
-import app.revanced.manager.ui.model.navigation.Dashboard
-import app.revanced.manager.ui.model.navigation.InstalledApplicationInfo
-import app.revanced.manager.ui.model.navigation.MorpheSettings
-import app.revanced.manager.ui.model.navigation.Patcher
-import app.revanced.manager.ui.model.navigation.SelectedApplicationInfo
-import app.revanced.manager.ui.model.navigation.Settings
-import app.revanced.manager.ui.model.navigation.Update
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.screen.AppSelectorScreen
-import app.revanced.manager.ui.screen.MorpheHomeScreen
-import app.revanced.manager.ui.screen.DashboardScreen
-import app.revanced.manager.ui.screen.InstalledAppInfoScreen
-import app.revanced.manager.ui.screen.PatcherScreen
-import app.revanced.manager.ui.screen.PatchesSelectorScreen
-import app.revanced.manager.ui.screen.MorphePatcherScreen
-import app.revanced.manager.ui.screen.MorpheSettingsScreen
-import app.revanced.manager.ui.screen.RequiredOptionsScreen
-import app.revanced.manager.ui.screen.SelectedAppInfoScreen
-import app.revanced.manager.ui.screen.SettingsScreen
-import app.revanced.manager.ui.screen.UpdateScreen
-import app.revanced.manager.ui.screen.settings.AboutSettingsScreen
-import app.revanced.manager.ui.screen.settings.AdvancedSettingsScreen
-import app.revanced.manager.ui.screen.settings.ContributorSettingsScreen
-import app.revanced.manager.ui.screen.settings.DeveloperSettingsScreen
-import app.revanced.manager.ui.screen.settings.DownloadsSettingsScreen
-import app.revanced.manager.ui.screen.settings.MorpheThemeSettingsScreen
-import app.revanced.manager.ui.screen.settings.ImportExportSettingsScreen
+import app.revanced.manager.ui.model.navigation.*
+import app.revanced.manager.ui.screen.*
+import app.revanced.manager.ui.screen.settings.*
 import app.revanced.manager.ui.screen.settings.update.ChangelogsSettingsScreen
 import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
@@ -71,9 +45,7 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
-// AppCompatActivity has issues of briefly showing a black screen on a new install.
-//class MainActivity : AppCompatActivity() {
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
