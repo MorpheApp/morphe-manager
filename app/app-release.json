@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-01-07T22:36:30.829Z",
-  "description": "## app [1.1.2-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.1...v1.1.2-dev.2) (2026-01-07)\n\n\n### Bug Fixes\n\n* Change to time based version code to resolve pre-release Manager unable to update to latest stable release ([97ec26e](https://github.com/MorpheApp/morphe-manager/commit/97ec26e3b11e0133873b5a8cae3dcb4a0a45c239))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.2-dev.2/morphe-manager-1.1.2-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.1.2-dev.2/morphe-manager-1.1.2-dev.2.apk.asc",
-  "version": "1.1.2-dev.2"
+  "created_at": "2026-01-10T11:07:54.948Z",
+  "description": "# app [1.2.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.1.2-dev.2...v1.2.0-dev.1) (2026-01-10)\n\n\n### Bug Fixes\n\n* Allow disabling built-in bundle ([#87](https://github.com/MorpheApp/morphe-manager/issues/87)) ([8673d14](https://github.com/MorpheApp/morphe-manager/commit/8673d14081d770f9cc53ccc0dc2d93da7903f581))\n\n\n### Features\n\n* Add language picker ([#93](https://github.com/MorpheApp/morphe-manager/issues/93)) ([dc2058a](https://github.com/MorpheApp/morphe-manager/commit/dc2058aad729689814e54302d14a55ae7f849754))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.2.0-dev.1/morphe-manager-1.2.0-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.2.0-dev.1/morphe-manager-1.2.0-dev.1.apk.asc",
+  "version": "1.2.0-dev.1"
 }
