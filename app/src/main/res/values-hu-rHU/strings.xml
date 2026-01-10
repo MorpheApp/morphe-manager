@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch csomag</string>
-    <string name="morphe_home_greeting_1">Melyik alkalmazást szeretnéd frissíteni?</string>
+    <string name="morphe_home_bundles">Patchcsomag</string>
+    <string name="morphe_home_greeting_1">Melyik alkalmazást szeretné patchelni?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Készen állsz arra, hogy a YouTube újra legendássá váljon?</string>
+    <string name="morphe_home_greeting_2">Készen áll, hogy a YouTube újra legendássá váljon?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Kössük be a biztonsági öveket, itt az ideje a frissítésnek</string>
+    <string name="morphe_home_greeting_3">Öveket becsatolni, itt a foltozás ideje</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Egy újabb nap, egy újabb reklámblokkolt remekmű</string>
+    <string name="morphe_home_greeting_4">Egy újabb nap, egy újabb reklámmentes remekmű</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Reklámokat akarsz nézni? Én sem</string>
+    <string name="morphe_home_greeting_5">Akar reklámokat nézni? Én sem</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Hozd létre az alkalmazásaidat</string>
+    <string name="morphe_home_greeting_6">Tanítsuk meg az alkalmazásait viselkedni</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Mai előrejelzés: 100% esély a foltjavításra</string>
+    <string name="morphe_home_greeting_7">Mai előrejelzés: 100% esély a foltozásra</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Készen állsz a jelentéktelenből fantasztikussá válni?</string>
+    <string name="morphe_home_greeting_8">Készen áll a jelentéktelent fantasztikussá változtatni?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Alkalmazások megmentése önmaguktól mától kezdve</string>
+    <string name="morphe_home_greeting_9">A mai naptól megmentjük az alkalmazásokat önmaguktól</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Kávé és jó javítások táplálnak</string>
+    <string name="morphe_home_greeting_10">Koffein és jó foltok által hajtva</string>
     <string name="morphe_home_bundle_type_api">API csomag</string>
-    <string name="morphe_home_update_error">Frissítés sikertelen</string>
-    <string name="morphe_home_update_error_subtitle">Ellenőrizze internetkapcsolatát, és próbálja újra</string>
-    <string name="morphe_home_updating_patches">Frissítések frissítése…</string>
-    <string name="morphe_home_update_success">Frissítés befejeződött</string>
-    <string name="morphe_home_patches_updated">A javításaid naprakészek</string>
-    <string name="morphe_home_patches_are_loading">A javítások betöltése folyamatban, kérlek várj…</string>
-    <string name="morphe_home_please_wait">Kérlek várj…</string>
-    <string name="morphe_home_open_in_browser">Böngészőben megnyitás</string>
-    <string name="morphe_home_failed_to_open_url">Hiba történt a URL megnyitásakor</string>
+    <string name="morphe_home_update_error">A frissítés sikertelen</string>
+    <string name="morphe_home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
+    <string name="morphe_home_updating_patches">Foltok frissítése…</string>
+    <string name="morphe_home_update_success">A frissítés befejeződött</string>
+    <string name="morphe_home_patches_updated">A foltjaid naprakészek</string>
+    <string name="morphe_home_patches_are_loading">Foltok betöltése folyamatban, kérem várjon…</string>
+    <string name="morphe_home_please_wait">Kérem várjon…</string>
+    <string name="morphe_home_open_in_browser">Megnyitás böngészőben</string>
+    <string name="morphe_home_failed_to_open_url">Sikertelen URL megnyitás</string>
     <string name="morphe_home_date_added">Hozzáadva</string>
     <string name="morphe_home_date_updated">Frissítve</string>
-    <string name="morphe_home_check_updates">Frissítések keresése</string>
+    <string name="morphe_home_check_updates">Ellenőrzés</string>
     <string name="morphe_home_unknown">Ismeretlen</string>
     <string name="morphe_home_timeline">Frissítési napló</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Rendelkezel az eredeti, javítatlan APK-val?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s frissítéséhez a %2$s (nem frissített) verziót kell használnod</string>
+    <string name="morphe_home_apk_availability_dialog_title">Rendelkezik az eredeti, folozatlan APK-val?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s foltzásához a %2$s (érintetlen) verzió szükséges</string>
     <string name="morphe_home_apk_availability_yes">Igen, megvan</string>
     <string name="morphe_home_apk_availability_no">Nem, segíts megtalálni</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Töltsd le az eredeti APK-t</string>
-    <string name="morphe_home_download_instructions_steps_title">Utasítások:</string>
-    <string name="morphe_home_download_instructions_step1">Drücken Sie =🏠= den \'%1$s\'-Button unten</string>
+    <string name="morphe_home_download_instructions_title">Az eredeti APK fájl letöltése</string>
+    <string name="morphe_home_download_instructions_steps_title">Útmutató:</string>
+    <string name="morphe_home_download_instructions_step1">Nyomja meg a(z) \'%1$s\' gombot alul</string>
     <string name="morphe_home_download_instructions_step2_part1">Görgessen lefelé a weblapon, és nyomja meg a</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Nyomd meg a letöltést a weboldalon, és ne itt 😊</string>
-    <string name="morphe_home_download_instructions_step3">Várj meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítsd&lt;/b&gt; az APK-t</string>
-    <string name="morphe_home_download_instructions_step3_mount">Várj meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítsd az APK-t&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_download_button_toast">A weblapon nyomja meg a letöltést, és ne itt 😊</string>
+    <string name="morphe_home_download_instructions_step3">Várja meg, amíg a letöltés befejeződik, és &lt;b&gt;ne telepítse&lt;/b&gt; az APK-t</string>
+    <string name="morphe_home_download_instructions_step3_mount">Várja meg, amíg a letöltés befejeződik, majd &lt;b&gt;telepítse az APK-t&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">A letöltés befejezése után nyissa meg újra ezt az alkalmazást</string>
     <string name="morphe_home_download_instructions_step4_mount">Az eredeti APK telepítése után nyissa meg újra ezt az alkalmazást</string>
     <string name="morphe_home_download_instructions_continue">Ugrás az APKMirror.com oldalra</string>
@@ -63,106 +63,111 @@
     <string name="morphe_root_gmscore_excluded">A GmsCore támogatási patch ki van zárva root módban</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK mentése</string>
-    <string name="morphe_patcher_copy_error">Másolási hiba</string>
-    <string name="morphe_patcher_show_error">Hibakeresés</string>
-    <string name="morphe_patcher_error_copied">Hiba másolva a vágólapra</string>
+    <string name="morphe_patcher_copy_error">Hiba másolása</string>
+    <string name="morphe_patcher_show_error">Hiba megjelenítése</string>
+    <string name="morphe_patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
     <string name="morphe_patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük, várjon…</string>
     <string name="morphe_patcher_installing">Telepítés…</string>
-    <string name="morphe_patcher_installing_subtitle">Majdnem kész a rockhoz! 🎸</string>
-    <string name="morphe_patcher_success_title">Kész! 🎉</string>
-    <string name="morphe_patcher_success_subtitle">Az alkalmazás javítva és telepítve lett!</string>
-    <string name="morphe_patcher_complete_title">A javítás befejeződött! ✨</string>
+    <string name="morphe_patcher_installing_subtitle">Majdnem készen állunk! 🎸</string>
+    <string name="morphe_patcher_success_title">Minden kész! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Az alkalmazás foltozva és telepítve!</string>
+    <string name="morphe_patcher_complete_title">A foltozás befejeződött! ✨</string>
     <string name="morphe_patcher_failed_title">Hoppá! Valami hiba történt</string>
-    <string name="morphe_patcher_failed_subtitle">Ellenőrizd az alábbi hibakódokat</string>
-    <string name="morphe_patcher_failed_dialog_title">A frissítés sikertelen</string>
+    <string name="morphe_patcher_failed_subtitle">Ellenőrizze az alábbi hiba részleteit</string>
+    <string name="morphe_patcher_failed_dialog_title">A foltozás sikertelen</string>
     <string name="morphe_patcher_unknown_error">Ismeretlen hiba történt</string>
     <string name="morphe_patcher_mounting">Csatlakoztatás…</string>
     <string name="morphe_patcher_conflict_title">Csomagütközés</string>
     <string name="morphe_patcher_conflict_subtitle">El kell távolítania a meglévő verziót</string>
     <string name="morphe_patcher_install_error_title">Telepítési hiba</string>
-    <string name="morphe_patcher_install_error_subtitle">Próbálja meg újra eltávolítani és telepíteni</string>
+    <string name="morphe_patcher_install_error_subtitle">Próbálja meg eltávolítani és újratelepíteni</string>
     <string name="morphe_patcher_ready_to_install_subtitle">Nyomja meg az alábbi gombot a telepítéshez</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">Nyomja meg az alábbi gombot a csatlakoztatáshoz</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Nem támogatott verzió</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ez az APK nem egy ajánlott alkalmazásverzió. A folytatás az alkalmazás nem megfelelő működését eredményezheti.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Továbbmegy így is</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Folytatás így is</string>
     <string name="morphe_patcher_wrong_package_title">Hibás csomag kiválasztva</string>
-    <string name="morphe_patcher_wrong_package_description">A kiválasztott APK nem ahhoz az alkalmazáshoz tartozik, amelyet módosítani szeretnél.</string>
-    <string name="morphe_patcher_expected_package">Elvárt csomag</string>
+    <string name="morphe_patcher_wrong_package_description">A kiválasztott APK nem ahhoz az alkalmazáshoz tartozik, amelyet módosítani szeretne.</string>
+    <string name="morphe_patcher_expected_package">Várt csomag</string>
     <string name="morphe_patcher_selected_package">Kiválasztott csomag</string>
-    <string name="morphe_patcher_message_1">Az alkalmazásod átalakítása valami nagyszerűvé… 🏆</string>
-    <string name="morphe_patcher_message_2">Régi alkalmazások megtanítása új trükkökre… 🎩</string>
-    <string name="morphe_patcher_message_3">Digitális karbantartást végezünk az alkalmazásodon… 🔧</string>
+    <string name="morphe_patcher_message_1">Az alkalmazás átalakítása valami nagyszerűvé… 🏆</string>
+    <string name="morphe_patcher_message_2">Régi alkalmazások tanítása új trükkökre… 🎩</string>
+    <string name="morphe_patcher_message_3">Digitális felturbózást végzünk az alkalmazáson… 🔧</string>
     <string name="morphe_patcher_message_4">Digitális varázslat főzése… ☕</string>
-    <string name="morphe_patcher_message_5">Ajánlott egy kávészünet… ☕</string>
-    <string name="morphe_patcher_message_6">Nézz ki, kellemes odakint… 🌤️</string>
-    <string name="morphe_patcher_message_7">Az 1-eseket és 0-kat állítjuk… 🤖</string>
-    <string name="morphe_patcher_message_8">Digitális spagetti kibogozása… 🍝</string>
+    <string name="morphe_patcher_message_5">Kávészünet ajánlott… ☕</string>
+    <string name="morphe_patcher_message_6">Nézzen ki, szép idő van odakint… 🌤️</string>
+    <string name="morphe_patcher_message_7">1-esek és 0-k beállítása… 🤖</string>
+    <string name="morphe_patcher_message_8">A digitális spagetti kibogozása… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Hibák javítása a nem javított alkalmazásban… 🐞</string>
-    <string name="morphe_patcher_message_10">A nagyszerű javítások megérik a várakozást… ⏳</string>
-    <string name="morphe_patcher_message_11">Képpontok polírozása, amíg ragyognak… 💎</string>
-    <string name="morphe_patcher_message_12">Kérlek, maradj ülve, amíg a kapitány kikapcsolja a \"Frissítés folyamatban\" feliratot... 💺✈️</string>
-    <string name="morphe_patcher_message_13">A javított alkalmazás főzése, forrón és frissen… 🍳</string>
+    <string name="morphe_patcher_message_9">Hibák javítása a foltozatlan alkalmazásban… 🐞</string>
+    <string name="morphe_patcher_message_10">A nagyszerű foltok megérik a várakozást… ⏳</string>
+    <string name="morphe_patcher_message_11">Képpontok polírozása, amíg nem ragyognak… 💎</string>
+    <string name="morphe_patcher_message_12">Kérjük maradjon ülve, amíg a kapitány kikapcsolja a \"Foltozás folyamatban\" feliratot... 💺✈️</string>
+    <string name="morphe_patcher_message_13">A patchelt alkalmazás főzése, forró és friss… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Udvariasan tárgyalva a bytekóddal… 🤝</string>
+    <string name="morphe_patcher_message_14">Udvarias tárgyalás a bájtkóddal… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Minden rendszer a normálison… javítási útvonal stabil… 🚀</string>
-    <string name="morphe_patcher_message_16">Extra teljesítmény kipréselése, mint a dzsúsz digitális citromból… 🍋</string>
-    <string name="morphe_patcher_message_17">Az alkalmazás ösztönzése, hogy elfogadja az új, jobb énjét… 🌱</string>
+    <string name="morphe_patcher_message_15">Minden rendszer nominális… a módosítási pálya stabil… 🚀</string>
+    <string name="morphe_patcher_message_16">Extra teljesítmény kipréselése, mint a digitális citromból a lé… 🍋</string>
+    <string name="morphe_patcher_message_17">Az alkalmazás bátorítása, hogy elfogadja az új, jobb énjét… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása kijavítatlanról kijavítottra… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása nem patcheltről patcheltre… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Az alkalmazásod lázas, és az egyetlen gyógyír rá több javítás… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Szemét eltávolítása. Kérjük, maradjon készen… 🗑️</string>
+    <string name="morphe_patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb patch… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Badarság eltávolítása. Kérjük, maradj készen… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Vissza a Morphe főoldalra</string>
     <string name="morphe_settings_return_to_morphe_description">Vissza az egyszerűsített módba</string>
-    <string name="morphe_settings_return_to_expert">Váltsa át az expert módra</string>
-    <string name="morphe_settings_return_to_expert_description">Váltson át az egész jellemzőkkel rendelkező expert módra</string>
+    <string name="morphe_settings_return_to_expert">Átváltás a szakértői módra</string>
+    <string name="morphe_settings_return_to_expert_description">Átváltás a teljes funkcionalitású szakértői módra</string>
     <string name="morphe_share_website">Webhely megosztása</string>
-    <string name="morphe_share_website_description">Oszd meg a hivatalos Morphe webhelyet</string>
+    <string name="morphe_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Kijelző beállítások</string>
-    <string name="morphe_appearance_options_description">Benutzerdefinierte Themes, Farben und Hintergründe</string>
-    <string name="morphe_background_type">Háttérminta</string>
+    <string name="morphe_appearance_options">Megjelenési lehetőségek</string>
+    <string name="morphe_appearance_options_description">Témák, színek, és hátterek személyreszabása</string>
+    <string name="morphe_appearance_app_language">Alkalmazás nyelve</string>
+    <string name="morphe_appearance_search">Keresés</string>
+    <string name="morphe_appearance_no_results">Nincs találat erre: „”</string>
+    <string name="morphe_appearance_translations_info_title">Néhány nyelvek fordításai hiányosak vagy teljesítetlenek</string>
+    <string name="morphe_appearance_translations_info_text">Új nyelvek fordításához vagy a meglévő fordítások javításához látogasson el a %s oldalra</string>
+    <string name="morphe_background_type">Háttér-animáció</string>
     <string name="morphe_background_type_circles">Körök</string>
     <string name="morphe_background_type_rings">Gyűrűk</string>
     <string name="morphe_background_type_waves">Hullámok</string>
     <string name="morphe_background_type_space">Űr</string>
     <string name="morphe_background_type_shapes">Alakzatok</string>
-    <string name="morphe_background_type_snow">Schnee</string>
-    <string name="morphe_background_type_none">Nincs</string>
+    <string name="morphe_background_type_snow">Hó</string>
+    <string name="morphe_background_type_none">Egyik sem</string>
     <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">A próbaverziók használata</string>
-    <string name="morphe_update_use_prereleases_description">Szerezzen előzetes hozzáférést új frissítésekre és menedzserekre.</string>
+    <string name="morphe_update_use_prereleases">Előzetes kiadások használata</string>
+    <string name="morphe_update_use_prereleases_description">Előzetes hozzáférés az új patchekhez és menedzser funkciókhoz</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patches beállítások</string>
-    <string name="morphe_patch_options_youtube_description">\"%s\" Patch-Optionen können verwendet werden, um das Äußere von YouTube anzuzeigen zu ändern.</string>
-    <string name="morphe_patch_options_youtube_music_description">\"%s\" Patch-Optionen können verwendet werden, um das Äußere von YouTube Music anzuzeigen zu ändern.</string>
-    <string name="morphe_patch_options_restart_message">Änderungen an den Patch-Optionen erfordern ein erneutes Anwenden des Patches, um die Änderungen wirksam zu machen.</string>
+    <string name="morphe_patch_options">Patch beállítások</string>
+    <string name="morphe_patch_options_youtube_description">Téma, márka, fejléc és Shorts lehetőségek</string>
+    <string name="morphe_patch_options_youtube_music_description">Téma és márka lehetőségek</string>
+    <string name="morphe_patch_options_restart_message">A patch beállításainak megváltoztatása után szükség van az alkalmazás újbóli patchelésére, hogy működjön</string>
     <!-- Theme Colors -->
-    <string name="morphe_patch_options_theme_colors">Kijelző témás színek</string>
+    <string name="morphe_patch_options_theme_colors">Alkalmazástéma színek</string>
     <string name="morphe_patch_options_theme_colors_description">Háttérszín megváltoztatása</string>
     <string name="morphe_patch_options_dark_theme_color">Sötét téma háttérszíne</string>
-    <string name="morphe_patch_options_dark_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy szín-kiemelési referencia</string>
-    <string name="morphe_patch_options_light_theme_color">Értékes téma háttérszíne</string>
-    <string name="morphe_patch_options_light_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy szín-kiemelési referencia</string>
-    <string name="morphe_patch_options_icon_instructions_title">Ikon formátum-instrukciók</string>
-    <string name="morphe_patch_options_header_instructions_title">Címke formátum-instrukciók</string>
-    <string name="morphe_patch_options_loading">Betöltés paches beállítások…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Várjon, amíg a frissítési csomag még létre nem képződik.</string>
-    <string name="morphe_patch_options_load_error">Laden der Patch-Optionen fehlgeschlagen</string>
-    <string name="morphe_patch_options_no_available">Ehhez a pachthez nem áll rendelkezésre beállítás</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
+    <string name="morphe_patch_options_light_theme_color">Világos téma háttérszíne</string>
+    <string name="morphe_patch_options_light_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
+    <string name="morphe_patch_options_icon_instructions_title">Ikonformátumra vonatkozó utasítások</string>
+    <string name="morphe_patch_options_header_instructions_title">Fejléc formátumra vonatkozó utasítások</string>
+    <string name="morphe_patch_options_loading">Patch beállítások betöltése…</string>
+    <string name="morphe_patch_options_waiting_for_bundle">Várjon, amíg a patchcsomag frissítésre kerül</string>
+    <string name="morphe_patch_options_load_error">Nem sikerült betölteni a patch beállításait</string>
+    <string name="morphe_patch_options_no_available">Ennek a patchnek nincsenek beállításai</string>
     <!-- Color Picker -->
-    <string name="morphe_custom_color">Benutzerdefinierter Farbbezeichner</string>
-    <string name="morphe_hex_color">Hex-Farbcode</string>
+    <string name="morphe_custom_color">Egyedi szín</string>
+    <string name="morphe_hex_color">Hex szín</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Egyedi gyártói brand</string>
-    <string name="morphe_patch_options_custom_branding_description">Változtassa meg az alkalmazás megjelenítési nevét</string>
+    <string name="morphe_patch_options_custom_branding">Egyedi branding</string>
+    <string name="morphe_patch_options_custom_branding_description">Változtassa meg az alkalmazás megjelenített nevét</string>
     <string name="morphe_patch_options_custom_branding_app_name">Alkalmazás neve</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">Add meg a egyedi név</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Adja meg a egyedi nevet</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">Egyedi ikon</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappa, mely tartalmazza a egyedi ikonok használata céljából szükséges képeket.
 
@@ -208,40 +213,40 @@ A képek méretei a következőknek kell legyenek:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Hide Shorts -->
-    <string name="morphe_patch_options_hide_shorts_features">YouTube Shorts eltávolítása</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">YouTube Shorts rövidcsúcs hitelesítői menü eltávolítása</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Hozzáfűzési menüből történő eltávolítás</string>
-    <string name="morphe_patch_options_hide_shorts_widget">YouTube Shorts widget eltávolítása</string>
-    <string name="morphe_patch_options_hide_shorts_widget_description">Hozzáfűzési menüből történő eltávolítás description</string>
+    <string name="morphe_patch_options_hide_shorts_features">Shorts funkciók eltávolítása</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Shorts gyorselérési menü eltávolítása</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Shorts eltávolítása a kezdőképernyő hosszan nyomási menüjéből</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Shorts widget elrejtése</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Shorts gomb eltávolítása a kezdőképernyő widgetről</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
-    <string name="patches">Pacek</string>
+    <string name="patches">Patchek</string>
     <string name="patch_bundles">Patch csomagok</string>
-    <string name="patch_bundle">Patch csomag</string>
+    <string name="patch_bundle">Patchcsomag</string>
     <!-- Morphe -->
-    <string name="installer">Installer</string>
+    <string name="installer">Telepítő</string>
     <string name="plugin_host_permission_label">Morphe plugin gazda</string>
-    <string name="plugin_host_permission_description">A Morphe beépülő modulokhoz való hozzáférés szabályozására szolgál. Csak a Morphe rendelkezik ezzel.</string>
+    <string name="plugin_host_permission_description">A Morphe beépülő moduljaihoz való hozzáférés szabályozására szolgál. Csak a Morphe rendelkezik ezzel.</string>
     <string name="toast_copied_to_clipboard">Másolva!</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
     <string name="settings">Beállítások</string>
     <string name="select_app">Válasszon ki egy alkalmazást</string>
-    <string name="app_filter_title">Szűrő alkalmazásokat</string>
+    <string name="app_filter_title">Alkalmazások szűrése</string>
     <string name="app_filter_installed_only">Csak telepített</string>
-    <string name="app_filter_patches_available">Frissítések elérhetőek</string>
+    <string name="app_filter_patches_available">Patchek elérhetőek</string>
     <string name="app_filter_no_results">Nincs alkalmazás a szűrőknek megfelelően.</string>
     <string name="new_downloader_plugins_notification">Új letöltő beépülő modulok érhetők el. Kattintson ide a konfigurálásukhoz.</string>
-    <string name="unsupported_architecture_warning">A javítás ezen eszközarchitektúrán nem támogatott, és nagy valószínűséggel sikertelen lesz.</string>
+    <string name="unsupported_architecture_warning">A patchelés ezen eszközarchitektúrán nem támogatott, és nagy valószínűséggel sikertelen lesz.</string>
     <string name="import_">Importálás</string>
     <string name="file_field_not_set">Nincs kiválasztva</string>
     <string name="field_not_set">Nincs beállítva</string>
     <string name="patches_missing">Hiányzó</string>
     <string name="patches_error">Hiba</string>
-    <string name="patches_error_description">A javítások nem tölthetők be. Érintse meg a hibaelhárításhoz</string>
-    <string name="patches_not_downloaded">Die Patches wurden noch nicht heruntergeladen. Klicken Sie =🏠= um sie herunterzuladen.</string>
-    <string name="patches_name_default">Javítások</string>
+    <string name="patches_error_description">A patchek nem tölthetőek be. Érintse meg a hibaelhárításhoz</string>
+    <string name="patches_not_downloaded">A patchek nincsenek letöltve. Érintse meg a letöltéshez</string>
+    <string name="patches_name_default">Patchek</string>
     <string name="patches_name_fallback">Névtelen</string>
-    <string name="bundle_uid">Köteg-UID</string>
+    <string name="bundle_uid">Csomag UID</string>
     <string name="patches_display_name">Megjelenítendő név</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazás-telepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, amely negatívan befolyásolja a felhasználói élményt.</string>

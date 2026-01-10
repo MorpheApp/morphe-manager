@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d पैच</item>
+        <item quantity="other">%d पैच</item>
+    </plurals>
+</resources>

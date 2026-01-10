@@ -155,12 +155,17 @@ android {
 
         val versionStr = if (version == "unspecified") "1.0.0" else version.toString()
         versionName = versionStr
-        versionCode = with(versionStr.toVersion()) {
-            major * 10_000_000 +
-                    minor * 10_000 +
-                    patch * 100 +
-                    (preRelease?.substringAfterLast('.')?.toInt() ?: 0)
-        }
+
+        // VersionCode derived from current time (1-minute intervals) + offset.
+        val nowMillis = System.currentTimeMillis()
+        val timestampVersionCode = (nowMillis / (60 * 1000)).toInt()
+        // Offset of the prior v1.1.1 version code to ensure the code is always newer for old installs.
+        // If a new app is used this offset should be changed to zero.
+        // 1 minute rounding and this offset still gives ~4,000 years of valid version codes
+        // and still fall into Play store max version code range.
+        val versionCodeOffset = 10010100
+        versionCode = timestampVersionCode + versionCodeOffset
+
         vectorDrawables.useSupportLibrary = true
     }
 

@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Asetusmuodot</string>
     <string name="morphe_appearance_options_description">Mukaila teemoja, värejä ja tauleviä</string>
+    <string name="morphe_appearance_app_language">Sovelluksen kieli</string>
+    <string name="morphe_appearance_search">Haku</string>
+    <string name="morphe_appearance_no_results">Tuloksia ei löytynyt</string>
+    <string name="morphe_appearance_translations_info_title">Käyttämät kielten käsitteellä käsitteellisyys voi olla puuttuva tai epätämäinen</string>
+    <string name="morphe_appearance_translations_info_text">Käännä uusia kieliä tai paranna olemassa olevia käännöksiä, käynnistämällä %s</string>
     <string name="morphe_background_type">Taustan animointi</string>
     <string name="morphe_background_type_circles">Ympyrät</string>
     <string name="morphe_background_type_rings">Renkaat</string>

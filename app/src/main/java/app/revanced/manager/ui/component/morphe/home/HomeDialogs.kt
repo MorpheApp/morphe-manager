@@ -2,6 +2,10 @@ package app.revanced.manager.ui.component.morphe.home
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -16,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +41,7 @@ import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -46,13 +52,22 @@ fun HomeDialogs(
     state: HomeStates
 ) {
     val uriHandler = LocalUriHandler.current
+    val scope = rememberCoroutineScope()
 
     // Dialog 1: APK Availability - "Do you have the APK?"
-    if (state.showApkAvailabilityDialog && state.pendingPackageName != null && state.pendingAppName != null) {
+    AnimatedVisibility(
+        visible = state.showApkAvailabilityDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(if (state.showDownloadInstructionsDialog) 0 else 200))
+    ) {
+        val appName = state.pendingAppName ?: return@AnimatedVisibility
+        val recommendedVersion = state.pendingRecommendedVersion
+        val usingMountInstall = state.usingMountInstall
+
         ApkAvailabilityDialog(
-            appName = state.pendingAppName!!,
-            recommendedVersion = state.pendingRecommendedVersion,
-            usingMountInstall = state.usingMountInstall,
+            appName = appName,
+            recommendedVersion = recommendedVersion,
+            usingMountInstall = usingMountInstall,
             onDismiss = {
                 state.showApkAvailabilityDialog = false
                 state.cleanupPendingData()
@@ -65,18 +80,29 @@ fun HomeDialogs(
             onNeedApk = {
                 // User needs APK - show download instructions
                 state.showApkAvailabilityDialog = false
-                state.showDownloadInstructionsDialog = true
-                state.resolveDownloadRedirect()
+                scope.launch {
+                    delay(50)
+                    state.showDownloadInstructionsDialog = true
+                    state.resolveDownloadRedirect()
+                }
             }
         )
     }
 
     // Dialog 2: Download Instructions
-    if (state.showDownloadInstructionsDialog && state.pendingPackageName != null && state.pendingAppName != null) {
+    AnimatedVisibility(
+        visible = state.showDownloadInstructionsDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(if (state.showFilePickerPromptDialog) 0 else 200))
+    ) {
+        val appName = state.pendingAppName ?: return@AnimatedVisibility
+        val recommendedVersion = state.pendingRecommendedVersion
+        val usingMountInstall = state.usingMountInstall
+
         DownloadInstructionsDialog(
-            appName = state.pendingAppName!!,
-            recommendedVersion = state.pendingRecommendedVersion,
-            usingMountInstall = state.usingMountInstall,
+            appName = appName,
+            recommendedVersion = recommendedVersion,
+            usingMountInstall = usingMountInstall,
             onDismiss = {
                 state.showDownloadInstructionsDialog = false
                 state.cleanupPendingData()
@@ -87,9 +113,15 @@ fun HomeDialogs(
     }
 
     // Dialog 3: File Picker Prompt
-    if (state.showFilePickerPromptDialog && state.pendingPackageName != null && state.pendingAppName != null) {
+    AnimatedVisibility(
+        visible = state.showFilePickerPromptDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val appName = state.pendingAppName ?: return@AnimatedVisibility
+
         FilePickerPromptDialog(
-            appName = state.pendingAppName!!,
+            appName = appName,
             onDismiss = {
                 state.showFilePickerPromptDialog = false
                 state.cleanupPendingData()
@@ -102,7 +134,13 @@ fun HomeDialogs(
     }
 
     // Unsupported Version Dialog
-    state.showUnsupportedVersionDialog?.let { dialogState ->
+    AnimatedVisibility(
+        visible = state.showUnsupportedVersionDialog != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val dialogState = state.showUnsupportedVersionDialog ?: return@AnimatedVisibility
+
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion,
@@ -130,7 +168,13 @@ fun HomeDialogs(
     }
 
     // Wrong Package Dialog
-    state.showWrongPackageDialog?.let { dialogState ->
+    AnimatedVisibility(
+        visible = state.showWrongPackageDialog != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val dialogState = state.showWrongPackageDialog ?: return@AnimatedVisibility
+
         WrongPackageDialog(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
