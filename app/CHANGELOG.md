@@ -1,3 +1,18 @@
+# app [1.2.0](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1...v1.2.0) (2026-01-10)
+
+
+### Bug Fixes
+
+* Allow disabling built-in bundle ([#87](https://github.com/MorpheApp/morphe-manager/issues/87)) ([8673d14](https://github.com/MorpheApp/morphe-manager/commit/8673d14081d770f9cc53ccc0dc2d93da7903f581))
+* Change to time based version code to resolve pre-release Manager unable to update to latest stable release ([97ec26e](https://github.com/MorpheApp/morphe-manager/commit/97ec26e3b11e0133873b5a8cae3dcb4a0a45c239))
+* Completely isolate patch options in Morphe and Expert modes ([#90](https://github.com/MorpheApp/morphe-manager/issues/90)) ([c96fcd9](https://github.com/MorpheApp/morphe-manager/commit/c96fcd9c1c24cbe2afc835b41737c351fb226f58))
+* Some apk files are not selectable in expert mode ([aa8c3ce](https://github.com/MorpheApp/morphe-manager/commit/aa8c3cea4a9e331d2dae09c65e3c1cd76bc2c618))
+
+
+### Features
+
+* Add language picker ([#93](https://github.com/MorpheApp/morphe-manager/issues/93)) ([dc2058a](https://github.com/MorpheApp/morphe-manager/commit/dc2058aad729689814e54302d14a55ae7f849754))
+
 # app [1.2.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2026-01-10)
 
 
