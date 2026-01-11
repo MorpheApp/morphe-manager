@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
+import app.revanced.manager.ui.component.morphe.shared.MorpheSettingsDivider
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -134,7 +135,7 @@ fun InstallerSection(
         ?: fallbackEntries.first()
 
     Column(
-        modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 8.dp),
+        modifier = Modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         // Primary Installer
@@ -143,6 +144,8 @@ fun InstallerSection(
             entry = primaryEntry,
             onClick = { onShowInstallerDialog(InstallerDialogTarget.Primary) }
         )
+
+        MorpheSettingsDivider()
 
         // Fallback Installer
         InstallerSettingsItem(

@@ -3,21 +3,32 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
@@ -26,9 +37,7 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.*
-import app.revanced.manager.ui.component.morphe.shared.AdaptiveLayout
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.shared.rememberWindowSize
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
@@ -36,12 +45,22 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 /**
- * MorpheSettingsScreen - Simplified settings interface
- * Provides theme customization, advanced settings, import/export, and about sections
- * Adapts layout for landscape orientation
+ * Settings tabs for bottom navigation
+ */
+private enum class SettingsTab(
+    val titleRes: Int,
+    val icon: ImageVector
+) {
+    APPEARANCE(R.string.appearance, Icons.Outlined.Palette),
+    ADVANCED(R.string.advanced, Icons.Outlined.Tune),
+    SYSTEM(R.string.system, Icons.Outlined.Settings)
+}
+
+/**
+ * Settings screen with bottom navigation and swipeable tabs
  */
 @SuppressLint("BatteryLight")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
@@ -53,12 +72,14 @@ fun MorpheSettingsScreen(
     advancedViewModel: AdvancedSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val coroutineScope = rememberCoroutineScope()
-    val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
     val installerManager: InstallerManager = koinInject()
     val rootInstaller: RootInstaller = koinInject()
+
+    // Pager state for swipeable tabs
+    val pagerState = rememberPagerState(pageCount = { SettingsTab.entries.size })
+    val currentTab = SettingsTab.entries[pagerState.currentPage]
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
@@ -171,113 +192,175 @@ fun MorpheSettingsScreen(
         )
     }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
-    ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            // Animated background
-            AnimatedBackground(type = backgroundType)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Animated background
+        AnimatedBackground(type = backgroundType)
 
-            // Use adaptive layout system
-            AdaptiveLayout(
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
+        ) {
+            // Content area
+            HorizontalPager(
+                state = pagerState,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                windowSize = windowSize,
-                leftContent = {
-                    // Appearance Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Palette,
-                        title = stringResource(R.string.appearance)
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) { page ->
+                when (SettingsTab.entries[page]) {
+                    SettingsTab.APPEARANCE -> AppearanceTabContent(
+                        theme = theme,
+                        pureBlackTheme = pureBlackTheme,
+                        dynamicColor = dynamicColor,
+                        customAccentColorHex = customAccentColorHex,
+                        backgroundType = backgroundType,
+                        themeViewModel = themeViewModel
                     )
 
-                    SettingsCard {
-                        AppearanceSection(
-                            theme = theme,
-                            pureBlackTheme = pureBlackTheme,
-                            dynamicColor = dynamicColor,
-                            customAccentColorHex = customAccentColorHex,
-                            backgroundType = backgroundType,
-                            onBackToAdvanced = {
-                                coroutineScope.launch {
-                                    themeViewModel.prefs.useMorpheHomeScreen.update(false)
-                                }
-                                onBackClick()
-                            },
-                            viewModel = themeViewModel
-                        )
-                    }
-
-                    // Patch Options Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Tune,
-                        title = stringResource(R.string.morphe_patch_options)
-                    )
-                    SettingsCard {
-                        PatchOptionsSection(
-                            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-                            viewModel = patchOptionsViewModel
-                        )
-                    }
-                },
-                rightContent = {
-                    // Advanced Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.DeveloperMode,
-                        title = stringResource(R.string.advanced)
-                    )
-
-                    SettingsCard {
-                        UpdatesSection(
-                            usePrereleases = usePrereleases,
-                            onPreReleaseChanged = { newValue ->
-                                coroutineScope.launch {
-                                    prefs.usePatchesPrereleases.update(newValue)
-                                    prefs.useManagerPrereleases.update(newValue)
-                                    prefs.managerAutoUpdates.update(newValue)
-                                    // Update patches bundle and clear changelog cache
-                                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                                    // Check for manager updates
-                                    dashboardViewModel.checkForManagerUpdates()
-                                    patchOptionsViewModel.refresh()
-                                }
+                    SettingsTab.ADVANCED -> AdvancedTabContent(
+                        usePrereleases = usePrereleases,
+                        patchOptionsViewModel = patchOptionsViewModel,
+                        dashboardViewModel = dashboardViewModel,
+                        prefs = prefs,
+                        installerManager = installerManager,
+                        advancedViewModel = advancedViewModel,
+                        onShowInstallerDialog = { target ->
+                            installerDialogTarget = target
+                        },
+                        onBackToAdvanced = {
+                            coroutineScope.launch {
+                                themeViewModel.prefs.useMorpheHomeScreen.update(false)
                             }
-                        )
-
-                        InstallerSection(
-                            installerManager = installerManager,
-                            advancedViewModel = advancedViewModel,
-                            onShowInstallerDialog = { target ->
-                                installerDialogTarget = target
-                            }
-                        )
-                    }
-
-                    // Import & Export Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Build,
-                        title = stringResource(R.string.import_export)
+                            onBackClick()
+                        }
                     )
 
-                    SettingsCard {
-                        ImportExportSection(
-                            importExportViewModel = importExportViewModel,
-                            onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                            onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") }
-                        )
-                    }
-
-                    // About Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Info,
-                        title = stringResource(R.string.about)
-                    )
-
-                    AboutSection(
+                    SettingsTab.SYSTEM -> SystemTabContent(
+                        importExportViewModel = importExportViewModel,
+                        onImportKeystore = { importKeystoreLauncher.launch("*/*") },
+                        onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                         onAboutClick = { showAboutDialog = true }
                     )
                 }
+            }
+
+            // Bottom Navigation
+            MorpheBottomNavigation(
+                currentTab = currentTab,
+                onTabSelected = { tab ->
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(tab.ordinal)
+                    }
+                }
             )
+        }
+    }
+}
+
+/**
+ * Bottom navigation bar
+ */
+@Composable
+private fun MorpheBottomNavigation(
+    currentTab: SettingsTab,
+    onTabSelected: (SettingsTab) -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding(),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+        tonalElevation = 3.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            SettingsTab.entries.forEach { tab ->
+                NavigationItem(
+                    tab = tab,
+                    isSelected = currentTab == tab,
+                    onClick = { onTabSelected(tab) }
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Individual navigation item
+ */
+@Composable
+private fun NavigationItem(
+    tab: SettingsTab,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val containerColor = if (isSelected) {
+        MaterialTheme.colorScheme.primaryContainer
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
+
+    val contentColor = if (isSelected) {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    Surface(
+        onClick = onClick,
+        modifier = Modifier
+            .height(48.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .then(
+                if (isSelected) {
+                    Modifier.widthIn(min = 64.dp, max = 140.dp)
+                } else {
+                    Modifier.width(64.dp)
+                }
+            ),
+        color = containerColor,
+        shape = RoundedCornerShape(24.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = tab.icon,
+                contentDescription = null,
+                tint = contentColor,
+                modifier = Modifier.size(24.dp)
+            )
+
+            AnimatedVisibility(
+                visible = isSelected,
+                enter = fadeIn() + expandHorizontally(),
+                exit = fadeOut() + shrinkHorizontally()
+            ) {
+                Row {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(tab.titleRes),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = contentColor,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
         }
     }
 }

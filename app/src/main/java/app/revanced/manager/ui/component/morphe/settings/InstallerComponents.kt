@@ -26,9 +26,7 @@ import app.revanced.manager.ui.component.morphe.shared.*
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
- * Installer settings item for Morphe settings screen
- * Shows current installer with icon and description
- * Opens selection dialog on click
+ * Installer settings item
  */
 @Composable
 fun InstallerSettingsItem(
@@ -47,22 +45,19 @@ fun InstallerSettingsItem(
         }.joinToString("\n")
     }
 
-    // Use SettingsItem with custom icon if available
-    when (entry.token) {
-        InstallerManager.Token.Shizuku,
-        is InstallerManager.Token.Component -> {
-            // For installers with custom icons, show the icon
-            if (entry.icon != null) {
-                MorpheClickableCard(
-                    onClick = onClick,
-                    cornerRadius = 8.dp,
-                    alpha = 0.33f,
-                    modifier = modifier
-                ) {
+    SettingsItemCard(
+        onClick = onClick
+    ) {
+        when (entry.token) {
+            InstallerManager.Token.Shizuku,
+            is InstallerManager.Token.Component -> {
+                // Custom icon layout
+                if (entry.icon != null) {
+                    // For installers with custom icons, show the icon
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(12.dp),
+                            .padding(16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -77,7 +72,8 @@ fun InstallerSettingsItem(
                             Text(
                                 text = title,
                                 style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             if (supportingText.isNotEmpty()) {
                                 Text(
@@ -91,38 +87,48 @@ fun InstallerSettingsItem(
                         Icon(
                             imageVector = Icons.Outlined.ChevronRight,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(20.dp)
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
+                } else {
+                    // Standard icon layout
+                    IconTextRow(
+                        icon = Icons.Outlined.Android,
+                        title = title,
+                        description = supportingText.takeIf { it.isNotEmpty() },
+                        modifier = Modifier.padding(16.dp),
+                        trailingContent = {
+                            Icon(
+                                imageVector = Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    )
                 }
-            } else {
-                // Fallback to standard settings item
-                SettingsItem(
+            }
+            else -> {
+                // Internal, AutoSaved, None
+                IconTextRow(
                     icon = Icons.Outlined.Android,
                     title = title,
                     description = supportingText.takeIf { it.isNotEmpty() },
-                    onClick = onClick,
-                    modifier = modifier
+                    modifier = Modifier.padding(16.dp),
+                    trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 )
             }
-        }
-        else -> {
-            // For Internal, AutoSaved, None - use standard settings item
-            SettingsItem(
-                icon = Icons.Outlined.Android,
-                title = title,
-                description = supportingText.takeIf { it.isNotEmpty() },
-                onClick = onClick,
-                modifier = modifier
-            )
         }
     }
 }
 
 /**
  * Dialog for selecting installer
- * Morphe-styled version of the Advanced Settings installer selection
  */
 @Composable
 fun InstallerSelectionDialog(
@@ -390,9 +396,9 @@ fun InstallerIconPreview(
             )
         } else {
             Icon(
-                imageVector = Icons.Outlined.Android,
+                imageVector = Icons.Outlined.ChevronRight,
                 contentDescription = null,
-                tint = colors.onSurface.copy(alpha = contentAlpha)
+                tint = MaterialTheme.colorScheme.primary
             )
         }
     }

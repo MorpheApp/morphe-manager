@@ -22,8 +22,7 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Compan
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_WIDGET_TITLE
 import app.revanced.manager.domain.manager.getLocalizedOrCustomText
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheCard
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
@@ -189,6 +188,8 @@ fun PatchOptionsSection(
                 }
             }
 
+            MorpheSettingsDivider()
+
             // YouTube Music Section
             if (youtubeMusicPatches.isNotEmpty()) {
                 ExpandableSection(
@@ -210,29 +211,29 @@ fun PatchOptionsSection(
             }
         }
 
+        MorpheSettingsDivider()
+
         // Warning
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp),
-            color = MaterialTheme.colorScheme.tertiaryContainer
-        ) {
-            Row(
-                modifier = Modifier.padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                    modifier = Modifier.size(20.dp)
-                )
-                Text(
-                    text = stringResource(R.string.morphe_patch_options_restart_message),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
-                )
+        SubtleCard(
+            content = {
+                Row(
+                    modifier = Modifier.padding(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.morphe_patch_options_restart_message),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                }
             }
-        }
+        )
     }
 
     // Theme Dialog
@@ -284,6 +285,8 @@ private fun AppPatchOptionsContent(
     val hasHideShorts = appType == AppType.YOUTUBE && viewModel.getHideShortsOptions() != null
 
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        MorpheSettingsDivider()
+
         // Theme Colors
         if (hasTheme) {
             SettingsItem(
@@ -292,6 +295,8 @@ private fun AppPatchOptionsContent(
                 description = stringResource(R.string.morphe_patch_options_theme_colors_description),
                 onClick = onThemeClick
             )
+
+            MorpheSettingsDivider()
         }
 
         // Custom Branding
@@ -302,6 +307,8 @@ private fun AppPatchOptionsContent(
                 description = stringResource(R.string.morphe_patch_options_custom_branding_description),
                 onClick = onBrandingClick
             )
+
+            MorpheSettingsDivider()
         }
 
         // Custom Header (YouTube only)
@@ -312,6 +319,8 @@ private fun AppPatchOptionsContent(
                 description = stringResource(R.string.morphe_patch_options_custom_header_description),
                 onClick = onHeaderClick
             )
+
+            MorpheSettingsDivider()
         }
 
         // Hide Shorts Features (YouTube only)
@@ -320,6 +329,8 @@ private fun AppPatchOptionsContent(
                 patchOptionsPrefs = patchOptionsPrefs,
                 viewModel = viewModel
             )
+
+            MorpheSettingsDivider()
         }
 
         // Show message if no options available for this app
@@ -351,10 +362,7 @@ private fun HideShortsSection(
     val appShortcutOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT)
     val widgetOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
 
-    MorpheCard(
-        cornerRadius = 8.dp,
-        alpha = 0.33f
-    ) {
+    MorpheCard() {
         Column(
             modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
