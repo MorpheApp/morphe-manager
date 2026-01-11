@@ -97,7 +97,7 @@
     <string name="morphe_patcher_message_4">Preparando magia digital… ☕</string>
     <string name="morphe_patcher_message_5">Se recomienda un descanso para el café… ☕</string>
     <string name="morphe_patcher_message_6">Mira afuera, hace buen tiempo… 🌤️</string>
-    <string name="morphe_patcher_message_7">Ajustando unos y ceros… 🤖</string>
+    <string name="morphe_patcher_message_7">Ajustando unos (1) y ceros (0)… 🤖</string>
     <string name="morphe_patcher_message_8">Deshaciendo el espagueti digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="morphe_patcher_message_9">Corrigiendo errores en la aplicación sin parches… 🐞</string>

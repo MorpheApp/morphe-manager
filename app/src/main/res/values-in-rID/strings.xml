@@ -128,9 +128,9 @@
     <string name="morphe_appearance_options_description">Kustomisasi tema, warna, dan latar belakang</string>
     <string name="morphe_appearance_app_language">Bahasa Aplikasi</string>
     <string name="morphe_appearance_search">Pencarian</string>
-    <string name="morphe_appearance_no_results">Tidak Ada Hasil Yang Ditemukan</string>
-    <string name="morphe_appearance_translations_info_title">Terjadi Kesalahan</string>
-    <string name="morphe_appearance_translations_info_text">Untuk mentranslate bahasa baru atau meningkatkan terjemahan yang ada, kunjungi %s</string>
+    <string name="morphe_appearance_no_results">Tidak ada hasil yang ditemukan</string>
+    <string name="morphe_appearance_translations_info_title">Terjemahan untuk beberapa bahasa mungkin belum tersedia atau belum lengkap.</string>
+    <string name="morphe_appearance_translations_info_text">Untuk menerjemahkan bahasa baru atau meningkatkan terjemahan yang ada, kunjungi %s</string>
     <string name="morphe_background_type">Animasi latar belakang</string>
     <string name="morphe_background_type_circles">Lingkaran</string>
     <string name="morphe_background_type_rings">Cincin</string>
@@ -311,7 +311,7 @@ Ukuran gambar harus sebagai berikut:
     <string name="apk_source_installed">Menggunakan APK yang terpasang</string>
     <string name="apk_source_local">Menggunakan berkas APK lokal</string>
     <string name="apk_source_downloaded">Menggunakan APK yang diunduh</string>
-    <string name="auto_updates_dialog_title">Konfigurasikan pembaruan</string>
+    <string name="auto_updates_dialog_title">Atur pembaruan</string>
     <string name="auto_updates_dialog_description">Apakah Anda ingin Morphe secara berkala memeriksa pembaruan untuk komponen berikut?</string>
     <string name="auto_updates_dialog_patches">Tambalan Morphe</string>
     <string name="auto_updates_dialog_note">Pengaturan ini dapat diubah nanti.</string>
@@ -527,7 +527,7 @@ Profil tambalan tidak terpengaruh."</string>
     <string name="patch_options_reset_all_description">Mengatur ulang semua opsi patch</string>
     <string name="download_settings">Pengaturan unduhan</string>
     <string name="downloader_auto_save_title">Simpan APK yang diunduh secara otomatis</string>
-    <string name="downloader_auto_save_description">Simpan APK yang diunduh melalui plugin untuk digunakan kembali. Nonaktifkan untuk menghapusnya setelah patching.</string>
+    <string name="downloader_auto_save_description">Pertahankan APK yang diunduh melalui plugin untuk digunakan kembali. Nonaktifkan untuk menghapusnya setelah penambalan.</string>
     <string name="downloader_plugins">Plugin</string>
     <string name="downloader_plugin_state_trusted">Terpercaya</string>
     <string name="downloader_plugin_state_failed">Gagal dimuat. Klik untuk detail selengkapnya</string>
@@ -694,9 +694,9 @@ Anda perlu mengaktifkan \"Izinkan mengubah pilihan dan pilihan tambalan\" di pen
     <string name="patch_profile_version_override_set_to_all">Tidak ada versi yang dimasukkan, disimpan sebagai \"%1$s\"</string>
     <string name="patch_profile_version_conflict_title">Pertahankan penimpaan versi?</string>
     <string name="patch_profile_version_conflict_message">"Versi saat ini: %1$s
-Versi masuk: %2$s
+Versi terbaru: %2$s
 Manakah yang harus disimpan ke profil ini?"</string>
-    <string name="patch_profile_version_conflict_use_new">Gunakan versi yang masuk</string>
+    <string name="patch_profile_version_conflict_use_new">Gunakan versi yang terbaru</string>
     <string name="patch_profile_version_conflict_keep_existing">Pertahankan versi yang ada</string>
     <string name="patch_profile_empty_state">Simpan konfigurasi dari layar pemilihan tambalan untuk melihatnya di sini.</string>
     <string name="patch_profile_missing_bundles_toast">Beberapa paket dalam profil ini tidak tersedia dan akan dilewati.</string>
@@ -849,7 +849,7 @@ Hanya kompatibel dengan versi berikut: %2$s."</string>
     <string name="installer_hint_blocked">Pemasangan diblokir oleh Android. Periksa Play Protect atau pengaturan keamanan.</string>
     <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terinstal. Hapus instalasinya sebelum melanjutkan.</string>
     <string name="installer_hint_incompatible">APK tidak kompatibel dengan perangkat atau versi Android ini.</string>
-    <string name="installer_hint_invalid">APK tidak valid atau rusak.</string>
+    <string name="installer_hint_invalid">APK tidak sah atau rusak.</string>
     <string name="installer_hint_storage">Tidak ada cukup ruang penyimpanan untuk pemasangan.</string>
     <string name="installer_hint_timeout">Pemasangan kehabisan waktu. Coba lagi.</string>
     <string name="installer_hint_aborted">Pemasangan dibatalkan.</string>
@@ -924,7 +924,7 @@ Detail: %2$s"</string>
     <string name="save_patched_app_dialog_save">Simpan aplikasi yang ditambal</string>
     <string name="save_patched_app_dialog_leave">Tinggalkan tanpa menyimpan</string>
     <string name="save_patched_app_dialog_cancel">Tetap di penambal</string>
-    <string name="save_patched_app_dialog_hint_save">Mempertahankan APK yang telah ditambal agar dapat diakses dari tab Aplikasi untuk pemasangan di masa mendatang.</string>
+    <string name="save_patched_app_dialog_hint_save">Menyimpan APK yang telah ditambal agar dapat diakses dari tab Aplikasi untuk pemasangan di masa mendatang.</string>
     <string name="save_patched_app_dialog_hint_leave">Membuang APK yang ditambal dan mengembalikan Anda ke layar sebelumnya.</string>
     <string name="patched_app_saved_toast">Aplikasi yang ditambal disimpan untuk nanti</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
@@ -983,7 +983,7 @@ Sumber terbuka pada intinya, Morphe berkembang pesat pada umpan balik dan kontri
     <string name="hours_ago">%sh yang lalu</string>
     <string name="days_ago">%sd yang lalu</string>
     <string name="invalid_date">Tanggal tidak sah</string>
-    <string name="input_dialog_value_invalid">Nilai tidak valid</string>
+    <string name="input_dialog_value_invalid">Nilai tidak sah</string>
     <string name="option_required">Opsi ini wajib diisi</string>
     <string name="required_options_screen">Opsi yang diperlukan</string>
     <string name="failed_to_check_updates">Gagal memeriksa pembaruan: %s</string>
