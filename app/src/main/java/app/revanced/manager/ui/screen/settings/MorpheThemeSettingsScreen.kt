@@ -282,9 +282,6 @@ fun MorpheThemeSettingsScreen(
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
-
-            GroupHeader(stringResource(R.string.morphe_appearance_app_language))
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
