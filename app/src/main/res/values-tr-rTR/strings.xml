@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Görünüm seçenekleri</string>
     <string name="morphe_appearance_options_description">Tema, renk ve arka planları özelleştirin</string>
+    <string name="morphe_appearance_app_language">Uygulama Dili</string>
+    <string name="morphe_appearance_search">Arama</string>
+    <string name="morphe_appearance_no_results">Sonuç Bulunamadı</string>
+    <string name="morphe_appearance_translations_info_title"> Bazı Dillerin Çevirileri Eksik veya Tam Olmayabilir</string>
+    <string name="morphe_appearance_translations_info_text">Yeni dilleri çevirmek veya mevcut çevirileri iyileştirmek için lütfen %s\'i ziyaret edin.</string>
     <string name="morphe_background_type">Arka plan animasyonu</string>
     <string name="morphe_background_type_circles">Daireler</string>
     <string name="morphe_background_type_rings">Halkalar</string>

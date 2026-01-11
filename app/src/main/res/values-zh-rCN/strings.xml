@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外观选项</string>
     <string name="morphe_appearance_options_description">自定义主题、颜色和背景</string>
+    <string name="morphe_appearance_app_language">应用语言</string>
+    <string name="morphe_appearance_search">搜索</string>
+    <string name="morphe_appearance_no_results">未找到结果</string>
+    <string name="morphe_appearance_translations_info_title">某些语言的翻译可能缺失或不完整</string>
+    <string name="morphe_appearance_translations_info_text">要翻译新语言或改善现有翻译，请访问%s</string>
     <string name="morphe_background_type">背景动画</string>
     <string name="morphe_background_type_circles">圆圈</string>
     <string name="morphe_background_type_rings">圆环</string>

@@ -9,6 +9,7 @@ import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
+import app.revanced.manager.util.isArmV7
 import app.revanced.manager.util.tag
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
@@ -37,8 +38,9 @@ class PreferencesManager(
     // Morphe
     val useProcessRuntime = booleanPreference(
         "use_process_runtime",
-        // Use process runtime fails for Android 10 and lower
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+        // Use process runtime fails for Android 10 and lower.
+        // Armv7 silently fails and nobody has researched why yet.
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
     // Morphe default value has changed since release and

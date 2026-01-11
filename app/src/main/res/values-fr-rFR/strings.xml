@@ -126,6 +126,11 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Options d\'apparence</string>
     <string name="morphe_appearance_options_description">Personnalisez les thèmes, les couleurs et les arrière-plans</string>
+    <string name="morphe_appearance_app_language">Langue de l\'application</string>
+    <string name="morphe_appearance_search">Recherche</string>
+    <string name="morphe_appearance_no_results">Pas de résultat trouvé</string>
+    <string name="morphe_appearance_translations_info_title">Certaines traductions peuvent être manquantes ou incomplètes</string>
+    <string name="morphe_appearance_translations_info_text">Pour traduire de nouvelles langues ou améliorer les traductions existantes, visitez %s</string>
     <string name="morphe_background_type">Animation d\'arrière-plan</string>
     <string name="morphe_background_type_circles">Cercles</string>
     <string name="morphe_background_type_rings">Anneaux</string>
@@ -245,7 +250,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="patches_display_name">Nom d\'affichage</string>
     <string name="android_11_bug_dialog_title">Bug Android 11</string>
     <string name="android_11_bug_dialog_description">L\'autorisation d\'installation de l\'application doit être accordée à l\'avance pour éviter un bug dans le système Android 11 qui affectera négativement l\'expérience utilisateur.</string>
-    <string name="no_network_toast">Aucune connexion Internet disponible</string>
+    <string name="no_network_toast">Pas connexion Internet disponible</string>
     <string name="selected_app_meta_any_version">Toute version disponible</string>
     <string name="app_source_dialog_title">Sélectionner la source</string>
     <string name="app_source_dialog_option_auto">Auto</string>
@@ -326,7 +331,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="advanced_description">URL de l\'API, limite de mémoire, débogage</string>
     <string name="about">À propos</string>
     <!-- Morphe -->
-    <string name="accent_color_presets">Accentué</string>
+    <string name="accent_color_presets">Accentuation</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
@@ -381,11 +386,11 @@ Activer quand même ?"</string>
     <string name="export_keystore_success">Keystore exporté</string>
     <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">Le keystore a été remplacé avec succès</string>
-    <string name="import_patch_selection">Importation de la sélection de patch</string>
+    <string name="import_patch_selection">Importer la sélection de patch</string>
     <string name="import_patch_selection_description">Importer la sélection de patch à partir d\'un fichier JSON</string>
     <string name="import_patch_selection_fail">Impossible d\'importer la sélection de patch : %s</string>
     <string name="import_patch_selection_success">Sélection de patch importée</string>
-    <string name="import_patch_bundles">Importer des bundles de patch</string>
+    <string name="import_patch_bundles">Importer les bundles de patch</string>
     <string name="import_patch_bundles_description">Restaurer des bundles de patch à distance à partir d\'un fichier JSON</string>
     <string name="import_patch_bundles_fail">Impossible d\'importer les bundles de patch : %s</string>
     <string name="import_patch_bundles_in_progress">Importation…</string>
@@ -395,7 +400,7 @@ Activer quand même ?"</string>
     <string name="import_patch_bundles_banner_title">Importation des bundles de patch</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d sur %2$d traités</string>
     <string name="import_patch_bundles_banner_steps">Étape %1$d sur %2$d</string>
-    <string name="import_patch_profiles">Importer des profils de patch</string>
+    <string name="import_patch_profiles">Importer les profils de patch</string>
     <string name="import_patch_profiles_description">Importer des profils de patch enregistrés à partir d\'un fichier JSON</string>
     <string name="import_patch_profiles_fail">Impossible d\'importer les profils de patch : %s</string>
     <string name="import_patch_profiles_success">%d profils de patch importés</string>
@@ -403,7 +408,7 @@ Activer quand même ?"</string>
     <string name="import_patch_profiles_skipped">%d profils de patch en double ignorés</string>
     <string name="import_patch_profiles_none">Aucun profil de patch n\'a été importé</string>
     <string name="import_manager_settings">Importer les paramètres du gestionnaire</string>
-    <string name="import_manager_settings_description">Restaurez les paramètres du gestionnaire enregistrés à partir d\'un fichier JSON</string>
+    <string name="import_manager_settings_description">Restaurer les paramètres du gestionnaire enregistrés à partir d\'un fichier JSON</string>
     <string name="import_manager_settings_fail">Impossible d\'importer les paramètres du gestionnaire : %s</string>
     <string name="import_manager_settings_success">Paramètres du gestionnaire importés</string>
     <string name="export_patch_selection">Exporter la sélection de patch</string>
@@ -411,7 +416,7 @@ Activer quand même ?"</string>
     <string name="export_patch_selection_fail">Impossible d\'exporter la sélection de patch : %s</string>
     <string name="export_patch_selection_success">Sélection de patch exportée</string>
     <string name="export_patch_bundles">Exporter les bundles de patch</string>
-    <string name="export_patch_bundles_description">Enregistrez les bundles de patch à distance importé dans un fichier JSON</string>
+    <string name="export_patch_bundles_description">Enregistrer les bundles de patch à distance importé dans un fichier JSON</string>
     <string name="export_patch_bundles_fail">Impossible d\'exporter les bundles de patch : %s</string>
     <string name="export_patch_bundles_success">%d bundles de patch exporté</string>
     <string name="export_patch_bundles_partial">%1$d bundles de patch exporté. Certains bundles n\'ont pas pu être exportés car ils ont été ajoutés localement.</string>
@@ -499,7 +504,7 @@ Les profils de patch ne sont pas affectés."</string>
     <string name="patch_selection_reset_package_dialog_description">"Vous êtes sur le point de réinitialiser la sélection de patch pour l'application \"%s\". Vous devrez sélectionner manuellement chaque patch à nouveau.
 
 Les profils de patch ne sont pas affectés."</string>
-    <string name="patch_selection_reset_package_description">Réinitialiser la sélection de patch pour une app uniquement</string>
+    <string name="patch_selection_reset_package_description">Réinitialise la sélection de patch pour une app uniquement</string>
     <string name="patch_selection_reset_patches">Réinitialiser la sélection de patch (unique)</string>
     <string name="patch_selection_reset_patches_dialog_description">"Vous êtes sur le point de réinitialiser la sélection de patch pour \"%s\". Vous devrez sélectionner manuellement chaque patch à nouveau.
 
@@ -515,7 +520,7 @@ Les profils de patch ne sont pas affectés."</string>
 
 Les profils de patch ne sont pas affectés."</string>
     <string name="patch_options_reset_patches_description">Réinitialise les options de patch pour une collection spécifique de patch</string>
-    <string name="patch_options_reset_all">Réinitialiser globalement les options de patch</string>
+    <string name="patch_options_reset_all">Réinitialiser les options de patch globalement</string>
     <string name="patch_options_reset_all_dialog_description">"Vous êtes sur le point de réinitialiser toutes les options de patch. Vous devrez réappliquer chaque option à nouveau.
 
 Les profils de patch ne sont pas affectés."</string>
@@ -693,7 +698,7 @@ Nouvelle version : %2$s
 Quelle version doit être enregistrée dans ce profil ?"</string>
     <string name="patch_profile_version_conflict_use_new">Utiliser la version sélectionnée</string>
     <string name="patch_profile_version_conflict_keep_existing">Conserver la version existante</string>
-    <string name="patch_profile_empty_state">Enregistrez une configuration depuis l’écran de sélection de patch pour la voir ici.</string>
+    <string name="patch_profile_empty_state">Enregistrer une configuration depuis l’écran de sélection de patch pour la voir ici.</string>
     <string name="patch_profile_missing_bundles_toast">Certains bundles de ce profil ne sont pas disponibles et seront ignorés.</string>
     <string name="patch_profile_changed_patches_toast">Certains patchs ou options de ce profil ne correspondent plus au bundle et ont été ignorés.</string>
     <string name="patch_profile_no_available_bundles_toast">Aucuns bundles de ce profil n’est disponible. Mettez à jour vos bundles et réessayez.</string>
@@ -792,7 +797,7 @@ Il est uniquement compatible avec la version suivante : %2$s."</string>
     <string name="installer_internal_description">Utiliser l\'installateur de package Android</string>
     <string name="installer_auto_saved_name">Installateur par montage root</string>
     <string name="installer_auto_saved_description">Monte l\'APK patché par-dessus l\'application installée (root requis).</string>
-    <string name="installer_shizuku_description">Installez silencieusement à l\'aide de Shizuku ou Sui.</string>
+    <string name="installer_shizuku_description">Installer silencieusement via Shizuku ou Sui</string>
     <string name="installer_option_none">Pas d\'installateur de secours</string>
     <string name="installer_none_description">Aucun installateur de secours configuré</string>
     <string name="installer_status_requires_root">Nécessite l\'accès root</string>
@@ -962,7 +967,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="update_checking_manager">Vérifier les mises à jour au lancement</string>
     <string name="update_checking_manager_description">Vérifier les nouvelles versions de Morphe au démarrage de l\'application</string>
     <string name="manager_prereleases">Utiliser les pré-versions</string>
-    <string name="manager_prereleases_description">Utilisez les versions préliminaires de Morphe</string>
+    <string name="manager_prereleases_description">Utiliser les versions préliminaires de Morphe</string>
     <string name="update_published">Publié le %s</string>
     <string name="battery_optimization_notification">Les optimisations de la batterie doivent être désactivées pour que Morphe fonctionne correctement en arrière-plan. Appuyez ici pour désactiver les optimisations. </string>
     <string name="installing_manager_update">Installation de la mise à jour…</string>

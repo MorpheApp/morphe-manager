@@ -42,16 +42,16 @@
     <string name="morphe_home_apk_availability_yes">Bəli, məndə var</string>
     <string name="morphe_home_apk_availability_no">Xeyr, mənə bunu tapmağa kömək et</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Əsl APK Yüklə</string>
+    <string name="morphe_home_download_instructions_title">Əsl APK-nı Yüklə</string>
     <string name="morphe_home_download_instructions_steps_title">Təlimatlar:</string>
     <string name="morphe_home_download_instructions_step1">Aşağıdakı \'%1$s\' düyməsinə toxun</string>
     <string name="morphe_home_download_instructions_step2_part1">Veb səhifəni aşağı sürüşdür və toxun</string>
     <string name="morphe_home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
-    <string name="morphe_home_download_instructions_step3">Endirmənin tamamlanmasını gözləyin və &lt;b&gt;quraşdırmayın&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3">Endirmənin tamamlanmasını gözləyin və &lt;/b&gt;APK quraşdırmayın&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step3_mount">Endirmənin tamamlanmasını gözləyin, sonra &lt;b&gt;APK quraşdırın&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Yükləmə bitdikdən sonra bu tətbiqi təzədən açın</string>
     <string name="morphe_home_download_instructions_step4_mount">Orijinal APK-nı quraşdırdıqdan sonra bu tətbiqi təzədən açın</string>
-    <string name="morphe_home_download_instructions_continue">APKMirror.com saytına keçid</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com-a keçin</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Endirdiyiniz APK-nı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">İndi yenicə endirdiyiniz %1$s APK faylını seçin.</string>
@@ -60,7 +60,7 @@
     <string name="morphe_patcher_selected_version">Seçilən versiya</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir.</string>
-    <string name="morphe_root_gmscore_excluded">GmsCore dəstək yamağı root rejimində istisna olunur</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK-nı Saxla</string>
     <string name="morphe_patcher_copy_error">Xətanı köçür</string>
@@ -69,7 +69,7 @@
     <string name="morphe_patcher_patches_progress">%1$d / %2$d yamaq</string>
     <string name="morphe_patcher_long_step_warning">Bu addım bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
     <string name="morphe_patcher_installing">Quraşdırılır…</string>
-    <string name="morphe_patcher_installing_subtitle">Təqribən partlatmağa hazırdır! 🎸</string>
+    <string name="morphe_patcher_installing_subtitle">Təqribən coşdurmağa hazırdır! 🎸</string>
     <string name="morphe_patcher_success_title">Hamısı Bitdi! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Tətbiqiniz yamaqlanıb və quraşdırılıb!</string>
     <string name="morphe_patcher_complete_title">Yamaqlama Tamamlandı! ✨</string>
@@ -81,51 +81,56 @@
     <string name="morphe_patcher_conflict_title">Paket ziddiyyəti</string>
     <string name="morphe_patcher_conflict_subtitle">Mövcud versiyanı silməlisiniz</string>
     <string name="morphe_patcher_install_error_title">Quraşdırma xətası</string>
-    <string name="morphe_patcher_install_error_subtitle">Təkrar silib-quraşdırmağa cəhd edin</string>
+    <string name="morphe_patcher_install_error_subtitle">Təkrar silməyə və quraşdırmağa çalış</string>
     <string name="morphe_patcher_ready_to_install_subtitle">Quraşdırmaq üçün aşağıdakı düyməyə toxun</string>
-    <string name="morphe_patcher_ready_to_mount_subtitle">Yükləmək üçün aşağıdakı düyməni basın</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK tövsiyə edilən tətbiq versiyası deyil. Davam etmək tətbiqin işləməməsinə səbəb ola bilər.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
     <string name="morphe_patcher_wrong_package_title">Yanlış paket seçildi</string>
-    <string name="morphe_patcher_wrong_package_description">Seçilən APK, yama etmək istədiyiniz proqram üçün deyil.</string>
+    <string name="morphe_patcher_wrong_package_description">Seçilən APK, yamaq üçün təyin etdiyiniz tətbiq üçün deyil.</string>
     <string name="morphe_patcher_expected_package">Gözlənilən paket</string>
     <string name="morphe_patcher_selected_package">Seçilən paket</string>
-    <string name="morphe_patcher_message_1">Proqramınızı inanılmaz bir şeyə çeviririk… 🏆</string>
-    <string name="morphe_patcher_message_2">Köhnə proqramlara yeni vərdişlər öyrədirik… 🎩</string>
-    <string name="morphe_patcher_message_3">Proqramınıza rəqəmsal yeniləmə edirik… 🔧</string>
-    <string name="morphe_patcher_message_4">RəqəmsalSehr\u00a0yarad\u0131l\u0131r\u2026 \ud83c\udf75</string>
-    <string name="morphe_patcher_message_5">Kofe fasil\u0259si\u00a0t\u00f6vsiy\u0259 olunur\u2026 \ud83c\udf75</string>
-    <string name="morphe_patcher_message_6">Bay\u0131ra bax\u0131n, orada\u00a0g\u00fcz\u0259ldir\u2026 \u2600}\ufe0f</string>
-    <string name="morphe_patcher_message_7">1-l\u0259ri\u00a0v\u0259 0-lar\u0131\u00a0t\u0259nzimleyir\u2026 \ud83e\udd16</string>
-    <string name="morphe_patcher_message_8">R\u0259q\u0259msal\u00a0spagetti\u00a0a\u00e7\u0131r\u0131r\u0131q\u2026 \ud83c\udf5d</string>
+    <string name="morphe_patcher_message_1">Tətbiqiniz mükəmməl bir şeyə döndərilir... 🏆</string>
+    <string name="morphe_patcher_message_2">Köhnə tətbiqlərə yeni fokuslar öyrədirik… 🎩</string>
+    <string name="morphe_patcher_message_3">Tətbiqinizə rəqəmsal qurulma imkanı veririk... 🔧</string>
+    <string name="morphe_patcher_message_4">Rəqəmsal sehr düzəldilir… ☕ </string>
+    <string name="morphe_patcher_message_5">Qəhvə fasiləsi tövsiyə olunur... ☕ </string>
+    <string name="morphe_patcher_message_6">Bayıra bax, orada hava çox gözəldir… 🌤️</string>
+    <string name="morphe_patcher_message_7">1 və 0-ların sazlanması… 🤖 </string>
+    <string name="morphe_patcher_message_8">Rəqəmsal makaron açılır... 🍝 </string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Yama olunmam\u0131\u015f\u00a0t\u0259tbiqd\u0259\u00a0s\u0259hvl\u0259r\u00a0d\u00fcz\u0259lir\u2026 \ud83d\udc1e</string>
-    <string name="morphe_patcher_message_10">G\u00f6z\u0259l\u00a0yamalar\u00a0g\u00f6zl\u0259m\u0259y\u0259\u00a0d\u0259y\u0259r\u2026 \u23f3</string>
-    <string name="morphe_patcher_message_11">Piksell\u0259ri\u00a0parlayana\u00a0kimi\u00a0cilalay\u0131r\u0131q\u2026 \ud83d\udc8e</string>
-    <string name="morphe_patcher_message_12">Lütfən, \"Yamaq prosesi\" işığı sönənədək oturmağa davam edin... 💺✈️</string>
+    <string name="morphe_patcher_message_9">Yamaqlanmayan tətbiqdəki səhvlərin bərpası... 🐞 </string>
+    <string name="morphe_patcher_message_10">Əla yamaqlar, gözləməyə dəyər... ⏳ </string>
+    <string name="morphe_patcher_message_11">Piksellər parıldayana qədər cilalanır... 💎 </string>
+    <string name="morphe_patcher_message_12">Kapitan \"Yamaqlama irəliləyişdədir\" işarəsini söndürənə qədər yerinizdə qalın... 💺✈️ </string>
     <string name="morphe_patcher_message_13">Yamalanan tətbiqinizi hazırlayırıq, isti və təzə... 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Bayt-kod ilə nəzakətlə danışıqlar aparılır… 🤝</string>
+    <string name="morphe_patcher_message_14">Bayt-kodla nəzakətlə şərtlər müzakirə olunur... 🤝 </string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Bütün sistemlər normaldır… Yama trayektoriyası sabitdir… 🚀</string>
-    <string name="morphe_patcher_message_16">Əlavə gücü, rəqəmsal limondan çıxan şirə kimi sıxırıq… 🍋</string>
-    <string name="morphe_patcher_message_17">Tətbiqi yeni, daha yaxşı özünü qəbul etməyə təşviq edirik… 🌱</string>
+    <string name="morphe_patcher_message_15">Bütün sistemlər nominaldır... yamaqlanma işi cizgisi sabitdir... 🚀 </string>
+    <string name="morphe_patcher_message_16">Rəqəmsal limondan çıxan şirə kimi əlavə gücü sıxır... 🍋 </string>
+    <string name="morphe_patcher_message_17">Tətbiqi yeni, daha yaxşı özünü təqdir etməyə həvəsləndirir... 🌱 </string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Tətbiqin superpozisiyasını yamalanmamışdan yamalanmışa dəyişirik… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">Tətbiqin üstün mövqeyin yamaqlanmayandan yamaqlanana dəyişdirir... 📦⚛️ </string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Sizin tətbiqinizin atəşi var və yeganə resept daha çox yamadır… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Boş sözlər aradan qaldırılır. Zəhmət olmasa gözləyin… 🗑️</string>
+    <string name="morphe_patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
+    <string name="morphe_patcher_message_20">Lazımsız olanı silirəm. Zəhmət olmasa, gözləyin... 🗑️ </string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe-yə qayıt</string>
-    <string name="morphe_settings_return_to_morphe_description">Sadələşdirilmiş rejimə qayıt</string>
-    <string name="morphe_settings_return_to_expert">Чиқарави Чиг орту</string>
-    <string name="morphe_settings_return_to_expert_description">Пۈتەن юзىلىقتىكى Чигийكى Нورسلطەملىك Шەخسىي Чىقىرىмلىق Нەھ چۆكمىلىكегە قاراش</string>
+    <string name="morphe_settings_return_to_morphe">Morphe əsas səhifəyə qayıt</string>
+    <string name="morphe_settings_return_to_morphe_description">Asanlaşdırılan rejimə qaytarın</string>
+    <string name="morphe_settings_return_to_expert">Mütəxəssis rejiminə dəyişdir</string>
+    <string name="morphe_settings_return_to_expert_description">Tam xüsusiyyətli mütəxəssis üsuluna çevir</string>
     <string name="morphe_share_website">Veb saytı paylaş</string>
     <string name="morphe_share_website_description">Rəsmi Morphe veb-saytını paylaşın</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Görünüş seçimləri</string>
     <string name="morphe_appearance_options_description">Tema, rang va fönə bölmələri kəlimləri özəlləndirin</string>
+    <string name="morphe_appearance_app_language">Tətbiq dili</string>
+    <string name="morphe_appearance_search">Axtarış</string>
+    <string name="morphe_appearance_no_results">Nəticə tapılmadı</string>
+    <string name="morphe_appearance_translations_info_title">Bazı dillər üçün tərcümə oluna bilməmiş və ya tam deyil ola bilər</string>
+    <string name="morphe_appearance_translations_info_text">Yeni dillər tərcümə etmək və ya mövcud tərcümələri təkmilləşdirmək üçün %s ziyarət edin</string>
     <string name="morphe_background_type">Fon animasiyası</string>
     <string name="morphe_background_type_circles">Dairələr</string>
     <string name="morphe_background_type_rings">Halqalar</string>
