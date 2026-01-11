@@ -1,3 +1,10 @@
+## app [1.2.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.2.0...v1.2.1-dev.1) (2026-01-10)
+
+
+### Bug Fixes
+
+* Do not use patcher process for armv7 devices ([9bc999c](https://github.com/MorpheApp/morphe-manager/commit/9bc999c45b82bfc3debd8c260bfa8a73a5476632))
+
 # app [1.2.0](https://github.com/MorpheApp/morphe-manager/compare/v1.1.1...v1.2.0) (2026-01-10)
 
 
