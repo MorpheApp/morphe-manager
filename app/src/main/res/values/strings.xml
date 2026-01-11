@@ -131,7 +131,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">Customize themes, colors, and backgrounds</string>
-    <string name="morphe_appearance_app_language">App Language</string>
     <string name="morphe_appearance_search">Search</string>
     <string name="morphe_appearance_no_results">No results found</string>
     <string name="morphe_appearance_translations_info_title">Translations for some languages may be missing or incomplete</string>
@@ -690,20 +689,9 @@ Signature (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Include in settings export</string>
     <string name="include_github_pat_in_exports_supporting">Adds this PAT to exported manager settings</string>
     <string name="include_github_pat_in_exports_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token.</string>
-    <!-- Morphe -->
-    <string name="app_language" translatable="false">App language</string>
-    <!-- Morphe -->
-    <string name="language_dialog_title" translatable="false">Choose app language</string>
-    <!-- Morphe -->
-    <string name="language_option_system" translatable="false">Use device language</string>
-    <!-- Morphe -->
-    <string name="language_option_english" translatable="false">English</string>
-    <!-- Morphe -->
-    <string name="language_option_chinese_simplified" translatable="false">简体中文</string>
-    <!-- Morphe -->
-    <string name="language_option_korean" translatable="false">한국어</string>
-    <!-- Morphe -->
-    <string name="language_option_vietnamese" translatable="false">Tiếng Việt</string>
+    <string name="app_language">App language</string>
+    <string name="language_dialog_title">Choose app language</string>
+    <string name="language_option_system">Use device language</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Large)</string>
     <string name="patches_force_download">Force download all patch bundles</string>
     <string name="patches_reset">Reset patch bundles</string>
