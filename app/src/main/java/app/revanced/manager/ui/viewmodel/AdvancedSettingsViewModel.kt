@@ -88,11 +88,6 @@ class AdvancedSettingsViewModel(
     }
 
     fun setPrimaryInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
-        // Morphe: Only request root in Advanced Settings in Expert mode
-        if (token == InstallerManager.Token.AutoSaved && !prefs.useMorpheHomeScreen.get()) {
-            // Request/verify root in background when user explicitly selects the rooted mount installer.
-            runCatching { withContext(Dispatchers.IO) { rootInstaller.hasRootAccess() } }
-        }
         installerManager.updatePrimaryToken(token)
         val fallback = installerManager.getFallbackToken()
         if (fallback != InstallerManager.Token.None && tokensEqual(fallback, token)) {
@@ -101,10 +96,6 @@ class AdvancedSettingsViewModel(
     }
 
     fun setFallbackInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
-        // Morphe:  Only request root in Advanced Settings in Expert mode
-        if (token == InstallerManager.Token.AutoSaved && !prefs.useMorpheHomeScreen.get()) {
-            runCatching { withContext(Dispatchers.IO) { rootInstaller.hasRootAccess() } }
-        }
         val primary = installerManager.getPrimaryToken()
         val target = if (token != InstallerManager.Token.None && tokensEqual(primary, token)) {
             InstallerManager.Token.None
