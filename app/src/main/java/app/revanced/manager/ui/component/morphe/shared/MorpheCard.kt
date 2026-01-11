@@ -53,10 +53,11 @@ fun MorpheCard(
 
 @Composable
 fun MorpheSettingsDivider(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fullWidth: Boolean = false
 ) {
     HorizontalDivider(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = if (fullWidth) modifier else modifier.padding(horizontal = 16.dp),
         color = lerp(
             MaterialTheme.colorScheme.outlineVariant,
             MaterialTheme.colorScheme.surfaceTint,

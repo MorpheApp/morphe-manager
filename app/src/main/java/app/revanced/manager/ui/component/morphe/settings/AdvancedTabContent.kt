@@ -123,12 +123,10 @@ fun AdvancedTabContent(
         // Patch Options
         SectionTitle(stringResource(R.string.morphe_patch_options))
 
-        SectionCard {
-            PatchOptionsSection(
-                patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-                viewModel = patchOptionsViewModel,
-                dashboardViewModel = dashboardViewModel
-            )
-        }
+        PatchOptionsSection(
+            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
+            viewModel = patchOptionsViewModel,
+            dashboardViewModel = dashboardViewModel
+        )
     }
 }
