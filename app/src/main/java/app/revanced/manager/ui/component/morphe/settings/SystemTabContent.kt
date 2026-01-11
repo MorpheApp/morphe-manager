@@ -6,6 +6,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.material.icons.outlined.SwapHoriz
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.morphe.shared.SectionCard
+import app.revanced.manager.ui.component.morphe.shared.SectionTitle
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 
@@ -38,7 +43,10 @@ fun SystemTabContent(
     ) {
 
         // Installers
-        SectionTitle(stringResource(R.string.installer))
+        SectionTitle(
+            text = stringResource(R.string.installer),
+            icon = Icons.Outlined.InstallMobile
+        )
 
         SectionCard {
             InstallerSection(
@@ -49,7 +57,10 @@ fun SystemTabContent(
         }
 
         // Import & Export
-        SectionTitle(stringResource(R.string.import_export))
+        SectionTitle(
+            text = stringResource(R.string.import_export),
+            icon = Icons.Outlined.SwapHoriz
+        )
 
         SectionCard {
             ImportExportSection(
@@ -60,7 +71,10 @@ fun SystemTabContent(
         }
 
         // About
-        SectionTitle(stringResource(R.string.about))
+        SectionTitle(
+            text = stringResource(R.string.about),
+            icon = Icons.Outlined.Info
+        )
 
         SectionCard {
             AboutSection(onAboutClick = onAboutClick)

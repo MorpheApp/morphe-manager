@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Science
-import androidx.compose.material.icons.outlined.SwapHoriz
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -22,8 +20,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.component.morphe.settings.PatchOptionsSection
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
+import app.revanced.manager.ui.component.morphe.shared.SectionTitle
 import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
@@ -51,7 +51,10 @@ fun AdvancedTabContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Return to expert mode button
-        SectionTitle(stringResource(R.string.advanced))
+        SectionTitle(
+            stringResource(R.string.advanced),
+            icon = Icons.Outlined.Engineering
+        )
 
         MorpheCard(
             onClick = onBackToAdvanced,
@@ -73,7 +76,10 @@ fun AdvancedTabContent(
         }
 
         // Updates
-        SectionTitle(stringResource(R.string.updates))
+        SectionTitle(
+            text = stringResource(R.string.updates),
+            icon = Icons.Outlined.Update
+        )
 
         SettingsItemCard(
             onClick = {
@@ -104,7 +110,10 @@ fun AdvancedTabContent(
         }
 
         // Patch Options
-        SectionTitle(stringResource(R.string.morphe_patch_options))
+        SectionTitle(
+            text = stringResource(R.string.morphe_patch_options),
+            icon = Icons.Outlined.Tune
+        )
 
         PatchOptionsSection(
             patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,

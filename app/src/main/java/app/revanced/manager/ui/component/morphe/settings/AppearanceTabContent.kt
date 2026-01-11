@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.component.morphe.settings.LanguagePickerDialog
+import app.revanced.manager.ui.component.morphe.settings.SelectorItem
+import app.revanced.manager.ui.component.morphe.settings.SelectorSection
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.shared.LanguageRepository.getLanguageDisplayName
 import app.revanced.manager.ui.component.morphe.utils.darken
@@ -67,7 +68,10 @@ fun AppearanceTabContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Background Type
-        SectionTitle(stringResource(R.string.morphe_background_type))
+        SectionTitle(
+            text = stringResource(R.string.morphe_background_type),
+            icon = Icons.Outlined.Wallpaper
+        )
 
         SectionCard {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -100,7 +104,10 @@ fun AppearanceTabContent(
         }
 
         // Theme Mode
-        SectionTitle(stringResource(R.string.theme))
+        SectionTitle(
+            text = stringResource(R.string.theme),
+            icon = Icons.Outlined.Palette
+        )
 
         SectionCard {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -170,7 +177,10 @@ fun AppearanceTabContent(
         }
 
         // Accent Color
-        SectionTitle(stringResource(R.string.accent_color_presets))
+        SectionTitle(
+            text = stringResource(R.string.accent_color_presets),
+            icon = Icons.Outlined.ColorLens
+        )
 
         SectionCard {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -183,7 +193,10 @@ fun AppearanceTabContent(
         }
 
         // Language
-        SectionTitle(stringResource(R.string.app_language))
+        SectionTitle(
+            text = stringResource(R.string.app_language),
+            icon = Icons.Outlined.Language
+        )
 
         SettingsItemCard(
             onClick = { showTranslationInfoDialog = true },
@@ -246,20 +259,6 @@ fun AppearanceTabContent(
             onDismiss = { showLanguageDialog = false }
         )
     }
-}
-
-/**
- * Section title
- */
-@Composable
-fun SectionTitle(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleMedium,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onSurface,
-        modifier = Modifier.padding(top = 4.dp)
-    )
 }
 
 /**
