@@ -3,6 +3,7 @@ package app.revanced.manager.di
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
+import app.revanced.manager.domain.manager.AppIconManager
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.util.PM
@@ -16,4 +17,5 @@ val managerModule = module {
     singleOf(::ShizukuInstaller)
     singleOf(::InstallerManager)
     singleOf(::PatchOptionsPreferencesManager)
+    singleOf(::AppIconManager)
 }

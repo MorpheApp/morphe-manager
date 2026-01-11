@@ -35,6 +35,7 @@ val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha 
  *
  * @param onDismissRequest Called when user dismisses the dialog
  * @param title Optional title displayed at the top
+ * @param titleTrailingContent Optional content displayed after the title (e.g., reset button)
  * @param footer Optional footer content (typically buttons)
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
  * @param content Scrollable dialog content
@@ -43,6 +44,7 @@ val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha 
 fun MorpheDialog(
     onDismissRequest: () -> Unit,
     title: String? = null,
+    titleTrailingContent: (@Composable () -> Unit)? = null,
     footer: (@Composable () -> Unit)? = null,
     dismissOnClickOutside: Boolean = true,
     content: @Composable () -> Unit
@@ -102,6 +104,7 @@ fun MorpheDialog(
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     DialogContent(
                         title = title,
+                        titleTrailingContent = titleTrailingContent,
                         footer = footer,
                         isDarkTheme = isDarkTheme,
                         content = content
@@ -118,6 +121,7 @@ fun MorpheDialog(
 @Composable
 private fun DialogContent(
     title: String?,
+    titleTrailingContent: (@Composable () -> Unit)?,
     footer: (@Composable () -> Unit)?,
     isDarkTheme: Boolean,
     content: @Composable () -> Unit
@@ -150,16 +154,31 @@ private fun DialogContent(
         ) {
             // Title section
             if (title != null) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = textColor,
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
+                        .padding(bottom = 24.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = if (titleTrailingContent != null) TextAlign.Start else TextAlign.Center,
+                        color = textColor,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    if (titleTrailingContent != null) {
+                        CompositionLocalProvider(
+                            LocalDialogTextColor provides textColor,
+                            LocalDialogSecondaryTextColor provides secondaryTextColor
+                        ) {
+                            titleTrailingContent()
+                        }
+                    }
+                }
             }
 
             // Scrollable content

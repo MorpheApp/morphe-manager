@@ -47,6 +47,20 @@
             android:multiprocess="false"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
+        <!--
+            <activity
+                android:name="app.revanced.manager.MainActivity"
+                android:exported="true"
+                android:theme="@style/Theme.ReVancedManager">
+
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+        -->
+
+        <!-- Main Activity without launcher -->
         <activity
             android:name="app.revanced.manager.MainActivity"
             android:exported="true"
@@ -54,9 +68,95 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Default launcher icon -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Default"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Alternative launcher icons -->
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Light_2"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_light_2"
+            android:roundIcon="@mipmap/ic_launcher_light_2"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Light_3"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_light_3"
+            android:roundIcon="@mipmap/ic_launcher_light_3"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Dark_1"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_dark_1"
+            android:roundIcon="@mipmap/ic_launcher_dark_1"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Dark_2"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_dark_2"
+            android:roundIcon="@mipmap/ic_launcher_dark_2"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="app.revanced.manager.MainActivity_Dark_3"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_dark_3"
+            android:roundIcon="@mipmap/ic_launcher_dark_3"
+            android:label="@string/app_name"
+            android:targetActivity="app.revanced.manager.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
 <!--        <activity android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity" android:exported="false" android:theme="@style/Theme.WebViewActivity" />-->
 
