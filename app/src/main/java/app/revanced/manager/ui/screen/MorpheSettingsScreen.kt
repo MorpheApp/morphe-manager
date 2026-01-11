@@ -227,11 +227,6 @@ fun MorpheSettingsScreen(
                         patchOptionsViewModel = patchOptionsViewModel,
                         dashboardViewModel = dashboardViewModel,
                         prefs = prefs,
-                        installerManager = installerManager,
-                        advancedViewModel = advancedViewModel,
-                        onShowInstallerDialog = { target ->
-                            installerDialogTarget = target
-                        },
                         onBackToAdvanced = {
                             coroutineScope.launch {
                                 themeViewModel.prefs.useMorpheHomeScreen.update(false)
@@ -241,6 +236,11 @@ fun MorpheSettingsScreen(
                     )
 
                     SettingsTab.SYSTEM -> SystemTabContent(
+                        installerManager = installerManager,
+                        advancedViewModel = advancedViewModel,
+                        onShowInstallerDialog = { target ->
+                            installerDialogTarget = target
+                        },
                         importExportViewModel = importExportViewModel,
                         onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                         onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },

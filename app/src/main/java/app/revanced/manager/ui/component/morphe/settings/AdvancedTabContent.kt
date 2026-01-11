@@ -21,13 +21,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
-import app.revanced.manager.ui.component.morphe.shared.SectionCard
 import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
-import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
@@ -41,9 +38,6 @@ fun AdvancedTabContent(
     patchOptionsViewModel: PatchOptionsViewModel,
     dashboardViewModel: DashboardViewModel,
     prefs: PreferencesManager,
-    installerManager: InstallerManager,
-    advancedViewModel: AdvancedSettingsViewModel,
-    onShowInstallerDialog: (InstallerDialogTarget) -> Unit,
     onBackToAdvanced: () -> Unit
 ) {
     val context = LocalContext.current
@@ -106,17 +100,6 @@ fun AdvancedTabContent(
                         onCheckedChange = null
                     )
                 }
-            )
-        }
-
-        // Installers
-        SectionTitle(stringResource(R.string.installer))
-
-        SectionCard {
-            InstallerSection(
-                installerManager = installerManager,
-                advancedViewModel = advancedViewModel,
-                onShowInstallerDialog = onShowInstallerDialog
             )
         }
 

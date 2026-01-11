@@ -11,7 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.component.morphe.shared.SectionCard
+import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 
 /**
@@ -19,6 +21,9 @@ import app.revanced.manager.ui.viewmodel.ImportExportViewModel
  */
 @Composable
 fun SystemTabContent(
+    installerManager: InstallerManager,
+    advancedViewModel: AdvancedSettingsViewModel,
+    onShowInstallerDialog: (InstallerDialogTarget) -> Unit,
     importExportViewModel: ImportExportViewModel,
     onImportKeystore: () -> Unit,
     onExportKeystore: () -> Unit,
@@ -31,6 +36,18 @@ fun SystemTabContent(
             .padding(horizontal = 16.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
+        // Installers
+        SectionTitle(stringResource(R.string.installer))
+
+        SectionCard {
+            InstallerSection(
+                installerManager = installerManager,
+                advancedViewModel = advancedViewModel,
+                onShowInstallerDialog = onShowInstallerDialog
+            )
+        }
+
         // Import & Export
         SectionTitle(stringResource(R.string.import_export))
 
