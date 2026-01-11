@@ -1,27 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">Paket nadopuna</string>
+    <string name="morphe_home_greeting_1">Koji aplikacijom želite popraviti?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Gotovo da opet napravite YouTube legendarno?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Uvijete se, sada je vrijeme za ispravke</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Još jedan dan, još jedna blokirana reklama majstorstvo</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Ne želim promatrati reklame, niti ja.</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Pomožimo da se vaše aplikacije ponašaju</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">Danasna prognoza: 100% vjerojatnost popravki</string>
     <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">Gotovo za promjenu neuzdovoljavajućeg u fantastično?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Od danas spašavamo aplikacije od same sebe</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Pokrenuto kofeinom i dobrom humorom</string>
+    <string name="morphe_home_bundle_type_api">API paket</string>
+    <string name="morphe_home_update_error">Ažuriranje je neuspjelo</string>
+    <string name="morphe_home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
+    <string name="morphe_home_updating_patches">Ažuriranje popravaka…</string>
+    <string name="morphe_home_update_success">Ažuriranje je dovršeno</string>
+    <string name="morphe_home_patches_updated">Vaši ispravke su ažurirane</string>
+    <string name="morphe_home_patches_are_loading">Učitavaju se popravci, molim sačekajte…</string>
+    <string name="morphe_home_please_wait">Molim čekajte…</string>
+    <string name="morphe_home_open_in_browser">Otvori u pregledniku</string>
+    <string name="morphe_home_failed_to_open_url">Nije moguće otvoriti URL</string>
+    <string name="morphe_home_date_added">Dodano</string>
+    <string name="morphe_home_date_updated">Ažurirano</string>
+    <string name="morphe_home_check_updates">Provjeri</string>
+    <string name="morphe_home_unknown">Nepoznato</string>
+    <string name="morphe_home_timeline">Ažurirajte povijest</string>
     <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Imate li originalni nepotpisani APK?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Da patchati %1$s, trebate verziju %2$s (nepatcheno)</string>
+    <string name="morphe_home_apk_availability_yes">Da, imam ga</string>
+    <string name="morphe_home_apk_availability_no">Ne, pomozite mi pronaći to</string>
     <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Preuzmi originalni APK</string>
+    <string name="morphe_home_download_instructions_steps_title">Upute:</string>
+    <string name="morphe_home_download_instructions_step1">Pritisnite dugme \'%1$s\' ispod</string>
+    <string name="morphe_home_download_instructions_step2_part1">Prolazite stranicu prema dolje i pritisnite</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Pritisni \"download\" na stranici, a ne ovdje 😊</string>
+    <string name="morphe_home_download_instructions_step3">Čekajte da se preuzimanje završi, a &lt;b&gt;ne instalirajte&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Čekajte da se preuzimanje završi, zatim &lt;b&gt;instalirajte APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Nakon što se preuzimanje završi, ponovo pokrenite ovu aplikaciju</string>
+    <string name="morphe_home_download_instructions_step4_mount">Nakon instalacije originalnog APK-a, ponovno pokrenite ovu aplikaciju</string>
+    <string name="morphe_home_download_instructions_continue">Nastavi na APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Odaberite APK koji ste preuzeli</string>
+    <string name="morphe_home_file_picker_prompt_description">Sada odaberite %1$s APK datoteku koju ste nedavno preuzeli.</string>
+    <string name="morphe_home_file_picker_prompt_open">Otvorite APK datoteku koju sam preuzela</string>
+    <string name="morphe_home_recommended_version">Preporučenu verziju</string>
+    <string name="morphe_patcher_selected_version">Odabrana verzija</string>
     <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">Režim korijena zahtijeva da je originalni APK instaliran na vašem uređaju prije ispravljanja.</string>
+    <string name="morphe_root_gmscore_excluded">Podrška GmsCore je isključena u korijenskom načinu</string>
     <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_save_apk">Sačuvaj APK</string>
+    <string name="morphe_patcher_copy_error">Kopirajte grešku</string>
+    <string name="morphe_patcher_show_error">Prikaži pogrešku</string>
+    <string name="morphe_patcher_error_copied">Greška kopirana u međuspremnik</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d patcha</string>
+    <string name="morphe_patcher_long_step_warning">Ova operacija može potrajati neko vrijeme. Molimo sačekajte…</string>
+    <string name="morphe_patcher_installing">Instaliranje…</string>
+    <string name="morphe_patcher_installing_subtitle">Skoro spremno za rock! 🎸</string>
+    <string name="morphe_patcher_success_title">Sve je gotovo! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">Vaša aplikacija je ispravljena i instalirana!</string>
+    <string name="morphe_patcher_complete_title">Popravke dovršene! ✨</string>
+    <string name="morphe_patcher_failed_title">Ups! Nešto je pošlo po zlu</string>
+    <string name="morphe_patcher_failed_subtitle">Provjerite pojedinosti o pogrešci ispod</string>
+    <string name="morphe_patcher_failed_dialog_title">Prikazivanje je neuspjelo</string>
+    <string name="morphe_patcher_unknown_error">Došlo je do neočekivane greške</string>
+    <string name="morphe_patcher_mounting">Montaža...</string>
+    <string name="morphe_patcher_conflict_title">Konflikt paketa</string>
+    <string name="morphe_patcher_conflict_subtitle">Potrebno je deinstalirati postojeću verziju</string>
+    <string name="morphe_patcher_install_error_title">Greška pri instalaciji</string>
+    <string name="morphe_patcher_install_error_subtitle">Pokušajte deinstalirati i ponovo instalirati</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Pritisnite dugme ispod za instalaciju</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Pritisnite dugme ispod da se prikaže</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Nepodržana verzija</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Ova APK nije preporučena verzija aplikacije. Nastavak može rezultirati nefunkcionalnom aplikacijom.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Nastavi u svakom slučaju</string>
+    <string name="morphe_patcher_wrong_package_title">Pogrešan paket odabran</string>
+    <string name="morphe_patcher_wrong_package_description">Izabrani APK nije namijenjen za aplikaciju koju želite patchati.</string>
+    <string name="morphe_patcher_expected_package">Očekivan paket</string>
+    <string name="morphe_patcher_selected_package">Izabrani paket</string>
+    <string name="morphe_patcher_message_1">Pretvaranje vaše aplikacije u nešto sjajno… 🏆</string>
+    <string name="morphe_patcher_message_2">Učimo starim aplikacijama nove trikove… 🎩</string>
+    <string name="morphe_patcher_message_3">Dodajte digitalnoj popravci vašoj aplikaciji… 🔧</string>
+    <string name="morphe_patcher_message_4">Kuhanje digitalne magije… ☕</string>
+    <string name="morphe_patcher_message_5">Preporučeno odmor… ☕</string>
+    <string name="morphe_patcher_message_6">Pogledaj van, lijepo je tamo… 🌤️</string>
+    <string name="morphe_patcher_message_7">Podesavanje 1-ova i 0-ova… 🤖</string>
+    <string name="morphe_patcher_message_8">Razmotati digitalni špageti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Popravljam greške u nepatchiranom aplikaciji… 🐞</string>
+    <string name="morphe_patcher_message_10">Veličani ispuni su vrijedni za čekanje… ⏳</string>
+    <string name="morphe_patcher_message_11">Poliranje piksela do sjaja… 💎</string>
+    <string name="morphe_patcher_message_12">Molimo ostanite sjedili do kada kapetan isključi znak \"Patching in progress\"… 💺✈️</string>
+    <string name="morphe_patcher_message_13">Kuhate vašu ispravljenu aplikaciju, toplo i svježe… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Pregovarati polito s bajtkodom… 🤝</string>
     <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Svi sistemi nominalni… putanja je stabilna… 🚀</string>
+    <string name="morphe_patcher_message_16">Izguravaju dodatnu snagu, kao sok od digitalnog limuna… 🍋</string>
+    <string name="morphe_patcher_message_17">Pozivati aplikaciju da prihvati svoju novu, bolju verziju… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Promjena postavke nadgradnje aplikacije s neispravnog na ispravan… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">Vaša aplikacija ima groznicu, a jedini recept je više lokera… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Uklanjanje smetnji. Molimo ostanite na čekanju… 🗑️</string>
     <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_morphe">Vrati se na Morphe domovinu</string>
     <!-- Appearance Section -->
     <!-- Update Section -->
     <!-- Patch Options Section -->
