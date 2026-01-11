@@ -132,6 +132,7 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">Customize themes, colors, and backgrounds</string>
+    <string name="morphe_appearance_current_language">Current language</string>
     <string name="morphe_appearance_search">Search</string>
     <string name="morphe_appearance_no_results">No results found</string>
     <string name="morphe_appearance_translations_info_title">Translations for some languages may be missing or incomplete</string>

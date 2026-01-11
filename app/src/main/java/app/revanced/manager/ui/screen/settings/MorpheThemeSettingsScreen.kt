@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
-import app.revanced.manager.ui.component.GroupHeader
 import app.revanced.manager.ui.component.morphe.shared.LanguageOption
 import app.revanced.manager.ui.component.morphe.shared.LanguageRepository
 import app.revanced.manager.ui.component.morphe.shared.rememberSelectedLanguageLabel
@@ -135,7 +134,7 @@ fun MorpheThemeSettingsScreen(
 
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+                contentPadding = PaddingValues(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.theme),
@@ -183,7 +182,7 @@ fun MorpheThemeSettingsScreen(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .alpha(accentControlsAlpha),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+                contentPadding = PaddingValues(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.accent_color_presets),
@@ -284,10 +283,10 @@ fun MorpheThemeSettingsScreen(
 
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                contentPadding = PaddingValues(0.dp)
             ) {
                 ExpressiveSettingsItem(
-                    headlineContent = stringResource(R.string.app_language),
+                    headlineContent = stringResource(R.string.morphe_appearance_current_language),
                     supportingContent = rememberSelectedLanguageLabel(appLanguage),
                     onClick = { showLanguageDialog = true }
                 )
@@ -298,7 +297,6 @@ fun MorpheThemeSettingsScreen(
 }
 
 private data class ThemePresetSwatch(val preset: ThemePreset, @param:StringRes val labelRes: Int, val colors: List<Color>)
-
 
 @Composable
 private fun ThemeSwatchChip(
@@ -405,7 +403,7 @@ private fun LanguageDialog(
 private fun ExpressiveThemePreview(modifier: Modifier = Modifier) {
     ExpressiveSettingsCard(
         modifier = modifier,
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+        contentPadding = PaddingValues(16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),

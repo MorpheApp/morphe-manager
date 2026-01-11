@@ -157,7 +157,6 @@ fun SectionTitle(
     icon: ImageVector? = null
 ) {
     Row(
-        modifier = Modifier.padding(top = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
