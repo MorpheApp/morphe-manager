@@ -14,23 +14,19 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.manager.hideInstallerComponent
 import app.revanced.manager.domain.manager.showInstallerComponent
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.model.PatchSelectionActionKey
+import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
-import app.revanced.manager.util.simpleMessage
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import app.revanced.manager.ui.model.PatchSelectionActionKey
 
 class AdvancedSettingsViewModel(
     val prefs: PreferencesManager,
@@ -92,7 +88,8 @@ class AdvancedSettingsViewModel(
     }
 
     fun setPrimaryInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
-        if (token == InstallerManager.Token.AutoSaved) {
+        // Morphe: Only request root in Advanced Settings in Expert mode
+        if (token == InstallerManager.Token.AutoSaved && !prefs.useMorpheHomeScreen.get()) {
             // Request/verify root in background when user explicitly selects the rooted mount installer.
             runCatching { withContext(Dispatchers.IO) { rootInstaller.hasRootAccess() } }
         }
@@ -104,7 +101,8 @@ class AdvancedSettingsViewModel(
     }
 
     fun setFallbackInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
-        if (token == InstallerManager.Token.AutoSaved) {
+        // Morphe:  Only request root in Advanced Settings in Expert mode
+        if (token == InstallerManager.Token.AutoSaved && !prefs.useMorpheHomeScreen.get()) {
             runCatching { withContext(Dispatchers.IO) { rootInstaller.hasRootAccess() } }
         }
         val primary = installerManager.getPrimaryToken()

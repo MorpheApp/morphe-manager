@@ -9,9 +9,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 /**
  * Installer section
@@ -158,8 +161,10 @@ fun InstallerSelectionDialogContainer(
     target: InstallerDialogTarget,
     installerManager: InstallerManager,
     advancedViewModel: AdvancedSettingsViewModel,
+    rootInstaller: RootInstaller,
     onDismiss: () -> Unit
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val primaryPreference by advancedViewModel.prefs.installerPrimary.getAsState()
     val fallbackPreference by advancedViewModel.prefs.installerFallback.getAsState()
 
@@ -242,6 +247,16 @@ fun InstallerSelectionDialogContainer(
             primaryToken,
         onDismiss = onDismiss,
         onConfirm = { selection ->
+            // Request root access only when 'Rooted mount installer' is selected
+            if (selection == InstallerManager.Token.AutoSaved) {
+                coroutineScope.launch(Dispatchers.IO) {
+                    runCatching {
+                        rootInstaller.hasRootAccess()
+                    }
+                }
+            }
+
+            // Set the installer
             if (isPrimary) {
                 advancedViewModel.setPrimaryInstaller(selection)
             } else {

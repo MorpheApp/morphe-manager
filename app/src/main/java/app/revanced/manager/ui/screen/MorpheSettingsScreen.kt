@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
@@ -57,6 +58,7 @@ fun MorpheSettingsScreen(
     val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
     val installerManager: InstallerManager = koinInject()
+    val rootInstaller: RootInstaller = koinInject()
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
@@ -164,6 +166,7 @@ fun MorpheSettingsScreen(
             target = target,
             installerManager = installerManager,
             advancedViewModel = advancedViewModel,
+            rootInstaller = rootInstaller,
             onDismiss = { installerDialogTarget = null }
         )
     }
