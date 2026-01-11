@@ -93,11 +93,7 @@ class InstallerManager(
         return entries
     }
 
-    fun describeEntry(token: Token, target: InstallTarget): Entry? {
-        // Morphe
-        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
-        return entryFor(token, target, checkRoot = shouldCheckRoot)
-    }
+    fun describeEntry(token: Token, target: InstallTarget): Entry? = entryFor(token, target)
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
@@ -478,26 +474,31 @@ class InstallerManager(
         Token.AutoSaved -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
         } else if (checkRoot) {
-            // Morphe: Only check root access when explicitly requested
+            // Expert mode: check root access
             if (!rootInstaller.hasRootAccess()) {
                 Availability(false, R.string.installer_status_requires_root)
             } else {
                 Availability(true)
             }
         } else {
-            // Morphe: When checkRoot is false (Morphe mode), don't verify root - assume available
-            // In Expert mode, checkRoot should always be true for proper status display
-            Availability(true)
+            // Morphe mode: check if device is rooted without requesting access
+            // This prevents showing root installer on non-rooted devices
+            if (!rootInstaller.isDeviceRooted()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                // Device is rooted, but don't verify access yet (avoid prompt)
+                Availability(true)
+            }
         }
 
         Token.Shizuku -> {
             if (!shizukuInstaller.isInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
-                // Morphe: Only check Shizuku availability when explicitly requested
+                // Expert mode: check full Shizuku availability
                 shizukuInstaller.availability(target)
             } else {
-                // Morphe: When checkRoot is false, just check if installed
+                // Morphe mode: just verify Shizuku is installed
                 Availability(true)
             }
         }
