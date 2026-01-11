@@ -47,9 +47,13 @@ class InstallerManager(
         val hiddenPackages = hiddenInstallerPackages
         val entries = mutableListOf<Entry>()
 
+        // Morphe: In Morphe mode use checkRoot = false to avoid root prompts during listing.
+        // In Expert mode, check root for accurate status.
+        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
+
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = true)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = true)?.let(entries::add)
+        entryFor(Token.AutoSaved, target, checkRoot = shouldCheckRoot)?.let(entries::add)
+        entryFor(Token.Shizuku, target, checkRoot = shouldCheckRoot)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -89,7 +93,11 @@ class InstallerManager(
         return entries
     }
 
-    fun describeEntry(token: Token, target: InstallTarget): Entry? = entryFor(token, target)
+    fun describeEntry(token: Token, target: InstallTarget): Entry? {
+        // Morphe
+        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
+        return entryFor(token, target, checkRoot = shouldCheckRoot)
+    }
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
@@ -469,15 +477,28 @@ class InstallerManager(
 
         Token.AutoSaved -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
-        } else if (checkRoot && !rootInstaller.hasRootAccess()) {
-            Availability(false, R.string.installer_status_requires_root)
-        } else Availability(true)
+        } else if (checkRoot) {
+            // Morphe: Only check root access when explicitly requested
+            if (!rootInstaller.hasRootAccess()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                Availability(true)
+            }
+        } else {
+            // Morphe: When checkRoot is false (Morphe mode), don't verify root - assume available
+            // In Expert mode, checkRoot should always be true for proper status display
+            Availability(true)
+        }
 
         Token.Shizuku -> {
             if (!shizukuInstaller.isInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
-            } else {
+            } else if (checkRoot) {
+                // Morphe: Only check Shizuku availability when explicitly requested
                 shizukuInstaller.availability(target)
+            } else {
+                // Morphe: When checkRoot is false, just check if installed
+                Availability(true)
             }
         }
 
