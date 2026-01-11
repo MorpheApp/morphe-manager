@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.component.morphe.settings
+package app.revanced.manager.ui.component.morphe.shared
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
@@ -20,9 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheCard
-import app.revanced.manager.ui.component.morphe.shared.MorpheClickableCard
 
 /**
  * Expandable section with animated header and content
@@ -43,19 +40,15 @@ fun ExpandableSection(
         label = "rotation"
     )
 
-    MorpheCard(
-        modifier = modifier,
-        cornerRadius = 12.dp,
-        alpha = 0.33f
-    ) {
+    MorpheCard(modifier = modifier) {
         Column {
             // Header
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(18.dp))
                     .clickable { onExpandChange(!expanded) }
-                    .padding(12.dp),
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -69,6 +62,7 @@ fun ExpandableSection(
                 Icon(
                     imageVector = Icons.Outlined.ExpandMore,
                     contentDescription = if (expanded) "Collapse" else "Expand",
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.rotate(rotationAngle)
                 )
             }
@@ -84,7 +78,7 @@ fun ExpandableSection(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     content()
@@ -104,19 +98,19 @@ fun SettingsItem(
     title: String,
     description: String? = null,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false
 ) {
-    MorpheClickableCard(
+    SettingsItemCard(
         onClick = onClick,
-        cornerRadius = 8.dp,
-        alpha = 0.33f,
+        borderWidth = if (showBorder) 1.dp else 0.dp,
         modifier = modifier
     ) {
         IconTextRow(
             icon = icon,
             title = title,
             description = description,
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(16.dp),
             trailingContent = {
                 Icon(
                     imageVector = Icons.Outlined.ChevronRight,
