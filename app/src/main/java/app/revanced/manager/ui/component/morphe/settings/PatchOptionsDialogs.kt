@@ -288,10 +288,9 @@ private fun ThemePresetItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    MorpheClickableCard(
+    MorpheCard(
         onClick = onClick,
-        cornerRadius = 8.dp,
-        alpha = if (isSelected) 0.1f else 0.05f
+        cornerRadius = 8.dp
     ) {
         Row(
             modifier = Modifier
@@ -315,8 +314,7 @@ private fun ThemePresetItem(
                 Icon(
                     imageVector = Icons.Outlined.Check,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -330,10 +328,9 @@ private fun CustomColorItem(
     isCustomSelected: Boolean,
     onClick: () -> Unit
 ) {
-    MorpheClickableCard(
+    MorpheCard(
         onClick = onClick,
-        cornerRadius = 8.dp,
-        alpha = if (isCustomSelected) 0.1f else 0.05f
+        cornerRadius = 8.dp
     ) {
         Row(
             modifier = Modifier
@@ -373,8 +370,7 @@ private fun CustomColorItem(
             Icon(
                 imageVector = Icons.Outlined.ChevronRight,
                 contentDescription = null,
-                tint = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                modifier = Modifier.size(20.dp)
+                tint = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -462,7 +458,7 @@ fun CustomBrandingDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // App Name field
             if (appNameOption != null) {
@@ -578,6 +574,8 @@ fun CustomBrandingDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 iconOption.description.let { description ->
@@ -710,7 +708,7 @@ fun CustomHeaderDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (customOption != null) {
                 OutlinedTextField(
@@ -779,6 +777,8 @@ fun CustomHeaderDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 customOption.description.let { description ->
