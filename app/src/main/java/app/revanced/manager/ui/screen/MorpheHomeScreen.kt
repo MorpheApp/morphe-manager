@@ -64,13 +64,10 @@ fun MorpheHomeScreen(
     themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     // Collect state flows
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
-    val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     // Install type is needed for UI components.
@@ -92,23 +89,6 @@ fun MorpheHomeScreen(
     var showUpdateDetailsDialog by remember { mutableStateOf(false) }
 
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
-
-    suspend fun updateMorpheBundleAndUI() {
-        bundleUpdateInProgress = true
-        homeState.isRefreshingBundle = true
-        try {
-            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
-                force = false,
-                showToast = false,
-                showProgress = true
-            )
-        } finally {
-            delay(500)
-            bundleUpdateInProgress = false
-            homeState.isRefreshingBundle = false
-            homeState.updateBundleData(sources, bundleInfo)
-        }
-    }
 
     // Show manager update available dialog
     if (homeState.shouldShowUpdateDialog) {
@@ -234,7 +214,7 @@ fun MorpheHomeScreen(
 
                     // Bundles FAB
                     MorpheFloatingButtons(
-                        onClick = { homeState.showBundlesSheet = true },
+                        onClick = { homeState.showBundleManagementSheet = true },
                         icon = Icons.Outlined.Source,
                         contentDescription = stringResource(R.string.morphe_home_bundles),
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,

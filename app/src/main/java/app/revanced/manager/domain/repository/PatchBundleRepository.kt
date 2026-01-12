@@ -1202,7 +1202,8 @@ class PatchBundleRepository(
 
     suspend fun updateOnlyMorpheBundle(
         force: Boolean = false,
-        showToast: Boolean = false
+        showToast: Boolean = false,
+        showProgress: Boolean = false
     ) {
         store.dispatch(
             Update(
