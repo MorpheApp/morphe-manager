@@ -401,7 +401,7 @@ class PatchBundleRepository(
         val info = loadMetadata(sources).toMutableMap()
 
         val officialSource = sources[0]
-        val officialDisplayName = "Official Morphe Patches"
+        val officialDisplayName = "Morphe Patches"
         if (officialSource != null) {
             val storedCustomName = prefs.officialBundleCustomDisplayName.get().takeIf { it.isNotBlank() }
             val currentName = officialSource.displayName
@@ -642,7 +642,7 @@ class PatchBundleRepository(
         val existingProps = dao.getProps(resolvedUid)
         val normalizedDisplayName = displayName?.takeUnless { it.isBlank() }
             ?: existingProps?.displayName?.takeUnless { it.isBlank() }
-            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Official Morphe Patches" else null
+            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Morphe Patches" else null
         val normalizedName = if (resolvedUid == DEFAULT_SOURCE_UID) {
             name
         } else {
@@ -1202,8 +1202,7 @@ class PatchBundleRepository(
 
     suspend fun updateOnlyMorpheBundle(
         force: Boolean = false,
-        showToast: Boolean = false,
-        showProgress: Boolean = false
+        showToast: Boolean = false
     ) {
         store.dispatch(
             Update(
@@ -1219,7 +1218,6 @@ class PatchBundleRepository(
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        val useMorpheHomeScreen = prefs.useMorpheHomeScreen.getBlocking()
         store.dispatch(Update { it.autoUpdate })
         checkManualUpdates()
     }
