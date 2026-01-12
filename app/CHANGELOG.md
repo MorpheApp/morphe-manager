@@ -1,3 +1,10 @@
+# app [1.3.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.2.1...v1.3.0-dev.1) (2026-01-12)
+
+
+### Features
+
+* Add additional app icons ([#95](https://github.com/MorpheApp/morphe-manager/issues/95)) ([1e3c058](https://github.com/MorpheApp/morphe-manager/commit/1e3c0581431af08c9de6075855c5554c6b716649))
+
 ## app [1.2.1](https://github.com/MorpheApp/morphe-manager/compare/v1.2.0...v1.2.1) (2026-01-11)
 
 

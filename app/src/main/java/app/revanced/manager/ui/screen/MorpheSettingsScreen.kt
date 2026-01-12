@@ -1,53 +1,66 @@
 package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.*
-import app.revanced.manager.ui.component.morphe.shared.AdaptiveLayout
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.shared.rememberWindowSize
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.toast
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 /**
- * MorpheSettingsScreen - Simplified settings interface
- * Provides theme customization, updates, import/export, and about sections
- * Adapts layout for landscape orientation
+ * Settings tabs for bottom navigation
+ */
+private enum class SettingsTab(
+    val titleRes: Int,
+    val icon: ImageVector
+) {
+    APPEARANCE(R.string.appearance, Icons.Outlined.Palette),
+    ADVANCED(R.string.advanced, Icons.Outlined.Tune),
+    SYSTEM(R.string.system, Icons.Outlined.Settings)
+}
+
+/**
+ * Settings screen with bottom navigation and swipeable tabs
  */
 @SuppressLint("BatteryLight")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MorpheSettingsScreen(
     onBackClick: () -> Unit,
@@ -55,13 +68,18 @@ fun MorpheSettingsScreen(
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     dashboardViewModel: DashboardViewModel = koinViewModel(),
-    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel()
+    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
+    advancedViewModel: AdvancedSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val coroutineScope = rememberCoroutineScope()
-    val windowSize = rememberWindowSize()
     val prefs: PreferencesManager = koinInject()
+    val installerManager: InstallerManager = koinInject()
+    val rootInstaller: RootInstaller = koinInject()
+
+    // Pager state for swipeable tabs
+    val pagerState = rememberPagerState(pageCount = { SettingsTab.entries.size })
+    val currentTab = SettingsTab.entries[pagerState.currentPage]
 
     // Appearance settings
     val theme by themeViewModel.prefs.theme.getAsState()
@@ -82,6 +100,7 @@ fun MorpheSettingsScreen(
     var selectedPluginState by remember { mutableStateOf<DownloaderPluginState?>(null) }
     var showExceptionViewer by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
+    var installerDialogTarget by rememberSaveable { mutableStateOf<InstallerDialogTarget?>(null) }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -162,79 +181,81 @@ fun MorpheSettingsScreen(
         )
     }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
-    ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            // Animated background
-            AnimatedBackground(type = backgroundType)
+    // Installer selection dialog
+    installerDialogTarget?.let { target ->
+        InstallerSelectionDialogContainer(
+            target = target,
+            installerManager = installerManager,
+            advancedViewModel = advancedViewModel,
+            rootInstaller = rootInstaller,
+            onDismiss = { installerDialogTarget = null }
+        )
+    }
 
-            // Use adaptive layout system
-            AdaptiveLayout(
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Animated background
+        AnimatedBackground(type = backgroundType)
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
+        ) {
+            // Content area
+            HorizontalPager(
+                state = pagerState,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                windowSize = windowSize,
-                leftContent = {
-                    // Appearance Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Palette,
-                        title = stringResource(R.string.appearance)
-                    )
-                    AppearanceSection(
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) { page ->
+                when (SettingsTab.entries[page]) {
+                    SettingsTab.APPEARANCE -> AppearanceTabContent(
                         theme = theme,
                         pureBlackTheme = pureBlackTheme,
                         dynamicColor = dynamicColor,
                         customAccentColorHex = customAccentColorHex,
                         backgroundType = backgroundType,
+                        themeViewModel = themeViewModel
+                    )
+
+                    SettingsTab.ADVANCED -> AdvancedTabContent(
+                        usePrereleases = usePrereleases,
+                        patchOptionsViewModel = patchOptionsViewModel,
+                        dashboardViewModel = dashboardViewModel,
+                        prefs = prefs,
                         onBackToAdvanced = {
                             coroutineScope.launch {
                                 themeViewModel.prefs.useMorpheHomeScreen.update(false)
                             }
                             onBackClick()
-                        },
-                        viewModel = themeViewModel
-                    )
-
-                    // Updates Section
-                    UpdatesSection(
-                        usePrereleases = usePrereleases,
-                        onPreReleaseChanged = { newValue ->
-                            coroutineScope.launch {
-                                prefs.usePatchesPrereleases.update(newValue)
-                                prefs.useManagerPrereleases.update(newValue)
-                                prefs.managerAutoUpdates.update(newValue)
-                                // Update patches bundle and clear changelog cache
-                                dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                                // Check for manager updates
-                                dashboardViewModel.checkForManagerUpdates()
-                                patchOptionsViewModel.refresh()
-                            }
                         }
                     )
 
-                    // Patch Options Section
-                    SettingsSectionHeader(
-                        icon = Icons.Outlined.Tune,
-                        title = stringResource(R.string.morphe_patch_options)
-                    )
-                    PatchOptionsSection(
-                        patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-                        viewModel = patchOptionsViewModel
-                    )
-                },
-                rightContent = {
-                    // Import & Export Section
-                    ImportExportSection(
+                    SettingsTab.SYSTEM -> SystemTabContent(
+                        installerManager = installerManager,
+                        advancedViewModel = advancedViewModel,
+                        onShowInstallerDialog = { target ->
+                            installerDialogTarget = target
+                        },
                         importExportViewModel = importExportViewModel,
                         onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                        onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") }
-                    )
-
-                    // About Section
-                    AboutSection(
+                        onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                         onAboutClick = { showAboutDialog = true }
                     )
+                }
+            }
+
+            // Bottom Navigation
+            MorpheBottomNavigation(
+                currentTab = currentTab,
+                onTabSelected = { tab ->
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(tab.ordinal)
+                    }
                 }
             )
         }
@@ -242,342 +263,101 @@ fun MorpheSettingsScreen(
 }
 
 /**
- * Updates section
- * Contains unified prereleases toggle with automatic checks
+ * Bottom navigation bar
  */
 @Composable
-private fun UpdatesSection(
-    usePrereleases: State<Boolean>,
-    onPreReleaseChanged: (preReleaseNewValue: Boolean) -> Unit
+private fun MorpheBottomNavigation(
+    currentTab: SettingsTab,
+    onTabSelected: (SettingsTab) -> Unit
 ) {
-
-    SettingsSectionHeader(
-        icon = Icons.Outlined.Update,
-        title = stringResource(R.string.updates)
-    )
-
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable {
-                        onPreReleaseChanged(!usePrereleases.value)
-                    },
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Science,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.morphe_update_use_prereleases),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_update_use_prereleases_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Switch(
-                        checked = usePrereleases.value,
-                        onCheckedChange = { newValue ->
-                            onPreReleaseChanged(newValue)
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
-
-/**
- * Plugins section
- * Lists installed downloader plugins
- */
-@Composable
-private fun PluginsSection(
-    pluginStates: Map<String, DownloaderPluginState>,
-    onPluginClick: (String) -> Unit
-) {
-    SettingsSectionHeader(
-        icon = Icons.Filled.Download,
-        title = stringResource(R.string.downloader_plugins)
-    )
-
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            if (pluginStates.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.downloader_no_plugins_installed),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding(),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+        tonalElevation = 3.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            SettingsTab.entries.forEach { tab ->
+                NavigationItem(
+                    tab = tab,
+                    isSelected = currentTab == tab,
+                    onClick = { onTabSelected(tab) }
                 )
-            } else {
-                pluginStates.forEach { (packageName, state) ->
-                    PluginItem(
-                        packageName = packageName,
-                        state = state,
-                        onClick = { onPluginClick(packageName) },
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    )
-                }
             }
         }
     }
 }
 
 /**
- * Import & Export section
- * Contains keystore import/export options
+ * Individual navigation item
  */
 @Composable
-private fun ImportExportSection(
-    importExportViewModel: ImportExportViewModel,
-    onImportKeystore: () -> Unit,
-    onExportKeystore: () -> Unit
+private fun NavigationItem(
+    tab: SettingsTab,
+    isSelected: Boolean,
+    onClick: () -> Unit
 ) {
-    val context = LocalContext.current
-
-    SettingsSectionHeader(
-        icon = Icons.Outlined.Build,
-        title = stringResource(R.string.import_export)
-    )
-
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            // Keystore Import
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable(onClick = onImportKeystore),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        Icons.Outlined.Key,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.import_keystore),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.import_keystore_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Icon(
-                        Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Keystore Export
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable {
-                        if (!importExportViewModel.canExport()) {
-                            context.toast(context.getString(R.string.export_keystore_unavailable))
-                        } else {
-                            onExportKeystore()
-                        }
-                    },
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        Icons.Outlined.Upload,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.export_keystore),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.export_keystore_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Icon(
-                        Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
+    val containerColor = if (isSelected) {
+        MaterialTheme.colorScheme.primaryContainer
+    } else {
+        MaterialTheme.colorScheme.surface
     }
-}
 
-/**
- * About section
- * Contains app info and website sharing
- */
-@Composable
-private fun AboutSection(
-    onAboutClick: () -> Unit
-) {
-    val context = LocalContext.current
+    val contentColor = if (isSelected) {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
 
-    SettingsSectionHeader(
-        icon = Icons.Outlined.Info,
-        title = stringResource(R.string.about)
-    )
-
-    SettingsCard {
-        Column(modifier = Modifier.padding(16.dp)) {
-            // About item
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable(onClick = onAboutClick),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    val icon = rememberDrawablePainter(
-                        drawable = remember {
-                            AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-                        }
-                    )
-                    Image(
-                        painter = icon,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.app_name),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = "Version ${BuildConfig.VERSION_NAME}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Icon(
-                        Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+    Surface(
+        onClick = onClick,
+        modifier = Modifier
+            .height(48.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .then(
+                if (isSelected) {
+                    Modifier.widthIn(min = 64.dp, max = 140.dp)
+                } else {
+                    Modifier.width(64.dp)
                 }
-            }
+            ),
+        color = containerColor,
+        shape = RoundedCornerShape(24.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = tab.icon,
+                contentDescription = null,
+                tint = contentColor,
+                modifier = Modifier.size(24.dp)
+            )
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Share Website
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable {
-                        // Share website functionality
-                        try {
-                            val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, "https://morphe.software")
-                            }
-                            context.startActivity(
-                                Intent.createChooser(
-                                    shareIntent,
-                                    context.getString(R.string.morphe_share_website)
-                                )
-                            )
-                        } catch (e: Exception) {
-                            context.toast("Failed to share website: ${e.message}")
-                        }
-                    },
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+            AnimatedVisibility(
+                visible = isSelected,
+                enter = fadeIn() + expandHorizontally(),
+                exit = fadeOut() + shrinkHorizontally()
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        Icons.Outlined.Language,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.morphe_share_website),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_share_website_description),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    Icon(
-                        Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                Row {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(tab.titleRes),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = contentColor,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }

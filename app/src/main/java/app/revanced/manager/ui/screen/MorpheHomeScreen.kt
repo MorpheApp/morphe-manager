@@ -217,25 +217,30 @@ fun MorpheHomeScreen(
                     contentDescription = stringResource(R.string.settings)
                 )
 
-                // Update FAB
-                if (hasManagerUpdate) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Update FAB
+                    if (hasManagerUpdate) {
+                        MorpheFloatingButtons(
+                            onClick = { showUpdateDetailsDialog = true },
+                            icon = Icons.Outlined.Update,
+                            contentDescription = stringResource(R.string.update),
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                    }
+
+                    // Bundles FAB
                     MorpheFloatingButtons(
-                        onClick = { showUpdateDetailsDialog = true },
-                        icon = Icons.Outlined.Update,
-                        contentDescription = stringResource(R.string.update),
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        onClick = { homeState.showBundlesSheet = true },
+                        icon = Icons.Outlined.Source,
+                        contentDescription = stringResource(R.string.morphe_home_bundles),
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                 }
-
-                // Bundles FAB
-                MorpheFloatingButtons(
-                    onClick = { homeState.showBundleManagementSheet = true },
-                    icon = Icons.Outlined.Source,
-                    contentDescription = stringResource(R.string.morphe_home_bundles),
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                )
             }
 
             // Bundle update snackbar

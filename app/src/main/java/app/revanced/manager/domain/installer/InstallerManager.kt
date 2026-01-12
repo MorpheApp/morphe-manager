@@ -47,9 +47,13 @@ class InstallerManager(
         val hiddenPackages = hiddenInstallerPackages
         val entries = mutableListOf<Entry>()
 
+        // Morphe: In Morphe mode use checkRoot = false to avoid root prompts during listing.
+        // In Expert mode, check root for accurate status.
+        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
+
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = true)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = true)?.let(entries::add)
+        entryFor(Token.AutoSaved, target, checkRoot = shouldCheckRoot)?.let(entries::add)
+        entryFor(Token.Shizuku, target, checkRoot = shouldCheckRoot)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -469,15 +473,33 @@ class InstallerManager(
 
         Token.AutoSaved -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
-        } else if (checkRoot && !rootInstaller.hasRootAccess()) {
-            Availability(false, R.string.installer_status_requires_root)
-        } else Availability(true)
+        } else if (checkRoot) {
+            // Expert mode: check root access
+            if (!rootInstaller.hasRootAccess()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                Availability(true)
+            }
+        } else {
+            // Morphe mode: check if device is rooted without requesting access
+            // This prevents showing root installer on non-rooted devices
+            if (!rootInstaller.isDeviceRooted()) {
+                Availability(false, R.string.installer_status_requires_root)
+            } else {
+                // Device is rooted, but don't verify access yet (avoid prompt)
+                Availability(true)
+            }
+        }
 
         Token.Shizuku -> {
             if (!shizukuInstaller.isInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
-            } else {
+            } else if (checkRoot) {
+                // Expert mode: check full Shizuku availability
                 shizukuInstaller.availability(target)
+            } else {
+                // Morphe mode: just verify Shizuku is installed
+                Availability(true)
             }
         }
 
