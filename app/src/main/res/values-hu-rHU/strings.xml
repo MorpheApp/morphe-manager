@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Megjelenési lehetőségek</string>
     <string name="morphe_appearance_options_description">Témák, színek, és hátterek személyreszabása</string>
-    <string name="morphe_appearance_app_language">Alkalmazás nyelve</string>
     <string name="morphe_appearance_search">Keresés</string>
     <string name="morphe_appearance_no_results">Nincs találat</string>
     <string name="morphe_appearance_translations_info_title">Néhány nyelv fordításai hiányosak vagy nem teljesek</string>
@@ -625,13 +624,9 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Beállítások exportálásába belefoglalás</string>
     <string name="include_github_pat_in_exports_supporting">Hozzáadja ezt a PAT-ot az exportált kezelői beállításokhoz</string>
     <string name="include_github_pat_in_exports_warning">Ne ossza meg a PAT-ot. Ha belefoglalja egy beállítások exportálásába, tartsa privátnak a fájlt, mert tartalmazza a tokent.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Alkalmazás nyelve</string>
+    <string name="language_dialog_title">Válassza ki az alkalmazás nyelvét</string>
+    <string name="language_option_system">A készülék nyelvének használata</string>
     <string name="device_memory_limit_format">%1$d MB (Normál) - %2$d MB (Nagy)</string>
     <string name="patches_force_download">Az összes javítási köteg letöltésének kényszerítése</string>
     <string name="patches_reset">Patch kötegek visszaállítása</string>

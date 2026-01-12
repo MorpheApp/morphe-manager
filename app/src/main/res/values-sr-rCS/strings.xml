@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opcije izgleda</string>
     <string name="morphe_appearance_options_description">Prilagođaj teme, boje i pozadinske likove</string>
-    <string name="morphe_appearance_app_language">Jezik aplikacije</string>
     <string name="morphe_appearance_search">Pretraga</string>
     <string name="morphe_appearance_no_results">Nisu pronađeni rezultati</string>
     <string name="morphe_appearance_translations_info_title">Prevodima za neke jezike mogu nedostajati ili biti nepopuni</string>
@@ -625,13 +624,9 @@ Potpis (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Uključi u izvoz postavki</string>
     <string name="include_github_pat_in_exports_supporting">Dodaje ovaj PAT izvezenim postavkama menadžera</string>
     <string name="include_github_pat_in_exports_warning">Nemojte deliti svoj PAT. Ako ga uključite u izvoz postavki, čuvajte tu datoteku privatnom jer ona sadrži token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Jezik aplikacije</string>
+    <string name="language_dialog_title">Izaberi jezik aplikacije</string>
+    <string name="language_option_system">Koristi jezik uređaja</string>
     <string name="device_memory_limit_format">%1$dMB (Normalno) - %2$dMB (Veliko)</string>
     <string name="patches_force_download">Prisilno preuzmi sve zakrpe</string>
     <string name="patches_reset">Vrati zakrpe</string>

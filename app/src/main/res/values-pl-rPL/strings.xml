@@ -126,10 +126,9 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opcje wyglądu</string>
     <string name="morphe_appearance_options_description">Dostosuj motywy, kolory i tła</string>
-    <string name="morphe_appearance_app_language">Język aplikacji</string>
     <string name="morphe_appearance_search">Szukaj</string>
     <string name="morphe_appearance_no_results">Nie znaleziono wyników</string>
-    <string name="morphe_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być brakujące lub niekompletne</string>
+    <string name="morphe_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą nie istnieć lub być niekompletne</string>
     <string name="morphe_appearance_translations_info_text">Aby przetłumaczyć nowe języki lub poprawić istniejącie tłumaczenia, odwiedź %s</string>
     <string name="morphe_background_type">Animacja tła</string>
     <string name="morphe_background_type_circles">Okręgi</string>
@@ -625,13 +624,9 @@ Podpis (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Uwzględnij w eksporcie ustawień</string>
     <string name="include_github_pat_in_exports_supporting">Dodaj ten PAT do eksportowanych ustawień menedżera</string>
     <string name="include_github_pat_in_exports_warning">Nie udostępniaj swojego PAT. Jeśli uwzględniasz go w eksporcie ustawień, przechowuj ten plik prywatnie, ponieważ zawiera token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Język aplikacji</string>
+    <string name="language_dialog_title">Wybierz język aplikacji</string>
+    <string name="language_option_system">Użyj języka urządzenia</string>
     <string name="device_memory_limit_format">%1$d MB (normalny) - %2$d MB (duży)</string>
     <string name="patches_force_download">Wymuś pobranie wszystkich pakietów modyfikacji</string>
     <string name="patches_reset">Zresetuj pakiety modyfikacji</string>

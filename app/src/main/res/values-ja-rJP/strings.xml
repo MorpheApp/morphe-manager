@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外観設定</string>
     <string name="morphe_appearance_options_description">テーマ、カラー、背景をカスタマイズ</string>
-    <string name="morphe_appearance_app_language">アプリの言語</string>
     <string name="morphe_appearance_search">検索</string>
     <string name="morphe_appearance_no_results">検索結果は見つかりませんでした</string>
     <string name="morphe_appearance_translations_info_title">一部の言語では、翻訳が存在しない、または不完全である可能性があります</string>
@@ -625,13 +624,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">エクスポートに含める</string>
     <string name="include_github_pat_in_exports_supporting">PAT をマネージャー設定のエクスポートに追加します</string>
     <string name="include_github_pat_in_exports_warning">PAT は共有しないでください。エクスポートに PAT を含める場合、ファイル内にトークンが保存されるため、そのファイルは公開しないでください。</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">アプリの言語</string>
+    <string name="language_dialog_title">アプリの言語を選択</string>
+    <string name="language_option_system">デバイスの言語を使用</string>
     <string name="device_memory_limit_format">%1$dMB（標準） - %2$dMB（大）</string>
     <string name="patches_force_download">すべてのパッチソースを強制的にダウンロード</string>
     <string name="patches_reset">パッチソースをリセット</string>

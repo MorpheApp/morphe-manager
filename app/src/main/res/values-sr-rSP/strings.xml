@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Подешавања изгледа</string>
     <string name="morphe_appearance_options_description">Прилагодите теме, боје и позадине</string>
-    <string name="morphe_appearance_app_language">Језик апликације</string>
     <string name="morphe_appearance_search">Претрага</string>
     <string name="morphe_appearance_no_results">Нису пронађени резултати</string>
     <string name="morphe_appearance_translations_info_title">Може да не понделе или да нису комплетне преводе за неке језике</string>
@@ -623,13 +622,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Укључи у извоз подешавања</string>
     <string name="include_github_pat_in_exports_supporting">Додаје овај ПАТ у извезене поставке менаџера</string>
     <string name="include_github_pat_in_exports_warning">Немојте делити свој ПАТ. Ако га укључите у извоз подешавања, чувајте ту датотеку приватном јер садржи токен.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Језик апликације</string>
+    <string name="language_dialog_title">Изабери језик апликације</string>
+    <string name="language_option_system">Користи језик уређаја</string>
     <string name="device_memory_limit_format">%1$dMB (Нормално) - %2$dMB (Велико)</string>
     <string name="patches_force_download">Принудно преузимање свих пакета закрпа</string>
     <string name="patches_reset">Ресетовање пакета закрпа</string>

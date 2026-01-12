@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Cài đặt giao diện</string>
     <string name="morphe_appearance_options_description">Tùy chỉnh chủ đề, màu sắc và hình nền</string>
-    <string name="morphe_appearance_app_language">Ngôn ngữ ứng dụng</string>
     <string name="morphe_appearance_search">Tìm kiếm</string>
     <string name="morphe_appearance_no_results">Không tìm thấy kết quả nào</string>
     <string name="morphe_appearance_translations_info_title">Có thể bị thiếu một số ngôn ngữ hoặc chưa hoàn thiện</string>
@@ -445,7 +444,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="patch_selection_select_all_empty_toast">Không có bản vá nào để chọn</string>
     <string name="patch_selection_selected_bundle_toast">Đã chọn tất cả bản vá trong %s</string>
     <string name="patch_selection_select_bundle_empty_toast">Không có bản vá nào để chọn trong %s</string>
-    <string name="patch_selection_all_actions_hidden_toast">Tất cả nút thao tác đã bị ẩn, hãy bật tối thiểu một nút trong cài đặt</string>
+    <string name="patch_selection_all_actions_hidden_toast">Tất cả nút thao tác đang ẩn, hãy bật tối thiểu một nút trong cài đặt</string>
     <string name="patch_selection_reset_bundle_toast">Đặt về mặc định cho %s</string>
     <string name="patch_selection_button_label_all">Bỏ chọn tất cả</string>
     <string name="patch_selection_button_label_bundle">Bỏ chọn gói</string>
@@ -606,13 +605,9 @@ Kích thước hình ảnh yêu cầu:
     <string name="include_github_pat_in_exports_label">Bao gồm trong xuất cài đặt</string>
     <string name="include_github_pat_in_exports_supporting">Thêm PAT này vào cài đặt trình quản lý đã xuất</string>
     <string name="include_github_pat_in_exports_warning">Không chia sẻ PAT của bạn. Nếu bạn bao gồm nó trong một bản xuất cài đặt, hãy giữ tệp đó ở chế độ riêng tư vì nó chứa mã thông báo.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Ngôn ngữ ứng dụng</string>
+    <string name="language_dialog_title">Chọn ngôn ngữ ứng dụng</string>
+    <string name="language_option_system">Sử dụng ngôn ngữ của thiết bị</string>
     <string name="device_memory_limit_format">%1$dMB (Thường) - %2$dMB (Lớn)</string>
     <string name="patches_force_download">Tải toàn bộ gói vá</string>
     <string name="patches_reset">Đặt lại gói vá</string>

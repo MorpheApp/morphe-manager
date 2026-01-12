@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Опции за външен вид</string>
     <string name="morphe_appearance_options_description">Настройте темите, цветовете и фона</string>
-    <string name="morphe_appearance_app_language">Език на приложението</string>
     <string name="morphe_appearance_search">Търсене</string>
     <string name="morphe_appearance_no_results">Не са открити резултати</string>
     <string name="morphe_appearance_translations_info_title">Преводи за някои езици може да липсват или да са некомплетни</string>
@@ -605,13 +604,6 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Not set</string>
     <string name="include_github_pat_in_exports_supporting">Missing</string>
     <string name="include_github_pat_in_exports_warning">Error</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
     <string name="device_memory_limit_format">New downloader plugins available. Click here to configure them.</string>
     <string name="patches_force_download">Patching on this device architecture is unsupported and will most likely fail.</string>
     <string name="patches_reset">Import</string>

@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">আকৃতি ও রঙের বিকল্প</string>
     <string name="morphe_appearance_options_description">\"Personalize themes, colors, and backgrounds\"</string>
-    <string name="morphe_appearance_app_language">অ্যাপ্লিকেশনের ভাষা</string>
     <string name="morphe_appearance_search">অনুসন্ধান</string>
     <string name="morphe_appearance_no_results">কোন ফলাফল পাওয়া যায়নি</string>
     <string name="morphe_appearance_translations_info_title">কয়েকটি ভাষার অনুবাদ অনুপস্থিত বা অসম্পূর্ণ হতে পারে</string>
@@ -625,13 +624,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">সেটিংস রপ্তানিতে অন্তর্ভুক্ত করুন</string>
     <string name="include_github_pat_in_exports_supporting">এই PAT কে রপ্তানি করা ম্যানেজার সেটিংসে যুক্ত করে</string>
     <string name="include_github_pat_in_exports_warning">আপনার PAT শেয়ার করবেন না। যদি আপনি এটিকে সেটিংস এক্সপোর্টে অন্তর্ভুক্ত করেন, তাহলে ফাইলটি ব্যক্তিগত রাখুন কারণ এতে টোকেন রয়েছে।</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">অ্যাপ্লিকেশনের ভাষা</string>
+    <string name="language_dialog_title">অ্যাপের ভাষা নির্বাচন করুন</string>
+    <string name="language_option_system">ডিভাইস ভাষা ব্যবহার করুন</string>
     <string name="device_memory_limit_format">%1$dMB (স্বাভাবিক) - %2$dMB (বড়)</string>
     <string name="patches_force_download">সমস্ত প্যাচ বান্ডিল জোর করে ডাউনলোড করুন</string>
     <string name="patches_reset">প্যাচ বান্ডিল রিসেট করুন</string>

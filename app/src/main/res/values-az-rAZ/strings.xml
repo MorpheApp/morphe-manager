@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Görünüş seçimləri</string>
     <string name="morphe_appearance_options_description">Tema, rang va fönə bölmələri kəlimləri özəlləndirin</string>
-    <string name="morphe_appearance_app_language">Tətbiq dili</string>
     <string name="morphe_appearance_search">Axtarış</string>
     <string name="morphe_appearance_no_results">Nəticə tapılmadı</string>
     <string name="morphe_appearance_translations_info_title">Bazı dillər üçün tərcümə oluna bilməmiş və ya tam deyil ola bilər</string>
@@ -622,13 +621,9 @@ Yama profillərinə təsir edilmir."</string>
     <string name="include_github_pat_in_exports_label">Parametrlərin ixracına daxil et</string>
     <string name="include_github_pat_in_exports_supporting">Bu PAT-ni ixrac edilmiş menecer parametrlərinə əlavə edir</string>
     <string name="include_github_pat_in_exports_warning">PAT-nizi paylaşmayın. Əgər onu parametrlərin ixracına daxil edirsinizsə, bu faylı şəxsi saxlayın, çünki o, token ehtiva edir.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Tətbiq dili</string>
+    <string name="language_dialog_title">Tətbiqin dilini seçin</string>
+    <string name="language_option_system">Cihaz dilindən istifadə edin</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Geniş)</string>
     <string name="patches_force_download">Bütün yama dəstlərinin endirilməsini məcburi et</string>
     <string name="patches_reset">Yama paketlərini sıfırla</string>

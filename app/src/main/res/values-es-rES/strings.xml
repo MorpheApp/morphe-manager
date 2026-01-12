@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opciones de apariencia</string>
     <string name="morphe_appearance_options_description">Personaliza temas, colores y fondos.</string>
-    <string name="morphe_appearance_app_language">Idioma de la aplicación</string>
     <string name="morphe_appearance_search">Búsqueda</string>
     <string name="morphe_appearance_no_results">No se encontraron resultados para «»</string>
     <string name="morphe_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
@@ -625,13 +624,9 @@ Firma (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Incluir en la exportación de configuraciones</string>
     <string name="include_github_pat_in_exports_supporting">Añade este PAT a la configuración exportada del gestor</string>
     <string name="include_github_pat_in_exports_warning">No compartas tu PAT. Si lo incluyes en una exportación de configuración, mantén ese archivo privado porque contiene el token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Idioma de la aplicación</string>
+    <string name="language_dialog_title">Elige el idioma de la app</string>
+    <string name="language_option_system">Usar idioma del dispositivo</string>
     <string name="device_memory_limit_format">%1$d MB (Normal) - %2$d MB (Grande)</string>
     <string name="patches_force_download">Forzar descarga de todos los paquetes de parches</string>
     <string name="patches_reset">Restablecer paquetes de parches</string>

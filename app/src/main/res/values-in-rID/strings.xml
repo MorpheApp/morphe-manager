@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Pilihan tampilan</string>
     <string name="morphe_appearance_options_description">Kustomisasi tema, warna, dan latar belakang</string>
-    <string name="morphe_appearance_app_language">Bahasa Aplikasi</string>
     <string name="morphe_appearance_search">Pencarian</string>
     <string name="morphe_appearance_no_results">Tidak ada hasil yang ditemukan</string>
     <string name="morphe_appearance_translations_info_title">Terjemahan untuk beberapa bahasa mungkin belum tersedia atau belum lengkap.</string>
@@ -625,13 +624,9 @@ Sidik jari (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Sertakan dalam ekspor setelan</string>
     <string name="include_github_pat_in_exports_supporting">Menambahkan PAT ini ke setelan manajer yang diekspor</string>
     <string name="include_github_pat_in_exports_warning">Jangan bagikan PAT Anda. Jika Anda menyertakannya dalam ekspor setelan, simpan berkas tersebut secara pribadi karena berisi token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Bahasa aplikasi</string>
+    <string name="language_dialog_title">Pilih bahasa aplikasi</string>
+    <string name="language_option_system">Gunakan bahasa perangkat</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Besar)</string>
     <string name="patches_force_download">Paksa unduh semua paket tambalan</string>
     <string name="patches_reset">Setel ulang paket tambalan</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-Bündel</string>
+    <string name="morphe_home_bundles">Patch-Bundle</string>
     <string name="morphe_home_greeting_1">Welche App möchtest du patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Bereit, YouTube wieder legendär zu machen?</string>
@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Aussehen anpassen</string>
     <string name="morphe_appearance_options_description">Anpassen von Themes, Farben und Hintergründen</string>
-    <string name="morphe_appearance_app_language">App-Sprache</string>
     <string name="morphe_appearance_search">Suchen</string>
     <string name="morphe_appearance_no_results">Keine Ergebnisse gefunden</string>
     <string name="morphe_appearance_translations_info_title">Übersetzungen für einige Sprachen können fehlen oder unvollständig sein</string>
@@ -625,13 +624,9 @@ Signatur (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">In Einstellungensexport einschließen</string>
     <string name="include_github_pat_in_exports_supporting">Fügt dieses PAT zu exportierten Manager-Einstellungen hinzu</string>
     <string name="include_github_pat_in_exports_warning">Teile deinen PAT nicht. Wenn du ihn mit exportierst halte die Datei privat, da sie das Token enthält.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">App-Sprache</string>
+    <string name="language_dialog_title">App-Sprache auswählen</string>
+    <string name="language_option_system">System-Sprache verwenden</string>
     <string name="device_memory_limit_format">%1$d MB (Normal) – %2$d MB (Groß)</string>
     <string name="patches_force_download">Alle Patch-Bündel erzwingen</string>
     <string name="patches_reset">Patch-Bündel zurücksetzen</string>

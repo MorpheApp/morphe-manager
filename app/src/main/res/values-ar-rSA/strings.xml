@@ -126,7 +126,6 @@
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">خيارات المظهر</string>
     <string name="morphe_appearance_options_description">تخصيص أشكال وألوان الخلفيات</string>
-    <string name="morphe_appearance_app_language">لغة التطبيق</string>
     <string name="morphe_appearance_search">البحث</string>
     <string name="morphe_appearance_no_results">لم يتم العثور على نتائج</string>
     <string name="morphe_appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
@@ -626,13 +625,9 @@ Morphe فقط لديه هذا.</string>
     <string name="include_github_pat_in_exports_label">تضمين في تصدير الإعدادات</string>
     <string name="include_github_pat_in_exports_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات المدير المصدرة</string>
     <string name="include_github_pat_in_exports_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">لغة التطبيق</string>
+    <string name="language_dialog_title">اختر لغة التطبيق</string>
+    <string name="language_option_system">استخدام لغة الجهاز</string>
     <string name="device_memory_limit_format">%1$d ميجابايت (عادي) - %2$d ميجابايت (كبير)</string>
     <string name="patches_force_download">فرض تنزيل جميع حزم التعديل</string>
     <string name="patches_reset">إعادة تعيين حزم التعديل</string>
