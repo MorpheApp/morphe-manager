@@ -1,3 +1,10 @@
+# app [1.3.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-01-12)
+
+
+### Features
+
+* Refactor to tab settings ([#101](https://github.com/MorpheApp/morphe-manager/issues/101)) ([d76ee03](https://github.com/MorpheApp/morphe-manager/commit/d76ee03fcdb3beccf95ebc91f257ca6feb2a162c))
+
 # app [1.3.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.2.1...v1.3.0-dev.1) (2026-01-12)
 
 
