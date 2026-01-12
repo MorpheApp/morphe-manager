@@ -289,7 +289,7 @@ fun MorpheThemeSettingsScreen(
                 contentPadding = PaddingValues(0.dp)
             ) {
                 ExpressiveSettingsItem(
-                    headlineContent = stringResource(R.string.app_language),
+                    headlineContent = stringResource(R.string.morphe_appearance_current_language),
                     supportingContent = rememberSelectedLanguageLabel(appLanguage),
                     onClick = { showLanguageDialog = true }
                 )
@@ -418,7 +418,7 @@ private fun LanguageDialog(
 private fun ExpressiveThemePreview(modifier: Modifier = Modifier) {
     ExpressiveSettingsCard(
         modifier = modifier,
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+        contentPadding = PaddingValues(16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
