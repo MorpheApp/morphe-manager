@@ -131,7 +131,6 @@
     <!-- App Icon Selector -->
     <string name="morphe_app_icon_selector_title">App Icon</string>
     <string name="morphe_app_icon_selector_description">Change the app launcher icon</string>
-    <string name="morphe_app_icon_selector_info">The app icon will update after you close and reopen the app from your launcher.</string>
     <string name="morphe_app_icon_default">Default</string>
     <string name="morphe_app_icon_light_2">Sky</string>
     <string name="morphe_app_icon_light_3">Sunset</string>
