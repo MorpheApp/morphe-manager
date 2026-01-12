@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.ColumnWithScrollbar
+import app.revanced.manager.ui.component.GroupHeader
+import app.revanced.manager.ui.component.morphe.settings.AppIconSection
 import app.revanced.manager.ui.component.morphe.shared.LanguageOption
 import app.revanced.manager.ui.component.morphe.shared.LanguageRepository
 import app.revanced.manager.ui.component.morphe.shared.rememberSelectedLanguageLabel
@@ -176,7 +178,7 @@ fun MorpheThemeSettingsScreen(
                 }
             }
 
-            // Accent Color Section with Expressive Style
+            // Accent Color Section
             val selectedAccentArgb = customAccentColorHex.toColorOrNull()?.toArgb()
             ExpressiveSettingsCard(
                 modifier = Modifier
@@ -212,7 +214,7 @@ fun MorpheThemeSettingsScreen(
                                     contentAlignment = Alignment.Center
                                 ) {
                                     if (color == null) {
-                                        // Reset button - same style as theme chips
+                                        // Reset button
                                         Box(
                                             modifier = Modifier
                                                 .size(56.dp)
@@ -244,7 +246,7 @@ fun MorpheThemeSettingsScreen(
                                             )
                                         }
                                     } else {
-                                        // Color preset - same style as theme chips
+                                        // Color preset
                                         val isSelected = selectedAccentArgb != null && color.toArgb() == selectedAccentArgb
                                         Box(
                                             modifier = Modifier
@@ -281,6 +283,7 @@ fun MorpheThemeSettingsScreen(
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             )
 
+            // App Language Section
             ExpressiveSettingsCard(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 contentPadding = PaddingValues(0.dp)
@@ -291,12 +294,24 @@ fun MorpheThemeSettingsScreen(
                     onClick = { showLanguageDialog = true }
                 )
             }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            // App Icon Section
+            ExpressiveSettingsCard(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                AppIconSection()
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 private data class ThemePresetSwatch(val preset: ThemePreset, @param:StringRes val labelRes: Int, val colors: List<Color>)
+
 
 @Composable
 private fun ThemeSwatchChip(
