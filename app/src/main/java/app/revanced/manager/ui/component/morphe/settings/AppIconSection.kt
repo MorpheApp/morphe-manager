@@ -6,8 +6,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -34,54 +32,45 @@ import kotlinx.coroutines.launch
  * Allows users to change the app launcher icon
  */
 @Composable
-fun AppIconSection(
-    modifier: Modifier = Modifier
-) {
+fun AppIconSection() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val iconManager = remember { AppIconManager(context) }
 
     var currentIcon by remember { mutableStateOf(iconManager.getCurrentIcon()) }
     var showConfirmDialog by remember { mutableStateOf<AppIconManager.AppIcon?>(null) }
-    var expanded by remember { mutableStateOf(false) }
 
-    ExpandableSection(
-        icon = Icons.Outlined.Apps,
-        title = stringResource(R.string.morphe_app_icon_selector_title),
-        description = stringResource(R.string.morphe_app_icon_selector_description),
-        expanded = expanded,
-        onExpandChange = { expanded = it }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        // Icon grid
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Icon grid
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        rowIcons.forEach { icon ->
-                            AppIconOption(
-                                icon = icon,
-                                isSelected = currentIcon == icon,
-                                onClick = {
-                                    if (currentIcon != icon) {
-                                        showConfirmDialog = icon
-                                    }
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        // Fill remaining space if row is incomplete
-                        repeat(3 - rowIcons.size) {
-                            Spacer(modifier = Modifier.weight(1f))
-                        }
+            AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    rowIcons.forEach { icon ->
+                        AppIconOption(
+                            icon = icon,
+                            isSelected = currentIcon == icon,
+                            onClick = {
+                                if (currentIcon != icon) {
+                                    showConfirmDialog = icon
+                                }
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    // Fill remaining space if row is incomplete
+                    repeat(3 - rowIcons.size) {
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }

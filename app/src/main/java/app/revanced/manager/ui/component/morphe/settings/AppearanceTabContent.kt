@@ -26,9 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.settings.LanguagePickerDialog
-import app.revanced.manager.ui.component.morphe.settings.SelectorItem
-import app.revanced.manager.ui.component.morphe.settings.SelectorSection
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.shared.LanguageRepository.getLanguageDisplayName
 import app.revanced.manager.ui.component.morphe.utils.darken
@@ -251,6 +248,16 @@ fun AppearanceTabContent(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+        }
+
+        // Icon manager
+        SectionTitle(
+            text = stringResource(R.string.morphe_app_icon_selector_title),
+            icon = Icons.Outlined.Apps
+        )
+
+        SectionCard {
+            AppIconSection()
         }
     }
 
