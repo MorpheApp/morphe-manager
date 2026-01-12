@@ -21,9 +21,12 @@ import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
+import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.util.MPP_FILE_MIME_TYPES
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
@@ -71,7 +74,7 @@ data class WrongPackageDialogState(
  */
 @Stable
 class HomeStates(
-    private val dashboardViewModel: DashboardViewModel,
+    val dashboardViewModel: DashboardViewModel,
     private val optionsRepository: PatchOptionsRepository,
     private val context: Context,
     private val scope: CoroutineScope,
@@ -84,6 +87,15 @@ class HomeStates(
     var isRefreshingBundle by mutableStateOf(false)
     var showPatchesSheet by mutableStateOf(false)
     var showChangelogSheet by mutableStateOf(false)
+    var showBundleManagementSheet by mutableStateOf(false)
+    var showAddBundleDialog by mutableStateOf(false)
+
+    // Bundle file selection
+    var selectedBundleUri by mutableStateOf<Uri?>(null)
+    var selectedBundlePath by mutableStateOf<String?>(null)
+
+    // Bundle picker launcher
+    lateinit var openBundlePicker: () -> Unit
 
     // APK selection flow dialogs (3-step process)
     var showApkAvailabilityDialog by mutableStateOf(false)      // Step 1: "Do you have APK?"
@@ -118,7 +130,6 @@ class HomeStates(
 
     // Bundle data
     var apiBundle: PatchBundleSource? = null
-        private set
 
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
@@ -237,7 +248,7 @@ class HomeStates(
         }
 
         // Filter to only use default bundle (bundle 0) in Morphe mode to prevent conflicts with custom patch bundles
-        val bundles = allBundles.filter { it.uid == PatchBundleRepository.DEFAULT_SOURCE_UID }
+        val bundles = allBundles.filter { it.uid == DEFAULT_SOURCE_UID }
 
         val patches = bundles.toPatchSelection(allowIncompatible) { _, patch ->
             patch.include &&
@@ -476,6 +487,15 @@ fun rememberMorpheHomeState(
     LaunchedEffect(sources, bundleInfo) {
         state.updateBundleData(sources, bundleInfo)
     }
+
+    // Initialize bundle picker
+    state.openBundlePicker = rememberFilePickerWithPermission(
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        onFilePicked = { uri ->
+            state.selectedBundleUri = uri
+            state.selectedBundlePath = uri.toFilePath()
+        }
+    )
 
     return state
 }

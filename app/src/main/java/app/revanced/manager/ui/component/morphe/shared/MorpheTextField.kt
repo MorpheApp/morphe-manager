@@ -1,6 +1,8 @@
 package app.revanced.manager.ui.component.morphe.shared
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -22,7 +24,9 @@ fun MorpheDialogTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
     singleLine: Boolean = true,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     val textColor = LocalDialogTextColor.current
 
@@ -36,6 +40,8 @@ fun MorpheDialogTextField(
         isError = isError,
         singleLine = singleLine,
         enabled = enabled,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         modifier = modifier,
         shape = RoundedCornerShape(12.dp),
         colors = OutlinedTextFieldDefaults.colors(

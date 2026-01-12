@@ -230,7 +230,7 @@ fun MorpheHomeScreen(
 
                 // Bundles FAB
                 MorpheFloatingButtons(
-                    onClick = { homeState.showBundlesSheet = true },
+                    onClick = { homeState.showBundleManagementSheet = true },
                     icon = Icons.Outlined.Source,
                     contentDescription = stringResource(R.string.morphe_home_bundles),
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -246,35 +246,5 @@ fun MorpheHomeScreen(
                 modifier = Modifier.align(Alignment.TopCenter)
             )
         }
-    }
-
-    // Bundle sheet
-    if (homeState.showBundlesSheet) {
-        HomeBundleSheet(
-            apiBundle = homeState.apiBundle,
-            patchCounts = patchCounts,
-            manualUpdateInfo = manualUpdateInfo,
-            isRefreshing = homeState.isRefreshingBundle || bundleUpdateProgress != null,
-            onDismiss = { homeState.showBundlesSheet = false },
-            onRefresh = {
-                scope.launch {
-                    updateMorpheBundleAndUI()
-                }
-            },
-            onPatchesClick = {
-                scope.launch {
-                    homeState.showBundlesSheet = false
-                    delay(300)
-                    homeState.showPatchesSheet = true
-                }
-            },
-            onVersionClick = {
-                scope.launch {
-                    homeState.showBundlesSheet = false
-                    delay(300)
-                    homeState.showChangelogSheet = true
-                }
-            }
-        )
     }
 }

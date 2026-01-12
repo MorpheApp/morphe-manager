@@ -37,6 +37,28 @@
     <string name="morphe_home_check_updates">Check</string>
     <string name="morphe_home_unknown">Unknown</string>
     <string name="morphe_home_timeline">Update history</string>
+    <!-- Bundle Management -->
+    <string name="morphe_bundle_management_title">Manage Bundles</string>
+    <string name="morphe_bundle_management_subtitle">%d bundles installed</string>
+    <string name="morphe_bundle_added_at">Added %s</string>
+    <string name="morphe_bundle_update_available">Update available</string>
+    <string name="morphe_bundle_delete_confirm_message">Delete bundle \"%s\"? This cannot be undone.</string>
+    <string name="morphe_bundle_rename_description">Enter a new name</string>
+    <string name="morphe_bundle_rename_duplicate">A bundle with name \"%s\" already exists</string>
+    <string name="morphe_bundle_not_found">Bundle not found</string>
+    <string name="morphe_enabled">Enabled</string>
+    <string name="morphe_disabled">Disabled</string>
+    <string name="morphe_rename">Rename</string>
+
+    <!-- Add Bundle Dialog -->
+    <string name="morphe_add_patch_bundle">Add Patch Bundle</string>
+    <string name="morphe_remote">Remote</string>
+    <string name="morphe_local">Local</string>
+    <string name="morphe_remote_source_url">Bundle URL</string>
+    <string name="morphe_remote_bundle_description">Enter JSON endpoint URL for remote patch bundle</string>
+    <string name="morphe_select_patch_bundle_file">Select Patch Bundle File</string>
+    <string name="morphe_change_file">Change File</string>
+    <string name="morphe_local_bundle_description">Select a .mpp patch bundle file from storage</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched)</string>

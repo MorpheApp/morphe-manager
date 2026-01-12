@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.ui.component.bundle.ImportPatchBundleDialog
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
@@ -52,6 +53,7 @@ fun HomeDialogs(
     state: HomeStates
 ) {
     val uriHandler = LocalUriHandler.current
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // Dialog 1: APK Availability - "Do you have the APK?"
@@ -199,6 +201,79 @@ fun HomeDialogs(
                 onDismissRequest = { state.showChangelogSheet = false }
             )
         }
+    }
+
+    // Bundle management sheet
+    if (state.showBundleManagementSheet) {
+        HomeBundleManagementSheet(
+            onDismissRequest = { state.showBundleManagementSheet = false },
+            onAddBundle = {
+                state.showBundleManagementSheet = false
+                state.showAddBundleDialog = true
+            },
+            onDelete = { bundle ->
+                scope.launch {
+                    state.dashboardViewModel.patchBundleRepository.remove(bundle)
+                }
+            },
+            onDisable = { bundle ->
+                scope.launch {
+                    state.dashboardViewModel.patchBundleRepository.disable(bundle)
+                }
+            },
+            onUpdate = { bundle ->
+                if (bundle is RemotePatchBundle) {
+                    scope.launch {
+                        state.dashboardViewModel.patchBundleRepository.update(bundle, showToast = true)
+                    }
+                }
+            },
+            onPatchesClick = { bundle ->
+                state.showBundleManagementSheet = false
+                state.apiBundle = bundle
+                scope.launch {
+                    delay(300)
+                    state.showPatchesSheet = true
+                }
+            },
+            onVersionClick = { bundle ->
+                state.showBundleManagementSheet = false
+                if (bundle is RemotePatchBundle) {
+                    state.apiBundle = bundle
+                    scope.launch {
+                        delay(300)
+                        state.showChangelogSheet = true
+                    }
+                }
+            }
+        )
+    }
+
+    // Add bundle dialog
+    if (state.showAddBundleDialog) {
+        MorpheAddBundleDialog(
+            onDismiss = {
+                state.showAddBundleDialog = false
+                state.selectedBundleUri = null
+                state.selectedBundlePath = null
+            },
+            onLocalSubmit = {
+                state.showAddBundleDialog = false
+                state.selectedBundleUri?.let { uri ->
+                    state.dashboardViewModel.createLocalSource(uri)
+                }
+                state.selectedBundleUri = null
+                state.selectedBundlePath = null
+            },
+            onRemoteSubmit = { url ->
+                state.showAddBundleDialog = false
+                state.dashboardViewModel.createRemoteSource(url, true)
+            },
+            onLocalPick = {
+                state.openBundlePicker()
+            },
+            selectedLocalPath = state.selectedBundlePath
+        )
     }
 }
 
