@@ -55,10 +55,15 @@ fun ExpertModeDialog(
     var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
 
-    // Get all patches with their enabled state
-    val allPatchesInfo = remember(bundles, selectedPatches) {
+    // Create local mutable state from incoming selectedPatches
+    var localSelectedPatches by remember(selectedPatches) {
+        mutableStateOf(selectedPatches.toMap())
+    }
+
+    // Get all patches with their enabled state using local state
+    val allPatchesInfo = remember(bundles, localSelectedPatches) {
         bundles.map { bundle ->
-            val selected = selectedPatches[bundle.uid] ?: emptySet()
+            val selected = localSelectedPatches[bundle.uid] ?: emptySet()
             val patches = bundle.patchSequence(allowIncompatible)
                 .map { patch -> patch to (patch.name in selected) }
                 .toList()
@@ -67,7 +72,7 @@ fun ExpertModeDialog(
         }.filter { it.second.isNotEmpty() }
     }
 
-    // Filter patches based on search
+    // Filter patches based on search query
     val filteredPatchesInfo = remember(allPatchesInfo, searchQuery) {
         if (searchQuery.isBlank()) {
             allPatchesInfo
@@ -82,7 +87,7 @@ fun ExpertModeDialog(
         }
     }
 
-    val totalSelectedCount = selectedPatches.values.sumOf { it.size }
+    val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
 
     MorpheDialog(
@@ -92,7 +97,31 @@ fun ExpertModeDialog(
         footer = {
             MorpheDialogButton(
                 text = stringResource(R.string.morphe_expert_mode_proceed),
-                onClick = onProceed,
+                onClick = {
+                    // Sync all local changes back before proceeding
+                    localSelectedPatches.forEach { (bundleUid, patches) ->
+                        val originalPatches = selectedPatches[bundleUid] ?: emptySet()
+                        patches.forEach { patchName ->
+                            if (patchName !in originalPatches) {
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                        originalPatches.forEach { patchName ->
+                            if (patchName !in patches) {
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                    }
+                    // Handle removed bundles
+                    selectedPatches.forEach { (bundleUid, patches) ->
+                        if (bundleUid !in localSelectedPatches) {
+                            patches.forEach { patchName ->
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                    }
+                    onProceed()
+                },
                 enabled = totalSelectedCount > 0,
                 icon = Icons.Outlined.AutoFixHigh,
                 modifier = Modifier.fillMaxWidth()
@@ -162,21 +191,40 @@ fun ExpertModeDialog(
                     filteredPatchesInfo.forEach { (bundle, patches) ->
                         val enabledCount = patches.count { it.second }
                         val totalCount = patches.size
-                        val allEnabled = enabledCount == totalCount
-                        val noneEnabled = enabledCount == 0
 
                         BundleHeader(
                             bundleName = bundle.name,
                             enabledCount = enabledCount,
                             totalCount = totalCount,
                             onToggleAll = {
-                                // If all enabled -> disable all
-                                // If any disabled -> enable all
+                                val allEnabled = enabledCount == totalCount
+                                // If all enabled -> disable all enabled patches
+                                // If any disabled -> enable all disabled patches
+
+                                val currentPatches = localSelectedPatches.toMutableMap()
+                                val bundlePatches = currentPatches[bundle.uid]?.toMutableSet() ?: mutableSetOf()
+
                                 patches.forEach { (patch, isEnabled) ->
-                                    if ((allEnabled && isEnabled) || (!allEnabled && !isEnabled)) {
-                                        onPatchToggle(bundle.uid, patch.name)
+                                    if (allEnabled) {
+                                        // Disable all currently enabled patches
+                                        if (isEnabled) {
+                                            bundlePatches.remove(patch.name)
+                                        }
+                                    } else {
+                                        // Enable all currently disabled patches
+                                        if (!isEnabled) {
+                                            bundlePatches.add(patch.name)
+                                        }
                                     }
                                 }
+
+                                if (bundlePatches.isEmpty()) {
+                                    currentPatches.remove(bundle.uid)
+                                } else {
+                                    currentPatches[bundle.uid] = bundlePatches
+                                }
+
+                                localSelectedPatches = currentPatches
                             }
                         )
 
@@ -185,7 +233,24 @@ fun ExpertModeDialog(
                                 patch = patch,
                                 bundleUid = bundle.uid,
                                 isEnabled = isEnabled,
-                                onToggle = { onPatchToggle(bundle.uid, patch.name) },
+                                onToggle = {
+                                    val currentPatches = localSelectedPatches.toMutableMap()
+                                    val bundlePatches = currentPatches[bundle.uid]?.toMutableSet() ?: mutableSetOf()
+
+                                    if (patch.name in bundlePatches) {
+                                        bundlePatches.remove(patch.name)
+                                    } else {
+                                        bundlePatches.add(patch.name)
+                                    }
+
+                                    if (bundlePatches.isEmpty()) {
+                                        currentPatches.remove(bundle.uid)
+                                    } else {
+                                        currentPatches[bundle.uid] = bundlePatches
+                                    }
+
+                                    localSelectedPatches = currentPatches
+                                },
                                 onConfigureOptions = {
                                     if (!patch.options.isNullOrEmpty()) {
                                         selectedPatchForOptions = bundle.uid to patch
@@ -227,6 +292,8 @@ private fun BundleHeader(
     totalCount: Int,
     onToggleAll: () -> Unit
 ) {
+    val allEnabled = enabledCount == totalCount
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -262,20 +329,20 @@ private fun BundleHeader(
             onClick = onToggleAll,
             modifier = Modifier.size(32.dp),
             colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = if (enabledCount == totalCount)
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                containerColor = if (allEnabled)
+                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
                 else
-                    MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
-                contentColor = if (enabledCount == totalCount)
-                    LocalDialogTextColor.current
+                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                contentColor = if (allEnabled)
+                    MaterialTheme.colorScheme.error
                 else
-                    LocalDialogTextColor.current
+                    MaterialTheme.colorScheme.primary
             )
         ) {
             Icon(
-                imageVector = if (enabledCount == totalCount) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
+                imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
                 contentDescription = stringResource(
-                    if (enabledCount == totalCount) R.string.morphe_expert_mode_disable_all
+                    if (allEnabled) R.string.morphe_expert_mode_disable_all
                     else R.string.morphe_expert_mode_enable_all
                 ),
                 modifier = Modifier.size(18.dp)
@@ -298,10 +365,23 @@ private fun PatchCard(
 ) {
     var isExpanded by remember { mutableStateOf(false) }
 
-    SubtleCard(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = { isExpanded = !isExpanded },
-        cornerRadius = 14.dp
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .clickable { isExpanded = !isExpanded },
+        shape = RoundedCornerShape(14.dp),
+        color = if (isEnabled) {
+            MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+        } else {
+            MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp).copy(alpha = 0.5f)
+        },
+        contentColor = if (isEnabled) {
+            MaterialTheme.colorScheme.onSurface
+        } else {
+            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+        },
+        tonalElevation = if (isEnabled) 2.dp else 0.dp
     ) {
         Column(
             modifier = Modifier
@@ -326,7 +406,7 @@ private fun PatchCard(
                         color = if (isEnabled)
                             LocalDialogTextColor.current
                         else
-                            LocalDialogSecondaryTextColor.current,
+                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
                         maxLines = if (isExpanded) Int.MAX_VALUE else 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -335,7 +415,10 @@ private fun PatchCard(
                         Text(
                             text = patch.description,
                             style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current,
+                            color = if (isEnabled)
+                                LocalDialogSecondaryTextColor.current
+                            else
+                                LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f),
                             maxLines = if (isExpanded) Int.MAX_VALUE else 2,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -353,10 +436,10 @@ private fun PatchCard(
                             modifier = Modifier.size(36.dp),
                             enabled = isEnabled,
                             colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
-                                contentColor = LocalDialogTextColor.current,
-                                disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.2f),
-                                disabledContentColor = LocalDialogSecondaryTextColor.current
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                                disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
                             )
                         ) {
                             Icon(
@@ -367,16 +450,19 @@ private fun PatchCard(
                         }
                     }
 
-                    // Toggle button - Close icon when enabled, Check icon when disabled
+                    // Toggle button
                     FilledTonalIconButton(
                         onClick = onToggle,
                         modifier = Modifier.size(36.dp),
                         colors = IconButtonDefaults.filledTonalIconButtonColors(
                             containerColor = if (isEnabled)
-                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
                             else
-                                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
-                            contentColor = LocalDialogTextColor.current
+                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                            contentColor = if (isEnabled)
+                                MaterialTheme.colorScheme.primary
+                            else
+                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                         )
                     ) {
                         Icon(
@@ -400,7 +486,7 @@ private fun PatchCard(
                 ) {
                     Surface(
                         shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
                         tonalElevation = 0.dp
                     ) {
                         Row(
