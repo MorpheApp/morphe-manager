@@ -94,9 +94,6 @@ fun MorpheSettingsScreen(
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
 
-    // Expert mode state
-    val useExpertMode by prefs.useExpertMode.getAsState()
-
     // Update
     val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
 

@@ -96,9 +96,6 @@ object LanguageRepository {
         return listOf(systemOption, englishOption) + otherLanguages
     }
 
-    private fun String.capitalize(locale: Locale) =
-        replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
-
     /**
      * Get flag emoji for language code
      */

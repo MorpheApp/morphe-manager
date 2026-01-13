@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -28,12 +29,12 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 /**
  * Installer settings item
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun InstallerSettingsItem(
     title: String,
     entry: InstallerManager.Entry,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -141,7 +142,6 @@ fun InstallerSelectionDialog(
     onOpenShizuku: (() -> Boolean)? = null,
     stripRootNote: Boolean = true
 ) {
-    val context = LocalContext.current
     val shizukuPromptReasons = remember {
         setOf(
             R.string.installer_status_shizuku_not_running,
@@ -229,6 +229,7 @@ fun InstallerSelectionDialog(
  * Individual installer option item in selection dialog
  * Displays installer with icon, description, and status
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun InstallerOptionItem(
     option: InstallerManager.Entry,

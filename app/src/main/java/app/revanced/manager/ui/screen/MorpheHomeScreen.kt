@@ -23,6 +23,8 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Compan
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
+import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateAvailableDialog
+import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
 import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
@@ -30,8 +32,6 @@ import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf

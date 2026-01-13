@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
@@ -43,6 +44,7 @@ import org.koin.compose.koinInject
 /**
  * Bottom sheet for managing patch bundles
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeBundleManagementSheet(

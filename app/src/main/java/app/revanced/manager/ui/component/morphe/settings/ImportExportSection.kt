@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import app.revanced.manager.util.toast
  * Import & Export section
  * Contains keystore import/export options
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun ImportExportSection(
     importExportViewModel: ImportExportViewModel,

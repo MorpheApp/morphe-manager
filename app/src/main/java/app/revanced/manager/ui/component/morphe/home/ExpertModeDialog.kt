@@ -238,7 +238,6 @@ fun ExpertModeDialog(
                         patches.forEach { (patch, isEnabled) ->
                             PatchCard(
                                 patch = patch,
-                                bundleUid = bundle.uid,
                                 isEnabled = isEnabled,
                                 onToggle = {
                                     val currentPatches = localSelectedPatches.toMutableMap()
@@ -276,7 +275,6 @@ fun ExpertModeDialog(
     selectedPatchForOptions?.let { (bundleUid, patch) ->
         PatchOptionsDialog(
             patch = patch,
-            bundleUid = bundleUid,
             values = options[bundleUid]?.get(patch.name),
             onValueChange = { key, value ->
                 onOptionChange(bundleUid, patch.name, key, value)
@@ -378,7 +376,6 @@ private fun BundleHeader(
 @Composable
 private fun PatchCard(
     patch: PatchInfo,
-    bundleUid: Int,
     isEnabled: Boolean,
     onToggle: () -> Unit,
     onConfigureOptions: () -> Unit,
@@ -489,8 +486,8 @@ private fun PatchCard(
                         Icon(
                             imageVector = if (isEnabled) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
                             contentDescription = stringResource(
-                                if (isEnabled) R.string.morphe_expert_mode_disable
-                                else R.string.morphe_expert_mode_enable
+                                if (isEnabled) R.string.disable
+                                else R.string.enable
                             ),
                             modifier = Modifier.size(18.dp)
                         )
@@ -579,7 +576,6 @@ private fun EmptyStateContent(
 @Composable
 private fun PatchOptionsDialog(
     patch: PatchInfo,
-    bundleUid: Int,
     values: Map<String, Any?>?,
     onValueChange: (String, Any?) -> Unit,
     onReset: () -> Unit,
@@ -630,9 +626,6 @@ private fun PatchOptionsDialog(
                 }
 
                 val typeName = option.type.toString()
-                val isPathOption = option.key.contains("path", ignoreCase = true) ||
-                        option.key.contains("dir", ignoreCase = true) ||
-                        option.key.contains("folder", ignoreCase = true)
 
                 when {
                     // Color option
@@ -882,7 +875,7 @@ private fun ThemePresetItem(
         else
             MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
         border = if (isSelected)
-            androidx.compose.foundation.BorderStroke(
+            BorderStroke(
                 1.5.dp,
                 MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
             )
@@ -986,7 +979,7 @@ private fun PathInputOption(
 
                     // Folder picker button
                     val folderPicker = rememberFolderPickerWithPermission { uri ->
-                        uri.let { onValueChange(it.toString()) }
+                        onValueChange(uri)
                     }
                     IconButton(
                         onClick = { folderPicker() },

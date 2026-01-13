@@ -49,7 +49,6 @@
     <string name="morphe_enabled">Enabled</string>
     <string name="morphe_disabled">Disabled</string>
     <string name="morphe_rename">Rename</string>
-
     <!-- Add Bundle Dialog -->
     <string name="morphe_add_patch_bundle">Add patch bundle</string>
     <string name="morphe_remote">Remote</string>
@@ -83,14 +82,12 @@
     <string name="morphe_home_recommended_version">Recommended version</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
     <!-- Dialog 4: Expert Mode Dialog -->
-    <string name="morphe_expert_mode_title">Expert Mode</string>
+    <string name="morphe_expert_mode_title">Expert mode</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
     <string name="morphe_expert_mode_search_placeholder">Search patches…</string>
     <string name="morphe_expert_mode_proceed">Proceed to Patching</string>
     <string name="morphe_expert_mode_disable_all">Disable all</string>
     <string name="morphe_expert_mode_enable_all">Enable all</string>
-    <string name="morphe_expert_mode_disable">Disable</string>
-    <string name="morphe_expert_mode_enable">Enable</string>
     <string name="morphe_expert_mode_has_options">Configurable</string>
     <string name="morphe_expert_mode_no_results">No patches found</string>
     <string name="morphe_expert_mode_no_patches">No patches available</string>
@@ -167,27 +164,7 @@
     <string name="morphe_patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
-    <string name="morphe_settings_return_to_morphe_description">Return to simplified mode</string>
-    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
-    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
-    <string name="morphe_share_website">Share website</string>
-    <string name="morphe_share_website_description">Share the official Morphe website</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">App Icon</string>
-    <string name="morphe_app_icon_selector_description">Change the app launcher icon</string>
-    <string name="morphe_app_icon_default">Default</string>
-    <string name="morphe_app_icon_light_2">Sky</string>
-    <string name="morphe_app_icon_light_3">Sunset</string>
-    <string name="morphe_app_icon_dark_1">Ocean</string>
-    <string name="morphe_app_icon_dark_2">Void</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
-    <string name="morphe_app_icon_change_dialog_message">Change to \'%1$s\' and restart?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>
-
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Appearance options</string>
     <string name="morphe_appearance_options_description">Customize themes, colors, and backgrounds</string>
     <string name="morphe_appearance_current_language">Current language</string>
@@ -204,20 +181,35 @@
     <string name="morphe_background_type_shapes">Shapes</string>
     <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">App Icon</string>
+    <string name="morphe_app_icon_selector_description">Change the app launcher icon</string>
+    <string name="morphe_app_icon_default">Default</string>
+    <string name="morphe_app_icon_light_2">Sky</string>
+    <string name="morphe_app_icon_light_3">Sunset</string>
+    <string name="morphe_app_icon_dark_1">Ocean</string>
+    <string name="morphe_app_icon_dark_2">Void</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Change to \'%1$s\' and restart?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>
 
-    <!-- Expert Settings Section -->
+    <!-- Advanced Tab -->
     <string name="morphe_expert_section">Expert settings</string>
     <string name="morphe_settings_expert_mode">Expert Mode</string>
     <string name="morphe_settings_expert_mode_description">Enable advanced features and customization options</string>
+    <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
+    <string name="morphe_settings_return_to_morphe_description">Return to simplified mode</string>
+    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
+    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>
     <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>
-
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
     <string name="morphe_patch_options_youtube_description">Theme, branding, header, and Shorts options</string>
     <string name="morphe_patch_options_youtube_music_description">Theme and branding options</string>
     <string name="morphe_patch_options_restart_message">Changing patch options requires re-patching the app to take effect</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">App theme colors</string>
     <string name="morphe_patch_options_theme_colors_description">Change background color</string>
     <string name="morphe_patch_options_dark_theme_color">Dark theme background color</string>
@@ -230,7 +222,7 @@
     <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
     <string name="morphe_patch_options_no_available">No options available for this patch</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Custom branding</string>
     <string name="morphe_patch_options_custom_branding_description">Change the app display name</string>
     <string name="morphe_patch_options_custom_branding_app_name">App name</string>
@@ -259,8 +251,7 @@ The image dimensions must be as follows:
 Optionally, the path contains a \'drawable\' folder with any of the monochrome icon files:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Custom header logo</string>
     <string name="morphe_patch_options_custom_header_description">Change header logo</string>
     <string name="morphe_patch_options_custom_header_instruction">"Folder with images to use as a custom header logo.
@@ -280,14 +271,14 @@ The image dimensions must be as follows:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Hide Shorts features</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Hide Shorts app shortcut</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
     <string name="morphe_patch_options_hide_shorts_widget">Hide Shorts widget</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
 
-    <!-- System Section -->
+    <!-- System Tab -->
     <string name="morphe_performance">Performance</string>
     <string name="morphe_process_runtime">Process runtime</string>
     <string name="morphe_process_runtime_description">Run patching in separate process for better stability</string>
@@ -298,6 +289,9 @@ The image dimensions must be as follows:
     <string name="morphe_memory_limit_warning">Low memory limit may cause patching failures</string>
     <string name="morphe_process_runtime_enabled_description">Enabled • %d MB limit</string>
     <string name="morphe_process_runtime_disabled_description">Disabled • Click to configure</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Share website</string>
+    <string name="morphe_share_website_description">Share the official Morphe website</string>
 
     <!-- Other strings -->
     <string name="app_name" translatable="false">Morphe</string>

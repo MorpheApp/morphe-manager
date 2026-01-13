@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material3.*
-import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -33,7 +33,7 @@ fun MorpheAddBundleDialog(
     selectedLocalPath: String?
 ) {
     var remoteUrl by rememberSaveable { mutableStateOf("") }
-    var selectedTab by rememberSaveable { mutableStateOf(0) } // 0 = Remote, 1 = Local
+    var selectedTab by rememberSaveable { mutableIntStateOf(0) } // 0 = Remote, 1 = Local
 
     val isRemoteValid = remoteUrl.isNotBlank() &&
             (remoteUrl.startsWith("http://") || remoteUrl.startsWith("https://"))
@@ -57,7 +57,6 @@ fun MorpheAddBundleDialog(
             )
         }
     ) {
-        val textColor = LocalDialogTextColor.current
         val secondaryColor = LocalDialogSecondaryTextColor.current
 
         Column(
@@ -117,7 +116,6 @@ fun MorpheAddBundleDialog(
                 0 -> RemoteTabContent(
                     remoteUrl = remoteUrl,
                     onUrlChange = { remoteUrl = it },
-                    textColor = textColor,
                     secondaryColor = secondaryColor
                 )
                 1 -> LocalTabContent(
@@ -134,7 +132,6 @@ fun MorpheAddBundleDialog(
 private fun RemoteTabContent(
     remoteUrl: String,
     onUrlChange: (String) -> Unit,
-    textColor: Color,
     secondaryColor: Color
 ) {
     Column(
@@ -175,7 +172,7 @@ private fun RemoteTabContent(
 private fun LocalTabContent(
     selectedPath: String?,
     onPickFile: () -> Unit,
-    secondaryColor: androidx.compose.ui.graphics.Color
+    secondaryColor: Color
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -224,11 +221,11 @@ fun BundleDeleteConfirmDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    app.revanced.manager.ui.component.morphe.shared.MorpheDialog(
+    MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.delete),
         footer = {
-            app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow(
+            MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.delete),
                 onPrimaryClick = onConfirm,
                 isPrimaryDestructive = true,
@@ -237,7 +234,7 @@ fun BundleDeleteConfirmDialog(
             )
         }
     ) {
-        val secondaryColor = app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor.current
+        val secondaryColor = LocalDialogSecondaryTextColor.current
 
         Text(
             text = stringResource(
@@ -247,52 +244,5 @@ fun BundleDeleteConfirmDialog(
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor
         )
-    }
-}
-
-@Composable
-fun BundleRenameDialog(
-    bundle: PatchBundleSource,
-    currentName: String,
-    onNameChange: (String) -> Unit,
-    onDismiss: () -> Unit,
-    onConfirm: (String) -> Unit
-) {
-    app.revanced.manager.ui.component.morphe.shared.MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_rename),
-        footer = {
-            app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_rename),
-                onPrimaryClick = { onConfirm(currentName) },
-                primaryEnabled = currentName.isNotBlank() && currentName != bundle.name,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        val textColor = app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor.current
-        val secondaryColor = app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor.current
-
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            MorpheDialogTextField(
-                value = currentName,
-                onValueChange = onNameChange,
-                modifier = Modifier.fillMaxWidth(),
-                label = {
-                    Text(
-                        stringResource(R.string.morphe_bundle_rename_description),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                },
-                placeholder = {
-                    Text(bundle.name)
-                },
-                singleLine = true
-            )
-        }
     }
 }

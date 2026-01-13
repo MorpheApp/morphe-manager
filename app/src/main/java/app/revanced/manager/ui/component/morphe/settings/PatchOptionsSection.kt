@@ -196,7 +196,6 @@ fun PatchOptionsSection(
                         icon = Icons.Outlined.VideoLibrary,
                         title = stringResource(R.string.morphe_home_youtube),
                         description = stringResource(R.string.morphe_patch_options_youtube_description),
-                        patchOptionsPrefs = patchOptionsPrefs,
                         viewModel = viewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
@@ -229,7 +228,6 @@ fun PatchOptionsSection(
                         icon = Icons.Outlined.LibraryMusic,
                         title = stringResource(R.string.morphe_home_youtube_music),
                         description = stringResource(R.string.morphe_patch_options_youtube_music_description),
-                        patchOptionsPrefs = patchOptionsPrefs,
                         viewModel = viewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
@@ -279,7 +277,6 @@ private fun AppPatchOptionsCard(
     icon: ImageVector,
     title: String,
     description: String,
-    patchOptionsPrefs: PatchOptionsPreferencesManager,
     viewModel: PatchOptionsViewModel,
     onThemeClick: () -> Unit,
     onBrandingClick: () -> Unit,
@@ -289,7 +286,6 @@ private fun AppPatchOptionsCard(
     val hasTheme = viewModel.getThemeOptions(appType.packageName) != null
     val hasBranding = viewModel.getBrandingOptions(appType.packageName) != null
     val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
-    val hasHideShorts = appType == AppType.YOUTUBE && viewModel.getHideShortsOptions() != null
 
     Column {
         // Header with app icon and title

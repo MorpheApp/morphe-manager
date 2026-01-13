@@ -15,7 +15,6 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
-import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
@@ -26,12 +25,7 @@ import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.util.MPP_FILE_MIME_TYPES
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.RequestInstallAppsContract
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
+import app.revanced.manager.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -85,8 +79,6 @@ class HomeStates(
 ) {
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
-    var showBundlesSheet by mutableStateOf(false)
-    var isRefreshingBundle by mutableStateOf(false)
     var showPatchesSheet by mutableStateOf(false)
     var showChangelogSheet by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
@@ -249,9 +241,6 @@ class HomeStates(
     /**
      * Start patching flow with optional expert mode
      */
-    /**
-     * Start patching flow with optional expert mode
-     */
     suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
         // Check if expert mode is enabled
         val expertModeEnabled = dashboardViewModel.prefs.useExpertMode.getBlocking()
@@ -268,7 +257,8 @@ class HomeStates(
 
         if (expertModeEnabled) {
             // Expert mode: Allow user to select patches from all bundles
-            val effectiveAllowIncompatible = true // Always allow incompatible patches in Expert mode
+            // In Expert mode, always allow incompatible patches so user can see all options
+            val effectiveAllowIncompatible = true
 
             // Get default patch selection (all patches marked with include=true)
             val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
@@ -287,6 +277,7 @@ class HomeStates(
             showExpertModeDialog = true
         } else {
             // Simple mode: Use only default bundle with include=true patches
+            // Filter bundles based on allowIncompatible setting
             val defaultBundle = bundles.firstOrNull { it.uid == 0 }
             if (defaultBundle == null) {
                 context.toast(context.getString(R.string.morphe_home_no_patches_available))
@@ -295,12 +286,13 @@ class HomeStates(
             }
 
             // Get patches only from default bundle with include=true
-            val patches = mapOf(
-                0 to defaultBundle.patches
-                    .filter { it.include }
-                    .map { it.name }
-                    .toSet()
-            ).filterValues { it.isNotEmpty() }
+            // In Simple mode, respect the allowIncompatible setting
+            val allPatches = defaultBundle.patchSequence(allowIncompatible)
+                .filter { it.include }
+                .map { it.name }
+                .toSet()
+
+            val patches = mapOf(0 to allPatches).filterValues { it.isNotEmpty() }
 
             if (patches.isEmpty() || patches[0]?.isEmpty() == true) {
                 context.toast(context.getString(R.string.morphe_home_no_patches_available))

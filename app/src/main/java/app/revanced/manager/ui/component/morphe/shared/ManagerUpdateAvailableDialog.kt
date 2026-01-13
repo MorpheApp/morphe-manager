@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.component.morphe.home
+package app.revanced.manager.ui.component.morphe.shared
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.network.dto.ReVancedAsset
 import app.revanced.manager.ui.component.Markdown
-import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.relativeTime
 

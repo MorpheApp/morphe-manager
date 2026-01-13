@@ -34,17 +34,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.ui.component.bundle.ImportPatchBundleDialog
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 /**
  * Container for all MorpheHomeScreen dialogs
@@ -54,7 +49,6 @@ fun HomeDialogs(
     state: HomeStates
 ) {
     val uriHandler = LocalUriHandler.current
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // Dialog 1: APK Availability - "Do you have the APK?"
@@ -98,13 +92,9 @@ fun HomeDialogs(
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(if (state.showFilePickerPromptDialog) 0 else 200))
     ) {
-        val appName = state.pendingAppName ?: return@AnimatedVisibility
-        val recommendedVersion = state.pendingRecommendedVersion
         val usingMountInstall = state.usingMountInstall
 
         DownloadInstructionsDialog(
-            appName = appName,
-            recommendedVersion = recommendedVersion,
             usingMountInstall = usingMountInstall,
             onDismiss = {
                 state.showDownloadInstructionsDialog = false
@@ -401,8 +391,6 @@ private fun ApkAvailabilityDialog(
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun DownloadInstructionsDialog(
-    appName: String,
-    recommendedVersion: String?,
     usingMountInstall: Boolean,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
