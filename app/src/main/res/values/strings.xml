@@ -205,7 +205,8 @@
     <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
 
-    <!-- Advanced Section -->
+    <!-- Expert Settings Section -->
+    <string name="morphe_expert_section">Expert settings</string>
     <string name="morphe_settings_expert_mode">Expert Mode</string>
     <string name="morphe_settings_expert_mode_description">Enable advanced features and customization options</string>
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>

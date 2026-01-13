@@ -42,6 +42,7 @@ fun AdvancedTabContent(
 ) {
     val scope = rememberCoroutineScope()
     val useExpertMode by prefs.useExpertMode.getAsState()
+    val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
 
     Column(
         modifier = Modifier
@@ -50,12 +51,13 @@ fun AdvancedTabContent(
             .padding(horizontal = 16.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Return to expert mode button
+        // Expert settings section
         SectionTitle(
-            stringResource(R.string.advanced),
+            stringResource(R.string.morphe_expert_section),
             icon = Icons.Outlined.Engineering
         )
 
+        // Return to Expert mode button (URV mode)
         MorpheCard(
             onClick = onBackToAdvanced,
             borderWidth = 1.dp
@@ -96,6 +98,31 @@ fun AdvancedTabContent(
                     )
                 },
             )
+        }
+
+        // Strip unused native libraries (only show in Expert mode)
+        if (useExpertMode) {
+            SettingsItemCard(
+                onClick = {
+                    scope.launch {
+                        prefs.stripUnusedNativeLibs.update(!stripUnusedNativeLibs)
+                    }
+                },
+                borderWidth = 1.dp
+            ) {
+                IconTextRow(
+                    icon = Icons.Outlined.LayersClear,
+                    title = stringResource(R.string.strip_unused_libs),
+                    description = stringResource(R.string.strip_unused_libs_description),
+                    modifier = Modifier.padding(16.dp),
+                    trailingContent = {
+                        Switch(
+                            checked = stripUnusedNativeLibs,
+                            onCheckedChange = null
+                        )
+                    }
+                )
+            }
         }
 
         // Updates
