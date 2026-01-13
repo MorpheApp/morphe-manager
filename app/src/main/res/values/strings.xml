@@ -51,13 +51,14 @@
     <string name="morphe_rename">Rename</string>
 
     <!-- Add Bundle Dialog -->
-    <string name="morphe_add_patch_bundle">Add Patch Bundle</string>
+    <string name="morphe_add_patch_bundle">Add patch bundle</string>
     <string name="morphe_remote">Remote</string>
     <string name="morphe_local">Local</string>
     <string name="morphe_remote_source_url">Bundle URL</string>
     <string name="morphe_remote_bundle_description">Enter JSON endpoint URL for remote patch bundle</string>
-    <string name="morphe_select_patch_bundle_file">Select Patch Bundle File</string>
-    <string name="morphe_change_file">Change File</string>
+    <string name="morphe_select_patch_bundle_file">Select patch bundle file</string>
+    <string name="morphe_home_no_patches_available">No patches available</string>
+    <string name="morphe_change_file">Change file</string>
     <string name="morphe_local_bundle_description">Select a .mpp patch bundle file from storage</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
@@ -81,6 +82,18 @@
     <string name="morphe_home_file_picker_prompt_open">Open APK file I downloaded</string>
     <string name="morphe_home_recommended_version">Recommended version</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
+
+    <!-- Expert Mode Dialog Strings -->
+    <string name="morphe_expert_mode_title">Expert mode</string>
+    <string name="morphe_expert_mode_subtitle">%d patches selected</string>
+    <string name="morphe_expert_mode_search_placeholder">Search patches…</string>
+    <string name="morphe_expert_mode_has_options">Configurable</string>
+    <string name="morphe_expert_mode_no_results">No patches found matching your search</string>
+    <string name="morphe_expert_mode_no_patches">No patches selected</string>
+    <string name="morphe_expert_mode_proceed">Start patching</string>
+    <string name="remove">Remove</string>
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
 
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>

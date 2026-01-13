@@ -27,6 +27,8 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.QuickPatchParams
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.util.MPP_FILE_MIME_TYPES
+import app.revanced.manager.util.Options
+import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.RequestInstallAppsContract
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
@@ -75,7 +77,7 @@ data class WrongPackageDialogState(
 @Stable
 class HomeStates(
     val dashboardViewModel: DashboardViewModel,
-    private val optionsRepository: PatchOptionsRepository,
+    val optionsRepository: PatchOptionsRepository,
     private val context: Context,
     private val scope: CoroutineScope,
     private val onStartQuickPatch: (QuickPatchParams) -> Unit,
@@ -89,6 +91,13 @@ class HomeStates(
     var showChangelogSheet by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
     var showAddBundleDialog by mutableStateOf(false)
+
+    // Expert mode state
+    var showExpertModeDialog by mutableStateOf(false)
+    var expertModeSelectedApp by mutableStateOf<SelectedApp?>(null)
+    var expertModeBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
+    var expertModePatches by mutableStateOf<PatchSelection>(emptyMap())
+    var expertModeOptions by mutableStateOf<Options>(emptyMap())
 
     // Bundle file selection
     var selectedBundleUri by mutableStateOf<Uri?>(null)
@@ -238,40 +247,149 @@ class HomeStates(
     }
 
     /**
-     * Start patching process with selected app
+     * Start patching flow with optional expert mode
      */
     suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
-        val allBundles = withContext(Dispatchers.IO) {
-            dashboardViewModel.patchBundleRepository
-                .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
-                .first()
+        // Check if expert mode is enabled
+        val expertModeEnabled = dashboardViewModel.prefs.useExpertMode.getBlocking()
+
+        // In expert mode, always allow incompatible patches so user can see all options
+        val effectiveAllowIncompatible = if (expertModeEnabled) true else allowIncompatible
+
+        val bundles = dashboardViewModel.patchBundleRepository
+            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
+            .first()
+
+        if (bundles.isEmpty()) {
+            context.toast(context.getString(R.string.morphe_home_no_patches_available))
+            cleanupPendingData()
+            return
         }
 
-        // Filter to only use default bundle (bundle 0) in Morphe mode to prevent conflicts with custom patch bundles
-        val bundles = allBundles.filter { it.uid == DEFAULT_SOURCE_UID }
+        // Get default patch selection (all patches marked with include=true)
+        val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
 
-        val patches = bundles.toPatchSelection(allowIncompatible) { _, patch ->
-            patch.include &&
-                    // Exclude GmsCore support patch in root mode
-                    // Eventually this will be improved with patcher changes
-                    (!usingMountInstall || !patch.name.equals("GmsCore support", ignoreCase = true))
-        }
-
-        val bundlePatches = bundles.associate { scoped ->
-            scoped.uid to scoped.patches.associateBy { it.name }
-        }
-
-        val options = withContext(Dispatchers.IO) {
-            optionsRepository.getOptions(selectedApp.packageName, bundlePatches)
-        }
-
-        val params = QuickPatchParams(
-            selectedApp = selectedApp,
-            patches = patches,
-            options = options
+        // Get saved options from repository
+        val savedOptions = optionsRepository.getOptions(
+            selectedApp.packageName,
+            bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
         )
 
-        onStartQuickPatch(params)
+        if (expertModeEnabled) {
+            // Show expert mode dialog for patch selection review
+            expertModeSelectedApp = selectedApp
+            expertModeBundles = bundles
+            expertModePatches = patches.toMutableMap()
+            expertModeOptions = savedOptions.toMutableMap()
+            showExpertModeDialog = true
+        } else {
+            // Directly start patching with default selection (all patches with include=true)
+            proceedWithPatching(selectedApp, patches, savedOptions)
+        }
+    }
+
+    /**
+     * Proceed with patching after expert mode confirmation or directly
+     */
+    fun proceedWithPatching(
+        selectedApp: SelectedApp,
+        patches: PatchSelection,
+        options: Options
+    ) {
+        onStartQuickPatch(
+            QuickPatchParams(
+                selectedApp = selectedApp,
+                patches = patches,
+                options = options
+            )
+        )
+        cleanupPendingData()
+    }
+
+    /**
+     * Toggle patch selection in expert mode
+     */
+    fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
+        val currentPatches = expertModePatches.toMutableMap()
+        val bundlePatches = currentPatches[bundleUid]?.toMutableSet() ?: return
+
+        if (patchName in bundlePatches) {
+            bundlePatches.remove(patchName)
+        } else {
+            bundlePatches.add(patchName)
+        }
+
+        if (bundlePatches.isEmpty()) {
+            currentPatches.remove(bundleUid)
+        } else {
+            currentPatches[bundleUid] = bundlePatches
+        }
+
+        expertModePatches = currentPatches
+    }
+
+    /**
+     * Update option value in expert mode
+     */
+    fun updateOptionInExpertMode(
+        bundleUid: Int,
+        patchName: String,
+        optionKey: String,
+        value: Any?
+    ) {
+        val currentOptions = expertModeOptions.toMutableMap()
+        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
+        val patchOptions = bundleOptions[patchName]?.toMutableMap() ?: mutableMapOf()
+
+        if (value == null) {
+            patchOptions.remove(optionKey)
+        } else {
+            patchOptions[optionKey] = value
+        }
+
+        // Clean up empty maps
+        if (patchOptions.isEmpty()) {
+            bundleOptions.remove(patchName)
+        } else {
+            bundleOptions[patchName] = patchOptions
+        }
+
+        if (bundleOptions.isEmpty()) {
+            currentOptions.remove(bundleUid)
+        } else {
+            currentOptions[bundleUid] = bundleOptions
+        }
+
+        expertModeOptions = currentOptions
+    }
+
+    /**
+     * Reset options for a patch in expert mode
+     */
+    fun resetOptionsInExpertMode(bundleUid: Int, patchName: String) {
+        val currentOptions = expertModeOptions.toMutableMap()
+        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: return
+
+        bundleOptions.remove(patchName)
+
+        if (bundleOptions.isEmpty()) {
+            currentOptions.remove(bundleUid)
+        } else {
+            currentOptions[bundleUid] = bundleOptions
+        }
+
+        expertModeOptions = currentOptions
+    }
+
+    /**
+     * Clean up expert mode data
+     */
+    fun cleanupExpertModeData() {
+        showExpertModeDialog = false
+        expertModeSelectedApp = null
+        expertModeBundles = emptyList()
+        expertModePatches = emptyMap()
+        expertModeOptions = emptyMap()
     }
 
     // TODO: Move this logic somewhere more appropriate.

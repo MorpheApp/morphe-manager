@@ -41,7 +41,7 @@ fun AdvancedTabContent(
     onBackToAdvanced: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    val expertMode by prefs.useExpertMode.flow.collectAsStateWithLifecycle(initialValue = true)
+    val useExpertMode by prefs.useExpertMode.getAsState()
 
     Column(
         modifier = Modifier
@@ -79,7 +79,7 @@ fun AdvancedTabContent(
         SettingsItemCard(
             onClick = {
                 scope.launch {
-                    prefs.useExpertMode.update(!expertMode)
+                    prefs.useExpertMode.update(!useExpertMode)
                 }
             },
             borderWidth = 1.dp
@@ -91,10 +91,10 @@ fun AdvancedTabContent(
                 modifier = Modifier.padding(16.dp),
                 trailingContent = {
                     Switch(
-                        checked = expertMode,
+                        checked = useExpertMode,
                         onCheckedChange = null
                     )
-                }
+                },
             )
         }
 

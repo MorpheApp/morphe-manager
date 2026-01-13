@@ -44,6 +44,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Container for all MorpheHomeScreen dialogs
@@ -181,6 +182,52 @@ fun HomeDialogs(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
             onDismiss = { state.showWrongPackageDialog = null }
+        )
+    }
+
+    // Expert Mode Dialog
+    AnimatedVisibility(
+        visible = state.showExpertModeDialog && state.expertModeSelectedApp != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val selectedApp = state.expertModeSelectedApp ?: return@AnimatedVisibility
+        val allowIncompatible = state.dashboardViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
+
+        ExpertModeDialog(
+            bundles = state.expertModeBundles,
+            selectedPatches = state.expertModePatches,
+            options = state.expertModeOptions,
+            onPatchToggle = { bundleUid, patchName ->
+                state.togglePatchInExpertMode(bundleUid, patchName)
+            },
+            onOptionChange = { bundleUid, patchName, optionKey, value ->
+                state.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
+            },
+            onResetOptions = { bundleUid, patchName ->
+                state.resetOptionsInExpertMode(bundleUid, patchName)
+            },
+            onDismiss = {
+                state.cleanupExpertModeData()
+            },
+            onProceed = {
+                // Save current selection and proceed with patching
+                val finalPatches = state.expertModePatches
+                val finalOptions = state.expertModeOptions
+
+                state.showExpertModeDialog = false
+
+                // Save options to repository
+                scope.launch(Dispatchers.IO) {
+                    state.optionsRepository.saveOptions(selectedApp.packageName, finalOptions)
+
+                    withContext(Dispatchers.Main) {
+                        state.proceedWithPatching(selectedApp, finalPatches, finalOptions)
+                        state.cleanupExpertModeData()
+                    }
+                }
+            },
+            allowIncompatible = allowIncompatible
         )
     }
 
