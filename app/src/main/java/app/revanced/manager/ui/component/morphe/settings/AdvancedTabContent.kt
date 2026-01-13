@@ -13,14 +13,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.settings.PatchOptionsSection
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.component.morphe.shared.SectionTitle
@@ -40,8 +40,8 @@ fun AdvancedTabContent(
     prefs: PreferencesManager,
     onBackToAdvanced: () -> Unit
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val expertMode by prefs.useExpertMode.flow.collectAsStateWithLifecycle(initialValue = true)
 
     Column(
         modifier = Modifier
@@ -70,6 +70,29 @@ fun AdvancedTabContent(
                         imageVector = Icons.Outlined.ChevronRight,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            )
+        }
+
+        // Expert Mode
+        SettingsItemCard(
+            onClick = {
+                scope.launch {
+                    prefs.useExpertMode.update(!expertMode)
+                }
+            },
+            borderWidth = 1.dp
+        ) {
+            IconTextRow(
+                icon = Icons.Outlined.Psychology,
+                title = stringResource(R.string.morphe_settings_expert_mode),
+                description = stringResource(R.string.morphe_settings_expert_mode_description),
+                modifier = Modifier.padding(16.dp),
+                trailingContent = {
+                    Switch(
+                        checked = expertMode,
+                        onCheckedChange = null
                     )
                 }
             )

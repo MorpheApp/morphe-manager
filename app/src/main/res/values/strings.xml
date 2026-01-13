@@ -182,6 +182,8 @@
     <string name="morphe_background_type_none">None</string>
 
     <!-- Advanced Section -->
+    <string name="morphe_settings_expert_mode">Expert Mode</string>
+    <string name="morphe_settings_expert_mode_description">Enable advanced features and customization options</string>
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>
     <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>
 
