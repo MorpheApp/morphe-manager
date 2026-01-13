@@ -61,9 +61,9 @@ fun ExpertModeDialog(
     }
 
     // Get all patches with their enabled state
-    val allPatchesInfo = remember(bundles, selectedPatches, allowIncompatible) {
+    val allPatchesInfo = remember(bundles, localSelectedPatches, allowIncompatible) {
         bundles.map { bundle ->
-            val selected = selectedPatches[bundle.uid] ?: emptySet()
+            val selected = localSelectedPatches[bundle.uid] ?: emptySet()
             // In expert mode, always show all patches (force allowIncompatible = true)
             val patches = bundle.patchSequence(true)
                 .map { patch -> patch to (patch.name in selected) }
@@ -74,7 +74,7 @@ fun ExpertModeDialog(
     }
 
     // Filter patches based on search query
-    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery) {
+    val filteredPatchesInfo = remember(allPatchesInfo, searchQuery, localSelectedPatches) {
         if (searchQuery.isBlank()) {
             allPatchesInfo
         } else {
