@@ -46,7 +46,7 @@ fun HomeBundleChangelogSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentWindowInsets = { WindowInsets.systemBars },
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         scrimColor = Color.Transparent
     ) {
         when (val current = state) {
@@ -137,7 +137,8 @@ private fun BundleChangelogSheetContent(
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(scrollState)
-            .padding(start = 24.dp, bottom = 24.dp, end = 24.dp)
+            .navigationBarsPadding()
+            .padding(horizontal = 16.dp)
     ) {
         // Header Content
         Column(

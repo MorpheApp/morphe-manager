@@ -75,7 +75,7 @@ fun HomeBundleManagementSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentWindowInsets = { WindowInsets.systemBars },
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         scrimColor = Color.Transparent
     ) {
         val context = LocalContext.current
@@ -84,6 +84,7 @@ fun HomeBundleManagementSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .navigationBarsPadding()
                 .padding(horizontal = 16.dp)
         ) {
             // Header

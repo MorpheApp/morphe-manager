@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,14 +51,15 @@ fun HomeBundlePatchesSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentWindowInsets = { WindowInsets.systemBars },
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         scrimColor = Color.Transparent
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .padding(start = 24.dp, bottom = 24.dp, end = 24.dp)
+                .navigationBarsPadding()
+                .padding(horizontal = 16.dp)
         ) {
             // Header Content
             Column(
