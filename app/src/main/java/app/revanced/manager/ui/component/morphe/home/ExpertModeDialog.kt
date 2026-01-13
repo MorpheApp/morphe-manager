@@ -60,11 +60,12 @@ fun ExpertModeDialog(
         mutableStateOf(selectedPatches.toMap())
     }
 
-    // Get all patches with their enabled state using local state
-    val allPatchesInfo = remember(bundles, localSelectedPatches) {
+    // Get all patches with their enabled state
+    val allPatchesInfo = remember(bundles, selectedPatches, allowIncompatible) {
         bundles.map { bundle ->
-            val selected = localSelectedPatches[bundle.uid] ?: emptySet()
-            val patches = bundle.patchSequence(allowIncompatible)
+            val selected = selectedPatches[bundle.uid] ?: emptySet()
+            // In expert mode, always show all patches (force allowIncompatible = true)
+            val patches = bundle.patchSequence(true)
                 .map { patch -> patch to (patch.name in selected) }
                 .toList()
 
