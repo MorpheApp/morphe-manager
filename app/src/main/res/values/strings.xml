@@ -82,20 +82,27 @@
     <string name="morphe_home_file_picker_prompt_open">Open APK file I downloaded</string>
     <string name="morphe_home_recommended_version">Recommended version</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
-
-    <!-- Expert Mode Dialog Strings -->
+    <!-- Dialog 4: Expert Mode Dialog -->
     <string name="morphe_expert_mode_title">Expert Mode</string>
-    <string name="morphe_expert_mode_subtitle_extended">%1$d enabled of %2$d patches</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
     <string name="morphe_expert_mode_search_placeholder">Search patches…</string>
+    <string name="morphe_expert_mode_proceed">Proceed to Patching</string>
+    <string name="morphe_expert_mode_disable_all">Disable all</string>
+    <string name="morphe_expert_mode_enable_all">Enable all</string>
+    <string name="morphe_expert_mode_disable">Disable</string>
+    <string name="morphe_expert_mode_enable">Enable</string>
     <string name="morphe_expert_mode_has_options">Configurable</string>
-    <string name="morphe_expert_mode_no_results">No patches found matching your search</string>
+    <string name="morphe_expert_mode_no_results">No patches found</string>
     <string name="morphe_expert_mode_no_patches">No patches available</string>
-    <string name="morphe_expert_mode_proceed">Start Patching</string>
-    <string name="morphe_expert_mode_enable">Enable patch</string>
-    <string name="morphe_expert_mode_disable">Disable patch</string>
-    <string name="morphe_expert_mode_enable_all">Enable all patches</string>
-    <string name="morphe_expert_mode_disable_all">Disable all patches</string>
-    <string name="remove">Remove</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Custom color</string>
+    <string name="morphe_hex_color">Hex color</string>
+    <string name="morphe_patch_option_enter_path">Enter path</string>
+    <string name="morphe_patch_option_instructions">Instructions</string>
+    <string name="morphe_patch_option_enter_value">Enter value</string>
+    <string name="morphe_patch_option_enter_number">Enter number</string>
+    <string name="morphe_patch_option_enter_decimal">Enter decimal</string>
+    <string name="morphe_patch_option_pick_folder">Pick folder</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
 
@@ -222,9 +229,6 @@
     <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
     <string name="morphe_patch_options_no_available">No options available for this patch</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Custom color</string>
-    <string name="morphe_hex_color">Hex color</string>
     <!-- Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Custom branding</string>
     <string name="morphe_patch_options_custom_branding_description">Change the app display name</string>
