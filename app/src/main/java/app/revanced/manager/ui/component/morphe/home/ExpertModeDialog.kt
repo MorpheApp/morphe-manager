@@ -307,12 +307,23 @@ private fun BundleHeader(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.weight(1f)
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Source,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(20.dp)
-            )
+            Surface(
+                modifier = Modifier.size(32.dp),
+                shape = RoundedCornerShape(50),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Source,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
             Text(
                 text = bundleName,
                 style = MaterialTheme.typography.titleMedium,
