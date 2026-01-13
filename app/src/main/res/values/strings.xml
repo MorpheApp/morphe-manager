@@ -286,6 +286,18 @@ The image dimensions must be as follows:
     <string name="morphe_patch_options_hide_shorts_widget">Hide Shorts widget</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Remove Shorts button from launcher widget</string>
 
+    <!-- System Section -->
+    <string name="morphe_performance">Performance</string>
+    <string name="morphe_process_runtime">Process runtime</string>
+    <string name="morphe_process_runtime_description">Run patching in separate process for better stability</string>
+    <string name="morphe_process_runtime_memory_limit">Memory Limit</string>
+    <string name="morphe_process_runtime_memory_limit_help">Adjust memory available for patching process. Lower values reduce memory usage but may cause failures for large apps.</string>
+    <string name="morphe_enable_process_runtime">Enable process runtime</string>
+    <string name="morphe_memory_limit_subtitle">Memory available for patching</string>
+    <string name="morphe_memory_limit_warning">Low memory limit may cause patching failures</string>
+    <string name="morphe_process_runtime_enabled_description">Enabled • %d MB limit</string>
+    <string name="morphe_process_runtime_disabled_description">Disabled • Click to configure</string>
+
     <!-- Other strings -->
     <string name="app_name" translatable="false">Morphe</string>
     <string name="main_top_title" translatable="false">Morphe</string>

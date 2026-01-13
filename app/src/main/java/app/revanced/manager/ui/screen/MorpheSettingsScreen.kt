@@ -251,7 +251,7 @@ fun MorpheSettingsScreen(
                         onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                         onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                         onAboutClick = { showAboutDialog = true },
-                        useExpertMode = useExpertMode
+                        prefs = prefs
                     )
                 }
             }
