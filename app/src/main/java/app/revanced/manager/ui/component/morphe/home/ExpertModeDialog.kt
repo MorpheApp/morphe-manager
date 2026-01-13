@@ -12,6 +12,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -64,7 +66,7 @@ fun ExpertModeDialog(
     val allPatchesInfo = remember(bundles, localSelectedPatches, allowIncompatible) {
         bundles.map { bundle ->
             val selected = localSelectedPatches[bundle.uid] ?: emptySet()
-            // In expert mode, always show all patches (force allowIncompatible = true)
+            // In Expert mode, always show all patches (force allowIncompatible = true)
             val patches = bundle.patchSequence(true)
                 .map { patch -> patch to (patch.name in selected) }
                 .toList()
@@ -90,6 +92,9 @@ fun ExpertModeDialog(
 
     val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
+
+    // Check if only one bundle exists
+    val showBundleToggleButtons = filteredPatchesInfo.size > 1
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -226,7 +231,8 @@ fun ExpertModeDialog(
                                 }
 
                                 localSelectedPatches = currentPatches
-                            }
+                            },
+                            showToggleButton = showBundleToggleButtons
                         )
 
                         patches.forEach { (patch, isEnabled) ->
@@ -291,7 +297,8 @@ private fun BundleHeader(
     bundleName: String,
     enabledCount: Int,
     totalCount: Int,
-    onToggleAll: () -> Unit
+    onToggleAll: () -> Unit,
+    showToggleButton: Boolean = true
 ) {
     val allEnabled = enabledCount == totalCount
 
@@ -337,28 +344,30 @@ private fun BundleHeader(
             )
         }
 
-        FilledTonalIconButton(
-            onClick = onToggleAll,
-            modifier = Modifier.size(32.dp),
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = if (allEnabled)
-                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
-                else
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                contentColor = if (allEnabled)
-                    MaterialTheme.colorScheme.error
-                else
-                    MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Icon(
-                imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
-                contentDescription = stringResource(
-                    if (allEnabled) R.string.morphe_expert_mode_disable_all
-                    else R.string.morphe_expert_mode_enable_all
-                ),
-                modifier = Modifier.size(18.dp)
-            )
+        if (showToggleButton) {
+            FilledTonalIconButton(
+                onClick = onToggleAll,
+                modifier = Modifier.size(32.dp),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = if (allEnabled)
+                        MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
+                    else
+                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                    contentColor = if (allEnabled)
+                        MaterialTheme.colorScheme.error
+                    else
+                        MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Icon(
+                    imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
+                    contentDescription = stringResource(
+                        if (allEnabled) R.string.morphe_expert_mode_disable_all
+                        else R.string.morphe_expert_mode_enable_all
+                    ),
+                    modifier = Modifier.size(18.dp)
+                )
+            }
         }
     }
 }
@@ -478,7 +487,7 @@ private fun PatchCard(
                         )
                     ) {
                         Icon(
-                            imageVector = if (isEnabled) Icons.Default.Close else Icons.Default.Check,
+                            imageVector = if (isEnabled) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
                             contentDescription = stringResource(
                                 if (isEnabled) R.string.morphe_expert_mode_disable
                                 else R.string.morphe_expert_mode_enable
