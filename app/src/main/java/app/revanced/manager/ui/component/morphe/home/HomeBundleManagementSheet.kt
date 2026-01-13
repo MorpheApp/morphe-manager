@@ -53,6 +53,7 @@ fun HomeBundleManagementSheet(
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
+    onRename: (PatchBundleSource) -> Unit,
     onPatchesClick: (PatchBundleSource) -> Unit,
     onVersionClick: (PatchBundleSource) -> Unit
 ) {
@@ -137,6 +138,7 @@ fun HomeBundleManagementSheet(
                         onDelete = { bundleToDelete = bundle },
                         onDisable = { onDisable(bundle) },
                         onUpdate = { onUpdate(bundle) },
+                        onRename = { onRename(bundle) },
                         onPatchesClick = { onPatchesClick(bundle) },
                         onVersionClick = { onVersionClick(bundle) },
                         onOpenInBrowser = {
@@ -157,7 +159,7 @@ fun HomeBundleManagementSheet(
 
     // Delete confirmation dialog
     if (bundleToDelete != null) {
-        BundleDeleteConfirmDialog(
+        MorpheBundleDeleteConfirmDialog(
             bundle = bundleToDelete!!,
             onDismiss = { bundleToDelete = null },
             onConfirm = {
@@ -179,6 +181,7 @@ private fun BundleManagementCard(
     onDelete: () -> Unit,
     onDisable: () -> Unit,
     onUpdate: () -> Unit,
+    onRename: () -> Unit,
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
@@ -242,48 +245,69 @@ private fun BundleManagementCard(
                 }
 
                 // Bundle info
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = bundle.displayTitle,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        color = if (bundle.enabled) {
-                            MaterialTheme.colorScheme.onSurface
-                        } else {
-                            MaterialTheme.colorScheme.outline
-                        }
-                    )
-
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (bundle.isDefault) {
-                            Text(
-                                text = stringResource(R.string.bundle_type_preinstalled),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        } else {
-                            val type = when (bundle) {
-                                is RemotePatchBundle -> stringResource(R.string.bundle_type_remote)
-                                else -> stringResource(R.string.bundle_type_local)
+                Row(
+                    modifier = Modifier.weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = bundle.displayTitle,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            color = if (bundle.enabled) {
+                                MaterialTheme.colorScheme.onSurface
+                            } else {
+                                MaterialTheme.colorScheme.outline
                             }
-                            Text(
-                                text = type,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
+                        )
 
-                        if (!bundle.enabled) {
-                            Text("•", style = MaterialTheme.typography.bodySmall)
-                            Text(
-                                text = stringResource(R.string.morphe_disabled),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.outline
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (bundle.isDefault) {
+                                Text(
+                                    text = stringResource(R.string.bundle_type_preinstalled),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            } else {
+                                val type = when (bundle) {
+                                    is RemotePatchBundle -> stringResource(R.string.bundle_type_remote)
+                                    else -> stringResource(R.string.bundle_type_local)
+                                }
+                                Text(
+                                    text = type,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            if (!bundle.enabled) {
+                                Text("•", style = MaterialTheme.typography.bodySmall)
+                                Text(
+                                    text = stringResource(R.string.morphe_disabled),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.outline
+                                )
+                            }
+                        }
+                    }
+
+                    // Rename button (only for non-default bundles)
+                    if (!bundle.isDefault) {
+                        IconButton(
+                            onClick = onRename,
+                            modifier = Modifier.size(36.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Edit,
+                                contentDescription = stringResource(R.string.morphe_rename),
+                                modifier = Modifier.size(18.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }

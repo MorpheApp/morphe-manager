@@ -2,9 +2,12 @@ package app.revanced.manager.ui.component.morphe.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -13,8 +16,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -216,7 +221,7 @@ private fun LocalTabContent(
 }
 
 @Composable
-fun BundleDeleteConfirmDialog(
+fun MorpheBundleDeleteConfirmDialog(
     bundle: PatchBundleSource,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
@@ -244,5 +249,78 @@ fun BundleDeleteConfirmDialog(
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor
         )
+    }
+}
+
+/**
+ * Dialog for renaming a bundle
+ */
+@Composable
+fun MorpheRenameBundleDialog(
+    initialValue: String,
+    onDismissRequest: () -> Unit,
+    onConfirm: (String) -> Unit
+) {
+    var textValue by remember { mutableStateOf(initialValue) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    MorpheDialog(
+        onDismissRequest = onDismissRequest,
+        title = stringResource(R.string.patches_display_name),
+        dismissOnClickOutside = false,
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(android.R.string.ok),
+                onPrimaryClick = {
+                    keyboardController?.hide()
+                    onConfirm(textValue)
+                },
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = {
+                    keyboardController?.hide()
+                    onDismissRequest()
+                }
+            )
+        }
+    ) {
+        val secondaryColor = LocalDialogSecondaryTextColor.current
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.patch_bundle_rename),
+                style = MaterialTheme.typography.bodyMedium,
+                color = secondaryColor
+            )
+
+            MorpheDialogTextField(
+                value = textValue,
+                onValueChange = { textValue = it },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.morphe_patch_option_enter_value),
+                        color = secondaryColor.copy(alpha = 0.5f)
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = null,
+                        tint = secondaryColor
+                    )
+                },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        keyboardController?.hide()
+                        onConfirm(textValue)
+                    }
+                )
+            )
+        }
     }
 }

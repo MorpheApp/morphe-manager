@@ -83,6 +83,8 @@ class HomeStates(
     var showChangelogSheet by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
     var showAddBundleDialog by mutableStateOf(false)
+    var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
+    var showRenameBundleDialog by mutableStateOf(false)
 
     // Expert mode state
     var showExpertModeDialog by mutableStateOf(false)

@@ -20,7 +20,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +36,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.component.TextInputDialog
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
@@ -50,6 +56,9 @@ fun HomeDialogs(
 ) {
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
+
+    var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
+    var showRenameBundleDialog by mutableStateOf(false)
 
     // Dialog 1: APK Availability - "Do you have the APK?"
     AnimatedVisibility(
@@ -265,6 +274,10 @@ fun HomeDialogs(
                     }
                 }
             },
+            onRename = { bundle ->
+                state.bundleToRename = bundle
+                state.showRenameBundleDialog = true
+            },
             onPatchesClick = { bundle ->
                 state.showBundleManagementSheet = false
                 state.apiBundle = bundle
@@ -310,6 +323,40 @@ fun HomeDialogs(
                 state.openBundlePicker()
             },
             selectedLocalPath = state.selectedBundlePath
+        )
+    }
+
+    // Rename bundle dialog
+    if (state.showRenameBundleDialog && state.bundleToRename != null) {
+        val bundle = state.bundleToRename!!
+        val context = LocalContext.current
+
+        MorpheRenameBundleDialog(
+            initialValue = bundle.displayName.orEmpty(),
+            onDismissRequest = {
+                state.showRenameBundleDialog = false
+                state.bundleToRename = null
+            },
+            onConfirm = { value ->
+                scope.launch {
+                    val result = state.dashboardViewModel.patchBundleRepository.setDisplayName(
+                        bundle.uid,
+                        value.trim().ifEmpty { null }
+                    )
+                    when (result) {
+                        PatchBundleRepository.DisplayNameUpdateResult.SUCCESS, PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> {
+                            state.showRenameBundleDialog = false
+                            state.bundleToRename = null
+                        }
+                        PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE -> {
+                            context.toast(context.getString(R.string.patch_bundle_duplicate_name_error))
+                        }
+                        PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND -> {
+                            context.toast(context.getString(R.string.patch_bundle_missing_error))
+                        }
+                    }
+                }
+            }
         )
     }
 }
