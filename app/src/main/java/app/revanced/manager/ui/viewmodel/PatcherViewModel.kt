@@ -1838,20 +1838,20 @@ fun removeMissingPatchesAndStart() {
         val shouldPreserveInput =
             selectedForRun is SelectedApp.Local && (selectedForRun.temporary || forceKeepLocalInput)
 
-        // Completely isolate Morphe and Expert modes
-        val useMorpheMode = prefs.useMorpheHomeScreen.getBlocking()
+        // Determine which patches and options to use based on mode
+        val useExpertMode = prefs.useExpertMode.getBlocking()
 
-        val mergedOptions = if (useMorpheMode) {
-            // Morphe mode: Use ONLY preferences manager options
+        val mergedOptions = if (useExpertMode) {
+            // Expert mode: Use options from input
+            input.options
+        } else {
+            // Simple mode: Use options from preferences manager
             runBlocking {
                 when (packageName) {
                     PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
                     else -> patchOptionsPrefs.exportYouTubePatchOptions()
                 }
             }
-        } else {
-            // Expert mode: Use ONLY input options
-            input.options
         }
 
         return PatcherWorker.Args(

@@ -249,12 +249,12 @@ class HomeStates(
     /**
      * Start patching flow with optional expert mode
      */
+    /**
+     * Start patching flow with optional expert mode
+     */
     suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
         // Check if expert mode is enabled
         val expertModeEnabled = dashboardViewModel.prefs.useExpertMode.getBlocking()
-
-        // In expert mode, always allow incompatible patches so user can see all options
-        val effectiveAllowIncompatible = if (expertModeEnabled) true else allowIncompatible
 
         val bundles = dashboardViewModel.patchBundleRepository
             .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
@@ -266,25 +266,53 @@ class HomeStates(
             return
         }
 
-        // Get default patch selection (all patches marked with include=true)
-        val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
-
-        // Get saved options from repository
-        val savedOptions = optionsRepository.getOptions(
-            selectedApp.packageName,
-            bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-        )
-
         if (expertModeEnabled) {
-            // Show expert mode dialog for patch selection review
+            // Expert mode: Allow user to select patches from all bundles
+            val effectiveAllowIncompatible = true // Always allow incompatible patches in Expert mode
+
+            // Get default patch selection (all patches marked with include=true)
+            val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
+
+            // Get saved options from repository
+            val savedOptions = optionsRepository.getOptions(
+                selectedApp.packageName,
+                bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+            )
+
+            // Show Expert mode dialog for patch selection review
             expertModeSelectedApp = selectedApp
             expertModeBundles = bundles
             expertModePatches = patches.toMutableMap()
             expertModeOptions = savedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
-            // Directly start patching with default selection (all patches with include=true)
-            proceedWithPatching(selectedApp, patches, savedOptions)
+            // Simple mode: Use only default bundle with include=true patches
+            val defaultBundle = bundles.firstOrNull { it.uid == 0 }
+            if (defaultBundle == null) {
+                context.toast(context.getString(R.string.morphe_home_no_patches_available))
+                cleanupPendingData()
+                return
+            }
+
+            // Get patches only from default bundle with include=true
+            val patches = mapOf(
+                0 to defaultBundle.patches
+                    .filter { it.include }
+                    .map { it.name }
+                    .toSet()
+            ).filterValues { it.isNotEmpty() }
+
+            if (patches.isEmpty() || patches[0]?.isEmpty() == true) {
+                context.toast(context.getString(R.string.morphe_home_no_patches_available))
+                cleanupPendingData()
+                return
+            }
+
+            // Empty options - will be loaded from preferences in PatcherViewModel
+            val emptyOptions = emptyMap<Int, Map<String, Map<String, Any?>>>()
+
+            // Directly start patching with default bundle patches and empty options placeholder
+            proceedWithPatching(selectedApp, patches, emptyOptions)
         }
     }
 
