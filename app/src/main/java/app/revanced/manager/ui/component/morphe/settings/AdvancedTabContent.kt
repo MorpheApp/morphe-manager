@@ -55,27 +55,6 @@ fun AdvancedTabContent(
             stringResource(R.string.morphe_expert_section),
             icon = Icons.Outlined.Engineering
         )
-
-        // Return to Expert mode button (URV mode)
-        MorpheCard(
-            onClick = onBackToAdvanced,
-            borderWidth = 1.dp
-        ) {
-            IconTextRow(
-                icon = Icons.Outlined.SwapHoriz,
-                title = stringResource(R.string.morphe_settings_return_to_expert),
-                description = stringResource(R.string.morphe_settings_return_to_expert_description),
-                modifier = Modifier.padding(16.dp),
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            )
-        }
-
         // Expert Mode
         SettingsItemCard(
             onClick = {
@@ -97,6 +76,28 @@ fun AdvancedTabContent(
                     )
                 },
             )
+        }
+
+        // Return to Expert mode button (URV mode) (only show in Expert mode)
+        if (useExpertMode) {
+            MorpheCard(
+                onClick = onBackToAdvanced,
+                borderWidth = 1.dp
+            ) {
+                IconTextRow(
+                    icon = Icons.Outlined.SwapHoriz,
+                    title = stringResource(R.string.morphe_settings_return_to_expert),
+                    description = stringResource(R.string.morphe_settings_return_to_expert_description),
+                    modifier = Modifier.padding(16.dp),
+                    trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                )
+            }
         }
 
         // Strip unused native libraries (only show in Expert mode)
