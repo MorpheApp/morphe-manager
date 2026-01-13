@@ -84,13 +84,17 @@
     <string name="morphe_patcher_selected_version">Selected version</string>
 
     <!-- Expert Mode Dialog Strings -->
-    <string name="morphe_expert_mode_title">Expert mode</string>
-    <string name="morphe_expert_mode_subtitle">%d patches selected</string>
+    <string name="morphe_expert_mode_title">Expert Mode</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d enabled of %2$d patches</string>
     <string name="morphe_expert_mode_search_placeholder">Search patches…</string>
     <string name="morphe_expert_mode_has_options">Configurable</string>
     <string name="morphe_expert_mode_no_results">No patches found matching your search</string>
-    <string name="morphe_expert_mode_no_patches">No patches selected</string>
-    <string name="morphe_expert_mode_proceed">Start patching</string>
+    <string name="morphe_expert_mode_no_patches">No patches available</string>
+    <string name="morphe_expert_mode_proceed">Start Patching</string>
+    <string name="morphe_expert_mode_enable">Enable patch</string>
+    <string name="morphe_expert_mode_disable">Disable patch</string>
+    <string name="morphe_expert_mode_enable_all">Enable all patches</string>
+    <string name="morphe_expert_mode_disable_all">Disable all patches</string>
     <string name="remove">Remove</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
