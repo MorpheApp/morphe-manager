@@ -78,7 +78,10 @@ fun MorpheSettingsScreen(
     val rootInstaller: RootInstaller = koinInject()
 
     // Pager state for swipeable tabs
-    val pagerState = rememberPagerState(pageCount = { SettingsTab.entries.size })
+    val pagerState = rememberPagerState(
+        initialPage = SettingsTab.ADVANCED.ordinal, // Open the Advanced tab when opening settings
+        pageCount = { SettingsTab.entries.size }
+    )
     val currentTab = SettingsTab.entries[pagerState.currentPage]
 
     // Appearance settings
@@ -90,6 +93,9 @@ fun MorpheSettingsScreen(
 
     // Plugins
     val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
+
+    // Expert mode state
+    val useExpertMode by prefs.useExpertMode.getAsState()
 
     // Update
     val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
@@ -244,7 +250,8 @@ fun MorpheSettingsScreen(
                         importExportViewModel = importExportViewModel,
                         onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                         onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
-                        onAboutClick = { showAboutDialog = true }
+                        onAboutClick = { showAboutDialog = true },
+                        useExpertMode = useExpertMode
                     )
                 }
             }

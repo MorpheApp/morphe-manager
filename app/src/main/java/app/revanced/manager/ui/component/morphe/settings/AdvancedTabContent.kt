@@ -132,16 +132,18 @@ fun AdvancedTabContent(
             )
         }
 
-        // Patch Options
-        SectionTitle(
-            text = stringResource(R.string.morphe_patch_options),
-            icon = Icons.Outlined.Tune
-        )
+        // Patch Options (only show in Simple mode)
+        if (!useExpertMode) {
+            SectionTitle(
+                text = stringResource(R.string.morphe_patch_options),
+                icon = Icons.Outlined.Tune
+            )
 
-        PatchOptionsSection(
-            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-            viewModel = patchOptionsViewModel,
-            dashboardViewModel = dashboardViewModel
-        )
+            PatchOptionsSection(
+                patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
+                viewModel = patchOptionsViewModel,
+                dashboardViewModel = dashboardViewModel
+            )
+        }
     }
 }

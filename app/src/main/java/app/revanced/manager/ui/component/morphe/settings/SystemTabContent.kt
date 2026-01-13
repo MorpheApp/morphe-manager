@@ -32,7 +32,8 @@ fun SystemTabContent(
     importExportViewModel: ImportExportViewModel,
     onImportKeystore: () -> Unit,
     onExportKeystore: () -> Unit,
-    onAboutClick: () -> Unit
+    onAboutClick: () -> Unit,
+    useExpertMode: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -56,18 +57,20 @@ fun SystemTabContent(
             )
         }
 
-        // Import & Export
-        SectionTitle(
-            text = stringResource(R.string.import_export),
-            icon = Icons.Outlined.SwapHoriz
-        )
-
-        SectionCard {
-            ImportExportSection(
-                importExportViewModel = importExportViewModel,
-                onImportKeystore = onImportKeystore,
-                onExportKeystore = onExportKeystore
+        // Import & Export (only show in Exper mode)
+        if (useExpertMode) {
+            SectionTitle(
+                text = stringResource(R.string.import_export),
+                icon = Icons.Outlined.SwapHoriz
             )
+
+            SectionCard {
+                ImportExportSection(
+                    importExportViewModel = importExportViewModel,
+                    onImportKeystore = onImportKeystore,
+                    onExportKeystore = onExportKeystore
+                )
+            }
         }
 
         // About
