@@ -211,8 +211,7 @@ fun PatchingSuccess(
                             usingMountInstall = usingMountInstall,
                             onInstall = onInstall,
                             onUninstall = onUninstall,
-                            onOpen = onOpen,
-                            modifier = Modifier.fillMaxWidth()
+                            onOpen = onOpen
                         )
                     }
                 }
@@ -265,8 +264,7 @@ fun PatchingSuccess(
                     usingMountInstall = usingMountInstall,
                     onInstall = onInstall,
                     onUninstall = onUninstall,
-                    onOpen = onOpen,
-                    modifier = Modifier.fillMaxWidth()
+                    onOpen = onOpen
                 )
             }
         }
