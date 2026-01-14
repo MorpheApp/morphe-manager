@@ -116,14 +116,16 @@ fun HomeDialogs(
 
     // Dialog 3: File Picker Prompt
     AnimatedVisibility(
-        visible = state.showFilePickerPromptDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        visible = state.showFilePickerPromptDialog && state.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
         val appName = state.pendingAppName ?: return@AnimatedVisibility
+        val isOtherApps = state.pendingPackageName == null
 
         FilePickerPromptDialog(
             appName = appName,
+            isOtherApps = isOtherApps,
             onDismiss = {
                 state.showFilePickerPromptDialog = false
                 state.cleanupPendingData()
@@ -612,17 +614,24 @@ private fun InstructionStep(
 
 /**
  * Dialog 3: File picker prompt dialog
- * Shown after browser opens, prompts user to select downloaded APK
+ * Shown for selecting any APK or after browser opens
  */
 @Composable
 private fun FilePickerPromptDialog(
     appName: String,
+    isOtherApps: Boolean,
     onDismiss: () -> Unit,
     onOpenFilePicker: () -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_home_file_picker_prompt_title),
+        title = stringResource(
+            if (isOtherApps) {
+                R.string.morphe_home_select_apk_title
+            } else {
+                R.string.morphe_home_file_picker_prompt_title
+            }
+        ),
         footer = {
             MorpheDialogButton(
                 text = stringResource(R.string.morphe_home_file_picker_prompt_open),
@@ -635,7 +644,11 @@ private fun FilePickerPromptDialog(
         val secondaryColor = LocalDialogSecondaryTextColor.current
 
         Text(
-            text = stringResource(R.string.morphe_home_file_picker_prompt_description, appName),
+            text = if (isOtherApps) {
+                stringResource(R.string.morphe_home_select_any_apk_description)
+            } else {
+                stringResource(R.string.morphe_home_file_picker_prompt_description, appName)
+            },
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor,
             textAlign = TextAlign.Center,

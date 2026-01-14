@@ -2,6 +2,16 @@
     <!-- Morphe Home Screen -->
     <string name="morphe_home_youtube" translatable="false">YouTube</string>
     <string name="morphe_home_youtube_music" translatable="false">YouTube Music</string>
+    <string name="morphe_home_reddit" translatable="false">Reddit</string>
+    <string name="morphe_home_other_apps">Other apps</string>
+    <string name="morphe_home">Home</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Manager update available</string>
+    <string name="morphe_home_update_available_subtitle">New version ready to install</string>
+    <!-- Home Screen - Toast Messages -->
+    <string name="morphe_home_reddit_coming_soon">Reddit patching coming soon!</string>
+    <string name="morphe_home_installed_apps_coming_soon">Installed apps screen coming soon!</string>
+
     <string name="morphe_home_bundles">Patch bundle</string>
     <string name="morphe_home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
@@ -81,6 +91,10 @@
     <string name="morphe_home_file_picker_prompt_open">Open APK file I downloaded</string>
     <string name="morphe_home_recommended_version">Recommended version</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
+    <string name="morphe_home_select_apk_title">Select APK</string>
+    <string name="morphe_home_select_any_apk_description">Tap the button below to select an APK file of any app for patching</string>
+    <string name="morphe_home_invalid_apk">Invalid APK file</string>
+    <string name="morphe_home_no_patches_for_app">No patches available for this app</string>
     <!-- Dialog 4: Expert Mode Dialog -->
     <string name="morphe_expert_mode_title">Expert mode</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>

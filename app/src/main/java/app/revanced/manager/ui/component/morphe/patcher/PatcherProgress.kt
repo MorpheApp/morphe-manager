@@ -28,8 +28,7 @@ import kotlinx.coroutines.delay
 
 /**
  * Patching in progress screen with animated progress indicator
- * Shows current step, download progress, and rotating messages
- * Uses adaptive layout for different screen sizes
+ * Uses new bottom action bar for consistent layout
  */
 @Composable
 fun PatchingInProgress(
@@ -37,7 +36,9 @@ fun PatchingInProgress(
     patchesProgress: Pair<Int, Int>,
     downloadProgress: Pair<Long, Long?>? = null,
     viewModel: PatcherViewModel,
-    showLongStepWarning: Boolean = false
+    showLongStepWarning: Boolean = false,
+    onCancelClick: () -> Unit,
+    onHomeClick: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
     val (completed, total) = patchesProgress
@@ -76,80 +77,99 @@ fun PatchingInProgress(
         }
     }
 
-    if (windowSize.useTwoColumnLayout) {
-        // Two-column layout for medium/expanded screens
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
-        ) {
-            // Left column - Message and details
-            Box(
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp)
+    ) {
+        // Main content
+        if (windowSize.useTwoColumnLayout) {
+            // Two-column layout for medium/expanded screens
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight(),
-                contentAlignment = Alignment.Center
+                    .fillMaxSize()
+                    .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 24.dp),
+                horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                // Left column - Message and details
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    ProgressMessageSection(currentMessage)
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                    ) {
+                        ProgressMessageSection(currentMessage)
 
-                    ProgressDetailsSection(
-                        showLongStepWarning = showLongStepWarning,
-                        downloadProgress = downloadProgress,
-                        isDownloadComplete = isDownloadComplete,
-                        viewModel = viewModel,
-                        windowSize = windowSize
+                        ProgressDetailsSection(
+                            showLongStepWarning = showLongStepWarning,
+                            downloadProgress = downloadProgress,
+                            isDownloadComplete = isDownloadComplete,
+                            viewModel = viewModel,
+                            windowSize = windowSize
+                        )
+                    }
+                }
+
+                // Right column - Circular progress
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .wrapContentSize(Alignment.Center),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressWithStats(
+                        progress = progress,
+                        completed = completed,
+                        total = total,
+                        modifier = Modifier.size(280.dp)
                     )
                 }
             }
-
-            // Right column - Circular progress
-            Box(
+        } else {
+            // Single-column layout
+            Column(
                 modifier = Modifier
-                    .weight(1f)
-                    .wrapContentSize(Alignment.Center),
-                contentAlignment = Alignment.Center
+                    .fillMaxSize()
+                    .padding(horizontal = windowSize.contentPadding)
+                    .padding(top = 24.dp, bottom = 120.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
             ) {
+                ProgressMessageSection(currentMessage)
+
                 CircularProgressWithStats(
                     progress = progress,
                     completed = completed,
                     total = total,
-                    modifier = Modifier.size(280.dp)
+                    modifier = Modifier.size(280.dp),
+                )
+
+                ProgressDetailsSection(
+                    showLongStepWarning = showLongStepWarning,
+                    downloadProgress = downloadProgress,
+                    isDownloadComplete = isDownloadComplete,
+                    viewModel = viewModel,
+                    windowSize = windowSize
                 )
             }
         }
-    } else {
-        // Single-column layout
-        Column(
+
+        // Bottom action bar
+        PatcherBottomActionBar(
+            showCancelButton = true,
+            showHomeButton = false,
+            showSaveButton = false,
+            onCancelClick = onCancelClick,
+            onHomeClick = onHomeClick,
+            onSaveClick = {},
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = windowSize.contentPadding)
-                .padding(top = 24.dp, bottom = 120.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
-        ) {
-            ProgressMessageSection(currentMessage)
-
-            CircularProgressWithStats(
-                progress = progress,
-                completed = completed,
-                total = total,
-                modifier = Modifier.size(280.dp),
-            )
-
-            ProgressDetailsSection(
-                showLongStepWarning = showLongStepWarning,
-                downloadProgress = downloadProgress,
-                isDownloadComplete = isDownloadComplete,
-                viewModel = viewModel,
-                windowSize = windowSize
-            )
-        }
+                .align(Alignment.BottomCenter)
+        )
     }
 }
 
@@ -306,7 +326,6 @@ private fun CircularProgressWithStats(
 
 /**
  * Long step warning card
- * Shown when a step takes longer than 50 seconds
  */
 @Composable
 private fun LongStepWarningCard() {
@@ -337,7 +356,7 @@ private fun LongStepWarningCard() {
 }
 
 /**
- * Download progress card with progress bar and file size
+ * Download progress card
  */
 @Composable
 private fun DownloadProgressCard(
@@ -377,7 +396,7 @@ private fun DownloadProgressCard(
 }
 
 /**
- * Current step indicator with animation
+ * Current step indicator
  */
 @Composable
 fun CurrentStepIndicator(

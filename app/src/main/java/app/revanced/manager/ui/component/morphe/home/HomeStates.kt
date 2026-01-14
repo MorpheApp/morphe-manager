@@ -178,7 +178,7 @@ class HomeStates(
      * Handle APK file selection from storage picker
      */
     fun handleApkSelection(uri: Uri?) {
-        if (uri == null || pendingPackageName == null) {
+        if (uri == null) {
             cleanupPendingData()
             return
         }
@@ -191,7 +191,7 @@ class HomeStates(
             if (selectedApp != null) {
                 processSelectedApp(selectedApp)
             } else {
-                context.toast(context.getString(R.string.failed_to_load_apk))
+                context.toast(context.getString(R.string.morphe_home_invalid_apk))
             }
         }
     }
@@ -201,12 +201,16 @@ class HomeStates(
      * Validates package name and patch availability
      */
     private suspend fun processSelectedApp(selectedApp: SelectedApp) {
-        // Validate package name matches expected
-        if (selectedApp.packageName != pendingPackageName) {
+        // If specific package is expected, validate it matches
+        if (pendingPackageName != null && selectedApp.packageName != pendingPackageName) {
             showWrongPackageDialog = WrongPackageDialogState(
                 expectedPackage = pendingPackageName!!,
                 actualPackage = selectedApp.packageName
             )
+            // Clean up temporary file
+            if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
+                selectedApp.file.delete()
+            }
             cleanupPendingData()
             return
         }
@@ -225,14 +229,29 @@ class HomeStates(
 
         // Check if any patches are available for this version
         if (totalPatches == 0) {
-            pendingSelectedApp = selectedApp
-            showUnsupportedVersionDialog = UnsupportedVersionDialogState(
-                packageName = selectedApp.packageName,
-                version = selectedApp.version ?: "unknown",
-                recommendedVersion = recommendedVersions[selectedApp.packageName]
-            )
-            cleanupPendingData(keepSelectedApp = true)
-            return
+            // Only show unsupported version dialog if we have a recommended version
+            // For "other apps", we don't have recommended version, so proceed anyway
+            val recommendedVersion = pendingPackageName?.let { recommendedVersions[it] }
+
+            if (recommendedVersion != null) {
+                pendingSelectedApp = selectedApp
+                showUnsupportedVersionDialog = UnsupportedVersionDialogState(
+                    packageName = selectedApp.packageName,
+                    version = selectedApp.version ?: "unknown",
+                    recommendedVersion = recommendedVersion
+                )
+                cleanupPendingData(keepSelectedApp = true)
+                return
+            } else {
+                // No patches available for "Other apps" and no recommended version
+                context.toast(context.getString(R.string.morphe_home_no_patches_for_app))
+                // Clean up temporary file
+                if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
+                    selectedApp.file.delete()
+                }
+                cleanupPendingData()
+                return
+            }
         }
 
         // Start patching with validated app
