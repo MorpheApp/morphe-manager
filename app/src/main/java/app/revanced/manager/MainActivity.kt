@@ -423,7 +423,7 @@ private fun ReVancedManager(vm: MainViewModel) {
 
             // Morphe Settings Screen
             composable<MorpheSettings> {
-                MorpheSettingsScreen(onBackClick = navController::popBackStack)
+                MorpheSettingsScreen()
             }
 
             // Morphe Installed Apps Screen

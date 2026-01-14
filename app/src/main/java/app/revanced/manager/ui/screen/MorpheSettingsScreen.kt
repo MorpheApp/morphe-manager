@@ -63,7 +63,6 @@ private enum class SettingsTab(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MorpheSettingsScreen(
-    onBackClick: () -> Unit,
     themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
     downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
@@ -234,7 +233,6 @@ fun MorpheSettingsScreen(
                             coroutineScope.launch {
                                 themeViewModel.prefs.useMorpheHomeScreen.update(false)
                             }
-                            onBackClick()
                         }
                     )
 

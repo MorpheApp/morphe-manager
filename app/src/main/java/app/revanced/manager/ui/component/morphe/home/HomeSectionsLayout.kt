@@ -456,7 +456,7 @@ fun HomeMainAppsSection(
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ) {
         // App buttons
         Column(
@@ -549,7 +549,7 @@ fun HomeAppButton(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(84.dp)
+            .height(80.dp)
     ) {
         // Main button
         Surface(
