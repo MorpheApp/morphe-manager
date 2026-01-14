@@ -47,7 +47,6 @@
     <!-- Bundle Management -->
     <string name="morphe_bundle_management_title">Manage Bundles</string>
     <string name="morphe_bundle_management_subtitle">%d bundles installed</string>
-    <string name="morphe_bundle_added_at">Added %s</string>
     <string name="morphe_bundle_update_available">Update available</string>
     <string name="morphe_bundle_delete_confirm_message">Delete bundle \"%s\"? This cannot be undone.</string>
     <string name="morphe_bundle_rename_description">Enter a new name</string>
