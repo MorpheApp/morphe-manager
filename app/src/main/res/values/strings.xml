@@ -3,15 +3,12 @@
     <string name="morphe_home_youtube" translatable="false">YouTube</string>
     <string name="morphe_home_youtube_music" translatable="false">YouTube Music</string>
     <string name="morphe_home_reddit" translatable="false">Reddit</string>
+    <string name="morphe_home_reddit_coming_soon">Reddit patching coming soon!</string>
     <string name="morphe_home_other_apps">Other apps</string>
     <string name="morphe_home">Home</string>
     <!-- Home Screen - Update Notifications -->
     <string name="morphe_home_update_available">Manager update available</string>
     <string name="morphe_home_update_available_subtitle">New version ready to install</string>
-    <!-- Home Screen - Toast Messages -->
-    <string name="morphe_home_reddit_coming_soon">Reddit patching coming soon!</string>
-    <string name="morphe_home_installed_apps_coming_soon">Installed apps screen coming soon!</string>
-
     <string name="morphe_home_bundles">Patch bundle</string>
     <string name="morphe_home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->

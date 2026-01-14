@@ -17,6 +17,9 @@ object MorpheHomeScreen
 object MorpheSettings
 
 @Serializable
+object MorpheInstalledApps
+
+@Serializable
 object Dashboard
 
 @Serializable

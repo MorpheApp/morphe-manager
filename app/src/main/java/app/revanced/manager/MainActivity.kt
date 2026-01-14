@@ -25,6 +25,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.component.morphe.home.MorpheInstalledAppsScreen
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
 import app.revanced.manager.ui.screen.*
@@ -118,6 +119,7 @@ private fun ReVancedManager(vm: MainViewModel) {
 
             MorpheHomeScreen(
                 onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
+                onMorpheInstalledAppsClick = { navController.navigate(MorpheInstalledApps) },
                 onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
                 onUpdateClick = { navController.navigate(Update()) },
                 onStartQuickPatch = { params ->
@@ -419,10 +421,17 @@ private fun ReVancedManager(vm: MainViewModel) {
                 ContributorSettingsScreen(onBackClick = navController::popBackStack)
             }
 
-            // Morphe Simplified Settings Screen
+            // Morphe Settings Screen
             composable<MorpheSettings> {
-                MorpheSettingsScreen(
-                    onBackClick = navController::popBackStack
+                MorpheSettingsScreen(onBackClick = navController::popBackStack)
+            }
+
+            // Morphe Installed Apps Screen
+            composable<MorpheInstalledApps> {
+                MorpheInstalledAppsScreen(
+                    onAppClick = { app ->
+                        navController.navigate(InstalledApplicationInfo(app.currentPackageName))
+                    }
                 )
             }
         }

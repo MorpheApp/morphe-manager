@@ -18,6 +18,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
 import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
 import app.revanced.manager.ui.model.SelectedApp
+import app.revanced.manager.ui.model.navigation.MorpheInstalledApps
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
 import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
@@ -52,6 +53,7 @@ data class QuickPatchParams(
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
+    onMorpheInstalledAppsClick: () -> Unit,
     onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     onUpdateClick: () -> Unit = {},
@@ -196,13 +198,8 @@ fun MorpheHomeScreen(
             },
 
             // Bottom action bar
-            onInstalledAppsClick = {
-                // TODO: Navigate to installed apps screen
-                context.toast(context.getString(R.string.morphe_home_installed_apps_coming_soon))
-            },
-            onBundlesClick = {
-                homeState.showBundleManagementSheet = true
-            },
+            onInstalledAppsClick = onMorpheInstalledAppsClick,
+            onBundlesClick = { homeState.showBundleManagementSheet = true },
             onSettingsClick = onMorpheSettingsClick,
 
             modifier = Modifier.padding(paddingValues)
