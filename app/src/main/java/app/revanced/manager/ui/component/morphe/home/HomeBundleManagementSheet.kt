@@ -38,6 +38,9 @@ import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefaul
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.component.morphe.shared.ActionPillButton
+import app.revanced.manager.ui.component.morphe.shared.StatusBadge
+import app.revanced.manager.ui.component.morphe.shared.StatusBadgeStyle
 import app.revanced.manager.ui.component.morphe.utils.getRelativeTimeString
 import app.revanced.manager.util.toast
 import org.koin.compose.koinInject
@@ -394,7 +397,7 @@ private fun BundleCardHeader(
                 if (!enabled) {
                     StatusBadge(
                         text = stringResource(R.string.morphe_disabled),
-                        error = true
+                        style = StatusBadgeStyle.Error
                     )
                 }
 
@@ -402,7 +405,7 @@ private fun BundleCardHeader(
                 if (updateInfo != null) {
                     StatusBadge(
                         text = stringResource(R.string.update),
-                        highlighted = true
+                        style = StatusBadgeStyle.Warning
                     )
                 }
             }
@@ -575,56 +578,4 @@ private fun BundleTypeBadge(bundle: PatchBundleSource) {
     }
 
     StatusBadge(text = text)
-}
-
-@Composable
-private fun StatusBadge(
-    text: String,
-    highlighted: Boolean = false,
-    error: Boolean = false
-) {
-    val containerColor = when {
-        error -> MaterialTheme.colorScheme.errorContainer
-        highlighted -> MaterialTheme.colorScheme.tertiaryContainer
-        else -> MaterialTheme.colorScheme.surfaceVariant
-    }
-
-    val contentColor = when {
-        error -> MaterialTheme.colorScheme.onErrorContainer
-        highlighted -> MaterialTheme.colorScheme.onTertiaryContainer
-        else -> MaterialTheme.colorScheme.onSurfaceVariant
-    }
-
-    Surface(
-        shape = RoundedCornerShape(6.dp),
-        color = containerColor
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-            style = MaterialTheme.typography.labelSmall,
-            color = contentColor
-        )
-    }
-}
-
-@Composable
-private fun ActionPillButton(
-    onClick: () -> Unit,
-    icon: ImageVector,
-    contentDescription: String,
-    enabled: Boolean = true,
-    colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
-) {
-    FilledTonalIconButton(
-        onClick = onClick,
-        enabled = enabled,
-        colors = colors,
-        shape = RoundedCornerShape(50),
-        modifier = Modifier
-            .height(44.dp)
-            .widthIn(min = 96.dp)
-    ) {
-        Icon(icon, contentDescription)
-    }
 }

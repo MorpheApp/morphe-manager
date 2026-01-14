@@ -2,14 +2,11 @@ package app.revanced.manager.ui.component.morphe.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,10 +15,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.SectionCard
-import app.revanced.manager.ui.component.morphe.shared.SectionTitle
-import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import kotlinx.coroutines.launch
@@ -69,7 +63,7 @@ fun SystemTabContent(
             )
         }
 
-        // Performance  (only show in Expert mode)
+        // Performance (only show in Expert mode)
         if (useExpertMode) {
             SectionTitle(
                 text = stringResource(R.string.morphe_performance),
@@ -98,22 +92,13 @@ fun SystemTabContent(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                if (useProcessRuntime) {
-                                    Surface(
-                                        shape = RoundedCornerShape(8.dp),
-                                        color = MaterialTheme.colorScheme.primaryContainer
-                                    ) {
-                                        Text(
-                                            text = stringResource(R.string.morphe_enabled),
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                            modifier = Modifier.padding(
-                                                horizontal = 8.dp,
-                                                vertical = 4.dp
-                                            )
-                                        )
-                                    }
-                                }
+                                StatusBadge(
+                                    text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
+                                    else stringResource(R.string.morphe_disabled),
+                                    style = if (useProcessRuntime) StatusBadgeStyle.Success
+                                    else StatusBadgeStyle.Default
+                                )
+
                                 Icon(
                                     imageVector = Icons.Outlined.ChevronRight,
                                     contentDescription = null,

@@ -113,6 +113,17 @@
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
 
+    <!-- App Info Screen -->
+    <string name="information">Information</string>
+    <string name="actions">Actions</string>
+    <string name="install">Install</string>
+    <string name="remount">Remount</string>
+    <string name="delete_saved_copy">Delete Saved Copy</string>
+    <string name="uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
+    <string name="saved_app_delete_confirmation">Are you sure you want to delete this saved app?</string>
+    <string name="saved_copy_delete_confirmation">Are you sure you want to delete the saved copy?</string>
+    <string name="view">View</string>
+
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>

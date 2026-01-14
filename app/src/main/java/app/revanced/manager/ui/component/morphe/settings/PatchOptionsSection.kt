@@ -168,24 +168,7 @@ fun PatchOptionsSection(
         } else {
             // Info message
             SubtleCard(
-                content = {
-                    Row(
-                        modifier = Modifier.padding(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_patch_options_restart_message),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
-                    }
-                }
+                text = stringResource(R.string.morphe_patch_options_restart_message)
             )
 
             // YouTube Card
@@ -377,21 +360,12 @@ private fun HideShortsSection(
     val widgetOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
 
     Column {
-        // Header with background
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
-        ) {
-            IconTextRow(
-                icon = Icons.Outlined.VisibilityOff,
-                title = stringResource(R.string.morphe_home_youtube),
-                description = stringResource(R.string.morphe_patch_options_hide_shorts_features),
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-
-        MorpheSettingsDivider(fullWidth = true)
+        // Header
+        CardHeader(
+            icon = Icons.Outlined.VisibilityOff,
+            title = stringResource(R.string.morphe_home_youtube),
+            description = stringResource(R.string.morphe_patch_options_hide_shorts_features)
+        )
 
         Column(
             modifier = Modifier.padding(8.dp),

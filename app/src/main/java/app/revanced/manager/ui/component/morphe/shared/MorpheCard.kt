@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -207,5 +209,149 @@ fun GradientCircleIcon(
             tint = Color.White,
             modifier = Modifier.size(iconSize)
         )
+    }
+}
+
+enum class StatusBadgeStyle {
+    Default,
+    Success,
+    Warning,
+    Error
+}
+
+@Composable
+fun StatusBadge(
+    text: String,
+    style: StatusBadgeStyle = StatusBadgeStyle.Default
+) {
+    val (containerColor, contentColor) = when (style) {
+        StatusBadgeStyle.Success -> {
+            MaterialTheme.colorScheme.tertiaryContainer to
+                    MaterialTheme.colorScheme.onTertiaryContainer
+        }
+        StatusBadgeStyle.Warning -> {
+            MaterialTheme.colorScheme.secondaryContainer to
+                    MaterialTheme.colorScheme.onSecondaryContainer
+        }
+        StatusBadgeStyle.Error -> {
+            MaterialTheme.colorScheme.errorContainer to
+                    MaterialTheme.colorScheme.onErrorContainer
+        }
+        StatusBadgeStyle.Default -> {
+            MaterialTheme.colorScheme.surfaceVariant to
+                    MaterialTheme.colorScheme.onSurfaceVariant
+        }
+    }
+
+    Surface(
+        shape = RoundedCornerShape(6.dp),
+        color = containerColor
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+            style = MaterialTheme.typography.labelSmall,
+            color = contentColor
+        )
+    }
+}
+
+@Composable
+fun ActionPillButton(
+    onClick: () -> Unit,
+    icon: ImageVector,
+    contentDescription: String,
+    enabled: Boolean = true,
+    colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
+) {
+    FilledTonalIconButton(
+        onClick = onClick,
+        enabled = enabled,
+        colors = colors,
+        shape = RoundedCornerShape(50),
+        modifier = Modifier
+            .height(44.dp)
+            .widthIn(min = 96.dp)
+    ) {
+        Icon(icon, contentDescription)
+    }
+}
+
+@Composable
+fun InfoRow(
+    label: String,
+    value: String
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+@Composable
+fun CardHeader(
+    icon: ImageVector,
+    title: String,
+    description: String? = null,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+            shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
+        ) {
+            IconTextRow(
+                icon = icon,
+                title = title,
+                description = description,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+        MorpheSettingsDivider(fullWidth = true)
+    }
+}
+
+@Composable
+fun SubtleCard(
+    text: String,
+    icon: ImageVector = Icons.Outlined.Info,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.tertiaryContainer
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onTertiaryContainer
+            )
+        }
     }
 }
