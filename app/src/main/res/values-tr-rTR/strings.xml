@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
     <string name="morphe_share_website">Web sitesini paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Uygulama Simgesi</string>
+    <string name="morphe_app_icon_selector_description">Uygulama Başlatıcısı\'ni Değiştir</string>
+    <string name="morphe_app_icon_default">Varsayılan</string>
+    <string name="morphe_app_icon_light_2">Gökçe</string>
+    <string name="morphe_app_icon_light_3">Güneşin Batışı</string>
+    <string name="morphe_app_icon_dark_1">Okyanus</string>
+    <string name="morphe_app_icon_dark_2">Boşluk</string>
+    <string name="morphe_app_icon_dark_3">Lavanta</string>
+    <string name="morphe_app_icon_change_dialog_title">Uygulamayı İkonu Değiştir?</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' olarak değiştir ve yeniden başlat?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">İkonu Değiştir</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Görünüm seçenekleri</string>
     <string name="morphe_appearance_options_description">Tema, renk ve arka planları özelleştirin</string>
-    <string name="morphe_appearance_app_language">Uygulama Dili</string>
+    <string name="morphe_appearance_current_language">Mevcut dil</string>
     <string name="morphe_appearance_search">Arama</string>
     <string name="morphe_appearance_no_results">Sonuç Bulunamadı</string>
     <string name="morphe_appearance_translations_info_title"> Bazı Dillerin Çevirileri Eksik veya Tam Olmayabilir</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Şekiller</string>
     <string name="morphe_background_type_snow">Kar</string>
     <string name="morphe_background_type_none">Yok</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Ön yayın sürümlerini kullan</string>
     <string name="morphe_update_use_prereleases_description">Yeni düzeltmeleri ve yönetici özellikleri erken deneyin</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Tüm yama profilleri etkilenmez."</string>
     <string name="include_github_pat_in_exports_label">Ayarlar dışa aktarımına dahil et</string>
     <string name="include_github_pat_in_exports_supporting">Bu PAT\'yi dışa aktarılan yönetici ayarlarına ekler</string>
     <string name="include_github_pat_in_exports_warning">PAT\'nizi paylaşmayın. Ayarlar dışa aktarımına dahil ederseniz, belirteci içerdiği için o dosyayı özel tutun.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Uygulama dili</string>
+    <string name="language_dialog_title">Uygulama dilini seçin</string>
+    <string name="language_option_system">Cihaz dilini kullan</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Büyük)</string>
     <string name="patches_force_download">Tüm yama paketlerini indir</string>
     <string name="patches_reset">Yama paketlerini sıfırla</string>

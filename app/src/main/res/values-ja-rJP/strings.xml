@@ -22,12 +22,12 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">カフェインと良いパッチで動いている</string>
     <string name="morphe_home_bundle_type_api">API バンドル</string>
-    <string name="morphe_home_update_error">更新できませんでした</string>
+    <string name="morphe_home_update_error">更新に失敗しました</string>
     <string name="morphe_home_update_error_subtitle">ネット接続を確認して、再度お試しください。</string>
     <string name="morphe_home_updating_patches">パッチを更新中…</string>
-    <string name="morphe_home_update_success">更新しました</string>
-    <string name="morphe_home_patches_updated">パッチは最新です</string>
-    <string name="morphe_home_patches_are_loading">パッチを読み込み中。しばらくお待ちください…</string>
+    <string name="morphe_home_update_success">更新が完了しました</string>
+    <string name="morphe_home_patches_updated">パッチは最新の状態です</string>
+    <string name="morphe_home_patches_are_loading">パッチを読み込んでいます。しばらくお待ちください…</string>
     <string name="morphe_home_please_wait">しばらくお待ちください…</string>
     <string name="morphe_home_open_in_browser">ブラウザで開く</string>
     <string name="morphe_home_failed_to_open_url">URL を開けませんでした</string>
@@ -38,7 +38,7 @@
     <string name="morphe_home_timeline">更新履歴</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">未パッチのオリジナル APK ファイルをお持ちですか？</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">未パッチのバージョン %2$s が %1$s のパッチに必要です</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">%1$s にパッチを適用するには、バージョン %2$s (未パッチ) が必要です</string>
     <string name="morphe_home_apk_availability_yes">はい、あります</string>
     <string name="morphe_home_apk_availability_no">いいえ、探すのを手伝って</string>
     <!-- Dialog 2: Download Instructions -->
@@ -50,11 +50,11 @@
     <string name="morphe_home_download_instructions_step3">ダウンロードが終わるまで待って、APK は  &lt;b&gt;絶対にインストールしないで&lt;b&gt;</string>
     <string name="morphe_home_download_instructions_step3_mount">ダウンロードしたら、APK を &lt;b&gt;インストールしてください&lt;b&gt;</string>
     <string name="morphe_home_download_instructions_step4">ダウンロードしたら、このアプリを再度開いてください</string>
-    <string name="morphe_home_download_instructions_step4_mount">APK をインストールした後、このアプリを再度開いてください</string>
+    <string name="morphe_home_download_instructions_step4_mount">オリジナルの APK をインストールした後、このアプリを再度開いてください</string>
     <string name="morphe_home_download_instructions_continue">APKMirror.com で続行</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">ダウンロードした APK を選択</string>
-    <string name="morphe_home_file_picker_prompt_description">ダウンロードした %1$s APK ファイルを選んでください。</string>
+    <string name="morphe_home_file_picker_prompt_description">ダウンロードした %1$s の APK ファイルを選んでください。</string>
     <string name="morphe_home_file_picker_prompt_open">ダウンロードした APK ファイルを開く</string>
     <string name="morphe_home_recommended_version">推奨バージョン</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK を保存</string>
-    <string name="morphe_patcher_copy_error">Copy error</string>
+    <string name="morphe_patcher_copy_error">エラーをコピー</string>
     <string name="morphe_patcher_show_error">Show error</string>
     <string name="morphe_patcher_error_copied">コピーしました</string>
     <string name="morphe_patcher_patches_progress">%2$d 件中 %1$d 件のパッチ</string>
@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">完全機能搭載の Expert モードに切り替え</string>
     <string name="morphe_share_website">ウェブサイトを共有</string>
     <string name="morphe_share_website_description">Morphe の公式ウェブサイトを共有します</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">アプリのアイコン</string>
+    <string name="morphe_app_icon_selector_description">アプリのランチャーアイコンを変更する</string>
+    <string name="morphe_app_icon_default">デフォルト</string>
+    <string name="morphe_app_icon_light_2">スカイブルー</string>
+    <string name="morphe_app_icon_light_3">サンセット</string>
+    <string name="morphe_app_icon_dark_1">オーシャン ブルー</string>
+    <string name="morphe_app_icon_dark_2">虚無</string>
+    <string name="morphe_app_icon_dark_3">藍色</string>
+    <string name="morphe_app_icon_change_dialog_title">アプリのアイコンを変更しますか？</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' に変更して再起動しますか？</string>
+    <string name="morphe_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外観設定</string>
     <string name="morphe_appearance_options_description">テーマ、カラー、背景をカスタマイズ</string>
-    <string name="morphe_appearance_app_language">アプリの言語</string>
+    <string name="morphe_appearance_current_language">現在の言語</string>
     <string name="morphe_appearance_search">検索</string>
     <string name="morphe_appearance_no_results">検索結果は見つかりませんでした</string>
     <string name="morphe_appearance_translations_info_title">一部の言語では、翻訳が存在しない、または不完全である可能性があります</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">図形</string>
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">なし</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">プレリリース版を使用</string>
     <string name="morphe_update_use_prereleases_description">新しいパッチおよびマネージャー機能を先行して利用します</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">エクスポートに含める</string>
     <string name="include_github_pat_in_exports_supporting">PAT をマネージャー設定のエクスポートに追加します</string>
     <string name="include_github_pat_in_exports_warning">PAT は共有しないでください。エクスポートに PAT を含める場合、ファイル内にトークンが保存されるため、そのファイルは公開しないでください。</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">アプリの言語</string>
+    <string name="language_dialog_title">アプリの言語を選択</string>
+    <string name="language_option_system">デバイスの言語を使用</string>
     <string name="device_memory_limit_format">%1$dMB（標準） - %2$dMB（大）</string>
     <string name="patches_force_download">すべてのパッチソースを強制的にダウンロード</string>
     <string name="patches_reset">パッチソースをリセット</string>

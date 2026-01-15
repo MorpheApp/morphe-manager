@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Přepnout na plný výprovozkový specializovaný režim</string>
     <string name="morphe_share_website">Setwitter / sdélat web</string>
     <string name="morphe_share_website_description">Sdílet oficiální webovou stránku Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Ikona aplikace</string>
+    <string name="morphe_app_icon_selector_description">Změnit ikonu aplikace</string>
+    <string name="morphe_app_icon_default">Výchozí</string>
+    <string name="morphe_app_icon_light_2">Obloha</string>
+    <string name="morphe_app_icon_light_3">Slunce západu</string>
+    <string name="morphe_app_icon_dark_1">Oceán</string>
+    <string name="morphe_app_icon_dark_2">Prázdnota</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Změnit ikonu aplikace?</string>
+    <string name="morphe_app_icon_change_dialog_message">Změnit na \'%1$s\' a restartovat?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Změnit ikonu</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Možnosti vzhledu</string>
     <string name="morphe_appearance_options_description">Personalizujte si motivy, barvy a pozadí.</string>
-    <string name="morphe_appearance_app_language">Jazyk aplikace</string>
+    <string name="morphe_appearance_current_language">Aktuální jazyk</string>
     <string name="morphe_appearance_search">Hledat</string>
     <string name="morphe_appearance_no_results">Nebyly nalezeny žádné výsledky</string>
     <string name="morphe_appearance_translations_info_title">Pro některé jazyky mohou být překlady chybějící nebo neúplné</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Tvary</string>
     <string name="morphe_background_type_snow">Sněh</string>
     <string name="morphe_background_type_none">Žádná</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Používejte předprodukční verze</string>
     <string name="morphe_update_use_prereleases_description">Získejte raný přístup k novým patchům a úpravám manažera</string>
     <!-- Patch Options Section -->
@@ -394,7 +406,7 @@ Povolit stejně?"</string>
     <string name="import_patch_bundles_description">Obnovit vzdálené sady záplat ze souboru JSON</string>
     <string name="import_patch_bundles_fail">Sady záplat nebylo možné importovat: %s</string>
     <string name="import_patch_bundles_in_progress">Importuje se…</string>
-    <string name="import_patch_bundles_success">{count,plural,one {Importována sada záplat}few {Importovány # sady záplat}many {Importováno # sad záplat}other {Importováno # sad záplat}}</string>
+    <string name="import_patch_bundles_success">Importováno %d sbalení</string>
     <string name="import_patch_bundles_updated">{count,plural,one {Aktualizována sada záplat}few {Aktualizovány # sady záplat}many {Aktualizováno # sad záplat}other {Aktualizováno # sad záplat}}</string>
     <string name="import_patch_bundles_none">Nebyly importovány žádné nové sady záplat</string>
     <string name="import_patch_bundles_banner_title">Import sad záplat</string>
@@ -625,13 +637,9 @@ Podpis (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Zahrnout do exportu nastavení</string>
     <string name="include_github_pat_in_exports_supporting">Přidá tento PAT do exportovaných nastavení správce</string>
     <string name="include_github_pat_in_exports_warning">Nesdílejte svůj PAT. Pokud ho zahrnete do exportu nastavení, udržujte tento soubor soukromý, protože obsahuje token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Jazyk aplikace</string>
+    <string name="language_dialog_title">Vybrat jazyk aplikace</string>
+    <string name="language_option_system">Použít jazyk zařízení</string>
     <string name="device_memory_limit_format">%1$d MB (Normální) - %2$d MB (Velký)</string>
     <string name="patches_force_download">Vynutit stažení všech balíčků záplat</string>
     <string name="patches_reset">Resetovat balíčky záplat</string>
