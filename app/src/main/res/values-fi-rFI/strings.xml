@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Siirry täysiarvoiseen experttimodeeseen</string>
     <string name="morphe_share_website">Jaa verkkosivusto</string>
     <string name="morphe_share_website_description">Jaa virallinen Morphe-verkkosivusto</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Sovelluskuvake</string>
+    <string name="morphe_app_icon_selector_description">Muuta sovelluslauncheerin ikonia</string>
+    <string name="morphe_app_icon_default">Oletus</string>
+    <string name="morphe_app_icon_light_2">Taivas</string>
+    <string name="morphe_app_icon_light_3">Auringonlaskunään</string>
+    <string name="morphe_app_icon_dark_1">Meri</string>
+    <string name="morphe_app_icon_dark_2">Tyhjötä</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Muuta sovelluksen ikonia?</string>
+    <string name="morphe_app_icon_change_dialog_message">Muuta \'%1$s\'iksi ja käynnistä uudelleen?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Muuta ikonia</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Asetusmuodot</string>
     <string name="morphe_appearance_options_description">Mukaila teemoja, värejä ja tauleviä</string>
-    <string name="morphe_appearance_app_language">Sovelluksen kieli</string>
+    <string name="morphe_appearance_current_language">Nykykieli</string>
     <string name="morphe_appearance_search">Haku</string>
     <string name="morphe_appearance_no_results">Tuloksia ei löytynyt</string>
     <string name="morphe_appearance_translations_info_title">Käyttämät kielten käsitteellä käsitteellisyys voi olla puuttuva tai epätämäinen</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Muodot</string>
     <string name="morphe_background_type_snow">Lumimaalia</string>
     <string name="morphe_background_type_none">Ei mitään</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Käytä beta-versiota</string>
     <string name="morphe_update_use_prereleases_description">Pääset käyttämään uusia korjauksia ja hallintaominaisuksia jo ennen virallista julkaisua</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Allekirjoitus (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Sisällytä asetusten vientiin</string>
     <string name="include_github_pat_in_exports_supporting">Lisää tämä PAT vietyihin hallinta-asetuksiin</string>
     <string name="include_github_pat_in_exports_warning">Älä jaa PAT-tunnustasi. Jos sisällytät sen asetusten vientiin, pidä tiedosto yksityisenä, koska se sisältää tunnuksen.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Sovelluksen kieli</string>
+    <string name="language_dialog_title">Valitse sovelluksen kieli</string>
+    <string name="language_option_system">Käytä laitteen kieltä</string>
     <string name="device_memory_limit_format">%1$dMt (normaali) - %2$dMt (suuri)</string>
     <string name="patches_force_download">Pakota kaikkien korjauspakettien lataus</string>
     <string name="patches_reset">Nollaa korjaustiedostopaketit</string>

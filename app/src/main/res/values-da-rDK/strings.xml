@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Skift til den fuldudviklede ekspertmodus</string>
     <string name="morphe_share_website">Del hjemmeside</string>
     <string name="morphe_share_website_description">Del den officielle Morphe-hjemmeside</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Appikon</string>
+    <string name="morphe_app_icon_selector_description">Ændre appens launcherikon</string>
+    <string name="morphe_app_icon_default">Standard</string>
+    <string name="morphe_app_icon_light_2">Himmel</string>
+    <string name="morphe_app_icon_light_3">Solnedgang</string>
+    <string name="morphe_app_icon_dark_1">Hav</string>
+    <string name="morphe_app_icon_dark_2">Tomhed</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Skift app-ikon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Skift til \'%1$s\' og genstart?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Skift ikon</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Visuel præferencer</string>
     <string name="morphe_appearance_options_description">Tilpas emnefarver, farver og baggrunde</string>
-    <string name="morphe_appearance_app_language">App-sprog</string>
+    <string name="morphe_appearance_current_language">Nuværende sprog</string>
     <string name="morphe_appearance_search">Søg</string>
     <string name="morphe_appearance_no_results">Ingen resultater fundet</string>
     <string name="morphe_appearance_translations_info_title">Oversættelser for nogle sprog kan mangle eller være ufuldstændige</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Former</string>
     <string name="morphe_background_type_snow">Sne</string>
     <string name="morphe_background_type_none">Ingen</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Brug prerelease-versioner</string>
     <string name="morphe_update_use_prereleases_description">Få tidlig adgang til nye patches og manager-funktioner</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Signatur (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Inkluder i indstillingerseksport</string>
     <string name="include_github_pat_in_exports_supporting">Tilføjer denne PAT til eksporterede manager-indstillinger</string>
     <string name="include_github_pat_in_exports_warning">Del ikke din PAT. Hvis du inkluderer den i en indstillingerseksport, skal du holde filen privat, fordi den indeholder tokenet.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">App-sprog</string>
+    <string name="language_dialog_title">Vælg app-sprog</string>
+    <string name="language_option_system">Brug enhedens sprog</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Stor)</string>
     <string name="patches_force_download">Tving download af alle patch-pakker</string>
     <string name="patches_reset">Nulstil patch-pakker</string>

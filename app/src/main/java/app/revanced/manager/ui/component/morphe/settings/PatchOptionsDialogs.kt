@@ -64,8 +64,6 @@ fun ThemeColorDialog(
     // Local state for custom color input
     var showDarkColorPicker by remember { mutableStateOf(false) }
     var showLightColorPicker by remember { mutableStateOf(false) }
-    var customDarkColor by remember { mutableStateOf(darkColor) }
-    var customLightColor by remember { mutableStateOf(lightColor) }
 
     // Get theme options from bundle
     val themeOptions = viewModel.getThemeOptions(appType.packageName)
@@ -78,12 +76,42 @@ fun ThemeColorDialog(
     val lightThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
     val lightPresets = lightThemeOption?.let { viewModel.getOptionPresetsMap(it) } ?: emptyMap()
 
+    // Get default values from presets
+    val defaultDarkColor = darkPresets.entries.firstOrNull()?.value?.toString() ?: "@android:color/black"
+    val defaultLightColor = lightPresets.entries.firstOrNull()?.value?.toString() ?: "@android:color/white"
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.morphe_patch_options_theme_colors),
+        titleTrailingContent = {
+            // Reset icon button in title
+            IconButton(
+                onClick = {
+                    scope.launch {
+                        when (appType) {
+                            AppType.YOUTUBE -> {
+                                patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(defaultDarkColor)
+                                patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(defaultLightColor)
+                            }
+                            AppType.YOUTUBE_MUSIC -> {
+                                patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(defaultDarkColor)
+                            }
+                        }
+                    }
+                },
+                modifier = Modifier.size(40.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.RestartAlt,
+                    contentDescription = stringResource(R.string.reset),
+                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        },
         footer = {
             MorpheDialogOutlinedButton(
-                text = stringResource(R.string.close),
+                text = stringResource(R.string.save),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -260,10 +288,9 @@ private fun ThemePresetItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    MorpheClickableCard(
+    MorpheCard(
         onClick = onClick,
-        cornerRadius = 8.dp,
-        alpha = if (isSelected) 0.1f else 0.05f
+        cornerRadius = 8.dp
     ) {
         Row(
             modifier = Modifier
@@ -287,8 +314,7 @@ private fun ThemePresetItem(
                 Icon(
                     imageVector = Icons.Outlined.Check,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -302,10 +328,9 @@ private fun CustomColorItem(
     isCustomSelected: Boolean,
     onClick: () -> Unit
 ) {
-    MorpheClickableCard(
+    MorpheCard(
         onClick = onClick,
-        cornerRadius = 8.dp,
-        alpha = if (isCustomSelected) 0.1f else 0.05f
+        cornerRadius = 8.dp
     ) {
         Row(
             modifier = Modifier
@@ -345,8 +370,7 @@ private fun CustomColorItem(
             Icon(
                 imageVector = Icons.Outlined.ChevronRight,
                 contentDescription = null,
-                tint = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                modifier = Modifier.size(20.dp)
+                tint = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -434,7 +458,7 @@ fun CustomBrandingDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // App Name field
             if (appNameOption != null) {
@@ -456,6 +480,22 @@ fun CustomBrandingDialog(
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
+                    trailingIcon = {
+                        // Reset button
+                        if (appName.isNotEmpty()) {
+                            IconButton(
+                                onClick = { appName = "" },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Clear,
+                                    contentDescription = stringResource(R.string.reset),
+                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                        }
+                    },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = LocalDialogTextColor.current,
                         unfocusedTextColor = LocalDialogTextColor.current,
@@ -487,16 +527,43 @@ fun CustomBrandingDialog(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
-                        IconButton(
-                            onClick = openFolderPicker,
-                            modifier = Modifier.size(40.dp)
+                        Row(
+                            modifier = Modifier.width(88.dp),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.FolderOpen,
-                                contentDescription = "Pick folder",
-                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                modifier = Modifier.size(20.dp)
-                            )
+                            // Reset button
+                            Box(
+                                modifier = Modifier.size(40.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (iconPath.isNotEmpty()) {
+                                    IconButton(
+                                        onClick = { iconPath = "" },
+                                        modifier = Modifier.fillMaxSize()
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Clear,
+                                            contentDescription = stringResource(R.string.reset),
+                                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+                                }
+                            }
+
+                            // Folder picker button
+                            IconButton(
+                                onClick = openFolderPicker,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.FolderOpen,
+                                    contentDescription = "Pick folder",
+                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
                         }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
@@ -507,6 +574,8 @@ fun CustomBrandingDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 iconOption.description.let { description ->
@@ -639,7 +708,7 @@ fun CustomHeaderDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (customOption != null) {
                 OutlinedTextField(
@@ -661,16 +730,43 @@ fun CustomHeaderDialog(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
-                        IconButton(
-                            onClick = openFolderPicker,
-                            modifier = Modifier.size(40.dp)
+                        Row(
+                            modifier = Modifier.width(88.dp),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.FolderOpen,
-                                contentDescription = "Pick folder",
-                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                modifier = Modifier.size(20.dp)
-                            )
+                            // Reset button
+                            Box(
+                                modifier = Modifier.size(40.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (headerPath.isNotEmpty()) {
+                                    IconButton(
+                                        onClick = { headerPath = "" },
+                                        modifier = Modifier.fillMaxSize()
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Clear,
+                                            contentDescription = stringResource(R.string.reset),
+                                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+                                }
+                            }
+
+                            // Folder picker button
+                            IconButton(
+                                onClick = openFolderPicker,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.FolderOpen,
+                                    contentDescription = "Pick folder",
+                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
                         }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
@@ -681,6 +777,8 @@ fun CustomHeaderDialog(
                         cursorColor = LocalDialogTextColor.current
                     )
                 )
+
+                Spacer(modifier = Modifier.height(0.dp))
 
                 // Expandable Instructions Section
                 customOption.description.let { description ->

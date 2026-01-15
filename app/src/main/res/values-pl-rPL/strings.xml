@@ -123,13 +123,25 @@
     <string name="morphe_settings_return_to_expert_description">Przełącz się na tryb eksperta z pełnymi funkcjami</string>
     <string name="morphe_share_website">Udostępnij stronę</string>
     <string name="morphe_share_website_description">Udostępnij oficjalną stronę Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Ikona aplikacji</string>
+    <string name="morphe_app_icon_selector_description">Zmień ikonę aplikacji</string>
+    <string name="morphe_app_icon_default">Domyślna</string>
+    <string name="morphe_app_icon_light_2">Niebo</string>
+    <string name="morphe_app_icon_light_3">Zmierzch</string>
+    <string name="morphe_app_icon_dark_1">Ocean</string>
+    <string name="morphe_app_icon_dark_2">Pustka</string>
+    <string name="morphe_app_icon_dark_3">Indygo</string>
+    <string name="morphe_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
+    <string name="morphe_app_icon_change_dialog_message">Zmienić na \'%1$s\' i uruchomić ponownie?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Zmień ikonę</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Opcje wyglądu</string>
     <string name="morphe_appearance_options_description">Dostosuj motywy, kolory i tła</string>
-    <string name="morphe_appearance_app_language">Język aplikacji</string>
+    <string name="morphe_appearance_current_language">Aktualny język</string>
     <string name="morphe_appearance_search">Szukaj</string>
     <string name="morphe_appearance_no_results">Nie znaleziono wyników</string>
-    <string name="morphe_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być brakujące lub niekompletne</string>
+    <string name="morphe_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą nie istnieć lub być niekompletne</string>
     <string name="morphe_appearance_translations_info_text">Aby przetłumaczyć nowe języki lub poprawić istniejącie tłumaczenia, odwiedź %s</string>
     <string name="morphe_background_type">Animacja tła</string>
     <string name="morphe_background_type_circles">Okręgi</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Kształty</string>
     <string name="morphe_background_type_snow">Śnieg</string>
     <string name="morphe_background_type_none">Brak</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Używaj wersji przedpremierowych Morphe</string>
     <string name="morphe_update_use_prereleases_description">Zdobądź wcześniejszy dostęp do nowych aktualizacji i funkcji menedżera</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Podpis (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Uwzględnij w eksporcie ustawień</string>
     <string name="include_github_pat_in_exports_supporting">Dodaj ten PAT do eksportowanych ustawień menedżera</string>
     <string name="include_github_pat_in_exports_warning">Nie udostępniaj swojego PAT. Jeśli uwzględniasz go w eksporcie ustawień, przechowuj ten plik prywatnie, ponieważ zawiera token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Język aplikacji</string>
+    <string name="language_dialog_title">Wybierz język aplikacji</string>
+    <string name="language_option_system">Użyj języka urządzenia</string>
     <string name="device_memory_limit_format">%1$d MB (normalny) - %2$d MB (duży)</string>
     <string name="patches_force_download">Wymuś pobranie wszystkich pakietów modyfikacji</string>
     <string name="patches_reset">Zresetuj pakiety modyfikacji</string>

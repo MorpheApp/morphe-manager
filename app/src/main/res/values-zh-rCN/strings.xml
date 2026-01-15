@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">切换至功能完整的专家模式</string>
     <string name="morphe_share_website">分享网站</string>
     <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">应用图标</string>
+    <string name="morphe_app_icon_selector_description">更改应用程序启动图标</string>
+    <string name="morphe_app_icon_default">默认</string>
+    <string name="morphe_app_icon_light_2">天空</string>
+    <string name="morphe_app_icon_light_3">日落</string>
+    <string name="morphe_app_icon_dark_1">大海</string>
+    <string name="morphe_app_icon_dark_2">虚空</string>
+    <string name="morphe_app_icon_dark_3">靛青</string>
+    <string name="morphe_app_icon_change_dialog_title">更改应用图标？</string>
+    <string name="morphe_app_icon_change_dialog_message">切换到\'%1$s\'并重启？</string>
+    <string name="morphe_app_icon_change_dialog_confirm">更改图标</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外观选项</string>
     <string name="morphe_appearance_options_description">自定义主题、颜色和背景</string>
-    <string name="morphe_appearance_app_language">应用语言</string>
+    <string name="morphe_appearance_current_language">当前语言</string>
     <string name="morphe_appearance_search">搜索</string>
     <string name="morphe_appearance_no_results">未找到结果</string>
     <string name="morphe_appearance_translations_info_title">某些语言的翻译可能缺失或不完整</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">形状</string>
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">无</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">使用预发布版本</string>
     <string name="morphe_update_use_prereleases_description">早期获取新补丁和管理器功能</string>
     <!-- Patch Options Section -->
@@ -605,13 +617,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">包含在设置导出中</string>
     <string name="include_github_pat_in_exports_supporting">将此 PAT 添加到导出的管理器设置</string>
     <string name="include_github_pat_in_exports_warning">请勿共享您的 PAT。如果您将其包含在设置导出中，请将该文件保密，因为它包含令牌。</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">应用语言</string>
+    <string name="language_dialog_title">选择应用语言</string>
+    <string name="language_option_system">跟随设备语言</string>
     <string name="device_memory_limit_format">%1$dMB (正常) - %2$dMB (大)</string>
     <string name="patches_force_download">强制下载所有补丁包</string>
     <string name="patches_reset">重置补丁包</string>

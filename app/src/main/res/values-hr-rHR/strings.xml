@@ -118,8 +118,9 @@
     <string name="morphe_patcher_message_20">Uklanjanje smetnji. Molimo ostanite na čekanju… 🗑️</string>
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Vrati se na Morphe domovinu</string>
+    <!-- App Icon Selector -->
     <!-- Appearance Section -->
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <!-- Patch Options Section -->
     <!-- Theme Colors -->
     <!-- Color Picker -->
@@ -141,13 +142,6 @@
     <!-- Morphe -->
     <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">حزمة التعديل</string>
+    <string name="morphe_home_bundles">حُزمة التعديل</string>
     <string name="morphe_home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">مستعد لجعل YouTube أسطوريًا مرة أخرى؟</string>
@@ -38,7 +38,7 @@
     <string name="morphe_home_timeline">سجل التحديث</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">لتعديل %1$s ، تحتاج إلى الإصدار %2$s (غير المعدل)</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">لتعديل %1$s، تحتاج إلى الإصدار %2$s (غير المعدل)</string>
     <string name="morphe_home_apk_availability_yes">نعم، لديّ</string>
     <string name="morphe_home_apk_availability_no">لا، ساعدني في العثور عليه</string>
     <!-- Dialog 2: Download Instructions -->
@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">حفظ ملف APK</string>
-    <string name="morphe_patcher_copy_error">Copy error</string>
+    <string name="morphe_patcher_copy_error">خطأ في النسخ</string>
     <string name="morphe_patcher_show_error">عرض الخطأ</string>
     <string name="morphe_patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d تعديلات</string>
@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">التبديل إلى وضع الخبير كامل الميزات</string>
     <string name="morphe_share_website">مشاركة الموقع الإلكتروني</string>
     <string name="morphe_share_website_description">شارك موقع Morphe الرسمي</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">أيقونة التطبيق</string>
+    <string name="morphe_app_icon_selector_description">تغيير أيقونة التطبيق على الشاشة الرئيسية</string>
+    <string name="morphe_app_icon_default">الافتراضي</string>
+    <string name="morphe_app_icon_light_2">السماء</string>
+    <string name="morphe_app_icon_light_3">غروب الشمس</string>
+    <string name="morphe_app_icon_dark_1">البحر</string>
+    <string name="morphe_app_icon_dark_2">الفراغ</string>
+    <string name="morphe_app_icon_dark_3">الأزرق الداكن</string>
+    <string name="morphe_app_icon_change_dialog_title">تغيير أيقونة التطبيق؟</string>
+    <string name="morphe_app_icon_change_dialog_message">تغيير إلى \'%1$s\' وإعادة تشغيل؟</string>
+    <string name="morphe_app_icon_change_dialog_confirm">تغيير الأيقونة</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">خيارات المظهر</string>
     <string name="morphe_appearance_options_description">تخصيص أشكال وألوان الخلفيات</string>
-    <string name="morphe_appearance_app_language">لغة التطبيق</string>
+    <string name="morphe_appearance_current_language">اللغة الحالية</string>
     <string name="morphe_appearance_search">البحث</string>
     <string name="morphe_appearance_no_results">لم يتم العثور على نتائج</string>
     <string name="morphe_appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">أشكال</string>
     <string name="morphe_background_type_snow">ثلج</string>
     <string name="morphe_background_type_none">لا شيء</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">استخدام إصدارات ما قبل الإطلاق</string>
     <string name="morphe_update_use_prereleases_description">احصل على الوصول المبكر إلى التعديلات الجديدة وميزات الإدارة</string>
     <!-- Patch Options Section -->
@@ -300,7 +312,7 @@ Morphe فقط لديه هذا.</string>
     <string name="bundle_version_dialog_selected_indicator">محدد</string>
     <string name="bundle_version_dialog_other_title">اختر إصدارًا مدعومًا آخر:</string>
     <string name="bundle_version_dialog_locked_title">تم تمكين ضمانات الإصدار</string>
-    <string name="bundle_version_dialog_locked_hint">انتقل إلى الإعدادات &gt; الإعدادات المتقدمة &gt; الضمانات واضبط كلًا من \"تتطلب إصدار التطبيق الموصى به\" (إيقاف التشغيل) و \"تعطيل فحص توافق الإصدار\" (تشغيل) لاختيار إصدارات خاصة بالحزمة.</string>
+    <string name="bundle_version_dialog_locked_hint">انتقل إلى الإعدادات &gt; الإعدادات المتقدمة &gt; الضمانات واضبط كلًا من \"يتطلب إصدار التطبيق الموصى به\" (إيقاف التشغيل) و \"تعطيل فحص توافق الإصدار\" (تشغيل) لاختيار إصدارات خاصة بالحزمة.</string>
     <string name="patch_versions_dialog_title">الإصدارات المدعومة لـ %1$s</string>
     <string name="patch_selector_item">تحديد التعديلات</string>
     <string name="patch_selector_item_description">%d تعديلات محددة</string>
@@ -357,7 +369,7 @@ Morphe فقط لديه هذا.</string>
     <string name="patch_compat_check_confirmation">"قد يؤدي تحديد التعديلات غير المتوافقة إلى تعطل التطبيق.
 
 هل تريد المتابعة على أي حال؟"</string>
-    <string name="suggested_version_safeguard">تتطلب إصدار التطبيق الموصى به</string>
+    <string name="suggested_version_safeguard">يتطلب إصدار التطبيق الموصى به</string>
     <string name="suggested_version_safeguard_description">فرض تحديد إصدار التطبيق الموصى به</string>
     <string name="suggested_version_safeguard_confirmation">"قد يتسبب تحديد تطبيق غير الإصدار الموصى به في حدوث مشكلات غير متوقعة.
 
@@ -626,13 +638,9 @@ Morphe فقط لديه هذا.</string>
     <string name="include_github_pat_in_exports_label">تضمين في تصدير الإعدادات</string>
     <string name="include_github_pat_in_exports_supporting">يضيف هذا الرمز المميز PAT إلى إعدادات المدير المصدرة</string>
     <string name="include_github_pat_in_exports_warning">لا تشارك رمز PAT الخاص بك. إذا قمت بتضمينه في إعدادات التصدير، فاحتفظ بهذا الملف خاصًا لأنه يحتوي على الرمز المميز.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">لغة التطبيق</string>
+    <string name="language_dialog_title">اختر لغة التطبيق</string>
+    <string name="language_option_system">استخدام لغة الجهاز</string>
     <string name="device_memory_limit_format">%1$d ميجابايت (عادي) - %2$d ميجابايت (كبير)</string>
     <string name="patches_force_download">فرض تنزيل جميع حزم التعديل</string>
     <string name="patches_reset">إعادة تعيين حزم التعديل</string>
@@ -665,7 +673,7 @@ Morphe فقط لديه هذا.</string>
     <string name="non_suggested_version_warning_description">"لا يتطابق إصدار التطبيق الذي حددته مع الإصدار الموصى به.
 يرجى استخدام الإصدار الموصى به: %s
 
-للمتابعة على أي حال، قم بتعطيل \"تتطلب إصدار التطبيق الموصى به\" في الإعدادات المتقدمة."</string>
+للمتابعة على أي حال، قم بتعطيل \"يتطلب إصدار التطبيق الموصى به\" في الإعدادات المتقدمة."</string>
     <string name="selection_warning_description">"يوصى باستخدام تحديد وخيارات التعديل الافتراضية. قد يؤدي تغييرها إلى مشاكل غير متوقعة.
 
 تحتاج إلى تشغيل \"السماح بتغيير تحديد التعديل وخياراتها\" في الإعدادات المتقدمة قبل تبديل التعديل."</string>

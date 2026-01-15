@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Schakel over naar de volledig ondersteunde expertmodus</string>
     <string name="morphe_share_website">Deel website</string>
     <string name="morphe_share_website_description">De officiële Morphe website delen</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">App-pictogram</string>
+    <string name="morphe_app_icon_selector_description">Verander het app-icoon</string>
+    <string name="morphe_app_icon_default">Standaard</string>
+    <string name="morphe_app_icon_light_2">Lucht</string>
+    <string name="morphe_app_icon_light_3">Zonsondergang</string>
+    <string name="morphe_app_icon_dark_1">Ocean</string>
+    <string name="morphe_app_icon_dark_2">Leegte</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Verander app-icoon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Verander naar \'%1$s\' en herstarten?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Verander icoon</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Uitzettingsvoorkeuren</string>
     <string name="morphe_appearance_options_description">Aanpassen van thema\'s, kleuren en achtergronden</string>
-    <string name="morphe_appearance_app_language">App-taal</string>
+    <string name="morphe_appearance_current_language">Huidige taal</string>
     <string name="morphe_appearance_search">Zoeken</string>
     <string name="morphe_appearance_no_results">Geen resultaten gevonden</string>
     <string name="morphe_appearance_translations_info_title">Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Vormen</string>
     <string name="morphe_background_type_snow">Sneeuw</string>
     <string name="morphe_background_type_none">Geen</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Gebruik voor-release-versies</string>
     <string name="morphe_update_use_prereleases_description">Krijg vroege toegang tot nieuwe patches en beheerdersfuncties</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Opnemen in instellingsexport</string>
     <string name="include_github_pat_in_exports_supporting">Voegt deze PAT toe aan geëxporteerde managerinstellingen</string>
     <string name="include_github_pat_in_exports_warning">Deel uw PAT niet. Als u deze in een instellingexport opneemt, houd dat bestand dan privé omdat het de token bevat.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">App-taal</string>
+    <string name="language_dialog_title">Kies app-taal</string>
+    <string name="language_option_system">Apparaattaal gebruiken</string>
     <string name="device_memory_limit_format">%1$dMB (Normaal) - %2$dMB (Groot)</string>
     <string name="patches_force_download">Alle patchbundels geforceerd downloaden</string>
     <string name="patches_reset">Patchbundels opnieuw instellen</string>
