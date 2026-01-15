@@ -1,3 +1,10 @@
+# app [1.3.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2026-01-15)
+
+
+### Bug Fixes
+
+* Set initial page to Advanced tab ([a94e971](https://github.com/MorpheApp/morphe-manager/commit/a94e971464b4aa055dacf41f86ff4e2fb33d746b))
+
 # app [1.3.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-01-12)
 
 
