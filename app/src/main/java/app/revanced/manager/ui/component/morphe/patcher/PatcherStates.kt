@@ -274,12 +274,13 @@ fun PatchingSuccess(
             showCancelButton = false,
             showHomeButton = true,
             showSaveButton = true,
+            showErrorButton = false,
             onCancelClick = {},
             onHomeClick = onHomeClick,
             onSaveClick = onSaveClick,
             isSaving = isSaving,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
+            onErrorClick = {},
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 }
@@ -295,18 +296,15 @@ private fun SuccessIcon(
     windowSize: WindowSize
 ) {
     Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) 140.dp else 120.dp)
-            .clip(CircleShape)
             .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        iconBackgroundColor,
-                        iconBackgroundColor.copy(alpha = 0.1f)
-                    )
-                )
-            ),
-        contentAlignment = Alignment.Center
+                brush = Brush.radialGradient(
+                    colors = listOf(iconBackgroundColor, Color.Transparent)
+                ),
+                shape = CircleShape
+            )
     ) {
         Icon(
             imageVector = icon,
@@ -327,18 +325,30 @@ private fun SuccessStatusText(
     isInstalling: Boolean,
     windowSize: WindowSize
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
-    ) {
+    AnimatedContent(
+        targetState = getTitleForState(installState, installedPackageName, isInstalling),
+        transitionSpec = {
+            fadeIn(animationSpec = tween(500)) togetherWith
+                    fadeOut(animationSpec = tween(500))
+        },
+        label = "title_animation"
+    ) { titleRes ->
         Text(
-            text = stringResource(
-                getTitleForState(installState, installedPackageName, isInstalling)
-            ),
-            style = MaterialTheme.typography.headlineMedium,
+            text = stringResource(titleRes),
+            style = if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
+                MaterialTheme.typography.headlineLarge
+            } else {
+                MaterialTheme.typography.headlineMedium
+            },
             fontWeight = FontWeight.Bold,
+            color = if (installState is MorpheInstallViewModel.InstallState.Error ||
+                installState is MorpheInstallViewModel.InstallState.Conflict) {
+                MaterialTheme.colorScheme.error
+            } else {
+                MaterialTheme.colorScheme.onBackground
+            },
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
@@ -353,15 +363,24 @@ private fun SuccessInstructionsText(
     isInstalling: Boolean,
     usingMountInstall: Boolean
 ) {
-    Text(
-        text = stringResource(
-            getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall)
-        ),
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth()
-    )
+    AnimatedContent(
+        targetState = getSubtitleForState(installState, installedPackageName, isInstalling, usingMountInstall),
+        transitionSpec = {
+            fadeIn(animationSpec = tween(500)) togetherWith
+                    fadeOut(animationSpec = tween(500))
+        },
+        label = "subtitle_animation"
+    ) { subtitleRes ->
+        if (subtitleRes != 0) {
+            Text(
+                text = stringResource(subtitleRes),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
 }
 
 /**
@@ -373,24 +392,23 @@ private fun SuccessErrorMessage(
     installState: MorpheInstallViewModel.InstallState
 ) {
     AnimatedVisibility(
-        visible = errorMessage != null || installState is MorpheInstallViewModel.InstallState.Conflict,
+        visible = errorMessage != null && installState is MorpheInstallViewModel.InstallState.Error,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(300))
     ) {
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp),
-            color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
-        ) {
-            Column(modifier = Modifier.padding(12.dp)) {
-                if (errorMessage != null) {
-                    Text(
-                        text = errorMessage,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center
-                    )
-                }
+        errorMessage?.let { message ->
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            ) {
+                Text(
+                    text = message,
+                    modifier = Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }
@@ -563,6 +581,7 @@ private fun getSubtitleForState(
  */
 @Composable
 fun PatchingFailed(
+    state: MorphePatcherState,
     onHomeClick: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
@@ -573,13 +592,11 @@ fun PatchingFailed(
             .padding(bottom = 16.dp)
     ) {
         AdaptiveCenteredLayout(windowSize = windowSize) {
-            Icon(
-                imageVector = Icons.Default.Error,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) 120.dp else 100.dp)
-                    .align(Alignment.CenterHorizontally),
-                tint = MaterialTheme.colorScheme.error
+            SuccessIcon(
+                icon = Icons.Default.Error,
+                iconTint = MaterialTheme.colorScheme.error,
+                iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                windowSize = windowSize
             )
 
             Spacer(Modifier.height(windowSize.itemSpacing * 2))
@@ -609,11 +626,12 @@ fun PatchingFailed(
             showCancelButton = false,
             showHomeButton = true,
             showSaveButton = false,
+            showErrorButton = true,
             onCancelClick = {},
             onHomeClick = onHomeClick,
             onSaveClick = {},
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
+            onErrorClick = { state.showErrorBottomSheet = true },
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 }

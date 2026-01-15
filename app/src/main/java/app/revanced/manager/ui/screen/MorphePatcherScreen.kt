@@ -392,6 +392,7 @@ fun MorphePatcherScreen(
 
                         PatcherState.FAILED -> {
                             PatchingFailed(
+                                state = state,
                                 onHomeClick = onBackClick
                             )
                         }

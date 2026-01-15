@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.FileDownload
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +19,7 @@ import app.revanced.manager.ui.component.morphe.home.BottomActionButton
 /**
  * Patcher bottom action bar
  * Three rectangular buttons with fixed position at bottom
- * Left: Cancel Patching | Center: Home | Right: Save APK
+ * Left: Cancel Patching | Center: Home | Right: Save / Error button
  * Follows same visual style as home screen bottom bar
  */
 @Composable
@@ -27,11 +28,13 @@ fun PatcherBottomActionBar(
     showCancelButton: Boolean = true,
     showHomeButton: Boolean = true,
     showSaveButton: Boolean = false,
+    showErrorButton: Boolean = false,
 
     // Actions
     onCancelClick: () -> Unit,
     onHomeClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onErrorClick: () -> Unit,
 
     // State
     isSaving: Boolean = false,
@@ -55,9 +58,7 @@ fun PatcherBottomActionBar(
                 containerColor = MaterialTheme.colorScheme.errorContainer,
                 contentColor = MaterialTheme.colorScheme.onErrorContainer
             )
-        } else {
-            Spacer(Modifier.weight(1f))
-        }
+        } else Spacer(Modifier.weight(1f))
 
         // Center: Home button
         if (showHomeButton) {
@@ -67,24 +68,25 @@ fun PatcherBottomActionBar(
                 text = stringResource(R.string.morphe_home),
                 modifier = Modifier.weight(1f)
             )
-        } else {
-            Spacer(Modifier.weight(1f))
-        }
+        } else Spacer(Modifier.weight(1f))
 
-        // Right: Save APK button
-        if (showSaveButton) {
+        // Right: Save / Error button
+        if (showSaveButton || showErrorButton) {
             BottomActionButton(
-                onClick = onSaveClick,
-                icon = Icons.Outlined.FileDownload,
-                text = stringResource(R.string.save),
+                onClick = if (showErrorButton) onErrorClick else onSaveClick,
+                icon = if (showErrorButton) Icons.Default.Error else Icons.Outlined.FileDownload,
+                text = if (showErrorButton) stringResource(R.string.patches_error)
+                else stringResource(R.string.save),
                 modifier = Modifier.weight(1f),
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                containerColor = if (showErrorButton)
+                    MaterialTheme.colorScheme.errorContainer
+                else MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = if (showErrorButton)
+                    MaterialTheme.colorScheme.onErrorContainer
+                else MaterialTheme.colorScheme.onSecondaryContainer,
                 enabled = !isSaving,
-                showProgress = isSaving
+                showProgress = isSaving && !showErrorButton
             )
-        } else {
-            Spacer(Modifier.weight(1f))
-        }
+        } else Spacer(Modifier.weight(1f))
     }
 }

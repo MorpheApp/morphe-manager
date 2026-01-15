@@ -164,11 +164,12 @@ fun PatchingInProgress(
             showCancelButton = true,
             showHomeButton = false,
             showSaveButton = false,
+            showErrorButton = false,
             onCancelClick = onCancelClick,
             onHomeClick = onHomeClick,
             onSaveClick = {},
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
+            onErrorClick = {},
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 }
