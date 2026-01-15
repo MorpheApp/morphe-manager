@@ -54,13 +54,13 @@
     <string name="morphe_home_download_instructions_continue">APKMirror.com 으로 이동하기</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">다운로드된 APK 선택</string>
-    <string name="morphe_home_file_picker_prompt_description">다운로드된 %1$s APK 파일을 선택하세요.</string>
+    <string name="morphe_home_file_picker_prompt_description">다운로드된 \'%1$s\' APK 파일을 선택하세요.</string>
     <string name="morphe_home_file_picker_prompt_open">다운로드된 APK 파일 열기</string>
     <string name="morphe_home_recommended_version">권장 버전</string>
     <string name="morphe_patcher_selected_version">선택된 버전</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다.</string>
-    <string name="morphe_root_gmscore_excluded">루트 모드에서는 GmsCore support 패치가 제외됩니다.</string>
+    <string name="morphe_root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됩니다.</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">APK 저장</string>
     <string name="morphe_patcher_copy_error">오류 복사</string>
@@ -123,14 +123,26 @@
     <string name="morphe_settings_return_to_expert_description">전체 기능을 갖춘 전문가 모드로 변경합니다</string>
     <string name="morphe_share_website">웹사이트 공유하기</string>
     <string name="morphe_share_website_description">공식 Morphe 웹사이트를 공유해 보세요</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">앱 아이콘</string>
+    <string name="morphe_app_icon_selector_description">앱 런처 아이콘을 변경해 보세요</string>
+    <string name="morphe_app_icon_default">기본값</string>
+    <string name="morphe_app_icon_light_2">하늘</string>
+    <string name="morphe_app_icon_light_3">일몰</string>
+    <string name="morphe_app_icon_dark_1">바다</string>
+    <string name="morphe_app_icon_dark_2">공허</string>
+    <string name="morphe_app_icon_dark_3">인디고</string>
+    <string name="morphe_app_icon_change_dialog_title">앱 아이콘을 변경하시겠습니까?</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\'로 변경하고 다시 시작하시겠습니까?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">레이아웃 옵션</string>
     <string name="morphe_appearance_options_description">테마, 색상 그리고 배경을 커스텀 해보세요</string>
-    <string name="morphe_appearance_app_language">앱 언어</string>
+    <string name="morphe_appearance_current_language">현재 언어</string>
     <string name="morphe_appearance_search">검색</string>
     <string name="morphe_appearance_no_results">결과가 없습니다</string>
     <string name="morphe_appearance_translations_info_title">일부 언어의 번역이 누락되었거나 불완전할 수 있습니다</string>
-    <string name="morphe_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
+    <string name="morphe_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 \'%s\'를 방문하세요</string>
     <string name="morphe_background_type">배경 애니메이션</string>
     <string name="morphe_background_type_circles">원</string>
     <string name="morphe_background_type_rings">링</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">도형</string>
     <string name="morphe_background_type_snow">눈</string>
     <string name="morphe_background_type_none">없음</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Pre-release 버전 사용하기</string>
     <string name="morphe_update_use_prereleases_description">새로운 패치 및 매니저 기능을 일찍 사용해 보세요</string>
     <!-- Patch Options Section -->
@@ -154,7 +166,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">색상 리소스를 참조하거나 헥스 색상 코드를 변경하여 원하는 테마 색상으로 변경해 보세요</string>
     <string name="morphe_patch_options_light_theme_color">밝은 테마 배경 색상</string>
     <string name="morphe_patch_options_light_theme_color_description">색상 리소스를 참조하거나 헥스 색상 코드를 변경하여 원하는 테마 색상으로 변경해 보세요</string>
-    <string name="morphe_patch_options_icon_instructions_title">아이콘 형식 설명서</string>
+    <string name="morphe_patch_options_icon_instructions_title">앱 아이콘 형식 설명서</string>
     <string name="morphe_patch_options_header_instructions_title">헤더 형식 설명서</string>
     <string name="morphe_patch_options_loading">패치 옵션을 불러오는 중 …</string>
     <string name="morphe_patch_options_waiting_for_bundle">패치 번들 업데이트를 기다리는 중</string>
@@ -167,9 +179,9 @@
     <string name="morphe_patch_options_custom_branding">커스텀 브랜딩</string>
     <string name="morphe_patch_options_custom_branding_description">앱 표시 이름을 변경해 보세요</string>
     <string name="morphe_patch_options_custom_branding_app_name">앱 이름</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">커스텀 이름 입력하기</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon">커스텀 아이콘</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"커스텀 아이콘으로 사용될 이미지가 있는 폴더.
+    <string name="morphe_patch_options_custom_branding_app_name_hint">커스텀 앱 이름 입력하기</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">커스텀 앱 아이콘</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"커스텀 앱 아이콘으로 사용될 이미지가 있는 폴더.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - mipmap-mdpi
@@ -262,7 +274,7 @@ morphe_header_custom_dark.png
     <string name="app_source_dialog_option_installed_version_not_suggested">%s 버전이 권장 버전과 일치하지 않습니다</string>
     <string name="bundle_version_item">번들 추천</string>
     <string name="bundle_version_item_description_default">기본 추천을 사용합니다</string>
-    <string name="bundle_version_item_description_selected">%1$s (%2$s) 을 사용합니다</string>
+    <string name="bundle_version_item_description_selected">\'%1$s (%2$s)\'을 사용합니다</string>
     <string name="bundle_version_dialog_title">번들 추천 선택하기</string>
     <string name="bundle_version_dialog_description">APK를 다운로드할 때 사용할 번들 추천을 선택하세요.</string>
     <string name="bundle_version_dialog_default">기본 추천 선택하기</string>
@@ -276,7 +288,7 @@ morphe_header_custom_dark.png
     <string name="bundle_update_banner_title">패치 번들을 업데이트하는 중</string>
     <string name="bundle_reorder">번들 정리</string>
     <string name="bundle_reorder_title">패치 번들 정리</string>
-    <string name="bundle_reorder_description">핸들을 드래그하여 목록과 패치 선택목록 메뉴에 나타나는 번들 순서를 정렬하세요.</string>
+    <string name="bundle_reorder_description">핸들을 드래그하여 목록과 패치 선택 목록 메뉴에 나타나는 번들 순서를 정렬하세요.</string>
     <string name="bundle_actions_expand">번들 동작 보기</string>
     <string name="bundle_actions_collapse">번들 동작 숨기기</string>
     <string name="patch_bundle_duplicate_name_error">이 이름의 패치 번들이 이미 있습니다</string>
@@ -299,15 +311,15 @@ morphe_header_custom_dark.png
     <string name="bundle_version_dialog_selected_indicator">선택됨</string>
     <string name="bundle_version_dialog_other_title">다른 지원 버전 선택:</string>
     <string name="bundle_version_dialog_locked_title">버전 보안이 활성화됨</string>
-    <string name="bundle_version_dialog_locked_hint">\"설정 &gt; 고급 &gt; 보안\"으로 이동하여 \"권장 앱 버전 요구\" (끄기)와 \"\'버전 호환성 검사 비활성화\" (켜기)를 설정하면 버전을 선택할 수 있습니다.</string>
-    <string name="patch_versions_dialog_title">%1$s 에 대한 지원 버전</string>
+    <string name="bundle_version_dialog_locked_hint">\'설정 &gt; 고급 &gt; 보안\'으로 이동하여 \'권장 앱 버전 요구\'를 끄고 \'버전 호환성 검사 비활성화\'를 켜면 버전을 선택할 수 있습니다.</string>
+    <string name="patch_versions_dialog_title">\'%1$s\'에 대한 지원 버전</string>
     <string name="patch_selector_item">패치 선택하기</string>
     <string name="patch_selector_item_description">%d 개의 패치를 선택하였습니다</string>
     <string name="no_patches_selected">선택된 패치가 없습니다</string>
     <string name="network_unavailable_warning">기기가 인터넷에 연결되어 있지 않습니다. 나중에 다운로드가 실패할 수 있습니다.</string>
     <string name="apk_source_selector_item">APK 소스 선택하기</string>
     <string name="apk_source_auto">모든 APK 다운로더를 사용합니다</string>
-    <string name="apk_source_downloader">%s 를 사용합니다</string>
+    <string name="apk_source_downloader">\'%s\'를 사용합니다</string>
     <string name="apk_source_installed">설치된 APK를 사용합니다</string>
     <string name="apk_source_local">기기 APK 파일를 사용합니다</string>
     <string name="apk_source_downloaded">다운로드된 APK를 사용합니다</string>
@@ -322,7 +334,7 @@ morphe_header_custom_dark.png
     <string name="downloads">다운로드</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <string name="import_export">가져오기 &amp; 내보내기</string>
-    <string name="import_export_description">키스토어, 패치 옵션 그리고 선택목록</string>
+    <string name="import_export_description">키스토어, 패치 옵션 그리고 선택 목록</string>
     <string name="changelog">변경 사항 보기</string>
     <string name="changelog_loading">변경 사항을 불러오는 중</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
@@ -342,13 +354,13 @@ morphe_header_custom_dark.png
     <!-- Morphe -->
     <string name="theme_presets">테마 프리셋</string>
     <!-- Morphe -->
-    <string name="theme_preset_default">기기 테마</string>
-    <string name="theme_preset_amoled">검은</string>
+    <string name="theme_preset_default">시스템 따르기</string>
+    <string name="theme_preset_amoled">순수 검정</string>
     <string name="theme_preset_dynamic">Material You</string>
     <!-- Morphe -->
     <string name="color_channel_red">빨강</string>
     <string name="color_channel_green">초록</string>
-    <string name="color_channel_blue">파란</string>
+    <string name="color_channel_blue">파랑</string>
     <string name="theme">테마</string>
     <string name="safeguards">보안</string>
     <string name="patch_compat_check">버전 호환성 검사 비활성화</string>
@@ -363,14 +375,14 @@ morphe_header_custom_dark.png
 그래도 계속하시겠습니까?"</string>
     <string name="patch_selection_safeguard">패치 선택 및 옵션 변경 허용</string>
     <string name="patch_selection_safeguard_description">패치를 선택하거나 선택 해제할 수 있고 옵션을 변경할 수 있습니다</string>
-    <string name="patch_selection_safeguard_confirmation">"패치 선택목록을 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
+    <string name="patch_selection_safeguard_confirmation">"패치 선택 목록을 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
 
 그래도 활성화하시겠습니까?"</string>
     <string name="universal_patches_safeguard">범용 패치 표시 및 사용 허용</string>
     <string name="universal_patches_safeguard_description">범용 패치를 표시하거나 사용할 수 있습니다</string>
     <string name="universal_patches_profile_blocked_title">범용 패치가 비활성화되어 있음</string>
-    <string name="universal_patches_profile_blocked_description">이 패치 프로필에는 범용 패치가 포함되어 있습니다. 사용하려면 고급 설정에서 \"%1$s\"를 활성화하세요.</string>
-    <string name="universal_patches_app_blocked_description">이 앱에는 범용 패치가 포함되어 있습니다. 계속하려면 고급 설정에서 \"%1$s\"를 활성화하세요.</string>
+    <string name="universal_patches_profile_blocked_description">이 패치 프로필에는 범용 패치가 포함되어 있습니다. 사용하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
+    <string name="universal_patches_app_blocked_description">이 앱에는 범용 패치가 포함되어 있습니다. 계속하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
     <string name="import_keystore">키스토어 가져오기</string>
     <string name="import_keystore_description">커스텀 키스토어를 가져옵니다</string>
     <string name="import_keystore_dialog_title">키스토어 자격 증명 입력</string>
@@ -386,12 +398,12 @@ morphe_header_custom_dark.png
     <string name="export_keystore_success">키스토어를 내보냈습니다</string>
     <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">키스토어를 성공적으로 변경하였습니다</string>
-    <string name="import_patch_selection">패치 선택목록 가져오기</string>
-    <string name="import_patch_selection_description">JSON 파일에서 패치 선택목록을 가져옵니다</string>
-    <string name="import_patch_selection_fail">패치 선택목록을 가져올 수 없습니다: %s</string>
-    <string name="import_patch_selection_success">패치 선택목록을 가져왔습니다</string>
+    <string name="import_patch_selection">패치 선택 목록 가져오기</string>
+    <string name="import_patch_selection_description">패치 선택 목록을 JSON 파일에서 가져옵니다</string>
+    <string name="import_patch_selection_fail">패치 선택 목록을 가져올 수 없습니다: %s</string>
+    <string name="import_patch_selection_success">패치 선택 목록을 가져왔습니다</string>
     <string name="import_patch_bundles">패치 번들 가져오기</string>
-    <string name="import_patch_bundles_description">JSON 파일에서 수동 패치 번들을 복원합니다</string>
+    <string name="import_patch_bundles_description">원격 패치 번들 목록을 JSON 파일에서 가져옵니다</string>
     <string name="import_patch_bundles_fail">패치 번들을 가져올 수 없습니다: %s</string>
     <string name="import_patch_bundles_in_progress">가져오는 중 ...</string>
     <string name="import_patch_bundles_success">%d 개의 패치 번들을 가져왔습니다</string>
@@ -401,27 +413,27 @@ morphe_header_custom_dark.png
     <string name="import_patch_bundles_banner_subtitle">%1$d / %2$d 처리됨</string>
     <string name="import_patch_bundles_banner_steps">%2$d 개 중 %1$d 번째 단계</string>
     <string name="import_patch_profiles">패치 프로필 가져오기</string>
-    <string name="import_patch_profiles_description">JSON 파일에서 저장된 패치 프로필을 가져옵니다</string>
+    <string name="import_patch_profiles_description">패치 프로필 목록을 JSON 파일에서 가져옵니다</string>
     <string name="import_patch_profiles_fail">패치 번들을 가져올 수 없습니다: %s</string>
     <string name="import_patch_profiles_success">%d 개의 패치 프로필을 가져왔습니다</string>
     <string name="import_patch_profiles_partial">%1$d 개의 패치 프로필을 가져왔으며 %2$d 개는 건너뛰었습니다</string>
     <string name="import_patch_profiles_skipped">%d 개의 중복 패치 프로필을 건너뛰었습니다</string>
     <string name="import_patch_profiles_none">가져온 패치 프로필이 없습니다</string>
     <string name="import_manager_settings">매니저 설정 가져오기</string>
-    <string name="import_manager_settings_description">JSON 파일에서 저장된 매니저 설정을 복원합니다</string>
+    <string name="import_manager_settings_description">매니저 설정을 JSON 파일에서 가져옵니다</string>
     <string name="import_manager_settings_fail">매니저 설정을 가져올 수 없습니다: %s</string>
     <string name="import_manager_settings_success">메니저 설정을 가져왔습니다</string>
-    <string name="export_patch_selection">패치 선택목록 내보내기</string>
-    <string name="export_patch_selection_description">패치 선택목록을 JSON 파일로 내보냅니다</string>
-    <string name="export_patch_selection_fail">패치 선택목록을 내보낼 수 없습니다: %s</string>
-    <string name="export_patch_selection_success">패치 선택목록을 내보냈습니다</string>
+    <string name="export_patch_selection">패치 선택 목록 내보내기</string>
+    <string name="export_patch_selection_description">패치 선택 목록을 JSON 파일으로 내보냅니다</string>
+    <string name="export_patch_selection_fail">패치 선택 목록을 내보낼 수 없습니다: %s</string>
+    <string name="export_patch_selection_success">패치 선택 목록을 내보냈습니다</string>
     <string name="export_patch_bundles">패치 번들 내보내기</string>
-    <string name="export_patch_bundles_description">JSON 파일에 가져온 수동 패치 번들을 저장합니다</string>
+    <string name="export_patch_bundles_description">원격 패치 번들 목록을 JSON 파일으로 내보냅니다</string>
     <string name="export_patch_bundles_fail">패치 번들을 내보낼 수 없습니다: %s</string>
     <string name="export_patch_bundles_success">%d 개의 패치 번들을 내보냈습니다</string>
     <string name="export_patch_bundles_partial">%1$d 개의 패치 번들을 내보냈습니다. 일부 번들은 기기에 추가되어있기 때문에 내보낼 수 없습니다.</string>
-    <string name="bundle_type_remote">수동 설치됨</string>
-    <string name="bundle_type_local">기기 저장소</string>
+    <string name="bundle_type_remote">원격</string>
+    <string name="bundle_type_local">로컬</string>
     <string name="bundle_type_preinstalled">미리 설치됨</string>
     <string name="bundle_created_at">%1$s 생성됨</string>
     <string name="bundle_updated_at">%1$s 업데이트됨</string>
@@ -431,28 +443,28 @@ morphe_header_custom_dark.png
     <string name="bundle_changelog_retry">다시 시도</string>
     <string name="bundle_changelog_empty">변경 사항이 없습니다</string>
     <string name="export_patch_profiles">패치 프로필 내보내기</string>
-    <string name="export_patch_profiles_description">JSON 파일로 모든 패치 프로필을 내보냅니다</string>
+    <string name="export_patch_profiles_description">패치 프로필 목록을 JSON 파일으로 내보냅니다</string>
     <string name="export_patch_profiles_fail">패치 프로필을 내보낼 수 없습니다: %s</string>
     <string name="export_patch_profiles_success">%d 개의 패치 프로필을 내보냈습니다</string>
     <string name="export_patch_profiles_empty">내보낼 수 있는 패치 프로필이 없습니다</string>
     <string name="export_manager_settings">매니저 설정 내보내기</string>
-    <string name="export_manager_settings_description">JSON 파일에 모든 매니저 설정을 저장합니다</string>
+    <string name="export_manager_settings_description">매니저 설정을 JSON 파일으로 내보냅니다</string>
     <string name="export_manager_settings_fail">매니저 설정을 내보낼 수 없습니다: %s</string>
     <string name="export_manager_settings_success">매니저 설정을 내보냈습니다</string>
-    <string name="reset_patch_selection">패치 선택목록 초기화</string>
-    <string name="reset_patch_selection_description">저장된 패치 선택목록을 초기화합니다</string>
+    <string name="reset_patch_selection">패치 선택 목록 초기화</string>
+    <string name="reset_patch_selection_description">패치 선택 목록을 초기화합니다</string>
     <string name="reset_patch_options">패치 옵션 초기화</string>
-    <string name="reset_patch_options_description">저장된 패치 옵션을 초기화합니다</string>
-    <string name="reset_patch_selection_success">패치 선택목록을 초기화하였습니다</string>
+    <string name="reset_patch_options_description">패치 옵션을 초기화합니다</string>
+    <string name="reset_patch_selection_success">패치 선택 목록을 초기화하였습니다</string>
     <string name="patch_selection_deselected_all_toast">모든 패치를 선택 해제하였습니다</string>
-    <string name="patch_selection_deselected_bundle_toast">%s 에서 모든 패치를 선택 해제하였습니다</string>
-    <string name="patch_selection_no_selected_bundle_toast">%s 에서 선택 해제할 수 있는 패치가 없습니다</string>
+    <string name="patch_selection_deselected_bundle_toast">\'%s\'에서 모든 패치를 선택 해제하였습니다</string>
+    <string name="patch_selection_no_selected_bundle_toast">\'%s\'에서 선택 해제할 수 있는 패치가 없습니다</string>
     <string name="patch_selection_selected_all_toast">모든 패치를 선택하였습니다</string>
     <string name="patch_selection_select_all_empty_toast">선택할 수 있는 패치가 없습니다</string>
-    <string name="patch_selection_selected_bundle_toast">%s 에서 모든 패치를 선택하였습니다</string>
-    <string name="patch_selection_select_bundle_empty_toast">%s 에서 선택할 수 있는 패치가 없습니다</string>
+    <string name="patch_selection_selected_bundle_toast">\'%s\'에서 모든 패치를 선택하였습니다</string>
+    <string name="patch_selection_select_bundle_empty_toast">\'%s\'에서 선택할 수 있는 패치가 없습니다</string>
     <string name="patch_selection_all_actions_hidden_toast">모든 동작 버튼이 숨겨집니다. 설정에서 최소 하나 이상을 활성화하세요</string>
-    <string name="patch_selection_reset_bundle_toast">%s 에 대한 기본값을 초기화하였습니다</string>
+    <string name="patch_selection_reset_bundle_toast">\'%s\'에 대한 기본값을 초기화하였습니다</string>
     <string name="patch_selection_button_label_all">모두 선택 해제</string>
     <string name="patch_selection_button_label_bundle">번들 선택 해제</string>
     <string name="patch_selection_button_label_defaults">모두 기본값</string>
@@ -460,14 +472,14 @@ morphe_header_custom_dark.png
     <string name="patch_selection_button_label_select_all">모두 선택</string>
     <string name="patch_selection_button_label_undo_action">동작 실행 취소</string>
     <string name="patch_selection_button_label_redo_action">동작 다시 실행</string>
-    <string name="patch_selection_history_undo">%1$s 을 실행 취소하였습니다</string>
-    <string name="patch_selection_history_redo">%1$s 를 다시 실행하였습니다</string>
+    <string name="patch_selection_history_undo">\'%1$s\'을 실행 취소하였습니다</string>
+    <string name="patch_selection_history_redo">\'%1$s\'를 다시 실행하였습니다</string>
     <string name="patch_selection_action_all_defaults">모두 기본값</string>
     <string name="patch_selection_action_deselect_all">모두 선택 해제</string>
     <string name="patch_selection_action_select_all">모두 선택</string>
-    <string name="patch_selection_action_select_bundle">\"%1$s\" 번들 선택</string>
-    <string name="patch_selection_action_deselect_bundle">“%1$s” 번들 선택 해제</string>
-    <string name="patch_selection_action_bundle_defaults">“%1$s” 번들 기본값</string>
+    <string name="patch_selection_action_select_bundle">\'%1$s\' 번들 선택</string>
+    <string name="patch_selection_action_deselect_bundle">\'%1$s\' 번들 선택 해제</string>
+    <string name="patch_selection_action_bundle_defaults">\'%1$s\' 번들 기본값</string>
     <string name="disable_patch_selection_confirmations">동작 확인 비활성화</string>
     <string name="disable_patch_selection_confirmations_description">패치 선택 동작에 ​​대한 확인 다이얼로그를 건너뜁니다</string>
     <string name="disable_patch_selection_confirmations_warning">확인 기능을 비활성화하면 의도치 않은 대량 변경이 발생할 수 있습니다.</string>
@@ -480,48 +492,48 @@ morphe_header_custom_dark.png
     <string name="patch_selection_action_visibility_reset">모든 동작 버튼 표시</string>
     <string name="patch_selection_action_order_reset">기본 순서로 초기화</string>
     <string name="patch_selection_confirm_deselect_bundle_title">번들을 선택 해제?</string>
-    <string name="patch_selection_confirm_deselect_bundle_message">%1$s 에 대한 모든 패치를 선택 해제하시겠습니까?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">\'%1$s\'에 대한 모든 패치를 선택 해제하시겠습니까?</string>
     <string name="patch_selection_confirm_deselect_all_title">모든 패치를 선택 해제?</string>
     <string name="patch_selection_confirm_deselect_all_message">모든 번들에 대한 모든 패치를 선택 해제하시겠습니까?</string>
     <string name="patch_selection_confirm_bundle_defaults_title">번들 기본값으로 복원?</string>
-    <string name="patch_selection_confirm_bundle_defaults_message">%1$s 에 대한 권장 기본값으로 복원하시겠습니까?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">\'%1$s\'에 대한 권장 기본값으로 복원하시겠습니까?</string>
     <string name="patch_selection_confirm_select_bundle_title">번들을 선택?</string>
-    <string name="patch_selection_confirm_select_bundle_message">%1$s 에 대한 모든 패치를 선택하시겠습니까?</string>
+    <string name="patch_selection_confirm_select_bundle_message">\'%1$s\'에 대한 모든 패치를 선택하시겠습니까?</string>
     <string name="patch_selection_confirm_select_all_title">모든 패치를 선택?</string>
     <string name="patch_selection_confirm_select_all_message">모든 번들에 대한 모든 패치를 선택하시겠습니까?</string>
     <string name="patch_selection_button_label_reset_bundle">번들 기본값</string>
     <string name="patch_profile_save_label">프로필 저장</string>
     <string name="patch_selection_toggle_expand">동작 보기</string>
     <string name="patch_selection_toggle_collapse">동작 숨기기</string>
-    <string name="patch_selection_reset_all">모든 패치 선택목록 초기화</string>
+    <string name="patch_selection_reset_all">모든 패치 선택 목록 초기화</string>
     <string name="patch_selection_reset_all_dialog_description">"모든 패치 선택 목록을 초기화합니다. 각 패치를 다시 직접 선택해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
-    <string name="patch_selection_reset_all_description">모든 패치 선택목록을 초기화합니다</string>
+    <string name="patch_selection_reset_all_description">모든 패치 선택 목록을 초기화합니다</string>
     <string name="patch_selection_reset_dialog_title">패치 기본값으로 초기화?</string>
-    <string name="patch_selection_reset_dialog_message">패치 선택목록 및 옵션을 기본값으로 복원하시겠습니까?</string>
-    <string name="patch_selection_reset_package">앱 패치 선택목록 초기화</string>
-    <string name="patch_selection_reset_package_dialog_description">"\"%s\"에 대한 패치 선택 목록을 초기화합니다. 각 패치를 다시 직접 선택해야 합니다.
+    <string name="patch_selection_reset_dialog_message">패치 선택 목록 및 옵션을 기본값으로 복원하시겠습니까?</string>
+    <string name="patch_selection_reset_package">앱 패치 선택 목록 초기화</string>
+    <string name="patch_selection_reset_package_dialog_description">"'%s'에 대한 패치 선택 목록을 초기화합니다. 각 패치를 다시 직접 선택해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
-    <string name="patch_selection_reset_package_description">단일 앱에 대한 패치 선택목록을 초기화합니다</string>
-    <string name="patch_selection_reset_patches">번들 패치 선택목록 초기화</string>
-    <string name="patch_selection_reset_patches_dialog_description">"\"%s\"에 대한 패치 선택 목록을 초기화합니다. 각 패치를 다시 직접 선택해야 합니다.
+    <string name="patch_selection_reset_package_description">단일 앱에 대한 패치 선택 목록을 초기화합니다</string>
+    <string name="patch_selection_reset_patches">번들 패치 선택 목록 초기화</string>
+    <string name="patch_selection_reset_patches_dialog_description">"'%s'에 대한 패치 선택 목록을 초기화합니다. 각 패치를 다시 직접 선택해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
-    <string name="patch_selection_reset_patches_description">단일 패치 번들에 대한 패치 선택목록을 초기화합니다</string>
+    <string name="patch_selection_reset_patches_description">단일 패치 번들에 대한 패치 선택 목록을 초기화합니다</string>
     <string name="patch_options_reset_package">앱 패치 옵션 초기화</string>
-    <string name="patch_options_reset_package_dialog_description">"\"%s\"에 대한 패치 옵션을 초기화합니다. 개별적으로 옵션을 다시 적용해야 합니다.
+    <string name="patch_options_reset_package_dialog_description">"'%s'에 대한 패치 옵션을 초기화합니다. 각 패치 옵션을 다시 직접 적용해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
     <string name="patch_options_reset_package_description">단일 앱에 대한 패치 옵션을 초기화합니다</string>
     <string name="patch_options_reset_patches">번들 패치 옵션 초기화</string>
-    <string name="patch_options_reset_patches_dialog_description">"\"%s\"에 대한 패치 옵션을 초기화합니다. 개별적으로 옵션을 다시 적용해야 합니다.
+    <string name="patch_options_reset_patches_dialog_description">"'%s'에 대한 패치 옵션을 초기화합니다. 각 패치 옵션을 다시 직접 적용해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
     <string name="patch_options_reset_patches_description">단일 패치 번들에 대한 패치 옵션을 초기화합니다</string>
     <string name="patch_options_reset_all">모든 패치 옵션 초기화</string>
-    <string name="patch_options_reset_all_dialog_description">"모든 패치 옵션을 초기화합니다. 개별적으로 옵션을 다시 적용해야 합니다.
+    <string name="patch_options_reset_all_dialog_description">"모든 패치 옵션을 초기화합니다. 각 패치 옵션을 다시 직접 적용해야 합니다.
 
 패치 프로필은 영향을 받지 않습니다."</string>
     <string name="patch_options_reset_all_description">모든 패치 옵션을 초기화합니다</string>
@@ -537,9 +549,9 @@ morphe_header_custom_dark.png
     <string name="downloader_plugin_trust_dialog_body">"패키지 이름: %1$s
 서명 (SHA-256): %2$s"</string>
     <string name="downloader_plugin_view_error">오류 세부 정보 보기</string>
-    <string name="downloader_plugin_failed_dialog_body">\"%1$s\"를 불러올 수 없습니다. 오류 세부 정보를 보거나 플러그인을 삭제할 수 있습니다.</string>
+    <string name="downloader_plugin_failed_dialog_body">\'%1$s\'를 불러올 수 없습니다. 오류 세부 정보를 보거나 플러그인을 삭제할 수 있습니다.</string>
     <string name="downloader_plugin_uninstall_title">플러그인을 삭제하시겠습니까?</string>
-    <string name="downloader_plugin_uninstall_description">\"%1$s\"을 삭제하시겠습니까?</string>
+    <string name="downloader_plugin_uninstall_description">\'%1$s\'을 삭제하시겠습니까?</string>
     <string name="downloader_plugin_delete_apps_title">선택된 앱 삭제</string>
     <string name="downloader_plugin_delete_apps_description">선택된 앱을 삭제하시겠습니까?</string>
     <string name="downloader_settings_no_apps">다운로드된 앱을 찾을 수 없습니다.</string>
@@ -562,7 +574,7 @@ morphe_header_custom_dark.png
     <string name="add">추가</string>
     <string name="close">닫기</string>
     <string name="clear">지우기</string>
-    <string name="system">시스템 기본값</string>
+    <string name="system">시스템</string>
     <string name="light">밝은</string>
     <string name="dark">어두운</string>
     <string name="black">검은</string>
@@ -593,21 +605,21 @@ morphe_header_custom_dark.png
     <string name="export_name_format_current">현재 패턴: %1$s</string>
     <string name="export_name_format_insert">추가</string>
     <string name="export_name_variable_app_name">앱 이름</string>
-    <string name="export_name_variable_app_name_description">앱 표시 이름으로 변경합니다.</string>
+    <string name="export_name_variable_app_name_description">앱 표시 이름을 추가합니다.</string>
     <string name="export_name_variable_package_name">패키지 이름</string>
-    <string name="export_name_variable_package_name_description">앱 패키지 이름으로 변경합니다.</string>
+    <string name="export_name_variable_package_name_description">앱 패키지 이름을 추가합니다.</string>
     <string name="export_name_variable_app_version">앱 버전</string>
-    <string name="export_name_variable_app_version_description">앱 버전 이름으로 변경합니다.</string>
+    <string name="export_name_variable_app_version_description">앱 버전 이름을 추가합니다.</string>
     <string name="export_name_variable_patches_version">패치 버전</string>
-    <string name="export_name_variable_patches_version_description">적용된 패치 번들 버전으로 변경합니다.</string>
+    <string name="export_name_variable_patches_version_description">적용된 패치 번들 버전을 추가합니다.</string>
     <string name="export_name_variable_bundle_names">패치 번들 이름</string>
-    <string name="export_name_variable_bundle_names_description">적용된 패치 번들 이름으로 변경합니다.</string>
+    <string name="export_name_variable_bundle_names_description">적용된 패치 번들 이름을 추가합니다.</string>
     <string name="export_name_variable_manager_version">매니저 버전</string>
-    <string name="export_name_variable_manager_version_description">매니저 버전으로 변경합니다.</string>
+    <string name="export_name_variable_manager_version_description">매니저 버전을 추가합니다.</string>
     <string name="export_name_variable_timestamp">타임스탬프</string>
-    <string name="export_name_variable_timestamp_description">현재 시간으로 변경합니다 (yyyyMMdd-HHmmss).</string>
+    <string name="export_name_variable_timestamp_description">현재 시간을 추가합니다 (yyyyMMdd-HHmmss).</string>
     <string name="export_name_variable_date">날짜</string>
-    <string name="export_name_variable_date_description">현재 날짜로 변경합니다 (yyyyMMdd).</string>
+    <string name="export_name_variable_date_description">현재 날짜를 추가합니다 (yyyyMMdd).</string>
     <string name="debug_logs_export">디버그 로그 내보내기</string>
     <string name="debug_logs_export_read_failed">로그를 읽을 수 없습니다 (종료 코드 %d)</string>
     <string name="debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">설정 내보내기에 포함</string>
     <string name="include_github_pat_in_exports_supporting">내보낼 매니저 설정에 이 PAT를 추가합니다</string>
     <string name="include_github_pat_in_exports_warning">PAT를 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">앱 언어</string>
+    <string name="language_dialog_title">앱 언어를 선택하세요</string>
+    <string name="language_option_system">기기 언어 사용</string>
     <string name="device_memory_limit_format">%1$d MB (일반) - %2$d MB (대용)</string>
     <string name="patches_force_download">모든 패치 번들 강제 다운로드</string>
     <string name="patches_reset">패치 번들 초기화</string>
@@ -645,28 +653,28 @@ morphe_header_custom_dark.png
     <string name="enable">활성화</string>
     <string name="patch_bundle_disabled_toast">%d 개의 번들을 비활성화하였습니다</string>
     <string name="patch_bundle_enabled_toast">%d 개의 번들을 비활성화하였습니다</string>
-    <string name="patches_disable_single_dialog_description">\"%s\"를 비활성화하시겠습니까?</string>
-    <string name="patches_enable_single_dialog_description">\"%s\"를 활성화하시겠습니까?</string>
+    <string name="patches_disable_single_dialog_description">\'%s\'를 비활성화하시겠습니까?</string>
+    <string name="patches_enable_single_dialog_description">\'%s\'를 활성화하시겠습니까?</string>
     <string name="refresh">새로고침</string>
     <string name="download_apk">APK 파일을 다운로드하는 중</string>
     <string name="patches_download_fail">패치를 다운로드할 수 없습니다: %s</string>
     <string name="patches_replace_fail">패치를 가져올 수 없습니다: %s</string>
     <string name="no_patched_apps_found">패치된 앱을 찾을 수 없습니다</string>
     <string name="patches_selected">%s 개의 패치 번들</string>
-    <string name="patch_profiles_selected">%1$d 개의 패치 프로필</string>
+    <string name="patch_profiles_selected">%1$d 개의 패치 프로필이 선택됨</string>
     <string name="selected_apps_count">%1$d 개의 앱이 선택됨</string>
     <string name="selected_apps_delete_dialog_description">매니저에서 선택된 앱을 삭제하시겠습니까?
 기기에 설치된 앱은 그대로 유지됩니다.</string>
     <string name="incompatible_patches">호환되지 않는 패치</string>
     <string name="universal_patches">범용 패치</string>
-    <string name="patch_selection_reset_toast">패치 선택목록 및 옵션을 권장되는 기본값으로 초기화하였습니다</string>
+    <string name="patch_selection_reset_toast">패치 선택 목록 및 옵션을 권장되는 기본값으로 초기화하였습니다</string>
     <string name="patch_options_reset_toast">패치 옵션을 초기화하였습니다</string>
     <string name="non_suggested_version_warning_title">권장되지 않는 버전</string>
     <string name="non_suggested_version_warning_description">"선택된 버전이 권장 버전과 일치하지 않습니다.
 권장 버전을 사용하세요: %s
 
 계속하려면 고급 설정에서 \"권장 앱 버전 요구\"를 비활성화하세요."</string>
-    <string name="selection_warning_description">"기본 패치 선택목록 및 옵션을 사용하는 것이 좋습니다. 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
+    <string name="selection_warning_description">"기본 패치 선택 목록 및 옵션을 사용하는 것이 좋습니다. 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
 
 패치를 전환하기 전에 고급 설정에서 \"패치 선택 및 옵션 변경 허용\"을 활성화해야 합니다."</string>
     <string name="patch_profile_save_action">패치 프로필 저장</string>
@@ -678,21 +686,21 @@ morphe_header_custom_dark.png
     <string name="patch_profile_update_existing_title">기존 프로필 업데이트</string>
     <string name="patch_profile_update_existing_description">저장된 프로필을 탭하여 덮어쓰거나, 모든 항목을 선택하지 않고 새로운 프로필을 만들 수 있습니다.</string>
     <string name="patch_profile_name_hint">프로필 이름</string>
-    <string name="patch_profile_saved_toast">\"%1$s\" 패치 프로필을 저장하였습니다</string>
-    <string name="patch_profile_duplicate_toast">이 앱에 대한 \"%1$s\" 패치 프로필이 이미 존재합니다</string>
-    <string name="patch_profile_updated_toast">\"%1$s\" 패치 프로필을 업데이트하였습니다</string>
+    <string name="patch_profile_saved_toast">\'%1$s\' 패치 프로필을 저장하였습니다</string>
+    <string name="patch_profile_duplicate_toast">이 앱에 대한 \'%1$s\' 패치 프로필이 이미 존재합니다</string>
+    <string name="patch_profile_updated_toast">\'%1$s\' 패치 프로필을 업데이트하였습니다</string>
     <string name="patch_profile_save_failed_toast">패치 프로필을 저장할 수 없습니다</string>
     <string name="patch_profile_rename">이름 변경</string>
     <string name="patch_profile_rename_title">패치 프로필 이름 변경</string>
     <string name="patch_profile_version_override_action">패치 프로필 버전 설정</string>
-    <string name="patch_profile_version_override_title">\"%1$s\" 버전 설정</string>
+    <string name="patch_profile_version_override_title">\'%1$s\' 버전 설정</string>
     <string name="patch_profile_version_override_message">프로필과 함께 저장될 특정 앱 버전을 설정하거나 모든 버전을 대상으로 지정할 수 있습니다.</string>
     <string name="patch_profile_version_override_label">앱 버전</string>
     <string name="patch_profile_version_override_hint">예) 18.27.35</string>
     <string name="patch_profile_version_override_all_versions">모든 버전 사용</string>
     <string name="patch_profile_version_override_saved_toast">프로필 버전을 업데이트하였습니다</string>
     <string name="patch_profile_version_override_failed_toast">프로필 버전을 업데이트할 수 없습니다</string>
-    <string name="patch_profile_version_override_set_to_all">입력된 버전이 없으므로 \"%1$s\"로 저장하였습니다</string>
+    <string name="patch_profile_version_override_set_to_all">입력된 버전이 없으므로 \'%1$s\'로 저장하였습니다</string>
     <string name="patch_profile_version_conflict_title">버전 재정의를 유지하시겠습니까?</string>
     <string name="patch_profile_version_conflict_message">"현재 버전: %1$s
 수신 버전: %2$s
@@ -709,11 +717,11 @@ morphe_header_custom_dark.png
     <string name="patch_profile_created_at">%1$s에 생성됨</string>
     <string name="patch_profile_bundle_unavailable_suffix">%1$s (사용할 수 없음)</string>
     <string name="patch_profile_bundle_change_uid">UID 변경</string>
-    <string name="patch_profile_bundle_change_uid_title">\"%1$s\"에 대한 UID 변경</string>
+    <string name="patch_profile_bundle_change_uid_title">\'%1$s\'에 대한 UID 변경</string>
     <string name="patch_profile_bundle_change_uid_invalid">유효한 숫자 UID를 입력하세요.</string>
-    <string name="patch_profile_bundle_change_uid_success">번들 UID를 %1$d 로 업데이트하였습니다.</string>
-    <string name="patch_profile_bundle_change_uid_not_found">UID가 %1$d 인 기기 패치 번들을 찾을 수 없습니다.</string>
-    <string name="patcher_process_exit_message">패처 프로세스를 코드 %1$d 로 종료하였습니다.</string>
+    <string name="patch_profile_bundle_change_uid_success">번들 UID를 \'%1$d\'로 업데이트하였습니다.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">UID가 \'%1$d\'인 기기 패치 번들을 찾을 수 없습니다.</string>
+    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$d\'로 종료하였습니다.</string>
     <string name="patcher_memory_adjustment_title">패처의 메모리가 부족합니다</string>
     <!-- Dormant code and not used -->
     <!-- Dormant code and not used -->
@@ -772,8 +780,8 @@ morphe_header_custom_dark.png
     <string name="downloader_error">다운로더 오류: %s</string>
     <string name="downloader_no_plugins_installed">다운로더가 설치되지 않았습니다.</string>
     <string name="downloader_no_plugins_available">다운로더가 설치되어 있지만 신뢰할 수 있는 다운로더가 없습니다. 설정을 확인하세요.</string>
-    <string name="downloader_plugin_uninstall_success">%1$s 을 삭제하였습니다</string>
-    <string name="downloader_plugin_uninstall_failed">%1$s 을 삭제할 수 없습니다</string>
+    <string name="downloader_plugin_uninstall_success">\'%1$s\'을 삭제하였습니다</string>
+    <string name="downloader_plugin_uninstall_failed">\'%1$s\'을 삭제할 수 없습니다</string>
     <string name="downloaded_apps_export">선택된 앱 내보내기</string>
     <string name="downloaded_apps_export_success">%1$d 개의 앱을 내보냈습니다</string>
     <string name="downloaded_apps_export_failed">다운로드된 앱을 내보낼 수 없습니다</string>
@@ -838,8 +846,8 @@ morphe_header_custom_dark.png
     <string name="installer_custom_action_remove">저장된 설치 프로그램 삭제</string>
     <string name="installer_custom_builtin_indicator">자동 저장됨</string>
     <string name="installer_custom_saved_indicator">저장됨</string>
-    <string name="installer_custom_lookup_none">%1$s 에 대한 설치 프로그램 액티비티를 찾을 수 없습니다.</string>
-    <string name="installer_custom_candidates_title">%1$s 에 대한 액티비티 사용 가능</string>
+    <string name="installer_custom_lookup_none">\'%1$s\'에 대한 설치 프로그램 액티비티를 찾을 수 없습니다.</string>
+    <string name="installer_custom_candidates_title">\'%1$s\'에 대한 액티비티 사용 가능</string>
     <string name="installer_custom_saved_header">저장된 설치 프로그램</string>
     <string name="installer_custom_empty">아직 저장된 커스텀 설치 프로그램이 없습니다.</string>
     <string name="installer_custom_added">커스텀 설치 프로그램을 저장하였습니다.</string>
@@ -857,10 +865,10 @@ morphe_header_custom_dark.png
     <string name="installer_hint_with_reason">"%1$s
 
 세부 정보: %2$s"</string>
-    <string name="installer_external_launched">%1$s 을 여는 중 …</string>
-    <string name="installer_external_timeout">%1$s 에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요.</string>
-    <string name="installer_external_success">%1$s 이 설치 성공을 보고하였습니다.</string>
-    <string name="installer_external_finished_no_change">%1$s 는 앱을 설치하지 않고 완료되었습니다. 설치 프로그램에서 오류 메시지를 확인하고 다시 시도하십시오.</string>
+    <string name="installer_external_launched">\'%1$s\'을 여는 중 …</string>
+    <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요.</string>
+    <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다.</string>
+    <string name="installer_external_finished_no_change">\'%1$s\'는 앱을 설치하지 않고 완료되었습니다. 설치 프로그램에서 오류 메시지를 확인하고 다시 시도하십시오.</string>
     <string name="installing_ellipsis">설치하는 중 ...</string>
     <string name="uninstalling_ellipsis">삭제하는 중 ...</string>
     <string name="mounting_ellipsis">마운트하는 중 ...</string>
@@ -918,8 +926,8 @@ morphe_header_custom_dark.png
     <string name="patcher_mount_in_progress_title">마운트 진행 중</string>
     <string name="patcher_mount_in_progress">마운트가 진행 중, 잠시만 기다리세요</string>
     <string name="applying_patches">패치를 적용하는 중</string>
-    <string name="applying_patch">%s 적용 중</string>
-    <string name="failed_to_execute_patch">%s 을 실행할 수 없습니다</string>
+    <string name="applying_patch">\'%s\' 적용 중</string>
+    <string name="failed_to_execute_patch">\'%s\'을 적용할 수 없습니다</string>
     <string name="save_patched_app_dialog_title">패처를 종료하시겠습니까?</string>
     <string name="save_patched_app_dialog_message">패처를 종료하려고 합니다. 패치된 앱은 나중에 사용할 수 있도록 저장하지 않으면 손실됩니다.</string>
     <string name="save_patched_app_dialog_save">패치된 앱 저장</string>
@@ -949,7 +957,7 @@ morphe_header_custom_dark.png
     <string name="view_patches">패치 목록을 자세하게 확인할 수 있습니다</string>
     <string name="patches_view_any_version">모든 버전</string>
     <string name="patches_view_any_package">모든 패키지</string>
-    <string name="patches_delete_single_dialog_description">\"%s\"를 삭제하시겠습니까?</string>
+    <string name="patches_delete_single_dialog_description">\'%s\'를 삭제하시겠습니까?</string>
     <string name="patches_delete_multiple_dialog_description">선택된 패치를 삭제하시겠습니까?</string>
     <string name="about_revanced_manager">Morphe에 대한 정보</string>
     <string name="revanced_manager_description">"Morphe는 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하는 데 중점을 둔 실험적인 오픈 소스 프로젝트입니다
@@ -990,7 +998,7 @@ morphe_header_custom_dark.png
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="no_update_available">새로운 업데이트가 없습니다</string>
     <string name="update_check">업데이트 확인하는 중 …</string>
-    <string name="update_available_dialog_description">Morphe의 새로운 버전 (%s) 을 사용할 수 있습니다.</string>
+    <string name="update_available_dialog_description">Morphe의 새로운 버전(%s)을 사용할 수 있습니다.</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="download">다운로드</string>
     <string name="resume_download">다운로드 재개</string>
@@ -1036,9 +1044,9 @@ morphe_header_custom_dark.png
     <string name="add_patches">패치 번들 추가</string>
     <string name="auto_update_description">새로운 버전이 릴리즈되었을 경우에 자동으로 업데이트합니다</string>
     <string name="patches_prereleases">Pre-release 버전 사용</string>
-    <string name="patches_prereleases_description">%s의 Pre-release 버전을 사용합니다</string>
+    <string name="patches_prereleases_description">\'%s\'의 Pre-release 버전을 사용합니다</string>
     <string name="patches_url">패치 번들 URL</string>
-    <string name="incompatible_patches_dialog">"이 패치는 선택된 앱 버전 (%1$s) 과 호환되지 않습니다.
+    <string name="incompatible_patches_dialog">"이 패치는 선택된 앱 버전(%1$s)과 호환되지 않습니다.
 
 자세한 정보를 보려면 패치를 탭하세요."</string>
     <string name="incompatible_patch">호환되지 않는 패치</string>

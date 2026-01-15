@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">পুরো ফিচার সহ প্রফেশনাল মোড়ে স্বিচ করুন</string>
     <string name="morphe_share_website">ওয়েবসাইট শেয়ার করুন</string>
     <string name="morphe_share_website_description">Morphe অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">অ্যাপ আইকন</string>
+    <string name="morphe_app_icon_selector_description">অ্যাপ লঞ্চার আইকন পরিবর্তন করুন</string>
+    <string name="morphe_app_icon_default">ডিফল্ট</string>
+    <string name="morphe_app_icon_light_2">আকাশ</string>
+    <string name="morphe_app_icon_light_3">সূর্যাস্ত</string>
+    <string name="morphe_app_icon_dark_1">সমুদ্র</string>
+    <string name="morphe_app_icon_dark_2">শূন্য</string>
+    <string name="morphe_app_icon_dark_3">ইন্দিগো</string>
+    <string name="morphe_app_icon_change_dialog_title">এপ্লিকেশন আইকন পরিবর্তন করুন?</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' এ পরিবর্তন করুন এবং পুনরায় শুরু করুন?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">আইকন পরিবর্তন করুন</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">আকৃতি ও রঙের বিকল্প</string>
     <string name="morphe_appearance_options_description">\"Personalize themes, colors, and backgrounds\"</string>
-    <string name="morphe_appearance_app_language">অ্যাপ্লিকেশনের ভাষা</string>
+    <string name="morphe_appearance_current_language">বর্তমান ভাষা</string>
     <string name="morphe_appearance_search">অনুসন্ধান</string>
     <string name="morphe_appearance_no_results">কোন ফলাফল পাওয়া যায়নি</string>
     <string name="morphe_appearance_translations_info_title">কয়েকটি ভাষার অনুবাদ অনুপস্থিত বা অসম্পূর্ণ হতে পারে</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">আকৃতি</string>
     <string name="morphe_background_type_snow">\"Snow\"</string>
     <string name="morphe_background_type_none">কিছুই না</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">වերը छापार वर्जन का उपयोग करें</string>
     <string name="morphe_update_use_prereleases_description">নতুন প্যাচ ও ম্যানেজার ফিচার গুলি আগে পান</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">সেটিংস রপ্তানিতে অন্তর্ভুক্ত করুন</string>
     <string name="include_github_pat_in_exports_supporting">এই PAT কে রপ্তানি করা ম্যানেজার সেটিংসে যুক্ত করে</string>
     <string name="include_github_pat_in_exports_warning">আপনার PAT শেয়ার করবেন না। যদি আপনি এটিকে সেটিংস এক্সপোর্টে অন্তর্ভুক্ত করেন, তাহলে ফাইলটি ব্যক্তিগত রাখুন কারণ এতে টোকেন রয়েছে।</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">অ্যাপ্লিকেশনের ভাষা</string>
+    <string name="language_dialog_title">অ্যাপের ভাষা নির্বাচন করুন</string>
+    <string name="language_option_system">ডিভাইস ভাষা ব্যবহার করুন</string>
     <string name="device_memory_limit_format">%1$dMB (স্বাভাবিক) - %2$dMB (বড়)</string>
     <string name="patches_force_download">সমস্ত প্যাচ বান্ডিল জোর করে ডাউনলোড করুন</string>
     <string name="patches_reset">প্যাচ বান্ডিল রিসেট করুন</string>

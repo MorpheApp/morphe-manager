@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Μετάβαση στο πλήρως εξοπλισμένο Προηγμένο Μορφέ</string>
     <string name="morphe_share_website">Κοινοποίηση ιστότοπου</string>
     <string name="morphe_share_website_description">Κοινοποίηση του επίσημου ιστοτόπου του Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Εικονίδιο Εφαρμογής</string>
+    <string name="morphe_app_icon_selector_description">Αλλαγή του εικονιδίου εκκίνησης της εφαρμογής</string>
+    <string name="morphe_app_icon_default">Προεπιλογή</string>
+    <string name="morphe_app_icon_light_2">Ουρανός</string>
+    <string name="morphe_app_icon_light_3">Δεσμός</string>
+    <string name="morphe_app_icon_dark_1">Θάλασσα</string>
+    <string name="morphe_app_icon_dark_2">Κενό</string>
+    <string name="morphe_app_icon_dark_3">Ινδικό</string>
+    <string name="morphe_app_icon_change_dialog_title">Αλλαξτε εικόνα εφαρμογής;</string>
+    <string name="morphe_app_icon_change_dialog_message">Αλλαξτε σε \'%1$s\' και επανεκκινήστε;</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Αλλαξτε Εικόνα</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Επιλογές εμφάνισης</string>
     <string name="morphe_appearance_options_description">Προσαρμόστε θέματα, χρώματα και φόντα</string>
-    <string name="morphe_appearance_app_language">Γλώσσα εφαρμογής</string>
+    <string name="morphe_appearance_current_language">Τρέχουσα γλώσσα</string>
     <string name="morphe_appearance_search">Αναζήτηση</string>
     <string name="morphe_appearance_no_results">Δεν βρέθηκαν αποτελέσματα</string>
     <string name="morphe_appearance_translations_info_title">Οι μεταφράσεις για κάποιες γλώσσες μπορεί να λείπουν ή να είναι μη ολοκληρωμένες</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Σχήματα</string>
     <string name="morphe_background_type_snow">Υάλωμα</string>
     <string name="morphe_background_type_none">Κανένα</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Χρήση προ-βήτυχων εκδόσεων</string>
     <string name="morphe_update_use_prereleases_description">Απόκτηση νωρίτερης πρόσβασης σε νέες αναθηρώσεις και διαχειριστικές λειτουργίες</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Συμπερίληψη στις εξαγωγές ρυθμίσεων</string>
     <string name="include_github_pat_in_exports_supporting">Προσθέτει αυτό το PAT στις εξαγόμενες ρυθμίσεις διαχείρισης</string>
     <string name="include_github_pat_in_exports_warning">Μην μοιράζεστε το PAT σας. Αν το συμπεριλάβετε σε εξαγωγή ρυθμίσεων, κρατήστε αυτό το αρχείο ιδιωτικό γιατί περιέχει το διακριτικό.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Γλώσσα εφαρμογής</string>
+    <string name="language_dialog_title">Επιλογή γλώσσας εφαρμογής</string>
+    <string name="language_option_system">Χρήση γλώσσας συσκευής</string>
     <string name="device_memory_limit_format">%1$dMB (Κανονικό) - %2$dMB (Μεγάλο)</string>
     <string name="patches_force_download">Αναγκαστική λήψη όλων των πακέτων ενημερώσεων</string>
     <string name="patches_reset">Επαναφορά πακέτων ενημερώσεων</string>

@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Passer en mode expert complet</string>
     <string name="morphe_share_website">Partager le site web</string>
     <string name="morphe_share_website_description">Partagez le site web officiel de Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Icône de l\'application</string>
+    <string name="morphe_app_icon_selector_description">Changer l’icône du lanceur d\'application</string>
+    <string name="morphe_app_icon_default">Par défaut</string>
+    <string name="morphe_app_icon_light_2">Ciel</string>
+    <string name="morphe_app_icon_light_3">Coucher de soleil</string>
+    <string name="morphe_app_icon_dark_1">Océan</string>
+    <string name="morphe_app_icon_dark_2">Néant</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Changer l’icône de l’application ?</string>
+    <string name="morphe_app_icon_change_dialog_message">Changer pour \'%1$s\' et redémarrer ?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Changer l’icône</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Options d\'apparence</string>
     <string name="morphe_appearance_options_description">Personnalisez les thèmes, les couleurs et les arrière-plans</string>
-    <string name="morphe_appearance_app_language">Langue de l\'application</string>
+    <string name="morphe_appearance_current_language">Langue actuelle</string>
     <string name="morphe_appearance_search">Recherche</string>
     <string name="morphe_appearance_no_results">Pas de résultat trouvé</string>
     <string name="morphe_appearance_translations_info_title">Certaines traductions peuvent être manquantes ou incomplètes</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Formes</string>
     <string name="morphe_background_type_snow">Neige</string>
     <string name="morphe_background_type_none">Aucun</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Utiliser les pré-versions</string>
     <string name="morphe_update_use_prereleases_description">Obtenir un accès anticipé aux nouveaux patchs et aux fonctions du gestionnaire</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Signature (SHA-256) : %2$s"</string>
     <string name="include_github_pat_in_exports_label">Inclure dans l\'export des paramètres</string>
     <string name="include_github_pat_in_exports_supporting">Ajoute ce PAT aux paramètres exportés du gestionnaire.</string>
     <string name="include_github_pat_in_exports_warning">Ne partagez pas votre PAT. Si vous l\'incluez dans une exportation de paramètres, gardez ce fichier privé car il contient le jeton.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Langue de l\'application</string>
+    <string name="language_dialog_title">Choisir la langue de l\'application</string>
+    <string name="language_option_system">Utiliser la langue de l\'appareil</string>
     <string name="device_memory_limit_format">%1$d Mo (Normal) - %2$d Mo (Grand)</string>
     <string name="patches_force_download">Forcer le téléchargement de tous les bundles de patch</string>
     <string name="patches_reset">Réinitialiser les bundles de patch</string>

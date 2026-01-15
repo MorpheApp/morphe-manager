@@ -5,7 +5,10 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +19,6 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Grid row of selectable options with icons and labels
- * Used for themes, backgrounds, and other multi-choice selections
  */
 @Composable
 fun SelectorGrid(
@@ -24,7 +26,7 @@ fun SelectorGrid(
     selectedItem: String,
     onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
-    columns: Int? = null // null for horizontal scroll, number for fixed grid
+    columns: Int? = null // Null for horizontal scroll, number for fixed grid
 ) {
     if (columns != null) {
         // Fixed grid layout
@@ -163,14 +165,16 @@ fun SelectorSection(
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(if (title.isNotEmpty()) 8.dp else 0.dp)
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
+        if (title.isNotEmpty()) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        }
         SelectorGrid(
             items = items,
             selectedItem = selectedItem,

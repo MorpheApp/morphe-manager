@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">切換至功能完整的專家模式</string>
     <string name="morphe_share_website">分享網站</string>
     <string name="morphe_share_website_description">分享官方 Morphe 網站</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">應用程式圖示</string>
+    <string name="morphe_app_icon_selector_description">更改應用程式啟動圖示</string>
+    <string name="morphe_app_icon_default">預設</string>
+    <string name="morphe_app_icon_light_2">天空</string>
+    <string name="morphe_app_icon_light_3">日落</string>
+    <string name="morphe_app_icon_dark_1">大海</string>
+    <string name="morphe_app_icon_dark_2">虛空</string>
+    <string name="morphe_app_icon_dark_3">靛青</string>
+    <string name="morphe_app_icon_change_dialog_title">更改應用程序圖標？</string>
+    <string name="morphe_app_icon_change_dialog_message">更改為\'%1$s\'並重新啟動？</string>
+    <string name="morphe_app_icon_change_dialog_confirm">更改圖標</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外觀設定</string>
     <string name="morphe_appearance_options_description">自定義主題、顏色與背景</string>
-    <string name="morphe_appearance_app_language">應用程式語言</string>
+    <string name="morphe_appearance_current_language">當前語言</string>
     <string name="morphe_appearance_search">搜尋</string>
     <string name="morphe_appearance_no_results">沒有找到\"\"的結果</string>
     <string name="morphe_appearance_translations_info_title">某些語言的翻譯可能缺失或不完整</string>
@@ -139,8 +151,8 @@
     <string name="morphe_background_type_shapes">形狀</string>
     <string name="morphe_background_type_snow">键盘</string>
     <string name="morphe_background_type_none">無</string>
-    <!-- Update Section -->
-    <string name="morphe_update_use_prereleases">Use 預發版本</string>
+    <!-- Advanced Section -->
+    <string name="morphe_update_use_prereleases">使用預先發布版</string>
     <string name="morphe_update_use_prereleases_description">及早使用最新的補丁與管理員功能</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">修補選項</string>
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">包含在設定匯出中</string>
     <string name="include_github_pat_in_exports_supporting">將此 PAT 新增至匯出的管理員設定</string>
     <string name="include_github_pat_in_exports_warning">請勿共用您的 PAT。如果您將其包含在設定匯出中，請將該檔案設為私人，因為其中包含權杖。</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">應用程式語言</string>
+    <string name="language_dialog_title">選擇應用程式語言</string>
+    <string name="language_option_system">使用裝置語言</string>
     <string name="device_memory_limit_format">%1$dMB (一般) - %2$dMB (大型)</string>
     <string name="patches_force_download">強制下載所有修補程式包</string>
     <string name="patches_reset">重設修補程式包</string>
@@ -966,8 +974,8 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <!-- Morphe -->
     <string name="update_checking_manager">啟動時檢查更新</string>
     <string name="update_checking_manager_description">啟動應用程式時檢查 Morphe 的新版本</string>
-    <string name="manager_prereleases">使用預發行版本</string>
-    <string name="manager_prereleases_description">使用 Morphe 的預發行版本</string>
+    <string name="manager_prereleases">使用預先發布版</string>
+    <string name="manager_prereleases_description">使用 Morphe 的預先發布版</string>
     <string name="update_published">已發佈 %s</string>
     <string name="battery_optimization_notification">Morphe 在背景中正常運作，必須關閉電池最佳化。按一下這裡以關閉最佳化。</string>
     <string name="installing_manager_update">正在安裝更新...</string>
@@ -1034,8 +1042,8 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <string name="auto_update">自動更新</string>
     <string name="add_patches">新增修補程式套件</string>
     <string name="auto_update_description">有新版本時自動更新</string>
-    <string name="patches_prereleases">使用預先發行版本</string>
-    <string name="patches_prereleases_description">使用 %s 的預覽版本</string>
+    <string name="patches_prereleases">使用預先發布版</string>
+    <string name="patches_prereleases_description">使用 %s 的預先發布版</string>
     <string name="patches_url">修補程式包 URL</string>
     <string name="incompatible_patches_dialog">"這些修補程式與所選的應用程式版本（%1$s）不相容。
 

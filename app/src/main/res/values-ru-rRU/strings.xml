@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Переключиться на полномасштабный режим эксперта</string>
     <string name="morphe_share_website">Поделиться веб-сайтом</string>
     <string name="morphe_share_website_description">Поделитесь официальным веб-сайтом Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Иконка приложения</string>
+    <string name="morphe_app_icon_selector_description">Изменить иконку приложения</string>
+    <string name="morphe_app_icon_default">По умолчанию</string>
+    <string name="morphe_app_icon_light_2">Небо</string>
+    <string name="morphe_app_icon_light_3">Закат</string>
+    <string name="morphe_app_icon_dark_1">Океан</string>
+    <string name="morphe_app_icon_dark_2">Пустота</string>
+    <string name="morphe_app_icon_dark_3">Индиго</string>
+    <string name="morphe_app_icon_change_dialog_title">Изменить значок приложения?</string>
+    <string name="morphe_app_icon_change_dialog_message">Изменить на \'%1$s\' и перезапустить?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Изменить значок</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Настройки оформления</string>
     <string name="morphe_appearance_options_description">Настройте темы, цвета и фоны</string>
-    <string name="morphe_appearance_app_language">Язык приложения</string>
+    <string name="morphe_appearance_current_language">Текущий язык</string>
     <string name="morphe_appearance_search">Поиск</string>
     <string name="morphe_appearance_no_results">По запросу \"\" ничего не найдено</string>
     <string name="morphe_appearance_translations_info_title">Переводы для некоторых языков могут отсутствовать или быть неполными</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Фигуры</string>
     <string name="morphe_background_type_snow">Снег</string>
     <string name="morphe_background_type_none">Нет</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Использовать предварительные релизы</string>
     <string name="morphe_update_use_prereleases_description">Получить ранний доступ к новым патчам и функциям продвинутого менеджера</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Включить в экспорт настроек</string>
     <string name="include_github_pat_in_exports_supporting">Добавляет этот PAT в экспортируемые настройки менеджера</string>
     <string name="include_github_pat_in_exports_warning">Не делитесь своим PAT. Если вы включаете его в экспорт настроек, сохраняйте этот файл конфиденциальным, так как он содержит токен.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Язык приложения</string>
+    <string name="language_dialog_title">Выберите язык приложения</string>
+    <string name="language_option_system">Использовать язык устройства</string>
     <string name="device_memory_limit_format">%1$d МБ (обычный) - %2$d МБ (большой)</string>
     <string name="patches_force_download">Принудительная загрузка всех наборов патчей</string>
     <string name="patches_reset">Сбросить наборы патчей</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-Bündel</string>
+    <string name="morphe_home_bundles">Patch-Bundle</string>
     <string name="morphe_home_greeting_1">Welche App möchtest du patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Bereit, YouTube wieder legendär zu machen?</string>
@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Wechsle zum vollständig ausgestatteten Experten-Modus</string>
     <string name="morphe_share_website">Website teilen</string>
     <string name="morphe_share_website_description">Teile die offizielle Morphe-Website</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">App-Symbol</string>
+    <string name="morphe_app_icon_selector_description">App-Startsymbol √§ndern</string>
+    <string name="morphe_app_icon_default">Standard</string>
+    <string name="morphe_app_icon_light_2">Himmel</string>
+    <string name="morphe_app_icon_light_3">Sununtergang</string>
+    <string name="morphe_app_icon_dark_1">Ozean</string>
+    <string name="morphe_app_icon_dark_2">Leere</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">App-Icons ändern?</string>
+    <string name="morphe_app_icon_change_dialog_message">Auf \'%1$s\' ändern und neu starten?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Icon ändern</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Aussehen anpassen</string>
     <string name="morphe_appearance_options_description">Anpassen von Themes, Farben und Hintergründen</string>
-    <string name="morphe_appearance_app_language">App-Sprache</string>
+    <string name="morphe_appearance_current_language">Aktuelle Sprache</string>
     <string name="morphe_appearance_search">Suchen</string>
     <string name="morphe_appearance_no_results">Keine Ergebnisse gefunden</string>
     <string name="morphe_appearance_translations_info_title">Übersetzungen für einige Sprachen können fehlen oder unvollständig sein</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Formen</string>
     <string name="morphe_background_type_snow">Schnee</string>
     <string name="morphe_background_type_none">Keine</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Verwende Prereleaseversionen.</string>
     <string name="morphe_update_use_prereleases_description">Erhalte frühzeitigen Zugang zu neuen Patches und Manager-Funktionen.</string>
     <!-- Patch Options Section -->
@@ -625,13 +637,9 @@ Signatur (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">In Einstellungensexport einschließen</string>
     <string name="include_github_pat_in_exports_supporting">Fügt dieses PAT zu exportierten Manager-Einstellungen hinzu</string>
     <string name="include_github_pat_in_exports_warning">Teile deinen PAT nicht. Wenn du ihn mit exportierst halte die Datei privat, da sie das Token enthält.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">App-Sprache</string>
+    <string name="language_dialog_title">App-Sprache auswählen</string>
+    <string name="language_option_system">System-Sprache verwenden</string>
     <string name="device_memory_limit_format">%1$d MB (Normal) – %2$d MB (Groß)</string>
     <string name="patches_force_download">Alle Patch-Bündel erzwingen</string>
     <string name="patches_reset">Patch-Bündel zurücksetzen</string>

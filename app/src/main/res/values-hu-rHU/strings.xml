@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Átváltás a teljes funkcionalitású szakértői módra</string>
     <string name="morphe_share_website">Webhely megosztása</string>
     <string name="morphe_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Alkalmazás ikonja</string>
+    <string name="morphe_app_icon_selector_description">Változtasd meg az alkalmazás indító ikonját</string>
+    <string name="morphe_app_icon_default">Alapértelmezett</string>
+    <string name="morphe_app_icon_light_2">Ég</string>
+    <string name="morphe_app_icon_light_3">Naplemente</string>
+    <string name="morphe_app_icon_dark_1">Tenger</string>
+    <string name="morphe_app_icon_dark_2">Üres</string>
+    <string name="morphe_app_icon_dark_3">Indigó</string>
+    <string name="morphe_app_icon_change_dialog_title">Alkalmazás ikonjának megváltoztatása?</string>
+    <string name="morphe_app_icon_change_dialog_message">Változtasd a \'%1$s\'-re és indítsd újra?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Ikon megváltoztatása</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Megjelenési lehetőségek</string>
     <string name="morphe_appearance_options_description">Témák, színek, és hátterek személyreszabása</string>
-    <string name="morphe_appearance_app_language">Alkalmazás nyelve</string>
+    <string name="morphe_appearance_current_language">Jelenlegi nyelv</string>
     <string name="morphe_appearance_search">Keresés</string>
     <string name="morphe_appearance_no_results">Nincs találat</string>
     <string name="morphe_appearance_translations_info_title">Néhány nyelv fordításai hiányosak vagy nem teljesek</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Alakzatok</string>
     <string name="morphe_background_type_snow">Hó</string>
     <string name="morphe_background_type_none">Egyik sem</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Előzetes kiadás használata</string>
     <string name="morphe_update_use_prereleases_description">Előzetes hozzáférés az új patchekhez és menedzser funkciókhoz</string>
     <!-- Patch Options Section -->
@@ -396,21 +408,21 @@ Engedélyezi így is?"</string>
     <string name="import_patch_bundles_in_progress">Importálás…</string>
     <string name="import_patch_bundles_success">%d patchcsomag importálva</string>
     <string name="import_patch_bundles_updated">%d patchcsomag frissítve</string>
-    <string name="import_patch_bundles_none">Nincsenek új patchcsomagok importálva</string>
+    <string name="import_patch_bundles_none">Nem lettek új patchcsomagok importálva</string>
     <string name="import_patch_bundles_banner_title">Patchcsomagok importálása</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d / %2$d feldolgozva</string>
     <string name="import_patch_bundles_banner_steps">%1$d/%2$d lépés</string>
-    <string name="import_patch_profiles">Patch profilok importálása</string>
-    <string name="import_patch_profiles_description">Mentett patch profilok importálása JSON fájlból</string>
-    <string name="import_patch_profiles_fail">Nem sikerült a patch profilok importálása: %s</string>
-    <string name="import_patch_profiles_success">%d patch profil importálva</string>
-    <string name="import_patch_profiles_partial">%1$d patch profil importálva, %2$d kihagyva</string>
-    <string name="import_patch_profiles_skipped">%d duplikált patch profil kihagyva</string>
-    <string name="import_patch_profiles_none">Nem lett patch profil importálva</string>
+    <string name="import_patch_profiles">Patchprofilok importálása</string>
+    <string name="import_patch_profiles_description">Mentett patchprofilok importálása JSON fájlból</string>
+    <string name="import_patch_profiles_fail">Nem sikerült a patchprofilok importálása: %s</string>
+    <string name="import_patch_profiles_success">%d patchprofil importálva</string>
+    <string name="import_patch_profiles_partial">%1$d patchprofil importálva, %2$d kihagyva</string>
+    <string name="import_patch_profiles_skipped">%d duplikált patchprofil kihagyva</string>
+    <string name="import_patch_profiles_none">Nem lettek patchprofilok importálva</string>
     <string name="import_manager_settings">Importálási beállítások</string>
     <string name="import_manager_settings_description">Mentett beállítások visszaállítása JSON fájlból</string>
     <string name="import_manager_settings_fail">A manager beállításai nem importálhatók: %s</string>
-    <string name="import_manager_settings_success">A manager beállításai importálva</string>
+    <string name="import_manager_settings_success">Manager beállítások importálva</string>
     <string name="export_patch_selection">Patchkiválasztás exportálása</string>
     <string name="export_patch_selection_description">Patchkiválasztás exportálása JSON fájlba</string>
     <string name="export_patch_selection_fail">A patchkiválasztás nem exportálható: %s</string>
@@ -425,48 +437,48 @@ Engedélyezi így is?"</string>
     <string name="bundle_type_preinstalled">Előre telepített</string>
     <string name="bundle_created_at">%1$s létrehozva</string>
     <string name="bundle_updated_at">%1$s frissítve</string>
-    <string name="bundle_changelog">Változások listája</string>
-    <string name="bundle_view_changelog">Tekintse meg a legújabb változások listáját</string>
-    <string name="bundle_changelog_error">Nem sikerült betölteni a változások listáját: %s</string>
+    <string name="bundle_changelog">Változásnapló</string>
+    <string name="bundle_view_changelog">Tekintse meg a legújabb változásnaplót</string>
+    <string name="bundle_changelog_error">Nem sikerült betölteni a változásnaplót: %s</string>
     <string name="bundle_changelog_retry">Újrapróbálkozás</string>
-    <string name="bundle_changelog_empty">Nincs elérhető változások listája</string>
-    <string name="export_patch_profiles">Patch profilok exportálása</string>
-    <string name="export_patch_profiles_description">Az összes patch profil exportálása JSON fájlba</string>
-    <string name="export_patch_profiles_fail">Nem sikerült exportálni a patch profilokat: %s</string>
-    <string name="export_patch_profiles_success">%d patch profil exportálva</string>
-    <string name="export_patch_profiles_empty">Nincsenek exportálható patch profilok</string>
-    <string name="export_manager_settings">Kezelői beállítások exportálása</string>
-    <string name="export_manager_settings_description">Az összes kezelői beállítás mentése JSON fájlba</string>
-    <string name="export_manager_settings_fail">Nem sikerült exportálni a kezelői beállításokat: %s</string>
-    <string name="export_manager_settings_success">Kezelői beállítások exportálva</string>
-    <string name="reset_patch_selection">Patch kiválasztás visszaállítása</string>
-    <string name="reset_patch_selection_description">Tárolt patch kiválasztás visszaállítása</string>
-    <string name="reset_patch_options">Patch beállítások visszaállítása</string>
-    <string name="reset_patch_options_description">Tárolt patch beállítások visszaállítása</string>
-    <string name="reset_patch_selection_success">A patch kiválasztás vissza lett állítva</string>
+    <string name="bundle_changelog_empty">A változásnapló nem elérhető</string>
+    <string name="export_patch_profiles">Patchprofilok exportálása</string>
+    <string name="export_patch_profiles_description">Az összes patchprofil exportálása JSON fájlba</string>
+    <string name="export_patch_profiles_fail">Nem sikerült exportálni a patchprofilokat: %s</string>
+    <string name="export_patch_profiles_success">%d patchprofil exportálva</string>
+    <string name="export_patch_profiles_empty">Nincsenek exportálható patchprofilok</string>
+    <string name="export_manager_settings">A manager beállításainak exportálása</string>
+    <string name="export_manager_settings_description">Az összes managerbeállítás mentése JSON fájlba</string>
+    <string name="export_manager_settings_fail">Nem sikerült exportálni a manager beállításait: %s</string>
+    <string name="export_manager_settings_success">A manager beállításai exportálva</string>
+    <string name="reset_patch_selection">Patchkiválasztás visszaállítása</string>
+    <string name="reset_patch_selection_description">Tárolt patchkiválasztás visszaállítása</string>
+    <string name="reset_patch_options">Patchbeállítások visszaállítása</string>
+    <string name="reset_patch_options_description">Tárolt patchbeállítások visszaállítása</string>
+    <string name="reset_patch_selection_success">A patchkiválasztás vissza lett állítva</string>
     <string name="patch_selection_deselected_all_toast">Az összes patch kijelölésének törlése</string>
-    <string name="patch_selection_deselected_bundle_toast">Összes javítás kiválasztva: %s</string>
-    <string name="patch_selection_no_selected_bundle_toast">Nincs kijelölhető javítás a %s-ben</string>
-    <string name="patch_selection_selected_all_toast">Összes javítás kiválasztva</string>
-    <string name="patch_selection_select_all_empty_toast">Nincsenek elérhető javítások a kiválasztáshoz</string>
-    <string name="patch_selection_selected_bundle_toast">Összes javítás kiválasztva: %s</string>
-    <string name="patch_selection_select_bundle_empty_toast">Nem választható javítások a %s-ben</string>
-    <string name="patch_selection_all_actions_hidden_toast">Minden műveletgomb elrejtve, legalább egyt kell bekapcsolni a beállításokban</string>
+    <string name="patch_selection_deselected_bundle_toast">A patchek kijelölésének visszavonása ebben: %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">Nincs visszavonható kijelölés ebben: %s</string>
+    <string name="patch_selection_selected_all_toast">Az összes patch kiválasztva</string>
+    <string name="patch_selection_select_all_empty_toast">Nincsenek kiválasztható patchek</string>
+    <string name="patch_selection_selected_bundle_toast">Az összes patch kiválasztva ebben: %s</string>
+    <string name="patch_selection_select_bundle_empty_toast">Nincsenek kiválasztható patchek ebben: %s</string>
+    <string name="patch_selection_all_actions_hidden_toast">Minden műveletgomb elrejtve, kapcsoljon be legalább egyet a beállításokban</string>
     <string name="patch_selection_reset_bundle_toast">Alapértékek visszaállítása ehhez: %s</string>
-    <string name="patch_selection_button_label_all">Összes kijelölése törölve</string>
-    <string name="patch_selection_button_label_bundle">Köteg kijelölésének törlése</string>
+    <string name="patch_selection_button_label_all">Összes kijelölés visszavonása</string>
+    <string name="patch_selection_button_label_bundle">Csomag kijelölésének visszavonása</string>
     <string name="patch_selection_button_label_defaults">Minden alapérték</string>
-    <string name="patch_selection_button_label_select_bundle">Köteg kiválasztása</string>
+    <string name="patch_selection_button_label_select_bundle">Csomag kiválasztása</string>
     <string name="patch_selection_button_label_select_all">Összes kiválasztása</string>
     <string name="patch_selection_button_label_undo_action">Művelet visszavonása</string>
     <string name="patch_selection_button_label_redo_action">Művelet megismétlése</string>
-    <string name="patch_selection_history_undo">Visszavont %1$s</string>
-    <string name="patch_selection_history_redo">Újraalkotott %1$s</string>
+    <string name="patch_selection_history_undo">%1$s visszavonva</string>
+    <string name="patch_selection_history_redo">%1$s újra alkalmazva</string>
     <string name="patch_selection_action_all_defaults">minden alapértelmezett</string>
-    <string name="patch_selection_action_deselect_all">mindet töröl</string>
-    <string name="patch_selection_action_select_all">mindet kiválaszt</string>
-    <string name="patch_selection_action_select_bundle">„%1$s” kötegelt kiválaszt</string>
-    <string name="patch_selection_action_deselect_bundle">„%1$s” kötegelt töröl</string>
+    <string name="patch_selection_action_deselect_all">összes kijelölés visszavonása</string>
+    <string name="patch_selection_action_select_all">összes kiválasztása</string>
+    <string name="patch_selection_action_select_bundle">„%1$s” csomag kiválasztása</string>
+    <string name="patch_selection_action_deselect_bundle">„%1$s” csomag kijelölésének visszavonása</string>
     <string name="patch_selection_action_bundle_defaults">„%1$s” alapértelmezett kötegei</string>
     <string name="disable_patch_selection_confirmations">Művelet-visszaigazolások letiltása</string>
     <string name="disable_patch_selection_confirmations_description">Mellőzze a visszaigazolási párbeszédablakokat a javítás kiválasztási műveleteihez</string>
@@ -625,13 +637,9 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Beállítások exportálásába belefoglalás</string>
     <string name="include_github_pat_in_exports_supporting">Hozzáadja ezt a PAT-ot az exportált kezelői beállításokhoz</string>
     <string name="include_github_pat_in_exports_warning">Ne ossza meg a PAT-ot. Ha belefoglalja egy beállítások exportálásába, tartsa privátnak a fájlt, mert tartalmazza a tokent.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Alkalmazás nyelve</string>
+    <string name="language_dialog_title">Válassza ki az alkalmazás nyelvét</string>
+    <string name="language_option_system">A készülék nyelvének használata</string>
     <string name="device_memory_limit_format">%1$d MB (Normál) - %2$d MB (Nagy)</string>
     <string name="patches_force_download">Az összes javítási köteg letöltésének kényszerítése</string>
     <string name="patches_reset">Patch kötegek visszaállítása</string>
