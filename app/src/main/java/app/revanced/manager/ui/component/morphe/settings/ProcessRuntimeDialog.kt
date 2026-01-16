@@ -31,8 +31,10 @@ fun ProcessRuntimeDialog(
 ) {
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
-    val minLimit = 512
-    val maxLimit = 4096
+    val minLimit = 512   // Min memory value
+    val maxLimit = 2048  // Max memory value
+    val lowWarning = 768 // Warning for low values
+    val steps = 64       // MB steps for slider
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -164,7 +166,7 @@ fun ProcessRuntimeDialog(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
                         valueRange = minLimit.toFloat()..maxLimit.toFloat(),
-                        steps = ((maxLimit - minLimit) / 128) - 1, // 128 MB steps
+                        steps = ((maxLimit - minLimit) / steps) - 1, // 64 MB steps
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -213,7 +215,7 @@ fun ProcessRuntimeDialog(
                 }
 
                 // Warning for low values
-                if (enabled && sliderValue < 1024) {
+                if (enabled && sliderValue < lowWarning) {
                     Surface(
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)

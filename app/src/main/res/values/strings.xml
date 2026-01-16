@@ -308,8 +308,8 @@ The image dimensions must be as follows:
     <string name="morphe_enable_process_runtime">Enable process runtime</string>
     <string name="morphe_memory_limit_subtitle">Memory available for patching</string>
     <string name="morphe_memory_limit_warning">Low memory limit may cause patching failures</string>
-    <string name="morphe_process_runtime_enabled_description">Enabled • %d MB limit</string>
-    <string name="morphe_process_runtime_disabled_description">Disabled • Click to configure</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB limit</string>
+    <string name="morphe_process_runtime_disabled_description">Click to configure</string>
     <!-- About Section -->
     <string name="morphe_share_website">Share website</string>
     <string name="morphe_share_website_description">Share the official Morphe website</string>
