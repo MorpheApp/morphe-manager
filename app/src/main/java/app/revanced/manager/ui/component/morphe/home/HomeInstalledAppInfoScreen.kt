@@ -50,9 +50,10 @@ import org.koin.core.parameter.parametersOf
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
-fun MorpheInstalledAppInfoScreen(
+fun HomeInstalledAppInfoScreen(
     packageName: String,
     onRepatch: (String, PatchSelection, Options) -> Unit,
+    onBackClick: () -> Unit = {},
     viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) },
     prefs: PreferencesManager = koinInject()
 ) {
@@ -159,6 +160,10 @@ fun MorpheInstalledAppInfoScreen(
     val isInstalling = viewModel.isInstalling
     val isMounted = viewModel.isMounted
     val mountOperation = viewModel.mountOperation
+
+    SideEffect {
+        viewModel.onBackClick = onBackClick
+    }
 
     // Handle install result
     LaunchedEffect(installResult) {

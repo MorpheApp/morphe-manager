@@ -31,7 +31,7 @@ import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MorpheInstalledAppsScreen(
+fun HomeInstalledAppsScreen(
     onAppClick: (InstalledApp) -> Unit,
     viewModel: InstalledAppsViewModel = koinViewModel(),
     themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()

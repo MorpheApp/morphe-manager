@@ -25,8 +25,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.home.MorpheInstalledAppInfoScreen
-import app.revanced.manager.ui.component.morphe.home.MorpheInstalledAppsScreen
+import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
+import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppsScreen
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
 import app.revanced.manager.ui.screen.*
@@ -429,7 +429,7 @@ private fun ReVancedManager(vm: MainViewModel) {
 
             // Morphe Installed Apps Screen
             composable<MorpheInstalledApps> {
-                MorpheInstalledAppsScreen(
+                HomeInstalledAppsScreen(
                     onAppClick = { app ->
                         navController.navigate(
                             MorpheInstalledAppInfo(app.currentPackageName)
@@ -441,7 +441,7 @@ private fun ReVancedManager(vm: MainViewModel) {
             composable<MorpheInstalledAppInfo> {
                 val data = it.toRoute<MorpheInstalledAppInfo>()
 
-                MorpheInstalledAppInfoScreen(
+                HomeInstalledAppInfoScreen(
                     packageName = data.packageName,
                     onRepatch = { packageName, patches, options ->
                         navController.navigateComplex(
@@ -455,7 +455,8 @@ private fun ReVancedManager(vm: MainViewModel) {
                                 options = options
                             )
                         )
-                    }
+                    },
+                    onBackClick = { navController.popBackStack() }
                 )
             }
         }
