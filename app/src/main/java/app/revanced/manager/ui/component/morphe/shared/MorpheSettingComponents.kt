@@ -127,7 +127,8 @@ fun IconTextRow(
             Text(
                 text = title,
                 style = titleStyle,
-                fontWeight = titleWeight
+                fontWeight = titleWeight,
+                color = MaterialTheme.colorScheme.onSurface
             )
             description?.let {
                 Text(

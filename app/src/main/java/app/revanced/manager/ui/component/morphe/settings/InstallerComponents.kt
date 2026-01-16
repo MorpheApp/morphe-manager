@@ -193,18 +193,42 @@ private fun InstallerOptionItem(
     enabled: Boolean,
     onSelect: () -> Unit
 ) {
+    val colors = MaterialTheme.colorScheme
+
+    val containerColor = when {
+        !enabled ->
+            colors.onSurface.copy(alpha = 0.05f)
+        selected ->
+            colors.primaryContainer
+        else ->
+            Color.Transparent
+    }
+
+    val titleColor = when {
+        enabled -> colors.onSurface
+        else -> colors.onSurface.copy(alpha = 0.38f)
+    }
+
+    val descriptionColor = when {
+        enabled -> colors.onSurfaceVariant
+        else -> colors.onSurfaceVariant.copy(alpha = 0.38f)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 2.dp),
         shape = RoundedCornerShape(12.dp),
-        color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.Transparent,
-        border = null,
-        onClick = onSelect
+        color = containerColor,
+        tonalElevation = if (selected && enabled) 1.dp else 0.dp,
+        onClick = onSelect,
+        enabled = enabled
     ) {
         val leadingContent: @Composable () -> Unit = {
-            if (option.icon != null &&
-                (option.token == InstallerManager.Token.Shizuku || option.token is InstallerManager.Token.Component)
+            if (
+                option.icon != null &&
+                (option.token == InstallerManager.Token.Shizuku ||
+                        option.token is InstallerManager.Token.Component)
             ) {
                 InstallerIconPreview(
                     drawable = option.icon,
@@ -217,8 +241,8 @@ private fun InstallerOptionItem(
                     onClick = null,
                     enabled = enabled,
                     colors = RadioButtonDefaults.colors(
-                        selectedColor = MaterialTheme.colorScheme.primary,
-                        unselectedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        selectedColor = colors.primary,
+                        unselectedColor = colors.onSurfaceVariant
                     )
                 )
             }
@@ -229,7 +253,9 @@ private fun InstallerOptionItem(
             leadingContent = leadingContent,
             title = option.label,
             description = option.description?.takeIf { it.isNotBlank() },
-            trailingContent = null
+            trailingContent = null,
+            titleStyle = MaterialTheme.typography.bodyMedium.copy(color = titleColor),
+            descriptionStyle = MaterialTheme.typography.bodySmall.copy(color = descriptionColor)
         )
     }
 }
