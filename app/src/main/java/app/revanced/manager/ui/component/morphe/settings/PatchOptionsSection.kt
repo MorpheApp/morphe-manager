@@ -167,8 +167,10 @@ fun PatchOptionsSection(
             }
         } else {
             // Info message
-            SubtleCard(
-                text = stringResource(R.string.morphe_patch_options_restart_message)
+            InfoBadge(
+                icon = Icons.Outlined.Info,
+                text = stringResource(R.string.morphe_patch_options_restart_message),
+                style = InfoBadgeStyle.Success
             )
 
             // YouTube Card
@@ -279,10 +281,7 @@ private fun AppPatchOptionsCard(
         )
 
         // Options list
-        Column(
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+        Column {
             // Theme Colors
             if (hasTheme) {
                 SettingsItem(
@@ -359,10 +358,7 @@ private fun HideShortsSection(
         )
 
         // Options list
-        Column(
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+        Column {
             // Hide App Shortcut
             if (hasAppShortcutOption && appShortcutOption != null) {
                 val hideShortsAppShortcut by patchOptionsPrefs.hideShortsAppShortcut.getAsState()

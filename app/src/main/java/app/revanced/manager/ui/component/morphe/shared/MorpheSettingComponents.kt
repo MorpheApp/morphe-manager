@@ -1,12 +1,8 @@
 package app.revanced.manager.ui.component.morphe.shared
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.ExpandMore
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -239,42 +234,6 @@ fun SectionCard(
 }
 
 /**
- * Subtle card with minimal styling
- * Good for secondary information or backgrounds
- */
-@Composable
-fun SubtleCard(
-    modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null,
-    enabled: Boolean = true,
-    cornerRadius: Dp = 12.dp,
-    borderWidth: Dp = 0.dp,
-    content: @Composable () -> Unit
-) {
-    val containerColor = MaterialTheme.colorScheme.tertiaryContainer
-    val borderColor = MaterialTheme.colorScheme.outlineVariant
-
-    Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(cornerRadius))
-            .then(
-                if (onClick != null) {
-                    Modifier.clickable(enabled = enabled, onClick = onClick)
-                } else Modifier
-            ),
-        shape = RoundedCornerShape(cornerRadius),
-        color = containerColor,
-        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-        border = if (borderWidth > 0.dp) {
-            BorderStroke(borderWidth, borderColor)
-        } else null
-    ) {
-        content()
-    }
-}
-
-/**
  * Section title with gradient icon
  */
 @Composable
@@ -336,47 +295,61 @@ fun GradientCircleIcon(
     }
 }
 
-enum class StatusBadgeStyle {
+enum class InfoBadgeStyle {
     Default,
+    Primary,
     Success,
     Warning,
     Error
 }
 
 @Composable
-fun StatusBadge(
+fun InfoBadge(
     text: String,
-    style: StatusBadgeStyle = StatusBadgeStyle.Default
+    style: InfoBadgeStyle = InfoBadgeStyle.Default,
+    icon: ImageVector? = null,
+    isCompact: Boolean = false,
+    modifier: Modifier = Modifier
 ) {
     val (containerColor, contentColor) = when (style) {
-        StatusBadgeStyle.Success -> {
-            MaterialTheme.colorScheme.tertiaryContainer to
-                    MaterialTheme.colorScheme.onTertiaryContainer
-        }
-        StatusBadgeStyle.Warning -> {
-            MaterialTheme.colorScheme.secondaryContainer to
-                    MaterialTheme.colorScheme.onSecondaryContainer
-        }
-        StatusBadgeStyle.Error -> {
-            MaterialTheme.colorScheme.errorContainer to
-                    MaterialTheme.colorScheme.onErrorContainer
-        }
-        StatusBadgeStyle.Default -> {
-            MaterialTheme.colorScheme.surfaceVariant to
-                    MaterialTheme.colorScheme.onSurfaceVariant
-        }
+        InfoBadgeStyle.Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
+        InfoBadgeStyle.Success -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
+        InfoBadgeStyle.Warning -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
+        InfoBadgeStyle.Error -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
+        InfoBadgeStyle.Default -> MaterialTheme.colorScheme.surfaceVariant to MaterialTheme.colorScheme.onSurfaceVariant
     }
 
+    val horizontalPadding = if (isCompact) 8.dp else 12.dp
+    val verticalPadding = if (isCompact) 2.dp else 8.dp
+    val iconSize = if (isCompact) 14.dp else 20.dp
+    val shapeRadius = if (isCompact) 6.dp else 12.dp
+    val surfaceModifier = if (isCompact) modifier.wrapContentWidth() else modifier.fillMaxWidth()
+
     Surface(
-        shape = RoundedCornerShape(6.dp),
+        modifier = surfaceModifier,
+        shape = RoundedCornerShape(shapeRadius),
         color = containerColor
     ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-            style = MaterialTheme.typography.labelSmall,
-            color = contentColor
-        )
+        Row(
+            modifier = Modifier
+                .padding(horizontal = horizontalPadding, vertical = verticalPadding),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = contentColor,
+                    modifier = Modifier.size(iconSize)
+                )
+            }
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodySmall,
+                color = contentColor
+            )
+        }
     }
 }
 
@@ -452,38 +425,6 @@ fun CardHeader(
         }
 
         MorpheSettingsDivider(fullWidth = true)
-    }
-}
-
-@Composable
-fun SubtleCard(
-    text: String,
-    icon: ImageVector = Icons.Outlined.Info,
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.tertiaryContainer
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                modifier = Modifier.size(20.dp)
-            )
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onTertiaryContainer
-            )
-        }
     }
 }
 

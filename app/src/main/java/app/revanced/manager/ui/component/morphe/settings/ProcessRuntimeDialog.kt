@@ -14,10 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
-import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
+import app.revanced.manager.ui.component.morphe.shared.*
 
 /**
  * Dialog for configuring process runtime settings
@@ -189,57 +186,19 @@ fun ProcessRuntimeDialog(
                 }
 
                 // Description
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.Top
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.morphe_process_runtime_memory_limit_help),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
-                }
+                InfoBadge(
+                    text = stringResource(R.string.morphe_process_runtime_memory_limit_help),
+                    style = InfoBadgeStyle.Default,
+                    icon = Icons.Outlined.Info
+                )
 
                 // Warning for low values
                 if (enabled && sliderValue < lowWarning) {
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.Top
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Warning,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.error,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.morphe_memory_limit_warning),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        }
-                    }
+                    InfoBadge(
+                        text = stringResource(R.string.morphe_memory_limit_warning),
+                        style = InfoBadgeStyle.Error,
+                        icon = Icons.Outlined.Warning
+                    )
                 }
             }
         }

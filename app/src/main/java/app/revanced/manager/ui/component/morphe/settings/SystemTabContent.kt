@@ -95,11 +95,13 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            StatusBadge(
+                            InfoBadge(
                                 text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
                                 else stringResource(R.string.morphe_disabled),
-                                style = if (useProcessRuntime) StatusBadgeStyle.Success
-                                else StatusBadgeStyle.Default
+                                style = if (useProcessRuntime) InfoBadgeStyle.Primary
+                                else InfoBadgeStyle.Default,
+                                icon = null,
+                                isCompact = true
                             )
                             Icon(
                                 imageVector = Icons.Outlined.ChevronRight,

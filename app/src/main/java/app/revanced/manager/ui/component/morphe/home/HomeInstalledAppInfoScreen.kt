@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -47,6 +48,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun MorpheInstalledAppInfoScreen(
     packageName: String,
@@ -395,38 +397,44 @@ private fun AppStatusBadges(
         modifier = Modifier.fillMaxWidth()
     ) {
         // Install type badge
-        StatusBadge(
+        InfoBadge(
             text = stringResource(installType.stringResource),
-            style = StatusBadgeStyle.Success
+            style = InfoBadgeStyle.Success,
+            icon = null,
+            isCompact = true
         )
 
         // Mount status
         if (installType == InstallType.MOUNT) {
             val (text, style) = when {
                 mountOperation == MountOperation.MOUNTING ->
-                    stringResource(R.string.mounting_ellipsis) to StatusBadgeStyle.Warning
+                    stringResource(R.string.mounting_ellipsis) to InfoBadgeStyle.Warning
 
                 mountOperation == MountOperation.UNMOUNTING ->
-                    stringResource(R.string.unmounting) to StatusBadgeStyle.Warning
+                    stringResource(R.string.unmounting) to InfoBadgeStyle.Warning
 
                 isMounted ->
-                    stringResource(R.string.mounted) to StatusBadgeStyle.Success
+                    stringResource(R.string.mounted) to InfoBadgeStyle.Success
 
                 else ->
-                    stringResource(R.string.not_mounted) to StatusBadgeStyle.Default
+                    stringResource(R.string.not_mounted) to InfoBadgeStyle.Default
             }
 
-            StatusBadge(
+            InfoBadge(
                 text = text,
-                style = style
+                style = style,
+                icon = null,
+                isCompact = true
             )
         }
 
         // Installing badge
         if (isInstalling) {
-            StatusBadge(
+            InfoBadge(
                 text = stringResource(R.string.installing_ellipsis),
-                style = StatusBadgeStyle.Success
+                style = InfoBadgeStyle.Success,
+                icon = null,
+                isCompact = true
             )
         }
     }

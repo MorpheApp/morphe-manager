@@ -39,8 +39,8 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.shared.ActionPillButton
-import app.revanced.manager.ui.component.morphe.shared.StatusBadge
-import app.revanced.manager.ui.component.morphe.shared.StatusBadgeStyle
+import app.revanced.manager.ui.component.morphe.shared.InfoBadge
+import app.revanced.manager.ui.component.morphe.shared.InfoBadgeStyle
 import app.revanced.manager.ui.component.morphe.utils.getRelativeTimeString
 import app.revanced.manager.util.toast
 import org.koin.compose.koinInject
@@ -395,17 +395,21 @@ private fun BundleCardHeader(
 
                 // Disabled badge
                 if (!enabled) {
-                    StatusBadge(
+                    InfoBadge(
                         text = stringResource(R.string.morphe_disabled),
-                        style = StatusBadgeStyle.Error
+                        style = InfoBadgeStyle.Error,
+                        icon = null,
+                        isCompact = true
                     )
                 }
 
                 // Update badge
                 if (updateInfo != null) {
-                    StatusBadge(
+                    InfoBadge(
                         text = stringResource(R.string.update),
-                        style = StatusBadgeStyle.Warning
+                        style = InfoBadgeStyle.Warning,
+                        icon = null,
+                        isCompact = true
                     )
                 }
             }
@@ -577,5 +581,8 @@ private fun BundleTypeBadge(bundle: PatchBundleSource) {
         else -> stringResource(R.string.bundle_type_local)
     }
 
-    StatusBadge(text = text)
+    InfoBadge(
+        text = text,
+        isCompact = true
+    )
 }
