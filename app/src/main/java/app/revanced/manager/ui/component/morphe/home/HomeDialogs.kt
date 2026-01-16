@@ -634,7 +634,13 @@ private fun FilePickerPromptDialog(
         ),
         footer = {
             MorpheDialogButton(
-                text = stringResource(R.string.morphe_home_file_picker_prompt_open),
+                text = stringResource(
+                    if (isOtherApps) {
+                        R.string.morphe_home_file_picker_prompt_open_apk
+                    } else {
+                        R.string.morphe_home_file_picker_prompt_open_downloaded_apk
+                    }
+                ),
                 onClick = onOpenFilePicker,
                 icon = Icons.Outlined.FolderOpen,
                 modifier = Modifier.fillMaxWidth()

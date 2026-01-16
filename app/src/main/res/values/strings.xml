@@ -84,7 +84,8 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Select the APK you downloaded</string>
     <string name="morphe_home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded.</string>
-    <string name="morphe_home_file_picker_prompt_open">Open APK file I downloaded</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Open APK file I downloaded</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Open APK file</string>
     <string name="morphe_home_recommended_version">Recommended version</string>
     <string name="morphe_patcher_selected_version">Selected version</string>
     <string name="morphe_home_select_apk_title">Select APK</string>
