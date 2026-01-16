@@ -893,7 +893,7 @@ fun removeMissingPatchesAndStart() {
         observeWorker(workId)
     }
 
-    private suspend fun persistPatchedApp(
+    suspend fun persistPatchedApp(
         currentPackageName: String?,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {

@@ -358,8 +358,7 @@ fun MorphePatcherScreen(
                                             packageName = viewModel.packageName,
                                             inputVersion = inputVersion,
                                             onPersistApp = { pkg, type ->
-                                                viewModel.savePatchedAppForLater(showToast = false)
-                                                true
+                                                viewModel.persistPatchedApp(pkg, type)
                                             }
                                         )
                                     } else {
@@ -368,8 +367,7 @@ fun MorphePatcherScreen(
                                             outputFile = outputFile,
                                             originalPackageName = viewModel.packageName,
                                             onPersistApp = { pkg, type ->
-                                                viewModel.savePatchedAppForLater(showToast = false)
-                                                true
+                                                viewModel.persistPatchedApp(pkg, type)
                                             }
                                         )
                                     }
