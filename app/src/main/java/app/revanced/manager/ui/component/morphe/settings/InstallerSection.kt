@@ -134,10 +134,7 @@ fun InstallerSection(
         ?: installerManager.describeEntry(fallbackToken, installTarget)
         ?: fallbackEntries.first()
 
-    Column(
-        modifier = Modifier.padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
+    Column {
         // Primary Installer
         InstallerSettingsItem(
             title = stringResource(R.string.installer_primary_title),
@@ -145,14 +142,15 @@ fun InstallerSection(
             onClick = { onShowInstallerDialog(InstallerDialogTarget.Primary) }
         )
 
-        MorpheSettingsDivider()
-
-        // Fallback Installer
-        InstallerSettingsItem(
-            title = stringResource(R.string.installer_fallback_title),
-            entry = fallbackEntry,
-            onClick = { onShowInstallerDialog(InstallerDialogTarget.Fallback) }
-        )
+        // TODO: remove Fallback Installer from code
+//        MorpheSettingsDivider()
+//
+//        // Fallback Installer
+//        InstallerSettingsItem(
+//            title = stringResource(R.string.installer_fallback_title),
+//            entry = fallbackEntry,
+//            onClick = { onShowInstallerDialog(InstallerDialogTarget.Fallback) }
+//        )
     }
 }
 
@@ -267,7 +265,6 @@ fun InstallerSelectionDialogContainer(
             }
             onDismiss()
         },
-        onOpenShizuku = installerManager::openShizukuApp,
-        stripRootNote = true
+        onOpenShizuku = installerManager::openShizukuApp
     )
 }

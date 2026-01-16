@@ -221,8 +221,8 @@
     <string name="morphe_settings_expert_mode_description">Enable advanced features and customization options</string>
     <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
     <string name="morphe_settings_return_to_morphe_description">Return to simplified mode</string>
-    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
-    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
+    <string name="morphe_settings_return_to_expert">Change to URV mode</string>
+    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured URV mode</string>
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>
     <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>
     <!-- Patch Options Section -->

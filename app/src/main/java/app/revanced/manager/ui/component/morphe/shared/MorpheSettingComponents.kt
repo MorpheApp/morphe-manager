@@ -1,5 +1,12 @@
 package app.revanced.manager.ui.component.morphe.shared
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -7,16 +14,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -91,6 +103,118 @@ fun SettingsItemCard(
         modifier = modifier
     ) {
         content()
+    }
+}
+
+/**
+ * Row with optional icon and text content
+ */
+@Composable
+fun IconTextRow(
+    modifier: Modifier = Modifier,
+    leadingContent: @Composable (() -> Unit)? = null,
+    title: String,
+    description: String? = null,
+    titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    titleWeight: FontWeight = FontWeight.Medium,
+    descriptionStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    trailingContent: @Composable (() -> Unit)? = null,
+    spacing: Dp = 12.dp
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(spacing),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        leadingContent?.invoke()
+
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                style = titleStyle,
+                fontWeight = titleWeight
+            )
+            description?.let {
+                Text(
+                    text = it,
+                    style = descriptionStyle,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        trailingContent?.invoke()
+    }
+}
+
+/**
+ * Simple settings item with icon, title, and action
+ */
+@Composable
+fun SettingsItem(
+    icon: ImageVector,
+    title: String,
+    description: String? = null,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false
+) {
+    SettingsItemCard(
+        onClick = onClick,
+        borderWidth = if (showBorder) 1.dp else 0.dp,
+        modifier = modifier
+    ) {
+        IconTextRow(
+            modifier = Modifier.padding(16.dp),
+            leadingContent = {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            title = title,
+            description = description,
+            trailingContent = {
+                Icon(
+                    imageVector = Icons.Outlined.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        )
+    }
+}
+
+@Composable
+fun RichSettingsItem(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false,
+    leadingContent: @Composable () -> Unit,
+    title: String,
+    subtitle: String? = null,
+    trailingContent: @Composable (() -> Unit)? = {
+        Icon(
+            imageVector = Icons.Outlined.ChevronRight,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary
+        )
+    }
+) {
+    SettingsItemCard(
+        onClick = onClick,
+        borderWidth = if (showBorder) 1.dp else 0.dp,
+        modifier = modifier
+    ) {
+        IconTextRow(
+            modifier = Modifier.padding(16.dp),
+            leadingContent = leadingContent,
+            title = title,
+            description = subtitle,
+            trailingContent = trailingContent
+        )
     }
 }
 
@@ -313,10 +437,17 @@ fun CardHeader(
             shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
         ) {
             IconTextRow(
-                icon = icon,
+                modifier = Modifier.padding(16.dp),
+                leadingContent = {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
                 title = title,
-                description = description,
-                modifier = Modifier.padding(16.dp)
+                description = description
             )
         }
 
@@ -352,6 +483,72 @@ fun SubtleCard(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onTertiaryContainer
             )
+        }
+    }
+}
+
+/**
+ * Expandable section with animated header and content
+ */
+@Composable
+fun ExpandableSection(
+    icon: ImageVector,
+    title: String,
+    description: String,
+    expanded: Boolean,
+    onExpandChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (expanded) 180f else 0f,
+        animationSpec = tween(300),
+        label = "expand_rotation"
+    )
+
+    MorpheCard(modifier = modifier) {
+        Column {
+            // Header
+            IconTextRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onExpandChange(!expanded) }
+                    .padding(16.dp),
+                leadingContent = {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
+                title = title,
+                description = description,
+                trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ExpandMore,
+                        contentDescription = if (expanded) "Collapse" else "Expand",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.rotate(rotationAngle)
+                    )
+                }
+            )
+
+            // Content
+            AnimatedVisibility(
+                visible = expanded,
+                enter = expandVertically(tween(300)) + fadeIn(tween(300)),
+                exit = shrinkVertically(tween(300)) + fadeOut(tween(300))
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    content()
+                }
+            }
         }
     }
 }

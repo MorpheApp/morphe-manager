@@ -2,7 +2,6 @@ package app.revanced.manager.ui.component.morphe.settings
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,11 +18,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.shared.IconTextRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
+import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
@@ -46,85 +47,38 @@ fun InstallerSettingsItem(
         }.joinToString("\n")
     }
 
-    SettingsItemCard(
-        onClick = onClick
-    ) {
-        when (entry.token) {
-            InstallerManager.Token.Shizuku,
-            is InstallerManager.Token.Component -> {
-                // Custom icon layout
-                if (entry.icon != null) {
-                    // For installers with custom icons, show the icon
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // Custom installer icon
-                        InstallerIconPreview(
-                            drawable = entry.icon,
-                            selected = true,
-                            enabled = entry.availability.available
-                        )
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = title,
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            if (supportingText.isNotEmpty()) {
-                                Text(
-                                    text = supportingText,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-
-                        Icon(
-                            imageVector = Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                } else {
-                    // Standard icon layout
-                    IconTextRow(
-                        icon = Icons.Outlined.Android,
-                        title = title,
-                        description = supportingText.takeIf { it.isNotEmpty() },
-                        modifier = Modifier.padding(16.dp),
-                        trailingContent = {
-                            Icon(
-                                imageVector = Icons.Outlined.ChevronRight,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    )
-                }
-            }
-            else -> {
-                // Internal, AutoSaved, None
-                IconTextRow(
-                    icon = Icons.Outlined.Android,
-                    title = title,
-                    description = supportingText.takeIf { it.isNotEmpty() },
-                    modifier = Modifier.padding(16.dp),
-                    trailingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
+    SettingsItemCard(onClick = onClick) {
+        val leadingContent: @Composable () -> Unit = {
+            if (entry.icon != null &&
+                (entry.token == InstallerManager.Token.Shizuku || entry.token is InstallerManager.Token.Component)
+            ) {
+                InstallerIconPreview(
+                    drawable = entry.icon,
+                    selected = true,
+                    enabled = entry.availability.available
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Outlined.Android,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
+
+        IconTextRow(
+            modifier = Modifier.padding(16.dp),
+            leadingContent = leadingContent,
+            title = title,
+            description = supportingText.takeIf { it.isNotEmpty() },
+            trailingContent = {
+                Icon(
+                    imageVector = Icons.Outlined.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        )
     }
 }
 
@@ -139,8 +93,7 @@ fun InstallerSelectionDialog(
     blockedToken: InstallerManager.Token?,
     onDismiss: () -> Unit,
     onConfirm: (InstallerManager.Token) -> Unit,
-    onOpenShizuku: (() -> Boolean)? = null,
-    stripRootNote: Boolean = true
+    onOpenShizuku: (() -> Boolean)? = null
 ) {
     val shizukuPromptReasons = remember {
         setOf(
@@ -151,7 +104,7 @@ fun InstallerSelectionDialog(
 
     var currentSelection by remember(selected) { mutableStateOf(selected) }
 
-    // Ensure valid selection on options change
+    // Ensure valid selection when options or blockedToken change
     LaunchedEffect(options, selected, blockedToken) {
         val tokens = options.map { it.token }
         var selection = currentSelection
@@ -194,9 +147,6 @@ fun InstallerSelectionDialog(
             )
         }
     ) {
-        val textColor = LocalDialogTextColor.current
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -204,7 +154,6 @@ fun InstallerSelectionDialog(
             options.forEach { option ->
                 val enabled = option.availability.available
                 val isSelected = currentSelection == option.token
-
                 val showShizukuAction = option.token == InstallerManager.Token.Shizuku &&
                         option.availability.reason in shizukuPromptReasons &&
                         onOpenShizuku != null
@@ -213,72 +162,54 @@ fun InstallerSelectionDialog(
                     option = option,
                     selected = isSelected,
                     enabled = enabled,
-                    showShizukuAction = showShizukuAction,
-                    stripRootNote = stripRootNote,
-                    textColor = textColor,
-                    secondaryColor = secondaryColor,
-                    onSelect = { if (enabled) currentSelection = option.token },
-                    onOpenShizuku = onOpenShizuku
+                    onSelect = { if (enabled) currentSelection = option.token }
                 )
+
+                if (showShizukuAction) {
+                    TextButton(
+                        onClick = {
+                            runCatching { onOpenShizuku.invoke() }
+                        },
+                        modifier = Modifier.padding(start = 56.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.installer_action_open_shizuku),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
             }
         }
     }
 }
 
 /**
- * Individual installer option item in selection dialog
- * Displays installer with icon, description, and status
+ * Individual installer option for dialog
  */
-@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun InstallerOptionItem(
     option: InstallerManager.Entry,
     selected: Boolean,
     enabled: Boolean,
-    showShizukuAction: Boolean,
-    stripRootNote: Boolean,
-    textColor: Color,
-    secondaryColor: Color,
-    onSelect: () -> Unit,
-    onOpenShizuku: (() -> Boolean)?
+    onSelect: () -> Unit
 ) {
-    val context = LocalContext.current
-
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 2.dp),
         shape = RoundedCornerShape(12.dp),
-        color = if (selected) {
-            textColor.copy(alpha = 0.1f)
-        } else {
-            Color.Transparent
-        },
-        border = if (selected) {
-            BorderStroke(2.dp, textColor.copy(alpha = 0.3f))
-        } else {
-            BorderStroke(1.dp, textColor.copy(alpha = 0.1f))
-        },
+        color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.Transparent,
+        border = null,
         onClick = onSelect
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Icon or Radio Button
-            val iconDrawable = option.icon
-            val useInstallerIcon = iconDrawable != null && when (option.token) {
-                InstallerManager.Token.Shizuku -> true
-                is InstallerManager.Token.Component -> true
-                else -> false
-            }
-
-            if (useInstallerIcon) {
+        val leadingContent: @Composable () -> Unit = {
+            if (option.icon != null &&
+                (option.token == InstallerManager.Token.Shizuku || option.token is InstallerManager.Token.Component)
+            ) {
                 InstallerIconPreview(
-                    drawable = iconDrawable,
+                    drawable = option.icon,
                     selected = selected,
-                    enabled = enabled || selected
+                    enabled = enabled
                 )
             } else {
                 RadioButton(
@@ -286,77 +217,20 @@ private fun InstallerOptionItem(
                     onClick = null,
                     enabled = enabled,
                     colors = RadioButtonDefaults.colors(
-                        selectedColor = textColor,
-                        unselectedColor = textColor.copy(alpha = 0.6f)
+                        selectedColor = MaterialTheme.colorScheme.primary,
+                        unselectedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
                 )
             }
-
-            // Content
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = option.label,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-                    color = if (enabled) textColor else secondaryColor
-                )
-
-                // Description and status
-                val lines = buildList {
-                    val desc = option.description?.let { text ->
-                        if (stripRootNote && option.token == InstallerManager.Token.AutoSaved) {
-                            val stripped = text.substringBefore(" (root required", text)
-                            stripped.trimEnd('.', ' ')
-                        } else text
-                    }
-                    desc?.takeIf { it.isNotBlank() }?.let { add(it) }
-                    option.availability.reason?.let { add(context.getString(it)) }
-                }
-
-                lines.forEachIndexed { index, line ->
-                    if (index == 0) {
-                        Text(
-                            text = line,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = secondaryColor
-                        )
-                    } else {
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = textColor.copy(alpha = 0.05f)
-                        ) {
-                            Text(
-                                text = line,
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                style = MaterialTheme.typography.labelMedium,
-                                color = secondaryColor
-                            )
-                        }
-                    }
-                }
-
-                // Shizuku action button
-                if (showShizukuAction) {
-                    TextButton(
-                        onClick = {
-                            val launched = runCatching { onOpenShizuku?.invoke() ?: false }
-                                .getOrDefault(false)
-                            if (!launched) {
-                                context.getString(R.string.installer_shizuku_launch_failed)
-                            }
-                        }
-                    ) {
-                        Text(
-                            stringResource(R.string.installer_action_open_shizuku),
-                            color = textColor
-                        )
-                    }
-                }
-            }
         }
+
+        IconTextRow(
+            modifier = Modifier.padding(16.dp),
+            leadingContent = leadingContent,
+            title = option.label,
+            description = option.description?.takeIf { it.isNotBlank() },
+            trailingContent = null
+        )
     }
 }
 

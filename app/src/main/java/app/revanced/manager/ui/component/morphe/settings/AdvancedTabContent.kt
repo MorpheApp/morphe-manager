@@ -23,6 +23,7 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.component.morphe.shared.IconTextRow
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.component.morphe.shared.SectionTitle
+import app.revanced.manager.ui.component.morphe.shared.SettingsItem
 import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
@@ -52,10 +53,10 @@ fun AdvancedTabContent(
     ) {
         // Expert settings section
         SectionTitle(
-            stringResource(R.string.morphe_expert_section),
+            text = stringResource(R.string.morphe_expert_section),
             icon = Icons.Outlined.Engineering
         )
-        // Expert Mode
+
         SettingsItemCard(
             onClick = {
                 scope.launch {
@@ -65,39 +66,34 @@ fun AdvancedTabContent(
             borderWidth = 1.dp
         ) {
             IconTextRow(
-                icon = Icons.Outlined.Psychology,
+                modifier = Modifier.padding(16.dp),
+                leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.Psychology,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                },
                 title = stringResource(R.string.morphe_settings_expert_mode),
                 description = stringResource(R.string.morphe_settings_expert_mode_description),
-                modifier = Modifier.padding(16.dp),
                 trailingContent = {
                     Switch(
                         checked = useExpertMode,
                         onCheckedChange = null
                     )
-                },
+                }
             )
         }
 
         // Return to Expert mode button (URV mode) (only show in Expert mode)
         if (useExpertMode) {
-            MorpheCard(
+            SettingsItem(
+                icon = Icons.Outlined.SwapHoriz,
+                title = stringResource(R.string.morphe_settings_return_to_expert),
+                description = stringResource(R.string.morphe_settings_return_to_expert_description),
                 onClick = onBackToAdvanced,
-                borderWidth = 1.dp
-            ) {
-                IconTextRow(
-                    icon = Icons.Outlined.SwapHoriz,
-                    title = stringResource(R.string.morphe_settings_return_to_expert),
-                    description = stringResource(R.string.morphe_settings_return_to_expert_description),
-                    modifier = Modifier.padding(16.dp),
-                    trailingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.ChevronRight,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                )
-            }
+                showBorder = true
+            )
         }
 
         // Strip unused native libraries (only show in Expert mode)
@@ -111,10 +107,16 @@ fun AdvancedTabContent(
                 borderWidth = 1.dp
             ) {
                 IconTextRow(
-                    icon = Icons.Outlined.LayersClear,
+                    modifier = Modifier.padding(16.dp),
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.LayersClear,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    },
                     title = stringResource(R.string.strip_unused_libs),
                     description = stringResource(R.string.strip_unused_libs_description),
-                    modifier = Modifier.padding(16.dp),
                     trailingContent = {
                         Switch(
                             checked = stripUnusedNativeLibs,
@@ -146,10 +148,16 @@ fun AdvancedTabContent(
             borderWidth = 1.dp
         ) {
             IconTextRow(
-                icon = Icons.Outlined.Science,
+                modifier = Modifier.padding(16.dp),
+                leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.Science,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                },
                 title = stringResource(R.string.morphe_update_use_prereleases),
                 description = stringResource(R.string.morphe_update_use_prereleases_description),
-                modifier = Modifier.padding(16.dp),
                 trailingContent = {
                     Switch(
                         checked = usePrereleases.value,

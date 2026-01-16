@@ -18,6 +18,8 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
+import app.revanced.manager.util.toast
+import com.topjohnwu.superuser.internal.Utils.context
 import kotlinx.coroutines.launch
 
 /**
@@ -71,43 +73,42 @@ fun SystemTabContent(
             )
 
             SectionCard {
-                SettingsItemCard(
+                RichSettingsItem(
                     onClick = { showProcessRuntimeDialog = true },
-                    borderWidth = 0.dp
-                ) {
-                    IconTextRow(
-                        icon = Icons.Outlined.Memory,
-                        title = stringResource(R.string.morphe_process_runtime),
-                        description = if (useProcessRuntime) {
-                            stringResource(
-                                R.string.morphe_process_runtime_enabled_description,
-                                memoryLimit
+                    showBorder = false,
+                    title = stringResource(R.string.morphe_process_runtime),
+                    subtitle = if (useProcessRuntime) {
+                        stringResource(R.string.morphe_process_runtime_enabled_description, memoryLimit)
+                    } else {
+                        stringResource(R.string.morphe_process_runtime_disabled_description)
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.Memory,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            StatusBadge(
+                                text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
+                                else stringResource(R.string.morphe_disabled),
+                                style = if (useProcessRuntime) StatusBadgeStyle.Success
+                                else StatusBadgeStyle.Default
                             )
-                        } else {
-                            stringResource(R.string.morphe_process_runtime_disabled_description)
-                        },
-                        modifier = Modifier.padding(16.dp),
-                        trailingContent = {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                StatusBadge(
-                                    text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
-                                    else stringResource(R.string.morphe_disabled),
-                                    style = if (useProcessRuntime) StatusBadgeStyle.Success
-                                    else StatusBadgeStyle.Default
-                                )
-
-                                Icon(
-                                    imageVector = Icons.Outlined.ChevronRight,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary
-                                )
-                            }
+                            Icon(
+                                imageVector = Icons.Outlined.ChevronRight,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
                         }
-                    )
-                }
+                    }
+                )
             }
         }
 
@@ -119,10 +120,28 @@ fun SystemTabContent(
             )
 
             SectionCard {
-                ImportExportSection(
-                    importExportViewModel = importExportViewModel,
-                    onImportKeystore = onImportKeystore,
-                    onExportKeystore = onExportKeystore
+                // Keystore Import
+                SettingsItem(
+                    icon = Icons.Outlined.Key,
+                    title = stringResource(R.string.import_keystore),
+                    description = stringResource(R.string.import_keystore_description),
+                    onClick = onImportKeystore
+                )
+
+                MorpheSettingsDivider()
+
+                // Keystore Export
+                SettingsItem(
+                    icon = Icons.Outlined.Upload,
+                    title = stringResource(R.string.export_keystore),
+                    description = stringResource(R.string.export_keystore_description),
+                    onClick = {
+                        if (!importExportViewModel.canExport()) {
+                            context.toast(context.getString(R.string.export_keystore_unavailable))
+                        } else {
+                            onExportKeystore()
+                        }
+                    }
                 )
             }
         }

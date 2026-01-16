@@ -198,23 +198,17 @@ fun AppearanceTabContent(
             icon = Icons.Outlined.Language
         )
 
-        SettingsItemCard(
-            onClick = { showTranslationInfoDialog = true },
-            borderWidth = 1.dp
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Language flag emoji
-                val currentLanguageOption = remember(appLanguage, context) {
-                    LanguageRepository.getSupportedLanguages(context)
-                        .find { it.code == appLanguage }
-                }
+        val currentLanguageOption = remember(appLanguage, context) {
+            LanguageRepository.getSupportedLanguages(context)
+                .find { it.code == appLanguage }
+        }
 
+        RichSettingsItem(
+            onClick = { showTranslationInfoDialog = true },
+            showBorder = true,
+            title = stringResource(R.string.morphe_appearance_current_language),
+            subtitle = currentLanguage,
+            leadingContent = {
                 Surface(
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
@@ -227,28 +221,15 @@ fun AppearanceTabContent(
                         )
                     }
                 }
-
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.morphe_appearance_current_language),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = currentLanguage,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-
+            },
+            trailingContent = {
                 Icon(
                     imageVector = Icons.Outlined.ChevronRight,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
-        }
+        )
 
         // Icon manager
         SectionTitle(

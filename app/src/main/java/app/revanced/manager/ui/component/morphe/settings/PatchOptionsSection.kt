@@ -271,21 +271,12 @@ private fun AppPatchOptionsCard(
     val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
 
     Column {
-        // Header with app icon and title
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
-        ) {
-            IconTextRow(
-                icon = icon,
-                title = title,
-                description = description,
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-
-        MorpheSettingsDivider(fullWidth = true)
+        // Header
+        CardHeader(
+            icon = icon,
+            title = title,
+            description = description
+        )
 
         // Options list
         Column(
@@ -367,6 +358,7 @@ private fun HideShortsSection(
             description = stringResource(R.string.morphe_patch_options_hide_shorts_features)
         )
 
+        // Options list
         Column(
             modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
