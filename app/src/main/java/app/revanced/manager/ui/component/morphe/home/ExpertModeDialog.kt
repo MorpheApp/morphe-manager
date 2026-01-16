@@ -501,8 +501,7 @@ private fun PatchCard(
                     text = stringResource(R.string.morphe_expert_mode_has_options),
                     style = InfoBadgeStyle.Primary,
                     icon = Icons.Outlined.Tune,
-                    isCompact = true,
-                    modifier = Modifier.wrapContentWidth()
+                    isCompact = true
                 )
             }
         }
