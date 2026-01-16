@@ -592,33 +592,36 @@ fun PatchingFailed(
             .padding(bottom = 16.dp)
     ) {
         AdaptiveCenteredLayout(windowSize = windowSize) {
-            SuccessIcon(
-                icon = Icons.Default.Error,
-                iconTint = MaterialTheme.colorScheme.error,
-                iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
-                windowSize = windowSize
-            )
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                SuccessIcon(
+                    icon = Icons.Default.Error,
+                    iconTint = MaterialTheme.colorScheme.error,
+                    iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                    windowSize = windowSize
+                )
 
-            Spacer(Modifier.height(windowSize.itemSpacing * 2))
+                Spacer(Modifier.height(windowSize.itemSpacing * 2))
 
-            Text(
-                text = stringResource(R.string.morphe_patcher_failed_title),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+                Text(
+                    text = stringResource(R.string.morphe_patcher_failed_title),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
 
-            Spacer(Modifier.height(windowSize.itemSpacing))
+                Spacer(Modifier.height(windowSize.itemSpacing))
 
-            Text(
-                text = stringResource(R.string.morphe_patcher_failed_subtitle),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+                Text(
+                    text = stringResource(R.string.morphe_patcher_failed_subtitle),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
 
         // Bottom action bar

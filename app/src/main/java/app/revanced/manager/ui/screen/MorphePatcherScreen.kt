@@ -317,9 +317,9 @@ fun MorphePatcherScreen(
         color = MaterialTheme.colorScheme.background
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
+            // Animated background
             AnimatedBackground(type = backgroundType)
 
-            // Existing content box
             Box(modifier = Modifier.fillMaxSize()) {
                 AnimatedContent(
                     targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
