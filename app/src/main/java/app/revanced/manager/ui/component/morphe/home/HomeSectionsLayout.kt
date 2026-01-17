@@ -68,7 +68,9 @@ fun HomeSectionsLayout(
 
     // Main content sections
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp)
     ) {
         Column(
             modifier = Modifier
