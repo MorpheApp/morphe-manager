@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 fun SystemTabContent(
     installerManager: InstallerManager,
     advancedViewModel: AdvancedSettingsViewModel,
-    onShowInstallerDialog: (InstallerDialogTarget) -> Unit,
+    onShowInstallerDialog: () -> Unit,
     importExportViewModel: ImportExportViewModel,
     onImportKeystore: () -> Unit,
     onExportKeystore: () -> Unit,

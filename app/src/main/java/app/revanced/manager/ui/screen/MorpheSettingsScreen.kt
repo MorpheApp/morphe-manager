@@ -98,11 +98,9 @@ fun MorpheSettingsScreen(
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
-    var showPluginDialog by rememberSaveable { mutableStateOf<String?>(null) }
-    var selectedPluginState by remember { mutableStateOf<DownloaderPluginState?>(null) }
     var showExceptionViewer by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-    var installerDialogTarget by rememberSaveable { mutableStateOf<InstallerDialogTarget?>(null) }
+    var showInstallerDialog by remember { mutableStateOf(false) }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -130,39 +128,6 @@ fun MorpheSettingsScreen(
         AboutDialog(onDismiss = { showAboutDialog = false })
     }
 
-    // Show plugin management dialog
-    showPluginDialog?.let { packageName ->
-        val state = pluginStates[packageName]
-
-        PluginActionDialog(
-            packageName = packageName,
-            state = state,
-            onDismiss = {
-                showPluginDialog = null
-                selectedPluginState = null
-            },
-            onTrust = { downloadsViewModel.trustPlugin(packageName) },
-            onRevoke = { downloadsViewModel.revokePluginTrust(packageName) },
-            onUninstall = { downloadsViewModel.uninstallPlugin(packageName) },
-            onViewError = {
-                selectedPluginState = state
-                showPluginDialog = null
-                showExceptionViewer = true
-            }
-        )
-    }
-
-    // Show exception viewer dialog
-    if (showExceptionViewer && selectedPluginState is DownloaderPluginState.Failed) {
-        ExceptionViewerDialog(
-            text = (selectedPluginState as DownloaderPluginState.Failed).throwable.stackTraceToString(),
-            onDismiss = {
-                showExceptionViewer = false
-                selectedPluginState = null
-            }
-        )
-    }
-
     // Show keystore credentials dialog
     if (showKeystoreCredentialsDialog) {
         KeystoreCredentialsDialog(
@@ -184,13 +149,12 @@ fun MorpheSettingsScreen(
     }
 
     // Installer selection dialog
-    installerDialogTarget?.let { target ->
+    if (showInstallerDialog) {
         InstallerSelectionDialogContainer(
-            target = target,
             installerManager = installerManager,
             advancedViewModel = advancedViewModel,
             rootInstaller = rootInstaller,
-            onDismiss = { installerDialogTarget = null }
+            onDismiss = { showInstallerDialog = false }
         )
     }
 
@@ -239,9 +203,7 @@ fun MorpheSettingsScreen(
                     SettingsTab.SYSTEM -> SystemTabContent(
                         installerManager = installerManager,
                         advancedViewModel = advancedViewModel,
-                        onShowInstallerDialog = { target ->
-                            installerDialogTarget = target
-                        },
+                        onShowInstallerDialog = { showInstallerDialog = true },
                         importExportViewModel = importExportViewModel,
                         onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                         onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
