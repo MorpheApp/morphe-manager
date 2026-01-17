@@ -1,6 +1,5 @@
 package app.revanced.manager.ui.component.morphe.home
 
-import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -63,21 +62,18 @@ fun HomeSectionsLayout(
     // Bottom action bar
     onInstalledAppsClick: () -> Unit,
     onBundlesClick: () -> Unit,
-    onSettingsClick: () -> Unit,
-    backgroundType: BackgroundType,
-
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    onSettingsClick: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
 
-    Box(modifier = modifier.fillMaxSize()) {
-        // Animated background
-        AnimatedBackground(type = backgroundType)
-
-        // Main content sections
+    // Main content sections
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
         ) {
             // Adaptive content layout based on window size
             HomeAdaptiveContent(

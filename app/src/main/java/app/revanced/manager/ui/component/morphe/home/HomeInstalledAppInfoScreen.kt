@@ -58,8 +58,6 @@ fun HomeInstalledAppInfoScreen(
     prefs: PreferencesManager = koinInject()
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val backgroundType by prefs.backgroundType.getAsState()
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
@@ -79,7 +77,7 @@ fun HomeInstalledAppInfoScreen(
     }
 
     val appliedBundles = remember(appliedPatches, bundleInfo, bundleSources, context, savedBundleVersions) {
-        if (appliedPatches.isNullOrEmpty()) return@remember emptyList<AppliedPatchBundleUi>()
+        if (appliedPatches.isNullOrEmpty()) return@remember emptyList()
 
         runCatching {
             appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
@@ -108,7 +106,7 @@ fun HomeInstalledAppInfoScreen(
                 AppliedPatchBundleUi(
                     uid = bundleUid,
                     title = title,
-                    version = savedBundleVersions[bundleUid]?.takeUnless { it.isNullOrBlank() } ?: info?.version,
+                    version = savedBundleVersions[bundleUid]?.takeUnless { it.isBlank() } ?: info?.version,
                     patchInfos = patchInfos,
                     fallbackNames = missingNames,
                     bundleAvailable = info != null
@@ -167,13 +165,13 @@ fun HomeInstalledAppInfoScreen(
 
     // Handle install result
     LaunchedEffect(installResult) {
-        when (val result = installResult) {
+        when (installResult) {
             is InstallResult.Success -> {
-                context.toast(result.message)
+                context.toast(installResult.message)
                 viewModel.clearInstallResult()
             }
             is InstallResult.Failure -> {
-                context.toast(result.message)
+                context.toast(installResult.message)
                 viewModel.clearInstallResult()
             }
             null -> {}
@@ -293,65 +291,56 @@ fun HomeInstalledAppInfoScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .statusBarsPadding()
     ) {
-        // Animated background
-        AnimatedBackground(type = backgroundType)
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .statusBarsPadding()
-        ) {
-            if (installedApp == null) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    LoadingIndicator()
-                }
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    // App header
-                    AppHeader(
-                        appInfo = appInfo,
-                        packageName = packageName
-                    )
+        if (installedApp == null) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                LoadingIndicator()
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // App header
+                AppHeader(
+                    appInfo = appInfo,
+                    packageName = packageName
+                )
 
-                    // Status badges
-                    AppStatusBadges(
-                        installType = installedApp.installType,
-                        isMounted = isMounted,
-                        isInstalling = isInstalling,
-                        mountOperation = mountOperation
-                    )
+                // Status badges
+                AppStatusBadges(
+                    installType = installedApp.installType,
+                    isMounted = isMounted,
+                    isInstalling = isInstalling,
+                    mountOperation = mountOperation
+                )
 
-                    // Info section
-                    AppInfoSection(
-                        installedApp = installedApp,
-                        appInfo = appInfo,
-                        appliedPatches = appliedPatches,
-                        onShowPatches = { showAppliedPatchesDialog = true },
-                        bundlesUsedSummary = bundlesUsedSummary
-                    )
+                // Info section
+                AppInfoSection(
+                    installedApp = installedApp,
+                    appliedPatches = appliedPatches,
+                    onShowPatches = { showAppliedPatchesDialog = true },
+                    bundlesUsedSummary = bundlesUsedSummary
+                )
 
-                    // Actions section
-                    AppActionsSection(
-                        viewModel = viewModel,
-                        installedApp = installedApp,
-                        onRepatch = onRepatch,
-                        onUninstall = { showUninstallConfirm = true },
-                        onDelete = { showDeleteDialog = true },
-                        onMountWarning = { showMountWarningDialog = true },
-                        onExport = { exportSavedLauncher.launch(exportFileName) }
-                    )
-                }
+                // Actions section
+                AppActionsSection(
+                    viewModel = viewModel,
+                    installedApp = installedApp,
+                    onRepatch = onRepatch,
+                    onUninstall = { showUninstallConfirm = true },
+                    onDelete = { showDeleteDialog = true },
+                    onMountWarning = { showMountWarningDialog = true },
+                    onExport = { exportSavedLauncher.launch(exportFileName) }
+                )
             }
         }
     }
@@ -448,7 +437,6 @@ private fun AppStatusBadges(
 @Composable
 private fun AppInfoSection(
     installedApp: InstalledApp,
-    appInfo: PackageInfo?,
     appliedPatches: Map<Int, Set<String>>?,
     onShowPatches: () -> Unit,
     bundlesUsedSummary: String

@@ -5,14 +5,19 @@ import android.os.Parcelable
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,6 +32,7 @@ import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppsScreen
+import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
 import app.revanced.manager.ui.screen.*
@@ -95,6 +101,7 @@ private fun ReVancedManager(vm: MainViewModel) {
     val prefs: PreferencesManager = koinInject()
     val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
     val startDest = if (useMorpheHomeScreen) MorpheHomeScreen else Dashboard
+    val backgroundType by prefs.backgroundType.getAsState()
 
     EventEffect(vm.appSelectFlow) { params ->
         navController.navigateComplex(
@@ -103,361 +110,400 @@ private fun ReVancedManager(vm: MainViewModel) {
         )
     }
 
-    NavHost(
-        navController = navController,
-        startDestination = startDest,
-        enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-        exitTransition = { slideOutHorizontally(targetOffsetX = { -it / 3 }) },
-        popEnterTransition = { slideInHorizontally(initialOffsetX = { -it / 3 }) },
-        popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
+    // Box with background at the highest level
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        // Clunky work around to get a boolean calculated in the home screen
-        val usingMountInstallState = mutableStateOf(false)
-
-        composable<MorpheHomeScreen> {
-            val dashboardViewModel = koinViewModel<DashboardViewModel>()
-            val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
-
-            MorpheHomeScreen(
-                onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
-                onMorpheInstalledAppsClick = { navController.navigate(MorpheInstalledApps) },
-                onDownloaderPluginClick = { navController.navigate(Settings.Downloads) },
-                onUpdateClick = { navController.navigate(Update()) },
-                onStartQuickPatch = { params ->
-                    // Immediately start patching with the received parameters
-                    navController.navigateComplex(
-                        Patcher,
-                        Patcher.ViewModelParams(
-                            selectedApp = params.selectedApp,
-                            selectedPatches = params.patches,
-                            options = params.options
-                        )
-                    )
-                },
-                dashboardViewModel = dashboardViewModel,
-                usingMountInstallState = usingMountInstallState,
-                bundleUpdateProgress = bundleUpdateProgress
-            )
+        // Show animated background
+        if (useMorpheHomeScreen) {
+            AnimatedBackground(type = backgroundType)
         }
 
-        composable<Dashboard> {
-            DashboardScreen(
-                onSettingsClick = { navController.navigate(Settings) },
-                onAppSelectorClick = {
-                    navController.navigate(AppSelector())
-                },
-                onStorageSelect = { saved -> vm.selectApp(saved) },
-                onUpdateClick = {
-                    navController.navigate(Update())
-                },
-                onDownloaderPluginClick = {
-                    navController.navigate(Settings.Downloads)
-                },
-                onAppClick = { packageName ->
-                    navController.navigate(InstalledApplicationInfo(packageName))
-                },
-                onProfileLaunch = { launchData ->
-                    navController.navigateComplex(
-                        SelectedApplicationInfo,
-                        SelectedApplicationInfo.ViewModelParams(
-                            app = SelectedApp.Search(
-                                launchData.profile.packageName,
-                                launchData.profile.appVersion
-                            ),
-                            patches = null,
-                            profileId = launchData.profile.uid,
-                            requiresSourceSelection = true
-                        )
-                    )
-                }
-            )
-        }
-
-        composable<InstalledApplicationInfo> {
-            val data = it.toRoute<InstalledApplicationInfo>()
-
-            InstalledAppInfoScreen(
-                onPatchClick = { packageName, selection ->
-                    vm.selectApp(packageName, selection)
-                },
-                onBackClick = navController::popBackStack,
-                viewModel = koinViewModel { parametersOf(data.packageName) }
-            )
-        }
-
-        composable<AppSelector> {
-            val args = it.toRoute<AppSelector>()
-            AppSelectorScreen(
-                onSelect = vm::selectApp,
-                onStorageSelect = vm::selectApp,
-                onBackClick = navController::popBackStack,
-                autoOpenStorage = args.autoStorage,
-                returnToDashboardOnStorage = args.autoStorageReturn
-            )
-        }
-
-        composable<Patcher> {
-            val params = it.getComplexArg<Patcher.ViewModelParams>()
-            val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
-
-            // Morphe changes begin
-            val prefs: PreferencesManager = koinInject()
-            val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
-            if (useMorpheHomeScreen) {
-                MorphePatcherScreen(
-                    onBackClick = navController::popBackStack,
-                    viewModel = patcherViewModel,
-                    usingMountInstall = usingMountInstallState.value
+        // All content on top of background
+        NavHost(
+            navController = navController,
+            startDestination = startDest,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(400, easing = FastOutSlowInEasing)
+                ) + fadeIn(
+                    animationSpec = tween(400, delayMillis = 100)
                 )
-                return@composable
-            }
-            // Morphe changes end
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it / 3 },
+                    animationSpec = tween(400, easing = FastOutSlowInEasing)
+                ) + fadeOut(
+                    animationSpec = tween(300)
+                )
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it / 3 },
+                    animationSpec = tween(400, easing = FastOutSlowInEasing)
+                ) + fadeIn(
+                    animationSpec = tween(400, delayMillis = 100)
+                )
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it },
+                    animationSpec = tween(400, easing = FastOutSlowInEasing)
+                ) + fadeOut(
+                    animationSpec = tween(300)
+                )
+            },
+        ) {
+            // Clunky work around to get a boolean calculated in the home screen
+            val usingMountInstallState = mutableStateOf(false)
 
-            PatcherScreen(
-                onBackClick = navController::popBackStack,
-                onReviewSelection = { app, selection, options, missing ->
-                    val appWithVersion = when (app) {
-                        is SelectedApp.Search -> app.copy(version = app.version ?: params.selectedApp.version)
-                        is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = params.selectedApp.version) else app
-                        else -> app
-                    }
-                    navController.navigateComplex(
-                        SelectedApplicationInfo.PatchesSelector,
-                        SelectedApplicationInfo.PatchesSelector.ViewModelParams(
-                            app = appWithVersion,
-                            currentSelection = selection,
-                            options = options,
-                            missingPatchNames = missing,
-                            preferredAppVersion = app.version,
-                            preferredBundleVersion = null,
-                            preferredBundleUid = selection.keys.firstOrNull(),
-                            preferredBundleOverride = null,
-                            preferredBundleTargetsAllVersions = false
-                        )
-                    )
-                },
-                viewModel = koinViewModel { parametersOf(params) }
-            )
-        }
+            composable<MorpheHomeScreen> {
+                val dashboardViewModel = koinViewModel<DashboardViewModel>()
+                val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
-        composable<Update> {
-            val data = it.toRoute<Update>()
-
-            UpdateScreen(
-                onBackClick = navController::popBackStack,
-                vm = koinViewModel { parametersOf(data.downloadOnScreenEntry) }
-            )
-        }
-
-        navigation<SelectedApplicationInfo>(startDestination = SelectedApplicationInfo.Main) {
-            composable<SelectedApplicationInfo.Main> {
-                val parentBackStackEntry = navController.navGraphEntry(it)
-                val data =
-                    parentBackStackEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
-                val viewModel =
-                    koinNavViewModel<SelectedAppInfoViewModel>(viewModelStoreOwner = parentBackStackEntry) {
-                        parametersOf(data)
-                    }
-
-                SelectedAppInfoScreen(
-                    onBackClick = navController::popBackStack,
-                    onPatchClick = {
-                        it.lifecycleScope.launch {
-                            navController.navigateComplex(
-                                Patcher,
-                                viewModel.getPatcherParams()
+                MorpheHomeScreen(
+                    onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
+                    onMorpheInstalledAppsClick = { navController.navigate(MorpheInstalledApps) },
+                    onStartQuickPatch = { params ->
+                        // Immediately start patching with the received parameters
+                        navController.navigateComplex(
+                            Patcher,
+                            Patcher.ViewModelParams(
+                                selectedApp = params.selectedApp,
+                                selectedPatches = params.patches,
+                                options = params.options
                             )
-                        }
+                        )
                     },
-                    onPatchSelectorClick = { app, patches, options ->
-                        val versionHint = viewModel.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
-                            ?: app.version?.takeUnless { it.isNullOrBlank() }
-                            ?: viewModel.preferredBundleVersion?.takeUnless { it.isNullOrBlank() }
-                            ?: viewModel.desiredVersion
+                    dashboardViewModel = dashboardViewModel,
+                    usingMountInstallState = usingMountInstallState,
+                    bundleUpdateProgress = bundleUpdateProgress
+                )
+            }
+
+            composable<Dashboard> {
+                DashboardScreen(
+                    onSettingsClick = { navController.navigate(Settings) },
+                    onAppSelectorClick = {
+                        navController.navigate(AppSelector())
+                    },
+                    onStorageSelect = { saved -> vm.selectApp(saved) },
+                    onUpdateClick = {
+                        navController.navigate(Update())
+                    },
+                    onDownloaderPluginClick = {
+                        navController.navigate(Settings.Downloads)
+                    },
+                    onAppClick = { packageName ->
+                        navController.navigate(InstalledApplicationInfo(packageName))
+                    },
+                    onProfileLaunch = { launchData ->
+                        navController.navigateComplex(
+                            SelectedApplicationInfo,
+                            SelectedApplicationInfo.ViewModelParams(
+                                app = SelectedApp.Search(
+                                    launchData.profile.packageName,
+                                    launchData.profile.appVersion
+                                ),
+                                patches = null,
+                                profileId = launchData.profile.uid,
+                                requiresSourceSelection = true
+                            )
+                        )
+                    }
+                )
+            }
+
+            composable<InstalledApplicationInfo> {
+                val data = it.toRoute<InstalledApplicationInfo>()
+
+                InstalledAppInfoScreen(
+                    onPatchClick = { packageName, selection ->
+                        vm.selectApp(packageName, selection)
+                    },
+                    onBackClick = navController::popBackStack,
+                    viewModel = koinViewModel { parametersOf(data.packageName) }
+                )
+            }
+
+            composable<AppSelector> {
+                val args = it.toRoute<AppSelector>()
+                AppSelectorScreen(
+                    onSelect = vm::selectApp,
+                    onStorageSelect = vm::selectApp,
+                    onBackClick = navController::popBackStack,
+                    autoOpenStorage = args.autoStorage,
+                    returnToDashboardOnStorage = args.autoStorageReturn
+                )
+            }
+
+            composable<Patcher> {
+                val params = it.getComplexArg<Patcher.ViewModelParams>()
+                val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
+
+                // Morphe changes begin
+                val prefs: PreferencesManager = koinInject()
+                val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
+                if (useMorpheHomeScreen) {
+                    MorphePatcherScreen(
+                        onBackClick = navController::popBackStack,
+                        viewModel = patcherViewModel,
+                        usingMountInstall = usingMountInstallState.value
+                    )
+                    return@composable
+                }
+                // Morphe changes end
+
+                PatcherScreen(
+                    onBackClick = navController::popBackStack,
+                    onReviewSelection = { app, selection, options, missing ->
                         val appWithVersion = when (app) {
-                            is SelectedApp.Search -> app.copy(version = versionHint)
-                            is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = versionHint) else app
+                            is SelectedApp.Search -> app.copy(version = app.version ?: params.selectedApp.version)
+                            is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = params.selectedApp.version) else app
                             else -> app
                         }
                         navController.navigateComplex(
                             SelectedApplicationInfo.PatchesSelector,
                             SelectedApplicationInfo.PatchesSelector.ViewModelParams(
-                                appWithVersion,
-                                patches,
-                                options,
-                                preferredAppVersion = versionHint,
-                                preferredBundleVersion = viewModel.preferredBundleVersion,
-                                preferredBundleUid = viewModel.selectedBundleUidFlow.value,
-                                preferredBundleOverride = viewModel.selectedBundleVersionOverrideFlow.value,
-                                preferredBundleTargetsAllVersions = viewModel.preferredBundleTargetsAllVersionsFlow.value
+                                app = appWithVersion,
+                                currentSelection = selection,
+                                options = options,
+                                missingPatchNames = missing,
+                                preferredAppVersion = app.version,
+                                preferredBundleVersion = null,
+                                preferredBundleUid = selection.keys.firstOrNull(),
+                                preferredBundleOverride = null,
+                                preferredBundleTargetsAllVersions = false
                             )
                         )
                     },
-                    onRequiredOptions = { app, patches, options ->
-                        val versionHint = viewModel.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
-                            ?: app.version?.takeUnless { it.isNullOrBlank() }
-                            ?: viewModel.preferredBundleVersion?.takeUnless { it.isNullOrBlank() }
-                            ?: viewModel.desiredVersion
-                        val appWithVersion = when (app) {
-                            is SelectedApp.Search -> app.copy(version = versionHint)
-                            is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = versionHint) else app
-                            else -> app
+                    viewModel = koinViewModel { parametersOf(params) }
+                )
+            }
+
+            composable<Update> {
+                val data = it.toRoute<Update>()
+
+                UpdateScreen(
+                    onBackClick = navController::popBackStack,
+                    vm = koinViewModel { parametersOf(data.downloadOnScreenEntry) }
+                )
+            }
+
+            navigation<SelectedApplicationInfo>(startDestination = SelectedApplicationInfo.Main) {
+                composable<SelectedApplicationInfo.Main> {
+                    val parentBackStackEntry = navController.navGraphEntry(it)
+                    val data =
+                        parentBackStackEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
+                    val viewModel =
+                        koinNavViewModel<SelectedAppInfoViewModel>(viewModelStoreOwner = parentBackStackEntry) {
+                            parametersOf(data)
                         }
-                        navController.navigateComplex(
-                            SelectedApplicationInfo.RequiredOptions,
-                            SelectedApplicationInfo.PatchesSelector.ViewModelParams(
-                                appWithVersion,
-                                patches,
-                                options,
-                                preferredAppVersion = versionHint,
-                                preferredBundleVersion = viewModel.preferredBundleVersion,
-                                preferredBundleUid = viewModel.selectedBundleUidFlow.value,
-                                preferredBundleOverride = viewModel.selectedBundleVersionOverrideFlow.value,
-                                preferredBundleTargetsAllVersions = viewModel.preferredBundleTargetsAllVersionsFlow.value
+
+                    SelectedAppInfoScreen(
+                        onBackClick = navController::popBackStack,
+                        onPatchClick = {
+                            it.lifecycleScope.launch {
+                                navController.navigateComplex(
+                                    Patcher,
+                                    viewModel.getPatcherParams()
+                                )
+                            }
+                        },
+                        onPatchSelectorClick = { app, patches, options ->
+                            val versionHint = viewModel.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
+                                ?: app.version?.takeUnless { it.isNullOrBlank() }
+                                ?: viewModel.preferredBundleVersion?.takeUnless { it.isNullOrBlank() }
+                                ?: viewModel.desiredVersion
+                            val appWithVersion = when (app) {
+                                is SelectedApp.Search -> app.copy(version = versionHint)
+                                is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = versionHint) else app
+                                else -> app
+                            }
+                            navController.navigateComplex(
+                                SelectedApplicationInfo.PatchesSelector,
+                                SelectedApplicationInfo.PatchesSelector.ViewModelParams(
+                                    appWithVersion,
+                                    patches,
+                                    options,
+                                    preferredAppVersion = versionHint,
+                                    preferredBundleVersion = viewModel.preferredBundleVersion,
+                                    preferredBundleUid = viewModel.selectedBundleUidFlow.value,
+                                    preferredBundleOverride = viewModel.selectedBundleVersionOverrideFlow.value,
+                                    preferredBundleTargetsAllVersions = viewModel.preferredBundleTargetsAllVersionsFlow.value
+                                )
                             )
-                        )
-                    },
-                    vm = viewModel
-                )
-            }
-
-            composable<SelectedApplicationInfo.PatchesSelector> {
-                val data =
-                    it.getComplexArg<SelectedApplicationInfo.PatchesSelector.ViewModelParams>()
-                val parentEntry = navController.navGraphEntry(it)
-                val parentArgs =
-                    parentEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
-                val selectedAppInfoVm = koinNavViewModel<SelectedAppInfoViewModel>(
-                    viewModelStoreOwner = parentEntry
-                ) {
-                    parametersOf(parentArgs)
+                        },
+                        onRequiredOptions = { app, patches, options ->
+                            val versionHint = viewModel.selectedAppInfo?.versionName?.takeUnless { it.isNullOrBlank() }
+                                ?: app.version?.takeUnless { it.isNullOrBlank() }
+                                ?: viewModel.preferredBundleVersion?.takeUnless { it.isNullOrBlank() }
+                                ?: viewModel.desiredVersion
+                            val appWithVersion = when (app) {
+                                is SelectedApp.Search -> app.copy(version = versionHint)
+                                is SelectedApp.Download -> if (app.version.isNullOrBlank()) app.copy(version = versionHint) else app
+                                else -> app
+                            }
+                            navController.navigateComplex(
+                                SelectedApplicationInfo.RequiredOptions,
+                                SelectedApplicationInfo.PatchesSelector.ViewModelParams(
+                                    appWithVersion,
+                                    patches,
+                                    options,
+                                    preferredAppVersion = versionHint,
+                                    preferredBundleVersion = viewModel.preferredBundleVersion,
+                                    preferredBundleUid = viewModel.selectedBundleUidFlow.value,
+                                    preferredBundleOverride = viewModel.selectedBundleVersionOverrideFlow.value,
+                                    preferredBundleTargetsAllVersions = viewModel.preferredBundleTargetsAllVersionsFlow.value
+                                )
+                            )
+                        },
+                        vm = viewModel
+                    )
                 }
 
-                PatchesSelectorScreen(
-                    onBackClick = navController::popBackStack,
-                    onSave = { patches, options ->
-                        selectedAppInfoVm.updateConfiguration(patches, options)
-                        navController.popBackStack()
-                    },
-                    viewModel = koinViewModel { parametersOf(data) }
-                )
-            }
+                composable<SelectedApplicationInfo.PatchesSelector> {
+                    val data =
+                        it.getComplexArg<SelectedApplicationInfo.PatchesSelector.ViewModelParams>()
+                    val parentEntry = navController.navGraphEntry(it)
+                    val parentArgs =
+                        parentEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
+                    val selectedAppInfoVm = koinNavViewModel<SelectedAppInfoViewModel>(
+                        viewModelStoreOwner = parentEntry
+                    ) {
+                        parametersOf(parentArgs)
+                    }
 
-            composable<SelectedApplicationInfo.RequiredOptions> {
-                val data =
-                    it.getComplexArg<SelectedApplicationInfo.PatchesSelector.ViewModelParams>()
-                val parentEntry = navController.navGraphEntry(it)
-                val parentArgs =
-                    parentEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
-                val selectedAppInfoVm = koinNavViewModel<SelectedAppInfoViewModel>(
-                    viewModelStoreOwner = parentEntry
-                ) {
-                    parametersOf(parentArgs)
+                    PatchesSelectorScreen(
+                        onBackClick = navController::popBackStack,
+                        onSave = { patches, options ->
+                            selectedAppInfoVm.updateConfiguration(patches, options)
+                            navController.popBackStack()
+                        },
+                        viewModel = koinViewModel { parametersOf(data) }
+                    )
                 }
 
-                RequiredOptionsScreen(
-                    onBackClick = navController::popBackStack,
-                    onContinue = { patches, options ->
-                        selectedAppInfoVm.updateConfiguration(patches, options)
-                        it.lifecycleScope.launch {
+                composable<SelectedApplicationInfo.RequiredOptions> {
+                    val data =
+                        it.getComplexArg<SelectedApplicationInfo.PatchesSelector.ViewModelParams>()
+                    val parentEntry = navController.navGraphEntry(it)
+                    val parentArgs =
+                        parentEntry.getComplexArg<SelectedApplicationInfo.ViewModelParams>()
+                    val selectedAppInfoVm = koinNavViewModel<SelectedAppInfoViewModel>(
+                        viewModelStoreOwner = parentEntry
+                    ) {
+                        parametersOf(parentArgs)
+                    }
+
+                    RequiredOptionsScreen(
+                        onBackClick = navController::popBackStack,
+                        onContinue = { patches, options ->
+                            selectedAppInfoVm.updateConfiguration(patches, options)
+                            it.lifecycleScope.launch {
+                                navController.navigateComplex(
+                                    Patcher,
+                                    selectedAppInfoVm.getPatcherParams()
+                                )
+                            }
+                        },
+                        vm = koinViewModel { parametersOf(data) }
+                    )
+                }
+            }
+
+            navigation<Settings>(startDestination = Settings.Main) {
+                composable<Settings.Main> {
+                    SettingsScreen(
+                        onBackClick = navController::popBackStack,
+                        navigate = navController::navigate
+                    )
+                }
+
+                composable<Settings.Theme> {
+                    MorpheThemeSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.Advanced> {
+                    AdvancedSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.Developer> {
+                    DeveloperSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.Updates> {
+                    UpdatesSettingsScreen(
+                        onBackClick = navController::popBackStack,
+                        onChangelogClick = { navController.navigate(Settings.Changelogs) },
+                        onUpdateClick = { navController.navigate(Update()) }
+                    )
+                }
+
+                composable<Settings.Downloads> {
+                    DownloadsSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.ImportExport> {
+                    ImportExportSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.About> {
+                    AboutSettingsScreen(
+                        onBackClick = navController::popBackStack,
+    //                    navigate = navController::navigate
+                    )
+                }
+
+                composable<Settings.Changelogs> {
+                    ChangelogsSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                composable<Settings.Contributors> {
+                    ContributorSettingsScreen(onBackClick = navController::popBackStack)
+                }
+
+                // Morphe Settings Screen
+                composable<MorpheSettings> {
+                    MorpheSettingsScreen()
+                }
+
+                // Morphe Installed Apps Screen
+                composable<MorpheInstalledApps> {
+                    HomeInstalledAppsScreen(
+                        onAppClick = { app ->
+                            navController.navigate(
+                                MorpheInstalledAppInfo(app.currentPackageName)
+                            )
+                        }
+                    )
+                }
+
+                composable<MorpheInstalledAppInfo> {
+                    val data = it.toRoute<MorpheInstalledAppInfo>()
+
+                    HomeInstalledAppInfoScreen(
+                        packageName = data.packageName,
+                        onRepatch = { packageName, patches, options ->
                             navController.navigateComplex(
                                 Patcher,
-                                selectedAppInfoVm.getPatcherParams()
+                                Patcher.ViewModelParams(
+                                    selectedApp = SelectedApp.Installed(
+                                        packageName = packageName,
+                                        version = ""
+                                    ),
+                                    selectedPatches = patches,
+                                    options = options
+                                )
                             )
-                        }
-                    },
-                    vm = koinViewModel { parametersOf(data) }
-                )
-            }
-        }
-
-        navigation<Settings>(startDestination = Settings.Main) {
-            composable<Settings.Main> {
-                SettingsScreen(
-                    onBackClick = navController::popBackStack,
-                    navigate = navController::navigate
-                )
-            }
-
-            composable<Settings.Theme> {
-                MorpheThemeSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.Advanced> {
-                AdvancedSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.Developer> {
-                DeveloperSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.Updates> {
-                UpdatesSettingsScreen(
-                    onBackClick = navController::popBackStack,
-                    onChangelogClick = { navController.navigate(Settings.Changelogs) },
-                    onUpdateClick = { navController.navigate(Update()) }
-                )
-            }
-
-            composable<Settings.Downloads> {
-                DownloadsSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.ImportExport> {
-                ImportExportSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.About> {
-                AboutSettingsScreen(
-                    onBackClick = navController::popBackStack,
-//                    navigate = navController::navigate
-                )
-            }
-
-            composable<Settings.Changelogs> {
-                ChangelogsSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            composable<Settings.Contributors> {
-                ContributorSettingsScreen(onBackClick = navController::popBackStack)
-            }
-
-            // Morphe Settings Screen
-            composable<MorpheSettings> {
-                MorpheSettingsScreen()
-            }
-
-            // Morphe Installed Apps Screen
-            composable<MorpheInstalledApps> {
-                HomeInstalledAppsScreen(
-                    onAppClick = { app ->
-                        navController.navigate(
-                            MorpheInstalledAppInfo(app.currentPackageName)
-                        )
-                    }
-                )
-            }
-
-            composable<MorpheInstalledAppInfo> {
-                val data = it.toRoute<MorpheInstalledAppInfo>()
-
-                HomeInstalledAppInfoScreen(
-                    packageName = data.packageName,
-                    onRepatch = { packageName, patches, options ->
-                        navController.navigateComplex(
-                            Patcher,
-                            Patcher.ViewModelParams(
-                                selectedApp = SelectedApp.Installed(
-                                    packageName = packageName,
-                                    version = ""
-                                ),
-                                selectedPatches = patches,
-                                options = options
-                            )
-                        )
-                    },
-                    onBackClick = { navController.popBackStack() }
-                )
+                        },
+                        onBackClick = { navController.popBackStack() }
+                    )
+                }
             }
         }
     }

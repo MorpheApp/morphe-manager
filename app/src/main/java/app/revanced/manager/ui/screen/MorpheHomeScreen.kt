@@ -1,9 +1,8 @@
 package app.revanced.manager.ui.screen
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,10 +17,8 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
 import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.model.navigation.MorpheInstalledApps
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -48,20 +45,15 @@ data class QuickPatchParams(
  * 4. Other apps button
  * 5. Bottom action bar
  */
-@SuppressLint("BatteryLife")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
     onMorpheInstalledAppsClick: () -> Unit,
-    onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
-    onUpdateClick: () -> Unit = {},
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()
+    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?
 ) {
     val context = LocalContext.current
 
@@ -89,8 +81,6 @@ fun MorpheHomeScreen(
     )
 
     var showUpdateDetailsDialog by remember { mutableStateOf(false) }
-
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     // Get greeting message
     val greetingMessage = stringResource(HomeAndPatcherMessages.getHomeMessage(context))
@@ -121,16 +111,15 @@ fun MorpheHomeScreen(
 
     // Control snackbar visibility based on progress
     LaunchedEffect(bundleUpdateProgress) {
-        val progress = bundleUpdateProgress
 
-        if (progress == null) {
+        if (bundleUpdateProgress == null) {
             // Progress cleared - hide snackbar
             homeState.showBundleUpdateSnackbar = false
             return@LaunchedEffect
         }
 
         homeState.showBundleUpdateSnackbar = true
-        homeState.snackbarStatus = when (progress.result) {
+        homeState.snackbarStatus = when (bundleUpdateProgress.result) {
             PatchBundleRepository.BundleUpdateResult.Success,
             PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
 
@@ -142,12 +131,14 @@ fun MorpheHomeScreen(
     }
 
     // All dialogs
-    HomeDialogs(
-        state = homeState
-    )
+    HomeDialogs(state = homeState)
 
-    // Main scaffold
-    Scaffold { paddingValues ->
+    // Main content
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
         HomeSectionsLayout(
             // Notifications section
             showBundleUpdateSnackbar = homeState.showBundleUpdateSnackbar,
@@ -180,7 +171,6 @@ fun MorpheHomeScreen(
                 // TODO: Implement Reddit patching when ready
                 context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
             },
-            backgroundType = backgroundType,
 
             // Other apps button (only show in expert mode)
             showOtherAppsButton = useExpertMode,
@@ -200,9 +190,7 @@ fun MorpheHomeScreen(
             // Bottom action bar
             onInstalledAppsClick = onMorpheInstalledAppsClick,
             onBundlesClick = { homeState.showBundleManagementSheet = true },
-            onSettingsClick = onMorpheSettingsClick,
-
-            modifier = Modifier.padding(paddingValues)
+            onSettingsClick = onMorpheSettingsClick
         )
     }
 }

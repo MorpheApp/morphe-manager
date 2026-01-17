@@ -13,6 +13,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,10 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.patcher.*
-import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.State
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
+import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
 import kotlinx.coroutines.delay
@@ -78,8 +78,6 @@ fun MorphePatcherScreen(
         animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
         label = "progress_animation"
     )
-
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     // Get output file from viewModel
     val outputFile = viewModel.outputFile
@@ -312,89 +310,83 @@ fun MorphePatcherScreen(
     }
 
     // Main content
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            // Animated background
-            AnimatedBackground(type = backgroundType)
+        AnimatedContent(
+            targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(800)) togetherWith
+                        fadeOut(animationSpec = tween(800))
+            },
+            label = "patcher_state_animation"
+        ) { patcherState ->
+            when (patcherState) {
+                PatcherState.IN_PROGRESS -> {
+                    PatchingInProgress(
+                        progress = displayProgressAnimate,
+                        patchesProgress = patchesProgress,
+                        downloadProgress = viewModel.downloadProgress,
+                        viewModel = viewModel,
+                        showLongStepWarning = showLongStepWarning,
+                        onCancelClick = { state.showCancelDialog = true },
+                        onHomeClick = onBackClick
+                    )
+                }
 
-            Box(modifier = Modifier.fillMaxSize()) {
-                AnimatedContent(
-                    targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
-                    transitionSpec = {
-                        fadeIn(animationSpec = tween(800)) togetherWith
-                                fadeOut(animationSpec = tween(800))
-                    },
-                    label = "patcher_state_animation"
-                ) { patcherState ->
-                    when (patcherState) {
-                        PatcherState.IN_PROGRESS -> {
-                            PatchingInProgress(
-                                progress = displayProgressAnimate,
-                                patchesProgress = patchesProgress,
-                                downloadProgress = viewModel.downloadProgress,
-                                viewModel = viewModel,
-                                showLongStepWarning = showLongStepWarning,
-                                onCancelClick = { state.showCancelDialog = true },
-                                onHomeClick = onBackClick
-                            )
-                        }
-
-                        PatcherState.SUCCESS -> {
-                            PatchingSuccess(
-                                installViewModel = installViewModel,
-                                usingMountInstall = usingMountInstall,
-                                onInstall = {
-                                    if (usingMountInstall) {
-                                        // Mount install
-                                        val inputVersion = viewModel.version
-                                            ?: viewModel.currentSelectedApp.version
-                                            ?: "unknown"
-                                        installViewModel.installMount(
-                                            outputFile = outputFile,
-                                            inputFile = viewModel.inputFile,
-                                            packageName = viewModel.packageName,
-                                            inputVersion = inputVersion,
-                                            onPersistApp = { pkg, type ->
-                                                viewModel.persistPatchedApp(pkg, type)
-                                            }
-                                        )
-                                    } else {
-                                        // Regular install with pre-conflict check
-                                        installViewModel.install(
-                                            outputFile = outputFile,
-                                            originalPackageName = viewModel.packageName,
-                                            onPersistApp = { pkg, type ->
-                                                viewModel.persistPatchedApp(pkg, type)
-                                            }
-                                        )
+                PatcherState.SUCCESS -> {
+                    PatchingSuccess(
+                        installViewModel = installViewModel,
+                        usingMountInstall = usingMountInstall,
+                        onInstall = {
+                            if (usingMountInstall) {
+                                // Mount install
+                                val inputVersion = viewModel.version
+                                    ?: viewModel.currentSelectedApp.version
+                                    ?: "unknown"
+                                installViewModel.installMount(
+                                    outputFile = outputFile,
+                                    inputFile = viewModel.inputFile,
+                                    packageName = viewModel.packageName,
+                                    inputVersion = inputVersion,
+                                    onPersistApp = { pkg, type ->
+                                        viewModel.persistPatchedApp(pkg, type)
                                     }
-                                },
-                                onUninstall = { packageName ->
-                                    installViewModel.requestUninstall(packageName)
-                                },
-                                onOpen = {
-                                    installViewModel.openApp()
-                                },
-                                onHomeClick = onBackClick,
-                                onSaveClick = {
-                                    if (!state.isSaving) {
-                                        exportApkLauncher.launch(exportFileName)
+                                )
+                            } else {
+                                // Regular install with pre-conflict check
+                                installViewModel.install(
+                                    outputFile = outputFile,
+                                    originalPackageName = viewModel.packageName,
+                                    onPersistApp = { pkg, type ->
+                                        viewModel.persistPatchedApp(pkg, type)
                                     }
-                                },
-                                isSaving = state.isSaving
-                            )
-                        }
+                                )
+                            }
+                        },
+                        onUninstall = { packageName ->
+                            installViewModel.requestUninstall(packageName)
+                        },
+                        onOpen = {
+                            installViewModel.openApp()
+                        },
+                        onHomeClick = onBackClick,
+                        onSaveClick = {
+                            if (!state.isSaving) {
+                                exportApkLauncher.launch(exportFileName)
+                            }
+                        },
+                        isSaving = state.isSaving
+                    )
+                }
 
-                        PatcherState.FAILED -> {
-                            PatchingFailed(
-                                state = state,
-                                onHomeClick = onBackClick
-                            )
-                        }
-                    }
+                PatcherState.FAILED -> {
+                    PatchingFailed(
+                        state = state,
+                        onHomeClick = onBackClick
+                    )
                 }
             }
         }

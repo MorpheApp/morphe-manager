@@ -44,16 +44,16 @@ fun AppearanceTabContent(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    backgroundType: BackgroundType,
     themeViewModel: MorpheThemeSettingsViewModel
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
+    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
+
     var showLanguageDialog by remember { mutableStateOf(false) }
     var showTranslationInfoDialog by remember { mutableStateOf(false) }
-
     val currentLanguage = remember(appLanguage, context) {
         getLanguageDisplayName(appLanguage, context)
     }

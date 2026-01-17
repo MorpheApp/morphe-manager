@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.component.morphe.home
 
 import android.content.pm.PackageInfo
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -23,30 +22,20 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.AppLabel
 import app.revanced.manager.ui.component.LoadingIndicator
-import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.component.morphe.shared.MorpheCard
 import app.revanced.manager.ui.component.morphe.shared.SectionTitle
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeInstalledAppsScreen(
     onAppClick: (InstalledApp) -> Unit,
-    viewModel: InstalledAppsViewModel = koinViewModel(),
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()
+    viewModel: InstalledAppsViewModel = koinViewModel()
 ) {
     val installedApps by viewModel.apps.collectAsStateWithLifecycle(initialValue = null)
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        // Animated background
-        AnimatedBackground(type = backgroundType)
-
+        modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
