@@ -1,4 +1,3 @@
-import io.github.z4kn4fein.semver.toVersion
 import kotlin.random.Random
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.jvm.tasks.Jar
