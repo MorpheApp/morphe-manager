@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -9,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -18,12 +20,12 @@ import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
-import com.topjohnwu.superuser.internal.Utils.context
 import kotlinx.coroutines.launch
 
 /**
  * System tab content
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SystemTabContent(
     installerManager: InstallerManager,
@@ -36,6 +38,7 @@ fun SystemTabContent(
     prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     val useExpertMode by prefs.useExpertMode.getAsState()
     val useProcessRuntime by prefs.useProcessRuntime.getAsState()
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
