@@ -1,5 +1,8 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -7,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,6 +33,7 @@ import app.revanced.manager.ui.component.morphe.shared.*
 /**
  * Dialog for adding patch bundles
  */
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MorpheAddBundleDialog(
     onDismiss: () -> Unit,
@@ -62,11 +67,9 @@ fun MorpheAddBundleDialog(
             )
         }
     ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Tabs
             Surface(
@@ -74,10 +77,7 @@ fun MorpheAddBundleDialog(
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
             ) {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     listOf(
                         stringResource(R.string.morphe_remote),
@@ -85,22 +85,27 @@ fun MorpheAddBundleDialog(
                     ).forEachIndexed { index, title ->
                         val isSelected = selectedTab == index
 
-                        Surface(
-                            onClick = { selectedTab = index },
-                            shape = RoundedCornerShape(6.dp),
-                            color = if (isSelected)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0f),
-                            modifier = Modifier.weight(1f)
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(48.dp)
+                                .clickable { selectedTab = index }
                         ) {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = if (isSelected)
+                                    MaterialTheme.colorScheme.primary
+                                else
+                                    Color.Transparent,
+                                modifier = Modifier.fillMaxSize()
+                            ) {}
                             Box(
-                                modifier = Modifier.padding(8.dp),
-                                contentAlignment = Alignment.Center
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxSize()
                             ) {
                                 Text(
                                     text = title,
-                                    style = MaterialTheme.typography.labelMedium,
+                                    style = MaterialTheme.typography.bodyLarge,
                                     fontWeight = if (isSelected)
                                         FontWeight.Bold
                                     else
@@ -116,18 +121,23 @@ fun MorpheAddBundleDialog(
                 }
             }
 
-            // Content based on selected tab
-            when (selectedTab) {
-                0 -> RemoteTabContent(
-                    remoteUrl = remoteUrl,
-                    onUrlChange = { remoteUrl = it },
-                    secondaryColor = secondaryColor
-                )
-                1 -> LocalTabContent(
-                    selectedPath = selectedLocalPath,
-                    onPickFile = onLocalPick,
-                    secondaryColor = secondaryColor
-                )
+            // Tabs content
+            AnimatedContent(
+                targetState = selectedTab,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(200)).togetherWith(fadeOut(animationSpec = tween(200)))
+                }
+            ) { tab ->
+                when (tab) {
+                    0 -> RemoteTabContent(
+                        remoteUrl = remoteUrl,
+                        onUrlChange = { remoteUrl = it }
+                    )
+                    1 -> LocalTabContent(
+                        selectedPath = selectedLocalPath,
+                        onPickFile = onLocalPick
+                    )
+                }
             }
         }
     }
@@ -136,8 +146,7 @@ fun MorpheAddBundleDialog(
 @Composable
 private fun RemoteTabContent(
     remoteUrl: String,
-    onUrlChange: (String) -> Unit,
-    secondaryColor: Color
+    onUrlChange: (String) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -149,26 +158,20 @@ private fun RemoteTabContent(
                 onValueChange = onUrlChange,
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(
-                        stringResource(R.string.morphe_remote_source_url),
-                        color = LocalDialogSecondaryTextColor.current
-                    )
+                    Text(stringResource(R.string.morphe_remote_source_url))
                 },
                 placeholder = {
-                    Text(
-                        text = "https://example.com/patches.json",
-                        color = secondaryColor.copy(alpha = 0.5f)
-                    )
+                    Text(text = "https://example.com/patches.json")
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri)
             )
         }
 
         // Description
-        Text(
+        InfoBadge(
+            icon = Icons.Outlined.Info,
             text = stringResource(R.string.morphe_remote_bundle_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = secondaryColor
+            style = InfoBadgeStyle.Success
         )
     }
 }
@@ -176,8 +179,7 @@ private fun RemoteTabContent(
 @Composable
 private fun LocalTabContent(
     selectedPath: String?,
-    onPickFile: () -> Unit,
-    secondaryColor: Color
+    onPickFile: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -196,26 +198,18 @@ private fun LocalTabContent(
 
         // Selected file path
         if (selectedPath != null) {
-            Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-            ) {
-                Text(
-                    text = selectedPath,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = secondaryColor
-                )
-            }
+            InfoBadge(
+                icon = null,
+                text = selectedPath,
+                style = InfoBadgeStyle.Default
+            )
         }
 
         // Description
-        Text(
+        InfoBadge(
+            icon = Icons.Outlined.Info,
             text = stringResource(R.string.morphe_local_bundle_description),
-            style = MaterialTheme.typography.bodySmall,
-            color = secondaryColor
+            style = InfoBadgeStyle.Success
         )
     }
 }
