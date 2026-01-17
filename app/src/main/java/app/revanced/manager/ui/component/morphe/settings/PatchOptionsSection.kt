@@ -375,25 +375,21 @@ private fun HideShortsSection(
                     R.string.morphe_patch_options_hide_shorts_app_shortcut_description
                 )
 
-                MorpheCard(
+                RichSettingsItem(
                     onClick = {
                         scope.launch {
                             patchOptionsPrefs.hideShortsAppShortcut.update(!hideShortsAppShortcut)
                         }
+                    },
+                    title = title,
+                    subtitle = description,
+                    trailingContent = {
+                        Switch(
+                            checked = hideShortsAppShortcut,
+                            onCheckedChange = null
+                        )
                     }
-                ) {
-                    IconTextRow(
-                        title = title,
-                        description = description,
-                        modifier = Modifier.padding(16.dp),
-                        trailingContent = {
-                            Switch(
-                                checked = hideShortsAppShortcut,
-                                onCheckedChange = null
-                            )
-                        }
-                    )
-                }
+                )
             }
 
             // Hide Widget
@@ -414,25 +410,21 @@ private fun HideShortsSection(
                     R.string.morphe_patch_options_hide_shorts_widget_description
                 )
 
-                MorpheCard(
+                RichSettingsItem(
                     onClick = {
                         scope.launch {
                             patchOptionsPrefs.hideShortsWidget.update(!hideShortsWidget)
                         }
+                    },
+                    title = title,
+                    subtitle = description,
+                    trailingContent = {
+                        Switch(
+                            checked = hideShortsWidget,
+                            onCheckedChange = null
+                        )
                     }
-                ) {
-                    IconTextRow(
-                        title = title,
-                        description = description,
-                        modifier = Modifier.padding(16.dp),
-                        trailingContent = {
-                            Switch(
-                                checked = hideShortsWidget,
-                                onCheckedChange = null
-                            )
-                        }
-                    )
-                }
+                )
             }
         }
     }

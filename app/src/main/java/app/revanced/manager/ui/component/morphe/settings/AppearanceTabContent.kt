@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.*
@@ -223,11 +221,7 @@ fun AppearanceTabContent(
                 }
             },
             trailingContent = {
-                Icon(
-                    imageVector = Icons.Outlined.ChevronRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                MorpheIcon(icon = Icons.Outlined.ChevronRight)
             }
         )
 
@@ -324,10 +318,9 @@ private fun AccentColorPresetsRow(
                 },
             contentAlignment = Alignment.Center
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Close,
-                contentDescription = "Reset",
-                modifier = Modifier.size(24.dp),
+            MorpheIcon(
+                icon = Icons.Outlined.Close,
+                contentDescription = stringResource(R.string.clear),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                     alpha = if (isEnabled) 1f else 0.5f
                 )

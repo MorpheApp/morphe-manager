@@ -21,10 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
-import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
-import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
+import app.revanced.manager.ui.component.morphe.shared.*
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 /**
@@ -47,8 +44,9 @@ fun InstallerSettingsItem(
         }.joinToString("\n")
     }
 
-    SettingsItemCard(onClick = onClick) {
-        val leadingContent: @Composable () -> Unit = {
+    RichSettingsItem(
+        onClick = onClick,
+        leadingContent = {
             if (entry.icon != null &&
                 (entry.token == InstallerManager.Token.Shizuku || entry.token is InstallerManager.Token.Component)
             ) {
@@ -58,28 +56,14 @@ fun InstallerSettingsItem(
                     enabled = entry.availability.available
                 )
             } else {
-                Icon(
-                    imageVector = Icons.Outlined.Android,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                MorpheIcon(
+                    icon = Icons.Outlined.Android
                 )
             }
-        }
-
-        IconTextRow(
-            modifier = Modifier.padding(16.dp),
-            leadingContent = leadingContent,
-            title = title,
-            description = supportingText.takeIf { it.isNotEmpty() },
-            trailingContent = {
-                Icon(
-                    imageVector = Icons.Outlined.ChevronRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        )
-    }
+        },
+        title = title,
+        subtitle = supportingText.takeIf { it.isNotEmpty() }
+    )
 }
 
 /**

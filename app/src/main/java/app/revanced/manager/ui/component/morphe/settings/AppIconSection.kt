@@ -28,8 +28,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 
 /**
- * App Icon Selection Section
- * Allows users to change the app launcher icon
+ * Section to select the app icon
  */
 @Composable
 fun AppIconSection() {
@@ -47,32 +46,23 @@ fun AppIconSection() {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         // Icon grid
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    rowIcons.forEach { icon ->
-                        AppIconOption(
-                            icon = icon,
-                            isSelected = currentIcon == icon,
-                            onClick = {
-                                if (currentIcon != icon) {
-                                    showConfirmDialog = icon
-                                }
-                            },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    // Fill remaining space if row is incomplete
-                    repeat(3 - rowIcons.size) {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
+        AppIconManager.AppIcon.entries.chunked(3).forEach { rowIcons ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                rowIcons.forEach { icon ->
+                    AppIconOption(
+                        icon = icon,
+                        isSelected = currentIcon == icon,
+                        onClick = {
+                            if (currentIcon != icon) showConfirmDialog = icon
+                        },
+                        modifier = Modifier.weight(1f)
+                    )
                 }
+                // Fill remaining space for incomplete row
+                repeat(3 - rowIcons.size) { Spacer(modifier = Modifier.weight(1f)) }
             }
         }
     }
@@ -94,7 +84,7 @@ fun AppIconSection() {
 }
 
 /**
- * Individual app icon option
+ * Single app icon option
  */
 @Composable
 private fun AppIconOption(
@@ -104,36 +94,26 @@ private fun AppIconOption(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val iconDrawable = remember(icon) {
-        AppCompatResources.getDrawable(context, icon.previewIconResId)
-    }
+    val iconDrawable = remember(icon) { AppCompatResources.getDrawable(context, icon.previewIconResId) }
+    val iconPainter = rememberDrawablePainter(drawable = iconDrawable)
+
+    val iconShape = RoundedCornerShape(14.dp)
+    val borderWidth = if (isSelected) 2.5.dp else 1.dp
+    val borderColor = if (isSelected) MaterialTheme.colorScheme.primary
+    else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+    val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f)
+    else MaterialTheme.colorScheme.surface
+    val textColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+    val fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
 
     Surface(
         modifier = modifier
             .aspectRatio(0.85f)
-            .clip(RoundedCornerShape(14.dp))
+            .clip(iconShape)
             .clickable(onClick = onClick)
-            .then(
-                if (isSelected) {
-                    Modifier.border(
-                        width = 2.5.dp,
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = RoundedCornerShape(14.dp)
-                    )
-                } else {
-                    Modifier.border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                        shape = RoundedCornerShape(14.dp)
-                    )
-                }
-            ),
-        shape = RoundedCornerShape(14.dp),
-        color = if (isSelected) {
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f)
-        } else {
-            MaterialTheme.colorScheme.surface
-        }
+            .border(borderWidth, borderColor, iconShape),
+        shape = iconShape,
+        color = backgroundColor
     ) {
         Box(
             modifier = Modifier
@@ -147,7 +127,7 @@ private fun AppIconOption(
             ) {
                 // Icon preview
                 Image(
-                    painter = rememberDrawablePainter(drawable = iconDrawable),
+                    painter = iconPainter,
                     contentDescription = null,
                     modifier = Modifier
                         .size(52.dp)
@@ -158,12 +138,8 @@ private fun AppIconOption(
                 Text(
                     text = stringResource(icon.displayNameResId),
                     style = MaterialTheme.typography.labelSmall,
-                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                    color = if (isSelected) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onSurface
-                    },
+                    fontWeight = fontWeight,
+                    color = textColor,
                     textAlign = TextAlign.Center,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -194,20 +170,15 @@ private fun AppIconChangeDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(
-                    R.string.morphe_app_icon_change_dialog_message,
-                    stringResource(icon.displayNameResId)
-                ),
-                style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
-                textAlign = TextAlign.Center
-            )
-        }
+        Text(
+            text = stringResource(
+                R.string.morphe_app_icon_change_dialog_message,
+                stringResource(icon.displayNameResId)
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

@@ -1,28 +1,23 @@
 package app.revanced.manager.ui.component.morphe.settings
 
-import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Restore
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.AppType
@@ -34,6 +29,9 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Compan
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_DESC
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.LIGHT_THEME_COLOR_TITLE
 import app.revanced.manager.domain.manager.getLocalizedOrCustomText
+import app.revanced.manager.ui.component.morphe.home.ColorPresetItem
+import app.revanced.manager.ui.component.morphe.home.ExpandableSurface
+import app.revanced.manager.ui.component.morphe.home.ScrollableInstruction
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.utils.rememberFolderPickerWithPermission
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
@@ -84,7 +82,6 @@ fun ThemeColorDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.morphe_patch_options_theme_colors),
         titleTrailingContent = {
-            // Reset icon button in title
             IconButton(
                 onClick = {
                     scope.launch {
@@ -99,13 +96,11 @@ fun ThemeColorDialog(
                         }
                     }
                 },
-                modifier = Modifier.size(40.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.RestartAlt,
+                    imageVector = Icons.Outlined.Restore,
                     contentDescription = stringResource(R.string.reset),
-                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                    modifier = Modifier.size(20.dp)
+                    tint = LocalDialogTextColor.current
                 )
             }
         },
@@ -118,11 +113,8 @@ fun ThemeColorDialog(
         }
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = 500.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Dark Theme Section
             if (darkThemeOption != null) {
@@ -156,7 +148,7 @@ fun ThemeColorDialog(
                 // Presets
                 darkPresets.forEach { (label, value) ->
                     val colorValue = value?.toString() ?: return@forEach
-                    ThemePresetItem(
+                    ColorPresetItem(
                         label = label,
                         colorValue = colorValue,
                         isSelected = darkColor == colorValue,
@@ -172,10 +164,11 @@ fun ThemeColorDialog(
                 }
 
                 // Custom color option
-                CustomColorItem(
+                ColorPresetItem(
                     label = stringResource(R.string.morphe_custom_color),
-                    currentColor = darkColor,
-                    isCustomSelected = darkPresets.values.none { it?.toString() == darkColor },
+                    colorValue = darkColor,
+                    isSelected = darkPresets.values.none { it?.toString() == darkColor },
+                    isCustom = true,
                     onClick = { showDarkColorPicker = true }
                 )
             }
@@ -214,7 +207,7 @@ fun ThemeColorDialog(
                 // Presets
                 lightPresets.forEach { (label, value) ->
                     val colorValue = value?.toString() ?: return@forEach
-                    ThemePresetItem(
+                    ColorPresetItem(
                         label = label,
                         colorValue = colorValue,
                         isSelected = lightColor == colorValue,
@@ -227,10 +220,11 @@ fun ThemeColorDialog(
                 }
 
                 // Custom color option
-                CustomColorItem(
+                ColorPresetItem(
                     label = stringResource(R.string.morphe_custom_color),
-                    currentColor = lightColor,
-                    isCustomSelected = lightPresets.values.none { it?.toString() == lightColor },
+                    colorValue = lightColor,
+                    isSelected = lightPresets.values.none { it?.toString() == lightColor },
+                    isCustom = true,
                     onClick = { showLightColorPicker = true }
                 )
             }
@@ -278,101 +272,6 @@ fun ThemeColorDialog(
             },
             onDismiss = { showLightColorPicker = false }
         )
-    }
-}
-
-@Composable
-private fun ThemePresetItem(
-    label: String,
-    colorValue: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    MorpheCard(
-        onClick = onClick,
-        cornerRadius = 8.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Color preview dot
-            ColorPreviewDot(colorValue = colorValue)
-
-            Text(
-                text = label,
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                modifier = Modifier.weight(1f)
-            )
-
-            if (isSelected) {
-                Icon(
-                    imageVector = Icons.Outlined.Check,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun CustomColorItem(
-    label: String,
-    currentColor: String,
-    isCustomSelected: Boolean,
-    onClick: () -> Unit
-) {
-    MorpheCard(
-        onClick = onClick,
-        cornerRadius = 8.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Color picker icon or preview
-            if (isCustomSelected) {
-                ColorPreviewDot(colorValue = currentColor)
-            } else {
-                Icon(
-                    imageVector = Icons.Outlined.Palette,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = label,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogTextColor.current,
-                    fontWeight = if (isCustomSelected) FontWeight.Bold else FontWeight.Normal
-                )
-                if (isCustomSelected) {
-                    Text(
-                        text = currentColor,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-
-            Icon(
-                imageVector = Icons.Outlined.ChevronRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
     }
 }
 
@@ -462,24 +361,15 @@ fun CustomBrandingDialog(
         ) {
             // App Name field
             if (appNameOption != null) {
-                OutlinedTextField(
+                MorpheDialogTextField(
                     value = appName,
                     onValueChange = { appName = it },
                     label = {
-                        Text(
-                            stringResource(R.string.morphe_patch_options_custom_branding_app_name),
-                            color = LocalDialogSecondaryTextColor.current
-                        )
+                        Text(stringResource(R.string.morphe_patch_options_custom_branding_app_name))
                     },
                     placeholder = {
-                        Text(
-                            stringResource(R.string.morphe_patch_options_custom_branding_app_name_hint),
-                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                        )
+                        Text(stringResource(R.string.morphe_patch_options_custom_branding_app_name_hint))
                     },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
                         // Reset button
                         if (appName.isNotEmpty()) {
@@ -495,37 +385,21 @@ fun CustomBrandingDialog(
                                 )
                             }
                         }
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalDialogTextColor.current,
-                        unfocusedTextColor = LocalDialogTextColor.current,
-                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                        cursorColor = LocalDialogTextColor.current
-                    )
+                    }
                 )
             }
 
             // Icon Path field with Folder Picker
             if (iconOption != null) {
-                OutlinedTextField(
+                MorpheDialogTextField(
                     value = iconPath,
                     onValueChange = { iconPath = it },
                     label = {
-                        Text(
-                            stringResource(R.string.morphe_patch_options_custom_branding_custom_icon),
-                            color = LocalDialogSecondaryTextColor.current
-                        )
+                        Text(stringResource(R.string.morphe_patch_options_custom_branding_custom_icon))
                     },
                     placeholder = {
-                        Text(
-                            "/storage/emulated/0/icons", // No need localization
-                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                        )
+                        Text("/storage/emulated/0/icons")
                     },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
                         Row(
                             modifier = Modifier.width(88.dp),
@@ -559,20 +433,13 @@ fun CustomBrandingDialog(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = "Pick folder",
+                                    contentDescription = stringResource(R.string.morphe_patch_option_pick_folder),
                                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
                         }
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalDialogTextColor.current,
-                        unfocusedTextColor = LocalDialogTextColor.current,
-                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                        cursorColor = LocalDialogTextColor.current
-                    )
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))
@@ -586,61 +453,10 @@ fun CustomBrandingDialog(
                         R.string.morphe_patch_options_custom_branding_custom_icon_instruction
                     )
 
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { showInstructions = !showInstructions },
-                        shape = RoundedCornerShape(12.dp),
-                        color = LocalDialogTextColor.current.copy(alpha = 0.05f)
-                    ) {
-                        Column(modifier = Modifier.fillMaxWidth()) {
-                            // Header
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(12.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Info,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(20.dp)
-                                    )
-                                    Text(
-                                        text = stringResource(R.string.morphe_patch_options_icon_instructions_title),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        fontWeight = FontWeight.Medium,
-                                        color = LocalDialogTextColor.current
-                                    )
-                                }
-                                Icon(
-                                    imageVector = Icons.Outlined.ExpandMore,
-                                    contentDescription = if (showInstructions) "Collapse" else "Expand",
-                                    modifier = Modifier
-                                        .size(20.dp)
-                                        .rotate(rotationAngle),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                                )
-                            }
-
-                            // Expandable Content with description from bundle
-                            AnimatedVisibility(
-                                visible = showInstructions,
-                                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
-                                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
-                            ) {
-                                ScrollableInstruction(description = localizedDescription)
-                            }
-                        }
-                    }
+                    ExpandableSurface(
+                        title = stringResource(R.string.morphe_patch_option_instructions),
+                        content = { ScrollableInstruction(description = localizedDescription) }
+                    )
                 }
             }
 
@@ -650,7 +466,7 @@ fun CustomBrandingDialog(
                     text = stringResource(R.string.morphe_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
-                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                    fontStyle = FontStyle.Italic
                 )
             }
         }
@@ -711,24 +527,15 @@ fun CustomHeaderDialog(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             if (customOption != null) {
-                OutlinedTextField(
+                MorpheDialogTextField(
                     value = headerPath,
                     onValueChange = { headerPath = it },
                     label = {
-                        Text(
-                            stringResource(R.string.morphe_patch_options_custom_header),
-                            color = LocalDialogSecondaryTextColor.current
-                        )
+                        Text(stringResource(R.string.morphe_patch_options_custom_header))
                     },
                     placeholder = {
-                        Text(
-                            "/storage/emulated/0/header", // No need localization
-                            color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                        )
+                        Text("/storage/emulated/0/header")
                     },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
                     trailingIcon = {
                         Row(
                             modifier = Modifier.width(88.dp),
@@ -762,20 +569,13 @@ fun CustomHeaderDialog(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = "Pick folder",
+                                    contentDescription = stringResource(R.string.morphe_patch_option_pick_folder),
                                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
                         }
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalDialogTextColor.current,
-                        unfocusedTextColor = LocalDialogTextColor.current,
-                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                        cursorColor = LocalDialogTextColor.current
-                    )
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))
@@ -789,61 +589,10 @@ fun CustomHeaderDialog(
                         R.string.morphe_patch_options_custom_header_instruction
                     )
 
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .clickable { showInstructions = !showInstructions },
-                        shape = RoundedCornerShape(12.dp),
-                        color = LocalDialogTextColor.current.copy(alpha = 0.05f)
-                    ) {
-                        Column(modifier = Modifier.fillMaxWidth()) {
-                            // Header
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(12.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Info,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(20.dp)
-                                    )
-                                    Text(
-                                        text = stringResource(R.string.morphe_patch_options_header_instructions_title),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        fontWeight = FontWeight.Medium,
-                                        color = LocalDialogTextColor.current
-                                    )
-                                }
-                                Icon(
-                                    imageVector = Icons.Outlined.ExpandMore,
-                                    contentDescription = if (showInstructions) "Collapse" else "Expand",
-                                    modifier = Modifier
-                                        .size(20.dp)
-                                        .rotate(rotationAngle),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                                )
-                            }
-
-                            // Expandable Content with description from bundle
-                            AnimatedVisibility(
-                                visible = showInstructions,
-                                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
-                                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
-                            ) {
-                                ScrollableInstruction(description = localizedDescription)
-                            }
-                        }
-                    }
+                    ExpandableSurface(
+                        title = stringResource(R.string.morphe_patch_option_instructions),
+                        content = { ScrollableInstruction(description = localizedDescription) }
+                    )
                 }
             } else {
                 // No option available
@@ -851,68 +600,9 @@ fun CustomHeaderDialog(
                     text = stringResource(R.string.morphe_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
-                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
+                    fontStyle = FontStyle.Italic
                 )
             }
-        }
-    }
-}
-
-/**
- * Scrollable instructions box with fade at bottom
- */
-@Composable
-fun ScrollableInstruction(
-    description: String,
-    modifier: Modifier = Modifier,
-    maxHeight: Dp = 300.dp
-) {
-    val scrollState = rememberScrollState()
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .heightIn(max = maxHeight)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(scrollState)
-                .padding(horizontal = 12.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
-                modifier = Modifier.padding(bottom = 4.dp)
-            )
-
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
-            )
-        }
-
-        // Fade at bottom
-        val showFade by remember {
-            derivedStateOf { scrollState.value < scrollState.maxValue }
-        }
-
-        if (showFade) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .height(24.dp)
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                MaterialTheme.colorScheme.surface
-                            )
-                        )
-                    )
-            )
         }
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -65,7 +64,7 @@ fun SystemTabContent(
             )
         }
 
-        // Performance (only show in Expert mode)
+        // Performance (Expert mode only)
         if (useExpertMode) {
             SectionTitle(
                 text = stringResource(R.string.morphe_performance),
@@ -75,20 +74,12 @@ fun SystemTabContent(
             SectionCard {
                 RichSettingsItem(
                     onClick = { showProcessRuntimeDialog = true },
-                    showBorder = false,
                     title = stringResource(R.string.morphe_process_runtime),
-                    subtitle = if (useProcessRuntime) {
+                    subtitle = if (useProcessRuntime)
                         stringResource(R.string.morphe_process_runtime_enabled_description, memoryLimit)
-                    } else {
-                        stringResource(R.string.morphe_process_runtime_disabled_description)
-                    },
+                    else stringResource(R.string.morphe_process_runtime_disabled_description),
                     leadingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.Memory,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
+                        MorpheIcon(icon = Icons.Outlined.Memory)
                     },
                     trailingContent = {
                         Row(
@@ -98,23 +89,17 @@ fun SystemTabContent(
                             InfoBadge(
                                 text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
                                 else stringResource(R.string.morphe_disabled),
-                                style = if (useProcessRuntime) InfoBadgeStyle.Primary
-                                else InfoBadgeStyle.Default,
-                                icon = null,
+                                style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
                                 isCompact = true
                             )
-                            Icon(
-                                imageVector = Icons.Outlined.ChevronRight,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
                         }
                     }
                 )
             }
         }
 
-        // Import & Export (only show in Expert mode)
+        // Import & Export (Expert mode only)
         if (useExpertMode) {
             SectionTitle(
                 text = stringResource(R.string.import_export),
@@ -122,33 +107,35 @@ fun SystemTabContent(
             )
 
             SectionCard {
-                // Keystore Import
-                SettingsItem(
-                    icon = Icons.Outlined.Key,
-                    title = stringResource(R.string.import_keystore),
-                    description = stringResource(R.string.import_keystore_description),
-                    onClick = onImportKeystore
-                )
+                Column {
+                    // Keystore Import
+                    BaseSettingsItem(
+                        onClick = onImportKeystore,
+                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Key) },
+                        title = stringResource(R.string.import_keystore),
+                        description = stringResource(R.string.import_keystore_description)
+                    )
 
-                MorpheSettingsDivider()
+                    MorpheSettingsDivider()
 
-                // Keystore Export
-                SettingsItem(
-                    icon = Icons.Outlined.Upload,
-                    title = stringResource(R.string.export_keystore),
-                    description = stringResource(R.string.export_keystore_description),
-                    onClick = {
-                        if (!importExportViewModel.canExport()) {
-                            context.toast(context.getString(R.string.export_keystore_unavailable))
-                        } else {
-                            onExportKeystore()
-                        }
-                    }
-                )
+                    // Keystore Export
+                    BaseSettingsItem(
+                        onClick = {
+                            if (!importExportViewModel.canExport()) {
+                                context.toast(context.getString(R.string.export_keystore_unavailable))
+                            } else {
+                                onExportKeystore()
+                            }
+                        },
+                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
+                        title = stringResource(R.string.export_keystore),
+                        description = stringResource(R.string.export_keystore_description)
+                    )
+                }
             }
         }
 
-        // About
+        // About Section
         SectionTitle(
             text = stringResource(R.string.about),
             icon = Icons.Outlined.Info

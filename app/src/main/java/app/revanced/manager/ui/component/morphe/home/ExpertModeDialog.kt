@@ -3,9 +3,7 @@ package app.revanced.manager.ui.component.morphe.home
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,11 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.patcher.patch.PatchBundleInfo
@@ -148,17 +150,16 @@ fun ExpertModeDialog(
             )
 
             // Search bar
-            OutlinedTextField(
+            MorpheDialogTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(stringResource(R.string.morphe_expert_mode_search_placeholder))
+                label = {
+                    Text(stringResource(R.string.morphe_expert_mode_search))
                 },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Search,
-                        contentDescription = null
+                        contentDescription = stringResource(R.string.morphe_expert_mode_search)
                     )
                 },
                 trailingIcon = {
@@ -170,15 +171,7 @@ fun ExpertModeDialog(
                             )
                         }
                     }
-                },
-                singleLine = true,
-                shape = RoundedCornerShape(16.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
-                    unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                    focusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.2f)
-                )
+                }
             )
 
             // Content
@@ -754,7 +747,7 @@ private fun ColorOptionWithPresets(
         if (!presets.isNullOrEmpty()) {
             presets.forEach { (label, presetValue) ->
                 val colorValue = presetValue?.toString() ?: return@forEach
-                ThemePresetItem(
+                ColorPresetItem(
                     label = label,
                     colorValue = colorValue,
                     isSelected = value == colorValue,
@@ -767,97 +760,48 @@ private fun ColorOptionWithPresets(
         val isCustomSelected = !isValueInPresets
 
         // Custom color button
-        Surface(
-            onClick = onCustomColorClick,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            color = if (isCustomSelected)
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-            else
-                MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
-            border = if (isCustomSelected)
-                BorderStroke(
-                    1.5.dp,
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                )
-            else null,
-            tonalElevation = 0.dp
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (isCustomSelected) {
-                    ColorPreviewDot(
-                        colorValue = value,
-                        size = 32
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Palette,
-                            contentDescription = null,
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.6f),
-                            modifier = Modifier.size(18.dp)
-                        )
-                    }
-                }
-
-                Text(
-                    text = stringResource(R.string.morphe_custom_color),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = if (isCustomSelected) FontWeight.SemiBold else FontWeight.Normal,
-                    color = if (isCustomSelected)
-                        MaterialTheme.colorScheme.primary
-                    else
-                        LocalDialogTextColor.current,
-                    modifier = Modifier.weight(1f)
-                )
-
-                if (isCustomSelected) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-            }
-        }
+        ColorPresetItem(
+            label = stringResource(R.string.morphe_custom_color),
+            colorValue = value,
+            isSelected = isCustomSelected,
+            isCustom = true,
+            onClick = onCustomColorClick
+        )
     }
 }
 
 @Composable
-private fun ThemePresetItem(
+fun ColorPresetItem(
     label: String,
     colorValue: String,
     isSelected: Boolean,
-    onClick: () -> Unit
+    isCustom: Boolean = false,
+    enabled: Boolean = true,
+    cornerRadius: Dp = 12.dp,
+    elevation: Dp = 0.dp,
+    borderWidth: Dp = 0.dp,
+    onClick: (() -> Unit)? = null
 ) {
     Surface(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(cornerRadius))
+            .then(
+                if (onClick != null) Modifier.clickable(enabled = enabled, onClick = onClick)
+                else Modifier
+            ),
+        shape = RoundedCornerShape(cornerRadius),
         color = if (isSelected)
             MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
         else
-            MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
-        border = if (isSelected)
-            BorderStroke(
-                1.5.dp,
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-            )
-        else null,
-        tonalElevation = 0.dp
+            MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        tonalElevation = elevation,
+        border = if (isSelected && borderWidth > 0.dp) {
+            BorderStroke(borderWidth, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
+        } else if (!isSelected && borderWidth > 0.dp) {
+            BorderStroke(borderWidth, MaterialTheme.colorScheme.outlineVariant)
+        } else null
     ) {
         Row(
             modifier = Modifier
@@ -866,13 +810,30 @@ private fun ThemePresetItem(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ColorPreviewDot(
-                colorValue = colorValue,
-                size = 32
-            )
+            if (isCustom && !isSelected) {
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Palette,
+                        contentDescription = null,
+                        tint = LocalDialogTextColor.current.copy(alpha = 0.6f),
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            } else {
+                ColorPreviewDot(
+                    colorValue = colorValue,
+                    size = 32
+                )
+            }
 
             Text(
-                text = label,
+                text = if (isCustom) stringResource(R.string.morphe_custom_color) else label,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
                 color = if (isSelected)
@@ -913,40 +874,41 @@ private fun PathInputOption(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(
-            text = title + if (required) " *" else "",
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Medium,
-            color = LocalDialogTextColor.current
-        )
+//        Text(
+//            text = title + if (required) " *" else "",
+//            style = MaterialTheme.typography.bodyMedium,
+//            fontWeight = FontWeight.Medium,
+//            color = LocalDialogTextColor.current
+//        )
 
-        OutlinedTextField(
+        MorpheDialogTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(
-                    text = stringResource(R.string.morphe_patch_option_enter_path),
-                    color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
-                )
+            label = {
+                Text(title)
             },
-            singleLine = true,
-            maxLines = 1,
+            placeholder = {
+                Text("/storage/emulated/0/folder")
+            },
             trailingIcon = {
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    // Clear button
-                    if (value.isNotEmpty()) {
-                        IconButton(
-                            onClick = { onValueChange("") },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
+                Row(
+                    modifier = Modifier.width(88.dp),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Reset button
+                    Box(
+                        modifier = Modifier.size(40.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (value.isNotEmpty()) {
+                            IconButton(
+                                onClick = { onValueChange("") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.Clear,
-                                    contentDescription = stringResource(R.string.clear),
+                                    contentDescription = stringResource(R.string.reset),
                                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -970,90 +932,20 @@ private fun PathInputOption(
                         )
                     }
                 }
-            },
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = LocalDialogTextColor.current,
-                unfocusedTextColor = LocalDialogTextColor.current,
-                focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                cursorColor = LocalDialogTextColor.current
-            )
+            }
         )
 
-        // Instructions (expandable)
+        // Instructions
         if (description.isNotBlank()) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable { showInstructions = !showInstructions },
-                shape = RoundedCornerShape(12.dp),
-                color = LocalDialogTextColor.current.copy(alpha = 0.05f)
-            ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.morphe_patch_option_instructions),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.Medium,
-                                color = LocalDialogTextColor.current
-                            )
-                        }
-                        Icon(
-                            imageVector = Icons.Outlined.ExpandMore,
-                            contentDescription = if (showInstructions)
-                                stringResource(R.string.collapse)
-                            else
-                                stringResource(R.string.expand),
-                            modifier = Modifier
-                                .size(20.dp)
-                                .rotate(rotationAngle),
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                        )
-                    }
-
-                    AnimatedVisibility(
-                        visible = showInstructions,
-                        enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
-                        exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp, vertical = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            HorizontalDivider(
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
-                                modifier = Modifier.padding(bottom = 4.dp)
-                            )
-                            Text(
-                                text = description,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                            )
-                        }
-                    }
+            ExpandableSurface(
+                title = stringResource(R.string.morphe_patch_option_instructions),
+                content = {
+                    ScrollableInstruction(
+                        description = description,
+                        maxHeight = 280.dp
+                    )
                 }
-            }
+            )
         }
     }
 }
@@ -1071,25 +963,28 @@ private fun TextInputOption(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(
-                text = title + if (required) " *" else "",
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = LocalDialogTextColor.current
-            )
-            if (description.isNotBlank()) {
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalDialogSecondaryTextColor.current
-                )
-            }
-        }
+//        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+//            Text(
+//                text = title + if (required) " *" else "",
+//                style = MaterialTheme.typography.bodyMedium,
+//                fontWeight = FontWeight.Medium,
+//                color = LocalDialogTextColor.current
+//            )
+//            if (description.isNotBlank()) {
+//                Text(
+//                    text = description,
+//                    style = MaterialTheme.typography.bodySmall,
+//                    color = LocalDialogSecondaryTextColor.current
+//                )
+//            }
+//        }
 
         MorpheDialogTextField(
             value = value,
             onValueChange = onValueChange,
+            label = {
+                Text(title)
+            },
             placeholder = {
                 Text(
                     stringResource(
@@ -1101,9 +996,23 @@ private fun TextInputOption(
                     )
                 )
             },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-            modifier = Modifier.fillMaxWidth()
+            trailingIcon = {
+                // Reset button
+                if (value.isNotEmpty()) {
+                    IconButton(
+                        onClick = { onValueChange("") },
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.reset),
+                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
     }
 }
@@ -1115,50 +1024,17 @@ private fun BooleanOptionItem(
     value: Boolean,
     onValueChange: (Boolean) -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
-        tonalElevation = 0.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = LocalDialogTextColor.current
-                )
-                if (description.isNotBlank()) {
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
-                    )
-                }
-            }
-
+    RichSettingsItem(
+        onClick = {},
+        title = title,
+        subtitle = if (description.isNotBlank()) description else null,
+        trailingContent = {
             Switch(
                 checked = value,
-                onCheckedChange = onValueChange,
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = MaterialTheme.colorScheme.primary,
-                    checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
-                    uncheckedThumbColor = MaterialTheme.colorScheme.outline,
-                    uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
-                )
+                onCheckedChange = onValueChange
             )
         }
-    }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -1200,13 +1076,10 @@ private fun DropdownOptionItem(
                 value = value,
                 onValueChange = {},
                 enabled = false,
-                singleLine = true,
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
             )
 
             ExposedDropdownMenu(
@@ -1223,6 +1096,140 @@ private fun DropdownOptionItem(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun ExpandableSurface(
+    title: String,
+    content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: ImageVector = Icons.Outlined.Info,
+    initialExpanded: Boolean = false,
+    headerTint: Color = LocalDialogTextColor.current,
+    iconTint: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+) {
+    var expanded by remember { mutableStateOf(initialExpanded) }
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (expanded) 180f else 0f,
+        animationSpec = tween(300),
+        label = "rotation"
+    )
+
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .clickable { expanded = !expanded },
+        shape = RoundedCornerShape(12.dp),
+        color = headerTint.copy(alpha = 0.05f)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            // Header
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        tint = headerTint,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        color = headerTint
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Outlined.ExpandMore,
+                    contentDescription = if (expanded)
+                        stringResource(R.string.collapse)
+                    else
+                        stringResource(R.string.expand),
+                    modifier = Modifier
+                        .size(20.dp)
+                        .rotate(rotationAngle),
+                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
+                )
+            }
+
+            // Expandable content
+            AnimatedVisibility(
+                visible = expanded,
+                enter = expandVertically(animationSpec = tween(300)) + fadeIn(),
+                exit = shrinkVertically(animationSpec = tween(300)) + fadeOut()
+            ) {
+                content()
+            }
+        }
+    }
+}
+
+/**
+ * Scrollable instructions box with fade at bottom
+ */
+@Composable
+fun ScrollableInstruction(
+    description: String,
+    modifier: Modifier = Modifier,
+    maxHeight: Dp = 300.dp
+) {
+    val scrollState = rememberScrollState()
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(max = maxHeight)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            MorpheSettingsDivider(fullWidth = true)
+
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4f
+            )
+        }
+
+        // Fade at bottom
+        val showFade by remember {
+            derivedStateOf { scrollState.value < scrollState.maxValue }
+        }
+
+        if (showFade) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(24.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.surface
+                            )
+                        )
+                    )
+            )
         }
     }
 }

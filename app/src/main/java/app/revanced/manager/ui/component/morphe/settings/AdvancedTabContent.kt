@@ -8,8 +8,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -20,11 +18,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheCard
+import app.revanced.manager.ui.component.morphe.shared.MorpheIcon
+import app.revanced.manager.ui.component.morphe.shared.RichSettingsItem
 import app.revanced.manager.ui.component.morphe.shared.SectionTitle
 import app.revanced.manager.ui.component.morphe.shared.SettingsItem
-import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
@@ -57,35 +54,27 @@ fun AdvancedTabContent(
             icon = Icons.Outlined.Engineering
         )
 
-        SettingsItemCard(
+        RichSettingsItem(
             onClick = {
                 scope.launch {
                     prefs.useExpertMode.update(!useExpertMode)
                 }
             },
-            borderWidth = 1.dp
-        ) {
-            IconTextRow(
-                modifier = Modifier.padding(16.dp),
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.Psychology,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                },
-                title = stringResource(R.string.morphe_settings_expert_mode),
-                description = stringResource(R.string.morphe_settings_expert_mode_description),
-                trailingContent = {
-                    Switch(
-                        checked = useExpertMode,
-                        onCheckedChange = null
-                    )
-                }
-            )
-        }
+            showBorder = true,
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Psychology)
+            },
+            title = stringResource(R.string.morphe_settings_expert_mode),
+            subtitle = stringResource(R.string.morphe_settings_expert_mode_description),
+            trailingContent = {
+                Switch(
+                    checked = useExpertMode,
+                    onCheckedChange = null
+                )
+            }
+        )
 
-        // Return to Expert mode button (URV mode) (only show in Expert mode)
+        // Return to Expert mode button (URV mode) (Expert mode only)
         if (useExpertMode) {
             SettingsItem(
                 icon = Icons.Outlined.SwapHoriz,
@@ -96,35 +85,27 @@ fun AdvancedTabContent(
             )
         }
 
-        // Strip unused native libraries (only show in Expert mode)
+        // Strip unused native libraries (Expert mode only)
         if (useExpertMode) {
-            SettingsItemCard(
+            RichSettingsItem(
                 onClick = {
                     scope.launch {
                         prefs.stripUnusedNativeLibs.update(!stripUnusedNativeLibs)
                     }
                 },
-                borderWidth = 1.dp
-            ) {
-                IconTextRow(
-                    modifier = Modifier.padding(16.dp),
-                    leadingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.LayersClear,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    title = stringResource(R.string.strip_unused_libs),
-                    description = stringResource(R.string.strip_unused_libs_description),
-                    trailingContent = {
-                        Switch(
-                            checked = stripUnusedNativeLibs,
-                            onCheckedChange = null
-                        )
-                    }
-                )
-            }
+                showBorder = true,
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.LayersClear)
+                },
+                title = stringResource(R.string.strip_unused_libs),
+                subtitle = stringResource(R.string.strip_unused_libs_description),
+                trailingContent = {
+                    Switch(
+                        checked = stripUnusedNativeLibs,
+                        onCheckedChange = null
+                    )
+                }
+            )
         }
 
         // Updates
@@ -133,7 +114,7 @@ fun AdvancedTabContent(
             icon = Icons.Outlined.Update
         )
 
-        SettingsItemCard(
+        RichSettingsItem(
             onClick = {
                 val newValue = !usePrereleases.value
                 scope.launch {
@@ -145,29 +126,21 @@ fun AdvancedTabContent(
                     patchOptionsViewModel.refresh()
                 }
             },
-            borderWidth = 1.dp
-        ) {
-            IconTextRow(
-                modifier = Modifier.padding(16.dp),
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.Science,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                },
-                title = stringResource(R.string.morphe_update_use_prereleases),
-                description = stringResource(R.string.morphe_update_use_prereleases_description),
-                trailingContent = {
-                    Switch(
-                        checked = usePrereleases.value,
-                        onCheckedChange = null
-                    )
-                }
-            )
-        }
+            showBorder = true,
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Science)
+            },
+            title = stringResource(R.string.morphe_update_use_prereleases),
+            subtitle = stringResource(R.string.morphe_update_use_prereleases_description),
+            trailingContent = {
+                Switch(
+                    checked = usePrereleases.value,
+                    onCheckedChange = null
+                )
+            }
+        )
 
-        // Patch Options (only show in Simple mode)
+        // Patch Options (Simple mode only)
         if (!useExpertMode) {
             SectionTitle(
                 text = stringResource(R.string.morphe_patch_options),

@@ -39,12 +39,10 @@ fun AboutSection(
     val context = LocalContext.current
 
     Column {
-        // About item
-        val appIcon = rememberDrawablePainter(
-            drawable = remember {
-                AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
-            }
-        )
+        // App info item
+        val appIconPainter = remember {
+            AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+        }.let { rememberDrawablePainter(it) }
 
         RichSettingsItem(
             onClick = onAboutClick,
@@ -52,7 +50,7 @@ fun AboutSection(
             subtitle = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
             leadingContent = {
                 Image(
-                    painter = appIcon,
+                    painter = appIconPainter,
                     contentDescription = null,
                     modifier = Modifier
                         .size(40.dp)
@@ -70,13 +68,13 @@ fun AboutSection(
 
         MorpheSettingsDivider()
 
-        // Share Website
+        // Share Website item
         SettingsItem(
             icon = Icons.Outlined.Language,
             title = stringResource(R.string.morphe_share_website),
             description = stringResource(R.string.morphe_share_website_description),
             onClick = {
-                try {
+                runCatching {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
                         putExtra(Intent.EXTRA_TEXT, "https://morphe.software")
@@ -87,8 +85,8 @@ fun AboutSection(
                             context.getString(R.string.morphe_share_website)
                         )
                     )
-                } catch (e: Exception) {
-                    context.toast("Failed to share website: ${e.message}")
+                }.onFailure {
+                    context.toast("Failed to share website: ${it.message}")
                 }
             }
         )

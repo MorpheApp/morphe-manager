@@ -95,7 +95,7 @@
     <!-- Dialog 4: Expert Mode Dialog -->
     <string name="morphe_expert_mode_title">Expert mode</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
-    <string name="morphe_expert_mode_search_placeholder">Search patches…</string>
+    <string name="morphe_expert_mode_search">Search patches</string>
     <string name="morphe_expert_mode_proceed">Proceed to Patching</string>
     <string name="morphe_expert_mode_disable_all">Disable all</string>
     <string name="morphe_expert_mode_enable_all">Enable all</string>
@@ -105,7 +105,6 @@
     <!-- Patch Options -->
     <string name="morphe_custom_color">Custom color</string>
     <string name="morphe_hex_color">Hex color</string>
-    <string name="morphe_patch_option_enter_path">Enter path</string>
     <string name="morphe_patch_option_instructions">Instructions</string>
     <string name="morphe_patch_option_enter_value">Enter value</string>
     <string name="morphe_patch_option_enter_number">Enter number</string>
@@ -238,8 +237,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
     <string name="morphe_patch_options_light_theme_color">Light theme background color</string>
     <string name="morphe_patch_options_light_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
-    <string name="morphe_patch_options_icon_instructions_title">Icon format instructions</string>
-    <string name="morphe_patch_options_header_instructions_title">Header format instructions</string>
     <string name="morphe_patch_options_loading">Loading patch options…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>

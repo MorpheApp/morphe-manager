@@ -9,6 +9,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.ExpandMore
@@ -28,6 +30,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+// Constants
+private object MorpheDefaults {
+    val CardElevation = 2.dp
+    val CardCornerRadius = 16.dp
+    val SettingsCornerRadius = 14.dp
+    val SectionCornerRadius = 18.dp
+    val IconSize = 24.dp
+    val AnimationDuration = 300
+    val ContentPadding = 16.dp
+    val ItemSpacing = 12.dp
+}
+
+// === BASE COMPONENTS ===
+
 /**
  * Elevated card with proper Material 3 theming
  * Base card for all other card types
@@ -37,8 +53,8 @@ fun MorpheCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     enabled: Boolean = true,
-    elevation: Dp = 2.dp,
-    cornerRadius: Dp = 16.dp,
+    elevation: Dp = MorpheDefaults.CardElevation,
+    cornerRadius: Dp = MorpheDefaults.CardCornerRadius,
     borderWidth: Dp = 0.dp,
     content: @Composable () -> Unit
 ) {
@@ -63,13 +79,16 @@ fun MorpheCard(
     }
 }
 
+/**
+ * Horizontal divider for settings sections
+ */
 @Composable
 fun MorpheSettingsDivider(
     modifier: Modifier = Modifier,
     fullWidth: Boolean = false
 ) {
     HorizontalDivider(
-        modifier = if (fullWidth) modifier else modifier.padding(horizontal = 16.dp),
+        modifier = if (fullWidth) modifier else modifier.padding(horizontal = MorpheDefaults.ContentPadding),
         color = lerp(
             MaterialTheme.colorScheme.outlineVariant,
             MaterialTheme.colorScheme.surfaceTint,
@@ -78,28 +97,56 @@ fun MorpheSettingsDivider(
     )
 }
 
+// === ICONS ===
+
 /**
- * Settings item card
+ * Reusable icon component with standard styling
  */
 @Composable
-fun SettingsItemCard(
-    onClick: () -> Unit,
+fun MorpheIcon(
+    icon: ImageVector,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    borderWidth: Dp = 0.dp,
-    content: @Composable () -> Unit
+    size: Dp = MorpheDefaults.IconSize,
+    tint: Color = MaterialTheme.colorScheme.primary,
+    contentDescription: String? = null
 ) {
-    MorpheCard(
-        onClick = onClick,
-        enabled = enabled,
-        elevation = 1.dp,
-        cornerRadius = 14.dp,
-        borderWidth = borderWidth,
+    Icon(
+        imageVector = icon,
+        contentDescription = contentDescription,
+        tint = tint,
+        modifier = modifier.size(size)
+    )
+}
+
+/**
+ * Circular icon with gradient background for section titles
+ */
+@Composable
+fun GradientCircleIcon(
+    icon: ImageVector,
+    modifier: Modifier = Modifier,
+    size: Dp = 40.dp,
+    iconSize: Dp = MorpheDefaults.IconSize,
+    contentDescription: String? = null,
+    gradientColors: List<Color> = listOf(Color(0xFF1E5AA8), Color(0xFF00AFAE))
+) {
+    Box(
         modifier = modifier
+            .size(size)
+            .clip(CircleShape)
+            .background(brush = Brush.linearGradient(colors = gradientColors)),
+        contentAlignment = Alignment.Center
     ) {
-        content()
+        MorpheIcon(
+            icon = icon,
+            contentDescription = contentDescription,
+            tint = Color.White,
+            size = iconSize
+        )
     }
 }
+
+// === TEXT AND ROWS ===
 
 /**
  * Row with optional icon and text content
@@ -114,7 +161,7 @@ fun IconTextRow(
     titleWeight: FontWeight = FontWeight.Medium,
     descriptionStyle: TextStyle = MaterialTheme.typography.bodySmall,
     trailingContent: @Composable (() -> Unit)? = null,
-    spacing: Dp = 12.dp
+    spacing: Dp = MorpheDefaults.ItemSpacing
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -144,237 +191,8 @@ fun IconTextRow(
 }
 
 /**
- * Simple settings item with icon, title, and action
+ * Info row with label and value
  */
-@Composable
-fun SettingsItem(
-    icon: ImageVector,
-    title: String,
-    description: String? = null,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false
-) {
-    SettingsItemCard(
-        onClick = onClick,
-        borderWidth = if (showBorder) 1.dp else 0.dp,
-        modifier = modifier
-    ) {
-        IconTextRow(
-            modifier = Modifier.padding(16.dp),
-            leadingContent = {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            title = title,
-            description = description,
-            trailingContent = {
-                Icon(
-                    imageVector = Icons.Outlined.ChevronRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        )
-    }
-}
-
-@Composable
-fun RichSettingsItem(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    showBorder: Boolean = false,
-    leadingContent: @Composable () -> Unit,
-    title: String,
-    subtitle: String? = null,
-    trailingContent: @Composable (() -> Unit)? = {
-        Icon(
-            imageVector = Icons.Outlined.ChevronRight,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
-) {
-    SettingsItemCard(
-        onClick = onClick,
-        borderWidth = if (showBorder) 1.dp else 0.dp,
-        modifier = modifier
-    ) {
-        IconTextRow(
-            modifier = Modifier.padding(16.dp),
-            leadingContent = leadingContent,
-            title = title,
-            description = subtitle,
-            trailingContent = trailingContent
-        )
-    }
-}
-
-/**
- * Section container card
- */
-@Composable
-fun SectionCard(
-    modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null,
-    content: @Composable () -> Unit
-) {
-    MorpheCard(
-        onClick = onClick,
-        elevation = 2.dp,
-        cornerRadius = 18.dp,
-        borderWidth = 1.dp,
-        modifier = modifier
-    ) {
-        content()
-    }
-}
-
-/**
- * Section title with gradient icon
- */
-@Composable
-fun SectionTitle(
-    text: String,
-    icon: ImageVector? = null
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        if (icon != null) {
-            GradientCircleIcon(
-                icon = icon,
-                size = 36.dp,
-                iconSize = 20.dp
-            )
-        }
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-    }
-}
-
-/**
- * Circular icon with gradient background for section titles
- */
-@Composable
-fun GradientCircleIcon(
-    icon: ImageVector,
-    modifier: Modifier = Modifier,
-    size: Dp = 40.dp,
-    iconSize: Dp = 24.dp,
-    contentDescription: String? = null
-) {
-    val gradientColors = listOf(
-        Color(0xFF1E5AA8), // #1E5AA8
-        Color(0xFF00AFAE)  // #00AFAE
-    )
-
-    Box(
-        modifier = modifier
-            .size(size)
-            .clip(CircleShape)
-            .background(
-                brush = Brush.linearGradient(colors = gradientColors)
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = contentDescription,
-            tint = Color.White,
-            modifier = Modifier.size(iconSize)
-        )
-    }
-}
-
-enum class InfoBadgeStyle {
-    Default,
-    Primary,
-    Success,
-    Warning,
-    Error
-}
-
-@Composable
-fun InfoBadge(
-    text: String,
-    style: InfoBadgeStyle = InfoBadgeStyle.Default,
-    icon: ImageVector? = null,
-    isCompact: Boolean = false,
-    modifier: Modifier = Modifier
-) {
-    val (containerColor, contentColor) = when (style) {
-        InfoBadgeStyle.Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
-        InfoBadgeStyle.Success -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
-        InfoBadgeStyle.Warning -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
-        InfoBadgeStyle.Error -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
-        InfoBadgeStyle.Default -> MaterialTheme.colorScheme.surfaceVariant to MaterialTheme.colorScheme.onSurfaceVariant
-    }
-
-    val horizontalPadding = if (isCompact) 8.dp else 12.dp
-    val verticalPadding = if (isCompact) 2.dp else 8.dp
-    val iconSize = if (isCompact) 14.dp else 20.dp
-    val shapeRadius = if (isCompact) 6.dp else 12.dp
-    val surfaceModifier = if (isCompact) modifier.wrapContentWidth() else modifier.fillMaxWidth()
-
-    Surface(
-        modifier = surfaceModifier,
-        shape = RoundedCornerShape(shapeRadius),
-        color = containerColor
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = horizontalPadding, vertical = verticalPadding),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (icon != null) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    tint = contentColor,
-                    modifier = Modifier.size(iconSize)
-                )
-            }
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodySmall,
-                color = contentColor
-            )
-        }
-    }
-}
-
-@Composable
-fun ActionPillButton(
-    onClick: () -> Unit,
-    icon: ImageVector,
-    contentDescription: String,
-    enabled: Boolean = true,
-    colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
-) {
-    FilledTonalIconButton(
-        onClick = onClick,
-        enabled = enabled,
-        colors = colors,
-        shape = RoundedCornerShape(50),
-        modifier = Modifier
-            .height(44.dp)
-            .widthIn(min = 96.dp)
-    ) {
-        Icon(icon, contentDescription)
-    }
-}
-
 @Composable
 fun InfoRow(
     label: String,
@@ -397,6 +215,164 @@ fun InfoRow(
     }
 }
 
+// === SETTINGS ===
+
+/**
+ * Settings item card wrapper
+ * Private component used by settings item variants
+ */
+@Composable
+fun SettingsItemCard(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    borderWidth: Dp = 0.dp,
+    content: @Composable () -> Unit
+) {
+    MorpheCard(
+        onClick = onClick,
+        enabled = enabled,
+        elevation = 1.dp,
+        cornerRadius = MorpheDefaults.SettingsCornerRadius,
+        borderWidth = borderWidth,
+        modifier = modifier
+    ) {
+        content()
+    }
+}
+
+/**
+ * Base settings item component
+ * Shared implementation for SettingsItem and RichSettingsItem
+ */
+@Composable
+fun BaseSettingsItem(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false,
+    leadingContent: @Composable () -> Unit,
+    title: String,
+    description: String? = null,
+    trailingContent: @Composable (() -> Unit)? = {
+        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+    }
+) {
+    SettingsItemCard(
+        onClick = onClick,
+        borderWidth = if (showBorder) 1.dp else 0.dp,
+        modifier = modifier
+    ) {
+        IconTextRow(
+            modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+            leadingContent = leadingContent,
+            title = title,
+            description = description,
+            trailingContent = trailingContent
+        )
+    }
+}
+
+/**
+ * Simple settings item with icon, title, and action
+ */
+@Composable
+fun SettingsItem(
+    icon: ImageVector,
+    title: String,
+    description: String? = null,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false
+) {
+    BaseSettingsItem(
+        onClick = onClick,
+        modifier = modifier,
+        showBorder = showBorder,
+        leadingContent = { MorpheIcon(icon = icon) },
+        title = title,
+        description = description
+    )
+}
+
+/**
+ * Rich settings item with custom leading content
+ */
+@Composable
+fun RichSettingsItem(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    showBorder: Boolean = false,
+    leadingContent: @Composable (() -> Unit) = {},
+    title: String,
+    subtitle: String? = null,
+    trailingContent: @Composable (() -> Unit)? = {
+        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+    }
+) {
+    BaseSettingsItem(
+        onClick = onClick,
+        modifier = modifier,
+        showBorder = showBorder,
+        leadingContent = leadingContent,
+        title = title,
+        description = subtitle,
+        trailingContent = trailingContent
+    )
+}
+
+// === SECTIONS ===
+
+/**
+ * Section container card
+ */
+@Composable
+fun SectionCard(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    content: @Composable () -> Unit
+) {
+    MorpheCard(
+        onClick = onClick,
+        elevation = MorpheDefaults.CardElevation,
+        cornerRadius = MorpheDefaults.SectionCornerRadius,
+        borderWidth = 1.dp,
+        modifier = modifier
+    ) {
+        content()
+    }
+}
+
+/**
+ * Section title with gradient icon
+ */
+@Composable
+fun SectionTitle(
+    text: String,
+    icon: ImageVector? = null
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(MorpheDefaults.ItemSpacing),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if (icon != null) {
+            GradientCircleIcon(
+                icon = icon,
+                size = 36.dp,
+                iconSize = 20.dp
+            )
+        }
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
+}
+
+/**
+ * Card header with icon and text
+ */
 @Composable
 fun CardHeader(
     icon: ImageVector,
@@ -408,18 +384,11 @@ fun CardHeader(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-            shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
+            shape = RoundedCornerShape(topStart = MorpheDefaults.SectionCornerRadius, topEnd = MorpheDefaults.SectionCornerRadius)
         ) {
             IconTextRow(
-                modifier = Modifier.padding(16.dp),
-                leadingContent = {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                },
+                modifier = Modifier.padding(MorpheDefaults.ContentPadding),
+                leadingContent = { MorpheIcon(icon = icon) },
                 title = title,
                 description = description
             )
@@ -444,7 +413,7 @@ fun ExpandableSection(
 ) {
     val rotationAngle by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(300),
+        animationSpec = tween(MorpheDefaults.AnimationDuration),
         label = "expand_rotation"
     )
 
@@ -455,22 +424,14 @@ fun ExpandableSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onExpandChange(!expanded) }
-                    .padding(16.dp),
-                leadingContent = {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-                },
+                    .padding(MorpheDefaults.ContentPadding),
+                leadingContent = { MorpheIcon(icon = icon) },
                 title = title,
                 description = description,
                 trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ExpandMore,
+                    MorpheIcon(
+                        icon = Icons.Outlined.ExpandMore,
                         contentDescription = if (expanded) "Collapse" else "Expand",
-                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.rotate(rotationAngle)
                     )
                 }
@@ -479,18 +440,162 @@ fun ExpandableSection(
             // Content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(tween(300)) + fadeIn(tween(300)),
-                exit = shrinkVertically(tween(300)) + fadeOut(tween(300))
+                enter = expandVertically(tween(MorpheDefaults.AnimationDuration)) +
+                        fadeIn(tween(MorpheDefaults.AnimationDuration)),
+                exit = shrinkVertically(tween(MorpheDefaults.AnimationDuration)) +
+                        fadeOut(tween(MorpheDefaults.AnimationDuration))
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(horizontal = MorpheDefaults.ContentPadding, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(MorpheDefaults.ContentPadding)
                 ) {
                     content()
                 }
             }
         }
     }
+}
+
+// === BADGES ===
+
+/**
+ * Badge style variants
+ */
+enum class InfoBadgeStyle {
+    Default,
+    Primary,
+    Success,
+    Warning,
+    Error;
+
+    /**
+     * Get container and content colors for this badge style
+     */
+    @Composable
+    fun colors(): Pair<Color, Color> = when (this) {
+        Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
+        Success -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
+        Warning -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
+        Error -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
+        Default -> MaterialTheme.colorScheme.surfaceVariant to MaterialTheme.colorScheme.onSurfaceVariant
+    }
+}
+
+/**
+ * Info badge with optional icon
+ */
+@Composable
+fun InfoBadge(
+    text: String,
+    style: InfoBadgeStyle = InfoBadgeStyle.Default,
+    icon: ImageVector? = null,
+    isCompact: Boolean = false,
+    modifier: Modifier = Modifier
+) {
+    val (containerColor, contentColor) = style.colors()
+    val horizontalPadding = if (isCompact) 8.dp else 12.dp
+    val verticalPadding = if (isCompact) 2.dp else 8.dp
+    val iconSize = if (isCompact) 14.dp else 20.dp
+    val shapeRadius = if (isCompact) 6.dp else 12.dp
+    val surfaceModifier = if (isCompact) modifier.wrapContentWidth() else modifier.fillMaxWidth()
+
+    Surface(
+        modifier = surfaceModifier,
+        shape = RoundedCornerShape(shapeRadius),
+        color = containerColor
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            icon?.let {
+                MorpheIcon(
+                    icon = it,
+                    tint = contentColor,
+                    size = iconSize
+                )
+            }
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodySmall,
+                color = contentColor
+            )
+        }
+    }
+}
+
+// === OTHER COMPONENTS ===
+
+/**
+ * Pill-shaped action button
+ */
+@Composable
+fun ActionPillButton(
+    onClick: () -> Unit,
+    icon: ImageVector,
+    contentDescription: String,
+    enabled: Boolean = true,
+    colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
+) {
+    FilledTonalIconButton(
+        onClick = onClick,
+        enabled = enabled,
+        colors = colors,
+        shape = RoundedCornerShape(50),
+        modifier = Modifier
+            .height(44.dp)
+            .widthIn(min = 96.dp)
+    ) {
+        Icon(icon, contentDescription)
+    }
+}
+
+/**
+ * Styled OutlinedTextField for dialogs with proper theming
+ */
+@Composable
+fun MorpheDialogTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    singleLine: Boolean = true,
+    enabled: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default
+) {
+    val textColor = LocalDialogTextColor.current
+
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = label,
+        placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        isError = isError,
+        singleLine = singleLine,
+        enabled = enabled,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = textColor,
+            unfocusedTextColor = textColor,
+            disabledTextColor = textColor.copy(alpha = 0.6f),
+            focusedBorderColor = textColor.copy(alpha = 0.5f),
+            unfocusedBorderColor = textColor.copy(alpha = 0.2f),
+            disabledBorderColor = textColor.copy(alpha = 0.1f),
+            cursorColor = textColor,
+            errorBorderColor = MaterialTheme.colorScheme.error
+        )
+    )
 }
