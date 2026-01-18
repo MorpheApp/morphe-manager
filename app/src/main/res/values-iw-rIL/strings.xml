@@ -123,11 +123,23 @@
     <string name="morphe_settings_return_to_expert_description">זה הולך לה thắng ב- новый >  #.fdsvc</string>
     <string name="morphe_share_website">שתף אתר</string>
     <string name="morphe_share_website_description">שתף את אתר האינטרנט הרשמי של Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">אייקון האפליקציה</string>
+    <string name="morphe_app_icon_selector_description">שינוי סמל האפליקציה</string>
+    <string name="morphe_app_icon_default">ברירת מחדל</string>
+    <string name="morphe_app_icon_light_2">שמיים</string>
+    <string name="morphe_app_icon_light_3">שקיעת שמש</string>
+    <string name="morphe_app_icon_dark_1">ים</string>
+    <string name="morphe_app_icon_dark_2">ריק</string>
+    <string name="morphe_app_icon_dark_3">אינדיגו</string>
+    <string name="morphe_app_icon_change_dialog_title">שנה סמל האפליקציה?</string>
+    <string name="morphe_app_icon_change_dialog_message">שנה ל\'%1$s\' ולהיחלץ?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">שנה סמל</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">אפשרויות茍:
 Настройки в 外れҰҡ or hate banех...</string>
     <string name="morphe_appearance_options_description">תכשולים בהגשות, צבעים ואפורים</string>
-    <string name="morphe_appearance_app_language">שפת היישום</string>
+    <string name="morphe_appearance_current_language">שפת Morphe</string>
     <string name="morphe_appearance_search">חיפוש</string>
     <string name="morphe_appearance_no_results">לא נמצאו תוצאות</string>
     <string name="morphe_appearance_translations_info_title">התרגומים של חלק מהשפות עשויים להיות חסרים או לא מלאים</string>
@@ -140,7 +152,7 @@
     <string name="morphe_background_type_shapes">צורות</string>
     <string name="morphe_background_type_snow">גשם</string>
     <string name="morphe_background_type_none">ללא</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">הוסף גרסאות心情versi贸 preliminari</string>
     <string name="morphe_update_use_prereleases_description">קבל גישה מוקדמת לבחירות ועדכונים</string>
     <!-- Patch Options Section -->
@@ -626,13 +638,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">כלול בהגדרות ייצוא</string>
     <string name="include_github_pat_in_exports_supporting">מוסיף PAT זה להגדרות המנהל המיוצאות</string>
     <string name="include_github_pat_in_exports_warning">אל תשתף את ה-PAT שלך. אם אתה כולל אותו בייצוא הגדרות, שמור על קובץ זה פרטי מכיוון שהוא מכיל את האסימון.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">שפת היישום</string>
+    <string name="language_dialog_title">בחר שפת אפליקציה</string>
+    <string name="language_option_system">השתמש בשפת המכשיר</string>
     <string name="device_memory_limit_format">%1$dMB (רגיל) - %2$dMB (גדול)</string>
     <string name="patches_force_download">אכיפת הורדה של כל אצוות התיקונים</string>
     <string name="patches_reset">איפוס חבילות טלאים</string>

@@ -1,3 +1,30 @@
+# app [1.3.0](https://github.com/MorpheApp/morphe-manager/compare/v1.2.1...v1.3.0) (2026-01-15)
+
+
+### Bug Fixes
+
+* Set initial page to Advanced tab ([a94e971](https://github.com/MorpheApp/morphe-manager/commit/a94e971464b4aa055dacf41f86ff4e2fb33d746b))
+
+
+### Features
+
+* Add additional app icons ([#95](https://github.com/MorpheApp/morphe-manager/issues/95)) ([1e3c058](https://github.com/MorpheApp/morphe-manager/commit/1e3c0581431af08c9de6075855c5554c6b716649))
+* Refactor to tab settings ([#101](https://github.com/MorpheApp/morphe-manager/issues/101)) ([d76ee03](https://github.com/MorpheApp/morphe-manager/commit/d76ee03fcdb3beccf95ebc91f257ca6feb2a162c))
+
+# app [1.3.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2026-01-15)
+
+
+### Bug Fixes
+
+* Set initial page to Advanced tab ([a94e971](https://github.com/MorpheApp/morphe-manager/commit/a94e971464b4aa055dacf41f86ff4e2fb33d746b))
+
+# app [1.3.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-01-12)
+
+
+### Features
+
+* Refactor to tab settings ([#101](https://github.com/MorpheApp/morphe-manager/issues/101)) ([d76ee03](https://github.com/MorpheApp/morphe-manager/commit/d76ee03fcdb3beccf95ebc91f257ca6feb2a162c))
+
 # app [1.3.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.2.1...v1.3.0-dev.1) (2026-01-12)
 
 

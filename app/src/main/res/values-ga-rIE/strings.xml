@@ -123,14 +123,26 @@
     <string name="morphe_settings_return_to_expert_description">Athraigh go dtí an mód saineolaithe lánghnéitheach</string>
     <string name="morphe_share_website">Comhroinn suíomh Gréasáin</string>
     <string name="morphe_share_website_description">Comhroinn suíomh Gréasáin oifigiúil Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Deilbhín Aip</string>
+    <string name="morphe_app_icon_selector_description">Athrú an deilbhín aip an chláir</string>
+    <string name="morphe_app_icon_default">Réamhshocrú</string>
+    <string name="morphe_app_icon_light_2">Neamh</string>
+    <string name="morphe_app_icon_light_3">Taiscead</string>
+    <string name="morphe_app_icon_dark_1">Mara</string>
+    <string name="morphe_app_icon_dark_2">Fáinne</string>
+    <string name="morphe_app_icon_dark_3">Indi</string>
+    <string name="morphe_app_icon_change_dialog_title">Athraigh Ikon App?</string>
+    <string name="morphe_app_icon_change_dialog_message">Athraigh go \'%1$s\' agus tairgfí?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Athraigh Ikon</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Roghanna cuma</string>
     <string name="morphe_appearance_options_description">Saincheap téamaí, dathanna agus cúlraí</string>
-    <string name="morphe_appearance_app_language">Teanga an app</string>
+    <string name="morphe_appearance_current_language">Teanga réamhach</string>
     <string name="morphe_appearance_search">Cuardaigh</string>
     <string name="morphe_appearance_no_results">Ní bhfuarthas aon toradh</string>
-    <string name="morphe_appearance_translations_info_title">Tá níos lú ná teanga ag teagasc</string>
-    <string name="morphe_appearance_translations_info_text">Chug cabhair le teanga nua a aistriúchán nó na teangacha atá ann a threoracha, cuir isteach i %s</string>
+    <string name="morphe_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>
+    <string name="morphe_appearance_translations_info_text">Chun teangacha nua a aistriú nó na haistriúcháin atá ann cheana a fheabhsú, tabhair cuairt ar %s</string>
     <string name="morphe_background_type">Beochan cúlra</string>
     <string name="morphe_background_type_circles">Ciorcail</string>
     <string name="morphe_background_type_rings">Fáinní</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Cruthanna</string>
     <string name="morphe_background_type_snow">Sneachta</string>
     <string name="morphe_background_type_none">Dada</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Úsáid leaganacha réamh-eisiúna</string>
     <string name="morphe_update_use_prereleases_description">Faigh rochtain luath ar phaistí nua agus ar ghnéithe bainisteoirí</string>
     <!-- Patch Options Section -->
@@ -297,14 +309,14 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="bundle_version_dialog_selected_indicator">Roghnaithe</string>
     <string name="bundle_version_dialog_other_title">Roghnaigh leagan eile a dtacaítear leis:</string>
     <string name="bundle_version_dialog_locked_title">Tá cosaintí leagan cumasaithe</string>
-    <string name="bundle_version_dialog_locked_hint">Téigh go Socruithe &gt; Casta &gt; Cosaintí agus socraigh \"Ceanglais leagan aip molta\" (lasc as) agus \"Díchumasaigh seiceáil comhoiriúnachta leagan\" (lasc air) araon chun leaganacha sonracha cuimsithe a roghnú.</string>
-    <string name="patch_versions_dialog_title">Roinneacht bunaithe do %1$s</string>
+    <string name="bundle_version_dialog_locked_hint">Téigh go Socruithe &gt; Ardleibhéil &gt; Cosaintí agus socraigh \"Éiligh leagan molta den aip\" (múch) agus \"Díchumasaigh seiceáil comhoiriúnachta leagan\" (cuir ar siúl) chun leaganacha sonracha don phacáiste a roghnú.</string>
+    <string name="patch_versions_dialog_title">Leaganacha tacaithe do %1$s</string>
     <string name="patch_selector_item">Roghnaigh paistí</string>
     <string name="patch_selector_item_description">%d paistí roghnaithe</string>
     <string name="no_patches_selected">Ní roghnaíodh paistí</string>
     <string name="network_unavailable_warning">Níl do ghléas ceangailte leis an idirlíon. Teipfidh ar an íoslódáil níos déanaí.</string>
     <string name="apk_source_selector_item">Roghnaigh foinse APK</string>
-    <string name="apk_source_auto">Ag úsáid gach íoslódálaí APK</string>
+    <string name="apk_source_auto">Ag baint úsáide as gach íoslódálaí APK</string>
     <string name="apk_source_downloader">Ag úsáid %s</string>
     <string name="apk_source_installed">Ag úsáid APK suiteáilte</string>
     <string name="apk_source_local">Ag úsáid comhad APK áitiúil</string>
@@ -314,47 +326,47 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="auto_updates_dialog_patches">Paistí Morphe</string>
     <string name="auto_updates_dialog_note">Is féidir na socruithe seo a athrú níos déanaí.</string>
     <string name="appearance">Dealramh</string>
-    <string name="appearance_description">Teama, dath níallaithe</string>
+    <string name="appearance_description">Téama, dath dinimiciúil</string>
     <string name="updates">Nuashonruithe</string>
     <string name="updates_description">Seiceáil le haghaidh nuashonruithe agus féach ar an logáil athraithe</string>
     <string name="downloads">Íoslódálacha</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Iompórtáil &amp; Easpórtáil</string>
-    <string name="import_export_description">Eochairstór, roghanna paiste agus roghnú</string>
-    <string name="changelog">Féach ar logálacha athraithe</string>
-    <string name="changelog_loading">Agus an logála na hathruithe á luchtú</string>
+    <string name="import_export">Iompórtáil &amp; easpórtáil</string>
+    <string name="import_export_description">Stór eochrach, roghanna paiste agus roghnú</string>
+    <string name="changelog">Féach ar logaí athruithe</string>
+    <string name="changelog_loading">Ag lódáil loga athruithe</string>
     <string name="changelog_download_fail">Theip ar an logála hathruithe a íoslódáil: %s</string>
     <string name="changelog_description">Seiceáil na hathruithe is déanaí sa nuashonrú seo</string>
-    <string name="advanced">Ardráta</string>
-    <string name="advanced_description">URL API, teorainn chuimhne, díchreimeadh</string>
+    <string name="advanced">Ardleibhéil</string>
+    <string name="advanced_description">URL API, teorainn chuimhne, dífhabhtú</string>
     <string name="about">Maidir</string>
     <!-- Morphe -->
-    <string name="accent_color_presets">Color accent</string>
+    <string name="accent_color_presets">Béim</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="theme_preview_title">Priontáil Téama</string>
+    <string name="theme_preview_title">Réamhamharc cuma</string>
     <!-- Morphe -->
     <string name="theme_presets">Réamhshocruithe téama</string>
     <!-- Morphe -->
     <string name="theme_preset_default">Lean an córas</string>
     <string name="theme_preset_amoled">Dubh íon</string>
-    <string name="theme_preset_dynamic">Ábhar Tú</string>
+    <string name="theme_preset_dynamic">Material You</string>
     <!-- Morphe -->
     <string name="color_channel_red">Dearg</string>
     <string name="color_channel_green">Glas</string>
     <string name="color_channel_blue">Gorm</string>
     <string name="theme">Téama</string>
-    <string name="safeguards">Gardaí</string>
-    <string name="patch_compat_check">Díchumasaigh seiceáil comhoiriúnachta leagain</string>
-    <string name="patch_compat_check_description">Ná srianta paistí le leaganacha comhoiriúnacha aipe</string>
+    <string name="safeguards">Cosaintí</string>
+    <string name="patch_compat_check">Díchumasaigh seiceáil comhoiriúnachta leaganacha</string>
+    <string name="patch_compat_check_description">Ná cuir srian le paistí do leaganacha comhoiriúnacha d\'aipeanna</string>
     <string name="patch_compat_check_confirmation">"Is féidir le paistí neamh-chomhoiriúnacha a roghnú a bheith ina gcúis le mífheidhm an aip.
 
 Ar mhaith leat leanúint ar aon nós?"</string>
-    <string name="suggested_version_safeguard">Ceanglais leagan molta aip</string>
+    <string name="suggested_version_safeguard">Éiligh leagan molta den aip</string>
     <string name="suggested_version_safeguard_description">Cuir i bhfeidhm roghnú an leagain molta aip</string>
     <string name="suggested_version_safeguard_confirmation">"D'fhéadfadh saincheisteanna gan choinne a bheith ann má roghnaíonn tú aip nach é an leagan a mholtar.
 
@@ -623,13 +635,9 @@ Síniú (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Áireamh i socruithe easpórtála</string>
     <string name="include_github_pat_in_exports_supporting">Cuireann sé an PAT seo leis na socruithe bainisteora atá easpórtáilte</string>
     <string name="include_github_pat_in_exports_warning">Ná roinn do PAT. Má chuimsíonn tú é in easpórtáil socruithe, coinnigh an comhad sin faoi rún mar go bhfuil an comhartha ann.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Teanga aip</string>
+    <string name="language_dialog_title">Roghnaigh teanga an aip</string>
+    <string name="language_option_system">Úsáid teanga an ghléis</string>
     <string name="device_memory_limit_format">%1$dMB (Gnáth) - %2$dMB (Mór)</string>
     <string name="patches_force_download">Íoslódáil gach paiste go forneartach</string>
     <string name="patches_reset">Athshocraigh paiste-bheartáin</string>

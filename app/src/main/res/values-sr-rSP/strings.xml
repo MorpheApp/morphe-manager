@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Промени на потпуно опремљен режим експерта</string>
     <string name="morphe_share_website">Дели веб-сајт</string>
     <string name="morphe_share_website_description">Делите званични веб-сајт Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Икона апликације</string>
+    <string name="morphe_app_icon_selector_description">Измени икону покретача апликације</string>
+    <string name="morphe_app_icon_default">Подразумеван</string>
+    <string name="morphe_app_icon_light_2">Небо</string>
+    <string name="morphe_app_icon_light_3">Sunset</string>
+    <string name="morphe_app_icon_dark_1">Okean</string>
+    <string name="morphe_app_icon_dark_2">Praznina</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Изменити икону апликације?</string>
+    <string name="morphe_app_icon_change_dialog_message">Промени у \'%1$s\' и почни поново?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Изменити икону</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Подешавања изгледа</string>
     <string name="morphe_appearance_options_description">Прилагодите теме, боје и позадине</string>
-    <string name="morphe_appearance_app_language">Језик апликације</string>
+    <string name="morphe_appearance_current_language">Тренутни језик</string>
     <string name="morphe_appearance_search">Претрага</string>
     <string name="morphe_appearance_no_results">Нису пронађени резултати</string>
     <string name="morphe_appearance_translations_info_title">Може да не понделе или да нису комплетне преводе за неке језике</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Облици</string>
     <string name="morphe_background_type_snow">Sneg</string>
     <string name="morphe_background_type_none">Ништа</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Koristi preizdvojene verzije</string>
     <string name="morphe_update_use_prereleases_description">Dobij prethodni pristup novim patchovima i funkcionalnostima menadžera</string>
     <!-- Patch Options Section -->
@@ -623,13 +635,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Укључи у извоз подешавања</string>
     <string name="include_github_pat_in_exports_supporting">Додаје овај ПАТ у извезене поставке менаџера</string>
     <string name="include_github_pat_in_exports_warning">Немојте делити свој ПАТ. Ако га укључите у извоз подешавања, чувајте ту датотеку приватном јер садржи токен.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Језик апликације</string>
+    <string name="language_dialog_title">Изабери језик апликације</string>
+    <string name="language_option_system">Користи језик уређаја</string>
     <string name="device_memory_limit_format">%1$dMB (Нормално) - %2$dMB (Велико)</string>
     <string name="patches_force_download">Принудно преузимање свих пакета закрпа</string>
     <string name="patches_reset">Ресетовање пакета закрпа</string>

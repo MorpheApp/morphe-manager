@@ -123,10 +123,22 @@
     <string name="morphe_settings_return_to_expert_description">Перемкнути до повнофункціонального експертного режиму</string>
     <string name="morphe_share_website">Поділитися вебсайтом</string>
     <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Іконка додатку</string>
+    <string name="morphe_app_icon_selector_description">Змінити іконку запуску додатку</string>
+    <string name="morphe_app_icon_default">Стандартний</string>
+    <string name="morphe_app_icon_light_2">Небо</string>
+    <string name="morphe_app_icon_light_3">Захід сонця</string>
+    <string name="morphe_app_icon_dark_1">Океан</string>
+    <string name="morphe_app_icon_dark_2">Пустота</string>
+    <string name="morphe_app_icon_dark_3">Індиго</string>
+    <string name="morphe_app_icon_change_dialog_title">Змінити іконку додатку?</string>
+    <string name="morphe_app_icon_change_dialog_message">Змінити на \'%1$s\' і перезапустити?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Змінити іконку</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Налаштування вигляду</string>
     <string name="morphe_appearance_options_description">Налаштуйте теми, кольори та фонові колірні схеми</string>
-    <string name="morphe_appearance_app_language">Мова застосунку</string>
+    <string name="morphe_appearance_current_language">Поточна мова</string>
     <string name="morphe_appearance_search">Пошук на YouTube</string>
     <string name="morphe_appearance_no_results">За запитом \'\' нічого не знайдено</string>
     <string name="morphe_appearance_translations_info_title">Переклади для деяких мов можуть бути відсутніми або неповними</string>
@@ -139,7 +151,7 @@
     <string name="morphe_background_type_shapes">Фігури</string>
     <string name="morphe_background_type_snow">Сніг</string>
     <string name="morphe_background_type_none">Немає</string>
-    <!-- Update Section -->
+    <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">Використовувати тестові версії</string>
     <string name="morphe_update_use_prereleases_description">Отримуйте ранній доступ до нових патчів та функцій менеджера</string>
     <!-- Patch Options Section -->
@@ -623,13 +635,9 @@ morphe_header_custom_dark.png
     <string name="include_github_pat_in_exports_label">Включити в експорт налаштувань</string>
     <string name="include_github_pat_in_exports_supporting">Додає цей PAT до експортованих налаштувань менеджера</string>
     <string name="include_github_pat_in_exports_warning">Не поширюйте ваш PAT. Якщо ви включите його в експорт налаштувань, тримайте цей файл приватним, оскільки він містить токен.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Мова додатку</string>
+    <string name="language_dialog_title">Вибрати мову додатку</string>
+    <string name="language_option_system">Використовувати мову пристрою</string>
     <string name="device_memory_limit_format">%1$dMB (Нормальний) - %2$dMB (Великий)</string>
     <string name="patches_force_download">Примусово завантажити всі пакети патчів</string>
     <string name="patches_reset">Скинути пакети патчів</string>
