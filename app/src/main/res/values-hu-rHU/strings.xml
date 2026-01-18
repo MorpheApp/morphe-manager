@@ -479,95 +479,95 @@ Engedélyezi így is?"</string>
     <string name="patch_selection_action_select_all">összes kiválasztása</string>
     <string name="patch_selection_action_select_bundle">„%1$s” csomag kiválasztása</string>
     <string name="patch_selection_action_deselect_bundle">„%1$s” csomag kijelölésének visszavonása</string>
-    <string name="patch_selection_action_bundle_defaults">„%1$s” alapértelmezett kötegei</string>
+    <string name="patch_selection_action_bundle_defaults">„%1$s” alapértelmezett csomagjai</string>
     <string name="disable_patch_selection_confirmations">Művelet-visszaigazolások letiltása</string>
-    <string name="disable_patch_selection_confirmations_description">Mellőzze a visszaigazolási párbeszédablakokat a javítás kiválasztási műveleteihez</string>
-    <string name="disable_patch_selection_confirmations_warning">A visszaigazolások letiltása nem szándékolt kötegelt módosításokat okozhat.</string>
-    <string name="patch_selection_collapse_on_toggle">Összecsukási műveletek a j Javítások váltása után</string>
-    <string name="patch_selection_collapse_on_toggle_description">A javítás kiválasztási művelet gombjainak automatikus elrejtése, amikor egy javítást választ ki vagy töröl</string>
-    <string name="patch_selection_action_order_title">Javítás kiválasztási művelet gombok sorrendje</string>
-    <string name="patch_selection_action_order_description">Válassza ki a patch kiválasztási műveleti gombjainak elrendezési sorrendjét</string>
-    <string name="patch_selection_action_visibility_title">Művelet-választási gombok elrejtése</string>
-    <string name="patch_selection_action_visibility_description">Válaszd ki, hogy mely patch-selejválasztási műveleti gombok jelenjenek meg</string>
-    <string name="patch_selection_action_visibility_reset"> Minden műveleti gomb megjelenítése</string>
+    <string name="disable_patch_selection_confirmations_description">Mellőzze a visszaigazolási párbeszédablakokat a patchkiválasztás műveleteihez</string>
+    <string name="disable_patch_selection_confirmations_warning">A visszaigazolások letiltása nem kívánt, tömeges változásokat okozhat.</string>
+    <string name="patch_selection_collapse_on_toggle">Műveletek összecsukása a patchek ki- vagy bekapcsolása után</string>
+    <string name="patch_selection_collapse_on_toggle_description">A patchkiválasztási műveletgombok automatikus elrejtése, amikor egy patchet kiválaszt vagy töröl</string>
+    <string name="patch_selection_action_order_title">A patchkiválasztás műveletgombjainak sorrendje</string>
+    <string name="patch_selection_action_order_description">Válassza ki a patchkiválasztási műveletgombjainak elrendezési sorrendjét</string>
+    <string name="patch_selection_action_visibility_title">Patchkiválasztás műveletgombjainak elrejtése</string>
+    <string name="patch_selection_action_visibility_description">Válassza ki, hogy mely műveletgombok jelenjenek meg a patchkiválasztásnál</string>
+    <string name="patch_selection_action_visibility_reset"> Minden műveletgomb megjelenítése</string>
     <string name="patch_selection_action_order_reset">Visszaállítás alapértelmezettre</string>
-    <string name="patch_selection_confirm_deselect_bundle_title">Csomag törlése?</string>
-    <string name="patch_selection_confirm_deselect_bundle_message">Minden, a %1$s-ből kiválasztott javítás kijelölésének megszüntetése?</string>
-    <string name="patch_selection_confirm_deselect_all_title">Összes patch törlése?</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">Visszavonja a csomag kiválasztását?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">Minden kiválasztott patch visszavonása innen: %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Minden kiválasztott patchet visszavon?</string>
     <string name="patch_selection_confirm_deselect_all_message">Ez minden kiválasztott patchet töröl az összes csomagból.</string>
     <string name="patch_selection_confirm_bundle_defaults_title">Visszaállítja a csomag alapértelmezettjeit?</string>
     <string name="patch_selection_confirm_bundle_defaults_message">Ez visszaállítja a(z) %1$s ajánlott alapértékeit.</string>
-    <string name="patch_selection_confirm_select_bundle_title">Csomag kiválasztása?</string>
-    <string name="patch_selection_confirm_select_bundle_message">Kiválasztja a %1$s által biztosított összes javítást?</string>
-    <string name="patch_selection_confirm_select_all_title">Minden patch kiválasztása?</string>
-    <string name="patch_selection_confirm_select_all_message">Ez az összes csomag összes patch-ét kiválasztja.</string>
-    <string name="patch_selection_button_label_reset_bundle">Csomag alapértékek</string>
+    <string name="patch_selection_confirm_select_bundle_title">Kiválasztja a csomagot?</string>
+    <string name="patch_selection_confirm_select_bundle_message">Kiválasztja az összes patchet ettől: %1$s?</string>
+    <string name="patch_selection_confirm_select_all_title">Az összes patchet kiválasztja?</string>
+    <string name="patch_selection_confirm_select_all_message">Ezzel minden csomag összes patchjét kiválasztja</string>
+    <string name="patch_selection_button_label_reset_bundle">A csomag alapértékei</string>
     <string name="patch_profile_save_label">Profil mentése</string>
     <string name="patch_selection_toggle_expand">Műveletek megjelenítése</string>
     <string name="patch_selection_toggle_collapse">Műveletek elrejtése</string>
-    <string name="patch_selection_reset_all">Az összes patch-kiválasztás visszaállítása</string>
+    <string name="patch_selection_reset_all">Az összes patchkiválasztás visszaállítása</string>
     <string name="patch_selection_reset_all_dialog_description">"Az összes patch kiválasztásának visszaállítását tervezi. Minden patchet manuálisan kell kiválasztania.
 
 A patch profilok nem érintettek."</string>
-    <string name="patch_selection_reset_all_description">Az összes patch-kiválasztás visszaállítása</string>
-    <string name="patch_selection_reset_dialog_title">Patch alapértékek visszaállítása?</string>
+    <string name="patch_selection_reset_all_description">Az összes patchkiválasztás visszaállítása</string>
+    <string name="patch_selection_reset_dialog_title">Patch alapértékeinek visszaállítása?</string>
     <string name="patch_selection_reset_dialog_message">Ez visszaállítja a patch kiválasztását és opcióit az ajánlott alapértékekre.</string>
-    <string name="patch_selection_reset_package">Patch kiválasztás visszaállítása az alkalmazáshoz</string>
-    <string name="patch_selection_reset_package_dialog_description">"Megpróbálja visszaállítani az alkalmazás \"%s\" javításválasztását. Minden egyes javítást manuálisan kell kiválasztania újra.
+    <string name="patch_selection_reset_package">Patchkiválasztás visszaállítása az alkalmazáshoz</string>
+    <string name="patch_selection_reset_package_dialog_description">"Megpróbálja visszaállítani az alkalmazás \"%s\" patchkiválasztását. Minden egyes patchet manuálisan kell kiválasztania újra.
 
-Ez nem érinti a javítási profilokat."</string>
-    <string name="patch_selection_reset_package_description">Egyetlen alkalmazás javításválasztásának alaphelyzetbe állítása</string>
-    <string name="patch_selection_reset_patches">Javításválasztás alaphelyzetbe állítása (egyes)</string>
-    <string name="patch_selection_reset_patches_dialog_description">"Megpróbálja visszaállítani a(z) \"%s\" javításválasztását. Minden egyes javítást manuálisan kell kiválasztania újra.
+Ez nem érinti a patchprofilokat."</string>
+    <string name="patch_selection_reset_package_description">Egyetlen alkalmazás patchkiválasztásának alaphelyzetbe állítása</string>
+    <string name="patch_selection_reset_patches">Patchkiválasztás alaphelyzetbe állítása (egy app)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"Megpróbálja visszaállítani a(z) \"%s\" patchkiválasztását. Minden egyes patchet manuálisan kell kiválasztania újra.
 
-A javítási profilokat ez nem érinti."</string>
-    <string name="patch_selection_reset_patches_description">Egy adott javításgyűjtemény javításválasztásának alaphelyzetbe állítása</string>
-    <string name="patch_options_reset_package">Alaphelyzetbe állítás javítási lehetőségekhez alkalmazásonként</string>
-    <string name="patch_options_reset_package_dialog_description">"Úgy döntött, visszaállítja az alkalmazás \"%s\" javítási beállításait. Minden egyes beállítást újra alkalmaznia kell.
+A patchprofilokat ez nem érinti."</string>
+    <string name="patch_selection_reset_patches_description">Egy adott patchgyűjtemény kiválasztásainak alaphelyzetbe állítása</string>
+    <string name="patch_options_reset_package">Alaphelyzetbe állítja a patch beállításait az alkalmazáshoz</string>
+    <string name="patch_options_reset_package_dialog_description">"Úgy döntött, hogy visszaállítja a(z) \"%s\" alkalmazás patchbeállításait. Minden egyes beállítást újra alkalmaznia kell.
 
-A javítási profilokat ez nem érinti."</string>
-    <string name="patch_options_reset_package_description">Egyszerű javítási lehetőségek alaphelyzetbe állítása egyetlen alkalmazáshoz</string>
-    <string name="patch_options_reset_patches">Javítási lehetőségek alaphelyzetbe állítása (egyes)</string>
-    <string name="patch_options_reset_patches_dialog_description">"Úgy döntött, visszaállítja a(z) \"%s\" javítási beállításait. Minden egyes beállítást újra alkalmaznia kell.
+A patchprofilokat ez nem érinti."</string>
+    <string name="patch_options_reset_package_description">A patch beállításainak alaphelyzetbe állítása egyetlen alkalmazáshoz</string>
+    <string name="patch_options_reset_patches">Patchbeállítások alaphelyzetbe állítása (egy app)</string>
+    <string name="patch_options_reset_patches_dialog_description">"Úgy döntött, hogy visszaállítja a(z) \"%s\" patchbeállításait. Minden egyes beállítást újra alkalmaznia kell.
 
-A javítási profilokat ez nem érinti."</string>
-    <string name="patch_options_reset_patches_description">Egy adott javításgyűjtemény javítási lehetőségeinek alaphelyzetbe állítása</string>
-    <string name="patch_options_reset_all">Összes patch opció visszaállítása</string>
-    <string name="patch_options_reset_all_dialog_description">"Minden patch opciót vissza fog állítani. Minden opciót újra kell alkalmaznia.
+A patchprofilokat ez nem érinti."</string>
+    <string name="patch_options_reset_patches_description">Egy adott patchgyűjtemény patchbeállításainak alaphelyzetbe állítása</string>
+    <string name="patch_options_reset_all">Összes patchbeállítás visszaállítása</string>
+    <string name="patch_options_reset_all_dialog_description">"Minden patchbeállítást vissza fog állítani. Minden opciót újra kell alkalmaznia.
 
-A patch profilokat ez nem érinti."</string>
-    <string name="patch_options_reset_all_description">Összes patch opció visszaállítása</string>
+A patchprofilokat ez nem érinti."</string>
+    <string name="patch_options_reset_all_description">Összes patchbeállítás visszaállítása</string>
     <string name="download_settings">Letöltési beállítások</string>
     <string name="downloader_auto_save_title">Letöltött APK-k automatikus mentése</string>
-    <string name="downloader_auto_save_description">A bővítményeken keresztül letöltött APK-k újrafelhasználás céljából megőrizve. Letiltva a javítás utáni törléshez.</string>
+    <string name="downloader_auto_save_description">A bővítményeken keresztül letöltött APK-k újrafelhasználás céljából megőrizve. Kapcsolja ki a patch utáni törléshez.</string>
     <string name="downloader_plugins">Bővítmények</string>
     <string name="downloader_plugin_state_trusted">Megbízható</string>
-    <string name="downloader_plugin_state_failed">Betöltés sikertelen. Érintse meg a részletekért</string>
+    <string name="downloader_plugin_state_failed">A betöltés sikertelen. Érintse meg a részletekért</string>
     <string name="downloader_plugin_state_untrusted">Nem megbízható</string>
-    <string name="downloader_plugin_trust_dialog_title">Bővítmény megbízható?</string>
+    <string name="downloader_plugin_trust_dialog_title">Megbízható bővítmény?</string>
     <string name="downloader_plugin_revoke_trust_dialog_title">Megbízhatóság visszavonása?</string>
     <string name="downloader_plugin_trust_dialog_body">"Csomagnév: %1$s
 Aláírás (SHA-256): %2$s"</string>
-    <string name="downloader_plugin_view_error">Hib rszleteinek megtekintse</string>
-    <string name="downloader_plugin_failed_dialog_body">Nem sikerlt betlteni: \"%1$s\". Megtekintheti a hib rszleteit, vagy eltvolthatja a beplt.</string>
-    <string name="downloader_plugin_uninstall_title">Beplt eltvoltsa?</string>
+    <string name="downloader_plugin_view_error">A hiba részleteinek megtekintése</string>
+    <string name="downloader_plugin_failed_dialog_body">Nem sikerült betölteni: \"%1$s\". Megtekintheti a hiba részleteit, vagy eltávolíthatja a bővítményt.</string>
+    <string name="downloader_plugin_uninstall_title">Eltávolítja a bővítményt?</string>
     <string name="downloader_plugin_uninstall_description">Biztosan törölni szeretné a(z) \"%1$s\" alkalmazást?</string>
-    <string name="downloader_plugin_delete_apps_title">Kivlasztott alkalmazsok trlse</string>
-    <string name="downloader_plugin_delete_apps_description">Biztosan trlni szeretn a kivlasztott alkalmazsokat?</string>
-    <string name="downloader_settings_no_apps">Nem tallhat leltett alkalmazst.</string>
-    <string name="search_apps">Alkalmazsok keresse…</string>
+    <string name="downloader_plugin_delete_apps_title">Kiválasztott alkalmazások törlése</string>
+    <string name="downloader_plugin_delete_apps_description">Biztosan törölni szeretné a kiválasztott alkalmazásokat?</string>
+    <string name="downloader_settings_no_apps">Nem található letöltött alkalmazás.</string>
+    <string name="search_apps">Alkalmazások keresése…</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
-    <string name="edit">Szerkeszt</string>
-    <string name="dialog_input_placeholder">rtrk</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="dialog_input_placeholder">Érték</string>
     <string name="reset">Visszaállítás</string>
-    <string name="share">Mrkzzs</string>
-    <string name="patch">Javts</string>
+    <string name="share">Megosztás</string>
+    <string name="patch">Patch</string>
     <string name="select_from_storage">Kiválasztás tárhelyről</string>
     <string name="select_from_storage_description">Válasszon ki egy APK fájlt a tárhelyről a fájlválasztó segítségével</string>
     <string name="type_anything">Írjon be bármit a folytatáshoz</string>
     <string name="search">Patch keresése…</string>
-    <string name="apply">Alkalmaz</string>
+    <string name="apply">Alkalmazás</string>
     <string name="help">Súgó</string>
     <string name="back">Vissza</string>
     <string name="warning">Figyelmeztetés</string>
@@ -580,14 +580,14 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="black">Fekete</string>
     <string name="downloaded_apps">Letöltött alkalmazások</string>
     <string name="process_runtime">Patch futtatása másik folyamatban</string>
-    <string name="process_runtime_description">Gyorsítja a patch-elést egy külön folyamat használatával</string>
+    <string name="process_runtime_description">Gyorsítja a patchelést egy külön folyamat használatával</string>
     <string name="process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
     <string name="strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
-    <string name="strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a javított alkalmazásokból</string>
-    <string name="process_runtime_memory_limit">Patcher folyamat memórialimite</string>
-    <string name="process_runtime_memory_limit_description">A Patcher folyamat által felhasználható memória maximális mennyisége (megabájtban)</string>
+    <string name="strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a patchelt alkalmazásokból</string>
+    <string name="process_runtime_memory_limit">A patchelés folyamatának memórialimite</string>
+    <string name="process_runtime_memory_limit_description">A patchelés folyamata által felhasználható memória maximális mennyisége (megabájtban)</string>
     <string name="reset_to_recommended">Visszaállítás az ajánlott értékekre</string>
-    <string name="patcher_auto_collapse_steps">Automatikus összecsukás a befejezett patcher lépések után</string>
+    <string name="patcher_auto_collapse_steps">A kész patchlépések automatikus összecsukása</string>
     <string name="patcher_auto_collapse_steps_description">Automatikus minden patcher folyamatjelző widget összecsukása, miután az összes lépése befejeződött</string>
     <string name="patch_bundle_rename">Patch csomag átnevezése</string>
     <string name="patch_profile_view_options">Beállítások megtekintése</string>

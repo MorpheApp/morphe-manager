@@ -657,7 +657,7 @@ Yama profillərinə təsir edilmir."</string>
     <string name="patches_download_fail">Yamaların yüklənməsi uğursuz oldu: %s</string>
     <string name="patches_replace_fail">Yamaların idxalı uğursuz oldu: %s</string>
     <string name="no_patched_apps_found">Heç bir yamalanmış proqram tapılmadı</string>
-    <string name="patches_selected">\"%s\" isimlərdəki %s tətbiq/n paketleri.                  </string>
+    <string name="patches_selected">%s yamaq paketi(lər)i seçildi</string>
     <string name="patch_profiles_selected">%1$d yama profili seçildi</string>
     <string name="selected_apps_count">%1$d əd aplikasiya seçildi</string>
     <string name="selected_apps_delete_dialog_description">Seçilən proqramları menedjerdən silmək istəyirsiniz? Quraşdırılmış proqramlar cihazınızda qalacaq.</string>

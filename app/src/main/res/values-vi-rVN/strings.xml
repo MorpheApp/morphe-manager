@@ -618,7 +618,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="include_github_pat_in_exports_label">Bao gồm trong xuất cài đặt</string>
     <string name="include_github_pat_in_exports_supporting">Thêm PAT này vào cài đặt trình quản lý đã xuất</string>
     <string name="include_github_pat_in_exports_warning">Không chia sẻ PAT của bạn. Nếu bạn bao gồm nó trong một bản xuất cài đặt, hãy giữ tệp đó ở chế độ riêng tư vì nó chứa mã thông báo.</string>
-    <string name="app_language">Ngôn ngữ ứng dụng</string>
+    <string name="app_language">Ngôn ngữ</string>
     <string name="language_dialog_title">Chọn ngôn ngữ ứng dụng</string>
     <string name="language_option_system">Sử dụng ngôn ngữ của thiết bị</string>
     <string name="device_memory_limit_format">%1$dMB (Thường) - %2$dMB (Lớn)</string>
