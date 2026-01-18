@@ -57,9 +57,7 @@ fun HomeBundleManagementSheet(
     onDelete: (PatchBundleSource) -> Unit,
     onDisable: (PatchBundleSource) -> Unit,
     onUpdate: (PatchBundleSource) -> Unit,
-    onRename: (PatchBundleSource) -> Unit,
-    onPatchesClick: (PatchBundleSource) -> Unit,
-    onVersionClick: (PatchBundleSource) -> Unit
+    onRename: (PatchBundleSource) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
 
@@ -71,6 +69,8 @@ fun HomeBundleManagementSheet(
     val lazyListState = rememberLazyListState()
 
     var bundleToDelete by remember { mutableStateOf<PatchBundleSource?>(null) }
+    var bundleToShowPatches by remember { mutableStateOf<PatchBundleSource?>(null) }
+    var bundleToShowChangelog by remember { mutableStateOf<RemotePatchBundle?>(null) }
 
     // Check if only default bundle exists
     val isSingleDefaultBundle = sources.size == 1
@@ -144,8 +144,12 @@ fun HomeBundleManagementSheet(
                         onDisable = { onDisable(bundle) },
                         onUpdate = { onUpdate(bundle) },
                         onRename = { onRename(bundle) },
-                        onPatchesClick = { onPatchesClick(bundle) },
-                        onVersionClick = { onVersionClick(bundle) },
+                        onPatchesClick = { bundleToShowPatches = bundle },
+                        onVersionClick = {
+                            if (bundle is RemotePatchBundle) {
+                                bundleToShowChangelog = bundle
+                            }
+                        },
                         onOpenInBrowser = {
                             val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
                                 ?: BUNDLE_URL_RELEASES
@@ -171,6 +175,22 @@ fun HomeBundleManagementSheet(
                 onDelete(bundleToDelete!!)
                 bundleToDelete = null
             }
+        )
+    }
+
+    // Patches dialog
+    if (bundleToShowPatches != null) {
+        HomeBundlePatchesDialog(
+            onDismissRequest = { bundleToShowPatches = null },
+            src = bundleToShowPatches!!
+        )
+    }
+
+    // Changelog dialog
+    if (bundleToShowChangelog != null) {
+        HomeBundleChangelogDialog(
+            src = bundleToShowChangelog!!,
+            onDismissRequest = { bundleToShowChangelog = null }
         )
     }
 }

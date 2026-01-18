@@ -2,33 +2,47 @@ package app.revanced.manager.ui.component.morphe.home
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.network.dto.ReVancedAsset
+import app.revanced.manager.patcher.patch.PatchInfo
+import app.revanced.manager.ui.component.ArrowButton
 import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.settings.Changelog
+import app.revanced.manager.util.relativeTime
+import app.revanced.manager.util.simpleMessage
+import kotlinx.coroutines.flow.mapNotNull
+import org.koin.compose.koinInject
 
 /**
  * Dialog for adding patch bundles
@@ -318,3 +332,504 @@ fun MorpheRenameBundleDialog(
         }
     }
 }
+
+/**
+ * Dialog displaying patches from a bundle
+ */
+@Composable
+fun HomeBundlePatchesDialog(
+    onDismissRequest: () -> Unit,
+    src: PatchBundleSource
+) {
+    val patchBundleRepository: PatchBundleRepository = koinInject()
+    val patches by remember(src.uid) {
+        patchBundleRepository.bundleInfoFlow.mapNotNull { it[src.uid]?.patches }
+    }.collectAsStateWithLifecycle(emptyList())
+
+    val isLoading = patches.isEmpty()
+
+    MorpheDialog(
+        onDismissRequest = onDismissRequest,
+        title = stringResource(R.string.patches),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(android.R.string.ok),
+                onPrimaryClick = onDismissRequest
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Header with icon and count
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Extension,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = src.displayTitle,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = LocalDialogTextColor.current,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    if (!isLoading) {
+                        Text(
+                            text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    } else {
+                        Text(
+                            text = "...",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+
+            // Content
+            if (isLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 400.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(patches) { patch ->
+                        var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
+                            mutableStateOf(false)
+                        }
+                        var expandOptions by rememberSaveable(src.uid, patch.name, "options") {
+                            mutableStateOf(false)
+                        }
+
+                        PatchItemCard(
+                            patch = patch,
+                            expandVersions = expandVersions,
+                            onExpandVersions = { expandVersions = !expandVersions },
+                            expandOptions = expandOptions,
+                            onExpandOptions = { expandOptions = !expandOptions }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PatchItemCard(
+    patch: PatchInfo,
+    expandVersions: Boolean,
+    onExpandVersions: () -> Unit,
+    expandOptions: Boolean,
+    onExpandOptions: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val textColor = LocalDialogTextColor.current
+    val secondaryColor = LocalDialogSecondaryTextColor.current
+
+    ElevatedCard(
+        modifier = modifier
+            .fillMaxWidth()
+            .then(
+                if (patch.options.isNullOrEmpty()) Modifier
+                else Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable(onClick = onExpandOptions)
+            ),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+        ),
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            // Header
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = patch.name,
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
+                )
+
+                if (!patch.options.isNullOrEmpty()) {
+                    ArrowButton(expanded = expandOptions, onClick = null)
+                }
+            }
+
+            // Description
+            patch.description?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = textColor
+                )
+            }
+
+            // Compatibility info
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                if (patch.compatiblePackages.isNullOrEmpty()) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        InfoBadge(
+                            text = stringResource(R.string.patches_view_any_package),
+                            icon = Icons.Outlined.Apps,
+                            style = InfoBadgeStyle.Default,
+                            isCompact = true
+                        )
+                        InfoBadge(
+                            text = stringResource(R.string.patches_view_any_version),
+                            icon = Icons.Outlined.Code,
+                            style = InfoBadgeStyle.Default,
+                            isCompact = true
+                        )
+                    }
+                } else {
+                    patch.compatiblePackages.forEach { compatiblePackage ->
+                        val packageName = compatiblePackage.packageName
+                        val versions = compatiblePackage.versions.orEmpty().reversed()
+
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            InfoBadge(
+                                text = packageName,
+                                icon = Icons.Outlined.Apps,
+                                style = InfoBadgeStyle.Primary,
+                                isCompact = true,
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            )
+
+                            if (versions.isNotEmpty()) {
+                                if (expandVersions) {
+                                    versions.forEach { version ->
+                                        InfoBadge(
+                                            text = version,
+                                            icon = Icons.Outlined.Code,
+                                            style = InfoBadgeStyle.Default,
+                                            isCompact = true,
+                                            modifier = Modifier.align(Alignment.CenterVertically)
+                                        )
+                                    }
+                                } else {
+                                    InfoBadge(
+                                        text = versions.first(),
+                                        icon = Icons.Outlined.Code,
+                                        style = InfoBadgeStyle.Default,
+                                        isCompact = true,
+                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                    )
+                                }
+                                if (versions.size > 1) {
+                                    PatchInfoChipButton(
+                                        onClick = onExpandVersions,
+                                        text = if (expandVersions)
+                                            stringResource(R.string.less)
+                                        else
+                                            "+${versions.size - 1}",
+                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Options
+            if (!patch.options.isNullOrEmpty()) {
+                AnimatedVisibility(visible = expandOptions) {
+                    Column(
+                        modifier = Modifier.padding(top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        patch.options.forEach { option ->
+                            OutlinedCard(
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = CardDefaults.outlinedCardColors(
+                                    containerColor = Color.Transparent
+                                ),
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(12.dp),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = option.title,
+                                        style = MaterialTheme.typography.titleSmall,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = option.description,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = secondaryColor
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun PatchInfoChipButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    text: String
+) {
+    val secondaryColor = LocalDialogSecondaryTextColor.current
+    val shape = RoundedCornerShape(8.dp)
+
+    OutlinedCard(
+        modifier = modifier
+            .clip(shape)
+            .clickable(onClick = onClick),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = Color.Transparent
+        ),
+        shape = shape,
+        border = BorderStroke(1.dp, secondaryColor.copy(alpha = 0.20f))
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text,
+                overflow = TextOverflow.Ellipsis,
+                softWrap = false,
+                style = MaterialTheme.typography.labelLarge,
+                color = secondaryColor
+            )
+        }
+    }
+}
+
+/**
+ * Dialog displaying changelog for a bundle
+ */
+@Composable
+fun HomeBundleChangelogDialog(
+    src: RemotePatchBundle,
+    onDismissRequest: () -> Unit
+) {
+    var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
+
+    LaunchedEffect(src.uid) {
+        state = BundleChangelogState.Loading
+        state = try {
+            val asset = src.fetchLatestReleaseInfo()
+            BundleChangelogState.Success(asset)
+        } catch (t: Throwable) {
+            BundleChangelogState.Error(t)
+        }
+    }
+
+    MorpheDialog(
+        onDismissRequest = onDismissRequest,
+        title = stringResource(R.string.bundle_changelog),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(android.R.string.ok),
+                onPrimaryClick = onDismissRequest
+            )
+        }
+    ) {
+        when (val current = state) {
+            BundleChangelogState.Loading -> BundleChangelogLoading()
+            is BundleChangelogState.Error -> BundleChangelogError(
+                error = current.throwable,
+                onRetry = {
+                    // Reload on retry
+                }
+            )
+            is BundleChangelogState.Success -> BundleChangelogContent(
+                asset = current.asset
+            )
+        }
+    }
+}
+
+@Composable
+private fun BundleChangelogLoading() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 48.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            CircularProgressIndicator()
+            Text(
+                text = stringResource(R.string.changelog_loading),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
+        }
+    }
+}
+
+@Composable
+private fun BundleChangelogError(
+    error: Throwable,
+    onRetry: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 48.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier.padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = stringResource(
+                    R.string.bundle_changelog_error,
+                    error.simpleMessage().orEmpty()
+                ),
+                style = MaterialTheme.typography.bodyLarge,
+                color = LocalDialogTextColor.current
+            )
+            Button(onClick = onRetry) {
+                Text(stringResource(R.string.bundle_changelog_retry))
+            }
+        }
+    }
+}
+
+@Composable
+private fun BundleChangelogContent(
+    asset: ReVancedAsset
+) {
+    val context = LocalContext.current
+
+    val publishDate = remember(asset.createdAt) {
+        asset.createdAt.relativeTime(context)
+    }
+    val markdown = remember(asset.description) {
+        asset.description
+            .replace("\r\n", "\n")
+            .sanitizePatchChangelogMarkdown()
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Header with icon
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                modifier = Modifier.size(48.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Outlined.History,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
+
+            Column {
+                Text(
+                    text = asset.version,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = LocalDialogTextColor.current
+                )
+                Text(
+                    text = publishDate,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
+        // Changelog content
+        Changelog(
+            markdown = markdown.ifBlank {
+                stringResource(R.string.bundle_changelog_empty)
+            },
+            version = asset.version,
+            publishDate = publishDate
+        )
+    }
+}
+
+private sealed interface BundleChangelogState {
+    data object Loading : BundleChangelogState
+    data class Success(val asset: ReVancedAsset) : BundleChangelogState
+    data class Error(val throwable: Throwable) : BundleChangelogState
+}
+
+private val doubleBracketLinkRegex = Regex("""\[\[([^]]+)]\(([^)]+)\)]""")
+
+private fun String.sanitizePatchChangelogMarkdown(): String =
+    doubleBracketLinkRegex.replace(this) { match ->
+        val label = match.groupValues[1]
+        val link = match.groupValues[2]
+        "[\\[$label\\]]($link)"
+    }

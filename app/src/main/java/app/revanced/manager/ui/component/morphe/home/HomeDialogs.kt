@@ -232,25 +232,6 @@ fun HomeDialogs(
         )
     }
 
-    // Patches bottom sheet
-    if (state.showPatchesSheet && state.apiBundle != null) {
-        HomeBundlePatchesSheet(
-            onDismissRequest = { state.showPatchesSheet = false },
-            src = state.apiBundle!!
-        )
-    }
-
-    // Changelog bottom sheet
-    if (state.showChangelogSheet && state.apiBundle != null) {
-        val remoteBundle = state.apiBundle as? RemotePatchBundle
-        if (remoteBundle != null) {
-            HomeBundleChangelogSheet(
-                src = remoteBundle,
-                onDismissRequest = { state.showChangelogSheet = false }
-            )
-        }
-    }
-
     // Bundle management sheet
     if (state.showBundleManagementSheet) {
         HomeBundleManagementSheet(
@@ -279,24 +260,6 @@ fun HomeDialogs(
             onRename = { bundle ->
                 state.bundleToRename = bundle
                 state.showRenameBundleDialog = true
-            },
-            onPatchesClick = { bundle ->
-                state.showBundleManagementSheet = false
-                state.apiBundle = bundle
-                scope.launch {
-                    delay(300)
-                    state.showPatchesSheet = true
-                }
-            },
-            onVersionClick = { bundle ->
-                state.showBundleManagementSheet = false
-                if (bundle is RemotePatchBundle) {
-                    state.apiBundle = bundle
-                    scope.launch {
-                        delay(300)
-                        state.showChangelogSheet = true
-                    }
-                }
             }
         )
     }
