@@ -34,6 +34,8 @@ fun SystemTabContent(
     importExportViewModel: ImportExportViewModel,
     onImportKeystore: () -> Unit,
     onExportKeystore: () -> Unit,
+    onImportSettings: () -> Unit,
+    onExportSettings: () -> Unit,
     onAboutClick: () -> Unit,
     prefs: PreferencesManager
 ) {
@@ -133,6 +135,28 @@ fun SystemTabContent(
                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
                         title = stringResource(R.string.export_keystore),
                         description = stringResource(R.string.export_keystore_description)
+                    )
+                }
+            }
+
+            SectionCard {
+                Column {
+                    // Manager Settings Import
+                    BaseSettingsItem(
+                        onClick = onImportSettings,
+                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Download) },
+                        title = stringResource(R.string.import_manager_settings),
+                        description = stringResource(R.string.import_manager_settings_description)
+                    )
+
+                    MorpheSettingsDivider()
+
+                    // Manager Settings Export
+                    BaseSettingsItem(
+                        onClick = onExportSettings,
+                        leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
+                        title = stringResource(R.string.export_manager_settings),
+                        description = stringResource(R.string.export_manager_settings_description)
                     )
                 }
             }

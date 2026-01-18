@@ -34,6 +34,7 @@ import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.component.morphe.settings.*
 import app.revanced.manager.ui.viewmodel.*
+import app.revanced.manager.util.JSON_MIMETYPE
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -105,6 +106,22 @@ fun MorpheSettingsScreen(
         contract = ActivityResultContracts.CreateDocument("*/*")
     ) { uri ->
         uri?.let { importExportViewModel.exportKeystore(it) }
+    }
+
+    // Manager settings import launcher
+    val importSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.importManagerSettings(it)
+        }
+    }
+
+    // Manager settings export launcher
+    val exportSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let { importExportViewModel.exportManagerSettings(it) }
     }
 
     // Show keystore credentials dialog when needed
@@ -187,6 +204,8 @@ fun MorpheSettingsScreen(
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
                     onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
+                    onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
+                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
                     onAboutClick = { showAboutDialog = true },
                     prefs = prefs
                 )
