@@ -48,6 +48,38 @@ fun AdvancedTabContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // Updates
+        SectionTitle(
+            text = stringResource(R.string.updates),
+            icon = Icons.Outlined.Update
+        )
+
+        RichSettingsItem(
+            onClick = {
+                val newValue = !usePrereleases.value
+                scope.launch {
+                    prefs.usePatchesPrereleases.update(newValue)
+                    prefs.useManagerPrereleases.update(newValue)
+                    prefs.managerAutoUpdates.update(newValue)
+                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
+                    dashboardViewModel.checkForManagerUpdates()
+                    patchOptionsViewModel.refresh()
+                }
+            },
+            showBorder = true,
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Science)
+            },
+            title = stringResource(R.string.morphe_update_use_prereleases),
+            subtitle = stringResource(R.string.morphe_update_use_prereleases_description),
+            trailingContent = {
+                Switch(
+                    checked = usePrereleases.value,
+                    onCheckedChange = null
+                )
+            }
+        )
+
         // Expert settings section
         SectionTitle(
             text = stringResource(R.string.morphe_expert_section),
@@ -107,38 +139,6 @@ fun AdvancedTabContent(
                 }
             )
         }
-
-        // Updates
-        SectionTitle(
-            text = stringResource(R.string.updates),
-            icon = Icons.Outlined.Update
-        )
-
-        RichSettingsItem(
-            onClick = {
-                val newValue = !usePrereleases.value
-                scope.launch {
-                    prefs.usePatchesPrereleases.update(newValue)
-                    prefs.useManagerPrereleases.update(newValue)
-                    prefs.managerAutoUpdates.update(newValue)
-                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                    dashboardViewModel.checkForManagerUpdates()
-                    patchOptionsViewModel.refresh()
-                }
-            },
-            showBorder = true,
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.Science)
-            },
-            title = stringResource(R.string.morphe_update_use_prereleases),
-            subtitle = stringResource(R.string.morphe_update_use_prereleases_description),
-            trailingContent = {
-                Switch(
-                    checked = usePrereleases.value,
-                    onCheckedChange = null
-                )
-            }
-        )
 
         // Patch Options (Simple mode only)
         if (!useExpertMode) {
