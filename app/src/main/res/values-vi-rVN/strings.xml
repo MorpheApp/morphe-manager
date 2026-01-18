@@ -124,7 +124,7 @@
     <string name="morphe_share_website">Chia sẻ</string>
     <string name="morphe_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
     <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Biểu tượng ứng dụng</string>
+    <string name="morphe_app_icon_selector_title">Biểu tượng</string>
     <string name="morphe_app_icon_selector_description">Đổi biểu tượng ứng dụng</string>
     <string name="morphe_app_icon_default">Mặc định</string>
     <string name="morphe_app_icon_light_2">Bầu trời</string>
