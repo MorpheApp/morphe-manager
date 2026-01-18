@@ -225,6 +225,7 @@
     <string name="morphe_settings_return_to_expert_description">Switch to the full-featured URV mode</string>
     <string name="morphe_update_use_prereleases">Use pre-release versions</string>
     <string name="morphe_update_use_prereleases_description">Get early access to new patches and manager features</string>
+    <string name="morphe_patch_options_expert_mode_notice">In Expert mode patch options will be available during the patching process</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch options</string>
     <string name="morphe_patch_options_youtube_description">Theme, branding, header, and Shorts options</string>

@@ -485,6 +485,13 @@ enum class InfoBadgeStyle {
 
 /**
  * Info badge with optional icon
+ *
+ * @param text Badge text content
+ * @param style Visual style of the badge
+ * @param icon Optional icon to display before text
+ * @param isCompact Whether to use compact sizing (smaller padding and icon)
+ * @param isExpanded Whether to use expanded variant (larger padding, centered content)
+ * @param modifier Modifier to be applied to the badge
  */
 @Composable
 fun InfoBadge(
@@ -492,14 +499,47 @@ fun InfoBadge(
     style: InfoBadgeStyle = InfoBadgeStyle.Default,
     icon: ImageVector? = null,
     isCompact: Boolean = false,
+    isExpanded: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val (containerColor, contentColor) = style.colors()
-    val horizontalPadding = if (isCompact) 8.dp else 12.dp
-    val verticalPadding = if (isCompact) 2.dp else 8.dp
-    val iconSize = if (isCompact) 14.dp else 20.dp
-    val shapeRadius = if (isCompact) 6.dp else 12.dp
-    val surfaceModifier = if (isCompact) modifier.wrapContentWidth() else modifier.fillMaxWidth()
+
+    // Determine sizing based on variant
+    val horizontalPadding = when {
+        isExpanded -> 16.dp
+        isCompact -> 8.dp
+        else -> 12.dp
+    }
+
+    val verticalPadding = when {
+        isExpanded -> 16.dp
+        isCompact -> 2.dp
+        else -> 8.dp
+    }
+
+    val iconSize = when {
+        isExpanded -> 24.dp
+        isCompact -> 14.dp
+        else -> 20.dp
+    }
+
+    val shapeRadius = when {
+        isExpanded -> 12.dp
+        isCompact -> 6.dp
+        else -> 12.dp
+    }
+
+    val surfaceModifier = if (isCompact && !isExpanded) {
+        modifier.wrapContentWidth()
+    } else {
+        modifier.fillMaxWidth()
+    }
+
+    val textStyle = if (isExpanded) {
+        MaterialTheme.typography.bodyMedium
+    } else {
+        MaterialTheme.typography.bodySmall
+    }
 
     Surface(
         modifier = surfaceModifier,
@@ -508,7 +548,7 @@ fun InfoBadge(
     ) {
         Row(
             modifier = Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(if (isExpanded) 12.dp else 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
@@ -520,7 +560,7 @@ fun InfoBadge(
             }
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodySmall,
+                style = textStyle,
                 color = contentColor
             )
         }
