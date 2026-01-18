@@ -26,7 +26,7 @@
     <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
     <string name="morphe_home_updating_patches">Patches worden bijgewerkt…</string>
     <string name="morphe_home_update_success">Update voltooid</string>
-    <string name="morphe_home_patches_updated">Uw patches zijn up-to-date</string>
+    <string name="morphe_home_patches_updated">Je patches zijn up-to-date</string>
     <string name="morphe_home_patches_are_loading">Patches worden geladen, een ogenblik geduld...</string>
     <string name="morphe_home_please_wait">Een ogenblik geduld...</string>
     <string name="morphe_home_open_in_browser">Open in de browser</string>
@@ -39,7 +39,7 @@
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
-    <string name="morphe_home_apk_availability_yes">Ja, ik heb het</string>
+    <string name="morphe_home_apk_availability_yes">Ja, die heb ik</string>
     <string name="morphe_home_apk_availability_no">Nee, help me het te vinden</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Download de originele APK</string>
@@ -86,7 +86,7 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Druk op de onderstaande knop om te koppelen</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Niet-ondersteunde versie</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Dit APK is geen aanbevolen appversie. Doorgaan kan resulteren in een niet-functionerende app.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Doorgaan ondanks dit</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Toch doorgaan</string>
     <string name="morphe_patcher_wrong_package_title">Verkeerd pakket gekozen</string>
     <string name="morphe_patcher_wrong_package_description">De geselecteerde APK is niet voor de toepassing die u wilde patchen.</string>
     <string name="morphe_patcher_expected_package">Geëxpectede pakket</string>
@@ -129,12 +129,12 @@
     <string name="morphe_app_icon_default">Standaard</string>
     <string name="morphe_app_icon_light_2">Lucht</string>
     <string name="morphe_app_icon_light_3">Zonsondergang</string>
-    <string name="morphe_app_icon_dark_1">Ocean</string>
+    <string name="morphe_app_icon_dark_1">Oceaan</string>
     <string name="morphe_app_icon_dark_2">Leegte</string>
     <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Verander app-icoon?</string>
-    <string name="morphe_app_icon_change_dialog_message">Verander naar \'%1$s\' en herstarten?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Verander icoon</string>
+    <string name="morphe_app_icon_change_dialog_title">App-pictogram wijzigen?</string>
+    <string name="morphe_app_icon_change_dialog_message">Wijzigen naar \'%1$s\' en herstarten?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Pictogram wijzigen</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Uitzettingsvoorkeuren</string>
     <string name="morphe_appearance_options_description">Aanpassen van thema\'s, kleuren en achtergronden</string>
@@ -176,11 +176,11 @@
     <string name="morphe_custom_color">Aangepaste kleur</string>
     <string name="morphe_hex_color">Hex-kleur</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Aangepast merkf</string>
+    <string name="morphe_patch_options_custom_branding">Aangepaste branding</string>
     <string name="morphe_patch_options_custom_branding_description">Verander toon van de app</string>
     <string name="morphe_patch_options_custom_branding_app_name">Appnaam</string>
     <string name="morphe_patch_options_custom_branding_app_name_hint">Geef aangepaste naam op</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon">Aangepast icoon</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Aangepast pictogram</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappenmap met afbeeldingen voor het gebruik als aangepast icoon.
 
 De map moet één of meer van de volgende mappen bevatten, afhankelijk van de DPI van het apparaat:
@@ -435,8 +435,8 @@ Toch inschakelen?"</string>
     <string name="bundle_type_remote">Extern</string>
     <string name="bundle_type_local">Lokaal</string>
     <string name="bundle_type_preinstalled">Vooraf geïnstalleerd</string>
-    <string name="bundle_created_at">Aangemaakt %1$s</string>
-    <string name="bundle_updated_at">Bijgewerkt %1$s</string>
+    <string name="bundle_created_at">Gemaakt op %1$s</string>
+    <string name="bundle_updated_at">Bijgewerkt op %1$s</string>
     <string name="bundle_changelog">Wijzigingslogboek</string>
     <string name="bundle_view_changelog">Bekijk het laatste wijzigingslogboek</string>
     <string name="bundle_changelog_error">Wijzigingslogboek kon niet worden geladen: %s</string>
@@ -465,11 +465,11 @@ Toch inschakelen?"</string>
     <string name="patch_selection_select_bundle_empty_toast">Geen selecteerbare patches in %s</string>
     <string name="patch_selection_all_actions_hidden_toast">Alle actieknoppen zijn verborgen, schakel er minstens één in de instellingen in</string>
     <string name="patch_selection_reset_bundle_toast">Standaardwaarden opnieuw instellen voor %s</string>
-    <string name="patch_selection_button_label_all">Deselecteer alles</string>
+    <string name="patch_selection_button_label_all">Alles deselecteren</string>
     <string name="patch_selection_button_label_bundle">Bundel deselecteren</string>
     <string name="patch_selection_button_label_defaults">Alle standaardwaarden</string>
     <string name="patch_selection_button_label_select_bundle">Bundel selecteren</string>
-    <string name="patch_selection_button_label_select_all">Selecteer alles</string>
+    <string name="patch_selection_button_label_select_all">Alles selecteren</string>
     <string name="patch_selection_button_label_undo_action">Actie ongedaan maken</string>
     <string name="patch_selection_button_label_redo_action">Actie opnieuw uitvoeren</string>
     <string name="patch_selection_history_undo">Ongedaan gemaakt %1$s</string>
@@ -543,7 +543,7 @@ Patchprofielen worden niet beïnvloed."</string>
     <string name="downloader_plugins">Plug-ins</string>
     <string name="downloader_plugin_state_trusted">Vertrouwd</string>
     <string name="downloader_plugin_state_failed">Laden mislukt. Klik voor meer details</string>
-    <string name="downloader_plugin_state_untrusted">Onvertrouwd</string>
+    <string name="downloader_plugin_state_untrusted">Niet vertrouwd</string>
     <string name="downloader_plugin_trust_dialog_title">Plug-in vertrouwen?</string>
     <string name="downloader_plugin_revoke_trust_dialog_title">Vertrouwen intrekken?</string>
     <string name="downloader_plugin_trust_dialog_body">"Pakketnaam: %1$s
@@ -623,7 +623,7 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="debug_logs_export">Foutopsporingslogboeken exporteren</string>
     <string name="debug_logs_export_read_failed">Kon er niet voor zorgen dat de logboeken werden gelezen (exit code %d)</string>
     <string name="debug_logs_export_failed">Mislukt om logboeken te exporteren</string>
-    <string name="debug_logs_export_success">Geëxporteerde logboeken</string>
+    <string name="debug_logs_export_success">Logboeken geëxporteerd</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <string name="api_url_dialog_description">Wijzig de API-URL van Morphe. Morphe gebruikt de API om patches en updates te downloaden.</string>
@@ -643,7 +643,7 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="device_memory_limit_format">%1$dMB (Normaal) - %2$dMB (Groot)</string>
     <string name="patches_force_download">Alle patchbundels geforceerd downloaden</string>
     <string name="patches_reset">Patchbundels opnieuw instellen</string>
-    <string name="storage">Systeem</string>
+    <string name="storage">Opslag</string>
     <string name="no_patch_found">Er kunnen geen patches worden gevonden. Controleer uw patches</string>
     <string name="tab_apps">Apps</string>
     <string name="tab_patches">Patchbundels</string>
@@ -787,8 +787,8 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="already_patched">Al gepatcht</string>
     <string name="patch_selector_sheet_filter_title">Filter</string>
     <string name="patch_selector_sheet_filter_compat_title">Compatibiliteit</string>
-    <string name="patch_selector_sheet_filter_sort_title">Beheer opties</string>
-    <string name="patch_selector_sheet_filter_sort_alphabetical">Alphabetisch</string>
+    <string name="patch_selector_sheet_filter_sort_title">Sortering</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabetisch</string>
     <string name="patch_selector_sheet_filter_sort_has_settings">Bevat instellingen</string>
     <string name="patch_selector_sheet_filter_sort_no_settings">Zonder instellingen</string>
     <string name="string_option_menu_description">Meer opties</string>
@@ -824,7 +824,7 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="mount_version_mismatch_title">Mount mislukt</string>
     <string name="mount_version_mismatch_message">Stock app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende stockversie en probeer het opnieuw.</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund.</string>
-    <string name="installer_action_open_shizuku">Open Shizuku</string>
+    <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_shizuku_launch_failed">Kan Shizuku niet openen. Start het handmatig en probeer het opnieuw.</string>
     <!-- Morphe -->
     <!-- Morphe -->
@@ -941,7 +941,7 @@ Details: %2$s"</string>
     <string name="step_running">bezig</string>
     <string name="step_waiting">wachtend</string>
     <string name="expand_content">uitvouwen</string>
-    <string name="collapse_content">inklapen</string>
+    <string name="collapse_content">inklappen</string>
     <string name="drag_handle">verplaatsen</string>
     <string name="more">Meer</string>
     <string name="less">Minder</string>
@@ -953,7 +953,7 @@ Details: %2$s"</string>
     <string name="developer_options_description">Opties voor het debuggen van problemen</string>
     <string name="patches_update_success">Update succesvol</string>
     <string name="patches_update_unavailable">Geen update beschikbaar</string>
-    <string name="view_patches">Patches bekijken</string>
+    <string name="view_patches">Patches weergeven</string>
     <string name="patches_view_any_version">Elke versie</string>
     <string name="patches_view_any_package">Elk pakket</string>
     <string name="patches_delete_single_dialog_description">Weet u zeker dat u \"%s\" wilt verwijderen?</string>
@@ -976,7 +976,7 @@ Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdrage
     <string name="update_checking_manager_description">Controleer op nieuwe versies van Morphe wanneer de applicatie start</string>
     <string name="manager_prereleases">Gebruik pre-releases</string>
     <string name="manager_prereleases_description">Gebruik pre-releaseversies van Morphe</string>
-    <string name="update_published">Gepubliceerd %s</string>
+    <string name="update_published">Gepubliceerd op %s</string>
     <string name="battery_optimization_notification">Batterij-optimalisaties moeten worden uitgeschakeld, zodat Morphe correct op de achtergrond kan werken. Klik hier om optimalisaties uit te schakelen.</string>
     <string name="installing_manager_update">Update installeren…</string>
     <string name="downloading_manager_update">Update downloaden…</string>
@@ -987,8 +987,8 @@ Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdrage
     <string name="update">Update</string>
     <string name="empty">Leeg</string>
     <string name="just_now">Zojuist</string>
-    <string name="minutes_ago">%sm minuten geleden</string>
-    <string name="hours_ago">%sh uur geleden</string>
+    <string name="minutes_ago">%sm geleden</string>
+    <string name="hours_ago">%su geleden</string>
     <string name="days_ago">%sd geleden</string>
     <string name="invalid_date">Ongeldige datum</string>
     <string name="input_dialog_value_invalid">Ongeldige waarde</string>

@@ -73,6 +73,8 @@
     <string name="morphe_patcher_success_title">Всичко е готово! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Вашата приложение е патчена и инсталирана!</string>
     <string name="morphe_patcher_mounting">Монтиране…</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Продължи въпреки това</string>
+    <string name="morphe_patcher_wrong_package_title">Избрана е грешна пакета</string>
     <string name="morphe_patcher_expected_package">Очакван пакет</string>
     <string name="morphe_patcher_selected_package">Избран пакет</string>
     <string name="morphe_patcher_message_6">Гледни навън, там е хубаво… ☀️</string>
@@ -86,6 +88,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
     <!-- Morphe Settings Screen -->
+    <string name="morphe_settings_return_to_expert">Промени на експерт режим</string>
     <string name="morphe_settings_return_to_expert_description">Превключване към експерт режим с пълни възможности</string>
     <string name="morphe_share_website">Сподели уебсайт</string>
     <string name="morphe_share_website_description">Сподели официалния уебсайт на Morphe</string>
