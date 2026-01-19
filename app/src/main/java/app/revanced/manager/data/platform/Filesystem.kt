@@ -43,6 +43,17 @@ class Filesystem(private val app: Application) {
      */
     val originalApksDir: File = app.getDir("original-apks", Context.MODE_PRIVATE).apply { mkdirs() }
 
+    /**
+     * Find any patched app file for the given package name.
+     * Useful when the exact version is unknown (e.g., after version update).
+     */
+    fun findPatchedAppFile(packageName: String): File? {
+        val safePackage = FilenameUtils.sanitize(packageName)
+        val prefix = "${safePackage}_"
+        return patchedAppsDir.listFiles()
+            ?.firstOrNull { it.name.startsWith(prefix) && it.name.endsWith(".apk") }
+    }
+
     fun externalFilesDir(): Path = Environment.getExternalStorageDirectory().toPath()
 
     fun storageRoots(): List<StorageRoot> {

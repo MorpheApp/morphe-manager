@@ -202,7 +202,10 @@ class InstalledAppsViewModel(
 
             when (installedApp.installType) {
                 InstallType.SAVED -> {
-                    val savedFile = filesystem.getPatchedAppFile(packageName, installedApp.version)
+                    // Try to find any saved file for this package (handles version updates)
+                    val savedFile = filesystem.findPatchedAppFile(packageName)
+                        ?: filesystem.getPatchedAppFile(packageName, installedApp.version)
+
                     if (!savedFile.exists()) {
                         installedAppsRepository.delete(installedApp)
                         return@withContext null
@@ -212,7 +215,9 @@ class InstalledAppsViewModel(
 
                 else -> {
                     pm.getPackageInfo(packageName) ?: run {
-                        val savedFile = filesystem.getPatchedAppFile(packageName, installedApp.version)
+                        // Try to find any saved file as fallback
+                        val savedFile = filesystem.findPatchedAppFile(packageName)
+                            ?: filesystem.getPatchedAppFile(packageName, installedApp.version)
                         if (savedFile.exists()) pm.getPackageInfo(savedFile) else null
                     }
                 }
