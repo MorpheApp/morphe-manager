@@ -37,6 +37,12 @@ class Filesystem(private val app: Application) {
     val uiTempDir: File = app.getDir("ui_ephemeral", Context.MODE_PRIVATE)
     private val patchedAppsDir: File = app.getDir("patched-apps", Context.MODE_PRIVATE).apply { mkdirs() }
 
+    /**
+     * Permanent directory for storing original APK files for repatching.
+     * Unlike temporary directories, these files persist across app restarts.
+     */
+    val originalApksDir: File = app.getDir("original-apks", Context.MODE_PRIVATE).apply { mkdirs() }
+
     fun externalFilesDir(): Path = Environment.getExternalStorageDirectory().toPath()
 
     fun storageRoots(): List<StorageRoot> {

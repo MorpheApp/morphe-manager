@@ -5,6 +5,11 @@ import android.content.pm.PackageInfo
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -47,12 +52,13 @@ import app.revanced.manager.util.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
+import java.io.File
 
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeInstalledAppInfoScreen(
     packageName: String,
-    onRepatch: (String, PatchSelection, Options) -> Unit,
+    onRepatch: (String, File, PatchSelection, Options) -> Unit,
     onBackClick: () -> Unit = {},
     viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) },
     prefs: PreferencesManager = koinInject()
@@ -286,6 +292,38 @@ fun HomeInstalledAppInfoScreen(
                 color = secondaryColor
             )
         }
+    }
+
+    // Repatch Expert Mode Dialog
+    if (viewModel.showRepatchDialog) {
+        val allowIncompatible by prefs.disablePatchVersionCompatCheck.getAsState()
+
+        ExpertModeDialog(
+            bundles = viewModel.repatchBundles,
+            selectedPatches = viewModel.repatchPatches,
+            options = viewModel.repatchOptions,
+            onPatchToggle = { bundleUid, patchName ->
+                viewModel.toggleRepatchPatch(bundleUid, patchName)
+            },
+            onOptionChange = { bundleUid, patchName, optionKey, value ->
+                viewModel.updateRepatchOption(bundleUid, patchName, optionKey, value)
+            },
+            onResetOptions = { bundleUid, patchName ->
+                viewModel.resetRepatchOptions(bundleUid, patchName)
+            },
+            onDismiss = {
+                viewModel.dismissRepatchDialog()
+            },
+            onProceed = {
+                viewModel.proceedWithRepatch(
+                    patches = viewModel.repatchPatches,
+                    options = viewModel.repatchOptions
+                ) { packageName, originalFile, patches, options ->
+                    onRepatch(packageName, originalFile, patches, options)
+                }
+            },
+            allowIncompatible = allowIncompatible
+        )
     }
 
     Box(
@@ -539,7 +577,7 @@ private fun AppInfoSection(
 private fun AppActionsSection(
     viewModel: InstalledAppInfoViewModel,
     installedApp: InstalledApp,
-    onRepatch: (String, PatchSelection, Options) -> Unit,
+    onRepatch: (String, File, PatchSelection, Options) -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
     onMountWarning: () -> Unit,
@@ -598,8 +636,13 @@ private fun AppActionsSection(
                             text = stringResource(R.string.repatch),
                             icon = Icons.Outlined.Build,
                             onClick = {
-                                context.toast("Feature not ready yet")
+                                viewModel.startRepatch { packageName, originalFile, patches, options ->
+                                    // This callback will be called when repatch is ready to start
+                                    // Navigate to patcher screen with these parameters
+                                    onRepatch(packageName, originalFile, patches, options)
+                                }
                             },
+                            enabled = viewModel.hasOriginalApk,  // Disable if no original APK
                             modifier = Modifier.weight(1f)
                         )
 
@@ -674,6 +717,20 @@ private fun AppActionsSection(
                                 modifier = Modifier.weight(1f)
                             )
                         }
+                    }
+
+                    AnimatedVisibility(
+                        visible = !viewModel.hasOriginalApk,
+                        enter = fadeIn() + expandVertically(),
+                        exit = fadeOut() + shrinkVertically()
+                    ) {
+                        InfoBadge(
+                            text = stringResource(R.string.morphe_repatch_requires_original),
+                            style = InfoBadgeStyle.Warning,
+                            icon = Icons.Outlined.Info,
+                            isExpanded = true,
+                            modifier = Modifier.fillMaxWidth()
+                        )
                     }
                 }
             }

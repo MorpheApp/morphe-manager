@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,18 +14,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 /**
  * System tab content
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SystemTabContent(
@@ -46,6 +51,30 @@ fun SystemTabContent(
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
 
     var showProcessRuntimeDialog by remember { mutableStateOf(false) }
+    var showOriginalApksDialog by remember { mutableStateOf(false) }
+
+    // Process runtime dialog
+    if (showProcessRuntimeDialog) {
+        ProcessRuntimeDialog(
+            currentEnabled = useProcessRuntime,
+            currentLimit = memoryLimit,
+            onDismiss = { showProcessRuntimeDialog = false },
+            onConfirm = { enabled, limit ->
+                scope.launch {
+                    prefs.useProcessRuntime.update(enabled)
+                    prefs.patcherProcessMemoryLimit.update(limit)
+                    showProcessRuntimeDialog = false
+                }
+            }
+        )
+    }
+
+    // Original APKs management dialog
+    if (showOriginalApksDialog) {
+        OriginalApksManagementDialog(
+            onDismissRequest = { showOriginalApksDialog = false }
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -162,6 +191,42 @@ fun SystemTabContent(
             }
         }
 
+        // Original APKs Management
+        SectionTitle(
+            text = stringResource(R.string.morphe_original_apks_management),
+            icon = Icons.Outlined.Storage
+        )
+
+        SectionCard {
+            val repository: OriginalApkRepository = koinInject()
+            val allOriginalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
+            val apkCount = allOriginalApks.size
+
+            RichSettingsItem(
+                onClick = { showOriginalApksDialog = true },
+                title = stringResource(R.string.morphe_original_apks_title),
+                subtitle = stringResource(R.string.morphe_original_apks_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.FolderOpen)
+                },
+                trailingContent = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (apkCount > 0) {
+                            InfoBadge(
+                                text = apkCount.toString(),
+                                style = InfoBadgeStyle.Default,
+                                isCompact = true
+                            )
+                        }
+                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                    }
+                }
+            )
+        }
+
         // About Section
         SectionTitle(
             text = stringResource(R.string.about),
@@ -171,21 +236,5 @@ fun SystemTabContent(
         SectionCard {
             AboutSection(onAboutClick = onAboutClick)
         }
-    }
-
-    // Process Runtime Dialog
-    if (showProcessRuntimeDialog) {
-        ProcessRuntimeDialog(
-            currentEnabled = useProcessRuntime,
-            currentLimit = memoryLimit,
-            onDismiss = { showProcessRuntimeDialog = false },
-            onConfirm = { enabled, limit ->
-                scope.launch {
-                    prefs.useProcessRuntime.update(enabled)
-                    prefs.patcherProcessMemoryLimit.update(limit)
-                    showProcessRuntimeDialog = false
-                }
-            }
-        )
     }
 }

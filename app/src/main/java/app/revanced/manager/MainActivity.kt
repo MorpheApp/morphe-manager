@@ -30,6 +30,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppsScreen
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
@@ -42,15 +43,20 @@ import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.util.EventEffect
+import app.revanced.manager.util.toast
+import com.topjohnwu.superuser.internal.Utils.context
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
+import java.io.File
+import app.morphe.manager.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -488,18 +494,22 @@ private fun ReVancedManager(vm: MainViewModel) {
 
                     HomeInstalledAppInfoScreen(
                         packageName = data.packageName,
-                        onRepatch = { packageName, patches, options ->
-                            navController.navigateComplex(
-                                Patcher,
-                                Patcher.ViewModelParams(
-                                    selectedApp = SelectedApp.Installed(
-                                        packageName = packageName,
-                                        version = ""
-                                    ),
-                                    selectedPatches = patches,
-                                    options = options
+                        onRepatch = { repatchPackageName, originalFile, patches, options ->
+                            it.lifecycleScope.launch {
+                                navController.navigateComplex(
+                                    Patcher,
+                                    Patcher.ViewModelParams(
+                                        selectedApp = SelectedApp.Local(
+                                            packageName = repatchPackageName,
+                                            version = originalFile.name.substringAfterLast("_").substringBeforeLast("_original.apk"),
+                                            file = originalFile,
+                                            temporary = false
+                                        ),
+                                        selectedPatches = patches,
+                                        options = options
+                                    )
                                 )
-                            )
+                            }
                         },
                         onBackClick = { navController.popBackStack() }
                     )
