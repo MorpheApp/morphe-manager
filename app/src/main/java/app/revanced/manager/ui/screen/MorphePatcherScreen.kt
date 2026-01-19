@@ -328,7 +328,6 @@ fun MorphePatcherScreen(
                     PatchingInProgress(
                         progress = displayProgressAnimate,
                         patchesProgress = patchesProgress,
-                        downloadProgress = viewModel.downloadProgress,
                         viewModel = viewModel,
                         showLongStepWarning = showLongStepWarning,
                         onCancelClick = { state.showCancelDialog = true },
