@@ -1,5 +1,7 @@
 package app.revanced.manager.ui.component.morphe.settings
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.original.OriginalApk
 import app.revanced.manager.domain.repository.OriginalApkRepository
+import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.utils.formatBytes
 import app.revanced.manager.util.toast
@@ -31,8 +34,18 @@ fun OriginalApksManagementDialog(
     val repository: OriginalApkRepository = koinInject()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val pm = context.packageManager
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
+
+    // Get package info for each APK
+    val packageInfoMap = remember(originalApks) {
+        originalApks.associate { apk ->
+            apk.packageName to runCatching {
+                pm.getPackageInfo(apk.packageName, 0)
+            }.getOrNull()
+        }
+    }
 
     // Calculate total size from actual APKs in the list
     val totalSize = remember(originalApks) {
@@ -99,6 +112,7 @@ fun OriginalApksManagementDialog(
                     originalApks.forEach { apk ->
                         OriginalApkItem(
                             apk = apk,
+                            packageInfo = packageInfoMap[apk.packageName],
                             onDelete = { apkToDelete = it }
                         )
                     }
@@ -134,7 +148,9 @@ fun OriginalApksManagementDialog(
                     apkToDelete!!.packageName
                 ),
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogTextColor.current
+                color = LocalDialogTextColor.current,
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
@@ -143,8 +159,11 @@ fun OriginalApksManagementDialog(
 @Composable
 private fun OriginalApkItem(
     apk: OriginalApk,
+    packageInfo: PackageInfo?,
     onDelete: (OriginalApk) -> Unit
 ) {
+    val context = LocalContext.current
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
@@ -154,15 +173,29 @@ private fun OriginalApkItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // App Icon
+            AppIcon(
+                packageInfo = packageInfo,
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
+
+            // App Info
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = apk.packageName,
+                    text = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+                        ?: apk.packageName,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color = LocalDialogTextColor.current
+                )
+                Text(
+                    text = apk.packageName,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = LocalDialogSecondaryTextColor.current
                 )
                 Text(
                     text = stringResource(
@@ -175,6 +208,7 @@ private fun OriginalApkItem(
                 )
             }
 
+            // Delete Button
             IconButton(onClick = { onDelete(apk) }) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,
