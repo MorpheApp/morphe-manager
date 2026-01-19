@@ -146,8 +146,9 @@ private fun MorpheInstalledAppCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                val versionText = installedApp.version
-                    .takeIf { it.isNotBlank() }
+                // Get version from PackageInfo
+                val versionText = packageInfo?.versionName
+                    ?.takeIf { it.isNotBlank() }
                     ?.let { if (it.startsWith("v")) it else "v$it" }
 
                 val installTypeText =
