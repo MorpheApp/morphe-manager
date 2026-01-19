@@ -952,7 +952,7 @@ class PatcherViewModel(
     ): Boolean = withContext(Dispatchers.IO) {
         val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
         val patchedPackageInfo = pm.getPackageInfo(outputFile)
-        val packageInfo = installedPackageInfo ?: patchedPackageInfo
+        val packageInfo = patchedPackageInfo ?: installedPackageInfo
         if (packageInfo == null) {
             Log.e(TAG, "Failed to resolve package info for patched APK")
             return@withContext false

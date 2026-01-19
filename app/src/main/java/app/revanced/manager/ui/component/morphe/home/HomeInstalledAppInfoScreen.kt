@@ -135,7 +135,7 @@ fun HomeInstalledAppInfoScreen(
     val exportFormat by prefs.patchedAppExportFormat.getAsState()
     val exportMetadata = remember(
         installedApp?.currentPackageName,
-        installedApp?.version,
+        appInfo?.versionName,
         appliedBundles,
         appInfo
     ) {
@@ -147,7 +147,7 @@ fun HomeInstalledAppInfoScreen(
         PatchedAppExportData(
             appName = label,
             packageName = installedApp.currentPackageName,
-            appVersion = installedApp.version,
+            appVersion = appInfo?.versionName ?: installedApp.version,
             patchBundleVersions = bundleVersions,
             patchBundleNames = bundleNames
         )
@@ -364,6 +364,7 @@ fun HomeInstalledAppInfoScreen(
                 // Info section
                 AppInfoSection(
                     installedApp = installedApp,
+                    appInfo = appInfo,
                     appliedPatches = appliedPatches,
                     onShowPatches = { showAppliedPatchesDialog = true },
                     bundlesUsedSummary = bundlesUsedSummary
@@ -475,6 +476,7 @@ private fun AppStatusBadges(
 @Composable
 private fun AppInfoSection(
     installedApp: InstalledApp,
+    appInfo: PackageInfo?,
     appliedPatches: Map<Int, Set<String>>?,
     onShowPatches: () -> Unit,
     bundlesUsedSummary: String
@@ -513,7 +515,7 @@ private fun AppInfoSection(
 
                 InfoRow(
                     label = stringResource(R.string.version),
-                    value = installedApp.version
+                    value = appInfo?.versionName ?: installedApp.version
                 )
 
                 MorpheSettingsDivider(modifier = Modifier.padding(vertical = 8.dp))
