@@ -189,39 +189,28 @@ The image dimensions must be as follows:
     ): Any? {
         val prefKey = "${packageType}_${patchName}_${optionKey}"
 
-        return when {
-            // YouTube Theme
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
-                darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}" ->
-                lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
+        return when (// YouTube Theme
+            prefKey) {
+            "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" -> darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}" -> lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
 
             // YouTube Custom Branding
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
-                customAppNameYouTube.get().takeIf { it.isNotBlank() }
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
-                customIconPathYouTube.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" -> customAppNameYouTube.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" -> customIconPathYouTube.get().takeIf { it.isNotBlank() }
 
             // YouTube Change Header
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}" ->
-                customHeaderPath.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}" -> customHeaderPath.get().takeIf { it.isNotBlank() }
 
             // YouTube Hide Shorts
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}" ->
-                hideShortsAppShortcut.get().takeIf { it }
-            prefKey == "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}" ->
-                hideShortsWidget.get().takeIf { it }
+            "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}" -> hideShortsAppShortcut.get().takeIf { it }
+            "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}" -> hideShortsWidget.get().takeIf { it }
 
             // YouTube Music Theme
-            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" ->
-                darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" -> darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() }
 
             // YouTube Music Custom Branding
-            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" ->
-                customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }
-            prefKey == "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" ->
-                customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }
-
+            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" -> customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }
+            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" -> customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }
             else -> null
         }
     }
