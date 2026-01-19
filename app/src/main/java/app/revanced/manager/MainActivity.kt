@@ -32,7 +32,6 @@ import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
-import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppsScreen
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
@@ -173,7 +172,10 @@ private fun ReVancedManager(vm: MainViewModel) {
 
                 MorpheHomeScreen(
                     onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
-                    onMorpheInstalledAppsClick = { navController.navigate(MorpheInstalledApps) },
+                    onMorpheInstalledAppInfoClick = { packageName ->
+                        // Navigate to installed app info screen
+                        navController.navigate(MorpheInstalledAppInfo(packageName))
+                    },
                     onStartQuickPatch = { params ->
                         // Immediately start patching with the received parameters
                         navController.navigateComplex(
@@ -461,7 +463,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                 composable<Settings.About> {
                     AboutSettingsScreen(
                         onBackClick = navController::popBackStack,
-    //                    navigate = navController::navigate
+                        //                    navigate = navController::navigate
                     )
                 }
 
@@ -478,17 +480,7 @@ private fun ReVancedManager(vm: MainViewModel) {
                     MorpheSettingsScreen()
                 }
 
-                // Morphe Installed Apps Screen
-                composable<MorpheInstalledApps> {
-                    HomeInstalledAppsScreen(
-                        onAppClick = { app ->
-                            navController.navigate(
-                                MorpheInstalledAppInfo(app.currentPackageName)
-                            )
-                        }
-                    )
-                }
-
+                // Morphe Installed App Info Screen
                 composable<MorpheInstalledAppInfo> {
                     val data = it.toRoute<MorpheInstalledAppInfo>()
 

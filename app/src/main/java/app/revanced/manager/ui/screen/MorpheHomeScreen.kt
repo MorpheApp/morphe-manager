@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.screen
 
+import android.content.pm.PackageInfo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -9,20 +10,29 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstallType
+import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.*
 import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
+import app.revanced.manager.ui.component.morphe.utils.buildBundleSummaries
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.HomeAndPatcherMessages
+import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.Options
+import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -48,7 +58,7 @@ data class QuickPatchParams(
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
-    onMorpheInstalledAppsClick: () -> Unit,
+    onMorpheInstalledAppInfoClick: (String) -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
@@ -56,20 +66,88 @@ fun MorpheHomeScreen(
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?
 ) {
     val context = LocalContext.current
+    val pm: PM = koinInject()
+    val installedAppRepository: InstalledAppRepository = koinInject()
 
     // Collect state flows
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
-    // Collect expert mode state
-    val useExpertMode by prefs.useExpertMode.getAsState()
-
     // Install type is needed for UI components.
     // Ideally this logic is part of some other code, but for now this is simple and works.
     val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
             dashboardViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
+
+    // Load installed apps
+    var youtubeInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+    var youtubeMusicInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+    var redditInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+
+    var youtubePackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+    var youtubeMusicPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+    var redditPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+
+    // Bundle summaries for displaying patch info on installed app cards
+    val youtubeBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+    val youtubeMusicBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+    val redditBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+
+    // Observe all installed apps from repository
+    val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
+
+    // Update installed apps when data changes
+    LaunchedEffect(allInstalledApps, sources, bundleInfo) {
+        withContext(Dispatchers.IO) {
+            val sourceMap = sources.associateBy { it.uid }
+
+            // Load YouTube
+            youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
+            youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let {
+                pm.getPackageInfo(it)
+            }
+            youtubeBundleSummaries.clear()
+            youtubeInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    youtubeBundleSummaries.addAll(
+                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
+                    )
+                }
+            }
+
+            // Load YouTube Music
+            youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE_MUSIC }
+            youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let {
+                pm.getPackageInfo(it)
+            }
+            youtubeMusicBundleSummaries.clear()
+            youtubeMusicInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    youtubeMusicBundleSummaries.addAll(
+                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
+                    )
+                }
+            }
+
+            // Load Reddit
+            redditInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_REDDIT }
+            redditPackageInfo = redditInstalledApp?.currentPackageName?.let {
+                pm.getPackageInfo(it)
+            }
+            redditBundleSummaries.clear()
+            redditInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    redditBundleSummaries.addAll(
+                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
+                    )
+                }
+            }
+        }
+    }
 
     // Remember home state
     val homeState = rememberMorpheHomeState(
@@ -111,7 +189,6 @@ fun MorpheHomeScreen(
 
     // Control snackbar visibility based on progress
     LaunchedEffect(bundleUpdateProgress) {
-
         if (bundleUpdateProgress == null) {
             // Progress cleared - hide snackbar
             homeState.showBundleUpdateSnackbar = false
@@ -172,8 +249,21 @@ fun MorpheHomeScreen(
                 context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
             },
 
-            // Other apps button (only show in expert mode)
-            showOtherAppsButton = useExpertMode,
+            // Installed apps data
+            youtubeInstalledApp = youtubeInstalledApp,
+            youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+            redditInstalledApp = redditInstalledApp,
+            youtubePackageInfo = youtubePackageInfo,
+            youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+            redditPackageInfo = redditPackageInfo,
+            youtubeBundleSummaries = youtubeBundleSummaries,
+            youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
+            redditBundleSummaries = redditBundleSummaries,
+            onInstalledAppClick = { app ->
+                onMorpheInstalledAppInfoClick(app.currentPackageName)
+            },
+
+            // Other apps button
             onOtherAppsClick = {
                 if (availablePatches <= 0 || bundleUpdateProgress != null) {
                     context.toast(context.getString(R.string.morphe_home_patches_are_loading))
@@ -188,7 +278,6 @@ fun MorpheHomeScreen(
             },
 
             // Bottom action bar
-            onInstalledAppsClick = onMorpheInstalledAppsClick,
             onBundlesClick = { homeState.showBundleManagementSheet = true },
             onSettingsClick = onMorpheSettingsClick
         )

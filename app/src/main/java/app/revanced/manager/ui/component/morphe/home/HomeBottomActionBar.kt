@@ -2,13 +2,22 @@ package app.revanced.manager.ui.component.morphe.home
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material3.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,12 +31,11 @@ import app.morphe.manager.R
 
 /**
  * Section 5: Bottom action bar
- * Three rectangular buttons with fixed position at bottom
- * Left: Installed/Patched Apps | Center: Bundles | Right: Settings
+ * Three-column layout: Empty space (left) | Bundles (center) | Settings (right)
+ * Bundles and Settings buttons positioned center and right
  */
 @Composable
 fun HomeBottomActionBar(
-    onInstalledAppsClick: () -> Unit,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -39,13 +47,8 @@ fun HomeBottomActionBar(
         horizontalArrangement = Arrangement.spacedBy(32.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Left: Installed Apps button
-        BottomActionButton(
-            onClick = onInstalledAppsClick,
-            icon = Icons.Outlined.Apps,
-            text = stringResource(R.string.installed),
-            modifier = Modifier.weight(1f)
-        )
+        // Left: Empty space
+        Spacer(modifier = Modifier.weight(1f))
 
         // Center: Bundles button
         BottomActionButton(
@@ -58,7 +61,7 @@ fun HomeBottomActionBar(
         // Right: Settings button
         BottomActionButton(
             onClick = onSettingsClick,
-            icon = Icons.Default.Settings,
+            icon = Icons.Outlined.Settings,
             text = stringResource(R.string.settings),
             modifier = Modifier.weight(1f)
         )

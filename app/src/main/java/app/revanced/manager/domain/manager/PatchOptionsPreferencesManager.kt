@@ -36,6 +36,7 @@ class PatchOptionsPreferencesManager(
         // Package identifiers
         const val PACKAGE_YOUTUBE = "com.google.android.youtube"
         const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
+        const val PACKAGE_REDDIT = "com.reddit.frontpage"
 
         // Patch names (must match exactly with bundle)
         const val PATCH_THEME = "Theme"

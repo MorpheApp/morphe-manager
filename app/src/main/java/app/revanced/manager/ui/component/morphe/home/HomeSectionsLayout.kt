@@ -1,16 +1,46 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,16 +49,23 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.AppIcon
+import app.revanced.manager.ui.component.morphe.shared.WindowSize
+import app.revanced.manager.ui.component.morphe.shared.contentPadding
+import app.revanced.manager.ui.component.morphe.shared.itemSpacing
+import app.revanced.manager.ui.component.morphe.shared.rememberWindowSize
+import app.revanced.manager.ui.component.morphe.shared.useTwoColumnLayout
+import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 
 /**
  * Home screen layout with 5 sections and adaptive landscape support:
@@ -36,7 +73,7 @@ import app.revanced.manager.ui.component.morphe.shared.*
  * 2. Greeting message section
  * 3. App buttons section (YouTube, YouTube Music, Reddit)
  * 4. Other apps button (only in expert mode)
- * 5. Bottom action bar (Installed Apps, Bundles, Settings)
+ * 5. Bottom action bar (Bundles, Settings)
  */
 @Composable
 fun HomeSectionsLayout(
@@ -55,12 +92,22 @@ fun HomeSectionsLayout(
     onYouTubeMusicClick: () -> Unit,
     onRedditClick: () -> Unit,
 
+    // Installed apps data
+    youtubeInstalledApp: InstalledApp? = null,
+    youtubeMusicInstalledApp: InstalledApp? = null,
+    redditInstalledApp: InstalledApp? = null,
+    youtubePackageInfo: PackageInfo? = null,
+    youtubeMusicPackageInfo: PackageInfo? = null,
+    redditPackageInfo: PackageInfo? = null,
+    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
+    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
+    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
+    onInstalledAppClick: (InstalledApp) -> Unit,
+
     // Other apps button
-    showOtherAppsButton: Boolean = false,
     onOtherAppsClick: () -> Unit,
 
     // Bottom action bar
-    onInstalledAppsClick: () -> Unit,
     onBundlesClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
@@ -84,14 +131,22 @@ fun HomeSectionsLayout(
                 onYouTubeClick = onYouTubeClick,
                 onYouTubeMusicClick = onYouTubeMusicClick,
                 onRedditClick = onRedditClick,
-                showOtherAppsButton = showOtherAppsButton,
+                youtubeInstalledApp = youtubeInstalledApp,
+                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                redditInstalledApp = redditInstalledApp,
+                youtubePackageInfo = youtubePackageInfo,
+                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                redditPackageInfo = redditPackageInfo,
+                youtubeBundleSummaries = youtubeBundleSummaries,
+                youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
+                redditBundleSummaries = redditBundleSummaries,
+                onInstalledAppClick = onInstalledAppClick,
                 onOtherAppsClick = onOtherAppsClick,
                 modifier = Modifier.weight(1f)
             )
 
             // Section 5: Bottom action bar
             HomeBottomActionBar(
-                onInstalledAppsClick = onInstalledAppsClick,
                 onBundlesClick = onBundlesClick,
                 onSettingsClick = onSettingsClick
             )
@@ -132,7 +187,16 @@ private fun HomeAdaptiveContent(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     onRedditClick: () -> Unit,
-    showOtherAppsButton: Boolean,
+    youtubeInstalledApp: InstalledApp?,
+    youtubeMusicInstalledApp: InstalledApp?,
+    redditInstalledApp: InstalledApp?,
+    youtubePackageInfo: PackageInfo?,
+    youtubeMusicPackageInfo: PackageInfo?,
+    redditPackageInfo: PackageInfo?,
+    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    onInstalledAppClick: (InstalledApp) -> Unit,
     onOtherAppsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -174,16 +238,24 @@ private fun HomeAdaptiveContent(
                     onYouTubeClick = onYouTubeClick,
                     onYouTubeMusicClick = onYouTubeMusicClick,
                     onRedditClick = onRedditClick,
+                    youtubeInstalledApp = youtubeInstalledApp,
+                    youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                    redditInstalledApp = redditInstalledApp,
+                    youtubePackageInfo = youtubePackageInfo,
+                    youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                    redditPackageInfo = redditPackageInfo,
+                    youtubeBundleSummaries = youtubeBundleSummaries,
+                    youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
+                    redditBundleSummaries = redditBundleSummaries,
+                    onInstalledAppClick = onInstalledAppClick,
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 // Other apps button
-                if (showOtherAppsButton) {
-                    HomeOtherAppsSection(
-                        onClick = onOtherAppsClick,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+                HomeOtherAppsSection(
+                    onClick = onOtherAppsClick,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     } else {
@@ -207,18 +279,26 @@ private fun HomeAdaptiveContent(
                 onYouTubeClick = onYouTubeClick,
                 onYouTubeMusicClick = onYouTubeMusicClick,
                 onRedditClick = onRedditClick,
+                youtubeInstalledApp = youtubeInstalledApp,
+                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                redditInstalledApp = redditInstalledApp,
+                youtubePackageInfo = youtubePackageInfo,
+                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                redditPackageInfo = redditPackageInfo,
+                youtubeBundleSummaries = youtubeBundleSummaries,
+                youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
+                redditBundleSummaries = redditBundleSummaries,
+                onInstalledAppClick = onInstalledAppClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             )
 
-            // Section 4: Other apps button (only in Expert mode)
-            if (showOtherAppsButton) {
-                HomeOtherAppsSection(
-                    onClick = onOtherAppsClick,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+            // Section 4: Other apps button
+            HomeOtherAppsSection(
+                onClick = onOtherAppsClick,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
@@ -450,6 +530,16 @@ fun HomeMainAppsSection(
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     onRedditClick: () -> Unit,
+    youtubeInstalledApp: InstalledApp?,
+    youtubeMusicInstalledApp: InstalledApp?,
+    redditInstalledApp: InstalledApp?,
+    youtubePackageInfo: PackageInfo?,
+    youtubeMusicPackageInfo: PackageInfo?,
+    redditPackageInfo: PackageInfo?,
+    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    onInstalledAppClick: (InstalledApp) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -464,72 +554,104 @@ fun HomeMainAppsSection(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // YouTube button
-            HomeAppButton(
-                text = stringResource(R.string.morphe_home_youtube),
-                backgroundColor = Color(0xFFFF0033),
-                contentColor = Color.White,
-                gradientColors = listOf(
-                    Color(0xFFFF0033), // YouTube red
-                    Color(0xFF1E5AA8), // Brand blue
-                    Color(0xFF00AFAE)  // Brand teal
-                ),
-                onClick = onYouTubeClick
-            )
+            // YouTube button/card
+            if (youtubeInstalledApp != null) {
+                HomeInstalledAppCard(
+                    installedApp = youtubeInstalledApp,
+                    packageInfo = youtubePackageInfo,
+                    gradientColors = listOf(
+                        Color(0xFFFF0033), // YouTube red
+                        Color(0xFF1E5AA8), // Brand blue
+                        Color(0xFF00AFAE)  // Brand teal
+                    ),
+                    bundleSummaries = youtubeBundleSummaries,
+                    onClick = { onInstalledAppClick(youtubeInstalledApp) }
+                )
+            } else {
+                HomeAppButton(
+                    text = stringResource(R.string.morphe_home_youtube),
+                    gradientColors = listOf(
+                        Color(0xFFFF0033),
+                        Color(0xFF1E5AA8),
+                        Color(0xFF00AFAE)
+                    ),
+                    onClick = onYouTubeClick
+                )
+            }
 
-            // YouTube Music button
-            HomeAppButton(
-                text = stringResource(R.string.morphe_home_youtube_music),
-                backgroundColor = Color(0xFFFF8C3E),
-                contentColor = Color.White,
-                gradientColors = listOf(
-                    Color(0xFFFF8C3E), // Orange
-                    Color(0xFF1E5AA8), // Brand blue
-                    Color(0xFF00AFAE)  // Brand teal
-                ),
-                onClick = onYouTubeMusicClick
-            )
+            // YouTube Music button/card
+            if (youtubeMusicInstalledApp != null) {
+                HomeInstalledAppCard(
+                    installedApp = youtubeMusicInstalledApp,
+                    packageInfo = youtubeMusicPackageInfo,
+                    gradientColors = listOf(
+                        Color(0xFFFF8C3E), // Orange
+                        Color(0xFF1E5AA8),
+                        Color(0xFF00AFAE)
+                    ),
+                    bundleSummaries = youtubeMusicBundleSummaries,
+                    onClick = { onInstalledAppClick(youtubeMusicInstalledApp) }
+                )
+            } else {
+                HomeAppButton(
+                    text = stringResource(R.string.morphe_home_youtube_music),
+                    gradientColors = listOf(
+                        Color(0xFFFF8C3E),
+                        Color(0xFF1E5AA8),
+                        Color(0xFF00AFAE)
+                    ),
+                    onClick = onYouTubeMusicClick
+                )
+            }
 
-            // Reddit button
-            HomeAppButton(
-                text = stringResource(R.string.morphe_home_reddit),
-                backgroundColor = Color(0xFFFF4500),
-                contentColor = Color.White,
-                gradientColors = listOf(
-                    Color(0xFFFF4500), // Reddit orange
-                    Color(0xFF1E5AA8), // Brand blue
-                    Color(0xFF00AFAE)  // Brand teal
-                ),
-                onClick = onRedditClick,
-//                enabled = false
-            )
+            // Reddit button/card
+            if (redditInstalledApp != null) {
+                HomeInstalledAppCard(
+                    installedApp = redditInstalledApp,
+                    packageInfo = redditPackageInfo,
+                    gradientColors = listOf(
+                        Color(0xFFFF4500), // Reddit orange
+                        Color(0xFF1E5AA8),
+                        Color(0xFF00AFAE)
+                    ),
+                    bundleSummaries = redditBundleSummaries,
+                    onClick = { onInstalledAppClick(redditInstalledApp) }
+                )
+            } else {
+                HomeAppButton(
+                    text = stringResource(R.string.morphe_home_reddit),
+                    gradientColors = listOf(
+                        Color(0xFFFF4500),
+                        Color(0xFF1E5AA8),
+                        Color(0xFF00AFAE)
+                    ),
+                    onClick = onRedditClick,
+//                    enabled = false
+                )
+            }
         }
     }
 }
 
 /**
- * App button with gradient background and haptic feedback
+ * Shared content layout for app cards and buttons
  */
 @Composable
-fun HomeAppButton(
-    text: String,
-    backgroundColor: Color,
-    contentColor: Color,
+private fun AppCardLayout(
+    gradientColors: List<Color>,
+    enabled: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    gradientColors: List<Color>? = null,
-    enabled: Boolean = true
+    content: @Composable RowScope.() -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)
-    val colors = gradientColors ?: listOf(backgroundColor, backgroundColor)
     val view = LocalView.current
     val isDarkMode = isSystemInDarkTheme()
 
-    // Adaptive alpha values - higher opacity in light mode for better contrast
     val backgroundAlpha = if (enabled) {
         if (isDarkMode) 0.6f else 0.85f
     } else {
-        0.3f // Much lower opacity for disabled state
+        0.3f
     }
 
     val borderAlpha = if (enabled) {
@@ -538,18 +660,11 @@ fun HomeAppButton(
         0.4f
     }
 
-    val finalContentColor = if (enabled) {
-        contentColor
-    } else {
-        contentColor.copy(alpha = 0.5f)
-    }
-
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
     ) {
-        // Main button
         Surface(
             onClick = {
                 if (enabled) {
@@ -564,9 +679,9 @@ fun HomeAppButton(
                 .border(
                     width = 1.5.dp,
                     brush = Brush.linearGradient(
-                        colors = colors.map { it.copy(alpha = borderAlpha) },
-                        start = Offset(0f, 0f), // Top-left
-                        end = Offset.Infinite   // Bottom-right
+                        colors = gradientColors.map { it.copy(alpha = borderAlpha) },
+                        start = Offset(0f, 0f),
+                        end = Offset.Infinite
                     ),
                     shape = shape
                 ),
@@ -579,26 +694,19 @@ fun HomeAppButton(
                     .fillMaxSize()
                     .background(
                         brush = Brush.linearGradient(
-                            colors = colors.map { it.copy(alpha = backgroundAlpha) },
-                            start = Offset(0f, 0f), // Top-left
-                            end = Offset.Infinite   // Bottom-right
+                            colors = gradientColors.map { it.copy(alpha = backgroundAlpha) },
+                            start = Offset(0f, 0f),
+                            end = Offset.Infinite
                         )
-                    ),
-                contentAlignment = Alignment.Center
+                    )
             ) {
-                Text(
-                    text = text,
-                    style = TextStyle(
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        // Text shadow for better readability
-                        shadow = Shadow(
-                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
-                            offset = Offset(0f, 2f),
-                            blurRadius = 4f
-                        )
-                    ),
-                    color = finalContentColor
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = content
                 )
             }
         }
@@ -606,7 +714,165 @@ fun HomeAppButton(
 }
 
 /**
- * Section 4: Other apps button (Expert mode only)
+ * Installed app card with gradient background
+ */
+@Composable
+fun HomeInstalledAppCard(
+    installedApp: InstalledApp,
+    packageInfo: PackageInfo?,
+    gradientColors: List<Color>,
+    bundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val isDarkMode = isSystemInDarkTheme()
+    val textColor = if (isDarkMode) Color.White else Color.Black
+
+    AppCardLayout(
+        gradientColors = gradientColors,
+        enabled = true,
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        // App icon
+        AppIcon(
+            packageInfo = packageInfo,
+            contentDescription = null,
+            modifier = Modifier.size(48.dp)
+        )
+
+        // App info
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            // App name
+            Text(
+                text = packageInfo?.applicationInfo?.loadLabel(
+                    LocalContext.current.packageManager
+                )?.toString() ?: installedApp.currentPackageName,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        offset = Offset(0f, 2f),
+                        blurRadius = 4f
+                    )
+                ),
+                color = textColor
+            )
+
+            // Show version
+            packageInfo?.versionName?.let { version ->
+                Text(
+                    text = if (version.startsWith("v")) version else "v$version",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        shadow = Shadow(
+                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                            offset = Offset(0f, 1f),
+                            blurRadius = 2f
+                        )
+                    ),
+                    color = textColor.copy(alpha = 0.85f)
+                )
+            }
+
+            // Show bundle summaries if available
+            bundleSummaries.forEach { summary ->
+                val version = summary.version?.let {
+                    if (it.startsWith("v")) it else "v$it"
+                }
+                Text(
+                    text = listOfNotNull(summary.title, version)
+                        .joinToString(" • "),
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        shadow = Shadow(
+                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                            offset = Offset(0f, 1f),
+                            blurRadius = 2f
+                        )
+                    ),
+                    color = textColor.copy(alpha = 0.7f)
+                )
+            }
+        }
+    }
+}
+
+/**
+ * App button with gradient background
+ */
+@Composable
+fun HomeAppButton(
+    text: String,
+    gradientColors: List<Color>,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    val isDarkMode = isSystemInDarkTheme()
+    val textColor = if (isDarkMode) Color.White else Color.Black
+    val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
+
+    AppCardLayout(
+        gradientColors = gradientColors,
+        enabled = enabled,
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        // Icon placeholder
+        Box(
+            modifier = Modifier
+                .size(48.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(finalTextColor.copy(alpha = 0.2f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(24.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(finalTextColor.copy(alpha = 0.4f))
+            )
+        }
+
+        // Text info
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            // App name
+            Text(
+                text = text,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        offset = Offset(0f, 2f),
+                        blurRadius = 4f
+                    )
+                ),
+                color = finalTextColor
+            )
+
+            // Status text
+            Text(
+                text = stringResource(R.string.morphe_home_not_patched_yet),
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    shadow = Shadow(
+                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        offset = Offset(0f, 1f),
+                        blurRadius = 2f
+                    )
+                ),
+                color = finalTextColor.copy(alpha = 0.7f)
+            )
+        }
+    }
+}
+
+/**
+ * Section 4: Other apps button
  */
 @Composable
 fun HomeOtherAppsSection(
