@@ -912,9 +912,7 @@ class PatcherViewModel(
     /**
      * Save original APK file for future repatching.
      * Called after successful patching, independent of installation method.
-     *
-     * Note: For SelectedApp.Local with temporary=true (file picker),
-     * this saves the temporary copy which will be used for repatching.
+     * This saves the temporary copy which will be used for repatching.
      * The original user file remains untouched in its location.
      */
     private suspend fun saveOriginalApkIfNeeded() {
@@ -922,9 +920,15 @@ class PatcherViewModel(
             val inputApk = inputFile
             if (inputApk == null || !inputApk.exists()) return
 
-            // Get version and save
-            val originalVersion = input.selectedApp.version
-                ?: pm.getPackageInfo(inputApk)?.versionName
+            // Get version from the APK file
+            val apkPackageInfo = pm.getPackageInfo(inputApk)
+            if (apkPackageInfo == null) {
+                Log.w(TAG, "Cannot get package info from input APK, skipping save")
+                return
+            }
+
+            val originalVersion = apkPackageInfo.versionName?.takeUnless { it.isBlank() }
+                ?: input.selectedApp.version
                 ?: "unknown"
 
             val savedFile = originalApkRepository.saveOriginalApk(
