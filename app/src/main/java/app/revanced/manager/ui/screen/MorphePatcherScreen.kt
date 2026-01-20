@@ -14,7 +14,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +37,6 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.patcher.*
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
 import kotlinx.coroutines.delay
@@ -52,7 +50,7 @@ import kotlin.math.min
  * Simplified patcher screen with progress tracking
  * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
  */
-@SuppressLint("LocalContextGetResourceValueCall")
+@SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorphePatcherScreen(
@@ -62,6 +60,7 @@ fun MorphePatcherScreen(
     installViewModel: MorpheInstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
+    @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)

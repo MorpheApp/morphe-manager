@@ -55,7 +55,7 @@ private enum class SettingsTab(
 /**
  * Settings screen with bottom navigation and swipeable tabs
  */
-@SuppressLint("BatteryLight")
+@SuppressLint("BatteryLight", "LocalContextGetResourceValueCall")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MorpheSettingsScreen(
@@ -190,11 +190,11 @@ fun MorpheSettingsScreen(
                     patchOptionsViewModel = patchOptionsViewModel,
                     dashboardViewModel = dashboardViewModel,
                     prefs = prefs,
-                    onBackToAdvanced = {
-                        coroutineScope.launch {
-                            themeViewModel.prefs.useMorpheHomeScreen.update(false)
-                        }
-                    }
+//                    onBackToAdvanced = {
+//                        coroutineScope.launch {
+//                            themeViewModel.prefs.useMorpheHomeScreen.update(false)
+//                        }
+//                    }
                 )
 
                 SettingsTab.SYSTEM -> SystemTabContent(

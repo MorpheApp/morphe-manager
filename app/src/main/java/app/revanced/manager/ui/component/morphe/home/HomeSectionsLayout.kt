@@ -3,46 +3,16 @@ package app.revanced.manager.ui.component.morphe.home
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,11 +32,7 @@ import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AppIcon
-import app.revanced.manager.ui.component.morphe.shared.WindowSize
-import app.revanced.manager.ui.component.morphe.shared.contentPadding
-import app.revanced.manager.ui.component.morphe.shared.itemSpacing
-import app.revanced.manager.ui.component.morphe.shared.rememberWindowSize
-import app.revanced.manager.ui.component.morphe.shared.useTwoColumnLayout
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 
 /**
@@ -74,7 +40,7 @@ import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
  * 1. Notifications section (messages/updates)
  * 2. Greeting message section
  * 3. App buttons section (YouTube, YouTube Music, Reddit)
- * 4. Other apps button (only in expert mode)
+ * 4. Other apps button
  * 5. Bottom action bar (Bundles, Settings)
  */
 @Composable

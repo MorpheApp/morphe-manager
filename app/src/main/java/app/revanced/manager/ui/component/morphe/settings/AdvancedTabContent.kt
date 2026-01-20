@@ -9,25 +9,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Switch
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.shared.InfoBadge
-import app.revanced.manager.ui.component.morphe.shared.InfoBadgeStyle
-import app.revanced.manager.ui.component.morphe.shared.MorpheIcon
-import app.revanced.manager.ui.component.morphe.shared.RichSettingsItem
-import app.revanced.manager.ui.component.morphe.shared.SectionTitle
-import app.revanced.manager.ui.component.morphe.shared.SettingsItem
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
@@ -41,7 +29,7 @@ fun AdvancedTabContent(
     patchOptionsViewModel: PatchOptionsViewModel,
     dashboardViewModel: DashboardViewModel,
     prefs: PreferencesManager,
-    onBackToAdvanced: () -> Unit
+//    onBackToAdvanced: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -126,15 +114,15 @@ fun AdvancedTabContent(
         )
 
         // For now hide 'Return to URV mode' button
-        if (useExpertMode) {
-            SettingsItem(
-                icon = Icons.Outlined.SwapHoriz,
-                title = "Change to URV mode",
-                description = "Switch to the full-featured URV mode",
-                onClick = onBackToAdvanced,
-                showBorder = true
-            )
-        }
+//        if (useExpertMode) {
+//            SettingsItem(
+//                icon = Icons.Outlined.SwapHoriz,
+//                title = "Change to URV mode",
+//                description = "Switch to the full-featured URV mode",
+//                onClick = onBackToAdvanced,
+//                showBorder = true
+//            )
+//        }
 
         // Strip unused native libraries (Expert mode only)
         if (useExpertMode) {
