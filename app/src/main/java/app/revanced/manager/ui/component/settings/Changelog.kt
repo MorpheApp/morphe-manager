@@ -22,31 +22,31 @@ import app.revanced.manager.ui.component.Markdown
 @Composable
 fun Changelog(
     markdown: String,
-    version: String,
-    publishDate: String
+//    version: String,
+//    publishDate: String
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 0.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.NewReleases,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .size(32.dp)
-            )
-            Text(
-                "${version.removePrefix("v")} ($publishDate)",
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight(800)),
-                color = MaterialTheme.colorScheme.primary,
-            )
-        }
-    }
+//    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 0.dp),
+//            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Icon(
+//                imageVector = Icons.Outlined.NewReleases,
+//                contentDescription = null,
+//                tint = MaterialTheme.colorScheme.primary,
+//                modifier = Modifier
+//                    .size(32.dp)
+//            )
+//            Text(
+//                "${version.removePrefix("v")} ($publishDate)",
+//                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight(800)),
+//                color = MaterialTheme.colorScheme.primary,
+//            )
+//        }
+//    }
     Markdown(
         markdown,
     )

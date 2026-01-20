@@ -199,8 +199,8 @@ private fun BundleChangelogContent(
                 markdown = if (markdown.isBlank()) {
                     stringResource(R.string.bundle_changelog_empty)
                 } else markdown,
-                version = asset.version,
-                publishDate = publishDate
+//                version = asset.version,
+//                publishDate = publishDate
             )
         }
     }

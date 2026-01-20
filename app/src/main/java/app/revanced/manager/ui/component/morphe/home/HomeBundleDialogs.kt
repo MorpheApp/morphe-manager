@@ -1,10 +1,29 @@
 package app.revanced.manager.ui.component.morphe.home
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -12,15 +31,35 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.ErrorOutline
+import androidx.compose.material.icons.outlined.ExpandMore
+import androidx.compose.material.icons.outlined.Extension
+import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material.icons.outlined.Widgets
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -36,8 +75,14 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.network.dto.ReVancedAsset
 import app.revanced.manager.patcher.patch.PatchInfo
-import app.revanced.manager.ui.component.ArrowButton
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.shared.InfoBadge
+import app.revanced.manager.ui.component.morphe.shared.InfoBadgeStyle
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButton
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogTextField
 import app.revanced.manager.ui.component.settings.Changelog
 import app.revanced.manager.util.relativeTime
 import app.revanced.manager.util.simpleMessage
@@ -350,7 +395,7 @@ fun HomeBundlePatchesDialog(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = stringResource(R.string.patches),
+        title = null,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(android.R.string.ok),
@@ -360,51 +405,74 @@ fun HomeBundlePatchesDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             // Header with icon and count
-            Row(
+            Surface(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
             ) {
-                Surface(
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                    modifier = Modifier.size(48.dp)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Outlined.Extension,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                        modifier = Modifier.size(56.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Outlined.Extension,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
                     }
-                }
 
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = src.displayTitle,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = LocalDialogTextColor.current,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = src.displayTitle,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = LocalDialogTextColor.current,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
 
-                    if (!isLoading) {
-                        Text(
-                            text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    } else {
-                        Text(
-                            text = "...",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        if (!isLoading) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Widgets,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Text(
+                                    text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                        } else {
+                            Text(
+                                text = stringResource(R.string.loading),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
                     }
                 }
             }
@@ -414,19 +482,20 @@ fun HomeBundlePatchesDialog(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(100.dp),
+                        .padding(vertical = 48.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator(
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(48.dp)
                     )
                 }
             } else {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .heightIn(max = 400.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                        .heightIn(max = 500.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(patches) { patch ->
                         var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
@@ -450,6 +519,9 @@ fun HomeBundlePatchesDialog(
     }
 }
 
+/**
+ * Patch item card
+ */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PatchItemCard(
@@ -463,22 +535,27 @@ private fun PatchItemCard(
     val textColor = LocalDialogTextColor.current
     val secondaryColor = LocalDialogSecondaryTextColor.current
 
-    ElevatedCard(
+    val rotationAngle by animateFloatAsState(
+        targetValue = if (expandOptions) 180f else 0f,
+        animationSpec = tween(300),
+        label = "expand_rotation"
+    )
+
+    Surface(
         modifier = modifier
             .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
             .then(
-                if (patch.options.isNullOrEmpty()) Modifier
-                else Modifier
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable(onClick = onExpandOptions)
+                if (!patch.options.isNullOrEmpty()) {
+                    Modifier.clickable(onClick = onExpandOptions)
+                } else Modifier
             ),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
-        ),
+        shape = RoundedCornerShape(14.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             // Header
             Row(
@@ -489,13 +566,20 @@ private fun PatchItemCard(
                 Text(
                     text = patch.name,
                     color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f)
                 )
 
                 if (!patch.options.isNullOrEmpty()) {
-                    ArrowButton(expanded = expandOptions, onClick = null)
+                    Icon(
+                        imageVector = Icons.Outlined.ExpandMore,
+                        contentDescription = if (expandOptions) "Collapse" else "Expand",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .rotate(rotationAngle)
+                    )
                 }
             }
 
@@ -509,33 +593,35 @@ private fun PatchItemCard(
             }
 
             // Compatibility info
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                if (patch.compatiblePackages.isNullOrEmpty()) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        InfoBadge(
-                            text = stringResource(R.string.patches_view_any_package),
-                            icon = Icons.Outlined.Apps,
-                            style = InfoBadgeStyle.Default,
-                            isCompact = true
-                        )
-                        InfoBadge(
-                            text = stringResource(R.string.patches_view_any_version),
-                            icon = Icons.Outlined.Code,
-                            style = InfoBadgeStyle.Default,
-                            isCompact = true
-                        )
-                    }
-                } else {
+            if (patch.compatiblePackages.isNullOrEmpty()) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.patches_view_any_package),
+                        icon = Icons.Outlined.Apps,
+                        style = InfoBadgeStyle.Default,
+                        isCompact = true
+                    )
+                    InfoBadge(
+                        text = stringResource(R.string.patches_view_any_version),
+                        icon = Icons.Outlined.Code,
+                        style = InfoBadgeStyle.Default,
+                        isCompact = true
+                    )
+                }
+            } else {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     patch.compatiblePackages.forEach { compatiblePackage ->
                         val packageName = compatiblePackage.packageName
                         val versions = compatiblePackage.versions.orEmpty().reversed()
 
                         FlowRow(
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             InfoBadge(
                                 text = packageName,
@@ -565,14 +651,19 @@ private fun PatchItemCard(
                                         modifier = Modifier.align(Alignment.CenterVertically)
                                     )
                                 }
+
                                 if (versions.size > 1) {
-                                    PatchInfoChipButton(
-                                        onClick = onExpandVersions,
+                                    InfoBadge(
                                         text = if (expandVersions)
                                             stringResource(R.string.less)
                                         else
                                             "+${versions.size - 1}",
-                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                        style = InfoBadgeStyle.Default,
+                                        isCompact = true,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .clickable(onClick = onExpandVersions)
                                     )
                                 }
                             }
@@ -583,26 +674,29 @@ private fun PatchItemCard(
 
             // Options
             if (!patch.options.isNullOrEmpty()) {
-                AnimatedVisibility(visible = expandOptions) {
+                AnimatedVisibility(
+                    visible = expandOptions,
+                    enter = expandVertically(tween(300)) + fadeIn(tween(300)),
+                    exit = shrinkVertically(tween(300)) + fadeOut(tween(300))
+                ) {
                     Column(
-                        modifier = Modifier.padding(top = 8.dp),
+                        modifier = Modifier.padding(top = 4.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         patch.options.forEach { option ->
-                            OutlinedCard(
+                            Surface(
                                 modifier = Modifier.fillMaxWidth(),
-                                colors = CardDefaults.outlinedCardColors(
-                                    containerColor = Color.Transparent
-                                ),
-                                shape = RoundedCornerShape(8.dp)
+                                shape = RoundedCornerShape(12.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                             ) {
                                 Column(
                                     modifier = Modifier.padding(12.dp),
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                    verticalArrangement = Arrangement.spacedBy(6.dp)
                                 ) {
                                     Text(
                                         text = option.title,
                                         style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.SemiBold,
                                         color = MaterialTheme.colorScheme.primary
                                     )
                                     Text(
@@ -616,41 +710,6 @@ private fun PatchItemCard(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun PatchInfoChipButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-    text: String
-) {
-    val secondaryColor = LocalDialogSecondaryTextColor.current
-    val shape = RoundedCornerShape(8.dp)
-
-    OutlinedCard(
-        modifier = modifier
-            .clip(shape)
-            .clickable(onClick = onClick),
-        colors = CardDefaults.outlinedCardColors(
-            containerColor = Color.Transparent
-        ),
-        shape = shape,
-        border = BorderStroke(1.dp, secondaryColor.copy(alpha = 0.20f))
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text,
-                overflow = TextOverflow.Ellipsis,
-                softWrap = false,
-                style = MaterialTheme.typography.labelLarge,
-                color = secondaryColor
-            )
         }
     }
 }
@@ -677,7 +736,7 @@ fun HomeBundleChangelogDialog(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = stringResource(R.string.bundle_changelog),
+        title = null,
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(android.R.string.ok),
@@ -689,6 +748,7 @@ fun HomeBundleChangelogDialog(
             BundleChangelogState.Loading -> BundleChangelogLoading()
             is BundleChangelogState.Error -> BundleChangelogError(
                 error = current.throwable,
+                onDismissRequest = onDismissRequest,
                 onRetry = {
                     // Reload on retry
                 }
@@ -705,14 +765,17 @@ private fun BundleChangelogLoading() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 48.dp),
+            .padding(vertical = 64.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(48.dp)
+            )
             Text(
                 text = stringResource(R.string.changelog_loading),
                 style = MaterialTheme.typography.bodyMedium,
@@ -725,6 +788,7 @@ private fun BundleChangelogLoading() {
 @Composable
 private fun BundleChangelogError(
     error: Throwable,
+    onDismissRequest: () -> Unit,
     onRetry: () -> Unit
 ) {
     Box(
@@ -734,21 +798,51 @@ private fun BundleChangelogError(
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            Text(
-                text = stringResource(
-                    R.string.bundle_changelog_error,
-                    error.simpleMessage().orEmpty()
-                ),
-                style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogTextColor.current
-            )
-            Button(onClick = onRetry) {
-                Text(stringResource(R.string.bundle_changelog_retry))
+            // Error icon with circular background
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                modifier = Modifier.size(80.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Outlined.ErrorOutline,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(40.dp)
+                    )
+                }
             }
+
+            // Error details
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = stringResource(
+                        R.string.bundle_changelog_error,
+                        error.simpleMessage().orEmpty()
+                    ),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = LocalDialogTextColor.current
+                )
+                MorpheDialogButton(
+                    text = stringResource(R.string.bundle_changelog_retry),
+                    onClick = onRetry
+                )
+            }
+
+            // Dismiss button
+            MorpheDialogButton(
+                text = stringResource(android.R.string.ok),
+                onClick = onDismissRequest,
+                modifier = Modifier.widthIn(min = 140.dp)
+            )
         }
     }
 }
@@ -770,51 +864,75 @@ private fun BundleChangelogContent(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        // Header with icon
-        Row(
+        // Header with version info
+        Surface(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
         ) {
-            Surface(
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                modifier = Modifier.size(48.dp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Outlined.History,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
+                // Icon with gradient-like appearance
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.History,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
                 }
-            }
 
-            Column {
-                Text(
-                    text = asset.version,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = LocalDialogTextColor.current
-                )
-                Text(
-                    text = publishDate,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                // Version info
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = asset.version,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = LocalDialogTextColor.current
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Schedule,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Text(
+                            text = publishDate,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
             }
         }
 
-        // Changelog content
+        // Changelog markdown content
         Changelog(
             markdown = markdown.ifBlank {
                 stringResource(R.string.bundle_changelog_empty)
             },
-            version = asset.version,
-            publishDate = publishDate
+//            version = asset.version,
+//            publishDate = publishDate
         )
     }
 }
