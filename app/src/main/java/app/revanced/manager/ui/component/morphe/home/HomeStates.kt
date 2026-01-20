@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.UriHandler
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
@@ -79,8 +80,6 @@ class HomeStates(
 ) {
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
-    var showPatchesSheet by mutableStateOf(false)
-    var showChangelogSheet by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
     var showAddBundleDialog by mutableStateOf(false)
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
@@ -120,12 +119,8 @@ class HomeStates(
     var showBundleUpdateSnackbar by mutableStateOf(false)
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
 
-    // Manager update dialog state
-    var hasCheckedForUpdates by mutableStateOf(false)
-    val shouldShowUpdateDialog: Boolean
-        get() = !hasCheckedForUpdates &&
-                dashboardViewModel.prefs.showManagerUpdateDialogOnLaunch.getBlocking() &&
-                !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
+    // Loading state for installed apps
+    var installedAppsLoading by mutableStateOf(true)
 
     // Activity result launchers
     lateinit var installAppsPermissionLauncher: ActivityResultLauncher<String>
@@ -146,6 +141,13 @@ class HomeStates(
     }
 
     /**
+     * Update loading state based on bundle update progress and installed apps
+     */
+    fun updateLoadingState(bundleUpdateInProgress: Boolean, hasInstalledApps: Boolean) {
+        installedAppsLoading = bundleUpdateInProgress || !hasInstalledApps
+    }
+
+    /**
      * Handle app button click (YouTube or YouTube Music)
      * Validates state before showing APK selection dialog
      */
@@ -153,8 +155,15 @@ class HomeStates(
         packageName: String,
         availablePatches: Int,
         bundleUpdateInProgress: Boolean,
-        android11BugActive: Boolean
+        android11BugActive: Boolean,
+        installedApp: InstalledApp?
     ) {
+        // If app is installed, allow click even during updates
+        if (installedApp != null) {
+            // Navigate to installed app info
+            return // Caller will handle navigation
+        }
+
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
             context.toast(context.getString(R.string.morphe_home_patches_are_loading))

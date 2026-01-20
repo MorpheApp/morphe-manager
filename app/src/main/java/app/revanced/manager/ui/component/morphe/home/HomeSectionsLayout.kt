@@ -1,8 +1,10 @@
 package app.revanced.manager.ui.component.morphe.home
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -103,6 +105,7 @@ fun HomeSectionsLayout(
     youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
     redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
     onInstalledAppClick: (InstalledApp) -> Unit,
+    installedAppsLoading: Boolean = false,
 
     // Other apps button
     onOtherAppsClick: () -> Unit,
@@ -141,6 +144,7 @@ fun HomeSectionsLayout(
                 youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
                 redditBundleSummaries = redditBundleSummaries,
                 onInstalledAppClick = onInstalledAppClick,
+                installedAppsLoading = installedAppsLoading,
                 onOtherAppsClick = onOtherAppsClick,
                 modifier = Modifier.weight(1f)
             )
@@ -197,6 +201,7 @@ private fun HomeAdaptiveContent(
     youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     onInstalledAppClick: (InstalledApp) -> Unit,
+    installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -248,6 +253,7 @@ private fun HomeAdaptiveContent(
                     youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
                     redditBundleSummaries = redditBundleSummaries,
                     onInstalledAppClick = onInstalledAppClick,
+                    installedAppsLoading = installedAppsLoading,
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -289,6 +295,7 @@ private fun HomeAdaptiveContent(
                 youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
                 redditBundleSummaries = redditBundleSummaries,
                 onInstalledAppClick = onInstalledAppClick,
+                installedAppsLoading = installedAppsLoading,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -396,13 +403,13 @@ private fun BundleUpdateSnackbarContent(
 
     val containerColor = when (status) {
         BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
-        BundleUpdateStatus.Error   -> MaterialTheme.colorScheme.errorContainer
+        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.errorContainer
         BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.surfaceVariant
     }
 
     val contentColor = when (status) {
         BundleUpdateStatus.Success -> MaterialTheme.colorScheme.onPrimaryContainer
-        BundleUpdateStatus.Error   -> MaterialTheme.colorScheme.onErrorContainer
+        BundleUpdateStatus.Error -> MaterialTheme.colorScheme.onErrorContainer
         BundleUpdateStatus.Updating -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
@@ -432,6 +439,7 @@ private fun BundleUpdateSnackbarContent(
                             modifier = Modifier.size(24.dp)
                         )
                     }
+
                     BundleUpdateStatus.Error -> {
                         Icon(
                             imageVector = Icons.Outlined.Warning,
@@ -440,6 +448,7 @@ private fun BundleUpdateSnackbarContent(
                             modifier = Modifier.size(24.dp)
                         )
                     }
+
                     BundleUpdateStatus.Updating -> {
                         CircularProgressIndicator(
                             progress = { fraction },
@@ -475,6 +484,7 @@ private fun BundleUpdateSnackbarContent(
                                     stringResource(R.string.morphe_home_please_wait)
                                 }
                             }
+
                             BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_patches_updated)
                             BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error_subtitle)
                         },
@@ -540,6 +550,8 @@ fun HomeMainAppsSection(
     youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     onInstalledAppClick: (InstalledApp) -> Unit,
+    installedAppsLoading: Boolean = false,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -554,80 +566,127 @@ fun HomeMainAppsSection(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // YouTube button/card
-            if (youtubeInstalledApp != null) {
-                HomeInstalledAppCard(
-                    installedApp = youtubeInstalledApp,
-                    packageInfo = youtubePackageInfo,
-                    gradientColors = listOf(
-                        Color(0xFFFF0033), // YouTube red
-                        Color(0xFF1E5AA8), // Brand blue
-                        Color(0xFF00AFAE)  // Brand teal
-                    ),
-                    bundleSummaries = youtubeBundleSummaries,
-                    onClick = { onInstalledAppClick(youtubeInstalledApp) }
-                )
-            } else {
-                HomeAppButton(
-                    text = stringResource(R.string.morphe_home_youtube),
-                    gradientColors = listOf(
-                        Color(0xFFFF0033),
-                        Color(0xFF1E5AA8),
-                        Color(0xFF00AFAE)
-                    ),
-                    onClick = onYouTubeClick
-                )
+            // YouTube
+            Crossfade(
+                targetState = installedAppsLoading,
+                animationSpec = tween(300),
+                label = "youtube_crossfade"
+            ) { isLoading ->
+                if (isLoading) {
+                    HomeAppLoadingCard(
+                        gradientColors = listOf(
+                            Color(0xFFFF0033),
+                            Color(0xFF1E5AA8),
+                            Color(0xFF00AFAE)
+                        )
+                    )
+                } else {
+                    if (youtubeInstalledApp != null) {
+                        HomeInstalledAppCard(
+                            installedApp = youtubeInstalledApp,
+                            packageInfo = youtubePackageInfo,
+                            gradientColors = listOf(
+                                Color(0xFFFF0033),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            bundleSummaries = youtubeBundleSummaries,
+                            onClick = { onInstalledAppClick(youtubeInstalledApp) }
+                        )
+                    } else {
+                        HomeAppButton(
+                            text = stringResource(R.string.morphe_home_youtube),
+                            gradientColors = listOf(
+                                Color(0xFFFF0033),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            onClick = onYouTubeClick
+                        )
+                    }
+                }
             }
 
-            // YouTube Music button/card
-            if (youtubeMusicInstalledApp != null) {
-                HomeInstalledAppCard(
-                    installedApp = youtubeMusicInstalledApp,
-                    packageInfo = youtubeMusicPackageInfo,
-                    gradientColors = listOf(
-                        Color(0xFFFF8C3E), // Orange
-                        Color(0xFF1E5AA8),
-                        Color(0xFF00AFAE)
-                    ),
-                    bundleSummaries = youtubeMusicBundleSummaries,
-                    onClick = { onInstalledAppClick(youtubeMusicInstalledApp) }
-                )
-            } else {
-                HomeAppButton(
-                    text = stringResource(R.string.morphe_home_youtube_music),
-                    gradientColors = listOf(
-                        Color(0xFFFF8C3E),
-                        Color(0xFF1E5AA8),
-                        Color(0xFF00AFAE)
-                    ),
-                    onClick = onYouTubeMusicClick
-                )
+            // YouTube Music
+            Crossfade(
+                targetState = installedAppsLoading,
+                animationSpec = tween(300),
+                label = "youtube_music_crossfade"
+            ) { isLoading ->
+                if (isLoading) {
+                    HomeAppLoadingCard(
+                        gradientColors = listOf(
+                            Color(0xFFFF8C3E),
+                            Color(0xFF1E5AA8),
+                            Color(0xFF00AFAE)
+                        )
+                    )
+                } else {
+                    if (youtubeMusicInstalledApp != null) {
+                        HomeInstalledAppCard(
+                            installedApp = youtubeMusicInstalledApp,
+                            packageInfo = youtubeMusicPackageInfo,
+                            gradientColors = listOf(
+                                Color(0xFFFF8C3E),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            bundleSummaries = youtubeMusicBundleSummaries,
+                            onClick = { onInstalledAppClick(youtubeMusicInstalledApp) }
+                        )
+                    } else {
+                        HomeAppButton(
+                            text = stringResource(R.string.morphe_home_youtube_music),
+                            gradientColors = listOf(
+                                Color(0xFFFF8C3E),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            onClick = onYouTubeMusicClick
+                        )
+                    }
+                }
             }
 
-            // Reddit button/card
-            if (redditInstalledApp != null) {
-                HomeInstalledAppCard(
-                    installedApp = redditInstalledApp,
-                    packageInfo = redditPackageInfo,
-                    gradientColors = listOf(
-                        Color(0xFFFF4500), // Reddit orange
-                        Color(0xFF1E5AA8),
-                        Color(0xFF00AFAE)
-                    ),
-                    bundleSummaries = redditBundleSummaries,
-                    onClick = { onInstalledAppClick(redditInstalledApp) }
-                )
-            } else {
-                HomeAppButton(
-                    text = stringResource(R.string.morphe_home_reddit),
-                    gradientColors = listOf(
-                        Color(0xFFFF4500),
-                        Color(0xFF1E5AA8),
-                        Color(0xFF00AFAE)
-                    ),
-                    onClick = onRedditClick,
-//                    enabled = false
-                )
+            // Reddit
+            Crossfade(
+                targetState = installedAppsLoading,
+                animationSpec = tween(300),
+                label = "reddit_crossfade"
+            ) { isLoading ->
+                if (isLoading) {
+                    HomeAppLoadingCard(
+                        gradientColors = listOf(
+                            Color(0xFFFF4500),
+                            Color(0xFF1E5AA8),
+                            Color(0xFF00AFAE)
+                        )
+                    )
+                } else {
+                    if (redditInstalledApp != null) {
+                        HomeInstalledAppCard(
+                            installedApp = redditInstalledApp,
+                            packageInfo = redditPackageInfo,
+                            gradientColors = listOf(
+                                Color(0xFFFF4500),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            bundleSummaries = redditBundleSummaries,
+                            onClick = { onInstalledAppClick(redditInstalledApp) }
+                        )
+                    } else {
+                        HomeAppButton(
+                            text = stringResource(R.string.morphe_home_reddit),
+                            gradientColors = listOf(
+                                Color(0xFFFF4500),
+                                Color(0xFF1E5AA8),
+                                Color(0xFF00AFAE)
+                            ),
+                            onClick = onRedditClick
+                        )
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.screen
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -55,6 +56,7 @@ data class QuickPatchParams(
  * 4. Other apps button
  * 5. Bottom action bar
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
@@ -96,6 +98,24 @@ fun MorpheHomeScreen(
 
     // Observe all installed apps from repository
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
+
+    // Remember home state
+    val homeState = rememberMorpheHomeState(
+        dashboardViewModel = dashboardViewModel,
+        sources = sources,
+        bundleInfo = bundleInfo,
+        onStartQuickPatch = onStartQuickPatch,
+        usingMountInstall = usingMountInstall
+    )
+
+    // Update loading state
+    LaunchedEffect(bundleUpdateProgress, allInstalledApps, availablePatches) {
+        val hasLoadedApps = allInstalledApps.isNotEmpty() || availablePatches > 0
+        homeState.updateLoadingState(
+            bundleUpdateInProgress = bundleUpdateProgress != null,
+            hasInstalledApps = hasLoadedApps
+        )
+    }
 
     // Update installed apps when data changes
     LaunchedEffect(allInstalledApps, sources, bundleInfo) {
@@ -148,15 +168,6 @@ fun MorpheHomeScreen(
             }
         }
     }
-
-    // Remember home state
-    val homeState = rememberMorpheHomeState(
-        dashboardViewModel = dashboardViewModel,
-        sources = sources,
-        bundleInfo = bundleInfo,
-        onStartQuickPatch = onStartQuickPatch,
-        usingMountInstall = usingMountInstall
-    )
 
     var showUpdateDetailsDialog by remember { mutableStateOf(false) }
 
@@ -233,20 +244,32 @@ fun MorpheHomeScreen(
                     packageName = PACKAGE_YOUTUBE,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = bundleUpdateProgress != null,
-                    android11BugActive = dashboardViewModel.android11BugActive
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = youtubeInstalledApp
                 )
+                youtubeInstalledApp?.let {
+                    onMorpheInstalledAppInfoClick(it.currentPackageName)
+                }
             },
             onYouTubeMusicClick = {
                 homeState.handleAppClick(
                     packageName = PACKAGE_YOUTUBE_MUSIC,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = bundleUpdateProgress != null,
-                    android11BugActive = dashboardViewModel.android11BugActive
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = youtubeMusicInstalledApp
                 )
+                youtubeMusicInstalledApp?.let {
+                    onMorpheInstalledAppInfoClick(it.currentPackageName)
+                }
             },
             onRedditClick = {
-                // TODO: Implement Reddit patching when ready
-                context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
+                redditInstalledApp?.let {
+                    onMorpheInstalledAppInfoClick(it.currentPackageName)
+                } ?: run {
+                    // TODO: Implement Reddit patching when ready
+                    context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
+                }
             },
 
             // Installed apps data
@@ -262,6 +285,7 @@ fun MorpheHomeScreen(
             onInstalledAppClick = { app ->
                 onMorpheInstalledAppInfoClick(app.currentPackageName)
             },
+            installedAppsLoading = homeState.installedAppsLoading,
 
             // Other apps button
             onOtherAppsClick = {

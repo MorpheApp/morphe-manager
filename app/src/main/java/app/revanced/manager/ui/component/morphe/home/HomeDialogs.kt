@@ -6,7 +6,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
@@ -20,10 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,29 +39,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.TextInputDialog
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.shared.DialogButtonLayout
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButton
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.APK_MIMETYPE
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Container for all MorpheHomeScreen dialogs
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeDialogs(
     state: HomeStates
 ) {
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
-
-    var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
-    var showRenameBundleDialog by mutableStateOf(false)
 
     // Dialog 1: APK Availability - "Do you have the APK?"
     AnimatedVisibility(
