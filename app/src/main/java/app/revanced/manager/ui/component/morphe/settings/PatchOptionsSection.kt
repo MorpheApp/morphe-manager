@@ -114,7 +114,7 @@ fun PatchOptionsSection(
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.morphe_patch_options_waiting_for_bundle),
+                        text = stringResource(R.string.morphe_patch_options_waiting_for_source),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -154,7 +154,7 @@ fun PatchOptionsSection(
                         scope.launch {
                             dashboardViewModel.updateMorpheBundleWithChangelogClear()
                             viewModel.refresh()
-                            context.toast(context.getString(R.string.morphe_home_updating_patches))
+                            context.toast(context.getString(R.string.morphe_home_updating_sources))
                         }
                     }) {
                         Icon(

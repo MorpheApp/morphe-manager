@@ -166,7 +166,7 @@ class HomeStates(
 
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
-            context.toast(context.getString(R.string.morphe_home_patches_are_loading))
+            context.toast(context.getString(R.string.morphe_home_sources_are_loading))
             return
         }
 
@@ -540,7 +540,7 @@ class HomeStates(
             showFilePickerPromptDialog = true
         } catch (ex: Exception) {
             Log.d(tag, "Failed to open URL: $ex")
-            context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+            context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
         }

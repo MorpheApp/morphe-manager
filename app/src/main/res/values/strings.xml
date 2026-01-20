@@ -10,6 +10,14 @@
     <!-- Home Screen - Update Notifications -->
     <string name="morphe_home_update_available">Manager update available</string>
     <string name="morphe_home_update_available_subtitle">New version ready to install</string>
+    <string name="morphe_home_update_error">Update failed</string>
+    <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
+    <string name="morphe_home_updating_sources">Updating sources…</string>
+    <string name="morphe_home_update_success">Update sources complete</string>
+    <string name="morphe_home_update_success_subtitle">Your sources are up to date</string>
+    <string name="morphe_home_sources_are_loading">Sources are loading, please wait…</string>
+    <string name="morphe_home_please_wait">Please wait…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Ready to make YouTube legendary again?</string>
@@ -29,38 +37,27 @@
     <string name="morphe_home_greeting_9">Saving apps from themselves since today</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Powered by caffeine and good patches</string>
-    <string name="morphe_home_bundle_type_api">API Bundle</string>
-    <string name="morphe_home_update_error">Update failed</string>
-    <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
-    <string name="morphe_home_updating_patches">Updating patches…</string>
-    <string name="morphe_home_update_success">Update complete</string>
-    <string name="morphe_home_patches_updated">Your patches are up to date</string>
-    <string name="morphe_home_patches_are_loading">Patches are loading, please wait…</string>
-    <string name="morphe_home_please_wait">Please wait…</string>
-    <string name="morphe_home_open_in_browser">Open in browser</string>
-    <string name="morphe_home_failed_to_open_url">Failed to open URL</string>
-    <string name="morphe_home_date_added">Added</string>
-    <string name="morphe_home_date_updated">Updated</string>
-    <string name="morphe_home_check_updates">Check</string>
-    <string name="morphe_home_unknown">Unknown</string>
-    <string name="morphe_home_timeline">Update history</string>
-    <!-- Bundle Management -->
-    <string name="morphe_home_bundles">Patch bundle</string>
-    <string name="morphe_bundle_management_subtitle">%d bundles installed</string>
-    <string name="morphe_bundle_delete_confirm_message">Delete bundle \"%s\"? This cannot be undone.</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Patch sources</string>
+    <string name="morphe_sources_management_subtitle">%d sources installed</string>
+    <string name="morphe_sources_delete_confirm_message">Delete source \"%s\"? This cannot be undone.</string>
+    <string name="morphe_sources_open_in_browser">Open in browser</string>
+    <string name="morphe_sources_failed_to_open_url">Failed to open URL</string>
+    <string name="morphe_sources_date_added">Added</string>
+    <string name="morphe_sources_date_updated">Updated</string>
     <string name="morphe_enabled">Enabled</string>
     <string name="morphe_disabled">Disabled</string>
     <string name="morphe_rename">Rename</string>
-    <!-- Add Bundle Dialog -->
-    <string name="morphe_add_patch_bundle">Add patch bundle</string>
-    <string name="morphe_remote">Remote</string>
-    <string name="morphe_local">Local</string>
-    <string name="morphe_remote_source_url">Bundle URL</string>
-    <string name="morphe_remote_bundle_description">Enter JSON endpoint URL for remote patch bundle</string>
-    <string name="morphe_select_patch_bundle_file">Select patch bundle file</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Add patch source</string>
+    <string name="morphe_add_patch_source_remote">Remote</string>
+    <string name="morphe_add_patch_source_remote_url">Source URL</string>
+    <string name="morphe_add_patch_source_remote_description">Enter JSON endpoint URL for remote patch source</string>
+    <string name="morphe_add_patch_source_local">Local</string>
+    <string name="morphe_add_patch_source_local_file">Select patch source file</string>
+    <string name="morphe_add_patch_source_local_file_description">Select a .mpp patch source file from storage</string>
+    <string name="morphe_add_patch_source_local_change_file">Change file</string>
     <string name="morphe_home_no_patches_available">No patches available</string>
-    <string name="morphe_change_file">Change file</string>
-    <string name="morphe_local_bundle_description">Select a .mpp patch bundle file from storage</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched)</string>
@@ -133,7 +130,7 @@
     <string name="morphe_original_apks_count">%d original APK(s) stored</string>
     <string name="morphe_original_apks_size">Total size: %s</string>
     <string name="morphe_original_apks_item_info">v%s • %s</string>
-    <string name="morphe_original_apks_delete_title">Delete Original APK</string>
+    <string name="morphe_original_apks_delete_title">Delete original APK</string>
     <string name="morphe_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
 
     <!-- Root Mode -->
@@ -215,7 +212,7 @@
     <string name="morphe_background_type_snow">Snow</string>
     <string name="morphe_background_type_none">None</string>
     <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">App Icon</string>
+    <string name="morphe_app_icon_selector_title">App icon</string>
     <string name="morphe_app_icon_selector_description">Change the app launcher icon</string>
     <string name="morphe_app_icon_default">Default</string>
     <string name="morphe_app_icon_light_2">Sky</string>
@@ -223,13 +220,13 @@
     <string name="morphe_app_icon_dark_1">Ocean</string>
     <string name="morphe_app_icon_dark_2">Void</string>
     <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Change App Icon?</string>
+    <string name="morphe_app_icon_change_dialog_title">Change app icon?</string>
     <string name="morphe_app_icon_change_dialog_message">Change to \'%1$s\' and restart?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Change Icon</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Change icon</string>
 
     <!-- Advanced Tab -->
     <string name="morphe_expert_section">Expert settings</string>
-    <string name="morphe_settings_expert_mode">Expert Mode</string>
+    <string name="morphe_settings_expert_mode">Expert mode</string>
     <string name="morphe_settings_expert_mode_description">Enable advanced features and customization options</string>
     <string name="morphe_settings_return_to_morphe">Return to Morphe home</string>
     <string name="morphe_settings_return_to_morphe_description">Return to simplified mode</string>
@@ -251,7 +248,7 @@
     <string name="morphe_patch_options_light_theme_color">Light theme background color</string>
     <string name="morphe_patch_options_light_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
     <string name="morphe_patch_options_loading">Loading patch options…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Wait until the patch bundle is updated</string>
+    <string name="morphe_patch_options_waiting_for_source">Wait until the patch source is updated</string>
     <string name="morphe_patch_options_load_error">Failed to load patch options</string>
     <string name="morphe_patch_options_no_available">No options available for this patch</string>
     <!-- Patch Options Section: Custom Branding -->
@@ -314,7 +311,7 @@ The image dimensions must be as follows:
     <string name="morphe_performance">Performance</string>
     <string name="morphe_process_runtime">Process runtime</string>
     <string name="morphe_process_runtime_description">Run patching in separate process for better stability</string>
-    <string name="morphe_process_runtime_memory_limit">Memory Limit</string>
+    <string name="morphe_process_runtime_memory_limit">Memory limit</string>
     <string name="morphe_process_runtime_memory_limit_help">Adjust memory available for patching process. Lower values reduce memory usage but may cause failures for large apps.</string>
     <string name="morphe_enable_process_runtime">Enable process runtime</string>
     <string name="morphe_memory_limit_subtitle">Memory available for patching</string>

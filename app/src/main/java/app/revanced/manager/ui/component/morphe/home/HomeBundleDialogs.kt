@@ -110,7 +110,7 @@ fun MorpheAddBundleDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_add_patch_bundle),
+        title = stringResource(R.string.morphe_add_patch_source),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
@@ -139,8 +139,8 @@ fun MorpheAddBundleDialog(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     listOf(
-                        stringResource(R.string.morphe_remote),
-                        stringResource(R.string.morphe_local)
+                        stringResource(R.string.morphe_add_patch_source_remote),
+                        stringResource(R.string.morphe_add_patch_source_local)
                     ).forEachIndexed { index, title ->
                         val isSelected = selectedTab == index
 
@@ -217,7 +217,7 @@ private fun RemoteTabContent(
                 onValueChange = onUrlChange,
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(stringResource(R.string.morphe_remote_source_url))
+                    Text(stringResource(R.string.morphe_add_patch_source_remote))
                 },
                 placeholder = {
                     Text(text = "https://example.com/patches.json")
@@ -229,7 +229,7 @@ private fun RemoteTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.morphe_remote_bundle_description),
+            text = stringResource(R.string.morphe_add_patch_source_remote_description),
             style = InfoBadgeStyle.Success
         )
     }
@@ -246,9 +246,9 @@ private fun LocalTabContent(
         // File picker button
         MorpheDialogButton(
             text = if (selectedPath == null) {
-                stringResource(R.string.morphe_select_patch_bundle_file)
+                stringResource(R.string.morphe_add_patch_source_local_file)
             } else {
-                stringResource(R.string.morphe_change_file)
+                stringResource(R.string.morphe_add_patch_source_local_change_file)
             },
             onClick = onPickFile,
             icon = Icons.Outlined.FolderOpen,
@@ -267,7 +267,7 @@ private fun LocalTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.morphe_local_bundle_description),
+            text = stringResource(R.string.morphe_add_patch_source_local_file_description),
             style = InfoBadgeStyle.Success
         )
     }
@@ -296,7 +296,7 @@ fun MorpheBundleDeleteConfirmDialog(
 
         Text(
             text = stringResource(
-                R.string.morphe_bundle_delete_confirm_message,
+                R.string.morphe_sources_delete_confirm_message,
                 bundle.displayTitle
             ),
             style = MaterialTheme.typography.bodyLarge,

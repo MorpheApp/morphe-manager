@@ -4,7 +4,6 @@ import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,13 +47,13 @@ fun HomeBottomActionBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Left: Empty space
-        Spacer(modifier = Modifier.weight(1f))
+//        Spacer(modifier = Modifier.weight(1f))
 
-        // Center: Bundles button
+        // Center: Sources button
         BottomActionButton(
             onClick = onBundlesClick,
             icon = Icons.Outlined.Source,
-            text = stringResource(R.string.morphe_home_bundles),
+            text = stringResource(R.string.morphe_home_sources),
             modifier = Modifier.weight(1f)
         )
 

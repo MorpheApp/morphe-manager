@@ -101,13 +101,13 @@ fun HomeBundleManagementSheet(
             ) {
                 Column {
                     Text(
-                        text = stringResource(R.string.tab_patches),
+                        text = stringResource(R.string.morphe_home_sources),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
                         text = stringResource(
-                            R.string.morphe_bundle_management_subtitle,
+                            R.string.morphe_sources_management_subtitle,
                             sources.size
                         ),
                         style = MaterialTheme.typography.bodySmall,
@@ -156,7 +156,7 @@ fun HomeBundleManagementSheet(
                             try {
                                 uriHandler.openUri(pageUrl)
                             } catch (_: Exception) {
-                                context.toast(context.getString(R.string.morphe_home_failed_to_open_url))
+                                context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
                             }
                         },
                         forceExpanded = isSingleDefaultBundle
@@ -301,7 +301,7 @@ private fun BundleManagementCard(
                                 contentDescription = null
                             )
                             Spacer(Modifier.width(8.dp))
-                            Text(stringResource(R.string.morphe_home_open_in_browser))
+                            Text(stringResource(R.string.morphe_sources_open_in_browser))
                         }
                     }
 
@@ -547,7 +547,7 @@ private fun BundleMetaCard(
                     )
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_home_date_added),
+                            text = stringResource(R.string.morphe_sources_date_added),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                         )
@@ -576,7 +576,7 @@ private fun BundleMetaCard(
                     )
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_home_date_updated),
+                            text = stringResource(R.string.morphe_sources_date_updated),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                         )

@@ -463,7 +463,7 @@ private fun BundleUpdateSnackbarContent(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = when (status) {
-                            BundleUpdateStatus.Updating -> stringResource(R.string.morphe_home_updating_patches)
+                            BundleUpdateStatus.Updating -> stringResource(R.string.morphe_home_updating_sources)
                             BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_update_success)
                             BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error)
                         },
@@ -485,7 +485,7 @@ private fun BundleUpdateSnackbarContent(
                                 }
                             }
 
-                            BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_patches_updated)
+                            BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_update_success_subtitle)
                             BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error_subtitle)
                         },
                         style = MaterialTheme.typography.bodyMedium,

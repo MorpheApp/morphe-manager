@@ -290,7 +290,7 @@ fun MorpheHomeScreen(
             // Other apps button
             onOtherAppsClick = {
                 if (availablePatches <= 0 || bundleUpdateProgress != null) {
-                    context.toast(context.getString(R.string.morphe_home_patches_are_loading))
+                    context.toast(context.getString(R.string.morphe_home_sources_are_loading))
                     return@HomeSectionsLayout
                 }
 
