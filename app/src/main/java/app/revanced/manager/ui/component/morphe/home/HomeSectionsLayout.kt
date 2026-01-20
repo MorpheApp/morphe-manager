@@ -705,19 +705,9 @@ private fun AppCardLayout(
 ) {
     val shape = RoundedCornerShape(24.dp)
     val view = LocalView.current
-    val isDarkMode = isSystemInDarkTheme()
 
-    val backgroundAlpha = if (enabled) {
-        if (isDarkMode) 0.6f else 0.85f
-    } else {
-        0.3f
-    }
-
-    val borderAlpha = if (enabled) {
-        if (isDarkMode) 0.8f else 0.9f
-    } else {
-        0.4f
-    }
+    val backgroundAlpha = if (enabled) 0.7f else 0.3f
+    val borderAlpha = if (enabled) 0.85f else 0.4f
 
     Box(
         modifier = modifier
@@ -784,8 +774,7 @@ fun HomeInstalledAppCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isDarkMode = isSystemInDarkTheme()
-    val textColor = if (isDarkMode) Color.White else Color.Black
+    val textColor = Color.White
 
     AppCardLayout(
         gradientColors = gradientColors,
@@ -813,7 +802,7 @@ fun HomeInstalledAppCard(
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                     shadow = Shadow(
-                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        color = Color.Black.copy(alpha = 0.4f),
                         offset = Offset(0f, 2f),
                         blurRadius = 4f
                     )
@@ -827,7 +816,7 @@ fun HomeInstalledAppCard(
                     text = if (version.startsWith("v")) version else "v$version",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         shadow = Shadow(
-                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                            color = Color.Black.copy(alpha = 0.4f),
                             offset = Offset(0f, 1f),
                             blurRadius = 2f
                         )
@@ -846,7 +835,7 @@ fun HomeInstalledAppCard(
                         .joinToString(" • "),
                     style = MaterialTheme.typography.bodySmall.copy(
                         shadow = Shadow(
-                            color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                            color = Color.Black.copy(alpha = 0.4f),
                             offset = Offset(0f, 1f),
                             blurRadius = 2f
                         )
@@ -869,8 +858,7 @@ fun HomeAppButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    val isDarkMode = isSystemInDarkTheme()
-    val textColor = if (isDarkMode) Color.White else Color.Black
+    val textColor = Color.White
     val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
 
     AppCardLayout(
@@ -906,7 +894,7 @@ fun HomeAppButton(
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                     shadow = Shadow(
-                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        color = Color.Black.copy(alpha = 0.4f),
                         offset = Offset(0f, 2f),
                         blurRadius = 4f
                     )
@@ -919,7 +907,7 @@ fun HomeAppButton(
                 text = stringResource(R.string.morphe_home_not_patched_yet),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     shadow = Shadow(
-                        color = Color.Black.copy(alpha = if (isDarkMode) 0.3f else 0.5f),
+                        color = Color.Black.copy(alpha = 0.4f),
                         offset = Offset(0f, 1f),
                         blurRadius = 2f
                     )
