@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.screen
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import android.view.WindowManager
@@ -51,13 +52,13 @@ import kotlin.math.min
  * Simplified patcher screen with progress tracking
  * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
     installViewModel: MorpheInstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -254,13 +255,14 @@ fun MorphePatcherScreen(
     if (state.showErrorBottomSheet) {
         ModalBottomSheet(
             onDismissRequest = { state.showErrorBottomSheet = false },
+            contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(24.dp),
+                    .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -280,7 +282,7 @@ fun MorphePatcherScreen(
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .heightIn(max = 400.dp),
+                        .heightIn(max = 500.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.errorContainer
                 ) {

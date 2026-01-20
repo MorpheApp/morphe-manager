@@ -65,9 +65,6 @@ fun HomeBundleManagementSheet(
     val patchCounts by patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
     val manualUpdateInfo by patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
 
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val lazyListState = rememberLazyListState()
-
     var bundleToDelete by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowPatches by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelog by remember { mutableStateOf<RemotePatchBundle?>(null) }
@@ -77,7 +74,7 @@ fun HomeBundleManagementSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        sheetState = sheetState,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
         scrimColor = Color.Transparent
@@ -132,8 +129,9 @@ fun HomeBundleManagementSheet(
 
             // Bundle cards
             LazyColumn(
-                state = lazyListState,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                state = rememberLazyListState(),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(bottom = 16.dp)
             ) {
                 items(sources, key = { bundle -> bundle.uid }) { bundle ->
                     BundleManagementCard(
