@@ -59,6 +59,8 @@ import java.io.File
 fun HomeInstalledAppInfoScreen(
     packageName: String,
     onRepatch: (String, File, PatchSelection, Options) -> Unit,
+    onPatchClick: (packageName: String) -> Unit = {},
+    availablePatches: Int = 0,
     onBackClick: () -> Unit = {},
     viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) },
     prefs: PreferencesManager = koinInject()
@@ -375,6 +377,8 @@ fun HomeInstalledAppInfoScreen(
                     viewModel = viewModel,
                     installedApp = installedApp,
                     onRepatch = onRepatch,
+                    onPatchClick = onPatchClick,
+                    availablePatches = availablePatches,
                     onUninstall = { showUninstallConfirm = true },
                     onDelete = { showDeleteDialog = true },
                     onMountWarning = { showMountWarningDialog = true },
@@ -580,13 +584,13 @@ private fun AppActionsSection(
     viewModel: InstalledAppInfoViewModel,
     installedApp: InstalledApp,
     onRepatch: (String, File, PatchSelection, Options) -> Unit,
+    onPatchClick: (packageName: String) -> Unit,
+    availablePatches: Int,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
     onMountWarning: () -> Unit,
     onExport: () -> Unit
 ) {
-    val context = LocalContext.current
-
     MorpheCard(
         elevation = 2.dp,
         cornerRadius = 18.dp
@@ -606,6 +610,23 @@ private fun AppActionsSection(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    // First row: Patch button
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        ActionCard(
+                            text = stringResource(R.string.patch),
+                            icon = Icons.Outlined.AutoAwesome,
+                            onClick = {
+                                // Trigger patch flow with original package name
+                                onPatchClick(installedApp.originalPackageName)
+                            },
+                            enabled = availablePatches > 0,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.fillMaxWidth()

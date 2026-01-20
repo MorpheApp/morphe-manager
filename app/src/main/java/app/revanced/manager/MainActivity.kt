@@ -50,6 +50,7 @@ import app.revanced.manager.util.EventEffect
 import app.revanced.manager.util.toast
 import com.topjohnwu.superuser.internal.Utils.context
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
 import org.koin.compose.koinInject
@@ -170,6 +171,10 @@ private fun ReVancedManager(vm: MainViewModel) {
                 val dashboardViewModel = koinViewModel<DashboardViewModel>()
                 val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
 
+                // Watch for patch triggers from installed app screen
+                val patchTriggerPackage by it.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
+                    .collectAsStateWithLifecycle()
+
                 MorpheHomeScreen(
                     onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
                     onMorpheInstalledAppInfoClick = { packageName ->
@@ -189,7 +194,11 @@ private fun ReVancedManager(vm: MainViewModel) {
                     },
                     dashboardViewModel = dashboardViewModel,
                     usingMountInstallState = usingMountInstallState,
-                    bundleUpdateProgress = bundleUpdateProgress
+                    bundleUpdateProgress = bundleUpdateProgress,
+                    patchTriggerPackage = patchTriggerPackage,
+                    onPatchTriggerHandled = {
+                        it.savedStateHandle.remove<String>("patch_trigger_package")
+                    }
                 )
             }
 
@@ -483,6 +492,8 @@ private fun ReVancedManager(vm: MainViewModel) {
                 // Morphe Installed App Info Screen
                 composable<MorpheInstalledAppInfo> {
                     val data = it.toRoute<MorpheInstalledAppInfo>()
+                    val dashboardViewModel = koinViewModel<DashboardViewModel>()
+                    val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
 
                     HomeInstalledAppInfoScreen(
                         packageName = data.packageName,
@@ -503,6 +514,16 @@ private fun ReVancedManager(vm: MainViewModel) {
                                 )
                             }
                         },
+                        onPatchClick = { originalPackageName ->
+                            // Navigate back and trigger patch selection dialog
+                            navController.popBackStack()
+
+                            // Set trigger in home screen's saved state
+                            navController.currentBackStackEntry?.savedStateHandle?.apply {
+                                set("patch_trigger_package", originalPackageName)
+                            }
+                        },
+                        availablePatches = availablePatches,
                         onBackClick = { navController.popBackStack() }
                     )
                 }

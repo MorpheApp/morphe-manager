@@ -177,6 +177,14 @@ class HomeStates(
         }
 
         // Show APK availability dialog to start selection process
+        showPatchDialog(packageName)
+    }
+
+    /**
+     * Show patch dialog without validation
+     * Used when called from installed app screen
+     */
+    fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
         pendingAppName = getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]

@@ -65,7 +65,9 @@ fun MorpheHomeScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
-    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?
+    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    patchTriggerPackage: String? = null,
+    onPatchTriggerHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val pm: PM = koinInject()
@@ -111,10 +113,22 @@ fun MorpheHomeScreen(
     // Update loading state
     LaunchedEffect(bundleUpdateProgress, allInstalledApps, availablePatches) {
         val hasLoadedApps = allInstalledApps.isNotEmpty() || availablePatches > 0
+        val isBundleUpdateInProgress = bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.None
         homeState.updateLoadingState(
-            bundleUpdateInProgress = bundleUpdateProgress != null,
+            bundleUpdateInProgress = isBundleUpdateInProgress,
             hasInstalledApps = hasLoadedApps
         )
+    }
+
+    // Handle patch trigger from installed app screen
+    LaunchedEffect(patchTriggerPackage) {
+        patchTriggerPackage?.let { packageName ->
+            // Show patch dialog directly without validation
+            homeState.showPatchDialog(packageName)
+
+            // Clear the trigger
+            onPatchTriggerHandled()
+        }
     }
 
     // Update installed apps when data changes
@@ -243,7 +257,7 @@ fun MorpheHomeScreen(
                 homeState.handleAppClick(
                     packageName = PACKAGE_YOUTUBE,
                     availablePatches = availablePatches,
-                    bundleUpdateInProgress = bundleUpdateProgress != null,
+                    bundleUpdateInProgress = false,
                     android11BugActive = dashboardViewModel.android11BugActive,
                     installedApp = youtubeInstalledApp
                 )
@@ -255,7 +269,7 @@ fun MorpheHomeScreen(
                 homeState.handleAppClick(
                     packageName = PACKAGE_YOUTUBE_MUSIC,
                     availablePatches = availablePatches,
-                    bundleUpdateInProgress = bundleUpdateProgress != null,
+                    bundleUpdateInProgress = false,
                     android11BugActive = dashboardViewModel.android11BugActive,
                     installedApp = youtubeMusicInstalledApp
                 )
@@ -289,7 +303,7 @@ fun MorpheHomeScreen(
 
             // Other apps button
             onOtherAppsClick = {
-                if (availablePatches <= 0 || bundleUpdateProgress != null) {
+                if (availablePatches <= 0) {
                     context.toast(context.getString(R.string.morphe_home_sources_are_loading))
                     return@HomeSectionsLayout
                 }
