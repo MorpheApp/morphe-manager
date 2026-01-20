@@ -125,12 +125,12 @@ fun AdvancedTabContent(
             }
         )
 
-        // Return to Expert mode button (URV mode) (Expert mode only)
+        // For now hide 'Return to URV mode' button
         if (useExpertMode) {
             SettingsItem(
                 icon = Icons.Outlined.SwapHoriz,
-                title = stringResource(R.string.morphe_settings_return_to_expert),
-                description = stringResource(R.string.morphe_settings_return_to_expert_description),
+                title = "Change to URV mode",
+                description = "Switch to the full-featured URV mode",
                 onClick = onBackToAdvanced,
                 showBorder = true
             )

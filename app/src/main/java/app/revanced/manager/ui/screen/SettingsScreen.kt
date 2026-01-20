@@ -123,8 +123,8 @@ fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> 
                             advancedViewModel.prefs.useMorpheHomeScreen.update(!useMorpheHomeScreen)
                         }
                     },
-                    headlineContent = stringResource(R.string.morphe_settings_return_to_morphe),
-                    supportingContent = stringResource(R.string.morphe_settings_return_to_morphe_description),
+                    headlineContent = "Return to Morphe home",
+                    supportingContent = "Return to simplified mode",
                     leadingContent = { Icon(Icons.Outlined.SwapHoriz, null) },
                     trailingContent = { Icon(Icons.AutoMirrored.Outlined.ArrowForwardIos, null) }
                 )
