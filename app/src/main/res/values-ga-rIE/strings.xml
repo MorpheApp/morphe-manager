@@ -127,18 +127,18 @@
     <string name="morphe_app_icon_selector_title">Deilbhín Aip</string>
     <string name="morphe_app_icon_selector_description">Athrú an deilbhín aip an chláir</string>
     <string name="morphe_app_icon_default">Réamhshocrú</string>
-    <string name="morphe_app_icon_light_2">Neamh</string>
-    <string name="morphe_app_icon_light_3">Taiscead</string>
-    <string name="morphe_app_icon_dark_1">Mara</string>
-    <string name="morphe_app_icon_dark_2">Fáinne</string>
-    <string name="morphe_app_icon_dark_3">Indi</string>
-    <string name="morphe_app_icon_change_dialog_title">Athraigh Ikon App?</string>
-    <string name="morphe_app_icon_change_dialog_message">Athraigh go \'%1$s\' agus tairgfí?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Athraigh Ikon</string>
+    <string name="morphe_app_icon_light_2">Spéir</string>
+    <string name="morphe_app_icon_light_3">Luí na gréine</string>
+    <string name="morphe_app_icon_dark_1">Aigéan</string>
+    <string name="morphe_app_icon_dark_2">Folús</string>
+    <string name="morphe_app_icon_dark_3">Indeagó</string>
+    <string name="morphe_app_icon_change_dialog_title">Deilbhín an Aipe a Athrú?</string>
+    <string name="morphe_app_icon_change_dialog_message">Athraigh go \'%1$s\' agus atosú?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Athraigh Deilbhín</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Roghanna cuma</string>
     <string name="morphe_appearance_options_description">Saincheap téamaí, dathanna agus cúlraí</string>
-    <string name="morphe_appearance_current_language">Teanga réamhach</string>
+    <string name="morphe_appearance_current_language">Teanga reatha</string>
     <string name="morphe_appearance_search">Cuardaigh</string>
     <string name="morphe_appearance_no_results">Ní bhfuarthas aon toradh</string>
     <string name="morphe_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>

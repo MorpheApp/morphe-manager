@@ -119,7 +119,7 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Morphe ana sayfasına dön</string>
     <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
-    <string name="morphe_settings_return_to_expert">Uzman yap&#305;gorunu degi&#350;tir</string>
+    <string name="morphe_settings_return_to_expert">Uzman moduna geç</string>
     <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
     <string name="morphe_share_website">Web sitesini paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>

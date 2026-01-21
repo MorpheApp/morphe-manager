@@ -8,19 +8,19 @@
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <string name="morphe_home_greeting_3">繫好安全帶,修補時間到了</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">另一天,另一個廣告遮蔽的傑作</string>
+    <string name="morphe_home_greeting_4">另一天，另一個廣告遮蔽的傑作</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">想看廣告嗎?我也不想</string>
+    <string name="morphe_home_greeting_5">想看廣告嗎？我也不想</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">讓我們讓您的應用程式更加得體</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">今天的天氣預報:有100%的補丁機會</string>
+    <string name="morphe_home_greeting_7">今天的天氣預報：有 100% 的修補機率</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">準備將平庸變成出色嗎?</string>
+    <string name="morphe_home_greeting_8">準備將平庸變成出色嗎？</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="morphe_home_greeting_9">從今天起拯救應用程式免於自我毀滅</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">由咖啡因和良好的補丁提供動力</string>
+    <string name="morphe_home_greeting_10">由咖啡因和良好的修補提供動力</string>
     <string name="morphe_home_bundle_type_api">API 套件</string>
     <string name="morphe_home_update_error">更新失敗</string>
     <string name="morphe_home_update_error_subtitle">檢查您的網際網路連線，然後再試一次</string>
@@ -38,20 +38,20 @@
     <string name="morphe_home_timeline">更新歷史</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始的未修補 APK 嗎？</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">要修補%1$s,您需要%2$s版本(未修補)</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">要修補 %1$s，你需要 %2$s 版本（未修補）</string>
     <string name="morphe_home_apk_availability_yes">是，我有</string>
     <string name="morphe_home_apk_availability_no">否，請協助我尋找</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">下載原始APK</string>
+    <string name="morphe_home_download_instructions_title">下載原始 APK</string>
     <string name="morphe_home_download_instructions_steps_title">指示：</string>
     <string name="morphe_home_download_instructions_step1">按下以下的 \'%1$s\' 按鈕</string>
     <string name="morphe_home_download_instructions_step2_part1">捲動網頁並按一下</string>
-    <string name="morphe_home_download_instructions_download_button_toast">在網站上按下下載,而不是在此處😊</string>
-    <string name="morphe_home_download_instructions_step3">等待下載完成,並&lt;b&gt;不要安裝&lt;/b&gt;APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">等待下載完成,然後&lt;b&gt;安裝APK&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_download_button_toast">在網站上按下下載，而不是在這裡 😊</string>
+    <string name="morphe_home_download_instructions_step3">等待下載完成，並&lt;b&gt;不要安裝&lt;/b&gt; APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">等待下載完成，並&lt;b&gt;安裝 APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">下載完成後，請再次開啟此應用程式</string>
     <string name="morphe_home_download_instructions_step4_mount">安裝原始 APK 後，請再次開啟此應用程式</string>
-    <string name="morphe_home_download_instructions_continue">繼續到APKMirror.com</string>
+    <string name="morphe_home_download_instructions_continue">繼續前往 APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">選取您下載的 APK</string>
     <string name="morphe_home_file_picker_prompt_description">現在請選取您剛下載的 %1$s APK 檔案。</string>
@@ -117,10 +117,10 @@
     <string name="morphe_patcher_message_19">您的應用程式發燒了，唯一的處方是更多的修補程式… 🩺🔔</string>
     <string name="morphe_patcher_message_20">正在移除不必要的內容。請稍候… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">返回 Morphe 主頁</string>
+    <string name="morphe_settings_return_to_morphe">返回 Morphe 首頁</string>
     <string name="morphe_settings_return_to_morphe_description">返回簡化模式</string>
-    <string name="morphe_settings_return_to_expert">切换至專家模式</string>
-    <string name="morphe_settings_return_to_expert_description">切換至功能完整的專家模式</string>
+    <string name="morphe_settings_return_to_expert">切換至專業模式</string>
+    <string name="morphe_settings_return_to_expert_description">切換至功能完整的專業模式</string>
     <string name="morphe_share_website">分享網站</string>
     <string name="morphe_share_website_description">分享官方 Morphe 網站</string>
     <!-- App Icon Selector -->
@@ -132,15 +132,15 @@
     <string name="morphe_app_icon_dark_1">大海</string>
     <string name="morphe_app_icon_dark_2">虛空</string>
     <string name="morphe_app_icon_dark_3">靛青</string>
-    <string name="morphe_app_icon_change_dialog_title">更改應用程序圖標？</string>
+    <string name="morphe_app_icon_change_dialog_title">更改應用程式圖示？</string>
     <string name="morphe_app_icon_change_dialog_message">更改為\'%1$s\'並重新啟動？</string>
-    <string name="morphe_app_icon_change_dialog_confirm">更改圖標</string>
+    <string name="morphe_app_icon_change_dialog_confirm">更改圖示</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">外觀設定</string>
-    <string name="morphe_appearance_options_description">自定義主題、顏色與背景</string>
-    <string name="morphe_appearance_current_language">當前語言</string>
+    <string name="morphe_appearance_options_description">客製化主題、顏色與背景</string>
+    <string name="morphe_appearance_current_language">目前語言</string>
     <string name="morphe_appearance_search">搜尋</string>
-    <string name="morphe_appearance_no_results">沒有找到\"\"的結果</string>
+    <string name="morphe_appearance_no_results">沒有找到結果</string>
     <string name="morphe_appearance_translations_info_title">某些語言的翻譯可能缺失或不完整</string>
     <string name="morphe_appearance_translations_info_text">要翻譯新語言或改進現有翻譯，請訪問 %s</string>
     <string name="morphe_background_type">背景動畫</string>
@@ -149,16 +149,16 @@
     <string name="morphe_background_type_waves">波浪</string>
     <string name="morphe_background_type_space">太空</string>
     <string name="morphe_background_type_shapes">形狀</string>
-    <string name="morphe_background_type_snow">键盘</string>
+    <string name="morphe_background_type_snow">鍵盤</string>
     <string name="morphe_background_type_none">無</string>
     <!-- Advanced Section -->
     <string name="morphe_update_use_prereleases">使用預先發布版</string>
-    <string name="morphe_update_use_prereleases_description">及早使用最新的補丁與管理員功能</string>
+    <string name="morphe_update_use_prereleases_description">及早使用最新的修補與管理員功能</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">修補選項</string>
     <string name="morphe_patch_options_youtube_description">主題、品牌標題、縮短片選項</string>
     <string name="morphe_patch_options_youtube_music_description">主題和品牌標題選項</string>
-    <string name="morphe_patch_options_restart_message">變更補丁選項需要重新安裝應用才能生效</string>
+    <string name="morphe_patch_options_restart_message">變更修補選項需要重新修補應用程式才能生效</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">應用主題顏色</string>
     <string name="morphe_patch_options_theme_colors_description">變更背景顏色</string>
@@ -166,31 +166,31 @@
     <string name="morphe_patch_options_dark_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
     <string name="morphe_patch_options_light_theme_color">淺色主題背景顏色</string>
     <string name="morphe_patch_options_light_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
-    <string name="morphe_patch_options_icon_instructions_title">圖標格式說明</string>
+    <string name="morphe_patch_options_icon_instructions_title">圖示格式說明</string>
     <string name="morphe_patch_options_header_instructions_title">標題格式說明</string>
     <string name="morphe_patch_options_loading">正在載入修補選項…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">請等待補丁程式包更新</string>
-    <string name="morphe_patch_options_load_error">載入補丁選項失敗</string>
+    <string name="morphe_patch_options_waiting_for_bundle">請等待修補程式包更新</string>
+    <string name="morphe_patch_options_load_error">無法載入修補選項</string>
     <string name="morphe_patch_options_no_available">此修補程式無可用選項</string>
     <!-- Color Picker -->
-    <string name="morphe_custom_color">自定義顏色</string>
+    <string name="morphe_custom_color">客製化顏色</string>
     <string name="morphe_hex_color">十六進制顏色</string>
     <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">自定義品牌</string>
+    <string name="morphe_patch_options_custom_branding">客製化品牌</string>
     <string name="morphe_patch_options_custom_branding_description">變更應用顯示名稱</string>
     <string name="morphe_patch_options_custom_branding_app_name">應用程式名稱</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">輸入自定義名稱</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon">自定義圖標</string>
-    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"用於自定義圖标的圖像文件夾。
+    <string name="morphe_patch_options_custom_branding_app_name_hint">輸入客製化名稱</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">客製化圖示</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"用於客製化圖示的圖像資料夾。
 
-此文件夾必須包含以下一個或多個文件夾，具體取決於設備的 DPI：
+此資料夾必須包含以下一個或多個資料夾，具體取決於裝置的 DPI：
 - mipmap-mdpi
 - mipmap-hdpi
 - mipmap-xhdpi
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-每個文件夾必須包含以下所有文件：
+每個資料夾必須包含以下所有文件：
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -201,21 +201,21 @@ morphe_adaptive_foreground_custom.png
 - mipmap-xxhdpi: 324x324 像素
 - mipmap-xxxhdpi: 432x432 像素
 
-選項性地，路徑中包含一個 'drawable' 文件夾，其中包含任何單色圖标文件：
+選項性地，路徑中包含一個 'drawable' 資料夾，其中包含任何單色圖示文件：
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_patch_options_custom_header">自定義標題圖標</string>
-    <string name="morphe_patch_options_custom_header_description">變更標題圖標</string>
-    <string name="morphe_patch_options_custom_header_instruction">"用於自定義標題圖标的圖像文件夾。
+    <string name="morphe_patch_options_custom_header">客製化標題圖示</string>
+    <string name="morphe_patch_options_custom_header_description">變更標題圖示</string>
+    <string name="morphe_patch_options_custom_header_instruction">"用於客製化標題圖示的圖像資料夾。
 
-此文件夾必須包含以下一個或多個文件夾，具體取決於設備的 DPI：
+此資料夾必須包含以下一個或多個資料夾，具體取決於裝置的 DPI：
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-每個文件夾必須包含以下所有文件：
+每個資料夾必須包含以下所有文件：
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
@@ -226,8 +226,8 @@ morphe_header_custom_dark.png
 - drawable-xxxhdpi: 512x192 像素"</string>
     <!-- Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">隱藏 Shorts 功能</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">隱藏 Shorts 應用快捷方式</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">將 Shorts 從發起者長按菜單中移除</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">隱藏 Shorts 應用程式捷徑</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">將 Shorts 從發起者長按選單中移除</string>
     <string name="morphe_patch_options_hide_shorts_widget">隱藏 Shorts 畫廊部件</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">將發起者部件上的 Shorts 按鈕移除</string>
     <!-- Other strings -->
@@ -255,7 +255,7 @@ morphe_header_custom_dark.png
     <string name="patches_missing">遺失</string>
     <string name="patches_error">錯誤</string>
     <string name="patches_error_description">無法載入修補程式。按一下以檢視錯誤</string>
-    <string name="patches_not_downloaded">補丁尚未下載。點擊此處下載。</string>
+    <string name="patches_not_downloaded">修補尚未下載。點擊此處下載。</string>
     <string name="patches_name_default">修補程式</string>
     <string name="patches_name_fallback">未命名</string>
     <string name="bundle_uid">套件 UID</string>
@@ -276,7 +276,7 @@ morphe_header_custom_dark.png
     <string name="bundle_version_item_description_default">使用預設建議</string>
     <string name="bundle_version_item_description_selected">遵循 %1$s (%2$s)</string>
     <string name="bundle_version_dialog_title">選擇套件建議</string>
-    <string name="bundle_version_dialog_description">選擇哪個存儲包的建議應該在下載APK時使用。</string>
+    <string name="bundle_version_dialog_description">選擇哪個儲存包的建議應該在下載APK時使用。</string>
     <string name="bundle_version_dialog_default">使用預設建議</string>
     <string name="bundle_version_dialog_default_subtitle">自動選取最常見的相容版本。</string>
     <string name="bundle_version_all_versions">所有版本</string>
@@ -295,7 +295,7 @@ morphe_header_custom_dark.png
     <string name="patch_bundle_missing_error">無法更新此修補程式套件。</string>
     <string name="bundle_release_page">開啟發行頁面</string>
     <string name="bundle_release_page_unavailable">此套件無法使用發行頁面</string>
-    <string name="bundle_release_page_error">無法開啟發行頁面： %s</string>
+    <string name="bundle_release_page_error">無法開啟發行頁面：%s</string>
     <string name="bundle_links_title">%1$s 的連結</string>
     <string name="bundle_link_release">GitHub 發行</string>
     <string name="bundle_link_catalog">修補程式清單目錄</string>
@@ -306,8 +306,8 @@ morphe_header_custom_dark.png
     <string name="other_supported_versions_title">其他支援的版本 (%1$s)</string>
     <string name="other_supported_versions_empty">沒有其他支援的版本。</string>
     <string name="other_supported_versions_all">支援所有版本。</string>
-    <string name="bundle_version_dialog_recommended">建議版本： %1$s</string>
-    <string name="bundle_version_dialog_selected_override">選定的版本： %1$s</string>
+    <string name="bundle_version_dialog_recommended">建議版本：%1$s</string>
+    <string name="bundle_version_dialog_selected_override">選定的版本：%1$s</string>
     <string name="bundle_version_dialog_selected_indicator">已選取</string>
     <string name="bundle_version_dialog_other_title">選取另一個支援的版本：</string>
     <string name="bundle_version_dialog_locked_title">已啟用版本防護</string>
@@ -386,7 +386,7 @@ morphe_header_custom_dark.png
     <string name="import_keystore">匯入金鑰儲存庫</string>
     <string name="import_keystore_description">匯入自訂金鑰儲存庫</string>
     <string name="import_keystore_dialog_title">輸入金鑰儲存庫認證</string>
-    <string name="import_keystore_dialog_description">您需要輸入金鑰庫的憑據才能導入它。</string>
+    <string name="import_keystore_dialog_description">您需要輸入金鑰庫的憑據才能匯入它。</string>
     <string name="import_keystore_dialog_alias_field">使用者名稱（別名）</string>
     <string name="import_keystore_dialog_password_field">密碼</string>
     <string name="import_keystore_dialog_button">匯入</string>
@@ -487,8 +487,8 @@ morphe_header_custom_dark.png
     <string name="patch_selection_collapse_on_toggle_description">選取或取消選取修補程式時，自動隱藏修補程式選取動作按鈕</string>
     <string name="patch_selection_action_order_title">修補程式選取動作按鈕順序</string>
     <string name="patch_selection_action_order_description">選擇修補程式選取動作按鈕的版面配置順序</string>
-    <string name="patch_selection_action_visibility_title">隱藏安裝補丁操作按鈕</string>
-    <string name="patch_selection_action_visibility_description">選擇要顯示哪些安裝補丁操作按鈕</string>
+    <string name="patch_selection_action_visibility_title">隱藏安裝修補操作按鈕</string>
+    <string name="patch_selection_action_visibility_description">選擇要顯示哪些安裝修補操作按鈕</string>
     <string name="patch_selection_action_visibility_reset">顯示所有操作按鈕</string>
     <string name="patch_selection_action_order_reset">重設為預設順序</string>
     <string name="patch_selection_confirm_deselect_bundle_title">取消選取套件？</string>
@@ -545,9 +545,9 @@ morphe_header_custom_dark.png
     <string name="downloader_plugin_state_failed">載入失敗。按一下以取得詳細資訊</string>
     <string name="downloader_plugin_state_untrusted">不信任</string>
     <string name="downloader_plugin_trust_dialog_title">信任外掛程式？</string>
-    <string name="downloader_plugin_revoke_trust_dialog_title">撤銷信任？</string>
-    <string name="downloader_plugin_trust_dialog_body">"套件名稱： %1$s
-簽章 (SHA-256)： %2$s"</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">撤除信任？</string>
+    <string name="downloader_plugin_trust_dialog_body">"套件名稱：%1$s
+簽章 (SHA-256)：%2$s"</string>
     <string name="downloader_plugin_view_error">查看錯誤詳情</string>
     <string name="downloader_plugin_failed_dialog_body">無法載入「%1$s」。您可以查看錯誤詳情或解除安裝此外掛程式。</string>
     <string name="downloader_plugin_uninstall_title">解除安裝外掛程式？</string>
@@ -605,21 +605,21 @@ morphe_header_custom_dark.png
     <string name="export_name_format_current">目前模式：%1$s</string>
     <string name="export_name_format_insert">插入</string>
     <string name="export_name_variable_app_name">應用程式名稱</string>
-    <string name="export_name_variable_app_name_description">替換為應用程式的顯示名稱。</string>
+    <string name="export_name_variable_app_name_description">已取代應用程式的顯示名稱。</string>
     <string name="export_name_variable_package_name">封包名稱</string>
-    <string name="export_name_variable_package_name_description">替換為應用程式的封包名稱。</string>
+    <string name="export_name_variable_package_name_description">已取代應用程式的封包名稱。</string>
     <string name="export_name_variable_app_version">應用程式版本</string>
-    <string name="export_name_variable_app_version_description">替換為應用程式的版本名稱。</string>
-    <string name="export_name_variable_patches_version">補丁版本</string>
-    <string name="export_name_variable_patches_version_description">替換為已應用的補丁封包版本。</string>
-    <string name="export_name_variable_bundle_names">補丁封包名稱</string>
-    <string name="export_name_variable_bundle_names_description">替換為已應用的補丁封包名稱。</string>
+    <string name="export_name_variable_app_version_description">已取代應用程式的版本名稱。</string>
+    <string name="export_name_variable_patches_version">修補版本</string>
+    <string name="export_name_variable_patches_version_description">已取代套用的修補封包版本。</string>
+    <string name="export_name_variable_bundle_names">修補包名稱</string>
+    <string name="export_name_variable_bundle_names_description">已取代套用的修補封包名稱。</string>
     <string name="export_name_variable_manager_version">管理員版本</string>
-    <string name="export_name_variable_manager_version_description">替換為管理員版本。</string>
+    <string name="export_name_variable_manager_version_description">已取代管理器版本。</string>
     <string name="export_name_variable_timestamp">時間戳記</string>
-    <string name="export_name_variable_timestamp_description">替換為当前时间（格式：yyyyMMdd-HHmmss）。</string>
+    <string name="export_name_variable_timestamp_description">已取代目前時間（格式：yyyyMMdd-HHmmss）。</string>
     <string name="export_name_variable_date">日期</string>
-    <string name="export_name_variable_date_description">替換為当前日期（格式：yyyyMMdd）。</string>
+    <string name="export_name_variable_date_description">已取代目前日期（格式：yyyyMMdd）。</string>
     <string name="debug_logs_export">匯出偵錯記錄</string>
     <string name="debug_logs_export_read_failed">無法讀取記錄 (結束代碼 %d)</string>
     <string name="debug_logs_export_failed">匯出記錄失敗</string>
@@ -660,7 +660,7 @@ morphe_header_custom_dark.png
     <string name="patches_download_fail">無法下載修補程式：%s</string>
     <string name="patches_replace_fail">無法匯入修補程式：%s</string>
     <string name="no_patched_apps_found">找不到已修補的應用程式</string>
-    <string name="patches_selected">已選擇 %1$s 個補丁封包</string>
+    <string name="patches_selected">已選擇 %s 個修補包</string>
     <string name="patch_profiles_selected">已選取 %1$d 個修補程式設定檔</string>
     <string name="selected_apps_count">已選取 %1$d 個應用程式</string>
     <string name="selected_apps_delete_dialog_description">從管理工具移除選取的應用程式？您裝置上已安裝的應用程式將保持不變。</string>
@@ -703,7 +703,7 @@ morphe_header_custom_dark.png
     <string name="patch_profile_version_conflict_title">保留版本覆寫？</string>
     <string name="patch_profile_version_conflict_message">"目前版本: %1$s
 即將到來的版本: %2$s
-哪個應該保存在此設定檔?"</string>
+哪個應該儲存在此設定檔?"</string>
     <string name="patch_profile_version_conflict_use_new">使用傳入版本</string>
     <string name="patch_profile_version_conflict_keep_existing">保留現有版本</string>
     <string name="patch_profile_empty_state">儲存從修補程式選取畫面所做的設定，以在此處查看。</string>
@@ -726,10 +726,10 @@ morphe_header_custom_dark.png
     <!-- Dormant code and not used -->
     <string name="patcher_memory_adjustment_retry">再試一次</string>
     <string name="patcher_memory_adjustment_dismiss">忽略</string>
-    <string name="patcher_missing_patch_title">補丁選取需要注意</string>
-    <string name="patcher_preflight_missing_patch_remove">移除遺失的補丁</string>
+    <string name="patcher_missing_patch_title">修補選取需要注意</string>
+    <string name="patcher_preflight_missing_patch_remove">移除遺失的修補</string>
     <string name="patcher_preflight_missing_patch_proceed">仍然繼續</string>
-    <string name="patcher_preflight_missing_patch_message">"目前捆綁中未包含以下補丁:
+    <string name="patcher_preflight_missing_patch_message">"目前包中未包含以下修補：
 %1$s
 您可以自動移除它們、調整選項，或繼續使用。"</string>
     <string name="patcher_missing_patch_review">檢閱選取項目</string>
@@ -762,25 +762,25 @@ morphe_header_custom_dark.png
     <string name="no_patch_bundles_tracked">此應用程式沒有記錄任何修補程式套件</string>
     <string name="mount_install">已植根的掛載安裝程式</string>
     <string name="mounted">已掛載</string>
-    <string name="unmounted">已卸載</string>
+    <string name="unmounted">已解除掛載</string>
     <string name="install_type_custom_installer">自訂安裝程式</string>
     <string name="install_type_system_installer">系統安裝程式</string>
     <string name="install_type_mount_label">已植根的掛載安裝程式</string>
     <string name="not_mounted">未掛載</string>
     <string name="mount">掛載</string>
-    <string name="unmount">卸載</string>
-    <string name="unmount_confirm_description">確定要卸載應用程式嗎？</string>
+    <string name="unmount">解除掛載</string>
+    <string name="unmount_confirm_description">確定要解除掛載應用程式嗎？</string>
     <string name="saved_install">已儲存</string>
     <string name="failed_to_mount">無法安裝：%s</string>
-    <string name="failed_to_unmount">無法卸載：%s</string>
+    <string name="failed_to_unmount">無法解除掛載：%s</string>
     <string name="unpatch_app">取消修補應用程式？</string>
     <string name="unpatch_description">您確定要取消修補此應用程式嗎？</string>
     <string name="downloader_app_not_found">下載器找不到應用程式</string>
     <string name="downloader_error">下載器錯誤：%s</string>
     <string name="downloader_no_plugins_installed">未安裝下載器。</string>
     <string name="downloader_no_plugins_available">已安裝下載程式，但沒有一個是受信任的。請檢查您的設定。</string>
-    <string name="downloader_plugin_uninstall_success">已卸載 %1$s</string>
-    <string name="downloader_plugin_uninstall_failed">無法卸載 %1$s</string>
+    <string name="downloader_plugin_uninstall_success">已解除掛載 %1$s</string>
+    <string name="downloader_plugin_uninstall_failed">無法解除掛載 %1$s</string>
     <string name="downloaded_apps_export">匯出選取的應用程式</string>
     <string name="downloaded_apps_export_success">已匯出 %1$d 個應用程式</string>
     <string name="downloaded_apps_export_failed">無法匯出下載的應用程式</string>
@@ -863,7 +863,7 @@ morphe_header_custom_dark.png
     <string name="installer_hint_aborted">安裝已被取消。</string>
     <string name="installer_hint_with_reason">"%1$s
 
-詳細： %2$s"</string>
+詳細：%2$s"</string>
     <string name="installer_external_launched">正在開啟 %1$s…</string>
     <string name="installer_external_timeout">%1$s 並未確認安裝。請檢查其他應用程式後再試一次。</string>
     <string name="installer_external_success">%1$s 報告安裝成功。</string>
@@ -871,13 +871,13 @@ morphe_header_custom_dark.png
     <string name="installing_ellipsis">正在安裝…</string>
     <string name="uninstalling_ellipsis">正在解安裝…</string>
     <string name="mounting_ellipsis">正在掛載…</string>
-    <string name="unmounting">正在卸載…</string>
+    <string name="unmounting">正在解除掛載…</string>
     <string name="install_app">安裝</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail_title">安裝失敗</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
     <string name="install_app_fail_missing_stock">缺少原始APK以進行掛載安裝。</string>
-    <string name="mount_split_not_supported">Rooted掛載安裝器不支援分拆APK。请改用系统安装器。</string>
+    <string name="mount_split_not_supported">Rooted掛載安裝器不支援分拆APK。請改用系統安裝器。</string>
     <string name="mount_app_fail_title">掛載失敗</string>
     <string name="install_timeout_message">安裝未完成。請檢查系統安裝程式對話方塊後重試。</string>
     <string name="uninstall_timeout_message">解安裝未完成。請檢查解安裝對話框並重試。</string>
@@ -917,7 +917,7 @@ morphe_header_custom_dark.png
     <string name="patcher_notification_title">修補程式進行中…</string>
     <string name="patcher_notification_text">點擊以返回修補程式</string>
     <string name="patcher_stop_confirm_title">停止修補程式</string>
-    <string name="patcher_stop_confirm_description">您確定要停止修補程序嗎？</string>
+    <string name="patcher_stop_confirm_description">您確定要停止修補程式嗎？</string>
     <string name="patcher_install_in_progress_title">安裝進行中</string>
     <string name="patcher_install_in_progress">正在安裝中。請稍候</string>
     <string name="patcher_install_in_progress_leave">仍離開</string>
@@ -962,7 +962,7 @@ morphe_header_custom_dark.png
     <string name="revanced_manager_description">"Morphe 是一個實驗性的開源專案，致力於為熱門的 Android 應用程式建立現代化、精簡的修補程式
 
 Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創新"</string>
-    <string name="here">此处。</string>
+    <string name="here">這裡。</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
     <string name="update_completed">更新已安裝</string>
@@ -976,7 +976,7 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <string name="update_checking_manager_description">啟動應用程式時檢查 Morphe 的新版本</string>
     <string name="manager_prereleases">使用預先發布版</string>
     <string name="manager_prereleases_description">使用 Morphe 的預先發布版</string>
-    <string name="update_published">已發佈 %s</string>
+    <string name="update_published">已發布 %s</string>
     <string name="battery_optimization_notification">Morphe 在背景中正常運作，必須關閉電池最佳化。按一下這裡以關閉最佳化。</string>
     <string name="installing_manager_update">正在安裝更新...</string>
     <string name="downloading_manager_update">正在下載更新...</string>
@@ -1001,7 +1001,7 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <string name="failed_to_download_update">無法下載更新：%s</string>
     <string name="download">下載</string>
     <string name="resume_download">繼續下載</string>
-    <string name="download_confirmation_metered">"您目前使用的是計量付費連線，可能會產生行動數據服務供應商的數據費用。
+    <string name="download_confirmation_metered">"您目前使用的是計量付費連線，可能會產生行動資料服務供應商的資料費用。
 
 您確定要繼續嗎？"</string>
     <string name="download_update_confirmation">下載更新？</string>
@@ -1027,13 +1027,13 @@ Morphe 以開源為核心，仰賴社群的回饋和貢獻來推動未來的創�
     <string name="installation_blocked_description">安裝被封鎖。請檢查您的裝置安全性設定後再試一次。</string>
     <string name="installation_conflict_description">現有的應用程式安裝封鎖了此安裝。解除安裝現有的應用程式後再試一次？</string>
     <string name="installation_signature_mismatch_dialog_title">簽名不符</string>
-    <string name="installation_signature_mismatch_description">已安裝的應用程式簽名不同。是否卸載已安裝的應用程式並安裝這個？</string>
+    <string name="installation_signature_mismatch_description">已安裝的應用程式簽名不同。是否解除掛載已安裝的應用程式並安裝這個？</string>
     <string name="installation_incompatible_description">此應用程式與此裝置不相容。請使用與此裝置相容的 APK 再試一次。</string>
     <string name="installation_invalid_description">應用程式無效。解除安裝此應用程式後再試一次？</string>
     <string name="installation_storage_issue_description">由於儲存空間不足，無法安裝此應用程式。請釋出一些空間後再試一次。</string>
     <string name="installation_timeout_description">安裝逾時。再試一次？</string>
     <string name="reinstall">重新安裝</string>
-    <string name="installation_signature_mismatch_confirm">卸載並安裝</string>
+    <string name="installation_signature_mismatch_confirm">解除掛載並安裝</string>
     <string name="show">顯示</string>
     <string name="debugging">偵錯</string>
     <string name="about_device">關於裝置</string>

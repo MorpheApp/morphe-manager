@@ -8,11 +8,11 @@
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <string name="morphe_home_greeting_3">Zapnij pasy, czas na modyfikowanie</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Kolejny dzień, kolejne mistrzowskie dzieło z adblockiem</string>
+    <string name="morphe_home_greeting_4">Kolejny dzień, kolejne zwycięstwo AdBlocka</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Chcesz oglądać reklamy? Ja też nie</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Sprawmy, aby Twoje aplikacje się zachowywały</string>
+    <string name="morphe_home_greeting_6">Sprawmy, aby Twoje aplikacje zachowywały się</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">Dzisiejsza prognoza: 100% szans na zmodyfikowanie</string>
     <!-- From mediocrity to amazing -->
@@ -27,17 +27,17 @@
     <string name="morphe_home_updating_patches">Aktualizowanie modyfikacji…</string>
     <string name="morphe_home_update_success">Aktualizacja zakończona</string>
     <string name="morphe_home_patches_updated">Twoje modyfikacje są aktualne</string>
-    <string name="morphe_home_patches_are_loading">Modyfikacje są ładowane, proszę czekać…</string>
+    <string name="morphe_home_patches_are_loading">Proszę czekać, trwa ładowanie modyfikacji…</string>
     <string name="morphe_home_please_wait">Proszę czekać…</string>
     <string name="morphe_home_open_in_browser">Otwórz w przeglądarce</string>
-    <string name="morphe_home_failed_to_open_url">Nie udało się otworzyć adresu URL</string>
+    <string name="morphe_home_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="morphe_home_date_added">Dodano</string>
     <string name="morphe_home_date_updated">Zaktualizowano</string>
     <string name="morphe_home_check_updates">Sprawdź</string>
     <string name="morphe_home_unknown">Nieznany</string>
     <string name="morphe_home_timeline">Historia aktualizacji</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany APK?</string>
+    <string name="morphe_home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany plik APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Aby zmodyfikować %1$s, potrzebujesz wersji %2$s (niezmodyfikowanej)</string>
     <string name="morphe_home_apk_availability_yes">Tak, mam</string>
     <string name="morphe_home_apk_availability_no">Nie, pomóż mi ją znaleźć</string>
@@ -46,7 +46,7 @@
     <string name="morphe_home_download_instructions_steps_title">Instrukcje:</string>
     <string name="morphe_home_download_instructions_step1">Naciśnij przycisk \'%1$s\' poniżej</string>
     <string name="morphe_home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Naciśnij pobieranie na stronie, a nie tutaj 😊</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
     <string name="morphe_home_download_instructions_step3">Poczekaj, aż pobieranie się zakończy, i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
     <string name="morphe_home_download_instructions_step3_mount">Poczekaj, aż pobieranie się zakończy, a następnie &lt;b&gt;zainstaluj plik APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Po zakończeniu pobierania otwórz tę aplikację ponownie</string>
@@ -63,7 +63,7 @@
     <string name="morphe_root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Zapisz APK</string>
-    <string name="morphe_patcher_copy_error">Błąd kopiowania</string>
+    <string name="morphe_patcher_copy_error">Kopiowanie nie powiodło się</string>
     <string name="morphe_patcher_show_error">Pokaż błąd</string>
     <string name="morphe_patcher_error_copied">Błąd skopiowano do schowka</string>
     <string name="morphe_patcher_patches_progress">%1$d z %2$d modyfikacji</string>
@@ -80,36 +80,36 @@
     <string name="morphe_patcher_mounting">Mountowanie…</string>
     <string name="morphe_patcher_conflict_title">Konflikt pakietów</string>
     <string name="morphe_patcher_conflict_subtitle">Musisz odinstalować istniejącą wersję</string>
-    <string name="morphe_patcher_install_error_title">Błąd instalacji</string>
-    <string name="morphe_patcher_install_error_subtitle">Spróbuj odinstalować i zainstalować ponownie</string>
+    <string name="morphe_patcher_install_error_title">Błąd podczas instalacji</string>
+    <string name="morphe_patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
     <string name="morphe_patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Niewspierana wersja</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie niefunkcjonalna.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
-    <string name="morphe_patcher_wrong_package_title">Wybrano zły pakiet</string>
-    <string name="morphe_patcher_wrong_package_description">Wybrane APK nie jest przeznaczone dla aplikacji, którą zamierzałeś zmodyfikować.</string>
+    <string name="morphe_patcher_wrong_package_title">Wybrano zły pakiet instalacyjny</string>
+    <string name="morphe_patcher_wrong_package_description">Wybrany plik APK nie jest przeznaczony dla aplikacji, którą zamierzałeś zmodyfikować.</string>
     <string name="morphe_patcher_expected_package">Oczekiwany pakiet</string>
     <string name="morphe_patcher_selected_package">Wybrany pakiet</string>
     <string name="morphe_patcher_message_1">Przekształcanie Twojej aplikacji w coś niesamowitego… 🏆</string>
-    <string name="morphe_patcher_message_2">Uczenie starych aplikacji nowych sztuczek… 🎩</string>
-    <string name="morphe_patcher_message_3">Cyfrowy \"tuning\" Twojej aplikacji… 🔧</string>
+    <string name="morphe_patcher_message_2">Uczenie starych aplikacji, nowych sztuczek… 🎩</string>
+    <string name="morphe_patcher_message_3">Podrasowywanie Twojej aplikacji w toku… 🔧</string>
     <string name="morphe_patcher_message_4">Tworzenie cyfrowej magii…</string>
     <string name="morphe_patcher_message_5">Polecana przerwa na kawę… ☕</string>
     <string name="morphe_patcher_message_6">Spójrz za okno, jest tam ładnie… 🌤️</string>
     <string name="morphe_patcher_message_7">Dostosowywanie zer i jedynek… 🤖</string>
     <string name="morphe_patcher_message_8">Rozplątywanie cyfrowego spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Naprawianie błędów w niezmodyfikowanej aplikacji… 🐞</string>
+    <string name="morphe_patcher_message_9">Naprawianie błędów w oryginalnej aplikacji… 🐞</string>
     <string name="morphe_patcher_message_10">Świetne modyfikacje są warte czekania… ⏳</string>
     <string name="morphe_patcher_message_11">Polerowanie pikseli, aż zaczną lśnić… 💎</string>
-    <string name="morphe_patcher_message_12">Proszę pozostać na miejscu, dopóki kapitan nie wyłączy znaku \"Trwa modyfikowanie\"... 💺✈️</string>
-    <string name="morphe_patcher_message_13">Gotowanie Twojej zmodyfikowanej aplikacji, gorącej i świeżej… 🍳</string>
+    <string name="morphe_patcher_message_12">Proszę pozostać na swoim miejscu, dopóki kapitan nie wyłączy znaku \"Trwa modyfikowanie\"... 💺✈️</string>
+    <string name="morphe_patcher_message_13">Przyrządzanie Twojej zmodyfikowanej aplikacji, tak aby była świeża i gorąca… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="morphe_patcher_message_14">Uprzejme negocjowanie z kodem bajtowym… 🤝</string>
+    <string name="morphe_patcher_message_14">Dogadywanie szczegółów z kodem binarnym… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="morphe_patcher_message_15">Wszystkie systemy nominalne… trajektoria modyfikowania jest stabilna… 🚀</string>
-    <string name="morphe_patcher_message_16">Wyciskając dodatkową moc, jak sok z cyfrowej cytryny… 🍋</string>
+    <string name="morphe_patcher_message_15">Wszystkie systemy sprawdzone… trajektoria modyfikowania jest stabilna… 🚀</string>
+    <string name="morphe_patcher_message_16">Wyciskanie jeszcze odrobinkę dodatkowej mocy, jak soku z cyfrowej cytryny… 🍋</string>
     <string name="morphe_patcher_message_17">Zachęcanie aplikacji do zaakceptowania swojej nowej, lepszej wersji… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Zmiana superpozycji aplikacji z niezmodyfikowanej na zmodyfikowaną… 📦⚛️</string>

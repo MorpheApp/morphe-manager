@@ -85,26 +85,26 @@
     <string name="morphe_patcher_ready_to_install_subtitle">Натисніть кнопку нижче, щоб встановити</string>
     <string name="morphe_patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Непідтримувана версія</string>
-    <string name="morphe_patcher_unsupported_version_dialog_description">Версія APK не є рекомендованою. Продовження може призвести до некоректної роботи додатку.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Цей APK не є рекомендованою версією застосунку. Продовження може призвести до несправності.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Продовжити в будь-якому разі</string>
     <string name="morphe_patcher_wrong_package_title">Вибрано невірний пакет</string>
-    <string name="morphe_patcher_wrong_package_description">Вибраний APK не відповідає додатку, який Ви збиралися патчити.</string>
+    <string name="morphe_patcher_wrong_package_description">Обраний APK-файл не призначений для застосунку, яку ви хотіли патчити.</string>
     <string name="morphe_patcher_expected_package">Очікуваний пакет</string>
     <string name="morphe_patcher_selected_package">Вибраний пакет</string>
-    <string name="morphe_patcher_message_1">Перетворення вашого додатка на щось дивовижне… 🏆</string>
-    <string name="morphe_patcher_message_2">Навчаємо старі додатки новим трюкам… 🎩</string>
-    <string name="morphe_patcher_message_3">Надаємо вашому додатку цифровий апгрейд… 🔧</string>
+    <string name="morphe_patcher_message_1">Перетворення вашого застосунку на щось круте… 🏆</string>
+    <string name="morphe_patcher_message_2">Навчаємо старі застосунки новим трюкам… 🎩</string>
+    <string name="morphe_patcher_message_3">Надаємо вашому застосунку цифрову прокачку… 🔧</string>
     <string name="morphe_patcher_message_4">Заварюємо цифрову магію… ☕</string>
     <string name="morphe_patcher_message_5">Рекомендується зробити перерву на каву… ☕</string>
     <string name="morphe_patcher_message_6">Подивіться надвір, там гарно… 🌤️</string>
     <string name="morphe_patcher_message_7">Налаштування 1 та 0… 🤖</string>
     <string name="morphe_patcher_message_8">Розплутування цифрової спагетті… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Виправлення помилок у непатченому додатку… 🐞</string>
+    <string name="morphe_patcher_message_9">Виправлення помилок у непатченому застосунку… 🐞</string>
     <string name="morphe_patcher_message_10">Великі патчі варті очікування… ⏳</string>
     <string name="morphe_patcher_message_11">Полірування пікселів до блиску… 💎</string>
     <string name="morphe_patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак «Триває патчінг»… 💺✈️</string>
-    <string name="morphe_patcher_message_13">Готуємо ваш оновлений додаток, гарячий і свіжий… 🍳</string>
+    <string name="morphe_patcher_message_13">Готуємо ваш оновлений застосунок, гарячий і свіжий… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Ввічливо ведемо переговори з байткодом… 🤝</string>
     <!-- Space flight communications callout. -->
@@ -124,17 +124,17 @@
     <string name="morphe_share_website">Поділитися вебсайтом</string>
     <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
     <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Іконка додатку</string>
-    <string name="morphe_app_icon_selector_description">Змінити іконку запуску додатку</string>
+    <string name="morphe_app_icon_selector_title">Значок застосунку</string>
+    <string name="morphe_app_icon_selector_description">Змінити значок застосунку</string>
     <string name="morphe_app_icon_default">Стандартний</string>
     <string name="morphe_app_icon_light_2">Небо</string>
     <string name="morphe_app_icon_light_3">Захід сонця</string>
     <string name="morphe_app_icon_dark_1">Океан</string>
     <string name="morphe_app_icon_dark_2">Пустота</string>
     <string name="morphe_app_icon_dark_3">Індиго</string>
-    <string name="morphe_app_icon_change_dialog_title">Змінити іконку додатку?</string>
-    <string name="morphe_app_icon_change_dialog_message">Змінити на \'%1$s\' і перезапустити?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Змінити іконку</string>
+    <string name="morphe_app_icon_change_dialog_title">Змінити значок застосунку?</string>
+    <string name="morphe_app_icon_change_dialog_message">Змінити на «%1$s» і перезапустити?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Змінити значок</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Налаштування вигляду</string>
     <string name="morphe_appearance_options_description">Налаштуйте теми, кольори та фонові колірні схеми</string>
@@ -142,7 +142,7 @@
     <string name="morphe_appearance_search">Пошук на YouTube</string>
     <string name="morphe_appearance_no_results">За запитом \'\' нічого не знайдено</string>
     <string name="morphe_appearance_translations_info_title">Переклади для деяких мов можуть бути відсутніми або неповними</string>
-    <string name="morphe_appearance_translations_info_text">Щоб перекласти нові мови або покращити існуючі переклади, відвідайте %s</string>
+    <string name="morphe_appearance_translations_info_text">Щоб перекласти нові мови або покращити наявні переклади, відвідайте %s</string>
     <string name="morphe_background_type">Фонова анімація</string>
     <string name="morphe_background_type_circles">Кола</string>
     <string name="morphe_background_type_rings">Кільця</string>
@@ -377,7 +377,7 @@ morphe_header_custom_dark.png
     <string name="patch_selection_safeguard_description">Не забороняти вибір або скасування вибору патчів і налаштувань параметрів</string>
     <string name="patch_selection_safeguard_confirmation">"Зміна вибору патчів може викликати несподівані проблеми.\n\nАктивувати в будь-якому випадку?"</string>
     <string name="universal_patches_safeguard">Показати та дозволити використання універсальних патчів</string>
-    <string name="universal_patches_safeguard_description">Не приховувати універсальні патчі або не забороняти їх використання</string>
+    <string name="universal_patches_safeguard_description">Не приховувати універсальні патчі або не забороняти їхнє використання</string>
     <string name="universal_patches_profile_blocked_title">Універсальні патчі вимкнено</string>
     <string name="universal_patches_profile_blocked_description">Цей профіль патча містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб використовувати їх.</string>
     <string name="universal_patches_app_blocked_description">Цей застосунок містить універсальні патчі. Активуйте «%1$s» у налаштуваннях, щоб продовжити.</string>
@@ -756,7 +756,7 @@ morphe_header_custom_dark.png
     <string name="view_applied_patches">Переглянути застосовані патчі</string>
     <string name="patch_bundles_used">Використані патч-бандли</string>
     <string name="applied_patches_empty">Для цього застосунку не записано патчів</string>
-    <string name="applied_patches_bundle_missing">Метадані бандла недоступні. Відображаються збережені назви патчів.</string>
+    <string name="applied_patches_bundle_missing">Метадані набору недоступні. Показуються збережені назви патчів.</string>
     <string name="no_patch_bundles_tracked">Для цього застосунку не записано пакети патчів</string>
     <string name="mount_install">Інсталятор з монтованим рутом</string>
     <string name="mounted">Монтовано</string>
@@ -865,39 +865,39 @@ morphe_header_custom_dark.png
     <string name="installer_external_launched">Відкриття %1$s…</string>
     <string name="installer_external_timeout">%1$s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову.</string>
     <string name="installer_external_success">%1$s повідомив про успішну інсталяцію.</string>
-    <string name="installer_external_finished_no_change">%1$s завершено без встановлення додатку. Перевірте іnstaller на помилкове повідомлення та спробуйте знову.</string>
+    <string name="installer_external_finished_no_change">%1$s завершено без встановлення застосунку. Перевірте встановлювач на повідомлення помилки та спробуйте знову.</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="uninstalling_ellipsis">Видалення...</string>
     <string name="mounting_ellipsis">Монтування…</string>
     <string name="unmounting">Демонтування…</string>
     <string name="install_app">Встановити</string>
     <string name="install_app_success">Встановлено успішно</string>
-    <string name="install_app_fail_title">Інсталяція не вдалася</string>
-    <string name="install_app_fail">Неможливо встановити додаток: %s</string>
+    <string name="install_app_fail_title">Встановлення не вдалося</string>
+    <string name="install_app_fail">Неможливо встановити застосунок: %s</string>
     <string name="install_app_fail_missing_stock">Відсутній оригінальний APK для установки.</string>
     <string name="mount_split_not_supported">Installer на виродженому монту не підтримує розділені APK. Використовуйте системний installer.</string>
     <string name="mount_app_fail_title">Не вдалося змонтувати</string>
     <string name="install_timeout_message">Інсталяція не завершена. Перевірте діалог системного інсталятора і спробуйте знову.</string>
     <string name="uninstall_timeout_message">Видалення не завершено. Перевірте діалог видалення та спробуйте знову.</string>
-    <string name="reinstall_app_fail">Неможливо перевстановити додаток: %s</string>
-    <string name="uninstall_app_fail">Неможливо видалити додаток: %s</string>
+    <string name="reinstall_app_fail">Неможливо перевстановити застосунок: %s</string>
+    <string name="uninstall_app_fail">Неможливо видалити застосунок: %s</string>
     <string name="open_app">Відкрити</string>
     <string name="save_apk">Зберегти APK</string>
     <string name="save_apk_success">APK збережено</string>
-    <string name="saved_app_export_success">Експортовано патчований додаток</string>
-    <string name="saved_app_export_failed">Не вдалося експортувати патчований додаток</string>
-    <string name="saved_app_removed_toast">Видалено збережений патчований додаток</string>
+    <string name="saved_app_export_success">Експортовано патчений застосунок</string>
+    <string name="saved_app_export_failed">Не вдалося експортувати патчений застосунок</string>
+    <string name="saved_app_removed_toast">Видалено збережений патчений застосунок</string>
     <string name="saved_app_copy_removed_toast">Видалено збережену копію</string>
-    <string name="delete_saved_app_title">Видалити збережений додаток</string>
-    <string name="delete_saved_app_description">Це видалить запис збереженого додатка і його збережений APK.</string>
-    <string name="delete_saved_entry_title">Видалити запис збереженого додатку</string>
-    <string name="delete_saved_entry_description">Це видалить запис збереженого додатка і його збережений APK. Додаток залишиться встановленим.</string>
-    <string name="saved_app_launch_unavailable">Встановіть додаток, перш ніж відкрити його.</string>
+    <string name="delete_saved_app_title">Видалити збережений застосунок</string>
+    <string name="delete_saved_app_description">Це видалить запис збереженого застосунку і його збережений APK.</string>
+    <string name="delete_saved_entry_title">Видалити запис збереженого застосунку</string>
+    <string name="delete_saved_entry_description">Це видалить запис збереженого застосунку і його збережений APK. Застосунок залишиться встановленим.</string>
+    <string name="saved_app_launch_unavailable">Встановіть застосунок, перш ніж відкрити його.</string>
     <string name="install_saved_app">Встановити</string>
     <string name="remount_saved_app">Перемонтувати</string>
     <string name="update_saved_app">Оновити</string>
-    <string name="saved_app_install_success">Збережений додаток встановлено</string>
-    <string name="saved_app_install_failed">Не вдалося встановити збережений додаток</string>
+    <string name="saved_app_install_success">Збережений застосунок встановлено</string>
+    <string name="saved_app_install_failed">Не вдалося встановити збережений застосунок</string>
     <string name="saved_app_uninstall_title">Видалити встановлену копію?</string>
     <string name="saved_app_uninstall_description">Це видалить лише встановлену версію. Ваш збережений APK залишається недоторканим.</string>
     <string name="saved_app_install_missing">Не знайдено збереженого APK</string>
@@ -926,14 +926,14 @@ morphe_header_custom_dark.png
     <string name="applying_patch">Застосування %s</string>
     <string name="failed_to_execute_patch">Не вдалося застосувати %s</string>
     <string name="save_patched_app_dialog_title">Покинути патчер?</string>
-    <string name="save_patched_app_dialog_message">Ви збираєтеся покинути патчер. Патчений додаток буде втрачено, якщо ви не збережете його для використання в майбутньому.</string>
-    <string name="save_patched_app_dialog_save">Зберегти патчений додаток</string>
+    <string name="save_patched_app_dialog_message">Ви збираєтеся покинути патчер. Патчений застосунок буде втрачено, якщо ви не збережете його для використання в майбутньому.</string>
+    <string name="save_patched_app_dialog_save">Зберегти патчений застосунок</string>
     <string name="save_patched_app_dialog_leave">Покинути без збереження</string>
     <string name="save_patched_app_dialog_cancel">Залишитися на патчері</string>
-    <string name="save_patched_app_dialog_hint_save">Зберігає патчений APK доступним у вкладці Додатки для подальшої інсталяції.</string>
+    <string name="save_patched_app_dialog_hint_save">Зберігає патчений APK доступним у вкладці «Застосунки» для подальшого встановлення.</string>
     <string name="save_patched_app_dialog_hint_leave">Вилучати патчений APK і повертає на попередній екран.</string>
-    <string name="patched_app_saved_toast">Патчений додаток збережено для подальшого використання</string>
-    <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений додаток</string>
+    <string name="patched_app_saved_toast">Патчений застосунок збережено для подальшого використання</string>
+    <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="step_completed">завершено</string>
     <string name="step_failed">не вдалося</string>
     <string name="step_running">виконується</string>
@@ -957,9 +957,9 @@ morphe_header_custom_dark.png
     <string name="patches_delete_single_dialog_description">Ви впевнені, що хочете видалити \"%s\"?</string>
     <string name="patches_delete_multiple_dialog_description">Ви впевнені, що хочете видалити вибрані пакети патчів?</string>
     <string name="about_revanced_manager">Про Morphe</string>
-    <string name="revanced_manager_description">"Morphe - це експериментальний проект з відкритим кодом, що зосереджений на створенні сучасного, спрощеного патчування популярних Android-додатків
+    <string name="revanced_manager_description">"Morphe — це експериментальний проєкт з відкритим кодом, що зосереджений на створенні сучасного, спрощеного патчування популярних Android-застосунків
 
-Відкритий на основі, Morphe процвітає завдяки відгукам і внескам спільноти для просування інновацій у майбутньому"</string>
+Маючи відкритий код, Morphe процвітає завдяки відгукам і внескам спільноти для просування інновацій у майбутньому"</string>
     <string name="here">тут.</string>
     <string name="update_available">У наявності є оновлення</string>
     <string name="ready_to_install_update">Готово до установки оновлення</string>
@@ -999,9 +999,9 @@ morphe_header_custom_dark.png
     <string name="failed_to_download_update">Помилка завантаження оновлення: %s</string>
     <string name="download">Завантажити</string>
     <string name="resume_download">Продовжити завантаження</string>
-    <string name="download_confirmation_metered">"Ви зараз на лімітованому підключенні, і з вас може стягуватися плата за дані від вашого постачальника послуг.
+    <string name="download_confirmation_metered">"Ви використовуєте лімітоване з’єднання, і з вас може стягуватися плата за трафік від вашого постачальника послуг.
 
-Все ще продовжувати?"</string>
+Усе ще бажаєте продовжити?"</string>
     <string name="download_update_confirmation">Завантажити оновлення?</string>
     <string name="no_contributors_found">Учасників не знайдено</string>
     <string name="select">Вибрати</string>
@@ -1023,12 +1023,12 @@ morphe_header_custom_dark.png
     <string name="installation_failed_description">Встановлення не вдалося з невідомої причини. Спробувати ще раз?</string>
     <string name="installation_aborted_description">Встановлення було скасовано вручну. Спробувати ще раз?</string>
     <string name="installation_blocked_description">Встановлення було заблоковано. Перевірте свої налаштування безпеки пристрою та спробуйте ще раз.</string>
-    <string name="installation_conflict_description">Встановлення запобігло існуванням іншої версії додатку. Видаліть встановлений додаток і спробуйте ще раз?</string>
+    <string name="installation_conflict_description">Встановлення запобігло існуванням іншої версії застосунку. Видалити встановлений застосунок і спробувати ще раз?</string>
     <string name="installation_signature_mismatch_dialog_title">Невідповідність підпису</string>
     <string name="installation_signature_mismatch_description">Встановлений додаток підписано іншим підписом. Видалити встановлений додаток і встановити цей?</string>
-    <string name="installation_incompatible_description">Додаток несумісний із цим пристроєм. Використовуйте APK, що сумісне з цим пристроєм, та спробуйте ще раз.</string>
-    <string name="installation_invalid_description">Додаток неприпустимий. Видаліть додаток і спробуйте ще раз?</string>
-    <string name="installation_storage_issue_description">Додаток не вдалося встановити через недостатнє місце. Звільніть простір і спробуйте ще раз.</string>
+    <string name="installation_incompatible_description">Застосунок несумісний із цим пристроєм. Використовуйте APK, що сумісне з цим пристроєм, та спробуйте ще раз.</string>
+    <string name="installation_invalid_description">Застосунок недійсний. Видалити застосунок і спробувати ще раз?</string>
+    <string name="installation_storage_issue_description">Застосунок не вдалося встановити через брак місця. Звільніть простір і спробуйте ще раз.</string>
     <string name="installation_timeout_description">Встановлення затягнулося. Спробувати ще раз?</string>
     <string name="reinstall">Встановити знову</string>
     <string name="installation_signature_mismatch_confirm">Видалити та встановити</string>

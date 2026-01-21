@@ -133,7 +133,7 @@
     <string name="morphe_app_icon_dark_2">Kosong</string>
     <string name="morphe_app_icon_dark_3">Indigo</string>
     <string name="morphe_app_icon_change_dialog_title">Ubah Ikon Aplikasi?</string>
-    <string name="morphe_app_icon_change_dialog_message">Ubah menjadi \'%1$s\' dan restart?</string>
+    <string name="morphe_app_icon_change_dialog_message">Ubah menjadi \'%1$s\' dan mulai ulang?</string>
     <string name="morphe_app_icon_change_dialog_confirm">Ubah Ikon</string>
     <!-- Appearance Section -->
     <string name="morphe_appearance_options">Pilihan tampilan</string>

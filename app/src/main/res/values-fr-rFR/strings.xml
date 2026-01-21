@@ -158,7 +158,7 @@
     <string name="morphe_patch_options">Options de patch</string>
     <string name="morphe_patch_options_youtube_description">Thème, branding, en-tête et options Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Options de thème et de branding</string>
-    <string name="morphe_patch_options_restart_message">Changer les options du patch nécessite de repatcher l\'application pour prendre effet</string>
+    <string name="morphe_patch_options_restart_message">Changer les options de patch nécessite de repatcher l\'application pour prendre effet</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Couleurs du thème de l\'application</string>
     <string name="morphe_patch_options_theme_colors_description">Changer la couleur d\'arrière-plan</string>
@@ -168,7 +168,7 @@
     <string name="morphe_patch_options_light_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
     <string name="morphe_patch_options_icon_instructions_title">Instructions de format d\'icône</string>
     <string name="morphe_patch_options_header_instructions_title">Instructions de format d\'en-tête</string>
-    <string name="morphe_patch_options_loading">Chargement des options du patch…</string>
+    <string name="morphe_patch_options_loading">Chargement des options de patch…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Attendez la mise à jour du bundle patch</string>
     <string name="morphe_patch_options_load_error">Échec du chargement des options du patch</string>
     <string name="morphe_patch_options_no_available">Aucune option disponible pour ce patch</string>
