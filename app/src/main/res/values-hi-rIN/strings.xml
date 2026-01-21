@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_bundles">पैच बंडल</string>
+    <string name="morphe_home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">क्या आप YouTube को फिर से लेजेंडरी बनाने के लिए तैयार हैं?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">तैयार हो जाइए, यह पैचिंग का समय है</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">एक और दिन, एक और विज्ञापन-ब्लॉक किया गया मास्टरपीस</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">विज्ञापन देखना चाहते हैं? मैं भी नहीं।</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">आइए आपके ऐप्स को ठीक से काम करने लायक बनाते हैं</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">आज का पूर्वानुमान: पैचिंग की 100% संभावना</string>
     <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">साधारण चीज़ों को शानदार में बदलने के लिए तैयार हैं?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">आज से ऐप्स को खुद से बचा रहे हैं</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
+    <string name="morphe_home_bundle_type_api">API बंडल</string>
+    <string name="morphe_home_update_error">उपडेट विफल हुआ</string>
+    <string name="morphe_home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
+    <string name="morphe_home_updating_patches">पैच अपडेट हो रहे हैं…</string>
+    <string name="morphe_home_update_success">अपडेट पूरा हुआ</string>
+    <string name="morphe_home_patches_updated">आपके पैच अप टू डेट हैं</string>
+    <string name="morphe_home_patches_are_loading">पैच लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
+    <string name="morphe_home_please_wait">कृपया प्रतीक्षा करें…</string>
     <string name="morphe_home_open_in_browser">ब्राउज़र में खोलें</string>
+    <string name="morphe_home_failed_to_open_url">URL खोलने में विफल रहा</string>
+    <string name="morphe_home_date_added">जोड़ा गया</string>
+    <string name="morphe_home_date_updated">अपडेटेड </string>
+    <string name="morphe_home_check_updates">जाँच करे </string>
+    <string name="morphe_home_unknown">अज्ञात</string>
     <string name="morphe_home_timeline">अद्यतन इतिहास</string>
     <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple"> %1$s को पैच करने के लिए, आपको वर्शन %2$s (पैच न किया गया) की ज़रूरत होगी</string>
+    <string name="morphe_home_apk_availability_yes">हां, मेरे पास है</string>
+    <string name="morphe_home_apk_availability_no">नहीं, इसे ढूंढने में मेरी मदद करो</string>
     <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">ओरिजनल APK डाउनलोड करें</string>
+    <string name="morphe_home_download_instructions_steps_title">निर्देश:</string>
+    <string name="morphe_home_download_instructions_step1">नीचे दिया गया \'%1$s\' बटन दबाएं</string>
+    <string name="morphe_home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
+    <string name="morphe_home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
+    <string name="morphe_home_download_instructions_step3">डाउनलोड पूरा होने का इंतज़ार करें और APK को &lt;b&gt;इंस्टाल न करें&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3_mount">डाउनलोड पूरा होने का इंतज़ार करें. इसके बाद,  &lt;b&gt;APK को इंस्टाल करें&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">डाउनलोड पूरा हो जाने के बाद, इस ऐप्लिकेशन को दोबारा खोलें</string>
+    <string name="morphe_home_download_instructions_step4_mount">ओरिजनल APK को इंस्टॉल करने के बाद, इस ऐप्लिकेशन को दोबारा खोलें</string>
+    <string name="morphe_home_download_instructions_continue">APKMirror.com पर जाएं</string>
     <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">डाउनलोड किए गए APK को चुनें</string>
+    <string name="morphe_home_file_picker_prompt_description">अब, डाउनलोड की गई %1$s APK फ़ाइल चुनें.</string>
     <string name="morphe_home_recommended_version">सुझाई गई संस्करण</string>
     <string name="morphe_patcher_selected_version">चयनित संस्करण</string>
     <!-- Root Mode -->

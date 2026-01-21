@@ -468,14 +468,14 @@ morphe_header_custom_dark.png
     <string name="patch_selection_reset_bundle_toast">%s のデフォルトをリセットしました</string>
     <string name="patch_selection_button_label_all">すべて選択解除</string>
     <string name="patch_selection_button_label_bundle">バンドルを選択解除</string>
-    <string name="patch_selection_button_label_defaults">すべてのデフォルト</string>
+    <string name="patch_selection_button_label_defaults">すべてデフォルトに戻す</string>
     <string name="patch_selection_button_label_select_bundle">バンドルを選択</string>
     <string name="patch_selection_button_label_select_all">すべて選択</string>
     <string name="patch_selection_button_label_undo_action">元に戻す</string>
     <string name="patch_selection_button_label_redo_action">やり直す</string>
     <string name="patch_selection_history_undo">%1$s を元に戻しました</string>
     <string name="patch_selection_history_redo">%1$s をやり直しました</string>
-    <string name="patch_selection_action_all_defaults">すべてデフォルト</string>
+    <string name="patch_selection_action_all_defaults">すべてデフォルトに戻す</string>
     <string name="patch_selection_action_deselect_all">すべて選択解除</string>
     <string name="patch_selection_action_select_all">すべて選択</string>
     <string name="patch_selection_action_select_bundle">バンドル「%1$s」を選択</string>
@@ -502,7 +502,7 @@ morphe_header_custom_dark.png
     <string name="patch_selection_confirm_select_bundle_message">%1$s のパッチをすべて選択しますか？</string>
     <string name="patch_selection_confirm_select_all_title">すべてのパッチを選択しますか？</string>
     <string name="patch_selection_confirm_select_all_message">これにより、すべてのバンドルで利用可能なパッチがすべて選択されます。</string>
-    <string name="patch_selection_button_label_reset_bundle">バンドルのデフォルト</string>
+    <string name="patch_selection_button_label_reset_bundle">バンドルのデフォルトに戻す</string>
     <string name="patch_profile_save_label">プロファイルを保存</string>
     <string name="patch_selection_toggle_expand">アクションを表示</string>
     <string name="patch_selection_toggle_collapse">アクションを非表示</string>

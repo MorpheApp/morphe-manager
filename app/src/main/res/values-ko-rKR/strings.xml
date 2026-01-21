@@ -977,7 +977,7 @@ morphe_header_custom_dark.png
     <string name="update_checking_manager_description">앱이 시작될 때마다 Morphe의 새로운 버전을 확인합니다</string>
     <string name="manager_prereleases">Pre-releases 버전 사용</string>
     <string name="manager_prereleases_description">Morphe의 Pre-release 버전을 사용합니다</string>
-    <string name="update_published">%s 에 게시됨</string>
+    <string name="update_published">%s 게시됨</string>
     <string name="battery_optimization_notification">Morphe가 백그라운드에서 정상적으로 작동하려면 배터리 최적화를 비활성화해야 합니다. 배터리 최적화를 비활성화하려면 여기를 탭하세요.</string>
     <string name="installing_manager_update">업데이트를 설치하는 중 …</string>
     <string name="downloading_manager_update">업데이트를 다운로드하는 중 …</string>

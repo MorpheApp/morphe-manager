@@ -999,7 +999,7 @@ Open-source in hart en nieren, Morphe gedijt op gemeenschapsfeedback en bijdrage
     <string name="update_check">Controleren op updates…</string>
     <string name="update_available_dialog_description">Een nieuwe versie van Morphe (%s) is beschikbaar.</string>
     <string name="failed_to_download_update">Download van update mislukt: %s</string>
-    <string name="download">Download</string>
+    <string name="download">Downloaden</string>
     <string name="resume_download">Download hervatten</string>
     <string name="download_confirmation_metered">"U maakt momenteel gebruik van een datalimietverbinding en er kunnen kosten van uw serviceprovider van toepassing zijn.
 
