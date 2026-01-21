@@ -992,37 +992,34 @@ class PatcherViewModel(
             exportMetadata = metadata
         }
 
-        val scopedBundlesFinal = patchBundleRepository.scopedBundleInfoFlow(finalPackageName, finalVersion)
-            .first()
-            .associateBy { it.uid }
-        val sanitizedSelectionFinal = sanitizeSelection(appliedSelection, scopedBundlesFinal)
-        val sanitizedOptionsFinal = sanitizeOptions(appliedOptions, scopedBundlesFinal)
-        val scopedBundlesOriginal = patchBundleRepository.scopedBundleInfoFlow(
+        // Use original package name to get scoped bundles for selection persistence
+        // This ensures all applied patches are correctly saved
+        val scopedBundlesForSelection = patchBundleRepository.scopedBundleInfoFlow(
             packageName,
             input.selectedApp.version
         ).first().associateBy { it.uid }
-        val sanitizedSelectionOriginal = sanitizeSelection(appliedSelection, scopedBundlesOriginal)
-        val sanitizedOptionsOriginal = sanitizeOptions(appliedOptions, scopedBundlesOriginal)
+        val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
+        val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
 
-        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelectionFinal)
+        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelection)
 
         installedAppRepository.addOrUpdate(
             finalPackageName,
             packageName,
             finalVersion,
             installType,
-            sanitizedSelectionFinal,
+            sanitizedSelection,
             selectionPayload
         )
 
         if (finalPackageName != packageName) {
-            patchSelectionRepository.updateSelection(finalPackageName, sanitizedSelectionFinal)
-            patchOptionsRepository.saveOptions(finalPackageName, sanitizedOptionsFinal)
+            patchSelectionRepository.updateSelection(finalPackageName, sanitizedSelection)
+            patchOptionsRepository.saveOptions(finalPackageName, sanitizedOptions)
         }
-        patchSelectionRepository.updateSelection(packageName, sanitizedSelectionOriginal)
-        patchOptionsRepository.saveOptions(packageName, sanitizedOptionsOriginal)
-        appliedSelection = sanitizedSelectionOriginal
-        appliedOptions = sanitizedOptionsOriginal
+        patchSelectionRepository.updateSelection(packageName, sanitizedSelection)
+        patchOptionsRepository.saveOptions(packageName, sanitizedOptions)
+        appliedSelection = sanitizedSelection
+        appliedOptions = sanitizedOptions
 
         savedPatchedApp = savedPatchedApp || installType == InstallType.SAVED || savedCopy.exists()
         true
