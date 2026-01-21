@@ -47,7 +47,7 @@ class Session(
         var nextPatchIndex = 0
 
         updateProgress(
-            name = androidContext.getString(R.string.applying_patches, selectedPatches[nextPatchIndex]),
+            name = androidContext.getString(R.string.applying_patches),
             state = State.RUNNING
         )
 
