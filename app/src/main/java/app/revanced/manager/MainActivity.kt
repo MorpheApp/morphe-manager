@@ -30,8 +30,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
+import app.revanced.manager.ui.component.morphe.home.InstalledAppInfoNavEvent
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
@@ -42,21 +42,16 @@ import app.revanced.manager.ui.screen.settings.update.UpdatesSettingsScreen
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.ui.viewmodel.SelectedAppInfoViewModel
 import app.revanced.manager.util.EventEffect
-import app.revanced.manager.util.toast
-import com.topjohnwu.superuser.internal.Utils.context
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import java.io.File
-import app.morphe.manager.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -492,39 +487,39 @@ private fun ReVancedManager(vm: MainViewModel) {
                 // Morphe Installed App Info Screen
                 composable<MorpheInstalledAppInfo> {
                     val data = it.toRoute<MorpheInstalledAppInfo>()
-                    val dashboardViewModel = koinViewModel<DashboardViewModel>()
-                    val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
 
                     HomeInstalledAppInfoScreen(
                         packageName = data.packageName,
-                        onRepatch = { repatchPackageName, originalFile, patches, options ->
-                            it.lifecycleScope.launch {
-                                navController.navigateComplex(
-                                    Patcher,
-                                    Patcher.ViewModelParams(
-                                        selectedApp = SelectedApp.Local(
-                                            packageName = repatchPackageName,
-                                            version = originalFile.name.substringAfterLast("_").substringBeforeLast("_original.apk"),
-                                            file = originalFile,
-                                            temporary = false
-                                        ),
-                                        selectedPatches = patches,
-                                        options = options
-                                    )
-                                )
+                        onNavigationEvent = { event ->
+                            when (event) {
+                                is InstalledAppInfoNavEvent.NavigateToPatcher -> {
+                                    it.lifecycleScope.launch {
+                                        navController.navigateComplex(
+                                            Patcher,
+                                            Patcher.ViewModelParams(
+                                                selectedApp = SelectedApp.Local(
+                                                    packageName = event.packageName,
+                                                    version = event.version,
+                                                    file = File(event.filePath),
+                                                    temporary = false
+                                                ),
+                                                selectedPatches = event.patches,
+                                                options = event.options
+                                            )
+                                        )
+                                    }
+                                }
+                                is InstalledAppInfoNavEvent.TriggerPatchFlow -> {
+                                    navController.popBackStack()
+                                    navController.currentBackStackEntry?.savedStateHandle?.apply {
+                                        set("patch_trigger_package", event.originalPackageName)
+                                    }
+                                }
+                                InstalledAppInfoNavEvent.NavigateBack -> {
+                                    navController.popBackStack()
+                                }
                             }
-                        },
-                        onPatchClick = { originalPackageName ->
-                            // Navigate back and trigger patch selection dialog
-                            navController.popBackStack()
-
-                            // Set trigger in home screen's saved state
-                            navController.currentBackStackEntry?.savedStateHandle?.apply {
-                                set("patch_trigger_package", originalPackageName)
-                            }
-                        },
-                        availablePatches = availablePatches,
-                        onBackClick = { navController.popBackStack() }
+                        }
                     )
                 }
             }

@@ -1,38 +1,37 @@
-package app.revanced.manager.ui.component.morphe.home
+package app.revanced.manager.ui.viewmodel
 
+import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.UriHandler
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
+import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
-import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
-import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.screen.QuickPatchParams
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.util.*
-import kotlinx.coroutines.CoroutineScope
+import app.revanced.manager.util.Options
+import app.revanced.manager.util.PatchSelection
+import app.revanced.manager.util.tag
+import app.revanced.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.compose.koinInject
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
@@ -66,18 +65,25 @@ data class WrongPackageDialogState(
 )
 
 /**
- * Main state holder for MorpheHomeScreen
+ * Quick patch parameters
+ */
+data class QuickPatchParams(
+    val selectedApp: SelectedApp,
+    val patches: PatchSelection,
+    val options: Options
+)
+
+/**
+ * ViewModel for MorpheHomeScreen
  * Manages all dialogs, user interactions, and APK processing
  */
-@Stable
-class HomeStates(
-    val dashboardViewModel: DashboardViewModel,
-    val optionsRepository: PatchOptionsRepository,
-    private val context: Context,
-    private val scope: CoroutineScope,
-    private val onStartQuickPatch: (QuickPatchParams) -> Unit,
-    val usingMountInstall: Boolean
-) {
+class HomeViewModel(
+    private val app: Application,
+    private val patchBundleRepository: PatchBundleRepository,
+    private val optionsRepository: PatchOptionsRepository,
+    private val prefs: PreferencesManager
+) : ViewModel() {
+
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
     var showBundleManagementSheet by mutableStateOf(false)
@@ -96,19 +102,16 @@ class HomeStates(
     var selectedBundleUri by mutableStateOf<Uri?>(null)
     var selectedBundlePath by mutableStateOf<String?>(null)
 
-    // Bundle picker launcher
-    lateinit var openBundlePicker: () -> Unit
-
-    // APK selection flow dialogs (3-step process)
-    var showApkAvailabilityDialog by mutableStateOf(false)      // Step 1: "Do you have APK?"
-    var showDownloadInstructionsDialog by mutableStateOf(false) // Step 2: Download guide
-    var showFilePickerPromptDialog by mutableStateOf(false)     // Step 3: Select file prompt
+    // APK selection flow dialogs
+    var showApkAvailabilityDialog by mutableStateOf(false)
+    var showDownloadInstructionsDialog by mutableStateOf(false)
+    var showFilePickerPromptDialog by mutableStateOf(false)
 
     // Error/warning dialogs
     var showUnsupportedVersionDialog by mutableStateOf<UnsupportedVersionDialogState?>(null)
     var showWrongPackageDialog by mutableStateOf<WrongPackageDialogState?>(null)
 
-    // Pending data during APK selection process
+    // Pending data during APK selection
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<String?>(null)
@@ -122,15 +125,16 @@ class HomeStates(
     // Loading state for installed apps
     var installedAppsLoading by mutableStateOf(true)
 
-    // Activity result launchers
-    lateinit var installAppsPermissionLauncher: ActivityResultLauncher<String>
-    lateinit var storagePickerLauncher: ActivityResultLauncher<String>
-
     // Bundle data
-    var apiBundle: PatchBundleSource? = null
-
+    private var apiBundle: PatchBundleSource? = null
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
+
+    // Using mount install (set externally)
+    var usingMountInstall: Boolean = false
+
+    // Callback for starting patch
+    var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
     /**
      * Update bundle data when sources or bundle info changes
@@ -141,7 +145,7 @@ class HomeStates(
     }
 
     /**
-     * Update loading state based on bundle update progress and installed apps
+     * Update loading state
      */
     fun updateLoadingState(bundleUpdateInProgress: Boolean, hasInstalledApps: Boolean) {
         installedAppsLoading = bundleUpdateInProgress || !hasInstalledApps
@@ -149,7 +153,6 @@ class HomeStates(
 
     /**
      * Handle app button click (YouTube or YouTube Music)
-     * Validates state before showing APK selection dialog
      */
     fun handleAppClick(
         packageName: String,
@@ -160,13 +163,12 @@ class HomeStates(
     ) {
         // If app is installed, allow click even during updates
         if (installedApp != null) {
-            // Navigate to installed app info
             return // Caller will handle navigation
         }
 
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
-            context.toast(context.getString(R.string.morphe_home_sources_are_loading))
+            app.toast(app.getString(R.string.morphe_home_sources_are_loading))
             return
         }
 
@@ -176,13 +178,11 @@ class HomeStates(
             return
         }
 
-        // Show APK availability dialog to start selection process
         showPatchDialog(packageName)
     }
 
     /**
-     * Show patch dialog without validation
-     * Used when called from installed app screen
+     * Show patch dialog
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
@@ -192,7 +192,7 @@ class HomeStates(
     }
 
     /**
-     * Handle APK file selection from storage picker
+     * Handle APK file selection
      */
     fun handleApkSelection(uri: Uri?) {
         if (uri == null) {
@@ -200,31 +200,29 @@ class HomeStates(
             return
         }
 
-        scope.launch {
+        viewModelScope.launch {
             val selectedApp = withContext(Dispatchers.IO) {
-                loadLocalApk(context, uri)
+                loadLocalApk(app, uri)
             }
 
             if (selectedApp != null) {
                 processSelectedApp(selectedApp)
             } else {
-                context.toast(context.getString(R.string.morphe_home_invalid_apk))
+                app.toast(app.getString(R.string.morphe_home_invalid_apk))
             }
         }
     }
 
     /**
      * Process selected APK file
-     * Validates package name and patch availability
      */
     private suspend fun processSelectedApp(selectedApp: SelectedApp) {
-        // If specific package is expected, validate it matches
+        // Validate package name if expected
         if (pendingPackageName != null && selectedApp.packageName != pendingPackageName) {
             showWrongPackageDialog = WrongPackageDialogState(
                 expectedPackage = pendingPackageName!!,
                 actualPackage = selectedApp.packageName
             )
-            // Clean up temporary file
             if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                 selectedApp.file.delete()
             }
@@ -232,11 +230,11 @@ class HomeStates(
             return
         }
 
-        val allowIncompatible = dashboardViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
+        val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
 
-        // Get available patches for this app version
+        // Get available patches
         val bundles = withContext(Dispatchers.IO) {
-            dashboardViewModel.patchBundleRepository
+            patchBundleRepository
                 .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
                 .first()
         }
@@ -244,10 +242,8 @@ class HomeStates(
         val patches = bundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
         val totalPatches = patches.values.sumOf { it.size }
 
-        // Check if any patches are available for this version
+        // Check if any patches available
         if (totalPatches == 0) {
-            // Only show unsupported version dialog if we have a recommended version
-            // For "other apps", we don't have recommended version, so proceed anyway
             val recommendedVersion = pendingPackageName?.let { recommendedVersions[it] }
 
             if (recommendedVersion != null) {
@@ -260,9 +256,7 @@ class HomeStates(
                 cleanupPendingData(keepSelectedApp = true)
                 return
             } else {
-                // No patches available for "Other apps" and no recommended version
-                context.toast(context.getString(R.string.morphe_home_no_patches_for_app))
-                // Clean up temporary file
+                app.toast(app.getString(R.string.morphe_home_no_patches_for_app))
                 if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                     selectedApp.file.delete()
                 }
@@ -271,60 +265,48 @@ class HomeStates(
             }
         }
 
-        // Start patching with validated app
         startPatchingWithApp(selectedApp, allowIncompatible)
         cleanupPendingData()
     }
 
     /**
-     * Start patching flow with optional expert mode
+     * Start patching flow
      */
     suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
-        // Check if expert mode is enabled
-        val expertModeEnabled = dashboardViewModel.prefs.useExpertMode.getBlocking()
+        val expertModeEnabled = prefs.useExpertMode.getBlocking()
 
-        val bundles = dashboardViewModel.patchBundleRepository
+        val bundles = patchBundleRepository
             .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
             .first()
 
         if (bundles.isEmpty()) {
-            context.toast(context.getString(R.string.morphe_home_no_patches_available))
+            app.toast(app.getString(R.string.morphe_home_no_patches_available))
             cleanupPendingData()
             return
         }
 
         if (expertModeEnabled) {
-            // Expert mode: Allow user to select patches from all bundles
-            // In Expert mode, always allow incompatible patches so user can see all options
             val effectiveAllowIncompatible = true
-
-            // Get default patch selection (all patches marked with include=true)
             val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
 
-            // Get saved options from repository
             val savedOptions = optionsRepository.getOptions(
                 selectedApp.packageName,
                 bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
             )
 
-            // Show Expert mode dialog for patch selection review
             expertModeSelectedApp = selectedApp
             expertModeBundles = bundles
             expertModePatches = patches.toMutableMap()
             expertModeOptions = savedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
-            // Simple mode: Use only default bundle with include=true patches
-            // Filter bundles based on allowIncompatible setting
             val defaultBundle = bundles.firstOrNull { it.uid == 0 }
             if (defaultBundle == null) {
-                context.toast(context.getString(R.string.morphe_home_no_patches_available))
+                app.toast(app.getString(R.string.morphe_home_no_patches_available))
                 cleanupPendingData()
                 return
             }
 
-            // Get patches only from default bundle with include=true
-            // In Simple mode, respect the allowIncompatible setting
             val allPatches = defaultBundle.patchSequence(allowIncompatible)
                 .filter { it.include }
                 .map { it.name }
@@ -333,28 +315,25 @@ class HomeStates(
             val patches = mapOf(0 to allPatches).filterValues { it.isNotEmpty() }
 
             if (patches.isEmpty() || patches[0]?.isEmpty() == true) {
-                context.toast(context.getString(R.string.morphe_home_no_patches_available))
+                app.toast(app.getString(R.string.morphe_home_no_patches_available))
                 cleanupPendingData()
                 return
             }
 
-            // Empty options - will be loaded from preferences in PatcherViewModel
             val emptyOptions = emptyMap<Int, Map<String, Map<String, Any?>>>()
-
-            // Directly start patching with default bundle patches and empty options placeholder
             proceedWithPatching(selectedApp, patches, emptyOptions)
         }
     }
 
     /**
-     * Proceed with patching after expert mode confirmation or directly
+     * Proceed with patching
      */
     fun proceedWithPatching(
         selectedApp: SelectedApp,
         patches: PatchSelection,
         options: Options
     ) {
-        onStartQuickPatch(
+        onStartQuickPatch?.invoke(
             QuickPatchParams(
                 selectedApp = selectedApp,
                 patches = patches,
@@ -365,7 +344,7 @@ class HomeStates(
     }
 
     /**
-     * Toggle patch selection in expert mode
+     * Toggle patch in expert mode
      */
     fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
         val currentPatches = expertModePatches.toMutableMap()
@@ -387,7 +366,7 @@ class HomeStates(
     }
 
     /**
-     * Update option value in expert mode
+     * Update option in expert mode
      */
     fun updateOptionInExpertMode(
         bundleUid: Int,
@@ -405,7 +384,6 @@ class HomeStates(
             patchOptions[optionKey] = value
         }
 
-        // Clean up empty maps
         if (patchOptions.isEmpty()) {
             bundleOptions.remove(patchName)
         } else {
@@ -450,7 +428,9 @@ class HomeStates(
         expertModeOptions = emptyMap()
     }
 
-    // TODO: Move this logic somewhere more appropriate.
+    /**
+     * Resolve download redirect
+     */
     fun resolveDownloadRedirect() {
         fun resolveUrlRedirect(url: String): String {
             return try {
@@ -485,8 +465,6 @@ class HomeStates(
                 }
             } catch (ex: SocketTimeoutException) {
                 Log.d(tag, "Timeout while resolving search redirect: $ex")
-                // Timeout may be because the network is very slow.
-                // Still use web-search api call in external browser.
                 url
             } catch (ex: Exception) {
                 Log.d(tag, "Exception while resolving search redirect: $ex")
@@ -494,21 +472,16 @@ class HomeStates(
             }
         }
 
-        // Must not escape colon search term separator, but recommended version must be escaped
-        // because Android version string can be almost anything.
         val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
-        // To test client fallback logic in getApiOfflineWebSearchUrl(), change this an invalid url.
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
 
-        // Use API web-search if user clicks thru faster than redirect resolving can occur.
         resolvedDownloadUrl = searchUrl
 
-        scope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             var resolved = resolveUrlRedirect(searchUrl)
 
-            // If redirect stays on api.morphe.software, try resolving again
             if (resolved.startsWith(MORPHE_API_URL)) {
                 Log.d(tag, "Redirect still on API host, resolving again")
                 resolved = resolveUrlRedirect(resolved)
@@ -522,51 +495,47 @@ class HomeStates(
 
     fun getApiOfflineWebSearchUrl(): String {
         val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
-            // YT Music requires architecture. This logic could be improved
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
         }
 
         val searchQuery = "\"$pendingPackageName\" \"$pendingRecommendedVersion\" \"$architecture\" site:APKMirror.com"
-
         val searchUrl = "https://google.com/search?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
         return searchUrl
     }
 
     /**
-     * Handle download instructions dialog continue action
-     * Opens browser to APKMirror search and shows file picker prompt.
+     * Handle download instructions continue
      */
-    fun handleDownloadInstructionsContinue(uriHandler: UriHandler) {
+    fun handleDownloadInstructionsContinue(onOpenUrl: (String) -> Boolean) {
         val urlToOpen = resolvedDownloadUrl!!
 
-        try {
-            uriHandler.openUri(urlToOpen)
+        if (onOpenUrl(urlToOpen)) {
             showDownloadInstructionsDialog = false
             showFilePickerPromptDialog = true
-        } catch (ex: Exception) {
-            Log.d(tag, "Failed to open URL: $ex")
-            context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
+        } else {
+            Log.d(tag, "Failed to open URL")
+            app.toast(app.getString(R.string.morphe_sources_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
         }
     }
 
     /**
-     * Get localized app name for package
+     * Get localized app name
      */
     fun getAppName(packageName: String): String {
         return when (packageName) {
-            PACKAGE_YOUTUBE -> context.getString(R.string.morphe_home_youtube)
-            PACKAGE_YOUTUBE_MUSIC -> context.getString(R.string.morphe_home_youtube_music)
+            PACKAGE_YOUTUBE -> app.getString(R.string.morphe_home_youtube)
+            PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.morphe_home_youtube_music)
             else -> packageName
         }
     }
 
     /**
-     * Clean up all pending data
+     * Clean up pending data
      */
     fun cleanupPendingData(keepSelectedApp: Boolean = false) {
         pendingPackageName = null
@@ -574,7 +543,6 @@ class HomeStates(
         pendingRecommendedVersion = null
         resolvedDownloadUrl = null
         if (!keepSelectedApp) {
-            // Delete temporary file if exists
             pendingSelectedApp?.let { app ->
                 if (app is SelectedApp.Local && app.temporary) {
                     app.file.delete()
@@ -587,12 +555,21 @@ class HomeStates(
     }
 
     /**
+     * Save options to repository
+     */
+    fun saveOptions(packageName: String, options: Options) {
+        viewModelScope.launch(Dispatchers.IO) {
+            optionsRepository.saveOptions(packageName, options)
+        }
+    }
+
+    /**
      * Extract recommended versions from bundle info
      */
     private fun extractRecommendedVersions(bundleInfo: Map<Int, Any>): Map<String, String> {
         return bundleInfo[0]?.let { apiBundleInfo ->
             val info = apiBundleInfo as? PatchBundleInfo
-            info?.let { it ->
+            info?.let {
                 mapOf(
                     PACKAGE_YOUTUBE to it.patches
                         .filter { patch ->
@@ -622,94 +599,41 @@ class HomeStates(
             } ?: emptyMap()
         } ?: emptyMap()
     }
-}
 
-/**
- * Remember MorpheHomeState with proper lifecycle management
- */
-@Composable
-fun rememberMorpheHomeState(
-    dashboardViewModel: DashboardViewModel,
-    sources: List<PatchBundleSource>,
-    bundleInfo: Map<Int, Any>,
-    onStartQuickPatch: (QuickPatchParams) -> Unit,
-    usingMountInstall : Boolean
-): HomeStates {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val optionsRepository: PatchOptionsRepository = koinInject()
-
-    val state = remember(dashboardViewModel) {
-        HomeStates(
-            dashboardViewModel = dashboardViewModel,
-            optionsRepository = optionsRepository,
-            context = context,
-            scope = scope,
-            onStartQuickPatch = onStartQuickPatch,
-            usingMountInstall = usingMountInstall
-        )
-    }
-
-    // Initialize launchers
-    state.installAppsPermissionLauncher = rememberLauncherForActivityResult(
-        RequestInstallAppsContract
-    ) { state.showAndroid11Dialog = false }
-
-    state.storagePickerLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.GetContent()
-    ) { uri -> state.handleApkSelection(uri) }
-
-    // Update bundle data when sources or bundleInfo changes
-    LaunchedEffect(sources, bundleInfo) {
-        state.updateBundleData(sources, bundleInfo)
-    }
-
-    // Initialize bundle picker
-    state.openBundlePicker = rememberFilePickerWithPermission(
-        mimeTypes = MPP_FILE_MIME_TYPES,
-        onFilePicked = { uri ->
-            state.selectedBundleUri = uri
-            state.selectedBundlePath = uri.toFilePath()
-        }
-    )
-
-    return state
-}
-
-/**
- * Load local APK file and extract package info
- */
-suspend fun loadLocalApk(
-    context: Context,
-    uri: Uri
-): SelectedApp.Local? = withContext(Dispatchers.IO) {
-    try {
-        val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.apk")
-        context.contentResolver.openInputStream(uri)?.use { input ->
-            tempFile.outputStream().use { output ->
-                input.copyTo(output)
+    /**
+     * Load local APK and extract package info
+     */
+    private suspend fun loadLocalApk(
+        context: Context,
+        uri: Uri
+    ): SelectedApp.Local? = withContext(Dispatchers.IO) {
+        try {
+            val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.apk")
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                tempFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
             }
+
+            val pm = context.packageManager
+            val packageInfo = pm.getPackageArchiveInfo(
+                tempFile.absolutePath,
+                PackageManager.GET_META_DATA
+            )
+
+            if (packageInfo == null) {
+                tempFile.delete()
+                return@withContext null
+            }
+
+            SelectedApp.Local(
+                packageName = packageInfo.packageName,
+                version = packageInfo.versionName ?: "unknown",
+                file = tempFile,
+                temporary = true
+            )
+        } catch (_: Exception) {
+            null
         }
-
-        val pm = context.packageManager
-        val packageInfo = pm.getPackageArchiveInfo(
-            tempFile.absolutePath,
-            PackageManager.GET_META_DATA
-        )
-
-        if (packageInfo == null) {
-            tempFile.delete()
-            return@withContext null
-        }
-
-        // Return SelectedApp without validation - let caller handle it
-        SelectedApp.Local(
-            packageName = packageInfo.packageName,
-            version = packageInfo.versionName ?: "unknown",
-            file = tempFile,
-            temporary = true
-        )
-    } catch (_: Exception) {
-        null
     }
 }

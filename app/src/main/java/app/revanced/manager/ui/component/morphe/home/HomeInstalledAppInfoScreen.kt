@@ -5,11 +5,7 @@ import android.content.pm.PackageInfo
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -37,7 +33,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
-import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.AppLabel
@@ -52,33 +47,54 @@ import app.revanced.manager.util.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
-import java.io.File
 
+/**
+ * Navigation event sealed class for cleaner navigation handling
+ */
+sealed class InstalledAppInfoNavEvent {
+    data class NavigateToPatcher(
+        val packageName: String,
+        val version: String,
+        val filePath: String,
+        val patches: PatchSelection,
+        val options: Options
+    ) : InstalledAppInfoNavEvent()
+
+    data class TriggerPatchFlow(val originalPackageName: String) : InstalledAppInfoNavEvent()
+    data object NavigateBack : InstalledAppInfoNavEvent()
+}
+
+/**
+ * Simplified HomeInstalledAppInfoScreen
+ * Uses single navigation callback instead of multiple specific callbacks
+ */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeInstalledAppInfoScreen(
     packageName: String,
-    onRepatch: (String, File, PatchSelection, Options) -> Unit,
-    onPatchClick: (packageName: String) -> Unit = {},
-    availablePatches: Int = 0,
-    onBackClick: () -> Unit = {},
-    viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) },
-    prefs: PreferencesManager = koinInject()
+    onNavigationEvent: (InstalledAppInfoNavEvent) -> Unit,
+    viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) }
 ) {
     val context = LocalContext.current
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
 
+    // Dialog states
     var showAppliedPatchesDialog by remember { mutableStateOf(false) }
     var showUninstallConfirm by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showMountWarningDialog by remember { mutableStateOf(false) }
 
+    // Collect bundle data
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val bundleSources by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val availablePatches by patchBundleRepository.bundleInfoFlow
+        .collectAsStateWithLifecycle(emptyMap())
+        .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
 
+    // Build applied bundles summary
     val selectionPayload = installedApp?.selectionPayload
     val savedBundleVersions = remember(selectionPayload) {
         selectionPayload?.bundles.orEmpty().associate { it.bundleUid to it.version }
@@ -134,7 +150,8 @@ fun HomeInstalledAppInfoScreen(
         }
     }
 
-    val exportFormat by prefs.patchedAppExportFormat.getAsState()
+    // Export functionality
+    val exportFormat by viewModel.exportFormat.collectAsStateWithLifecycle()
     val exportMetadata = remember(
         installedApp?.currentPackageName,
         appInfo?.versionName,
@@ -167,8 +184,9 @@ fun HomeInstalledAppInfoScreen(
     val isMounted = viewModel.isMounted
     val mountOperation = viewModel.mountOperation
 
+    // Set back click handler
     SideEffect {
-        viewModel.onBackClick = onBackClick
+        viewModel.onBackClick = { onNavigationEvent(InstalledAppInfoNavEvent.NavigateBack) }
     }
 
     // Handle install result
@@ -298,7 +316,7 @@ fun HomeInstalledAppInfoScreen(
 
     // Repatch Expert Mode Dialog
     if (viewModel.showRepatchDialog) {
-        val allowIncompatible by prefs.disablePatchVersionCompatCheck.getAsState()
+        val allowIncompatible by viewModel.allowIncompatiblePatches.collectAsStateWithLifecycle()
 
         ExpertModeDialog(
             bundles = viewModel.repatchBundles,
@@ -320,14 +338,25 @@ fun HomeInstalledAppInfoScreen(
                 viewModel.proceedWithRepatch(
                     patches = viewModel.repatchPatches,
                     options = viewModel.repatchOptions
-                ) { packageName, originalFile, patches, options ->
-                    onRepatch(packageName, originalFile, patches, options)
+                ) { pkgName, originalFile, patches, options ->
+                    onNavigationEvent(
+                        InstalledAppInfoNavEvent.NavigateToPatcher(
+                            packageName = pkgName,
+                            version = originalFile.name
+                                .substringAfterLast("_")
+                                .substringBeforeLast("_original.apk"),
+                            filePath = originalFile.absolutePath,
+                            patches = patches,
+                            options = options
+                        )
+                    )
                 }
             },
             allowIncompatible = allowIncompatible
         )
     }
 
+    // Main content
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -376,13 +405,15 @@ fun HomeInstalledAppInfoScreen(
                 AppActionsSection(
                     viewModel = viewModel,
                     installedApp = installedApp,
-                    onRepatch = onRepatch,
-                    onPatchClick = onPatchClick,
                     availablePatches = availablePatches,
+                    onPatchClick = { originalPkgName ->
+                        onNavigationEvent(InstalledAppInfoNavEvent.TriggerPatchFlow(originalPkgName))
+                    },
                     onUninstall = { showUninstallConfirm = true },
                     onDelete = { showDeleteDialog = true },
                     onMountWarning = { showMountWarningDialog = true },
-                    onExport = { exportSavedLauncher.launch(exportFileName) }
+                    onExport = { exportSavedLauncher.launch(exportFileName) },
+                    onNavigationEvent = onNavigationEvent
                 )
             }
         }
@@ -583,13 +614,13 @@ private fun AppInfoSection(
 private fun AppActionsSection(
     viewModel: InstalledAppInfoViewModel,
     installedApp: InstalledApp,
-    onRepatch: (String, File, PatchSelection, Options) -> Unit,
-    onPatchClick: (packageName: String) -> Unit,
     availablePatches: Int,
+    onPatchClick: (String) -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
     onMountWarning: () -> Unit,
-    onExport: () -> Unit
+    onExport: () -> Unit,
+    onNavigationEvent: (InstalledAppInfoNavEvent) -> Unit
 ) {
     MorpheCard(
         elevation = 2.dp,
@@ -609,152 +640,159 @@ private fun AppActionsSection(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    // First row: Patch button
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
+                // Patch button row
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    ActionCard(
+                        text = stringResource(R.string.patch),
+                        icon = Icons.Outlined.AutoAwesome,
+                        onClick = { onPatchClick(installedApp.originalPackageName) },
+                        enabled = availablePatches > 0,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                // Open/Export row
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null) {
                         ActionCard(
-                            text = stringResource(R.string.patch),
-                            icon = Icons.Outlined.AutoAwesome,
-                            onClick = {
-                                // Trigger patch flow with original package name
-                                onPatchClick(installedApp.originalPackageName)
-                            },
-                            enabled = availablePatches > 0,
+                            text = stringResource(R.string.open_app),
+                            icon = Icons.Outlined.PlayArrow,
+                            onClick = { viewModel.launch() },
+                            enabled = viewModel.isInstalledOnDevice,
                             modifier = Modifier.weight(1f)
                         )
                     }
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null) {
-                            ActionCard(
-                                text = stringResource(R.string.open_app),
-                                icon = Icons.Outlined.PlayArrow,
-                                onClick = { viewModel.launch() },
-                                enabled = viewModel.isInstalledOnDevice,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-
-                        if (viewModel.hasSavedCopy) {
-                            ActionCard(
-                                text = stringResource(R.string.export),
-                                icon = Icons.Outlined.Save,
-                                onClick = onExport,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
+                    if (viewModel.hasSavedCopy) {
                         ActionCard(
-                            text = stringResource(R.string.repatch),
-                            icon = Icons.Outlined.Build,
+                            text = stringResource(R.string.export),
+                            icon = Icons.Outlined.Save,
+                            onClick = onExport,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                // Repatch/Install row
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    ActionCard(
+                        text = stringResource(R.string.repatch),
+                        icon = Icons.Outlined.Build,
+                        onClick = {
+                            viewModel.startRepatch { pkgName, originalFile, patches, options ->
+                                onNavigationEvent(
+                                    InstalledAppInfoNavEvent.NavigateToPatcher(
+                                        packageName = pkgName,
+                                        version = originalFile.name
+                                            .substringAfterLast("_")
+                                            .substringBeforeLast("_original.apk"),
+                                        filePath = originalFile.absolutePath,
+                                        patches = patches,
+                                        options = options
+                                    )
+                                )
+                            }
+                        },
+                        enabled = viewModel.hasOriginalApk,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    if (installedApp.installType == InstallType.SAVED && viewModel.hasSavedCopy) {
+                        val installText = if (viewModel.isInstalledOnDevice) {
+                            stringResource(R.string.reinstall)
+                        } else {
+                            stringResource(R.string.install)
+                        }
+                        ActionCard(
+                            text = installText,
+                            icon = Icons.Outlined.RestartAlt,
                             onClick = {
-                                viewModel.startRepatch { packageName, originalFile, patches, options ->
-                                    // This callback will be called when repatch is ready to start
-                                    // Navigate to patcher screen with these parameters
-                                    onRepatch(packageName, originalFile, patches, options)
+                                if (viewModel.mountWarning != null) {
+                                    onMountWarning()
+                                } else {
+                                    viewModel.installSavedApp()
                                 }
                             },
-                            enabled = viewModel.hasOriginalApk,  // Disable if no original APK
                             modifier = Modifier.weight(1f)
                         )
+                    }
 
-                        if (installedApp.installType == InstallType.SAVED && viewModel.hasSavedCopy) {
-                            val installText = if (viewModel.isInstalledOnDevice) {
-                                stringResource(R.string.reinstall)
+                    if (installedApp.installType == InstallType.MOUNT) {
+                        ActionCard(
+                            text = if (viewModel.isMounted) {
+                                stringResource(R.string.remount_saved_app)
                             } else {
-                                stringResource(R.string.install)
-                            }
-                            ActionCard(
-                                text = installText,
-                                icon = Icons.Outlined.RestartAlt,
-                                onClick = {
-                                    if (viewModel.mountWarning != null) {
-                                        onMountWarning()
-                                    } else {
-                                        viewModel.installSavedApp()
-                                    }
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-
-                        if (installedApp.installType == InstallType.MOUNT) {
-                            ActionCard(
-                                text = if (viewModel.isMounted) {
-                                    stringResource(R.string.remount_saved_app)
+                                stringResource(R.string.mount)
+                            },
+                            icon = if (viewModel.isMounted) {
+                                Icons.Outlined.Refresh
+                            } else {
+                                Icons.Outlined.Check
+                            },
+                            onClick = {
+                                if (viewModel.isMounted) {
+                                    viewModel.remountSavedInstallation()
                                 } else {
-                                    stringResource(R.string.mount)
-                                },
-                                icon = if (viewModel.isMounted) {
-                                    Icons.Outlined.Refresh
-                                } else {
-                                    Icons.Outlined.Check
-                                },
-                                onClick = {
-                                    if (viewModel.isMounted) {
-                                        viewModel.remountSavedInstallation()
-                                    } else {
-                                        viewModel.mountOrUnmount()
-                                    }
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        if (viewModel.isInstalledOnDevice) {
-                            ActionCard(
-                                text = stringResource(R.string.uninstall),
-                                icon = Icons.Outlined.DeleteForever,
-                                onClick = onUninstall,
-                                isDestructive = true,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-
-                        if (viewModel.hasSavedCopy) {
-                            ActionCard(
-                                text = if (installedApp.installType == InstallType.SAVED) {
-                                    stringResource(R.string.delete)
-                                } else {
-                                    stringResource(R.string.delete_saved_copy)
-                                },
-                                icon = Icons.Outlined.DeleteOutline,
-                                onClick = onDelete,
-                                isDestructive = true,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-
-                    AnimatedVisibility(
-                        visible = !viewModel.hasOriginalApk,
-                        enter = fadeIn() + expandVertically(),
-                        exit = fadeOut() + shrinkVertically()
-                    ) {
-                        InfoBadge(
-                            text = stringResource(R.string.morphe_repatch_requires_original),
-                            style = InfoBadgeStyle.Warning,
-                            icon = Icons.Outlined.Info,
-                            isExpanded = true,
-                            modifier = Modifier.fillMaxWidth()
+                                    viewModel.mountOrUnmount()
+                                }
+                            },
+                            modifier = Modifier.weight(1f)
                         )
                     }
+                }
+
+                // Uninstall/Delete row
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (viewModel.isInstalledOnDevice) {
+                        ActionCard(
+                            text = stringResource(R.string.uninstall),
+                            icon = Icons.Outlined.DeleteForever,
+                            onClick = onUninstall,
+                            isDestructive = true,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    if (viewModel.hasSavedCopy) {
+                        ActionCard(
+                            text = if (installedApp.installType == InstallType.SAVED) {
+                                stringResource(R.string.delete)
+                            } else {
+                                stringResource(R.string.delete_saved_copy)
+                            },
+                            icon = Icons.Outlined.DeleteOutline,
+                            onClick = onDelete,
+                            isDestructive = true,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                // Warning badge
+                AnimatedVisibility(
+                    visible = !viewModel.hasOriginalApk,
+                    enter = fadeIn() + expandVertically(),
+                    exit = fadeOut() + shrinkVertically()
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.morphe_repatch_requires_original),
+                        style = InfoBadgeStyle.Warning,
+                        icon = Icons.Outlined.Info,
+                        isExpanded = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }

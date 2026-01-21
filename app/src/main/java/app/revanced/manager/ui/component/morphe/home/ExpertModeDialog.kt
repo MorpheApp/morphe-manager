@@ -651,7 +651,7 @@ private fun PatchOptionsDialog(
                         BooleanOptionItem(
                             title = option.title,
                             description = option.description,
-                            value = value as? Boolean ?: false,
+                            value = value as? Boolean == true,
                             onValueChange = { onValueChange(key, it) }
                         )
                     }
@@ -863,13 +863,6 @@ private fun PathInputOption(
     required: Boolean,
     onValueChange: (String) -> Unit
 ) {
-    var showInstructions by remember { mutableStateOf(false) }
-    val rotationAngle by animateFloatAsState(
-        targetValue = if (showInstructions) 180f else 0f,
-        animationSpec = tween(300),
-        label = "rotation"
-    )
-
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -1107,8 +1100,7 @@ fun ExpandableSurface(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Outlined.Info,
     initialExpanded: Boolean = false,
-    headerTint: Color = LocalDialogTextColor.current,
-    iconTint: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+    headerTint: Color = LocalDialogTextColor.current
 ) {
     var expanded by remember { mutableStateOf(initialExpanded) }
     val rotationAngle by animateFloatAsState(

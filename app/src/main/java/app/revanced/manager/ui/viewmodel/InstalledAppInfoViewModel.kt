@@ -15,6 +15,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -52,9 +53,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import java.io.File
 import java.io.IOException
 import org.koin.core.component.KoinComponent
@@ -594,7 +598,8 @@ class InstalledAppInfoViewModel(
     private fun tryHandleExternalInstallSuccess(plan: InstallerManager.InstallPlan.External): Boolean {
         val info = pm.getPackageInfo(plan.expectedPackage)
         val baseline = externalInstallBaseline
-        val updatedSinceStart = info?.let { isUpdatedSinceBaseline(it, baseline, externalInstallStartTime) } ?: false
+        val updatedSinceStart =
+            info?.let { isUpdatedSinceBaseline(it, baseline, externalInstallStartTime) } == true
         val signatureChangedToExpected =
             shouldTreatAsInstalledBySignature(plan.expectedPackage, externalPackageWasPresentAtStart)
         if (info != null && (updatedSinceStart || signatureChangedToExpected)) {
@@ -617,6 +622,7 @@ class InstalledAppInfoViewModel(
         pm.getSignature(packageName).toByteArray()
     }.getOrNull()
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun readArchiveSignatureBytes(file: File): ByteArray? = runCatching {
         @Suppress("DEPRECATION")
         val flags = PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
@@ -685,7 +691,7 @@ class InstalledAppInfoViewModel(
                 val info = pm.getPackageInfo(plan.expectedPackage)
                 val updatedSinceStart = info?.let {
                     isUpdatedSinceBaseline(it, baseline, startTime)
-                } ?: false
+                } == true
                 val signatureChangedToExpected =
                     shouldTreatAsInstalledBySignature(plan.expectedPackage, externalPackageWasPresentAtStart)
 
@@ -725,7 +731,7 @@ class InstalledAppInfoViewModel(
 
         when (plan.target) {
             InstallerManager.InstallTarget.SAVED_APP -> {
-                val app = installedApp ?: return
+                installedApp ?: return
                 val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
                 viewModelScope.launch {
                     persistInstallMetadata(installType)
@@ -954,6 +960,12 @@ class InstalledAppInfoViewModel(
             }
         }
     }
+
+    val exportFormat: StateFlow<String> = prefs.patchedAppExportFormat.flow
+        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.patchedAppExportFormat.getBlocking())
+
+    val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
+        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
 
     /**
      * Start repatch flow - Expert Mode or Simple Mode

@@ -33,6 +33,7 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.viewmodel.BundleUpdateStatus
 import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 
 /**
