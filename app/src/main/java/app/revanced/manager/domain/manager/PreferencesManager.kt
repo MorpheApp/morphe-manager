@@ -90,7 +90,7 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
-    val useExpertMode = booleanPreference("use_expert_mode", true)
+    val useExpertMode = booleanPreference("use_expert_mode", false)
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
 
     init {
