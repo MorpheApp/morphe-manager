@@ -443,7 +443,7 @@ private fun BundleUpdateSnackbarContent(
                             BundleUpdateStatus.Updating -> {
                                 if (progress != null && progress.total > 0) {
                                     stringResource(
-                                        R.string.bundle_update_progress,
+                                        R.string.morphe_home_update_progress,
                                         progress.completed,
                                         progress.total
                                     )

@@ -13,6 +13,7 @@
     <string name="morphe_home_update_error">Update failed</string>
     <string name="morphe_home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="morphe_home_updating_sources">Updating sources…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d sources processed</string>
     <string name="morphe_home_update_success">Update sources complete</string>
     <string name="morphe_home_update_success_subtitle">Your sources are up to date</string>
     <string name="morphe_home_sources_are_loading">Sources are loading, please wait…</string>
@@ -121,9 +122,9 @@
     <string name="morphe_repatch_requires_original">Repatch requires the original APK file</string>
     <!-- Storage Management -->
     <string name="morphe_storage_management">Storage Management</string>
-    <string name="morphe_calculating_size">Calculating size…</string>
     <string name="morphe_apks_count">%d APK(s)</string>
     <string name="morphe_apks_size">Total size: %s</string>
+    <string name="morphe_apk_item_info" translatable="false">v%s • %s</string>
     <!-- Patched APKs Management -->
     <string name="morphe_patched_apks_management">Patched APKs</string>
     <string name="morphe_patched_apks_title">Patched APKs</string>
@@ -132,7 +133,6 @@
     <string name="morphe_patched_apks_delete_title">Delete patched APK?</string>
     <string name="morphe_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
     <string name="morphe_patched_apks_deleted">Patched APK deleted successfully</string>
-    <string name="morphe_patched_apks_item_version">Version: %s</string>
     <!-- Original APKs Management -->
     <string name="morphe_original_apks_management">Original APKs</string>
     <string name="morphe_original_apks_title">Original APKs</string>
@@ -141,7 +141,6 @@
     <string name="morphe_original_apks_deleted">Original APK deleted successfully</string>
     <string name="morphe_original_apks_saved">Original APK saved</string>
     <string name="morphe_original_apks_save_failed">Failed to save original APK</string>
-    <string name="morphe_original_apks_item_info">v%s • %s</string>
     <string name="morphe_original_apks_delete_title">Delete original APK?</string>
     <string name="morphe_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
 

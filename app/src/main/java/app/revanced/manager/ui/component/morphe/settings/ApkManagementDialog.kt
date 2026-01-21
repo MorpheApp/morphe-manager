@@ -27,13 +27,12 @@ import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.utils.calculateApkSize
 import app.revanced.manager.ui.component.morphe.utils.formatBytes
 import app.revanced.manager.ui.component.morphe.utils.getApkPath
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.toast
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
 
@@ -44,6 +43,17 @@ enum class ApkManagementType {
     PATCHED,
     ORIGINAL
 }
+
+/**
+ * Data class representing an APK item for display
+ */
+private data class ApkItemData(
+    val packageName: String,
+    val displayName: String,
+    val version: String,
+    val fileSize: Long,
+    val packageInfo: PackageInfo?
+)
 
 /**
  * Universal dialog for managing APK files (patched or original)
@@ -81,70 +91,57 @@ private fun PatchedApksContent(
     val pm: PM = koinInject()
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
-    val patchedApps = remember(allInstalledApps) {
-        allInstalledApps
-    }
 
-    val packageInfoMap = remember(patchedApps) {
-        patchedApps.associate { app ->
-            app.currentPackageName to runCatching {
-                pm.getPackageInfo(app.currentPackageName)
-            }.getOrNull()
+    // Convert to ApkItemData with size calculation
+    val apkItems = remember(allInstalledApps) {
+        allInstalledApps.map { app ->
+            val packageInfo = runCatching { pm.getPackageInfo(app.currentPackageName) }.getOrNull()
+            ApkItemData(
+                packageName = app.currentPackageName,
+                displayName = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+                    ?: app.currentPackageName,
+                version = app.version,
+                fileSize = calculateApkSize(context, app),
+                packageInfo = packageInfo
+            )
         }
     }
 
-    var totalSize by remember { mutableLongStateOf(0L) }
-    var isLoadingSize by remember { mutableStateOf(true) }
-
-    LaunchedEffect(patchedApps) {
-        withContext(Dispatchers.IO) {
-            var size = 0L
-            patchedApps.forEach { app ->
-                val apkPath = getApkPath(context, app)
-                apkPath?.let {
-                    runCatching {
-                        size += File(it).length()
-                    }
-                }
-            }
-            totalSize = size
-            isLoadingSize = false
-        }
+    val totalSize = remember(apkItems) {
+        apkItems.sumOf { it.fileSize }
     }
 
-    var appToDelete by remember { mutableStateOf<InstalledApp?>(null) }
+    var itemToDelete by remember { mutableStateOf<InstalledApp?>(null) }
 
     ApkManagementDialogContent(
         title = stringResource(R.string.morphe_patched_apks_management),
         icon = Icons.Outlined.Apps,
-        count = patchedApps.size,
+        count = apkItems.size,
         totalSize = totalSize,
-        isLoadingSize = isLoadingSize,
-        isEmpty = patchedApps.isEmpty(),
+        isEmpty = apkItems.isEmpty(),
         emptyMessage = stringResource(R.string.morphe_patched_apks_empty),
         onDismissRequest = onDismissRequest,
         itemsContent = {
-            patchedApps.forEach { app ->
-                PatchedApkItem(
-                    app = app,
-                    packageInfo = packageInfoMap[app.currentPackageName],
-                    onDelete = { appToDelete = it }
+            apkItems.forEachIndexed { index, item ->
+                ApkItem(
+                    data = item,
+                    onDelete = { itemToDelete = allInstalledApps[index] }
                 )
             }
         }
     )
 
-    if (appToDelete != null) {
+    if (itemToDelete != null) {
         DeleteConfirmationDialog(
             title = stringResource(R.string.morphe_patched_apks_delete_title),
             message = stringResource(
                 R.string.morphe_patched_apks_delete_confirm,
-                appToDelete!!.currentPackageName
+                itemToDelete!!.currentPackageName
             ),
-            onDismiss = { appToDelete = null },
+            onDismiss = { itemToDelete = null },
             onConfirm = {
                 scope.launch {
-                    val apkPath = getApkPath(context, appToDelete!!)
+                    val apkPath = getApkPath(context, itemToDelete!!)
                     apkPath?.let { path ->
                         val deleted = runCatching {
                             File(path).delete()
@@ -155,9 +152,9 @@ private fun PatchedApksContent(
                         }
                     }
 
-                    repository.delete(appToDelete!!)
+                    repository.delete(itemToDelete!!)
                     context.toast(context.getString(R.string.morphe_patched_apks_deleted))
-                    appToDelete = null
+                    itemToDelete = null
                 }
             }
         )
@@ -175,55 +172,58 @@ private fun OriginalApksContent(
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
-    // Get package info for each APK
-    val packageInfoMap = remember(originalApks) {
-        originalApks.associate { apk ->
-            apk.packageName to runCatching {
-                pm.getPackageInfo(apk.packageName, 0)
-            }.getOrNull()
+    // Convert to ApkItemData
+    val apkItems = remember(originalApks) {
+        originalApks.map { apk ->
+            val packageInfo = runCatching { pm.getPackageInfo(apk.packageName, 0) }.getOrNull()
+            ApkItemData(
+                packageName = apk.packageName,
+                displayName = packageInfo?.applicationInfo?.loadLabel(pm)?.toString()
+                    ?: apk.packageName,
+                version = apk.version,
+                fileSize = apk.fileSize,
+                packageInfo = packageInfo
+            )
         }
     }
 
-    // Calculate total size from actual APKs in the list
-    val totalSize = remember(originalApks) {
-        originalApks.sumOf { it.fileSize }
+    val totalSize = remember(apkItems) {
+        apkItems.sumOf { it.fileSize }
     }
 
-    var apkToDelete by remember { mutableStateOf<OriginalApk?>(null) }
+    var itemToDelete by remember { mutableStateOf<OriginalApk?>(null) }
 
     ApkManagementDialogContent(
         title = stringResource(R.string.morphe_original_apks_management),
         icon = Icons.Outlined.Storage,
-        count = originalApks.size,
+        count = apkItems.size,
         totalSize = totalSize,
-        isLoadingSize = false,
-        isEmpty = originalApks.isEmpty(),
+        isEmpty = apkItems.isEmpty(),
         emptyMessage = stringResource(R.string.morphe_original_apks_empty),
         onDismissRequest = onDismissRequest,
         itemsContent = {
-            originalApks.forEach { apk ->
-                OriginalApkItem(
-                    apk = apk,
-                    packageInfo = packageInfoMap[apk.packageName],
-                    onDelete = { apkToDelete = it }
+            apkItems.forEachIndexed { index, item ->
+                ApkItem(
+                    data = item,
+                    onDelete = { itemToDelete = originalApks[index] }
                 )
             }
         }
     )
 
-    if (apkToDelete != null) {
+    if (itemToDelete != null) {
         DeleteConfirmationDialog(
             title = stringResource(R.string.morphe_original_apks_delete_title),
             message = stringResource(
                 R.string.morphe_original_apks_delete_confirm,
-                apkToDelete!!.packageName
+                itemToDelete!!.packageName
             ),
-            onDismiss = { apkToDelete = null },
+            onDismiss = { itemToDelete = null },
             onConfirm = {
                 scope.launch {
-                    repository.delete(apkToDelete!!)
+                    repository.delete(itemToDelete!!)
                     context.toast(context.getString(R.string.morphe_original_apks_deleted))
-                    apkToDelete = null
+                    itemToDelete = null
                 }
             }
         )
@@ -236,7 +236,6 @@ private fun ApkManagementDialogContent(
     icon: ImageVector,
     count: Int,
     totalSize: Long,
-    isLoadingSize: Boolean,
     isEmpty: Boolean,
     emptyMessage: String,
     onDismissRequest: () -> Unit,
@@ -275,19 +274,11 @@ private fun ApkManagementDialogContent(
                             fontWeight = FontWeight.Bold,
                             color = LocalDialogTextColor.current
                         )
-                        if (isLoadingSize) {
-                            Text(
-                                text = stringResource(R.string.morphe_calculating_size),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                        } else {
-                            Text(
-                                text = stringResource(R.string.morphe_apks_size, formatBytes(totalSize)),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                        }
+                        Text(
+                            text = stringResource(R.string.morphe_apks_size, formatBytes(totalSize)),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
                     }
                     Icon(
                         imageVector = icon,
@@ -313,54 +304,26 @@ private fun ApkManagementDialogContent(
 }
 
 @Composable
-private fun PatchedApkItem(
-    app: InstalledApp,
-    packageInfo: PackageInfo?,
-    onDelete: (InstalledApp) -> Unit
+private fun ApkItem(
+    data: ApkItemData,
+    onDelete: () -> Unit
 ) {
-    val context = LocalContext.current
-
     ApkItemCard(
         icon = {
             AppIcon(
-                packageInfo = packageInfo,
+                packageInfo = data.packageInfo,
                 contentDescription = null,
                 modifier = Modifier.size(48.dp)
             )
         },
-        title = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-            ?: app.currentPackageName,
-        subtitle = app.currentPackageName,
-        details = stringResource(R.string.morphe_patched_apks_item_version, app.version),
-        onDelete = { onDelete(app) }
-    )
-}
-
-@Composable
-private fun OriginalApkItem(
-    apk: OriginalApk,
-    packageInfo: PackageInfo?,
-    onDelete: (OriginalApk) -> Unit
-) {
-    val context = LocalContext.current
-
-    ApkItemCard(
-        icon = {
-            AppIcon(
-                packageInfo = packageInfo,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp)
-            )
-        },
-        title = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-            ?: apk.packageName,
-        subtitle = apk.packageName,
+        title = data.displayName,
+        subtitle = data.packageName,
         details = stringResource(
-            R.string.morphe_original_apks_item_info,
-            apk.version,
-            formatBytes(apk.fileSize)
+            R.string.morphe_apk_item_info,
+            data.version,
+            formatBytes(data.fileSize)
         ),
-        onDelete = { onDelete(apk) }
+        onDelete = onDelete
     )
 }
 
