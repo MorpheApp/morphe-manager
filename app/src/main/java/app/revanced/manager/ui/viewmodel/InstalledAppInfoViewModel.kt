@@ -992,11 +992,9 @@ class InstalledAppInfoViewModel(
         // Get current patches and options
         val patches = appliedPatches ?: resolveAppliedSelection(app)
 
-        val options = app.selectionPayload?.bundles?.associate { bundle ->
-            bundle.bundleUid to bundle.patches.associateWith { patchName ->
-                bundle.options[patchName] ?: emptyMap()
-            }
-        } ?: patchOptionsRepository.getOptions(
+        // Always load options from repository. Options are stored separately via
+        // patchOptionsRepository.saveOptions() during patching.
+        val options = patchOptionsRepository.getOptions(
             app.originalPackageName,
             patchBundleRepository.bundleInfoFlow.first().mapValues { (_, info) ->
                 info.patches.associateBy { it.name }
