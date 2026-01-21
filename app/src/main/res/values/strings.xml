@@ -117,20 +117,32 @@
     <string name="saved_copy_delete_confirmation">Are you sure you want to delete the saved copy?</string>
     <string name="view">View</string>
     <!-- Repatch Feature -->
-    <string name="morphe_original_apks_management">Original APKs management</string>
     <string name="morphe_repatch_no_original_apk">Original APK not found. Cannot repatch this app.</string>
     <string name="morphe_repatch_requires_original">Repatch requires the original APK file</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Storage Management</string>
+    <string name="morphe_calculating_size">Calculating size…</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Total size: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Patched APKs</string>
+    <string name="morphe_patched_apks_title">Patched APKs</string>
+    <string name="morphe_patched_apks_description">Manage saved patched application files</string>
+    <string name="morphe_patched_apks_empty">No patched APKs saved yet</string>
+    <string name="morphe_patched_apks_delete_title">Delete patched APK?</string>
+    <string name="morphe_patched_apks_delete_confirm">Are you sure you want to delete the saved patched APK for %s?</string>
+    <string name="morphe_patched_apks_deleted">Patched APK deleted successfully</string>
+    <string name="morphe_patched_apks_item_version">Version: %s</string>
     <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Original APKs</string>
     <string name="morphe_original_apks_title">Original APKs</string>
     <string name="morphe_original_apks_description">Original APK files are saved for repatching. Only the most recent version is kept for each app.</string>
     <string name="morphe_original_apks_empty">No original APKs stored</string>
-    <string name="morphe_original_apks_deleted">Original APK deleted</string>
+    <string name="morphe_original_apks_deleted">Original APK deleted successfully</string>
     <string name="morphe_original_apks_saved">Original APK saved</string>
     <string name="morphe_original_apks_save_failed">Failed to save original APK</string>
-    <string name="morphe_original_apks_count">%d original APK(s) stored</string>
-    <string name="morphe_original_apks_size">Total size: %s</string>
     <string name="morphe_original_apks_item_info">v%s • %s</string>
-    <string name="morphe_original_apks_delete_title">Delete original APK</string>
+    <string name="morphe_original_apks_delete_title">Delete original APK?</string>
     <string name="morphe_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
 
     <!-- Root Mode -->

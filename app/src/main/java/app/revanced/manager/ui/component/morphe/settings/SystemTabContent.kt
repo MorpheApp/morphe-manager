@@ -15,8 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
@@ -50,7 +52,7 @@ fun SystemTabContent(
     val memoryLimit by prefs.patcherProcessMemoryLimit.getAsState()
 
     var showProcessRuntimeDialog by remember { mutableStateOf(false) }
-    var showOriginalApksDialog by remember { mutableStateOf(false) }
+    var showApkManagementDialog by remember { mutableStateOf<ApkManagementType?>(null) }
 
     // Process runtime dialog
     if (showProcessRuntimeDialog) {
@@ -68,10 +70,11 @@ fun SystemTabContent(
         )
     }
 
-    // Original APKs management dialog
-    if (showOriginalApksDialog) {
-        OriginalApksManagementDialog(
-            onDismissRequest = { showOriginalApksDialog = false }
+    // APK management dialog
+    showApkManagementDialog?.let { type ->
+        ApkManagementDialog(
+            type = type,
+            onDismissRequest = { showApkManagementDialog = null }
         )
     }
 
@@ -190,40 +193,74 @@ fun SystemTabContent(
             }
         }
 
-        // Original APKs Management
+        // Storage Management Section
         SectionTitle(
-            text = stringResource(R.string.morphe_original_apks_management),
+            text = stringResource(R.string.morphe_storage_management),
             icon = Icons.Outlined.Storage
         )
 
         SectionCard {
-            val repository: OriginalApkRepository = koinInject()
-            val allOriginalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
-            val apkCount = allOriginalApks.size
+            Column {
+                // Original APKs management
+                val originalApkRepository: OriginalApkRepository = koinInject()
+                val allOriginalApks by originalApkRepository.getAll().collectAsStateWithLifecycle(emptyList())
+                val originalApkCount = allOriginalApks.size
 
-            RichSettingsItem(
-                onClick = { showOriginalApksDialog = true },
-                title = stringResource(R.string.morphe_original_apks_title),
-                subtitle = stringResource(R.string.morphe_original_apks_description),
-                leadingContent = {
-                    MorpheIcon(icon = Icons.Outlined.FolderOpen)
-                },
-                trailingContent = {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (apkCount > 0) {
-                            InfoBadge(
-                                text = apkCount.toString(),
-                                style = InfoBadgeStyle.Default,
-                                isCompact = true
-                            )
+                RichSettingsItem(
+                    onClick = { showApkManagementDialog = ApkManagementType.ORIGINAL },
+                    title = stringResource(R.string.morphe_original_apks_title),
+                    subtitle = stringResource(R.string.morphe_original_apks_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.FolderOpen)
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (originalApkCount > 0) {
+                                InfoBadge(
+                                    text = originalApkCount.toString(),
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
                         }
-                        MorpheIcon(icon = Icons.Outlined.ChevronRight)
                     }
-                }
-            )
+                )
+
+                MorpheSettingsDivider()
+
+                // Patched APKs management
+                val installedAppRepository: InstalledAppRepository = koinInject()
+                val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
+                val patchedApkCount = allInstalledApps.size
+
+                RichSettingsItem(
+                    onClick = { showApkManagementDialog = ApkManagementType.PATCHED },
+                    title = stringResource(R.string.morphe_patched_apks_title),
+                    subtitle = stringResource(R.string.morphe_patched_apks_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Apps)
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (patchedApkCount > 0) {
+                                InfoBadge(
+                                    text = patchedApkCount.toString(),
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                        }
+                    }
+                )
+            }
         }
 
         // About Section
