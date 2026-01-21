@@ -85,14 +85,12 @@ fun HomeSectionsLayout(
 
     // Main content sections
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding()
+                .navigationBarsPadding()
         ) {
             // Adaptive content layout based on window size
             HomeAdaptiveContent(
@@ -903,6 +901,7 @@ fun HomeOtherAppsSection(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .padding(top = 16.dp, bottom = 24.dp)
             .height(48.dp)
             .clip(shape)
             .background(

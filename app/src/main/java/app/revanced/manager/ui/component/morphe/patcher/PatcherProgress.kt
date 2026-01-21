@@ -59,7 +59,7 @@ fun PatchingInProgress(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp)
+            .navigationBarsPadding()
     ) {
         // Main content
         if (windowSize.useTwoColumnLayout) {

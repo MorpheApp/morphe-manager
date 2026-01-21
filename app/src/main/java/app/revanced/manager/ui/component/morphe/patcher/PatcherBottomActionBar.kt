@@ -18,9 +18,7 @@ import app.revanced.manager.ui.component.morphe.home.BottomActionButton
 
 /**
  * Patcher bottom action bar
- * Three rectangular buttons with fixed position at bottom
  * Left: Cancel Patching | Center: Home | Right: Save / Error button
- * Follows same visual style as home screen bottom bar
  */
 @Composable
 fun PatcherBottomActionBar(
@@ -44,7 +42,8 @@ fun PatcherBottomActionBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 24.dp, horizontal = 16.dp),
+            .padding(bottom = 8.dp)
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(32.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

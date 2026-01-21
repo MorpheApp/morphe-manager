@@ -30,8 +30,7 @@ import app.morphe.manager.R
 
 /**
  * Section 5: Bottom action bar
- * Three-column layout: Empty space (left) | Bundles (center) | Settings (right)
- * Bundles and Settings buttons positioned center and right
+ * Bundles and Settings buttons positioned left and right
  */
 @Composable
 fun HomeBottomActionBar(
@@ -42,14 +41,12 @@ fun HomeBottomActionBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 24.dp, horizontal = 16.dp),
+            .padding(bottom = 8.dp)
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(32.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Left: Empty space
-//        Spacer(modifier = Modifier.weight(1f))
-
-        // Center: Sources button
+        // Left: Sources button
         BottomActionButton(
             onClick = onBundlesClick,
             icon = Icons.Outlined.Source,
