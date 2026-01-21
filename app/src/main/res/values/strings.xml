@@ -965,7 +965,7 @@ It is only compatible with the following version: %2$s."</string>
     <string name="show_password_field">Show password</string>
     <string name="hide_password_field">Hide password</string>
 
-    <string name="installer_primary_title">Primary installer</string>
+    <string name="installer_primary_title">Installer</string>
     <string name="installer_fallback_title">Fallback installer</string>
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Use the Android package installer</string>
