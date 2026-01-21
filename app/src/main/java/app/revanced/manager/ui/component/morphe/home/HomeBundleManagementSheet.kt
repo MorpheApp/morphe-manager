@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -86,79 +87,91 @@ fun HomeBundleManagementSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .navigationBarsPadding()
-                .padding(horizontal = 16.dp)
         ) {
-            // Header
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            // Header - outside scrollable area
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp)
             ) {
-                Column {
-                    Text(
-                        text = stringResource(R.string.morphe_home_sources),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = stringResource(
-                            R.string.morphe_sources_management_subtitle,
-                            sources.size
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.morphe_home_sources),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = stringResource(
+                                R.string.morphe_sources_management_subtitle,
+                                sources.size
+                            ),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    FilledIconButton(
+                        onClick = onAddBundle,
+                        colors = IconButtonDefaults.filledIconButtonColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(R.string.add)
+                        )
+                    }
                 }
 
-                FilledIconButton(
-                    onClick = onAddBundle,
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(R.string.add)
-                    )
-                }
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Bundle cards
-            LazyColumn(
-                state = rememberLazyListState(),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(bottom = 16.dp)
-            ) {
-                items(sources, key = { bundle -> bundle.uid }) { bundle ->
-                    BundleManagementCard(
-                        bundle = bundle,
-                        patchCount = patchCounts[bundle.uid] ?: 0,
-                        updateInfo = manualUpdateInfo[bundle.uid],
-                        onDelete = { bundleToDelete = bundle },
-                        onDisable = { onDisable(bundle) },
-                        onUpdate = { onUpdate(bundle) },
-                        onRename = { onRename(bundle) },
-                        onPatchesClick = { bundleToShowPatches = bundle },
-                        onVersionClick = {
-                            if (bundle is RemotePatchBundle) {
-                                bundleToShowChangelog = bundle
-                            }
-                        },
-                        onOpenInBrowser = {
-                            val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                ?: BUNDLE_URL_RELEASES
-                            try {
-                                uriHandler.openUri(pageUrl)
-                            } catch (_: Exception) {
-                                context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
-                            }
-                        },
-                        forceExpanded = isSingleDefaultBundle
+            // Bundle cards - scrollable area with disabled overscroll
+            CompositionLocalProvider(LocalOverscrollFactory provides null) {
+                LazyColumn(
+                    state = rememberLazyListState(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f, fill = false),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp
                     )
+                ) {
+                    items(sources, key = { bundle -> bundle.uid }) { bundle ->
+                        BundleManagementCard(
+                            bundle = bundle,
+                            patchCount = patchCounts[bundle.uid] ?: 0,
+                            updateInfo = manualUpdateInfo[bundle.uid],
+                            onDelete = { bundleToDelete = bundle },
+                            onDisable = { onDisable(bundle) },
+                            onUpdate = { onUpdate(bundle) },
+                            onRename = { onRename(bundle) },
+                            onPatchesClick = { bundleToShowPatches = bundle },
+                            onVersionClick = {
+                                if (bundle is RemotePatchBundle) {
+                                    bundleToShowChangelog = bundle
+                                }
+                            },
+                            onOpenInBrowser = {
+                                val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
+                                    ?: BUNDLE_URL_RELEASES
+                                try {
+                                    uriHandler.openUri(pageUrl)
+                                } catch (_: Exception) {
+                                    context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
+                                }
+                            },
+                            forceExpanded = isSingleDefaultBundle
+                        )
+                    }
                 }
             }
         }

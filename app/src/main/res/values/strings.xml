@@ -149,10 +149,9 @@
     <string name="morphe_root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
 
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Save APK</string>
-    <string name="morphe_patcher_copy_error">Copy error</string>
-    <string name="morphe_patcher_show_error">Show error</string>
     <string name="morphe_patcher_error_copied">Error copied to clipboard</string>
+    <string name="morphe_patcher_error_log">Error log</string>
+    <string name="morphe_patcher_error_technical">Technical details</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_percentage" translatable="false">%1$d%%</string>
     <string name="morphe_patcher_long_step_warning">This step may take a while. Please wait…</string>
