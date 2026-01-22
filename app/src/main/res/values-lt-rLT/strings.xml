@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_greeting_1">Kokią programėlę norėtumėte pataisyti?</string>
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">Norite žiūrėti reklamas? Aš irgi ne</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <!-- Whimsical forecast-style joke, not meant literally -->
     <!-- From mediocrity to amazing -->
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_update_error">Nepavyko atnaujinti</string>
+    <string name="morphe_home_update_success">Atnaujinimas baigtas</string>
+    <string name="morphe_home_please_wait">Palaukite</string>
+    <string name="morphe_home_open_in_browser">Atidaryti naršyklėje</string>
+    <string name="morphe_home_failed_to_open_url">Nepavyko atidaryti nuorodos</string>
+    <string name="morphe_home_date_added">Pridėta</string>
+    <string name="morphe_home_date_updated">Atnaujinta</string>
+    <string name="morphe_home_unknown">Nežinoma</string>
+    <string name="morphe_home_timeline">Atnaujinimų istorija</string>
     <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">Ar turite originalų, netaisytą APK failą?</string>
+    <string name="morphe_home_apk_availability_yes">Taip, turiu</string>
+    <string name="morphe_home_apk_availability_no">Neturiu, padėkit surasti</string>
     <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_steps_title">Instrukcijos:</string>
+    <string name="morphe_home_download_instructions_step1">Paspauskite \'%1$s\' mygtuką</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Paspauskite atsisiųsti (Download) puslapyje, o ne čia 😊</string>
+    <string name="morphe_home_download_instructions_step4">Atsisiuntus, vėl atsidarykite šią programėlę</string>
     <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_recommended_version">Rekomenduojama versija</string>
+    <string name="morphe_patcher_selected_version">Pasirinkta versija</string>
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_wrong_package_title">Pasirinktas netinkamas failas</string>
+    <string name="morphe_patcher_selected_package">Pasirinktas failas</string>
+    <string name="morphe_patcher_message_4">Verdama skaitmeninė magija… ☕</string>
+    <string name="morphe_patcher_message_6">Pažiūrėkite į lauką, ten gražu… 🌤️</string>
+    <string name="morphe_patcher_message_8">Išpainiojami skaitmeniniai spagečiai… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_13">Jūsų pataisyta programėlė kepama, karšta ir šviežia… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_16">Išspaudžiama papildoma galia, kaip sultys iš skaitmeninės citrinos… 🍋</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Morphe Settings Screen -->
