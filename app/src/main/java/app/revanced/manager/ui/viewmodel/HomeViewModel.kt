@@ -2,6 +2,7 @@ package app.revanced.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -23,6 +24,7 @@ import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
@@ -37,6 +39,7 @@ import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.URLEncoder.encode
+import java.util.zip.ZipInputStream
 
 /**
  * Bundle update status for snackbar display
@@ -605,24 +608,42 @@ class HomeViewModel(
 
     /**
      * Load local APK and extract package info
+     * Supports both single APK and split APK archives (apkm, apks, xapk)
      */
     private suspend fun loadLocalApk(
         context: Context,
         uri: Uri
     ): SelectedApp.Local? = withContext(Dispatchers.IO) {
         try {
-            val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.apk")
+            // Copy file to cache with original extension detection
+            val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                val nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME)
+                cursor.moveToFirst()
+                cursor.getString(nameIndex)
+            } ?: "temp_${System.currentTimeMillis()}"
+
+            val extension = fileName.substringAfterLast('.', "apk").lowercase()
+            val tempFile = File(context.cacheDir, "temp_apk_${System.currentTimeMillis()}.$extension")
+
             context.contentResolver.openInputStream(uri)?.use { input ->
                 tempFile.outputStream().use { output ->
                     input.copyTo(output)
                 }
             }
 
-            val pm = context.packageManager
-            val packageInfo = pm.getPackageArchiveInfo(
-                tempFile.absolutePath,
-                PackageManager.GET_META_DATA
-            )
+            // Check if it's a split APK archive
+            val isSplitArchive = SplitApkPreparer.isSplitArchive(tempFile)
+
+            val packageInfo = if (isSplitArchive) {
+                // Extract base APK from archive and get package info
+                extractPackageInfoFromSplitArchive(context, tempFile)
+            } else {
+                // Regular APK - parse directly
+                context.packageManager.getPackageArchiveInfo(
+                    tempFile.absolutePath,
+                    PackageManager.GET_META_DATA
+                )
+            }
 
             if (packageInfo == null) {
                 tempFile.delete()
@@ -635,7 +656,51 @@ class HomeViewModel(
                 file = tempFile,
                 temporary = true
             )
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to load APK", e)
+            null
+        }
+    }
+
+    /**
+     * Extract package info from split APK archive (apkm, apks, xapk)
+     */
+    private fun extractPackageInfoFromSplitArchive(
+        context: Context,
+        archiveFile: File
+    ): PackageInfo? {
+        return try {
+            ZipInputStream(archiveFile.inputStream()).use { zip ->
+                var entry = zip.nextEntry
+                while (entry != null) {
+                    val name = entry.name.lowercase()
+                    // Look for base APK (usually named base.apk, or the main APK without split suffix)
+                    if (name.endsWith(".apk") &&
+                        (name.contains("base") || !name.contains("split") && !name.contains("config"))) {
+
+                        // Extract base APK to temp file
+                        val tempBaseApk = File(context.cacheDir, "temp_base_${System.currentTimeMillis()}.apk")
+                        tempBaseApk.outputStream().use { output ->
+                            zip.copyTo(output)
+                        }
+
+                        val packageInfo = context.packageManager.getPackageArchiveInfo(
+                            tempBaseApk.absolutePath,
+                            PackageManager.GET_META_DATA
+                        )
+
+                        tempBaseApk.delete()
+
+                        if (packageInfo != null) {
+                            return packageInfo
+                        }
+                    }
+                    entry = zip.nextEntry
+                }
+                null
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to extract package info from split archive", e)
             null
         }
     }
