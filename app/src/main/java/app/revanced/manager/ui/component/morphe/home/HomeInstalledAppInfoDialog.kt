@@ -55,7 +55,10 @@ fun InstalledAppInfoDialog(
     onDismiss: () -> Unit,
     onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     onTriggerPatchFlow: (originalPackageName: String) -> Unit,
-    viewModel: InstalledAppInfoViewModel = koinViewModel { parametersOf(packageName) }
+    viewModel: InstalledAppInfoViewModel = koinViewModel(
+        key = packageName,
+        parameters = { parametersOf(packageName) }
+    )
 ) {
     val context = LocalContext.current
     val installedApp = viewModel.installedApp

@@ -209,18 +209,20 @@ fun MorpheHomeScreen(
 
     // Installed App Info Dialog
     showInstalledAppDialog?.let { packageName ->
-        InstalledAppInfoDialog(
-            packageName = packageName,
-            onDismiss = { showInstalledAppDialog = null },
-            onNavigateToPatcher = { pkg, version, filePath, patches, options ->
-                showInstalledAppDialog = null
-                onNavigateToPatcher(pkg, version, filePath, patches, options)
-            },
-            onTriggerPatchFlow = { originalPackageName ->
-                showInstalledAppDialog = null
-                homeViewModel.showPatchDialog(originalPackageName)
-            }
-        )
+        key(packageName) {
+            InstalledAppInfoDialog(
+                packageName = packageName,
+                onDismiss = { showInstalledAppDialog = null },
+                onNavigateToPatcher = { pkg, version, filePath, patches, options ->
+                    showInstalledAppDialog = null
+                    onNavigateToPatcher(pkg, version, filePath, patches, options)
+                },
+                onTriggerPatchFlow = { originalPackageName ->
+                    showInstalledAppDialog = null
+                    homeViewModel.showPatchDialog(originalPackageName)
+                }
+            )
+        }
     }
 
     // Control snackbar visibility
