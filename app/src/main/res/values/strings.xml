@@ -1078,7 +1078,7 @@ Details: %2$s"</string>
 
     <string name="patcher_step_group_preparing">Preparing</string>
     <string name="patcher_step_load_patches">Loading patches</string>
-    <string name="patcher_step_prepare_split_apk">Merge split APK</string>
+    <string name="patcher_step_prepare_split_apk">Merging split APK</string>
     <string name="patcher_step_unpack">Read APK file</string>
     <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Saving</string>
