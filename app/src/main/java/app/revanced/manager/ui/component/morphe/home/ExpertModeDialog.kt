@@ -95,9 +95,6 @@ fun ExpertModeDialog(
     val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
 
-    // Check if only one bundle exists
-    val showBundleToggleButtons = filteredPatchesInfo.size > 1
-
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.morphe_expert_mode_title),
@@ -224,8 +221,7 @@ fun ExpertModeDialog(
                                 }
 
                                 localSelectedPatches = currentPatches
-                            },
-                            showToggleButton = showBundleToggleButtons
+                            }
                         )
 
                         patches.forEach { (patch, isEnabled) ->
@@ -288,8 +284,7 @@ private fun BundleHeader(
     bundleName: String,
     enabledCount: Int,
     totalCount: Int,
-    onToggleAll: () -> Unit,
-    showToggleButton: Boolean = true
+    onToggleAll: () -> Unit
 ) {
     val allEnabled = enabledCount == totalCount
 
@@ -335,30 +330,29 @@ private fun BundleHeader(
             )
         }
 
-        if (showToggleButton) {
-            FilledTonalIconButton(
-                onClick = onToggleAll,
-                modifier = Modifier.size(32.dp),
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = if (allEnabled)
-                        MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
-                    else
-                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                    contentColor = if (allEnabled)
-                        MaterialTheme.colorScheme.error
-                    else
-                        MaterialTheme.colorScheme.primary
-                )
-            ) {
-                Icon(
-                    imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
-                    contentDescription = stringResource(
-                        if (allEnabled) R.string.morphe_expert_mode_disable_all
-                        else R.string.morphe_expert_mode_enable_all
-                    ),
-                    modifier = Modifier.size(18.dp)
-                )
-            }
+        // All patches selection button
+        FilledTonalIconButton(
+            onClick = onToggleAll,
+            modifier = Modifier.size(32.dp),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = if (allEnabled)
+                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
+                else
+                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                contentColor = if (allEnabled)
+                    MaterialTheme.colorScheme.error
+                else
+                    MaterialTheme.colorScheme.primary
+            )
+        ) {
+            Icon(
+                imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
+                contentDescription = stringResource(
+                    if (allEnabled) R.string.morphe_expert_mode_disable_all
+                    else R.string.morphe_expert_mode_enable_all
+                ),
+                modifier = Modifier.size(18.dp)
+            )
         }
     }
 }
@@ -629,7 +623,7 @@ private fun PatchOptionsDialog(
                             title = option.title,
                             description = option.description,
                             value = value?.toString() ?: "",
-                            required = option.required,
+//                            required = option.required,
                             onValueChange = { onValueChange(key, it) }
                         )
                     }
@@ -638,9 +632,9 @@ private fun PatchOptionsDialog(
                     typeName.contains("String") && !typeName.contains("Array") -> {
                         TextInputOption(
                             title = option.title,
-                            description = option.description,
+//                            description = option.description,
                             value = value?.toString() ?: "",
-                            required = option.required,
+//                            required = option.required,
                             keyboardType = KeyboardType.Text,
                             onValueChange = { onValueChange(key, it) }
                         )
@@ -660,9 +654,9 @@ private fun PatchOptionsDialog(
                     (typeName.contains("Int") || typeName.contains("Long")) && !typeName.contains("Array") -> {
                         TextInputOption(
                             title = option.title,
-                            description = option.description,
+//                            description = option.description,
                             value = (value as? Number)?.toLong()?.toString() ?: "",
-                            required = option.required,
+//                            required = option.required,
                             keyboardType = KeyboardType.Number,
                             onValueChange = { it.toLongOrNull()?.let { num -> onValueChange(key, num) } }
                         )
@@ -672,9 +666,9 @@ private fun PatchOptionsDialog(
                     (typeName.contains("Float") || typeName.contains("Double")) && !typeName.contains("Array") -> {
                         TextInputOption(
                             title = option.title,
-                            description = option.description,
+//                            description = option.description,
                             value = (value as? Number)?.toFloat()?.toString() ?: "",
-                            required = option.required,
+//                            required = option.required,
                             keyboardType = KeyboardType.Decimal,
                             onValueChange = { it.toFloatOrNull()?.let { num -> onValueChange(key, num) } }
                         )
@@ -860,7 +854,7 @@ private fun PathInputOption(
     title: String,
     description: String,
     value: String,
-    required: Boolean,
+//    required: Boolean,
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -946,9 +940,9 @@ private fun PathInputOption(
 @Composable
 private fun TextInputOption(
     title: String,
-    description: String,
+//    description: String,
     value: String,
-    required: Boolean,
+//    required: Boolean,
     keyboardType: KeyboardType,
     onValueChange: (String) -> Unit
 ) {
