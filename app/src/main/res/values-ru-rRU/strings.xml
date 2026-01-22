@@ -59,7 +59,7 @@
     <string name="morphe_home_recommended_version">Рекомендуемая версия</string>
     <string name="morphe_patcher_selected_version">Выбранная версия</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Для режима root требуется, чтобы на вашем устройстве был установлен исходный APK перед установкой патчей.</string>
+    <string name="morphe_root_install_apk_required">Root режим требует установленный непатченный APK перед установкой патчей.</string>
     <string name="morphe_root_gmscore_excluded">Поддержка GmsCore отключена в режиме root</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Сохранить APK</string>

@@ -29,13 +29,11 @@
     <string name="morphe_home_patches_updated">Dina patchar är uppdaterade</string>
     <string name="morphe_home_patches_are_loading">Patchar laddas, vänligen vänta…</string>
     <string name="morphe_home_please_wait">Vänligen vänta…</string>
-    <string name="morphe_home_open_in_browser">Öppna i webbläsaren</string>
     <string name="morphe_home_failed_to_open_url">Det gick inte att öppna URL</string>
     <string name="morphe_home_date_added">Lades till</string>
     <string name="morphe_home_date_updated">Uppdaterades</string>
     <string name="morphe_home_check_updates">Kontrollera</string>
     <string name="morphe_home_unknown">Okänd</string>
-    <string name="morphe_home_timeline">Uppdateringshistorik</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den ursprungliga opatchade APK:n?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">För att uppdatera %1$s behöver du version %2$s (ouppdaterad)</string>
@@ -56,15 +54,11 @@
     <string name="morphe_home_file_picker_prompt_title">Välj den APK-fil du laddade ner</string>
     <string name="morphe_home_file_picker_prompt_description">Välj nu %1$s APK-filen som du just laddade ner.</string>
     <string name="morphe_home_file_picker_prompt_open">Öppna APK-fil jag laddade ner</string>
-    <string name="morphe_home_recommended_version">Rekommenderad version</string>
-    <string name="morphe_patcher_selected_version">Vald version</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Rotläge kräver att den ursprungliga APK:n är installerad på din enhet innan patchning.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore supportpatch är exkluderad i rotläge</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_save_apk">Spara APK</string>
-    <string name="morphe_patcher_copy_error">Kopieringsfel</string>
-    <string name="morphe_patcher_show_error">Visa fel</string>
     <string name="morphe_patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchar</string>
     <string name="morphe_patcher_long_step_warning">Det här steget kan ta en stund. Vänligen vänta...</string>
@@ -86,11 +80,7 @@
     <string name="morphe_patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">O stödde version</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Denna APK är inte en rekommenderad appversion. Att fortsätta kan leda till att appen inte fungerar.</string>
-    <string name="morphe_patcher_unsupported_version_dialog_proceed">Fortsätt ändå</string>
-    <string name="morphe_patcher_wrong_package_title">Fel paket valt</string>
     <string name="morphe_patcher_wrong_package_description">Den valda APK:n är inte för applikationen du avsåg att patcha.</string>
-    <string name="morphe_patcher_expected_package">Förväntat paket</string>
-    <string name="morphe_patcher_selected_package">Valt paket</string>
     <string name="morphe_patcher_message_1">Morphar din app till något fantastiskt… 🏆</string>
     <string name="morphe_patcher_message_2">Lär gamla appar nya knep… 🎩</string>
     <string name="morphe_patcher_message_3">Ger din app en digital service… 🔧</string>
@@ -119,14 +109,10 @@
     <!-- Morphe Settings Screen -->
     <string name="morphe_settings_return_to_morphe">Återgå till Morphe-hem</string>
     <string name="morphe_settings_return_to_morphe_description">Återgå till förenklat läge</string>
-    <string name="morphe_settings_return_to_advanced">Växla till Avancerat läge</string>
-    <string name="morphe_settings_return_to_advanced_description">Växla till det fullt utrustade avancerade läget</string>
-    <string name="morphe_share_website">Dela webbplatsen</string>
     <string name="morphe_share_website_description">Dela den officiella Morphe-webbplatsen</string>
+    <!-- App Icon Selector -->
     <!-- Appearance Section -->
-    <string name="morphe_appearance_options">Inställningsalternativ för utseende</string>
     <string name="morphe_appearance_options_description">Anpassa teman, färger och bakgrunder</string>
-    <string name="morphe_background_type">Bakgrundsanimation</string>
     <string name="morphe_background_type_circles">Cirklar</string>
     <string name="morphe_background_type_rings">Ringar</string>
     <string name="morphe_background_type_waves">Vågor</string>
@@ -134,41 +120,20 @@
     <string name="morphe_background_type_shapes">Former</string>
     <string name="morphe_background_type_snow">Snö</string>
     <string name="morphe_background_type_none">Ingen</string>
-    <!-- Update Section -->
-    <string name="morphe_update_use_patches_prereleases">Använd förhandsversioner av korrigeringar</string>
-    <string name="morphe_update_use_patches_prereleases_description">Använd de senaste utvecklingskorrigeringarna</string>
+    <!-- Advanced Section -->
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patchalternativ</string>
     <string name="morphe_patch_options_youtube_description">Tema, branding, rubrik och Shorts-alternativ</string>
     <string name="morphe_patch_options_youtube_music_description">Tema- och brandingalternativ</string>
     <string name="morphe_patch_options_restart_message">Ändring av patchalternativ kräver återinstallering för att ändringarna ska börja gälla</string>
-    <string name="morphe_icon_instructions_title">Instruktioner för ikonformat</string>
-    <string name="morphe_header_instructions_title">Instruktioner för rubrikformat</string>
-    <string name="morphe_loading_patch_options">Läser in patchalternativ...</string>
+    <!-- Theme Colors -->
     <string name="morphe_patch_options_waiting_for_bundle">Vänta tills patchburden uppdateras</string>
     <string name="morphe_patch_options_load_error">Misslyckades med att läsa in patchalternativ</string>
-    <string name="morphe_no_options_available">Inga alternativ tillgängliga för denna patch</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">Anpassad färg</string>
     <string name="morphe_hex_color">HEX-färg</string>
-    <!-- Theme Colors -->
-    <string name="morphe_theme_colors">App-Temafärgar</string>
-    <string name="morphe_theme_dark_color">Temafärg för mörkerläge</string>
-    <string name="morphe_theme_dark_color_description">Bakgrundsfärg för mörkerläge</string>
-    <string name="morphe_theme_light_color">Temafärg för ljust läge</string>
     <!-- Custom Branding -->
-    <string name="morphe_custom_branding">Anpassad branding</string>
-    <string name="morphe_custom_app_name_description">Ändra appens visningsnamn</string>
-    <string name="morphe_custom_app_name_hint">Ange anpassat namn</string>
     <!-- Custom Header (YouTube) -->
-    <string name="morphe_custom_header">Anpassad rubriklogga</string>
-    <string name="morphe_custom_header_description">Mappruta som innehåller anpassade rubrikbilder</string>
     <!-- Hide Shorts -->
-    <string name="morphe_hide_shorts_features">Dölj Shorts-funktioner</string>
-    <string name="morphe_hide_shorts_app_shortcut">Dölj Shorts-appsnabbkommando</string>
-    <string name="morphe_hide_shorts_app_shortcut_description">Ta bort Shorts från lanschens långhållmenu</string>
-    <string name="morphe_hide_shorts_widget">Dölj Shorts-widget</string>
-    <string name="morphe_hide_shorts_widget_description">Ta bort Shorts-knapp från lanschens widget</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patchar</string>
@@ -576,13 +541,9 @@ Signatur (SHA-256): %2$s"</string>
     <string name="include_github_pat_in_exports_label">Inkludera i export av inställningar</string>
     <string name="include_github_pat_in_exports_supporting">Lägger till denna PAT i exporterade hanteringsinställningar</string>
     <string name="include_github_pat_in_exports_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport, behåll den filen privat eftersom den innehåller token.</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <string name="app_language">Appspråk</string>
+    <string name="language_dialog_title">Välj appens språk</string>
+    <string name="language_option_system">Använd enhetens språk</string>
     <string name="device_memory_limit_format">%1$dMB (Normal) - %2$dMB (Stor)</string>
     <string name="patches_force_download">Tvinga nedladdning av alla patchpaket</string>
     <string name="patches_reset">Återställ patch-paket</string>
