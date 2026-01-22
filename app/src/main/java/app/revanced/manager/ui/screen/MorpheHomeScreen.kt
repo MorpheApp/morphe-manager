@@ -93,7 +93,7 @@ fun MorpheHomeScreen(
 
     // Initialize launchers
     val storagePickerLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.GetContent()
+        ActivityResultContracts.OpenDocument()
     ) { uri -> homeViewModel.handleApkSelection(uri) }
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
@@ -233,7 +233,7 @@ fun MorpheHomeScreen(
     HomeDialogs(
         viewModel = homeViewModel,
         dashboardViewModel = dashboardViewModel,
-        storagePickerLauncher = { storagePickerLauncher.launch(APK_MIMETYPE) },
+        storagePickerLauncher = { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) },
         openBundlePicker = openBundlePicker
     )
 
