@@ -943,16 +943,12 @@ class PatcherViewModel(
             }
 
             // Get version from the package info
-            // For split archives, we need to get info from the merged APK (inputFile)
-            val apkForInfo = if (SplitApkPreparer.isSplitArchive(fileToSave)) {
-                inputFile ?: fileToSave
-            } else {
-                fileToSave
-            }
-
-            val apkPackageInfo = pm.getPackageInfo(apkForInfo)
+            // Use outputFile (patched APK) because inputFile might be deleted by worker!
+            // For split archives: selected.file (archive) won't have valid PackageInfo
+            // For regular APKs: inputFile might be deleted
+            val apkPackageInfo = pm.getPackageInfo(outputFile)
             if (apkPackageInfo == null) {
-                Log.w(TAG, "Cannot get package info from APK, skipping save")
+                Log.w(TAG, "Cannot get package info from output APK, skipping save")
                 return
             }
 
@@ -960,6 +956,14 @@ class PatcherViewModel(
                 ?: input.selectedApp.version
                 ?: "unknown"
 
+            // Does original already exist in repository?
+            val existing = originalApkRepository.get(packageName)
+            if (existing != null && existing.version == originalVersion) {
+                Log.d(TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
+                return
+            }
+
+            // If we got here, we need to save the original
             val savedFile = originalApkRepository.saveOriginalApk(
                 packageName = packageName,
                 version = originalVersion,
@@ -987,6 +991,7 @@ class PatcherViewModel(
             return@withContext false
         }
 
+        // This call is safe, it will skip if already saved
         saveOriginalApkIfNeeded()
 
         val finalPackageName = packageInfo.packageName
