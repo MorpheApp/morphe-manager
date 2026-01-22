@@ -912,18 +912,47 @@ class PatcherViewModel(
     /**
      * Save original APK file for future repatching.
      * Called after successful patching, independent of installation method.
-     * This saves the temporary copy which will be used for repatching.
-     * The original user file remains untouched in its location.
+     * For split APK archives (apkm, apks, xapk), saves the original archive.
+     * For regular APK files, saves the APK itself.
      */
     private suspend fun saveOriginalApkIfNeeded() {
         try {
-            val inputApk = inputFile
-            if (inputApk == null || !inputApk.exists()) return
+            // Determine which file to save:
+            // - For SelectedApp.Local with split archives: save the original user file
+            // - For other cases: save the inputFile (which might be a downloaded/extracted APK)
+            val fileToSave = when (val selected = input.selectedApp) {
+                is SelectedApp.Local -> {
+                    // Check if original file is a split archive
+                    if (SplitApkPreparer.isSplitArchive(selected.file)) {
+                        // Save the original split archive, not the merged APK
+                        selected.file
+                    } else {
+                        // For regular APK, use inputFile (might be same as selected.file)
+                        inputFile ?: selected.file
+                    }
+                }
+                else -> {
+                    // For non-local apps (Download, Search, Installed), use inputFile
+                    inputFile
+                }
+            }
 
-            // Get version from the APK file
-            val apkPackageInfo = pm.getPackageInfo(inputApk)
+            if (fileToSave == null || !fileToSave.exists()) {
+                Log.w(TAG, "File to save doesn't exist, skipping original APK save")
+                return
+            }
+
+            // Get version from the package info
+            // For split archives, we need to get info from the merged APK (inputFile)
+            val apkForInfo = if (SplitApkPreparer.isSplitArchive(fileToSave)) {
+                inputFile ?: fileToSave
+            } else {
+                fileToSave
+            }
+
+            val apkPackageInfo = pm.getPackageInfo(apkForInfo)
             if (apkPackageInfo == null) {
-                Log.w(TAG, "Cannot get package info from input APK, skipping save")
+                Log.w(TAG, "Cannot get package info from APK, skipping save")
                 return
             }
 
@@ -934,11 +963,11 @@ class PatcherViewModel(
             val savedFile = originalApkRepository.saveOriginalApk(
                 packageName = packageName,
                 version = originalVersion,
-                sourceFile = inputApk
+                sourceFile = fileToSave
             )
 
             if (savedFile != null) {
-                Log.i(TAG, "Original APK saved: ${savedFile.name}")
+                Log.i(TAG, "Original APK/archive saved: ${savedFile.name}")
             }
         } catch (e: Exception) {
             // Don't fail patching if save fails
