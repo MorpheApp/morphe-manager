@@ -76,6 +76,7 @@ fun HomeSectionsLayout(
 
     // Other apps button
     onOtherAppsClick: () -> Unit,
+    showOtherAppsButton: Boolean = true,
 
     // Bottom action bar
     onBundlesClick: () -> Unit,
@@ -111,6 +112,7 @@ fun HomeSectionsLayout(
                 onInstalledAppClick = onInstalledAppClick,
                 installedAppsLoading = installedAppsLoading,
                 onOtherAppsClick = onOtherAppsClick,
+                showOtherAppsButton = showOtherAppsButton,
                 modifier = Modifier.weight(1f)
             )
 
@@ -168,6 +170,8 @@ private fun HomeAdaptiveContent(
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
+    showOtherAppsButton: Boolean = true,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     val contentPadding = windowSize.contentPadding
@@ -222,11 +226,13 @@ private fun HomeAdaptiveContent(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                // Other apps button
-                HomeOtherAppsSection(
-                    onClick = onOtherAppsClick,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                // Other apps button (hidden in simple mode with single bundle)
+                if (showOtherAppsButton) {
+                    HomeOtherAppsSection(
+                        onClick = onOtherAppsClick,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
         }
     } else {
@@ -266,11 +272,13 @@ private fun HomeAdaptiveContent(
                     .weight(1f)
             )
 
-            // Section 4: Other apps button
-            HomeOtherAppsSection(
-                onClick = onOtherAppsClick,
-                modifier = Modifier.fillMaxWidth()
-            )
+            // Section 4: Other apps button (hidden in simple mode with single bundle)
+            if (showOtherAppsButton) {
+                HomeOtherAppsSection(
+                    onClick = onOtherAppsClick,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }

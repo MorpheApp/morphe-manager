@@ -68,6 +68,17 @@ fun MorpheHomeScreen(
             dashboardViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
 
+    // Calculate if Other Apps button should be visible
+    val useExpertMode by prefs.useExpertMode.getAsState()
+    val showOtherAppsButton = remember(useExpertMode, sources) {
+        if (useExpertMode) {
+            true  // Always show in expert mode
+        } else {
+            // In simple mode, show only if there are multiple bundles
+            sources.size > 1
+        }
+    }
+
     // Set up HomeViewModel
     LaunchedEffect(Unit) {
         homeViewModel.usingMountInstall = usingMountInstall
@@ -314,6 +325,7 @@ fun MorpheHomeScreen(
                 homeViewModel.pendingRecommendedVersion = null
                 homeViewModel.showFilePickerPromptDialog = true
             },
+            showOtherAppsButton = showOtherAppsButton,
 
             // Bottom action bar
             onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
