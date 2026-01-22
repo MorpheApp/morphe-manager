@@ -303,7 +303,14 @@ class HomeViewModel(
             expertModeOptions = savedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
-            val defaultBundle = bundles.firstOrNull { it.uid == 0 }
+            // Find the first bundle that has patches for this APK
+            // Priority: default bundle (uid==0) if it has patches, otherwise first bundle with patches
+            val defaultBundle = bundles.firstOrNull { bundle ->
+                bundle.uid == 0 && bundle.patchSequence(allowIncompatible).filter { it.include }.any()
+            } ?: bundles.firstOrNull { bundle ->
+                bundle.patchSequence(allowIncompatible).filter { it.include }.any()
+            }
+
             if (defaultBundle == null) {
                 app.toast(app.getString(R.string.morphe_home_no_patches_available))
                 cleanupPendingData()
@@ -315,9 +322,10 @@ class HomeViewModel(
                 .map { it.name }
                 .toSet()
 
-            val patches = mapOf(0 to allPatches).filterValues { it.isNotEmpty() }
+            // Use the correct uid instead of always using default bundle
+            val patches = mapOf(defaultBundle.uid to allPatches).filterValues { it.isNotEmpty() }
 
-            if (patches.isEmpty() || patches[0]?.isEmpty() == true) {
+            if (patches.isEmpty() || patches[defaultBundle.uid]?.isEmpty() == true) {
                 app.toast(app.getString(R.string.morphe_home_no_patches_available))
                 cleanupPendingData()
                 return
