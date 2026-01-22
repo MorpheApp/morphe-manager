@@ -472,7 +472,8 @@ class HomeViewModel(
             }
         }
 
-        val escapedVersion = encode(pendingRecommendedVersion, "UTF-8")
+        // Handle null pendingRecommendedVersion
+        val escapedVersion = pendingRecommendedVersion?.let { encode(it, "UTF-8") } ?: ""
         val searchQuery = "$pendingPackageName:$escapedVersion:${Build.SUPPORTED_ABIS.first()}"
         val searchUrl = "$MORPHE_API_URL/v2/web-search/$searchQuery"
         Log.d(tag, "Using search url: $searchUrl")
@@ -500,7 +501,9 @@ class HomeViewModel(
             "nodpi"
         }
 
-        val searchQuery = "\"$pendingPackageName\" \"$pendingRecommendedVersion\" \"$architecture\" site:APKMirror.com"
+        // Handle null pendingRecommendedVersion
+        val versionPart = pendingRecommendedVersion?.let { "\"$it\"" } ?: ""
+        val searchQuery = "\"$pendingPackageName\" $versionPart \"$architecture\" site:APKMirror.com"
         val searchUrl = "https://google.com/search?q=${encode(searchQuery, "UTF-8")}"
         Log.d(tag, "Using search query: $searchQuery")
         return searchUrl
