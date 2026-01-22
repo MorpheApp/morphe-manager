@@ -1,3 +1,10 @@
+## app [1.3.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0...v1.3.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* Handle multiple versionName entries in root mount script ([#118](https://github.com/MorpheApp/morphe-manager/issues/118)) ([4515e8b](https://github.com/MorpheApp/morphe-manager/commit/4515e8b2586f0667a682d1b4b2e6301c2811c2ce))
+
 ## app [1.3.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0...v1.3.1-dev.1) (2026-01-21)
 
 
