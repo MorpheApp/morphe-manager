@@ -25,6 +25,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.morphe.home.HomeAndroid11Dialog
 import app.revanced.manager.ui.component.morphe.home.HomeDialogs
 import app.revanced.manager.ui.component.morphe.home.HomeSectionsLayout
+import app.revanced.manager.ui.component.morphe.home.InstalledAppInfoDialog
 import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
 import app.revanced.manager.ui.component.morphe.utils.buildBundleSummaries
 import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
@@ -44,8 +45,8 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
-    onMorpheInstalledAppInfoClick: (String) -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
+    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
@@ -57,6 +58,9 @@ fun MorpheHomeScreen(
     val context = LocalContext.current
     val pm: PM = koinInject()
     val installedAppRepository: InstalledAppRepository = koinInject()
+
+    // Dialog state for installed app info
+    var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
 
     // Collect state flows
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
@@ -71,12 +75,8 @@ fun MorpheHomeScreen(
     // Calculate if Other Apps button should be visible
     val useExpertMode by prefs.useExpertMode.getAsState()
     val showOtherAppsButton = remember(useExpertMode, sources) {
-        if (useExpertMode) {
-            true  // Always show in expert mode
-        } else {
-            // In simple mode, show only if there are multiple bundles
-            sources.size > 1
-        }
+        if (useExpertMode) true // Always show in expert mode
+        else sources.size > 1 // In simple mode, show only if there are multiple bundles
     }
 
     // Set up HomeViewModel
@@ -134,7 +134,7 @@ fun MorpheHomeScreen(
         )
     }
 
-    // Handle patch trigger from installed app screen
+    // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
             homeViewModel.showPatchDialog(packageName)
@@ -149,46 +149,34 @@ fun MorpheHomeScreen(
 
             // Load YouTube
             youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
-            youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let {
-                pm.getPackageInfo(it)
-            }
+            youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
             youtubeBundleSummaries.clear()
             youtubeInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeBundleSummaries.addAll(
-                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
-                    )
+                    youtubeBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
                 }
             }
 
             // Load YouTube Music
             youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE_MUSIC }
-            youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let {
-                pm.getPackageInfo(it)
-            }
+            youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
             youtubeMusicBundleSummaries.clear()
             youtubeMusicInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeMusicBundleSummaries.addAll(
-                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
-                    )
+                    youtubeMusicBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
                 }
             }
 
             // Load Reddit
             redditInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_REDDIT }
-            redditPackageInfo = redditInstalledApp?.currentPackageName?.let {
-                pm.getPackageInfo(it)
-            }
+            redditPackageInfo = redditInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
             redditBundleSummaries.clear()
             redditInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    redditBundleSummaries.addAll(
-                        buildBundleSummaries(app, selection, bundleInfo, sourceMap)
-                    )
+                    redditBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
                 }
             }
         }
@@ -202,11 +190,9 @@ fun MorpheHomeScreen(
     // Check for manager update
     val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
 
-    // Show manager update details dialog
+    // Manager update details dialog
     if (showUpdateDetailsDialog) {
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            parameters = { parametersOf(false) }
-        )
+        val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
         ManagerUpdateDetailsDialog(
             onDismiss = { showUpdateDetailsDialog = false },
             updateViewModel = updateViewModel
@@ -221,21 +207,34 @@ fun MorpheHomeScreen(
         )
     }
 
+    // Installed App Info Dialog
+    showInstalledAppDialog?.let { packageName ->
+        InstalledAppInfoDialog(
+            packageName = packageName,
+            onDismiss = { showInstalledAppDialog = null },
+            onNavigateToPatcher = { pkg, version, filePath, patches, options ->
+                showInstalledAppDialog = null
+                onNavigateToPatcher(pkg, version, filePath, patches, options)
+            },
+            onTriggerPatchFlow = { originalPackageName ->
+                showInstalledAppDialog = null
+                homeViewModel.showPatchDialog(originalPackageName)
+            }
+        )
+    }
+
     // Control snackbar visibility
     LaunchedEffect(bundleUpdateProgress) {
         if (bundleUpdateProgress == null) {
             homeViewModel.showBundleUpdateSnackbar = false
             return@LaunchedEffect
         }
-
         homeViewModel.showBundleUpdateSnackbar = true
         homeViewModel.snackbarStatus = when (bundleUpdateProgress.result) {
             PatchBundleRepository.BundleUpdateResult.Success,
             PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
-
             PatchBundleRepository.BundleUpdateResult.NoInternet,
             PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
-
             PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
         }
     }
@@ -274,9 +273,7 @@ fun MorpheHomeScreen(
                     android11BugActive = dashboardViewModel.android11BugActive,
                     installedApp = youtubeInstalledApp
                 )
-                youtubeInstalledApp?.let {
-                    onMorpheInstalledAppInfoClick(it.currentPackageName)
-                }
+                youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
             },
             onYouTubeMusicClick = {
                 homeViewModel.handleAppClick(
@@ -286,16 +283,11 @@ fun MorpheHomeScreen(
                     android11BugActive = dashboardViewModel.android11BugActive,
                     installedApp = youtubeMusicInstalledApp
                 )
-                youtubeMusicInstalledApp?.let {
-                    onMorpheInstalledAppInfoClick(it.currentPackageName)
-                }
+                youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
             },
             onRedditClick = {
-                redditInstalledApp?.let {
-                    onMorpheInstalledAppInfoClick(it.currentPackageName)
-                } ?: run {
-                    context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
-                }
+                redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+                    ?: context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
             },
 
             // Installed apps data
@@ -308,9 +300,7 @@ fun MorpheHomeScreen(
             youtubeBundleSummaries = youtubeBundleSummaries,
             youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
             redditBundleSummaries = redditBundleSummaries,
-            onInstalledAppClick = { app ->
-                onMorpheInstalledAppInfoClick(app.currentPackageName)
-            },
+            onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
             installedAppsLoading = homeViewModel.installedAppsLoading,
 
             // Other apps button
@@ -319,7 +309,6 @@ fun MorpheHomeScreen(
                     context.toast(context.getString(R.string.morphe_home_sources_are_loading))
                     return@HomeSectionsLayout
                 }
-
                 homeViewModel.pendingPackageName = null
                 homeViewModel.pendingAppName = context.getString(R.string.morphe_home_other_apps)
                 homeViewModel.pendingRecommendedVersion = null

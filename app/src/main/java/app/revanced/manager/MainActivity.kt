@@ -30,8 +30,6 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.home.HomeInstalledAppInfoScreen
-import app.revanced.manager.ui.component.morphe.home.InstalledAppInfoNavEvent
 import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
@@ -162,37 +160,49 @@ private fun ReVancedManager(vm: MainViewModel) {
             // Clunky work around to get a boolean calculated in the home screen
             val usingMountInstallState = mutableStateOf(false)
 
-            composable<MorpheHomeScreen> {
+            composable<MorpheHomeScreen> { entry ->
                 val dashboardViewModel = koinViewModel<DashboardViewModel>()
                 val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
-
-                // Watch for patch triggers from installed app screen
-                val patchTriggerPackage by it.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
+                val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
 
                 MorpheHomeScreen(
                     onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
-                    onMorpheInstalledAppInfoClick = { packageName ->
-                        // Navigate to installed app info screen
-                        navController.navigate(MorpheInstalledAppInfo(packageName))
-                    },
                     onStartQuickPatch = { params ->
-                        // Immediately start patching with the received parameters
-                        navController.navigateComplex(
-                            Patcher,
-                            Patcher.ViewModelParams(
-                                selectedApp = params.selectedApp,
-                                selectedPatches = params.patches,
-                                options = params.options
+                        entry.lifecycleScope.launch {
+                            navController.navigateComplex(
+                                Patcher,
+                                Patcher.ViewModelParams(
+                                    selectedApp = params.selectedApp,
+                                    selectedPatches = params.patches,
+                                    options = params.options
+                                )
                             )
-                        )
+                        }
+                    },
+                    onNavigateToPatcher = { packageName, version, filePath, patches, options ->
+                        entry.lifecycleScope.launch {
+                            navController.navigateComplex(
+                                Patcher,
+                                Patcher.ViewModelParams(
+                                    selectedApp = SelectedApp.Local(
+                                        packageName = packageName,
+                                        version = version,
+                                        file = File(filePath),
+                                        temporary = false
+                                    ),
+                                    selectedPatches = patches,
+                                    options = options
+                                )
+                            )
+                        }
                     },
                     dashboardViewModel = dashboardViewModel,
                     usingMountInstallState = usingMountInstallState,
                     bundleUpdateProgress = bundleUpdateProgress,
                     patchTriggerPackage = patchTriggerPackage,
                     onPatchTriggerHandled = {
-                        it.savedStateHandle.remove<String>("patch_trigger_package")
+                        entry.savedStateHandle["patch_trigger_package"] = null
                     }
                 )
             }
@@ -482,45 +492,6 @@ private fun ReVancedManager(vm: MainViewModel) {
                 // Morphe Settings Screen
                 composable<MorpheSettings> {
                     MorpheSettingsScreen()
-                }
-
-                // Morphe Installed App Info Screen
-                composable<MorpheInstalledAppInfo> {
-                    val data = it.toRoute<MorpheInstalledAppInfo>()
-
-                    HomeInstalledAppInfoScreen(
-                        packageName = data.packageName,
-                        onNavigationEvent = { event ->
-                            when (event) {
-                                is InstalledAppInfoNavEvent.NavigateToPatcher -> {
-                                    it.lifecycleScope.launch {
-                                        navController.navigateComplex(
-                                            Patcher,
-                                            Patcher.ViewModelParams(
-                                                selectedApp = SelectedApp.Local(
-                                                    packageName = event.packageName,
-                                                    version = event.version,
-                                                    file = File(event.filePath),
-                                                    temporary = false
-                                                ),
-                                                selectedPatches = event.patches,
-                                                options = event.options
-                                            )
-                                        )
-                                    }
-                                }
-                                is InstalledAppInfoNavEvent.TriggerPatchFlow -> {
-                                    navController.popBackStack()
-                                    navController.currentBackStackEntry?.savedStateHandle?.apply {
-                                        set("patch_trigger_package", event.originalPackageName)
-                                    }
-                                }
-                                InstalledAppInfoNavEvent.NavigateBack -> {
-                                    navController.popBackStack()
-                                }
-                            }
-                        }
-                    )
                 }
             }
         }
