@@ -34,7 +34,6 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.BundleUpdateStatus
-import app.revanced.manager.ui.viewmodel.InstalledAppsViewModel
 
 /**
  * Home screen layout with 5 sections and adaptive landscape support:
@@ -68,9 +67,6 @@ fun HomeSectionsLayout(
     youtubePackageInfo: PackageInfo? = null,
     youtubeMusicPackageInfo: PackageInfo? = null,
     redditPackageInfo: PackageInfo? = null,
-    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
-    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
-    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary> = emptyList(),
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean = false,
 
@@ -106,9 +102,6 @@ fun HomeSectionsLayout(
                 youtubePackageInfo = youtubePackageInfo,
                 youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                 redditPackageInfo = redditPackageInfo,
-                youtubeBundleSummaries = youtubeBundleSummaries,
-                youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
-                redditBundleSummaries = redditBundleSummaries,
                 onInstalledAppClick = onInstalledAppClick,
                 installedAppsLoading = installedAppsLoading,
                 onOtherAppsClick = onOtherAppsClick,
@@ -164,9 +157,6 @@ private fun HomeAdaptiveContent(
     youtubePackageInfo: PackageInfo?,
     youtubeMusicPackageInfo: PackageInfo?,
     redditPackageInfo: PackageInfo?,
-    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
-    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
-    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
@@ -218,9 +208,6 @@ private fun HomeAdaptiveContent(
                     youtubePackageInfo = youtubePackageInfo,
                     youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                     redditPackageInfo = redditPackageInfo,
-                    youtubeBundleSummaries = youtubeBundleSummaries,
-                    youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
-                    redditBundleSummaries = redditBundleSummaries,
                     onInstalledAppClick = onInstalledAppClick,
                     installedAppsLoading = installedAppsLoading,
                     modifier = Modifier.fillMaxWidth()
@@ -262,9 +249,6 @@ private fun HomeAdaptiveContent(
                 youtubePackageInfo = youtubePackageInfo,
                 youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                 redditPackageInfo = redditPackageInfo,
-                youtubeBundleSummaries = youtubeBundleSummaries,
-                youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
-                redditBundleSummaries = redditBundleSummaries,
                 onInstalledAppClick = onInstalledAppClick,
                 installedAppsLoading = installedAppsLoading,
                 modifier = Modifier
@@ -519,9 +503,6 @@ fun HomeMainAppsSection(
     youtubePackageInfo: PackageInfo?,
     youtubeMusicPackageInfo: PackageInfo?,
     redditPackageInfo: PackageInfo?,
-    youtubeBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
-    youtubeMusicBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
-    redditBundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean = false,
     @SuppressLint("ModifierParameter")
@@ -563,7 +544,6 @@ fun HomeMainAppsSection(
                                 Color(0xFF1E5AA8),
                                 Color(0xFF00AFAE)
                             ),
-                            bundleSummaries = youtubeBundleSummaries,
                             onClick = { onInstalledAppClick(youtubeInstalledApp) }
                         )
                     } else {
@@ -604,7 +584,6 @@ fun HomeMainAppsSection(
                                 Color(0xFF1E5AA8),
                                 Color(0xFF00AFAE)
                             ),
-                            bundleSummaries = youtubeMusicBundleSummaries,
                             onClick = { onInstalledAppClick(youtubeMusicInstalledApp) }
                         )
                     } else {
@@ -645,7 +624,6 @@ fun HomeMainAppsSection(
                                 Color(0xFF1E5AA8),
                                 Color(0xFF00AFAE)
                             ),
-                            bundleSummaries = redditBundleSummaries,
                             onClick = { onInstalledAppClick(redditInstalledApp) }
                         )
                     } else {
@@ -743,7 +721,6 @@ fun HomeInstalledAppCard(
     installedApp: InstalledApp,
     packageInfo: PackageInfo?,
     gradientColors: List<Color>,
-    bundleSummaries: List<InstalledAppsViewModel.AppBundleSummary>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -795,25 +772,6 @@ fun HomeInstalledAppCard(
                         )
                     ),
                     color = textColor.copy(alpha = 0.85f)
-                )
-            }
-
-            // Show bundle summaries if available
-            bundleSummaries.forEach { summary ->
-                val version = summary.version?.let {
-                    if (it.startsWith("v")) it else "v$it"
-                }
-                Text(
-                    text = listOfNotNull(summary.title, version)
-                        .joinToString(" • "),
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        shadow = Shadow(
-                            color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 1f),
-                            blurRadius = 2f
-                        )
-                    ),
-                    color = textColor.copy(alpha = 0.7f)
                 )
             }
         }

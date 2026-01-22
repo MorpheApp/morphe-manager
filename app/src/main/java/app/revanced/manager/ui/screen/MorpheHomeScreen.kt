@@ -299,9 +299,6 @@ fun MorpheHomeScreen(
             youtubePackageInfo = youtubePackageInfo,
             youtubeMusicPackageInfo = youtubeMusicPackageInfo,
             redditPackageInfo = redditPackageInfo,
-            youtubeBundleSummaries = youtubeBundleSummaries,
-            youtubeMusicBundleSummaries = youtubeMusicBundleSummaries,
-            redditBundleSummaries = redditBundleSummaries,
             onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
             installedAppsLoading = homeViewModel.installedAppsLoading,
 
