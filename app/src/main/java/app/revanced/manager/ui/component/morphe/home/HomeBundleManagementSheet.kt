@@ -416,14 +416,16 @@ private fun BundleCardHeader(
             )
 
             // Version
-            bundle.version?.let { version ->
-                Text(
-                    text = version.removePrefix("v"),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+            if (showChevron) {
+                bundle.version?.let { version ->
+                    Text(
+                        text = version.removePrefix("v"),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
 
             Spacer(Modifier.height(2.dp))
