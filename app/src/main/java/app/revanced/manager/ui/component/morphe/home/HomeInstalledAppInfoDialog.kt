@@ -483,7 +483,7 @@ private fun ActionsSection(
             val installText = if (viewModel.isInstalledOnDevice) {
                 stringResource(R.string.reinstall)
             } else {
-                stringResource(R.string.install)
+                stringResource(R.string.install_app)
             }
             secondaryActions.add(
                 ActionItem(
@@ -518,9 +518,9 @@ private fun ActionsSection(
 
     if (viewModel.hasSavedCopy) {
         val deleteText = if (installedApp.installType == InstallType.SAVED) {
-            stringResource(R.string.delete)
+            stringResource(R.string.uninstall)
         } else {
-            stringResource(R.string.delete_saved_copy)
+            stringResource(R.string.delete)
         }
         destructiveActions.add(
             ActionItem(
@@ -592,41 +592,41 @@ private fun ActionButton(
     isPrimary: Boolean = false
 ) {
     val containerColor = when {
-        isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f)
-        isPrimary -> MaterialTheme.colorScheme.primary
+        isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
+        isPrimary -> MaterialTheme.colorScheme.primaryContainer
         !enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+        else -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f)
     }
 
     val contentColor = when {
         isDestructive -> MaterialTheme.colorScheme.error
-        isPrimary -> MaterialTheme.colorScheme.onPrimary
+        isPrimary -> MaterialTheme.colorScheme.onPrimaryContainer
         !enabled -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
-        else -> MaterialTheme.colorScheme.onSurfaceVariant
+        else -> MaterialTheme.colorScheme.onSecondaryContainer
     }
 
     Surface(
         onClick = onClick,
         enabled = enabled,
-        modifier = modifier.height(48.dp),
-        shape = RoundedCornerShape(12.dp),
+        modifier = modifier.height(52.dp),
+        shape = RoundedCornerShape(14.dp),
         color = containerColor,
         contentColor = contentColor
     ) {
         Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
                 text = text,
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
