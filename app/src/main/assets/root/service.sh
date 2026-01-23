@@ -1,7 +1,7 @@
 #!/system/bin/sh
 package_name="__PKG_NAME__"
 version="__VERSION__"
-base_dir="/data/adb/morphe/$package_name"
+base_dir="/data/adb/revanced/$package_name"
 log="$base_dir/log"
 base_path="$base_dir/$package_name.apk"
 
