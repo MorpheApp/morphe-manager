@@ -560,7 +560,7 @@ fun AdvancedSettingsScreen(
                     description = R.string.process_runtime_description,
                 )
                 ExpressiveSettingsDivider()
-                val recommendedProcessLimit = 700 //= remember { 700 } // Morphe
+                val recommendedProcessLimit = 500 //= remember { 700 } // Morphe
                 IntegerItem(
                     preference = viewModel.prefs.patcherProcessMemoryLimit,
                     coroutineScope = viewModel.viewModelScope,

@@ -45,7 +45,7 @@ class PreferencesManager(
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
     // Morphe default value has changed since release and
     // a different key is needed to ensure old saved data isn't used.
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", 700)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", 500)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE
