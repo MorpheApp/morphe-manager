@@ -1,3 +1,10 @@
+## app [1.3.2-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2-dev.2...v1.3.2-dev.3) (2026-01-23)
+
+
+### Bug Fixes
+
+* Update root mounting script directory ([3c3b7a7](https://github.com/MorpheApp/morphe-manager/commit/3c3b7a7fc2bf3d4b77a0c86d70b4e137ab91d917))
+
 ## app [1.3.2-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2-dev.1...v1.3.2-dev.2) (2026-01-23)
 
 
