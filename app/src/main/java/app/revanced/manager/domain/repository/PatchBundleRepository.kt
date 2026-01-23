@@ -401,7 +401,7 @@ class PatchBundleRepository(
         val info = loadMetadata(sources).toMutableMap()
 
         val officialSource = sources[0]
-        val officialDisplayName = "Morphe Patches"
+        val officialDisplayName = "Official Morphe Patches"
         if (officialSource != null) {
             val storedCustomName = prefs.officialBundleCustomDisplayName.get().takeIf { it.isNotBlank() }
             val currentName = officialSource.displayName
@@ -642,7 +642,7 @@ class PatchBundleRepository(
         val existingProps = dao.getProps(resolvedUid)
         val normalizedDisplayName = displayName?.takeUnless { it.isBlank() }
             ?: existingProps?.displayName?.takeUnless { it.isBlank() }
-            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Morphe Patches" else null
+            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Official Morphe Patches" else null
         val normalizedName = if (resolvedUid == DEFAULT_SOURCE_UID) {
             name
         } else {
