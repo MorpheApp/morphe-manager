@@ -14,6 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_LOW_WARNING
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_STEP
 import app.revanced.manager.ui.component.morphe.shared.*
 
 /**
@@ -28,10 +32,6 @@ fun ProcessRuntimeDialog(
 ) {
     var enabled by remember { mutableStateOf(currentEnabled) }
     var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
-    val minLimit = 512   // Min memory value
-    val maxLimit = 2048  // Max memory value
-    val lowWarning = 768 // Warning for low values
-    val steps = 64       // MB steps for slider
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -162,8 +162,9 @@ fun ProcessRuntimeDialog(
                     Slider(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
-                        valueRange = minLimit.toFloat()..maxLimit.toFloat(),
-                        steps = ((maxLimit - minLimit) / steps) - 1, // 64 MB steps
+                        valueRange = PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM.toFloat()..PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toFloat(),
+                        steps = (((PROCESS_RUNTIME_MEMORY_MAX_LIMIT.toDouble() - PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM)
+                                / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -173,12 +174,12 @@ fun ProcessRuntimeDialog(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "$minLimit MB",
+                            text = "$PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM MB",
                             style = MaterialTheme.typography.labelSmall,
                             color = LocalDialogSecondaryTextColor.current
                         )
                         Text(
-                            text = "$maxLimit MB",
+                            text = "$PROCESS_RUNTIME_MEMORY_MAX_LIMIT MB",
                             style = MaterialTheme.typography.labelSmall,
                             color = LocalDialogSecondaryTextColor.current
                         )
@@ -193,7 +194,7 @@ fun ProcessRuntimeDialog(
                 )
 
                 // Warning for low values
-                if (enabled && sliderValue < lowWarning) {
+                if (enabled && sliderValue < PROCESS_RUNTIME_MEMORY_LOW_WARNING) {
                     InfoBadge(
                         text = stringResource(R.string.morphe_memory_limit_warning),
                         style = InfoBadgeStyle.Error,

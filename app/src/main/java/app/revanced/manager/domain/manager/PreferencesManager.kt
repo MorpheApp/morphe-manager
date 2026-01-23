@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
@@ -43,9 +44,7 @@ class PreferencesManager(
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
-    // Morphe default value has changed since release and
-    // a different key is needed to ensure old saved data isn't used.
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", 500)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_DEFAULT)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE

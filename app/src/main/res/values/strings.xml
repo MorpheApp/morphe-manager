@@ -318,10 +318,10 @@ The image dimensions must be as follows:
     <string name="morphe_process_runtime">Process runtime</string>
     <string name="morphe_process_runtime_description">Run patching in separate process for better stability</string>
     <string name="morphe_process_runtime_memory_limit">Memory limit</string>
-    <string name="morphe_process_runtime_memory_limit_help">Adjust memory available for patching process. Lower values reduce memory usage but may cause failures for large apps.</string>
+    <string name="morphe_process_runtime_memory_limit_help">Higher memory limits can speed up patching but may not work with older devices</string>
     <string name="morphe_enable_process_runtime">Enable process runtime</string>
     <string name="morphe_memory_limit_subtitle">Memory available for patching</string>
-    <string name="morphe_memory_limit_warning">Low memory limit may cause patching failures</string>
+    <string name="morphe_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
     <string name="morphe_process_runtime_enabled_description">%d MB limit</string>
     <string name="morphe_process_runtime_disabled_description">Click to configure</string>
     <!-- About Section -->
