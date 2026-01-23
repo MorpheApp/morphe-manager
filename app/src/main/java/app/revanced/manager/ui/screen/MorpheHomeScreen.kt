@@ -317,7 +317,10 @@ fun MorpheHomeScreen(
 
             // Bottom action bar
             onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
-            onSettingsClick = onMorpheSettingsClick
+            onSettingsClick = onMorpheSettingsClick,
+
+            // Expert mode
+            isExpertModeEnabled = useExpertMode
         )
     }
 }

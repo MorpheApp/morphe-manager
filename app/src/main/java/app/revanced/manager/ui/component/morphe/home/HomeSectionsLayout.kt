@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.Engineering
 import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
@@ -76,7 +77,10 @@ fun HomeSectionsLayout(
 
     // Bottom action bar
     onBundlesClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+
+    // Expert mode
+    isExpertModeEnabled: Boolean = false
 ) {
     val windowSize = rememberWindowSize()
 
@@ -106,6 +110,7 @@ fun HomeSectionsLayout(
                 installedAppsLoading = installedAppsLoading,
                 onOtherAppsClick = onOtherAppsClick,
                 showOtherAppsButton = showOtherAppsButton,
+                isExpertModeEnabled = isExpertModeEnabled,
                 modifier = Modifier.weight(1f)
             )
 
@@ -161,6 +166,7 @@ private fun HomeAdaptiveContent(
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
     showOtherAppsButton: Boolean = true,
+    isExpertModeEnabled: Boolean = false,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -210,6 +216,7 @@ private fun HomeAdaptiveContent(
                     redditPackageInfo = redditPackageInfo,
                     onInstalledAppClick = onInstalledAppClick,
                     installedAppsLoading = installedAppsLoading,
+                    isExpertModeEnabled = isExpertModeEnabled,
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -251,6 +258,7 @@ private fun HomeAdaptiveContent(
                 redditPackageInfo = redditPackageInfo,
                 onInstalledAppClick = onInstalledAppClick,
                 installedAppsLoading = installedAppsLoading,
+                isExpertModeEnabled = isExpertModeEnabled,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -505,6 +513,7 @@ fun HomeMainAppsSection(
     redditPackageInfo: PackageInfo?,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean = false,
+    isExpertModeEnabled: Boolean = false,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -520,6 +529,20 @@ fun HomeMainAppsSection(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            if (isExpertModeEnabled) {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    InfoBadge(
+                        text = stringResource(R.string.morphe_settings_expert_mode),
+                        style = InfoBadgeStyle.Primary,
+                        icon = Icons.Outlined.Engineering,
+                        isCompact = true
+                    )
+                }
+            }
+
             // YouTube
             Crossfade(
                 targetState = installedAppsLoading,
