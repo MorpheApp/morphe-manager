@@ -1,3 +1,10 @@
+## app [1.3.2-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2-dev.1...v1.3.2-dev.2) (2026-01-23)
+
+
+### Bug Fixes
+
+* Reduce default patcher process memory to 500mb to solve patching errors for budget devices ([0a4cea3](https://github.com/MorpheApp/morphe-manager/commit/0a4cea36edb4904266d8e314cbdd5eb785606a28))
+
 ## app [1.3.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.1...v1.3.2-dev.1) (2026-01-23)
 
 
