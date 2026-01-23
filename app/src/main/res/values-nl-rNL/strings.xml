@@ -333,7 +333,7 @@ De afmetingen van de afbeeldingen moeten het volgende zijn:
     <string name="updates_description">Controleren op updates en wijzigingslogboek bekijken</string>
     <string name="downloads">Downloads</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Importeren &amp; exporteren</string>
+    <string name="import_export">Importeren en exporteren</string>
     <string name="import_export_description">Keystore, patchopties en selectie</string>
     <string name="changelog">Wijzigingslogboeken bekijken</string>
     <string name="changelog_loading">Changelog laden</string>
@@ -378,7 +378,7 @@ Wilt u toch doorgaan?"</string>
     <string name="patch_selection_safeguard_confirmation">"Het wijzigen van de selectie van patches kan onverwachte problemen veroorzaken.
 
 Toch inschakelen?"</string>
-    <string name="universal_patches_safeguard">Universele patches tonen &amp; toestaan</string>
+    <string name="universal_patches_safeguard">Universele patches tonen en toestaan</string>
     <string name="universal_patches_safeguard_description">Universele patches niet verbergen of het gebruik ervan voorkomen</string>
     <string name="universal_patches_profile_blocked_title">Universele patches uitgeschakeld</string>
     <string name="universal_patches_profile_blocked_description">Dit patchprofiel bevat universele patches. Schakel \"%1$s\" in de geavanceerde instellingen in om het te gebruiken.</string>
@@ -909,7 +909,7 @@ Details: %2$s"</string>
     <string name="patcher_step_group_preparing">Voorbereiden</string>
     <string name="patcher_step_load_patches">Patches laden</string>
     <string name="patcher_step_prepare_split_apk">Gesplitste APK samenvoegen</string>
-    <string name="patcher_step_unpack">\"APK-bestand\" lezen</string>
+    <string name="patcher_step_unpack">APK-bestand lezen</string>
     <string name="patcher_step_group_patching">Patchen</string>
     <string name="patcher_step_group_saving">Opslaan</string>
     <string name="patcher_step_write_patched">Gepatcht APK-bestand schrijven</string>

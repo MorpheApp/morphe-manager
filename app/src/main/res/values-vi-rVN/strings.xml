@@ -35,7 +35,7 @@
     <string name="morphe_home_date_updated">Đã cập nhật</string>
     <string name="morphe_home_check_updates">Kiểm tra</string>
     <string name="morphe_home_unknown">Không xác định</string>
-    <string name="morphe_home_timeline">Cập nhật lịch sử</string>
+    <string name="morphe_home_timeline">Lịch sử cập nhật</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Để vá %1$s, bạn cần phiên bản %2$s (chưa được vá)</string>
@@ -256,7 +256,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="patches_error">Lỗi</string>
     <string name="patches_error_description">Không thể tải bản vá. Ấn vào đây để xem chi tiết lỗi</string>
     <string name="patches_not_downloaded">Các bản vá chưa được tải xuống. Ấn vào đây để tải</string>
-    <string name="patches_name_default">Bản vá</string>
+    <string name="patches_name_default">Số bản vá</string>
     <string name="patches_name_fallback">Chưa có tên</string>
     <string name="bundle_uid">Mã định danh gói</string>
     <string name="patches_display_name">Tên hiển thị</string>

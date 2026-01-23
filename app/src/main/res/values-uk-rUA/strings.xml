@@ -560,11 +560,11 @@ morphe_header_custom_dark.png
     <string name="dialog_input_placeholder">Значення</string>
     <string name="reset">Скинути</string>
     <string name="share">Поділитися</string>
-    <string name="patch">Патч</string>
+    <string name="patch">Патчити</string>
     <string name="select_from_storage">Вибрати зі сховища</string>
     <string name="select_from_storage_description">Виберіть файл APK зі сховища за допомогою вибору файлу</string>
     <string name="type_anything">Введіть що-небудь, щоб продовжити</string>
-    <string name="search">Пошук виправлень…</string>
+    <string name="search">Пошук патчів…</string>
     <string name="apply">Застосувати</string>
     <string name="help">Довідка</string>
     <string name="back">Назад</string>
@@ -578,7 +578,7 @@ morphe_header_custom_dark.png
     <string name="black">Чорний</string>
     <string name="downloaded_apps">Завантажені застосунки</string>
     <string name="process_runtime">Запустити патчер в іншому процесі</string>
-    <string name="process_runtime_description">Прискорює патчування, використовуючи окремий процес</string>
+    <string name="process_runtime_description">Прискорює патчінг, використовуючи окремий процес</string>
     <string name="process_runtime_description_not_available">Ця функція вимагає Android 11 або вище</string>
     <string name="strip_unused_libs">Видалити невикористані нативні бібліотеки</string>
     <string name="strip_unused_libs_description">Видалення нативних бібліотек для непідтримуваних архітектур процесорів з патчених застосунків</string>
@@ -748,7 +748,7 @@ morphe_header_custom_dark.png
     <string name="installed">Встановлено</string>
     <string name="app_info">Інформація про застосунок</string>
     <string name="uninstall">Видалити</string>
-    <string name="repatch">Перепатчено</string>
+    <string name="repatch">Репатчити</string>
     <string name="install_type">Тип встановлення</string>
     <string name="package_name">Назва пакета</string>
     <string name="original_package_name">Оригінальна назва пакета</string>
@@ -907,12 +907,12 @@ morphe_header_custom_dark.png
     <string name="patcher_step_group_preparing">Підготовка</string>
     <string name="patcher_step_load_patches">Завантаження патчів</string>
     <string name="patcher_step_prepare_split_apk">Об\'єднати розділений APK</string>
-    <string name="patcher_step_unpack">Читати APK файл</string>
-    <string name="patcher_step_group_patching">Патчення</string>
+    <string name="patcher_step_unpack">Читання APK файлу</string>
+    <string name="patcher_step_group_patching">Патчінг</string>
     <string name="patcher_step_group_saving">Збереження</string>
     <string name="patcher_step_write_patched">Запис патченого APK файлу</string>
     <string name="patcher_step_sign_apk">Підпис патченого APK файлу</string>
-    <string name="patcher_notification_title">Патчення в процесі…</string>
+    <string name="patcher_notification_title">Патчінг в процесі…</string>
     <string name="patcher_notification_text">Натисніть, щоб повернутися до патчера</string>
     <string name="patcher_stop_confirm_title">Зупинити патчер</string>
     <string name="patcher_stop_confirm_description">Ви впевнені, що хочете зупинити процес патчення?</string>
