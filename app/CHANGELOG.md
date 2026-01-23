@@ -1,3 +1,10 @@
+## app [1.3.2-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.1...v1.3.2-dev.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* Handle remounting of patched app after rebooting ([b28cc9e](https://github.com/MorpheApp/morphe-manager/commit/b28cc9e77cc06f564be4bb39b26663cc5ac4a7da))
+
 ## app [1.3.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.0...v1.3.1) (2026-01-22)
 
 
