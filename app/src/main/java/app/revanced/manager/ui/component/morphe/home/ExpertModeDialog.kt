@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -471,7 +471,7 @@ private fun PatchCard(
                         )
                     ) {
                         Icon(
-                            imageVector = if (isEnabled) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                            imageVector = if (isEnabled) Icons.Filled.Remove else Icons.Filled.Add,
                             contentDescription = stringResource(
                                 if (isEnabled) R.string.disable
                                 else R.string.enable
