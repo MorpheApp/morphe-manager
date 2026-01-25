@@ -15,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
@@ -544,6 +545,7 @@ class HomeViewModel(
         return when (packageName) {
             PACKAGE_YOUTUBE -> app.getString(R.string.morphe_home_youtube)
             PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.morphe_home_youtube_music)
+            PACKAGE_REDDIT -> app.getString(R.string.morphe_home_reddit)
             else -> packageName
         }
     }
@@ -604,6 +606,18 @@ class HomeViewModel(
                         .flatMap { patch ->
                             patch.compatiblePackages
                                 ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC }
+                                ?.versions
+                                ?: emptyList()
+                        }
+                        .maxByOrNull { it }
+                        .orEmpty(),
+                    PACKAGE_REDDIT to it.patches
+                        .filter { patch ->
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_REDDIT } == true
+                        }
+                        .flatMap { patch ->
+                            patch.compatiblePackages
+                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_REDDIT }
                                 ?.versions
                                 ?: emptyList()
                         }

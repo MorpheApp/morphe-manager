@@ -3,7 +3,6 @@
     <string name="morphe_home_youtube" translatable="false">YouTube</string>
     <string name="morphe_home_youtube_music" translatable="false">YouTube Music</string>
     <string name="morphe_home_reddit" translatable="false">Reddit</string>
-    <string name="morphe_home_reddit_coming_soon">Reddit patching coming soon!</string>
     <string name="morphe_home_other_apps">Other apps</string>
     <string name="morphe_home">Home</string>
     <string name="morphe_home_not_patched_yet">Not patched yet</string>

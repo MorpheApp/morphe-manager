@@ -288,8 +288,14 @@ fun MorpheHomeScreen(
                 youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
             },
             onRedditClick = {
+                homeViewModel.handleAppClick(
+                    packageName = PACKAGE_REDDIT,
+                    availablePatches = availablePatches,
+                    bundleUpdateInProgress = false,
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = redditInstalledApp
+                )
                 redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-                    ?: context.toast(context.getString(R.string.morphe_home_reddit_coming_soon))
             },
 
             // Installed apps data
