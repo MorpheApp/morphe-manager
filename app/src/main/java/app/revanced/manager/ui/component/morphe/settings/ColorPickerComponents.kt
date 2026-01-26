@@ -118,8 +118,7 @@ fun ColorPickerDialog(
                         color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
                     )
                 },
-                isError = isHexError,
-                modifier = Modifier.fillMaxWidth()
+                isError = isHexError
             )
 
             // RGB Sliders

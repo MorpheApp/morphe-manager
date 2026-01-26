@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.component.morphe.shared
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -25,10 +26,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 
 // Constants
 private object MorpheDefaults {
@@ -37,7 +40,7 @@ private object MorpheDefaults {
     val SettingsCornerRadius = 14.dp
     val SectionCornerRadius = 18.dp
     val IconSize = 24.dp
-    val AnimationDuration = 300
+    const val ANIMATION_DURATION = 300
     val ContentPadding = 16.dp
     val ItemSpacing = 12.dp
 }
@@ -281,6 +284,7 @@ fun SettingsItem(
     title: String,
     description: String? = null,
     onClick: () -> Unit,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     showBorder: Boolean = false
 ) {
@@ -378,6 +382,7 @@ fun CardHeader(
     icon: ImageVector,
     title: String,
     description: String? = null,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
@@ -413,7 +418,7 @@ fun ExpandableSection(
 ) {
     val rotationAngle by animateFloatAsState(
         targetValue = if (expanded) 180f else 0f,
-        animationSpec = tween(MorpheDefaults.AnimationDuration),
+        animationSpec = tween(MorpheDefaults.ANIMATION_DURATION),
         label = "expand_rotation"
     )
 
@@ -431,7 +436,10 @@ fun ExpandableSection(
                 trailingContent = {
                     MorpheIcon(
                         icon = Icons.Outlined.ExpandMore,
-                        contentDescription = if (expanded) "Collapse" else "Expand",
+                        contentDescription = if (expanded)
+                            stringResource(R.string.collapse)
+                        else
+                            stringResource(R.string.expand),
                         modifier = Modifier.rotate(rotationAngle)
                     )
                 }
@@ -440,10 +448,10 @@ fun ExpandableSection(
             // Content
             AnimatedVisibility(
                 visible = expanded,
-                enter = expandVertically(tween(MorpheDefaults.AnimationDuration)) +
-                        fadeIn(tween(MorpheDefaults.AnimationDuration)),
-                exit = shrinkVertically(tween(MorpheDefaults.AnimationDuration)) +
-                        fadeOut(tween(MorpheDefaults.AnimationDuration))
+                enter = expandVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                        fadeIn(tween(MorpheDefaults.ANIMATION_DURATION)),
+                exit = shrinkVertically(tween(MorpheDefaults.ANIMATION_DURATION)) +
+                        fadeOut(tween(MorpheDefaults.ANIMATION_DURATION))
             ) {
                 Column(
                     modifier = Modifier
@@ -500,6 +508,7 @@ fun InfoBadge(
     icon: ImageVector? = null,
     isCompact: Boolean = false,
     isExpanded: Boolean = false,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
     val (containerColor, contentColor) = style.colors()
@@ -600,7 +609,6 @@ fun ActionPillButton(
 fun MorpheDialogTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,

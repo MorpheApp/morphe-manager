@@ -1065,8 +1065,7 @@ private fun DropdownOptionItem(
                 enabled = false,
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                },
-                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                }
             )
 
             ExposedDropdownMenu(

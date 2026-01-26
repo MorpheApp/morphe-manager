@@ -169,7 +169,6 @@ private fun RemoteTabContent(
             MorpheDialogTextField(
                 value = remoteUrl,
                 onValueChange = onUrlChange,
-                modifier = Modifier.fillMaxWidth(),
                 label = {
                     Text(stringResource(R.string.morphe_add_patch_source_remote))
                 },
@@ -305,7 +304,6 @@ fun MorpheRenameBundleDialog(
             MorpheDialogTextField(
                 value = textValue,
                 onValueChange = { textValue = it },
-                modifier = Modifier.fillMaxWidth(),
                 placeholder = {
                     Text(
                         text = stringResource(R.string.morphe_patch_option_enter_value),
@@ -355,118 +353,106 @@ fun HomeBundlePatchesDialog(
                 primaryText = stringResource(android.R.string.ok),
                 onPrimaryClick = onDismissRequest
             )
-        }
+        },
+        scrollable = false
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            // Header with icon and count
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+        if (isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 48.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
-                        modifier = Modifier.size(56.dp)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                imageVector = Icons.Outlined.Extension,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(28.dp)
-                            )
-                        }
-                    }
-
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = src.displayTitle,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = LocalDialogTextColor.current,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-
-                        if (!isLoading) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Widgets,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Text(
-                                    text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    fontWeight = FontWeight.Medium
-                                )
-                            }
-                        } else {
-                            Text(
-                                text = stringResource(R.string.loading),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                        }
-                    }
-                }
+                CircularProgressIndicator(
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(48.dp)
+                )
             }
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                // Header as first item
+                item {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(14.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Extension,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                }
+                            }
 
-            // Content
-            if (isLoading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 48.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
-            } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 500.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    items(patches) { patch ->
-                        var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
-                            mutableStateOf(false)
-                        }
-                        var expandOptions by rememberSaveable(src.uid, patch.name, "options") {
-                            mutableStateOf(false)
-                        }
+                            Column(
+                                modifier = Modifier.weight(1f),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = src.displayTitle,
+                                    style = MaterialTheme.typography.titleLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    color = LocalDialogTextColor.current,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
 
-                        PatchItemCard(
-                            patch = patch,
-                            expandVersions = expandVersions,
-                            onExpandVersions = { expandVersions = !expandVersions },
-                            expandOptions = expandOptions,
-                            onExpandOptions = { expandOptions = !expandOptions }
-                        )
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Widgets,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(16.dp)
+                                    )
+                                    Text(
+                                        text = "${patches.size} ${stringResource(R.string.patches).lowercase()}",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+                            }
+                        }
                     }
+                }
+
+                // Patches list
+                items(patches) { patch ->
+                    var expandVersions by rememberSaveable(src.uid, patch.name, "versions") {
+                        mutableStateOf(false)
+                    }
+                    var expandOptions by rememberSaveable(src.uid, patch.name, "options") {
+                        mutableStateOf(false)
+                    }
+
+                    PatchItemCard(
+                        patch = patch,
+                        expandVersions = expandVersions,
+                        onExpandVersions = { expandVersions = !expandVersions },
+                        expandOptions = expandOptions,
+                        onExpandOptions = { expandOptions = !expandOptions }
+                    )
                 }
             }
         }
@@ -528,7 +514,10 @@ private fun PatchItemCard(
                 if (!patch.options.isNullOrEmpty()) {
                     Icon(
                         imageVector = Icons.Outlined.ExpandMore,
-                        contentDescription = if (expandOptions) "Collapse" else "Expand",
+                        contentDescription = if (expandOptions)
+                            stringResource(R.string.collapse)
+                        else
+                            stringResource(R.string.expand),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .size(24.dp)
