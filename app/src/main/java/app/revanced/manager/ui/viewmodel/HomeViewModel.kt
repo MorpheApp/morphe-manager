@@ -270,7 +270,6 @@ class HomeViewModel(
         }
 
         startPatchingWithApp(selectedApp, allowIncompatible)
-        cleanupPendingData()
     }
 
     /**
@@ -352,7 +351,14 @@ class HomeViewModel(
                 options = options
             )
         )
-        cleanupPendingData()
+
+        // Clean only UI state
+        pendingPackageName = null
+        pendingAppName = null
+        pendingRecommendedVersion = null
+        resolvedDownloadUrl = null
+        showDownloadInstructionsDialog = false
+        showFilePickerPromptDialog = false
     }
 
     /**
