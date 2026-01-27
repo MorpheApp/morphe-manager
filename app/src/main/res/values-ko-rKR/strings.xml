@@ -47,7 +47,7 @@
     <string name="morphe_home_download_instructions_step1">아래 \'%1$s\' 버튼을 탭하세요</string>
     <string name="morphe_home_download_instructions_step2_part1">웹페이지를 아래로 스크롤 한 후에 이 버튼을 탭하세요</string>
     <string name="morphe_home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 탭하세요 😊</string>
-    <string name="morphe_home_download_instructions_step3">다운로드가 완료될 때까지 기다리세요, APK는 &lt;b&gt;설치하지 마세요&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step3">다운로드가 완료될 때까지 기다리세요&lt;br&gt;APK는 &lt;b&gt;설치하지 마세요&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step3_mount">다운로드가 완료되면, &lt;b&gt;APK 파일을 설치하세요&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">다운로드가 완료된 후에 이 앱으로 돌아오세요</string>
     <string name="morphe_home_download_instructions_step4_mount">원본 APK를 설치한 후에 이 앱으로 돌아오세요</string>
@@ -142,7 +142,7 @@
     <string name="morphe_appearance_search">검색</string>
     <string name="morphe_appearance_no_results">결과가 없습니다</string>
     <string name="morphe_appearance_translations_info_title">일부 언어의 번역이 누락되었거나 불완전할 수 있습니다</string>
-    <string name="morphe_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 \'%s\'를 방문하세요</string>
+    <string name="morphe_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
     <string name="morphe_background_type">배경 애니메이션</string>
     <string name="morphe_background_type_circles">원</string>
     <string name="morphe_background_type_rings">링</string>
@@ -742,7 +742,7 @@ morphe_header_custom_dark.png
     <string name="this_version">이 버전</string>
     <string name="universal">모든 앱</string>
     <string name="search_patches">패치 검색</string>
-    <string name="app_version_not_compatible">"이 패치는 선택한 앱 버전(%1$s)과 호환되지 않습니다.
+    <string name="app_version_not_compatible">"이 패치는 선택된 앱 버전(%1$s)과 호환되지 않습니다.
 
 다음 버전에서만 호환됩니다: %2$s."</string>
     <string name="failed_to_load_apk">APK를 불러올 수 없습니다</string>

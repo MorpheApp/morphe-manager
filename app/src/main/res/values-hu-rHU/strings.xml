@@ -12,7 +12,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="morphe_home_greeting_5">Akar reklámokat nézni? Én sem</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Tanítsuk meg az alkalmazásait viselkedni</string>
+    <string name="morphe_home_greeting_6">Szabályozzuk az alkalmazásai viselkedését</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">Mai előrejelzés: 100% esély a patchelésre</string>
     <!-- From mediocrity to amazing -->
@@ -567,7 +567,7 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="select_from_storage_description">Válasszon ki egy APK fájlt a tárhelyről a fájlválasztó segítségével</string>
     <string name="type_anything">Írjon be bármit a folytatáshoz</string>
     <string name="search">Patch keresése…</string>
-    <string name="apply">Alkalmazás</string>
+    <string name="apply">Alkalmaz</string>
     <string name="help">Súgó</string>
     <string name="back">Vissza</string>
     <string name="warning">Figyelmeztetés</string>
@@ -584,36 +584,36 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
     <string name="strip_unused_libs">Távolítsa el a nem használt natív könyvtárakat</string>
     <string name="strip_unused_libs_description">Törölje a nem támogatott CPU-architektúrákhoz tartozó natív könyvtárakat a patchelt alkalmazásokból</string>
-    <string name="process_runtime_memory_limit">A patchelés folyamatának memórialimite</string>
+    <string name="process_runtime_memory_limit">A patchelési folyamat memóriakorlátja</string>
     <string name="process_runtime_memory_limit_description">A patchelés folyamata által felhasználható memória maximális mennyisége (megabájtban)</string>
     <string name="reset_to_recommended">Visszaállítás az ajánlott értékekre</string>
     <string name="patcher_auto_collapse_steps">A kész patchlépések automatikus összecsukása</string>
-    <string name="patcher_auto_collapse_steps_description">Automatikus minden patcher folyamatjelző widget összecsukása, miután az összes lépése befejeződött</string>
-    <string name="patch_bundle_rename">Patch csomag átnevezése</string>
+    <string name="patcher_auto_collapse_steps_description">Minden patchfolyamatjelző widget automatikus összecsukása az összes lépésük befejezésekor</string>
+    <string name="patch_bundle_rename">Patchcsomag átnevezése</string>
     <string name="patch_profile_view_options">Beállítások megtekintése</string>
     <string name="patch_profile_patch_options_title">Beállítások ehhez: %1$s</string>
     <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
     <string name="app_exporting">Alkalmazás exportálása</string>
-    <string name="export_name_format">Export fájlnév formátum</string>
-    <string name="export_name_format_description">Testreszabhatja az exportált javított alkalmazások alapértelmezett fájlnevét</string>
-    <string name="export_name_format_dialog_title">Export fájlnév formátum</string>
-    <string name="export_name_format_dialog_supporting">Az alábbi helyőrzőket használhatja a fájlnév felépítéséhez. A .apk kiterjesztés automatikusan hozzáadódik, ha hiányzik.</string>
+    <string name="export_name_format">Fájlnévformátum exportálása</string>
+    <string name="export_name_format_description">Testreszabhatja az exportált patchelt alkalmazások alapértelmezett fájlnevét</string>
+    <string name="export_name_format_dialog_title">Fáljnévformátum exportálása</string>
+    <string name="export_name_format_dialog_supporting">Használja az alábbi helyőrzőket a fájlnév felépítéséhez. Az .apk kiterjesztés automatikusan hozzáadódik, ha hiányzik.</string>
     <string name="export_name_format_preview_label">Előnézet</string>
     <string name="export_name_format_variables">Változók</string>
     <string name="export_name_format_reset">Visszaállítás alapértékre</string>
-    <string name="export_name_format_error_blank">A fájlnév formátum nem lehet üres.</string>
+    <string name="export_name_format_error_blank">A fájlnévformátum nem lehet üres.</string>
     <string name="export_name_format_current">Jelenlegi minta: %1$s</string>
     <string name="export_name_format_insert">Beszúrás</string>
     <string name="export_name_variable_app_name">Alkalmazás neve</string>
-    <string name="export_name_variable_app_name_description">\"The displayed name of the app\" helyére lesz.</string>
+    <string name="export_name_variable_app_name_description">Az alkalmazás megjelenített nevére lesz cserélve.</string>
     <string name="export_name_variable_package_name">Csomag neve</string>
-    <string name="export_name_variable_package_name_description">\"%s\" helyére lesz a tested app csomagneve.</string>
-    <string name="export_name_variable_app_version">\"App version\"</string>
-    <string name="export_name_variable_app_version_description">\"%s\" helyére lesz a tested app verziója.</string>
-    <string name="export_name_variable_patches_version">\"Patches version\"</string>
-    <string name="export_name_variable_patches_version_description">\"%s\" helyére lesz a telepítésre használt patch-csomag verziója (akciókönyv) (1. alkalommal)</string>
-    <string name="export_name_variable_bundle_names">Általában használt verm-init-csomag nevek</string>
-    <string name="export_name_variable_bundle_names_description">\"%s\" helyére lesz az alkalmazott patch verzió csomag neve (akciókönyv) (1. alkalommal).</string>
+    <string name="export_name_variable_package_name_description">Az alkalmazás csomagnevére lesz cserélve.</string>
+    <string name="export_name_variable_app_version">Alkalmazásverzió</string>
+    <string name="export_name_variable_app_version_description">Az alkalmazásverzió nevére lesz cserélve.</string>
+    <string name="export_name_variable_patches_version">Patchek verziója</string>
+    <string name="export_name_variable_patches_version_description">Az alkalmazott patchcsomag(ok) verziójára lesz cserélve.</string>
+    <string name="export_name_variable_bundle_names">Patchcsomagok neve</string>
+    <string name="export_name_variable_bundle_names_description">Az alkalmazott patchcsomag(ok) nevére lesz cserélve.</string>
     <string name="export_name_variable_manager_version">Kezelő verziója</string>
     <string name="export_name_variable_manager_version_description">\"%s\" helyére lesz a rendered műveletkezelő verziója.</string>
     <string name="export_name_variable_timestamp">Időbélyeg</string>

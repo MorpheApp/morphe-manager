@@ -144,29 +144,113 @@
     <string name="morphe_appearance_translations_info_title">કેટલીક ભાષાઓ માટે અનુવાદો ખૂટતા અથવા અપૂર્ણ હોઈ શકે છે.</string>
     <string name="morphe_appearance_translations_info_text">નવી ભાષાઓનો અનુવાદ કરવા અથવા હાલના અનુવાદોને સુધારવા માટે, %s ની મુલાકાત લો.</string>
     <string name="morphe_background_type">બેકગ્રાઉન્ડ એનિમેશન</string>
+    <string name="morphe_background_type_circles">વર્તુળો </string>
     <string name="morphe_background_type_rings">રિંગ્સ</string>
     <string name="morphe_background_type_waves">તરંગ</string>
+    <string name="morphe_background_type_space">આકાશ</string>
+    <string name="morphe_background_type_shapes">આકારો</string>
     <string name="morphe_background_type_snow">બરફ</string>
     <string name="morphe_background_type_none">કોઈપણ નહિ </string>
     <!-- Advanced Section -->
+    <string name="morphe_update_use_prereleases">પૂર્વ પ્રકાશિત સંસ્કરણનો ઉપયોગ કરો</string>
+    <string name="morphe_update_use_prereleases_description">નવા પેચ અને મેનેજર ફીચર્સનો વહેલા અનુભવ મેળવો</string>
     <!-- Patch Options Section -->
+    <string name="morphe_patch_options">પેચ વિકલ્પો</string>
     <string name="morphe_patch_options_youtube_description">થીમ, બ્રાન્ડિંગ, હેડર, અને શોર્ટ્સ ઓપ્શન્સ</string>
+    <string name="morphe_patch_options_youtube_music_description">થીમ અને બ્રાન્ડિંગ વિકલ્પો</string>
+    <string name="morphe_patch_options_restart_message">પેચ વિકલ્પો બદલવાથી નવા પ્રભાવો મેળવવા માટે એપ્લિકેશનને ફરીથી પેચ કરવાની જરૂર છે</string>
     <!-- Theme Colors -->
     <string name="morphe_patch_options_theme_colors">એપ્લિકેશન થીમ રંગો</string>
+    <string name="morphe_patch_options_theme_colors_description">પૃષ્ઠભૂમિ રંગ બદલો</string>
+    <string name="morphe_patch_options_dark_theme_color">ડાર્ક થીમ પૃષ્ઠભૂમિ રંગ</string>
+    <string name="morphe_patch_options_dark_theme_color_description">હેક્સ રંગ (#RRGGBB) અથવા રંગ સંસાધન સંદર્ભ હોઈ શકે છે</string>
     <string name="morphe_patch_options_light_theme_color">લાઇટ થીમ બેકગ્રાઉન્ડ રંગ</string>
+    <string name="morphe_patch_options_light_theme_color_description">હેક્સ રંગ (#RRGGBB) અથવા રંગ સંસાધન સંદર્ભ હોઈ શકે છે</string>
+    <string name="morphe_patch_options_icon_instructions_title">આયકન ફોર્મેટ સૂચનાઓ</string>
+    <string name="morphe_patch_options_header_instructions_title">હેડર ફોર્મેટ સૂચનાઓ</string>
+    <string name="morphe_patch_options_loading">પેચ વિકલ્પો લોડ કરી રહ્યું છે…</string>
+    <string name="morphe_patch_options_waiting_for_bundle">પેચ બંડલ અપડેટ થાય ત્યાં સુધી રાહ જુઓ</string>
+    <string name="morphe_patch_options_load_error">પેચ વિકલ્પો લોડ કરવામાં નિષ્ફળ થયાં</string>
+    <string name="morphe_patch_options_no_available">આ પેચ માટે કોઈ વિકલ્પો ઉપલબ્ધ નથી.</string>
     <!-- Color Picker -->
     <string name="morphe_custom_color">કસ્ટમ રંગ</string>
     <string name="morphe_hex_color">હેક્સ રંગ</string>
     <!-- Custom Branding -->
     <string name="morphe_patch_options_custom_branding">કસ્ટમ બ્રાન્ડિંગ</string>
+    <string name="morphe_patch_options_custom_branding_description">એપ્લિકેશનનું ડિસ્પ્લે નામ બદલો</string>
     <string name="morphe_patch_options_custom_branding_app_name">ઍપ્લિકેશનનું નામ</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">તમારી પસંદનું નામ દાખલ કરો</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">કસ્ટમ આઇકોન</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"તમારી પસંદના આઇકન તરીકે ઉપયોગ કરવા માટે છબીઓ સાથેનું ફોલ્ડર.
+
+ઉપકરણના DPI પર આધાર રાખીને, ફોલ્ડરમાં નીચેનામાંથી એક અથવા વધુ ફોલ્ડર્સ હોવા આવશ્યક છે:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+દરેક ફોલ્ડરમાં નીચેની બધી ફાઇલો હોવી આવશ્યક છે:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+છબીના પરિમાણો નીચે મુજબ હોવા જોઈએ:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+વૈકલ્પિક રીતે, પાથમાં કોઈપણ મોનોક્રોમ આઇકોન ફાઇલો સાથે 'ડ્રોએબલ' ફોલ્ડર હોય છે  :
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
     <!-- Custom Header (YouTube) -->
     <string name="morphe_patch_options_custom_header">કસ્ટમ હેડર લોગો</string>
+    <string name="morphe_patch_options_custom_header_description">હેડર લોગો બદલો</string>
+    <string name="morphe_patch_options_custom_header_instruction">"કસ્ટમ હેડર લોગો તરીકે ઉપયોગ કરવા માટે છબીઓ સાથેનું ફોલ્ડર.
+
+ઉપકરણના DPI પર આધાર રાખીને, ફોલ્ડરમાં નીચેનામાંથી એક અથવા વધુ ફોલ્ડર્સ હોવા આવશ્યક છે:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+દરેક ફોલ્ડરમાં નીચેની બધી ફાઇલો હોવી આવશ્યક છે:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+છબીના પરિમાણો નીચે મુજબ હોવા જોઈએ:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px
+
+"</string>
     <!-- Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">શોર્ટ્સ ફીચર્સ છુપાવો</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">શોર્ટ્સનો ઍપ શોર્ટકટ છુપાવો</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">લૉન્ચરમાં લાંબા સમય સુધી દબાવી રાખવાના મેનૂમાંથી શોર્ટ્સ દૂર કરો</string>
+    <string name="morphe_patch_options_hide_shorts_widget">શોર્ટ્સ વિજેટ છુપાવો</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">લોન્ચર વિજેટમાંથી શોર્ટ્સ બટન દૂર કરો</string>
     <!-- Other strings -->
+    <string name="patcher">પેચર</string>
+    <string name="patches">પેચો</string>
+    <string name="patch_bundles">પેચ બંડલો </string>
+    <string name="patch_bundle">પેચ બંડલ</string>
     <!-- Morphe -->
+    <string name="installer">ઇન્સ્ટૉલર</string>
+    <string name="plugin_host_permission_label">મોર્ફે પ્લગઇન હોસ્ટ</string>
+    <string name="plugin_host_permission_description">મોર્ફે પ્લગિન્સને મેળવવાનું નિયંત્રિત કરવા માટે વપરાય છે. ફક્ત મોર્ફે પાસે જ આ છે.</string>
+    <string name="toast_copied_to_clipboard">નકલ કરી!</string>
+    <string name="copy_to_clipboard">ક્લિપબોર્ડ પર નકલ કરો</string>
+    <string name="settings">સેટિંગ્સ</string>
+    <string name="select_app">એક એપ્લિકેશન પસંદ કરો</string>
+    <string name="app_filter_title">એપ્લિકેશનો ફિલ્ટર કરો</string>
+    <string name="app_filter_installed_only">ફક્ત ઇન્સ્ટોલ કરેલ</string>
+    <string name="app_filter_patches_available">પેચો ઉપલબ્ધ છે</string>
+    <string name="app_filter_no_results">કોઈ એપ્લિકેશન તમારા ફિલ્ટર્સ સાથે મેળ ખાતી નથી.</string>
+    <string name="new_downloader_plugins_notification">નવા ડાઉનલોડર પ્લગઇન્સ ઉપલબ્ધ છે. તેમને ગોઠવવા માટે અહીં ક્લિક કરો.</string>
+    <string name="unsupported_architecture_warning">આ ઉપકરણ આર્કિટેક્ચર પર પેચિંગ અસમર્થિત છે અને મોટા ભાગે નિષ્ફળ જશે.</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
     <!-- Morphe -->
     <!-- Morphe -->
