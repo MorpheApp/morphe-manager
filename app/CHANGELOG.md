@@ -1,3 +1,10 @@
+# app [1.4.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0-dev.1) (2026-01-27)
+
+
+### Features
+
+* Add Expert mode ([#107](https://github.com/MorpheApp/morphe-manager/issues/107)) ([9273b41](https://github.com/MorpheApp/morphe-manager/commit/9273b415546c4561520ccb73b4cc48a73c449a4e))
+
 ## app [1.3.2](https://github.com/MorpheApp/morphe-manager/compare/v1.3.1...v1.3.2) (2026-01-23)
 
 
