@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.List
@@ -64,6 +62,7 @@ fun InstalledAppInfoDialog(
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
+    val isLoading = viewModel.isLoading
 
     // Dialog states
     var showUninstallConfirm by remember { mutableStateOf(false) }
@@ -219,7 +218,7 @@ fun InstalledAppInfoDialog(
         dismissOnClickOutside = true,
         footer = null
     ) {
-        if (installedApp == null) {
+        if (isLoading || installedApp == null) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -272,11 +271,7 @@ fun InstalledAppInfoDialog(
                 )
 
                 // Warning for missing original APK
-                AnimatedVisibility(
-                    visible = !viewModel.hasOriginalApk,
-                    enter = fadeIn() + expandVertically(),
-                    exit = fadeOut() + shrinkVertically()
-                ) {
+                if (!viewModel.hasOriginalApk) {
                     InfoBadge(
                         text = stringResource(R.string.morphe_repatch_requires_original),
                         style = InfoBadgeStyle.Warning,

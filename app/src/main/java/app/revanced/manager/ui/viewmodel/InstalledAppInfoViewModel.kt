@@ -1,11 +1,7 @@
 package app.revanced.manager.ui.viewmodel
 
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
@@ -30,39 +26,18 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.InstalledAppRepository
-import app.revanced.manager.domain.repository.OriginalApkRepository
-import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.domain.repository.remapAndExtractSelection
-import app.revanced.manager.domain.repository.toSignatureMap
+import app.revanced.manager.domain.repository.*
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.service.UninstallService
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.simpleMessage
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
-import app.revanced.manager.util.toastHandle
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import app.revanced.manager.util.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.stateIn
-import java.io.File
-import java.io.IOException
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.File
+import java.io.IOException
 
 class InstalledAppInfoViewModel(
     packageName: String
@@ -133,6 +108,8 @@ class InstalledAppInfoViewModel(
         private set
     var repatchOptions by mutableStateOf<Options>(emptyMap())
         private set
+    var isLoading by mutableStateOf(true)
+        private set
 
     val primaryInstallerIsMount: Boolean
         get() = installerManager.getPrimaryToken() == InstallerManager.Token.AutoSaved
@@ -141,14 +118,25 @@ class InstalledAppInfoViewModel(
 
     init {
         viewModelScope.launch {
+            // Load all data before marking as ready
             val app = installedAppRepository.get(packageName)
             installedApp = app
             if (app != null) {
-                isMounted = rootInstaller.isAppMounted(app.currentPackageName)
-                refreshAppState(app)
-                appliedPatches = resolveAppliedSelection(app)
-                hasOriginalApk = originalApkRepository.get(app.originalPackageName) != null
+                // Run all checks in parallel
+                val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
+                val deferredAppState = async { refreshAppState(app) }
+                val deferredPatches = async { resolveAppliedSelection(app) }
+
+                // Wait for all to complete
+                isMounted = deferredMounted.await()
+                hasOriginalApk = deferredOriginalApk.await()
+                deferredAppState.await()
+                appliedPatches = deferredPatches.await()
             }
+
+            // Mark as loaded
+            isLoading = false
         }
     }
 
@@ -562,6 +550,7 @@ class InstalledAppInfoViewModel(
         }
 
         try {
+            @Suppress("DEPRECATION")
             ContextCompat.startActivity(context, plan.intent, null)
             context.toast(context.getString(R.string.installer_external_launched, plan.installerLabel))
         } catch (error: ActivityNotFoundException) {
@@ -628,7 +617,7 @@ class InstalledAppInfoViewModel(
         val flags = PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
         @Suppress("DEPRECATION")
         val pkgInfo = context.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
-
+        @Suppress("DEPRECATION")
         val signature: Signature? =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 pkgInfo.signingInfo?.apkContentsSigners?.firstOrNull()
