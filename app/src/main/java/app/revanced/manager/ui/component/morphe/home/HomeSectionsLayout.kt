@@ -15,6 +15,11 @@ import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.component.AppIcon
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.BundleUpdateStatus
+import kotlinx.coroutines.delay
 
 /**
  * Home screen layout with 5 sections and adaptive landscape support:
@@ -517,6 +523,20 @@ fun HomeMainAppsSection(
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
+    // Stable loading state with debounce to prevent flickering
+    var stableLoadingState by remember { mutableStateOf(installedAppsLoading) }
+
+    LaunchedEffect(installedAppsLoading) {
+        if (installedAppsLoading) {
+            // Immediately show loading
+            stableLoadingState = true
+        } else {
+            // Add delay before hiding loading to ensure data is ready
+            delay(300)
+            stableLoadingState = false
+        }
+    }
+
     Box(
         modifier = modifier,
         contentAlignment = Alignment.TopCenter
@@ -544,123 +564,87 @@ fun HomeMainAppsSection(
             }
 
             // YouTube
-            Crossfade(
-                targetState = installedAppsLoading,
-                animationSpec = tween(300),
-                label = "youtube_crossfade"
-            ) { isLoading ->
-                if (isLoading) {
-                    HomeAppLoadingCard(
-                        gradientColors = listOf(
-                            Color(0xFFFF0033),
-                            Color(0xFF1E5AA8),
-                            Color(0xFF00AFAE)
-                        )
-                    )
-                } else {
-                    if (youtubeInstalledApp != null) {
-                        HomeInstalledAppCard(
-                            installedApp = youtubeInstalledApp,
-                            packageInfo = youtubePackageInfo,
-                            gradientColors = listOf(
-                                Color(0xFFFF0033),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = { onInstalledAppClick(youtubeInstalledApp) }
-                        )
-                    } else {
-                        HomeAppButton(
-                            text = stringResource(R.string.morphe_home_youtube),
-                            gradientColors = listOf(
-                                Color(0xFFFF0033),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = onYouTubeClick
-                        )
-                    }
-                }
-            }
+            AppCardWithLoading(
+                isLoading = stableLoadingState,
+                installedApp = youtubeInstalledApp,
+                packageInfo = youtubePackageInfo,
+                gradientColors = listOf(
+                    Color(0xFFFF0033),
+                    Color(0xFF1E5AA8),
+                    Color(0xFF00AFAE)
+                ),
+                buttonText = stringResource(R.string.morphe_home_youtube),
+                onInstalledAppClick = onInstalledAppClick,
+                onButtonClick = onYouTubeClick
+            )
 
             // YouTube Music
-            Crossfade(
-                targetState = installedAppsLoading,
-                animationSpec = tween(300),
-                label = "youtube_music_crossfade"
-            ) { isLoading ->
-                if (isLoading) {
-                    HomeAppLoadingCard(
-                        gradientColors = listOf(
-                            Color(0xFFFF8C3E),
-                            Color(0xFF1E5AA8),
-                            Color(0xFF00AFAE)
-                        )
-                    )
-                } else {
-                    if (youtubeMusicInstalledApp != null) {
-                        HomeInstalledAppCard(
-                            installedApp = youtubeMusicInstalledApp,
-                            packageInfo = youtubeMusicPackageInfo,
-                            gradientColors = listOf(
-                                Color(0xFFFF8C3E),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = { onInstalledAppClick(youtubeMusicInstalledApp) }
-                        )
-                    } else {
-                        HomeAppButton(
-                            text = stringResource(R.string.morphe_home_youtube_music),
-                            gradientColors = listOf(
-                                Color(0xFFFF8C3E),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = onYouTubeMusicClick
-                        )
-                    }
-                }
-            }
+            AppCardWithLoading(
+                isLoading = stableLoadingState,
+                installedApp = youtubeMusicInstalledApp,
+                packageInfo = youtubeMusicPackageInfo,
+                gradientColors = listOf(
+                    Color(0xFFFF8C3E),
+                    Color(0xFF1E5AA8),
+                    Color(0xFF00AFAE)
+                ),
+                buttonText = stringResource(R.string.morphe_home_youtube_music),
+                onInstalledAppClick = onInstalledAppClick,
+                onButtonClick = onYouTubeMusicClick
+            )
 
             // Reddit
-            Crossfade(
-                targetState = installedAppsLoading,
-                animationSpec = tween(300),
-                label = "reddit_crossfade"
-            ) { isLoading ->
-                if (isLoading) {
-                    HomeAppLoadingCard(
-                        gradientColors = listOf(
-                            Color(0xFFFF4500),
-                            Color(0xFF1E5AA8),
-                            Color(0xFF00AFAE)
-                        )
-                    )
-                } else {
-                    if (redditInstalledApp != null) {
-                        HomeInstalledAppCard(
-                            installedApp = redditInstalledApp,
-                            packageInfo = redditPackageInfo,
-                            gradientColors = listOf(
-                                Color(0xFFFF4500),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = { onInstalledAppClick(redditInstalledApp) }
-                        )
-                    } else {
-                        HomeAppButton(
-                            text = stringResource(R.string.morphe_home_reddit),
-                            gradientColors = listOf(
-                                Color(0xFFFF4500),
-                                Color(0xFF1E5AA8),
-                                Color(0xFF00AFAE)
-                            ),
-                            onClick = onRedditClick
-                        )
-                    }
-                }
+            AppCardWithLoading(
+                isLoading = stableLoadingState,
+                installedApp = redditInstalledApp,
+                packageInfo = redditPackageInfo,
+                gradientColors = listOf(
+                    Color(0xFFFF4500),
+                    Color(0xFF1E5AA8),
+                    Color(0xFF00AFAE)
+                ),
+                buttonText = stringResource(R.string.morphe_home_reddit),
+                onInstalledAppClick = onInstalledAppClick,
+                onButtonClick = onRedditClick
+            )
+        }
+    }
+}
+
+/**
+ * App card component with loading state
+ */
+@Composable
+private fun AppCardWithLoading(
+    isLoading: Boolean,
+    installedApp: InstalledApp?,
+    packageInfo: PackageInfo?,
+    gradientColors: List<Color>,
+    buttonText: String,
+    onInstalledAppClick: (InstalledApp) -> Unit,
+    onButtonClick: () -> Unit
+) {
+    Crossfade(
+        targetState = isLoading,
+        animationSpec = tween(300),
+        label = "app_card_crossfade"
+    ) { loading ->
+        if (loading) {
+            HomeAppLoadingCard(gradientColors = gradientColors)
+        } else {
+            if (installedApp != null) {
+                HomeInstalledAppCard(
+                    installedApp = installedApp,
+                    packageInfo = packageInfo,
+                    gradientColors = gradientColors,
+                    onClick = { onInstalledAppClick(installedApp) }
+                )
+            } else {
+                HomeAppButton(
+                    text = buttonText,
+                    gradientColors = gradientColors,
+                    onClick = onButtonClick
+                )
             }
         }
     }
