@@ -1,11 +1,7 @@
 package app.revanced.manager.ui.viewmodel
 
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
@@ -15,6 +11,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -28,32 +25,19 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
-import app.revanced.manager.domain.repository.InstalledAppRepository
-import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.domain.repository.remapAndExtractSelection
-import app.revanced.manager.domain.repository.toSignatureMap
+import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.*
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.service.UninstallService
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.simpleMessage
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
-import app.revanced.manager.util.toastHandle
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import app.revanced.manager.util.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.flow.first
-import java.io.File
-import java.io.IOException
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.File
+import java.io.IOException
 
 class InstalledAppInfoViewModel(
     packageName: String
@@ -67,6 +51,9 @@ class InstalledAppInfoViewModel(
     val rootInstaller: RootInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val shizukuInstaller: ShizukuInstaller by inject()
+    private val originalApkRepository: OriginalApkRepository by inject()
+    private val patchOptionsRepository: PatchOptionsRepository by inject()
+    private val prefs: PreferencesManager by inject()
     private val filesystem: Filesystem by inject()
     private var launchedActivity: CompletableDeferred<ActivityResult>? = null
     private val launchActivityChannel = Channel<Intent>()
@@ -111,6 +98,18 @@ class InstalledAppInfoViewModel(
         private set
     var signatureMismatchPackage by mutableStateOf<String?>(null)
         private set
+    var hasOriginalApk by mutableStateOf(false)
+        private set
+    var showRepatchDialog by mutableStateOf(false)
+        private set
+    var repatchBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
+        private set
+    var repatchPatches by mutableStateOf<PatchSelection>(emptyMap())
+        private set
+    var repatchOptions by mutableStateOf<Options>(emptyMap())
+        private set
+    var isLoading by mutableStateOf(true)
+        private set
 
     val primaryInstallerIsMount: Boolean
         get() = installerManager.getPrimaryToken() == InstallerManager.Token.AutoSaved
@@ -119,13 +118,25 @@ class InstalledAppInfoViewModel(
 
     init {
         viewModelScope.launch {
+            // Load all data before marking as ready
             val app = installedAppRepository.get(packageName)
             installedApp = app
             if (app != null) {
-                isMounted = rootInstaller.isAppMounted(app.currentPackageName)
-                refreshAppState(app)
-                appliedPatches = resolveAppliedSelection(app)
+                // Run all checks in parallel
+                val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
+                val deferredAppState = async { refreshAppState(app) }
+                val deferredPatches = async { resolveAppliedSelection(app) }
+
+                // Wait for all to complete
+                isMounted = deferredMounted.await()
+                hasOriginalApk = deferredOriginalApk.await()
+                deferredAppState.await()
+                appliedPatches = deferredPatches.await()
             }
+
+            // Mark as loaded
+            isLoading = false
         }
     }
 
@@ -539,6 +550,7 @@ class InstalledAppInfoViewModel(
         }
 
         try {
+            @Suppress("DEPRECATION")
             ContextCompat.startActivity(context, plan.intent, null)
             context.toast(context.getString(R.string.installer_external_launched, plan.installerLabel))
         } catch (error: ActivityNotFoundException) {
@@ -575,7 +587,8 @@ class InstalledAppInfoViewModel(
     private fun tryHandleExternalInstallSuccess(plan: InstallerManager.InstallPlan.External): Boolean {
         val info = pm.getPackageInfo(plan.expectedPackage)
         val baseline = externalInstallBaseline
-        val updatedSinceStart = info?.let { isUpdatedSinceBaseline(it, baseline, externalInstallStartTime) } ?: false
+        val updatedSinceStart =
+            info?.let { isUpdatedSinceBaseline(it, baseline, externalInstallStartTime) } == true
         val signatureChangedToExpected =
             shouldTreatAsInstalledBySignature(plan.expectedPackage, externalPackageWasPresentAtStart)
         if (info != null && (updatedSinceStart || signatureChangedToExpected)) {
@@ -598,12 +611,13 @@ class InstalledAppInfoViewModel(
         pm.getSignature(packageName).toByteArray()
     }.getOrNull()
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun readArchiveSignatureBytes(file: File): ByteArray? = runCatching {
         @Suppress("DEPRECATION")
         val flags = PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
         @Suppress("DEPRECATION")
         val pkgInfo = context.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
-
+        @Suppress("DEPRECATION")
         val signature: Signature? =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 pkgInfo.signingInfo?.apkContentsSigners?.firstOrNull()
@@ -666,7 +680,7 @@ class InstalledAppInfoViewModel(
                 val info = pm.getPackageInfo(plan.expectedPackage)
                 val updatedSinceStart = info?.let {
                     isUpdatedSinceBaseline(it, baseline, startTime)
-                } ?: false
+                } == true
                 val signatureChangedToExpected =
                     shouldTreatAsInstalledBySignature(plan.expectedPackage, externalPackageWasPresentAtStart)
 
@@ -706,7 +720,7 @@ class InstalledAppInfoViewModel(
 
         when (plan.target) {
             InstallerManager.InstallTarget.SAVED_APP -> {
-                val app = installedApp ?: return
+                installedApp ?: return
                 val installType = if (plan.token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
                 viewModelScope.launch {
                     persistInstallMetadata(installType)
@@ -936,6 +950,190 @@ class InstalledAppInfoViewModel(
         }
     }
 
+    val exportFormat: StateFlow<String> = prefs.patchedAppExportFormat.flow
+        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.patchedAppExportFormat.getBlocking())
+
+    val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
+        .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
+
+    /**
+     * Start repatch flow - Expert Mode or Simple Mode
+     */
+    fun startRepatch(
+        onStartPatch: (String, File, PatchSelection, Options) -> Unit
+    ) = viewModelScope.launch {
+        val app = installedApp ?: return@launch
+
+        // Check if original APK exists
+        val originalApk = originalApkRepository.get(app.originalPackageName)
+        if (originalApk == null) {
+            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            return@launch
+        }
+
+        // Check if file exists - filePath is String, need to convert to File
+        val originalFile = File(originalApk.filePath)
+        if (!originalFile.exists()) {
+            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            return@launch
+        }
+
+        // Get current patches and options
+        val patches = appliedPatches ?: resolveAppliedSelection(app)
+
+        // Always load options from repository. Options are stored separately via
+        // patchOptionsRepository.saveOptions() during patching.
+        val options = patchOptionsRepository.getOptions(
+            app.originalPackageName,
+            patchBundleRepository.bundleInfoFlow.first().mapValues { (_, info) ->
+                info.patches.associateBy { it.name }
+            }
+        )
+
+        // Check if Expert Mode is enabled
+        val useExpertMode = prefs.useExpertMode.getBlocking()
+
+        if (useExpertMode) {
+            // Expert Mode: Show dialog for patch selection
+            repatchBundles = patchBundleRepository
+                .scopedBundleInfoFlow(app.originalPackageName, originalApk.version)
+                .first()
+
+            repatchPatches = patches.toMutableMap()
+            repatchOptions = options.toMutableMap()
+            showRepatchDialog = true
+        } else {
+            // Simple Mode: Start patching immediately with original APK file
+            originalApkRepository.markUsed(app.originalPackageName)
+            onStartPatch(app.originalPackageName, originalFile, patches, options)
+        }
+    }
+
+    /**
+     * Proceed with repatch after Expert Mode dialog
+     */
+    fun proceedWithRepatch(
+        patches: PatchSelection,
+        options: Options,
+        onStartPatch: (String, File, PatchSelection, Options) -> Unit
+    ) = viewModelScope.launch {
+        val app = installedApp ?: return@launch
+
+        // Get original APK file
+        val originalApk = originalApkRepository.get(app.originalPackageName)
+        if (originalApk == null) {
+            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            return@launch
+        }
+
+        val originalFile = File(originalApk.filePath)
+        if (!originalFile.exists()) {
+            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            return@launch
+        }
+
+        // Update last used timestamp
+        originalApkRepository.markUsed(app.originalPackageName)
+
+        // Save updated options
+        patchOptionsRepository.saveOptions(app.originalPackageName, options)
+
+        // Start patching with original APK file
+        onStartPatch(app.originalPackageName, originalFile, patches, options)
+
+        // Close dialog
+        showRepatchDialog = false
+        cleanupRepatchDialog()
+    }
+
+    /**
+     * Close repatch dialog
+     */
+    fun dismissRepatchDialog() {
+        showRepatchDialog = false
+        cleanupRepatchDialog()
+    }
+
+    private fun cleanupRepatchDialog() {
+        repatchBundles = emptyList()
+        repatchPatches = emptyMap()
+        repatchOptions = emptyMap()
+    }
+
+    /**
+     * Toggle patch in repatch dialog
+     */
+    fun toggleRepatchPatch(bundleUid: Int, patchName: String) {
+        val currentPatches = repatchPatches.toMutableMap()
+        val bundlePatches = currentPatches[bundleUid]?.toMutableSet() ?: return
+
+        if (patchName in bundlePatches) {
+            bundlePatches.remove(patchName)
+        } else {
+            bundlePatches.add(patchName)
+        }
+
+        if (bundlePatches.isEmpty()) {
+            currentPatches.remove(bundleUid)
+        } else {
+            currentPatches[bundleUid] = bundlePatches
+        }
+
+        repatchPatches = currentPatches
+    }
+
+    /**
+     * Update option in repatch dialog
+     */
+    fun updateRepatchOption(
+        bundleUid: Int,
+        patchName: String,
+        optionKey: String,
+        value: Any?
+    ) {
+        val currentOptions = repatchOptions.toMutableMap()
+        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
+        val patchOptions = bundleOptions[patchName]?.toMutableMap() ?: mutableMapOf()
+
+        if (value == null) {
+            patchOptions.remove(optionKey)
+        } else {
+            patchOptions[optionKey] = value
+        }
+
+        if (patchOptions.isEmpty()) {
+            bundleOptions.remove(patchName)
+        } else {
+            bundleOptions[patchName] = patchOptions
+        }
+
+        if (bundleOptions.isEmpty()) {
+            currentOptions.remove(bundleUid)
+        } else {
+            currentOptions[bundleUid] = bundleOptions
+        }
+
+        repatchOptions = currentOptions
+    }
+
+    /**
+     * Reset options for patch in repatch dialog
+     */
+    fun resetRepatchOptions(bundleUid: Int, patchName: String) {
+        val currentOptions = repatchOptions.toMutableMap()
+        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: return
+
+        bundleOptions.remove(patchName)
+
+        if (bundleOptions.isEmpty()) {
+            currentOptions.remove(bundleUid)
+        } else {
+            currentOptions[bundleUid] = bundleOptions
+        }
+
+        repatchOptions = currentOptions
+    }
+
     private val installBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -963,8 +1161,8 @@ class InstalledAppInfoViewModel(
                 }
 
                 Intent.ACTION_PACKAGE_REMOVED -> {
-                    if (intent?.getBooleanExtra(Intent.EXTRA_REPLACING, false) == true) return
-                    val pkg = intent?.data?.schemeSpecificPart ?: return
+                    if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false) == true) return
+                    val pkg = intent.data?.schemeSpecificPart ?: return
                     val currentApp = installedApp ?: return
                     if (pkg != currentApp.currentPackageName) return
                     viewModelScope.launch {

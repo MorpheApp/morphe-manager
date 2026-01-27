@@ -38,7 +38,8 @@ val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha 
  * @param titleTrailingContent Optional content displayed after the title (e.g., reset button)
  * @param footer Optional footer content (typically buttons)
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
- * @param content Scrollable dialog content
+ * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
+ * @param content Dialog content
  */
 @Composable
 fun MorpheDialog(
@@ -47,7 +48,8 @@ fun MorpheDialog(
     titleTrailingContent: (@Composable () -> Unit)? = null,
     footer: (@Composable () -> Unit)? = null,
     dismissOnClickOutside: Boolean = true,
-    content: @Composable () -> Unit
+    scrollable: Boolean = true,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
     var visible by remember { mutableStateOf(false) }
@@ -107,6 +109,7 @@ fun MorpheDialog(
                         titleTrailingContent = titleTrailingContent,
                         footer = footer,
                         isDarkTheme = isDarkTheme,
+                        scrollable = scrollable,
                         content = content
                     )
                 }
@@ -124,7 +127,8 @@ private fun DialogContent(
     titleTrailingContent: (@Composable () -> Unit)?,
     footer: (@Composable () -> Unit)?,
     isDarkTheme: Boolean,
-    content: @Composable () -> Unit
+    scrollable: Boolean,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val isLandscape = isLandscape()
 
@@ -181,17 +185,27 @@ private fun DialogContent(
                 }
             }
 
-            // Scrollable content
-            Box(
-                modifier = Modifier
-                    .weight(1f, fill = false)
-                    .verticalScroll(rememberScrollState())
+            // Content area with conditional scrolling
+            CompositionLocalProvider(
+                LocalDialogTextColor provides textColor,
+                LocalDialogSecondaryTextColor provides secondaryTextColor
             ) {
-                CompositionLocalProvider(
-                    LocalDialogTextColor provides textColor,
-                    LocalDialogSecondaryTextColor provides secondaryTextColor
-                ) {
-                    content()
+                if (scrollable) {
+                    // Automatic scroll for regular content
+                    Column(
+                        modifier = Modifier
+                            .weight(1f, fill = false)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        content()
+                    }
+                } else {
+                    // No scroll wrapper, for LazyColumn use full available height
+                    Column(
+                        modifier = Modifier.weight(1f, fill = false)
+                    ) {
+                        content()
+                    }
                 }
             }
 

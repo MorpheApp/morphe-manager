@@ -1,11 +1,29 @@
-package app.revanced.manager.ui.component.morphe.home
+package app.revanced.manager.ui.component.morphe.shared
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Article
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.Download
+import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.material.icons.outlined.NewReleases
+import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -22,57 +40,12 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.network.dto.ReVancedAsset
 import app.revanced.manager.ui.component.Markdown
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.ui.component.morphe.utils.formatMegabytes
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.relativeTime
 
 /**
- * Initial update available dialog
- * Shows when app launches with available update
- */
-@Composable
-fun ManagerUpdateAvailableDialog(
-    onDismiss: () -> Unit,
-    onShowDetails: () -> Unit,
-    setShowManagerUpdateDialogOnLaunch: (Boolean) -> Unit,
-    newVersion: String
-) {
-    MorpheDialog(
-        onDismissRequest = {
-            setShowManagerUpdateDialogOnLaunch(true)
-            onDismiss()
-        },
-        title = stringResource(R.string.update_available),
-        footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.show),
-                onPrimaryClick = {
-                    setShowManagerUpdateDialogOnLaunch(true)
-                    onShowDetails()
-                },
-                secondaryText = stringResource(R.string.never_show_again),
-                onSecondaryClick = {
-                    setShowManagerUpdateDialogOnLaunch(false)
-                    onDismiss()
-                }
-            )
-        }
-    ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
-        Text(
-            text = stringResource(R.string.update_available_dialog_description, newVersion),
-            style = MaterialTheme.typography.bodyLarge,
-            color = secondaryColor,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-/**
- * Full update details dialog with download and install functionality
- * Replaces the UpdateScreen
+ * Update details dialog with download and install functionality
  */
 @Composable
 fun ManagerUpdateDetailsDialog(
@@ -120,7 +93,7 @@ fun ManagerUpdateDetailsDialog(
                             else R.string.download
                         ),
                         onClick = { updateViewModel.downloadUpdate() },
-                        icon = Icons.Outlined.InstallMobile,
+                        icon = Icons.Outlined.Download,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -144,16 +117,13 @@ fun ManagerUpdateDetailsDialog(
                     // User can close our dialog, but install will continue
                 }
                 UpdateViewModel.State.FAILED -> {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
+                    MorpheDialogButtonColumn {
                         if (updateViewModel.canResumeDownload) {
                             // Download failed/cancelled - offer to resume
                             MorpheDialogButton(
                                 text = stringResource(R.string.resume_download),
                                 onClick = { updateViewModel.downloadUpdate() },
-                                icon = Icons.Outlined.InstallMobile,
+                                icon = Icons.Outlined.Download,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         } else {
@@ -165,7 +135,7 @@ fun ManagerUpdateDetailsDialog(
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
-                        MorpheDialogButton(
+                        MorpheDialogOutlinedButton(
                             text = stringResource(android.R.string.cancel),
                             onClick = onDismiss,
                             modifier = Modifier.fillMaxWidth()
@@ -189,110 +159,151 @@ fun ManagerUpdateDetailsDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Download progress
-            if (state == UpdateViewModel.State.DOWNLOADING) {
-                DownloadProgressSection(
-                    downloadedSize = updateViewModel.downloadedSize,
-                    totalSize = updateViewModel.totalSize,
-                    progress = updateViewModel.downloadProgress,
-                    textColor = textColor,
-                    secondaryColor = secondaryColor
-                )
-            }
-
-            // Installing indicator
-            if (state == UpdateViewModel.State.INSTALLING) {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+            when (state) {
+                UpdateViewModel.State.DOWNLOADING -> {
+                    DownloadProgressSection(
+                        downloadedSize = updateViewModel.downloadedSize,
+                        totalSize = updateViewModel.totalSize,
+                        progress = updateViewModel.downloadProgress,
+                        textColor = textColor
+                    )
+                }
+                UpdateViewModel.State.INSTALLING -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 48.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        CircularProgressIndicator(
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            text = stringResource(R.string.installing_manager_update),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = secondaryColor,
-                            textAlign = TextAlign.Center
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(20.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(48.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.installing_manager_update),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = secondaryColor,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+                UpdateViewModel.State.FAILED -> {
+                    if (updateViewModel.installError.isNotEmpty()) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(16.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = MaterialTheme.colorScheme.error.copy(alpha = 0.2f),
+                                    modifier = Modifier.size(56.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Outlined.ErrorOutline,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.error,
+                                            modifier = Modifier.size(28.dp)
+                                        )
+                                    }
+                                }
+
+                                Text(
+                                    text = stringResource(R.string.install_update_manager_failed),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.error,
+                                    textAlign = TextAlign.Center
+                                )
+
+                                Text(
+                                    text = updateViewModel.installError,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = secondaryColor,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                }
+                UpdateViewModel.State.SUCCESS -> {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.CheckCircle,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.tertiary,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                }
+                            }
+
+                            Text(
+                                text = stringResource(R.string.update_completed),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onTertiaryContainer,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+                UpdateViewModel.State.CAN_DOWNLOAD, UpdateViewModel.State.CAN_INSTALL -> {
+                    if (releaseInfo == null) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 48.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(20.dp)
+                            ) {
+                                CircularProgressIndicator(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(48.dp)
+                                )
+                                Text(
+                                    text = stringResource(R.string.changelog_loading),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = secondaryColor,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    } else {
+                        ReleaseInfoSection(
+                            releaseInfo = releaseInfo,
+                            textColor = textColor
                         )
                     }
                 }
-            }
-
-            // Error message
-            if (state == UpdateViewModel.State.FAILED && updateViewModel.installError.isNotEmpty()) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.install_update_manager_failed),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Red.copy(alpha = 0.9f),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Text(
-                        text = updateViewModel.installError,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = secondaryColor,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            }
-
-            // Success message
-            if (state == UpdateViewModel.State.SUCCESS) {
-                Text(
-                    text = stringResource(R.string.update_completed),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Green.copy(alpha = 0.9f),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            // Loading changelog indicator
-            if (releaseInfo == null && state == UpdateViewModel.State.CAN_DOWNLOAD
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 24.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        CircularProgressIndicator(
-                            strokeWidth = 3.dp,
-                            color = MaterialTheme.colorScheme.secondary
-                        )
-                        Text(
-                            text = stringResource(R.string.changelog_loading),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = secondaryColor,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-
-            // Release info - show only when not actively installing
-            if (releaseInfo != null && state != UpdateViewModel.State.INSTALLING) {
-                ReleaseInfoSection(
-                    releaseInfo = releaseInfo,
-                    textColor = textColor,
-                    secondaryColor = secondaryColor
-                )
             }
         }
     }
@@ -314,13 +325,11 @@ fun ManagerUpdateDetailsDialog(
                 )
             }
         ) {
-            val secondaryColor = LocalDialogSecondaryTextColor.current
-            Text(
+            InfoBadge(
+                icon = Icons.Outlined.Warning,
                 text = stringResource(R.string.download_confirmation_metered),
-                style = MaterialTheme.typography.bodyLarge,
-                color = secondaryColor,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                style = InfoBadgeStyle.Warning,
+                isExpanded = true
             )
         }
     }
@@ -334,43 +343,71 @@ private fun DownloadProgressSection(
     downloadedSize: Long,
     totalSize: Long,
     progress: Float,
-    textColor: Color,
-    secondaryColor: Color
+    textColor: Color
 ) {
-    Column(
+    Surface(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
     ) {
-        Text(
-            text = stringResource(R.string.downloading_manager_update),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = textColor,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Download,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
 
-        Text(
-            text = stringResource(
-                R.string.manager_update_progress_detail,
-                formatMegabytes(downloadedSize),
-                formatMegabytes(totalSize),
-                (progress * 100).toInt()
-            ),
-            style = MaterialTheme.typography.bodyMedium,
-            color = secondaryColor,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.downloading_manager_update),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
+                    )
 
-        LinearProgressIndicator(
-            progress = { progress },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(8.dp),
-            color = MaterialTheme.colorScheme.primary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
+                    Text(
+                        text = stringResource(
+                            R.string.manager_update_progress_detail,
+                            formatMegabytes(downloadedSize),
+                            formatMegabytes(totalSize),
+                            (progress * 100).toInt()
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(8.dp),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+            )
+        }
     }
 }
 
@@ -380,8 +417,7 @@ private fun DownloadProgressSection(
 @Composable
 private fun ReleaseInfoSection(
     releaseInfo: ReVancedAsset,
-    textColor: Color,
-    secondaryColor: Color
+    textColor: Color
 ) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
@@ -391,56 +427,68 @@ private fun ReleaseInfoSection(
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        // Version and published date in a card-like section
-        Row(
+        Surface(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
         ) {
-            // Version
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(
-                    text = stringResource(R.string.version),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = secondaryColor
-                )
-                Text(
-                    text = releaseInfo.version,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
-            }
-
-            // Published date
-            Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                horizontalAlignment = Alignment.End
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(R.string.published),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = secondaryColor
-                )
-                Text(
-                    text = published,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                    modifier = Modifier.size(56.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.NewReleases,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
+
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = releaseInfo.version,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Schedule,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Text(
+                            text = published,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
             }
         }
 
         // Changelog section
         if (releaseInfo.description.isNotBlank()) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Markdown(releaseInfo.description.replace("`", ""))
-            }
+            Markdown(releaseInfo.description.replace("`", ""))
         }
 
         // Full changelog button
@@ -448,11 +496,9 @@ private fun ReleaseInfoSection(
             MorpheDialogButton(
                 text = stringResource(R.string.changelog),
                 onClick = { uriHandler.openUri(url) },
+                icon = Icons.AutoMirrored.Outlined.Article,
                 modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
-
-private fun formatMegabytes(bytes: Long): Float =
-    if (bytes <= 0) 0f else bytes / 1_000_000f

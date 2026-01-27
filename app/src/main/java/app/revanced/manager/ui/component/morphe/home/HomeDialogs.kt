@@ -6,7 +6,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
@@ -34,56 +40,67 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.ui.component.morphe.shared.*
+import app.revanced.manager.domain.repository.PatchBundleRepository
+import app.revanced.manager.ui.component.morphe.shared.DialogButtonLayout
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogSecondaryTextColor
+import app.revanced.manager.ui.component.morphe.shared.LocalDialogTextColor
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialog
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButton
+import app.revanced.manager.ui.component.morphe.shared.MorpheDialogButtonRow
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.util.APK_MIMETYPE
+import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Container for all MorpheHomeScreen dialogs
  */
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeDialogs(
-    state: HomeStates
+    viewModel: HomeViewModel,
+    dashboardViewModel: DashboardViewModel,
+    storagePickerLauncher: () -> Unit,
+    openBundlePicker: () -> Unit
 ) {
     val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
-    // Dialog 1: APK Availability - "Do you have the APK?"
+    // Dialog 1: APK Availability
     AnimatedVisibility(
-        visible = state.showApkAvailabilityDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        visible = viewModel.showApkAvailabilityDialog && viewModel.pendingPackageName != null && viewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (state.showDownloadInstructionsDialog) 0 else 200))
+        exit = fadeOut(animationSpec = tween(if (viewModel.showDownloadInstructionsDialog) 0 else 200))
     ) {
-        val appName = state.pendingAppName ?: return@AnimatedVisibility
-        val recommendedVersion = state.pendingRecommendedVersion
-        val usingMountInstall = state.usingMountInstall
+        val appName = viewModel.pendingAppName ?: return@AnimatedVisibility
+        val recommendedVersion = viewModel.pendingRecommendedVersion
+        val usingMountInstall = viewModel.usingMountInstall
 
         ApkAvailabilityDialog(
             appName = appName,
             recommendedVersion = recommendedVersion,
             usingMountInstall = usingMountInstall,
             onDismiss = {
-                state.showApkAvailabilityDialog = false
-                state.cleanupPendingData()
+                viewModel.showApkAvailabilityDialog = false
+                viewModel.cleanupPendingData()
             },
             onHaveApk = {
-                // User has APK - open file picker
-                state.showApkAvailabilityDialog = false
-                state.storagePickerLauncher.launch(APK_MIMETYPE)
+                viewModel.showApkAvailabilityDialog = false
+                storagePickerLauncher()
             },
             onNeedApk = {
-                // User needs APK - show download instructions
-                state.showApkAvailabilityDialog = false
+                viewModel.showApkAvailabilityDialog = false
                 scope.launch {
                     delay(50)
-                    state.showDownloadInstructionsDialog = true
-                    state.resolveDownloadRedirect()
+                    viewModel.showDownloadInstructionsDialog = true
+                    viewModel.resolveDownloadRedirect()
                 }
             }
         )
@@ -91,76 +108,79 @@ fun HomeDialogs(
 
     // Dialog 2: Download Instructions
     AnimatedVisibility(
-        visible = state.showDownloadInstructionsDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        visible = viewModel.showDownloadInstructionsDialog && viewModel.pendingPackageName != null && viewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (state.showFilePickerPromptDialog) 0 else 200))
+        exit = fadeOut(animationSpec = tween(if (viewModel.showFilePickerPromptDialog) 0 else 200))
     ) {
-        val appName = state.pendingAppName ?: return@AnimatedVisibility
-        val recommendedVersion = state.pendingRecommendedVersion
-        val usingMountInstall = state.usingMountInstall
+        val usingMountInstall = viewModel.usingMountInstall
 
         DownloadInstructionsDialog(
-            appName = appName,
-            recommendedVersion = recommendedVersion,
             usingMountInstall = usingMountInstall,
             onDismiss = {
-                state.showDownloadInstructionsDialog = false
-                state.cleanupPendingData()
+                viewModel.showDownloadInstructionsDialog = false
+                viewModel.cleanupPendingData()
             }
         ) {
-            state.handleDownloadInstructionsContinue(uriHandler)
+            viewModel.handleDownloadInstructionsContinue { url ->
+                try {
+                    uriHandler.openUri(url)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
+            }
         }
     }
 
     // Dialog 3: File Picker Prompt
     AnimatedVisibility(
-        visible = state.showFilePickerPromptDialog && state.pendingPackageName != null && state.pendingAppName != null,
+        visible = viewModel.showFilePickerPromptDialog && viewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val appName = state.pendingAppName ?: return@AnimatedVisibility
+        val appName = viewModel.pendingAppName ?: return@AnimatedVisibility
+        val isOtherApps = viewModel.pendingPackageName == null
 
         FilePickerPromptDialog(
             appName = appName,
+            isOtherApps = isOtherApps,
             onDismiss = {
-                state.showFilePickerPromptDialog = false
-                state.cleanupPendingData()
+                viewModel.showFilePickerPromptDialog = false
+                viewModel.cleanupPendingData()
             },
             onOpenFilePicker = {
-                state.showFilePickerPromptDialog = false
-                state.storagePickerLauncher.launch(APK_MIMETYPE)
+                viewModel.showFilePickerPromptDialog = false
+                storagePickerLauncher()
             }
         )
     }
 
     // Unsupported Version Dialog
     AnimatedVisibility(
-        visible = state.showUnsupportedVersionDialog != null,
+        visible = viewModel.showUnsupportedVersionDialog != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val dialogState = state.showUnsupportedVersionDialog ?: return@AnimatedVisibility
+        val dialogState = viewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
 
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion,
             onDismiss = {
-                state.showUnsupportedVersionDialog = null
-                // Clean up the pending app
-                state.pendingSelectedApp?.let { app ->
+                viewModel.showUnsupportedVersionDialog = null
+                viewModel.pendingSelectedApp?.let { app ->
                     if (app is SelectedApp.Local && app.temporary) {
                         app.file.delete()
                     }
                 }
-                state.pendingSelectedApp = null
+                viewModel.pendingSelectedApp = null
             },
             onProceed = {
-                state.showUnsupportedVersionDialog = null
-                // Start patching with the already loaded app
-                state.pendingSelectedApp?.let { app ->
+                viewModel.showUnsupportedVersionDialog = null
+                viewModel.pendingSelectedApp?.let { app ->
                     CoroutineScope(Dispatchers.Main).launch {
-                        state.startPatchingWithApp(app, true)
-                        state.pendingSelectedApp = null
+                        viewModel.startPatchingWithApp(app, true)
+                        viewModel.pendingSelectedApp = null
                     }
                 }
             }
@@ -169,42 +189,159 @@ fun HomeDialogs(
 
     // Wrong Package Dialog
     AnimatedVisibility(
-        visible = state.showWrongPackageDialog != null,
+        visible = viewModel.showWrongPackageDialog != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val dialogState = state.showWrongPackageDialog ?: return@AnimatedVisibility
+        val dialogState = viewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 
         WrongPackageDialog(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
-            onDismiss = { state.showWrongPackageDialog = null }
+            onDismiss = { viewModel.showWrongPackageDialog = null }
         )
     }
 
-    // Patches bottom sheet
-    if (state.showPatchesSheet && state.apiBundle != null) {
-        HomeBundlePatchesSheet(
-            onDismissRequest = { state.showPatchesSheet = false },
-            src = state.apiBundle!!
+    // Expert Mode Dialog
+    AnimatedVisibility(
+        visible = viewModel.showExpertModeDialog && viewModel.expertModeSelectedApp != null,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(200))
+    ) {
+        val selectedApp = viewModel.expertModeSelectedApp ?: return@AnimatedVisibility
+        val allowIncompatible = dashboardViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
+
+        ExpertModeDialog(
+            bundles = viewModel.expertModeBundles,
+            selectedPatches = viewModel.expertModePatches,
+            options = viewModel.expertModeOptions,
+            onPatchToggle = { bundleUid, patchName ->
+                viewModel.togglePatchInExpertMode(bundleUid, patchName)
+            },
+            onOptionChange = { bundleUid, patchName, optionKey, value ->
+                viewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
+            },
+            onResetOptions = { bundleUid, patchName ->
+                viewModel.resetOptionsInExpertMode(bundleUid, patchName)
+            },
+            onDismiss = {
+                viewModel.cleanupExpertModeData()
+            },
+            onProceed = {
+                val finalPatches = viewModel.expertModePatches
+                val finalOptions = viewModel.expertModeOptions
+
+                viewModel.showExpertModeDialog = false
+
+                scope.launch(Dispatchers.IO) {
+                    viewModel.saveOptions(selectedApp.packageName, finalOptions)
+
+                    withContext(Dispatchers.Main) {
+                        viewModel.proceedWithPatching(selectedApp, finalPatches, finalOptions)
+                        viewModel.cleanupExpertModeData()
+                    }
+                }
+            },
+            allowIncompatible = allowIncompatible
         )
     }
 
-    // Changelog bottom sheet
-    if (state.showChangelogSheet && state.apiBundle != null) {
-        val remoteBundle = state.apiBundle as? RemotePatchBundle
-        if (remoteBundle != null) {
-            HomeBundleChangelogSheet(
-                src = remoteBundle,
-                onDismissRequest = { state.showChangelogSheet = false }
-            )
-        }
+    // Bundle management sheet
+    if (viewModel.showBundleManagementSheet) {
+        HomeBundleManagementSheet(
+            onDismissRequest = { viewModel.showBundleManagementSheet = false },
+            onAddBundle = {
+                viewModel.showBundleManagementSheet = false
+                viewModel.showAddBundleDialog = true
+            },
+            onDelete = { bundle ->
+                scope.launch {
+                    dashboardViewModel.patchBundleRepository.remove(bundle)
+                }
+            },
+            onDisable = { bundle ->
+                scope.launch {
+                    dashboardViewModel.patchBundleRepository.disable(bundle)
+                }
+            },
+            onUpdate = { bundle ->
+                if (bundle is RemotePatchBundle) {
+                    scope.launch {
+                        dashboardViewModel.patchBundleRepository.update(bundle, showToast = true)
+                    }
+                }
+            },
+            onRename = { bundle ->
+                viewModel.bundleToRename = bundle
+                viewModel.showRenameBundleDialog = true
+            }
+        )
+    }
+
+    // Add bundle dialog
+    if (viewModel.showAddBundleDialog) {
+        MorpheAddBundleDialog(
+            onDismiss = {
+                viewModel.showAddBundleDialog = false
+                viewModel.selectedBundleUri = null
+                viewModel.selectedBundlePath = null
+            },
+            onLocalSubmit = {
+                viewModel.showAddBundleDialog = false
+                viewModel.selectedBundleUri?.let { uri ->
+                    dashboardViewModel.createLocalSource(uri)
+                }
+                viewModel.selectedBundleUri = null
+                viewModel.selectedBundlePath = null
+            },
+            onRemoteSubmit = { url ->
+                viewModel.showAddBundleDialog = false
+                dashboardViewModel.createRemoteSource(url, true)
+            },
+            onLocalPick = {
+                openBundlePicker()
+            },
+            selectedLocalPath = viewModel.selectedBundlePath
+        )
+    }
+
+    // Rename bundle dialog
+    if (viewModel.showRenameBundleDialog && viewModel.bundleToRename != null) {
+        val bundle = viewModel.bundleToRename!!
+
+        MorpheRenameBundleDialog(
+            initialValue = bundle.displayName.orEmpty(),
+            onDismissRequest = {
+                viewModel.showRenameBundleDialog = false
+                viewModel.bundleToRename = null
+            },
+            onConfirm = { value ->
+                scope.launch {
+                    val result = dashboardViewModel.patchBundleRepository.setDisplayName(
+                        bundle.uid,
+                        value.trim().ifEmpty { null }
+                    )
+                    when (result) {
+                        PatchBundleRepository.DisplayNameUpdateResult.SUCCESS,
+                        PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> {
+                            viewModel.showRenameBundleDialog = false
+                            viewModel.bundleToRename = null
+                        }
+                        PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE -> {
+                            context.toast(context.getString(R.string.patch_bundle_duplicate_name_error))
+                        }
+                        PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND -> {
+                            context.toast(context.getString(R.string.patch_bundle_missing_error))
+                        }
+                    }
+                }
+            }
+        )
     }
 }
 
 /**
  * Dialog 1: Initial "Do you have the APK?" dialog
- * First step in APK selection process
  */
 @Composable
 private fun ApkAvailabilityDialog(
@@ -274,13 +411,10 @@ private fun ApkAvailabilityDialog(
 
 /**
  * Dialog 2: Download instructions dialog
- * Provides step-by-step guide for downloading APK from APKMirror
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 private fun DownloadInstructionsDialog(
-    appName: String,
-    recommendedVersion: String?,
     usingMountInstall: Boolean,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
@@ -306,7 +440,6 @@ private fun DownloadInstructionsDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Steps
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -318,7 +451,6 @@ private fun DownloadInstructionsDialog(
                     color = textColor
                 )
 
-                // Step 1
                 InstructionStep(
                     number = "1",
                     text = stringResource(
@@ -329,7 +461,6 @@ private fun DownloadInstructionsDialog(
                     secondaryColor = secondaryColor
                 )
 
-                // Step 2 with button preview
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     InstructionStep(
                         number = "2",
@@ -338,7 +469,6 @@ private fun DownloadInstructionsDialog(
                         secondaryColor = secondaryColor
                     )
 
-                    // APKMirror button preview
                     Box(
                         modifier = Modifier.fillMaxWidth(),
                         contentAlignment = Alignment.Center
@@ -367,7 +497,7 @@ private fun DownloadInstructionsDialog(
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Text(
-                                    text = "DOWNLOAD APK", // APKMirror does not have localization
+                                    text = "DOWNLOAD APK",
                                     style = MaterialTheme.typography.labelLarge,
                                     color = Color.White
                                 )
@@ -376,7 +506,6 @@ private fun DownloadInstructionsDialog(
                     }
                 }
 
-                // Step 3
                 InstructionStep(
                     number = "3",
                     text = htmlAnnotatedString(
@@ -392,7 +521,6 @@ private fun DownloadInstructionsDialog(
                     secondaryColor = secondaryColor
                 )
 
-                // Step 4
                 InstructionStep(
                     number = "4",
                     text = stringResource(
@@ -407,10 +535,6 @@ private fun DownloadInstructionsDialog(
     }
 }
 
-/**
- * Instruction step row
- * Displays numbered step with text
- */
 @Composable
 private fun InstructionStep(
     number: String,
@@ -452,23 +576,34 @@ private fun InstructionStep(
     )
 }
 
-
 /**
  * Dialog 3: File picker prompt dialog
- * Shown after browser opens, prompts user to select downloaded APK
  */
 @Composable
 private fun FilePickerPromptDialog(
     appName: String,
+    isOtherApps: Boolean,
     onDismiss: () -> Unit,
     onOpenFilePicker: () -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_home_file_picker_prompt_title),
+        title = stringResource(
+            if (isOtherApps) {
+                R.string.morphe_home_select_apk_title
+            } else {
+                R.string.morphe_home_file_picker_prompt_title
+            }
+        ),
         footer = {
             MorpheDialogButton(
-                text = stringResource(R.string.morphe_home_file_picker_prompt_open),
+                text = stringResource(
+                    if (isOtherApps) {
+                        R.string.morphe_home_file_picker_prompt_open_apk
+                    } else {
+                        R.string.morphe_home_file_picker_prompt_open_downloaded_apk
+                    }
+                ),
                 onClick = onOpenFilePicker,
                 icon = Icons.Outlined.FolderOpen,
                 modifier = Modifier.fillMaxWidth()
@@ -478,7 +613,11 @@ private fun FilePickerPromptDialog(
         val secondaryColor = LocalDialogSecondaryTextColor.current
 
         Text(
-            text = stringResource(R.string.morphe_home_file_picker_prompt_description, appName),
+            text = if (isOtherApps) {
+                stringResource(R.string.morphe_home_select_any_apk_description)
+            } else {
+                stringResource(R.string.morphe_home_file_picker_prompt_description, appName)
+            },
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor,
             textAlign = TextAlign.Center,
@@ -489,7 +628,6 @@ private fun FilePickerPromptDialog(
 
 /**
  * Unsupported version warning dialog
- * Shown when selected APK version has no compatible patches
  */
 @Composable
 private fun UnsupportedVersionWarningDialog(
@@ -525,12 +663,10 @@ private fun UnsupportedVersionWarningDialog(
                 textAlign = TextAlign.Center
             )
 
-            // Version info
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Selected Version
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
                         text = stringResource(R.string.morphe_patcher_selected_version),
@@ -545,7 +681,6 @@ private fun UnsupportedVersionWarningDialog(
                     )
                 }
 
-                // Recommended Version
                 if (recommendedVersion != null) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
@@ -568,7 +703,6 @@ private fun UnsupportedVersionWarningDialog(
 
 /**
  * Wrong package dialog
- * Shown when selected APK doesn't match expected package name
  */
 @Composable
 fun WrongPackageDialog(

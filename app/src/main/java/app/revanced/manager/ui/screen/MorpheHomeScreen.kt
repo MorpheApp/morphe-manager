@@ -1,135 +1,198 @@
 package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material.icons.outlined.Update
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import android.content.pm.PackageInfo
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstallType
+import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
+import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.component.morphe.home.*
-import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
-import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
-import app.revanced.manager.ui.viewmodel.UpdateViewModel
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PatchSelection
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import app.revanced.manager.ui.component.morphe.home.HomeAndroid11Dialog
+import app.revanced.manager.ui.component.morphe.home.HomeDialogs
+import app.revanced.manager.ui.component.morphe.home.HomeSectionsLayout
+import app.revanced.manager.ui.component.morphe.home.InstalledAppInfoDialog
+import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
+import app.revanced.manager.ui.component.morphe.utils.buildBundleSummaries
+import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
+import app.revanced.manager.ui.component.morphe.utils.toFilePath
+import app.revanced.manager.ui.viewmodel.*
+import app.revanced.manager.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 /**
- * Data class for quick patch parameters
+ * MorpheHomeScreen 5-section layout
  */
-data class QuickPatchParams(
-    val selectedApp: SelectedApp,
-    val patches: PatchSelection,
-    val options: Options
-)
-
-/**
- * MorpheHomeScreen - Simplified home screen for patching YouTube and YouTube Music
- * Provides streamlined interface with two main app buttons and floating action buttons
- */
-@SuppressLint("BatteryLife")
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun MorpheHomeScreen(
     onMorpheSettingsClick: () -> Unit,
-    onDownloaderPluginClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
-    onUpdateClick: () -> Unit = {},
+    onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
     dashboardViewModel: DashboardViewModel = koinViewModel(),
+    homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel()
+    patchTriggerPackage: String? = null,
+    onPatchTriggerHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
+    val pm: PM = koinInject()
+    val installedAppRepository: InstalledAppRepository = koinInject()
+
+    // Dialog state for installed app info
+    var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
 
     // Collect state flows
     val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
     val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val patchCounts by dashboardViewModel.patchBundleRepository.patchCountsFlow.collectAsStateWithLifecycle(emptyMap())
-    val manualUpdateInfo by dashboardViewModel.patchBundleRepository.manualUpdateInfo.collectAsStateWithLifecycle(emptyMap())
     val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
-    // Install type is needed for UI components.
-    // Ideally this logic is part of some other code, but for now this is simple and works.
+    // Calculate mount install state
     val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
             dashboardViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
 
-    // Remember home state
-    val homeState = rememberMorpheHomeState(
-        dashboardViewModel = dashboardViewModel,
-        sources = sources,
-        bundleInfo = bundleInfo,
-        onStartQuickPatch = onStartQuickPatch,
-        usingMountInstall = usingMountInstall
+    // Calculate if Other Apps button should be visible
+    val useExpertMode by prefs.useExpertMode.getAsState()
+    val showOtherAppsButton = remember(useExpertMode, sources) {
+        if (useExpertMode) true // Always show in expert mode
+        else sources.size > 1 // In simple mode, show only if there are multiple bundles
+    }
+
+    // Set up HomeViewModel
+    LaunchedEffect(Unit) {
+        homeViewModel.usingMountInstall = usingMountInstall
+        homeViewModel.onStartQuickPatch = onStartQuickPatch
+    }
+
+    // Load installed apps
+    var youtubeInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+    var youtubeMusicInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+    var redditInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
+
+    var youtubePackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+    var youtubeMusicPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+    var redditPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
+
+    // Bundle summaries
+    val youtubeBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+    val youtubeMusicBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+    val redditBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
+
+    // Observe all installed apps
+    val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
+
+    // Initialize launchers
+    val storagePickerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri -> homeViewModel.handleApkSelection(uri) }
+
+    val installAppsPermissionLauncher = rememberLauncherForActivityResult(
+        RequestInstallAppsContract
+    ) { homeViewModel.showAndroid11Dialog = false }
+
+    val openBundlePicker = rememberFilePickerWithPermission(
+        mimeTypes = MPP_FILE_MIME_TYPES,
+        onFilePicked = { uri ->
+            homeViewModel.selectedBundleUri = uri
+            homeViewModel.selectedBundlePath = uri.toFilePath()
+        }
     )
 
-    var bundleUpdateInProgress by remember { mutableStateOf(false) }
-    var showUpdateDetailsDialog by remember { mutableStateOf(false) }
+    // Update bundle data
+    LaunchedEffect(sources, bundleInfo) {
+        homeViewModel.updateBundleData(sources, bundleInfo)
+    }
 
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
+    // Update loading state
+    LaunchedEffect(bundleUpdateProgress, allInstalledApps, availablePatches) {
+        val hasLoadedApps = allInstalledApps.isNotEmpty() || availablePatches > 0
+        val isBundleUpdateInProgress = bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.None
+        homeViewModel.updateLoadingState(
+            bundleUpdateInProgress = isBundleUpdateInProgress,
+            hasInstalledApps = hasLoadedApps
+        )
+    }
 
-    suspend fun updateMorpheBundleAndUI() {
-        bundleUpdateInProgress = true
-        homeState.isRefreshingBundle = true
-        try {
-            dashboardViewModel.patchBundleRepository.updateOnlyMorpheBundle(
-                force = false,
-                showToast = false,
-                showProgress = true
-            )
-        } finally {
-            delay(500)
-            bundleUpdateInProgress = false
-            homeState.isRefreshingBundle = false
-            homeState.updateBundleData(sources, bundleInfo)
+    // Handle patch trigger from dialog
+    LaunchedEffect(patchTriggerPackage) {
+        patchTriggerPackage?.let { packageName ->
+            homeViewModel.showPatchDialog(packageName)
+            onPatchTriggerHandled()
         }
     }
 
-    // Show manager update available dialog
-    if (homeState.shouldShowUpdateDialog) {
-        ManagerUpdateAvailableDialog(
-            onDismiss = { homeState.hasCheckedForUpdates = true },
-            onShowDetails = {
-                homeState.hasCheckedForUpdates = true
-                showUpdateDetailsDialog = true
-            },
-            setShowManagerUpdateDialogOnLaunch = dashboardViewModel::setShowManagerUpdateDialogOnLaunch,
-            newVersion = dashboardViewModel.updatedManagerVersion ?: "unknown"
-        )
+    // Update installed apps when data changes
+    LaunchedEffect(allInstalledApps, sources, bundleInfo) {
+        withContext(Dispatchers.IO) {
+            val sourceMap = sources.associateBy { it.uid }
+
+            // Load YouTube
+            youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
+            youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
+            youtubeBundleSummaries.clear()
+            youtubeInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    youtubeBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                }
+            }
+
+            // Load YouTube Music
+            youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE_MUSIC }
+            youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
+            youtubeMusicBundleSummaries.clear()
+            youtubeMusicInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    youtubeMusicBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                }
+            }
+
+            // Load Reddit
+            redditInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_REDDIT }
+            redditPackageInfo = redditInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
+            redditBundleSummaries.clear()
+            redditInstalledApp?.let { app ->
+                if (app.installType == InstallType.SAVED) {
+                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
+                    redditBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                }
+            }
+        }
     }
 
-    // Show manager update details dialog
+    var showUpdateDetailsDialog by remember { mutableStateOf(false) }
+
+    // Get greeting message
+    val greetingMessage = stringResource(HomeAndPatcherMessages.getHomeMessage(context))
+
+    // Check for manager update
+    val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
+
+    // Manager update details dialog
     if (showUpdateDetailsDialog) {
-        // Create UpdateViewModel with downloadOnScreenEntry = false
-        // We don't want auto-download when dialog opens
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            parameters = { parametersOf(false) }
-        )
+        val updateViewModel: UpdateViewModel = koinViewModel(parameters = { parametersOf(false) })
         ManagerUpdateDetailsDialog(
             onDismiss = { showUpdateDetailsDialog = false },
             updateViewModel = updateViewModel
@@ -137,149 +200,133 @@ fun MorpheHomeScreen(
     }
 
     // Android 11 Dialog
-    if (homeState.showAndroid11Dialog) {
+    if (homeViewModel.showAndroid11Dialog) {
         HomeAndroid11Dialog(
-            onDismissRequest = { homeState.showAndroid11Dialog = false },
-            onContinue = { homeState.installAppsPermissionLauncher.launch(context.packageName) }
+            onDismissRequest = { homeViewModel.showAndroid11Dialog = false },
+            onContinue = { installAppsPermissionLauncher.launch(context.packageName) }
         )
     }
 
-    // Control snackbar visibility based on progress
-    LaunchedEffect(bundleUpdateProgress) {
-        val progress = bundleUpdateProgress
+    // Installed App Info Dialog
+    showInstalledAppDialog?.let { packageName ->
+        key(packageName) {
+            InstalledAppInfoDialog(
+                packageName = packageName,
+                onDismiss = { showInstalledAppDialog = null },
+                onNavigateToPatcher = { pkg, version, filePath, patches, options ->
+                    showInstalledAppDialog = null
+                    onNavigateToPatcher(pkg, version, filePath, patches, options)
+                },
+                onTriggerPatchFlow = { originalPackageName ->
+                    showInstalledAppDialog = null
+                    homeViewModel.showPatchDialog(originalPackageName)
+                }
+            )
+        }
+    }
 
-        if (progress == null) {
-            // Progress cleared - hide snackbar
-            homeState.showBundleUpdateSnackbar = false
+    // Control snackbar visibility
+    LaunchedEffect(bundleUpdateProgress) {
+        if (bundleUpdateProgress == null) {
+            homeViewModel.showBundleUpdateSnackbar = false
             return@LaunchedEffect
         }
-
-        homeState.showBundleUpdateSnackbar = true
-        homeState.snackbarStatus = when (progress.result) {
+        homeViewModel.showBundleUpdateSnackbar = true
+        homeViewModel.snackbarStatus = when (bundleUpdateProgress.result) {
             PatchBundleRepository.BundleUpdateResult.Success,
             PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
-
             PatchBundleRepository.BundleUpdateResult.NoInternet,
             PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
-
             PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
         }
     }
 
     // All dialogs
     HomeDialogs(
-        state = homeState
+        viewModel = homeViewModel,
+        dashboardViewModel = dashboardViewModel,
+        storagePickerLauncher = { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) },
+        openBundlePicker = openBundlePicker
     )
 
-    // Main scaffold
-    Scaffold { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            // Main content with app buttons
-            HomeMainContent(
-                onYouTubeClick = {
-                    homeState.handleAppClick(
-                        packageName = PACKAGE_YOUTUBE,
-                        availablePatches = availablePatches,
-                        bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
-                        android11BugActive = dashboardViewModel.android11BugActive
-                    )
-                },
-                onYouTubeMusicClick = {
-                    homeState.handleAppClick(
-                        packageName = PACKAGE_YOUTUBE_MUSIC,
-                        availablePatches = availablePatches,
-                        bundleUpdateInProgress = bundleUpdateInProgress || bundleUpdateProgress != null,
-                        android11BugActive = dashboardViewModel.android11BugActive
-                    )
-                },
-                backgroundType = backgroundType
-            )
+    // Main content
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
+        HomeSectionsLayout(
+            // Notifications section
+            showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
+            snackbarStatus = homeViewModel.snackbarStatus,
+            bundleUpdateProgress = bundleUpdateProgress,
+            hasManagerUpdate = hasManagerUpdate,
+            onShowUpdateDetails = { showUpdateDetailsDialog = true },
 
-            val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
+            // Greeting section
+            greetingMessage = greetingMessage,
 
-            // Floating Action Buttons
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(16.dp)
-                    .padding(bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                horizontalAlignment = Alignment.End
-            ) {
-                // Settings FAB
-                MorpheFloatingButtons(
-                    onClick = onMorpheSettingsClick,
-                    icon = Icons.Default.Settings,
-                    contentDescription = stringResource(R.string.settings)
+            // App buttons section
+            onYouTubeClick = {
+                homeViewModel.handleAppClick(
+                    packageName = PACKAGE_YOUTUBE,
+                    availablePatches = availablePatches,
+                    bundleUpdateInProgress = false,
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = youtubeInstalledApp
                 )
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Update FAB
-                    if (hasManagerUpdate) {
-                        MorpheFloatingButtons(
-                            onClick = { showUpdateDetailsDialog = true },
-                            icon = Icons.Outlined.Update,
-                            contentDescription = stringResource(R.string.update),
-                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
-                    }
-
-                    // Bundles FAB
-                    MorpheFloatingButtons(
-                        onClick = { homeState.showBundlesSheet = true },
-                        icon = Icons.Outlined.Source,
-                        contentDescription = stringResource(R.string.morphe_home_bundles),
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
-                }
-            }
-
-            // Bundle update snackbar
-            HomeBundleUpdateSnackbar(
-                visible = homeState.showBundleUpdateSnackbar,
-                status = homeState.snackbarStatus,
-                progress = bundleUpdateProgress,
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
-        }
-    }
-
-    // Bundle sheet
-    if (homeState.showBundlesSheet) {
-        HomeBundleSheet(
-            apiBundle = homeState.apiBundle,
-            patchCounts = patchCounts,
-            manualUpdateInfo = manualUpdateInfo,
-            isRefreshing = homeState.isRefreshingBundle || bundleUpdateProgress != null,
-            onDismiss = { homeState.showBundlesSheet = false },
-            onRefresh = {
-                scope.launch {
-                    updateMorpheBundleAndUI()
-                }
+                youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
             },
-            onPatchesClick = {
-                scope.launch {
-                    homeState.showBundlesSheet = false
-                    delay(300)
-                    homeState.showPatchesSheet = true
-                }
+            onYouTubeMusicClick = {
+                homeViewModel.handleAppClick(
+                    packageName = PACKAGE_YOUTUBE_MUSIC,
+                    availablePatches = availablePatches,
+                    bundleUpdateInProgress = false,
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = youtubeMusicInstalledApp
+                )
+                youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
             },
-            onVersionClick = {
-                scope.launch {
-                    homeState.showBundlesSheet = false
-                    delay(300)
-                    homeState.showChangelogSheet = true
+            onRedditClick = {
+                homeViewModel.handleAppClick(
+                    packageName = PACKAGE_REDDIT,
+                    availablePatches = availablePatches,
+                    bundleUpdateInProgress = false,
+                    android11BugActive = dashboardViewModel.android11BugActive,
+                    installedApp = redditInstalledApp
+                )
+                redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+            },
+
+            // Installed apps data
+            youtubeInstalledApp = youtubeInstalledApp,
+            youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+            redditInstalledApp = redditInstalledApp,
+            youtubePackageInfo = youtubePackageInfo,
+            youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+            redditPackageInfo = redditPackageInfo,
+            onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
+            installedAppsLoading = homeViewModel.installedAppsLoading,
+
+            // Other apps button
+            onOtherAppsClick = {
+                if (availablePatches <= 0) {
+                    context.toast(context.getString(R.string.morphe_home_sources_are_loading))
+                    return@HomeSectionsLayout
                 }
-            }
+                homeViewModel.pendingPackageName = null
+                homeViewModel.pendingAppName = context.getString(R.string.morphe_home_other_apps)
+                homeViewModel.pendingRecommendedVersion = null
+                homeViewModel.showFilePickerPromptDialog = true
+            },
+            showOtherAppsButton = showOtherAppsButton,
+
+            // Bottom action bar
+            onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
+            onSettingsClick = onMorpheSettingsClick,
+
+            // Expert mode
+            isExpertModeEnabled = useExpertMode
         )
     }
 }

@@ -30,6 +30,14 @@ import kotlinx.coroutines.withTimeout
 import org.koin.core.component.inject
 import kotlin.math.max
 
+// Max memory value. Slightly higher values may work for some devices
+// but patching YT is the same time with both 1200 and 1600 memory.
+const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1536
+const val PROCESS_RUNTIME_MEMORY_DEFAULT = 512
+const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 256
+const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 384
+const val PROCESS_RUNTIME_MEMORY_STEP = 128
+
 /**
  * Runs the patcher in another process by using the app_process binary and IPC.
  */
@@ -91,10 +99,10 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                 )
                 // Success - update preference and return.
                 if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    if (memoryMB < 500) {
+                    if (memoryMB < PROCESS_RUNTIME_MEMORY_DEFAULT) {
                         // Don't save a value lower than the expected minimum.
                         // Instead allow discovering the actually memory limit again next time.
-                        memoryMB = 500
+                        memoryMB = PROCESS_RUNTIME_MEMORY_DEFAULT
                     }
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
@@ -110,7 +118,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
 
                 if (isMemoryFailure && memoryMB > minMemoryLimit) {
                     retried = true
-                    memoryMB -= 100
+                    memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
                     continue
                 }

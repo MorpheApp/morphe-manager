@@ -60,7 +60,8 @@ fun LanguagePickerDialog(
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
             )
-        }
+        },
+        scrollable = false
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -93,16 +94,13 @@ fun LanguagePickerDialog(
                             )
                         }
                     }
-                },
-                modifier = Modifier.fillMaxWidth()
+                }
             )
 
             // Language list
             LazyColumn(
                 state = listState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 400.dp),
+                modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(filteredLanguages) { language ->

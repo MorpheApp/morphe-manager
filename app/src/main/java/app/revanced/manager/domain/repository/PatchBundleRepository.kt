@@ -1219,7 +1219,6 @@ class PatchBundleRepository(
      * Updates all bundles that should be automatically updated.
      */
     suspend fun updateCheck() {
-        val useMorpheHomeScreen = prefs.useMorpheHomeScreen.getBlocking()
         store.dispatch(Update { it.autoUpdate })
         checkManualUpdates()
     }
