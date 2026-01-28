@@ -513,14 +513,9 @@ private fun ActionsSection(
     }
 
     if (viewModel.hasSavedCopy) {
-        val deleteText = if (installedApp.installType == InstallType.SAVED) {
-            stringResource(R.string.uninstall)
-        } else {
-            stringResource(R.string.delete)
-        }
         destructiveActions.add(
             ActionItem(
-                text = deleteText,
+                text = stringResource(R.string.delete),
                 icon = Icons.Outlined.DeleteOutline,
                 onClick = onDelete,
                 isDestructive = true
