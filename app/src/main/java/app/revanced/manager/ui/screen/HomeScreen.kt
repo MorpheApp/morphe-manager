@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
@@ -38,7 +37,7 @@ import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 /**
- * Home Screen 5-section layout
+ * Home Screen with 5-section layout
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
@@ -92,11 +91,6 @@ fun HomeScreen(
     var youtubeMusicPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
     var redditPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
 
-    // Bundle summaries
-    val youtubeBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
-    val youtubeMusicBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
-    val redditBundleSummaries = remember { mutableStateListOf<InstalledAppsViewModel.AppBundleSummary>() }
-
     // Observe all installed apps
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -141,55 +135,19 @@ fun HomeScreen(
     }
 
     // Update installed apps when data changes
-    LaunchedEffect(allInstalledApps, sources, bundleInfo) {
+    LaunchedEffect(allInstalledApps) {
         withContext(Dispatchers.IO) {
-            val sourceMap = sources.associateBy { it.uid }
-
-            // Helper function to build bundle summaries from selection
-            fun buildBundleSummariesFromSelection(selection: PatchSelection): List<InstalledAppsViewModel.AppBundleSummary> {
-                if (selection.isEmpty()) return emptyList()
-
-                return selection.keys.mapNotNull { uid ->
-                    val info = bundleInfo[uid]
-                    val source = sourceMap[uid]
-                    val title = source?.displayTitle ?: info?.name ?: return@mapNotNull null
-                    val version = info?.version
-                    InstalledAppsViewModel.AppBundleSummary(title = title, version = version)
-                }
-            }
-
             // Load YouTube
             youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
             youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
-            youtubeBundleSummaries.clear()
-            youtubeInstalledApp?.let { app ->
-                if (app.installType == InstallType.SAVED) {
-                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
-                }
-            }
 
             // Load YouTube Music
             youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE_MUSIC }
             youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
-            youtubeMusicBundleSummaries.clear()
-            youtubeMusicInstalledApp?.let { app ->
-                if (app.installType == InstallType.SAVED) {
-                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeMusicBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
-                }
-            }
 
             // Load Reddit
             redditInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_REDDIT }
             redditPackageInfo = redditInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
-            redditBundleSummaries.clear()
-            redditInstalledApp?.let { app ->
-                if (app.installType == InstallType.SAVED) {
-                    val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    redditBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
-                }
-            }
         }
     }
 
