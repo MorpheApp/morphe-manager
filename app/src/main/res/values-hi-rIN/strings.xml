@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">पैच बंडल</string>
     <string name="morphe_home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">क्या आप YouTube को फिर से लेजेंडरी बनाने के लिए तैयार हैं?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">आज से ऐप्स को खुद से बचा रहे हैं</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
-    <string name="morphe_home_bundle_type_api">API बंडल</string>
     <string name="morphe_home_update_error">उपडेट विफल हुआ</string>
     <string name="morphe_home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
-    <string name="morphe_home_updating_patches">पैच अपडेट हो रहे हैं…</string>
     <string name="morphe_home_update_success">अपडेट पूरा हुआ</string>
-    <string name="morphe_home_patches_updated">आपके पैच अप टू डेट हैं</string>
-    <string name="morphe_home_patches_are_loading">पैच लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="morphe_home_please_wait">कृपया प्रतीक्षा करें…</string>
-    <string name="morphe_home_open_in_browser">ब्राउज़र में खोलें</string>
-    <string name="morphe_home_failed_to_open_url">URL खोलने में विफल रहा</string>
-    <string name="morphe_home_date_added">जोड़ा गया</string>
-    <string name="morphe_home_date_updated">अपडेटेड </string>
-    <string name="morphe_home_check_updates">जाँच करे </string>
-    <string name="morphe_home_unknown">अज्ञात</string>
-    <string name="morphe_home_timeline">अद्यतन इतिहास</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple"> %1$s को पैच करने के लिए, आपको वर्शन %2$s (पैच न किया गया) की ज़रूरत होगी</string>
@@ -59,8 +47,6 @@
     <string name="morphe_patcher_selected_version">चयनित संस्करण</string>
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_copy_error">कॉपी त्रुटि</string>
-    <string name="morphe_patcher_show_error">त्रुटि दिखाएं</string>
     <string name="morphe_patcher_error_copied">%1$d / %2$d patches</string>
     <string name="morphe_patcher_patches_progress">URL copied to clipboard</string>
     <string name="morphe_patcher_long_step_warning">This step may take a while. Please wait…</string>
@@ -111,10 +97,6 @@
     <string name="morphe_patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe गृह वापस जाएँ</string>
-    <string name="morphe_settings_return_to_morphe_description">वापस सरल मोड में जाएँ</string>
-    <string name="morphe_settings_return_to_expert">मोड को एक्सपर्ट में बदलें</string>
-    <string name="morphe_settings_return_to_expert_description">पूर्ण-उत्पादक एक्सपर्ट मोड में स्विच करें</string>
     <string name="morphe_share_website">वेबसाइट साझा करें</string>
     <string name="morphe_share_website_description">साझा अधिकृत मॉर्फ वेबसाइट</string>
     <!-- App Icon Selector -->
@@ -150,8 +132,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">यह एक हेक्स रंग (#RRGGBB) या एक रंग संसाधन संदर्भ हो सकता है</string>
     <string name="morphe_patch_options_light_theme_color">सвет थीम पृष्ठभूमि रंग</string>
     <string name="morphe_patch_options_light_theme_color_description">यह एक हेक्स रंग (#RRGGBB) या एक रंग संसाधन संदर्भ हो सकता है</string>
-    <string name="morphe_patch_options_icon_instructions_title">आइकॉन फॉर्मेट निर्देश</string>
-    <string name="morphe_patch_options_header_instructions_title">हेडर फॉर्मेट निर्देश</string>
     <string name="morphe_patch_options_loading">पैच विकल्प लोड हो रहा है...</string>
     <string name="morphe_patch_options_waiting_for_bundle">पैच बंडल को अपडेट करने के लिए प्रतीक्षा करें</string>
     <string name="morphe_patch_options_load_error">पैच विकल्प को लोड करने में विफल रहा</string>

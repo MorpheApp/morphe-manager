@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-bundel</string>
     <string name="morphe_home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Klaar om YouTube legendarisch te maken?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Apps redden van zichzelf sinds vandaag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Aangedreven door cafeïne en goede patches</string>
-    <string name="morphe_home_bundle_type_api">API-bundel</string>
     <string name="morphe_home_update_error">Update mislukt</string>
     <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
-    <string name="morphe_home_updating_patches">Patches worden bijgewerkt…</string>
     <string name="morphe_home_update_success">Update voltooid</string>
-    <string name="morphe_home_patches_updated">Je patches zijn up-to-date</string>
-    <string name="morphe_home_patches_are_loading">Patches worden geladen, een ogenblik geduld...</string>
     <string name="morphe_home_please_wait">Een ogenblik geduld...</string>
-    <string name="morphe_home_open_in_browser">Open in de browser</string>
-    <string name="morphe_home_failed_to_open_url">Kan URL niet openen</string>
-    <string name="morphe_home_date_added">Toegevoegd</string>
-    <string name="morphe_home_date_updated">Bijgewerkt</string>
-    <string name="morphe_home_check_updates">Controleren</string>
-    <string name="morphe_home_unknown">Onbekend</string>
-    <string name="morphe_home_timeline">Update geschiedenis</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selecteer de APK die je hebt gedownload</string>
     <string name="morphe_home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat je zojuist hebt gedownload.</string>
-    <string name="morphe_home_file_picker_prompt_open">Open gedownloade APK-bestand</string>
     <string name="morphe_home_recommended_version">Aanbevolen versie</string>
     <string name="morphe_patcher_selected_version">Gekozen versie</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Rootmodus vereist dat de originele APK op uw apparaat is geïnstalleerd voordat u gaat patchen.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK opslaan</string>
-    <string name="morphe_patcher_copy_error">Kopieerfout</string>
-    <string name="morphe_patcher_show_error">Toon fout</string>
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Uw app heeft koorts, en de enige remedie zijn meer patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Verwijder onzin. Even geduld… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Terug naar Morphe-startscherm</string>
-    <string name="morphe_settings_return_to_morphe_description">Terugkeren naar vereenvoudigde modus</string>
-    <string name="morphe_settings_return_to_expert">Schakel over naar Expertmodus</string>
-    <string name="morphe_settings_return_to_expert_description">Schakel over naar de volledig ondersteunde expertmodus</string>
     <string name="morphe_share_website">Deel website</string>
     <string name="morphe_share_website_description">De officiële Morphe website delen</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
     <string name="morphe_patch_options_light_theme_color">Lichte themeka: Kleur</string>
     <string name="morphe_patch_options_light_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
-    <string name="morphe_patch_options_icon_instructions_title">Icoonindelingstitel</string>
-    <string name="morphe_patch_options_header_instructions_title">Hooftitelindelingstitel</string>
     <string name="morphe_patch_options_loading">Patchvoorkeuren worden geladen...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Wacht tot het patchpakket wordt bijgewerkt</string>
     <string name="morphe_patch_options_load_error">Mislukt om patchopties te laden</string>

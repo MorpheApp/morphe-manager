@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">حُزمة التعديل</string>
     <string name="morphe_home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">مستعد لجعل YouTube أسطوريًا مرة أخرى؟</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">إنقاذ التطبيقات من نفسها منذ اليوم</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">مدعوم بالكافيين والتعديلات الجيدة</string>
-    <string name="morphe_home_bundle_type_api">حزمة API</string>
     <string name="morphe_home_update_error">فشل التحديث</string>
     <string name="morphe_home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
-    <string name="morphe_home_updating_patches">جارٍ تحديث التعديلات…</string>
     <string name="morphe_home_update_success">اكتمل التحديث</string>
-    <string name="morphe_home_patches_updated">تم تحديث التعديلات الخاصة بك</string>
-    <string name="morphe_home_patches_are_loading">يتم تحميل التعديلات، يرجى الانتظار…</string>
     <string name="morphe_home_please_wait">يرجى الانتظار…</string>
-    <string name="morphe_home_open_in_browser">فتح في المتصفح</string>
-    <string name="morphe_home_failed_to_open_url">فشل في فتح الرابط</string>
-    <string name="morphe_home_date_added">تمت الإضافة</string>
-    <string name="morphe_home_date_updated">محدَّث</string>
-    <string name="morphe_home_check_updates">تحقق</string>
-    <string name="morphe_home_unknown">غير معروف</string>
-    <string name="morphe_home_timeline">سجل التحديث</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">لتعديل %1$s، تحتاج إلى الإصدار %2$s (غير المعدل)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">تحديد ملف APK الذي قمت بتنزيله</string>
     <string name="morphe_home_file_picker_prompt_description">الآن حدد ملف %1$s APK الذي قمت بتنزيله للتو.</string>
-    <string name="morphe_home_file_picker_prompt_open">فتح ملف APK الذي قمت بتنزيله</string>
     <string name="morphe_home_recommended_version">الإصدار الموصى به</string>
     <string name="morphe_patcher_selected_version">الإصدار المحدد</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل.</string>
     <string name="morphe_root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">حفظ ملف APK</string>
-    <string name="morphe_patcher_copy_error">خطأ في النسخ</string>
-    <string name="morphe_patcher_show_error">عرض الخطأ</string>
     <string name="morphe_patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d تعديلات</string>
     <string name="morphe_patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
     <string name="morphe_patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">الرجوع إلى الصفحة الرئيسية لـ Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">الرجوع إلى الوضع المبسط</string>
-    <string name="morphe_settings_return_to_expert">التبديل إلى وضع الخبير</string>
-    <string name="morphe_settings_return_to_expert_description">التبديل إلى وضع الخبير كامل الميزات</string>
     <string name="morphe_share_website">مشاركة الموقع الإلكتروني</string>
     <string name="morphe_share_website_description">شارك موقع Morphe الرسمي</string>
     <!-- App Icon Selector -->
@@ -166,10 +146,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
     <string name="morphe_patch_options_light_theme_color">لون خلفية المظهر الفاتح</string>
     <string name="morphe_patch_options_light_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
-    <string name="morphe_patch_options_icon_instructions_title">تعليمات تنسيق الأيقونة</string>
-    <string name="morphe_patch_options_header_instructions_title">تعليمات تنسيق الشعار</string>
     <string name="morphe_patch_options_loading">تحميل خيارات التعديل...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">انتظر حتى يتم تحديث حزمة التعديل</string>
     <string name="morphe_patch_options_load_error">فشل في تحميل خيارات التعديل</string>
     <string name="morphe_patch_options_no_available">لا توجد خيارات متاحة لهذا التعديل</string>
     <!-- Color Picker -->

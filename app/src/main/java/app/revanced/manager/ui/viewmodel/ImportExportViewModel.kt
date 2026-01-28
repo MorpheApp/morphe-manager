@@ -44,59 +44,6 @@ import kotlin.io.path.deleteExisting
 import kotlin.io.path.inputStream
 import app.revanced.manager.data.room.bundles.Source as SourceInfo
 
-sealed class ResetDialogState(
-    @StringRes val titleResId: Int,
-    @StringRes val descriptionResId: Int,
-    val onConfirm: () -> Unit,
-    val dialogOptionName: String? = null
-) {
-    class Keystore(onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.regenerate_keystore,
-        descriptionResId = R.string.regenerate_keystore_dialog_description,
-        onConfirm = onConfirm
-    )
-
-    class PatchSelectionAll(onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_selection_reset_all,
-        descriptionResId = R.string.patch_selection_reset_all_dialog_description,
-        onConfirm = onConfirm
-    )
-
-    class PatchSelectionPackage(dialogOptionName:String, onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_selection_reset_package,
-        descriptionResId = R.string.patch_selection_reset_package_dialog_description,
-        onConfirm = onConfirm,
-        dialogOptionName = dialogOptionName
-    )
-
-    class PatchSelectionBundle(dialogOptionName: String, onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_selection_reset_patches,
-        descriptionResId = R.string.patch_selection_reset_patches_dialog_description,
-        onConfirm = onConfirm,
-        dialogOptionName = dialogOptionName
-    )
-
-    class PatchOptionsAll(onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_options_reset_all,
-        descriptionResId = R.string.patch_options_reset_all_dialog_description,
-        onConfirm = onConfirm
-    )
-
-    class PatchOptionPackage(dialogOptionName:String, onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_options_reset_package,
-        descriptionResId = R.string.patch_options_reset_package_dialog_description,
-        onConfirm = onConfirm,
-        dialogOptionName = dialogOptionName
-    )
-
-    class PatchOptionBundle(dialogOptionName: String, onConfirm: () -> Unit) : ResetDialogState(
-        titleResId = R.string.patch_options_reset_patches,
-        descriptionResId = R.string.patch_options_reset_patches_dialog_description,
-        onConfirm = onConfirm,
-        dialogOptionName = dialogOptionName
-    )
-}
-
 @Serializable
 data class PatchBundleExportFile(
     val bundles: List<PatchBundleSnapshot>
@@ -152,8 +99,6 @@ class ImportExportViewModel(
         private set
     private var keystoreImportPath by mutableStateOf<Path?>(null)
     val showCredentialsDialog by derivedStateOf { keystoreImportPath != null }
-
-    var resetDialogState by mutableStateOf<ResetDialogState?>(null)
 
     val packagesWithOptions = optionsRepository.getPackagesWithSavedOptions()
     val packagesWithSelection = selectionRepository.getPackagesWithSavedSelection()
@@ -230,49 +175,8 @@ class ImportExportViewModel(
         app.toast(app.getString(R.string.export_keystore_success))
     }
 
-    fun regenerateKeystore() = viewModelScope.launch {
-        keystoreManager.regenerate()
-        app.toast(app.getString(R.string.regenerate_keystore_success))
-    }
-
-    fun resetSelection() = viewModelScope.launch {
-        withContext(Dispatchers.Default) { selectionRepository.reset() }
-        app.toast(app.getString(R.string.reset_patch_selection_success))
-    }
-
-    fun resetSelectionForPackage(packageName: String) = viewModelScope.launch {
-        selectionRepository.resetSelectionForPackage(packageName)
-        app.toast(app.getString(R.string.reset_patch_selection_success))
-    }
-
-    fun resetSelectionForPatchBundle(patchBundle: PatchBundleSource) = viewModelScope.launch {
-        selectionRepository.resetSelectionForPatchBundle(patchBundle.uid)
-        app.toast(app.getString(R.string.reset_patch_selection_success))
-    }
-
-    fun executeSelectionAction(target: Uri) = viewModelScope.launch {
-        val source = selectedBundle!!
-        val action = selectionAction!!
-        clearSelectionAction()
-
-        action.execute(source.uid, target)
-    }
-
     fun selectBundle(bundle: PatchBundleSource) {
         selectedBundle = bundle
-    }
-
-    fun clearSelectionAction() {
-        selectionAction = null
-        selectedBundle = null
-    }
-
-    fun importSelection() = clearSelectionAction().also {
-        selectionAction = Import()
-    }
-
-    fun exportSelection() = clearSelectionAction().also {
-        selectionAction = Export()
     }
 
     fun importPatchBundles(source: Uri) = viewModelScope.launch {

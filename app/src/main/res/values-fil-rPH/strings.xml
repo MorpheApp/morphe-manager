@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch bundle</string>
     <string name="morphe_home_greeting_1">Anong app ang gusto mong i-patch?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Handa ka na bang gawing astig muli ang YouTube?</string>

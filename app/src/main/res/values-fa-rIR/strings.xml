@@ -20,18 +20,10 @@
     <string name="morphe_home_greeting_9">نجات اپ‌ها از دست خودشون، از امروز!</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">قدرت گرفته از کافئین و پچ‌های خوب</string>
-    <string name="morphe_home_bundle_type_api">باندل api</string>
     <string name="morphe_home_update_error">بروزرسانی شکست خورد</string>
     <string name="morphe_home_update_error_subtitle">وضعیت اینترنتت رو چک‌ کن و دوباره امتحان کن</string>
-    <string name="morphe_home_updating_patches">در حال بروزرسانی پچ‌ها...</string>
     <string name="morphe_home_update_success">بروزرسانی کامل شد</string>
-    <string name="morphe_home_patches_updated">پچ‌های شما به روز هستند</string>
-    <string name="morphe_home_patches_are_loading">پچ‌ها در حال بارگذاری هستند، لطفا صبر کنید...</string>
     <string name="morphe_home_please_wait">لطفا صبر کنید...</string>
-    <string name="morphe_home_failed_to_open_url">باز کردن لینک ناموفق بود</string>
-    <string name="morphe_home_date_added">افزوده شد</string>
-    <string name="morphe_home_date_updated">به روزرسانی شد</string>
-    <string name="morphe_home_check_updates">بررسی</string>
     <string name="morphe_home_unknown">ناشناخته</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">فایل apk پچ نشده رو داری؟</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">修補程式包</string>
     <string name="morphe_home_greeting_1">您想修補哪個應用程式？</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">準備讓 YouTube 再次傳奇嗎?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">從今天起拯救應用程式免於自我毀滅</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">由咖啡因和良好的修補提供動力</string>
-    <string name="morphe_home_bundle_type_api">API 套件</string>
     <string name="morphe_home_update_error">更新失敗</string>
     <string name="morphe_home_update_error_subtitle">檢查您的網際網路連線，然後再試一次</string>
-    <string name="morphe_home_updating_patches">正在更新修補程式...</string>
     <string name="morphe_home_update_success">更新完成</string>
-    <string name="morphe_home_patches_updated">您的修補程式已是最新版本</string>
-    <string name="morphe_home_patches_are_loading">正在載入修補程式，請稍候…</string>
     <string name="morphe_home_please_wait">請稍候…</string>
-    <string name="morphe_home_open_in_browser">在瀏覽器中開啟連結</string>
-    <string name="morphe_home_failed_to_open_url">無法開啟網址</string>
-    <string name="morphe_home_date_added">已新增</string>
-    <string name="morphe_home_date_updated">已更新</string>
-    <string name="morphe_home_check_updates">檢查更新</string>
-    <string name="morphe_home_unknown">未知</string>
-    <string name="morphe_home_timeline">更新歷史</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始的未修補 APK 嗎？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修補 %1$s，你需要 %2$s 版本（未修補）</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">選取您下載的 APK</string>
     <string name="morphe_home_file_picker_prompt_description">現在請選取您剛下載的 %1$s APK 檔案。</string>
-    <string name="morphe_home_file_picker_prompt_open">開啟我下載的 APK 檔案</string>
     <string name="morphe_home_recommended_version">建議版本</string>
     <string name="morphe_patcher_selected_version">所選版本</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root 模式需要裝置上先安裝原始 APK 才能進行修補。</string>
     <string name="morphe_root_gmscore_excluded">GmsCore 支援性修補在 Root 模式中已排除</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">儲存 APK</string>
-    <string name="morphe_patcher_copy_error">複製錯誤</string>
-    <string name="morphe_patcher_show_error">顯示錯誤</string>
     <string name="morphe_patcher_error_copied">錯誤已複製到剪貼簿</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 個修補程式</string>
     <string name="morphe_patcher_long_step_warning">此步驟可能需要一些時間。請稍候…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">您的應用程式發燒了，唯一的處方是更多的修補程式… 🩺🔔</string>
     <string name="morphe_patcher_message_20">正在移除不必要的內容。請稍候… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">返回 Morphe 首頁</string>
-    <string name="morphe_settings_return_to_morphe_description">返回簡化模式</string>
-    <string name="morphe_settings_return_to_expert">切換至專業模式</string>
-    <string name="morphe_settings_return_to_expert_description">切換至功能完整的專業模式</string>
     <string name="morphe_share_website">分享網站</string>
     <string name="morphe_share_website_description">分享官方 Morphe 網站</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
     <string name="morphe_patch_options_light_theme_color">淺色主題背景顏色</string>
     <string name="morphe_patch_options_light_theme_color_description">可以是十六進制顏色 (#RRGGBB) 或顏色資源引用</string>
-    <string name="morphe_patch_options_icon_instructions_title">圖示格式說明</string>
-    <string name="morphe_patch_options_header_instructions_title">標題格式說明</string>
     <string name="morphe_patch_options_loading">正在載入修補選項…</string>
     <string name="morphe_patch_options_waiting_for_bundle">請等待修補程式包更新</string>
     <string name="morphe_patch_options_load_error">無法載入修補選項</string>

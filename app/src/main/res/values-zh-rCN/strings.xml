@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">补丁包</string>
     <string name="morphe_home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">准备让YouTube再次传奇吗？</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">从今天开始,拯救应用程序</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">靠咖啡因和好的补丁供电</string>
-    <string name="morphe_home_bundle_type_api">API 包</string>
     <string name="morphe_home_update_error">更新失败</string>
     <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
-    <string name="morphe_home_updating_patches">正在更新补丁…</string>
     <string name="morphe_home_update_success">更新完成</string>
-    <string name="morphe_home_patches_updated">您的补丁已是最新</string>
-    <string name="morphe_home_patches_are_loading">补丁正在加载，请稍候…</string>
     <string name="morphe_home_please_wait">请稍候…</string>
-    <string name="morphe_home_open_in_browser">在浏览器中打开链接</string>
-    <string name="morphe_home_failed_to_open_url">无法打开网址</string>
-    <string name="morphe_home_date_added">已添加</string>
-    <string name="morphe_home_date_updated">更新于</string>
-    <string name="morphe_home_check_updates">检查更新</string>
-    <string name="morphe_home_unknown">未知</string>
-    <string name="morphe_home_timeline">更新历史记录</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始未打补丁的 APK 吗？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修补 %1$s，您需要版本 %2$s（未修补）</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">选择您下载的APK</string>
     <string name="morphe_home_file_picker_prompt_description">现在选择您刚刚下载的 %1$s APK 文件。</string>
-    <string name="morphe_home_file_picker_prompt_open">打开我下载的APK文件</string>
     <string name="morphe_home_recommended_version">推荐版本</string>
     <string name="morphe_patcher_selected_version">已选版本</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root模式需要先在您的设备上安装原始APK，然后才能进行修补。</string>
     <string name="morphe_root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">保存 APK</string>
-    <string name="morphe_patcher_copy_error">复制错误</string>
-    <string name="morphe_patcher_show_error">显示错误</string>
     <string name="morphe_patcher_error_copied">错误已复制到剪贴板</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 个补丁</string>
     <string name="morphe_patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
     <string name="morphe_patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">返回 Morphe 主页</string>
-    <string name="morphe_settings_return_to_morphe_description">返回简化模式</string>
-    <string name="morphe_settings_return_to_expert">切换至专家模式</string>
-    <string name="morphe_settings_return_to_expert_description">切换至功能完整的专家模式</string>
     <string name="morphe_share_website">分享网站</string>
     <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
     <string name="morphe_patch_options_light_theme_color">浅色主题背景色</string>
     <string name="morphe_patch_options_light_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
-    <string name="morphe_patch_options_icon_instructions_title">图标格式说明</string>
-    <string name="morphe_patch_options_header_instructions_title">标题栏格式说明</string>
     <string name="morphe_patch_options_loading">正在加载补丁选项…</string>
     <string name="morphe_patch_options_waiting_for_bundle">请等待补丁包更新</string>
     <string name="morphe_patch_options_load_error">加载补丁选项失败</string>

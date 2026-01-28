@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patchcsomag</string>
     <string name="morphe_home_greeting_1">Melyik alkalmazást szeretné patchelni?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Készen áll, hogy a YouTube újra legendássá váljon?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">A mai naptól megmentjük az alkalmazásokat önmaguktól</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Koffein és jó patchek által hajtva</string>
-    <string name="morphe_home_bundle_type_api">API csomag</string>
     <string name="morphe_home_update_error">A frissítés sikertelen</string>
     <string name="morphe_home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
-    <string name="morphe_home_updating_patches">Patchek frissítése…</string>
     <string name="morphe_home_update_success">A frissítés befejeződött</string>
-    <string name="morphe_home_patches_updated">A patchek naprakészek</string>
-    <string name="morphe_home_patches_are_loading">A patchek betöltése folyamatban, kérem várjon…</string>
     <string name="morphe_home_please_wait">Kérem várjon…</string>
-    <string name="morphe_home_open_in_browser">Megnyitás böngészőben</string>
-    <string name="morphe_home_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="morphe_home_date_added">Hozzáadva</string>
-    <string name="morphe_home_date_updated">Frissítve</string>
-    <string name="morphe_home_check_updates">Ellenőrzés</string>
-    <string name="morphe_home_unknown">Ismeretlen</string>
-    <string name="morphe_home_timeline">Frissítési napló</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Rendelkezik az eredeti, nem patchelt APK-val?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s patcheléséhez a %2$s (nem patchelt) verzió szükséges</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Válassza ki a letöltött APK-t</string>
     <string name="morphe_home_file_picker_prompt_description">Most válassza ki a letöltött %1$s APK fájlt.</string>
-    <string name="morphe_home_file_picker_prompt_open">Nyissa meg a letöltött APK fájlt</string>
     <string name="morphe_home_recommended_version">Ajánlott verzió</string>
     <string name="morphe_patcher_selected_version">Kiválasztott verzió</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a patchelés előtt.</string>
     <string name="morphe_root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK mentése</string>
-    <string name="morphe_patcher_copy_error">Hiba másolása</string>
-    <string name="morphe_patcher_show_error">Hiba megjelenítése</string>
     <string name="morphe_patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
     <string name="morphe_patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük, várjon…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb patch… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Badarság eltávolítása. Kérjük, maradj készen… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Vissza a Morphe főoldalra</string>
-    <string name="morphe_settings_return_to_morphe_description">Vissza az egyszerűsített módba</string>
-    <string name="morphe_settings_return_to_expert">Átváltás a szakértői módra</string>
-    <string name="morphe_settings_return_to_expert_description">Átváltás a teljes funkcionalitású szakértői módra</string>
     <string name="morphe_share_website">Webhely megosztása</string>
     <string name="morphe_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
     <!-- App Icon Selector -->
@@ -166,10 +146,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
     <string name="morphe_patch_options_light_theme_color">Világos téma háttérszíne</string>
     <string name="morphe_patch_options_light_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
-    <string name="morphe_patch_options_icon_instructions_title">Ikonformátumra vonatkozó utasítások</string>
-    <string name="morphe_patch_options_header_instructions_title">Fejléc formátumra vonatkozó utasítások</string>
     <string name="morphe_patch_options_loading">Patch beállítások betöltése…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Várjon, amíg a patchcsomag frissítésre kerül</string>
     <string name="morphe_patch_options_load_error">Nem sikerült betölteni a patch beállításait</string>
     <string name="morphe_patch_options_no_available">Ennek a patchnek nincsenek beállításai</string>
     <!-- Color Picker -->

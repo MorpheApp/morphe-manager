@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Bundle de patch</string>
     <string name="morphe_home_greeting_1">Quelle application voulez-vous patcher ?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Prêt à rendre YouTube légendaire à nouveau ?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Sauvons les applications elles-mêmes à compter d\'aujourd\'hui</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Alimenté par la caféine et les bons patchs</string>
-    <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">Mise à jour échouée</string>
     <string name="morphe_home_update_error_subtitle">Vérifiez votre connexion Internet et réessayez</string>
-    <string name="morphe_home_updating_patches">Mise à jour des patchs…</string>
     <string name="morphe_home_update_success">Mise à jour terminée</string>
-    <string name="morphe_home_patches_updated">Vos patchs sont à jour</string>
-    <string name="morphe_home_patches_are_loading">Chargement des patchs, veuillez patienter…</string>
     <string name="morphe_home_please_wait">Veuillez patienter…</string>
-    <string name="morphe_home_open_in_browser">Ouvrir dans le navigateur</string>
-    <string name="morphe_home_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
-    <string name="morphe_home_date_added">Ajouté</string>
-    <string name="morphe_home_date_updated">Mis à jour</string>
-    <string name="morphe_home_check_updates">Vérifier</string>
-    <string name="morphe_home_unknown">Inconnu</string>
-    <string name="morphe_home_timeline">Historique des mises à jour</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Avez-vous l\'APK original non patché ?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pour mettre à jour %1$s, vous avez besoin de la version %2$s (non patché)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Sélectionnez l\'APK que vous avez téléchargée</string>
     <string name="morphe_home_file_picker_prompt_description">Sélectionnez maintenant le fichier APK %1$s que vous venez de télécharger.</string>
-    <string name="morphe_home_file_picker_prompt_open">Ouvrir le fichier APK que j\'ai téléchargé</string>
     <string name="morphe_home_recommended_version">Version recommandée</string>
     <string name="morphe_patcher_selected_version">Version sélectionnée</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage.</string>
     <string name="morphe_root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Enregistrer l\'APK</string>
-    <string name="morphe_patcher_copy_error">Copier l\'erreur</string>
-    <string name="morphe_patcher_show_error">Afficher l\'erreur</string>
     <string name="morphe_patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchs</string>
     <string name="morphe_patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Votre application a de la fièvre et la seule prescription est plus de patchs… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Retour à l\'accueil Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Retour au mode simplifié</string>
-    <string name="morphe_settings_return_to_expert">Passer en mode expert</string>
-    <string name="morphe_settings_return_to_expert_description">Passer en mode expert complet</string>
     <string name="morphe_share_website">Partager le site web</string>
     <string name="morphe_share_website_description">Partagez le site web officiel de Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
     <string name="morphe_patch_options_light_theme_color">Arrière-plan du thème clair</string>
     <string name="morphe_patch_options_light_theme_color_description">Peut être une couleur hexadécimale (#RRGGBB) ou une référence à une ressource de couleur</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instructions de format d\'icône</string>
-    <string name="morphe_patch_options_header_instructions_title">Instructions de format d\'en-tête</string>
     <string name="morphe_patch_options_loading">Chargement des options de patch…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Attendez la mise à jour du bundle patch</string>
     <string name="morphe_patch_options_load_error">Échec du chargement des options du patch</string>

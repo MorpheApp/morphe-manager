@@ -47,13 +47,9 @@ class InstallerManager(
         val hiddenPackages = hiddenInstallerPackages
         val entries = mutableListOf<Entry>()
 
-        // Morphe: In Morphe mode use checkRoot = false to avoid root prompts during listing.
-        // In Expert mode, check root for accurate status.
-        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
-
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = shouldCheckRoot)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = shouldCheckRoot)?.let(entries::add)
+        entryFor(Token.AutoSaved, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -177,7 +173,7 @@ class InstallerManager(
 
         val results = mutableListOf<PackageSuggestion>()
         packages.forEach { info ->
-            val packageName = info.packageName ?: return@forEach
+            val packageName = info.packageName
             val applicationInfo = info.applicationInfo
             val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
             val matches = packageName.contains(lower, ignoreCase = true) ||

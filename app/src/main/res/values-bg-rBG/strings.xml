@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Набор на пачове</string>
     <string name="morphe_home_greeting_1">Кое приложение искате да пачнете?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Готови ли сте да направим YouTube легендарен отново?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Запазваме приложения за самите себе от днес</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Захранва се от кофеин и добри кръпки</string>
-    <string name="morphe_home_bundle_type_api">API Пакет</string>
     <string name="morphe_home_update_error">Неуспешно актуализиране</string>
     <string name="morphe_home_update_error_subtitle">Проверете връзката си с интернет и опитайте отново</string>
-    <string name="morphe_home_updating_patches">Обновяне на пакети…</string>
     <string name="morphe_home_update_success">Актуализация завършена</string>
-    <string name="morphe_home_patches_updated">Вашите патчове са актуални</string>
-    <string name="morphe_home_patches_are_loading">Зареждането на пачовете продължава, моля изчакайте…</string>
     <string name="morphe_home_please_wait">Моля изчакайте…</string>
-    <string name="morphe_home_open_in_browser">Отваряне в браузър</string>
-    <string name="morphe_home_failed_to_open_url">Неуспешно отваряне на URL</string>
-    <string name="morphe_home_date_added">Добавено</string>
-    <string name="morphe_home_date_updated">Актуализиран</string>
-    <string name="morphe_home_check_updates">Проверка</string>
-    <string name="morphe_home_unknown">Неизвестен</string>
-    <string name="morphe_home_timeline">История на обновленията</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Имате ли оригиналния неподправен APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">За да пачнеш %1$s, ти трябва версия %2$s (без пач)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Изберете APK файла, който изтегнахте</string>
     <string name="morphe_home_file_picker_prompt_description">Сега изберете файла %1$s APK, който сте изтеглили.</string>
-    <string name="morphe_home_file_picker_prompt_open">Отворете APK файла, който изтегнахте</string>
     <string name="morphe_home_recommended_version">Рекомендирана версия</string>
     <string name="morphe_patcher_selected_version">Избрана версия</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Режимът \"Root\" изисква оригиналния APK да бъде инсталиран на вашето устройство преди да се прилагат патчове.</string>
     <string name="morphe_root_gmscore_excluded">Поддръжката на GmsCore е изключена в режим на корен</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Съхрани APK</string>
-    <string name="morphe_patcher_copy_error">Грешка при копиране</string>
-    <string name="morphe_patcher_show_error">Покажи грешките</string>
     <string name="morphe_patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d латки</string>
     <string name="morphe_patcher_long_step_warning">Този стъпка може да отнеме време. Моля, изчакайте…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Премахвам глупостите. Моля, изчакайте… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Връщане към началния екран на Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Връщане към опростен режим</string>
-    <string name="morphe_settings_return_to_expert">Промени на експерт режим</string>
-    <string name="morphe_settings_return_to_expert_description">Превключване към експерт режим с пълни възможности</string>
     <string name="morphe_share_website">Сподели уебсайт</string>
     <string name="morphe_share_website_description">Сподели официалния уебсайт на Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Може да бъде хекс цвят (#RRGGBB) или рефереция към ресурс на цвят</string>
     <string name="morphe_patch_options_light_theme_color">Светъл фонов цвят</string>
     <string name="morphe_patch_options_light_theme_color_description">Може да бъде хекс цвят (#RRGGBB) или рефереция към ресурс на цвят</string>
-    <string name="morphe_patch_options_icon_instructions_title">Инструкции за формат на иконите</string>
-    <string name="morphe_patch_options_header_instructions_title">Инструкции за формат на заглавията</string>
     <string name="morphe_patch_options_loading">Зарежда се опции за заплащане…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Очаквайте да се обнови пачовият набор</string>
     <string name="morphe_patch_options_load_error">Неуспешно зареждане на опции за пачове</string>

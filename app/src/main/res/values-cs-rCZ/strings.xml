@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Balíček záplat</string>
     <string name="morphe_home_greeting_1">Kterou aplikaci chcete spravit?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Jste připraveni znovu povznést YouTube na legendární úroveň?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Zachraňujeme aplikace před sebou samými od dneška</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Poháněno kávou a dobrými opravami</string>
-    <string name="morphe_home_bundle_type_api">API balíček</string>
     <string name="morphe_home_update_error">Aktualizace selhala</string>
     <string name="morphe_home_update_error_subtitle">Zkontrolujte připojení k internetu a zkuste to znovu</string>
-    <string name="morphe_home_updating_patches">Aktualizují se záplaty…</string>
     <string name="morphe_home_update_success">Aktualizace dokončena</string>
-    <string name="morphe_home_patches_updated">Vaše záplaty jsou aktuální</string>
-    <string name="morphe_home_patches_are_loading">Záplaty se načítají, prosím čekejte…</string>
     <string name="morphe_home_please_wait">Čekejte, prosím…</string>
-    <string name="morphe_home_open_in_browser">Otev\u0159\u0165\u010dit v prohl\u0159\u017ee\u010d\u0165\u0122i</string>
-    <string name="morphe_home_failed_to_open_url">Selhání otevření URL</string>
-    <string name="morphe_home_date_added">Přidáno</string>
-    <string name="morphe_home_date_updated">Aktualizováno</string>
-    <string name="morphe_home_check_updates">Kontrolovat</string>
-    <string name="morphe_home_unknown">Neznámé</string>
-    <string name="morphe_home_timeline">Historie aktualizac\u00EC</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Máte původní neupravenou APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pro opravení %1$s potřebujete verzi %2$s (neopraveno)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Vyberte staženou APK</string>
     <string name="morphe_home_file_picker_prompt_description">Nyní vyberte soubor APK %1$s, který jste právě stáhli.</string>
-    <string name="morphe_home_file_picker_prompt_open">Otevřít stažený soubor APK</string>
     <string name="morphe_home_recommended_version">Doporu\u010den\u0110 verze</string>
     <string name="morphe_patcher_selected_version">Vybraná verze</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Režim root vyžaduje, aby byl před patchováním nainstalován původní APK na vašem zařízení.</string>
     <string name="morphe_root_gmscore_excluded">Patch podpory GmsCore je v root módu vyloučen</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Uložit APK</string>
-    <string name="morphe_patcher_copy_error">Chyba při kopírování</string>
-    <string name="morphe_patcher_show_error">Zobrazit chybu</string>
     <string name="morphe_patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchů</string>
     <string name="morphe_patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Vaše aplikace má horečku a jediný předpis je více patchů… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Odstraňování nesmyslů. Prosím, čekejte… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Návrat na domovskou stránku Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Návrat do zjednodušeného režimu</string>
-    <string name="morphe_settings_return_to_expert">Přepnout na specializovaný režim</string>
-    <string name="morphe_settings_return_to_expert_description">Přepnout na plný výprovozkový specializovaný režim</string>
     <string name="morphe_share_website">Setwitter / sdélat web</string>
     <string name="morphe_share_website_description">Sdílet oficiální webovou stránku Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Může být hexová barva (#RRGGBB) nebo odkaz na prostředek barvy</string>
     <string name="morphe_patch_options_light_theme_color">Barva pozadí světlého motivu</string>
     <string name="morphe_patch_options_light_theme_color_description">Může být hexová barva (#RRGGBB) nebo odkaz na prostředek barvy</string>
-    <string name="morphe_patch_options_icon_instructions_title">Návody pro formát ikon</string>
-    <string name="morphe_patch_options_header_instructions_title">Návody pro formát hlavičky</string>
     <string name="morphe_patch_options_loading">Načítám možnosti...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Počkejte, než je balíček oprav aktualizován</string>
     <string name="morphe_patch_options_load_error">Nastavení možností oprav selhalo</string>

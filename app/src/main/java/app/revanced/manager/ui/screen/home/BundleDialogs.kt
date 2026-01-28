@@ -169,7 +169,7 @@ private fun RemoteTabContent(
                 value = remoteUrl,
                 onValueChange = onUrlChange,
                 label = {
-                    Text(stringResource(R.string.morphe_add_patch_source_remote))
+                    Text(stringResource(R.string.morphe_add_patch_source_remote_url))
                 },
                 placeholder = {
                     Text(text = "https://example.com/patches.json")

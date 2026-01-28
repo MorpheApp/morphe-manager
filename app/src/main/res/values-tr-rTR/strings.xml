@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Yama paketi</string>
     <string name="morphe_home_greeting_1">Hangi uygulamayı yamalamak istiyorsunuz?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">YouTube\'u tekrar efsane yapmaya hazır mısınız?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Bugünden beri kendini kurtaran uygulamalar</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
-    <string name="morphe_home_bundle_type_api">API Paketi</string>
     <string name="morphe_home_update_error">Güncelleme başarısız</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
-    <string name="morphe_home_updating_patches">Yama paketleri güncelleniyor…</string>
     <string name="morphe_home_update_success">Güncelleme tamamlandı</string>
-    <string name="morphe_home_patches_updated">Yama paketleriniz güncel</string>
-    <string name="morphe_home_patches_are_loading">Yama paketleri yükleniyor, lütfen bekleyin…</string>
     <string name="morphe_home_please_wait">Lütfen bekleyin…</string>
-    <string name="morphe_home_open_in_browser">Tarayıcıda Aç</string>
-    <string name="morphe_home_failed_to_open_url">URL Açılamadı</string>
-    <string name="morphe_home_date_added">Eklendi</string>
-    <string name="morphe_home_date_updated">Güncellendi</string>
-    <string name="morphe_home_check_updates">Kontrol Et</string>
-    <string name="morphe_home_unknown">Bilinmeyen</string>
-    <string name="morphe_home_timeline">Güncelleme Geçmişi</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s\'i yamak için %2$s (yamasız) sürümüne ihtiyacınız var</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">Şimdi yeni indirdiğiniz %1$s APK dosyasını seçin.</string>
-    <string name="morphe_home_file_picker_prompt_open">İndirdiğim APK dosyasını aç</string>
     <string name="morphe_home_recommended_version">Tavsiye Edilen Sürüm</string>
     <string name="morphe_patcher_selected_version">Seçilen sürüm</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Kök modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK Kaydet</string>
-    <string name="morphe_patcher_copy_error">Kopya hatası</string>
-    <string name="morphe_patcher_show_error">Hata göster</string>
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="morphe_patcher_patches_progress">%2$d / %1$d yama</string>
     <string name="morphe_patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Uygulamanızın ateşi var ve tek reçete daha fazla yama… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Saçmalıklar kaldırılıyor. Lütfen bekleyin… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe ana sayfasına dön</string>
-    <string name="morphe_settings_return_to_morphe_description">Basit moda dön</string>
-    <string name="morphe_settings_return_to_expert">Uzman moduna geç</string>
-    <string name="morphe_settings_return_to_expert_description">Tam özellikli expert moduna geçin</string>
     <string name="morphe_share_website">Web sitesini paylaş</string>
     <string name="morphe_share_website_description">Resmi Morphe web sitesini paylaşın</string>
     <!-- App Icon Selector -->
@@ -166,10 +146,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
     <string name="morphe_patch_options_light_theme_color">Açık tema arka plan rengi</string>
     <string name="morphe_patch_options_light_theme_color_description">Bir hex renk (#RRGGBB) veya bir renk kaynak referansı olabilir</string>
-    <string name="morphe_patch_options_icon_instructions_title">Simge formatı talimatları</string>
-    <string name="morphe_patch_options_header_instructions_title">Başlık formatı talimatları</string>
     <string name="morphe_patch_options_loading">Yama seçenekleri yükleniyor...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Yama paketi güncellenene kadar bekleyin</string>
     <string name="morphe_patch_options_load_error">Yama seçenekleri yüklenemedi</string>
     <string name="morphe_patch_options_no_available">Bu yamaya ait seçenekler bulunmuyor</string>
     <!-- Color Picker -->

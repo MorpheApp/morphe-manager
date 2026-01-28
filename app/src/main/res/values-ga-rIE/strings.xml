@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Paiste Beart</string>
     <string name="morphe_home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Réidh le YouTube a dhéanamh finscéalach arís?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Aipeanna á sábháil uathu féin ó inniu</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
-    <string name="morphe_home_bundle_type_api">Beart API</string>
     <string name="morphe_home_update_error">Theip ar nuashonrú</string>
     <string name="morphe_home_update_error_subtitle">Seiceáil do nasc idirlín agus bain triail eile as</string>
-    <string name="morphe_home_updating_patches">Ag nuashonrú paistí…</string>
     <string name="morphe_home_update_success">Nuashonrú críochnaithe</string>
-    <string name="morphe_home_patches_updated">Tá do paistí suas chun dáta</string>
-    <string name="morphe_home_patches_are_loading">Tá na paistí ag lódáil, fan le do thoil…</string>
     <string name="morphe_home_please_wait">Fan le do thoil…</string>
-    <string name="morphe_home_open_in_browser">Oscail sa bhrabhsálaí</string>
-    <string name="morphe_home_failed_to_open_url">Teip ar URL a oscailt</string>
-    <string name="morphe_home_date_added">Cuireadh leis</string>
-    <string name="morphe_home_date_updated">Nuashonraithe</string>
-    <string name="morphe_home_check_updates">Seiceáil</string>
-    <string name="morphe_home_unknown">Anaithnid</string>
-    <string name="morphe_home_timeline">Stair nuashonraithe</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">An bhfuil an APK bunaidh neamhpaisteáilte agat?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a phaisteáil, ní mór duit leagan %2$s (gan phaisteáil) a úsáid</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Roghnaigh an APK a d\'íoslódáil tú</string>
     <string name="morphe_home_file_picker_prompt_description">Anois roghnaigh an comhad APK %1$s a d\'íoslódáil tú díreach.</string>
-    <string name="morphe_home_file_picker_prompt_open">Oscail an comhad APK a d\'íoslódáil mé</string>
     <string name="morphe_home_recommended_version">Leagan molta</string>
     <string name="morphe_patcher_selected_version">Leagan roghnaithe</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil.</string>
     <string name="morphe_root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Sábháil APK</string>
-    <string name="morphe_patcher_copy_error">Earráid chóipeála</string>
-    <string name="morphe_patcher_show_error">Taispeáin earráid</string>
     <string name="morphe_patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d paistí</string>
     <string name="morphe_patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Tionnadh go dtí baile Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Fill ar ais go mód simplithe</string>
-    <string name="morphe_settings_return_to_expert">Athraigh go mód saineolaithe</string>
-    <string name="morphe_settings_return_to_expert_description">Athraigh go dtí an mód saineolaithe lánghnéitheach</string>
     <string name="morphe_share_website">Comhroinn suíomh Gréasáin</string>
     <string name="morphe_share_website_description">Comhroinn suíomh Gréasáin oifigiúil Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Is féidir dath heicsidheachúlach (#RRGGBB) nó tagairt acmhainne datha a bheith ann</string>
     <string name="morphe_patch_options_light_theme_color">Dath cúlra téama éadrom</string>
     <string name="morphe_patch_options_light_theme_color_description">Is féidir dath heicsidheachúlach (#RRGGBB) nó tagairt acmhainne datha a bheith ann</string>
-    <string name="morphe_patch_options_icon_instructions_title">Treoracha formáide deilbhíní</string>
-    <string name="morphe_patch_options_header_instructions_title">Treoracha formáide ceanntásca</string>
     <string name="morphe_patch_options_loading">Ag lódáil roghanna paiste…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Fan go dtí go mbeidh an pacáiste paiste nuashonraithe</string>
     <string name="morphe_patch_options_load_error">Theip ar na roghanna paiste a luchtú</string>

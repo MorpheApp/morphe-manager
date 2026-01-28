@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-pakke</string>
     <string name="morphe_home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Klar til at gøre YouTube legendarisk igen?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Redder apps fra dem selv siden i dag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Drevet af koffein og gode patches</string>
-    <string name="morphe_home_bundle_type_api">API-pakke</string>
     <string name="morphe_home_update_error">Opdatering mislykkedes</string>
     <string name="morphe_home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
-    <string name="morphe_home_updating_patches">Opdaterer patches…</string>
     <string name="morphe_home_update_success">Opdatering fuldført</string>
-    <string name="morphe_home_patches_updated">Dine patches er opdaterede</string>
-    <string name="morphe_home_patches_are_loading">Patches indlæses, vent venligst…</string>
     <string name="morphe_home_please_wait">Vent venligst…</string>
-    <string name="morphe_home_open_in_browser">Åbn i browser</string>
-    <string name="morphe_home_failed_to_open_url">Kunne ikke åbne URL</string>
-    <string name="morphe_home_date_added">Tilføjet</string>
-    <string name="morphe_home_date_updated">Opdateret</string>
-    <string name="morphe_home_check_updates">Tjek</string>
-    <string name="morphe_home_unknown">Ukendt</string>
-    <string name="morphe_home_timeline">Historik for opdateringer</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den originale upatchede APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Vælg den APK du har downloadet</string>
     <string name="morphe_home_file_picker_prompt_description">Vælg nu %1$s APK-filen, som du lige har downloadet.</string>
-    <string name="morphe_home_file_picker_prompt_open">Åbn APK-fil jeg downloadede</string>
     <string name="morphe_home_recommended_version">Anbefalet version</string>
     <string name="morphe_patcher_selected_version">Valgte version</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root-tilstand kræver, at den originale APK er installeret på din enhed, før der kan lappes.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Gem APK</string>
-    <string name="morphe_patcher_copy_error">Kopierfejl</string>
-    <string name="morphe_patcher_show_error">Vis fejl</string>
     <string name="morphe_patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d pletter</string>
     <string name="morphe_patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Fjerner vrøvl. Venligst vent… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Tilbage til Morphe hjem</string>
-    <string name="morphe_settings_return_to_morphe_description">Tilbage til forenklet tilstand</string>
-    <string name="morphe_settings_return_to_expert">Skift til ekspertmodus</string>
-    <string name="morphe_settings_return_to_expert_description">Skift til den fuldudviklede ekspertmodus</string>
     <string name="morphe_share_website">Del hjemmeside</string>
     <string name="morphe_share_website_description">Del den officielle Morphe-hjemmeside</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
     <string name="morphe_patch_options_light_theme_color">Lys version baggrunds farve</string>
     <string name="morphe_patch_options_light_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instruktioner for ikoner</string>
-    <string name="morphe_patch_options_header_instructions_title">Instruktioner for header</string>
     <string name="morphe_patch_options_loading">Henter pakkeindstillinger...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Vent til patch pakken opdateres</string>
     <string name="morphe_patch_options_load_error">Fejled ved indlæsning af patchindstillinger</string>

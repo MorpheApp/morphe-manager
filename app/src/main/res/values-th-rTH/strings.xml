@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">ชุดแพตช์</string>
     <string name="morphe_home_greeting_1">คุณต้องการแพ็ตช์แอปใด</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">พร้อมหรือยังที่จะให้ YouTube กลับมาเป็นตำนานอีกครั้ง</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">ช่วยแอปพลิเคชันให้รอดตัวตั้งแต่วันนี้</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">ขับเคลื่อนด้วยคาเฟอีนและแพทช์ที่ดี</string>
-    <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">การอัปเดตล้มเหลว</string>
     <string name="morphe_home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
-    <string name="morphe_home_updating_patches">กำลังอัปเดตแพตช์…</string>
     <string name="morphe_home_update_success">อัปเดตเสร็จสมบูรณ์</string>
-    <string name="morphe_home_patches_updated">แพตช์ของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
-    <string name="morphe_home_patches_are_loading">แพตช์กำลังโหลด โปรดรอสักครู่…</string>
     <string name="morphe_home_please_wait">โปรดรอสักครู่…</string>
-    <string name="morphe_home_open_in_browser">Open in browser</string>
-    <string name="morphe_home_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
-    <string name="morphe_home_date_added">เพิ่มแล้ว</string>
-    <string name="morphe_home_date_updated">อัปเดตแล้ว</string>
-    <string name="morphe_home_check_updates">ตรวจสอบ</string>
-    <string name="morphe_home_unknown">ไม่รู้จัก</string>
-    <string name="morphe_home_timeline">ประวัติการอัปเดต</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">คุณมี APK ต้นฉบับที่ยังไม่ได้แพตช์หรือไม่?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
     <string name="morphe_home_file_picker_prompt_description">ตอนนี้ ให้เลือกไฟล์ APK %1$s ที่คุณเพิ่งดาวน์โหลด</string>
-    <string name="morphe_home_file_picker_prompt_open">เปิดไฟล์ APK ที่ฉันดาวน์โหลด</string>
     <string name="morphe_home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="morphe_patcher_selected_version">เวอร์ชันที่เลือก</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">โหมด Root จำเป็นต้องติดตั้ง APK ต้นฉบับไว้ในอุปกรณ์ของคุณก่อนทำการแพตช์</string>
     <string name="morphe_root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">บันทึกไฟล์ APK</string>
-    <string name="morphe_patcher_copy_error">ข้อผิดพลาดในการสำรองข้อมูล</string>
-    <string name="morphe_patcher_show_error">แสดงข้อผิดพลาด</string>
     <string name="morphe_patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d แพตช์</string>
     <string name="morphe_patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
     <string name="morphe_patcher_message_20">กำลังลบข้อความที่ไร้สาระ กรุณารอ… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">กลับหน้าหลัก Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">กลับสู่โหมดธรรมดา</string>
-    <string name="morphe_settings_return_to_expert">Change to Expert mode</string>
-    <string name="morphe_settings_return_to_expert_description">Switch to the full-featured expert mode</string>
     <string name="morphe_share_website">แชร์เว็บไซต์</string>
     <string name="morphe_share_website_description">แชร์เว็บไซต์ทางการของ Morphe</string>
     <!-- App Icon Selector -->
@@ -166,10 +146,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">สามารถเป็นสีในรูปแบบ헥ซาดีเซමอล (#RRGGBB) หรืออ้างอิงทรัพยากรสี</string>
     <string name="morphe_patch_options_light_theme_color">สีพื้นหลังธีมที่สว่าง</string>
     <string name="morphe_patch_options_light_theme_color_description">สามารถเป็นสีในรูปแบบ헥ซาดีเซමอล (#RRGGBB) หรืออ้างอิงทรัพยากรสี</string>
-    <string name="morphe_patch_options_icon_instructions_title">ข้อบังคับสำหรับรูปภาพไอคอน</string>
-    <string name="morphe_patch_options_header_instructions_title">ข้อบังคับสำหรับรูปภาพหัวข้อ</string>
     <string name="morphe_patch_options_loading">Loading ตัวเลือกการซ่อมแซม…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">รอให้การติดตั้งส่งกลับข้อมูลส่วนเสริม</string>
     <string name="morphe_patch_options_load_error">การโหลดตัวเลือกการติดตั้งล้มเหลว</string>
     <string name="morphe_patch_options_no_available">ไม่มีตัวเลือกที่พร้อมใช้งานสำหรับการซ่อมแซมนี้</string>
     <!-- Color Picker -->

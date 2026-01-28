@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">חבילת תיקון</string>
     <string name="morphe_home_greeting_1">אילו יישומון אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">מוכן להפוך את YouTube למיתולוגי שוב?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">מצילים אפליקציות מעצמן מהיום</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">מופעל על ידי קפאין ותיקונים טובים</string>
-    <string name="morphe_home_bundle_type_api">חבילת API</string>
     <string name="morphe_home_update_error">העדכון נכשל</string>
     <string name="morphe_home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
-    <string name="morphe_home_updating_patches">מעדכן תיקונים…</string>
     <string name="morphe_home_update_success">העדכון הושלם</string>
-    <string name="morphe_home_patches_updated">התיקונים שלך מעודכנים</string>
-    <string name="morphe_home_patches_are_loading">התיקונים נטענים, אנא המתן…</string>
     <string name="morphe_home_please_wait">אנא המתן…</string>
-    <string name="morphe_home_open_in_browser">פתח בדפדפן</string>
-    <string name="morphe_home_failed_to_open_url">הפעולה נכשלה, לא ניתן לפתוח את ה-URL</string>
-    <string name="morphe_home_date_added">נוסף</string>
-    <string name="morphe_home_date_updated">עודכן</string>
-    <string name="morphe_home_check_updates">בדוק</string>
-    <string name="morphe_home_unknown">לא ידוע</string>
-    <string name="morphe_home_timeline">история обновлений</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">האם יש לך את קובץ ה-APK המקורי ללא תיקונים?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">כדי לתקן את %1$s, אתה צריך את הגרסה %2$s (לא מתוקנת)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">בחר את קובץ ה-APK שהורדת</string>
     <string name="morphe_home_file_picker_prompt_description">כעת בחר את קובץ ה-APK מסוג %1$s שהורדת זה עתה.</string>
-    <string name="morphe_home_file_picker_prompt_open">פתח קובץ APK שהורדתי</string>
     <string name="morphe_home_recommended_version">версия для рекомендации</string>
     <string name="morphe_patcher_selected_version">גרסה שוחזרת</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">מצב Root דורש שה-APK המקורי יהיה מותקן על המכשיר שלך לפני התיקון.</string>
     <string name="morphe_root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">שמור APK</string>
-    <string name="morphe_patcher_copy_error">שגיאת עתיק硬化</string>
-    <string name="morphe_patcher_show_error">הראה שגיאה</string>
     <string name="morphe_patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d תיקונים</string>
     <string name="morphe_patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
     <string name="morphe_patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">חזור לדף הבית של Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">חזור למצב פשוט</string>
-    <string name="morphe_settings_return_to_expert">אם לספור את מומחי ישיר. להיות מומחה.#!/ strenge מה...</string>
-    <string name="morphe_settings_return_to_expert_description">זה הולך לה thắng ב- новый >  #.fdsvc</string>
     <string name="morphe_share_website">שתף אתר</string>
     <string name="morphe_share_website_description">שתף את אתר האינטרנט הרשמי של Morphe</string>
     <!-- App Icon Selector -->
@@ -167,8 +147,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Может быть #RRGGBB или ссылка на ресурс цвета</string>
     <string name="morphe_patch_options_light_theme_color">Цвет заднего плана светлой темы</string>
     <string name="morphe_patch_options_light_theme_color_description">Может быть #RRGGBB или ссылка на ресурс цвета</string>
-    <string name="morphe_patch_options_icon_instructions_title">Пояснения по формату иконки</string>
-    <string name="morphe_patch_options_header_instructions_title">Пояснения по формату заголовка</string>
     <string name="morphe_patch_options_loading">Загрузка опций исправления...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Ждите, пока пакет патча будет обновлен</string>
     <string name="morphe_patch_options_load_error">Ошибка загрузки опций патча</string>

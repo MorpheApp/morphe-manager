@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Pachet de patch-uri</string>
     <string name="morphe_home_greeting_1">Pentru ce aplicație doriți să aplicați patch-uri?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Gata să faceți YouTube legendar din nou?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Salvăm aplicaţiile de la ele însele din astăzi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Alimentat de cafea şi patch-uri bune</string>
-    <string name="morphe_home_bundle_type_api">Pachet API</string>
     <string name="morphe_home_update_error">Actualizarea a eșuat</string>
     <string name="morphe_home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
-    <string name="morphe_home_updating_patches">Se actualizează patch-urile…</string>
     <string name="morphe_home_update_success">Actualizare completă</string>
-    <string name="morphe_home_patches_updated">Patch-urile tale sunt la zi</string>
-    <string name="morphe_home_patches_are_loading">Patch-urile se încarcă, vă rugăm așteptați…</string>
     <string name="morphe_home_please_wait">Vă rugăm așteptați…</string>
-    <string name="morphe_home_open_in_browser">Deschide în browser</string>
-    <string name="morphe_home_failed_to_open_url">Nu s-a putut deschide URL-ul</string>
-    <string name="morphe_home_date_added">Adăugat</string>
-    <string name="morphe_home_date_updated">Actualizat</string>
-    <string name="morphe_home_check_updates">Verifică</string>
-    <string name="morphe_home_unknown">Necunoscut</string>
-    <string name="morphe_home_timeline">Istoric de actualizări</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
     <string name="morphe_home_file_picker_prompt_description">Acum selectează fișierul APK %1$s pe care tocmai l-ai descărcat.</string>
-    <string name="morphe_home_file_picker_prompt_open">Deschide fișierul APK pe care l-am descărcat</string>
     <string name="morphe_home_recommended_version">Versiune recomandată</string>
     <string name="morphe_patcher_selected_version">Versiune selectat\u0103</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Modul root necesită ca fișierul APK original să fie instalat pe dispozitivul dvs. înainte de aplicarea patch-ului.</string>
     <string name="morphe_root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Salvare APK</string>
-    <string name="morphe_patcher_copy_error">Eroare la copiere</string>
-    <string name="morphe_patcher_show_error">Arat\u0103 eroarea</string>
     <string name="morphe_patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch-uri</string>
     <string name="morphe_patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Întoarcere la pagina principală Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Reveniți la modul simplificat</string>
-    <string name="morphe_settings_return_to_expert">Schimbă la modul avansat</string>
-    <string name="morphe_settings_return_to_expert_description">Schimbă la modul expert complet</string>
     <string name="morphe_share_website">Partajare website</string>
     <string name="morphe_share_website_description">Distribuie site-ul web oficial Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Poate fi o culoare HEX (#RRGGBB) sau o referință la resursa de culoare</string>
     <string name="morphe_patch_options_light_theme_color">Culoare fundal pentru temă luminată</string>
     <string name="morphe_patch_options_light_theme_color_description">Poate fi o culoare HEX (#RRGGBB) sau o referință la resursa de culoare</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instrucțiuni formate iconiță</string>
-    <string name="morphe_patch_options_header_instructions_title">Instrucțiuni formate header</string>
     <string name="morphe_patch_options_loading">Încărcare opțiuni patch...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Așteptați până când bundle-ul de patch este actualizat</string>
     <string name="morphe_patch_options_load_error">Eroare la încărcarea opțiunilor de patch</string>

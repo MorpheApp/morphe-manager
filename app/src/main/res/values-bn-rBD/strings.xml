@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">প্যাচ বান্ডিল</string>
     <string name="morphe_home_greeting_1">আপনি কোন অ্যাপ পাচ্ছতে চান?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">YouTube কে আবার জনপ্রিয় করার জন্য প্রস্তুত?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">আজ থেকে নিজেরই সাহায্য করছি</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">ক্যাফেইন ও ভালো প্যাচ দিয়ে চালিত</string>
-    <string name="morphe_home_bundle_type_api">এপিআই বান্ডিল</string>
     <string name="morphe_home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="morphe_home_update_error_subtitle">আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন</string>
-    <string name="morphe_home_updating_patches">প্যাচ আপডেট হচ্ছে…</string>
     <string name="morphe_home_update_success">আপডেট সম্পন্ন হয়েছে</string>
-    <string name="morphe_home_patches_updated">আপনার প্যাচগুলি আপ টু ডেট</string>
-    <string name="morphe_home_patches_are_loading">প্যাচ লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="morphe_home_please_wait">অনুগ্রহ করে অপেক্ষা করুন…</string>
-    <string name="morphe_home_open_in_browser">লিঙ্ক ব্রাউজারে খোলুন</string>
-    <string name="morphe_home_failed_to_open_url">URL খোলা যায়নি</string>
-    <string name="morphe_home_date_added">যোগ করা হয়েছে</string>
-    <string name="morphe_home_date_updated">আপডেট করা হয়েছে</string>
-    <string name="morphe_home_check_updates">চেক করুন</string>
-    <string name="morphe_home_unknown">অজানা</string>
-    <string name="morphe_home_timeline">修鉴記​</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s পার্চ করতে, আপনার %2$s (পার্চ না করা) সংস্করণ প্রয়োজন</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">আপনি যে APK ডাউনলোড করেছেন সেটি নির্বাচন করুন</string>
     <string name="morphe_home_file_picker_prompt_description">এখন আপনি যে %1$s APK ফাইলটি ডাউনলোড করেছেন সেটি নির্বাচন করুন।</string>
-    <string name="morphe_home_file_picker_prompt_open">আমি যে APK ফাইলটি ডাউনলোড করেছি সেটি খুলুন</string>
     <string name="morphe_home_recommended_version">社学牛​</string>
     <string name="morphe_patcher_selected_version">নির্বাচিত সংস্করণ</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">রুট মোডের জন্য প্যাচ করার আগে আপনার ডিভাইসে আসল APK ইনস্টল করা প্রয়োজন।</string>
     <string name="morphe_root_gmscore_excluded">রুট মোডে GmsCore সমর্থন প্যাচ বাদ দেওয়া হয়েছে</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK সংরক্ষণ করুন</string>
-    <string name="morphe_patcher_copy_error">কপি ত্রুটি</string>
-    <string name="morphe_patcher_show_error">ত্রুটি দেখাও</string>
     <string name="morphe_patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="morphe_patcher_patches_progress">%2$d টির মধ্যে %1$d টি প্যাচ</string>
     <string name="morphe_patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">আপনার অ্যাপের জ্বর হয়েছে, এবং এর একমাত্র প্রতিকার হল আরও প্যাচ… 🩺🔔</string>
     <string name="morphe_patcher_message_20">অর্থহীন কথাগুলো সরিয়ে ফেলা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe হোমে ফিরে যান</string>
-    <string name="morphe_settings_return_to_morphe_description">সরলীকৃত মোডে ফিরে যান</string>
-    <string name="morphe_settings_return_to_expert">প্রোফেশনাল মোড় স্঵িচ করুন</string>
-    <string name="morphe_settings_return_to_expert_description">পুরো ফিচার সহ প্রফেশনাল মোড়ে স্বিচ করুন</string>
     <string name="morphe_share_website">ওয়েবসাইট শেয়ার করুন</string>
     <string name="morphe_share_website_description">Morphe অফিসিয়াল ওয়েবসাইট শেয়ার করুন</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">এটি হতে পারে #RRGGBB রঙ বা রঙের সংযোগ সোয়ার</string>
     <string name="morphe_patch_options_light_theme_color">হুলিয়া থিমের পেইন্ট রঙ</string>
     <string name="morphe_patch_options_light_theme_color_description">এটি হতে পারে #RRGGBB রঙ বা রঙের সংযোগ সোয়ার</string>
-    <string name="morphe_patch_options_icon_instructions_title">আইকন ফরম্যাট নির্দেশ</string>
-    <string name="morphe_patch_options_header_instructions_title">হেডার ফরম্যাট নির্দেশ</string>
     <string name="morphe_patch_options_loading">প্যাচ বিকল্প সংগ্রহ হচ্ছে...</string>
     <string name="morphe_patch_options_waiting_for_bundle">పాచ్‌ బుండ్ల్‌ను అప్‌డేట్ చేయడానికి ఆగండి</string>
     <string name="morphe_patch_options_load_error">పాచ్‌ ఆప్‌షన్‌లు తీసుకోవడంలో విఫలమైనది</string>

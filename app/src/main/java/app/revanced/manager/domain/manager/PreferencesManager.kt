@@ -7,7 +7,6 @@ import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
 import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
 import app.revanced.manager.ui.screen.shared.BackgroundType
-import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.isArmV7
@@ -18,10 +17,6 @@ import kotlinx.serialization.Serializable
 class PreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "settings") {
-    companion object {
-        private val PATCH_ACTION_ORDER_DEFAULT =
-            PatchSelectionActionKey.DefaultOrder.joinToString(",") { it.storageId }
-    }
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
     val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
@@ -76,17 +71,6 @@ class PreferencesManager(
     val disableUniversalPatchCheck = booleanPreference("disable_patch_universal_check", false)
     val suggestedVersionSafeguard = booleanPreference("suggested_version_safeguard", false)
     val disablePatchSelectionConfirmations = booleanPreference("disable_patch_selection_confirmations", false)
-    val collapsePatchActionsOnSelection = booleanPreference("collapse_patch_actions_on_selection", true)
-    val patchSelectionFilterFlags = intPreference("patch_selection_filter_flags", -1)
-    val patchSelectionSortAlphabetical = booleanPreference("patch_selection_sort_alphabetical", false)
-    val patchSelectionSortSettingsMode = stringPreference("patch_selection_sort_settings_mode", "None")
-    val patchSelectionActionOrder =
-        stringPreference("patch_selection_action_order", PATCH_ACTION_ORDER_DEFAULT)
-    val patchSelectionHiddenActions =
-        stringSetPreference("patch_selection_hidden_actions", emptySet())
-
-    val acknowledgedDownloaderPlugins = stringSetPreference("acknowledged_downloader_plugins", emptySet())
-    val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
     val useExpertMode = booleanPreference("use_expert_mode", false)
@@ -192,14 +176,7 @@ class PreferencesManager(
         disableUniversalPatchCheck = disableUniversalPatchCheck.get(),
         suggestedVersionSafeguard = suggestedVersionSafeguard.get(),
         disablePatchSelectionConfirmations = disablePatchSelectionConfirmations.get(),
-        collapsePatchActionsOnSelection = collapsePatchActionsOnSelection.get(),
-        patchSelectionFilterFlags = patchSelectionFilterFlags.get(),
-        patchSelectionSortAlphabetical = patchSelectionSortAlphabetical.get(),
-        patchSelectionSortSettingsMode = patchSelectionSortSettingsMode.get(),
-        patchSelectionActionOrder = patchSelectionActionOrder.get(),
-        patchSelectionHiddenActions = patchSelectionHiddenActions.get(),
-        acknowledgedDownloaderPlugins = acknowledgedDownloaderPlugins.get(),
-        autoSaveDownloaderApks = autoSaveDownloaderApks.get(),
+
         backgroundType = backgroundType.get(), // Morphe
         useMorpheHomeScreen = useMorpheHomeScreen.get(), // Morphe
         useExpertMode = useExpertMode.get() // Morphe
@@ -243,14 +220,7 @@ class PreferencesManager(
         snapshot.disableUniversalPatchCheck?.let { disableUniversalPatchCheck.value = it }
         snapshot.suggestedVersionSafeguard?.let { suggestedVersionSafeguard.value = it }
         snapshot.disablePatchSelectionConfirmations?.let { disablePatchSelectionConfirmations.value = it }
-        snapshot.collapsePatchActionsOnSelection?.let { collapsePatchActionsOnSelection.value = it }
-        snapshot.patchSelectionFilterFlags?.let { patchSelectionFilterFlags.value = it }
-        snapshot.patchSelectionSortAlphabetical?.let { patchSelectionSortAlphabetical.value = it }
-        snapshot.patchSelectionSortSettingsMode?.let { patchSelectionSortSettingsMode.value = it }
-        snapshot.patchSelectionActionOrder?.let { patchSelectionActionOrder.value = it }
-        snapshot.patchSelectionHiddenActions?.let { patchSelectionHiddenActions.value = it }
-        snapshot.acknowledgedDownloaderPlugins?.let { acknowledgedDownloaderPlugins.value = it }
-        snapshot.autoSaveDownloaderApks?.let { autoSaveDownloaderApks.value = it }
+
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useMorpheHomeScreen?.let { useMorpheHomeScreen.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }

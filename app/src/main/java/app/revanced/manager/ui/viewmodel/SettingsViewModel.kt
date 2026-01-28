@@ -14,7 +14,6 @@ import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.manager.hideInstallerComponent
 import app.revanced.manager.domain.manager.showInstallerComponent
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
@@ -111,17 +110,6 @@ class SettingsViewModel(
     fun resetPatchedAppExportFormat() = viewModelScope.launch(Dispatchers.Default) {
         prefs.patchedAppExportFormat.update(prefs.patchedAppExportFormat.default)
     }
-
-    fun setPatchSelectionActionOrder(order: List<PatchSelectionActionKey>) =
-        viewModelScope.launch(Dispatchers.Default) {
-            val serialized = order.joinToString(",") { it.storageId }
-            prefs.patchSelectionActionOrder.update(serialized)
-        }
-
-    fun setPatchSelectionHiddenActions(hidden: Set<String>) =
-        viewModelScope.launch(Dispatchers.Default) {
-            prefs.patchSelectionHiddenActions.update(hidden)
-        }
 
     fun restoreOfficialBundle() = viewModelScope.launch(Dispatchers.Default) {
         val hasBundle = patchBundleRepository.sources.first().any { it.isDefault }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Пакет печева</string>
     <string name="morphe_home_greeting_1">Коју апликацију желите да печујете?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Спремни да учините YouTube легендарним поново?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Спасавамо апликације од њих самих од данас</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Покренуто кафеином и добрим печовима</string>
-    <string name="morphe_home_bundle_type_api">API пакет</string>
     <string name="morphe_home_update_error">Ажурирање није успело</string>
     <string name="morphe_home_update_error_subtitle">Проверите интернет везу и покушајте поново</string>
-    <string name="morphe_home_updating_patches">Ажурирање печева…</string>
     <string name="morphe_home_update_success">Ажурирање завршено</string>
-    <string name="morphe_home_patches_updated">Ваши печеви су ажурни</string>
-    <string name="morphe_home_patches_are_loading">Печеви се учитавају, молимо сачекајте…</string>
     <string name="morphe_home_please_wait">Молимо сачекајте…</string>
-    <string name="morphe_home_open_in_browser">Отвори у прегледачу</string>
-    <string name="morphe_home_failed_to_open_url">Неуспешно отварање URL адресе</string>
-    <string name="morphe_home_date_added">Додато</string>
-    <string name="morphe_home_date_updated">Ажурирано</string>
-    <string name="morphe_home_check_updates">Провери</string>
-    <string name="morphe_home_unknown">Непознато</string>
-    <string name="morphe_home_timeline">Историја ажурирања</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Имате ли оригинални непромењени APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">За печовање %1$s, потребна вам је верзија %2$s (непечована)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Изаберите APK који сте преузели</string>
     <string name="morphe_home_file_picker_prompt_description">Сада изаберите APK фајл %1$s који сте управо преузели.</string>
-    <string name="morphe_home_file_picker_prompt_open">Отвори преузети APK фајл</string>
     <string name="morphe_home_recommended_version">Препоручена верзија</string>
     <string name="morphe_patcher_selected_version">Изабрана верзија</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања.</string>
     <string name="morphe_root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Сачувај APK</string>
-    <string name="morphe_patcher_copy_error">Грешка приликом копирања</string>
-    <string name="morphe_patcher_show_error">Прикажи грешку</string>
     <string name="morphe_patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d печева</string>
     <string name="morphe_patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Ваша апликација има повишену температуру, а једини лек су додатни печеви… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Уклањање глупости. Молимо сачекајте… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Повратак на почетну страницу Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Ппвратак на поједностављени режим</string>
-    <string name="morphe_settings_return_to_expert">Промени на режим експерта</string>
-    <string name="morphe_settings_return_to_expert_description">Промени на потпуно опремљен режим експерта</string>
     <string name="morphe_share_website">Дели веб-сајт</string>
     <string name="morphe_share_website_description">Делите званични веб-сајт Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Može bitи шемски бојни назив (#RRGGBB) или референца на ресурс боје</string>
     <string name="morphe_patch_options_light_theme_color">Боја позадине теме (светла)</string>
     <string name="morphe_patch_options_light_theme_color_description">Može bitи шемски бојни назив (#RRGGBB) или референца на ресурс боје</string>
-    <string name="morphe_patch_options_icon_instructions_title">Инструкције за коришћење икони</string>
-    <string name="morphe_patch_options_header_instructions_title">Инструкције за коришћење надсловne</string>
     <string name="morphe_patch_options_loading">Настављање подешavanja модификације...</string>
     <string name="morphe_patch_options_waiting_for_bundle">Čekajte dok se bundle patcha ne dočita</string>
     <string name="morphe_patch_options_load_error">Greška pri učitavanju opcija za patch</string>

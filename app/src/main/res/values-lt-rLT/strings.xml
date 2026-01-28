@@ -15,11 +15,6 @@
     <string name="morphe_home_update_error">Nepavyko atnaujinti</string>
     <string name="morphe_home_update_success">Atnaujinimas baigtas</string>
     <string name="morphe_home_please_wait">Palaukite</string>
-    <string name="morphe_home_open_in_browser">Atidaryti naršyklėje</string>
-    <string name="morphe_home_failed_to_open_url">Nepavyko atidaryti nuorodos</string>
-    <string name="morphe_home_date_added">Pridėta</string>
-    <string name="morphe_home_date_updated">Atnaujinta</string>
-    <string name="morphe_home_unknown">Nežinoma</string>
     <string name="morphe_home_timeline">Atnaujinimų istorija</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Ar turite originalų, netaisytą APK failą?</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Ενημερωτικό πακέτο</string>
     <string name="morphe_home_greeting_1">Ποια εφαρμογή θέλετε να διορθώσετε;</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Έτοιμοι να κάνετε το YouTube θρυλικό ξανά;</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Σώζουμε εφαρμογές από τον εαυτό τους από σήμερα</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Τροφοδοτούμενοι από καφεΐνη και καλές επιδιορθώσεις</string>
-    <string name="morphe_home_bundle_type_api">Πακέτο API</string>
     <string name="morphe_home_update_error">Η ενημέρωση απέτυχε</string>
     <string name="morphe_home_update_error_subtitle">Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
-    <string name="morphe_home_updating_patches">Ενημέρωση ενημερώσεων…</string>
     <string name="morphe_home_update_success">Η ενημέρωση ολοκληρώθηκε</string>
-    <string name="morphe_home_patches_updated">Οι ενημερώσεις σας είναι πλήρεις</string>
-    <string name="morphe_home_patches_are_loading">Οι ενημερώσεις φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="morphe_home_please_wait">Παρακαλώ περιμένετε…</string>
-    <string name="morphe_home_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
-    <string name="morphe_home_failed_to_open_url">Αδυναμία ανοίγματος URL</string>
-    <string name="morphe_home_date_added">Προστέθηκε</string>
-    <string name="morphe_home_date_updated">Ενημερώθηκε</string>
-    <string name="morphe_home_check_updates">Έλεγχος</string>
-    <string name="morphe_home_unknown">Άγνωστο</string>
-    <string name="morphe_home_timeline">Ιστορικό ενημερώσεων</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Έχετε το αρχικό μη τροποποιημένο APK;</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Για να επιδιορθώσετε το %1$s, χρειάζεστε την έκδοση %2$s (μη επιδιορθωμένη)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Επιλέξτε το APK που κατεβάσατε</string>
     <string name="morphe_home_file_picker_prompt_description">Τώρα επιλέξτε το αρχείο %1$s APK που μόλις κατεβάσατε.</string>
-    <string name="morphe_home_file_picker_prompt_open">Άνοιγμα αρχείου APK που κατέβασα</string>
     <string name="morphe_home_recommended_version">Προτεινόμενη έκδοση</string>
     <string name="morphe_patcher_selected_version">Επιλεγμένη έκδοση</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Η λειτουργία root απαιτεί την εγκατάσταση του αρχικού APK στη συσκευή σας πριν την εφαρμογή της ενημέρωσης.</string>
     <string name="morphe_root_gmscore_excluded">Η ενημέρωση GmsCore έχει εξαιρεθεί στη λειτουργία root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Αποθήκευση APK</string>
-    <string name="morphe_patcher_copy_error">Σφάλμα αντιγραφής</string>
-    <string name="morphe_patcher_show_error">Εμφάνιση σφάλματος</string>
     <string name="morphe_patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d ενημερώσεις</string>
     <string name="morphe_patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Η εφαρμογή σας έχει πυρετό, και η μόνη συνταγή είναι περισσότερες τροποποιήσεις... 🩺🔔</string>
     <string name="morphe_patcher_message_20">Αφαιρώ ανοησίες. Παρακαλούμε περιμένετε… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Επιστροφή στην αρχική σελίδα Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Επιστροφή στην απλοποιημένη λειτουργία</string>
-    <string name="morphe_settings_return_to_expert">Μετάβαση στο Προηγμένο Μο ρφέ</string>
-    <string name="morphe_settings_return_to_expert_description">Μετάβαση στο πλήρως εξοπλισμένο Προηγμένο Μορφέ</string>
     <string name="morphe_share_website">Κοινοποίηση ιστότοπου</string>
     <string name="morphe_share_website_description">Κοινοποίηση του επίσημου ιστοτόπου του Morphe</string>
     <!-- App Icon Selector -->
@@ -166,8 +146,6 @@
     <string name="morphe_patch_options_dark_theme_color_description">Μπορεί να είναι ένα δεκαεξαδικό χρώμα (#RRGGBB) ή μια αναφορά πόρτας χρωμάτων</string>
     <string name="morphe_patch_options_light_theme_color">Χρώμα φόντου φωτεινού θέματος</string>
     <string name="morphe_patch_options_light_theme_color_description">Μπορεί να είναι ένα δεκαεξαδικό χρώμα (#RRGGBB) ή μια αναφορά πόρτας χρωμάτων</string>
-    <string name="morphe_patch_options_icon_instructions_title">Προδιαγραφές του τύπου εικονιδίου</string>
-    <string name="morphe_patch_options_header_instructions_title">Προδιαγραφές του τύπου τίτλου</string>
     <string name="morphe_patch_options_loading">Φόρτωση επιλογών ενότητας προσαρμογής…</string>
     <string name="morphe_patch_options_waiting_for_bundle">Μέχρι το πακέτο δεδομένων να ενημερωθεί</string>
     <string name="morphe_patch_options_load_error">Αποτυχία φόρτωσης επιλογών δεδομένων</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Conjunt de pedaços</string>
     <string name="morphe_home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Esteu llestos per convertir el YouTube en llegendari de nou?</string>
@@ -21,20 +20,10 @@
     <string name="morphe_home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
-    <string name="morphe_home_bundle_type_api">API Bundle</string>
     <string name="morphe_home_update_error">Actualització fallida</string>
     <string name="morphe_home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
-    <string name="morphe_home_updating_patches">Actualitzant pedaços...</string>
     <string name="morphe_home_update_success">Actualització completada</string>
-    <string name="morphe_home_patches_updated">Els teus pedaços estan al dia</string>
-    <string name="morphe_home_patches_are_loading">S\'estan carregant els pedaços, si us plau espereu...</string>
     <string name="morphe_home_please_wait">Espereu...</string>
-    <string name="morphe_home_open_in_browser">Obrir al navegador</string>
-    <string name="morphe_home_failed_to_open_url">Error en obrir l\'URL</string>
-    <string name="morphe_home_date_added">Afegit</string>
-    <string name="morphe_home_date_updated">Actualitzat</string>
-    <string name="morphe_home_check_updates">Comprovar</string>
-    <string name="morphe_home_unknown">Desconegut</string>
     <string name="morphe_home_timeline">Actualització de la Història</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>

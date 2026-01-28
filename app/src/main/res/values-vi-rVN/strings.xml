@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Gói vá</string>
     <string name="morphe_home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Sẵn sàng để đưa YouTube trở lại thời hoàng kim chưa?</string>
@@ -21,21 +20,10 @@
     <string name="morphe_home_greeting_9">Cứu chúng khỏi chính chúng ngay từ hôm nay</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
-    <string name="morphe_home_bundle_type_api">Gói API</string>
     <string name="morphe_home_update_error">Không thể cập nhật</string>
     <string name="morphe_home_update_error_subtitle">Kiểm tra kết nối mạng và thử lại</string>
-    <string name="morphe_home_updating_patches">Đang cập nhật bản vá…</string>
     <string name="morphe_home_update_success">Cập nhật hoàn tất</string>
-    <string name="morphe_home_patches_updated">Đã cập nhật các bản vá</string>
-    <string name="morphe_home_patches_are_loading">Đang tải bản vá, vui lòng chờ…</string>
     <string name="morphe_home_please_wait">Vui lòng chờ…</string>
-    <string name="morphe_home_open_in_browser">Mở trong trình duyệt</string>
-    <string name="morphe_home_failed_to_open_url">Không thể mở URL</string>
-    <string name="morphe_home_date_added">Đã thêm</string>
-    <string name="morphe_home_date_updated">Đã cập nhật</string>
-    <string name="morphe_home_check_updates">Kiểm tra</string>
-    <string name="morphe_home_unknown">Không xác định</string>
-    <string name="morphe_home_timeline">Lịch sử cập nhật</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Để vá %1$s, bạn cần phiên bản %2$s (chưa được vá)</string>
@@ -55,16 +43,12 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Chọn tệp APK bạn đã tải</string>
     <string name="morphe_home_file_picker_prompt_description">Bây giờ hãy chọn tệp APK %1$s bạn vừa tải.</string>
-    <string name="morphe_home_file_picker_prompt_open">Mở tệp APK tôi đã tải</string>
     <string name="morphe_home_recommended_version">Phiên bản đề xuất</string>
     <string name="morphe_patcher_selected_version">Phiên bản đã chọn</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Chế độ root yêu cầu cài đặt APK gốc trên thiết bị của bạn trước khi vá.</string>
     <string name="morphe_root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Lưu APK</string>
-    <string name="morphe_patcher_copy_error">Chép lỗi</string>
-    <string name="morphe_patcher_show_error">Hiện lỗi</string>
     <string name="morphe_patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="morphe_patcher_patches_progress">%1$d/%2$d bản vá</string>
     <string name="morphe_patcher_long_step_warning">Bước này có thể hơi lâu một chút. Vui lòng chờ…</string>
@@ -117,10 +101,6 @@
     <string name="morphe_patcher_message_19">Ứng dụng bị sốt rồi, phương pháp điều trị bây giờ là vá thêm thôi… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Đang dọn dẹp mớ hỗn độn. Chờ tí… 🗑️</string>
     <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Trang chủ Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Quay lại chế độ đơn giản</string>
-    <string name="morphe_settings_return_to_expert">Chế độ chuyên gia</string>
-    <string name="morphe_settings_return_to_expert_description">Chuyển sang chế độ chuyên gia với đầy đủ tính năng</string>
     <string name="morphe_share_website">Chia sẻ</string>
     <string name="morphe_share_website_description">Chia sẻ trang web chính chủ của Morphe</string>
     <!-- App Icon Selector -->
@@ -166,10 +146,7 @@
     <string name="morphe_patch_options_dark_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
     <string name="morphe_patch_options_light_theme_color">Màu nền chủ đề sáng</string>
     <string name="morphe_patch_options_light_theme_color_description">Có thể dùng mã màu hex (#RRGGBB) hoặc tham chiếu tài nguyên màu</string>
-    <string name="morphe_patch_options_icon_instructions_title">Hướng dẫn về định dạng biểu tượng</string>
-    <string name="morphe_patch_options_header_instructions_title">Hướng dẫn về định dạng logo</string>
     <string name="morphe_patch_options_loading">Đang tải tùy chỉnh bản vá…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Chờ cho gói vá cập nhật xong</string>
     <string name="morphe_patch_options_load_error">Không thể tải tùy chỉnh bản vá</string>
     <string name="morphe_patch_options_no_available">Không chỉnh được bản vá này</string>
     <!-- Color Picker -->
