@@ -6,6 +6,7 @@ import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.data.room.apps.installed.SelectionPayload
 import app.revanced.manager.util.PatchSelection
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 class InstalledAppRepository(
@@ -16,6 +17,9 @@ class InstalledAppRepository(
     fun getAll() = dao.getAll().distinctUntilChanged()
 
     suspend fun get(packageName: String) = dao.get(packageName)
+
+    fun getAsFlow(packageName: String): Flow<InstalledApp?> =
+        dao.getAsFlow(packageName).distinctUntilChanged()
 
     suspend fun getAppliedPatches(packageName: String): PatchSelection =
         dao.getPatchesSelection(packageName).mapValues { (_, patches) -> patches.toSet() }

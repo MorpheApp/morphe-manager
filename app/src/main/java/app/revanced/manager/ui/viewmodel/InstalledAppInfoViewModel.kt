@@ -118,25 +118,27 @@ class InstalledAppInfoViewModel(
 
     init {
         viewModelScope.launch {
-            // Load all data before marking as ready
-            val app = installedAppRepository.get(packageName)
-            installedApp = app
-            if (app != null) {
-                // Run all checks in parallel
-                val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
-                val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
-                val deferredAppState = async { refreshAppState(app) }
-                val deferredPatches = async { resolveAppliedSelection(app) }
+            // Use Flow to automatically update when app data changes in database
+            installedAppRepository.getAsFlow(packageName).collect { app ->
+                installedApp = app
 
-                // Wait for all to complete
-                isMounted = deferredMounted.await()
-                hasOriginalApk = deferredOriginalApk.await()
-                deferredAppState.await()
-                appliedPatches = deferredPatches.await()
+                if (app != null) {
+                    // Run all checks in parallel
+                    val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                    val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
+                    val deferredAppState = async { refreshAppState(app) }
+                    val deferredPatches = async { resolveAppliedSelection(app) }
+
+                    // Wait for all to complete
+                    isMounted = deferredMounted.await()
+                    hasOriginalApk = deferredOriginalApk.await()
+                    deferredAppState.await()
+                    appliedPatches = deferredPatches.await()
+                }
+
+                // Mark as loaded
+                isLoading = false
             }
-
-            // Mark as loaded
-            isLoading = false
         }
     }
 
