@@ -11,13 +11,10 @@ import kotlinx.serialization.Serializable
 interface ComplexParameter<T : Parcelable>
 
 @Serializable
-object MorpheHomeScreen
+object HomeScreen
 
 @Serializable
-object MorpheSettings
-
-@Serializable
-data class Update(val downloadOnScreenEntry: Boolean = false)
+object Settings
 
 @Serializable
 data object SelectedApplicationInfo : ComplexParameter<SelectedApplicationInfo.ViewModelParams> {
@@ -47,9 +44,6 @@ data object SelectedApplicationInfo : ComplexParameter<SelectedApplicationInfo.V
             val preferredBundleTargetsAllVersions: Boolean = false
         ) : Parcelable
     }
-
-    @Serializable
-    data object RequiredOptions : ComplexParameter<PatchesSelector.ViewModelParams>
 }
 
 @Serializable

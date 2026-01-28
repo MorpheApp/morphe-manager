@@ -6,7 +6,7 @@ import android.os.Build
 import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
 import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
-import app.revanced.manager.ui.component.morphe.shared.BackgroundType
+import app.revanced.manager.ui.screen.shared.BackgroundType
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter

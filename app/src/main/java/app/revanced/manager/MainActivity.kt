@@ -29,12 +29,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.navigation.*
-import app.revanced.manager.ui.screen.MorpheHomeScreen
-import app.revanced.manager.ui.screen.MorphePatcherScreen
-import app.revanced.manager.ui.screen.MorpheSettingsScreen
+import app.revanced.manager.ui.screen.HomeScreen
+import app.revanced.manager.ui.screen.PatcherScreen
+import app.revanced.manager.ui.screen.SettingsScreen
+import app.revanced.manager.ui.screen.shared.AnimatedBackground
 import app.revanced.manager.ui.theme.ReVancedManagerTheme
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
 private fun ReVancedManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
-    val useMorpheHomeScreen by prefs.useMorpheHomeScreen.getAsState()
     val backgroundType by prefs.backgroundType.getAsState()
 
     EventEffect(vm.appSelectFlow) { params ->
@@ -100,14 +99,12 @@ private fun ReVancedManager(vm: MainViewModel) {
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Show animated background
-        if (useMorpheHomeScreen) {
-            AnimatedBackground(type = backgroundType)
-        }
+        AnimatedBackground(type = backgroundType)
 
         // All content on top of background
         NavHost(
             navController = navController,
-            startDestination = MorpheHomeScreen,
+            startDestination = HomeScreen,
             enterTransition = {
                 slideInHorizontally(
                     initialOffsetX = { it },
@@ -144,14 +141,14 @@ private fun ReVancedManager(vm: MainViewModel) {
             // Clunky work around to get a boolean calculated in the home screen
             val usingMountInstallState = mutableStateOf(false)
 
-            composable<MorpheHomeScreen> { entry ->
+            composable<HomeScreen> { entry ->
                 val dashboardViewModel = koinViewModel<DashboardViewModel>()
                 val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
 
-                MorpheHomeScreen(
-                    onMorpheSettingsClick = { navController.navigate(MorpheSettings) },
+                HomeScreen(
+                    onSettingsClick = { navController.navigate(Settings) },
                     onStartQuickPatch = { params ->
                         entry.lifecycleScope.launch {
                             navController.navigateComplex(
@@ -194,7 +191,7 @@ private fun ReVancedManager(vm: MainViewModel) {
             composable<Patcher> {
                 val params = it.getComplexArg<Patcher.ViewModelParams>()
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
-                MorphePatcherScreen(
+                PatcherScreen(
                     onBackClick = navController::popBackStack,
                     viewModel = patcherViewModel,
                     usingMountInstall = usingMountInstallState.value
@@ -202,8 +199,8 @@ private fun ReVancedManager(vm: MainViewModel) {
                 return@composable
             }
 
-            composable<MorpheSettings> {
-                MorpheSettingsScreen()
+            composable<Settings> {
+                SettingsScreen()
             }
         }
     }
