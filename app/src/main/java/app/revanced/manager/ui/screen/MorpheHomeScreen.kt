@@ -27,7 +27,6 @@ import app.revanced.manager.ui.component.morphe.home.HomeDialogs
 import app.revanced.manager.ui.component.morphe.home.HomeSectionsLayout
 import app.revanced.manager.ui.component.morphe.home.InstalledAppInfoDialog
 import app.revanced.manager.ui.component.morphe.shared.ManagerUpdateDetailsDialog
-import app.revanced.manager.ui.component.morphe.utils.buildBundleSummaries
 import app.revanced.manager.ui.component.morphe.utils.rememberFilePickerWithPermission
 import app.revanced.manager.ui.component.morphe.utils.toFilePath
 import app.revanced.manager.ui.viewmodel.*
@@ -147,6 +146,19 @@ fun MorpheHomeScreen(
         withContext(Dispatchers.IO) {
             val sourceMap = sources.associateBy { it.uid }
 
+            // Helper function to build bundle summaries from selection
+            fun buildBundleSummariesFromSelection(selection: PatchSelection): List<InstalledAppsViewModel.AppBundleSummary> {
+                if (selection.isEmpty()) return emptyList()
+
+                return selection.keys.mapNotNull { uid ->
+                    val info = bundleInfo[uid]
+                    val source = sourceMap[uid]
+                    val title = source?.displayTitle ?: info?.name ?: return@mapNotNull null
+                    val version = info?.version
+                    InstalledAppsViewModel.AppBundleSummary(title = title, version = version)
+                }
+            }
+
             // Load YouTube
             youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
             youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
@@ -154,7 +166,7 @@ fun MorpheHomeScreen(
             youtubeInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                    youtubeBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
                 }
             }
 
@@ -165,7 +177,7 @@ fun MorpheHomeScreen(
             youtubeMusicInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    youtubeMusicBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                    youtubeMusicBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
                 }
             }
 
@@ -176,7 +188,7 @@ fun MorpheHomeScreen(
             redditInstalledApp?.let { app ->
                 if (app.installType == InstallType.SAVED) {
                     val selection = installedAppRepository.getAppliedPatches(app.currentPackageName)
-                    redditBundleSummaries.addAll(buildBundleSummaries(app, selection, bundleInfo, sourceMap))
+                    redditBundleSummaries.addAll(buildBundleSummariesFromSelection(selection))
                 }
             }
         }

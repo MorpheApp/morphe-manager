@@ -21,7 +21,6 @@ import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemote
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.network.api.ReVancedAPI
@@ -39,7 +38,6 @@ import java.io.FileNotFoundException
 class DashboardViewModel(
     private val app: Application,
     val patchBundleRepository: PatchBundleRepository,
-    private val downloaderPluginRepository: DownloaderPluginRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
@@ -52,9 +50,6 @@ class DashboardViewModel(
     val bundleImportProgress = patchBundleRepository.bundleImportProgress
     private val contentResolver: ContentResolver = app.contentResolver
     private val powerManager = app.getSystemService<PowerManager>()!!
-
-    val newDownloaderPluginsAvailable =
-        downloaderPluginRepository.newPluginPackageNames.map { it.isNotEmpty() }
 
     /**
      * Android 11 kills the app process after granting the "install apps" permission, which is a problem for the patcher screen.
@@ -230,8 +225,7 @@ class DashboardViewModel(
     suspend fun updateMorpheBundleWithChangelogClear() {
         patchBundleRepository.updateOnlyMorpheBundle(
             force = false,
-            showToast = false,
-            showProgress = true
+            showToast = false
         )
         // Clear changelog cache
         val sources = patchBundleRepository.sources.first()

@@ -14,46 +14,35 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.domain.repository.PatchProfileExportEntry
-import app.revanced.manager.domain.repository.PatchProfileRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.domain.repository.SerializedSelection
-import app.revanced.manager.domain.bundles.PatchBundleSource
-import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
-import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
-import app.revanced.manager.domain.repository.remapLocalBundles
-import app.revanced.manager.data.room.bundles.Source as SourceInfo
 import app.revanced.manager.util.JSON_MIMETYPE
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.uiSafe
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.NonCancellable
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import java.util.concurrent.atomic.AtomicBoolean
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.io.path.deleteExisting
 import kotlin.io.path.inputStream
+import app.revanced.manager.data.room.bundles.Source as SourceInfo
 
 sealed class ResetDialogState(
     @StringRes val titleResId: Int,
@@ -140,11 +129,6 @@ private data class PatchBundleImportSummary(
 )
 
 @Serializable
-data class PatchProfileExportFile(
-    val profiles: List<PatchProfileExportEntry>
-)
-
-@Serializable
 data class ManagerSettingsExportFile(
     val version: Int = 1,
     val settings: PreferencesManager.SettingsSnapshot
@@ -157,7 +141,6 @@ class ImportExportViewModel(
     private val selectionRepository: PatchSelectionRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val patchBundleRepository: PatchBundleRepository,
-    private val patchProfileRepository: PatchProfileRepository,
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
     private val contentResolver = app.contentResolver
@@ -707,12 +690,12 @@ class ImportExportViewModel(
                     ?.displayName
                     ?.takeUnless { it.isBlank() }
                 val officialState = officialSource?.let { OfficialBundleState.PRESENT } ?: OfficialBundleState.ABSENT
-                val officialEnabled = officialSource?.enabled ?: true
+                val officialEnabled = officialSource?.enabled != false
 
                 val exportedCount = remoteSources.size
 
                 val positionLookup = sources.withIndex().associate { it.value.uid to it.index }
-                val officialAutoUpdate = officialSource?.asRemoteOrNull?.autoUpdate ?: false
+                val officialAutoUpdate = officialSource?.asRemoteOrNull?.autoUpdate == true
             val officialUsePrereleases = preferencesManager.usePatchesPrereleases.get()
 
             val bundles = buildList {
@@ -758,80 +741,6 @@ class ImportExportViewModel(
             }
 
             app.toast(app.getString(message, exportedCount))
-        }
-    }
-
-    fun importPatchProfiles(source: Uri) = viewModelScope.launch {
-        withContext(NonCancellable) {
-            uiSafe(app, R.string.import_patch_profiles_fail, "Failed to import patch profiles") {
-                val exportFile = withContext(Dispatchers.IO) {
-                    contentResolver.openInputStream(source)!!.use {
-                        Json.decodeFromStream<PatchProfileExportFile>(it)
-                    }
-                }
-
-                val entries = exportFile.profiles.filter { it.name.isNotBlank() && it.packageName.isNotBlank() }
-                if (entries.isEmpty()) {
-                    app.toast(app.getString(R.string.import_patch_profiles_none))
-                    return@uiSafe
-                }
-
-                val sourcesSnapshot = patchBundleRepository.sources.first()
-                val signatureSnapshot = patchBundleRepository.allBundlesInfoFlow.first()
-                    .mapValues { (_, info) -> info.patches.map { it.name.trim().lowercase() }.toSet() }
-                val remappedEntries = entries.map { entry ->
-                    val remappedPayload = entry.payload.remapLocalBundles(sourcesSnapshot, signatureSnapshot)
-                    if (remappedPayload === entry.payload) entry else entry.copy(payload = remappedPayload)
-                }
-
-                val result = patchProfileRepository.importProfiles(remappedEntries)
-                when {
-                    result.imported > 0 && result.skipped > 0 -> {
-                        app.toast(
-                            app.getString(
-                                R.string.import_patch_profiles_partial,
-                                result.imported,
-                                result.skipped
-                            )
-                        )
-                    }
-                    result.imported > 0 -> {
-                        app.toast(
-                            app.getString(
-                                R.string.import_patch_profiles_success,
-                                result.imported
-                            )
-                        )
-                    }
-                    result.skipped > 0 -> {
-                        app.toast(
-                            app.getString(
-                                R.string.import_patch_profiles_skipped,
-                                result.skipped
-                            )
-                        )
-                    }
-                    else -> app.toast(app.getString(R.string.import_patch_profiles_none))
-                }
-            }
-        }
-    }
-
-    fun exportPatchProfiles(target: Uri) = viewModelScope.launch {
-        uiSafe(app, R.string.export_patch_profiles_fail, "Failed to export patch profiles") {
-            val profiles = patchProfileRepository.exportProfiles()
-            if (profiles.isEmpty()) {
-                app.toast(app.getString(R.string.export_patch_profiles_empty))
-                return@uiSafe
-            }
-
-            withContext(Dispatchers.IO) {
-                contentResolver.openOutputStream(target, "wt")!!.use {
-                    Json.Default.encodeToStream(PatchProfileExportFile(profiles), it)
-                }
-            }
-
-            app.toast(app.getString(R.string.export_patch_profiles_success, profiles.size))
         }
     }
 

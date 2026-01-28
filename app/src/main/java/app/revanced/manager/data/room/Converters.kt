@@ -1,17 +1,15 @@
 package app.revanced.manager.data.room
 
 import androidx.room.TypeConverter
+import app.revanced.manager.data.room.apps.installed.SelectionPayload
 import app.revanced.manager.data.room.bundles.Source
 import app.revanced.manager.data.room.options.Option.SerializedValue
-import app.revanced.manager.data.room.profile.PatchProfilePayload
-import java.io.File
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.io.File
 
 class Converters {
     companion object {
-        private val profileJson = Json {
+        private val json = Json {
             encodeDefaults = true
             ignoreUnknownKeys = true
         }
@@ -36,10 +34,10 @@ class Converters {
     fun serializedOptionToString(value: SerializedValue) = value.toJsonString()
 
     @TypeConverter
-    fun patchProfilePayloadFromString(value: String) =
-        profileJson.decodeFromString<PatchProfilePayload>(value)
+    fun selectionPayloadFromString(value: String) =
+        json.decodeFromString<SelectionPayload>(value)
 
     @TypeConverter
-    fun patchProfilePayloadToString(payload: PatchProfilePayload) =
-        profileJson.encodeToString(payload)
+    fun selectionPayloadToString(payload: SelectionPayload) =
+        json.encodeToString(payload)
 }

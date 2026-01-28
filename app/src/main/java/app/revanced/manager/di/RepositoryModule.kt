@@ -17,14 +17,11 @@ val repositoryModule = module {
     singleOf(::NetworkInfo)
     singleOf(::PatchSelectionRepository)
     singleOf(::PatchOptionsRepository)
-    singleOf(::PatchProfileRepository)
     singleOf(::PatchBundleRepository) {
         // It is best to load patch bundles ASAP
         createdAtStart()
     }
-    singleOf(::DownloaderPluginRepository)
     singleOf(::WorkerRepository)
-    singleOf(::DownloadedAppRepository)
     singleOf(::InstalledAppRepository)
     singleOf(::OriginalApkRepository)
 }

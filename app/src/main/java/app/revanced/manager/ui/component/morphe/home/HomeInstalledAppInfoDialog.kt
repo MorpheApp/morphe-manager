@@ -79,12 +79,7 @@ fun InstalledAppInfoDialog(
         .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
 
     // Build applied bundles summary
-    val selectionPayload = installedApp?.selectionPayload
-    val savedBundleVersions = remember(selectionPayload) {
-        selectionPayload?.bundles.orEmpty().associate { it.bundleUid to it.version }
-    }
-
-    val appliedBundles = remember(appliedPatches, bundleInfo, bundleSources, context, savedBundleVersions) {
+    val appliedBundles = remember(appliedPatches, bundleInfo, bundleSources, context) {
         if (appliedPatches.isNullOrEmpty()) return@remember emptyList()
         runCatching {
             appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
@@ -102,7 +97,7 @@ fun InstalledAppInfoDialog(
                 AppliedPatchBundleUi(
                     uid = bundleUid,
                     title = title,
-                    version = savedBundleVersions[bundleUid]?.takeUnless { it.isBlank() } ?: info?.version,
+                    version = info?.version,
                     patchInfos = patchInfos,
                     fallbackNames = missingNames,
                     bundleAvailable = info != null

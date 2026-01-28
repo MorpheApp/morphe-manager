@@ -199,7 +199,7 @@ class InstalledAppInfoViewModel(
         val sources = patchBundleRepository.sources.first()
         val sourceIds = sources.map { it.uid }.toSet()
         val signatures = patchBundleRepository.allBundlesInfoFlow.first().toSignatureMap()
-        val (remappedPayload, remappedSelection) = payload.remapAndExtractSelection(sources, signatures)
+        val (remappedPayload, remappedSelection) = payload.remapAndExtractSelection(sources)
         val persistableSelection = remappedSelection.filterKeys { it in sourceIds }
         if (persistableSelection.isNotEmpty()) {
             installedAppRepository.addOrUpdate(
@@ -213,9 +213,8 @@ class InstalledAppInfoViewModel(
         }
         if (remappedSelection.isNotEmpty()) return@withContext remappedSelection
 
-        payload.bundles.associate { bundle ->
-            bundle.bundleUid to bundle.patches.filter { it.isNotBlank() }.toSet()
-        }.filterValues { it.isNotEmpty() }
+        // Fallback: convert payload directly to selection
+        payload.toPatchSelection()
     }
 
     fun launch() {

@@ -1,7 +1,6 @@
 package app.revanced.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,35 +10,26 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.os.Parcelable
 import android.os.PowerManager
 import android.util.Log
-import androidx.activity.result.ActivityResult
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import app.revanced.manager.MainActivity
 import app.morphe.manager.R
+import app.revanced.manager.MainActivity
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.DownloadResult
-import app.revanced.manager.domain.repository.DownloadedAppRepository
-import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.worker.Worker
 import app.revanced.manager.domain.worker.WorkerRepository
-import app.revanced.manager.network.downloader.LoadedDownloaderPlugin
 import app.revanced.manager.patcher.logger.Logger
-import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.runtime.CoroutineRuntime
 import app.revanced.manager.patcher.runtime.ProcessRuntime
+import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.util.NativeLibStripper
-import app.revanced.manager.plugin.downloader.GetScope
-import app.revanced.manager.plugin.downloader.PluginHostApi
-import app.revanced.manager.plugin.downloader.UserInteractionException
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.util.Options
@@ -47,19 +37,17 @@ import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.tag
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
-import java.util.zip.ZipFile
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
 
-@OptIn(PluginHostApi::class)
 class PatcherWorker(
     context: Context,
     parameters: WorkerParameters
@@ -67,8 +55,6 @@ class PatcherWorker(
     private val workerRepository: WorkerRepository by inject()
     private val prefs: PreferencesManager by inject()
     private val keystoreManager: KeystoreManager by inject()
-    private val downloaderPluginRepository: DownloaderPluginRepository by inject()
-    private val downloadedAppRepository: DownloadedAppRepository by inject()
     private val pm: PM by inject()
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
@@ -80,9 +66,7 @@ class PatcherWorker(
         val selectedPatches: PatchSelection,
         val options: Options,
         val logger: Logger,
-        val onDownloadProgress: suspend (Pair<Long, Long?>?) -> Unit,
         val onPatchCompleted: suspend () -> Unit,
-        val handleStartActivityRequest: suspend (LoadedDownloaderPlugin, Intent) -> ActivityResult,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler
     ) {
@@ -161,11 +145,9 @@ class PatcherWorker(
             args.onProgress(name, state, message)
 
         val patchedApk = fs.tempDir.resolve("patched.apk")
-        var downloadCleanup: (() -> Unit)? = null
 
         return try {
             val startTime = System.currentTimeMillis()
-            val autoSaveDownloads = prefs.autoSaveDownloaderApks.get()
 
             if (args.input is SelectedApp.Installed) {
                 installedAppRepository.get(args.packageName)?.let {
@@ -175,76 +157,29 @@ class PatcherWorker(
                 }
             }
 
-            suspend fun download(plugin: LoadedDownloaderPlugin, data: Parcelable) =
-                downloadedAppRepository.download(
-                    plugin,
-                    data,
-                    args.packageName,
-                    args.input.version,
-                    prefs.suggestedVersionSafeguard.get(),
-                    !prefs.disablePatchVersionCompatCheck.get(),
-                    onDownload = args.onDownloadProgress,
-                    persistDownload = autoSaveDownloads
-                ).also {
-                    args.setInputFile(it.file, it.needsSplit, it.merged)
-                    updateProgress(state = State.COMPLETED) // Download APK
-                }
-
-            val downloadResult = when (val selectedApp = args.input) {
+            val inputFile = when (val selectedApp = args.input) {
                 is SelectedApp.Download -> {
-                    val (plugin, data) = downloaderPluginRepository.unwrapParceledData(selectedApp.data)
-
-                    download(plugin, data)
+                    // Download type no longer supported after API module removal
+                    throw UnsupportedOperationException("Download type is no longer supported")
                 }
 
                 is SelectedApp.Search -> {
-                    downloaderPluginRepository.loadedPluginsFlow.first()
-                        .firstNotNullOfOrNull { plugin ->
-                            try {
-                                val getScope = object : GetScope {
-                                    override val pluginPackageName = plugin.packageName
-                                    override val hostPackageName = applicationContext.packageName
-                                    override suspend fun requestStartActivity(intent: Intent): Intent? {
-                                        val result = args.handleStartActivityRequest(plugin, intent)
-                                        return when (result.resultCode) {
-                                            Activity.RESULT_OK -> result.data
-                                            Activity.RESULT_CANCELED -> throw UserInteractionException.Activity.Cancelled()
-                                            else -> throw UserInteractionException.Activity.NotCompleted(
-                                                result.resultCode,
-                                                result.data
-                                            )
-                                        }
-                                    }
-                                }
-                                withContext(Dispatchers.IO) {
-                                    plugin.get(
-                                        getScope,
-                                        selectedApp.packageName,
-                                        selectedApp.version
-                                    )
-                                }?.takeIf { (_, version) -> selectedApp.version == null || version == selectedApp.version }
-                            } catch (e: UserInteractionException.Activity.NotCompleted) {
-                                throw e
-                            } catch (_: UserInteractionException) {
-                                null
-                            }?.let { (data, _) -> download(plugin, data) }
-                        } ?: throw Exception("App is not available.")
+                    // Search type no longer supported after API module removal
+                    throw UnsupportedOperationException("Search type is no longer supported")
                 }
 
                 is SelectedApp.Local -> {
                     val needsSplit = SplitApkPreparer.isSplitArchive(selectedApp.file)
                     args.setInputFile(selectedApp.file, needsSplit, false)
-                    DownloadResult(selectedApp.file, needsSplit)
+                    selectedApp.file
                 }
 
                 is SelectedApp.Installed -> {
                     val source = File(pm.getPackageInfo(selectedApp.packageName)!!.applicationInfo!!.sourceDir)
                     args.setInputFile(source, false, false)
-                    DownloadResult(source, false)
+                    source
                 }
             }
-            downloadCleanup = downloadResult.cleanup
-            val inputFile = downloadResult.file
 
             val runtime = if (prefs.useProcessRuntime.get()) {
                 ProcessRuntime(applicationContext)
@@ -330,7 +265,6 @@ class PatcherWorker(
             )
         } finally {
             patchedApk.delete()
-            downloadCleanup?.invoke()
         }
     }
 
@@ -407,14 +341,12 @@ class PatcherWorker(
         clone.time = entry.time
         clone.comment = entry.comment
         entry.extra?.let { clone.extra = it.copyOf() }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                entry.creationTime?.let { clone.creationTime = it }
-                entry.lastAccessTime?.let { clone.lastAccessTime = it }
-                entry.lastModifiedTime?.let { clone.lastModifiedTime = it }
-            } catch (_: Exception) {
-                // Some builders may throw if the values are unavailable; ignore.
-            }
+        try {
+            entry.creationTime?.let { clone.creationTime = it }
+            entry.lastAccessTime?.let { clone.lastAccessTime = it }
+            entry.lastModifiedTime?.let { clone.lastModifiedTime = it }
+        } catch (_: Exception) {
+            // Some builders may throw if the values are unavailable; ignore.
         }
 
         when (entry.method) {

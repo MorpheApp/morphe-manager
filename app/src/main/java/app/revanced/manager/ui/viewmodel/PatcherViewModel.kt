@@ -54,8 +54,6 @@ import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.worker.PatcherWorker
-import app.revanced.manager.plugin.downloader.PluginHostApi
-import app.revanced.manager.plugin.downloader.UserInteractionException
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.service.UninstallService
 import app.revanced.manager.ui.model.InstallerModel
@@ -104,7 +102,7 @@ import java.util.UUID
 import kotlin.math.max
 import kotlin.math.min
 
-@OptIn(SavedStateHandleSaveableApi::class, PluginHostApi::class)
+@OptIn(SavedStateHandleSaveableApi::class)
 class PatcherViewModel(
     private val input: Patcher.ViewModelParams
 ) : ViewModel(), KoinComponent, StepProgressProvider, InstallerModel {
@@ -1955,14 +1953,8 @@ class PatcherViewModel(
             selectedForRun,
             outputFile.path,
             input.selectedPatches,
-            // input.options,
             mergedOptions,
             logger,
-            onDownloadProgress = {
-                withContext(Dispatchers.Main) {
-                    downloadProgress = it
-                }
-            },
             onPatchCompleted = {
                 withContext(Dispatchers.Main) { completedPatchCount += 1 }
             },
@@ -1981,30 +1973,6 @@ class PatcherViewModel(
                 withContext(Dispatchers.Main) {
                     inputFile = storedFile
                     updateSplitStepRequirement(storedFile, needsSplit, merged)
-                }
-            },
-            handleStartActivityRequest = { plugin, intent ->
-                withContext(Dispatchers.Main) {
-                    if (currentActivityRequest != null) throw Exception("Another request is already pending.")
-                    try {
-                        val accepted = with(CompletableDeferred<Boolean>()) {
-                            currentActivityRequest = this to plugin.name
-                            await()
-                        }
-                        if (!accepted) throw UserInteractionException.RequestDenied()
-
-                        try {
-                            with(CompletableDeferred<ActivityResult>()) {
-                                launchedActivity = this
-                                launchActivityChannel.send(intent)
-                                await()
-                            }
-                        } finally {
-                            launchedActivity = null
-                        }
-                    } finally {
-                        currentActivityRequest = null
-                    }
                 }
             },
             onProgress = { name, state, message ->

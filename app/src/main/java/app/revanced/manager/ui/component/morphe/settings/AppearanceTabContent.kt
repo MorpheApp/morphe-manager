@@ -27,13 +27,29 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.component.morphe.shared.LanguageRepository.getLanguageDisplayName
 import app.revanced.manager.ui.component.morphe.utils.darken
-import app.revanced.manager.ui.screen.settings.THEME_PRESET_COLORS
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+val THEME_PRESET_COLORS = listOf(
+    Color(0xFF6750A4),
+    Color(0xFF386641),
+    Color(0xFF0061A4),
+    Color(0xFF8E24AA),
+    Color(0xFFEF6C00),
+    Color(0xFF00897B),
+    Color(0xFFD81B60),
+    Color(0xFF5C6BC0),
+    Color(0xFF43A047),
+    Color(0xFFFF7043),
+    Color(0xFF1DE9B6),
+    Color(0xFFFFC400),
+    Color(0xFF00B8D4),
+    Color(0xFFBA68C8)
+)
 
 /**
  * Appearance tab content

@@ -12,7 +12,6 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.manager.KeystoreManager
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.DownloadedAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.domain.repository.SerializedSelection
@@ -33,11 +32,8 @@ import kotlinx.serialization.json.Json
 class MainViewModel(
     private val patchBundleRepository: PatchBundleRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
-    private val downloadedAppRepository: DownloadedAppRepository,
     private val keystoreManager: KeystoreManager,
-    private val app: Application,
     val prefs: PreferencesManager,
-    private val json: Json
 ) : ViewModel() {
     private val appSelectChannel = Channel<SelectedApplicationInfo.ViewModelParams>()
     val appSelectFlow = appSelectChannel.receiveAsFlow()
@@ -47,27 +43,10 @@ class MainViewModel(
     private suspend fun suggestedVersion(packageName: String) =
         patchBundleRepository.suggestedVersions.first()[packageName]
 
-    private suspend fun findDownloadedApp(app: SelectedApp): SelectedApp.Local? {
-        if (app !is SelectedApp.Search) return null
-
-        val suggestedVersion = suggestedVersion(app.packageName) ?: return null
-
-        val downloadedApp =
-            downloadedAppRepository.get(app.packageName, suggestedVersion, markUsed = true)
-                ?: return null
-        return SelectedApp.Local(
-            downloadedApp.packageName,
-            downloadedApp.version,
-            downloadedAppRepository.getPreparedApkFile(downloadedApp),
-            false
-        )
-    }
-
     fun selectApp(app: SelectedApp, patches: PatchSelection? = null) = viewModelScope.launch {
-        val resolved = findDownloadedApp(app) ?: app
         appSelectChannel.send(
             SelectedApplicationInfo.ViewModelParams(
-                app = resolved,
+                app = app,
                 patches = patches
             )
         )

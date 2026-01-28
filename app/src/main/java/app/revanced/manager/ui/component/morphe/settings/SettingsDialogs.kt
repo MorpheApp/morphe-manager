@@ -1,8 +1,5 @@
 package app.revanced.manager.ui.component.morphe.settings
 
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,19 +17,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.revanced.manager.network.downloader.DownloaderPluginState
 import app.revanced.manager.ui.component.PasswordField
 import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.AboutViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import java.security.MessageDigest
 
 /**
  * About dialog
@@ -166,159 +160,6 @@ private fun SocialIconButton(
                 tint = textColor.copy(alpha = 0.8f),
                 modifier = Modifier.size(26.dp)
             )
-        }
-    }
-}
-
-/**
- * Plugin management dialog
- * Shows plugin details and management options
- */
-@RequiresApi(Build.VERSION_CODES.P)
-@Composable
-fun PluginActionDialog(
-    packageName: String,
-    state: DownloaderPluginState?,
-    onDismiss: () -> Unit,
-    onTrust: () -> Unit,
-    onRevoke: () -> Unit,
-    onUninstall: () -> Unit,
-    onViewError: () -> Unit
-) {
-    val context = LocalContext.current
-    val pm = remember { context.packageManager }
-
-    val signature = remember(packageName) {
-        runCatching {
-            val androidSignature = pm.getPackageInfo(
-                packageName,
-                PackageManager.GET_SIGNING_CERTIFICATES
-            ).signingInfo?.apkContentsSigners?.firstOrNull()
-
-            if (androidSignature != null) {
-                val hash = MessageDigest.getInstance("SHA-256")
-                    .digest(androidSignature.toByteArray())
-                hash.joinToString(":") { "%02X".format(it) }
-            } else {
-                "Unknown"
-            }
-        }.getOrNull() ?: "Unknown"
-    }
-
-    MorpheDialog(
-        onDismissRequest = onDismiss,
-        title = when (state) {
-            is DownloaderPluginState.Loaded -> stringResource(R.string.downloader_plugin_revoke_trust_dialog_title)
-            is DownloaderPluginState.Failed -> stringResource(R.string.downloader_plugin_state_failed)
-            is DownloaderPluginState.Untrusted -> stringResource(R.string.downloader_plugin_trust_dialog_title)
-            else -> packageName
-        },
-        footer = {
-            MorpheDialogButtonColumn {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    when (state) {
-                        is DownloaderPluginState.Loaded -> {
-                            MorpheDialogButton(
-                                text = stringResource(R.string.continue_),
-                                onClick = {
-                                    onRevoke()
-                                    onDismiss()
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        is DownloaderPluginState.Untrusted -> {
-                            MorpheDialogButton(
-                                text = stringResource(R.string.continue_),
-                                onClick = {
-                                    onTrust()
-                                    onDismiss()
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        is DownloaderPluginState.Failed -> {
-                            MorpheDialogButton(
-                                text = stringResource(R.string.downloader_plugin_view_error),
-                                onClick = onViewError,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        else -> {}
-                    }
-
-                    MorpheDialogOutlinedButton(
-                        text = stringResource(R.string.uninstall),
-                        onClick = {
-                            onUninstall()
-                            onDismiss()
-                        },
-                        isDestructive = true,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-
-                MorpheDialogOutlinedButton(
-                    text = stringResource(R.string.dismiss),
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth(0.5f)
-                )
-            }
-        }
-    ) {
-        val textColor = LocalDialogTextColor.current
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            when (state) {
-                is DownloaderPluginState.Failed -> {
-                    Text(
-                        text = stringResource(R.string.downloader_plugin_failed_dialog_body, packageName),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = secondaryColor,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                else -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(
-                                text = "Package:",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = secondaryColor
-                            )
-                            Text(
-                                text = packageName,
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontFamily = FontFamily.Monospace,
-                                color = textColor
-                            )
-                        }
-
-                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(
-                                text = "Signature (SHA-256):",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = secondaryColor
-                            )
-                            Text(
-                                text = signature,
-                                style = MaterialTheme.typography.bodySmall,
-                                fontFamily = FontFamily.Monospace,
-                                lineHeight = 20.sp,
-                                color = textColor.copy(alpha = 0.8f)
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }

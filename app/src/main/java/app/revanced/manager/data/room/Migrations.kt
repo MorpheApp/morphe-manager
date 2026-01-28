@@ -82,3 +82,12 @@ val MIGRATION_7_8 = object : Migration(7, 8) {
         )
     }
 }
+
+val MIGRATION_8_9 = object : Migration(8, 9) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Drop tables related to downloader plugins, patch profiles and downloaded apps
+        db.execSQL("DROP TABLE IF EXISTS trusted_downloader_plugins")
+        db.execSQL("DROP TABLE IF EXISTS patch_profiles")
+        db.execSQL("DROP TABLE IF EXISTS downloaded_app")
+    }
+}
