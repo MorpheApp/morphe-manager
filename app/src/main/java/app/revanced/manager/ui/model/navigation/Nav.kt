@@ -17,36 +17,6 @@ object HomeScreen
 object Settings
 
 @Serializable
-data object SelectedApplicationInfo : ComplexParameter<SelectedApplicationInfo.ViewModelParams> {
-    @Parcelize
-    data class ViewModelParams(
-        val app: SelectedApp,
-        val patches: PatchSelection? = null,
-        val profileId: Int? = null,
-        val requiresSourceSelection: Boolean = false
-    ) : Parcelable
-
-    @Serializable
-    object Main
-
-    @Serializable
-    data object PatchesSelector : ComplexParameter<PatchesSelector.ViewModelParams> {
-        @Parcelize
-        data class ViewModelParams(
-            val app: SelectedApp,
-            val currentSelection: PatchSelection?,
-            val options: @RawValue Options,
-            val preferredAppVersion: String? = null,
-            val missingPatchNames: @RawValue List<String>? = null,
-            val preferredBundleVersion: String? = null,
-            val preferredBundleUid: Int? = null,
-            val preferredBundleOverride: String? = null,
-            val preferredBundleTargetsAllVersions: Boolean = false
-        ) : Parcelable
-    }
-}
-
-@Serializable
 data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
     @Parcelize
     data class ViewModelParams(

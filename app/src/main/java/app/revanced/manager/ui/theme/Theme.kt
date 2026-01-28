@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.theme
 
 import android.app.Activity
-import android.graphics.Color as AndroidColor
 import android.os.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -13,6 +12,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowCompat
 import app.morphe.manager.R
+import app.revanced.manager.util.toColorOrNull
 import kotlinx.serialization.Serializable
 
 private val DarkColorScheme = darkColorScheme(
@@ -80,7 +80,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun ReVancedManagerTheme(
+fun ManagerTheme(
     darkTheme: Boolean,
     dynamicColor: Boolean,
     pureBlackTheme: Boolean,
@@ -107,16 +107,17 @@ fun ReVancedManagerTheme(
         } else it
     }
 
-    val schemeWithAccent = parseCustomColor(accentColorHex)?.let {
+    val schemeWithAccent = accentColorHex.toColorOrNull()?.let {
         applyCustomAccent(baseScheme, it, darkTheme)
     } ?: baseScheme
 
-    val finalScheme = parseCustomColor(themeColorHex)?.let {
+    val finalScheme = themeColorHex.toColorOrNull()?.let {
         applyCustomThemeColor(schemeWithAccent, it, darkTheme)
     } ?: schemeWithAccent
 
     val view = LocalView.current
     if (!view.isInEditMode) {
+        @Suppress("DEPRECATION")
         SideEffect {
             val activity = view.context as Activity
 
@@ -142,12 +143,6 @@ enum class Theme(val displayName: Int) {
     SYSTEM(R.string.system),
     LIGHT(R.string.light),
     DARK(R.string.dark);
-}
-
-private fun parseCustomColor(hex: String?): Color? {
-    val normalized = hex?.trim()
-    if (normalized.isNullOrEmpty()) return null
-    return runCatching { Color(AndroidColor.parseColor(normalized)) }.getOrNull()
 }
 
 private fun applyCustomAccent(

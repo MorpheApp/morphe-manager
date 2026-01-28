@@ -26,21 +26,22 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.ui.model.navigation.*
+import app.revanced.manager.ui.model.navigation.ComplexParameter
+import app.revanced.manager.ui.model.navigation.HomeScreen
+import app.revanced.manager.ui.model.navigation.Patcher
+import app.revanced.manager.ui.model.navigation.Settings
 import app.revanced.manager.ui.screen.HomeScreen
 import app.revanced.manager.ui.screen.PatcherScreen
 import app.revanced.manager.ui.screen.SettingsScreen
 import app.revanced.manager.ui.screen.shared.AnimatedBackground
-import app.revanced.manager.ui.theme.ReVancedManagerTheme
+import app.revanced.manager.ui.theme.ManagerTheme
 import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
-import app.revanced.manager.util.EventEffect
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -66,31 +67,24 @@ class MainActivity : AppCompatActivity() {
             val customAccentColor by vm.prefs.customAccentColor.getAsState()
             val customThemeColor by vm.prefs.customThemeColor.getAsState()
 
-            ReVancedManagerTheme(
+            ManagerTheme(
                 darkTheme = theme == Theme.SYSTEM && isSystemInDarkTheme() || theme == Theme.DARK,
                 dynamicColor = dynamicColor,
                 pureBlackTheme = pureBlackTheme,
                 accentColorHex = customAccentColor.takeUnless { it.isBlank() },
                 themeColorHex = customThemeColor.takeUnless { it.isBlank() }
             ) {
-                ReVancedManager(vm)
+                MorpheManager(vm)
             }
         }
     }
 }
 
 @Composable
-private fun ReVancedManager(vm: MainViewModel) {
+private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
-
-    EventEffect(vm.appSelectFlow) { params ->
-        navController.navigateComplex(
-            SelectedApplicationInfo,
-            params
-        )
-    }
 
     // Box with background at the highest level
     Box(
