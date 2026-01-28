@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -69,6 +70,8 @@ fun InstalledAppInfoDialog(
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
     val isLoading = viewModel.isLoading
+    val isInstalling = viewModel.isInstalling
+    val mountOperation = viewModel.mountOperation
 
     // Dialog states
     var showUninstallConfirm by remember { mutableStateOf(false) }
@@ -253,6 +256,8 @@ fun InstalledAppInfoDialog(
                     viewModel = viewModel,
                     installedApp = installedApp,
                     availablePatches = availablePatches,
+                    isInstalling = isInstalling,
+                    mountOperation = mountOperation,
                     onPatchClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
                     onRepatchClick = {
                         viewModel.startRepatch { pkgName, originalFile, patches, options ->
@@ -421,6 +426,8 @@ private fun ActionsSection(
     viewModel: InstalledAppInfoViewModel,
     installedApp: InstalledApp,
     availablePatches: Int,
+    isInstalling: Boolean,
+    mountOperation: InstalledAppInfoViewModel.MountOperation?,
     onPatchClick: () -> Unit,
     onRepatchClick: () -> Unit,
     onUninstall: () -> Unit,
@@ -485,16 +492,19 @@ private fun ActionsSection(
                 ActionItem(
                     text = installText,
                     icon = Icons.Outlined.Download,
-                    onClick = { if (viewModel.mountWarning != null) onMountWarning() else viewModel.installSavedApp() }
+                    onClick = { if (viewModel.mountWarning != null) onMountWarning() else viewModel.installSavedApp() },
+                    isLoading = isInstalling
                 )
             )
         }
         installedApp.installType == InstallType.MOUNT -> {
+            val isMountLoading = mountOperation != null
             secondaryActions.add(
                 ActionItem(
                     text = if (viewModel.isMounted) stringResource(R.string.remount_saved_app) else stringResource(R.string.mount),
                     icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Check,
-                    onClick = { if (viewModel.isMounted) viewModel.remountSavedInstallation() else viewModel.mountOrUnmount() }
+                    onClick = { if (viewModel.isMounted) viewModel.remountSavedInstallation() else viewModel.mountOrUnmount() },
+                    isLoading = isMountLoading
                 )
             )
         }
@@ -546,7 +556,8 @@ private data class ActionItem(
     val icon: ImageVector,
     val onClick: () -> Unit,
     val enabled: Boolean = true,
-    val isDestructive: Boolean = false
+    val isDestructive: Boolean = false,
+    val isLoading: Boolean = false
 )
 
 @Composable
@@ -566,6 +577,7 @@ private fun ActionButtonsRow(
                 enabled = action.enabled,
                 isDestructive = action.isDestructive,
                 isPrimary = isPrimary && !action.isDestructive,
+                isLoading = action.isLoading,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -580,7 +592,8 @@ private fun ActionButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     isDestructive: Boolean = false,
-    isPrimary: Boolean = false
+    isPrimary: Boolean = false,
+    isLoading: Boolean = false
 ) {
     val containerColor = when {
         isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
@@ -598,7 +611,7 @@ private fun ActionButton(
 
     Surface(
         onClick = onClick,
-        enabled = enabled,
+        enabled = enabled && !isLoading,
         modifier = modifier.height(52.dp),
         shape = RoundedCornerShape(14.dp),
         color = containerColor,
@@ -609,11 +622,19 @@ private fun ActionButton(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    strokeWidth = 2.dp,
+                    color = contentColor
+                )
+            } else {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
             Spacer(modifier = Modifier.width(6.dp))
             Text(
                 text = text,
