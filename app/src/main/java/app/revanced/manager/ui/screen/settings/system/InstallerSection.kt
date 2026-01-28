@@ -23,7 +23,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -36,10 +36,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun InstallerSection(
     installerManager: InstallerManager,
-    advancedViewModel: AdvancedSettingsViewModel,
+    settingsViewModel: SettingsViewModel,
     onShowInstallerDialog: () -> Unit
 ) {
-    val primaryPreference by advancedViewModel.prefs.installerPrimary.getAsState()
+    val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         installerManager.parseToken(primaryPreference)
     }
@@ -91,12 +91,12 @@ fun InstallerSection(
 @Composable
 fun InstallerSelectionDialogContainer(
     installerManager: InstallerManager,
-    advancedViewModel: AdvancedSettingsViewModel,
+    settingsViewModel: SettingsViewModel,
     rootInstaller: RootInstaller,
     onDismiss: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val primaryPreference by advancedViewModel.prefs.installerPrimary.getAsState()
+    val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         installerManager.parseToken(primaryPreference)
     }
@@ -122,7 +122,7 @@ fun InstallerSelectionDialogContainer(
                 }
             }
 
-            advancedViewModel.setPrimaryInstaller(selection)
+            settingsViewModel.setPrimaryInstaller(selection)
             onDismiss()
         },
         onOpenShizuku = installerManager::openShizukuApp

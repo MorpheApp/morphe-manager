@@ -42,7 +42,7 @@ import app.revanced.manager.ui.screen.shared.InfoBadge
 import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
 import app.revanced.manager.ui.screen.shared.MorpheCard
 import app.revanced.manager.ui.screen.shared.MorpheSettingsDivider
-import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
+import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
 import kotlinx.coroutines.delay
@@ -61,21 +61,21 @@ import kotlin.math.min
 @Composable
 fun PatcherScreen(
     onBackClick: () -> Unit,
-    viewModel: PatcherViewModel,
+    patcherViewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    installViewModel: MorpheInstallViewModel = koinViewModel()
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
-    val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
+    val patcherSucceeded by patcherViewModel.patcherSucceeded.observeAsState(null)
 
     // Remember patcher state
-    val state = rememberMorphePatcherState(viewModel)
+    val state = rememberMorphePatcherState(patcherViewModel)
 
     // Animated progress with dual-mode animation
-    var displayProgress by remember { mutableStateOf(viewModel.progress) }
+    var displayProgress by remember { mutableStateOf(patcherViewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
     var showSuccessScreen by remember { mutableStateOf(false) }
 
@@ -86,7 +86,7 @@ fun PatcherScreen(
     )
 
     // Get output file from viewModel
-    val outputFile = viewModel.outputFile
+    val outputFile = patcherViewModel.outputFile
 
     // Progress animation logic
     LaunchedEffect(patcherSucceeded) {
@@ -96,7 +96,7 @@ fun PatcherScreen(
         while (patcherSucceeded == null) {
             val now = System.currentTimeMillis()
 
-            val actualProgress = viewModel.progress
+            val actualProgress = patcherViewModel.progress
             if (lastProgressUpdate != actualProgress) {
                 // Progress updated!
                 lastProgressUpdate = actualProgress
@@ -155,13 +155,13 @@ fun PatcherScreen(
         }
     }
 
-    val patchesProgress = viewModel.patchesProgress
+    val patchesProgress = patcherViewModel.patchesProgress
 
     // Monitor for patching errors (not installation errors)
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == false && !state.hasPatchingError) {
             state.hasPatchingError = true
-            val steps = viewModel.steps
+            val steps = patcherViewModel.steps
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
             state.errorMessage = failedStep?.message
                 ?: context.getString(R.string.morphe_patcher_unknown_error)
@@ -191,13 +191,13 @@ fun PatcherScreen(
     }
 
     // Export APK setup
-    val exportFormat = remember { viewModel.prefs.patchedAppExportFormat.getBlocking() }
-    val exportMetadata = viewModel.exportMetadata
-    val fallbackMetadata = remember(viewModel.packageName, viewModel.version) {
+    val exportFormat = remember { patcherViewModel.prefs.patchedAppExportFormat.getBlocking() }
+    val exportMetadata = patcherViewModel.exportMetadata
+    val fallbackMetadata = remember(patcherViewModel.packageName, patcherViewModel.version) {
         PatchedAppExportData(
-            appName = viewModel.packageName,
-            packageName = viewModel.packageName,
-            appVersion = viewModel.version ?: "unspecified"
+            appName = patcherViewModel.packageName,
+            packageName = patcherViewModel.packageName,
+            appVersion = patcherViewModel.version ?: "unspecified"
         )
     }
     val exportFileName = remember(exportFormat, exportMetadata, fallbackMetadata) {
@@ -209,8 +209,8 @@ fun PatcherScreen(
     ) { uri ->
         if (uri != null && !state.isSaving) {
             state.isSaving = true
-            viewModel.export(uri)
-            viewModel.viewModelScope.launch {
+            patcherViewModel.export(uri)
+            patcherViewModel.viewModelScope.launch {
                 delay(2000)
                 state.isSaving = false
             }
@@ -220,23 +220,23 @@ fun PatcherScreen(
     // Activity launcher for handling plugin activities or external installs
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = viewModel::handleActivityResult
+        onResult = patcherViewModel::handleActivityResult
     )
-    EventEffect(flow = viewModel.launchActivityFlow) { intent ->
+    EventEffect(flow = patcherViewModel.launchActivityFlow) { intent ->
         activityLauncher.launch(intent)
     }
 
     // Activity prompt dialog
-    viewModel.activityPromptDialog?.let { title ->
+    patcherViewModel.activityPromptDialog?.let { title ->
         AlertDialog(
-            onDismissRequest = viewModel::rejectInteraction,
+            onDismissRequest = patcherViewModel::rejectInteraction,
             confirmButton = {
-                TextButton(onClick = viewModel::allowInteraction) {
+                TextButton(onClick = patcherViewModel::allowInteraction) {
                     Text(stringResource(R.string.continue_))
                 }
             },
             dismissButton = {
-                TextButton(onClick = viewModel::rejectInteraction) {
+                TextButton(onClick = patcherViewModel::rejectInteraction) {
                     Text(stringResource(android.R.string.cancel))
                 }
             },
@@ -440,7 +440,7 @@ fun PatcherScreen(
                     PatchingInProgress(
                         progress = displayProgressAnimate,
                         patchesProgress = patchesProgress,
-                        viewModel = viewModel,
+                        patcherViewModel = patcherViewModel,
                         showLongStepWarning = showLongStepWarning,
                         onCancelClick = { state.showCancelDialog = true },
                         onHomeClick = onBackClick
@@ -454,25 +454,25 @@ fun PatcherScreen(
                         onInstall = {
                             if (usingMountInstall) {
                                 // Mount install
-                                val inputVersion = viewModel.version
-                                    ?: viewModel.currentSelectedApp.version
+                                val inputVersion = patcherViewModel.version
+                                    ?: patcherViewModel.currentSelectedApp.version
                                     ?: "unknown"
                                 installViewModel.installMount(
                                     outputFile = outputFile,
-                                    inputFile = viewModel.inputFile,
-                                    packageName = viewModel.packageName,
+                                    inputFile = patcherViewModel.inputFile,
+                                    packageName = patcherViewModel.packageName,
                                     inputVersion = inputVersion,
                                     onPersistApp = { pkg, type ->
-                                        viewModel.persistPatchedApp(pkg, type)
+                                        patcherViewModel.persistPatchedApp(pkg, type)
                                     }
                                 )
                             } else {
                                 // Regular install with pre-conflict check
                                 installViewModel.install(
                                     outputFile = outputFile,
-                                    originalPackageName = viewModel.packageName,
+                                    originalPackageName = patcherViewModel.packageName,
                                     onPersistApp = { pkg, type ->
-                                        viewModel.persistPatchedApp(pkg, type)
+                                        patcherViewModel.persistPatchedApp(pkg, type)
                                     }
                                 )
                             }

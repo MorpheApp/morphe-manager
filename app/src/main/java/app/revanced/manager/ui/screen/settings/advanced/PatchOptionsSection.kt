@@ -24,7 +24,7 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Compan
 import app.revanced.manager.domain.manager.getLocalizedOrCustomText
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import app.revanced.manager.util.toast
@@ -39,8 +39,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PatchOptionsSection(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    viewModel: PatchOptionsViewModel = koinViewModel(),
-    dashboardViewModel: DashboardViewModel = koinViewModel()
+    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
+    homeViewModel: HomeViewModel = koinViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -50,21 +50,21 @@ fun PatchOptionsSection(
     var showHeaderDialog by remember { mutableStateOf(false) }
 
     // Collect patch options from ViewModel
-    val youtubePatches by viewModel.youtubePatches.collectAsState()
-    val youtubeMusicPatches by viewModel.youtubeMusicPatches.collectAsState()
-    val loadError = viewModel.loadError
+    val youtubePatches by patchOptionsViewModel.youtubePatches.collectAsState()
+    val youtubeMusicPatches by patchOptionsViewModel.youtubeMusicPatches.collectAsState()
+    val loadError = patchOptionsViewModel.loadError
 
     // Track bundle update progress to show loading state
-    val bundleUpdateProgress by dashboardViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+    val bundleUpdateProgress by homeViewModel.patchBundleRepository.bundleUpdateProgress.collectAsStateWithLifecycle(null)
     val isBundleUpdating = bundleUpdateProgress != null && bundleUpdateProgress!!.result == PatchBundleRepository.BundleUpdateResult.None
 
     // Collect bundle info to detect changes
-    val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     // Refresh patch options when bundle info changes
     LaunchedEffect(bundleInfo) {
         if (bundleInfo.isNotEmpty()) {
-            viewModel.refresh()
+            patchOptionsViewModel.refresh()
         }
     }
 
@@ -152,8 +152,8 @@ fun PatchOptionsSection(
                     }
                     IconButton(onClick = {
                         scope.launch {
-                            dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                            viewModel.refresh()
+                            homeViewModel.updateMorpheBundleWithChangelogClear()
+                            patchOptionsViewModel.refresh()
                             context.toast(context.getString(R.string.morphe_home_updating_sources))
                         }
                     }) {
@@ -181,7 +181,7 @@ fun PatchOptionsSection(
                         icon = Icons.Outlined.VideoLibrary,
                         title = stringResource(R.string.morphe_home_youtube),
                         description = stringResource(R.string.morphe_patch_options_youtube_description),
-                        viewModel = viewModel,
+                        patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
                         onHeaderClick = { showHeaderDialog = true }
@@ -189,17 +189,17 @@ fun PatchOptionsSection(
                 }
 
                 // Hide Shorts Features
-                val hideShortsOptions = viewModel.getHideShortsOptions()
+                val hideShortsOptions = patchOptionsViewModel.getHideShortsOptions()
                 val hasHideShorts = hideShortsOptions != null && (
-                        viewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT) ||
-                                viewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
+                        patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT) ||
+                                patchOptionsViewModel.hasOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
                         )
 
                 if (hasHideShorts) {
                     SectionCard {
                         HideShortsSection(
                             patchOptionsPrefs = patchOptionsPrefs,
-                            viewModel = viewModel
+                            viewModel = patchOptionsViewModel
                         )
                     }
                 }
@@ -213,7 +213,7 @@ fun PatchOptionsSection(
                         icon = Icons.Outlined.LibraryMusic,
                         title = stringResource(R.string.morphe_home_youtube_music),
                         description = stringResource(R.string.morphe_patch_options_youtube_music_description),
-                        viewModel = viewModel,
+                        patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
                         onHeaderClick = null // No header for YouTube Music
@@ -227,7 +227,7 @@ fun PatchOptionsSection(
     showThemeDialog?.let { appType ->
         ThemeColorDialog(
             patchOptionsPrefs = patchOptionsPrefs,
-            viewModel = viewModel,
+            patchOptionsViewModel = patchOptionsViewModel,
             appType = appType,
             onDismiss = { showThemeDialog = null }
         )
@@ -237,7 +237,7 @@ fun PatchOptionsSection(
     showBrandingDialog?.let { appType ->
         CustomBrandingDialog(
             patchOptionsPrefs = patchOptionsPrefs,
-            viewModel = viewModel,
+            patchOptionsViewModel = patchOptionsViewModel,
             appType = appType,
             onDismiss = { showBrandingDialog = null }
         )
@@ -247,7 +247,7 @@ fun PatchOptionsSection(
     if (showHeaderDialog) {
         CustomHeaderDialog(
             patchOptionsPrefs = patchOptionsPrefs,
-            viewModel = viewModel,
+            patchOptionsViewModel = patchOptionsViewModel,
             onDismiss = { showHeaderDialog = false }
         )
     }
@@ -262,15 +262,15 @@ private fun AppPatchOptionsCard(
     icon: ImageVector,
     title: String,
     description: String,
-    viewModel: PatchOptionsViewModel,
+    patchOptionsViewModel: PatchOptionsViewModel,
     onThemeClick: () -> Unit,
     onBrandingClick: () -> Unit,
     onHeaderClick: (() -> Unit)?
 ) {
     // Get available patches for this app type
-    val hasTheme = viewModel.getThemeOptions(appType.packageName) != null
-    val hasBranding = viewModel.getBrandingOptions(appType.packageName) != null
-    val hasHeader = appType == AppType.YOUTUBE && viewModel.getHeaderOptions() != null
+    val hasTheme = patchOptionsViewModel.getThemeOptions(appType.packageName) != null
+    val hasBranding = patchOptionsViewModel.getBrandingOptions(appType.packageName) != null
+    val hasHeader = appType == AppType.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
 
     Column {
         // Header

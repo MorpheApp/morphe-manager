@@ -21,7 +21,7 @@ import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.screen.settings.system.*
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ import org.koin.compose.koinInject
 @Composable
 fun SystemTabContent(
     installerManager: InstallerManager,
-    advancedViewModel: AdvancedSettingsViewModel,
+    settingsViewModel: SettingsViewModel,
     onShowInstallerDialog: () -> Unit,
     importExportViewModel: ImportExportViewModel,
     onImportKeystore: () -> Unit,
@@ -95,7 +95,7 @@ fun SystemTabContent(
         SectionCard {
             InstallerSection(
                 installerManager = installerManager,
-                advancedViewModel = advancedViewModel,
+                settingsViewModel = settingsViewModel,
                 onShowInstallerDialog = onShowInstallerDialog
             )
         }

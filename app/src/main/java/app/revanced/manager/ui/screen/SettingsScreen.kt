@@ -64,11 +64,11 @@ private enum class SettingsTab(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SettingsScreen(
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
+    themeViewModel: ThemeSettingsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
-    dashboardViewModel: DashboardViewModel = koinViewModel(),
+    homeViewModel: HomeViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
-    advancedViewModel: AdvancedSettingsViewModel = koinViewModel()
+    settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -90,7 +90,7 @@ fun SettingsScreen(
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
 
     // Update
-    val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
+    val usePrereleases = homeViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
@@ -163,7 +163,7 @@ fun SettingsScreen(
     if (showInstallerDialog) {
         InstallerSelectionDialogContainer(
             installerManager = installerManager,
-            advancedViewModel = advancedViewModel,
+            settingsViewModel = settingsViewModel,
             rootInstaller = rootInstaller,
             onDismiss = { showInstallerDialog = false }
         )
@@ -193,18 +193,13 @@ fun SettingsScreen(
                 SettingsTab.ADVANCED -> AdvancedTabContent(
                     usePrereleases = usePrereleases,
                     patchOptionsViewModel = patchOptionsViewModel,
-                    dashboardViewModel = dashboardViewModel,
-                    prefs = prefs,
-//                    onBackToAdvanced = {
-//                        coroutineScope.launch {
-//                            themeViewModel.prefs.useMorpheHomeScreen.update(false)
-//                        }
-//                    }
+                    homeViewModel = homeViewModel,
+                    prefs = prefs
                 )
 
                 SettingsTab.SYSTEM -> SystemTabContent(
                     installerManager = installerManager,
-                    advancedViewModel = advancedViewModel,
+                    settingsViewModel = settingsViewModel,
                     onShowInstallerDialog = { showInstallerDialog = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },

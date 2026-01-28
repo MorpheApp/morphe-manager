@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ThemeColorDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    viewModel: PatchOptionsViewModel,
+    patchOptionsViewModel: PatchOptionsViewModel,
     appType: AppType,
     onDismiss: () -> Unit
 ) {
@@ -62,15 +62,15 @@ fun ThemeColorDialog(
     var showLightColorPicker by remember { mutableStateOf(false) }
 
     // Get theme options from bundle
-    val themeOptions = viewModel.getThemeOptions(appType.packageName)
+    val themeOptions = patchOptionsViewModel.getThemeOptions(appType.packageName)
 
     // Get dark theme option with its presets
-    val darkThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
-    val darkPresets = darkThemeOption?.let { viewModel.getOptionPresetsMap(it) } ?: emptyMap()
+    val darkThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
+    val darkPresets = darkThemeOption?.let { patchOptionsViewModel.getOptionPresetsMap(it) } ?: emptyMap()
 
     // Get light theme option (YouTube only)
-    val lightThemeOption = viewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
-    val lightPresets = lightThemeOption?.let { viewModel.getOptionPresetsMap(it) } ?: emptyMap()
+    val lightThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.LIGHT_THEME_COLOR)
+    val lightPresets = lightThemeOption?.let { patchOptionsViewModel.getOptionPresetsMap(it) } ?: emptyMap()
 
     // Get default values from presets
     val defaultDarkColor = darkPresets.entries.firstOrNull()?.value?.toString() ?: "@android:color/black"
@@ -279,7 +279,7 @@ fun ThemeColorDialog(
 @Composable
 fun CustomBrandingDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    viewModel: PatchOptionsViewModel,
+    patchOptionsViewModel: PatchOptionsViewModel,
     appType: AppType,
     onDismiss: () -> Unit
 ) {
@@ -306,9 +306,9 @@ fun CustomBrandingDialog(
     }
 
     // Get branding options from bundle
-    val brandingOptions = viewModel.getBrandingOptions(appType.packageName)
-    val appNameOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
-    val iconOption = viewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
+    val brandingOptions = patchOptionsViewModel.getBrandingOptions(appType.packageName)
+    val appNameOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
+    val iconOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
 
     // Folder picker with permission handling
     val openFolderPicker = rememberFolderPickerWithPermission(
@@ -469,7 +469,7 @@ fun CustomBrandingDialog(
 @Composable
 fun CustomHeaderDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
-    viewModel: PatchOptionsViewModel,
+    patchOptionsViewModel: PatchOptionsViewModel,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -477,8 +477,8 @@ fun CustomHeaderDialog(
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
     // Get header options from bundle
-    val headerOptions = viewModel.getHeaderOptions()
-    val customOption = viewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
+    val headerOptions = patchOptionsViewModel.getHeaderOptions()
+    val customOption = patchOptionsViewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
 
     // Folder picker with permission handling
     val openFolderPicker = rememberFolderPickerWithPermission(

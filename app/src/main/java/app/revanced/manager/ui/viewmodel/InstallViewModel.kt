@@ -36,7 +36,7 @@ import androidx.core.net.toUri
  * Simplified install view model for Morphe patcher screen.
  * Handles installation with pre-check for signature conflicts BEFORE system dialog.
  */
-class MorpheInstallViewModel : ViewModel(), KoinComponent {
+class InstallViewModel : ViewModel(), KoinComponent {
 
     private val app: Application by inject()
     private val pm: PM by inject()

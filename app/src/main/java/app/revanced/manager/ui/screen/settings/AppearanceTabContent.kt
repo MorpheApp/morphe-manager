@@ -32,7 +32,7 @@ import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.revanced.manager.util.darken
 import app.revanced.manager.ui.theme.Theme
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
+import app.revanced.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
 import app.revanced.manager.util.toColorOrNull
 import kotlinx.coroutines.delay
@@ -64,7 +64,7 @@ fun AppearanceTabContent(
     pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     customAccentColorHex: String?,
-    themeViewModel: MorpheThemeSettingsViewModel
+    themeViewModel: ThemeSettingsViewModel
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current

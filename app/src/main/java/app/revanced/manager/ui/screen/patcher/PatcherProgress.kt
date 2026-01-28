@@ -33,7 +33,7 @@ import kotlinx.coroutines.delay
 fun PatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
-    viewModel: PatcherViewModel,
+    patcherViewModel: PatcherViewModel,
     showLongStepWarning: Boolean = false,
     onCancelClick: () -> Unit,
     onHomeClick: () -> Unit
@@ -86,7 +86,7 @@ fun PatchingInProgress(
 
                         ProgressDetailsSection(
                             showLongStepWarning = showLongStepWarning,
-                            viewModel = viewModel,
+                            patcherViewModel = patcherViewModel,
                             windowSize = windowSize
                         )
                     }
@@ -128,7 +128,7 @@ fun PatchingInProgress(
 
                 ProgressDetailsSection(
                     showLongStepWarning = showLongStepWarning,
-                    viewModel = viewModel,
+                    patcherViewModel = patcherViewModel,
                     windowSize = windowSize
                 )
             }
@@ -170,7 +170,7 @@ private fun ProgressMessageSection(currentMessage: Int) {
 @Composable
 private fun ProgressDetailsSection(
     showLongStepWarning: Boolean,
-    viewModel: PatcherViewModel,
+    patcherViewModel: PatcherViewModel,
     windowSize: WindowSize
 ) {
     Column(
@@ -195,7 +195,7 @@ private fun ProgressDetailsSection(
 
         // Current step indicator
         CurrentStepIndicator(
-            viewModel = viewModel,
+            patcherViewModel = patcherViewModel,
             windowSize = windowSize
         )
     }
@@ -292,12 +292,12 @@ private fun CircularProgressWithStats(
  */
 @Composable
 fun CurrentStepIndicator(
-    viewModel: PatcherViewModel,
+    patcherViewModel: PatcherViewModel,
     windowSize: WindowSize
 ) {
     val currentStep by remember {
         derivedStateOf {
-            viewModel.steps.firstOrNull { it.state == State.RUNNING }
+            patcherViewModel.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
 

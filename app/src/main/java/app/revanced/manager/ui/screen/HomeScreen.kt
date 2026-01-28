@@ -46,7 +46,6 @@ fun HomeScreen(
     onSettingsClick: () -> Unit,
     onStartQuickPatch: (QuickPatchParams) -> Unit,
     onNavigateToPatcher: (packageName: String, version: String, filePath: String, patches: PatchSelection, options: Options) -> Unit,
-    dashboardViewModel: DashboardViewModel = koinViewModel(),
     homeViewModel: HomeViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     usingMountInstallState: MutableState<Boolean>,
@@ -62,13 +61,13 @@ fun HomeScreen(
     var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
 
     // Collect state flows
-    val availablePatches by dashboardViewModel.availablePatches.collectAsStateWithLifecycle(0)
-    val sources by dashboardViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val bundleInfo by dashboardViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
+    val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
     // Calculate mount install state
     val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
-            dashboardViewModel.rootInstaller.hasRootAccess()
+            homeViewModel.rootInstaller.hasRootAccess()
     usingMountInstallState.value = usingMountInstall
 
     // Calculate if Other Apps button should be visible
@@ -200,7 +199,7 @@ fun HomeScreen(
     val greetingMessage = stringResource(HomeAndPatcherMessages.getHomeMessage(context))
 
     // Check for manager update
-    val hasManagerUpdate = !dashboardViewModel.updatedManagerVersion.isNullOrEmpty()
+    val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
     // Manager update details dialog
     if (showUpdateDetailsDialog) {
@@ -255,8 +254,7 @@ fun HomeScreen(
 
     // All dialogs
     HomeDialogs(
-        viewModel = homeViewModel,
-        dashboardViewModel = dashboardViewModel,
+        homeViewModel = homeViewModel,
         storagePickerLauncher = { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) },
         openBundlePicker = openBundlePicker
     )
@@ -284,7 +282,7 @@ fun HomeScreen(
                     packageName = PACKAGE_YOUTUBE,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
-                    android11BugActive = dashboardViewModel.android11BugActive,
+                    android11BugActive = homeViewModel.android11BugActive,
                     installedApp = youtubeInstalledApp
                 )
                 youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
@@ -294,7 +292,7 @@ fun HomeScreen(
                     packageName = PACKAGE_YOUTUBE_MUSIC,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
-                    android11BugActive = dashboardViewModel.android11BugActive,
+                    android11BugActive = homeViewModel.android11BugActive,
                     installedApp = youtubeMusicInstalledApp
                 )
                 youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
@@ -304,7 +302,7 @@ fun HomeScreen(
                     packageName = PACKAGE_REDDIT,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
-                    android11BugActive = dashboardViewModel.android11BugActive,
+                    android11BugActive = homeViewModel.android11BugActive,
                     installedApp = redditInstalledApp
                 )
                 redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }

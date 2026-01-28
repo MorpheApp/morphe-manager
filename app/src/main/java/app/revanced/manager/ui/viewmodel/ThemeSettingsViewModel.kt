@@ -28,10 +28,7 @@ private data class ThemePresetConfig(
     val customThemeHex: String = ""
 )
 
-/**
- * Original was GeneralSettingsViewModel until changed to just "Theme" for Morphe advanced mode.
- */
-class MorpheThemeSettingsViewModel(
+class ThemeSettingsViewModel(
     val prefs: PreferencesManager
 ) : ViewModel() {
     private val presetConfigs = mapOf(

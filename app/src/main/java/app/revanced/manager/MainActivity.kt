@@ -39,7 +39,7 @@ import app.revanced.manager.ui.screen.SettingsScreen
 import app.revanced.manager.ui.screen.shared.AnimatedBackground
 import app.revanced.manager.ui.theme.ManagerTheme
 import app.revanced.manager.ui.theme.Theme
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.MainViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.launch
@@ -136,8 +136,8 @@ private fun MorpheManager(vm: MainViewModel) {
             val usingMountInstallState = mutableStateOf(false)
 
             composable<HomeScreen> { entry ->
-                val dashboardViewModel = koinViewModel<DashboardViewModel>()
-                val bundleUpdateProgress by dashboardViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
+                val homeViewModel = koinViewModel<HomeViewModel>()
+                val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
 
@@ -172,7 +172,7 @@ private fun MorpheManager(vm: MainViewModel) {
                             )
                         }
                     },
-                    dashboardViewModel = dashboardViewModel,
+                    homeViewModel = homeViewModel,
                     usingMountInstallState = usingMountInstallState,
                     bundleUpdateProgress = bundleUpdateProgress,
                     patchTriggerPackage = patchTriggerPackage,
@@ -187,7 +187,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 PatcherScreen(
                     onBackClick = navController::popBackStack,
-                    viewModel = patcherViewModel,
+                    patcherViewModel = patcherViewModel,
                     usingMountInstall = usingMountInstallState.value
                 )
                 return@composable

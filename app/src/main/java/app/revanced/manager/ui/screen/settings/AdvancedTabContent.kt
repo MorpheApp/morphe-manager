@@ -17,7 +17,7 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
+import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
 
@@ -28,9 +28,8 @@ import kotlinx.coroutines.launch
 fun AdvancedTabContent(
     usePrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
-    dashboardViewModel: DashboardViewModel,
-    prefs: PreferencesManager,
-//    onBackToAdvanced: () -> Unit
+    homeViewModel: HomeViewModel,
+    prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -69,8 +68,8 @@ fun AdvancedTabContent(
                     prefs.usePatchesPrereleases.update(newValue)
                     prefs.useManagerPrereleases.update(newValue)
                     prefs.managerAutoUpdates.update(newValue)
-                    dashboardViewModel.updateMorpheBundleWithChangelogClear()
-                    dashboardViewModel.checkForManagerUpdates()
+                    homeViewModel.updateMorpheBundleWithChangelogClear()
+                    homeViewModel.checkForManagerUpdates()
                     patchOptionsViewModel.refresh()
                 }
             },
@@ -165,8 +164,8 @@ fun AdvancedTabContent(
 
             PatchOptionsSection(
                 patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-                viewModel = patchOptionsViewModel,
-                dashboardViewModel = dashboardViewModel
+                patchOptionsViewModel = patchOptionsViewModel,
+                homeViewModel = homeViewModel
             )
         }
     }

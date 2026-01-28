@@ -37,7 +37,6 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
@@ -49,8 +48,7 @@ import kotlinx.coroutines.*
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeDialogs(
-    viewModel: HomeViewModel,
-    dashboardViewModel: DashboardViewModel,
+    homeViewModel: HomeViewModel,
     storagePickerLauncher: () -> Unit,
     openBundlePicker: () -> Unit
 ) {
@@ -60,32 +58,32 @@ fun HomeDialogs(
 
     // Dialog 1: APK Availability
     AnimatedVisibility(
-        visible = viewModel.showApkAvailabilityDialog && viewModel.pendingPackageName != null && viewModel.pendingAppName != null,
+        visible = homeViewModel.showApkAvailabilityDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (viewModel.showDownloadInstructionsDialog) 0 else 200))
+        exit = fadeOut(animationSpec = tween(if (homeViewModel.showDownloadInstructionsDialog) 0 else 200))
     ) {
-        val appName = viewModel.pendingAppName ?: return@AnimatedVisibility
-        val recommendedVersion = viewModel.pendingRecommendedVersion
-        val usingMountInstall = viewModel.usingMountInstall
+        val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
+        val recommendedVersion = homeViewModel.pendingRecommendedVersion
+        val usingMountInstall = homeViewModel.usingMountInstall
 
         ApkAvailabilityDialog(
             appName = appName,
             recommendedVersion = recommendedVersion,
             usingMountInstall = usingMountInstall,
             onDismiss = {
-                viewModel.showApkAvailabilityDialog = false
-                viewModel.cleanupPendingData()
+                homeViewModel.showApkAvailabilityDialog = false
+                homeViewModel.cleanupPendingData()
             },
             onHaveApk = {
-                viewModel.showApkAvailabilityDialog = false
+                homeViewModel.showApkAvailabilityDialog = false
                 storagePickerLauncher()
             },
             onNeedApk = {
-                viewModel.showApkAvailabilityDialog = false
+                homeViewModel.showApkAvailabilityDialog = false
                 scope.launch {
                     delay(50)
-                    viewModel.showDownloadInstructionsDialog = true
-                    viewModel.resolveDownloadRedirect()
+                    homeViewModel.showDownloadInstructionsDialog = true
+                    homeViewModel.resolveDownloadRedirect()
                 }
             }
         )
@@ -93,20 +91,20 @@ fun HomeDialogs(
 
     // Dialog 2: Download Instructions
     AnimatedVisibility(
-        visible = viewModel.showDownloadInstructionsDialog && viewModel.pendingPackageName != null && viewModel.pendingAppName != null,
+        visible = homeViewModel.showDownloadInstructionsDialog && homeViewModel.pendingPackageName != null && homeViewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
-        exit = fadeOut(animationSpec = tween(if (viewModel.showFilePickerPromptDialog) 0 else 200))
+        exit = fadeOut(animationSpec = tween(if (homeViewModel.showFilePickerPromptDialog) 0 else 200))
     ) {
-        val usingMountInstall = viewModel.usingMountInstall
+        val usingMountInstall = homeViewModel.usingMountInstall
 
         DownloadInstructionsDialog(
             usingMountInstall = usingMountInstall,
             onDismiss = {
-                viewModel.showDownloadInstructionsDialog = false
-                viewModel.cleanupPendingData()
+                homeViewModel.showDownloadInstructionsDialog = false
+                homeViewModel.cleanupPendingData()
             }
         ) {
-            viewModel.handleDownloadInstructionsContinue { url ->
+            homeViewModel.handleDownloadInstructionsContinue { url ->
                 try {
                     uriHandler.openUri(url)
                     true
@@ -119,22 +117,22 @@ fun HomeDialogs(
 
     // Dialog 3: File Picker Prompt
     AnimatedVisibility(
-        visible = viewModel.showFilePickerPromptDialog && viewModel.pendingAppName != null,
+        visible = homeViewModel.showFilePickerPromptDialog && homeViewModel.pendingAppName != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val appName = viewModel.pendingAppName ?: return@AnimatedVisibility
-        val isOtherApps = viewModel.pendingPackageName == null
+        val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
+        val isOtherApps = homeViewModel.pendingPackageName == null
 
         FilePickerPromptDialog(
             appName = appName,
             isOtherApps = isOtherApps,
             onDismiss = {
-                viewModel.showFilePickerPromptDialog = false
-                viewModel.cleanupPendingData()
+                homeViewModel.showFilePickerPromptDialog = false
+                homeViewModel.cleanupPendingData()
             },
             onOpenFilePicker = {
-                viewModel.showFilePickerPromptDialog = false
+                homeViewModel.showFilePickerPromptDialog = false
                 storagePickerLauncher()
             }
         )
@@ -142,30 +140,30 @@ fun HomeDialogs(
 
     // Unsupported Version Dialog
     AnimatedVisibility(
-        visible = viewModel.showUnsupportedVersionDialog != null,
+        visible = homeViewModel.showUnsupportedVersionDialog != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val dialogState = viewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
+        val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
 
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion,
             onDismiss = {
-                viewModel.showUnsupportedVersionDialog = null
-                viewModel.pendingSelectedApp?.let { app ->
+                homeViewModel.showUnsupportedVersionDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
                     if (app is SelectedApp.Local && app.temporary) {
                         app.file.delete()
                     }
                 }
-                viewModel.pendingSelectedApp = null
+                homeViewModel.pendingSelectedApp = null
             },
             onProceed = {
-                viewModel.showUnsupportedVersionDialog = null
-                viewModel.pendingSelectedApp?.let { app ->
+                homeViewModel.showUnsupportedVersionDialog = null
+                homeViewModel.pendingSelectedApp?.let { app ->
                     CoroutineScope(Dispatchers.Main).launch {
-                        viewModel.startPatchingWithApp(app, true)
-                        viewModel.pendingSelectedApp = null
+                        homeViewModel.startPatchingWithApp(app, true)
+                        homeViewModel.pendingSelectedApp = null
                     }
                 }
             }
@@ -174,56 +172,56 @@ fun HomeDialogs(
 
     // Wrong Package Dialog
     AnimatedVisibility(
-        visible = viewModel.showWrongPackageDialog != null,
+        visible = homeViewModel.showWrongPackageDialog != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val dialogState = viewModel.showWrongPackageDialog ?: return@AnimatedVisibility
+        val dialogState = homeViewModel.showWrongPackageDialog ?: return@AnimatedVisibility
 
         WrongPackageDialog(
             expectedPackage = dialogState.expectedPackage,
             actualPackage = dialogState.actualPackage,
-            onDismiss = { viewModel.showWrongPackageDialog = null }
+            onDismiss = { homeViewModel.showWrongPackageDialog = null }
         )
     }
 
     // Expert Mode Dialog
     AnimatedVisibility(
-        visible = viewModel.showExpertModeDialog && viewModel.expertModeSelectedApp != null,
+        visible = homeViewModel.showExpertModeDialog && homeViewModel.expertModeSelectedApp != null,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(200))
     ) {
-        val selectedApp = viewModel.expertModeSelectedApp ?: return@AnimatedVisibility
-        val allowIncompatible = dashboardViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
+        val selectedApp = homeViewModel.expertModeSelectedApp ?: return@AnimatedVisibility
+        val allowIncompatible = homeViewModel.prefs.disablePatchVersionCompatCheck.getBlocking()
 
         ExpertModeDialog(
-            bundles = viewModel.expertModeBundles,
-            selectedPatches = viewModel.expertModePatches,
-            options = viewModel.expertModeOptions,
+            bundles = homeViewModel.expertModeBundles,
+            selectedPatches = homeViewModel.expertModePatches,
+            options = homeViewModel.expertModeOptions,
             onPatchToggle = { bundleUid, patchName ->
-                viewModel.togglePatchInExpertMode(bundleUid, patchName)
+                homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
             },
             onOptionChange = { bundleUid, patchName, optionKey, value ->
-                viewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
+                homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
             },
             onResetOptions = { bundleUid, patchName ->
-                viewModel.resetOptionsInExpertMode(bundleUid, patchName)
+                homeViewModel.resetOptionsInExpertMode(bundleUid, patchName)
             },
             onDismiss = {
-                viewModel.cleanupExpertModeData()
+                homeViewModel.cleanupExpertModeData()
             },
             onProceed = {
-                val finalPatches = viewModel.expertModePatches
-                val finalOptions = viewModel.expertModeOptions
+                val finalPatches = homeViewModel.expertModePatches
+                val finalOptions = homeViewModel.expertModeOptions
 
-                viewModel.showExpertModeDialog = false
+                homeViewModel.showExpertModeDialog = false
 
                 scope.launch(Dispatchers.IO) {
-                    viewModel.saveOptions(selectedApp.packageName, finalOptions)
+                    homeViewModel.saveOptions(selectedApp.packageName, finalOptions)
 
                     withContext(Dispatchers.Main) {
-                        viewModel.proceedWithPatching(selectedApp, finalPatches, finalOptions)
-                        viewModel.cleanupExpertModeData()
+                        homeViewModel.proceedWithPatching(selectedApp, finalPatches, finalOptions)
+                        homeViewModel.cleanupExpertModeData()
                     }
                 }
             },
@@ -232,85 +230,85 @@ fun HomeDialogs(
     }
 
     // Bundle management sheet
-    if (viewModel.showBundleManagementSheet) {
+    if (homeViewModel.showBundleManagementSheet) {
         BundleManagementSheet(
-            onDismissRequest = { viewModel.showBundleManagementSheet = false },
+            onDismissRequest = { homeViewModel.showBundleManagementSheet = false },
             onAddBundle = {
-                viewModel.showBundleManagementSheet = false
-                viewModel.showAddBundleDialog = true
+                homeViewModel.showBundleManagementSheet = false
+                homeViewModel.showAddBundleDialog = true
             },
             onDelete = { bundle ->
                 scope.launch {
-                    dashboardViewModel.patchBundleRepository.remove(bundle)
+                    homeViewModel.patchBundleRepository.remove(bundle)
                 }
             },
             onDisable = { bundle ->
                 scope.launch {
-                    dashboardViewModel.patchBundleRepository.disable(bundle)
+                    homeViewModel.patchBundleRepository.disable(bundle)
                 }
             },
             onUpdate = { bundle ->
                 if (bundle is RemotePatchBundle) {
                     scope.launch {
-                        dashboardViewModel.patchBundleRepository.update(bundle, showToast = true)
+                        homeViewModel.patchBundleRepository.update(bundle, showToast = true)
                     }
                 }
             },
             onRename = { bundle ->
-                viewModel.bundleToRename = bundle
-                viewModel.showRenameBundleDialog = true
+                homeViewModel.bundleToRename = bundle
+                homeViewModel.showRenameBundleDialog = true
             }
         )
     }
 
     // Add bundle dialog
-    if (viewModel.showAddBundleDialog) {
+    if (homeViewModel.showAddBundleDialog) {
         AddBundleDialog(
             onDismiss = {
-                viewModel.showAddBundleDialog = false
-                viewModel.selectedBundleUri = null
-                viewModel.selectedBundlePath = null
+                homeViewModel.showAddBundleDialog = false
+                homeViewModel.selectedBundleUri = null
+                homeViewModel.selectedBundlePath = null
             },
             onLocalSubmit = {
-                viewModel.showAddBundleDialog = false
-                viewModel.selectedBundleUri?.let { uri ->
-                    dashboardViewModel.createLocalSource(uri)
+                homeViewModel.showAddBundleDialog = false
+                homeViewModel.selectedBundleUri?.let { uri ->
+                    homeViewModel.createLocalSource(uri)
                 }
-                viewModel.selectedBundleUri = null
-                viewModel.selectedBundlePath = null
+                homeViewModel.selectedBundleUri = null
+                homeViewModel.selectedBundlePath = null
             },
             onRemoteSubmit = { url ->
-                viewModel.showAddBundleDialog = false
-                dashboardViewModel.createRemoteSource(url, true)
+                homeViewModel.showAddBundleDialog = false
+                homeViewModel.createRemoteSource(url, true)
             },
             onLocalPick = {
                 openBundlePicker()
             },
-            selectedLocalPath = viewModel.selectedBundlePath
+            selectedLocalPath = homeViewModel.selectedBundlePath
         )
     }
 
     // Rename bundle dialog
-    if (viewModel.showRenameBundleDialog && viewModel.bundleToRename != null) {
-        val bundle = viewModel.bundleToRename!!
+    if (homeViewModel.showRenameBundleDialog && homeViewModel.bundleToRename != null) {
+        val bundle = homeViewModel.bundleToRename!!
 
         RenameBundleDialog(
             initialValue = bundle.displayName.orEmpty(),
             onDismissRequest = {
-                viewModel.showRenameBundleDialog = false
-                viewModel.bundleToRename = null
+                homeViewModel.showRenameBundleDialog = false
+                homeViewModel.bundleToRename = null
             },
             onConfirm = { value ->
                 scope.launch {
-                    val result = dashboardViewModel.patchBundleRepository.setDisplayName(
+                    val result = homeViewModel.patchBundleRepository.setDisplayName(
                         bundle.uid,
                         value.trim().ifEmpty { null }
                     )
                     when (result) {
                         PatchBundleRepository.DisplayNameUpdateResult.SUCCESS,
                         PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> {
-                            viewModel.showRenameBundleDialog = false
-                            viewModel.bundleToRename = null
+                            homeViewModel.showRenameBundleDialog = false
+                            homeViewModel.bundleToRename = null
                         }
                         PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE -> {
                             context.toast(context.getString(R.string.patch_bundle_duplicate_name_error))

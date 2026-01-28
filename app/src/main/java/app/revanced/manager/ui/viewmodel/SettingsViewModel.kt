@@ -28,7 +28,7 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class AdvancedSettingsViewModel(
+class SettingsViewModel(
     val prefs: PreferencesManager,
     private val app: Application,
     private val patchBundleRepository: PatchBundleRepository,
