@@ -162,7 +162,6 @@ class InstalledAppInfoViewModel(
         internalInstallTimeoutJob?.cancel()
         externalInstallBaseline = null
         externalInstallStartTime = null
-        stopInstallProgressToasts()
         installResult = null
         isInstalling = false
     }
@@ -233,7 +232,6 @@ class InstalledAppInfoViewModel(
     }
 
     private fun markInstallSuccess(message: String) {
-        stopInstallProgressToasts()
         internalInstallTimeoutJob?.cancel()
         installResult = InstallResult.Success(message)
         isInstalling = false
@@ -270,15 +268,12 @@ class InstalledAppInfoViewModel(
     }
 
     private fun markInstallFailure(message: String) {
-        stopInstallProgressToasts()
-        stopUninstallProgressToasts()
         internalInstallTimeoutJob?.cancel()
         installResult = InstallResult.Failure(message)
         isInstalling = false
     }
 
     private fun showSignatureMismatchPrompt(packageName: String) {
-        stopInstallProgressToasts()
         installResult = null
         isInstalling = false
         pendingSignatureMismatchPackage = packageName
@@ -298,14 +293,12 @@ class InstalledAppInfoViewModel(
                     pendingSignatureMismatchPackage = null
                     signatureMismatchPackage = null
                     signatureMismatchUninstallJob = null
-                    stopUninstallProgressToasts()
                     installSavedApp()
                     return@launch
                 }
                 delay(SIGNATURE_MISMATCH_UNINSTALL_POLL_MS)
             }
             if (pendingSignatureMismatchPackage == targetPackage) {
-                stopUninstallProgressToasts()
                 val failureMessage = this@InstalledAppInfoViewModel.context.getString(
                     R.string.uninstall_app_fail,
                     this@InstalledAppInfoViewModel.context.getString(R.string.install_timeout_message)
@@ -329,44 +322,6 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    private fun startInstallProgressToasts() {
-        if (installProgressToastJob?.isActive == true) return
-        isInstalling = true
-        installProgressToastJob = viewModelScope.launch {
-            while (isActive) {
-                context.toast(context.getString(R.string.installing_ellipsis))
-                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
-            }
-        }
-    }
-
-    private fun stopInstallProgressToasts() {
-        installProgressToastJob?.cancel()
-        installProgressToastJob = null
-        internalInstallTimeoutJob?.cancel()
-        if (pendingExternalInstall == null && pendingInternalInstallPackage == null) {
-            isInstalling = false
-        }
-    }
-
-    private fun startUninstallProgressToasts() {
-        if (uninstallProgressToastJob?.isActive == true) return
-        uninstallProgressToastJob = viewModelScope.launch {
-            while (isActive) {
-                uninstallProgressToast?.cancel()
-                uninstallProgressToast = context.toastHandle(context.getString(R.string.uninstalling_ellipsis))
-                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
-            }
-        }
-    }
-
-    private fun stopUninstallProgressToasts() {
-        uninstallProgressToastJob?.cancel()
-        uninstallProgressToastJob = null
-        uninstallProgressToast?.cancel()
-        uninstallProgressToast = null
-    }
-
     fun handleActivityResult(result: ActivityResult) {
         launchedActivity?.complete(result)
     }
@@ -385,7 +340,6 @@ class InstalledAppInfoViewModel(
         externalInstallTimeoutJob?.cancel()
         externalInstallBaseline = null
         externalInstallStartTime = null
-        startInstallProgressToasts()
         isInstalling = true
         val plan = installerManager.resolvePlan(
             InstallerManager.InstallTarget.SAVED_APP,
@@ -400,7 +354,6 @@ class InstalledAppInfoViewModel(
             showSignatureMismatchPrompt(app.currentPackageName)
             return@launch
         }
-        startInstallProgressToasts()
         isInstalling = true
         if (plan is InstallerManager.InstallPlan.External) {
             runCatching { apk.copyTo(plan.sharedFile, overwrite = true) }
@@ -426,7 +379,6 @@ class InstalledAppInfoViewModel(
             is InstallerManager.InstallPlan.Mount -> {
                 try {
                     if (!isInstalledOnDevice) {
-                        stopInstallProgressToasts()
                         mountVersionMismatchMessage = context.getString(R.string.install_app_fail_missing_stock)
                         return@launch
                     }
@@ -521,7 +473,6 @@ class InstalledAppInfoViewModel(
             markInstallFailure(context.getString(R.string.install_app_fail, context.getString(R.string.saved_app_install_missing)))
             return
         }
-        startInstallProgressToasts()
         if (isInstallerX(plan) && launchedActivity == null) {
             val activityDeferred = CompletableDeferred<ActivityResult>()
             launchedActivity = activityDeferred
@@ -1242,7 +1193,6 @@ class InstalledAppInfoViewModel(
                     if (pendingSignature != null && pendingSignature == targetPackage) {
                         signatureMismatchUninstallJob?.cancel()
                         signatureMismatchUninstallJob = null
-                        stopUninstallProgressToasts()
                         if (extraStatus == PackageInstaller.STATUS_SUCCESS) {
                             pendingSignatureMismatchPackage = null
                             viewModelScope.launch {
@@ -1336,7 +1286,6 @@ class InstalledAppInfoViewModel(
         externalInstallStartTime = null
         expectedInstallSignature = null
         baselineInstallSignature = null
-        stopInstallProgressToasts()
     }
 
     fun clearInstallResult() {
@@ -1353,8 +1302,6 @@ class InstalledAppInfoViewModel(
     fun confirmSignatureMismatchInstall() {
         val targetPackage = pendingSignatureMismatchPackage ?: return
         signatureMismatchPackage = null
-        stopInstallProgressToasts()
-        startUninstallProgressToasts()
         startSignatureMismatchUninstallTimeout(targetPackage)
         pm.uninstallPackage(targetPackage)
     }
