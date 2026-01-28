@@ -62,14 +62,22 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
                     // Regenerate only when star is far behind camera
                     if (adjustedProgress > 0.98f || adjustedProgress < 0.01f) {
                         if (star.lastRegen != baseProgress.toInt()) {
-                            // Generate new random position
-                            val newAngle = Random.nextFloat() * 360f
-                            val newDistance = kotlin.math.sqrt(Random.nextFloat()) * 1.5f
-                            val newAngleRad = newAngle * (Math.PI / 180f).toFloat()
+                            // Generate new random position avoiding center
+                            var newX: Float
+                            var newY: Float
+                            var newDistance: Float
+
+                            do {
+                                val newAngle = Random.nextFloat() * 360f
+                                newDistance = kotlin.math.sqrt(Random.nextFloat()) * 1.5f
+                                val newAngleRad = newAngle * (Math.PI / 180f).toFloat()
+                                newX = cos(newAngleRad) * newDistance
+                                newY = sin(newAngleRad) * newDistance
+                            } while (newDistance < 0.15f) // Exclude center 10% area
 
                             stars[index] = star.copy(
-                                x = cos(newAngleRad) * newDistance,
-                                y = sin(newAngleRad) * newDistance,
+                                x = newX,
+                                y = newY,
                                 lastRegen = baseProgress.toInt()
                             )
                         }
@@ -139,12 +147,20 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
         while (true) {
             delay(Random.nextLong(40000, 60000)) // 40-60 seconds
 
+            val direction = Random.nextInt(2)
+
+            val angle = when (direction) {
+                0 -> 130f + Random.nextFloat() * 20f  // Right to left
+                else -> 30f + Random.nextFloat() * 20f  // Left to right
+            }
+
             val newMeteor = MeteorState(
                 startX = Random.nextFloat(),
                 startY = Random.nextFloat() * 0.3f,
-                angle = 130f + Random.nextFloat() * 20f,
+                angle = angle,
                 length = 200f + Random.nextFloat() * 150f,
-                depth = 0.4f + Random.nextFloat() * 0.6f
+                depth = 0.4f + Random.nextFloat() * 0.6f,
+                thickness = 4f
             )
 
             meteor = newMeteor
@@ -259,6 +275,22 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
             val tailX = curX - (m.length * cosAngle)
             val tailY = curY - (m.length * sinAngle)
 
+            // Outer glow
+            drawLine(
+                brush = Brush.linearGradient(
+                    0.0f to starColor.copy(alpha = 0.3f),
+                    0.6f to starColor.copy(alpha = 0.15f),
+                    1.0f to Color.Transparent,
+                    start = Offset(curX, curY),
+                    end = Offset(tailX, tailY)
+                ),
+                start = Offset(curX, curY),
+                end = Offset(tailX, tailY),
+                strokeWidth = m.thickness * 4f,
+                cap = StrokeCap.Round
+            )
+
+            // Core trail
             drawLine(
                 brush = Brush.linearGradient(
                     0.0f to starColor.copy(alpha = 0.95f),
@@ -269,7 +301,7 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
                 ),
                 start = Offset(curX, curY),
                 end = Offset(tailX, tailY),
-                strokeWidth = 4f,
+                strokeWidth = m.thickness,
                 cap = StrokeCap.Round
             )
         }
@@ -285,13 +317,22 @@ private fun generateStarPool(): List<StarData> {
         val depthLayer = index / 300f
 
         // Use golden angle for even circular distribution
-        val angle = (index * 137.5f) % 360f
-        val distance = kotlin.math.sqrt(Random.nextFloat()) * 1.5f
-        val angleRad = angle * (Math.PI / 180f).toFloat()
+        // Regenerate position until we get one outside the center exclusion zone
+        var x: Float
+        var y: Float
+        var distance: Float
+
+        do {
+            val angle = (index * 137.5f) % 360f
+            distance = kotlin.math.sqrt(Random.nextFloat()) * 1.5f
+            val angleRad = angle * (Math.PI / 180f).toFloat()
+            x = cos(angleRad) * distance
+            y = sin(angleRad) * distance
+        } while (distance < 0.15f) // Exclude center 10% area
 
         StarData(
-            x = cos(angleRad) * distance,
-            y = sin(angleRad) * distance,
+            x = x,
+            y = y,
             size = 2f + Random.nextFloat() * 3.5f,
             baseAlpha = 0.6f + Random.nextFloat() * 0.4f,
             depth = depthLayer,
@@ -318,5 +359,6 @@ private data class MeteorState(
     val startY: Float,
     val angle: Float,
     val length: Float,
-    val depth: Float
+    val depth: Float,
+    val thickness: Float
 )
