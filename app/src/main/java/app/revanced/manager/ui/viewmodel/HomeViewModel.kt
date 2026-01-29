@@ -121,7 +121,6 @@ class HomeViewModel(
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<String?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
-    var pendingIsMainApp by mutableStateOf(false)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
 
     // Bundle update snackbar state
@@ -141,6 +140,13 @@ class HomeViewModel(
 
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
+
+    // Main app packages that use default bundle only
+    private val mainAppPackages = setOf(
+        PACKAGE_YOUTUBE,
+        PACKAGE_YOUTUBE_MUSIC,
+        PACKAGE_REDDIT
+    )
 
     /**
      * Update bundle data when sources or bundle info changes
@@ -184,17 +190,16 @@ class HomeViewModel(
             return
         }
 
-        showPatchDialog(packageName, isMainApp = true)
+        showPatchDialog(packageName)
     }
 
     /**
      * Show patch dialog
      */
-    fun showPatchDialog(packageName: String, isMainApp: Boolean = false) {
+    fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
         pendingAppName = getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
-        pendingIsMainApp = isMainApp
         showApkAvailabilityDialog = true
     }
 
@@ -272,7 +277,7 @@ class HomeViewModel(
             }
         }
 
-        startPatchingWithApp(selectedApp, allowIncompatible, pendingIsMainApp)
+        startPatchingWithApp(selectedApp, allowIncompatible)
     }
 
     /**
@@ -280,8 +285,7 @@ class HomeViewModel(
      */
     suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
-        allowIncompatible: Boolean,
-        isMainApp: Boolean = false
+        allowIncompatible: Boolean
     ) {
         val expertModeEnabled = prefs.useExpertMode.getBlocking()
 
@@ -315,7 +319,9 @@ class HomeViewModel(
             expertModeOptions = savedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
-            // Simple Mode: behavior depends on app source
+            // Simple Mode: check if this is a main app or "other app"
+            val isMainApp = selectedApp.packageName in mainAppPackages
+
             if (isMainApp) {
                 // For main apps: use only default bundle
                 val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
@@ -385,7 +391,6 @@ class HomeViewModel(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
-        pendingIsMainApp = false
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
@@ -593,7 +598,6 @@ class HomeViewModel(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
-        pendingIsMainApp = false
         resolvedDownloadUrl = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
