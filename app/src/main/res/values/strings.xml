@@ -58,6 +58,7 @@
     <string name="morphe_add_patch_source_local_file_description">Select a .mpp patch source file from storage</string>
     <string name="morphe_add_patch_source_local_change_file">Change file</string>
     <string name="morphe_home_no_patches_available">No patches available</string>
+    <string name="morphe_home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched)</string>
