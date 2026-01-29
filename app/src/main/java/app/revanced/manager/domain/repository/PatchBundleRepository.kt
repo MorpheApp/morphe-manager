@@ -5,69 +5,48 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
 import app.morphe.library.mostCommonCompatibleVersions
-import app.morphe.patcher.patch.Patch
 import app.morphe.manager.R
+import app.morphe.patcher.patch.Patch
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.redux.Action
 import app.revanced.manager.data.redux.ActionContext
 import app.revanced.manager.data.redux.Store
 import app.revanced.manager.data.room.AppDatabase
 import app.revanced.manager.data.room.AppDatabase.Companion.generateUid
+import app.revanced.manager.data.room.apps.installed.SelectionPayload
 import app.revanced.manager.data.room.bundles.PatchBundleEntity
 import app.revanced.manager.data.room.bundles.PatchBundleProperties
 import app.revanced.manager.data.room.bundles.Source
-import app.revanced.manager.domain.bundles.APIPatchBundle
-import app.revanced.manager.domain.bundles.GitHubPullRequestBundle
-import app.revanced.manager.domain.bundles.JsonPatchBundle
-import app.revanced.manager.data.room.bundles.Source as SourceInfo
-import app.revanced.manager.domain.bundles.LocalPatchBundle
-import app.revanced.manager.domain.bundles.PatchBundleDownloadProgress
-import app.revanced.manager.domain.bundles.PatchBundleDownloadResult
-import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.*
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.patcher.patch.PatchBundle
 import app.revanced.manager.patcher.patch.PatchBundleInfo
+import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.tag
 import app.revanced.manager.util.toast
-import kotlinx.collections.immutable.*
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import io.ktor.http.Url
+import kotlinx.collections.immutable.PersistentMap
+import kotlinx.collections.immutable.mutate
+import kotlinx.collections.immutable.persistentMapOf
+import kotlinx.collections.immutable.toPersistentMap
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
-import io.ktor.http.Url
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
+import java.net.URI
+import java.net.URISyntaxException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
-import java.net.URI
-import java.net.URISyntaxException
 import java.util.Locale
-import kotlin.collections.LinkedHashSet
-import kotlin.collections.joinToString
-import kotlin.collections.map
-import kotlin.text.ifEmpty
+import app.revanced.manager.data.room.bundles.Source as SourceInfo
 
 class PatchBundleRepository(
     private val app: Application,
@@ -152,7 +131,7 @@ class PatchBundleRepository(
 
         val isDownloadComplete = progress.bytesTotal?.takeIf { it > 0L }?.let { total ->
             progress.bytesRead >= total
-        } ?: false
+        } == true
 
         val isDone = progress.processed >= progress.total &&
                 (progress.phase != BundleImportPhase.Downloading || isDownloadComplete)
@@ -164,7 +143,7 @@ class PatchBundleRepository(
             val current = bundleImportProgressFlow.value ?: return@launch
             val currentDownloadComplete = current.bytesTotal?.takeIf { it > 0L }?.let { total ->
                 current.bytesRead >= total
-            } ?: false
+            } == true
             val currentDone = current.processed >= current.total &&
                     (current.phase != BundleImportPhase.Downloading || currentDownloadComplete)
             if (currentDone) {
@@ -356,8 +335,17 @@ class PatchBundleRepository(
         prefs.officialBundleSortOrder.update(value)
     }
 
-    suspend fun snapshotSelection(selection: PatchSelection) =
-        selection.toPayload(sources.first(), bundleInfoFlow.first())
+    fun snapshotSelection(selection: PatchSelection): SelectionPayload {
+        return SelectionPayload(
+            bundles = selection.map { (bundleUid, patches) ->
+                SelectionPayload.BundleSelection(
+                    bundleUid = bundleUid,
+                    patches = patches.toList(),
+                    options = emptyMap()
+                )
+            }
+        )
+    }
 
     private suspend inline fun dispatchAction(
         name: String,
@@ -655,7 +643,7 @@ class PatchBundleRepository(
         val now = System.currentTimeMillis()
         val resolvedCreatedAt = createdAt ?: existingProps?.createdAt ?: now
         val resolvedUpdatedAt = updatedAt ?: now
-        val resolvedEnabled = existingProps?.enabled ?: true
+        val resolvedEnabled = existingProps?.enabled != false
         val entity = PatchBundleEntity(
             uid = resolvedUid,
             name = normalizedName,
@@ -902,7 +890,7 @@ class PatchBundleRepository(
                 setLocalImportProgress(
                     baseProcessed = baseProcessed,
                     offset = 0,
-                    displayName = displayName,
+                    displayName = null,
                     phase = BundleImportPhase.Downloading,
                     bytesRead = 0L,
                     bytesTotal = null,
@@ -957,7 +945,7 @@ class PatchBundleRepository(
 
                     val manifestName = runCatching {
                         PatchBundle(tempFile.absolutePath).manifestAttributes?.name
-                    }.getOrNull()?.takeUnless { it.isNullOrBlank() }
+                    }.getOrNull()?.takeUnless { it.isBlank() }
 
                     val uid = stableLocalUid(manifestName, tempFile, precomputedDigest)
                     val existingProps = dao.getProps(uid)
@@ -1202,8 +1190,7 @@ class PatchBundleRepository(
 
     suspend fun updateOnlyMorpheBundle(
         force: Boolean = false,
-        showToast: Boolean = false,
-        showProgress: Boolean = false
+        showToast: Boolean = false
     ) {
         store.dispatch(
             Update(
@@ -1400,7 +1387,7 @@ class PatchBundleRepository(
 
                     val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
                         if (isRemoteUpdateCancelled(bundle.uid)) {
-                            throw BundleUpdateCancelled(bundle.uid)
+                            throw BundleUpdateCancelled()
                         }
                         bundleUpdateProgressFlow.update { progress ->
                             progress?.copy(
@@ -1415,7 +1402,7 @@ class PatchBundleRepository(
 
                     val result = try {
                         if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
-                    } catch (e: BundleUpdateCancelled) {
+                    } catch (_: BundleUpdateCancelled) {
                         continue
                     }
 
@@ -1576,7 +1563,7 @@ class PatchBundleRepository(
 
                     val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
                         if (isRemoteUpdateCancelled(bundle.uid)) {
-                            throw BundleUpdateCancelled(bundle.uid)
+                            throw BundleUpdateCancelled()
                         }
                         bundleUpdateProgressFlow.update { progress ->
                             progress?.copy(
@@ -1591,7 +1578,7 @@ class PatchBundleRepository(
 
                     val result = try {
                         if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
-                    } catch (e: BundleUpdateCancelled) {
+                    } catch (_: BundleUpdateCancelled) {
                         continue
                     }
 
@@ -1712,7 +1699,7 @@ class PatchBundleRepository(
         }
     }
 
-    private class BundleUpdateCancelled(val uid: Int) : Exception()
+    private class BundleUpdateCancelled() : Exception()
 
     private inner class ManualUpdateCheck(
         private val targetUids: Set<Int>? = null

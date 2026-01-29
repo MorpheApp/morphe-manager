@@ -17,6 +17,9 @@ interface InstalledAppDao {
     @Query("SELECT * FROM installed_app WHERE current_package_name = :packageName")
     suspend fun get(packageName: String): InstalledApp?
 
+    @Query("SELECT * FROM installed_app WHERE current_package_name = :packageName")
+    fun getAsFlow(packageName: String): Flow<InstalledApp?>
+
     @Query(
         "SELECT bundle, patch_name FROM applied_patch" +
                 " WHERE package_name = :packageName"

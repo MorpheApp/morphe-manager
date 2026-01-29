@@ -1,7 +1,6 @@
 package app.revanced.manager.ui.model
 
 import android.os.Parcelable
-import app.revanced.manager.network.downloader.ParceledDownloaderData
 import kotlinx.parcelize.Parcelize
 import java.io.File
 
@@ -12,8 +11,7 @@ sealed interface SelectedApp : Parcelable {
     @Parcelize
     data class Download(
         override val packageName: String,
-        override val version: String?,
-        val data: ParceledDownloaderData
+        override val version: String?
     ) : SelectedApp
 
     @Parcelize
