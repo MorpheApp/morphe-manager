@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Pacote de patches</string>
+    <string name="morphe_home_other_apps">Outras aplicações</string>
+    <string name="morphe_home">Início</string>
+    <string name="morphe_home_not_patched_yet">Ainda não atualizado</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Atualização disponível</string>
+    <string name="morphe_home_update_available_subtitle">Nova versão disponível para instalação</string>
+    <string name="morphe_home_update_error">Atualização falhou</string>
+    <string name="morphe_home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
+    <string name="morphe_home_updating_sources">Atualizando fontes…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d fontes processadas</string>
+    <string name="morphe_home_update_success">Atualização das fontes concluída</string>
+    <string name="morphe_home_update_success_subtitle">Suas fontes estão atualizadas</string>
+    <string name="morphe_home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
+    <string name="morphe_home_please_wait">Por favor aguarde…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Que aplicativo você quer corrigir?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Pronto para tornar o YouTube lendário novamente?</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Salvando aplicativos de si mesmos desde hoje</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Alimentado por cafeína e bons patches</string>
-    <string name="morphe_home_bundle_type_api">Pacote de API</string>
-    <string name="morphe_home_update_error">Atualização falhou</string>
-    <string name="morphe_home_update_error_subtitle">Verifique sua conexão com a internet e tente novamente</string>
-    <string name="morphe_home_updating_patches">Atualizando patches…</string>
-    <string name="morphe_home_update_success">Atualização completa</string>
-    <string name="morphe_home_patches_updated">As suas correções estão atualizadas</string>
-    <string name="morphe_home_patches_are_loading">A carregar correções, por favor aguarde…</string>
-    <string name="morphe_home_please_wait">Por favor aguarde…</string>
-    <string name="morphe_home_open_in_browser">Abrir no navegador</string>
-    <string name="morphe_home_failed_to_open_url">Falha ao abrir URL</string>
-    <string name="morphe_home_date_added">Adicionado</string>
-    <string name="morphe_home_date_updated">Atualizado</string>
-    <string name="morphe_home_check_updates">Verificar atualizações</string>
-    <string name="morphe_home_unknown">Desconhecido</string>
-    <string name="morphe_home_timeline">Histórico de atualizações</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Gerenciar fontes</string>
+    <string name="morphe_sources_management_subtitle">%d fontes instaladas</string>
+    <string name="morphe_sources_delete_confirm_message">Excluir fonte \"%s\"? Isso não pode ser desfeito.</string>
+    <string name="morphe_sources_open_in_browser">Abrir no navegador</string>
+    <string name="morphe_sources_failed_to_open_url">Falha ao abrir URL</string>
+    <string name="morphe_sources_date_added">Adicionado</string>
+    <string name="morphe_sources_date_updated">Atualizado</string>
+    <string name="morphe_enabled">Habilitado</string>
+    <string name="morphe_disabled">Desativado</string>
+    <string name="morphe_rename">Renomear</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Adicionar fonte de patch</string>
+    <string name="morphe_add_patch_source_remote">Remoto</string>
+    <string name="morphe_add_patch_source_remote_url">URL da fonte</string>
+    <string name="morphe_add_patch_source_remote_description">Informe a URL do endpoint JSON para a fonte de patch remota</string>
+    <string name="morphe_add_patch_source_local">Local</string>
+    <string name="morphe_add_patch_source_local_file">Selecionar arquivo de fonte de patch</string>
+    <string name="morphe_add_patch_source_local_file_description">Selecionar um arquivo de fonte de patch .mpp a partir do armazenamento</string>
+    <string name="morphe_add_patch_source_local_change_file">Alterar arquivo</string>
+    <string name="morphe_home_no_patches_available">Não há patches disponíveis</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Tem o APK original sem patches?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Para corrigir %1$s, você precisa da versão %2$s (não corrigida)</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selecione o APK que você baixou</string>
     <string name="morphe_home_file_picker_prompt_description">Agora selecione o arquivo APK %1$s que você acabou de baixar.</string>
-    <string name="morphe_home_file_picker_prompt_open">Abrir arquivo APK que baixei</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Abrir arquivo APK baixado</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Abrir arquivo APK</string>
     <string name="morphe_home_recommended_version">Versão recomendada</string>
     <string name="morphe_patcher_selected_version">Versão selecionada</string>
+    <string name="morphe_home_select_apk_title">Selecionar APK</string>
+    <string name="morphe_home_select_any_apk_description">Toque no botão abaixo para selecionar um arquivo APK de qualquer aplicativo para patchar</string>
+    <string name="morphe_home_invalid_apk">Arquivo APK inválido</string>
+    <string name="morphe_home_no_patches_for_app">Não há patches disponíveis para este aplicativo</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Modo avançado</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d de %2$d patches selecionados</string>
+    <string name="morphe_expert_mode_search">Pesquisar patches</string>
+    <string name="morphe_expert_mode_proceed">Iniciar patch</string>
+    <string name="morphe_expert_mode_disable_all">Desativar todos</string>
+    <string name="morphe_expert_mode_enable_all">Ativar todos</string>
+    <string name="morphe_expert_mode_has_options">Configurável</string>
+    <string name="morphe_expert_mode_no_results">Nenhum patch encontrado</string>
+    <string name="morphe_expert_mode_no_patches">Não há patches disponíveis</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Cor personalizada</string>
+    <string name="morphe_hex_color">Cor hexadecimal</string>
+    <string name="morphe_patch_option_instructions">Instruções</string>
+    <string name="morphe_patch_option_enter_value">Inserir valor</string>
+    <string name="morphe_patch_option_enter_number">Inserir número</string>
+    <string name="morphe_patch_option_enter_decimal">Inserir decimal</string>
+    <string name="morphe_patch_option_pick_folder">Selecionar pasta</string>
+    <string name="expand">Expandir</string>
+    <string name="collapse">Recolher</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Tem certeza de que deseja desinstalar este aplicativo?</string>
+    <string name="saved_app_delete_confirmation">Tem certeza de que deseja excluir esta cópia salva?</string>
+    <string name="saved_copy_delete_confirmation">Tem certeza de que deseja excluir a cópia salva?</string>
+    <string name="view">Visualizar</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Arquivo APK original não encontrado. Não é possível repatchar este aplicativo.</string>
+    <string name="morphe_repatch_requires_original">O repatch requer o arquivo APK original</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Gerenciamento de armazenamento</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Tamanho total: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">APKs patchados</string>
+    <string name="morphe_patched_apks_title">APKs patchados</string>
+    <string name="morphe_patched_apks_description">Gerenciar arquivos de aplicativos patchados salvos</string>
+    <string name="morphe_patched_apks_empty">Nenhum APK patchado salvo ainda</string>
+    <string name="morphe_patched_apks_delete_title">Excluir APK patchado?</string>
+    <string name="morphe_patched_apks_delete_confirm">Tem certeza de que deseja excluir o APK patchado salvo para %s?</string>
+    <string name="morphe_patched_apks_deleted">APK patchado excluído com sucesso</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">APKs originais</string>
+    <string name="morphe_original_apks_title">APKs originais</string>
+    <string name="morphe_original_apks_description">Os arquivos APK originais são salvos para repatch. Somente a versão mais recente é mantida para cada aplicativo.</string>
+    <string name="morphe_original_apks_empty">Nenhum APK original armazenado</string>
+    <string name="morphe_original_apks_deleted">APK original excluído com sucesso</string>
+    <string name="morphe_original_apks_saved">APK original salvo</string>
+    <string name="morphe_original_apks_save_failed">Falha ao salvar APK original</string>
+    <string name="morphe_original_apks_delete_title">Excluir APK original?</string>
+    <string name="morphe_original_apks_delete_confirm">Excluir APK original para %s? Você não poderá repatchar sem fornecer um novo APK.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">O modo root exige que o APK original esteja instalado no seu dispositivo antes do patching.</string>
     <string name="morphe_root_gmscore_excluded">O patch de suporte GmsCore está excluído no modo root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Salvar APK</string>
-    <string name="morphe_patcher_copy_error">Erro de cópia</string>
-    <string name="morphe_patcher_show_error">Mostrar erro</string>
     <string name="morphe_patcher_error_copied">Erro copiado para a área de transferência</string>
+    <string name="morphe_patcher_error_log">Log de erros</string>
+    <string name="morphe_patcher_error_technical">Detalhes técnicos</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d remendos</string>
     <string name="morphe_patcher_long_step_warning">Esta etapa pode levar um tempo. Por favor, aguarde…</string>
     <string name="morphe_patcher_installing">Instalando…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">Ajustando 1s e 0s… 🤖</string>
     <string name="morphe_patcher_message_8">Desvendando espaguete digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Corrigindo bugs no aplicativo sem patches… 🐞</string>
+    <string name="morphe_patcher_message_9">Corrigindo bugs no aplicativo não patchado… 🪲</string>
     <string name="morphe_patcher_message_10">Grandes patches valem a pena esperar… ⏳</string>
     <string name="morphe_patcher_message_11">Polindo pixels até que brilhem… 💎</string>
     <string name="morphe_patcher_message_12">Por favor, permaneça sentado até o piloto desligar o sinal de \"Correção em progresso\"... 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Seu aplicativo está com febre e a única prescrição são mais patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Removendo besteiras. Por favor, aguarde… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Retornar à tela inicial do Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Retornar ao modo simplificado</string>
-    <string name="morphe_settings_return_to_expert">Alterar para modo Avançado</string>
-    <string name="morphe_settings_return_to_expert_description">Trocar para o modo completo de especialista</string>
-    <string name="morphe_share_website">Compartilhar site</string>
-    <string name="morphe_share_website_description">Compartilhe o site oficial do Morphe</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Ícone do aplicativo</string>
-    <string name="morphe_app_icon_selector_description">Alterar o ícone do lançador do aplicativo</string>
-    <string name="morphe_app_icon_default">Padrão</string>
-    <string name="morphe_app_icon_light_2">Céu</string>
-    <string name="morphe_app_icon_light_3">Pôr do Sol</string>
-    <string name="morphe_app_icon_dark_1">Oceano</string>
-    <string name="morphe_app_icon_dark_2">Vazio</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Alterar Ícone do Aplicativo?</string>
-    <string name="morphe_app_icon_change_dialog_message">Alterar para \'%1$s\' e reiniciar?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Alterar Ícone</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Opções de aparência</string>
     <string name="morphe_appearance_options_description">Personalize temas, cores e fundos</string>
     <string name="morphe_appearance_current_language">Idioma do Morphe</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Formas</string>
     <string name="morphe_background_type_snow">Neve</string>
     <string name="morphe_background_type_none">Nenhum</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Ícone da aplicação</string>
+    <string name="morphe_app_icon_selector_description">Alterar o ícone do lançador do aplicativo</string>
+    <string name="morphe_app_icon_default">Padrão</string>
+    <string name="morphe_app_icon_light_2">Céu</string>
+    <string name="morphe_app_icon_light_3">Pôr do Sol</string>
+    <string name="morphe_app_icon_dark_1">Oceano</string>
+    <string name="morphe_app_icon_dark_2">Vazio</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Alterar ícone do aplicativo?</string>
+    <string name="morphe_app_icon_change_dialog_message">Alterar para \'%1$s\' e reiniciar?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Alterar ícone</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Configurações avançadas</string>
+    <string name="morphe_settings_expert_mode">Modo avançado</string>
+    <string name="morphe_settings_expert_mode_description">Habilitar recursos avançados e opções de personalização</string>
     <string name="morphe_update_use_prereleases">Use versões de pré-lançamento</string>
     <string name="morphe_update_use_prereleases_description">Obtenha acesso antecipado a novos patches e recursos do gerenciador</string>
+    <string name="morphe_patch_options_expert_mode_notice">No modo avançado, as opções de patch estarão disponíveis durante o processo de patch</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Opções de patch</string>
     <string name="morphe_patch_options_youtube_description">Tema, marca, cabeçalho e opções de\nShorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opções de tema e branding</string>
     <string name="morphe_patch_options_restart_message">Alterar opções do patch requer a re-aplicaçäo do patch para que as mudanças tenham efeito</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Cores do tema da aplicação</string>
     <string name="morphe_patch_options_theme_colors_description">Alterar a cor de fundo</string>
     <string name="morphe_patch_options_dark_theme_color">Cor de fundo do tema escuro</string>
     <string name="morphe_patch_options_dark_theme_color_description">Pode ser uma cor hexadecimal (#RRGGBB) ou uma referência a um recurso de cor</string>
     <string name="morphe_patch_options_light_theme_color">Cor de fundo do tema claro</string>
     <string name="morphe_patch_options_light_theme_color_description">Pode ser uma cor hexadecimal (#RRGGBB) ou uma referência a um recurso de cor</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instruções de formato de ícone</string>
-    <string name="morphe_patch_options_header_instructions_title">Instruções de formato do cabeçalho</string>
     <string name="morphe_patch_options_loading">Carregando opções de patch…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Espere atè o bundle do patch ser atualizado</string>
+    <string name="morphe_patch_options_waiting_for_source">Aguardar até que a fonte de patch seja atualizada</string>
     <string name="morphe_patch_options_load_error">Falha ao carregar opções do patch</string>
     <string name="morphe_patch_options_no_available">Nenhuma opção disponível para este patch</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Cor personalizada</string>
-    <string name="morphe_hex_color">Cor hexadecimal</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Marca própria</string>
     <string name="morphe_patch_options_custom_branding_description">Alterar o nome de exibição da aplicação</string>
     <string name="morphe_patch_options_custom_branding_app_name">Nome da aplicação</string>
@@ -204,7 +270,7 @@ As dimensões das imagens devem ser as seguintes:
 Opcionalmente, o caminho contém uma pasta 'drawable' com qualquer arquivo de ícone monocromo:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Logo de cabeçalho personalizado</string>
     <string name="morphe_patch_options_custom_header_description">Alterar o logo do cabeçalho</string>
     <string name="morphe_patch_options_custom_header_instruction">"Pasta com imagens para usar como logo de cabeçalho personalizado.
@@ -224,12 +290,26 @@ As dimensões das imagens devem ser as seguintes:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Esconder características do Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Esconder atalho da aplicação Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Remover Shorts do menu de longo-pressão do launcher</string>
     <string name="morphe_patch_options_hide_shorts_widget">Esconder o widget do Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Remover botão de Shorts do widget do launcher</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Desempenho</string>
+    <string name="morphe_process_runtime">Tempo de execução do processo</string>
+    <string name="morphe_process_runtime_description">Executar patch em processo separado para maior estabilidade</string>
+    <string name="morphe_process_runtime_memory_limit">Limite de memória</string>
+    <string name="morphe_process_runtime_memory_limit_help">Limites de memória mais altos podem acelerar o patch, mas podem não funcionar com dispositivos mais antigos</string>
+    <string name="morphe_enable_process_runtime">Habilitar tempo de execução do processo</string>
+    <string name="morphe_memory_limit_subtitle">Memória disponível para patch</string>
+    <string name="morphe_memory_limit_warning">Um limite de memória baixo pode causar falhas ao patchar aplicativos maiores</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB limite</string>
+    <string name="morphe_process_runtime_disabled_description">Clique para configurar</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Compartilhar site</string>
+    <string name="morphe_share_website_description">Compartilhe o site oficial do Morphe</string>
     <!-- Other strings -->
     <string name="patcher">Remendador</string>
     <string name="patches">Remendos</string>
@@ -799,7 +879,7 @@ Ele é compatível apenas com a seguinte versão: %2$s."</string>
     <string name="path_selector_files">Arquivos</string>
     <string name="show_password_field">Mostrar senha</string>
     <string name="hide_password_field">Ocultar senha</string>
-    <string name="installer_primary_title">Instalador principal</string>
+    <string name="installer_primary_title">Instalador</string>
     <string name="installer_fallback_title">Instalador de fallback</string>
     <string name="installer_internal_name">Instalador do sistema</string>
     <string name="installer_internal_description">Use o instalador de pacotes do Android</string>
@@ -908,7 +988,7 @@ Detalhes: %2$s"</string>
     <string name="select_install_type">Selecionar tipo de instalação</string>
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Carregando patches</string>
-    <string name="patcher_step_prepare_split_apk">Mesclar APK dividido</string>
+    <string name="patcher_step_prepare_split_apk">Mesclando APKs divididos</string>
     <string name="patcher_step_unpack">Ler arquivo APK</string>
     <string name="patcher_step_group_patching">Aplicando patches</string>
     <string name="patcher_step_group_saving">Salvando</string>

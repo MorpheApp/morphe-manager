@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patchcsomag</string>
-    <string name="morphe_home_greeting_1">Melyik alkalmazást szeretné patchelni?</string>
+    <string name="morphe_home_other_apps">Egyéb alkalmazások</string>
+    <string name="morphe_home">Főoldal</string>
+    <string name="morphe_home_not_patched_yet">Még nem módosított</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Manager frissítés elérhető</string>
+    <string name="morphe_home_update_available_subtitle">Az új verzió telepítésre vár</string>
+    <string name="morphe_home_update_error">A frissítés sikertelen</string>
+    <string name="morphe_home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
+    <string name="morphe_home_updating_sources">Források frissítése…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d forrás feldolgozva</string>
+    <string name="morphe_home_update_success">A források frissítése befejeződött</string>
+    <string name="morphe_home_update_success_subtitle">A forrásai naprakészek</string>
+    <string name="morphe_home_sources_are_loading">Források betöltése, kérem várjon…</string>
+    <string name="morphe_home_please_wait">Kérem várjon…</string>
+    <!-- Home Screen - Home Greetings -->
+    <string name="morphe_home_greeting_1">Melyik alkalmazást szeretné módosítani?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Készen áll, hogy a YouTube újra legendássá váljon?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Öveket becsatolni, itt a patchelés ideje</string>
+    <string name="morphe_home_greeting_3">Öveket becsatolni, itt a módosítások ideje</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Egy újabb nap, egy újabb reklámmentes remekmű</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -14,31 +28,37 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">Szabályozzuk az alkalmazásai viselkedését</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Mai előrejelzés: 100% esély a patchelésre</string>
+    <string name="morphe_home_greeting_7">Mai előrejelzés: 100% esély a módosításra</string>
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">Készen áll a jelentéktelent fantasztikussá változtatni?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="morphe_home_greeting_9">A mai naptól megmentjük az alkalmazásokat önmaguktól</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Koffein és jó patchek által hajtva</string>
-    <string name="morphe_home_bundle_type_api">API csomag</string>
-    <string name="morphe_home_update_error">A frissítés sikertelen</string>
-    <string name="morphe_home_update_error_subtitle">Ellenőrizze az internetkapcsolatát, és próbálja újra</string>
-    <string name="morphe_home_updating_patches">Patchek frissítése…</string>
-    <string name="morphe_home_update_success">A frissítés befejeződött</string>
-    <string name="morphe_home_patches_updated">A patchek naprakészek</string>
-    <string name="morphe_home_patches_are_loading">A patchek betöltése folyamatban, kérem várjon…</string>
-    <string name="morphe_home_please_wait">Kérem várjon…</string>
-    <string name="morphe_home_open_in_browser">Megnyitás böngészőben</string>
-    <string name="morphe_home_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="morphe_home_date_added">Hozzáadva</string>
-    <string name="morphe_home_date_updated">Frissítve</string>
-    <string name="morphe_home_check_updates">Ellenőrzés</string>
-    <string name="morphe_home_unknown">Ismeretlen</string>
-    <string name="morphe_home_timeline">Frissítési napló</string>
+    <string name="morphe_home_greeting_10">Koffein és jó módosítások által hajtva</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Módosítások forrásai</string>
+    <string name="morphe_sources_management_subtitle">%d forrás telepítve</string>
+    <string name="morphe_sources_delete_confirm_message">Törli a(z) \"%s\" forrást? Ez nem visszavonható.</string>
+    <string name="morphe_sources_open_in_browser">Megnyitás böngészőben</string>
+    <string name="morphe_sources_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
+    <string name="morphe_sources_date_added">Hozzáadva</string>
+    <string name="morphe_sources_date_updated">Frissítve</string>
+    <string name="morphe_enabled">Engedélyezve</string>
+    <string name="morphe_disabled">Kikapcsolva</string>
+    <string name="morphe_rename">Átnevezés</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Patchforrás hozzáadása</string>
+    <string name="morphe_add_patch_source_remote">Távoli</string>
+    <string name="morphe_add_patch_source_remote_url">Forrás URL</string>
+    <string name="morphe_add_patch_source_remote_description">Adja meg a távoli forrás JSON végpont URL-jét</string>
+    <string name="morphe_add_patch_source_local">Helyi</string>
+    <string name="morphe_add_patch_source_local_file">Válassza ki a patch forrásfájlját</string>
+    <string name="morphe_add_patch_source_local_file_description">Válasszon ki egy .mpp patch forrásfájlt a tárhelyről</string>
+    <string name="morphe_add_patch_source_local_change_file">Fájl megváltoztatása</string>
+    <string name="morphe_home_no_patches_available">Nincsenek elérhető módosítások</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Rendelkezik az eredeti, nem patchelt APK-val?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s patcheléséhez a %2$s (nem patchelt) verzió szükséges</string>
+    <string name="morphe_home_apk_availability_dialog_title">Rendelkezik az eredeti, nem módosított APK-val?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s módosításához a %2$s (nem módosított) verzió szükséges</string>
     <string name="morphe_home_apk_availability_yes">Igen, megvan</string>
     <string name="morphe_home_apk_availability_no">Nem, segíts megtalálni</string>
     <!-- Dialog 2: Download Instructions -->
@@ -55,27 +75,81 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Válassza ki a letöltött APK-t</string>
     <string name="morphe_home_file_picker_prompt_description">Most válassza ki a letöltött %1$s APK fájlt.</string>
-    <string name="morphe_home_file_picker_prompt_open">Nyissa meg a letöltött APK fájlt</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Nyissa meg a letöltött APK fájlt</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">APK fájl megnyitása</string>
     <string name="morphe_home_recommended_version">Ajánlott verzió</string>
     <string name="morphe_patcher_selected_version">Kiválasztott verzió</string>
+    <string name="morphe_home_select_apk_title">APK kiválasztása</string>
+    <string name="morphe_home_select_any_apk_description">Koppintson az alábbi gombra, hogy kiválassza egy alkalmazás APK fájlját a módosításhoz.</string>
+    <string name="morphe_home_invalid_apk">Érvénytelen APK fájl</string>
+    <string name="morphe_home_no_patches_for_app">Nincsenek elérhető módosítások ehhez az alkalmazáshoz</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Szakértői mód</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d/%2$d módosítás kiválasztva</string>
+    <string name="morphe_expert_mode_search">Patchek keresése</string>
+    <string name="morphe_expert_mode_proceed">Folytatás a módosításhoz</string>
+    <string name="morphe_expert_mode_disable_all">Minden módosítás letiltása</string>
+    <string name="morphe_expert_mode_enable_all">Minden módosítás engedélyezése</string>
+    <string name="morphe_expert_mode_has_options">Konfigurálható</string>
+    <string name="morphe_expert_mode_no_results">Nem találhatók módosítások</string>
+    <string name="morphe_expert_mode_no_patches">Nincsenek elérhető módosítások</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Egyedi szín</string>
+    <string name="morphe_hex_color">Hex szín</string>
+    <string name="morphe_patch_option_instructions">Útmutató</string>
+    <string name="morphe_patch_option_enter_value">Érték megadása</string>
+    <string name="morphe_patch_option_enter_number">Szám megadása</string>
+    <string name="morphe_patch_option_enter_decimal">Tizedes megadása</string>
+    <string name="morphe_patch_option_pick_folder">Mappa kiválasztása</string>
+    <string name="expand">Kibontás</string>
+    <string name="collapse">Összecsukás</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Biztosan el akarja távolítani ezt az alkalmazást?</string>
+    <string name="saved_app_delete_confirmation">Biztosan törli ezt a mentett alkalmazást?</string>
+    <string name="saved_copy_delete_confirmation">Biztosan törli a mentett másolatot?</string>
+    <string name="view">Megtekintés</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Az eredeti APK nem található. Nem lehet ismét módosítani az alkalmazást.</string>
+    <string name="morphe_repatch_requires_original">Az újramódosításhoz az eredeti APK fájl szükséges</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Tárhelykezelés</string>
+    <string name="morphe_apks_count">%d APK</string>
+    <string name="morphe_apks_size">Teljes méret: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Módosított APK-k</string>
+    <string name="morphe_patched_apks_title">Módosított APK-k</string>
+    <string name="morphe_patched_apks_description">Mentett módosított alkalmazásfájlok kezelése</string>
+    <string name="morphe_patched_apks_empty">Még nincsenek mentett módosított APK-k</string>
+    <string name="morphe_patched_apks_delete_title">Törli a módosított APK-t?</string>
+    <string name="morphe_patched_apks_delete_confirm">Biztosan törölni szeretné a mentett, javított APK-t: %s?</string>
+    <string name="morphe_patched_apks_deleted">A módosított APK sikeresen törölve</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Eredeti APK-k</string>
+    <string name="morphe_original_apks_title">Eredeti APK-k</string>
+    <string name="morphe_original_apks_description">Az eredeti APK fájlok mentve vannak az újramódosításhoz. Csak az alkalmazás legújabb verzióját tartjuk meg.</string>
+    <string name="morphe_original_apks_empty">Nincsenek mentett eredeti APK-k</string>
+    <string name="morphe_original_apks_deleted">Az eredeti APK sikeresen törölve</string>
+    <string name="morphe_original_apks_saved">Az eredeti APK mentve</string>
+    <string name="morphe_original_apks_save_failed">Nem sikerült menteni az eredeti APK-t</string>
+    <string name="morphe_original_apks_delete_title">Törli az eredeti APK-t?</string>
+    <string name="morphe_original_apks_delete_confirm">Törli az eredeti %s APK-t? Nem fogja tudni újramódosítani az alkalmazást új APK megadása nélkül.</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a patchelés előtt.</string>
+    <string name="morphe_root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt.</string>
     <string name="morphe_root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK mentése</string>
-    <string name="morphe_patcher_copy_error">Hiba másolása</string>
-    <string name="morphe_patcher_show_error">Hiba megjelenítése</string>
     <string name="morphe_patcher_error_copied">A hiba másolva a vágólapra</string>
+    <string name="morphe_patcher_error_log">Hibanapló</string>
+    <string name="morphe_patcher_error_technical">Technikai részletek</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch</string>
     <string name="morphe_patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük, várjon…</string>
     <string name="morphe_patcher_installing">Telepítés…</string>
     <string name="morphe_patcher_installing_subtitle">Majdnem készen állunk! 🎸</string>
     <string name="morphe_patcher_success_title">Minden kész! 🎉</string>
-    <string name="morphe_patcher_success_subtitle">Az alkalmazás patchelve és telepítve!</string>
-    <string name="morphe_patcher_complete_title">A patchelés befejeződött! ✨</string>
+    <string name="morphe_patcher_success_subtitle">Az alkalmazás módosítva és telepítve!</string>
+    <string name="morphe_patcher_complete_title">A módosítás befejeződött! ✨</string>
     <string name="morphe_patcher_failed_title">Hoppá! Valami hiba történt</string>
     <string name="morphe_patcher_failed_subtitle">Ellenőrizze az alábbi hiba részleteit</string>
-    <string name="morphe_patcher_failed_dialog_title">A patchelés sikertelen</string>
+    <string name="morphe_patcher_failed_dialog_title">A módosítás sikertelen</string>
     <string name="morphe_patcher_unknown_error">Ismeretlen hiba történt</string>
     <string name="morphe_patcher_mounting">Csatlakoztatás…</string>
     <string name="morphe_patcher_conflict_title">Csomagütközés</string>
@@ -87,7 +161,7 @@
     <string name="morphe_patcher_unsupported_version_dialog_title">Nem támogatott verzió</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ez az APK nem egy ajánlott alkalmazásverzió. A folytatás az alkalmazás nem megfelelő működését eredményezheti.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Folytatás így is</string>
-    <string name="morphe_patcher_wrong_package_title">Hibás csomag kiválasztva</string>
+    <string name="morphe_patcher_wrong_package_title">Rossz csomagot választott ki</string>
     <string name="morphe_patcher_wrong_package_description">A kiválasztott APK nem ahhoz az alkalmazáshoz tartozik, amelyet módosítani szeretne.</string>
     <string name="morphe_patcher_expected_package">Várt csomag</string>
     <string name="morphe_patcher_selected_package">Kiválasztott csomag</string>
@@ -98,50 +172,31 @@
     <string name="morphe_patcher_message_5">Kávészünet ajánlott… ☕</string>
     <string name="morphe_patcher_message_6">Nézzen ki, szép idő van odakint… 🌤️</string>
     <string name="morphe_patcher_message_7">1-esek és 0-k beállítása… 🤖</string>
-    <string name="morphe_patcher_message_8">A digitális spagetti kibogozása… 🍝</string>
+    <string name="morphe_patcher_message_8">Digitális spagetti kibogozása… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Hibák javítása a nem patchelt alkalmazásban… 🐞</string>
-    <string name="morphe_patcher_message_10">A nagyszerű patchek megérik a várakozást… ⏳</string>
+    <string name="morphe_patcher_message_9">Hibák javítása a nem módosított alkalmazásban… 🪲</string>
+    <string name="morphe_patcher_message_10">A nagyszerű módosítások megérik a várakozást… ⏳</string>
     <string name="morphe_patcher_message_11">Képpontok polírozása, amíg nem ragyognak… 💎</string>
     <string name="morphe_patcher_message_12">Kérjük maradjon ülve, amíg a kapitány kikapcsolja a \"Patchelés folyamatban\" feliratot... 💺✈️</string>
-    <string name="morphe_patcher_message_13">A patchelt alkalmazás főzése, forró és friss… 🍳</string>
+    <string name="morphe_patcher_message_13">A módosított alkalmazás főzése, forró és friss… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Udvarias tárgyalás a bájtkóddal… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="morphe_patcher_message_15">Minden rendszer nominális… a módosítási pálya stabil… 🚀</string>
     <string name="morphe_patcher_message_16">Extra teljesítmény kipréselése, mint a digitális citromból a lé… 🍋</string>
-    <string name="morphe_patcher_message_17">Az alkalmazás bátorítása, hogy elfogadja az új, jobb énjét… 🌱</string>
+    <string name="morphe_patcher_message_17">Az alkalmazás ösztönzése, hogy elfogadja az új, jobb énjét… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="morphe_patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása nem patcheltről patcheltre… 📦⚛️</string>
+    <string name="morphe_patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása módosítás nélküliről módosítottra… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="morphe_patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb patch… 🩺🔔</string>
-    <string name="morphe_patcher_message_20">Badarság eltávolítása. Kérjük, maradj készen… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Vissza a Morphe főoldalra</string>
-    <string name="morphe_settings_return_to_morphe_description">Vissza az egyszerűsített módba</string>
-    <string name="morphe_settings_return_to_expert">Átváltás a szakértői módra</string>
-    <string name="morphe_settings_return_to_expert_description">Átváltás a teljes funkcionalitású szakértői módra</string>
-    <string name="morphe_share_website">Webhely megosztása</string>
-    <string name="morphe_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Alkalmazás ikonja</string>
-    <string name="morphe_app_icon_selector_description">Változtasd meg az alkalmazás indító ikonját</string>
-    <string name="morphe_app_icon_default">Alapértelmezett</string>
-    <string name="morphe_app_icon_light_2">Ég</string>
-    <string name="morphe_app_icon_light_3">Naplemente</string>
-    <string name="morphe_app_icon_dark_1">Tenger</string>
-    <string name="morphe_app_icon_dark_2">Üres</string>
-    <string name="morphe_app_icon_dark_3">Indigó</string>
-    <string name="morphe_app_icon_change_dialog_title">Alkalmazás ikonjának megváltoztatása?</string>
-    <string name="morphe_app_icon_change_dialog_message">Változtasd a \'%1$s\'-re és indítsd újra?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Ikon megváltoztatása</string>
-    <!-- Appearance Section -->
+    <string name="morphe_patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb módosítás… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Ostobaságok eltávolítása. Kérjük, maradjon készen… 🗑️</string>
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Megjelenési lehetőségek</string>
     <string name="morphe_appearance_options_description">Témák, színek, és hátterek személyreszabása</string>
     <string name="morphe_appearance_current_language">Jelenlegi nyelv</string>
     <string name="morphe_appearance_search">Keresés</string>
     <string name="morphe_appearance_no_results">Nincs találat</string>
-    <string name="morphe_appearance_translations_info_title">Néhány nyelv fordításai hiányosak vagy nem teljesek</string>
+    <string name="morphe_appearance_translations_info_title">Egyes nyelvek fordításai hiányozhatnak vagy hiányosak lehetnek.</string>
     <string name="morphe_appearance_translations_info_text">Új nyelvek fordításához vagy a meglévő fordítások javításához látogasson el a következő oldalra: %s</string>
     <string name="morphe_background_type">Háttér-animáció</string>
     <string name="morphe_background_type_circles">Körök</string>
@@ -151,35 +206,46 @@
     <string name="morphe_background_type_shapes">Alakzatok</string>
     <string name="morphe_background_type_snow">Hó</string>
     <string name="morphe_background_type_none">Egyik sem</string>
-    <!-- Advanced Section -->
-    <string name="morphe_update_use_prereleases">Előzetes kiadás használata</string>
-    <string name="morphe_update_use_prereleases_description">Előzetes hozzáférés az új patchekhez és menedzser funkciókhoz</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Alkalmazásikon</string>
+    <string name="morphe_app_icon_selector_description">Változtassa meg az alkalmazás indító ikonját</string>
+    <string name="morphe_app_icon_default">Alapértelmezett</string>
+    <string name="morphe_app_icon_light_2">Ég</string>
+    <string name="morphe_app_icon_light_3">Naplemente</string>
+    <string name="morphe_app_icon_dark_1">Oceán</string>
+    <string name="morphe_app_icon_dark_2">Void</string>
+    <string name="morphe_app_icon_dark_3">Indigó</string>
+    <string name="morphe_app_icon_change_dialog_title">Megváltoztatja az alkalmazás ikonját?</string>
+    <string name="morphe_app_icon_change_dialog_message">Változtatás erre: \'%1$s\' és újraindítás?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Ikon módosítása</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Szakértői beállítások</string>
+    <string name="morphe_settings_expert_mode">Szakértői mód</string>
+    <string name="morphe_settings_expert_mode_description">Engedélyezi a haladó funkciókat és a módosítási lehetőségeket</string>
+    <string name="morphe_update_use_prereleases">Előzetes kiadások használata</string>
+    <string name="morphe_update_use_prereleases_description">Előzetes hozzáférés az új módosításokhoz és manager funkciókhoz</string>
+    <string name="morphe_patch_options_expert_mode_notice">Szakértői módban a módosítás beállításai a módosítási folyamat során lesznek elérhetők.</string>
     <!-- Patch Options Section -->
-    <string name="morphe_patch_options">Patch beállítások</string>
+    <string name="morphe_patch_options">Módosítás beállításai</string>
     <string name="morphe_patch_options_youtube_description">Téma, márka, fejléc és Shorts lehetőségek</string>
     <string name="morphe_patch_options_youtube_music_description">Téma és márka lehetőségek</string>
-    <string name="morphe_patch_options_restart_message">A patch beállításainak megváltoztatása után szükség van az alkalmazás újbóli patchelésére, hogy működjön</string>
-    <!-- Theme Colors -->
+    <string name="morphe_patch_options_restart_message">A patch beállításainak megváltoztatása után szükség van az alkalmazás újbóli módosítására, hogy a változások érvénybe lépjenek.</string>
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Alkalmazástéma színek</string>
     <string name="morphe_patch_options_theme_colors_description">Háttérszín megváltoztatása</string>
     <string name="morphe_patch_options_dark_theme_color">Sötét téma háttérszíne</string>
     <string name="morphe_patch_options_dark_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
     <string name="morphe_patch_options_light_theme_color">Világos téma háttérszíne</string>
     <string name="morphe_patch_options_light_theme_color_description">Lehet egy hex szín (#RRGGBB) vagy egy színforrás-hivatkozás</string>
-    <string name="morphe_patch_options_icon_instructions_title">Ikonformátumra vonatkozó utasítások</string>
-    <string name="morphe_patch_options_header_instructions_title">Fejléc formátumra vonatkozó utasítások</string>
-    <string name="morphe_patch_options_loading">Patch beállítások betöltése…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Várjon, amíg a patchcsomag frissítésre kerül</string>
-    <string name="morphe_patch_options_load_error">Nem sikerült betölteni a patch beállításait</string>
-    <string name="morphe_patch_options_no_available">Ennek a patchnek nincsenek beállításai</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Egyedi szín</string>
-    <string name="morphe_hex_color">Hex szín</string>
-    <!-- Custom Branding -->
-    <string name="morphe_patch_options_custom_branding">Egyedi branding</string>
-    <string name="morphe_patch_options_custom_branding_description">Változtassa meg az alkalmazás megjelenített nevét</string>
+    <string name="morphe_patch_options_loading">Módosítások beállításainak betöltése…</string>
+    <string name="morphe_patch_options_waiting_for_source">Várjon, amíg a módosítások forrása frissül</string>
+    <string name="morphe_patch_options_load_error">A módosítási beállítások betöltése nem sikerült</string>
+    <string name="morphe_patch_options_no_available">Ennek a módosításnak nincsenek beállításai</string>
+    <!-- Patch Options Section: Custom Branding -->
+    <string name="morphe_patch_options_custom_branding">Egyedi márkajelzés</string>
+    <string name="morphe_patch_options_custom_branding_description">Az alkalmazás megjelenített nevének módosítása</string>
     <string name="morphe_patch_options_custom_branding_app_name">Alkalmazás neve</string>
-    <string name="morphe_patch_options_custom_branding_app_name_hint">Adja meg a egyedi nevet</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Egyéni név megadása</string>
     <string name="morphe_patch_options_custom_branding_custom_icon">Egyedi ikon</string>
     <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Mappa, mely tartalmazza a egyedi ikonok használata céljából szükséges képeket.
 
@@ -204,7 +270,7 @@ A képek méretei a következőknek kell legyenek:
 Az elérési út opcionálisan tartalmazhat egy \"drawable\" mappát monokróm ikonokkal:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Egyedi fejléc logó</string>
     <string name="morphe_patch_options_custom_header_description">Fejléc logó megváltoztatása</string>
     <string name="morphe_patch_options_custom_header_instruction">"Mappa, mely tartalmazza az egyedi fejléc logó használata céljából szükséges képeket.
@@ -224,39 +290,53 @@ A képek méreteinek a következőknek kell lennie:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
-    <string name="morphe_patch_options_hide_shorts_features">Shorts funkciók eltávolítása</string>
-    <string name="morphe_patch_options_hide_shorts_app_shortcut">Shorts gyorselérési menü eltávolítása</string>
+    <!-- Patch Options Section: Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_features">Shorts funkciók elrejtése</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Shorts gyorselérési menü elrejtése</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Shorts eltávolítása a kezdőképernyő hosszan nyomási menüjéből</string>
     <string name="morphe_patch_options_hide_shorts_widget">Shorts widget elrejtése</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Shorts gomb eltávolítása a kezdőképernyő widgetről</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Teljesítmény</string>
+    <string name="morphe_process_runtime">Folyamat futási ideje</string>
+    <string name="morphe_process_runtime_description">A jobb stabilitás érdekében futtassa a módosítást külön folyamatban.</string>
+    <string name="morphe_process_runtime_memory_limit">Memóriakorlát</string>
+    <string name="morphe_process_runtime_memory_limit_help">A magasabb memóriakorlát felgyorsíthatja a módosítást, de régebbi eszközökön nem biztos, hogy működnek.</string>
+    <string name="morphe_enable_process_runtime">Folyamatfutási környezet engedélyezése</string>
+    <string name="morphe_memory_limit_subtitle">A módosításhoz rendelkezésre álló memória</string>
+    <string name="morphe_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB korlát</string>
+    <string name="morphe_process_runtime_disabled_description">Kattintson a konfigurálásához</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Webhely megosztása</string>
+    <string name="morphe_share_website_description">Ossza meg a Morphe hivatalos weboldalát</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
-    <string name="patches">Patchek</string>
+    <string name="patches">Módosítások</string>
     <string name="patch_bundles">Patch csomagok</string>
     <string name="patch_bundle">Patchcsomag</string>
     <!-- Morphe -->
     <string name="installer">Telepítő</string>
-    <string name="plugin_host_permission_label">Morphe plugin gazda</string>
+    <string name="plugin_host_permission_label">Morphe plugin hoszt</string>
     <string name="plugin_host_permission_description">A Morphe beépülő moduljaihoz való hozzáférés szabályozására szolgál. Csak a Morphe rendelkezik ezzel.</string>
     <string name="toast_copied_to_clipboard">Másolva!</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
     <string name="settings">Beállítások</string>
-    <string name="select_app">Válasszon ki egy alkalmazást</string>
+    <string name="select_app">Válasszon egy alkalmazást</string>
     <string name="app_filter_title">Alkalmazások szűrése</string>
     <string name="app_filter_installed_only">Csak telepített</string>
-    <string name="app_filter_patches_available">Patchek elérhetőek</string>
+    <string name="app_filter_patches_available">Módosítások elérhetők</string>
     <string name="app_filter_no_results">Nincs a szűrőknek megfelelő alkalmazás.</string>
     <string name="new_downloader_plugins_notification">Új letöltő beépülő modulok érhetők el. Kattintson ide a konfigurálásukhoz.</string>
-    <string name="unsupported_architecture_warning">A patchelés ezen eszközarchitektúrán nem támogatott, és nagy valószínűséggel sikertelen lesz.</string>
+    <string name="unsupported_architecture_warning">A módosítások ezen az eszközarchitektúrán nem támogatottak, és valószínűleg sikertelenek lesznek.</string>
     <string name="import_">Importálás</string>
     <string name="file_field_not_set">Nincs kiválasztva</string>
     <string name="field_not_set">Nincs beállítva</string>
     <string name="patches_missing">Hiányzó</string>
     <string name="patches_error">Hiba</string>
-    <string name="patches_error_description">A patchek nem tölthetőek be. Érintse meg a hibaelhárításhoz</string>
-    <string name="patches_not_downloaded">A patchek nincsenek letöltve. Érintse meg a letöltéshez</string>
-    <string name="patches_name_default">Patchek</string>
+    <string name="patches_error_description">A módosítások nem tölthetők be. Kattintson a hiba megtekintéséhez</string>
+    <string name="patches_not_downloaded">A módosítások nincsenek letöltve. Érintse meg a letöltéshez</string>
+    <string name="patches_name_default">Módosítások</string>
     <string name="patches_name_fallback">Névtelen</string>
     <string name="bundle_uid">Csomag UID</string>
     <string name="patches_display_name">Megjelenítendő név</string>
@@ -270,12 +350,12 @@ A képek méreteinek a következőknek kell lennie:
     <string name="app_source_dialog_option_auto_unavailable">Nincsenek elérhető bővítmények</string>
     <string name="app_source_dialog_option_storage">Tárhely</string>
     <string name="app_source_dialog_option_storage_description">Válasszon ki egy APK-t a tárhelyről</string>
-    <string name="app_source_dialog_option_installed_no_root">A telepített alkalmazások root hozzáférés nélkül nem javíthatók újra</string>
+    <string name="app_source_dialog_option_installed_no_root">A telepített alkalmazások root hozzáférés nélkül nem módosíthatóak újra</string>
     <string name="app_source_dialog_option_installed_version_not_suggested">A(z) (%s) verzió nem egyezik a javasolt verzióval</string>
-    <string name="bundle_version_item">Csomagajánlás</string>
+    <string name="bundle_version_item">Csomagjavaslat</string>
     <string name="bundle_version_item_description_default">Alapértelmezett ajánlás használata</string>
     <string name="bundle_version_item_description_selected">Követés: %1$s (%2$s)</string>
-    <string name="bundle_version_dialog_title">Csomagajánlás kiválasztása</string>
+    <string name="bundle_version_dialog_title">Csomagjavaslat kiválasztása</string>
     <string name="bundle_version_dialog_description">Válassza ki, hogy melyik csomagjavaslat legyen használva, amikor egy APK letöltése történik.</string>
     <string name="bundle_version_dialog_default">Alapértelmezett ajánlás használata</string>
     <string name="bundle_version_dialog_default_subtitle">Automatikus kiválasztás a leggyakoribb kompatibilis verzió alapján.</string>
@@ -285,26 +365,26 @@ A képek méreteinek a következőknek kell lennie:
     <string name="bundle_update_manual_available">Frissítés elérhető</string>
     <string name="bundle_update_manual_available_with_version">Frissítés elérhető: %1$s</string>
     <string name="bundle_update_progress">%1$d/%2$d csomag feldolgozva</string>
-    <string name="bundle_update_banner_title">Patch csomagok frissítése</string>
+    <string name="bundle_update_banner_title">Módosító csomagok frissítése</string>
     <string name="bundle_reorder">Csomagok rendezése</string>
-    <string name="bundle_reorder_title">Patch csomagok rendezése</string>
-    <string name="bundle_reorder_description">Húzza a fogantyút a csomagok sorrendjének módosításához a listában és a patch kiválasztási menüben.</string>
+    <string name="bundle_reorder_title">Módosító csomagok rendezése</string>
+    <string name="bundle_reorder_description">A fogantyú húzásával rendezheti a csomagok sorrendjének megjelenését a listában és a patchkiválasztó menüben.</string>
     <string name="bundle_actions_expand">Csomagműveletek megjelenítése</string>
     <string name="bundle_actions_collapse">Csomagműveletek elrejtése</string>
-    <string name="patch_bundle_duplicate_name_error">Ezzel a névvel már létezik patch csomag</string>
-    <string name="patch_bundle_missing_error">Nem sikerült frissíteni ezt a patch csomagot.</string>
+    <string name="patch_bundle_duplicate_name_error">Ezzel a névvel már létezik módosítócsomag</string>
+    <string name="patch_bundle_missing_error">Nem sikerült frissíteni ezt a módosítócsomagot.</string>
     <string name="bundle_release_page">Kiadási oldal megnyitása</string>
     <string name="bundle_release_page_unavailable">A kiadási oldal nem érhető el ehhez a csomaghoz</string>
     <string name="bundle_release_page_error">Nem sikerült megnyitni a kiadási oldalt: %s</string>
     <string name="bundle_links_title">Hivatkozások ehhez: %1$s</string>
     <string name="bundle_link_release">GitHub kiadás</string>
-    <string name="bundle_link_catalog">Patch lista katalógus</string>
-    <string name="bundle_catalog_unavailable">A patch lista katalógus nem érhető el</string>
+    <string name="bundle_link_catalog">Patchlista katalógus</string>
+    <string name="bundle_catalog_unavailable">A patchlista-katalógus nem érhető el</string>
     <string name="show_suggested_versions">Javasolt verziók megjelenítése</string>
     <string name="hide_suggested_versions">Javasolt verziók elrejtése</string>
     <string name="show_other_versions">Egyéb verziók megjelenítése</string>
     <string name="other_supported_versions_title">Egyéb támogatott verziók (%1$s)</string>
-    <string name="other_supported_versions_empty">Nincsenek más elérhető támogatott verziók.</string>
+    <string name="other_supported_versions_empty">Nincs más elérhető támogatott verzió.</string>
     <string name="other_supported_versions_all">Minden verzió támogatott.</string>
     <string name="bundle_version_dialog_recommended">Javasolt verzió: %1$s</string>
     <string name="bundle_version_dialog_selected_override">Kiválasztott verzió: %1$s</string>
@@ -316,7 +396,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="patch_selector_item">Válassza ki a módosításokat</string>
     <string name="patch_selector_item_description">%d módosítás kiválasztva</string>
     <string name="no_patches_selected">Nincsenek kiválasztott módosítások</string>
-    <string name="network_unavailable_warning">Az eszköz nincs csatlakozva az internethez. A letöltés később sikertelen lesz.</string>
+    <string name="network_unavailable_warning">A készüléke nincs csatlakozva az internethez. A letöltés sikertelen lesz.</string>
     <string name="apk_source_selector_item">Válasszon APK forrást</string>
     <string name="apk_source_auto">Minden APK letöltő használata</string>
     <string name="apk_source_downloader">%s használata</string>
@@ -325,23 +405,23 @@ A képek méreteinek a következőknek kell lennie:
     <string name="apk_source_downloaded">Letöltött APK használata</string>
     <string name="auto_updates_dialog_title">Frissítések konfigurálása</string>
     <string name="auto_updates_dialog_description">Szeretné, hogy a Morphe rendszeresen ellenőrizze a következő összetevők frissítéseit?</string>
-    <string name="auto_updates_dialog_patches">Morphe patchek</string>
+    <string name="auto_updates_dialog_patches">Morphe módosítások</string>
     <string name="auto_updates_dialog_note">Ezek a beállítások később módosíthatók.</string>
     <string name="appearance">Megjelenés</string>
-    <string name="appearance_description">Téma, dinamikus színek</string>
+    <string name="appearance_description">Téma, dinamikus szín</string>
     <string name="updates">Frissítések</string>
     <string name="updates_description">Frissítések keresése és változásnapló megtekintése</string>
     <string name="downloads">Letöltések</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Importálás &amp; exportálás</string>
-    <string name="import_export_description">Kulcstároló, javítási opciók és kiválasztás</string>
+    <string name="import_export">Importálás és exportálás</string>
+    <string name="import_export_description">Kulcstároló, módosítási opciók és kiválasztás</string>
     <string name="changelog">Változásnaplók megtekintése</string>
     <string name="changelog_loading">Változásnapló betöltése</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>
     <string name="changelog_description">Tekintse meg a legújabb módosításokat ebben a frissítésben</string>
     <string name="advanced">Haladó</string>
     <string name="advanced_description">API URL, memórialimit, hibakeresés</string>
-    <string name="about">Rólunk</string>
+    <string name="about">Névjegy</string>
     <!-- Morphe -->
     <string name="accent_color_presets">Kiemelőszín</string>
     <!-- Morphe -->
@@ -362,10 +442,10 @@ A képek méreteinek a következőknek kell lennie:
     <string name="color_channel_green">Zöld</string>
     <string name="color_channel_blue">Kék</string>
     <string name="theme">Téma</string>
-    <string name="safeguards">Biztonsági intézkedések</string>
+    <string name="safeguards">Védelmek</string>
     <string name="patch_compat_check">Verziókompatibilitási ellenőrzés letiltása</string>
-    <string name="patch_compat_check_description">Ne korlátozza a patcheket a kompatibilis alkalmazás verziókra</string>
-    <string name="patch_compat_check_confirmation">"A nem kompatibilis patchek kiválasztása az alkalmazás meghibásodásához vezethet.
+    <string name="patch_compat_check_description">Ne korlátozza a módosításokat a kompatibilis alkalmazásverziókra</string>
+    <string name="patch_compat_check_confirmation">"A nem kompatibilis módosítások kiválasztása az alkalmazás meghibásodásához vezethet.
 
 Mindenképpen folytatni szeretné?"</string>
     <string name="suggested_version_safeguard">Ajánlott verzió megkövetelése</string>
@@ -378,19 +458,19 @@ Szeretné folytatni így is?"</string>
     <string name="patch_selection_safeguard_confirmation">"A patchek kiválasztásának módosítása váratlan problémákat okozhat.
 
 Engedélyezi így is?"</string>
-    <string name="universal_patches_safeguard">Univerzális patchek megjelenítése &amp; használatának engedélyezése</string>
-    <string name="universal_patches_safeguard_description">Ne rejtse el az univerzális patcheket, és ne akadályozza azok használatát</string>
-    <string name="universal_patches_profile_blocked_title">Univerzális patchek letiltva</string>
-    <string name="universal_patches_profile_blocked_description">Ez a patch profil univerzális javításokat tartalmaz. Engedélyezze a következőt a haladó beállításokban a használathoz: \"%1$s\"</string>
-    <string name="universal_patches_app_blocked_description">Ez az alkalmazás univerzális patcheket tartalmaz. A következő engedélyezésével a haladó beállításokban engedélyezheti: “%1$s”</string>
+    <string name="universal_patches_safeguard">Univerzális módosítások megjelenítése és használatának engedélyezése</string>
+    <string name="universal_patches_safeguard_description">Ne rejtse el az univerzális módosításokat, és ne akadályozza azok használatát</string>
+    <string name="universal_patches_profile_blocked_title">Univerzális módosítások letiltva</string>
+    <string name="universal_patches_profile_blocked_description">Ez a patch profil univerzális módosításokat tartalmaz. Engedélyezze a következőt a haladó beállításokban a használathoz: \"%1$s\"</string>
+    <string name="universal_patches_app_blocked_description">Ez az alkalmazás univerzális módosításokat tartalmaz. A következő engedélyezésével a haladó beállításokban engedélyezheti: “%1$s”</string>
     <string name="import_keystore">Kulcstároló importálása</string>
-    <string name="import_keystore_description">Egyéni kulcstároló importálása</string>
+    <string name="import_keystore_description">Egyedi kulcstároló importálása</string>
     <string name="import_keystore_dialog_title">Kulcstároló hitelesítő adatainak megadása</string>
     <string name="import_keystore_dialog_description">A kulcstároló importálásához meg kell adnia a hozzáférési adatokat.</string>
     <string name="import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="import_keystore_dialog_password_field">Jelszó</string>
     <string name="import_keystore_dialog_button">Importálás</string>
-    <string name="import_keystore_wrong_credentials">Hibás hitelesítő adatok a kulcstárolóhoz</string>
+    <string name="import_keystore_wrong_credentials">Hibás hitelesítőadatok a kulcstárolóhoz</string>
     <string name="import_keystore_success">Kulcstároló importálva</string>
     <string name="export_keystore">Kulcstároló exportálása</string>
     <string name="export_keystore_description">Az aktuális kulcstároló exportálása</string>
@@ -398,40 +478,40 @@ Engedélyezi így is?"</string>
     <string name="export_keystore_success">Kulcstároló exportálva</string>
     <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
     <string name="regenerate_keystore_success">A kulcstároló sikeresen le lett cserélve</string>
-    <string name="import_patch_selection">Patchkiválasztás importálása</string>
-    <string name="import_patch_selection_description">Patchkiválasztás importálása JSON fájlból</string>
-    <string name="import_patch_selection_fail">Nem sikerült importálni a patchkiválasztást: %s</string>
-    <string name="import_patch_selection_success">Patchkiválasztás importálva</string>
-    <string name="import_patch_bundles">Patchcsomagok importálása</string>
-    <string name="import_patch_bundles_description">Távoli patchcsomagok visszaállítása JSON fájlból</string>
-    <string name="import_patch_bundles_fail">Nem sikerült importálni a patchcsomagokat: %s</string>
+    <string name="import_patch_selection">Kiválasztott módosítások importálása</string>
+    <string name="import_patch_selection_description">Kiválasztott módosítások importálása JSON fájlból</string>
+    <string name="import_patch_selection_fail">Nem sikerült importálni a kiválasztott módosításokat: %s</string>
+    <string name="import_patch_selection_success">Kiválasztott módosítások importálva</string>
+    <string name="import_patch_bundles">Módosítócsomagok importálása</string>
+    <string name="import_patch_bundles_description">Távoli módosítócsomagok visszaállítása JSON fájlból</string>
+    <string name="import_patch_bundles_fail">Nem sikerült importálni a módosítócsomagokat: %s</string>
     <string name="import_patch_bundles_in_progress">Importálás…</string>
-    <string name="import_patch_bundles_success">%d patchcsomag importálva</string>
-    <string name="import_patch_bundles_updated">%d patchcsomag frissítve</string>
-    <string name="import_patch_bundles_none">Nem lettek új patchcsomagok importálva</string>
-    <string name="import_patch_bundles_banner_title">Patchcsomagok importálása</string>
+    <string name="import_patch_bundles_success">%d módosítócsomag importálva</string>
+    <string name="import_patch_bundles_updated">%d módosítócsomag frissítve</string>
+    <string name="import_patch_bundles_none">Nem lettek új módosítócsomagok importálva</string>
+    <string name="import_patch_bundles_banner_title">Módosítócsomagok importálása</string>
     <string name="import_patch_bundles_banner_subtitle">%1$d / %2$d feldolgozva</string>
     <string name="import_patch_bundles_banner_steps">%1$d/%2$d lépés</string>
-    <string name="import_patch_profiles">Patchprofilok importálása</string>
-    <string name="import_patch_profiles_description">Mentett patchprofilok importálása JSON fájlból</string>
-    <string name="import_patch_profiles_fail">Nem sikerült a patchprofilok importálása: %s</string>
-    <string name="import_patch_profiles_success">%d patchprofil importálva</string>
-    <string name="import_patch_profiles_partial">%1$d patchprofil importálva, %2$d kihagyva</string>
-    <string name="import_patch_profiles_skipped">%d duplikált patchprofil kihagyva</string>
-    <string name="import_patch_profiles_none">Nem lettek patchprofilok importálva</string>
-    <string name="import_manager_settings">Importálási beállítások</string>
+    <string name="import_patch_profiles">Módosítási profilok importálása</string>
+    <string name="import_patch_profiles_description">Mentett módosítási profilok importálása JSON fájlból</string>
+    <string name="import_patch_profiles_fail">Nem sikerült a módosítási profilok importálása: %s</string>
+    <string name="import_patch_profiles_success">%d módosítási profil importálva</string>
+    <string name="import_patch_profiles_partial">%1$d módosítási profil importálva, %2$d kihagyva</string>
+    <string name="import_patch_profiles_skipped">%d duplikált módosítási profil kihagyva</string>
+    <string name="import_patch_profiles_none">Nem lettek módosítási profilok importálva</string>
+    <string name="import_manager_settings">Manager beállításainak importálása</string>
     <string name="import_manager_settings_description">Mentett beállítások visszaállítása JSON fájlból</string>
     <string name="import_manager_settings_fail">A manager beállításai nem importálhatók: %s</string>
-    <string name="import_manager_settings_success">Manager beállítások importálva</string>
-    <string name="export_patch_selection">Patchkiválasztás exportálása</string>
-    <string name="export_patch_selection_description">Patchkiválasztás exportálása JSON fájlba</string>
-    <string name="export_patch_selection_fail">A patchkiválasztás nem exportálható: %s</string>
-    <string name="export_patch_selection_success">Patchkiválasztás exportálva</string>
-    <string name="export_patch_bundles">Patchcsomagok exportálása</string>
-    <string name="export_patch_bundles_description">Importált távoli patchcsomagok mentése JSON fájlba</string>
-    <string name="export_patch_bundles_fail">Nem sikerült exportálni a patchcsomagokat: %s</string>
-    <string name="export_patch_bundles_success">%d patchcsomag exportálva</string>
-    <string name="export_patch_bundles_partial">%1$d patchcsomag exportálva. Néhány csomag nem exportálható, mert helyileg lett hozzáadva.</string>
+    <string name="import_manager_settings_success">A manager beállításai importálva</string>
+    <string name="export_patch_selection">Kiválasztott módosítások exportálása</string>
+    <string name="export_patch_selection_description">Kiválasztott módosítások exportálása JSON fájlba</string>
+    <string name="export_patch_selection_fail">A kiválasztott módosítások nem exportálhatók: %s</string>
+    <string name="export_patch_selection_success">Kiválasztott módosítások exportálva</string>
+    <string name="export_patch_bundles">Módosítócsomagok exportálása</string>
+    <string name="export_patch_bundles_description">Importált távoli módosítócsomagok mentése JSON fájlba</string>
+    <string name="export_patch_bundles_fail">Nem sikerült exportálni a módosítócsomagokat: %s</string>
+    <string name="export_patch_bundles_success">%d módosítócsomagok exportálva</string>
+    <string name="export_patch_bundles_partial">%1$d módosítócsomagok exportálva. Néhány csomag nem exportálható, mert helyileg lett hozzáadva.</string>
     <string name="bundle_type_remote">Távoli</string>
     <string name="bundle_type_local">Helyi</string>
     <string name="bundle_type_preinstalled">Előre telepített</string>
@@ -440,29 +520,29 @@ Engedélyezi így is?"</string>
     <string name="bundle_changelog">Változásnapló</string>
     <string name="bundle_view_changelog">Tekintse meg a legújabb változásnaplót</string>
     <string name="bundle_changelog_error">Nem sikerült betölteni a változásnaplót: %s</string>
-    <string name="bundle_changelog_retry">Újrapróbálkozás</string>
+    <string name="bundle_changelog_retry">Újra</string>
     <string name="bundle_changelog_empty">A változásnapló nem elérhető</string>
-    <string name="export_patch_profiles">Patchprofilok exportálása</string>
-    <string name="export_patch_profiles_description">Az összes patchprofil exportálása JSON fájlba</string>
-    <string name="export_patch_profiles_fail">Nem sikerült exportálni a patchprofilokat: %s</string>
-    <string name="export_patch_profiles_success">%d patchprofil exportálva</string>
-    <string name="export_patch_profiles_empty">Nincsenek exportálható patchprofilok</string>
+    <string name="export_patch_profiles">Módosítási profilok exportálása</string>
+    <string name="export_patch_profiles_description">Az összes módosítási profil exportálása JSON fájlba</string>
+    <string name="export_patch_profiles_fail">Nem sikerült exportálni a módosítási profilokat: %s</string>
+    <string name="export_patch_profiles_success">%d módosítási profil exportálva</string>
+    <string name="export_patch_profiles_empty">Nincsenek exportálható módosítási profilok</string>
     <string name="export_manager_settings">A manager beállításainak exportálása</string>
     <string name="export_manager_settings_description">Az összes managerbeállítás mentése JSON fájlba</string>
     <string name="export_manager_settings_fail">Nem sikerült exportálni a manager beállításait: %s</string>
     <string name="export_manager_settings_success">A manager beállításai exportálva</string>
-    <string name="reset_patch_selection">Patchkiválasztás visszaállítása</string>
-    <string name="reset_patch_selection_description">Tárolt patchkiválasztás visszaállítása</string>
-    <string name="reset_patch_options">Patchbeállítások visszaállítása</string>
-    <string name="reset_patch_options_description">Tárolt patchbeállítások visszaállítása</string>
-    <string name="reset_patch_selection_success">A patchkiválasztás vissza lett állítva</string>
-    <string name="patch_selection_deselected_all_toast">Az összes patch kijelölésének törlése</string>
-    <string name="patch_selection_deselected_bundle_toast">A patchek kijelölésének visszavonása ebben: %s</string>
+    <string name="reset_patch_selection">Kiválasztott módosítások visszaállítása</string>
+    <string name="reset_patch_selection_description">Tárolt módosítás kiválasztás visszaállítása</string>
+    <string name="reset_patch_options">Módosítások beállításainak visszaállítása</string>
+    <string name="reset_patch_options_description">Tárolt módosításbeállítások visszaállítása</string>
+    <string name="reset_patch_selection_success">A kiválasztott módosítások vissza lettek állítva</string>
+    <string name="patch_selection_deselected_all_toast">Az összes módosítás kiválasztásának törlése</string>
+    <string name="patch_selection_deselected_bundle_toast">A módosítások kijelölésének visszavonása ebben: %s</string>
     <string name="patch_selection_no_selected_bundle_toast">Nincs visszavonható kijelölés ebben: %s</string>
-    <string name="patch_selection_selected_all_toast">Az összes patch kiválasztva</string>
-    <string name="patch_selection_select_all_empty_toast">Nincsenek kiválasztható patchek</string>
-    <string name="patch_selection_selected_bundle_toast">Az összes patch kiválasztva ebben: %s</string>
-    <string name="patch_selection_select_bundle_empty_toast">Nincsenek kiválasztható patchek ebben: %s</string>
+    <string name="patch_selection_selected_all_toast">Az összes módosítás kiválasztva</string>
+    <string name="patch_selection_select_all_empty_toast">Nincsenek kiválasztható módosítások</string>
+    <string name="patch_selection_selected_bundle_toast">Az összes módosítás kiválasztva ebben: %s</string>
+    <string name="patch_selection_select_bundle_empty_toast">Nincsenek kiválasztható módosítások ebben: %s</string>
     <string name="patch_selection_all_actions_hidden_toast">Minden műveletgomb elrejtve, kapcsoljon be legalább egyet a beállításokban</string>
     <string name="patch_selection_reset_bundle_toast">Alapértékek visszaállítása ehhez: %s</string>
     <string name="patch_selection_button_label_all">Összes kijelölés visszavonása</string>
@@ -479,54 +559,54 @@ Engedélyezi így is?"</string>
     <string name="patch_selection_action_select_all">összes kiválasztása</string>
     <string name="patch_selection_action_select_bundle">„%1$s” csomag kiválasztása</string>
     <string name="patch_selection_action_deselect_bundle">„%1$s” csomag kijelölésének visszavonása</string>
-    <string name="patch_selection_action_bundle_defaults">„%1$s” alapértelmezett csomagjai</string>
+    <string name="patch_selection_action_bundle_defaults">a csomag alapértelmezései ehhez: “%1$s”</string>
     <string name="disable_patch_selection_confirmations">Művelet-visszaigazolások letiltása</string>
-    <string name="disable_patch_selection_confirmations_description">Mellőzze a visszaigazolási párbeszédablakokat a patchkiválasztás műveleteihez</string>
+    <string name="disable_patch_selection_confirmations_description">Mellőzze a megerősítő párbeszédablakokat a kiválasztott módosítások műveleteihez</string>
     <string name="disable_patch_selection_confirmations_warning">A visszaigazolások letiltása nem kívánt, tömeges változásokat okozhat.</string>
     <string name="patch_selection_collapse_on_toggle">Műveletek összecsukása a patchek ki- vagy bekapcsolása után</string>
-    <string name="patch_selection_collapse_on_toggle_description">A patchkiválasztási műveletgombok automatikus elrejtése, amikor egy patchet kiválaszt vagy töröl</string>
-    <string name="patch_selection_action_order_title">A patchkiválasztás műveletgombjainak sorrendje</string>
-    <string name="patch_selection_action_order_description">Válassza ki a patchkiválasztási műveletgombjainak elrendezési sorrendjét</string>
-    <string name="patch_selection_action_visibility_title">Patchkiválasztás műveletgombjainak elrejtése</string>
-    <string name="patch_selection_action_visibility_description">Válassza ki, hogy mely műveletgombok jelenjenek meg a patchkiválasztásnál</string>
+    <string name="patch_selection_collapse_on_toggle_description">A módosításválasztás műveletgombjainak automatikus elrejtése, amikor egy módosítást kiválaszt vagy töröl</string>
+    <string name="patch_selection_action_order_title">A módosításválasztás műveletgombjainak sorrendje</string>
+    <string name="patch_selection_action_order_description">Válassza ki a módosításválasztás műveletgombjainak elrendezési sorrendjét</string>
+    <string name="patch_selection_action_visibility_title">Módosításválasztás műveletgombjainak elrejtése</string>
+    <string name="patch_selection_action_visibility_description">Válassza ki, hogy mely műveletgombok jelenjenek meg a módosítások kiválasztásakor</string>
     <string name="patch_selection_action_visibility_reset"> Minden műveletgomb megjelenítése</string>
     <string name="patch_selection_action_order_reset">Visszaállítás alapértelmezettre</string>
     <string name="patch_selection_confirm_deselect_bundle_title">Visszavonja a csomag kiválasztását?</string>
-    <string name="patch_selection_confirm_deselect_bundle_message">Minden kiválasztott patch visszavonása innen: %1$s?</string>
-    <string name="patch_selection_confirm_deselect_all_title">Minden kiválasztott patchet visszavon?</string>
-    <string name="patch_selection_confirm_deselect_all_message">Ez minden kiválasztott patchet töröl az összes csomagból.</string>
-    <string name="patch_selection_confirm_bundle_defaults_title">Visszaállítja a csomag alapértelmezettjeit?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">Minden kiválasztott módosítás visszavonása innen: %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Minden kiválasztott módosítást visszavon?</string>
+    <string name="patch_selection_confirm_deselect_all_message">Ez minden kiválasztott módosítást töröl az összes csomagból.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">Visszaállítja a csomag alapértelmezéseit?</string>
     <string name="patch_selection_confirm_bundle_defaults_message">Ez visszaállítja a(z) %1$s ajánlott alapértékeit.</string>
     <string name="patch_selection_confirm_select_bundle_title">Kiválasztja a csomagot?</string>
-    <string name="patch_selection_confirm_select_bundle_message">Kiválasztja az összes patchet ettől: %1$s?</string>
-    <string name="patch_selection_confirm_select_all_title">Az összes patchet kiválasztja?</string>
-    <string name="patch_selection_confirm_select_all_message">Ezzel minden csomag összes patchjét kiválasztja</string>
+    <string name="patch_selection_confirm_select_bundle_message">Kiválasztja az összes módosítást ettől: %1$s?</string>
+    <string name="patch_selection_confirm_select_all_title">Az összes módosítást kiválasztja?</string>
+    <string name="patch_selection_confirm_select_all_message">Ezzel minden csomag összes módosítását kiválasztja</string>
     <string name="patch_selection_button_label_reset_bundle">A csomag alapértékei</string>
     <string name="patch_profile_save_label">Profil mentése</string>
     <string name="patch_selection_toggle_expand">Műveletek megjelenítése</string>
     <string name="patch_selection_toggle_collapse">Műveletek elrejtése</string>
-    <string name="patch_selection_reset_all">Az összes patchkiválasztás visszaállítása</string>
-    <string name="patch_selection_reset_all_dialog_description">"Az összes patch kiválasztásának visszaállítását tervezi. Minden patchet manuálisan kell kiválasztania.
+    <string name="patch_selection_reset_all">Az összes kiválasztott módosítás visszaállítása</string>
+    <string name="patch_selection_reset_all_dialog_description">"Az összes módosítás kiválasztásának visszaállítását tervezi. Mindent manuálisan kell újra kiválasztania.
 
-A patch profilok nem érintettek."</string>
-    <string name="patch_selection_reset_all_description">Az összes patchkiválasztás visszaállítása</string>
-    <string name="patch_selection_reset_dialog_title">Patch alapértékeinek visszaállítása?</string>
-    <string name="patch_selection_reset_dialog_message">Ez visszaállítja a patch kiválasztását és opcióit az ajánlott alapértékekre.</string>
-    <string name="patch_selection_reset_package">Patchkiválasztás visszaállítása az alkalmazáshoz</string>
-    <string name="patch_selection_reset_package_dialog_description">"Megpróbálja visszaállítani az alkalmazás \"%s\" patchkiválasztását. Minden egyes patchet manuálisan kell kiválasztania újra.
+A módosítási profilok nem érintettek."</string>
+    <string name="patch_selection_reset_all_description">Az összes kiválasztott módosítá visszaállítása</string>
+    <string name="patch_selection_reset_dialog_title">Visszaállítja a módosítások alapértékeit?</string>
+    <string name="patch_selection_reset_dialog_message">Visszaállítja a a kiválasztott módosításokat és beállításaikat az ajánlott alapértékekre.</string>
+    <string name="patch_selection_reset_package">Kiválasztott módosítások visszaállítása az alkalmazáshoz</string>
+    <string name="patch_selection_reset_package_dialog_description">"A következő alkalmazás kiválasztott módosításait próbálja visszaállítani: \"%s\". Minden egyes módosítást manuálisan kell újra kiválasztania.
 
-Ez nem érinti a patchprofilokat."</string>
-    <string name="patch_selection_reset_package_description">Egyetlen alkalmazás patchkiválasztásának alaphelyzetbe állítása</string>
-    <string name="patch_selection_reset_patches">Patchkiválasztás alaphelyzetbe állítása (egy app)</string>
-    <string name="patch_selection_reset_patches_dialog_description">"Megpróbálja visszaállítani a(z) \"%s\" patchkiválasztását. Minden egyes patchet manuálisan kell kiválasztania újra.
+Ez nem érinti a módosítási profilokat."</string>
+    <string name="patch_selection_reset_package_description">Egyetlen alkalmazás kiválasztott módosításainak alaphelyzetbe állítása</string>
+    <string name="patch_selection_reset_patches">Kiválasztott módosítások alaphelyzetbe állítása (egy app)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"A következő alkalmazás kiválasztott módosításait próbálja visszaállítani: \"%s\". Minden egyes módosítást manuálisan kell újra kiválasztania.
 
-A patchprofilokat ez nem érinti."</string>
+A módosítási profilokat ez nem érinti."</string>
     <string name="patch_selection_reset_patches_description">Egy adott patchgyűjtemény kiválasztásainak alaphelyzetbe állítása</string>
-    <string name="patch_options_reset_package">Alaphelyzetbe állítja a patch beállításait az alkalmazáshoz</string>
-    <string name="patch_options_reset_package_dialog_description">"Úgy döntött, hogy visszaállítja a(z) \"%s\" alkalmazás patchbeállításait. Minden egyes beállítást újra alkalmaznia kell.
+    <string name="patch_options_reset_package">Alaphelyzetbe állítja a módosítás beállításait az alkalmazáshoz</string>
+    <string name="patch_options_reset_package_dialog_description">"A következő alkalmazás módosításainak beállítását tervezi visszaállítani: \"%s\". Minden egyes beállítást újra alkalmaznia kell.
 
-A patchprofilokat ez nem érinti."</string>
-    <string name="patch_options_reset_package_description">A patch beállításainak alaphelyzetbe állítása egyetlen alkalmazáshoz</string>
+A módosítási profilokat ez nem érinti."</string>
+    <string name="patch_options_reset_package_description">A módosítás beállításainak alaphelyzetbe állítása egyetlen alkalmazáshoz</string>
     <string name="patch_options_reset_patches">Patchbeállítások alaphelyzetbe állítása (egy app)</string>
     <string name="patch_options_reset_patches_dialog_description">"Úgy döntött, hogy visszaállítja a(z) \"%s\" patchbeállításait. Minden egyes beállítást újra alkalmaznia kell.
 
@@ -614,83 +694,83 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="export_name_variable_patches_version_description">Az alkalmazott patchcsomag(ok) verziójára lesz cserélve.</string>
     <string name="export_name_variable_bundle_names">Patchcsomagok neve</string>
     <string name="export_name_variable_bundle_names_description">Az alkalmazott patchcsomag(ok) nevére lesz cserélve.</string>
-    <string name="export_name_variable_manager_version">Kezelő verziója</string>
-    <string name="export_name_variable_manager_version_description">\"%s\" helyére lesz a rendered műveletkezelő verziója.</string>
+    <string name="export_name_variable_manager_version">Manager verziója</string>
+    <string name="export_name_variable_manager_version_description">A manager verziójára lesz cserélve</string>
     <string name="export_name_variable_timestamp">Időbélyeg</string>
-    <string name="export_name_variable_timestamp_description">\"%s\" helyére lesz az aktuális idő (yyyyMMdd-HHmmss) (1. alkalommal).</string>
+    <string name="export_name_variable_timestamp_description">Az aktuális idővel lesz helyettesítve (ééééHHnn-ÓÓppmm).</string>
     <string name="export_name_variable_date">Dátum</string>
-    <string name="export_name_variable_date_description">\"%s\" helyére lesz az aktuális dátum (yyyyMMdd) (1. alkalommal).</string>
+    <string name="export_name_variable_date_description">Az aktuális dátummal lesz helyettesítve (ééééHHnn).</string>
     <string name="debug_logs_export">Hibakeresési naplók exportálása</string>
     <string name="debug_logs_export_read_failed">Nem sikerült a naplók olvasása (kilépési kód: %d)</string>
     <string name="debug_logs_export_failed">Nem sikerült exportálni a naplókat</string>
     <string name="debug_logs_export_success">Exportált naplók</string>
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="api_url_dialog_description">Módosítsa a Morphe API URL-jét. A Morphe az API-t használja a javítások és frissítések letöltéséhez.</string>
-    <string name="api_url_dialog_warning">A Morphe az API-hoz csatlakozik a javítások és frissítések letöltéséhez. Győződjön meg róla, hogy megbízik benne.</string>
+    <string name="api_url_dialog_description">Módosítsa a Morphe API URL-jét. A Morphe API-t használ a patchek és a frissítések letöltéséhez.</string>
+    <string name="api_url_dialog_warning">A Morphe az API-hoz csatlakozik a patchek és frissítések letöltéséhez. Győződjön meg róla, hogy megbízható.</string>
     <string name="api_url_dialog_save">Beállítás</string>
     <string name="api_url_dialog_reset">API URL visszaállítása</string>
     <!-- Morphe -->
     <string name="github_pat_description">GitHub Personal Access Token a GitHub integrációhoz</string>
     <string name="set_github_pat_dialog_title">GitHub PAT beállítása</string>
-    <string name="set_github_pat_dialog_description">Állítson be egy GitHub Personal Access Tökent a Lekéréses kérések külső forrásként való hozzáadásához. Hozzon létre egy PAT-ot a public_repo hatókörrel.</string>
-    <string name="include_github_pat_in_exports_label">Beállítások exportálásába belefoglalás</string>
-    <string name="include_github_pat_in_exports_supporting">Hozzáadja ezt a PAT-ot az exportált kezelői beállításokhoz</string>
-    <string name="include_github_pat_in_exports_warning">Ne ossza meg a PAT-ot. Ha belefoglalja egy beállítások exportálásába, tartsa privátnak a fájlt, mert tartalmazza a tokent.</string>
+    <string name="set_github_pat_dialog_description">GitHub Personal Access Token beállítása a Pull Requestek külső forrásként történő hozzáadásához. PAT létrehozása public_repo hatókörrel.</string>
+    <string name="include_github_pat_in_exports_label">Felvétel az exportált beállítások közé</string>
+    <string name="include_github_pat_in_exports_supporting">Hozzáadja ezt a PAT-ot a manager exportált beállításaihoz</string>
+    <string name="include_github_pat_in_exports_warning">Ne ossza meg a PAT-ot. Ha felveszi az exportált beállításokba, kezelje privátként a fájlt, mert tartalmazza a tokent.</string>
     <string name="app_language">Alkalmazás nyelve</string>
     <string name="language_dialog_title">Válassza ki az alkalmazás nyelvét</string>
     <string name="language_option_system">A készülék nyelvének használata</string>
-    <string name="device_memory_limit_format">%1$d MB (Normál) - %2$d MB (Nagy)</string>
-    <string name="patches_force_download">Az összes javítási köteg letöltésének kényszerítése</string>
-    <string name="patches_reset">Patch kötegek visszaállítása</string>
-    <string name="storage">Tárolás</string>
-    <string name="no_patch_found">Nem található pótlás. Ellenőrizze a pótlásokat</string>
+    <string name="device_memory_limit_format">%1$dMB (Normál) - %2$dMB (Nagy)</string>
+    <string name="patches_force_download">Az összes patchköteg kényszerített letöltése</string>
+    <string name="patches_reset">Patchkötegek visszaállítása</string>
+    <string name="storage">Tárhely</string>
+    <string name="no_patch_found">Nem találhatók patchek. Ellenőrizze a patcheket</string>
     <string name="tab_apps">Alkalmazások</string>
-    <string name="tab_patches">Patch kötegek</string>
-    <string name="tab_profiles">Patch profilok</string>
+    <string name="tab_patches">Patchkötegek</string>
+    <string name="tab_profiles">Patchprofilok</string>
     <string name="delete">Törlés</string>
     <string name="disable">Letiltás</string>
-    <string name="enable">Kikapcsolás engedélyezése</string>
-    <string name="patch_bundle_disabled_toast">Letiltva %d csomag(ok)</string>
-    <string name="patch_bundle_enabled_toast">Engedélyezett %d csomag(ok)</string>
-    <string name="patches_disable_single_dialog_description">\"%s\" deaktivieren?</string>
-    <string name="patches_enable_single_dialog_description">\"%s\" aktivieren?</string>
+    <string name="enable">Engedélyezés</string>
+    <string name="patch_bundle_disabled_toast">%d csomag letiltva</string>
+    <string name="patch_bundle_enabled_toast">%d csomag engedélyezve</string>
+    <string name="patches_disable_single_dialog_description">Letiltja a következőt: \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">Engedélyezi a következőt: \"%s\"?</string>
     <string name="refresh">Frissítés</string>
     <string name="download_apk">APK fájl letöltése</string>
-    <string name="patches_download_fail">Nem sikerült a pótlások letöltése: %s</string>
-    <string name="patches_replace_fail">Nem sikerült a pótlások importálása: %s</string>
-    <string name="no_patched_apps_found">Nincs pótlásként kezelt alkalmazás</string>
-    <string name="patches_selected">%s \'patcher\' kiválasztva</string>
-    <string name="patch_profiles_selected">%1$d javítóprofil kiválasztva</string>
+    <string name="patches_download_fail">Nem sikerült a patchek letöltése: %s</string>
+    <string name="patches_replace_fail">Nem sikerült a patchek importálása: %s</string>
+    <string name="no_patched_apps_found">Nem található patchelt alkalmazás</string>
+    <string name="patches_selected">%s patchcsomag kiválasztva</string>
+    <string name="patch_profiles_selected">%1$d patchprofil kiválasztva</string>
     <string name="selected_apps_count">%1$d alkalmazás kiválasztva</string>
-    <string name="selected_apps_delete_dialog_description">Eltávolítja a kiválasztott alkalmazásokat a kezelőből? A készüléken telepített alkalmazások érintetlenek maradnak.</string>
-    <string name="incompatible_patches">Össze nem férő patch-ek</string>
-    <string name="universal_patches">Univerzális patch-ek</string>
-    <string name="patch_selection_reset_toast">A patch kiválasztása és az opciók visszaállítva a javasolt alapértékekre</string>
-    <string name="patch_options_reset_toast">A patch opciók visszaállítva</string>
+    <string name="selected_apps_delete_dialog_description">Eltávolítja a kiválasztott alkalmazásokat a managerből? A készüléken telepített alkalmazások érintetlenek maradnak.</string>
+    <string name="incompatible_patches">Nem kompatibilis patchek</string>
+    <string name="universal_patches">Univerzális patchek</string>
+    <string name="patch_selection_reset_toast">A kiválasztott patchek és beállítások visszaállítva a javasolt alapértékekre</string>
+    <string name="patch_options_reset_toast">A patch beállításai visszaállítva</string>
     <string name="non_suggested_version_warning_title">Nem javasolt verzió</string>
     <string name="non_suggested_version_warning_description">"A kiválasztott alkalmazás verziója nem egyezik a javasolt verzióval.
 Kérjük, használja a javasolt verziót: %s
 
-Ha folytatni szeretné, kapcsolja ki a „Kötelező a javasolt alkalmazás verzió” opciót a speciális beállításokban."</string>
-    <string name="selection_warning_description">"Javasolt a patch kiválasztásának és az opcióknak az alapértékek használata. Ezek megváltoztatása váratlan problémákat okozhat.
+Ha folytatni szeretné, kapcsolja ki a „Javasolt alkalmazásverzió megkövetelése” opciót a haladó beállításokban."</string>
+    <string name="selection_warning_description">"Javasoljuk az alapértelmezett patchkiválasztás és beállítások használatát. Ezek megváltoztatása váratlan problémákat okozhat.
 
-A patch-ek kapcsolgatása előtt engedélyeznie kell a „Patch kiválasztás és opciók módosításának engedélyezése” opciót a speciális beállításokban."</string>
-    <string name="patch_profile_save_action">Patch profil mentése</string>
-    <string name="patch_profile_select_bundles_title">Patch csomagok kiválasztása</string>
-    <string name="patch_profile_select_bundles_description">Válassza ki a profilhoz tartozó patch csomagokat.</string>
-    <string name="patch_profile_select_bundles_empty">Nincsenek elérhető patch csomagok mentéshez.</string>
-    <string name="patch_profile_name_title">Patch profil elnevezése</string>
-    <string name="patch_profile_name_description">Adjon meg egy nevet ehhez a patch profilhoz, vagy válasszon ki egyet az alábbiak közül az átnevezéshez</string>
+A patchek módosítása előtt engedélyeznie kell a „Patchkiválasztás és beállítások módosításának engedélyezése” opciót a haladó beállításokban."</string>
+    <string name="patch_profile_save_action">Patchprofil mentése</string>
+    <string name="patch_profile_select_bundles_title">Patchcsomagok kiválasztása</string>
+    <string name="patch_profile_select_bundles_description">Válassza ki a profilhoz tartozó patchcsomagokat.</string>
+    <string name="patch_profile_select_bundles_empty">Nincsenek elérhető patchcsomagok a mentéshez.</string>
+    <string name="patch_profile_name_title">Patchprofil elnevezése</string>
+    <string name="patch_profile_name_description">Adjon meg egy nevet ehhez a patchprofilhoz, vagy válasszon ki egyet az alábbiak közül az átnevezéshez</string>
     <string name="patch_profile_update_existing_title">Meglévő profil frissítése</string>
     <string name="patch_profile_update_existing_description">Érintse meg a mentett profilt a felülíráshoz, vagy hagyjon mindent kiválasztatlanul az új profil létrehozásához.</string>
     <string name="patch_profile_name_hint">Profil neve</string>
-    <string name="patch_profile_saved_toast">A \"%1$s\" profil javítása mentve</string>
-    <string name="patch_profile_duplicate_toast">A \"%1$s\" profil már létezik ehhez az alkalmazáshoz</string>
-    <string name="patch_profile_updated_toast">A \"%1$s\" profil frissítve lett</string>
-    <string name="patch_profile_save_failed_toast">A patch profil mentése sikertelen volt</string>
+    <string name="patch_profile_saved_toast">Patchprofil mentve: \"%1$s\"</string>
+    <string name="patch_profile_duplicate_toast">A patchprofil már létezik ehhez az alkalmazáshoz: \"%1$s\"</string>
+    <string name="patch_profile_updated_toast">A patchprofil frissítve lett: \"%1$s\"</string>
+    <string name="patch_profile_save_failed_toast">A patchprofil mentése sikertelen</string>
     <string name="patch_profile_rename">Átnevezés</string>
-    <string name="patch_profile_rename_title">Patch profil átnevezése</string>
+    <string name="patch_profile_rename_title">Patchprofil átnevezése</string>
     <string name="patch_profile_version_override_action">Frissítse a profil verzióbeállításait</string>
     <string name="patch_profile_version_override_title">Verzióbeállítások ehhez: \"%1$s\"</string>
     <string name="patch_profile_version_override_message">Adjon meg egy adott alkalmazásverziót, amelyet a profillal szeretne tárolni, vagy célozzon meg minden verziót.</string>
@@ -699,82 +779,82 @@ A patch-ek kapcsolgatása előtt engedélyeznie kell a „Patch kiválasztás é
     <string name="patch_profile_version_override_all_versions">Minden verzió használata</string>
     <string name="patch_profile_version_override_saved_toast">Profil verziója frissítve</string>
     <string name="patch_profile_version_override_failed_toast">Nem sikerült frissíteni a profil verzióját</string>
-    <string name="patch_profile_version_override_set_to_all">Nem lett megadva verzió, mentve mint \"%1$s\"</string>
-    <string name="patch_profile_version_conflict_title">Verzió felülírását szeretné megtartani?</string>
+    <string name="patch_profile_version_override_set_to_all">Nem lett verzió megadva, mentve mint \"%1$s\"</string>
+    <string name="patch_profile_version_conflict_title">Szeretné a verzió felülírását megtartani?</string>
     <string name="patch_profile_version_conflict_message">"Jelenlegi verzió: %1$s
 Új verzió: %2$s
-Melyiket kell menteni ehhez a profilhoz?"</string>
-    <string name="patch_profile_version_conflict_use_new">Használja a bejövő verziót</string>
-    <string name="patch_profile_version_conflict_keep_existing">Meglévő verzió megtartása</string>
-    <string name="patch_profile_empty_state">Mentse el a konfigurációt a patch kiválasztási képernyőjéről, hogy itt lássa.</string>
+Melyiket mentené ehhez a profilhoz?"</string>
+    <string name="patch_profile_version_conflict_use_new">Használja az új verziót</string>
+    <string name="patch_profile_version_conflict_keep_existing">Jelenlegi verzió megtartása</string>
+    <string name="patch_profile_empty_state">Mentse el a konfigurációt a patchkiválasztás képernyőjéről, hogy itt lássa.</string>
     <string name="patch_profile_missing_bundles_toast">A profilban szereplő egyes kötegek nem érhetők el, és ki lesznek hagyva.</string>
     <string name="patch_profile_changed_patches_toast">A profilban szereplő egyes patchek vagy opciók már nem egyeznek a köteggel, és ki lettek hagyva.</string>
     <string name="patch_profile_no_available_bundles_toast">A profilban egyetlen köteg sem érhető el. Frissítse a kötegeket, és próbálkozzon újra.</string>
-    <string name="patch_profile_launch_error">Nem lehetett megnyitni ezt a patch profilt.</string>
-    <string name="patch_profile_show_more">Többet mutat</string>
-    <string name="patch_profile_show_less">Kevesebbet mutat</string>
-    <string name="patch_profile_created_at">Létrehozva: %1$s</string>
-    <string name="patch_profile_bundle_unavailable_suffix">%1$s (nem érhető el)</string>
+    <string name="patch_profile_launch_error">Nem lehetett megnyitni ezt a patchprofilt.</string>
+    <string name="patch_profile_show_more">Mutass többet</string>
+    <string name="patch_profile_show_less">Mutass kevesebbet</string>
+    <string name="patch_profile_created_at">%1$s létrehozva</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (nem elérhető)</string>
     <string name="patch_profile_bundle_change_uid">UID módosítása</string>
     <string name="patch_profile_bundle_change_uid_title">UID módosítása ehhez: %1$s</string>
     <string name="patch_profile_bundle_change_uid_invalid">Adjon meg egy érvényes numerikus UID-t.</string>
-    <string name="patch_profile_bundle_change_uid_success">Anya UID frissítve: %1$d.</string>
-    <string name="patch_profile_bundle_change_uid_not_found">Nem található helyi javítási csomag %1$d UID-vel.</string>
-    <string name="patcher_process_exit_message">A javítófolyamat %1$d kóddal lépett ki.</string>
-    <string name="patcher_memory_adjustment_title">A javító kifutott a memóriából</string>
+    <string name="patch_profile_bundle_change_uid_success">Csomag UID frissítve: %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">Nem található helyi patchcsomag: UID %1$d.</string>
+    <string name="patcher_process_exit_message">A patchfolyamat %1$d kóddal kilépett.</string>
+    <string name="patcher_memory_adjustment_title">A patchelő kifutott a memóriából</string>
     <!-- Dormant code and not used -->
     <!-- Dormant code and not used -->
-    <string name="patcher_memory_adjustment_retry">Újra próbálkozom</string>
+    <string name="patcher_memory_adjustment_retry">Próbálja újra</string>
     <string name="patcher_memory_adjustment_dismiss">Elvetés</string>
-    <string name="patcher_missing_patch_title">A javítás kiválasztása figyelmet igényel</string>
-    <string name="patcher_preflight_missing_patch_remove">A hiányzó javítások eltávolítása</string>
-    <string name="patcher_preflight_missing_patch_proceed">Mégis folytatás</string>
-    <string name="patcher_preflight_missing_patch_message">"A következő javítócsomagok nem érhetők el a jelenlegi csomagban:
+    <string name="patcher_missing_patch_title">A patchkiválasztás figyelmet igényel</string>
+    <string name="patcher_preflight_missing_patch_remove">Hiányzó patchek eltávolítása</string>
+    <string name="patcher_preflight_missing_patch_proceed">Folytatás mégis</string>
+    <string name="patcher_preflight_missing_patch_message">"A következő patchcsomagok nem érhetők el a jelenlegi csomagban:
 %1$s
 Automatikusan eltávolíthatja őket, módosíthatja a kiválasztást, vagy folytathatja tovább."</string>
     <string name="patcher_missing_patch_review">Kiválasztás áttekintése</string>
-    <string name="patch_selector_missing_patch_title">Hiányzó javítások újbóli kiválasztása</string>
-    <string name="patch_selector_missing_patch_message">"Ezeket a javításokat újra kell választani:
+    <string name="patch_selector_missing_patch_title">Hiányzó patchek újbóli kiválasztása</string>
+    <string name="patch_selector_missing_patch_message">"Ezeket a patcheket kell újra kiválasztani:
 %1$s
-Engedélyezze újra őket (vagy válasszon alternatívákat), majd próbálkozzon újra a javítással."</string>
-    <string name="patch_profile_delete_multiple_dialog_description">Törli a kiválasztott javításcsomagokat?</string>
+Engedélyezze újra őket (vagy válasszon alternatívákat), majd próbálkozzon ismét a patcheléssel."</string>
+    <string name="patch_profile_delete_multiple_dialog_description">Törli a kiválasztott patchcsomagokat?</string>
     <string name="this_version">Ez a verzió</string>
     <string name="universal">Bármelyik alkalmazás</string>
-    <string name="search_patches">Patch-ek keresése</string>
-    <string name="app_version_not_compatible">"Ez a javítás nem kompatibilis a kiválasztott alkalmazás verziójával (%1$s).
+    <string name="search_patches">Patchek keresése</string>
+    <string name="app_version_not_compatible">"Ez a patch nem kompatibilis a kiválasztott alkalmazás verziójával (%1$s).
 
 Csak a következő verzióval kompatibilis: %2$s."</string>
     <string name="failed_to_load_apk">Nem sikerült betölteni az APK-t</string>
     <string name="loading">Betöltés…</string>
     <string name="not_installed">Nincs telepítve</string>
     <string name="installed">Telepítve</string>
-    <string name="app_info">Alkalmazás-információk</string>
+    <string name="app_info">Alkalmazásinformáció</string>
     <string name="uninstall">Eltávolítás</string>
-    <string name="repatch">Patch újratelepítése</string>
+    <string name="repatch">Patchelés újra</string>
     <string name="install_type">Telepítés típusa</string>
-    <string name="package_name">Csomag neve</string>
-    <string name="original_package_name">Eredeti csomag neve</string>
-    <string name="applied_patches">Alkalmazott javítások</string>
-    <string name="view_applied_patches">Alkalmazott javítások megtekintése</string>
-    <string name="patch_bundles_used">Használt javítási csomagok</string>
-    <string name="applied_patches_empty">Nincs rögzítve javítás ehhez az alkalmazáshoz</string>
-    <string name="applied_patches_bundle_missing">A csomag metaadatai nem állnak rendelkezésre. Megjelennek a mentett javításnevek.</string>
-    <string name="no_patch_bundles_tracked">Nincs rögzítve javítási csomag ehhez az alkalmazáshoz</string>
-    <string name="mount_install">Rootolt mount telepítő</string>
+    <string name="package_name">Csomagnév</string>
+    <string name="original_package_name">Eredeti csomagnév</string>
+    <string name="applied_patches">Alkalmazott patchek</string>
+    <string name="view_applied_patches">Alkalmazott patchek megtekintése</string>
+    <string name="patch_bundles_used">Használt patchcsomagok</string>
+    <string name="applied_patches_empty">Ehhez az alkalmazáshoz nincs rögzített patch</string>
+    <string name="applied_patches_bundle_missing">A csomag metaadatai nem elérhetők. A mentett patchek nevei jelennek meg.</string>
+    <string name="no_patch_bundles_tracked">Ehhez az alkalmazáshoz nincs rögzített patchcsomag</string>
+    <string name="mount_install"> Root telepítő</string>
     <string name="mounted">Csatlakoztatva</string>
     <string name="unmounted">Leválasztva</string>
     <string name="install_type_custom_installer">Egyéni telepítő</string>
-    <string name="install_type_system_installer">Rendszer telepítő</string>
-    <string name="install_type_mount_label">Rootolt mount telepítő</string>
+    <string name="install_type_system_installer">Rendszertelepítő</string>
+    <string name="install_type_mount_label">Root telepítő</string>
     <string name="not_mounted">Nincs csatlakoztatva</string>
     <string name="mount">Csatlakoztatás</string>
-    <string name="unmount">Eltávolítás</string>
-    <string name="unmount_confirm_description">Szeretné eltávolítani az alkalmazást?</string>
+    <string name="unmount">Leválasztás</string>
+    <string name="unmount_confirm_description">Szeretné leválasztani az alkalmazást?</string>
     <string name="saved_install">Mentve</string>
     <string name="failed_to_mount">Nem sikerült csatlakoztatni: %s</string>
-    <string name="failed_to_unmount">Nem sikerült eltávolítani: %s</string>
-    <string name="unpatch_app">Eltávolítja a javítást?</string>
-    <string name="unpatch_description">Biztosan szeretné eltávolítani a javítást erről az alkalmazásról?</string>
+    <string name="failed_to_unmount">Nem sikerült leválasztani: %s</string>
+    <string name="unpatch_app">Eltávolítja a patcheket?</string>
+    <string name="unpatch_description">Biztosan el szeretné távolítani a patcheket az alkalmazásról?</string>
     <string name="downloader_app_not_found">A letöltő nem találta az alkalmazást</string>
     <string name="downloader_error">Letöltő hiba: %s</string>
     <string name="downloader_no_plugins_installed">Nincs telepítve letöltő.</string>
@@ -784,55 +864,54 @@ Csak a következő verzióval kompatibilis: %2$s."</string>
     <string name="downloaded_apps_export">Kijelölt alkalmazások exportálása</string>
     <string name="downloaded_apps_export_success">%1$d alkalmazás exportálva</string>
     <string name="downloaded_apps_export_failed">Nem sikerült exportálni a letöltött alkalmazásokat</string>
-    <string name="already_patched">Már javítva</string>
+    <string name="already_patched">Már patchelve</string>
     <string name="patch_selector_sheet_filter_title">Szűrő</string>
     <string name="patch_selector_sheet_filter_compat_title">Kompatibilitás</string>
-    <string name="patch_selector_sheet_filter_sort_title">Sortierung</string>
-    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabetisch</string>
-    <string name="patch_selector_sheet_filter_sort_has_settings">Besteht ausinstellungen</string>
-    <string name="patch_selector_sheet_filter_sort_no_settings">Keineinstellungen vorhanden</string>
+    <string name="patch_selector_sheet_filter_sort_title">Rendezés</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Betűrendben</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Beállítások elérhetők</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">Nincsenek beállítások</string>
     <string name="string_option_menu_description">További lehetőségek</string>
     <string name="option_preset_custom_value">Egyéni érték</string>
-    <string name="path_selector">Válasszon a tárhelyről</string>
+    <string name="path_selector">Kiválasztás tárhelyről</string>
     <string name="path_selector_parent_dir">Előző mappa</string>
     <string name="path_selector_dirs">Mappák</string>
     <string name="path_selector_files">Fájlok</string>
     <string name="show_password_field">Jelszó megjelenítése</string>
     <string name="hide_password_field">Jelszó elrejtése</string>
-    <string name="installer_primary_title">Elsődleges telepítő</string>
+    <string name="installer_primary_title">Telepítő</string>
     <string name="installer_fallback_title">Tartalék telepítő</string>
-    <string name="installer_internal_name">Rendszert telepítő</string>
+    <string name="installer_internal_name">Rendszertelepítő</string>
     <string name="installer_internal_description">Az Android csomagtelepítő használata</string>
-    <string name="installer_auto_saved_name">Rootolt mount telepítő</string>
-    <string name="installer_auto_saved_description">A javított APK-t a telepített alkalmazás fölé mountolja (root szükséges).</string>
-    <string name="installer_shizuku_description">Telepítés
-néma módban Shizuku vagy Sui használatával.</string>
+    <string name="installer_auto_saved_name">Root telepítő</string>
+    <string name="installer_auto_saved_description">A patchelt APK-t a telepített alkalmazás fölé csatlakoztatja (root szükséges).</string>
+    <string name="installer_shizuku_description">Telepítés csendben Shizuku vagy Sui használatával.</string>
     <string name="installer_option_none">Nincs tartalék</string>
     <string name="installer_none_description">Nincs tartalék telepítő konfigurálva</string>
-    <string name="installer_status_requires_root">Root hozzáférés szükséges</string>
+    <string name="installer_status_requires_root">Root jogosultság szükséges</string>
     <string name="installer_status_not_supported">Nem támogatott ehhez a művelethez.</string>
     <string name="installer_status_shizuku_not_installed">Telepítse a Shizuku vagy a Sui alkalmazást az opció használatához.</string>
-    <string name="installer_status_shizuku_not_running">Indítsa el a Shizuku vagy a Sui alkalmazást, és próbálkozzon újra.</string>
+    <string name="installer_status_shizuku_not_running">Indítsa el a Shizuku vagy a Sui alkalmazást és próbálkozzon újra.</string>
     <string name="installer_status_shizuku_permission">Adjon Shizuku engedélyt a Morphe számára a Shizuku alkalmazásból.</string>
-    <string name="installer_mount_warning_title">Gyökerezett csatoló telepítő kiválasztva</string>
-    <string name="installer_mount_warning_install">Az elsődleges telepítő a gyökerezett csatoló telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
-    <string name="installer_mount_warning_update">Az elsődleges telepítő a gyökerezett csatoló telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
-    <string name="installer_mount_warning_uninstall">Az elsődleges telepítő a gyökerezett csatoló telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
-    <string name="installer_mount_mismatch_title">Gyökerezett csatoló telepítő nincs kiválasztva</string>
-    <string name="installer_mount_mismatch_install">Ez az alkalmazás a gyökerezett csatoló telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatoljon.</string>
-    <string name="installer_mount_mismatch_update">Ez az alkalmazás a gyökerezett csatoló telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatolja újra.</string>
-    <string name="installer_mount_mismatch_uninstall">Ez az alkalmazás a gyökerezett csatoló telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatolja le.</string>
+    <string name="installer_mount_warning_title">Root telepítő kiválasztva</string>
+    <string name="installer_mount_warning_install">Az elsődleges telepítő root telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
+    <string name="installer_mount_warning_update">Az elsődleges telepítő root telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
+    <string name="installer_mount_warning_uninstall">Az elsődleges telepítő root telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve.</string>
+    <string name="installer_mount_mismatch_title">A root telepítő nincs kiválasztva</string>
+    <string name="installer_mount_mismatch_install">Ez az alkalmazás a root telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatlakoztassa.</string>
+    <string name="installer_mount_mismatch_update">Ez az alkalmazás a root telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatlakoztassa újra.</string>
+    <string name="installer_mount_mismatch_uninstall">Ez az alkalmazás a root telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd válassza le.</string>
     <string name="mount_version_mismatch_title">Csatolás sikertelen</string>
-    <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a javított alkalmazás verziójával (%1$s). Csatolja a megfelelő alapverziót, majd próbálkozzon újra.</string>
+    <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a patchelt alkalmazás verziójával (%1$s). Csatolja a megfelelő alapverziót, majd próbálkozzon újra.</string>
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott.</string>
     <string name="installer_action_open_shizuku">Shizuku megnyitása</string>
     <string name="installer_shizuku_launch_failed">Nem sikerült megnyitni a Shizukut. Indítsa el manuálisan, és próbálkozzon újra.</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <string name="installer_custom_tab_saved">Mentett</string>
-    <string name="installer_custom_saved_note">A felhasználó által manuálisan hozzáadott telepítők az elsődleges &amp; tartalék telepítőválasztó menükhöz.</string>
-    <string name="installer_custom_tab_auto_saved">Automatikus mentés</string>
-    <string name="installer_custom_auto_note">Automatikusan észlelt és hozzáadott telepítők az elsődleges &amp; tartalék telepítőválasztó menükhöz.</string>
+    <string name="installer_custom_saved_note">A felhasználó által manuálisan hozzáadott telepítők az elsődleges és tartalék telepítőválasztó menükhöz.</string>
+    <string name="installer_custom_tab_auto_saved">Automatikusan mentett</string>
+    <string name="installer_custom_auto_note">Automatikusan észlelt és hozzáadott telepítők az elsődleges és tartalék telepítőválasztó menükhöz.</string>
     <string name="installer_custom_tab_discover">Felfedezés</string>
     <string name="installer_custom_close">Bezárás</string>
     <string name="installer_custom_manage_description">Harmadik féltől származó telepítőtevékenységek mentése elsődleges vagy tartalék telepítőként való használathoz</string>
@@ -840,56 +919,56 @@ néma módban Shizuku vagy Sui használatával.</string>
     <string name="installer_custom_package_hint">Írjon be egy csomagnevet, és koppintson a \"Telepítők keresése\" elemre a telepítőtevékenységek felfedezéséhez</string>
     <string name="installer_custom_lookup">Telepítők keresése</string>
     <string name="installer_custom_lookup_empty">Először adjon meg egy csomagnevet.</string>
-    <string name="installer_custom_searching">Telepítő tevékenységek keresése…</string>
+    <string name="installer_custom_searching">Telepítőtevékenységek keresése…</string>
     <string name="installer_custom_lookup_found">%1$d telepítő található.</string>
     <string name="installer_custom_action_add">Telepítő mentése</string>
     <string name="installer_custom_action_remove">Mentett telepítő eltávolítása</string>
-    <string name="installer_custom_builtin_indicator">Automatikus mentés</string>
+    <string name="installer_custom_builtin_indicator">Automatikusan mentett</string>
     <string name="installer_custom_saved_indicator">Mentett</string>
-    <string name="installer_custom_lookup_none">Nincs telepítő tevékenység található ehhez: %1$s.</string>
+    <string name="installer_custom_lookup_none">Nem található telepítőtevékenység ehhez: %1$s.</string>
     <string name="installer_custom_candidates_title">Elérhető tevékenységek ehhez: %1$s</string>
     <string name="installer_custom_saved_header">Mentett telepítők</string>
-    <string name="installer_custom_empty">Még nincsenek egyéni telepítők mentve.</string>
+    <string name="installer_custom_empty">Még nincs mentett egyéni telepítő.</string>
     <string name="installer_custom_added">Egyéni telepítő mentve.</string>
     <string name="installer_custom_exists">Ez a telepítő már mentve van.</string>
     <string name="installer_custom_removed">Egyéni telepítő eltávolítva.</string>
-    <string name="installer_custom_remove_failed">A telepítő eltávolítása sikertelen volt. Próbálja újra.</string>
+    <string name="installer_custom_remove_failed">A telepítő eltávolítása nem sikerült. Próbálja újra.</string>
     <string name="installer_hint_generic">A telepítés sikertelen volt. Próbálja újra, vagy váltson másik telepítőre.</string>
-    <string name="installer_hint_blocked">A telepítést az Android blokkolta. Ellenőrizze a Play Protect vagy a biztonsági beállításokat.</string>
+    <string name="installer_hint_blocked">A telepítést az Android blokkolta. Ellenőrizze a Play Protectet vagy a biztonsági beállításokat.</string>
     <string name="installer_hint_conflict">Ezzel a csomagnévvel egy másik alkalmazás már telepítve van. Távolítsa el, mielőtt folytatná.</string>
     <string name="installer_hint_incompatible">Az APK nem kompatibilis ezzel az eszközzel vagy Android-verzióval.</string>
     <string name="installer_hint_invalid">Az APK érvénytelen vagy sérült.</string>
     <string name="installer_hint_storage">Nincs elegendő tárhely a telepítéshez.</string>
     <string name="installer_hint_timeout">A telepítés időtúllépés miatt megszakadt. Próbálja újra.</string>
-    <string name="installer_hint_aborted">A telepítés megszakadt.</string>
+    <string name="installer_hint_aborted">Telepítés megszakítva.</string>
     <string name="installer_hint_with_reason">"%1$s
 
 Részletek: %2$s"</string>
     <string name="installer_external_launched">%1$s megnyitása…</string>
     <string name="installer_external_timeout">%1$s nem erősítette meg a telepítést. Ellenőrizze a másik alkalmazást, és próbálja újra.</string>
-    <string name="installer_external_success">%1$s sikeres telepítésről számolt be.</string>
-    <string name="installer_external_finished_no_change">\"%1$s\" sikeresen befejeződött az alkalmazás telepítése nélkül. Kérjük, nézze meg a telepítőt hibajegyzékért és kísérld újra.</string>
+    <string name="installer_external_success">%1$s sikeres telepítést jelentett.</string>
+    <string name="installer_external_finished_no_change">\"%1$s\" befejeződött az alkalmazás telepítése nélkül. Kérjük ellenőrizze a telepítő hibaüzeneteit és próbálja újra.</string>
     <string name="installing_ellipsis">Telepítés…</string>
-    <string name="uninstalling_ellipsis">Deinstalliert...</string>
+    <string name="uninstalling_ellipsis">Eltávolítás...</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting">Leválasztás…</string>
     <string name="install_app">Telepítés</string>
     <string name="install_app_success">Sikeresen telepítve</string>
     <string name="install_app_fail_title">Sikertelen telepítés</string>
     <string name="install_app_fail">Nem sikerült telepíteni az alkalmazást: %s</string>
-    <string name="install_app_fail_missing_stock">Missing original APK for mount install. Please ensure the original APK is available for the mount install process to work correctly.</string>
-    <string name="mount_split_not_supported">Mounted installer does not support S APKs. Please use system installer instead of mounted installer for split APK installation.</string>
+    <string name="install_app_fail_missing_stock">Hiányzik az eredeti APK a csatolásos telepítéshez.</string>
+    <string name="mount_split_not_supported">A root jogosultságú csatolásos telepítés nem támogatja az osztott APK fájlokat. Használja a rendszertelepítőt.</string>
     <string name="mount_app_fail_title">Sikertelen csatlakoztatás</string>
-    <string name="install_timeout_message">A telepítés nem fejeződött be. Ellenőrizze a rendszer telepítőjének párbeszédpaneljét, majd próbálkozzon újra.</string>
-    <string name="uninstall_timeout_message">Deinstallation nicht beendet. Bitte prüfen Sie die Deinstallationsmeldung erneut.</string>
+    <string name="install_timeout_message">A telepítés nem fejeződött be. Ellenőrizze a rendszertelepítő párbeszédpaneljét, majd próbálkozzon újra.</string>
+    <string name="uninstall_timeout_message">Az eltávolítás nem fejeződött be. Ellenőrizze az eltávolítási párbeszédpanelt, majd próbálkozzon újra.</string>
     <string name="reinstall_app_fail">Nem sikerült újratelepíteni az alkalmazást: %s</string>
     <string name="uninstall_app_fail">Nem sikerült eltávolítani az alkalmazást: %s</string>
     <string name="open_app">Megnyitás</string>
     <string name="save_apk">APK mentése</string>
     <string name="save_apk_success">APK mentve</string>
-    <string name="saved_app_export_success">Exportált módosított alkalmazás</string>
+    <string name="saved_app_export_success">A módosított alkalmazás exportálva</string>
     <string name="saved_app_export_failed">Nem sikerült exportálni a módosított alkalmazást</string>
-    <string name="saved_app_removed_toast">Mentett módosított alkalmazás eltávolítva</string>
+    <string name="saved_app_removed_toast">A módosított alkalmazás mentése eltávolítva</string>
     <string name="saved_app_copy_removed_toast">Mentett másolat eltávolítva</string>
     <string name="delete_saved_app_title">Mentett alkalmazás törlése</string>
     <string name="delete_saved_app_description">Ez eltávolítja a mentett alkalmazás bejegyzést és a tárolt APK-t.</string>
@@ -900,16 +979,16 @@ Részletek: %2$s"</string>
     <string name="remount_saved_app">Újracsatlakoztatás</string>
     <string name="update_saved_app">Frissítés</string>
     <string name="saved_app_install_success">Mentett alkalmazás telepítve</string>
-    <string name="saved_app_install_failed">Sikertelen mentett alkalmazás telepítés</string>
+    <string name="saved_app_install_failed">A mentett alkalmazás telepítése sikertelen</string>
     <string name="saved_app_uninstall_title">Telepített példány eltávolítása?</string>
     <string name="saved_app_uninstall_description">Ez csak a telepített verziót távolítja el. A mentett APK sértetlen marad.</string>
-    <string name="saved_app_install_missing">Mentett APK nem található</string>
+    <string name="saved_app_install_missing">Nem található mentett APK</string>
     <string name="save_logs">Naplók mentése</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség.</string>
     <string name="select_install_type">Válassza ki a telepítés típusát</string>
     <string name="patcher_step_group_preparing">Előkészítés</string>
     <string name="patcher_step_load_patches">Patch-ek betöltése</string>
-    <string name="patcher_step_prepare_split_apk">Split APK összevonása</string>
+    <string name="patcher_step_prepare_split_apk">APK fájlok egyesítése</string>
     <string name="patcher_step_unpack">Lade APK-Datei</string>
     <string name="patcher_step_group_patching">Patch-elés</string>
     <string name="patcher_step_group_saving">Mentés</string>

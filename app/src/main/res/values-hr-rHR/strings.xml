@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Paket nadopuna</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">Ažuriranje je neuspjelo</string>
+    <string name="morphe_home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
+    <string name="morphe_home_please_wait">Molim čekajte…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Koji aplikacijom želite popraviti?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Gotovo da opet napravite YouTube legendarno?</string>
@@ -21,21 +25,12 @@
     <string name="morphe_home_greeting_9">Od danas spašavamo aplikacije od same sebe</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Pokrenuto kofeinom i dobrom humorom</string>
-    <string name="morphe_home_bundle_type_api">API paket</string>
-    <string name="morphe_home_update_error">Ažuriranje je neuspjelo</string>
-    <string name="morphe_home_update_error_subtitle">Provjerite vašu internetsku vezu i pokušajte ponovno</string>
-    <string name="morphe_home_updating_patches">Ažuriranje popravaka…</string>
-    <string name="morphe_home_update_success">Ažuriranje je dovršeno</string>
-    <string name="morphe_home_patches_updated">Vaši ispravke su ažurirane</string>
-    <string name="morphe_home_patches_are_loading">Učitavaju se popravci, molim sačekajte…</string>
-    <string name="morphe_home_please_wait">Molim čekajte…</string>
-    <string name="morphe_home_open_in_browser">Otvori u pregledniku</string>
-    <string name="morphe_home_failed_to_open_url">Nije moguće otvoriti URL</string>
-    <string name="morphe_home_date_added">Dodano</string>
-    <string name="morphe_home_date_updated">Ažurirano</string>
-    <string name="morphe_home_check_updates">Provjeri</string>
-    <string name="morphe_home_unknown">Nepoznato</string>
-    <string name="morphe_home_timeline">Ažurirajte povijest</string>
+    <!-- Sources Management -->
+    <string name="morphe_sources_open_in_browser">Otvori u pregledniku</string>
+    <string name="morphe_sources_failed_to_open_url">Nije moguće otvoriti URL</string>
+    <string name="morphe_sources_date_added">Dodano</string>
+    <string name="morphe_sources_date_updated">Ažurirano</string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Imate li originalni nepotpisani APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Da patchati %1$s, trebate verziju %2$s (nepatcheno)</string>
@@ -55,16 +50,21 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Odaberite APK koji ste preuzeli</string>
     <string name="morphe_home_file_picker_prompt_description">Sada odaberite %1$s APK datoteku koju ste nedavno preuzeli.</string>
-    <string name="morphe_home_file_picker_prompt_open">Otvorite APK datoteku koju sam preuzela</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Otvorite APK datoteku koju sam preuzela</string>
     <string name="morphe_home_recommended_version">Preporučenu verziju</string>
     <string name="morphe_patcher_selected_version">Odabrana verzija</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <string name="morphe_patch_option_instructions">Upute</string>
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Režim korijena zahtijeva da je originalni APK instaliran na vašem uređaju prije ispravljanja.</string>
     <string name="morphe_root_gmscore_excluded">Podrška GmsCore je isključena u korijenskom načinu</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Sačuvaj APK</string>
-    <string name="morphe_patcher_copy_error">Kopirajte grešku</string>
-    <string name="morphe_patcher_show_error">Prikaži pogrešku</string>
     <string name="morphe_patcher_error_copied">Greška kopirana u međuspremnik</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patcha</string>
     <string name="morphe_patcher_long_step_warning">Ova operacija može potrajati neko vrijeme. Molimo sačekajte…</string>
@@ -100,7 +100,7 @@
     <string name="morphe_patcher_message_7">Podesavanje 1-ova i 0-ova… 🤖</string>
     <string name="morphe_patcher_message_8">Razmotati digitalni špageti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Popravljam greške u nepatchiranom aplikaciji… 🐞</string>
+    <string name="morphe_patcher_message_9">Popravljam greške u nepatchiranom aplikaciji… 🪲</string>
     <string name="morphe_patcher_message_10">Veličani ispuni su vrijedni za čekanje… ⏳</string>
     <string name="morphe_patcher_message_11">Poliranje piksela do sjaja… 💎</string>
     <string name="morphe_patcher_message_12">Molimo ostanite sjedili do kada kapetan isključi znak \"Patching in progress\"… 💺✈️</string>
@@ -116,17 +116,16 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Vaša aplikacija ima groznicu, a jedini recept je više lokera… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Uklanjanje smetnji. Molimo ostanite na čekanju… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Vrati se na Morphe domovinu</string>
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <!-- Home Screen - Update Notifications -->
+    <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -10,9 +12,20 @@
     <!-- From mediocrity to amazing -->
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <!-- Sources Management -->
+    <string name="morphe_enabled">செயலில்பாட்டில் உள்ளது</string>
+    <string name="morphe_disabled">முடக்கப்பட்டது</string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
     <!-- Dialog 3: File Picker Prompt -->
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
@@ -20,16 +33,16 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->

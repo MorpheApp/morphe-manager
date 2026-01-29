@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Korjauspaketti</string>
+    <string name="morphe_home_other_apps">Muut sovellukset</string>
+    <string name="morphe_home">Koti</string>
+    <string name="morphe_home_not_patched_yet">Ei vielä päivitetty</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Uusi päivitys saatavilla</string>
+    <string name="morphe_home_update_available_subtitle">Uusi versio valmis asennukseen</string>
+    <string name="morphe_home_update_error">Päivitys epäonnistui</string>
+    <string name="morphe_home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
+    <string name="morphe_home_updating_sources">Päivitetään lähteitä…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d lähdettä käsitelty</string>
+    <string name="morphe_home_update_success">Lähteiden päivitys valmis</string>
+    <string name="morphe_home_update_success_subtitle">Lähteetsinä päivitety</string>
+    <string name="morphe_home_sources_are_loading">Lähteet ladassa, odota…</string>
+    <string name="morphe_home_please_wait">Odota hetki…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Minkä sovelluksen haluat korjata?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Oletko valmis tekemään YouTube:sta legendaarisen jälleen?</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Pelastamme sovelluksia itseltään tästä päivästä lähtien</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Voimanamme kofeiini ja hyvät päivitykset</string>
-    <string name="morphe_home_bundle_type_api">API-paketti</string>
-    <string name="morphe_home_update_error">Päivitys epäonnistui</string>
-    <string name="morphe_home_update_error_subtitle">Tarkista internet-yhteytesi ja yritä uudelleen</string>
-    <string name="morphe_home_updating_patches">Päivitetään korjauksia…</string>
-    <string name="morphe_home_update_success">Päivitys valmis</string>
-    <string name="morphe_home_patches_updated">Korjauksesi ovat ajan tasalla</string>
-    <string name="morphe_home_patches_are_loading">Korjauksia ladataan, odota hetki…</string>
-    <string name="morphe_home_please_wait">Odota hetki…</string>
-    <string name="morphe_home_open_in_browser">Avaa selaimessa</string>
-    <string name="morphe_home_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
-    <string name="morphe_home_date_added">Lisätty</string>
-    <string name="morphe_home_date_updated">Päivitetty</string>
-    <string name="morphe_home_check_updates">Tarkista</string>
-    <string name="morphe_home_unknown">Tuntematon</string>
-    <string name="morphe_home_timeline">Muokkaushistoria</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Muokkaa lähteitä</string>
+    <string name="morphe_sources_management_subtitle">%d lähdettä asennettu</string>
+    <string name="morphe_sources_delete_confirm_message">Poista lähde \"%s\"? Tätä ei voi peruuttaa.</string>
+    <string name="morphe_sources_open_in_browser">Avaa linkit selaimessa</string>
+    <string name="morphe_sources_failed_to_open_url">Ei onnistu avata URL-osoitetta</string>
+    <string name="morphe_sources_date_added">Lisätty</string>
+    <string name="morphe_sources_date_updated">Päivitetty</string>
+    <string name="morphe_enabled">Käytössä</string>
+    <string name="morphe_disabled">Pois käytöstä</string>
+    <string name="morphe_rename">Nimeä uudelleen</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Lisää patch-lähde</string>
+    <string name="morphe_add_patch_source_remote">Pois päältä</string>
+    <string name="morphe_add_patch_source_remote_url">Lähteen URL-osoite</string>
+    <string name="morphe_add_patch_source_remote_description">Anna JSON-palvelimen URL-osoite poistettavalle patch-lähteelle</string>
+    <string name="morphe_add_patch_source_local">Lokali</string>
+    <string name="morphe_add_patch_source_local_file">Valitse patch-lähteen tiedosto</string>
+    <string name="morphe_add_patch_source_local_file_description">Valitse .mpp-patch-lähteen tiedosto tallennuksesta</string>
+    <string name="morphe_add_patch_source_local_change_file">Vaihda tiedostoa</string>
+    <string name="morphe_home_no_patches_available">Ei patcheja saatavilla</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Valitse lataamasi APK</string>
     <string name="morphe_home_file_picker_prompt_description">Valitse nyt lataamasi %1$s APK-tiedosto.</string>
-    <string name="morphe_home_file_picker_prompt_open">Avaa lataamani APK-tiedosto</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Avaa ladatun APK-tiedosto</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Avaa APK-tiedosto</string>
     <string name="morphe_home_recommended_version">Suositeltu versio</string>
     <string name="morphe_patcher_selected_version">Valittu versio</string>
+    <string name="morphe_home_select_apk_title">Valitse APK</string>
+    <string name="morphe_home_select_any_apk_description">Klikkaa alla olevaa painiketta valitaksesi minkä tahansa sovelluksen APK-tiedoston patchaamiseen</string>
+    <string name="morphe_home_invalid_apk">Virheellinen APK-tiedosto</string>
+    <string name="morphe_home_no_patches_for_app">Ei patcheja saatavilla tälle sovellukselle</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Asiantuntijan tila</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d/%2$d patchea valittu</string>
+    <string name="morphe_expert_mode_search">Etsi patcheja</string>
+    <string name="morphe_expert_mode_proceed">Jatka patchaamista</string>
+    <string name="morphe_expert_mode_disable_all">Poista kaikki</string>
+    <string name="morphe_expert_mode_enable_all">Ota kaikki käyttöön</string>
+    <string name="morphe_expert_mode_has_options">Mukautettava</string>
+    <string name="morphe_expert_mode_no_results">Ei patcheja löytynyt</string>
+    <string name="morphe_expert_mode_no_patches">Ei patcheja saatavilla</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Mukautettu väri</string>
+    <string name="morphe_hex_color">HEX-väri</string>
+    <string name="morphe_patch_option_instructions">Ohjeet</string>
+    <string name="morphe_patch_option_enter_value">Anna arvo</string>
+    <string name="morphe_patch_option_enter_number">Anna numero</string>
+    <string name="morphe_patch_option_enter_decimal">Anna desimaali</string>
+    <string name="morphe_patch_option_pick_folder">Valitse kansio</string>
+    <string name="expand">Laajenna</string>
+    <string name="collapse">Sulje</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Oletko varma, että haluat poistaa tämän sovelluksen?</string>
+    <string name="saved_app_delete_confirmation">Oletko varma, että haluat poistaa tämän tallennetun sovelluksen?</string>
+    <string name="saved_copy_delete_confirmation">Oletko varma, että haluat poistaa tallennetun kopion?</string>
+    <string name="view">Näytä</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Alkuperäistä APK-tiedostoa ei löytynyt. Ei voida patchata tätä sovellusta uudelleen.</string>
+    <string name="morphe_repatch_requires_original">Uudelleenpatchaaminen vaatii alkuperäisen APK-tiedoston</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Tallennushallinta</string>
+    <string name="morphe_apks_count">%d APK(t)</string>
+    <string name="morphe_apks_size">Yhteispaino: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Patchatut APK-tiedostot</string>
+    <string name="morphe_patched_apks_title">Patchatut APK-tiedostot</string>
+    <string name="morphe_patched_apks_description">Hallinnoi tallennettuja patchatut APK-tiedostoja</string>
+    <string name="morphe_patched_apks_empty">Ei patchatut APK-tiedostoja tallennettu</string>
+    <string name="morphe_patched_apks_delete_title">Poista patchattu APK-tiedosto?</string>
+    <string name="morphe_patched_apks_delete_confirm">Oletko varma, että haluat poistaa tallennetun patchatun APK-tiedoston %s?</string>
+    <string name="morphe_patched_apks_deleted">Patchattu APK-tiedosto poistettu onnistuneesti</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Alkuperäiset APK-tiedostot</string>
+    <string name="morphe_original_apks_title">Alkuperäiset APK-tiedostot</string>
+    <string name="morphe_original_apks_description">Alkuperäisiä APK-tiedostoja tallennetaan uudelleenpatchaamiseen. Ainoastaan uusin versio säilytetään jokaiselle sovellukselle.</string>
+    <string name="morphe_original_apks_empty">Ei alkuperäisiä APK-tiedostoja tallennettu</string>
+    <string name="morphe_original_apks_deleted">Alkuperäisen APK-tiedoston poisto onnistui</string>
+    <string name="morphe_original_apks_saved">Alkuperäisen APK-tiedosto tallennettu</string>
+    <string name="morphe_original_apks_save_failed">Ei onnistu tallentaa alkuperäistä APK-tiedostoa</string>
+    <string name="morphe_original_apks_delete_title">Poista alkuperäinen APK-tiedosto?</string>
+    <string name="morphe_original_apks_delete_confirm">Poistetaanko alkuperäisen APK-tiedoston %s? Ilman uutta APK-tiedostoa ei voida patchata.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Juuritila vaatii alkuperäisen APK:n asentamisen laitteellesi ennen korjausta.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Tallenna APK</string>
-    <string name="morphe_patcher_copy_error">Kopioivahtikuvausvirhe</string>
-    <string name="morphe_patcher_show_error">Näytä virhe</string>
     <string name="morphe_patcher_error_copied">Virhe kopioitu leikepöydälle</string>
+    <string name="morphe_patcher_error_log">Virhekirjoitus</string>
+    <string name="morphe_patcher_error_technical">Teknisiä tietoja</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d korjausta</string>
     <string name="morphe_patcher_long_step_warning">Tämä vaihe voi kestää jonkin aikaa. Odota…</string>
     <string name="morphe_patcher_installing">Asennetaan…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">Säädetään ykkösiä ja nollia… 🤖</string>
     <string name="morphe_patcher_message_8">Selvitellään digitaalisia spagettikoodauksia… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Korjataan bugeja paikkaamattomassa sovelluksessa… 🐞</string>
+    <string name="morphe_patcher_message_9">korjaa bugeja epätaloudellisessa sovelluksessa… 🪲</string>
     <string name="morphe_patcher_message_10">Hyvä paikkaus odotuksen arvoinen… ⏳</string>
     <string name="morphe_patcher_message_11">Kiillotetaan pikseleitä, kunnes ne loistavat… 💎</string>
     <string name="morphe_patcher_message_12">Pysy paikallasi, kunnes kapteeni sammuttaa \'Korjaus meneillään\' -merkin... 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Palaa Morphen kotisivulle</string>
-    <string name="morphe_settings_return_to_morphe_description">Palaa yksinkertaistettuun tilaan</string>
-    <string name="morphe_settings_return_to_expert">Vaihda experttimoodiin</string>
-    <string name="morphe_settings_return_to_expert_description">Siirry täysiarvoiseen experttimodeeseen</string>
-    <string name="morphe_share_website">Jaa verkkosivusto</string>
-    <string name="morphe_share_website_description">Jaa virallinen Morphe-verkkosivusto</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Sovelluskuvake</string>
-    <string name="morphe_app_icon_selector_description">Muuta sovelluslauncheerin ikonia</string>
-    <string name="morphe_app_icon_default">Oletus</string>
-    <string name="morphe_app_icon_light_2">Taivas</string>
-    <string name="morphe_app_icon_light_3">Auringonlaskunään</string>
-    <string name="morphe_app_icon_dark_1">Meri</string>
-    <string name="morphe_app_icon_dark_2">Tyhjötä</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Muuta sovelluksen ikonia?</string>
-    <string name="morphe_app_icon_change_dialog_message">Muuta \'%1$s\'iksi ja käynnistä uudelleen?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Muuta ikonia</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Asetusmuodot</string>
     <string name="morphe_appearance_options_description">Mukaila teemoja, värejä ja tauleviä</string>
     <string name="morphe_appearance_current_language">Nykykieli</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Muodot</string>
     <string name="morphe_background_type_snow">Lumimaalia</string>
     <string name="morphe_background_type_none">Ei mitään</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Sovelluskuvake</string>
+    <string name="morphe_app_icon_selector_description">Muuta sovelluslauncheerin ikonia</string>
+    <string name="morphe_app_icon_default">Oletus</string>
+    <string name="morphe_app_icon_light_2">Taivas</string>
+    <string name="morphe_app_icon_light_3">Auringonlaskunään</string>
+    <string name="morphe_app_icon_dark_1">Meri</string>
+    <string name="morphe_app_icon_dark_2">Tyhjötä</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Muuta sovelluksen ikonia?</string>
+    <string name="morphe_app_icon_change_dialog_message">Muuta \'%1$s\'iksi ja käynnistä uudelleen?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Muuta ikonia</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Asiantuntijan asetukset</string>
+    <string name="morphe_settings_expert_mode">Asiantuntijan tila</string>
+    <string name="morphe_settings_expert_mode_description">Ota käyttöön lisäasetuksia ja mukautettavia asetuksia</string>
     <string name="morphe_update_use_prereleases">Käytä beta-versiota</string>
     <string name="morphe_update_use_prereleases_description">Pääset käyttämään uusia korjauksia ja hallintaominaisuksia jo ennen virallista julkaisua</string>
+    <string name="morphe_patch_options_expert_mode_notice">Asiantuntijan tilaa käytettäessä patch-asetuksia on saatavilla patchaamisen aikana</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patch-asetukset</string>
     <string name="morphe_patch_options_youtube_description">Teema, brändi, pääte, ja Shorts-valinnat</string>
     <string name="morphe_patch_options_youtube_music_description">Teema- ja brändivalinnat</string>
     <string name="morphe_patch_options_restart_message">Patch-valintojen muutos vaatii sovelluksen uusikäynnistyksen uusien asetusten effectöimiseksi.</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Sovelluksen teeman värit</string>
     <string name="morphe_patch_options_theme_colors_description">Muuta taustan väri</string>
     <string name="morphe_patch_options_dark_theme_color">Tumman teeman taustaväri</string>
     <string name="morphe_patch_options_dark_theme_color_description">Vaihtoehtona voi olla myös heksaväri (#RRGGBB) tai väripoikanen</string>
     <string name="morphe_patch_options_light_theme_color">Käyttäjän määritetty taustaväri</string>
     <string name="morphe_patch_options_light_theme_color_description">Vaihtoehtona voi olla myös heksaväri (#RRGGBB) tai väripoikanen</string>
-    <string name="morphe_patch_options_icon_instructions_title">Ikonien muotoilutiedo</string>
-    <string name="morphe_patch_options_header_instructions_title">Otsikon muotoilutiedo</string>
     <string name="morphe_patch_options_loading">Ladataan patch-asetuksia...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Odota patch-kansion päivitystä</string>
+    <string name="morphe_patch_options_waiting_for_source">Odota, kun patch-lähde päivitetaan</string>
     <string name="morphe_patch_options_load_error">Patch-valintojen lataus epäonnistui.</string>
     <string name="morphe_patch_options_no_available">Tälle patchille ei ole saatavilla asetuksia</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Mukautettu väri</string>
-    <string name="morphe_hex_color">HEX-väri</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Mukauta brändiä</string>
     <string name="morphe_patch_options_custom_branding_description">Muuta sovelluksen näyttöimeen</string>
     <string name="morphe_patch_options_custom_branding_app_name">Sovelluksen nimi</string>
@@ -204,7 +270,7 @@ Kuvien koot tulee olla seuraavat:
 Toivomaltaan, osoitteessa on 'drawable' hakemisto monokroma-ikonitiedoilla:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Mukainen headerlogi</string>
     <string name="morphe_patch_options_custom_header_description">Muuta headerlogia</string>
     <string name="morphe_patch_options_custom_header_instruction">"Hakemisto kuvilla, jotka käytetään mukaan headerlogina.
@@ -224,12 +290,26 @@ Kuvien koot tulee olla seuraavat:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Piilottele Shorts-ominaisuudet</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Piilottele Shorts-sovellusliukun</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Poista Shorts-laajakäyttäjän pitävä liukun</string>
     <string name="morphe_patch_options_hide_shorts_widget">Piilota Shorts-ikkuna</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Poista Shorts-painike laajakäyttäjän pitävästä liukusta</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Suoritus</string>
+    <string name="morphe_process_runtime">Suoritusaika</string>
+    <string name="morphe_process_runtime_description">Suorita patchaaminen erillisessä prosessissa paremman vakauden takaamiseksi</string>
+    <string name="morphe_process_runtime_memory_limit">Muistinrajoitus</string>
+    <string name="morphe_process_runtime_memory_limit_help">Korkeammat muistinrajoitukset voivat nopeuttaa patchaamista, mutta ne saattavat ei toimi vanhempien laitteiden kanssa</string>
+    <string name="morphe_enable_process_runtime">Ota suoritusaika käyttöön</string>
+    <string name="morphe_memory_limit_subtitle">Muistiin käytettävää muistia patchaamiseen</string>
+    <string name="morphe_memory_limit_warning">Alhainen muistinrajoitus saattaa aiheuttaa virheitä patchaamalla suurempia sovelluksia</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB rajoitus</string>
+    <string name="morphe_process_runtime_disabled_description">Klikkaa asetuksien määrittämistä</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Jaa verkkosivusto</string>
+    <string name="morphe_share_website_description">Jaa virallinen Morphe-verkkosivusto</string>
     <!-- Other strings -->
     <string name="patcher">Paikkaaja</string>
     <string name="patches">Korjaustiedostot</string>
@@ -799,7 +879,7 @@ Se on yhteensopiva vain seuraavan version kanssa: %2$s."</string>
     <string name="path_selector_files">Tiedostot</string>
     <string name="show_password_field">Näytä salasana</string>
     <string name="hide_password_field">Piilota salasana</string>
-    <string name="installer_primary_title">Ensisijainen asennusohjelma</string>
+    <string name="installer_primary_title">Asentaja</string>
     <string name="installer_fallback_title">Vara-asennusohjelma</string>
     <string name="installer_internal_name">Järjestelmän asennusohjelma</string>
     <string name="installer_internal_description">Käytä Android-pakettien asennusohjelmaa</string>
@@ -908,7 +988,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="select_install_type">Valitse asennustyyppi</string>
     <string name="patcher_step_group_preparing">Valmistellaan</string>
     <string name="patcher_step_load_patches">Ladataan korjauksia</string>
-    <string name="patcher_step_prepare_split_apk">Yhdistä jaetut APK:t</string>
+    <string name="patcher_step_prepare_split_apk">Yhdistää jakamattomat APK-tiedostot</string>
     <string name="patcher_step_unpack">Lue APK-tiedosto</string>
     <string name="patcher_step_group_patching">Korjataan</string>
     <string name="patcher_step_group_saving">Tallennetaan</string>

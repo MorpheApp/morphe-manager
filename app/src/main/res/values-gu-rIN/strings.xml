@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">પેચ બંડલ</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">અપડેટ નિષ્ફળ થયું</string>
+    <string name="morphe_home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
+    <string name="morphe_home_please_wait">કૃપા કરીને રાહ જુઓ...</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">તમે કઈ એપ્લિકેશનને પેચ કરવા માંગો છો?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">YouTube ને ફરીથી સુપ્રસિદ્ધ બનાવવા માટે તૈયાર છો?</string>
@@ -21,21 +25,12 @@
     <string name="morphe_home_greeting_9">આજથી એપ્સને પોતાની પાસેથી સેવ કરી રહ્યા છીએ</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">કેફીન અને સારા પેચો દ્વારા સંચાલિત</string>
-    <string name="morphe_home_bundle_type_api">API બંડલ</string>
-    <string name="morphe_home_update_error">અપડેટ નિષ્ફળ થયું</string>
-    <string name="morphe_home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
-    <string name="morphe_home_updating_patches">પેચ અપડેટ કરી રહ્યાં છીએ...</string>
-    <string name="morphe_home_update_success">અપડેટ પૂર્ણ થયું</string>
-    <string name="morphe_home_patches_updated">તમારા પેચ અપ ટુ ડેટ છે</string>
-    <string name="morphe_home_patches_are_loading">પેચો લોડ થઈ રહ્યાં છે, કૃપા કરીને રાહ જુઓ...</string>
-    <string name="morphe_home_please_wait">કૃપા કરીને રાહ જુઓ...</string>
-    <string name="morphe_home_open_in_browser">બ્રાઉઝરમાં ખોલો</string>
-    <string name="morphe_home_failed_to_open_url">URL ખોલવામાં નિષ્ફળ</string>
-    <string name="morphe_home_date_added">ઉમેરાયેલ છે</string>
-    <string name="morphe_home_date_updated">અપડેટેડ </string>
-    <string name="morphe_home_check_updates">તપાસો</string>
-    <string name="morphe_home_unknown">અજ્ઞાત</string>
-    <string name="morphe_home_timeline">ઇતિહાસ અપડેટ કરો</string>
+    <!-- Sources Management -->
+    <string name="morphe_sources_open_in_browser">બ્રાઉઝરમાં ખોલો</string>
+    <string name="morphe_sources_failed_to_open_url">URL ખોલવામાં નિષ્ફળ</string>
+    <string name="morphe_sources_date_added">ઉમેરાયેલ છે</string>
+    <string name="morphe_sources_date_updated">અપડેટેડ </string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">શું તમારી પાસે અસલ અનપેચ્ડ APK છે?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s ને પેચ કરવા માટે, તમારે %2$s (અનપૅચ કરેલ) સંસ્કરણની જરૂર છે</string>
@@ -55,16 +50,23 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">તમે ડાઉનલોડ કરેલ APK પસંદ કરો</string>
     <string name="morphe_home_file_picker_prompt_description">હવે તમે હમણાં જ ડાઉનલોડ કરેલ %1$s APK ફાઇલ પસંદ કરો.</string>
-    <string name="morphe_home_file_picker_prompt_open">મેં ડાઉનલોડ કરેલી APK ફાઇલ ખોલો</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">મેં ડાઉનલોડ કરેલી APK ફાઇલ ખોલો</string>
     <string name="morphe_home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="morphe_patcher_selected_version">પસંદ કરેલ સંસ્કરણ</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">કસ્ટમ રંગ</string>
+    <string name="morphe_hex_color">હેક્સ રંગ</string>
+    <string name="morphe_patch_option_instructions">સૂચનાઓ</string>
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">રૂટ મોડને પેચ કરતા પહેલા તમારા ઉપકરણ પર મૂળ APK ઇન્સ્ટોલ કરવું જરૂરી છે.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore સપોર્ટ પેચ રૂટ મોડમાં બાકાત છે</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK સાચવો</string>
-    <string name="morphe_patcher_copy_error">ભૂલ કોપી કરો</string>
-    <string name="morphe_patcher_show_error">ભૂલ બતાવો</string>
     <string name="morphe_patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d પેચીસ</string>
     <string name="morphe_patcher_long_step_warning">આ પગલામાં થોડો સમય લાગી શકે છે. કૃપા કરીને રાહ જુઓ...</string>
@@ -100,7 +102,7 @@
     <string name="morphe_patcher_message_7">1 અને 0 ને સમાયોજિત કરી રહ્યા છીએ… 🤖</string>
     <string name="morphe_patcher_message_8">ડિજિટલ સ્પેગેટી ગૂંચવણ ઉકેલી રહ્યા છીએ… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">પેચ વગરની એપમાં બગ ફિક્સ કરી રહ્યા છીએ… 🐞</string>
+    <string name="morphe_patcher_message_9">પેચ વગરની એપમાં બગ ફિક્સ કરી રહ્યા છીએ… 🪲</string>
     <string name="morphe_patcher_message_10">મહાન પેચો માટે રાહ જોવી યોગ્ય છે… ⏳</string>
     <string name="morphe_patcher_message_11">પિક્સેલ ચમકે ત્યાં સુધી પોલિશ કરી રહ્યાં છે… 💎</string>
     <string name="morphe_patcher_message_12">કૃપા કરીને જ્યાં સુધી કેપ્ટન \"પેચિંગ ચાલુ છે\" ચિહ્ન બંધ ન કરે ત્યાં સુધી બેઠેલા રહો... 💺✈️</string>
@@ -116,26 +118,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">તમારી ઍપને થોડો તાવ આવ્યો છે, અને એની એક જ દવા છે, ઢગલાબંધ પેચિસ... 🩺🔔</string>
     <string name="morphe_patcher_message_20">થોડો કચરો સાફ કરું છું... બસ બે મિનિટ હો! 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">મોર્ફે ઘર પર પાછા ફરો</string>
-    <string name="morphe_settings_return_to_morphe_description">સરળ મોડ તરફ પાછા ફરો</string>
-    <string name="morphe_settings_return_to_expert">નિષ્ણાત મોડમાં જાઓ</string>
-    <string name="morphe_settings_return_to_expert_description">સંપૂર્ણ સુવિધાયુક્ત નિષ્ણાત મોડ પર સ્વિચ કરો</string>
-    <string name="morphe_share_website">વેબસાઇટ બાટો </string>
-    <string name="morphe_share_website_description">સત્તાવાર Morphe વેબસાઇટ બાટો</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">એપ્લિકેશન આયકન</string>
-    <string name="morphe_app_icon_selector_description">એપ્લિકેશન લોન્ચર આઇકન બદલો</string>
-    <string name="morphe_app_icon_default">ડિફૉલ્ટ</string>
-    <string name="morphe_app_icon_light_2">આકાશ</string>
-    <string name="morphe_app_icon_light_3">સૂર્યાસ્ત</string>
-    <string name="morphe_app_icon_dark_1">સમુદ્ર</string>
-    <string name="morphe_app_icon_dark_2">ખાલીપણું</string>
-    <string name="morphe_app_icon_dark_3">ઈન્ડિગો</string>
-    <string name="morphe_app_icon_change_dialog_title">એપ આઇકન બદલો?</string>
-    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' માં બદલીને ફરી શરૂ કરીએ?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">ચિહ્ન બદલો</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">દેખાવ વિકલ્પો</string>
     <string name="morphe_appearance_options_description">થીમ્સ, રંગો અને બેકગ્રાઉન્ડને કસ્ટમાઇઝ કરો</string>
     <string name="morphe_appearance_current_language">વર્તમાન ભાષા</string>
@@ -151,7 +134,16 @@
     <string name="morphe_background_type_shapes">આકારો</string>
     <string name="morphe_background_type_snow">બરફ</string>
     <string name="morphe_background_type_none">કોઈપણ નહિ </string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_description">એપ્લિકેશન લોન્ચર આઇકન બદલો</string>
+    <string name="morphe_app_icon_default">ડિફૉલ્ટ</string>
+    <string name="morphe_app_icon_light_2">આકાશ</string>
+    <string name="morphe_app_icon_light_3">સૂર્યાસ્ત</string>
+    <string name="morphe_app_icon_dark_1">સમુદ્ર</string>
+    <string name="morphe_app_icon_dark_2">ખાલીપણું</string>
+    <string name="morphe_app_icon_dark_3">ઈન્ડિગો</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' માં બદલીને ફરી શરૂ કરીએ?</string>
+    <!-- Advanced Tab -->
     <string name="morphe_update_use_prereleases">પૂર્વ પ્રકાશિત સંસ્કરણનો ઉપયોગ કરો</string>
     <string name="morphe_update_use_prereleases_description">નવા પેચ અને મેનેજર ફીચર્સનો વહેલા અનુભવ મેળવો</string>
     <!-- Patch Options Section -->
@@ -159,23 +151,17 @@
     <string name="morphe_patch_options_youtube_description">થીમ, બ્રાન્ડિંગ, હેડર, અને શોર્ટ્સ ઓપ્શન્સ</string>
     <string name="morphe_patch_options_youtube_music_description">થીમ અને બ્રાન્ડિંગ વિકલ્પો</string>
     <string name="morphe_patch_options_restart_message">પેચ વિકલ્પો બદલવાથી નવા પ્રભાવો મેળવવા માટે એપ્લિકેશનને ફરીથી પેચ કરવાની જરૂર છે</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">એપ્લિકેશન થીમ રંગો</string>
     <string name="morphe_patch_options_theme_colors_description">પૃષ્ઠભૂમિ રંગ બદલો</string>
     <string name="morphe_patch_options_dark_theme_color">ડાર્ક થીમ પૃષ્ઠભૂમિ રંગ</string>
     <string name="morphe_patch_options_dark_theme_color_description">હેક્સ રંગ (#RRGGBB) અથવા રંગ સંસાધન સંદર્ભ હોઈ શકે છે</string>
     <string name="morphe_patch_options_light_theme_color">લાઇટ થીમ બેકગ્રાઉન્ડ રંગ</string>
     <string name="morphe_patch_options_light_theme_color_description">હેક્સ રંગ (#RRGGBB) અથવા રંગ સંસાધન સંદર્ભ હોઈ શકે છે</string>
-    <string name="morphe_patch_options_icon_instructions_title">આયકન ફોર્મેટ સૂચનાઓ</string>
-    <string name="morphe_patch_options_header_instructions_title">હેડર ફોર્મેટ સૂચનાઓ</string>
     <string name="morphe_patch_options_loading">પેચ વિકલ્પો લોડ કરી રહ્યું છે…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">પેચ બંડલ અપડેટ થાય ત્યાં સુધી રાહ જુઓ</string>
     <string name="morphe_patch_options_load_error">પેચ વિકલ્પો લોડ કરવામાં નિષ્ફળ થયાં</string>
     <string name="morphe_patch_options_no_available">આ પેચ માટે કોઈ વિકલ્પો ઉપલબ્ધ નથી.</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">કસ્ટમ રંગ</string>
-    <string name="morphe_hex_color">હેક્સ રંગ</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">કસ્ટમ બ્રાન્ડિંગ</string>
     <string name="morphe_patch_options_custom_branding_description">એપ્લિકેશનનું ડિસ્પ્લે નામ બદલો</string>
     <string name="morphe_patch_options_custom_branding_app_name">ઍપ્લિકેશનનું નામ</string>
@@ -204,7 +190,7 @@ morphe_adaptive_foreground_custom.png
 વૈકલ્પિક રીતે, પાથમાં કોઈપણ મોનોક્રોમ આઇકોન ફાઇલો સાથે 'ડ્રોએબલ' ફોલ્ડર હોય છે  :
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">કસ્ટમ હેડર લોગો</string>
     <string name="morphe_patch_options_custom_header_description">હેડર લોગો બદલો</string>
     <string name="morphe_patch_options_custom_header_instruction">"કસ્ટમ હેડર લોગો તરીકે ઉપયોગ કરવા માટે છબીઓ સાથેનું ફોલ્ડર.
@@ -226,12 +212,16 @@ morphe_header_custom_dark.png
 - drawable-xxxhdpi: 512x192 px
 
 "</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">શોર્ટ્સ ફીચર્સ છુપાવો</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">શોર્ટ્સનો ઍપ શોર્ટકટ છુપાવો</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">લૉન્ચરમાં લાંબા સમય સુધી દબાવી રાખવાના મેનૂમાંથી શોર્ટ્સ દૂર કરો</string>
     <string name="morphe_patch_options_hide_shorts_widget">શોર્ટ્સ વિજેટ છુપાવો</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">લોન્ચર વિજેટમાંથી શોર્ટ્સ બટન દૂર કરો</string>
+    <!-- System Tab -->
+    <!-- About Section -->
+    <string name="morphe_share_website">વેબસાઇટ બાટો </string>
+    <string name="morphe_share_website_description">સત્તાવાર Morphe વેબસાઇટ બાટો</string>
     <!-- Other strings -->
     <string name="patcher">પેચર</string>
     <string name="patches">પેચો</string>
@@ -269,6 +259,7 @@ morphe_header_custom_dark.png
     <!-- Morphe -->
     <!-- Dormant code and not used -->
     <!-- Dormant code and not used -->
+    <string name="installer_primary_title">ઇન્સ્ટૉલર</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->

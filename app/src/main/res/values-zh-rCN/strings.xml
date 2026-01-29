@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">补丁包</string>
+    <string name="morphe_home_other_apps">其他应用</string>
+    <string name="morphe_home">主页</string>
+    <string name="morphe_home_not_patched_yet">尚未修补</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">有新的更新可用</string>
+    <string name="morphe_home_update_available_subtitle">新版本已准备好安装</string>
+    <string name="morphe_home_update_error">更新失败</string>
+    <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
+    <string name="morphe_home_updating_sources">正在更新源…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d 个源已处理</string>
+    <string name="morphe_home_update_success">源更新完成</string>
+    <string name="morphe_home_update_success_subtitle">您的源已是最新的</string>
+    <string name="morphe_home_sources_are_loading">源正在加载，请稍等…</string>
+    <string name="morphe_home_please_wait">请稍候…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">您想要修补哪个应用程序？</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">准备让YouTube再次传奇吗？</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">从今天开始,拯救应用程序</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">靠咖啡因和好的补丁供电</string>
-    <string name="morphe_home_bundle_type_api">API 包</string>
-    <string name="morphe_home_update_error">更新失败</string>
-    <string name="morphe_home_update_error_subtitle">请检查您的互联网连接并重试</string>
-    <string name="morphe_home_updating_patches">正在更新补丁…</string>
-    <string name="morphe_home_update_success">更新完成</string>
-    <string name="morphe_home_patches_updated">您的补丁已是最新</string>
-    <string name="morphe_home_patches_are_loading">补丁正在加载，请稍候…</string>
-    <string name="morphe_home_please_wait">请稍候…</string>
-    <string name="morphe_home_open_in_browser">在浏览器中打开链接</string>
-    <string name="morphe_home_failed_to_open_url">无法打开网址</string>
-    <string name="morphe_home_date_added">已添加</string>
-    <string name="morphe_home_date_updated">更新于</string>
-    <string name="morphe_home_check_updates">检查更新</string>
-    <string name="morphe_home_unknown">未知</string>
-    <string name="morphe_home_timeline">更新历史记录</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">补丁源</string>
+    <string name="morphe_sources_management_subtitle">已安装%d个源</string>
+    <string name="morphe_sources_delete_confirm_message">确定要删除源“%s”吗？此操作无法撤销。</string>
+    <string name="morphe_sources_open_in_browser">在浏览器中打开链接</string>
+    <string name="morphe_sources_failed_to_open_url">无法打开URL</string>
+    <string name="morphe_sources_date_added">已添加</string>
+    <string name="morphe_sources_date_updated">已更新于</string>
+    <string name="morphe_enabled">已启用</string>
+    <string name="morphe_disabled">已禁用</string>
+    <string name="morphe_rename">重命名</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">添加补丁源</string>
+    <string name="morphe_add_patch_source_remote">远程</string>
+    <string name="morphe_add_patch_source_remote_url">源URL</string>
+    <string name="morphe_add_patch_source_remote_description">输入远程补丁源的JSON端点URL</string>
+    <string name="morphe_add_patch_source_local">本地</string>
+    <string name="morphe_add_patch_source_local_file">选择补丁源文件</string>
+    <string name="morphe_add_patch_source_local_file_description">从存储中选择.mpp补丁源文件</string>
+    <string name="morphe_add_patch_source_local_change_file">更改文件</string>
+    <string name="morphe_home_no_patches_available">无可用更新</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始未打补丁的 APK 吗？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修补 %1$s，您需要版本 %2$s（未修补）</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">选择您下载的APK</string>
     <string name="morphe_home_file_picker_prompt_description">现在选择您刚刚下载的 %1$s APK 文件。</string>
-    <string name="morphe_home_file_picker_prompt_open">打开我下载的APK文件</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">打开我下载的APK文件</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">打开APK文件</string>
     <string name="morphe_home_recommended_version">推荐版本</string>
     <string name="morphe_patcher_selected_version">已选版本</string>
+    <string name="morphe_home_select_apk_title">选择APK</string>
+    <string name="morphe_home_select_any_apk_description">点击下方按钮选择任何应用的APK文件进行修补</string>
+    <string name="morphe_home_invalid_apk">无效的APK文件</string>
+    <string name="morphe_home_no_patches_for_app">此应用无补丁记录</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">高级模式</string>
+    <string name="morphe_expert_mode_subtitle_extended">已选择%d/%2$d个补丁</string>
+    <string name="morphe_expert_mode_search">搜索补丁</string>
+    <string name="morphe_expert_mode_proceed">开始修补</string>
+    <string name="morphe_expert_mode_disable_all">禁用所有</string>
+    <string name="morphe_expert_mode_enable_all">启用所有</string>
+    <string name="morphe_expert_mode_has_options">可配置</string>
+    <string name="morphe_expert_mode_no_results">未找到修补的应用</string>
+    <string name="morphe_expert_mode_no_patches">无可用更新</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">自定义颜色</string>
+    <string name="morphe_hex_color">十六进制颜色</string>
+    <string name="morphe_patch_option_instructions">说明</string>
+    <string name="morphe_patch_option_enter_value">输入值</string>
+    <string name="morphe_patch_option_enter_number">输入数字</string>
+    <string name="morphe_patch_option_enter_decimal">输入小数</string>
+    <string name="morphe_patch_option_pick_folder">选择文件夹</string>
+    <string name="expand">展开</string>
+    <string name="collapse">折叠</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">确定要卸载此应用吗？</string>
+    <string name="saved_app_delete_confirmation">确定要删除选中的应用吗？</string>
+    <string name="saved_copy_delete_confirmation">确定要删除保存的副本吗？</string>
+    <string name="view">查看</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">找不到原始APK。无法重新修补此应用。</string>
+    <string name="morphe_repatch_requires_original">重新修补需要原始APK文件</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">存储管理</string>
+    <string name="morphe_apks_count">%d个APK</string>
+    <string name="morphe_apks_size">总计:%s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">已修补的APK</string>
+    <string name="morphe_patched_apks_title">已修补的APK</string>
+    <string name="morphe_patched_apks_description">管理保存的修补应用文件</string>
+    <string name="morphe_patched_apks_empty">尚未保存任何修补的APK</string>
+    <string name="morphe_patched_apks_delete_title">删除修补的APK？</string>
+    <string name="morphe_patched_apks_delete_confirm">确定要删除已保存的修补APK吗？</string>
+    <string name="morphe_patched_apks_deleted">已成功删除修补的APK</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">原始APK</string>
+    <string name="morphe_original_apks_title">原始APK</string>
+    <string name="morphe_original_apks_description">原始APK文件已保存，用于重新修补。每个应用只保留最近的版本。</string>
+    <string name="morphe_original_apks_empty">未保存任何原始APK</string>
+    <string name="morphe_original_apks_deleted">已成功删除原始APK</string>
+    <string name="morphe_original_apks_saved">原始APK已保存</string>
+    <string name="morphe_original_apks_save_failed">无法保存原始APK</string>
+    <string name="morphe_original_apks_delete_title">删除原始APK？</string>
+    <string name="morphe_original_apks_delete_confirm">确定要删除%s的原始APK吗？无法重新修补将需要提供新的APK。</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root模式需要先在您的设备上安装原始APK，然后才能进行修补。</string>
     <string name="morphe_root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">保存 APK</string>
-    <string name="morphe_patcher_copy_error">复制错误</string>
-    <string name="morphe_patcher_show_error">显示错误</string>
     <string name="morphe_patcher_error_copied">错误已复制到剪贴板</string>
+    <string name="morphe_patcher_error_log">错误日志</string>
+    <string name="morphe_patcher_error_technical">技术细节</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d 个补丁</string>
     <string name="morphe_patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
     <string name="morphe_patcher_installing">正在安装…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">正在调整 1 和 0… 🤖</string>
     <string name="morphe_patcher_message_8">正在解开数字意大利面条… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">正在修复未修补应用中的错误… 🐞</string>
+    <string name="morphe_patcher_message_9">正在修复未修补应用中的错误… 🪲</string>
     <string name="morphe_patcher_message_10">精彩的补丁值得等待… ⏳</string>
     <string name="morphe_patcher_message_11">抛光像素直到它们闪耀… 💎</string>
     <string name="morphe_patcher_message_12">在机长关掉\"正在进行补丁\"标识之前请保持座位…💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
     <string name="morphe_patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">返回 Morphe 主页</string>
-    <string name="morphe_settings_return_to_morphe_description">返回简化模式</string>
-    <string name="morphe_settings_return_to_expert">切换至专家模式</string>
-    <string name="morphe_settings_return_to_expert_description">切换至功能完整的专家模式</string>
-    <string name="morphe_share_website">分享网站</string>
-    <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">应用图标</string>
-    <string name="morphe_app_icon_selector_description">更改应用程序启动图标</string>
-    <string name="morphe_app_icon_default">默认</string>
-    <string name="morphe_app_icon_light_2">天空</string>
-    <string name="morphe_app_icon_light_3">日落</string>
-    <string name="morphe_app_icon_dark_1">大海</string>
-    <string name="morphe_app_icon_dark_2">虚空</string>
-    <string name="morphe_app_icon_dark_3">靛青</string>
-    <string name="morphe_app_icon_change_dialog_title">更改应用图标？</string>
-    <string name="morphe_app_icon_change_dialog_message">切换到\'%1$s\'并重启？</string>
-    <string name="morphe_app_icon_change_dialog_confirm">更改图标</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">外观选项</string>
     <string name="morphe_appearance_options_description">自定义主题、颜色和背景</string>
     <string name="morphe_appearance_current_language">当前语言</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">形状</string>
     <string name="morphe_background_type_snow">雪</string>
     <string name="morphe_background_type_none">无</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">应用图标</string>
+    <string name="morphe_app_icon_selector_description">更改应用程序启动图标</string>
+    <string name="morphe_app_icon_default">默认</string>
+    <string name="morphe_app_icon_light_2">天空</string>
+    <string name="morphe_app_icon_light_3">日落</string>
+    <string name="morphe_app_icon_dark_1">大海</string>
+    <string name="morphe_app_icon_dark_2">虚空</string>
+    <string name="morphe_app_icon_dark_3">靛青</string>
+    <string name="morphe_app_icon_change_dialog_title">更改应用图标？</string>
+    <string name="morphe_app_icon_change_dialog_message">切换到\'%1$s\'并重启？</string>
+    <string name="morphe_app_icon_change_dialog_confirm">更改图标</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">高级设置</string>
+    <string name="morphe_settings_expert_mode">高级模式</string>
+    <string name="morphe_settings_expert_mode_description">启用高级功能和自定义选项</string>
     <string name="morphe_update_use_prereleases">使用预发布版本</string>
     <string name="morphe_update_use_prereleases_description">早期获取新补丁和管理器功能</string>
+    <string name="morphe_patch_options_expert_mode_notice">在高级模式下，修补选项将在修补过程中可用</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">补丁选项</string>
     <string name="morphe_patch_options_youtube_description">主题、品牌、顶部栏以及 Shorts 的选项</string>
     <string name="morphe_patch_options_youtube_music_description">主题和品牌选项</string>
     <string name="morphe_patch_options_restart_message">更改补丁选项需要重新应用补丁才能生效</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">应用主题颜色</string>
     <string name="morphe_patch_options_theme_colors_description">更改背景颜色</string>
     <string name="morphe_patch_options_dark_theme_color">深色主题背景色</string>
     <string name="morphe_patch_options_dark_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
     <string name="morphe_patch_options_light_theme_color">浅色主题背景色</string>
     <string name="morphe_patch_options_light_theme_color_description">可以是十六进制颜色 (#RRGGBB) 或资源参考</string>
-    <string name="morphe_patch_options_icon_instructions_title">图标格式说明</string>
-    <string name="morphe_patch_options_header_instructions_title">标题栏格式说明</string>
     <string name="morphe_patch_options_loading">正在加载补丁选项…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">请等待补丁包更新</string>
+    <string name="morphe_patch_options_waiting_for_source">等待补丁源更新</string>
     <string name="morphe_patch_options_load_error">加载补丁选项失败</string>
     <string name="morphe_patch_options_no_available">对此补丁没有可用选项</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">自定义颜色</string>
-    <string name="morphe_hex_color">十六进制颜色</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">自定义品牌</string>
     <string name="morphe_patch_options_custom_branding_description">更改应用显示名称</string>
     <string name="morphe_patch_options_custom_branding_app_name">应用名称</string>
@@ -203,7 +269,7 @@ morphe_adaptive_foreground_custom.png
 此外，路径下可以包含 'drawable' 文件夹以及以下任意一种单色图标文件:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">自定义顶部标题图片</string>
     <string name="morphe_patch_options_custom_header_description">更改顶部标题图片</string>
     <string name="morphe_patch_options_custom_header_instruction">"用于自定义标题栏图片的文件夹。
@@ -223,12 +289,26 @@ morphe_header_custom_dark.png
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">隐藏 Shorts 功能</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">隐藏 Shorts 应用快捷方式</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">从启动器长按菜单中删除 Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget">隐藏 Shorts 网格图标的部件（小部件？）</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">从启动器小部件中移除 Shorts 按钮</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">性能</string>
+    <string name="morphe_process_runtime">进程运行时</string>
+    <string name="morphe_process_runtime_description">以提高稳定性，将修补过程放在单独的进程中运行</string>
+    <string name="morphe_process_runtime_memory_limit">内存限制</string>
+    <string name="morphe_process_runtime_memory_limit_help">较高的内存限制可以加快修补速度，但可能无法在旧设备上工作</string>
+    <string name="morphe_enable_process_runtime">启用进程运行时</string>
+    <string name="morphe_memory_limit_subtitle">可用于修补的内存</string>
+    <string name="morphe_memory_limit_warning">较低的内存限制可能会在修补较大应用时导致失败</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB限制</string>
+    <string name="morphe_process_runtime_disabled_description">点击配置</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">分享网站</string>
+    <string name="morphe_share_website_description">分享官方的 Morphe 网站</string>
     <!-- Other strings -->
     <string name="patcher">修补程序</string>
     <string name="patches">补丁</string>
@@ -772,7 +852,7 @@ morphe_header_custom_dark.png
     <string name="path_selector_files">文件</string>
     <string name="show_password_field">显示密码</string>
     <string name="hide_password_field">隐藏密码</string>
-    <string name="installer_primary_title">主要安装程序</string>
+    <string name="installer_primary_title">安装程序</string>
     <string name="installer_fallback_title">备用安装程序</string>
     <string name="installer_internal_name">系统安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
@@ -881,7 +961,7 @@ morphe_header_custom_dark.png
     <string name="select_install_type">选择安装类型</string>
     <string name="patcher_step_group_preparing">准备中</string>
     <string name="patcher_step_load_patches">加载补丁</string>
-    <string name="patcher_step_prepare_split_apk">合并分块 APK</string>
+    <string name="patcher_step_prepare_split_apk">合并分割的APK</string>
     <string name="patcher_step_unpack">读取APK文件</string>
     <string name="patcher_step_group_patching">修补中</string>
     <string name="patcher_step_group_saving">保存中</string>

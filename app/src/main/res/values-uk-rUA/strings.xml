@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Пакет патчу</string>
+    <string name="morphe_home_other_apps">Інші застосунки</string>
+    <string name="morphe_home">Головна</string>
+    <string name="morphe_home_not_patched_yet">Ще не патчено</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Оновлення доступне</string>
+    <string name="morphe_home_update_available_subtitle">Нова версія готова до встановлення</string>
+    <string name="morphe_home_update_error">Помилка оновлення</string>
+    <string name="morphe_home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
+    <string name="morphe_home_updating_sources">Оновлення джерел…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d джерел оброблено</string>
+    <string name="morphe_home_update_success">Оновлення джерел завершено</string>
+    <string name="morphe_home_update_success_subtitle">Ваші джерела актуальні</string>
+    <string name="morphe_home_sources_are_loading">Джерела завантажуються, будь ласка, зачекайте…</string>
+    <string name="morphe_home_please_wait">Будь ласка, зачекайте…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Який додаток ви хочете пропатчити?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Готові зробити YouTube знову легендарним?</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Рятуємо додатки від них самих, починаючи з сьогодні</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">На каві та хороших оновленнях</string>
-    <string name="morphe_home_bundle_type_api">Пакет API</string>
-    <string name="morphe_home_update_error">Помилка оновлення</string>
-    <string name="morphe_home_update_error_subtitle">Перевірте підключення до Інтернету та спробуйте знову</string>
-    <string name="morphe_home_updating_patches">Оновлення патчів…</string>
-    <string name="morphe_home_update_success">Оновлення завершено</string>
-    <string name="morphe_home_patches_updated">Ваші патчі актуальні</string>
-    <string name="morphe_home_patches_are_loading">Патчі завантажуються, будь ласка, зачекайте…</string>
-    <string name="morphe_home_please_wait">Будь ласка, зачекайте…</string>
-    <string name="morphe_home_open_in_browser">Відкрити в браузері</string>
-    <string name="morphe_home_failed_to_open_url">Не вдалося відкрити URL</string>
-    <string name="morphe_home_date_added">Додано</string>
-    <string name="morphe_home_date_updated">Оновлено</string>
-    <string name="morphe_home_check_updates">Перевірити</string>
-    <string name="morphe_home_unknown">Невідомо</string>
-    <string name="morphe_home_timeline">Історія оновлень</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Джерела</string>
+    <string name="morphe_sources_management_subtitle">%d джерел встановлено</string>
+    <string name="morphe_sources_delete_confirm_message">Видалити джерело «%s»? Це не можна відмінити.</string>
+    <string name="morphe_sources_open_in_browser">Відкрити в браузері</string>
+    <string name="morphe_sources_failed_to_open_url">Не вдалося відкрити URL</string>
+    <string name="morphe_sources_date_added">Додано</string>
+    <string name="morphe_sources_date_updated">Оновлено</string>
+    <string name="morphe_enabled">Увімкнено</string>
+    <string name="morphe_disabled">Вимкнено</string>
+    <string name="morphe_rename">Перейменувати</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Додати джерело патчів</string>
+    <string name="morphe_add_patch_source_remote">Віддалений</string>
+    <string name="morphe_add_patch_source_remote_url">URL джерела</string>
+    <string name="morphe_add_patch_source_remote_description">Введіть URL JSON-ендпоінту для віддаленого джерела патчів</string>
+    <string name="morphe_add_patch_source_local">Локальний</string>
+    <string name="morphe_add_patch_source_local_file">Вибрати файл джерела патчів</string>
+    <string name="morphe_add_patch_source_local_file_description">Вибрати файл .mpp джерела патчів із сховища</string>
+    <string name="morphe_add_patch_source_local_change_file">Змінити файл</string>
+    <string name="morphe_home_no_patches_available">Ні патчів доступно</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">У вас є непатчений оригінальний APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Щоб пропатчити %1$s, потрібна версія %2$s (непатчена)</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Виберіть завантажений APK</string>
     <string name="morphe_home_file_picker_prompt_description">Тепер виберіть файл %1$s APK, який ви щойно завантажили.</string>
-    <string name="morphe_home_file_picker_prompt_open">Відкрити завантажений APK</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Відкрити завантажений APK</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Відкрити файл APK</string>
     <string name="morphe_home_recommended_version">Рекомендована версія</string>
     <string name="morphe_patcher_selected_version">Вибрана версія</string>
+    <string name="morphe_home_select_apk_title">Вибрати APK</string>
+    <string name="morphe_home_select_any_apk_description">Натисніть кнопку нижче, щоб вибрати файл APK будь-якого застосунку для патчування</string>
+    <string name="morphe_home_invalid_apk">Недійсний файл APK</string>
+    <string name="morphe_home_no_patches_for_app">Ні патчів доступно для цього застосунку</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Режим експерта</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d з %2$d патчів вибрано</string>
+    <string name="morphe_expert_mode_search">Пошук патчів</string>
+    <string name="morphe_expert_mode_proceed">Продовжити патчування</string>
+    <string name="morphe_expert_mode_disable_all">Вимкнути все</string>
+    <string name="morphe_expert_mode_enable_all">Увімкнути все</string>
+    <string name="morphe_expert_mode_has_options">Налаштовуване</string>
+    <string name="morphe_expert_mode_no_results">Ні патчів знайдено</string>
+    <string name="morphe_expert_mode_no_patches">Ні патчів доступно</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Користувацький колір</string>
+    <string name="morphe_hex_color">Шістнадцятковий колір</string>
+    <string name="morphe_patch_option_instructions">Інструкції</string>
+    <string name="morphe_patch_option_enter_value">Ввести значення</string>
+    <string name="morphe_patch_option_enter_number">Ввести число</string>
+    <string name="morphe_patch_option_enter_decimal">Ввести десяткове</string>
+    <string name="morphe_patch_option_pick_folder">Вибрати папку</string>
+    <string name="expand">Розгорнути</string>
+    <string name="collapse">Згорнути</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Ви впевнені, що хочете деінсталювати цей застосунок?</string>
+    <string name="saved_app_delete_confirmation">Ви впевнені, що хочете видалити цей збережений застосунок?</string>
+    <string name="saved_copy_delete_confirmation">Ви впевнені, що хочете видалити збережену копію?</string>
+    <string name="view">Переглянути</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Оригінальний файл APK не знайдено. Неможливо патчувати цей застосунок.</string>
+    <string name="morphe_repatch_requires_original">Патчування вимагає оригінального файлу APK</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Керування сховищем</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Загальний розмір: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Патчені файли APK</string>
+    <string name="morphe_patched_apks_title">Патчені файли APK</string>
+    <string name="morphe_patched_apks_description">Керування збереженими патченими файлами застосунку</string>
+    <string name="morphe_patched_apks_empty">Жодних патчених файлів APK ще не збережено</string>
+    <string name="morphe_patched_apks_delete_title">Видалити патчений файл APK?</string>
+    <string name="morphe_patched_apks_delete_confirm">Ви впевнені, що хочете видалити збережений патчений файл APK для %s?</string>
+    <string name="morphe_patched_apks_deleted">Патчений файл APK успішно видалено</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Оригінальні файли APK</string>
+    <string name="morphe_original_apks_title">Оригінальні файли APK</string>
+    <string name="morphe_original_apks_description">Оригінальні файли APK зберігаються для патчування. Зберігається лише остання версія для кожного застосунку.</string>
+    <string name="morphe_original_apks_empty">Ні оригінальних файлів APK не збережено</string>
+    <string name="morphe_original_apks_deleted">Оригінальний файл APK успішно видалено</string>
+    <string name="morphe_original_apks_saved">Оригінальний файл APK збережено</string>
+    <string name="morphe_original_apks_save_failed">Не вдалося зберегти оригінальний файл APK</string>
+    <string name="morphe_original_apks_delete_title">Видалити оригінальний файл APK?</string>
+    <string name="morphe_original_apks_delete_confirm">Видалити оригінальний файл APK для %s? Ви не зможете патчувати без надання нового файлу APK.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Режим root вимагає, щоб оригінальний APK був встановлений на вашому пристрої перед патчінгом.</string>
     <string name="morphe_root_gmscore_excluded">Патч підтримки GmsCore виключено у режимі root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Зберегти APK</string>
-    <string name="morphe_patcher_copy_error">Скопіювати помилку</string>
-    <string name="morphe_patcher_show_error">Показати помилку</string>
     <string name="morphe_patcher_error_copied">Помилку скопійовано у буфер обміну</string>
+    <string name="morphe_patcher_error_log">Журнал помилок</string>
+    <string name="morphe_patcher_error_technical">Технічні відомості</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d патчів</string>
     <string name="morphe_patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
     <string name="morphe_patcher_installing">Встановлення…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">Налаштування 1 та 0… 🤖</string>
     <string name="morphe_patcher_message_8">Розплутування цифрової спагетті… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Виправлення помилок у непатченому застосунку… 🐞</string>
+    <string name="morphe_patcher_message_9">Виправлення помилок у непатченому застосунку… 🪲</string>
     <string name="morphe_patcher_message_10">Великі патчі варті очікування… ⏳</string>
     <string name="morphe_patcher_message_11">Полірування пікселів до блиску… 💎</string>
     <string name="morphe_patcher_message_12">Будь ласка, залишайтеся на місці, поки капітан не вимкне знак «Триває патчінг»… 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Ваш додаток має підвищену температуру, і єдиний рятунок — більше патчів… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Видалення нісенітниці. Будь ласка, зачекайте… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Повернутися до Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Повернутися до спрощеного режиму</string>
-    <string name="morphe_settings_return_to_expert">Змінити на Експертний режим</string>
-    <string name="morphe_settings_return_to_expert_description">Перемкнути до повнофункціонального експертного режиму</string>
-    <string name="morphe_share_website">Поділитися вебсайтом</string>
-    <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Значок застосунку</string>
-    <string name="morphe_app_icon_selector_description">Змінити значок застосунку</string>
-    <string name="morphe_app_icon_default">Стандартний</string>
-    <string name="morphe_app_icon_light_2">Небо</string>
-    <string name="morphe_app_icon_light_3">Захід сонця</string>
-    <string name="morphe_app_icon_dark_1">Океан</string>
-    <string name="morphe_app_icon_dark_2">Пустота</string>
-    <string name="morphe_app_icon_dark_3">Індиго</string>
-    <string name="morphe_app_icon_change_dialog_title">Змінити значок застосунку?</string>
-    <string name="morphe_app_icon_change_dialog_message">Змінити на «%1$s» і перезапустити?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Змінити значок</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Налаштування вигляду</string>
     <string name="morphe_appearance_options_description">Налаштуйте теми, кольори та фонові колірні схеми</string>
     <string name="morphe_appearance_current_language">Поточна мова</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Фігури</string>
     <string name="morphe_background_type_snow">Сніг</string>
     <string name="morphe_background_type_none">Немає</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Іконка додатку</string>
+    <string name="morphe_app_icon_selector_description">Змінити значок застосунку</string>
+    <string name="morphe_app_icon_default">Стандартний</string>
+    <string name="morphe_app_icon_light_2">Небо</string>
+    <string name="morphe_app_icon_light_3">Захід сонця</string>
+    <string name="morphe_app_icon_dark_1">Океан</string>
+    <string name="morphe_app_icon_dark_2">Пустота</string>
+    <string name="morphe_app_icon_dark_3">Індиго</string>
+    <string name="morphe_app_icon_change_dialog_title">Змінити значок застосунку?</string>
+    <string name="morphe_app_icon_change_dialog_message">Змінити на «%1$s» і перезапустити?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Змінити значок</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Налаштування експерта</string>
+    <string name="morphe_settings_expert_mode">Режим експерта</string>
+    <string name="morphe_settings_expert_mode_description">Увімкнути розширені функції та налаштування</string>
     <string name="morphe_update_use_prereleases">Використовувати тестові версії</string>
     <string name="morphe_update_use_prereleases_description">Отримуйте ранній доступ до нових патчів та функцій менеджера</string>
+    <string name="morphe_patch_options_expert_mode_notice">У режимі експерта опції патчування будуть доступні під час процесу патчування</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Параметри патчів</string>
     <string name="morphe_patch_options_youtube_description">Тема, брендинг, заголовок та параметри Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Параметри теми та брендингу</string>
     <string name="morphe_patch_options_restart_message">Зміна параметрів патчу потребує повторного патчінгу додатка для застосування змін</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Кольори теми</string>
     <string name="morphe_patch_options_theme_colors_description">Змінити колір фону</string>
     <string name="morphe_patch_options_dark_theme_color">Колір фону темної теми</string>
     <string name="morphe_patch_options_dark_theme_color_description">Може бути шістнадцятковим кольором (#RRGGBB) або посиланням на ресурс кольору</string>
     <string name="morphe_patch_options_light_theme_color">Колір фону світлої теми</string>
     <string name="morphe_patch_options_light_theme_color_description">Може бути шістнадцятковим кольором (#RRGGBB) або посиланням на ресурс кольору</string>
-    <string name="morphe_patch_options_icon_instructions_title">Інструкції щодо формату іконки</string>
-    <string name="morphe_patch_options_header_instructions_title">Інструкції щодо формату логотипу заголовку</string>
     <string name="morphe_patch_options_loading">Завантаження параметрів патчів...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Зачекайте, поки пакет патчів буде оновлено</string>
+    <string name="morphe_patch_options_waiting_for_source">Зачекайте, поки джерело патчів буде оновлено</string>
     <string name="morphe_patch_options_load_error">Не вдалося завантажити параметри патчу</string>
     <string name="morphe_patch_options_no_available">Для цього патчу немає доступних параметрів</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Користувацький колір</string>
-    <string name="morphe_hex_color">Шістнадцятковий колір</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Користувацький брендинг</string>
     <string name="morphe_patch_options_custom_branding_description">Змінити ім’я додатка</string>
     <string name="morphe_patch_options_custom_branding_app_name">Назва додатку</string>
@@ -204,7 +270,7 @@ morphe_adaptive_foreground_custom.png
 За бажанням, шлях може містити папку drawable з будь-яким із файлів монохромної іконки:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Користувацький логотип заголовку</string>
     <string name="morphe_patch_options_custom_header_description">Замінити логотип заголовку</string>
     <string name="morphe_patch_options_custom_header_instruction">"Папка з зображеннями для використання користувацького логотипу заголовку.
@@ -224,12 +290,26 @@ morphe_header_custom_dark.png
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Приховати функціонал Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Приховати ярлик Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Прибрати Shorts з меню довгого натискання у лаунчері</string>
     <string name="morphe_patch_options_hide_shorts_widget">Приховати віджет Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Прибрати кнопку Shorts з віджета лаунчера</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Робота системи</string>
+    <string name="morphe_process_runtime">Час виконання процесу</string>
+    <string name="morphe_process_runtime_description">Виконувати патчування в окремому процесі для кращої стабільності</string>
+    <string name="morphe_process_runtime_memory_limit">Ліміт пам\'яті</string>
+    <string name="morphe_process_runtime_memory_limit_help">Вищі ліміти пам\'яті можуть пришвидшити патчування, але можуть не працювати з старішими пристроями</string>
+    <string name="morphe_enable_process_runtime">Увімкнути виконання процесу</string>
+    <string name="morphe_memory_limit_subtitle">Пам\'ять доступна для патчування</string>
+    <string name="morphe_memory_limit_warning">Низький ліміт пам\'яті може спричинити помилки при патчуванні більших застосунків</string>
+    <string name="morphe_process_runtime_enabled_description">%d МБ ліміт</string>
+    <string name="morphe_process_runtime_disabled_description">Натисніть, щоб налаштувати</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Поділитися вебсайтом</string>
+    <string name="morphe_share_website_description">Поділитися офіційним вебсайтом Morphe</string>
     <!-- Other strings -->
     <string name="patcher">Патчер</string>
     <string name="patches">Патчі</string>
@@ -797,7 +877,7 @@ morphe_header_custom_dark.png
     <string name="path_selector_files">Файли</string>
     <string name="show_password_field">Показати пароль</string>
     <string name="hide_password_field">Приховати пароль</string>
-    <string name="installer_primary_title">Основний інсталятор</string>
+    <string name="installer_primary_title">Інсталятор</string>
     <string name="installer_fallback_title">Файлбек інсталятор</string>
     <string name="installer_internal_name">Системний інсталятор</string>
     <string name="installer_internal_description">Використовувати менеджер пакетів Android</string>
