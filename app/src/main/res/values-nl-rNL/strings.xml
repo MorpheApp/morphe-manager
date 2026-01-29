@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-bundel</string>
+    <string name="morphe_home_other_apps">Andere apps</string>
+    <string name="morphe_home">Thuis</string>
+    <string name="morphe_home_not_patched_yet">Nog niet gepatcht</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Manager update beschikbaar</string>
+    <string name="morphe_home_update_available_subtitle">Nieuwe versie gereed voor installatie</string>
+    <string name="morphe_home_update_error">Update mislukt</string>
+    <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
+    <string name="morphe_home_updating_sources">Bronnen worden geüpdatet…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d bronnen verwerkt</string>
+    <string name="morphe_home_update_success">Bronnen worden geüpdatet</string>
+    <string name="morphe_home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
+    <string name="morphe_home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
+    <string name="morphe_home_please_wait">Een ogenblik geduld...</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Welke app wil je patchen?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Klaar om YouTube legendarisch te maken?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Hang de gordel om, het is tijd om te patchen</string>
+    <string name="morphe_home_greeting_3">Riemen vast, het is tijd om te patchen</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Weer een dag, weer een meesterwerk zonder advertenties</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Apps redden van zichzelf sinds vandaag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Aangedreven door cafeïne en goede patches</string>
-    <string name="morphe_home_bundle_type_api">API-bundel</string>
-    <string name="morphe_home_update_error">Update mislukt</string>
-    <string name="morphe_home_update_error_subtitle">Controleer uw internetverbinding en probeer het opnieuw</string>
-    <string name="morphe_home_updating_patches">Patches worden bijgewerkt…</string>
-    <string name="morphe_home_update_success">Update voltooid</string>
-    <string name="morphe_home_patches_updated">Je patches zijn up-to-date</string>
-    <string name="morphe_home_patches_are_loading">Patches worden geladen, een ogenblik geduld...</string>
-    <string name="morphe_home_please_wait">Een ogenblik geduld...</string>
-    <string name="morphe_home_open_in_browser">Open in de browser</string>
-    <string name="morphe_home_failed_to_open_url">Kan URL niet openen</string>
-    <string name="morphe_home_date_added">Toegevoegd</string>
-    <string name="morphe_home_date_updated">Bijgewerkt</string>
-    <string name="morphe_home_check_updates">Controleren</string>
-    <string name="morphe_home_unknown">Onbekend</string>
-    <string name="morphe_home_timeline">Update geschiedenis</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Bronnen</string>
+    <string name="morphe_sources_management_subtitle">%d bronnen geïnstalleerd</string>
+    <string name="morphe_sources_delete_confirm_message">Bron \"%s\" verwijderen? Dit kan niet ongedaan gemaakt worden.</string>
+    <string name="morphe_sources_open_in_browser">Open in browser</string>
+    <string name="morphe_sources_failed_to_open_url">Kan URL niet openen</string>
+    <string name="morphe_sources_date_added">Toegevoegd</string>
+    <string name="morphe_sources_date_updated">Bijgewerkt</string>
+    <string name="morphe_enabled">Ingeschakeld</string>
+    <string name="morphe_disabled">Uitgeschakeld</string>
+    <string name="morphe_rename">Hernoemen</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Patchbron toevoegen</string>
+    <string name="morphe_add_patch_source_remote">Remote</string>
+    <string name="morphe_add_patch_source_remote_url">Bron-URL</string>
+    <string name="morphe_add_patch_source_remote_description">Voer de JSON-eindpunt-URL in voor de remote-bron.</string>
+    <string name="morphe_add_patch_source_local">Lokaal</string>
+    <string name="morphe_add_patch_source_local_file">Selecteer een .mpp-bronbestand van de opslag</string>
+    <string name="morphe_add_patch_source_local_file_description">Selecteer een .mpp-bronbestand van de opslag</string>
+    <string name="morphe_add_patch_source_local_change_file">Bestand wijzigen</string>
+    <string name="morphe_home_no_patches_available">Geen patches beschikbaar</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selecteer de APK die je hebt gedownload</string>
     <string name="morphe_home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat je zojuist hebt gedownload.</string>
-    <string name="morphe_home_file_picker_prompt_open">Open gedownloade APK-bestand</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Open APK-bestand dat ik gedownload heb</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Open APK-bestand</string>
     <string name="morphe_home_recommended_version">Aanbevolen versie</string>
     <string name="morphe_patcher_selected_version">Gekozen versie</string>
+    <string name="morphe_home_select_apk_title">Selecteer APK</string>
+    <string name="morphe_home_select_any_apk_description">Klik op de knop hieronder om een APK-bestand van elke app te selecteren voor het patchen.</string>
+    <string name="morphe_home_invalid_apk">Ongeldig APK-bestand</string>
+    <string name="morphe_home_no_patches_for_app">Geen patches beschikbaar voor deze app</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Expert-modus</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d van %2$d patches geselecteerd</string>
+    <string name="morphe_expert_mode_search">Zoek patches</string>
+    <string name="morphe_expert_mode_proceed">Doorgaan met patchen</string>
+    <string name="morphe_expert_mode_disable_all">Uitschakelen</string>
+    <string name="morphe_expert_mode_enable_all">Inschakelen</string>
+    <string name="morphe_expert_mode_has_options">Aanpasbaar</string>
+    <string name="morphe_expert_mode_no_results">Geen patches gevonden</string>
+    <string name="morphe_expert_mode_no_patches">Geen patches beschikbaar</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Aangepaste kleur</string>
+    <string name="morphe_hex_color">Hex-kleur</string>
+    <string name="morphe_patch_option_instructions">Instructies</string>
+    <string name="morphe_patch_option_enter_value">Waarde invoeren</string>
+    <string name="morphe_patch_option_enter_number">Getal invoeren</string>
+    <string name="morphe_patch_option_enter_decimal">Decimaal invoeren</string>
+    <string name="morphe_patch_option_pick_folder">Map selecteren</string>
+    <string name="expand">Uitvouwen</string>
+    <string name="collapse">Inklappen</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Weet u zeker dat u deze app wilt deïnstalleren?</string>
+    <string name="saved_app_delete_confirmation">Weet u zeker dat u deze opgeslagen app wilt verwijderen?</string>
+    <string name="saved_copy_delete_confirmation">Weet u zeker dat u de opgeslagen kopie wilt verwijderen?</string>
+    <string name="view">Bekijken</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Origineel APK niet gevonden. Kan deze app niet repatchen.</string>
+    <string name="morphe_repatch_requires_original">Repatch vereist het originele APK-bestand</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Opslagbeheer</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Totaal: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Gepatched APKs</string>
+    <string name="morphe_patched_apks_title">Gepatched APKs</string>
+    <string name="morphe_patched_apks_description">Beheer opgeslagen gepatchte appbestanden</string>
+    <string name="morphe_patched_apks_empty">Nog geen gepatchte APKs opgeslagen</string>
+    <string name="morphe_patched_apks_delete_title">Gepatched APK verwijderen?</string>
+    <string name="morphe_patched_apks_delete_confirm">Weet u zeker dat u de opgeslagen gepatchte APK voor %s wilt verwijderen?</string>
+    <string name="morphe_patched_apks_deleted">Gepatched APK succesvol verwijderd</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Originele APKs</string>
+    <string name="morphe_original_apks_title">Originele APKs</string>
+    <string name="morphe_original_apks_description">Originele APK-bestanden worden opgeslagen voor het repatchen. Alleen de nieuwste versie wordt bewaard voor elke app.</string>
+    <string name="morphe_original_apks_empty">Geen originele APKs opgeslagen</string>
+    <string name="morphe_original_apks_deleted">Origineel APK succesvol verwijderd</string>
+    <string name="morphe_original_apks_saved">Origineel APK opgeslagen</string>
+    <string name="morphe_original_apks_save_failed">Kan origineel APK niet opslaan</string>
+    <string name="morphe_original_apks_delete_title">Origineel APK verwijderen?</string>
+    <string name="morphe_original_apks_delete_confirm">Origineel APK voor %s verwijderen? U kunt niet repatchen zonder een nieuw APK te verstrekken.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Rootmodus vereist dat de originele APK op uw apparaat is geïnstalleerd voordat u gaat patchen.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK opslaan</string>
-    <string name="morphe_patcher_copy_error">Kopieerfout</string>
-    <string name="morphe_patcher_show_error">Toon fout</string>
     <string name="morphe_patcher_error_copied">Fout gekopieerd naar klembord</string>
+    <string name="morphe_patcher_error_log">Foutenlog</string>
+    <string name="morphe_patcher_error_technical">Technische details</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patches</string>
     <string name="morphe_patcher_long_step_warning">Deze stap kan even duren. Een ogenblik geduld...</string>
     <string name="morphe_patcher_installing">Installeren...</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">1\'en en 0\'en aan het aanpassen… 🤖</string>
     <string name="morphe_patcher_message_8">Digitale spaghetti aan het ontwarren… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Bugs aan het repareren in de ongepatchte app… 🐞</string>
+    <string name="morphe_patcher_message_9">Bugs in de on gepatchte app worden opgelost… 🪲</string>
     <string name="morphe_patcher_message_10">Geweldige patches zijn het wachten waard… ⏳</string>
     <string name="morphe_patcher_message_11">Pixels aan het polijsten tot ze glimmen… 💎</string>
     <string name="morphe_patcher_message_12">Blijf zitten totdat de kapitein het \"Patching in progress\"-teken uitschakelt... 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Uw app heeft koorts, en de enige remedie zijn meer patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Verwijder onzin. Even geduld… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Terug naar Morphe-startscherm</string>
-    <string name="morphe_settings_return_to_morphe_description">Terugkeren naar vereenvoudigde modus</string>
-    <string name="morphe_settings_return_to_expert">Schakel over naar Expertmodus</string>
-    <string name="morphe_settings_return_to_expert_description">Schakel over naar de volledig ondersteunde expertmodus</string>
-    <string name="morphe_share_website">Deel website</string>
-    <string name="morphe_share_website_description">De officiële Morphe website delen</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">App-pictogram</string>
-    <string name="morphe_app_icon_selector_description">Verander het app-icoon</string>
-    <string name="morphe_app_icon_default">Standaard</string>
-    <string name="morphe_app_icon_light_2">Lucht</string>
-    <string name="morphe_app_icon_light_3">Zonsondergang</string>
-    <string name="morphe_app_icon_dark_1">Oceaan</string>
-    <string name="morphe_app_icon_dark_2">Leegte</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">App-pictogram wijzigen?</string>
-    <string name="morphe_app_icon_change_dialog_message">Wijzigen naar \'%1$s\' en herstarten?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Pictogram wijzigen</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Uitzettingsvoorkeuren</string>
     <string name="morphe_appearance_options_description">Aanpassen van thema\'s, kleuren en achtergronden</string>
     <string name="morphe_appearance_current_language">Huidige taal</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Vormen</string>
     <string name="morphe_background_type_snow">Sneeuw</string>
     <string name="morphe_background_type_none">Geen</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">App-pictogram</string>
+    <string name="morphe_app_icon_selector_description">Verander het app-icoon</string>
+    <string name="morphe_app_icon_default">Standaard</string>
+    <string name="morphe_app_icon_light_2">Lucht</string>
+    <string name="morphe_app_icon_light_3">Zonsondergang</string>
+    <string name="morphe_app_icon_dark_1">Oceaan</string>
+    <string name="morphe_app_icon_dark_2">Leegte</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">App-pictogram wijzigen?</string>
+    <string name="morphe_app_icon_change_dialog_message">Wijzigen naar \'%1$s\' en herstarten?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Pictogram wijzigen</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Expert-instellingen</string>
+    <string name="morphe_settings_expert_mode">Expert-modus</string>
+    <string name="morphe_settings_expert_mode_description">Schakel voorbehouden functies en aanpassingsopties in</string>
     <string name="morphe_update_use_prereleases">Gebruik voor-release-versies</string>
     <string name="morphe_update_use_prereleases_description">Krijg vroege toegang tot nieuwe patches en beheerdersfuncties</string>
+    <string name="morphe_patch_options_expert_mode_notice">In Expert-modus zullen patchopties beschikbaar zijn tijdens het patchen</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Patchvoorkeuren</string>
     <string name="morphe_patch_options_youtube_description">Thema, branding, header en Shorts-opties</string>
     <string name="morphe_patch_options_youtube_music_description">Thema- en brandingopties</string>
     <string name="morphe_patch_options_restart_message">Wijziging van patchopties vereist herinstallatie van de app om in te werken</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">App-themetekens</string>
     <string name="morphe_patch_options_theme_colors_description">Verander achtergrondkleur</string>
     <string name="morphe_patch_options_dark_theme_color">Donkere themeka: Kleur</string>
     <string name="morphe_patch_options_dark_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
     <string name="morphe_patch_options_light_theme_color">Lichte themeka: Kleur</string>
     <string name="morphe_patch_options_light_theme_color_description">Kan een hex- kleur (#RRGGBB) of een kleurreferentie zijn</string>
-    <string name="morphe_patch_options_icon_instructions_title">Icoonindelingstitel</string>
-    <string name="morphe_patch_options_header_instructions_title">Hooftitelindelingstitel</string>
     <string name="morphe_patch_options_loading">Patchvoorkeuren worden geladen...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Wacht tot het patchpakket wordt bijgewerkt</string>
+    <string name="morphe_patch_options_waiting_for_source">Wacht tot de bronbron is geüpdatet</string>
     <string name="morphe_patch_options_load_error">Mislukt om patchopties te laden</string>
     <string name="morphe_patch_options_no_available">Geen beschikbare opties voor deze patch</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Aangepaste kleur</string>
-    <string name="morphe_hex_color">Hex-kleur</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Aangepaste branding</string>
     <string name="morphe_patch_options_custom_branding_description">Verander toon van de app</string>
     <string name="morphe_patch_options_custom_branding_app_name">Appnaam</string>
@@ -204,7 +270,7 @@ De afmetingen van de afbeeldingen moeten het volgende zijn:
 Optioneel is het pad uitgerust met een 'drawable' map die enkele van de zwart-witte icoon-bestanden bevat:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Aangepaste kophooglogo</string>
     <string name="morphe_patch_options_custom_header_description">Verander kophooglogo</string>
     <string name="morphe_patch_options_custom_header_instruction">"Mappenmap met afbeeldingen voor het gebruik als aangepast kophooglogo.
@@ -224,12 +290,26 @@ De afmetingen van de afbeeldingen moeten het volgende zijn:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Verberg Shorts-functies</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Verberg Shorts-app-shortcut</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Verwijder Shorts uit het lang-drukmenu van de launcher</string>
     <string name="morphe_patch_options_hide_shorts_widget">Verberg Shorts-widget</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Verwijder de Shorts-knop uit het launcher-widget</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Prestaties</string>
+    <string name="morphe_process_runtime">Process-runtime</string>
+    <string name="morphe_process_runtime_description">Voer patchen uit in een apart proces voor betere stabiliteit</string>
+    <string name="morphe_process_runtime_memory_limit">Geheugenlimiet</string>
+    <string name="morphe_process_runtime_memory_limit_help">Hogere geheugenlimieten kunnen het patchen versnellen, maar werken mogelijk niet met oudere apparaten</string>
+    <string name="morphe_enable_process_runtime">Process-runtime inschakelen</string>
+    <string name="morphe_memory_limit_subtitle">Geheugen beschikbaar voor patchen</string>
+    <string name="morphe_memory_limit_warning">Een lage geheugenlimiet kan mislukken bij het patchen van grotere apps</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB limiet</string>
+    <string name="morphe_process_runtime_disabled_description">Klik om te configureren</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Deel website</string>
+    <string name="morphe_share_website_description">De officiële Morphe website delen</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patches</string>
@@ -799,7 +879,7 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="path_selector_files">Bestanden</string>
     <string name="show_password_field">Wachtwoord tonen</string>
     <string name="hide_password_field">Wachtwoord verbergen</string>
-    <string name="installer_primary_title">Primaire installer</string>
+    <string name="installer_primary_title">Installer</string>
     <string name="installer_fallback_title">Fallback-installatie</string>
     <string name="installer_internal_name">Systeeminstaller</string>
     <string name="installer_internal_description">Gebruik de Android-pakketinstaller</string>
@@ -908,7 +988,7 @@ Details: %2$s"</string>
     <string name="select_install_type">Instellingstype selecteren</string>
     <string name="patcher_step_group_preparing">Voorbereiden</string>
     <string name="patcher_step_load_patches">Patches laden</string>
-    <string name="patcher_step_prepare_split_apk">Gesplitste APK samenvoegen</string>
+    <string name="patcher_step_prepare_split_apk">Splits APK samenvoegen</string>
     <string name="patcher_step_unpack">APK-bestand lezen</string>
     <string name="patcher_step_group_patching">Patchen</string>
     <string name="patcher_step_group_saving">Opslaan</string>

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Tampal Pekej</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">Kemas kini gagal</string>
+    <string name="morphe_home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
+    <string name="morphe_home_please_wait">Sila tunggu…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Sedia untuk membuat YouTube menjadi legenda semula? </string>
@@ -21,21 +25,12 @@
     <string name="morphe_home_greeting_9">Menyimpan aplikasi daripada diri mereka sendiri sejak hari ini</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Dikuasakan oleh kafein dan tampalan yang bagus</string>
-    <string name="morphe_home_bundle_type_api">Pekej API</string>
-    <string name="morphe_home_update_error">Kemas kini gagal</string>
-    <string name="morphe_home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
-    <string name="morphe_home_updating_patches">Mengemas kini tampalan…</string>
-    <string name="morphe_home_update_success">Kemas kini selesai</string>
-    <string name="morphe_home_patches_updated">Tampalan kamu adalah yang terkini </string>
-    <string name="morphe_home_patches_are_loading">Tampalan sedang dimuatkan, sila tunggu…</string>
-    <string name="morphe_home_please_wait">Sila tunggu…</string>
-    <string name="morphe_home_open_in_browser">Buka dalam pelayar web</string>
-    <string name="morphe_home_failed_to_open_url">Gagal untuk membuka URL</string>
-    <string name="morphe_home_date_added">Tambah</string>
-    <string name="morphe_home_date_updated">Kemas kini</string>
-    <string name="morphe_home_check_updates">Semak</string>
-    <string name="morphe_home_unknown">Tidak diketahui</string>
-    <string name="morphe_home_timeline">Sejarah kemas kini</string>
+    <!-- Sources Management -->
+    <string name="morphe_sources_open_in_browser">Buka dalam pelayar web</string>
+    <string name="morphe_sources_failed_to_open_url">Gagal untuk membuka URL</string>
+    <string name="morphe_sources_date_added">Tambah</string>
+    <string name="morphe_sources_date_updated">Kemas kini</string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Adakah kamu mempunyai APK asal yang belum ditampal?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Untuk menampal %1$s, kamu memerlukan versi %2$s (belum ditampal)</string>
@@ -55,16 +50,20 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Pilih APK yang telah kamu muat turun</string>
     <string name="morphe_home_file_picker_prompt_description">Sekarang pilih %1$s fail APK yang kamu baru muat turun. </string>
-    <string name="morphe_home_file_picker_prompt_open">Buka fail APK yang saya muat turun</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Buka fail APK yang saya muat turun</string>
     <string name="morphe_home_recommended_version">Versi yang disyorkan</string>
     <string name="morphe_patcher_selected_version">Versi terpilih</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal.</string>
     <string name="morphe_root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Simpan APK</string>
-    <string name="morphe_patcher_copy_error"> Salin ralat</string>
-    <string name="morphe_patcher_show_error">Tunjuk ralat</string>
     <string name="morphe_patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d ditampal</string>
     <string name="morphe_patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
@@ -100,7 +99,7 @@
     <string name="morphe_patcher_message_7">Melaraskan 1 dan 0… 🤖</string>
     <string name="morphe_patcher_message_8">Menguraikan spageti digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Membetulkan pepijat dalam aplikasi yang belum ditampal… 🐞</string>
+    <string name="morphe_patcher_message_9">Membetulkan pepijat dalam aplikasi yang belum ditampal… 🪲</string>
     <string name="morphe_patcher_message_10">Tampalan yang hebat berbaloi untuk ditunggu… ⏳</string>
     <string name="morphe_patcher_message_11">Menggilap piksel sehingga ia bersinar… 💎</string>
     <string name="morphe_patcher_message_12">Sila kekal duduk sehingga kapten mematikan tanda \"Tampalan sedang dijalankan\"… 💺✈️</string>
@@ -114,18 +113,18 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Buang butang Shorts dari widget pelancar</string>
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <string name="patcher">Penampal</string>
     <string name="patches">Tampalan</string>
@@ -194,6 +193,7 @@
     <!-- Morphe -->
     <!-- Dormant code and not used -->
     <!-- Dormant code and not used -->
+    <string name="installer_primary_title">Pemasang</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->

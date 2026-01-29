@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Paket zakrpa</string>
+    <string name="morphe_home_other_apps">Ostale aplikacije</string>
+    <string name="morphe_home">Početna</string>
+    <string name="morphe_home_not_patched_yet">Još nisu ispravljene</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Ažuriranje menadžera dostupno</string>
+    <string name="morphe_home_update_available_subtitle">Nova verzija sprema za instalaciju</string>
+    <string name="morphe_home_update_error">Ažuriranje nije uspelo</string>
+    <string name="morphe_home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
+    <string name="morphe_home_updating_sources">Ažuriranje izvora…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d izvora obrađeno</string>
+    <string name="morphe_home_update_success">Ažuriranje izvora završeno</string>
+    <string name="morphe_home_update_success_subtitle">Vaši izvori su ažurirani</string>
+    <string name="morphe_home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
+    <string name="morphe_home_please_wait">Molimo sačekajte…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Koju aplikaciju želite da popravite?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Spremni ste da YouTube učinite legendarnim ponovo?</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Spasavamo aplikacije od njih samih od danas</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Pokretane kafom i dobrim zakrpama</string>
-    <string name="morphe_home_bundle_type_api">API paket</string>
-    <string name="morphe_home_update_error">Ažuriranje nije uspelo</string>
-    <string name="morphe_home_update_error_subtitle">Proverite internet vezu i pokušajte ponovo</string>
-    <string name="morphe_home_updating_patches">Ažuriraju se zakrpe…</string>
-    <string name="morphe_home_update_success">Ažuriranje završeno</string>
-    <string name="morphe_home_patches_updated">Vaše zakrpe su ažurirane</string>
-    <string name="morphe_home_patches_are_loading">Zakrpe se učitavaju, molimo sačekajte…</string>
-    <string name="morphe_home_please_wait">Molimo sačekajte…</string>
-    <string name="morphe_home_open_in_browser">Otvori u pregledačāku</string>
-    <string name="morphe_home_failed_to_open_url">Neuspešno otvaranje URL-a</string>
-    <string name="morphe_home_date_added">Dodato</string>
-    <string name="morphe_home_date_updated">Ažurirano</string>
-    <string name="morphe_home_check_updates">Proveri</string>
-    <string name="morphe_home_unknown">Nepoznato</string>
-    <string name="morphe_home_timeline">Istorija ažuriranja</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Izvori</string>
+    <string name="morphe_sources_management_subtitle">%d izvora instalirano</string>
+    <string name="morphe_sources_delete_confirm_message">Izbriši izvor \"%s\"? Ovo ne može biti poništeno.</string>
+    <string name="morphe_sources_open_in_browser">Otvori u pregledniku</string>
+    <string name="morphe_sources_failed_to_open_url">Neuspeh pri otvaranju URL-a</string>
+    <string name="morphe_sources_date_added">Dodato</string>
+    <string name="morphe_sources_date_updated">Ažurirano</string>
+    <string name="morphe_enabled">Omogućen</string>
+    <string name="morphe_disabled">Onemogućen</string>
+    <string name="morphe_rename">Preimenovanje</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Dodaj izvor za patch</string>
+    <string name="morphe_add_patch_source_remote">Udaljeno</string>
+    <string name="morphe_add_patch_source_remote_url">URL izvora</string>
+    <string name="morphe_add_patch_source_remote_description">Unesite JSON krajnjicu URL-a za udaljeni izvor za patch</string>
+    <string name="morphe_add_patch_source_local">Lokalno</string>
+    <string name="morphe_add_patch_source_local_file">Odaberite datoteku za izvor za patch</string>
+    <string name="morphe_add_patch_source_local_file_description">Odaberite datoteku .mpp za izvor za patch sa pohrane</string>
+    <string name="morphe_add_patch_source_local_change_file">Promeni datoteku</string>
+    <string name="morphe_home_no_patches_available">Nema dostupnih patchova</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Da li poseduješ originalni ne-zakrpljeni APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Da bi zakrpio %1$s, potrebna ti je verzija %2$s (nekrpljena)</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Izaberi APK koji si preuzeo</string>
     <string name="morphe_home_file_picker_prompt_description">Sada izaberi %1$s APK fajl koji si upravo preuzeo.</string>
-    <string name="morphe_home_file_picker_prompt_open">Otvori APK fajl koji sam preuzeo</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Otvori APK datoteku koju sam preuzeo</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Otvori APK datoteku</string>
     <string name="morphe_home_recommended_version">Preporučena verzija</string>
     <string name="morphe_patcher_selected_version">Izabrana verzija</string>
+    <string name="morphe_home_select_apk_title">Odaberite APK</string>
+    <string name="morphe_home_select_any_apk_description">Kliknite dugme ispod da odaberete APK datoteku bilo koje aplikacije za patchiranje</string>
+    <string name="morphe_home_invalid_apk">Nevažeća APK datoteka</string>
+    <string name="morphe_home_no_patches_for_app">Nema patchova za ovu aplikaciju</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Režim eksperta</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d od %2$d patchova odabrano</string>
+    <string name="morphe_expert_mode_search">Pretraži patchove</string>
+    <string name="morphe_expert_mode_proceed">Nastavi patchiranje</string>
+    <string name="morphe_expert_mode_disable_all">Onemogući sve</string>
+    <string name="morphe_expert_mode_enable_all">Omogući sve</string>
+    <string name="morphe_expert_mode_has_options">Podešljivo</string>
+    <string name="morphe_expert_mode_no_results">Nema pronađenih patchova</string>
+    <string name="morphe_expert_mode_no_patches">Nema dostupnih patchova</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Prilagođena boja</string>
+    <string name="morphe_hex_color">Boja u heksadecimalnom formatu</string>
+    <string name="morphe_patch_option_instructions">Upute</string>
+    <string name="morphe_patch_option_enter_value">Unesite vrednost</string>
+    <string name="morphe_patch_option_enter_number">Unesite broj</string>
+    <string name="morphe_patch_option_enter_decimal">Unesite decimalni broj</string>
+    <string name="morphe_patch_option_pick_folder">Odaberite folder</string>
+    <string name="expand">Proširi</string>
+    <string name="collapse">Smanji</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Da li zaista želite da deinstalirate ovu aplikaciju?</string>
+    <string name="saved_app_delete_confirmation">Da li zaista želite da obrišete spremljenu aplikaciju?</string>
+    <string name="saved_copy_delete_confirmation">Da li zaista želite da obrišete spremljenu kopiju?</string>
+    <string name="view">Pogledaj</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Originalna APK nije nađena. Ne može se ponovo patchirati ova aplikacija.</string>
+    <string name="morphe_repatch_requires_original">Ponovo patchiranje zahteva originalnu APK datoteku</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Upravljanje pohranom</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Ukupna veličina: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Patchovani APK-ovi</string>
+    <string name="morphe_patched_apks_title">Patchovani APK-ovi</string>
+    <string name="morphe_patched_apks_description">Upravljajte spremljenim patchovanim datotekama aplikacija</string>
+    <string name="morphe_patched_apks_empty">Još uvek nema spremljenih patchovanih APK-ova</string>
+    <string name="morphe_patched_apks_delete_title">Obriši patchovani APK?</string>
+    <string name="morphe_patched_apks_delete_confirm">Da li zaista želite da obrišete patchovani APK za %s? </string>
+    <string name="morphe_patched_apks_deleted">Patchovani APK obrisan uspešno</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Originalni APK-ovi</string>
+    <string name="morphe_original_apks_title">Originalni APK-ovi</string>
+    <string name="morphe_original_apks_description">Originalne APK datoteke su spremljene za ponovo patchiranje. Samo najnovija verzija je zadržana za svaku aplikaciju.</string>
+    <string name="morphe_original_apks_empty">Nema spremljenih originalnih APK-ova</string>
+    <string name="morphe_original_apks_deleted">Originalni APK obrisan uspešno</string>
+    <string name="morphe_original_apks_saved">Originalni APK spremljen</string>
+    <string name="morphe_original_apks_save_failed">Neuspeh pri spremanju originalnog APK</string>
+    <string name="morphe_original_apks_delete_title">Obriši originalni APK?</string>
+    <string name="morphe_original_apks_delete_confirm">Obriši originalni APK za %s? Nećete moći da ponovo patchirate bez pružanja nove APK datoteke.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root režim zahteva da originalni APK bude instaliran na tvom uređaju pre zakrpe.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore zakrpa za podršku je isključena u root modu</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Sačuvaj APK</string>
-    <string name="morphe_patcher_copy_error">Greška pri kopiranju</string>
-    <string name="morphe_patcher_show_error">Prikaži grešku</string>
     <string name="morphe_patcher_error_copied">Greška kopirana u privremenu memoriju</string>
+    <string name="morphe_patcher_error_log">Dnevnik grešaka</string>
+    <string name="morphe_patcher_error_technical">Tehničke informacije</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d zakrpa</string>
     <string name="morphe_patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
     <string name="morphe_patcher_installing">Instaliram…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">Podešavanje 1 i 0… 🤖</string>
     <string name="morphe_patcher_message_8">Odvajanje digitalnih špageta… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Ispravljanje grešaka u nezapečenoj aplikaciji… 🐞</string>
+    <string name="morphe_patcher_message_9">Popravljam greške u nepatchiranoj aplikaciji… 🪲</string>
     <string name="morphe_patcher_message_10">Vredi čekati sjajne zakrpe… ⏳</string>
     <string name="morphe_patcher_message_11">Poliranje piksela dok ne zasijaju… 💎</string>
     <string name="morphe_patcher_message_12">Molimo vas da ostanete u sedištima dok kapetan ne isključi znak \"Zakrpa u toku\"... 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Vaša aplikacija ima temperaturu, a jedini lek je više zakrpa… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Uklanjanje besmislica. Molimo pričekajte… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Povratak na Morphe početnu stranicu</string>
-    <string name="morphe_settings_return_to_morphe_description">Povratak na pojednostavljeni režim</string>
-    <string name="morphe_settings_return_to_expert">Promijeni u ekspertski nač Čarad</string>
-    <string name="morphe_settings_return_to_expert_description">Prebaci na punofunkcionalni ekspertski nač</string>
-    <string name="morphe_share_website">Deli veb-sajt</string>
-    <string name="morphe_share_website_description">Podelite zvanični Morphe veb-sajt</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Ikonica aplikacije</string>
-    <string name="morphe_app_icon_selector_description">Promenite ikonu pokretača aplikacije</string>
-    <string name="morphe_app_icon_default">Podrazumevana</string>
-    <string name="morphe_app_icon_light_2">Neбо</string>
-    <string name="morphe_app_icon_light_3">Sunset</string>
-    <string name="morphe_app_icon_dark_1">Okean</string>
-    <string name="morphe_app_icon_dark_2">Praznina</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Promena ikone aplikacije?</string>
-    <string name="morphe_app_icon_change_dialog_message">Promeniti u \'%1$s\' i ponovo pokrenuti?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Promeni ikonu</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Opcije izgleda</string>
     <string name="morphe_appearance_options_description">Prilagođaj teme, boje i pozadinske likove</string>
     <string name="morphe_appearance_current_language">Trenutni jezik</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Oblici</string>
     <string name="morphe_background_type_snow">Sneg</string>
     <string name="morphe_background_type_none">Nijedan</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Ikonica aplikacije</string>
+    <string name="morphe_app_icon_selector_description">Promenite ikonu pokretača aplikacije</string>
+    <string name="morphe_app_icon_default">Podrazumevana</string>
+    <string name="morphe_app_icon_light_2">Neбо</string>
+    <string name="morphe_app_icon_light_3">Sunset</string>
+    <string name="morphe_app_icon_dark_1">Okean</string>
+    <string name="morphe_app_icon_dark_2">Praznina</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Promeni ikonu aplikacije?</string>
+    <string name="morphe_app_icon_change_dialog_message">Promeniti u \'%1$s\' i ponovo pokrenuti?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Promeni ikonu</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Postavke za eksperte</string>
+    <string name="morphe_settings_expert_mode">Režim eksperta</string>
+    <string name="morphe_settings_expert_mode_description">Omogućite napredne značajke i opcije personalizacije</string>
     <string name="morphe_update_use_prereleases">Koristi preizdanja verzije</string>
     <string name="morphe_update_use_prereleases_description">Dohvatite ranji pristup nošim ispravkama i menadžerskim značajkama</string>
+    <string name="morphe_patch_options_expert_mode_notice">U režimu eksperta patch opcije će biti dostupne tokom procesa patchiranja</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Opcije začinjavanja</string>
     <string name="morphe_patch_options_youtube_description">Tema, branding, header i opcije za Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opcije za temu i branding</string>
     <string name="morphe_patch_options_restart_message">Ponovno patchovanje aplikacije je potrebno da bi izmjene učinile učinkovitim</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Boje teme</string>
     <string name="morphe_patch_options_theme_colors_description">Izmeni boju pozadine</string>
     <string name="morphe_patch_options_dark_theme_color">Boja pozadine tamne teme</string>
     <string name="morphe_patch_options_dark_theme_color_description">Može biti hex boja (#RRGGBB) ili referenca na resurs boje</string>
     <string name="morphe_patch_options_light_theme_color">Boja pozadine svetle osećajne teme</string>
     <string name="morphe_patch_options_light_theme_color_description">Može biti hex boja (#RRGGBB) ili referenca na resurs boje</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instrukcije za format ikone</string>
-    <string name="morphe_patch_options_header_instructions_title">Instrukcije za format naslova</string>
     <string name="morphe_patch_options_loading">Učitavanje opcija začinjavanja…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Izčitavanje sučeka za bundle</string>
+    <string name="morphe_patch_options_waiting_for_source">Sačekajte dok se izvor za patch ažurira</string>
     <string name="morphe_patch_options_load_error">Neuspjelo učitavanje opcija za patch</string>
     <string name="morphe_patch_options_no_available">Nema dostupnih opcija za ovaj začinjivač</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Prilagođena boja</string>
-    <string name="morphe_hex_color">Boja u heksadecimalnom formatu</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Prilagođene markiranje</string>
     <string name="morphe_patch_options_custom_branding_description">Izmeni ime prikaza aplikacije</string>
     <string name="morphe_patch_options_custom_branding_app_name">Naziv aplikacije</string>
@@ -204,7 +270,7 @@ Dimenzije slika moraju da budu sledeće:
 Ispostavqeno, putanja sadrži foldjer 'drawable' sa monohromaticnim datotečima ikona:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Prilagođeno naslovno logo</string>
     <string name="morphe_patch_options_custom_header_description">Izmeni naslovno logo</string>
     <string name="morphe_patch_options_custom_header_instruction">"Foldjer sa slikama za korišćenje kao prilagođeno naslovno logo.
@@ -224,12 +290,26 @@ Dimenzije slika moraju da budu sledeće:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Sakrij Shorts funkcije</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Sakrij Shorts aplikacijski skraćivač</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Ukloni Shorts iz menija dužine pritiska launcher</string>
     <string name="morphe_patch_options_hide_shorts_widget">Sakrij Shorts widget</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Ukloni dugme za Shorts iz launcher widgeta</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Performanse</string>
+    <string name="morphe_process_runtime">Vremenska ograničenja procesa</string>
+    <string name="morphe_process_runtime_description">Izvrši patchiranje u odvojenom procesu za bolju stabilnost</string>
+    <string name="morphe_process_runtime_memory_limit">Ograničenje memorije</string>
+    <string name="morphe_process_runtime_memory_limit_help">Viši ograničenja memorije mogu ubrzati patchiranje ali možda neće funkcionisati sa starijim uređajima</string>
+    <string name="morphe_enable_process_runtime">Omogući vremenska ograničenja procesa</string>
+    <string name="morphe_memory_limit_subtitle">Memorija dostupna za patchiranje</string>
+    <string name="morphe_memory_limit_warning">Niska ograničenja memorije može uzrokovati neuspehe pri patchiranju većih aplikacija</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB ograničenje</string>
+    <string name="morphe_process_runtime_disabled_description">Kliknite da konfigurisate</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Deli veb-sajt</string>
+    <string name="morphe_share_website_description">Podelite zvanični Morphe veb-sajt</string>
     <!-- Other strings -->
     <string name="patcher">Alat za zakrpljavanje</string>
     <string name="patches">Zakrpe</string>
@@ -799,7 +879,7 @@ Ona je kompatibilna samo sa sledećom verzijom: %2$s."</string>
     <string name="path_selector_files">Datoteke</string>
     <string name="show_password_field">Prikaži lozinku</string>
     <string name="hide_password_field">Sakrij lozinku</string>
-    <string name="installer_primary_title">Primarni instalacioni program</string>
+    <string name="installer_primary_title">Instalator</string>
     <string name="installer_fallback_title">Rezervni instalacioni program</string>
     <string name="installer_internal_name">Sistemski instalacioni program</string>
     <string name="installer_internal_description">Koristi instalacioni program paketa Android</string>
@@ -908,7 +988,7 @@ Detalji: %2$s"</string>
     <string name="select_install_type">Izaberi tip instalacije</string>
     <string name="patcher_step_group_preparing">Priprema</string>
     <string name="patcher_step_load_patches">Učitavanje zakrpa</string>
-    <string name="patcher_step_prepare_split_apk">Spoji deljenu APK datoteku</string>
+    <string name="patcher_step_prepare_split_apk">Spojivanje APK-ova</string>
     <string name="patcher_step_unpack">Pročitajte datoteku APK</string>
     <string name="patcher_step_group_patching">Zakrpljivanje</string>
     <string name="patcher_step_group_saving">Čuvanje</string>
