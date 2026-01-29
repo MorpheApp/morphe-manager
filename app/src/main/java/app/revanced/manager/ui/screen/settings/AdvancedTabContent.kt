@@ -57,7 +57,7 @@ fun AdvancedTabContent(
     ) {
         // Updates
         SectionTitle(
-            text = stringResource(R.string.updates),
+            text = stringResource(R.string.settings_advanced_updates),
             icon = Icons.Outlined.Update
         )
 
@@ -77,8 +77,8 @@ fun AdvancedTabContent(
             leadingContent = {
                 MorpheIcon(icon = Icons.Outlined.Science)
             },
-            title = stringResource(R.string.morphe_update_use_prereleases),
-            subtitle = stringResource(R.string.morphe_update_use_prereleases_description),
+            title = stringResource(R.string.settings_advanced_updates_use_prereleases),
+            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description),
             trailingContent = {
                 Switch(
                     checked = usePrereleases.value,
@@ -89,7 +89,7 @@ fun AdvancedTabContent(
 
         // Expert settings section
         SectionTitle(
-            text = stringResource(R.string.morphe_expert_section),
+            text = stringResource(R.string.settings_advanced_expert),
             icon = Icons.Outlined.Engineering
         )
 
@@ -103,8 +103,8 @@ fun AdvancedTabContent(
             leadingContent = {
                 MorpheIcon(icon = Icons.Outlined.Psychology)
             },
-            title = stringResource(R.string.morphe_settings_expert_mode),
-            subtitle = stringResource(R.string.morphe_settings_expert_mode_description),
+            title = stringResource(R.string.settings_advanced_expert_mode),
+            subtitle = stringResource(R.string.settings_advanced_expert_mode_description),
             trailingContent = {
                 Switch(
                     checked = useExpertMode,
@@ -112,17 +112,6 @@ fun AdvancedTabContent(
                 )
             }
         )
-
-        // For now hide 'Return to URV mode' button
-//        if (useExpertMode) {
-//            SettingsItem(
-//                icon = Icons.Outlined.SwapHoriz,
-//                title = "Change to URV mode",
-//                description = "Switch to the full-featured URV mode",
-//                onClick = onBackToAdvanced,
-//                showBorder = true
-//            )
-//        }
 
         // Strip unused native libraries (Expert mode only)
         if (useExpertMode) {
@@ -136,8 +125,8 @@ fun AdvancedTabContent(
                 leadingContent = {
                     MorpheIcon(icon = Icons.Outlined.LayersClear)
                 },
-                title = stringResource(R.string.strip_unused_libs),
-                subtitle = stringResource(R.string.strip_unused_libs_description),
+                title = stringResource(R.string.settings_advanced_strip_unused_libs),
+                subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description),
                 trailingContent = {
                     Switch(
                         checked = stripUnusedNativeLibs,
@@ -151,14 +140,14 @@ fun AdvancedTabContent(
             // In Expert mode Notice shown instead of patch options
             InfoBadge(
                 icon = Icons.Outlined.Info,
-                text = stringResource(R.string.morphe_patch_options_expert_mode_notice),
+                text = stringResource(R.string.settings_advanced_patch_options_expert_mode_notice),
                 style = InfoBadgeStyle.Warning,
                 isExpanded = true
             )
         } else if (!useExpertMode) {
             // Patch Options  (Simple mode only)
             SectionTitle(
-                text = stringResource(R.string.morphe_patch_options),
+                text = stringResource(R.string.settings_advanced_patch_options),
                 icon = Icons.Outlined.Tune
             )
 

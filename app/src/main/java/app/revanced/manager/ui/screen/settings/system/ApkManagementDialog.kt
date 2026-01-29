@@ -116,12 +116,12 @@ private fun PatchedApksContent(
     var itemToDelete by remember { mutableStateOf<InstalledApp?>(null) }
 
     ApkManagementDialogContent(
-        title = stringResource(R.string.morphe_patched_apks_management),
+        title = stringResource(R.string.settings_system_patched_apks_management),
         icon = Icons.Outlined.Apps,
         count = apkItems.size,
         totalSize = totalSize,
         isEmpty = apkItems.isEmpty(),
-        emptyMessage = stringResource(R.string.morphe_patched_apks_empty),
+        emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
         itemsContent = {
             apkItems.forEachIndexed { index, item ->
@@ -135,9 +135,9 @@ private fun PatchedApksContent(
 
     if (itemToDelete != null) {
         DeleteConfirmationDialog(
-            title = stringResource(R.string.morphe_patched_apks_delete_title),
+            title = stringResource(R.string.settings_system_patched_apks_delete_title),
             message = stringResource(
-                R.string.morphe_patched_apks_delete_confirm,
+                R.string.settings_system_patched_apks_delete_confirm,
                 itemToDelete!!.currentPackageName
             ),
             onDismiss = { itemToDelete = null },
@@ -155,7 +155,7 @@ private fun PatchedApksContent(
                     }
 
                     repository.delete(itemToDelete!!)
-                    context.toast(context.getString(R.string.morphe_patched_apks_deleted))
+                    context.toast(context.getString(R.string.settings_system_patched_apks_deleted))
                     itemToDelete = null
                 }
             }
@@ -196,12 +196,12 @@ private fun OriginalApksContent(
     var itemToDelete by remember { mutableStateOf<OriginalApk?>(null) }
 
     ApkManagementDialogContent(
-        title = stringResource(R.string.morphe_original_apks_management),
+        title = stringResource(R.string.settings_system_original_apks_management),
         icon = Icons.Outlined.Storage,
         count = apkItems.size,
         totalSize = totalSize,
         isEmpty = apkItems.isEmpty(),
-        emptyMessage = stringResource(R.string.morphe_original_apks_empty),
+        emptyMessage = stringResource(R.string.settings_system_original_apks_empty),
         onDismissRequest = onDismissRequest,
         itemsContent = {
             apkItems.forEachIndexed { index, item ->
@@ -215,16 +215,16 @@ private fun OriginalApksContent(
 
     if (itemToDelete != null) {
         DeleteConfirmationDialog(
-            title = stringResource(R.string.morphe_original_apks_delete_title),
+            title = stringResource(R.string.settings_system_original_apks_delete_title),
             message = stringResource(
-                R.string.morphe_original_apks_delete_confirm,
+                R.string.settings_system_original_apks_delete_confirm,
                 itemToDelete!!.packageName
             ),
             onDismiss = { itemToDelete = null },
             onConfirm = {
                 scope.launch {
                     repository.delete(itemToDelete!!)
-                    context.toast(context.getString(R.string.morphe_original_apks_deleted))
+                    context.toast(context.getString(R.string.settings_system_original_apks_deleted))
                     itemToDelete = null
                 }
             }
@@ -271,13 +271,13 @@ private fun ApkManagementDialogContent(
                 ) {
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_apks_count, count),
+                            text = stringResource(R.string.settings_system_apks_count, count),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = LocalDialogTextColor.current
                         )
                         Text(
-                            text = stringResource(R.string.morphe_apks_size, formatBytes(totalSize)),
+                            text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize)),
                             style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current
                         )
@@ -321,7 +321,7 @@ private fun ApkItem(
         title = data.displayName,
         subtitle = data.packageName,
         details = stringResource(
-            R.string.morphe_apk_item_info,
+            R.string.settings_system_apk_item_info,
             data.version,
             formatBytes(data.fileSize)
         ),

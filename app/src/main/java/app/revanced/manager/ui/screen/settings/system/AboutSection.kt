@@ -71,8 +71,8 @@ fun AboutSection(
         // Share Website item
         SettingsItem(
             icon = Icons.Outlined.Language,
-            title = stringResource(R.string.morphe_share_website),
-            description = stringResource(R.string.morphe_share_website_description),
+            title = stringResource(R.string.settings_system_share_website),
+            description = stringResource(R.string.settings_system_share_website_description),
             onClick = {
                 runCatching {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -82,7 +82,7 @@ fun AboutSection(
                     context.startActivity(
                         Intent.createChooser(
                             shareIntent,
-                            context.getString(R.string.morphe_share_website)
+                            context.getString(R.string.settings_system_share_website)
                         )
                     )
                 }.onFailure {

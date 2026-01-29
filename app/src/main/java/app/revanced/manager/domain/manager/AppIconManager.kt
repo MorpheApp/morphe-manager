@@ -23,42 +23,42 @@ class AppIconManager(private val context: Context) {
     ) {
         DEFAULT(
             aliasName = "app.revanced.manager.MainActivity_Default",
-            displayNameResId = R.string.morphe_app_icon_default,
+            displayNameResId = R.string.settings_appearance_app_icon_default,
             previewIconResId = R.mipmap.ic_launcher
         ),
 
         // Light variant 2 (Sky theme)
         LIGHT_2(
             aliasName = "app.revanced.manager.MainActivity_Light_2",
-            displayNameResId = R.string.morphe_app_icon_light_2,
+            displayNameResId = R.string.settings_appearance_app_icon_light_2,
             previewIconResId = R.mipmap.ic_launcher_light_2
         ),
 
         // Light variant 3 (Sunset theme)
         LIGHT_3(
             aliasName = "app.revanced.manager.MainActivity_Light_3",
-            displayNameResId = R.string.morphe_app_icon_light_3,
+            displayNameResId = R.string.settings_appearance_app_icon_light_3,
             previewIconResId = R.mipmap.ic_launcher_light_3
         ),
 
         // Dark variant 1 (Ocean theme)
         DARK_1(
             aliasName = "app.revanced.manager.MainActivity_Dark_1",
-            displayNameResId = R.string.morphe_app_icon_dark_1,
+            displayNameResId = R.string.settings_appearance_app_icon_dark_1,
             previewIconResId = R.mipmap.ic_launcher_dark_1
         ),
 
         // Dark variant 2 (Void theme)
         DARK_2(
             aliasName = "app.revanced.manager.MainActivity_Dark_2",
-            displayNameResId = R.string.morphe_app_icon_dark_2,
+            displayNameResId = R.string.settings_appearance_app_icon_dark_2,
             previewIconResId = R.mipmap.ic_launcher_dark_2
         ),
 
         // Dark variant 3 (Indigo theme)
         DARK_3(
             aliasName = "app.revanced.manager.MainActivity_Dark_3",
-            displayNameResId = R.string.morphe_app_icon_dark_3,
+            displayNameResId = R.string.settings_appearance_app_icon_dark_3,
             previewIconResId = R.mipmap.ic_launcher_dark_3
         );
 
@@ -98,15 +98,5 @@ class AppIconManager(private val context: Context) {
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             0
         )
-    }
-
-    /**
-     * Check if an icon is currently active
-     */
-    fun isIconActive(icon: AppIcon): Boolean {
-        val componentName = icon.getComponentName(context)
-        val state = packageManager.getComponentEnabledSetting(componentName)
-        return state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED ||
-                (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && icon == AppIcon.DEFAULT)
     }
 }

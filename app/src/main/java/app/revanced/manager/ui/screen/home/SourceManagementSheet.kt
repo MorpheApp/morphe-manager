@@ -101,13 +101,13 @@ fun BundleManagementSheet(
                 ) {
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_home_sources),
+                            text = stringResource(R.string.sources_management_title),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             text = stringResource(
-                                R.string.morphe_sources_management_subtitle,
+                                R.string.sources_management_subtitle,
                                 sources.size
                             ),
                             style = MaterialTheme.typography.bodySmall,
@@ -166,7 +166,7 @@ fun BundleManagementSheet(
                                 try {
                                     uriHandler.openUri(pageUrl)
                                 } catch (_: Exception) {
-                                    context.toast(context.getString(R.string.morphe_sources_failed_to_open_url))
+                                    context.toast(context.getString(R.string.sources_management_failed_to_open_url))
                                 }
                             },
                             forceExpanded = isSingleDefaultBundle
@@ -312,7 +312,7 @@ private fun BundleManagementCard(
                                 contentDescription = null
                             )
                             Spacer(Modifier.width(8.dp))
-                            Text(stringResource(R.string.morphe_sources_open_in_browser))
+                            Text(stringResource(R.string.sources_management_open_in_browser))
                         }
                     }
 
@@ -440,7 +440,7 @@ private fun BundleCardHeader(
                 // Disabled badge
                 if (!enabled) {
                     InfoBadge(
-                        text = stringResource(R.string.morphe_disabled),
+                        text = stringResource(R.string.disabled),
                         style = InfoBadgeStyle.Error,
                         icon = null,
                         isCompact = true
@@ -464,7 +464,7 @@ private fun BundleCardHeader(
             IconButton(onClick = onRename) {
                 Icon(
                     Icons.Outlined.Edit,
-                    contentDescription = stringResource(R.string.morphe_rename),
+                    contentDescription = stringResource(R.string.rename),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -571,7 +571,7 @@ private fun BundleMetaCard(
                     )
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_sources_date_added),
+                            text = stringResource(R.string.sources_management_date_added),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                         )
@@ -600,7 +600,7 @@ private fun BundleMetaCard(
                     )
                     Column {
                         Text(
-                            text = stringResource(R.string.morphe_sources_date_updated),
+                            text = stringResource(R.string.sources_management_date_updated),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                         )
@@ -620,9 +620,9 @@ private fun BundleMetaCard(
 @Composable
 private fun BundleTypeBadge(bundle: PatchBundleSource) {
     val text = when {
-        bundle.isDefault -> stringResource(R.string.bundle_type_preinstalled)
-        bundle is RemotePatchBundle -> stringResource(R.string.bundle_type_remote)
-        else -> stringResource(R.string.bundle_type_local)
+        bundle.isDefault -> stringResource(R.string.sources_dialog_preinstalled)
+        bundle is RemotePatchBundle -> stringResource(R.string.sources_dialog_remote)
+        else -> stringResource(R.string.sources_dialog_local)
     }
 
     InfoBadge(

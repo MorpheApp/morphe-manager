@@ -101,7 +101,7 @@ fun AboutDialog(onDismiss: () -> Unit) {
                     color = textColor
                 )
                 Text(
-                    text = "Version ${BuildConfig.VERSION_NAME}",
+                    text = stringResource(R.string.version) + " " + BuildConfig.VERSION_NAME,
                     style = MaterialTheme.typography.bodyMedium,
                     color = secondaryColor
                 )
@@ -109,7 +109,7 @@ fun AboutDialog(onDismiss: () -> Unit) {
 
             // Description
             Text(
-                text = stringResource(R.string.revanced_manager_description),
+                text = stringResource(R.string.settings_system_manager_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center,

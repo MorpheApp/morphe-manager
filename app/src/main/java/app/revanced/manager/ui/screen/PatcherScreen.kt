@@ -164,7 +164,7 @@ fun PatcherScreen(
             val steps = patcherViewModel.steps
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
             state.errorMessage = failedStep?.message
-                ?: context.getString(R.string.morphe_patcher_unknown_error)
+                ?: context.getString(R.string.patcher_unknown_error)
             state.showErrorBottomSheet = true
         }
     }
@@ -300,7 +300,7 @@ fun PatcherScreen(
 
                     // Title
                     Text(
-                        text = stringResource(R.string.morphe_patcher_failed_dialog_title),
+                        text = stringResource(R.string.patcher_failed_dialog_title),
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
@@ -329,14 +329,14 @@ fun PatcherScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = stringResource(R.string.morphe_patcher_error_log),
+                                    text = stringResource(R.string.patcher_error_log),
                                     style = MaterialTheme.typography.labelLarge,
                                     fontWeight = FontWeight.SemiBold,
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
 
                                 InfoBadge(
-                                    text = stringResource(R.string.morphe_patcher_error_technical),
+                                    text = stringResource(R.string.patcher_error_technical),
                                     style = InfoBadgeStyle.Error,
                                     isCompact = true
                                 )
@@ -377,7 +377,7 @@ fun PatcherScreen(
                     FilledTonalButton(
                         onClick = {
                             clipboardManager.setText(AnnotatedString(state.errorMessage))
-                            context.toast(context.getString(R.string.morphe_patcher_error_copied))
+                            context.toast(context.getString(R.string.patcher_error_copied))
                         },
                         modifier = Modifier
                             .weight(1f)

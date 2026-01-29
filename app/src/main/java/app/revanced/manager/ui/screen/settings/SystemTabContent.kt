@@ -103,17 +103,17 @@ fun SystemTabContent(
         // Performance (Expert mode only)
         if (useExpertMode) {
             SectionTitle(
-                text = stringResource(R.string.morphe_performance),
+                text = stringResource(R.string.settings_system_performance),
                 icon = Icons.Outlined.Speed
             )
 
             SectionCard {
                 RichSettingsItem(
                     onClick = { showProcessRuntimeDialog = true },
-                    title = stringResource(R.string.morphe_process_runtime),
+                    title = stringResource(R.string.settings_system_process_runtime),
                     subtitle = if (useProcessRuntime)
-                        stringResource(R.string.morphe_process_runtime_enabled_description, memoryLimit)
-                    else stringResource(R.string.morphe_process_runtime_disabled_description),
+                        stringResource(R.string.settings_system_process_runtime_enabled_description, memoryLimit)
+                    else stringResource(R.string.settings_system_process_runtime_disabled_description),
                     leadingContent = {
                         MorpheIcon(icon = Icons.Outlined.Memory)
                     },
@@ -123,8 +123,8 @@ fun SystemTabContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             InfoBadge(
-                                text = if (useProcessRuntime) stringResource(R.string.morphe_enabled)
-                                else stringResource(R.string.morphe_disabled),
+                                text = if (useProcessRuntime) stringResource(R.string.enabled)
+                                else stringResource(R.string.disabled),
                                 style = if (useProcessRuntime) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
                                 isCompact = true
                             )
@@ -138,7 +138,7 @@ fun SystemTabContent(
         // Import & Export (Expert mode only)
         if (useExpertMode) {
             SectionTitle(
-                text = stringResource(R.string.import_export),
+                text = stringResource(R.string.settings_system_import_export),
                 icon = Icons.Outlined.SwapHoriz
             )
 
@@ -148,8 +148,8 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = onImportKeystore,
                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Key) },
-                        title = stringResource(R.string.import_keystore),
-                        description = stringResource(R.string.import_keystore_description)
+                        title = stringResource(R.string.settings_system_import_keystore),
+                        description = stringResource(R.string.settings_system_import_keystore_description)
                     )
 
                     MorpheSettingsDivider()
@@ -158,14 +158,14 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = {
                             if (!importExportViewModel.canExport()) {
-                                context.toast(context.getString(R.string.export_keystore_unavailable))
+                                context.toast(context.getString(R.string.settings_system_export_keystore_unavailable))
                             } else {
                                 onExportKeystore()
                             }
                         },
                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
-                        title = stringResource(R.string.export_keystore),
-                        description = stringResource(R.string.export_keystore_description)
+                        title = stringResource(R.string.settings_system_export_keystore),
+                        description = stringResource(R.string.settings_system_export_keystore_description)
                     )
                 }
             }
@@ -186,8 +186,8 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = onExportSettings,
                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
-                        title = stringResource(R.string.export_manager_settings),
-                        description = stringResource(R.string.export_manager_settings_description)
+                        title = stringResource(R.string.settings_system_export_manager_settings),
+                        description = stringResource(R.string.settings_system_export_manager_settings_description)
                     )
                 }
             }
@@ -195,7 +195,7 @@ fun SystemTabContent(
 
         // Storage Management Section
         SectionTitle(
-            text = stringResource(R.string.morphe_storage_management),
+            text = stringResource(R.string.settings_system_storage_management),
             icon = Icons.Outlined.Storage
         )
 
@@ -208,8 +208,8 @@ fun SystemTabContent(
 
                 RichSettingsItem(
                     onClick = { showApkManagementDialog = ApkManagementType.ORIGINAL },
-                    title = stringResource(R.string.morphe_original_apks_title),
-                    subtitle = stringResource(R.string.morphe_original_apks_description),
+                    title = stringResource(R.string.settings_system_original_apks_title),
+                    subtitle = stringResource(R.string.settings_system_original_apks_description),
                     leadingContent = {
                         MorpheIcon(icon = Icons.Outlined.FolderOpen)
                     },
@@ -239,8 +239,8 @@ fun SystemTabContent(
 
                 RichSettingsItem(
                     onClick = { showApkManagementDialog = ApkManagementType.PATCHED },
-                    title = stringResource(R.string.morphe_patched_apks_title),
-                    subtitle = stringResource(R.string.morphe_patched_apks_description),
+                    title = stringResource(R.string.settings_system_patched_apks_title),
+                    subtitle = stringResource(R.string.settings_system_patched_apks_description),
                     leadingContent = {
                         MorpheIcon(icon = Icons.Outlined.Apps)
                     },
@@ -265,7 +265,7 @@ fun SystemTabContent(
 
         // About Section
         SectionTitle(
-            text = stringResource(R.string.about),
+            text = stringResource(R.string.settings_system_about),
             icon = Icons.Outlined.Info
         )
 

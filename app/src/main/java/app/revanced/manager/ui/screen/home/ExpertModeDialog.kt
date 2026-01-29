@@ -97,11 +97,11 @@ fun ExpertModeDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_expert_mode_title),
+        title = stringResource(R.string.expert_mode_title),
         dismissOnClickOutside = false,
         footer = {
             MorpheDialogButton(
-                text = stringResource(R.string.morphe_expert_mode_proceed),
+                text = stringResource(R.string.expert_mode_proceed),
                 onClick = {
                     // Sync all local changes back before proceeding
                     localSelectedPatches.forEach { (bundleUid, patches) ->
@@ -139,7 +139,7 @@ fun ExpertModeDialog(
         ) {
             // Subtitle with count
             Text(
-                text = stringResource(R.string.morphe_expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
+                text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
                 style = MaterialTheme.typography.bodyMedium,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center,
@@ -151,12 +151,12 @@ fun ExpertModeDialog(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 label = {
-                    Text(stringResource(R.string.morphe_expert_mode_search))
+                    Text(stringResource(R.string.expert_mode_search))
                 },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.Search,
-                        contentDescription = stringResource(R.string.morphe_expert_mode_search)
+                        contentDescription = stringResource(R.string.expert_mode_search)
                     )
                 },
                 trailingIcon = {
@@ -348,8 +348,8 @@ private fun BundleHeader(
             Icon(
                 imageVector = if (allEnabled) Icons.Outlined.ClearAll else Icons.Outlined.DoneAll,
                 contentDescription = stringResource(
-                    if (allEnabled) R.string.morphe_expert_mode_disable_all
-                    else R.string.morphe_expert_mode_enable_all
+                    if (allEnabled) R.string.expert_mode_disable_all
+                    else R.string.expert_mode_enable_all
                 ),
                 modifier = Modifier.size(18.dp)
             )
@@ -449,7 +449,7 @@ private fun PatchCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Settings,
-                                contentDescription = stringResource(R.string.morphe_patch_options),
+                                contentDescription = stringResource(R.string.settings_advanced_patch_options),
                                 modifier = Modifier.size(18.dp)
                             )
                         }
@@ -485,7 +485,7 @@ private fun PatchCard(
             // Options indicator (only show if patch is enabled)
             if (hasOptions && isEnabled) {
                 InfoBadge(
-                    text = stringResource(R.string.morphe_expert_mode_has_options),
+                    text = stringResource(R.string.expert_mode_has_options),
                     style = InfoBadgeStyle.Primary,
                     icon = Icons.Outlined.Tune,
                     isCompact = true
@@ -521,9 +521,9 @@ private fun EmptyStateContent(
             Text(
                 text = stringResource(
                     if (hasSearch)
-                        R.string.morphe_expert_mode_no_results
+                        R.string.expert_mode_no_results
                     else
-                        R.string.morphe_expert_mode_no_patches
+                        R.string.expert_mode_no_patches
                 ),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
@@ -755,7 +755,7 @@ private fun ColorOptionWithPresets(
 
         // Custom color button
         ColorPresetItem(
-            label = stringResource(R.string.morphe_custom_color),
+            label = stringResource(R.string.custom_color),
             colorValue = value,
             isSelected = isCustomSelected,
             isCustom = true,
@@ -827,7 +827,7 @@ fun ColorPresetItem(
             }
 
             Text(
-                text = if (isCustom) stringResource(R.string.morphe_custom_color) else label,
+                text = if (isCustom) stringResource(R.string.custom_color) else label,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
                 color = if (isSelected)
@@ -913,7 +913,7 @@ private fun PathInputOption(
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = stringResource(R.string.morphe_patch_option_pick_folder),
+                            contentDescription = stringResource(R.string.patch_option_pick_folder),
                             tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                             modifier = Modifier.size(20.dp)
                         )
@@ -925,7 +925,7 @@ private fun PathInputOption(
         // Instructions
         if (description.isNotBlank()) {
             ExpandableSurface(
-                title = stringResource(R.string.morphe_patch_option_instructions),
+                title = stringResource(R.string.patch_option_instructions),
                 content = {
                     ScrollableInstruction(
                         description = description,
@@ -976,9 +976,9 @@ private fun TextInputOption(
                 Text(
                     stringResource(
                         when (keyboardType) {
-                            KeyboardType.Number -> R.string.morphe_patch_option_enter_number
-                            KeyboardType.Decimal -> R.string.morphe_patch_option_enter_decimal
-                            else -> R.string.morphe_patch_option_enter_value
+                            KeyboardType.Number -> R.string.patch_option_enter_number
+                            KeyboardType.Decimal -> R.string.patch_option_enter_decimal
+                            else -> R.string.patch_option_enter_value
                         }
                     )
                 )

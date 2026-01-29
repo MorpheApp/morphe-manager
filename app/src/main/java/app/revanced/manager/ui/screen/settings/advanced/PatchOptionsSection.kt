@@ -90,7 +90,7 @@ fun PatchOptionsSection(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
-                    text = stringResource(R.string.morphe_patch_options_loading),
+                    text = stringResource(R.string.settings_advanced_patch_options_loading),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -114,7 +114,7 @@ fun PatchOptionsSection(
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.morphe_patch_options_waiting_for_source),
+                        text = stringResource(R.string.settings_advanced_patch_options_waiting_for_source),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -140,7 +140,7 @@ fun PatchOptionsSection(
                     )
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = stringResource(R.string.morphe_patch_options_load_error),
+                            text = stringResource(R.string.settings_advanced_patch_options_load_error),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.error
                         )
@@ -154,7 +154,7 @@ fun PatchOptionsSection(
                         scope.launch {
                             homeViewModel.updateMorpheBundleWithChangelogClear()
                             patchOptionsViewModel.refresh()
-                            context.toast(context.getString(R.string.morphe_home_updating_sources))
+                            context.toast(context.getString(R.string.home_updating_sources))
                         }
                     }) {
                         Icon(
@@ -169,7 +169,7 @@ fun PatchOptionsSection(
             // Info message
             InfoBadge(
                 icon = Icons.Outlined.Info,
-                text = stringResource(R.string.morphe_patch_options_restart_message),
+                text = stringResource(R.string.settings_advanced_patch_options_restart_message),
                 style = InfoBadgeStyle.Success
             )
 
@@ -179,8 +179,8 @@ fun PatchOptionsSection(
                     AppPatchOptionsCard(
                         appType = AppType.YOUTUBE,
                         icon = Icons.Outlined.VideoLibrary,
-                        title = stringResource(R.string.morphe_home_youtube),
-                        description = stringResource(R.string.morphe_patch_options_youtube_description),
+                        title = stringResource(R.string.home_youtube),
+                        description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
@@ -211,8 +211,8 @@ fun PatchOptionsSection(
                     AppPatchOptionsCard(
                         appType = AppType.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
-                        title = stringResource(R.string.morphe_home_youtube_music),
-                        description = stringResource(R.string.morphe_patch_options_youtube_music_description),
+                        title = stringResource(R.string.home_youtube_music),
+                        description = stringResource(R.string.settings_advanced_patch_options_youtube_music_description),
                         patchOptionsViewModel = patchOptionsViewModel,
                         onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
                         onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
@@ -286,8 +286,8 @@ private fun AppPatchOptionsCard(
             if (hasTheme) {
                 SettingsItem(
                     icon = Icons.Outlined.Palette,
-                    title = stringResource(R.string.morphe_patch_options_theme_colors),
-                    description = stringResource(R.string.morphe_patch_options_theme_colors_description),
+                    title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
+                    description = stringResource(R.string.settings_advanced_patch_options_theme_colors_description),
                     onClick = onThemeClick
                 )
             }
@@ -298,8 +298,8 @@ private fun AppPatchOptionsCard(
 
                 SettingsItem(
                     icon = Icons.Outlined.Style,
-                    title = stringResource(R.string.morphe_patch_options_custom_branding),
-                    description = stringResource(R.string.morphe_patch_options_custom_branding_description),
+                    title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
+                    description = stringResource(R.string.settings_advanced_patch_options_custom_branding_description),
                     onClick = onBrandingClick
                 )
             }
@@ -310,8 +310,8 @@ private fun AppPatchOptionsCard(
 
                 SettingsItem(
                     icon = Icons.Outlined.Image,
-                    title = stringResource(R.string.morphe_patch_options_custom_header),
-                    description = stringResource(R.string.morphe_patch_options_custom_header_description),
+                    title = stringResource(R.string.settings_advanced_patch_options_custom_header),
+                    description = stringResource(R.string.settings_advanced_patch_options_custom_header_description),
                     onClick = onHeaderClick
                 )
             }
@@ -319,7 +319,7 @@ private fun AppPatchOptionsCard(
             // Show message if no options available for this app
             if (!hasTheme && !hasBranding && !hasHeader) {
                 Text(
-                    text = stringResource(R.string.morphe_patch_options_no_available),
+                    text = stringResource(R.string.settings_advanced_patch_options_no_available),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(vertical = 8.dp)
@@ -353,8 +353,8 @@ private fun HideShortsSection(
         // Header
         CardHeader(
             icon = Icons.Outlined.VisibilityOff,
-            title = stringResource(R.string.morphe_home_youtube),
-            description = stringResource(R.string.morphe_patch_options_hide_shorts_features)
+            title = stringResource(R.string.home_youtube),
+            description = stringResource(R.string.settings_advanced_patch_options_hide_shorts_features)
         )
 
         // Options list
@@ -366,13 +366,13 @@ private fun HideShortsSection(
                     context,
                     appShortcutOption.title,
                     HIDE_SHORTS_APP_SHORTCUT_TITLE,
-                    R.string.morphe_patch_options_hide_shorts_app_shortcut
+                    R.string.settings_advanced_patch_options_hide_shorts_app_shortcut
                 )
                 val description = getLocalizedOrCustomText(
                     context,
                     appShortcutOption.description,
                     HIDE_SHORTS_APP_SHORTCUT_DESC,
-                    R.string.morphe_patch_options_hide_shorts_app_shortcut_description
+                    R.string.settings_advanced_patch_options_hide_shorts_app_shortcut_description
                 )
 
                 RichSettingsItem(
@@ -401,13 +401,13 @@ private fun HideShortsSection(
                     context,
                     widgetOption.title,
                     HIDE_SHORTS_WIDGET_TITLE,
-                    R.string.morphe_patch_options_hide_shorts_widget
+                    R.string.settings_advanced_patch_options_hide_shorts_widget
                 )
                 val description = getLocalizedOrCustomText(
                     context,
                     widgetOption.description,
                     HIDE_SHORTS_WIDGET_DESC,
-                    R.string.morphe_patch_options_hide_shorts_widget_description
+                    R.string.settings_advanced_patch_options_hide_shorts_widget_description
                 )
 
                 RichSettingsItem(

@@ -311,10 +311,10 @@ fun HomeDialogs(
                             homeViewModel.bundleToRename = null
                         }
                         PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE -> {
-                            context.toast(context.getString(R.string.patch_bundle_duplicate_name_error))
+                            context.toast(context.getString(R.string.sources_dialog_duplicate_name_error))
                         }
                         PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND -> {
-                            context.toast(context.getString(R.string.patch_bundle_missing_error))
+                            context.toast(context.getString(R.string.sources_dialog_missing_error))
                         }
                     }
                 }
@@ -337,13 +337,13 @@ private fun ApkAvailabilityDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_home_apk_availability_dialog_title),
+        title = stringResource(R.string.home_apk_availability_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_home_apk_availability_no),
+                primaryText = stringResource(R.string.home_apk_availability_no),
                 onPrimaryClick = onNeedApk,
                 primaryIcon = Icons.Outlined.Download,
-                secondaryText = stringResource(R.string.morphe_home_apk_availability_yes),
+                secondaryText = stringResource(R.string.home_apk_availability_yes),
                 onSecondaryClick = onHaveApk,
                 secondaryIcon = Icons.Outlined.Check,
                 layout = DialogButtonLayout.Vertical
@@ -359,7 +359,7 @@ private fun ApkAvailabilityDialog(
         ) {
             Text(
                 text = stringResource(
-                    R.string.morphe_home_apk_availability_dialog_description_simple,
+                    R.string.home_apk_availability_dialog_description_simple,
                     appName,
                     recommendedVersion ?: stringResource(R.string.any_version)
                 ),
@@ -382,7 +382,7 @@ private fun ApkAvailabilityDialog(
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.morphe_root_install_apk_required),
+                        text = stringResource(R.string.root_install_apk_required),
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.Red.copy(alpha = 0.8f)
                     )
@@ -406,10 +406,10 @@ private fun DownloadInstructionsDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_home_download_instructions_title),
+        title = stringResource(R.string.home_download_instructions_title),
         footer = {
             MorpheDialogButton(
-                text = stringResource(R.string.morphe_home_download_instructions_continue),
+                text = stringResource(R.string.home_download_instructions_continue),
                 onClick = onContinue,
                 icon = Icons.AutoMirrored.Outlined.OpenInNew,
                 modifier = Modifier.fillMaxWidth()
@@ -428,7 +428,7 @@ private fun DownloadInstructionsDialog(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.morphe_home_download_instructions_steps_title),
+                    text = stringResource(R.string.home_download_instructions_steps_title),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = textColor
@@ -437,8 +437,8 @@ private fun DownloadInstructionsDialog(
                 InstructionStep(
                     number = "1",
                     text = stringResource(
-                        R.string.morphe_home_download_instructions_step1,
-                        stringResource(R.string.morphe_home_download_instructions_continue)
+                        R.string.home_download_instructions_step1,
+                        stringResource(R.string.home_download_instructions_continue)
                     ),
                     textColor = textColor,
                     secondaryColor = secondaryColor
@@ -447,7 +447,7 @@ private fun DownloadInstructionsDialog(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     InstructionStep(
                         number = "2",
-                        text = stringResource(R.string.morphe_home_download_instructions_step2_part1),
+                        text = stringResource(R.string.home_download_instructions_step2_part1),
                         textColor = textColor,
                         secondaryColor = secondaryColor
                     )
@@ -460,7 +460,7 @@ private fun DownloadInstructionsDialog(
                             onClick = {
                                 context.toast(
                                     string = context.getString(
-                                        R.string.morphe_home_download_instructions_download_button_toast
+                                        R.string.home_download_instructions_download_button_toast
                                     ),
                                     duration = Toast.LENGTH_LONG
                                 )
@@ -494,9 +494,9 @@ private fun DownloadInstructionsDialog(
                     text = htmlAnnotatedString(
                         stringResource(
                             if (usingMountInstall) {
-                                R.string.morphe_home_download_instructions_step3_mount
+                                R.string.home_download_instructions_step3_mount
                             } else {
-                                R.string.morphe_home_download_instructions_step3
+                                R.string.home_download_instructions_step3
                             }
                         )
                     ),
@@ -507,8 +507,8 @@ private fun DownloadInstructionsDialog(
                 InstructionStep(
                     number = "4",
                     text = stringResource(
-                        if (usingMountInstall) R.string.morphe_home_download_instructions_step4_mount
-                        else R.string.morphe_home_download_instructions_step4
+                        if (usingMountInstall) R.string.home_download_instructions_step4_mount
+                        else R.string.home_download_instructions_step4
                     ),
                     textColor = textColor,
                     secondaryColor = secondaryColor
@@ -573,18 +573,18 @@ private fun FilePickerPromptDialog(
         onDismissRequest = onDismiss,
         title = stringResource(
             if (isOtherApps) {
-                R.string.morphe_home_select_apk_title
+                R.string.home_select_apk_title
             } else {
-                R.string.morphe_home_file_picker_prompt_title
+                R.string.home_file_picker_prompt_title
             }
         ),
         footer = {
             MorpheDialogButton(
                 text = stringResource(
                     if (isOtherApps) {
-                        R.string.morphe_home_file_picker_prompt_open_apk
+                        R.string.home_file_picker_prompt_open_apk
                     } else {
-                        R.string.morphe_home_file_picker_prompt_open_downloaded_apk
+                        R.string.home_file_picker_prompt_open_downloaded_apk
                     }
                 ),
                 onClick = onOpenFilePicker,
@@ -597,9 +597,9 @@ private fun FilePickerPromptDialog(
 
         Text(
             text = if (isOtherApps) {
-                stringResource(R.string.morphe_home_select_any_apk_description)
+                stringResource(R.string.home_select_any_apk_description)
             } else {
-                stringResource(R.string.morphe_home_file_picker_prompt_description, appName)
+                stringResource(R.string.home_file_picker_prompt_description, appName)
             },
             style = MaterialTheme.typography.bodyLarge,
             color = secondaryColor,
@@ -621,10 +621,10 @@ private fun UnsupportedVersionWarningDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_patcher_unsupported_version_dialog_title),
+        title = stringResource(R.string.home_dialog_unsupported_version_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_patcher_unsupported_version_dialog_proceed),
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
                 onPrimaryClick = onProceed,
                 isPrimaryDestructive = true,
                 secondaryText = stringResource(android.R.string.cancel),
@@ -640,7 +640,7 @@ private fun UnsupportedVersionWarningDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.morphe_patcher_unsupported_version_dialog_description),
+                text = stringResource(R.string.home_dialog_unsupported_version_dialog_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
@@ -652,7 +652,7 @@ private fun UnsupportedVersionWarningDialog(
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = stringResource(R.string.morphe_patcher_selected_version),
+                        text = stringResource(R.string.home_selected_version),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )
@@ -667,7 +667,7 @@ private fun UnsupportedVersionWarningDialog(
                 if (recommendedVersion != null) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
-                            text = stringResource(R.string.morphe_home_recommended_version),
+                            text = stringResource(R.string.home_recommended_version),
                             style = MaterialTheme.typography.labelMedium,
                             color = secondaryColor
                         )
@@ -695,7 +695,7 @@ fun WrongPackageDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_patcher_wrong_package_title),
+        title = stringResource(R.string.home_dialog_wrong_package_title),
         footer = {
             MorpheDialogButton(
                 text = stringResource(android.R.string.ok),
@@ -712,7 +712,7 @@ fun WrongPackageDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.morphe_patcher_wrong_package_description),
+                text = stringResource(R.string.home_dialog_wrong_package_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
@@ -724,7 +724,7 @@ fun WrongPackageDialog(
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = stringResource(R.string.morphe_patcher_expected_package),
+                        text = stringResource(R.string.home_dialog_expected_package),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )
@@ -738,7 +738,7 @@ fun WrongPackageDialog(
 
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = stringResource(R.string.morphe_patcher_selected_package),
+                        text = stringResource(R.string.home_dialog_selected_package),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )

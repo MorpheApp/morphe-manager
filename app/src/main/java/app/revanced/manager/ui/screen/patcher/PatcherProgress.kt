@@ -187,7 +187,7 @@ private fun ProgressDetailsSection(
             exit = fadeOut(animationSpec = tween(500)) + shrinkVertically(animationSpec = tween(500))
         ) {
             InfoBadge(
-                text = stringResource(R.string.morphe_patcher_long_step_warning),
+                text = stringResource(R.string.patcher_long_step_warning),
                 style = InfoBadgeStyle.Primary,
                 icon = Icons.Rounded.Info
             )
@@ -263,7 +263,7 @@ private fun CircularProgressWithStats(
         ) {
             Text(
                 text = stringResource(
-                    R.string.morphe_patcher_percentage,
+                    R.string.patcher_percentage,
                     (progress * 100).toInt()
                 ),
                 style = MaterialTheme.typography.displayLarge,
@@ -276,7 +276,7 @@ private fun CircularProgressWithStats(
 
             Text(
                 text = stringResource(
-                    R.string.morphe_patcher_patches_progress,
+                    R.string.patcher_patches_progress,
                     completed,
                     total
                 ),

@@ -96,9 +96,9 @@ fun InstalledAppInfoDialog(
                 val info = bundleInfo[bundleUid]
                 val source = bundleSources.firstOrNull { it.uid == bundleUid }
                 val fallbackName = if (bundleUid == 0) {
-                    context.getString(R.string.patches_name_default)
+                    context.getString(R.string.home_app_info_patches_name_default)
                 } else {
-                    context.getString(R.string.patches_name_fallback)
+                    context.getString(R.string.home_app_info_patches_name_fallback)
                 }
                 val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
                 val patchInfos = info?.patches?.filter { it.name in patches }?.distinctBy { it.name }?.sortedBy { it.name } ?: emptyList()
@@ -279,7 +279,7 @@ fun InstalledAppInfoDialog(
                 // Warning for missing original APK
                 if (!viewModel.hasOriginalApk) {
                     InfoBadge(
-                        text = stringResource(R.string.morphe_repatch_requires_original),
+                        text = stringResource(R.string.home_app_info_repatch_requires_original),
                         style = InfoBadgeStyle.Warning,
                         icon = Icons.Outlined.Info,
                         isExpanded = true,
@@ -365,7 +365,7 @@ private fun InfoSection(
             if (installedApp.originalPackageName != installedApp.currentPackageName) {
                 MorpheSettingsDivider(fullWidth = true)
                 InfoRow(
-                    label = stringResource(R.string.original_package_name),
+                    label = stringResource(R.string.home_app_info_original_package_name),
                     value = installedApp.originalPackageName
                 )
             }
@@ -374,7 +374,7 @@ private fun InfoSection(
 
             // Install type
             InfoRow(
-                label = stringResource(R.string.install_type),
+                label = stringResource(R.string.home_app_info_install_type),
                 value = stringResource(installedApp.installType.stringResource)
             )
 
@@ -391,7 +391,7 @@ private fun InfoSection(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.applied_patches),
+                            text = stringResource(R.string.home_app_info_applied_patches),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -413,7 +413,7 @@ private fun InfoSection(
             if (bundlesUsedSummary.isNotBlank()) {
                 MorpheSettingsDivider(fullWidth = true)
                 InfoRow(
-                    label = stringResource(R.string.patch_bundles_used),
+                    label = stringResource(R.string.home_app_info_patch_bundles_used),
                     value = bundlesUsedSummary
                 )
             }
@@ -464,7 +464,7 @@ private fun ActionsSection(
     if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null && viewModel.isInstalledOnDevice) {
         secondaryActions.add(
             ActionItem(
-                text = stringResource(R.string.open_app),
+                text = stringResource(R.string.open),
                 icon = Icons.Outlined.PlayArrow,
                 onClick = { viewModel.launch() }
             )
@@ -486,7 +486,7 @@ private fun ActionsSection(
             val installText = if (viewModel.isInstalledOnDevice) {
                 stringResource(R.string.reinstall)
             } else {
-                stringResource(R.string.install_app)
+                stringResource(R.string.install)
             }
             secondaryActions.add(
                 ActionItem(
@@ -501,7 +501,7 @@ private fun ActionsSection(
             val isMountLoading = mountOperation != null
             secondaryActions.add(
                 ActionItem(
-                    text = if (viewModel.isMounted) stringResource(R.string.remount_saved_app) else stringResource(R.string.mount),
+                    text = if (viewModel.isMounted) stringResource(R.string.remount) else stringResource(R.string.mount),
                     icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Check,
                     onClick = { if (viewModel.isMounted) viewModel.remountSavedInstallation() else viewModel.mountOrUnmount() },
                     isLoading = isMountLoading
@@ -704,7 +704,7 @@ private fun UninstallConfirmDialog(
         }
     ) {
         Text(
-            text = stringResource(R.string.uninstall_app_confirmation),
+            text = stringResource(R.string.home_app_info_uninstall_app_confirmation),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )
@@ -734,8 +734,8 @@ private fun DeleteConfirmDialog(
         }
     ) {
         Text(
-            text = if (isSavedOnly) stringResource(R.string.saved_app_delete_confirmation)
-            else stringResource(R.string.saved_copy_delete_confirmation),
+            text = if (isSavedOnly) stringResource(R.string.home_app_info_saved_app_delete_confirmation)
+            else stringResource(R.string.home_app_info_saved_copy_delete_confirmation),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )
@@ -749,7 +749,7 @@ private fun AppliedPatchesDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.applied_patches),
+        title = stringResource(R.string.home_app_info_applied_patches),
         footer = {
             MorpheDialogButton(
                 text = stringResource(android.R.string.ok),

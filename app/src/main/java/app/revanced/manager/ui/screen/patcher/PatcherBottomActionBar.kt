@@ -64,7 +64,7 @@ fun PatcherBottomActionBar(
             BottomActionButton(
                 onClick = onHomeClick,
                 icon = Icons.Default.Home,
-                text = stringResource(R.string.morphe_home),
+                text = stringResource(R.string.home),
                 modifier = Modifier.weight(1f)
             )
         } else Spacer(Modifier.weight(1f))
@@ -74,7 +74,7 @@ fun PatcherBottomActionBar(
             BottomActionButton(
                 onClick = if (showErrorButton) onErrorClick else onSaveClick,
                 icon = if (showErrorButton) Icons.Default.Error else Icons.Outlined.FileDownload,
-                text = if (showErrorButton) stringResource(R.string.patches_error)
+                text = if (showErrorButton) stringResource(R.string.error_)
                 else stringResource(R.string.save),
                 modifier = Modifier.weight(1f),
                 containerColor = if (showErrorButton)

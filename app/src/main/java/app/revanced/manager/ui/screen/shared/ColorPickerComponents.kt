@@ -107,7 +107,7 @@ fun ColorPickerDialog(
                 },
                 label = {
                     Text(
-                        stringResource(R.string.morphe_hex_color),
+                        stringResource(R.string.hex_color),
                         color = LocalDialogSecondaryTextColor.current
                     )
                 },

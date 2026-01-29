@@ -15,13 +15,13 @@ import app.revanced.manager.ui.screen.shared.backgrounds.*
  * Types of animated backgrounds available in the app
  */
 enum class BackgroundType(val displayNameResId: Int) {
-    CIRCLES(R.string.morphe_background_type_circles),
-    RINGS(R.string.morphe_background_type_rings),
-    WAVES(R.string.morphe_background_type_waves),
-    SPACE(R.string.morphe_background_type_space),
-    SHAPES(R.string.morphe_background_type_shapes),
-    SNOW(R.string.morphe_background_type_snow),
-    NONE(R.string.morphe_background_type_none);
+    CIRCLES(R.string.settings_appearance_background_circles),
+    RINGS(R.string.settings_appearance_background_rings),
+    WAVES(R.string.settings_appearance_background_waves),
+    SPACE(R.string.settings_appearance_background_space),
+    SHAPES(R.string.settings_appearance_background_shapes),
+    SNOW(R.string.settings_appearance_background_snow),
+    NONE(R.string.settings_appearance_background_none);
 
     companion object {
         val DEFAULT = CIRCLES

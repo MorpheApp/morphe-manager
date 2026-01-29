@@ -7,11 +7,11 @@ import app.morphe.manager.R
 import kotlinx.serialization.Serializable
 
 enum class InstallType(val stringResource: Int) {
-    DEFAULT(R.string.install_type_system_installer),
-    CUSTOM(R.string.install_type_custom_installer),
-    MOUNT(R.string.mount_install),
-    SAVED(R.string.saved_install),
-    SHIZUKU(R.string.install_type_shizuku_label)
+    DEFAULT(R.string.home_app_info_install_type_system_installer),
+    CUSTOM(R.string.home_app_info_install_type_custom_installer),
+    MOUNT(R.string.mount),
+    SAVED(R.string.saved),
+    SHIZUKU(R.string.home_app_info_install_type_shizuku)
 }
 
 /**

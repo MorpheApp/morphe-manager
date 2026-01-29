@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
+    <string name="home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Esteu llestos per convertir el YouTube en llegendari de nou?</string>
+    <string name="home_greeting_2">Esteu llestos per convertir el YouTube en llegendari de nou?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Aguanta\'t, és l\'hora dels pedaços</string>
+    <string name="home_greeting_3">Aguanta\'t, és l\'hora dels pedaços</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Un dia més, una obra mestra més sense anuncis</string>
+    <string name="home_greeting_4">Un dia més, una obra mestra més sense anuncis</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Vols veure anuncis? Ja, jo tampoc</string>
+    <string name="home_greeting_5">Vols veure anuncis? Ja, jo tampoc</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Fem que les teves aplicacions es comportin</string>
+    <string name="home_greeting_6">Fem que les teves aplicacions es comportin</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Pronòstic d\'avui: 100% de probabilitat de pedaços</string>
+    <string name="home_greeting_7">Pronòstic d\'avui: 100% de probabilitat de pedaços</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Llestos per canviar de decebedor a fantàstic?</string>
+    <string name="home_greeting_8">Llestos per canviar de decebedor a fantàstic?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
+    <string name="home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
-    <string name="morphe_home_update_error">Actualització fallida</string>
-    <string name="morphe_home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
-    <string name="morphe_home_update_success">Actualització completada</string>
-    <string name="morphe_home_please_wait">Espereu...</string>
-    <string name="morphe_home_timeline">Actualització de la Història</string>
+    <string name="home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
+    <string name="home_update_error">Actualització fallida</string>
+    <string name="home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
+    <string name="home_update_success">Actualització completada</string>
+    <string name="home_please_wait">Espereu...</string>
+    <string name="home_timeline">Actualització de la Història</string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Per aplicar un pedaç a %1$s, necessites la versió %2$s (sense aplicar)</string>
-    <string name="morphe_home_apk_availability_yes">Sí, la tinc</string>
-    <string name="morphe_home_apk_availability_no">No, ajuda\'m a trobar-la</string>
+    <string name="home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>
+    <string name="home_apk_availability_dialog_description_simple">Per aplicar un pedaç a %1$s, necessites la versió %2$s (sense aplicar)</string>
+    <string name="home_apk_availability_yes">Sí, la tinc</string>
+    <string name="home_apk_availability_no">No, ajuda\'m a trobar-la</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Descarrega l\'APK original</string>
-    <string name="morphe_home_download_instructions_steps_title">Instruccions:</string>
-    <string name="morphe_home_download_instructions_step1">Premeu el botó \'%1$s\' de sota</string>
-    <string name="morphe_home_download_instructions_step2_part1">Desplaceu-vos per la pàgina web i premeu</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Premeu \'descarrega\' al lloc web, i no aquí 😊</string>
-    <string name="morphe_home_download_instructions_step3">Espereu que la descàrrega s\'acabi, i &lt;b&gt;no instal·leu&lt;/b&gt; l\'APK</string>
-    <string name="morphe_home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
-    <string name="morphe_home_download_instructions_step4">Després de finalitzar la descàrrega, obriu aquesta aplicació de nou</string>
+    <string name="home_download_instructions_title">Descarrega l\'APK original</string>
+    <string name="home_download_instructions_steps_title">Instruccions:</string>
+    <string name="home_download_instructions_step1">Premeu el botó \'%1$s\' de sota</string>
+    <string name="home_download_instructions_step2_part1">Desplaceu-vos per la pàgina web i premeu</string>
+    <string name="home_download_instructions_download_button_toast">Premeu \'descarrega\' al lloc web, i no aquí 😊</string>
+    <string name="home_download_instructions_step3">Espereu que la descàrrega s\'acabi, i &lt;b&gt;no instal·leu&lt;/b&gt; l\'APK</string>
+    <string name="home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
+    <string name="home_download_instructions_step4">Després de finalitzar la descàrrega, obriu aquesta aplicació de nou</string>
     <!-- Dialog 3: File Picker Prompt -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->

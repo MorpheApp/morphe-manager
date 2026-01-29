@@ -51,7 +51,7 @@ fun HomeBottomActionBar(
         BottomActionButton(
             onClick = onBundlesClick,
             icon = Icons.Outlined.Source,
-            text = stringResource(R.string.morphe_home_sources),
+            text = stringResource(R.string.sources_management_title),
             modifier = Modifier.weight(1f)
         )
 

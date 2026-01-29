@@ -119,7 +119,7 @@ class ImportExportViewModel(
     }
 
     fun startKeystoreImport(content: Uri) = viewModelScope.launch {
-        uiSafe(app, R.string.failed_to_import_keystore, "Failed to import keystore") {
+        uiSafe(app, R.string.settings_system_import_keystore_failed, "Failed to import keystore") {
             val path = withContext(Dispatchers.IO) {
                 File.createTempFile("signing", "ks", app.cacheDir).toPath().also {
                     Files.copy(
@@ -153,7 +153,7 @@ class ImportExportViewModel(
     private suspend fun tryKeystoreImport(alias: String, pass: String, path: Path): Boolean {
         path.inputStream().use { stream ->
             if (keystoreManager.import(alias, pass, stream)) {
-                app.toast(app.getString(R.string.import_keystore_success))
+                app.toast(app.getString(R.string.settings_system_import_keystore_success))
                 cancelKeystoreImport()
                 return true
             }
@@ -172,7 +172,7 @@ class ImportExportViewModel(
 
     fun exportKeystore(target: Uri) = viewModelScope.launch {
         keystoreManager.export(contentResolver.openOutputStream(target)!!)
-        app.toast(app.getString(R.string.export_keystore_success))
+        app.toast(app.getString(R.string.settings_system_export_keystore_success))
     }
 
     fun selectBundle(bundle: PatchBundleSource) {
@@ -240,7 +240,7 @@ class ImportExportViewModel(
                                 val displayName = snapshot.displayName?.trim().takeUnless { it.isNullOrBlank() }
                                 val snapshotName = snapshot.name.trim().takeUnless { it.isBlank() }
                                 val bundleLabel = (displayName ?: snapshotName)
-                                    ?.takeUnless { it == app.getString(R.string.patches_name_fallback) }
+                                    ?.takeUnless { it == app.getString(R.string.home_app_info_patches_name_fallback) }
                                     ?: runCatching {
                                         val uri = java.net.URI(endpoint)
                                         val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() }.orEmpty()
@@ -664,7 +664,7 @@ class ImportExportViewModel(
     }
 
     fun exportManagerSettings(target: Uri) = viewModelScope.launch {
-        uiSafe(app, R.string.export_manager_settings_fail, "Failed to export manager settings") {
+        uiSafe(app, R.string.settings_system_export_manager_settings_fail, "Failed to export manager settings") {
             val snapshot = preferencesManager.exportSettings()
 
             withContext(Dispatchers.IO) {
@@ -676,7 +676,7 @@ class ImportExportViewModel(
                 }
             }
 
-            app.toast(app.getString(R.string.export_manager_settings_success))
+            app.toast(app.getString(R.string.settings_system_export_manager_settings_success))
         }
     }
 

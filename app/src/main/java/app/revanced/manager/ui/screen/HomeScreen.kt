@@ -279,11 +279,11 @@ fun HomeScreen(
             // Other apps button
             onOtherAppsClick = {
                 if (availablePatches <= 0) {
-                    context.toast(context.getString(R.string.morphe_home_sources_are_loading))
+                    context.toast(context.getString(R.string.home_sources_are_loading))
                     return@SectionsLayout
                 }
                 homeViewModel.pendingPackageName = null
-                homeViewModel.pendingAppName = context.getString(R.string.morphe_home_other_apps)
+                homeViewModel.pendingAppName = context.getString(R.string.home_other_apps)
                 homeViewModel.pendingRecommendedVersion = null
                 homeViewModel.showFilePickerPromptDialog = true
             },

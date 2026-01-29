@@ -35,7 +35,7 @@ fun ProcessRuntimeDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_process_runtime),
+        title = stringResource(R.string.settings_system_process_runtime),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -82,14 +82,14 @@ fun ProcessRuntimeDialog(
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
-                                text = stringResource(R.string.morphe_enable_process_runtime),
+                                text = stringResource(R.string.settings_system_process_runtime_enable),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.SemiBold,
                                 color = LocalDialogTextColor.current
                             )
                         }
                         Text(
-                            text = stringResource(R.string.morphe_process_runtime_description),
+                            text = stringResource(R.string.settings_system_process_runtime_description),
                             style = MaterialTheme.typography.bodySmall,
                             color = LocalDialogSecondaryTextColor.current
                         )
@@ -122,7 +122,7 @@ fun ProcessRuntimeDialog(
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.morphe_process_runtime_memory_limit),
+                        text = stringResource(R.string.settings_system_process_runtime_memory_limit),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold,
                         color = LocalDialogTextColor.current
@@ -147,7 +147,7 @@ fun ProcessRuntimeDialog(
                             color = LocalDialogTextColor.current
                         )
                         Text(
-                            text = stringResource(R.string.morphe_memory_limit_subtitle),
+                            text = stringResource(R.string.settings_system_memory_limit_subtitle),
                             style = MaterialTheme.typography.bodySmall,
                             color = LocalDialogSecondaryTextColor.current,
                             textAlign = TextAlign.Center
@@ -188,7 +188,7 @@ fun ProcessRuntimeDialog(
 
                 // Description
                 InfoBadge(
-                    text = stringResource(R.string.morphe_process_runtime_memory_limit_help),
+                    text = stringResource(R.string.settings_system_process_runtime_memory_limit_description),
                     style = InfoBadgeStyle.Default,
                     icon = Icons.Outlined.Info
                 )
@@ -196,7 +196,7 @@ fun ProcessRuntimeDialog(
                 // Warning for low values
                 if (enabled && sliderValue < PROCESS_RUNTIME_MEMORY_LOW_WARNING) {
                     InfoBadge(
-                        text = stringResource(R.string.morphe_memory_limit_warning),
+                        text = stringResource(R.string.settings_system_memory_limit_warning),
                         style = InfoBadgeStyle.Error,
                         icon = Icons.Outlined.Warning
                     )

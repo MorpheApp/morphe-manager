@@ -4,17 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -22,7 +23,6 @@ import app.revanced.manager.ui.screen.shared.LocalDialogSecondaryTextColor
 import app.revanced.manager.ui.screen.shared.LocalDialogTextColor
 import app.revanced.manager.ui.screen.shared.MorpheDialog
 import app.revanced.manager.ui.screen.shared.MorpheDialogButtonRow
-import app.revanced.manager.ui.screen.shared.PasswordField
 
 /**
  * Keystore Credentials Dialog
@@ -38,10 +38,10 @@ fun KeystoreCredentialsDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.import_keystore_dialog_title),
+        title = stringResource(R.string.settings_system_import_keystore_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.import_keystore_dialog_button),
+                primaryText = stringResource(R.string.settings_system_import_keystore_dialog_button),
                 onPrimaryClick = { onSubmit(alias, pass) },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -56,7 +56,7 @@ fun KeystoreCredentialsDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = stringResource(R.string.import_keystore_dialog_description),
+                text = stringResource(R.string.settings_system_import_keystore_dialog_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = secondaryColor,
                 textAlign = TextAlign.Center
@@ -68,7 +68,7 @@ fun KeystoreCredentialsDialog(
                 onValueChange = { alias = it },
                 label = {
                     Text(
-                        stringResource(R.string.import_keystore_dialog_alias_field),
+                        stringResource(R.string.settings_system_import_keystore_dialog_alias_field),
                         color = secondaryColor
                     )
                 },
@@ -90,7 +90,7 @@ fun KeystoreCredentialsDialog(
                 onValueChange = { pass = it },
                 label = {
                     Text(
-                        stringResource(R.string.import_keystore_dialog_password_field),
+                        stringResource(R.string.settings_system_import_keystore_dialog_password_field),
                         color = secondaryColor
                     )
                 },
@@ -98,4 +98,40 @@ fun KeystoreCredentialsDialog(
             )
         }
     }
+}
+
+@Composable
+fun PasswordField(
+    modifier: Modifier = Modifier,
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null
+) {
+    var visible by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = placeholder,
+        label = label,
+        modifier = modifier,
+        trailingIcon = {
+            IconButton(onClick = {
+                visible = !visible
+            }) {
+                val (icon, description) = remember(visible) {
+                    if (visible) Icons.Outlined.VisibilityOff to R.string.settings_system_hide_password_field
+                    else Icons.Outlined.Visibility to R.string.settings_system_show_password_field
+                }
+                Icon(icon, stringResource(description))
+            }
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password
+        ),
+        visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
+    )
 }

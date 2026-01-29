@@ -367,7 +367,7 @@ class HomeViewModel(
 
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
-            app.toast(app.getString(R.string.morphe_home_sources_are_loading))
+            app.toast(app.getString(R.string.home_sources_are_loading))
             return
         }
 
@@ -407,7 +407,7 @@ class HomeViewModel(
             if (selectedApp != null) {
                 processSelectedApp(selectedApp)
             } else {
-                app.toast(app.getString(R.string.morphe_home_invalid_apk))
+                app.toast(app.getString(R.string.home_invalid_apk))
             }
         }
     }
@@ -455,7 +455,7 @@ class HomeViewModel(
                 cleanupPendingData(keepSelectedApp = true)
                 return
             } else {
-                app.toast(app.getString(R.string.morphe_home_no_patches_for_app))
+                app.toast(app.getString(R.string.home_no_patches_for_app))
                 if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                     selectedApp.file.delete()
                 }
@@ -478,7 +478,7 @@ class HomeViewModel(
             .first()
 
         if (bundles.isEmpty()) {
-            app.toast(app.getString(R.string.morphe_home_no_patches_available))
+            app.toast(app.getString(R.string.home_no_patches_available))
             cleanupPendingData()
             return
         }
@@ -507,7 +507,7 @@ class HomeViewModel(
             }
 
             if (defaultBundle == null) {
-                app.toast(app.getString(R.string.morphe_home_no_patches_available))
+                app.toast(app.getString(R.string.home_no_patches_available))
                 cleanupPendingData()
                 return
             }
@@ -521,7 +521,7 @@ class HomeViewModel(
             val patches = mapOf(defaultBundle.uid to allPatches).filterValues { it.isNotEmpty() }
 
             if (patches.isEmpty() || patches[defaultBundle.uid]?.isEmpty() == true) {
-                app.toast(app.getString(R.string.morphe_home_no_patches_available))
+                app.toast(app.getString(R.string.home_no_patches_available))
                 cleanupPendingData()
                 return
             }
@@ -733,7 +733,7 @@ class HomeViewModel(
             showFilePickerPromptDialog = true
         } else {
             Log.d(tag, "Failed to open URL")
-            app.toast(app.getString(R.string.morphe_sources_failed_to_open_url))
+            app.toast(app.getString(R.string.sources_management_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
         }
@@ -744,9 +744,9 @@ class HomeViewModel(
      */
     fun getAppName(packageName: String): String {
         return when (packageName) {
-            PACKAGE_YOUTUBE -> app.getString(R.string.morphe_home_youtube)
-            PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.morphe_home_youtube_music)
-            PACKAGE_REDDIT -> app.getString(R.string.morphe_home_reddit)
+            PACKAGE_YOUTUBE -> app.getString(R.string.home_youtube)
+            PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
+            PACKAGE_REDDIT -> app.getString(R.string.home_reddit)
             else -> packageName
         }
     }

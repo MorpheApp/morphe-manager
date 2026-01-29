@@ -262,7 +262,7 @@ class PatchBundleRepository(
         val explicitDisplayName = bundle.displayName?.trim().takeUnless { it.isNullOrBlank() }
         if (explicitDisplayName != null) return explicitDisplayName
 
-        val unnamed = app.getString(R.string.patches_name_fallback)
+        val unnamed = app.getString(R.string.home_app_info_patches_name_fallback)
         if (bundle.name == unnamed) {
             guessNameFromEndpoint(bundle.endpoint)?.let { return it }
         }
@@ -492,7 +492,7 @@ class PatchBundleRepository(
     private fun PatchBundleEntity.load(): PatchBundleSource {
         val dir = directoryOf(uid)
         val actualName =
-            name.ifEmpty { app.getString(if (uid == 0) R.string.patches_name_default else R.string.patches_name_fallback) }
+            name.ifEmpty { app.getString(if (uid == 0) R.string.home_app_info_patches_name_default else R.string.home_app_info_patches_name_fallback) }
         val normalizedDisplayName = displayName?.takeUnless { it.isBlank() }
 
         return when (source) {
@@ -598,7 +598,7 @@ class PatchBundleRepository(
 
     private suspend fun ensureUniqueName(requestedName: String?, excludeUid: Int? = null): String {
         val base = requestedName?.trim().takeUnless { it.isNullOrBlank() }
-            ?: app.getString(R.string.patches_name_fallback)
+            ?: app.getString(R.string.home_app_info_patches_name_fallback)
 
         val existing = dao.all()
             .filterNot { entity -> excludeUid != null && entity.uid == excludeUid }
@@ -1004,7 +1004,7 @@ class PatchBundleRepository(
                         if (e is CancellationException) throw e
                         Log.e(tag, "Got exception while importing bundle", e)
                         withContext(Dispatchers.Main) {
-                            app.toast(app.getString(R.string.patches_replace_fail, e.simpleMessage()))
+                            app.toast(app.getString(R.string.home_app_info_patches_replace_fail, e.simpleMessage()))
                         }
 
                         withContext(Dispatchers.IO) {
@@ -1264,7 +1264,7 @@ class PatchBundleRepository(
 
         override suspend fun catch(exception: Exception) {
             Log.e(tag, "Failed to update patches", exception)
-            toast(R.string.patches_download_fail, exception.simpleMessage())
+            toast(R.string.sources_download_fail, exception.simpleMessage())
         }
     }
 
@@ -1347,7 +1347,7 @@ class PatchBundleRepository(
                 .filter { predicate(it) }
 
             if (targets.isEmpty()) {
-                if (showToast) toast(R.string.patches_update_unavailable)
+                if (showToast) toast(R.string.sources_update_unavailable)
                 bundleUpdateProgressFlow.value = null
                 return@coroutineScope
             }
@@ -1435,14 +1435,14 @@ class PatchBundleRepository(
                 results
             } catch (e: Exception) {
                 Log.e(tag, "Failed to update patches", e)
-                toast(R.string.patches_download_fail, e.simpleMessage())
+                toast(R.string.sources_download_fail, e.simpleMessage())
                 emptyMap()
             } finally {
                 bundleUpdateProgressFlow.value = null
             }
 
             if (updated.isEmpty()) {
-                if (showToast) toast(R.string.patches_update_unavailable)
+                if (showToast) toast(R.string.sources_update_unavailable)
                 return@coroutineScope
             }
 
@@ -1470,7 +1470,7 @@ class PatchBundleRepository(
 
             val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
             manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
-            if (showToast) toast(R.string.patches_update_success)
+            if (showToast) toast(R.string.sources_update_success)
         } finally {
             clearActiveUpdateState()
         }
@@ -1521,7 +1521,7 @@ class PatchBundleRepository(
                 .filter { predicate(it) }
 
             if (targets.isEmpty()) {
-                if (showToast) toast(R.string.patches_update_unavailable)
+                if (showToast) toast(R.string.sources_update_unavailable)
                 bundleUpdateProgressFlow.value = null
                 return@coroutineScope
             }
@@ -1628,12 +1628,12 @@ class PatchBundleRepository(
                     }
                 }
 
-                toast(R.string.patches_download_fail, e.simpleMessage())
+                toast(R.string.sources_download_fail, e.simpleMessage())
                 return@coroutineScope
             }
 
             if (updated.isEmpty()) {
-                if (showToast) toast(R.string.patches_update_unavailable)
+                if (showToast) toast(R.string.sources_update_unavailable)
 
                 // No updates available - already up to date
                 val noUpdatesProgress = BundleUpdateProgress(
@@ -1677,7 +1677,7 @@ class PatchBundleRepository(
 
             val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
             manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
-            if (showToast) toast(R.string.patches_update_success)
+            if (showToast) toast(R.string.sources_update_success)
 
             // Show success state
             val successProgress = BundleUpdateProgress(

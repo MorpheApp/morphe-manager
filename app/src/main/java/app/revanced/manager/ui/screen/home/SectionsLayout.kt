@@ -304,13 +304,13 @@ fun ManagerUpdateNotification(
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = stringResource(R.string.morphe_home_update_available),
+                    text = stringResource(R.string.home_update_available),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
                 Text(
-                    text = stringResource(R.string.morphe_home_update_available_subtitle),
+                    text = stringResource(R.string.home_update_available_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
                 )
@@ -424,9 +424,9 @@ private fun BundleUpdateSnackbarContent(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = when (status) {
-                            BundleUpdateStatus.Updating -> stringResource(R.string.morphe_home_updating_sources)
-                            BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_update_success)
-                            BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error)
+                            BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
+                            BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
+                            BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
@@ -437,17 +437,17 @@ private fun BundleUpdateSnackbarContent(
                             BundleUpdateStatus.Updating -> {
                                 if (progress != null && progress.total > 0) {
                                     stringResource(
-                                        R.string.morphe_home_update_progress,
+                                        R.string.home_update_progress,
                                         progress.completed,
                                         progress.total
                                     )
                                 } else {
-                                    stringResource(R.string.morphe_home_please_wait)
+                                    stringResource(R.string.home_please_wait)
                                 }
                             }
 
-                            BundleUpdateStatus.Success -> stringResource(R.string.morphe_home_update_success_subtitle)
-                            BundleUpdateStatus.Error -> stringResource(R.string.morphe_home_update_error_subtitle)
+                            BundleUpdateStatus.Success -> stringResource(R.string.home_update_success_subtitle)
+                            BundleUpdateStatus.Error -> stringResource(R.string.home_update_error_subtitle)
                         },
                         style = MaterialTheme.typography.bodyMedium,
                         color = contentColor.copy(alpha = 0.8f)
@@ -548,7 +548,7 @@ fun MainAppsSection(
                     Color(0xFF1E5AA8),
                     Color(0xFF00AFAE)
                 ),
-                buttonText = stringResource(R.string.morphe_home_youtube),
+                buttonText = stringResource(R.string.home_youtube),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onYouTubeClick
             )
@@ -563,7 +563,7 @@ fun MainAppsSection(
                     Color(0xFF1E5AA8),
                     Color(0xFF00AFAE)
                 ),
-                buttonText = stringResource(R.string.morphe_home_youtube_music),
+                buttonText = stringResource(R.string.home_youtube_music),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onYouTubeMusicClick
             )
@@ -578,7 +578,7 @@ fun MainAppsSection(
                     Color(0xFF1E5AA8),
                     Color(0xFF00AFAE)
                 ),
-                buttonText = stringResource(R.string.morphe_home_reddit),
+                buttonText = stringResource(R.string.home_reddit),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onRedditClick
             )
@@ -817,7 +817,7 @@ fun AppButton(
 
             // Status text
             Text(
-                text = stringResource(R.string.morphe_home_not_patched_yet),
+                text = stringResource(R.string.home_not_patched_yet),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     shadow = Shadow(
                         color = Color.Black.copy(alpha = 0.4f),
@@ -869,7 +869,7 @@ fun OtherAppsSection(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(R.string.morphe_home_other_apps),
+            text = stringResource(R.string.home_other_apps),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp,

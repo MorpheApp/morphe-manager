@@ -54,7 +54,7 @@ fun LanguagePickerDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.app_language),
+        title = stringResource(R.string.settings_appearance_app_language),
         footer = {
             MorpheDialogOutlinedButton(
                 text = stringResource(android.R.string.cancel),
@@ -74,7 +74,7 @@ fun LanguagePickerDialog(
                 onValueChange = { searchQuery = it },
                 label = {
                     Text(
-                        stringResource(R.string.morphe_appearance_search),
+                        stringResource(R.string.search),
                         color = LocalDialogSecondaryTextColor.current
                     )
                 },
@@ -90,7 +90,7 @@ fun LanguagePickerDialog(
                         IconButton(onClick = { searchQuery = "" }) {
                             Icon(
                                 imageVector = Icons.Outlined.Close,
-                                contentDescription = "Clear search",
+                                contentDescription = stringResource(R.string.clear_search),
                                 tint = LocalDialogSecondaryTextColor.current
                             )
                         }
@@ -115,7 +115,7 @@ fun LanguagePickerDialog(
                 if (filteredLanguages.isEmpty()) {
                     item {
                         Text(
-                            text = stringResource(R.string.morphe_appearance_no_results),
+                            text = stringResource(R.string.search_no_results),
                             style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                             modifier = Modifier

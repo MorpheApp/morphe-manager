@@ -87,7 +87,7 @@ fun AppearanceTabContent(
     ) {
         // Background Type
         SectionTitle(
-            text = stringResource(R.string.morphe_background_type),
+            text = stringResource(R.string.settings_appearance_background),
             icon = Icons.Outlined.Wallpaper
         )
 
@@ -127,7 +127,7 @@ fun AppearanceTabContent(
 
         // Theme Mode
         SectionTitle(
-            text = stringResource(R.string.theme),
+            text = stringResource(R.string.settings_appearance_theme),
             icon = Icons.Outlined.Palette
         )
 
@@ -140,28 +140,28 @@ fun AppearanceTabContent(
                             SelectorItem(
                                 key = "SYSTEM",
                                 icon = Icons.Outlined.PhoneAndroid,
-                                label = stringResource(R.string.system)
+                                label = stringResource(R.string.settings_appearance_system)
                             )
                         )
                         add(
                             SelectorItem(
                                 key = "LIGHT",
                                 icon = Icons.Outlined.LightMode,
-                                label = stringResource(R.string.light)
+                                label = stringResource(R.string.settings_appearance_light)
                             )
                         )
                         add(
                             SelectorItem(
                                 key = "DARK",
                                 icon = Icons.Outlined.DarkMode,
-                                label = stringResource(R.string.dark)
+                                label = stringResource(R.string.settings_appearance_dark)
                             )
                         )
                         add(
                             SelectorItem(
                                 key = "BLACK",
                                 icon = Icons.Outlined.Contrast,
-                                label = stringResource(R.string.black)
+                                label = stringResource(R.string.settings_appearance_black)
                             )
                         )
                         if (supportsDynamicColor) {
@@ -169,7 +169,7 @@ fun AppearanceTabContent(
                                 SelectorItem(
                                     key = "DYNAMIC",
                                     icon = Icons.Outlined.AutoAwesome,
-                                    label = stringResource(R.string.theme_preset_dynamic)
+                                    label = stringResource(R.string.settings_appearance_dynamic)
                                 )
                             )
                         }
@@ -200,7 +200,7 @@ fun AppearanceTabContent(
 
         // Accent Color
         SectionTitle(
-            text = stringResource(R.string.accent_color_presets),
+            text = stringResource(R.string.settings_appearance_accent_color),
             icon = Icons.Outlined.ColorLens
         )
 
@@ -216,7 +216,7 @@ fun AppearanceTabContent(
 
         // Language
         SectionTitle(
-            text = stringResource(R.string.app_language),
+            text = stringResource(R.string.settings_appearance_app_language),
             icon = Icons.Outlined.Language
         )
 
@@ -228,7 +228,7 @@ fun AppearanceTabContent(
         RichSettingsItem(
             onClick = { showTranslationInfoDialog = true },
             showBorder = true,
-            title = stringResource(R.string.morphe_appearance_current_language),
+            title = stringResource(R.string.settings_appearance_app_language_current),
             subtitle = currentLanguage,
             leadingContent = {
                 Surface(
@@ -251,7 +251,7 @@ fun AppearanceTabContent(
 
         // Icon manager
         SectionTitle(
-            text = stringResource(R.string.morphe_app_icon_selector_title),
+            text = stringResource(R.string.settings_appearance_app_icon_selector_title),
             icon = Icons.Outlined.Apps
         )
 
@@ -267,10 +267,10 @@ fun AppearanceTabContent(
         exit = fadeOut(animationSpec = tween(if (showLanguageDialog) 0 else 200))
     ) {
         MorpheDialogWithLinks(
-            title = stringResource(R.string.morphe_appearance_translations_info_title),
+            title = stringResource(R.string.settings_appearance_translations_info_title),
             message = stringResource(
-                R.string.morphe_appearance_translations_info_text,
-                stringResource(R.string.morphe_appearance_translations_info_url)
+                R.string.settings_appearance_translations_info_text,
+                stringResource(R.string.settings_appearance_translations_info_url)
             ),
             urlLink = "https://morphe.software/translate",
             onDismiss = {

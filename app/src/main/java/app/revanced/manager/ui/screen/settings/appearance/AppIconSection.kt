@@ -160,10 +160,10 @@ private fun AppIconChangeDialog(
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_app_icon_change_dialog_title),
+        title = stringResource(R.string.settings_appearance_app_icon_change_dialog_title),
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.morphe_app_icon_change_dialog_confirm),
+                primaryText = stringResource(R.string.settings_appearance_app_icon_change_dialog_confirm),
                 onPrimaryClick = onConfirm,
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
@@ -172,7 +172,7 @@ private fun AppIconChangeDialog(
     ) {
         Text(
             text = stringResource(
-                R.string.morphe_app_icon_change_dialog_message,
+                R.string.settings_appearance_app_icon_change_dialog_message,
                 stringResource(icon.displayNameResId)
             ),
             style = MaterialTheme.typography.bodyLarge,

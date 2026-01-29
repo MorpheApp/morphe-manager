@@ -140,9 +140,9 @@ fun ManagerTheme(
 
 @Serializable
 enum class Theme(val displayName: Int) {
-    SYSTEM(R.string.system),
-    LIGHT(R.string.light),
-    DARK(R.string.dark);
+    SYSTEM(R.string.settings_appearance_system),
+    LIGHT(R.string.settings_appearance_light),
+    DARK(R.string.settings_appearance_dark);
 }
 
 private fun applyCustomAccent(

@@ -63,7 +63,7 @@ fun AddBundleDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_add_patch_source),
+        title = stringResource(R.string.sources_dialog_add_source),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.add),
@@ -92,8 +92,8 @@ fun AddBundleDialog(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     listOf(
-                        stringResource(R.string.morphe_add_patch_source_remote),
-                        stringResource(R.string.morphe_add_patch_source_local)
+                        stringResource(R.string.sources_dialog_remote),
+                        stringResource(R.string.sources_dialog_local)
                     ).forEachIndexed { index, title ->
                         val isSelected = selectedTab == index
 
@@ -169,7 +169,7 @@ private fun RemoteTabContent(
                 value = remoteUrl,
                 onValueChange = onUrlChange,
                 label = {
-                    Text(stringResource(R.string.morphe_add_patch_source_remote_url))
+                    Text(stringResource(R.string.sources_dialog_remote_url))
                 },
                 placeholder = {
                     Text(text = "https://example.com/patches.json")
@@ -181,7 +181,7 @@ private fun RemoteTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.morphe_add_patch_source_remote_description),
+            text = stringResource(R.string.sources_dialog_remote_description),
             style = InfoBadgeStyle.Success
         )
     }
@@ -198,9 +198,9 @@ private fun LocalTabContent(
         // File picker button
         MorpheDialogButton(
             text = if (selectedPath == null) {
-                stringResource(R.string.morphe_add_patch_source_local_file)
+                stringResource(R.string.sources_dialog_local_file)
             } else {
-                stringResource(R.string.morphe_add_patch_source_local_change_file)
+                stringResource(R.string.sources_dialog_local_change_file)
             },
             onClick = onPickFile,
             icon = Icons.Outlined.FolderOpen,
@@ -219,7 +219,7 @@ private fun LocalTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.morphe_add_patch_source_local_file_description),
+            text = stringResource(R.string.sources_dialog_local_file_description),
             style = InfoBadgeStyle.Success
         )
     }
@@ -248,7 +248,7 @@ fun BundleDeleteConfirmDialog(
 
         Text(
             text = stringResource(
-                R.string.morphe_sources_delete_confirm_message,
+                R.string.sources_dialog_delete_confirm_message,
                 bundle.displayTitle
             ),
             style = MaterialTheme.typography.bodyLarge,
@@ -271,7 +271,7 @@ fun RenameBundleDialog(
 
     MorpheDialog(
         onDismissRequest = onDismissRequest,
-        title = stringResource(R.string.patches_display_name),
+        title = stringResource(R.string.sources_dialog_display_name),
         dismissOnClickOutside = false,
         footer = {
             MorpheDialogButtonRow(
@@ -295,7 +295,7 @@ fun RenameBundleDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = stringResource(R.string.patch_bundle_rename),
+                text = stringResource(R.string.sources_dialog_rename),
                 style = MaterialTheme.typography.bodyMedium,
                 color = secondaryColor
             )
@@ -305,7 +305,7 @@ fun RenameBundleDialog(
                 onValueChange = { textValue = it },
                 placeholder = {
                     Text(
-                        text = stringResource(R.string.morphe_patch_option_enter_value),
+                        text = stringResource(R.string.patch_option_enter_value),
                         color = secondaryColor.copy(alpha = 0.5f)
                     )
                 },
@@ -541,13 +541,13 @@ private fun PatchItemCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     InfoBadge(
-                        text = stringResource(R.string.patches_view_any_package),
+                        text = stringResource(R.string.sources_dialog_view_any_package),
                         icon = Icons.Outlined.Apps,
                         style = InfoBadgeStyle.Default,
                         isCompact = true
                     )
                     InfoBadge(
-                        text = stringResource(R.string.patches_view_any_version),
+                        text = stringResource(R.string.sources_dialog_view_any_version),
                         icon = Icons.Outlined.Code,
                         style = InfoBadgeStyle.Default,
                         isCompact = true
@@ -766,7 +766,7 @@ private fun BundleChangelogError(
             ) {
                 Text(
                     text = stringResource(
-                        R.string.bundle_changelog_error,
+                        R.string.changelog_download_fail,
                         error.simpleMessage().orEmpty()
                     ),
                     style = MaterialTheme.typography.bodyLarge,
@@ -774,7 +774,7 @@ private fun BundleChangelogError(
                     color = LocalDialogTextColor.current
                 )
                 MorpheDialogButton(
-                    text = stringResource(R.string.bundle_changelog_retry),
+                    text = stringResource(R.string.changelog_retry),
                     onClick = onRetry
                 )
             }
@@ -871,7 +871,7 @@ private fun BundleChangelogContent(
         // Changelog markdown content
         Changelog(
             markdown = markdown.ifBlank {
-                stringResource(R.string.bundle_changelog_empty)
+                stringResource(R.string.changelog_empty)
             }
         )
     }

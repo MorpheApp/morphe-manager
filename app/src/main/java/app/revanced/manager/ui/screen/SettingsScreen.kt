@@ -152,7 +152,7 @@ fun SettingsScreen(
                     if (result) {
                         showKeystoreCredentialsDialog = false
                     } else {
-                        context.toast(context.getString(R.string.import_keystore_wrong_credentials))
+                        context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
                     }
                 }
             }

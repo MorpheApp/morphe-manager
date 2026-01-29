@@ -78,7 +78,7 @@ fun ThemeColorDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_patch_options_theme_colors),
+        title = stringResource(R.string.settings_advanced_patch_options_theme_colors),
         titleTrailingContent = {
             IconButton(
                 onClick = {
@@ -120,7 +120,7 @@ fun ThemeColorDialog(
                     context,
                     darkThemeOption.title,
                     DARK_THEME_COLOR_TITLE,
-                    R.string.morphe_patch_options_dark_theme_color
+                    R.string.settings_advanced_patch_options_dark_theme_color
                 )
                 Text(
                     text = localizedTitle,
@@ -134,7 +134,7 @@ fun ThemeColorDialog(
                         context,
                         desc,
                         DARK_THEME_COLOR_DESC,
-                        R.string.morphe_patch_options_dark_theme_color_description
+                        R.string.settings_advanced_patch_options_dark_theme_color_description
                     )
                     Text(
                         text = localizedDesc,
@@ -163,7 +163,7 @@ fun ThemeColorDialog(
 
                 // Custom color option
                 ColorPresetItem(
-                    label = stringResource(R.string.morphe_custom_color),
+                    label = stringResource(R.string.custom_color),
                     colorValue = darkColor,
                     isSelected = darkPresets.values.none { it?.toString() == darkColor },
                     isCustom = true,
@@ -179,7 +179,7 @@ fun ThemeColorDialog(
                     context,
                     lightThemeOption.title,
                     LIGHT_THEME_COLOR_TITLE,
-                    R.string.morphe_patch_options_light_theme_color
+                    R.string.settings_advanced_patch_options_light_theme_color
                 )
                 Text(
                     text = localizedTitle,
@@ -193,7 +193,7 @@ fun ThemeColorDialog(
                         context,
                         desc,
                         LIGHT_THEME_COLOR_DESC,
-                        R.string.morphe_patch_options_light_theme_color_description
+                        R.string.settings_advanced_patch_options_light_theme_color_description
                     )
                     Text(
                         text = localizedDesc,
@@ -219,7 +219,7 @@ fun ThemeColorDialog(
 
                 // Custom color option
                 ColorPresetItem(
-                    label = stringResource(R.string.morphe_custom_color),
+                    label = stringResource(R.string.custom_color),
                     colorValue = lightColor,
                     isSelected = lightPresets.values.none { it?.toString() == lightColor },
                     isCustom = true,
@@ -230,7 +230,7 @@ fun ThemeColorDialog(
             // Show message if no options available
             if (darkThemeOption == null && lightThemeOption == null) {
                 Text(
-                    text = stringResource(R.string.morphe_patch_options_no_available),
+                    text = stringResource(R.string.settings_advanced_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = FontStyle.Italic
@@ -242,7 +242,7 @@ fun ThemeColorDialog(
     // Dark Color Picker Dialog
     if (showDarkColorPicker) {
         ColorPickerDialog(
-            title = stringResource(R.string.morphe_patch_options_dark_theme_color),
+            title = stringResource(R.string.settings_advanced_patch_options_dark_theme_color),
             currentColor = darkColor,
             onColorSelected = { color ->
                 scope.launch {
@@ -260,7 +260,7 @@ fun ThemeColorDialog(
     // Light Color Picker Dialog
     if (showLightColorPicker) {
         ColorPickerDialog(
-            title = stringResource(R.string.morphe_patch_options_light_theme_color),
+            title = stringResource(R.string.settings_advanced_patch_options_light_theme_color),
             currentColor = lightColor,
             onColorSelected = { color ->
                 scope.launch {
@@ -319,7 +319,7 @@ fun CustomBrandingDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_patch_options_custom_branding),
+        title = stringResource(R.string.settings_advanced_patch_options_custom_branding),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -355,10 +355,10 @@ fun CustomBrandingDialog(
                     value = appName,
                     onValueChange = { appName = it },
                     label = {
-                        Text(stringResource(R.string.morphe_patch_options_custom_branding_app_name))
+                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name))
                     },
                     placeholder = {
-                        Text(stringResource(R.string.morphe_patch_options_custom_branding_app_name_hint))
+                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name_hint))
                     },
                     trailingIcon = {
                         // Reset button
@@ -385,7 +385,7 @@ fun CustomBrandingDialog(
                     value = iconPath,
                     onValueChange = { iconPath = it },
                     label = {
-                        Text(stringResource(R.string.morphe_patch_options_custom_branding_custom_icon))
+                        Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_custom_icon))
                     },
                     placeholder = {
                         Text("/storage/emulated/0/icons")
@@ -423,7 +423,7 @@ fun CustomBrandingDialog(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = stringResource(R.string.morphe_patch_option_pick_folder),
+                                    contentDescription = stringResource(R.string.patch_option_pick_folder),
                                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -440,11 +440,11 @@ fun CustomBrandingDialog(
                         context,
                         description,
                         CUSTOM_ICON_INSTRUCTION,
-                        R.string.morphe_patch_options_custom_branding_custom_icon_instruction
+                        R.string.settings_advanced_patch_options_custom_branding_custom_icon_instruction
                     )
 
                     ExpandableSurface(
-                        title = stringResource(R.string.morphe_patch_option_instructions),
+                        title = stringResource(R.string.patch_option_instructions),
                         content = { ScrollableInstruction(description = localizedDescription) }
                     )
                 }
@@ -453,7 +453,7 @@ fun CustomBrandingDialog(
             // Show message if no options available
             if (appNameOption == null && iconOption == null) {
                 Text(
-                    text = stringResource(R.string.morphe_patch_options_no_available),
+                    text = stringResource(R.string.settings_advanced_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = FontStyle.Italic
@@ -489,7 +489,7 @@ fun CustomHeaderDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.morphe_patch_options_custom_header),
+        title = stringResource(R.string.settings_advanced_patch_options_custom_header),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -513,7 +513,7 @@ fun CustomHeaderDialog(
                     value = headerPath,
                     onValueChange = { headerPath = it },
                     label = {
-                        Text(stringResource(R.string.morphe_patch_options_custom_header))
+                        Text(stringResource(R.string.settings_advanced_patch_options_custom_header))
                     },
                     placeholder = {
                         Text("/storage/emulated/0/header")
@@ -551,7 +551,7 @@ fun CustomHeaderDialog(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = stringResource(R.string.morphe_patch_option_pick_folder),
+                                    contentDescription = stringResource(R.string.patch_option_pick_folder),
                                     tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -568,18 +568,18 @@ fun CustomHeaderDialog(
                         context,
                         description,
                         CUSTOM_HEADER_INSTRUCTION,
-                        R.string.morphe_patch_options_custom_header_instruction
+                        R.string.settings_advanced_patch_options_custom_header_instruction
                     )
 
                     ExpandableSurface(
-                        title = stringResource(R.string.morphe_patch_option_instructions),
+                        title = stringResource(R.string.patch_option_instructions),
                         content = { ScrollableInstruction(description = localizedDescription) }
                     )
                 }
             } else {
                 // No option available
                 Text(
-                    text = stringResource(R.string.morphe_patch_options_no_available),
+                    text = stringResource(R.string.settings_advanced_patch_options_no_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.7f),
                     fontStyle = FontStyle.Italic

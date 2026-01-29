@@ -919,14 +919,14 @@ class InstalledAppInfoViewModel(
         // Check if original APK exists
         val originalApk = originalApkRepository.get(app.originalPackageName)
         if (originalApk == null) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
         // Check if file exists - filePath is String, need to convert to File
         val originalFile = File(originalApk.filePath)
         if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
@@ -974,13 +974,13 @@ class InstalledAppInfoViewModel(
         // Get original APK file
         val originalApk = originalApkRepository.get(app.originalPackageName)
         if (originalApk == null) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
         val originalFile = File(originalApk.filePath)
         if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 

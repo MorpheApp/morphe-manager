@@ -443,7 +443,7 @@ private fun SuccessRootWarning(
                 modifier = Modifier.size(20.dp)
             )
             Text(
-                text = stringResource(R.string.morphe_root_gmscore_excluded),
+                text = stringResource(R.string.root_gmscore_excluded),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -509,8 +509,8 @@ private fun InstallActionButton(
             Spacer(Modifier.width(12.dp))
             Text(
                 text = stringResource(
-                    if (usingMountInstall) R.string.morphe_patcher_mounting
-                    else R.string.morphe_patcher_installing
+                    if (usingMountInstall) R.string.mounting_ellipsis
+                    else R.string.installing_ellipsis
                 ),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
@@ -531,11 +531,11 @@ private fun InstallActionButton(
             Text(
                 text = stringResource(
                     when {
-                        isInstalled -> R.string.open_app
+                        isInstalled -> R.string.open
                         isConflict -> R.string.uninstall
-                        isError -> R.string.install_app
+                        isError -> R.string.install
                         usingMountInstall -> R.string.mount
-                        else -> R.string.install_app
+                        else -> R.string.install
                     }
                 ),
                 style = MaterialTheme.typography.titleMedium,
@@ -553,11 +553,11 @@ private fun getTitleForState(
     installedPackageName: String?,
     isInstalling: Boolean
 ): Int = when {
-    isInstalling -> R.string.morphe_patcher_installing
-    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.morphe_patcher_success_title
-    installState is InstallViewModel.InstallState.Conflict -> R.string.morphe_patcher_conflict_title
-    installState is InstallViewModel.InstallState.Error -> R.string.morphe_patcher_install_error_title
-    else -> R.string.morphe_patcher_complete_title
+    isInstalling -> R.string.installing_ellipsis
+    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.patcher_success_title
+    installState is InstallViewModel.InstallState.Conflict -> R.string.patcher_conflict_title
+    installState is InstallViewModel.InstallState.Error -> R.string.patcher_install_error_title
+    else -> R.string.patcher_complete_title
 }
 
 /**
@@ -569,11 +569,11 @@ private fun getSubtitleForState(
     isInstalling: Boolean,
     usingMountInstall: Boolean
 ): Int = when {
-    isInstalling -> R.string.morphe_patcher_installing_subtitle
-    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.morphe_patcher_success_subtitle
-    installState is InstallViewModel.InstallState.Conflict -> R.string.morphe_patcher_conflict_subtitle
-    installState is InstallViewModel.InstallState.Error -> R.string.morphe_patcher_install_error_subtitle
-    else -> if (usingMountInstall) R.string.morphe_patcher_ready_to_mount_subtitle else R.string.morphe_patcher_ready_to_install_subtitle
+    isInstalling -> R.string.patcher_installing_subtitle
+    installedPackageName != null || installState is InstallViewModel.InstallState.Installed -> R.string.patcher_success_subtitle
+    installState is InstallViewModel.InstallState.Conflict -> R.string.patcher_conflict_subtitle
+    installState is InstallViewModel.InstallState.Error -> R.string.patcher_install_error_subtitle
+    else -> if (usingMountInstall) R.string.patcher_ready_to_mount_subtitle else R.string.patcher_ready_to_install_subtitle
 }
 
 /**
@@ -606,7 +606,7 @@ fun PatchingFailed(
                 Spacer(Modifier.height(windowSize.itemSpacing * 2))
 
                 Text(
-                    text = stringResource(R.string.morphe_patcher_failed_title),
+                    text = stringResource(R.string.patcher_failed_title),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
@@ -616,7 +616,7 @@ fun PatchingFailed(
                 Spacer(Modifier.height(windowSize.itemSpacing))
 
                 Text(
-                    text = stringResource(R.string.morphe_patcher_failed_subtitle),
+                    text = stringResource(R.string.patcher_failed_subtitle),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center

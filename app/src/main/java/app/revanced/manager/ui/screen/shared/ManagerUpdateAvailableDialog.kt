@@ -89,7 +89,7 @@ fun ManagerUpdateDetailsDialog(
 
                 UpdateViewModel.State.CAN_INSTALL -> {
                     MorpheDialogButton(
-                        text = stringResource(R.string.install_app),
+                        text = stringResource(R.string.install),
                         onClick = { updateViewModel.installUpdate() },
                         icon = Icons.Outlined.InstallMobile,
                         modifier = Modifier.fillMaxWidth()
@@ -114,7 +114,7 @@ fun ManagerUpdateDetailsDialog(
                         } else {
                             // Download completed but install failed - offer to retry install
                             MorpheDialogButton(
-                                text = stringResource(R.string.install_app),
+                                text = stringResource(R.string.install),
                                 onClick = { updateViewModel.installUpdate() },
                                 icon = Icons.Outlined.InstallMobile,
                                 modifier = Modifier.fillMaxWidth()
