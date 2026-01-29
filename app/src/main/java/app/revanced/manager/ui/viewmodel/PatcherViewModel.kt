@@ -43,6 +43,7 @@ import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
+import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
@@ -120,6 +121,7 @@ class PatcherViewModel(
     private val installerManager: InstallerManager by inject()
     val prefs: PreferencesManager by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
+    private val originalApkRepository: OriginalApkRepository by inject()
     private val savedStateHandle: SavedStateHandle = get()
 
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null
@@ -240,30 +242,30 @@ class PatcherViewModel(
             bundleOptions.mapValues { (_, patchOptions) -> patchOptions.toMap() }.toMap()
         }.toMap()
 
-fun dismissMissingPatchWarning() {
-    missingPatchWarning = null
-}
-
-fun proceedAfterMissingPatchWarning() {
-    if (missingPatchWarning == null) return
-    viewModelScope.launch {
+    fun dismissMissingPatchWarning() {
         missingPatchWarning = null
-        startWorker()
     }
-}
 
-fun removeMissingPatchesAndStart() {
-    val warning = missingPatchWarning ?: return
-    viewModelScope.launch {
-        val scopedBundles = gatherScopedBundles()
-        val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
-        val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
-        appliedSelection = sanitizedSelection
-        appliedOptions = sanitizedOptions
-        missingPatchWarning = null
-        startWorker()
+    fun proceedAfterMissingPatchWarning() {
+        if (missingPatchWarning == null) return
+        viewModelScope.launch {
+            missingPatchWarning = null
+            startWorker()
+        }
     }
-}
+
+    fun removeMissingPatchesAndStart() {
+        val warning = missingPatchWarning ?: return
+        viewModelScope.launch {
+            val scopedBundles = gatherScopedBundles()
+            val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
+            val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
+            appliedSelection = sanitizedSelection
+            appliedOptions = sanitizedOptions
+            missingPatchWarning = null
+            startWorker()
+        }
+    }
 
     private var currentActivityRequest: Pair<CompletableDeferred<Boolean>, String>? by mutableStateOf(
         null
@@ -418,9 +420,9 @@ fun removeMissingPatchesAndStart() {
                     val signatureChangedToExpected = if (expectedSignature != null) {
                         val current = readInstalledSignatureBytes(packageName)
                         current != null &&
-                            current.contentEquals(expectedSignature) &&
-                            (!packageWasPresentAtStart || baselineSignature != null) &&
-                            (baselineSignature == null || !baselineSignature.contentEquals(current))
+                                current.contentEquals(expectedSignature) &&
+                                (!packageWasPresentAtStart || baselineSignature != null) &&
+                                (baselineSignature == null || !baselineSignature.contentEquals(current))
                     } else {
                         false
                     }
@@ -868,6 +870,20 @@ fun removeMissingPatchesAndStart() {
                 runPreflightCheck()
             }
         }
+
+        // Fallback: if inputFile is null and we have SelectedApp.Installed,
+        // try to get the original APK from repository (for repatch feature)
+        if (inputFile == null && input.selectedApp is SelectedApp.Installed) {
+            viewModelScope.launch(Dispatchers.IO) {
+                val originalApk = originalApkRepository.get(packageName)
+                if (originalApk != null) {
+                    val file = File(originalApk.filePath)
+                    if (file.exists()) {
+                        inputFile = file
+                    }
+                }
+            }
+        }
     }
 
     private suspend fun runPreflightCheck() {
@@ -893,21 +909,105 @@ fun removeMissingPatchesAndStart() {
         observeWorker(workId)
     }
 
-    private suspend fun persistPatchedApp(
+    /**
+     * Save original APK file for future repatching.
+     * Called after successful patching, independent of installation method.
+     * For split APK archives (apkm, apks, xapk), saves the original archive.
+     * For regular APK files, saves the APK itself.
+     */
+    private suspend fun saveOriginalApkIfNeeded() {
+        try {
+            // Determine which file to save:
+            // - For SelectedApp.Local with split archives: save the original user file
+            // - For other cases: save the inputFile (which might be a downloaded/extracted APK)
+            val fileToSave = when (val selected = input.selectedApp) {
+                is SelectedApp.Local -> {
+                    // Check if original file is a split archive
+                    if (SplitApkPreparer.isSplitArchive(selected.file)) {
+                        // Save the original split archive, not the merged APK
+                        selected.file
+                    } else {
+                        // For regular APK, use inputFile (might be same as selected.file)
+                        inputFile ?: selected.file
+                    }
+                }
+                else -> {
+                    // For non-local apps (Download, Search, Installed), use inputFile
+                    inputFile
+                }
+            }
+
+            if (fileToSave == null || !fileToSave.exists()) {
+                Log.w(TAG, "File to save doesn't exist, skipping original APK save")
+                return
+            }
+
+            // Get version from the package info
+            // Use outputFile (patched APK) because inputFile might be deleted by worker!
+            // For split archives: selected.file (archive) won't have valid PackageInfo
+            // For regular APKs: inputFile might be deleted
+            val apkPackageInfo = pm.getPackageInfo(outputFile)
+            if (apkPackageInfo == null) {
+                Log.w(TAG, "Cannot get package info from output APK, skipping save")
+                return
+            }
+
+            val originalVersion = apkPackageInfo.versionName?.takeUnless { it.isBlank() }
+                ?: input.selectedApp.version
+                ?: "unknown"
+
+            // Does original already exist in repository?
+            val existing = originalApkRepository.get(packageName)
+            if (existing != null && existing.version == originalVersion) {
+                Log.d(TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
+                return
+            }
+
+            // If we got here, we need to save the original
+            val savedFile = originalApkRepository.saveOriginalApk(
+                packageName = packageName,
+                version = originalVersion,
+                sourceFile = fileToSave
+            )
+
+            if (savedFile != null) {
+                Log.i(TAG, "Original APK/archive saved: ${savedFile.name}")
+            }
+        } catch (e: Exception) {
+            // Don't fail patching if save fails
+            Log.w(TAG, "Failed to save original APK", e)
+        }
+    }
+
+    suspend fun persistPatchedApp(
         currentPackageName: String?,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
         val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
         val patchedPackageInfo = pm.getPackageInfo(outputFile)
-        val packageInfo = installedPackageInfo ?: patchedPackageInfo
+        val packageInfo = patchedPackageInfo ?: installedPackageInfo
         if (packageInfo == null) {
             Log.e(TAG, "Failed to resolve package info for patched APK")
             return@withContext false
         }
 
+        // This call is safe, it will skip if already saved
+        saveOriginalApkIfNeeded()
+
         val finalPackageName = packageInfo.packageName
         val finalVersion = packageInfo.versionName?.takeUnless { it.isBlank() } ?: version ?: "unspecified"
 
+        // Delete old version file if it exists and is different
+        val existingApp = installedAppRepository.get(finalPackageName)
+        if (existingApp != null && existingApp.version != finalVersion) {
+            val oldFile = fs.getPatchedAppFile(finalPackageName, existingApp.version)
+            if (oldFile.exists()) {
+                oldFile.delete()
+                Log.d(TAG, "Deleted old patched app file: ${oldFile.name}")
+            }
+        }
+
+        // Save new version
         val savedCopy = fs.getPatchedAppFile(finalPackageName, finalVersion)
         try {
             savedCopy.parentFile?.mkdirs()
@@ -926,37 +1026,34 @@ fun removeMissingPatchesAndStart() {
             exportMetadata = metadata
         }
 
-        val scopedBundlesFinal = patchBundleRepository.scopedBundleInfoFlow(finalPackageName, finalVersion)
-            .first()
-            .associateBy { it.uid }
-        val sanitizedSelectionFinal = sanitizeSelection(appliedSelection, scopedBundlesFinal)
-        val sanitizedOptionsFinal = sanitizeOptions(appliedOptions, scopedBundlesFinal)
-        val scopedBundlesOriginal = patchBundleRepository.scopedBundleInfoFlow(
+        // Use original package name to get scoped bundles for selection persistence
+        // This ensures all applied patches are correctly saved
+        val scopedBundlesForSelection = patchBundleRepository.scopedBundleInfoFlow(
             packageName,
             input.selectedApp.version
         ).first().associateBy { it.uid }
-        val sanitizedSelectionOriginal = sanitizeSelection(appliedSelection, scopedBundlesOriginal)
-        val sanitizedOptionsOriginal = sanitizeOptions(appliedOptions, scopedBundlesOriginal)
+        val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
+        val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
 
-        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelectionFinal)
+        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelection)
 
         installedAppRepository.addOrUpdate(
             finalPackageName,
             packageName,
             finalVersion,
             installType,
-            sanitizedSelectionFinal,
+            sanitizedSelection,
             selectionPayload
         )
 
         if (finalPackageName != packageName) {
-            patchSelectionRepository.updateSelection(finalPackageName, sanitizedSelectionFinal)
-            patchOptionsRepository.saveOptions(finalPackageName, sanitizedOptionsFinal)
+            patchSelectionRepository.updateSelection(finalPackageName, sanitizedSelection)
+            patchOptionsRepository.saveOptions(finalPackageName, sanitizedOptions)
         }
-        patchSelectionRepository.updateSelection(packageName, sanitizedSelectionOriginal)
-        patchOptionsRepository.saveOptions(packageName, sanitizedOptionsOriginal)
-        appliedSelection = sanitizedSelectionOriginal
-        appliedOptions = sanitizedOptionsOriginal
+        patchSelectionRepository.updateSelection(packageName, sanitizedSelection)
+        patchOptionsRepository.saveOptions(packageName, sanitizedOptions)
+        appliedSelection = sanitizedSelection
+        appliedOptions = sanitizedOptions
 
         savedPatchedApp = savedPatchedApp || installType == InstallType.SAVED || savedCopy.exists()
         true
@@ -1021,13 +1118,13 @@ fun removeMissingPatchesAndStart() {
                         PackageInstaller.STATUS_FAILURE
                     )
 
-                intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
-                    ?.let(logger::trace)
+                    intent.getStringExtra(UninstallService.EXTRA_UNINSTALL_STATUS_MESSAGE)
+                        ?.let(logger::trace)
 
-                if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
-                    updateInstallingState(true)
-                    return
-                }
+                    if (pmStatus == PackageInstaller.STATUS_PENDING_USER_ACTION) {
+                        updateInstallingState(true)
+                        return
+                    }
 
                     if (pmStatus == PackageInstaller.STATUS_SUCCESS) {
                         val packageName = intent.getStringExtra(InstallService.EXTRA_PACKAGE_NAME)
@@ -1052,7 +1149,7 @@ fun removeMissingPatchesAndStart() {
                     } else {
                         val now = System.currentTimeMillis()
                         val recentShizukuSuccess = lastSuccessInstallType == InstallType.SHIZUKU &&
-                            now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
+                                now - lastSuccessAtMs < SUPPRESS_FAILURE_AFTER_SUCCESS_MS * 2
                         if (activeInstallType == InstallType.SHIZUKU || recentShizukuSuccess || installStatus is InstallCompletionStatus.Success) {
                             packageInstallerStatus = null
                             installFailureMessage = null
@@ -1422,7 +1519,7 @@ fun removeMissingPatchesAndStart() {
                         rootInstaller.mount(packageName)
 
                         installedPackageName = packageName
-            markInstallSuccess(packageName)
+                        markInstallSuccess(packageName)
                         updateInstallingState(false)
                     } catch (e: Exception) {
                         Log.e(tag, "Failed to install as root", e)
@@ -1441,19 +1538,19 @@ fun removeMissingPatchesAndStart() {
                 }
             }
         } catch (e: Exception) {
-                    Log.e(tag, "Failed to install", e)
-                    awaitingPackageInstall = null
-                    packageInstallerStatus = null
-                    showInstallFailure(
-                        app.getString(
-                            R.string.install_app_fail,
-                            e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
-                        )
-                    )
-                } finally {
-                    if (!pmInstallStarted) updateInstallingState(false)
-                }
-            }
+            Log.e(tag, "Failed to install", e)
+            awaitingPackageInstall = null
+            packageInstallerStatus = null
+            showInstallFailure(
+                app.getString(
+                    R.string.install_app_fail,
+                    e.simpleMessage() ?: e.javaClass.simpleName.orEmpty()
+                )
+            )
+        } finally {
+            if (!pmInstallStarted) updateInstallingState(false)
+        }
+    }
 
     private suspend fun performShizukuInstall() {
         activeInstallType = InstallType.SHIZUKU
@@ -1698,8 +1795,8 @@ fun removeMissingPatchesAndStart() {
                     outputFile,
                     expectedPackage,
                     packageName,
-            )
-            Log.d(TAG, "install() resolved plan=${plan::class.java.simpleName}")
+                )
+                Log.d(TAG, "install() resolved plan=${plan::class.java.simpleName}")
                 if (plan !is InstallerManager.InstallPlan.Mount &&
                     hasSignatureMismatch(expectedPackage, outputFile)
                 ) {
@@ -1838,20 +1935,20 @@ fun removeMissingPatchesAndStart() {
         val shouldPreserveInput =
             selectedForRun is SelectedApp.Local && (selectedForRun.temporary || forceKeepLocalInput)
 
-        // Completely isolate Morphe and Expert modes
-        val useMorpheMode = prefs.useMorpheHomeScreen.getBlocking()
+        // Determine which patches and options to use based on mode
+        val useExpertMode = prefs.useExpertMode.getBlocking()
 
-        val mergedOptions = if (useMorpheMode) {
-            // Morphe mode: Use ONLY preferences manager options
+        val mergedOptions = if (useExpertMode) {
+            // Expert mode: Use options from input
+            input.options
+        } else {
+            // Simple mode: Use options from preferences manager
             runBlocking {
                 when (packageName) {
                     PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
                     else -> patchOptionsPrefs.exportYouTubePatchOptions()
                 }
             }
-        } else {
-            // Expert mode: Use ONLY input options
-            input.options
         }
 
         return PatcherWorker.Args(
@@ -1938,13 +2035,24 @@ fun removeMissingPatchesAndStart() {
             when (workInfo?.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     forceKeepLocalInput = false
-                    if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
-                        inputFile?.takeIf { it.exists() }?.delete()
-                        inputFile = null
-                        updateSplitStepRequirement(null)
+
+                    // Save original APK before deleting temporary file (blocking)
+                    viewModelScope.launch(Dispatchers.IO) {
+                        try {
+                            saveOriginalApkIfNeeded()
+                        } finally {
+                            withContext(Dispatchers.Main) {
+                                // Delete temporary file after saving
+                                if (input.selectedApp is SelectedApp.Local && input.selectedApp.temporary) {
+                                    inputFile?.takeIf { it.exists() }?.delete()
+                                    inputFile = null
+                                    updateSplitStepRequirement(null)
+                                }
+                                refreshExportMetadata()
+                                _patcherSucceeded.value = true
+                            }
+                        }
                     }
-                    refreshExportMetadata()
-                    _patcherSucceeded.value = true
                 }
 
                 WorkInfo.State.FAILED -> {
@@ -2026,8 +2134,8 @@ fun removeMissingPatchesAndStart() {
         merged: Boolean = false
     ) {
         val needsSplit = needsSplitOverride
-            ?: merged
-            || file?.let(SplitApkPreparer::isSplitArchive) == true
+                ?: merged
+                || file?.let(SplitApkPreparer::isSplitArchive) == true
         when {
             needsSplit && !requiresSplitPreparation -> {
                 requiresSplitPreparation = true

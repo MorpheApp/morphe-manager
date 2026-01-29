@@ -1,5 +1,6 @@
 package app.revanced.manager.ui.screen
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import android.view.WindowManager
@@ -13,16 +14,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -34,13 +33,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.patcher.*
-import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
-import app.revanced.manager.ui.component.morphe.shared.MorpheFloatingButtons
+import app.revanced.manager.ui.component.morphe.shared.InfoBadge
+import app.revanced.manager.ui.component.morphe.shared.InfoBadgeStyle
+import app.revanced.manager.ui.component.morphe.shared.MorpheCard
+import app.revanced.manager.ui.component.morphe.shared.MorpheSettingsDivider
 import app.revanced.manager.ui.model.State
-import app.revanced.manager.ui.viewmodel.MorpheThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.MorpheInstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import app.revanced.manager.util.*
@@ -52,19 +53,20 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * MorphePatcherScreen - Simplified patcher screen with progress tracking
+ * Simplified patcher screen with progress tracking
  * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
  */
+@SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MorphePatcherScreen(
     onBackClick: () -> Unit,
     viewModel: PatcherViewModel,
     usingMountInstall: Boolean,
-    themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
     installViewModel: MorpheInstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
+    @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
 
     val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
@@ -72,7 +74,7 @@ fun MorphePatcherScreen(
     // Remember patcher state
     val state = rememberMorphePatcherState(viewModel)
 
-    // Animated progress with dual-mode animation: slow crawl + fast catch-up
+    // Animated progress with dual-mode animation
     var displayProgress by remember { mutableStateOf(viewModel.progress) }
     var showLongStepWarning by remember { mutableStateOf(false) }
     var showSuccessScreen by remember { mutableStateOf(false) }
@@ -83,12 +85,10 @@ fun MorphePatcherScreen(
         label = "progress_animation"
     )
 
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
-
     // Get output file from viewModel
     val outputFile = viewModel.outputFile
 
-    // Dual-mode animation: always crawls forward, but accelerates when catching up
+    // Progress animation logic
     LaunchedEffect(patcherSucceeded) {
         var lastProgressUpdate = 0.0f
         var currentStepStartTime = System.currentTimeMillis()
@@ -131,17 +131,12 @@ fun MorphePatcherScreen(
                 val secondsSinceStepStarted = timeSinceStepStarted / 1000.0
                 val overEstimatedProgress = min(
                     maxOverCorrectPercentage,
-                    actualProgress + 0.01 * overEstimateProgressAdjustment(
-                        secondsSinceStepStarted
-                    )
+                    actualProgress + 0.01 * overEstimateProgressAdjustment(secondsSinceStepStarted)
                 ).toFloat()
 
                 // Don't allow rolling back the progress if it went over,
                 // and don't go over 98% unless the actual progress is that far
-                displayProgress = max(
-                    displayProgress,
-                    overEstimatedProgress
-                )
+                displayProgress = max(displayProgress, overEstimatedProgress)
             }
 
             // Update four times a second
@@ -168,8 +163,8 @@ fun MorphePatcherScreen(
             state.hasPatchingError = true
             val steps = viewModel.steps
             val failedStep = steps.firstOrNull { it.state == State.FAILED }
-            state.errorMessage =
-                failedStep?.message ?: context.getString(R.string.morphe_patcher_unknown_error)
+            state.errorMessage = failedStep?.message
+                ?: context.getString(R.string.morphe_patcher_unknown_error)
             state.showErrorBottomSheet = true
         }
     }
@@ -222,7 +217,7 @@ fun MorphePatcherScreen(
         }
     }
 
-    // Add activity launcher for handling plugin activities or external installs
+    // Activity launcher for handling plugin activities or external installs
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = viewModel::handleActivityResult
@@ -231,28 +226,22 @@ fun MorphePatcherScreen(
         activityLauncher.launch(intent)
     }
 
-    // Add activity prompt dialog
+    // Activity prompt dialog
     viewModel.activityPromptDialog?.let { title ->
         AlertDialog(
             onDismissRequest = viewModel::rejectInteraction,
             confirmButton = {
-                TextButton(
-                    onClick = viewModel::allowInteraction
-                ) {
+                TextButton(onClick = viewModel::allowInteraction) {
                     Text(stringResource(R.string.continue_))
                 }
             },
             dismissButton = {
-                TextButton(
-                    onClick = viewModel::rejectInteraction
-                ) {
+                TextButton(onClick = viewModel::rejectInteraction) {
                     Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(title) },
-            text = {
-                Text(stringResource(R.string.plugin_activity_dialog_body))
-            }
+            text = { Text(stringResource(R.string.plugin_activity_dialog_body)) }
         )
     }
 
@@ -271,228 +260,244 @@ fun MorphePatcherScreen(
     if (state.showErrorBottomSheet) {
         ModalBottomSheet(
             onDismissRequest = { state.showErrorBottomSheet = false },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+            contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            containerColor = MaterialTheme.colorScheme.surface
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Error,
-                    contentDescription = null,
-                    modifier = Modifier.size(64.dp),
-                    tint = MaterialTheme.colorScheme.error
-                )
-
-                Text(
-                    text = stringResource(R.string.morphe_patcher_failed_dialog_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Surface(
+                // Header
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .heightIn(max = 400.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.errorContainer
+                        .padding(horizontal = 24.dp)
+                        .padding(top = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(
-                        modifier = Modifier.verticalScroll(rememberScrollState())
+                    // Error icon
+                    Surface(
+                        modifier = Modifier.size(80.dp),
+                        shape = RoundedCornerShape(24.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
                     ) {
-                        Text(
-                            text = state.errorMessage,
-                            modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onErrorContainer
-                        )
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Error,
+                                contentDescription = null,
+                                modifier = Modifier.size(48.dp),
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    // Title
+                    Text(
+                        text = stringResource(R.string.morphe_patcher_failed_dialog_title),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
+
+                // Error message card
+                CompositionLocalProvider(LocalOverscrollFactory provides null) {
+                    MorpheCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f, fill = false)
+                            .padding(horizontal = 24.dp),
+                        elevation = 2.dp,
+                        cornerRadius = 16.dp
+                    ) {
+                        Column {
+                            // Error log header
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.morphe_patcher_error_log),
+                                    style = MaterialTheme.typography.labelLarge,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+
+                                InfoBadge(
+                                    text = stringResource(R.string.morphe_patcher_error_technical),
+                                    style = InfoBadgeStyle.Error,
+                                    isCompact = true
+                                )
+                            }
+
+                            MorpheSettingsDivider(fullWidth = true)
+
+                            // Scrollable error message
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .verticalScroll(rememberScrollState())
+                                    .padding(16.dp)
+                            ) {
+                                Text(
+                                    text = state.errorMessage,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                    lineHeight = 20.sp
+                                )
+                            }
+                        }
                     }
                 }
 
-                Button(
-                    onClick = {
-                        clipboardManager.setText(AnnotatedString(state.errorMessage))
-                        context.toast(context.getString(R.string.morphe_patcher_error_copied))
-                    },
-                    modifier = Modifier.fillMaxWidth()
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Action buttons
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(bottom = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Icon(Icons.Default.ContentCopy, null)
-                    Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.morphe_patcher_copy_error))
+                    // Copy button
+                    FilledTonalButton(
+                        onClick = {
+                            clipboardManager.setText(AnnotatedString(state.errorMessage))
+                            context.toast(context.getString(R.string.morphe_patcher_error_copied))
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    ) {
+                        Icon(
+                            Icons.Default.ContentCopy,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(android.R.string.copy),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    // Close button
+                    Button(
+                        onClick = { state.showErrorBottomSheet = false },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.close),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
         }
     }
 
     // Main content
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
     ) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            // Add animated background
-            AnimatedBackground(
-                type = backgroundType
-            )
-
-            // Existing content box
-            Box(modifier = Modifier.fillMaxSize()) {
-                // Main content centered
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    AnimatedContent(
-                        targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
-                        transitionSpec = {
-                            fadeIn(animationSpec = tween(800)) togetherWith
-                                    fadeOut(animationSpec = tween(800))
-                        },
-                        label = "patcher_state_animation"
-                    ) { patcherState ->
-                        when (patcherState) {
-                            PatcherState.IN_PROGRESS -> {
-                                PatchingInProgress(
-                                    progress = displayProgressAnimate,
-                                    patchesProgress = patchesProgress,
-                                    downloadProgress = viewModel.downloadProgress,
-                                    viewModel = viewModel,
-                                    showLongStepWarning = showLongStepWarning
-                                )
-                            }
-
-                            PatcherState.SUCCESS -> {
-                                PatchingSuccess(
-                                    installViewModel = installViewModel,
-                                    usingMountInstall = usingMountInstall,
-                                    onInstall = {
-                                        if (usingMountInstall) {
-                                            // Mount install
-                                            val inputVersion = viewModel.version
-                                                ?: viewModel.currentSelectedApp.version
-                                                ?: "unknown"
-                                            installViewModel.installMount(
-                                                outputFile = outputFile,
-                                                inputFile = viewModel.inputFile,
-                                                packageName = viewModel.packageName,
-                                                inputVersion = inputVersion,
-                                                onPersistApp = { pkg, type ->
-                                                    viewModel.savePatchedAppForLater(showToast = false)
-                                                    true
-                                                }
-                                            )
-                                        } else {
-                                            // Regular install with pre-conflict check
-                                            installViewModel.install(
-                                                outputFile = outputFile,
-                                                originalPackageName = viewModel.packageName,
-                                                onPersistApp = { pkg, type ->
-                                                    viewModel.savePatchedAppForLater(showToast = false)
-                                                    true
-                                                }
-                                            )
-                                        }
-                                    },
-                                    onUninstall = { packageName ->
-                                        installViewModel.requestUninstall(packageName)
-                                    },
-                                    onOpen = {
-                                        installViewModel.openApp()
-                                    }
-                                )
-                            }
-
-                            PatcherState.FAILED -> {
-                                PatchingFailed()
-                            }
-                        }
-                    }
+        AnimatedContent(
+            targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(800)) togetherWith
+                        fadeOut(animationSpec = tween(800))
+            },
+            label = "patcher_state_animation"
+        ) { patcherState ->
+            when (patcherState) {
+                PatcherState.IN_PROGRESS -> {
+                    PatchingInProgress(
+                        progress = displayProgressAnimate,
+                        patchesProgress = patchesProgress,
+                        viewModel = viewModel,
+                        showLongStepWarning = showLongStepWarning,
+                        onCancelClick = { state.showCancelDialog = true },
+                        onHomeClick = onBackClick
+                    )
                 }
 
-                // Floating action buttons - bottom
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .navigationBarsPadding()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 24.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    // Left: Cancel button during patching or empty space
-                    when {
-                        patcherSucceeded == null -> {
-                            // Cancel button during patching
-                            MorpheFloatingButtons(
-                                onClick = { state.showCancelDialog = true },
-                                icon = Icons.Default.Close,
-                                contentDescription = stringResource(android.R.string.cancel),
-                                containerColor = MaterialTheme.colorScheme.errorContainer,
-                                contentColor = MaterialTheme.colorScheme.onErrorContainer
-                            )
-                        }
-
-                        else -> {
-                            // Empty spacer for symmetry
-                            Spacer(Modifier.size(64.dp))
-                        }
-                    }
-
-                    // Center: Home button (only show when patching is complete)
-                    if (patcherSucceeded != null) {
-                        MorpheFloatingButtons(
-                            onClick = onBackClick,
-                            icon = Icons.Default.Home,
-                            contentDescription = stringResource(R.string.main_top_title),
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                    } else {
-                        // Empty spacer during patching
-                        Spacer(Modifier.size(64.dp))
-                    }
-
-                    // Right: Save APK button or Show Error button
-                    when {
-                        state.hasPatchingError -> {
-                            // Show error button only for patching errors
-                            if (!state.showErrorBottomSheet) {
-                                MorpheFloatingButtons(
-                                    onClick = { state.showErrorBottomSheet = true },
-                                    icon = Icons.Default.Error,
-                                    contentDescription = stringResource(R.string.morphe_patcher_show_error),
-                                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                PatcherState.SUCCESS -> {
+                    PatchingSuccess(
+                        installViewModel = installViewModel,
+                        usingMountInstall = usingMountInstall,
+                        onInstall = {
+                            if (usingMountInstall) {
+                                // Mount install
+                                val inputVersion = viewModel.version
+                                    ?: viewModel.currentSelectedApp.version
+                                    ?: "unknown"
+                                installViewModel.installMount(
+                                    outputFile = outputFile,
+                                    inputFile = viewModel.inputFile,
+                                    packageName = viewModel.packageName,
+                                    inputVersion = inputVersion,
+                                    onPersistApp = { pkg, type ->
+                                        viewModel.persistPatchedApp(pkg, type)
+                                    }
                                 )
                             } else {
-                                // Empty spacer for symmetry when error sheet is shown
-                                Spacer(Modifier.size(64.dp))
-                            }
-                        }
-                        patcherSucceeded == true && !state.hasPatchingError -> {
-                            // Save APK button
-                            MorpheFloatingButtons(
-                                onClick = {
-                                    if (!state.isSaving) {
-                                        exportApkLauncher.launch(exportFileName)
+                                // Regular install with pre-conflict check
+                                installViewModel.install(
+                                    outputFile = outputFile,
+                                    originalPackageName = viewModel.packageName,
+                                    onPersistApp = { pkg, type ->
+                                        viewModel.persistPatchedApp(pkg, type)
                                     }
-                                },
-                                icon = Icons.Outlined.Save,
-                                contentDescription = stringResource(R.string.morphe_patcher_save_apk),
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                        }
-                        else -> {
-                            // Empty spacer for symmetry
-                            Spacer(Modifier.size(64.dp))
-                        }
-                    }
+                                )
+                            }
+                        },
+                        onUninstall = { packageName ->
+                            installViewModel.requestUninstall(packageName)
+                        },
+                        onOpen = {
+                            installViewModel.openApp()
+                        },
+                        onHomeClick = onBackClick,
+                        onSaveClick = {
+                            if (!state.isSaving) {
+                                exportApkLauncher.launch(exportFileName)
+                            }
+                        },
+                        isSaving = state.isSaving
+                    )
+                }
+
+                PatcherState.FAILED -> {
+                    PatchingFailed(
+                        state = state,
+                        onHomeClick = onBackClick
+                    )
                 }
             }
         }

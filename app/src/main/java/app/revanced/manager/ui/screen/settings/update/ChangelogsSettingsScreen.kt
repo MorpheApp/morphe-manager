@@ -73,8 +73,8 @@ fun ChangelogsSettingsScreen(
                     ) {
                         Changelog(
                             markdown = info.description.replace("`", ""),
-                            version = info.version,
-                            publishDate = info.createdAt.relativeTime(LocalContext.current)
+//                            version = info.version,
+//                            publishDate = info.createdAt.relativeTime(LocalContext.current)
                         )
                         info.pageUrl?.let { url ->
                             ExpressiveSettingsDivider()

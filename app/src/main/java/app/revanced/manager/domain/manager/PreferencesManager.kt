@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
+import app.revanced.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_DEFAULT
 import app.revanced.manager.ui.component.morphe.shared.BackgroundType
 import app.revanced.manager.ui.model.PatchSelectionActionKey
 import app.revanced.manager.ui.theme.Theme
@@ -43,9 +44,7 @@ class PreferencesManager(
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
-    // Morphe default value has changed since release and
-    // a different key is needed to ensure old saved data isn't used.
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", 500)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_DEFAULT)
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE
@@ -90,6 +89,7 @@ class PreferencesManager(
     val autoSaveDownloaderApks = booleanPreference("auto_save_downloader_apks", true)
 
     val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
+    val useExpertMode = booleanPreference("use_expert_mode", false)
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
 
     init {
@@ -152,6 +152,8 @@ class PreferencesManager(
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
         val backgroundType: BackgroundType? = null, // Morphe
+        val useMorpheHomeScreen: Boolean? = null, // Morphe
+        val useExpertMode: Boolean? = null, // Morphe
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -198,7 +200,9 @@ class PreferencesManager(
         patchSelectionHiddenActions = patchSelectionHiddenActions.get(),
         acknowledgedDownloaderPlugins = acknowledgedDownloaderPlugins.get(),
         autoSaveDownloaderApks = autoSaveDownloaderApks.get(),
-        backgroundType = backgroundType.get() // Morphe
+        backgroundType = backgroundType.get(), // Morphe
+        useMorpheHomeScreen = useMorpheHomeScreen.get(), // Morphe
+        useExpertMode = useExpertMode.get() // Morphe
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -248,6 +252,8 @@ class PreferencesManager(
         snapshot.acknowledgedDownloaderPlugins?.let { acknowledgedDownloaderPlugins.value = it }
         snapshot.autoSaveDownloaderApks?.let { autoSaveDownloaderApks.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
+        snapshot.useMorpheHomeScreen?.let { useMorpheHomeScreen.value = it }
+        snapshot.useExpertMode?.let { useExpertMode.value = it }
     }
 
 }

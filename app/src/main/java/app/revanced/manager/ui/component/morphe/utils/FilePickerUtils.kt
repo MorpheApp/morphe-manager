@@ -1,12 +1,15 @@
 package app.revanced.manager.ui.component.morphe.utils
 
+import android.content.Context
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import app.revanced.manager.data.platform.Filesystem
+import app.revanced.manager.data.room.apps.installed.InstalledApp
 import org.koin.compose.koinInject
+import java.io.File
 
 /**
  * Convert content:// URI to file path
@@ -152,4 +155,25 @@ fun rememberFilePickerWithPermission(
             }
         }
     }
+}
+
+/**
+ * Helper function to get APK path for installed app
+ */
+fun getApkPath(context: Context, app: InstalledApp): String? {
+    return runCatching {
+        context.packageManager.getPackageInfo(app.currentPackageName, 0)
+            .applicationInfo?.sourceDir
+    }.getOrNull()
+}
+
+/**
+ * Calculate APK file size from installed app
+ */
+fun calculateApkSize(context: Context, app: InstalledApp): Long {
+    return getApkPath(context, app)?.let { path ->
+        runCatching {
+            File(path).length()
+        }.getOrNull()
+    } ?: 0L
 }

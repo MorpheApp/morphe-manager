@@ -25,7 +25,7 @@ object SplitApkPreparer {
     suspend fun prepareIfNeeded(
         source: File,
         workspace: File,
-        logger: Logger = defaultLogger,
+        logger: Logger = DefaultLogger,
         stripNativeLibs: Boolean = false
     ): PreparationResult {
         if (!isSplitArchive(source)) {
@@ -131,7 +131,7 @@ object SplitApkPreparer {
         }
     }
 
-    private object defaultLogger : Logger() {
+    private object DefaultLogger : Logger() {
         override fun log(level: LogLevel, message: String) {
             Log.d("SplitApkPreparer", "[${level.name}] $message")
         }

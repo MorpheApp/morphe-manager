@@ -1,8 +1,13 @@
 package app.revanced.manager.ui.component.morphe.shared
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.graphicsLayer
 import app.morphe.manager.R
 import app.revanced.manager.ui.component.morphe.shared.backgrounds.*
 
@@ -30,16 +35,24 @@ enum class BackgroundType(val displayNameResId: Int) {
 @Composable
 @SuppressLint("ModifierParameter")
 fun AnimatedBackground(
-    type: BackgroundType = BackgroundType.CIRCLES,
-    modifier: Modifier = Modifier
+    type: BackgroundType = BackgroundType.CIRCLES
 ) {
-    when (type) {
-        BackgroundType.CIRCLES -> CirclesBackground(modifier)
-        BackgroundType.RINGS -> RingsBackground(modifier)
-        BackgroundType.WAVES -> WavesBackground(modifier)
-        BackgroundType.SPACE -> SpaceBackground(modifier)
-        BackgroundType.SHAPES -> ShapesBackground(modifier)
-        BackgroundType.SNOW -> SnowBackground(modifier)
-        BackgroundType.NONE -> {} // No background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .clipToBounds()
+            .graphicsLayer {
+                compositingStrategy = CompositingStrategy.Offscreen
+            }
+    ) {
+        when (type) {
+            BackgroundType.CIRCLES -> CirclesBackground(Modifier.fillMaxSize())
+            BackgroundType.RINGS -> RingsBackground(Modifier.fillMaxSize())
+            BackgroundType.WAVES -> WavesBackground(Modifier.fillMaxSize())
+            BackgroundType.SPACE -> SpaceBackground(Modifier.fillMaxSize())
+            BackgroundType.SHAPES -> ShapesBackground(Modifier.fillMaxSize())
+            BackgroundType.SNOW -> SnowBackground(Modifier.fillMaxSize())
+            BackgroundType.NONE -> Unit
+        }
     }
 }

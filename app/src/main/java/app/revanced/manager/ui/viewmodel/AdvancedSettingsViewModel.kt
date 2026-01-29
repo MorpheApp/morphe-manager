@@ -95,6 +95,7 @@ class AdvancedSettingsViewModel(
         }
     }
 
+    // TODO: Remove this sometime
     fun setFallbackInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
         val primary = installerManager.getPrimaryToken()
         val target = if (token != InstallerManager.Token.None && tokensEqual(primary, token)) {

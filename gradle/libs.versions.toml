@@ -1,6 +1,5 @@
 [versions]
 ktx = "1.16.0"
-material3 = "1.4.0"
 ui-tooling = "1.8.1"
 viewmodel-lifecycle = "2.9.0"
 splash-screen = "1.2.0"
@@ -8,7 +7,9 @@ activity = "1.10.1"
 appcompat = "1.7.0"
 preferences-datastore = "1.1.2"
 work-runtime = "2.10.1"
-compose-bom = "2025.12.00"
+compose-bom = "2026.01.00"
+# Remove when released stable 1.5.0 in Compose BOM. Fix for https://github.com/MorpheApp/morphe-manager/issues/74
+material3 = "1.5.0-alpha12" # 1.5.0-alpha09 API Changes: Remove deprecated experimental ModalBottomSheet
 navigation = "2.8.6"
 accompanist = "0.37.0"
 placeholder = "1.1.2"

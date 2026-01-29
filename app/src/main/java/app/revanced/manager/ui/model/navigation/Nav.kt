@@ -17,6 +17,12 @@ object MorpheHomeScreen
 object MorpheSettings
 
 @Serializable
+object MorpheInstalledApps
+
+@Serializable
+data class MorpheInstalledAppInfo(val packageName: String)
+
+@Serializable
 object Dashboard
 
 @Serializable

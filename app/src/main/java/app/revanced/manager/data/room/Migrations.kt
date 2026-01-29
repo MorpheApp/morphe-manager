@@ -65,3 +65,20 @@ val MIGRATION_6_7 = object : Migration(6, 7) {
         db.execSQL("ALTER TABLE patch_bundles ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1")
     }
 }
+
+val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS original_apks (
+                package_name TEXT NOT NULL,
+                version TEXT NOT NULL,
+                file_path TEXT NOT NULL,
+                last_used INTEGER NOT NULL,
+                file_size INTEGER NOT NULL,
+                PRIMARY KEY(package_name)
+            )
+            """.trimIndent()
+        )
+    }
+}
