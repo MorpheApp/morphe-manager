@@ -1,474 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Morphe Home Screen -->
-    <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">مستعد لجعل YouTube أسطوريًا مرة أخرى؟</string>
-    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="home_greeting_3">اربط حزام الأمان، إنه وقت التعديل</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">يوم آخر، وتحفة فنية أخرى محجوبة الإعلانات</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">هل ترغب في مشاهدة الإعلانات؟ أنا أيضًا لا أرغب بذلك</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">الآن نجعل تطبيقاتك تتصرف</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">توقعات اليوم: فرصة 100% للتعديل</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">هل أنت مستعد لتحويل الأداء غير المثير إلى رائع؟</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">إنقاذ التطبيقات من نفسها منذ اليوم</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">مدعوم بالكافيين والتعديلات الجيدة</string>
-    <string name="home_update_error">فشل التحديث</string>
-    <string name="home_update_error_subtitle">تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
-    <string name="home_update_success">اكتمل التحديث</string>
-    <string name="home_please_wait">يرجى الانتظار…</string>
-    <!-- Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
-    <string name="home_apk_availability_dialog_description_simple">لتعديل %1$s، تحتاج إلى الإصدار %2$s (غير المعدل)</string>
-    <string name="home_apk_availability_yes">نعم، لديّ</string>
-    <string name="home_apk_availability_no">لا، ساعدني في العثور عليه</string>
-    <!-- Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">تنزيل ملف APK الأصلي</string>
-    <string name="home_download_instructions_steps_title">التعليمات:</string>
-    <string name="home_download_instructions_step1">انقر على زر \'%1$s\' أدناه</string>
-    <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
-    <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
-    <string name="home_download_instructions_step3">انتظر حتى يكتمل التنزيل، و&lt;b&gt;لا تقم بتثبيت&lt;/b&gt; ملف APK</string>
-    <string name="home_download_instructions_step3_mount">انتظر حتى يكتمل التنزيل، ثم &lt;b&gt;قم بتثبيت ملف APK&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">بعد انتهاء التنزيل، افتح هذا التطبيق مرة أخرى</string>
-    <string name="home_download_instructions_step4_mount">بعد تثبيت ملف APK الأصلي، افتح هذا التطبيق مرة أخرى</string>
-    <string name="home_download_instructions_continue">المتابعة إلى APKMirror.com</string>
-    <!-- Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">تحديد ملف APK الذي قمت بتنزيله</string>
-    <string name="home_file_picker_prompt_description">الآن حدد ملف %1$s APK الذي قمت بتنزيله للتو.</string>
-    <string name="home_recommended_version">الإصدار الموصى به</string>
-    <string name="patcher_selected_version">الإصدار المحدد</string>
-    <!-- Root Mode -->
-    <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل.</string>
-    <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
-    <!-- Morphe Patcher Screen -->
-    <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
-    <string name="patcher_patches_progress">%1$d / %2$d تعديلات</string>
-    <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
-    <string name="patcher_installing">جارٍ التثبيت…</string>
-    <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
-    <string name="patcher_success_title">تم الانتهاء! 🎉</string>
-    <string name="patcher_success_subtitle">تم تعديل تطبيقك وتثبيته!</string>
-    <string name="patcher_complete_title">اكتمل التعديل! ✨</string>
-    <string name="patcher_failed_title">عفوًا! حدث خطأ ما</string>
-    <string name="patcher_failed_subtitle">تحقق من تفاصيل الخطأ أدناه</string>
-    <string name="patcher_failed_dialog_title">فشل التعديل</string>
-    <string name="patcher_unknown_error">حدث خطأ غير معروف</string>
-    <string name="patcher_mounting">يتم التركيب…</string>
-    <string name="patcher_conflict_title">تعارض الحزمة</string>
-    <string name="patcher_conflict_subtitle">تحتاج إلى إلغاء تثبيت الإصدار الحالي</string>
-    <string name="patcher_install_error_title">خطأ في التثبيت</string>
-    <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
-    <string name="patcher_ready_to_install_subtitle">اضغط على الزر أدناه للتثبيت</string>
-    <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
-    <string name="patcher_unsupported_version_dialog_title">إصدار غير مدعوم</string>
-    <string name="patcher_unsupported_version_dialog_description">ملف APK هذا ليس إصدارًا موصى به. قد تؤدي المتابعة إلى عدم عمله بشكل صحيح.</string>
-    <string name="patcher_unsupported_version_dialog_proceed">المتابعة على أي حال</string>
-    <string name="patcher_wrong_package_title">تم اختيار حزمة تطبيق خاطئة</string>
-    <string name="patcher_wrong_package_description">ملف APK المحدد ليس للتطبيق الذي كنت تنوي تعديله.</string>
-    <string name="patcher_expected_package">الحزمة المتوقعة</string>
-    <string name="patcher_selected_package">الحزمة المحددة</string>
-    <string name="patcher_message_1">تحويل تطبيقك إلى شيء رائع… 🏆</string>
-    <string name="patcher_message_2">تعليم التطبيقات القديمة حيلًا جديدة… 🎩</string>
-    <string name="patcher_message_3">إجراء تحسين رقمي لتطبيقك… 🔧</string>
-    <string name="patcher_message_4">جارٍ تحضير سحرًا رقميًا… ☕</string>
-    <string name="patcher_message_5">يوصى بأخذ استراحة قهوة… ☕</string>
-    <string name="patcher_message_6">انظر إلى الخارج، الجو جميل… 🌤️</string>
-    <string name="patcher_message_7">جارٍ تعديل 1 و 0… 🤖</string>
-    <string name="patcher_message_8">فك تشابك السباغيتي رقميًا… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">إصلاح الأخطاء في التطبيق غير المعدل… 🐞</string>
-    <string name="patcher_message_10">التعديلات الرائعة تستحق الانتظار… ⏳</string>
-    <string name="patcher_message_11">تلميع البكسلات حتى تلمع… 💎</string>
-    <string name="patcher_message_12">يرجى البقاء في مقعدك حتى يطفئ القبطان علامة \"جارٍ الإصلاح\"... 💺✈️</string>
-    <string name="patcher_message_13">جارٍ طبخ تطبيقك المعدل، ساخن وطازج… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">نتفاوض بلطف مع شيفرة بايت… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">جميع الأنظمة تعمل بشكل طبيعي… مسار التعديل مستقر… 🚀</string>
-    <string name="patcher_message_16">استخلاص طاقة إضافية، مثل العصير من ليمونة رقمية… 🍋</string>
-    <string name="patcher_message_17">تشجيع التطبيق على قبول ذاته الجديدة والأفضل… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
-    <string name="patcher_message_18">تغيير وضع التطبيق من غير معدل إلى معدل… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
-    <string name="patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="share_website">مشاركة الموقع الإلكتروني</string>
-    <string name="share_website_description">شارك موقع Morphe الرسمي</string>
-    <!-- App Icon Selector -->
-    <string name="app_icon_selector_title">أيقونة التطبيق</string>
-    <string name="app_icon_default">الافتراضي</string>
-    <string name="app_icon_light_2">السماء</string>
-    <string name="app_icon_light_3">غروب الشمس</string>
-    <string name="app_icon_dark_1">البحر</string>
-    <string name="app_icon_dark_2">الفراغ</string>
-    <string name="app_icon_dark_3">الأزرق الداكن</string>
-    <string name="app_icon_change_dialog_title">تغيير أيقونة التطبيق؟</string>
-    <string name="app_icon_change_dialog_message">تغيير إلى \'%1$s\' وإعادة تشغيل؟</string>
-    <string name="app_icon_change_dialog_confirm">تغيير الأيقونة</string>
-    <!-- Appearance Section -->
-    <string name="appearance_current_language">اللغة الحالية</string>
-    <string name="appearance_search">البحث</string>
-    <string name="appearance_no_results">لم يتم العثور على نتائج</string>
-    <string name="appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
-    <string name="appearance_translations_info_text">لترجمة لغات جديدة أو تحسين الترجمات الحالية، تفضل بزيارة %s</string>
-    <string name="background_type">خلفيّات مُتحرِّكة</string>
-    <string name="background_type_circles">دوائر</string>
-    <string name="background_type_rings">حلقات</string>
-    <string name="background_type_waves">أمواج</string>
-    <string name="background_type_space">فضاء</string>
-    <string name="background_type_shapes">أشكال</string>
-    <string name="background_type_snow">ثلج</string>
-    <string name="background_type_none">لا شيء</string>
-    <!-- Advanced Section -->
-    <string name="update_use_prereleases">استخدام إصدارات ما قبل الإطلاق</string>
-    <string name="update_use_prereleases_description">احصل على الوصول المبكر إلى التعديلات الجديدة وميزات الإدارة</string>
-    <!-- Patch Options Section -->
-    <string name="patch_options">خيارات التعديل</string>
-    <string name="patch_options_youtube_description">المظهر، الشعار، الهوية، وخيارات Shorts</string>
-    <string name="patch_options_youtube_music_description">خيارات المظهر و الشعار</string>
-    <string name="patch_options_restart_message">يتطلب تغيير خيارات التعديل إعادة تعديل التطبيق حتى تسري التغييرات</string>
-    <!-- Theme Colors -->
-    <string name="patch_options_theme_colors">ألوان مظهر التطبيق</string>
-    <string name="patch_options_theme_colors_description">تغيير لون الخلفية</string>
-    <string name="patch_options_dark_theme_color">لون خلفية المظهر الداكن</string>
-    <string name="patch_options_dark_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
-    <string name="patch_options_light_theme_color">لون خلفية المظهر الفاتح</string>
-    <string name="patch_options_light_theme_color_description">يمكن أن يكون لونًا من القائمة أو قيمة لون بصيغة سداسية (#RRGGBB).</string>
-    <string name="patch_options_loading">تحميل خيارات التعديل...</string>
-    <string name="patch_options_load_error">فشل في تحميل خيارات التعديل</string>
-    <string name="patch_options_no_available">لا توجد خيارات متاحة لهذا التعديل</string>
-    <!-- Color Picker -->
-    <string name="custom_color">اللون المخصص</string>
-    <string name="hex_color">صيغة اللون</string>
-    <!-- Custom Branding -->
-    <string name="patch_options_custom_branding">تخصيص الهوية</string>
-    <string name="patch_options_custom_branding_description">تغيير الاسم المعروض للتطبيق</string>
-    <string name="patch_options_custom_branding_app_name">اسم التطبيق</string>
-    <string name="patch_options_custom_branding_app_name_hint">أدخل اسمًا مخصصًا</string>
-    <string name="patch_options_custom_branding_custom_icon">أيقونة مخصصة</string>
-    <string name="patch_options_custom_branding_custom_icon_instruction">"مجلد يحتوي على صور لاستخدامها كأيقونة مخصّصة.
-
-يجب أن يحتوي المجلد على مجلد واحد أو أكثر من المجلدات التالية، حسب كثافة شاشة الجهاز (DPI):
-• mipmap-mdpi
-• mipmap-hdpi
-• mipmap-xhdpi
-• mipmap-xxhdpi
-• mipmap-xxxhdpi
-
-يجب أن يحتوي كل مجلد منها على جميع الملفات التالية:
-• morphe_adaptive_background_custom.png 
-• morphe_adaptive_foreground_custom.png
-
-يجب أن تكون أبعاد الصورة كما يلي:
-• mipmap-mdpi: 108x108 px
-• mipmap-hdpi: 162x162 px
-• mipmap-xhdpi: 216x216 px
-• mipmap-xxhdpi: 324x324 px
-• mipmap-xxxhdpi: 432x432 px
-
-اختياريًا، يمكن أن يحتوي المسار على مجلد باسم drawable يضم أيًا من ملفات أيقونة 'أحادية اللون':
-• morphe_adaptive_monochrome_custom.xml
-• morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
-    <string name="patch_options_custom_header">علامة شعار مخصصة</string>
-    <string name="patch_options_custom_header_description">تغيير علامة الشعار</string>
-    <string name="patch_options_custom_header_instruction">"مجلد يحتوي على صور لاستخدامها كشعار مخصّص للشريط العلوي.
-
-يجب أن يحتوي المجلد على مجلد واحد أو أكثر من المجلدات التالية، حسب كثافة شاشة الجهاز (DPI):
-• drawable-hdpi
-• drawable-xhdpi
-• drawable-xxhdpi
-• drawable-xxxhdpi
-
-يجب أن يحتوي كل مجلد منها على جميع الملفات التالية:
-• morphe_header_custom_light.png
-• morphe_header_custom_dark.png
-
-يجب أن تكون أبعاد الصورة كما يلي:
-• drawable-hdpi: 194x72 px
-• drawable-xhdpi: 258x96 px
-• drawable-xxhdpi: 387x144 px
-• drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
-    <string name="patch_options_hide_shorts_features">إخفاء ميزات Shorts</string>
-    <string name="patch_options_hide_shorts_app_shortcut">إخفاء اختصار تطبيق Shorts</string>
-    <string name="patch_options_hide_shorts_app_shortcut_description">إزالة Shorts من قائمة الضغط المطوّل على الأيقونة في الشاشة الرئيسية</string>
-    <string name="patch_options_hide_shorts_widget">إخفاء التطبيق المصغّر لـ Shorts</string>
-    <string name="patch_options_hide_shorts_widget_description">إزالة زر Shorts من Widget الشاشة الرئيسية</string>
-    <!-- Other strings -->
-    <string name="patches">التعديلات</string>
-    <!-- Morphe -->
-    <string name="installer">أداة التثبيت</string>
-    <string name="plugin_host_permission_label">مضيف ملحقات Morphe</string>
-    <string name="plugin_host_permission_description">يُستخدم للتحكم في الوصول إلى ملحقات Morphe.
-Morphe فقط لديه هذا.</string>
-    <string name="settings">الإعدادات</string>
-    <string name="patches_error">خطأ</string>
-    <string name="patches_name_default">التعديلات</string>
-    <string name="patches_name_fallback">بدون اسم</string>
-    <string name="patches_display_name">الاسم المعروض</string>
-    <string name="android_11_bug_dialog_title">خطأ Android 11</string>
-    <string name="android_11_bug_dialog_description">يجب منح إذن تثبيت التطبيق مسبقًا لتجنب خطأ في نظام Android 11 سيؤثر سلبًا على تجربة المستخدم.</string>
-    <string name="patch_bundle_duplicate_name_error">توجد حزمة تعديل بهذا الاسم بالفعل</string>
-    <string name="patch_bundle_missing_error">تعذر تحديث حزمة التعديل هذه.</string>
-    <string name="appearance">المظهر</string>
-    <string name="updates">التحديثات</string>
-    <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">استيراد &amp; تصدير</string>
-    <string name="changelog">عرض سجل التغييرات</string>
-    <string name="changelog_loading">جارٍ تحميل سجل التغييرات</string>
-    <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
-    <string name="advanced">الإعدادات المتقدمة</string>
-    <string name="about">لمحة</string>
-    <!-- Morphe -->
-    <string name="accent_color_presets">لون التمييز</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="theme_preset_dynamic">Material You</string>
-    <!-- Morphe -->
-    <string name="theme">المظهر</string>
-    <string name="import_keystore">استيراد مخزن المفاتيح</string>
-    <string name="import_keystore_description">استيراد مخزن مفاتيح مخصص</string>
-    <string name="import_keystore_dialog_title">أدخل بيانات اعتماد مخزن المفاتيح</string>
-    <string name="import_keystore_dialog_description">سوف تحتاج إلى إدخال بيانات اعتماد مخزن المفاتيح لاستيراده.</string>
-    <string name="import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
-    <string name="import_keystore_dialog_password_field">كلمة المرور</string>
-    <string name="import_keystore_dialog_button">استيراد</string>
-    <string name="import_keystore_wrong_credentials">بيانات اعتماد مخزن المفاتيح غير صحيحة</string>
-    <string name="import_keystore_success">تم استيراد مخزن المفاتيح</string>
-    <string name="export_keystore">تصدير مخزن المفاتيح</string>
-    <string name="export_keystore_description">تصدير مخزن المفاتيح الحالي</string>
-    <string name="export_keystore_unavailable">لا يوجد مخزن مفاتيح لتصديره</string>
-    <string name="export_keystore_success">تم تصدير مخزن المفاتيح</string>
-    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
-    <string name="regenerate_keystore_success">تم استبدال مخزن المفاتيح بنجاح</string>
-    <string name="import_patch_selection_fail">تعذر استيراد التعديل المحدد: %s</string>
-    <string name="import_patch_selection_success">تم استيراد التحديد المعدل</string>
-    <string name="import_patch_bundles_fail">تعذر استيراد حزم التعديل: %s</string>
-    <string name="import_patch_bundles_in_progress">جارٍ استيراد…</string>
-    <string name="import_patch_bundles_success">تم استيراد %d من حزم التعديل</string>
-    <string name="import_patch_bundles_updated">تم تحديث %d من حزم التعديل</string>
-    <string name="import_patch_bundles_none">لم يتم استيراد حزم تعديل جديدة</string>
-    <string name="import_manager_settings">استيراد إعدادات المدير</string>
-    <string name="import_manager_settings_description">استعادة إعدادات المدير المحفوظة من ملف JSON</string>
-    <string name="import_manager_settings_fail">تعذر استيراد إعدادات المدير: %s</string>
-    <string name="import_manager_settings_success">تم استيراد إعدادات المدير</string>
-    <string name="export_patch_selection_fail">تعذر تصدير التعديل المحدد: %s</string>
-    <string name="export_patch_selection_success">تم تصدير التعديل المحدد</string>
-    <string name="export_patch_bundles_fail">تعذر تصدير حزم التعديل: %s</string>
-    <string name="export_patch_bundles_success">تم تصدير %d حزم تعديل</string>
-    <string name="export_patch_bundles_partial">تم تصدير %1$d حزم تعديلات. تعذر تصدير بعض الحزم لأنها أضيفت محليًا.</string>
-    <string name="bundle_type_remote">عن بُعد</string>
-    <string name="bundle_type_local">محلي</string>
-    <string name="bundle_type_preinstalled">مثبتة مسبقًا</string>
-    <string name="bundle_changelog_error">فشل تحميل سجل التغييرات: %s</string>
-    <string name="bundle_changelog_retry">إعادة المحاولة</string>
-    <string name="bundle_changelog_empty">لا يتوفر سجل تغييرات</string>
-    <string name="export_manager_settings">تصدير إعدادات المدير</string>
-    <string name="export_manager_settings_description">حفظ جميع إعدادات المدير إلى ملف JSON</string>
-    <string name="export_manager_settings_fail">تعذر تصدير إعدادات المدير: %s</string>
-    <string name="export_manager_settings_success">تم تصدير إعدادات المدير</string>
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
-    <string name="reset">إعادة التعيين</string>
-    <string name="patch">تعديل</string>
-    <string name="warning">تحذير</string>
-    <string name="add">إضافة</string>
-    <string name="close">إغلاق</string>
-    <string name="clear">مسح</string>
-    <string name="system">النظام</string>
-    <string name="light">فاتح</string>
-    <string name="dark">داكن</string>
-    <string name="black">أسود</string>
-    <string name="strip_unused_libs">إزالة المكتبات الأصلية غير المستخدمة</string>
-    <string name="strip_unused_libs_description">حذف المكتبات الأصلية لبنى المعالج غير المدعومة من التطبيقات المعدلة</string>
-    <string name="patch_bundle_rename">إعادة تسمية حزمة التعديل</string>
-    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
-    <string name="export_name_variable_app_name">اسم التطبيق</string>
-    <string name="export_name_variable_app_name_description">يتم استبدالها باسم عرض التطبيق.</string>
-    <string name="export_name_variable_package_name">اسم الحزمة</string>
-    <string name="export_name_variable_package_name_description">يتم استبدالها باسم حزمة التطبيق.</string>
-    <string name="export_name_variable_app_version">إصدار التطبيق</string>
-    <string name="export_name_variable_app_version_description">يتم استبدالها باسم اصدار التطبيق.</string>
-    <string name="export_name_variable_patches_version">إصدار التعديلات</string>
-    <string name="export_name_variable_patches_version_description">يتم استبدالها بإصدار (إصدارات) حزمة التعديل المطبقة.</string>
-    <string name="export_name_variable_bundle_names">أسماء حزم التعديل</string>
-    <string name="export_name_variable_bundle_names_description">يتم استبدالها باسم (أسماء) حزمة التعديل المطبقة.</string>
-    <string name="export_name_variable_manager_version">إصدار المدير</string>
-    <string name="export_name_variable_manager_version_description">يتم استبدالها بإصدار المدير.</string>
-    <string name="export_name_variable_timestamp">التوقيت</string>
-    <string name="export_name_variable_timestamp_description">يتم استبدالها بالوقت الحالي (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date">التاريخ</string>
-    <string name="export_name_variable_date_description">يتم استبدالها بالتاريخ الحالي (yyyyMMdd)</string>
-    <string name="debug_logs_export_read_failed">فشل في قراءة السجلات (رمز الخروج %d)</string>
-    <string name="debug_logs_export_failed">فشل تصدير السجلات</string>
-    <string name="debug_logs_export_success">تم تصدير السجلات</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="app_language">لغة التطبيق</string>
-    <string name="delete">حذف</string>
-    <string name="disable">تعطيل</string>
-    <string name="enable">تمكين</string>
-    <string name="patch_bundle_disabled_toast">تم تعطيل %d حزمة (حزم)</string>
-    <string name="patch_bundle_enabled_toast">تم تمكين %d حزمة (حزم)</string>
-    <string name="download_apk">تنزيل ملف APK</string>
-    <string name="patches_download_fail">فشل تنزيل التعديلات: %s</string>
-    <string name="patches_replace_fail">فشل استيراد التعديلات: %s</string>
-    <string name="patch_options_reset_toast">تمت إعادة تعيين خيارات التعديل</string>
-    <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$d.</string>
-    <!-- Dormant code and not used -->
-    <!-- Dormant code and not used -->
-    <string name="loading">جارٍ التحميل…</string>
-    <string name="not_installed">غير مثبت</string>
-    <string name="uninstall">إلغاء التثبيت</string>
-    <string name="repatch">إعادة التعديل</string>
-    <string name="install_type">نوع التثبيت</string>
-    <string name="package_name">اسم الحزمة</string>
-    <string name="original_package_name">اسم الحزمة الأصلي</string>
-    <string name="applied_patches">التعديلات المطبقة</string>
-    <string name="patch_bundles_used">حزم التعديل المستخدمة</string>
-    <string name="mount_install">أداة تثبيت تركيب Rooted</string>
-    <string name="mounted">مركّب</string>
-    <string name="unmounted">غير مفكوك التركيب</string>
-    <string name="install_type_custom_installer">أداة تثبيت مخصصة</string>
-    <string name="install_type_system_installer">أداة تثبيت النظام</string>
-    <string name="mount">تركيب</string>
-    <string name="saved_install">تم الحفظ</string>
-    <string name="failed_to_mount">فشل تركيب: %s</string>
-    <string name="failed_to_unmount">فشل فك تركيب: %s</string>
-    <string name="show_password_field">عرض كلمة المرور</string>
-    <string name="hide_password_field">إخفاء كلمة المرور</string>
-    <string name="installer_primary_title">أداة التثبيت الأساسية</string>
-    <string name="installer_internal_name">أداة تثبيت النظام</string>
-    <string name="installer_internal_description">استخدام أداة تثبيت حزم Android</string>
-    <string name="installer_auto_saved_name">أداة تثبيت تركيب Rooted</string>
-    <string name="installer_auto_saved_description">يقوم بتركيب ملف APK المعدل فوق التطبيق المثبت (يتطلب Root).</string>
-    <string name="installer_shizuku_description">التثبيت الصامت باستخدام Shizuku أو Sui</string>
-    <string name="installer_option_none">لا بديل</string>
-    <string name="installer_none_description">لم يتم تكوين أي أداة تثبيت بديلة</string>
-    <string name="installer_status_requires_root">يتطلب صلاحيات Root</string>
-    <string name="installer_status_not_supported">غير مدعوم لهذا الإجراء</string>
-    <string name="installer_status_shizuku_not_installed">قم بتثبيت Shizuku أو Sui لاستخدام هذا الخيار</string>
-    <string name="installer_status_shizuku_not_running">ابدأ Shizuku أو Sui وحاول مرة أخرى</string>
-    <string name="installer_status_shizuku_permission">امنح Shizuku إذن للوصول إلى Morphe من تطبيق Shizuku</string>
-    <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت تركيب Rooted. لم يتم تثبيت التطبيق المحفوظ باستخدام التركيب.</string>
-    <string name="installer_mount_mismatch_title">لم يتم تحديد أداة تثبيت تركيب Rooted </string>
-    <string name="installer_mount_mismatch_install">تم تثبيت هذا التطبيق باستخدام أداة تثبيت تركيب Rooted. قم بتبديل أداة التثبيت الأساسية الخاصة بك مرة أخرى لاستخدام إجراءات التثبيت، ثم قم بالتثبيت.</string>
-    <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى.</string>
-    <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم.</string>
-    <string name="installer_action_open_shizuku">فتح Shizuku</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى.</string>
-    <string name="installer_hint_blocked">تم حظر التثبيت بواسطة Android. تحقق من إعدادات Play Protect أو الأمان.</string>
-    <string name="installer_hint_conflict">يوجد تطبيق آخر بنفس اسم الحزمة مثبت بالفعل. قم بإلغاء تثبيته قبل المتابعة.</string>
-    <string name="installer_hint_incompatible">ملف APK غير متوافق مع هذا الجهاز أو إصدار Android.</string>
-    <string name="installer_hint_invalid">ملف APK غير صالح أو تالف.</string>
-    <string name="installer_hint_storage">مساحة التخزين غير كافية للتثبيت.</string>
-    <string name="installer_hint_timeout">انتهت مهلة التثبيت. حاول مرة أخرى.</string>
-    <string name="installer_hint_aborted">تم إلغاء التثبيت.</string>
-    <string name="installer_hint_with_reason">"%1$s
-
-التفاصيل: %2$s"</string>
-    <string name="installer_external_launched">جارٍ فتح %1$s…</string>
-    <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى.</string>
-    <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت.</string>
-    <string name="installer_external_finished_no_change">%1$s انتهى دون تثبيت التطبيق. تحقق من أداة التثبيت بحثًا عن رسالة خطأ وحاول مرة أخرى.</string>
-    <string name="installing_ellipsis">جارٍ التثبيت…</string>
-    <string name="uninstalling_ellipsis">جارٍ إلغاء التثبيت…</string>
-    <string name="mounting_ellipsis">جارٍ التركيب…</string>
-    <string name="unmounting">جارٍ فك التركيب…</string>
-    <string name="install_app">تثبيت</string>
-    <string name="install_app_success">تم التثبيت بنجاح</string>
-    <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
-    <string name="install_app_fail_missing_stock">ملف APK الأصلي غير موجود للتثبيت عبر التركيب</string>
-    <string name="mount_split_not_supported">أداة التثبيت عبر التركيب للأجهزة المروّتة Root لا تدعم ملفات APK المقسّمة. استخدم أداة تثبيت النظام بدلًا من ذلك.</string>
-    <string name="install_timeout_message">لم يكتمل التثبيت. تحقق من مربع حوار أداة التثبيت في النظام وحاول مرة أخرى.</string>
-    <string name="uninstall_timeout_message">لم تكتمل عملية إلغاء التثبيت. تحقق من مربع حوار إلغاء التثبيت وحاول مرة أخرى.</string>
-    <string name="reinstall_app_fail">فشل إعادة تثبيت التطبيق: %s</string>
-    <string name="uninstall_app_fail">فشل إلغاء تثبيت التطبيق: %s</string>
-    <string name="open_app">فتح</string>
-    <string name="save_apk_success">تم حفظ APK</string>
-    <string name="saved_app_export_success">تم تصدير التطبيق المعدل</string>
-    <string name="saved_app_export_failed">فشل تصدير التطبيق المعدل</string>
-    <string name="saved_app_removed_toast">تمت إزالة التطبيق المعدل المحفوظ</string>
-    <string name="saved_app_copy_removed_toast">تمت إزالة النسخة المحفوظة</string>
-    <string name="saved_app_launch_unavailable">قم بتثبيت التطبيق قبل فتحه.</string>
-    <string name="remount_saved_app">إعادة التركيب</string>
-    <string name="saved_app_install_success">تم تثبيت التطبيق المحفوظ</string>
-    <string name="saved_app_install_failed">فشل تثبيت التطبيق المحفوظ</string>
-    <string name="saved_app_install_missing">لم يتم العثور على ملف APK المحفوظ</string>
-    <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي.</string>
-    <string name="patcher_step_group_preparing">جارٍ الإعداد</string>
-    <string name="patcher_step_load_patches">جارٍ تحميل التعديلات</string>
-    <string name="patcher_step_prepare_split_apk">دمج APK منقسم</string>
-    <string name="patcher_step_unpack">قراءة ملف APK</string>
-    <string name="patcher_step_group_patching">التعديل</string>
-    <string name="patcher_step_group_saving">الحفظ</string>
-    <string name="patcher_step_write_patched">جارٍ كتابة ملف APK المعدل</string>
-    <string name="patcher_step_sign_apk">جارٍ توقيع ملف APK المعدل</string>
-    <string name="patcher_notification_title">جارٍ التعديل…</string>
-    <string name="patcher_notification_text">اضغط للعودة إلى أداة التعديل</string>
-    <string name="patcher_stop_confirm_title">إيقاف أداة التعديل</string>
-    <string name="patcher_stop_confirm_description">هل أنت متأكد أنك تريد إيقاف عملية التعديل؟</string>
-    <string name="applying_patches">جارٍ تطبيق التعديلات</string>
-    <string name="applying_patch">جارٍ تطبيق %s</string>
-    <string name="failed_to_execute_patch">فشل تطبيق %s</string>
-    <string name="patched_app_saved_toast">تم حفظ التطبيق المعدل لوقت لاحق</string>
-    <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
-    <string name="less">أقل</string>
-    <string name="continue_">متابعة</string>
-    <string name="version">الإصدار</string>
-    <string name="patches_update_success">تم التحديث بنجاح</string>
-    <string name="patches_update_unavailable">لا يتوفر تحديث</string>
-    <string name="patches_view_any_version">أي إصدار</string>
-    <string name="patches_view_any_package">أي حزمة</string>
-    <string name="revanced_manager_description">"Morphe هو مشروع تجريبي مفتوح المصدر يركز على إنشاء تعديل حديث ومبسط لتطبيقات Android الشهيرة
-
-مشروع مفتوح المصدر في جوهره، يزدهر Morphe على ملاحظات المجتمع ومساهماته لدفع الابتكار المستقبلي"</string>
-    <string name="update_available">يتوفر تحديث</string>
-    <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>
-    <string name="update_completed">تم تثبيت التحديث</string>
-    <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <string name="installing_manager_update">جارٍ تثبيت التحديث...</string>
-    <string name="downloading_manager_update">جارٍ تنزيل التحديث...</string>
-    <string name="download_manager_failed">فشل تنزيل التحديث: %s</string>
-    <string name="save">حفظ</string>
-    <string name="update">تحديث</string>
-    <string name="just_now">الآن</string>
-    <string name="minutes_ago">قبل %s دقيقة</string>
-    <string name="hours_ago">قبل %s ساعة</string>
-    <string name="days_ago">قبل %s يوم</string>
-    <string name="invalid_date">تاريخ غير صالح</string>
-    <string name="failed_to_check_updates">فشل التحقق من التحديثات: %s</string>
-    <string name="failed_to_download_update">فشل تنزيل التحديث: %s</string>
-    <string name="download">تنزيل</string>
-    <string name="resume_download">استئناف التنزيل</string>
-    <string name="download_confirmation_metered">"أنت حاليًا على اتصال محدود البيانات، وقد يتم تطبيق رسوم بيانات من مزود الخدمة الخاص بك.
-
-هل لا تزال ترغب في المتابعة؟"</string>
-    <string name="download_update_confirmation">تنزيل التحديث؟</string>
-    <string name="reinstall">إعادة التثبيت</string>
-    <string name="any_version">أي شي</string>
-    <string name="failed_to_import_keystore">فشل استيراد مخزن المفاتيح</string>
-    <string name="export">تصدير</string>
-</resources>
