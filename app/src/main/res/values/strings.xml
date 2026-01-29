@@ -176,7 +176,7 @@
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
 
-    <!-- Patcher Screen - Patcher Steps-->
+    <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparing</string>
     <string name="patcher_step_load_patches">Loading patches</string>
     <string name="patcher_step_prepare_split_apk">Merging split APK</string>
@@ -252,7 +252,6 @@
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
-
     <!-- Settings -->
     <string name="appearance">Appearance</string>
     <string name="advanced">Advanced</string>
@@ -314,7 +313,8 @@
     <string name="settings_advanced_patch_options_youtube_music_description">Theme and branding options</string>
     <string name="settings_advanced_patch_options_restart_message">Changing patch options requires re-patching the app to take effect</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">In Expert mode patch options will be available during the patching process</string>
-    <!-- Patch Options Section: Theme Colors -->
+
+    <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">App theme colors</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Change background color</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Dark theme background color</string>
@@ -325,7 +325,8 @@
     <string name="settings_advanced_patch_options_waiting_for_source">Wait until the patch source is updated</string>
     <string name="settings_advanced_patch_options_load_error">Failed to load patch options</string>
     <string name="settings_advanced_patch_options_no_available">No options available for this patch</string>
-    <!-- Patch Options Section: Custom Branding -->
+
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Custom branding</string>
     <string name="settings_advanced_patch_options_custom_branding_description">Change the app display name</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">App name</string>
@@ -354,7 +355,8 @@ The image dimensions must be as follows:
 Optionally, the path contains a \'drawable\' folder with any of the monochrome icon files:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Patch Options Section: Custom Header -->
+
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Custom header logo</string>
     <string name="settings_advanced_patch_options_custom_header_description">Change header logo</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Folder with images to use as a custom header logo.
@@ -375,7 +377,7 @@ The image dimensions must be as follows:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
 
-    <!-- Patch Options Section: Hide Shorts -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Hide Shorts features</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Hide Shorts app shortcut</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Remove Shorts from launcher long-press menu</string>
@@ -411,7 +413,7 @@ The image dimensions must be as follows:
     <string name="installer_hint_storage">There is not enough storage space for the installation.</string>
     <string name="installer_hint_timeout">The installation timed out. Try again.</string>
     <string name="installer_hint_aborted">The installation was cancelled.</string>
-    <string name="installer_hint_with_reason">"%1$s
+    <string name="installer_hint_with_reason" translatable="false">"%1$s
 
 Details: %2$s"</string>
     <string name="installer_external_launched">Opening %1$s…</string>
@@ -450,11 +452,23 @@ Details: %2$s"</string>
     <string name="settings_system_show_password_field">Show password</string>
     <string name="settings_system_hide_password_field">Hide password</string>
 
-    <!-- Settings - System Tab - Import and export manager settings -->
+    <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <string name="settings_system_import_manager_settings">Import manager settings</string>
+    <string name="settings_system_import_manager_settings_description">Restore manager settings from a JSON file</string>
+    <string name="settings_system_import_manager_settings_fail">Failed to import manager settings: %s</string>
+    <string name="settings_system_import_manager_settings_success">Manager settings imported</string>
     <string name="settings_system_export_manager_settings">Export manager settings</string>
-    <string name="settings_system_export_manager_settings_description">Save all manager settings to a JSON file</string>
-    <string name="settings_system_export_manager_settings_fail">Could not export manager settings: %s</string>
-    <string name="settings_system_export_manager_settings_success">Exported manager settings</string>
+    <string name="settings_system_export_manager_settings_description">Save manager settings to a JSON file</string>
+    <string name="settings_system_export_manager_settings_fail">Failed to export manager settings: %s</string>
+    <string name="settings_system_export_manager_settings_success">Manager settings exported</string>
+
+    <!-- Settings - System Tab - Debug Section -->
+    <string name="settings_system_debug">Debug</string>
+    <string name="settings_system_export_debug_logs">Export debug logs</string>
+    <string name="settings_system_export_debug_logs_description">Export system logs for troubleshooting</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Failed to read logs (exit code %d)</string>
+    <string name="settings_system_export_debug_logs_export_failed">Failed to export logs</string>
+    <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Storage Management</string>
@@ -537,7 +551,8 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="installing_ellipsis">Installing…</string>
     <string name="uninstalling_ellipsis">Uninstalling…</string>
     <string name="mounting_ellipsis">Mounting…</string>
-    <string name="unmounting">Unmounting…</string>
+    <string name="unmounting_ellipsis">Unmounting…</string>
+    <string name="importing_ellipsis">Importing…</string>
 
     <string name="changelog">View changelogs</string>
     <string name="changelog_loading">Loading changelog</string>
@@ -569,50 +584,4 @@ Do you still want to continue?"</string>
 
     <string name="plugin_host_permission_label">Morphe plugin host</string>
     <string name="plugin_host_permission_description">Used to control access to Morphe plugins. Only Morphe has this.</string>
-
-    <!-- Currently Not Used in our UI -->
-    <string name="restore_official_bundle_success" translatable="false">Official Morphe patch bundle restored</string>
-    <string name="restore_official_bundle_failed" translatable="false">Failed to restore the Official Morphe patch bundle: %1$s</string>
-    <string name="restore_official_bundle_already" translatable="false">The Official Morphe patch bundle is already installed</string>
-    <string name="regenerate_keystore" translatable="false">Regenerate keystore</string>
-    <string name="regenerate_keystore_dialog_description" translatable="false">"You are about to regenerate your keystore the manager will use during the patching process.
-
-You will not be able to update the previously installed apps from this source."</string>
-    <string name="regenerate_keystore_success" translatable="false">The keystore has been successfully replaced</string>
-    <string name="import_patch_selection_fail" translatable="false">Could not import patch selection: %s</string>
-    <string name="import_patch_selection_success" translatable="false">Imported patch selection</string>
-    <string name="import_patch_bundles_fail" translatable="false">Could not import patch bundles: %s</string>
-    <string name="import_patch_bundles_in_progress" translatable="false">Importing…</string>
-    <string name="import_patch_bundles_success" translatable="false">Imported %d patch bundles</string>
-    <string name="import_patch_bundles_updated" translatable="false">Updated %d patch bundles</string>
-    <string name="import_patch_bundles_none" translatable="false">No new patch bundles were imported</string>
-    <string name="import_manager_settings">Import manager settings</string>
-    <string name="import_manager_settings_description">Restore saved manager settings from a JSON file</string>
-    <string name="import_manager_settings_fail">Could not import manager settings: %s</string>
-    <string name="import_manager_settings_success">Imported manager settings</string>
-    <string name="export_patch_selection_fail" translatable="false">Could not export patch selection: %s</string>
-    <string name="export_patch_selection_success" translatable="false">Exported patch selection</string>
-    <string name="export_patch_bundles_fail" translatable="false">Could not export patch bundles: %s</string>
-    <string name="export_patch_bundles_success" translatable="false">Exported %d patch bundles</string>
-    <string name="export_patch_bundles_partial" translatable="false">Exported %1$d patch bundles. Some bundles could not be exported because they were added locally.</string>
-    <string name="patch_options_reset_toast" translatable="false">Patch options have been reset</string>
-    <string name="export_name_variable_app_name" translatable="false">App name</string>
-    <string name="export_name_variable_app_name_description" translatable="false">Replaced with the app\'s display name.</string>
-    <string name="export_name_variable_package_name" translatable="false">Package name</string>
-    <string name="export_name_variable_package_name_description" translatable="false">Replaced with the app\'s package name.</string>
-    <string name="export_name_variable_app_version" translatable="false">App version</string>
-    <string name="export_name_variable_app_version_description" translatable="false">Replaced with the app\'s version name.</string>
-    <string name="export_name_variable_patches_version" translatable="false">Patches version</string>
-    <string name="export_name_variable_patches_version_description" translatable="false">Replaced with the applied patch bundle version(s).</string>
-    <string name="export_name_variable_bundle_names" translatable="false">Patch bundle names</string>
-    <string name="export_name_variable_bundle_names_description" translatable="false">Replaced with the applied patch bundle name(s).</string>
-    <string name="export_name_variable_manager_version" translatable="false">Manager version</string>
-    <string name="export_name_variable_manager_version_description" translatable="false">Replaced with the manager version.</string>
-    <string name="export_name_variable_timestamp" translatable="false">Timestamp</string>
-    <string name="export_name_variable_timestamp_description" translatable="false">Replaced with the current time (yyyyMMdd-HHmmss).</string>
-    <string name="export_name_variable_date" translatable="false">Date</string>
-    <string name="export_name_variable_date_description" translatable="false">Replaced with the current date (yyyyMMdd).</string>
-    <string name="debug_logs_export_read_failed" translatable="false">Failed to read logs (exit code %d)</string>
-    <string name="debug_logs_export_failed" translatable="false">Failed to export logs</string>
-    <string name="debug_logs_export_success" translatable="false">Exported logs</string>
 </resources>

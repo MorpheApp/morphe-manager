@@ -232,7 +232,7 @@ class HomeViewModel(
         val progressToast = withContext(Dispatchers.Main) {
             Toast.makeText(
                 app,
-                app.getString(R.string.import_patch_bundles_in_progress),
+                app.getString(R.string.importing_ellipsis),
                 Toast.LENGTH_SHORT
             )
         }

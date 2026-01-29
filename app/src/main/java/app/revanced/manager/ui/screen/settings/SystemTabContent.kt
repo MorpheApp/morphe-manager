@@ -42,6 +42,7 @@ fun SystemTabContent(
     onExportKeystore: () -> Unit,
     onImportSettings: () -> Unit,
     onExportSettings: () -> Unit,
+    onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
     prefs: PreferencesManager
 ) {
@@ -176,8 +177,8 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = onImportSettings,
                         leadingContent = { MorpheIcon(icon = Icons.Outlined.Download) },
-                        title = stringResource(R.string.import_manager_settings),
-                        description = stringResource(R.string.import_manager_settings_description)
+                        title = stringResource(R.string.settings_system_import_manager_settings),
+                        description = stringResource(R.string.settings_system_import_manager_settings_description)
                     )
 
                     MorpheSettingsDivider()
@@ -190,6 +191,23 @@ fun SystemTabContent(
                         description = stringResource(R.string.settings_system_export_manager_settings_description)
                     )
                 }
+            }
+        }
+
+        // Debug Logs (Expert mode only)
+        if (useExpertMode) {
+            SectionTitle(
+                text = stringResource(R.string.settings_system_debug),
+                icon = Icons.Outlined.BugReport
+            )
+
+            SectionCard {
+                BaseSettingsItem(
+                    onClick = onExportDebugLogs,
+                    leadingContent = { MorpheIcon(icon = Icons.Outlined.Upload) },
+                    title = stringResource(R.string.settings_system_export_debug_logs),
+                    description = stringResource(R.string.settings_system_export_debug_logs_description)
+                )
             }
         }
 

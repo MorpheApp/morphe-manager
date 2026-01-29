@@ -68,7 +68,6 @@ class UpdateViewModel(
     }
     var showInternetCheckDialog by mutableStateOf(false)
     var state by mutableStateOf(State.CAN_DOWNLOAD)
-//        private set // Morphe
 
     var installError by mutableStateOf("")
 

@@ -8,8 +8,8 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.applyAppLanguage
 import app.revanced.manager.util.resetListItemColorsCached
 import app.revanced.manager.util.toHexString
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 enum class ThemePreset {
@@ -51,26 +51,9 @@ class ThemeSettingsViewModel(
         )
     )
 
-    fun resetThemeSettings() = viewModelScope.launch {
-        prefs.theme.update(Theme.SYSTEM)
-        prefs.dynamicColor.update(false)
-        prefs.pureBlackTheme.update(false)
-        prefs.themePresetSelectionEnabled.update(true)
-        prefs.themePresetSelectionName.update(ThemePreset.DEFAULT.name)
-        prefs.customAccentColor.update("")
-        prefs.customThemeColor.update("")
-        resetListItemColorsCached()
-    }
-
     fun setCustomAccentColor(color: Color?) = viewModelScope.launch {
         val value = color?.toHexString().orEmpty()
         prefs.customAccentColor.update(value)
-        resetListItemColorsCached()
-    }
-
-    fun setCustomThemeColor(color: Color?) = viewModelScope.launch {
-        val value = color?.toHexString().orEmpty()
-        prefs.customThemeColor.update(value)
         resetListItemColorsCached()
     }
 
@@ -97,11 +80,5 @@ class ThemeSettingsViewModel(
 
         prefs.themePresetSelectionName.update(preset.name)
         resetListItemColorsCached()
-    }
-
-    private suspend fun getCurrentThemePreset(): ThemePreset? {
-        if (!prefs.themePresetSelectionEnabled.get()) return null
-        val storedName = prefs.themePresetSelectionName.get().takeIf { it.isNotBlank() }
-        return storedName?.let { runCatching { ThemePreset.valueOf(it) }.getOrNull() }
     }
 }

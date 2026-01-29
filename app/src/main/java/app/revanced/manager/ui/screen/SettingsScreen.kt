@@ -129,6 +129,13 @@ fun SettingsScreen(
         uri?.let { importExportViewModel.exportManagerSettings(it) }
     }
 
+    // Debug logs export launcher
+    val exportDebugLogsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("text/plain")
+    ) { uri ->
+        uri?.let { importExportViewModel.exportDebugLogs(it) }
+    }
+
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
         showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
@@ -206,6 +213,7 @@ fun SettingsScreen(
                     onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
                     onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
+                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
                     onAboutClick = { showAboutDialog = true },
                     prefs = prefs
                 )

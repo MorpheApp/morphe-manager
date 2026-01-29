@@ -723,7 +723,7 @@ class InstalledAppInfoViewModel(
         mountOperation = MountOperation.UNMOUNTING
         isMounted = false
         try {
-            context.toast(context.getString(R.string.unmounting))
+            context.toast(context.getString(R.string.unmounting_ellipsis))
             rootInstaller.unmount(pkgName)
             context.toast(context.getString(R.string.unmounted))
             mountOperation = MountOperation.MOUNTING
@@ -748,7 +748,7 @@ class InstalledAppInfoViewModel(
     fun unmountSavedInstallation() = viewModelScope.launch {
         val pkgName = installedApp?.currentPackageName ?: return@launch
         try {
-            context.toast(context.getString(R.string.unmounting))
+            context.toast(context.getString(R.string.unmounting_ellipsis))
             rootInstaller.unmount(pkgName)
             isMounted = false
             context.toast(context.getString(R.string.unmounted))
@@ -764,7 +764,7 @@ class InstalledAppInfoViewModel(
         try {
             if (isMounted) {
                 mountOperation = MountOperation.UNMOUNTING
-                context.toast(context.getString(R.string.unmounting))
+                context.toast(context.getString(R.string.unmounting_ellipsis))
                 rootInstaller.unmount(pkgName)
                 isMounted = false
                 context.toast(context.getString(R.string.unmounted))

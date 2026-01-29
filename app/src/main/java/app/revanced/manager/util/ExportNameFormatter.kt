@@ -18,27 +18,10 @@ data class PatchedAppExportData(
 object ExportNameFormatter {
     const val DEFAULT_TEMPLATE = "{app name}-{app version}-{patches version}.apk"
 
-    data class Variable(
-        val token: String,
-        val label: Int,
-        val description: Int
-    )
-
     private val timestampFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")
         .withZone(ZoneId.systemDefault())
     private val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         .withZone(ZoneId.systemDefault())
-
-    fun availableVariables(): List<Variable> = listOf(
-        Variable("{app name}", app.morphe.manager.R.string.export_name_variable_app_name, app.morphe.manager.R.string.export_name_variable_app_name_description),
-        Variable("{package name}", app.morphe.manager.R.string.export_name_variable_package_name, app.morphe.manager.R.string.export_name_variable_package_name_description),
-        Variable("{app version}", app.morphe.manager.R.string.export_name_variable_app_version, app.morphe.manager.R.string.export_name_variable_app_version_description),
-        Variable("{patches version}", app.morphe.manager.R.string.export_name_variable_patches_version, app.morphe.manager.R.string.export_name_variable_patches_version_description),
-        Variable("{patch bundle names}", app.morphe.manager.R.string.export_name_variable_bundle_names, app.morphe.manager.R.string.export_name_variable_bundle_names_description),
-        Variable("{manager version}", app.morphe.manager.R.string.export_name_variable_manager_version, app.morphe.manager.R.string.export_name_variable_manager_version_description),
-        Variable("{timestamp}", app.morphe.manager.R.string.export_name_variable_timestamp, app.morphe.manager.R.string.export_name_variable_timestamp_description),
-        Variable("{date}", app.morphe.manager.R.string.export_name_variable_date, app.morphe.manager.R.string.export_name_variable_date_description)
-    )
 
     fun format(template: String?, data: PatchedAppExportData): String {
         val resolvedTemplate = template?.takeIf { it.isNotBlank() } ?: DEFAULT_TEMPLATE
@@ -47,18 +30,6 @@ object ExportNameFormatter {
         val clean = ensuredExtension.trim().ifEmpty { DEFAULT_TEMPLATE }
         return FilenameUtils.sanitize(clean)
     }
-
-    fun preview(template: String): String = format(
-        template,
-        PatchedAppExportData(
-            appName = "ExampleApp",
-            packageName = "com.example.app",
-            appVersion = "1.2.3",
-            patchBundleVersions = listOf("2.201.0"),
-            patchBundleNames = listOf("ReVanced Extended"),
-            generatedAt = Instant.now()
-        )
-    )
 
     private fun replaceVariables(template: String, data: PatchedAppExportData): String {
         val replacements: Map<String, String> = buildMap {
