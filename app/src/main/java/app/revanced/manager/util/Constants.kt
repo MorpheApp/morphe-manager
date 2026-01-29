@@ -1,6 +1,49 @@
 package app.revanced.manager.util
 
+import androidx.compose.ui.graphics.Color
+
 const val tag = "Morphe Manager"
+
+// Package identifiers with their associated colors
+object AppPackages {
+    const val YOUTUBE = "com.google.android.youtube"
+    const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
+    const val REDDIT = "com.reddit.frontpage"
+
+    // Gradient colors for each package
+    val YOUTUBE_COLORS = listOf(
+        Color(0xFFFF0033),
+        Color(0xFF1E5AA8),
+        Color(0xFF00AFAE)
+    )
+
+    val YOUTUBE_MUSIC_COLORS = listOf(
+        Color(0xFFFF8C3E),
+        Color(0xFF1E5AA8),
+        Color(0xFF00AFAE)
+    )
+
+    val REDDIT_COLORS = listOf(
+        Color(0xFFFF4500),
+        Color(0xFF1E5AA8),
+        Color(0xFF00AFAE)
+    )
+
+    // Download button colors
+    val YOUTUBE_DOWNLOAD_COLOR = Color(0xFFFF0034)
+    val YOUTUBE_MUSIC_DOWNLOAD_COLOR = Color(0xFFFF0034)
+    val REDDIT_DOWNLOAD_COLOR = Color(0xFFFF4400)
+
+    /**
+     * Get download button color for a package
+     */
+    fun getDownloadColor(packageName: String): Color = when (packageName) {
+        YOUTUBE -> YOUTUBE_DOWNLOAD_COLOR
+        YOUTUBE_MUSIC -> YOUTUBE_MUSIC_DOWNLOAD_COLOR
+        REDDIT -> REDDIT_DOWNLOAD_COLOR
+        else -> YOUTUBE_DOWNLOAD_COLOR // Default to YouTube color
+    }
+}
 
 //const val JAR_MIMETYPE = "application/java-archive"
 const val APK_MIMETYPE = "application/vnd.android.package-archive"

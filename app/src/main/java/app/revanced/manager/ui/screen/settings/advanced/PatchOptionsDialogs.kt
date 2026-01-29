@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.CUSTOM_HEADER_INSTRUCTION
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.CUSTOM_ICON_INSTRUCTION
@@ -31,6 +30,7 @@ import app.revanced.manager.ui.screen.home.ColorPresetItem
 import app.revanced.manager.ui.screen.home.ExpandableSurface
 import app.revanced.manager.ui.screen.home.ScrollableInstruction
 import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.util.AppPackages
 import app.revanced.manager.util.rememberFolderPickerWithPermission
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
@@ -43,16 +43,17 @@ import kotlinx.coroutines.launch
 fun ThemeColorDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     patchOptionsViewModel: PatchOptionsViewModel,
-    appType: AppType,
+    packageName: String,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // Get current values from preferences
-    val darkColor by when (appType) {
-        AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.getAsState()
-        AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.getAsState()
+    val darkColor by when (packageName) {
+        AppPackages.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.getAsState()
+        AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.getAsState()
+        else -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.getAsState()
     }
 
     val lightColor by patchOptionsPrefs.lightThemeBackgroundColorYouTube.getAsState()
@@ -62,7 +63,7 @@ fun ThemeColorDialog(
     var showLightColorPicker by remember { mutableStateOf(false) }
 
     // Get theme options from bundle
-    val themeOptions = patchOptionsViewModel.getThemeOptions(appType.packageName)
+    val themeOptions = patchOptionsViewModel.getThemeOptions(packageName)
 
     // Get dark theme option with its presets
     val darkThemeOption = patchOptionsViewModel.getOption(themeOptions, PatchOptionKeys.DARK_THEME_COLOR)
@@ -83,12 +84,12 @@ fun ThemeColorDialog(
             IconButton(
                 onClick = {
                     scope.launch {
-                        when (appType) {
-                            AppType.YOUTUBE -> {
+                        when (packageName) {
+                            AppPackages.YOUTUBE -> {
                                 patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(defaultDarkColor)
                                 patchOptionsPrefs.lightThemeBackgroundColorYouTube.update(defaultLightColor)
                             }
-                            AppType.YOUTUBE_MUSIC -> {
+                            AppPackages.YOUTUBE_MUSIC -> {
                                 patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(defaultDarkColor)
                             }
                         }
@@ -152,9 +153,9 @@ fun ThemeColorDialog(
                         isSelected = darkColor == colorValue,
                         onClick = {
                             scope.launch {
-                                when (appType) {
-                                    AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(colorValue)
-                                    AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(colorValue)
+                                when (packageName) {
+                                    AppPackages.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(colorValue)
+                                    AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(colorValue)
                                 }
                             }
                         }
@@ -172,7 +173,7 @@ fun ThemeColorDialog(
             }
 
             // Light Theme Section (YouTube only, if available)
-            if (appType == AppType.YOUTUBE && lightThemeOption != null) {
+            if (packageName == AppPackages.YOUTUBE && lightThemeOption != null) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 val localizedTitle = getLocalizedOrCustomText(
@@ -246,9 +247,9 @@ fun ThemeColorDialog(
             currentColor = darkColor,
             onColorSelected = { color ->
                 scope.launch {
-                    when (appType) {
-                        AppType.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(color)
-                        AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(color)
+                    when (packageName) {
+                        AppPackages.YOUTUBE -> patchOptionsPrefs.darkThemeBackgroundColorYouTube.update(color)
+                        AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.darkThemeBackgroundColorYouTubeMusic.update(color)
                     }
                 }
                 showDarkColorPicker = false
@@ -280,7 +281,7 @@ fun ThemeColorDialog(
 fun CustomBrandingDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     patchOptionsViewModel: PatchOptionsViewModel,
-    appType: AppType,
+    packageName: String,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -289,24 +290,26 @@ fun CustomBrandingDialog(
     // Get current values from preferences
     var appName by remember {
         mutableStateOf(
-            when (appType) {
-                AppType.YOUTUBE -> patchOptionsPrefs.customAppNameYouTube.getBlocking()
-                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.customAppNameYouTubeMusic.getBlocking()
+            when (packageName) {
+                AppPackages.YOUTUBE -> patchOptionsPrefs.customAppNameYouTube.getBlocking()
+                AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.customAppNameYouTubeMusic.getBlocking()
+                else -> ""
             }
         )
     }
 
     var iconPath by remember {
         mutableStateOf(
-            when (appType) {
-                AppType.YOUTUBE -> patchOptionsPrefs.customIconPathYouTube.getBlocking()
-                AppType.YOUTUBE_MUSIC -> patchOptionsPrefs.customIconPathYouTubeMusic.getBlocking()
+            when (packageName) {
+                AppPackages.YOUTUBE -> patchOptionsPrefs.customIconPathYouTube.getBlocking()
+                AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.customIconPathYouTubeMusic.getBlocking()
+                else -> ""
             }
         )
     }
 
     // Get branding options from bundle
-    val brandingOptions = patchOptionsViewModel.getBrandingOptions(appType.packageName)
+    val brandingOptions = patchOptionsViewModel.getBrandingOptions(packageName)
     val appNameOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
     val iconOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
 
@@ -326,12 +329,12 @@ fun CustomBrandingDialog(
                 onPrimaryClick = {
                     scope.launch {
                         patchOptionsPrefs.edit {
-                            when (appType) {
-                                AppType.YOUTUBE -> {
+                            when (packageName) {
+                                AppPackages.YOUTUBE -> {
                                     patchOptionsPrefs.customAppNameYouTube.value = appName
                                     patchOptionsPrefs.customIconPathYouTube.value = iconPath
                                 }
-                                AppType.YOUTUBE_MUSIC -> {
+                                AppPackages.YOUTUBE_MUSIC -> {
                                     patchOptionsPrefs.customAppNameYouTubeMusic.value = appName
                                     patchOptionsPrefs.customIconPathYouTubeMusic.value = iconPath
                                 }

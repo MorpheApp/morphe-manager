@@ -2,23 +2,7 @@ package app.revanced.manager.domain.manager
 
 import android.content.Context
 import app.revanced.manager.domain.manager.base.BasePreferencesManager
-
-/**
- * App type enum for patch options
- */
-enum class AppType {
-    YOUTUBE,
-    YOUTUBE_MUSIC;
-
-    /**
-     * Get the package name for this app type
-     */
-    val packageName: String
-        get() = when (this) {
-            YOUTUBE -> PatchOptionsPreferencesManager.PACKAGE_YOUTUBE
-            YOUTUBE_MUSIC -> PatchOptionsPreferencesManager.PACKAGE_YOUTUBE_MUSIC
-        }
-}
+import app.revanced.manager.util.AppPackages
 
 /**
  * Manages patch-specific option values that are applied during patching.
@@ -34,9 +18,8 @@ class PatchOptionsPreferencesManager(
 
     companion object {
         // Package identifiers
-        const val PACKAGE_YOUTUBE = "com.google.android.youtube"
-        const val PACKAGE_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
-        const val PACKAGE_REDDIT = "com.reddit.frontpage"
+        const val PACKAGE_YOUTUBE = AppPackages.YOUTUBE
+        const val PACKAGE_YOUTUBE_MUSIC = AppPackages.YOUTUBE_MUSIC
 
         // Patch names (must match exactly with bundle)
         const val PATCH_THEME = "Theme"
@@ -179,43 +162,6 @@ The image dimensions must be as follows:
     )
 
     /**
-     * Get the preference value for a specific option.
-     * Returns null if the option is not stored.
-     */
-    suspend fun getOptionValue(
-        packageType: String,
-        patchName: String,
-        optionKey: String
-    ): Any? {
-        val prefKey = "${packageType}_${patchName}_${optionKey}"
-
-        return when (// YouTube Theme
-            prefKey) {
-            "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" -> darkThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
-            "${PACKAGE_YOUTUBE}_${PATCH_THEME}_${KEY_LIGHT_THEME_COLOR}" -> lightThemeBackgroundColorYouTube.get().takeIf { it.isNotBlank() }
-
-            // YouTube Custom Branding
-            "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" -> customAppNameYouTube.get().takeIf { it.isNotBlank() }
-            "${PACKAGE_YOUTUBE}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" -> customIconPathYouTube.get().takeIf { it.isNotBlank() }
-
-            // YouTube Change Header
-            "${PACKAGE_YOUTUBE}_${PATCH_CHANGE_HEADER}_${KEY_CUSTOM_HEADER}" -> customHeaderPath.get().takeIf { it.isNotBlank() }
-
-            // YouTube Hide Shorts
-            "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_APP_SHORTCUT}" -> hideShortsAppShortcut.get().takeIf { it }
-            "${PACKAGE_YOUTUBE}_${PATCH_HIDE_SHORTS}_${KEY_HIDE_SHORTS_WIDGET}" -> hideShortsWidget.get().takeIf { it }
-
-            // YouTube Music Theme
-            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_THEME}_${KEY_DARK_THEME_COLOR}" -> darkThemeBackgroundColorYouTubeMusic.get().takeIf { it.isNotBlank() }
-
-            // YouTube Music Custom Branding
-            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_NAME}" -> customAppNameYouTubeMusic.get().takeIf { it.isNotBlank() }
-            "${PACKAGE_YOUTUBE_MUSIC}_${PATCH_CUSTOM_BRANDING}_${KEY_CUSTOM_ICON}" -> customIconPathYouTubeMusic.get().takeIf { it.isNotBlank() }
-            else -> null
-        }
-    }
-
-    /**
      * Export YouTube specific patch options
      * Format: Map<BundleUid, Map<PatchName, Map<OptionKey, Value>>>
      */
@@ -308,25 +254,6 @@ The image dimensions must be as follows:
                 put(0, bundleOptions)
             }
         }
-    }
-
-    /**
-     * Reset all patch options to defaults
-     */
-    suspend fun resetToDefaults() = edit {
-        // YouTube
-        darkThemeBackgroundColorYouTube.value = DEFAULT_DARK_THEME
-        lightThemeBackgroundColorYouTube.value = DEFAULT_LIGHT_THEME
-        customAppNameYouTube.value = ""
-        customIconPathYouTube.value = ""
-        customHeaderPath.value = ""
-        hideShortsAppShortcut.value = false
-        hideShortsWidget.value = false
-
-        // YouTube Music
-        darkThemeBackgroundColorYouTubeMusic.value = DEFAULT_DARK_THEME
-        customAppNameYouTubeMusic.value = ""
-        customIconPathYouTubeMusic.value = ""
     }
 }
 

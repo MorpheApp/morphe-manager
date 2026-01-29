@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +39,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
+import app.revanced.manager.util.AppPackages
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.*
@@ -96,9 +98,12 @@ fun HomeDialogs(
         exit = fadeOut(animationSpec = tween(if (homeViewModel.showFilePickerPromptDialog) 0 else 200))
     ) {
         val usingMountInstall = homeViewModel.usingMountInstall
+        // Remember packageName to prevent color flickering during exit animation
+        val packageName = remember { homeViewModel.pendingPackageName }
 
         DownloadInstructionsDialog(
             usingMountInstall = usingMountInstall,
+            packageName = packageName,
             onDismiss = {
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
@@ -399,10 +404,15 @@ private fun ApkAvailabilityDialog(
 @Composable
 private fun DownloadInstructionsDialog(
     usingMountInstall: Boolean,
+    packageName: String?,
     onDismiss: () -> Unit,
     onContinue: () -> Unit
 ) {
     val context = LocalContext.current
+
+    // Get button color based on package name
+    val buttonColor = packageName?.let { AppPackages.getDownloadColor(it) }
+        ?: AppPackages.YOUTUBE_DOWNLOAD_COLOR
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -466,7 +476,7 @@ private fun DownloadInstructionsDialog(
                                 )
                             },
                             shape = RoundedCornerShape(1.dp),
-                            color = Color(0xFFFF0034)
+                            color = buttonColor
                         ) {
                             Row(
                                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),

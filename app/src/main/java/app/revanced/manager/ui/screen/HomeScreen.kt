@@ -15,9 +15,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -138,15 +135,15 @@ fun HomeScreen(
     LaunchedEffect(allInstalledApps) {
         withContext(Dispatchers.IO) {
             // Load YouTube
-            youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE }
+            youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE }
             youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
 
             // Load YouTube Music
-            youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_YOUTUBE_MUSIC }
+            youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE_MUSIC }
             youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
 
             // Load Reddit
-            redditInstalledApp = allInstalledApps.find { it.originalPackageName == PACKAGE_REDDIT }
+            redditInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.REDDIT }
             redditPackageInfo = redditInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
         }
     }
@@ -237,7 +234,7 @@ fun HomeScreen(
             // App buttons section
             onYouTubeClick = {
                 homeViewModel.handleAppClick(
-                    packageName = PACKAGE_YOUTUBE,
+                    packageName = AppPackages.YOUTUBE,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
                     android11BugActive = homeViewModel.android11BugActive,
@@ -247,7 +244,7 @@ fun HomeScreen(
             },
             onYouTubeMusicClick = {
                 homeViewModel.handleAppClick(
-                    packageName = PACKAGE_YOUTUBE_MUSIC,
+                    packageName = AppPackages.YOUTUBE_MUSIC,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
                     android11BugActive = homeViewModel.android11BugActive,
@@ -257,7 +254,7 @@ fun HomeScreen(
             },
             onRedditClick = {
                 homeViewModel.handleAppClick(
-                    packageName = PACKAGE_REDDIT,
+                    packageName = AppPackages.REDDIT,
                     availablePatches = availablePatches,
                     bundleUpdateInProgress = false,
                     android11BugActive = homeViewModel.android11BugActive,

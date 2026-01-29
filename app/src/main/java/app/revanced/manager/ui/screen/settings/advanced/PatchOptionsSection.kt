@@ -15,7 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.revanced.manager.domain.manager.AppType
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_APP_SHORTCUT_DESC
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.HIDE_SHORTS_APP_SHORTCUT_TITLE
@@ -27,6 +26,7 @@ import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
+import app.revanced.manager.util.AppPackages
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -45,8 +45,8 @@ fun PatchOptionsSection(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    var showThemeDialog by remember { mutableStateOf<AppType?>(null) }
-    var showBrandingDialog by remember { mutableStateOf<AppType?>(null) }
+    var showThemeDialog by remember { mutableStateOf<String?>(null) }
+    var showBrandingDialog by remember { mutableStateOf<String?>(null) }
     var showHeaderDialog by remember { mutableStateOf(false) }
 
     // Collect patch options from ViewModel
@@ -177,13 +177,13 @@ fun PatchOptionsSection(
             if (youtubePatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        appType = AppType.YOUTUBE,
+                        packageName = AppPackages.YOUTUBE,
                         icon = Icons.Outlined.VideoLibrary,
                         title = stringResource(R.string.home_youtube),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = AppType.YOUTUBE },
-                        onBrandingClick = { showBrandingDialog = AppType.YOUTUBE },
+                        onThemeClick = { showThemeDialog = AppPackages.YOUTUBE },
+                        onBrandingClick = { showBrandingDialog = AppPackages.YOUTUBE },
                         onHeaderClick = { showHeaderDialog = true }
                     )
                 }
@@ -209,13 +209,13 @@ fun PatchOptionsSection(
             if (youtubeMusicPatches.isNotEmpty()) {
                 SectionCard {
                     AppPatchOptionsCard(
-                        appType = AppType.YOUTUBE_MUSIC,
+                        packageName = AppPackages.YOUTUBE_MUSIC,
                         icon = Icons.Outlined.LibraryMusic,
                         title = stringResource(R.string.home_youtube_music),
                         description = stringResource(R.string.settings_advanced_patch_options_youtube_music_description),
                         patchOptionsViewModel = patchOptionsViewModel,
-                        onThemeClick = { showThemeDialog = AppType.YOUTUBE_MUSIC },
-                        onBrandingClick = { showBrandingDialog = AppType.YOUTUBE_MUSIC },
+                        onThemeClick = { showThemeDialog = AppPackages.YOUTUBE_MUSIC },
+                        onBrandingClick = { showBrandingDialog = AppPackages.YOUTUBE_MUSIC },
                         onHeaderClick = null // No header for YouTube Music
                     )
                 }
@@ -224,21 +224,21 @@ fun PatchOptionsSection(
     }
 
     // Theme Dialog
-    showThemeDialog?.let { appType ->
+    showThemeDialog?.let { packageName ->
         ThemeColorDialog(
             patchOptionsPrefs = patchOptionsPrefs,
             patchOptionsViewModel = patchOptionsViewModel,
-            appType = appType,
+            packageName = packageName,
             onDismiss = { showThemeDialog = null }
         )
     }
 
     // Branding Dialog
-    showBrandingDialog?.let { appType ->
+    showBrandingDialog?.let { packageName ->
         CustomBrandingDialog(
             patchOptionsPrefs = patchOptionsPrefs,
             patchOptionsViewModel = patchOptionsViewModel,
-            appType = appType,
+            packageName = packageName,
             onDismiss = { showBrandingDialog = null }
         )
     }
@@ -258,7 +258,7 @@ fun PatchOptionsSection(
  */
 @Composable
 private fun AppPatchOptionsCard(
-    appType: AppType,
+    packageName: String,
     icon: ImageVector,
     title: String,
     description: String,
@@ -268,9 +268,9 @@ private fun AppPatchOptionsCard(
     onHeaderClick: (() -> Unit)?
 ) {
     // Get available patches for this app type
-    val hasTheme = patchOptionsViewModel.getThemeOptions(appType.packageName) != null
-    val hasBranding = patchOptionsViewModel.getBrandingOptions(appType.packageName) != null
-    val hasHeader = appType == AppType.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
+    val hasTheme = patchOptionsViewModel.getThemeOptions(packageName) != null
+    val hasBranding = patchOptionsViewModel.getBrandingOptions(packageName) != null
+    val hasHeader = packageName == AppPackages.YOUTUBE && patchOptionsViewModel.getHeaderOptions() != null
 
     Column {
         // Header

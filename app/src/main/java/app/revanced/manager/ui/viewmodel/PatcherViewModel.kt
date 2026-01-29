@@ -1,11 +1,7 @@
 package app.revanced.manager.ui.viewmodel
 
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
@@ -16,18 +12,10 @@ import android.os.ParcelUuid
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.autoSaver
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.toMutableStateList
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
 import androidx.work.WorkInfo
@@ -40,57 +28,28 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.InstalledAppRepository
-import app.revanced.manager.domain.repository.OriginalApkRepository
-import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.domain.repository.PatchSelectionRepository
+import app.revanced.manager.domain.repository.*
 import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
+import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.worker.PatcherWorker
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.service.UninstallService
-import app.revanced.manager.ui.model.InstallerModel
-import app.revanced.manager.ui.model.ProgressKey
-import app.revanced.manager.ui.model.SelectedApp
+import app.revanced.manager.ui.model.*
 import app.revanced.manager.ui.model.State
-import app.revanced.manager.ui.model.Step
-import app.revanced.manager.ui.model.StepCategory
-import app.revanced.manager.ui.model.StepId
-import app.revanced.manager.ui.model.StepProgressProvider
 import app.revanced.manager.ui.model.navigation.Patcher
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.PatchedAppExportData
-import app.revanced.manager.patcher.patch.PatchBundleInfo
-import app.revanced.manager.util.saveableVar
+import app.revanced.manager.util.*
 import app.revanced.manager.util.saver.snapshotStateListSaver
-import app.revanced.manager.util.simpleMessage
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
-import app.revanced.manager.util.toastHandle
-import app.revanced.manager.util.uiSafe
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.time.withTimeout
-import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -1943,7 +1902,7 @@ class PatcherViewModel(
             // Simple mode: Use options from preferences manager
             runBlocking {
                 when (packageName) {
-                    PACKAGE_YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
+                    AppPackages.YOUTUBE_MUSIC -> patchOptionsPrefs.exportYouTubeMusicPatchOptions()
                     else -> patchOptionsPrefs.exportYouTubePatchOptions()
                 }
             }

@@ -26,9 +26,6 @@ import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -39,12 +36,7 @@ import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
-import app.revanced.manager.util.uiSafe
+import app.revanced.manager.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
@@ -708,7 +700,7 @@ class HomeViewModel(
     }
 
     fun getApiOfflineWebSearchUrl(): String {
-        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
+        val architecture = if (pendingPackageName == AppPackages.YOUTUBE_MUSIC) {
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
@@ -744,9 +736,9 @@ class HomeViewModel(
      */
     fun getAppName(packageName: String): String {
         return when (packageName) {
-            PACKAGE_YOUTUBE -> app.getString(R.string.home_youtube)
-            PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
-            PACKAGE_REDDIT -> app.getString(R.string.home_reddit)
+            AppPackages.YOUTUBE -> app.getString(R.string.home_youtube)
+            AppPackages.YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
+            AppPackages.REDDIT -> app.getString(R.string.home_reddit)
             else -> packageName
         }
     }
@@ -788,37 +780,37 @@ class HomeViewModel(
             val info = apiBundleInfo as? PatchBundleInfo
             info?.let {
                 mapOf(
-                    PACKAGE_YOUTUBE to it.patches
+                    AppPackages.YOUTUBE to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE }
                                 ?.versions
                                 ?: emptyList()
                         }
                         .maxByOrNull { it }
                         .orEmpty(),
-                    PACKAGE_YOUTUBE_MUSIC to it.patches
+                    AppPackages.YOUTUBE_MUSIC to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC }
                                 ?.versions
                                 ?: emptyList()
                         }
                         .maxByOrNull { it }
                         .orEmpty(),
-                    PACKAGE_REDDIT to it.patches
+                    AppPackages.REDDIT to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_REDDIT } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.REDDIT } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_REDDIT }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.REDDIT }
                                 ?.versions
                                 ?: emptyList()
                         }

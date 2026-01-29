@@ -33,6 +33,7 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.BundleUpdateStatus
+import app.revanced.manager.util.AppPackages
 import kotlinx.coroutines.delay
 
 /**
@@ -543,11 +544,7 @@ fun MainAppsSection(
                 isLoading = stableLoadingState,
                 installedApp = youtubeInstalledApp,
                 packageInfo = youtubePackageInfo,
-                gradientColors = listOf(
-                    Color(0xFFFF0033),
-                    Color(0xFF1E5AA8),
-                    Color(0xFF00AFAE)
-                ),
+                gradientColors = AppPackages.YOUTUBE_COLORS,
                 buttonText = stringResource(R.string.home_youtube),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onYouTubeClick
@@ -558,11 +555,7 @@ fun MainAppsSection(
                 isLoading = stableLoadingState,
                 installedApp = youtubeMusicInstalledApp,
                 packageInfo = youtubeMusicPackageInfo,
-                gradientColors = listOf(
-                    Color(0xFFFF8C3E),
-                    Color(0xFF1E5AA8),
-                    Color(0xFF00AFAE)
-                ),
+                gradientColors = AppPackages.YOUTUBE_MUSIC_COLORS,
                 buttonText = stringResource(R.string.home_youtube_music),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onYouTubeMusicClick
@@ -573,11 +566,7 @@ fun MainAppsSection(
                 isLoading = stableLoadingState,
                 installedApp = redditInstalledApp,
                 packageInfo = redditPackageInfo,
-                gradientColors = listOf(
-                    Color(0xFFFF4500),
-                    Color(0xFF1E5AA8),
-                    Color(0xFF00AFAE)
-                ),
+                gradientColors = AppPackages.REDDIT_COLORS,
                 buttonText = stringResource(R.string.home_reddit),
                 onInstalledAppClick = onInstalledAppClick,
                 onButtonClick = onRedditClick
