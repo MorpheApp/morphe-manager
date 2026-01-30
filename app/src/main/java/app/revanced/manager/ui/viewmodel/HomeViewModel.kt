@@ -330,9 +330,9 @@ class HomeViewModel(
 
     // Main app packages that use default bundle only
     private val mainAppPackages = setOf(
-        PACKAGE_YOUTUBE,
-        PACKAGE_YOUTUBE_MUSIC,
-        PACKAGE_REDDIT
+        AppPackages.YOUTUBE,
+        AppPackages.YOUTUBE_MUSIC,
+        AppPackages.REDDIT
     )
 
     /**
@@ -481,7 +481,7 @@ class HomeViewModel(
             .first()
 
         if (allBundles.isEmpty()) {
-            app.toast(app.getString(R.string.morphe_home_no_patches_available))
+            app.toast(app.getString(R.string.home_no_patches_available))
             cleanupPendingData()
             return
         }
@@ -514,7 +514,7 @@ class HomeViewModel(
                 val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
 
                 if (defaultBundle == null || !defaultBundle.enabled) {
-                    app.toast(app.getString(R.string.morphe_home_default_source_disabled))
+                    app.toast(app.getString(R.string.home_default_source_disabled))
                     cleanupPendingData()
                     return
                 }

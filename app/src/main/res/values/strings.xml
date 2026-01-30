@@ -6,6 +6,7 @@
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
+    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode.</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience.</string>
 
