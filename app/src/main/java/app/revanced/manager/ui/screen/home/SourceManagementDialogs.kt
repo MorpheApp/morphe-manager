@@ -685,8 +685,7 @@ fun BundleChangelogDialog(
                 primaryText = stringResource(android.R.string.ok),
                 onPrimaryClick = onDismissRequest
             )
-        },
-        compactPadding = true
+        }
     ) {
         when (val current = state) {
             BundleChangelogState.Loading -> BundleChangelogLoading()
