@@ -1,3 +1,10 @@
+# app [1.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2026-01-30)
+
+
+### Bug Fixes
+
+* 'GmsCore support' patch not excluded in root mode ([#134](https://github.com/MorpheApp/morphe-manager/issues/134)) ([a2eb5b0](https://github.com/MorpheApp/morphe-manager/commit/a2eb5b0106c53ddb352b90496d51805a4d70a6a9))
+
 # app [1.4.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2026-01-30)
 
 
