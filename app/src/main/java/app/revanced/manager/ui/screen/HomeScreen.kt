@@ -22,7 +22,7 @@ import app.revanced.manager.ui.screen.home.Android11Dialog
 import app.revanced.manager.ui.screen.home.HomeDialogs
 import app.revanced.manager.ui.screen.home.InstalledAppInfoDialog
 import app.revanced.manager.ui.screen.home.SectionsLayout
-import app.revanced.manager.ui.screen.shared.ManagerUpdateDetailsDialog
+import app.revanced.manager.ui.screen.home.ManagerUpdateDetailsDialog
 import app.revanced.manager.util.rememberFilePickerWithPermission
 import app.revanced.manager.util.toFilePath
 import app.revanced.manager.ui.viewmodel.*

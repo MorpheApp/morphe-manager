@@ -10,8 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.ExpandMore
@@ -44,8 +42,6 @@ private object MorpheDefaults {
     val ContentPadding = 16.dp
     val ItemSpacing = 12.dp
 }
-
-// === BASE COMPONENTS ===
 
 /**
  * Elevated card with proper Material 3 theming
@@ -100,8 +96,6 @@ fun MorpheSettingsDivider(
     )
 }
 
-// === ICONS ===
-
 /**
  * Reusable icon component with standard styling
  */
@@ -149,8 +143,6 @@ fun GradientCircleIcon(
     }
 }
 
-// === TEXT AND ROWS ===
-
 /**
  * Row with optional icon and text content
  */
@@ -192,33 +184,6 @@ fun IconTextRow(
         trailingContent?.invoke()
     }
 }
-
-/**
- * Info row with label and value
- */
-@Composable
-fun InfoRow(
-    label: String,
-    value: String
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodySmall,
-            fontWeight = FontWeight.Medium
-        )
-    }
-}
-
-// === SETTINGS ===
 
 /**
  * Settings item card wrapper
@@ -323,8 +288,6 @@ fun RichSettingsItem(
         trailingContent = trailingContent
     )
 }
-
-// === SECTIONS ===
 
 /**
  * Section container card
@@ -464,186 +427,4 @@ fun ExpandableSection(
             }
         }
     }
-}
-
-// === BADGES ===
-
-/**
- * Badge style variants
- */
-enum class InfoBadgeStyle {
-    Default,
-    Primary,
-    Success,
-    Warning,
-    Error;
-
-    /**
-     * Get container and content colors for this badge style
-     */
-    @Composable
-    fun colors(): Pair<Color, Color> = when (this) {
-        Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
-        Success -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
-        Warning -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
-        Error -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
-        Default -> MaterialTheme.colorScheme.surfaceVariant to MaterialTheme.colorScheme.onSurfaceVariant
-    }
-}
-
-/**
- * Info badge with optional icon
- *
- * @param text Badge text content
- * @param style Visual style of the badge
- * @param icon Optional icon to display before text
- * @param isCompact Whether to use compact sizing (smaller padding and icon)
- * @param isExpanded Whether to use expanded variant (larger padding, centered content)
- * @param modifier Modifier to be applied to the badge
- */
-@Composable
-fun InfoBadge(
-    text: String,
-    style: InfoBadgeStyle = InfoBadgeStyle.Default,
-    icon: ImageVector? = null,
-    isCompact: Boolean = false,
-    isExpanded: Boolean = false,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
-) {
-    val (containerColor, contentColor) = style.colors()
-
-    // Determine sizing based on variant
-    val horizontalPadding = when {
-        isExpanded -> 16.dp
-        isCompact -> 8.dp
-        else -> 12.dp
-    }
-
-    val verticalPadding = when {
-        isExpanded -> 16.dp
-        isCompact -> 2.dp
-        else -> 8.dp
-    }
-
-    val iconSize = when {
-        isExpanded -> 24.dp
-        isCompact -> 14.dp
-        else -> 20.dp
-    }
-
-    val shapeRadius = when {
-        isExpanded -> 12.dp
-        isCompact -> 6.dp
-        else -> 12.dp
-    }
-
-    val surfaceModifier = if (isCompact && !isExpanded) {
-        modifier.wrapContentWidth()
-    } else {
-        modifier.fillMaxWidth()
-    }
-
-    val textStyle = if (isExpanded) {
-        MaterialTheme.typography.bodyMedium
-    } else {
-        MaterialTheme.typography.bodySmall
-    }
-
-    Surface(
-        modifier = surfaceModifier,
-        shape = RoundedCornerShape(shapeRadius),
-        color = containerColor
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
-            horizontalArrangement = Arrangement.spacedBy(if (isExpanded) 12.dp else 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            icon?.let {
-                MorpheIcon(
-                    icon = it,
-                    tint = contentColor,
-                    size = iconSize
-                )
-            }
-            Text(
-                text = text,
-                style = textStyle,
-                color = contentColor
-            )
-        }
-    }
-}
-
-// === OTHER COMPONENTS ===
-
-/**
- * Pill-shaped action button
- */
-@Composable
-fun ActionPillButton(
-    onClick: () -> Unit,
-    icon: ImageVector,
-    contentDescription: String,
-    enabled: Boolean = true,
-    colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors()
-) {
-    FilledTonalIconButton(
-        onClick = onClick,
-        enabled = enabled,
-        colors = colors,
-        shape = RoundedCornerShape(50),
-        modifier = Modifier
-            .height(44.dp)
-            .widthIn(min = 96.dp)
-    ) {
-        Icon(icon, contentDescription)
-    }
-}
-
-/**
- * Styled OutlinedTextField for dialogs with proper theming
- */
-@Composable
-fun MorpheDialogTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    singleLine: Boolean = true,
-    enabled: Boolean = true,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default
-) {
-    val textColor = LocalDialogTextColor.current
-
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = label,
-        placeholder = placeholder,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        isError = isError,
-        singleLine = singleLine,
-        enabled = enabled,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = textColor,
-            unfocusedTextColor = textColor,
-            disabledTextColor = textColor.copy(alpha = 0.6f),
-            focusedBorderColor = textColor.copy(alpha = 0.5f),
-            unfocusedBorderColor = textColor.copy(alpha = 0.2f),
-            disabledBorderColor = textColor.copy(alpha = 0.1f),
-            cursorColor = textColor,
-            errorBorderColor = MaterialTheme.colorScheme.error
-        )
-    )
 }

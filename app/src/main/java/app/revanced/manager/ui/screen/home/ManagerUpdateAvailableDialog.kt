@@ -1,4 +1,4 @@
-package app.revanced.manager.ui.screen.shared
+package app.revanced.manager.ui.screen.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -21,8 +21,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.network.dto.ReVancedAsset
-import app.revanced.manager.util.formatMegabytes
+import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.UpdateViewModel
+import app.revanced.manager.util.formatMegabytes
 import app.revanced.manager.util.relativeTime
 
 /**
