@@ -34,6 +34,7 @@ import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
+import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.*
@@ -327,6 +328,13 @@ class HomeViewModel(
         apiBundle?.clearChangelogCache()
     }
 
+    // Main app packages that use default bundle only
+    private val mainAppPackages = setOf(
+        PACKAGE_YOUTUBE,
+        PACKAGE_YOUTUBE_MUSIC,
+        PACKAGE_REDDIT
+    )
+
     /**
      * Update bundle data when sources or bundle info changes
      */
@@ -462,64 +470,91 @@ class HomeViewModel(
     /**
      * Start patching flow
      */
-    suspend fun startPatchingWithApp(selectedApp: SelectedApp, allowIncompatible: Boolean) {
+    suspend fun startPatchingWithApp(
+        selectedApp: SelectedApp,
+        allowIncompatible: Boolean
+    ) {
         val expertModeEnabled = prefs.useExpertMode.getBlocking()
 
-        val bundles = patchBundleRepository
+        val allBundles = patchBundleRepository
             .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version)
             .first()
 
-        if (bundles.isEmpty()) {
-            app.toast(app.getString(R.string.home_no_patches_available))
+        if (allBundles.isEmpty()) {
+            app.toast(app.getString(R.string.morphe_home_no_patches_available))
             cleanupPendingData()
             return
         }
 
+        // Patch filter: exclude GmsCore support in root mode
+        val shouldIncludePatch: (Int, PatchInfo) -> Boolean = { _, patch ->
+            patch.include && (!usingMountInstall || !patch.name.equals("GmsCore support", ignoreCase = true))
+        }
+
         if (expertModeEnabled) {
-            val effectiveAllowIncompatible = true
-            val patches = bundles.toPatchSelection(effectiveAllowIncompatible) { _, patch -> patch.include }
+            // Expert Mode: show all patches from all bundles
+            val patches = allBundles.toPatchSelection(true, shouldIncludePatch)
 
             val savedOptions = optionsRepository.getOptions(
                 selectedApp.packageName,
-                bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+                allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
             )
 
             expertModeSelectedApp = selectedApp
-            expertModeBundles = bundles
+            expertModeBundles = allBundles
             expertModePatches = patches.toMutableMap()
             expertModeOptions = savedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
-            // Find the first bundle that has patches for this APK
-            // Priority: default bundle (uid==0) if it has patches, otherwise first bundle with patches
-            val defaultBundle = bundles.firstOrNull { bundle ->
-                bundle.uid == 0 && bundle.patchSequence(allowIncompatible).filter { it.include }.any()
-            } ?: bundles.firstOrNull { bundle ->
-                bundle.patchSequence(allowIncompatible).filter { it.include }.any()
+            // Simple Mode: check if this is a main app or "other app"
+            val isMainApp = selectedApp.packageName in mainAppPackages
+
+            if (isMainApp) {
+                // For main apps: use only default bundle
+                val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
+
+                if (defaultBundle == null || !defaultBundle.enabled) {
+                    app.toast(app.getString(R.string.morphe_home_default_source_disabled))
+                    cleanupPendingData()
+                    return
+                }
+
+                val patchNames = defaultBundle.patchSequence(allowIncompatible)
+                    .filter { shouldIncludePatch(defaultBundle.uid, it) }
+                    .mapTo(mutableSetOf()) { it.name }
+
+                if (patchNames.isEmpty()) {
+                    app.toast(app.getString(R.string.home_no_patches_available))
+                    cleanupPendingData()
+                    return
+                }
+
+                proceedWithPatching(selectedApp, mapOf(defaultBundle.uid to patchNames), emptyMap())
+            } else {
+                // For "Other Apps": search all enabled bundles for patches
+                val bundleWithPatches = allBundles
+                    .filter { it.enabled }
+                    .map { bundle ->
+                        val patchNames = bundle.patchSequence(allowIncompatible)
+                            .filter { shouldIncludePatch(bundle.uid, it) }
+                            .mapTo(mutableSetOf()) { it.name }
+                        bundle to patchNames
+                    }
+                    .filter { (_, patches) -> patches.isNotEmpty() }
+
+                if (bundleWithPatches.isEmpty()) {
+                    app.toast(app.getString(R.string.home_no_patches_available))
+                    cleanupPendingData()
+                    return
+                }
+
+                // Use all available patches from all bundles
+                val allPatches = bundleWithPatches.associate { (bundle, patches) ->
+                    bundle.uid to patches
+                }
+
+                proceedWithPatching(selectedApp, allPatches, emptyMap())
             }
-
-            if (defaultBundle == null) {
-                app.toast(app.getString(R.string.home_no_patches_available))
-                cleanupPendingData()
-                return
-            }
-
-            val allPatches = defaultBundle.patchSequence(allowIncompatible)
-                .filter { it.include }
-                .map { it.name }
-                .toSet()
-
-            // Use the correct uid instead of always using default bundle
-            val patches = mapOf(defaultBundle.uid to allPatches).filterValues { it.isNotEmpty() }
-
-            if (patches.isEmpty() || patches[defaultBundle.uid]?.isEmpty() == true) {
-                app.toast(app.getString(R.string.home_no_patches_available))
-                cleanupPendingData()
-                return
-            }
-
-            val emptyOptions = emptyMap<Int, Map<String, Map<String, Any?>>>()
-            proceedWithPatching(selectedApp, patches, emptyOptions)
         }
     }
 
