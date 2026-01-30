@@ -22,6 +22,11 @@ val repositoryModule = module {
         createdAtStart()
     }
     singleOf(::WorkerRepository)
-    singleOf(::InstalledAppRepository)
+    single {
+        InstalledAppRepository(
+            db = get(),
+            patchBundleRepository = get()
+        )
+    }
     singleOf(::OriginalApkRepository)
 }

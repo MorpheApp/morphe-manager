@@ -29,7 +29,7 @@ import kotlin.random.Random
         Option::class,
         OriginalApk::class
     ],
-    version = 9
+    version = 10
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

@@ -150,6 +150,7 @@
     <string name="home_app_info_install_type_custom_installer">Custom installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
     <string name="home_app_info_install_type_shizuku" translatable="false">Shizuku</string>
+    <string name="home_app_info_patched_at">Patched</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>

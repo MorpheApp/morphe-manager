@@ -37,6 +37,8 @@ import app.revanced.manager.ui.viewmodel.InstallResult
 import app.revanced.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.revanced.manager.ui.viewmodel.MountWarningReason
 import app.revanced.manager.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -87,32 +89,50 @@ fun InstalledAppInfoDialog(
         .collectAsStateWithLifecycle(emptyMap())
         .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
 
-    // Build applied bundles summary
-    val appliedBundles = remember(appliedPatches, bundleInfo, bundleSources, context) {
-        if (appliedPatches.isNullOrEmpty()) return@remember emptyList()
-        runCatching {
-            appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
-                if (patches.isEmpty()) return@mapNotNull null
-                val info = bundleInfo[bundleUid]
-                val source = bundleSources.firstOrNull { it.uid == bundleUid }
-                val fallbackName = if (bundleUid == 0) {
-                    context.getString(R.string.home_app_info_patches_name_default)
-                } else {
-                    context.getString(R.string.home_app_info_patches_name_fallback)
-                }
-                val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
-                val patchInfos = info?.patches?.filter { it.name in patches }?.distinctBy { it.name }?.sortedBy { it.name } ?: emptyList()
-                val missingNames = patches.toList().sorted().filterNot { name -> patchInfos.any { it.name == name } }.distinct()
-                AppliedPatchBundleUi(
-                    uid = bundleUid,
-                    title = title,
-                    version = info?.version,
-                    patchInfos = patchInfos,
-                    fallbackNames = missingNames,
-                    bundleAvailable = info != null
-                )
-            }.sortedBy { it.title }
-        }.getOrElse { emptyList() }
+    // Build applied bundles summary with stored versions
+    val appliedBundles by produceState<List<AppliedPatchBundleUi>>(
+        initialValue = emptyList(),
+        appliedPatches,
+        bundleInfo,
+        bundleSources,
+        context,
+        installedApp
+    ) {
+        if (appliedPatches.isNullOrEmpty() || installedApp == null) {
+            value = emptyList()
+            return@produceState
+        }
+
+        // Get stored bundle versions from database
+        val storedVersions = withContext(Dispatchers.IO) {
+            viewModel.getStoredBundleVersions()
+        }
+
+        value = appliedPatches.entries.mapNotNull { (bundleUid, patches) ->
+            if (patches.isEmpty()) return@mapNotNull null
+            val info = bundleInfo[bundleUid]
+            val source = bundleSources.firstOrNull { it.uid == bundleUid }
+            val fallbackName = if (bundleUid == 0) {
+                context.getString(R.string.home_app_info_patches_name_default)
+            } else {
+                context.getString(R.string.home_app_info_patches_name_fallback)
+            }
+            val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
+
+            // Use stored version from DB, fallback to current version
+            val version = storedVersions[bundleUid] ?: info?.version
+
+            val patchInfos = info?.patches?.filter { it.name in patches }?.distinctBy { it.name }?.sortedBy { it.name } ?: emptyList()
+            val missingNames = patches.toList().sorted().filterNot { name -> patchInfos.any { it.name == name } }.distinct()
+            AppliedPatchBundleUi(
+                uid = bundleUid,
+                title = title,
+                version = version,
+                patchInfos = patchInfos,
+                fallbackNames = missingNames,
+                bundleAvailable = info != null
+            )
+        }.sortedBy { it.title }
     }
 
     // Bundle summary text
@@ -378,6 +398,15 @@ private fun InfoSection(
                 value = stringResource(installedApp.installType.stringResource)
             )
 
+            // Patched date (if available)
+            installedApp.patchedAt?.let { timestamp ->
+                MorpheSettingsDivider(fullWidth = true)
+                InfoRow(
+                    label = stringResource(R.string.home_app_info_patched_at),
+                    value = getRelativeTimeString(timestamp)
+                )
+            }
+
             // Applied patches with icon button
             if (totalPatches > 0) {
                 MorpheSettingsDivider(fullWidth = true)
@@ -397,7 +426,7 @@ private fun InfoSection(
                         )
                         Text(
                             text = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Medium,
                         )
                     }

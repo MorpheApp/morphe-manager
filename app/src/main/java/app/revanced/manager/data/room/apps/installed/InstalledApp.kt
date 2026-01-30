@@ -36,5 +36,6 @@ data class InstalledApp(
     @ColumnInfo(name = "original_package_name") val originalPackageName: String,
     @ColumnInfo(name = "version") val version: String,
     @ColumnInfo(name = "install_type") val installType: InstallType,
-    @ColumnInfo(name = "selection_payload") val selectionPayload: SelectionPayload? = null
+    @ColumnInfo(name = "selection_payload") val selectionPayload: SelectionPayload? = null,
+    @ColumnInfo(name = "patched_at") val patchedAt: Long? = null
 )

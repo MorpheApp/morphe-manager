@@ -58,6 +58,9 @@ fun SectionsLayout(
     hasManagerUpdate: Boolean,
     onShowUpdateDetails: () -> Unit,
 
+    // App update indicators
+    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
+
     // Greeting section
     greetingMessage: String,
 
@@ -102,6 +105,7 @@ fun SectionsLayout(
             AdaptiveContent(
                 windowSize = windowSize,
                 greetingMessage = greetingMessage,
+                appUpdatesAvailable = appUpdatesAvailable,
                 onYouTubeClick = onYouTubeClick,
                 onYouTubeMusicClick = onYouTubeMusicClick,
                 onRedditClick = onRedditClick,
@@ -158,6 +162,7 @@ fun SectionsLayout(
 private fun AdaptiveContent(
     windowSize: WindowSize,
     greetingMessage: String,
+    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     onRedditClick: () -> Unit,
@@ -209,6 +214,7 @@ private fun AdaptiveContent(
             ) {
                 // App buttons section
                 MainAppsSection(
+                    appUpdatesAvailable = appUpdatesAvailable,
                     onYouTubeClick = onYouTubeClick,
                     onYouTubeMusicClick = onYouTubeMusicClick,
                     onRedditClick = onRedditClick,
@@ -250,6 +256,7 @@ private fun AdaptiveContent(
 
             // Section 3: Main app buttons
             MainAppsSection(
+                appUpdatesAvailable = appUpdatesAvailable,
                 onYouTubeClick = onYouTubeClick,
                 onYouTubeMusicClick = onYouTubeMusicClick,
                 onRedditClick = onRedditClick,
@@ -504,6 +511,7 @@ fun GreetingSection(
  */
 @Composable
 fun MainAppsSection(
+    appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
     onRedditClick: () -> Unit,
@@ -552,7 +560,10 @@ fun MainAppsSection(
                 gradientColors = AppPackages.YOUTUBE_COLORS,
                 buttonText = stringResource(R.string.home_youtube),
                 onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onYouTubeClick
+                onButtonClick = onYouTubeClick,
+                hasUpdate = youtubeInstalledApp?.let {
+                    appUpdatesAvailable[it.currentPackageName] == true
+                } == true
             )
 
             // YouTube Music
@@ -563,7 +574,10 @@ fun MainAppsSection(
                 gradientColors = AppPackages.YOUTUBE_MUSIC_COLORS,
                 buttonText = stringResource(R.string.home_youtube_music),
                 onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onYouTubeMusicClick
+                onButtonClick = onYouTubeMusicClick,
+                hasUpdate = youtubeMusicInstalledApp?.let {
+                    appUpdatesAvailable[it.currentPackageName] == true
+                } == true
             )
 
             // Reddit
@@ -574,7 +588,10 @@ fun MainAppsSection(
                 gradientColors = AppPackages.REDDIT_COLORS,
                 buttonText = stringResource(R.string.home_reddit),
                 onInstalledAppClick = onInstalledAppClick,
-                onButtonClick = onRedditClick
+                onButtonClick = onRedditClick,
+                hasUpdate = redditInstalledApp?.let {
+                    appUpdatesAvailable[it.currentPackageName] == true
+                } == true
             )
         }
     }
@@ -591,7 +608,8 @@ private fun AppCardWithLoading(
     gradientColors: List<Color>,
     buttonText: String,
     onInstalledAppClick: (InstalledApp) -> Unit,
-    onButtonClick: () -> Unit
+    onButtonClick: () -> Unit,
+    hasUpdate: Boolean = false
 ) {
     Crossfade(
         targetState = isLoading,
@@ -606,7 +624,8 @@ private fun AppCardWithLoading(
                     installedApp = installedApp,
                     packageInfo = packageInfo,
                     gradientColors = gradientColors,
-                    onClick = { onInstalledAppClick(installedApp) }
+                    onClick = { onInstalledAppClick(installedApp) },
+                    hasUpdate = hasUpdate
                 )
             } else {
                 AppButton(
@@ -690,7 +709,7 @@ private fun AppCardLayout(
 }
 
 /**
- * Installed app card with gradient background and accessibility support
+ * Installed app card with gradient background
  */
 @Composable
 fun InstalledAppCard(
@@ -698,13 +717,27 @@ fun InstalledAppCard(
     packageInfo: PackageInfo?,
     gradientColors: List<Color>,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    hasUpdate: Boolean = false
 ) {
     val context = LocalContext.current
     val textColor = Color.White
 
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
+    val updateAvailableLabel = stringResource(R.string.update_available)
+
+    // Delayed visibility for badge to prevent showing during skeleton loading
+    var showBadge by remember { mutableStateOf(false) }
+
+    LaunchedEffect(hasUpdate) {
+        if (hasUpdate) {
+            delay(500) // Wait for skeleton animation to finish
+            showBadge = true
+        } else {
+            showBadge = false
+        }
+    }
 
     // Build content description for accessibility
     val appName = remember(packageInfo, installedApp) {
@@ -718,7 +751,7 @@ fun InstalledAppCard(
         } ?: ""
     }
 
-    val contentDesc = remember(appName, version, versionLabel, installedLabel) {
+    val contentDesc = remember(appName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel) {
         buildString {
             append(appName)
             if (version.isNotEmpty()) {
@@ -729,6 +762,10 @@ fun InstalledAppCard(
             }
             append(", ")
             append(installedLabel)
+            if (hasUpdate) {
+                append(", ")
+                append(updateAvailableLabel)
+            }
         }
     }
 
@@ -749,38 +786,87 @@ fun InstalledAppCard(
         )
 
         // App info
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+        Box(
+            modifier = Modifier.weight(1f)
         ) {
-            // App name
-            Text(
-                text = appName,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    shadow = Shadow(
-                        color = Color.Black.copy(alpha = 0.4f),
-                        offset = Offset(0f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                color = textColor
-            )
-
-            // Show version
-            if (version.isNotEmpty()) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                // App name
                 Text(
-                    text = version,
-                    style = MaterialTheme.typography.bodyMedium.copy(
+                    text = appName,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
                         shadow = Shadow(
                             color = Color.Black.copy(alpha = 0.4f),
-                            offset = Offset(0f, 1f),
-                            blurRadius = 2f
+                            offset = Offset(0f, 2f),
+                            blurRadius = 4f
                         )
                     ),
-                    color = textColor.copy(alpha = 0.85f)
+                    color = textColor
                 )
+
+                // Show version
+                if (version.isNotEmpty()) {
+                    Text(
+                        text = version,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.4f),
+                                offset = Offset(0f, 1f),
+                                blurRadius = 2f
+                            )
+                        ),
+                        color = textColor.copy(alpha = 0.85f)
+                    )
+                }
             }
+
+            // Update badge
+            androidx.compose.animation.AnimatedVisibility(
+                visible = showBadge,
+                modifier = Modifier.align(Alignment.BottomEnd),
+                enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
+                        scaleIn(initialScale = 0.8f, animationSpec = tween(durationMillis = 400)),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
+                        scaleOut(targetScale = 0.8f, animationSpec = tween(durationMillis = 300))
+            ) {
+                UpdateBadge()
+            }
+        }
+    }
+}
+
+/**
+ * Update badge for app cards
+ */
+@Composable
+private fun UpdateBadge(
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shadowElevation = 4.dp
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Update,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(14.dp)
+            )
+            Text(
+                text = stringResource(R.string.update),
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         }
     }
 }

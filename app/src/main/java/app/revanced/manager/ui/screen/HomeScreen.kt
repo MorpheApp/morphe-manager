@@ -123,6 +123,34 @@ fun HomeScreen(
         )
     }
 
+    // Check for app updates after bundle update completes
+    LaunchedEffect(bundleUpdateProgress, allInstalledApps, sources) {
+        // Only check when bundle update is complete (not in progress)
+        if (bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.Success ||
+            bundleUpdateProgress?.result == PatchBundleRepository.BundleUpdateResult.NoUpdates) {
+
+            val defaultBundle = sources.firstOrNull { it.uid == 0 }
+            homeViewModel.checkInstalledAppsForUpdates(
+                installedApps = allInstalledApps,
+                currentBundleVersion = defaultBundle?.version
+            )
+        }
+    }
+
+    // Also check on initial load
+    LaunchedEffect(allInstalledApps, sources) {
+        if (allInstalledApps.isNotEmpty() && sources.isNotEmpty()) {
+            val defaultBundle = sources.firstOrNull { it.uid == 0 }
+            homeViewModel.checkInstalledAppsForUpdates(
+                installedApps = allInstalledApps,
+                currentBundleVersion = defaultBundle?.version
+            )
+        }
+    }
+
+    // Pass update info to sections layout
+    val appUpdatesAvailable by remember { derivedStateOf { homeViewModel.appUpdatesAvailable } }
+
     // Handle patch trigger from dialog
     LaunchedEffect(patchTriggerPackage) {
         patchTriggerPackage?.let { packageName ->
@@ -227,6 +255,9 @@ fun HomeScreen(
             bundleUpdateProgress = bundleUpdateProgress,
             hasManagerUpdate = hasManagerUpdate,
             onShowUpdateDetails = { showUpdateDetailsDialog = true },
+
+            // App update indicators
+            appUpdatesAvailable = appUpdatesAvailable,
 
             // Greeting section
             greetingMessage = greetingMessage,

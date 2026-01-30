@@ -27,10 +27,10 @@ import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemote
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.network.api.MORPHE_API_URL
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -94,6 +94,7 @@ data class QuickPatchParams(
 class HomeViewModel(
     private val app: Application,
     val patchBundleRepository: PatchBundleRepository,
+    private val installedAppRepository: InstalledAppRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,
@@ -166,6 +167,10 @@ class HomeViewModel(
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
 
+    // Track available updates for installed apps
+    var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
@@ -210,6 +215,41 @@ class HomeViewModel(
                 updateCheck()
             }
         }
+    }
+
+    /**
+     * Check for bundle updates for installed apps
+     */
+    suspend fun checkInstalledAppsForUpdates(
+        installedApps: List<InstalledApp>,
+        currentBundleVersion: String?
+    ) = withContext(Dispatchers.IO) {
+        if (currentBundleVersion == null) {
+            appUpdatesAvailable = emptyMap()
+            return@withContext
+        }
+
+        val updates = mutableMapOf<String, Boolean>()
+
+        installedApps.forEach { app ->
+            // Get stored bundle versions for this app
+            val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+
+            // Check if any bundle used for this app has been updated
+            val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
+                // Only check default bundle (UID 0) for main apps
+                if (bundleUid == DEFAULT_SOURCE_UID) {
+                    // Compare stored version with current version
+                    isNewerVersion(storedVersion, currentBundleVersion)
+                } else {
+                    false // For now, only track default bundle updates
+                }
+            }
+
+            updates[app.currentPackageName] = hasUpdate
+        }
+
+        appUpdatesAvailable = updates
     }
 
     private fun sendEvent(event: BundleListViewModel.Event) {

@@ -142,6 +142,11 @@ class InstalledAppInfoViewModel(
         }
     }
 
+    suspend fun getStoredBundleVersions(): Map<Int, String?> {
+        val app = installedApp ?: return emptyMap()
+        return installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+    }
+
     fun showMountWarning(action: MountWarningAction, reason: MountWarningReason) {
         mountWarning = MountWarningState(action, reason)
     }
@@ -209,7 +214,8 @@ class InstalledAppInfoViewModel(
                 app.version,
                 app.installType,
                 persistableSelection,
-                remappedPayload
+                remappedPayload,
+                app.patchedAt
             )
         }
         if (remappedSelection.isNotEmpty()) return@withContext remappedSelection
@@ -256,7 +262,8 @@ class InstalledAppInfoViewModel(
             version = resolvedVersion,
             installType = installType,
             patchSelection = selection,
-            selectionPayload = selectionPayload
+            selectionPayload = selectionPayload,
+            patchedAt = app.patchedAt ?: System.currentTimeMillis()
         )
 
         val updatedApp = app.copy(
@@ -431,7 +438,8 @@ class InstalledAppInfoViewModel(
                             app.version,
                             InstallType.SHIZUKU,
                             selection,
-                            payload
+                            payload,
+                            app.patchedAt
                         )
                     }
                     persistInstallMetadata(InstallType.SHIZUKU, app.version)
@@ -1240,7 +1248,8 @@ class InstalledAppInfoViewModel(
                                     currentApp.version,
                                     InstallType.SAVED,
                                     persistableSelection,
-                                    payload
+                                    payload,
+                                    currentApp.patchedAt
                                 )
                             }
 

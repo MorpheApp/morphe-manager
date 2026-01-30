@@ -8,9 +8,11 @@ import app.revanced.manager.data.room.apps.installed.SelectionPayload
 import app.revanced.manager.util.PatchSelection
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 
 class InstalledAppRepository(
-    db: AppDatabase
+    db: AppDatabase,
+    private val patchBundleRepository: PatchBundleRepository
 ) {
     private val dao = db.installedAppDao()
 
@@ -24,28 +26,39 @@ class InstalledAppRepository(
     suspend fun getAppliedPatches(packageName: String): PatchSelection =
         dao.getPatchesSelection(packageName).mapValues { (_, patches) -> patches.toSet() }
 
+    suspend fun getBundleVersionsForApp(packageName: String): Map<Int, String?> =
+        dao.getBundleVersions(packageName)
+            .associate { it.bundleUid to it.version }
+
     suspend fun addOrUpdate(
         currentPackageName: String,
         originalPackageName: String,
         version: String,
         installType: InstallType,
         patchSelection: PatchSelection,
-        selectionPayload: SelectionPayload? = null
+        selectionPayload: SelectionPayload? = null,
+        patchedAt: Long? = System.currentTimeMillis() // Default to current time for new patches
     ) {
+        // Get current bundle versions at the time of patching
+        val bundleVersions = patchBundleRepository.sources.first()
+            .associate { it.uid to it.version }
+
         dao.upsertApp(
             InstalledApp(
                 currentPackageName = currentPackageName,
                 originalPackageName = originalPackageName,
                 version = version,
                 installType = installType,
-                selectionPayload = selectionPayload
+                selectionPayload = selectionPayload,
+                patchedAt = patchedAt
             ),
             patchSelection.flatMap { (uid, patches) ->
                 patches.map { patch ->
                     AppliedPatch(
                         packageName = currentPackageName,
                         bundle = uid,
-                        patchName = patch
+                        patchName = patch,
+                        bundleVersion = bundleVersions[uid] // Store bundle version at patch time
                     )
                 }
             }
