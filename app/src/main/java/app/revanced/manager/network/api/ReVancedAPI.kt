@@ -1,12 +1,12 @@
 package app.revanced.manager.network.api
 
-import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.dto.*
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.APIFailure
 import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
+import app.morphe.manager.BuildConfig
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import kotlinx.datetime.Instant
@@ -14,7 +14,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.runCatching
 
-private const val MORPHE_MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 class ReVancedAPI(
