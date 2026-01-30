@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-paket</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">Uppdateringen misslyckades</string>
+    <string name="morphe_home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
+    <string name="morphe_home_please_wait">Vänligen vänta…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Vilken app vill du patcha?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Redo att göra YouTube legendar igen?</string>
@@ -21,19 +25,9 @@
     <string name="morphe_home_greeting_9">Räddar appar från sig själva sedan idag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Driven av koffein och bra uppdateringar</string>
-    <string name="morphe_home_bundle_type_api">API-paket</string>
-    <string name="morphe_home_update_error">Uppdateringen misslyckades</string>
-    <string name="morphe_home_update_error_subtitle">Kontrollera din internetanslutning och försök igen</string>
-    <string name="morphe_home_updating_patches">Uppdaterar patchar…</string>
-    <string name="morphe_home_update_success">Uppdateringen klar</string>
-    <string name="morphe_home_patches_updated">Dina patchar är uppdaterade</string>
-    <string name="morphe_home_patches_are_loading">Patchar laddas, vänligen vänta…</string>
-    <string name="morphe_home_please_wait">Vänligen vänta…</string>
-    <string name="morphe_home_failed_to_open_url">Det gick inte att öppna URL</string>
-    <string name="morphe_home_date_added">Lades till</string>
-    <string name="morphe_home_date_updated">Uppdaterades</string>
-    <string name="morphe_home_check_updates">Kontrollera</string>
-    <string name="morphe_home_unknown">Okänd</string>
+    <!-- Sources Management -->
+    <string name="morphe_disabled">Inaktiverad</string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den ursprungliga opatchade APK:n?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">För att uppdatera %1$s behöver du version %2$s (ouppdaterad)</string>
@@ -53,12 +47,19 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Välj den APK-fil du laddade ner</string>
     <string name="morphe_home_file_picker_prompt_description">Välj nu %1$s APK-filen som du just laddade ner.</string>
-    <string name="morphe_home_file_picker_prompt_open">Öppna APK-fil jag laddade ner</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Anpassad färg</string>
+    <string name="morphe_hex_color">HEX-färg</string>
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Rotläge kräver att den ursprungliga APK:n är installerad på din enhet innan patchning.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore supportpatch är exkluderad i rotläge</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Spara APK</string>
     <string name="morphe_patcher_error_copied">Fel kopierat till urklipp</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patchar</string>
     <string name="morphe_patcher_long_step_warning">Det här steget kan ta en stund. Vänligen vänta...</string>
@@ -90,7 +91,6 @@
     <string name="morphe_patcher_message_7">Justerar 1:or och 0:or… 🤖</string>
     <string name="morphe_patcher_message_8">Redar ut digital spaghetti… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Fixar buggar i den opatchade appen… 🐞</string>
     <string name="morphe_patcher_message_10">Bra patchar är värda att vänta på… ⏳</string>
     <string name="morphe_patcher_message_11">Polerar pixlar tills de glänser… 💎</string>
     <string name="morphe_patcher_message_12">Var snäll och sitt kvar tills kapten stänger av \"Uppdatering pågår\"-skylten... 💺✈️</string>
@@ -106,12 +106,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Din app har feber, och den enda medicinen är fler patchar… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Tar bort nonsens. Vänligen vänta… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Återgå till Morphe-hem</string>
-    <string name="morphe_settings_return_to_morphe_description">Återgå till förenklat läge</string>
-    <string name="morphe_share_website_description">Dela den officiella Morphe-webbplatsen</string>
-    <!-- App Icon Selector -->
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options_description">Anpassa teman, färger och bakgrunder</string>
     <string name="morphe_background_type_circles">Cirklar</string>
     <string name="morphe_background_type_rings">Ringar</string>
@@ -120,20 +115,21 @@
     <string name="morphe_background_type_shapes">Former</string>
     <string name="morphe_background_type_snow">Snö</string>
     <string name="morphe_background_type_none">Ingen</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Appikon</string>
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
     <string name="morphe_patch_options_youtube_description">Tema, branding, rubrik och Shorts-alternativ</string>
     <string name="morphe_patch_options_youtube_music_description">Tema- och brandingalternativ</string>
     <string name="morphe_patch_options_restart_message">Ändring av patchalternativ kräver återinstallering för att ändringarna ska börja gälla</string>
-    <!-- Theme Colors -->
-    <string name="morphe_patch_options_waiting_for_bundle">Vänta tills patchburden uppdateras</string>
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_load_error">Misslyckades med att läsa in patchalternativ</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Anpassad färg</string>
-    <string name="morphe_hex_color">HEX-färg</string>
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
+    <string name="morphe_share_website_description">Dela den officiella Morphe-webbplatsen</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patchar</string>
@@ -703,7 +699,6 @@ Den är endast kompatibel med följande version: %2$s."</string>
     <string name="path_selector_files">Filer</string>
     <string name="show_password_field">Visa lösenord</string>
     <string name="hide_password_field">Dölj lösenord</string>
-    <string name="installer_primary_title">Primärt installationsprogram</string>
     <string name="installer_fallback_title">Reserv-installationsprogram</string>
     <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
@@ -812,7 +807,6 @@ Detaljer: %2$s"</string>
     <string name="select_install_type">Välj installationstyp</string>
     <string name="patcher_step_group_preparing">Förbereder</string>
     <string name="patcher_step_load_patches">Läser in patchar</string>
-    <string name="patcher_step_prepare_split_apk">Slå samman delad APK</string>
     <string name="patcher_step_unpack">Läser APK-fil</string>
     <string name="patcher_step_group_patching">Patchar</string>
     <string name="patcher_step_group_saving">Sparar</string>

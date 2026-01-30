@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Paket tambalan</string>
+    <string name="morphe_home_other_apps">Aplikasi lainnya</string>
+    <string name="morphe_home">Beranda</string>
+    <string name="morphe_home_not_patched_yet">Belum ditambal</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Tersedia pembaruan Manager</string>
+    <string name="morphe_home_update_available_subtitle">Versi baru siap dipasang</string>
+    <string name="morphe_home_update_error">Pembaruan gagal</string>
+    <string name="morphe_home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
+    <string name="morphe_home_updating_sources">Memperbarui sumber…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d sumber diproses</string>
+    <string name="morphe_home_update_success">Pembaruan sumber selesai</string>
+    <string name="morphe_home_update_success_subtitle">Sumber Anda sudah terbaru</string>
+    <string name="morphe_home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
+    <string name="morphe_home_please_wait">Silakan tunggu…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Siap untuk membuat YouTube legendaris lagi?</string>
@@ -21,21 +35,27 @@
     <string name="morphe_home_greeting_9">Menyelamatkan aplikasi dari diri mereka sendiri sejak hari ini</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Didukung oleh kafein dan tambalan yang bagus</string>
-    <string name="morphe_home_bundle_type_api">Paket API</string>
-    <string name="morphe_home_update_error">Pembaruan gagal</string>
-    <string name="morphe_home_update_error_subtitle">Periksa koneksi internet Anda dan coba lagi</string>
-    <string name="morphe_home_updating_patches">Memperbarui tambalan…</string>
-    <string name="morphe_home_update_success">Pembaruan selesai</string>
-    <string name="morphe_home_patches_updated">Tambalan Anda sudah terbaru</string>
-    <string name="morphe_home_patches_are_loading">Patch sedang dimuat, silakan tunggu…</string>
-    <string name="morphe_home_please_wait">Silakan tunggu…</string>
-    <string name="morphe_home_open_in_browser">Buka di peramban</string>
-    <string name="morphe_home_failed_to_open_url">Gagal membuka URL</string>
-    <string name="morphe_home_date_added">Ditambahkan</string>
-    <string name="morphe_home_date_updated">Diperbarui</string>
-    <string name="morphe_home_check_updates">Periksa</string>
-    <string name="morphe_home_unknown">Tidak diketahui</string>
-    <string name="morphe_home_timeline">Riwayat pembaruan</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Sumber tambalan</string>
+    <string name="morphe_sources_management_subtitle">%d sumber dipasang</string>
+    <string name="morphe_sources_delete_confirm_message">Hapus sumber \"%s\"? Ini tidak dapat dibatalkan.</string>
+    <string name="morphe_sources_open_in_browser">Buka di peramban</string>
+    <string name="morphe_sources_failed_to_open_url">Gagal membuka URL</string>
+    <string name="morphe_sources_date_added">Ditambahkan</string>
+    <string name="morphe_sources_date_updated">Diperbarui</string>
+    <string name="morphe_enabled"> Diaktifkan</string>
+    <string name="morphe_disabled">Nonaktif</string>
+    <string name="morphe_rename">Ganti nama</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Tambah sumber tambalan</string>
+    <string name="morphe_add_patch_source_remote">Daring</string>
+    <string name="morphe_add_patch_source_remote_url">URL sumber</string>
+    <string name="morphe_add_patch_source_remote_description">Masukkan URL titik akhir JSON untuk sumber tambalan daring</string>
+    <string name="morphe_add_patch_source_local">Lokal</string>
+    <string name="morphe_add_patch_source_local_file">Pilih berkas sumber tambalan</string>
+    <string name="morphe_add_patch_source_local_file_description">Pilih berkas sumber tambalan .mpp dari penyimpanan</string>
+    <string name="morphe_add_patch_source_local_change_file">Ganti berkas</string>
+    <string name="morphe_home_no_patches_available">Tidak ada tambalan tersedia</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Apakah Anda memiliki APK asli yang belum ditambal?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Untuk menambal %1$s, Anda membutuhkan versi %2$s (belum ditambal)</string>
@@ -55,17 +75,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Pilih APK yang Anda unduh</string>
     <string name="morphe_home_file_picker_prompt_description">Sekarang pilih berkas APK %1$s yang baru saja Anda unduh.</string>
-    <string name="morphe_home_file_picker_prompt_open">Buka berkas APK yang saya unduh</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Buka berkas APK yang Saya unduh</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Buka berkas APK</string>
     <string name="morphe_home_recommended_version">Versi rekomendasi</string>
     <string name="morphe_patcher_selected_version">Versi terpilih</string>
+    <string name="morphe_home_select_apk_title">Pilih APK</string>
+    <string name="morphe_home_select_any_apk_description">Ketuk tombol di bawah untuk memilih berkas APK apapun untuk ditambal</string>
+    <string name="morphe_home_invalid_apk">Berkas APK tidak sah</string>
+    <string name="morphe_home_no_patches_for_app">Tidak ada tambalan tersedia untuk aplikasi ini</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Mode ahli</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d dari %2$d tambalan dipilih</string>
+    <string name="morphe_expert_mode_search">Cari tambalan</string>
+    <string name="morphe_expert_mode_proceed">Lanjutkan ke Menambal</string>
+    <string name="morphe_expert_mode_disable_all">Nonaktifkan semua</string>
+    <string name="morphe_expert_mode_enable_all">Aktifkan semua</string>
+    <string name="morphe_expert_mode_has_options">Dapat disesuaikan</string>
+    <string name="morphe_expert_mode_no_results">Tidak ada tambalan ditemukan</string>
+    <string name="morphe_expert_mode_no_patches">Tidak ada tambalan tersedia</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Warna Khusus</string>
+    <string name="morphe_hex_color">Warna Hex</string>
+    <string name="morphe_patch_option_instructions">Petunjuk</string>
+    <string name="morphe_patch_option_enter_value">Masukkan nilai</string>
+    <string name="morphe_patch_option_enter_number">Masukkan nomor</string>
+    <string name="morphe_patch_option_enter_decimal">Masukkan desimal</string>
+    <string name="morphe_patch_option_pick_folder">Pilih folder</string>
+    <string name="expand">Perluas</string>
+    <string name="collapse">Kecilkan</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Apakah Anda yakin ingin menguninstall aplikasi ini?</string>
+    <string name="saved_app_delete_confirmation">Apakah Anda yakin ingin menghapus aplikasi yang disimpan ini?</string>
+    <string name="saved_copy_delete_confirmation">Apakah Anda yakin ingin menghapus salinan yang disimpan?</string>
+    <string name="view">Lihat</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">APK asli tidak ditemukan. Tidak dapat mem-patch aplikasi ini.</string>
+    <string name="morphe_repatch_requires_original">Mem-patch membutuhkan berkas APK asli</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Manajemen penyimpanan</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Ukuran total: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">APK yang dipatch</string>
+    <string name="morphe_patched_apks_title">APK yang dipatch</string>
+    <string name="morphe_patched_apks_description">Kelola berkas aplikasi yang ditambal dan disimpan</string>
+    <string name="morphe_patched_apks_empty">Belum ada APK yang ditambal dan disimpan hingga saat ini</string>
+    <string name="morphe_patched_apks_delete_title">Hapus APK yang ditambal?</string>
+    <string name="morphe_patched_apks_delete_confirm">Apakah Anda yakin ingin menghapus APK ditambal yang disimpan untuk %s?</string>
+    <string name="morphe_patched_apks_deleted">APK yang ditambal berhasil dihapus</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">APK asli</string>
+    <string name="morphe_original_apks_title">APK asli</string>
+    <string name="morphe_original_apks_description">Berkas APK asli disimpan untuk ditambal ulang. Hanya versi terbaru yang disimpan untuk setiap aplikasi.</string>
+    <string name="morphe_original_apks_empty">Tidak ada APK asli yang disimpan</string>
+    <string name="morphe_original_apks_deleted">APK asli berhasil dihapus</string>
+    <string name="morphe_original_apks_saved">APK asli disimpan</string>
+    <string name="morphe_original_apks_save_failed">Gagal menyimpan APK asli</string>
+    <string name="morphe_original_apks_delete_title">Hapus APK asli?</string>
+    <string name="morphe_original_apks_delete_confirm">Hapus APK asli untuk %s? Anda tidak akan dapat menambal ulang tanpa menyediakan APK baru.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal.</string>
     <string name="morphe_root_gmscore_excluded">Dukungan tambalan GmsCore dikecualikan dalam mode root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Simpan APK</string>
-    <string name="morphe_patcher_copy_error">Kesalahan penyalinan</string>
-    <string name="morphe_patcher_show_error">Tampilkan kesalahan</string>
     <string name="morphe_patcher_error_copied">Kesalahan disalin ke papan klip</string>
+    <string name="morphe_patcher_error_log">Catatan kesalahan</string>
+    <string name="morphe_patcher_error_technical">Rincian teknis</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d tambalan</string>
     <string name="morphe_patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
     <string name="morphe_patcher_installing">Memasang…</string>
@@ -100,7 +174,7 @@
     <string name="morphe_patcher_message_7">Menyesuaikan 1 dan 0… 🤖</string>
     <string name="morphe_patcher_message_8">Mengurai kekacauan digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Memperbaiki bug di aplikasi yang belum ditambal… 🐞</string>
+    <string name="morphe_patcher_message_9">Memperbaiki bug di aplikasi asli… 🪲</string>
     <string name="morphe_patcher_message_10">Tambalan hebat pantas ditunggu… ⏳</string>
     <string name="morphe_patcher_message_11">Memoles piksel hingga berkilau… 💎</string>
     <string name="morphe_patcher_message_12">Harap tetap duduk hingga kapten mematikan tanda \"Sedang menambal\" ... 💺✈️</string>
@@ -116,26 +190,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak tambalan… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Menghapus omong kosong. Mohon tunggu sebentar… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Kembali ke beranda Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Kembali ke mode yang disederhanakan</string>
-    <string name="morphe_settings_return_to_expert">Beralih ke mode Ahli</string>
-    <string name="morphe_settings_return_to_expert_description">Beralih ke mode ahli dengan fitur lengkap</string>
-    <string name="morphe_share_website">Bagikan situs web</string>
-    <string name="morphe_share_website_description">Bagikan situs web resmi Morphe</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Ikon Aplikasi</string>
-    <string name="morphe_app_icon_selector_description">Ubah ikon peluncur aplikasi</string>
-    <string name="morphe_app_icon_default">Bawaan</string>
-    <string name="morphe_app_icon_light_2">Langit</string>
-    <string name="morphe_app_icon_light_3">Matahari Terbenam</string>
-    <string name="morphe_app_icon_dark_1">Samudra</string>
-    <string name="morphe_app_icon_dark_2">Kosong</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Ubah Ikon Aplikasi?</string>
-    <string name="morphe_app_icon_change_dialog_message">Ubah menjadi \'%1$s\' dan mulai ulang?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Ubah Ikon</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Pilihan tampilan</string>
     <string name="morphe_appearance_options_description">Kustomisasi tema, warna, dan latar belakang</string>
     <string name="morphe_appearance_current_language">Bahasa saat ini</string>
@@ -151,31 +206,42 @@
     <string name="morphe_background_type_shapes">Bentuk</string>
     <string name="morphe_background_type_snow">Salju</string>
     <string name="morphe_background_type_none">Tidak Ada</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Ikon aplikasi</string>
+    <string name="morphe_app_icon_selector_description">Ubah ikon peluncur aplikasi</string>
+    <string name="morphe_app_icon_default">Bawaan</string>
+    <string name="morphe_app_icon_light_2">Langit</string>
+    <string name="morphe_app_icon_light_3">Matahari Terbenam</string>
+    <string name="morphe_app_icon_dark_1">Samudra</string>
+    <string name="morphe_app_icon_dark_2">Kosong</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Ganti ikon aplikasi?</string>
+    <string name="morphe_app_icon_change_dialog_message">Ubah menjadi \'%1$s\' dan mulai ulang?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Ganti ikon</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Pengaturan ahli</string>
+    <string name="morphe_settings_expert_mode">Mode pakar</string>
+    <string name="morphe_settings_expert_mode_description">Mengaktifkan fitur-fitur tingkat lanjut dan pilihan kustomisasi</string>
     <string name="morphe_update_use_prereleases">Gunakan versi pra-rilis</string>
     <string name="morphe_update_use_prereleases_description">Dapatkan akses awal ke tambalan baru dan fitur manajer</string>
+    <string name="morphe_patch_options_expert_mode_notice">Dalam mode Ahli pilihan tambalan akan tersedia selama proses penambalan</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Pilihan tambalan</string>
     <string name="morphe_patch_options_youtube_description">Pilihan Tema, Branding, Header, dan Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Pilihan Tema dan Branding</string>
     <string name="morphe_patch_options_restart_message">Mengubah pilihan tambalan memerlukan menambal ulang aplikasi agar perubahan berlaku</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Warna tema aplikasi</string>
     <string name="morphe_patch_options_theme_colors_description">Ubah warna latar belakang</string>
     <string name="morphe_patch_options_dark_theme_color">Warna latar belakang tema gelap</string>
     <string name="morphe_patch_options_dark_theme_color_description">Dapat berupa warna hex (#RRGGBB) atau referensi sumber daya warna</string>
     <string name="morphe_patch_options_light_theme_color">Warna latar belakang tema terang</string>
     <string name="morphe_patch_options_light_theme_color_description">Dapat berupa warna hex (#RRGGBB) atau referensi sumber daya warna</string>
-    <string name="morphe_patch_options_icon_instructions_title">Panduan format ikon</string>
-    <string name="morphe_patch_options_header_instructions_title">Panduan format header</string>
     <string name="morphe_patch_options_loading">Memuat pilihan tambalan…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Tunggu hingga paket tambalan diperbarui</string>
+    <string name="morphe_patch_options_waiting_for_source">Tunggu hingga sumber tambalan diperbarui</string>
     <string name="morphe_patch_options_load_error">Gagal memuat pilihan tambalan</string>
     <string name="morphe_patch_options_no_available">Tidak ada pilihan tersedia untuk tambalan ini</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Warna Khusus</string>
-    <string name="morphe_hex_color">Warna Hex</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Branding khusus</string>
     <string name="morphe_patch_options_custom_branding_description">Ubah nama tampilan aplikasi</string>
     <string name="morphe_patch_options_custom_branding_app_name">Nama aplikasi</string>
@@ -204,7 +270,7 @@ Ukuran gambar harus sebagai berikut:
 Opsional, jalur tersebut dapat berisi folder 'drawable' dengan file ikon monokrom berikut:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Logo header khusus</string>
     <string name="morphe_patch_options_custom_header_description">Ubah header logo</string>
     <string name="morphe_patch_options_custom_header_instruction">"Folder berisi gambar yang akan digunakan sebagai logo header khusus.
@@ -224,12 +290,26 @@ Ukuran gambar harus sebagai berikut:
 - drawable-xhdpi: 258x96 piksel
 - drawable-xxhdpi: 387x144 piksel
 - drawable-xxxhdpi: 512x192 piksel"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Fitur Sembunyikan Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Sembunyikan pintasan aplikasi Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Hapus Shorts dari menu tekan lama peluncur</string>
     <string name="morphe_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Hapus tombol Shorts dari widget peluncur</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Performa</string>
+    <string name="morphe_process_runtime">Proses runtime</string>
+    <string name="morphe_process_runtime_description">Jalankan penambalan di proses terpisah untuk stabilitas yang lebih baik</string>
+    <string name="morphe_process_runtime_memory_limit">Batas memori</string>
+    <string name="morphe_process_runtime_memory_limit_help">Batas memori yang lebih tinggi dapat mempercepat penambalan tetapi mungkin tidak bekerja di perangkat lama</string>
+    <string name="morphe_enable_process_runtime">Aktifkan proses runtime</string>
+    <string name="morphe_memory_limit_subtitle">Memori tersedia untuk penambalan</string>
+    <string name="morphe_memory_limit_warning">Batas memori yang rendah mungkin menyebabkan kegagalan saat menambal aplikasi yang lebih besar</string>
+    <string name="morphe_process_runtime_enabled_description">Batas %d MB</string>
+    <string name="morphe_process_runtime_disabled_description">Klik untuk mengaturnya</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Bagikan situs web</string>
+    <string name="morphe_share_website_description">Bagikan situs web resmi Morphe</string>
     <!-- Other strings -->
     <string name="patcher">Penambal</string>
     <string name="patches">Tambalan</string>
@@ -799,7 +879,7 @@ Hanya kompatibel dengan versi berikut: %2$s."</string>
     <string name="path_selector_files">Berkas</string>
     <string name="show_password_field">Tampilkan kata sandi</string>
     <string name="hide_password_field">Sembunyikan kata sandi</string>
-    <string name="installer_primary_title">Pemasang utama</string>
+    <string name="installer_primary_title">Pemasang</string>
     <string name="installer_fallback_title">Pemasang cadangan</string>
     <string name="installer_internal_name">Pemasang sistem</string>
     <string name="installer_internal_description">Gunakan pemasang paket Android</string>
@@ -908,7 +988,7 @@ Detail: %2$s"</string>
     <string name="select_install_type">Pilih jenis pemasangan</string>
     <string name="patcher_step_group_preparing">Mempersiapkan</string>
     <string name="patcher_step_load_patches">Memuat tambalan</string>
-    <string name="patcher_step_prepare_split_apk">Gabungkan APK split</string>
+    <string name="patcher_step_prepare_split_apk">Menggabungkan APK terpisah</string>
     <string name="patcher_step_unpack">Membaca berkas APK</string>
     <string name="patcher_step_group_patching">Penyematan</string>
     <string name="patcher_step_group_saving">Penyimpanan</string>

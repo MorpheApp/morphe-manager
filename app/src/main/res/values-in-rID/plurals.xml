@@ -7,7 +7,7 @@
         <item quantity="other">Menerapkan %d tambalan</item>
     </plurals>
     <plurals name="selected_count">
-        <item quantity="other">%d terpilih</item>
+        <item quantity="other">%d dipilih</item>
     </plurals>
     <plurals name="patch_profile_bundle_patch_count">
         <item quantity="other">%d tambalan</item>

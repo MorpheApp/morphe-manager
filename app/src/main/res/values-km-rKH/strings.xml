@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
+    <string name="morphe_home_other_apps">កម្មវិធីផ្សេង</string>
+    <string name="morphe_home">ទំព័រដើម</string>
+    <string name="morphe_home_not_patched_yet">មិនទាន់បានបំណេះនៅឡើយទេ</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">កម្មវិធីគ្រប់គ្រងអាចអាប់ដេតបានហើយ</string>
+    <string name="morphe_home_update_available_subtitle">កំណែថ្មីត្រៀមជាស្រេច ដើម្បីដំឡើង</string>
+    <string name="morphe_home_update_error">ការអាប់ដេតបានបរាជ័យ</string>
+    <string name="morphe_home_update_error_subtitle">សូមពិនិត្យមើលការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក ហើយព្យាយាមម្តងទៀត</string>
+    <string name="morphe_home_updating_sources">កំពុងអាប់ដេតប្រភព…</string>
+    <string name="morphe_home_update_success">អាប់ដេតប្រភពបានបញ្ចប់</string>
+    <string name="morphe_home_update_success_subtitle">ប្រភពរបស់អ្នកទាន់សម័យហើយ</string>
+    <string name="morphe_home_sources_are_loading">ប្រភពកំពុងផ្ទុក សូមរង់ចាំ…</string>
+    <string name="morphe_home_please_wait">សូមរង់ចាំ…</string>
+    <!-- Home Screen - Home Greetings -->
+    <string name="morphe_home_greeting_1">តើកម្មវិធីណាមួយដែលអ្នកចង់ធ្វើបំណេះ?</string>
     <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">ត្រៀមខ្លួនដើម្បីធ្វើឱ្យ YouTube ក្លាយជាអស្ចារ្យម្ដងទៀតហើយឬនៅ?</string>
     <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -10,9 +26,31 @@
     <!-- From mediocrity to amazing -->
     <!-- Playful exaggeration, making patching feel heroic -->
     <!-- Light sarcasm, casual and tech-savvy humor -->
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">ប្រភពបំណះ</string>
+    <string name="morphe_sources_management_subtitle">%d ប្រភពដែលបានដំឡើង</string>
+    <string name="morphe_sources_delete_confirm_message">លុបប្រភព \"%s\"? នេះមិនអាចធ្វើឡើងវិញបានទេ។</string>
+    <string name="morphe_sources_open_in_browser">បើកក្នុងកម្មវិធីច្បោល</string>
+    <string name="morphe_sources_failed_to_open_url">បរាជ័យក្នុងការបើក URL</string>
+    <string name="morphe_sources_date_added">បានបន្ថែម</string>
+    <string name="morphe_sources_date_updated">បានអាប់ដេត</string>
+    <string name="morphe_enabled">បានបើក</string>
+    <string name="morphe_disabled">បានផ្ដាច់</string>
+    <string name="morphe_rename">ប្ដូរឈ្មោះ</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">បន្ថែមប្រភពបំណះ</string>
+    <string name="morphe_add_patch_source_remote_url">URL ប្រភព</string>
+    <string name="morphe_add_patch_source_local_file">រើសឯកសារប្រភពបំណះ</string>
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
     <!-- Dialog 3: File Picker Prompt -->
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
@@ -20,16 +58,16 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->

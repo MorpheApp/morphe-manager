@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Пакет патчаў</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">Абнаўленне не ўдалося</string>
+    <string name="morphe_home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Гатовыя зноў зрабіць YouTube легендарным?</string>
@@ -21,14 +24,18 @@
     <string name="morphe_home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Працуе на кафеіне і добрых патчах</string>
-    <string name="morphe_home_bundle_type_api">API пакет</string>
-    <string name="morphe_home_update_error">Абнаўленне не ўдалося</string>
-    <string name="morphe_home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
-    <string name="morphe_home_updating_patches">Абнаўленне патчаў…</string>
-    <string name="morphe_home_update_success">Абнаўленне завершана</string>
+    <!-- Sources Management -->
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <!-- Dialog 2: Download Instructions -->
     <!-- Dialog 3: File Picker Prompt -->
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
@@ -36,16 +43,16 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->

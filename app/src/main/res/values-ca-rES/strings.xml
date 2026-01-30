@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Conjunt de pedaços</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_error">Actualització fallida</string>
+    <string name="morphe_home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
+    <string name="morphe_home_please_wait">Espereu...</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Esteu llestos per convertir el YouTube en llegendari de nou?</string>
@@ -21,21 +25,12 @@
     <string name="morphe_home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
-    <string name="morphe_home_bundle_type_api">API Bundle</string>
-    <string name="morphe_home_update_error">Actualització fallida</string>
-    <string name="morphe_home_update_error_subtitle">Comproveu la connexió a la xarxa i proveu-ho de nou</string>
-    <string name="morphe_home_updating_patches">Actualitzant pedaços...</string>
-    <string name="morphe_home_update_success">Actualització completada</string>
-    <string name="morphe_home_patches_updated">Els teus pedaços estan al dia</string>
-    <string name="morphe_home_patches_are_loading">S\'estan carregant els pedaços, si us plau espereu...</string>
-    <string name="morphe_home_please_wait">Espereu...</string>
-    <string name="morphe_home_open_in_browser">Obrir al navegador</string>
-    <string name="morphe_home_failed_to_open_url">Error en obrir l\'URL</string>
-    <string name="morphe_home_date_added">Afegit</string>
-    <string name="morphe_home_date_updated">Actualitzat</string>
-    <string name="morphe_home_check_updates">Comprovar</string>
-    <string name="morphe_home_unknown">Desconegut</string>
-    <string name="morphe_home_timeline">Actualització de la Història</string>
+    <!-- Sources Management -->
+    <string name="morphe_sources_open_in_browser">Obrir al navegador</string>
+    <string name="morphe_sources_failed_to_open_url">Error en obrir l\'URL</string>
+    <string name="morphe_sources_date_added">Afegit</string>
+    <string name="morphe_sources_date_updated">Actualitzat</string>
+    <!-- Add Sources Dialog -->
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Per aplicar un pedaç a %1$s, necessites la versió %2$s (sense aplicar)</string>
@@ -51,6 +46,14 @@
     <string name="morphe_home_download_instructions_step3_mount">Espereu que la descàrrega s\'acabi, i llavors&lt;b&gt;instal·leu l\'APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Després de finalitzar la descàrrega, obriu aquesta aplicació de nou</string>
     <!-- Dialog 3: File Picker Prompt -->
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <string name="morphe_patch_option_instructions">Instruccions</string>
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
@@ -58,16 +61,16 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
+    <!-- Appearance Tab -->
     <!-- App Icon Selector -->
-    <!-- Appearance Section -->
-    <!-- Advanced Section -->
+    <!-- Advanced Tab -->
     <!-- Patch Options Section -->
-    <!-- Theme Colors -->
-    <!-- Color Picker -->
-    <!-- Custom Branding -->
-    <!-- Custom Header (YouTube) -->
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
     <!-- Other strings -->
     <!-- Morphe -->
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
