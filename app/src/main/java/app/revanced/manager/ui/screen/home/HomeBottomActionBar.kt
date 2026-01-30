@@ -24,6 +24,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
@@ -98,6 +104,19 @@ fun BottomActionButton(
         MaterialTheme.colorScheme.onPrimaryContainer
     }
 
+    // Build content description for accessibility
+    val contentDesc = buildString {
+        text?.let { append(it) }
+        if (showExpertBadge) {
+            append(", ")
+            append(stringResource(R.string.settings_advanced_expert_mode))
+        }
+        if (showProgress) {
+            append(", ")
+            append(stringResource(R.string.loading))
+        }
+    }
+
     Box(modifier = modifier) {
         Surface(
             onClick = {
@@ -108,7 +127,14 @@ fun BottomActionButton(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(56.dp)
+                .semantics {
+                    role = Role.Button
+                    this.contentDescription = contentDesc
+                    if (showProgress) {
+                        liveRegion = LiveRegionMode.Polite
+                    }
+                },
             shape = shape,
             color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
             shadowElevation = if (enabled) 4.dp else 0.dp,
@@ -139,7 +165,7 @@ fun BottomActionButton(
                 } else {
                     Icon(
                         imageVector = icon,
-                        contentDescription = text,
+                        contentDescription = null,
                         tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
                         modifier = Modifier.size(24.dp)
                     )
@@ -155,12 +181,15 @@ fun BottomActionButton(
                     .padding(top = 6.dp, end = 6.dp)
                     .size(18.dp)
                     .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.tertiary),
+                    .background(MaterialTheme.colorScheme.tertiary)
+                    .semantics(mergeDescendants = true) {
+                        // Badge is decorative, already announced in button description
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Engineering,
-                    contentDescription = "Expert Mode",
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.surface,
                     modifier = Modifier.size(12.dp)
                 )

@@ -18,6 +18,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
@@ -203,6 +208,11 @@ private fun InstallerSelectionDialog(
 
     val confirmEnabled = options.find { it.token == currentSelection }?.availability?.available != false
 
+    // Localized strings for accessibility
+    val selectedState = stringResource(R.string.selected)
+    val notSelectedState = stringResource(R.string.not_selected)
+    val disabledState = stringResource(R.string.disabled)
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = title,
@@ -227,11 +237,21 @@ private fun InstallerSelectionDialog(
                         option.availability.reason in shizukuPromptReasons &&
                         onOpenShizuku != null
 
+                // Build state description for accessibility
+                val stateDesc = buildString {
+                    append(if (isSelected) selectedState else notSelectedState)
+                    if (!enabled) {
+                        append(", ")
+                        append(disabledState)
+                    }
+                }
+
                 InstallerOptionItem(
                     option = option,
                     selected = isSelected,
                     enabled = enabled,
-                    onSelect = { if (enabled) currentSelection = option.token }
+                    onSelect = { if (enabled) currentSelection = option.token },
+                    stateDescription = stateDesc
                 )
 
                 if (showShizukuAction) {
@@ -259,7 +279,8 @@ private fun InstallerOptionItem(
     option: InstallerManager.Entry,
     selected: Boolean,
     enabled: Boolean,
-    onSelect: () -> Unit
+    onSelect: () -> Unit,
+    stateDescription: String
 ) {
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
@@ -277,7 +298,12 @@ private fun InstallerOptionItem(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 2.dp),
+            .padding(vertical = 2.dp)
+            .semantics {
+                role = Role.RadioButton
+                this.selected = selected
+                this.stateDescription = stateDescription
+            },
         shape = RoundedCornerShape(12.dp),
         color = when {
             !enabled -> colors.surfaceVariant.copy(alpha = 0.5f)

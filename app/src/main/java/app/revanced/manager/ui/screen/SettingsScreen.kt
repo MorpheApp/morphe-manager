@@ -25,6 +25,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -285,6 +289,8 @@ private fun NavigationItem(
         MaterialTheme.colorScheme.onSurfaceVariant
     }
 
+    val tabLabel = stringResource(tab.titleRes)
+
     Surface(
         onClick = onClick,
         modifier = Modifier
@@ -296,7 +302,11 @@ private fun NavigationItem(
                 } else {
                     Modifier.width(64.dp)
                 }
-            ),
+            )
+            .semantics {
+                role = Role.Tab
+                selected = isSelected
+            },
         color = containerColor,
         shape = RoundedCornerShape(24.dp)
     ) {
@@ -309,7 +319,7 @@ private fun NavigationItem(
         ) {
             Icon(
                 imageVector = tab.icon,
-                contentDescription = null,
+                contentDescription = tabLabel,
                 tint = contentColor,
                 modifier = Modifier.size(24.dp)
             )
@@ -322,7 +332,7 @@ private fun NavigationItem(
                 Row {
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = stringResource(tab.titleRes),
+                        text = tabLabel,
                         style = MaterialTheme.typography.labelLarge,
                         color = contentColor,
                         fontWeight = FontWeight.Medium,

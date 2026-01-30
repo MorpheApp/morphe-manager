@@ -29,6 +29,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -230,6 +235,13 @@ private fun BundleManagementCard(
         if (forceExpanded) expanded = true
     }
 
+    // Localized strings for accessibility
+    val expandedState = stringResource(R.string.expanded)
+    val collapsedState = stringResource(R.string.collapsed)
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+    val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -238,12 +250,40 @@ private fun BundleManagementCard(
     ) {
         val isEnabled = bundle.enabled
 
+        // Build content description
+        val contentDesc = buildString {
+            append(bundle.displayTitle)
+            append(", ")
+            if (isEnabled) {
+                append(enabledState)
+            } else {
+                append(disabledState)
+            }
+            if (!forceExpanded) {
+                append(", ")
+                append(if (expanded) expandedState else collapsedState)
+            }
+            updateInfo?.let {
+                append(", ")
+                append(stringResource(R.string.update))
+                append(" ")
+                append(stringResource(R.string.available))
+            }
+        }
+
         Column(modifier = Modifier
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) {
                 if (!forceExpanded) expanded = !expanded
+            }
+            .semantics {
+                if (!forceExpanded) {
+                    role = Role.Button
+                    stateDescription = if (expanded) expandedState else collapsedState
+                }
+                this.contentDescription = contentDesc
             }
             .padding(16.dp)) {
             // Header
@@ -304,7 +344,10 @@ private fun BundleManagementCard(
                             modifier = Modifier
                                 .alpha(if (isEnabled) 1f else 0.5f)
                                 .fillMaxWidth()
-                                .height(48.dp),
+                                .height(48.dp)
+                                .semantics {
+                                    contentDescription = openInBrowser
+                                },
                             shape = RoundedCornerShape(12.dp)
                         ) {
                             Icon(
@@ -312,7 +355,7 @@ private fun BundleManagementCard(
                                 contentDescription = null
                             )
                             Spacer(Modifier.width(8.dp))
-                            Text(stringResource(R.string.sources_management_open_in_browser))
+                            Text(openInBrowser)
                         }
                     }
 
@@ -326,16 +369,19 @@ private fun BundleManagementCard(
                     ) {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             if (!forceExpanded) {
+                                val disableEnableDesc = if (bundle.enabled) {
+                                    stringResource(R.string.disable) + " " + bundle.displayTitle
+                                } else {
+                                    stringResource(R.string.enable) + " " + bundle.displayTitle
+                                }
+
                                 ActionPillButton(
                                     onClick = onDisable,
                                     icon = if (bundle.enabled)
                                         Icons.Outlined.Block
                                     else
                                         Icons.Outlined.CheckCircle,
-                                    contentDescription = if (bundle.enabled)
-                                        stringResource(R.string.disable)
-                                    else
-                                        stringResource(R.string.enable)
+                                    contentDescription = disableEnableDesc
                                 )
                             }
 
@@ -343,7 +389,7 @@ private fun BundleManagementCard(
                                 ActionPillButton(
                                     onClick = onUpdate,
                                     icon = Icons.Outlined.Refresh,
-                                    contentDescription = stringResource(R.string.update)
+                                    contentDescription = stringResource(R.string.update) + " " + bundle.displayTitle
                                 )
                             }
 
@@ -351,7 +397,7 @@ private fun BundleManagementCard(
                                 ActionPillButton(
                                     onClick = onDelete,
                                     icon = Icons.Outlined.Delete,
-                                    contentDescription = stringResource(R.string.delete),
+                                    contentDescription = stringResource(R.string.delete) + " " + bundle.displayTitle,
                                     colors = IconButtonDefaults.filledTonalIconButtonColors(
                                         containerColor = MaterialTheme.colorScheme.errorContainer,
                                         contentColor = MaterialTheme.colorScheme.onErrorContainer
@@ -492,8 +538,13 @@ private fun BundleInfoCard(
     showChevron: Boolean = true,
     enabled: Boolean = true
 ) {
+    val contentDesc = "$title: $value"
+
     Surface(
-        modifier = modifier,
+        modifier = modifier.semantics {
+            contentDescription = contentDesc
+            role = Role.Button
+        },
         shape = RoundedCornerShape(12.dp),
         color = if (enabled) MaterialTheme.colorScheme.secondaryContainer
         else MaterialTheme.colorScheme.surfaceVariant,

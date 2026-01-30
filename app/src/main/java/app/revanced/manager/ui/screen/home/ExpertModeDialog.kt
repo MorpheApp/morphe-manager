@@ -23,6 +23,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -370,6 +373,12 @@ private fun PatchCard(
 ) {
     var isExpanded by remember { mutableStateOf(false) }
 
+    // Localized strings for accessibility
+    val settings = stringResource(R.string.settings)
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+    val patchState = if (isEnabled) enabledState else disabledState
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -438,7 +447,11 @@ private fun PatchCard(
                     if (hasOptions) {
                         FilledTonalIconButton(
                             onClick = onConfigureOptions,
-                            modifier = Modifier.size(36.dp),
+                            modifier = Modifier
+                                .size(36.dp)
+                                .semantics {
+                                    contentDescription = "${patch.name}, $settings"
+                                },
                             enabled = isEnabled,
                             colors = IconButtonDefaults.filledTonalIconButtonColors(
                                 containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
@@ -449,7 +462,7 @@ private fun PatchCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Settings,
-                                contentDescription = stringResource(R.string.settings_advanced_patch_options),
+                                contentDescription = null,
                                 modifier = Modifier.size(18.dp)
                             )
                         }
@@ -458,7 +471,12 @@ private fun PatchCard(
                     // Toggle button
                     FilledTonalIconButton(
                         onClick = onToggle,
-                        modifier = Modifier.size(36.dp),
+                        modifier = Modifier
+                            .size(36.dp)
+                            .semantics {
+                                stateDescription = patchState
+                                contentDescription = "${patch.name}, $patchState"
+                            },
                         colors = IconButtonDefaults.filledTonalIconButtonColors(
                             containerColor = if (isEnabled)
                                 MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
@@ -472,10 +490,7 @@ private fun PatchCard(
                     ) {
                         Icon(
                             imageVector = if (isEnabled) Icons.Filled.Remove else Icons.Filled.Add,
-                            contentDescription = stringResource(
-                                if (isEnabled) R.string.disable
-                                else R.string.enable
-                            ),
+                            contentDescription = null, // Handled by button semantics
                             modifier = Modifier.size(18.dp)
                         )
                     }
@@ -1011,6 +1026,9 @@ private fun BooleanOptionItem(
     value: Boolean,
     onValueChange: (Boolean) -> Unit
 ) {
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+
     RichSettingsItem(
         onClick = {},
         title = title,
@@ -1018,7 +1036,10 @@ private fun BooleanOptionItem(
         trailingContent = {
             Switch(
                 checked = value,
-                onCheckedChange = onValueChange
+                onCheckedChange = onValueChange,
+                modifier = Modifier.semantics {
+                    stateDescription = if (value) enabledState else disabledState
+                }
             )
         }
     )

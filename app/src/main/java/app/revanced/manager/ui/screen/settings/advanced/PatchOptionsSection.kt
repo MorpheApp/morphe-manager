@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -349,6 +351,10 @@ private fun HideShortsSection(
     val appShortcutOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_APP_SHORTCUT)
     val widgetOption = viewModel.getOption(hideShortsOptions, PatchOptionKeys.HIDE_SHORTS_WIDGET)
 
+    // Localized strings for accessibility
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+
     Column {
         // Header
         CardHeader(
@@ -386,7 +392,10 @@ private fun HideShortsSection(
                     trailingContent = {
                         Switch(
                             checked = hideShortsAppShortcut,
-                            onCheckedChange = null
+                            onCheckedChange = null,
+                            modifier = Modifier.semantics {
+                                stateDescription = if (hideShortsAppShortcut) enabledState else disabledState
+                            }
                         )
                     }
                 )
@@ -421,7 +430,10 @@ private fun HideShortsSection(
                     trailingContent = {
                         Switch(
                             checked = hideShortsWidget,
-                            onCheckedChange = null
+                            onCheckedChange = null,
+                            modifier = Modifier.semantics {
+                                stateDescription = if (hideShortsWidget) enabledState else disabledState
+                            }
                         )
                     }
                 )

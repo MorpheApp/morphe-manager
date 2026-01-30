@@ -12,6 +12,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
@@ -48,6 +50,10 @@ fun AdvancedTabContent(
         previousExpertMode = useExpertMode
     }
 
+    // Localized strings for accessibility
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,7 +88,10 @@ fun AdvancedTabContent(
             trailingContent = {
                 Switch(
                     checked = usePrereleases.value,
-                    onCheckedChange = null
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (usePrereleases.value) enabledState else disabledState
+                    }
                 )
             }
         )
@@ -108,7 +117,10 @@ fun AdvancedTabContent(
             trailingContent = {
                 Switch(
                     checked = useExpertMode,
-                    onCheckedChange = null
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (useExpertMode) enabledState else disabledState
+                    }
                 )
             }
         )
@@ -130,7 +142,10 @@ fun AdvancedTabContent(
                 trailingContent = {
                     Switch(
                         checked = stripUnusedNativeLibs,
-                        onCheckedChange = null
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (stripUnusedNativeLibs) enabledState else disabledState
+                        }
                     )
                 }
             )

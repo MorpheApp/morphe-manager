@@ -24,6 +24,11 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -685,7 +690,7 @@ private fun AppCardLayout(
 }
 
 /**
- * Installed app card with gradient background
+ * Installed app card with gradient background and accessibility support
  */
 @Composable
 fun InstalledAppCard(
@@ -695,18 +700,51 @@ fun InstalledAppCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val textColor = Color.White
+
+    val versionLabel = stringResource(R.string.version)
+    val installedLabel = stringResource(R.string.installed)
+
+    // Build content description for accessibility
+    val appName = remember(packageInfo, installedApp) {
+        packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
+            ?: installedApp.currentPackageName
+    }
+
+    val version = remember(packageInfo) {
+        packageInfo?.versionName?.let {
+            if (it.startsWith("v")) it else "v$it"
+        } ?: ""
+    }
+
+    val contentDesc = remember(appName, version, versionLabel, installedLabel) {
+        buildString {
+            append(appName)
+            if (version.isNotEmpty()) {
+                append(", ")
+                append(versionLabel)
+                append(" ")
+                append(version)
+            }
+            append(", ")
+            append(installedLabel)
+        }
+    }
 
     AppCardLayout(
         gradientColors = gradientColors,
         enabled = true,
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier.semantics {
+            role = Role.Button
+            this.contentDescription = contentDesc
+        }
     ) {
         // App icon
         AppIcon(
             packageInfo = packageInfo,
-            contentDescription = null,
+            contentDescription = null, // Handled by card semantics
             modifier = Modifier.size(48.dp)
         )
 
@@ -717,9 +755,7 @@ fun InstalledAppCard(
         ) {
             // App name
             Text(
-                text = packageInfo?.applicationInfo?.loadLabel(
-                    LocalContext.current.packageManager
-                )?.toString() ?: installedApp.currentPackageName,
+                text = appName,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
                     shadow = Shadow(
@@ -732,9 +768,9 @@ fun InstalledAppCard(
             )
 
             // Show version
-            packageInfo?.versionName?.let { version ->
+            if (version.isNotEmpty()) {
                 Text(
-                    text = if (version.startsWith("v")) version else "v$version",
+                    text = version,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         shadow = Shadow(
                             color = Color.Black.copy(alpha = 0.4f),
@@ -763,11 +799,33 @@ fun AppButton(
     val textColor = Color.White
     val finalTextColor = if (enabled) textColor else textColor.copy(alpha = 0.5f)
 
+    val notPatchedText = stringResource(R.string.home_not_patched_yet)
+    val disabledText = stringResource(R.string.disabled)
+
+    // Build content description for accessibility
+    val contentDesc = remember(text, notPatchedText, disabledText, enabled) {
+        buildString {
+            append(text)
+            append(", ")
+            append(notPatchedText)
+            if (!enabled) {
+                append(", ")
+                append(disabledText)
+            }
+        }
+    }
+
     AppCardLayout(
         gradientColors = gradientColors,
         enabled = enabled,
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier.semantics {
+            role = Role.Button
+            this.contentDescription = contentDesc
+            if (!enabled) {
+                stateDescription = disabledText
+            }
+        }
     ) {
         // Icon placeholder
         Box(
@@ -806,7 +864,7 @@ fun AppButton(
 
             // Status text
             Text(
-                text = stringResource(R.string.home_not_patched_yet),
+                text = notPatchedText,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     shadow = Shadow(
                         color = Color.Black.copy(alpha = 0.4f),
