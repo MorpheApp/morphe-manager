@@ -86,7 +86,7 @@ jobs:
           subject-path: app/build/outputs/apk/release/morphe-manager*.apk
 
       - name: Generate website deploy token
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.NEW_TAG != ''
         id: app-token
         uses: actions/create-github-app-token@v1
         with:
@@ -95,7 +95,7 @@ jobs:
           owner: MorpheApp
 
       - name: Trigger website deploy
-        if: steps.release.outputs.new_release_published == 'true'
+        if: steps.release.outputs.NEW_TAG != ''
         uses: actions/github-script@v7
         with:
           github-token: ${{ steps.app-token.outputs.token }}
