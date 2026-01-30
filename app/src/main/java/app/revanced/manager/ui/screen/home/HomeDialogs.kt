@@ -375,24 +375,15 @@ private fun ApkAvailabilityDialog(
 
             // Root mode warning
             if (usingMountInstall) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Warning,
-                        contentDescription = null,
-                        tint = Color.Red.copy(alpha = 0.8f),
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.root_install_apk_required),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Red.copy(alpha = 0.8f)
-                    )
-                }
+                InfoBadge(
+                    text = stringResource(R.string.root_install_apk_required),
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Warning,
+                    isExpanded = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
+
         }
     }
 }
