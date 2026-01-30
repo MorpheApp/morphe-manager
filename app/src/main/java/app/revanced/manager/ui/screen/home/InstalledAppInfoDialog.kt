@@ -4,6 +4,12 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +39,7 @@ import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.InstallResult
 import app.revanced.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.revanced.manager.ui.viewmodel.MountWarningReason
@@ -74,6 +81,10 @@ fun InstalledAppInfoDialog(
     val isLoading = viewModel.isLoading
     val isInstalling = viewModel.isInstalling
     val mountOperation = viewModel.mountOperation
+
+    // Get HomeViewModel for update status
+    val homeViewModel: HomeViewModel = koinViewModel()
+    val hasUpdate = homeViewModel.appUpdatesAvailable[packageName] == true
 
     // Dialog states
     var showUninstallConfirm by remember { mutableStateOf(false) }
@@ -263,6 +274,22 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp
                 )
 
+                // Update Available Banner
+                AnimatedVisibility(
+                    visible = hasUpdate,
+                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
+                            expandVertically(animationSpec = tween(durationMillis = 400)),
+                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
+                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                ) {
+                    PatchUpdateAvailableBanner(
+                        onPatchClick = {
+                            onDismiss()
+                            onTriggerPatchFlow(installedApp.originalPackageName)
+                        }
+                    )
+                }
+
                 // Info Section
                 InfoSection(
                     installedApp = installedApp,
@@ -278,6 +305,7 @@ fun InstalledAppInfoDialog(
                     availablePatches = availablePatches,
                     isInstalling = isInstalling,
                     mountOperation = mountOperation,
+                    hasUpdate = hasUpdate,
                     onPatchClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
                     onRepatchClick = {
                         viewModel.startRepatch { pkgName, originalFile, patches, options ->
@@ -307,6 +335,65 @@ fun InstalledAppInfoDialog(
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Banner component showing patch update availability
+ */
+@Composable
+private fun PatchUpdateAvailableBanner(
+    onPatchClick: () -> Unit
+) {
+    MorpheCard(
+        cornerRadius = 12.dp,
+        elevation = 2.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Header with icon
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Update,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = stringResource(R.string.home_app_info_patch_update_available),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
+
+            // Description
+            Text(
+                text = stringResource(R.string.home_app_info_patch_update_available_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.9f),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+            )
+
+            // Patch button
+            ActionButton(
+                text = stringResource(R.string.patch),
+                icon = Icons.Outlined.Refresh,
+                onClick = onPatchClick,
+                isPrimary = true,
+                isHighlighted = true,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
@@ -457,6 +544,7 @@ private fun ActionsSection(
     availablePatches: Int,
     isInstalling: Boolean,
     mountOperation: InstalledAppInfoViewModel.MountOperation?,
+    hasUpdate: Boolean,
     onPatchClick: () -> Unit,
     onRepatchClick: () -> Unit,
     onUninstall: () -> Unit,
@@ -470,14 +558,16 @@ private fun ActionsSection(
     val destructiveActions = mutableListOf<ActionItem>()
 
     // Primary actions
-    primaryActions.add(
-        ActionItem(
-            text = stringResource(R.string.patch),
-            icon = Icons.Outlined.AutoAwesome,
-            onClick = onPatchClick,
-            enabled = availablePatches > 0
+    if (!hasUpdate) { // Hide the Patch button if there is an update banner with its own button
+        primaryActions.add(
+            ActionItem(
+                text = stringResource(R.string.patch),
+                icon = Icons.Outlined.AutoAwesome,
+                onClick = onPatchClick,
+                enabled = availablePatches > 0
+            )
         )
-    )
+    }
 
     if (viewModel.hasOriginalApk) {
         primaryActions.add(
@@ -622,9 +712,11 @@ private fun ActionButton(
     enabled: Boolean = true,
     isDestructive: Boolean = false,
     isPrimary: Boolean = false,
-    isLoading: Boolean = false
+    isLoading: Boolean = false,
+    isHighlighted: Boolean = false
 ) {
     val containerColor = when {
+        isHighlighted -> MaterialTheme.colorScheme.primary
         isDestructive -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
         isPrimary -> MaterialTheme.colorScheme.primaryContainer
         !enabled -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
@@ -632,6 +724,7 @@ private fun ActionButton(
     }
 
     val contentColor = when {
+        isHighlighted -> MaterialTheme.colorScheme.onPrimary
         isDestructive -> MaterialTheme.colorScheme.error
         isPrimary -> MaterialTheme.colorScheme.onPrimaryContainer
         !enabled -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
