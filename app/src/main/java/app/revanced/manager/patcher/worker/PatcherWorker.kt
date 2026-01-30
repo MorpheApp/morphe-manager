@@ -36,15 +36,9 @@ import app.revanced.manager.util.Options
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.tag
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
-import java.util.zip.ZipEntry
-import java.util.zip.ZipFile
-import java.util.zip.ZipInputStream
-import java.util.zip.ZipOutputStream
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
 
@@ -275,111 +269,4 @@ class PatcherWorker(
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
     }
-
-    private suspend fun stripUnusedNativeLibraries(apkFile: File) = withContext(Dispatchers.IO) {
-        val supportedAbis = Build.SUPPORTED_ABIS.filter { it.isNotBlank() }
-        if (supportedAbis.isEmpty()) return@withContext
-
-        val preferredAbi = determinePreferredAbi(apkFile, supportedAbis)
-        val allowedAbis = preferredAbi?.let { setOf(it) } ?: supportedAbis.toSet()
-
-        if (preferredAbi != null) {
-            Log.i(tag, "Preserving native libraries for ABI $preferredAbi".logFmt())
-        }
-
-        val tempFile = File(apkFile.parentFile, "${apkFile.nameWithoutExtension}-abi-stripped.apk")
-        var removedEntries = 0
-
-        ZipInputStream(apkFile.inputStream().buffered()).use { zis ->
-            ZipOutputStream(tempFile.outputStream().buffered()).use { zos ->
-                val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-                var entry = zis.nextEntry
-                while (entry != null) {
-                    val name = entry.name
-                    val keepEntry = shouldKeepZipEntry(name, allowedAbis)
-
-                    if (keepEntry) {
-                        val newEntry = cloneEntry(entry)
-                        zos.putNextEntry(newEntry)
-                        if (!entry.isDirectory) {
-                            while (true) {
-                                val read = zis.read(buffer)
-                                if (read == -1) break
-                                zos.write(buffer, 0, read)
-                            }
-                        }
-                        zos.closeEntry()
-                    } else if (!entry.isDirectory) {
-                        removedEntries++
-                    }
-
-                    zis.closeEntry()
-                    entry = zis.nextEntry
-                }
-            }
-        }
-
-        if (removedEntries > 0) {
-            if (!apkFile.delete()) {
-                Log.w(tag, "Failed to delete original APK before stripping ABIs".logFmt())
-            }
-            tempFile.copyTo(apkFile, overwrite = true)
-            tempFile.delete()
-            Log.i(tag, "Removed $removedEntries native library entries for unsupported ABIs".logFmt())
-        } else {
-            tempFile.delete()
-        }
-    }
-
-    private fun shouldKeepZipEntry(name: String, allowedAbis: Set<String>): Boolean {
-        val abi = extractAbiFromEntry(name) ?: return true
-        return abi in allowedAbis
-    }
-
-    private fun cloneEntry(entry: ZipEntry): ZipEntry {
-        val clone = ZipEntry(entry.name)
-        clone.time = entry.time
-        clone.comment = entry.comment
-        entry.extra?.let { clone.extra = it.copyOf() }
-        try {
-            entry.creationTime?.let { clone.creationTime = it }
-            entry.lastAccessTime?.let { clone.lastAccessTime = it }
-            entry.lastModifiedTime?.let { clone.lastModifiedTime = it }
-        } catch (_: Exception) {
-            // Some builders may throw if the values are unavailable; ignore.
-        }
-
-        when (entry.method) {
-            ZipEntry.STORED -> {
-                clone.method = ZipEntry.STORED
-                if (entry.size >= 0) clone.size = entry.size
-                if (entry.compressedSize >= 0) clone.compressedSize = entry.compressedSize
-                clone.crc = entry.crc
-            }
-
-            ZipEntry.DEFLATED -> clone.method = ZipEntry.DEFLATED
-            else -> if (entry.method != -1) clone.method = entry.method
-        }
-
-        return clone
-    }
-
-    private fun extractAbiFromEntry(name: String): String? {
-        if (!name.startsWith("lib/")) return null
-        val secondSlash = name.indexOf('/', startIndex = 4)
-        if (secondSlash == -1) return null
-        return name.substring(4, secondSlash)
-    }
-
-    private fun determinePreferredAbi(apkFile: File, supportedAbis: List<String>): String? =
-        runCatching {
-            ZipFile(apkFile).use { zip ->
-                val abisInApk = zip.entries().asSequence()
-                    .map { it.name }
-                    .mapNotNull(::extractAbiFromEntry)
-                    .toSet()
-
-                supportedAbis.firstOrNull { it in abisInApk }
-            }
-        }.getOrNull()
 }

@@ -8,15 +8,12 @@ import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.tag
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.map
 
 class PatchOptionsRepository(db: AppDatabase) {
     private val dao = db.optionDao()
     private val resetEventsFlow = MutableSharedFlow<ResetEvent>(extraBufferCapacity = 4)
-    val resetEvents: SharedFlow<ResetEvent> = resetEventsFlow.asSharedFlow()
 
     private suspend fun getOrCreateGroup(bundleUid: Int, packageName: String) =
         dao.getGroupId(bundleUid, packageName) ?: OptionGroup(

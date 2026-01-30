@@ -1,6 +1,5 @@
 package app.revanced.manager.domain.bundles
 
-import app.revanced.manager.data.redux.ActionContext
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.network.dto.ReVancedAsset
@@ -15,18 +14,17 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.utils.io.jvm.javaio.toInputStream
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import okhttp3.Protocol
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
 import java.io.IOException
 import java.util.zip.ZipInputStream
-import okhttp3.Protocol
 
 data class PatchBundleDownloadResult(
     val versionSignature: String,
@@ -137,7 +135,6 @@ sealed class RemotePatchBundle(
     }
 
     companion object {
-        const val updateFailMsg = "Failed to update patches"
         private const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val changelogCacheMutex = Mutex()
         private val changelogCache = mutableMapOf<String, CachedChangelog>()

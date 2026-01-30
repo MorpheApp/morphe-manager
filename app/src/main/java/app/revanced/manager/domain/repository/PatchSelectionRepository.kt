@@ -4,15 +4,12 @@ import app.revanced.manager.data.room.AppDatabase
 import app.revanced.manager.data.room.AppDatabase.Companion.generateUid
 import app.revanced.manager.data.room.selection.PatchSelection
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.map
 
 class PatchSelectionRepository(db: AppDatabase) {
     private val dao = db.selectionDao()
     private val resetEventsFlow = MutableSharedFlow<ResetEvent>(extraBufferCapacity = 4)
-    val resetEvents: SharedFlow<ResetEvent> = resetEventsFlow.asSharedFlow()
 
     private suspend fun getOrCreateSelection(bundleUid: Int, packageName: String) =
         dao.getSelectionId(bundleUid, packageName) ?: PatchSelection(

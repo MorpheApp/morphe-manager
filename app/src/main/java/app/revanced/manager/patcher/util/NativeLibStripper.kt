@@ -83,14 +83,12 @@ object NativeLibStripper {
         clone.time = entry.time
         clone.comment = entry.comment
         entry.extra?.let { clone.extra = it.copyOf() }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                entry.creationTime?.let { clone.creationTime = it }
-                entry.lastAccessTime?.let { clone.lastAccessTime = it }
-                entry.lastModifiedTime?.let { clone.lastModifiedTime = it }
-            } catch (_: Exception) {
-                // Ignore metadata failures
-            }
+        try {
+            entry.creationTime?.let { clone.creationTime = it }
+            entry.lastAccessTime?.let { clone.lastAccessTime = it }
+            entry.lastModifiedTime?.let { clone.lastModifiedTime = it }
+        } catch (_: Exception) {
+            // Ignore metadata failures
         }
 
         when (entry.method) {

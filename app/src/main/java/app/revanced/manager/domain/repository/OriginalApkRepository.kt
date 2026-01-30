@@ -12,7 +12,7 @@ import java.io.File
 
 class OriginalApkRepository(
     db: AppDatabase,
-    private val fs: Filesystem
+    fs: Filesystem
 ) {
     private val dao = db.originalApkDao()
     // Use permanent directory from Filesystem instead of temporary directory
@@ -78,11 +78,6 @@ class OriginalApkRepository(
     }
 
     /**
-     * Gets count of stored original APKs
-     */
-    suspend fun getCount(): Int = dao.getCount()
-
-    /**
      * Delete original APK for package
      */
     suspend fun delete(packageName: String) = withContext(Dispatchers.IO) {
@@ -104,36 +99,6 @@ class OriginalApkRepository(
             file.delete()
         }
         dao.delete(originalApk)
-    }
-
-    /**
-     * Get total size of all stored original APKs
-     */
-    suspend fun getTotalSize(): Long = withContext(Dispatchers.IO) {
-        originalApksDir.walkTopDown()
-            .filter { it.isFile }
-            .sumOf { it.length() }
-    }
-
-    /**
-     * Clean up orphaned files (files without database entries)
-     */
-    suspend fun cleanupOrphaned() = withContext(Dispatchers.IO) {
-        val allEntries = dao.getAll()
-        val validPaths = mutableSetOf<String>()
-
-        // Collect valid paths from database
-        allEntries.collect { list ->
-            validPaths.addAll(list.map { it.filePath })
-        }
-
-        // Delete files not in database
-        originalApksDir.listFiles()?.forEach { file ->
-            if (file.absolutePath !in validPaths) {
-                file.delete()
-                Log.d(TAG, "Cleaned up orphaned file: ${file.name}")
-            }
-        }
     }
 
     companion object {

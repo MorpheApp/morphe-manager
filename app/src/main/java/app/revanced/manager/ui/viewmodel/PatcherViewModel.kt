@@ -34,7 +34,6 @@ import app.revanced.manager.domain.worker.WorkerRepository
 import app.revanced.manager.patcher.logger.LogLevel
 import app.revanced.manager.patcher.logger.Logger
 import app.revanced.manager.patcher.patch.PatchBundleInfo
-import app.revanced.manager.patcher.runtime.MemoryLimitConfig
 import app.revanced.manager.patcher.runtime.ProcessRuntime
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.patcher.worker.PatcherWorker
@@ -2007,7 +2006,7 @@ class PatcherViewModel(
                     -1
                 )
                 val previousLimit = if (previousFromWorker > 0) previousFromWorker else prefs.patcherProcessMemoryLimit.get()
-                val newLimit = (previousLimit - MEMORY_ADJUSTMENT_MB).coerceAtLeast(MemoryLimitConfig.MIN_LIMIT_MB)
+                val newLimit = (previousLimit - MEMORY_ADJUSTMENT_MB).coerceAtLeast(MIN_LIMIT_MB)
                 val adjusted = newLimit < previousLimit
                 if (adjusted) {
                     prefs.patcherProcessMemoryLimit.update(newLimit)
@@ -2181,6 +2180,7 @@ class PatcherViewModel(
         private const val SIGNATURE_MISMATCH_UNINSTALL_TIMEOUT_MS = 30_000L
         private const val SIGNATURE_MISMATCH_UNINSTALL_POLL_MS = 750L
         private const val MEMORY_ADJUSTMENT_MB = 200
+        private const val MIN_LIMIT_MB = 200
         private const val SUPPRESS_FAILURE_AFTER_SUCCESS_MS = 5000L
 
         fun LogLevel.androidLog(msg: String) = when (this) {

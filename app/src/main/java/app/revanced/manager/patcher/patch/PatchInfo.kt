@@ -2,13 +2,13 @@ package app.revanced.manager.patcher.patch
 
 import androidx.compose.runtime.Immutable
 import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.Option as PatchOption
 import app.morphe.patcher.patch.resourcePatch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import kotlin.reflect.KType
+import app.morphe.patcher.patch.Option as PatchOption
 
 data class PatchInfo(
     val name: String,
@@ -31,7 +31,7 @@ data class PatchInfo(
     )
 
     fun compatibleWith(packageName: String) =
-        compatiblePackages?.any { it.packageName == packageName } ?: true
+        compatiblePackages?.any { it.packageName == packageName } != false
 
     fun supports(packageName: String, versionName: String?): Boolean {
         val packages = compatiblePackages ?: return true // Universal patch

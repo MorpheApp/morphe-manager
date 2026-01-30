@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
-import app.morphe.library.mostCommonCompatibleVersions
 import app.morphe.manager.R
-import app.morphe.patcher.patch.Patch
 import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.redux.Action
 import app.revanced.manager.data.redux.ActionContext
@@ -22,7 +20,6 @@ import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefaul
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.patcher.patch.PatchBundle
 import app.revanced.manager.patcher.patch.PatchBundleInfo
-import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.tag
@@ -82,20 +79,6 @@ class PatchBundleRepository(
     }
 
     val patchCountsFlow = allBundlesInfoFlow.map { it.mapValues { (_, info) -> info.patches.size } }
-
-    val suggestedVersions = enabledBundlesInfoFlow.map {
-        val allPatches =
-            it.values.flatMap { bundle -> bundle.patches.map(PatchInfo::toPatcherPatch) }.toSet()
-
-        suggestedVersionsFor(allPatches)
-    }
-
-    val suggestedVersionsByBundle = enabledBundlesInfoFlow.map { bundleInfos ->
-        bundleInfos.mapValues { (_, info) ->
-            val patches = info.patches.map(PatchInfo::toPatcherPatch).toSet()
-            suggestedVersionsFor(patches)
-        }
-    }
 
     private val manualUpdateInfoFlow = MutableStateFlow<Map<Int, ManualBundleUpdateInfo>>(emptyMap())
     val manualUpdateInfo: StateFlow<Map<Int, ManualBundleUpdateInfo>> = manualUpdateInfoFlow.asStateFlow()
@@ -309,32 +292,6 @@ class PatchBundleRepository(
         }
     }
 
-    suspend fun enforceOfficialOrderPreference() = dispatchAction("Enforce official order preference") { state ->
-        val storedOrder = prefs.officialBundleSortOrder.get()
-        if (storedOrder < 0) return@dispatchAction state
-        val entities = dao.all().sortedBy { entity -> entity.sortOrder }
-        val currentIndex = entities.indexOfFirst { entity -> entity.uid == DEFAULT_SOURCE_UID }
-        if (currentIndex == -1) return@dispatchAction state
-        val targetIndex = storedOrder.coerceIn(0, entities.lastIndex)
-        if (currentIndex == targetIndex) return@dispatchAction state
-
-        val adjusted = entities.toMutableList()
-        val defaultEntity = adjusted.removeAt(currentIndex)
-        adjusted.add(targetIndex, defaultEntity)
-        adjusted.forEachIndexed { index, entity ->
-            dao.updateSortOrder(entity.uid, index)
-        }
-        doReload()
-    }
-
-    suspend fun getOfficialBundleSortOrder(): Int? =
-        prefs.officialBundleSortOrder.get().takeIf { it >= 0 }
-
-    suspend fun setOfficialBundleSortOrder(order: Int?) {
-        val value = order?.takeIf { it >= 0 } ?: -1
-        prefs.officialBundleSortOrder.update(value)
-    }
-
     fun snapshotSelection(selection: PatchSelection): SelectionPayload {
         return SelectionPayload(
             bundles = selection.map { (bundleUid, patches) ->
@@ -475,14 +432,6 @@ class PatchBundleRepository(
 
         return metadata
     }
-
-    suspend fun isVersionAllowed(packageName: String, version: String) =
-        withContext(Dispatchers.Default) {
-            if (!prefs.suggestedVersionSafeguard.get()) return@withContext true
-
-            val suggestedVersion = suggestedVersions.first()[packageName] ?: return@withContext true
-            suggestedVersion == version
-        }
 
     /**
      * Get the directory of the [PatchBundleSource] with the specified [uid], creating it if needed.
@@ -742,31 +691,6 @@ class PatchBundleRepository(
             doReload()
         }
 
-    suspend fun setEnabledStates(states: Map<Int, Boolean>) =
-        dispatchAction("Set bundle enabled states") { state ->
-            val updates = states.filter { (uid, enabled) ->
-                state.sources[uid]?.enabled != enabled
-            }
-            if (updates.isEmpty()) return@dispatchAction state
-
-            updates.forEach { (uid, enabled) ->
-                updateDb(uid) { it.copy(enabled = enabled) }
-            }
-
-            val sources = state.sources.mutate { map ->
-                updates.forEach { (uid, enabled) ->
-                    map[uid] = map[uid]?.copy(enabled = enabled) ?: return@forEach
-                }
-            }
-            val info = state.info.mutate { map ->
-                updates.forEach { (uid, enabled) ->
-                    map[uid] = map[uid]?.copy(enabled = enabled) ?: return@forEach
-                }
-            }
-
-            state.copy(sources = sources, info = info)
-        }
-
     suspend fun remove(vararg bundles: PatchBundleSource) =
         dispatchAction("Remove (${bundles.map { it.uid }.joinToString(",")})") { state ->
             val sources = state.sources.toMutableMap()
@@ -789,14 +713,6 @@ class PatchBundleRepository(
 
             State(sources.toPersistentMap(), info.toPersistentMap())
         }
-
-    suspend fun restoreDefaultBundle() = dispatchAction("Restore default bundle") {
-        prefs.officialBundleRemoved.update(false)
-        dao.upsert(createDefaultEntityWithStoredOrder())
-        doReload()
-    }
-
-    suspend fun refreshDefaultBundle() = store.dispatch(Update(force = true) { it.uid == DEFAULT_SOURCE_UID })
 
     enum class DisplayNameUpdateResult {
         SUCCESS,
@@ -853,30 +769,6 @@ class PatchBundleRepository(
         }
 
         return result
-    }
-
-    suspend fun updateTimestamps(src: PatchBundleSource, createdAt: Long?, updatedAt: Long?) {
-        if (createdAt == null && updatedAt == null) return
-
-        dispatchAction("Update timestamps (${src.uid})") { state ->
-            val currentSource = state.sources[src.uid] ?: return@dispatchAction state
-            updateDb(src.uid) {
-                it.copy(
-                    createdAt = createdAt ?: it.createdAt,
-                    updatedAt = updatedAt ?: it.updatedAt
-                )
-            }
-
-            state.copy(
-                sources = state.sources.put(
-                    src.uid,
-                    currentSource.copy(
-                        createdAt = createdAt ?: currentSource.createdAt,
-                        updatedAt = updatedAt ?: currentSource.updatedAt
-                    )
-                )
-            )
-        }
     }
 
     suspend fun createLocal(expectedSize: Long? = null, createStream: suspend () -> InputStream) {
@@ -1147,15 +1039,6 @@ class PatchBundleRepository(
         return "https://$host$normalizedPath$query"
     }
 
-    suspend fun reloadApiBundles() = dispatchAction("Reload API bundles") {
-        this@PatchBundleRepository.sources.first().filterIsInstance<APIPatchBundle>().forEach {
-            with(it) { deleteLocalFile() }
-            updateDb(it.uid) { it.copy(versionHash = null) }
-        }
-
-        doReload()
-    }
-
     suspend fun RemotePatchBundle.setAutoUpdate(value: Boolean) {
         dispatchAction("Set auto update ($name, $value)") { state ->
             updateDb(uid) { it.copy(autoUpdate = value) }
@@ -1199,8 +1082,6 @@ class PatchBundleRepository(
             ) { it.uid == DEFAULT_SOURCE_UID }
         )
     }
-
-    suspend fun redownloadRemoteBundles() = store.dispatch(Update(force = true))
 
     /**
      * Updates all bundles that should be automatically updated.
@@ -1766,30 +1647,11 @@ class PatchBundleRepository(
         }
     }
 
-    private fun suggestedVersionsFor(patches: Set<Patch<*>>): Map<String, String?> {
-        val versionCounts = patches.mostCommonCompatibleVersions(countUnusedPatches = true)
-
-        return versionCounts.mapValues { (_, versions) ->
-            if (versions.keys.size < 2) {
-                return@mapValues versions.keys.firstOrNull()
-            }
-
-            var currentHighestPatchCount = -1
-            versions.entries.last { (_, patchCount) ->
-                if (patchCount >= currentHighestPatchCount) {
-                    currentHighestPatchCount = patchCount
-                    true
-                } else false
-            }.key
-        }
-    }
-
     data class State(
         val sources: PersistentMap<Int, PatchBundleSource> = persistentMapOf(),
         val info: PersistentMap<Int, PatchBundleInfo.Global> = persistentMapOf()
     )
 
-    // Morphe
     enum class BundleUpdateResult {
         None,           // Update in progress
         Success,        // Successfully updated
@@ -1822,20 +1684,7 @@ class PatchBundleRepository(
         val bytesRead: Long = 0L,
         val bytesTotal: Long? = null,
         val isStepBased: Boolean = false,
-    ) {
-        val ratio: Float?
-            get() {
-                val safeTotal = total.coerceAtLeast(1)
-                val clampedProcessed = processed.coerceIn(0, safeTotal)
-                if (clampedProcessed >= safeTotal) return 1f
-
-                val totalBytes = bytesTotal?.takeIf { it > 0L }
-                    ?: return (clampedProcessed.toFloat() / safeTotal).coerceIn(0f, 1f)
-
-                val perStepFraction = (bytesRead.toFloat() / totalBytes).coerceIn(0f, 1f)
-                return ((clampedProcessed + perStepFraction) / safeTotal).coerceIn(0f, 1f)
-            }
-    }
+    )
 
     enum class BundleImportPhase {
         Processing,

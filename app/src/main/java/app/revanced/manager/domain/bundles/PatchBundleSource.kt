@@ -1,10 +1,7 @@
 package app.revanced.manager.domain.bundles
 
 import androidx.compose.runtime.Stable
-import app.revanced.manager.data.redux.ActionContext
 import app.revanced.manager.patcher.patch.PatchBundle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FilterOutputStream
 import java.io.IOException
@@ -42,10 +39,6 @@ sealed class PatchBundleSource(
     val isNameOutOfDate get() = patchBundle?.manifestAttributes?.name?.let { it != name } == true
     val error get() = (state as? State.Failed)?.throwable
     val displayTitle get() = displayName?.takeUnless { it.isBlank() } ?: name
-
-    suspend fun ActionContext.deleteLocalFile() = withContext(Dispatchers.IO) {
-        patchesFile.delete()
-    }
 
     abstract fun copy(
         error: Throwable? = this.error,
@@ -91,6 +84,5 @@ sealed class PatchBundleSource(
         private const val MIN_PATCH_BUNDLE_BYTES = 8L
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
-        val PatchBundleSource.actualName inline get() = name
     }
 }

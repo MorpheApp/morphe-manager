@@ -26,12 +26,10 @@ class PreferencesManager(
     val theme = enumPreference("theme", Theme.SYSTEM)
     val appLanguage = stringPreference("app_language", "system")
 
-    // Morphe: API preference is currently hidden
     val api = stringPreference("api_url", "https://api.morphe.software")
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
-    // Morphe
     val useProcessRuntime = booleanPreference(
         "use_process_runtime",
         // Use process runtime fails for Android 10 and lower.

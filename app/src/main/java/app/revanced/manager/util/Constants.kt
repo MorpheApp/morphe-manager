@@ -4,6 +4,10 @@ import androidx.compose.ui.graphics.Color
 
 const val tag = "Morphe Manager"
 
+const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
+
+internal const val MORPHE_API_URL = "https://api.morphe.software"
+
 // Package identifiers with their associated colors
 object AppPackages {
     const val YOUTUBE = "com.google.android.youtube"
