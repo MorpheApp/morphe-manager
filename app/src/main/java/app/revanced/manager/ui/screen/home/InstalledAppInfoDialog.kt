@@ -251,6 +251,7 @@ fun InstalledAppInfoDialog(
         onDismissRequest = onDismiss,
         title = null,
         dismissOnClickOutside = true,
+        compactPadding = true,
         footer = null
     ) {
         if (isLoading || installedApp == null) {

@@ -101,6 +101,7 @@ fun ExpertModeDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.expert_mode_title),
+        compactPadding = true,
         dismissOnClickOutside = false,
         footer = {
             MorpheDialogButton(

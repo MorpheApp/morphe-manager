@@ -39,6 +39,7 @@ val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha 
  * @param footer Optional footer content (typically buttons)
  * @param dismissOnClickOutside Whether clicking outside dismisses the dialog
  * @param scrollable Whether to wrap content in verticalScroll. Set to false for LazyColumn. Default is true.
+ * @param compactPadding Whether to use compact padding. Default is false.
  * @param content Dialog content
  */
 @Composable
@@ -49,6 +50,7 @@ fun MorpheDialog(
     footer: (@Composable () -> Unit)? = null,
     dismissOnClickOutside: Boolean = true,
     scrollable: Boolean = true,
+    compactPadding: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
@@ -110,6 +112,7 @@ fun MorpheDialog(
                         footer = footer,
                         isDarkTheme = isDarkTheme,
                         scrollable = scrollable,
+                        compactPadding = compactPadding,
                         content = content
                     )
                 }
@@ -128,6 +131,7 @@ private fun DialogContent(
     footer: (@Composable () -> Unit)?,
     isDarkTheme: Boolean,
     scrollable: Boolean,
+    compactPadding: Boolean,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isLandscape = isLandscape()
@@ -140,9 +144,13 @@ private fun DialogContent(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .systemBarsPadding()
             .padding(
-                horizontal = if (isLandscape) 80.dp else 32.dp,
-                vertical = if (isLandscape) 32.dp else 64.dp
+                if (compactPadding) {
+                    PaddingValues(16.dp)
+                } else {
+                    PaddingValues(32.dp)
+                }
             )
             .pointerInput(Unit) {
                 detectTapGestures { /* Consume clicks */ }
