@@ -293,7 +293,7 @@ fun ManagerUpdateNotification(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+        modifier = modifier.padding(horizontal = 16.dp),
         onClick = onShowDetails,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer
@@ -390,7 +390,7 @@ private fun BundleUpdateSnackbarContent(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+            .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = containerColor),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         shape = RoundedCornerShape(16.dp)
@@ -491,8 +491,8 @@ fun GreetingSection(
 ) {
     Box(
         modifier = modifier
-            .padding(top = 64.dp)
-            .height(128.dp),
+            .padding(top = 54.dp)
+            .height(120.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -547,8 +547,7 @@ fun MainAppsSection(
         // App buttons
         Column(
             modifier = Modifier
-                .widthIn(max = 500.dp)
-                .padding(vertical = 16.dp),
+                .widthIn(max = 500.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -982,7 +981,7 @@ fun OtherAppsSection(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 16.dp, bottom = 24.dp)
+            .padding(bottom = 24.dp)
             .height(48.dp)
             .clip(shape)
             .background(

@@ -112,10 +112,9 @@ fun PatchingInProgress(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = windowSize.contentPadding)
-                    .padding(top = 24.dp, bottom = 120.dp),
+                    .padding(horizontal = windowSize.contentPadding),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
+                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
             ) {
                 ProgressMessageSection(currentMessage)
 
@@ -157,6 +156,7 @@ private fun ProgressMessageSection(currentMessage: Int) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(top = 54.dp)
             .height(150.dp),
         contentAlignment = Alignment.Center
     ) {
