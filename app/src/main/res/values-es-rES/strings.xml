@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <string name="morphe_home_other_apps">Otras apps</string>
+    <string name="morphe_home">Inicio</string>
+    <string name="morphe_home_not_patched_yet">Aún no parcheado</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Actualización del administrador disponible</string>
+    <string name="morphe_home_update_available_subtitle">Nueva versión lista para instalar</string>
+    <string name="morphe_home_update_error">Actualización fallida</string>
+    <string name="morphe_home_update_error_subtitle">Revisa tu conexión a internet e intenta nuevamente </string>
+    <string name="morphe_home_updating_sources">Actualizando fuentes…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d fuentes procesadas</string>
+    <string name="morphe_home_update_success">Actualización de fuentes completa</string>
+    <string name="morphe_home_update_success_subtitle">Tus fuentes están al día</string>
+    <string name="morphe_home_sources_are_loading">Cargando fuentes, por favor espera…</string>
+    <string name="morphe_home_please_wait">Por favor espera...</string>
+    <!-- Home Screen - Home Greetings -->
+    <string name="morphe_home_greeting_1">¿Qué aplicación quieres parchear?</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">¿Listo para hacer que YouTube sea legendario de nuevo?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Abróchate el cinturón, es hora de parchear</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <string name="morphe_home_greeting_4">Otro día, otra obra maestra bloqueada por anuncios</string>
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <string name="morphe_home_greeting_5">¿Quieres ver anuncios? Yo tampoco</string>
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <string name="morphe_home_greeting_6">Hagamos que tus aplicaciones se comporten</string>
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <string name="morphe_home_greeting_7">El pronóstico de hoy: 100% de probabilidad de parchear</string>
+    <!-- From mediocrity to amazing -->
+    <string name="morphe_home_greeting_8">¿Listo para cambiar lo mediocre por lo increíble?</string>
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <string name="morphe_home_greeting_9">Salvando aplicaciones de sí mismas desde hoy</string>
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <string name="morphe_home_greeting_10">Impulsado por cafeína y buenos parches</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Fuentes de parches</string>
+    <string name="morphe_sources_management_subtitle">%d fuentes instaladas</string>
+    <string name="morphe_sources_delete_confirm_message">¿Eliminar la fuente «%s»? Esto no se puede deshacer.</string>
+    <string name="morphe_sources_open_in_browser">Abrir en el navegador</string>
+    <string name="morphe_sources_failed_to_open_url">No se pudo abrir la URL</string>
+    <string name="morphe_sources_date_added">Agregado</string>
+    <string name="morphe_sources_date_updated">Actualizado</string>
+    <string name="morphe_enabled">Activado</string>
+    <string name="morphe_disabled">Desactivado</string>
+    <string name="morphe_rename">Renombrar</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Agregar fuente de parches</string>
+    <string name="morphe_add_patch_source_remote">Remoto</string>
+    <string name="morphe_add_patch_source_remote_url">URL de la fuente</string>
+    <string name="morphe_add_patch_source_remote_description">Ingrese la URL del endpoint JSON para la fuente de parches remota</string>
+    <string name="morphe_add_patch_source_local">Local</string>
+    <string name="morphe_add_patch_source_local_file">Seleccione el archivo fuente de parches</string>
+    <string name="morphe_add_patch_source_local_file_description">Seleccionar un archivo fuente de parches .mpp en el almacenamiento</string>
+    <string name="morphe_add_patch_source_local_change_file">Cambiar archivo</string>
+    <string name="morphe_home_no_patches_available">No hay parches disponibles</string>
+    <!-- Dialog 1: APK Availability -->
+    <string name="morphe_home_apk_availability_dialog_title">¿Tienes la APK original sin parchear?</string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Para parchear %1$s, necesitas la versión %2$s (sin parchear)</string>
+    <string name="morphe_home_apk_availability_yes">Sí, lo tengo</string>
+    <string name="morphe_home_apk_availability_no">No, ayúdame a encontrarlo</string>
+    <!-- Dialog 2: Download Instructions -->
+    <string name="morphe_home_download_instructions_title">Descarga el APK original</string>
+    <string name="morphe_home_download_instructions_steps_title">Instrucciones:</string>
+    <string name="morphe_home_download_instructions_step1">Presiona el botón \'%1$s\' de abajo</string>
+    <string name="morphe_home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y presiona</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Presiona descargar en el sitio web, y no aquí 😊</string>
+    <string name="morphe_home_download_instructions_step3">Espera a que la descarga se complete, y &lt;b&gt;no instales&lt;/b&gt; el APK</string>
+    <string name="morphe_home_download_instructions_step3_mount">Espera a que la descarga se complete, luego &lt;b&gt;instala el APK&lt;/b&gt;</string>
+    <string name="morphe_home_download_instructions_step4">Después de que termine la descarga, vuelve a abrir esta aplicación</string>
+    <string name="morphe_home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a abrir esta aplicación</string>
+    <string name="morphe_home_download_instructions_continue">Continuar a APKMirror.com</string>
+    <!-- Dialog 3: File Picker Prompt -->
+    <string name="morphe_home_file_picker_prompt_title">Selecciona el APK que descargaste</string>
+    <string name="morphe_home_file_picker_prompt_description">Ahora selecciona el archivo APK %1$s que acabas de descargar.</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Abrir archivo APK que descargué</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Abrir archivo APK</string>
+    <string name="morphe_home_recommended_version">Versión recomendada</string>
+    <string name="morphe_patcher_selected_version">Versión seleccionada</string>
+    <string name="morphe_home_select_apk_title">Seleccionar APK</string>
+    <string name="morphe_home_select_any_apk_description">Toca el botón de abajo para seleccionar un archivo APK de cualquier aplicación para parchear</string>
+    <string name="morphe_home_invalid_apk">Archivo APK no válido</string>
+    <string name="morphe_home_no_patches_for_app">No hay parches disponibles para esta aplicación</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Modo experto</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d de %2$d parches seleccionados</string>
+    <string name="morphe_expert_mode_search">Buscar parches</string>
+    <string name="morphe_expert_mode_proceed">Proceder al parcheado</string>
+    <string name="morphe_expert_mode_disable_all">Desactivar todo</string>
+    <string name="morphe_expert_mode_enable_all">Activar todo</string>
+    <string name="morphe_expert_mode_has_options">Configurable</string>
+    <string name="morphe_expert_mode_no_results">No se encontraron parches</string>
+    <string name="morphe_expert_mode_no_patches">No hay parches disponibles</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Color personalizado</string>
+    <string name="morphe_hex_color">Color HEX</string>
+    <string name="morphe_patch_option_instructions">Instrucciones</string>
+    <string name="morphe_patch_option_enter_value">Ingresar valor</string>
+    <string name="morphe_patch_option_enter_number">Ingresar número</string>
+    <string name="morphe_patch_option_enter_decimal">Ingresar decimal</string>
+    <string name="morphe_patch_option_pick_folder">Elegir carpeta</string>
+    <string name="expand">Expandir</string>
+    <string name="collapse">Contraer</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">¿Realmente quieres desinstalar esta aplicación?</string>
+    <string name="saved_app_delete_confirmation">¿Realmente quieres eliminar esta aplicación guardada?</string>
+    <string name="saved_copy_delete_confirmation">¿Realmente quieres eliminar la copia guardada?</string>
+    <string name="view">Ver</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">No se encontró el APK original. No se puede volver a parchear esta aplicación.</string>
+    <string name="morphe_repatch_requires_original">El reparchado requiere el archivo APK original</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Administración de almacenamiento</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Tamaño total: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">APKs parcheados</string>
+    <string name="morphe_patched_apks_title">APKs parcheados</string>
+    <string name="morphe_patched_apks_description">Administrar archivos de aplicaciones parcheadas guardadas</string>
+    <string name="morphe_patched_apks_empty">Aún no se han guardado APKs parcheados</string>
+    <string name="morphe_patched_apks_delete_title">¿Eliminar el APK parcheado?</string>
+    <string name="morphe_patched_apks_delete_confirm">¿Realmente quieres eliminar el APK parcheado guardado para %s?</string>
+    <string name="morphe_patched_apks_deleted">APK parcheado eliminado correctamente</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">APKs originales</string>
+    <string name="morphe_original_apks_title">APKs originales</string>
+    <string name="morphe_original_apks_description">Los archivos APK originales se guardan para el reparchado. Solo se mantiene la versión más reciente para cada aplicación.</string>
+    <string name="morphe_original_apks_empty">No hay APKs originales almacenados</string>
+    <string name="morphe_original_apks_deleted">APK original eliminado correctamente</string>
+    <string name="morphe_original_apks_saved">APK original guardado</string>
+    <string name="morphe_original_apks_save_failed">No se pudo guardar el APK original</string>
+    <string name="morphe_original_apks_delete_title">¿Eliminar el APK original?</string>
+    <string name="morphe_original_apks_delete_confirm">¿Eliminar el APK original para %s? No podrás volver a parchear sin proporcionar un nuevo APK.</string>
+    <!-- Root Mode -->
+    <string name="morphe_root_install_apk_required">El modo root requiere que la APK original esté instalada en tu dispositivo antes de aplicar el parche.</string>
+    <string name="morphe_root_gmscore_excluded">El parche de soporte de GmsCore está excluido en el modo raíz</string>
+    <!-- Morphe Patcher Screen -->
+    <string name="morphe_patcher_error_copied">Error copiado en el portapapeles</string>
+    <string name="morphe_patcher_error_log">Registro de errores</string>
+    <string name="morphe_patcher_error_technical">Detalles técnicos</string>
+    <string name="morphe_patcher_patches_progress">%1$d / %2$d parches</string>
+    <string name="morphe_patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espere…</string>
+    <string name="morphe_patcher_installing">Instalando…</string>
+    <string name="morphe_patcher_installing_subtitle">¡Casi listo para empezar! 🎸</string>
+    <string name="morphe_patcher_success_title">¡Todo listo! 🎉</string>
+    <string name="morphe_patcher_success_subtitle">¡Tu aplicación está parcheada e instalada!</string>
+    <string name="morphe_patcher_complete_title">¡Parcheado completado! ✨</string>
+    <string name="morphe_patcher_failed_title">¡Ups! Algo salió mal</string>
+    <string name="morphe_patcher_failed_subtitle">Consulta los detalles del error a continuación</string>
+    <string name="morphe_patcher_failed_dialog_title">Fallo al aplicar el parche</string>
+    <string name="morphe_patcher_unknown_error">Ocurrió un error desconocido</string>
+    <string name="morphe_patcher_mounting">Montando…</string>
+    <string name="morphe_patcher_conflict_title">Conflicto de paquete</string>
+    <string name="morphe_patcher_conflict_subtitle">Debe desinstalar la versión existente</string>
+    <string name="morphe_patcher_install_error_title">Error de instalación</string>
+    <string name="morphe_patcher_install_error_subtitle">Intente desinstalar y volver a instalar</string>
+    <string name="morphe_patcher_ready_to_install_subtitle">Pulse el botón de abajo para instalar</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Pulse el botón de abajo para montar</string>
+    <string name="morphe_patcher_unsupported_version_dialog_title">Versión no compatible</string>
+    <string name="morphe_patcher_unsupported_version_dialog_description">Esta APK no es una versión de aplicación recomendada. Continuar puede resultar en una aplicación no funcional.</string>
+    <string name="morphe_patcher_unsupported_version_dialog_proceed">Continuar de todos modos</string>
+    <string name="morphe_patcher_wrong_package_title">Paquete incorrecto seleccionado</string>
+    <string name="morphe_patcher_wrong_package_description">El APK seleccionado no es para la aplicación que intentaste parchear.</string>
+    <string name="morphe_patcher_expected_package">Paquete esperado</string>
+    <string name="morphe_patcher_selected_package">Paquete seleccionado</string>
+    <string name="morphe_patcher_message_1">Transformando tu app en algo increíble… 🏆</string>
+    <string name="morphe_patcher_message_2">Enseñando trucos nuevos a apps antiguas… 🎩</string>
+    <string name="morphe_patcher_message_3">Haciendo un ajuste digital a tu app… 🔧</string>
+    <string name="morphe_patcher_message_4">Preparando magia digital… ☕</string>
+    <string name="morphe_patcher_message_5">Se recomienda un descanso para el café… ☕</string>
+    <string name="morphe_patcher_message_6">Mira afuera, hace buen tiempo… 🌤️</string>
+    <string name="morphe_patcher_message_7">Ajustando unos (1) y ceros (0)… 🤖</string>
+    <string name="morphe_patcher_message_8">Deshaciendo el espagueti digital… 🍝</string>
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <string name="morphe_patcher_message_9">Arreglando errores en la aplicación no parcheada… 🪲</string>
+    <string name="morphe_patcher_message_10">Los buenos parches valen la pena esperar… ⏳</string>
+    <string name="morphe_patcher_message_11">Pulir píxeles hasta que brillen… 💎</string>
+    <string name="morphe_patcher_message_12">Por favor, permanezca sentado hasta que el capitán apague el letrero de \"Parche en progreso\"... 💺✈️</string>
+    <string name="morphe_patcher_message_13">Cocinando tu aplicación parcheada, caliente y fresca… 🍳</string>
+    <!-- "bytecode" can be translated from "the app code" -->
+    <string name="morphe_patcher_message_14">Negociando de forma educada con el código de la aplicación… 🤝</string>
+    <!-- Space flight communications callout. -->
+    <string name="morphe_patcher_message_15">Todos los sistemas nominales… la trayectoria de parcheo es estable… 🚀</string>
+    <string name="morphe_patcher_message_16">Exprimiendo potencia extra, como jugo de un limón digital… 🍋</string>
+    <string name="morphe_patcher_message_17">Animando a la aplicación a aceptar su nuevo y mejor yo… 🌱</string>
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <string name="morphe_patcher_message_18">Cambiando la superposición de la aplicación de sin parchear a parcheada… 📦⚛️</string>
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="morphe_patcher_message_19">Tu aplicación tiene fiebre y la única receta son más parches… 🩺🔔</string>
+    <string name="morphe_patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
+    <!-- Appearance Tab -->
+    <string name="morphe_appearance_options">Opciones de apariencia</string>
+    <string name="morphe_appearance_options_description">Personaliza temas, colores y fondos.</string>
+    <string name="morphe_appearance_current_language">Idioma actual</string>
+    <string name="morphe_appearance_search">Búsqueda</string>
+    <string name="morphe_appearance_no_results">No se encontraron resultados para «»</string>
+    <string name="morphe_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
+    <string name="morphe_appearance_translations_info_text">Para traducir nuevos idiomas o mejorar las traducciones existentes, visita %s</string>
+    <string name="morphe_background_type">Animación de fondo</string>
+    <string name="morphe_background_type_circles">Círculos</string>
+    <string name="morphe_background_type_rings">Anillos</string>
+    <string name="morphe_background_type_waves">Ondas</string>
+    <string name="morphe_background_type_space">Espacio</string>
+    <string name="morphe_background_type_shapes">Formas</string>
+    <string name="morphe_background_type_snow">Recto</string>
+    <string name="morphe_background_type_none">Ninguno</string>
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Icono de la aplicación</string>
+    <string name="morphe_app_icon_selector_description">Cambiar el icono del lanzador de la aplicación</string>
+    <string name="morphe_app_icon_default">Predeterminado</string>
+    <string name="morphe_app_icon_light_2">Cielo</string>
+    <string name="morphe_app_icon_light_3">Atardecer</string>
+    <string name="morphe_app_icon_dark_1">Océano</string>
+    <string name="morphe_app_icon_dark_2">Vacío</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">¿Cambiar el icono de la aplicación?</string>
+    <string name="morphe_app_icon_change_dialog_message">¿Cambiar a \"%1$s\" y reiniciar?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Cambiar icono</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Ajustes de expertos</string>
+    <string name="morphe_settings_expert_mode">Modo experto</string>
+    <string name="morphe_settings_expert_mode_description">Activa características avanzadas y opciones de personalización</string>
+    <string name="morphe_update_use_prereleases">Usar versiones preliminares</string>
+    <string name="morphe_update_use_prereleases_description">Obtén acceso anticipado a nuevos parches y funciones del Manager</string>
+    <string name="morphe_patch_options_expert_mode_notice">En el modo experto, las opciones de parche estarán disponibles durante el proceso de parcheado</string>
+    <!-- Patch Options Section -->
+    <string name="morphe_patch_options">Opciones de parche</string>
+    <string name="morphe_patch_options_youtube_description">Tema, marca, encabezado y opciones de Shorts</string>
+    <string name="morphe_patch_options_youtube_music_description">Opciones de tema y marca</string>
+    <string name="morphe_patch_options_restart_message">Cambiar opciones de parche requiere rehacer el parche para que surtan efecto</string>
+    <!-- Patch Options Section: Theme Colors -->
+    <string name="morphe_patch_options_theme_colors">Colores del tema de la app</string>
+    <string name="morphe_patch_options_theme_colors_description">Cambiar color de fondo</string>
+    <string name="morphe_patch_options_dark_theme_color">Color de fondo del tema oscuro</string>
+    <string name="morphe_patch_options_dark_theme_color_description">Puede ser un color hexadecimal (#RRGGBB) o una referencia de recurso de color</string>
+    <string name="morphe_patch_options_light_theme_color">Color de fondo del tema claro</string>
+    <string name="morphe_patch_options_light_theme_color_description">Puede ser un color hexadecimal (#RRGGBB) o una referencia de recurso de color</string>
+    <string name="morphe_patch_options_loading">Cargando opciones de parche…</string>
+    <string name="morphe_patch_options_waiting_for_source">Esperar hasta que la fuente de parche se actualice</string>
+    <string name="morphe_patch_options_load_error">Error al cargar opciones de parche</string>
+    <string name="morphe_patch_options_no_available">No hay opciones disponibles para este parche</string>
+    <!-- Patch Options Section: Custom Branding -->
+    <string name="morphe_patch_options_custom_branding">Marca personalizada</string>
+    <string name="morphe_patch_options_custom_branding_description">Cambia el nombre para mostrar de la aplicación</string>
+    <string name="morphe_patch_options_custom_branding_app_name">Nombre de la aplicación</string>
+    <string name="morphe_patch_options_custom_branding_app_name_hint">Introduzca un nombre personalizado</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon">Icono personalizado</string>
+    <string name="morphe_patch_options_custom_branding_custom_icon_instruction">"Carpeta con imágenes para usar como icono personalizado.
+
+La carpeta debe contener una o más de las siguientes carpetas, dependiendo de los DPI del dispositivo:
+- mipmap-mdpi
+- mipmap-hdpi
+- mipmap-xhdpi
+- mipmap-xxhdpi
+- mipmap-xxxhdpi
+
+Cada una de las carpetas debe contener todos los siguientes archivos:
+morphe_adaptive_background_custom.png
+morphe_adaptive_foreground_custom.png
+
+Las dimensiones de la imagen deben ser las siguientes:
+- mipmap-mdpi: 108x108 px
+- mipmap-hdpi: 162x162 px
+- mipmap-xhdpi: 216x216 px
+- mipmap-xxhdpi: 324x324 px
+- mipmap-xxxhdpi: 432x432 px
+
+Opcionalmente, la ruta contiene una carpeta \"drawable\" con cualquiera de los archivos de iconos monocromáticos:
+morphe_adaptive_monochrome_custom.xml
+morphe_notification_icon_custom.xml"</string>
+    <!-- Patch Options Section: Custom Header -->
+    <string name="morphe_patch_options_custom_header">Logo de encabezado personalizado</string>
+    <string name="morphe_patch_options_custom_header_description">Cambiar logo de encabezado</string>
+    <string name="morphe_patch_options_custom_header_instruction">"Carpeta con imágenes para usar como logo de encabezado personalizado.
+
+La carpeta debe contener una o varias de las siguientes carpetas, dependiendo de los DPI del dispositivo:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Cada una de las carpetas debe contener todos los siguientes archivos:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Las dimensiones de la imagen deben ser las siguientes:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
+    <!-- Patch Options Section: Hide Shorts -->
+    <string name="morphe_patch_options_hide_shorts_features">Ocultar funciones de Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut">Ocultar acceso directo de app de Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Elimina Shorts del menú de pulsación larga del launcher</string>
+    <string name="morphe_patch_options_hide_shorts_widget">Ocultar widget de Shorts</string>
+    <string name="morphe_patch_options_hide_shorts_widget_description">Elimina el botón Shorts del widget del launcher</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Rendimiento</string>
+    <string name="morphe_process_runtime">Tiempo de ejecución del proceso</string>
+    <string name="morphe_process_runtime_description">Ejecutar el parcheado en un proceso separado para una mayor estabilidad</string>
+    <string name="morphe_process_runtime_memory_limit">Límite de memoria</string>
+    <string name="morphe_process_runtime_memory_limit_help">Límites de memoria más altos pueden acelerar el parcheado, pero pueden no funcionar con dispositivos más antiguos</string>
+    <string name="morphe_enable_process_runtime">Activar tiempo de ejecución del proceso</string>
+    <string name="morphe_memory_limit_subtitle">Memoria disponible para el parcheado</string>
+    <string name="morphe_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
+    <string name="morphe_process_runtime_enabled_description">Límite de %d MB</string>
+    <string name="morphe_process_runtime_disabled_description">Pulsa para configurar</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Compartir sitio web</string>
+    <string name="morphe_share_website_description">Comparte el sitio web oficial de Morphe</string>
+    <!-- Other strings -->
+    <string name="patcher">Parche</string>
+    <string name="patches">Parches</string>
+    <string name="patch_bundles">Paquetes de parches</string>
+    <string name="patch_bundle">Paquete de parches</string>
+    <!-- Morphe -->
+    <string name="installer">Instalador</string>
+    <string name="plugin_host_permission_label">Host de plugins de Morphe</string>
+    <string name="plugin_host_permission_description">Se usa para controlar el acceso a los plugins de Morphe. Solo Morphe tiene esto.</string>
+    <string name="toast_copied_to_clipboard">¡Copiado!</string>
+    <string name="copy_to_clipboard">Copiar al portapapeles</string>
+    <string name="settings">Ajustes</string>
+    <string name="select_app">Seleccionar una app</string>
+    <string name="app_filter_title">Filtrar aplicaciones</string>
+    <string name="app_filter_installed_only">Solo instalados</string>
+    <string name="app_filter_patches_available">Actualizaciones disponibles</string>
+    <string name="app_filter_no_results">No hay aplicaciones que coincidan con tus filtros.</string>
+    <string name="new_downloader_plugins_notification">Hay nuevos plugins de descarga disponibles. Haz clic aquí para configurarlos.</string>
+    <string name="unsupported_architecture_warning">El parcheo en esta arquitectura de dispositivo no es compatible y lo más probable es que falle.</string>
+    <string name="import_">Importar</string>
+    <string name="file_field_not_set">No seleccionado</string>
+    <string name="field_not_set">No establecido</string>
+    <string name="patches_missing">Faltante</string>
+    <string name="patches_error">Error</string>
+    <string name="patches_error_description">No se pudieron cargar los parches. Haz clic para ver el error</string>
+    <string name="patches_not_downloaded">No se han descargado parches. Haga clic aquí para descargar</string>
+    <string name="patches_name_default">Parches</string>
+    <string name="patches_name_fallback">Sin nombre</string>
+    <string name="bundle_uid">UID del paquete</string>
+    <string name="patches_display_name">Nombre para mostrar</string>
+    <string name="android_11_bug_dialog_title">Error de Android 11</string>
+    <string name="android_11_bug_dialog_description">El permiso de instalación de la aplicación debe concederse con antelación para evitar un error en el sistema Android 11 que afectará negativamente la experiencia del usuario.</string>
+    <string name="no_network_toast">No hay conexión a internet disponible</string>
+    <string name="selected_app_meta_any_version">Cualquier versión disponible</string>
+    <string name="app_source_dialog_title">Seleccionar origen</string>
+    <string name="app_source_dialog_option_auto">Automático</string>
+    <string name="app_source_dialog_option_auto_description">Usa todos los descargadores disponibles para descargar la aplicación</string>
+    <string name="app_source_dialog_option_auto_unavailable">No hay plugins disponibles</string>
+    <string name="app_source_dialog_option_storage">Almacenamiento</string>
+    <string name="app_source_dialog_option_storage_description">Selecciona un APK del almacenamiento local</string>
+    <string name="app_source_dialog_option_installed_no_root">Las aplicaciones montadas no pueden ser parcheadas de nuevo sin acceso root</string>
+    <string name="app_source_dialog_option_installed_version_not_suggested">La versión %s no coincide con la versión sugerida</string>
+    <string name="bundle_version_item">Recomendación de paquete</string>
+    <string name="bundle_version_item_description_default">Usando la recomendación predeterminada</string>
+    <string name="bundle_version_item_description_selected">Siguiendo %1$s (%2$s)</string>
+    <string name="bundle_version_dialog_title">Elegir recomendación de paquete</string>
+    <string name="bundle_version_dialog_description">Elige qué paquete sugerido debes utilizar cuando descargues una APK.</string>
+    <string name="bundle_version_dialog_default">Usar recomendación predeterminada</string>
+    <string name="bundle_version_dialog_default_subtitle">Selecciona automáticamente la versión compatible más común.</string>
+    <string name="bundle_version_all_versions">Todas las versiones</string>
+    <string name="bundle_version_no_version">No hay versión sugerida</string>
+    <string name="bundle_version_suggested_label">Versión recomendada: %1$s</string>
+    <string name="bundle_update_manual_available">Actualización disponible</string>
+    <string name="bundle_update_manual_available_with_version">Actualización disponible: %1$s</string>
+    <string name="bundle_update_progress">%1$d/%2$d paquetes procesados</string>
+    <string name="bundle_update_banner_title">Actualizando paquetes de parches</string>
+    <string name="bundle_reorder">Organizar paquetes</string>
+    <string name="bundle_reorder_title">Organizar paquetes de parches</string>
+    <string name="bundle_reorder_description">Arrastra el control para organizar el orden en que aparecen los paquetes en la lista y en el menú de selección de parches.</string>
+    <string name="bundle_actions_expand">Mostrar acciones del paquete</string>
+    <string name="bundle_actions_collapse">Ocultar acciones rápidas</string>
+    <string name="patch_bundle_duplicate_name_error">Ya existe un paquete de parches con este nombre.</string>
+    <string name="patch_bundle_missing_error">No se pudo actualizar este paquete de parches.</string>
+    <string name="bundle_release_page">Abrir página de lanzamiento</string>
+    <string name="bundle_release_page_unavailable">La página de lanzamiento no está disponible para este paquete</string>
+    <string name="bundle_release_page_error">No se pudo abrir la página de lanzamiento: %s</string>
+    <string name="bundle_links_title">Enlaces para %1$s</string>
+    <string name="bundle_link_release">Lanzamiento de GitHub</string>
+    <string name="bundle_link_catalog">Catálogo de lista de parches</string>
+    <string name="bundle_catalog_unavailable">Catálogo de lista de parches no disponible</string>
+    <string name="show_suggested_versions">Mostrar versiones sugeridas</string>
+    <string name="hide_suggested_versions">Ocultar versiones sugeridas</string>
+    <string name="show_other_versions">Mostrar otras versiones</string>
+    <string name="other_supported_versions_title">Otras versiones compatibles (%1$s)</string>
+    <string name="other_supported_versions_empty">No hay otras versiones compatibles disponibles.</string>
+    <string name="other_supported_versions_all">Soporta todas las versiones.</string>
+    <string name="bundle_version_dialog_recommended">Versión sugerida: %1$s</string>
+    <string name="bundle_version_dialog_selected_override">Versión seleccionada: %1$s</string>
+    <string name="bundle_version_dialog_selected_indicator">Seleccionada</string>
+    <string name="bundle_version_dialog_other_title">Seleccionar otra versión compatible:</string>
+    <string name="bundle_version_dialog_locked_title">Las protecciones de versión están habilitadas</string>
+    <string name="bundle_version_dialog_locked_hint">Ve a Configuración &gt; Avanzada &gt; Salvaguardas y configura tanto \"Requerir versión de aplicación sugerida\" (desactivar) como \"Deshabilitar comprobación de compatibilidad de versión\" (activar) para elegir versiones específicas del paquete.</string>
+    <string name="patch_versions_dialog_title">Versiones compatibles para %1$s</string>
+    <string name="patch_selector_item">Seleccionar parches</string>
+    <string name="patch_selector_item_description">%d parches seleccionados</string>
+    <string name="no_patches_selected">No se han seleccionado parches</string>
+    <string name="network_unavailable_warning">Tu dispositivo no está conectado a Internet. La descarga fallará más tarde.</string>
+    <string name="apk_source_selector_item">Seleccionar origen de APK</string>
+    <string name="apk_source_auto">Usando todos los descargadores de APK</string>
+    <string name="apk_source_downloader">Usando %s</string>
+    <string name="apk_source_installed">Usando APK instalado</string>
+    <string name="apk_source_local">Usando un archivo APK local</string>
+    <string name="apk_source_downloaded">Usando APK descargado</string>
+    <string name="auto_updates_dialog_title">Configurar actualizaciones</string>
+    <string name="auto_updates_dialog_description">¿Quieres que Morphe compruebe periódicamente las actualizaciones para los siguientes componentes?</string>
+    <string name="auto_updates_dialog_patches">Parches de Morphe</string>
+    <string name="auto_updates_dialog_note">Estas configuraciones se pueden cambiar más adelante.</string>
+    <string name="appearance">Apariencia</string>
+    <string name="appearance_description">Tema, color dinámico</string>
+    <string name="updates">Actualizaciones</string>
+    <string name="updates_description">Buscar actualizaciones y ver el registro de cambios</string>
+    <string name="downloads">Descargas</string>
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <string name="import_export">Importar &amp; exportar</string>
+    <string name="import_export_description">Keystore, opciones de parcheo y selección</string>
+    <string name="changelog">Ver registros de cambios</string>
+    <string name="changelog_loading">Cargando registro de cambios</string>
+    <string name="changelog_download_fail">Error al descargar el registro de cambios: %s</string>
+    <string name="changelog_description">Consulta los últimos cambios en esta actualización</string>
+    <string name="advanced">Avanzado</string>
+    <string name="advanced_description">URL de la API, límite de memoria, depuración</string>
+    <string name="about">Acerca de</string>
+    <!-- Morphe -->
+    <string name="accent_color_presets">Destacar color</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="theme_preview_title">Previsualización del tema</string>
+    <!-- Morphe -->
+    <string name="theme_presets">Ajustes predeterminados del tema</string>
+    <!-- Morphe -->
+    <string name="theme_preset_default">Seguir sistema</string>
+    <string name="theme_preset_amoled">Negro puro</string>
+    <string name="theme_preset_dynamic">Material You</string>
+    <!-- Morphe -->
+    <string name="color_channel_red">Rojo</string>
+    <string name="color_channel_green">Verde</string>
+    <string name="color_channel_blue">Azul</string>
+    <string name="theme">Tema</string>
+    <string name="safeguards">Salvaguardas</string>
+    <string name="patch_compat_check">Desactivar la comprobación de compatibilidad de versiones</string>
+    <string name="patch_compat_check_description">No restringir parches a versiones de aplicaciones compatibles</string>
+    <string name="patch_compat_check_confirmation">"La selección de parches incompatibles puede provocar que la aplicación se rompa.
+
+¿Deseas continuar de todos modos?"</string>
+    <string name="suggested_version_safeguard">Requerir versión de aplicación sugerida</string>
+    <string name="suggested_version_safeguard_description">Forzar la selección de la versión de aplicación sugerida</string>
+    <string name="suggested_version_safeguard_confirmation">"Seleccionar una aplicación que no sea la versión sugerida puede causar problemas inesperados.
+
+¿Desea continuar de todos modos?"</string>
+    <string name="patch_selection_safeguard">Permitir cambiar la selección y las opciones del parche</string>
+    <string name="patch_selection_safeguard_description">No impedir seleccionar o deseleccionar parches y personalizar opciones</string>
+    <string name="patch_selection_safeguard_confirmation">"Cambiar la selección de parches puede causar problemas inesperados.
+
+¿Habilitar de todos modos?"</string>
+    <string name="universal_patches_safeguard">Mostrar &amp; permitir el uso de parches universales</string>
+    <string name="universal_patches_safeguard_description">No ocultar parches universales ni impedir su uso</string>
+    <string name="universal_patches_profile_blocked_title">Parches universales deshabilitados</string>
+    <string name="universal_patches_profile_blocked_description">Este perfil de parche contiene parches universales. Habilite “%1$s” en la configuración avanzada para usarlo.</string>
+    <string name="universal_patches_app_blocked_description">Esta aplicación contiene parches universales. Habilite “%1$s” en la configuración avanzada para continuar.</string>
+    <string name="import_keystore">Importar keystore</string>
+    <string name="import_keystore_description">Importar un keystore personalizado</string>
+    <string name="import_keystore_dialog_title">Introducir credenciales del keystore</string>
+    <string name="import_keystore_dialog_description">Necesitarás ingresar las credenciales del almacén para importarlo.</string>
+    <string name="import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
+    <string name="import_keystore_dialog_password_field">Contraseña</string>
+    <string name="import_keystore_dialog_button">Importar</string>
+    <string name="import_keystore_wrong_credentials">Credenciales de almacén de claves incorrectas</string>
+    <string name="import_keystore_success">Almacén de claves importado</string>
+    <string name="export_keystore">Exportar almacén de claves</string>
+    <string name="export_keystore_description">Exporta el almacén de claves actual</string>
+    <string name="export_keystore_unavailable">No hay almacén de claves para exportar</string>
+    <string name="export_keystore_success">Almacén de claves exportado</string>
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <string name="regenerate_keystore_success">El almacén de claves ha sido reemplazado con éxito</string>
+    <string name="import_patch_selection">Importar selección de parches</string>
+    <string name="import_patch_selection_description">Importar selección de parche desde un archivo JSON</string>
+    <string name="import_patch_selection_fail">No se pudo importar la selección de parches: %s</string>
+    <string name="import_patch_selection_success">Selección de parche importada</string>
+    <string name="import_patch_bundles">Importar paquetes de parches</string>
+    <string name="import_patch_bundles_description">Restaurar paquetes de parches remotos desde un archivo JSON</string>
+    <string name="import_patch_bundles_fail">No se pudieron importar los paquetes de parches: %s</string>
+    <string name="import_patch_bundles_in_progress">Importando…</string>
+    <string name="import_patch_bundles_success">Se importaron %d paquetes de parches</string>
+    <string name="import_patch_bundles_updated">Se actualizaron %d paquetes de parches</string>
+    <string name="import_patch_bundles_none">No se importaron nuevos paquetes de parches</string>
+    <string name="import_patch_bundles_banner_title">Importando paquetes de parches</string>
+    <string name="import_patch_bundles_banner_subtitle">%1$d de %2$d procesados</string>
+    <string name="import_patch_bundles_banner_steps">Paso %1$d de %2$d</string>
+    <string name="import_patch_profiles">Importar perfiles de parches</string>
+    <string name="import_patch_profiles_description">Importar perfiles de parches guardados desde un archivo JSON</string>
+    <string name="import_patch_profiles_fail">No se pudieron importar los perfiles de parche: %s</string>
+    <string name="import_patch_profiles_success">Perfiles de parche %d importados</string>
+    <string name="import_patch_profiles_partial">Perfiles de parche importados %1$d con %2$d omitidos</string>
+    <string name="import_patch_profiles_skipped">Se omitieron %d perfiles de parche duplicados</string>
+    <string name="import_patch_profiles_none">No se importó ningún perfil de parche</string>
+    <string name="import_manager_settings">Configuración del administrador de importación</string>
+    <string name="import_manager_settings_description">Restaura la configuración guardada del administrador desde un archivo JSON</string>
+    <string name="import_manager_settings_fail">No se pudo importar la configuración del administrador: %s</string>
+    <string name="import_manager_settings_success">Configuración del administrador importada</string>
+    <string name="export_patch_selection">Exportar selección de parches</string>
+    <string name="export_patch_selection_description">Exportar selección de parches a un archivo JSON</string>
+    <string name="export_patch_selection_fail">No se pudo exportar la selección de parches: %s</string>
+    <string name="export_patch_selection_success">Selección de parches exportada</string>
+    <string name="export_patch_bundles">Exportar paquetes de parches</string>
+    <string name="export_patch_bundles_description">Guardar paquetes de parches remotos importados en un archivo JSON</string>
+    <string name="export_patch_bundles_fail">Error al exportar paquetes de parches: %s</string>
+    <string name="export_patch_bundles_success">Se exportaron %d paquetes de parches</string>
+    <string name="export_patch_bundles_partial">Se exportaron %1$d paquetes de parches. No se pudieron exportar algunos paquetes porque se agregaron localmente.</string>
+    <string name="bundle_type_remote">Remoto</string>
+    <string name="bundle_type_local">Local</string>
+    <string name="bundle_type_preinstalled">Preinstalado</string>
+    <string name="bundle_created_at">Creado el %1$s</string>
+    <string name="bundle_updated_at">Actualizado el %1$s</string>
+    <string name="bundle_changelog">Registro de cambios</string>
+    <string name="bundle_view_changelog">Ver el último registro de cambios</string>
+    <string name="bundle_changelog_error">No se pudo cargar el registro de cambios: %s</string>
+    <string name="bundle_changelog_retry">Reintentar</string>
+    <string name="bundle_changelog_empty">No hay registro de cambios disponible</string>
+    <string name="export_patch_profiles">Exportar perfiles de parche</string>
+    <string name="export_patch_profiles_description">Exportar todos los perfiles de parche a un archivo JSON</string>
+    <string name="export_patch_profiles_fail">No se pudieron exportar los perfiles de parche: %s</string>
+    <string name="export_patch_profiles_success">Se exportaron %d perfiles de parche</string>
+    <string name="export_patch_profiles_empty">No hay perfiles de parche para exportar</string>
+    <string name="export_manager_settings">Exportar configuración del administrador</string>
+    <string name="export_manager_settings_description">Guardar toda la configuración del administrador en un archivo JSON</string>
+    <string name="export_manager_settings_fail">No se pudo exportar la configuración del administrador: %s</string>
+    <string name="export_manager_settings_success">Configuración del administrador exportada</string>
+    <string name="reset_patch_selection">Restablecer selección de parches</string>
+    <string name="reset_patch_selection_description">Restablecer la selección de parches almacenada</string>
+    <string name="reset_patch_options">Restablecer opciones de parche</string>
+    <string name="reset_patch_options_description">Restablecer las opciones de parche almacenadas</string>
+    <string name="reset_patch_selection_success">La selección de parches se ha restablecido</string>
+    <string name="patch_selection_deselected_all_toast">Desmarcar todos los parches</string>
+    <string name="patch_selection_deselected_bundle_toast">Todos los parches desmarcados en %s</string>
+    <string name="patch_selection_no_selected_bundle_toast">No hay parches para desmarcar en %s</string>
+    <string name="patch_selection_selected_all_toast">Todos los parches seleccionados</string>
+    <string name="patch_selection_select_all_empty_toast">No hay parches disponibles para seleccionar</string>
+    <string name="patch_selection_selected_bundle_toast">Todos los parches seleccionados en %s</string>
+    <string name="patch_selection_select_bundle_empty_toast">No hay parches seleccionables en %s</string>
+    <string name="patch_selection_all_actions_hidden_toast">Todos los botones de acción están ocultos, habilita al menos uno en la configuración</string>
+    <string name="patch_selection_reset_bundle_toast">Restablecer valores predeterminados para %s</string>
+    <string name="patch_selection_button_label_all">Desmarcar todos</string>
+    <string name="patch_selection_button_label_bundle">Desmarcar paquete</string>
+    <string name="patch_selection_button_label_defaults">Todos los valores predeterminados</string>
+    <string name="patch_selection_button_label_select_bundle">Seleccionar paquete</string>
+    <string name="patch_selection_button_label_select_all">Seleccionar todos</string>
+    <string name="patch_selection_button_label_undo_action">Deshacer acción</string>
+    <string name="patch_selection_button_label_redo_action">Rehacer acción</string>
+    <string name="patch_selection_history_undo">Deshizo %1$s</string>
+    <string name="patch_selection_history_redo">Rehizo %1$s</string>
+    <string name="patch_selection_action_all_defaults">Todos los valores predeterminados</string>
+    <string name="patch_selection_action_deselect_all">Desmarcar todo</string>
+    <string name="patch_selection_action_select_all">Seleccionar todo</string>
+    <string name="patch_selection_action_select_bundle">Seleccionar paquete “%1$s”</string>
+    <string name="patch_selection_action_deselect_bundle">Desmarcar bundle \"%1$s\"</string>
+    <string name="patch_selection_action_bundle_defaults">Valores predeterminados del paquete para “%1$s”</string>
+    <string name="disable_patch_selection_confirmations">Desactivar confirmaciones de acciones</string>
+    <string name="disable_patch_selection_confirmations_description">Omitir cuadros de diálogo de confirmación para acciones de selección de parches</string>
+    <string name="disable_patch_selection_confirmations_warning">Desactivar las confirmaciones puede provocar cambios masivos no intencionados.</string>
+    <string name="patch_selection_collapse_on_toggle">Contraer acciones después de alternar parches</string>
+    <string name="patch_selection_collapse_on_toggle_description">Ocultar automáticamente los botones de acción de selección de parches cada vez que seleccione o desmarque un parche</string>
+    <string name="patch_selection_action_order_title">Orden de los botones de acción de selección de parches</string>
+    <string name="patch_selection_action_order_description">Elija el orden de diseño para los botones de acción de selección de parches</string>
+    <string name="patch_selection_action_visibility_title">Ocultar botones de acción del selector de parches</string>
+    <string name="patch_selection_action_visibility_description">Seleccionar qué botones de acción del selector de parches se muestran</string>
+    <string name="patch_selection_action_visibility_reset">Mostrar todos los botones de acción</string>
+    <string name="patch_selection_action_order_reset">Restablecer el orden por defecto</string>
+    <string name="patch_selection_confirm_deselect_bundle_title">¿Desmarcar paquete?</string>
+    <string name="patch_selection_confirm_deselect_bundle_message">¿Desmarcar todos los parches seleccionados de %1$s?</string>
+    <string name="patch_selection_confirm_deselect_all_title">Desmarcar todos los parches</string>
+    <string name="patch_selection_confirm_deselect_all_message">Esto elimina todos los parches seleccionados en todos los paquetes.</string>
+    <string name="patch_selection_confirm_bundle_defaults_title">¿Restablecer los valores predeterminados del paquete?</string>
+    <string name="patch_selection_confirm_bundle_defaults_message">Esto restaura las configuraciones predeterminadas recomendadas para %1$s.</string>
+    <string name="patch_selection_confirm_select_bundle_title">¿Seleccionar paquete?</string>
+    <string name="patch_selection_confirm_select_bundle_message">¿Seleccionar todos los parches proporcionados por %1$s?</string>
+    <string name="patch_selection_confirm_select_all_title">¿Seleccionar todos los parches?</string>
+    <string name="patch_selection_confirm_select_all_message">Esto selecciona todos los parches de todos los paquetes.</string>
+    <string name="patch_selection_button_label_reset_bundle">Valores predeterminados del paquete</string>
+    <string name="patch_profile_save_label">Guardar perfil</string>
+    <string name="patch_selection_toggle_expand">Mostrar acciones</string>
+    <string name="patch_selection_toggle_collapse">Ocultar acciones</string>
+    <string name="patch_selection_reset_all">Restablecer selección de parches globalmente</string>
+    <string name="patch_selection_reset_all_dialog_description">"Está a punto de restablecer todas las selecciones de parches. Deberá seleccionar manualmente cada parche de nuevo.
+
+Los perfiles de parches no se ven afectados."</string>
+    <string name="patch_selection_reset_all_description">Restablece todas las selecciones de parches</string>
+    <string name="patch_selection_reset_dialog_title">¿Restablecer valores predeterminados de parches?</string>
+    <string name="patch_selection_reset_dialog_message">Esto restaurará sus selecciones y opciones de parches a sus valores recomendados predeterminados.</string>
+    <string name="patch_selection_reset_package">Restablecer selección de parches para la aplicación</string>
+    <string name="patch_selection_reset_package_dialog_description">"Estás a punto de restablecer la selección de parches para la aplicación \"%s\". Tendrás que seleccionar manualmente cada parche de nuevo.
+
+Los perfiles de parches no se ven afectados."</string>
+    <string name="patch_selection_reset_package_description">Restablece la selección de parches para una sola aplicación</string>
+    <string name="patch_selection_reset_patches">Restablecer selección de parches (individual)</string>
+    <string name="patch_selection_reset_patches_dialog_description">"Estás a punto de restablecer la selección de parches para \"%s\". Tendrás que seleccionar manualmente cada parche de nuevo.
+
+Los perfiles de parches no se ven afectados."</string>
+    <string name="patch_selection_reset_patches_description">Restablece la selección de parches para una colección específica de parches</string>
+    <string name="patch_options_reset_package">Restablecer opciones de parches para la aplicación</string>
+    <string name="patch_options_reset_package_dialog_description">"Estás a punto de restablecer las opciones de parches para la aplicación \"%s\". Tendrás que volver a aplicar cada opción de nuevo.
+
+Los perfiles de parches no se ven afectados."</string>
+    <string name="patch_options_reset_package_description">Restablece las opciones de parches para una sola aplicación</string>
+    <string name="patch_options_reset_patches">Restablecer opciones de parches (individual)</string>
+    <string name="patch_options_reset_patches_dialog_description">"Estás a punto de restablecer las opciones de parches para \"%s\". Tendrás que volver a aplicar cada opción de nuevo.
+
+Los perfiles de parches no se ven afectados."</string>
+    <string name="patch_options_reset_patches_description">Restablece las opciones de parches para una colección específica de parches</string>
+    <string name="patch_options_reset_all">Restablecer opciones de parche globalmente</string>
+    <string name="patch_options_reset_all_dialog_description">"Estás a punto de restablecer todas las opciones de parche. Tendrás que volver a aplicar cada opción.
+
+Los perfiles de parche no se ven afectados."</string>
+    <string name="patch_options_reset_all_description">Restablece todas las opciones de parche</string>
+    <string name="download_settings">Ajustes de descarga</string>
+    <string name="downloader_auto_save_title">Guardar automáticamente los APK descargados</string>
+    <string name="downloader_auto_save_description">Conserva los APK descargados a través de plugins para su reutilización. Desactiva para eliminarlos después de parchear.</string>
+    <string name="downloader_plugins">Plugins</string>
+    <string name="downloader_plugin_state_trusted">Confiable</string>
+    <string name="downloader_plugin_state_failed">Error al cargar. Toca para más detalles</string>
+    <string name="downloader_plugin_state_untrusted">No confiable</string>
+    <string name="downloader_plugin_trust_dialog_title">¿Confiar en el plugin?</string>
+    <string name="downloader_plugin_revoke_trust_dialog_title">¿Revocar confianza?</string>
+    <string name="downloader_plugin_trust_dialog_body">"Nombre del paquete: %1$s
+Firma (SHA-256): %2$s"</string>
+    <string name="downloader_plugin_view_error">Ver detalles del error</string>
+    <string name="downloader_plugin_failed_dialog_body">No se pudo cargar \"%1$s\". Puedes ver los detalles del error o desinstalar el complemento.</string>
+    <string name="downloader_plugin_uninstall_title">¿Desinstalar complemento?</string>
+    <string name="downloader_plugin_uninstall_description">¿Estás seguro de que quieres desinstalar \"%1$s\"?</string>
+    <string name="downloader_plugin_delete_apps_title">Eliminar aplicaciones seleccionadas</string>
+    <string name="downloader_plugin_delete_apps_description">¿Estás seguro de que quieres eliminar las aplicaciones seleccionadas?</string>
+    <string name="downloader_settings_no_apps">No se encontraron aplicaciones descargadas.</string>
+    <string name="search_apps">Buscar aplicaciones…</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="edit">Editar</string>
+    <string name="dialog_input_placeholder">Valor</string>
+    <string name="reset">Restablecer</string>
+    <string name="share">Compartir</string>
+    <string name="patch">Parche</string>
+    <string name="select_from_storage">Seleccionar del almacenamiento</string>
+    <string name="select_from_storage_description">Selecciona un archivo APK del almacenamiento usando el selector de archivos</string>
+    <string name="type_anything">Escribe cualquier cosa para continuar</string>
+    <string name="search">Buscar parches…</string>
+    <string name="apply">Aplicar</string>
+    <string name="help">Ayuda</string>
+    <string name="back">Atrás</string>
+    <string name="warning">Advertencia</string>
+    <string name="add">Añadir</string>
+    <string name="close">Cerrar</string>
+    <string name="clear">Limpiar</string>
+    <string name="system">Sistema</string>
+    <string name="light">Claro</string>
+    <string name="dark">Oscuro</string>
+    <string name="black">Negro</string>
+    <string name="downloaded_apps">Aplicaciones descargadas</string>
+    <string name="process_runtime">Ejecutar Patcher en otro proceso</string>
+    <string name="process_runtime_description">Acelera el parcheo usando un proceso separado</string>
+    <string name="process_runtime_description_not_available">Esta función requiere Android 11 o superior</string>
+    <string name="strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
+    <string name="strip_unused_libs_description">Eliminar bibliotecas nativas de arquitecturas de CPU no compatibles de las aplicaciones parcheadas</string>
+    <string name="process_runtime_memory_limit">Límite de memoria del proceso de parcheo</string>
+    <string name="process_runtime_memory_limit_description">La cantidad máxima de memoria que el proceso de parcheo puede usar (en megabytes)</string>
+    <string name="reset_to_recommended">Restablecer a recomendado</string>
+    <string name="patcher_auto_collapse_steps">Contraer automáticamente los pasos completados del parcheador</string>
+    <string name="patcher_auto_collapse_steps_description">Contraer automáticamente cada widget de progreso del parcheador después de que todos sus pasos finalicen</string>
+    <string name="patch_bundle_rename">Renombrar paquete de parches</string>
+    <string name="patch_profile_view_options">Ver opciones</string>
+    <string name="patch_profile_patch_options_title">Opciones para %1$s</string>
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <string name="app_exporting">Exportación de aplicaciones</string>
+    <string name="export_name_format">Formato del nombre de archivo de exportación</string>
+    <string name="export_name_format_description">Personaliza el nombre de archivo predeterminado para las aplicaciones parcheadas exportadas</string>
+    <string name="export_name_format_dialog_title">Formato del nombre de archivo de exportación</string>
+    <string name="export_name_format_dialog_supporting">Utiliza los marcadores de posición a continuación para crear un nombre de archivo. La extensión .apk se agrega automáticamente si falta.</string>
+    <string name="export_name_format_preview_label">Vista previa</string>
+    <string name="export_name_format_variables">Variables</string>
+    <string name="export_name_format_reset">Restablecer a los valores predeterminados</string>
+    <string name="export_name_format_error_blank">El formato del nombre de archivo no puede estar en blanco.</string>
+    <string name="export_name_format_current">Patrón actual: %1$s</string>
+    <string name="export_name_format_insert">Insertar</string>
+    <string name="export_name_variable_app_name">Nombre de la aplicación</string>
+    <string name="export_name_variable_app_name_description">Reemplazado con el nombre de pantalla de la aplicación.</string>
+    <string name="export_name_variable_package_name">Nombre del paquete</string>
+    <string name="export_name_variable_package_name_description">Reemplazado con el nombre del paquete de la aplicación.</string>
+    <string name="export_name_variable_app_version">Versión de la aplicación</string>
+    <string name="export_name_variable_app_version_description">Reemplazado con el nombre de la versión de la aplicación.</string>
+    <string name="export_name_variable_patches_version">Versión de los parches</string>
+    <string name="export_name_variable_patches_version_description">Reemplazado con la(s) versión(es) del paquete de parcheo aplicado(s).</string>
+    <string name="export_name_variable_bundle_names">Nombres de los paquetes de parcheo</string>
+    <string name="export_name_variable_bundle_names_description">Reemplazado con el nombre del paquete de parcheo aplicado.</string>
+    <string name="export_name_variable_manager_version">Versión del gestor</string>
+    <string name="export_name_variable_manager_version_description">Reemplazado con la versión del gestor.</string>
+    <string name="export_name_variable_timestamp">Marca de tiempo</string>
+    <string name="export_name_variable_timestamp_description">Reemplazado con la hora actual (yyyyMMdd-HHmmss).</string>
+    <string name="export_name_variable_date">Fecha</string>
+    <string name="export_name_variable_date_description">Reemplazado con la fecha actual (yyyyMMdd).</string>
+    <string name="debug_logs_export">Exportar registros de depuración</string>
+    <string name="debug_logs_export_read_failed">No se pudieron leer los registros (código de salida %d)</string>
+    <string name="debug_logs_export_failed">Error al exportar registros</string>
+    <string name="debug_logs_export_success">Registros exportados</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="api_url_dialog_description">Cambia la URL de la API de Morphe. Morphe usa la API para descargar parches y actualizaciones.</string>
+    <string name="api_url_dialog_warning">Morphe se conecta a la API para descargar parches y actualizaciones. Asegúrate de que confías en ella.</string>
+    <string name="api_url_dialog_save">Establecer</string>
+    <string name="api_url_dialog_reset">Restablecer URL de la API</string>
+    <!-- Morphe -->
+    <string name="github_pat_description">Token de Acceso Personal de GitHub necesario para la integración con GitHub</string>
+    <string name="set_github_pat_dialog_title">Establecer PAT de GitHub</string>
+    <string name="set_github_pat_dialog_description">Establece un Token de Acceso Personal de GitHub para poder añadir Pull Requests como fuentes externas. Crea un PAT con el ámbito public_repo</string>
+    <string name="include_github_pat_in_exports_label">Incluir en la exportación de configuraciones</string>
+    <string name="include_github_pat_in_exports_supporting">Añade este PAT a la configuración exportada del gestor</string>
+    <string name="include_github_pat_in_exports_warning">No compartas tu PAT. Si lo incluyes en una exportación de configuración, mantén ese archivo privado porque contiene el token.</string>
+    <string name="app_language">Idioma de la aplicación</string>
+    <string name="language_dialog_title">Elige el idioma de la app</string>
+    <string name="language_option_system">Usar idioma del dispositivo</string>
+    <string name="device_memory_limit_format">%1$d MB (Normal) - %2$d MB (Grande)</string>
+    <string name="patches_force_download">Forzar descarga de todos los paquetes de parches</string>
+    <string name="patches_reset">Restablecer paquetes de parches</string>
+    <string name="storage">Almacenamiento</string>
+    <string name="no_patch_found">No se encontraron parches. Revisa tus parches</string>
+    <string name="tab_apps">Aplicaciones</string>
+    <string name="tab_patches">Paquetes de parches</string>
+    <string name="tab_profiles">Perfiles de parches</string>
+    <string name="delete">Eliminar</string>
+    <string name="disable">Deshabilitar</string>
+    <string name="enable">Habilitar</string>
+    <string name="patch_bundle_disabled_toast">Deshabilitados %d paquetes</string>
+    <string name="patch_bundle_enabled_toast">Habilitados %d paquetes</string>
+    <string name="patches_disable_single_dialog_description">¿Deshabilitar \"%s\"?</string>
+    <string name="patches_enable_single_dialog_description">¿Habilitar \"%s\"?</string>
+    <string name="refresh">Actualizar</string>
+    <string name="download_apk">Descargar archivo APK</string>
+    <string name="patches_download_fail">Error al descargar parches: %s</string>
+    <string name="patches_replace_fail">Error al importar parches: %s</string>
+    <string name="no_patched_apps_found">No se encontraron aplicaciones parcheadas</string>
+    <string name="patches_selected">%s Paquetes de parcheo seleccionados</string>
+    <string name="patch_profiles_selected">%1$d Perfil de parche seleccionado</string>
+    <string name="selected_apps_count">%1$d Aplicación seleccionada</string>
+    <string name="selected_apps_delete_dialog_description">¿Eliminar las aplicaciones seleccionadas del gestor? Las aplicaciones instaladas en tu dispositivo permanecerán intactas.</string>
+    <string name="incompatible_patches">Parches incompatibles</string>
+    <string name="universal_patches">Parches universales</string>
+    <string name="patch_selection_reset_toast">La selección y las opciones de parches se han restablecido a los valores predeterminados recomendados</string>
+    <string name="patch_options_reset_toast">Las opciones de parches se han restablecido</string>
+    <string name="non_suggested_version_warning_title">Versión no sugerida</string>
+    <string name="non_suggested_version_warning_description">"La versión de la aplicación que has seleccionado no coincide con la versión sugerida.
+Por favor, utiliza la versión sugerida: %s
+
+Para continuar de todos modos, desactiva \"Requerir la versión sugerida de la aplicación\" en la configuración avanzada."</string>
+    <string name="selection_warning_description">"Se recomienda usar la selección y las opciones de parches predeterminadas. Cambiarlas puede generar problemas inesperados.
+
+Necesitas activar \"Permitir cambiar la selección y las opciones de parches\" en la configuración avanzada antes de alternar los parches."</string>
+    <string name="patch_profile_save_action">Guardar perfil de parche</string>
+    <string name="patch_profile_select_bundles_title">Seleccionar paquetes de parches</string>
+    <string name="patch_profile_select_bundles_description">Elija los paquetes de parches que se incluirán en este perfil.</string>
+    <string name="patch_profile_select_bundles_empty">No hay paquetes de parches disponibles para guardar.</string>
+    <string name="patch_profile_name_title">Nombre del perfil de parches</string>
+    <string name="patch_profile_name_description">Introduzca un nombre para este perfil de parches o seleccione uno a continuación para actualizarlo</string>
+    <string name="patch_profile_update_existing_title">Actualizar perfil existente</string>
+    <string name="patch_profile_update_existing_description">Toque un perfil guardado para sobrescribirlo o deje todo sin seleccionar para crear un nuevo perfil.</string>
+    <string name="patch_profile_name_hint">Nombre del perfil</string>
+    <string name="patch_profile_saved_toast">Perfil de parches \"%1$s\" guardado</string>
+    <string name="patch_profile_duplicate_toast">El perfil de parches \"%1$s\" ya existe para esta aplicación</string>
+    <string name="patch_profile_updated_toast">Perfil de parches \"%1$s\" actualizado</string>
+    <string name="patch_profile_save_failed_toast">No se pudo guardar el perfil de parches</string>
+    <string name="patch_profile_rename">Renombrar</string>
+    <string name="patch_profile_rename_title">Renombrar perfil de parches</string>
+    <string name="patch_profile_version_override_action">Parchear configuración de versión de perfil</string>
+    <string name="patch_profile_version_override_title">Configuración de versión para \"%1$s\"</string>
+    <string name="patch_profile_version_override_message">Establecer una versión de aplicación específica para almacenar con este perfil, o apuntar a todas las versiones.</string>
+    <string name="patch_profile_version_override_label">Versión de la aplicación</string>
+    <string name="patch_profile_version_override_hint">Por ejemplo, 18.27.35</string>
+    <string name="patch_profile_version_override_all_versions">Usar todas las versiones</string>
+    <string name="patch_profile_version_override_saved_toast">Versión del perfil actualizada</string>
+    <string name="patch_profile_version_override_failed_toast">Error al actualizar la versión del perfil</string>
+    <string name="patch_profile_version_override_set_to_all">No se introdujo ninguna versión, se guardó como \"%1$s\"</string>
+    <string name="patch_profile_version_conflict_title">¿Mantener la anulación de versión?</string>
+    <string name="patch_profile_version_conflict_message">"Versión actual: %1$s
+Versión entrante: %2$s
+¿Cuál se debe guardar en este perfil?"</string>
+    <string name="patch_profile_version_conflict_use_new">Usar versión entrante</string>
+    <string name="patch_profile_version_conflict_keep_existing">Mantener versión existente</string>
+    <string name="patch_profile_empty_state">Guarda una configuración desde la pantalla de selección de parches para verla aquí.</string>
+    <string name="patch_profile_missing_bundles_toast">Algunos paquetes de este perfil no están disponibles y se omitirán.</string>
+    <string name="patch_profile_changed_patches_toast">Algunos parches u opciones de este perfil ya no coinciden con el paquete y se omitieron.</string>
+    <string name="patch_profile_no_available_bundles_toast">Ningún paquete de este perfil está disponible. Actualiza tus paquetes e inténtalo de nuevo.</string>
+    <string name="patch_profile_launch_error">No se pudo abrir este perfil de parches.</string>
+    <string name="patch_profile_show_more">Mostrar más</string>
+    <string name="patch_profile_show_less">Mostrar menos</string>
+    <string name="patch_profile_created_at">Creado el %1$s</string>
+    <string name="patch_profile_bundle_unavailable_suffix">%1$s (no disponible)</string>
+    <string name="patch_profile_bundle_change_uid">Cambiar UID</string>
+    <string name="patch_profile_bundle_change_uid_title">Cambiar UID para %1$s</string>
+    <string name="patch_profile_bundle_change_uid_invalid">Introduce un UID numérico válido.</string>
+    <string name="patch_profile_bundle_change_uid_success">UID del paquete actualizado a %1$d.</string>
+    <string name="patch_profile_bundle_change_uid_not_found">No se encontró ningún paquete de parche local con el UID %1$d.</string>
+    <string name="patcher_process_exit_message">El proceso de aplicación de parches salió con el código %1$d.</string>
+    <string name="patcher_memory_adjustment_title">El aplicador de parches se quedó sin memoria</string>
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <string name="patcher_memory_adjustment_retry">Intentar de nuevo</string>
+    <string name="patcher_memory_adjustment_dismiss">Descartar</string>
+    <string name="patcher_missing_patch_title">La selección de parches necesita atención</string>
+    <string name="patcher_preflight_missing_patch_remove">Quitar parches faltantes</string>
+    <string name="patcher_preflight_missing_patch_proceed">Continuar de todos modos</string>
+    <string name="patcher_preflight_missing_patch_message">"Los siguientes parches no están disponibles en el paquete actual:
+%1$s
+Puedes eliminarlos automáticamente, ajustar la selección, o continuar de todos modos."</string>
+    <string name="patcher_missing_patch_review">Revisar selección</string>
+    <string name="patch_selector_missing_patch_title">Re-seleccionar parches faltantes</string>
+    <string name="patch_selector_missing_patch_message">"Estos parches deben ser re-seleccionados:
+%1$s
+Habilítalos de nuevo (o elige alternativas) y luego intenta aplicar los parches una vez más."</string>
+    <string name="patch_profile_delete_multiple_dialog_description">¿Eliminar los perfiles de parches seleccionados?</string>
+    <string name="this_version">Esta versión</string>
+    <string name="universal">Cualquier aplicación</string>
+    <string name="search_patches">Buscar parches</string>
+    <string name="app_version_not_compatible">"Este parche no es compatible con la versión de la aplicación seleccionada (%1$s).
+
+Solo es compatible con la siguiente versión: %2$s."</string>
+    <string name="failed_to_load_apk">Error al cargar APK</string>
+    <string name="loading">Cargando…</string>
+    <string name="not_installed">No instalada</string>
+    <string name="installed">Instalado</string>
+    <string name="app_info">Información de la aplicación</string>
+    <string name="uninstall">Desinstalar</string>
+    <string name="repatch">Reaplicar parche</string>
+    <string name="install_type">Tipo de instalación</string>
+    <string name="package_name">Nombre del paquete</string>
+    <string name="original_package_name">Nombre del paquete original</string>
+    <string name="applied_patches">Parches aplicados</string>
+    <string name="view_applied_patches">Ver parches aplicados</string>
+    <string name="patch_bundles_used">Paquetes de parches utilizados</string>
+    <string name="applied_patches_empty">No se han registrado parches para esta aplicación</string>
+    <string name="applied_patches_bundle_missing">Metadatos del paquete no disponibles. Se muestran los nombres de los parches guardados.</string>
+    <string name="no_patch_bundles_tracked">No se han registrado paquetes de parches para esta aplicación</string>
+    <string name="mount_install">Instalador de montaje rooteado</string>
+    <string name="mounted">Montado</string>
+    <string name="unmounted">Desmontado</string>
+    <string name="install_type_custom_installer">Instalador personalizado</string>
+    <string name="install_type_system_installer">Instalador del sistema</string>
+    <string name="install_type_mount_label">Instalador de montaje rooteado</string>
+    <string name="not_mounted">No montado</string>
+    <string name="mount">Montar</string>
+    <string name="unmount">Desmontar</string>
+    <string name="unmount_confirm_description">¿Quieres desmontar la aplicación?</string>
+    <string name="saved_install">Guardado</string>
+    <string name="failed_to_mount">Error al montar: %s</string>
+    <string name="failed_to_unmount">Error al desmontar: %s</string>
+    <string name="unpatch_app">¿Desinstalar parche?</string>
+    <string name="unpatch_description">¿Estás seguro de que quieres desinstalar este parche?</string>
+    <string name="downloader_app_not_found">El descargador no ha encontrado la aplicación</string>
+    <string name="downloader_error">Error del descargador: %s</string>
+    <string name="downloader_no_plugins_installed">No hay ningún descargador instalado.</string>
+    <string name="downloader_no_plugins_available">Hay descargadores instalados pero ninguno es de confianza. Revisa tu configuración.</string>
+    <string name="downloader_plugin_uninstall_success">Se ha desinstalado %1$s</string>
+    <string name="downloader_plugin_uninstall_failed">Error al desinstalar %1$s</string>
+    <string name="downloaded_apps_export">Exportar aplicaciones seleccionadas</string>
+    <string name="downloaded_apps_export_success">Exportadas %1$d aplicaciones</string>
+    <string name="downloaded_apps_export_failed">No se pudieron exportar las aplicaciones descargadas</string>
+    <string name="already_patched">Ya parcheado</string>
+    <string name="patch_selector_sheet_filter_title">Filtrar</string>
+    <string name="patch_selector_sheet_filter_compat_title">Compatibilidad</string>
+    <string name="patch_selector_sheet_filter_sort_title">Ordenar</string>
+    <string name="patch_selector_sheet_filter_sort_alphabetical">Alfabético</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">Tiene ajustes</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">No tiene ajustes</string>
+    <string name="string_option_menu_description">Más opciones</string>
+    <string name="option_preset_custom_value">Valor personalizado</string>
+    <string name="path_selector">Seleccionar del almacenamiento</string>
+    <string name="path_selector_parent_dir">Directorio anterior</string>
+    <string name="path_selector_dirs">Directorios</string>
+    <string name="path_selector_files">Archivos</string>
+    <string name="show_password_field">Mostrar contraseña</string>
+    <string name="hide_password_field">Ocultar contraseña</string>
+    <string name="installer_primary_title">Instalador</string>
+    <string name="installer_fallback_title">Instalador de reserva</string>
+    <string name="installer_internal_name">Instalador del sistema</string>
+    <string name="installer_internal_description">Usar el instalador de paquetes de Android</string>
+    <string name="installer_auto_saved_name">Instalador de montaje con root</string>
+    <string name="installer_auto_saved_description">Monta la APK modificada sobre la app instalada (requiere root).</string>
+    <string name="installer_shizuku_description">Instalar silenciosamente usando Shizuku o Sui.</string>
+    <string name="installer_option_none">Sin opción de recuperación</string>
+    <string name="installer_none_description">No hay instalador de recuperación configurado</string>
+    <string name="installer_status_requires_root">Requiere acceso root</string>
+    <string name="installer_status_not_supported">No compatible con esta acción.</string>
+    <string name="installer_status_shizuku_not_installed">Instala Shizuku o Sui para usar esta opción.</string>
+    <string name="installer_status_shizuku_not_running">Inicia Shizuku o Sui e inténtalo de nuevo.</string>
+    <string name="installer_status_shizuku_permission">Otorga permiso de Shizuku a Morphe desde la aplicación Shizuku.</string>
+    <string name="installer_mount_warning_title">Instalador de montaje rooteado seleccionado</string>
+    <string name="installer_mount_warning_install">Tu instalador principal está configurado como el instalador de montaje rooteado. Esta aplicación guardada no se instaló usando montaje.</string>
+    <string name="installer_mount_warning_update">Tu instalador principal está configurado como el instalador de montaje rooteado. Esta aplicación guardada no se instaló usando montaje.</string>
+    <string name="installer_mount_warning_uninstall">Tu instalador principal está configurado como el instalador de montaje rooteado. Esta aplicación guardada no se instaló usando montaje.</string>
+    <string name="installer_mount_mismatch_title">Instalador de montaje rooteado no seleccionado</string>
+    <string name="installer_mount_mismatch_install">Esta aplicación se instaló usando el instalador de montaje rooteado. Cambia tu instalador principal de nuevo para usar acciones de montaje, luego monta.</string>
+    <string name="installer_mount_mismatch_update">Esta aplicación se instaló usando el instalador de montaje rooteado. Cambia tu instalador principal de nuevo para usar acciones de montaje, luego vuelve a montar.</string>
+    <string name="installer_mount_mismatch_uninstall">Esta aplicación se instaló usando el instalador de montaje rooteado. Cambia tu instalador principal de nuevo para usar acciones de montaje, luego desmonta.</string>
+    <string name="mount_version_mismatch_title">Fallo de montaje</string>
+    <string name="mount_version_mismatch_message">La versión de la aplicación stock (%2$s) no coincide con la versión de la aplicación parcheada (%1$s). Monta la versión de stock coincidente y vuelve a intentarlo.</string>
+    <string name="installer_status_shizuku_unsupported">La versión instalada de Shizuku no es compatible.</string>
+    <string name="installer_action_open_shizuku">Abrir Shizuku</string>
+    <string name="installer_shizuku_launch_failed">No se puede abrir Shizuku. Inícielo manualmente e inténtelo de nuevo.</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="installer_custom_tab_saved">Guardado</string>
+    <string name="installer_custom_saved_note">Instaladores añadidos manualmente por el usuario a los menús de selección de instaladores Principal y de Reserva.</string>
+    <string name="installer_custom_tab_auto_saved">Guardado automático</string>
+    <string name="installer_custom_auto_note">Instaladores detectados y añadidos automáticamente a los menús de selección de instaladores primarios y de reserva.</string>
+    <string name="installer_custom_tab_discover">Descubrir</string>
+    <string name="installer_custom_close">Cerrar</string>
+    <string name="installer_custom_manage_description">Guarda actividades de instaladores de terceros para usarlas como instaladores primarios o de respaldo</string>
+    <string name="installer_custom_input_label">Nombre del paquete</string>
+    <string name="installer_custom_package_hint">Escribe un nombre de paquete y pulsa \"Buscar instaladores\" para descubrir actividades de instalador</string>
+    <string name="installer_custom_lookup">Buscar instaladores</string>
+    <string name="installer_custom_lookup_empty">Primero introduce un nombre de paquete.</string>
+    <string name="installer_custom_searching">Buscando actividades del instalador…</string>
+    <string name="installer_custom_lookup_found">Instalador encontrado: %1$d.</string>
+    <string name="installer_custom_action_add">Guardar instalador</string>
+    <string name="installer_custom_action_remove">Eliminar instalador guardado</string>
+    <string name="installer_custom_builtin_indicator">Guardado automáticamente</string>
+    <string name="installer_custom_saved_indicator">Guardado</string>
+    <string name="installer_custom_lookup_none">No se han encontrado actividades del instalador para %1$s.</string>
+    <string name="installer_custom_candidates_title">Actividades disponibles para %1$s</string>
+    <string name="installer_custom_saved_header">Instaladores guardados</string>
+    <string name="installer_custom_empty">Todavía no hay instaladores personalizados guardados.</string>
+    <string name="installer_custom_added">Instalador personalizado guardado.</string>
+    <string name="installer_custom_exists">Ese instalador ya está guardado.</string>
+    <string name="installer_custom_removed">Instalador personalizado eliminado.</string>
+    <string name="installer_custom_remove_failed">No se ha podido eliminar el instalador. Inténtalo de nuevo.</string>
+    <string name="installer_hint_generic">La instalación ha fallado. Inténtalo de nuevo o cambia a un instalador diferente.</string>
+    <string name="installer_hint_blocked">La instalación fue bloqueada por Android. Revisa Play Protect o la configuración de seguridad.</string>
+    <string name="installer_hint_conflict">Otra aplicación con este nombre de paquete ya está instalada. Desinstálala antes de continuar.</string>
+    <string name="installer_hint_incompatible">La APK no es compatible con este dispositivo o versión de Android.</string>
+    <string name="installer_hint_invalid">La APK es inválida o está corrupta.</string>
+    <string name="installer_hint_storage">No hay suficiente espacio de almacenamiento para la instalación.</string>
+    <string name="installer_hint_timeout">La instalación ha expirado. Inténtalo de nuevo.</string>
+    <string name="installer_hint_aborted">La instalación fue cancelada.</string>
+    <string name="installer_hint_with_reason">"%1$s
+
+Detalles: %2$s"</string>
+    <string name="installer_external_launched">Abriendo %1$s…</string>
+    <string name="installer_external_timeout">%1$s no confirmó la instalación. Revisa la otra aplicación e inténtalo de nuevo.</string>
+    <string name="installer_external_success">%1$s informó de una instalación exitosa.</string>
+    <string name="installer_external_finished_no_change">%1$s completado sin instalar la aplicación. Verifica el instalador para un mensaje de error y prueba de nuevo.</string>
+    <string name="installing_ellipsis">Instalando…</string>
+    <string name="uninstalling_ellipsis">Desinstalando…</string>
+    <string name="mounting_ellipsis">Montando…</string>
+    <string name="unmounting">Desmontando…</string>
+    <string name="install_app">Instalar</string>
+    <string name="install_app_success">Instalado correctamente</string>
+    <string name="install_app_fail_title">Fallo en la instalación</string>
+    <string name="install_app_fail">Error al instalar la aplicación: %s</string>
+    <string name="install_app_fail_missing_stock">Falta el original APK para una instalación montada.</string>
+    <string name="mount_split_not_supported">Un instalador montado con root no admite aplicaciones divididas. Usar el instalador del sistema en su lugar.</string>
+    <string name="mount_app_fail_title">Fallo al montar</string>
+    <string name="install_timeout_message">La instalación no finalizó. Comprueba el diálogo del instalador del sistema y vuelve a intentarlo.</string>
+    <string name="uninstall_timeout_message">La desinstalación no se completó. Revise el diálogo de desinstalación y inténtelo de nuevo.</string>
+    <string name="reinstall_app_fail">Error al reinstalar la aplicación: %s</string>
+    <string name="uninstall_app_fail">Error al desinstalar la aplicación: %s</string>
+    <string name="open_app">Abrir</string>
+    <string name="save_apk">Guardar APK</string>
+    <string name="save_apk_success">APK guardado</string>
+    <string name="saved_app_export_success">Aplicación parcheada exportada</string>
+    <string name="saved_app_export_failed">Error al exportar la aplicación parcheada</string>
+    <string name="saved_app_removed_toast">Aplicación parcheada guardada eliminada</string>
+    <string name="saved_app_copy_removed_toast">Copia guardada eliminada</string>
+    <string name="delete_saved_app_title">Eliminar aplicación guardada</string>
+    <string name="delete_saved_app_description">Esto eliminará la entrada de la aplicación guardada y su APK almacenado.</string>
+    <string name="delete_saved_entry_title">Eliminar entrada de app guardada</string>
+    <string name="delete_saved_entry_description">Esto eliminará la entrada de la app guardada y su APK guardado. La app permanecerá instalada.</string>
+    <string name="saved_app_launch_unavailable">Instala la app antes de abrirla.</string>
+    <string name="install_saved_app">Instalar</string>
+    <string name="remount_saved_app">Remontar</string>
+    <string name="update_saved_app">Actualizar</string>
+    <string name="saved_app_install_success">App guardada instalada</string>
+    <string name="saved_app_install_failed">Error al instalar la app guardada</string>
+    <string name="saved_app_uninstall_title">¿Desinstalar copia instalada?</string>
+    <string name="saved_app_uninstall_description">Esto elimina solo la versión instalada. Tu APK guardado permanece intacto.</string>
+    <string name="saved_app_install_missing">No se encontró el APK guardado</string>
+    <string name="save_logs">Guardar registros</string>
+    <string name="plugin_activity_dialog_body">Se requiere la interacción del usuario para continuar con este complemento.</string>
+    <string name="select_install_type">Seleccionar tipo de instalación</string>
+    <string name="patcher_step_group_preparing">Preparando</string>
+    <string name="patcher_step_load_patches">Cargando parches</string>
+    <string name="patcher_step_prepare_split_apk">Fusionando APK dividido</string>
+    <string name="patcher_step_unpack">Leer archivo APK</string>
+    <string name="patcher_step_group_patching">Aplicando parches</string>
+    <string name="patcher_step_group_saving">Guardando</string>
+    <string name="patcher_step_write_patched">Escribiendo archivo APK parcheado</string>
+    <string name="patcher_step_sign_apk">Firmando archivo APK parcheado</string>
+    <string name="patcher_notification_title">Aplicando parches en curso...</string>
+    <string name="patcher_notification_text">Toca para volver al parcheador</string>
+    <string name="patcher_stop_confirm_title">Detener parcheador</string>
+    <string name="patcher_stop_confirm_description">¿Estás seguro de que quieres detener el proceso de parcheo?</string>
+    <string name="patcher_install_in_progress_title">Instalación en curso</string>
+    <string name="patcher_install_in_progress">La instalación está en curso. Por favor, espera</string>
+    <string name="patcher_install_in_progress_leave">Salir de todos modos</string>
+    <string name="patcher_install_in_progress_stay">Quedarse aquí</string>
+    <string name="patcher_mount_in_progress_title">Montaje en curso</string>
+    <string name="patcher_mount_in_progress">El montaje está en curso. Por favor, espera</string>
+    <string name="applying_patches">Aplicando parches</string>
+    <string name="applying_patch">Aplicando %s</string>
+    <string name="failed_to_execute_patch">Error al aplicar %s</string>
+    <string name="save_patched_app_dialog_title">¿Salir del parcheador?</string>
+    <string name="save_patched_app_dialog_message">Estás a punto de salir del parcheador. La aplicación parcheada se perderá a menos que la guardes para más tarde.</string>
+    <string name="save_patched_app_dialog_save">Guardar app parcheada</string>
+    <string name="save_patched_app_dialog_leave">Salir sin guardar</string>
+    <string name="save_patched_app_dialog_cancel">Permanecer en el parcheador</string>
+    <string name="save_patched_app_dialog_hint_save">Mantiene la APK parcheada accesible desde la pestaña Aplicaciones para futuras instalaciones.</string>
+    <string name="save_patched_app_dialog_hint_leave">Descarta la APK parcheada y te devuelve a la pantalla anterior.</string>
+    <string name="patched_app_saved_toast">App parcheada guardada para más tarde</string>
+    <string name="patched_app_save_failed_toast">Error al guardar la app parcheada</string>
+    <string name="step_completed">completado</string>
+    <string name="step_failed">fallido</string>
+    <string name="step_running">en ejecución</string>
+    <string name="step_waiting">esperando</string>
+    <string name="expand_content">expandir</string>
+    <string name="collapse_content">contraer</string>
+    <string name="drag_handle">reordenar</string>
+    <string name="more">Más</string>
+    <string name="less">Menos</string>
+    <string name="continue_">Continuar</string>
+    <string name="dismiss">Descartar</string>
+    <string name="version">Versión</string>
+    <string name="published">Publicado</string>
+    <string name="developer_options">Opciones de desarrollador</string>
+    <string name="developer_options_description">Opciones para depurar incidencias</string>
+    <string name="patches_update_success">Actualización correcta</string>
+    <string name="patches_update_unavailable">No hay actualización disponible</string>
+    <string name="view_patches">Ver parches</string>
+    <string name="patches_view_any_version">Cualquier versión</string>
+    <string name="patches_view_any_package">Cualquier paquete</string>
+    <string name="patches_delete_single_dialog_description">¿Estás seguro de que quieres eliminar \"%s\"?</string>
+    <string name="patches_delete_multiple_dialog_description">¿Estás seguro de que quieres eliminar los paquetes de parches seleccionados?</string>
+    <string name="about_revanced_manager">Acerca de Morphe</string>
+    <string name="revanced_manager_description">"Morphe es un proyecto experimental de código abierto enfocado en la creación de un parche moderno y optimizado de aplicaciones populares de Android
+
+Como proyecto de código abierto en su esencia, Morphe prospera con los comentarios y contribuciones de la comunidad para impulsar la innovación futura"</string>
+    <string name="here">aquí.</string>
+    <string name="update_available">Hay una actualización disponible</string>
+    <string name="ready_to_install_update">Listo para instalar la actualización</string>
+    <string name="update_completed">Actualización instalada</string>
+    <string name="install_update_manager_failed">Error al instalar la actualización</string>
+    <string name="manual_update_check">Buscar actualizaciones</string>
+    <string name="manual_update_check_description">Buscar actualizaciones manualmente</string>
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <string name="update_checking_manager">Buscar actualizaciones al iniciar</string>
+    <string name="update_checking_manager_description">Busca nuevas versiones de Morphe cuando la aplicación se inicia</string>
+    <string name="manager_prereleases">Usar versiones preliminares</string>
+    <string name="manager_prereleases_description">Usar versiones preliminares de Morphe</string>
+    <string name="update_published">Publicado el %s</string>
+    <string name="battery_optimization_notification">Las optimizaciones de la batería deben desactivarse para que Morphe funcione correctamente en segundo plano. Haz clic aquí para desactivar las optimizaciones.</string>
+    <string name="installing_manager_update">Instalando actualización…</string>
+    <string name="downloading_manager_update">Descargando actualización…</string>
+    <string name="manager_update_banner_title">Descargando actualización del administrador</string>
+    <string name="download_manager_failed">Error al descargar la actualización: %s</string>
+    <string name="save">Guardar</string>
+    <string name="save_with_count">Guardar (%1$s)</string>
+    <string name="update">Actualizar</string>
+    <string name="empty">Vacío</string>
+    <string name="just_now">Justo ahora</string>
+    <string name="minutes_ago">hace %s min</string>
+    <string name="hours_ago">hace %s h</string>
+    <string name="days_ago">hace %sd</string>
+    <string name="invalid_date">Fecha no válida</string>
+    <string name="input_dialog_value_invalid">Valor no válido</string>
+    <string name="option_required">Esta opción es obligatoria</string>
+    <string name="required_options_screen">Opciones obligatorias</string>
+    <string name="failed_to_check_updates">Error al buscar actualizaciones: %s</string>
+    <string name="no_update_available">No hay actualizaciones disponibles</string>
+    <string name="update_check">Comprobando actualizaciones…</string>
+    <string name="update_available_dialog_description">Hay una nueva versión de Morphe (%s) disponible.</string>
+    <string name="failed_to_download_update">Error al descargar la actualización: %s</string>
+    <string name="download">Descargar</string>
+    <string name="resume_download">Reanudar descarga</string>
+    <string name="download_confirmation_metered">"Actualmente te encuentras en una conexión de datos medidos, y pueden aplicarse cargos de datos de tu proveedor de servicios.
+
+¿Deseas continuar de todos modos?"</string>
+    <string name="download_update_confirmation">¿Descargar actualización?</string>
+    <string name="no_contributors_found">No se encontraron colaboradores</string>
+    <string name="select">Seleccionar</string>
+    <string name="select_deselect_all">Seleccionar o deseleccionar todo</string>
+    <string name="deselect_all">Deseleccionar todo</string>
+    <string name="deselect_bundle">Deseleccionar paquete actual</string>
+    <string name="select_patches_type_dialog_description">Añadir nuevos paquetes de revisiones desde una URL o archivos locales</string>
+    <string name="local_patches_description">Añadir paquetes de revisiones desde almacenamiento local.</string>
+    <string name="remote_patches_description">Añadir paquetes de revisiones desde una URL. Los paquetes de revisiones se pueden actualizar automáticamente.</string>
+    <string name="recommended">Recomendado</string>
+    <string name="installation_failed_dialog_title">La instalación falló</string>
+    <string name="installation_cancelled_dialog_title">Instalación cancelada</string>
+    <string name="installation_blocked_dialog_title">Instalación bloqueada</string>
+    <string name="installation_conflict_dialog_title">Conflicto de instalación</string>
+    <string name="installation_incompatible_dialog_title">Instalación incompatible</string>
+    <string name="installation_invalid_dialog_title">Instalación no válida</string>
+    <string name="installation_storage_issue_dialog_title">No hay suficiente espacio de almacenamiento</string>
+    <string name="installation_timeout_dialog_title">La instalación superó el tiempo de espera</string>
+    <string name="installation_failed_description">La instalación falló por una razón desconocida. ¿Intentar de nuevo?</string>
+    <string name="installation_aborted_description">La instalación se canceló manualmente. ¿Intentar de nuevo?</string>
+    <string name="installation_blocked_description">La instalación se bloqueó. Revisa la configuración de seguridad de tu dispositivo e inténtalo de nuevo.</string>
+    <string name="installation_conflict_description">La instalación se vio impedida por una instalación existente de la aplicación. ¿Desinstala la aplicación instalada e inténtalo de nuevo?</string>
+    <string name="installation_signature_mismatch_dialog_title">Coincidencia de firma</string>
+    <string name="installation_signature_mismatch_description">La aplicación instalada está firmada de manera diferente. Desinstala la aplicación instalada y instala esta?</string>
+    <string name="installation_incompatible_description">La aplicación es incompatible con este dispositivo. Usa una APK compatible con este dispositivo e inténtalo de nuevo.</string>
+    <string name="installation_invalid_description">La aplicación no es válida. ¿Desinstala la aplicación e inténtalo de nuevo?</string>
+    <string name="installation_storage_issue_description">La aplicación no se pudo instalar debido a espacio de almacenamiento insuficiente. Libera espacio e inténtalo de nuevo.</string>
+    <string name="installation_timeout_description">La instalación tardó demasiado. ¿Intentar de nuevo?</string>
+    <string name="reinstall">Reinstalar</string>
+    <string name="installation_signature_mismatch_confirm">Desinstalar e instalar</string>
+    <string name="show">Mostrar</string>
+    <string name="debugging">Depuración</string>
+    <string name="about_device">Acerca del dispositivo</string>
+    <string name="enter_url">Introducir URL</string>
+    <string name="next">Siguiente</string>
+    <string name="auto_update">Actualización automática</string>
+    <string name="add_patches">Añadir paquete de parches</string>
+    <string name="auto_update_description">Actualizar automáticamente cuando haya una nueva versión disponible</string>
+    <string name="patches_prereleases">Usar versiones preliminares</string>
+    <string name="patches_prereleases_description">Usar versiones preliminares de %s</string>
+    <string name="patches_url">URL del paquete de parches</string>
+    <string name="incompatible_patches_dialog">"Estos parches no son compatibles con la versión de la aplicación seleccionada (%1$s).
+
+Pulsa en los parches para ver más detalles."</string>
+    <string name="incompatible_patch">Parche incompatible</string>
+    <string name="any_version">Cualquiera</string>
+    <string name="never_show_again">No volver a mostrar</string>
+    <string name="show_manager_update_dialog_on_launch">Mostrar mensaje de actualización al iniciar</string>
+    <string name="show_manager_update_dialog_on_launch_description">Mostrar una notificación emergente cada vez que haya una nueva actualización disponible al iniciar</string>
+    <string name="failed_to_import_keystore">No se ha podido importar el almacén de claves</string>
+    <string name="export">Exportar</string>
+    <string name="confirm">Confirmar</string>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morphe Home Screen -->
+    <!-- Home Screen - Update Notifications -->
+    <!-- Home Screen - Home Greetings -->
+    <string name="morphe_home_greeting_1">Anong app ang gusto mong i-patch?</string>
+    <!-- Humorous hype message with light nostalgia -->
+    <string name="morphe_home_greeting_2">Handa ka na bang gawing astig muli ang YouTube?</string>
+    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="morphe_home_greeting_3">Kapit lang, oras na ng pag-patch!</string>
+    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
+    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
+    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
+    <!-- Whimsical forecast-style joke, not meant literally -->
+    <!-- From mediocrity to amazing -->
+    <!-- Playful exaggeration, making patching feel heroic -->
+    <!-- Light sarcasm, casual and tech-savvy humor -->
+    <!-- Sources Management -->
+    <!-- Add Sources Dialog -->
+    <!-- Dialog 1: APK Availability -->
+    <!-- Dialog 2: Download Instructions -->
+    <!-- Dialog 3: File Picker Prompt -->
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <!-- Patch Options -->
+    <!-- App Info Screen -->
+    <!-- Repatch Feature -->
+    <!-- Storage Management -->
+    <!-- Patched APKs Management -->
+    <!-- Original APKs Management -->
+    <!-- Root Mode -->
+    <!-- Morphe Patcher Screen -->
+    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
+    <!-- "bytecode" can be translated from "the app code" -->
+    <!-- Space flight communications callout. -->
+    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <!-- Appearance Tab -->
+    <!-- App Icon Selector -->
+    <!-- Advanced Tab -->
+    <!-- Patch Options Section -->
+    <!-- Patch Options Section: Theme Colors -->
+    <!-- Patch Options Section: Custom Branding -->
+    <!-- Patch Options Section: Custom Header -->
+    <!-- Patch Options Section: Hide Shorts -->
+    <!-- System Tab -->
+    <!-- About Section -->
+    <!-- Other strings -->
+    <!-- Morphe -->
+    <!-- Morphe Currently untranslatable until downloaders are figured out -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
+    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Dormant code and not used -->
+    <!-- Dormant code and not used -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+    <!-- Morphe -->
+</resources>

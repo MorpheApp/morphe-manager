@@ -49,7 +49,7 @@ val httpModule = module {
             requestTimeoutMillis = 5 * 60_000
         }
         install(UserAgent) {
-            agent = "ReVanced-Manager/${BuildConfig.VERSION_CODE}"
+            agent = "Morphe-Manager/${BuildConfig.VERSION_CODE}"
         }
     }
 

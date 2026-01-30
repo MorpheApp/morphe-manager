@@ -1,3 +1,10 @@
+# app [1.4.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2026-01-30)
+
+
+### Bug Fixes
+
+* Resolve libaapt.so patching errors ([#133](https://github.com/MorpheApp/morphe-manager/issues/133)) ([7a443e7](https://github.com/MorpheApp/morphe-manager/commit/7a443e7215eaa9a2ddb26670518694661f57551d))
+
 # app [1.4.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0-dev.1) (2026-01-27)
 
 
