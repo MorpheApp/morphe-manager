@@ -15,15 +15,24 @@ plugins {
 
 val outputApkFileName = "${rootProject.name}-$version.apk"
 
-val arscLib by configurations.creating
+val apkEditorLib by configurations.creating
 
-val strippedArscLib by tasks.registering(Jar::class) {
-    archiveFileName.set("ARSCLib-android.jar")
+val strippedApkEditorLib by tasks.registering(Jar::class) {
+    archiveFileName.set("APKEditor-android.jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     doFirst {
-        from(arscLib.resolve().map { zipTree(it) })
+        from(apkEditorLib.resolve().map { zipTree(it) })
     }
-    exclude("android/**", "org/xmlpull/**")
+    exclude(
+        "android/**",
+        "org/xmlpull/**",
+        "antlr/**",
+        "org/antlr/**",
+        "com/beust/jcommander/**",
+        "javax/annotation/**",
+        "smali.properties",
+        "baksmali.properties"
+    )
 }
 
 dependencies {
@@ -72,8 +81,8 @@ dependencies {
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
 
-    arscLib("io.github.reandroid:ARSCLib:1.3.8")
-    implementation(files(strippedArscLib))
+    apkEditorLib(files("$rootDir/libs/APKEditor-1.4.7.jar"))
+    implementation(files(strippedApkEditorLib))
     implementation("androidx.documentfile:documentfile:1.0.1")
 
     // Downloader plugins
