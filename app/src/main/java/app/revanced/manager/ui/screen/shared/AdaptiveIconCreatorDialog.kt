@@ -620,8 +620,15 @@ private suspend fun createAdaptiveIcon(
         val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
         val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
 
+        // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
+        val bitmapPaint = Paint().apply {
+            isAntiAlias = true
+            isFilterBitmap = true
+            isDither = true
+        }
+
         val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-        foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, null)
+        foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, bitmapPaint)
 
         // Save background
         val backgroundFile = File(mipmapDir, AdaptiveIconConfig.BACKGROUND_FILE_NAME)

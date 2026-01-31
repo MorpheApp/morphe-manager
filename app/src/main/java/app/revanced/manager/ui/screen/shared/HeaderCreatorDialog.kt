@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.RectF
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -668,9 +669,16 @@ private fun createScaledHeader(
     val left = (targetWidth - targetScaledWidth) / 2 + targetOffsetX
     val top = (targetHeight - targetScaledHeight) / 2 + targetOffsetY
 
-    // Draw the scaled and positioned image (will be cropped to canvas bounds)
+    // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
+    val bitmapPaint = Paint().apply {
+        isAntiAlias = true
+        isFilterBitmap = true
+        isDither = true
+    }
+
+    // Draw the scaled and positioned image with anti-aliasing (will be cropped to canvas bounds)
     val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-    canvas.drawBitmap(sourceBitmap, null, destRect, null)
+    canvas.drawBitmap(sourceBitmap, null, destRect, bitmapPaint)
 
     return outputBitmap
 }
