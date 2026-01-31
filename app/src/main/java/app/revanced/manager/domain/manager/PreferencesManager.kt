@@ -40,7 +40,6 @@ class PreferencesManager(
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
-    val installerFallback = stringPreference("installer_fallback", InstallerPreferenceTokens.NONE)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
@@ -105,7 +104,6 @@ class PreferencesManager(
         val officialBundleCustomDisplayName: String? = null,
         val allowMeteredUpdates: Boolean? = null,
         val installerPrimary: String? = null,
-        val installerFallback: String? = null,
         val installerCustomComponents: Set<String>? = null,
         val installerHiddenComponents: Set<String>? = null,
         val keystoreAlias: String? = null,
@@ -151,7 +149,6 @@ class PreferencesManager(
         officialBundleCustomDisplayName = officialBundleCustomDisplayName.get(),
         allowMeteredUpdates = allowMeteredUpdates.get(),
         installerPrimary = installerPrimary.get(),
-        installerFallback = installerFallback.get(),
         installerCustomComponents = installerCustomComponents.get(),
         installerHiddenComponents = installerHiddenComponents.get(),
         keystoreAlias = keystoreAlias.get(),
@@ -185,7 +182,6 @@ class PreferencesManager(
         snapshot.officialBundleCustomDisplayName?.let { officialBundleCustomDisplayName.value = it }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
-        snapshot.installerFallback?.let { installerFallback.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }
         snapshot.installerHiddenComponents?.let { installerHiddenComponents.value = it }
         snapshot.keystoreAlias?.let { keystoreAlias.value = it }
@@ -201,7 +197,6 @@ class PreferencesManager(
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
     }
-
 }
 
 object InstallerPreferenceTokens {

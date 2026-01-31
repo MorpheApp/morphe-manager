@@ -13,16 +13,5 @@ class SettingsViewModel(
 ) : ViewModel() {
     fun setPrimaryInstaller(token: InstallerManager.Token) = viewModelScope.launch(Dispatchers.Default) {
         installerManager.updatePrimaryToken(token)
-        val fallback = installerManager.getFallbackToken()
-        if (fallback != InstallerManager.Token.None && tokensEqual(fallback, token)) {
-            installerManager.updateFallbackToken(InstallerManager.Token.None)
-        }
     }
-}
-
-private fun tokensEqual(a: InstallerManager.Token, b: InstallerManager.Token): Boolean = when {
-    a === b -> true
-    a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
-        a.componentName == b.componentName
-    else -> false
 }
