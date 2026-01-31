@@ -593,14 +593,16 @@ fun MainAppsSection(
         }
     }
 
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.TopCenter
+    // App buttons
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(itemSpacing)
     ) {
-        // App buttons
         Column(
-            modifier = Modifier
-                .widthIn(max = 500.dp),
+            modifier = Modifier.widthIn(max = 500.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(itemSpacing)
         ) {
