@@ -88,9 +88,6 @@ private object AdaptiveIconConfig {
     const val SNAP_GUIDE_ALPHA = 0.6f
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
 
-    // Preview size
-    val PREVIEW_SIZE = 200.dp
-
     // Default background color
     const val DEFAULT_BACKGROUND_COLOR = "#1E5AA8"
 }
@@ -321,6 +318,7 @@ fun AdaptiveIconCreatorDialog(
 /**
  * Preview component showing adaptive icon with safe zones and transform gestures
  */
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 private fun AdaptiveIconPreview(
     foregroundBitmap: Bitmap?,
@@ -331,6 +329,22 @@ private fun AdaptiveIconPreview(
     onScaleChange: (Float) -> Unit,
     onOffsetChange: (Float, Float) -> Unit
 ) {
+    val context = LocalContext.current
+
+    // Get current device density and determine target size
+    val displayMetrics = context.resources.displayMetrics
+    val density = displayMetrics.densityDpi
+
+    // Determine which size to use based on density
+    val (_, targetSize) = AdaptiveIconConfig.DENSITY_CONFIGS
+        .entries
+        .firstOrNull { density <= it.key }
+        ?.value
+        ?: AdaptiveIconConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
+
+    // Convert target size to dp for preview
+    val previewSize = targetSize.dp
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -345,7 +359,7 @@ private fun AdaptiveIconPreview(
 
         Box(
             modifier = Modifier
-                .size(AdaptiveIconConfig.PREVIEW_SIZE)
+                .size(previewSize)
                 .clip(CircleShape)
                 .background(
                     parseColorToRgb(backgroundColor).let { (r, g, b) ->
@@ -375,7 +389,7 @@ private fun AdaptiveIconPreview(
                                 // Apply zoom
                                 currentScale *= zoom
 
-                                // Apply pan (convert to normalized coordinates)
+                                // Apply pan
                                 var newOffsetX = currentOffsetX + pan.x
                                 var newOffsetY = currentOffsetY + pan.y
 
@@ -398,9 +412,21 @@ private fun AdaptiveIconPreview(
                     // Draw foreground first
                     val imageBitmap = foregroundBitmap.asImageBitmap()
 
-                    // Calculate scaled size
-                    val scaledWidth = size.width * currentScale
-                    val scaledHeight = size.height * currentScale
+                    // Calculate base size by fitting image to canvas while maintaining aspect ratio
+                    val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
+                    val canvasAspect = size.width / size.height  // For square canvas this is 1.0
+
+                    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+                        // Image is wider - fit to width
+                        size.width to (size.width / imageAspect)
+                    } else {
+                        // Image is taller - fit to height
+                        (size.height * imageAspect) to size.height
+                    }
+
+                    // Apply user scale to the fitted size
+                    val scaledWidth = baseWidth * currentScale
+                    val scaledHeight = baseHeight * currentScale
 
                     // Calculate position with offset
                     val left = centerX - (scaledWidth / 2) + currentOffsetX
@@ -574,13 +600,40 @@ private suspend fun createAdaptiveIcon(
         val foregroundScaled = createBitmap(targetSize, targetSize)
         val foregroundCanvas = Canvas(foregroundScaled)
 
-        // Apply transformations
-        val scaledWidth = targetSize * scale
-        val scaledHeight = targetSize * scale
-        val left = (targetSize - scaledWidth) / 2 + (offsetX * targetSize / AdaptiveIconConfig.MAX_OFFSET)
-        val top = (targetSize - scaledHeight) / 2 + (offsetY * targetSize / AdaptiveIconConfig.MAX_OFFSET)
+        // Get density to convert preview offsets to target offsets
+        val previewDensity = context.resources.displayMetrics.density
 
-        val destRect = RectF(left, top, left + scaledWidth, top + scaledHeight)
+        // Preview canvas size in pixels
+        val previewCanvasSize = targetSize * previewDensity
+
+        // Calculate base size by fitting image to canvas (same logic as preview)
+        val imageAspect = foregroundBitmap.width.toFloat() / foregroundBitmap.height.toFloat()
+        val canvasAspect = previewCanvasSize / previewCanvasSize  // 1.0 for square
+
+        val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+            // Image is wider - fit to width
+            previewCanvasSize to (previewCanvasSize / imageAspect)
+        } else {
+            // Image is taller - fit to height
+            (previewCanvasSize * imageAspect) to previewCanvasSize
+        }
+
+        // Apply user scale to the fitted size
+        val scaledWidth = baseWidth * scale
+        val scaledHeight = baseHeight * scale
+
+        // Convert to target bitmap coordinates
+        val targetScaledWidth = scaledWidth / previewDensity
+        val targetScaledHeight = scaledHeight / previewDensity
+
+        // Convert offsets from preview canvas pixels to target bitmap pixels
+        val targetOffsetX = offsetX / previewDensity
+        val targetOffsetY = offsetY / previewDensity
+
+        val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
+        val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
+
+        val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
         foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, null)
 
         // Save background

@@ -77,10 +77,6 @@ private object HeaderConfig {
     const val SNAP_GUIDE_ALPHA = 0.6f
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
     const val BORDER_STROKE_WIDTH = 2f
-
-    // Preview size (maintaining aspect ratio ~2.67:1)
-    val PREVIEW_WIDTH = 280.dp
-    val PREVIEW_HEIGHT = 105.dp
 }
 
 /**
@@ -209,7 +205,7 @@ fun HeaderCreatorDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.header_creator_title),
-        compactPadding = true,
+        compactPadding = false,
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -364,6 +360,7 @@ fun HeaderCreatorDialog(
 /**
  * Preview component for header with transform gestures
  */
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 private fun HeaderPreview(
     headerBitmap: Bitmap?,
@@ -374,8 +371,24 @@ private fun HeaderPreview(
     onScaleChange: (Float) -> Unit,
     onOffsetChange: (Float, Float) -> Unit
 ) {
-    val previewWidth = HeaderConfig.PREVIEW_WIDTH
-    val previewHeight = HeaderConfig.PREVIEW_HEIGHT
+    val context = LocalContext.current
+
+    // Get current device density and determine target size
+    val displayMetrics = context.resources.displayMetrics
+    val density = displayMetrics.densityDpi
+
+    // Determine which size to use based on density
+    val (_, targetSize) = HeaderConfig.DENSITY_CONFIGS
+        .entries
+        .firstOrNull { density <= it.key }
+        ?.value
+        ?: HeaderConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
+
+    val (targetWidth, targetHeight) = targetSize
+
+    // Convert target size to dp for preview
+    val previewWidth = targetWidth.dp
+    val previewHeight = targetHeight.dp
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -443,9 +456,22 @@ private fun HeaderPreview(
                     // Draw header image
                     val imageBitmap = headerBitmap.asImageBitmap()
 
-                    // Size based on scale - keep original size, just scale it
-                    val displayWidth = imageBitmap.width * currentScale
-                    val displayHeight = imageBitmap.height * currentScale
+                    // Calculate display size based on fitting the image to canvas, then applying scale
+                    // First, fit image to canvas while maintaining aspect ratio
+                    val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
+                    val canvasAspect = size.width / size.height
+
+                    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+                        // Image is wider - fit to width
+                        size.width to (size.width / imageAspect)
+                    } else {
+                        // Image is taller - fit to height
+                        (size.height * imageAspect) to size.height
+                    }
+
+                    // Apply user scale
+                    val displayWidth = baseWidth * currentScale
+                    val displayHeight = baseHeight * currentScale
 
                     // Calculate position with offset (centered + user offset)
                     val left = centerX - (displayWidth / 2) + currentOffsetX
@@ -545,12 +571,13 @@ private suspend fun createHeaderFiles(
 
         // Create light header
         val lightScaled = createScaledHeader(
-            lightHeaderBitmap,
-            targetWidth,
-            targetHeight,
-            lightScale,
-            lightOffsetX,
-            lightOffsetY
+            context = context,
+            sourceBitmap = lightHeaderBitmap,
+            targetWidth = targetWidth,
+            targetHeight = targetHeight,
+            scale = lightScale,
+            offsetX = lightOffsetX,
+            offsetY = lightOffsetY
         )
 
         // Save light header
@@ -561,12 +588,13 @@ private suspend fun createHeaderFiles(
 
         // Create dark header
         val darkScaled = createScaledHeader(
-            darkHeaderBitmap,
-            targetWidth,
-            targetHeight,
-            darkScale,
-            darkOffsetX,
-            darkOffsetY
+            context = context,
+            sourceBitmap = darkHeaderBitmap,
+            targetWidth = targetWidth,
+            targetHeight = targetHeight,
+            scale = darkScale,
+            offsetX = darkOffsetX,
+            offsetY = darkOffsetY
         )
 
         // Save dark header
@@ -589,10 +617,11 @@ private suspend fun createHeaderFiles(
 
 /**
  * Helper function to create scaled and positioned header bitmap
- * Crops the image based on preview transformations to match what user sees
+ * Uses the same logic as preview: fit image to canvas, then apply scale and offset
  */
 @SuppressLint("UseKtx")
 private fun createScaledHeader(
+    context: Context,
     sourceBitmap: Bitmap,
     targetWidth: Int,
     targetHeight: Int,
@@ -604,20 +633,43 @@ private fun createScaledHeader(
     val outputBitmap = createBitmap(targetWidth, targetHeight)
     val canvas = Canvas(outputBitmap)
 
-    // Calculate scaled dimensions of source image
-    val scaledSourceWidth = sourceBitmap.width * scale
-    val scaledSourceHeight = sourceBitmap.height * scale
+    // Get density to convert preview canvas offsets to target bitmap offsets
+    val density = context.resources.displayMetrics.density
 
-    // Calculate position (center + offset)
-    // Normalize offset from preview coordinates to output coordinates
-    val normalizedOffsetX = offsetX * (targetWidth.toFloat() / HeaderConfig.PREVIEW_WIDTH.value)
-    val normalizedOffsetY = offsetY * (targetHeight.toFloat() / HeaderConfig.PREVIEW_HEIGHT.value)
+    // Preview canvas size in pixels
+    val previewCanvasWidth = targetWidth * density
+    val previewCanvasHeight = targetHeight * density
 
-    val left = (targetWidth - scaledSourceWidth) / 2 + normalizedOffsetX
-    val top = (targetHeight - scaledSourceHeight) / 2 + normalizedOffsetY
+    // Calculate base size by fitting image to canvas (same logic as preview)
+    val imageAspect = sourceBitmap.width.toFloat() / sourceBitmap.height.toFloat()
+    val canvasAspect = previewCanvasWidth / previewCanvasHeight
+
+    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+        // Image is wider - fit to width
+        previewCanvasWidth to (previewCanvasWidth / imageAspect)
+    } else {
+        // Image is taller - fit to height
+        (previewCanvasHeight * imageAspect) to previewCanvasHeight
+    }
+
+    // Apply user scale (same as preview)
+    val scaledWidth = baseWidth * scale
+    val scaledHeight = baseHeight * scale
+
+    // Convert to target bitmap coordinates
+    val targetScaledWidth = scaledWidth / density
+    val targetScaledHeight = scaledHeight / density
+
+    // Convert offsets from preview canvas pixels to target bitmap pixels
+    val targetOffsetX = offsetX / density
+    val targetOffsetY = offsetY / density
+
+    // Calculate position (same logic as preview)
+    val left = (targetWidth - targetScaledWidth) / 2 + targetOffsetX
+    val top = (targetHeight - targetScaledHeight) / 2 + targetOffsetY
 
     // Draw the scaled and positioned image (will be cropped to canvas bounds)
-    val destRect = RectF(left, top, left + scaledSourceWidth, top + scaledSourceHeight)
+    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
     canvas.drawBitmap(sourceBitmap, null, destRect, null)
 
     return outputBitmap
