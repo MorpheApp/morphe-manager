@@ -1,3 +1,10 @@
+## app [1.4.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0...v1.4.1-dev.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* Force off Advanced mode for users who had it enabled ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
+
 # app [1.4.0](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0) (2026-01-31)
 
 
