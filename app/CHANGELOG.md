@@ -1,3 +1,16 @@
+# app [1.4.0](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0) (2026-01-31)
+
+
+### Bug Fixes
+
+* 'GmsCore support' patch not excluded in root mode ([#134](https://github.com/MorpheApp/morphe-manager/issues/134)) ([a2eb5b0](https://github.com/MorpheApp/morphe-manager/commit/a2eb5b0106c53ddb352b90496d51805a4d70a6a9))
+* Resolve libaapt.so patching errors ([#133](https://github.com/MorpheApp/morphe-manager/issues/133)) ([7a443e7](https://github.com/MorpheApp/morphe-manager/commit/7a443e7215eaa9a2ddb26670518694661f57551d))
+
+
+### Features
+
+* Add Expert mode ([#107](https://github.com/MorpheApp/morphe-manager/issues/107)) ([9273b41](https://github.com/MorpheApp/morphe-manager/commit/9273b415546c4561520ccb73b4cc48a73c449a4e))
+
 # app [1.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2026-01-30)
 
 
