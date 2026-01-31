@@ -37,7 +37,7 @@
     <string name="morphe_home_greeting_10">Napędzani kawą i dobrymi modyfikacjami</string>
     <!-- Sources Management -->
     <string name="morphe_home_sources">Źródła modyfikacji</string>
-    <string name="morphe_sources_management_subtitle">Pobrano %d źródeł</string>
+    <string name="morphe_sources_management_subtitle">%d zainstalowanych źródeł</string>
     <string name="morphe_sources_delete_confirm_message">Usunąć źródło \"%s\"? Tej operacji nie da się cofnąć.</string>
     <string name="morphe_sources_open_in_browser">Otwórz w przeglądarce</string>
     <string name="morphe_sources_failed_to_open_url">Nie udało się otworzyć strony</string>
@@ -67,16 +67,16 @@
     <string name="morphe_home_download_instructions_steps_title">Instrukcje:</string>
     <string name="morphe_home_download_instructions_step1">Naciśnij przycisk \'%1$s\' poniżej</string>
     <string name="morphe_home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Naciśnij pobierz na stronie, a nie tutaj 😊</string>
+    <string name="morphe_home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
     <string name="morphe_home_download_instructions_step3">Poczekaj, aż pobieranie się zakończy, i &lt;b&gt;nie instaluj&lt;/b&gt; pliku APK</string>
     <string name="morphe_home_download_instructions_step3_mount">Poczekaj, aż pobieranie się zakończy, a następnie &lt;b&gt;zainstaluj plik APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Po zakończeniu pobierania otwórz tę aplikację ponownie</string>
     <string name="morphe_home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK otwórz tę aplikację ponownie</string>
     <string name="morphe_home_download_instructions_continue">Kontynuuj do APKMirror.com</string>
     <!-- Dialog 3: File Picker Prompt -->
-    <string name="morphe_home_file_picker_prompt_title">Wybierz plik APK, który pobrałeś</string>
-    <string name="morphe_home_file_picker_prompt_description">Teraz wybierz plik APK %1$s, który właśnie pobrałeś.</string>
-    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Otwórz plik APK, który pobrałem</string>
+    <string name="morphe_home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
+    <string name="morphe_home_file_picker_prompt_description">Teraz wybierz pobrany plik APK %1$s.</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Otwórz pobrany plik APK</string>
     <string name="morphe_home_file_picker_prompt_open_apk">Otwórz plik APK</string>
     <string name="morphe_home_recommended_version">Zalecana wersja</string>
     <string name="morphe_patcher_selected_version">Wybrana wersja</string>
@@ -115,12 +115,12 @@
     <!-- Storage Management -->
     <string name="morphe_storage_management">Zarządzanie pamięcią</string>
     <string name="morphe_apks_count">%d plików APK</string>
-    <string name="morphe_apks_size">Suma rozmiaru: %s</string>
+    <string name="morphe_apks_size">Całkowity rozmiar: %s</string>
     <!-- Patched APKs Management -->
     <string name="morphe_patched_apks_management">Zmodyfikowane pliki APK</string>
     <string name="morphe_patched_apks_title">Zmodyfikowane pliki APK</string>
     <string name="morphe_patched_apks_description">Zarządzaj zapisanymi plikami zmodyfikowanych aplikacji</string>
-    <string name="morphe_patched_apks_empty">Nie zapisano jeszcze zmodyfikowanych plików APK</string>
+    <string name="morphe_patched_apks_empty">Brak zapisanych plików APK</string>
     <string name="morphe_patched_apks_delete_title">Usunąć zmodyfikowany plik APK?</string>
     <string name="morphe_patched_apks_delete_confirm">Czy na pewno chcesz usunąć zapisany, zmodyfikowany plik APK dla %s?</string>
     <string name="morphe_patched_apks_deleted">Pomyślnie usunięto zmodyfikowany plik APK</string>
@@ -140,11 +140,11 @@
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_error_copied">Błąd został skopiowany do schowka</string>
     <string name="morphe_patcher_error_log">Dziennik błędów</string>
-    <string name="morphe_patcher_error_technical">Techniczne szczegóły</string>
+    <string name="morphe_patcher_error_technical">Szczegóły techniczne</string>
     <string name="morphe_patcher_patches_progress">%1$d z %2$d modyfikacji</string>
     <string name="morphe_patcher_long_step_warning">Ten krok może potrwać chwilę. Proszę czekać…</string>
     <string name="morphe_patcher_installing">Instalowanie…</string>
-    <string name="morphe_patcher_installing_subtitle">Prawie gotowe, żeby rockować! 🎸</string>
+    <string name="morphe_patcher_installing_subtitle">Prawie gotowe do działania!</string>
     <string name="morphe_patcher_success_title">Wszystko gotowe! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Twoja aplikacja została zmodyfikowana i zainstalowana!</string>
     <string name="morphe_patcher_complete_title">Modyfikowanie zakończone! ✨</string>
