@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Yamaq paketi</string>
+    <string name="morphe_home_other_apps">Başqa tətbiqlər</string>
+    <string name="morphe_home">Ev</string>
+    <string name="morphe_home_not_patched_yet">Hələ yamalanmamış</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Yeni yenilənmə əlçatandır</string>
+    <string name="morphe_home_update_available_subtitle">Yeni versiya yüklənmək üçün hazırdır</string>
+    <string name="morphe_home_update_error">Yenilənmə uğursuz oldu</string>
+    <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
+    <string name="morphe_home_updating_sources">Yamaqlar yenilənir…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d yamaqlar işlənib</string>
+    <string name="morphe_home_update_success">Yenilənmə tamamlandı</string>
+    <string name="morphe_home_update_success_subtitle">Yamaqlarınız yenilənib</string>
+    <string name="morphe_home_sources_are_loading">Yamaqlar yüklənilir, xahiş olunur gözləyin…</string>
+    <string name="morphe_home_please_wait">Zəhmət olmasa, gözləyin...</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">YouTube-u yenə əfsanəvi etməyə hazırsınız?</string>
@@ -21,21 +35,28 @@
     <string name="morphe_home_greeting_9">Bu gündən etibarən tətbiqlər özlərindən müstəsna edilir</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Kofein və yaxşı yamalar ilə gücləndirilib</string>
-    <string name="morphe_home_bundle_type_api">API Paketi</string>
-    <string name="morphe_home_update_error">Yenilənmə uğursuz oldu</string>
-    <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
-    <string name="morphe_home_updating_patches">Yamaqlar yenilənir…</string>
-    <string name="morphe_home_update_success">Yenilənmə tamamlandı</string>
-    <string name="morphe_home_patches_updated">Yamaqlarınız yenilənib</string>
-    <string name="morphe_home_patches_are_loading">Yamaqlar yüklənilir, xahiş olunur gözləyin...</string>
-    <string name="morphe_home_please_wait">Zəhmət olmasa, gözləyin...</string>
-    <string name="morphe_home_open_in_browser">Brauzerdə açın</string>
-    <string name="morphe_home_failed_to_open_url">URL-i açmaq uğursuz oldu</string>
-    <string name="morphe_home_date_added">Əlavə edildi</string>
-    <string name="morphe_home_date_updated">Yeniləndi</string>
-    <string name="morphe_home_check_updates">Yoxla</string>
-    <string name="morphe_home_unknown">Naməlum</string>
-    <string name="morphe_home_timeline">Yenilənmə tarixçəsi</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Yamaq mənbələri</string>
+    <string name="morphe_sources_management_subtitle">%d yamaqlar yüklənildi</string>
+    <string name="morphe_sources_delete_confirm_message">Yamaq mənbəsini \"%s\" silmək istəyirsiniz? Bu geri alınmır.</string>
+    <string name="morphe_sources_open_in_browser">Brauzerdə açın</string>
+    <string name="morphe_sources_failed_to_open_url">URL-i açmaq uğursuz oldu</string>
+    <string name="morphe_sources_date_added">Əlavə edildi</string>
+    <string name="morphe_sources_date_updated">Yeniləndi</string>
+    <string name="morphe_enabled">İşləkdi</string>
+    <string name="morphe_disabled">Qapalıdı</string>
+    <string name="morphe_rename">Adı dəyişdir</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Yeni yamaq mənbəsi əlavə et</string>
+    <string name="morphe_add_patch_source_remote">Uzaktı</string>
+    <string name="morphe_add_patch_source_remote_url">Mənbə URL</string>
+    <string name="morphe_add_patch_source_remote_description">Uzaktı yamaq mənbəsi üçün JSON sonluğu URL-nı daxil edin</string>
+    <string name="morphe_add_patch_source_local">Yerli</string>
+    <string name="morphe_add_patch_source_local_file">Yamaq mənbəsi faylını seçin</string>
+    <string name="morphe_add_patch_source_local_file_description">Saxlanışdan .mpp yamaq mənbəsi faylını seçin</string>
+    <string name="morphe_add_patch_source_local_change_file">Faylı dəyişdir</string>
+    <string name="morphe_home_no_patches_available">Yeni yenilənmə yoxdur</string>
+    <string name="morphe_home_default_source_disabled">Morphe patch mənbəsi deaktivdir. Lütfen Patch mənbələri sayfasında onu aktivləşdirin ya da Expert rejimindən istifadə edin.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Sizin orijinal, yamaqsız APK-nız var?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s yamaq üçün sizə %2$s (yamaqlanmayan) versiyası lazımdır</string>
@@ -55,17 +76,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Endirdiyiniz APK-nı seçin</string>
     <string name="morphe_home_file_picker_prompt_description">İndi yenicə endirdiyiniz %1$s APK faylını seçin.</string>
-    <string name="morphe_home_file_picker_prompt_open">Endirdiyim APK faylını açın</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Endirdiyim APK faylını açın</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">APK faylı açmaq</string>
     <string name="morphe_home_recommended_version">Tövsiyə olunan versiya</string>
     <string name="morphe_patcher_selected_version">Seçilən versiya</string>
+    <string name="morphe_home_select_apk_title">APK seç</string>
+    <string name="morphe_home_select_any_apk_description">APK-nin istənilən tətbiqi üçün yenilənmə üçün aşağıdakı düyməyə basın</string>
+    <string name="morphe_home_invalid_apk">Yanlış APK faylı</string>
+    <string name="morphe_home_no_patches_for_app">Bu tətbiq üçün yenilənmə yoxdur</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Mütəxəssislik rejimi</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d/%2$d yamaq seçildi</string>
+    <string name="morphe_expert_mode_search">Yamaqlar axtar</string>
+    <string name="morphe_expert_mode_proceed">Yenilənməyə başla</string>
+    <string name="morphe_expert_mode_disable_all">Hamısını söndür</string>
+    <string name="morphe_expert_mode_enable_all">Hamısını aç</string>
+    <string name="morphe_expert_mode_has_options">Tənzimləyə bilən</string>
+    <string name="morphe_expert_mode_no_results">Nəticə tapılmadı</string>
+    <string name="morphe_expert_mode_no_patches">Yeni yenilənmə yoxdur</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Xüsusi rəng</string>
+    <string name="morphe_hex_color">Altı dəyərli rəng</string>
+    <string name="morphe_patch_option_instructions">Təlimatlar</string>
+    <string name="morphe_patch_option_enter_value">Dəyər daxil edin</string>
+    <string name="morphe_patch_option_enter_number">Say daxil edin</string>
+    <string name="morphe_patch_option_enter_decimal">Onluq daxil edin</string>
+    <string name="morphe_patch_option_pick_folder">Klasoru seç</string>
+    <string name="expand">Genişləndir</string>
+    <string name="collapse">Qıx</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Bu tətbiqi silmək istəyirsiniz?</string>
+    <string name="saved_app_delete_confirmation">Bu saxlanan tətbiqi silmək istəyirsiniz?</string>
+    <string name="saved_copy_delete_confirmation">Saxlanan nüsxəni silmək istəyirsiniz?</string>
+    <string name="view">Görüntüle</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Əsli APK tapılmadı. Yenilənməyə yenə başlamaq mümkün deyil.</string>
+    <string name="morphe_repatch_requires_original">Yenilənməyə yenə başlamaq yenilənmə üçün orijinal APK faylı tələb edir</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Saxlanma idarəetməsi</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Ümumi ölçü: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Yenilənmiş APK-lər</string>
+    <string name="morphe_patched_apks_title">Yenilənmiş APK-lər</string>
+    <string name="morphe_patched_apks_description">Saxlanan yenilənmiş tətbiq fayllarını idarə edin</string>
+    <string name="morphe_patched_apks_empty">Hazırda heç bir yenilənmiş APK saxlanılmır</string>
+    <string name="morphe_patched_apks_delete_title">Yenilənmiş APK silinir?</string>
+    <string name="morphe_patched_apks_delete_confirm">Bu tətbiqi üçün saxlanan yenilənmiş APK silmək istəyirsiniz? Yenilənməyə yenə başlamaq üçün yeni APK təmin etmək lazımdır.</string>
+    <string name="morphe_patched_apks_deleted">Yenilənmiş APK uğurla silindi</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Orijinal APK-lər</string>
+    <string name="morphe_original_apks_title">Orijinal APK-lər</string>
+    <string name="morphe_original_apks_description">Yenilənməyə yenə başlamaq üçün orijinal APK faylları saxlanır. Hər tətbiq üçün sonuncu versiya saxlanılır.</string>
+    <string name="morphe_original_apks_empty">Orijinal APK-lər saxlanılmır</string>
+    <string name="morphe_original_apks_deleted">Orijinal APK uğurla silindi</string>
+    <string name="morphe_original_apks_saved">Orijinal APK saxlandı</string>
+    <string name="morphe_original_apks_save_failed">Orijinal APK saxlanıla bilmədi</string>
+    <string name="morphe_original_apks_delete_title">Orijinal APK silinir?</string>
+    <string name="morphe_original_apks_delete_confirm">%s üçün orijinal APK silmək istəyirsiniz? Yenilənməyə yenə başlamaq üçün yeni APK təmin etmək lazımdır.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root rejimi yamaqdan əvvəl orijinal APK-nın cihazınızda quraşdırılmasını tələb edir.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore dəstək yamağı root rejimində çıxarılır</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">APK-nı Saxla</string>
-    <string name="morphe_patcher_copy_error">Xətanı köçür</string>
-    <string name="morphe_patcher_show_error">Xətanı göstər</string>
     <string name="morphe_patcher_error_copied">Xəta buferə köçürüldü</string>
+    <string name="morphe_patcher_error_log">Xəta siyahısı</string>
+    <string name="morphe_patcher_error_technical">Texniki məlumatlar</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d yamaq</string>
     <string name="morphe_patcher_long_step_warning">Bu addım bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
     <string name="morphe_patcher_installing">Quraşdırılır…</string>
@@ -100,7 +175,7 @@
     <string name="morphe_patcher_message_7">1 və 0-ların sazlanması… 🤖 </string>
     <string name="morphe_patcher_message_8">Rəqəmsal makaron açılır... 🍝 </string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Yamaqlanmayan tətbiqdəki səhvlərin bərpası... 🐞 </string>
+    <string name="morphe_patcher_message_9">Yenilənməyə yoxlanmayan tətbiqdəki səhvləri düzəlir... 🪲</string>
     <string name="morphe_patcher_message_10">Əla yamaqlar, gözləməyə dəyər... ⏳ </string>
     <string name="morphe_patcher_message_11">Piksellər parıldayana qədər cilalanır... 💎 </string>
     <string name="morphe_patcher_message_12">Kapitan \"Yamaqlama irəliləyişdədir\" işarəsini söndürənə qədər yerinizdə qalın... 💺✈️ </string>
@@ -116,26 +191,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
     <string name="morphe_patcher_message_20">Lazımsız olanı silirəm. Zəhmət olmasa, gözləyin... 🗑️ </string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe əsas səhifəyə qayıt</string>
-    <string name="morphe_settings_return_to_morphe_description">Asanlaşdırılan rejimə qaytarın</string>
-    <string name="morphe_settings_return_to_expert">Mütəxəssis rejiminə dəyişdir</string>
-    <string name="morphe_settings_return_to_expert_description">Tam xüsusiyyətli mütəxəssis üsuluna çevir</string>
-    <string name="morphe_share_website">Veb saytı paylaş</string>
-    <string name="morphe_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Tətbiq Simvolu</string>
-    <string name="morphe_app_icon_selector_description">Tətbiq açıcı simvolun dəyişdir</string>
-    <string name="morphe_app_icon_default">İlkin</string>
-    <string name="morphe_app_icon_light_2">Səma</string>
-    <string name="morphe_app_icon_light_3">Qürub</string>
-    <string name="morphe_app_icon_dark_1">Okean</string>
-    <string name="morphe_app_icon_dark_2">Boşluq</string>
-    <string name="morphe_app_icon_dark_3">Tünd göy</string>
-    <string name="morphe_app_icon_change_dialog_title">Tətbiq Simvolu Dəyişdirilsin?</string>
-    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' kimi dəyişdirib yenidən başladılsın?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Simvolu Dəyişdir</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Görünüş seçimləri</string>
     <string name="morphe_appearance_options_description">Koloritləri, rəngləri və fonları xüsusiləşdir</string>
     <string name="morphe_appearance_current_language">Gündəlik dil</string>
@@ -151,31 +207,42 @@
     <string name="morphe_background_type_shapes">Fiqurlar</string>
     <string name="morphe_background_type_snow">Qar</string>
     <string name="morphe_background_type_none">Heç biri</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Tətbiq simvolu</string>
+    <string name="morphe_app_icon_selector_description">Tətbiq açıcı simvolun dəyişdir</string>
+    <string name="morphe_app_icon_default">İlkin</string>
+    <string name="morphe_app_icon_light_2">Səma</string>
+    <string name="morphe_app_icon_light_3">Qürub</string>
+    <string name="morphe_app_icon_dark_1">Okean</string>
+    <string name="morphe_app_icon_dark_2">Boşluq</string>
+    <string name="morphe_app_icon_dark_3">Tünd göy</string>
+    <string name="morphe_app_icon_change_dialog_title">Tətbiq simvolunu dəyişdirmək istəyirsiniz?</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' kimi dəyişdirib yenidən başladılsın?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Simvolu dəyişdir</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Mütəxəssislik tənzimləri</string>
+    <string name="morphe_settings_expert_mode">Mütəxəssislik rejimi</string>
+    <string name="morphe_settings_expert_mode_description">Mütəxəssislik rejimində yenilənmə seçenekləri və tənzimləmə imkanı təklif olunur</string>
     <string name="morphe_update_use_prereleases">Buraxılış öncəsi versiyaları istifadə et</string>
     <string name="morphe_update_use_prereleases_description">Yeni yamaqlara və menecer xüsusiyyətlərinə erkən yol əldə edin</string>
+    <string name="morphe_patch_options_expert_mode_notice">Mütəxəssislik rejimində yenilənmə seçenekləri yenilənmə prosesində mövcud olacaq</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Yamaq seçimləri</string>
     <string name="morphe_patch_options_youtube_description">Kolorit, markalanma, sərlövhə və Shorts seçimləri</string>
     <string name="morphe_patch_options_youtube_music_description">Kolorit və markalanma seçimləri</string>
     <string name="morphe_patch_options_restart_message">Yamaq seçimlərini dəyişdirmədə, təsiri olması üçün tətbiqi təkrar yamaqlamaq ehtiyacı var</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Tətbiq kolorit rəngləri</string>
     <string name="morphe_patch_options_theme_colors_description">Fon rəngini dəyişdir</string>
     <string name="morphe_patch_options_dark_theme_color">Qara kolorit fon rəngi</string>
     <string name="morphe_patch_options_dark_theme_color_description">Altı rəng (#RRGGBB) və ya rəng ehtiyatına istinad ola bilər</string>
     <string name="morphe_patch_options_light_theme_color">İşıqlı kolorit fon rəngi</string>
     <string name="morphe_patch_options_light_theme_color_description">Altı rəng (#RRGGBB) və ya rəng ehtiyatına istinad ola bilər</string>
-    <string name="morphe_patch_options_icon_instructions_title">Simvol formatı təlimatları</string>
-    <string name="morphe_patch_options_header_instructions_title">Sərlövhə formatı təlimatları</string>
     <string name="morphe_patch_options_loading">Yamaq seçimləri yüklənilir…</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Yamaq paketi yenilənənə qədər gözləyin</string>
+    <string name="morphe_patch_options_waiting_for_source">Yamaq mənbəyi yenilənənə qədər gözləyin</string>
     <string name="morphe_patch_options_load_error">Yamaq seçimlərini yükləmək olmadı</string>
     <string name="morphe_patch_options_no_available">Bu yamaq üçün seçim əlçatan deyil</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Xüsusi rəng</string>
-    <string name="morphe_hex_color">Altı dəyərli rəng</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Fərdi markalanma</string>
     <string name="morphe_patch_options_custom_branding_description">Tətbiq ekran adını dəyiş</string>
     <string name="morphe_patch_options_custom_branding_app_name">Tətbiq adı</string>
@@ -201,7 +268,7 @@ morphe_adaptive_background_custom.png morphe_adaptive_foreground_custom.png
 - mipmap-xxxhdpi: 432x432 px
 
 Əlavə olaraq, yol tək rəngli simvol fayllarından hansısa ilə \"drawable\" qovluq ehtiva edir: morphe_adaptive_monochrome_custom.xml morphe_notification_icon_custom.xml "</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Custom header logo</string>
     <string name="morphe_patch_options_custom_header_description">Header simvolik logo ni o\'zgartirin</string>
     <string name="morphe_patch_options_custom_header_instruction">"Bir mappa, simvolik header logo sifatida ishlatilayotgan tasvurlarni o'z ichiga oladi.
@@ -221,12 +288,26 @@ Tasvir bo'ylamlari quyidagicha bo'lishi kerak:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">\"Shorts\" funksiyalarini gizlət</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">\"Shorts\" ilovalari boshqatlamaqchi shortcut (yechim) ni gizlət</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">«Launcher» (naqsh uruhi) boshqatlash menu sifatida \"Shorts\" ni о铲ешлəй olmaysiz</string>
     <string name="morphe_patch_options_hide_shorts_widget">\"Shorts\" gizlət widget (mantiqiy yuqori hisoblagich) ni gizlət</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">«Launcher» widget\'dan \"Shorts\" tastiq (button) ni о铲ешлəй olmaysiz</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">İşləmə</string>
+    <string name="morphe_process_runtime">Proses runtime</string>
+    <string name="morphe_process_runtime_description">Yenilənmə üçün ayrı prosesdə işləmək daha sabitdir</string>
+    <string name="morphe_process_runtime_memory_limit">Xəzin limiti</string>
+    <string name="morphe_process_runtime_memory_limit_help">Yenə yüksək xəzin limitləri yenilənməyə sürət verə bilər, lakin daha qədim cihazlarla işləməyə bilməz</string>
+    <string name="morphe_enable_process_runtime">Proses runtime-ı aç</string>
+    <string name="morphe_memory_limit_subtitle">Yenilənməyə ayrılan xəzin</string>
+    <string name="morphe_memory_limit_warning">Az xəzin limiti böyük tətbiqlərin yenilənməsi zamanı səhvlərə səbəb ola bilər</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB limit</string>
+    <string name="morphe_process_runtime_disabled_description">Tənzimləyə bilmək üçün vurun</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Veb saytı paylaş</string>
+    <string name="morphe_share_website_description">Xidməti Morphe veb saytını paylaşın</string>
     <!-- Other strings -->
     <string name="patcher">Yamaq</string>
     <string name="patches">Yamalar</string>
@@ -796,7 +877,7 @@ Bu yalnız aşağıdakı versiya ilə uyğundur: %2$s."</string>
     <string name="path_selector_files">Fayllar</string>
     <string name="show_password_field">Şifrəni göstər</string>
     <string name="hide_password_field">Şifrəni gizlət</string>
-    <string name="installer_primary_title">Əsas quraşdırıcı</string>
+    <string name="installer_primary_title">Yüklənən</string>
     <string name="installer_fallback_title">Ehtiyat quraşdırıcı</string>
     <string name="installer_internal_name">Sistem quraşdırıcısı</string>
     <string name="installer_internal_description">Android paket quraşdırıcısından istifadə edin</string>
@@ -905,7 +986,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="select_install_type">Quraşdırma növünü seçin</string>
     <string name="patcher_step_group_preparing">Hazırlanır</string>
     <string name="patcher_step_load_patches">Yama yüklənir</string>
-    <string name="patcher_step_prepare_split_apk">Split APK-nı birləşdirin</string>
+    <string name="patcher_step_prepare_split_apk">APK-ləri birləşdirir</string>
     <string name="patcher_step_unpack">APK faylini oxu.</string>
     <string name="patcher_step_group_patching">Yama tətbiq olunur</string>
     <string name="patcher_step_group_saving">Saxlanılır</string>

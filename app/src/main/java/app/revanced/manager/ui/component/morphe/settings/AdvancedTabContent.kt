@@ -8,23 +8,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.component.morphe.settings.PatchOptionsSection
-import app.revanced.manager.ui.component.morphe.shared.IconTextRow
-import app.revanced.manager.ui.component.morphe.shared.MorpheCard
-import app.revanced.manager.ui.component.morphe.shared.SectionTitle
-import app.revanced.manager.ui.component.morphe.shared.SettingsItemCard
+import app.revanced.manager.ui.component.morphe.shared.*
 import app.revanced.manager.ui.viewmodel.DashboardViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import kotlinx.coroutines.launch
@@ -38,50 +29,39 @@ fun AdvancedTabContent(
     patchOptionsViewModel: PatchOptionsViewModel,
     dashboardViewModel: DashboardViewModel,
     prefs: PreferencesManager,
-    onBackToAdvanced: () -> Unit
+//    onBackToAdvanced: () -> Unit
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val useExpertMode by prefs.useExpertMode.getAsState()
+    val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
+
+    // Track if expert mode was just enabled to show the notice
+    var showExpertModeNotice by remember { mutableStateOf(false) }
+    var previousExpertMode by remember { mutableStateOf(useExpertMode) }
+
+    // Detect expert mode changes
+    LaunchedEffect(useExpertMode) {
+        if (useExpertMode && !previousExpertMode) {
+            // Expert mode was just enabled
+            showExpertModeNotice = true
+        }
+        previousExpertMode = useExpertMode
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp, vertical = 16.dp),
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Return to expert mode button
-        SectionTitle(
-            stringResource(R.string.advanced),
-            icon = Icons.Outlined.Engineering
-        )
-
-        MorpheCard(
-            onClick = onBackToAdvanced,
-            borderWidth = 1.dp
-        ) {
-            IconTextRow(
-                icon = Icons.Outlined.SwapHoriz,
-                title = stringResource(R.string.morphe_settings_return_to_expert),
-                description = stringResource(R.string.morphe_settings_return_to_expert_description),
-                modifier = Modifier.padding(16.dp),
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            )
-        }
-
         // Updates
         SectionTitle(
             text = stringResource(R.string.updates),
             icon = Icons.Outlined.Update
         )
 
-        SettingsItemCard(
+        RichSettingsItem(
             onClick = {
                 val newValue = !usePrereleases.value
                 scope.launch {
@@ -93,32 +73,100 @@ fun AdvancedTabContent(
                     patchOptionsViewModel.refresh()
                 }
             },
-            borderWidth = 1.dp
-        ) {
-            IconTextRow(
-                icon = Icons.Outlined.Science,
-                title = stringResource(R.string.morphe_update_use_prereleases),
-                description = stringResource(R.string.morphe_update_use_prereleases_description),
-                modifier = Modifier.padding(16.dp),
+            showBorder = true,
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Science)
+            },
+            title = stringResource(R.string.morphe_update_use_prereleases),
+            subtitle = stringResource(R.string.morphe_update_use_prereleases_description),
+            trailingContent = {
+                Switch(
+                    checked = usePrereleases.value,
+                    onCheckedChange = null
+                )
+            }
+        )
+
+        // Expert settings section
+        SectionTitle(
+            text = stringResource(R.string.morphe_expert_section),
+            icon = Icons.Outlined.Engineering
+        )
+
+        RichSettingsItem(
+            onClick = {
+                scope.launch {
+                    prefs.useExpertMode.update(!useExpertMode)
+                }
+            },
+            showBorder = true,
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Psychology)
+            },
+            title = stringResource(R.string.morphe_settings_expert_mode),
+            subtitle = stringResource(R.string.morphe_settings_expert_mode_description),
+            trailingContent = {
+                Switch(
+                    checked = useExpertMode,
+                    onCheckedChange = null
+                )
+            }
+        )
+
+        // For now hide 'Return to URV mode' button
+//        if (useExpertMode) {
+//            SettingsItem(
+//                icon = Icons.Outlined.SwapHoriz,
+//                title = "Change to URV mode",
+//                description = "Switch to the full-featured URV mode",
+//                onClick = onBackToAdvanced,
+//                showBorder = true
+//            )
+//        }
+
+        // Strip unused native libraries (Expert mode only)
+        if (useExpertMode) {
+            RichSettingsItem(
+                onClick = {
+                    scope.launch {
+                        prefs.stripUnusedNativeLibs.update(!stripUnusedNativeLibs)
+                    }
+                },
+                showBorder = true,
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.LayersClear)
+                },
+                title = stringResource(R.string.strip_unused_libs),
+                subtitle = stringResource(R.string.strip_unused_libs_description),
                 trailingContent = {
                     Switch(
-                        checked = usePrereleases.value,
+                        checked = stripUnusedNativeLibs,
                         onCheckedChange = null
                     )
                 }
             )
         }
 
-        // Patch Options
-        SectionTitle(
-            text = stringResource(R.string.morphe_patch_options),
-            icon = Icons.Outlined.Tune
-        )
+        if (useExpertMode && showExpertModeNotice) {
+            // In Expert mode Notice shown instead of patch options
+            InfoBadge(
+                icon = Icons.Outlined.Info,
+                text = stringResource(R.string.morphe_patch_options_expert_mode_notice),
+                style = InfoBadgeStyle.Warning,
+                isExpanded = true
+            )
+        } else if (!useExpertMode) {
+            // Patch Options  (Simple mode only)
+            SectionTitle(
+                text = stringResource(R.string.morphe_patch_options),
+                icon = Icons.Outlined.Tune
+            )
 
-        PatchOptionsSection(
-            patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
-            viewModel = patchOptionsViewModel,
-            dashboardViewModel = dashboardViewModel
-        )
+            PatchOptionsSection(
+                patchOptionsPrefs = patchOptionsViewModel.patchOptionsPrefs,
+                viewModel = patchOptionsViewModel,
+                dashboardViewModel = dashboardViewModel
+            )
+        }
     }
 }

@@ -5,7 +5,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -29,16 +28,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.network.downloader.DownloaderPluginState
-import app.revanced.manager.ui.component.ExceptionViewerDialog
 import app.revanced.manager.ui.component.morphe.settings.*
-import app.revanced.manager.ui.component.morphe.shared.AnimatedBackground
 import app.revanced.manager.ui.viewmodel.*
+import app.revanced.manager.util.JSON_MIMETYPE
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -59,13 +55,11 @@ private enum class SettingsTab(
 /**
  * Settings screen with bottom navigation and swipeable tabs
  */
-@SuppressLint("BatteryLight")
+@SuppressLint("BatteryLight", "LocalContextGetResourceValueCall")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MorpheSettingsScreen(
-    onBackClick: () -> Unit,
     themeViewModel: MorpheThemeSettingsViewModel = koinViewModel(),
-    downloadsViewModel: DownloadsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
@@ -89,21 +83,14 @@ fun MorpheSettingsScreen(
     val pureBlackTheme by themeViewModel.prefs.pureBlackTheme.getAsState()
     val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
     val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
-    val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
-
-    // Plugins
-    val pluginStates by downloadsViewModel.downloaderPluginStates.collectAsStateWithLifecycle()
 
     // Update
     val usePrereleases = dashboardViewModel.prefs.usePatchesPrereleases.getAsState()
 
     // Dialog states
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
-    var showPluginDialog by rememberSaveable { mutableStateOf<String?>(null) }
-    var selectedPluginState by remember { mutableStateOf<DownloaderPluginState?>(null) }
-    var showExceptionViewer by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
-    var installerDialogTarget by rememberSaveable { mutableStateOf<InstallerDialogTarget?>(null) }
+    var showInstallerDialog by remember { mutableStateOf(false) }
 
     // Keystore import launcher
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -121,6 +108,22 @@ fun MorpheSettingsScreen(
         uri?.let { importExportViewModel.exportKeystore(it) }
     }
 
+    // Manager settings import launcher
+    val importSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.importManagerSettings(it)
+        }
+    }
+
+    // Manager settings export launcher
+    val exportSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let { importExportViewModel.exportManagerSettings(it) }
+    }
+
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
         showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
@@ -129,39 +132,6 @@ fun MorpheSettingsScreen(
     // Show about dialog
     if (showAboutDialog) {
         AboutDialog(onDismiss = { showAboutDialog = false })
-    }
-
-    // Show plugin management dialog
-    showPluginDialog?.let { packageName ->
-        val state = pluginStates[packageName]
-
-        PluginActionDialog(
-            packageName = packageName,
-            state = state,
-            onDismiss = {
-                showPluginDialog = null
-                selectedPluginState = null
-            },
-            onTrust = { downloadsViewModel.trustPlugin(packageName) },
-            onRevoke = { downloadsViewModel.revokePluginTrust(packageName) },
-            onUninstall = { downloadsViewModel.uninstallPlugin(packageName) },
-            onViewError = {
-                selectedPluginState = state
-                showPluginDialog = null
-                showExceptionViewer = true
-            }
-        )
-    }
-
-    // Show exception viewer dialog
-    if (showExceptionViewer && selectedPluginState is DownloaderPluginState.Failed) {
-        ExceptionViewerDialog(
-            text = (selectedPluginState as DownloaderPluginState.Failed).throwable.stackTraceToString(),
-            onDismiss = {
-                showExceptionViewer = false
-                selectedPluginState = null
-            }
-        )
     }
 
     // Show keystore credentials dialog
@@ -185,83 +155,72 @@ fun MorpheSettingsScreen(
     }
 
     // Installer selection dialog
-    installerDialogTarget?.let { target ->
+    if (showInstallerDialog) {
         InstallerSelectionDialogContainer(
-            target = target,
             installerManager = installerManager,
             advancedViewModel = advancedViewModel,
             rootInstaller = rootInstaller,
-            onDismiss = { installerDialogTarget = null }
+            onDismiss = { showInstallerDialog = false }
         )
     }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .statusBarsPadding()
     ) {
-        // Animated background
-        AnimatedBackground(type = backgroundType)
-
-        Column(
+        // Content area
+        HorizontalPager(
+            state = pagerState,
             modifier = Modifier
-                .fillMaxSize()
-                .statusBarsPadding()
-        ) {
-            // Content area
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) { page ->
-                when (SettingsTab.entries[page]) {
-                    SettingsTab.APPEARANCE -> AppearanceTabContent(
-                        theme = theme,
-                        pureBlackTheme = pureBlackTheme,
-                        dynamicColor = dynamicColor,
-                        customAccentColorHex = customAccentColorHex,
-                        backgroundType = backgroundType,
-                        themeViewModel = themeViewModel
-                    )
+                .fillMaxWidth()
+                .weight(1f)
+        ) { page ->
+            when (SettingsTab.entries[page]) {
+                SettingsTab.APPEARANCE -> AppearanceTabContent(
+                    theme = theme,
+                    pureBlackTheme = pureBlackTheme,
+                    dynamicColor = dynamicColor,
+                    customAccentColorHex = customAccentColorHex,
+                    themeViewModel = themeViewModel
+                )
 
-                    SettingsTab.ADVANCED -> AdvancedTabContent(
-                        usePrereleases = usePrereleases,
-                        patchOptionsViewModel = patchOptionsViewModel,
-                        dashboardViewModel = dashboardViewModel,
-                        prefs = prefs,
-                        onBackToAdvanced = {
-                            coroutineScope.launch {
-                                themeViewModel.prefs.useMorpheHomeScreen.update(false)
-                            }
-                            onBackClick()
-                        }
-                    )
+                SettingsTab.ADVANCED -> AdvancedTabContent(
+                    usePrereleases = usePrereleases,
+                    patchOptionsViewModel = patchOptionsViewModel,
+                    dashboardViewModel = dashboardViewModel,
+                    prefs = prefs,
+//                    onBackToAdvanced = {
+//                        coroutineScope.launch {
+//                            themeViewModel.prefs.useMorpheHomeScreen.update(false)
+//                        }
+//                    }
+                )
 
-                    SettingsTab.SYSTEM -> SystemTabContent(
-                        installerManager = installerManager,
-                        advancedViewModel = advancedViewModel,
-                        onShowInstallerDialog = { target ->
-                            installerDialogTarget = target
-                        },
-                        importExportViewModel = importExportViewModel,
-                        onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                        onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
-                        onAboutClick = { showAboutDialog = true }
-                    )
+                SettingsTab.SYSTEM -> SystemTabContent(
+                    installerManager = installerManager,
+                    advancedViewModel = advancedViewModel,
+                    onShowInstallerDialog = { showInstallerDialog = true },
+                    importExportViewModel = importExportViewModel,
+                    onImportKeystore = { importKeystoreLauncher.launch("*/*") },
+                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
+                    onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
+                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
+                    onAboutClick = { showAboutDialog = true },
+                    prefs = prefs
+                )
+            }
+        }
+
+        // Bottom Navigation
+        MorpheBottomNavigation(
+            currentTab = currentTab,
+            onTabSelected = { tab ->
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(tab.ordinal)
                 }
             }
-
-            // Bottom Navigation
-            MorpheBottomNavigation(
-                currentTab = currentTab,
-                onTabSelected = { tab ->
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(tab.ordinal)
-                    }
-                }
-            )
-        }
+        )
     }
 }
 

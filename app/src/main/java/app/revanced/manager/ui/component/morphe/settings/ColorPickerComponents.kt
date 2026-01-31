@@ -118,8 +118,7 @@ fun ColorPickerDialog(
                         color = LocalDialogSecondaryTextColor.current.copy(alpha = 0.6f)
                     )
                 },
-                isError = isHexError,
-                modifier = Modifier.fillMaxWidth()
+                isError = isHexError
             )
 
             // RGB Sliders
@@ -282,7 +281,7 @@ fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
         when (cleanHex.length) {
             6 -> {
                 // #RRGGBB format
-                val r = cleanHex.substring(0, 2).toInt(16) / 255f
+                val r = cleanHex.take(2).toInt(16) / 255f
                 val g = cleanHex.substring(2, 4).toInt(16) / 255f
                 val b = cleanHex.substring(4, 6).toInt(16) / 255f
                 Triple(r, g, b)
@@ -296,7 +295,7 @@ fun parseHexToRgb(hex: String): Triple<Float, Float, Float>? {
             }
             else -> null
         }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         null
     }
 }

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
 import app.morphe.manager.BuildConfig
@@ -28,7 +29,16 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 import org.koin.core.component.inject
+import java.io.File
 import kotlin.math.max
+
+// Max memory value. Slightly higher values may work for some devices
+// but patching YT is the same time with both 1200 and 1600 memory.
+const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1536
+const val PROCESS_RUNTIME_MEMORY_DEFAULT = 512
+const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 256
+const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 384
+const val PROCESS_RUNTIME_MEMORY_STEP = 128
 
 /**
  * Runs the patcher in another process by using the app_process binary and IPC.
@@ -91,10 +101,10 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                 )
                 // Success - update preference and return.
                 if (retried && prefs.patcherProcessMemoryLimit.get() != memoryMB) {
-                    if (memoryMB < 500) {
+                    if (memoryMB < PROCESS_RUNTIME_MEMORY_DEFAULT) {
                         // Don't save a value lower than the expected minimum.
                         // Instead allow discovering the actually memory limit again next time.
-                        memoryMB = 500
+                        memoryMB = PROCESS_RUNTIME_MEMORY_DEFAULT
                     }
                     Log.i(tag, "Updating process memory limit setting to: $memoryMB")
                     prefs.patcherProcessMemoryLimit.update(memoryMB)
@@ -110,7 +120,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
 
                 if (isMemoryFailure && memoryMB > minMemoryLimit) {
                     retried = true
-                    memoryMB -= 100
+                    memoryMB -= PROCESS_RUNTIME_MEMORY_STEP
                     Log.i(tag, "Process memory limit failed, retrying with: $memoryMB")
                     continue
                 }
@@ -149,20 +159,22 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         val heapSizeString = "${memoryLimit}M"
         val env =
             System.getenv().toMutableMap().apply {
-                putAll(
-                    mapOf(
-                        "CLASSPATH" to managerBaseApk,
-                        // Override the props used by ART to set the memory limit.
-                        "LD_PRELOAD" to propOverride,
-                        "PROP_dalvik.vm.heapsize" to heapSizeString,
-                        "PROP_dalvik.vm.heapgrowthlimit" to heapSizeString,
-                    )
-                )
+                put("CLASSPATH", managerBaseApk)
+                if (propOverride != null) {
+                    // Override the props used by ART to set the memory limit.
+                    put("LD_PRELOAD", propOverride)
+                    put("PROP_dalvik.vm.heapgrowthlimit", heapSizeString)
+                    put("PROP_dalvik.vm.heapsize", heapSizeString)
+                } else {
+                    Log.w(tag, "Skipping prop override on Android ${Build.VERSION.SDK_INT}")
+                }
             }
+
+        val appProcessBin = resolveAppProcessBin(context)
 
         launch(Dispatchers.IO) {
             val result = process(
-                APP_PROCESS_BIN_PATH,
+                appProcessBin,
                 "-Djava.io.tmpdir=$cacheDir", // The process will use /tmp if this isn't set, which is a problem because that folder is not accessible on Android.
                 "/", // The unused cmd-dir parameter
                 "--nice-name=${context.packageName}:Patcher",
@@ -186,6 +198,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
 
         launch(Dispatchers.IO) {
             val binder = awaitBinderConnection()
+//            binderRef.set(binder)
 
             // Android Studio's fast deployment feature causes an issue where the other process will be running older code compared to the main process.
             // The patcher process is running outdated code if the randomly generated BUILD_ID numbers don't match.
@@ -203,7 +216,7 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
                     onProgress(name, state?.let { enumValueOf<State>(it) }, msg)
 
                 override fun finished(exceptionStackTrace: String?) {
-                    binder.exit()
+                    runCatching { binder.exit() }
 
                     exceptionStackTrace?.let {
                         patching.completeExceptionally(RemoteFailureException(it))
@@ -239,6 +252,8 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
 
     companion object : LibraryResolver() {
         private const val APP_PROCESS_BIN_PATH = "/system/bin/app_process"
+        private const val APP_PROCESS_BIN_PATH_64 = "/system/bin/app_process64"
+        private const val APP_PROCESS_BIN_PATH_32 = "/system/bin/app_process32"
         const val OOM_EXIT_CODE = 134
         const val SIGKILL_EXIT_CODE = 137
 
@@ -247,6 +262,11 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         const val BUNDLE_BINDER_KEY = "BINDER"
 
         private fun resolvePropOverride(context: Context) = findLibrary(context, "prop_override")
+        private fun resolveAppProcessBin(context: Context): String {
+            val is64Bit = context.applicationInfo.nativeLibraryDir.contains("64")
+            val preferred = if (is64Bit) APP_PROCESS_BIN_PATH_64 else APP_PROCESS_BIN_PATH_32
+            return if (File(preferred).exists()) preferred else APP_PROCESS_BIN_PATH
+        }
     }
 
     /**

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Patch-pakke</string>
+    <string name="morphe_home_other_apps">Andet</string>
+    <string name="morphe_home">Hjem</string>
+    <string name="morphe_home_not_patched_yet">Ikke patchet endnu</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Manager opdatering tilgængelig</string>
+    <string name="morphe_home_update_available_subtitle">Ny version klar til installation</string>
+    <string name="morphe_home_update_error">Opdatering mislykkedes</string>
+    <string name="morphe_home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
+    <string name="morphe_home_updating_sources">Ophaver kilder…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d kilder behandlet</string>
+    <string name="morphe_home_update_success">Ophav kilder fuldført</string>
+    <string name="morphe_home_update_success_subtitle">Dine kilder er opdaterede</string>
+    <string name="morphe_home_sources_are_loading">Kilder hentes, vent venligst…</string>
+    <string name="morphe_home_please_wait">Vent venligst…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Klar til at gøre YouTube legendarisk igen?</string>
@@ -21,21 +35,28 @@
     <string name="morphe_home_greeting_9">Redder apps fra dem selv siden i dag</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Drevet af koffein og gode patches</string>
-    <string name="morphe_home_bundle_type_api">API-pakke</string>
-    <string name="morphe_home_update_error">Opdatering mislykkedes</string>
-    <string name="morphe_home_update_error_subtitle">Tjek din internetforbindelse, og prøv igen.</string>
-    <string name="morphe_home_updating_patches">Opdaterer patches…</string>
-    <string name="morphe_home_update_success">Opdatering fuldført</string>
-    <string name="morphe_home_patches_updated">Dine patches er opdaterede</string>
-    <string name="morphe_home_patches_are_loading">Patches indlæses, vent venligst…</string>
-    <string name="morphe_home_please_wait">Vent venligst…</string>
-    <string name="morphe_home_open_in_browser">Åbn i browser</string>
-    <string name="morphe_home_failed_to_open_url">Kunne ikke åbne URL</string>
-    <string name="morphe_home_date_added">Tilføjet</string>
-    <string name="morphe_home_date_updated">Opdateret</string>
-    <string name="morphe_home_check_updates">Tjek</string>
-    <string name="morphe_home_unknown">Ukendt</string>
-    <string name="morphe_home_timeline">Historik for opdateringer</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Kilder</string>
+    <string name="morphe_sources_management_subtitle">%d kilder installeret</string>
+    <string name="morphe_sources_delete_confirm_message">Slet kilden “%s”? Dette kan ikke angores. </string>
+    <string name="morphe_sources_open_in_browser">Åbn i browser</string>
+    <string name="morphe_sources_failed_to_open_url">Kunne ikke åbne URL</string>
+    <string name="morphe_sources_date_added">Tilføjet</string>
+    <string name="morphe_sources_date_updated">Opdateret</string>
+    <string name="morphe_enabled">Aktiveret</string>
+    <string name="morphe_disabled">Deaktiveret</string>
+    <string name="morphe_rename">Omdøb</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Tilføj patch-kilde</string>
+    <string name="morphe_add_patch_source_remote">Remote</string>
+    <string name="morphe_add_patch_source_remote_url">Kildens URL</string>
+    <string name="morphe_add_patch_source_remote_description">Angiv JSON-endpoint URL for remote patch-kilde</string>
+    <string name="morphe_add_patch_source_local">Lokalt</string>
+    <string name="morphe_add_patch_source_local_file">Vælg patch-kildefil</string>
+    <string name="morphe_add_patch_source_local_file_description">Vælg en .mpp patch-kildefil fra lagring</string>
+    <string name="morphe_add_patch_source_local_change_file">Skift fil</string>
+    <string name="morphe_home_no_patches_available">Ingen patches tilgængelige</string>
+    <string name="morphe_home_default_source_disabled">Morphe-patch kilden er deaktiveret. Aktiver den i Patch-kilderark eller brug Avanceret-modus.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den originale upatchede APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
@@ -55,17 +76,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Vælg den APK du har downloadet</string>
     <string name="morphe_home_file_picker_prompt_description">Vælg nu %1$s APK-filen, som du lige har downloadet.</string>
-    <string name="morphe_home_file_picker_prompt_open">Åbn APK-fil jeg downloadede</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Åbn APK-fil jeg nedlåste</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Åbn APK-fil</string>
     <string name="morphe_home_recommended_version">Anbefalet version</string>
     <string name="morphe_patcher_selected_version">Valgte version</string>
+    <string name="morphe_home_select_apk_title">Vælg APK</string>
+    <string name="morphe_home_select_any_apk_description">Tryk på knappen nedenfor for at vælge en APK-fil for et hvilket som helst app for at patche</string>
+    <string name="morphe_home_invalid_apk">Ugyldig APK-fil</string>
+    <string name="morphe_home_no_patches_for_app">Ingen patches tilgængelige for dette app</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Expert-modus</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d af %2$d patches valgt</string>
+    <string name="morphe_expert_mode_search">Søg patches</string>
+    <string name="morphe_expert_mode_proceed">Fortsæt til patching</string>
+    <string name="morphe_expert_mode_disable_all">Deaktiver alle</string>
+    <string name="morphe_expert_mode_enable_all">Aktiver alle</string>
+    <string name="morphe_expert_mode_has_options">Konfigurerbart</string>
+    <string name="morphe_expert_mode_no_results">Ingen patches fundet</string>
+    <string name="morphe_expert_mode_no_patches">Ingen patches tilgængelige</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Bruglig farve</string>
+    <string name="morphe_hex_color">Hex farve</string>
+    <string name="morphe_patch_option_instructions">Instruktioner</string>
+    <string name="morphe_patch_option_enter_value">Angiv værdi</string>
+    <string name="morphe_patch_option_enter_number">Angiv tal</string>
+    <string name="morphe_patch_option_enter_decimal">Angiv desimal</string>
+    <string name="morphe_patch_option_pick_folder">Vælg mappe</string>
+    <string name="expand">Udvid</string>
+    <string name="collapse">Fold op</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Er du sikker på, at du vil afinstallere dette app?</string>
+    <string name="saved_app_delete_confirmation">Er du sikker på, at du vil slette dette gemte app?</string>
+    <string name="saved_copy_delete_confirmation">Er du sikker på, at du vil slette den gemte kopi?</string>
+    <string name="view">Vis</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Original APK ikke fundet. Kan ikke repatch dette app.</string>
+    <string name="morphe_repatch_requires_original">Repatch kræver den originale APK-fil</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Lagringstilstande</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">Total størrelse: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Patchede APK\'er</string>
+    <string name="morphe_patched_apks_title">Patchede APK\'er</string>
+    <string name="morphe_patched_apks_description">Håndter gemte patchede app-filer</string>
+    <string name="morphe_patched_apks_empty">Ingen patchede APK\'er gemt endnu</string>
+    <string name="morphe_patched_apks_delete_title">Slet patchede APK?</string>
+    <string name="morphe_patched_apks_delete_confirm">Er du sikker på, at du vil slette den gemte patchede APK for %s? </string>
+    <string name="morphe_patched_apks_deleted">Patchede APK slettet</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Originale APK\'er</string>
+    <string name="morphe_original_apks_title">Originale APK\'er</string>
+    <string name="morphe_original_apks_description">Originale APK-filer er gemt til repatching. Kun den seneste version for hvert app holdes.</string>
+    <string name="morphe_original_apks_empty">Ingen originale APK\'er gemt</string>
+    <string name="morphe_original_apks_deleted">Original APK slettet</string>
+    <string name="morphe_original_apks_saved">Original APK gemt</string>
+    <string name="morphe_original_apks_save_failed">Kunne ikke gemme original APK</string>
+    <string name="morphe_original_apks_delete_title">Slet original APK?</string>
+    <string name="morphe_original_apks_delete_confirm">Slet original APK for %s? Du kan ikke repatch uden at give en ny APK.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Root-tilstand kræver, at den originale APK er installeret på din enhed, før der kan lappes.</string>
     <string name="morphe_root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Gem APK</string>
-    <string name="morphe_patcher_copy_error">Kopierfejl</string>
-    <string name="morphe_patcher_show_error">Vis fejl</string>
     <string name="morphe_patcher_error_copied">Fejl kopieret til udklipsholder</string>
+    <string name="morphe_patcher_error_log">Fejlprotokol</string>
+    <string name="morphe_patcher_error_technical">Tekniske oplysninger</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d pletter</string>
     <string name="morphe_patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
     <string name="morphe_patcher_installing">Installerer...</string>
@@ -100,7 +175,7 @@
     <string name="morphe_patcher_message_7">Justerer 1-taller og 0-taller… 🤖</string>
     <string name="morphe_patcher_message_8">Redder digitale spaghetti ud… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Retter fejl i den upatchede app… 🐞</string>
+    <string name="morphe_patcher_message_9">Fixer bugs i det upatchede app… 🪲</string>
     <string name="morphe_patcher_message_10">Store patches er ventetiden værd… ⏳</string>
     <string name="morphe_patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
     <string name="morphe_patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker for \"Udbedring i gang\" skiltet... 💺✈️</string>
@@ -116,26 +191,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Fjerner vrøvl. Venligst vent… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Tilbage til Morphe hjem</string>
-    <string name="morphe_settings_return_to_morphe_description">Tilbage til forenklet tilstand</string>
-    <string name="morphe_settings_return_to_expert">Skift til ekspertmodus</string>
-    <string name="morphe_settings_return_to_expert_description">Skift til den fuldudviklede ekspertmodus</string>
-    <string name="morphe_share_website">Del hjemmeside</string>
-    <string name="morphe_share_website_description">Del den officielle Morphe-hjemmeside</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Appikon</string>
-    <string name="morphe_app_icon_selector_description">Ændre appens launcherikon</string>
-    <string name="morphe_app_icon_default">Standard</string>
-    <string name="morphe_app_icon_light_2">Himmel</string>
-    <string name="morphe_app_icon_light_3">Solnedgang</string>
-    <string name="morphe_app_icon_dark_1">Hav</string>
-    <string name="morphe_app_icon_dark_2">Tomhed</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Skift app-ikon?</string>
-    <string name="morphe_app_icon_change_dialog_message">Skift til \'%1$s\' og genstart?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Skift ikon</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Visuel præferencer</string>
     <string name="morphe_appearance_options_description">Tilpas emnefarver, farver og baggrunde</string>
     <string name="morphe_appearance_current_language">Nuværende sprog</string>
@@ -151,31 +207,42 @@
     <string name="morphe_background_type_shapes">Former</string>
     <string name="morphe_background_type_snow">Sne</string>
     <string name="morphe_background_type_none">Ingen</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Appikon</string>
+    <string name="morphe_app_icon_selector_description">Ændre appens launcherikon</string>
+    <string name="morphe_app_icon_default">Standard</string>
+    <string name="morphe_app_icon_light_2">Himmel</string>
+    <string name="morphe_app_icon_light_3">Solnedgang</string>
+    <string name="morphe_app_icon_dark_1">Hav</string>
+    <string name="morphe_app_icon_dark_2">Tomhed</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Skift app-ikon?</string>
+    <string name="morphe_app_icon_change_dialog_message">Skift til \'%1$s\' og genstart?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Skift ikon</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Expertindstillinger</string>
+    <string name="morphe_settings_expert_mode">Expertmodus</string>
+    <string name="morphe_settings_expert_mode_description">Aktiver avancerede funktioner og tilpasningsmuligheder</string>
     <string name="morphe_update_use_prereleases">Brug prerelease-versioner</string>
     <string name="morphe_update_use_prereleases_description">Få tidlig adgang til nye patches og manager-funktioner</string>
+    <string name="morphe_patch_options_expert_mode_notice">I Expertmodus vil patch-indstillinger være tilgængelige under patch-processen</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Pakkeindstillinger</string>
     <string name="morphe_patch_options_youtube_description">Tema, branding, header, og Shorts indstillinger</string>
     <string name="morphe_patch_options_youtube_music_description">Tema og brandingindstillinger</string>
     <string name="morphe_patch_options_restart_message">Ændring af patchindstillinger kræver geninstallering af appen for at træffe virkning.</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Appemotivfarver</string>
     <string name="morphe_patch_options_theme_colors_description">Skift baggrunds farve</string>
     <string name="morphe_patch_options_dark_theme_color">Dunk version baggrunds farve</string>
     <string name="morphe_patch_options_dark_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
     <string name="morphe_patch_options_light_theme_color">Lys version baggrunds farve</string>
     <string name="morphe_patch_options_light_theme_color_description">Kan være et hexadecimal farvekode (#RRGGBB) eller en henvisning til en farve-ressource.</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instruktioner for ikoner</string>
-    <string name="morphe_patch_options_header_instructions_title">Instruktioner for header</string>
     <string name="morphe_patch_options_loading">Henter pakkeindstillinger...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Vent til patch pakken opdateres</string>
+    <string name="morphe_patch_options_waiting_for_source">Vent, indtil patch-kilden er opdateret</string>
     <string name="morphe_patch_options_load_error">Fejled ved indlæsning af patchindstillinger</string>
     <string name="morphe_patch_options_no_available">Der er ikke tilgængelige indstillinger til denne patch</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Bruglig farve</string>
-    <string name="morphe_hex_color">Hex farve</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Tilpasset markering</string>
     <string name="morphe_patch_options_custom_branding_description">Skift app visningsnavn</string>
     <string name="morphe_patch_options_custom_branding_app_name">Appnavn</string>
@@ -204,7 +271,7 @@ Bildets dimensioner skal være som følger:
 Valgfri: stien indeholder en 'drawable' mappe med en hvit ikonfil (eller en gemtik fil):
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Tilpasset headerlog</string>
     <string name="morphe_patch_options_custom_header_description">Skift headerlog</string>
     <string name="morphe_patch_options_custom_header_instruction">"Mappe med billeder, der skal bruges som tilpasset headerlog.
@@ -224,12 +291,26 @@ Bildets dimensioner skal være som følger:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Skjul Shorts-features</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Skjul Shorts-programlets genvejstast</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Fjern Shorts fra langtrykkningsmenu i launcheren</string>
     <string name="morphe_patch_options_hide_shorts_widget">Skjul Shorts-widget</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Fjern Shorts-knap fra launcher-widget</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Ydeevne</string>
+    <string name="morphe_process_runtime">Process runtime</string>
+    <string name="morphe_process_runtime_description">Kør patching i separat proces for bedre stabilitet</string>
+    <string name="morphe_process_runtime_memory_limit">Minnegrænse</string>
+    <string name="morphe_process_runtime_memory_limit_help">Høje minnegrænser kan fartøje patching, men kan ikke fungere med ældre enheder</string>
+    <string name="morphe_enable_process_runtime">Aktiver process runtime</string>
+    <string name="morphe_memory_limit_subtitle">Minne tilgængeligt for patching</string>
+    <string name="morphe_memory_limit_warning">Lav minnegrænse kan forårsage fejl, når du patcher større apps</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB grænse</string>
+    <string name="morphe_process_runtime_disabled_description">Klik for at konfigurere</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Del hjemmeside</string>
+    <string name="morphe_share_website_description">Del den officielle Morphe-hjemmeside</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Pletter</string>
@@ -799,7 +880,7 @@ Den er kun kompatibel med følgende version: %2$s."</string>
     <string name="path_selector_files">Filer</string>
     <string name="show_password_field">Vis adgangskode</string>
     <string name="hide_password_field">Skjul adgangskode</string>
-    <string name="installer_primary_title">Primært installationsprogram</string>
+    <string name="installer_primary_title">Installer</string>
     <string name="installer_fallback_title">Sekundært installationsprogram</string>
     <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Brug Android-pakkeinstallationsprogrammet</string>
@@ -908,7 +989,7 @@ Detaljer: %2$s"</string>
     <string name="select_install_type">Vælg installationstype</string>
     <string name="patcher_step_group_preparing">Forbereder</string>
     <string name="patcher_step_load_patches">Indlæser patches</string>
-    <string name="patcher_step_prepare_split_apk">Flet delt APK</string>
+    <string name="patcher_step_prepare_split_apk">Fletter split APK</string>
     <string name="patcher_step_unpack">Læs APK fil</string>
     <string name="patcher_step_group_patching">Patche</string>
     <string name="patcher_step_group_saving">Gemmer</string>

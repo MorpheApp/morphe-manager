@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">Pachet de patch-uri</string>
+    <string name="morphe_home_other_apps">Alte aplicații</string>
+    <string name="morphe_home">Acasă</string>
+    <string name="morphe_home_not_patched_yet">Nu este actualizat încă</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">Există actualizări disponibile</string>
+    <string name="morphe_home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
+    <string name="morphe_home_update_error">Actualizarea a eșuat</string>
+    <string name="morphe_home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
+    <string name="morphe_home_updating_sources">Se actualizează surse…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d surse procesate</string>
+    <string name="morphe_home_update_success">Actualizare surse finalizată</string>
+    <string name="morphe_home_update_success_subtitle">Sursele tale sunt actualizate</string>
+    <string name="morphe_home_sources_are_loading">Se încarcă sursele, așteptați…</string>
+    <string name="morphe_home_please_wait">Vă rugăm așteptați…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Pentru ce aplicație doriți să aplicați patch-uri?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">Gata să faceți YouTube legendar din nou?</string>
@@ -21,21 +35,28 @@
     <string name="morphe_home_greeting_9">Salvăm aplicaţiile de la ele însele din astăzi</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Alimentat de cafea şi patch-uri bune</string>
-    <string name="morphe_home_bundle_type_api">Pachet API</string>
-    <string name="morphe_home_update_error">Actualizarea a eșuat</string>
-    <string name="morphe_home_update_error_subtitle">Verifică-ți conexiunea la internet și încearcă din nou</string>
-    <string name="morphe_home_updating_patches">Se actualizează patch-urile…</string>
-    <string name="morphe_home_update_success">Actualizare completă</string>
-    <string name="morphe_home_patches_updated">Patch-urile tale sunt la zi</string>
-    <string name="morphe_home_patches_are_loading">Patch-urile se încarcă, vă rugăm așteptați…</string>
-    <string name="morphe_home_please_wait">Vă rugăm așteptați…</string>
-    <string name="morphe_home_open_in_browser">Deschide în browser</string>
-    <string name="morphe_home_failed_to_open_url">Nu s-a putut deschide URL-ul</string>
-    <string name="morphe_home_date_added">Adăugat</string>
-    <string name="morphe_home_date_updated">Actualizat</string>
-    <string name="morphe_home_check_updates">Verifică</string>
-    <string name="morphe_home_unknown">Necunoscut</string>
-    <string name="morphe_home_timeline">Istoric de actualizări</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">Surse</string>
+    <string name="morphe_sources_management_subtitle">%d surse instalate</string>
+    <string name="morphe_sources_delete_confirm_message">Sigur doriți să ștergeți sursa \"%s\"? Acest lucru nu poate fi anulat.</string>
+    <string name="morphe_sources_open_in_browser">Deschide în browser</string>
+    <string name="morphe_sources_failed_to_open_url">Eroare la deschiderea URL-ului</string>
+    <string name="morphe_sources_date_added">Adăugat</string>
+    <string name="morphe_sources_date_updated">Actualizat</string>
+    <string name="morphe_enabled">Activat</string>
+    <string name="morphe_disabled">Dezactivat</string>
+    <string name="morphe_rename">Redenumește</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">Adaugă sursă de patch</string>
+    <string name="morphe_add_patch_source_remote">Distanță</string>
+    <string name="morphe_add_patch_source_remote_url">URL sursă</string>
+    <string name="morphe_add_patch_source_remote_description">Introduceți URL-ul punctului final JSON pentru sursă de patch distantă</string>
+    <string name="morphe_add_patch_source_local">Local</string>
+    <string name="morphe_add_patch_source_local_file">Selectează fișierul de sursă de patch</string>
+    <string name="morphe_add_patch_source_local_file_description">Selectează un fișier .mpp de sursă de patch din stocare</string>
+    <string name="morphe_add_patch_source_local_change_file">Schimbă fișier</string>
+    <string name="morphe_home_no_patches_available">Nu există patch-uri disponibile</string>
+    <string name="morphe_home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să folosiți modul Expert.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>
@@ -55,17 +76,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
     <string name="morphe_home_file_picker_prompt_description">Acum selectează fișierul APK %1$s pe care tocmai l-ai descărcat.</string>
-    <string name="morphe_home_file_picker_prompt_open">Deschide fișierul APK pe care l-am descărcat</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">Deschide fișierul APK pe care l-am descărcat</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">Deschide fișierul APK</string>
     <string name="morphe_home_recommended_version">Versiune recomandată</string>
     <string name="morphe_patcher_selected_version">Versiune selectat\u0103</string>
+    <string name="morphe_home_select_apk_title">Selectează APK</string>
+    <string name="morphe_home_select_any_apk_description">Apasa butonul de mai jos pentru a selecta un fișier APK al oricărei aplicații pentru patchare</string>
+    <string name="morphe_home_invalid_apk">Fișier APK invalid</string>
+    <string name="morphe_home_no_patches_for_app">Nu există patch-uri disponibile pentru această aplicație</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">Mod expert</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d din %2$d patch-uri selectate</string>
+    <string name="morphe_expert_mode_search">Caută patch-uri</string>
+    <string name="morphe_expert_mode_proceed">Procedează la patchare</string>
+    <string name="morphe_expert_mode_disable_all">Dezactivează toate</string>
+    <string name="morphe_expert_mode_enable_all">Activează toate</string>
+    <string name="morphe_expert_mode_has_options">Configurabil</string>
+    <string name="morphe_expert_mode_no_results">Nu au fost găsite patch-uri</string>
+    <string name="morphe_expert_mode_no_patches">Nu există patch-uri disponibile</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Culoare personalizată</string>
+    <string name="morphe_hex_color">Culoare hexazecimală</string>
+    <string name="morphe_patch_option_instructions">Instrucțiuni</string>
+    <string name="morphe_patch_option_enter_value">Introduceți valoarea</string>
+    <string name="morphe_patch_option_enter_number">Introduceți numărul</string>
+    <string name="morphe_patch_option_enter_decimal">Introduceți decimal</string>
+    <string name="morphe_patch_option_pick_folder">Alege folder</string>
+    <string name="expand">Extinde</string>
+    <string name="collapse">Restrânge</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">Sigur doriți să deinstalezi această aplicație?</string>
+    <string name="saved_app_delete_confirmation">Sigur doriți să ștergeți această aplicație salvată?</string>
+    <string name="saved_copy_delete_confirmation">Sigur doriți să ștergeți copia salvată?</string>
+    <string name="view">Vizualizează</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">Fișierul APK original nu a fost găsit. Nu se poate repatcha această aplicație.</string>
+    <string name="morphe_repatch_requires_original">Repatchul necesită fișierul APK original</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">Gestionare stocare</string>
+    <string name="morphe_apks_count">%d fișier(ă) APK</string>
+    <string name="morphe_apks_size">Dimensiune totală: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">Fișiere APK patcheate</string>
+    <string name="morphe_patched_apks_title">Fișiere APK patcheate</string>
+    <string name="morphe_patched_apks_description">Gestionați fișierele APK patcheate ale aplicațiilor salvate</string>
+    <string name="morphe_patched_apks_empty">Nu există încă fișiere APK patcheate salvate</string>
+    <string name="morphe_patched_apks_delete_title">Ștergeți fișierul APK patcheat?</string>
+    <string name="morphe_patched_apks_delete_confirm">Sigur doriți să ștergeți fișierul APK patcheat pentru %s?</string>
+    <string name="morphe_patched_apks_deleted">Fișierul APK patcheat a fost șters cu succes</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">Fișiere APK originale</string>
+    <string name="morphe_original_apks_title">Fișiere APK originale</string>
+    <string name="morphe_original_apks_description">Fișierele APK originale sunt salvate pentru repatchare. Se păstrează doar ultima versiune pentru fiecare aplicație.</string>
+    <string name="morphe_original_apks_empty">Nu există fișiere APK originale salvate</string>
+    <string name="morphe_original_apks_deleted">Fișierul APK original a fost șters cu succes</string>
+    <string name="morphe_original_apks_saved">Fișierul APK original a fost salvat</string>
+    <string name="morphe_original_apks_save_failed">Eroare la salvarea fișierului APK original</string>
+    <string name="morphe_original_apks_delete_title">Ștergeți fișierul APK original?</string>
+    <string name="morphe_original_apks_delete_confirm">Ștergeți fișierul APK original pentru %s? Nu veți putea repatcha fără să furnizați un nou fișier APK.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">Modul root necesită ca fișierul APK original să fie instalat pe dispozitivul dvs. înainte de aplicarea patch-ului.</string>
     <string name="morphe_root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">Salvare APK</string>
-    <string name="morphe_patcher_copy_error">Eroare la copiere</string>
-    <string name="morphe_patcher_show_error">Arat\u0103 eroarea</string>
     <string name="morphe_patcher_error_copied">Eroare copiată în clipboard</string>
+    <string name="morphe_patcher_error_log">Jurnal erori</string>
+    <string name="morphe_patcher_error_technical">Detalii tehnice</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d patch-uri</string>
     <string name="morphe_patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
     <string name="morphe_patcher_installing">Se instalează…</string>
@@ -100,7 +175,7 @@
     <string name="morphe_patcher_message_7">Ajustare 1-uri și 0-uri… 🤖</string>
     <string name="morphe_patcher_message_8">Descurcarea spaghetti-ului digital… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Repararea bug-urilor în aplicația nepatch-uită… 🐞</string>
+    <string name="morphe_patcher_message_9">Se încerca repararea bug-urilor din aplicația nepatcheată… 🪲</string>
     <string name="morphe_patcher_message_10">Patch-urile grozave merită așteptarea… ⏳</string>
     <string name="morphe_patcher_message_11">Șlefuirea pixelilor până strălucesc… 💎</string>
     <string name="morphe_patcher_message_12">Vă rugăm să rămâneți așezați până când pilotul oprește semnul \"Repararea este în curs\"... 💺✈️</string>
@@ -116,26 +191,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
     <string name="morphe_patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Întoarcere la pagina principală Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">Reveniți la modul simplificat</string>
-    <string name="morphe_settings_return_to_expert">Schimbă la modul avansat</string>
-    <string name="morphe_settings_return_to_expert_description">Schimbă la modul expert complet</string>
-    <string name="morphe_share_website">Partajare website</string>
-    <string name="morphe_share_website_description">Distribuie site-ul web oficial Morphe</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">Icoana aplicației</string>
-    <string name="morphe_app_icon_selector_description">Schimbă icoana aplicației</string>
-    <string name="morphe_app_icon_default">Implicit</string>
-    <string name="morphe_app_icon_light_2">Cer</string>
-    <string name="morphe_app_icon_light_3">Amurg</string>
-    <string name="morphe_app_icon_dark_1">Ocean</string>
-    <string name="morphe_app_icon_dark_2">Vide</string>
-    <string name="morphe_app_icon_dark_3">Indigo</string>
-    <string name="morphe_app_icon_change_dialog_title">Schimbă icona aplicației?</string>
-    <string name="morphe_app_icon_change_dialog_message">Schimbă la \'%1$s\' și repornește?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">Schimbă Icona</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">Opțiuni de aparență</string>
     <string name="morphe_appearance_options_description">Personalizați teme, culori și fundaluri</string>
     <string name="morphe_appearance_current_language">Limba Morphe</string>
@@ -151,31 +207,42 @@
     <string name="morphe_background_type_shapes">Forme</string>
     <string name="morphe_background_type_snow">Zăpadă</string>
     <string name="morphe_background_type_none">Niciunul</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">Pictograma aplicației</string>
+    <string name="morphe_app_icon_selector_description">Schimbă icoana aplicației</string>
+    <string name="morphe_app_icon_default">Implicit</string>
+    <string name="morphe_app_icon_light_2">Cer</string>
+    <string name="morphe_app_icon_light_3">Amurg</string>
+    <string name="morphe_app_icon_dark_1">Ocean</string>
+    <string name="morphe_app_icon_dark_2">Vide</string>
+    <string name="morphe_app_icon_dark_3">Indigo</string>
+    <string name="morphe_app_icon_change_dialog_title">Schimbăți icona aplicației?</string>
+    <string name="morphe_app_icon_change_dialog_message">Schimbă la \'%1$s\' și repornește?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">Schimbăți icona</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">Setări expert</string>
+    <string name="morphe_settings_expert_mode">Mod expert</string>
+    <string name="morphe_settings_expert_mode_description">Activează funcții avansate și opțiuni de personalizare</string>
     <string name="morphe_update_use_prereleases">Utilizaă versiuni pre-lansare</string>
     <string name="morphe_update_use_prereleases_description">Obșine acces anticipat la noile Åšni patches &amp; feature-uri ale managerului</string>
+    <string name="morphe_patch_options_expert_mode_notice">În mod expert, opțiunile de patchare vor fi disponibile în timpul procesului de patchare</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">Opțiuni de patch</string>
     <string name="morphe_patch_options_youtube_description">Opțiuni pentru tematică, brandare, antet și Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Opțiuni pentru tematică și brandare</string>
     <string name="morphe_patch_options_restart_message">Schimbul opțiunilor de patch necesită repatch pentru a avea efect</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">Culoare tematică</string>
     <string name="morphe_patch_options_theme_colors_description">Schimbare culoare fundal</string>
     <string name="morphe_patch_options_dark_theme_color">Culoare fundal pentru temă întunecată</string>
     <string name="morphe_patch_options_dark_theme_color_description">Poate fi o culoare HEX (#RRGGBB) sau o referință la resursa de culoare</string>
     <string name="morphe_patch_options_light_theme_color">Culoare fundal pentru temă luminată</string>
     <string name="morphe_patch_options_light_theme_color_description">Poate fi o culoare HEX (#RRGGBB) sau o referință la resursa de culoare</string>
-    <string name="morphe_patch_options_icon_instructions_title">Instrucțiuni formate iconiță</string>
-    <string name="morphe_patch_options_header_instructions_title">Instrucțiuni formate header</string>
     <string name="morphe_patch_options_loading">Încărcare opțiuni patch...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Așteptați până când bundle-ul de patch este actualizat</string>
+    <string name="morphe_patch_options_waiting_for_source">Așteptați până când sursa de patch este actualizată</string>
     <string name="morphe_patch_options_load_error">Eroare la încărcarea opțiunilor de patch</string>
     <string name="morphe_patch_options_no_available">Nu există opțiuni disponibile pentru acest patch</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Culoare personalizată</string>
-    <string name="morphe_hex_color">Culoare hexazecimală</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Marcaj personalizat</string>
     <string name="morphe_patch_options_custom_branding_description">Schimbare nume afișat al aplicației</string>
     <string name="morphe_patch_options_custom_branding_app_name">Numele aplicației</string>
@@ -204,7 +271,7 @@ Dimensiunile imaginilor trebuie să fie ca de mai jos:
 Optional, poate exista un folder 'drawable' cu oricare dintre fișierele iconițelor monocrome:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">Logo header personalizat</string>
     <string name="morphe_patch_options_custom_header_description">Schimbare logo header</string>
     <string name="morphe_patch_options_custom_header_instruction">"Folder cu imagini pentru a fi utilizate drept logo header personalizat.
@@ -224,12 +291,26 @@ Dimensiunile imaginilor trebuie să fie ca de mai jos:
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">Ascunde caracteristicile Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">Ascunde shortcut-ul aplicației Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">Elimină accesul la aplicația Shorts din meniul de la apăsare lungă în launcher</string>
     <string name="morphe_patch_options_hide_shorts_widget">Ascunde widget-ul Shorts</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">Elimină butonul Shorts din widget-ul launcher</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">Performanță</string>
+    <string name="morphe_process_runtime">Timp proces</string>
+    <string name="morphe_process_runtime_description">Rulați patcharea în proces separat pentru stabilitate mai bună</string>
+    <string name="morphe_process_runtime_memory_limit">Limita memorie</string>
+    <string name="morphe_process_runtime_memory_limit_help">Limite memorie mai înalte pot accelera patcharea dar pot nu funcționa cu dispozitive mai vechi</string>
+    <string name="morphe_enable_process_runtime">Activează timp proces</string>
+    <string name="morphe_memory_limit_subtitle">Memorie disponibilă pentru patchare</string>
+    <string name="morphe_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când se patchă aplicații mai mari</string>
+    <string name="morphe_process_runtime_enabled_description">Limită %d MB</string>
+    <string name="morphe_process_runtime_disabled_description">Click pentru a configura</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">Partajare website</string>
+    <string name="morphe_share_website_description">Distribuie site-ul web oficial Morphe</string>
     <!-- Other strings -->
     <string name="patcher">Patcher</string>
     <string name="patches">Patch-uri</string>
@@ -798,7 +879,7 @@ Este compatibilă doar cu următoarea versiune: %2$s."</string>
     <string name="path_selector_files">Fișiere</string>
     <string name="show_password_field">Afișare parolă</string>
     <string name="hide_password_field">Ascundere parolă</string>
-    <string name="installer_primary_title">Instalator primar</string>
+    <string name="installer_primary_title">Instalator</string>
     <string name="installer_fallback_title">Instalator de rezervă</string>
     <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizați instalatorul de pachete Android</string>
@@ -907,7 +988,7 @@ Detalii: %2$s"</string>
     <string name="select_install_type">Selectați tipul de instalare</string>
     <string name="patcher_step_group_preparing">Pregătire</string>
     <string name="patcher_step_load_patches">Se încarcă modificările</string>
-    <string name="patcher_step_prepare_split_apk">Se combină APK-ul divizat</string>
+    <string name="patcher_step_prepare_split_apk">Concatenează APK-uri</string>
     <string name="patcher_step_unpack">Citește fișierul APK</string>
     <string name="patcher_step_group_patching">Modificare</string>
     <string name="patcher_step_group_saving">Se salvează</string>

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">חבילת תיקון</string>
+    <string name="morphe_home_other_apps">אפליקציות אחרות</string>
+    <string name="morphe_home">בית</string>
+    <string name="morphe_home_not_patched_yet">עדיין לא תוקן</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">עדכון ניהול זמין</string>
+    <string name="morphe_home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
+    <string name="morphe_home_update_error">העדכון נכשל</string>
+    <string name="morphe_home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
+    <string name="morphe_home_updating_sources">מעדכן מקורות…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d מקורות מעובדים</string>
+    <string name="morphe_home_update_success">עדכון מקורות הושלם</string>
+    <string name="morphe_home_update_success_subtitle">המקורות שלך מעודכנים</string>
+    <string name="morphe_home_sources_are_loading">המקורות מתעדכנים, נא להמתין…</string>
+    <string name="morphe_home_please_wait">אנא המתן…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">אילו יישומון אתה רוצה לתקן?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">מוכן להפוך את YouTube למיתולוגי שוב?</string>
@@ -21,21 +35,28 @@
     <string name="morphe_home_greeting_9">מצילים אפליקציות מעצמן מהיום</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">מופעל על ידי קפאין ותיקונים טובים</string>
-    <string name="morphe_home_bundle_type_api">חבילת API</string>
-    <string name="morphe_home_update_error">העדכון נכשל</string>
-    <string name="morphe_home_update_error_subtitle">בדוק את חיבור האינטרנט שלך ונסה שוב</string>
-    <string name="morphe_home_updating_patches">מעדכן תיקונים…</string>
-    <string name="morphe_home_update_success">העדכון הושלם</string>
-    <string name="morphe_home_patches_updated">התיקונים שלך מעודכנים</string>
-    <string name="morphe_home_patches_are_loading">התיקונים נטענים, אנא המתן…</string>
-    <string name="morphe_home_please_wait">אנא המתן…</string>
-    <string name="morphe_home_open_in_browser">פתח בדפדפן</string>
-    <string name="morphe_home_failed_to_open_url">הפעולה נכשלה, לא ניתן לפתוח את ה-URL</string>
-    <string name="morphe_home_date_added">נוסף</string>
-    <string name="morphe_home_date_updated">עודכן</string>
-    <string name="morphe_home_check_updates">בדוק</string>
-    <string name="morphe_home_unknown">לא ידוע</string>
-    <string name="morphe_home_timeline">история обновлений</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">מקורות</string>
+    <string name="morphe_sources_management_subtitle">%d מקורות מותקנים</string>
+    <string name="morphe_sources_delete_confirm_message">למחוק מקור \"%s\"? פעולה זו לא תוכל להתבטל.</string>
+    <string name="morphe_sources_open_in_browser">פתח בקישורים בדפדפן</string>
+    <string name="morphe_sources_failed_to_open_url">שגיאה בפתיחת כתובת URL</string>
+    <string name="morphe_sources_date_added">הוסף</string>
+    <string name="morphe_sources_date_updated">עדכן</string>
+    <string name="morphe_enabled">הפעל</string>
+    <string name="morphe_disabled">מושבת</string>
+    <string name="morphe_rename">שנה שם</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">הוסף מקור תיקון</string>
+    <string name="morphe_add_patch_source_remote">רמוט</string>
+    <string name="morphe_add_patch_source_remote_url">כתובת URL של המקור</string>
+    <string name="morphe_add_patch_source_remote_description">הזן כתובת נקודת קצה JSON עבור מקור תיקון רמוט</string>
+    <string name="morphe_add_patch_source_local"> מקומי</string>
+    <string name="morphe_add_patch_source_local_file">בחר קובץ מקור תיקון</string>
+    <string name="morphe_add_patch_source_local_file_description">בחר קובץ מקור תיקון .mpp מאחסון</string>
+    <string name="morphe_add_patch_source_local_change_file">שנה קובץ</string>
+    <string name="morphe_home_no_patches_available">אין תיקונים זמינים</string>
+    <string name="morphe_home_default_source_disabled">הפאץ\' של מורפא דISABLED. אנא אפשרו אותו ברשימה של מקורות הפאץ או השתמשו במצב EXPERT.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">האם יש לך את קובץ ה-APK המקורי ללא תיקונים?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">כדי לתקן את %1$s, אתה צריך את הגרסה %2$s (לא מתוקנת)</string>
@@ -55,17 +76,71 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">בחר את קובץ ה-APK שהורדת</string>
     <string name="morphe_home_file_picker_prompt_description">כעת בחר את קובץ ה-APK מסוג %1$s שהורדת זה עתה.</string>
-    <string name="morphe_home_file_picker_prompt_open">פתח קובץ APK שהורדתי</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">פתח קובץ APK שטעיתי</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">פתח קובץ APK</string>
     <string name="morphe_home_recommended_version">версия для рекомендации</string>
     <string name="morphe_patcher_selected_version">גרסה שוחזרת</string>
+    <string name="morphe_home_select_apk_title">בחר APK</string>
+    <string name="morphe_home_select_any_apk_description">לחץ על הכפתור למטה כדי לבחור קובץ APK של כל אפליקציה לתיקון</string>
+    <string name="morphe_home_invalid_apk">קובץ APK לא חוקי</string>
+    <string name="morphe_home_no_patches_for_app">אין תיקונים זמינים עבור אפליקציה זו</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">מצב מומחה</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d מתוך %2$d תיקונים נבחרו</string>
+    <string name="morphe_expert_mode_search">חפש תיקונים</string>
+    <string name="morphe_expert_mode_proceed">המשך לתיקון</string>
+    <string name="morphe_expert_mode_disable_all">השבת את כולם</string>
+    <string name="morphe_expert_mode_enable_all">הפעל את כולם</string>
+    <string name="morphe_expert_mode_has_options">ניתן להגדרה</string>
+    <string name="morphe_expert_mode_no_results">לא נמצאו תיקונים</string>
+    <string name="morphe_expert_mode_no_patches">אין תיקונים זמינים</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">Цвет \"изготовителя\"</string>
+    <string name="morphe_hex_color">Цвет в формате HEX</string>
+    <string name="morphe_patch_option_instructions">הוראות</string>
+    <string name="morphe_patch_option_enter_value">הזן ערך</string>
+    <string name="morphe_patch_option_enter_number">הזן מספר</string>
+    <string name="morphe_patch_option_enter_decimal">הזן ספרתי</string>
+    <string name="morphe_patch_option_pick_folder">בחר תיקיה</string>
+    <string name="expand">הרחב</string>
+    <string name="collapse">צמצם</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">האם אתה בטוח שברצונך להסיר את האפליקציה הזו?</string>
+    <string name="saved_app_delete_confirmation">האם אתה בטוח שברצונך למחוק את העותק שמור הזה?</string>
+    <string name="saved_copy_delete_confirmation">האם אתה בטוח שברצונך למחוק את העותק השמור?</string>
+    <string name="view">צפה</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">קובץ APK מקורי לא נמצא. לא ניתן לתקן את האפליקציה הזו מחדש.</string>
+    <string name="morphe_repatch_requires_original">לתיקון מחדש דרוש קובץ APK מקורי</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">ניהול אחסון</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">גודל כולל: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">APKים מתוקנים</string>
+    <string name="morphe_patched_apks_title">APKים מתוקנים</string>
+    <string name="morphe_patched_apks_description">נהל קובצי APK מתוקנים שמורים</string>
+    <string name="morphe_patched_apks_empty">אין APKים מתוקנים שמורים עדיין</string>
+    <string name="morphe_patched_apks_delete_title">למחוק APK מתוקן?</string>
+    <string name="morphe_patched_apks_delete_confirm">האם אתה בטוח שברצונך למחוק את העותק המתוקן של %s?</string>
+    <string name="morphe_patched_apks_deleted">APK מתוקן נמחק בהצלחה</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">APKים מקוריים</string>
+    <string name="morphe_original_apks_title">APKים מקוריים</string>
+    <string name="morphe_original_apks_description">קובצי APK מקוריים שמורים לצורך תיקון מחדש. רק הגרסה האחרונה של כל אפליקציה נשמרת.</string>
+    <string name="morphe_original_apks_empty">אין APKים מקוריים שמורים</string>
+    <string name="morphe_original_apks_deleted">APK מקורי נמחק בהצלחה</string>
+    <string name="morphe_original_apks_saved">APK מקורי שמור</string>
+    <string name="morphe_original_apks_save_failed">שגיאה בשמירת APK מקורי</string>
+    <string name="morphe_original_apks_delete_title">למחוק APK מקורי?</string>
+    <string name="morphe_original_apks_delete_confirm">למחוק את העותק המקורי של %s? לא תוכל לתקן מחדש בלי לספק APK חדש.</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">מצב Root דורש שה-APK המקורי יהיה מותקן על המכשיר שלך לפני התיקון.</string>
     <string name="morphe_root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_save_apk">שמור APK</string>
-    <string name="morphe_patcher_copy_error">שגיאת עתיק硬化</string>
-    <string name="morphe_patcher_show_error">הראה שגיאה</string>
     <string name="morphe_patcher_error_copied">השגיאה הועתקה ללוח</string>
+    <string name="morphe_patcher_error_log">יומן שגיאות</string>
+    <string name="morphe_patcher_error_technical">פרטי טכניים</string>
     <string name="morphe_patcher_patches_progress">%1$d / %2$d תיקונים</string>
     <string name="morphe_patcher_long_step_warning">שלב זה עשוי לקחת זמן. אנא המתן…</string>
     <string name="morphe_patcher_installing">מתקין…</string>
@@ -100,7 +175,7 @@
     <string name="morphe_patcher_message_7">מכווננים 1 ו-0… 🤖</string>
     <string name="morphe_patcher_message_8">מתירים ספגטי דיגיטלי… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">מתקנים באגים באפליקציה שלא תוקנה… 🐞</string>
+    <string name="morphe_patcher_message_9">מתקן בעיות באפליקציה בלתי מתוקנת… 🪲</string>
     <string name="morphe_patcher_message_10">תיקונים מעולים שווים את ההמתנה… ⏳</string>
     <string name="morphe_patcher_message_11">מצחצחים פיקסלים עד שהם נוצצים… 💎</string>
     <string name="morphe_patcher_message_12">אנא שב במקומך עד שהקפטן יכבה את סימן \"תהליך התיקון בעיצומו\"... 💺✈️</string>
@@ -116,26 +191,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="morphe_patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
     <string name="morphe_patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">חזור לדף הבית של Morphe</string>
-    <string name="morphe_settings_return_to_morphe_description">חזור למצב פשוט</string>
-    <string name="morphe_settings_return_to_expert">אם לספור את מומחי ישיר. להיות מומחה.#!/ strenge מה...</string>
-    <string name="morphe_settings_return_to_expert_description">זה הולך לה thắng ב- новый >  #.fdsvc</string>
-    <string name="morphe_share_website">שתף אתר</string>
-    <string name="morphe_share_website_description">שתף את אתר האינטרנט הרשמי של Morphe</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">אייקון האפליקציה</string>
-    <string name="morphe_app_icon_selector_description">שינוי סמל האפליקציה</string>
-    <string name="morphe_app_icon_default">ברירת מחדל</string>
-    <string name="morphe_app_icon_light_2">שמיים</string>
-    <string name="morphe_app_icon_light_3">שקיעת שמש</string>
-    <string name="morphe_app_icon_dark_1">ים</string>
-    <string name="morphe_app_icon_dark_2">ריק</string>
-    <string name="morphe_app_icon_dark_3">אינדיגו</string>
-    <string name="morphe_app_icon_change_dialog_title">שנה סמל האפליקציה?</string>
-    <string name="morphe_app_icon_change_dialog_message">שנה ל\'%1$s\' ולהיחלץ?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">שנה סמל</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">אפשרויות茍:
 Настройки в 外れҰҡ or hate banех...</string>
     <string name="morphe_appearance_options_description">תכשולים בהגשות, צבעים ואפורים</string>
@@ -152,31 +208,42 @@
     <string name="morphe_background_type_shapes">צורות</string>
     <string name="morphe_background_type_snow">גשם</string>
     <string name="morphe_background_type_none">ללא</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">אייקון האפליקציה</string>
+    <string name="morphe_app_icon_selector_description">שינוי סמל האפליקציה</string>
+    <string name="morphe_app_icon_default">ברירת מחדל</string>
+    <string name="morphe_app_icon_light_2">שמיים</string>
+    <string name="morphe_app_icon_light_3">שקיעת שמש</string>
+    <string name="morphe_app_icon_dark_1">ים</string>
+    <string name="morphe_app_icon_dark_2">ריק</string>
+    <string name="morphe_app_icon_dark_3">אינדיגו</string>
+    <string name="morphe_app_icon_change_dialog_title">לשנות סמל האפליקציה?</string>
+    <string name="morphe_app_icon_change_dialog_message">שנה ל\'%1$s\' ולהיחלץ?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">שנה סמל</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">הגדרות מומחה</string>
+    <string name="morphe_settings_expert_mode">מצב מומחה</string>
+    <string name="morphe_settings_expert_mode_description">הפעל תכונות מתקדמות וoptions שלמות</string>
     <string name="morphe_update_use_prereleases">הוסף גרסאות心情versi贸 preliminari</string>
     <string name="morphe_update_use_prereleases_description">קבל גישה מוקדמת לבחירות ועדכונים</string>
+    <string name="morphe_patch_options_expert_mode_notice">במצב מומחה תכונות תיקון יהיו זמינות במהלך תיקון</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">אפשרויות עיבוד</string>
     <string name="morphe_patch_options_youtube_description">Тема, маркетинг, хедер, а также опции для Shorts</string>
     <string name="morphe_patch_options_youtube_music_description">Опции темы и брендинга</string>
     <string name="morphe_patch_options_restart_message">Изменение опций патча требует переустановки приложения для применения изменений</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">צבעים של .apple</string>
     <string name="morphe_patch_options_theme_colors_description">ש buses את צבע ההbackground</string>
     <string name="morphe_patch_options_dark_theme_color">Цвет заднего плана темной темы</string>
     <string name="morphe_patch_options_dark_theme_color_description">Может быть #RRGGBB или ссылка на ресурс цвета</string>
     <string name="morphe_patch_options_light_theme_color">Цвет заднего плана светлой темы</string>
     <string name="morphe_patch_options_light_theme_color_description">Может быть #RRGGBB или ссылка на ресурс цвета</string>
-    <string name="morphe_patch_options_icon_instructions_title">Пояснения по формату иконки</string>
-    <string name="morphe_patch_options_header_instructions_title">Пояснения по формату заголовка</string>
     <string name="morphe_patch_options_loading">Загрузка опций исправления...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">Ждите, пока пакет патча будет обновлен</string>
+    <string name="morphe_patch_options_waiting_for_source">חכה עד שמקור התיקון יועודכן</string>
     <string name="morphe_patch_options_load_error">Ошибка загрузки опций патча</string>
     <string name="morphe_patch_options_no_available">Нет доступных опций исправления</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">Цвет \"изготовителя\"</string>
-    <string name="morphe_hex_color">Цвет в формате HEX</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">Брендинг пользовательский</string>
     <string name="morphe_patch_options_custom_branding_description">Сменить название отображения приложения</string>
     <string name="morphe_patch_options_custom_branding_app_name">שם האפליקציה</string>
@@ -205,7 +272,7 @@ morphe_adaptive_foreground_custom.png
 אפשרות אופטיבית, המודל מכיל תיקייה 'drawable' הכוללת קובץ אייקון חד-צבע:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">לוגו כותרת מותאם אישית</string>
     <string name="morphe_patch_options_custom_header_description">שנה את לוגו הכותרת</string>
     <string name="morphe_patch_options_custom_header_instruction">"תיקייה הכוללת תמונות לה использовנה כלוגו כותרת מותאם אישית.
@@ -225,12 +292,26 @@ morphe_header_custom_dark.png
 - drawable-xhdpi: 258x96 פיקסלים
 - drawable-xxhdpi: 387x144 פיקסלים
 - drawable-xxxhdpi: 512x192 פיקסלים"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">הסתר ת Peel секретת</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">הסתר הקיצור של Shorts</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">הסר את Shorts מהתפריט הקשור לחץ של הפלטת</string>
     <string name="morphe_patch_options_hide_shorts_widget">הסתר את אייקון הטור</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">הסרת איקונית Shorts מפלטת הטור</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">הופעה</string>
+    <string name="morphe_process_runtime">זמן ריצה של תהליך</string>
+    <string name="morphe_process_runtime_description">רוץ את תיקון בпроצס נפרד לשליטה טובה יותר</string>
+    <string name="morphe_process_runtime_memory_limit">הגבלת זיכרון</string>
+    <string name="morphe_process_runtime_memory_limit_help">הגבלת זיכרון גבוהה יותר יכולה להאיץ את תיקון אך לא תעבוד עם מכשירים ישנים</string>
+    <string name="morphe_enable_process_runtime">הפעל ריצה תהליך</string>
+    <string name="morphe_memory_limit_subtitle">זיכרון זמין לתיקון</string>
+    <string name="morphe_memory_limit_warning">הגבלת זיכרון נמוכה עשויה לגרור שגיאות בעת תיקון של אפליקציות גדולות</string>
+    <string name="morphe_process_runtime_enabled_description">%d הגבלת MB</string>
+    <string name="morphe_process_runtime_disabled_description">לחץ כדי להגדיר</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">שתף אתר</string>
+    <string name="morphe_share_website_description">שתף את אתר האינטרנט הרשמי של Morphe</string>
     <!-- Other strings -->
     <string name="patcher">מכוון</string>
     <string name="patches">תיקונים</string>
@@ -800,7 +881,7 @@ morphe_header_custom_dark.png
     <string name="path_selector_files">קבצים</string>
     <string name="show_password_field">הצג סיסמה</string>
     <string name="hide_password_field">הסתר סיסמה</string>
-    <string name="installer_primary_title">מתקין ראשי</string>
+    <string name="installer_primary_title">התקן</string>
     <string name="installer_fallback_title">מתקין חלופי</string>
     <string name="installer_internal_name">מתקין מערכת</string>
     <string name="installer_internal_description">השתמש במתקין החבילות של Android</string>
@@ -909,7 +990,7 @@ morphe_header_custom_dark.png
     <string name="select_install_type">בחר סוג התקנה</string>
     <string name="patcher_step_group_preparing">מכין</string>
     <string name="patcher_step_load_patches">טוען תיקונים</string>
-    <string name="patcher_step_prepare_split_apk">מיזוג קובץ APK מפוצל</string>
+    <string name="patcher_step_prepare_split_apk">מיזוג APK מפוצל</string>
     <string name="patcher_step_unpack">Прочитать файл APK</string>
     <string name="patcher_step_group_patching">תיקון</string>
     <string name="patcher_step_group_saving">שמירה</string>

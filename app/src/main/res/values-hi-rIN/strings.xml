@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_bundles">पैच बंडल</string>
+    <string name="morphe_home_other_apps">अन्य ऐप्स</string>
+    <string name="morphe_home">घर</string>
+    <string name="morphe_home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
+    <!-- Home Screen - Update Notifications -->
+    <string name="morphe_home_update_available">मेन्यर अपडेट उपलब्ध है</string>
+    <string name="morphe_home_update_available_subtitle">नई संस्करण तैयार है</string>
+    <string name="morphe_home_update_error">उपडेट विफल हुआ</string>
+    <string name="morphe_home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
+    <string name="morphe_home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d स्रोतें संसाधित हुईं</string>
+    <string name="morphe_home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
+    <string name="morphe_home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
+    <string name="morphe_home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
+    <string name="morphe_home_please_wait">कृपया प्रतीक्षा करें…</string>
+    <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="morphe_home_greeting_2">क्या आप YouTube को फिर से लेजेंडरी बनाने के लिए तैयार हैं?</string>
@@ -21,21 +35,28 @@
     <string name="morphe_home_greeting_9">आज से ऐप्स को खुद से बचा रहे हैं</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
-    <string name="morphe_home_bundle_type_api">API बंडल</string>
-    <string name="morphe_home_update_error">उपडेट विफल हुआ</string>
-    <string name="morphe_home_update_error_subtitle">अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
-    <string name="morphe_home_updating_patches">पैच अपडेट हो रहे हैं…</string>
-    <string name="morphe_home_update_success">अपडेट पूरा हुआ</string>
-    <string name="morphe_home_patches_updated">आपके पैच अप टू डेट हैं</string>
-    <string name="morphe_home_patches_are_loading">पैच लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
-    <string name="morphe_home_please_wait">कृपया प्रतीक्षा करें…</string>
-    <string name="morphe_home_open_in_browser">ब्राउज़र में खोलें</string>
-    <string name="morphe_home_failed_to_open_url">URL खोलने में विफल रहा</string>
-    <string name="morphe_home_date_added">जोड़ा गया</string>
-    <string name="morphe_home_date_updated">अपडेटेड </string>
-    <string name="morphe_home_check_updates">जाँच करे </string>
-    <string name="morphe_home_unknown">अज्ञात</string>
-    <string name="morphe_home_timeline">अद्यतन इतिहास</string>
+    <!-- Sources Management -->
+    <string name="morphe_home_sources">पैच स्रोत</string>
+    <string name="morphe_sources_management_subtitle">%d स्रोत स्थापित हैं</string>
+    <string name="morphe_sources_delete_confirm_message">स्रोत \"%s\" को हटाएं? यह परिवर्तन नहीं किया जा सकता है।</string>
+    <string name="morphe_sources_open_in_browser">ब्राउज़र में खोलें</string>
+    <string name="morphe_sources_failed_to_open_url">URL खोलने में विफल रहा</string>
+    <string name="morphe_sources_date_added">जोड़ा गया</string>
+    <string name="morphe_sources_date_updated">अपडेटेड </string>
+    <string name="morphe_enabled">सक्षम</string>
+    <string name="morphe_disabled">असक्षम</string>
+    <string name="morphe_rename">रename</string>
+    <!-- Add Sources Dialog -->
+    <string name="morphe_add_patch_source">पैच स्रोत जोड़ें</string>
+    <string name="morphe_add_patch_source_remote">रिमोट</string>
+    <string name="morphe_add_patch_source_remote_url">स्रोत URL</string>
+    <string name="morphe_add_patch_source_remote_description">रिमोट पैच स्रोत के लिए JSON एंडपॉइंट URL दर्ज करें</string>
+    <string name="morphe_add_patch_source_local">लोकल</string>
+    <string name="morphe_add_patch_source_local_file">पैच स्रोत फ़ाइल चुनें</string>
+    <string name="morphe_add_patch_source_local_file_description">स्टोरेज से .mpp पैच स्रोत फ़ाइल चुनें</string>
+    <string name="morphe_add_patch_source_local_change_file">फ़ाइल बदलें</string>
+    <string name="morphe_home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
+    <string name="morphe_home_default_source_disabled">मorphe पटच स्रोत अक्षम है। पटच स्रोत शीट में इसे सक्षम करें या विशेष मोड का उपयोग करें।</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple"> %1$s को पैच करने के लिए, आपको वर्शन %2$s (पैच न किया गया) की ज़रूरत होगी</string>
@@ -55,13 +76,69 @@
     <!-- Dialog 3: File Picker Prompt -->
     <string name="morphe_home_file_picker_prompt_title">डाउनलोड किए गए APK को चुनें</string>
     <string name="morphe_home_file_picker_prompt_description">अब, डाउनलोड की गई %1$s APK फ़ाइल चुनें.</string>
+    <string name="morphe_home_file_picker_prompt_open_downloaded_apk">मैंने जो APK फ़ाइल डाउनलोड की है उसे खोलें</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">APK फ़ाइल खोलें</string>
     <string name="morphe_home_recommended_version">सुझाई गई संस्करण</string>
     <string name="morphe_patcher_selected_version">चयनित संस्करण</string>
+    <string name="morphe_home_select_apk_title">APK चुनें</string>
+    <string name="morphe_home_select_any_apk_description">पैचिंग के लिए किसी भी ऐप के लिए APK फ़ाइल चुनने के लिए नीचे दिए गए बटन पर टैप करें</string>
+    <string name="morphe_home_invalid_apk">अवैध APK फ़ाइल</string>
+    <string name="morphe_home_no_patches_for_app">इस ऐप के लिए कोई पैच उपलब्ध नहीं है</string>
+    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="morphe_expert_mode_title">एक्सपर्ट मोड</string>
+    <string name="morphe_expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
+    <string name="morphe_expert_mode_search">पैच खोजें</string>
+    <string name="morphe_expert_mode_proceed">पैचिंग के लिए आगे जाएं</string>
+    <string name="morphe_expert_mode_disable_all">सभी को असक्षम करें</string>
+    <string name="morphe_expert_mode_enable_all">सभी को सक्षम करें</string>
+    <string name="morphe_expert_mode_has_options">कस्टमाइज़ेशन ऑप्शंस उपलब्ध हैं</string>
+    <string name="morphe_expert_mode_no_results">कोई पैच नहीं मिला</string>
+    <string name="morphe_expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
+    <!-- Patch Options -->
+    <string name="morphe_custom_color">कस्टम रंग</string>
+    <string name="morphe_hex_color">हेक्स रंग</string>
+    <string name="morphe_patch_option_instructions">निर्देश</string>
+    <string name="morphe_patch_option_enter_value">मूल्य दर्ज करें</string>
+    <string name="morphe_patch_option_enter_number">नंबर दर्ज करें</string>
+    <string name="morphe_patch_option_enter_decimal">दशमलव दर्ज करें</string>
+    <string name="morphe_patch_option_pick_folder">फ़ोल्डर चुनें</string>
+    <string name="expand">विस्तार करें</string>
+    <string name="collapse">सिकुड़ाएं</string>
+    <!-- App Info Screen -->
+    <string name="uninstall_app_confirmation">क्या आप वाकई इस ऐप को अनइंस्टॉल करना चाहते हैं?</string>
+    <string name="saved_app_delete_confirmation">क्या आप वाकई इस सहेजे गए ऐप को हटाना चाहते हैं?</string>
+    <string name="saved_copy_delete_confirmation">क्या आप वाकई सहेजे गए कॉपी को हटाना चाहते हैं?</string>
+    <string name="view">दृश्य</string>
+    <!-- Repatch Feature -->
+    <string name="morphe_repatch_no_original_apk">ओरिजिनल APK नहीं मिला. इस ऐप को पुनःपैच करना संभव नहीं है।</string>
+    <string name="morphe_repatch_requires_original">पुनःपैच के लिए ओरिजिनल APK फ़ाइल आवश्यक है</string>
+    <!-- Storage Management -->
+    <string name="morphe_storage_management">स्टोरेज मैनेजमेंट</string>
+    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_size">कुल आकार: %s</string>
+    <!-- Patched APKs Management -->
+    <string name="morphe_patched_apks_management">पैच किए गए APKs</string>
+    <string name="morphe_patched_apks_title">पैच किए गए APKs</string>
+    <string name="morphe_patched_apks_description">सहेजे गए पैच किए गए ऐप फ़ाइलों को प्रबंधित करें</string>
+    <string name="morphe_patched_apks_empty">अभी तक कोई पैच किए गए APK सहेजे गए नहीं हैं</string>
+    <string name="morphe_patched_apks_delete_title">पैच किए गए APK को हटाएं?</string>
+    <string name="morphe_patched_apks_delete_confirm">क्या आप वाकई ऐप %s के लिए सहेजे गए पैच किए गए APK को हटाना चाहते हैं?</string>
+    <string name="morphe_patched_apks_deleted">पैच किए गए APK सफलतापूर्वक हटा दिया गया</string>
+    <!-- Original APKs Management -->
+    <string name="morphe_original_apks_management">ओरिजिनल APKs</string>
+    <string name="morphe_original_apks_title">ओरिजिनल APKs</string>
+    <string name="morphe_original_apks_description">ओरिजिनल APK फ़ाइलें पुनःपैच के लिए सहेजी जाती हैं। प्रत्येक ऐप के लिए केवल नवीनतम संस्करण रखा जाता है।</string>
+    <string name="morphe_original_apks_empty">कोई ओरिजिनल APK स्टोर नहीं किए गए हैं</string>
+    <string name="morphe_original_apks_deleted">ओरिजिनल APK सफलतापूर्वक हटा दिया गया</string>
+    <string name="morphe_original_apks_saved">ओरिजिनल APK सहेजा गया</string>
+    <string name="morphe_original_apks_save_failed">ओरिजिनल APK सहेजने में विफल हुआ</string>
+    <string name="morphe_original_apks_delete_title">ओरिजिनल APK को हटाएं?</string>
+    <string name="morphe_original_apks_delete_confirm">आप ऐप %s के लिए ओरिजिनल APK को हटाना चाहते हैं? इसके बिना नई APK प्रदान किए बिना पुनःपैच करना संभव नहीं होगा।</string>
     <!-- Root Mode -->
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_copy_error">कॉपी त्रुटि</string>
-    <string name="morphe_patcher_show_error">त्रुटि दिखाएं</string>
     <string name="morphe_patcher_error_copied">%1$d / %2$d patches</string>
+    <string name="morphe_patcher_error_log">त्रुटि रिपोर्ट</string>
+    <string name="morphe_patcher_error_technical">तकनीकी विवरण</string>
     <string name="morphe_patcher_patches_progress">URL copied to clipboard</string>
     <string name="morphe_patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="morphe_patcher_installing">Installing…</string>
@@ -96,7 +173,7 @@
     <string name="morphe_patcher_message_7">Look outside, it\'s nice out there… 🌤️</string>
     <string name="morphe_patcher_message_8">Adjusting 1\'s and 0\'s… 🤖</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="morphe_patcher_message_9">Untangling digital spaghetti… 🍝</string>
+    <string name="morphe_patcher_message_9">अपैच किए गए ऐप में बग्स को ठीक कर रहा हूँ… 🪲</string>
     <string name="morphe_patcher_message_10">Fixing bugs in the unpatched app… 🐞</string>
     <string name="morphe_patcher_message_11">Great patches are worth the wait… ⏳</string>
     <string name="morphe_patcher_message_12">Polishing pixels until they shine… 💎</string>
@@ -110,26 +187,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="morphe_patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Morphe Settings Screen -->
-    <string name="morphe_settings_return_to_morphe">Morphe गृह वापस जाएँ</string>
-    <string name="morphe_settings_return_to_morphe_description">वापस सरल मोड में जाएँ</string>
-    <string name="morphe_settings_return_to_expert">मोड को एक्सपर्ट में बदलें</string>
-    <string name="morphe_settings_return_to_expert_description">पूर्ण-उत्पादक एक्सपर्ट मोड में स्विच करें</string>
-    <string name="morphe_share_website">वेबसाइट साझा करें</string>
-    <string name="morphe_share_website_description">साझा अधिकृत मॉर्फ वेबसाइट</string>
-    <!-- App Icon Selector -->
-    <string name="morphe_app_icon_selector_title">एप्लिकेशन आइकन</string>
-    <string name="morphe_app_icon_selector_description">एप्लिकेशन लॉन्चर आइकन को बदलें</string>
-    <string name="morphe_app_icon_default">डिफ़ॉल्ट</string>
-    <string name="morphe_app_icon_light_2">आकाश</string>
-    <string name="morphe_app_icon_light_3">सूर्यास्त</string>
-    <string name="morphe_app_icon_dark_1">समुद्र</string>
-    <string name="morphe_app_icon_dark_2">वॉयड</string>
-    <string name="morphe_app_icon_dark_3">इंडिगो</string>
-    <string name="morphe_app_icon_change_dialog_title">एप्लिकेशन आइकन बदलें?</string>
-    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' में बदलें और पुनरारंभ करें?</string>
-    <string name="morphe_app_icon_change_dialog_confirm">आइकन बदलें</string>
-    <!-- Appearance Section -->
+    <!-- Appearance Tab -->
     <string name="morphe_appearance_options">प्रतीतिजनक विकल्प</string>
     <string name="morphe_appearance_options_description">थีม, रंग, और पृष्ठभूमि को अनुकूलित करें</string>
     <string name="morphe_appearance_current_language">वर्तमान भाषा</string>
@@ -138,28 +196,39 @@
     <string name="morphe_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद उपलब्ध नहीं हो सकते हैं या अधूरी हो सकते हैं</string>
     <string name="morphe_appearance_translations_info_text">नई भाषाओं के अनुवाद या मौजूदा अनुवादों को सुधारने के लिए, %s पर जाएं</string>
     <string name="morphe_background_type">पृष्ठभूमि गतिविधि</string>
-    <!-- Advanced Section -->
+    <!-- App Icon Selector -->
+    <string name="morphe_app_icon_selector_title">ऐप आइकन</string>
+    <string name="morphe_app_icon_selector_description">एप्लिकेशन लॉन्चर आइकन को बदलें</string>
+    <string name="morphe_app_icon_default">डिफ़ॉल्ट</string>
+    <string name="morphe_app_icon_light_2">आकाश</string>
+    <string name="morphe_app_icon_light_3">सूर्यास्त</string>
+    <string name="morphe_app_icon_dark_1">समुद्र</string>
+    <string name="morphe_app_icon_dark_2">वॉयड</string>
+    <string name="morphe_app_icon_dark_3">इंडिगो</string>
+    <string name="morphe_app_icon_change_dialog_title">ऐप आइकन बदलना चाहते हैं?</string>
+    <string name="morphe_app_icon_change_dialog_message">\'%1$s\' में बदलें और पुनरारंभ करें?</string>
+    <string name="morphe_app_icon_change_dialog_confirm">आइकन बदलें</string>
+    <!-- Advanced Tab -->
+    <string name="morphe_expert_section">एक्सपर्ट सेटिंग्स</string>
+    <string name="morphe_settings_expert_mode">एक्सपर्ट मोड</string>
+    <string name="morphe_settings_expert_mode_description">एक्सपर्ट मोड में उन्नत सुविधाएं और कस्टमाइज़ेशन ऑप्शंस सक्षम किए जाएंगे</string>
     <string name="morphe_update_use_prereleases">प्रिलीमरी रिलीज़ज़ को उपयोग करें</string>
     <string name="morphe_update_use_prereleases_description">नए पैच और मैनेजर फीचर्स के लिए प्रारंभिक 액्सेस प्राप्त करें</string>
+    <string name="morphe_patch_options_expert_mode_notice">एक्सपर्ट मोड में पैच ऑप्शंस पैचिंग प्रक्रिया के दौरान उपलब्ध होंगे</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">पैच विकल्प</string>
-    <!-- Theme Colors -->
+    <!-- Patch Options Section: Theme Colors -->
     <string name="morphe_patch_options_theme_colors">एप्लिकेशन थीम रंग</string>
     <string name="morphe_patch_options_theme_colors_description">पृष्ठभूमि रंग बदलें</string>
     <string name="morphe_patch_options_dark_theme_color">अंधेरे थीम पृष्ठभूमि रंग</string>
     <string name="morphe_patch_options_dark_theme_color_description">यह एक हेक्स रंग (#RRGGBB) या एक रंग संसाधन संदर्भ हो सकता है</string>
     <string name="morphe_patch_options_light_theme_color">सвет थीम पृष्ठभूमि रंग</string>
     <string name="morphe_patch_options_light_theme_color_description">यह एक हेक्स रंग (#RRGGBB) या एक रंग संसाधन संदर्भ हो सकता है</string>
-    <string name="morphe_patch_options_icon_instructions_title">आइकॉन फॉर्मेट निर्देश</string>
-    <string name="morphe_patch_options_header_instructions_title">हेडर फॉर्मेट निर्देश</string>
     <string name="morphe_patch_options_loading">पैच विकल्प लोड हो रहा है...</string>
-    <string name="morphe_patch_options_waiting_for_bundle">पैच बंडल को अपडेट करने के लिए प्रतीक्षा करें</string>
+    <string name="morphe_patch_options_waiting_for_source">पैच स्रोत को अपडेट होने तक प्रतीक्षा करें</string>
     <string name="morphe_patch_options_load_error">पैच विकल्प को लोड करने में विफल रहा</string>
     <string name="morphe_patch_options_no_available">कोई विकल्प उपलब्ध नहीं है</string>
-    <!-- Color Picker -->
-    <string name="morphe_custom_color">कस्टम रंग</string>
-    <string name="morphe_hex_color">हेक्स रंग</string>
-    <!-- Custom Branding -->
+    <!-- Patch Options Section: Custom Branding -->
     <string name="morphe_patch_options_custom_branding">कस्टम ब्रांडिंग</string>
     <string name="morphe_patch_options_custom_branding_description">एप्लिकेशन डिस्प्ले नाम बदलें</string>
     <string name="morphe_patch_options_custom_branding_app_name">एप्लिकेशन नाम</string>
@@ -188,7 +257,7 @@ morphe_adaptive_foreground_custom.png
 اختياريًا, पथ में 'drawable' फ़ोल्डर में किसी एक या अधिक मोनोक्रोम आइकन फ़ाइलें हो सकती हैं:
 morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
-    <!-- Custom Header (YouTube) -->
+    <!-- Patch Options Section: Custom Header -->
     <string name="morphe_patch_options_custom_header">कस्टम हेडर लोगो</string>
     <string name="morphe_patch_options_custom_header_description">हेडर लोगो बदलें</string>
     <string name="morphe_patch_options_custom_header_instruction">"कस्टम हेडर लोगो के लिए इमेज को उपयोग करने के लिए फोल्डर.
@@ -208,12 +277,26 @@ morphe_header_custom_dark.png
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
-    <!-- Hide Shorts -->
+    <!-- Patch Options Section: Hide Shorts -->
     <string name="morphe_patch_options_hide_shorts_features">शॉर्ट्स फीचर्स छुपाएं</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut">शॉर्ट्स एप्लिकेशन शॉर्टकट छुपाएं</string>
     <string name="morphe_patch_options_hide_shorts_app_shortcut_description">लॉन्चर लॉन्ग-प्रेस मेनू से शॉर्ट्स को हटाएं</string>
     <string name="morphe_patch_options_hide_shorts_widget">शॉर्ट्स विड्जेट छुपाएं</string>
     <string name="morphe_patch_options_hide_shorts_widget_description">लॉन्चर विड्जेट से शॉर्ट्स बटन को हटाएं</string>
+    <!-- System Tab -->
+    <string name="morphe_performance">प्रदर्शन</string>
+    <string name="morphe_process_runtime">प्रोसेस रनटाइम</string>
+    <string name="morphe_process_runtime_description">पैचिंग को अलग से प्रोसेस में चलाकर स्थिरता को बढ़ाएं</string>
+    <string name="morphe_process_runtime_memory_limit">मेमोरी सीमा</string>
+    <string name="morphe_process_runtime_memory_limit_help">अधिक मেমोरी सीमा पैचिंग को तेज़ कर सकती है लेकिन पुराने डिवाइसों के साथ काम नहीं करेगी</string>
+    <string name="morphe_enable_process_runtime">प्रोसेस रनटाइम सक्षम करें</string>
+    <string name="morphe_memory_limit_subtitle">पैचिंग के लिए उपलब्ध मेमोरी</string>
+    <string name="morphe_memory_limit_warning">अधिक मेमोरी सीमा पैचिंग के लिए बड़े ऐपों को संसाधित करने में विफल हो सकती है</string>
+    <string name="morphe_process_runtime_enabled_description">%d MB सीमा</string>
+    <string name="morphe_process_runtime_disabled_description">क्लिक करें और कॉन्फ़िगर करें</string>
+    <!-- About Section -->
+    <string name="morphe_share_website">वेबसाइट साझा करें</string>
+    <string name="morphe_share_website_description">साझा अधिकृत मॉर्फ वेबसाइट</string>
     <!-- Other strings -->
     <!-- Morphe -->
     <string name="bundle_version_dialog_description">Pick which bundle\'s suggestion should be used when downloading an APK.</string>
@@ -483,6 +566,7 @@ It is only compatible with the following version: %2$s."</string>
     <string name="view_applied_patches">View applied patches</string>
     <string name="patch_bundles_used">Patch bundles used</string>
     <string name="applied_patches_empty">No patches recorded for this app</string>
+    <string name="installer_primary_title">इंस्टॉलर</string>
     <string name="installer_status_requires_root">Requires root access</string>
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
@@ -536,6 +620,7 @@ It is only compatible with the following version: %2$s."</string>
     <string name="installer_hint_storage">There is not enough storage space for the installation.</string>
     <string name="installer_hint_timeout">The installation timed out. Try again.</string>
     <string name="installer_hint_aborted">The installation was cancelled.</string>
+    <string name="patcher_step_prepare_split_apk">स्प्लिटेड APK को मर्ज कर रहा हूँ</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
     <string name="patcher_notification_title">Patching in progress…</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
