@@ -90,6 +90,9 @@ private object AdaptiveIconConfig {
 
     // Default background color
     const val DEFAULT_BACKGROUND_COLOR = "#1E5AA8"
+
+    // Preview size
+    val PREVIEW_SIZE = 200.dp
 }
 
 /**
@@ -329,22 +332,6 @@ private fun AdaptiveIconPreview(
     onScaleChange: (Float) -> Unit,
     onOffsetChange: (Float, Float) -> Unit
 ) {
-    val context = LocalContext.current
-
-    // Get current device density and determine target size
-    val displayMetrics = context.resources.displayMetrics
-    val density = displayMetrics.densityDpi
-
-    // Determine which size to use based on density
-    val (_, targetSize) = AdaptiveIconConfig.DENSITY_CONFIGS
-        .entries
-        .firstOrNull { density <= it.key }
-        ?.value
-        ?: AdaptiveIconConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
-
-    // Convert target size to dp for preview
-    val previewSize = targetSize.dp
-
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -359,7 +346,7 @@ private fun AdaptiveIconPreview(
 
         Box(
             modifier = Modifier
-                .size(previewSize)
+                .size(AdaptiveIconConfig.PREVIEW_SIZE)
                 .clip(CircleShape)
                 .background(
                     parseColorToRgb(backgroundColor).let { (r, g, b) ->
