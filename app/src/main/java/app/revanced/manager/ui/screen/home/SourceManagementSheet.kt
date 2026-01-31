@@ -42,11 +42,11 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.bundles.RemotePatchBundle
-import app.revanced.manager.domain.manager.PreferencesManager.PatchBundleConstants.BUNDLE_URL_RELEASES
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.shared.ActionPillButton
 import app.revanced.manager.ui.screen.shared.InfoBadge
 import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
+import app.revanced.manager.util.BUNDLE_URL_RELEASES
 import app.revanced.manager.util.getRelativeTimeString
 import app.revanced.manager.util.toast
 import org.koin.compose.koinInject

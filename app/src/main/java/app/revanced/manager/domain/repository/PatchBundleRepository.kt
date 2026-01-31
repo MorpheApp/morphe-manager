@@ -1164,27 +1164,13 @@ class PatchBundleRepository(
             } else {
                 updateJob = scope.launch {
                     try {
-                        val useMorpheMode = prefs.useMorpheHomeScreen.get()
-
-                        if (useMorpheMode) {
-                            // Morphe performRemoteUpdate with result tracking
-                            performRemoteUpdateWithResult(
-                                force = request.force,
-                                showToast = request.showToast,
-                                allowUnsafeNetwork = request.allowUnsafeNetwork,
-                                onPerBundleProgress = request.onPerBundleProgress,
-                                predicate = request.predicate
-                            )
-                        } else {
-                            // Use standard upstream behavior
-                            performRemoteUpdate(
-                                force = request.force,
-                                showToast = request.showToast,
-                                allowUnsafeNetwork = request.allowUnsafeNetwork,
-                                onPerBundleProgress = request.onPerBundleProgress,
-                                predicate = request.predicate
-                            )
-                        }
+                        performRemoteUpdateWithResult(
+                            force = request.force,
+                            showToast = request.showToast,
+                            allowUnsafeNetwork = request.allowUnsafeNetwork,
+                            onPerBundleProgress = request.onPerBundleProgress,
+                            predicate = request.predicate
+                        )
                     } finally {
                         updateJobMutex.withLock {
                             updateJob = null
@@ -1208,158 +1194,6 @@ class PatchBundleRepository(
         }
     }
 
-    private suspend fun performRemoteUpdate(
-        force: Boolean,
-        showToast: Boolean,
-        allowUnsafeNetwork: Boolean,
-        onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)?,
-        predicate: (bundle: RemotePatchBundle) -> Boolean,
-    ) = coroutineScope {
-        try {
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowUnsafeNetwork && !allowMeteredUpdates && !networkInfo.isSafe()) {
-                Log.d(tag, "Skipping update check because the network is down or metered.")
-                bundleUpdateProgressFlow.value = null
-                return@coroutineScope
-            }
-
-            val targets = store.state.value.sources.values
-                .filterIsInstance<RemotePatchBundle>()
-                .filter { predicate(it) }
-
-            if (targets.isEmpty()) {
-                if (showToast) toast(R.string.sources_update_unavailable)
-                bundleUpdateProgressFlow.value = null
-                return@coroutineScope
-            }
-
-            markActiveUpdateUids(targets.map(RemotePatchBundle::uid).toSet())
-
-            bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                total = currentUpdateTotal(targets.size),
-                completed = 0,
-                phase = BundleUpdatePhase.Checking,
-            )
-
-            val updated: Map<RemotePatchBundle, PatchBundleDownloadResult> = try {
-                val results = LinkedHashMap<RemotePatchBundle, PatchBundleDownloadResult>()
-                var completed = 0
-
-                for (bundle in targets) {
-                    val total = currentUpdateTotal(targets.size)
-                    if (total <= 0) {
-                        bundleUpdateProgressFlow.value = null
-                        return@coroutineScope
-                    }
-                    if (isRemoteUpdateCancelled(bundle.uid)) {
-                        continue
-                    }
-
-                    Log.d(tag, "Updating patch bundle: ${bundle.name}")
-
-                    bundleUpdateProgressFlow.value = BundleUpdateProgress(
-                        total = total,
-                        completed = completed.coerceAtMost(total),
-                        currentBundleName = progressLabelFor(bundle),
-                        phase = BundleUpdatePhase.Checking,
-                        bytesRead = 0L,
-                        bytesTotal = null,
-                    )
-
-                    val onProgress: PatchBundleDownloadProgress = { bytesRead, bytesTotal ->
-                        if (isRemoteUpdateCancelled(bundle.uid)) {
-                            throw BundleUpdateCancelled()
-                        }
-                        bundleUpdateProgressFlow.update { progress ->
-                            progress?.copy(
-                                currentBundleName = progressLabelFor(bundle),
-                                phase = BundleUpdatePhase.Downloading,
-                                bytesRead = bytesRead,
-                                bytesTotal = bytesTotal,
-                            )
-                        }
-                        onPerBundleProgress?.invoke(bundle, bytesRead, bytesTotal)
-                    }
-
-                    val result = try {
-                        if (force) bundle.downloadLatest(onProgress) else bundle.update(onProgress)
-                    } catch (_: BundleUpdateCancelled) {
-                        continue
-                    }
-
-                    val downloadedName = runCatching {
-                        PatchBundle(bundle.patchesJarFile.absolutePath).manifestAttributes?.name
-                    }.getOrNull()?.trim().takeUnless { it.isNullOrBlank() }
-                    if (downloadedName != null) {
-                        bundleUpdateProgressFlow.update { progress ->
-                            progress?.copy(currentBundleName = downloadedName)
-                        }
-                    }
-
-                    val nextTotal = currentUpdateTotal(targets.size)
-                    completed = (completed + 1).coerceAtMost(nextTotal)
-                    bundleUpdateProgressFlow.update { progress ->
-                        progress?.copy(
-                            completed = completed,
-                            currentBundleName = downloadedName ?: progressLabelFor(bundle),
-                            phase = BundleUpdatePhase.Finalizing,
-                            bytesRead = 0L,
-                            bytesTotal = null,
-                        )
-                    }
-
-                    if (result != null) {
-                        results[bundle] = result
-                    }
-                }
-
-                results
-            } catch (e: Exception) {
-                Log.e(tag, "Failed to update patches", e)
-                toast(R.string.sources_download_fail, e.simpleMessage())
-                emptyMap()
-            } finally {
-                bundleUpdateProgressFlow.value = null
-            }
-
-            if (updated.isEmpty()) {
-                if (showToast) toast(R.string.sources_update_unavailable)
-                return@coroutineScope
-            }
-
-            dispatchAction("Apply updated bundles") {
-                updated.forEach { (src, downloadResult) ->
-                    if (dao.getProps(src.uid) == null) return@forEach
-                    val rawName = runCatching {
-                        PatchBundle(src.patchesJarFile.absolutePath).manifestAttributes?.name
-                    }.getOrNull()?.trim().takeUnless { it.isNullOrBlank() } ?: src.name
-                    val name = if (src.uid == DEFAULT_SOURCE_UID) rawName else ensureUniqueName(rawName, src.uid)
-                    val now = System.currentTimeMillis()
-
-                    updateDb(src.uid) {
-                        it.copy(
-                            versionHash = downloadResult.versionSignature,
-                            name = name,
-                            createdAt = downloadResult.assetCreatedAtMillis ?: it.createdAt,
-                            updatedAt = now
-                        )
-                    }
-                }
-
-                doReload()
-            }
-
-            val updatedUids = updated.keys.map(RemotePatchBundle::uid).toSet()
-            manualUpdateInfoFlow.update { currentMap -> currentMap - updatedUids }
-            if (showToast) toast(R.string.sources_update_success)
-        } finally {
-            clearActiveUpdateState()
-        }
-    }
-
-    /**
-     * Morphe: Hardcoded performRemoteUpdate that adds result tracking
-     */
     private suspend fun performRemoteUpdateWithResult(
         force: Boolean,
         showToast: Boolean,
