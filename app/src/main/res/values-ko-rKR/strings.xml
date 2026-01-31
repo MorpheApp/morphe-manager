@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
     <string name="morphe_add_patch_source_local_change_file">파일 변경</string>
     <string name="morphe_home_no_patches_available">사용 가능한 패치가 없습니다</string>
+    <string name="morphe_home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">패치할 원본 APK가 있나요?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">\'%1$s\'를 패치하려면, 패치되지 않은 %2$s 버전이 필요합니다</string>
@@ -76,7 +77,7 @@
     <string name="morphe_home_file_picker_prompt_title">다운로드된 APK 선택</string>
     <string name="morphe_home_file_picker_prompt_description">다운로드된 \'%1$s\' APK 파일을 선택하세요.</string>
     <string name="morphe_home_file_picker_prompt_open_downloaded_apk">다운로드된 APK 파일 열기</string>
-    <string name="morphe_home_file_picker_prompt_open_apk">APK 파일을 읽어오는 중</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">APK 파일 열기</string>
     <string name="morphe_home_recommended_version">권장 버전</string>
     <string name="morphe_patcher_selected_version">선택된 버전</string>
     <string name="morphe_home_select_apk_title">APK 선택</string>
@@ -114,7 +115,7 @@
     <!-- Storage Management -->
     <string name="morphe_storage_management">저장소 관리</string>
     <string name="morphe_apks_count">%d 개의 APK</string>
-    <string name="morphe_apks_size">총 크기: %s</string>
+    <string name="morphe_apks_size">전체 용량: %s</string>
     <!-- Patched APKs Management -->
     <string name="morphe_patched_apks_management">패치된 APK</string>
     <string name="morphe_patched_apks_title">패치된 APK</string>
@@ -126,7 +127,7 @@
     <!-- Original APKs Management -->
     <string name="morphe_original_apks_management">원본 APK</string>
     <string name="morphe_original_apks_title">원본 APK</string>
-    <string name="morphe_original_apks_description">원본 APK 파일은 다시 패치하기 위해 저장됩니다. 앱마다 가장 최신 버전만 보관됩니다.</string>
+    <string name="morphe_original_apks_description">원본 APK 파일은 다시 패치하기 위해 저장됩니다. 앱마다 가장 최신 버전만 보관됩니다</string>
     <string name="morphe_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="morphe_original_apks_deleted">원본 APK 삭제 완료</string>
     <string name="morphe_original_apks_saved">원본 APK 저장됨</string>
@@ -191,7 +192,7 @@
     <string name="morphe_patcher_message_19">앱에서 열이 좀 나네요, 유일한 처방은 더 많은 패치뿐입니다… 🩺🔔</string>
     <string name="morphe_patcher_message_20">잡소리를 삭제 중, 잠시만 기다려 주세요… 🗑️</string>
     <!-- Appearance Tab -->
-    <string name="morphe_appearance_options">레이아웃 옵션</string>
+    <string name="morphe_appearance_options">디자인 옵션</string>
     <string name="morphe_appearance_options_description">테마, 색상 그리고 배경을 커스텀 해보세요</string>
     <string name="morphe_appearance_current_language">현재 언어</string>
     <string name="morphe_appearance_search">검색</string>
@@ -407,7 +408,7 @@ morphe_header_custom_dark.png
     <string name="auto_updates_dialog_description">Morphe에서 다음 구성 요소에 대한 업데이트를 주기적으로 확인하시겠습니까?</string>
     <string name="auto_updates_dialog_patches">Morphe 패치</string>
     <string name="auto_updates_dialog_note">이 설정은 나중에 변경할 수 있습니다.</string>
-    <string name="appearance">레이아웃</string>
+    <string name="appearance">디자인</string>
     <string name="appearance_description">테마 및 동적 색상</string>
     <string name="updates">업데이트</string>
     <string name="updates_description">업데이트 확인 및 변경 사항 보기</string>
@@ -430,7 +431,7 @@ morphe_header_custom_dark.png
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
-    <string name="theme_preview_title">레이아웃 미리보기</string>
+    <string name="theme_preview_title">디자인 미리보기</string>
     <!-- Morphe -->
     <string name="theme_presets">테마 프리셋</string>
     <!-- Morphe -->
@@ -458,11 +459,11 @@ morphe_header_custom_dark.png
     <string name="patch_selection_safeguard_confirmation">"패치 선택 목록을 변경하면 예상되지 않은 문제점이 발생할 수 있습니다.
 
 그래도 활성화하시겠습니까?"</string>
-    <string name="universal_patches_safeguard">범용 패치 표시 및 사용 허용</string>
-    <string name="universal_patches_safeguard_description">범용 패치를 표시하거나 사용할 수 있습니다</string>
-    <string name="universal_patches_profile_blocked_title">범용 패치가 비활성화되어 있음</string>
-    <string name="universal_patches_profile_blocked_description">이 패치 프로필에는 범용 패치가 포함되어 있습니다. 사용하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
-    <string name="universal_patches_app_blocked_description">이 앱에는 범용 패치가 포함되어 있습니다. 계속하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
+    <string name="universal_patches_safeguard">유니버셜 패치 표시 및 사용</string>
+    <string name="universal_patches_safeguard_description">유니버셜 패치를 표시하거나 사용할 수 있습니다</string>
+    <string name="universal_patches_profile_blocked_title">유니버셜 패치가 비활성화되어 있음</string>
+    <string name="universal_patches_profile_blocked_description">이 패치 프로필에는 유니버셜 패치가 포함되어 있습니다. 사용하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
+    <string name="universal_patches_app_blocked_description">이 앱에는 유니버셜 패치가 포함되어 있습니다. 계속하려면 고급 설정에서 \'%1$s\'을 활성화하세요.</string>
     <string name="import_keystore">키스토어 가져오기</string>
     <string name="import_keystore_description">커스텀 키스토어를 가져옵니다</string>
     <string name="import_keystore_dialog_title">키스토어 자격 증명 입력</string>
@@ -746,7 +747,7 @@ morphe_header_custom_dark.png
     <string name="selected_apps_delete_dialog_description">매니저에서 선택된 앱을 삭제하시겠습니까?
 기기에 설치된 앱은 그대로 유지됩니다.</string>
     <string name="incompatible_patches">호환되지 않는 패치</string>
-    <string name="universal_patches">범용 패치</string>
+    <string name="universal_patches">유니버셜 패치</string>
     <string name="patch_selection_reset_toast">패치 선택 목록 및 옵션을 권장되는 기본값으로 초기화하였습니다</string>
     <string name="patch_options_reset_toast">패치 옵션을 초기화하였습니다</string>
     <string name="non_suggested_version_warning_title">권장되지 않는 버전</string>
@@ -1130,7 +1131,7 @@ morphe_header_custom_dark.png
 
 자세한 정보를 보려면 패치를 탭하세요."</string>
     <string name="incompatible_patch">호환되지 않는 패치</string>
-    <string name="any_version">모든 앱 버전</string>
+    <string name="any_version">모든</string>
     <string name="never_show_again">다시 보지 않기</string>
     <string name="show_manager_update_dialog_on_launch">시작 시 업데이트 메시지 표시</string>
     <string name="show_manager_update_dialog_on_launch_description">새로운 업데이트가 있을 경우에 시작 시 팝업 메시지를 표시합니다</string>

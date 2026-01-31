@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Selectează un fișier .mpp de sursă de patch din stocare</string>
     <string name="morphe_add_patch_source_local_change_file">Schimbă fișier</string>
     <string name="morphe_home_no_patches_available">Nu există patch-uri disponibile</string>
+    <string name="morphe_home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să folosiți modul Expert.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>

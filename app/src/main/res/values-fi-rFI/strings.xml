@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Valitse .mpp-patch-lähteen tiedosto tallennuksesta</string>
     <string name="morphe_add_patch_source_local_change_file">Vaihda tiedostoa</string>
     <string name="morphe_home_no_patches_available">Ei patcheja saatavilla</string>
+    <string name="morphe_home_default_source_disabled">Morphe-patchin lähde on poistettu. Kytke se päälle Patch sources -lehdessä tai käytä Expert-moodia.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>

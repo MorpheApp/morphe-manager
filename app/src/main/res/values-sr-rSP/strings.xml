@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Изаберите .mpp фајл извора печева са складишта</string>
     <string name="morphe_add_patch_source_local_change_file">Промени фајл</string>
     <string name="morphe_home_no_patches_available">Нema печева доступно</string>
+    <string name="morphe_home_default_source_disabled">Morphe patch izvora je iskljčeno. Molimo, omogušite ga u listu izvora patch-a ili koristite Expert mod.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Имате ли оригинални непромењени APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">За печовање %1$s, потребна вам је верзија %2$s (непечована)</string>

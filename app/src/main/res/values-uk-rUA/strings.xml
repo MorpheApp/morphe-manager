@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Вибрати файл .mpp джерела патчів із сховища</string>
     <string name="morphe_add_patch_source_local_change_file">Змінити файл</string>
     <string name="morphe_home_no_patches_available">Ні патчів доступно</string>
+    <string name="morphe_home_default_source_disabled">Відключено джерело Morphe. Увімкніть його в аркуші \"Джерела патчів\" або використовуйте Режим експерта.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">У вас є непатчений оригінальний APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Щоб пропатчити %1$s, потрібна версія %2$s (непатчена)</string>

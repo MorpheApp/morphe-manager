@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Vælg en .mpp patch-kildefil fra lagring</string>
     <string name="morphe_add_patch_source_local_change_file">Skift fil</string>
     <string name="morphe_home_no_patches_available">Ingen patches tilgængelige</string>
+    <string name="morphe_home_default_source_disabled">Morphe-patch kilden er deaktiveret. Aktiver den i Patch-kilderark eller brug Avanceret-modus.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Har du den originale upatchede APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">For at udbedre %1$s, skal du bruge version %2$s (uden rettelser)</string>
