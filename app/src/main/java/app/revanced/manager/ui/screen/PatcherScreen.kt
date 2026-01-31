@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -75,9 +76,9 @@ fun PatcherScreen(
     val state = rememberMorphePatcherState(patcherViewModel)
 
     // Animated progress with dual-mode animation
-    var displayProgress by remember { mutableStateOf(patcherViewModel.progress) }
-    var showLongStepWarning by remember { mutableStateOf(false) }
-    var showSuccessScreen by remember { mutableStateOf(false) }
+    var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
+    var showLongStepWarning by rememberSaveable { mutableStateOf(false) }
+    var showSuccessScreen by rememberSaveable { mutableStateOf(false) }
 
     val displayProgressAnimate by animateFloatAsState(
         targetValue = displayProgress,
