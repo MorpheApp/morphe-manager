@@ -150,6 +150,22 @@
     <string name="adaptive_icon_create_new">Create new icon</string>
     <string name="adaptive_icon_folder_explanation">Select where to create \'morphe_branding/morphe_icons\' folder with generated icon files</string>
 
+    <!-- Header Creator -->
+    <string name="header_creator_title">Create custom header</string>
+    <string name="header_creator_create">Create header</string>
+    <string name="header_creator_create_new">Create new header</string>
+    <string name="header_creator_instructions">Choose images for light and dark themes, then adjust with pinch-to-zoom gestures</string>
+    <string name="header_creator_light_theme">Light theme header</string>
+    <string name="header_creator_dark_theme">Dark theme header</string>
+    <string name="header_creator_select_light">Select light theme image</string>
+    <string name="header_creator_change_light">Change light theme image</string>
+    <string name="header_creator_select_dark">Select dark theme image</string>
+    <string name="header_creator_change_dark">Change dark theme image</string>
+    <string name="header_creator_no_image">No image selected</string>
+    <string name="header_creator_success">Header created successfully</string>
+    <string name="header_creator_failed">Failed to create header</string>
+    <string name="header_creator_folder_explanation">Select where to create \'morphe_branding/morphe_header\' folder with generated header files</string>
+
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Are you sure you want to delete this saved app?</string>

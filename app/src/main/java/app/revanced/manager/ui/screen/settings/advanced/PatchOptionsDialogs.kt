@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -504,6 +505,9 @@ fun CustomHeaderDialog(
     val scope = rememberCoroutineScope()
     var headerPath by remember { mutableStateOf(patchOptionsPrefs.customHeaderPath.getBlocking()) }
 
+    // State for header creator dialog
+    var showHeaderCreator by remember { mutableStateOf(false) }
+
     // Get header options from bundle
     val headerOptions = patchOptionsViewModel.getHeaderOptions()
     val customOption = patchOptionsViewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
@@ -590,6 +594,16 @@ fun CustomHeaderDialog(
 
                 Spacer(modifier = Modifier.height(0.dp))
 
+                // Create Header button
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.header_creator_create_new),
+                    onClick = { showHeaderCreator = true },
+                    icon = Icons.Outlined.Image,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(0.dp))
+
                 // Expandable Instructions Section
                 customOption.description.let { description ->
                     val localizedDescription = getLocalizedOrCustomText(
@@ -614,5 +628,16 @@ fun CustomHeaderDialog(
                 )
             }
         }
+    }
+
+    // Header creator dialog
+    if (showHeaderCreator) {
+        HeaderCreatorDialog(
+            onDismiss = { showHeaderCreator = false },
+            onHeaderCreated = { path ->
+                headerPath = path
+                showHeaderCreator = false
+            }
+        )
     }
 }

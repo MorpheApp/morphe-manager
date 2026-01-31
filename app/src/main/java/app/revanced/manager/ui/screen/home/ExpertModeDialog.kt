@@ -874,6 +874,17 @@ private fun PathInputOption(
     onValueChange: (String) -> Unit
 ) {
     var showIconCreator by remember { mutableStateOf(false) }
+    var showHeaderCreator by remember { mutableStateOf(false) }
+
+    // Detect if this is icon-related or header-related field
+    val isIconField = title.contains("icon", ignoreCase = true) ||
+            description.contains("icon", ignoreCase = true) ||
+            description.contains("mipmap", ignoreCase = true)
+
+    val isHeaderField = title.contains("header", ignoreCase = true) ||
+            description.contains("header", ignoreCase = true) ||
+            (description.contains("drawable", ignoreCase = true) &&
+                    !description.contains("icon", ignoreCase = true))
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -941,13 +952,21 @@ private fun PathInputOption(
         )
 
         // Create Icon button
-        if (title.contains("icon", ignoreCase = true) ||
-            description.contains("icon", ignoreCase = true) ||
-            description.contains("mipmap", ignoreCase = true)) {
+        if (isIconField) {
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.adaptive_icon_create_new),
                 onClick = { showIconCreator = true },
                 icon = Icons.Outlined.AutoAwesome,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        // Create Header button
+        if (isHeaderField) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.header_creator_create_new),
+                onClick = { showHeaderCreator = true },
+                icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -973,6 +992,17 @@ private fun PathInputOption(
             onIconCreated = { path ->
                 onValueChange(path)
                 showIconCreator = false
+            }
+        )
+    }
+
+    // Header creator dialog
+    if (showHeaderCreator) {
+        HeaderCreatorDialog(
+            onDismiss = { showHeaderCreator = false },
+            onHeaderCreated = { path ->
+                onValueChange(path)
+                showHeaderCreator = false
             }
         )
     }
