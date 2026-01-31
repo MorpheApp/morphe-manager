@@ -24,13 +24,10 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
@@ -92,35 +89,38 @@ fun SectionsLayout(
 ) {
     val windowSize = rememberWindowSize()
 
-    // Main content sections
-    Box(
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main layout structure
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .navigationBarsPadding()
         ) {
-            // Adaptive content layout based on window size
-            AdaptiveContent(
-                windowSize = windowSize,
-                greetingMessage = greetingMessage,
-                appUpdatesAvailable = appUpdatesAvailable,
-                onYouTubeClick = onYouTubeClick,
-                onYouTubeMusicClick = onYouTubeMusicClick,
-                onRedditClick = onRedditClick,
-                youtubeInstalledApp = youtubeInstalledApp,
-                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                redditInstalledApp = redditInstalledApp,
-                youtubePackageInfo = youtubePackageInfo,
-                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                redditPackageInfo = redditPackageInfo,
-                onInstalledAppClick = onInstalledAppClick,
-                installedAppsLoading = installedAppsLoading,
-                onOtherAppsClick = onOtherAppsClick,
-                showOtherAppsButton = showOtherAppsButton,
-                modifier = Modifier.weight(1f)
-            )
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                AdaptiveContent(
+                    windowSize = windowSize,
+                    greetingMessage = greetingMessage,
+                    appUpdatesAvailable = appUpdatesAvailable,
+                    onYouTubeClick = onYouTubeClick,
+                    onYouTubeMusicClick = onYouTubeMusicClick,
+                    onRedditClick = onRedditClick,
+                    youtubeInstalledApp = youtubeInstalledApp,
+                    youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                    redditInstalledApp = redditInstalledApp,
+                    youtubePackageInfo = youtubePackageInfo,
+                    youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                    redditPackageInfo = redditPackageInfo,
+                    onInstalledAppClick = onInstalledAppClick,
+                    installedAppsLoading = installedAppsLoading,
+                    onOtherAppsClick = onOtherAppsClick,
+                    showOtherAppsButton = showOtherAppsButton
+                )
+            }
 
             // Section 5: Bottom action bar
             HomeBottomActionBar(
@@ -130,28 +130,18 @@ fun SectionsLayout(
             )
         }
 
-        // Section 1: Notifications
-        Column(
+        // Section 1: Notifications overlay
+        NotificationsOverlay(
+            hasManagerUpdate = hasManagerUpdate,
+            onShowUpdateDetails = onShowUpdateDetails,
+            showBundleUpdateSnackbar = showBundleUpdateSnackbar,
+            snackbarStatus = snackbarStatus,
+            bundleUpdateProgress = bundleUpdateProgress,
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.TopCenter)
-        ) {
-            // Manager update notification
-            if (hasManagerUpdate) {
-                ManagerUpdateNotification(
-                    onShowDetails = onShowUpdateDetails,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            // Bundle update snackbar
-            BundleUpdateSnackbar(
-                visible = showBundleUpdateSnackbar,
-                status = snackbarStatus,
-                progress = bundleUpdateProgress,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+                .statusBarsPadding()
+        )
     }
 }
 
@@ -175,45 +165,88 @@ private fun AdaptiveContent(
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
-    showOtherAppsButton: Boolean = true,
-    @SuppressLint("ModifierParameter")
-    modifier: Modifier = Modifier
+    showOtherAppsButton: Boolean = true
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
+    val useTwoColumns = windowSize.useTwoColumnLayout
+    val scrollState = rememberScrollState()
 
-    // Use two-column layout for medium/expanded windows (landscape)
-    if (windowSize.useTwoColumnLayout) {
-        Row(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(horizontal = contentPadding),
-            horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2)
-        ) {
-            // Left column: Greeting
-            Box(
-                modifier = Modifier
-                    .weight(0.4f)
-                    .fillMaxHeight(),
-                contentAlignment = Alignment.Center
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(scrollState)
+            .padding(horizontal = contentPadding),
+        verticalArrangement = Arrangement.spacedBy(itemSpacing)
+    ) {
+        if (useTwoColumns) {
+            // Two-column layout for medium/expanded windows (landscape)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(itemSpacing * 2),
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                // Left column: Greeting
+                Column(
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .fillMaxHeight(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    GreetingSection(
+                        message = greetingMessage,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                // Right column: App buttons + Other apps
+                Column(
+                    modifier = Modifier.weight(0.5f),
+                    verticalArrangement = Arrangement.spacedBy(itemSpacing)
+                ) {
+                    MainAppsSection(
+                        itemSpacing = itemSpacing,
+                        appUpdatesAvailable = appUpdatesAvailable,
+                        onYouTubeClick = onYouTubeClick,
+                        onYouTubeMusicClick = onYouTubeMusicClick,
+                        onRedditClick = onRedditClick,
+                        youtubeInstalledApp = youtubeInstalledApp,
+                        youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                        redditInstalledApp = redditInstalledApp,
+                        youtubePackageInfo = youtubePackageInfo,
+                        youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                        redditPackageInfo = redditPackageInfo,
+                        onInstalledAppClick = onInstalledAppClick,
+                        installedAppsLoading = installedAppsLoading
+                    )
+
+                    // Section 4: Other apps
+                    if (!showOtherAppsButton) {
+                        Spacer(modifier = Modifier.height(48.dp + itemSpacing))
+                    } else {
+                        OtherAppsSection(
+                            onClick = onOtherAppsClick,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+        } else {
+            // Single-column layout for compact windows (portrait)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(itemSpacing)
+            ) {
+                // Section 2: Greeting
                 GreetingSection(
                     message = greetingMessage,
                     modifier = Modifier.fillMaxWidth()
                 )
-            }
 
-            // Right column: App buttons + Other apps
-            Column(
-                modifier = Modifier
-                    .weight(0.6f)
-                    .fillMaxHeight()
-                    .verticalScroll(rememberScrollState())
-                    .padding(vertical = contentPadding),
-                verticalArrangement = Arrangement.spacedBy(itemSpacing)
-            ) {
-                // App buttons section
+                // Section 3: App buttons
                 MainAppsSection(
+                    itemSpacing = itemSpacing,
                     appUpdatesAvailable = appUpdatesAvailable,
                     onYouTubeClick = onYouTubeClick,
                     onYouTubeMusicClick = onYouTubeMusicClick,
@@ -225,12 +258,13 @@ private fun AdaptiveContent(
                     youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                     redditPackageInfo = redditPackageInfo,
                     onInstalledAppClick = onInstalledAppClick,
-                    installedAppsLoading = installedAppsLoading,
-                    modifier = Modifier.fillMaxWidth()
+                    installedAppsLoading = installedAppsLoading
                 )
 
-                // Other apps button (hidden in simple mode with single bundle)
-                if (showOtherAppsButton) {
+                // Section 4: Other apps
+                if (!showOtherAppsButton) {
+                    Spacer(modifier = Modifier.height(48.dp + itemSpacing))
+                } else {
                     OtherAppsSection(
                         onClick = onOtherAppsClick,
                         modifier = Modifier.fillMaxWidth()
@@ -238,102 +272,122 @@ private fun AdaptiveContent(
                 }
             }
         }
-    } else {
-        // Single-column layout for compact windows (portrait)
+    }
+}
+
+/**
+ * Section 1: Unified notifications overlay component
+ * Handles both manager update and bundle update notifications
+ */
+@Composable
+fun NotificationsOverlay(
+    hasManagerUpdate: Boolean,
+    onShowUpdateDetails: () -> Unit,
+    showBundleUpdateSnackbar: Boolean,
+    snackbarStatus: BundleUpdateStatus,
+    bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
+    modifier: Modifier = Modifier
+) {
+    val windowSize = rememberWindowSize()
+    val useTwoColumns = windowSize.useTwoColumnLayout
+
+    Box(
+        modifier = modifier,
+        contentAlignment = if (useTwoColumns) Alignment.TopStart else Alignment.TopCenter
+    ) {
         Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(horizontal = contentPadding),
-            verticalArrangement = Arrangement.spacedBy(itemSpacing)
+            modifier = Modifier
+                .then(
+                    if (useTwoColumns) {
+                        Modifier.fillMaxWidth(0.5f) // 50% width in landscape
+                    } else {
+                        Modifier.fillMaxWidth() // Full width in portrait
+                    }
+                ),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Section 2: Greeting message
-            GreetingSection(
-                message = greetingMessage,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp)
+            // Manager update snackbar
+            ManagerUpdateSnackbar(
+                visible = hasManagerUpdate,
+                onShowDetails = onShowUpdateDetails,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            // Section 3: Main app buttons
-            MainAppsSection(
-                appUpdatesAvailable = appUpdatesAvailable,
-                onYouTubeClick = onYouTubeClick,
-                onYouTubeMusicClick = onYouTubeMusicClick,
-                onRedditClick = onRedditClick,
-                youtubeInstalledApp = youtubeInstalledApp,
-                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-                redditInstalledApp = redditInstalledApp,
-                youtubePackageInfo = youtubePackageInfo,
-                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-                redditPackageInfo = redditPackageInfo,
-                onInstalledAppClick = onInstalledAppClick,
-                installedAppsLoading = installedAppsLoading,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
+            // Bundle update snackbar
+            BundleUpdateSnackbar(
+                visible = showBundleUpdateSnackbar,
+                status = snackbarStatus,
+                progress = bundleUpdateProgress,
+                modifier = Modifier.fillMaxWidth()
             )
-
-            // Section 4: Other apps button (hidden in simple mode with single bundle)
-            if (showOtherAppsButton) {
-                OtherAppsSection(
-                    onClick = onOtherAppsClick,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
         }
     }
 }
 
 /**
- * Section 1: Manager update notification
+ * Manager update snackbar
  */
 @Composable
-fun ManagerUpdateNotification(
+fun ManagerUpdateSnackbar(
+    visible: Boolean,
     onShowDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.padding(horizontal = 16.dp),
-        onClick = onShowDetails,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        shape = RoundedCornerShape(16.dp)
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically(
+            initialOffsetY = { -it },
+            animationSpec = tween(durationMillis = 500)
+        ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+        exit = slideOutVertically(
+            targetOffsetY = { -it },
+            animationSpec = tween(durationMillis = 500)
+        ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+        modifier = modifier
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Card(
+            modifier = modifier.padding(horizontal = 16.dp),
+            onClick = onShowDetails,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            shape = RoundedCornerShape(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Outlined.Update,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                modifier = Modifier.size(24.dp)
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Update,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    modifier = Modifier.size(24.dp)
+                )
 
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.home_update_available),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
-                )
-                Text(
-                    text = stringResource(R.string.home_update_available_subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.home_update_available),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                    Text(
+                        text = stringResource(R.string.home_update_available_subtitle),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f)
+                    )
+                }
             }
         }
     }
 }
 
 /**
- * Bundle update snackbar with animations
+ * Bundle update snackbar
  */
 @Composable
 fun BundleUpdateSnackbar(
@@ -490,9 +544,7 @@ fun GreetingSection(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier
-            .padding(top = 54.dp)
-            .height(120.dp),
+        modifier = modifier.height(120.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -511,6 +563,7 @@ fun GreetingSection(
  */
 @Composable
 fun MainAppsSection(
+    itemSpacing: Dp = 16.dp,
     appUpdatesAvailable: Map<String, Boolean> = emptyMap(),
     onYouTubeClick: () -> Unit,
     onYouTubeMusicClick: () -> Unit,
@@ -549,7 +602,7 @@ fun MainAppsSection(
             modifier = Modifier
                 .widthIn(max = 500.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(itemSpacing)
         ) {
             // YouTube
             AppCardWithLoading(
@@ -981,7 +1034,6 @@ fun OtherAppsSection(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 24.dp)
             .height(48.dp)
             .clip(shape)
             .background(

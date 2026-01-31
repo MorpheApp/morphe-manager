@@ -86,7 +86,6 @@ fun rememberMorphePatcherState(
 
 /**
  * Patching success screen
- * Uses MorpheInstallViewModel for clean installation logic
  */
 @Composable
 fun PatchingSuccess(
@@ -133,98 +132,92 @@ fun PatchingSuccess(
         else -> null
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .navigationBarsPadding()
-    ) {
-        // Main content
-        if (windowSize.useTwoColumnLayout) {
-            // Two-column layout
-            Row(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main content area
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .navigationBarsPadding()
+        ) {
+            // Content
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 96.dp),
-                horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
             ) {
-                // Left column - Icon and status text
-                Box(
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
-                    ) {
-                        SuccessIcon(
-                            icon = icon,
-                            iconTint = iconTint,
-                            iconBackgroundColor = iconBackgroundColor,
-                            windowSize = windowSize
-                        )
-
-                        SuccessStatusText(
-                            installState = installState,
-                            installedPackageName = installedPackageName,
-                            isInstalling = isInstalling,
-                            windowSize = windowSize
-                        )
-                    }
-                }
-
-                // Right column - Instructions and install button
-                Box(
-                    modifier = Modifier
-                        .weight(0.5f)
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
-                    ) {
-                        SuccessInstructionsText(
-                            installState = installState,
-                            installedPackageName = installedPackageName,
-                            isInstalling = isInstalling,
-                            usingMountInstall = usingMountInstall
-                        )
-
-                        SuccessErrorMessage(
-                            errorMessage = errorMessage,
-                            installState = installState
-                        )
-
-                        SuccessRootWarning(
-                            usingMountInstall = usingMountInstall,
-                            installState = installState
-                        )
-
-                        InstallActionButton(
-                            installState = installState,
-                            isInstalling = isInstalling,
-                            conflictPackageName = conflictPackageName,
-                            usingMountInstall = usingMountInstall,
-                            onInstall = onInstall,
-                            onUninstall = onUninstall,
-                            onOpen = onOpen
-                        )
-                    }
-                }
+                AdaptiveSuccessContent(
+                    windowSize = windowSize,
+                    icon = icon,
+                    iconTint = iconTint,
+                    iconBackgroundColor = iconBackgroundColor,
+                    installState = installState,
+                    installedPackageName = installedPackageName,
+                    isInstalling = isInstalling,
+                    usingMountInstall = usingMountInstall,
+                    errorMessage = errorMessage,
+                    conflictPackageName = conflictPackageName,
+                    onInstall = onInstall,
+                    onUninstall = onUninstall,
+                    onOpen = onOpen
+                )
             }
-        } else {
-            // Single-column layout
+
+            // Bottom action bar
+            PatcherBottomActionBar(
+                showCancelButton = false,
+                showHomeButton = true,
+                showSaveButton = true,
+                showErrorButton = false,
+                onCancelClick = {},
+                onHomeClick = onHomeClick,
+                onSaveClick = onSaveClick,
+                isSaving = isSaving,
+                onErrorClick = {}
+            )
+        }
+    }
+}
+
+/**
+ * Adaptive content layout for success screen
+ */
+@Composable
+private fun AdaptiveSuccessContent(
+    windowSize: WindowSize,
+    icon: ImageVector,
+    iconTint: Color,
+    iconBackgroundColor: Color,
+    installState: InstallViewModel.InstallState,
+    installedPackageName: String?,
+    isInstalling: Boolean,
+    usingMountInstall: Boolean,
+    errorMessage: String?,
+    conflictPackageName: String?,
+    onInstall: () -> Unit,
+    onUninstall: (String) -> Unit,
+    onOpen: () -> Unit
+) {
+    val contentPadding = windowSize.contentPadding
+    val itemSpacing = windowSize.itemSpacing
+    val useTwoColumns = windowSize.useTwoColumnLayout
+
+    if (useTwoColumns) {
+        // Two-column layout for medium/expanded windows (landscape)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = contentPadding),
+            horizontalArrangement = Arrangement.spacedBy(itemSpacing * 3),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left column: Icon and status
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = windowSize.contentPadding)
-                    .padding(top = 24.dp, bottom = 120.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3, Alignment.CenterVertically)
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SuccessIcon(
                     icon = icon,
@@ -233,13 +226,24 @@ fun PatchingSuccess(
                     windowSize = windowSize
                 )
 
+                Spacer(Modifier.height(itemSpacing))
+
                 SuccessStatusText(
                     installState = installState,
                     installedPackageName = installedPackageName,
                     isInstalling = isInstalling,
                     windowSize = windowSize
                 )
+            }
 
+            // Right column: Instructions and actions
+            Column(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 SuccessInstructionsText(
                     installState = installState,
                     installedPackageName = installedPackageName,
@@ -257,6 +261,8 @@ fun PatchingSuccess(
                     installState = installState
                 )
 
+                Spacer(Modifier.height(itemSpacing))
+
                 InstallActionButton(
                     installState = installState,
                     isInstalling = isInstalling,
@@ -268,20 +274,56 @@ fun PatchingSuccess(
                 )
             }
         }
+    } else {
+        // Single-column layout for compact windows (portrait)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = contentPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(itemSpacing * 3)
+        ) {
+            SuccessIcon(
+                icon = icon,
+                iconTint = iconTint,
+                iconBackgroundColor = iconBackgroundColor,
+                windowSize = windowSize
+            )
 
-        // Bottom action bar
-        PatcherBottomActionBar(
-            showCancelButton = false,
-            showHomeButton = true,
-            showSaveButton = true,
-            showErrorButton = false,
-            onCancelClick = {},
-            onHomeClick = onHomeClick,
-            onSaveClick = onSaveClick,
-            isSaving = isSaving,
-            onErrorClick = {},
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+            SuccessStatusText(
+                installState = installState,
+                installedPackageName = installedPackageName,
+                isInstalling = isInstalling,
+                windowSize = windowSize
+            )
+
+            SuccessInstructionsText(
+                installState = installState,
+                installedPackageName = installedPackageName,
+                isInstalling = isInstalling,
+                usingMountInstall = usingMountInstall
+            )
+
+            SuccessErrorMessage(
+                errorMessage = errorMessage,
+                installState = installState
+            )
+
+            SuccessRootWarning(
+                usingMountInstall = usingMountInstall,
+                installState = installState
+            )
+
+            InstallActionButton(
+                installState = installState,
+                isInstalling = isInstalling,
+                conflictPackageName = conflictPackageName,
+                usingMountInstall = usingMountInstall,
+                onInstall = onInstall,
+                onUninstall = onUninstall,
+                onOpen = onOpen
+            )
+        }
     }
 }
 
@@ -586,55 +628,62 @@ fun PatchingFailed(
 ) {
     val windowSize = rememberWindowSize()
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
-    ) {
-        AdaptiveCenteredLayout(windowSize = windowSize) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main content area
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .navigationBarsPadding()
+        ) {
+            // Content
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
             ) {
-                SuccessIcon(
-                    icon = Icons.Default.Error,
-                    iconTint = MaterialTheme.colorScheme.error,
-                    iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
-                    windowSize = windowSize
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = windowSize.contentPadding),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
+                ) {
+                    SuccessIcon(
+                        icon = Icons.Default.Error,
+                        iconTint = MaterialTheme.colorScheme.error,
+                        iconBackgroundColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                        windowSize = windowSize
+                    )
 
-                Spacer(Modifier.height(windowSize.itemSpacing * 2))
+                    Text(
+                        text = stringResource(R.string.patcher_failed_title),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                Text(
-                    text = stringResource(R.string.patcher_failed_title),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-                Spacer(Modifier.height(windowSize.itemSpacing))
-
-                Text(
-                    text = stringResource(R.string.patcher_failed_subtitle),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
+                    Text(
+                        text = stringResource(R.string.patcher_failed_subtitle),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
-        }
 
-        // Bottom action bar
-        PatcherBottomActionBar(
-            showCancelButton = false,
-            showHomeButton = true,
-            showSaveButton = false,
-            showErrorButton = true,
-            onCancelClick = {},
-            onHomeClick = onHomeClick,
-            onSaveClick = {},
-            onErrorClick = { state.showErrorBottomSheet = true },
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+            // Bottom action bar
+            PatcherBottomActionBar(
+                showCancelButton = false,
+                showHomeButton = true,
+                showSaveButton = false,
+                showErrorButton = true,
+                onCancelClick = {},
+                onHomeClick = onHomeClick,
+                onSaveClick = {},
+                onErrorClick = { state.showErrorBottomSheet = true }
+            )
+        }
     }
 }

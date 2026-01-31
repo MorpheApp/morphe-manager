@@ -45,30 +45,36 @@ fun HomeBottomActionBar(
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
-            .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(32.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
-        // Left: Sources button
-        BottomActionButton(
-            onClick = onBundlesClick,
-            icon = Icons.Outlined.Source,
-            text = stringResource(R.string.sources_management_title),
-            modifier = Modifier.weight(1f)
-        )
+        Row(
+            modifier = Modifier
+                .widthIn(max = 448.dp)
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(32.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left: Sources button
+            BottomActionButton(
+                onClick = onBundlesClick,
+                icon = Icons.Outlined.Source,
+                text = stringResource(R.string.sources_management_title),
+                modifier = Modifier.weight(1f)
+            )
 
-        // Right: Settings button with expert mode indicator
-        BottomActionButton(
-            onClick = onSettingsClick,
-            icon = Icons.Outlined.Settings,
-            text = stringResource(R.string.settings),
-            showExpertBadge = isExpertModeEnabled,
-            modifier = Modifier.weight(1f)
-        )
+            // Right: Settings button with expert mode indicator
+            BottomActionButton(
+                onClick = onSettingsClick,
+                icon = Icons.Outlined.Settings,
+                text = stringResource(R.string.settings),
+                showExpertBadge = isExpertModeEnabled,
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 }
 

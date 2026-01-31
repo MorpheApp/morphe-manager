@@ -1,11 +1,21 @@
 package app.revanced.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/**
+ * Check if current orientation is landscape
+ */
+@Composable
+fun isLandscape(): Boolean {
+    val configuration = LocalConfiguration.current
+    return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+}
 
 /**
  * Window size classes following Material Design 3 guidelines

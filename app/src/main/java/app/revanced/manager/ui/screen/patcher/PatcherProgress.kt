@@ -27,7 +27,7 @@ import app.revanced.manager.ui.viewmodel.PatcherViewModel
 import kotlinx.coroutines.delay
 
 /**
- * Patching in progress screen with animated progress indicator
+ * Patching in progress screen with adaptive layout
  */
 @Composable
 fun PatchingInProgress(
@@ -56,74 +56,81 @@ fun PatchingInProgress(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .navigationBarsPadding()
-    ) {
-        // Main content
-        if (windowSize.useTwoColumnLayout) {
-            // Two-column layout for medium/expanded screens
-            Row(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main content area
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .navigationBarsPadding()
+        ) {
+            // Content with weight to push bottom bar down
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = 96.dp, end = 96.dp, top = 24.dp, bottom = 24.dp),
-                horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
+                    .weight(1f)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
             ) {
-                // Left column - Message and details
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 2)
-                    ) {
-                        ProgressMessageSection(currentMessage)
-
-                        ProgressDetailsSection(
-                            showLongStepWarning = showLongStepWarning,
-                            patcherViewModel = patcherViewModel,
-                            windowSize = windowSize
-                        )
-                    }
-                }
-
-                // Right column - Circular progress
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .wrapContentSize(Alignment.Center),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressWithStats(
-                        progress = progress,
-                        completed = completed,
-                        total = total,
-                        modifier = Modifier.size(280.dp)
-                    )
-                }
-            }
-        } else {
-            // Single-column layout
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = windowSize.contentPadding),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing * 3)
-            ) {
-                ProgressMessageSection(currentMessage)
-
-                CircularProgressWithStats(
+                AdaptiveProgressContent(
+                    windowSize = windowSize,
+                    currentMessage = currentMessage,
                     progress = progress,
                     completed = completed,
                     total = total,
-                    modifier = Modifier.size(280.dp),
+                    showLongStepWarning = showLongStepWarning,
+                    patcherViewModel = patcherViewModel
                 )
+            }
+
+            // Bottom action bar
+            PatcherBottomActionBar(
+                showCancelButton = true,
+                showHomeButton = false,
+                showSaveButton = false,
+                showErrorButton = false,
+                onCancelClick = onCancelClick,
+                onHomeClick = onHomeClick,
+                onSaveClick = {},
+                onErrorClick = {}
+            )
+        }
+    }
+}
+
+/**
+ * Adaptive content layout for patching progress
+ */
+@Composable
+private fun AdaptiveProgressContent(
+    windowSize: WindowSize,
+    currentMessage: Int,
+    progress: Float,
+    completed: Int,
+    total: Int,
+    showLongStepWarning: Boolean,
+    patcherViewModel: PatcherViewModel
+) {
+    val contentPadding = windowSize.contentPadding
+    val itemSpacing = windowSize.itemSpacing
+    val useTwoColumns = windowSize.useTwoColumnLayout
+
+    if (useTwoColumns) {
+        // Two-column layout for medium/expanded windows (landscape)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = contentPadding),
+            horizontalArrangement = Arrangement.spacedBy(itemSpacing * 3),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left column: Message and details
+            Column(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                ProgressMessageSection(currentMessage)
 
                 ProgressDetailsSection(
                     showLongStepWarning = showLongStepWarning,
@@ -131,20 +138,46 @@ fun PatchingInProgress(
                     windowSize = windowSize
                 )
             }
-        }
 
-        // Bottom action bar
-        PatcherBottomActionBar(
-            showCancelButton = true,
-            showHomeButton = false,
-            showSaveButton = false,
-            showErrorButton = false,
-            onCancelClick = onCancelClick,
-            onHomeClick = onHomeClick,
-            onSaveClick = {},
-            onErrorClick = {},
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+            // Right column: Circular progress
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressWithStats(
+                    progress = progress,
+                    completed = completed,
+                    total = total,
+                    modifier = Modifier.size(280.dp)
+                )
+            }
+        }
+    } else {
+        // Single-column layout for compact windows (portrait)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = contentPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(itemSpacing * 3)
+        ) {
+            ProgressMessageSection(currentMessage)
+
+            CircularProgressWithStats(
+                progress = progress,
+                completed = completed,
+                total = total,
+                modifier = Modifier.size(280.dp)
+            )
+
+            ProgressDetailsSection(
+                showLongStepWarning = showLongStepWarning,
+                patcherViewModel = patcherViewModel,
+                windowSize = windowSize
+            )
+        }
     }
 }
 
@@ -156,8 +189,7 @@ private fun ProgressMessageSection(currentMessage: Int) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 54.dp)
-            .height(150.dp),
+            .height(120.dp),
         contentAlignment = Alignment.Center
     ) {
         AnimatedMessage(currentMessage)
