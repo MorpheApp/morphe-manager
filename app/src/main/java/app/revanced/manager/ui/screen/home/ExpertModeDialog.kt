@@ -873,6 +873,8 @@ private fun PathInputOption(
 //    required: Boolean,
     onValueChange: (String) -> Unit
 ) {
+    var showIconCreator by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -938,6 +940,18 @@ private fun PathInputOption(
             }
         )
 
+        // Create Icon button
+        if (title.contains("icon", ignoreCase = true) ||
+            description.contains("icon", ignoreCase = true) ||
+            description.contains("mipmap", ignoreCase = true)) {
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.adaptive_icon_create_new),
+                onClick = { showIconCreator = true },
+                icon = Icons.Outlined.AutoAwesome,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
         // Instructions
         if (description.isNotBlank()) {
             ExpandableSurface(
@@ -950,6 +964,17 @@ private fun PathInputOption(
                 }
             )
         }
+    }
+
+    // Icon creator dialog
+    if (showIconCreator) {
+        AdaptiveIconCreatorDialog(
+            onDismiss = { showIconCreator = false },
+            onIconCreated = { path ->
+                onValueChange(path)
+                showIconCreator = false
+            }
+        )
     }
 }
 

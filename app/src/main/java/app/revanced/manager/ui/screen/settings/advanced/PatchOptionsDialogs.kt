@@ -2,6 +2,7 @@ package app.revanced.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Restore
@@ -275,7 +276,7 @@ fun ThemeColorDialog(
 }
 
 /**
- * Custom branding dialog with folder picker and dynamic instructions from bundle
+ * Custom branding dialog with folder picker and adaptive icon creator
  */
 @Composable
 fun CustomBrandingDialog(
@@ -307,6 +308,9 @@ fun CustomBrandingDialog(
             }
         )
     }
+
+    // State for icon creator dialog
+    var showIconCreator by remember { mutableStateOf(false) }
 
     // Get branding options from bundle
     val brandingOptions = patchOptionsViewModel.getBrandingOptions(packageName)
@@ -437,6 +441,16 @@ fun CustomBrandingDialog(
 
                 Spacer(modifier = Modifier.height(0.dp))
 
+                // Create Icon button
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.adaptive_icon_create_new),
+                    onClick = { showIconCreator = true },
+                    icon = Icons.Outlined.AutoAwesome,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(0.dp))
+
                 // Expandable Instructions Section
                 iconOption.description.let { description ->
                     val localizedDescription = getLocalizedOrCustomText(
@@ -463,6 +477,17 @@ fun CustomBrandingDialog(
                 )
             }
         }
+    }
+
+    // Icon creator dialog
+    if (showIconCreator) {
+        AdaptiveIconCreatorDialog(
+            onDismiss = { showIconCreator = false },
+            onIconCreated = { path ->
+                iconPath = path
+                showIconCreator = false
+            }
+        )
     }
 }
 
