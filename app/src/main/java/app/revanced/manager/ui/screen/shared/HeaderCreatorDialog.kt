@@ -9,6 +9,7 @@ import android.graphics.RectF
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -208,35 +209,23 @@ fun HeaderCreatorDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.header_creator_title),
-        compactPadding = false,
+        compactPadding = true,
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 // Explanation text
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                AnimatedVisibility(
+                    visible = lightHeaderBitmap != null && darkHeaderBitmap != null,
+                    enter = fadeIn() + expandVertically(),
+                    exit = fadeOut() + shrinkVertically()
                 ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.header_creator_folder_explanation),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
+                    InfoBadge(
+                        text = stringResource(R.string.header_creator_folder_explanation),
+                        style = InfoBadgeStyle.Primary,
+                        icon = Icons.Outlined.Info
+                    )
                 }
 
                 // Create button
