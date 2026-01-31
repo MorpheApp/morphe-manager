@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Seleccionar un archivo fuente de parches .mpp en el almacenamiento</string>
     <string name="morphe_add_patch_source_local_change_file">Cambiar archivo</string>
     <string name="morphe_home_no_patches_available">No hay parches disponibles</string>
+    <string name="morphe_home_default_source_disabled">El origen de Morphe está desactivado. Por favor, áctivalo en la hoja de orígenes de parches o utiliza el modo experto.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">¿Tienes la APK original sin parchear?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Para parchear %1$s, necesitas la versión %2$s (sin parchear)</string>

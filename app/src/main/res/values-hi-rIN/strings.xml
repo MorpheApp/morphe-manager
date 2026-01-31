@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">स्टोरेज से .mpp पैच स्रोत फ़ाइल चुनें</string>
     <string name="morphe_add_patch_source_local_change_file">फ़ाइल बदलें</string>
     <string name="morphe_home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
+    <string name="morphe_home_default_source_disabled">मorphe पटच स्रोत अक्षम है। पटच स्रोत शीट में इसे सक्षम करें या विशेष मोड का उपयोग करें।</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple"> %1$s को पैच करने के लिए, आपको वर्शन %2$s (पैच न किया गया) की ज़रूरत होगी</string>

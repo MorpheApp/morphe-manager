@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">حدد ملف مصدر تعديل .mpp من وحدة التخزين</string>
     <string name="morphe_add_patch_source_local_change_file">تغيير الملف</string>
     <string name="morphe_home_no_patches_available">لا يوجد تعديلات متاحة</string>
+    <string name="morphe_home_default_source_disabled">مصدر تعديل Morphe معطل. يرجى تمكينه في صفحة مصادر التعديل أو استخدام وضع الخبير.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">لتعديل %1$s، تحتاج إلى الإصدار %2$s (غير المعدل)</string>

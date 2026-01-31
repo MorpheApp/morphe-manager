@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Válasszon ki egy .mpp patch forrásfájlt a tárhelyről</string>
     <string name="morphe_add_patch_source_local_change_file">Fájl megváltoztatása</string>
     <string name="morphe_home_no_patches_available">Nincsenek elérhető módosítások</string>
+    <string name="morphe_home_default_source_disabled">Morphe forrása letiltva. Kérem, engedélyezze a Patch források lapján vagy használja az Expert módot.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Rendelkezik az eredeti, nem módosított APK-val?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">A(z) %1$s módosításához a %2$s (nem módosított) verzió szükséges</string>
@@ -453,7 +454,7 @@ Mindenképpen folytatni szeretné?"</string>
     <string name="suggested_version_safeguard_confirmation">"Az ajánlott verziótól eltérő alkalmazás kiválasztása váratlan problémákat okozhat.
 
 Szeretné folytatni így is?"</string>
-    <string name="patch_selection_safeguard">A patchek kiválasztásának és módosításának engedélyezése </string>
+    <string name="patch_selection_safeguard">Patchkiválasztás és beállítások módosításának engedélyezése</string>
     <string name="patch_selection_safeguard_description">Ne akadályozza a patchek kiválasztását, törlését vagy a beállításaik módosítását</string>
     <string name="patch_selection_safeguard_confirmation">"A patchek kiválasztásának módosítása váratlan problémákat okozhat.
 
@@ -746,16 +747,16 @@ Aláírás (SHA-256): %2$s"</string>
     <string name="selected_apps_delete_dialog_description">Eltávolítja a kiválasztott alkalmazásokat a managerből? A készüléken telepített alkalmazások érintetlenek maradnak.</string>
     <string name="incompatible_patches">Nem kompatibilis módosítások</string>
     <string name="universal_patches">Univerzális módosítások</string>
-    <string name="patch_selection_reset_toast">A kiválasztott patchek és beállítások visszaállítva a javasolt alapértékekre</string>
-    <string name="patch_options_reset_toast">A patch beállításai visszaállítva</string>
+    <string name="patch_selection_reset_toast">A kiválasztott módosítások és beállításaik visszaállítva a javasolt alapértékekre</string>
+    <string name="patch_options_reset_toast">A módosítások beállításai visszaállítva</string>
     <string name="non_suggested_version_warning_title">Nem javasolt verzió</string>
     <string name="non_suggested_version_warning_description">"A kiválasztott alkalmazás verziója nem egyezik a javasolt verzióval.
 Kérjük, használja a javasolt verziót: %s
 
 Ha folytatni szeretné, kapcsolja ki a „Javasolt alkalmazásverzió megkövetelése” opciót a haladó beállításokban."</string>
-    <string name="selection_warning_description">"Javasoljuk az alapértelmezett patchkiválasztás és beállítások használatát. Ezek megváltoztatása váratlan problémákat okozhat.
+    <string name="selection_warning_description">"Javasoljuk az alapértelmezetten kiválasztott módosítások és beállítások használatát. Ezek megváltoztatása váratlan problémákat okozhat.
 
-A patchek módosítása előtt engedélyeznie kell a „Patchkiválasztás és beállítások módosításának engedélyezése” opciót a haladó beállításokban."</string>
+A módosítások kiválasztása előtt engedélyeznie kell a „Patchkiválasztás és beállítások módosításának engedélyezése” opciót a haladó beállításokban."</string>
     <string name="patch_profile_save_action">Patchprofil mentése</string>
     <string name="patch_profile_select_bundles_title">Módosítócsomagok kiválasztása</string>
     <string name="patch_profile_select_bundles_description">Válassza ki a profilhoz tartozó módosítócsomagokat.</string>
@@ -789,7 +790,7 @@ Melyiket mentené ehhez a profilhoz?"</string>
     <string name="patch_profile_empty_state">Mentse el a konfigurációt a patchkiválasztás képernyőjéről, hogy itt lássa.</string>
     <string name="patch_profile_missing_bundles_toast">A profilban szereplő egyes csomagok nem érhetők el, és ki lesznek hagyva.</string>
     <string name="patch_profile_changed_patches_toast">A profilban szereplő egyes patchek vagy opciók már nem egyeznek a köteggel, és ki lettek hagyva.</string>
-    <string name="patch_profile_no_available_bundles_toast">A profilban egyetlen köteg sem érhető el. Frissítse a kötegeket, és próbálkozzon újra.</string>
+    <string name="patch_profile_no_available_bundles_toast">A profilban egyetlen csomag sem érhető el. Frissítse a csomagokat, és próbálja újra.</string>
     <string name="patch_profile_launch_error">Nem lehetett megnyitni ezt a patchprofilt.</string>
     <string name="patch_profile_show_more">Mutass többet</string>
     <string name="patch_profile_show_less">Mutass kevesebbet</string>
@@ -836,10 +837,10 @@ Csak a következő verzióval kompatibilis: %2$s."</string>
     <string name="original_package_name">Eredeti csomagnév</string>
     <string name="applied_patches">Alkalmazott patchek</string>
     <string name="view_applied_patches">Alkalmazott patchek megtekintése</string>
-    <string name="patch_bundles_used">Használt patchcsomagok</string>
+    <string name="patch_bundles_used">Használt módosítócsomagok</string>
     <string name="applied_patches_empty">Ehhez az alkalmazáshoz nincs rögzített patch</string>
     <string name="applied_patches_bundle_missing">A csomag metaadatai nem elérhetők. A mentett patchek nevei jelennek meg.</string>
-    <string name="no_patch_bundles_tracked">Ehhez az alkalmazáshoz nincs rögzített patchcsomag</string>
+    <string name="no_patch_bundles_tracked">Nincs rögzítve módosítócsomag az alkalmazáshoz</string>
     <string name="mount_install"> Root telepítő</string>
     <string name="mounted">Csatlakoztatva</string>
     <string name="unmounted">Leválasztva</string>
@@ -1037,7 +1038,7 @@ Részletek: %2$s"</string>
     <string name="patches_view_any_version">Bármely verzió</string>
     <string name="patches_view_any_package">Bármely csomag</string>
     <string name="patches_delete_single_dialog_description">Biztosan törli a következőt: \"%s\"?</string>
-    <string name="patches_delete_multiple_dialog_description">Biztosan törölni szeretné a kiválasztott patch-csomagokat?</string>
+    <string name="patches_delete_multiple_dialog_description">Biztosan törölni szeretné a kiválasztott módosítócsomagokat?</string>
     <string name="about_revanced_manager">A Morphe névjegye</string>
     <string name="revanced_manager_description">"A Morphe egy kísérleti nyílt forráskódú projekt, amely népszerű Android-alkalmazások modern, áramvonalas javításának létrehozására összpontosít.
 
@@ -1090,9 +1091,9 @@ Szeretné folytatni?"</string>
     <string name="select_deselect_all">Összes kiválasztása vagy törlése</string>
     <string name="deselect_all">Összes törlése</string>
     <string name="deselect_bundle">Aktuális köteg törlése</string>
-    <string name="select_patches_type_dialog_description">Új javítókötegek hozzáadása URL-ről vagy helyi fájlokból</string>
-    <string name="local_patches_description">Javítókötegek hozzáadása helyi tárhelyről.</string>
-    <string name="remote_patches_description">Javítókötegek hozzáadása URL-ről. A javítókötegek automatikusan frissülhetnek.</string>
+    <string name="select_patches_type_dialog_description">Új módosítócsomagok hozzáadása URL-ről vagy helyi fájlokból</string>
+    <string name="local_patches_description">Módosítócsomagok hozzáadása helyi tárhelyről.</string>
+    <string name="remote_patches_description">Módosítócsomagok hozzáadása URL-ről. A módosítócsomagok automatikusan frissülhetnek.</string>
     <string name="recommended">Ajánlott</string>
     <string name="installation_failed_dialog_title">Telepítés sikertelen</string>
     <string name="installation_cancelled_dialog_title">Telepítés megszakítva</string>

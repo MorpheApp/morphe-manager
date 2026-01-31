@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Selecteer een .mpp-bronbestand van de opslag</string>
     <string name="morphe_add_patch_source_local_change_file">Bestand wijzigen</string>
     <string name="morphe_home_no_patches_available">Geen patches beschikbaar</string>
+    <string name="morphe_home_default_source_disabled">De Morphe patchbron is uitgeschakeld. Schakel het in in de Patchbronnenblad of gebruik de Expertmodus.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Heeft u de originele ongepatchte APK?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Om %1$s te patchen, heb je versie %2$s (niet gepatcht) nodig</string>

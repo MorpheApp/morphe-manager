@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Roghnaigh do foinse pacáistí .mpp ón stóras</string>
     <string name="morphe_add_patch_source_local_change_file">Athraigh an foinse</string>
     <string name="morphe_home_no_patches_available">Níor fhágadh pacáistí</string>
+    <string name="morphe_home_default_source_disabled">Tá an fhíochán Morphe curtha ar an gcórais. Cuirtear é ar an gcórais ag an leathanach Sárfíocháin nó is féidir é a úsáid i réimse na nExpert.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">An bhfuil an APK bunaidh neamhpaisteáilte agat?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Chun %1$s a phaisteáil, ní mór duit leagan %2$s (gan phaisteáil) a úsáid</string>

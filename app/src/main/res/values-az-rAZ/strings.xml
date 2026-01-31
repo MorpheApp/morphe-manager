@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Saxlanışdan .mpp yamaq mənbəsi faylını seçin</string>
     <string name="morphe_add_patch_source_local_change_file">Faylı dəyişdir</string>
     <string name="morphe_home_no_patches_available">Yeni yenilənmə yoxdur</string>
+    <string name="morphe_home_default_source_disabled">Morphe patch mənbəsi deaktivdir. Lütfen Patch mənbələri sayfasında onu aktivləşdirin ya da Expert rejimindən istifadə edin.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Sizin orijinal, yamaqsız APK-nız var?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s yamaq üçün sizə %2$s (yamaqlanmayan) versiyası lazımdır</string>

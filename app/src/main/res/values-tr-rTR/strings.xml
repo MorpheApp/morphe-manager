@@ -3,7 +3,7 @@
     <!-- Morphe Home Screen -->
     <string name="morphe_home_other_apps">Diğer uygulamalar</string>
     <string name="morphe_home">Ana Sayfa</string>
-    <string name="morphe_home_not_patched_yet">Henüz güncellenmedi</string>
+    <string name="morphe_home_not_patched_yet">Henüz yamalanmadı</string>
     <!-- Home Screen - Update Notifications -->
     <string name="morphe_home_update_available">Yeni sürüm mevcut</string>
     <string name="morphe_home_update_available_subtitle">Yükleme için hazır</string>
@@ -32,7 +32,7 @@
     <!-- From mediocrity to amazing -->
     <string name="morphe_home_greeting_8">Hayal kırıklığından harikaya geçmeye hazır mısın?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Bugünden itibaren uygulamalar kendilerinden kurtuluyor</string>
+    <string name="morphe_home_greeting_9">Bugünden itibaren uygulamaları kendilerinden kurtarıyoruz</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="morphe_home_greeting_10">Kafein ve iyi yamalarla güçlendirilmiştir</string>
     <!-- Sources Management -->
@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Depolama alanından .mpp yama kaynağı dosyasını seçin</string>
     <string name="morphe_add_patch_source_local_change_file">Dosyayı değiştir</string>
     <string name="morphe_home_no_patches_available">Yamalar mevcut değil</string>
+    <string name="morphe_home_default_source_disabled">Morphe çözüm kaynağı devre dışı bırakıldı. Lütfen Patch kaynağı sayfasında etkinleştirin veya Uzman modunu kullanın.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s\'i yamalamak için %2$s (yamasız) sürümüne ihtiyacınız var</string>
@@ -177,7 +178,7 @@
     <string name="morphe_patcher_message_9">Uygulamadaki hataları düzeltiyoruz… 🪲</string>
     <string name="morphe_patcher_message_10">Harika yamalar beklemeye değer… ⏳</string>
     <string name="morphe_patcher_message_11">Pikselleri parlayana kadar cilalıyoruz… 💎</string>
-    <string name="morphe_patcher_message_12">Pilot \'Yamalama işlemi devam ediyor\' ışığı sönene kadar lütfen yerinizde ayrılmayın... 💺✈️</string>
+    <string name="morphe_patcher_message_12">Pilot, \'Yamalama işlemi devam ediyor\' ışığını söndürene kadar lütfen yerinizden ayrılmayın... 💺✈️</string>
     <string name="morphe_patcher_message_13">Yama yapılan uygulamanız pişiyor, sıcak ve taze… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="morphe_patcher_message_14">Bytecode ile nazikçe pazarlık yapıyoruz... 🤝</string>
@@ -298,11 +299,11 @@ Görüntü boyutları şu şekilde olmalıdır:
     <string name="morphe_patch_options_hide_shorts_widget_description">Başlatıcı Araç Takımında Shorts Düğmesini Kaldır</string>
     <!-- System Tab -->
     <string name="morphe_performance">Performans</string>
-    <string name="morphe_process_runtime">Çalışma süresi</string>
+    <string name="morphe_process_runtime">Çalışma süreci</string>
     <string name="morphe_process_runtime_description">Yamalamak için ayrı bir süreç kullanmak daha stabil bir performans sağlar</string>
     <string name="morphe_process_runtime_memory_limit">Hafıza sınırı</string>
     <string name="morphe_process_runtime_memory_limit_help">Daha yüksek hafıza sınırları yamalamayı hızlandırabilir ancak daha eski cihazlarla çalışmayabilir</string>
-    <string name="morphe_enable_process_runtime">Çalışma süresini etkinleştir</string>
+    <string name="morphe_enable_process_runtime">Çalışma sürecini etkinleştir</string>
     <string name="morphe_memory_limit_subtitle">Yamalamak için kullanılacak hafıza</string>
     <string name="morphe_memory_limit_warning">Daha düşük hafıza sınırları daha büyük uygulamaları yamalamak için başarısız olabilir</string>
     <string name="morphe_process_runtime_enabled_description">%d MB sınır</string>
@@ -989,11 +990,11 @@ Ayrıntılar: %2$s"</string>
     <string name="patcher_step_group_preparing">Hazırlanıyor</string>
     <string name="patcher_step_load_patches">Yamalar yükleniyor</string>
     <string name="patcher_step_prepare_split_apk">Ayrı APK\'leri birleştirmek</string>
-    <string name="patcher_step_unpack">APK Dosyasını Okuyun</string>
+    <string name="patcher_step_unpack">APK dosyası okunuyor</string>
     <string name="patcher_step_group_patching">Yama yapılıyor</string>
     <string name="patcher_step_group_saving">Kaydediliyor</string>
-    <string name="patcher_step_write_patched">Yama yapılmış APK dosyası yazılıyor</string>
-    <string name="patcher_step_sign_apk">Yama yapılmış APK dosyası imzalanıyor</string>
+    <string name="patcher_step_write_patched">Yamalanmış APK dosyası yazılıyor</string>
+    <string name="patcher_step_sign_apk">Yamalanmış APK dosyası imzalanıyor</string>
     <string name="patcher_notification_title">Yama işlemi devam ediyor…</string>
     <string name="patcher_notification_text">Yama işlemcisine dönmek için dokunun</string>
     <string name="patcher_stop_confirm_title">Yama işlemcisi durdurulsun</string>
@@ -1067,9 +1068,9 @@ Ayrıntılar: %2$s"</string>
     <string name="update">Güncelle</string>
     <string name="empty">Boş</string>
     <string name="just_now">Az önce</string>
-    <string name="minutes_ago">%sm dakika önce</string>
-    <string name="hours_ago">%sh saat önce</string>
-    <string name="days_ago">%sd gün önce</string>
+    <string name="minutes_ago">%sdk önce</string>
+    <string name="hours_ago">%ssa önce</string>
+    <string name="days_ago">%sg önce</string>
     <string name="invalid_date">Geçersiz tarih</string>
     <string name="input_dialog_value_invalid">Geçersiz değer</string>
     <string name="option_required">Bu seçenek zorunludur</string>

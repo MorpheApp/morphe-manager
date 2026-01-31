@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Selecionar um arquivo de fonte de patch .mpp a partir do armazenamento</string>
     <string name="morphe_add_patch_source_local_change_file">Alterar arquivo</string>
     <string name="morphe_home_no_patches_available">Não há patches disponíveis</string>
+    <string name="morphe_home_default_source_disabled">O Morphe patch fonte está desativado. Por favor, ative-o na folha de fontes do patch ou utilize o modo expert.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Tem o APK original sem patches?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Para corrigir %1$s, você precisa da versão %2$s (não corrigida)</string>

@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">เลือกไฟล์ .mpp แหล่งข้อมูลเสริมจากเก็บข้อมูล</string>
     <string name="morphe_add_patch_source_local_change_file">เปลี่ยนไฟล์</string>
     <string name="morphe_home_no_patches_available">ไม่มีแหล่งข้อมูลเสริมให้ใช้งาน</string>
+    <string name="morphe_home_default_source_disabled">Morphe แหล่งข้อมูลป้ายกำกับถูกปิดใช้งาน โปรดเปิดใช้งานในแผ่นแหล่งข้อมูลป้ายกำกับ หรือใช้โหมดผู้เชี่ยวชาญ</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">คุณมี APK ต้นฉบับที่ยังไม่ได้แพตช์หรือไม่?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
