@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">从存储中选择.mpp补丁源文件</string>
     <string name="morphe_add_patch_source_local_change_file">更改文件</string>
     <string name="morphe_home_no_patches_available">无可用更新</string>
+    <string name="morphe_home_default_source_disabled">Morphe补丁源已禁用。请在补丁源表中启用它或使用专家模式。</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">您有原始未打补丁的 APK 吗？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">要修补 %1$s，您需要版本 %2$s（未修补）</string>

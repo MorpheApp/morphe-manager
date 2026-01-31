@@ -12,7 +12,7 @@
     <string name="morphe_home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="morphe_home_update_progress">Đã xử lý %1$d/%2$d nguồn</string>
     <string name="morphe_home_update_success">Cập nhật nguồn hoàn tất</string>
-    <string name="morphe_home_update_success_subtitle">Đã được cập nhật nguồn mới nhất</string>
+    <string name="morphe_home_update_success_subtitle">Đã cập nhật nguồn mới nhất</string>
     <string name="morphe_home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="morphe_home_please_wait">Vui lòng chờ…</string>
     <!-- Home Screen - Home Greetings -->
@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Chọn tệp nguồn vá .mpp từ bộ nhớ trong</string>
     <string name="morphe_add_patch_source_local_change_file">Đổi tệp</string>
     <string name="morphe_home_no_patches_available">Không có bản vá nào</string>
+    <string name="morphe_home_default_source_disabled">Nguồn Morphe đang bị tắt. Vui lòng bật trong bảng nguồn vá hoặc dùng Chế độ chuyên gia.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Để vá %1$s, bạn có thể chọn phiên bản %2$s (chưa vá ấy)</string>
@@ -305,7 +306,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="morphe_enable_process_runtime">Bật tiến trình riêng</string>
     <string name="morphe_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
     <string name="morphe_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
-    <string name="morphe_process_runtime_enabled_description">%d MB giới hạn</string>
+    <string name="morphe_process_runtime_enabled_description">Giới hạn %d MB</string>
     <string name="morphe_process_runtime_disabled_description">Bấm để cấu hình</string>
     <!-- About Section -->
     <string name="morphe_share_website">Chia sẻ</string>

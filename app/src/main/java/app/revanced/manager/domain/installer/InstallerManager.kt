@@ -58,7 +58,7 @@ class InstallerManager(
                 val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
                 if (isDefaultComponent(component)) return@mapNotNull null
                 if (component.packageName in hiddenPackages) return@mapNotNull null
-                if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager)?.toString() ?: info.activityInfo.packageName)) {
+                if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager).toString())) {
                     return@mapNotNull null
                 }
                 entryFor(Token.Component(component), target, checkRoot = false)
@@ -117,16 +117,9 @@ class InstallerManager(
 
     fun getPrimaryToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
 
-    fun getFallbackToken(): Token = parseToken(prefs.installerFallback.getBlocking())
-
     suspend fun updatePrimaryToken(token: Token) {
         Log.d(TAG, "updatePrimaryToken -> ${token.describe()}")
         prefs.installerPrimary.update(tokenToPreference(token))
-    }
-
-    suspend fun updateFallbackToken(token: Token) {
-        Log.d(TAG, "updateFallbackToken -> ${token.describe()}")
-        prefs.installerFallback.update(tokenToPreference(token))
     }
 
     fun storedCustomInstallerTokens(): List<Token.Component> = readCustomInstallerTokens()
@@ -177,7 +170,7 @@ class InstallerManager(
             val applicationInfo = info.applicationInfo
             val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
             val matches = packageName.contains(lower, ignoreCase = true) ||
-                label.contains(lower, ignoreCase = true)
+                    label.contains(lower, ignoreCase = true)
             if (!matches) return@forEach
 
             val activities = info.activities?.asSequence() ?: emptySequence()
@@ -331,9 +324,9 @@ class InstallerManager(
                         setDataAndType(uri, APK_MIME)
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
-                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                    Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                    Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
                         )
                         clipData = ClipData.newRawUri("APK", uri)
                         putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
@@ -344,8 +337,8 @@ class InstallerManager(
                         token.componentName.packageName,
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
                     )
                     InstallPlan.External(
                         target = target,
@@ -379,7 +372,7 @@ class InstallerManager(
     private fun resolveLabel(componentName: ComponentName): String =
         runCatching {
             val activityInfo: ActivityInfo = packageManager.getActivityInfo(componentName, 0)
-            activityInfo.loadLabel(packageManager)?.toString() ?: componentName.packageName
+            activityInfo.loadLabel(packageManager).toString()
         }.getOrDefault(componentName.packageName)
 
     private fun entryFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Entry? = when (token) {
@@ -445,7 +438,6 @@ class InstallerManager(
     private fun buildSequence(target: InstallTarget): List<Token> {
         val tokens = mutableListOf<Token>()
         val primary = getPrimaryToken()
-        val fallback = getFallbackToken()
 
         fun add(token: Token) {
             if (token == Token.None) return
@@ -457,8 +449,6 @@ class InstallerManager(
         add(primary)
 
         if (Token.Internal !in tokens) add(Token.Internal)
-
-        if (fallback != primary) add(fallback)
 
         return tokens
     }
@@ -545,8 +535,8 @@ class InstallerManager(
         val chosen = preferredPackages.firstNotNullOfOrNull { pkg ->
             candidates.firstOrNull { it.activityInfo.packageName == pkg }
         } ?: candidates.firstOrNull { info ->
-            info.loadLabel(packageManager)?.toString()
-                ?.equals(AOSP_INSTALLER_LABEL, ignoreCase = true) == true
+            info.loadLabel(packageManager).toString()
+                .equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
         } ?: candidates.first()
 
         val activityInfo = chosen.activityInfo
@@ -564,7 +554,7 @@ class InstallerManager(
 
     private fun isExcludedDuplicate(packageName: String, label: String): Boolean =
         packageName == AOSP_INSTALLER_PACKAGE &&
-            label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
+                label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
 
     private fun isInstallerCandidate(info: ResolveInfo): Boolean {
         if (!info.activityInfo.exported) return false
@@ -577,7 +567,7 @@ class InstallerManager(
 
         return requestedPermissions.any {
             it == Manifest.permission.REQUEST_INSTALL_PACKAGES ||
-                it == Manifest.permission.INSTALL_PACKAGES
+                    it == Manifest.permission.INSTALL_PACKAGES
         }
     }
 
@@ -666,9 +656,9 @@ class InstallerManager(
         val normalized = message?.lowercase(Locale.ROOT)?.trim().orEmpty()
         if (normalized.isEmpty()) return false
         return normalized.contains("install_failed_update_incompatible") ||
-            normalized.contains("install_failed_signature_inconsistent") ||
-            normalized.contains("signatures do not match") ||
-            normalized.contains("signature mismatch")
+                normalized.contains("install_failed_signature_inconsistent") ||
+                normalized.contains("signatures do not match") ||
+                normalized.contains("signature mismatch")
     }
 }
 

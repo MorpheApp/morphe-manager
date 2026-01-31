@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">স্টোরেজ থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="morphe_add_patch_source_local_change_file">ফাইল পরিবর্তন করুন</string>
     <string name="morphe_home_no_patches_available">কোনো প্যাচ উপলব্ধ নেই</string>
+    <string name="morphe_home_default_source_disabled">মর্ফে প্যাচের উৎস নিষ্ক্রিয়। প্যাচ উৎস শিটে সক্রিয় করুন অথবা এক্সপার্ট মোড ব্যবহার করুন।</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s পার্চ করতে, আপনার %2$s (পার্চ না করা) সংস্করণ প্রয়োজন</string>

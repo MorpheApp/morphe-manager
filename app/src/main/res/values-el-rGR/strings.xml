@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Επιλογή αρχείου επεξεργασίας πηγής .mpp από την αποθήκευση</string>
     <string name="morphe_add_patch_source_local_change_file">Αλλαγή αρχείου</string>
     <string name="morphe_home_no_patches_available">Δεν υπάρχουν επεξεργασίες διαθέσιμες</string>
+    <string name="morphe_home_default_source_disabled">Η πηγή Morphe είναι απενεργοποιημένη. Παρακαλώ ενεργοποιήστε την στη φύλλο πηγών ή χρησιμοποιήστε τον τρόπο Ειδικός.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Έχετε το αρχικό μη τροποποιημένο APK;</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Για να επιδιορθώσετε το %1$s, χρειάζεστε την έκδοση %2$s (μη επιδιορθωμένη)</string>

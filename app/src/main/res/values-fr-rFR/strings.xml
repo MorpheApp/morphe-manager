@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">Sélectionnez un fichier de source de patch .mpp depuis le stockage</string>
     <string name="morphe_add_patch_source_local_change_file">Changer de fichier</string>
     <string name="morphe_home_no_patches_available">Aucuns patchs disponibles</string>
+    <string name="morphe_home_default_source_disabled">La source de patch Morphe est désactivé. Veuillez l’activer dans la feuille des sources de patch ou utiliser le mode Expert</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Avez-vous l\'APK original non patché ?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Pour mettre à jour %1$s, vous avez besoin de la version %2$s (non patché)</string>
@@ -84,7 +85,7 @@
     <string name="morphe_home_invalid_apk">Fichier APK invalide</string>
     <string name="morphe_home_no_patches_for_app">Aucuns patchs disponibles pour cette application</string>
     <!-- Dialog 4: Expert Mode Dialog -->
-    <string name="morphe_expert_mode_title">Mode expert</string>
+    <string name="morphe_expert_mode_title">Mode Expert</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d sur %2$d patchs sélectionnés</string>
     <string name="morphe_expert_mode_search">Rechercher des patchs</string>
     <string name="morphe_expert_mode_proceed">Passer au patchage</string>
@@ -219,7 +220,7 @@
     <string name="morphe_app_icon_change_dialog_message">Changer pour \'%1$s\' et redémarrer ?</string>
     <string name="morphe_app_icon_change_dialog_confirm">Changer l’icône</string>
     <!-- Advanced Tab -->
-    <string name="morphe_expert_section">Paramètres experts</string>
+    <string name="morphe_expert_section">Paramètres expert</string>
     <string name="morphe_settings_expert_mode">Mode expert</string>
     <string name="morphe_settings_expert_mode_description">Activer les fonctionnalités avancées et les options de personnalisation</string>
     <string name="morphe_update_use_prereleases">Utiliser les pré-versions</string>
@@ -461,8 +462,8 @@ Activer quand même ?"</string>
     <string name="universal_patches_safeguard">Afficher &amp; autoriser l\'utilisation de patchs universels</string>
     <string name="universal_patches_safeguard_description">Ne pas masquer les patchs universels ni empêcher leur utilisation</string>
     <string name="universal_patches_profile_blocked_title">Patchs universels désactivés</string>
-    <string name="universal_patches_profile_blocked_description">Ce profil de patch contient des patchs universels. Activez « %1$s » dans les paramètres avancés pour l\'utiliser.</string>
-    <string name="universal_patches_app_blocked_description">Cette application contient des patchs universels. Activez « %1$s » dans les paramètres avancés pour continuer.</string>
+    <string name="universal_patches_profile_blocked_description">Ce profil de patch contient des patchs universels. Activez \"%1$s\" dans les paramètres avancés pour l\'utiliser.</string>
+    <string name="universal_patches_app_blocked_description">Cette application contient des patchs universels. Activez \"%1$s\" dans les paramètres avancés pour continuer.</string>
     <string name="import_keystore">Importer le keystore</string>
     <string name="import_keystore_description">Importer un keystore personnalisé</string>
     <string name="import_keystore_dialog_title">Entrez les informations d\'identification du keystore</string>

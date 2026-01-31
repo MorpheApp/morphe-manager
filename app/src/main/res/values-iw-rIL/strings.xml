@@ -56,6 +56,7 @@
     <string name="morphe_add_patch_source_local_file_description">בחר קובץ מקור תיקון .mpp מאחסון</string>
     <string name="morphe_add_patch_source_local_change_file">שנה קובץ</string>
     <string name="morphe_home_no_patches_available">אין תיקונים זמינים</string>
+    <string name="morphe_home_default_source_disabled">הפאץ\' של מורפא דISABLED. אנא אפשרו אותו ברשימה של מקורות הפאץ או השתמשו במצב EXPERT.</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">האם יש לך את קובץ ה-APK המקורי ללא תיקונים?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">כדי לתקן את %1$s, אתה צריך את הגרסה %2$s (לא מתוקנת)</string>
