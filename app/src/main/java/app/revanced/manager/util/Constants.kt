@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 const val tag = "Morphe Manager"
 
 const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
-
+const val BUNDLE_URL_RELEASES = "https://github.com/MorpheApp/morphe-patches/releases/latest"
 internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 // Package identifiers with their associated colors

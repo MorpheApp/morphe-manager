@@ -1,6 +1,5 @@
 package app.revanced.manager.domain.manager
 
-import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.util.Log
@@ -17,6 +16,10 @@ import kotlinx.serialization.Serializable
 class PreferencesManager(
     context: Context
 ) : BasePreferencesManager(context, "settings") {
+
+    // Appearance tab
+    val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
+
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
     val themePresetSelectionEnabled = booleanPreference("theme_preset_selection_enabled", true)
@@ -24,11 +27,22 @@ class PreferencesManager(
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val theme = enumPreference("theme", Theme.SYSTEM)
+
     val appLanguage = stringPreference("app_language", "system")
 
-    val api = stringPreference("api_url", "https://api.morphe.software")
-    val gitHubPat = stringPreference("github_pat", "")
-    val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
+    // Advanced tab
+    val useManagerPrereleases = booleanPreference("manager_prereleases", false)
+    val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
+
+    val useExpertMode = booleanPreference("use_expert_mode", false)
+
+    val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
+
+    // System tab
+    val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
+    val installerFallback = stringPreference("installer_fallback", InstallerPreferenceTokens.NONE)
+    val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
+    val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
     val useProcessRuntime = booleanPreference(
         "use_process_runtime",
@@ -36,43 +50,28 @@ class PreferencesManager(
         // Armv7 silently fails and nobody has researched why yet.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
-    val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
     val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_DEFAULT)
-    val patchedAppExportFormat = stringPreference(
-        "patched_app_export_format",
-        ExportNameFormatter.DEFAULT_TEMPLATE
-    )
-    val officialBundleRemoved = booleanPreference("official_bundle_removed", false)
-    val officialBundleSortOrder = intPreference("official_bundle_sort_order", -1)
-    val officialBundleCustomDisplayName = stringPreference("official_bundle_custom_display_name", "")
-    val autoCollapsePatcherSteps = booleanPreference("auto_collapse_patcher_steps", false)
-
-    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
-    val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
-    val installerFallback = stringPreference("installer_fallback", InstallerPreferenceTokens.NONE)
-    val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
-    val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
 
+    // Others hidden settings
+    val gitHubPat = stringPreference("github_pat", "")
+    val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
+
+    val officialBundleRemoved = booleanPreference("official_bundle_removed", false)
+    val officialBundleSortOrder = intPreference("official_bundle_sort_order", -1)
+    val officialBundleCustomDisplayName = stringPreference("official_bundle_custom_display_name", "")
+    val patchedAppExportFormat = stringPreference(
+        "patched_app_export_format",
+        ExportNameFormatter.DEFAULT_TEMPLATE
+    )
+    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
     val managerAutoUpdates = booleanPreference("manager_auto_updates", true)
     val showManagerUpdateDialogOnLaunch = booleanPreference("show_manager_update_dialog_on_launch", true)
-    val useManagerPrereleases = booleanPreference("manager_prereleases", false)
-    val usePatchesPrereleases = booleanPreference("patches_prereleases", false)
-
     val installationTime = longPreference("manager_installation_time", 0)
-
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
-    val disableSelectionWarning = booleanPreference("disable_selection_warning", true)
-    val disableUniversalPatchCheck = booleanPreference("disable_patch_universal_check", false)
-    val suggestedVersionSafeguard = booleanPreference("suggested_version_safeguard", false)
-    val disablePatchSelectionConfirmations = booleanPreference("disable_patch_selection_confirmations", false)
-
-    val useMorpheHomeScreen = booleanPreference("use_morphe_home_screen", true)
-    val useExpertMode = booleanPreference("use_expert_mode", false)
-    val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
 
     init {
         runBlocking {
@@ -82,10 +81,6 @@ class PreferencesManager(
                 Log.d(tag, "Installation time set to $now")
             }
         }
-    }
-
-    object PatchBundleConstants {
-        const val BUNDLE_URL_RELEASES = "https://github.com/MorpheApp/morphe-patches/releases/latest"
     }
 
     @Serializable
@@ -133,9 +128,8 @@ class PreferencesManager(
         val patchSelectionHiddenActions: Set<String>? = null,
         val acknowledgedDownloaderPlugins: Set<String>? = null,
         val autoSaveDownloaderApks: Boolean? = null,
-        val backgroundType: BackgroundType? = null, // Morphe
-        val useMorpheHomeScreen: Boolean? = null, // Morphe
-        val useExpertMode: Boolean? = null, // Morphe
+        val backgroundType: BackgroundType? = null,
+        val useExpertMode: Boolean? = null,
     )
 
     suspend fun exportSettings() = SettingsSnapshot(
@@ -148,12 +142,10 @@ class PreferencesManager(
         stripUnusedNativeLibs = stripUnusedNativeLibs.get(),
         theme = theme.get(),
         appLanguage = appLanguage.get(),
-        api = api.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
-        autoCollapsePatcherSteps = autoCollapsePatcherSteps.get(),
         patchedAppExportFormat = patchedAppExportFormat.get(),
         officialBundleRemoved = officialBundleRemoved.get(),
         officialBundleCustomDisplayName = officialBundleCustomDisplayName.get(),
@@ -170,14 +162,8 @@ class PreferencesManager(
         useManagerPrereleases = useManagerPrereleases.get(),
         usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
-        disableSelectionWarning = disableSelectionWarning.get(),
-        disableUniversalPatchCheck = disableUniversalPatchCheck.get(),
-        suggestedVersionSafeguard = suggestedVersionSafeguard.get(),
-        disablePatchSelectionConfirmations = disablePatchSelectionConfirmations.get(),
-
-        backgroundType = backgroundType.get(), // Morphe
-        useMorpheHomeScreen = useMorpheHomeScreen.get(), // Morphe
-        useExpertMode = useExpertMode.get() // Morphe
+        backgroundType = backgroundType.get(),
+        useExpertMode = useExpertMode.get()
     )
 
     suspend fun importSettings(snapshot: SettingsSnapshot) = edit {
@@ -190,12 +176,10 @@ class PreferencesManager(
         snapshot.stripUnusedNativeLibs?.let { stripUnusedNativeLibs.value = it }
         snapshot.theme?.let { theme.value = it }
         snapshot.appLanguage?.let { appLanguage.value = it }
-        snapshot.api?.let { api.value = it }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
-        snapshot.autoCollapsePatcherSteps?.let { autoCollapsePatcherSteps.value = it }
         snapshot.patchedAppExportFormat?.let { patchedAppExportFormat.value = it }
         snapshot.officialBundleRemoved?.let { officialBundleRemoved.value = it }
         snapshot.officialBundleCustomDisplayName?.let { officialBundleCustomDisplayName.value = it }
@@ -214,13 +198,7 @@ class PreferencesManager(
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
-        snapshot.disableSelectionWarning?.let { disableSelectionWarning.value = it }
-        snapshot.disableUniversalPatchCheck?.let { disableUniversalPatchCheck.value = it }
-        snapshot.suggestedVersionSafeguard?.let { suggestedVersionSafeguard.value = it }
-        snapshot.disablePatchSelectionConfirmations?.let { disablePatchSelectionConfirmations.value = it }
-
         snapshot.backgroundType?.let { backgroundType.value = it }
-        snapshot.useMorpheHomeScreen?.let { useMorpheHomeScreen.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
     }
 
@@ -233,14 +211,4 @@ object InstallerPreferenceTokens {
     const val AUTO_SAVED = ":auto_saved:"
     const val SHIZUKU = ":shizuku:"
     const val NONE = ":none:"
-}
-
-suspend fun PreferencesManager.hideInstallerComponent(component: ComponentName) = edit {
-    val flattened = component.flattenToString()
-    installerHiddenComponents.value = installerHiddenComponents.value + flattened
-}
-
-suspend fun PreferencesManager.showInstallerComponent(component: ComponentName) = edit {
-    val flattened = component.flattenToString()
-    installerHiddenComponents.value = installerHiddenComponents.value - flattened
 }
