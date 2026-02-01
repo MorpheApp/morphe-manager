@@ -25,8 +25,8 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">What app do you want to patch?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Ready to make YouTube legendary again?</string>
-    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
+    <string name="home_greeting_2">Ready to make apps legendary again?</string>
+    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Buckle up, it\'s patching time</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Another day, another ad-blocked masterpiece</string>

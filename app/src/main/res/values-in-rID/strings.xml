@@ -60,7 +60,7 @@
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">Apakah Anda memiliki APK asli yang belum ditambal?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Untuk menambal %1$s, Anda membutuhkan versi %2$s (belum ditambal)</string>
-    <string name="morphe_home_apk_availability_yes">Ya, saya punya</string>
+    <string name="morphe_home_apk_availability_yes">Ya, saya sudah punya</string>
     <string name="morphe_home_apk_availability_no">Tidak, bantu saya menemukannya</string>
     <!-- Dialog 2: Download Instructions -->
     <string name="morphe_home_download_instructions_title">Unduh APK asli</string>
@@ -117,8 +117,8 @@
     <string name="morphe_apks_count">%d APK(s)</string>
     <string name="morphe_apks_size">Ukuran total: %s</string>
     <!-- Patched APKs Management -->
-    <string name="morphe_patched_apks_management">APK yang dipatch</string>
-    <string name="morphe_patched_apks_title">APK yang dipatch</string>
+    <string name="morphe_patched_apks_management">APK yang ditambal</string>
+    <string name="morphe_patched_apks_title">APK yang ditambal</string>
     <string name="morphe_patched_apks_description">Kelola berkas aplikasi yang ditambal dan disimpan</string>
     <string name="morphe_patched_apks_empty">Belum ada APK yang ditambal dan disimpan hingga saat ini</string>
     <string name="morphe_patched_apks_delete_title">Hapus APK yang ditambal?</string>
@@ -221,7 +221,7 @@
     <string name="morphe_app_icon_change_dialog_confirm">Ganti ikon</string>
     <!-- Advanced Tab -->
     <string name="morphe_expert_section">Pengaturan ahli</string>
-    <string name="morphe_settings_expert_mode">Mode pakar</string>
+    <string name="morphe_settings_expert_mode">Mode ahli</string>
     <string name="morphe_settings_expert_mode_description">Mengaktifkan fitur-fitur tingkat lanjut dan pilihan kustomisasi</string>
     <string name="morphe_update_use_prereleases">Gunakan versi pra-rilis</string>
     <string name="morphe_update_use_prereleases_description">Dapatkan akses awal ke tambalan baru dan fitur manajer</string>

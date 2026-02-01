@@ -6,7 +6,7 @@
     <string name="morphe_home_not_patched_yet">Noch nicht gepatcht</string>
     <!-- Home Screen - Update Notifications -->
     <string name="morphe_home_update_available">Manager-Update verfügbar</string>
-    <string name="morphe_home_update_available_subtitle">Neue Version bereit zum Installieren</string>
+    <string name="morphe_home_update_available_subtitle">Neue Version bereit zur Installation</string>
     <string name="morphe_home_update_error">Update fehlgeschlagen</string>
     <string name="morphe_home_update_error_subtitle">Überprüfe deine Internetverbindung und versuche es erneut</string>
     <string name="morphe_home_updating_sources">Update-Sources…</string>
@@ -24,13 +24,13 @@
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="morphe_home_greeting_4">Neuer Tag, neues Werbefreies Meisterwerk</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Bock auf Werbung? Ich auch nicht!</string>
+    <string name="morphe_home_greeting_5">Haben Sie Bock auf Werbung? Wir nämlich auch nicht!</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="morphe_home_greeting_6">Lassen wir deine Apps agieren</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="morphe_home_greeting_7">Heutige Vorhersage: 100%ige Chance auf Behebung</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Bereit, unterwältigendes in Geniales zu verwandeln?</string>
+    <string name="morphe_home_greeting_8">Sind Sie bereit, die Unterwältigung in eine großartige Veränderung zu verwandeln? </string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="morphe_home_greeting_9">Apps von sich selbst retten, seit heute</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
@@ -53,22 +53,22 @@
     <string name="morphe_add_patch_source_remote_description">Geben Sie die JSON-Endpunkt-URL für die Remote-Patch-Source ein</string>
     <string name="morphe_add_patch_source_local">Lokal</string>
     <string name="morphe_add_patch_source_local_file">Wähle eine .mpp-Patch-Source-Datei aus</string>
-    <string name="morphe_add_patch_source_local_file_description">Wähle eine .mpp-Patch-Source-Datei aus dem Speicher aus</string>
+    <string name="morphe_add_patch_source_local_file_description">Wählen Sie eine .mpp-Patch-Source-Datei aus dem Speicher aus</string>
     <string name="morphe_add_patch_source_local_change_file">Datei ändern</string>
     <string name="morphe_home_no_patches_available">Keine Patches verfügbar</string>
-    <string name="morphe_home_default_source_disabled">Morphe-Patch-Quelle ist deaktiviert. Bitte aktivieren Sie sie in der \"Patch-Quellen\"-Tabelle oder verwenden Sie den \"Expert-Modus\".</string>
+    <string name="morphe_home_default_source_disabled">Die Patch-Quelle von Morphe ist deaktiviert. Bitte aktivieren Sie es im Patch-Quellenblatt oder verwenden Sie den Expertenmodus. </string>
     <!-- Dialog 1: APK Availability -->
-    <string name="morphe_home_apk_availability_dialog_title">Hast du die ursprüngliche und unveränderte APK?</string>
-    <string name="morphe_home_apk_availability_dialog_description_simple">Um %1$s zu patchen, benötigst du Version %2$s (ungepatcht)</string>
-    <string name="morphe_home_apk_availability_yes">Ja, ich habe sie</string>
-    <string name="morphe_home_apk_availability_no">Nein, hilf mir, es sie finden</string>
+    <string name="morphe_home_apk_availability_dialog_title">Haben Sie die ursprüngliche ungepatchte APK? </string>
+    <string name="morphe_home_apk_availability_dialog_description_simple">Um %1$s zu patchen, benötigen Sie Version %2$s (ungepatcht) </string>
+    <string name="morphe_home_apk_availability_yes">Ja, ich habe es </string>
+    <string name="morphe_home_apk_availability_no">Nein, hilf mir, es zu finden </string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Lade die originale APK herunter</string>
+    <string name="morphe_home_download_instructions_title">Laden Sie die ursprüngliche APK herunter </string>
     <string name="morphe_home_download_instructions_steps_title">Anleitung:</string>
-    <string name="morphe_home_download_instructions_step1">Drücke den \'%1$s\'-Button unten</string>
-    <string name="morphe_home_download_instructions_step2_part1">Scrolle auf der Webseite nach unten und drücke</string>
-    <string name="morphe_home_download_instructions_download_button_toast">Drücke zum Herunterladen auf der Webseite und nicht hier 😊</string>
-    <string name="morphe_home_download_instructions_step3">Warte, bis der Download abgeschlossen ist, und &lt;b&gt;installiere&lt;/b&gt; die APK nicht</string>
+    <string name="morphe_home_download_instructions_step1">Drücken Sie die Taste \'%1$s\' unten </string>
+    <string name="morphe_home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
+    <string name="morphe_home_download_instructions_download_button_toast">Drücke die Download Taste auf der Website und nicht hier 😊 </string>
+    <string name="morphe_home_download_instructions_step3">Warten Sie, bis der Download abgeschlossen ist, und &lt;b&gt; installieren Sie nicht&lt;/b&gt; die APK </string>
     <string name="morphe_home_download_instructions_step3_mount">Warte, bis der Download abgeschlossen ist, dann &lt;b&gt;installiere die APK&lt;/b&gt;</string>
     <string name="morphe_home_download_instructions_step4">Öffne diese App erneut, nachdem der Download abgeschlossen ist</string>
     <string name="morphe_home_download_instructions_step4_mount">Öffne diese App nach der Installation der ursprünglichen APK erneut</string>
