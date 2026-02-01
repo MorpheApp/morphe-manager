@@ -99,81 +99,53 @@ fun ExpertModeDialog(
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.expert_mode_title),
-        compactPadding = true,
         dismissOnClickOutside = false,
-        footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.expert_mode_proceed),
-                onClick = {
-                    // Sync all local changes back before proceeding
-                    localSelectedPatches.forEach { (bundleUid, patches) ->
-                        val originalPatches = selectedPatches[bundleUid] ?: emptySet()
-                        patches.forEach { patchName ->
-                            if (patchName !in originalPatches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                        originalPatches.forEach { patchName ->
-                            if (patchName !in patches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                    }
-                    // Handle removed bundles
-                    selectedPatches.forEach { (bundleUid, patches) ->
-                        if (bundleUid !in localSelectedPatches) {
-                            patches.forEach { patchName ->
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                    }
-                    onProceed()
-                },
-                enabled = totalSelectedCount > 0,
-                icon = Icons.Outlined.AutoFixHigh,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        footer = null,
+        compactPadding = true,
+        scrollable = false
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Subtitle with count
-            Text(
-                text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+            // Fixed header section
+            Column(modifier = Modifier.fillMaxWidth()) {
+                // Subtitle with count
+                Text(
+                    text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            // Search bar
-            MorpheDialogTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                label = {
-                    Text(stringResource(R.string.expert_mode_search))
-                },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = stringResource(R.string.expert_mode_search)
-                    )
-                },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = stringResource(R.string.clear)
-                            )
+                // Search bar
+                MorpheDialogTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    label = {
+                        Text(stringResource(R.string.expert_mode_search))
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = stringResource(R.string.expert_mode_search)
+                        )
+                    },
+                    trailingIcon = {
+                        if (searchQuery.isNotEmpty()) {
+                            IconButton(onClick = { searchQuery = "" }) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(R.string.clear)
+                                )
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
 
-            // Content
+            // Scrollable content
             if (filteredPatchesInfo.isEmpty()) {
                 EmptyStateContent(
                     hasSearch = searchQuery.isNotBlank(),
@@ -183,7 +155,10 @@ fun ExpertModeDialog(
                 )
             } else {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     filteredPatchesInfo.forEach { (bundle, patches) ->
@@ -259,6 +234,39 @@ fun ExpertModeDialog(
                     }
                 }
             }
+
+            // Proceed to Patching button
+            MorpheDialogButton(
+                text = stringResource(R.string.expert_mode_proceed),
+                onClick = {
+                    // Sync all local changes back before proceeding
+                    localSelectedPatches.forEach { (bundleUid, patches) ->
+                        val originalPatches = selectedPatches[bundleUid] ?: emptySet()
+                        patches.forEach { patchName ->
+                            if (patchName !in originalPatches) {
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                        originalPatches.forEach { patchName ->
+                            if (patchName !in patches) {
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                    }
+                    // Handle removed bundles
+                    selectedPatches.forEach { (bundleUid, patches) ->
+                        if (bundleUid !in localSelectedPatches) {
+                            patches.forEach { patchName ->
+                                onPatchToggle(bundleUid, patchName)
+                            }
+                        }
+                    }
+                    onProceed()
+                },
+                enabled = totalSelectedCount > 0,
+                icon = Icons.Outlined.AutoFixHigh,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 
