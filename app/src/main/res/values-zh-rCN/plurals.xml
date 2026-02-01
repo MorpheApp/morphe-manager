@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="other">%d 个补丁</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">执行 %d 个补丁</item>
+    </plurals>
+</resources>

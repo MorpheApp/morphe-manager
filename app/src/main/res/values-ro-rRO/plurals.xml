@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d petec</item>
+        <item quantity="few">%d patch-uri</item>
+        <item quantity="other">%d patch-uri</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Execută %d patch</item>
+        <item quantity="few">Execută %d patch-uri</item>
+        <item quantity="other">Execută %d patch-uri</item>
+    </plurals>
+</resources>

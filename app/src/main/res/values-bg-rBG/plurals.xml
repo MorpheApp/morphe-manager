@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d пач</item>
+        <item quantity="other">%d пач</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Приложи %d пач</item>
+        <item quantity="other">Приложи %d пача</item>
+    </plurals>
+</resources>

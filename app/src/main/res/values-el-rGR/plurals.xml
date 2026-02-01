@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d τροποποίηση</item>
+        <item quantity="other">%d τροποποιήσεις</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Εκτέλεση %d τροποποίησης</item>
+        <item quantity="other">Εκτέλεση %d τροποποιήσεων</item>
+    </plurals>
+</resources>

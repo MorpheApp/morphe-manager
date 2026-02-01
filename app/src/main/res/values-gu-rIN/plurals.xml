@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d પેચ</item>
+        <item quantity="other">%d પેચો</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%d પેચ એક્ઝિક્યુટ કરો</item>
+        <item quantity="other">%d પેચો એક્ઝિક્યુટ કરો</item>
+    </plurals>
+</resources>

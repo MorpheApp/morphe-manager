@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d патч</item>
+        <item quantity="few">%d патчів</item>
+        <item quantity="many">%d патчів</item>
+        <item quantity="other">%d патчі</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Виконати %d патч</item>
+        <item quantity="few">Виконати %d патчів</item>
+        <item quantity="many">Виконати %d патчів</item>
+        <item quantity="other">Виконати %d патчі</item>
+    </plurals>
+</resources>

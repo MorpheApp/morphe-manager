@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d modyfikacja</item>
+        <item quantity="few">%d modyfikacje</item>
+        <item quantity="many">%d modyfikacji</item>
+        <item quantity="other">%d modyfikacji</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Wykonaj %d modyfikację</item>
+        <item quantity="few">Wykonaj %d modyfikacje</item>
+        <item quantity="many">Wykonaj %d modyfikacji</item>
+        <item quantity="other">Wykonaj %d modyfikacji</item>
+    </plurals>
+</resources>
