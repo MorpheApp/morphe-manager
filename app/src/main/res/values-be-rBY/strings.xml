@@ -1,81 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Morphe Home Screen -->
+    <!-- Home Screen -->
     <!-- Home Screen - Update Notifications -->
-    <string name="morphe_home_update_error">Абнаўленне не ўдалося</string>
-    <string name="morphe_home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
+    <string name="home_update_error">Абнаўленне не ўдалося</string>
+    <string name="home_update_error_subtitle">Праверце інтэрнэт-злучэнне і паўтарыце ізноў</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="morphe_home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
+    <string name="home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="morphe_home_greeting_2">Гатовыя зноў зрабіць YouTube легендарным?</string>
-    <!-- "Buckle up" referring to fasten your vehicle seat belt. A light-hearted joke to build excitement. -->
-    <string name="morphe_home_greeting_3">Прышпіліце рамяні, час латаць</string>
+    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">Прышпіліце рамяні, час латаць</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="morphe_home_greeting_4">Яшчэ адзін дзень, яшчэ адзін шэдэўр з блакіроўкай рэкламы</string>
+    <string name="home_greeting_4">Яшчэ адзін дзень, яшчэ адзін шэдэўр з блакіроўкай рэкламы</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="morphe_home_greeting_5">Хочаце глядзець рэкламу? Я таксама не хачу.</string>
+    <string name="home_greeting_5">Хочаце глядзець рэкламу? Я таксама не хачу.</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="morphe_home_greeting_6">Давайце зробім так, каб вашы праграмы паводзілі сябе добра</string>
+    <string name="home_greeting_6">Давайце зробім так, каб вашы праграмы паводзілі сябе добра</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="morphe_home_greeting_7">Прагноз на сёння: 100% верагоднасць выпраўлення</string>
+    <string name="home_greeting_7">Прагноз на сёння: 100% верагоднасць выпраўлення</string>
     <!-- From mediocrity to amazing -->
-    <string name="morphe_home_greeting_8">Гатовыя змяніць непрыемнае на цудоўнае?</string>
+    <string name="home_greeting_8">Гатовыя змяніць непрыемнае на цудоўнае?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="morphe_home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
+    <string name="home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="morphe_home_greeting_10">Працуе на кафеіне і добрых патчах</string>
-    <!-- Sources Management -->
-    <!-- Add Sources Dialog -->
-    <!-- Dialog 1: APK Availability -->
-    <!-- Dialog 2: Download Instructions -->
-    <!-- Dialog 3: File Picker Prompt -->
-    <!-- Dialog 4: Expert Mode Dialog -->
+    <string name="home_greeting_10">Працуе на кафеіне і добрых патчах</string>
+    <!-- Home Screen - Sources Management -->
+    <!-- Home Screen - Sources Dialogs -->
+    <!-- Home Screen - Dialog 1: APK Availability -->
+    <!-- Home Screen - Dialog 2: Download Instructions -->
+    <!-- Home Screen - Dialog 3: File Picker Prompt -->
+    <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Patch Options -->
-    <!-- App Info Screen -->
-    <!-- Repatch Feature -->
-    <!-- Storage Management -->
-    <!-- Patched APKs Management -->
-    <!-- Original APKs Management -->
-    <!-- Root Mode -->
-    <!-- Morphe Patcher Screen -->
+    <!-- Home Screen - App Info Screen -->
+    <!-- Home Screen - Root Mode -->
+    <!-- Patcher Screen -->
+    <!-- Patcher Screen - Patcher Steps -->
+    <!-- Patcher Screen - Patcher Worker -->
+    <!-- Patcher Screen - Patcher Messages -->
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Appearance Tab -->
-    <!-- App Icon Selector -->
-    <!-- Advanced Tab -->
-    <!-- Patch Options Section -->
-    <!-- Patch Options Section: Theme Colors -->
-    <!-- Patch Options Section: Custom Branding -->
-    <!-- Patch Options Section: Custom Header -->
-    <!-- Patch Options Section: Hide Shorts -->
-    <!-- System Tab -->
-    <!-- About Section -->
-    <!-- Other strings -->
-    <!-- Morphe -->
-    <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe hide this because users can break updating their existing apps if they don't understand what they're doing -->
-    <!-- Morphe because there are no other patches yet, official patches are always added and currently cannot be removed -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Dormant code and not used -->
-    <!-- Dormant code and not used -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
-    <!-- Morphe -->
+    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Settings -->
+    <!-- Settings - Appearance Tab - Background animation -->
+    <!-- Settings - Appearance Tab - Theme -->
+    <!-- Settings - Appearance Tab - Language Selector -->
+    <!-- Settings - Appearance Tab - App Icon Selector -->
+    <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - Patch Options Section -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
+    <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
+    <!-- Settings - System Tab - Installer Section -->
+    <!-- Settings - System Tab - Performance Section -->
+    <!-- Settings - System Tab - Import and export keystore -->
+    <!-- Settings - System Tab - Import and Export Manager Settings -->
+    <!-- Settings - System Tab - Debug Section -->
+    <!-- Settings - System Tab - Storage Management Section -->
+    <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - About Section -->
+    <!-- Shared strings -->
 </resources>

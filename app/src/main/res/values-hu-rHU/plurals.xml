@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d javítás</item>
+        <item quantity="other">%d javítás</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%d javítás futtatása</item>
+        <item quantity="other">%d javítások futtatása</item>
+    </plurals>
+</resources>

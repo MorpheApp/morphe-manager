@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d korjaustiedosto</item>
+        <item quantity="other">%d korjaustiedostoa</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Suorita %d korjaustiedosto</item>
+        <item quantity="other">Suorita %d korjaustiedostoa</item>
+    </plurals>
+</resources>

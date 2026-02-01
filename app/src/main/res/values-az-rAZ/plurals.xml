@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d yamaq</item>
+        <item quantity="other">%d yamaq</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%d yamaq icra edildi</item>
+        <item quantity="other">%d yamaq icra edildi</item>
+    </plurals>
+</resources>

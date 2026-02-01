@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d conserto</item>
+        <item quantity="other">%d consertos</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Executar %d patch</item>
+        <item quantity="other">Executar %d patches</item>
+    </plurals>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d záplata</item>
+        <item quantity="few">%d záplaty</item>
+        <item quantity="many">%d záplat</item>
+        <item quantity="other">%d záplat</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">Provést %d záplatu</item>
+        <item quantity="few">Provést %d záplaty</item>
+        <item quantity="many">Provést %d záplat</item>
+        <item quantity="other">Provést %d záplat</item>
+    </plurals>
+</resources>
