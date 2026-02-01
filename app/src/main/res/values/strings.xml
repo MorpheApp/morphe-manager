@@ -322,9 +322,8 @@
     <string name="settings_advanced_patch_options_theme_colors">App theme colors</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Change background color</string>
     <string name="settings_advanced_patch_options_dark_theme_color">Dark theme background color</string>
-    <string name="settings_advanced_patch_options_dark_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
     <string name="settings_advanced_patch_options_light_theme_color">Light theme background color</string>
-    <string name="settings_advanced_patch_options_light_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
+    <string name="settings_advanced_patch_options_theme_color_description">Can be a hex color (#RRGGBB) or a color resource reference</string>
     <string name="settings_advanced_patch_options_loading">Loading patch options…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Wait until the patch source is updated</string>
     <string name="settings_advanced_patch_options_load_error">Failed to load patch options</string>
