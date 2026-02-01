@@ -116,7 +116,7 @@ private fun PatchedApksContent(
     var itemToDelete by remember { mutableStateOf<InstalledApp?>(null) }
 
     ApkManagementDialogContent(
-        title = stringResource(R.string.settings_system_patched_apks_management),
+        title = stringResource(R.string.settings_system_patched_apks_title),
         icon = Icons.Outlined.Apps,
         count = apkItems.size,
         totalSize = totalSize,

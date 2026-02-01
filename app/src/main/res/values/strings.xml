@@ -480,7 +480,6 @@ Details: %2$s"</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
 
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_management">Patched APKs</string>
     <string name="settings_system_patched_apks_title">Patched APKs</string>
     <string name="settings_system_patched_apks_description">Manage saved patched application files</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
