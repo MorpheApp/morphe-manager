@@ -488,7 +488,6 @@ Details: %2$s"</string>
     <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
 
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
-    <string name="settings_system_original_apks_management">Original APKs</string>
     <string name="settings_system_original_apks_title">Original APKs</string>
     <string name="settings_system_original_apks_description">Original APK files are saved for repatching. Only the most recent version is kept for each app.</string>
     <string name="settings_system_original_apks_empty">No original APKs stored</string>
