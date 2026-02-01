@@ -87,7 +87,7 @@
     <!-- Dialog 4: Expert Mode Dialog -->
     <string name="morphe_expert_mode_title">Tryb ekspercki</string>
     <string name="morphe_expert_mode_subtitle_extended">Wybrano %1$d z %2$d modyfikacji</string>
-    <string name="morphe_expert_mode_search">Wyszukaj modyfikacje</string>
+    <string name="morphe_expert_mode_search">Szukaj modyfikacji</string>
     <string name="morphe_expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="morphe_expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="morphe_expert_mode_enable_all">Włącz wszystkie</string>
@@ -95,7 +95,7 @@
     <string name="morphe_expert_mode_no_results">Brak znalezionych modyfikacji</string>
     <string name="morphe_expert_mode_no_patches">Brak dostępnych modyfikacji</string>
     <!-- Patch Options -->
-    <string name="morphe_custom_color">Własny kolor</string>
+    <string name="morphe_custom_color">Kolor niestandardowy</string>
     <string name="morphe_hex_color">Kolor w formacie HEX</string>
     <string name="morphe_patch_option_instructions">Instrukcje</string>
     <string name="morphe_patch_option_enter_value">Wprowadź wartość</string>
@@ -135,10 +135,10 @@
     <string name="morphe_original_apks_delete_title">Usunąć oryginalny plik APK?</string>
     <string name="morphe_original_apks_delete_confirm">Usunąć oryginalny plik APK dla aplikacji %s? Nie będziesz mógł ponownie modyfikować bez wybrania nowego pliku APK.</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Tryb roota wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem.</string>
+    <string name="morphe_root_install_apk_required">Tryb root wymaga zainstalowania oryginalnego pliku APK na urządzeniu przed zmodyfikowaniem.</string>
     <string name="morphe_root_gmscore_excluded">Wsparcie dla GmsCore jest wyłączone w trybie root</string>
     <!-- Morphe Patcher Screen -->
-    <string name="morphe_patcher_error_copied">Błąd został skopiowany do schowka</string>
+    <string name="morphe_patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="morphe_patcher_error_log">Dziennik błędów</string>
     <string name="morphe_patcher_error_technical">Szczegóły techniczne</string>
     <string name="morphe_patcher_patches_progress">%1$d z %2$d modyfikacji</string>
@@ -152,13 +152,13 @@
     <string name="morphe_patcher_failed_subtitle">Sprawdź poniższe szczegóły błędu</string>
     <string name="morphe_patcher_failed_dialog_title">Modyfikowanie nie powiodło się</string>
     <string name="morphe_patcher_unknown_error">Wystąpił nieznany błąd</string>
-    <string name="morphe_patcher_mounting">Montowanie...</string>
+    <string name="morphe_patcher_mounting">Mountowanie...</string>
     <string name="morphe_patcher_conflict_title">Konflikt pakietów</string>
     <string name="morphe_patcher_conflict_subtitle">Musisz odinstalować istniejącą wersję</string>
     <string name="morphe_patcher_install_error_title">Błąd podczas instalacji</string>
     <string name="morphe_patcher_install_error_subtitle">Spróbuj odinstalować i ponownie zainstalować</string>
     <string name="morphe_patcher_ready_to_install_subtitle">Naciśnij przycisk poniżej, aby zainstalować</string>
-    <string name="morphe_patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmontować</string>
+    <string name="morphe_patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zmountować</string>
     <string name="morphe_patcher_unsupported_version_dialog_title">Niewspierana wersja</string>
     <string name="morphe_patcher_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy.</string>
     <string name="morphe_patcher_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>

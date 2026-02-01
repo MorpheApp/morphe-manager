@@ -99,6 +99,9 @@ class PreferencesManager(
                 installationTime.update(now)
                 Log.d(tag, "Installation time set to $now")
             }
+
+            // Force off Advanced mode for users who had it enabled. This option will be removed in the future.
+            useMorpheHomeScreen.update(true)
         }
     }
 

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_other_apps">Başqa tətbiqlər</string>
-    <string name="morphe_home">Ev</string>
-    <string name="morphe_home_not_patched_yet">Hələ yamalanmamış</string>
+    <string name="morphe_home_other_apps">Digər tətbiqlər</string>
+    <string name="morphe_home">Əsas səhifə</string>
+    <string name="morphe_home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="morphe_home_update_available">Yeni yenilənmə əlçatandır</string>
-    <string name="morphe_home_update_available_subtitle">Yeni versiya yüklənmək üçün hazırdır</string>
+    <string name="morphe_home_update_available">Menecer yeniləməsi var</string>
+    <string name="morphe_home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
     <string name="morphe_home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="morphe_home_update_error_subtitle">İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
-    <string name="morphe_home_updating_sources">Yamaqlar yenilənir…</string>
-    <string name="morphe_home_update_progress">%1$d/%2$d yamaqlar işlənib</string>
-    <string name="morphe_home_update_success">Yenilənmə tamamlandı</string>
-    <string name="morphe_home_update_success_subtitle">Yamaqlarınız yenilənib</string>
-    <string name="morphe_home_sources_are_loading">Yamaqlar yüklənilir, xahiş olunur gözləyin…</string>
+    <string name="morphe_home_updating_sources">Mənbələr yenilənir…</string>
+    <string name="morphe_home_update_progress">%1$d/%2$d mənbə emal olunub</string>
+    <string name="morphe_home_update_success">Mənbələri yeniləmə tamamlandı</string>
+    <string name="morphe_home_update_success_subtitle">Mənbələriniz yenilənib</string>
+    <string name="morphe_home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
     <string name="morphe_home_please_wait">Zəhmət olmasa, gözləyin...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="morphe_home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
@@ -37,10 +37,10 @@
     <string name="morphe_home_greeting_10">Kofein və yaxşı yamalar ilə gücləndirilib</string>
     <!-- Sources Management -->
     <string name="morphe_home_sources">Yamaq mənbələri</string>
-    <string name="morphe_sources_management_subtitle">%d yamaqlar yüklənildi</string>
-    <string name="morphe_sources_delete_confirm_message">Yamaq mənbəsini \"%s\" silmək istəyirsiniz? Bu geri alınmır.</string>
+    <string name="morphe_sources_management_subtitle">%d mənbə quraşdırılıb</string>
+    <string name="morphe_sources_delete_confirm_message">\"%s\" mənbəsini silməlimi? Bu geri alına bilməz.</string>
     <string name="morphe_sources_open_in_browser">Brauzerdə açın</string>
-    <string name="morphe_sources_failed_to_open_url">URL-i açmaq uğursuz oldu</string>
+    <string name="morphe_sources_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="morphe_sources_date_added">Əlavə edildi</string>
     <string name="morphe_sources_date_updated">Yeniləndi</string>
     <string name="morphe_enabled">İşləkdi</string>

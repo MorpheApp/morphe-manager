@@ -88,7 +88,7 @@
     <string name="morphe_expert_mode_title">Uzman modu</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d/%2$d yama seçildi</string>
     <string name="morphe_expert_mode_search">Yamaları ara</string>
-    <string name="morphe_expert_mode_proceed">Yamalamaya devam et</string>
+    <string name="morphe_expert_mode_proceed">Yamalamaya Başla</string>
     <string name="morphe_expert_mode_disable_all">Hepsini devre dışı bırak</string>
     <string name="morphe_expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="morphe_expert_mode_has_options">Ayarlanabilir</string>
@@ -105,7 +105,7 @@
     <string name="expand">Genişlet</string>
     <string name="collapse">Daralt</string>
     <!-- App Info Screen -->
-    <string name="uninstall_app_confirmation">Bu uygulamı silmek istediğinizden emin misiniz?</string>
+    <string name="uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
     <string name="saved_app_delete_confirmation">Bu kaydedilmiş uygulamayı silmek istediğinizden emin misiniz?</string>
     <string name="saved_copy_delete_confirmation">Kaydedilmiş kopyayı silmek istediğinizden emin misiniz?</string>
     <string name="view">Görüntüle</string>
@@ -135,8 +135,8 @@
     <string name="morphe_original_apks_delete_title">%s için orijinal APK\'yi silmek istediğinizden emin misiniz?</string>
     <string name="morphe_original_apks_delete_confirm">%s için orijinal APK\'yi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve yeniden yamalamak için yeni bir APK dosyası sağlamanız gerekecektir.</string>
     <!-- Root Mode -->
-    <string name="morphe_root_install_apk_required">Kök modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
-    <string name="morphe_root_gmscore_excluded">GmsCore destek yaması kök modda hariç tutulmuştur</string>
+    <string name="morphe_root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir.</string>
+    <string name="morphe_root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
     <!-- Morphe Patcher Screen -->
     <string name="morphe_patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="morphe_patcher_error_log">Hata günlüğü</string>
@@ -643,7 +643,7 @@ Tüm yama profilleri etkilenmez."</string>
     <string name="dialog_input_placeholder">Değer</string>
     <string name="reset">Sıfırla</string>
     <string name="share">Paylaş</string>
-    <string name="patch">Yama</string>
+    <string name="patch">Yamala</string>
     <string name="select_from_storage">Depodan seç</string>
     <string name="select_from_storage_description">Dosya seçiciyi kullanarak depodan bir APK dosyası seçin</string>
     <string name="type_anything">Devam etmek için herhangi bir şey yazın</string>
@@ -831,7 +831,7 @@ Sadece aşağıdaki sürümle uyumludur: %2$s."</string>
     <string name="installed">Yüklü</string>
     <string name="app_info">Uygulama bilgileri</string>
     <string name="uninstall">Kaldır</string>
-    <string name="repatch">Yeniden yama</string>
+    <string name="repatch">Yeniden yamala</string>
     <string name="install_type">Yükleme türü</string>
     <string name="package_name">Paket adı</string>
     <string name="original_package_name">Orijinal paket adı</string>
