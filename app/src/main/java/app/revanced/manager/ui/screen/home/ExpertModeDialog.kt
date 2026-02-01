@@ -35,12 +35,10 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchInfo
-import app.revanced.manager.ui.screen.shared.ColorPickerDialog
-import app.revanced.manager.ui.screen.shared.ColorPreviewDot
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.util.rememberFolderPickerWithPermission
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
+import app.revanced.manager.util.rememberFolderPickerWithPermission
 
 /**
  * Advanced patch selection and configuration dialog

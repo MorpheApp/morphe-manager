@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.outlined.FileDownload
-import androidx.compose.material.icons.outlined.FolderOpen
+import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -560,11 +560,11 @@ private fun InstallActionButton(
         } else {
             Icon(
                 imageVector = when {
-                    isInstalled -> Icons.AutoMirrored.Outlined.OpenInNew
-                    isConflict -> Icons.Default.Delete
-                    isError -> Icons.Outlined.FileDownload
-                    usingMountInstall -> Icons.Outlined.FolderOpen
-                    else -> Icons.Outlined.FileDownload
+                    isInstalled -> Icons.AutoMirrored.Outlined.Launch
+                    isConflict -> Icons.Default.DeleteForever
+                    isError -> Icons.Outlined.InstallMobile
+                    usingMountInstall -> Icons.Outlined.Link
+                    else -> Icons.Outlined.InstallMobile
                 },
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
