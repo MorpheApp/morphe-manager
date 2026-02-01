@@ -6,18 +6,12 @@ import app.morphe.library.ApkSigner
 import app.morphe.library.ApkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.BufferedInputStream
-import java.io.ByteArrayInputStream
-import java.io.File
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
 import java.nio.file.Files
 import java.security.UnrecoverableKeyException
-import java.util.Date
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
-import kotlin.time.Duration.Companion.days
 
 class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     companion object Constants {
@@ -25,7 +19,6 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
          * Default alias and password for the keystore.
          */
         const val DEFAULT = "Morphe"
-        private val eightYearsFromNow get() = Date(System.currentTimeMillis() + (365.days * 8).inWholeMilliseconds * 24)
     }
 
     private val keystorePath =
@@ -47,27 +40,6 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         val sanitized = sanitizeZipIfNeeded(input)
         ApkUtils.signApk(sanitized, output, prefs.keystoreAlias.get(), signingDetails())
         if (sanitized != input) sanitized.delete()
-    }
-
-    suspend fun regenerate() = withContext(Dispatchers.Default) {
-        val keyCertPair = ApkSigner.newPrivateKeyCertificatePair(
-            prefs.keystoreAlias.get(),
-            eightYearsFromNow
-        )
-        val ks = ApkSigner.newKeyStore(
-            setOf(
-                ApkSigner.KeyStoreEntry(
-                    DEFAULT, DEFAULT, keyCertPair
-                )
-            )
-        )
-        withContext(Dispatchers.IO) {
-            keystorePath.outputStream().use {
-                ks.store(it, null)
-            }
-        }
-
-        updatePrefs(DEFAULT, DEFAULT)
     }
 
     /**

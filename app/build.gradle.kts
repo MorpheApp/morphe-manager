@@ -76,9 +76,6 @@ dependencies {
     implementation(files(strippedArscLib))
     implementation("androidx.documentfile:documentfile:1.0.1")
 
-    // Downloader plugins
-    implementation(project(":api"))
-
     // Native processes
     implementation(libs.kotlin.process)
 

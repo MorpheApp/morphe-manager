@@ -28,13 +28,6 @@ data class GitHubAsset(
 )
 
 @Serializable
-data class GitHubContributor(
-    val login: String,
-    @SerialName("avatar_url")
-    val avatarUrl: String,
-)
-
-@Serializable
 data class GitHubPullRequest(
     val url: String,
     val head: GitHubPullRequestHead

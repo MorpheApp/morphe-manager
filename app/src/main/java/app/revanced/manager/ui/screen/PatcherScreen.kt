@@ -1,133 +1,186 @@
 package app.revanced.manager.ui.screen
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.LocalOverscrollFactory
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ExitToApp
-import androidx.compose.material.icons.automirrored.outlined.OpenInNew
-import androidx.compose.material.icons.outlined.Cancel
-import androidx.compose.material.icons.outlined.FileDownload
-import androidx.compose.material.icons.outlined.PostAdd
-import androidx.compose.material.icons.outlined.Save
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.AppScaffold
-import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.component.ConfirmDialog
-import app.revanced.manager.ui.component.InstallerStatusDialog
-import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
-import app.revanced.manager.ui.component.patcher.Steps
-import app.revanced.manager.ui.model.StepCategory
-import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.data.room.apps.installed.InstallType
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.model.State
+import app.revanced.manager.ui.screen.patcher.*
+import app.revanced.manager.ui.screen.shared.InfoBadge
+import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
+import app.revanced.manager.ui.screen.shared.MorpheCard
+import app.revanced.manager.ui.screen.shared.MorpheSettingsDivider
+import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
-import app.revanced.manager.util.APK_MIMETYPE
-import app.revanced.manager.util.ExportNameFormatter
-import app.revanced.manager.util.EventEffect
-import app.revanced.manager.util.PatchedAppExportData
-import org.koin.compose.koinInject
+import app.revanced.manager.util.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
+import kotlin.math.exp
+import kotlin.math.max
+import kotlin.math.min
 
+/**
+ * Simplified patcher screen with progress tracking
+ * Shows patching progress, handles installation with pre-conflict detection, and provides export functionality
+ */
+@SuppressLint("LocalContextGetResourceValueCall", "AutoboxingStateCreation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatcherScreen(
     onBackClick: () -> Unit,
-    onReviewSelection: (SelectedApp, PatchSelection, Options, List<String>) -> Unit,
-    viewModel: PatcherViewModel
+    patcherViewModel: PatcherViewModel,
+    usingMountInstall: Boolean,
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
-    fun onLeave() {
-        viewModel.suppressInstallProgressToasts()
-        viewModel.onBack()
-        onBackClick()
-    }
-
     val context = LocalContext.current
-    val prefs: PreferencesManager = koinInject()
-    val exportFormat by prefs.patchedAppExportFormat.getAsState()
-    val autoCollapsePatcherSteps by prefs.autoCollapsePatcherSteps.getAsState()
-    val exportMetadata = viewModel.exportMetadata
-    val fallbackExportMetadata = remember(viewModel.packageName, viewModel.version) {
-        PatchedAppExportData(
-            appName = viewModel.packageName,
-            packageName = viewModel.packageName,
-            appVersion = viewModel.version ?: "unspecified"
-        )
-    }
-    val exportFileName = remember(exportFormat, exportMetadata, fallbackExportMetadata) {
-        ExportNameFormatter.format(exportFormat, exportMetadata ?: fallbackExportMetadata)
-    }
-    val exportApkLauncher =
-        rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE), viewModel::export)
+    @Suppress("DEPRECATION")
+    val clipboardManager = LocalClipboardManager.current
 
-    val patcherSucceeded by viewModel.patcherSucceeded.observeAsState(null)
-    val isMounting = viewModel.activeInstallType == InstallType.MOUNT
-    val canInstall by remember { derivedStateOf { patcherSucceeded == true && (viewModel.installedPackageName != null || !viewModel.isInstalling) } }
-    var showDismissConfirmationDialog by rememberSaveable { mutableStateOf(false) }
-    var showInstallInProgressDialog by rememberSaveable { mutableStateOf(false) }
-    var showSavePatchedAppDialog by rememberSaveable { mutableStateOf(false) }
+    val patcherSucceeded by patcherViewModel.patcherSucceeded.observeAsState(null)
 
-    fun onPageBack() = when {
-        patcherSucceeded == null -> showDismissConfirmationDialog = true
-        // FIXME? ORIGINAL CHANGES
-//        viewModel.isInstalling -> context.toast(context.getString(R.string.patcher_install_in_progress))
-        viewModel.isInstalling -> showInstallInProgressDialog = true
-        patcherSucceeded == true && viewModel.installedPackageName == null && !viewModel.hasSavedPatchedApp -> showSavePatchedAppDialog = true
-        else -> onLeave()
-    }
+    // Remember patcher state
+    val state = rememberMorphePatcherState(patcherViewModel)
 
-    BackHandler(onBack = ::onPageBack)
+    // Animated progress with dual-mode animation
+    var displayProgress by rememberSaveable { mutableFloatStateOf(patcherViewModel.progress) }
+    var showLongStepWarning by rememberSaveable { mutableStateOf(false) }
+    var showSuccessScreen by rememberSaveable { mutableStateOf(false) }
 
-    val steps by remember {
-        derivedStateOf {
-            viewModel.steps.groupBy { it.category }
+    val displayProgressAnimate by animateFloatAsState(
+        targetValue = displayProgress,
+        animationSpec = tween(durationMillis = 1500, easing = FastOutSlowInEasing),
+        label = "progress_animation"
+    )
+
+    // Get output file from viewModel
+    val outputFile = patcherViewModel.outputFile
+
+    // Progress animation logic
+    LaunchedEffect(patcherSucceeded) {
+        var lastProgressUpdate = 0.0f
+        var currentStepStartTime = System.currentTimeMillis()
+
+        while (patcherSucceeded == null) {
+            val now = System.currentTimeMillis()
+
+            val actualProgress = patcherViewModel.progress
+            if (lastProgressUpdate != actualProgress) {
+                // Progress updated!
+                lastProgressUpdate = actualProgress
+                currentStepStartTime = now
+                showLongStepWarning = false
+                if (Log.isLoggable(tag, Log.DEBUG)) {
+                    Log.d(tag, "Real progress update: ${(actualProgress * 1000).toInt() / 10.0f}%")
+                }
+            }
+
+            val timeUntilStepShowsBePatient = 60 * 1000 // 60 seconds
+            val timeSinceStepStarted = now - currentStepStartTime
+            if (!showLongStepWarning && timeSinceStepStarted > timeUntilStepShowsBePatient) {
+                showLongStepWarning = true
+            }
+
+            // When to stop using overcorrection of progress and always use the actual progress.
+            val maxOverCorrectPercentage = 0.97
+
+            if (actualProgress >= maxOverCorrectPercentage) {
+                displayProgress = actualProgress
+            } else {
+                // Over estimate the progress by about 1% per second, but decays to
+                // adding smaller adjustments each second until the current step completes
+                fun overEstimateProgressAdjustment(secondsElapsed: Double): Double {
+                    // Sigmoid curve. Give larger correct soon after the step starts but then flattens off.
+                    val maximumValue = 25.0 // Up to 25% over correct
+                    val timeConstant = 50.0 // Larger value = longer time until plateau
+                    return maximumValue * (1 - exp(-secondsElapsed / timeConstant))
+                }
+
+                val secondsSinceStepStarted = timeSinceStepStarted / 1000.0
+                val overEstimatedProgress = min(
+                    maxOverCorrectPercentage,
+                    actualProgress + 0.01 * overEstimateProgressAdjustment(secondsSinceStepStarted)
+                ).toFloat()
+
+                // Don't allow rolling back the progress if it went over,
+                // and don't go over 98% unless the actual progress is that far
+                displayProgress = max(displayProgress, overEstimatedProgress)
+            }
+
+            // Update four times a second
+            delay(250)
+        }
+
+        // Patching completed - ensure progress reaches 100%
+        if (patcherSucceeded == true) {
+            displayProgress = 1.0f
+            // Wait for animation to complete and add extra delay
+            delay(2000) // Wait 2 seconds at 100% before showing success screen
+            showSuccessScreen = true
+        } else {
+            // Failed - show immediately
+            showSuccessScreen = true
         }
     }
 
+    val patchesProgress = patcherViewModel.patchesProgress
+
+    // Monitor for patching errors (not installation errors)
+    LaunchedEffect(patcherSucceeded) {
+        if (patcherSucceeded == false && !state.hasPatchingError) {
+            state.hasPatchingError = true
+            val steps = patcherViewModel.steps
+            val failedStep = steps.firstOrNull { it.state == State.FAILED }
+            state.errorMessage = failedStep?.message
+                ?: context.getString(R.string.patcher_unknown_error)
+            state.showErrorBottomSheet = true
+        }
+    }
+
+    BackHandler {
+        if (patcherSucceeded == null) {
+            // Show cancel dialog if patching is in progress
+            state.showCancelDialog = true
+        } else {
+            // Allow normal back navigation if patching is complete or failed
+            onBackClick()
+        }
+    }
+
+    // Keep screen on during patching
     if (patcherSucceeded == null) {
         DisposableEffect(Unit) {
             val window = (context as Activity).window
@@ -138,459 +191,316 @@ fun PatcherScreen(
         }
     }
 
-    if (showDismissConfirmationDialog) {
-        ConfirmDialog(
-            onDismiss = { showDismissConfirmationDialog = false },
-            onConfirm = {
-                showDismissConfirmationDialog = false
-                onLeave()
-            },
-            title = stringResource(R.string.patcher_stop_confirm_title),
-            description = stringResource(R.string.patcher_stop_confirm_description),
-            icon = Icons.Outlined.Cancel
+    // Export APK setup
+    val exportFormat = remember { patcherViewModel.prefs.patchedAppExportFormat.getBlocking() }
+    val exportMetadata = patcherViewModel.exportMetadata
+    val fallbackMetadata = remember(patcherViewModel.packageName, patcherViewModel.version) {
+        PatchedAppExportData(
+            appName = patcherViewModel.packageName,
+            packageName = patcherViewModel.packageName,
+            appVersion = patcherViewModel.version ?: "unspecified"
         )
     }
-
-    if (showInstallInProgressDialog) {
-        AlertDialog(
-            onDismissRequest = { showInstallInProgressDialog = false },
-            icon = { Icon(Icons.Outlined.FileDownload, null) },
-            title = {
-                Text(
-                    stringResource(
-                        if (isMounting) R.string.patcher_mount_in_progress_title else R.string.patcher_install_in_progress_title
-                    )
-                )
-            },
-            text = {
-                Text(
-                    text = stringResource(
-                        if (isMounting) R.string.patcher_mount_in_progress else R.string.patcher_install_in_progress
-                    ),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showInstallInProgressDialog = false
-                        viewModel.suppressInstallProgressToasts()
-                        onLeave()
-                    }
-                ) {
-                    Text(stringResource(R.string.patcher_install_in_progress_leave))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { showInstallInProgressDialog = false }
-                ) {
-                    Text(stringResource(R.string.patcher_install_in_progress_stay))
-                }
-            }
-        )
+    val exportFileName = remember(exportFormat, exportMetadata, fallbackMetadata) {
+        ExportNameFormatter.format(exportFormat, exportMetadata ?: fallbackMetadata)
     }
 
-    if (showSavePatchedAppDialog) {
-        SavePatchedAppDialog(
-            onDismiss = { showSavePatchedAppDialog = false },
-            onLeave = {
-                showSavePatchedAppDialog = false
-                onLeave()
-            },
-            onSave = {
-                viewModel.savePatchedAppForLater(onResult = { success ->
-                    if (success) {
-                        showSavePatchedAppDialog = false
-                        onLeave()
-                    }
-                })
-            }
-        )
-    }
-
-    viewModel.packageInstallerStatus?.let {
-        if (!viewModel.shouldSuppressPackageInstallerDialog()) {
-            InstallerStatusDialog(it, viewModel, viewModel::dismissPackageInstallerDialog)
-        } else {
-            viewModel.dismissPackageInstallerDialog()
-        }
-    }
-
-    viewModel.signatureMismatchPackage?.let {
-        AlertDialog(
-            onDismissRequest = viewModel::dismissSignatureMismatchPrompt,
-            title = { Text(stringResource(R.string.installation_signature_mismatch_dialog_title)) },
-            text = { Text(stringResource(R.string.installation_signature_mismatch_description)) },
-            confirmButton = {
-                TextButton(onClick = viewModel::confirmSignatureMismatchInstall) {
-                    Text(stringResource(R.string.installation_signature_mismatch_confirm))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::dismissSignatureMismatchPrompt) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-            }
-        )
-    }
-
-    // TODO: This code is dead and can be removed. Patching now automatically reduces max memory if needed.
-    viewModel.memoryAdjustmentDialog?.let { state ->
-        val message = if (state.adjusted) {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_reduced,
-                state.previousLimit,
-                state.newLimit
-            )
-        } else {
-            stringResource(
-                R.string.patcher_memory_adjustment_message_no_change,
-                state.previousLimit
-            )
-        }
-        AlertDialog(
-            onDismissRequest = viewModel::dismissMemoryAdjustmentDialog,
-            title = { Text(stringResource(R.string.patcher_memory_adjustment_title)) },
-            text = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = viewModel::retryAfterMemoryAdjustment) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_retry))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::dismissMemoryAdjustmentDialog) {
-                    Text(stringResource(R.string.patcher_memory_adjustment_dismiss))
-                }
-            }
-        )
-    }
-
-    viewModel.missingPatchWarning?.let { state ->
-        AlertDialog(
-            onDismissRequest = {},
-            title = { Text(stringResource(R.string.patcher_missing_patch_title)) },
-            text = {
-                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Text(
-                        stringResource(
-                            R.string.patcher_preflight_missing_patch_message,
-                            buildString {
-                                append("• ")
-                                append(state.patchNames.joinToString(separator = "\n• "))
-                            }
-                        )
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = viewModel::removeMissingPatchesAndStart) {
-                    Text(stringResource(R.string.patcher_preflight_missing_patch_remove))
-                }
-            },
-            dismissButton = {
-                Column(horizontalAlignment = Alignment.End) {
-                    TextButton(onClick = viewModel::proceedAfterMissingPatchWarning) {
-                        Text(stringResource(R.string.patcher_preflight_missing_patch_proceed))
-                    }
-                    TextButton(
-                        onClick = {
-                            val selection = viewModel.currentSelectionSnapshot()
-                            val options = viewModel.currentOptionsSnapshot()
-                            val patches = state.patchNames
-                            viewModel.dismissMissingPatchWarning()
-                            onReviewSelection(
-                                viewModel.currentSelectedApp,
-                                selection,
-                                options,
-                                patches
-                            )
-                            onBackClick()
-                        }
-                    ) {
-                        Text(stringResource(R.string.patcher_missing_patch_review))
-                    }
-                }
-            }
-        )
-    }
-
-    viewModel.installFailureMessage?.let { message ->
-        AlertDialog(
-            onDismissRequest = viewModel::dismissInstallFailureMessage,
-            title = {
-                Text(
-                    stringResource(
-                        if (viewModel.lastInstallType == InstallType.MOUNT) R.string.mount_app_fail_title else R.string.install_app_fail_title
-                    )
-                )
-            },
-            text = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                    Text(stringResource(android.R.string.ok))
-                }
-            }
-        )
-    }
-
-    viewModel.installStatus?.let { status ->
-        when (status) {
-            PatcherViewModel.InstallCompletionStatus.InProgress -> {
-                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Success -> {
-                AlertDialog(
-                    onDismissRequest = viewModel::clearInstallStatus,
-                    confirmButton = {
-                        TextButton(onClick = viewModel::clearInstallStatus) {
-                            Text(stringResource(android.R.string.ok))
-                        }
-                    },
-                    title = { Text(stringResource(R.string.install_app_success)) },
-                    text = {
-                        status.packageName?.let { Text(text = it) }
-                    }
-                )
-            }
-
-            is PatcherViewModel.InstallCompletionStatus.Failure -> {
-                if (viewModel.shouldSuppressInstallFailureDialog()) {
-                    viewModel.dismissInstallFailureMessage()
-                    viewModel.clearInstallStatus()
-                    return@let
-                }
-                if (!viewModel.shouldSuppressInstallFailureDialog() && viewModel.installFailureMessage == null) {
-                    AlertDialog(
-                        onDismissRequest = viewModel::dismissInstallFailureMessage,
-                        title = {
-                            Text(
-                                stringResource(
-                                    if (viewModel.lastInstallType == InstallType.MOUNT) R.string.mount_app_fail_title else R.string.install_app_fail_title
-                                )
-                            )
-                        },
-                        text = { Text(status.message) },
-                        confirmButton = {
-                            TextButton(onClick = viewModel::dismissInstallFailureMessage) {
-                                Text(stringResource(android.R.string.ok))
-                            }
-                        }
-                    )
-                }
+    val exportApkLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument(APK_MIMETYPE)
+    ) { uri ->
+        if (uri != null && !state.isSaving) {
+            state.isSaving = true
+            patcherViewModel.export(uri)
+            patcherViewModel.viewModelScope.launch {
+                delay(2000)
+                state.isSaving = false
             }
         }
     }
 
+    // Activity launcher for handling plugin activities or external installs
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = viewModel::handleActivityResult
+        onResult = patcherViewModel::handleActivityResult
     )
-    EventEffect(flow = viewModel.launchActivityFlow) { intent ->
+    EventEffect(flow = patcherViewModel.launchActivityFlow) { intent ->
         activityLauncher.launch(intent)
     }
 
-    viewModel.activityPromptDialog?.let { title ->
+    // Activity prompt dialog
+    patcherViewModel.activityPromptDialog?.let { title ->
         AlertDialog(
-            onDismissRequest = viewModel::rejectInteraction,
+            onDismissRequest = patcherViewModel::rejectInteraction,
             confirmButton = {
-                TextButton(
-                    onClick = viewModel::allowInteraction
-                ) {
+                TextButton(onClick = patcherViewModel::allowInteraction) {
                     Text(stringResource(R.string.continue_))
                 }
             },
             dismissButton = {
-                TextButton(
-                    onClick = viewModel::rejectInteraction
-                ) {
+                TextButton(onClick = patcherViewModel::rejectInteraction) {
                     Text(stringResource(android.R.string.cancel))
                 }
             },
             title = { Text(title) },
-            text = {
-                Text(stringResource(R.string.plugin_activity_dialog_body))
+            text = { Text(stringResource(R.string.plugin_activity_dialog_body)) }
+        )
+    }
+
+    // Cancel patching confirmation dialog
+    if (state.showCancelDialog) {
+        CancelPatchingDialog(
+            onDismiss = { state.showCancelDialog = false },
+            onConfirm = {
+                state.showCancelDialog = false
+                onBackClick()
             }
         )
     }
 
-    AppScaffold(
-        topBar = { scrollBehavior ->
-            AppTopBar(
-                title = stringResource(R.string.patcher),
-                scrollBehavior = scrollBehavior,
-                onBackClick = ::onPageBack
-            )
-        },
-        bottomBar = {
-            BottomAppBar(
-                actions = {
-                    IconButton(
-                        onClick = { exportApkLauncher.launch(exportFileName) },
-                        enabled = patcherSucceeded == true
+    // Error bottom sheet
+    if (state.showErrorBottomSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { state.showErrorBottomSheet = false },
+            contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            containerColor = MaterialTheme.colorScheme.surface
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+            ) {
+                // Header
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(top = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    // Error icon
+                    Surface(
+                        modifier = Modifier.size(80.dp),
+                        shape = RoundedCornerShape(24.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
                     ) {
-                        Icon(Icons.Outlined.Save, stringResource(id = R.string.save_apk))
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Error,
+                                contentDescription = null,
+                                modifier = Modifier.size(48.dp),
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                        }
                     }
-                    IconButton(
-                        onClick = { viewModel.exportLogs(context) },
-                        enabled = patcherSucceeded != null
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    // Title
+                    Text(
+                        text = stringResource(R.string.patcher_failed_dialog_title),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
+
+                // Error message card
+                CompositionLocalProvider(LocalOverscrollFactory provides null) {
+                    MorpheCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f, fill = false)
+                            .padding(horizontal = 24.dp),
+                        elevation = 2.dp,
+                        cornerRadius = 16.dp
                     ) {
-                        Icon(Icons.Outlined.PostAdd, stringResource(id = R.string.save_logs))
-                    }
-                },
-                floatingActionButton = {
-                    AnimatedVisibility(visible = canInstall) {
-                        HapticExtendedFloatingActionButton(
-                            text = {
+                        Column {
+                            // Error log header
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Text(
-                                    stringResource(if (viewModel.installedPackageName == null) R.string.install_app else R.string.open_app)
+                                    text = stringResource(R.string.patcher_error_log),
+                                    style = MaterialTheme.typography.labelLarge,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
-                            },
-                            icon = {
-                                viewModel.installedPackageName?.let {
-                                    Icon(
-                                        Icons.AutoMirrored.Outlined.OpenInNew,
-                                        stringResource(R.string.open_app)
-                                    )
-                                } ?: Icon(
-                                    Icons.Outlined.FileDownload,
-                                    stringResource(R.string.install_app)
+
+                                InfoBadge(
+                                    text = stringResource(R.string.patcher_error_technical),
+                                    style = InfoBadgeStyle.Error,
+                                    isCompact = true
                                 )
-                            },
-                            onClick = {
-                                if (viewModel.installedPackageName == null) {
-                                    viewModel.install()
-                                } else {
-                                    viewModel.open()
-                                }
                             }
+
+                            MorpheSettingsDivider(fullWidth = true)
+
+                            // Scrollable error message
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .verticalScroll(rememberScrollState())
+                                    .padding(16.dp)
+                            ) {
+                                Text(
+                                    text = state.errorMessage,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                    lineHeight = 20.sp
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Action buttons
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(bottom = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    // Copy button
+                    FilledTonalButton(
+                        onClick = {
+                            clipboardManager.setText(AnnotatedString(state.errorMessage))
+                            context.toast(context.getString(R.string.patcher_error_copied))
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    ) {
+                        Icon(
+                            Icons.Default.ContentCopy,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(android.R.string.copy),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    // Close button
+                    Button(
+                        onClick = { state.showErrorBottomSheet = false },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.close),
+                            fontWeight = FontWeight.SemiBold
                         )
                     }
                 }
-            )
+            }
         }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-        ) {
-            LinearProgressIndicator(
-                progress = { viewModel.progress },
-                modifier = Modifier.fillMaxWidth()
-            )
+    }
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(16.dp)
-            ) {
-                items(
-                    items = steps.toList(),
-                    key = { it.first }
-                ) { (category, steps) ->
-                    Steps(
-                        category = category,
-                        steps = steps,
-                        stepCount = if (category == StepCategory.PATCHING) viewModel.patchesProgress else null,
-                        stepProgressProvider = viewModel,
-                        autoCollapseCompleted = autoCollapsePatcherSteps
+    // Main content
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
+        AnimatedContent(
+            targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(800)) togetherWith
+                        fadeOut(animationSpec = tween(800))
+            },
+            label = "patcher_state_animation"
+        ) { patcherState ->
+            when (patcherState) {
+                PatcherState.IN_PROGRESS -> {
+                    PatchingInProgress(
+                        progress = displayProgressAnimate,
+                        patchesProgress = patchesProgress,
+                        patcherViewModel = patcherViewModel,
+                        showLongStepWarning = showLongStepWarning,
+                        onCancelClick = { state.showCancelDialog = true },
+                        onHomeClick = onBackClick
+                    )
+                }
+
+                PatcherState.SUCCESS -> {
+                    PatchingSuccess(
+                        installViewModel = installViewModel,
+                        usingMountInstall = usingMountInstall,
+                        onInstall = {
+                            if (usingMountInstall) {
+                                // Mount install
+                                val inputVersion = patcherViewModel.version
+                                    ?: patcherViewModel.currentSelectedApp.version
+                                    ?: "unknown"
+                                installViewModel.installMount(
+                                    outputFile = outputFile,
+                                    inputFile = patcherViewModel.inputFile,
+                                    packageName = patcherViewModel.packageName,
+                                    inputVersion = inputVersion,
+                                    onPersistApp = { pkg, type ->
+                                        patcherViewModel.persistPatchedApp(pkg, type)
+                                    }
+                                )
+                            } else {
+                                // Regular install with pre-conflict check
+                                installViewModel.install(
+                                    outputFile = outputFile,
+                                    originalPackageName = patcherViewModel.packageName,
+                                    onPersistApp = { pkg, type ->
+                                        patcherViewModel.persistPatchedApp(pkg, type)
+                                    }
+                                )
+                            }
+                        },
+                        onUninstall = { packageName ->
+                            installViewModel.requestUninstall(packageName)
+                        },
+                        onOpen = {
+                            installViewModel.openApp()
+                        },
+                        onHomeClick = onBackClick,
+                        onSaveClick = {
+                            if (!state.isSaving) {
+                                exportApkLauncher.launch(exportFileName)
+                            }
+                        },
+                        isSaving = state.isSaving
+                    )
+                }
+
+                PatcherState.FAILED -> {
+                    PatchingFailed(
+                        state = state,
+                        onHomeClick = onBackClick
                     )
                 }
             }
         }
     }
-}
-
-@Composable
-private fun SavePatchedAppDialog(
-    onDismiss: () -> Unit,
-    onLeave: () -> Unit,
-    onSave: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        icon = { Icon(Icons.Outlined.Save, null) },
-        title = { Text(stringResource(R.string.save_patched_app_dialog_title)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = stringResource(R.string.save_patched_app_dialog_message),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                ElevatedCard(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Save,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                            Text(
-                                text = stringResource(R.string.save_patched_app_dialog_hint_save),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Outlined.ExitToApp,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                            Text(
-                                text = stringResource(R.string.save_patched_app_dialog_hint_leave),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                FilledTonalButton(
-                    onClick = onSave,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.save_patched_app_dialog_save))
-                }
-                FilledTonalButton(
-                    onClick = onLeave,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.save_patched_app_dialog_leave))
-                }
-                FilledTonalButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.save_patched_app_dialog_cancel))
-                }
-            }
-        },
-        dismissButton = {}
-    )
 }

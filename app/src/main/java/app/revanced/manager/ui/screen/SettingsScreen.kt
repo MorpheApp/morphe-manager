@@ -1,146 +1,344 @@
 package app.revanced.manager.ui.screen
 
-import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import android.annotation.SuppressLint
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
-import androidx.compose.material.icons.automirrored.outlined.ArrowForwardIos
-import androidx.compose.material.icons.outlined.Code
-import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.SwapHoriz
-import androidx.compose.material.icons.outlined.SwapVert
 import androidx.compose.material.icons.outlined.Tune
-import androidx.compose.material.icons.outlined.Update
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.revanced.manager.ui.component.AppTopBar
-import app.revanced.manager.ui.component.ColumnWithScrollbar
-import app.revanced.manager.ui.component.settings.ExpressiveSettingsCard
-import app.revanced.manager.ui.component.settings.ExpressiveSettingsDivider
-import app.revanced.manager.ui.component.settings.ExpressiveSettingsItem
-import app.revanced.manager.ui.component.settings.SettingsListItem
-import app.revanced.manager.ui.model.navigation.Settings
-import app.revanced.manager.ui.viewmodel.AdvancedSettingsViewModel
+import app.revanced.manager.domain.installer.InstallerManager
+import app.revanced.manager.domain.installer.RootInstaller
+import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.screen.settings.system.AboutDialog
+import app.revanced.manager.ui.screen.settings.AdvancedTabContent
+import app.revanced.manager.ui.screen.settings.AppearanceTabContent
+import app.revanced.manager.ui.screen.settings.SystemTabContent
+import app.revanced.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
+import app.revanced.manager.ui.screen.settings.system.KeystoreCredentialsDialog
+import app.revanced.manager.ui.viewmodel.*
+import app.revanced.manager.util.JSON_MIMETYPE
+import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
-private data class Section(
-    @StringRes val name: Int,
-    @StringRes val description: Int,
-    val image: ImageVector,
-    val destination: Settings.Destination,
-)
+/**
+ * Settings tabs for bottom navigation
+ */
+private enum class SettingsTab(
+    val titleRes: Int,
+    val icon: ImageVector
+) {
+    APPEARANCE(R.string.appearance, Icons.Outlined.Palette),
+    ADVANCED(R.string.advanced, Icons.Outlined.Tune),
+    SYSTEM(R.string.system, Icons.Outlined.Settings)
+}
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Settings screen with bottom navigation and swipeable tabs
+ */
+@SuppressLint("BatteryLight", "LocalContextGetResourceValueCall")
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SettingsScreen(onBackClick: () -> Unit, navigate: (Settings.Destination) -> Unit) {
-    val advancedViewModel: AdvancedSettingsViewModel = koinViewModel()
-    val useMorpheHomeScreen by advancedViewModel.prefs.useMorpheHomeScreen.getAsState()
+fun SettingsScreen(
+    themeViewModel: ThemeSettingsViewModel = koinViewModel(),
+    importExportViewModel: ImportExportViewModel = koinViewModel(),
+    homeViewModel: HomeViewModel = koinViewModel(),
+    patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
+    settingsViewModel: SettingsViewModel = koinViewModel()
+) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val prefs: PreferencesManager = koinInject()
+    val installerManager: InstallerManager = koinInject()
+    val rootInstaller: RootInstaller = koinInject()
 
-    val settingsSections = remember {
-        listOf(
-            Section(
-                R.string.appearance,
-                R.string.appearance_description,
-                Icons.Outlined.Palette,
-                Settings.Theme
-            ),
-            Section(
-                R.string.updates,
-                R.string.updates_description,
-                Icons.Outlined.Update,
-                Settings.Updates
-            ),
-            // Morphe: Figure out if downloader plugins are supported
-//            Section(
-//                R.string.downloads,
-//                R.string.downloads_description,
-//                Icons.Outlined.Download,
-//                Settings.Downloads
-//            ),
-            Section(
-                R.string.import_export,
-                R.string.import_export_description,
-                Icons.Outlined.SwapVert,
-                Settings.ImportExport
-            ),
-            Section(
-                R.string.advanced,
-                R.string.advanced_description,
-                Icons.Outlined.Tune,
-                Settings.Advanced
-            ),
-            Section(
-                R.string.about,
-                R.string.app_name,
-                Icons.Outlined.Info,
-                Settings.About
-            ),
-            Section(
-                R.string.developer_options,
-                R.string.developer_options_description,
-                Icons.Outlined.Code,
-                Settings.Developer
-            )
+    // Pager state for swipeable tabs
+    val pagerState = rememberPagerState(
+        initialPage = SettingsTab.ADVANCED.ordinal, // Open the Advanced tab when opening settings
+        pageCount = { SettingsTab.entries.size }
+    )
+    val currentTab = SettingsTab.entries[pagerState.currentPage]
+
+    // Appearance settings
+    val theme by themeViewModel.prefs.theme.getAsState()
+    val pureBlackTheme by themeViewModel.prefs.pureBlackTheme.getAsState()
+    val dynamicColor by themeViewModel.prefs.dynamicColor.getAsState()
+    val customAccentColorHex by themeViewModel.prefs.customAccentColor.getAsState()
+
+    // Update
+    val usePrereleases = homeViewModel.prefs.usePatchesPrereleases.getAsState()
+
+    // Dialog states
+    var showAboutDialog by rememberSaveable { mutableStateOf(false) }
+    var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
+    var showInstallerDialog by remember { mutableStateOf(false) }
+
+    // Keystore import launcher
+    val importKeystoreLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.startKeystoreImport(it)
+        }
+    }
+
+    // Keystore export launcher
+    val exportKeystoreLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("*/*")
+    ) { uri ->
+        uri?.let { importExportViewModel.exportKeystore(it) }
+    }
+
+    // Manager settings import launcher
+    val importSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.importManagerSettings(it)
+        }
+    }
+
+    // Manager settings export launcher
+    val exportSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let { importExportViewModel.exportManagerSettings(it) }
+    }
+
+    // Debug logs export launcher
+    val exportDebugLogsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("text/plain")
+    ) { uri ->
+        uri?.let { importExportViewModel.exportDebugLogs(it) }
+    }
+
+    // Show keystore credentials dialog when needed
+    LaunchedEffect(importExportViewModel.showCredentialsDialog) {
+        showKeystoreCredentialsDialog = importExportViewModel.showCredentialsDialog
+    }
+
+    // Show about dialog
+    if (showAboutDialog) {
+        AboutDialog(onDismiss = { showAboutDialog = false })
+    }
+
+    // Show keystore credentials dialog
+    if (showKeystoreCredentialsDialog) {
+        KeystoreCredentialsDialog(
+            onDismiss = {
+                importExportViewModel.cancelKeystoreImport()
+                showKeystoreCredentialsDialog = false
+            },
+            onSubmit = { alias, pass ->
+                coroutineScope.launch {
+                    val result = importExportViewModel.tryKeystoreImport(alias, pass)
+                    if (result) {
+                        showKeystoreCredentialsDialog = false
+                    } else {
+                        context.toast(context.getString(R.string.settings_system_import_keystore_wrong_credentials))
+                    }
+                }
+            }
         )
     }
 
-    Scaffold(
-        topBar = {
-            AppTopBar(
-                title = stringResource(R.string.settings),
-                onBackClick = onBackClick,
-            )
-        }
-    ) { paddingValues ->
-        ColumnWithScrollbar(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-        ) {
-            ExpressiveSettingsCard(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                // Morphe begin
-                ExpressiveSettingsItem(
-                    modifier = Modifier.clickable {
-                        advancedViewModel.viewModelScope.launch {
-                            advancedViewModel.prefs.useMorpheHomeScreen.update(!useMorpheHomeScreen)
-                        }
-                    },
-                    headlineContent = "Return to Morphe home",
-                    supportingContent = "Return to simplified mode",
-                    leadingContent = { Icon(Icons.Outlined.SwapHoriz, null) },
-                    trailingContent = { Icon(Icons.AutoMirrored.Outlined.ArrowForwardIos, null) }
-                )
-                ExpressiveSettingsDivider()
-                // Morphe end
+    // Installer selection dialog
+    if (showInstallerDialog) {
+        InstallerSelectionDialogContainer(
+            installerManager = installerManager,
+            settingsViewModel = settingsViewModel,
+            rootInstaller = rootInstaller,
+            onDismiss = { showInstallerDialog = false }
+        )
+    }
 
-                settingsSections.forEachIndexed { index, (name, description, icon, destination) ->
-                    ExpressiveSettingsItem(
-                        headlineContent = stringResource(name),
-                        supportingContent = stringResource(description),
-                        leadingContent = { Icon(icon, null) },
-                        onClick = { navigate(destination) }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
+        // Content area
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) { page ->
+            when (SettingsTab.entries[page]) {
+                SettingsTab.APPEARANCE -> AppearanceTabContent(
+                    theme = theme,
+                    pureBlackTheme = pureBlackTheme,
+                    dynamicColor = dynamicColor,
+                    customAccentColorHex = customAccentColorHex,
+                    themeViewModel = themeViewModel
+                )
+
+                SettingsTab.ADVANCED -> AdvancedTabContent(
+                    usePrereleases = usePrereleases,
+                    patchOptionsViewModel = patchOptionsViewModel,
+                    homeViewModel = homeViewModel,
+                    prefs = prefs
+                )
+
+                SettingsTab.SYSTEM -> SystemTabContent(
+                    installerManager = installerManager,
+                    settingsViewModel = settingsViewModel,
+                    onShowInstallerDialog = { showInstallerDialog = true },
+                    importExportViewModel = importExportViewModel,
+                    onImportKeystore = { importKeystoreLauncher.launch("*/*") },
+                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
+                    onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
+                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
+                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
+                    onAboutClick = { showAboutDialog = true },
+                    prefs = prefs
+                )
+            }
+        }
+
+        // Bottom Navigation
+        MorpheBottomNavigation(
+            currentTab = currentTab,
+            onTabSelected = { tab ->
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(tab.ordinal)
+                }
+            }
+        )
+    }
+}
+
+/**
+ * Bottom navigation bar
+ */
+@Composable
+private fun MorpheBottomNavigation(
+    currentTab: SettingsTab,
+    onTabSelected: (SettingsTab) -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding(),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+        tonalElevation = 3.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            SettingsTab.entries.forEach { tab ->
+                NavigationItem(
+                    tab = tab,
+                    isSelected = currentTab == tab,
+                    onClick = { onTabSelected(tab) }
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Individual navigation item
+ */
+@Composable
+private fun NavigationItem(
+    tab: SettingsTab,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val containerColor = if (isSelected) {
+        MaterialTheme.colorScheme.primaryContainer
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
+
+    val contentColor = if (isSelected) {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    val tabLabel = stringResource(tab.titleRes)
+
+    Surface(
+        onClick = onClick,
+        modifier = Modifier
+            .height(48.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .then(
+                if (isSelected) {
+                    Modifier.widthIn(min = 64.dp, max = 140.dp)
+                } else {
+                    Modifier.width(64.dp)
+                }
+            )
+            .semantics {
+                role = Role.Tab
+                selected = isSelected
+            },
+        color = containerColor,
+        shape = RoundedCornerShape(24.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = tab.icon,
+                contentDescription = tabLabel,
+                tint = contentColor,
+                modifier = Modifier.size(24.dp)
+            )
+
+            AnimatedVisibility(
+                visible = isSelected,
+                enter = fadeIn() + expandHorizontally(),
+                exit = fadeOut() + shrinkHorizontally()
+            ) {
+                Row {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = tabLabel,
+                        style = MaterialTheme.typography.labelLarge,
+                        color = contentColor,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
-                    if (index != settingsSections.lastIndex) {
-                        ExpressiveSettingsDivider()
-                    }
                 }
             }
         }

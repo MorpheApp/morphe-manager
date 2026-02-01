@@ -118,26 +118,33 @@ class InstalledAppInfoViewModel(
 
     init {
         viewModelScope.launch {
-            // Load all data before marking as ready
-            val app = installedAppRepository.get(packageName)
-            installedApp = app
-            if (app != null) {
-                // Run all checks in parallel
-                val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
-                val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
-                val deferredAppState = async { refreshAppState(app) }
-                val deferredPatches = async { resolveAppliedSelection(app) }
+            // Use Flow to automatically update when app data changes in database
+            installedAppRepository.getAsFlow(packageName).collect { app ->
+                installedApp = app
 
-                // Wait for all to complete
-                isMounted = deferredMounted.await()
-                hasOriginalApk = deferredOriginalApk.await()
-                deferredAppState.await()
-                appliedPatches = deferredPatches.await()
+                if (app != null) {
+                    // Run all checks in parallel
+                    val deferredMounted = async { rootInstaller.isAppMounted(app.currentPackageName) }
+                    val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
+                    val deferredAppState = async { refreshAppState(app) }
+                    val deferredPatches = async { resolveAppliedSelection(app) }
+
+                    // Wait for all to complete
+                    isMounted = deferredMounted.await()
+                    hasOriginalApk = deferredOriginalApk.await()
+                    deferredAppState.await()
+                    appliedPatches = deferredPatches.await()
+                }
+
+                // Mark as loaded
+                isLoading = false
             }
-
-            // Mark as loaded
-            isLoading = false
         }
+    }
+
+    suspend fun getStoredBundleVersions(): Map<Int, String?> {
+        val app = installedApp ?: return emptyMap()
+        return installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
     }
 
     fun showMountWarning(action: MountWarningAction, reason: MountWarningReason) {
@@ -160,7 +167,6 @@ class InstalledAppInfoViewModel(
         internalInstallTimeoutJob?.cancel()
         externalInstallBaseline = null
         externalInstallStartTime = null
-        stopInstallProgressToasts()
         installResult = null
         isInstalling = false
     }
@@ -199,7 +205,7 @@ class InstalledAppInfoViewModel(
         val sources = patchBundleRepository.sources.first()
         val sourceIds = sources.map { it.uid }.toSet()
         val signatures = patchBundleRepository.allBundlesInfoFlow.first().toSignatureMap()
-        val (remappedPayload, remappedSelection) = payload.remapAndExtractSelection(sources, signatures)
+        val (remappedPayload, remappedSelection) = payload.remapAndExtractSelection(sources)
         val persistableSelection = remappedSelection.filterKeys { it in sourceIds }
         if (persistableSelection.isNotEmpty()) {
             installedAppRepository.addOrUpdate(
@@ -208,14 +214,14 @@ class InstalledAppInfoViewModel(
                 app.version,
                 app.installType,
                 persistableSelection,
-                remappedPayload
+                remappedPayload,
+                app.patchedAt
             )
         }
         if (remappedSelection.isNotEmpty()) return@withContext remappedSelection
 
-        payload.bundles.associate { bundle ->
-            bundle.bundleUid to bundle.patches.filter { it.isNotBlank() }.toSet()
-        }.filterValues { it.isNotEmpty() }
+        // Fallback: convert payload directly to selection
+        payload.toPatchSelection()
     }
 
     fun launch() {
@@ -232,7 +238,6 @@ class InstalledAppInfoViewModel(
     }
 
     private fun markInstallSuccess(message: String) {
-        stopInstallProgressToasts()
         internalInstallTimeoutJob?.cancel()
         installResult = InstallResult.Success(message)
         isInstalling = false
@@ -257,7 +262,8 @@ class InstalledAppInfoViewModel(
             version = resolvedVersion,
             installType = installType,
             patchSelection = selection,
-            selectionPayload = selectionPayload
+            selectionPayload = selectionPayload,
+            patchedAt = app.patchedAt ?: System.currentTimeMillis()
         )
 
         val updatedApp = app.copy(
@@ -269,15 +275,12 @@ class InstalledAppInfoViewModel(
     }
 
     private fun markInstallFailure(message: String) {
-        stopInstallProgressToasts()
-        stopUninstallProgressToasts()
         internalInstallTimeoutJob?.cancel()
         installResult = InstallResult.Failure(message)
         isInstalling = false
     }
 
     private fun showSignatureMismatchPrompt(packageName: String) {
-        stopInstallProgressToasts()
         installResult = null
         isInstalling = false
         pendingSignatureMismatchPackage = packageName
@@ -297,14 +300,12 @@ class InstalledAppInfoViewModel(
                     pendingSignatureMismatchPackage = null
                     signatureMismatchPackage = null
                     signatureMismatchUninstallJob = null
-                    stopUninstallProgressToasts()
                     installSavedApp()
                     return@launch
                 }
                 delay(SIGNATURE_MISMATCH_UNINSTALL_POLL_MS)
             }
             if (pendingSignatureMismatchPackage == targetPackage) {
-                stopUninstallProgressToasts()
                 val failureMessage = this@InstalledAppInfoViewModel.context.getString(
                     R.string.uninstall_app_fail,
                     this@InstalledAppInfoViewModel.context.getString(R.string.install_timeout_message)
@@ -328,44 +329,6 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    private fun startInstallProgressToasts() {
-        if (installProgressToastJob?.isActive == true) return
-        isInstalling = true
-        installProgressToastJob = viewModelScope.launch {
-            while (isActive) {
-                context.toast(context.getString(R.string.installing_ellipsis))
-                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
-            }
-        }
-    }
-
-    private fun stopInstallProgressToasts() {
-        installProgressToastJob?.cancel()
-        installProgressToastJob = null
-        internalInstallTimeoutJob?.cancel()
-        if (pendingExternalInstall == null && pendingInternalInstallPackage == null) {
-            isInstalling = false
-        }
-    }
-
-    private fun startUninstallProgressToasts() {
-        if (uninstallProgressToastJob?.isActive == true) return
-        uninstallProgressToastJob = viewModelScope.launch {
-            while (isActive) {
-                uninstallProgressToast?.cancel()
-                uninstallProgressToast = context.toastHandle(context.getString(R.string.uninstalling_ellipsis))
-                delay(INSTALL_PROGRESS_TOAST_INTERVAL_MS)
-            }
-        }
-    }
-
-    private fun stopUninstallProgressToasts() {
-        uninstallProgressToastJob?.cancel()
-        uninstallProgressToastJob = null
-        uninstallProgressToast?.cancel()
-        uninstallProgressToast = null
-    }
-
     fun handleActivityResult(result: ActivityResult) {
         launchedActivity?.complete(result)
     }
@@ -384,7 +347,6 @@ class InstalledAppInfoViewModel(
         externalInstallTimeoutJob?.cancel()
         externalInstallBaseline = null
         externalInstallStartTime = null
-        startInstallProgressToasts()
         isInstalling = true
         val plan = installerManager.resolvePlan(
             InstallerManager.InstallTarget.SAVED_APP,
@@ -399,7 +361,6 @@ class InstalledAppInfoViewModel(
             showSignatureMismatchPrompt(app.currentPackageName)
             return@launch
         }
-        startInstallProgressToasts()
         isInstalling = true
         if (plan is InstallerManager.InstallPlan.External) {
             runCatching { apk.copyTo(plan.sharedFile, overwrite = true) }
@@ -425,7 +386,6 @@ class InstalledAppInfoViewModel(
             is InstallerManager.InstallPlan.Mount -> {
                 try {
                     if (!isInstalledOnDevice) {
-                        stopInstallProgressToasts()
                         mountVersionMismatchMessage = context.getString(R.string.install_app_fail_missing_stock)
                         return@launch
                     }
@@ -478,7 +438,8 @@ class InstalledAppInfoViewModel(
                             app.version,
                             InstallType.SHIZUKU,
                             selection,
-                            payload
+                            payload,
+                            app.patchedAt
                         )
                     }
                     persistInstallMetadata(InstallType.SHIZUKU, app.version)
@@ -520,7 +481,6 @@ class InstalledAppInfoViewModel(
             markInstallFailure(context.getString(R.string.install_app_fail, context.getString(R.string.saved_app_install_missing)))
             return
         }
-        startInstallProgressToasts()
         if (isInstallerX(plan) && launchedActivity == null) {
             val activityDeferred = CompletableDeferred<ActivityResult>()
             launchedActivity = activityDeferred
@@ -771,7 +731,7 @@ class InstalledAppInfoViewModel(
         mountOperation = MountOperation.UNMOUNTING
         isMounted = false
         try {
-            context.toast(context.getString(R.string.unmounting))
+            context.toast(context.getString(R.string.unmounting_ellipsis))
             rootInstaller.unmount(pkgName)
             context.toast(context.getString(R.string.unmounted))
             mountOperation = MountOperation.MOUNTING
@@ -796,7 +756,7 @@ class InstalledAppInfoViewModel(
     fun unmountSavedInstallation() = viewModelScope.launch {
         val pkgName = installedApp?.currentPackageName ?: return@launch
         try {
-            context.toast(context.getString(R.string.unmounting))
+            context.toast(context.getString(R.string.unmounting_ellipsis))
             rootInstaller.unmount(pkgName)
             isMounted = false
             context.toast(context.getString(R.string.unmounted))
@@ -812,7 +772,7 @@ class InstalledAppInfoViewModel(
         try {
             if (isMounted) {
                 mountOperation = MountOperation.UNMOUNTING
-                context.toast(context.getString(R.string.unmounting))
+                context.toast(context.getString(R.string.unmounting_ellipsis))
                 rootInstaller.unmount(pkgName)
                 isMounted = false
                 context.toast(context.getString(R.string.unmounted))
@@ -967,14 +927,14 @@ class InstalledAppInfoViewModel(
         // Check if original APK exists
         val originalApk = originalApkRepository.get(app.originalPackageName)
         if (originalApk == null) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
         // Check if file exists - filePath is String, need to convert to File
         val originalFile = File(originalApk.filePath)
         if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
@@ -1022,13 +982,13 @@ class InstalledAppInfoViewModel(
         // Get original APK file
         val originalApk = originalApkRepository.get(app.originalPackageName)
         if (originalApk == null) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
         val originalFile = File(originalApk.filePath)
         if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.morphe_repatch_no_original_apk))
+            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
             return@launch
         }
 
@@ -1241,7 +1201,6 @@ class InstalledAppInfoViewModel(
                     if (pendingSignature != null && pendingSignature == targetPackage) {
                         signatureMismatchUninstallJob?.cancel()
                         signatureMismatchUninstallJob = null
-                        stopUninstallProgressToasts()
                         if (extraStatus == PackageInstaller.STATUS_SUCCESS) {
                             pendingSignatureMismatchPackage = null
                             viewModelScope.launch {
@@ -1289,7 +1248,8 @@ class InstalledAppInfoViewModel(
                                     currentApp.version,
                                     InstallType.SAVED,
                                     persistableSelection,
-                                    payload
+                                    payload,
+                                    currentApp.patchedAt
                                 )
                             }
 
@@ -1335,7 +1295,6 @@ class InstalledAppInfoViewModel(
         externalInstallStartTime = null
         expectedInstallSignature = null
         baselineInstallSignature = null
-        stopInstallProgressToasts()
     }
 
     fun clearInstallResult() {
@@ -1352,8 +1311,6 @@ class InstalledAppInfoViewModel(
     fun confirmSignatureMismatchInstall() {
         val targetPackage = pendingSignatureMismatchPackage ?: return
         signatureMismatchPackage = null
-        stopInstallProgressToasts()
-        startUninstallProgressToasts()
         startSignatureMismatchUninstallTimeout(targetPackage)
         pm.uninstallPackage(targetPackage)
     }

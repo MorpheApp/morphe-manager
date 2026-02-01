@@ -17,4 +17,3 @@ data class ReVancedAsset (
     val description: String,
     val version: String,
 )
-

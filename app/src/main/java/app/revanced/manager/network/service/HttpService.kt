@@ -20,12 +20,7 @@ import io.ktor.http.isSuccess
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.isNotEmpty
 import io.ktor.utils.io.core.readBytes
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
@@ -67,7 +62,7 @@ class HttpService(
                     } else {
                         body = try {
                             response.bodyAsText()
-                        } catch (t: Throwable) {
+                        } catch (_: Throwable) {
                             null
                         }
 
@@ -84,7 +79,7 @@ class HttpService(
                     APIResponse.Failure(APIFailure(t, body))
                 }
             }
-        } catch (t: TooManyRequestsException) {
+        } catch (_: TooManyRequestsException) {
             Log.w(tag, "request failed with HTTP 429 after retries")
             APIResponse.Error(APIError(HttpStatusCode.TooManyRequests, body))
         }
@@ -137,7 +132,7 @@ class HttpService(
                     }
                 }
             }
-        } catch (t: TooManyRequestsException) {
+        } catch (_: TooManyRequestsException) {
             throw HttpException(HttpStatusCode.TooManyRequests)
         }
     }
@@ -180,7 +175,7 @@ class HttpService(
                     }
                 }
             }
-        } catch (t: TooManyRequestsException) {
+        } catch (_: TooManyRequestsException) {
             throw HttpException(HttpStatusCode.TooManyRequests)
         }
     }
@@ -344,10 +339,9 @@ class HttpService(
                         header(HttpHeaders.Range, "bytes=$start-$end")
                         builder()
                     }.execute { httpResponse ->
-                        when {
-                            httpResponse.status == HttpStatusCode.TooManyRequests ->
-                                throw TooManyRequestsException(httpResponse.retryAfterMillis())
-                            httpResponse.status == HttpStatusCode.PartialContent -> {
+                        when (httpResponse.status) {
+                            HttpStatusCode.TooManyRequests -> throw TooManyRequestsException(httpResponse.retryAfterMillis())
+                            HttpStatusCode.PartialContent -> {
                                 val channel: ByteReadChannel = httpResponse.body()
                                 RandomAccessFile(saveLocation, "rw").use { raf ->
                                     raf.seek(start)
