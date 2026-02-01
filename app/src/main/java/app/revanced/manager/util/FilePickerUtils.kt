@@ -39,45 +39,6 @@ fun Uri.toFilePath(): String {
 }
 
 /**
- * File picker launcher with automatic permission handling
- *
- * @param onFilePicked Callback when file is selected, receives Uri
- * @return Function to launch the picker
- */
-@Composable
-fun rememberFilePickerWithPermission(
-    onFilePicked: (Uri) -> Unit
-): () -> Unit {
-    val fs: Filesystem = koinInject()
-
-    val filePickerLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocument()
-    ) { uri: Uri? ->
-        uri?.let { onFilePicked(it) }
-    }
-
-    val (permissionContract, permissionName) = remember { fs.permissionContract() }
-
-    val permissionLauncher = rememberLauncherForActivityResult(
-        contract = permissionContract
-    ) { granted ->
-        if (granted) {
-            filePickerLauncher.launch(arrayOf("*/*"))
-        }
-    }
-
-    return remember {
-        {
-            if (fs.hasStoragePermission()) {
-                filePickerLauncher.launch(arrayOf("*/*"))
-            } else {
-                permissionLauncher.launch(permissionName)
-            }
-        }
-    }
-}
-
-/**
  * Folder picker launcher with automatic permission handling
  *
  * @param onFolderPicked Callback when folder is selected, receives converted file path
@@ -136,20 +97,40 @@ fun rememberFilePickerWithPermission(
         uri?.let { onFilePicked(it) }
     }
 
+    // Fallback to GetContent for devices without OPEN_DOCUMENT support
+    // Fix for https://github.com/MorpheApp/morphe-manager/issues/114
+    val getContentLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { onFilePicked(it) }
+    }
+
     val (permissionContract, permissionName) = remember { fs.permissionContract() }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = permissionContract
     ) { granted ->
         if (granted) {
-            filePickerLauncher.launch(mimeTypes)
+            try {
+                filePickerLauncher.launch(mimeTypes)
+            } catch (_: android.content.ActivityNotFoundException) {
+                // Fallback to GetContent if OpenDocument is not available
+                // Use */* to allow selecting any file type
+                getContentLauncher.launch("*/*")
+            }
         }
     }
 
     return remember {
         {
             if (fs.hasStoragePermission()) {
-                filePickerLauncher.launch(mimeTypes)
+                try {
+                    filePickerLauncher.launch(mimeTypes)
+                } catch (_: android.content.ActivityNotFoundException) {
+                    // Fallback to GetContent if OpenDocument is not available
+                    // Use */* to allow selecting any file type
+                    getContentLauncher.launch("*/*")
+                }
             } else {
                 permissionLauncher.launch(permissionName)
             }
