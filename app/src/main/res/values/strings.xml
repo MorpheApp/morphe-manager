@@ -35,7 +35,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Let\'s make your apps behave</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Today\'s forecast: 100%% chance of patching</string>
+    <string name="home_greeting_7">Today\'s forecast: 100% chance of patching</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Ready to change underwhelming into awesome?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
