@@ -114,6 +114,10 @@
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_no_patches">No patches available</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Multiple patch sources selected</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
+
+Are you sure you want to proceed?"</string>
 
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Unsupported Version</string>

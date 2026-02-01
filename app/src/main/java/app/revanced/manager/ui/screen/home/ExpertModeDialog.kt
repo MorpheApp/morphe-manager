@@ -56,6 +56,7 @@ fun ExpertModeDialog(
 ) {
     var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
+    var showMultipleBundlesWarning by remember { mutableStateOf(false) }
 
     // Create local mutable state from incoming selectedPatches
     var localSelectedPatches by remember(selectedPatches) {
@@ -92,6 +93,34 @@ fun ExpertModeDialog(
 
     val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
+
+    // Check if multiple bundles are selected
+    val hasMultipleBundles = localSelectedPatches.keys.size > 1
+
+    // Sync function
+    fun syncAndProceed() {
+        localSelectedPatches.forEach { (bundleUid, patches) ->
+            val originalPatches = selectedPatches[bundleUid] ?: emptySet()
+            patches.forEach { patchName ->
+                if (patchName !in originalPatches) {
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+            originalPatches.forEach { patchName ->
+                if (patchName !in patches) {
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+        }
+        selectedPatches.forEach { (bundleUid, patches) ->
+            if (bundleUid !in localSelectedPatches) {
+                patches.forEach { patchName ->
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+        }
+        onProceed()
+    }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -236,35 +265,29 @@ fun ExpertModeDialog(
             MorpheDialogButton(
                 text = stringResource(R.string.expert_mode_proceed),
                 onClick = {
-                    // Sync all local changes back before proceeding
-                    localSelectedPatches.forEach { (bundleUid, patches) ->
-                        val originalPatches = selectedPatches[bundleUid] ?: emptySet()
-                        patches.forEach { patchName ->
-                            if (patchName !in originalPatches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                        originalPatches.forEach { patchName ->
-                            if (patchName !in patches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
+                    // Check if multiple bundles are selected
+                    if (hasMultipleBundles) {
+                        showMultipleBundlesWarning = true
+                    } else {
+                        syncAndProceed()
                     }
-                    // Handle removed bundles
-                    selectedPatches.forEach { (bundleUid, patches) ->
-                        if (bundleUid !in localSelectedPatches) {
-                            patches.forEach { patchName ->
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                    }
-                    onProceed()
                 },
                 enabled = totalSelectedCount > 0,
                 icon = Icons.Outlined.AutoFixHigh,
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+
+    // Multiple bundles warning dialog
+    if (showMultipleBundlesWarning) {
+        MultipleBundlesWarningDialog(
+            onDismiss = { showMultipleBundlesWarning = false },
+            onProceed = {
+                showMultipleBundlesWarning = false
+                syncAndProceed()
+            }
+        )
     }
 
     // Options dialog
@@ -1197,5 +1220,34 @@ fun ScrollableInstruction(
                     )
             )
         }
+    }
+}
+
+
+/**
+ * Warning dialog shown when user selects patches from multiple bundles
+ */
+@Composable
+private fun MultipleBundlesWarningDialog(
+    onDismiss: () -> Unit,
+    onProceed: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.expert_mode_multiple_bundles_warning_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onProceed,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(R.string.expert_mode_multiple_bundles_warning_message),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current
+        )
     }
 }
