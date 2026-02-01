@@ -196,7 +196,7 @@ private fun OriginalApksContent(
     var itemToDelete by remember { mutableStateOf<OriginalApk?>(null) }
 
     ApkManagementDialogContent(
-        title = stringResource(R.string.settings_system_original_apks_management),
+        title = stringResource(R.string.settings_system_original_apks_title),
         icon = Icons.Outlined.Storage,
         count = apkItems.size,
         totalSize = totalSize,
