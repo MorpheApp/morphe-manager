@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-01T09:43:53.956Z",
-  "description": "# app [1.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.1...v1.5.0-dev.1) (2026-02-01)\n\n\n### Features\n\n* Show homescreen app update badges ([#132](https://github.com/MorpheApp/morphe-manager/issues/132)) ([b8adadf](https://github.com/MorpheApp/morphe-manager/commit/b8adadf782e49f55ffc1323dcc15dd6a461abd81))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.5.0-dev.1/morphe-manager-1.5.0-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.5.0-dev.1/morphe-manager-1.5.0-dev.1.apk.asc",
-  "version": "1.5.0-dev.1"
+  "created_at": "2026-02-01T18:46:52.983Z",
+  "description": "# app [1.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2026-02-01)\n\n\n### Features\n\n* Add pull-to-refresh gesture ([#143](https://github.com/MorpheApp/morphe-manager/issues/143)) ([50525f0](https://github.com/MorpheApp/morphe-manager/commit/50525f0183440b4a4798d0520f5f415b9e569900))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.5.0-dev.2/morphe-manager-1.5.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.5.0-dev.2/morphe-manager-1.5.0-dev.2.apk.asc",
+  "version": "1.5.0-dev.2"
 }
