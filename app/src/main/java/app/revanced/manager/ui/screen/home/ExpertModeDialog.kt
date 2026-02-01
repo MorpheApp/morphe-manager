@@ -8,10 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -29,7 +27,6 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -378,8 +375,6 @@ private fun PatchCard(
     onConfigureOptions: () -> Unit,
     hasOptions: Boolean
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     // Localized strings for accessibility
     val settings = stringResource(R.string.settings)
     val enabledState = stringResource(R.string.enabled)
@@ -390,7 +385,11 @@ private fun PatchCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .clickable { isExpanded = !isExpanded },
+            .clickable(onClick = onToggle)
+            .semantics {
+                stateDescription = patchState
+                contentDescription = "${patch.name}, $patchState"
+            },
         shape = RoundedCornerShape(14.dp),
         color = if (isEnabled) {
             MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
@@ -404,114 +403,68 @@ private fun PatchCard(
         },
         tonalElevation = if (isEnabled) 2.dp else 0.dp
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Header with patch name and controls
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            // Patch info
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = if (hasOptions) 8.dp else 0.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
+                Text(
+                    text = patch.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (isEnabled)
+                        LocalDialogTextColor.current
+                    else
+                        LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
+                )
+
+                if (!patch.description.isNullOrBlank()) {
                     Text(
-                        text = patch.name,
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        text = patch.description,
+                        style = MaterialTheme.typography.bodySmall,
                         color = if (isEnabled)
-                            LocalDialogTextColor.current
+                            LocalDialogSecondaryTextColor.current
                         else
-                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
-                        maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                        overflow = TextOverflow.Ellipsis
+                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f)
                     )
-
-                    if (!patch.description.isNullOrBlank()) {
-                        Text(
-                            text = patch.description,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = if (isEnabled)
-                                LocalDialogSecondaryTextColor.current
-                            else
-                                LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f),
-                            maxLines = if (isExpanded) Int.MAX_VALUE else 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Options button (only enabled if patch is enabled)
-                    if (hasOptions) {
-                        FilledTonalIconButton(
-                            onClick = onConfigureOptions,
-                            modifier = Modifier
-                                .size(36.dp)
-                                .semantics {
-                                    contentDescription = "${patch.name}, $settings"
-                                },
-                            enabled = isEnabled,
-                            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                                disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
-                            )
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Settings,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                    }
-
-                    // Toggle button
-                    FilledTonalIconButton(
-                        onClick = onToggle,
-                        modifier = Modifier
-                            .size(36.dp)
-                            .semantics {
-                                stateDescription = patchState
-                                contentDescription = "${patch.name}, $patchState"
-                            },
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = if (isEnabled)
-                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
-                            else
-                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                            contentColor = if (isEnabled)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                        )
-                    ) {
-                        Icon(
-                            imageVector = if (isEnabled) Icons.Filled.Remove else Icons.Filled.Add,
-                            contentDescription = null, // Handled by button semantics
-                            modifier = Modifier.size(18.dp)
-                        )
-                    }
                 }
             }
 
-            // Options indicator (only show if patch is enabled)
-            if (hasOptions && isEnabled) {
-                InfoBadge(
-                    text = stringResource(R.string.expert_mode_has_options),
-                    style = InfoBadgeStyle.Primary,
-                    icon = Icons.Outlined.Tune,
-                    isCompact = true
-                )
+            // Options button (only enabled if patch is enabled)
+            if (hasOptions) {
+                FilledTonalIconButton(
+                    onClick = {
+                        // Prevent click propagation to card
+                        onConfigureOptions()
+                    },
+                    modifier = Modifier
+                        .size(36.dp)
+                        .semantics {
+                            contentDescription = "${patch.name}, $settings"
+                        },
+                    enabled = isEnabled,
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Settings,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
             }
         }
     }

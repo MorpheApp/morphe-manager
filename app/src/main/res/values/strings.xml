@@ -112,7 +112,6 @@
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
-    <string name="expert_mode_has_options">Configurable</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_no_patches">No patches available</string>
 
