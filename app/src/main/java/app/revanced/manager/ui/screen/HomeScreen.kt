@@ -2,32 +2,33 @@ package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
+import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.ui.screen.home.Android11Dialog
-import app.revanced.manager.ui.screen.home.HomeDialogs
-import app.revanced.manager.ui.screen.home.InstalledAppInfoDialog
-import app.revanced.manager.ui.screen.home.SectionsLayout
-import app.revanced.manager.ui.screen.home.ManagerUpdateDetailsDialog
-import app.revanced.manager.util.rememberFilePickerWithPermission
-import app.revanced.manager.util.toFilePath
+import app.revanced.manager.ui.screen.home.*
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -36,6 +37,7 @@ import org.koin.core.parameter.parametersOf
 /**
  * Home Screen with 5-section layout
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun HomeScreen(
@@ -52,9 +54,27 @@ fun HomeScreen(
     val context = LocalContext.current
     val pm: PM = koinInject()
     val installedAppRepository: InstalledAppRepository = koinInject()
+    val view = LocalView.current
 
     // Dialog state for installed app info
     var showInstalledAppDialog by remember { mutableStateOf<String?>(null) }
+
+    // Pull to refresh state
+    var isRefreshing by remember { mutableStateOf(false) }
+
+    // Handle refresh with haptic feedback
+    val onRefresh: () -> Unit = {
+        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+        isRefreshing = true
+        homeViewModel.viewModelScope.launch {
+            try {
+                homeViewModel.patchBundleRepository.updateCheck()
+                delay(500)
+            } finally {
+                isRefreshing = false
+            }
+        }
+    }
 
     // Collect state flows
     val availablePatches by homeViewModel.availablePatches.collectAsStateWithLifecycle(0)
@@ -242,87 +262,93 @@ fun HomeScreen(
         openBundlePicker = openBundlePicker
     )
 
-    // Main content
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
+    // Main content with pull-to-refresh
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+        modifier = Modifier.fillMaxSize()
     ) {
-        SectionsLayout(
-            // Notifications section
-            showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
-            snackbarStatus = homeViewModel.snackbarStatus,
-            bundleUpdateProgress = bundleUpdateProgress,
-            hasManagerUpdate = hasManagerUpdate,
-            onShowUpdateDetails = { showUpdateDetailsDialog = true },
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
+        ) {
+            SectionsLayout(
+                // Notifications section
+                showBundleUpdateSnackbar = homeViewModel.showBundleUpdateSnackbar,
+                snackbarStatus = homeViewModel.snackbarStatus,
+                bundleUpdateProgress = bundleUpdateProgress,
+                hasManagerUpdate = hasManagerUpdate,
+                onShowUpdateDetails = { showUpdateDetailsDialog = true },
 
-            // App update indicators
-            appUpdatesAvailable = appUpdatesAvailable,
+                // App update indicators
+                appUpdatesAvailable = appUpdatesAvailable,
 
-            // Greeting section
-            greetingMessage = greetingMessage,
+                // Greeting section
+                greetingMessage = greetingMessage,
 
-            // App buttons section
-            onYouTubeClick = {
-                homeViewModel.handleAppClick(
-                    packageName = AppPackages.YOUTUBE,
-                    availablePatches = availablePatches,
-                    bundleUpdateInProgress = false,
-                    android11BugActive = homeViewModel.android11BugActive,
-                    installedApp = youtubeInstalledApp
-                )
-                youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-            },
-            onYouTubeMusicClick = {
-                homeViewModel.handleAppClick(
-                    packageName = AppPackages.YOUTUBE_MUSIC,
-                    availablePatches = availablePatches,
-                    bundleUpdateInProgress = false,
-                    android11BugActive = homeViewModel.android11BugActive,
-                    installedApp = youtubeMusicInstalledApp
-                )
-                youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-            },
-            onRedditClick = {
-                homeViewModel.handleAppClick(
-                    packageName = AppPackages.REDDIT,
-                    availablePatches = availablePatches,
-                    bundleUpdateInProgress = false,
-                    android11BugActive = homeViewModel.android11BugActive,
-                    installedApp = redditInstalledApp
-                )
-                redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
-            },
+                // App buttons section
+                onYouTubeClick = {
+                    homeViewModel.handleAppClick(
+                        packageName = AppPackages.YOUTUBE,
+                        availablePatches = availablePatches,
+                        bundleUpdateInProgress = false,
+                        android11BugActive = homeViewModel.android11BugActive,
+                        installedApp = youtubeInstalledApp
+                    )
+                    youtubeInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+                },
+                onYouTubeMusicClick = {
+                    homeViewModel.handleAppClick(
+                        packageName = AppPackages.YOUTUBE_MUSIC,
+                        availablePatches = availablePatches,
+                        bundleUpdateInProgress = false,
+                        android11BugActive = homeViewModel.android11BugActive,
+                        installedApp = youtubeMusicInstalledApp
+                    )
+                    youtubeMusicInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+                },
+                onRedditClick = {
+                    homeViewModel.handleAppClick(
+                        packageName = AppPackages.REDDIT,
+                        availablePatches = availablePatches,
+                        bundleUpdateInProgress = false,
+                        android11BugActive = homeViewModel.android11BugActive,
+                        installedApp = redditInstalledApp
+                    )
+                    redditInstalledApp?.let { showInstalledAppDialog = it.currentPackageName }
+                },
 
-            // Installed apps data
-            youtubeInstalledApp = youtubeInstalledApp,
-            youtubeMusicInstalledApp = youtubeMusicInstalledApp,
-            redditInstalledApp = redditInstalledApp,
-            youtubePackageInfo = youtubePackageInfo,
-            youtubeMusicPackageInfo = youtubeMusicPackageInfo,
-            redditPackageInfo = redditPackageInfo,
-            onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
-            installedAppsLoading = homeViewModel.installedAppsLoading,
+                // Installed apps data
+                youtubeInstalledApp = youtubeInstalledApp,
+                youtubeMusicInstalledApp = youtubeMusicInstalledApp,
+                redditInstalledApp = redditInstalledApp,
+                youtubePackageInfo = youtubePackageInfo,
+                youtubeMusicPackageInfo = youtubeMusicPackageInfo,
+                redditPackageInfo = redditPackageInfo,
+                onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
+                installedAppsLoading = homeViewModel.installedAppsLoading,
 
-            // Other apps button
-            onOtherAppsClick = {
-                if (availablePatches <= 0) {
-                    context.toast(context.getString(R.string.home_sources_are_loading))
-                    return@SectionsLayout
-                }
-                homeViewModel.pendingPackageName = null
-                homeViewModel.pendingAppName = context.getString(R.string.home_other_apps)
-                homeViewModel.pendingRecommendedVersion = null
-                homeViewModel.showFilePickerPromptDialog = true
-            },
-            showOtherAppsButton = showOtherAppsButton,
+                // Other apps button
+                onOtherAppsClick = {
+                    if (availablePatches <= 0) {
+                        context.toast(context.getString(R.string.home_sources_are_loading))
+                        return@SectionsLayout
+                    }
+                    homeViewModel.pendingPackageName = null
+                    homeViewModel.pendingAppName = context.getString(R.string.home_other_apps)
+                    homeViewModel.pendingRecommendedVersion = null
+                    homeViewModel.showFilePickerPromptDialog = true
+                },
+                showOtherAppsButton = showOtherAppsButton,
 
-            // Bottom action bar
-            onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
-            onSettingsClick = onSettingsClick,
+                // Bottom action bar
+                onBundlesClick = { homeViewModel.showBundleManagementSheet = true },
+                onSettingsClick = onSettingsClick,
 
-            // Expert mode
-            isExpertModeEnabled = useExpertMode
-        )
+                // Expert mode
+                isExpertModeEnabled = useExpertMode
+            )
+        }
     }
 }
