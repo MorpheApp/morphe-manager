@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="one">%d টি প্যাচ</item>
+        <item quantity="other">%d টি প্যাচ</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%d টি প্যাচ চালান</item>
+        <item quantity="other">%d টি প্যাচ চালান</item>
+    </plurals>
+</resources>

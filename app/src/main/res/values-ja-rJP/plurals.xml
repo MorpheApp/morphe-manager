@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="other">%d 個のパッチ</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">%d 個のパッチを実行</item>
+    </plurals>
+</resources>

@@ -137,7 +137,7 @@ fun ThemeColorDialog(
                         context,
                         desc,
                         DARK_THEME_COLOR_DESC,
-                        R.string.settings_advanced_patch_options_dark_theme_color_description
+                        R.string.settings_advanced_patch_options_theme_color_description
                     )
                     Text(
                         text = localizedDesc,
@@ -196,7 +196,7 @@ fun ThemeColorDialog(
                         context,
                         desc,
                         LIGHT_THEME_COLOR_DESC,
-                        R.string.settings_advanced_patch_options_light_theme_color_description
+                        R.string.settings_advanced_patch_options_theme_color_description
                     )
                     Text(
                         text = localizedDesc,

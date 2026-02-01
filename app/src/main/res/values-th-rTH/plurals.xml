@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="other">%d แพตช์</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="other">ดำเนินการ %d แพตช์</item>
+    </plurals>
+</resources>

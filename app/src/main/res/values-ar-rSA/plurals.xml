@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="patch_count">
+        <item quantity="zero">%d تعديل</item>
+        <item quantity="one">%d تعديل</item>
+        <item quantity="two">%d تعديلان</item>
+        <item quantity="few">%d تعديلات</item>
+        <item quantity="many">%d تعديلًا</item>
+        <item quantity="other">%d تعديلات</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="zero">تنفيذ %d تعديل</item>
+        <item quantity="one">تنفيذ %d تعديل</item>
+        <item quantity="two">تنفيذ %d تعديلان</item>
+        <item quantity="few">تنفيذ %d تعديلات</item>
+        <item quantity="many">تنفيذ %d تعديلًا</item>
+        <item quantity="other">تنفيذ %d تعديلات</item>
+    </plurals>
+</resources>

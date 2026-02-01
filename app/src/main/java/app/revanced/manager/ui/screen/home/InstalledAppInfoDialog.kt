@@ -530,7 +530,7 @@ private fun InfoSection(
             if (bundlesUsedSummary.isNotBlank()) {
                 MorpheSettingsDivider(fullWidth = true)
                 InfoRow(
-                    label = stringResource(R.string.home_app_info_patch_bundles_used),
+                    label = stringResource(R.string.home_app_info_patch_source_used),
                     value = bundlesUsedSummary
                 )
             }
