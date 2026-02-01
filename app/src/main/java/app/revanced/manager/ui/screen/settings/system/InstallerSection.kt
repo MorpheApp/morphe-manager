@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,11 +24,13 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
@@ -446,4 +449,131 @@ private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?):
     a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
         a.componentName == b.componentName
     else -> false
+}
+
+/**
+ * Dialog shown when user's preferred installer (Shizuku/Root) is unavailable.
+ */
+@Composable
+fun InstallerUnavailableDialog(
+    state: InstallViewModel.InstallerUnavailableState,
+    onOpenApp: () -> Unit,
+    onRetry: () -> Unit,
+    onUseFallback: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    val installerName = when (state.installerToken) {
+        InstallerManager.Token.Shizuku -> stringResource(R.string.installer_shizuku_name)
+        InstallerManager.Token.AutoSaved -> stringResource(R.string.installer_auto_saved_name)
+        else -> stringResource(R.string.installer_internal_name)
+    }
+
+    val reasonText = state.reason?.let { stringResource(it) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        icon = {
+            Icon(
+                imageVector = Icons.Outlined.Warning,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(32.dp)
+            )
+        },
+        title = {
+            Text(
+                text = stringResource(R.string.installer_unavailable_title, installerName),
+                textAlign = TextAlign.Center
+            )
+        },
+        text = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.installer_unavailable_message, installerName),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                if (reasonText != null) {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                    ) {
+                        Text(
+                            text = reasonText,
+                            modifier = Modifier.padding(12.dp),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+                if (state.canOpenApp && state.installerToken == InstallerManager.Token.Shizuku) {
+                    Text(
+                        text = stringResource(R.string.installer_unavailable_shizuku_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Primary actions row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    if (state.canOpenApp) {
+                        OutlinedButton(
+                            onClick = onOpenApp,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = when (state.installerToken) {
+                                    InstallerManager.Token.Shizuku -> stringResource(R.string.installer_action_open_shizuku)
+                                    else -> stringResource(R.string.open)
+                                }
+                            )
+                        }
+                    }
+
+                    Button(
+                        onClick = onRetry,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.retry))
+                    }
+                }
+
+                // Secondary actions
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(android.R.string.cancel))
+                    }
+
+                    TextButton(
+                        onClick = onUseFallback,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.installer_use_standard))
+                    }
+                }
+            }
+        },
+        dismissButton = null
+    )
 }

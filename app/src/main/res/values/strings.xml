@@ -423,6 +423,10 @@ Details: %2$s"</string>
     <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again.</string>
     <string name="installer_external_success">%1$s reported a successful installation.</string>
     <string name="installer_external_finished_no_change">%1$s finished without installing the app. Check the installer for an error message and try again.</string>
+    <string name="installer_unavailable_title">%s unavailable</string>
+    <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead.</string>
+    <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app.</string>
+    <string name="installer_use_standard">Use standard</string>
 
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performance</string>
@@ -513,6 +517,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="reset">Reset</string>
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
+    <string name="retry">Retry</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
     <string name="clear">Clear</string>
