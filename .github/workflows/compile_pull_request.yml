@@ -2,6 +2,9 @@ name: Compile pull request
 
 on:
   pull_request:
+    branches-ignore:
+      - main
+      - dev
 
 concurrency:
   group: compile-${{ github.ref }}
@@ -9,7 +12,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.event.pull_request.head.ref != 'dev'
     runs-on: ubuntu-latest
 
     steps:
