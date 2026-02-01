@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
@@ -37,9 +38,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
 import app.morphe.manager.R
-import app.revanced.manager.util.parseColorToRgb
-import app.revanced.manager.util.toFilePath
-import app.revanced.manager.util.toast
+import app.revanced.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -82,14 +81,14 @@ private object AdaptiveIconConfig {
     const val SAFE_ZONE_INNER = 0.42f // 42% - always visible
 
     // Visual appearance
-    const val SAFE_ZONE_OUTER_ALPHA = 0.3f
+    const val SAFE_ZONE_STROKE_WIDTH = 3f
     const val SAFE_ZONE_INNER_ALPHA = 0.5f
-    const val SAFE_ZONE_STROKE_WIDTH = 2.5f
-    const val SNAP_GUIDE_ALPHA = 0.6f
+    const val SAFE_ZONE_OUTER_ALPHA = 0.5f
     const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
+    const val SNAP_GUIDE_ALPHA = 0.6f
 
     // Default background color
-    const val DEFAULT_BACKGROUND_COLOR = "#1E5AA8"
+    const val DEFAULT_BACKGROUND_COLOR = "#B3E5FC"
 
     // Preview size
     val PREVIEW_SIZE = 200.dp
@@ -332,6 +331,20 @@ private fun AdaptiveIconPreview(
     onScaleChange: (Float) -> Unit,
     onOffsetChange: (Float, Float) -> Unit
 ) {
+    // Color for guides and safe zones inside the preview canvas
+    val previewGuideColor = remember(backgroundColor) {
+        val bgColor = backgroundColor.toColorOrNull()
+            ?: AdaptiveIconConfig.DEFAULT_BACKGROUND_COLOR.toColorOrNull()
+            ?: Color.Black
+        if (bgColor.isDarkBackground()) Color.White else Color.Black
+    }
+
+    // Color for the legend
+    val legendColor = MaterialTheme.colorScheme.onSurface
+
+    // Dashed effect for snap guides and outer safe zone
+    val dashEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 6f), 0f)
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -396,7 +409,7 @@ private fun AdaptiveIconPreview(
                     val centerX = size.width / 2
                     val centerY = size.height / 2
 
-                    // Draw foreground first
+                    // Draw foreground image
                     val imageBitmap = foregroundBitmap.asImageBitmap()
 
                     // Calculate base size by fitting image to canvas while maintaining aspect ratio
@@ -425,62 +438,72 @@ private fun AdaptiveIconPreview(
                         dstSize = IntSize(scaledWidth.toInt(), scaledHeight.toInt())
                     )
 
-                    // Draw center snap guides when near center
+                    // Draw dashed snap guides when close to center
                     if (abs(currentOffsetX) < AdaptiveIconConfig.SNAP_GUIDE_THRESHOLD ||
                         abs(currentOffsetY) < AdaptiveIconConfig.SNAP_GUIDE_THRESHOLD) {
+
                         // Vertical center line
                         if (abs(currentOffsetX) < AdaptiveIconConfig.SNAP_GUIDE_THRESHOLD) {
                             drawLine(
-                                color = Color.White.copy(alpha = AdaptiveIconConfig.SNAP_GUIDE_ALPHA),
+                                color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SNAP_GUIDE_ALPHA),
                                 start = Offset(centerX, 0f),
                                 end = Offset(centerX, size.height),
-                                strokeWidth = AdaptiveIconConfig.SNAP_GUIDE_STROKE_WIDTH
+                                strokeWidth = AdaptiveIconConfig.SNAP_GUIDE_STROKE_WIDTH,
+                                pathEffect = dashEffect
                             )
                         }
 
                         // Horizontal center line
                         if (abs(currentOffsetY) < AdaptiveIconConfig.SNAP_GUIDE_THRESHOLD) {
                             drawLine(
-                                color = Color.White.copy(alpha = AdaptiveIconConfig.SNAP_GUIDE_ALPHA),
+                                color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SNAP_GUIDE_ALPHA),
                                 start = Offset(0f, centerY),
                                 end = Offset(size.width, centerY),
-                                strokeWidth = AdaptiveIconConfig.SNAP_GUIDE_STROKE_WIDTH
+                                strokeWidth = AdaptiveIconConfig.SNAP_GUIDE_STROKE_WIDTH,
+                                pathEffect = dashEffect
                             )
                         }
                     }
 
-                    // Draw safe zone circles ON TOP of foreground
-                    // Outer safe zone (66dp mask)
+                    // Outer safe zone (66% – mask area)
                     drawCircle(
-                        color = Color.White.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA),
+                        color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA),
                         radius = size.width * AdaptiveIconConfig.SAFE_ZONE_OUTER / 2,
                         center = Offset(centerX, centerY),
-                        style = Stroke(width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH)
+                        style = Stroke(
+                            width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH,
+                            pathEffect = dashEffect
+                        )
                     )
 
-                    // Inner safe zone (42dp safe area)
+                    // Inner safe zone (42% – always visible)
                     drawCircle(
-                        color = Color.White.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA),
+                        color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA),
                         radius = size.width * AdaptiveIconConfig.SAFE_ZONE_INNER / 2,
                         center = Offset(centerX, centerY),
                         style = Stroke(width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH)
                     )
                 }
             } else {
-                // Empty state - just show safe zones
+                // Empty state – show only safe zones
                 Canvas(modifier = Modifier.fillMaxSize()) {
                     val centerX = size.width / 2
                     val centerY = size.height / 2
 
+                    // Outer safe zone – dashed
                     drawCircle(
-                        color = Color.White.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA),
+                        color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA),
                         radius = size.width * AdaptiveIconConfig.SAFE_ZONE_OUTER / 2,
                         center = Offset(centerX, centerY),
-                        style = Stroke(width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH)
+                        style = Stroke(
+                            width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH,
+                            pathEffect = dashEffect
+                        )
                     )
 
+                    // Inner safe zone – solid
                     drawCircle(
-                        color = Color.White.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA),
+                        color = previewGuideColor.copy(alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA),
                         radius = size.width * AdaptiveIconConfig.SAFE_ZONE_INNER / 2,
                         center = Offset(centerX, centerY),
                         style = Stroke(width = AdaptiveIconConfig.SAFE_ZONE_STROKE_WIDTH)
@@ -497,31 +520,48 @@ private fun AdaptiveIconPreview(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             SafeZoneLegendItem(
-                color = Color.White.copy(alpha = 0.3f),
+                baseColor = legendColor,
+                alpha = AdaptiveIconConfig.SAFE_ZONE_INNER_ALPHA,
+                isDashed = false,
                 text = stringResource(R.string.adaptive_icon_safe_zone_inner)
             )
             SafeZoneLegendItem(
-                color = Color.White.copy(alpha = 0.2f),
+                baseColor = legendColor,
+                alpha = AdaptiveIconConfig.SAFE_ZONE_OUTER_ALPHA,
+                isDashed = true,
                 text = stringResource(R.string.adaptive_icon_safe_zone_outer)
             )
         }
     }
 }
 
+/**
+ * Legend item for safe zones – shows a small circle with solid or dashed stroke
+ */
 @Composable
 private fun SafeZoneLegendItem(
-    color: Color,
+    baseColor: Color,
+    alpha: Float,
+    isDashed: Boolean,
     text: String
 ) {
+    val itemColor = baseColor.copy(alpha = alpha)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .size(12.dp)
-                .border(2.dp, color, CircleShape)
-        )
+        Canvas(modifier = Modifier.size(16.dp)) {
+            val dashEffect = if (isDashed) PathEffect.dashPathEffect(floatArrayOf(8f, 6f), 0f) else null
+            drawCircle(
+                color = itemColor,
+                radius = size.minDimension / 2,
+                style = Stroke(
+                    width = 2.5f,
+                    pathEffect = dashEffect
+                )
+            )
+        }
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,

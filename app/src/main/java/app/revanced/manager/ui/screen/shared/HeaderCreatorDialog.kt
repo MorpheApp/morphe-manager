@@ -26,11 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -391,6 +393,12 @@ private fun HeaderPreview(
     val previewWidth = targetWidth.dp
     val previewHeight = targetHeight.dp
 
+    // Guide color
+    val guideColor = if (isDarkTheme)
+        Color.White.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
+    else
+        Color.Black.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -457,8 +465,7 @@ private fun HeaderPreview(
                     // Draw header image
                     val imageBitmap = headerBitmap.asImageBitmap()
 
-                    // Calculate display size based on fitting the image to canvas, then applying scale
-                    // First, fit image to canvas while maintaining aspect ratio
+                    // Fit image to canvas while maintaining aspect ratio
                     val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
                     val canvasAspect = size.width / size.height
 
@@ -474,7 +481,7 @@ private fun HeaderPreview(
                     val displayWidth = baseWidth * currentScale
                     val displayHeight = baseHeight * currentScale
 
-                    // Calculate position with offset (centered + user offset)
+                    // Calculate position with offset
                     val left = centerX - (displayWidth / 2) + currentOffsetX
                     val top = centerY - (displayHeight / 2) + currentOffsetY
 
@@ -485,13 +492,11 @@ private fun HeaderPreview(
                         dstSize = IntSize(displayWidth.toInt(), displayHeight.toInt())
                     )
 
-                    // Draw center snap guides when near center
+                    // Draw dashed snap guides when close to center
                     if (abs(currentOffsetX) < HeaderConfig.SNAP_GUIDE_THRESHOLD ||
                         abs(currentOffsetY) < HeaderConfig.SNAP_GUIDE_THRESHOLD) {
-                        val guideColor = if (isDarkTheme)
-                            Color.White.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
-                        else
-                            Color.Black.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
+
+                        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 6f), 0f)
 
                         // Vertical center line
                         if (abs(currentOffsetX) < HeaderConfig.SNAP_GUIDE_THRESHOLD) {
@@ -499,7 +504,8 @@ private fun HeaderPreview(
                                 color = guideColor,
                                 start = Offset(centerX, 0f),
                                 end = Offset(centerX, size.height),
-                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH
+                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH,
+                                pathEffect = dashEffect
                             )
                         }
 
@@ -509,17 +515,28 @@ private fun HeaderPreview(
                                 color = guideColor,
                                 start = Offset(0f, centerY),
                                 end = Offset(size.width, centerY),
-                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH
+                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH,
+                                pathEffect = dashEffect
                             )
                         }
                     }
                 }
             } else {
                 // Empty state
+                val placeholderColor = if (isDarkTheme) {
+                    Color.White.copy(alpha = 0.6f)
+                } else {
+                    Color.Black.copy(alpha = 0.6f)
+                }
+
                 Text(
                     text = stringResource(R.string.header_creator_no_image),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                    color = placeholderColor,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(Alignment.Center)
                 )
             }
         }
