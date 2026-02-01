@@ -145,7 +145,7 @@
     <string name="home_app_info_repatch_requires_original">Repatch requires the original APK file</string>
     <string name="home_app_info_original_package_name">Original package name</string>
     <string name="home_app_info_applied_patches">Applied patches</string>
-    <string name="home_app_info_patch_bundles_used">Patch bundles used</string>
+    <string name="home_app_info_patch_source_used">Patch source used</string>
     <string name="home_app_info_install_type">Installation type</string>
     <string name="home_app_info_install_type_custom_installer">Custom installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
