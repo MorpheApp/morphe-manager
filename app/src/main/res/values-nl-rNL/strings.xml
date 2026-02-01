@@ -39,7 +39,7 @@
     <string name="morphe_home_sources">Bronnen</string>
     <string name="morphe_sources_management_subtitle">%d bronnen geïnstalleerd</string>
     <string name="morphe_sources_delete_confirm_message">Bron \"%s\" verwijderen? Dit kan niet ongedaan gemaakt worden.</string>
-    <string name="morphe_sources_open_in_browser">Open in browser</string>
+    <string name="morphe_sources_open_in_browser">Openen in browser</string>
     <string name="morphe_sources_failed_to_open_url">Kan URL niet openen</string>
     <string name="morphe_sources_date_added">Toegevoegd</string>
     <string name="morphe_sources_date_updated">Bijgewerkt</string>
@@ -89,8 +89,8 @@
     <string name="morphe_expert_mode_subtitle_extended">%1$d van %2$d patches geselecteerd</string>
     <string name="morphe_expert_mode_search">Zoek patches</string>
     <string name="morphe_expert_mode_proceed">Doorgaan met patchen</string>
-    <string name="morphe_expert_mode_disable_all">Uitschakelen</string>
-    <string name="morphe_expert_mode_enable_all">Inschakelen</string>
+    <string name="morphe_expert_mode_disable_all">Alles uitschakelen</string>
+    <string name="morphe_expert_mode_enable_all">Alles inschakelen</string>
     <string name="morphe_expert_mode_has_options">Aanpasbaar</string>
     <string name="morphe_expert_mode_no_results">Geen patches gevonden</string>
     <string name="morphe_expert_mode_no_patches">Geen patches beschikbaar</string>
@@ -114,19 +114,19 @@
     <string name="morphe_repatch_requires_original">Repatch vereist het originele APK-bestand</string>
     <!-- Storage Management -->
     <string name="morphe_storage_management">Opslagbeheer</string>
-    <string name="morphe_apks_count">%d APK(s)</string>
+    <string name="morphe_apks_count">%d APK(\'s)</string>
     <string name="morphe_apks_size">Totaal: %s</string>
     <!-- Patched APKs Management -->
-    <string name="morphe_patched_apks_management">Gepatched APKs</string>
-    <string name="morphe_patched_apks_title">Gepatched APKs</string>
+    <string name="morphe_patched_apks_management">Gepatchte APK\'s</string>
+    <string name="morphe_patched_apks_title">Gepatchte APK\'s</string>
     <string name="morphe_patched_apks_description">Beheer opgeslagen gepatchte appbestanden</string>
-    <string name="morphe_patched_apks_empty">Nog geen gepatchte APKs opgeslagen</string>
-    <string name="morphe_patched_apks_delete_title">Gepatched APK verwijderen?</string>
+    <string name="morphe_patched_apks_empty">Nog geen gepatchte APK\'s opgeslagen</string>
+    <string name="morphe_patched_apks_delete_title">Gepatchte APK verwijderen?</string>
     <string name="morphe_patched_apks_delete_confirm">Weet u zeker dat u de opgeslagen gepatchte APK voor %s wilt verwijderen?</string>
-    <string name="morphe_patched_apks_deleted">Gepatched APK succesvol verwijderd</string>
+    <string name="morphe_patched_apks_deleted">Gepatchte APK verwijderd</string>
     <!-- Original APKs Management -->
-    <string name="morphe_original_apks_management">Originele APKs</string>
-    <string name="morphe_original_apks_title">Originele APKs</string>
+    <string name="morphe_original_apks_management">Originele APK\'s</string>
+    <string name="morphe_original_apks_title">Originele APK\'s</string>
     <string name="morphe_original_apks_description">Originele APK-bestanden worden opgeslagen voor het repatchen. Alleen de nieuwste versie wordt bewaard voor elke app.</string>
     <string name="morphe_original_apks_empty">Geen originele APKs opgeslagen</string>
     <string name="morphe_original_apks_deleted">Origineel APK succesvol verwijderd</string>
@@ -147,7 +147,7 @@
     <string name="morphe_patcher_installing_subtitle">Bijna klaar om te knallen! 🎸</string>
     <string name="morphe_patcher_success_title">Klaar! 🎉</string>
     <string name="morphe_patcher_success_subtitle">Je app is gepatcht en geïnstalleerd!</string>
-    <string name="morphe_patcher_complete_title">Patching Voltooid! ✨</string>
+    <string name="morphe_patcher_complete_title">Patchen voltooid! ✨</string>
     <string name="morphe_patcher_failed_title">Oeps! Er ging iets mis</string>
     <string name="morphe_patcher_failed_subtitle">Controleer de onderstaande foutdetails</string>
     <string name="morphe_patcher_failed_dialog_title">Patching mislukt</string>
@@ -643,7 +643,7 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="dialog_input_placeholder">Waarde</string>
     <string name="reset">Terugzetten</string>
     <string name="share">Delen</string>
-    <string name="patch">Patch</string>
+    <string name="patch">Patchen</string>
     <string name="select_from_storage">Selecteren uit opslag</string>
     <string name="select_from_storage_description">Selecteer een APK-bestand uit opslag met de bestandskiezer</string>
     <string name="type_anything">Typ iets om door te gaan</string>
@@ -732,9 +732,9 @@ Handtekening (SHA-256): %2$s"</string>
     <string name="delete">Verwijderen</string>
     <string name="disable">Uitschakelen</string>
     <string name="enable">Inschakelen</string>
-    <string name="patch_bundle_disabled_toast">Uitgeschakeld %d bundle(s)</string>
-    <string name="patch_bundle_enabled_toast">Geschakeld %d bundle(s)</string>
-    <string name="patches_disable_single_dialog_description">Uit \"%s\" uitschakelen?</string>
+    <string name="patch_bundle_disabled_toast">%d bundel(s) uitgeschakeld</string>
+    <string name="patch_bundle_enabled_toast">%d bundel(s) ingeschakeld</string>
+    <string name="patches_disable_single_dialog_description">\"%s\" uitschakelen?</string>
     <string name="patches_enable_single_dialog_description">\"%s\" inschakelen?</string>
     <string name="refresh">Vernieuwen</string>
     <string name="download_apk">APK-bestand downloaden</string>
@@ -830,7 +830,7 @@ Deze is alleen compatibel met de volgende versie: %2$s."</string>
     <string name="not_installed">Niet geïnstalleerd</string>
     <string name="installed">Geïnstalleerd</string>
     <string name="app_info">App-info</string>
-    <string name="uninstall">Verwijderen</string>
+    <string name="uninstall">Deïnstalleren</string>
     <string name="repatch">Repatchen</string>
     <string name="install_type">Installatietype</string>
     <string name="package_name">Pakketnaam</string>
@@ -1113,7 +1113,7 @@ Wilt u toch doorgaan?"</string>
     <string name="installation_invalid_description">De app is ongeldig. De app deïnstalleren en opnieuw proberen?</string>
     <string name="installation_storage_issue_description">De app kon niet worden geïnstalleerd vanwege onvoldoende opslagruimte. Maak wat ruimte vrij en probeer het opnieuw.</string>
     <string name="installation_timeout_description">De installatie duurde te lang. Opnieuw proberen?</string>
-    <string name="reinstall">Opnieuw installeren</string>
+    <string name="reinstall">Opn. installeren</string>
     <string name="installation_signature_mismatch_confirm">\"De installeren en opnieuw installeren\"</string>
     <string name="show">Tonen</string>
     <string name="debugging">Debuggen</string>

@@ -37,7 +37,7 @@
     <string name="morphe_home_greeting_10">カフェインと良いパッチで動いている</string>
     <!-- Sources Management -->
     <string name="morphe_home_sources">パッチソース</string>
-    <string name="morphe_sources_management_subtitle">%d のソースがインストール済み</string>
+    <string name="morphe_sources_management_subtitle">インストール済みのソース %d 件</string>
     <string name="morphe_sources_delete_confirm_message">「%s」を削除しますか？ この操作は元に戻すことができません。</string>
     <string name="morphe_sources_open_in_browser">ブラウザで開く</string>
     <string name="morphe_sources_failed_to_open_url">URL を開けませんでした</string>
@@ -49,14 +49,14 @@
     <!-- Add Sources Dialog -->
     <string name="morphe_add_patch_source">パッチソースを追加する</string>
     <string name="morphe_add_patch_source_remote">リモート</string>
-    <string name="morphe_add_patch_source_remote_url">ソースURL</string>
-    <string name="morphe_add_patch_source_remote_description">リモートパッチソースのJSONエンドポイントURLを入力してください</string>
+    <string name="morphe_add_patch_source_remote_url">ソース URL</string>
+    <string name="morphe_add_patch_source_remote_description">リモートパッチソースの JSON エンドポイント URL を入力してください</string>
     <string name="morphe_add_patch_source_local">ローカル</string>
     <string name="morphe_add_patch_source_local_file">パッチソースファイルを選択する</string>
-    <string name="morphe_add_patch_source_local_file_description">ストレージから.mppパッチソースファイルを選択してください</string>
+    <string name="morphe_add_patch_source_local_file_description">ストレージから .mpp パッチソースファイルを選択してください</string>
     <string name="morphe_add_patch_source_local_change_file">ファイルを変更する</string>
     <string name="morphe_home_no_patches_available">利用可能なパッチはありません</string>
-    <string name="morphe_home_default_source_disabled">Morpheのパッチソースが無効になっています。パッチソースシートで有効にするか、エキスパートモードを使用してください。</string>
+    <string name="morphe_home_default_source_disabled">Morphe のパッチソースが無効になっています。パッチソース設定画面で有効にするか、エキスパートモードを使用してください。</string>
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">オリジナルの APK ファイル (未パッチ) はありますか？</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">%1$s にパッチを適用するには、バージョン %2$s (未パッチ) が必要です</string>
@@ -77,15 +77,15 @@
     <string name="morphe_home_file_picker_prompt_title">ダウンロードした APK を選択</string>
     <string name="morphe_home_file_picker_prompt_description">ダウンロードした %1$s の APK ファイルを選択してください。</string>
     <string name="morphe_home_file_picker_prompt_open_downloaded_apk">ダウンロードした APK ファイルを開く</string>
-    <string name="morphe_home_file_picker_prompt_open_apk">APKファイルを開く</string>
+    <string name="morphe_home_file_picker_prompt_open_apk">APK ファイルを開く</string>
     <string name="morphe_home_recommended_version">推奨バージョン</string>
     <string name="morphe_patcher_selected_version">選択したバージョン</string>
-    <string name="morphe_home_select_apk_title">APKを選択する</string>
-    <string name="morphe_home_select_any_apk_description">以下のボタンをタップして、パッチするための任意のアプリのAPKファイルを選択してください</string>
-    <string name="morphe_home_invalid_apk">無効なAPKファイル</string>
+    <string name="morphe_home_select_apk_title">APK を選択する</string>
+    <string name="morphe_home_select_any_apk_description">以下のボタンをタップして、パッチするための任意のアプリの APK ファイルを選択してください</string>
+    <string name="morphe_home_invalid_apk">無効な APK ファイル</string>
     <string name="morphe_home_no_patches_for_app">このアプリに利用できるパッチはありません</string>
     <!-- Dialog 4: Expert Mode Dialog -->
-    <string name="morphe_expert_mode_title">専門モード</string>
+    <string name="morphe_expert_mode_title">エキスパートモード</string>
     <string name="morphe_expert_mode_subtitle_extended">%1$d/%2$d のパッチが選択中</string>
     <string name="morphe_expert_mode_search">パッチを検索する</string>
     <string name="morphe_expert_mode_proceed">パッチ処理に進む</string>
@@ -107,33 +107,33 @@
     <!-- App Info Screen -->
     <string name="uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="saved_app_delete_confirmation">選択したアプリを削除しますか？</string>
-    <string name="saved_copy_delete_confirmation">保存されたコピーを削除しますか？</string>
+    <string name="saved_copy_delete_confirmation">保存されたコピーを削除してもよろしいですか？</string>
     <string name="view">表示</string>
     <!-- Repatch Feature -->
-    <string name="morphe_repatch_no_original_apk">元のAPKが見つかりません。このアプリを再パッチすることができません。</string>
-    <string name="morphe_repatch_requires_original">再パッチには元のAPKファイルが必要です</string>
+    <string name="morphe_repatch_no_original_apk">元の APK が見つかりません。このアプリを再パッチすることができません。</string>
+    <string name="morphe_repatch_requires_original">再パッチには元の APK ファイルが必要です</string>
     <!-- Storage Management -->
     <string name="morphe_storage_management">ストレージ管理</string>
-    <string name="morphe_apks_count">%d のAPK</string>
+    <string name="morphe_apks_count">%d 個の APK</string>
     <string name="morphe_apks_size">合計サイズ: %s</string>
     <!-- Patched APKs Management -->
-    <string name="morphe_patched_apks_management">パッチ済みAPK</string>
-    <string name="morphe_patched_apks_title">パッチ済みAPK</string>
+    <string name="morphe_patched_apks_management">パッチ済み APK</string>
+    <string name="morphe_patched_apks_title">パッチ済み APK</string>
     <string name="morphe_patched_apks_description">保存されたパッチ済みアプリファイルを管理する</string>
-    <string name="morphe_patched_apks_empty">まだパッチ済みAPKが保存されていません</string>
-    <string name="morphe_patched_apks_delete_title">パッチ済みAPKを削除しますか？</string>
-    <string name="morphe_patched_apks_delete_confirm">選択したアプリを削除しますか？</string>
-    <string name="morphe_patched_apks_deleted">パッチ済みAPKを削除しました</string>
+    <string name="morphe_patched_apks_empty">まだパッチ済み APK が保存されていません</string>
+    <string name="morphe_patched_apks_delete_title">パッチ済み APK を削除しますか？</string>
+    <string name="morphe_patched_apks_delete_confirm">保存されている %s のパッチ済み APK を削除してもよろしいですか？</string>
+    <string name="morphe_patched_apks_deleted">パッチ済み APK を削除しました</string>
     <!-- Original APKs Management -->
-    <string name="morphe_original_apks_management">元のAPK</string>
-    <string name="morphe_original_apks_title">元のAPK</string>
-    <string name="morphe_original_apks_description">元のAPKファイルは再パッチ用に保存されます。各アプリに対しては最新のバージョンのみが保持されます。</string>
-    <string name="morphe_original_apks_empty">元のAPKは保存されていません</string>
-    <string name="morphe_original_apks_deleted">元のAPKを削除しました</string>
-    <string name="morphe_original_apks_saved">元のAPKが保存されました</string>
-    <string name="morphe_original_apks_save_failed">元のAPKを保存できませんでした</string>
-    <string name="morphe_original_apks_delete_title">元のAPKを削除しますか？</string>
-    <string name="morphe_original_apks_delete_confirm">「%s」の元のAPKを削除しますか？ APKを提供しないと再パッチできません。</string>
+    <string name="morphe_original_apks_management">元の APK</string>
+    <string name="morphe_original_apks_title">元の APK</string>
+    <string name="morphe_original_apks_description">元の APK ファイルは再パッチ用に保存されます。各アプリに対しては最新のバージョンのみが保持されます。</string>
+    <string name="morphe_original_apks_empty">元の APK は保存されていません</string>
+    <string name="morphe_original_apks_deleted">元の APK を削除しました</string>
+    <string name="morphe_original_apks_saved">元の APK が保存されました</string>
+    <string name="morphe_original_apks_save_failed">元の APK の保存に失敗しました</string>
+    <string name="morphe_original_apks_delete_title">元の APK を削除しますか？</string>
+    <string name="morphe_original_apks_delete_confirm">「%s」の元の APK を削除しますか？ APKを提供しないと再パッチできません。</string>
     <!-- Root Mode -->
     <string name="morphe_root_install_apk_required">root モードでは、パッチ前の APK を先にインストールする必要があります。</string>
     <string name="morphe_root_gmscore_excluded">GmsCore サポートパッチは root モードでは除外されます</string>
@@ -218,14 +218,14 @@
     <string name="morphe_app_icon_dark_3">インディゴ</string>
     <string name="morphe_app_icon_change_dialog_title">アプリのアイコンを変更しますか？</string>
     <string name="morphe_app_icon_change_dialog_message">「%1$s」 に変更して再起動しますか？</string>
-    <string name="morphe_app_icon_change_dialog_confirm">アイコンを変更する</string>
+    <string name="morphe_app_icon_change_dialog_confirm">アイコンを変更</string>
     <!-- Advanced Tab -->
-    <string name="morphe_expert_section">専門設定</string>
-    <string name="morphe_settings_expert_mode">専門モード</string>
+    <string name="morphe_expert_section">エキスパート設定</string>
+    <string name="morphe_settings_expert_mode">エキスパートモード</string>
     <string name="morphe_settings_expert_mode_description">高度な機能とカスタマイズオプションを有効化します</string>
     <string name="morphe_update_use_prereleases">プレリリース版を使用</string>
     <string name="morphe_update_use_prereleases_description">新しいパッチやマネージャー機能をいち早く利用できます</string>
-    <string name="morphe_patch_options_expert_mode_notice">専門モードでパッチオプションがパッチ処理中に利用可能になります</string>
+    <string name="morphe_patch_options_expert_mode_notice">エキスパートモードでは、パッチ適用の過程でパッチオプションを設定できます</string>
     <!-- Patch Options Section -->
     <string name="morphe_patch_options">パッチ設定</string>
     <string name="morphe_patch_options_youtube_description">テーマ、ブランディング、ヘッダー、ショートの設定</string>
@@ -393,7 +393,7 @@ morphe_header_custom_dark.png
     <string name="bundle_version_dialog_selected_indicator">選択済み</string>
     <string name="bundle_version_dialog_other_title">他のサポート バージョンを選択:</string>
     <string name="bundle_version_dialog_locked_title">バージョン保護が有効です</string>
-    <string name="bundle_version_dialog_locked_hint">設定 &gt; 詳細設定 &gt; 保護機能 に移動し、「推奨アプリバージョンの要求」を無効に、「バージョン互換性チェックを無効」を有効にすると、バンドル固有のバージョンを選択できるようになります。</string>
+    <string name="bundle_version_dialog_locked_hint">設定 &gt; 高度な設定 &gt; 保護機能 に移動し、「推奨アプリバージョンの要求」を無効に、「バージョン互換性チェックを無効」を有効にすると、バンドル固有のバージョンを選択できるようになります。</string>
     <string name="patch_versions_dialog_title">%1$s に対応するパッチ バージョン</string>
     <string name="patch_selector_item">パッチを選択</string>
     <string name="patch_selector_item_description">%d 個のパッチを選択中</string>
@@ -421,7 +421,7 @@ morphe_header_custom_dark.png
     <string name="changelog_loading">変更履歴を読み込んでいます</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>
     <string name="changelog_description">このアップデートでの最新の変更点を確認</string>
-    <string name="advanced">詳細設定</string>
+    <string name="advanced">高度な設定</string>
     <string name="advanced_description">API URL、メモリ制限、デバッグ</string>
     <string name="about">このアプリについて</string>
     <!-- Morphe -->
@@ -455,7 +455,7 @@ morphe_header_custom_dark.png
     <string name="suggested_version_safeguard_confirmation">"提案されたバージョンではないアプリを選択すると、予期しない問題が発生する可能性があります。
 
 続行しますか？"</string>
-    <string name="patch_selection_safeguard">パッチ選択と設定の変更の許可</string>
+    <string name="patch_selection_safeguard">パッチ選択とオプションの変更を許可</string>
     <string name="patch_selection_safeguard_description">パッチ選択や設定のカスタマイズの制限を解除する</string>
     <string name="patch_selection_safeguard_confirmation">"パッチの選択を変更すると、予期しない問題が発生する可能性があります。
 
@@ -463,7 +463,7 @@ morphe_header_custom_dark.png
     <string name="universal_patches_safeguard">ユニバーサルパッチの使用・表示</string>
     <string name="universal_patches_safeguard_description">ユニバーサルパッチを表示し、使用を許可する</string>
     <string name="universal_patches_profile_blocked_title">ユニバーサルパッチが無効です</string>
-    <string name="universal_patches_profile_blocked_description">このパッチプロファイルにはユニバーサルパッチが含まれています。使用するには、詳細設定で「%1$s」を有効にしてください。</string>
+    <string name="universal_patches_profile_blocked_description">このパッチプロファイルにはユニバーサルパッチが含まれています。使用するには、高度な設定で「%1$s」を有効にしてください。</string>
     <string name="universal_patches_app_blocked_description">このアプリにはユニバーサルパッチが含まれています。「%1$s」を高度な設定で有効にして続行してください。</string>
     <string name="import_keystore">キーストアをインポート</string>
     <string name="import_keystore_description">カスタムキーストアをインポート</string>
@@ -754,10 +754,10 @@ morphe_header_custom_dark.png
     <string name="non_suggested_version_warning_description">"選択したアプリのバージョンは、推奨バージョンと一致しません。
 推奨バージョンを使用してください： %s
 
-それでも続行する場合は、詳細設定で「推奨アプリバージョンの要求」を無効にしてください。"</string>
-    <string name="selection_warning_description">"デフォルトのパッチ選択と設定の使用をお勧めします。変更すると予期しない問題が発生する可能性があります。
+それでも続行する場合は、高度な設定で「推奨アプリバージョンの要求」を無効にしてください。"</string>
+    <string name="selection_warning_description">"デフォルトのパッチ選択とパッチオプションを使用することを推奨します。変更して使用すると、予期しない問題が発生する可能性があります。
 
-パッチの切り替えを行う前に、詳細設定で「パッチ選択と設定の変更の許可」を有効にする必要があります。"</string>
+パッチ選択を変更するには、高度な設定で「パッチ選択とオプションの変更を許可」をオンにする必要があります。"</string>
     <string name="patch_profile_save_action">パッチプロファイルを保存</string>
     <string name="patch_profile_select_bundles_title">パッチバンドルを選択</string>
     <string name="patch_profile_select_bundles_description">このプロファイルに含めるパッチバンドルを選択してください。</string>
@@ -871,8 +871,8 @@ morphe_header_custom_dark.png
     <string name="patch_selector_sheet_filter_compat_title">互換性</string>
     <string name="patch_selector_sheet_filter_sort_title">ソート</string>
     <string name="patch_selector_sheet_filter_sort_alphabetical">アルファベット順</string>
-    <string name="patch_selector_sheet_filter_sort_has_settings">設定があるもの</string>
-    <string name="patch_selector_sheet_filter_sort_no_settings">設定がないもの</string>
+    <string name="patch_selector_sheet_filter_sort_has_settings">設定あり</string>
+    <string name="patch_selector_sheet_filter_sort_no_settings">設定なし</string>
     <string name="string_option_menu_description">その他のオプション</string>
     <string name="option_preset_custom_value">カスタム値</string>
     <string name="path_selector">ストレージから選択</string>
@@ -990,7 +990,7 @@ morphe_header_custom_dark.png
     <string name="select_install_type">インストールタイプの選択</string>
     <string name="patcher_step_group_preparing">準備中</string>
     <string name="patcher_step_load_patches">パッチの読み込み</string>
-    <string name="patcher_step_prepare_split_apk">分割APKをマージする</string>
+    <string name="patcher_step_prepare_split_apk">分割 APK を結合する</string>
     <string name="patcher_step_unpack">APK ファイルの読み込み</string>
     <string name="patcher_step_group_patching">パッチ適用中</string>
     <string name="patcher_step_group_saving">保存中</string>

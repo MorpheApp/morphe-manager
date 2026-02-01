@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Morphe Home Screen -->
-    <string name="morphe_home_other_apps">Otras apps</string>
+    <string name="morphe_home_other_apps">Other apps</string>
     <string name="morphe_home">Inicio</string>
     <string name="morphe_home_not_patched_yet">Aún no parcheado</string>
     <!-- Home Screen - Update Notifications -->
@@ -60,10 +60,10 @@
     <!-- Dialog 1: APK Availability -->
     <string name="morphe_home_apk_availability_dialog_title">¿Tienes la APK original sin parchear?</string>
     <string name="morphe_home_apk_availability_dialog_description_simple">Para parchear %1$s, necesitas la versión %2$s (sin parchear)</string>
-    <string name="morphe_home_apk_availability_yes">Sí, lo tengo</string>
-    <string name="morphe_home_apk_availability_no">No, ayúdame a encontrarlo</string>
+    <string name="morphe_home_apk_availability_yes">Sí, la tengo</string>
+    <string name="morphe_home_apk_availability_no">No, ayúdame a encontrarla</string>
     <!-- Dialog 2: Download Instructions -->
-    <string name="morphe_home_download_instructions_title">Descarga el APK original</string>
+    <string name="morphe_home_download_instructions_title">APKDescarga el APK original</string>
     <string name="morphe_home_download_instructions_steps_title">Instrucciones:</string>
     <string name="morphe_home_download_instructions_step1">Presiona el botón \'%1$s\' de abajo</string>
     <string name="morphe_home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y presiona</string>
@@ -312,7 +312,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="morphe_share_website">Compartir sitio web</string>
     <string name="morphe_share_website_description">Comparte el sitio web oficial de Morphe</string>
     <!-- Other strings -->
-    <string name="patcher">Parche</string>
+    <string name="patcher">Parchear</string>
     <string name="patches">Parches</string>
     <string name="patch_bundles">Paquetes de parches</string>
     <string name="patch_bundle">Paquete de parches</string>
@@ -414,7 +414,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="updates_description">Buscar actualizaciones y ver el registro de cambios</string>
     <string name="downloads">Descargas</string>
     <!-- Morphe Currently untranslatable until downloaders are figured out -->
-    <string name="import_export">Importar &amp; exportar</string>
+    <string name="import_export">Importar y exportar</string>
     <string name="import_export_description">Keystore, opciones de parcheo y selección</string>
     <string name="changelog">Ver registros de cambios</string>
     <string name="changelog_loading">Cargando registro de cambios</string>
@@ -422,9 +422,9 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="changelog_description">Consulta los últimos cambios en esta actualización</string>
     <string name="advanced">Avanzado</string>
     <string name="advanced_description">URL de la API, límite de memoria, depuración</string>
-    <string name="about">Acerca de</string>
+    <string name="about">Información</string>
     <!-- Morphe -->
-    <string name="accent_color_presets">Destacar color</string>
+    <string name="accent_color_presets">Color de acento</string>
     <!-- Morphe -->
     <!-- Morphe -->
     <!-- Morphe -->
@@ -660,7 +660,7 @@ Firma (SHA-256): %2$s"</string>
     <string name="dark">Oscuro</string>
     <string name="black">Negro</string>
     <string name="downloaded_apps">Aplicaciones descargadas</string>
-    <string name="process_runtime">Ejecutar Patcher en otro proceso</string>
+    <string name="process_runtime">Ejecutar el parcheador en otro proceso</string>
     <string name="process_runtime_description">Acelera el parcheo usando un proceso separado</string>
     <string name="process_runtime_description_not_available">Esta función requiere Android 11 o superior</string>
     <string name="strip_unused_libs">Eliminar bibliotecas nativas no utilizadas</string>
