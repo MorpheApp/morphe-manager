@@ -48,7 +48,7 @@ fun MorpheDialog(
     title: String? = null,
     titleTrailingContent: (@Composable () -> Unit)? = null,
     footer: (@Composable () -> Unit)? = null,
-    dismissOnClickOutside: Boolean = true,
+    dismissOnClickOutside: Boolean = false,
     scrollable: Boolean = true,
     compactPadding: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
