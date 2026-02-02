@@ -112,9 +112,12 @@
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_enable_all">Enable all</string>
-    <string name="expert_mode_has_options">Configurable</string>
     <string name="expert_mode_no_results">No patches found</string>
     <string name="expert_mode_no_patches">No patches available</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Multiple patch sources selected</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"You have selected patches from multiple patch sources. This may cause compatibility issues or unexpected behavior.
+
+Are you sure you want to proceed?"</string>
 
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Unsupported Version</string>
@@ -133,6 +136,38 @@
     <string name="patch_option_enter_number">Enter number</string>
     <string name="patch_option_enter_decimal">Enter decimal</string>
     <string name="patch_option_pick_folder">Pick folder</string>
+
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Create adaptive icon</string>
+    <string name="adaptive_icon_create">Create icon</string>
+    <string name="adaptive_icon_instructions">Choose a foreground image, select background color, and adjust the preview with pinch-to-zoom gestures</string>
+    <string name="adaptive_icon_preview">Preview</string>
+    <string name="adaptive_icon_select_foreground">Select foreground image</string>
+    <string name="adaptive_icon_change_foreground">Change foreground image</string>
+    <string name="adaptive_icon_background_color">Background color</string>
+    <string name="adaptive_icon_reset_transform">Reset position and scale</string>
+    <string name="adaptive_icon_safe_zone_inner">Safe zone (always visible)</string>
+    <string name="adaptive_icon_safe_zone_outer">Mask zone (may be clipped)</string>
+    <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
+    <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
+    <string name="adaptive_icon_create_new">Create new icon</string>
+    <string name="adaptive_icon_folder_explanation">Select where to create \'morphe_branding/morphe_icons\' folder with generated icon files</string>
+
+    <!-- Header Creator -->
+    <string name="header_creator_title">Create custom header</string>
+    <string name="header_creator_create">Create header</string>
+    <string name="header_creator_create_new">Create new header</string>
+    <string name="header_creator_instructions">Choose images for light and dark themes, then adjust with pinch-to-zoom gestures</string>
+    <string name="header_creator_light_theme">Light theme header</string>
+    <string name="header_creator_dark_theme">Dark theme header</string>
+    <string name="header_creator_select_light">Select light theme image</string>
+    <string name="header_creator_change_light">Change light theme image</string>
+    <string name="header_creator_select_dark">Select dark theme image</string>
+    <string name="header_creator_change_dark">Change dark theme image</string>
+    <string name="header_creator_no_image">No image selected</string>
+    <string name="header_creator_success">Header created successfully</string>
+    <string name="header_creator_failed">Failed to create header</string>
+    <string name="header_creator_folder_explanation">Select where to create \'morphe_branding/morphe_header\' folder with generated header files</string>
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
