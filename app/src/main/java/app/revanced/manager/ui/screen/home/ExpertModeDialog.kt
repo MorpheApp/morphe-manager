@@ -8,10 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -29,18 +27,15 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchInfo
-import app.revanced.manager.ui.screen.shared.ColorPickerDialog
-import app.revanced.manager.ui.screen.shared.ColorPreviewDot
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.util.rememberFolderPickerWithPermission
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
+import app.revanced.manager.util.rememberFolderPickerWithPermission
 
 /**
  * Advanced patch selection and configuration dialog
@@ -61,6 +56,7 @@ fun ExpertModeDialog(
 ) {
     var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
+    var showMultipleBundlesWarning by remember { mutableStateOf(false) }
 
     // Create local mutable state from incoming selectedPatches
     var localSelectedPatches by remember(selectedPatches) {
@@ -98,84 +94,84 @@ fun ExpertModeDialog(
     val totalSelectedCount = localSelectedPatches.values.sumOf { it.size }
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
 
+    // Check if multiple bundles are selected
+    val hasMultipleBundles = localSelectedPatches.keys.size > 1
+
+    // Sync function
+    fun syncAndProceed() {
+        localSelectedPatches.forEach { (bundleUid, patches) ->
+            val originalPatches = selectedPatches[bundleUid] ?: emptySet()
+            patches.forEach { patchName ->
+                if (patchName !in originalPatches) {
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+            originalPatches.forEach { patchName ->
+                if (patchName !in patches) {
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+        }
+        selectedPatches.forEach { (bundleUid, patches) ->
+            if (bundleUid !in localSelectedPatches) {
+                patches.forEach { patchName ->
+                    onPatchToggle(bundleUid, patchName)
+                }
+            }
+        }
+        onProceed()
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.expert_mode_title),
-        compactPadding = true,
         dismissOnClickOutside = false,
-        footer = {
-            MorpheDialogButton(
-                text = stringResource(R.string.expert_mode_proceed),
-                onClick = {
-                    // Sync all local changes back before proceeding
-                    localSelectedPatches.forEach { (bundleUid, patches) ->
-                        val originalPatches = selectedPatches[bundleUid] ?: emptySet()
-                        patches.forEach { patchName ->
-                            if (patchName !in originalPatches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                        originalPatches.forEach { patchName ->
-                            if (patchName !in patches) {
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                    }
-                    // Handle removed bundles
-                    selectedPatches.forEach { (bundleUid, patches) ->
-                        if (bundleUid !in localSelectedPatches) {
-                            patches.forEach { patchName ->
-                                onPatchToggle(bundleUid, patchName)
-                            }
-                        }
-                    }
-                    onProceed()
-                },
-                enabled = totalSelectedCount > 0,
-                icon = Icons.Outlined.AutoFixHigh,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        footer = null,
+        compactPadding = true,
+        scrollable = false
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Subtitle with count
-            Text(
-                text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+            // Fixed header section
+            Column(modifier = Modifier.fillMaxWidth()) {
+                // Subtitle with count
+                Text(
+                    text = stringResource(R.string.expert_mode_subtitle_extended, totalSelectedCount, totalPatchesCount),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            // Search bar
-            MorpheDialogTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                label = {
-                    Text(stringResource(R.string.expert_mode_search))
-                },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = stringResource(R.string.expert_mode_search)
-                    )
-                },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = stringResource(R.string.clear)
-                            )
+                // Search bar
+                MorpheDialogTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    label = {
+                        Text(stringResource(R.string.expert_mode_search))
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = stringResource(R.string.expert_mode_search)
+                        )
+                    },
+                    trailingIcon = {
+                        if (searchQuery.isNotEmpty()) {
+                            IconButton(onClick = { searchQuery = "" }) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(R.string.clear)
+                                )
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
 
-            // Content
+            // Scrollable content
             if (filteredPatchesInfo.isEmpty()) {
                 EmptyStateContent(
                     hasSearch = searchQuery.isNotBlank(),
@@ -185,7 +181,10 @@ fun ExpertModeDialog(
                 )
             } else {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     filteredPatchesInfo.forEach { (bundle, patches) ->
@@ -261,7 +260,34 @@ fun ExpertModeDialog(
                     }
                 }
             }
+
+            // Proceed to Patching button
+            MorpheDialogButton(
+                text = stringResource(R.string.expert_mode_proceed),
+                onClick = {
+                    // Check if multiple bundles are selected
+                    if (hasMultipleBundles) {
+                        showMultipleBundlesWarning = true
+                    } else {
+                        syncAndProceed()
+                    }
+                },
+                enabled = totalSelectedCount > 0,
+                icon = Icons.Outlined.AutoFixHigh,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
+    }
+
+    // Multiple bundles warning dialog
+    if (showMultipleBundlesWarning) {
+        MultipleBundlesWarningDialog(
+            onDismiss = { showMultipleBundlesWarning = false },
+            onProceed = {
+                showMultipleBundlesWarning = false
+                syncAndProceed()
+            }
+        )
     }
 
     // Options dialog
@@ -372,8 +398,6 @@ private fun PatchCard(
     onConfigureOptions: () -> Unit,
     hasOptions: Boolean
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     // Localized strings for accessibility
     val settings = stringResource(R.string.settings)
     val enabledState = stringResource(R.string.enabled)
@@ -384,7 +408,11 @@ private fun PatchCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .clickable { isExpanded = !isExpanded },
+            .clickable(onClick = onToggle)
+            .semantics {
+                stateDescription = patchState
+                contentDescription = "${patch.name}, $patchState"
+            },
         shape = RoundedCornerShape(14.dp),
         color = if (isEnabled) {
             MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
@@ -398,114 +426,68 @@ private fun PatchCard(
         },
         tonalElevation = if (isEnabled) 2.dp else 0.dp
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Header with patch name and controls
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            // Patch info
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = if (hasOptions) 8.dp else 0.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
+                Text(
+                    text = patch.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (isEnabled)
+                        LocalDialogTextColor.current
+                    else
+                        LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
+                )
+
+                if (!patch.description.isNullOrBlank()) {
                     Text(
-                        text = patch.name,
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        text = patch.description,
+                        style = MaterialTheme.typography.bodySmall,
                         color = if (isEnabled)
-                            LocalDialogTextColor.current
+                            LocalDialogSecondaryTextColor.current
                         else
-                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
-                        maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                        overflow = TextOverflow.Ellipsis
+                            LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f)
                     )
-
-                    if (!patch.description.isNullOrBlank()) {
-                        Text(
-                            text = patch.description,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = if (isEnabled)
-                                LocalDialogSecondaryTextColor.current
-                            else
-                                LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f),
-                            maxLines = if (isExpanded) Int.MAX_VALUE else 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Options button (only enabled if patch is enabled)
-                    if (hasOptions) {
-                        FilledTonalIconButton(
-                            onClick = onConfigureOptions,
-                            modifier = Modifier
-                                .size(36.dp)
-                                .semantics {
-                                    contentDescription = "${patch.name}, $settings"
-                                },
-                            enabled = isEnabled,
-                            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                                disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
-                            )
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Settings,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                    }
-
-                    // Toggle button
-                    FilledTonalIconButton(
-                        onClick = onToggle,
-                        modifier = Modifier
-                            .size(36.dp)
-                            .semantics {
-                                stateDescription = patchState
-                                contentDescription = "${patch.name}, $patchState"
-                            },
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = if (isEnabled)
-                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
-                            else
-                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                            contentColor = if (isEnabled)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                        )
-                    ) {
-                        Icon(
-                            imageVector = if (isEnabled) Icons.Filled.Remove else Icons.Filled.Add,
-                            contentDescription = null, // Handled by button semantics
-                            modifier = Modifier.size(18.dp)
-                        )
-                    }
                 }
             }
 
-            // Options indicator (only show if patch is enabled)
-            if (hasOptions && isEnabled) {
-                InfoBadge(
-                    text = stringResource(R.string.expert_mode_has_options),
-                    style = InfoBadgeStyle.Primary,
-                    icon = Icons.Outlined.Tune,
-                    isCompact = true
-                )
+            // Options button (only enabled if patch is enabled)
+            if (hasOptions) {
+                FilledTonalIconButton(
+                    onClick = {
+                        // Prevent click propagation to card
+                        onConfigureOptions()
+                    },
+                    modifier = Modifier
+                        .size(36.dp)
+                        .semantics {
+                            contentDescription = "${patch.name}, $settings"
+                        },
+                    enabled = isEnabled,
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Settings,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
             }
         }
     }
@@ -1293,5 +1275,34 @@ fun ScrollableInstruction(
                     )
             )
         }
+    }
+}
+
+
+/**
+ * Warning dialog shown when user selects patches from multiple bundles
+ */
+@Composable
+private fun MultipleBundlesWarningDialog(
+    onDismiss: () -> Unit,
+    onProceed: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.expert_mode_multiple_bundles_warning_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                onPrimaryClick = onProceed,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(R.string.expert_mode_multiple_bundles_warning_message),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current
+        )
     }
 }
