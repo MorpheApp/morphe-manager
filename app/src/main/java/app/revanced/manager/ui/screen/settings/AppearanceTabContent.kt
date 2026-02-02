@@ -6,9 +6,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
@@ -17,43 +18,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.ui.screen.settings.appearance.AppIconSection
-import app.revanced.manager.ui.screen.settings.appearance.LanguagePickerDialog
-import app.revanced.manager.ui.screen.settings.appearance.SelectorItem
-import app.revanced.manager.ui.screen.settings.appearance.SelectorSection
+import app.revanced.manager.ui.screen.settings.appearance.*
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
-import app.revanced.manager.util.darken
 import app.revanced.manager.ui.theme.Theme
-import app.revanced.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.revanced.manager.ui.viewmodel.ThemePreset
-import app.revanced.manager.util.toColorOrNull
+import app.revanced.manager.ui.viewmodel.ThemeSettingsViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-val THEME_PRESET_COLORS = listOf(
-    Color(0xFF6750A4),
-    Color(0xFF386641),
-    Color(0xFF0061A4),
-    Color(0xFF8E24AA),
-    Color(0xFFEF6C00),
-    Color(0xFF00897B),
-    Color(0xFFD81B60),
-    Color(0xFF5C6BC0),
-    Color(0xFF43A047),
-    Color(0xFFFF7043),
-    Color(0xFF1DE9B6),
-    Color(0xFFFFC400),
-    Color(0xFF00B8D4),
-    Color(0xFFBA68C8)
-)
 
 /**
  * Appearance tab content
@@ -74,9 +50,6 @@ fun AppearanceTabContent(
 
     var showLanguageDialog by remember { mutableStateOf(false) }
     var showTranslationInfoDialog by remember { mutableStateOf(false) }
-    val currentLanguage = remember(appLanguage, context) {
-        getLanguageDisplayName(appLanguage, context)
-    }
 
     Column(
         modifier = Modifier
@@ -85,179 +58,70 @@ fun AppearanceTabContent(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Background Type
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_background),
-            icon = Icons.Outlined.Wallpaper
+        // Language Section
+        LanguageSection(
+            appLanguage = appLanguage,
+            onLanguageClick = { showTranslationInfoDialog = true }
         )
 
-        SectionCard {
-            Column(modifier = Modifier.padding(16.dp)) {
-                SelectorSection(
-                    title = "",
-                    items = BackgroundType.entries.map { bgType ->
-                        SelectorItem(
-                            key = bgType.name,
-                            icon = when (bgType) {
-                                BackgroundType.CIRCLES -> Icons.Outlined.Circle
-                                BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
-                                BackgroundType.WAVES -> Icons.Outlined.Waves
-                                BackgroundType.SPACE -> Icons.Outlined.AutoAwesome
-                                BackgroundType.SHAPES -> Icons.Outlined.Pentagon
-                                BackgroundType.SNOW -> Icons.Outlined.AcUnit
-                                BackgroundType.NONE -> Icons.Outlined.VisibilityOff
-                            },
-                            label = stringResource(bgType.displayNameResId)
-                        )
-                    },
-                    selectedItem = backgroundType.name,
-                    onItemSelected = { selectedType ->
-                        scope.launch {
-                            themeViewModel.prefs.backgroundType.update(
-                                BackgroundType.valueOf(
-                                    selectedType
-                                )
-                            )
-                        }
-                    },
-                    columns = null
-                )
-            }
-        }
-
-        // Theme Mode
+        // Theme Mode Section
         SectionTitle(
             text = stringResource(R.string.settings_appearance_theme),
             icon = Icons.Outlined.Palette
         )
 
-        SectionCard {
-            Column(modifier = Modifier.padding(16.dp)) {
-                SelectorSection(
-                    title = "",
-                    items = buildList {
-                        add(
-                            SelectorItem(
-                                key = "SYSTEM",
-                                icon = Icons.Outlined.PhoneAndroid,
-                                label = stringResource(R.string.settings_appearance_system)
-                            )
-                        )
-                        add(
-                            SelectorItem(
-                                key = "LIGHT",
-                                icon = Icons.Outlined.LightMode,
-                                label = stringResource(R.string.settings_appearance_light)
-                            )
-                        )
-                        add(
-                            SelectorItem(
-                                key = "DARK",
-                                icon = Icons.Outlined.DarkMode,
-                                label = stringResource(R.string.settings_appearance_dark)
-                            )
-                        )
-                        add(
-                            SelectorItem(
-                                key = "BLACK",
-                                icon = Icons.Outlined.Contrast,
-                                label = stringResource(R.string.settings_appearance_black)
-                            )
-                        )
-                        if (supportsDynamicColor) {
-                            add(
-                                SelectorItem(
-                                    key = "DYNAMIC",
-                                    icon = Icons.Outlined.AutoAwesome,
-                                    label = stringResource(R.string.settings_appearance_dynamic)
-                                )
-                            )
-                        }
-                    },
-                    selectedItem = when {
-                        dynamicColor && supportsDynamicColor -> "DYNAMIC"
-                        pureBlackTheme -> "BLACK"
-                        theme == Theme.SYSTEM -> "SYSTEM"
-                        theme == Theme.LIGHT -> "LIGHT"
-                        theme == Theme.DARK -> "DARK"
-                        else -> "SYSTEM"
-                    },
-                    onItemSelected = { selectedTheme ->
-                        scope.launch {
-                            when (selectedTheme) {
-                                "SYSTEM" -> themeViewModel.applyThemePreset(ThemePreset.DEFAULT)
-                                "LIGHT" -> themeViewModel.applyThemePreset(ThemePreset.LIGHT)
-                                "DARK" -> themeViewModel.applyThemePreset(ThemePreset.DARK)
-                                "BLACK" -> themeViewModel.applyThemePreset(ThemePreset.PURE_BLACK)
-                                "DYNAMIC" -> themeViewModel.applyThemePreset(ThemePreset.DYNAMIC)
-                            }
-                        }
-                    },
-                    columns = null
-                )
+        ThemeSelector(
+            theme = theme,
+            pureBlackTheme = pureBlackTheme,
+            dynamicColor = dynamicColor,
+            supportsDynamicColor = supportsDynamicColor,
+            onThemeSelected = { selectedTheme ->
+                scope.launch {
+                    when (selectedTheme) {
+                        "SYSTEM" -> themeViewModel.applyThemePreset(ThemePreset.DEFAULT)
+                        "LIGHT" -> themeViewModel.applyThemePreset(ThemePreset.LIGHT)
+                        "DARK" -> themeViewModel.applyThemePreset(ThemePreset.DARK)
+                        "BLACK" -> themeViewModel.applyThemePreset(ThemePreset.PURE_BLACK)
+                        "DYNAMIC" -> themeViewModel.applyThemePreset(ThemePreset.DYNAMIC)
+                    }
+                }
             }
-        }
+        )
 
-        // Accent Color
+        // Background Type Section
+        SectionTitle(
+            text = stringResource(R.string.settings_appearance_background),
+            icon = Icons.Outlined.Wallpaper
+        )
+
+        BackgroundSelector(
+            selectedBackground = backgroundType,
+            onBackgroundSelected = { selectedType ->
+                scope.launch {
+                    themeViewModel.prefs.backgroundType.update(selectedType)
+                }
+            }
+        )
+
+        // Accent Color Section
         SectionTitle(
             text = stringResource(R.string.settings_appearance_accent_color),
             icon = Icons.Outlined.ColorLens
         )
 
-        SectionCard {
-            Column(modifier = Modifier.padding(16.dp)) {
-                AccentColorPresetsRow(
-                    selectedColorHex = customAccentColorHex,
-                    onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-                    dynamicColorEnabled = dynamicColor
-                )
-            }
-        }
-
-        // Language
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_app_language),
-            icon = Icons.Outlined.Language
+        AccentColorSelector(
+            selectedColorHex = customAccentColorHex,
+            onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
+            dynamicColorEnabled = dynamicColor
         )
 
-        val currentLanguageOption = remember(appLanguage, context) {
-            LanguageRepository.getSupportedLanguages(context)
-                .find { it.code == appLanguage }
-        }
-
-        RichSettingsItem(
-            onClick = { showTranslationInfoDialog = true },
-            showBorder = true,
-            title = stringResource(R.string.settings_appearance_app_language_current),
-            subtitle = currentLanguage,
-            leadingContent = {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(
-                            text = currentLanguageOption?.flag ?: "🌐",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                    }
-                }
-            },
-            trailingContent = {
-                MorpheIcon(icon = Icons.Outlined.ChevronRight)
-            }
-        )
-
-        // Icon manager
+        // App Icon Section
         SectionTitle(
             text = stringResource(R.string.settings_appearance_app_icon_selector_title),
             icon = Icons.Outlined.Apps
         )
 
-        SectionCard {
-            AppIconSection()
-        }
+        AppIconSelector()
     }
 
     // Translation Info Dialog
@@ -304,78 +168,49 @@ fun AppearanceTabContent(
 }
 
 /**
- * Row of accent color preset buttons
+ * Language selection section
  */
 @Composable
-private fun AccentColorPresetsRow(
-    selectedColorHex: String?,
-    onColorSelected: (Color?) -> Unit,
-    dynamicColorEnabled: Boolean
+private fun LanguageSection(
+    appLanguage: String,
+    onLanguageClick: () -> Unit
 ) {
-    val selectedArgb = selectedColorHex.toColorOrNull()?.toArgb()
-    val isEnabled = !dynamicColorEnabled
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Reset button
-        Box(
-            modifier = Modifier
-                .size(56.dp)
-                .clip(RoundedCornerShape(14.dp))
-                .border(
-                    width = if (selectedArgb == null) 2.dp else 1.dp,
-                    color = if (selectedArgb == null)
-                        MaterialTheme.colorScheme.primary
-                    else
-                        MaterialTheme.colorScheme.outline,
-                    shape = RoundedCornerShape(14.dp)
-                )
-                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(14.dp))
-                .clickable(enabled = isEnabled) {
-                    if (isEnabled) {
-                        onColorSelected(null)
-                    }
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            MorpheIcon(
-                icon = Icons.Outlined.Close,
-                contentDescription = stringResource(R.string.clear),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                    alpha = if (isEnabled) 1f else 0.5f
-                )
-            )
-        }
-
-        // Color presets
-        THEME_PRESET_COLORS.forEach { preset ->
-            val isSelected = selectedArgb != null && preset.toArgb() == selectedArgb
-            Box(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(14.dp))
-                    .border(
-                        width = if (isSelected) 2.dp else 1.dp,
-                        color = if (isSelected)
-                            preset.darken(0.4f)
-                        else
-                            MaterialTheme.colorScheme.outline,
-                        shape = RoundedCornerShape(14.dp)
-                    )
-                    .background(
-                        preset.copy(alpha = if (isEnabled) 1f else 0.5f),
-                        RoundedCornerShape(14.dp)
-                    )
-                    .clickable(enabled = isEnabled) {
-                        if (isEnabled) {
-                            onColorSelected(preset)
-                        }
-                    }
-            )
-        }
+    val context = LocalContext.current
+    val currentLanguage = remember(appLanguage, context) {
+        getLanguageDisplayName(appLanguage, context)
     }
+
+    val currentLanguageOption = remember(appLanguage, context) {
+        LanguageRepository.getSupportedLanguages(context)
+            .find { it.code == appLanguage }
+    }
+
+    SectionTitle(
+        text = stringResource(R.string.settings_appearance_app_language),
+        icon = Icons.Outlined.Language
+    )
+
+    RichSettingsItem(
+        onClick = onLanguageClick,
+        showBorder = true,
+        title = stringResource(R.string.settings_appearance_app_language_current),
+        subtitle = currentLanguage,
+        leadingContent = {
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                modifier = Modifier.size(40.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(
+                        text = currentLanguageOption?.flag ?: "🌐",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+            }
+        },
+        trailingContent = {
+            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+        }
+    )
 }

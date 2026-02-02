@@ -4,16 +4,13 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.CircularProgressIndicator
@@ -447,7 +444,7 @@ private fun PatchUpdateAvailableBanner(
 
             // Patch button
             ActionButton(
-                text = stringResource(R.string.patch),
+                text = stringResource(R.string.repatch),
                 icon = Icons.Outlined.Refresh,
                 onClick = onPatchClick,
                 isPrimary = true,
@@ -623,7 +620,7 @@ private fun ActionsSection(
         primaryActions.add(
             ActionItem(
                 text = stringResource(R.string.patch),
-                icon = Icons.Outlined.AutoAwesome,
+                icon = Icons.Outlined.AutoFixHigh,
                 onClick = onPatchClick,
                 enabled = availablePatches > 0
             )
@@ -634,7 +631,7 @@ private fun ActionsSection(
         primaryActions.add(
             ActionItem(
                 text = stringResource(R.string.repatch),
-                icon = Icons.Outlined.Build,
+                icon = Icons.Outlined.Refresh,
                 onClick = onRepatchClick
             )
         )
@@ -645,7 +642,7 @@ private fun ActionsSection(
         secondaryActions.add(
             ActionItem(
                 text = stringResource(R.string.open),
-                icon = Icons.Outlined.PlayArrow,
+                icon = Icons.AutoMirrored.Outlined.Launch,
                 onClick = { viewModel.launch() }
             )
         )
@@ -671,7 +668,7 @@ private fun ActionsSection(
             secondaryActions.add(
                 ActionItem(
                     text = installText,
-                    icon = Icons.Outlined.Download,
+                    icon = Icons.Outlined.InstallMobile,
                     onClick = {
                         val savedFile = viewModel.savedApkFile()
                         if (savedFile != null) {
@@ -709,7 +706,7 @@ private fun ActionsSection(
             secondaryActions.add(
                 ActionItem(
                     text = if (viewModel.isMounted) stringResource(R.string.remount) else stringResource(R.string.mount),
-                    icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Check,
+                    icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Link,
                     onClick = {
                         if (viewModel.isMounted) {
                             installViewModel.remount(

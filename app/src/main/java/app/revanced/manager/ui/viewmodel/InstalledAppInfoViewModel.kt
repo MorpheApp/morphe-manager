@@ -284,9 +284,16 @@ class InstalledAppInfoViewModel(
 
         if (useExpertMode) {
             // Expert Mode: Show dialog for patch selection
-            repatchBundles = patchBundleRepository
+            // Load all available bundles
+            val allBundles = patchBundleRepository
                 .scopedBundleInfoFlow(app.originalPackageName, originalApk.version)
                 .first()
+
+            // Filter to show only bundles that were used during patching
+            val usedBundleUids = patches.keys
+            repatchBundles = allBundles.filter { bundle ->
+                bundle.uid in usedBundleUids
+            }
 
             repatchPatches = patches.toMutableMap()
             repatchOptions = options.toMutableMap()
