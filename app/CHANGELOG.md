@@ -1,3 +1,10 @@
+# app [1.5.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2026-02-02)
+
+
+### Features
+
+* Add updating sources progress bar ([#152](https://github.com/MorpheApp/morphe-manager/issues/152)) ([8fd353f](https://github.com/MorpheApp/morphe-manager/commit/8fd353f3ef53da81f1151132318e832713156628))
+
 # app [1.5.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2026-02-02)
 
 
