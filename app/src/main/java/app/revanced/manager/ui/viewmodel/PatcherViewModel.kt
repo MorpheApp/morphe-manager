@@ -190,6 +190,23 @@ class PatcherViewModel(
         }
     }
 
+    private val tempDir = savedStateHandle.saveable(key = "tempDir") {
+        fs.uiTempDir.resolve("installer").also {
+            it.deleteRecursively()
+            it.mkdirs()
+        }
+    }
+
+    private var _inputFile: File? = null
+    var inputFile: File?
+        get() = _inputFile
+        set(value) { _inputFile = value }
+
+    private var requiresSplitPreparation by savedStateHandle.saveableVar {
+        initialSplitRequirement(input.selectedApp)
+    }
+    val outputFile = tempDir.resolve("output.apk")
+
     /**
      * How much of the progress is allocated to executing patches.
      */
@@ -241,6 +258,18 @@ class PatcherViewModel(
                 savedStateHandle["patcher_worker_id"] = value
             }
         }
+
+    private val logs = mutableListOf<Pair<LogLevel, String>>()
+    private val logger = object : Logger() {
+        override fun log(level: LogLevel, message: String) {
+            level.androidLog(message)
+            if (level == LogLevel.TRACE) return
+
+            viewModelScope.launch {
+                logs.add(level to message)
+            }
+        }
+    }
 
     init {
         val existingId = patcherWorkerId?.uuid
@@ -463,35 +492,6 @@ class PatcherViewModel(
         }
     }
 
-    private val tempDir = savedStateHandle.saveable(key = "tempDir") {
-        fs.uiTempDir.resolve("installer").also {
-            it.deleteRecursively()
-            it.mkdirs()
-        }
-    }
-
-    private var _inputFile: File? = null
-    var inputFile: File?
-        get() = _inputFile
-        set(value) { _inputFile = value }
-
-    private var requiresSplitPreparation by savedStateHandle.saveableVar {
-        initialSplitRequirement(input.selectedApp)
-    }
-    val outputFile = tempDir.resolve("morphe_output.apk")
-
-    private val logs by savedStateHandle.saveable<MutableList<Pair<LogLevel, String>>> { mutableListOf() }
-    private val logger = object : Logger() {
-        override fun log(level: LogLevel, message: String) {
-            level.androidLog(message)
-            if (level == LogLevel.TRACE) return
-
-            viewModelScope.launch {
-                logs.add(level to message)
-            }
-        }
-    }
-
     private val patchCount = input.selectedPatches.values.sumOf { it.size }
     private var completedPatchCount by savedStateHandle.saveable {
         // SavedStateHandle.saveable only supports the boxed version.
@@ -524,8 +524,11 @@ class PatcherViewModel(
                 return@launch
             }
 
+            // Save metadata to database
             val wasAlreadySaved = hasSavedPatchedApp
             val saved = persistPatchedApp(null, InstallType.SAVED)
+
+            // Show appropriate success message
             if (!saved) {
                 app.toast(app.getString(R.string.patched_app_save_failed_toast))
             } else {
