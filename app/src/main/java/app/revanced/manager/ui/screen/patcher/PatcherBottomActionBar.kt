@@ -6,7 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.outlined.FileDownload
+import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -73,7 +73,7 @@ fun PatcherBottomActionBar(
         if (showSaveButton || showErrorButton) {
             BottomActionButton(
                 onClick = if (showErrorButton) onErrorClick else onSaveClick,
-                icon = if (showErrorButton) Icons.Default.Error else Icons.Outlined.FileDownload,
+                icon = if (showErrorButton) Icons.Default.Error else Icons.Outlined.Save,
                 text = if (showErrorButton) stringResource(R.string.error_)
                 else stringResource(R.string.save),
                 modifier = Modifier.weight(1f),
