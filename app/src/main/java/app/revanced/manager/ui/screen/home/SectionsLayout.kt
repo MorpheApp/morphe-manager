@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -506,13 +507,22 @@ private fun BundleUpdateSnackbarContent(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = when (status) {
-                            BundleUpdateStatus.Updating -> stringResource(R.string.home_updating_sources)
+                            BundleUpdateStatus.Updating -> {
+                                // Show bundle name if available and downloading
+                                if (isDownloading && progress.currentBundleName != null) {
+                                    progress.currentBundleName
+                                } else {
+                                    stringResource(R.string.home_updating_sources)
+                                }
+                            }
                             BundleUpdateStatus.Success -> stringResource(R.string.home_update_success)
                             BundleUpdateStatus.Error -> stringResource(R.string.home_update_error)
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        color = contentColor
+                        color = contentColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = when (status) {
