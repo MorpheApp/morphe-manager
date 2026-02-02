@@ -222,7 +222,7 @@ private fun DialogContent(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 32.dp)
+                        .padding(top = 24.dp)
                 ) {
                     CompositionLocalProvider(
                         LocalDialogTextColor provides textColor,
