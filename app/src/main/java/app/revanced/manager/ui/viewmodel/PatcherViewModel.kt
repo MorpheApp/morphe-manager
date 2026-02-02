@@ -528,11 +528,9 @@ class PatcherViewModel(
             val saved = persistPatchedApp(null, InstallType.SAVED)
             if (!saved) {
                 app.toast(app.getString(R.string.patched_app_save_failed_toast))
-            } else if (!wasAlreadySaved) {
-                app.toast(app.getString(R.string.patched_app_saved_toast))
+            } else {
+                app.toast(app.getString(R.string.save_apk_success))
             }
-
-            app.toast(app.getString(R.string.save_apk_success))
         }
     }
 

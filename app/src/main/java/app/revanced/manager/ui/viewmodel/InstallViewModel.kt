@@ -704,12 +704,6 @@ class InstallViewModel : ViewModel(), KoinComponent {
             }
         }.isSuccess
 
-        if (exportSucceeded) {
-            app.toast(app.getString(R.string.save_apk_success))
-        } else {
-            app.toast(app.getString(R.string.saved_app_export_failed))
-        }
-
         onComplete(exportSucceeded)
     }
 

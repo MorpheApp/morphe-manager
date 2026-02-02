@@ -235,22 +235,12 @@
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
-    <string name="install_app_fail_missing_stock">Missing original APK for mount install.</string>
-    <string name="mount_split_not_supported">Rooted mount installer does not support split APKs. Use system installer instead.</string>
     <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again.</string>
-    <string name="uninstall_timeout_message">Uninstallation did not finish. Check the uninstall dialog and try again.</string>
-    <string name="reinstall_app_fail">Failed to reinstall app: %s</string>
-    <string name="uninstall_app_fail">Failed to uninstall app: %s</string>
     <string name="save_apk_success">APK Saved</string>
-    <string name="saved_app_export_success">Exported patched app</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
     <string name="saved_app_copy_removed_toast">Removed saved copy</string>
     <string name="saved_app_launch_unavailable">Install the app before opening it.</string>
-
-    <string name="saved_app_install_success">Installed saved app</string>
-    <string name="saved_app_install_failed">Failed to install saved app</string>
-    <string name="saved_app_install_missing">Saved APK not found</string>
 
     <string name="package_name">Package name</string>
     <string name="failed_to_mount">Failed to mount: %s</string>

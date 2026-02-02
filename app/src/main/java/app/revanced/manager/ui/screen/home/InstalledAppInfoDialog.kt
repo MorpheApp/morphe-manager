@@ -108,7 +108,7 @@ fun InstalledAppInfoDialog(
     // Extract strings to avoid LocalContext issues
     val fallbackNameDefault = stringResource(R.string.home_app_info_patches_name_default)
     val fallbackNameGeneric = stringResource(R.string.home_app_info_patches_name_fallback)
-    val exportSuccessMessage = stringResource(R.string.saved_app_export_success)
+    val exportSuccessMessage = stringResource(R.string.save_apk_success)
     val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
 
     // Build applied bundles summary with stored versions
