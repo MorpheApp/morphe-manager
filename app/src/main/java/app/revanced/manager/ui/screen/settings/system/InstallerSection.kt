@@ -19,12 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.selected
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
@@ -470,110 +465,75 @@ fun InstallerUnavailableDialog(
 
     val reasonText = state.reason?.let { stringResource(it) }
 
-    AlertDialog(
+    MorpheDialog(
         onDismissRequest = onDismiss,
-        icon = {
-            Icon(
-                imageVector = Icons.Outlined.Warning,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(32.dp)
-            )
-        },
-        title = {
-            Text(
-                text = stringResource(R.string.installer_unavailable_title, installerName),
-                textAlign = TextAlign.Center
-            )
-        },
-        text = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.installer_unavailable_message, installerName),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+        title = stringResource(R.string.installer_unavailable_title, installerName),
+        footer = {
+            MorpheDialogButtonColumn {
+                // Primary action - Retry
+                MorpheDialogButton(
+                    text = stringResource(R.string.retry),
+                    onClick = onRetry,
+                    modifier = Modifier.fillMaxWidth()
                 )
 
-                if (reasonText != null) {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-                    ) {
-                        Text(
-                            text = reasonText,
-                            modifier = Modifier.padding(12.dp),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                }
-
-                if (state.canOpenApp && state.installerToken == InstallerManager.Token.Shizuku) {
-                    Text(
-                        text = stringResource(R.string.installer_unavailable_shizuku_hint),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                // Secondary action - Open app (if available)
+                if (state.canOpenApp) {
+                    MorpheDialogButton(
+                        text = when (state.installerToken) {
+                            InstallerManager.Token.Shizuku -> stringResource(R.string.installer_action_open_shizuku)
+                            else -> stringResource(R.string.open)
+                        },
+                        onClick = onOpenApp,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
+
+                // Fallback option
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.installer_use_standard),
+                    onClick = onUseFallback,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Cancel
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
-        },
-        confirmButton = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // Primary actions row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    if (state.canOpenApp) {
-                        OutlinedButton(
-                            onClick = onOpenApp,
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(
-                                text = when (state.installerToken) {
-                                    InstallerManager.Token.Shizuku -> stringResource(R.string.installer_action_open_shizuku)
-                                    else -> stringResource(R.string.open)
-                                }
-                            )
-                        }
-                    }
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Main message
+            Text(
+                text = stringResource(R.string.installer_unavailable_message, installerName),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
 
-                    Button(
-                        onClick = onRetry,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.retry))
-                    }
-                }
-
-                // Secondary actions
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    TextButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(android.R.string.cancel))
-                    }
-
-                    TextButton(
-                        onClick = onUseFallback,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(stringResource(R.string.installer_use_standard))
-                    }
-                }
+            // Error reason badge
+            if (reasonText != null) {
+                InfoBadge(
+                    text = reasonText,
+                    style = InfoBadgeStyle.Error,
+                    icon = Icons.Outlined.Warning,
+                    isExpanded = true
+                )
             }
-        },
-        dismissButton = null
-    )
+
+            // Shizuku-specific hint
+            if (state.canOpenApp && state.installerToken == InstallerManager.Token.Shizuku) {
+                InfoBadge(
+                    text = stringResource(R.string.installer_unavailable_shizuku_hint),
+                    style = InfoBadgeStyle.Primary,
+                    isExpanded = true
+                )
+            }
+        }
+    }
 }
