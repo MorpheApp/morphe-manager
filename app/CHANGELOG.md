@@ -1,3 +1,10 @@
+# app [1.5.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2026-02-02)
+
+
+### Features
+
+* **Custom branding:** Allow Manager to process custom icon/headers into the correct formats/names/sizes ([#138](https://github.com/MorpheApp/morphe-manager/issues/138)) ([b5e6c82](https://github.com/MorpheApp/morphe-manager/commit/b5e6c82745c5441e17272850ed0b47cd525b514b))
+
 # app [1.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2026-02-02)
 
 
