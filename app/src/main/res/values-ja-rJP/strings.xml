@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">パッチ処理に進む</string>
     <string name="expert_mode_disable_all">全て無効化する</string>
     <string name="expert_mode_enable_all">全て有効化する</string>
-    <string name="expert_mode_has_options">設定可能</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
     <string name="expert_mode_no_patches">利用可能なパッチはありません</string>
+    <string name="expert_mode_multiple_bundles_warning_title">複数のパッチソースが選択されました</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"複数のパッチソースからパッチを選択しました。これは互換性の問題や予期しない動作を引き起こす可能性があります。
+
+続行しますか？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">非対応のバージョン</string>
     <string name="home_dialog_unsupported_version_dialog_description">この APK は推奨されているバージョンではありません。続行すると、アプリが正常に機能しない可能性があります。</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">数値を入力してください</string>
     <string name="patch_option_enter_decimal">小数点を入力してください</string>
     <string name="patch_option_pick_folder">フォルダーを選択する</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">アダプティブアイコンを作成</string>
+    <string name="adaptive_icon_create">アイコンを作成</string>
+    <string name="adaptive_icon_instructions">前景画像を選択し、背景色を選択し、ピンチツイストジェスチャーを使用してプレビューを調整します</string>
+    <string name="adaptive_icon_preview">プレビュー</string>
+    <string name="adaptive_icon_select_foreground">前景画像を選択</string>
+    <string name="adaptive_icon_change_foreground">前景画像を変更</string>
+    <string name="adaptive_icon_background_color">背景色</string>
+    <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
+    <string name="adaptive_icon_safe_zone_inner">安全ゾーン（常に表示）</string>
+    <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り詰められる可能性あり）</string>
+    <string name="adaptive_icon_created_success">アダプティブアイコンの作成に成功しました</string>
+    <string name="adaptive_icon_creation_failed">アダプティブアイコンの作成に失敗しました</string>
+    <string name="adaptive_icon_create_new">新しいアイコンを作成</string>
+    <string name="adaptive_icon_folder_explanation">生成されたアイコンファイルを格納する\'morphe_branding/morphe_icons\'フォルダの作成先を選択</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">カスタムヘッダーを作成</string>
+    <string name="header_creator_create">ヘッダーを作成</string>
+    <string name="header_creator_create_new">新しいヘッダーを作成</string>
+    <string name="header_creator_instructions">明るいテーマと暗いテーマの画像を選択し、ピンチツー・ゾームジェスチャーで調整</string>
+    <string name="header_creator_light_theme">明るいテーマのヘッダー</string>
+    <string name="header_creator_dark_theme">暗いテーマのヘッダー</string>
+    <string name="header_creator_select_light">明るいテーマの画像を選択</string>
+    <string name="header_creator_change_light">明るいテーマの画像を変更</string>
+    <string name="header_creator_select_dark">暗いテーマの画像を選択</string>
+    <string name="header_creator_change_dark">暗いテーマの画像を変更</string>
+    <string name="header_creator_no_image">画像が選択されていません</string>
+    <string name="header_creator_success">ヘッダーの作成に成功しました</string>
+    <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
+    <string name="header_creator_folder_explanation">生成されたヘッダーファイルを格納する\'morphe_branding/morphe_header\'フォルダの作成先を選択</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_saved_app_delete_confirmation">この保存されたアプリを削除しますか？</string>

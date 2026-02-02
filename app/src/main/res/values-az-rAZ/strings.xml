@@ -101,7 +101,6 @@
     <string name="expert_mode_proceed">Yamaqlamağa davam edin</string>
     <string name="expert_mode_disable_all">Hamısını qapat</string>
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
-    <string name="expert_mode_has_options">Tənzimlənən</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_no_patches">Yamaqlar əlçatan deyil</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -120,6 +119,8 @@
     <string name="patch_option_enter_number">Sayı qeyd edin</string>
     <string name="patch_option_enter_decimal">Onluq qeyd edin</string>
     <string name="patch_option_pick_folder">Qovluq seçin</string>
+    <!-- Adaptive Icon Creator -->
+    <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu tətbiqi silmək istədiyinizə əminsiniz?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Bu saxlanılan tətbiqi silmək istədiyinizə əminsiniz?</string>

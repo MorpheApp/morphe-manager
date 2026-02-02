@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Продължаване към пачове</string>
     <string name="expert_mode_disable_all">Изключи всички</string>
     <string name="expert_mode_enable_all">Включи всички</string>
-    <string name="expert_mode_has_options">Настройки</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
     <string name="expert_mode_no_patches">Няма достъпни пачове</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Избрани са патчове от различни източници</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Избрахте патчове от различни източници. Това може да доведе до проблеми с съвместимост или непредвидимо поведение.
+
+Сигурни ли сте, че искате да продължите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Неподдържана версия</string>
     <string name="home_dialog_unsupported_version_dialog_description">Този APK не е препоръчителна версия на приложението. Продължаване може да доведе до неработещо приложение.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Въведете число</string>
     <string name="patch_option_enter_decimal">Въведете десетично число</string>
     <string name="patch_option_pick_folder">Избор на папка</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Създаване на адаптивен икон</string>
+    <string name="adaptive_icon_create">Създаване на иконка</string>
+    <string name="adaptive_icon_instructions">Изберете изображение на преден план, изберете фонова боя, и настройте превьюто с жестове за разширяване с два пръста</string>
+    <string name="adaptive_icon_preview">Предогледна</string>
+    <string name="adaptive_icon_select_foreground">Избери изображение за преден план</string>
+    <string name="adaptive_icon_change_foreground">Смени изображение за преден план</string>
+    <string name="adaptive_icon_background_color">Цвят на фона</string>
+    <string name="adaptive_icon_reset_transform">Възстанови позиция и мащаб</string>
+    <string name="adaptive_icon_safe_zone_inner">Безопасна зона (винаги видима)</string>
+    <string name="adaptive_icon_safe_zone_outer">Маска зона (може да бъде отрязана)</string>
+    <string name="adaptive_icon_created_success">Адаптивен иконо създаден успешно</string>
+    <string name="adaptive_icon_creation_failed">Неуспешно създаване на адаптивен иконо</string>
+    <string name="adaptive_icon_create_new">Създай нов иконо</string>
+    <string name="adaptive_icon_folder_explanation">Избери къде да се създаде папката \'morphe_branding/morphe_icons\' с генерираните файлове на иконо</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Създай обичкена заглавие</string>
+    <string name="header_creator_create">Създай заглавие</string>
+    <string name="header_creator_create_new">Създай ново заглавие</string>
+    <string name="header_creator_instructions">Избери изображения за светли и тъмни теми, след това настрой с жестове за сгъване с два пръста</string>
+    <string name="header_creator_light_theme">Заглавие за светла тема</string>
+    <string name="header_creator_dark_theme">Заглавие за тъмна тема</string>
+    <string name="header_creator_select_light">Избери изображение за светла тема</string>
+    <string name="header_creator_change_light">Смени изображение за светла тема</string>
+    <string name="header_creator_select_dark">Избери изображение за тъмна тема</string>
+    <string name="header_creator_change_dark">Смени изображение за тъмна тема</string>
+    <string name="header_creator_no_image">Няма избрано изображение</string>
+    <string name="header_creator_success">Заглавието е създадено успешно</string>
+    <string name="header_creator_failed">Неуспешно създаване на заглавие</string>
+    <string name="header_creator_folder_explanation">Избери къде да се създаде папката \'morphe_branding/morphe_header\' с генерираните файлове на заглавието</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Сигурни ли сте, че искате да деинсталирате това приложение?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Сигурни ли сте, че искате да изтриете това запазено приложение?</string>

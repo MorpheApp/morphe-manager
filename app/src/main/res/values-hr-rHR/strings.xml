@@ -63,6 +63,8 @@
     <string name="home_dialog_selected_package">Izabrani paket</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Upute</string>
+    <!-- Adaptive Icon Creator -->
+    <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Režim korijena zahtijeva da je originalni APK instaliran na vašem uređaju prije ispravljanja.</string>

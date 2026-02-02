@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">প্যাচিংয়ের জন্য প্রেরণ করুন</string>
     <string name="expert_mode_disable_all">সবকিছু নিষ্ক্রিয় করুন</string>
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
-    <string name="expert_mode_has_options">নিয়ন্ত্রণযোগ্য</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="expert_mode_no_patches">কোনো প্যাচ উপলব্ধ নেই</string>
+    <string name="expert_mode_multiple_bundles_warning_title">বহু প্যাচ উৎস নির্বাচন করা হয়েছে</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"আপনি বিভিন্ন প্যাচ উৎস থেকে প্যাচ নির্বাচন করেছেন। এটি সামঞ্জस्यতা সমস্যা বা অপ্রত্যাশিত আচরণের কারণ হতে পারে।
+
+আপনি কি এগিয়ে যেতে চান?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">এই এপিকটি একটি সুপারিশিত অ্যাপ সংস্করণ নয়। এগো চললে একটি অকার্যকার অ্যাপ হয়তে পারে।</string>
     <string name="home_dialog_unsupported_version_dialog_description">এই এপিআকটি একটি সুপারিশিত অ্যাপ সংস্করণ নয়। এগো চললে একটি অকার্যকার অ্যাপ হয়তে পারে।</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">সংখ্যা দিন</string>
     <string name="patch_option_enter_decimal">ডেসিমাল দিন</string>
     <string name="patch_option_pick_folder">ফোল্ডার নির্বাচন করুন</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">আদাপ্টিভ আইকন তৈরি করুন</string>
+    <string name="adaptive_icon_create">আইকন তৈরি করুন</string>
+    <string name="adaptive_icon_instructions">আগের ছবি, পটের রং নির্বাচন করুন এবং প্রিভিউকে পিন্চ-টু-জুম গেস্টার্স দ্বারা বদলান করুন</string>
+    <string name="adaptive_icon_preview">পূর্বরূপ</string>
+    <string name="adaptive_icon_select_foreground">ফরগ্রাউন্ড ইমেজ নির্বাচন করুন</string>
+    <string name="adaptive_icon_change_foreground">ফরগ্রাউন্ড ইমেজ পরিবর্তন করুন</string>
+    <string name="adaptive_icon_background_color">ব্যাকগ্রাউন্ড রং</string>
+    <string name="adaptive_icon_reset_transform">পজিশন এবং স্কেল রিসেট করুন</string>
+    <string name="adaptive_icon_safe_zone_inner">সেফ জোন (সময়কালে দৃশ্যমান)</string>
+    <string name="adaptive_icon_safe_zone_outer">মাস্ক জোন (মুছে ফেলা হতে পারে)</string>
+    <string name="adaptive_icon_created_success">অ্যাডাপ্টিভ আইকন সফলভাবে তৈরি হয়েছে</string>
+    <string name="adaptive_icon_creation_failed">অ্যাডাপ্টিভ আইকন তৈরি করতে ব্যর্থ হয়েছে</string>
+    <string name="adaptive_icon_create_new">নতুন আইকন তৈরি করুন</string>
+    <string name="adaptive_icon_folder_explanation">জেনারেটেড আইকন ফাইলস থাকা \'morphe_branding/morphe_icons\' ফোল্ডারটি কোথায় তৈরি করবেন তা নির্বাচন করুন</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">কাস্টম হেডার তৈরি করুন</string>
+    <string name="header_creator_create">হেডার তৈরি করুন</string>
+    <string name="header_creator_create_new">নতুন হেডার তৈরি করুন</string>
+    <string name="header_creator_instructions">লাইট এবং ডার্ক থিমের জন্য ছবি নির্বাচন করুন, তারপর পিন্চ-টু-জুম গেস্টার্স ব্যবহার করে ঝাপটান করুন</string>
+    <string name="header_creator_light_theme">লাইট থিম হেডার</string>
+    <string name="header_creator_dark_theme">ডার্ক থিম হেডার</string>
+    <string name="header_creator_select_light">লাইট থিম ছবি নির্বাচন করুন</string>
+    <string name="header_creator_change_light">লাইট থিম ছবি পরিবর্তন করুন</string>
+    <string name="header_creator_select_dark">ডার্ক থিম ছবি নির্বাচন করুন</string>
+    <string name="header_creator_change_dark">ডার্ক থিম ছবি পরিবর্তন করুন</string>
+    <string name="header_creator_no_image">কোন ছবি নির্বাচন করা হয়নি</string>
+    <string name="header_creator_success">হেডার সফলভাবে তৈরি হয়েছে</string>
+    <string name="header_creator_failed">হেডার তৈরি করতে ব্যর্থ হয়েছে</string>
+    <string name="header_creator_folder_explanation">জেনারেটেড হেডার ফাইলস থাকা \'morphe_branding/morphe_header\' ফোল্ডারটি কোথায় তৈরি করবেন তা নির্বাচন করুন</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">আপন কি এই অ্যাপটি মুছে ফেলতে চানেন? </string>
     <string name="home_app_info_saved_app_delete_confirmation">আপনি কি এই সংরক্ষিত অ্যাপটি মুছে ফেলতে চানেন? </string>

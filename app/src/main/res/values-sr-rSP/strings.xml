@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Настави са печевима</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_enable_all">Омогући све</string>
-    <string name="expert_mode_has_options">Подешавања</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
     <string name="expert_mode_no_patches">Нema печева доступно</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Више извора пакета изабрано</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Изабрали сте пакете са више извора пакета. То може да изазове проблеме са компатибилношћу или неочекивано понашање.
+
+Да ли сте сигурни да желите да наставите?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Неподржана верзија</string>
     <string name="home_dialog_unsupported_version_dialog_description">Овај APK није препоручена верзија апликације. Настављање може резултирати нефункционалном апликацијом.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Унесите број</string>
     <string name="patch_option_enter_decimal">Унесите децимално</string>
     <string name="patch_option_pick_folder">Изаберите фасциклу</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Креирај адаптивни икону</string>
+    <string name="adaptive_icon_create">Креирај икону</string>
+    <string name="adaptive_icon_instructions">Изаберите предњи слику, изаберите боју позадине и прилагодите преглед са гестовима за увећање/умањење</string>
+    <string name="adaptive_icon_preview">Преглед</string>
+    <string name="adaptive_icon_select_foreground">Одаберите слику за предњи план</string>
+    <string name="adaptive_icon_change_foreground">Промените слику за предњи план</string>
+    <string name="adaptive_icon_background_color">Боја позадине</string>
+    <string name="adaptive_icon_reset_transform">Ресетујте положај и скала</string>
+    <string name="adaptive_icon_safe_zone_inner">Зона безбедности (увек видљива)</string>
+    <string name="adaptive_icon_safe_zone_outer">Маска зона (може бити одсечена)</string>
+    <string name="adaptive_icon_created_success">Адаптивни иконика успјешно створен</string>
+    <string name="adaptive_icon_creation_failed">Неуспјех у креирању адаптивног иконика</string>
+    <string name="adaptive_icon_create_new">Креирајте нов иконик</string>
+    <string name="adaptive_icon_folder_explanation">Одаберите гдје креирати \'morphe_branding/morphe_icons\' фасциклу са генерисаним иконика фајловима</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Креирајте обични заглавље</string>
+    <string name="header_creator_create">Креирајте заглавље</string>
+    <string name="header_creator_create_new">Креирајте ново заглавље</string>
+    <string name="header_creator_instructions">Одаберите слике за светле и тамне теме, затим прилагођавајте их жестикулирањем \'притисак за увећање\'</string>
+    <string name="header_creator_light_theme">Заглавље светле теме</string>
+    <string name="header_creator_dark_theme">Заглавље тамне теме</string>
+    <string name="header_creator_select_light">Одаберите слику за светле теме</string>
+    <string name="header_creator_change_light">Промените слику за светле теме</string>
+    <string name="header_creator_select_dark">Одаберите слику за тамне теме</string>
+    <string name="header_creator_change_dark">Промените слику за тамне теме</string>
+    <string name="header_creator_no_image">Није одабрана слика</string>
+    <string name="header_creator_success">Заглавље успјешно креирано</string>
+    <string name="header_creator_failed">Неуспјех у креирању заглавља</string>
+    <string name="header_creator_folder_explanation">Одаберите гдје креирати \'morphe_branding/morphe_header\' фасциклу са генерисаним заглавље фајловима</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Да ли сте сигурни да желите да уклоните ову апликацију?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Да ли сте сигурни да желите да обришете сачувану апликацију?</string>
