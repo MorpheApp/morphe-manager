@@ -3,9 +3,7 @@ package app.revanced.manager.ui.screen.home
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Engineering
@@ -18,18 +16,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
@@ -69,9 +61,9 @@ fun HomeBottomActionBar(
             // Right: Settings button with expert mode indicator
             BottomActionButton(
                 onClick = onSettingsClick,
-                icon = Icons.Outlined.Settings,
+                icon = if (isExpertModeEnabled) Icons.Outlined.Engineering else Icons.Outlined.Settings,
                 text = stringResource(R.string.settings),
-                showExpertBadge = isExpertModeEnabled,
+                isExpertMode = isExpertModeEnabled,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -92,19 +84,19 @@ fun BottomActionButton(
     contentColor: Color? = null,
     enabled: Boolean = true,
     showProgress: Boolean = false,
-    showExpertBadge: Boolean = false
+    isExpertMode: Boolean = false
 ) {
     val shape = RoundedCornerShape(16.dp)
     val view = LocalView.current
 
-    // Use expert mode colors if badge is shown
-    val finalContainerColor = containerColor ?: if (showExpertBadge) {
+    // Use expert mode colors if enabled
+    val finalContainerColor = containerColor ?: if (isExpertMode) {
         MaterialTheme.colorScheme.tertiaryContainer
     } else {
         MaterialTheme.colorScheme.primaryContainer
     }
 
-    val finalContentColor = contentColor ?: if (showExpertBadge) {
+    val finalContentColor = contentColor ?: if (isExpertMode) {
         MaterialTheme.colorScheme.onTertiaryContainer
     } else {
         MaterialTheme.colorScheme.onPrimaryContainer
@@ -113,7 +105,7 @@ fun BottomActionButton(
     // Build content description for accessibility
     val contentDesc = buildString {
         text?.let { append(it) }
-        if (showExpertBadge) {
+        if (isExpertMode) {
             append(", ")
             append(stringResource(R.string.settings_advanced_expert_mode))
         }
@@ -123,81 +115,56 @@ fun BottomActionButton(
         }
     }
 
-    Box(modifier = modifier) {
-        Surface(
-            onClick = {
-                if (enabled) {
-                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-                    onClick()
+    Surface(
+        onClick = {
+            if (enabled) {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                onClick()
+            }
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .semantics {
+                role = Role.Button
+                this.contentDescription = contentDesc
+                if (showProgress) {
+                    liveRegion = LiveRegionMode.Polite
                 }
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .semantics {
-                    role = Role.Button
-                    this.contentDescription = contentDesc
-                    if (showProgress) {
-                        liveRegion = LiveRegionMode.Polite
-                    }
-                },
-            shape = shape,
-            color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
-            shadowElevation = if (enabled) 4.dp else 0.dp,
-            border = BorderStroke(
-                width = 1.dp,
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        finalContentColor.copy(alpha = if (enabled) 0.2f else 0.1f),
-                        finalContentColor.copy(alpha = if (enabled) 0.1f else 0.05f)
-                    )
+        shape = shape,
+        color = finalContainerColor.copy(alpha = if (enabled) 1f else 0.5f),
+        shadowElevation = if (enabled) 4.dp else 0.dp,
+        border = BorderStroke(
+            width = 1.dp,
+            brush = Brush.linearGradient(
+                colors = listOf(
+                    finalContentColor.copy(alpha = if (enabled) 0.2f else 0.1f),
+                    finalContentColor.copy(alpha = if (enabled) 0.1f else 0.05f)
                 )
-            ),
-            enabled = enabled
+            )
+        ),
+        enabled = enabled
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 12.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (showProgress) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp),
-                        color = finalContentColor,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
-        }
-
-        // Expert mode indicator badge
-        if (showExpertBadge) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 6.dp, end = 6.dp)
-                    .size(18.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.tertiary)
-                    .semantics(mergeDescendants = true) {
-                        // Badge is decorative, already announced in button description
-                    },
-                contentAlignment = Alignment.Center
-            ) {
+            if (showProgress) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    color = finalContentColor,
+                    strokeWidth = 2.dp
+                )
+            } else {
                 Icon(
-                    imageVector = Icons.Outlined.Engineering,
+                    imageVector = icon,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.size(12.dp)
+                    tint = finalContentColor.copy(alpha = if (enabled) 1f else 0.5f),
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
