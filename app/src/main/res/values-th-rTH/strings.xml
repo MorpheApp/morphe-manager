@@ -2,20 +2,20 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">แอปอื่น ๆ</string>
-    <string name="home_not_patched_yet">ยังไม่ได้ปรับปรุง</string>
-    <string name="home_no_patches_available">ไม่มีแหล่งข้อมูลเสริมให้ใช้งาน</string>
+    <string name="home_not_patched_yet">ยังไม่ได้รับการแพทช์</string>
+    <string name="home_no_patches_available">ไม่มีแพตซ์รองรับ</string>
     <string name="home_default_source_disabled">Morphe แหล่งข้อมูลป้ายกำกับถูกปิดใช้งาน โปรดเปิดใช้งานในแผ่นแหล่งข้อมูลป้ายกำกับ หรือใช้โหมดผู้เชี่ยวชาญ</string>
-    <string name="android_11_bug_dialog_title">ข้อผิดพลาด Android 11</string>
-    <string name="android_11_bug_dialog_description">ต้องได้รับอนุญาตการติดตั้งแอปล่วงหน้าเพื่อหลีกเลี่ยงข้อผิดพลาดในระบบ Android 11 ซึ่งจะส่งผลเสียต่อประสบการณ์ผู้ใช้</string>
+    <string name="android_11_bug_dialog_title">บัก Android 11</string>
+    <string name="android_11_bug_dialog_description">ต้องอนุญาตเปิดสิทธิเข้าถึงการติดตั้งแอปพลิเคชันก่อน เพื่อหลีกเลี่ยงปัญหาจากระบบปฏิบัติการ Android 11 ที่มีผลกระทบต่อการใช้งานแอปพลิเคชันนี้</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">มีอัพเดทใหม่ให้ใช้งาน</string>
+    <string name="home_update_available">มีอัพเดทแอปพลิเคชันใหม่ให้ใช้งานแล้ว</string>
     <string name="home_update_available_subtitle">เวอร์ชันใหม่พร้อมถูกติดตั้งแล้ว</string>
-    <string name="home_update_error">การอัปเดตล้มเหลว</string>
+    <string name="home_update_error">อัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองอีกครั้ง</string>
-    <string name="home_updating_sources">กำลังอัพเดทแหล่งข้อมูล…</string>
+    <string name="home_updating_sources">กำลังอัพเดทข้อมูล…</string>
     <string name="home_update_progress">%1$d/%2$d แหล่งข้อมูลที่ถูกดำเนินการแล้ว</string>
     <string name="home_update_success">การอัพเดทแหล่งข้อมูลเสร็จสมบูรณ์แล้ว</string>
-    <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณอยู่ในเวอร์ชันล่าสุดแล้ว</string>
+    <string name="home_update_success_subtitle">แหล่งข้อมูลของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งข้อมูล กรุณารอสักครู่…</string>
     <string name="home_please_wait">โปรดรอสักครู่…</string>
     <!-- Home Screen - Home Greetings -->
@@ -23,62 +23,62 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">พร้อมหรือยังที่จะทำให้แอปกลายเป็นตำนานอีกครั้ง?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">คาดเข็มขัดนะ เวลาเพิ่มแพ็ตช์แล้ว</string>
+    <string name="home_greeting_3">รัดเข็มขัดซ่ะ ได้เวลาแพตซ์แอปพลิเคชันแล้ว</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">อีกวันหนึ่งผ่านไป อีกผลงานระดับมาสเตอร์กับการบล็อกโฆษณา</string>
+    <string name="home_greeting_4"> ก็แค่วันนึง กับผลงานการบล็อกโฆษณาชิ้นโบว์แดง</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">อยากดูโฆษณาไหม? ผมไม่เอาล่ะหนึ่ง</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">มาทำให้แอปพลิเคชันของคุณมีพฤติกรรมที่ดีขึ้นกันเถอะ</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">พยากรณ์วันนี้: การแพตซ์แอปพลิเคชันมีโอกาสทั้งหมด 100%</string>
+    <string name="home_greeting_7">พยากรณ์วันนี้: การแพตซ์แอปพลิเคชันสำเร็จ 100%</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">พร้อมที่จะเปลี่ยนสิ่งที่ไม่น่าประทับใจให้กลายเป็นสุดยอดไหม?</string>
+    <string name="home_greeting_8">พร้อมไหมที่จะเปลี่ยนแอปพลิเคชันดังเดิมที่แสนน่าเบื่อให้สุดยอดมากขึ้น</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">ช่วยแอปพลิเคชันให้รอดตัวตั้งแต่วันนี้</string>
+    <string name="home_greeting_9">ช่วยแอปพลิเคชันให้ดีขึ้นตั้งแต่วันนี้</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">ขับเคลื่อนด้วยคาเฟอีนและแพทช์ที่ดี</string>
+    <string name="home_greeting_10">สนับสนุนโดยกาแฟหนึ่งแก้วกับแพตซ์ที่มีคุณภาพ</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">ดูแลแหล่งข้อมูล</string>
+    <string name="sources_management_title">จัดการแหล่งข้อมูล</string>
     <string name="sources_management_subtitle">%d แหล่งข้อมูลถูกติดตั้งแล้ว</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_management_date_added">เพิ่มเข้ามาแล้ว</string>
-    <string name="sources_management_date_updated">อัปเด็ดท์แล้ว</string>
+    <string name="sources_management_date_updated">อัปเดตแล้ว</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">ชื่อแสดง</string>
-    <string name="sources_dialog_rename">เปลี่ยนชื่อของแหล่งข้อมูล</string>
+    <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
+    <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
     <string name="sources_dialog_duplicate_name_error">แหล่งข้อมูลที่มีชื่อนี้อยู่แล้ว</string>
     <string name="sources_dialog_missing_error">ไม่สามารถอัปเด็ดท์แหล่งข้อมูลนี้ได้</string>
     <string name="sources_dialog_disabled_toast">ปิดบังออฟฟ  %d แหล่งข้อมูล</string>
-    <string name="sources_dialog_enabled_toast">เปิดบังออฟฟ  %d แหล่งข้อมูล</string>
+    <string name="sources_dialog_enabled_toast">เปิด  %d  แหล่งข้อมูล</string>
     <string name="sources_dialog_view_any_version">เวอร์ชันใด ๆ</string>
     <string name="sources_dialog_view_any_package">แพ็คเกจใด ๆ</string>
     <string name="sources_dialog_add_source">เพิ่มแหล่งข้อมูล</string>
-    <string name="sources_dialog_delete_confirm_message">ลบข้อมูลว่า %s ? นี้ไม่สามารถยกเลิกได้</string>
+    <string name="sources_dialog_delete_confirm_message">ลบแหล่งข้อมูล %s ? นี้ ขั้นตอนนี้ไม่สามารถยกเลิกได้</string>
     <string name="sources_dialog_remote">รีโมต</string>
     <string name="sources_dialog_remote_url">URL แหล่งข้อมูล</string>
-    <string name="sources_dialog_remote_description">ป้อนให้ระบุระบุที่อยู่ของแหล่งข้อมูลรีโมต</string>
-    <string name="sources_dialog_local">ท้อง</string>
+    <string name="sources_dialog_remote_description">กรอกลิงค์ JSON endpoint URL สำหรับดึงแหล่งข้อมูลภายนอก</string>
+    <string name="sources_dialog_local">อุปกรณ์</string>
     <string name="sources_dialog_local_file">เลือกไฟล์แหล่งข้อมูล</string>
-    <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp แหล่งข้อมูลจากเก็บเก็บ</string>
+    <string name="sources_dialog_local_file_description">เลือกไฟล์ .mpp แหล่งข้อมูลจากที่เก็บข้อมูลภายใน</string>
     <string name="sources_dialog_local_change_file">เปลี่ยนไฟล์</string>
-    <string name="sources_dialog_preinstalled">มีตั้งต้น</string>
-    <string name="sources_update_success">อัปเด็ดท์สำเร็จ</string>
-    <string name="sources_update_unavailable">ไม่มีการอัปเด็ดท์ที่สามารถใช้ได้</string>
+    <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
+    <string name="sources_update_success">อัปเดตเสร็จสมบูรณ์</string>
+    <string name="sources_update_unavailable">ยังไม่มีการอัปเดต</string>
     <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">คุณมี APK ต้นฉบับที่ยังไม่ได้แพตช์หรือไม่?</string>
-    <string name="home_apk_availability_dialog_description_simple">เพื่อแก้ไข %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้แก้ไข)</string>
+    <string name="home_apk_availability_dialog_title">มีไฟล์ APK ดังเดิมที่ไม่ได้รับการแพตซ์ไหม</string>
+    <string name="home_apk_availability_dialog_description_simple">เพื่อแพตซ์ %1$s คุณจำเป็นต้องใช้เวอร์ชัน %2$s (ที่ยังไม่ได้ด้รับการแพตซ์)</string>
     <string name="home_apk_availability_yes">ใช่ ฉันมีมัน</string>
     <string name="home_apk_availability_no">ไม่ ช่วยฉันหา</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">ดาวน์โหลด APK ต้นฉบับ</string>
+    <string name="home_download_instructions_title">ดาวน์โหลด APK ดังเดิม</string>
     <string name="home_download_instructions_steps_title">คำแนะนำ:</string>
     <string name="home_download_instructions_step1">กดปุ่ม \'%1$s\' ด้านล่าง</string>
-    <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกด</string>
+    <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
     <string name="home_download_instructions_download_button_toast">กดดาวน์โหลดบนเว็บไซต์ อย่ากดที่นี่ 😊</string>
-    <string name="home_download_instructions_step3">รอให้การดาวน์โหลดเสร็จสิ้น และ &lt;b&gt;อย่าติดตั้ง&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3">รอการดาวน์โหลดให้เรียบร้อย และ &lt;b&gt;อย่าไปติดตั้ง &lt;/b&gt; ไปก่อน</string>
     <string name="home_download_instructions_step3_mount">รอให้การดาวน์โหลดเสร็จสิ้น แล้ว &lt;b&gt;ติดตั้ง APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">หลังจากดาวน์โหลดเสร็จแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
     <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับแล้ว ให้เปิดแอปนี้อีกครั้ง</string>
@@ -86,29 +86,32 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">เลือก APK ที่คุณดาวน์โหลด</string>
     <string name="home_file_picker_prompt_description">ตอนนี้ ให้เลือกไฟล์ APK %1$s ที่คุณเพิ่งดาวน์โหลด</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">เปิดไฟล์ APK ที่ฉันดาวน์โหลดแล้ว</string>
+    <string name="home_file_picker_prompt_open_downloaded_apk">เปิดไฟล์ APK ที่ดาวน์โหลดแล้ว</string>
     <string name="home_file_picker_prompt_open_apk">เปิดไฟล์ APK</string>
     <string name="home_recommended_version">เวอร์ชันแนะนำ</string>
     <string name="home_selected_version">เลือกเวอร์ชัน</string>
     <string name="home_select_apk_title">เลือก APK</string>
-    <string name="home_select_any_apk_description">กดปุ่มด้านล่างเพื่อเลือกไฟล์ APK ของแอปใด ๆ เพื่อการปรับแต่ง</string>
+    <string name="home_select_any_apk_description">กดปุ่มด้านล่างเพื่อเลือกไฟล์ APK ของแอปพลิเคชันใด ๆ เพื่อการแพตซ์</string>
     <string name="home_invalid_apk">ไฟล์ APK ไม่ถูกต้อง</string>
     <string name="home_no_patches_for_app">ไม่มีแหล่งข้อมูลเสริมให้กับแอปนี้</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">โหมดผู้เชี่ยวชาญ</string>
-    <string name="expert_mode_subtitle_extended">%1$d จาก %2$d แหล่งข้อมูลเสริมที่ถูกเลือกแล้ว</string>
+    <string name="expert_mode_subtitle_extended">%1$d จาก %2$d แพตซ์ที่ถูกเลือกแล้ว</string>
     <string name="expert_mode_search">ค้นหาแหล่งข้อมูลเสริม</string>
-    <string name="expert_mode_proceed">ดำเนินการต่อไปยังการปรับแต่ง</string>
+    <string name="expert_mode_proceed">ดำเนินการต่อไปยังการแพตซ์</string>
     <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all">เปิดการใช้งานทั้งหมด</string>
-    <string name="expert_mode_has_options">สามารถปรับแต่งได้</string>
-    <string name="expert_mode_no_results">ไม่พบแหล่งข้อมูลเสริม</string>
-    <string name="expert_mode_no_patches">ไม่มีแหล่งข้อมูลเสริมให้ใช้งาน</string>
+    <string name="expert_mode_no_results">ไม่พบแพตซ์</string>
+    <string name="expert_mode_no_patches">ไม่มีแพตซ์ให้ใช้งาน</string>
+    <string name="expert_mode_multiple_bundles_warning_title">เลือกแหล่งที่มาแปลงหลายรายการ</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"คุณเลือกแพตซ์จากหลายที่มารวมกันซึ่งอาจจะมีผลกระทบต่อความเข้ากันของแอปพลิเคชันหรือพบปัญหาแปลก
+
+คุณแน่ใจที่จะดำเนินต่อไปหรือไม่?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_dialog_unsupported_version_dialog_title">เวอร์ชันนี้ไม่ใช่เวอร์ชันแอปของแอป</string>
-    <string name="home_dialog_unsupported_version_dialog_description">APK นี้ไม่ใช่เวอร์ชันแอปที่แนะ่ให้</string>
+    <string name="home_dialog_unsupported_version_dialog_title">เวอร์ชันนี้ไม่รองรับ</string>
+    <string name="home_dialog_unsupported_version_dialog_description">ไฟล์ APK ไม่เป็นเวอร์ชันที่แนะนำ หากดำเนินต่ออาจจะไม่สามารถใช้งาน</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ดำเนินต่อไป</string>
-    <string name="home_dialog_wrong_package_title">แพคเกจที่เลือกไม่ถูกต้อง</string>
+    <string name="home_dialog_wrong_package_title">แพ็กเกจที่เลือกไม่ถูกต้อง</string>
     <string name="home_dialog_wrong_package_description">แอปที่เลือกไม่ใช่แอปที่คุณตั้งใจให้</string>
     <string name="home_dialog_expected_package">แพคเกจที่คาดหวัง</string>
     <string name="home_dialog_selected_package">แพคเกจที่เลือก</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">ป้อนตัวเลข</string>
     <string name="patch_option_enter_decimal">ป้อนตัวเลขทศนิยม</string>
     <string name="patch_option_pick_folder">เลือกโฟลเดอร์</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">สร้างไอคอนดัดแปลง</string>
+    <string name="adaptive_icon_create">สร้างไอคอน</string>
+    <string name="adaptive_icon_instructions">เลือกภาพพื้นหลัง, เลือกสีพื้นหลัง, และปรับปรุงตัวอย่างด้วยการยืดหดด้วยจิ๊มมูฟ</string>
+    <string name="adaptive_icon_preview">ตัวอย่าง</string>
+    <string name="adaptive_icon_select_foreground">เลือกภาพพื้นหลัง</string>
+    <string name="adaptive_icon_change_foreground">เปลี่ยนภาพพื้นหลัง</string>
+    <string name="adaptive_icon_background_color">สีพื้นหลัง</string>
+    <string name="adaptive_icon_reset_transform">รีเซ็ตตำแหน่งและขนาด</string>
+    <string name="adaptive_icon_safe_zone_inner">เขตปลอดภัย (ปรากฏเสมอ)</string>
+    <string name="adaptive_icon_safe_zone_outer">เขตมาสก์ (อาจถูกตัด)</string>
+    <string name="adaptive_icon_created_success">สร้างภาพประจำกิจการสำเร็จ</string>
+    <string name="adaptive_icon_creation_failed">ล้มเหลวในการสร้างภาพประจำกิจการ</string>
+    <string name="adaptive_icon_create_new">สร้างไอคอนปรับแต่งใหม่</string>
+    <string name="adaptive_icon_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_icons\' ที่มีไฟล์ภาพประจำกิจการ</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">สร้างหัวข้อ</string>
+    <string name="header_creator_create">สร้าง Header ใหม่</string>
+    <string name="header_creator_create_new">เลือกภาพสำหรับธีมแสงสว่างและมืด, แล้วปรับปรุงด้วยการชูชนิด</string>
+    <string name="header_creator_instructions">หัวข้อธีมแสงสว่าง</string>
+    <string name="header_creator_light_theme">หัวข้อธีมมืด</string>
+    <string name="header_creator_dark_theme">เลือกภาพธีมแสงสว่าง</string>
+    <string name="header_creator_select_light">เปลี่ยนภาพธีมแสงสว่าง</string>
+    <string name="header_creator_change_light">เลือกภาพธีมมืด</string>
+    <string name="header_creator_select_dark">เปลี่ยนภาพธีมมืด</string>
+    <string name="header_creator_change_dark">ไม่มีภาพที่ถูกเลือก</string>
+    <string name="header_creator_no_image">ส่งคำขอของคุณสำเร็จ</string>
+    <string name="header_creator_success">ล้มเหลวในการสร้างหัวข้อ</string>
+    <string name="header_creator_failed">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_header\' ที่มีไฟล์หัวข้อ</string>
+    <string name="header_creator_folder_explanation">เลือกที่จะสร้างโฟลเดอร์ \'morphe_branding/morphe_header\' ที่มีไฟล์หัวข้อที่สร้างขึ้น</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">คุณแน่ใจหรือไม่ว่าต้องการลบแอปนี้?</string>
     <string name="home_app_info_saved_app_delete_confirmation">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่บันทึกไว้?</string>

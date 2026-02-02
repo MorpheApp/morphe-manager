@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Weiter zum Patchen</string>
     <string name="expert_mode_disable_all">Deaktiviere alle</string>
     <string name="expert_mode_enable_all">Aktiviere alle</string>
-    <string name="expert_mode_has_options">Konfigurierbar</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
     <string name="expert_mode_no_patches">Keine Patches verfügbar</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Mehrere Patchquellen ausgewählt</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Sie haben Patches von mehreren Quellen ausgewählt. Dies kann Kompatibilitätsprobleme oder unerwartetes Verhalten verursachen.
+
+Möchten Sie trotzdem fortfahren?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Diese APK ist keine empfohlene App-Version. Fortfahren kann zu einer nicht funktionierenden App führen.</string>
     <string name="home_dialog_unsupported_version_dialog_description">Diese APK ist keine empfohlene App-Version. Das Fortfahren kann zu einer nicht funktionierenden App führen.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Zahl eingeben</string>
     <string name="patch_option_enter_decimal">Dezimalzahl eingeben</string>
     <string name="patch_option_pick_folder">Ordner auswählen</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Adaptives Icon erstellen</string>
+    <string name="adaptive_icon_create">Icon erstellen</string>
+    <string name="adaptive_icon_instructions">W√§hlen Sie ein Vordergrundbild, w√§hlen Sie die Hintergrundfarbe und passen Sie die Vorschau mit Pinch-to-Zoom-Gesten an.</string>
+    <string name="adaptive_icon_preview">Vorschau</string>
+    <string name="adaptive_icon_select_foreground">Hintergrundbild auswählen</string>
+    <string name="adaptive_icon_change_foreground">Hintergrundbild ändern</string>
+    <string name="adaptive_icon_background_color">Hintergrundfarbe</string>
+    <string name="adaptive_icon_reset_transform">Position und Skalierung zurücksetzen</string>
+    <string name="adaptive_icon_safe_zone_inner">Sicherheitszone (immer sichtbar)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskenzone (kann abgeschnitten werden)</string>
+    <string name="adaptive_icon_created_success">Adaptives Icon erfolgreich erstellt</string>
+    <string name="adaptive_icon_creation_failed">Fehler beim Erstellen des adaptiven Icons</string>
+    <string name="adaptive_icon_create_new">Neues Icon erstellen</string>
+    <string name="adaptive_icon_folder_explanation">Wählen Sie, wo der Ordner \'morphe_branding/morphe_icons\' mit den generierten Icon-Dateien erstellt werden soll</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Benutzerdefinierten Header erstellen</string>
+    <string name="header_creator_create">Header erstellen</string>
+    <string name="header_creator_create_new">Neuen Header erstellen</string>
+    <string name="header_creator_instructions">Wählen Sie Bilder für helle und dunkle Themen aus und passen Sie sie mit Pinch-to-Zoom-Gesten an</string>
+    <string name="header_creator_light_theme">Header für helles Thema</string>
+    <string name="header_creator_dark_theme">Header für dunkles Thema</string>
+    <string name="header_creator_select_light">Bild für helles Thema auswählen</string>
+    <string name="header_creator_change_light">Bild für helles Thema ändern</string>
+    <string name="header_creator_select_dark">Bild für dunkles Thema auswählen</string>
+    <string name="header_creator_change_dark">Bild für dunkles Thema ändern</string>
+    <string name="header_creator_no_image">Kein Bild ausgewählt</string>
+    <string name="header_creator_success">Header erfolgreich erstellt</string>
+    <string name="header_creator_failed">Fehler beim Erstellen des Headers</string>
+    <string name="header_creator_folder_explanation">Wählen Sie, wo der Ordner \'morphe_branding/morphe_header\' mit den generierten Header-Dateien erstellt werden soll</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sind Sie sicher, dass Sie diese App deinstallieren möchten?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Sind Sie sicher, dass Sie diese gespeicherte App löschen möchten?</string>

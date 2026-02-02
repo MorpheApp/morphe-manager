@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Pokračovat v záplatování</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_enable_all">Zapnout vše</string>
-    <string name="expert_mode_has_options">Konfigurovatelný</string>
     <string name="expert_mode_no_results">Nebyly nalezeny žádné záplaty</string>
     <string name="expert_mode_no_patches">Nejsou dostupné žádné záplaty</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Vybráno více zdrojů patches</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Vybrali jste patches z více zdrojů patches. To může způsobit kompatibility problémy nebo neočekávané chování.
+
+Opravdu chcete pokračovat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Nepodporovaná verze</string>
     <string name="home_dialog_unsupported_version_dialog_description">Tato APK není doporučenou verzí aplikace. Pokračování může vést k nefunkčnosti aplikace.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Zadejte číslo</string>
     <string name="patch_option_enter_decimal">Zadejte desetinné číslo</string>
     <string name="patch_option_pick_folder">Vybrat složku</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Vytvořit adaptivní ikonu</string>
+    <string name="adaptive_icon_create">Vytvořit ikonu</string>
+    <string name="adaptive_icon_instructions">Vyberte přední obrázek, vyberte barvu pozadí a přizpůsobte náhled s gesty pinch-to-zoom</string>
+    <string name="adaptive_icon_preview">Náhled</string>
+    <string name="adaptive_icon_select_foreground">Vyberte obrázek pro přední plochu</string>
+    <string name="adaptive_icon_change_foreground">Změnit obrázek pro přední plochu</string>
+    <string name="adaptive_icon_background_color">Barva pozadí</string>
+    <string name="adaptive_icon_reset_transform">Resetovat pozici a měřítko</string>
+    <string name="adaptive_icon_safe_zone_inner">Zóna bezpečí (vždy viditelná)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskovací zóna (může být skryta)</string>
+    <string name="adaptive_icon_created_success">Adaptivní ikona vytvořena úspěšně</string>
+    <string name="adaptive_icon_creation_failed">Nepodařilo se vytvořit adaptivní ikonu</string>
+    <string name="adaptive_icon_create_new">Vytvořit novou ikonu</string>
+    <string name="adaptive_icon_folder_explanation">Vyberte místo, kde se bude vytvářet složka \'morphe_branding/morphe_icons\' s generovanými ikonami</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Vytvořit vlastní záhlaví</string>
+    <string name="header_creator_create">Vytvořit záhlaví</string>
+    <string name="header_creator_create_new">Vytvořit nové záhlaví</string>
+    <string name="header_creator_instructions">Vyberte obrázky pro světlé a tmavé téma, potom přizpůsobte gesty pinch-to-zoom</string>
+    <string name="header_creator_light_theme">Záhlaví pro světlé téma</string>
+    <string name="header_creator_dark_theme">Záhlaví pro tmavé téma</string>
+    <string name="header_creator_select_light">Vybrat obrázek pro světlé téma</string>
+    <string name="header_creator_change_light">Změnit obrázek pro světlé téma</string>
+    <string name="header_creator_select_dark">Vybrat obrázek pro tmavé téma</string>
+    <string name="header_creator_change_dark">Změnit obrázek pro tmavé téma</string>
+    <string name="header_creator_no_image">Není vybrán žádný obrázek</string>
+    <string name="header_creator_success">Záhlaví vytvořeno úspěšně</string>
+    <string name="header_creator_failed">Nepodařilo se vytvořit záhlaví</string>
+    <string name="header_creator_folder_explanation">Vyberte místo, kde se bude vytvářet složka \'morphe_branding/morphe_header\' s generovanými záhlavími</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Opravdu chcete odinstalovat tuto aplikaci?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Opravdu chcete smazat tuto uloženou aplikaci?</string>

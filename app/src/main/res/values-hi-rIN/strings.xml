@@ -99,9 +99,12 @@
     <string name="expert_mode_proceed">पैचिंग के लिए आगे जाएं</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
-    <string name="expert_mode_has_options">कस्टमाइज़ेशन ऑप्शंस उपलब्ध हैं</string>
     <string name="expert_mode_no_results">कोई पैच नहीं मिला</string>
     <string name="expert_mode_no_patches">कोई पैच उपलब्ध नहीं है</string>
+    <string name="expert_mode_multiple_bundles_warning_title">बहुत स्रोतों से पट्च चुने गए हैं</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"आपने विभिन्न पट्च स्रोतों से पट्च चुने हैं। यह संयोजन समस्याएं या अप्रत्याशित व्यवहार का कारण हो सकता है।
+
+क्या आप निश्चित हैं कि आप आगे बढ़ना चाहते हैं?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
     <string name="home_dialog_unsupported_version_dialog_description">इस एपीएम को अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्लिकेशन संस्करण हो सकता है।</string>
@@ -118,6 +121,36 @@
     <string name="patch_option_enter_number">नंबर दर्ज करें</string>
     <string name="patch_option_enter_decimal">दशमलव दर्ज करें</string>
     <string name="patch_option_pick_folder">फ़ोल्डर चुनें</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">अडैप्टिव आइकॉन बनाएं</string>
+    <string name="adaptive_icon_create">आइकॉन बनाएं</string>
+    <string name="adaptive_icon_instructions">फोरग्राउंड छवि चुनें, बैकग्राउंड रंग चुनें और पिन्च-टू-ज़ूम गेस्टर से प्रीव्यू को अनुकूलित करें</string>
+    <string name="adaptive_icon_preview">पूर्वावलोकन</string>
+    <string name="adaptive_icon_select_foreground">फोरग्राउंड छवि का चयन करें</string>
+    <string name="adaptive_icon_change_foreground">फोरग्राउंड छवि को बदलें</string>
+    <string name="adaptive_icon_background_color">बैकग्राउंड रंग</string>
+    <string name="adaptive_icon_reset_transform">पोजीशन और स्केल को रीसेट करें</string>
+    <string name="adaptive_icon_safe_zone_inner">सेफ ज़ोन (हमेशा दृश्य)</string>
+    <string name="adaptive_icon_safe_zone_outer">मास्क ज़ोन (क्लिप हो सकता है)</string>
+    <string name="adaptive_icon_created_success">एडैप्टिव आइकॉन सफलतापूर्वक बनाया गया</string>
+    <string name="adaptive_icon_creation_failed">एडैप्टिव आइकॉन को बनाना विफल रहा</string>
+    <string name="adaptive_icon_create_new">नया आइकॉन बनाएं</string>
+    <string name="adaptive_icon_folder_explanation">जेनरेटेड आइकॉन फाइलों के साथ \'मorphe_branding/morphe_icons\' फोल्डर को कहाँ बनाएं</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">हेडर क्रिएटर</string>
+    <string name="header_creator_create">हेडर बनाएं</string>
+    <string name="header_creator_create_new">नया हेडर बनाएं</string>
+    <string name="header_creator_instructions">लाइट और डार्क थीम के लिए छवियां चुनें, फिर पिन्च-टू-ज़ूम गेस्टर से अदजस्ट करें</string>
+    <string name="header_creator_light_theme">लाइट थीम हेडर</string>
+    <string name="header_creator_dark_theme">डार्क थीम हेडर</string>
+    <string name="header_creator_select_light">लाइट थीम छवि का चयन करें</string>
+    <string name="header_creator_change_light">लाइट थीम छवि को बदलें</string>
+    <string name="header_creator_select_dark">डार्क थीम छवि का चयन करें</string>
+    <string name="header_creator_change_dark">डार्क थीम छवि को बदलें</string>
+    <string name="header_creator_no_image">कोई छवि चुनी गई नहीं</string>
+    <string name="header_creator_success">हेडर सफलतापूर्वक बनाया गया</string>
+    <string name="header_creator_failed">हेडर को बनाना विफल रहा</string>
+    <string name="header_creator_folder_explanation">जेनरेटेड हेडर फाइलों के साथ \'मorphe_branding/morphe_header\' फोल्डर को कहाँ बनाएं</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">क्या आप वाकई तौर पर इस ऐप को अनइंस्टॉल करना चाहते हैं?</string>
     <string name="home_app_info_saved_app_delete_confirmation">क्या आप वाकई तौर पर इस सहेज़ ऐप को हटाना चाहते हैं?</string>

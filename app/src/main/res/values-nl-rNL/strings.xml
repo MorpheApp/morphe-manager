@@ -87,7 +87,7 @@
     <string name="home_file_picker_prompt_title">Selecteer de APK die je hebt gedownload</string>
     <string name="home_file_picker_prompt_description">Selecteer nu het %1$s APK-bestand dat je zojuist hebt gedownload.</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Open APK-bestand dat ik gedownload heb</string>
-    <string name="home_file_picker_prompt_open_apk">Open APK-bestand</string>
+    <string name="home_file_picker_prompt_open_apk">APK-bestand openen</string>
     <string name="home_recommended_version">Aanbevolen versie</string>
     <string name="home_selected_version">Geselecteerde versie</string>
     <string name="home_select_apk_title">Selecteer APK</string>
@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Doorgaan met patchen</string>
     <string name="expert_mode_disable_all">Alles uitschakelen</string>
     <string name="expert_mode_enable_all">Alles inschakelen</string>
-    <string name="expert_mode_has_options">Aanpasbaar</string>
     <string name="expert_mode_no_results">Geen patches gevonden</string>
     <string name="expert_mode_no_patches">Geen patches beschikbaar</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Meerdere patch-bronnen geselecteerd</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"U heeft patches geselecteerd uit meerdere patch-bronnen. Dit kan compatibiliteitsproblemen of onverwachte gedragingen veroorzaken.
+
+Wilt u toch doorgaan?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Onondersteunde versie</string>
     <string name="home_dialog_unsupported_version_dialog_description">Deze APK is geen aanbevolen app-versie. Doorgaan kan leiden tot een niet-werkende app.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Getal invoeren</string>
     <string name="patch_option_enter_decimal">Decimaal invoeren</string>
     <string name="patch_option_pick_folder">Map selecteren</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Aanpassingsvriendelijk icoon maken</string>
+    <string name="adaptive_icon_create">Icoon maken</string>
+    <string name="adaptive_icon_instructions">Kies een voorgrondafbeelding, selecteer de achtergrondkleur en justeer de voorbeeldweergave met pinch-to-zoom-gesten</string>
+    <string name="adaptive_icon_preview">Voorbeeld</string>
+    <string name="adaptive_icon_select_foreground">Selecteer voorgrondafbeelding</string>
+    <string name="adaptive_icon_change_foreground">Verander voorgrondafbeelding</string>
+    <string name="adaptive_icon_background_color">Achtergrondkleur</string>
+    <string name="adaptive_icon_reset_transform">Reset positie en schaal</string>
+    <string name="adaptive_icon_safe_zone_inner">Veilige zone (altijd zichtbaar)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskerzone (mag worden geknipt)</string>
+    <string name="adaptive_icon_created_success">Adaptieve icoon succesvol gemaakt</string>
+    <string name="adaptive_icon_creation_failed">Mislukt om adaptieve icoon te maken</string>
+    <string name="adaptive_icon_create_new">Maak nieuwe icoon</string>
+    <string name="adaptive_icon_folder_explanation">Selecteer waar de map \'morphe_branding/morphe_icons\' met gegenereerde icoonbestanden gemaakt moet worden</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Maak aangepaste header</string>
+    <string name="header_creator_create">Maak header</string>
+    <string name="header_creator_create_new">Maak nieuwe header</string>
+    <string name="header_creator_instructions">Selecteer beelden voor lichte en donkere thema\'s, en justeer met pinch-to-zoom-gesten</string>
+    <string name="header_creator_light_theme">Lichte thema header</string>
+    <string name="header_creator_dark_theme">Donkere thema header</string>
+    <string name="header_creator_select_light">Selecteer lichte thema afbeelding</string>
+    <string name="header_creator_change_light">Verander lichte thema afbeelding</string>
+    <string name="header_creator_select_dark">Selecteer donkere thema afbeelding</string>
+    <string name="header_creator_change_dark">Verander donkere thema afbeelding</string>
+    <string name="header_creator_no_image">Geen afbeelding geselecteerd</string>
+    <string name="header_creator_success">Header succesvol gemaakt</string>
+    <string name="header_creator_failed">Mislukt om header te maken</string>
+    <string name="header_creator_folder_explanation">Selecteer waar de map \'morphe_branding/morphe_header\' met gegenereerde headerbestanden gemaakt moet worden</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Weet u zeker dat u deze app wilt verwijderen?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Weet u zeker dat u deze opgeslagen app wilt verwijderen?</string>
@@ -127,7 +160,7 @@
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Naamloos</string>
     <string name="home_app_info_patches_replace_fail">Kan patches niet importeren: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Originele APK niet gevonden. Kan deze app niet repatchen.</string>
+    <string name="home_app_info_repatch_no_original_apk">Originele APK niet gevonden. Kan deze app niet opnieuw patchen.</string>
     <string name="home_app_info_repatch_requires_original">Repatch vereist de originele APK-bestand</string>
     <string name="home_app_info_original_package_name">Originele pakketnaam</string>
     <string name="home_app_info_applied_patches">Toegepaste patches</string>
@@ -344,7 +377,7 @@ De afbeelddimensionen moeten als volgt zijn:
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Verberg Shorts-functies</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Verberg Shorts-appkortwel</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Shorts-appsnelkoppeling verbergen</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Verwijder Shorts uit het launcher-langwerpmenu</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Verberg Shorts-widget</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Verwijder Shorts-knop uit launcher-widget</string>
@@ -442,7 +475,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_system_original_apks_empty">Geen originele APK\'s opgeslagen</string>
     <string name="settings_system_original_apks_deleted">Originele APK succesvol verwijderd</string>
     <string name="settings_system_original_apks_delete_title">Verwijder originele APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Verwijder originele APK voor %s? U kunt deze app niet meer repatchen zonder een nieuw APK-bestand te versturen.</string>
+    <string name="settings_system_original_apks_delete_confirm">Originele APK voor %s verwijderen? Je kunt deze app niet meer opnieuw patchen zonder een nieuw APK-bestand aan te leveren.</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Over</string>
     <string name="settings_system_share_website">Deel website</string>
@@ -488,7 +521,7 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="continue_">Doorgaan</string>
     <string name="version">Versie</string>
     <string name="patch">Patchen</string>
-    <string name="repatch">Repatchen</string>
+    <string name="repatch">Opnieuw patchen</string>
     <string name="open">Openen</string>
     <string name="mount">Monteren</string>
     <string name="mounted">Gemonteerd</string>

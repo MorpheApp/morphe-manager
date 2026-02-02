@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Procedează la patchare</string>
     <string name="expert_mode_disable_all">Dezactivează toate</string>
     <string name="expert_mode_enable_all">Activează toate</string>
-    <string name="expert_mode_has_options">Configurabil</string>
     <string name="expert_mode_no_results">Nu au fost găsite patch-uri</string>
     <string name="expert_mode_no_patches">Nu există patch-uri disponibile</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Sursă de modificare multiplă selectată</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Ați selectat modificări din surse multiple. Acest lucru poate duce la probleme de compatibilitate sau comportament neașteptat.
+
+Sunteți sigur că doriți să continuați?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versiune neacceptată</string>
     <string name="home_dialog_unsupported_version_dialog_description">Acest APK nu este o versiune recomandată a aplicației. Continuarea poate resultă în o aplicație nefuncțională.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Introduceți numărul</string>
     <string name="patch_option_enter_decimal">Introduceți decimal</string>
     <string name="patch_option_pick_folder">Alege folder</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Creează icon adaptabil</string>
+    <string name="adaptive_icon_create">Creează icon</string>
+    <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează culoarea de fundal și ajustează previzualizarea cu gesturi de zoom cu degetul</string>
+    <string name="adaptive_icon_preview">Previzualizare</string>
+    <string name="adaptive_icon_select_foreground">Selectați imaginea de prim-plan</string>
+    <string name="adaptive_icon_change_foreground">Schimbați imaginea de prim-plan</string>
+    <string name="adaptive_icon_background_color">Culoare de fundal</string>
+    <string name="adaptive_icon_reset_transform">Reinitalizați poziția și scalarea</string>
+    <string name="adaptive_icon_safe_zone_inner">Zonă sigură (totdeauna vizibilă)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zonă mascată (poate fi tăiată)</string>
+    <string name="adaptive_icon_created_success">Icoana adaptivă creată cu succes</string>
+    <string name="adaptive_icon_creation_failed">Eroare la crearea icoanei adaptive</string>
+    <string name="adaptive_icon_create_new">Creați noua icoană</string>
+    <string name="adaptive_icon_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_icons\' cu fișierele icoanelor generate</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Creați antet personalizat</string>
+    <string name="header_creator_create">Creați antet</string>
+    <string name="header_creator_create_new">Creați noul antet</string>
+    <string name="header_creator_instructions">Alegeți imaginile pentru teme luminoase și întunecate, apoi ajustați cu gesturi de zoom cu pinț</string>
+    <string name="header_creator_light_theme">Antet temă luminoasă</string>
+    <string name="header_creator_dark_theme">Antet temă întunecată</string>
+    <string name="header_creator_select_light">Selectați imaginea pentru temă luminoasă</string>
+    <string name="header_creator_change_light">Schimbați imaginea pentru temă luminoasă</string>
+    <string name="header_creator_select_dark">Selectați imaginea pentru temă întunecată</string>
+    <string name="header_creator_change_dark">Schimbați imaginea pentru temă întunecată</string>
+    <string name="header_creator_no_image">Nicio imagine selectată</string>
+    <string name="header_creator_success">Antet creat cu succes</string>
+    <string name="header_creator_failed">Eroare la crearea antetului</string>
+    <string name="header_creator_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_header\' cu fișierele antetului generate</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sigur doriți să ștergeți această aplicație?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Sigur doriți să ștergeți această aplicație salvată?</string>

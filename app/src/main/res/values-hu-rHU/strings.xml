@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Folytatás a módosításhoz</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
-    <string name="expert_mode_has_options">Konfigurálható</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
     <string name="expert_mode_no_patches">Nincsenek elérhető módosítások</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Több pátchsforrás választva</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Több pátchsforrásból választott pátcheket. Ez kompatibilitási problémák vagy váratlan viselkedéshez vezethet.
+
+Biztosan folytatod?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Nem támogatott verzió</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ez az APK nem egy ajánlott alkalmazásverzió. A folytatás az alkalmazás nem megfelelő működését eredményezheti.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Szám megadása</string>
     <string name="patch_option_enter_decimal">Tizedes megadása</string>
     <string name="patch_option_pick_folder">Mappa kiválasztása</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Adaptív ikon létrehozása</string>
+    <string name="adaptive_icon_create">Ikon létrehozása</string>
+    <string name="adaptive_icon_instructions">Válasszon előtérképet, állítsa be a háttér színt, és állítsa be a előnézetet szögletes zomásztás segítségével</string>
+    <string name="adaptive_icon_preview">Előnézet</string>
+    <string name="adaptive_icon_select_foreground">Válasszon előtérképet</string>
+    <string name="adaptive_icon_change_foreground">Változtassa meg az előtérképet</string>
+    <string name="adaptive_icon_background_color">Háttérszín</string>
+    <string name="adaptive_icon_reset_transform">Állás és méret visszaállítása</string>
+    <string name="adaptive_icon_safe_zone_inner">Biztonságos zóna (mindig látható)</string>
+    <string name="adaptive_icon_safe_zone_outer">Mázkás zóna (lehet clippelt)</string>
+    <string name="adaptive_icon_created_success">Adaptív ikon létrehozva sikeresen</string>
+    <string name="adaptive_icon_creation_failed">Nem sikerült az adaptív ikon létrehozása</string>
+    <string name="adaptive_icon_create_new">Létrehoz egy új ikont</string>
+    <string name="adaptive_icon_folder_explanation">Válassza ki a \'morphe_branding/morphe_icons\' mappát a létrehozott ikonfájlok számára</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Létrehoz egy szokásos fejezetet</string>
+    <string name="header_creator_create">Létrehoz egy fejezetet</string>
+    <string name="header_creator_create_new">Létrehoz egy új fejezetet</string>
+    <string name="header_creator_instructions">Válasszon képeket a világos és sötét témákhoz, majd állítsa be pinch-to-zoom gesztusokkal</string>
+    <string name="header_creator_light_theme">Világos téma fejezet</string>
+    <string name="header_creator_dark_theme">Sötét téma fejezet</string>
+    <string name="header_creator_select_light">Válasszon világos téma képet</string>
+    <string name="header_creator_change_light">Változtassa meg a világos téma képét</string>
+    <string name="header_creator_select_dark">Válasszon sötét téma képet</string>
+    <string name="header_creator_change_dark">Változtassa meg a sötét téma képét</string>
+    <string name="header_creator_no_image">Nincsen kiválasztva kép</string>
+    <string name="header_creator_success">Fejezet létrehozva sikeresen</string>
+    <string name="header_creator_failed">Nem sikerült a fejezet létrehozása</string>
+    <string name="header_creator_folder_explanation">Válassza ki a \'morphe_branding/morphe_header\' mappát a létrehozott fejezetfájlok számára</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Biztosan el akarja távolítani ezt az alkalmazást?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Biztosan törli ezt a mentett alkalmazást?</string>

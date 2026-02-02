@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">進行修補</string>
     <string name="expert_mode_disable_all">停用所有</string>
     <string name="expert_mode_enable_all">啟用所有</string>
-    <string name="expert_mode_has_options">可自訂</string>
     <string name="expert_mode_no_results">找不到補丁</string>
     <string name="expert_mode_no_patches">沒有可用的補丁</string>
+    <string name="expert_mode_multiple_bundles_warning_title">已選擇多個補丁來源</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"您已選擇來自多個補丁來源的補丁。這可能會導致兼容性問題或意料之外的行為。
+
+您確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
     <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推薦的應用程式版本。繼續可能會導致無法使用的應用程式。</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">輸入數字</string>
     <string name="patch_option_enter_decimal">輸入小數</string>
     <string name="patch_option_pick_folder">選擇資料夾</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">建立自適應圖示</string>
+    <string name="adaptive_icon_create">建立圖示</string>
+    <string name="adaptive_icon_instructions">選擇前景圖像，選擇背景顏色，並使用捏合手勢調整預覽</string>
+    <string name="adaptive_icon_preview">預覽</string>
+    <string name="adaptive_icon_select_foreground">選擇前景圖片</string>
+    <string name="adaptive_icon_change_foreground">更改前景圖片</string>
+    <string name="adaptive_icon_background_color">背景顏色</string>
+    <string name="adaptive_icon_reset_transform">重設位置和縮放</string>
+    <string name="adaptive_icon_safe_zone_inner">安全區域（始終可見）</string>
+    <string name="adaptive_icon_safe_zone_outer">遮罩區域（可能會被剪裁）</string>
+    <string name="adaptive_icon_created_success">適應式圖示已成功建立</string>
+    <string name="adaptive_icon_creation_failed">無法建立適應式圖示</string>
+    <string name="adaptive_icon_create_new">建立新圖示</string>
+    <string name="adaptive_icon_folder_explanation">選擇建立\'morphe_branding/morphe_icons\'資料夾的位置，其中包含產生的圖示檔案</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">建立自訂標頭</string>
+    <string name="header_creator_create">建立標頭</string>
+    <string name="header_creator_create_new">建立新標頭</string>
+    <string name="header_creator_instructions">選擇明亮和暗色主題的圖片，然後使用捏合手勢調整</string>
+    <string name="header_creator_light_theme">明亮主題標頭</string>
+    <string name="header_creator_dark_theme">暗色主題標頭</string>
+    <string name="header_creator_select_light">選擇明亮主題圖片</string>
+    <string name="header_creator_change_light">更改明亮主題圖片</string>
+    <string name="header_creator_select_dark">選擇暗色主題圖片</string>
+    <string name="header_creator_change_dark">更改暗色主題圖片</string>
+    <string name="header_creator_no_image">未選擇圖片</string>
+    <string name="header_creator_success">標頭已成功建立</string>
+    <string name="header_creator_failed">無法建立標頭</string>
+    <string name="header_creator_folder_explanation">選擇建立\'morphe_branding/morphe_header\'資料夾的位置，其中包含產生的標頭檔案</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">確定要卸載此應用程式嗎？</string>
     <string name="home_app_info_saved_app_delete_confirmation">確定要刪除已儲存的應用程式嗎？</string>

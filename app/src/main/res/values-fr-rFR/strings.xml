@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Passer au patchage</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_enable_all">Tout activer</string>
-    <string name="expert_mode_has_options">Configurable</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
     <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Sources de correctifs multiples sélectionnées</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Vous avez sélectionné des correctifs à partir de sources de correctifs multiples. Cela peut entraîner des problèmes de compatibilité ou un comportement inattendu.
+
+Voulez-vous vraiment continuer ?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette APK n’est pas une version d’application recommandée. Continuer peut entraîner un dysfonctionnement de l’application.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Entrer un nombre</string>
     <string name="patch_option_enter_decimal">Entrer un décimal</string>
     <string name="patch_option_pick_folder">Choisir un dossier</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Créer une icône adaptative</string>
+    <string name="adaptive_icon_create">Créer une icône</string>
+    <string name="adaptive_icon_instructions">Choisissez une image en premier plan, sélectionnez une couleur d\'arrière-plan et ajustez l\'aperçu avec des gestes de pincement-dézoom</string>
+    <string name="adaptive_icon_preview">Aperçu</string>
+    <string name="adaptive_icon_select_foreground">Sélectionner l\'image en premier plan</string>
+    <string name="adaptive_icon_change_foreground">Changer l\'image en premier plan</string>
+    <string name="adaptive_icon_background_color">Couleur d\'arrière-plan</string>
+    <string name="adaptive_icon_reset_transform">Réinitialiser la position et l\'échelle</string>
+    <string name="adaptive_icon_safe_zone_inner">Zone de sécurité (toujours visible)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zone de masque (peut être rognée)</string>
+    <string name="adaptive_icon_created_success">Icône adaptative créée avec succès</string>
+    <string name="adaptive_icon_creation_failed">Échec de la création de l\'icône adaptative</string>
+    <string name="adaptive_icon_create_new">Créer une nouvelle icône</string>
+    <string name="adaptive_icon_folder_explanation">Sélectionnez où créer le dossier \'morphe_branding/morphe_icons\' avec les fichiers d\'icône générés</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Créer un en-tête personnalisé</string>
+    <string name="header_creator_create">Créer un en-tête</string>
+    <string name="header_creator_create_new">Créer un nouvel en-tête</string>
+    <string name="header_creator_instructions">Sélectionnez des images pour les thèmes clair et sombre, puis ajustez-les avec des gestes de pincement</string>
+    <string name="header_creator_light_theme">En-tête du thème clair</string>
+    <string name="header_creator_dark_theme">En-tête du thème sombre</string>
+    <string name="header_creator_select_light">Sélectionner l\'image du thème clair</string>
+    <string name="header_creator_change_light">Changer l\'image du thème clair</string>
+    <string name="header_creator_select_dark">Sélectionner l\'image du thème sombre</string>
+    <string name="header_creator_change_dark">Changer l\'image du thème sombre</string>
+    <string name="header_creator_no_image">Aucune image sélectionnée</string>
+    <string name="header_creator_success">En-tête créé avec succès</string>
+    <string name="header_creator_failed">Échec de la création de l\'en-tête</string>
+    <string name="header_creator_folder_explanation">Sélectionnez où créer le dossier \'morphe_branding/morphe_header\' avec les fichiers d\'en-tête générés</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Êtes-vous sûr de vouloir désinstaller cette application ?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Êtes-vous sûr de vouloir supprimer cette application enregistrée ?</string>
@@ -129,7 +162,7 @@
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des patchs : %s</string>
     <string name="home_app_info_repatch_no_original_apk">APK original introuvable. Impossible de repatcher cette application.</string>
     <string name="home_app_info_repatch_requires_original">Le repatchage nécessite le fichier APK original</string>
-    <string name="home_app_info_original_package_name">Nom de package d\'origine</string>
+    <string name="home_app_info_original_package_name">Nom de package d\'original</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
     <string name="home_app_info_patch_source_used">Source du patch utilisée</string>
     <string name="home_app_info_install_type">Type d\'installation</string>
@@ -432,14 +465,14 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patchés</string>
     <string name="settings_system_patched_apks_description">Gérer les fichiers d’application patchés enregistrés</string>
-    <string name="settings_system_patched_apks_empty">Pas d\'APK patché enregistré pour l’instant</string>
+    <string name="settings_system_patched_apks_empty">Pas d\'APKs patchés enregistrés pour l’instant</string>
     <string name="settings_system_patched_apks_delete_title">Supprimer l’APK patché ?</string>
     <string name="settings_system_patched_apks_delete_confirm">Êtes-vous sûr de vouloir supprimer l\'APK patché enregistré pour %s ?</string>
     <string name="settings_system_patched_apks_deleted">APK patché supprimé avec succès</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APKs originaux</string>
     <string name="settings_system_original_apks_description">Les fichiers APK originaux sont enregistrés pour un repatchage. Seule la version la plus récente est conservée pour chaque application.</string>
-    <string name="settings_system_original_apks_empty">Pas d\'APK original enregistré</string>
+    <string name="settings_system_original_apks_empty">Pas d\'APKs originaux enregistrés</string>
     <string name="settings_system_original_apks_deleted">APK original supprimé avec succès</string>
     <string name="settings_system_original_apks_delete_title">Supprimer l’APK original ?</string>
     <string name="settings_system_original_apks_delete_confirm">Supprimer l\'APK original pour %s ? Vous ne pourrez pas repatcher sans fournir un nouvel APK.</string>

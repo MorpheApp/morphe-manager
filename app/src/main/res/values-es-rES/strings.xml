@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Other apps</string>
+    <string name="home_other_apps">Otras aplicaciones</string>
     <string name="home_not_patched_yet">Aún no parcheado</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
-    <string name="home_default_source_disabled">El origen de Morphe está desactivado. Por favor, áctivalo en la hoja de orígenes de parches o utiliza el modo experto.</string>
+    <string name="home_default_source_disabled">La fuente de parches de Morphe está deshabilitada. Actívala en Fuentes de parches o usa el modo Experto.</string>
     <string name="android_11_bug_dialog_title">Error de Android 11</string>
-    <string name="android_11_bug_dialog_description">El permiso de instalación de la aplicación debe concederse con antelación para evitar un error en el sistema Android 11 que afectará negativamente la experiencia del usuario.</string>
+    <string name="android_11_bug_dialog_description">El permiso para instalar aplicaciones debe concederse antes para evitar un problema de Android 11 que afecta negativamente la experiencia del usuario.</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Actualización del administrador disponible</string>
+    <string name="home_update_available">Actualización del gestor disponible</string>
     <string name="home_update_available_subtitle">Nueva versión lista para instalar</string>
-    <string name="home_update_error">Actualización fallida</string>
-    <string name="home_update_error_subtitle">Revisa tu conexión a internet e intenta nuevamente </string>
+    <string name="home_update_error">La actualización falló</string>
+    <string name="home_update_error_subtitle">Comprueba tu conexión a internet y vuelve a intentarlo </string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
     <string name="home_update_progress">%1$d/%2$d fuentes procesadas</string>
-    <string name="home_update_success">Actualización de fuentes completa</string>
+    <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
     <string name="home_please_wait">Por favor espera...</string>
@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Proceder al parcheado</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_enable_all">Activar todo</string>
-    <string name="expert_mode_has_options">Configurable</string>
     <string name="expert_mode_no_results">No se encontraron parches</string>
     <string name="expert_mode_no_patches">No hay parches disponibles</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Varias fuentes de parches seleccionadas</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Has seleccionado parches de varias fuentes de parches. Esto puede causar problemas de compatibilidad o comportamiento inesperado.
+
+¿Realmente quieres continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versión no compatible</string>
     <string name="home_dialog_unsupported_version_dialog_description">Esta APK no es una versión recomendada de la aplicación. Continuar puede resultar en una aplicación no funcional.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Ingresar número</string>
     <string name="patch_option_enter_decimal">Ingresar decimal</string>
     <string name="patch_option_pick_folder">Elegir carpeta</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Crear icono adaptable</string>
+    <string name="adaptive_icon_create">Crear icono</string>
+    <string name="adaptive_icon_instructions">Elija una imagen de primer plano, seleccione el color de fondo y ajuste la vista previa con gestos de pellizco</string>
+    <string name="adaptive_icon_preview">Vista previa</string>
+    <string name="adaptive_icon_select_foreground">Seleccionar imagen de primer plano</string>
+    <string name="adaptive_icon_change_foreground">Cambiar imagen de primer plano</string>
+    <string name="adaptive_icon_background_color">Color de fondo</string>
+    <string name="adaptive_icon_reset_transform">Restablecer posición y escala</string>
+    <string name="adaptive_icon_safe_zone_inner">Zona segura (siempre visible)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zona de máscara (puede ser recortada)</string>
+    <string name="adaptive_icon_created_success">Ícono adaptativo creado con éxito</string>
+    <string name="adaptive_icon_creation_failed">No se pudo crear el ícono adaptativo</string>
+    <string name="adaptive_icon_create_new">Crear nuevo ícono</string>
+    <string name="adaptive_icon_folder_explanation">Seleccionar dónde crear la carpeta \'morphe_branding/morphe_icons\' con los archivos del ícono generado</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Crear encabezado personalizado</string>
+    <string name="header_creator_create">Crear encabezado</string>
+    <string name="header_creator_create_new">Crear nuevo encabezado</string>
+    <string name="header_creator_instructions">Elija imágenes para temas claros y oscuros, luego ajuste con gestos de pellizco</string>
+    <string name="header_creator_light_theme">Encabezado de tema claro</string>
+    <string name="header_creator_dark_theme">Encabezado de tema oscuro</string>
+    <string name="header_creator_select_light">Seleccionar imagen de tema claro</string>
+    <string name="header_creator_change_light">Cambiar imagen de tema claro</string>
+    <string name="header_creator_select_dark">Seleccionar imagen de tema oscuro</string>
+    <string name="header_creator_change_dark">Cambiar imagen de tema oscuro</string>
+    <string name="header_creator_no_image">No se ha seleccionado ninguna imagen</string>
+    <string name="header_creator_success">Encabezado creado con éxito</string>
+    <string name="header_creator_failed">No se pudo crear el encabezado</string>
+    <string name="header_creator_folder_explanation">Seleccionar dónde crear la carpeta \'morphe_branding/morphe_header\' con los archivos del encabezado generado</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">¿Realmente quieres desinstalar esta aplicación?</string>
     <string name="home_app_info_saved_app_delete_confirmation">¿Realmente quieres eliminar esta aplicación guardada?</string>

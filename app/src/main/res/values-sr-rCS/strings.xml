@@ -101,9 +101,14 @@
     <string name="expert_mode_proceed">Nastavi patchiranje</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_enable_all">Omogući sve</string>
-    <string name="expert_mode_has_options">Podešljivo</string>
     <string name="expert_mode_no_results">Nema pronađenih patchova</string>
     <string name="expert_mode_no_patches">Nema dostupnih patchova</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Odabrano je patch-ova iz više izvora. Ovo može uzrokovati probleme sa kompatibilnošću ili neočekivano ponašanje.
+
+Da li ste sigurni da želite nastaviti?</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Odabrali ste patch-eve iz više izvora. Ovo može uzrokovati probleme sa kompatibilnoštom ili neočekivano ponašanje.
+
+Da li ste sigurni da želite nastaviti?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Ova APK nije preporučena verzija aplikacije. Nastavljanje može dovesti nefunkcionalnu aplikaciju.</string>
     <string name="home_dialog_unsupported_version_dialog_description">Nastavi ipak</string>
@@ -120,6 +125,36 @@
     <string name="patch_option_enter_number">Unesite broj</string>
     <string name="patch_option_enter_decimal">Unesite decimalni broj</string>
     <string name="patch_option_pick_folder">Odaberite folder</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Stvori adaptivni ikon</string>
+    <string name="adaptive_icon_create">Stvori ikonu</string>
+    <string name="adaptive_icon_instructions">Odaberi prednji lik, odaberi boju pozadine i prilagodi preglédaj sa gestama za pritisak-prstom</string>
+    <string name="adaptive_icon_preview">Pregled</string>
+    <string name="adaptive_icon_select_foreground">Odaberite sliku za prednji plan</string>
+    <string name="adaptive_icon_change_foreground">Promenite sliku za prednji plan</string>
+    <string name="adaptive_icon_background_color">Boja pozadine</string>
+    <string name="adaptive_icon_reset_transform">Resetujte položaj i skaliranje</string>
+    <string name="adaptive_icon_safe_zone_inner">Sigurna zona (uvek vidljiva)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskirana zona (može biti isječena)</string>
+    <string name="adaptive_icon_created_success">Adaptivni ikona uspešno kreirana</string>
+    <string name="adaptive_icon_creation_failed">Neuspešno kreiranje adaptivne ikone</string>
+    <string name="adaptive_icon_create_new">Kreirajte novu ikonu</string>
+    <string name="adaptive_icon_folder_explanation">Odaberite gde da kreirate folder \'morphe_branding/morphe_icons\' sa generisanim fajlovima ikona</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Kreirajte glavu</string>
+    <string name="header_creator_create">Kreirajte glavu</string>
+    <string name="header_creator_create_new">Kreirajte novu glavu</string>
+    <string name="header_creator_instructions">Odaberite slike za svetle i tamne teme, a zatim prilagodite sa gestama za prstima za prstima</string>
+    <string name="header_creator_light_theme">Glavna tema za svetlo</string>
+    <string name="header_creator_dark_theme">Glavna tema za tamno</string>
+    <string name="header_creator_select_light">Odaberite sliku za glavnu temu za svetlo</string>
+    <string name="header_creator_change_light">Promenite sliku za glavnu temu za svetlo</string>
+    <string name="header_creator_select_dark">Odaberite sliku za glavnu temu za tamno</string>
+    <string name="header_creator_change_dark">Promenite sliku za glavnu temu za tamno</string>
+    <string name="header_creator_no_image">Nema odabrane slike</string>
+    <string name="header_creator_success">Glavna tema uspešno kreirana</string>
+    <string name="header_creator_failed">Neuspešno kreiranje glavne teme</string>
+    <string name="header_creator_folder_explanation">Odaberite gde da kreirate folder \'morphe_branding/morphe_header\' sa generisanim fajlovima glavnih tema</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Da li zaista želite da ponišete ovu aplikaciju?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Da li zaista želite da obrišete ovu sačuvanu aplikaciju?</string>

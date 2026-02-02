@@ -4,7 +4,7 @@
     <string name="home_other_apps">Ứng dụng khác</string>
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
-    <string name="home_default_source_disabled">Nguồn Morphe đang bị tắt. Vui lòng bật trong bảng nguồn vá hoặc dùng Chế độ chuyên gia.</string>
+    <string name="home_default_source_disabled">Nguồn Morphe đang bị tắt. Vui lòng bật trong bảng nguồn vá hoặc bật Chế độ chuyên gia.</string>
     <string name="android_11_bug_dialog_title">Lỗi Android 11</string>
     <string name="android_11_bug_dialog_description">Cần cấp quyền cài đặt không rõ nguồn gốc cho ứng dụng trước để tránh phát sinh lỗi trên hệ thống Android 11 và gây ảnh hưởng tiêu cực đến trải nghiệm của người dùng.</string>
     <!-- Home Screen - Update Notifications -->
@@ -21,7 +21,7 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Sẵn sàng để làm ứng dụng trở nên huyền thoại lại chưa?</string>
+    <string name="home_greeting_2">Sẵn sàng để đưa các ứng dụng trở lại thời hoàng kim chưa?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
     <string name="home_greeting_3">Thắt dây an toàn, đã đến lúc vá rồi</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
@@ -31,7 +31,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Cùng biến đổi ứng dụng theo cách bạn muốn</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Dự báo hôm nay: 100% tỷ lệ vá</string>
+    <string name="home_greeting_7">Dự báo hôm nay: 100% vá thành công</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Sẵn sàng thay đổi từ tầm thường lên đến đỉnh cao?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -48,10 +48,10 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
-    <string name="sources_dialog_duplicate_name_error">Một nguồn vá với tên này đã tồn tại</string>
+    <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này rồi</string>
     <string name="sources_dialog_missing_error">Không thể cập nhật nguồn vá này.</string>
-    <string name="sources_dialog_disabled_toast">Vô hiệu hóa %d nguồn vá</string>
-    <string name="sources_dialog_enabled_toast">Kích hoạt %d nguồn vá</string>
+    <string name="sources_dialog_disabled_toast">Đã vô hiệu %d nguồn vá</string>
+    <string name="sources_dialog_enabled_toast">Đã kích hoạt %d nguồn vá</string>
     <string name="sources_dialog_view_any_version">Phiên bản bất kỳ</string>
     <string name="sources_dialog_view_any_package">Gói bất kỳ</string>
     <string name="sources_dialog_add_source">Thêm nguồn vá</string>
@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Tiến hành vá</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_enable_all">Bật tất cả</string>
-    <string name="expert_mode_has_options">Có thể sửa</string>
     <string name="expert_mode_no_results">Không tìm thấy bản vá nào</string>
     <string name="expert_mode_no_patches">Không có bản vá nào</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Đã chọn nhiều nguồn bản</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Bạn đã chọn các bản vá từ nhiều nguồn khác nhau. Điều đó có thể khiến ứng dụng có thể gặp phải các vấn đề về tương thích hoặc không hoạt động như mong muốn.
+
+Bạn có chắc muốn tiếp tục không?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Phiên bản không hỗ trợ</string>
     <string name="home_dialog_unsupported_version_dialog_description">Phiên bản APK này không được đề xuất. Tiếp tục có thể dẫn đến ứng dụng không hoạt động.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Nhập số</string>
     <string name="patch_option_enter_decimal">Nhập số thập phân</string>
     <string name="patch_option_pick_folder">Chọn thư mục</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Tạo biểu tượng thích ứng</string>
+    <string name="adaptive_icon_create">Tạo biểu tượng</string>
+    <string name="adaptive_icon_instructions">Chọn ảnh tiền cảnh, chọn màu nền, và điều chỉnh bằng cách chụm để thu phóng</string>
+    <string name="adaptive_icon_preview">Xem trước</string>
+    <string name="adaptive_icon_select_foreground">Chọn ảnh tiền cảnh</string>
+    <string name="adaptive_icon_change_foreground">Đổi ảnh tiền cảnh</string>
+    <string name="adaptive_icon_background_color">Màu nền</string>
+    <string name="adaptive_icon_reset_transform">Đặt lại vị trí và tỷ lệ</string>
+    <string name="adaptive_icon_safe_zone_inner">Vùng an toàn (luôn hiển thị)</string>
+    <string name="adaptive_icon_safe_zone_outer">Vùng mặt nạ (có thể bị cắt)</string>
+    <string name="adaptive_icon_created_success">Đã tạo biểu tượng thích ứng thành công</string>
+    <string name="adaptive_icon_creation_failed">Không thể tạo biểu tượng thích ứng</string>
+    <string name="adaptive_icon_create_new">Tạo biểu tượng mới</string>
+    <string name="adaptive_icon_folder_explanation">Chọn vị trí để tạo thư mục \'morphe_branding/morphe_icons\' với các tệp biểu tượng đã tạo</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Tạo tiêu đề tùy chỉnh</string>
+    <string name="header_creator_create">Tạo tiêu đề</string>
+    <string name="header_creator_create_new">Tạo tiêu đề mới</string>
+    <string name="header_creator_instructions">Chọn hình ảnh cho các chủ đề sáng và tối, sau đó điều chỉnh bằng cách chụm để thu phóng</string>
+    <string name="header_creator_light_theme">Tiêu đề chủ đề sáng</string>
+    <string name="header_creator_dark_theme">Tiêu đề chủ đề tối</string>
+    <string name="header_creator_select_light">Chọn hình ảnh chủ đề sáng</string>
+    <string name="header_creator_change_light">Đổi hình ảnh chủ đề sáng</string>
+    <string name="header_creator_select_dark">Chọn hình ảnh chủ đề tối</string>
+    <string name="header_creator_change_dark">Đổi hình ảnh chủ đề tối</string>
+    <string name="header_creator_no_image">Không có hình ảnh nào được chọn</string>
+    <string name="header_creator_success">Đã tạo tiêu đề thành công</string>
+    <string name="header_creator_failed">Không thể tạo tiêu đề</string>
+    <string name="header_creator_folder_explanation">Chọn vị trí để tạo thư mục \'morphe_branding/morphe_header\' với các tệp tiêu đề đã tạo</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bạn có chắc muốn gỡ ứng dụng này không?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Bạn có chắc muốn xóa ứng dụng đã lưu này không?</string>
@@ -128,16 +161,16 @@
     <string name="home_app_info_patches_name_fallback">Chưa có tên</string>
     <string name="home_app_info_patches_replace_fail">Không thể nhập bản vá: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Không tìm thấy APK gốc. Không thể vá lại ứng dụng này.</string>
-    <string name="home_app_info_repatch_requires_original">Vá lại yêu cầu tệp APK gốc</string>
+    <string name="home_app_info_repatch_requires_original">Bạn cần APK gốc để vá lại</string>
     <string name="home_app_info_original_package_name">Tên gói ban đầu</string>
     <string name="home_app_info_applied_patches">Bản vá đã áp dụng</string>
-    <string name="home_app_info_patch_source_used">Gói vá đã dùng</string>
+    <string name="home_app_info_patch_source_used">Nguồn vá đã dùng</string>
     <string name="home_app_info_install_type">Kiểu cài đặt</string>
     <string name="home_app_info_install_type_custom_installer">Trình cài đặt tùy chỉnh</string>
     <string name="home_app_info_install_type_system_installer">Trình cài đặt hệ thống</string>
     <string name="home_app_info_patched_at">Đã vá</string>
-    <string name="home_app_info_patch_update_available">Có bản vá mới sẵn sàng</string>
-    <string name="home_app_info_patch_update_available_description">Một phiên bản mới của bản vá đã có sẵn. Vá lại ứng dụng của bạn để nhận được cải tiến và sửa lỗi mới nhất.</string>
+    <string name="home_app_info_patch_update_available"> Đã có bản vá mới</string>
+    <string name="home_app_info_patch_update_available_description">Đã có bản vá mới. Hãy vá lại ứng dụng để áp dụng các cải tiến và bản sửa lỗi mới nhất.</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Chế độ root yêu cầu cài đặt APK gốc trên thiết bị của bạn trước khi vá.</string>
     <string name="root_gmscore_excluded">Chế độ root không cần bản vá \'GmsCore support\'</string>
@@ -236,19 +269,19 @@
     <string name="system">Hệ thống</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Hiệu ứng nền</string>
-    <string name="settings_appearance_background_circles">Circles</string>
-    <string name="settings_appearance_background_rings">Rings</string>
-    <string name="settings_appearance_background_waves">Waves</string>
-    <string name="settings_appearance_background_space">Space</string>
-    <string name="settings_appearance_background_shapes">Shapes</string>
-    <string name="settings_appearance_background_snow">Snow</string>
+    <string name="settings_appearance_background_circles">Hình tròn</string>
+    <string name="settings_appearance_background_rings">Vòng tròn</string>
+    <string name="settings_appearance_background_waves">Sóng</string>
+    <string name="settings_appearance_background_space">Không gian</string>
+    <string name="settings_appearance_background_shapes">Hình khối</string>
+    <string name="settings_appearance_background_snow">Tuyết</string>
     <string name="settings_appearance_background_none">Không có</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
     <string name="settings_appearance_system">Hệ thống</string>
     <string name="settings_appearance_light">Sáng</string>
     <string name="settings_appearance_dark">Tối</string>
-    <string name="settings_appearance_black">Black</string>
+    <string name="settings_appearance_black">Đen</string>
     <string name="settings_appearance_dynamic">Cá nhân hóa</string>
     <string name="settings_appearance_accent_color">Màu nổi bật</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -427,8 +460,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Quản lý bộ nhớ</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
-    <string name="settings_system_apks_size">Kích thước tổng cộng: %s</string>
+    <string name="settings_system_apks_count">%d APK</string>
+    <string name="settings_system_apks_size">Tổng kích thước: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
     <string name="settings_system_patched_apks_description">Quản lý tệp ứng dụng đã vá</string>

@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Jatka patchaamista</string>
     <string name="expert_mode_disable_all">Poista kaikki</string>
     <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
-    <string name="expert_mode_has_options">Mukautettava</string>
     <string name="expert_mode_no_results">Ei patcheja löytynyt</string>
     <string name="expert_mode_no_patches">Ei patcheja saatavilla</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Valittu useita päivityspäiväytmää. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia käyttäytymisiä.</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Olet valinnut päivityksiä useilta päivityspäiväytmiltä. Tämä saattaa aiheuttaa yhteensopivuusongelmia tai odottamattomia käyttäytymisiä.
+
+Oletko varma, että haluat jatkaa?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Tämä APK ei ole suositin app-versio. Jatkamalla voi johtaa epätoimivan appia.</string>
     <string name="home_dialog_unsupported_version_dialog_description">Jatkaakin</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Anna numero</string>
     <string name="patch_option_enter_decimal">Anna desimaali</string>
     <string name="patch_option_pick_folder">Valitse kansio</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Luo sopeutuva ikoni</string>
+    <string name="adaptive_icon_create">Luo ikoni</string>
+    <string name="adaptive_icon_instructions">Valitse esikuvan etusivu, valitse taustaväri ja säädä esikatsetta pinchin avulla</string>
+    <string name="adaptive_icon_preview">Esikatselu</string>
+    <string name="adaptive_icon_select_foreground">Valitse esikuvan kuva</string>
+    <string name="adaptive_icon_change_foreground">Vaihda esikuvan kuva</string>
+    <string name="adaptive_icon_background_color">Taustaväri</string>
+    <string name="adaptive_icon_reset_transform">Nollaa sijainti ja skaala</string>
+    <string name="adaptive_icon_safe_zone_inner">Turvallinen alue (aina näkyvä)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskin alue (saattaa leikata)</string>
+    <string name="adaptive_icon_created_success">Adaptiivinen kuvake luotu onnistuneesti</string>
+    <string name="adaptive_icon_creation_failed">Ei onnistu luoda adaptiivista kuvaetta</string>
+    <string name="adaptive_icon_create_new">Luo uusi kuvake</string>
+    <string name="adaptive_icon_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_icons\' kansio luotujen kuvakkeiden kanssa</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Luo mukautettu otsikko</string>
+    <string name="header_creator_create">Luo otsikko</string>
+    <string name="header_creator_create_new">Luo uusi otsikko</string>
+    <string name="header_creator_instructions">Valitse kuvat valoiselle ja tummalle teemalle, sitten säädä pinch-to-zoom-puhkein</string>
+    <string name="header_creator_light_theme">Valoisan teeman otsikko</string>
+    <string name="header_creator_dark_theme">Tummalle teemalle otsikko</string>
+    <string name="header_creator_select_light">Valitse valoisan teeman kuva</string>
+    <string name="header_creator_change_light">Vaihda valoisan teeman kuva</string>
+    <string name="header_creator_select_dark">Valitse tumman teeman kuva</string>
+    <string name="header_creator_change_dark">Vaihda tumman teeman kuva</string>
+    <string name="header_creator_no_image">Ei kuvaa valittu</string>
+    <string name="header_creator_success">Otsikko luotu onnistuneesti</string>
+    <string name="header_creator_failed">Ei onnistu luoda otsikkoa</string>
+    <string name="header_creator_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_header\' kansio luotujen otsikoiden kanssa</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Oletko varmaasi poistaa tätä sovellusta? Tätä ei voi peruuttaa.</string>
     <string name="home_app_info_saved_app_delete_confirmation">Oletko varmaasi poistaa tallennettu sovellus? Tätä ei voi peruuttaa.</string>

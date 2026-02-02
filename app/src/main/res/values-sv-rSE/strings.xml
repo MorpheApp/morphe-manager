@@ -74,7 +74,6 @@
     <string name="expert_mode_title">Expertläge</string>
     <string name="expert_mode_disable_all">Inaktivera alla</string>
     <string name="expert_mode_enable_all">Aktivera alla</string>
-    <string name="expert_mode_has_options">Konfigurerbar</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version som inte stöds</string>
     <string name="home_dialog_unsupported_version_dialog_description">Den här APK-filen är inte en rekommenderad appversion. Om du fortsätter kan det leda till att appen inte fungerar.</string>
@@ -91,6 +90,8 @@
     <string name="patch_option_enter_number">Ange tal</string>
     <string name="patch_option_enter_decimal">Ange decimaltal</string>
     <string name="patch_option_pick_folder">Välj mapp</string>
+    <!-- Adaptive Icon Creator -->
+    <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Är du säker på att du vill ta bort den här sparade appen?</string>

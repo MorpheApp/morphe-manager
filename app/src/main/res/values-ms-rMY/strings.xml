@@ -65,6 +65,8 @@
     <string name="home_dialog_expected_package">Pakej yang dijangkakan</string>
     <string name="home_dialog_selected_package">Pakej terpilih</string>
     <!-- Patch Options -->
+    <!-- Adaptive Icon Creator -->
+    <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_patches_name_default">Tampalan</string>
     <string name="home_app_info_patches_name_fallback">Tidak dinamakan</string>

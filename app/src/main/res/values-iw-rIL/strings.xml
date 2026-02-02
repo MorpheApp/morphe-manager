@@ -102,9 +102,12 @@
     <string name="expert_mode_proceed">המשך לתיקון</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_enable_all">הפעל את כולם</string>
-    <string name="expert_mode_has_options">ניתן להגדרה</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
     <string name="expert_mode_no_patches">אין תיקונים זמינים</string>
+    <string name="expert_mode_multiple_bundles_warning_title">נבחרו מקורות טיקים מרובים</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"נבחרתם טיקים ממקורות טיקים מרובים. זה עשוי לגרום לסוגי תאימות או התנהגות בלתי צפויה.
+
+האם אתם בטוחים שברצונכם להמשיך?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">גרסה לא מומלצת</string>
     <string name="home_dialog_unsupported_version_dialog_description">גרסה זו אינה גרסה מומלצת. להמשך ייתכן לגרום לגרסה לא פונקציונלית. </string>
@@ -121,6 +124,36 @@
     <string name="patch_option_enter_number">הזן מספר</string>
     <string name="patch_option_enter_decimal">הזן ספרתי</string>
     <string name="patch_option_pick_folder">בחר תיקיה</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">צור סמלה מתכנסת</string>
+    <string name="adaptive_icon_create">צור סמל</string>
+    <string name="adaptive_icon_instructions">בחר תמונה קדמית, בחר צבע רקע, והסיט את התצוגה עם גסיסות צפייה</string>
+    <string name="adaptive_icon_preview">תצוגה מקדימה</string>
+    <string name="adaptive_icon_select_foreground">בחר תמונה ראשית</string>
+    <string name="adaptive_icon_change_foreground">שנה תמונה ראשית</string>
+    <string name="adaptive_icon_background_color">צבע רקע</string>
+    <string name="adaptive_icon_reset_transform">אפס מיקום ומספר</string>
+    <string name="adaptive_icon_safe_zone_inner">אזור בטוח (תמיד מראה)</string>
+    <string name="adaptive_icon_safe_zone_outer">אזור מסכה (может быть обрезан)</string>
+    <string name="adaptive_icon_created_success">עיצוב איקונני אדפטיבי בוצע בהצלחה</string>
+    <string name="adaptive_icon_creation_failed">שגיאה ביצירת עיצוב איקונני אדפטיבי</string>
+    <string name="adaptive_icon_create_new">צור אייקון חדש</string>
+    <string name="adaptive_icon_folder_explanation">בחר היכן ליצור את הקובץ \'morphe_branding/morphe_icons\' עם הקבצים שצורנו</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">צור עמודות ראשיות</string>
+    <string name="header_creator_create">צור עמודות ראשיות</string>
+    <string name="header_creator_create_new">צור עמודות ראשיות חדשות</string>
+    <string name="header_creator_instructions">בחר תמונות עבור תכונות אור וחושך, ואז מתן בעזרת גישות \'pinch-to-zoom\'</string>
+    <string name="header_creator_light_theme">עמודות ראשיות עבור תכונת אור</string>
+    <string name="header_creator_dark_theme">עמודות ראשיות עבור תכונת חושך</string>
+    <string name="header_creator_select_light">בחר תמונה עבור תכונת אור</string>
+    <string name="header_creator_change_light">שנה תמונה עבור תכונת אור</string>
+    <string name="header_creator_select_dark">בחר תמונה עבור תכונת חושך</string>
+    <string name="header_creator_change_dark">שנה תמונה עבור תכונת חושך</string>
+    <string name="header_creator_no_image">לא נבחרה תמונה</string>
+    <string name="header_creator_success">עמודות ראשיות צורו בהצלחה</string>
+    <string name="header_creator_failed">שגיאה ביצירת עמודות ראשיות</string>
+    <string name="header_creator_folder_explanation">בחר היכן ליצור את הקובץ \'morphe_branding/morphe_header\' עם הקבצים שצורנו</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">האם אתה בטוח שברצונך למחוק את אפליקציה זו? </string>
     <string name="home_app_info_saved_app_delete_confirmation">האם אתה בטוח שברצונך למחוק את האפליקציה הנשמורה הזויה? </string>
