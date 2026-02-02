@@ -38,11 +38,11 @@ import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.patcher.patch.PatchInfo
+import app.revanced.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
-import app.revanced.manager.ui.viewmodel.InstallResult
+import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.InstalledAppInfoViewModel
-import app.revanced.manager.ui.viewmodel.MountWarningReason
 import app.revanced.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -62,7 +62,7 @@ data class AppliedPatchBundleUi(
 /**
  * Dialog for installed app info and actions
  */
-@SuppressLint("LocalContextGetResourceValueCall")
+@SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun InstalledAppInfoDialog(
     packageName: String,
@@ -72,15 +72,19 @@ fun InstalledAppInfoDialog(
     viewModel: InstalledAppInfoViewModel = koinViewModel(
         key = packageName,
         parameters = { parametersOf(packageName) }
-    )
+    ),
+    installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
     val isLoading = viewModel.isLoading
-    val isInstalling = viewModel.isInstalling
-    val mountOperation = viewModel.mountOperation
+
+    // Get installation state
+    val installState = installViewModel.installState
+    val isInstalling = installState is InstallViewModel.InstallState.Installing
+    val mountOperation = installViewModel.mountOperation
 
     // Get HomeViewModel for update status
     val homeViewModel: HomeViewModel = koinViewModel()
@@ -89,8 +93,9 @@ fun InstalledAppInfoDialog(
     // Dialog states
     var showUninstallConfirm by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
-    var showMountWarningDialog by remember { mutableStateOf(false) }
     var showAppliedPatchesDialog by remember { mutableStateOf(false) }
+    var showMountWarningDialog by remember { mutableStateOf(false) }
+    var pendingMountWarningAction by remember { mutableStateOf<(() -> Unit)?>(null) }
 
     // Bundle data
     val patchBundleRepository: PatchBundleRepository = koinInject()
@@ -100,14 +105,21 @@ fun InstalledAppInfoDialog(
         .collectAsStateWithLifecycle(emptyMap())
         .let { remember(it.value) { derivedStateOf { it.value.values.sumOf { bundle -> bundle.patches.size } } } }
 
+    // Extract strings to avoid LocalContext issues
+    val fallbackNameDefault = stringResource(R.string.home_app_info_patches_name_default)
+    val fallbackNameGeneric = stringResource(R.string.home_app_info_patches_name_fallback)
+    val exportSuccessMessage = stringResource(R.string.saved_app_export_success)
+    val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
+
     // Build applied bundles summary with stored versions
     val appliedBundles by produceState<List<AppliedPatchBundleUi>>(
         initialValue = emptyList(),
         appliedPatches,
         bundleInfo,
         bundleSources,
-        context,
-        installedApp
+        installedApp,
+        fallbackNameDefault,
+        fallbackNameGeneric
     ) {
         if (appliedPatches.isNullOrEmpty() || installedApp == null) {
             value = emptyList()
@@ -124,9 +136,9 @@ fun InstalledAppInfoDialog(
             val info = bundleInfo[bundleUid]
             val source = bundleSources.firstOrNull { it.uid == bundleUid }
             val fallbackName = if (bundleUid == 0) {
-                context.getString(R.string.home_app_info_patches_name_default)
+                fallbackNameDefault
             } else {
-                context.getString(R.string.home_app_info_patches_name_fallback)
+                fallbackNameGeneric
             }
             val title = source?.displayTitle ?: info?.name ?: "$fallbackName (#$bundleUid)"
 
@@ -173,39 +185,82 @@ fun InstalledAppInfoDialog(
     val exportFileName = remember(exportMetadata, exportFormat) {
         exportMetadata?.let { ExportNameFormatter.format(exportFormat, it) } ?: "morphe_export.apk"
     }
-    val exportSavedLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
-        viewModel.exportSavedApp(uri)
-    }
 
-    val installResult = viewModel.installResult
+    val exportSavedLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
+        val savedFile = viewModel.savedApkFile()
+        if (savedFile != null && uri != null) {
+            installViewModel.export(savedFile, uri) { success ->
+                if (success) {
+                    context.toast(exportSuccessMessage)
+                } else {
+                    context.toast(exportFailedMessage)
+                }
+            }
+        }
+    }
 
     // Set back click handler
     SideEffect { viewModel.onBackClick = onDismiss }
 
     // Handle install result
-    LaunchedEffect(installResult) {
-        when (installResult) {
-            is InstallResult.Success -> { context.toast(installResult.message); viewModel.clearInstallResult() }
-            is InstallResult.Failure -> { context.toast(installResult.message); viewModel.clearInstallResult() }
-            null -> {}
+    LaunchedEffect(installState) {
+        when (installState) {
+            is InstallViewModel.InstallState.Installed -> {
+                // Installation succeeded - update install type in database and refresh UI
+                val finalPackageName = installState.packageName
+                val newInstallType = when (installViewModel.currentInstallType) {
+                    InstallType.MOUNT -> InstallType.MOUNT
+                    InstallType.SHIZUKU -> InstallType.SHIZUKU
+                    InstallType.CUSTOM -> InstallType.CUSTOM
+                    else -> InstallType.DEFAULT
+                }
+                viewModel.updateInstallType(finalPackageName, newInstallType)
+            }
+            is InstallViewModel.InstallState.Error -> {
+                // Show error toast
+                context.toast(installState.message)
+            }
+            else -> {}
         }
     }
 
-    // Sub-dialogs
-    MountWarningDialog(
-        show = showMountWarningDialog && viewModel.mountWarning != null,
-        reason = viewModel.mountWarning?.reason,
-        onConfirm = { viewModel.performMountWarningAction(); showMountWarningDialog = false },
-        onDismiss = { viewModel.clearMountWarning(); showMountWarningDialog = false }
-    )
+    // Installer unavailable dialog
+    installViewModel.installerUnavailableDialog?.let { dialogState ->
+        InstallerUnavailableDialog(
+            state = dialogState,
+            onOpenApp = installViewModel::openInstallerApp,
+            onRetry = installViewModel::retryWithPreferredInstaller,
+            onUseFallback = installViewModel::proceedWithFallbackInstaller,
+            onDismiss = installViewModel::dismissInstallerUnavailableDialog
+        )
+    }
 
+    // Sub-dialogs
     if (showAppliedPatchesDialog && appliedPatches != null) {
         AppliedPatchesDialog(bundles = appliedBundles, onDismiss = { showAppliedPatchesDialog = false })
     }
 
+    // Mount warning dialog
+    if (showMountWarningDialog) {
+        MountWarningDialog(
+            onConfirm = {
+                showMountWarningDialog = false
+                pendingMountWarningAction?.invoke()
+                pendingMountWarningAction = null
+            },
+            onDismiss = {
+                showMountWarningDialog = false
+                pendingMountWarningAction = null
+            }
+        )
+    }
+
     UninstallConfirmDialog(
         show = showUninstallConfirm,
-        onConfirm = { viewModel.uninstall(); showUninstallConfirm = false },
+        onConfirm = {
+            viewModel.uninstall()
+            showUninstallConfirm = false
+        },
         onDismiss = { showUninstallConfirm = false }
     )
 
@@ -302,6 +357,7 @@ fun InstalledAppInfoDialog(
                 // Actions Section
                 ActionsSection(
                     viewModel = viewModel,
+                    installViewModel = installViewModel,
                     installedApp = installedApp,
                     availablePatches = availablePatches,
                     isInstalling = isInstalling,
@@ -321,8 +377,11 @@ fun InstalledAppInfoDialog(
                     },
                     onUninstall = { showUninstallConfirm = true },
                     onDelete = { showDeleteDialog = true },
-                    onMountWarning = { showMountWarningDialog = true },
-                    onExport = { exportSavedLauncher.launch(exportFileName) }
+                    onExport = { exportSavedLauncher.launch(exportFileName) },
+                    onShowMountWarning = { action ->
+                        pendingMountWarningAction = action
+                        showMountWarningDialog = true
+                    }
                 )
 
                 // Warning for missing original APK
@@ -541,17 +600,18 @@ private fun InfoSection(
 @Composable
 private fun ActionsSection(
     viewModel: InstalledAppInfoViewModel,
+    installViewModel: InstallViewModel,
     installedApp: InstalledApp,
     availablePatches: Int,
     isInstalling: Boolean,
-    mountOperation: InstalledAppInfoViewModel.MountOperation?,
+    mountOperation: InstallViewModel.MountOperation?,
     hasUpdate: Boolean,
     onPatchClick: () -> Unit,
     onRepatchClick: () -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
-    onMountWarning: () -> Unit,
-    onExport: () -> Unit
+    onExport: () -> Unit,
+    onShowMountWarning: (action: () -> Unit) -> Unit
 ) {
     // Collect all available actions
     val primaryActions = mutableListOf<ActionItem>()
@@ -612,7 +672,34 @@ private fun ActionsSection(
                 ActionItem(
                     text = installText,
                     icon = Icons.Outlined.Download,
-                    onClick = { if (viewModel.mountWarning != null) onMountWarning() else viewModel.installSavedApp() },
+                    onClick = {
+                        val savedFile = viewModel.savedApkFile()
+                        if (savedFile != null) {
+                            val installAction = {
+                                installViewModel.install(
+                                    outputFile = savedFile,
+                                    originalPackageName = installedApp.originalPackageName,
+                                    onPersistApp = { pkg, type ->
+                                        // Callback will be called after successful installation
+                                        // The LaunchedEffect handler will update the install type
+                                        true
+                                    }
+                                )
+                            }
+
+                            // Check if mount warning is needed
+                            if (viewModel.primaryInstallerIsMount && installedApp.installType != InstallType.MOUNT) {
+                                // Show mount warning dialog
+                                onShowMountWarning(installAction)
+                            } else if (!viewModel.primaryInstallerIsMount && installedApp.installType == InstallType.MOUNT) {
+                                // Show mount mismatch warning
+                                onShowMountWarning(installAction)
+                            } else {
+                                // No warning needed, install directly
+                                installAction()
+                            }
+                        }
+                    },
                     isLoading = isInstalling
                 )
             )
@@ -623,7 +710,19 @@ private fun ActionsSection(
                 ActionItem(
                     text = if (viewModel.isMounted) stringResource(R.string.remount) else stringResource(R.string.mount),
                     icon = if (viewModel.isMounted) Icons.Outlined.Refresh else Icons.Outlined.Check,
-                    onClick = { if (viewModel.isMounted) viewModel.remountSavedInstallation() else viewModel.mountOrUnmount() },
+                    onClick = {
+                        if (viewModel.isMounted) {
+                            installViewModel.remount(
+                                packageName = installedApp.currentPackageName,
+                                version = installedApp.version
+                            )
+                        } else {
+                            installViewModel.mount(
+                                packageName = installedApp.currentPackageName,
+                                version = installedApp.version
+                            )
+                        }
+                    },
                     isLoading = isMountLoading
                 )
             )
@@ -772,13 +871,9 @@ private fun ActionButton(
 
 @Composable
 private fun MountWarningDialog(
-    show: Boolean,
-    reason: MountWarningReason?,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    if (!show) return
-
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.warning),
@@ -792,13 +887,7 @@ private fun MountWarningDialog(
         }
     ) {
         Text(
-            text = stringResource(
-                when (reason) {
-                    MountWarningReason.PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP -> R.string.installer_mount_warning_install
-                    MountWarningReason.PRIMARY_NOT_MOUNT_FOR_MOUNT_APP -> R.string.installer_mount_mismatch_install
-                    else -> R.string.installer_mount_mismatch_title
-                }
-            ),
+            text = stringResource(R.string.installer_mount_warning_install),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )

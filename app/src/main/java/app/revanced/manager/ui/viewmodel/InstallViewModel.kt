@@ -2,20 +2,18 @@ package app.revanced.manager.ui.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -27,18 +25,15 @@ import app.revanced.manager.service.InstallService
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.simpleMessage
 import app.revanced.manager.util.toast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
-import androidx.core.net.toUri
+import java.io.IOException
+import java.nio.file.Files
 
 /**
- * Install view model for Patcher screen.
+ * Centralized view model for all installation operations, mounting/unmounting and exporting.
  * Handles installation with support for multiple installers (Standard, Shizuku, Root, External).
  */
 class InstallViewModel : ViewModel(), KoinComponent {
@@ -78,6 +73,11 @@ class InstallViewModel : ViewModel(), KoinComponent {
         val canOpenApp: Boolean
     )
 
+    /**
+     * Mount operation state
+     */
+    enum class MountOperation { UNMOUNTING, MOUNTING }
+
     var installState by mutableStateOf<InstallState>(InstallState.Ready)
         private set
 
@@ -85,6 +85,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
         private set
 
     var installerUnavailableDialog by mutableStateOf<InstallerUnavailableState?>(null)
+        private set
+
+    var mountOperation: MountOperation? by mutableStateOf(null)
         private set
 
     private var awaitingPackageName: String? = null
@@ -104,7 +107,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private var pendingPersistCallback: (suspend (String, InstallType) -> Boolean)? = null
 
     // Track current install type for proper persistence
-    private var currentInstallType: InstallType = InstallType.DEFAULT
+    var currentInstallType: InstallType = InstallType.DEFAULT
+        private set
 
     // Broadcast receiver for install results
     private val installReceiver = object : BroadcastReceiver() {
@@ -602,6 +606,113 @@ class InstallViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    /**
+     * Mount app (for root installer)
+     */
+    fun mount(packageName: String, version: String) = viewModelScope.launch {
+        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        if (stockVersion != null && stockVersion != version) {
+            handleInstallError(
+                app.getString(
+                    R.string.mount_version_mismatch_message,
+                    version,
+                    stockVersion
+                )
+            )
+            return@launch
+        }
+
+        try {
+            mountOperation = MountOperation.MOUNTING
+            app.toast(app.getString(R.string.mounting_ellipsis))
+            rootInstaller.mount(packageName)
+            app.toast(app.getString(R.string.mounted))
+        } catch (e: Exception) {
+            app.toast(app.getString(R.string.failed_to_mount, e.simpleMessage()))
+            Log.e(TAG, "Failed to mount", e)
+        } finally {
+            mountOperation = null
+        }
+    }
+
+    /**
+     * Unmount app (for root installer)
+     */
+    @Suppress("unused")
+    fun unmount(packageName: String) = viewModelScope.launch {
+        try {
+            mountOperation = MountOperation.UNMOUNTING
+            app.toast(app.getString(R.string.unmounting_ellipsis))
+            rootInstaller.unmount(packageName)
+            app.toast(app.getString(R.string.unmounted))
+        } catch (e: Exception) {
+            app.toast(app.getString(R.string.failed_to_unmount, e.simpleMessage()))
+            Log.e(TAG, "Failed to unmount", e)
+        } finally {
+            mountOperation = null
+        }
+    }
+
+    /**
+     * Remount app (unmount then mount)
+     */
+    fun remount(packageName: String, version: String) = viewModelScope.launch {
+        val stockVersion = pm.getPackageInfo(packageName)?.versionName
+        if (stockVersion != null && stockVersion != version) {
+            handleInstallError(
+                app.getString(
+                    R.string.mount_version_mismatch_message,
+                    version,
+                    stockVersion
+                )
+            )
+            return@launch
+        }
+
+        try {
+            mountOperation = MountOperation.UNMOUNTING
+            app.toast(app.getString(R.string.unmounting_ellipsis))
+            rootInstaller.unmount(packageName)
+            app.toast(app.getString(R.string.unmounted))
+
+            mountOperation = MountOperation.MOUNTING
+            app.toast(app.getString(R.string.mounting_ellipsis))
+            rootInstaller.mount(packageName)
+            app.toast(app.getString(R.string.mounted))
+        } catch (e: Exception) {
+            app.toast(app.getString(R.string.failed_to_mount, e.simpleMessage()))
+            Log.e(TAG, "Failed to remount", e)
+        } finally {
+            mountOperation = null
+        }
+    }
+
+    /**
+     * Export patched app to URI
+     */
+    fun export(outputFile: File, uri: Uri?, onComplete: (Boolean) -> Unit = {}) = viewModelScope.launch {
+        if (uri == null) {
+            onComplete(false)
+            return@launch
+        }
+
+        val exportSucceeded = runCatching {
+            withContext(Dispatchers.IO) {
+                app.contentResolver.openOutputStream(uri)
+                    ?.use { stream -> Files.copy(outputFile.toPath(), stream) }
+                    ?: throw IOException("Could not open output stream for export")
+            }
+        }.isSuccess
+
+        if (exportSucceeded) {
+            app.toast(app.getString(R.string.save_apk_success))
+        } else {
+            app.toast(app.getString(R.string.saved_app_export_failed))
+        }
+
+        onComplete(exportSucceeded)
+    }
+
     // ==================== Dialog handlers ====================
 
     /**
@@ -814,7 +925,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     companion object {
-        private const val TAG = "MorpheInstallViewModel"
+        private const val TAG = "Morphe Install"
         private const val INSTALL_TIMEOUT_MS = 240_000L
         private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val INSTALL_MONITOR_POLL_MS = 1000L
