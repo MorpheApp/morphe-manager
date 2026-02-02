@@ -1,3 +1,10 @@
+# app [1.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2026-02-02)
+
+
+### Bug Fixes
+
+* UX improvements ([#147](https://github.com/MorpheApp/morphe-manager/issues/147)) ([0029e51](https://github.com/MorpheApp/morphe-manager/commit/0029e51ff931b74278e6120b8249371e9e0a5056))
+
 # app [1.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2026-02-01)
 
 
