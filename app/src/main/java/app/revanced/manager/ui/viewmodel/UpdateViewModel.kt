@@ -208,7 +208,9 @@ class UpdateViewModel(
         pendingExternalInstall = plan
         installError = ""
         try {
-            ContextCompat.startActivity(app, plan.intent, null)
+            // Add FLAG_ACTIVITY_NEW_TASK since we're starting from Application context
+            plan.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            app.startActivity(plan.intent)
             app.toast(app.getString(R.string.installer_external_launched, plan.installerLabel))
         } catch (error: ActivityNotFoundException) {
             installerManager.cleanup(plan)

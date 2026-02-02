@@ -117,6 +117,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
         @SuppressLint("PrivateApi")
         @JvmStatic
         fun main(args: Array<String>) {
+            @Suppress("DEPRECATION")
             Looper.prepareMainLooper()
 
             val managerPackageName = args[0]
