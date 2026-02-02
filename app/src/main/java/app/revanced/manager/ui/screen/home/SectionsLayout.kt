@@ -36,6 +36,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.BundleUpdateStatus
 import app.revanced.manager.util.AppPackages
+import app.revanced.manager.util.formatMegabytes
 import kotlinx.coroutines.delay
 
 /**
@@ -423,11 +424,25 @@ private fun BundleUpdateSnackbarContent(
     status: BundleUpdateStatus,
     progress: PatchBundleRepository.BundleUpdateProgress?
 ) {
+    // Calculate bundle processing progress
     val fraction = if (progress?.total == 0 || progress == null) {
         0f
     } else {
         progress.completed.toFloat() / progress.total
     }
+
+    // Calculate download progress
+    val downloadFraction = if (progress?.bytesTotal == null || progress.bytesTotal == 0L) {
+        0f
+    } else {
+        progress.bytesRead.toFloat() / progress.bytesTotal.toFloat()
+    }
+
+    // Determine which progress to show
+    val isDownloading = progress?.phase == PatchBundleRepository.BundleUpdatePhase.Downloading &&
+            progress.bytesTotal != null &&
+            progress.bytesTotal > 0L
+    val displayProgress = if (isDownloading) downloadFraction else fraction
 
     val containerColor = when (status) {
         BundleUpdateStatus.Success -> MaterialTheme.colorScheme.primaryContainer
@@ -479,7 +494,7 @@ private fun BundleUpdateSnackbarContent(
 
                     BundleUpdateStatus.Updating -> {
                         CircularProgressIndicator(
-                            progress = { fraction },
+                            progress = { displayProgress },
                             modifier = Modifier.size(24.dp),
                             strokeWidth = 3.dp,
                             color = MaterialTheme.colorScheme.primary
@@ -502,12 +517,30 @@ private fun BundleUpdateSnackbarContent(
                     Text(
                         text = when (status) {
                             BundleUpdateStatus.Updating -> {
-                                if (progress != null && progress.total > 0) {
-                                    stringResource(
-                                        R.string.home_update_progress,
-                                        progress.completed,
-                                        progress.total
-                                    )
+                                if (progress != null) {
+                                    when {
+                                        // Show download progress in MB
+                                        isDownloading -> {
+                                            stringResource(
+                                                R.string.home_update_download_progress,
+                                                formatMegabytes(progress.bytesRead),
+                                                formatMegabytes(progress.bytesTotal),
+                                                (downloadFraction * 100).toInt()
+                                            )
+                                        }
+                                        // Show source processing progress
+                                        progress.total > 0 -> {
+                                            stringResource(
+                                                R.string.home_update_progress,
+                                                progress.completed,
+                                                progress.total
+                                            )
+                                        }
+                                        // Loading state
+                                        else -> {
+                                            stringResource(R.string.home_please_wait)
+                                        }
+                                    }
                                 } else {
                                     stringResource(R.string.home_please_wait)
                                 }
@@ -525,7 +558,7 @@ private fun BundleUpdateSnackbarContent(
             // Progress bar only for updating status
             if (status == BundleUpdateStatus.Updating) {
                 LinearProgressIndicator(
-                    progress = { fraction },
+                    progress = { displayProgress },
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.primary,
                     trackColor = MaterialTheme.colorScheme.surfaceVariant
