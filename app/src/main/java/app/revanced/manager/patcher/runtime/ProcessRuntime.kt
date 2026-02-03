@@ -144,7 +144,6 @@ class ProcessRuntime(private val context: Context) : Runtime(context) {
         // Get the location of our own Apk.
         val managerBaseApk = pm.getPackageInfo(context.packageName)!!.applicationInfo!!.sourceDir
         val propOverride = resolvePropOverride(context)?.absolutePath
-            ?: throw Exception("Couldn't find prop override library")
 
         val heapSizeString = "${memoryLimit}M"
         val env =

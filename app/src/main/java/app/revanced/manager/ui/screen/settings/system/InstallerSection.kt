@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,16 +19,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.selected
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.Dispatchers
@@ -446,4 +444,96 @@ private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?):
     a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
         a.componentName == b.componentName
     else -> false
+}
+
+/**
+ * Dialog shown when user's preferred installer (Shizuku/Root) is unavailable.
+ */
+@Composable
+fun InstallerUnavailableDialog(
+    state: InstallViewModel.InstallerUnavailableState,
+    onOpenApp: () -> Unit,
+    onRetry: () -> Unit,
+    onUseFallback: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    val installerName = when (state.installerToken) {
+        InstallerManager.Token.Shizuku -> stringResource(R.string.installer_shizuku_name)
+        InstallerManager.Token.AutoSaved -> stringResource(R.string.installer_auto_saved_name)
+        else -> stringResource(R.string.installer_internal_name)
+    }
+
+    val reasonText = state.reason?.let { stringResource(it) }
+
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.installer_unavailable_title, installerName),
+        footer = {
+            MorpheDialogButtonColumn {
+                // Primary action - Retry
+                MorpheDialogButton(
+                    text = stringResource(R.string.retry),
+                    onClick = onRetry,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Secondary action - Open app (if available)
+                if (state.canOpenApp) {
+                    MorpheDialogButton(
+                        text = when (state.installerToken) {
+                            InstallerManager.Token.Shizuku -> stringResource(R.string.installer_action_open_shizuku)
+                            else -> stringResource(R.string.open)
+                        },
+                        onClick = onOpenApp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                // Fallback option
+                MorpheDialogOutlinedButton(
+                    text = stringResource(R.string.installer_use_standard),
+                    onClick = onUseFallback,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Cancel
+                MorpheDialogOutlinedButton(
+                    text = stringResource(android.R.string.cancel),
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Main message
+            Text(
+                text = stringResource(R.string.installer_unavailable_message, installerName),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
+
+            // Error reason badge
+            if (reasonText != null) {
+                InfoBadge(
+                    text = reasonText,
+                    style = InfoBadgeStyle.Error,
+                    icon = Icons.Outlined.Warning,
+                    isExpanded = true
+                )
+            }
+
+            // Shizuku-specific hint
+            if (state.canOpenApp && state.installerToken == InstallerManager.Token.Shizuku) {
+                InfoBadge(
+                    text = stringResource(R.string.installer_unavailable_shizuku_hint),
+                    style = InfoBadgeStyle.Primary,
+                    isExpanded = true
+                )
+            }
+        }
+    }
 }

@@ -3,11 +3,11 @@ package app.revanced.manager.service
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageInstaller
-import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
+import androidx.core.net.toUri
 
 @Suppress("DEPRECATION")
 class InstallService : Service() {
@@ -23,14 +23,13 @@ class InstallService : Service() {
                 val userActionIntent = if (Build.VERSION.SDK_INT >= 33) {
                     intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
                 } else {
-                    @Suppress("DEPRECATION")
                     intent.getParcelableExtra(Intent.EXTRA_INTENT) as? Intent
                 }
 
                 if (!tryStartUserAction(userActionIntent)) {
                     val fallback = Intent(
                         Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                        Uri.parse("package:$packageName")
+                        "package:$packageName".toUri()
                     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                     if (!tryStartUserAction(fallback)) {

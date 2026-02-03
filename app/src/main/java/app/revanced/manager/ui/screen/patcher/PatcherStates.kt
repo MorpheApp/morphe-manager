@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.revanced.manager.ui.screen.settings.system.InstallerUnavailableDialog
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
@@ -42,7 +43,7 @@ enum class PatcherState {
 }
 
 /**
- * State holder for MorphePatcherScreen
+ * State holder for Patcher Screen
  * Manages patching progress, dialogs, and installation flow
  */
 @Stable
@@ -101,6 +102,17 @@ fun PatchingSuccess(
     val windowSize = rememberWindowSize()
     val installState = installViewModel.installState
     val installedPackageName = installViewModel.installedPackageName
+
+    // Installer unavailable dialog
+    installViewModel.installerUnavailableDialog?.let { dialogState ->
+        InstallerUnavailableDialog(
+            state = dialogState,
+            onOpenApp = installViewModel::openInstallerApp,
+            onRetry = installViewModel::retryWithPreferredInstaller,
+            onUseFallback = installViewModel::proceedWithFallbackInstaller,
+            onDismiss = installViewModel::dismissInstallerUnavailableDialog
+        )
+    }
 
     // Determine visual state
     val isError = installState is InstallViewModel.InstallState.Error ||

@@ -269,19 +269,93 @@ class InstallerManager(
         return results.values.sortedBy { it.label.lowercase() }
     }
 
+    /**
+     * Resolves the installation plan based on user's preferred installer.
+     * Returns a [ResolvedPlan] which includes the plan and information about
+     * whether the primary installer was unavailable.
+     */
+    fun resolvePlanWithStatus(
+        target: InstallTarget,
+        sourceFile: File,
+        expectedPackage: String,
+        sourceLabel: String?
+    ): ResolvedPlan {
+        val primaryToken = getPrimaryToken()
+        val primaryAvailability = availabilityFor(primaryToken, target, checkRoot = true)
+
+        // If primary is available, use it
+        if (primaryAvailability.available) {
+            val plan = createPlan(primaryToken, target, sourceFile, expectedPackage, sourceLabel)
+            if (plan != null) {
+                return ResolvedPlan(
+                    plan = plan,
+                    primaryUnavailable = false,
+                    primaryToken = primaryToken,
+                    unavailabilityReason = null
+                )
+            }
+        }
+
+        // Primary is unavailable - check if it's Shizuku or AutoSaved (special cases)
+        val isSpecialInstaller = primaryToken == Token.Shizuku || primaryToken == Token.AutoSaved
+
+        if (isSpecialInstaller) {
+            // Return info about unavailability so UI can show appropriate dialog
+            return ResolvedPlan(
+                plan = InstallPlan.Internal(target), // Fallback
+                primaryUnavailable = true,
+                primaryToken = primaryToken,
+                unavailabilityReason = primaryAvailability.reason
+            )
+        }
+
+        // For other installers, try fallback sequence
+        val sequence = buildSequence(target)
+        sequence.forEach { token ->
+            createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { plan ->
+                return ResolvedPlan(
+                    plan = plan,
+                    primaryUnavailable = primaryToken != token,
+                    primaryToken = primaryToken,
+                    unavailabilityReason = if (primaryToken != token) primaryAvailability.reason else null
+                )
+            }
+        }
+
+        // Fallback to internal install
+        return ResolvedPlan(
+            plan = InstallPlan.Internal(target),
+            primaryUnavailable = primaryToken != Token.Internal,
+            primaryToken = primaryToken,
+            unavailabilityReason = primaryAvailability.reason
+        )
+    }
+
+    /**
+     * Original resolvePlan method for backward compatibility.
+     * Use [resolvePlanWithStatus] for more detailed information.
+     */
     fun resolvePlan(
         target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
         sourceLabel: String?
     ): InstallPlan {
-        val sequence = buildSequence(target)
-        sequence.forEach { token ->
-            createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { return it }
-        }
+        return resolvePlanWithStatus(target, sourceFile, expectedPackage, sourceLabel).plan
+    }
 
-        // Should never happen, fallback to internal install.
-        return InstallPlan.Internal(target)
+    /**
+     * Get current availability status for Shizuku installer.
+     */
+    fun getShizukuAvailability(target: InstallTarget): Availability {
+        return availabilityFor(Token.Shizuku, target, checkRoot = true)
+    }
+
+    /**
+     * Get current availability status for root/mount installer.
+     */
+    fun getRootAvailability(target: InstallTarget): Availability {
+        return availabilityFor(Token.AutoSaved, target, checkRoot = true)
     }
 
     fun cleanup(plan: InstallPlan.External) {
@@ -306,11 +380,11 @@ class InstallerManager(
         return when (token) {
             Token.Internal -> InstallPlan.Internal(target)
             Token.None -> null
-            Token.AutoSaved -> if (availabilityFor(Token.AutoSaved, target).available) {
+            Token.AutoSaved -> if (availabilityFor(Token.AutoSaved, target, checkRoot = true).available) {
                 InstallPlan.Mount(target)
             } else null
 
-            Token.Shizuku -> if (availabilityFor(Token.Shizuku, target).available) {
+            Token.Shizuku -> if (availabilityFor(Token.Shizuku, target, checkRoot = true).available) {
                 InstallPlan.Shizuku(target)
             } else null
 
@@ -442,7 +516,8 @@ class InstallerManager(
         fun add(token: Token) {
             if (token == Token.None) return
             if (token in tokens) return
-            if (!availabilityFor(token, target).available) return
+            // Use checkRoot = true here to ensure we only add available installers
+            if (!availabilityFor(token, target, checkRoot = true).available) return
             tokens += token
         }
 
@@ -481,10 +556,10 @@ class InstallerManager(
             if (!shizukuInstaller.isInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
-                // Expert mode: check full Shizuku availability
+                // Full availability check
                 shizukuInstaller.availability(target)
             } else {
-                // Morphe mode: just verify Shizuku is installed
+                // Just verify Shizuku is installed (for UI display)
                 Availability(true)
             }
         }
@@ -587,6 +662,17 @@ class InstallerManager(
     data class Availability(
         val available: Boolean,
         @StringRes val reason: Int? = null
+    )
+
+    /**
+     * Result of [resolvePlanWithStatus] that includes information about
+     * whether the user's preferred installer was unavailable.
+     */
+    data class ResolvedPlan(
+        val plan: InstallPlan,
+        val primaryUnavailable: Boolean,
+        val primaryToken: Token,
+        @StringRes val unavailabilityReason: Int?
     )
 
     sealed class Token {
