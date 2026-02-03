@@ -4,7 +4,7 @@
     <string name="home_other_apps">Другие приложения</string>
     <string name="home_not_patched_yet">Еще не пропатчено</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
-    <string name="home_default_source_disabled">Источник патча Morphe отключен. Включите его в листе источников патчей или воспользуйтесь режимом эксперта.</string>
+    <string name="home_default_source_disabled">Источник патчей Morphe отключен. Включите его в списке источников патчей или воспользуйтесь режимом эксперта.</string>
     <string name="android_11_bug_dialog_title">Ошибка Android 11</string>
     <string name="android_11_bug_dialog_description">Разрешение на установку приложения должно быть предоставлено заранее, чтобы избежать ошибки в системе Android 11, которая негативно скажется на пользовательском опыте.</string>
     <!-- Home Screen - Update Notifications -->
@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Перейти к патчингу</string>
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_enable_all">Включить все</string>
-    <string name="expert_mode_has_options">Настраиваемый</string>
     <string name="expert_mode_no_results">Нет найденных патчей</string>
     <string name="expert_mode_no_patches">Нет доступных патчей</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Выбрано несколько источников патчей</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Вы выбрали патчи из нескольких источников патчей. Это может привести к проблеме совместимости или неожиданному поведению.
+
+Вы действительно хотите продолжить?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Неподдерживаемая версия</string>
     <string name="home_dialog_unsupported_version_dialog_description">Этот APK не является рекомендуемой версией приложения. Продолжение может привести к неработоспособности приложения.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Введите число</string>
     <string name="patch_option_enter_decimal">Введите десятичную дробь</string>
     <string name="patch_option_pick_folder">Выбрать папку</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Создать адаптивный значок</string>
+    <string name="adaptive_icon_create">Создать значок</string>
+    <string name="adaptive_icon_instructions">Выберите изображение переднего плана, выберите цвет фона и отрегулируйте предварительный просмотр жестами \"приблизить для увеличения\"</string>
+    <string name="adaptive_icon_preview">Предпросмотр</string>
+    <string name="adaptive_icon_select_foreground">Выберите фоновое изображение</string>
+    <string name="adaptive_icon_change_foreground">Изменить фоновое изображение</string>
+    <string name="adaptive_icon_background_color">Цвет фона</string>
+    <string name="adaptive_icon_reset_transform">Сбросить позицию и масштаб</string>
+    <string name="adaptive_icon_safe_zone_inner">Безопасная зона (всегда видна)</string>
+    <string name="adaptive_icon_safe_zone_outer">Зона маски (может быть обрезано)</string>
+    <string name="adaptive_icon_created_success">Адаптивный значок создан успешно</string>
+    <string name="adaptive_icon_creation_failed">Не удалось создать адаптивный значок</string>
+    <string name="adaptive_icon_create_new">Создать новый значок</string>
+    <string name="adaptive_icon_folder_explanation">Выберите место для создания папки \'morphe_branding/morphe_icons\' с Generated icon files</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Создать кастомный заголовок</string>
+    <string name="header_creator_create">Создать заголовок</string>
+    <string name="header_creator_create_new">Создать новый заголовок</string>
+    <string name="header_creator_instructions">Выберите изображения для светлой и темной тем, затем отрегулируйте жестами \" pinch-to-zoom \"</string>
+    <string name="header_creator_light_theme">Заголовок светлой темы</string>
+    <string name="header_creator_dark_theme">Заголовок темной темы</string>
+    <string name="header_creator_select_light">Выберите изображение светлой темы</string>
+    <string name="header_creator_change_light">Изменить изображение светлой темы</string>
+    <string name="header_creator_select_dark">Выберите изображение темной темы</string>
+    <string name="header_creator_change_dark">Изменить изображение темной темы</string>
+    <string name="header_creator_no_image">Изображение не выбрано</string>
+    <string name="header_creator_success">Заголовок создан успешно</string>
+    <string name="header_creator_failed">Не удалось создать заголовок</string>
+    <string name="header_creator_folder_explanation">Выберите место для создания папки \'morphe_branding/morphe_header\' с Generated header files</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Вы действительно хотите удалить это приложение?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Вы действительно хотите удалить это сохраненное приложение?</string>

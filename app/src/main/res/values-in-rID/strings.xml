@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Lanjutkan ke Menambal</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_enable_all">Aktifkan semua</string>
-    <string name="expert_mode_has_options">Dapat disesuaikan</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_no_patches">Tidak ada tambalan tersedia</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Sumber perbaikan beragam dipilih</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Anda telah memilih perbaikan dari sumber perbaikan beragam. Hal ini mungkin menyebabkan masalah kompatibilitas atau perilaku yang tidak dijangkakan.
+
+Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versi tidak didukung</string>
     <string name="home_dialog_unsupported_version_dialog_description">APK ini bukan versi aplikasi yang direkomendasikan. Tetap melanjutkan mungkin akan membuat aplikasi tidak berfungsi.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Masukkan nomor</string>
     <string name="patch_option_enter_decimal">Masukkan desimal</string>
     <string name="patch_option_pick_folder">Pilih folder</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Buat ikon adaptif</string>
+    <string name="adaptive_icon_create">Buat ikon</string>
+    <string name="adaptive_icon_instructions">Pilih gambar depan, pilih warna latar belakang, dan sesuaikan pratinjau dengan gestur geser-menyentuh</string>
+    <string name="adaptive_icon_preview">Pratinjau</string>
+    <string name="adaptive_icon_select_foreground">Pilih gambar depan</string>
+    <string name="adaptive_icon_change_foreground">Ubah gambar depan</string>
+    <string name="adaptive_icon_background_color">Warna latar belakang</string>
+    <string name="adaptive_icon_reset_transform">Reset posisi dan skala</string>
+    <string name="adaptive_icon_safe_zone_inner">Zona aman (selalu terlihat)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zona mask (mungkin dipotong)</string>
+    <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
+    <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
+    <string name="adaptive_icon_create_new">Buat ikon baru</string>
+    <string name="adaptive_icon_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_icons\' dengan berkas ikon yang dihasilkan</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Buat header</string>
+    <string name="header_creator_create">Buat header</string>
+    <string name="header_creator_create_new">Buat header baru</string>
+    <string name="header_creator_instructions">Pilih gambar untuk tema ringan dan gelap, lalu sesuaikan dengan gestur sentuh dan geser</string>
+    <string name="header_creator_light_theme">Header tema ringan</string>
+    <string name="header_creator_dark_theme">Header tema gelap</string>
+    <string name="header_creator_select_light">Pilih gambar tema ringan</string>
+    <string name="header_creator_change_light">Ubah gambar tema ringan</string>
+    <string name="header_creator_select_dark">Pilih gambar tema gelap</string>
+    <string name="header_creator_change_dark">Ubah gambar tema gelap</string>
+    <string name="header_creator_no_image">Tidak ada gambar yang dipilih</string>
+    <string name="header_creator_success">Header berhasil dibuat</string>
+    <string name="header_creator_failed">Gagal membuat header</string>
+    <string name="header_creator_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_header\' dengan berkas header yang dihasilkan</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin mencopot pemasangan aplikasi ini?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Apakah Anda yakin ingin menghapus aplikasi yang disimpan ini?</string>

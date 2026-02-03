@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">패치 진행</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
-    <string name="expert_mode_has_options">옵션 변경 가능</string>
     <string name="expert_mode_no_results">패치된 앱을 찾을 수 없습니다</string>
     <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
+    <string name="expert_mode_multiple_bundles_warning_title">다중 패치 소스 선택됨</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"다중 패치 소스에서 패치를 선택했습니다. 호환성 문제나 예기치 않은 동작이 발생할 수 있습니다.
+
+진행하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속하면 앱이 제대로 작동하지 않을 수 있습니다.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">숫자 입력</string>
     <string name="patch_option_enter_decimal">소수점 입력</string>
     <string name="patch_option_pick_folder">폴더 선택</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">어댑티브 아이콘 생성</string>
+    <string name="adaptive_icon_create">아이콘 생성</string>
+    <string name="adaptive_icon_instructions">전경 이미지 선택, 배경색 선택, 미리보기 조절을 위해 pinch-to-zoom 제스처 사용</string>
+    <string name="adaptive_icon_preview">미리보기</string>
+    <string name="adaptive_icon_select_foreground">선택할 전면 이미지</string>
+    <string name="adaptive_icon_change_foreground">전면 이미지 변경</string>
+    <string name="adaptive_icon_background_color">배경색</string>
+    <string name="adaptive_icon_reset_transform">위치 및 크기 초기화</string>
+    <string name="adaptive_icon_safe_zone_inner">안전 영역 (항상 표시)</string>
+    <string name="adaptive_icon_safe_zone_outer">마스크 영역 (자르기 가능)</string>
+    <string name="adaptive_icon_created_success">적응형 아이콘 생성 완료</string>
+    <string name="adaptive_icon_creation_failed">적응형 아이콘 생성 실패</string>
+    <string name="adaptive_icon_create_new">새로운 아이콘 생성</string>
+    <string name="adaptive_icon_folder_explanation">\'morphe_branding/morphe_icons\' 폴더에 생성된 아이콘 파일을 생성할 위치 선택</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">헤더 생성기</string>
+    <string name="header_creator_create">헤더 생성</string>
+    <string name="header_creator_create_new">새로운 헤더 생성</string>
+    <string name="header_creator_instructions">빛과 어둠 테마 이미지를 선택하고 pinch-to-zoom 제스처로 조정하세요</string>
+    <string name="header_creator_light_theme">빛 테마 헤더</string>
+    <string name="header_creator_dark_theme">어둠 테마 헤더</string>
+    <string name="header_creator_select_light">빛 테마 이미지 선택</string>
+    <string name="header_creator_change_light">빛 테마 이미지 변경</string>
+    <string name="header_creator_select_dark">어둠 테마 이미지 선택</string>
+    <string name="header_creator_change_dark">어둠 테마 이미지 변경</string>
+    <string name="header_creator_no_image">선택된 이미지가 없습니다</string>
+    <string name="header_creator_success">헤더 생성 완료</string>
+    <string name="header_creator_failed">헤더 생성 실패</string>
+    <string name="header_creator_folder_explanation">\'morphe_branding/morphe_header\' 폴더에 생성된 헤더 파일을 생성할 위치 선택</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 언인스톨하시겠습니까?</string>
     <string name="home_app_info_saved_app_delete_confirmation">저장된 앱을 삭제하시겠습니까?</string>

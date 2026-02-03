@@ -1,3 +1,10 @@
+# app [1.5.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2026-02-03)
+
+
+### Bug Fixes
+
+* Refactor app installation code ([#149](https://github.com/MorpheApp/morphe-manager/issues/149)) ([119d112](https://github.com/MorpheApp/morphe-manager/commit/119d11258148fab6e91ef7d6c2df6edda8d03754))
+
 # app [1.5.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2026-02-02)
 
 

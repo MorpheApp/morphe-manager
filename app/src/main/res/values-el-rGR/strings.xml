@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Προχωράτε στην Επεξεργασία</string>
     <string name="expert_mode_disable_all">Απενεργοποιήστε όλα</string>
     <string name="expert_mode_enable_all">Ενεργοποιήστε όλα</string>
-    <string name="expert_mode_has_options">Επιλέγεται</string>
     <string name="expert_mode_no_results">Δεν βρέθηκαν επεξεργασίες</string>
     <string name="expert_mode_no_patches">Δεν υπάρχουν επεξεργασίες διαθέσιμες</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Επιλέξατε πηγές αναθεώσεων από διαφορετικές πηγές</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Επιλέξατε αναθεώσεις από διαφορετικές πηγές. Αυτό μπορεί να προκαλέσει προβλήματα συμβατότητας ή άγνωστο συμπεριφορά.
+
+Είστε σίγουροι ότι θέλετε να προχωρήσετε;"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Μη υποστηριμμένη έκδοση</string>
     <string name="home_dialog_unsupported_version_dialog_description">Αυτή η APK δεν είναι η συνηθισμένη έκδοση της εφαρμογής. Η συνέχεια μπορεί να προκαλέσει μια μη λειτουργική εφαρμογή.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Εισαγωγή αριθμού</string>
     <string name="patch_option_enter_decimal">Εισαγωγή δεκαδικού</string>
     <string name="patch_option_pick_folder">Επιλογή φακέλου</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Δημιουργία προσαρμοστικού εικονίδιου</string>
+    <string name="adaptive_icon_create">Δημιουργία εικονίδιου</string>
+    <string name="adaptive_icon_instructions">Επιλέξτε μια εικόνα προσκηνίου, επιλέξτε χρώμα φόντου και προσαρμόστε την προεπισκόπηση με γέστες pinch-to-zoom</string>
+    <string name="adaptive_icon_preview">Προεπισκόπηση</string>
+    <string name="adaptive_icon_select_foreground">Επιλέξτε εικόνα προσκήνιου</string>
+    <string name="adaptive_icon_change_foreground">Αλλαγή εικόνας προσκήνιου</string>
+    <string name="adaptive_icon_background_color">Χρώμα φόντου</string>
+    <string name="adaptive_icon_reset_transform">Επαναφορά θέσης και κλίμακας</string>
+    <string name="adaptive_icon_safe_zone_inner">Περιοχή ασφαλείας (πάντα ορατός)</string>
+    <string name="adaptive_icon_safe_zone_outer">Περιοχή μάσκας (может κοπεί)</string>
+    <string name="adaptive_icon_created_success">Δημιουργήθηκε επιτυχώς το εικονίδιο προσαρμογής</string>
+    <string name="adaptive_icon_creation_failed">Ατυχήθηκε η δημιουργία του εικονιδίου προσαρμογής</string>
+    <string name="adaptive_icon_create_new">Δημιουργία νέου εικονιδίου</string>
+    <string name="adaptive_icon_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_icons\' με τα δημιουργημένα αρχεία εικονιδίου</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Δημιουργία κεφαλίδας</string>
+    <string name="header_creator_create">Δημιουργία κεφαλίδας</string>
+    <string name="header_creator_create_new">Δημιουργία νέας κεφαλίδας</string>
+    <string name="header_creator_instructions">Επιλέξτε εικόνες για φωτεινές και σκοτεινές θεματικές, στη συνέχεια προσαρμόστε με κινήσεις pinch-to-zoom</string>
+    <string name="header_creator_light_theme">Κεφαλίδα φωτεινής θεματικής</string>
+    <string name="header_creator_dark_theme">Κεφαλίδα σκοτεινής θεματικής</string>
+    <string name="header_creator_select_light">Επιλέξτε εικόνα φωτεινής θεματικής</string>
+    <string name="header_creator_change_light">Αλλαγή εικόνας φωτεινής θεματικής</string>
+    <string name="header_creator_select_dark">Επιλέξτε εικόνα σκοτεινής θεματικής</string>
+    <string name="header_creator_change_dark">Αλλαγή εικόνας σκοτεινής θεματικής</string>
+    <string name="header_creator_no_image">Δεν επιλέχθηκε εικόνα</string>
+    <string name="header_creator_success">Δημιουργήθηκε επιτυχώς η κεφαλίδα</string>
+    <string name="header_creator_failed">Ατυχήθηκε η δημιουργία της κεφαλίδας</string>
+    <string name="header_creator_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_header\' με τα δημιουργημένα αρχεία κεφαλίδας</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Είστε βέβαιοι ότι θέλετε να αποσυνήτε αυτή την εφαρμογή;</string>
     <string name="home_app_info_saved_app_delete_confirmation">Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την αποθηκευμένη εφαρμογή;</string>

@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Fortsæt til patching</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_enable_all">Aktiver alle</string>
-    <string name="expert_mode_has_options">Konfigurerbart</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
     <string name="expert_mode_no_patches">Ingen patches tilgængelige</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Valgt flere patch-kilder</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Du har valgt patches fra flere patch-kilder. Dette kan forårsage kompatibilitetsproblemer eller uventet adfærd.
+
+Er du sikker på, at du vil fortsætte?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Ugyldig versjon</string>
     <string name="home_dialog_unsupported_version_dialog_description">Denne APK er ikke en anbefalt appversjon. Fortsett kan føre til en ikke-funksjonell app.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Angiv tal</string>
     <string name="patch_option_enter_decimal">Angiv desimal</string>
     <string name="patch_option_pick_folder">Vælg mappe</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Opret adaptive ikon</string>
+    <string name="adaptive_icon_create">Opret ikon</string>
+    <string name="adaptive_icon_instructions">Vælg et forgrundsbillede, vælg baggrundsfar og justér forhåndsvisningen med pinch-to-zoom-gester</string>
+    <string name="adaptive_icon_preview">Forhædvisning</string>
+    <string name="adaptive_icon_select_foreground">Vælg forgrundsbild</string>
+    <string name="adaptive_icon_change_foreground">Skift forgrundsbild</string>
+    <string name="adaptive_icon_background_color">Baggrundsfarve</string>
+    <string name="adaptive_icon_reset_transform">Nulstil position og skala</string>
+    <string name="adaptive_icon_safe_zone_inner">Sikker zone (altid synlig)</string>
+    <string name="adaptive_icon_safe_zone_outer">Maskezone (kan klippes)</string>
+    <string name="adaptive_icon_created_success">Adaptiv ikon oprettet med succes</string>
+    <string name="adaptive_icon_creation_failed">Kunne ikke oprette adaptiv ikon</string>
+    <string name="adaptive_icon_create_new">Opret nyt ikon</string>
+    <string name="adaptive_icon_folder_explanation">Vælg hvor at oprette \'morphe_branding/morphe_icons\' mappe med genererede ikonfiler</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Opret overskrift</string>
+    <string name="header_creator_create">Opret overskrift</string>
+    <string name="header_creator_create_new">Opret ny overskrift</string>
+    <string name="header_creator_instructions">Vælg billeder for lys og mørketemaer, derefter juster med pinch-to-zoom gester</string>
+    <string name="header_creator_light_theme">Lys overskrift</string>
+    <string name="header_creator_dark_theme">Mørke overskrift</string>
+    <string name="header_creator_select_light">Vælg lys tema billede</string>
+    <string name="header_creator_change_light">Skift lys tema billede</string>
+    <string name="header_creator_select_dark">Vælg mørke tema billede</string>
+    <string name="header_creator_change_dark">Skift mørke tema billede</string>
+    <string name="header_creator_no_image">Ingen billede valgt</string>
+    <string name="header_creator_success">Overskrift oprettet med succes</string>
+    <string name="header_creator_failed">Kunne ikke oprette overskrift</string>
+    <string name="header_creator_folder_explanation">Vælg hvor at oprette \'morphe_branding/morphe_header\' mappe med genererede overskriftfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Er du sikker på at du vil fjerne denne app? </string>
     <string name="home_app_info_saved_app_delete_confirmation">Er du sikker på at du vil slette denne lagrede app? </string>

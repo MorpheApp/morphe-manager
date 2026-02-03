@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Przejdź do modyfikowania</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_enable_all">Włącz wszystkie</string>
-    <string name="expert_mode_has_options">Konfigurowalne</string>
     <string name="expert_mode_no_results">Brak znalezionych modyfikacji</string>
     <string name="expert_mode_no_patches">Brak dostępnych modyfikacji</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Wybrano wiele źródeł modyfikacji</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Wybrano modyfikacje z wielu różnych źródeł. Może to spowodować problemy z kompatybilnością lub nieoczekiwane zachowanie.
+
+Czy na pewno chcesz kontynuować?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Niewspierana wersja</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ten plik APK nie jest zalecaną wersją aplikacji. Kontynuowanie może spowodować, że aplikacja będzie posiadała błędy.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Wprowadź liczbę</string>
     <string name="patch_option_enter_decimal">Wprowadź liczbę dziesiętną</string>
     <string name="patch_option_pick_folder">Wybierz folder</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Utwórz ikony adaptacyjne</string>
+    <string name="adaptive_icon_create">Utwórz ikonę</string>
+    <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>
+    <string name="adaptive_icon_preview">Podgląd</string>
+    <string name="adaptive_icon_select_foreground">Wybierz obraz pierwszego planu</string>
+    <string name="adaptive_icon_change_foreground">Zmień obraz pierwszego planu</string>
+    <string name="adaptive_icon_background_color">Kolor tła</string>
+    <string name="adaptive_icon_reset_transform">Zresetuj pozycję i skalę</string>
+    <string name="adaptive_icon_safe_zone_inner">Bezpieczna strefa (zawsze widoczna)</string>
+    <string name="adaptive_icon_safe_zone_outer">Strefa maskowania (może być przycięta)</string>
+    <string name="adaptive_icon_created_success">Ikona adaptacyjna została utworzona pomyślnie</string>
+    <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
+    <string name="adaptive_icon_create_new">Utwórz nową ikonę</string>
+    <string name="adaptive_icon_folder_explanation">Wybierz miejsce utworzenia folderu \'morphe_branding/morphe_icons\' z utworzonymi plikami ikon</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Utwórz własny nagłówek</string>
+    <string name="header_creator_create">Utwórz nagłówek</string>
+    <string name="header_creator_create_new">Utwórz nowy nagłówek</string>
+    <string name="header_creator_instructions">Wybierz obrazy dla jasnego i ciemnego motywu, a następnie dostosuj je za pomocą gestów uszczypnięcia</string>
+    <string name="header_creator_light_theme">Nagłówek motywu jasnego</string>
+    <string name="header_creator_dark_theme">Nagłówek motywu ciemnego</string>
+    <string name="header_creator_select_light">Wybierz obraz motywu jasnego</string>
+    <string name="header_creator_change_light">Zmień obraz motywu jasnego</string>
+    <string name="header_creator_select_dark">Wybierz obraz motywu ciemnego</string>
+    <string name="header_creator_change_dark">Zmień obraz motywu ciemnego</string>
+    <string name="header_creator_no_image">Nie wybrano żadnego obrazu</string>
+    <string name="header_creator_success">Nagłówek utworzony pomyślnie</string>
+    <string name="header_creator_failed">Nie udało się utworzyć nagłówka</string>
+    <string name="header_creator_folder_explanation">Wybierz miejsce utworzenia folderu \'morphe_branding/morphe_header\' z utworzonymi plikami nagłówka</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Czy na pewno chcesz odinstalować tę aplikację?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Czy na pewno chcesz usunąć tę zapisaną aplikację?</string>
@@ -202,7 +235,7 @@
     <string name="patcher_message_19">Twoja aplikacja ma gorączkę, a jedyną receptą jest więcej modyfikacji… 🩺🔔</string>
     <string name="patcher_message_20">Usuwanie bzdur. Proszę czekać… 🗑️</string>
     <!-- Patcher Screen - Other hiden strings -->
-    <string name="applying_patches">Stosowanie modyfikacji</string>
+    <string name="applying_patches">Modyfikowanie aplikacji</string>
     <string name="applying_patch">Stosowanie %s</string>
     <string name="failed_to_execute_patch">Nie udało się zastosować %s</string>
     <string name="patched_app_saved_toast">Zmodyfikowana aplikacja zapisana na później</string>
@@ -279,7 +312,7 @@
     <string name="settings_advanced_strip_unused_libs_description">Usuń biblioteki natywne dla nieobsługiwanych architektur CPU ze zmodyfikowanych aplikacji</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Ustawienia modyfikacji</string>
-    <string name="settings_advanced_patch_options_youtube_description">Motyw, marka, nagłówek i ustawienia Shortsów</string>
+    <string name="settings_advanced_patch_options_youtube_description">Motyw, marka, logo i ustawienia Shortsów</string>
     <string name="settings_advanced_patch_options_youtube_music_description">Ustawienia motywu i marki</string>
     <string name="settings_advanced_patch_options_restart_message">Zmiana ustawień modyfikacji wymaga ponownego zmodyfikowania aplikacji w celu zastosowania zmian</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">W trybie eksperckim opcje modyfikacji będą dostępne podczas modyfikowania</string>
@@ -424,7 +457,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_debug_logs_description">Eksportuj logi systemowe do debugowania</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Nie udało się odczytać logów (kod wyjścia %d)</string>
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
-    <string name="settings_system_export_debug_logs_export_success">Logi wyeksportowane</string>
+    <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Zarządzanie pamięcią</string>
     <string name="settings_system_apks_count">%d APK</string>
@@ -449,7 +482,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_share_website_description">Udostępnij oficjalną stronę Morphe</string>
     <string name="settings_system_manager_description">"Morphe to eksperymentalny projekt open-source skupiający się na tworzeniu nowoczesnego, usprawnionego modyfikowania popularnych aplikacji na Androida
 
-Podstawą Morphe jest otwartość, a jego rozwój napędzany jest opiniami i wkładem społeczności w przyszłe innowacje."</string>
+Podstawą Morphe jest otwartość, a jego rozwój napędzany jest opiniami i wkładem społeczności w przyszłe innowacje"</string>
     <!-- Shared strings -->
     <string name="patches">Modyfikacje</string>
     <string name="home">Strona główna</string>

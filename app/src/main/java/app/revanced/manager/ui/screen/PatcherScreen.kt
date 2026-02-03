@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.screen.patcher.*
 import app.revanced.manager.ui.screen.shared.InfoBadge
@@ -210,10 +211,16 @@ fun PatcherScreen(
     ) { uri ->
         if (uri != null && !state.isSaving) {
             state.isSaving = true
-            patcherViewModel.export(uri)
-            patcherViewModel.viewModelScope.launch {
-                delay(2000)
-                state.isSaving = false
+            // Use InstallViewModel for export
+            installViewModel.export(outputFile, uri) { success ->
+                patcherViewModel.viewModelScope.launch {
+                    if (success) {
+                        // Also save patched app metadata
+                        patcherViewModel.persistPatchedApp(null, InstallType.SAVED)
+                    }
+                    delay(2000)
+                    state.isSaving = false
+                }
             }
         }
     }

@@ -40,6 +40,8 @@
     <string name="home_dialog_selected_package">Pasirinktas failas</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instrukcijos</string>
+    <!-- Adaptive Icon Creator -->
+    <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->

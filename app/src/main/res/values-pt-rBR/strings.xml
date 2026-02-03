@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Prosseguir para patching</string>
     <string name="expert_mode_disable_all">Desativar todos</string>
     <string name="expert_mode_enable_all">Ativar todos</string>
-    <string name="expert_mode_has_options">Configurável</string>
     <string name="expert_mode_no_results">Nenhum patch encontrado</string>
     <string name="expert_mode_no_patches">Não há atualizações disponíveis</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Várias fontes de patch selecionadas</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Você selecionou patches de várias fontes de patch. Isso pode causar problemas de compatibilidade ou comportamento inesperado.
+
+Você tem certeza de que deseja continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versão não suportada</string>
     <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do aplicativo. Continuar pode resultar em um aplicativo não funcional.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Digite um número</string>
     <string name="patch_option_enter_decimal">Digite um decimal</string>
     <string name="patch_option_pick_folder">Selecionar pasta</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Criar Ã­cone adaptativo</string>
+    <string name="adaptive_icon_create">Criar Ã­cone</string>
+    <string name="adaptive_icon_instructions">Escolha uma imagem de primeiro plano, selecione a cor de fundo e ajuste a visualizaÃ§Ã£o com gestos de pinch-to-zoom</string>
+    <string name="adaptive_icon_preview">Visualizar</string>
+    <string name="adaptive_icon_select_foreground">Selecionar imagem de primeiro plano</string>
+    <string name="adaptive_icon_change_foreground">Alterar imagem de primeiro plano</string>
+    <string name="adaptive_icon_background_color">Cor de fundo</string>
+    <string name="adaptive_icon_reset_transform">Redefinir posição e escala</string>
+    <string name="adaptive_icon_safe_zone_inner">Área segura (sempre visível)</string>
+    <string name="adaptive_icon_safe_zone_outer">Área de máscara (pode ser recortada)</string>
+    <string name="adaptive_icon_created_success">Ícone adaptável criado com sucesso</string>
+    <string name="adaptive_icon_creation_failed">Falha ao criar ícone adaptável</string>
+    <string name="adaptive_icon_create_new">Criar novo ícone</string>
+    <string name="adaptive_icon_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_icons\' com os arquivos de ícone gerados</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Criar cabeçalho personalizado</string>
+    <string name="header_creator_create">Criar cabeçalho</string>
+    <string name="header_creator_create_new">Criar novo cabeçalho</string>
+    <string name="header_creator_instructions">Escolha imagens para temas claro e escuro, depois ajuste com gestos de aproximação com dois dedos</string>
+    <string name="header_creator_light_theme">Cabeçalho do tema claro</string>
+    <string name="header_creator_dark_theme">Cabeçalho do tema escuro</string>
+    <string name="header_creator_select_light">Selecionar imagem do tema claro</string>
+    <string name="header_creator_change_light">Alterar imagem do tema claro</string>
+    <string name="header_creator_select_dark">Selecionar imagem do tema escuro</string>
+    <string name="header_creator_change_dark">Alterar imagem do tema escuro</string>
+    <string name="header_creator_no_image">Nenhuma imagem selecionada</string>
+    <string name="header_creator_success">Cabeçalho criado com sucesso</string>
+    <string name="header_creator_failed">Falha ao criar cabeçalho</string>
+    <string name="header_creator_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_header\' com os arquivos de cabeçalho gerados</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Tem certeza de que deseja desinstalar esse aplicativo?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Tem certeza de que deseja excluir esse aplicativo salvo?</string>

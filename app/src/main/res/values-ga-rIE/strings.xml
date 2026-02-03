@@ -101,9 +101,12 @@
     <string name="expert_mode_proceed">Tairgf do Phaiste</string>
     <string name="expert_mode_disable_all">Díchumasaithe go léir</string>
     <string name="expert_mode_enable_all">Cumasaithe go léir</string>
-    <string name="expert_mode_has_options">Roghanna</string>
     <string name="expert_mode_no_results">Ní fuaighte paiste</string>
     <string name="expert_mode_no_patches">Ní paiste ar fáil</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Tá sárán phatchanna roghnaichte</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Tá patchanna roghnaithe agat ó sárán fhoinse. Tá seo in amhras go mbeidh comhluadar nó gníomhartha neamhordúla. 
+
+Tá sé cinnte duit go bhfuil sé ag dul chugat?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Leagan Gan Tacaíocht</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ní leagan molta den aip é an APK seo. D’fhéadfadh sé nach n-oibreodh an aip má leanann tú ar aghaidh.</string>
@@ -120,6 +123,36 @@
     <string name="patch_option_enter_number">Tairgf uimhir</string>
     <string name="patch_option_enter_decimal">Tairgf deichniúil</string>
     <string name="patch_option_pick_folder">Tairgf réadlann</string>
+    <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Cruthú icon adaptála</string>
+    <string name="adaptive_icon_create">Cruthú icon</string>
+    <string name="adaptive_icon_instructions">Roghnaíonn tú image atá in aghaidh an fhóid, roghnaíonn tú dath an phóid, agus tástálann tú an prionta le gníomhartha pinch-to-zoom</string>
+    <string name="adaptive_icon_preview">Réamhfhógair</string>
+    <string name="adaptive_icon_select_foreground">Roghnaigh íomhá an fhothain</string>
+    <string name="adaptive_icon_change_foreground">Athraigh íomhá an fhothain</string>
+    <string name="adaptive_icon_background_color">Dath an chúlra</string>
+    <string name="adaptive_icon_reset_transform">Athraigh poist agus scála</string>
+    <string name="adaptive_icon_safe_zone_inner">Zóna seoil (tá sé mar atá sé riamh)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zóin cló (tá sé ag tarchur)</string>
+    <string name="adaptive_icon_created_success">Tugadh tairbhe do icon adaptach</string>
+    <string name="adaptive_icon_creation_failed">Fáiltíonn tugadh tairbhe do icon adaptach</string>
+    <string name="adaptive_icon_create_new">Tugann icon nua</string>
+    <string name="adaptive_icon_folder_explanation">Roghnaigh cá háit a thugann \'morphe_branding/morphe_icons\' uimhir íomhánna tairbheacha</string>
+    <!-- Header Creator -->
+    <string name="header_creator_title">Tugann ceann</string>
+    <string name="header_creator_create">Tugann ceann</string>
+    <string name="header_creator_create_new">Tugann ceann nua</string>
+    <string name="header_creator_instructions">Roghnaigh íomhánna do theamaigh agus do theamaigh dorcha, ansin athraigh le gníomhartha an gcló</string>
+    <string name="header_creator_light_theme">Ceann do theamaigh dorcha</string>
+    <string name="header_creator_dark_theme">Ceann do theamaigh dorcha</string>
+    <string name="header_creator_select_light">Roghnaigh íomhá do theamaigh dorcha</string>
+    <string name="header_creator_change_light">Athraigh íomhá do theamaigh dorcha</string>
+    <string name="header_creator_select_dark">Roghnaigh íomhá do theamaigh dorcha</string>
+    <string name="header_creator_change_dark">Athraigh íomhá do theamaigh dorcha</string>
+    <string name="header_creator_no_image">Ní roghnaíodh íomhá</string>
+    <string name="header_creator_success">Tugadh tairbhe do cheann</string>
+    <string name="header_creator_failed">Fáiltíonn tugadh tairbhe do cheann</string>
+    <string name="header_creator_folder_explanation">Roghnaigh cá háit a thugann \'morphe_branding/morphe_header\' uimhir íomhánna tairbheacha</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">An bhfuil tú cinnte gur mhaith leat an t-áit a scriosadh?</string>
     <string name="home_app_info_saved_app_delete_confirmation">An bhfuil tú cinnte gur mhaith leat an t-áit seo a scriosadh?</string>
