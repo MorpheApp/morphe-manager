@@ -1,10 +1,13 @@
 package app.revanced.manager.ui.screen.home
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -25,21 +28,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.revanced.manager.domain.bundles.PatchBundleSource
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.githubAvatarUrl
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.repository.PatchBundleRepository
@@ -49,7 +53,10 @@ import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
 import app.revanced.manager.util.BUNDLE_URL_RELEASES
 import app.revanced.manager.util.getRelativeTimeString
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
+import java.net.URL
 
 /**
  * Bottom sheet for managing patch bundles
@@ -443,23 +450,12 @@ private fun BundleCardHeader(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Bundle icon
-        Surface(
-            shape = CircleShape,
-            color = if (enabled) MaterialTheme.colorScheme.primaryContainer
-            else MaterialTheme.colorScheme.surfaceVariant,
+        // Bundle icon with GitHub avatar support
+        BundleIcon(
+            bundle = bundle,
+            enabled = enabled,
             modifier = Modifier.size(44.dp)
-        ) {
-            Icon(
-                imageVector = if (bundle.isDefault) Icons.Outlined.Stars else Icons.Outlined.Source,
-                contentDescription = null,
-                tint = if (enabled)
-                    MaterialTheme.colorScheme.onPrimaryContainer
-                else
-                    MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(10.dp)
-            )
-        }
+        )
 
         // Title + badges
         Column(modifier = Modifier.weight(1f)) {
@@ -690,4 +686,96 @@ private fun BundleTypeBadge(bundle: PatchBundleSource) {
         text = text,
         isCompact = true
     )
+}
+
+@Composable
+fun BundleIcon(
+    bundle: PatchBundleSource,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    val githubAvatarUrl = bundle.githubAvatarUrl
+
+    Surface(
+        modifier = modifier,
+        shape = CircleShape,
+        color = when {
+            bundle.isDefault -> Color.White
+            enabled -> MaterialTheme.colorScheme.primaryContainer
+            else -> MaterialTheme.colorScheme.surfaceVariant
+        }
+    ) {
+        when {
+            bundle.isDefault -> {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = modifier
+                        .graphicsLayer {
+                            scaleX = 1.5f
+                            scaleY = 1.5f
+                        }
+                )
+            }
+
+            githubAvatarUrl != null -> {
+                RemoteAvatar(
+                    url = githubAvatarUrl,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            else -> {
+                Icon(
+                    imageVector = Icons.Outlined.Source,
+                    contentDescription = null,
+                    tint = if (enabled)
+                        MaterialTheme.colorScheme.onPrimaryContainer
+                    else
+                        MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(10.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun RemoteAvatar(
+    url: String,
+    modifier: Modifier = Modifier
+) {
+    var bitmap by remember(url) { mutableStateOf<Bitmap?>(null) }
+
+    LaunchedEffect(url) {
+        bitmap = loadGitHubAvatar(url)
+    }
+
+    if (bitmap != null) {
+        Image(
+            bitmap = bitmap!!.asImageBitmap(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = modifier
+        )
+    }
+}
+
+/**
+ * Load GitHub avatar image from URL
+ */
+private suspend fun loadGitHubAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
+    try {
+        val connection = URL(url).openConnection()
+        connection.connectTimeout = 5000
+        connection.readTimeout = 5000
+        connection.connect()
+
+        connection.getInputStream().use { input ->
+            BitmapFactory.decodeStream(input)
+        }
+    } catch (_: Exception) {
+        null
+    }
 }

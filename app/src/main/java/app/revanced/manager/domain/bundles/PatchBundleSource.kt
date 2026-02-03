@@ -84,5 +84,38 @@ sealed class PatchBundleSource(
         private const val MIN_PATCH_BUNDLE_BYTES = 8L
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
+
+        /**
+         * Get GitHub avatar URL if this bundle is from a GitHub repository
+         */
+        val PatchBundleSource.githubAvatarUrl: String? get() {
+            val remote = this as? RemotePatchBundle ?: return null
+            return extractGitHubOwner(remote.endpoint)?.let { owner ->
+                "https://github.com/$owner.png"
+            }
+        }
+
+        /**
+         * Extract GitHub owner/organization name from endpoint URL
+         */
+        private fun extractGitHubOwner(endpoint: String): String? {
+            return try {
+                val uri = java.net.URI(endpoint)
+                val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
+                val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
+
+                when {
+                    // raw.githubusercontent.com/owner/repo/...
+                    host == "raw.githubusercontent.com" && segments.isNotEmpty() -> segments[0]
+
+                    // github.com/owner/repo/...
+                    host == "github.com" && segments.isNotEmpty() -> segments[0]
+
+                    else -> null
+                }
+            } catch (_: Exception) {
+                null
+            }
+        }
     }
 }
