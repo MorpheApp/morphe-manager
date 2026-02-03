@@ -78,6 +78,16 @@ fun BundleManagementSheet(
     // Check if only default bundle exists
     val isSingleDefaultBundle = sources.size == 1
 
+    // Auto-enable the default bundle if it's the only one and disabled
+    LaunchedEffect(sources) {
+        if (sources.size == 1) {
+            val singleBundle = sources.first()
+            if (singleBundle.isDefault && !singleBundle.enabled) {
+                onDisable(singleBundle) // This will toggle it to enabled
+            }
+        }
+    }
+
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
