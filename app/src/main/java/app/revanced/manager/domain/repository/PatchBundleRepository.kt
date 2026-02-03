@@ -1009,28 +1009,96 @@ class PatchBundleRepository(
         var host = parsed.host
         var pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
 
-        // Allow GitHub pull request URLs untouched (handled separately by Source.from / GitHubPullRequestBundle).
-        if (host.equals("github.com", ignoreCase = true) &&
-            pathSegments.size >= 3 &&
-            pathSegments[2] == "pull"
-        ) {
-            val scheme = if (parsed.protocol.name.equals("https", ignoreCase = true)) "https" else "http"
-            val basePath = "/" + pathSegments.joinToString("/")
-            val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-            return "$scheme://$host$basePath$query"
-        }
+        // Handle GitHub repository URLs
+        if (host.equals("github.com", ignoreCase = true)) {
+            if (pathSegments.size < 2) {
+                throw IllegalArgumentException("Invalid GitHub repository URL")
+            }
 
-        if (host.equals("github.com", ignoreCase = true) && pathSegments.size >= 4 && pathSegments[2] == "blob") {
-            // https://github.com/{owner}/{repo}/blob/{branch}/path -> raw.githubusercontent.com/{owner}/{repo}/{branch}/path
+            // Check if it's a pull request URL
+            if (pathSegments.size >= 3 && pathSegments[2] == "pull") {
+                val scheme = if (parsed.protocol.name.equals("https", ignoreCase = true)) "https" else "http"
+                val basePath = "/" + pathSegments.joinToString("/")
+                val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
+                return "$scheme://$host$basePath$query"
+            }
+
+            // Transform GitHub repository URL to raw.githubusercontent.com
             val owner = pathSegments[0]
             val repo = pathSegments[1]
-            val branchAndPath = pathSegments.drop(3)
-            host = "raw.githubusercontent.com"
-            pathSegments = listOf(owner, repo) + branchAndPath
+
+            // Determine branch and additional path
+            val branch = when {
+                // URL format: github.com/owner/repo/tree/branch/path...
+                pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
+                    val branchSegments = pathSegments.drop(3)
+                    // Find where the branch name ends (could be multi-segment like "refs/heads/main")
+                    branchSegments.takeWhile { !it.endsWith(".json") }.joinToString("/")
+                }
+                // URL format: github.com/owner/repo/blob/branch/path...
+                pathSegments.size >= 4 && pathSegments[2] == "blob" -> {
+                    pathSegments[3]
+                }
+                // Default to main branch
+                else -> "main"
+            }
+
+            // Get the remaining path after branch (if any)
+            val remainingPath = when {
+                pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
+                    // For tree URLs, get everything after the branch
+                    val branchSegmentCount = branch.split("/").size
+                    pathSegments.drop(3 + branchSegmentCount).joinToString("/")
+                }
+                pathSegments.size >= 5 && pathSegments[2] == "blob" -> {
+                    // For blob URLs, get everything after the branch
+                    pathSegments.drop(4).joinToString("/")
+                }
+                pathSegments.size >= 3 -> {
+                    // Direct path after repo (e.g., github.com/owner/repo/legacy)
+                    pathSegments.drop(2).joinToString("/")
+                }
+                else -> ""
+            }
+
+            // Build the final path
+            val finalPath = buildString {
+                append("/$owner/$repo/$branch")
+                if (remainingPath.isNotEmpty()) {
+                    append("/$remainingPath")
+                    // Add patches-bundle.json only if the path doesn't already end with .json
+                    if (!remainingPath.endsWith(".json", ignoreCase = true)) {
+                        append("/patches-bundle.json")
+                    }
+                } else {
+                    append("/patches-bundle.json")
+                }
+            }
+
+            return "https://raw.githubusercontent.com$finalPath"
         }
 
+        // Handle raw.githubusercontent.com URLs (legacy support)
+        if (host.equals("raw.githubusercontent.com", ignoreCase = true)) {
+            if (pathSegments.size < 3) {
+                throw IllegalArgumentException("Invalid raw GitHub URL")
+            }
+
+            val normalizedPath = "/" + pathSegments.joinToString("/")
+            val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
+
+            if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+                throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
+            }
+
+            val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
+            return "https://$host$normalizedPath$query"
+        }
+
+        // Handle direct JSON URLs from other hosts
         val normalizedPath = "/" + pathSegments.joinToString("/")
         val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
+
         if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
             throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
         }
