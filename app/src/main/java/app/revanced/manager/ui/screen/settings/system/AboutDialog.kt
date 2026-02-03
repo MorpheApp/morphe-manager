@@ -117,9 +117,11 @@ fun AboutDialog(onDismiss: () -> Unit) {
             )
 
             // Social Links
-            Row(
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
-                modifier = Modifier.fillMaxWidth()
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                maxItemsInEachRow = 4
             ) {
                 AboutViewModel.socials.forEach { link ->
                     SocialIconButton(
@@ -161,5 +163,3 @@ private fun SocialIconButton(
         }
     }
 }
-
-

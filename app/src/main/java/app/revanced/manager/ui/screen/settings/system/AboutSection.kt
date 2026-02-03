@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -70,7 +70,7 @@ fun AboutSection(
 
         // Share Website item
         SettingsItem(
-            icon = Icons.Outlined.Language,
+            icon = Icons.Outlined.Public,
             title = stringResource(R.string.settings_system_share_website),
             description = stringResource(R.string.settings_system_share_website_description),
             onClick = {
