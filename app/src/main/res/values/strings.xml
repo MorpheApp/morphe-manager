@@ -78,7 +78,12 @@
 
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">To patch %1$s, you need version %2$s (unpatched)</string>
+    <string name="home_apk_availability_dialog_description_simple">To patch %1$s, you need an unpatched APK with version:</string>
+    <string name="home_apk_availability_dialog_description_expert">Do you have an unpatched %1$s APK?
+
+Compatible versions:</string>
+    <string name="home_apk_availability_recommended_label">Recommended</string>
+    <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
     <string name="home_apk_availability_no">No, help me find it</string>
 
@@ -124,10 +129,12 @@ Are you sure you want to proceed?"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Unsupported Version</string>
     <string name="home_dialog_unsupported_version_dialog_description">This APK is not a recommended app version. Proceeding may result in a non-functional app.</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceed anyway</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Compatible versions:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Unsupported</string>
     <string name="home_dialog_wrong_package_title">Wrong package selected</string>
     <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch.</string>
-    <string name="home_dialog_expected_package">Expected package</string>
-    <string name="home_dialog_selected_package">Selected package</string>
+    <string name="home_dialog_expected_package">Expected package:</string>
+    <string name="home_dialog_selected_package">Selected package:</string>
 
     <!-- Patch Options -->
     <string name="custom_color">Custom color</string>
