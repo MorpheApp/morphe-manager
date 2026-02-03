@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <permission
-        android:name="app.morphe.manager.permission.PLUGIN_HOST"
-        android:protectionLevel="signature"
-        android:label="@string/plugin_host_permission_label"
-        android:description="@string/plugin_host_permission_description" />
-
-    <uses-permission android:name="app.morphe.manager.permission.PLUGIN_HOST" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -46,23 +39,11 @@
             android:multiprocess="false"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
-        <!--
-            <activity
-                android:name="app.revanced.manager.MainActivity"
-                android:exported="true"
-                android:theme="@style/Theme.ReVancedManager">
-
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-        -->
-
         <!-- Main Activity without launcher -->
         <activity
             android:name="app.revanced.manager.MainActivity"
             android:exported="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
             android:theme="@style/Theme.ReVancedManager">
 
             <intent-filter>
@@ -156,8 +137,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
-<!--        <activity android:name="app.revanced.manager.plugin.downloader.webview.WebViewActivity" android:exported="false" android:theme="@style/Theme.WebViewActivity" />-->
 
         <service android:name="app.revanced.manager.service.InstallService" />
         <service android:name="app.revanced.manager.service.UninstallService" />

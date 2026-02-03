@@ -44,6 +44,7 @@ import app.revanced.manager.ui.screen.settings.system.InstallerSelectionDialogCo
 import app.revanced.manager.ui.screen.settings.system.KeystoreCredentialsDialog
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.JSON_MIMETYPE
+import app.revanced.manager.util.rememberFileCreatorWithPermission
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -101,7 +102,7 @@ fun SettingsScreen(
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
     var showInstallerDialog by remember { mutableStateOf(false) }
 
-    // Keystore import launcher
+    // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
@@ -110,14 +111,6 @@ fun SettingsScreen(
         }
     }
 
-    // Keystore export launcher
-    val exportKeystoreLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("*/*")
-    ) { uri ->
-        uri?.let { importExportViewModel.exportKeystore(it) }
-    }
-
-    // Manager settings import launcher
     val importSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
@@ -126,19 +119,21 @@ fun SettingsScreen(
         }
     }
 
-    // Manager settings export launcher
-    val exportSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
-    ) { uri ->
-        uri?.let { importExportViewModel.exportManagerSettings(it) }
-    }
+    // Export launchers
+    val exportKeystore = rememberFileCreatorWithPermission(
+        mimeType = "*/*",
+        onFileCreated = { uri -> importExportViewModel.exportKeystore(uri) }
+    )
 
-    // Debug logs export launcher
-    val exportDebugLogsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("text/plain")
-    ) { uri ->
-        uri?.let { importExportViewModel.exportDebugLogs(it) }
-    }
+    val exportSettings = rememberFileCreatorWithPermission(
+        mimeType = JSON_MIMETYPE,
+        onFileCreated = { uri -> importExportViewModel.exportManagerSettings(uri) }
+    )
+
+    val exportDebugLogs = rememberFileCreatorWithPermission(
+        mimeType = "text/plain",
+        onFileCreated = { uri -> importExportViewModel.exportDebugLogs(uri) }
+    )
 
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
@@ -214,10 +209,10 @@ fun SettingsScreen(
                     onShowInstallerDialog = { showInstallerDialog = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
+                    onExportKeystore = { exportKeystore("Morphe.keystore") },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
-                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
-                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
+                    onExportSettings = { exportSettings("morphe_manager_settings.json") },
+                    onExportDebugLogs = { exportDebugLogs(importExportViewModel.debugLogFileName) },
                     onAboutClick = { showAboutDialog = true },
                     prefs = prefs
                 )

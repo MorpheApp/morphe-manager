@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -112,9 +111,10 @@ fun HomeScreen(
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
 
     // Initialize launchers
-    val storagePickerLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocument()
-    ) { uri -> homeViewModel.handleApkSelection(uri) }
+    val openApkPicker = rememberFilePickerWithPermission(
+        mimeTypes = APK_FILE_MIME_TYPES,
+        onFilePicked = { uri -> homeViewModel.handleApkSelection(uri) }
+    )
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
         RequestInstallAppsContract
@@ -258,7 +258,7 @@ fun HomeScreen(
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = { storagePickerLauncher.launch(APK_FILE_MIME_TYPES) },
+        storagePickerLauncher = openApkPicker,
         openBundlePicker = openBundlePicker
     )
 

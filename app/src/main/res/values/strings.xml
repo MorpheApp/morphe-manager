@@ -619,7 +619,4 @@ Do you still want to continue?"</string>
     <string name="hours_ago">%sh ago</string>
     <string name="days_ago">%sd ago</string>
     <string name="invalid_date">Invalid date</string>
-
-    <string name="plugin_host_permission_label">Morphe plugin host</string>
-    <string name="plugin_host_permission_description">Used to control access to Morphe plugins. Only Morphe has this.</string>
 </resources>
