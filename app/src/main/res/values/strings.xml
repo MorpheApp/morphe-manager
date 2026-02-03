@@ -146,32 +146,24 @@ Are you sure you want to proceed?"</string>
     <string name="patch_option_pick_folder">Pick folder</string>
 
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Create adaptive icon</string>
-    <string name="adaptive_icon_create">Create icon</string>
+    <string name="adaptive_icon_create">Create adaptive icon</string>
     <string name="adaptive_icon_instructions">Choose a foreground image, select background color, and adjust the preview with pinch-to-zoom gestures</string>
     <string name="adaptive_icon_preview">Preview</string>
-    <string name="adaptive_icon_select_foreground">Select foreground image</string>
-    <string name="adaptive_icon_change_foreground">Change foreground image</string>
+    <string name="adaptive_icon_select_image">Select image</string>
+    <string name="adaptive_icon_change_image">Change image</string>
     <string name="adaptive_icon_background_color">Background color</string>
     <string name="adaptive_icon_reset_transform">Reset position and scale</string>
     <string name="adaptive_icon_safe_zone_inner">Safe zone (always visible)</string>
     <string name="adaptive_icon_safe_zone_outer">Mask zone (may be clipped)</string>
     <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
     <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
-    <string name="adaptive_icon_create_new">Create new icon</string>
     <string name="adaptive_icon_folder_explanation">Select where to create \'morphe_branding/morphe_icons\' folder with generated icon files</string>
 
     <!-- Header Creator -->
-    <string name="header_creator_title">Create custom header</string>
-    <string name="header_creator_create">Create header</string>
-    <string name="header_creator_create_new">Create new header</string>
+    <string name="header_creator_create">Create custom header</string>
     <string name="header_creator_instructions">Choose images for light and dark themes, then adjust with pinch-to-zoom gestures</string>
     <string name="header_creator_light_theme">Light theme header</string>
     <string name="header_creator_dark_theme">Dark theme header</string>
-    <string name="header_creator_select_light">Select light theme image</string>
-    <string name="header_creator_change_light">Change light theme image</string>
-    <string name="header_creator_select_dark">Select dark theme image</string>
-    <string name="header_creator_change_dark">Change dark theme image</string>
     <string name="header_creator_no_image">No image selected</string>
     <string name="header_creator_success">Header created successfully</string>
     <string name="header_creator_failed">Failed to create header</string>
