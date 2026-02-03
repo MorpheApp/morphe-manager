@@ -4,10 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import androidx.core.net.toUri
 import app.revanced.manager.service.UninstallService
 
 @Suppress("DEPRECATION")
@@ -23,14 +23,13 @@ class UninstallReceiver : BroadcastReceiver() {
                 val userActionIntent = if (Build.VERSION.SDK_INT >= 33) {
                     intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
                 } else {
-                    @Suppress("DEPRECATION")
                     intent.getParcelableExtra(Intent.EXTRA_INTENT) as? Intent
                 }
 
                 if (!tryStartUserAction(context, userActionIntent)) {
                     val fallback = Intent(
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:${targetPackage.orEmpty()}")
+                        "package:${targetPackage.orEmpty()}".toUri()
                     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                     if (!tryStartUserAction(context, fallback)) {
