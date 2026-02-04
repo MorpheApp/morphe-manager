@@ -2,17 +2,12 @@ package app.revanced.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AutoAwesome
-import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Image
-import androidx.compose.material.icons.outlined.Restore
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -32,10 +27,10 @@ import app.revanced.manager.ui.screen.home.ColorPresetItem
 import app.revanced.manager.ui.screen.home.ExpandableSurface
 import app.revanced.manager.ui.screen.home.ScrollableInstruction
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.util.AppPackages
-import app.revanced.manager.util.rememberFolderPickerWithPermission
 import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
+import app.revanced.manager.util.AppPackages
+import app.revanced.manager.util.rememberFolderPickerWithPermission
 import kotlinx.coroutines.launch
 
 /**
@@ -398,44 +393,19 @@ fun CustomBrandingDialog(
                     placeholder = {
                         Text("/storage/emulated/0/icons")
                     },
+                    showClearButton = true,
                     trailingIcon = {
-                        Row(
-                            modifier = Modifier.width(88.dp),
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                        // Folder picker button
+                        IconButton(
+                            onClick = openFolderPicker,
+                            modifier = Modifier.size(40.dp)
                         ) {
-                            // Reset button
-                            Box(
-                                modifier = Modifier.size(40.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                if (iconPath.isNotEmpty()) {
-                                    IconButton(
-                                        onClick = { iconPath = "" },
-                                        modifier = Modifier.fillMaxSize()
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Clear,
-                                            contentDescription = stringResource(R.string.reset),
-                                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                            modifier = Modifier.size(20.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            // Folder picker button
-                            IconButton(
-                                onClick = openFolderPicker,
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = stringResource(R.string.patch_option_pick_folder),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
+                            Icon(
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = stringResource(R.string.patch_option_pick_folder),
+                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                modifier = Modifier.size(20.dp)
+                            )
                         }
                     }
                 )
@@ -550,44 +520,19 @@ fun CustomHeaderDialog(
                     placeholder = {
                         Text("/storage/emulated/0/header")
                     },
+                    showClearButton = true,
                     trailingIcon = {
-                        Row(
-                            modifier = Modifier.width(88.dp),
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                        // Folder picker button
+                        IconButton(
+                            onClick = openFolderPicker,
+                            modifier = Modifier.size(40.dp)
                         ) {
-                            // Reset button
-                            Box(
-                                modifier = Modifier.size(40.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                if (headerPath.isNotEmpty()) {
-                                    IconButton(
-                                        onClick = { headerPath = "" },
-                                        modifier = Modifier.fillMaxSize()
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Outlined.Clear,
-                                            contentDescription = stringResource(R.string.reset),
-                                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                            modifier = Modifier.size(20.dp)
-                                        )
-                                    }
-                                }
-                            }
-
-                            // Folder picker button
-                            IconButton(
-                                onClick = openFolderPicker,
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.FolderOpen,
-                                    contentDescription = stringResource(R.string.patch_option_pick_folder),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
+                            Icon(
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = stringResource(R.string.patch_option_pick_folder),
+                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                                modifier = Modifier.size(20.dp)
+                            )
                         }
                     }
                 )

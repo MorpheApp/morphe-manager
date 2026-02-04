@@ -1,17 +1,19 @@
 package app.revanced.manager.ui.screen.settings.advanced
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.screen.shared.*
@@ -81,7 +83,6 @@ private fun GitHubPatDialog(
     var pat by rememberSaveable(currentPat) { mutableStateOf(currentPat) }
     var includePatInExport by rememberSaveable(currentIncludeInExport) { mutableStateOf(currentIncludeInExport) }
     var showIncludeWarning by rememberSaveable { mutableStateOf(false) }
-    var showPassword by rememberSaveable { mutableStateOf(false) }
     var showInfoDialog by rememberSaveable { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
@@ -121,10 +122,12 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                OutlinedTextField(
+                MorpheDialogTextField(
                     value = pat,
                     onValueChange = { pat = it },
-                    label = { Text(stringResource(R.string.settings_advanced_github_pat_label)) },
+                    label = {
+                        Text(stringResource(R.string.settings_advanced_github_pat_label))
+                    },
                     placeholder = { Text("ghp_xxxxxxxxxxxxxxx") },
                     leadingIcon = {
                         Icon(
@@ -133,64 +136,8 @@ private fun GitHubPatDialog(
                             tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
                         )
                     },
-                    trailingIcon = {
-                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            // Toggle visibility button
-                            IconButton(
-                                onClick = { showPassword = !showPassword }
-                            ) {
-                                Icon(
-                                    imageVector = if (showPassword) {
-                                        Icons.Outlined.VisibilityOff
-                                    } else {
-                                        Icons.Outlined.Visibility
-                                    },
-                                    contentDescription = if (showPassword) {
-                                        stringResource(R.string.settings_advanced_github_pat_hide)
-                                    } else {
-                                        stringResource(R.string.settings_advanced_github_pat_show)
-                                    },
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                                )
-                            }
-
-                            // Clear button
-                            if (pat.isNotBlank()) {
-                                IconButton(onClick = { pat = "" }) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Delete,
-                                        contentDescription = stringResource(R.string.clear),
-                                        tint = LocalDialogTextColor.current.copy(alpha = 0.7f)
-                                    )
-                                }
-                            }
-                        }
-                    },
-                    visualTransformation = if (showPassword) {
-                        VisualTransformation.None
-                    } else {
-                        PasswordVisualTransformation()
-                    },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalDialogTextColor.current,
-                        unfocusedTextColor = LocalDialogTextColor.current,
-                        disabledTextColor = LocalDialogTextColor.current.copy(alpha = 0.6f),
-                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
-                        disabledBorderColor = LocalDialogTextColor.current.copy(alpha = 0.1f),
-                        cursorColor = LocalDialogTextColor.current,
-                        focusedLeadingIconColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                        unfocusedLeadingIconColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        focusedTrailingIconColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                        unfocusedTrailingIconColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        focusedLabelColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                        unfocusedLabelColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
-                        focusedPlaceholderColor = LocalDialogTextColor.current.copy(alpha = 0.4f),
-                        unfocusedPlaceholderColor = LocalDialogTextColor.current.copy(alpha = 0.4f)
-                    ),
-                    shape = MaterialTheme.shapes.medium
+                    isPassword = true,
+                    showClearButton = true
                 )
             }
 

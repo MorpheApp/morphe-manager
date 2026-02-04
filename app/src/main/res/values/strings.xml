@@ -65,7 +65,10 @@
     <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone.</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">Source URL</string>
-    <string name="sources_dialog_remote_description">Enter JSON endpoint URL for remote patch source</string>
+    <string name="sources_dialog_remote_url_formats">"Examples:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Select patch source file</string>
     <string name="sources_dialog_local_file_description">Select a .mpp patch source file from storage</string>
@@ -345,8 +348,6 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_github_pat_how_to_get">How to get a token</string>
     <string name="settings_advanced_github_pat_dialog_title">Set GitHub PAT</string>
     <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo github.com</string>
-    <string name="settings_advanced_github_pat_show">Show token</string>
-    <string name="settings_advanced_github_pat_hide">Hide token</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported manager settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token.</string>

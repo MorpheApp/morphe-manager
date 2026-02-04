@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -158,16 +157,7 @@ fun ExpertModeDialog(
                             contentDescription = stringResource(R.string.expert_mode_search)
                         )
                     },
-                    trailingIcon = {
-                        if (searchQuery.isNotEmpty()) {
-                            IconButton(onClick = { searchQuery = "" }) {
-                                Icon(
-                                    imageVector = Icons.Default.Close,
-                                    contentDescription = stringResource(R.string.clear)
-                                )
-                            }
-                        }
-                    }
+                    showClearButton = true
                 )
             }
 
@@ -888,47 +878,22 @@ private fun PathInputOption(
             placeholder = {
                 Text("/storage/emulated/0/folder")
             },
+            showClearButton = true,
             trailingIcon = {
-                Row(
-                    modifier = Modifier.width(88.dp),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                // Folder picker button
+                val folderPicker = rememberFolderPickerWithPermission { uri ->
+                    onValueChange(uri)
+                }
+                IconButton(
+                    onClick = { folderPicker() },
+                    modifier = Modifier.size(40.dp)
                 ) {
-                    // Reset button
-                    Box(
-                        modifier = Modifier.size(40.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (value.isNotEmpty()) {
-                            IconButton(
-                                onClick = { onValueChange("") },
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Clear,
-                                    contentDescription = stringResource(R.string.reset),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-                    }
-
-                    // Folder picker button
-                    val folderPicker = rememberFolderPickerWithPermission { uri ->
-                        onValueChange(uri)
-                    }
-                    IconButton(
-                        onClick = { folderPicker() },
-                        modifier = Modifier.size(40.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.FolderOpen,
-                            contentDescription = stringResource(R.string.patch_option_pick_folder),
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Outlined.FolderOpen,
+                        contentDescription = stringResource(R.string.patch_option_pick_folder),
+                        tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
             }
         )
@@ -1036,22 +1001,7 @@ private fun TextInputOption(
                     )
                 )
             },
-            trailingIcon = {
-                // Reset button
-                if (value.isNotEmpty()) {
-                    IconButton(
-                        onClick = { onValueChange("") },
-                        modifier = Modifier.size(40.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Clear,
-                            contentDescription = stringResource(R.string.reset),
-                            tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                }
-            },
+            showClearButton = true,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
     }

@@ -172,8 +172,9 @@ private fun RemoteTabContent(
                     Text(stringResource(R.string.sources_dialog_remote_url))
                 },
                 placeholder = {
-                    Text(text = "https://example.com/patches.json")
+                    Text(text = "github.com/owner/repo")
                 },
+                showClearButton = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri)
             )
         }
@@ -181,8 +182,8 @@ private fun RemoteTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.sources_dialog_remote_description),
-            style = InfoBadgeStyle.Success
+            text = stringResource(R.string.sources_dialog_remote_url_formats),
+            style = InfoBadgeStyle.Default
         )
     }
 }
