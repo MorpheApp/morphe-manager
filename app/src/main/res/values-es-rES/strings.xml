@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">El proceso de aplicación de parches salió con el código %1$d.</string>
     <string name="install_app_success">Instalado correctamente</string>
     <string name="install_app_fail">Error al instalar la aplicación: %s</string>
-    <string name="install_app_fail_missing_stock">Falta el original APK para una instalación montada.</string>
-    <string name="mount_split_not_supported">Un instalador montado con root no admite aplicaciones divididas. Usar el instalador del sistema en su lugar.</string>
     <string name="install_timeout_message">La instalación no finalizó. Comprueba el diálogo del instalador del sistema y vuelve a intentarlo.</string>
-    <string name="uninstall_timeout_message">La desinstalación no se completó. Revise el diálogo de desinstalación y inténtelo de nuevo.</string>
-    <string name="reinstall_app_fail">Error al reinstalar la aplicación: %s</string>
-    <string name="uninstall_app_fail">Error al desinstalar la aplicación: %s</string>
     <string name="save_apk_success">APK guardado</string>
-    <string name="saved_app_export_success">Aplicación parcheada exportada</string>
     <string name="saved_app_export_failed">Error al exportar la aplicación parcheada</string>
     <string name="saved_app_removed_toast">Aplicación parcheada guardada eliminada</string>
     <string name="saved_app_copy_removed_toast">Copia guardada eliminada</string>
     <string name="saved_app_launch_unavailable">Instala la app antes de abrirla.</string>
-    <string name="saved_app_install_success">App guardada instalada</string>
-    <string name="saved_app_install_failed">Error al instalar la app guardada</string>
-    <string name="saved_app_install_missing">No se encontró el APK guardado</string>
     <string name="package_name">Nombre del paquete</string>
     <string name="failed_to_mount">Error al montar: %s</string>
     <string name="failed_to_unmount">Error al desmontar: %s</string>
@@ -413,6 +404,10 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_external_timeout">%1$s no confirmó la instalación. Revisa la otra aplicación e inténtalo de nuevo.</string>
     <string name="installer_external_success">%1$s informó de una instalación exitosa.</string>
     <string name="installer_external_finished_no_change">%1$s completado sin instalar la aplicación. Verifica el instalador para un mensaje de error y prueba de nuevo.</string>
+    <string name="installer_unavailable_title">%s no disponible</string>
+    <string name="installer_unavailable_message">Su instalador preferido (%s) está actualmente no disponible. Puede solucionar el problema y volver a intentarlo, o usar el instalador estándar en su lugar.</string>
+    <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku está en ejecución y se ha concedido el permiso a esta aplicación.</string>
+    <string name="installer_use_standard">Usar estándar</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Rendimiento</string>
     <string name="settings_system_process_runtime">Tiempo de ejecución del proceso</string>
@@ -492,6 +487,7 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="reset">Restablecer</string>
     <string name="warning">Advertencia</string>
     <string name="error_">Error</string>
+    <string name="retry">Reintentar</string>
     <string name="add">Añadir</string>
     <string name="close">Cerrar</string>
     <string name="clear">Limpiar</string>
@@ -563,6 +559,4 @@ Morphe se basa en la retroalimentación y las contribuciones de la comunidad par
     <string name="hours_ago">hace %s h</string>
     <string name="days_ago">hace %sd</string>
     <string name="invalid_date">Fecha no válida</string>
-    <string name="plugin_host_permission_label">Host de plugins de Morphe</string>
-    <string name="plugin_host_permission_description">Se usa para controlar el acceso a los plugins de Morphe. Solo Morphe tiene esto.</string>
 </resources>

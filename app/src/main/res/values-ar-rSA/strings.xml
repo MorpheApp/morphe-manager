@@ -103,10 +103,10 @@
     <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_no_results">لم يتم العثور على تعديلات</string>
     <string name="expert_mode_no_patches">لا يوجد تعديلات متاحة</string>
-    <string name="expert_mode_multiple_bundles_warning_title">تمت الإختيار من مصادر التحديثات المتعددة</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"تمت الإختيار من مصادر التحديثات المتعددة. قد يؤدي هذا إلى مشاكل في التوافق أو سلوك غير متوقع.
+    <string name="expert_mode_multiple_bundles_warning_title">تم تحديد مصادر تعديل متعددة</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"لقد حددت تعديلات من مصادر متعددة. قد يُسبب ذلك مشاكل في التوافق أو سلوكًا غير متوقع.
 
-هل تريد الاستمرار؟"</string>
+هل أنت متأكد من رغبتك في المتابعة؟"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">إصدار غير مدعوم</string>
     <string name="home_dialog_unsupported_version_dialog_description">ملف APK هذا ليس إصدارًا موصى به. قد تؤدي المتابعة إلى عدم عمله بشكل صحيح.</string>
@@ -124,35 +124,35 @@
     <string name="patch_option_enter_decimal">أدخل رقمًا العشريًا</string>
     <string name="patch_option_pick_folder">تحديد المجلد</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">إنشاء أيقونة قابلة للتكيف</string>
+    <string name="adaptive_icon_creator_title">إنشاء أيقونة تكيفية</string>
     <string name="adaptive_icon_create">إنشاء أيقونة</string>
-    <string name="adaptive_icon_instructions">اختر صورة أمامية، حدد لون خلفية، وعدل المعاينة باستخدام إشارات الزوم باللمسة</string>
+    <string name="adaptive_icon_instructions">اختر صورة أمامية، حدد لون الخلفية، واضبط المعاينة باستخدام إيماءات التكبير والتصغير.</string>
     <string name="adaptive_icon_preview">معاينة</string>
-    <string name="adaptive_icon_select_foreground">اختر صورة خلفية</string>
-    <string name="adaptive_icon_change_foreground">تغيير صورة خلفية</string>
+    <string name="adaptive_icon_select_foreground">اختر صورة أمامية</string>
+    <string name="adaptive_icon_change_foreground">تغيير الصورة الأمامية</string>
     <string name="adaptive_icon_background_color">لون الخلفية</string>
-    <string name="adaptive_icon_reset_transform">إعادة تعيين موضع و مقياس</string>
-    <string name="adaptive_icon_safe_zone_inner">منطقة آمنة (دائمة البصر)</string>
-    <string name="adaptive_icon_safe_zone_outer">منطقة قناع ( peut être rogné)</string>
-    <string name="adaptive_icon_created_success">تم إنشاء أيقونة مرنة بنجاح</string>
-    <string name="adaptive_icon_creation_failed">تعذر إنشاء أيقونة مرنة</string>
+    <string name="adaptive_icon_reset_transform">إعادة ضبط الموضع والحجم</string>
+    <string name="adaptive_icon_safe_zone_inner">منطقة آمنة (دائمة الظهور)</string>
+    <string name="adaptive_icon_safe_zone_outer">منطقة القناع (قد تكون مقصوصة)</string>
+    <string name="adaptive_icon_created_success">تم إنشاء أيقونة تكيفية بنجاح</string>
+    <string name="adaptive_icon_creation_failed">فشل إنشاء أيقونة تكيفية</string>
     <string name="adaptive_icon_create_new">إنشاء أيقونة جديدة</string>
-    <string name="adaptive_icon_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_icons\' مع ملفات أيقونة-generated</string>
+    <string name="adaptive_icon_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_icons\' مع ملفات الأيقونة المنشأة</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">إنشاء رأس مخصص</string>
-    <string name="header_creator_create">إنشاء رأس</string>
-    <string name="header_creator_create_new">إنشاء رأس جديد</string>
-    <string name="header_creator_instructions">اختر صور للأنماط الخفيفة والداكنة، ثم تعديلها باستخدام إيماءات تمسح</string>
-    <string name="header_creator_light_theme">رأس نمط خفيف</string>
-    <string name="header_creator_dark_theme">رأس نمط داكن</string>
-    <string name="header_creator_select_light">اختر صورة نمط خفيف</string>
-    <string name="header_creator_change_light">تغيير صورة نمط خفيف</string>
-    <string name="header_creator_select_dark">اختر صورة نمط داكن</string>
-    <string name="header_creator_change_dark">تغيير صورة نمط داكن</string>
+    <string name="header_creator_title">إنشاء علامة شعار مخصصة</string>
+    <string name="header_creator_create">إنشاء شعار</string>
+    <string name="header_creator_create_new">إنشاء شعار جديد</string>
+    <string name="header_creator_instructions">اختر صورًا للمظاهر الفاتحة والداكنة، ثم اضبطها باستخدام إيماءات التكبير والتصغير.</string>
+    <string name="header_creator_light_theme">علامة شعار المظهر الفاتح</string>
+    <string name="header_creator_dark_theme">علامة شعار المظهر الداكن</string>
+    <string name="header_creator_select_light">اختر صورة المظهر الفاتح</string>
+    <string name="header_creator_change_light">تغيير صورة المظهر الفاتح</string>
+    <string name="header_creator_select_dark">اختر صورة المظهر الداكن</string>
+    <string name="header_creator_change_dark">تغيير صورة المظهر الداكن</string>
     <string name="header_creator_no_image">لم يتم تحديد أي صورة</string>
-    <string name="header_creator_success">تم إنشاء الرأس بنجاح</string>
-    <string name="header_creator_failed">تعذر إنشاء الرأس</string>
-    <string name="header_creator_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_header\' مع ملفات رأس-generated</string>
+    <string name="header_creator_success">تم إنشاء علامة الشعار بنجاح</string>
+    <string name="header_creator_failed">تعذر إنشاء علامة الشعار</string>
+    <string name="header_creator_folder_explanation">حدد مكان إنشاء مجلد \'morphe_branding/morphe_header\' مع ملفات علامة الشعار المنشأة</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">هل تريد بالتأكيد حذف هذا التطبيق؟</string>
     <string name="home_app_info_saved_app_delete_confirmation">هل تريد بالتأكيد حذف هذا التطبيق المحفوظ؟</string>
@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">انتهت عملية أداة التعديل بالرمز %1$d.</string>
     <string name="install_app_success">تم التثبيت بنجاح</string>
     <string name="install_app_fail">فشل تثبيت التطبيق: %s</string>
-    <string name="install_app_fail_missing_stock">ملف APK الأصلي غير موجود للتثبيت عبر التركيب</string>
-    <string name="mount_split_not_supported">أداة التثبيت عبر التركيب للأجهزة المروّتة Root لا تدعم ملفات APK المقسّمة. استخدم أداة تثبيت النظام بدلًا من ذلك.</string>
     <string name="install_timeout_message">لم يكتمل التثبيت. تحقق من مربع حوار أداة التثبيت في النظام وحاول مرة أخرى.</string>
-    <string name="uninstall_timeout_message">لم تكتمل عملية إلغاء التثبيت. تحقق من مربع حوار إلغاء التثبيت وحاول مرة أخرى.</string>
-    <string name="reinstall_app_fail">فشل إعادة تثبيت التطبيق: %s</string>
-    <string name="uninstall_app_fail">فشل إلغاء تثبيت التطبيق: %s</string>
     <string name="save_apk_success">تم حفظ APK</string>
-    <string name="saved_app_export_success">تم تصدير التطبيق المعدل</string>
     <string name="saved_app_export_failed">فشل تصدير التطبيق المعدل</string>
     <string name="saved_app_removed_toast">تمت إزالة التطبيق المعدل المحفوظ</string>
     <string name="saved_app_copy_removed_toast">تمت إزالة النسخة المحفوظة</string>
     <string name="saved_app_launch_unavailable">قم بتثبيت التطبيق قبل فتحه.</string>
-    <string name="saved_app_install_success">تم تثبيت التطبيق المحفوظ</string>
-    <string name="saved_app_install_failed">فشل تثبيت التطبيق المحفوظ</string>
-    <string name="saved_app_install_missing">لم يتم العثور على ملف APK المحفوظ</string>
     <string name="package_name">اسم الحزمة</string>
     <string name="failed_to_mount">فشل تركيب: %s</string>
     <string name="failed_to_unmount">فشل فك تركيب: %s</string>
@@ -413,6 +404,10 @@
     <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى.</string>
     <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت.</string>
     <string name="installer_external_finished_no_change">%1$s انتهى دون تثبيت التطبيق. تحقق من أداة التثبيت بحثًا عن رسالة خطأ وحاول مرة أخرى.</string>
+    <string name="installer_unavailable_title">%s غير متوفر</string>
+    <string name="installer_unavailable_message">أداة التثبيت المفضلة لديك (%s) غير متوفرة حاليًا. يمكنك إصلاح المشكلة وإعادة المحاولة، أو استخدام أداة التثبيت القياسية بدلًا من ذلك.</string>
+    <string name="installer_unavailable_shizuku_hint">تأكد من تشغيل Shizuku ومنح الإذن لهذا التطبيق.</string>
+    <string name="installer_use_standard">استخدام القياسي</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">الأداء</string>
     <string name="settings_system_process_runtime">مدة التشغيل</string>
@@ -492,6 +487,7 @@
     <string name="reset">إعادة التعيين</string>
     <string name="warning">تحذير</string>
     <string name="error_">خطأ</string>
+    <string name="retry">إعادة المحاولة</string>
     <string name="add">إضافة</string>
     <string name="close">إغلاق</string>
     <string name="clear">مسح</string>
@@ -563,7 +559,4 @@
     <string name="hours_ago">قبل %s ساعة</string>
     <string name="days_ago">قبل %s يوم</string>
     <string name="invalid_date">تاريخ غير صالح</string>
-    <string name="plugin_host_permission_label">مضيف ملحقات Morphe</string>
-    <string name="plugin_host_permission_description">يُستخدم للتحكم في الوصول إلى ملحقات Morphe.
-Morphe فقط لديه هذا.</string>
 </resources>

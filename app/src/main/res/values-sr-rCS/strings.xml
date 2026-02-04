@@ -247,21 +247,12 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="patcher_process_exit_message">Proces zakrpe je završen sa kodom %1$d.</string>
     <string name="install_app_success">Uspešno instalirano</string>
     <string name="install_app_fail">Nije uspelo instaliranje aplikacije: %s</string>
-    <string name="install_app_fail_missing_stock">Nedostaje originalni APK za montažno instaliranje.</string>
-    <string name="mount_split_not_supported">Manifest instalatera korisničkog računa ne podržava razdvojene APK-ove. Koristite sistemski instalater umesto njega.</string>
     <string name="install_timeout_message">Instalacija nije završena. Proverite dijalog sistemskog instalatora i pokušajte ponovo.</string>
-    <string name="uninstall_timeout_message">Instalacija nije završena. Proverite dijalog ovojavљivanja i pokušajte ponovo.</string>
-    <string name="reinstall_app_fail">Neuspešno ponovno instaliranje aplikacije: %s</string>
-    <string name="uninstall_app_fail">Neuspešno deinstaliranje aplikacije: %s</string>
     <string name="save_apk_success">Sačuvana APK datoteka</string>
-    <string name="saved_app_export_success">Izvezena zakrpljena aplikacija</string>
     <string name="saved_app_export_failed">Nije uspelo izvoz zakrpljene aplikacije</string>
     <string name="saved_app_removed_toast">Uklonjena sačuvana zakrpljena aplikacija</string>
     <string name="saved_app_copy_removed_toast">Uklonjena sačuvana kopija</string>
     <string name="saved_app_launch_unavailable">Instalirajte aplikaciju pre nego što je otvorite.</string>
-    <string name="saved_app_install_success">Sačuvana aplikacija instalirana</string>
-    <string name="saved_app_install_failed">Došlo je do greške prilikom instaliranja sačuvane aplikacije</string>
-    <string name="saved_app_install_missing">Sačuvani APK nije pronađen</string>
     <string name="package_name">Naziv paketa</string>
     <string name="failed_to_mount">Nije moguće montirati: %s</string>
     <string name="failed_to_unmount">Nije moguće demontirati: %s</string>
@@ -377,6 +368,10 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="installer_external_timeout">%1$s nije potvrdio instalaciju. Proverite drugu aplikaciju i pokušajte ponovo.</string>
     <string name="installer_external_success">%1$s je prijavio uspešnu instalaciju.</string>
     <string name="installer_external_finished_no_change">%1$s završena bez instaliranja aplikacije. Proverite instalater za poruku o greški i pokušajte ponovo.</string>
+    <string name="installer_unavailable_title">%s nedostupan</string>
+    <string name="installer_unavailable_message">Vaš omiljeni instalater (%s) trenutno nije dostupan. Možete ispraviti problem i pokušati ponovo ili koristiti standardni instalater umesto njega.</string>
+    <string name="installer_unavailable_shizuku_hint">Uvjerite se da je Shizuku pokrenut i da je ovom aplikaciji dodijeljena dozvola.</string>
+    <string name="installer_use_standard">Koristi standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Vrijedi vrijeme izvođenja</string>
     <string name="settings_system_process_runtime">Pokrenite proces izvođenja za bolju stabilnost</string>
@@ -456,6 +451,7 @@ Otvoreni na jezgru, Morphe prosperira zahvaljujući korisničke povratke i dopri
     <string name="reset">Poništi</string>
     <string name="warning">Upozorenje</string>
     <string name="error_">Greška</string>
+    <string name="retry">Pokušaj ponovo</string>
     <string name="add">Dodaj</string>
     <string name="close">Zatvori</string>
     <string name="clear">Obriši</string>
@@ -527,6 +523,4 @@ Da li i dalje želite da nastavite?"</string>
     <string name="hours_ago">%sh pre</string>
     <string name="days_ago">%sd pre</string>
     <string name="invalid_date">Nevažeći datum</string>
-    <string name="plugin_host_permission_label">Morphe host dodataka</string>
-    <string name="plugin_host_permission_description">Koristi se za kontrolu pristupa Morphe dodacima. Samo Morphe ima ovo.</string>
 </resources>

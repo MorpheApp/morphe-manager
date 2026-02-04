@@ -124,7 +124,7 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patch_option_enter_decimal">Wprowadź liczbę dziesiętną</string>
     <string name="patch_option_pick_folder">Wybierz folder</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Utwórz ikony adaptacyjne</string>
+    <string name="adaptive_icon_creator_title">Utwórz ikonę adaptacyjną</string>
     <string name="adaptive_icon_create">Utwórz ikonę</string>
     <string name="adaptive_icon_instructions">Wybierz obraz pierwszego planu, wybierz kolor tła i dostosuj podgląd za pomocą gestów uszczypnięcia</string>
     <string name="adaptive_icon_preview">Podgląd</string>
@@ -245,21 +245,12 @@ Czy na pewno chcesz kontynuować?"</string>
     <string name="patcher_process_exit_message">Proces modyfikatora zakończył się kodem %1$d.</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
     <string name="install_app_fail">Nie udało się zainstalować aplikacji: %s</string>
-    <string name="install_app_fail_missing_stock">Brak oryginalnego pliku APK dla instalacji z mountem.</string>
-    <string name="mount_split_not_supported">Instalator z mountowaniem roota nie obsługuje rozdzielonych plików APK. Zamiast tego użyj instalatora systemowego.</string>
     <string name="install_timeout_message">Instalacja nie została zakończona. Sprawdź okno dialogowe instalatora systemowego i spróbuj ponownie.</string>
-    <string name="uninstall_timeout_message">Usuwanie nie zakończyło się. Sprawdź okno dialogowe odinstalowywania i spróbuj ponownie.</string>
-    <string name="reinstall_app_fail">Nie udało się ponownie zainstalować aplikacji: %s</string>
-    <string name="uninstall_app_fail">Nie udało się odinstalować aplikacji: %s</string>
     <string name="save_apk_success">Zapisano APK</string>
-    <string name="saved_app_export_success">Wyeksportowano zmodyfikowaną aplikację</string>
     <string name="saved_app_export_failed">Nie udało się wyeksportować zmodyfikowanej aplikacji</string>
     <string name="saved_app_removed_toast">Usunięto zapisaną zmodyfikowaną aplikację</string>
     <string name="saved_app_copy_removed_toast">Usunięto zapisaną kopię</string>
     <string name="saved_app_launch_unavailable">Zainstaluj aplikację przed jej otwarciem.</string>
-    <string name="saved_app_install_success">Zainstalowano zapisaną aplikację</string>
-    <string name="saved_app_install_failed">Nie udało się zainstalować zapisanej aplikacji</string>
-    <string name="saved_app_install_missing">Nie znaleziono zapisanego pliku APK</string>
     <string name="package_name">Nazwa pakietu</string>
     <string name="failed_to_mount">Nie udało się zmountować: %s</string>
     <string name="failed_to_unmount">Nie udało się odmountować: %s</string>
@@ -413,6 +404,10 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_external_timeout">%1$s nie potwierdził instalacji. Sprawdź inną aplikację i spróbuj ponownie.</string>
     <string name="installer_external_success">%1$s zgłosił pomyślną instalację.</string>
     <string name="installer_external_finished_no_change">%1$s zakończono bez instalacji aplikacji. Sprawdź komunikat o błędzie w instalatorze i spróbuj ponownie.</string>
+    <string name="installer_unavailable_title">%s niedostępny</string>
+    <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub zamiast tego użyć standardowego instalatora.</string>
+    <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia.</string>
+    <string name="installer_use_standard">Użyj standardowego</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Wydajność</string>
     <string name="settings_system_process_runtime">Środowisko procesu</string>
@@ -492,6 +487,7 @@ Podstawą Morphe jest otwartość, a jego rozwój napędzany jest opiniami i wk�
     <string name="reset">Zresetuj</string>
     <string name="warning">Ostrzeżenie</string>
     <string name="error_">Błąd</string>
+    <string name="retry">Spróbuj ponownie</string>
     <string name="add">Dodaj</string>
     <string name="close">Zamknij</string>
     <string name="clear">Wyczyść</string>
@@ -563,6 +559,4 @@ Czy mimo to chcesz kontynuować?"</string>
     <string name="hours_ago">%s godzin temu</string>
     <string name="days_ago">%s dni temu</string>
     <string name="invalid_date">Nieprawidłowa data</string>
-    <string name="plugin_host_permission_label">Host wtyczek Morphe</string>
-    <string name="plugin_host_permission_description">Służy do kontrolowania dostępu do wtyczek Morphe. Tylko Morphe ma tę funkcję.</string>
 </resources>
