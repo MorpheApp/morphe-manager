@@ -383,7 +383,6 @@ private fun ApkAvailabilityDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-
         }
     }
 }

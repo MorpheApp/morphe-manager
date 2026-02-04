@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -264,11 +265,15 @@ fun InstalledAppInfoDialog(
     DeleteConfirmDialog(
         show = showDeleteDialog,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
+        appInfo = viewModel.appInfo,
+        appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
         onConfirm = {
             viewModel.removeAppCompletely()
             showDeleteDialog = false
         },
-        onDismiss = { showDeleteDialog = false }
+        onDismiss = {
+            showDeleteDialog = false
+        }
     )
 
     // Expert Mode Repatch Dialog
@@ -438,7 +443,7 @@ private fun PatchUpdateAvailableBanner(
                 text = stringResource(R.string.home_app_info_patch_update_available_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.9f),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                textAlign = TextAlign.Center
             )
 
             // Patch button
@@ -923,6 +928,8 @@ private fun UninstallConfirmDialog(
 private fun DeleteConfirmDialog(
     show: Boolean,
     isSavedOnly: Boolean,
+    appInfo: PackageInfo?,
+    appLabel: String?,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -941,13 +948,108 @@ private fun DeleteConfirmDialog(
             )
         }
     ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // App Icon
+            AppIcon(
+                packageInfo = appInfo,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+
+            // App Name
+            if (appLabel != null) {
+                Text(
+                    text = appLabel,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = LocalDialogTextColor.current,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // What will be deleted
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    if (isSavedOnly) {
+                        // Saved app - only delete patched APK
+                        Text(
+                            text = stringResource(R.string.home_app_info_saved_app_delete_warning),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.error
+                        )
+
+                        DeleteItem(
+                            icon = Icons.Outlined.Delete,
+                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                        )
+                    } else {
+                        // Full deletion
+                        Text(
+                            text = stringResource(R.string.home_app_info_remove_app_warning),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.error
+                        )
+
+                        DeleteItem(
+                            icon = Icons.Outlined.Storage,
+                            text = stringResource(R.string.home_app_info_delete_item_database)
+                        )
+                        DeleteItem(
+                            icon = Icons.Outlined.Android,
+                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                        )
+                        DeleteItem(
+                            icon = Icons.Outlined.FilePresent,
+                            text = stringResource(R.string.home_app_info_delete_item_original_apk)
+                        )
+                    }
+                }
+            }
+
+            // Description
+            if (!isSavedOnly) {
+                InfoBadge(
+                    text = stringResource(R.string.home_app_info_delete_preservation_note),
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Info,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun DeleteItem(
+    icon: ImageVector,
+    text: String
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = LocalDialogSecondaryTextColor.current
+        )
         Text(
-            text = if (isSavedOnly) {
-                stringResource(R.string.home_app_info_saved_app_delete_confirmation)
-            } else {
-                stringResource(R.string.home_app_info_remove_app_confirmation)
-            },
-            style = MaterialTheme.typography.bodyLarge,
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
             color = LocalDialogSecondaryTextColor.current
         )
     }
