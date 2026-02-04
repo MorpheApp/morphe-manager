@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,7 +27,7 @@ fun AppIcon(
 
     if (packageInfo == null) {
         val image = rememberVectorPainter(Icons.Default.Android)
-        val colorFilter = ColorFilter.tint(LocalContentColor.current)
+        val colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
 
         Image(
             image,

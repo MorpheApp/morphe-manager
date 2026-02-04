@@ -972,50 +972,35 @@ private fun DeleteConfirmDialog(
             }
 
             // What will be deleted
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
+            DeletionWarningBox(
+                warningText = stringResource(
                     if (isSavedOnly) {
-                        // Saved app - only delete patched APK
-                        Text(
-                            text = stringResource(R.string.home_app_info_saved_app_delete_warning),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.error
-                        )
-
-                        DeleteItem(
-                            icon = Icons.Outlined.Delete,
-                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
-                        )
+                        R.string.home_app_info_saved_app_delete_warning
                     } else {
-                        // Full deletion
-                        Text(
-                            text = stringResource(R.string.home_app_info_remove_app_warning),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.error
-                        )
-
-                        DeleteItem(
-                            icon = Icons.Outlined.Storage,
-                            text = stringResource(R.string.home_app_info_delete_item_database)
-                        )
-                        DeleteItem(
-                            icon = Icons.Outlined.Android,
-                            text = stringResource(R.string.home_app_info_delete_item_patched_apk)
-                        )
-                        DeleteItem(
-                            icon = Icons.Outlined.FilePresent,
-                            text = stringResource(R.string.home_app_info_delete_item_original_apk)
-                        )
+                        R.string.home_app_info_remove_app_warning
                     }
+                )
+            ) {
+                if (isSavedOnly) {
+                    // Saved app - only delete patched APK
+                    DeleteListItem(
+                        icon = Icons.Outlined.Delete,
+                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                    )
+                } else {
+                    // Full deletion
+                    DeleteListItem(
+                        icon = Icons.Outlined.Storage,
+                        text = stringResource(R.string.home_app_info_delete_item_database)
+                    )
+                    DeleteListItem(
+                        icon = Icons.Outlined.Android,
+                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                    )
+                    DeleteListItem(
+                        icon = Icons.Outlined.FilePresent,
+                        text = stringResource(R.string.home_app_info_delete_item_original_apk)
+                    )
                 }
             }
 
@@ -1029,29 +1014,6 @@ private fun DeleteConfirmDialog(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun DeleteItem(
-    icon: ImageVector,
-    text: String
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp),
-            tint = LocalDialogSecondaryTextColor.current
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current
-        )
     }
 }
 

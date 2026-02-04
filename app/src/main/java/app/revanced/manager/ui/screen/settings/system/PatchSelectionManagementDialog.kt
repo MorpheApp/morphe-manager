@@ -361,63 +361,25 @@ private fun DeleteSelectionConfirmationDialog(
             }
 
             // What will be deleted
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            DeletionWarningBox(
+                warningText = stringResource(R.string.settings_system_patch_selection_delete_warning)
             ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.settings_system_patch_selection_delete_warning),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.error
+                if (patchCount > 0) {
+                    DeleteListItem(
+                        icon = Icons.Outlined.CheckCircle,
+                        text = pluralStringResource(
+                            R.plurals.patch_count,
+                            patchCount,
+                            patchCount
+                        )
                     )
+                }
 
-                    if (patchCount > 0) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.CheckCircle,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp),
-                                tint = LocalDialogSecondaryTextColor.current
-                            )
-                            Text(
-                                text = pluralStringResource(
-                                    R.plurals.patch_count,
-                                    patchCount,
-                                    patchCount
-                                ),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                        }
-                    }
-
-                    if (hasOptions) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Tune,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp),
-                                tint = LocalDialogSecondaryTextColor.current
-                            )
-                            Text(
-                                text = stringResource(R.string.settings_system_patch_selections_patches_options),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
-                            )
-                        }
-                    }
+                if (hasOptions) {
+                    DeleteListItem(
+                        icon = Icons.Outlined.Tune,
+                        text = stringResource(R.string.settings_system_patch_selections_patches_options)
+                    )
                 }
             }
         }
