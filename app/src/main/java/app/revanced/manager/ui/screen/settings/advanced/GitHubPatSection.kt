@@ -6,9 +6,12 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.screen.shared.*
@@ -118,18 +121,11 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.settings_advanced_github_pat_label),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current
-                )
-
-                MorpheDialogTextField(
+                OutlinedTextField(
                     value = pat,
                     onValueChange = { pat = it },
                     label = { Text(stringResource(R.string.settings_advanced_github_pat_label)) },
-                    placeholder = { Text("ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx") },
+                    placeholder = { Text("ghp_xxxxxxxxxxxxxxx") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.Key,
@@ -170,7 +166,31 @@ private fun GitHubPatDialog(
                             }
                         }
                     },
-                    singleLine = true
+                    visualTransformation = if (showPassword) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = LocalDialogTextColor.current,
+                        unfocusedTextColor = LocalDialogTextColor.current,
+                        disabledTextColor = LocalDialogTextColor.current.copy(alpha = 0.6f),
+                        focusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        unfocusedBorderColor = LocalDialogTextColor.current.copy(alpha = 0.2f),
+                        disabledBorderColor = LocalDialogTextColor.current.copy(alpha = 0.1f),
+                        cursorColor = LocalDialogTextColor.current,
+                        focusedLeadingIconColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                        unfocusedLeadingIconColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        focusedTrailingIconColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                        unfocusedTrailingIconColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        focusedLabelColor = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                        unfocusedLabelColor = LocalDialogTextColor.current.copy(alpha = 0.5f),
+                        focusedPlaceholderColor = LocalDialogTextColor.current.copy(alpha = 0.4f),
+                        unfocusedPlaceholderColor = LocalDialogTextColor.current.copy(alpha = 0.4f)
+                    ),
+                    shape = MaterialTheme.shapes.medium
                 )
             }
 
@@ -179,13 +199,6 @@ private fun GitHubPatDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.settings_advanced_github_pat_export_title),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = LocalDialogTextColor.current
-                )
-
                 RichSettingsItem(
                     onClick = {
                         if (!includePatInExport) {

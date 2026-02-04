@@ -347,7 +347,6 @@ Are you sure you want to proceed?"</string>
     <string name="settings_advanced_github_pat_dialog_description">Set a GitHub Personal Access Token in order to be able to add Pull Requests as external sources. Create a PAT with scope public_repo github.com</string>
     <string name="settings_advanced_github_pat_show">Show token</string>
     <string name="settings_advanced_github_pat_hide">Hide token</string>
-    <string name="settings_advanced_github_pat_export_title">Export Settings</string>
     <string name="settings_advanced_github_pat_export_include_label">Include in settings export</string>
     <string name="settings_advanced_github_pat_export_include_supporting">Adds this PAT to exported manager settings</string>
     <string name="settings_advanced_github_pat_export_warning">Do not share your PAT. If you include it in a settings export, keep that file private because it contains the token.</string>
