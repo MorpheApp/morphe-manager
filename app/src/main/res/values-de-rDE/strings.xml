@@ -245,21 +245,12 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="patcher_process_exit_message">Patcher-Prozess beendet mit Code %1$d.</string>
     <string name="install_app_success">Erfolgreich installiert</string>
     <string name="install_app_fail">App konnte nicht installiert werden: %s</string>
-    <string name="install_app_fail_missing_stock">Fehlende Original-APK für install installieren.</string>
-    <string name="mount_split_not_supported">Root-Mounter-Installer unterstützt keine Split-APKs. Verwende stattdessen den System-Installer.</string>
     <string name="install_timeout_message">Die Installation wurde nicht abgeschlossen. Überprüfe den Systeminstallationsdialog und versuche es erneut.</string>
-    <string name="uninstall_timeout_message">Deinstallation nicht abgeschlossen. Prüfe den Deinstallationsdialog und versuche es erneut.</string>
-    <string name="reinstall_app_fail">App konnte nicht neu installiert werden: %s</string>
-    <string name="uninstall_app_fail">App konnte nicht deinstalliert werden: %s</string>
     <string name="save_apk_success">APK gespeichert</string>
-    <string name="saved_app_export_success">Gepatchte App exportiert</string>
     <string name="saved_app_export_failed">Gepatchte App konnte nicht exportiert werden</string>
     <string name="saved_app_removed_toast">Gespeicherte App entfernt</string>
     <string name="saved_app_copy_removed_toast">Gespeicherte Kopie entfernt</string>
     <string name="saved_app_launch_unavailable">Installiere die App vor dem Öffnen.</string>
-    <string name="saved_app_install_success">Gespeicherte App installiert</string>
-    <string name="saved_app_install_failed">Installation der gespeicherten App fehlgeschlagen</string>
-    <string name="saved_app_install_missing">Gespeicherte APK nicht gefunden</string>
     <string name="package_name">Paketname</string>
     <string name="failed_to_mount">Einhängen fehlgeschlagen: %s</string>
     <string name="failed_to_unmount">Aushängen fehlgeschlagen: %s</string>
@@ -293,7 +284,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="settings_appearance_app_icon_selector_title">App-Symbol</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
     <string name="settings_appearance_app_icon_light_2">Himmel</string>
-    <string name="settings_appearance_app_icon_light_3">Sunset</string>
+    <string name="settings_appearance_app_icon_light_3">Sonne</string>
     <string name="settings_appearance_app_icon_dark_1">Ozean</string>
     <string name="settings_appearance_app_icon_dark_2">Leere</string>
     <string name="settings_appearance_app_icon_dark_3">Indigo</string>
@@ -302,7 +293,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Icon ändern</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Aktualisierungen</string>
-    <string name="settings_advanced_updates_use_prereleases">Verwende Prereleaseversionen.</string>
+    <string name="settings_advanced_updates_use_prereleases">Verwende Vorabversion</string>
     <string name="settings_advanced_updates_use_prereleases_description">Erhalte frühzeitigen Zugang zu neuen Patches und Manager-Funktionen.</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Erweiterte Einstellungen</string>
@@ -413,6 +404,10 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_external_timeout">%1$s hat die Installation nicht bestätigt. Überprüfe die andere App und versuche es erneut.</string>
     <string name="installer_external_success">%1$s hat eine erfolgreiche Installation gemeldet.</string>
     <string name="installer_external_finished_no_change">%1$s ist fertig, die Anwendung wurde jedoch nicht installiert. Prüfe den Installer auf eine Fehlermeldung und versuche es erneut.</string>
+    <string name="installer_unavailable_title">%s nicht verfügbar</string>
+    <string name="installer_unavailable_message">Ihr bevorzugter Installer (%s) ist derzeit nicht verfügbar. Sie können das Problem beheben und erneut versuchen oder den Standard-Installer verwenden.</string>
+    <string name="installer_unavailable_shizuku_hint">Stellen Sie sicher, dass Shizuku ausgeführt wird und die Berechtigung für diese App erteilt wurde.</string>
+    <string name="installer_use_standard">Standard verwenden</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Leistung</string>
     <string name="settings_system_process_runtime">Patching in einem separaten Prozess für bessere Stabilität ausführen</string>
@@ -480,9 +475,9 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_about">Über</string>
     <string name="settings_system_share_website">Website teilen</string>
     <string name="settings_system_share_website_description">Teilen Sie die offizielle Morphe-Website</string>
-    <string name="settings_system_manager_description">"Morphe ist ein experimentelles Open-Source-Projekt, das sich auf die Schaffung einer modernen, übersichtlichen Patching von populären Android-Apps konzentriert
+    <string name="settings_system_manager_description">"Morphe ist ein experimentelles Open-Source-Projekt, das sich auf die Entwicklung eines modernen und effizienten Patching-Verfahrens für gängige Android-Apps konzentriert.
 
-Das Open-Source-Projekt basiert auf der Gemeinschaftsfeedback und -beiträge, um zukünftige Innovationen anzutreiben"</string>
+Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Community, um zukünftige Innovationen voranzutreiben."</string>
     <!-- Shared strings -->
     <string name="patches">Patches</string>
     <string name="home">Startseite</string>
@@ -492,6 +487,7 @@ Das Open-Source-Projekt basiert auf der Gemeinschaftsfeedback und -beiträge, um
     <string name="reset">Zurücksetzen</string>
     <string name="warning">Warnung</string>
     <string name="error_">Fehler</string>
+    <string name="retry">Erneut versuchen</string>
     <string name="add">Hinzufügen</string>
     <string name="close">Schließen</string>
     <string name="clear">Löschen</string>
@@ -563,6 +559,4 @@ Trotzdem fortfahren?"</string>
     <string name="hours_ago">vor %s Stunden</string>
     <string name="days_ago">%sd Tage her</string>
     <string name="invalid_date">Ungültiges Datum</string>
-    <string name="plugin_host_permission_label">Morphe Plugin-Host</string>
-    <string name="plugin_host_permission_description">Wird verwendet, um den Zugriff auf Morphe-Plugins zu steuern. Nur Morphe hat dies.</string>
 </resources>

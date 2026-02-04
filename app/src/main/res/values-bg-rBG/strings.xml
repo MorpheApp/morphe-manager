@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Процесът на патчването излязъл с код %1$d.</string>
     <string name="install_app_success">Инсталирано успешно</string>
     <string name="install_app_fail">Неуспешно инсталиране на приложението: %s</string>
-    <string name="install_app_fail_missing_stock">Липсва оригиналния APK за монтиране на инсталацията.</string>
-    <string name="mount_split_not_supported">Коренът монтиращ инсталатор не поддържа разделени APK. Използвайте инсталатора на системата вместо това.</string>
     <string name="install_timeout_message">Инсталацията не завърши. Проверете диалога на системния инсталатор и опитайте отново.</string>
-    <string name="uninstall_timeout_message">Деинсталацията не завърши. Проверете диалога за деинсталация и опитайте отново.</string>
-    <string name="reinstall_app_fail">Неуспешно преинсталиране на приложението: %s</string>
-    <string name="uninstall_app_fail">Неуспешно изтриване на приложението: %s</string>
     <string name="save_apk_success">APK запазен</string>
-    <string name="saved_app_export_success">Изнесено модифицирано приложение</string>
     <string name="saved_app_export_failed">Неуспешно изнасяне на модифицирано приложение</string>
     <string name="saved_app_removed_toast">Премахнато запазено модифицирано приложение</string>
     <string name="saved_app_copy_removed_toast">Премахната запазената копия</string>
     <string name="saved_app_launch_unavailable">Инсталирай приложението преди да го отвориш.</string>
-    <string name="saved_app_install_success">Patch Bundle</string>
-    <string name="saved_app_install_failed">Morphe</string>
-    <string name="saved_app_install_missing">Select an app</string>
     <string name="package_name">Име на пакета</string>
     <string name="failed_to_mount">Неуспешно монтиране: %s</string>
     <string name="failed_to_unmount">Неуспешно откачване: %s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s не потвърди инсталацията. Проверете другата приложение и опитайте отново.</string>
     <string name="installer_external_success">%1$s докладва за успешно инсталиране.</string>
     <string name="installer_external_finished_no_change">%1$s завърши без инсталиране на приложението. Проверете инсталатора за съобщение за грешка и опитайте отново.</string>
+    <string name="installer_unavailable_title">%s (недостъпен)</string>
+    <string name="installer_unavailable_message">Вашият предпочитан инсталиращ (%s) е текущо недостъпен. Можете да поправите проблема и опитате се отново, или да използвате стандартен инсталиращ вместо него.</string>
+    <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартирала и разрешението е дадено на това приложение.</string>
+    <string name="installer_use_standard">Използвайте стандартен</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Перформанс</string>
     <string name="settings_system_process_runtime">Време на изпълнение</string>
@@ -492,6 +487,7 @@ morphe_header_custom_dark.png
     <string name="reset">Нулирай</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Грешка</string>
+    <string name="retry">Повтори</string>
     <string name="add">Добави</string>
     <string name="close">Затвори</string>
     <string name="clear">Изчисти</string>
@@ -563,6 +559,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">преди %sч</string>
     <string name="days_ago">преди %sd</string>
     <string name="invalid_date">Невалидна дата</string>
-    <string name="plugin_host_permission_label">Morphe хост на добавки</string>
-    <string name="plugin_host_permission_description">Използва се за контрол на достъпа до добавките на Morphe. Само Morphe има това.</string>
 </resources>

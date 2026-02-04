@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Патчер процес је завршен са кодом %1$d.</string>
     <string name="install_app_success">Успешно инсталирано</string>
     <string name="install_app_fail">Није успело инсталирање апликације: %s</string>
-    <string name="install_app_fail_missing_stock">Нema оригиналан APK-файл за монтење инсталацije.</string>
-    <string name="mount_split_not_supported">Инсталер коришћен за монтење не подржава раздвојене APK-файлове. Користите системски инсталер umesto тога.</string>
     <string name="install_timeout_message">Инсталација није завршена. Проверите дијалог системског инсталатера и покушајте поново.</string>
-    <string name="uninstall_timeout_message">Деинсталацијa nije завршена. Проверите диалог деинсталацијe и покушайте поново.</string>
-    <string name="reinstall_app_fail">Није успела поновна инсталација апликације: %s</string>
-    <string name="uninstall_app_fail">Није успело деинсталирање апликације: %s</string>
     <string name="save_apk_success">АПК је сачуван</string>
-    <string name="saved_app_export_success">Извезена је покрпљена апликација</string>
     <string name="saved_app_export_failed">Није успео извоз покрпљене апликације</string>
     <string name="saved_app_removed_toast">Уклоњена сачувана покрпљена апликација</string>
     <string name="saved_app_copy_removed_toast">Уклоњена сачувана копија</string>
     <string name="saved_app_launch_unavailable">Инсталирајте апликацију пре њеног отварања.</string>
-    <string name="saved_app_install_success">Инсталирана сачувана апликација</string>
-    <string name="saved_app_install_failed">Грешка при инсталирању сачуване апликације</string>
-    <string name="saved_app_install_missing">Сачувани АПК није пронађен</string>
     <string name="package_name">Име пакета</string>
     <string name="failed_to_mount">Није успело монтирање: %s</string>
     <string name="failed_to_unmount">Није успело демонтирање: %s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s није потврдио инсталацију. Проверите другу апликацију и покушајте поново.</string>
     <string name="installer_external_success">%1$s је пријавио успешну инсталацију.</string>
     <string name="installer_external_finished_no_change">%1$s је завршен без инсталирања апликације. Проверите инсталери за поруку грешке и покушайте поново.</string>
+    <string name="installer_unavailable_title">%s није доступно</string>
+    <string name="installer_unavailable_message">Vaš omiljeni instalater (%s) тренутно није доступан. Možete iskoristiti standardni instalater umesto njega.</string>
+    <string name="installer_unavailable_shizuku_hint">Uvjerite se da je Shizuku pokrenut i da je ovom aplikaciji dopušteno korištenje.</string>
+    <string name="installer_use_standard">Користи стандардни</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Начин</string>
     <string name="settings_system_process_runtime">Трајање времена</string>
@@ -492,6 +487,7 @@ morphe_header_custom_dark.png
     <string name="reset">Ресетуј</string>
     <string name="warning">Упозорење</string>
     <string name="error_">Грешка</string>
+    <string name="retry">Покушај поново</string>
     <string name="add">Додај</string>
     <string name="close">Затвори</string>
     <string name="clear">Очисти</string>
@@ -563,6 +559,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">%s сати пре</string>
     <string name="days_ago">%s дана пре</string>
     <string name="invalid_date">Неважећи датум</string>
-    <string name="plugin_host_permission_label">Morphe хост додатка</string>
-    <string name="plugin_host_permission_description">Користи се за контролу приступа Morphe додацима. Само Morphe ово има.</string>
 </resources>

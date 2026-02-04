@@ -245,21 +245,12 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patcher_process_exit_message">Korjausprosessi päättyi koodiin %1$d.</string>
     <string name="install_app_success">Asennettu onnistuneesti</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
-    <string name="install_app_fail_missing_stock">Mitätöidyt alkuperäiset APK-tiedostot asennusmenettelyn suoritusohjelmaan.</string>
-    <string name="mount_split_not_supported">Järjestelmän ulkopuolisen asennusmenettelyn ei tue jakamattomia APK-tiedostoja. Käytä sijassa järjestelmäasennusohjelmaa.</string>
     <string name="install_timeout_message">Asennus ei valmistunut. Tarkista järjestelmän asennusvalintaikkuna ja yritä uudelleen.</string>
-    <string name="uninstall_timeout_message">Asennuksen peruuntuminen viiveellä. Tarkista asennusikkuna ja yritä uudelleen.</string>
-    <string name="reinstall_app_fail">Sovelluksen uudelleenasennus epäonnistui: %s</string>
-    <string name="uninstall_app_fail">Sovelluksen poistaminen epäonnistui: %s</string>
     <string name="save_apk_success">APK tallennettu</string>
-    <string name="saved_app_export_success">Viedyt muokatut sovellukset</string>
     <string name="saved_app_export_failed">Muokattujen sovellusten vieminen epäonnistui</string>
     <string name="saved_app_removed_toast">Tallennettu sovellus poistettu</string>
     <string name="saved_app_copy_removed_toast">Tallennuskopio poistettu</string>
     <string name="saved_app_launch_unavailable">Asenna sovellus ennen sen avaamista.</string>
-    <string name="saved_app_install_success">Asennettu tallennettu sovellus</string>
-    <string name="saved_app_install_failed">Tallennnetun sovelluksen asentaminen epäonnistui</string>
-    <string name="saved_app_install_missing">Tallennettua APK-tiedostoa ei löydy</string>
     <string name="package_name">Paketin nimi</string>
     <string name="failed_to_mount">Liitoksen muodostaminen epäonnistui: %s</string>
     <string name="failed_to_unmount">Liitoksen poistaminen epäonnistui: %s</string>
@@ -413,6 +404,10 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_external_timeout">%1$s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen.</string>
     <string name="installer_external_success">%1$s ilmoitti onnistuneesta asennuksesta.</string>
     <string name="installer_external_finished_no_change">%1$s valmis ilman sovelluksen asennusta. Tarkista virheilmoitukset asennusohjelmasta ja yritä uudelleen.</string>
+    <string name="installer_unavailable_title">%s ei ole käytettävissä</string>
+    <string name="installer_unavailable_message">Suosittu asennusohjelmasi (%s) ei ole tällä hetkellä käytettävissä. Voit korjata ongelman ja yritä uudelleen tai käyttää standardia asennusohjelmaa.</string>
+    <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja sille on myönnetty lupa tälle sovellukselle.</string>
+    <string name="installer_use_standard">Käytä oletusta</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prosessointi</string>
     <string name="settings_system_process_runtime">Käytä patchaamisen prosessin erillisen prosessin</string>
@@ -492,6 +487,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="reset">Nollaa</string>
     <string name="warning">Varoitus</string>
     <string name="error_">Virhe</string>
+    <string name="retry">Yritä uudelleen</string>
     <string name="add">Lisää</string>
     <string name="close">Sulje</string>
     <string name="clear">Tyhjennä</string>
@@ -563,6 +559,4 @@ Haluatko silti jatkaa?"</string>
     <string name="hours_ago">%s tuntia sitten</string>
     <string name="days_ago">%sd sitten</string>
     <string name="invalid_date">Virheellinen päivämäärä</string>
-    <string name="plugin_host_permission_label">Morphe-laajennosten isäntä</string>
-    <string name="plugin_host_permission_description">Käytetään Morphe-laajennosten käyttöoikeuksien hallintaan. Vain Morphella on tämä.</string>
 </resources>

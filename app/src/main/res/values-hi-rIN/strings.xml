@@ -5,6 +5,8 @@
     <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
     <string name="home_default_source_disabled">मorphe पटच स्रोत अक्षम है। पटच स्रोत शीट में इसे सक्षम करें या विशेष मोड का उपयोग करें।</string>
+    <string name="android_11_bug_dialog_title">एंड्रॉइड 11 बग</string>
+    <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">मेन्यर अपडेट उपलब्ध है</string>
     <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
@@ -170,6 +172,7 @@
     <string name="home_app_info_patch_update_available">पैच अपडेट उपलब्ध है</string>
     <string name="home_app_info_patch_update_available_description">नई पैच संस्करण उपलब्ध है। अपनी ऐप को नवीन सुविधाओं और त्रुटि को ठीक करने के लिए फिर पैच करें।</string>
     <!-- Home Screen - Root Mode -->
+    <string name="root_install_apk_required">रूट मोड को पैच करना शुरू करने से पहले आपके डिवाइस पर APK को इंस्टॉल करना आवश्यक है।</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">%1$d / %2$d patches</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
@@ -191,7 +194,12 @@
     <string name="patcher_ready_to_install_subtitle">Press the button below to install</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <!-- Patcher Screen - Patcher Steps -->
+    <string name="patcher_step_group_preparing">तैयार कर रहे हैं...</string>
+    <string name="patcher_step_load_patches">पैच लोड हो रहे हैं</string>
     <string name="patcher_step_prepare_split_apk">स्प्लिटेड APK को मर्ज कर रहा हूँ</string>
+    <string name="patcher_step_unpack">APK फाइल पढ़ें</string>
+    <string name="patcher_step_group_patching">पैचिंग</string>
+    <string name="patcher_step_group_saving">सेव हो रहा है</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
@@ -222,6 +230,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
+    <string name="patcher_message_19">आपकी ऐप को एक बुखार है, और इसके लिए केवल एक मेडिकल रेफरेंस है... 🩺🔔</string>
     <!-- Patcher Screen - Other hiden strings -->
     <string name="applying_patches">Applying patches</string>
     <string name="applying_patch">Applying %s</string>
@@ -230,8 +239,13 @@
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="download_apk">एपीके फाइल डाउनलोड करें</string>
     <string name="patcher_process_exit_message">Patcher process exited with code %1$d.</string>
+    <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
+    <string name="install_app_fail">अप्लिकेशन को तैयार करना असफल रहा: %s</string>
     <string name="package_name">Package name</string>
     <!-- Settings -->
+    <string name="appearance">स्वरूप</string>
+    <string name="advanced">उन्नत</string>
+    <string name="system">सिस्टम</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">बैकग्राउंड एनीमेशन</string>
     <string name="settings_appearance_background_circles">सर्के</string>
@@ -347,6 +361,11 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget">शॉर्ट्स विजेट छिपाएं</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">लॉन्चर विजेट से शॉर्ट्स बटन को हटाएं</string>
     <!-- Settings - System Tab - Installer Section -->
+    <string name="installer">इंस्टॉलर</string>
+    <string name="installer_internal_name">सिस्टम इन्स्टॉलर</string>
+    <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का इस्तमाल करें</string>
+    <string name="installer_auto_saved_name">रूट्ड माउंट इंस्टॉलर</string>
+    <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
     <string name="installer_status_requires_root">Requires root access</string>
     <string name="installer_status_not_supported">Not supported for this action.</string>
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
@@ -366,6 +385,11 @@ morphe_header_custom_dark.png
     <string name="installer_hint_storage">There is not enough storage space for the installation.</string>
     <string name="installer_hint_timeout">The installation timed out. Try again.</string>
     <string name="installer_hint_aborted">The installation was cancelled.</string>
+    <string name="installer_external_launched">%1$s खोला जा रहा है</string>
+    <string name="installer_unavailable_title">%s उपलब्ध नहीं है</string>
+    <string name="installer_unavailable_message">आपका पसंदीदा इंस्टॉलर (%s) वर्तमान में उपलब्ध नहीं है। आप समस्या को ठीक कर सकते हैं और पुन: प्रयास कर सकते हैं, या मानक इंस्टॉलर का उपयोग कर सकते हैं।</string>
+    <string name="installer_unavailable_shizuku_hint">确保 Shizuku चल रहा है और इस ऐप को अनुमति दी गई है।</string>
+    <string name="installer_use_standard">स्तاندर्ड का उपयोग करें</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">प्रदर्शन</string>
     <string name="settings_system_process_runtime">प्रोसेस रनटाइम</string>
@@ -437,8 +461,18 @@ morphe_header_custom_dark.png
 
 खुले स्रोत के मूल में, मोरफे समुदाय के फीडबैक और योगदान को प्रोत्साहित करता है ताकि भविष्य के नवीनता को प्रेरित किया जाए"</string>
     <!-- Shared strings -->
+    <string name="patches">पैच</string>
     <string name="home">घर</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="yes">हां</string>
+    <string name="no">नहीं</string>
+    <string name="reset">रीसेट करें</string>
+    <string name="warning">चेतावनी</string>
     <string name="error_">त्रुटि</string>
+    <string name="retry">पुनरावलोकन करें</string>
+    <string name="add">जोड़ें</string>
+    <string name="close">बंद करे</string>
+    <string name="clear">खाली करें</string>
     <string name="delete">हटाएं</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
@@ -455,6 +489,7 @@ morphe_header_custom_dark.png
     <string name="not_selected">चयनित नहीं</string>
     <string name="rename">रename</string>
     <string name="export">निर्यात करें</string>
+    <string name="download">डाउनलोड करें</string>
     <string name="less">Less</string>
     <string name="expand">विस्तार करें</string>
     <string name="expanded">विस्तृत किया गया</string>
@@ -463,18 +498,37 @@ morphe_header_custom_dark.png
     <string name="available">उपलब्ध</string>
     <string name="continue_">Continue</string>
     <string name="version">Version</string>
+    <string name="patch">पैच</string>
     <string name="repatch">Repatch</string>
     <string name="open">खुला</string>
+    <string name="mount">माउंट करें</string>
+    <string name="mounted">माउंटेड</string>
+    <string name="unmounted">अनमाउंटेड</string>
     <string name="remount">पुनःसंयोजित करें</string>
     <string name="install">स्थापित करें</string>
     <string name="installed">Installed</string>
     <string name="reinstall">Debugging</string>
     <string name="uninstall">Uninstall</string>
+    <string name="save">सेव करें</string>
     <string name="saved">सहेजा गया</string>
+    <string name="update">अपडेट</string>
+    <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
+    <string name="uninstalling_ellipsis">अन्स्टॉल हो रहा हे</string>
+    <string name="mounting_ellipsis">माउंटिंग…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>
     <string name="importing_ellipsis">आयम…</string>
     <string name="changelog_retry">पुनः प्रयास करें</string>
     <string name="changelog_empty">कोई चेंजलॉग उपलब्ध नहीं है</string>
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>
+    <string name="update_completed">अपडेट इंस्टॉल हो गया</string>
+    <string name="download_confirmation_metered">"आप मापित कनेक्शन पर हैं, और आपके सेवा प्रदाता से डेटा चार्ज लागू हो सकते हैं.
+
+क्या आप अभी भी आगे बढ़ना चाहते हैं?"</string>
+    <string name="download_update_confirmation">अपडेट डाउनलोड करें?</string>
+    <string name="just_now">अभी-अभी</string>
+    <string name="minutes_ago">%s मिनट पहले</string>
+    <string name="hours_ago">%s घंटे पहले</string>
+    <string name="days_ago">%s दिन पहले</string>
+    <string name="invalid_date">अवैध तारीख</string>
 </resources>

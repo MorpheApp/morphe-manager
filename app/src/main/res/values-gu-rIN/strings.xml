@@ -234,6 +234,4 @@ morphe_header_custom_dark.png
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
-    <string name="plugin_host_permission_label">મોર્ફે પ્લગઇન હોસ્ટ</string>
-    <string name="plugin_host_permission_description">મોર્ફે પ્લગિન્સને મેળવવાનું નિયંત્રિત કરવા માટે વપરાય છે. ફક્ત મોર્ફે પાસે જ આ છે.</string>
 </resources>

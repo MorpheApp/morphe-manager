@@ -148,6 +148,4 @@
     <string name="settings">Pengaturan</string>
     <string name="error_">Ralat</string>
     <string name="not_selected">Tidak dipilih</string>
-    <string name="plugin_host_permission_label">Hos pemalam Morphe</string>
-    <string name="plugin_host_permission_description">Digunakan untuk mengawal akses kepada pemalam Morphe. Hanya Morphe yang mempunyai ini.</string>
 </resources>
