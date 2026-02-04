@@ -2,8 +2,8 @@ package app.revanced.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.Icon
@@ -12,6 +12,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,8 +27,7 @@ import kotlinx.coroutines.launch
 fun GitHubPatSettingsItem(
     currentPat: String,
     currentIncludeInExport: Boolean,
-    onSave: (String, Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    onSave: (String, Boolean) -> Unit
 ) {
     var showDialog by rememberSaveable { mutableStateOf(false) }
     val hasPat = currentPat.isNotBlank()
@@ -45,16 +45,19 @@ fun GitHubPatSettingsItem(
             stringResource(R.string.settings_advanced_github_pat_description)
         },
         trailingContent = {
-            if (hasPat) {
-                Icon(
-                    imageVector = Icons.Outlined.CheckCircle,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(24.dp)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                InfoBadge(
+                    text = if (hasPat) stringResource(R.string.enabled)
+                    else stringResource(R.string.disabled),
+                    style = if (hasPat) InfoBadgeStyle.Primary else InfoBadgeStyle.Default,
+                    isCompact = true
                 )
+                MorpheIcon(icon = Icons.Outlined.ChevronRight)
             }
-        },
-        modifier = modifier
+        }
     )
 
     if (showDialog) {
@@ -126,7 +129,7 @@ private fun GitHubPatDialog(
                     value = pat,
                     onValueChange = { pat = it },
                     label = {
-                        Text(stringResource(R.string.settings_advanced_github_pat_label))
+                        Text(stringResource(R.string.settings_advanced_github_pat))
                     },
                     placeholder = { Text("ghp_xxxxxxxxxxxxxxx") },
                     leadingIcon = {
