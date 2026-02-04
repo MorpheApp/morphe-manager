@@ -1,0 +1,356 @@
+package app.revanced.manager.ui.screen.settings.system
+
+import android.annotation.SuppressLint
+import android.content.pm.PackageInfo
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.FolderOff
+import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.morphe.manager.R
+import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.domain.repository.PatchSelectionRepository
+import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.util.PM
+import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.compose.koinInject
+
+/**
+ * Data class representing a saved patch selection for display
+ */
+private data class SavedSelectionItemData(
+    val packageName: String,
+    val displayName: String,
+    val patchCount: Int,
+    val hasOptions: Boolean,
+    val packageInfo: PackageInfo?
+)
+
+/**
+ * Dialog for managing saved patch selections and options
+ * These selections persist even after app uninstallation
+ */
+@SuppressLint("LocalContextGetResourceValueCheck")
+@Composable
+fun PatchSelectionManagementDialog(
+    onDismissRequest: () -> Unit
+) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val pm: PM = koinInject()
+
+    val selectionRepository: PatchSelectionRepository = koinInject()
+    val optionsRepository: PatchOptionsRepository = koinInject()
+
+    // Get packages with saved selections
+    val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
+        .collectAsStateWithLifecycle(emptySet())
+
+    // Get packages with saved options
+    val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
+        .collectAsStateWithLifecycle(emptySet())
+
+    // Combine both lists - use Set to avoid duplicates
+    val allPackages = remember(packagesWithSelection, packagesWithOptions) {
+        (packagesWithSelection + packagesWithOptions).sorted()
+    }
+
+    // Get detailed data for each package
+    var selectionData by remember { mutableStateOf<List<SavedSelectionItemData>>(emptyList()) }
+
+    // Extract strings to avoid LocalContext issues
+    val selectionDeleted = stringResource(R.string.settings_system_patch_selection_deleted)
+
+    LaunchedEffect(allPackages) {
+        if (allPackages.isEmpty()) {
+            selectionData = emptyList()
+            return@LaunchedEffect
+        }
+
+        val data = withContext(Dispatchers.IO) {
+            allPackages.map { packageName ->
+                val selections = selectionRepository.getSelection(packageName)
+                val patchCount = selections.values.sumOf { it.size }
+                val hasOptions = packageName in packagesWithOptions
+
+                // Try to get PackageInfo and friendly name
+                val packageInfo = try {
+                    pm.getPackageInfo(packageName)
+                } catch (_: Exception) {
+                    null
+                }
+
+                val displayName = try {
+                    if (packageInfo != null) {
+                        packageInfo.applicationInfo?.loadLabel(context.packageManager)?.toString()
+                    } else {
+                        val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+                        context.packageManager.getApplicationLabel(appInfo).toString()
+                    }
+                } catch (_: Exception) {
+                    packageName
+                } ?: packageName
+
+                SavedSelectionItemData(
+                    packageName = packageName,
+                    displayName = displayName,
+                    patchCount = patchCount,
+                    hasOptions = hasOptions,
+                    packageInfo = packageInfo
+                )
+            }.sortedBy { it.displayName }
+        }
+
+        selectionData = data
+    }
+
+    var itemToDelete by remember { mutableStateOf<String?>(null) }
+
+    PatchSelectionManagementDialogContent(
+        count = selectionData.size,
+        isEmpty = selectionData.isEmpty(),
+        onDismissRequest = onDismissRequest,
+        itemsContent = {
+            selectionData.forEach { item ->
+                SavedSelectionItem(
+                    data = item,
+                    onDelete = { itemToDelete = item.packageName }
+                )
+            }
+        }
+    )
+
+    if (itemToDelete != null) {
+        DeleteSelectionConfirmationDialog(
+            packageName = itemToDelete!!,
+            displayName = selectionData.find { it.packageName == itemToDelete }?.displayName ?: itemToDelete!!,
+            onDismiss = { itemToDelete = null },
+            onConfirm = {
+                scope.launch {
+                    val pkg = itemToDelete!!
+                    // Delete both selection and options
+                    selectionRepository.resetSelectionForPackage(pkg)
+                    optionsRepository.resetOptionsForPackage(pkg)
+                    context.toast(selectionDeleted)
+                    itemToDelete = null
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun PatchSelectionManagementDialogContent(
+    count: Int,
+    isEmpty: Boolean,
+    onDismissRequest: () -> Unit,
+    itemsContent: @Composable ColumnScope.() -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismissRequest,
+        title = stringResource(R.string.settings_system_patch_selections_title),
+        footer = {
+            MorpheDialogButton(
+                text = stringResource(android.R.string.ok),
+                onClick = onDismissRequest,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            // Summary
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+            ) {
+                Row(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.settings_system_patch_selections_count, count),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = LocalDialogTextColor.current
+                        )
+                        Text(
+                            text = stringResource(R.string.settings_system_patch_selections_description_short),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                    Icon(
+                        imageVector = Icons.Outlined.Tune,
+                        contentDescription = null,
+                        modifier = Modifier.size(40.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            // List of saved selections
+            if (isEmpty) {
+                EmptyState(message = stringResource(R.string.settings_system_patch_selections_empty))
+            } else {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    itemsContent()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SavedSelectionItem(
+    data: SavedSelectionItemData,
+    onDelete: () -> Unit
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // App icon (or default Android icon if not available)
+            AppIcon(
+                packageInfo = data.packageInfo,
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
+
+            // Selection Info
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = data.displayName,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = LocalDialogTextColor.current
+                )
+                Text(
+                    text = data.packageName,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = LocalDialogSecondaryTextColor.current
+                )
+
+                // Details
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (data.patchCount > 0) {
+                        Text(
+                            text = pluralStringResource(
+                                R.plurals.patch_count,
+                                data.patchCount,
+                                data.patchCount
+                            ),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalDialogSecondaryTextColor.current
+                        )
+                    }
+                    if (data.hasOptions) {
+                        InfoBadge(
+                            text = stringResource(R.string.settings_system_patch_selections_has_options),
+                            style = InfoBadgeStyle.Primary,
+                            isCompact = true
+                        )
+                    }
+                }
+            }
+
+            IconButton(onClick = onDelete) {
+                Icon(
+                    imageVector = Icons.Outlined.Delete,
+                    contentDescription = stringResource(R.string.delete),
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun DeleteSelectionConfirmationDialog(
+    packageName: String,
+    displayName: String,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.settings_system_patch_selection_delete_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(R.string.delete),
+                onPrimaryClick = onConfirm,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Text(
+            text = stringResource(
+                R.string.settings_system_patch_selection_delete_confirm,
+                displayName,
+                packageName
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogTextColor.current,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun EmptyState(message: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.FolderOff,
+            contentDescription = null,
+            modifier = Modifier.size(64.dp),
+            tint = LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f)
+        )
+        Text(
+            text = message,
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalDialogSecondaryTextColor.current
+        )
+    }
+}

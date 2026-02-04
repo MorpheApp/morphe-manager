@@ -177,6 +177,14 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Are you sure you want to delete this saved app?</string>
     <string name="home_app_info_saved_copy_delete_confirmation">Are you sure you want to delete the saved copy?</string>
+    <string name="home_app_info_remove_app_confirmation">"Remove this app record?
+
+This will delete:
+• Database entry
+• Patched APK file
+• Original APK file
+
+Your patch selection and options will be preserved for future patching"</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
@@ -191,7 +199,7 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_install_type_shizuku" translatable="false">Shizuku</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
-    <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes.</string>
+    <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>
@@ -538,6 +546,19 @@ Details: %2$s"</string>
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
+
+    <!-- Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Patch selections</string>
+    <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation.</string>
+    <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
+    <string name="settings_system_patch_selections_count">%1$d saved selection(s)</string>
+    <string name="settings_system_patch_selections_empty">No saved patch selections</string>
+    <string name="settings_system_patch_selections_has_options">Has options</string>
+    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
+    <string name="settings_system_patch_selection_delete_confirm">"Delete saved patch selection for %1$s (%2$s)?
+
+This will remove your saved patch choices and options for this app"</string>
+    <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>

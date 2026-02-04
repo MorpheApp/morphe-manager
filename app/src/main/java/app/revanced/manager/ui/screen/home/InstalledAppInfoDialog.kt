@@ -265,8 +265,7 @@ fun InstalledAppInfoDialog(
         show = showDeleteDialog,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
         onConfirm = {
-            if (installedApp?.installType == InstallType.SAVED) viewModel.removeSavedApp()
-            else viewModel.deleteSavedCopy()
+            viewModel.removeAppCompletely()
             showDeleteDialog = false
         },
         onDismiss = { showDeleteDialog = false }

@@ -19,6 +19,8 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
+import app.revanced.manager.domain.repository.PatchSelectionRepository
+import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.ui.screen.settings.system.*
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.SettingsViewModel
@@ -28,10 +30,10 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 /**
- * System tab content
+ * System tab content with patch selection management
  */
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("LocalContextGetResourceValueCall")
+@SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun SystemTabContent(
     installerManager: InstallerManager,
@@ -54,6 +56,10 @@ fun SystemTabContent(
 
     var showProcessRuntimeDialog by remember { mutableStateOf(false) }
     var showApkManagementDialog by remember { mutableStateOf<ApkManagementType?>(null) }
+    var showPatchSelectionDialog by remember { mutableStateOf(false) }
+
+    // Extract strings to avoid LocalContext issues
+    val keystoreUnavailable = stringResource(R.string.settings_system_export_keystore_unavailable)
 
     // Process runtime dialog
     if (showProcessRuntimeDialog) {
@@ -76,6 +82,13 @@ fun SystemTabContent(
         ApkManagementDialog(
             type = type,
             onDismissRequest = { showApkManagementDialog = null }
+        )
+    }
+
+    // Patch selection management dialog
+    if (showPatchSelectionDialog) {
+        PatchSelectionManagementDialog(
+            onDismissRequest = { showPatchSelectionDialog = false }
         )
     }
 
@@ -159,7 +172,7 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = {
                             if (!importExportViewModel.canExport()) {
-                                context.toast(context.getString(R.string.settings_system_export_keystore_unavailable))
+                                context.toast(keystoreUnavailable)
                             } else {
                                 onExportKeystore()
                             }
@@ -270,6 +283,43 @@ fun SystemTabContent(
                             if (patchedApkCount > 0) {
                                 InfoBadge(
                                     text = patchedApkCount.toString(),
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                        }
+                    }
+                )
+
+                MorpheSettingsDivider()
+
+                // Patch Selections management
+                val selectionRepository: PatchSelectionRepository = koinInject()
+                val optionsRepository: PatchOptionsRepository = koinInject()
+                val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
+                    .collectAsStateWithLifecycle(emptySet())
+                val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
+                    .collectAsStateWithLifecycle(emptySet())
+                val savedSelectionsCount = remember(packagesWithSelection, packagesWithOptions) {
+                    (packagesWithSelection + packagesWithOptions).size
+                }
+
+                RichSettingsItem(
+                    onClick = { showPatchSelectionDialog = true },
+                    title = stringResource(R.string.settings_system_patch_selections_title),
+                    subtitle = stringResource(R.string.settings_system_patch_selections_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Tune)
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (savedSelectionsCount > 0) {
+                                InfoBadge(
+                                    text = savedSelectionsCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )

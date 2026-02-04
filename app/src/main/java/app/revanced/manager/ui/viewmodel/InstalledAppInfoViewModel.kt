@@ -144,7 +144,8 @@ class InstalledAppInfoViewModel(
 
             InstallType.MOUNT -> viewModelScope.launch {
                 rootInstaller.uninstall(app.currentPackageName)
-                installedAppRepository.delete(app)
+                // Delete record and APK but preserve selection and options
+                deleteRecordAndApk(app)
                 onBackClick()
             }
 
@@ -152,21 +153,21 @@ class InstalledAppInfoViewModel(
         }
     }
 
-    fun removeSavedApp() = viewModelScope.launch {
+    /**
+     * Remove app completely: database record, patched APK and original APK
+     * Patch selection and options are preserved for future patching
+     */
+    fun removeAppCompletely() = viewModelScope.launch {
         val app = installedApp ?: return@launch
-        if (app.installType != InstallType.SAVED) return@launch
-        clearSavedData(app, deleteRecord = true)
-        installedApp = null
-        appInfo = null
-        appliedPatches = null
-        isInstalledOnDevice = false
-        context.toast(context.getString(R.string.saved_app_removed_toast))
-        onBackClick()
-    }
+        deleteRecordAndApk(app)
 
-    fun deleteSavedEntry() = viewModelScope.launch {
-        val app = installedApp ?: return@launch
-        clearSavedData(app, deleteRecord = true)
+        // Also delete original APK if it exists
+        withContext(Dispatchers.IO) {
+            originalApkRepository.get(app.originalPackageName)?.let { originalApk ->
+                originalApkRepository.delete(originalApk)
+            }
+        }
+
         installedApp = null
         appInfo = null
         appliedPatches = null
@@ -176,8 +177,20 @@ class InstalledAppInfoViewModel(
     }
 
     /**
-     * Update install type after installation and refresh state
+     * Delete database record and patched APK file
+     * Note: Patch selection and options are NOT deleted - they remain for future patching
      */
+    private suspend fun deleteRecordAndApk(app: InstalledApp) {
+        // Delete database record
+        installedAppRepository.delete(app)
+
+        // Delete patched APK file
+        withContext(Dispatchers.IO) {
+            savedApkFile(app)?.delete()
+        }
+        hasSavedCopy = false
+    }
+
     fun updateInstallType(packageName: String, newInstallType: InstallType) = viewModelScope.launch {
         val app = installedApp ?: return@launch
         // Update in database
@@ -197,18 +210,11 @@ class InstalledAppInfoViewModel(
 
     fun deleteSavedCopy() = viewModelScope.launch {
         val app = installedApp ?: return@launch
-        clearSavedData(app, deleteRecord = false)
-        context.toast(context.getString(R.string.saved_app_copy_removed_toast))
-    }
-
-    private suspend fun clearSavedData(app: InstalledApp, deleteRecord: Boolean) {
-        if (deleteRecord) {
-            installedAppRepository.delete(app)
-        }
         withContext(Dispatchers.IO) {
             savedApkFile(app)?.delete()
         }
         hasSavedCopy = false
+        context.toast(context.getString(R.string.saved_app_copy_removed_toast))
     }
 
     fun savedApkFile(app: InstalledApp? = this.installedApp): File? {
