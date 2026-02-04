@@ -103,10 +103,10 @@
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_no_results">Aucuns patchs trouvés</string>
     <string name="expert_mode_no_patches">Aucuns patchs disponibles</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Sources de correctifs multiples sélectionnées</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Vous avez sélectionné des correctifs à partir de sources de correctifs multiples. Cela peut entraîner des problèmes de compatibilité ou un comportement inattendu.
+    <string name="expert_mode_multiple_bundles_warning_title">Plusieurs sources de patch sélectionnées</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Vous avez sélectionné des patchs provenant de plusieurs sources différentes. Cela peut entraîner des problèmes de compatibilité ou un comportement inattendu.
 
-Voulez-vous vraiment continuer ?"</string>
+Êtes-vous sûr de vouloir continuer ?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette APK n’est pas une version d’application recommandée. Continuer peut entraîner un dysfonctionnement de l’application.</string>
@@ -126,33 +126,33 @@ Voulez-vous vraiment continuer ?"</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_creator_title">Créer une icône adaptative</string>
     <string name="adaptive_icon_create">Créer une icône</string>
-    <string name="adaptive_icon_instructions">Choisissez une image en premier plan, sélectionnez une couleur d\'arrière-plan et ajustez l\'aperçu avec des gestes de pincement-dézoom</string>
+    <string name="adaptive_icon_instructions">Choisissez une image de premier plan, sélectionnez une couleur d’arrière-plan et ajustez l’aperçu à l’aide des gestes de pincement pour zoomer</string>
     <string name="adaptive_icon_preview">Aperçu</string>
-    <string name="adaptive_icon_select_foreground">Sélectionner l\'image en premier plan</string>
+    <string name="adaptive_icon_select_foreground">Sélectionner une image en premier plan</string>
     <string name="adaptive_icon_change_foreground">Changer l\'image en premier plan</string>
     <string name="adaptive_icon_background_color">Couleur d\'arrière-plan</string>
-    <string name="adaptive_icon_reset_transform">Réinitialiser la position et l\'échelle</string>
+    <string name="adaptive_icon_reset_transform">Réinitialiser la position et la taille</string>
     <string name="adaptive_icon_safe_zone_inner">Zone de sécurité (toujours visible)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zone de masque (peut être rognée)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zone de masquage (peut être rognée)</string>
     <string name="adaptive_icon_created_success">Icône adaptative créée avec succès</string>
     <string name="adaptive_icon_creation_failed">Échec de la création de l\'icône adaptative</string>
     <string name="adaptive_icon_create_new">Créer une nouvelle icône</string>
-    <string name="adaptive_icon_folder_explanation">Sélectionnez où créer le dossier \'morphe_branding/morphe_icons\' avec les fichiers d\'icône générés</string>
+    <string name="adaptive_icon_folder_explanation">Sélectionnez l’emplacement où créer le dossier \'morphe_branding/morphe_icons\' contenant les fichiers d’icônes générés</string>
     <!-- Header Creator -->
     <string name="header_creator_title">Créer un en-tête personnalisé</string>
     <string name="header_creator_create">Créer un en-tête</string>
     <string name="header_creator_create_new">Créer un nouvel en-tête</string>
-    <string name="header_creator_instructions">Sélectionnez des images pour les thèmes clair et sombre, puis ajustez-les avec des gestes de pincement</string>
+    <string name="header_creator_instructions">Choisissez des images pour les thèmes clair et sombre, puis ajustez-les avec des gestes de pincement pour zoomer</string>
     <string name="header_creator_light_theme">En-tête du thème clair</string>
     <string name="header_creator_dark_theme">En-tête du thème sombre</string>
     <string name="header_creator_select_light">Sélectionner l\'image du thème clair</string>
     <string name="header_creator_change_light">Changer l\'image du thème clair</string>
     <string name="header_creator_select_dark">Sélectionner l\'image du thème sombre</string>
     <string name="header_creator_change_dark">Changer l\'image du thème sombre</string>
-    <string name="header_creator_no_image">Aucune image sélectionnée</string>
+    <string name="header_creator_no_image">Pas d\'image sélectionnée</string>
     <string name="header_creator_success">En-tête créé avec succès</string>
     <string name="header_creator_failed">Échec de la création de l\'en-tête</string>
-    <string name="header_creator_folder_explanation">Sélectionnez où créer le dossier \'morphe_branding/morphe_header\' avec les fichiers d\'en-tête générés</string>
+    <string name="header_creator_folder_explanation">Sélectionnez l’emplacement où créer le dossier \'morphe_branding/morphe_icons\' contenant les fichiers d’en-tête générés</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Êtes-vous sûr de vouloir désinstaller cette application ?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Êtes-vous sûr de vouloir supprimer cette application enregistrée ?</string>
@@ -245,21 +245,12 @@ Voulez-vous vraiment continuer ?"</string>
     <string name="patcher_process_exit_message">Le processus du patcher s’est terminé avec le code %1$d.</string>
     <string name="install_app_success">Installé avec succès</string>
     <string name="install_app_fail">Impossible d\'installer l\'application : %s</string>
-    <string name="install_app_fail_missing_stock">Fichier APK original manquant pour l\'installation par montage.</string>
-    <string name="mount_split_not_supported">L\'installateur par montage root ne prend pas en charge les APK fractionnés. Utilisez plutôt l\'installateur système.</string>
     <string name="install_timeout_message">L\'installation n\'est pas terminée. Vérifiez la boîte de dialogue de l\'installateur système et réessayez.</string>
-    <string name="uninstall_timeout_message">La désinstallation n\'est pas terminée. Vérifiez la boîte de dialogue de désinstallation et réessayez.</string>
-    <string name="reinstall_app_fail">Échec de la réinstallation de l\'application : %s</string>
-    <string name="uninstall_app_fail">Échec de la désinstallation de l\'application : %s</string>
     <string name="save_apk_success">APK enregistré</string>
-    <string name="saved_app_export_success">Application patchée exportée</string>
     <string name="saved_app_export_failed">Échec de l\'exportation de l\'application patchée</string>
     <string name="saved_app_removed_toast">Suppression de l\'application patchée enregistrée</string>
     <string name="saved_app_copy_removed_toast">Copie enregistrée supprimée</string>
     <string name="saved_app_launch_unavailable">Installez l\'application avant de l\'ouvrir.</string>
-    <string name="saved_app_install_success">Application enregistrée installée</string>
-    <string name="saved_app_install_failed">Échec de l\'installation de l\'application enregistrée</string>
-    <string name="saved_app_install_missing">APK enregistré introuvable</string>
     <string name="package_name">Nom de package</string>
     <string name="failed_to_mount">Échec du montage : %s</string>
     <string name="failed_to_unmount">Échec du démontage : %s</string>
@@ -413,6 +404,10 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_external_timeout">%1$s n\'a pas confirmé l\'installation. Vérifiez l\'autre application et réessayez.</string>
     <string name="installer_external_success">%1$s a signalé une installation réussie.</string>
     <string name="installer_external_finished_no_change">%1$s s\'est terminé sans installer l\'application. Vérifiez si l\'installateur affiche un message d\'erreur et réessayez.</string>
+    <string name="installer_unavailable_title">%s indisponible</string>
+    <string name="installer_unavailable_message">Votre installateur préféré (%s) est actuellement indisponible. Vous pouvez résoudre le problème et réessayer, ou utiliser l\'installateur standard à la place.</string>
+    <string name="installer_unavailable_shizuku_hint">Assurez-vous que Shizuku est en cours d’exécution et que l’autorisation a été accordée à cette application.</string>
+    <string name="installer_use_standard">Utiliser l\'installateur standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performance</string>
     <string name="settings_system_process_runtime">Temps d’exécution du processus</string>
@@ -492,6 +487,7 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="reset">Réinitialiser</string>
     <string name="warning">Avertissement</string>
     <string name="error_">Erreur</string>
+    <string name="retry">Réessayer</string>
     <string name="add">Ajouter</string>
     <string name="close">Fermer</string>
     <string name="clear">Effacer</string>
@@ -563,6 +559,4 @@ Voulez-vous tout de même continuer ?"</string>
     <string name="hours_ago">Il y a %s heures</string>
     <string name="days_ago">Il y a %s jours</string>
     <string name="invalid_date">Date invalide</string>
-    <string name="plugin_host_permission_label">Hôte de plugin Morphe</string>
-    <string name="plugin_host_permission_description">Permet de contrôler l\'accès aux plugins Morphe. Seul Morphe possède ceci.</string>
 </resources>

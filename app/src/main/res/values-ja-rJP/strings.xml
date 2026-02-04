@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">パッチャープロセスがコード %1$d で終了しました。</string>
     <string name="install_app_success">正常にインストールされました</string>
     <string name="install_app_fail">アプリのインストールに失敗しました: %s</string>
-    <string name="install_app_fail_missing_stock">マウント式インストールに必要な元の APK が見つかりません。</string>
-    <string name="mount_split_not_supported">root 権限マウント式インストーラーは分割 APK に対応していません。代わりにシステムのインストーラーを使用してください。</string>
     <string name="install_timeout_message">インストールが完了しませんでした。システムインストーラーのダイアログを確認して、再度お試しください。</string>
-    <string name="uninstall_timeout_message">アンインストールが完了しませんでした。アンインストールのダイアログを確認して、再度お試しください。</string>
-    <string name="reinstall_app_fail">アプリの再インストールに失敗しました: %s</string>
-    <string name="uninstall_app_fail">アプリのアンインストールに失敗しました: %s</string>
     <string name="save_apk_success">APK を保存しました</string>
-    <string name="saved_app_export_success">パッチ済みアプリをエクスポートしました</string>
     <string name="saved_app_export_failed">パッチ済みアプリをエクスポートできませんでした</string>
     <string name="saved_app_removed_toast">保存済みアプリを削除しました</string>
     <string name="saved_app_copy_removed_toast">保存済みコピーを削除しました</string>
     <string name="saved_app_launch_unavailable">アプリを開く前にインストールしてください。</string>
-    <string name="saved_app_install_success">保存されたアプリをインストールしました</string>
-    <string name="saved_app_install_failed">保存されたアプリのインストールに失敗しました</string>
-    <string name="saved_app_install_missing">保存された APK が見つかりません</string>
     <string name="package_name">パッケージ名</string>
     <string name="failed_to_mount">マウントに失敗しました: %s</string>
     <string name="failed_to_unmount">アンマウントに失敗しました: %s</string>
@@ -414,6 +405,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s がインストールを確認できませんでした。別のアプリを確認して、再度お試しください。</string>
     <string name="installer_external_success">%1$s がインストールに成功したことを報告しました。</string>
     <string name="installer_external_finished_no_change">%1$s はアプリをインストールせずに終了しました。インストーラーのエラーメッセージを確認して、再度お試しください。</string>
+    <string name="installer_unavailable_title">%s が利用できません</string>
+    <string name="installer_unavailable_message">お使いのインストーラー (%s) が現在利用できません。問題を修正して再度お試しください、または標準のインストーラーを使用してください。</string>
+    <string name="installer_unavailable_shizuku_hint">Shizuku が実行中であること、およびこのアプリに対する権限が許可されていることを確認してください。</string>
+    <string name="installer_use_standard">標準を使用</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">パフォーマンス</string>
     <string name="settings_system_process_runtime">プロセス実行時間</string>
@@ -493,6 +488,7 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="reset">リセット</string>
     <string name="warning">警告</string>
     <string name="error_">エラー</string>
+    <string name="retry">再試行</string>
     <string name="add">追加</string>
     <string name="close">閉じる</string>
     <string name="clear">クリア</string>
@@ -564,6 +560,4 @@ Morphe は、コミュニティのフィードバックと貢献によって発�
     <string name="hours_ago">%sh 前</string>
     <string name="days_ago">%sd 前</string>
     <string name="invalid_date">無効な日付</string>
-    <string name="plugin_host_permission_label">Morphe プラグインホスト</string>
-    <string name="plugin_host_permission_description">Morphe プラグインへのアクセス制御に使用されます。この権限はMorphe のみが持ちます。</string>
 </resources>

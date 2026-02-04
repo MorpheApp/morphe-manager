@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Η διαδικασία patcher ολοκληρώθηκε με κωδικό %1$d.</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Αδυναμία εγκατάστασης εφαρμογής: %s</string>
-    <string name="install_app_fail_missing_stock">Μην υπάρχει αρχικό APK για εγκατάσταση μέσα από το διαμέρισμα.</string>
-    <string name="mount_split_not_supported">Η εγκαταστασία μέσω διαμέρισμα δεν υποστηρίζει διασπασμένα APK. Χρήσιμος είναι ο συστημικός εγκαταστασίος.</string>
     <string name="install_timeout_message">Η εγκατάσταση δεν ολοκληρώθηκε. Ελέγξτε το παράθυρο διαλόγου του εγκαταστάτη συστήματος και προσπαθήστε ξανά.</string>
-    <string name="uninstall_timeout_message">Η απεγκατάσταση δεν ολοκληρώθηκε. Έλεγξτε το dialoγο απεγκατάστασης και δοκιμάστε ξανά.</string>
-    <string name="reinstall_app_fail">Απέτυχε η επανεγκατάσταση της εφαρμογής: %s</string>
-    <string name="uninstall_app_fail">Απέτυχε η απεγκατάσταση της εφαρμογής: %s</string>
     <string name="save_apk_success">Το APK αποθηκεύτηκε</string>
-    <string name="saved_app_export_success">Η τροποποιημένη εφαρμογή εξήχθη</string>
     <string name="saved_app_export_failed">Η εξαγωγή της τροποποιημένης εφαρμογής απέτυχε</string>
     <string name="saved_app_removed_toast">Η αποθηκευμένη τροποποιημένη εφαρμογή αφαιρέθηκε</string>
     <string name="saved_app_copy_removed_toast">Αποθηκευμένο αντίγραφο αφαιρέθηκε</string>
     <string name="saved_app_launch_unavailable">Εγκαταστήστε την εφαρμογή πριν την ανοίξετε.</string>
-    <string name="saved_app_install_success">Εγκαταστάθηκε η εφαρμογή σε αναμονή</string>
-    <string name="saved_app_install_failed">Απέτυχε η εγκατάσταση της εφαρμογής σε αναμονή</string>
-    <string name="saved_app_install_missing">Δεν βρέθηκε το αποθηκευμένο APK</string>
     <string name="package_name">Όνομα πακέτου</string>
     <string name="failed_to_mount">Αδυναμία προσάρτησης: %s</string>
     <string name="failed_to_unmount">Αδυναμία αποπροσάρτησης: %s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">Το %1$s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά.</string>
     <string name="installer_external_success">Το %1$s ανέφερε επιτυχή εγκατάσταση.</string>
     <string name="installer_external_finished_no_change">%1$s ολοκληρώθηκε χωρίς να εγκατασταθεί η εφαρμογή. Έλεγξτε το εγκαταστασίο για ένα μήνυμα σφάλματος και δοκιμάστε ξανά.</string>
+    <string name="installer_unavailable_title">%s μη διαθέσιμο</string>
+    <string name="installer_unavailable_message">Ο προτιμώμενος εγκαταστάτης (%s) δεν είναι διαθέσιμος τώρα. Μπορείς να διορθώσεις το πρόβλημα και να προσπαθήσεις ξανά, ή να χρησιμοποιήσεις τον καθιερωμένο εγκαταστάτη αντί για αυτό.</string>
+    <string name="installer_unavailable_shizuku_hint">Βεβαιωθείτε ότι το Shizuku τρέχει και η άδεια έχει δοθεί σε αυτή την εφαρμογή.</string>
+    <string name="installer_use_standard">Χρησιμοποιήστε τον καθορισμένο</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Επιδομή</string>
     <string name="settings_system_process_runtime">Χρόνος επεξεργασίας</string>
@@ -490,6 +485,7 @@ morphe_header_custom_dark.png
     <string name="reset">Επαναφορά</string>
     <string name="warning">Προειδοποίηση</string>
     <string name="error_">Σφάλμα</string>
+    <string name="retry">Προσπαθήστε ξανά</string>
     <string name="add">Προσθήκη</string>
     <string name="close">Κλείσιμο</string>
     <string name="clear">Εκκαθάριση</string>
@@ -561,6 +557,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">πριν από %s ώρες</string>
     <string name="days_ago">πριν από %s ημέρες</string>
     <string name="invalid_date">Μη έγκυρη ημερομηνία</string>
-    <string name="plugin_host_permission_label">Φιλοξενία πρόσθετων Morphe</string>
-    <string name="plugin_host_permission_description">Χρησιμοποιείται για τον έλεγχο της πρόσβασης σε πρόσθετα Morphe. Μόνο το Morphe έχει αυτήν την άδεια.</string>
 </resources>

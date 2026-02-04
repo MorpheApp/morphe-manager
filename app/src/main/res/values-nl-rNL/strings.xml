@@ -245,21 +245,12 @@ Wilt u toch doorgaan?"</string>
     <string name="patcher_process_exit_message">Patcher-proces beëindigd met code %1$d.</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
     <string name="install_app_fail">Kon app niet installeren: %s</string>
-    <string name="install_app_fail_missing_stock">Geen originele APK voor installatie via installeer-op-maat.</string>
-    <string name="mount_split_not_supported">De installeer-op-maat die is gemonteerd ondersteunt geen gepartitioneerde APK\'s. Gebruik de systeeminstaller in plaats daarvan.</string>
     <string name="install_timeout_message">Installatie is niet voltooid. Controleer het systeemeigenaardialoogvenster en probeer het opnieuw.</string>
-    <string name="uninstall_timeout_message">De installatie is niet voltooien. Controleer het installeerbeveiligingsovenliggaand dialoog en probeer opnieuw.</string>
-    <string name="reinstall_app_fail">Kon app niet opnieuw installeren: %s</string>
-    <string name="uninstall_app_fail">Kon app niet verwijderen: %s</string>
     <string name="save_apk_success">APK opgeslagen</string>
-    <string name="saved_app_export_success">Gepatchte app geëxporteerd</string>
     <string name="saved_app_export_failed">Kan gepatchte app niet exporteren</string>
     <string name="saved_app_removed_toast">Opgeslagen gepatchte app verwijderd</string>
     <string name="saved_app_copy_removed_toast">Opgeslagen kopie verwijderd</string>
     <string name="saved_app_launch_unavailable">Installeer de app voordat u deze opent.</string>
-    <string name="saved_app_install_success">Opgeslagen app geïnstalleerd</string>
-    <string name="saved_app_install_failed">Fout bij installeren van opgeslagen app</string>
-    <string name="saved_app_install_missing">Opgeslagen APK niet gevonden</string>
     <string name="package_name">Pakketnaam</string>
     <string name="failed_to_mount">Kon %s niet koppelen</string>
     <string name="failed_to_unmount">Kon %s niet ontkoppelen</string>
@@ -413,6 +404,10 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_external_timeout">%1$s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw.</string>
     <string name="installer_external_success">%1$s heeft een succesvolle installatie gerapporteerd.</string>
     <string name="installer_external_finished_no_change">%1$s is klaar zonder de app te installeren. Controleer het installatieprogramma voor een foutmelding en probeer het opnieuw.</string>
+    <string name="installer_unavailable_title">%s (niet beschikbaar)</string>
+    <string name="installer_unavailable_message">Uw voorkeur-installer (%s) is momenteel niet beschikbaar. U kunt het probleem oplossen en opnieuw proberen, of de standaard-installer gebruiken.</string>
+    <string name="installer_unavailable_shizuku_hint">Zorg ervoor dat Shizuku draait en de toestemming voor deze app is gegeven.</string>
+    <string name="installer_use_standard">Gebruik standaard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestaties</string>
     <string name="settings_system_process_runtime">Processruntime</string>
@@ -492,6 +487,7 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="reset">Terugzetten</string>
     <string name="warning">Waarschuwing</string>
     <string name="error_">Fout</string>
+    <string name="retry">Opnieuw proberen</string>
     <string name="add">Toevoegen</string>
     <string name="close">Sluiten</string>
     <string name="clear">Leegmaken</string>
@@ -563,6 +559,4 @@ Wilt u toch doorgaan?"</string>
     <string name="hours_ago">%su geleden</string>
     <string name="days_ago">%sd geleden</string>
     <string name="invalid_date">Ongeldige datum</string>
-    <string name="plugin_host_permission_label">Morphe-pluginhost</string>
-    <string name="plugin_host_permission_description">Wordt gebruikt om toegang tot Morphe-plugins te beheren. Alleen Morphe heeft deze.</string>
 </resources>

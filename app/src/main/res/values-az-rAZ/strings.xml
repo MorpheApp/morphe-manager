@@ -103,6 +103,10 @@
     <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_no_results">Yamaqlar tapılmadı</string>
     <string name="expert_mode_no_patches">Yamaqlar əlçatan deyil</string>
+    <string name="expert_mode_multiple_bundles_warning_title">Çoxlu yamaq mənbəyi seçilib</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Çoxlu yamaq mənbəyindən yamaqlar seçmisiniz. Bu, uyuşma problemlərinə və ya gözlənilməz fəaliyyətə səbəb ola bilər.
+
+Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər.</string>
@@ -120,7 +124,32 @@
     <string name="patch_option_enter_decimal">Onluq qeyd edin</string>
     <string name="patch_option_pick_folder">Qovluq seçin</string>
     <!-- Adaptive Icon Creator -->
+    <string name="adaptive_icon_creator_title">Uyğun simvol yarat</string>
+    <string name="adaptive_icon_create">Simvol yarat</string>
+    <string name="adaptive_icon_instructions">Ön səhnə şəklin seçin, fon rəngini seçin və önizləməni böyütmək üçün çimdikləmə jestləri ilə nizamlayın</string>
+    <string name="adaptive_icon_preview">Önizləmə</string>
+    <string name="adaptive_icon_select_foreground">Ön səhnə şəklini seç</string>
+    <string name="adaptive_icon_change_foreground">Ön səhnə şəklini dəyişdir</string>
+    <string name="adaptive_icon_background_color">Fon rəngi</string>
+    <string name="adaptive_icon_reset_transform">Mövqeyi və miqyası qaytar</string>
+    <string name="adaptive_icon_safe_zone_inner">Etibarlı yer (həmişə görünən)</string>
+    <string name="adaptive_icon_safe_zone_outer">Örtük yeri (kəsilmiş ola bilər)</string>
+    <string name="adaptive_icon_created_success">Uyğun simvol uğurla yaradıldı</string>
+    <string name="adaptive_icon_creation_failed">Uyğun simvol yaratmaq olmadı</string>
+    <string name="adaptive_icon_create_new">Yeni simvol yarat</string>
+    <string name="adaptive_icon_folder_explanation">Yaradılmış simvol faylları ilə \'morphe_branding/morphe_icons\' qovluğunun harada yaradılacağın seç</string>
     <!-- Header Creator -->
+    <string name="header_creator_title">Xüsusi sərlövhə yarat</string>
+    <string name="header_creator_create">Sərlövhə yarat</string>
+    <string name="header_creator_create_new">Yeni sərlövhə yarat</string>
+    <string name="header_creator_instructions">İşıqlı və qaranlıq koloritlər üçün şəkillər seç, sonra böyütmək üçün çimdikləmə jestləri ilə nizamla</string>
+    <string name="header_creator_light_theme">İşıqlı kolorit sərlövhəsi</string>
+    <string name="header_creator_dark_theme">Qaranlıq kolorit sərlövhəsi</string>
+    <string name="header_creator_select_light">İşıqlı kolorit şəklini seçin</string>
+    <string name="header_creator_change_light">İşıqlı kolorit şəklini dəyişdir</string>
+    <string name="header_creator_select_dark">Qaranlıq kolorit şəklini seçin</string>
+    <string name="header_creator_change_dark">Qaranlıq kolorit şəklini dəyişdir</string>
+    <string name="header_creator_no_image">Seçilən şəkil yoxdur</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu tətbiqi silmək istədiyinizə əminsiniz?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Bu saxlanılan tətbiqi silmək istədiyinizə əminsiniz?</string>
@@ -207,21 +236,12 @@
     <string name="patcher_process_exit_message">Yama proqramı %1$d kodla çıxdı.</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
     <string name="install_app_fail">Proqramı quraşdırmaq mümkün olmadı: %s</string>
-    <string name="install_app_fail_missing_stock">Montaj üçin orijinal APK yo\'q.</string>
-    <string name="mount_split_not_supported">İzgiriltilmiş montaj instalyarı split APK\'ları qoşmaadi.</string>
     <string name="install_timeout_message">Quraşdırma başa çatmadı. Sistem quraşdırıcısının dialoq qutusuna baxın və yenidən cəhd edin.</string>
-    <string name="uninstall_timeout_message">Çıqarma muvvakıtlığı tugaganda tamamlanmadı. Çıqarma dialoqunuzu tekşirib, dava qilin.</string>
-    <string name="reinstall_app_fail">Proqramı yenidən quraşdırmaq mümkün olmadı: %s</string>
-    <string name="uninstall_app_fail">Proqramı silmək mümkün olmadı: %s</string>
     <string name="save_apk_success">APK saxlanıldı</string>
-    <string name="saved_app_export_success">Yamaqlı proqram ixrac edildi</string>
     <string name="saved_app_export_failed">Yamaqlı proqramı ixrac etmək mümkün olmadı</string>
     <string name="saved_app_removed_toast">Saxlanmış yamaqlı proqram silindi</string>
     <string name="saved_app_copy_removed_toast">Saxlanmış surət silindi</string>
     <string name="saved_app_launch_unavailable">Tətbiqi açmadan əvvəl quraşdırın.</string>
-    <string name="saved_app_install_success">Saxlanılan tətbiq quraşdırıldı</string>
-    <string name="saved_app_install_failed">Saxlanılan tətbiq quraşdırıla bilmədi</string>
-    <string name="saved_app_install_missing">Saxlanılan APK tapılmadı</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Quraşdırma alınmadı: %s</string>
     <string name="failed_to_unmount">Sökülmə alınmadı: %s</string>
@@ -413,6 +433,4 @@ Hələ də davam etmək istəyirsiniz?"</string>
     <string name="hours_ago">%s saat əvvəl</string>
     <string name="days_ago">%sd əvvəl</string>
     <string name="invalid_date">Yanlış tarix</string>
-    <string name="plugin_host_permission_label">Morphe plagində host</string>
-    <string name="plugin_host_permission_description">Morphe plugin-lərinə girişi idarə etmək üçün istifadə olunur. Yalnız Morphe-nin bu var.</string>
 </resources>

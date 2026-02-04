@@ -245,21 +245,12 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patcher_process_exit_message">Tiến trình vá bị thoát với mã %1$d.</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
-    <string name="install_app_fail_missing_stock">Thiếu APK gốc để cài đặt kiểu gắn kết.</string>
-    <string name="mount_split_not_supported">Trình cài đặt gắn kết bằng root không hỗ trợ APK chia nhỏ. Hãy chuyển sang trình cài đặt hệ thống.</string>
     <string name="install_timeout_message">Cài đặt không thành công. Kiểm tra hộp thoại cài đặt hệ thống và thử lại.</string>
-    <string name="uninstall_timeout_message">Gỡ cài đặt không thành công. Hãy kiểm tra hộp thoại gỡ cài đặt và thử lại.</string>
-    <string name="reinstall_app_fail">Không thể cài lại ứng dụng: %s</string>
-    <string name="uninstall_app_fail">Không thể gỡ cài đặt: %s</string>
     <string name="save_apk_success">Đã lưu APK</string>
-    <string name="saved_app_export_success">Đã xuất ứng dụng đã vá</string>
     <string name="saved_app_export_failed">Không thể xuất ứng dụng đã vá</string>
     <string name="saved_app_removed_toast">Đã xoá bản lưu ứng dụng đã vá</string>
     <string name="saved_app_copy_removed_toast">Đã xoá bản sao đã lưu</string>
     <string name="saved_app_launch_unavailable">Cài ứng dụng trước khi mở.</string>
-    <string name="saved_app_install_success">Đang cài đặt ứng dụng đã lưu</string>
-    <string name="saved_app_install_failed">Không thể cài ứng dụng đã lưu</string>
-    <string name="saved_app_install_missing">Không tìm thấy APK đã lưu</string>
     <string name="package_name">Tên gói</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
@@ -275,7 +266,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_background_space">Không gian</string>
     <string name="settings_appearance_background_shapes">Hình khối</string>
     <string name="settings_appearance_background_snow">Tuyết</string>
-    <string name="settings_appearance_background_none">Không có</string>
+    <string name="settings_appearance_background_none">Không</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
     <string name="settings_appearance_system">Hệ thống</string>
@@ -413,6 +404,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_external_timeout">%1$s không xác nhận cài đặt. Kiểm tra ứng dụng khác và thử lại.</string>
     <string name="installer_external_success">%1$s báo đã cài đặt thành công.</string>
     <string name="installer_external_finished_no_change">%1$s đã hoàn thành mà không cần cài đặt ứng dụng. Vui lòng kiểm tra thông báo lỗi trong trình cài đặt và thử lại.</string>
+    <string name="installer_unavailable_title">%s không khả dụng</string>
+    <string name="installer_unavailable_message">Trình cài đặt mà bạn ưu tiên (%s) hiện đang không khả dụng. Hãy thử lại sau khi sửa lỗi hoặc chuyển sang dùng trình cài đặt tiêu chuẩn.</string>
+    <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này.</string>
+    <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Hiệu suất</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
@@ -492,6 +487,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="reset">Đặt lại</string>
     <string name="warning">Cảnh báo</string>
     <string name="error_">Lỗi</string>
+    <string name="retry">Thử lại</string>
     <string name="add">Thêm</string>
     <string name="close">Đóng</string>
     <string name="clear">Dọn dẹp</string>
@@ -508,7 +504,7 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="enabled">Đang bật</string>
     <string name="disabled">Đang tắt</string>
     <string name="selected">Đã chọn</string>
-    <string name="not_selected">Chưa chọn</string>
+    <string name="not_selected">Không chọn</string>
     <string name="rename">Đổi tên</string>
     <string name="export">Xuất</string>
     <string name="download">Tải xuống</string>
@@ -561,6 +557,4 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="hours_ago">%s giờ trước</string>
     <string name="days_ago">%s ngày trước</string>
     <string name="invalid_date">Thời gian không hợp lệ</string>
-    <string name="plugin_host_permission_label">Định danh plugin Morphe</string>
-    <string name="plugin_host_permission_description">Dùng để kiểm soát quyền truy cập vào các plugin, chỉ Morphe mới có quyền này.</string>
 </resources>

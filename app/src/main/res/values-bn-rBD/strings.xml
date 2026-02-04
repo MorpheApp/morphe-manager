@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Patcher কোড %1$d সহ বন্ধ হয়ে গেছে।</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
-    <string name="install_app_fail_missing_stock">モニタリングインストール用の元のAPKが見つかりません</string>
-    <string name="mount_split_not_supported">ルート化されたモニタリングインストーラーは分割 APK をサポートしません。システムインストーラーをご使用ください</string>
     <string name="install_timeout_message">ইনস্টলেশন শেষ হয়নি। সিস্টেম ইনস্টলার ডায়ালগটি পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
-    <string name="uninstall_timeout_message">アンインストールが完了しません。アンインストールダイアログを確認し、再度お試しください</string>
-    <string name="reinstall_app_fail">অ্যাপ পুনরায় ইনস্টল করতে ব্যর্থ: %s</string>
-    <string name="uninstall_app_fail">অ্যাপ আনইনস্টল করতে ব্যর্থ: %s</string>
     <string name="save_apk_success">APK সেভ করা হয়েছে</string>
-    <string name="saved_app_export_success">প্যাচ করা অ্যাপ এক্সপোর্ট করা হয়েছে</string>
     <string name="saved_app_export_failed">প্যাচ করা অ্যাপ এক্সপোর্ট করতে ব্যর্থ</string>
     <string name="saved_app_removed_toast">সেভ করা প্যাচ করা অ্যাপ সরানো হয়েছে</string>
     <string name="saved_app_copy_removed_toast">সংরক্ষিত কপি সরানো হয়েছে</string>
     <string name="saved_app_launch_unavailable">এটি খোলার আগে অ্যাপটি ইনস্টল করুন।</string>
-    <string name="saved_app_install_success">সংরক্ষিত অ্যাপ ইনস্টল করা হয়েছে</string>
-    <string name="saved_app_install_failed">সংরক্ষিত অ্যাপ ইনস্টল করতে ব্যর্থ</string>
-    <string name="saved_app_install_missing">সংরক্ষিত APK খুঁজে পাওয়া যায়নি</string>
     <string name="package_name">প্যাকেজের নাম</string>
     <string name="failed_to_mount">মাউন্ট করতে ব্যর্থ: %s</string>
     <string name="failed_to_unmount">আনমাউন্ট করতে ব্যর্থ: %s</string>
@@ -390,6 +381,10 @@
     <string name="installer_external_timeout">%1$s ইনস্টলেশন নিশ্চিত করেনি। অন্য অ্যাপটি পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
     <string name="installer_external_success">%1$s একটি সফল ইনস্টলেশনের কথা জানিয়েছে।</string>
     <string name="installer_external_finished_no_change">%1$s がアプリをインストールせずに完了しました。エラー メッセージを確認して、再度試してください</string>
+    <string name="installer_unavailable_title">%s অকার্যকর</string>
+    <string name="installer_unavailable_message">আপনার পছন্দের ইনস্টলার (%s) বর্তমানে অকার্যকর। সমস্যা ঠিক করুন এবং পুনরায় চেষ্টা করুন, অথবা মানক ইনস্টলার ব্যবহার করুন।</string>
+    <string name="installer_unavailable_shizuku_hint">বিশ্বাস করুন যে শিজুকু চালু আছে এবং এই অ্যাপের জন্য অনুমতি প্রদান করা হয়েছে।</string>
+    <string name="installer_use_standard">স্ট্যান্ডার্ড ব্যবহার করুন</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">প্রোফাইল</string>
     <string name="settings_system_process_runtime">প্রক্রিয় রান্টাইম</string>
@@ -471,6 +466,7 @@
     <string name="reset">আবার সেট করুন</string>
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
+    <string name="retry">আবার চেষ্টা করুন</string>
     <string name="add">যোগ করুন</string>
     <string name="close">বন্ধ করুন</string>
     <string name="clear">পরিষ্কার করুন</string>
@@ -542,6 +538,4 @@
     <string name="hours_ago">%s ঘন্টা আগে</string>
     <string name="days_ago">%s দিন আগে</string>
     <string name="invalid_date">অবৈধ তারিখ</string>
-    <string name="plugin_host_permission_label">Morphe প্লাগইন হোস্ট</string>
-    <string name="plugin_host_permission_description">Morphe প্লাগইনে অ্যাক্সেস নিয়ন্ত্রণ করতে ব্যবহৃত হয়। শুধুমাত্র Morphe-এর এটি আছে।</string>
 </resources>

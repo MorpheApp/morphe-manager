@@ -41,7 +41,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
     <string name="sources_management_subtitle">%d kaynak yüklendi</string>
-    <string name="sources_management_open_in_browser">Bağlantıları tarayıcıda aç</string>
+    <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_management_date_added">Eklendi</string>
     <string name="sources_management_date_updated">Güncellendi</string>
@@ -221,7 +221,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="patcher_message_9">Uygulamadaki hataları düzeltiyoruz… 🪲</string>
     <string name="patcher_message_10">Harika yamalar beklemeye değer… ⏳</string>
     <string name="patcher_message_11">Pikselleri parlayana kadar cilalıyoruz… 💎</string>
-    <string name="patcher_message_12">Pilot \'Yamalama işlemi devam ediyor\' ışığını söndürene kadar lütfen yerinizde kalın... 💺✈️</string>
+    <string name="patcher_message_12">Lütfen pilot \'Yamalama işlemi devam ediyor\' ışığını söndürene kadar yerinizde kalın... 💺✈️</string>
     <string name="patcher_message_13">Yamalanmış uygulamanız pişiyor, sıcak ve taze… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Bytecode ile nazikçe pazarlık yapıyoruz... 🤝</string>
@@ -245,21 +245,12 @@ Devam etmek istiyor musunuz?"</string>
     <string name="patcher_process_exit_message">Yama işleci %1$d koduyla sonlandı.</string>
     <string name="install_app_success">Başarıyla yüklendi</string>
     <string name="install_app_fail">Uygulama yüklenemedi: %s</string>
-    <string name="install_app_fail_missing_stock">Bağlama (mount) kurulumu için orijinal APK bulunamadı.</string>
-    <string name="mount_split_not_supported">Bağlama (mount) kurulumu, bölünmüş APK\'leri desteklememektedir. Sistem kurulumunu kullanın.</string>
     <string name="install_timeout_message">Kurulum tamamlanamadı. Sistem yükleyici iletişim kutusunu kontrol edin ve tekrar deneyin.</string>
-    <string name="uninstall_timeout_message">Kurulum tamamlanamadı. Kurulum diyalogunu kontrol edin ve tekrar deneyin.</string>
-    <string name="reinstall_app_fail">Uygulama yeniden yüklenemedi: %s</string>
-    <string name="uninstall_app_fail">Uygulama kaldırılamadı: %s</string>
     <string name="save_apk_success">APK Kaydedildi</string>
-    <string name="saved_app_export_success">Yamalanmış uygulama dışa aktarıldı</string>
     <string name="saved_app_export_failed">Yamalanmış uygulama dışa aktarılamadı</string>
     <string name="saved_app_removed_toast">Kaydedilen uygulama kaldırıldı</string>
     <string name="saved_app_copy_removed_toast">Kaydedilen kopya kaldırıldı</string>
     <string name="saved_app_launch_unavailable">Uygulamayı açmadan önce yükleyin.</string>
-    <string name="saved_app_install_success">Kaydedilen uygulama yüklendi</string>
-    <string name="saved_app_install_failed">Kaydedilen uygulama yüklenemedi</string>
-    <string name="saved_app_install_missing">Kaydedilen APK bulunamadı</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
     <string name="failed_to_unmount">%s: Kaldırılamadı</string>
@@ -389,7 +380,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_auto_saved_description">Yüklü uygulamaya yamalı APK\'yı bağlar (root gereklidir).</string>
     <string name="installer_shizuku_description">Shizuku veya Sui kullanarak sessizce yükleyin.</string>
     <string name="installer_option_none">Yedekleme yok</string>
-    <string name="installer_none_description">Yedekleme yükleyici yapılandırılmamış</string>
+    <string name="installer_none_description">Yedek yükleyici yapılandırılmamış</string>
     <string name="installer_status_requires_root">Root erişimi gerektirir</string>
     <string name="installer_status_not_supported">Bu işlem için desteklenmiyor.</string>
     <string name="installer_status_shizuku_not_installed">Bu seçeneği kullanmak için Shizuku veya Sui yükleyin.</string>
@@ -413,21 +404,25 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_external_timeout">%1$s kurulumu onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin.</string>
     <string name="installer_external_success">%1$s başarılı bir kurulum bildirdi.</string>
     <string name="installer_external_finished_no_change">%1$s uygulama kurulumu tamamlandı ancak kurulum yapılmadı. Hata mesajını kurulum arayüzüne bakın ve tekrar deneyin.</string>
+    <string name="installer_unavailable_title">%s kullanılamıyor</string>
+    <string name="installer_unavailable_message">Tercih ettiğiniz kurucuyla (%s) şu anda kullanılamıyor. Sorunu çözerek tekrar deneyebilir veya standart kurucu kullanabilirsin.</string>
+    <string name="installer_unavailable_shizuku_hint">Lütfen Shizuku\'nun çalışıyor ve bu uygulamaya izin verildiğini kontrol edin.</string>
+    <string name="installer_use_standard">Standart kullanımı kullanınız</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performans</string>
     <string name="settings_system_process_runtime">Çalışma süreci</string>
-    <string name="settings_system_process_runtime_description">Yamalamayı ayrı işlem için daha stabil çalışması için etkinleştirin</string>
-    <string name="settings_system_process_runtime_memory_limit">İşlem bellek limiti</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek bellek limitleri yamalamayı hızlandırır, ancak eskidenki cihazlarda çalışmayabilir</string>
+    <string name="settings_system_process_runtime_description">Daha iyi istikrar için yamalamayı ayrı bir süreçte gerçekleştirin</string>
+    <string name="settings_system_process_runtime_memory_limit">Bellek limiti</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Daha yüksek bellek limiti yamalamayı hızlandırabilir ancak eski cihazlarda çalışmayabilir</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
-    <string name="settings_system_memory_limit_subtitle">Yamalamaya ayrı işlem için kullanılacak bellek</string>
+    <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
     <string name="settings_system_memory_limit_warning">%d MB limit</string>
-    <string name="settings_system_process_runtime_enabled_description">Tıklayın ve yapılandırın</string>
+    <string name="settings_system_process_runtime_enabled_description">%d MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <!-- Settings - System Tab - Import and export keystore -->
-    <string name="settings_system_import_export">İçe aktar &amp; dışa aktar</string>
+    <string name="settings_system_import_export">İçe &amp; dışa aktar</string>
     <string name="settings_system_import_keystore">Anahtar deposunu içe aktar</string>
-    <string name="settings_system_import_keystore_description">Özel anahtar deposunu içe aktarın</string>
+    <string name="settings_system_import_keystore_description">Özelleştirilmiş anahtar deposunu içe aktar</string>
     <string name="settings_system_import_keystore_dialog_title">Keystore kimlik bilgilerini girin</string>
     <string name="settings_system_import_keystore_dialog_description">Keystore\'un girdilerini içe aktarmak için girdi gerekli.</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
@@ -444,7 +439,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_hide_password_field">Parolayı gizle</string>
     <!-- Settings - System Tab - Import and Export Manager Settings -->
     <string name="settings_system_import_manager_settings">Ayarları içe aktar</string>
-    <string name="settings_system_import_manager_settings_description">JSON dosyasından ayarları geri yükle</string>
+    <string name="settings_system_import_manager_settings_description">Ayarları JSON dosyasından geri yükle</string>
     <string name="settings_system_import_manager_settings_fail">Ayarlar içe aktarılamadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Ayarlar içe aktarıldı</string>
     <string name="settings_system_export_manager_settings">Ayarları dışa aktar</string>
@@ -492,6 +487,7 @@ Kullanıcı geri bildirimleri ve katkılarla gelecekteki yenilikler için çalı
     <string name="reset">Sıfırla</string>
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>
+    <string name="retry">Tekrar deneyin</string>
     <string name="add">Ekle</string>
     <string name="close">Kapat</string>
     <string name="clear">Temizle</string>
@@ -563,6 +559,4 @@ Devam etmek istiyor musunuz?"</string>
     <string name="hours_ago">%ssa önce</string>
     <string name="days_ago">%sg önce</string>
     <string name="invalid_date">Geçersiz tarih</string>
-    <string name="plugin_host_permission_label">Morphe eklenti barındırıcısı</string>
-    <string name="plugin_host_permission_description">Morphe eklentilerine erişimi kontrol etmek için kullanılır. Yalnızca Morphe\'nun buna erişimi vardır.</string>
 </resources>

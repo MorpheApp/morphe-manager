@@ -103,8 +103,8 @@
     <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_no_results">Tidak ada tambalan ditemukan</string>
     <string name="expert_mode_no_patches">Tidak ada tambalan tersedia</string>
-    <string name="expert_mode_multiple_bundles_warning_title">Sumber perbaikan beragam dipilih</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"Anda telah memilih perbaikan dari sumber perbaikan beragam. Hal ini mungkin menyebabkan masalah kompatibilitas atau perilaku yang tidak dijangkakan.
+    <string name="expert_mode_multiple_bundles_warning_title">Beragam sumber tambalan dipilih</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"Anda telah memilih tambalan dari berbagai sumber. Hal ini dapat menyebabkan masalah kompatibilitas atau masalah yang tidak terduga.
 
 Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -126,33 +126,33 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_creator_title">Buat ikon adaptif</string>
     <string name="adaptive_icon_create">Buat ikon</string>
-    <string name="adaptive_icon_instructions">Pilih gambar depan, pilih warna latar belakang, dan sesuaikan pratinjau dengan gestur geser-menyentuh</string>
+    <string name="adaptive_icon_instructions">Pilih gambar latar depan, pilih warna latar belakang, dan sesuaikan pratinjau dengan gerakan mencubit untuk memperbesar.</string>
     <string name="adaptive_icon_preview">Pratinjau</string>
-    <string name="adaptive_icon_select_foreground">Pilih gambar depan</string>
-    <string name="adaptive_icon_change_foreground">Ubah gambar depan</string>
+    <string name="adaptive_icon_select_foreground">Pilih gambar latar depan</string>
+    <string name="adaptive_icon_change_foreground">Ubah gambar latar depan</string>
     <string name="adaptive_icon_background_color">Warna latar belakang</string>
-    <string name="adaptive_icon_reset_transform">Reset posisi dan skala</string>
+    <string name="adaptive_icon_reset_transform">Atur ulang posisi dan skala</string>
     <string name="adaptive_icon_safe_zone_inner">Zona aman (selalu terlihat)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona mask (mungkin dipotong)</string>
+    <string name="adaptive_icon_safe_zone_outer">Zona tertutup (mungkin dipotong)</string>
     <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
     <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
     <string name="adaptive_icon_create_new">Buat ikon baru</string>
-    <string name="adaptive_icon_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_icons\' dengan berkas ikon yang dihasilkan</string>
+    <string name="adaptive_icon_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_icons\' dengan berkas ikon yang sudah dibuat</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">Buat header</string>
+    <string name="header_creator_title">Buat header khusus</string>
     <string name="header_creator_create">Buat header</string>
     <string name="header_creator_create_new">Buat header baru</string>
-    <string name="header_creator_instructions">Pilih gambar untuk tema ringan dan gelap, lalu sesuaikan dengan gestur sentuh dan geser</string>
-    <string name="header_creator_light_theme">Header tema ringan</string>
+    <string name="header_creator_instructions">Pilih gambar untuk tema terang dan gelap, lalu sesuaikan dengan gerakan mencubit untuk memperbesar</string>
+    <string name="header_creator_light_theme">Header tema terang</string>
     <string name="header_creator_dark_theme">Header tema gelap</string>
-    <string name="header_creator_select_light">Pilih gambar tema ringan</string>
-    <string name="header_creator_change_light">Ubah gambar tema ringan</string>
+    <string name="header_creator_select_light">Pilih gambar tema terang</string>
+    <string name="header_creator_change_light">Ubah gambar tema terang</string>
     <string name="header_creator_select_dark">Pilih gambar tema gelap</string>
     <string name="header_creator_change_dark">Ubah gambar tema gelap</string>
     <string name="header_creator_no_image">Tidak ada gambar yang dipilih</string>
     <string name="header_creator_success">Header berhasil dibuat</string>
     <string name="header_creator_failed">Gagal membuat header</string>
-    <string name="header_creator_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_header\' dengan berkas header yang dihasilkan</string>
+    <string name="header_creator_folder_explanation">Pilih di mana akan dibuat folder \'morphe_branding/morphe_header\' dengan berkas header yang sudah dibuat</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Apakah Anda yakin ingin mencopot pemasangan aplikasi ini?</string>
     <string name="home_app_info_saved_app_delete_confirmation">Apakah Anda yakin ingin menghapus aplikasi yang disimpan ini?</string>
@@ -245,21 +245,12 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="patcher_process_exit_message">Proses penambal keluar dengan kode %1$d.</string>
     <string name="install_app_success">Berhasil dipasang</string>
     <string name="install_app_fail">Gagal memasang aplikasi: %s</string>
-    <string name="install_app_fail_missing_stock">Berkas APK asli hilang untuk pemasangan dengan mount.</string>
-    <string name="mount_split_not_supported">Pemasang root mount tidak mendukung APK terpisah. Gunakan pemasang sistem sebagai gantinya.</string>
     <string name="install_timeout_message">Pemasangan tidak selesai. Periksa dialog pemasang sistem dan coba lagi.</string>
-    <string name="uninstall_timeout_message">Pencopotan pemasangan belum selesai. Periksa dialog pembatalan dan coba lagi.</string>
-    <string name="reinstall_app_fail">Gagal memasang ulang aplikasi: %s</string>
-    <string name="uninstall_app_fail">Gagal mencopot pemasangan aplikasi: %s</string>
     <string name="save_apk_success">APK Tersimpan</string>
-    <string name="saved_app_export_success">Aplikasi hasil patch diekspor</string>
     <string name="saved_app_export_failed">Gagal mengekspor aplikasi hasil patch</string>
     <string name="saved_app_removed_toast">Entri aplikasi patch tersimpan dihapus</string>
     <string name="saved_app_copy_removed_toast">Salinan tersimpan dihapus</string>
     <string name="saved_app_launch_unavailable">Pasang aplikasi sebelum membukanya.</string>
-    <string name="saved_app_install_success">Aplikasi tersimpan terpasang</string>
-    <string name="saved_app_install_failed">Gagal memasang aplikasi tersimpan</string>
-    <string name="saved_app_install_missing">APK tersimpan tidak ditemukan</string>
     <string name="package_name">Nama paket</string>
     <string name="failed_to_mount">Gagal mount: %s</string>
     <string name="failed_to_unmount">Gagal unmount: %s</string>
@@ -413,6 +404,10 @@ Ukuran gambar harus sebagai berikut:
     <string name="installer_external_timeout">%1$s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi.</string>
     <string name="installer_external_success">%1$s melaporkan pemasangan berhasil.</string>
     <string name="installer_external_finished_no_change">%1$s selesai tanpa menginstal aplikasi. Periksa instalator untuk pesan kesalahan dan coba lagi.</string>
+    <string name="installer_unavailable_title">%s tidak tersedia</string>
+    <string name="installer_unavailable_message">Pemasang yang Anda pilih (%s) saat ini tidak tersedia. Anda dapat memperbaiki masalah ini dan mencobanya lagi, atau menggunakan pemasang standar untuk menggantikannya.</string>
+    <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin diberikan ke aplikasi ini.</string>
+    <string name="installer_use_standard">Gunakan standar</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performa</string>
     <string name="settings_system_process_runtime">Proses runtime</string>
@@ -492,6 +487,7 @@ Sebagai proyek sumber terbuka, Morphe terus berkembang berdasarkan masukan dan k
     <string name="reset">Setel ulang</string>
     <string name="warning">Peringatan</string>
     <string name="error_">Kesalahan</string>
+    <string name="retry">Coba lagi</string>
     <string name="add">Tambah</string>
     <string name="close">Tutup</string>
     <string name="clear">Bersihkan</string>
@@ -563,6 +559,4 @@ Apakah Anda masih ingin melanjutkan?"</string>
     <string name="hours_ago">%sh yang lalu</string>
     <string name="days_ago">%sd yang lalu</string>
     <string name="invalid_date">Tanggal tidak sah</string>
-    <string name="plugin_host_permission_label">Host plugin Morphe</string>
-    <string name="plugin_host_permission_description">Digunakan untuk mengontrol akses ke plugin Morphe. Hanya Morphe yang memiliki ini.</string>
 </resources>

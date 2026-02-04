@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Patcher 進程已退出，代碼為 %1$d。</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
-    <string name="install_app_fail_missing_stock">缺少原始APK以進行掛載安裝。</string>
-    <string name="mount_split_not_supported">Rooted掛載安裝器不支援分拆APK。請改用系統安裝器。</string>
     <string name="install_timeout_message">安裝未完成。請檢查系統安裝程式對話方塊後重試。</string>
-    <string name="uninstall_timeout_message">解安裝未完成。請檢查解安裝對話框並重試。</string>
-    <string name="reinstall_app_fail">無法重新安裝應用程式：%s</string>
-    <string name="uninstall_app_fail">無法解除安裝應用程式：%s</string>
     <string name="save_apk_success">APK 已儲存</string>
-    <string name="saved_app_export_success">已匯出已修補的應用程式</string>
     <string name="saved_app_export_failed">無法匯出已修補的應用程式</string>
     <string name="saved_app_removed_toast">已移除已儲存的應用程式</string>
     <string name="saved_app_copy_removed_toast">已移除已儲存的複本</string>
     <string name="saved_app_launch_unavailable">請在開啟應用程式前安裝。</string>
-    <string name="saved_app_install_success">已安裝已儲存的應用程式</string>
-    <string name="saved_app_install_failed">無法安裝已儲存的應用程式</string>
-    <string name="saved_app_install_missing">找不到已儲存的APK</string>
     <string name="package_name">套件名稱</string>
     <string name="failed_to_mount">無法安裝：%s</string>
     <string name="failed_to_unmount">無法解除掛載：%s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s 並未確認安裝。請檢查其他應用程式後再試一次。</string>
     <string name="installer_external_success">%1$s 報告安裝成功。</string>
     <string name="installer_external_finished_no_change">%1$s 完成，但未安裝應用程式。檢查安裝器中的錯誤訊息並重試。</string>
+    <string name="installer_unavailable_title">%s 未能使用</string>
+    <string name="installer_unavailable_message">您的首选安装程序（%s）当前不可用。您可以修复此问题并重试，或改用标准安装程序。</string>
+    <string name="installer_unavailable_shizuku_hint">请确保 Shizuku 正在运行，并且已授予此应用程序权限。</string>
+    <string name="installer_use_standard">使用標準</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">效能</string>
     <string name="settings_system_process_runtime">運行時間</string>
@@ -492,6 +487,7 @@ morphe_header_custom_dark.png
     <string name="reset">重設</string>
     <string name="warning">警告</string>
     <string name="error_">錯誤</string>
+    <string name="retry">重試</string>
     <string name="add">新增</string>
     <string name="close">關閉</string>
     <string name="clear">清除</string>
@@ -563,6 +559,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">%s 小時前</string>
     <string name="days_ago">%s 天前</string>
     <string name="invalid_date">無效日期</string>
-    <string name="plugin_host_permission_label">Morphe 插件主控</string>
-    <string name="plugin_host_permission_description">用於控制對 Morphe 插件的存取。只有 Morphe 擁有此權限。</string>
 </resources>

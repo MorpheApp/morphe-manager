@@ -245,21 +245,12 @@ Tá sé cinnte duit go bhfuil sé ag dul chugat?"</string>
     <string name="patcher_process_exit_message">Chuaigh próiseas an phaiste amach le cód %1$d.</string>
     <string name="install_app_success">Suiteáladh go rathúil</string>
     <string name="install_app_fail">Theip ar aip a shuiteáil: %s</string>
-    <string name="install_app_fail_missing_stock">Ní lige an APK orighṫ a chur chun rith a sheachrán a dúnadh.</string>
-    <string name="mount_split_not_supported">Na cinntiúcháin busálaíbh ar bhedrún ar leith ní hé sin amhárán. Bain úsáid as an cinntiúchán sisead.</string>
     <string name="install_timeout_message">Níor chríochnaigh an suiteáil. Seiceáil fuinneog d\'fheiste agus bain triail eile as.</string>
-    <string name="uninstall_timeout_message">Ní sheachrán was gan tuisle. Cuardaigh an dúshlán cinntiúcháin agus triail iarracht arís.</string>
-    <string name="reinstall_app_fail">Theip ar aip a athshuiteáil: %s</string>
-    <string name="uninstall_app_fail">Theip ar aip a dhíshuiteáil: %s</string>
     <string name="save_apk_success">Sábháiltear APK</string>
-    <string name="saved_app_export_success">Aip paisteáilte a d\'onnmhairigh</string>
     <string name="saved_app_export_failed">Theip ar aip paisteáilte a easpórtáil</string>
     <string name="saved_app_removed_toast">Cóip paisteáilte sábháilte a bhaint</string>
     <string name="saved_app_copy_removed_toast">Cóip sábháilte a bhaint</string>
     <string name="saved_app_launch_unavailable">Suiteáil an aip sula n-osclaíonn tú é.</string>
-    <string name="saved_app_install_success">Suiteáladh aip shábháilte</string>
-    <string name="saved_app_install_failed">Theip ar aip shábháilte a shuiteáil</string>
-    <string name="saved_app_install_missing">Ní bhfuarthas APK sábháilte</string>
     <string name="package_name">Ainm an phacáiste</string>
     <string name="failed_to_mount">Theip ar mountáil: %s</string>
     <string name="failed_to_unmount">Theip ar unmountáil: %s</string>
@@ -411,6 +402,10 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_external_timeout">Ní dhearbhaigh %1$s an suiteáil. Seiceáil an aip eile agus bain triail eile as.</string>
     <string name="installer_external_success">Thuairiscigh %1$s suiteáil rathúil.</string>
     <string name="installer_external_finished_no_change">%1$s buairt an chéad bná %1$s gan sheachrán na cend a bhí i cónaí. Cuardaigh na múli a léiríodh ar bhualadh agus triail iarracht arís.</string>
+    <string name="installer_unavailable_title">%s ar an deireadh</string>
+    <string name="installer_unavailable_message">Tá an gcló atá agat (%s) curtha ar an deireadh anois. Tá an t-áiseanna atá agat leat an t-áiséad seo a réiteach nó an gcló seo a úsáid.</string>
+    <string name="installer_unavailable_shizuku_hint">Cuirfidh tú le tamann Shizuku a chugainn agus cead a thabhairt do réimse seo do chugainn.</string>
+    <string name="installer_use_standard">Úsáid an stádas seo</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Storage Management</string>
     <string name="settings_system_process_runtime">%d APK(s)</string>
@@ -488,6 +483,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="reset">Athshocrú</string>
     <string name="warning">Rabhadh</string>
     <string name="error_">Earráid</string>
+    <string name="retry">Reáchtáigh</string>
     <string name="add">Cuir leis</string>
     <string name="close">Dún</string>
     <string name="clear">Glan</string>
@@ -559,6 +555,4 @@ Ar mhaith leat leanúint ort fós?"</string>
     <string name="hours_ago">Uair%s ó shin</string>
     <string name="days_ago">Lá%s ó shin</string>
     <string name="invalid_date">Dáta neamhbhailí</string>
-    <string name="plugin_host_permission_label">Óstach breiseán Morphe</string>
-    <string name="plugin_host_permission_description">Úsáidtear é chun rochtain ar bhreiseáin Morphe a rialú. Níl sé seo ach ag Morphe.</string>
 </resources>

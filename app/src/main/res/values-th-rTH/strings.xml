@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">กระบวนการ Patcher สิ้นสุดลงด้วยโค้ด %1$d</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="install_app_fail">ไม่สามารถติดตั้งแอปได้: %s</string>
-    <string name="install_app_fail_missing_stock">ไม่พบ APK ต้นฉบับสำหรับการติดตั้งของระบบ.</string>
-    <string name="mount_split_not_supported">ตัวติดตั้งระบบ rooting ไม่สามารถใช้งาน APK อาร์เคดแบดส่วนต\u30BBត.</string>
     <string name="install_timeout_message">การติดตั้งไม่เสร็จสมบูรณ์ โปรดตรวจสอบหน้าต่างตัวติดตั้งของระบบแล้วลองอีกครั้ง</string>
-    <string name="uninstall_timeout_message">การถอนติดตั้งเสร็จสิ้นผิดพลาด โปรดตรวจสอบข้อความในหน้าต dialогถอนติดตั้งและลองอีกครั้ง.</string>
-    <string name="reinstall_app_fail">ไม่สามารถติดตั้งแอปใหม่ได้: %s</string>
-    <string name="uninstall_app_fail">ไม่สามารถถอนการติดตั้งแอปได้: %s</string>
     <string name="save_apk_success">บันทึก APK สำเร็จ</string>
-    <string name="saved_app_export_success">ส่งออกแอปที่แก้ไขแล้ว</string>
     <string name="saved_app_export_failed">ส่งออกแอปที่แก้ไขแล้วไม่สำเร็จ</string>
     <string name="saved_app_removed_toast">ลบแอปที่บันทึกไว้แล้ว</string>
     <string name="saved_app_copy_removed_toast">ลบคู่มือที่บันทึกไว้</string>
     <string name="saved_app_launch_unavailable">ติดตั้งแอปก่อนเปิด</string>
-    <string name="saved_app_install_success">ติดตั้งแอปที่บันทึกไว้สำเร็จแล้ว</string>
-    <string name="saved_app_install_failed">ติดตั้งแอปที่บันทึกไว้ไม่สำเร็จ</string>
-    <string name="saved_app_install_missing">ไม่พบ APK ที่บันทึกไว้</string>
     <string name="package_name">ชื่อแพ็กเกจ</string>
     <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
     <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s ไม่ได้ยืนยันการติดตั้ง โปรดตรวจสอบแอปอื่นแล้วลองอีกครั้ง</string>
     <string name="installer_external_success">%1$s รายงานว่าติดตั้งสำเร็จแล้ว</string>
     <string name="installer_external_finished_no_change">%s การติดตั้งสำเร็จโดยไม่ต้องติดตั้งแอปพลิเคชัน โปรดตรวจสอบข้อความผิดพลาดในตัวติดตั้งและลองอีกครั้ง</string>
+    <string name="installer_unavailable_title">%s ไม่พร้อมใช้งาน</string>
+    <string name="installer_unavailable_message">ตัวเลือกติดตั้งที่คุณชอบ (%s) ไม่พร้อมใช้งานในขณะนี้ คุณสามารถแก้ไขปัญหาและลองใหม่อีกครั้งหรือใช้ตัวเลือกติดตั้งมาตรฐานแทน</string>
+    <string name="installer_unavailable_shizuku_hint">ตรวจสอบให้แน่ใจว่า Shizuku กำลังทำงานและสิทธิ์ได้รับอนุญาตให้กับแอปพลิเคชันนี้</string>
+    <string name="installer_use_standard">ใช้มาตรฐาน</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">การตั้งค่า</string>
     <string name="settings_system_process_runtime">การทำงานของโปรเซส</string>
@@ -490,6 +485,7 @@ morphe_header_custom_dark.png
     <string name="reset">รีเซ็ต</string>
     <string name="warning">คำเตือน</string>
     <string name="error_">ขยาย</string>
+    <string name="retry">ลองใหม่อีกครั้ง</string>
     <string name="add">เพิ่ม</string>
     <string name="close">ปิด</string>
     <string name="clear">ล้าง</string>
@@ -561,6 +557,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">เมื่อ %s ชั่วโมงที่แล้ว</string>
     <string name="days_ago">เมื่อ %s วันที่แล้ว</string>
     <string name="invalid_date">วันที่ไม่ถูกต้อง</string>
-    <string name="plugin_host_permission_label">โฮสต์ปลั๊กอิน Morphe</string>
-    <string name="plugin_host_permission_description">ใช้เพื่อควบคุมการเข้าถึงปลั๊กอิน Morphe มีเพียง Morphe เท่านั้นที่มีสิ่งนี้</string>
 </resources>
