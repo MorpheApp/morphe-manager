@@ -12,6 +12,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsChannel
+import io.ktor.http.contentLength
 import io.ktor.utils.io.jvm.javaio.toInputStream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -102,12 +103,12 @@ sealed class RemotePatchBundle(
 
     suspend fun update(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult? =
         withContext(Dispatchers.IO) {
-        val info = getLatestInfo()
-        if (hasInstalled() && info.version == installedVersionSignatureInternal)
-            return@withContext null
+            val info = getLatestInfo()
+            if (hasInstalled() && info.version == installedVersionSignatureInternal)
+                return@withContext null
 
-        download(info, onProgress)
-    }
+            download(info, onProgress)
+        }
 
     suspend fun fetchLatestReleaseInfo(): ReVancedAsset {
         val key = "$uid|$endpoint"
@@ -277,9 +278,18 @@ class GitHubPullRequestBundle(
                     url(info.downloadUrl)
                     header("Authorization", "Bearer $gitHubPat")
                 }.execute { httpResponse ->
+                    val contentLength = httpResponse.contentLength()
+                    val totalArchiveBytes = contentLength?.takeIf { it > 0 }
+
+                    // Report initial progress
+                    onProgress?.invoke(0L, totalArchiveBytes)
+
+                    val inputStream = httpResponse.bodyAsChannel().toInputStream()
+
                     patchBundleOutputStream().use { patchOutput ->
-                        ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
+                        ZipInputStream(inputStream).use { zis ->
                             val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                            var totalReadFromStream = 0L
                             var copiedBytes = 0L
                             var lastReportedBytes = 0L
                             var lastReportedAt = 0L
@@ -289,16 +299,23 @@ class GitHubPullRequestBundle(
                             while (entry != null) {
                                 if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
                                     extractedTotal = entry.size.takeIf { it > 0 }
+
                                     while (true) {
                                         val read = zis.read(buffer)
                                         if (read == -1) break
                                         patchOutput.write(buffer, 0, read)
                                         copiedBytes += read.toLong()
+                                        totalReadFromStream += read.toLong()
+
                                         val now = System.currentTimeMillis()
-                                        if (copiedBytes - lastReportedBytes >= 64 * 1024 || now - lastReportedAt >= 200) {
-                                            lastReportedBytes = copiedBytes
+                                        if (totalReadFromStream - lastReportedBytes >= 64 * 1024 || now - lastReportedAt >= 200) {
+                                            lastReportedBytes = totalReadFromStream
                                             lastReportedAt = now
-                                            onProgress?.invoke(copiedBytes, extractedTotal)
+                                            // Report progress based on total archive download if available
+                                            val progressBytes = totalArchiveBytes?.let {
+                                                (totalReadFromStream.toDouble() / it * (extractedTotal ?: totalArchiveBytes)).toLong()
+                                            } ?: copiedBytes
+                                            onProgress?.invoke(progressBytes, extractedTotal ?: totalArchiveBytes)
                                         }
                                     }
                                     break
@@ -310,7 +327,8 @@ class GitHubPullRequestBundle(
                             if (copiedBytes <= 0L) {
                                 throw IOException("No .mpp file found in the pull request artifact.")
                             }
-                            onProgress?.invoke(copiedBytes, extractedTotal)
+                            // Final progress report
+                            onProgress?.invoke(extractedTotal ?: copiedBytes, extractedTotal ?: totalArchiveBytes)
                         }
                     }
                 }
