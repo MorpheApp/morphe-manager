@@ -26,7 +26,9 @@ import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
@@ -294,15 +296,30 @@ fun SystemTabContent(
 
                 MorpheSettingsDivider()
 
-                // Patch Selections management
+                // Patch Selections management with grouped count
                 val selectionRepository: PatchSelectionRepository = koinInject()
                 val optionsRepository: PatchOptionsRepository = koinInject()
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
                     .collectAsStateWithLifecycle(emptySet())
                 val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
                     .collectAsStateWithLifecycle(emptySet())
-                val savedSelectionsCount = remember(packagesWithSelection, packagesWithOptions) {
-                    (packagesWithSelection + packagesWithOptions).size
+
+                // Calculate grouped count
+                var groupedSelectionsCount by remember { mutableIntStateOf(0) }
+
+                LaunchedEffect(packagesWithSelection, packagesWithOptions) {
+                    val allPackages = packagesWithSelection + packagesWithOptions
+                    if (allPackages.isEmpty()) {
+                        groupedSelectionsCount = 0
+                    } else {
+                        withContext(Dispatchers.IO) {
+                            val packageGroups = groupPackagesByOriginal(
+                                allPackages,
+                                installedAppRepository
+                            )
+                            groupedSelectionsCount = packageGroups.size
+                        }
+                    }
                 }
 
                 RichSettingsItem(
@@ -317,9 +334,9 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (savedSelectionsCount > 0) {
+                            if (groupedSelectionsCount > 0) {
                                 InfoBadge(
-                                    text = savedSelectionsCount.toString(),
+                                    text = groupedSelectionsCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )

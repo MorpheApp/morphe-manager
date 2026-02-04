@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.ui.screen.shared.*
@@ -39,12 +40,13 @@ private data class SavedSelectionItemData(
     val displayName: String,
     val patchCount: Int,
     val hasOptions: Boolean,
-    val packageInfo: PackageInfo?
+    val packageInfo: PackageInfo?,
+    val relatedPackages: Set<String> // All related packages (original + patched variants)
 )
 
 /**
  * Dialog for managing saved patch selections and options
- * These selections persist even after app uninstallation
+ * Groups original and patched packages together
  */
 @SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
@@ -57,6 +59,7 @@ fun PatchSelectionManagementDialog(
 
     val selectionRepository: PatchSelectionRepository = koinInject()
     val optionsRepository: PatchOptionsRepository = koinInject()
+    val installedAppRepository: InstalledAppRepository = koinInject()
 
     // Get packages with saved selections
     val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
@@ -68,7 +71,7 @@ fun PatchSelectionManagementDialog(
 
     // Combine both lists - use Set to avoid duplicates
     val allPackages = remember(packagesWithSelection, packagesWithOptions) {
-        (packagesWithSelection + packagesWithOptions).sorted()
+        (packagesWithSelection + packagesWithOptions)
     }
 
     // Get detailed data for each package
@@ -84,35 +87,61 @@ fun PatchSelectionManagementDialog(
         }
 
         val data = withContext(Dispatchers.IO) {
-            allPackages.map { packageName ->
-                val selections = selectionRepository.getSelection(packageName)
-                val patchCount = selections.values.sumOf { it.size }
-                val hasOptions = packageName in packagesWithOptions
+            // Group packages by their original package name
+            val packageGroups = groupPackagesByOriginal(
+                allPackages,
+                installedAppRepository
+            )
 
-                // Try to get PackageInfo and friendly name
+            packageGroups.map { (originalPackage, relatedPackages) ->
+                // Get patch count only for original package
+                val selections = selectionRepository.getSelection(originalPackage)
+                val patchCount = selections.values.sumOf { it.size }
+
+                // Check if any related package has options
+                val hasOptions = relatedPackages.any { it in packagesWithOptions }
+
+                // Try to get PackageInfo from the original package first
                 val packageInfo = try {
-                    pm.getPackageInfo(packageName)
+                    pm.getPackageInfo(originalPackage)
                 } catch (_: Exception) {
-                    null
+                    // Try to get from any related package
+                    relatedPackages.firstNotNullOfOrNull { pkg ->
+                        try {
+                            pm.getPackageInfo(pkg)
+                        } catch (_: Exception) {
+                            null
+                        }
+                    }
                 }
 
+                // Get display name from original package
                 val displayName = try {
                     if (packageInfo != null) {
                         packageInfo.applicationInfo?.loadLabel(context.packageManager)?.toString()
                     } else {
-                        val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+                        val appInfo = context.packageManager.getApplicationInfo(originalPackage, 0)
                         context.packageManager.getApplicationLabel(appInfo).toString()
                     }
                 } catch (_: Exception) {
-                    packageName
-                } ?: packageName
+                    // Try to get name from any related package
+                    relatedPackages.firstNotNullOfOrNull { pkg ->
+                        try {
+                            val appInfo = context.packageManager.getApplicationInfo(pkg, 0)
+                            context.packageManager.getApplicationLabel(appInfo).toString()
+                        } catch (_: Exception) {
+                            null
+                        }
+                    } ?: originalPackage
+                } ?: originalPackage
 
                 SavedSelectionItemData(
-                    packageName = packageName,
+                    packageName = originalPackage,
                     displayName = displayName,
                     patchCount = patchCount,
                     hasOptions = hasOptions,
-                    packageInfo = packageInfo
+                    packageInfo = packageInfo,
+                    relatedPackages = relatedPackages
                 )
             }.sortedBy { it.displayName }
         }
@@ -148,10 +177,11 @@ fun PatchSelectionManagementDialog(
                 onDismiss = { itemToDelete = null },
                 onConfirm = {
                     scope.launch {
-                        val pkg = itemToDelete!!
-                        // Delete both selection and options
-                        selectionRepository.resetSelectionForPackage(pkg)
-                        optionsRepository.resetOptionsForPackage(pkg)
+                        // Delete selections and options for related packages
+                        itemData.relatedPackages.forEach { pkg ->
+                            selectionRepository.resetSelectionForPackage(pkg)
+                            optionsRepository.resetOptionsForPackage(pkg)
+                        }
                         context.toast(selectionDeleted)
                         itemToDelete = null
                     }
@@ -407,4 +437,42 @@ private fun EmptyState(message: String) {
             color = LocalDialogSecondaryTextColor.current
         )
     }
+}
+
+/**
+ * Groups packages by their original package name
+ * Returns map of original package -> set of all related packages (including the original)
+ */
+suspend fun groupPackagesByOriginal(
+    allPackages: Set<String>,
+    installedAppRepository: InstalledAppRepository
+): Map<String, Set<String>> {
+    val packageToOriginal = mutableMapOf<String, String>()
+    val originalPackages = mutableSetOf<String>()
+
+    // First pass: identify which packages are patched and their originals
+    for (packageName in allPackages) {
+        val installedApp = installedAppRepository.get(packageName)
+        if (installedApp != null) {
+            // This is a patched app
+            packageToOriginal[packageName] = installedApp.originalPackageName
+            originalPackages.add(installedApp.originalPackageName)
+        }
+    }
+
+    // Second pass: treat remaining packages as originals
+    for (packageName in allPackages) {
+        if (packageName !in packageToOriginal) {
+            originalPackages.add(packageName)
+            packageToOriginal[packageName] = packageName
+        }
+    }
+
+    // Group by original package
+    val groups = mutableMapOf<String, MutableSet<String>>()
+    for ((pkg, original) in packageToOriginal) {
+        groups.getOrPut(original) { mutableSetOf() }.add(pkg)
+    }
+
+    return groups
 }
