@@ -99,7 +99,7 @@
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Select the APK you downloaded</string>
-    <string name="home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded.</string>
+    <string name="home_file_picker_prompt_description">Now select the %1$s APK file you just downloaded</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Open APK file I downloaded</string>
     <string name="home_file_picker_prompt_open_apk">Open APK file</string>
     <string name="home_recommended_version">Recommended version</string>
@@ -125,10 +125,10 @@ Are you sure you want to proceed?"</string>
 
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Unsupported Version</string>
-    <string name="home_dialog_unsupported_version_dialog_description">This APK is not a recommended app version. Proceeding may result in a non-functional app.</string>
+    <string name="home_dialog_unsupported_version_dialog_description">This APK is not a recommended app version. Proceeding may result in a non-functional app</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Proceed anyway</string>
     <string name="home_dialog_wrong_package_title">Wrong package selected</string>
-    <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch.</string>
+    <string name="home_dialog_wrong_package_description">The selected APK is not for the application you intended to patch</string>
     <string name="home_dialog_expected_package">Expected package</string>
     <string name="home_dialog_selected_package">Selected package</string>
 
@@ -436,7 +436,7 @@ The image dimensions must be as follows:
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Use the Android package installer</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
-    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app (root required).</string>
+    <string name="installer_auto_saved_description">Mounts the patched APK over the installed app (root required)</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
     <string name="installer_shizuku_description">Install silently using Shizuku or Sui.</string>
     <string name="installer_option_none">No fallback</string>
@@ -489,7 +489,7 @@ Details: %2$s"</string>
     <string name="settings_system_import_keystore">Import keystore</string>
     <string name="settings_system_import_keystore_description">Import a custom keystore</string>
     <string name="settings_system_import_keystore_dialog_title">Enter keystore credentials</string>
-    <string name="settings_system_import_keystore_dialog_description">You\'ll need enter the keystore\'s credentials to import it.</string>
+    <string name="settings_system_import_keystore_dialog_description">You\'ll need enter the keystore\'s credentials to import it</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Username (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
     <string name="settings_system_import_keystore_dialog_button">Import</string>
@@ -522,7 +522,7 @@ Details: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_success">Logs exported</string>
 
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Storage Management</string>
+    <string name="settings_system_storage_management">Storage management</string>
     <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Total size: %s</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
@@ -541,17 +541,17 @@ Details: %2$s"</string>
     <string name="settings_system_original_apks_empty">No original APKs stored</string>
     <string name="settings_system_original_apks_deleted">Original APK deleted successfully</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
-    <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
+    <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK</string>
 
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
-    <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation.</string>
+    <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
     <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
     <string name="settings_system_patch_selections_count">%1$d saved selection(s)</string>
     <string name="settings_system_patch_selections_empty">No saved patch selections</string>
     <string name="settings_system_patch_selections_has_options">Has options</string>
     <string name="settings_system_patch_selections_patches_options">Patches options</string>
-    <string name="settings_system_patch_selection_delete_title">Delete Patch Selection</string>
+    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
     <string name="settings_system_patch_selection_delete_warning">This will permanently delete:</string>
     <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
 

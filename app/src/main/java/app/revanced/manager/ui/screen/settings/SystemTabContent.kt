@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 /**
- * System tab content with patch selection management
+ * System tab content
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("LocalContextGetResourceValueCheck")
