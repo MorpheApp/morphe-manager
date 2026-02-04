@@ -869,6 +869,11 @@ private fun PathInputOption(
 //            color = LocalDialogTextColor.current
 //        )
 
+        // Folder picker button
+        val folderPicker = rememberFolderPickerWithPermission { uri ->
+            onValueChange(uri)
+        }
+
         MorpheDialogTextField(
             value = value,
             onValueChange = onValueChange,
@@ -879,23 +884,7 @@ private fun PathInputOption(
                 Text("/storage/emulated/0/folder")
             },
             showClearButton = true,
-            trailingIcon = {
-                // Folder picker button
-                val folderPicker = rememberFolderPickerWithPermission { uri ->
-                    onValueChange(uri)
-                }
-                IconButton(
-                    onClick = { folderPicker() },
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FolderOpen,
-                        contentDescription = stringResource(R.string.patch_option_pick_folder),
-                        tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-            }
+            onFolderPickerClick = { folderPicker() }
         )
 
         // Create Icon button

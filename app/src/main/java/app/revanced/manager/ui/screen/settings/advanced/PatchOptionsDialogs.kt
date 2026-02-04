@@ -363,22 +363,7 @@ fun CustomBrandingDialog(
                     placeholder = {
                         Text(stringResource(R.string.settings_advanced_patch_options_custom_branding_app_name_hint))
                     },
-                    trailingIcon = {
-                        // Reset button
-                        if (appName.isNotEmpty()) {
-                            IconButton(
-                                onClick = { appName = "" },
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Clear,
-                                    contentDescription = stringResource(R.string.reset),
-                                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-                    }
+                    showClearButton = true,
                 )
             }
 
@@ -394,20 +379,7 @@ fun CustomBrandingDialog(
                         Text("/storage/emulated/0/icons")
                     },
                     showClearButton = true,
-                    trailingIcon = {
-                        // Folder picker button
-                        IconButton(
-                            onClick = openFolderPicker,
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.FolderOpen,
-                                contentDescription = stringResource(R.string.patch_option_pick_folder),
-                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
+                    onFolderPickerClick = { openFolderPicker() }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))
@@ -521,20 +493,7 @@ fun CustomHeaderDialog(
                         Text("/storage/emulated/0/header")
                     },
                     showClearButton = true,
-                    trailingIcon = {
-                        // Folder picker button
-                        IconButton(
-                            onClick = openFolderPicker,
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.FolderOpen,
-                                contentDescription = stringResource(R.string.patch_option_pick_folder),
-                                tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                    }
+                    onFolderPickerClick = { openFolderPicker() }
                 )
 
                 Spacer(modifier = Modifier.height(0.dp))

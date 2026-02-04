@@ -9,6 +9,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.*
@@ -41,6 +42,7 @@ fun MorpheDialogTextField(
     enabled: Boolean = true,
     isPassword: Boolean = false,
     showClearButton: Boolean = false,
+    onFolderPickerClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     @SuppressLint("ModifierParameter")
@@ -56,7 +58,7 @@ fun MorpheDialogTextField(
         placeholder = placeholder,
         leadingIcon = leadingIcon,
         trailingIcon = {
-            if (isPassword || showClearButton) {
+            if (isPassword || showClearButton || onFolderPickerClick != null) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     // Password visibility toggle
                     if (isPassword) {
@@ -87,9 +89,19 @@ fun MorpheDialogTextField(
                             )
                         }
                     }
+
+                    // Folder picker button
+                    if (onFolderPickerClick != null) {
+                        IconButton(onClick = onFolderPickerClick) {
+                            Icon(
+                                imageVector = Icons.Outlined.FolderOpen,
+                                contentDescription = stringResource(R.string.patch_option_pick_folder),
+                                tint = textColor.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
                 }
             } else {
-                // Custom trailing icon (if provided)
                 trailingIcon?.invoke()
             }
         },
