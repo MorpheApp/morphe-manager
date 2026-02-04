@@ -444,7 +444,7 @@ fun CustomBrandingDialog(
 
                 // Create Icon button
                 MorpheDialogOutlinedButton(
-                    text = stringResource(R.string.adaptive_icon_create_new),
+                    text = stringResource(R.string.adaptive_icon_create),
                     onClick = { showIconCreator = true },
                     icon = Icons.Outlined.AutoAwesome,
                     modifier = Modifier.fillMaxWidth()
@@ -596,7 +596,7 @@ fun CustomHeaderDialog(
 
                 // Create Header button
                 MorpheDialogOutlinedButton(
-                    text = stringResource(R.string.header_creator_create_new),
+                    text = stringResource(R.string.header_creator_create),
                     onClick = { showHeaderCreator = true },
                     icon = Icons.Outlined.Image,
                     modifier = Modifier.fillMaxWidth()
