@@ -70,14 +70,6 @@ class Session(
 
             onPatchCompleted()
 
-
-            if (false) // TODO: Enable this only when using advanced mode? Or never?
-            selectedPatches.getOrNull(nextPatchIndex)?.let { nextPatch ->
-                updateProgress(
-                    name = androidContext.getString(R.string.applying_patch, nextPatch.name)
-                )
-            }
-
             logger.info("${patch.name} succeeded")
         }
 

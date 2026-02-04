@@ -7,14 +7,14 @@ import app.revanced.manager.network.utils.APIFailure
 import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
 import app.morphe.manager.BuildConfig
+import app.revanced.manager.util.MANAGER_REPO_URL
+import app.revanced.manager.util.MORPHE_API_URL
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.runCatching
-
-internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 class ReVancedAPI(
     private val client: HttpService,
@@ -50,8 +50,10 @@ class ReVancedAPI(
                 val repoPath = trimmed.removePrefix("https://api.github.com/").trim('/').removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 val reposIndex = parts.indexOf("repos")
-                val owner = parts.getOrNull(reposIndex + 1) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
-                val name = parts.getOrNull(reposIndex + 2) ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val owner = parts.getOrNull(reposIndex + 1)
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                val name = parts.getOrNull(reposIndex + 2)
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
                 RepoConfig(
                     owner = owner,
                     name = name,
@@ -64,7 +66,10 @@ class ReVancedAPI(
         }
     }
 
-    private suspend inline fun <reified T> githubRequest(config: RepoConfig, path: String): APIResponse<T> {
+    private suspend inline fun <reified T> githubRequest(
+        config: RepoConfig,
+        path: String
+    ): APIResponse<T> {
         val normalizedPath = path.trimStart('/')
         val pat = prefs.gitHubPat.get()
         return client.request {
@@ -73,15 +78,12 @@ class ReVancedAPI(
         }
     }
 
-    // Morphe
     private fun apiUrl(): String = MORPHE_API_URL
-//    private suspend fun apiUrl(): String = prefs.api.get().trim().removeSuffix("/")
 
     private suspend inline fun <reified T> apiRequest(route: String): APIResponse<T> {
         val normalizedRoute = route.trimStart('/')
         val baseUrl = apiUrl()
         return client.request {
-            // Morphe
             url("$baseUrl/v2/$normalizedRoute")
         }
     }
@@ -161,35 +163,15 @@ class ReVancedAPI(
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 
-    // Morphe
     suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = apiRequest(
         if (prefs.usePatchesPrereleases.get()) "patches/prerelease" else "patches"
     )
 
-    suspend fun getContributors(): APIResponse<List<ReVancedGitRepository>> {
-        val config = repoConfig()
-        return when (val response = githubRequest<List<GitHubContributor>>(config, "contributors")) {
-            is APIResponse.Success -> {
-                val contributors = response.data.map {
-                    ReVancedContributor(username = it.login, avatarUrl = it.avatarUrl)
-                }
-                APIResponse.Success(
-                    listOf(
-                        ReVancedGitRepository(
-                            name = config.name,
-                            url = config.htmlUrl,
-                            contributors = contributors
-                        )
-                    )
-                )
-            }
-
-            is APIResponse.Error -> APIResponse.Error(response.error)
-            is APIResponse.Failure -> APIResponse.Failure(response.error)
-        }
-    }
-
-    suspend fun getAssetFromPullRequest(owner: String, repo: String, pullRequestNumber: String): ReVancedAsset {
+    suspend fun getAssetFromPullRequest(
+        owner: String,
+        repo: String,
+        pullRequestNumber: String
+    ): ReVancedAsset {
         suspend fun getPullWithRun(
             pullRequestNumber: String,
             config: RepoConfig
@@ -233,7 +215,7 @@ class ReVancedAPI(
             .artifacts
 
         val artifact = artifacts.firstOrNull()
-            ?: throw Exception("The lastest commit in this PR didn't have any artifacts. Did the GitHub action run correctly?")
+            ?: throw Exception("The latest commit in this PR didn't have any artifacts. Did the GitHub action run correctly?")
 
         return ReVancedAsset(
             downloadUrl = artifact.archiveDownloadUrl,
@@ -252,5 +234,3 @@ fun <T> APIResponse<T>.successOrThrow(context: String): T {
         is APIResponse.Failure -> throw Exception("Failed fetching $context: ${error.message}", error)
     }
 }
-
-private const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"

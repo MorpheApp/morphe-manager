@@ -47,13 +47,9 @@ class InstallerManager(
         val hiddenPackages = hiddenInstallerPackages
         val entries = mutableListOf<Entry>()
 
-        // Morphe: In Morphe mode use checkRoot = false to avoid root prompts during listing.
-        // In Expert mode, check root for accurate status.
-        val shouldCheckRoot = !prefs.useMorpheHomeScreen.getBlocking()
-
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = shouldCheckRoot)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = shouldCheckRoot)?.let(entries::add)
+        entryFor(Token.AutoSaved, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
 
         val activityEntries = queryInstallerActivities()
             .filter(::isInstallerCandidate)
@@ -62,7 +58,7 @@ class InstallerManager(
                 val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
                 if (isDefaultComponent(component)) return@mapNotNull null
                 if (component.packageName in hiddenPackages) return@mapNotNull null
-                if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager)?.toString() ?: info.activityInfo.packageName)) {
+                if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager).toString())) {
                     return@mapNotNull null
                 }
                 entryFor(Token.Component(component), target, checkRoot = false)
@@ -121,16 +117,9 @@ class InstallerManager(
 
     fun getPrimaryToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
 
-    fun getFallbackToken(): Token = parseToken(prefs.installerFallback.getBlocking())
-
     suspend fun updatePrimaryToken(token: Token) {
         Log.d(TAG, "updatePrimaryToken -> ${token.describe()}")
         prefs.installerPrimary.update(tokenToPreference(token))
-    }
-
-    suspend fun updateFallbackToken(token: Token) {
-        Log.d(TAG, "updateFallbackToken -> ${token.describe()}")
-        prefs.installerFallback.update(tokenToPreference(token))
     }
 
     fun storedCustomInstallerTokens(): List<Token.Component> = readCustomInstallerTokens()
@@ -177,11 +166,11 @@ class InstallerManager(
 
         val results = mutableListOf<PackageSuggestion>()
         packages.forEach { info ->
-            val packageName = info.packageName ?: return@forEach
+            val packageName = info.packageName
             val applicationInfo = info.applicationInfo
             val label = applicationInfo?.loadLabel(packageManager)?.toString().orEmpty()
             val matches = packageName.contains(lower, ignoreCase = true) ||
-                label.contains(lower, ignoreCase = true)
+                    label.contains(lower, ignoreCase = true)
             if (!matches) return@forEach
 
             val activities = info.activities?.asSequence() ?: emptySequence()
@@ -280,19 +269,93 @@ class InstallerManager(
         return results.values.sortedBy { it.label.lowercase() }
     }
 
+    /**
+     * Resolves the installation plan based on user's preferred installer.
+     * Returns a [ResolvedPlan] which includes the plan and information about
+     * whether the primary installer was unavailable.
+     */
+    fun resolvePlanWithStatus(
+        target: InstallTarget,
+        sourceFile: File,
+        expectedPackage: String,
+        sourceLabel: String?
+    ): ResolvedPlan {
+        val primaryToken = getPrimaryToken()
+        val primaryAvailability = availabilityFor(primaryToken, target, checkRoot = true)
+
+        // If primary is available, use it
+        if (primaryAvailability.available) {
+            val plan = createPlan(primaryToken, target, sourceFile, expectedPackage, sourceLabel)
+            if (plan != null) {
+                return ResolvedPlan(
+                    plan = plan,
+                    primaryUnavailable = false,
+                    primaryToken = primaryToken,
+                    unavailabilityReason = null
+                )
+            }
+        }
+
+        // Primary is unavailable - check if it's Shizuku or AutoSaved (special cases)
+        val isSpecialInstaller = primaryToken == Token.Shizuku || primaryToken == Token.AutoSaved
+
+        if (isSpecialInstaller) {
+            // Return info about unavailability so UI can show appropriate dialog
+            return ResolvedPlan(
+                plan = InstallPlan.Internal(target), // Fallback
+                primaryUnavailable = true,
+                primaryToken = primaryToken,
+                unavailabilityReason = primaryAvailability.reason
+            )
+        }
+
+        // For other installers, try fallback sequence
+        val sequence = buildSequence(target)
+        sequence.forEach { token ->
+            createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { plan ->
+                return ResolvedPlan(
+                    plan = plan,
+                    primaryUnavailable = primaryToken != token,
+                    primaryToken = primaryToken,
+                    unavailabilityReason = if (primaryToken != token) primaryAvailability.reason else null
+                )
+            }
+        }
+
+        // Fallback to internal install
+        return ResolvedPlan(
+            plan = InstallPlan.Internal(target),
+            primaryUnavailable = primaryToken != Token.Internal,
+            primaryToken = primaryToken,
+            unavailabilityReason = primaryAvailability.reason
+        )
+    }
+
+    /**
+     * Original resolvePlan method for backward compatibility.
+     * Use [resolvePlanWithStatus] for more detailed information.
+     */
     fun resolvePlan(
         target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
         sourceLabel: String?
     ): InstallPlan {
-        val sequence = buildSequence(target)
-        sequence.forEach { token ->
-            createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { return it }
-        }
+        return resolvePlanWithStatus(target, sourceFile, expectedPackage, sourceLabel).plan
+    }
 
-        // Should never happen, fallback to internal install.
-        return InstallPlan.Internal(target)
+    /**
+     * Get current availability status for Shizuku installer.
+     */
+    fun getShizukuAvailability(target: InstallTarget): Availability {
+        return availabilityFor(Token.Shizuku, target, checkRoot = true)
+    }
+
+    /**
+     * Get current availability status for root/mount installer.
+     */
+    fun getRootAvailability(target: InstallTarget): Availability {
+        return availabilityFor(Token.AutoSaved, target, checkRoot = true)
     }
 
     fun cleanup(plan: InstallPlan.External) {
@@ -317,11 +380,11 @@ class InstallerManager(
         return when (token) {
             Token.Internal -> InstallPlan.Internal(target)
             Token.None -> null
-            Token.AutoSaved -> if (availabilityFor(Token.AutoSaved, target).available) {
+            Token.AutoSaved -> if (availabilityFor(Token.AutoSaved, target, checkRoot = true).available) {
                 InstallPlan.Mount(target)
             } else null
 
-            Token.Shizuku -> if (availabilityFor(Token.Shizuku, target).available) {
+            Token.Shizuku -> if (availabilityFor(Token.Shizuku, target, checkRoot = true).available) {
                 InstallPlan.Shizuku(target)
             } else null
 
@@ -335,9 +398,9 @@ class InstallerManager(
                         setDataAndType(uri, APK_MIME)
                         addFlags(
                             Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
-                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                    Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                    Intent.FLAG_GRANT_PREFIX_URI_PERMISSION or
+                                    Intent.FLAG_ACTIVITY_NEW_TASK
                         )
                         clipData = ClipData.newRawUri("APK", uri)
                         putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
@@ -348,8 +411,8 @@ class InstallerManager(
                         token.componentName.packageName,
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-                            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
                     )
                     InstallPlan.External(
                         target = target,
@@ -383,7 +446,7 @@ class InstallerManager(
     private fun resolveLabel(componentName: ComponentName): String =
         runCatching {
             val activityInfo: ActivityInfo = packageManager.getActivityInfo(componentName, 0)
-            activityInfo.loadLabel(packageManager)?.toString() ?: componentName.packageName
+            activityInfo.loadLabel(packageManager).toString()
         }.getOrDefault(componentName.packageName)
 
     private fun entryFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Entry? = when (token) {
@@ -449,20 +512,18 @@ class InstallerManager(
     private fun buildSequence(target: InstallTarget): List<Token> {
         val tokens = mutableListOf<Token>()
         val primary = getPrimaryToken()
-        val fallback = getFallbackToken()
 
         fun add(token: Token) {
             if (token == Token.None) return
             if (token in tokens) return
-            if (!availabilityFor(token, target).available) return
+            // Use checkRoot = true here to ensure we only add available installers
+            if (!availabilityFor(token, target, checkRoot = true).available) return
             tokens += token
         }
 
         add(primary)
 
         if (Token.Internal !in tokens) add(Token.Internal)
-
-        if (fallback != primary) add(fallback)
 
         return tokens
     }
@@ -495,10 +556,10 @@ class InstallerManager(
             if (!shizukuInstaller.isInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
-                // Expert mode: check full Shizuku availability
+                // Full availability check
                 shizukuInstaller.availability(target)
             } else {
-                // Morphe mode: just verify Shizuku is installed
+                // Just verify Shizuku is installed (for UI display)
                 Availability(true)
             }
         }
@@ -549,8 +610,8 @@ class InstallerManager(
         val chosen = preferredPackages.firstNotNullOfOrNull { pkg ->
             candidates.firstOrNull { it.activityInfo.packageName == pkg }
         } ?: candidates.firstOrNull { info ->
-            info.loadLabel(packageManager)?.toString()
-                ?.equals(AOSP_INSTALLER_LABEL, ignoreCase = true) == true
+            info.loadLabel(packageManager).toString()
+                .equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
         } ?: candidates.first()
 
         val activityInfo = chosen.activityInfo
@@ -568,7 +629,7 @@ class InstallerManager(
 
     private fun isExcludedDuplicate(packageName: String, label: String): Boolean =
         packageName == AOSP_INSTALLER_PACKAGE &&
-            label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
+                label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
 
     private fun isInstallerCandidate(info: ResolveInfo): Boolean {
         if (!info.activityInfo.exported) return false
@@ -581,7 +642,7 @@ class InstallerManager(
 
         return requestedPermissions.any {
             it == Manifest.permission.REQUEST_INSTALL_PACKAGES ||
-                it == Manifest.permission.INSTALL_PACKAGES
+                    it == Manifest.permission.INSTALL_PACKAGES
         }
     }
 
@@ -601,6 +662,17 @@ class InstallerManager(
     data class Availability(
         val available: Boolean,
         @StringRes val reason: Int? = null
+    )
+
+    /**
+     * Result of [resolvePlanWithStatus] that includes information about
+     * whether the user's preferred installer was unavailable.
+     */
+    data class ResolvedPlan(
+        val plan: InstallPlan,
+        val primaryUnavailable: Boolean,
+        val primaryToken: Token,
+        @StringRes val unavailabilityReason: Int?
     )
 
     sealed class Token {
@@ -670,9 +742,9 @@ class InstallerManager(
         val normalized = message?.lowercase(Locale.ROOT)?.trim().orEmpty()
         if (normalized.isEmpty()) return false
         return normalized.contains("install_failed_update_incompatible") ||
-            normalized.contains("install_failed_signature_inconsistent") ||
-            normalized.contains("signatures do not match") ||
-            normalized.contains("signature mismatch")
+                normalized.contains("install_failed_signature_inconsistent") ||
+                normalized.contains("signatures do not match") ||
+                normalized.contains("signature mismatch")
     }
 }
 

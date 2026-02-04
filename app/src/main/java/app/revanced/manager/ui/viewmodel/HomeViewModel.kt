@@ -1,42 +1,51 @@
 package app.revanced.manager.ui.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
+import android.provider.OpenableColumns
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.NetworkInfo
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_REDDIT
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE
-import app.revanced.manager.domain.manager.PatchOptionsPreferencesManager.Companion.PACKAGE_YOUTUBE_MUSIC
+import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
+import app.revanced.manager.domain.bundles.RemotePatchBundle
+import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
-import app.revanced.manager.network.api.MORPHE_API_URL
+import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.patcher.split.SplitApkPreparer
 import app.revanced.manager.ui.model.SelectedApp
-import app.revanced.manager.util.Options
-import app.revanced.manager.util.PatchSelection
-import app.revanced.manager.util.tag
-import app.revanced.manager.util.toast
-import kotlinx.coroutines.Dispatchers
+import app.revanced.manager.util.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.receiveAsFlow
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
@@ -79,15 +88,38 @@ data class QuickPatchParams(
 )
 
 /**
- * ViewModel for MorpheHomeScreen
- * Manages all dialogs, user interactions, and APK processing
+ * Combined ViewModel for Home and Dashboard functionality
+ * Manages all dialogs, user interactions, APK processing, and bundle management
  */
 class HomeViewModel(
     private val app: Application,
-    private val patchBundleRepository: PatchBundleRepository,
+    val patchBundleRepository: PatchBundleRepository,
+    private val installedAppRepository: InstalledAppRepository,
     private val optionsRepository: PatchOptionsRepository,
-    private val prefs: PreferencesManager
+    private val reVancedAPI: ReVancedAPI,
+    private val networkInfo: NetworkInfo,
+    val prefs: PreferencesManager,
+    private val pm: PM,
+    val rootInstaller: RootInstaller
 ) : ViewModel() {
+
+    val availablePatches =
+        patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
+    val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
+    val bundleImportProgress = patchBundleRepository.bundleImportProgress
+    private val contentResolver: ContentResolver = app.contentResolver
+    private val powerManager = app.getSystemService<PowerManager>()!!
+
+    /**
+     * Android 11 kills the app process after granting the "install apps" permission
+     */
+    val android11BugActive get() = Build.VERSION.SDK_INT == Build.VERSION_CODES.R && !pm.canInstallPackages()
+
+    var updatedManagerVersion: String? by mutableStateOf(null)
+        private set
+
+    private val bundleListEventsChannel = Channel<BundleListViewModel.Event>()
+    val bundleListEventsFlow = bundleListEventsChannel.receiveAsFlow()
 
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
@@ -135,17 +167,212 @@ class HomeViewModel(
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
 
+    // Track available updates for installed apps
+    var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
+    init {
+        viewModelScope.launch {
+            checkForManagerUpdates()
+        }
+    }
+
+    suspend fun checkForManagerUpdates() {
+        if (!prefs.managerAutoUpdates.get() || !networkInfo.isConnected()) return
+
+        uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
+            updatedManagerVersion = reVancedAPI.getAppUpdate()?.version
+        }
+    }
+
+    fun setShowManagerUpdateDialogOnLaunch(value: Boolean) {
+        viewModelScope.launch {
+            prefs.showManagerUpdateDialogOnLaunch.update(value)
+        }
+    }
+
+    fun applyAutoUpdatePrefs(manager: Boolean, patches: Boolean) = viewModelScope.launch {
+        prefs.firstLaunch.update(false)
+
+        prefs.managerAutoUpdates.update(manager)
+
+        if (manager) checkForManagerUpdates()
+
+        if (patches) {
+            with(patchBundleRepository) {
+                sources
+                    .first()
+                    .find { it.uid == DEFAULT_SOURCE_UID }
+                    ?.asRemoteOrNull
+                    ?.setAutoUpdate(true)
+
+                updateCheck()
+            }
+        }
+    }
+
+    /**
+     * Check for bundle updates for installed apps
+     */
+    suspend fun checkInstalledAppsForUpdates(
+        installedApps: List<InstalledApp>,
+        currentBundleVersion: String?
+    ) = withContext(Dispatchers.IO) {
+        if (currentBundleVersion == null) {
+            appUpdatesAvailable = emptyMap()
+            return@withContext
+        }
+
+        val updates = mutableMapOf<String, Boolean>()
+
+        installedApps.forEach { app ->
+            // Get stored bundle versions for this app
+            val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+
+            // Check if any bundle used for this app has been updated
+            val hasUpdate = storedVersions.any { (bundleUid, storedVersion) ->
+                // Only check default bundle (UID 0) for main apps
+                if (bundleUid == DEFAULT_SOURCE_UID) {
+                    // Compare stored version with current version
+                    isNewerVersion(storedVersion, currentBundleVersion)
+                } else {
+                    false // For now, only track default bundle updates
+                }
+            }
+
+            updates[app.currentPackageName] = hasUpdate
+        }
+
+        appUpdatesAvailable = updates
+    }
+
+    private fun sendEvent(event: BundleListViewModel.Event) {
+        viewModelScope.launch { bundleListEventsChannel.send(event) }
+    }
+
+    fun cancelSourceSelection() = sendEvent(BundleListViewModel.Event.CANCEL)
+    fun updateSources() = sendEvent(BundleListViewModel.Event.UPDATE_SELECTED)
+    fun deleteSources() = sendEvent(BundleListViewModel.Event.DELETE_SELECTED)
+    fun disableSources() = sendEvent(BundleListViewModel.Event.DISABLE_SELECTED)
+
+    private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
+        val progressToast = withContext(Dispatchers.Main) {
+            Toast.makeText(
+                app,
+                app.getString(R.string.importing_ellipsis),
+                Toast.LENGTH_SHORT
+            )
+        }
+        withContext(Dispatchers.Main) { progressToast.show() }
+
+        val toastRepeater = launch(Dispatchers.Main) {
+            try {
+                while (isActive) {
+                    delay(1_750)
+                    progressToast.show()
+                }
+            } catch (_: CancellationException) {
+                // Ignore cancellation.
+            }
+        }
+
+        try {
+            block()
+        } finally {
+            toastRepeater.cancel()
+            withContext(Dispatchers.Main) { progressToast.cancel() }
+        }
+    }
+
+    @SuppressLint("Recycle")
+    fun createLocalSource(patchBundle: Uri) = viewModelScope.launch {
+        withContext(NonCancellable) {
+            withPersistentImportToast {
+                val permissionFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                var persistedPermission = false
+                val size = runCatching {
+                    contentResolver.openFileDescriptor(patchBundle, "r")
+                        ?.use { it.statSize.takeIf { sz -> sz > 0 } }
+                        ?: contentResolver.query(
+                            patchBundle,
+                            arrayOf(OpenableColumns.SIZE),
+                            null,
+                            null,
+                            null
+                        )
+                            ?.use { cursor ->
+                                val index = cursor.getColumnIndex(OpenableColumns.SIZE)
+                                if (index != -1 && cursor.moveToFirst()) cursor.getLong(index) else null
+                            }
+                }.getOrNull()?.takeIf { it > 0L }
+                try {
+                    contentResolver.takePersistableUriPermission(patchBundle, permissionFlags)
+                    persistedPermission = true
+                } catch (_: SecurityException) {
+                    // Provider may not support persistable permissions; fall back to transient grant.
+                }
+
+                try {
+                    patchBundleRepository.createLocal(size) {
+                        contentResolver.openInputStream(patchBundle)
+                            ?: throw FileNotFoundException("Unable to open $patchBundle")
+                    }
+                } finally {
+                    if (persistedPermission) {
+                        try {
+                            contentResolver.releasePersistableUriPermission(
+                                patchBundle,
+                                permissionFlags
+                            )
+                        } catch (_: SecurityException) {
+                            // Ignore if provider revoked or already released.
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun createRemoteSource(apiUrl: String, autoUpdate: Boolean) = viewModelScope.launch {
+        withContext(NonCancellable) {
+            patchBundleRepository.createRemote(apiUrl, autoUpdate)
+        }
+    }
+
+    fun createLocalSourceFromFile(path: String) = viewModelScope.launch {
+        withContext(NonCancellable) {
+            withPersistentImportToast {
+                val file = File(path)
+                val length = file.length().takeIf { it > 0L }
+                patchBundleRepository.createLocal(length) {
+                    FileInputStream(file)
+                }
+            }
+        }
+    }
+
+    suspend fun updateMorpheBundleWithChangelogClear() {
+        patchBundleRepository.updateOnlyMorpheBundle(
+            force = false,
+            showToast = false
+        )
+        // Clear changelog cache
+        val sources = patchBundleRepository.sources.first()
+        val apiBundle = sources.firstOrNull() as? RemotePatchBundle
+        apiBundle?.clearChangelogCache()
+    }
+
     // Main app packages that use default bundle only
     private val mainAppPackages = setOf(
-        PACKAGE_YOUTUBE,
-        PACKAGE_YOUTUBE_MUSIC,
-        PACKAGE_REDDIT
+        AppPackages.YOUTUBE,
+        AppPackages.YOUTUBE_MUSIC,
+        AppPackages.REDDIT
     )
 
     /**
@@ -180,7 +407,7 @@ class HomeViewModel(
 
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
-            app.toast(app.getString(R.string.morphe_home_sources_are_loading))
+            app.toast(app.getString(R.string.home_sources_are_loading))
             return
         }
 
@@ -220,7 +447,7 @@ class HomeViewModel(
             if (selectedApp != null) {
                 processSelectedApp(selectedApp)
             } else {
-                app.toast(app.getString(R.string.morphe_home_invalid_apk))
+                app.toast(app.getString(R.string.home_invalid_apk))
             }
         }
     }
@@ -268,7 +495,7 @@ class HomeViewModel(
                 cleanupPendingData(keepSelectedApp = true)
                 return
             } else {
-                app.toast(app.getString(R.string.morphe_home_no_patches_for_app))
+                app.toast(app.getString(R.string.home_no_patches_for_app))
                 if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                     selectedApp.file.delete()
                 }
@@ -294,7 +521,7 @@ class HomeViewModel(
             .first()
 
         if (allBundles.isEmpty()) {
-            app.toast(app.getString(R.string.morphe_home_no_patches_available))
+            app.toast(app.getString(R.string.home_no_patches_available))
             cleanupPendingData()
             return
         }
@@ -327,7 +554,7 @@ class HomeViewModel(
                 val defaultBundle = allBundles.find { it.uid == DEFAULT_SOURCE_UID }
 
                 if (defaultBundle == null || !defaultBundle.enabled) {
-                    app.toast(app.getString(R.string.morphe_home_default_source_disabled))
+                    app.toast(app.getString(R.string.home_default_source_disabled))
                     cleanupPendingData()
                     return
                 }
@@ -337,7 +564,7 @@ class HomeViewModel(
                     .mapTo(mutableSetOf()) { it.name }
 
                 if (patchNames.isEmpty()) {
-                    app.toast(app.getString(R.string.morphe_home_no_patches_available))
+                    app.toast(app.getString(R.string.home_no_patches_available))
                     cleanupPendingData()
                     return
                 }
@@ -356,7 +583,7 @@ class HomeViewModel(
                     .filter { (_, patches) -> patches.isNotEmpty() }
 
                 if (bundleWithPatches.isEmpty()) {
-                    app.toast(app.getString(R.string.morphe_home_no_patches_available))
+                    app.toast(app.getString(R.string.home_no_patches_available))
                     cleanupPendingData()
                     return
                 }
@@ -548,7 +775,7 @@ class HomeViewModel(
     }
 
     fun getApiOfflineWebSearchUrl(): String {
-        val architecture = if (pendingPackageName == PACKAGE_YOUTUBE_MUSIC) {
+        val architecture = if (pendingPackageName == AppPackages.YOUTUBE_MUSIC) {
             " (${Build.SUPPORTED_ABIS.first()})"
         } else {
             "nodpi"
@@ -573,7 +800,7 @@ class HomeViewModel(
             showFilePickerPromptDialog = true
         } else {
             Log.d(tag, "Failed to open URL")
-            app.toast(app.getString(R.string.morphe_sources_failed_to_open_url))
+            app.toast(app.getString(R.string.sources_management_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
         }
@@ -584,9 +811,9 @@ class HomeViewModel(
      */
     fun getAppName(packageName: String): String {
         return when (packageName) {
-            PACKAGE_YOUTUBE -> app.getString(R.string.morphe_home_youtube)
-            PACKAGE_YOUTUBE_MUSIC -> app.getString(R.string.morphe_home_youtube_music)
-            PACKAGE_REDDIT -> app.getString(R.string.morphe_home_reddit)
+            AppPackages.YOUTUBE -> app.getString(R.string.home_youtube)
+            AppPackages.YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
+            AppPackages.REDDIT -> app.getString(R.string.home_reddit)
             else -> packageName
         }
     }
@@ -628,37 +855,37 @@ class HomeViewModel(
             val info = apiBundleInfo as? PatchBundleInfo
             info?.let {
                 mapOf(
-                    PACKAGE_YOUTUBE to it.patches
+                    AppPackages.YOUTUBE to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE }
                                 ?.versions
                                 ?: emptyList()
                         }
                         .maxByOrNull { it }
                         .orEmpty(),
-                    PACKAGE_YOUTUBE_MUSIC to it.patches
+                    AppPackages.YOUTUBE_MUSIC to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_YOUTUBE_MUSIC }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC }
                                 ?.versions
                                 ?: emptyList()
                         }
                         .maxByOrNull { it }
                         .orEmpty(),
-                    PACKAGE_REDDIT to it.patches
+                    AppPackages.REDDIT to it.patches
                         .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == PACKAGE_REDDIT } == true
+                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.REDDIT } == true
                         }
                         .flatMap { patch ->
                             patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == PACKAGE_REDDIT }
+                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.REDDIT }
                                 ?.versions
                                 ?: emptyList()
                         }

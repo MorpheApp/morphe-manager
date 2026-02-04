@@ -9,6 +9,11 @@ import androidx.room.Transaction
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
+data class BundleWithVersion(
+    val bundleUid: Int,
+    val version: String?
+)
+
 @Dao
 interface InstalledAppDao {
     @Query("SELECT * FROM installed_app")
@@ -17,6 +22,9 @@ interface InstalledAppDao {
     @Query("SELECT * FROM installed_app WHERE current_package_name = :packageName")
     suspend fun get(packageName: String): InstalledApp?
 
+    @Query("SELECT * FROM installed_app WHERE current_package_name = :packageName")
+    fun getAsFlow(packageName: String): Flow<InstalledApp?>
+
     @Query(
         "SELECT bundle, patch_name FROM applied_patch" +
                 " WHERE package_name = :packageName"
@@ -24,6 +32,12 @@ interface InstalledAppDao {
     suspend fun getPatchesSelection(packageName: String): Map<@MapColumn("bundle") Int, List<@MapColumn(
         "patch_name"
     ) String>>
+
+    @Query(
+        "SELECT DISTINCT bundle as bundleUid, bundle_version as version FROM applied_patch" +
+                " WHERE package_name = :packageName"
+    )
+    suspend fun getBundleVersions(packageName: String): List<BundleWithVersion>
 
     @Transaction
     suspend fun upsertApp(installedApp: InstalledApp, appliedPatches: List<AppliedPatch>) {

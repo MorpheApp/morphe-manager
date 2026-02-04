@@ -68,7 +68,6 @@ class UpdateViewModel(
     }
     var showInternetCheckDialog by mutableStateOf(false)
     var state by mutableStateOf(State.CAN_DOWNLOAD)
-//        private set // Morphe
 
     var installError by mutableStateOf("")
 
@@ -209,7 +208,9 @@ class UpdateViewModel(
         pendingExternalInstall = plan
         installError = ""
         try {
-            ContextCompat.startActivity(app, plan.intent, null)
+            // Add FLAG_ACTIVITY_NEW_TASK since we're starting from Application context
+            plan.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            app.startActivity(plan.intent)
             app.toast(app.getString(R.string.installer_external_launched, plan.installerLabel))
         } catch (error: ActivityNotFoundException) {
             installerManager.cleanup(plan)

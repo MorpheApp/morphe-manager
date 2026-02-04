@@ -33,7 +33,7 @@ class AboutViewModel() : ViewModel() {
             ),
             SocialLink(
                 name = "Crowdin",
-                url = "https://translate.morphe.software"
+                url = "https://morphe.software/translate"
             )
         )
 

@@ -2,6 +2,8 @@ name: Compile pull request
 
 on:
   pull_request:
+    branches:
+      - dev
 
 concurrency:
   group: compile-${{ github.ref }}
@@ -9,7 +11,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.event.pull_request.head.ref != 'dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +25,8 @@ jobs:
           cache: gradle
 
       - name: Build Debug APK
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace

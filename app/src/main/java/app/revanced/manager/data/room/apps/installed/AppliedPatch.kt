@@ -31,5 +31,6 @@ import kotlinx.parcelize.Parcelize
 data class AppliedPatch(
     @ColumnInfo(name = "package_name") val packageName: String,
     @ColumnInfo(name = "bundle") val bundle: Int,
-    @ColumnInfo(name = "patch_name") val patchName: String
+    @ColumnInfo(name = "patch_name") val patchName: String,
+    @ColumnInfo(name = "bundle_version") val bundleVersion: String? = null
 ) : Parcelable

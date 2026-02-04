@@ -82,3 +82,22 @@ val MIGRATION_7_8 = object : Migration(7, 8) {
         )
     }
 }
+
+val MIGRATION_8_9 = object : Migration(8, 9) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Drop tables related to downloader plugins, patch profiles and downloaded apps
+        db.execSQL("DROP TABLE IF EXISTS trusted_downloader_plugins")
+        db.execSQL("DROP TABLE IF EXISTS patch_profiles")
+        db.execSQL("DROP TABLE IF EXISTS downloaded_app")
+    }
+}
+
+val MIGRATION_9_10 = object : Migration(9, 10) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Add bundle_version column to applied_patch table
+        db.execSQL("ALTER TABLE applied_patch ADD COLUMN bundle_version TEXT")
+
+        // Add patched_at column to installed_app table
+        db.execSQL("ALTER TABLE installed_app ADD COLUMN patched_at INTEGER")
+    }
+}

@@ -52,4 +52,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "morphe-manager"
-include(":app", ":api")
+include(":app")

@@ -1,16 +1,65 @@
+# app [1.5.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* Resolve "No Activity found" crash ([#148](https://github.com/MorpheApp/morphe-manager/issues/148)) ([12ec590](https://github.com/MorpheApp/morphe-manager/commit/12ec590cc147d2742e224221b5282e082edf3053))
+
+# app [1.5.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2026-02-03)
+
+
+### Bug Fixes
+
+* Refactor app installation code ([#149](https://github.com/MorpheApp/morphe-manager/issues/149)) ([119d112](https://github.com/MorpheApp/morphe-manager/commit/119d11258148fab6e91ef7d6c2df6edda8d03754))
+
+# app [1.5.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2026-02-02)
+
+
+### Features
+
+* Add updating sources progress bar ([#152](https://github.com/MorpheApp/morphe-manager/issues/152)) ([8fd353f](https://github.com/MorpheApp/morphe-manager/commit/8fd353f3ef53da81f1151132318e832713156628))
+
+# app [1.5.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2026-02-02)
+
+
+### Features
+
+* **Custom branding:** Allow Manager to process custom icon/headers into the correct formats/names/sizes ([#138](https://github.com/MorpheApp/morphe-manager/issues/138)) ([b5e6c82](https://github.com/MorpheApp/morphe-manager/commit/b5e6c82745c5441e17272850ed0b47cd525b514b))
+
+# app [1.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2026-02-02)
+
+
+### Bug Fixes
+
+* UX improvements ([#147](https://github.com/MorpheApp/morphe-manager/issues/147)) ([0029e51](https://github.com/MorpheApp/morphe-manager/commit/0029e51ff931b74278e6120b8249371e9e0a5056))
+
+# app [1.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2026-02-01)
+
+
+### Features
+
+* Add pull-to-refresh gesture ([#143](https://github.com/MorpheApp/morphe-manager/issues/143)) ([50525f0](https://github.com/MorpheApp/morphe-manager/commit/50525f0183440b4a4798d0520f5f415b9e569900))
+
+# app [1.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.1...v1.5.0-dev.1) (2026-02-01)
+
+
+### Features
+
+* Show homescreen app update badges ([#132](https://github.com/MorpheApp/morphe-manager/issues/132)) ([b8adadf](https://github.com/MorpheApp/morphe-manager/commit/b8adadf782e49f55ffc1323dcc15dd6a461abd81))
+
 ## app [1.4.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0...v1.4.1) (2026-02-01)
 
 
 ### Bug Fixes
 
-* Force off Advanced mode for users who had it enabled ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
+* Use new Expert mode for users with old user data ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
 
 ## app [1.4.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.4.0...v1.4.1-dev.1) (2026-01-31)
 
 
 ### Bug Fixes
 
-* Force off Advanced mode for users who had it enabled ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
+* Use new Expert mode for users with old user data ([57e658c](https://github.com/MorpheApp/morphe-manager/commit/57e658c26e3c2f7822ac0d4a906a6c2fd4a35210))
 
 # app [1.4.0](https://github.com/MorpheApp/morphe-manager/compare/v1.3.2...v1.4.0) (2026-01-31)
 

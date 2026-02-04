@@ -9,11 +9,9 @@ import android.util.Log
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.di.*
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.domain.repository.DownloaderPluginRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
-import app.revanced.manager.network.service.HttpService
-import app.revanced.manager.util.tag
 import app.revanced.manager.util.applyAppLanguage
+import app.revanced.manager.util.tag
 import coil.Coil
 import coil.ImageLoader
 import com.topjohnwu.superuser.Shell
@@ -35,9 +33,7 @@ class ManagerApplication : Application() {
     private val scope = MainScope()
     private val prefs: PreferencesManager by inject()
     private val patchBundleRepository: PatchBundleRepository by inject()
-    private val downloaderPluginRepository: DownloaderPluginRepository by inject()
     private val fs: Filesystem by inject()
-//    private val httpService: HttpService by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -59,8 +55,6 @@ class ManagerApplication : Application() {
             )
         }
 
-//        PatchListCatalog.initialize(this)
-
         // App icon loader (Coil)
         val pixels = 512
         Coil.setImageLoader(
@@ -79,10 +73,6 @@ class ManagerApplication : Application() {
         // Preload preferences + initialize repositories
         scope.launch {
             prefs.preload()
-//            val currentApi = prefs.api.get()
-//            if (currentApi == LEGACY_MANAGER_REPO_URL || currentApi == LEGACY_MANAGER_REPO_API_URL) {
-//                prefs.api.update(DEFAULT_API_URL)
-//            }
             val storedLanguage = prefs.appLanguage.get().ifBlank { "system" }
             if (storedLanguage != prefs.appLanguage.get()) {
                 prefs.appLanguage.update(storedLanguage)
@@ -90,13 +80,6 @@ class ManagerApplication : Application() {
             applyAppLanguage(storedLanguage)
         }
 
-        scope.launch(Dispatchers.Default) {
-            downloaderPluginRepository.reload()
-        }
-        // Morphe
-//        scope.launch(Dispatchers.Default) {
-//            PatchListCatalog.refreshIfNeeded(httpService)
-//        }
         scope.launch(Dispatchers.Default) {
             with(patchBundleRepository) {
                 reload()
@@ -152,10 +135,4 @@ class ManagerApplication : Application() {
             mkdirs()
         }
     }
-
-//    private companion object {
-//        private const val DEFAULT_API_URL = "https://api.revanced.app"
-//        private const val LEGACY_MANAGER_REPO_URL = "https://github.com/Jman-Github/universal-revanced-manager"
-//        private const val LEGACY_MANAGER_REPO_API_URL = "https://api.github.com/repos/Jman-Github/universal-revanced-manager"
-//    }
 }
