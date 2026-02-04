@@ -266,9 +266,9 @@ class GitHubPullRequestBundle(
                 }
             }
             install(HttpTimeout) {
-                connectTimeoutMillis = 10_000
-                socketTimeoutMillis = 10_000
-                requestTimeoutMillis = 5 * 60_000
+                connectTimeoutMillis = 15_000
+                socketTimeoutMillis = 30_000
+                requestTimeoutMillis = 10 * 60_000
             }
         }
 
@@ -279,17 +279,12 @@ class GitHubPullRequestBundle(
                     header("Authorization", "Bearer $gitHubPat")
                 }.execute { httpResponse ->
                     val contentLength = httpResponse.contentLength()
-                    val totalArchiveBytes = contentLength?.takeIf { it > 0 }
-
-                    // Report initial progress
-                    onProgress?.invoke(0L, totalArchiveBytes)
-
-                    val inputStream = httpResponse.bodyAsChannel().toInputStream()
+                    val archiveSize = contentLength?.takeIf { it > 0 }
 
                     patchBundleOutputStream().use { patchOutput ->
-                        ZipInputStream(inputStream).use { zis ->
-                            val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-                            var totalReadFromStream = 0L
+                        ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
+                            // Use larger buffer for faster I/O (512 KB)
+                            val buffer = ByteArray(512 * 1024)
                             var copiedBytes = 0L
                             var lastReportedBytes = 0L
                             var lastReportedAt = 0L
@@ -305,17 +300,14 @@ class GitHubPullRequestBundle(
                                         if (read == -1) break
                                         patchOutput.write(buffer, 0, read)
                                         copiedBytes += read.toLong()
-                                        totalReadFromStream += read.toLong()
-
                                         val now = System.currentTimeMillis()
-                                        if (totalReadFromStream - lastReportedBytes >= 64 * 1024 || now - lastReportedAt >= 200) {
-                                            lastReportedBytes = totalReadFromStream
+                                        // Report progress less frequently: every 256KB or 500ms
+                                        if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
+                                            lastReportedBytes = copiedBytes
                                             lastReportedAt = now
-                                            // Report progress based on total archive download if available
-                                            val progressBytes = totalArchiveBytes?.let {
-                                                (totalReadFromStream.toDouble() / it * (extractedTotal ?: totalArchiveBytes)).toLong()
-                                            } ?: copiedBytes
-                                            onProgress?.invoke(progressBytes, extractedTotal ?: totalArchiveBytes)
+                                            // Update total size if we now have extracted size
+                                            val currentTotal = extractedTotal ?: archiveSize
+                                            onProgress?.invoke(copiedBytes, currentTotal)
                                         }
                                     }
                                     break
@@ -327,8 +319,9 @@ class GitHubPullRequestBundle(
                             if (copiedBytes <= 0L) {
                                 throw IOException("No .mpp file found in the pull request artifact.")
                             }
-                            // Final progress report
-                            onProgress?.invoke(extractedTotal ?: copiedBytes, extractedTotal ?: totalArchiveBytes)
+                            // Final progress - use actual copied bytes as total if we don't have size
+                            val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
+                            onProgress?.invoke(copiedBytes, finalTotal)
                         }
                     }
                 }
