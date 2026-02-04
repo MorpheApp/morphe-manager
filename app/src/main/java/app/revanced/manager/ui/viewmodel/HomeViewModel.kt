@@ -67,7 +67,8 @@ enum class BundleUpdateStatus {
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
-    val recommendedVersion: String?
+    val recommendedVersion: String?,
+    val allCompatibleVersions: List<String> = emptyList()
 )
 
 /**
@@ -152,6 +153,7 @@ class HomeViewModel(
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<String?>(null)
+    var pendingCompatibleVersions by mutableStateOf<List<String>>(emptyList())
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
 
@@ -165,6 +167,8 @@ class HomeViewModel(
     // Bundle data
     private var apiBundle: PatchBundleSource? = null
     var recommendedVersions: Map<String, String> = emptyMap()
+        private set
+    var compatibleVersions: Map<String, List<String>> = emptyMap()
         private set
 
     // Track available updates for installed apps
@@ -380,7 +384,9 @@ class HomeViewModel(
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
         apiBundle = sources.firstOrNull { it.uid == DEFAULT_SOURCE_UID }
-        recommendedVersions = extractRecommendedVersions(bundleInfo)
+        val versionData = extractCompatibleVersions(bundleInfo)
+        recommendedVersions = versionData.mapValues { it.value.firstOrNull() ?: "" }
+        compatibleVersions = versionData
     }
 
     /**
@@ -427,6 +433,7 @@ class HomeViewModel(
         pendingPackageName = packageName
         pendingAppName = getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
+        pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         showApkAvailabilityDialog = true
     }
 
@@ -484,13 +491,15 @@ class HomeViewModel(
         // Check if any patches available
         if (totalPatches == 0) {
             val recommendedVersion = pendingPackageName?.let { recommendedVersions[it] }
+            val allVersions = pendingPackageName?.let { compatibleVersions[it] } ?: emptyList()
 
             if (recommendedVersion != null) {
                 pendingSelectedApp = selectedApp
                 showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                     packageName = selectedApp.packageName,
                     version = selectedApp.version ?: "unknown",
-                    recommendedVersion = recommendedVersion
+                    recommendedVersion = recommendedVersion,
+                    allCompatibleVersions = allVersions
                 )
                 cleanupPendingData(keepSelectedApp = true)
                 return
@@ -618,6 +627,7 @@ class HomeViewModel(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
+        pendingCompatibleVersions = emptyList()
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
@@ -825,6 +835,7 @@ class HomeViewModel(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
+        pendingCompatibleVersions = emptyList()
         resolvedDownloadUrl = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
@@ -848,9 +859,10 @@ class HomeViewModel(
     }
 
     /**
-     * Extract recommended versions from bundle info
+     * Extract compatible versions for each package from bundle info
+     * Returns a map of package name to sorted list of versions (newest first)
      */
-    private fun extractRecommendedVersions(bundleInfo: Map<Int, Any>): Map<String, String> {
+    private fun extractCompatibleVersions(bundleInfo: Map<Int, Any>): Map<String, List<String>> {
         return bundleInfo[0]?.let { apiBundleInfo ->
             val info = apiBundleInfo as? PatchBundleInfo
             info?.let {
@@ -865,8 +877,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty(),
+                        .distinct()
+                        .sortedDescending(),
                     AppPackages.YOUTUBE_MUSIC to it.patches
                         .filter { patch ->
                             patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC } == true
@@ -877,8 +889,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty(),
+                        .distinct()
+                        .sortedDescending(),
                     AppPackages.REDDIT to it.patches
                         .filter { patch ->
                             patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.REDDIT } == true
@@ -889,8 +901,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty()
+                        .distinct()
+                        .sortedDescending()
                 ).filterValues { it.isNotEmpty() }
             } ?: emptyMap()
         } ?: emptyMap()

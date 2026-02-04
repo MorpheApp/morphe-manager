@@ -184,7 +184,7 @@ fun AdaptiveIconCreatorDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.adaptive_icon_creator_title),
+        title = stringResource(R.string.adaptive_icon_create),
         compactPadding = true,
         footer = {
             Column(
@@ -265,9 +265,9 @@ fun AdaptiveIconCreatorDialog(
             // Foreground selection
             MorpheDialogButton(
                 text = if (foregroundUri == null)
-                    stringResource(R.string.adaptive_icon_select_foreground)
+                    stringResource(R.string.adaptive_icon_select_image)
                 else
-                    stringResource(R.string.adaptive_icon_change_foreground),
+                    stringResource(R.string.adaptive_icon_change_image),
                 onClick = { foregroundPicker.launch("image/*") },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
