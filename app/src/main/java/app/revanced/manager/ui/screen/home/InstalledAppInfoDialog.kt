@@ -942,8 +942,11 @@ private fun DeleteConfirmDialog(
         }
     ) {
         Text(
-            text = if (isSavedOnly) stringResource(R.string.home_app_info_saved_app_delete_confirmation)
-            else stringResource(R.string.home_app_info_saved_copy_delete_confirmation),
+            text = if (isSavedOnly) {
+                stringResource(R.string.home_app_info_saved_app_delete_confirmation)
+            } else {
+                stringResource(R.string.home_app_info_remove_app_confirmation)
+            },
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )
