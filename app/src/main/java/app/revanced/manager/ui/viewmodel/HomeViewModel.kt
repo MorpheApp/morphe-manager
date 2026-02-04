@@ -31,6 +31,7 @@ import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -96,6 +97,7 @@ class HomeViewModel(
     private val app: Application,
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
+    private val patchSelectionRepository: PatchSelectionRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,
@@ -541,13 +543,51 @@ class HomeViewModel(
         }
 
         if (expertModeEnabled) {
-            // Expert Mode: show all patches from all bundles
-            val patches = allBundles.toPatchSelection(true, shouldIncludePatch)
+            // Expert Mode: Load saved selections and options
+            val savedSelections = withContext(Dispatchers.IO) {
+                // Try to load from original package name first
+                var selections = patchSelectionRepository.getSelection(selectedApp.packageName)
 
-            val savedOptions = optionsRepository.getOptions(
-                selectedApp.packageName,
-                allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-            )
+                // If no selections found, try patched package name
+                if (selections.isEmpty()) {
+                    // Get all installed apps to find patched package name
+                    val installedApps = installedAppRepository.getAll().first()
+                    val patchedPackage = installedApps
+                        .find { it.originalPackageName == selectedApp.packageName }
+                        ?.currentPackageName
+
+                    if (patchedPackage != null && patchedPackage != selectedApp.packageName) {
+                        selections = patchSelectionRepository.getSelection(patchedPackage)
+                    }
+                }
+
+                selections
+            }
+
+            // Load saved options
+            val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+            val savedOptions = withContext(Dispatchers.IO) {
+                optionsRepository.getOptions(selectedApp.packageName, bundlesMap)
+            }
+
+            // Use saved selections or create new ones
+            val patches = if (savedSelections.isNotEmpty()) {
+                // Validate saved selections against available patches
+                savedSelections.mapNotNull { (bundleUid, patchNames) ->
+                    val bundle = allBundles.find { it.uid == bundleUid } ?: return@mapNotNull null
+                    val validPatches = patchNames.filter { patchName ->
+                        bundle.patches.any { patch ->
+                            patch.name == patchName && shouldIncludePatch(bundleUid, patch)
+                        }
+                    }.toSet()
+
+                    if (validPatches.isEmpty()) null
+                    else bundleUid to validPatches
+                }.toMap()
+            } else {
+                // No saved selections - use default
+                allBundles.toPatchSelection(true, shouldIncludePatch)
+            }
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
@@ -568,6 +608,7 @@ class HomeViewModel(
                     return
                 }
 
+                // Always use default selection in Simple Mode
                 val patchNames = defaultBundle.patchSequence(allowIncompatible)
                     .filter { shouldIncludePatch(defaultBundle.uid, it) }
                     .mapTo(mutableSetOf()) { it.name }
