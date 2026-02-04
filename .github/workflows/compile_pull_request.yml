@@ -2,8 +2,7 @@ name: Compile pull request
 
 on:
   pull_request:
-    branches-ignore:
-      - main
+    branches:
       - dev
 
 concurrency:
