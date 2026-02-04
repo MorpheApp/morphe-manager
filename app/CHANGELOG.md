@@ -1,3 +1,10 @@
+# app [1.5.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2026-02-03)
+
+
+### Bug Fixes
+
+* Resolve "No Activity found" crash ([#148](https://github.com/MorpheApp/morphe-manager/issues/148)) ([12ec590](https://github.com/MorpheApp/morphe-manager/commit/12ec590cc147d2742e224221b5282e082edf3053))
+
 # app [1.5.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2026-02-03)
 
 
