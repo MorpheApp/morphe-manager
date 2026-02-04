@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material.icons.outlined.Tune
@@ -136,21 +137,27 @@ fun PatchSelectionManagementDialog(
     )
 
     if (itemToDelete != null) {
-        DeleteSelectionConfirmationDialog(
-            packageName = itemToDelete!!,
-            displayName = selectionData.find { it.packageName == itemToDelete }?.displayName ?: itemToDelete!!,
-            onDismiss = { itemToDelete = null },
-            onConfirm = {
-                scope.launch {
-                    val pkg = itemToDelete!!
-                    // Delete both selection and options
-                    selectionRepository.resetSelectionForPackage(pkg)
-                    optionsRepository.resetOptionsForPackage(pkg)
-                    context.toast(selectionDeleted)
-                    itemToDelete = null
+        val itemData = selectionData.find { it.packageName == itemToDelete }
+        if (itemData != null) {
+            DeleteSelectionConfirmationDialog(
+                packageName = itemData.packageName,
+                displayName = itemData.displayName,
+                packageInfo = itemData.packageInfo,
+                patchCount = itemData.patchCount,
+                hasOptions = itemData.hasOptions,
+                onDismiss = { itemToDelete = null },
+                onConfirm = {
+                    scope.launch {
+                        val pkg = itemToDelete!!
+                        // Delete both selection and options
+                        selectionRepository.resetSelectionForPackage(pkg)
+                        optionsRepository.resetOptionsForPackage(pkg)
+                        context.toast(selectionDeleted)
+                        itemToDelete = null
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
 
@@ -302,6 +309,9 @@ private fun SavedSelectionItem(
 private fun DeleteSelectionConfirmationDialog(
     packageName: String,
     displayName: String,
+    packageInfo: PackageInfo?,
+    patchCount: Int,
+    hasOptions: Boolean,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
@@ -318,17 +328,99 @@ private fun DeleteSelectionConfirmationDialog(
             )
         }
     ) {
-        Text(
-            text = stringResource(
-                R.string.settings_system_patch_selection_delete_confirm,
-                displayName,
-                packageName
-            ),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogTextColor.current,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // App Icon
+            AppIcon(
+                packageInfo = packageInfo,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+
+            // App Info
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = displayName,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = LocalDialogTextColor.current,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = packageName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // What will be deleted
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.settings_system_patch_selection_delete_warning),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.error
+                    )
+
+                    if (patchCount > 0) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp),
+                                tint = LocalDialogSecondaryTextColor.current
+                            )
+                            Text(
+                                text = pluralStringResource(
+                                    R.plurals.patch_count,
+                                    patchCount,
+                                    patchCount
+                                ),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+
+                    if (hasOptions) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Tune,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp),
+                                tint = LocalDialogSecondaryTextColor.current
+                            )
+                            Text(
+                                text = stringResource(R.string.settings_system_patch_selections_patches_options),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalDialogSecondaryTextColor.current
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -546,17 +546,16 @@ Details: %2$s"</string>
     <string name="settings_system_original_apks_delete_title">Delete original APK?</string>
     <string name="settings_system_original_apks_delete_confirm">Delete original APK for %s? You won\'t be able to repatch without providing a new APK.</string>
 
-    <!-- Patch Selection Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation.</string>
     <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
     <string name="settings_system_patch_selections_count">%1$d saved selection(s)</string>
     <string name="settings_system_patch_selections_empty">No saved patch selections</string>
     <string name="settings_system_patch_selections_has_options">Has options</string>
-    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
-    <string name="settings_system_patch_selection_delete_confirm">"Delete saved patch selection for %1$s (%2$s)?
-
-This will remove your saved patch choices and options for this app"</string>
+    <string name="settings_system_patch_selections_patches_options">Patches options</string>
+    <string name="settings_system_patch_selection_delete_title">Delete Patch Selection</string>
+    <string name="settings_system_patch_selection_delete_warning">This will permanently delete:</string>
     <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
 
     <!-- Settings - System Tab - About Section -->
