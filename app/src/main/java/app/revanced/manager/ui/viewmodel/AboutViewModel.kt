@@ -27,12 +27,12 @@ class AboutViewModel() : ViewModel() {
                 preferred = true
             ),
             SocialLink(
-                name = "GitHub",
-                url = "https://github.com/MorpheApp"
-            ),
-            SocialLink(
                 name = "Changelog",
                 url = "https://morphe.software/changelog"
+            ),
+            SocialLink(
+                name = "GitHub",
+                url = "https://github.com/MorpheApp"
             ),
             SocialLink(
                 name = "X",
