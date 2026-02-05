@@ -1,11 +1,9 @@
 package app.revanced.manager.ui.screen.shared.backgrounds
 
-import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -18,28 +16,30 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import app.revanced.manager.util.isDarkBackground
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
 /**
  * Animated space background with stars moving towards the viewer
- * Features parallax effect based on device orientation
  */
 @Composable
-fun SpaceBackground(modifier: Modifier = Modifier) {
+fun SpaceBackground(
+    modifier: Modifier = Modifier,
+    enableParallax: Boolean = true
+) {
     val isDarkTheme = MaterialTheme.colorScheme.background.isDarkBackground()
     val starColor = if (isDarkTheme) Color.White else Color(0xFF1A2530)
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    val smoothTiltX = remember { Animatable(0f) }
-    val smoothTiltY = remember { Animatable(0f) }
-
-    var baselineX by remember { mutableFloatStateOf(0f) }
-    var baselineY by remember { mutableFloatStateOf(0f) }
-    var isCalibrated by remember { mutableStateOf(false) }
+    // Use new parallax system
+    val parallaxState = rememberParallaxState(
+        enableParallax = enableParallax,
+        sensitivity = 0.3f,
+        context = context,
+        coroutineScope = coroutineScope
+    )
 
     val stars = remember(isDarkTheme) {
         mutableStateListOf<StarData>().apply {
@@ -90,58 +90,6 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
     var meteor by remember { mutableStateOf<MeteorState?>(null) }
     val meteorProgress = remember { Animatable(0f) }
 
-    // Accelerometer sensor setup
-    DisposableEffect(Unit) {
-        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
-        val listener = object : SensorEventListener {
-            override fun onSensorChanged(event: SensorEvent) {
-                if (!isCalibrated) {
-                    baselineX = event.values[0]
-                    baselineY = event.values[1]
-                    isCalibrated = true
-                }
-
-                val rawTiltX = event.values[0] - baselineX
-                val rawTiltY = event.values[1] - baselineY
-
-                coroutineScope.launch {
-                    smoothTiltX.animateTo(
-                        targetValue = rawTiltX * 0.3f,
-                        animationSpec = spring(
-                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                            stiffness = Spring.StiffnessLow
-                        )
-                    )
-                }
-                coroutineScope.launch {
-                    smoothTiltY.animateTo(
-                        targetValue = rawTiltY * 0.3f,
-                        animationSpec = spring(
-                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                            stiffness = Spring.StiffnessLow
-                        )
-                    )
-                }
-            }
-
-            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
-        }
-
-        accelerometer?.let {
-            sensorManager.registerListener(
-                listener,
-                it,
-                SensorManager.SENSOR_DELAY_GAME
-            )
-        }
-
-        onDispose {
-            sensorManager.unregisterListener(listener)
-        }
-    }
-
     // Meteor spawner
     LaunchedEffect(Unit) {
         while (true) {
@@ -181,8 +129,9 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
         val centerX = width / 2f
         val centerY = height / 2f
 
-        val tiltX = smoothTiltX.value
-        val tiltY = smoothTiltY.value
+        // Use new parallax state
+        val tiltX = parallaxState.tiltX.value
+        val tiltY = parallaxState.tiltY.value
 
         // Render stars
         stars.forEach { star ->
@@ -255,7 +204,7 @@ fun SpaceBackground(modifier: Modifier = Modifier) {
             )
         }
 
-        // Render meteor
+        // Render meteor with parallax
         meteor?.let { m ->
             val p = meteorProgress.value
             val angleRad = m.angle * (Math.PI / 180f).toFloat()

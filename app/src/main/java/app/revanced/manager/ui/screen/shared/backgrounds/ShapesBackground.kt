@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -14,32 +15,45 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.platform.LocalContext
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- * Geometric shapes floating in space
+ * Geometric shapes floating in space with parallax effect
  */
 @Composable
-fun ShapesBackground(modifier: Modifier = Modifier) {
+fun ShapesBackground(
+    modifier: Modifier = Modifier,
+    enableParallax: Boolean = true
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor = MaterialTheme.colorScheme.tertiary
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val parallaxState = rememberParallaxState(
+        enableParallax = enableParallax,
+        sensitivity = 0.3f,
+        context = context,
+        coroutineScope = coroutineScope
+    )
 
     val infiniteTransition = rememberInfiniteTransition(label = "shapes")
 
     // Shape configurations
     val shapes = remember {
         listOf(
-            ShapeConfig(0.1f, 0.15f, 0.3f, 0.2f, 30000, 0f, ShapeType.TRIANGLE),
-            ShapeConfig(0.7f, 0.1f, 0.9f, 0.15f, 28000, 0f, ShapeType.SQUARE),
-            ShapeConfig(0.15f, 0.38f, 0.35f, 0.48f, 32000, 0f, ShapeType.PENTAGON),
-            ShapeConfig(0.8f, 0.4f, 0.68f, 0.32f, 29000, 0f, ShapeType.TRIANGLE),
-            ShapeConfig(0.22f, 0.62f, 0.35f, 0.72f, 31000, 180f, ShapeType.SQUARE),
-            ShapeConfig(0.75f, 0.65f, 0.62f, 0.55f, 27000, 0f, ShapeType.PENTAGON),
-            ShapeConfig(0.15f, 0.85f, 0.32f, 0.92f, 33000, 180f, ShapeType.TRIANGLE),
-            ShapeConfig(0.72f, 0.88f, 0.58f, 0.82f, 26000, 0f, ShapeType.SQUARE)
+            ShapeConfig(0.1f, 0.15f, 0.3f, 0.2f, 30000, 0f, ShapeType.TRIANGLE, 0.8f),
+            ShapeConfig(0.7f, 0.1f, 0.9f, 0.15f, 28000, 0f, ShapeType.SQUARE, 0.6f),
+            ShapeConfig(0.15f, 0.38f, 0.35f, 0.48f, 32000, 0f, ShapeType.PENTAGON, 0.5f),
+            ShapeConfig(0.8f, 0.4f, 0.68f, 0.32f, 29000, 0f, ShapeType.TRIANGLE, 0.4f),
+            ShapeConfig(0.22f, 0.62f, 0.35f, 0.72f, 31000, 180f, ShapeType.SQUARE, 0.7f),
+            ShapeConfig(0.75f, 0.65f, 0.62f, 0.55f, 27000, 0f, ShapeType.PENTAGON, 0.6f),
+            ShapeConfig(0.15f, 0.85f, 0.32f, 0.92f, 33000, 180f, ShapeType.TRIANGLE, 0.5f),
+            ShapeConfig(0.72f, 0.88f, 0.58f, 0.82f, 26000, 0f, ShapeType.SQUARE, 0.4f)
         )
     }
 
@@ -67,6 +81,9 @@ fun ShapesBackground(modifier: Modifier = Modifier) {
     }
 
     Canvas(modifier = modifier.fillMaxSize()) {
+        val tiltX = parallaxState.tiltX.value
+        val tiltY = parallaxState.tiltY.value
+
         shapeAnimations.forEachIndexed { index, (x, y, rotation) ->
             val color = when (index % 3) {
                 0 -> primaryColor
@@ -74,13 +91,18 @@ fun ShapesBackground(modifier: Modifier = Modifier) {
                 else -> tertiaryColor
             }.copy(alpha = 0.12f)
 
-            val centerX = size.width * x.value
-            val centerY = size.height * y.value
+            val config = shapes[index]
+            val parallaxStrength = config.depth * 50f
+            val parallaxX = tiltX * parallaxStrength
+            val parallaxY = tiltY * parallaxStrength
+
+            val centerX = size.width * x.value + parallaxX
+            val centerY = size.height * y.value + parallaxY
             val shapeSize = 200f
 
             // Rotate and draw shape
             rotate(rotation.value, Offset(centerX, centerY)) {
-                when (shapes[index].type) {
+                when (config.type) {
                     ShapeType.TRIANGLE -> drawTriangle(centerX, centerY, shapeSize, color)
                     ShapeType.SQUARE -> drawSquare(centerX, centerY, shapeSize, color)
                     ShapeType.PENTAGON -> drawPentagon(centerX, centerY, shapeSize, color)
@@ -165,11 +187,12 @@ private enum class ShapeType {
 }
 
 private data class ShapeConfig(
-    val startX: Float,          // Starting X position (0-1)
-    val startY: Float,          // Starting Y position (0-1)
-    val endX: Float,            // Ending X position (0-1)
-    val endY: Float,            // Ending Y position (0-1)
-    val duration: Int,          // Animation duration in ms
-    val initialRotation: Float, // Starting rotation angle
-    val type: ShapeType         // Type of shape to draw
+    val startX: Float,
+    val startY: Float,
+    val endX: Float,
+    val endY: Float,
+    val duration: Int,
+    val initialRotation: Float,
+    val type: ShapeType,
+    val depth: Float  // Depth for parallax effect
 )
