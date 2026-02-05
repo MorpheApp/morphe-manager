@@ -94,7 +94,7 @@ fun ExpertModeDialog(
     val totalPatchesCount = allPatchesInfo.sumOf { it.second.size }
 
     // Check if multiple bundles are selected
-    val hasMultipleBundles = localSelectedPatches.keys.size > 1
+    val hasMultipleBundles = localSelectedPatches.count { (_, patches) -> patches.isNotEmpty() } > 1
 
     // Sync function
     fun syncAndProceed() {
