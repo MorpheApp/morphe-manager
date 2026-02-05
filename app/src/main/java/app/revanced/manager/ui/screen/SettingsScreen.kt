@@ -185,7 +185,7 @@ fun SettingsScreen(
     if (showChangelogDialog) {
         ChangelogDialog(
             onDismiss = { showChangelogDialog = false },
-            releaseInfo = updateViewModel.releaseInfo
+            updateViewModel = updateViewModel
         )
     }
 

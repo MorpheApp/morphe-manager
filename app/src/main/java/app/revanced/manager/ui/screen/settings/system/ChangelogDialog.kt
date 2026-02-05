@@ -8,20 +8,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.revanced.manager.network.dto.ReVancedAsset
 import app.revanced.manager.ui.screen.home.ReleaseInfoSection
 import app.revanced.manager.ui.screen.shared.*
+import app.revanced.manager.ui.viewmodel.UpdateViewModel
 
 /**
  * Changelog dialog
- * Displays the latest manager changelog using the same component as the update dialog
+ * Displays the changelog for currently installed manager version
  */
 @Composable
 fun ChangelogDialog(
     onDismiss: () -> Unit,
-    releaseInfo: ReVancedAsset?
+    updateViewModel: UpdateViewModel
 ) {
     val textColor = LocalDialogTextColor.current
+    val secondaryColor = LocalDialogSecondaryTextColor.current
+
+    // Load current version changelog when dialog opens
+    LaunchedEffect(Unit) {
+        updateViewModel.loadCurrentVersionChangelog()
+    }
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -34,6 +40,8 @@ fun ChangelogDialog(
             )
         }
     ) {
+        val releaseInfo = updateViewModel.currentVersionReleaseInfo
+
         if (releaseInfo == null) {
             // Loading state
             Box(
@@ -42,10 +50,20 @@ fun ChangelogDialog(
                     .padding(vertical = 48.dp),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(48.dp)
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(48.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.changelog_loading),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = secondaryColor
+                    )
+                }
             }
         } else {
             // Reuse the same component from update dialog

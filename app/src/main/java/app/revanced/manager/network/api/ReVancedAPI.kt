@@ -27,15 +27,13 @@ class ReVancedAPI(
         val htmlUrl: String,
     )
 
-    private fun repoConfig(): RepoConfig = parseRepoUrl(MANAGER_REPO_URL)
-
-    private fun parseRepoUrl(raw: String): RepoConfig {
-        val trimmed = raw.removeSuffix("/")
+    private fun repoConfig(): RepoConfig {
+        val trimmed = MANAGER_REPO_URL.removeSuffix("/")
         return when {
             trimmed.startsWith("https://github.com/") -> {
                 val repoPath = trimmed.removePrefix("https://github.com/").removeSuffix(".git")
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
-                require(parts.size >= 2) { "Invalid GitHub repository URL: $raw" }
+                require(parts.size >= 2) { "Invalid GitHub repository URL: $MANAGER_REPO_URL" }
                 val owner = parts[0]
                 val name = parts[1]
                 RepoConfig(
@@ -51,9 +49,9 @@ class ReVancedAPI(
                 val parts = repoPath.split("/").filter { it.isNotBlank() }
                 val reposIndex = parts.indexOf("repos")
                 val owner = parts.getOrNull(reposIndex + 1)
-                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $MANAGER_REPO_URL")
                 val name = parts.getOrNull(reposIndex + 2)
-                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $raw")
+                    ?: throw IllegalArgumentException("Invalid GitHub API URL: $MANAGER_REPO_URL")
                 RepoConfig(
                     owner = owner,
                     name = name,
@@ -62,7 +60,7 @@ class ReVancedAPI(
                 )
             }
 
-            else -> throw IllegalArgumentException("Unsupported repository URL: $raw")
+            else -> throw IllegalArgumentException("Unsupported repository URL: $MANAGER_REPO_URL")
         }
     }
 
@@ -161,6 +159,34 @@ class ReVancedAPI(
     suspend fun getAppUpdate(): ReVancedAsset? {
         val asset = getLatestAppInfo().getOrNull() ?: return null
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
+    }
+
+    /**
+     * Get manager release by specific version tag
+     * Used for displaying changelog of currently installed version
+     */
+    suspend fun getManagerReleaseByVersion(version: String): APIResponse<ReVancedAsset> {
+        val config = repoConfig()
+        val normalizedVersion = if (version.startsWith("v")) version else "v$version"
+
+        return when (val releaseResponse = githubRequest<GitHubRelease>(config, "releases/tags/$normalizedVersion")) {
+            is APIResponse.Success -> {
+                val mapped = runCatching {
+                    val release = releaseResponse.data
+                    val asset = release.assets.firstOrNull(::isManagerAsset)
+                        ?: throw IllegalStateException("No manager APK found in release $normalizedVersion")
+                    mapReleaseToAsset(config, release, asset)
+                }
+
+                mapped.fold(
+                    onSuccess = { APIResponse.Success(it) },
+                    onFailure = { APIResponse.Failure(APIFailure(it, null)) }
+                )
+            }
+
+            is APIResponse.Error -> APIResponse.Error(releaseResponse.error)
+            is APIResponse.Failure -> APIResponse.Failure(releaseResponse.error)
+        }
     }
 
     suspend fun getPatchesUpdate(): APIResponse<ReVancedAsset> = apiRequest(
