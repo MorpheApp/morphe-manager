@@ -1,3 +1,10 @@
+# app [1.6.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0...v1.6.0-dev.1) (2026-02-04)
+
+
+### Features
+
+* Add an extended list of supported versions ([#155](https://github.com/MorpheApp/morphe-manager/issues/155)) ([25dafb6](https://github.com/MorpheApp/morphe-manager/commit/25dafb685b5dbc28ae6d8c64553ac9a2d5a7527f))
+
 # app [1.5.0](https://github.com/MorpheApp/morphe-manager/compare/v1.4.1...v1.5.0) (2026-02-04)
 
 

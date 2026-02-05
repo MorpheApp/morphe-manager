@@ -623,10 +623,12 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="importing_ellipsis">Importing…</string>
 
     <string name="changelog">View changelogs</string>
+    <string name="changelog_description">Check out the latest changes in this update</string>
     <string name="changelog_loading">Loading changelog</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_retry">Retry</string>
     <string name="changelog_empty">No changelog available</string>
+    <string name="no_network_toast">No internet connection available</string>
 
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>
