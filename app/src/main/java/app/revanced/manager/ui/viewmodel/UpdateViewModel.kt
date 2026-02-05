@@ -74,7 +74,12 @@ class UpdateViewModel(
 
     var installError by mutableStateOf("")
 
+    // Release info for update dialog
     var releaseInfo: ReVancedAsset? by mutableStateOf(null)
+        private set
+
+    // Release info for changelog dialog
+    var currentVersionReleaseInfo: ReVancedAsset? by mutableStateOf(null)
         private set
 
     var canResumeDownload by mutableStateOf(false)
@@ -334,19 +339,6 @@ class UpdateViewModel(
         location.delete()
     }
 
-    companion object {
-        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
-    }
-
-    enum class State(@StringRes val title: Int) {
-        CAN_DOWNLOAD(R.string.update_available),
-        DOWNLOADING(R.string.downloading_manager_update),
-        CAN_INSTALL(R.string.ready_to_install_update),
-        INSTALLING(R.string.installing_manager_update),
-        FAILED(R.string.install_update_manager_failed),
-        SUCCESS(R.string.update_completed)
-    }
-
     /**
      * Reset state if installation was cancelled by user (dismissed system dialog)
      * Called when dialog reopens to check if we need to reset
@@ -367,18 +359,25 @@ class UpdateViewModel(
     }
 
     /**
-     * Clear changelog cache to force reload
+     * Load changelog for currently installed version
      */
-    fun clearChangelogCache() {
-        releaseInfo = null
+    fun loadCurrentVersionChangelog() = viewModelScope.launch {
+        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
+            val currentVersion = "v${BuildConfig.VERSION_NAME}"
+            currentVersionReleaseInfo = reVancedAPI.getManagerReleaseByVersion(currentVersion).getOrNull()
+        }
     }
 
-    /**
-     * Reload changelog with current prerelease settings
-     */
-    fun reloadChangelog() = viewModelScope.launch {
-        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            releaseInfo = reVancedAPI.getLatestAppInfo().getOrNull()
-        }
+    companion object {
+        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
+    }
+
+    enum class State(@StringRes val title: Int) {
+        CAN_DOWNLOAD(R.string.update_available),
+        DOWNLOADING(R.string.downloading_manager_update),
+        CAN_INSTALL(R.string.ready_to_install_update),
+        INSTALLING(R.string.installing_manager_update),
+        FAILED(R.string.install_update_manager_failed),
+        SUCCESS(R.string.update_completed)
     }
 }

@@ -22,9 +22,7 @@ import app.revanced.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
-import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 
 /**
  * Advanced tab content
@@ -34,7 +32,6 @@ fun AdvancedTabContent(
     usePrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
-    updateViewModel: UpdateViewModel = koinViewModel(),
     prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
@@ -81,8 +78,6 @@ fun AdvancedTabContent(
                     prefs.useManagerPrereleases.update(newValue)
                     prefs.managerAutoUpdates.update(newValue)
                     homeViewModel.updateMorpheBundleWithChangelogClear()
-                    updateViewModel.clearChangelogCache()
-                    updateViewModel.reloadChangelog()
                     homeViewModel.checkForManagerUpdates()
                     patchOptionsViewModel.refresh()
                 }
