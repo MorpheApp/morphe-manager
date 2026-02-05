@@ -245,21 +245,12 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="patcher_process_exit_message">O processo de patcher foi encerrado com o código %1$d.</string>
     <string name="install_app_success">Instalado com sucesso</string>
     <string name="install_app_fail">Falha ao instalar o app: %s</string>
-    <string name="install_app_fail_missing_stock">Arquivo APK original faltando para instalacao montada.</string>
-    <string name="mount_split_not_supported">Instalador de montagem raiz não suporta APKs divididos. Use o instalador do sistema em vez disso.</string>
     <string name="install_timeout_message">A instalação não foi concluída. Verifique a caixa de diálogo do instalador do sistema e tente novamente.</string>
-    <string name="uninstall_timeout_message">Desinstalação não foi concluída. Verifique o diálogo de desinstalação e tente novamente.</string>
-    <string name="reinstall_app_fail">Falha ao reinstalar o app: %s</string>
-    <string name="uninstall_app_fail">Falha ao desinstalar o app: %s</string>
     <string name="save_apk_success">APK Salvo</string>
-    <string name="saved_app_export_success">App corrigido exportado</string>
     <string name="saved_app_export_failed">Falha ao exportar o app corrigido</string>
     <string name="saved_app_removed_toast">App corrigido salvo removido</string>
     <string name="saved_app_copy_removed_toast">Cópia salva removida</string>
     <string name="saved_app_launch_unavailable">Instale o app antes de abri-lo.</string>
-    <string name="saved_app_install_success">App salvo instalado</string>
-    <string name="saved_app_install_failed">Falha ao instalar app salvo</string>
-    <string name="saved_app_install_missing">APK salvo não encontrado</string>
     <string name="package_name">Nome do pacote</string>
     <string name="failed_to_mount">Falha ao montar: %s</string>
     <string name="failed_to_unmount">Falha ao desmontar: %s</string>
@@ -413,6 +404,10 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_external_timeout">%1$s não confirmou a instalação. Verifique o outro app e tente novamente.</string>
     <string name="installer_external_success">%1$s relatou uma instalação bem-sucedida.</string>
     <string name="installer_external_finished_no_change">%1$s finalizado sem instalação do aplicativo. Verifique o instalador para uma mensagem de erro e tente novamente.</string>
+    <string name="installer_unavailable_title">%s indisponível</string>
+    <string name="installer_unavailable_message">Seu instalador preferencial (%s) está atualmente indisponível. Você pode corrigir o problema e tentar novamente ou usar o instalador padrão em vez disso.</string>
+    <string name="installer_unavailable_shizuku_hint">Certifique-se de que Shizuku está em execução e a permissão foi concedida a este aplicativo.</string>
+    <string name="installer_use_standard">Usar padrão</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Desempenho</string>
     <string name="settings_system_process_runtime">Processos de runtime</string>
@@ -492,6 +487,7 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="reset">Resetar</string>
     <string name="warning">Atenção</string>
     <string name="error_">Erro</string>
+    <string name="retry">Tentar novamente</string>
     <string name="add">Adicionar</string>
     <string name="close">Fechar</string>
     <string name="clear">Limpar</string>
@@ -563,6 +559,4 @@ Deseja continuar mesmo assim?"</string>
     <string name="hours_ago">há %s h</string>
     <string name="days_ago">há %sd atrás</string>
     <string name="invalid_date">Data inválida</string>
-    <string name="plugin_host_permission_label">Host de plugin Morphe</string>
-    <string name="plugin_host_permission_description">Usado para controlar o acesso a plugins do Morphe. Somente o Morphe possui isso.</string>
 </resources>

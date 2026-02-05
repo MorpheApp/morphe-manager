@@ -890,7 +890,7 @@ private fun PathInputOption(
         // Create Icon button
         if (isIconField) {
             MorpheDialogOutlinedButton(
-                text = stringResource(R.string.adaptive_icon_create_new),
+                text = stringResource(R.string.adaptive_icon_create),
                 onClick = { showIconCreator = true },
                 icon = Icons.Outlined.AutoAwesome,
                 modifier = Modifier.fillMaxWidth()
@@ -900,7 +900,7 @@ private fun PathInputOption(
         // Create Header button
         if (isHeaderField) {
             MorpheDialogOutlinedButton(
-                text = stringResource(R.string.header_creator_create_new),
+                text = stringResource(R.string.header_creator_create),
                 onClick = { showHeaderCreator = true },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()

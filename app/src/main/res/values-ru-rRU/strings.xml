@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">Процесс исправления завершился с кодом %1$d.</string>
     <string name="install_app_success">Успешно установлено</string>
     <string name="install_app_fail">Не удалось установить приложение: %s</string>
-    <string name="install_app_fail_missing_stock">Отсутствует оригинальный APK для монтирования установки.</string>
-    <string name="mount_split_not_supported">Установщик с корневым монтированием не поддерживает разделенные APK. Используйте системный установщик.</string>
     <string name="install_timeout_message">Установка не завершена. Проверьте диалоговое окно установщика системы и попробуйте снова.</string>
-    <string name="uninstall_timeout_message">Отмена установки завершена. Проверьте диалог отмены и повторите попытку.</string>
-    <string name="reinstall_app_fail">Не удалось переустановить приложение: %s</string>
-    <string name="uninstall_app_fail">Не удалось удалить приложение: %s</string>
     <string name="save_apk_success">APK сохранен</string>
-    <string name="saved_app_export_success">Исправленное приложение экспортировано</string>
     <string name="saved_app_export_failed">Не удалось экспортировать исправленное приложение</string>
     <string name="saved_app_removed_toast">Удалено сохраненное пропатченное приложение</string>
     <string name="saved_app_copy_removed_toast">Удалена сохраненная копия</string>
     <string name="saved_app_launch_unavailable">Установите приложение перед его запуском.</string>
-    <string name="saved_app_install_success">Сохраненное приложение установлено</string>
-    <string name="saved_app_install_failed">Не удалось установить сохраненное приложение</string>
-    <string name="saved_app_install_missing">Сохраненный APK не найден</string>
     <string name="package_name">Имя пакета</string>
     <string name="failed_to_mount">Не удалось смонтировать: %s</string>
     <string name="failed_to_unmount">Не удалось размонтировать: %s</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">%1$s не подтвердил установку. Проверьте другое приложение и попробуйте снова.</string>
     <string name="installer_external_success">%1$s сообщил об успешной установке.</string>
     <string name="installer_external_finished_no_change">%1$s завершено без установки. Проверьте установщик на сообщение об ошибке и повторите попытку.</string>
+    <string name="installer_unavailable_title">%s (недоступно)</string>
+    <string name="installer_unavailable_message">Ваш предпочтительный установщик (%s) в настоящее время недоступен. Вы можете исправить проблему и повторить попытку или использовать стандартный установщик вместо него.</string>
+    <string name="installer_unavailable_shizuku_hint">Убедитесь, что Shizuku запущен и разрешено право доступа к этому приложению.</string>
+    <string name="installer_use_standard">Использовать стандартное</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Производительность</string>
     <string name="settings_system_process_runtime">Время выполнения процесса</string>
@@ -492,6 +487,7 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="reset">Сбросить</string>
     <string name="warning">Предупреждение</string>
     <string name="error_">Ошибка</string>
+    <string name="retry">Повторить попытку</string>
     <string name="add">Добавить</string>
     <string name="close">Закрыть</string>
     <string name="clear">Очистить</string>
@@ -563,6 +559,4 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="hours_ago">%s час назад</string>
     <string name="days_ago">%s день назад</string>
     <string name="invalid_date">Неверная дата</string>
-    <string name="plugin_host_permission_label">Хост плагинов Morphe</string>
-    <string name="plugin_host_permission_description">Используется для управления доступом к плагинам Morphe. Эта функция доступна только в Morphe.</string>
 </resources>

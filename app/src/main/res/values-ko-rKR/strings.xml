@@ -103,10 +103,10 @@
     <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_no_results">패치된 앱을 찾을 수 없습니다</string>
     <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
-    <string name="expert_mode_multiple_bundles_warning_title">다중 패치 소스 선택됨</string>
-    <string name="expert_mode_multiple_bundles_warning_message">"다중 패치 소스에서 패치를 선택했습니다. 호환성 문제나 예기치 않은 동작이 발생할 수 있습니다.
+    <string name="expert_mode_multiple_bundles_warning_title">여러 패치 소스가 선택됨</string>
+    <string name="expert_mode_multiple_bundles_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
-진행하시겠습니까?"</string>
+그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
     <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속하면 앱이 제대로 작동하지 않을 수 있습니다.</string>
@@ -124,35 +124,35 @@
     <string name="patch_option_enter_decimal">소수점 입력</string>
     <string name="patch_option_pick_folder">폴더 선택</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">어댑티브 아이콘 생성</string>
-    <string name="adaptive_icon_create">아이콘 생성</string>
-    <string name="adaptive_icon_instructions">전경 이미지 선택, 배경색 선택, 미리보기 조절을 위해 pinch-to-zoom 제스처 사용</string>
+    <string name="adaptive_icon_creator_title">적응형 아이콘 만들기</string>
+    <string name="adaptive_icon_create">아이콘 만들기</string>
+    <string name="adaptive_icon_instructions">전면 이미지 및 배경 색상을 선택하고, 손가락으로 확대하거나 축소하여 미리보기를 조정하세요</string>
     <string name="adaptive_icon_preview">미리보기</string>
-    <string name="adaptive_icon_select_foreground">선택할 전면 이미지</string>
+    <string name="adaptive_icon_select_foreground">전면 이미지 선택</string>
     <string name="adaptive_icon_change_foreground">전면 이미지 변경</string>
-    <string name="adaptive_icon_background_color">배경색</string>
+    <string name="adaptive_icon_background_color">배경 색상</string>
     <string name="adaptive_icon_reset_transform">위치 및 크기 초기화</string>
-    <string name="adaptive_icon_safe_zone_inner">안전 영역 (항상 표시)</string>
-    <string name="adaptive_icon_safe_zone_outer">마스크 영역 (자르기 가능)</string>
-    <string name="adaptive_icon_created_success">적응형 아이콘 생성 완료</string>
-    <string name="adaptive_icon_creation_failed">적응형 아이콘 생성 실패</string>
-    <string name="adaptive_icon_create_new">새로운 아이콘 생성</string>
-    <string name="adaptive_icon_folder_explanation">\'morphe_branding/morphe_icons\' 폴더에 생성된 아이콘 파일을 생성할 위치 선택</string>
+    <string name="adaptive_icon_safe_zone_inner">안전 영역 (항상 표시됨)</string>
+    <string name="adaptive_icon_safe_zone_outer">마스크 영역 (잘릴 수 있음)</string>
+    <string name="adaptive_icon_created_success">적응형 아이콘을 성공적으로 만들었습니다</string>
+    <string name="adaptive_icon_creation_failed">적응형 아이콘을 만들 수 없습니다</string>
+    <string name="adaptive_icon_create_new">새로운 아이콘 만들기</string>
+    <string name="adaptive_icon_folder_explanation">만들어진 아이콘 파일이 저장될 \'morphe_branding/morphe_icons\' 폴더의 위치를 ​​선택하세요</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">헤더 생성기</string>
-    <string name="header_creator_create">헤더 생성</string>
-    <string name="header_creator_create_new">새로운 헤더 생성</string>
-    <string name="header_creator_instructions">빛과 어둠 테마 이미지를 선택하고 pinch-to-zoom 제스처로 조정하세요</string>
-    <string name="header_creator_light_theme">빛 테마 헤더</string>
-    <string name="header_creator_dark_theme">어둠 테마 헤더</string>
-    <string name="header_creator_select_light">빛 테마 이미지 선택</string>
-    <string name="header_creator_change_light">빛 테마 이미지 변경</string>
-    <string name="header_creator_select_dark">어둠 테마 이미지 선택</string>
-    <string name="header_creator_change_dark">어둠 테마 이미지 변경</string>
+    <string name="header_creator_title">커스텀 헤더 만들기</string>
+    <string name="header_creator_create">헤더 만들기</string>
+    <string name="header_creator_create_new">새로운 헤더 만들기</string>
+    <string name="header_creator_instructions">밝은 테마와 어두운 테마에 사용될 이미지를 선택한 다음에 손가락으로 확대하거나 축소하여 이미지 크기를 조절하세요</string>
+    <string name="header_creator_light_theme">밝은 테마 헤더</string>
+    <string name="header_creator_dark_theme">어두운 테마 헤더</string>
+    <string name="header_creator_select_light">밝은 테마 이미지 선택</string>
+    <string name="header_creator_change_light">밝은 테마 이미지 변경</string>
+    <string name="header_creator_select_dark">어두운 테마 이미지 선택</string>
+    <string name="header_creator_change_dark">어두운 테마 이미지 변경</string>
     <string name="header_creator_no_image">선택된 이미지가 없습니다</string>
-    <string name="header_creator_success">헤더 생성 완료</string>
-    <string name="header_creator_failed">헤더 생성 실패</string>
-    <string name="header_creator_folder_explanation">\'morphe_branding/morphe_header\' 폴더에 생성된 헤더 파일을 생성할 위치 선택</string>
+    <string name="header_creator_success">헤더를 성공적으로 만들었습니다</string>
+    <string name="header_creator_failed">헤더를 만들 수 없습니다</string>
+    <string name="header_creator_folder_explanation">만들어진 헤더 파일이 저장될 \'morphe_branding/morphe_header\' 폴더의 위치를 ​​선택하세요</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 언인스톨하시겠습니까?</string>
     <string name="home_app_info_saved_app_delete_confirmation">저장된 앱을 삭제하시겠습니까?</string>
@@ -245,21 +245,12 @@
     <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$d\'로 종료하였습니다.</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
     <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
-    <string name="install_app_fail_missing_stock">마운트 설치를 위한 원본 APK가 누락되어 있습니다.</string>
-    <string name="mount_split_not_supported">루팅된 마운트 설치 프로그램은 분할 APK를 지원하지 않습니다. 대신에 시스템 설치 프로그램을 사용하세요.</string>
     <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요.</string>
-    <string name="uninstall_timeout_message">언인스톨이 완료되지 않았습니다. 삭제 다이얼로그를 확인하고 다시 시도하세요.</string>
-    <string name="reinstall_app_fail">앱을 다시 설치할 수 없습니다: %s</string>
-    <string name="uninstall_app_fail">앱을 언인스톨할 수 없습니다: %s</string>
     <string name="save_apk_success">APK를 저장하였습니다</string>
-    <string name="saved_app_export_success">패치된 앱을 내보냈습니다</string>
     <string name="saved_app_export_failed">패치된 앱을 내보낼 수 없습니다</string>
     <string name="saved_app_removed_toast">저장된 패치된 앱을 삭제하였습니다</string>
     <string name="saved_app_copy_removed_toast">저장된 사본을 삭제하였습니다</string>
     <string name="saved_app_launch_unavailable">열기 전에 앱을 설치하세요.</string>
-    <string name="saved_app_install_success">저장된 앱을 설치하였습니다</string>
-    <string name="saved_app_install_failed">저장된 앱을 설치할 수 없습니다</string>
-    <string name="saved_app_install_missing">저장된 APK를 찾을 수 없습니다</string>
     <string name="package_name">패키지 이름</string>
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
@@ -296,14 +287,14 @@
     <string name="settings_appearance_app_icon_light_3">일몰</string>
     <string name="settings_appearance_app_icon_dark_1">바다</string>
     <string name="settings_appearance_app_icon_dark_2">공허</string>
-    <string name="settings_appearance_app_icon_dark_3">인디고</string>
-    <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경하시겠습니까?</string>
+    <string name="settings_appearance_app_icon_dark_3">남색</string>
+    <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\'로 변경하고 다시 시작하시겠습니까?</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release 버전 사용하기</string>
-    <string name="settings_advanced_updates_use_prereleases_description">새로운 패치 및 매니저 기능을 일찍 사용해 보세요</string>
+    <string name="settings_advanced_updates_use_prereleases_description">새로운 패치 및 매니저 기능을 미리 사용해 보세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -413,6 +404,10 @@ morphe_header_custom_dark.png
     <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요.</string>
     <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다.</string>
     <string name="installer_external_finished_no_change">\'%1$s\'는 앱을 설치하지 않고 완료되었습니다. 설치 프로그램에서 오류 메시지를 확인하고 다시 시도하십시오.</string>
+    <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
+    <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 대신에 사용할 수 있습니다.</string>
+    <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요.</string>
+    <string name="installer_use_standard">표준을 사용하세요</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">성능</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
@@ -492,6 +487,7 @@ morphe_header_custom_dark.png
     <string name="reset">초기화</string>
     <string name="warning">경고</string>
     <string name="error_">오류</string>
+    <string name="retry">다시 시도</string>
     <string name="add">추가</string>
     <string name="close">닫기</string>
     <string name="clear">지우기</string>
@@ -563,6 +559,4 @@ morphe_header_custom_dark.png
     <string name="hours_ago">%s시간 전</string>
     <string name="days_ago">%s일 전</string>
     <string name="invalid_date">잘못된 날짜</string>
-    <string name="plugin_host_permission_label">Morphe 플러그인 호스트</string>
-    <string name="plugin_host_permission_description">Morphe 플러그인 접근 제어에 사용됩니다. Morphe만 이 권한을 가집니다.</string>
 </resources>

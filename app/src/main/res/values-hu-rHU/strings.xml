@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Egyéb alkalmazások</string>
-    <string name="home_not_patched_yet">Még nem módosított</string>
+    <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
     <string name="home_default_source_disabled">Morphe forrása letiltva. Kérem, engedélyezze a Patch források lapján vagy használja az Expert módot.</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
@@ -245,21 +245,12 @@ Biztosan folytatod?"</string>
     <string name="patcher_process_exit_message">A patchfolyamat %1$d kóddal kilépett.</string>
     <string name="install_app_success">Sikeresen telepítve</string>
     <string name="install_app_fail">Nem sikerült telepíteni az alkalmazást: %s</string>
-    <string name="install_app_fail_missing_stock">Hiányzik az eredeti APK a csatolásos telepítéshez.</string>
-    <string name="mount_split_not_supported">A root jogosultságú csatolásos telepítés nem támogatja az osztott APK fájlokat. Használja a rendszertelepítőt.</string>
     <string name="install_timeout_message">A telepítés nem fejeződött be. Ellenőrizze a rendszertelepítő párbeszédpaneljét, majd próbálkozzon újra.</string>
-    <string name="uninstall_timeout_message">Az eltávolítás nem fejeződött be. Ellenőrizze az eltávolítási párbeszédpanelt, majd próbálkozzon újra.</string>
-    <string name="reinstall_app_fail">Nem sikerült újratelepíteni az alkalmazást: %s</string>
-    <string name="uninstall_app_fail">Nem sikerült eltávolítani az alkalmazást: %s</string>
     <string name="save_apk_success">APK mentve</string>
-    <string name="saved_app_export_success">A módosított alkalmazás exportálva</string>
     <string name="saved_app_export_failed">Nem sikerült exportálni a módosított alkalmazást</string>
     <string name="saved_app_removed_toast">A módosított alkalmazás mentése eltávolítva</string>
     <string name="saved_app_copy_removed_toast">Mentett másolat eltávolítva</string>
     <string name="saved_app_launch_unavailable">Telepítse az alkalmazást, mielőtt megnyitná.</string>
-    <string name="saved_app_install_success">Mentett alkalmazás telepítve</string>
-    <string name="saved_app_install_failed">A mentett alkalmazás telepítése sikertelen</string>
-    <string name="saved_app_install_missing">Nem található mentett APK</string>
     <string name="package_name">Csomagnév</string>
     <string name="failed_to_mount">Nem sikerült csatlakoztatni: %s</string>
     <string name="failed_to_unmount">Nem sikerült leválasztani: %s</string>
@@ -413,6 +404,10 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_external_timeout">%1$s nem erősítette meg a telepítést. Ellenőrizze a másik alkalmazást, és próbálja újra.</string>
     <string name="installer_external_success">%1$s sikeres telepítést jelentett.</string>
     <string name="installer_external_finished_no_change">\"%1$s\" befejeződött az alkalmazás telepítése nélkül. Kérjük ellenőrizze a telepítő hibaüzeneteit és próbálja újra.</string>
+    <string name="installer_unavailable_title">%s (nem elérhető)</string>
+    <string name="installer_unavailable_message">A kedvenc telepítője (%s) jelenleg nem elérhető. A problémát megoldhatja és újrapróbálkozik, vagy használhatja a standard telepítőt helyette.</string>
+    <string name="installer_unavailable_shizuku_hint">Tisztelje meg, hogy Shizuku fut és engedélyezte ezt az alkalmazásnak a jogosultságot.</string>
+    <string name="installer_use_standard">Szabványos használat</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Teljesítmény</string>
     <string name="settings_system_process_runtime">Folyamat futási ideje</string>
@@ -492,6 +487,7 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="reset">Visszaállítás</string>
     <string name="warning">Figyelmeztetés</string>
     <string name="error_">Hiba</string>
+    <string name="retry">Újra</string>
     <string name="add">Hozzáadás</string>
     <string name="close">Bezárás</string>
     <string name="clear">Törlés</string>
@@ -563,6 +559,4 @@ Szeretné folytatni?"</string>
     <string name="hours_ago">%s órával ezelőtt</string>
     <string name="days_ago">%sd ideje</string>
     <string name="invalid_date">Érvénytelen dátum</string>
-    <string name="plugin_host_permission_label">Morphe plugin hoszt</string>
-    <string name="plugin_host_permission_description">A Morphe beépülő moduljaihoz való hozzáférés szabályozására szolgál. Csak a Morphe rendelkezik ezzel.</string>
 </resources>

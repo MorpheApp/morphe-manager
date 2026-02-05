@@ -245,21 +245,12 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="patcher_process_exit_message">Patcher-processen afsluttede med kode %1$d.</string>
     <string name="install_app_success">Installeret succesfuldt</string>
     <string name="install_app_fail">Kunne ikke installere app: %s</string>
-    <string name="install_app_fail_missing_stock">Mangler original APK for montering.</string>
-    <string name="mount_split_not_supported">Avtungeret mount installator understøtter ikke delt APK. Brug i stedet systeminstallator.</string>
     <string name="install_timeout_message">Installationen blev ikke fuldført. Tjek systemets installationsdialog og prøv igen.</string>
-    <string name="uninstall_timeout_message">Deinstallation gik ikke færdig. Tjek deinstallationsdialogen og prøv igen.</string>
-    <string name="reinstall_app_fail">Kunne ikke geninstallere app: %s</string>
-    <string name="uninstall_app_fail">Kunne ikke afinstallere app: %s</string>
     <string name="save_apk_success">APK gemt</string>
-    <string name="saved_app_export_success">Eksporteret modificeret app</string>
     <string name="saved_app_export_failed">Kunne ikke eksportere modificeret app</string>
     <string name="saved_app_removed_toast">Gemt modificeret app fjernet</string>
     <string name="saved_app_copy_removed_toast">Gemt kopi fjernet</string>
     <string name="saved_app_launch_unavailable">Installer appen, før du åbner den.</string>
-    <string name="saved_app_install_success">Installeret gemt app</string>
-    <string name="saved_app_install_failed">Kunne ikke installere gemt app</string>
-    <string name="saved_app_install_missing">Gemt APK blev ikke fundet</string>
     <string name="package_name">Pakkenavn</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
     <string name="failed_to_unmount">Kunne ikke afmontere: %s</string>
@@ -413,6 +404,10 @@ Bildeformateringen må være som følger:
     <string name="installer_external_timeout">%1$s bekræftede ikke installationen. Kontroller den anden app, og prøv igen.</string>
     <string name="installer_external_success">%1$s rapporterede en vellykket installation.</string>
     <string name="installer_external_finished_no_change">%1$s færdiggjort uden at installere app\'en. Tjek installator for fejlbesked og prøv igen.</string>
+    <string name="installer_unavailable_title">%s utilgångelig</string>
+    <string name="installer_unavailable_message">Din foretrukne installer (%s) er for tiden utilgångelig. Du kan fjerne fejlen og prøve igen, eller bruge standardinstalleren i stedet.</string>
+    <string name="installer_unavailable_shizuku_hint">Forsør at Shizuku køres og at tilladelse er givet til denne app.</string>
+    <string name="installer_use_standard">Brug standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Ytelsekstelse</string>
     <string name="settings_system_process_runtime">Prosesskjøring</string>
@@ -492,6 +487,7 @@ Bildeformateringen må være som følger:
     <string name="reset">Nulstil</string>
     <string name="warning">Advarsel</string>
     <string name="error_">Feil</string>
+    <string name="retry">Forsøg igen</string>
     <string name="add">Tilføj</string>
     <string name="close">Luk</string>
     <string name="clear">Ryd</string>
@@ -563,6 +559,4 @@ Vil du stadig fortsætte?"</string>
     <string name="hours_ago">for %s timer siden</string>
     <string name="days_ago">for %s dage siden</string>
     <string name="invalid_date">Ugyldig dato</string>
-    <string name="plugin_host_permission_label">Morphe plugin-vært</string>
-    <string name="plugin_host_permission_description">Bruges til at styre adgangen til Morphe-plugins. Kun Morphe har denne.</string>
 </resources>

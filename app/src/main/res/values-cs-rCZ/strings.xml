@@ -245,21 +245,12 @@ Opravdu chcete pokračovat?"</string>
     <string name="patcher_process_exit_message">Proces patcheru ukončen kódem %1$d.</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
     <string name="install_app_fail">Selhání instalace aplikace: %s</string>
-    <string name="install_app_fail_missing_stock">Chybí původní APK pro instalační zavedení.</string>
-    <string name="mount_split_not_supported">Instalátor s přetečením neobsahuje podporu pro rozdělené APK. Použijte správce systému namísto toho.</string>
     <string name="install_timeout_message">Instalace nebyla dokončena. Zkontrolujte dialog systémového instalátoru a zkuste to znovu.</string>
-    <string name="uninstall_timeout_message">Uninstalace nebyla dokončena. Zkontrolujte dialóg uninstalace a zkuste to znovu.</string>
-    <string name="reinstall_app_fail">Selhání reinstalace aplikace: %s</string>
-    <string name="uninstall_app_fail">Selhání při odinstalování aplikace: %s</string>
     <string name="save_apk_success">APK uložen</string>
-    <string name="saved_app_export_success">Exportována upravená aplikace</string>
     <string name="saved_app_export_failed">Selhání při exportu upravené aplikace</string>
     <string name="saved_app_removed_toast">Odstraněna uložená upravená aplikace</string>
     <string name="saved_app_copy_removed_toast">Odstraněna uložená kopie</string>
     <string name="saved_app_launch_unavailable">Nejprve nainstalujte aplikaci.</string>
-    <string name="saved_app_install_success">Uložená aplikace nainstalována</string>
-    <string name="saved_app_install_failed">Selhala instalace uložené aplikace</string>
-    <string name="saved_app_install_missing">Uložená APK nenalezena</string>
     <string name="package_name">Název balíčku</string>
     <string name="failed_to_mount">Selhalo připojení: %s</string>
     <string name="failed_to_unmount">Selhalo odejmutí: %s</string>
@@ -413,6 +404,10 @@ Rozměry obrázků musí být následující:
     <string name="installer_external_timeout">%1$s nepotvrdil instalaci. Zkontrolujte jinou aplikaci a zkuste to znovu.</string>
     <string name="installer_external_success">%1$s nahlásil úspěšnou instalaci.</string>
     <string name="installer_external_finished_no_change">Externí instalátor dokončil instalaci bez změny aplikace. Zkontrolujte instalátor pro zprávu o chybě a zkuste to znovu.</string>
+    <string name="installer_unavailable_title">%s nedostupná</string>
+    <string name="installer_unavailable_message">Vaší instalátor (%s) je momentální nedostupný. Mžete vyřešit problém a zkuste znovu, nebo použijte standardní instalátor namísto toho.</string>
+    <string name="installer_unavailable_shizuku_hint">Ujistěte se, že Shizuku je spuštěn a že je povoleno pro tuto aplikaci.</string>
+    <string name="installer_use_standard">Použít standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Výkonnost</string>
     <string name="settings_system_process_runtime">Doba běhu procesů</string>
@@ -492,6 +487,7 @@ Otevřený projekt v jádru, Morphe se vyvíjí na základě zpětné vazby a p�
     <string name="reset">Resetovat</string>
     <string name="warning">Varování</string>
     <string name="error_">Chyba</string>
+    <string name="retry">Zkuste znova</string>
     <string name="add">Přidat</string>
     <string name="close">Zavřít</string>
     <string name="clear">Vyčistit</string>
@@ -563,6 +559,4 @@ Chcete přesto pokračovat?"</string>
     <string name="hours_ago">před %sh</string>
     <string name="days_ago">před %sd</string>
     <string name="invalid_date">Neplatné datum</string>
-    <string name="plugin_host_permission_label">Hostitel pluginů Morphe</string>
-    <string name="plugin_host_permission_description">Používá se k ovládání přístupu k pluginům Morphe. Toto má pouze Morphe.</string>
 </resources>

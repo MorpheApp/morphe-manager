@@ -245,21 +245,12 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patcher_process_exit_message">Procesul de patch-uri s-a încheiat cu codul %1$d.</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
-    <string name="install_app_fail_missing_stock">Lipsește APK-ul original pentru instalare cu root.</string>
-    <string name="mount_split_not_supported">Instalatorul cu rădăcini nu susține pachetele divizate. Utilizați instalatorul predefinit în schimb.</string>
     <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul de instalare al sistemului și încercați din nou.</string>
-    <string name="uninstall_timeout_message">Dezinstalarea nu s-a finalizat. Verificați dialogul de dezinstalare și încercați din nou.</string>
-    <string name="reinstall_app_fail">Nu s-a putut reinstala aplicația: %s</string>
-    <string name="uninstall_app_fail">Nu s-a putut dezinstala aplicația: %s</string>
     <string name="save_apk_success">APK salvat</string>
-    <string name="saved_app_export_success">Aplicație modificată exportată</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
     <string name="saved_app_removed_toast">Aplicație modificată salvată eliminată</string>
     <string name="saved_app_copy_removed_toast">Copie salvată eliminată</string>
     <string name="saved_app_launch_unavailable">Instalează aplicația înainte de a o deschide.</string>
-    <string name="saved_app_install_success">Aplicație salvată instalată</string>
-    <string name="saved_app_install_failed">Instalarea aplicației salvate a eșuat</string>
-    <string name="saved_app_install_missing">APK salvat negăsit</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
@@ -413,6 +404,10 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verifică cealaltă aplicație și încearcă din nou.</string>
     <string name="installer_external_success">%1$s a raportat o instalare reușită.</string>
     <string name="installer_external_finished_no_change">\"%1$s\" a fost instalat fără a instala aplicația. Verificați instalatorul pentru mesajul de eroare și încercați din nou.</string>
+    <string name="installer_unavailable_title">%s indisponibil</string>
+    <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți rezolva problema și încerca din nou sau folosi instalatorul standard.</string>
+    <string name="installer_unavailable_shizuku_hint">Asigurați-vă că Shizuku rulează și că permisiunea este acordată aplicației.</string>
+    <string name="installer_use_standard">Folosiånd standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performanță</string>
     <string name="settings_system_process_runtime">Timp de rulare</string>
@@ -492,6 +487,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="reset">Resetare</string>
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
+    <string name="retry">Reânâmârâ</string>
     <string name="add">Adăugare</string>
     <string name="close">Închidere</string>
     <string name="clear">Golire</string>
@@ -563,6 +559,4 @@ Doriți totuși să continuați?"</string>
     <string name="hours_ago">acum %s ore</string>
     <string name="days_ago">acum %s zile</string>
     <string name="invalid_date">Dată invalidă</string>
-    <string name="plugin_host_permission_label">Gazdă plugin Morphe</string>
-    <string name="plugin_host_permission_description">Folosit pentru a controla accesul la pluginurile Morphe. Doar Morphe deține acest lucru.</string>
 </resources>

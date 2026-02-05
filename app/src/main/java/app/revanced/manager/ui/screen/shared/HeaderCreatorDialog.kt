@@ -207,7 +207,7 @@ fun HeaderCreatorDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.header_creator_title),
+        title = stringResource(R.string.header_creator_create),
         compactPadding = false,
         footer = {
             Column(
@@ -294,9 +294,9 @@ fun HeaderCreatorDialog(
 
             MorpheDialogButton(
                 text = if (lightHeaderUri == null)
-                    stringResource(R.string.header_creator_select_light)
+                    stringResource(R.string.adaptive_icon_select_image)
                 else
-                    stringResource(R.string.header_creator_change_light),
+                    stringResource(R.string.adaptive_icon_change_image),
                 onClick = { lightHeaderPicker.launch("image/*") },
                 icon = Icons.Outlined.LightMode,
                 modifier = Modifier.fillMaxWidth()
@@ -349,9 +349,9 @@ fun HeaderCreatorDialog(
 
             MorpheDialogButton(
                 text = if (darkHeaderUri == null)
-                    stringResource(R.string.header_creator_select_dark)
+                    stringResource(R.string.adaptive_icon_select_image)
                 else
-                    stringResource(R.string.header_creator_change_dark),
+                    stringResource(R.string.adaptive_icon_change_image),
                 onClick = { darkHeaderPicker.launch("image/*") },
                 icon = Icons.Outlined.DarkMode,
                 modifier = Modifier.fillMaxWidth()

@@ -2,9 +2,9 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Altre app</string>
-    <string name="home_not_patched_yet">Non ancora aggiornato</string>
+    <string name="home_not_patched_yet">Non ancora patchato</string>
     <string name="home_no_patches_available">Nessuna patch disponibile</string>
-    <string name="home_default_source_disabled">La sorgente Morphe è disabilitata. Abilitala nel foglio delle sorgenti patch o utilizza la modalità esperta.</string>
+    <string name="home_default_source_disabled">La sorgente delle patch di Morphe è disabilitata. Abilitala nel foglio delle sorgenti delle Patch o utilizza la modalità Esperta.</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">L\'autorizzazione all\'installazione dell\'app deve essere concessa in anticipo per evitare un bug nel sistema Android 11 che influenzerà negativamente l\'esperienza utente.</string>
     <!-- Home Screen - Update Notifications -->
@@ -21,9 +21,9 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quale app vuoi installare?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Pronti a rendere le app leggendarie di nuovo?</string>
+    <string name="home_greeting_2">Pronto a rendere le app nuovamente leggendarie?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Allaccia le cinture, è il momento di installare</string>
+    <string name="home_greeting_3">Allaccia le cinture, è il momento di patchare</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Un altro giorno, un altro capolavoro bloccato dalla pubblicità</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -31,7 +31,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Rendiamo il comportamento delle tue app più accettabile</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7">Oggi la previsione: 100% di probabilit√† di patching</string>
+    <string name="home_greeting_7">Oggi la previsione: 100% di probabilità di patchare</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Pronti a trasformare il deludente in eccezionale?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -39,7 +39,7 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Alimentato da caffeina e buoni aggiornamenti</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Fonte patch</string>
+    <string name="sources_management_title">Fonte delle patch</string>
     <string name="sources_management_subtitle">%d fonti installate</string>
     <string name="sources_management_open_in_browser">Apri in browser</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
@@ -245,21 +245,12 @@ Sei sicuro di voler procedere?"</string>
     <string name="patcher_process_exit_message">Il processo di patching è terminato con il codice %1$d.</string>
     <string name="install_app_success">Installato correttamente</string>
     <string name="install_app_fail">Impossibile installare l\'app: %s</string>
-    <string name="install_app_fail_missing_stock">L\'APK originale manca per un installazione con montaggio.</string>
-    <string name="mount_split_not_supported">Lo installatore di montaggio radicato non supporta gli APK divisi. Usa lo installatore di sistema invece.</string>
     <string name="install_timeout_message">L\'installazione non è terminata. Controlla la finestra di dialogo dell\'installer di sistema e riprova.</string>
-    <string name="uninstall_timeout_message">La disinstallazione non è stata completata. Controlla la finestra di dialogo di disinstallazione e riprova.</string>
-    <string name="reinstall_app_fail">Impossibile reinstallare l\'app: %s</string>
-    <string name="uninstall_app_fail">Impossibile disinstallare l\'app: %s</string>
     <string name="save_apk_success">APK Salvato</string>
-    <string name="saved_app_export_success">App patchata esportata</string>
     <string name="saved_app_export_failed">Impossibile esportare l\'app patchata</string>
     <string name="saved_app_removed_toast">App patchata salvata rimossa</string>
     <string name="saved_app_copy_removed_toast">Copia salvata rimossa</string>
     <string name="saved_app_launch_unavailable">Installa l\'app prima di aprirla.</string>
-    <string name="saved_app_install_success">App salvata installata</string>
-    <string name="saved_app_install_failed">Installazione app salvata non riuscita</string>
-    <string name="saved_app_install_missing">APK salvato non trovato</string>
     <string name="package_name">Nome pacchetto</string>
     <string name="failed_to_mount">Impossibile montare: %s</string>
     <string name="failed_to_unmount">Impossibile smontare: %s</string>
@@ -269,7 +260,7 @@ Sei sicuro di voler procedere?"</string>
     <string name="system">Sistema</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Animazione di sfondo</string>
-    <string name="settings_appearance_background_circles">Circoli</string>
+    <string name="settings_appearance_background_circles">Cerchi</string>
     <string name="settings_appearance_background_rings">Anelli</string>
     <string name="settings_appearance_background_waves">Onde</string>
     <string name="settings_appearance_background_space">Spazio</string>
@@ -413,6 +404,10 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_external_timeout">%1$s non ha confermato l\'installazione. Controlla l\'altra app e riprova.</string>
     <string name="installer_external_success">%1$s ha segnalato un\'installazione riuscita.</string>
     <string name="installer_external_finished_no_change">%1$s completato senza installare l\'applicazione. Controlla il installatore per un messaggio d\'errore e riprova.</string>
+    <string name="installer_unavailable_title">%s indisponibile</string>
+    <string name="installer_unavailable_message">Il tuo installer preferito (%s) è attualmente indisponibile. Puoi risolvere il problema e riprovare o utilizzare l\'installer standard.</string>
+    <string name="installer_unavailable_shizuku_hint">Assicurati che Shizuku sia in esecuzione e che il permesso sia concesso a questa app.</string>
+    <string name="installer_use_standard">Usa standard</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestazioni</string>
     <string name="settings_system_process_runtime">Processo di esecuzione</string>
@@ -452,10 +447,10 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_system_export_manager_settings_fail">Log esportati</string>
     <string name="settings_system_export_manager_settings_success">Gestione archiviazione</string>
     <!-- Settings - System Tab - Debug Section -->
-    <string name="settings_system_debug">%d APK(s)</string>
-    <string name="settings_system_export_debug_logs">Esporta i log di debug</string>
+    <string name="settings_system_debug">Debug</string>
+    <string name="settings_system_export_debug_logs">Esporta i logs di debug</string>
     <string name="settings_system_export_debug_logs_description">Pacchetti patch</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Pacchetti patch</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Lettura dei logs non riuscita (codice di uscita %d)</string>
     <string name="settings_system_export_debug_logs_export_failed">Esportazione dei log non riuscita</string>
     <string name="settings_system_export_debug_logs_export_success">Nessun pacchetto patch salvato</string>
     <!-- Settings - System Tab - Storage Management Section -->
@@ -492,6 +487,7 @@ Open-source nel suo nucleo, Morphe prospera grazie al feedback e ai contributi d
     <string name="reset">Reimposta</string>
     <string name="warning">Attenzione</string>
     <string name="error_">Rimonta</string>
+    <string name="retry">Riprova</string>
     <string name="add">Aggiungi</string>
     <string name="close">Chiudi</string>
     <string name="clear">Cancella</string>
@@ -563,6 +559,4 @@ Vuoi comunque continuare?"</string>
     <string name="hours_ago">%sh fa</string>
     <string name="days_ago">%sd fa</string>
     <string name="invalid_date">Data non valida</string>
-    <string name="plugin_host_permission_label">Host plugin Morphe</string>
-    <string name="plugin_host_permission_description">Utilizzato per controllare l\'accesso ai plugin Morphe. Solo Morphe ha questo.</string>
 </resources>

@@ -246,21 +246,12 @@
     <string name="patcher_process_exit_message">תהליך ה-Patcher הסתיים עם קוד %1$d.</string>
     <string name="install_app_success">הותקן בהצלחה</string>
     <string name="install_app_fail">נכשל להתקין את האפליקציה: %s</string>
-    <string name="install_app_fail_missing_stock">No hay APK original para instalación по монтированию.</string>
-    <string name="mount_split_not_supported">Приложение включает разъединение APK. Используйте приложение для системных монтажников.</string>
     <string name="install_timeout_message">ההתקנה לא הסתיימה. בדוק את תיבת הדו-שיח של מתקין המערכת ונסה שוב.</string>
-    <string name="uninstall_timeout_message">Начало операции отмены не закончилось. Осмотрите привязку отмены и попробуйте ещё раз.</string>
-    <string name="reinstall_app_fail">נכשל להתקין מחדש את האפליקציה: %s</string>
-    <string name="uninstall_app_fail">נכשל להסיר את האפליקציה: %s</string>
     <string name="save_apk_success">APK נשמר</string>
-    <string name="saved_app_export_success">אפליקציה מתוקנת יצאה</string>
     <string name="saved_app_export_failed">כשל בייצוא האפליקציה המתוקנת</string>
     <string name="saved_app_removed_toast">אפליקציה מתוקנת שנשמרה הוסרה</string>
     <string name="saved_app_copy_removed_toast">עותק שמור הוסר</string>
     <string name="saved_app_launch_unavailable">התקן את האפליקציה לפני פתיחתה.</string>
-    <string name="saved_app_install_success">אפליקציה שמורה הותקנה</string>
-    <string name="saved_app_install_failed">כשל בהתקנת האפליקציה השמורה</string>
-    <string name="saved_app_install_missing">קובץ ה-APK השמור לא נמצא</string>
     <string name="package_name">שם חבילה</string>
     <string name="failed_to_mount">כשל בהרכבה: %s</string>
     <string name="failed_to_unmount">כשל בפירוק: %s</string>
@@ -376,6 +367,10 @@
     <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב.</string>
     <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת.</string>
     <string name="installer_external_finished_no_change">%1$s завершено без instalación la app. Verificar el instalador para un mensaje de error y volver a intentarlo.</string>
+    <string name="installer_unavailable_title">%s אינו זמין</string>
+    <string name="installer_unavailable_message">התקן המועדף שלך (%s) אינו זמין כרגע. תוכל לתקן את הבעיה ולנסות שוב, או להשתמש בתקן סטנדרטי במקום זאת.</string>
+    <string name="installer_unavailable_shizuku_hint">אסור להתקן שיזוקה ורשאות מוגדרות לאפליקציה זו.</string>
+    <string name="installer_use_standard">השתמש בסטנדרטי</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">מוצא איבוד... </string>
     <string name="settings_system_process_runtime">מוצא איבוד... </string>
@@ -453,6 +448,7 @@
     <string name="reset">איפוס</string>
     <string name="warning">אזהרה</string>
     <string name="error_">שגגה</string>
+    <string name="retry">נסה שוב</string>
     <string name="add">הוסף</string>
     <string name="close">סגור</string>
     <string name="clear">נקה</string>
@@ -524,6 +520,4 @@
     <string name="hours_ago">לפני %sh</string>
     <string name="days_ago">לפני %sd</string>
     <string name="invalid_date">תאריך לא חוקי</string>
-    <string name="plugin_host_permission_label">מארח פלאגין של Morphe</string>
-    <string name="plugin_host_permission_description">משמש לשליטה בגישה לפלאגינים של Morphe. רק ל-Morphe יש זאת.</string>
 </resources>

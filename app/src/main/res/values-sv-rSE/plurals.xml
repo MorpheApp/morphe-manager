@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d plåster</item>
-        <item quantity="other">%d plåster</item>
+        <item quantity="one">%d korrigering</item>
+        <item quantity="other">%d korrigeringar</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Kör %d plåster</item>
-        <item quantity="other">Kör %d plåster</item>
+        <item quantity="one">Kör %d korrigering</item>
+        <item quantity="other">Kör %d korrigeringar</item>
     </plurals>
 </resources>
