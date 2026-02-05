@@ -41,6 +41,7 @@ class PreferencesManager(
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
+    val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install",false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 

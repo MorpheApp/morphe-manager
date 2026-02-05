@@ -287,6 +287,9 @@ Are you sure you want to proceed?"</string>
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
+    <string name="patcher_select_installer_title">Select installer</string>
+    <string name="patcher_select_installer_description">Choose which installer to use for this installation</string>
+
     <!-- Settings -->
     <string name="appearance">Appearance</string>
     <string name="advanced">Advanced</string>
@@ -469,6 +472,8 @@ Details: %2$s"</string>
     <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead.</string>
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app.</string>
     <string name="installer_use_standard">Use standard</string>
+    <string name="settings_prompt_installer_on_install">Prompt installer on install</string>
+    <string name="settings_prompt_installer_on_install_description">Show installer selection dialog each time you install a patched app</string>
 
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performance</string>

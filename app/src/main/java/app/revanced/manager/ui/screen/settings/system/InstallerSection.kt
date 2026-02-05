@@ -42,6 +42,7 @@ fun InstallerSection(
     settingsViewModel: SettingsViewModel,
     onShowInstallerDialog: () -> Unit
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         installerManager.parseToken(primaryPreference)
@@ -79,11 +80,45 @@ fun InstallerSection(
         ?: installerManager.describeEntry(primaryToken, installTarget)
         ?: primaryEntries.firstOrNull()
 
-    if (primaryEntry != null) {
-        InstallerSettingsItem(
-            title = stringResource(R.string.installer),
-            entry = primaryEntry,
-            onClick = onShowInstallerDialog
+    // Prompt installer on install preference
+    val promptInstallerOnInstall by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
+
+    // Localized strings for accessibility
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
+
+    Column {
+        if (primaryEntry != null) {
+            InstallerSettingsItem(
+                title = stringResource(R.string.installer),
+                entry = primaryEntry,
+                onClick = onShowInstallerDialog
+            )
+        }
+
+        MorpheSettingsDivider()
+
+        // Prompt installer toggle
+        RichSettingsItem(
+            onClick = {
+                coroutineScope.launch {
+                    settingsViewModel.prefs.promptInstallerOnInstall.update(!promptInstallerOnInstall)
+                }
+            },
+            leadingContent = {
+                MorpheIcon(icon = Icons.Outlined.Android)
+            },
+            title = stringResource(R.string.settings_prompt_installer_on_install),
+            subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
+            trailingContent = {
+                Switch(
+                    checked = promptInstallerOnInstall,
+                    onCheckedChange = null,
+                    modifier = Modifier.semantics {
+                        stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
+                    }
+                )
+            }
         )
     }
 }
@@ -177,7 +212,7 @@ private fun InstallerSettingsItem(
  * Dialog for selecting installer
  */
 @Composable
-private fun InstallerSelectionDialog(
+fun InstallerSelectionDialog(
     title: String,
     options: List<InstallerManager.Entry>,
     selected: InstallerManager.Token,
@@ -269,11 +304,11 @@ private fun InstallerSelectionDialog(
 }
 
 /**
- * Individual installer option for dialog
+ * Single installer option item in dialog
  */
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
-private fun InstallerOptionItem(
+fun InstallerOptionItem(
     option: InstallerManager.Entry,
     selected: Boolean,
     enabled: Boolean,
@@ -355,7 +390,7 @@ private fun InstallerOptionItem(
  * Installer icon preview component
  */
 @Composable
-private fun InstallerIconPreview(
+fun InstallerIconPreview(
     drawable: Drawable?,
     selected: Boolean,
     enabled: Boolean,
@@ -402,7 +437,7 @@ private fun InstallerIconPreview(
 /**
  * Helper function to ensure valid selection and remove duplicates
  */
-private fun ensureValidEntries(
+fun ensureValidEntries(
     entries: List<InstallerManager.Entry>,
     token: InstallerManager.Token,
     installerManager: InstallerManager,
@@ -438,7 +473,7 @@ private fun ensureValidEntries(
 /**
  * Helper function to compare installer tokens
  */
-private fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
+fun tokensEqual(a: InstallerManager.Token?, b: InstallerManager.Token?): Boolean = when {
     a === b -> true
     a == null || b == null -> false
     a is InstallerManager.Token.Component && b is InstallerManager.Token.Component ->
