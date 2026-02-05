@@ -40,6 +40,7 @@ import app.revanced.manager.ui.screen.settings.system.AboutDialog
 import app.revanced.manager.ui.screen.settings.AdvancedTabContent
 import app.revanced.manager.ui.screen.settings.AppearanceTabContent
 import app.revanced.manager.ui.screen.settings.SystemTabContent
+import app.revanced.manager.ui.screen.settings.system.ChangelogDialog
 import app.revanced.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
 import app.revanced.manager.ui.screen.settings.system.KeystoreCredentialsDialog
 import app.revanced.manager.ui.viewmodel.*
@@ -49,6 +50,7 @@ import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 /**
  * Settings tabs for bottom navigation
@@ -73,7 +75,10 @@ fun SettingsScreen(
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     homeViewModel: HomeViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
-    settingsViewModel: SettingsViewModel = koinViewModel()
+    settingsViewModel: SettingsViewModel = koinViewModel(),
+    updateViewModel: UpdateViewModel = koinViewModel {
+        parametersOf(false)
+    }
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -101,6 +106,7 @@ fun SettingsScreen(
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
     var showInstallerDialog by remember { mutableStateOf(false) }
+    var showChangelogDialog by remember { mutableStateOf(false) }
 
     // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -175,6 +181,14 @@ fun SettingsScreen(
         )
     }
 
+    // Manager changelog dialog
+    if (showChangelogDialog) {
+        ChangelogDialog(
+            onDismiss = { showChangelogDialog = false },
+            releaseInfo = updateViewModel.releaseInfo
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -214,6 +228,7 @@ fun SettingsScreen(
                     onExportSettings = { exportSettings("morphe_manager_settings.json") },
                     onExportDebugLogs = { exportDebugLogs(importExportViewModel.debugLogFileName) },
                     onAboutClick = { showAboutDialog = true },
+                    onChangelogClick = { showChangelogDialog = true },
                     prefs = prefs
                 )
             }

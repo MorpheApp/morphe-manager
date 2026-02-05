@@ -8,8 +8,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -24,8 +25,10 @@ import app.morphe.manager.R
 import app.revanced.manager.ui.screen.shared.MorpheSettingsDivider
 import app.revanced.manager.ui.screen.shared.RichSettingsItem
 import app.revanced.manager.ui.screen.shared.SettingsItem
+import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import app.revanced.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * About section
@@ -34,7 +37,9 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun AboutSection(
-    onAboutClick: () -> Unit
+    onAboutClick: () -> Unit,
+    onChangelogClick: () -> Unit,
+    updateViewModel: UpdateViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
 
@@ -68,9 +73,25 @@ fun AboutSection(
 
         MorpheSettingsDivider()
 
+        // Changelog item
+        SettingsItem(
+            icon = Icons.AutoMirrored.Outlined.Article,
+            title = stringResource(R.string.changelog),
+            description = stringResource(R.string.changelog_description),
+            onClick = {
+                if (!updateViewModel.isConnected) {
+                    context.toast(context.getString(R.string.no_network_toast))
+                    return@SettingsItem
+                }
+                onChangelogClick()
+            }
+        )
+
+        MorpheSettingsDivider()
+
         // Share Website item
         SettingsItem(
-            icon = Icons.Outlined.Language,
+            icon = Icons.Outlined.Public,
             title = stringResource(R.string.settings_system_share_website),
             description = stringResource(R.string.settings_system_share_website_description),
             onClick = {

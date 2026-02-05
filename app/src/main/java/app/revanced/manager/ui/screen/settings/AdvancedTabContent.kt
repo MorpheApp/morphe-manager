@@ -17,11 +17,14 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.revanced.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
+import app.revanced.manager.ui.viewmodel.UpdateViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * Advanced tab content
@@ -31,6 +34,7 @@ fun AdvancedTabContent(
     usePrereleases: State<Boolean>,
     patchOptionsViewModel: PatchOptionsViewModel,
     homeViewModel: HomeViewModel,
+    updateViewModel: UpdateViewModel = koinViewModel(),
     prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
@@ -40,6 +44,8 @@ fun AdvancedTabContent(
     // Track if expert mode was just enabled to show the notice
     var showExpertModeNotice by remember { mutableStateOf(false) }
     var previousExpertMode by remember { mutableStateOf(useExpertMode) }
+    val gitHubPat by prefs.gitHubPat.getAsState()
+    val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
 
     // Detect expert mode changes
     LaunchedEffect(useExpertMode) {
@@ -75,6 +81,8 @@ fun AdvancedTabContent(
                     prefs.useManagerPrereleases.update(newValue)
                     prefs.managerAutoUpdates.update(newValue)
                     homeViewModel.updateMorpheBundleWithChangelogClear()
+                    updateViewModel.clearChangelogCache()
+                    updateViewModel.reloadChangelog()
                     homeViewModel.checkForManagerUpdates()
                     patchOptionsViewModel.refresh()
                 }
@@ -122,6 +130,17 @@ fun AdvancedTabContent(
                         stateDescription = if (useExpertMode) enabledState else disabledState
                     }
                 )
+            }
+        )
+
+        GitHubPatSettingsItem(
+            currentPat = gitHubPat,
+            currentIncludeInExport = includeGitHubPatInExports,
+            onSave = { pat, include ->
+                scope.launch {
+                    prefs.gitHubPat.update(pat)
+                    prefs.includeGitHubPatInExports.update(include)
+                }
             }
         )
 

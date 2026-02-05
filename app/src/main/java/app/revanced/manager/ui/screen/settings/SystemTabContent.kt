@@ -44,6 +44,7 @@ fun SystemTabContent(
     onExportSettings: () -> Unit,
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
+    onChangelogClick: () -> Unit,
     prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
@@ -288,7 +289,10 @@ fun SystemTabContent(
         )
 
         SectionCard {
-            AboutSection(onAboutClick = onAboutClick)
+            AboutSection(
+                onAboutClick = onAboutClick,
+                onChangelogClick = onChangelogClick
+            )
         }
     }
 }
