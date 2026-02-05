@@ -406,7 +406,7 @@ private fun DownloadProgressSection(
  * Release information section with version, date, and changelog
  */
 @Composable
-private fun ReleaseInfoSection(
+internal fun ReleaseInfoSection(
     releaseInfo: ReVancedAsset,
     textColor: Color
 ) {

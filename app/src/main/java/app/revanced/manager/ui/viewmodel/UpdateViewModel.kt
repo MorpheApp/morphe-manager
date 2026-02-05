@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.platform.NetworkInfo
@@ -26,6 +27,7 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.ShizukuInstaller
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.network.utils.getOrNull
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.toast
 import app.revanced.manager.util.uiSafe
@@ -41,7 +43,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class UpdateViewModel(
-    private val downloadOnScreenEntry: Boolean
+    private val downloadOnScreenEntry: Boolean,
+    private val network: NetworkInfo,
 ) : ViewModel(), KoinComponent {
     private val app: Application by inject()
     private val reVancedAPI: ReVancedAPI by inject()
@@ -80,15 +83,23 @@ class UpdateViewModel(
     private val location = fs.tempDir.resolve("updater.apk")
     private val job = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
-            releaseInfo = reVancedAPI.getAppUpdate() ?: throw Exception("No update available")
+            releaseInfo = reVancedAPI.getLatestAppInfo().getOrNull()
 
             if (downloadOnScreenEntry) {
-                downloadUpdate()
+                val isUpdate = releaseInfo?.version?.removePrefix("v") != BuildConfig.VERSION_NAME
+                if (isUpdate) {
+                    downloadUpdate()
+                } else {
+                    state = State.CAN_DOWNLOAD
+                }
             } else {
                 state = State.CAN_DOWNLOAD
             }
         }
     }
+
+    val isConnected: Boolean
+        get() = network.isConnected()
 
     fun downloadUpdate(ignoreInternetCheck: Boolean = false) = viewModelScope.launch {
         uiSafe(app, R.string.failed_to_download_update, "Failed to download update") {
@@ -352,6 +363,22 @@ class UpdateViewModel(
                 state = State.CAN_DOWNLOAD
                 canResumeDownload = false
             }
+        }
+    }
+
+    /**
+     * Clear changelog cache to force reload
+     */
+    fun clearChangelogCache() {
+        releaseInfo = null
+    }
+
+    /**
+     * Reload changelog with current prerelease settings
+     */
+    fun reloadChangelog() = viewModelScope.launch {
+        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
+            releaseInfo = reVancedAPI.getLatestAppInfo().getOrNull()
         }
     }
 }
