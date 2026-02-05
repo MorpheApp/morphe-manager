@@ -973,13 +973,7 @@ private fun DeleteConfirmDialog(
 
             // What will be deleted
             DeletionWarningBox(
-                warningText = stringResource(
-                    if (isSavedOnly) {
-                        R.string.home_app_info_saved_app_delete_warning
-                    } else {
-                        R.string.home_app_info_remove_app_warning
-                    }
-                )
+                warningText = stringResource(R.string.home_app_info_remove_app_warning)
             ) {
                 if (isSavedOnly) {
                     // Saved app - only delete patched APK

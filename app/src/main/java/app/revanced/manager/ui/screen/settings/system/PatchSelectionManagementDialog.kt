@@ -392,7 +392,7 @@ private fun DeleteSelectionConfirmationDialog(
 
             // What will be deleted
             DeletionWarningBox(
-                warningText = stringResource(R.string.settings_system_patch_selection_delete_warning)
+                warningText = stringResource(R.string.home_app_info_remove_app_warning)
             ) {
                 if (patchCount > 0) {
                     DeleteListItem(

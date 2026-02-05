@@ -174,7 +174,6 @@ Are you sure you want to proceed?"</string>
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Are you sure you want to uninstall this app?</string>
-    <string name="home_app_info_saved_app_delete_warning">This will permanently delete:</string>
     <string name="home_app_info_remove_app_warning">This will permanently delete:</string>
     <string name="home_app_info_delete_item_database">Database entry</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
@@ -551,7 +550,6 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selections_has_options">Has options</string>
     <string name="settings_system_patch_selections_patches_options">Patches options</string>
     <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
-    <string name="settings_system_patch_selection_delete_warning">This will permanently delete:</string>
     <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
 
     <!-- Settings - System Tab - About Section -->
