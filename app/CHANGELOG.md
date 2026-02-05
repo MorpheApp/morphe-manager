@@ -1,3 +1,11 @@
+# app [1.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-02-05)
+
+
+### Features
+
+* Add GitHub repo as a patch bundle source ([#157](https://github.com/MorpheApp/morphe-manager/issues/157)) ([ec0f741](https://github.com/MorpheApp/morphe-manager/commit/ec0f7415964d6982925d7c097535d9032af1330a))
+* Add stored patch selection dialog ([#167](https://github.com/MorpheApp/morphe-manager/issues/167)) ([c36b424](https://github.com/MorpheApp/morphe-manager/commit/c36b42436ddde47b6bcea8c8f3b5a8eea50137ac))
+
 # app [1.6.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.5.0...v1.6.0-dev.1) (2026-02-04)
 
 
