@@ -84,6 +84,7 @@ fun AdvancedTabContent(
                     updateViewModel.clearChangelogCache()
                     updateViewModel.reloadChangelog()
                     homeViewModel.checkForManagerUpdates()
+                    patchOptionsViewModel.refresh()
                 }
             },
             showBorder = true,
