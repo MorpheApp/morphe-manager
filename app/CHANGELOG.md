@@ -1,3 +1,10 @@
+# app [1.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2026-02-06)
+
+
+### Features
+
+* Add installer prompt on patcher screen ([#170](https://github.com/MorpheApp/morphe-manager/issues/170)) ([b93719b](https://github.com/MorpheApp/morphe-manager/commit/b93719b9181f44760648fc1a788e4dd9ca3a8580))
+
 # app [1.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2026-02-06)
 
 
