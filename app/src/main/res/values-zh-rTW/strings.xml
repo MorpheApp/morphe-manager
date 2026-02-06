@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">重新命名修補來源</string>
     <string name="sources_dialog_duplicate_name_error">已存在名為 %s 的修補來源</string>
     <string name="sources_dialog_missing_error">無法更新此補丁源</string>
-    <string name="sources_dialog_disabled_toast">已停用 %d 個修補來源</string>
-    <string name="sources_dialog_enabled_toast">已啟用 %d 個修補來源</string>
     <string name="sources_dialog_view_any_version">任何版本</string>
     <string name="sources_dialog_view_any_package">任何套件</string>
     <string name="sources_dialog_add_source">新增修補來源</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">無法下載修補來源：%s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">您有原始的未修補 APK 嗎？</string>
-    <string name="home_apk_availability_dialog_description_simple">要修補 %1$s，您需要未修補的 APK，版本為：</string>
-    <string name="home_apk_availability_dialog_description_expert">您有未修補的 %1$s APK嗎？
+    <string name="home_apk_availability_dialog_simple">要修補 %1$s，您需要未修補的 APK，版本為：</string>
+    <string name="home_apk_availability_dialog_expert">"您有未修補的 %1$s APK嗎？
 
-兼容版本：</string>
+兼容版本："</string>
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_yes">是，我有</string>
@@ -475,7 +473,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">記錄已匯出</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">存儲管理</string>
-    <string name="settings_system_apks_count">已修補 APK</string>
     <string name="settings_system_apks_size">已修補 APK</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修補 APK</string>
@@ -495,7 +492,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">修補選擇</string>
     <string name="settings_system_patch_selections_description">管理已保存的修補選擇和選項。這些在應用程式卸載後仍然存在</string>
     <string name="settings_system_patch_selections_description_short">保留供未來修補使用</string>
-    <string name="settings_system_patch_selections_count">%1$d 個已保存的選擇</string>
     <string name="settings_system_patch_selections_empty">沒有已保存的修補選擇</string>
     <string name="settings_system_patch_selections_has_options">有選項</string>
     <string name="settings_system_patch_selections_patches_options">修補選擇</string>

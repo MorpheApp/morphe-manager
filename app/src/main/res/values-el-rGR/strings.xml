@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Αλλαγή ονόματος πηγής</string>
     <string name="sources_dialog_duplicate_name_error">Ένας πηγής με το ίδιο όνομα υπάρχει ήδη</string>
     <string name="sources_dialog_missing_error">Δυστυχώς, δεν μπόρεσα να ενημερώσω αυτή την πηγή πατς</string>
-    <string name="sources_dialog_disabled_toast">Απενεργοποίηση %d πηγής(ων)</string>
-    <string name="sources_dialog_enabled_toast">Ενεργοποίηση %d πηγής(ων)</string>
     <string name="sources_dialog_view_any_version">Οποιαδήποτε</string>
     <string name="sources_dialog_view_any_package">Οποιαδήποτε πακέτο</string>
     <string name="sources_dialog_add_source">Προσθήκη πηγής</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Αποτυχία εξαγωγής πηγών: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Έχετε το αρχικό μη τροποποιημένο APK;</string>
-    <string name="home_apk_availability_dialog_description_simple">Για να εφαρμόσετε το %1$s, χρειάζεστε ένα μη εφαρμοσμένο APK με έκδοση:</string>
-    <string name="home_apk_availability_dialog_description_expert">Έχετε ένα μη εφαρμοσμένο %1$s APK;
+    <string name="home_apk_availability_dialog_simple">Για να εφαρμόσετε το %1$s, χρειάζεστε ένα ακαταπαγής APK με έκδοση:</string>
+    <string name="home_apk_availability_dialog_expert">"Είτε έχετε ακαταπαγές %1$s APK;
 
-Συμβαστικές εκδόσεις:</string>
+Συμβαίνουσες εκδόσεις:"</string>
     <string name="home_apk_availability_recommended_label">Συνιστάται</string>
     <string name="home_apk_availability_unpatched_label">Ανεπανόρθωτο</string>
     <string name="home_apk_availability_yes">Ναι, το έχω</string>
@@ -475,7 +473,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">Αρχεία καταγραφής εξαγωγή</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Διαχείριση αποθηκεύσεων</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Σύνο μέγεθος: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Επιλεγμένες APKs</string>
@@ -495,7 +492,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών</string>
     <string name="settings_system_patch_selections_description">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών και επιλογών. Αυτές διατηρούνται μετά την απενεργοποίηση της εφαρμογής</string>
     <string name="settings_system_patch_selections_description_short">Αποθηκευμένο για μελλοντική επεξεργασία</string>
-    <string name="settings_system_patch_selections_count">%1$d αποθηκευμένη(μες) επιλογή(ες)</string>
     <string name="settings_system_patch_selections_empty">Δεν υπάρχουν αποθηκευμένες επιλογές επεξεργασιών</string>
     <string name="settings_system_patch_selections_has_options">Επιλέγει επιλογές επεξεργασιών</string>
     <string name="settings_system_patch_selections_patches_options">Επιλογές επεξεργασιών</string>

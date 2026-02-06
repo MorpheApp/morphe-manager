@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Agregar fuente de parches</string>
     <string name="sources_dialog_duplicate_name_error">Ya existe una fuente de parches con este nombre</string>
     <string name="sources_dialog_missing_error">No se pudo actualizar esta fuente de parche</string>
-    <string name="sources_dialog_disabled_toast">%d fuente(s) desactivada(s)</string>
-    <string name="sources_dialog_enabled_toast">%d fuente(s) activada(s)</string>
     <string name="sources_dialog_view_any_version">Cualquier versión</string>
     <string name="sources_dialog_view_any_package">Cualquier paquete</string>
     <string name="sources_dialog_add_source">Agregar fuente de parches</string>
@@ -72,10 +70,9 @@
     <string name="sources_download_fail">No se pudo descargar las fuentes: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">¿Tienes la APK original sin parchear?</string>
-    <string name="home_apk_availability_dialog_description_simple">Para parchear %1$s, necesitas un APK sin parchear con la versión:</string>
-    <string name="home_apk_availability_dialog_description_expert">¿Tienes un APK de %1$s sin parchear?
+    <string name="home_apk_availability_dialog_expert">"¿Tienes un APK de %1$s sin parchear?
 
-Versiones compatibles:</string>
+Versiones compatibles:"</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">No parcheado</string>
     <string name="home_apk_availability_yes">Sí, la tengo</string>
@@ -475,7 +472,6 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Administración de almacenamiento</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Tamaño total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs parcheados</string>
@@ -495,7 +491,6 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_system_patch_selections_title">Opciones de parche</string>
     <string name="settings_system_patch_selections_description">Administrar las selecciones y opciones de parches guardadas. Estas persisten después de la desinstalación de la aplicación</string>
     <string name="settings_system_patch_selections_description_short">Guardado para futuros parcheos</string>
-    <string name="settings_system_patch_selections_count">%1$d selección(es) guardada(s)</string>
     <string name="settings_system_patch_selections_empty">No hay selecciones de parches guardadas</string>
     <string name="settings_system_patch_selections_has_options">Tiene opciones</string>
     <string name="settings_system_patch_selections_patches_options">Opciones de parches</string>

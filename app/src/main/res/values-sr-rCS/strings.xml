@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Promeni ime</string>
     <string name="sources_dialog_duplicate_name_error">Već postoji patch sa ovim imenom</string>
     <string name="sources_dialog_missing_error">Nije moguće ažurirati ovaj patch izvor</string>
-    <string name="sources_dialog_disabled_toast">Onemogućeno %d izvor(s)</string>
-    <string name="sources_dialog_enabled_toast">Omogućeno %d izvor(s)</string>
     <string name="sources_dialog_view_any_version">Sve verzije</string>
     <string name="sources_dialog_view_any_package">Svi paketi</string>
     <string name="sources_dialog_add_source">Dodaj patch izvor</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Nijeleženo preuzimanje izvora: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Da li poseduješ originalni ne-zakrpljeni APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Da biste patchovali %1$s, potrebno je nepatchovani APK sa verzijom:</string>
-    <string name="home_apk_availability_dialog_description_expert">Da li imate nepatchovani %1$s APK?
+    <string name="home_apk_availability_dialog_simple">Da bi popravili %1$s, potrebno je nepotpisani APK sa verzijom:</string>
+    <string name="home_apk_availability_dialog_expert">"Imate nepotpisani %1$s APK?
 
-Kompatibilne verzije:</string>
+Kompatibilne verzije:"</string>
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Neopterećeno</string>
     <string name="home_apk_availability_yes">Da, imam ga</string>
@@ -439,7 +437,6 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_export_debug_logs_export_success">Lozove izvezeno</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Upravljanje skladištem</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Ukupna veličina: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patcheirani APK(s)</string>
@@ -459,7 +456,6 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
     <string name="settings_system_patch_selections_description">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
     <string name="settings_system_patch_selections_description_short">Sačuvano za buduće patchiranje</string>
-    <string name="settings_system_patch_selections_count">%1$d sačuvanih odabira</string>
     <string name="settings_system_patch_selections_empty">Nema sačuvanih patch-ova</string>
     <string name="settings_system_patch_selections_has_options">Ima opcije</string>
     <string name="settings_system_patch_selections_patches_options">Patch-ovi opcija</string>

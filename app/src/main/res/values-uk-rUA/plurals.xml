@@ -12,4 +12,28 @@
         <item quantity="many">Виконати %d патчів</item>
         <item quantity="other">Виконати %d патчі</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файлів</item>
+        <item quantity="many">%d APK файлів</item>
+        <item quantity="other">%d APK файли</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d збережений вибір патчів</item>
+        <item quantity="few">%d збережених виборів патчів</item>
+        <item quantity="many">%d збережених виборів патчів</item>
+        <item quantity="other">%d збережені вибори патчів</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Вимкнено джерело: %d</item>
+        <item quantity="few">Вимкнено джерел: %d</item>
+        <item quantity="many">Вимкнено джерел: %d</item>
+        <item quantity="other">Вимкнено джерел: %d</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Увімкнено джерело: %d</item>
+        <item quantity="few">Увімкнено джерел: %d</item>
+        <item quantity="many">Увімкнено джерел: %d</item>
+        <item quantity="other">Увімкнено джерел: %d</item>
+    </plurals>
 </resources>

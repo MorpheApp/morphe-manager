@@ -6,4 +6,16 @@
     <plurals name="patches_executed">
         <item quantity="other">执行 %d 个补丁</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%d 个 APK 文件</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="other">%d 个保存的选择</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="other">禁用了 %d 个源</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="other">启用了 %d 个源</item>
+    </plurals>
 </resources>

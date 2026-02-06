@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
     <string name="sources_dialog_duplicate_name_error">Sumber tambalan dengan nama ini sudah ada</string>
     <string name="sources_dialog_missing_error">Tidak dapat memperbarui sumber tambalan ini</string>
-    <string name="sources_dialog_disabled_toast">Menonaktifkan %d sumber</string>
-    <string name="sources_dialog_enabled_toast">Mengaktifkan %d sumber</string>
     <string name="sources_dialog_view_any_version">Versi apapun</string>
     <string name="sources_dialog_view_any_package">Paket apapun</string>
     <string name="sources_dialog_add_source">Tambah sumber tambalan</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Apakah Anda memiliki APK asli yang belum ditambal?</string>
-    <string name="home_apk_availability_dialog_description_simple">Untuk menambal %1$s, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
-    <string name="home_apk_availability_dialog_description_expert">Apakah Anda memiliki APK %1$s yang belum ditambal?
+    <string name="home_apk_availability_dialog_simple">Untuk menambal %1$s, Anda membutuhkan APK yang belum ditambal dengan versi:</string>
+    <string name="home_apk_availability_dialog_expert">"Apakah Anda memiliki APK %1$s yang belum ditambal?
 
-Versi yang cocok:</string>
+Versi yang cocok:"</string>
     <string name="home_apk_availability_recommended_label">Direkomendasikan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditambal</string>
     <string name="home_apk_availability_yes">Ya, saya sudah punya</string>
@@ -475,7 +473,6 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_export_debug_logs_export_success">Catatan diekspor</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Manajemen penyimpanan</string>
-    <string name="settings_system_apks_count">%d APK</string>
     <string name="settings_system_apks_size">Ukuran total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditambal</string>
@@ -495,7 +492,6 @@ Ukuran gambar harus sebagai berikut:
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
     <string name="settings_system_patch_selections_description">Kelola pemilihan tambalan dan pilihan yang disimpan. Hal ini tetap tersedia setelah menghapus pemasangan aplikasi</string>
     <string name="settings_system_patch_selections_description_short">Disimpan untuk penambalan di masa mendatang</string>
-    <string name="settings_system_patch_selections_count">%1$d pemilihan yang disimpan</string>
     <string name="settings_system_patch_selections_empty">Tidak ada pemilihan tambalan yang disimpan</string>
     <string name="settings_system_patch_selections_has_options">Memiliki pilihan</string>
     <string name="settings_system_patch_selections_patches_options">Pilihan tambalan</string>

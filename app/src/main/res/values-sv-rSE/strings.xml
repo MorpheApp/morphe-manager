@@ -49,8 +49,6 @@
     <string name="sources_dialog_rename">Byt namn på korrigeringskällan</string>
     <string name="sources_dialog_duplicate_name_error">Det finns redan en korrigeringskälla med det här namnet</string>
     <string name="sources_dialog_missing_error">Det gick inte att uppdatera den här korrigeringskällan</string>
-    <string name="sources_dialog_disabled_toast">Inaktiverade %d källor</string>
-    <string name="sources_dialog_enabled_toast">Aktiverade %d källor</string>
     <string name="sources_dialog_view_any_version">Valfri version</string>
     <string name="sources_dialog_view_any_package">Valfritt paket</string>
     <string name="sources_dialog_add_source">Lägg till korrigeringskälla</string>
@@ -422,7 +420,6 @@ Bildernas mått ska vara följande:
     <string name="settings_system_export_debug_logs_export_failed">Det gick inte att exportera loggar</string>
     <string name="settings_system_export_debug_logs_export_success">Loggar exporterade</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_apks_count">%d APK-fil(er)</string>
     <string name="settings_system_apks_size">Total storlek: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Korrigerade APK-filer</string>

@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Přejmenovat zdroj záplat</string>
     <string name="sources_dialog_duplicate_name_error">Zdroj záplat s tímto názvem již existuje</string>
     <string name="sources_dialog_missing_error">Nebylo možné aktualizovat tento zdroj ovladače</string>
-    <string name="sources_dialog_disabled_toast">Zakázáno %d zdrojů</string>
-    <string name="sources_dialog_enabled_toast">Povoleno %d zdrojů</string>
     <string name="sources_dialog_view_any_version">Koukni na jakoukoli verzi</string>
     <string name="sources_dialog_view_any_package">Koukni na jakýkoliv balíček</string>
     <string name="sources_dialog_add_source">Přidat zdroj záplat</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Máte původní nezáplatované APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Pro vylepšení %1$s je třeba nevyopatřené APK s verzí:</string>
-    <string name="home_apk_availability_dialog_description_expert">Máte nevyopatřenou %1$s APK?
+    <string name="home_apk_availability_dialog_simple">Chcete-li opravit %1$s, potřebujete neopravený APK s verzí:</string>
+    <string name="home_apk_availability_dialog_expert">"Máte neopravený %1$s APK?
 
-Kompatibilní verze:</string>
+Kompatibilní verze:"</string>
     <string name="home_apk_availability_recommended_label">Doporučené</string>
     <string name="home_apk_availability_unpatched_label">Neupravený</string>
     <string name="home_apk_availability_yes">Ano, mám ji</string>
@@ -475,7 +473,6 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_export_debug_logs_export_success">Protokoly exportovány</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Správa úložiště</string>
-    <string name="settings_system_apks_count">%d souborů APK</string>
     <string name="settings_system_apks_size">Celková velikost: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Záplatované soubory APK</string>
@@ -495,7 +492,6 @@ Rozměry obrázků musí být následující:
     <string name="settings_system_patch_selections_title">Výběry záplaty</string>
     <string name="settings_system_patch_selections_description">Spravujte uložené výběry záplaty a nastavení. Tyto se udržují po odinstalaci aplikace.</string>
     <string name="settings_system_patch_selections_description_short">Uložené pro budoucí záplaty</string>
-    <string name="settings_system_patch_selections_count">%1$d uložený výběr(ů)</string>
     <string name="settings_system_patch_selections_empty">Žádné uložené výběry záplaty</string>
     <string name="settings_system_patch_selections_has_options">Má nastavení</string>
     <string name="settings_system_patch_selections_patches_options">Nastavení záplaty</string>

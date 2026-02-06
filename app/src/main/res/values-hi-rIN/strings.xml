@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
     <string name="sources_dialog_duplicate_name_error">इस नाम के साथ पहले से एक पैच स्रोत मौजूद है</string>
     <string name="sources_dialog_missing_error">यह पैच स्रोत अपडेट नहीं हो सका</string>
-    <string name="sources_dialog_disabled_toast">%d स्रोत(स) अक्षमित किया गया</string>
-    <string name="sources_dialog_enabled_toast">%d स्रोत(स) सक्रिय किया गया</string>
     <string name="sources_dialog_view_any_version">कोई भी संस्करण</string>
     <string name="sources_dialog_view_any_package">कोई भी पैकेज</string>
     <string name="sources_dialog_add_source">पैच स्रोत जोड़ें</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">क्या आपके पास ओरिजिनल अनपैच्ड APK है?</string>
-    <string name="home_apk_availability_dialog_description_simple">पैच करना %1$s के लिए, आपका अपकैट संस्करण होना चाहिए:</string>
-    <string name="home_apk_availability_dialog_description_expert">आपका अपकैट %1$s है?
+    <string name="home_apk_availability_dialog_simple">पैटच %1$s के लिए, आपको एक अपटच्ड एपीके के साथ संस्करण आवश्यक है:</string>
+    <string name="home_apk_availability_dialog_expert">"क्या आपके पास एक अपटच्ड %1$s एपीके है?
 
-संगत संस्करण:</string>
+संगत संस्करण:"</string>
     <string name="home_apk_availability_recommended_label">सुझाया गया</string>
     <string name="home_apk_availability_unpatched_label">अपडेट किए बिना</string>
     <string name="home_apk_availability_yes">हां, मेरे पास है</string>
@@ -465,7 +463,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">लॉग्स एक्सपोर्ट किए गए</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">स्टोरेज प्रबंधन</string>
-    <string name="settings_system_apks_count">%d एपीके(s)</string>
     <string name="settings_system_apks_size">कुल आकार: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">पैच किए गए एपीके</string>
@@ -485,7 +482,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">पथच चयन</string>
     <string name="settings_system_patch_selections_description">सहेजे गए पथच चयन और विकल्प प्रबंधित करें। ये एप्लिकेशन अनइंस्टॉलेशन के बाद भी persis करें।</string>
     <string name="settings_system_patch_selections_description_short">भविष्य के पथच के लिए सहेजा गया</string>
-    <string name="settings_system_patch_selections_count">%1$d सहेजे गए चयन(स)</string>
     <string name="settings_system_patch_selections_empty">कोई सहेजा गया पथच चयन नहीं है</string>
     <string name="settings_system_patch_selections_has_options">विकल्प हैं</string>
     <string name="settings_system_patch_selections_patches_options">पथच विकल्प</string>

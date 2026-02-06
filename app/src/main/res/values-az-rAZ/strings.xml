@@ -49,8 +49,6 @@
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
     <string name="sources_dialog_duplicate_name_error">Bu adla yamaq mənbəsi artıq var</string>
     <string name="sources_dialog_missing_error">Bu yamaq mənbəsin yeniləmək mümkün olmadı</string>
-    <string name="sources_dialog_disabled_toast">%d mənbə(lər) qapalıdı</string>
-    <string name="sources_dialog_enabled_toast">%d mənbə(lər) aktivləşdirilib</string>
     <string name="sources_dialog_view_any_version">İstənilən versiya</string>
     <string name="sources_dialog_view_any_package">İstənilən paket</string>
     <string name="sources_dialog_add_source">Yamaq mənbəsi əlavə et</string>
@@ -70,10 +68,10 @@
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Sizin orijinal, yamaqsız APK-nız var?</string>
-    <string name="home_apk_availability_dialog_description_simple">%1$s yamağı üçün sizin versiyaya aid yamaqlanmayan APK-ya ehtiyacınız var:</string>
-    <string name="home_apk_availability_dialog_description_expert">Yamaqlanmayan %1$s APK-nız var?
+    <string name="home_apk_availability_dialog_simple">%1$s yamağı üçün sizin versiyaya aid yamaqlanmayan APK-ya ehtiyacınız var:</string>
+    <string name="home_apk_availability_dialog_expert">"Yamaqlanmayan %1$s APK-nız var?
 
-Uyuşan versiyalar:</string>
+Uyuşan versiyalar:"</string>
     <string name="home_apk_availability_recommended_label">Tövsiyə olunan</string>
     <string name="home_apk_availability_unpatched_label">Yamaqlanmayan</string>
     <string name="home_apk_availability_yes">Bəli, məndə var</string>
@@ -439,7 +437,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">Jurnallar ixrac olundu</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Saxlanc idarəçiliyi</string>
-    <string name="settings_system_apks_count">%d APK(lar)</string>
     <string name="settings_system_apks_size">Tam həcm: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Yamaqlanan APK-lar</string>
