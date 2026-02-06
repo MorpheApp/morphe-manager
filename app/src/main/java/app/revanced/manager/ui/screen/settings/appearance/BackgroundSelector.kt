@@ -65,7 +65,7 @@ fun BackgroundSelector(
 private fun getBackgroundIcon(type: BackgroundType): ImageVector = when (type) {
     BackgroundType.CIRCLES -> Icons.Outlined.Circle
     BackgroundType.RINGS -> Icons.Outlined.RadioButtonUnchecked
-    BackgroundType.WAVES -> Icons.Outlined.Waves
+    BackgroundType.MESH -> Icons.Outlined.Grid3x3
     BackgroundType.SPACE -> Icons.Outlined.AutoAwesome
     BackgroundType.SHAPES -> Icons.Outlined.Pentagon
     BackgroundType.SNOW -> Icons.Outlined.AcUnit

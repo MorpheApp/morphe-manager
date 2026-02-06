@@ -17,7 +17,7 @@ import app.revanced.manager.ui.screen.shared.backgrounds.*
 enum class BackgroundType(val displayNameResId: Int) {
     CIRCLES(R.string.settings_appearance_background_circles),
     RINGS(R.string.settings_appearance_background_rings),
-    WAVES(R.string.settings_appearance_background_waves),
+    MESH(R.string.settings_appearance_background_mesh),
     SPACE(R.string.settings_appearance_background_space),
     SHAPES(R.string.settings_appearance_background_shapes),
     SNOW(R.string.settings_appearance_background_snow),
@@ -35,7 +35,8 @@ enum class BackgroundType(val displayNameResId: Int) {
 @Composable
 @SuppressLint("ModifierParameter")
 fun AnimatedBackground(
-    type: BackgroundType = BackgroundType.CIRCLES
+    type: BackgroundType = BackgroundType.CIRCLES,
+    enableParallax: Boolean = true
 ) {
     Box(
         modifier = Modifier
@@ -46,12 +47,30 @@ fun AnimatedBackground(
             }
     ) {
         when (type) {
-            BackgroundType.CIRCLES -> CirclesBackground(Modifier.fillMaxSize())
-            BackgroundType.RINGS -> RingsBackground(Modifier.fillMaxSize())
-            BackgroundType.WAVES -> WavesBackground(Modifier.fillMaxSize())
-            BackgroundType.SPACE -> SpaceBackground(Modifier.fillMaxSize())
-            BackgroundType.SHAPES -> ShapesBackground(Modifier.fillMaxSize())
-            BackgroundType.SNOW -> SnowBackground(Modifier.fillMaxSize())
+            BackgroundType.CIRCLES -> CirclesBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
+            BackgroundType.RINGS -> RingsBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
+            BackgroundType.MESH -> MeshBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
+            BackgroundType.SPACE -> SpaceBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
+            BackgroundType.SHAPES -> ShapesBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
+            BackgroundType.SNOW -> SnowBackground(
+                modifier = Modifier.fillMaxSize(),
+                enableParallax = enableParallax
+            )
             BackgroundType.NONE -> Unit
         }
     }

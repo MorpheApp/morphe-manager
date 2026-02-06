@@ -85,6 +85,7 @@ private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val prefs: PreferencesManager = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
+    val enableParallax by prefs.enableBackgroundParallax.getAsState()
 
     // Box with background at the highest level
     Box(
@@ -93,7 +94,10 @@ private fun MorpheManager(vm: MainViewModel) {
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Show animated background
-        AnimatedBackground(type = backgroundType)
+        AnimatedBackground(
+            type = backgroundType,
+            enableParallax = enableParallax
+        )
 
         // All content on top of background
         NavHost(

@@ -1,21 +1,36 @@
 package app.revanced.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalContext
 
 /**
- * Original circles background
+ * Original circles background with parallax effect
  */
 @Composable
-fun CirclesBackground(modifier: Modifier = Modifier) {
+fun CirclesBackground(
+    modifier: Modifier = Modifier,
+    enableParallax: Boolean = true
+) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor = MaterialTheme.colorScheme.tertiary
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val parallaxState = rememberParallaxState(
+        enableParallax = enableParallax,
+        sensitivity = 0.3f,
+        context = context,
+        coroutineScope = coroutineScope
+    )
 
     val infiniteTransition = rememberInfiniteTransition(label = "circles")
 
@@ -104,35 +119,41 @@ fun CirclesBackground(modifier: Modifier = Modifier) {
     )
 
     Canvas(modifier = modifier.fillMaxSize()) {
-        drawCircle(
-            color = primaryColor.copy(alpha = 0.05f),
-            radius = 400f,
-            center = Offset(size.width * circle1X.value, size.height * circle1Y.value)
+        val tiltX = parallaxState.tiltX.value
+        val tiltY = parallaxState.tiltY.value
+
+        // Circle configs with depth for parallax
+        val circles = listOf(
+            CircleData(circle1X.value, circle1Y.value, 400f, primaryColor, 0.05f, 0.8f),
+            CircleData(circle2X.value, circle2Y.value, 280f, tertiaryColor, 0.035f, 0.6f),
+            CircleData(circle3X.value, circle3Y.value, 200f, tertiaryColor, 0.04f, 0.4f),
+            CircleData(circle4X.value, circle4Y.value, 320f, secondaryColor, 0.035f, 0.7f),
+            CircleData(circle5X.value, circle5Y.value, 180f, primaryColor, 0.04f, 0.5f),
+            CircleData(circle6X.value, circle6Y.value, 220f, secondaryColor, 0.04f, 0.6f)
         )
-        drawCircle(
-            color = tertiaryColor.copy(alpha = 0.035f),
-            radius = 280f,
-            center = Offset(size.width * circle2X.value, size.height * circle2Y.value)
-        )
-        drawCircle(
-            color = tertiaryColor.copy(alpha = 0.04f),
-            radius = 200f,
-            center = Offset(size.width * circle3X.value, size.height * circle3Y.value)
-        )
-        drawCircle(
-            color = secondaryColor.copy(alpha = 0.035f),
-            radius = 320f,
-            center = Offset(size.width * circle4X.value, size.height * circle4Y.value)
-        )
-        drawCircle(
-            color = primaryColor.copy(alpha = 0.04f),
-            radius = 180f,
-            center = Offset(size.width * circle5X.value, size.height * circle5Y.value)
-        )
-        drawCircle(
-            color = secondaryColor.copy(alpha = 0.04f),
-            radius = 220f,
-            center = Offset(size.width * circle6X.value, size.height * circle6Y.value)
-        )
+
+        circles.forEach { circle ->
+            val parallaxStrength = circle.depth * 50f
+            val parallaxX = tiltX * parallaxStrength
+            val parallaxY = tiltY * parallaxStrength
+
+            drawCircle(
+                color = circle.color.copy(alpha = circle.alpha),
+                radius = circle.radius,
+                center = Offset(
+                    size.width * circle.x + parallaxX,
+                    size.height * circle.y + parallaxY
+                )
+            )
+        }
     }
 }
+
+private data class CircleData(
+    val x: Float,
+    val y: Float,
+    val radius: Float,
+    val color: androidx.compose.ui.graphics.Color,
+    val alpha: Float,
+    val depth: Float
+)
