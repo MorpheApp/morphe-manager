@@ -58,7 +58,7 @@ private object AdaptiveIconConfig {
     const val BACKGROUND_FILE_NAME = "morphe_adaptive_background_custom.png"
     const val FOREGROUND_FILE_NAME = "morphe_adaptive_foreground_custom.png"
 
-    // Density folders and sizes
+    // Density folders and sizes - all densities will be generated
     val DENSITY_CONFIGS = listOf(
         DensityConfig("mipmap-mdpi", 108),
         DensityConfig("mipmap-hdpi", 162),
@@ -594,6 +594,12 @@ private suspend fun createAdaptiveIcons(
         // Create directory structure: morphe_branding/morphe_icons
         val brandingDir = File(baseDir, AdaptiveIconConfig.BRANDING_FOLDER_NAME)
         if (!brandingDir.exists()) brandingDir.mkdirs()
+
+        // Create .nomedia file to prevent icons from appearing in gallery
+        val nomediaFile = File(brandingDir, ".nomedia")
+        if (!nomediaFile.exists()) {
+            nomediaFile.createNewFile()
+        }
 
         val iconsDir = File(brandingDir, AdaptiveIconConfig.ICONS_FOLDER_NAME)
         if (!iconsDir.exists()) iconsDir.mkdirs()

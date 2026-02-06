@@ -581,6 +581,12 @@ private suspend fun createHeaderFiles(
         val brandingDir = File(baseDir, HeaderConfig.BRANDING_FOLDER_NAME)
         if (!brandingDir.exists()) brandingDir.mkdirs()
 
+        // Create .nomedia file to prevent icons from appearing in gallery
+        val nomediaFile = File(brandingDir, ".nomedia")
+        if (!nomediaFile.exists()) {
+            nomediaFile.createNewFile()
+        }
+
         val headerDir = File(brandingDir, HeaderConfig.HEADER_FOLDER_NAME)
         if (!headerDir.exists()) headerDir.mkdirs()
 
