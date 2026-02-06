@@ -12,4 +12,28 @@
         <item quantity="many">Wykonaj %d modyfikacji</item>
         <item quantity="other">Wykonaj %d modyfikacji</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d plik APK</item>
+        <item quantity="few">%d pliki APK</item>
+        <item quantity="many">%d plików APK</item>
+        <item quantity="other">%d plików APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d zapisany wybór</item>
+        <item quantity="few">%d zapisane wybory</item>
+        <item quantity="many">%d zapisanych wyborów</item>
+        <item quantity="other">%d zapisanych wyborów</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Wyłączono %d źródło</item>
+        <item quantity="few">Wyłączono %d źródła</item>
+        <item quantity="many">Wyłączono %d źródeł</item>
+        <item quantity="other">Wyłączono %d źródeł</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Włączono %d źródło</item>
+        <item quantity="few">Włączono %d źródła</item>
+        <item quantity="many">Włączono %d źródeł</item>
+        <item quantity="other">Włączono %d źródeł</item>
+    </plurals>
 </resources>

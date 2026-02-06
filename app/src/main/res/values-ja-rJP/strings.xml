@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
     <string name="sources_dialog_duplicate_name_error">同じ名前のパッチソースが既に存在します</string>
     <string name="sources_dialog_missing_error">このパッチソースを更新できませんでした</string>
-    <string name="sources_dialog_disabled_toast">%d個のソースを無効化しました</string>
-    <string name="sources_dialog_enabled_toast">%d個のソースを有効化しました</string>
     <string name="sources_dialog_view_any_version">任意のバージョン</string>
     <string name="sources_dialog_view_any_package">任意のパッケージ</string>
     <string name="sources_dialog_add_source">パッチソースを追加</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">オリジナルの APK ファイル (未パッチ) はありますか？</string>
-    <string name="home_apk_availability_dialog_description_simple">%1$s にパッチを適用するには、次のバージョンの APK (未パッチ) が必要です:</string>
-    <string name="home_apk_availability_dialog_description_expert">%1$s の APK (未パッチ) をお持ちですか？
+    <string name="home_apk_availability_dialog_simple">%1$s にパッチを適用するには、次のバージョンの APK (未パッチ) が必要です:</string>
+    <string name="home_apk_availability_dialog_expert">"%1$s の APK (未パッチ) をお持ちですか？
 
-互換性のあるバージョン:</string>
+互換性のあるバージョン:"</string>
     <string name="home_apk_availability_recommended_label">推奨</string>
     <string name="home_apk_availability_unpatched_label">未パッチ</string>
     <string name="home_apk_availability_yes">はい、あります</string>
@@ -476,7 +474,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">ログをエクスポートしました</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">ストレージ管理</string>
-    <string name="settings_system_apks_count">%d 個の APK</string>
     <string name="settings_system_apks_size">合計サイズ: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">パッチ済み APK</string>
@@ -496,7 +493,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">パッチ選択</string>
     <string name="settings_system_patch_selections_description">保存されたパッチ選択とオプションを管理します。これらはアプリのアンインストール後も保持されます</string>
     <string name="settings_system_patch_selections_description_short">今後のパッチ適用のために保存されます</string>
-    <string name="settings_system_patch_selections_count">%1$d 件の保存済み選択</string>
     <string name="settings_system_patch_selections_empty">保存済みパッチ選択なし</string>
     <string name="settings_system_patch_selections_has_options">オプションあり</string>
     <string name="settings_system_patch_selections_patches_options">パッチオプション</string>

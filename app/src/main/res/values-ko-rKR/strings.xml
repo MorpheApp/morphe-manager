@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
     <string name="sources_dialog_duplicate_name_error">이 이름의 패치 소스가 이미 존재함</string>
     <string name="sources_dialog_missing_error">이 패치 소스를 업데이트할 수 없습니다</string>
-    <string name="sources_dialog_disabled_toast">%d 개의 소스가 비활성화됨</string>
-    <string name="sources_dialog_enabled_toast">%d 개의 소스가 활성화됨</string>
     <string name="sources_dialog_view_any_version">모든 버전</string>
     <string name="sources_dialog_view_any_package">모든 패키지</string>
     <string name="sources_dialog_add_source">패치 소스 추가</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">소스 다운로드 실패: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">패치할 원본 APK가 있나요?</string>
-    <string name="home_apk_availability_dialog_description_simple">%1$s를 패치하려면, 다음 버전의 패치되지 않은 APK가 필요합니다:</string>
-    <string name="home_apk_availability_dialog_description_expert">패치되지 않은 %1$s APK가 있으신가요?
+    <string name="home_apk_availability_dialog_simple">%1$s를 패치하려면, 다음 버전의 패치되지 않은 APK가 필요합니다:</string>
+    <string name="home_apk_availability_dialog_expert">"패치되지 않은 %1$s APK가 있으신가요?
 
-호환 가능한 버전:</string>
+호환 가능한 버전:"</string>
     <string name="home_apk_availability_recommended_label">권장 버전</string>
     <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
     <string name="home_apk_availability_yes">네, 가지고 있습니다</string>
@@ -476,7 +474,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">로그를 내보냈습니다</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">저장소 관리</string>
-    <string name="settings_system_apks_count">%d 개의 APK</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
@@ -496,7 +493,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
     <string name="settings_system_patch_selections_description">저장된 패치 선택 목록 및 옵션을 관리합니다. 앱을 제거한 후에도 유지됩니다</string>
     <string name="settings_system_patch_selections_description_short">향후 패치를 위해 저장됨</string>
-    <string name="settings_system_patch_selections_count">%1$d 개의 저장된 선택 목록</string>
     <string name="settings_system_patch_selections_empty">저장된 패치 선택 목록이 없습니다</string>
     <string name="settings_system_patch_selections_has_options">옵션 있음</string>
     <string name="settings_system_patch_selections_patches_options">패치 옵션</string>

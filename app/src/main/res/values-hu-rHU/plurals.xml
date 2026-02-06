@@ -8,4 +8,20 @@
         <item quantity="one">%d javítás futtatása</item>
         <item quantity="other">%d javítások futtatása</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK fájl</item>
+        <item quantity="other">%d APK fájlok</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d mentett kiválasztás</item>
+        <item quantity="other">%d mentett kiválasztás</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Letiltva %d forrás</item>
+        <item quantity="other">Letiltva %d forrást</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Engedélyezve %d forrás</item>
+        <item quantity="other">Engedélyezve %d forrást</item>
+    </plurals>
 </resources>

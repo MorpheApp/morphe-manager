@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
     <string name="sources_dialog_duplicate_name_error">Джерело з такою назвою вже існує</string>
     <string name="sources_dialog_missing_error">Не вдалося оновити це джерело патчів</string>
-    <string name="sources_dialog_disabled_toast">Вимкнено джерел: %d</string>
-    <string name="sources_dialog_enabled_toast">Увімкнено джерел: %d</string>
     <string name="sources_dialog_view_any_version">Будь-яка версія</string>
     <string name="sources_dialog_view_any_package">Будь-який пакет</string>
     <string name="sources_dialog_add_source">Додати джерело патчів</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">У вас є непатчений оригінальний APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Щоб патчити %1$s, вам потрібний непатчений APK з версією:</string>
-    <string name="home_apk_availability_dialog_description_expert">У вас є непатчений %1$s APK?
+    <string name="home_apk_availability_dialog_simple">Щоб патчити %1$s, вам потрібний непатчений APK з версією:</string>
+    <string name="home_apk_availability_dialog_expert">"У вас є непатчений %1$s APK?
 
-Сумісні версії:</string>
+Сумісні версії:"</string>
     <string name="home_apk_availability_recommended_label">Рекомендовано</string>
     <string name="home_apk_availability_unpatched_label">Непатчений</string>
     <string name="home_apk_availability_yes">Так, у мене є</string>
@@ -475,7 +473,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">Журнали експортовано</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Керування сховищем</string>
-    <string name="settings_system_apks_count">%d APK</string>
     <string name="settings_system_apks_size">Загальний розмір: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Патчені APK</string>
@@ -495,7 +492,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Вибрані патчі</string>
     <string name="settings_system_patch_selections_description">Керування збереженими вибраними патчами та параметрами. Вони залишаються після видалення застосунку</string>
     <string name="settings_system_patch_selections_description_short">Збережено для майбутнього патчінгу</string>
-    <string name="settings_system_patch_selections_count">%1$d збережених виборів</string>
     <string name="settings_system_patch_selections_empty">Немає збережених вибраних патчів</string>
     <string name="settings_system_patch_selections_has_options">Має опції</string>
     <string name="settings_system_patch_selections_patches_options">Опції патчів</string>

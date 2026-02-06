@@ -10,4 +10,24 @@
         <item quantity="few">Execută %d patch-uri</item>
         <item quantity="other">Execută %d patch-uri</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d fișier APK</item>
+        <item quantity="few">%d fișiere APK</item>
+        <item quantity="other">%d fișiere APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d selecție salvată</item>
+        <item quantity="few">%d selecții salvate</item>
+        <item quantity="other">%d selecții salvate</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one"> Dezactivat %d sursă</item>
+        <item quantity="few"> Dezactivat %d surse</item>
+        <item quantity="other"> Dezactivat %d surse</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Activat %d sursă</item>
+        <item quantity="few">Activat %d surse</item>
+        <item quantity="other">Activat %d surse</item>
+    </plurals>
 </resources>

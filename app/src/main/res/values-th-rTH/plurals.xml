@@ -6,4 +6,16 @@
     <plurals name="patches_executed">
         <item quantity="other">ดำเนินการ %d แพตช์</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%d ไฟล์ APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="other">%d การเลือกที่ถูกบันทึก</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="other">ปิดการใช้งาน %d แหล่งข้อมูล</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="other">เปิดการใช้งาน %d แหล่งข้อมูล</item>
+    </plurals>
 </resources>

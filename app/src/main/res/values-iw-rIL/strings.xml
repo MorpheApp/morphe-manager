@@ -51,8 +51,6 @@
     <string name="sources_dialog_rename">שנה את שם התצוגה</string>
     <string name="sources_dialog_duplicate_name_error">יש תצוג בשם זה כבר</string>
     <string name="sources_dialog_missing_error">לא ניתן לעדכן את Sourse הזה</string>
-    <string name="sources_dialog_disabled_toast"> išׁ 23023,</string>
-    <string name="sources_dialog_enabled_toast">מופעלת %d מקור(ים)</string>
     <string name="sources_dialog_view_any_version">כל גרסיה</string>
     <string name="sources_dialog_view_any_package">כל חבילה</string>
     <string name="sources_dialog_add_source">הוסף תצוג</string>
@@ -73,10 +71,10 @@
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">האם יש לך את קובץ ה-APK המקורי ללא תיקונים?</string>
-    <string name="home_apk_availability_dialog_description_simple">לעדכן את %1$s, צריך APK שלא עודכן עם גרסה:</string>
-    <string name="home_apk_availability_dialog_description_expert">יש לך APK שלא עודכן %1$s?
+    <string name="home_apk_availability_dialog_simple">להפעיל %1$s, צריך APK לא מופץ עם גרסה:</string>
+    <string name="home_apk_availability_dialog_expert">"יש לך APK לא מופץ %1$s?
 
-גרסאות תואמות:</string>
+גרסאות תואמות:"</string>
     <string name="home_apk_availability_recommended_label">מומלץ</string>
     <string name="home_apk_availability_unpatched_label">לא מתקן</string>
     <string name="home_apk_availability_yes">כן, יש לי את זה</string>
@@ -438,7 +436,6 @@
     <string name="settings_system_export_debug_logs_export_success">התיקונים יוצאו</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">ניהול אחסון</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">גודל: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">פיצ\'ים מותאמים</string>
@@ -458,7 +455,6 @@
     <string name="settings_system_patch_selections_title">ניהול בחירות תיקון</string>
     <string name="settings_system_patch_selections_description">ניהול בחירות תיקון וצורה שמורות. אלה נשארות לאחר הסרת האפליקציה</string>
     <string name="settings_system_patch_selections_description_short">שמורות לתיקון עתידי</string>
-    <string name="settings_system_patch_selections_count">%1$d בחירה(ות) שמורה(ות)</string>
     <string name="settings_system_patch_selections_empty">אין בחירות תיקון שמורות</string>
     <string name="settings_system_patch_selections_has_options">יש אופציות</string>
     <string name="settings_system_patch_selections_patches_options">אופציות תיקון</string>

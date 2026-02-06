@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Преименуване на източник</string>
     <string name="sources_dialog_duplicate_name_error">Източник с това име вече съществува</string>
     <string name="sources_dialog_missing_error">Не може да се обнови този източник на патча</string>
-    <string name="sources_dialog_disabled_toast">Изключените са %d източника</string>
-    <string name="sources_dialog_enabled_toast">Активираните са %d източника</string>
     <string name="sources_dialog_view_any_version">Всяка версия</string>
     <string name="sources_dialog_view_any_package">Всяко пакети</string>
     <string name="sources_dialog_add_source">Добавяне на източник</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Имате ли оригиналния неподправен APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">За да прилагате %1$s, ви е нужно непренасяна APK с версия:</string>
-    <string name="home_apk_availability_dialog_description_expert">Имате ли непренасяна %1$s APK?
+    <string name="home_apk_availability_dialog_simple">За да прилагате %1$s, ще benötigteте непренагласен APK с версия:</string>
+    <string name="home_apk_availability_dialog_expert">"Имате непренагласен %1$s APK?
 
-Допустими версии:</string>
+Допълнителни версии:"</string>
     <string name="home_apk_availability_recommended_label">Рекомендовано</string>
     <string name="home_apk_availability_unpatched_label">Необновен</string>
     <string name="home_apk_availability_yes">Да, имам я</string>
@@ -475,7 +473,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">Логовете са експортирани</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Управление на съхранението</string>
-    <string name="settings_system_apks_count">%d APK(а)</string>
     <string name="settings_system_apks_size">Общ размер: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Променени APK</string>
@@ -495,7 +492,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
     <string name="settings_system_patch_selections_description">Управление на запазените избори за поправка и опции. Тези данни се запазват след деинсталиране на приложението</string>
     <string name="settings_system_patch_selections_description_short">Запазено за бъдещи поправки</string>
-    <string name="settings_system_patch_selections_count">%1$d запазени избора(а)</string>
     <string name="settings_system_patch_selections_empty">Няма запазени избори за поправка</string>
     <string name="settings_system_patch_selections_has_options">Има опции</string>
     <string name="settings_system_patch_selections_patches_options">Поправки на опциите</string>

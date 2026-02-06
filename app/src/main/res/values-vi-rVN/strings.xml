@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
     <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này rồi</string>
     <string name="sources_dialog_missing_error">Không thể cập nhật nguồn vá này</string>
-    <string name="sources_dialog_disabled_toast">Đã vô hiệu %d nguồn vá</string>
-    <string name="sources_dialog_enabled_toast">Đã kích hoạt %d nguồn vá</string>
     <string name="sources_dialog_view_any_version">Phiên bản bất kỳ</string>
     <string name="sources_dialog_view_any_package">Gói bất kỳ</string>
     <string name="sources_dialog_add_source">Thêm nguồn vá</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Bạn đã có APK gốc chưa?</string>
-    <string name="home_apk_availability_dialog_description_simple">Để vá %1$s, bạn cần một APK chưa vá với phiên bản:</string>
-    <string name="home_apk_availability_dialog_description_expert">Bạn có APK chưa vá %1$s chưa?
+    <string name="home_apk_availability_dialog_simple">Để vá %1$s, bạn cần một APK chưa vá với phiên bản:</string>
+    <string name="home_apk_availability_dialog_expert">"Bạn có APK chưa vá %1$s chưa?
 
-Phiên bản tương thích:</string>
+Phiên bản tương thích:"</string>
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_yes">Rồi, tôi đã có nó</string>
@@ -247,10 +245,10 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="download_apk">Tải tệp APK</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
-    <string name="patcher_process_exit_message">Tiến trình vá bị thoát với mã %1$d</string>
+    <string name="patcher_process_exit_message">Tiến trình vá đã dừng với mã lỗi %1$d</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
     <string name="install_app_fail">Không thể cài đặt ứng dụng: %s</string>
-    <string name="install_timeout_message">Cài đặt không thành công. Kiểm tra hộp thoại cài đặt hệ thống và thử lại</string>
+    <string name="install_timeout_message">Cài đặt không thành công. Hãy kiểm tra hộp thoại cài đặt của hệ thống và thử lại</string>
     <string name="save_apk_success">Đã lưu APK</string>
     <string name="saved_app_export_failed">Không thể xuất ứng dụng đã vá</string>
     <string name="saved_app_removed_toast">Đã xoá bản lưu ứng dụng đã vá</string>
@@ -273,7 +271,7 @@ Bạn có chắc muốn tiếp tục không?"</string>
     <string name="settings_appearance_background_snow">Tuyết</string>
     <string name="settings_appearance_background_none">Không</string>
     <string name="settings_appearance_parallax_effect">Hiệu ứng thị sai</string>
-    <string name="settings_appearance_parallax_effect_description">Nền dịch chuyển nhẹ nhàng theo chuyển động nghiêng của thiết bị</string>
+    <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
     <string name="settings_appearance_system">Hệ thống</string>
@@ -391,7 +389,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Gỡ nút Shorts khỏi tiện ích màn hình chính</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Trình cài đặt</string>
-    <string name="installer_title">Chọn trình cài đặt</string>
+    <string name="installer_title">Trình cài đặt</string>
     <string name="installer_internal_name">Trình cài đặt hệ thống</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_auto_saved_name">Trình cài đặt gắn kết đã root</string>
@@ -400,10 +398,10 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_option_none">Không có</string>
     <string name="installer_none_description">Chưa cấu hình trình cài đặt dự phòng</string>
     <string name="installer_status_requires_root">Yêu cầu quyền root</string>
-    <string name="installer_status_not_supported">Thao tác này không được hỗ trợ</string>
+    <string name="installer_status_not_supported">Không được hỗ trợ thao tác này</string>
     <string name="installer_status_shizuku_not_installed">Cài Shizuku hoặc Sui để dùng tuỳ chọn này</string>
     <string name="installer_status_shizuku_not_running">Chạy Shizuku hoặc Sui và thử lại</string>
-    <string name="installer_status_shizuku_permission">Cấp quyền Shizuku cho Morphe từ ứng dụng Shizuku</string>
+    <string name="installer_status_shizuku_permission">Cấp quyền Shizuku cho Morphe trong ứng dụng Shizuku</string>
     <string name="installer_mount_warning_install">Trình cài đặt chính của bạn đã được đặt là trình cài đặt mount gốc. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="installer_mount_mismatch_title">Trình cài đặt gắn kết đã được root chưa được chọn</string>
     <string name="installer_mount_mismatch_install">Ứng dụng này đã được cài đặt bằng trình cài đặt mount gốc. Đổi trình cài đặt chính của bạn về để sử dụng mount, sau đó mount</string>
@@ -426,8 +424,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_unavailable_message">Trình cài đặt mà bạn ưu tiên (%s) hiện đang không khả dụng. Hãy thử lại sau khi sửa lỗi hoặc chuyển sang dùng trình cài đặt tiêu chuẩn</string>
     <string name="installer_unavailable_shizuku_hint">Hãy đảm bảo rằng Shizuku đang chạy và bạn đã cấp quyền cho ứng dụng này</string>
     <string name="installer_use_standard">Trình cài đặt tiêu chuẩn</string>
-    <string name="settings_prompt_installer_on_install">Hiển thị hộp thoại chọn trình cài đặt khi cài đặt</string>
-    <string name="settings_prompt_installer_on_install_description">Hiển thị hộp thoại chọn trình cài đặt mỗi khi cài đặt một ứng dụng đã sửa</string>
+    <string name="settings_prompt_installer_on_install">Hỏi trình cài đặt khi cài</string>
+    <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Hiệu suất</string>
     <string name="settings_system_process_runtime">Tiến trình riêng</string>
@@ -468,14 +466,13 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_export_manager_settings_success">Đã xuất cài đặt trình quản lý</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">Gỡ lỗi</string>
-    <string name="settings_system_export_debug_logs">Xuất nhật ký gỡ lỗi</string>
+    <string name="settings_system_export_debug_logs">Nhật ký gỡ lỗi</string>
     <string name="settings_system_export_debug_logs_description">Xuất nhật ký hệ thống để khắc phục lỗi</string>
-    <string name="settings_system_export_debug_logs_export_read_failed">Không đọc được nhật ký (mã thoát %d)</string>
-    <string name="settings_system_export_debug_logs_export_failed">Không xuất được nhật ký</string>
+    <string name="settings_system_export_debug_logs_export_read_failed">Không thể đọc nhật ký (mã thoát %d)</string>
+    <string name="settings_system_export_debug_logs_export_failed">Không thể xuất nhật ký</string>
     <string name="settings_system_export_debug_logs_export_success">Đã xuất nhật ký</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Quản lý bộ nhớ</string>
-    <string name="settings_system_apks_count">%d APK</string>
     <string name="settings_system_apks_size">Tổng kích thước: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK đã vá</string>
@@ -495,7 +492,6 @@ Kích thước hình ảnh yêu cầu:
     <string name="settings_system_patch_selections_title">Lựa chọn vá</string>
     <string name="settings_system_patch_selections_description">Quản lý lựa chọn và tùy chọn đã lưu. Chúng sẽ tồn tại sau khi xóa ứng dụng</string>
     <string name="settings_system_patch_selections_description_short">Đã lưu cho việc vá sau này</string>
-    <string name="settings_system_patch_selections_count">%1$d lựa chọn đã lưu</string>
     <string name="settings_system_patch_selections_empty">Không có lựa chọn vá đã lưu</string>
     <string name="settings_system_patch_selections_has_options">Có tùy chọn</string>
     <string name="settings_system_patch_selections_patches_options">Tùy chỉnh</string>
@@ -566,12 +562,12 @@ Với mã nguồn mở là cốt lõi, Morphe phát triển dựa trên phản h
     <string name="mounting_ellipsis">Đang gắn kết…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn kết…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
-    <string name="changelog">Xem nhật ký thay đổi</string>
+    <string name="changelog">Lịch sử cập nhật</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
-    <string name="changelog_loading">Đang tải nhật ký thay đổi</string>
-    <string name="changelog_download_fail">Không thể tải nhật ký thay đổi: %s</string>
+    <string name="changelog_loading">Đang tải lịch sử cập nhật</string>
+    <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
     <string name="changelog_retry">Thử lại</string>
-    <string name="changelog_empty">Không có nhật ký thay đổi</string>
+    <string name="changelog_empty">Không có lịch sử cập nhật</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>

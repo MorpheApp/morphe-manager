@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Renomecer origem de patch</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma origem de patch com esse nome</string>
     <string name="sources_dialog_missing_error">Não foi possível atualizar esta fonte de patch.</string>
-    <string name="sources_dialog_disabled_toast">Desativado %d origem(ões) de patch</string>
-    <string name="sources_dialog_enabled_toast">Ativado %d origem(ões) de patch</string>
     <string name="sources_dialog_view_any_version">Qualquer versão</string>
     <string name="sources_dialog_view_any_package">Qualquer pacote</string>
     <string name="sources_dialog_add_source">Adicionar origem de patch</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Falha ao baixar as origens: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Você tem o APK original sem patches?</string>
-    <string name="home_apk_availability_dialog_description_simple">Para corrigir %1$s, vocã precisa de um APK desatualizado com a versão:</string>
-    <string name="home_apk_availability_dialog_description_expert">Vocã tem um APK desatualizado %1$s?
+    <string name="home_apk_availability_dialog_simple">Para corrigir %1$s, você precisa de um APK não corrigido com a versão:</string>
+    <string name="home_apk_availability_dialog_expert">"Você tem um APK não corrigido %1$s?
 
-Versões compatíveis:</string>
+Versões compatíveis:"</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Sem atualizações</string>
     <string name="home_apk_availability_yes">Sim, eu tenho</string>
@@ -475,7 +473,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Gerenciamento de armazenamento</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Tamanho total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patcheados</string>
@@ -495,7 +492,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_patch_selections_title">Seleções de emenda</string>
     <string name="settings_system_patch_selections_description">Gerencie as seleções de emenda e opções salvas. Estas persistirão após a desinstalação do aplicativo</string>
     <string name="settings_system_patch_selections_description_short">Salvo para emendas futuras</string>
-    <string name="settings_system_patch_selections_count">%1$d seleçãoão(s) salva(s)</string>
     <string name="settings_system_patch_selections_empty">Nenhuma seleção de emenda salva</string>
     <string name="settings_system_patch_selections_has_options">Tem opções</string>
     <string name="settings_system_patch_selections_patches_options">Opções de emenda</string>

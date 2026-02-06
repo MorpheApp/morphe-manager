@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
     <string name="sources_dialog_duplicate_name_error">এই নামের একটি প্যাচ সোর্স ইতিমে ইতিমে আছে</string>
     <string name="sources_dialog_missing_error">এই প্যাচ উৎসটি আপডেট করতে পারেনি</string>
-    <string name="sources_dialog_disabled_toast">ডিসাবলড %d উৎস(সমূহ)</string>
-    <string name="sources_dialog_enabled_toast">এনাবলড %d উৎস(সমূহ)</string>
     <string name="sources_dialog_view_any_version">কোনো সংস্করণ</string>
     <string name="sources_dialog_view_any_package">কোনো প্যাকেজ</string>
     <string name="sources_dialog_add_source">প্যাচ উৎস যোগ করুন</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
-    <string name="home_apk_availability_dialog_description_simple">প্যাচ করতে %1$s, আপনাকে অপ্যাচড APK এর প্রয়োজন হবে, যার সংস্করণ:</string>
-    <string name="home_apk_availability_dialog_description_expert">আপনাকে অপ্যাচড %1$s APK আছে?
+    <string name="home_apk_availability_dialog_simple">%1$s প্যাচ করতে, আপনার প্রয়োজন হবে:</string>
+    <string name="home_apk_availability_dialog_expert">"আপনার আছে অপ্যাচড %1$s APK?
 
-সামঞ্জস্যপূর্ণ সংস্করণ:</string>
+সামঞ্জস্যপূর্ণ সংস্করণ:"</string>
     <string name="home_apk_availability_recommended_label">প্রশংসিত</string>
     <string name="home_apk_availability_unpatched_label">অনুশিষ্টিত</string>
     <string name="home_apk_availability_yes">হ্যাঁ, আমার আছে</string>
@@ -454,7 +452,6 @@
     <string name="settings_system_export_debug_logs_export_success">APK(গুলি) সংখ্যা</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">স্টোরেজ ম্যানেজমেন্ট</string>
-    <string name="settings_system_apks_count">প্যাচড APK(গুলি)</string>
     <string name="settings_system_apks_size">প্যাচড APK(গুলি)</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">প্যাচড APK(গুলি) ব্যবস্থা</string>
@@ -474,7 +471,6 @@
     <string name="settings_system_patch_selections_title">প্যাচ নির্বাচন</string>
     <string name="settings_system_patch_selections_description">সংরক্ষিত প্যাচ নির্বাচন ও অপশন পরিচালনা করুন। এগুলি অ্যাপ আনইনস্টলেশন পরেেও টিকিয়ে রাখা হয়</string>
     <string name="settings_system_patch_selections_description_short">ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত</string>
-    <string name="settings_system_patch_selections_count">%1$d সংরক্ষিত নির্বাচন(সমূহ)</string>
     <string name="settings_system_patch_selections_empty">কোন সংরক্ষিত প্যাচ নির্বাচন নেই</string>
     <string name="settings_system_patch_selections_has_options">অপশন আছে</string>
     <string name="settings_system_patch_selections_patches_options">প্যাচ অপশন</string>

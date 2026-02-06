@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Muokka patch- lähde</string>
     <string name="sources_dialog_duplicate_name_error">Nimi on jo käytössä</string>
     <string name="sources_dialog_missing_error">Tätä patch-lähdettä ei voitu päivittää.</string>
-    <string name="sources_dialog_disabled_toast">Poistettiin %d lähde(t)</string>
-    <string name="sources_dialog_enabled_toast">Aktivoitettu %d lähde(t)</string>
     <string name="sources_dialog_view_any_version">Mikä vain versio</string>
     <string name="sources_dialog_view_any_package">Mikä vain paketti</string>
     <string name="sources_dialog_add_source">Lisää patch- lähde</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Päivityksen %1$s varten tarvitset patjaton APK:n versio:</string>
-    <string name="home_apk_availability_dialog_description_expert">Oletko saanut patjaton %1$s APK:n?
+    <string name="home_apk_availability_dialog_simple">Päivityksen %1$s varten tarvitset unpatched APK:n version:</string>
+    <string name="home_apk_availability_dialog_expert">"Oletko saanut unpatched %1$s APK:n?
 
-Sovittuvat versiot:</string>
+Sovittuvien versioiden:"</string>
     <string name="home_apk_availability_recommended_label">Suositeltu</string>
     <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
     <string name="home_apk_availability_yes">Kyllä, minulla on se</string>
@@ -475,7 +473,6 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_export_debug_logs_export_success">%d APK(t)</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Tallennustilan hallinta</string>
-    <string name="settings_system_apks_count">Yhteensä APK(t)</string>
     <string name="settings_system_apks_size">Patchettujen APK(t)</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchettujen APK(t)</string>
@@ -495,7 +492,6 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_patch_selections_title">Korjausvalinnat</string>
     <string name="settings_system_patch_selections_description">Hallinnoi tallennettuja korjausvalintoja ja asetuksia. Nämä säilytetään sovelluksen poistamisen jälkeen</string>
     <string name="settings_system_patch_selections_description_short">Tallennettu tulevaisuuden korjaukseen</string>
-    <string name="settings_system_patch_selections_count">%1$d tallennettua valintaa</string>
     <string name="settings_system_patch_selections_empty">Ei tallennettuja korjausvalintoja</string>
     <string name="settings_system_patch_selections_has_options">Sisältää asetuksia</string>
     <string name="settings_system_patch_selections_patches_options">Korjausasetukset</string>

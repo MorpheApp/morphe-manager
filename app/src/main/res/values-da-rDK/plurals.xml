@@ -8,4 +8,20 @@
         <item quantity="one">Udfør %d patch</item>
         <item quantity="other">Udfør %d patches</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK-fil</item>
+        <item quantity="other">%d APK-filer</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d gemt valgt</item>
+        <item quantity="other">%d gemte valg</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Deaktiveret %d kilde</item>
+        <item quantity="other">Deaktiveret %d kilder</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Aktiveret %d kilde</item>
+        <item quantity="other">Aktiveret %d kilder</item>
+    </plurals>
 </resources>

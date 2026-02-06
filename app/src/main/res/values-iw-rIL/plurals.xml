@@ -12,4 +12,28 @@
         <item quantity="many">הפעל %d תיקונים</item>
         <item quantity="other">הפעל %d תיקונים</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d קובץ APK</item>
+        <item quantity="two">%d קובצי APK</item>
+        <item quantity="many">%d קובצי APK</item>
+        <item quantity="other">%d קובצי APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d בחירה שמורה</item>
+        <item quantity="two">%d בחירות שמורות</item>
+        <item quantity="many">%d בחירות שמורות</item>
+        <item quantity="other">%d בחירות שמורות</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one"> išмור %d מקור</item>
+        <item quantity="two"> išמורים %d מקורות</item>
+        <item quantity="many"> išמורים %d מקורות</item>
+        <item quantity="other"> išמורים %d מקורות</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">הפעיל %d מקור</item>
+        <item quantity="two">הפעיל %d מקורות</item>
+        <item quantity="many">הפעיל %d מקורות</item>
+        <item quantity="other">הפעיל %d מקורות</item>
+    </plurals>
 </resources>

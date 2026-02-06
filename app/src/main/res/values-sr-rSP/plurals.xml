@@ -10,4 +10,24 @@
         <item quantity="few">Изврши %d исправке</item>
         <item quantity="other">Изврши %d исправки</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d АПК датотека</item>
+        <item quantity="few">%d АПК датотеке</item>
+        <item quantity="other">%d АПК датотека</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d сачувана селекција</item>
+        <item quantity="few">%d сачуваних селекција</item>
+        <item quantity="other">%d сачуваних селекција</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Онемогућено %d извор</item>
+        <item quantity="few">Онемогућено %d извора</item>
+        <item quantity="other">Онемогућено %d извора</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Омогућено %d извор</item>
+        <item quantity="few">Омогућено %d извора</item>
+        <item quantity="other">Омогућено %d извора</item>
+    </plurals>
 </resources>

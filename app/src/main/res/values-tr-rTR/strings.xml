@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Yama kaynağını yeniden adlandır</string>
     <string name="sources_dialog_duplicate_name_error">Bu isme sahip bir yama kaynağı zaten mevcut</string>
     <string name="sources_dialog_missing_error">Bu yama kaynağı güncellenemedi</string>
-    <string name="sources_dialog_disabled_toast">%d kaynak devre dışı bırakıldı</string>
-    <string name="sources_dialog_enabled_toast">%d kaynak etkinleştirildi</string>
     <string name="sources_dialog_view_any_version">Herhangi bir sürüm</string>
     <string name="sources_dialog_view_any_package">Herhangi bir paket</string>
     <string name="sources_dialog_add_source">Yama kaynağı ekle</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Kaynağları indirmek başarısız: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
-    <string name="home_apk_availability_dialog_description_simple">Yeni bir APK\'yi yayımlamak için, yayımlanmamış APK ile versiyon: %1$s gereklidir.</string>
-    <string name="home_apk_availability_dialog_description_expert">Yayımlanmamış %1$s APK\'siniz var mı?
+    <string name="home_apk_availability_dialog_simple">Bu sürümü yapmak için, %1$s\'yi güncellememiş bir APK ile sürüm:</string>
+    <string name="home_apk_availability_dialog_expert">"%1$s'yi güncellememiş bir APK varsa?
 
- Uyumlu versiyonlar:</string>
+ Uyumlu sürümler:"</string>
     <string name="home_apk_availability_recommended_label">Tavsiye edilen</string>
     <string name="home_apk_availability_unpatched_label">Yakınmıyan</string>
     <string name="home_apk_availability_yes">Evet, bende var</string>
@@ -475,7 +473,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_export_debug_logs_export_success">Günlükler dışa aktarıldı</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Depo yönetimi</string>
-    <string name="settings_system_apks_count">%d APK</string>
     <string name="settings_system_apks_size">Toplam boyut: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Değiştirilmiş APK\'ler</string>
@@ -495,7 +492,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
     <string name="settings_system_patch_selections_description">Kayıtlı yama seçeneklerini yönetin. Bunlar uygulama kaldırılmasından sonra da kalır</string>
     <string name="settings_system_patch_selections_description_short">Gelecekteki yama için saklı</string>
-    <string name="settings_system_patch_selections_count">%1$d kaydedilmiş(ler)</string>
     <string name="settings_system_patch_selections_empty">Kayıtlı yama seçenekleri yok</string>
     <string name="settings_system_patch_selections_has_options">Seçenekler var</string>
     <string name="settings_system_patch_selections_patches_options">Yama seçenekleri</string>

@@ -50,8 +50,6 @@
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
     <string name="sources_dialog_duplicate_name_error">แหล่งข้อมูลที่มีชื่อนี้อยู่แล้ว</string>
-    <string name="sources_dialog_disabled_toast">ปิดบังออฟฟ  %d แหล่งข้อมูล</string>
-    <string name="sources_dialog_enabled_toast">เปิด  %d  แหล่งข้อมูล</string>
     <string name="sources_dialog_view_any_version">เวอร์ชันใด ๆ</string>
     <string name="sources_dialog_view_any_package">แพ็คเกจใด ๆ</string>
     <string name="sources_dialog_add_source">เพิ่มแหล่งข้อมูล</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">ล้มข้อมูลแหล่งข้อมูลไม่สำเร็จ: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">มีไฟล์ APK ดังเดิมที่ไม่ได้รับการแพตซ์ไหม</string>
-    <string name="home_apk_availability_dialog_description_simple">เพื่อติดตั้ง %1$s คุณต้องมี APK ที่ยังไม่ได้ติดตั้งและมีเวอร์ชัน:</string>
-    <string name="home_apk_availability_dialog_description_expert">คุณมี APK ที่ยังไม่ได้ติดตั้ง %1$s หรือไม่?
+    <string name="home_apk_availability_dialog_simple">เพื่อปรับปรุง %1$s คุณต้องมี APK ที่ยังไม่ได้ปรับปรุงและมีเวอร์ชัน:</string>
+    <string name="home_apk_availability_dialog_expert">"คุณมี APK ที่ยังไม่ได้ปรับปรุง %1$s หรือไม่?
 
-เวอร์ชันที่เข้ากันได้:</string>
+เวอร์ชันที่เข้ากัน:"</string>
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตซ์</string>
     <string name="home_apk_availability_yes">ใช่ ฉันมีมัน</string>
@@ -476,7 +474,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">ขนาดทั้งหมด: %s</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">การจัดการพื้นที่เก็บ</string>
-    <string name="settings_system_apks_count">แอปที่ถูกนำพัท์</string>
     <string name="settings_system_apks_size">จัดการแอปที่ถูกนำพัท์</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">คุณแน่ใจหรือไม่ว่าต้องการลบแอปที่ถูกนำพัท์ %s?</string>
@@ -497,7 +494,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">การเลือกการแก้ไข</string>
     <string name="settings_system_patch_selections_description">จัดการการเลือกการแก้ไขและตัวเลือกที่บันทึกไว้ การเลือกนี้จะคงอยู่หลังจากการลบแอป</string>
     <string name="settings_system_patch_selections_description_short">บันทึกไว้สำหรับการแก้ไขในอนาคต</string>
-    <string name="settings_system_patch_selections_count">%1$d การเลือกที่บันทึกไว้</string>
     <string name="settings_system_patch_selections_empty">ไม่มีการเลือกการแก้ไขที่บันทึกไว้</string>
     <string name="settings_system_patch_selections_has_options">มีตัวเลือก</string>
     <string name="settings_system_patch_selections_patches_options">ตัวเลือกการแก้ไข</string>

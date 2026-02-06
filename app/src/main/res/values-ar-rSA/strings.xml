@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
     <string name="sources_dialog_duplicate_name_error">توجد حزمة تعديل بهذا الاسم بالفعل</string>
     <string name="sources_dialog_missing_error">تعذر تحديث مصدر التعديل هذا</string>
-    <string name="sources_dialog_disabled_toast">تم تعطيل %d مصدر(مصادر).</string>
-    <string name="sources_dialog_enabled_toast">تم تمكين %d مصدر(مصادر).</string>
     <string name="sources_dialog_view_any_version">أي إصدار</string>
     <string name="sources_dialog_view_any_package">أي حزمة</string>
     <string name="sources_dialog_add_source">إضافة مصدر تعديل</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s.</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">هل لديك ملف APK الأصلي غير المعدل؟</string>
-    <string name="home_apk_availability_dialog_description_simple">لتعديل %1$s، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
-    <string name="home_apk_availability_dialog_description_expert">هل لديك ملف APK غير معدل %1$s؟
+    <string name="home_apk_availability_dialog_simple">لتعديل %1$s، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
+    <string name="home_apk_availability_dialog_expert">"هل لديك ملف APK غير معدل %1$s؟
 
-الإصدارات المتوافقة:</string>
+الإصدارات المتوافقة:"</string>
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
     <string name="home_apk_availability_yes">نعم، لديّ</string>
@@ -475,7 +473,6 @@
     <string name="settings_system_export_debug_logs_export_success">تم تصدير السجلات</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">إدارة التخزين</string>
-    <string name="settings_system_apks_count">%d ملف(ملفات) APK</string>
     <string name="settings_system_apks_size">إجمالي الحجم: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs معدلة</string>
@@ -495,7 +492,6 @@
     <string name="settings_system_patch_selections_title">خيارات التعديل</string>
     <string name="settings_system_patch_selections_description">إدارة خيارات وتعديلات البرامج المحفوظة. تبقى هذه الخيارات محفوظة حتى بعد إلغاء تثبيت التطبيق.</string>
     <string name="settings_system_patch_selections_description_short">تم الحفظ للتعديل المستقبلي</string>
-    <string name="settings_system_patch_selections_count">%1$d تحديد(تحديدات) محفوظة</string>
     <string name="settings_system_patch_selections_empty">لا يوجد تحديدات تعديل محفوظة</string>
     <string name="settings_system_patch_selections_has_options">له خيارات</string>
     <string name="settings_system_patch_selections_patches_options">خيارات التعديل</string>

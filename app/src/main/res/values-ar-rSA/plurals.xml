@@ -16,4 +16,36 @@
         <item quantity="many">تنفيذ %d تعديلًا</item>
         <item quantity="other">تنفيذ %d تعديلات</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="zero">%d ملف APK</item>
+        <item quantity="one">%d ملف APK</item>
+        <item quantity="two">%d ملف APK</item>
+        <item quantity="few">%d ملف APK</item>
+        <item quantity="many">%d ملف APK</item>
+        <item quantity="other">%d ملف APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="zero">%d تحديد(تحديدات) محفوظة</item>
+        <item quantity="one">%d تحديد(تحديدات) محفوظة</item>
+        <item quantity="two">%d تحديد(تحديدات) محفوظة</item>
+        <item quantity="few">%d تحديد(تحديدات) محفوظة</item>
+        <item quantity="many">%d تحديد(تحديدات) محفوظة</item>
+        <item quantity="other">%d تحديد(تحديدات) محفوظة</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="zero">تم تعطيل %d مصدر(مصادر).</item>
+        <item quantity="one">تم تعطيل %d مصدر(مصادر).</item>
+        <item quantity="two">تم تعطيل %d مصدر(مصادر).</item>
+        <item quantity="few">تم تعطيل %d مصدر(مصادر).</item>
+        <item quantity="many">تم تعطيل %d مصدر(مصادر).</item>
+        <item quantity="other">تم تعطيل %d مصدر(مصادر).</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="zero">تم تمكين %d مصدر(مصادر).</item>
+        <item quantity="one">تم تمكين %d مصدر(مصادر).</item>
+        <item quantity="two">تم تمكين %d مصدر(مصادر).</item>
+        <item quantity="few">تم تمكين %d مصدر(مصادر).</item>
+        <item quantity="many">تم تمكين %d مصدر(مصادر).</item>
+        <item quantity="other">تم تمكين %d مصدر(مصادر).</item>
+    </plurals>
 </resources>

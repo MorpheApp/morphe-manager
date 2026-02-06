@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Renumează sursă de patach</string>
     <string name="sources_dialog_duplicate_name_error">Există deja o sursă de patach cu acest nume</string>
     <string name="sources_dialog_missing_error">Nu a fost posibil să se actualizeze sursa de patch</string>
-    <string name="sources_dialog_disabled_toast">Dezactivat %d sursă(ri)</string>
-    <string name="sources_dialog_enabled_toast">Activat %d sursă(ri)</string>
     <string name="sources_dialog_view_any_version">O orice versiune</string>
     <string name="sources_dialog_view_any_package">O orice pachet</string>
     <string name="sources_dialog_add_source">Adăugă sursă de patach</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Eșec la descărcarea surselor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
-    <string name="home_apk_availability_dialog_description_simple">Pentru a aplica %1$s, ai nevoie de un APK neactualizat cu versiunea:</string>
-    <string name="home_apk_availability_dialog_description_expert">Ai un APK neactualizat %1$s?
+    <string name="home_apk_availability_dialog_simple">Pentru a aplica %1$s, trebuie să ai un APK neactualizat cu versiunea:</string>
+    <string name="home_apk_availability_dialog_expert">"Ai un APK neactualizat %1$s?
 
-Versiunile compatibile:</string>
+Versiuni compatibile:"</string>
     <string name="home_apk_availability_recommended_label">Recomandat</string>
     <string name="home_apk_availability_unpatched_label">Neactualizat</string>
     <string name="home_apk_availability_yes">Da, o am</string>
@@ -475,7 +473,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Gestionarea stocării</string>
-    <string name="settings_system_apks_count">%d APK(%s)</string>
     <string name="settings_system_apks_size">Dimensiune totală: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patcheate</string>
@@ -495,7 +492,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
     <string name="settings_system_patch_selections_description">Gestiune selectii de modificări și opțiuni. Acestea persistă după dezinstalarea aplicației</string>
     <string name="settings_system_patch_selections_description_short">Păstrat pentru viitoarele modificări</string>
-    <string name="settings_system_patch_selections_count">%1$d selectie(ni) păstrate</string>
     <string name="settings_system_patch_selections_empty">Nici o selectie de modificări păstrată</string>
     <string name="settings_system_patch_selections_has_options">Are opțiuni</string>
     <string name="settings_system_patch_selections_patches_options">Opțiuni de modificare</string>

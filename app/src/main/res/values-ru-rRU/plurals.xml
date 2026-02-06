@@ -12,4 +12,28 @@
         <item quantity="many">Выполнить %d исправлений</item>
         <item quantity="other">Выполнить %d исправлений</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файла</item>
+        <item quantity="many">%d APK файлов</item>
+        <item quantity="other">%d APK файлов</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d сохраненный выбор</item>
+        <item quantity="few">%d сохраненных выбора</item>
+        <item quantity="many">%d сохраненных выборов</item>
+        <item quantity="other">%d сохраненных выборов</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Отключено %d источников</item>
+        <item quantity="few">Отключено %d источников</item>
+        <item quantity="many">Отключено %d источников</item>
+        <item quantity="other">Отключено %d источников</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Включено %d источников</item>
+        <item quantity="few">Включено %d источников</item>
+        <item quantity="many">Включено %d источников</item>
+        <item quantity="other">Включено %d источников</item>
+    </plurals>
 </resources>

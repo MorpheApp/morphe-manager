@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Patch-Bündel umbenennen</string>
     <string name="sources_dialog_duplicate_name_error">Ein Patch-Bündel mit diesem Namen existiert bereits</string>
     <string name="sources_dialog_missing_error">Konnte diese Patch-Quelle nicht aktualisieren</string>
-    <string name="sources_dialog_disabled_toast">Deaktiviert %d Quelle(n)</string>
-    <string name="sources_dialog_enabled_toast">Aktiviert %d Quelle(n)</string>
     <string name="sources_dialog_view_any_version">Beliebige Version</string>
     <string name="sources_dialog_view_any_package">Beliebiges Paket</string>
     <string name="sources_dialog_add_source">Patch-Quelle hinzufügen</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Fehler beim Herunterladen der Quellen: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Haben Sie die ursprüngliche ungepatchte APK? </string>
-    <string name="home_apk_availability_dialog_description_simple">Um das %1$s zu patchen, benötigst du ein unpatched APK mit der Version:</string>
-    <string name="home_apk_availability_dialog_description_expert">Hast du ein unpatched %1$s APK?
+    <string name="home_apk_availability_dialog_simple">Um %1$s zu patchen, benötigen Sie eine unpatched APK mit der Version:</string>
+    <string name="home_apk_availability_dialog_expert">"Haben Sie eine unpatched %1$s APK?
 
-Kompatible Versionen:</string>
+Kompatible Versionen:"</string>
     <string name="home_apk_availability_recommended_label">Empfohlen</string>
     <string name="home_apk_availability_unpatched_label">Unbehandelt</string>
     <string name="home_apk_availability_yes">Ja, ich habe es </string>
@@ -475,7 +473,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_export_debug_logs_export_success">Protokolle exportiert</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Speichermanagement</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Gesamtgröße: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Gepatched APKs</string>
@@ -495,7 +492,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_system_patch_selections_title">Patchauswahlen</string>
     <string name="settings_system_patch_selections_description">Verwalten Sie gespeicherte Patchauswahlen und Optionen. Diese bestehen nach der Deinstallation der App fort.</string>
     <string name="settings_system_patch_selections_description_short">Für zukünftiges Patchen gespeichert</string>
-    <string name="settings_system_patch_selections_count">%1$d gespeicherte Auswahl(en)</string>
     <string name="settings_system_patch_selections_empty">Keine gespeicherten Patchauswahlen</string>
     <string name="settings_system_patch_selections_has_options">Hat Optionen</string>
     <string name="settings_system_patch_selections_patches_options">Patchoptionen</string>

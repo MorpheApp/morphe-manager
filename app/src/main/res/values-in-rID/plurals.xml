@@ -6,4 +6,16 @@
     <plurals name="patches_executed">
         <item quantity="other">Menerapkan %d tambalan</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%d berkas APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="other">%d pemilihan yang disimpan</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="other">Menonaktifkan %d sumber</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="other">Mengaktifkan %d sumber</item>
+    </plurals>
 </resources>

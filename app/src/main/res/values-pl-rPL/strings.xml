@@ -50,8 +50,6 @@
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
     <string name="sources_dialog_duplicate_name_error">Źródło modyfikacji o tej nazwie już istnieje</string>
     <string name="sources_dialog_missing_error">Nie można zaktualizować tego źródła modyfikacji</string>
-    <string name="sources_dialog_disabled_toast">Wyłączono %d źródło(ła)</string>
-    <string name="sources_dialog_enabled_toast">Włączono %d źródło(ła)</string>
     <string name="sources_dialog_view_any_version">Dowolna wersja</string>
     <string name="sources_dialog_view_any_package">Dowolny pakiet</string>
     <string name="sources_dialog_add_source">Dodaj źródło modyfikacji</string>
@@ -72,10 +70,10 @@
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Czy masz oryginalny, niezmodyfikowany plik APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Aby zmodyfikować %1$s, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
-    <string name="home_apk_availability_dialog_description_expert">Czy masz niezmodyfikowany plik APK %1$s?
+    <string name="home_apk_availability_dialog_simple">Aby zmodyfikować %1$s, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
+    <string name="home_apk_availability_dialog_expert">"Czy masz niezmodyfikowany plik APK %1$s?
 
-Kompatybilne wersje:</string>
+Kompatybilne wersje:"</string>
     <string name="home_apk_availability_recommended_label">Zalecana</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
     <string name="home_apk_availability_yes">Tak, mam</string>
@@ -475,7 +473,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Zarządzanie pamięcią</string>
-    <string name="settings_system_apks_count">%d APK</string>
     <string name="settings_system_apks_size">Całkowity rozmiar: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Zmodyfikowane pliki APK</string>
@@ -495,7 +492,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
     <string name="settings_system_patch_selections_description">Zarządzaj zapisanymi wyborami i opcjami modyfikacji. Pozostają one zachowane po odinstalowaniu aplikacji</string>
     <string name="settings_system_patch_selections_description_short">Zachowane do przyszłego modyfikowania</string>
-    <string name="settings_system_patch_selections_count">%1$d zapisanych wyborów</string>
     <string name="settings_system_patch_selections_empty">Brak zapisanych wyborów modyfikacji</string>
     <string name="settings_system_patch_selections_has_options">Posiada opcje</string>
     <string name="settings_system_patch_selections_patches_options">Opcje modyfikacji</string>
