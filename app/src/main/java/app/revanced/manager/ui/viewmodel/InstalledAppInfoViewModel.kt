@@ -294,10 +294,29 @@ class InstalledAppInfoViewModel(
         // Validate and filter options - only keep options for patches that exist
         val validatedOptions = validatePatchOptions(savedOptions, bundlePatches)
 
-        // Log validation results
+        // Log validation results and update database if needed
         val removedPatchCount = savedPatches.values.sumOf { it.size } - validatedPatches.values.sumOf { it.size }
         if (removedPatchCount > 0) {
             Log.w(tag, "Removed $removedPatchCount invalid patches from selection during repatch")
+
+            // Save validated data back to database to clean up invalid records
+            withContext(Dispatchers.IO) {
+                // Update installed app with validated patches
+                installedAppRepository.addOrUpdate(
+                    app.currentPackageName,
+                    app.originalPackageName,
+                    app.version,
+                    app.installType,
+                    validatedPatches,
+                    app.selectionPayload,
+                    app.patchedAt
+                )
+
+                // Update options with validated options
+                patchOptionsRepository.saveOptions(app.originalPackageName, validatedOptions)
+
+                Log.i(tag, "Cleaned up invalid patches and options in database")
+            }
         }
 
         // Check if Expert Mode is enabled
