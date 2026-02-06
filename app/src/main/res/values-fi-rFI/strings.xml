@@ -4,9 +4,9 @@
     <string name="home_other_apps">Muut sovellukset</string>
     <string name="home_not_patched_yet">Ei vielä päivitetty</string>
     <string name="home_no_patches_available">Ei patcheja saatavilla</string>
-    <string name="home_default_source_disabled">Morphe-patchin lähde on poistettu. Kytke se päälle Patch sources -lehdessä tai käytä Expert-moodia.</string>
+    <string name="home_default_source_disabled">Morphe-patchin lähde on poistettu. Koteloa sallitaan Patch sources -lehdellään tai käytä Expert-moodia.</string>
     <string name="android_11_bug_dialog_title">Android 11 virhe</string>
-    <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa on myönnettävä etukäteen, jotta vältetään Android 11 -järjestelmän virhe, joka vaikuttaa negatiivisesti käyttökokemukseen.</string>
+    <string name="android_11_bug_dialog_description">Sovelluksen asennuslupa tulee myöntää etukäteen välttääkseen Android 11 -järjestelmän bugin, joka haittaakin käyttäjätapausta.</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uusi päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennukseen</string>
@@ -49,16 +49,19 @@
     <string name="sources_dialog_display_name">Näytönimi</string>
     <string name="sources_dialog_rename">Muokka patch- lähde</string>
     <string name="sources_dialog_duplicate_name_error">Nimi on jo käytössä</string>
-    <string name="sources_dialog_missing_error">Ei voin muokata tätä patch- lähdettä</string>
+    <string name="sources_dialog_missing_error">Tätä patch-lähdettä ei voitu päivittää.</string>
     <string name="sources_dialog_disabled_toast">Poistettiin %d lähde(t)</string>
     <string name="sources_dialog_enabled_toast">Aktivoitettu %d lähde(t)</string>
     <string name="sources_dialog_view_any_version">Mikä vain versio</string>
     <string name="sources_dialog_view_any_package">Mikä vain paketti</string>
     <string name="sources_dialog_add_source">Lisää patch- lähde</string>
-    <string name="sources_dialog_delete_confirm_message">Poistetaanko lähde \"%s\"? Täätä ei voi peruuttaa.</string>
+    <string name="sources_dialog_delete_confirm_message">Poista lähde \"%s\"? Tätä ei voi peruuttaa.</string>
     <string name="sources_dialog_remote">Etämain</string>
     <string name="sources_dialog_remote_url">Lähde-URL</string>
-    <string name="sources_dialog_remote_description">Anna JSON-palvelun URL-osoite patch- lähteelle</string>
+    <string name="sources_dialog_remote_url_formats">"Esimerkkejä:
+• github.com/omistaja/projekti
+• raw.githubusercontent.com/omistaja/projekti/main/patches-bundle.json
+• esimerkki.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Kotima</string>
     <string name="sources_dialog_local_file">Valitse patch- lähde-tiedosto</string>
     <string name="sources_dialog_local_file_description">Valitse .mpp patch- lähde-tiedosto tallennokse</string>
@@ -69,7 +72,12 @@
     <string name="sources_download_fail">Ei saatu patch- lähteiden lataus: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Onko sinulla alkuperäinen laikkaamaton APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Voit korjata ohjelmaa %1$s, tarvitset version %2$s (korjaamaton)</string>
+    <string name="home_apk_availability_dialog_description_simple">Päivityksen %1$s varten tarvitset patjaton APK:n versio:</string>
+    <string name="home_apk_availability_dialog_description_expert">Oletko saanut patjaton %1$s APK:n?
+
+Sovittuvat versiot:</string>
+    <string name="home_apk_availability_recommended_label">Suositeltu</string>
+    <string name="home_apk_availability_unpatched_label">Ei korjattuja</string>
     <string name="home_apk_availability_yes">Kyllä, minulla on se</string>
     <string name="home_apk_availability_no">Ei, auta minua löytämään se</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +93,7 @@
     <string name="home_download_instructions_continue">Jatka APKMirror.com:iin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Valitse lataamasi APK</string>
-    <string name="home_file_picker_prompt_description">Valitse nyt lataamasi %1$s APK-tiedosto.</string>
+    <string name="home_file_picker_prompt_description">Valitse nyt ladottu %1$s APK-tiedosto</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Avaa ladatun APK-tiedosto</string>
     <string name="home_file_picker_prompt_open_apk">Avaa APK-tiedosto</string>
     <string name="home_recommended_version">Suositeltu versio</string>
@@ -109,12 +117,14 @@
 Oletko varma, että haluat jatkaa?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Tämä APK ei ole suositin app-versio. Jatkamalla voi johtaa epätoimivan appia.</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Jatkaakin</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Tämä APK ei ole suositeltu sovellusversio. Jatkaminen saattaa johtaa toimimattomaan sovellukseen</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Vain väärin väärä</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Sopivia versioita:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Ei tuettuja</string>
     <string name="home_dialog_wrong_package_title">Valitettu paketti ei ole sovitettu sinulle haluttuun sovellukselle.</string>
-    <string name="home_dialog_wrong_package_description">Odotettu paketti</string>
-    <string name="home_dialog_expected_package">Odotettu paketti</string>
-    <string name="home_dialog_selected_package">Valitettu paketti</string>
+    <string name="home_dialog_wrong_package_description">Valittu APK ei ole sovellukselle, jonka halusit korjata</string>
+    <string name="home_dialog_expected_package">Odotettu paketti:</string>
+    <string name="home_dialog_selected_package">Valittu paketti:</string>
     <!-- Patch Options -->
     <string name="custom_color">Mukautettu väri</string>
     <string name="hex_color">HEX-väri</string>
@@ -124,43 +134,38 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patch_option_enter_decimal">Anna desimaali</string>
     <string name="patch_option_pick_folder">Valitse kansio</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Luo sopeutuva ikoni</string>
-    <string name="adaptive_icon_create">Luo ikoni</string>
+    <string name="adaptive_icon_create">Luo adaptiivinen kuvake</string>
     <string name="adaptive_icon_instructions">Valitse esikuvan etusivu, valitse taustaväri ja säädä esikatsetta pinchin avulla</string>
     <string name="adaptive_icon_preview">Esikatselu</string>
-    <string name="adaptive_icon_select_foreground">Valitse esikuvan kuva</string>
-    <string name="adaptive_icon_change_foreground">Vaihda esikuvan kuva</string>
+    <string name="adaptive_icon_select_image">Valitse kuva</string>
+    <string name="adaptive_icon_change_image">Vaihda kuvaa</string>
     <string name="adaptive_icon_background_color">Taustaväri</string>
     <string name="adaptive_icon_reset_transform">Nollaa sijainti ja skaala</string>
     <string name="adaptive_icon_safe_zone_inner">Turvallinen alue (aina näkyvä)</string>
     <string name="adaptive_icon_safe_zone_outer">Maskin alue (saattaa leikata)</string>
     <string name="adaptive_icon_created_success">Adaptiivinen kuvake luotu onnistuneesti</string>
     <string name="adaptive_icon_creation_failed">Ei onnistu luoda adaptiivista kuvaetta</string>
-    <string name="adaptive_icon_create_new">Luo uusi kuvake</string>
     <string name="adaptive_icon_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_icons\' kansio luotujen kuvakkeiden kanssa</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">Luo mukautettu otsikko</string>
-    <string name="header_creator_create">Luo otsikko</string>
-    <string name="header_creator_create_new">Luo uusi otsikko</string>
+    <string name="header_creator_create">Luo mukautettu otsikko</string>
     <string name="header_creator_instructions">Valitse kuvat valoiselle ja tummalle teemalle, sitten säädä pinch-to-zoom-puhkein</string>
     <string name="header_creator_light_theme">Valoisan teeman otsikko</string>
     <string name="header_creator_dark_theme">Tummalle teemalle otsikko</string>
-    <string name="header_creator_select_light">Valitse valoisan teeman kuva</string>
-    <string name="header_creator_change_light">Vaihda valoisan teeman kuva</string>
-    <string name="header_creator_select_dark">Valitse tumman teeman kuva</string>
-    <string name="header_creator_change_dark">Vaihda tumman teeman kuva</string>
     <string name="header_creator_no_image">Ei kuvaa valittu</string>
     <string name="header_creator_success">Otsikko luotu onnistuneesti</string>
     <string name="header_creator_failed">Ei onnistu luoda otsikkoa</string>
     <string name="header_creator_folder_explanation">Valitse missä luoda \'morphe_branding/morphe_header\' kansio luotujen otsikoiden kanssa</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Oletko varmaasi poistaa tätä sovellusta? Tätä ei voi peruuttaa.</string>
-    <string name="home_app_info_saved_app_delete_confirmation">Oletko varmaasi poistaa tallennettu sovellus? Tätä ei voi peruuttaa.</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">Oletko varmaasi poistaa tallennettu kopio? Tätä ei voi peruuttaa.</string>
+    <string name="home_app_info_remove_app_warning">Tämä poistaa pysyvästi:</string>
+    <string name="home_app_info_delete_item_database">Tietokantamerkintä</string>
+    <string name="home_app_info_delete_item_patched_apk">Korjattu APK-tiedosto</string>
+    <string name="home_app_info_delete_item_original_apk">Alkuperäinen APK-tiedosto</string>
+    <string name="home_app_info_delete_preservation_note">Sovelluksesi korjausvalinnat ja asetukset säilytetään tulevaisuuden korjaukseen</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Ei-nimeltä</string>
     <string name="home_app_info_patches_replace_fail">Ei saatu tuoda patches: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Alkuperainen APK ei löydytty. Ei voida uudelleen patchata tätä sovellusta.</string>
+    <string name="home_app_info_repatch_no_original_apk">Alkuperäistä APK-tiedostoa ei löytynyt. Ei voida korjastaa tätä sovellusta.</string>
     <string name="home_app_info_repatch_requires_original">Repatch vaatii alkuperäisen APK-tiedoston</string>
     <string name="home_app_info_original_package_name">Alkuperäinen paketin nimi</string>
     <string name="home_app_info_applied_patches">Käytetyit patches</string>
@@ -170,9 +175,9 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_app_info_install_type_system_installer">Järjestelmän asennustyyppi</string>
     <string name="home_app_info_patched_at">Muokattu</string>
     <string name="home_app_info_patch_update_available">Uusi patch-versio on saatavilla</string>
-    <string name="home_app_info_patch_update_available_description">Uudella patch-versio on saatavilla. Repatchaa sovellustasi saada uusimmat parantimia ja korjauseita.</string>
+    <string name="home_app_info_patch_update_available_description">Uudempi korjausversio on saatavilla. Korjaa sovelluksesi uudelleen saadaksesi uusimmat parannukset ja korjaukset</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Juuritila vaatii alkuperäisen APK:n asentamisen laitteellesi ennen korjausta.</string>
+    <string name="root_install_apk_required">Juurtimemoodi vaatii alkuperäisen APK-tiedoston asennuksen laitteellesi ennen korjausta.</string>
     <string name="root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Virhe kopioitu leikepöydälle</string>
@@ -241,16 +246,16 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="patched_app_saved_toast">Muokattu sovellus tallennettu myöhempää käyttöä varten</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="download_apk">Lataa APK-tiedosto</string>
-    <string name="plugin_activity_dialog_body">Tämän laajennuksen jatkamiseksi vaaditaan käyttäjän toimia.</string>
-    <string name="patcher_process_exit_message">Korjausprosessi päättyi koodiin %1$d.</string>
+    <string name="plugin_activity_dialog_body">Tätä liitännöä varten tarvitaan käyttäjän interaktiivisuutta.</string>
+    <string name="patcher_process_exit_message">Korjaaja-prosessi keskeytyi koodilla %1$d.</string>
     <string name="install_app_success">Asennettu onnistuneesti</string>
     <string name="install_app_fail">Sovelluksen asentaminen epäonnistui: %s</string>
-    <string name="install_timeout_message">Asennus ei valmistunut. Tarkista järjestelmän asennusvalintaikkuna ja yritä uudelleen.</string>
+    <string name="install_timeout_message">Asennus ei päätytty. Tarkista järjestelmän asennusdialogi ja yritä uudelleen.</string>
     <string name="save_apk_success">APK tallennettu</string>
     <string name="saved_app_export_failed">Muokattujen sovellusten vieminen epäonnistui</string>
     <string name="saved_app_removed_toast">Tallennettu sovellus poistettu</string>
     <string name="saved_app_copy_removed_toast">Tallennuskopio poistettu</string>
-    <string name="saved_app_launch_unavailable">Asenna sovellus ennen sen avaamista.</string>
+    <string name="saved_app_launch_unavailable">Asenna sovellus ennen avaamista.</string>
     <string name="package_name">Paketin nimi</string>
     <string name="failed_to_mount">Liitoksen muodostaminen epäonnistui: %s</string>
     <string name="failed_to_unmount">Liitoksen poistaminen epäonnistui: %s</string>
@@ -262,11 +267,13 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_appearance_background">Taustallus</string>
     <string name="settings_appearance_background_circles">Piirrokkeet</string>
     <string name="settings_appearance_background_rings">Rengastet</string>
-    <string name="settings_appearance_background_waves">Aallot</string>
+    <string name="settings_appearance_background_mesh">Ruutu</string>
     <string name="settings_appearance_background_space">Tähtä</string>
     <string name="settings_appearance_background_shapes">Muodot</string>
     <string name="settings_appearance_background_snow">Ei mitään</string>
     <string name="settings_appearance_background_none">Muokka appin ulkon</string>
+    <string name="settings_appearance_parallax_effect">Parallaksi-efekti</string>
+    <string name="settings_appearance_parallax_effect_description">Smooth background shifting when tilting the device</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Teema</string>
     <string name="settings_appearance_system">Järjestelmä</string>
@@ -301,6 +308,16 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="settings_advanced_expert_mode_description">Expert-tila sallitsee etäasetuksia ja muokkaustustimia</string>
     <string name="settings_advanced_strip_unused_libs">Poistaa käyttämättä alkuperäisiä kirjastot</string>
     <string name="settings_advanced_strip_unused_libs_description">Poistaa käyttämättä alkuperäisiä kirjastot ei ole soveltuva vanhoilla laitteilla</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat_description">Tarvitaan pull request -pakkauksille</string>
+    <string name="settings_advanced_github_pat_configured">Token asetettu</string>
+    <string name="settings_advanced_github_pat_how_to_get">Miten saada tokenia</string>
+    <string name="settings_advanced_github_pat_dialog_title">Aseta GitHubhen henkilökohtainen pääsytokeni</string>
+    <string name="settings_advanced_github_pat_dialog_description">Aseta GitHubhen henkilökohtainen pääsytokeni, jotta voit lisätä Pull Requestit ulkoisina lähteina. Luo PAT:lle skooppi public_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Sisällytä asetuksien viedossa</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lisää tämä PAT viedyihin asetuksiin</string>
+    <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patch-asetukset</string>
     <string name="settings_advanced_patch_options_youtube_description">Teema, mainosta, otsikko ja lyhyt-versiot asetukset</string>
@@ -374,40 +391,43 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Poista Shorts-pikku valikkeen</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Asentaja</string>
+    <string name="installer_title">Valitse asenninväline.</string>
     <string name="installer_internal_name">Järjestelmän asennusohjelma</string>
     <string name="installer_internal_description">Käytä Android-pakettien asennusohjelmaa</string>
     <string name="installer_auto_saved_name">Root-liitosasennusohjelma</string>
-    <string name="installer_auto_saved_description">Liittää muokatun APK:n asennetun sovelluksen päälle (vaatii root-oikeudet).</string>
-    <string name="installer_shizuku_description">Asenna hiljaa käyttämällä Shizukua tai Sui:ta.</string>
+    <string name="installer_auto_saved_description">Asentaa korjattu APK asennetun sovelluksen päälle (juurinoikeudet vaaditaan)</string>
+    <string name="installer_shizuku_description">Asenna hiljaa käyttämällä Shizuku tai Sui.</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
     <string name="installer_none_description">Varajärjestelmää ei ole määritetty</string>
     <string name="installer_status_requires_root">Vaatii pääkäyttäjän käyttöoikeudet</string>
-    <string name="installer_status_not_supported">Ei tuettu tälle toiminnalle.</string>
-    <string name="installer_status_shizuku_not_installed">Asenna Shizuku tai Sui käyttääksesi tätä vaihtoehtoa.</string>
+    <string name="installer_status_not_supported">Tätä toimitusta ei tueta tälle toiminnolle.</string>
+    <string name="installer_status_shizuku_not_installed">Asenna Shizuku tai Sui käyttääksesi tämän vaihtoehdon.</string>
     <string name="installer_status_shizuku_not_running">Käynnistä Shizuku tai Sui ja yritä uudelleen.</string>
-    <string name="installer_status_shizuku_permission">Myönnä Shizuku-lupa Morphe:lle Shizuku-sovelluksesta.</string>
-    <string name="installer_mount_warning_install">Ensisijainen asennusohjelmasi on määritetty rootatuksi asennusohjelmaksi. Tätä tallennettua sovellusta ei asennettu liittämällä.</string>
+    <string name="installer_status_shizuku_permission">Myönnä Shizukulle lupa Morphelle Shizuku-sovelluksesta.</string>
+    <string name="installer_mount_warning_install">Pääasennuksesi on asetettu juurtimen asennukseen. Tämä tallennettu sovellus ei ole asennettu juurtimella.</string>
     <string name="installer_mount_mismatch_title">Rootattua asennusohjelmaa ei valittu</string>
-    <string name="installer_mount_mismatch_install">Tämä sovellus asennettiin rootatulla asennusohjelmalla. Vaihda ensisijainen asennusohjelmasi takaisin käyttämään liitämistoimintoja ja liitä sitten.</string>
-    <string name="mount_version_mismatch_message">Alkuperäisen sovelluksen versio (%2$s) ei vastaa muokattua sovellusversiota (%1$s). Liitä vastaava alkuperäinen versio ja yritä uudelleen.</string>
-    <string name="installer_status_shizuku_unsupported">Asennettua Shizuku-versiota ei tueta.</string>
+    <string name="installer_mount_mismatch_install">Tämä sovellus on asennettu juurtimen asennukseen. Palauta pääasennuksesi juurtimelle, jotta voit käyttää juurtimetoimintoja, sitten juurta.</string>
+    <string name="mount_version_mismatch_message">Perusversion (%2$s) ei vastaa korjattua sovellusta (%1$s). Juurta korjatun perusversion kanssa, sitten yritä uudelleen.</string>
+    <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
-    <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennustoimintoon.</string>
-    <string name="installer_hint_blocked">Asennuksen esti Android. Tarkista Play Protect tai suojausasetukset.</string>
-    <string name="installer_hint_conflict">Tämä pakettinimi on jo asennettu toisella sovelluksella. Poista se ennen jatkamista.</string>
-    <string name="installer_hint_incompatible">APK ei ole yhteensopiva tämän laitteen tai Android-version kanssa.</string>
-    <string name="installer_hint_invalid">APK on virheellinen tai vioittunut.</string>
-    <string name="installer_hint_storage">Asennukseen ei ole riittävästi tallennustilaa.</string>
-    <string name="installer_hint_timeout">Asennus aikakatkaistiin. Yritä uudelleen.</string>
+    <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
+    <string name="installer_hint_blocked">Android esti asennuksen. Tarkista Play Protect tai turvaympäristöasetukset.</string>
+    <string name="installer_hint_conflict">Toinen sovellus samalla pakettinimellä on jo asennettu. Poista se ennen jatkamista.</string>
+    <string name="installer_hint_incompatible">APK ei ole yhteensopiva tällä laitteella tai Android-versiolla.</string>
+    <string name="installer_hint_invalid">APK on epäkelpoa tai vikaista.</string>
+    <string name="installer_hint_storage">Tilaa ei riitä asennukseen.</string>
+    <string name="installer_hint_timeout">Asennus aikakatkosi. Yritä uudelleen.</string>
     <string name="installer_hint_aborted">Asennus peruutettiin.</string>
     <string name="installer_external_launched">Avataan kohdetta %1$s…</string>
     <string name="installer_external_timeout">%1$s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen.</string>
-    <string name="installer_external_success">%1$s ilmoitti onnistuneesta asennuksesta.</string>
-    <string name="installer_external_finished_no_change">%1$s valmis ilman sovelluksen asennusta. Tarkista virheilmoitukset asennusohjelmasta ja yritä uudelleen.</string>
+    <string name="installer_external_success">%1$s raportoi onnistuneen asennuksen.</string>
+    <string name="installer_external_finished_no_change">%1$s päättyi ilman sovelluksen asennusta. Tarkista asennusväline virheviestistä ja yritä uudelleen.</string>
     <string name="installer_unavailable_title">%s ei ole käytettävissä</string>
-    <string name="installer_unavailable_message">Suosittu asennusohjelmasi (%s) ei ole tällä hetkellä käytettävissä. Voit korjata ongelman ja yritä uudelleen tai käyttää standardia asennusohjelmaa.</string>
-    <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja sille on myönnetty lupa tälle sovellukselle.</string>
+    <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
+    <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
     <string name="installer_use_standard">Käytä oletusta</string>
+    <string name="settings_prompt_installer_on_install">Näytä asenninvälinevalinta jokaisen patikoidun sovelluksen asennuksen yhteydessä.</string>
+    <string name="settings_prompt_installer_on_install_description">Näytä asenninvälinevalinta jokaisen patikoidun sovelluksen asennuksen yhteydessä.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prosessointi</string>
     <string name="settings_system_process_runtime">Käytä patchaamisen prosessin erillisen prosessin</string>
@@ -424,7 +444,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_import_keystore">Tuo custom-keystore</string>
     <string name="settings_system_import_keystore_description">Tuo custom-keystore</string>
     <string name="settings_system_import_keystore_dialog_title">Anna keystore-tunnus (alias)</string>
-    <string name="settings_system_import_keystore_dialog_description">Sinun on syöttää varmenteeseen liittyvät tunnukset sen tuomiseen.</string>
+    <string name="settings_system_import_keystore_dialog_description">Sinun on syöttää varmenteeseen liittyvät tunnukset sen tuomiseen</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Väärin keystore-tunnus (alias)</string>
     <string name="settings_system_import_keystore_dialog_button">Tuo</string>
@@ -454,7 +474,7 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
     <string name="settings_system_export_debug_logs_export_success">%d APK(t)</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Yhteensä APK(t)</string>
+    <string name="settings_system_storage_management">Tallennustilan hallinta</string>
     <string name="settings_system_apks_count">Yhteensä APK(t)</string>
     <string name="settings_system_apks_size">Patchettujen APK(t)</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
@@ -466,11 +486,21 @@ Kuvien mitat on oltava seuraavasti:
     <string name="settings_system_patched_apks_deleted">Tallennettu patchetti poistettu onnistuneesti</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Alkuperäisten APK(t)</string>
-    <string name="settings_system_original_apks_description">Alkuperäisten APK(t) tallennetaan repatchaamista varten. Ainoa uusin versio on säilytä jokaiselle sovellukselle.</string>
+    <string name="settings_system_original_apks_description">Alkuperäiset APK-tiedostot tallennetaan uudelleenpatikointia varten. Ainoastaan uusin versio säilytetään jokaiselle sovellukselle</string>
     <string name="settings_system_original_apks_empty">Ei tallennettu alkuperäisiä APK(t)</string>
     <string name="settings_system_original_apks_deleted">Alkuperäisen APK(t) poistettu onnistuneesti</string>
     <string name="settings_system_original_apks_delete_title">Poistetaanko alkuperäisen APK(t)? Tätä ei voi peruuttaa.</string>
-    <string name="settings_system_original_apks_delete_confirm">Poistetaanko alkuperäisen APK(t) %s? Tätä ei voi peruuttaa. Ei voida uudelleen patchaamista ilman uutta APK(t).</string>
+    <string name="settings_system_original_apks_delete_confirm">Poistaa alkuperäisen APK:n %s? Korjaus ei ole enää mahdollista ilman uuden APK:n antamista</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Korjausvalinnat</string>
+    <string name="settings_system_patch_selections_description">Hallinnoi tallennettuja korjausvalintoja ja asetuksia. Nämä säilytetään sovelluksen poistamisen jälkeen</string>
+    <string name="settings_system_patch_selections_description_short">Tallennettu tulevaisuuden korjaukseen</string>
+    <string name="settings_system_patch_selections_count">%1$d tallennettua valintaa</string>
+    <string name="settings_system_patch_selections_empty">Ei tallennettuja korjausvalintoja</string>
+    <string name="settings_system_patch_selections_has_options">Sisältää asetuksia</string>
+    <string name="settings_system_patch_selections_patches_options">Korjausasetukset</string>
+    <string name="settings_system_patch_selection_delete_title">Poista korjausvalinta</string>
+    <string name="settings_system_patch_selection_deleted">Korjausvalinta poistettu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_share_website">Jaa verkkosivuston</string>
@@ -485,6 +515,7 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
     <string name="reset">Nollaa</string>
+    <string name="confirm">Vahvista</string>
     <string name="warning">Varoitus</string>
     <string name="error_">Virhe</string>
     <string name="retry">Yritä uudelleen</string>
@@ -536,10 +567,12 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
     <string name="changelog">Näytä muutoshistoriat</string>
+    <string name="changelog_description">Tarkastele uusimmat muutokset tässä päivityksessä</string>
     <string name="changelog_loading">Ladataan muutostietoja</string>
     <string name="changelog_download_fail">Muutostietojen lataus epäonnistui: %s</string>
     <string name="changelog_retry">Yritä uudelleen</string>
     <string name="changelog_empty">Ei sivustetta</string>
+    <string name="no_network_toast">Ei internet-yhteyttä käytettävissä</string>
     <string name="update_available">Päivitys saatavilla</string>
     <string name="ready_to_install_update">Valmis asentamaan päivityksen</string>
     <string name="update_completed">Päivitys asennettu</string>

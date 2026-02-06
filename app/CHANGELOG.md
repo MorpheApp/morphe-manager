@@ -1,3 +1,10 @@
+# app [1.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2026-02-06)
+
+
+### Bug Fixes
+
+* Create adaptive icons for all resolutions ([#171](https://github.com/MorpheApp/morphe-manager/issues/171)) ([f22aa3f](https://github.com/MorpheApp/morphe-manager/commit/f22aa3f343cc34270030dc52f347518e40bde322))
+
 # app [1.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2026-02-06)
 
 

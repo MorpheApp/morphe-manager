@@ -31,7 +31,6 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">فایل apk پچ نشده رو داری؟</string>
-    <string name="home_apk_availability_dialog_description_simple">برای پچ‌ کردن %1$s، به نسخه %2$s نیاز داری (پچ نشده)</string>
     <string name="home_apk_availability_yes">بله، دارمش</string>
     <string name="home_apk_availability_no">نه، کمکم کن پیداش کنم</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -66,6 +65,7 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -79,6 +79,7 @@
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
 </resources>
