@@ -20,6 +20,7 @@ class PreferencesManager(
 
     // Appearance tab
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
+    val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)

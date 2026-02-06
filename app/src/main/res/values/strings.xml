@@ -296,11 +296,13 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_background">Background animation</string>
     <string name="settings_appearance_background_circles">Circles</string>
     <string name="settings_appearance_background_rings">Rings</string>
-    <string name="settings_appearance_background_waves">Waves</string>
+    <string name="settings_appearance_background_mesh">Mesh</string>
     <string name="settings_appearance_background_space">Space</string>
     <string name="settings_appearance_background_shapes">Shapes</string>
     <string name="settings_appearance_background_snow">Snow</string>
     <string name="settings_appearance_background_none">None</string>
+    <string name="settings_appearance_parallax_effect">Parallax effect</string>
+    <string name="settings_appearance_parallax_effect_description">Smooth background shifting when tilting the device</string>
 
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Theme</string>
