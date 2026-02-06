@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_other_apps">અન્ય એપ્લિકેશનો</string>
+    <string name="home_not_patched_yet">હજુ પેચ કરેલ નથી </string>
+    <string name="home_no_patches_available">કોઈ પેચો ઉપલબ્ધ નથી</string>
+    <string name="android_11_bug_dialog_title">એન્ડ્રોઇડ 11 બગ</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">પ્રબંધક અધ્યતન સંસ્કરણ ઉપલબ્ધ છે</string>
+    <string name="home_update_available_subtitle">નવું સંસ્કરણ ઇન્સ્ટોલ કરવા માટે તૈયાર છે</string>
     <string name="home_update_error">અપડેટ નિષ્ફળ થયું</string>
     <string name="home_update_error_subtitle">તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને ફરી પ્રયાસ કરો</string>
+    <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>
     <string name="home_please_wait">કૃપા કરીને રાહ જુઓ...</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">તમે કઈ એપ્લિકેશનને પેચ કરવા માંગો છો?</string>
@@ -32,7 +39,6 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">શું તમારી પાસે અસલ અનપેચ્ડ APK છે?</string>
-    <string name="home_apk_availability_dialog_description_simple">%1$s ને પેચ કરવા માટે, તમારે %2$s (અનપૅચ કરેલ) સંસ્કરણની જરૂર છે</string>
     <string name="home_apk_availability_yes">હા, મારી પાસે છે</string>
     <string name="home_apk_availability_no">ના, તેને શોધવામાં મને મદદ કરો</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -48,19 +54,16 @@
     <string name="home_download_instructions_continue">APKMirror.com પર ચાલુ રાખો</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">તમે ડાઉનલોડ કરેલ APK પસંદ કરો</string>
-    <string name="home_file_picker_prompt_description">હવે તમે હમણાં જ ડાઉનલોડ કરેલ %1$s APK ફાઇલ પસંદ કરો.</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">મેં ડાઉનલોડ કરેલી APK ફાઇલ ખોલો</string>
     <string name="home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="home_selected_version">પસંદ કરેલ સંસ્કરણ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">અસમર્થિત સંસ્કરણ</string>
-    <string name="home_dialog_unsupported_version_dialog_description">આ APK એ ભલામણ કરેલ એપ્લિકેશન સંસ્કરણ નથી. આગળ વધવાથી એપ બિન-કાર્યક્ષમ બની શકે છે.</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ઘરની ધોરાજી ચલાવો</string>
     <string name="home_dialog_wrong_package_title">ખોટું પેકેજ પસંદ કર્યું</string>
-    <string name="home_dialog_wrong_package_description">પસંદ કરેલ APK એ એપ્લિકેશન માટે નથી જે તમે પેચ કરવાનો ઈરાદો ધરાવો છો.</string>
-    <string name="home_dialog_expected_package">અપેક્ષિત પેકેજ</string>
-    <string name="home_dialog_selected_package">પસંદ કરેલ પેકેજ</string>
+    <string name="home_dialog_expected_package">અપેક્ષિત પેકેજ:</string>
+    <string name="home_dialog_selected_package">પસંદ કરેલ પેકેજ:</string>
     <!-- Patch Options -->
     <string name="custom_color">કસ્ટમ રંગ</string>
     <string name="hex_color">હેક્સ રંગ</string>
@@ -70,7 +73,6 @@
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_patches_name_default">પેચો</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">રૂટ મોડને પેચ કરતા પહેલા તમારા ઉપકરણ પર મૂળ APK ઇન્સ્ટોલ કરવું જરૂરી છે.</string>
     <string name="root_gmscore_excluded">GmsCore સપોર્ટ પેચ રૂટ મોડમાં બાકાત છે</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
@@ -124,7 +126,6 @@
     <string name="settings_appearance_background">બેકગ્રાઉન્ડ એનિમેશન</string>
     <string name="settings_appearance_background_circles">વર્તુળો </string>
     <string name="settings_appearance_background_rings">રિંગ્સ</string>
-    <string name="settings_appearance_background_waves">તરંગ</string>
     <string name="settings_appearance_background_space">આકાશ</string>
     <string name="settings_appearance_background_shapes">આકારો</string>
     <string name="settings_appearance_background_snow">બરફ</string>
@@ -146,6 +147,7 @@
     <string name="settings_advanced_updates_use_prereleases">પૂર્વ પ્રકાશિત સંસ્કરણનો ઉપયોગ કરો</string>
     <string name="settings_advanced_updates_use_prereleases_description">નવા પેચ અને મેનેજર ફીચર્સનો વહેલા અનુભવ મેળવો</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">પેચ વિકલ્પો</string>
     <string name="settings_advanced_patch_options_youtube_description">થીમ, બ્રાન્ડિંગ, હેડર, અને શોર્ટ્સ ઓપ્શન્સ</string>
@@ -226,6 +228,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_share_website">વેબસાઇટ બાટો </string>
     <string name="settings_system_share_website_description">સત્તાવાર Morphe વેબસાઇટ બાટો</string>

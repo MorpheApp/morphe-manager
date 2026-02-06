@@ -4,6 +4,6 @@
         <item quantity="other">%d 개의 패치</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">%d 개의 패치를 실행하였습니다</item>
+        <item quantity="other">%d개의 패치 실행</item>
     </plurals>
 </resources>

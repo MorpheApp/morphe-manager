@@ -4,9 +4,9 @@
     <string name="home_other_apps">Alte aplicații</string>
     <string name="home_not_patched_yet">Nu este actualizat încă</string>
     <string name="home_no_patches_available">Nu există patch-uri disponibile</string>
-    <string name="home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să folosiți modul Expert.</string>
+    <string name="home_default_source_disabled">Sursa Morphe este dezactivată. Vă rugăm să o activați în foaia Surselor de patch sau să utilizați modul Expert</string>
     <string name="android_11_bug_dialog_title">Eroare Android 11</string>
-    <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în prealabil pentru a evita o eroare în sistemul Android 11 care va afecta negativ experiența utilizatorului.</string>
+    <string name="android_11_bug_dialog_description">Permisiunea de instalare a aplicației trebuie acordată în avans pentru a evita o problemă în sistemul Android 11 care poate afecta negativ experiența utilizatorului</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Există actualizări disponibile</string>
     <string name="home_update_available_subtitle">Versiune nouă pregătită pentru instalare</string>
@@ -49,16 +49,19 @@
     <string name="sources_dialog_display_name">Nume afișat</string>
     <string name="sources_dialog_rename">Renumează sursă de patach</string>
     <string name="sources_dialog_duplicate_name_error">Există deja o sursă de patach cu acest nume</string>
-    <string name="sources_dialog_missing_error">Nu se poate actualiza această sursă de patach.</string>
+    <string name="sources_dialog_missing_error">Nu a fost posibil să se actualizeze sursa de patch</string>
     <string name="sources_dialog_disabled_toast">Dezactivat %d sursă(ri)</string>
     <string name="sources_dialog_enabled_toast">Activat %d sursă(ri)</string>
     <string name="sources_dialog_view_any_version">O orice versiune</string>
     <string name="sources_dialog_view_any_package">O orice pachet</string>
     <string name="sources_dialog_add_source">Adăugă sursă de patach</string>
-    <string name="sources_dialog_delete_confirm_message">Sigur doriți să ștergeți această sursă de patach? Acest lucru nu poate fi anulat.</string>
+    <string name="sources_dialog_delete_confirm_message">Ștergeți sursa \"%s\"? Acest lucru nu poate fi anulat.</string>
     <string name="sources_dialog_remote">Distanță</string>
     <string name="sources_dialog_remote_url">URL-ul sursei</string>
-    <string name="sources_dialog_remote_description">Introduceți URL-ul endpoint JSON pentru sursă de patach distanță</string>
+    <string name="sources_dialog_remote_url_formats">"Exemple:
+• github.com/proprietar/proiect
+• raw.githubusercontent.com/proprietar/proiect/main/patches-bundle.json
+• exemple.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Selectează fișierul sursei de patach</string>
     <string name="sources_dialog_local_file_description">Selectați un fișier .mpp de sursă de patach din stocare</string>
@@ -69,7 +72,12 @@
     <string name="sources_download_fail">Eșec la descărcarea surselor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Aveți fișierul APK original ne-patch-uit?</string>
-    <string name="home_apk_availability_dialog_description_simple">Pentru a repara %1$s, aveți nevoie de versiunea %2$s (nepatată)</string>
+    <string name="home_apk_availability_dialog_description_simple">Pentru a aplica %1$s, ai nevoie de un APK neactualizat cu versiunea:</string>
+    <string name="home_apk_availability_dialog_description_expert">Ai un APK neactualizat %1$s?
+
+Versiunile compatibile:</string>
+    <string name="home_apk_availability_recommended_label">Recomandat</string>
+    <string name="home_apk_availability_unpatched_label">Neactualizat</string>
     <string name="home_apk_availability_yes">Da, o am</string>
     <string name="home_apk_availability_no">Nu, ajută-mă să o găsesc</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +93,7 @@
     <string name="home_download_instructions_continue">Continuați la APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selectează fișierul APK descărcat</string>
-    <string name="home_file_picker_prompt_description">Acum selectează fișierul APK %1$s pe care tocmai l-ai descărcat.</string>
+    <string name="home_file_picker_prompt_description">Acum selectați fișierul %1$s APK pe care l-ați descărcat</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Deschide fișierul APK pe care l-am descărcat</string>
     <string name="home_file_picker_prompt_open_apk">Deschide fișierul APK</string>
     <string name="home_recommended_version">Versiune recomandată</string>
@@ -109,12 +117,14 @@
 Sunteți sigur că doriți să continuați?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versiune neacceptată</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Acest APK nu este o versiune recomandată a aplicației. Continuarea poate resultă în o aplicație nefuncțională.</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Acest APK nu este o versiune recomandată a aplicației. Continuarea poate duce la o aplicație nefuncțională</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuă în continuare</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Versiuni compatibile:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Necompatibil</string>
     <string name="home_dialog_wrong_package_title">Pachet greșit selectat</string>
-    <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care vrei să o patachiza.</string>
-    <string name="home_dialog_expected_package">Pachet expectat</string>
-    <string name="home_dialog_selected_package">Pachet selectat</string>
+    <string name="home_dialog_wrong_package_description">APK-ul selectat nu este pentru aplicația pe care doriți să o modificați</string>
+    <string name="home_dialog_expected_package">Pachet așteptat:</string>
+    <string name="home_dialog_selected_package">Pachet selectat:</string>
     <!-- Patch Options -->
     <string name="custom_color">Culoare personalizată</string>
     <string name="hex_color">Culoare hexazecimală</string>
@@ -124,43 +134,38 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patch_option_enter_decimal">Introduceți decimal</string>
     <string name="patch_option_pick_folder">Alege folder</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Creează icon adaptabil</string>
-    <string name="adaptive_icon_create">Creează icon</string>
+    <string name="adaptive_icon_create">Creează iconiță adaptivă</string>
     <string name="adaptive_icon_instructions">Alege o imagine de fundal, selectează culoarea de fundal și ajustează previzualizarea cu gesturi de zoom cu degetul</string>
     <string name="adaptive_icon_preview">Previzualizare</string>
-    <string name="adaptive_icon_select_foreground">Selectați imaginea de prim-plan</string>
-    <string name="adaptive_icon_change_foreground">Schimbați imaginea de prim-plan</string>
+    <string name="adaptive_icon_select_image">Selectează imagine</string>
+    <string name="adaptive_icon_change_image">Schimbă imagine</string>
     <string name="adaptive_icon_background_color">Culoare de fundal</string>
     <string name="adaptive_icon_reset_transform">Reinitalizați poziția și scalarea</string>
     <string name="adaptive_icon_safe_zone_inner">Zonă sigură (totdeauna vizibilă)</string>
     <string name="adaptive_icon_safe_zone_outer">Zonă mascată (poate fi tăiată)</string>
     <string name="adaptive_icon_created_success">Icoana adaptivă creată cu succes</string>
     <string name="adaptive_icon_creation_failed">Eroare la crearea icoanei adaptive</string>
-    <string name="adaptive_icon_create_new">Creați noua icoană</string>
     <string name="adaptive_icon_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_icons\' cu fișierele icoanelor generate</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">Creați antet personalizat</string>
-    <string name="header_creator_create">Creați antet</string>
-    <string name="header_creator_create_new">Creați noul antet</string>
+    <string name="header_creator_create">Creează antet personalizat</string>
     <string name="header_creator_instructions">Alegeți imaginile pentru teme luminoase și întunecate, apoi ajustați cu gesturi de zoom cu pinț</string>
     <string name="header_creator_light_theme">Antet temă luminoasă</string>
     <string name="header_creator_dark_theme">Antet temă întunecată</string>
-    <string name="header_creator_select_light">Selectați imaginea pentru temă luminoasă</string>
-    <string name="header_creator_change_light">Schimbați imaginea pentru temă luminoasă</string>
-    <string name="header_creator_select_dark">Selectați imaginea pentru temă întunecată</string>
-    <string name="header_creator_change_dark">Schimbați imaginea pentru temă întunecată</string>
     <string name="header_creator_no_image">Nicio imagine selectată</string>
     <string name="header_creator_success">Antet creat cu succes</string>
     <string name="header_creator_failed">Eroare la crearea antetului</string>
     <string name="header_creator_folder_explanation">Selectați unde să creați folderul \'morphe_branding/morphe_header\' cu fișierele antetului generate</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Sigur doriți să ștergeți această aplicație?</string>
-    <string name="home_app_info_saved_app_delete_confirmation">Sigur doriți să ștergeți această aplicație salvată?</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">Sigur doriți să ștergeți o copie salvată?</string>
+    <string name="home_app_info_remove_app_warning">Aceasta va șterge permanent:</string>
+    <string name="home_app_info_delete_item_database">Intrare în bază de date</string>
+    <string name="home_app_info_delete_item_patched_apk">Fișierul APK modificat</string>
+    <string name="home_app_info_delete_item_original_apk">Fișierul APK original</string>
+    <string name="home_app_info_delete_preservation_note">Selectia și opțiunile de modificare vor fi păstrate pentru viitoarele modificări</string>
     <string name="home_app_info_patches_name_default">Patachuri</string>
     <string name="home_app_info_patches_name_fallback">Fără nume</string>
     <string name="home_app_info_patches_replace_fail">Nu s-a putut importa patachuri: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Originalul APK nu a fost găsit. Nu se poate repatachiza această aplicație.</string>
+    <string name="home_app_info_repatch_no_original_apk">APK original nu găsit. Nu se poate repata acest aplicație</string>
     <string name="home_app_info_repatch_requires_original">Repatachizare necesită fișierul APK original</string>
     <string name="home_app_info_original_package_name">Numele pachetului original</string>
     <string name="home_app_info_applied_patches">Patachuri aplica</string>
@@ -170,9 +175,9 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_app_info_install_type_system_installer">Instalator sistem</string>
     <string name="home_app_info_patched_at">Patachizat</string>
     <string name="home_app_info_patch_update_available">Actualizare patach disponibilă</string>
-    <string name="home_app_info_patch_update_available_description">Există o versiune mai nouă a patachurilor. Repatachizați aplicația pentru a obține ultimele îmbunături și reparări.</string>
+    <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Modul root necesită ca fișierul APK original să fie instalat pe dispozitivul dvs. înainte de aplicarea patch-ului.</string>
+    <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
@@ -241,16 +246,16 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="patched_app_saved_toast">Aplicație modificată salvată pentru mai târziu</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="download_apk">Descarcă fișierul APK</string>
-    <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin.</string>
-    <string name="patcher_process_exit_message">Procesul de patch-uri s-a încheiat cu codul %1$d.</string>
+    <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
+    <string name="patcher_process_exit_message">Procesul de pata a ieșit cu codul %1$d</string>
     <string name="install_app_success">Instalat cu succes</string>
     <string name="install_app_fail">Nu s-a putut instala aplicația: %s</string>
-    <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul de instalare al sistemului și încercați din nou.</string>
+    <string name="install_timeout_message">Instalarea nu s-a finalizat. Verificați dialogul instalatorului sistemului și reîncercați</string>
     <string name="save_apk_success">APK salvat</string>
     <string name="saved_app_export_failed">Nu s-a putut exporta aplicația modificată</string>
     <string name="saved_app_removed_toast">Aplicație modificată salvată eliminată</string>
     <string name="saved_app_copy_removed_toast">Copie salvată eliminată</string>
-    <string name="saved_app_launch_unavailable">Instalează aplicația înainte de a o deschide.</string>
+    <string name="saved_app_launch_unavailable">Instalează aplicația înainte de deschiderea ei</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
@@ -262,11 +267,13 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_appearance_background">Animație de fond</string>
     <string name="settings_appearance_background_circles">Cercuri</string>
     <string name="settings_appearance_background_rings">Ringe</string>
-    <string name="settings_appearance_background_waves">Valuri</string>
+    <string name="settings_appearance_background_mesh">Rețea</string>
     <string name="settings_appearance_background_space">Spațiu</string>
     <string name="settings_appearance_background_shapes">Forme</string>
     <string name="settings_appearance_background_snow">Snow</string>
     <string name="settings_appearance_background_none">Fără</string>
+    <string name="settings_appearance_parallax_effect">Efect parallax</string>
+    <string name="settings_appearance_parallax_effect_description">Schimbare suedea a fundalului când se înclina dispozitivul</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">Sistem</string>
@@ -301,6 +308,16 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="settings_advanced_expert_mode_description">Activează funcții avansate și opțiuni de personalizare</string>
     <string name="settings_advanced_strip_unused_libs">Elimina librări native nefolosite</string>
     <string name="settings_advanced_strip_unused_libs_description">Șterge librări native pentru arhitecturi CPU nesupuse de pe aplicații patachate</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">Token GitHub</string>
+    <string name="settings_advanced_github_pat_description">Necesar pentru pachete de cereri de tractare</string>
+    <string name="settings_advanced_github_pat_configured">Token configurat</string>
+    <string name="settings_advanced_github_pat_how_to_get">Cum obţiţi un token</string>
+    <string name="settings_advanced_github_pat_dialog_title">Setare GitHub Personal Access Token</string>
+    <string name="settings_advanced_github_pat_dialog_description">Setati un GitHub Personal Access Token pentru a putea adauga cereri de modificare ca surse externe. Creaţi un PAT cu scopul public_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Include în exportul setărilor</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Adaugă acest PAT în setările exportate ale managerului</string>
+    <string name="settings_advanced_github_pat_export_warning">Nu împărtăşeşti PAT-ul tău. Dacă îl includi într-un export de setări, menţine fişierul privat, deoarece conţine tokenul</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opțiuni de patach</string>
     <string name="settings_advanced_patch_options_youtube_description">Opțiuni de temă, branding, antetă și Shorts</string>
@@ -374,40 +391,43 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Elimină butonul Shorts din widgetul de lansare</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalatorul</string>
+    <string name="installer_title">Selectați instalatorul</string>
     <string name="installer_internal_name">Instalator de sistem</string>
     <string name="installer_internal_description">Utilizați instalatorul de pachete Android</string>
     <string name="installer_auto_saved_name">Instalator de montare root</string>
-    <string name="installer_auto_saved_description">Montează fișierul APK modificat peste aplicația instalată (necesită root).</string>
-    <string name="installer_shizuku_description">Instalați silențios folosind Shizuku sau Sui.</string>
+    <string name="installer_auto_saved_description">Montați APK-ul modificat peste aplicația instalată (necesită root)</string>
+    <string name="installer_shizuku_description">Instalează în mod silent folosind Shizuku sau Sui</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
     <string name="installer_none_description">Nu este configurat niciun instalator de rezervă</string>
     <string name="installer_status_requires_root">Necesită acces root</string>
-    <string name="installer_status_not_supported">Nu este acceptat pentru această acțiune.</string>
-    <string name="installer_status_shizuku_not_installed">Instalați Shizuku sau Sui pentru a utiliza această opțiune.</string>
-    <string name="installer_status_shizuku_not_running">Porniți Shizuku sau Sui și încercați din nou.</string>
-    <string name="installer_status_shizuku_permission">Acordați permisiunea Shizuku lui Morphe din aplicația Shizuku.</string>
-    <string name="installer_mount_warning_install">Instalatorul principal este setat la instalatorul bazat pe montare. Această aplicație salvată nu a fost instalată folosind montarea.</string>
+    <string name="installer_status_not_supported">Nu este suportat pentru această acțiune</string>
+    <string name="installer_status_shizuku_not_installed">Instalați Shizuku sau Sui pentru a folosi această opțiune</string>
+    <string name="installer_status_shizuku_not_running">Porniți Shizuku sau Sui și reîncercați</string>
+    <string name="installer_status_shizuku_permission">Grantă Shizuku permisiunea pentru Morphe din aplicația Shizuku</string>
+    <string name="installer_mount_warning_install">Instalatorul principal setat la instalatorul montat radical. Această aplicație salvată nu a fost instalată folosind montaj</string>
     <string name="installer_mount_mismatch_title">Instalator bazat pe montare nenoselectat</string>
-    <string name="installer_mount_mismatch_install">Această aplicație a fost instalată folosind instalatorul bazat pe montare. Comutați instalatorul principal înapoi pentru a utiliza acțiunile de montare, apoi montați.</string>
-    <string name="mount_version_mismatch_message">Versiunea aplicației stoc (%2$s) nu corespunde versiunii aplicației modificată (%1$s). Montați versiunea stoc corespunzătoare, apoi încercați din nou.</string>
-    <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este acceptată.</string>
+    <string name="installer_mount_mismatch_install">Această aplicație a fost instalată folosind instalatorul montat radical. Schimbați instalatorul principal pentru a utiliza acțiunile de montaj, apoi montează</string>
+    <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivște cu versiunea aplicației patate (%1$s). Montează versiunea de bază potrivită, apoi reîncercați</string>
+    <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
-    <string name="installer_hint_generic">Instalarea a eșuat. Încearcă din nou sau comută la un alt program de instalare.</string>
-    <string name="installer_hint_blocked">Instalarea a fost blocată de Android. Verifică setările Play Protect sau de securitate.</string>
-    <string name="installer_hint_conflict">O altă aplicație cu acest nume de pachet este deja instalată. Dezinstaleaz-o înainte de a continua.</string>
-    <string name="installer_hint_incompatible">APK nu este compatibil cu acest dispozitiv sau versiune de Android.</string>
-    <string name="installer_hint_invalid">APK este nevalid sau corupt.</string>
-    <string name="installer_hint_storage">Nu există suficient spațiu de stocare pentru instalare.</string>
-    <string name="installer_hint_timeout">Instalarea a expirat. Încearcă din nou.</string>
-    <string name="installer_hint_aborted">Instalarea a fost anulată.</string>
+    <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>
+    <string name="installer_hint_blocked">Instalarea a fost blocată de Android. Verificați Play Protect sau setările de securitate</string>
+    <string name="installer_hint_conflict">Altă aplicație cu acest nume de pachet este deja instalată. Dezinstalați-o înainte de continuare</string>
+    <string name="installer_hint_incompatible">APK-ul nu este compatibil cu acest dispozitiv sau versiunea Android</string>
+    <string name="installer_hint_invalid">APK-ul este invalid sau corupt</string>
+    <string name="installer_hint_storage">Nu există suficient spațiu de stocare pentru instalarea</string>
+    <string name="installer_hint_timeout">Instalarea a expirat. Reîncercați</string>
+    <string name="installer_hint_aborted">Instalarea a fost anulată</string>
     <string name="installer_external_launched">Se deschide %1$s…</string>
-    <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verifică cealaltă aplicație și încearcă din nou.</string>
-    <string name="installer_external_success">%1$s a raportat o instalare reușită.</string>
-    <string name="installer_external_finished_no_change">\"%1$s\" a fost instalat fără a instala aplicația. Verificați instalatorul pentru mesajul de eroare și încercați din nou.</string>
+    <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verificați altă aplicație și reîncercați</string>
+    <string name="installer_external_success">%1$s a raportat o instalare reușită</string>
+    <string name="installer_external_finished_no_change">%1$s s-a finalizat fără instalarea aplicației. Verificați instalatorul pentru un mesaj de eroare și reîncercați</string>
     <string name="installer_unavailable_title">%s indisponibil</string>
-    <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți rezolva problema și încerca din nou sau folosi instalatorul standard.</string>
-    <string name="installer_unavailable_shizuku_hint">Asigurați-vă că Shizuku rulează și că permisiunea este acordată aplicației.</string>
+    <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți fixa problema și reinstalare, sau folosi instalatorul standard în schimb</string>
+    <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>
     <string name="installer_use_standard">Folosiånd standard</string>
+    <string name="settings_prompt_installer_on_install">Prompt instalator la instalare</string>
+    <string name="settings_prompt_installer_on_install_description">Afișează dialogul de selecție a instalatorului fiecare dată când instalați o aplicație patată</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Performanță</string>
     <string name="settings_system_process_runtime">Timp de rulare</string>
@@ -424,7 +444,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_import_keystore">Importă cheia de semnă</string>
     <string name="settings_system_import_keystore_description">Importă o cheie de semnă personalizată</string>
     <string name="settings_system_import_keystore_dialog_title">Introduceți datele cheii</string>
-    <string name="settings_system_import_keystore_dialog_description">Trebuie să introduceți datele cheii pentru a importa aceasta</string>
+    <string name="settings_system_import_keystore_dialog_description">Vă veți trebi să introduceți credențialele keystore-ului pentru a-l importa</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nume (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parolă</string>
     <string name="settings_system_import_keystore_dialog_button">Importare</string>
@@ -454,7 +474,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_export_debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Gestiune spațiu</string>
+    <string name="settings_system_storage_management">Gestionarea stocării</string>
     <string name="settings_system_apks_count">%d APK(%s)</string>
     <string name="settings_system_apks_size">Dimensiune totală: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
@@ -466,11 +486,21 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="settings_system_patched_apks_deleted">APK patcheat șters cu succes</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK-uri originale</string>
-    <string name="settings_system_original_apks_description">Fișierele APK-uri originale sunt salvate pentru repatching. Se menține doar ultima versiune pentru fiecare aplicație.</string>
+    <string name="settings_system_original_apks_description">Fişierele APK originale sunt salvate pentru repatching. Se menţine doar ultima versiune pentru fiecare aplicaţie</string>
     <string name="settings_system_original_apks_empty">Niciun APK original stocat</string>
     <string name="settings_system_original_apks_deleted">APK original șters cu succes</string>
     <string name="settings_system_original_apks_delete_title">Ștergeți APK original?</string>
-    <string name="settings_system_original_apks_delete_confirm">Ștergeți APK original pentru %s? Nu veți putea repatch without providing a new APK.</string>
+    <string name="settings_system_original_apks_delete_confirm">Ștergeți fișierul APK original pentru %s? Fără un nou fișier APK nu veți putea repăta aplicația</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
+    <string name="settings_system_patch_selections_description">Gestiune selectii de modificări și opțiuni. Acestea persistă după dezinstalarea aplicației</string>
+    <string name="settings_system_patch_selections_description_short">Păstrat pentru viitoarele modificări</string>
+    <string name="settings_system_patch_selections_count">%1$d selectie(ni) păstrate</string>
+    <string name="settings_system_patch_selections_empty">Nici o selectie de modificări păstrată</string>
+    <string name="settings_system_patch_selections_has_options">Are opțiuni</string>
+    <string name="settings_system_patch_selections_patches_options">Opțiuni de modificare</string>
+    <string name="settings_system_patch_selection_delete_title">Ștergeți selectia de modificări</string>
+    <string name="settings_system_patch_selection_deleted">Selectia de modificări ștergă</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_share_website">Partajează website</string>
@@ -485,6 +515,7 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="reset">Resetare</string>
+    <string name="confirm">Confirmă</string>
     <string name="warning">Atenție</string>
     <string name="error_">Eroare</string>
     <string name="retry">Reânâmârâ</string>
@@ -536,10 +567,12 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="changelog">Vizualizați jurnalele modificărilor</string>
+    <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_loading">Se încarcă jurnalul de modificări</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_retry">Reîncercați</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>
+    <string name="no_network_toast">Nu există conexiune la internet</string>
     <string name="update_available">Este disponibilă o actualizare</string>
     <string name="ready_to_install_update">Actualizare pregătită pentru instalare</string>
     <string name="update_completed">Actualizare instalată</string>

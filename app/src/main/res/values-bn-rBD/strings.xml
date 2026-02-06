@@ -4,9 +4,9 @@
     <string name="home_other_apps">অন্যান্য অ্যাপ</string>
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
     <string name="home_no_patches_available">কোনো প্যাচ উপলব্ধ নেই</string>
-    <string name="home_default_source_disabled">মর্ফে প্যাচের উৎস নিষ্ক্রিয়। প্যাচ উৎস শিটে সক্রিয় করুন অথবা এক্সপার্ট মোড ব্যবহার করুন।</string>
+    <string name="home_default_source_disabled">মর্ফে প্যাচের উৎসটি অক্ষম করা হয়েছে। প্যাচ উৎস শীটে এটি সক্ষম করুন অথবা এক্সপার্ট মোড ব্যবহার করুন</string>
     <string name="android_11_bug_dialog_title">অ্যান্ড্রয়েড ১১ বাগ</string>
-    <string name="android_11_bug_dialog_description">ব্যবহারকারীর অভিজ্ঞতাকে বিরূপভাবে প্রভাবিত করবে এমন অ্যান্ড্রয়েড ১১ সিস্টেমের একটি বাগ এড়াতে অ্যাপ ইনস্টলেশন অনুমতি আগে থেকেই মঞ্জুর করতে হবে।</string>
+    <string name="android_11_bug_dialog_description">এক্সপ্লোর 11 সিস্টেমের একটি বাগের কারণে অ্যাপ ইনস্টলেশন অনুমতি আগে দেওয়া উচিত। এটি ব্যবহারকারীর অভিজ্ঞতাকে নেতিবাচকভাবে প্রভাবিত করবে</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">ম্যানেজার আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
@@ -49,16 +49,19 @@
     <string name="sources_dialog_display_name">দেখান নাম</string>
     <string name="sources_dialog_rename">প্যাচের নাম পরিবর্তন করুন</string>
     <string name="sources_dialog_duplicate_name_error">এই নামের একটি প্যাচ সোর্স ইতিমে ইতিমে আছে</string>
-    <string name="sources_dialog_missing_error">এই প্যাচ সোর্সটি পাওয়া যায়নি।</string>
+    <string name="sources_dialog_missing_error">এই প্যাচ উৎসটি আপডেট করতে পারেনি</string>
     <string name="sources_dialog_disabled_toast">ডিসাবলড %d উৎস(সমূহ)</string>
     <string name="sources_dialog_enabled_toast">এনাবলড %d উৎস(সমূহ)</string>
     <string name="sources_dialog_view_any_version">কোনো সংস্করণ</string>
     <string name="sources_dialog_view_any_package">কোনো প্যাকেজ</string>
     <string name="sources_dialog_add_source">প্যাচ উৎস যোগ করুন</string>
-    <string name="sources_dialog_delete_confirm_message">উৎস \"%s\" ডিলিট করুন? এটি বাতিল করা যাবে না।</string>
+    <string name="sources_dialog_delete_confirm_message">ডিলিট করুন উৎস \"%s\"? এটি বাতিল করা যাবে না</string>
     <string name="sources_dialog_remote">মূল</string>
     <string name="sources_dialog_remote_url">সোর্স URL</string>
-    <string name="sources_dialog_remote_description">মূল প্যাচ সোর্সের জন্য JSON এন্ডপয়েন্ট URL প্রদান করুন</string>
+    <string name="sources_dialog_remote_url_formats">"উদাহরণ:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">স্থানিক</string>
     <string name="sources_dialog_local_file">প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
     <string name="sources_dialog_local_file_description">স্টোর থেকে .mpp প্যাচ সোর্স ফাইল নির্বাচন করুন</string>
@@ -69,7 +72,12 @@
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">আপনার কাছে কি মূল আনপ্যাচড APK আছে?</string>
-    <string name="home_apk_availability_dialog_description_simple">%1$s পার্চ করতে, আপনার %2$s (পার্চ না করা) সংস্করণ প্রয়োজন</string>
+    <string name="home_apk_availability_dialog_description_simple">প্যাচ করতে %1$s, আপনাকে অপ্যাচড APK এর প্রয়োজন হবে, যার সংস্করণ:</string>
+    <string name="home_apk_availability_dialog_description_expert">আপনাকে অপ্যাচড %1$s APK আছে?
+
+সামঞ্জস্যপূর্ণ সংস্করণ:</string>
+    <string name="home_apk_availability_recommended_label">প্রশংসিত</string>
+    <string name="home_apk_availability_unpatched_label">অনুশিষ্টিত</string>
     <string name="home_apk_availability_yes">হ্যাঁ, আমার আছে</string>
     <string name="home_apk_availability_no">না, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +93,7 @@
     <string name="home_download_instructions_continue">APKMirror.com-এ চালিয়ে যান</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">আপনি যে APK ডাউনলোড করেছেন সেটি নির্বাচন করুন</string>
-    <string name="home_file_picker_prompt_description">এখন আপনি যে %1$s APK ফাইলটি ডাউনলোড করেছেন সেটি নির্বাচন করুন।</string>
+    <string name="home_file_picker_prompt_description">এখন %1$sz নির্বাচিত APK ফাইলটি ডাউনলোড করুন</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">আমি ডাউনলোড করা APK ফাইল খুলতে চান</string>
     <string name="home_file_picker_prompt_open_apk">APK ফাইল খুলুন</string>
     <string name="home_recommended_version">社学牛​</string>
@@ -109,12 +117,14 @@
 আপনি কি এগিয়ে যেতে চান?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">এই এপিকটি একটি সুপারিশিত অ্যাপ সংস্করণ নয়। এগো চললে একটি অকার্যকার অ্যাপ হয়তে পারে।</string>
-    <string name="home_dialog_unsupported_version_dialog_description">এই এপিআকটি একটি সুপারিশিত অ্যাপ সংস্করণ নয়। এগো চললে একটি অকার্যকার অ্যাপ হয়তে পারে।</string>
+    <string name="home_dialog_unsupported_version_dialog_description">এই APK রেকমেন্ডেড অ্যাপ ভার্সনের নয়। চলুন এতে ফলাফল হবার সম্ভাবনা আছে</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">এগো চলুন</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">সমর্থিত সংস্করণ:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">সমর্থিত হয়নি</string>
     <string name="home_dialog_wrong_package_title">ভুলি প্যাকেজ নির্বাচন করা হয়েছে</string>
-    <string name="home_dialog_wrong_package_description">নির্বাচিত এপিআকটি সেই অ্যাপের জন্য যা তুমি চানতেন প্যাচ করছেন।</string>
-    <string name="home_dialog_expected_package">নির্বাচিত প্যাকেজ</string>
-    <string name="home_dialog_selected_package">নির্বাচিত প্যাকেজ</string>
+    <string name="home_dialog_wrong_package_description">নির্বাচিত APK অ্যাপের জন্য নির্বাচিত হয়নি</string>
+    <string name="home_dialog_expected_package">অ্যাপের নাম:</string>
+    <string name="home_dialog_selected_package">নির্বাচিত অ্যাপ:</string>
     <!-- Patch Options -->
     <string name="custom_color">కస్టమ్‌ క్రోమ్‌</string>
     <string name="hex_color">డిస్‌క్‌వర్‌ కోడ్ రంగు</string>
@@ -124,43 +134,38 @@
     <string name="patch_option_enter_decimal">ডেসিমাল দিন</string>
     <string name="patch_option_pick_folder">ফোল্ডার নির্বাচন করুন</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">আদাপ্টিভ আইকন তৈরি করুন</string>
-    <string name="adaptive_icon_create">আইকন তৈরি করুন</string>
+    <string name="adaptive_icon_create">অ্যাডাপ্টিভ আইকন তৈরি করুন</string>
     <string name="adaptive_icon_instructions">আগের ছবি, পটের রং নির্বাচন করুন এবং প্রিভিউকে পিন্চ-টু-জুম গেস্টার্স দ্বারা বদলান করুন</string>
     <string name="adaptive_icon_preview">পূর্বরূপ</string>
-    <string name="adaptive_icon_select_foreground">ফরগ্রাউন্ড ইমেজ নির্বাচন করুন</string>
-    <string name="adaptive_icon_change_foreground">ফরগ্রাউন্ড ইমেজ পরিবর্তন করুন</string>
+    <string name="adaptive_icon_select_image">চিত্র নির্বাচন করুন</string>
+    <string name="adaptive_icon_change_image">চিত্র পরিবর্তন করুন</string>
     <string name="adaptive_icon_background_color">ব্যাকগ্রাউন্ড রং</string>
     <string name="adaptive_icon_reset_transform">পজিশন এবং স্কেল রিসেট করুন</string>
     <string name="adaptive_icon_safe_zone_inner">সেফ জোন (সময়কালে দৃশ্যমান)</string>
     <string name="adaptive_icon_safe_zone_outer">মাস্ক জোন (মুছে ফেলা হতে পারে)</string>
     <string name="adaptive_icon_created_success">অ্যাডাপ্টিভ আইকন সফলভাবে তৈরি হয়েছে</string>
     <string name="adaptive_icon_creation_failed">অ্যাডাপ্টিভ আইকন তৈরি করতে ব্যর্থ হয়েছে</string>
-    <string name="adaptive_icon_create_new">নতুন আইকন তৈরি করুন</string>
     <string name="adaptive_icon_folder_explanation">জেনারেটেড আইকন ফাইলস থাকা \'morphe_branding/morphe_icons\' ফোল্ডারটি কোথায় তৈরি করবেন তা নির্বাচন করুন</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">কাস্টম হেডার তৈরি করুন</string>
-    <string name="header_creator_create">হেডার তৈরি করুন</string>
-    <string name="header_creator_create_new">নতুন হেডার তৈরি করুন</string>
+    <string name="header_creator_create">মুখপাতা তৈরি করুন</string>
     <string name="header_creator_instructions">লাইট এবং ডার্ক থিমের জন্য ছবি নির্বাচন করুন, তারপর পিন্চ-টু-জুম গেস্টার্স ব্যবহার করে ঝাপটান করুন</string>
     <string name="header_creator_light_theme">লাইট থিম হেডার</string>
     <string name="header_creator_dark_theme">ডার্ক থিম হেডার</string>
-    <string name="header_creator_select_light">লাইট থিম ছবি নির্বাচন করুন</string>
-    <string name="header_creator_change_light">লাইট থিম ছবি পরিবর্তন করুন</string>
-    <string name="header_creator_select_dark">ডার্ক থিম ছবি নির্বাচন করুন</string>
-    <string name="header_creator_change_dark">ডার্ক থিম ছবি পরিবর্তন করুন</string>
     <string name="header_creator_no_image">কোন ছবি নির্বাচন করা হয়নি</string>
     <string name="header_creator_success">হেডার সফলভাবে তৈরি হয়েছে</string>
     <string name="header_creator_failed">হেডার তৈরি করতে ব্যর্থ হয়েছে</string>
     <string name="header_creator_folder_explanation">জেনারেটেড হেডার ফাইলস থাকা \'morphe_branding/morphe_header\' ফোল্ডারটি কোথায় তৈরি করবেন তা নির্বাচন করুন</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">আপন কি এই অ্যাপটি মুছে ফেলতে চানেন? </string>
-    <string name="home_app_info_saved_app_delete_confirmation">আপনি কি এই সংরক্ষিত অ্যাপটি মুছে ফেলতে চানেন? </string>
-    <string name="home_app_info_saved_copy_delete_confirmation">আপনি কি সংরক্ষিত কপি মুছে ফেলতে চানেন? </string>
+    <string name="home_app_info_remove_app_warning">এইচইলি:</string>
+    <string name="home_app_info_delete_item_database">ডাটাবেস এন্ট্রি</string>
+    <string name="home_app_info_delete_item_patched_apk">প্যাচড APK ফাইল</string>
+    <string name="home_app_info_delete_item_original_apk">অরিজিনাল APK ফাইল</string>
+    <string name="home_app_info_delete_preservation_note">আপনার প্যাচ নির্বাচন ও অপশনগুলি ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত থাকবে</string>
     <string name="home_app_info_patches_name_default">প্যাচগুলি</string>
     <string name="home_app_info_patches_name_fallback">নামহীন</string>
     <string name="home_app_info_patches_replace_fail">প্যাচগুলি আমদানি করতে ব্যর্থ হয়েছে: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">মূল এপিআক পাওয়া যায়নি। এই অ্যাপকে পুনরপ্যাচ করা যায় না।</string>
+    <string name="home_app_info_repatch_no_original_apk">আরিজিনাল এপিকে খুঁজে পাওয়া যায়নি. এই অ্যাপের রিপ্যাচ করতে পারবো না</string>
     <string name="home_app_info_repatch_requires_original">পুনরপ্যাচের জন্য মূল এপিআক ফাইল প্রয়োজন</string>
     <string name="home_app_info_original_package_name">মূল প্যাকেজ নাম</string>
     <string name="home_app_info_applied_patches">আমদান প্যাচগুলি</string>
@@ -170,9 +175,9 @@
     <string name="home_app_info_install_type_system_installer">সিস্টেম ইনস্টলার</string>
     <string name="home_app_info_patched_at">প্যাচ করা হয়েছে</string>
     <string name="home_app_info_patch_update_available">প্যাচ আপডেট উপলব্ধ আছে</string>
-    <string name="home_app_info_patch_update_available_description">নতুন প্যাচগুলি জন্য আপডেট উপলব্ধ আছে। আপনকে সর্বশেষ্ট উন্নগ্রদন ও সমস্যা সমাধান করা হয়তে পারেন।</string>
+    <string name="home_app_info_patch_update_available_description">প্যাচের নতুন ভার্সন উপলব্ধ। আপনার অ্যাপকে পুনরায় প্যাচ করুন সর্বশেষ উন্নতির জন্য</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">রুট মোডের জন্য প্যাচ করার আগে আপনার ডিভাইসে আসল APK ইনস্টল করা প্রয়োজন।</string>
+    <string name="root_install_apk_required">রুট মোডে আরিজিনাল এপিকে ডিভাইসে ইনস্টল করা থাকতে হবে প্যাচিংয়ের আগে</string>
     <string name="root_gmscore_excluded">রুট মোডে GmsCore সমর্থন প্যাচ বাদ দেওয়া হয়েছে</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
@@ -241,16 +246,16 @@
     <string name="patched_app_saved_toast">প্যাচ করা অ্যাপ পরে জন্য সংরক্ষণ করা হয়েছে</string>
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="download_apk">APK ফাইল ডাউনলোড করুন</string>
-    <string name="plugin_activity_dialog_body">এই প্লাগইনটি চালিয়ে যাওয়ার জন্য ব্যবহারকারীর মিথস্ক্রিয়া প্রয়োজন।</string>
-    <string name="patcher_process_exit_message">Patcher কোড %1$d সহ বন্ধ হয়ে গেছে।</string>
+    <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে জন্য ব্যবহারকারীর ইন্টারেকশন প্রয়োজন</string>
+    <string name="patcher_process_exit_message">প্যাচার প্রসেস কোড %1$d এর সাথে বের হয়েছে</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
     <string name="install_app_fail">অ্যাপ ইনস্টল করতে ব্যর্থ: %s</string>
-    <string name="install_timeout_message">ইনস্টলেশন শেষ হয়নি। সিস্টেম ইনস্টলার ডায়ালগটি পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
+    <string name="install_timeout_message">ইনস্টলেশন শেষ হয়নি. সিস্টেম ইনস্টলার ডায়ালগকে চেক করুন এবং আবার চেষ্টা করুন</string>
     <string name="save_apk_success">APK সেভ করা হয়েছে</string>
     <string name="saved_app_export_failed">প্যাচ করা অ্যাপ এক্সপোর্ট করতে ব্যর্থ</string>
     <string name="saved_app_removed_toast">সেভ করা প্যাচ করা অ্যাপ সরানো হয়েছে</string>
     <string name="saved_app_copy_removed_toast">সংরক্ষিত কপি সরানো হয়েছে</string>
-    <string name="saved_app_launch_unavailable">এটি খোলার আগে অ্যাপটি ইনস্টল করুন।</string>
+    <string name="saved_app_launch_unavailable">এই অ্যাপটি খুলতে আগে ইনস্টল করুন</string>
     <string name="package_name">প্যাকেজের নাম</string>
     <string name="failed_to_mount">মাউন্ট করতে ব্যর্থ: %s</string>
     <string name="failed_to_unmount">আনমাউন্ট করতে ব্যর্থ: %s</string>
@@ -262,11 +267,13 @@
     <string name="settings_appearance_background">পটভলম্যান</string>
     <string name="settings_appearance_background_circles">সার্কলস</string>
     <string name="settings_appearance_background_rings">ঘিরি</string>
-    <string name="settings_appearance_background_waves">ওয়েভস</string>
+    <string name="settings_appearance_background_mesh">মেশ</string>
     <string name="settings_appearance_background_space">স্পেস</string>
     <string name="settings_appearance_background_shapes">আকর্ষ</string>
     <string name="settings_appearance_background_snow">নেই</string>
     <string name="settings_appearance_background_none">থিম</string>
+    <string name="settings_appearance_parallax_effect">প্যারাল্যাক্স ইফেক্ট</string>
+    <string name="settings_appearance_parallax_effect_description">ডিভাইসকে কাঁটিলে পটভূমি পরিবর্তনের সাবলীলতা</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">সিস্টেম</string>
     <string name="settings_appearance_system">লাইট</string>
@@ -301,6 +308,16 @@
     <string name="settings_advanced_expert_mode_description">বিশেষ্ট বৈশিষ্ট ও কাস্টমাইজেশন বিকল্পগুলি সক্রিয় করুন</string>
     <string name="settings_advanced_strip_unused_libs">ব্যন্ত-নেটিভ লাইব্রেরিস মুছে ফেলুন</string>
     <string name="settings_advanced_strip_unused_libs_description">অনুসুশিত নয় এমন সিপ-আর্কিত লাইব্রেরিসগুলি প্যাচড অ্যাপ থেকে মুছে ফেলুন</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">গিটহাব PAT</string>
+    <string name="settings_advanced_github_pat_description">পুল রিকুয়েস্ট বান্ডলের জন্য প্রয়োজনীয়</string>
+    <string name="settings_advanced_github_pat_configured">টোকেন কনফিগার করা হয়েছে</string>
+    <string name="settings_advanced_github_pat_how_to_get">কিভাবে একটি টোকেন পেতে পারেন</string>
+    <string name="settings_advanced_github_pat_dialog_title">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন</string>
+    <string name="settings_advanced_github_pat_dialog_description">গিটহাব ব্যক্তিগত অ্যাক্সেস টোকেন সেট করুন, যাতে আপনি বাহ্যিক উৎস হিসেবে পুল রিকোয়েস্ট যোগ করতে পারেন। public_repo স্কোপের সাথে একটি PAT তৈরি করুন</string>
+    <string name="settings_advanced_github_pat_export_include_label">সেটিংসে অন্তর্ভুক্ত করুন</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">এই PAT কে ম্যানেজার সেটিংসে যোগ করুন</string>
+    <string name="settings_advanced_github_pat_export_warning">আপনার PAT কে শেয়ার করবেন না। যদি আপনি এটি সেটিংসে অন্তর্ভুক্ত করেন, তাহলে সেই ফাইলটি বেসিক রাখুন, কারণ এটি টোকেন ধারণ করে</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">প্যাচ বিকল্পগুলি</string>
     <string name="settings_advanced_patch_options_youtube_description">ইউটিউব, ব্র্যান্ডিং, হেডার, শর্টস বিকল্পগুলি</string>
@@ -351,40 +368,43 @@
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">লঞ্চার উইজেট থেকে শর্টস বাতিল মুছে ফেলুন</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">పరిష్కరణ</string>
+    <string name="installer_title">ইনস্টলার নির্বাচন করুন</string>
     <string name="installer_internal_name">সিস্টেম ইনস্টলার</string>
     <string name="installer_internal_description">অ্যান্ড্রয়েড প্যাকেজ ইনস্টলার ব্যবহার করুন</string>
     <string name="installer_auto_saved_name">রুট করা মাউন্ট ইনস্টলার</string>
-    <string name="installer_auto_saved_description">ইনস্টল করা অ্যাপের উপর প্যাচযুক্ত APK মাউন্ট করে (রুট প্রয়োজন)।</string>
-    <string name="installer_shizuku_description">শিজুকু বা সুই ব্যবহার করে নীরবে ইনস্টল করুন।</string>
+    <string name="installer_auto_saved_description">ইনস্টলড অ্যাপের উপর প্যাচড APK মাউন্ট করুন (রুট প্রয়োজন)</string>
+    <string name="installer_shizuku_description">শিজুকু বা সুই ব্যবহার করে নির্বাহিতভাবে ইনস্টল করুন</string>
     <string name="installer_option_none">কোন ফলব্যাক নেই</string>
     <string name="installer_none_description">কোনও ফলব্যাক ইনস্টলার কনফিগার করা নেই</string>
     <string name="installer_status_requires_root">রুট অ্যাক্সেস প্রয়োজন</string>
-    <string name="installer_status_not_supported">এই কাজের জন্য সমর্থিত নয়।</string>
-    <string name="installer_status_shizuku_not_installed">এই বিকল্পটি ব্যবহার করতে শিজুকু বা সুই ইনস্টল করুন।</string>
-    <string name="installer_status_shizuku_not_running">শিজুকু বা সুই শুরু করুন এবং আবার চেষ্টা করুন।</string>
-    <string name="installer_status_shizuku_permission">Shizuku-কে Shizuku অ্যাপ থেকে Morphe-এর অনুমতি দিন।</string>
-    <string name="installer_mount_warning_install">আপনার প্রাথমিক ইনস্টলার রুট করা মাউন্ট ইনস্টলারে সেট করা আছে। এই সংরক্ষিত অ্যাপটি মাউন্ট ব্যবহার করে ইনস্টল করা হয়নি।</string>
+    <string name="installer_status_not_supported">এই ক্রিয়ার জন্য সমর্থিত নয়</string>
+    <string name="installer_status_shizuku_not_installed">এই বিকল্প ব্যবহার করতে শিজুকু বা সুই ইনস্টল করুন</string>
+    <string name="installer_status_shizuku_not_running">শিজুকু বা সুই শুরু করুন এবং আবার চেষ্টা করুন</string>
+    <string name="installer_status_shizuku_permission">মরফেকে শিজুকু অ্যাপ থেকে শিজুকু অনুমতি দিন</string>
+    <string name="installer_mount_warning_install">তোমার প্রধান ইনস্টলার রুটেড মাউন্ট ইনস্টলার সেট করা আছে. এই সেভড অ্যাপটি মাউন্ট ব্যবহার করে ইনস্টল করা হয়নি</string>
     <string name="installer_mount_mismatch_title">রুট করা মাউন্ট ইনস্টলার নির্বাচন করা হয়নি</string>
-    <string name="installer_mount_mismatch_install">এই অ্যাপটি রুট করা মাউন্ট ইনস্টলার ব্যবহার করে ইনস্টল করা হয়েছে। মাউন্ট অ্যাকশনগুলি ব্যবহার করতে আপনার প্রাথমিক ইনস্টলারে ফিরে যান, তারপর মাউন্ট করুন।</string>
-    <string name="mount_version_mismatch_message">স্টক অ্যাপ সংস্করণ (%2$s) প্যাচ করা অ্যাপ সংস্করণের (%1$s) সাথে মেলে না। মেলানো স্টক সংস্করণ মাউন্ট করুন, তারপর আবার চেষ্টা করুন।</string>
-    <string name="installer_status_shizuku_unsupported">ইনস্টল করা Shizuku সংস্করণ সমর্থিত নয়।</string>
+    <string name="installer_mount_mismatch_install">এই অ্যাপটি রুটেড মাউন্ট ইনস্টলার ব্যবহার করে ইনস্টল করা হয়েছে. মাউন্ট ক্রিয়াকলাপ ব্যবহার করতে তোমার প্রধান ইনস্টলারকে বদলি কর এবং মাউন্ট কর</string>
+    <string name="mount_version_mismatch_message">স্টক অ্যাপ ভার্সন (%2$s) প্যাচড অ্যাপ ভার্সন (%1$s) এর সাথে ম্যাচ করে না. ম্যাচিং স্টক ভার্সন মাউন্ট কর এবং আবার চেষ্টা করুন</string>
+    <string name="installer_status_shizuku_unsupported">ইনস্টল করা শিজুকু ভার্সন সমর্থিত নয়</string>
     <string name="installer_action_open_shizuku">Shizuku খুলুন</string>
-    <string name="installer_hint_generic">ইনস্টলেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন বা অন্য ইনস্টলার ব্যবহার করুন।</string>
-    <string name="installer_hint_blocked">অ্যান্ড্রয়েড দ্বারা ইনস্টলেশন ব্লক করা হয়েছে। প্লে সুরক্ষা বা সুরক্ষা সেটিংস পরীক্ষা করুন।</string>
-    <string name="installer_hint_conflict">এই প্যাকেজ নামের অন্য অ্যাপ ইতিমধ্যে ইনস্টল করা আছে। চালিয়ে যাওয়ার আগে এটি আনইনস্টল করুন।</string>
-    <string name="installer_hint_incompatible">APK এই ডিভাইস বা অ্যান্ড্রয়েড সংস্করণের সাথে সামঞ্জস্যপূর্ণ নয়।</string>
-    <string name="installer_hint_invalid">APK অবৈধ বা ক্ষতিগ্রস্ত।</string>
-    <string name="installer_hint_storage">ইনস্টলেশনের জন্য পর্যাপ্ত স্টোরেজ স্পেস নেই।</string>
-    <string name="installer_hint_timeout">ইনস্টলেশনের সময় শেষ হয়েছে। আবার চেষ্টা করুন।</string>
-    <string name="installer_hint_aborted">ইনস্টলেশন বাতিল করা হয়েছে।</string>
+    <string name="installer_hint_generic">ইনস্টলেশন ব্যর্থ হয়েছে. আবার চেষ্টা করুন বা ভিন্ন ইনস্টলার ব্যবহার করুন</string>
+    <string name="installer_hint_blocked">এন্ড্রয়েড দ্বারা ইনস্টলেশন ব্লক করা হয়েছে. প্লে প্রোটেক্ট বা সিকিউরিটি সেটিংস চেক করুন</string>
+    <string name="installer_hint_conflict">এই প্যাকেজ নামের সাথে আরেকটি অ্যাপ ইতিমধ্যে ইনস্টল করা আছে. এটিকে বাতিল করুন এবং চলে যান</string>
+    <string name="installer_hint_incompatible">এই ডিভাইস বা অ্যান্ড্রয়েড ভার্সনের সাথে এপিকে সমর্থিত নয়</string>
+    <string name="installer_hint_invalid">এপিকটি অকার্যকর বা ক্ষতিগ্রস্ত হয়েছে</string>
+    <string name="installer_hint_storage">ইনস্টলেশন জন্য স্টোরেজ স্পেস पर्यাপ্ত নেই</string>
+    <string name="installer_hint_timeout">ইনস্টলেশন টাইমআউট হয়েছে. আবার চেষ্টা করুন</string>
+    <string name="installer_hint_aborted">ইনস্টলেশন বাতিল করা হয়েছে</string>
     <string name="installer_external_launched">%1$s খোলা হচ্ছে…</string>
-    <string name="installer_external_timeout">%1$s ইনস্টলেশন নিশ্চিত করেনি। অন্য অ্যাপটি পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
-    <string name="installer_external_success">%1$s একটি সফল ইনস্টলেশনের কথা জানিয়েছে।</string>
-    <string name="installer_external_finished_no_change">%1$s がアプリをインストールせずに完了しました。エラー メッセージを確認して、再度試してください</string>
+    <string name="installer_external_timeout">%1$s ইনস্টলেশন কনফার্ম করেননি. অন্যান্য অ্যাপ চেক করুন এবং আবার চেষ্টা করুন</string>
+    <string name="installer_external_success">%1$s একটি সফল ইনস্টলেশন রিপোর্ট করেছে</string>
+    <string name="installer_external_finished_no_change">%1$s অ্যাপ ইনস্টল না করেই শেষ হয়েছে. ইনস্টলার থেকে একটি ত্রুটি বার্তা চেক করুন এবং আবার চেষ্টা করুন</string>
     <string name="installer_unavailable_title">%s অকার্যকর</string>
-    <string name="installer_unavailable_message">আপনার পছন্দের ইনস্টলার (%s) বর্তমানে অকার্যকর। সমস্যা ঠিক করুন এবং পুনরায় চেষ্টা করুন, অথবা মানক ইনস্টলার ব্যবহার করুন।</string>
-    <string name="installer_unavailable_shizuku_hint">বিশ্বাস করুন যে শিজুকু চালু আছে এবং এই অ্যাপের জন্য অনুমতি প্রদান করা হয়েছে।</string>
+    <string name="installer_unavailable_message">তোমার পছন্দের ইনস্টলার (%s) বর্তমানে অ্যাক্সেসযোগ্য নয়. সমস্যা সমাধান কর এবং আবার চেষ্টা করুন, বা স্ট্যান্ডার্ড ইনস্টলার ব্যবহার করুন</string>
+    <string name="installer_unavailable_shizuku_hint">শিজুকু চালু আছে এবং এই অ্যাপের অনুমতি দেওয়া হয়েছে</string>
     <string name="installer_use_standard">স্ট্যান্ডার্ড ব্যবহার করুন</string>
+    <string name="settings_prompt_installer_on_install">ইনস্টল করলে ইনস্টলার নির্বাচন ডায়ালগ প্রদর্শন করুন</string>
+    <string name="settings_prompt_installer_on_install_description">প্রতি ইনস্টল করলে প্যাচড অ্যাপের জন্য ইনস্টলার নির্বাচন ডায়ালগ প্রদর্শন করুন</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">প্রোফাইল</string>
     <string name="settings_system_process_runtime">প্রক্রিয় রান্টাইম</string>
@@ -403,7 +423,7 @@
     <string name="settings_system_import_keystore_dialog_title">মরফে একটি পরীক্ষামূল, খোল-উৎসাহা প্রকল্প যা আপনার ফিডব্যাকের ফিডব্যাক ও অবদানকে ভিত্ত করে ভবিষ্যতা ও উন্নতরনের জন্য সম্প্রদিত হয়।
 
 মরফে খোল-উৎসাহা প্রকল্পের ভিত্তে, এটি সম্প্রদিত সম্প্রদনের ও অবদানের উপর নির্ভরিত।</string>
-    <string name="settings_system_import_keystore_dialog_description">আপনাকে ইম্পোর্ট করতে অ্যাপের মধ্যে keystore এর credentials লিখতে হবে।</string>
+    <string name="settings_system_import_keystore_dialog_description">আপনাকে ইম্পোর্ট করতে অ্যাপের মধ্যে keystore এর credentials লিখতে হবে</string>
     <string name="settings_system_import_keystore_dialog_alias_field">কাস্টম কী-স্টোর আমদানি করুন</string>
     <string name="settings_system_import_keystore_dialog_password_field">কী-স্টোর নাম (এলিয়াস)</string>
     <string name="settings_system_import_keystore_dialog_button">আমদানি করুন</string>
@@ -433,7 +453,7 @@
     <string name="settings_system_export_debug_logs_export_failed">স্টোর ম্যানেজমেন্ট</string>
     <string name="settings_system_export_debug_logs_export_success">APK(গুলি) সংখ্যা</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">মোট আকার: %s</string>
+    <string name="settings_system_storage_management">স্টোরেজ ম্যানেজমেন্ট</string>
     <string name="settings_system_apks_count">প্যাচড APK(গুলি)</string>
     <string name="settings_system_apks_size">প্যাচড APK(গুলি)</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
@@ -445,11 +465,21 @@
     <string name="settings_system_patched_apks_deleted">প্যাচড APK মুছে ফেল হয়েছে</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">মূল APK(গুলি)</string>
-    <string name="settings_system_original_apks_description">মূল APK ফাইলগুলি পুনরপ্যাচের জন্য সংরক্ষিত থাকে। শুধু মাত্র একটি সংস্করণ সংরক্ষিত থাকে।</string>
+    <string name="settings_system_original_apks_description">আরিজিনাল APK ফাইল পুনরায় প্যাচিংয়ের জন্য সংরক্ষিত করা হয়। প্রতিটি অ্যাপের জন্য সর্বশেষ সংস্করণটি রাখা হয়</string>
     <string name="settings_system_original_apks_empty">কোনো মূল APK ফাইল সংরক্ষিত হয়নি</string>
     <string name="settings_system_original_apks_deleted">মূল APK মুছে ফেল হয়েছে</string>
     <string name="settings_system_original_apks_delete_title">মূল APK মুছে ফেলতে চানেন? </string>
-    <string name="settings_system_original_apks_delete_confirm">মূল APK মুছে ফেলতে চানেন? %s-এর জন্য? আপনি এই অ্যাপটি পুনরপ্যাচ করতে পারবেন না।</string>
+    <string name="settings_system_original_apks_delete_confirm">%s এর জন্য অরিজিনাল APK মুছে ফেলতে চান? নতুন APK প্রদান না করলে পুনরায় প্যাচ করতে পারবেন না</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">প্যাচ নির্বাচন</string>
+    <string name="settings_system_patch_selections_description">সংরক্ষিত প্যাচ নির্বাচন ও অপশন পরিচালনা করুন। এগুলি অ্যাপ আনইনস্টলেশন পরেেও টিকিয়ে রাখা হয়</string>
+    <string name="settings_system_patch_selections_description_short">ভবিষ্যতের প্যাচিংয়ের জন্য সংরক্ষিত</string>
+    <string name="settings_system_patch_selections_count">%1$d সংরক্ষিত নির্বাচন(সমূহ)</string>
+    <string name="settings_system_patch_selections_empty">কোন সংরক্ষিত প্যাচ নির্বাচন নেই</string>
+    <string name="settings_system_patch_selections_has_options">অপশন আছে</string>
+    <string name="settings_system_patch_selections_patches_options">প্যাচ অপশন</string>
+    <string name="settings_system_patch_selection_delete_title">প্যাচ নির্বাচন মুছে ফেলুন</string>
+    <string name="settings_system_patch_selection_deleted">প্যাচ নির্বাচন মুছে ফেলা হয়েছে</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">মর্ফ সম্পর্কে</string>
     <string name="settings_system_share_website">ওয়েবসাইট শেয়ার করুন</string>
@@ -464,6 +494,7 @@
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
     <string name="reset">আবার সেট করুন</string>
+    <string name="confirm">নিশ্চিত করুন</string>
     <string name="warning">সতর্কবার্তা</string>
     <string name="error_">ত্রুটি</string>
     <string name="retry">আবার চেষ্টা করুন</string>
@@ -515,10 +546,12 @@
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>
     <string name="importing_ellipsis">আমদানি করছেন…</string>
     <string name="changelog">পরিবর্তনলগ দেখুন</string>
+    <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
     <string name="changelog_loading">চেঞ্জলগ লোড হচ্ছে</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_retry">পুনরায় করুন</string>
     <string name="changelog_empty">কোনো চ্যাঞলগ উপলব্ধ নেই</string>
+    <string name="no_network_toast">ইন্টারনেট সংযোগ উপলব্ধ নয়</string>
     <string name="update_available">একটি আপডেট উপলব্ধ</string>
     <string name="ready_to_install_update">আপডেট ইনস্টল করার জন্য প্রস্তুত</string>
     <string name="update_completed">আপডেট ইনস্টল করা হয়েছে</string>
