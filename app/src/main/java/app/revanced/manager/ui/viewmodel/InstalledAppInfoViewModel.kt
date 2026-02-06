@@ -17,6 +17,7 @@ import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.*
 import app.revanced.manager.patcher.patch.PatchBundleInfo
+import app.revanced.manager.patcher.patch.PatchInfo
 import app.revanced.manager.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -274,16 +275,49 @@ class InstalledAppInfoViewModel(
             return@launch
         }
 
-        // Get current patches and options
-        val patches = appliedPatches ?: resolveAppliedSelection(app)
+        // Get current bundle info to validate against
+        val currentBundleInfo = patchBundleRepository.bundleInfoFlow.first()
+        val bundlePatches = currentBundleInfo.mapValues { (_, info) ->
+            info.patches.associateBy { it.name }
+        }
 
-        // Always load options from repository
-        val options = patchOptionsRepository.getOptions(
+        // Get saved patches and options
+        val savedPatches = appliedPatches ?: resolveAppliedSelection(app)
+        val savedOptions = patchOptionsRepository.getOptions(
             app.originalPackageName,
-            patchBundleRepository.bundleInfoFlow.first().mapValues { (_, info) ->
-                info.patches.associateBy { it.name }
-            }
+            bundlePatches
         )
+
+        // Validate and filter patches - only keep patches that exist in current bundles
+        val validatedPatches = validatePatchSelection(savedPatches, bundlePatches)
+
+        // Validate and filter options - only keep options for patches that exist
+        val validatedOptions = validatePatchOptions(savedOptions, bundlePatches)
+
+        // Log validation results and update database if needed
+        val removedPatchCount = savedPatches.values.sumOf { it.size } - validatedPatches.values.sumOf { it.size }
+        if (removedPatchCount > 0) {
+            Log.w(tag, "Removed $removedPatchCount invalid patches from selection during repatch")
+
+            // Save validated data back to database to clean up invalid records
+            withContext(Dispatchers.IO) {
+                // Update installed app with validated patches
+                installedAppRepository.addOrUpdate(
+                    app.currentPackageName,
+                    app.originalPackageName,
+                    app.version,
+                    app.installType,
+                    validatedPatches,
+                    app.selectionPayload,
+                    app.patchedAt
+                )
+
+                // Update options with validated options
+                patchOptionsRepository.saveOptions(app.originalPackageName, validatedOptions)
+
+                Log.i(tag, "Cleaned up invalid patches and options in database")
+            }
+        }
 
         // Check if Expert Mode is enabled
         val useExpertMode = prefs.useExpertMode.getBlocking()
@@ -296,18 +330,18 @@ class InstalledAppInfoViewModel(
                 .first()
 
             // Filter to show only bundles that were used during patching
-            val usedBundleUids = patches.keys
+            val usedBundleUids = validatedPatches.keys
             repatchBundles = allBundles.filter { bundle ->
                 bundle.uid in usedBundleUids
             }
 
-            repatchPatches = patches.toMutableMap()
-            repatchOptions = options.toMutableMap()
+            repatchPatches = validatedPatches.toMutableMap()
+            repatchOptions = validatedOptions.toMutableMap()
             showRepatchDialog = true
         } else {
             // Simple Mode: Start patching immediately with original APK file
             originalApkRepository.markUsed(app.originalPackageName)
-            onStartPatch(app.originalPackageName, originalFile, patches, options)
+            onStartPatch(app.originalPackageName, originalFile, validatedPatches, validatedOptions)
         }
     }
 
@@ -434,6 +468,59 @@ class InstalledAppInfoViewModel(
         }
 
         repatchOptions = currentOptions
+    }
+
+    /**
+     * Validate patch selection against current bundle info
+     * Removes patches that no longer exist in the current bundles
+     */
+    private fun validatePatchSelection(
+        savedSelection: PatchSelection,
+        bundlePatches: Map<Int, Map<String, PatchInfo>>
+    ): PatchSelection {
+        return savedSelection.mapNotNull { (bundleUid, patchNames) ->
+            // Check if bundle still exists
+            val currentBundlePatches = bundlePatches[bundleUid] ?: return@mapNotNull null
+
+            // Filter patches that still exist in the current bundle
+            val validPatches = patchNames.filter { patchName ->
+                currentBundlePatches.containsKey(patchName)
+            }.toSet()
+
+            // Only include this bundle if it has valid patches
+            if (validPatches.isEmpty()) null else bundleUid to validPatches
+        }.toMap()
+    }
+
+    /**
+     * Validate patch options against current bundle info
+     * Removes options for patches that no longer exist or options that are no longer valid
+     */
+    private fun validatePatchOptions(
+        savedOptions: Options,
+        bundlePatches: Map<Int, Map<String, PatchInfo>>
+    ): Options {
+        return savedOptions.mapNotNull { (bundleUid, bundlePatchOptions) ->
+            // Check if bundle still exists
+            val currentBundlePatches = bundlePatches[bundleUid] ?: return@mapNotNull null
+
+            // Filter options for patches that still exist
+            val validOptions = bundlePatchOptions.mapNotNull { (patchName, patchOptions) ->
+                // Check if patch still exists
+                val patchInfo = currentBundlePatches[patchName] ?: return@mapNotNull null
+
+                // Filter options that are still valid for this patch
+                val validPatchOptions = patchOptions.filterKeys { optionKey ->
+                    patchInfo.options?.any { it.key == optionKey } == true
+                }
+
+                // Only include this patch if it has valid options
+                if (validPatchOptions.isEmpty()) null else patchName to validPatchOptions
+            }.toMap()
+
+            // Only include this bundle if it has valid options
+            if (validOptions.isEmpty()) null else bundleUid to validOptions
+        }.toMap()
     }
 
     override fun onCleared() {
