@@ -1,3 +1,10 @@
+# app [1.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2026-02-06)
+
+
+### Features
+
+* Add optional parallax effect to animated backgrounds ([#169](https://github.com/MorpheApp/morphe-manager/issues/169)) ([bc28fa9](https://github.com/MorpheApp/morphe-manager/commit/bc28fa9f5ea90cf2db3f6a485279e65cddff5438))
+
 # app [1.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-02-05)
 
 

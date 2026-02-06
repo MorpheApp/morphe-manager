@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-05T10:52:55.582Z",
-  "description": "# app [1.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-02-05)\n\n\n### Features\n\n* Add GitHub repo as a patch bundle source ([#157](https://github.com/MorpheApp/morphe-manager/issues/157)) ([ec0f741](https://github.com/MorpheApp/morphe-manager/commit/ec0f7415964d6982925d7c097535d9032af1330a))\n* Add stored patch selection dialog ([#167](https://github.com/MorpheApp/morphe-manager/issues/167)) ([c36b424](https://github.com/MorpheApp/morphe-manager/commit/c36b42436ddde47b6bcea8c8f3b5a8eea50137ac))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.2/morphe-manager-1.6.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.2/morphe-manager-1.6.0-dev.2.apk.asc",
-  "version": "1.6.0-dev.2"
+  "created_at": "2026-02-06T13:20:18.565Z",
+  "description": "# app [1.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2026-02-06)\n\n\n### Features\n\n* Add optional parallax effect to animated backgrounds ([#169](https://github.com/MorpheApp/morphe-manager/issues/169)) ([bc28fa9](https://github.com/MorpheApp/morphe-manager/commit/bc28fa9f5ea90cf2db3f6a485279e65cddff5438))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.3/morphe-manager-1.6.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.3/morphe-manager-1.6.0-dev.3.apk.asc",
+  "version": "1.6.0-dev.3"
 }
