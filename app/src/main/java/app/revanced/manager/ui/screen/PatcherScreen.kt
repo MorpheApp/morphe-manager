@@ -38,18 +38,24 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstallType
+import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.ui.model.State
 import app.revanced.manager.ui.screen.patcher.*
+import app.revanced.manager.ui.screen.settings.system.InstallerSelectionDialog
+import app.revanced.manager.ui.screen.settings.system.ensureValidEntries
 import app.revanced.manager.ui.screen.shared.InfoBadge
 import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
 import app.revanced.manager.ui.screen.shared.MorpheCard
 import app.revanced.manager.ui.screen.shared.MorpheSettingsDivider
 import app.revanced.manager.ui.viewmodel.InstallViewModel
 import app.revanced.manager.ui.viewmodel.PatcherViewModel
+import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import app.revanced.manager.util.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 import kotlin.math.exp
 import kotlin.math.max
 import kotlin.math.min
@@ -427,6 +433,55 @@ fun PatcherScreen(
                 }
             }
         }
+    }
+
+    // Installer selection dialog for patcher screen
+    if (installViewModel.showInstallerSelectionDialog) {
+        val installerManager: InstallerManager = koinInject()
+        val settingsViewModel: SettingsViewModel = koinViewModel()
+
+        val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
+        val primaryToken = remember(primaryPreference) {
+            installerManager.parseToken(primaryPreference)
+        }
+
+        val installTarget = InstallerManager.InstallTarget.PATCHER
+
+        // Installer entries with periodic updates
+        var options by remember(primaryToken) {
+            mutableStateOf(
+                ensureValidEntries(
+                    installerManager.listEntries(installTarget, includeNone = false),
+                    primaryToken,
+                    installerManager,
+                    installTarget
+                )
+            )
+        }
+
+        // Periodically update installer list for availability changes
+        LaunchedEffect(installTarget, primaryToken) {
+            while (isActive) {
+                options = ensureValidEntries(
+                    installerManager.listEntries(installTarget, includeNone = false),
+                    primaryToken,
+                    installerManager,
+                    installTarget
+                )
+                delay(1_500)
+            }
+        }
+
+        InstallerSelectionDialog(
+            title = stringResource(R.string.installer_title),
+            options = options,
+            selected = primaryToken,
+            onDismiss = installViewModel::dismissInstallerSelectionDialog,
+            onConfirm = { selectedToken ->
+                installViewModel.proceedWithSelectedInstaller(selectedToken)
+            },
+            onOpenShizuku = installerManager::openShizukuApp
+        )
     }
 
     // Main content
