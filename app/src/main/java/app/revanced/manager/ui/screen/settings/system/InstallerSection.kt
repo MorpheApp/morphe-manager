@@ -251,7 +251,7 @@ fun InstallerSelectionDialog(
         title = title,
         footer = {
             MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.save),
+                primaryText = stringResource(R.string.confirm),
                 onPrimaryClick = { onConfirm(currentSelection) },
                 primaryEnabled = confirmEnabled,
                 secondaryText = stringResource(android.R.string.cancel),
