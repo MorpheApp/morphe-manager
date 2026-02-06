@@ -6,9 +6,9 @@
     <string name="home_other_apps">Other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_no_patches_available">No patches available</string>
-    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode.</string>
+    <string name="home_default_source_disabled">Morphe patch source is disabled. Please enable it in Patch sources sheet or use Expert mode</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
-    <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience.</string>
+    <string name="android_11_bug_dialog_description">The app installation permission must be granted ahead of time to avoid a bug in the Android 11 system that will negatively affect the user experience</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Manager update available</string>
@@ -56,13 +56,13 @@
     <string name="sources_dialog_display_name">Display name</string>
     <string name="sources_dialog_rename">Rename patch source</string>
     <string name="sources_dialog_duplicate_name_error">A patch source with this name already exists</string>
-    <string name="sources_dialog_missing_error">Could not update this patch source.</string>
+    <string name="sources_dialog_missing_error">Could not update this patch source</string>
     <string name="sources_dialog_disabled_toast">Disabled %d source(s)</string>
     <string name="sources_dialog_enabled_toast">Enabled %d source(s)</string>
     <string name="sources_dialog_view_any_version">Any version</string>
     <string name="sources_dialog_view_any_package">Any package</string>
     <string name="sources_dialog_add_source">Add patch source</string>
-    <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone.</string>
+    <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">Source URL</string>
     <string name="sources_dialog_remote_url_formats">"Examples:
@@ -182,7 +182,7 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Original APK not found. Cannot repatch this app.</string>
+    <string name="home_app_info_repatch_no_original_apk">Original APK not found. Cannot repatch this app</string>
     <string name="home_app_info_repatch_requires_original">Repatch requires the original APK file</string>
     <string name="home_app_info_original_package_name">Original package name</string>
     <string name="home_app_info_applied_patches">Applied patches</string>
@@ -196,7 +196,7 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
 
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching.</string>
+    <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
 
     <!-- Patcher Screen -->
@@ -271,24 +271,21 @@ Are you sure you want to proceed?"</string>
     <string name="patched_app_saved_toast">Patched app saved for later</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="download_apk">Download APK file</string>
-    <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin.</string>
-    <string name="patcher_process_exit_message">Patcher process exited with code %1$d.</string>
+    <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
+    <string name="patcher_process_exit_message">Patcher process exited with code %1$d</string>
 
     <string name="install_app_success">Installed successfully</string>
     <string name="install_app_fail">Failed to install app: %s</string>
-    <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again.</string>
+    <string name="install_timeout_message">Installation did not finish. Check the system installer dialog and try again</string>
     <string name="save_apk_success">APK Saved</string>
     <string name="saved_app_export_failed">Failed to export patched app</string>
     <string name="saved_app_removed_toast">Removed saved patched app</string>
     <string name="saved_app_copy_removed_toast">Removed saved copy</string>
-    <string name="saved_app_launch_unavailable">Install the app before opening it.</string>
+    <string name="saved_app_launch_unavailable">Install the app before opening it</string>
 
     <string name="package_name">Package name</string>
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
-
-    <string name="patcher_select_installer_title">Select installer</string>
-    <string name="patcher_select_installer_description">Choose which installer to use for this installation</string>
 
     <!-- Settings -->
     <string name="appearance">Appearance</string>
@@ -434,43 +431,44 @@ The image dimensions must be as follows:
 
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installer</string>
+    <string name="installer_title">Select installer</string>
     <string name="installer_internal_name">System installer</string>
     <string name="installer_internal_description">Use the Android package installer</string>
     <string name="installer_auto_saved_name">Rooted mount installer</string>
     <string name="installer_auto_saved_description">Mounts the patched APK over the installed app (root required)</string>
     <string name="installer_shizuku_name" translatable="false">Shizuku</string>
-    <string name="installer_shizuku_description">Install silently using Shizuku or Sui.</string>
+    <string name="installer_shizuku_description">Install silently using Shizuku or Sui</string>
     <string name="installer_option_none">No fallback</string>
     <string name="installer_none_description">No fallback installer is configured</string>
     <string name="installer_status_requires_root">Requires root access</string>
-    <string name="installer_status_not_supported">Not supported for this action.</string>
-    <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option.</string>
-    <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again.</string>
-    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app.</string>
-    <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount.</string>
+    <string name="installer_status_not_supported">Not supported for this action</string>
+    <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option</string>
+    <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
+    <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app</string>
+    <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
     <string name="installer_mount_mismatch_title">Rooted mount installer not selected</string>
-    <string name="installer_mount_mismatch_install">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then mount.</string>
-    <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again.</string>
-    <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported.</string>
+    <string name="installer_mount_mismatch_install">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then mount</string>
+    <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
+    <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
-    <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer.</string>
-    <string name="installer_hint_blocked">The installation was blocked by Android. Check Play Protect or security settings.</string>
-    <string name="installer_hint_conflict">Another app with this package name is already installed. Uninstall it before continuing.</string>
-    <string name="installer_hint_incompatible">The APK is not compatible with this device or Android version.</string>
-    <string name="installer_hint_invalid">The APK is invalid or corrupted.</string>
-    <string name="installer_hint_storage">There is not enough storage space for the installation.</string>
-    <string name="installer_hint_timeout">The installation timed out. Try again.</string>
-    <string name="installer_hint_aborted">The installation was cancelled.</string>
+    <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>
+    <string name="installer_hint_blocked">The installation was blocked by Android. Check Play Protect or security settings</string>
+    <string name="installer_hint_conflict">Another app with this package name is already installed. Uninstall it before continuing</string>
+    <string name="installer_hint_incompatible">The APK is not compatible with this device or Android version</string>
+    <string name="installer_hint_invalid">The APK is invalid or corrupted</string>
+    <string name="installer_hint_storage">There is not enough storage space for the installation</string>
+    <string name="installer_hint_timeout">The installation timed out. Try again</string>
+    <string name="installer_hint_aborted">The installation was cancelled</string>
     <string name="installer_hint_with_reason" translatable="false">"%1$s
 
 Details: %2$s"</string>
     <string name="installer_external_launched">Opening %1$s…</string>
-    <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again.</string>
-    <string name="installer_external_success">%1$s reported a successful installation.</string>
-    <string name="installer_external_finished_no_change">%1$s finished without installing the app. Check the installer for an error message and try again.</string>
+    <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again</string>
+    <string name="installer_external_success">%1$s reported a successful installation</string>
+    <string name="installer_external_finished_no_change">%1$s finished without installing the app. Check the installer for an error message and try again</string>
     <string name="installer_unavailable_title">%s unavailable</string>
-    <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead.</string>
-    <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app.</string>
+    <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead</string>
+    <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
     <string name="installer_use_standard">Use standard</string>
     <string name="settings_prompt_installer_on_install">Prompt installer on install</string>
     <string name="settings_prompt_installer_on_install_description">Show installer selection dialog each time you install a patched app</string>

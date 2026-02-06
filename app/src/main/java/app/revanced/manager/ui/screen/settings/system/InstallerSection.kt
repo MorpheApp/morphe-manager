@@ -90,7 +90,7 @@ fun InstallerSection(
     Column {
         if (primaryEntry != null) {
             InstallerSettingsItem(
-                title = stringResource(R.string.installer),
+                title = stringResource(R.string.installer_title),
                 entry = primaryEntry,
                 onClick = onShowInstallerDialog
             )
@@ -148,7 +148,7 @@ fun InstallerSelectionDialogContainer(
     )
 
     InstallerSelectionDialog(
-        title = stringResource(R.string.installer),
+        title = stringResource(R.string.installer_title),
         options = options,
         selected = primaryToken,
         onDismiss = onDismiss,
