@@ -8,4 +8,20 @@
         <item quantity="one">Execute %d patch</item>
         <item quantity="other">Execute %d patches</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK file</item>
+        <item quantity="other">%d APK files</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d saved selection</item>
+        <item quantity="other">%d saved selections</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Disabled %d source</item>
+        <item quantity="other">Disabled %d sources</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Enabled %d source</item>
+        <item quantity="other">Enabled %d sources</item>
+    </plurals>
 </resources>

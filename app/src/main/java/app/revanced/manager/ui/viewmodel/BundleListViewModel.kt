@@ -107,11 +107,11 @@ class BundleListViewModel : ViewModel(), KoinComponent {
     }
 
     private fun showDisabledToast(targets: List<PatchBundleSource>) {
-        app.toast(app.getString(R.string.sources_dialog_disabled_toast, targets.size))
+        app.toast(app.resources.getQuantityString(R.plurals.sources_dialog_disabled_toast, targets.size, targets.size))
     }
 
     private fun showEnabledToast(targets: List<PatchBundleSource>) {
-        app.toast(app.getString(R.string.sources_dialog_enabled_toast, targets.size))
+        app.toast(app.resources.getQuantityString(R.plurals.sources_dialog_enabled_toast, targets.size, targets.size))
     }
 
     enum class Event {
