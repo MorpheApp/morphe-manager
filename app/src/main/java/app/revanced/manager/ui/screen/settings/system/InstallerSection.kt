@@ -43,6 +43,7 @@ fun InstallerSection(
     onShowInstallerDialog: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val expertMode by settingsViewModel.prefs.useExpertMode.getAsState()
     val primaryPreference by settingsViewModel.prefs.installerPrimary.getAsState()
     val primaryToken = remember(primaryPreference) {
         installerManager.parseToken(primaryPreference)
@@ -96,30 +97,32 @@ fun InstallerSection(
             )
         }
 
-        MorpheSettingsDivider()
+        // Prompt installer toggle (Expert mode only)
+        if (expertMode) {
+            MorpheSettingsDivider()
 
-        // Prompt installer toggle
-        RichSettingsItem(
-            onClick = {
-                coroutineScope.launch {
-                    settingsViewModel.prefs.promptInstallerOnInstall.update(!promptInstallerOnInstall)
-                }
-            },
-            leadingContent = {
-                MorpheIcon(icon = Icons.Outlined.Android)
-            },
-            title = stringResource(R.string.settings_prompt_installer_on_install),
-            subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
-            trailingContent = {
-                Switch(
-                    checked = promptInstallerOnInstall,
-                    onCheckedChange = null,
-                    modifier = Modifier.semantics {
-                        stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
+            RichSettingsItem(
+                onClick = {
+                    coroutineScope.launch {
+                        settingsViewModel.prefs.promptInstallerOnInstall.update(!promptInstallerOnInstall)
                     }
-                )
-            }
-        )
+                },
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Android)
+                },
+                title = stringResource(R.string.settings_prompt_installer_on_install),
+                subtitle = stringResource(R.string.settings_prompt_installer_on_install_description),
+                trailingContent = {
+                    Switch(
+                        checked = promptInstallerOnInstall,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (promptInstallerOnInstall) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
     }
 }
 
