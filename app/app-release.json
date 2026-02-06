@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-06T14:17:38.547Z",
-  "description": "# app [1.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2026-02-06)\n\n\n### Bug Fixes\n\n* Create adaptive icons for all resolutions ([#171](https://github.com/MorpheApp/morphe-manager/issues/171)) ([f22aa3f](https://github.com/MorpheApp/morphe-manager/commit/f22aa3f343cc34270030dc52f347518e40bde322))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.5/morphe-manager-1.6.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.5/morphe-manager-1.6.0-dev.5.apk.asc",
-  "version": "1.6.0-dev.5"
+  "created_at": "2026-02-06T18:22:54.820Z",
+  "description": "# app [1.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2026-02-06)\n\n\n### Bug Fixes\n\n* Add validation of patch selections when repatching ([#174](https://github.com/MorpheApp/morphe-manager/issues/174)) ([2dba355](https://github.com/MorpheApp/morphe-manager/commit/2dba3556c8c4b6f6db2eb596c2c1df53afb2b8ef))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.6/morphe-manager-1.6.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.6/morphe-manager-1.6.0-dev.6.apk.asc",
+  "version": "1.6.0-dev.6"
 }
