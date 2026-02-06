@@ -57,8 +57,6 @@
     <string name="sources_dialog_rename">Rename patch source</string>
     <string name="sources_dialog_duplicate_name_error">A patch source with this name already exists</string>
     <string name="sources_dialog_missing_error">Could not update this patch source</string>
-    <string name="sources_dialog_disabled_toast">Disabled %d source(s)</string>
-    <string name="sources_dialog_enabled_toast">Enabled %d source(s)</string>
     <string name="sources_dialog_view_any_version">Any version</string>
     <string name="sources_dialog_view_any_package">Any package</string>
     <string name="sources_dialog_add_source">Add patch source</string>
@@ -81,10 +79,10 @@
 
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Do you have the original unpatched APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">To patch %1$s, you need an unpatched APK with version:</string>
-    <string name="home_apk_availability_dialog_description_expert">Do you have an unpatched %1$s APK?
+    <string name="home_apk_availability_dialog_simple">To patch %1$s, you need an unpatched APK with version:</string>
+    <string name="home_apk_availability_dialog_expert">"Do you have an unpatched %1$s APK?
 
-Compatible versions:</string>
+Compatible versions:"</string>
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
@@ -526,7 +524,6 @@ Details: %2$s"</string>
 
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Storage management</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Total size: %s</string>
     <string name="settings_system_apk_item_info" translatable="false">v%s • %s</string>
 
@@ -550,7 +547,6 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
     <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
-    <string name="settings_system_patch_selections_count">%1$d saved selection(s)</string>
     <string name="settings_system_patch_selections_empty">No saved patch selections</string>
     <string name="settings_system_patch_selections_has_options">Has options</string>
     <string name="settings_system_patch_selections_patches_options">Patches options</string>

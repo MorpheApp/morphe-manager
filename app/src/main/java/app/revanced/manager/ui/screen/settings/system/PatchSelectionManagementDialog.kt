@@ -226,7 +226,7 @@ private fun PatchSelectionManagementDialogContent(
                 ) {
                     Column {
                         Text(
-                            text = stringResource(R.string.settings_system_patch_selections_count, count),
+                            text = pluralStringResource(R.plurals.settings_system_patch_selections_count, count, count),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = LocalDialogTextColor.current
