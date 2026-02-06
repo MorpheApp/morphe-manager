@@ -128,16 +128,19 @@ fun AdvancedTabContent(
             }
         )
 
-        GitHubPatSettingsItem(
-            currentPat = gitHubPat,
-            currentIncludeInExport = includeGitHubPatInExports,
-            onSave = { pat, include ->
-                scope.launch {
-                    prefs.gitHubPat.update(pat)
-                    prefs.includeGitHubPatInExports.update(include)
+        // GitHub PAT (Expert mode only)
+        if (useExpertMode) {
+            GitHubPatSettingsItem(
+                currentPat = gitHubPat,
+                currentIncludeInExport = includeGitHubPatInExports,
+                onSave = { pat, include ->
+                    scope.launch {
+                        prefs.gitHubPat.update(pat)
+                        prefs.includeGitHubPatInExports.update(include)
+                    }
                 }
-            }
-        )
+            )
+        }
 
         // Strip unused native libraries (Expert mode only)
         if (useExpertMode) {
@@ -165,8 +168,8 @@ fun AdvancedTabContent(
             )
         }
 
+        // In Expert mode Notice shown instead of patch options
         if (useExpertMode && showExpertModeNotice) {
-            // In Expert mode Notice shown instead of patch options
             InfoBadge(
                 icon = Icons.Outlined.Info,
                 text = stringResource(R.string.settings_advanced_patch_options_expert_mode_notice),
