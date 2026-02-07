@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-06T18:22:54.820Z",
-  "description": "# app [1.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2026-02-06)\n\n\n### Bug Fixes\n\n* Add validation of patch selections when repatching ([#174](https://github.com/MorpheApp/morphe-manager/issues/174)) ([2dba355](https://github.com/MorpheApp/morphe-manager/commit/2dba3556c8c4b6f6db2eb596c2c1df53afb2b8ef))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.6/morphe-manager-1.6.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.6/morphe-manager-1.6.0-dev.6.apk.asc",
-  "version": "1.6.0-dev.6"
+  "created_at": "2026-02-07T15:43:54.892Z",
+  "description": "# app [1.6.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2026-02-07)\n\n\n### Bug Fixes\n\n* Show banner when patched app was has been uninstalled from the device ([562f23e](https://github.com/MorpheApp/morphe-manager/commit/562f23e845c18c5a6e4d34f631bec6ad095c77b8))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.7/morphe-manager-1.6.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.7/morphe-manager-1.6.0-dev.7.apk.asc",
+  "version": "1.6.0-dev.7"
 }
