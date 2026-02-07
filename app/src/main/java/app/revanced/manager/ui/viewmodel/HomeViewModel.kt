@@ -43,9 +43,6 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -459,7 +456,7 @@ class HomeViewModel(
     /**
      * Load package info for display
      */
-    private suspend fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
+    private fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
         installedApp ?: return null
 
         return pm.getPackageInfo(installedApp.currentPackageName)
