@@ -1,3 +1,10 @@
+# app [1.6.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2026-02-07)
+
+
+### Bug Fixes
+
+* Show banner when patched app was has been uninstalled from the device ([562f23e](https://github.com/MorpheApp/morphe-manager/commit/562f23e845c18c5a6e4d34f631bec6ad095c77b8))
+
 # app [1.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2026-02-06)
 
 
