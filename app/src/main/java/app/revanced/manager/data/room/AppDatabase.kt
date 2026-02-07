@@ -40,6 +40,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun originalApkDao(): OriginalApkDao
 
     companion object {
-        fun generateUid() = Random.Default.nextInt()
+        fun generateUid() = Random.nextInt()
     }
 }

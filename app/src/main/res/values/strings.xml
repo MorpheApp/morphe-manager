@@ -265,9 +265,8 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
     <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
 
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Applying patches</string>
-    <string name="applying_patch">Applying %s</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="patched_app_saved_toast">Patched app saved for later</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
@@ -449,8 +448,6 @@ The image dimensions must be as follows:
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
     <string name="installer_status_shizuku_permission">Grant Shizuku permission to Morphe from the Shizuku app</string>
     <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
-    <string name="installer_mount_mismatch_title">Rooted mount installer not selected</string>
-    <string name="installer_mount_mismatch_install">This app was installed using the rooted mount installer. Switch your primary installer back to use mount actions, then mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
@@ -468,7 +465,6 @@ Details: %2$s"</string>
     <string name="installer_external_launched">Opening %1$s…</string>
     <string name="installer_external_timeout">%1$s did not confirm the installation. Check the other app and try again</string>
     <string name="installer_external_success">%1$s reported a successful installation</string>
-    <string name="installer_external_finished_no_change">%1$s finished without installing the app. Check the installer for an error message and try again</string>
     <string name="installer_unavailable_title">%s unavailable</string>
     <string name="installer_unavailable_message">Your preferred installer (%s) is currently unavailable. You can fix the issue and retry, or use the standard installer instead</string>
     <string name="installer_unavailable_shizuku_hint">Make sure Shizuku is running and permission is granted to this app</string>
@@ -586,7 +582,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="not_installed">Not installed</string>
     <string name="view">View</string>
     <string name="search">Search</string>
-    <string name="clear_search">Clear search</string>
     <string name="search_no_results">No results found</string>
     <string name="any_version">Any</string>
     <string name="enabled">Enabled</string>
@@ -620,7 +615,6 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="saved">Saved</string>
     <string name="update">Update</string>
     <string name="installing_ellipsis">Installing…</string>
-    <string name="uninstalling_ellipsis">Uninstalling…</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Importing…</string>
