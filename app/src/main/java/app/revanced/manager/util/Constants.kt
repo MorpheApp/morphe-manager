@@ -1,6 +1,8 @@
 package app.revanced.manager.util
 
+import android.content.Context
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.R
 
 const val tag = "Morphe Manager"
 
@@ -47,6 +49,16 @@ object AppPackages {
         REDDIT -> REDDIT_DOWNLOAD_COLOR
         else -> YOUTUBE_DOWNLOAD_COLOR // Default to YouTube color
     }
+
+    /**
+     * Get localized app name for a package
+     */
+    fun getAppName(context: Context, packageName: String): String = when (packageName) {
+        YOUTUBE -> context.getString(R.string.home_youtube)
+        YOUTUBE_MUSIC -> context.getString(R.string.home_youtube_music)
+        REDDIT -> context.getString(R.string.home_reddit)
+        else -> packageName
+    }
 }
 
 //const val JAR_MIMETYPE = "application/java-archive"
@@ -55,7 +67,7 @@ const val APK_MIMETYPE = "application/vnd.android.package-archive"
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
     APK_MIMETYPE,
-    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassify
+    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassified
     // the file as an application or something incorrect. Renaming the file and
     // removing "apkmirror.com" from the file name fixes the issue, but that's not something the
     // end user will know or should have to do. Instead, show all files to ensure the user can

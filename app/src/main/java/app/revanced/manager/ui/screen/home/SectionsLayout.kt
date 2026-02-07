@@ -75,6 +75,9 @@ fun SectionsLayout(
     youtubePackageInfo: PackageInfo? = null,
     youtubeMusicPackageInfo: PackageInfo? = null,
     redditPackageInfo: PackageInfo? = null,
+    youtubeIsDeleted: Boolean = false,
+    youtubeMusicIsDeleted: Boolean = false,
+    redditIsDeleted: Boolean = false,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean = false,
 
@@ -117,6 +120,9 @@ fun SectionsLayout(
                     youtubePackageInfo = youtubePackageInfo,
                     youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                     redditPackageInfo = redditPackageInfo,
+                    youtubeIsDeleted = youtubeIsDeleted,
+                    youtubeMusicIsDeleted = youtubeMusicIsDeleted,
+                    redditIsDeleted = redditIsDeleted,
                     onInstalledAppClick = onInstalledAppClick,
                     installedAppsLoading = installedAppsLoading,
                     onOtherAppsClick = onOtherAppsClick,
@@ -164,6 +170,9 @@ private fun AdaptiveContent(
     youtubePackageInfo: PackageInfo?,
     youtubeMusicPackageInfo: PackageInfo?,
     redditPackageInfo: PackageInfo?,
+    youtubeIsDeleted: Boolean,
+    youtubeMusicIsDeleted: Boolean,
+    redditIsDeleted: Boolean,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean,
     onOtherAppsClick: () -> Unit,
@@ -219,6 +228,9 @@ private fun AdaptiveContent(
                         youtubePackageInfo = youtubePackageInfo,
                         youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                         redditPackageInfo = redditPackageInfo,
+                        youtubeIsDeleted = youtubeIsDeleted,
+                        youtubeMusicIsDeleted = youtubeMusicIsDeleted,
+                        redditIsDeleted = redditIsDeleted,
                         onInstalledAppClick = onInstalledAppClick,
                         installedAppsLoading = installedAppsLoading
                     )
@@ -259,6 +271,9 @@ private fun AdaptiveContent(
                     youtubePackageInfo = youtubePackageInfo,
                     youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                     redditPackageInfo = redditPackageInfo,
+                    youtubeIsDeleted = youtubeIsDeleted,
+                    youtubeMusicIsDeleted = youtubeMusicIsDeleted,
+                    redditIsDeleted = redditIsDeleted,
                     onInstalledAppClick = onInstalledAppClick,
                     installedAppsLoading = installedAppsLoading
                 )
@@ -617,6 +632,9 @@ fun MainAppsSection(
     youtubePackageInfo: PackageInfo?,
     youtubeMusicPackageInfo: PackageInfo?,
     redditPackageInfo: PackageInfo?,
+    youtubeIsDeleted: Boolean = false,
+    youtubeMusicIsDeleted: Boolean = false,
+    redditIsDeleted: Boolean = false,
     onInstalledAppClick: (InstalledApp) -> Unit,
     installedAppsLoading: Boolean = false,
     @SuppressLint("ModifierParameter")
@@ -660,7 +678,8 @@ fun MainAppsSection(
                 onButtonClick = onYouTubeClick,
                 hasUpdate = youtubeInstalledApp?.let {
                     appUpdatesAvailable[it.currentPackageName] == true
-                } == true
+                } == true,
+                isAppDeleted = youtubeIsDeleted
             )
 
             // YouTube Music
@@ -674,7 +693,8 @@ fun MainAppsSection(
                 onButtonClick = onYouTubeMusicClick,
                 hasUpdate = youtubeMusicInstalledApp?.let {
                     appUpdatesAvailable[it.currentPackageName] == true
-                } == true
+                } == true,
+                isAppDeleted = youtubeMusicIsDeleted
             )
 
             // Reddit
@@ -688,7 +708,8 @@ fun MainAppsSection(
                 onButtonClick = onRedditClick,
                 hasUpdate = redditInstalledApp?.let {
                     appUpdatesAvailable[it.currentPackageName] == true
-                } == true
+                } == true,
+                isAppDeleted = redditIsDeleted
             )
         }
     }
@@ -706,7 +727,8 @@ private fun AppCardWithLoading(
     buttonText: String,
     onInstalledAppClick: (InstalledApp) -> Unit,
     onButtonClick: () -> Unit,
-    hasUpdate: Boolean = false
+    hasUpdate: Boolean = false,
+    isAppDeleted: Boolean = false
 ) {
     Crossfade(
         targetState = isLoading,
@@ -722,7 +744,8 @@ private fun AppCardWithLoading(
                     packageInfo = packageInfo,
                     gradientColors = gradientColors,
                     onClick = { onInstalledAppClick(installedApp) },
-                    hasUpdate = hasUpdate
+                    hasUpdate = hasUpdate,
+                    isAppDeleted = isAppDeleted
                 )
             } else {
                 AppButton(
@@ -815,7 +838,8 @@ fun InstalledAppCard(
     gradientColors: List<Color>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    hasUpdate: Boolean = false
+    hasUpdate: Boolean = false,
+    isAppDeleted: Boolean = false
 ) {
     val context = LocalContext.current
     val textColor = Color.White
@@ -823,6 +847,7 @@ fun InstalledAppCard(
     val versionLabel = stringResource(R.string.version)
     val installedLabel = stringResource(R.string.installed)
     val updateAvailableLabel = stringResource(R.string.update_available)
+    val deletedLabel = stringResource(R.string.uninstalled)
 
     // Delayed visibility for badge to prevent showing during skeleton loading
     var showBadge by remember { mutableStateOf(false) }
@@ -839,16 +864,29 @@ fun InstalledAppCard(
     // Build content description for accessibility
     val appName = remember(packageInfo, installedApp) {
         packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-            ?: installedApp.currentPackageName
+            ?: AppPackages.getAppName(context, installedApp.originalPackageName)
     }
 
-    val version = remember(packageInfo) {
-        packageInfo?.versionName?.let {
-            if (it.startsWith("v")) it else "v$it"
-        } ?: ""
+    val version = remember(packageInfo, installedApp, isAppDeleted) {
+        when {
+            packageInfo != null -> {
+                packageInfo.versionName?.let {
+                    if (it.startsWith("v")) it else "v$it"
+                } ?: installedApp.version.let { "v$it" }
+            }
+            isAppDeleted -> {
+                val savedVersion = installedApp.version.let {
+                    if (it.startsWith("v")) it else "v$it"
+                }
+                savedVersion
+            }
+            else -> installedApp.version.let {
+                if (it.startsWith("v")) it else "v$it"
+            }
+        }
     }
 
-    val contentDesc = remember(appName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel) {
+    val contentDesc = remember(appName, version, versionLabel, installedLabel, hasUpdate, updateAvailableLabel, isAppDeleted, deletedLabel) {
         buildString {
             append(appName)
             if (version.isNotEmpty()) {
@@ -858,8 +896,12 @@ fun InstalledAppCard(
                 append(version)
             }
             append(", ")
-            append(installedLabel)
-            if (hasUpdate) {
+            if (isAppDeleted) {
+                append(deletedLabel)
+            } else {
+                append(installedLabel)
+            }
+            if (hasUpdate && !isAppDeleted) {
                 append(", ")
                 append(updateAvailableLabel)
             }
@@ -903,25 +945,45 @@ fun InstalledAppCard(
                     color = textColor
                 )
 
-                // Show version
+                // Show version or deletion warning
                 if (version.isNotEmpty()) {
-                    Text(
-                        text = version,
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.4f),
-                                offset = Offset(0f, 1f),
-                                blurRadius = 2f
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = version,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                shadow = Shadow(
+                                    color = Color.Black.copy(alpha = 0.4f),
+                                    offset = Offset(0f, 1f),
+                                    blurRadius = 2f
+                                )
+                            ),
+                            color = textColor.copy(alpha = 0.85f)
+                        )
+
+                        if (isAppDeleted) {
+                            Text(
+                                text = "• ${stringResource(R.string.uninstalled)}",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    shadow = Shadow(
+                                        color = Color.Black.copy(alpha = 0.4f),
+                                        offset = Offset(0f, 1f),
+                                        blurRadius = 2f
+                                    )
+                                ),
+                                color = Color(0xFFFF5252),
+                                fontWeight = FontWeight.Bold
                             )
-                        ),
-                        color = textColor.copy(alpha = 0.85f)
-                    )
+                        }
+                    }
                 }
             }
 
             // Update badge
             androidx.compose.animation.AnimatedVisibility(
-                visible = showBadge,
+                visible = showBadge && !isAppDeleted,
                 modifier = Modifier.align(Alignment.BottomEnd),
                 enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
                         scaleIn(initialScale = 0.8f, animationSpec = tween(durationMillis = 400)),

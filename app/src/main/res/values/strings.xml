@@ -177,6 +177,7 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
     <string name="home_app_info_delete_item_original_apk">Original APK file</string>
     <string name="home_app_info_delete_preservation_note">Your patch selection and options will be preserved for future patching</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Removed %d outdated patches from saved selection</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
@@ -192,6 +193,8 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Patch update available</string>
     <string name="home_app_info_patch_update_available_description">A newer version of patches is available. Repatch your app to get the latest improvements and fixes</string>
+    <string name="home_app_info_app_deleted_warning">App uninstalled outside manager</string>
+    <string name="home_app_info_app_deleted_description">This app was uninstalled outside the manager. Repatch it to restore functionality</string>
 
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
@@ -612,6 +615,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="installed">Installed</string>
     <string name="reinstall">Reinstall</string>
     <string name="uninstall">Uninstall</string>
+    <string name="uninstalled">Uninstalled</string>
     <string name="save">Save</string>
     <string name="saved">Saved</string>
     <string name="update">Update</string>

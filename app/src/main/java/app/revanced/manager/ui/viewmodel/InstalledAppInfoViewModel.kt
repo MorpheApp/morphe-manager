@@ -55,6 +55,8 @@ class InstalledAppInfoViewModel(
         private set
     var hasOriginalApk by mutableStateOf(false)
         private set
+    var isAppDeleted by mutableStateOf(false)
+        private set
     var showRepatchDialog by mutableStateOf(false)
         private set
     var repatchBundles by mutableStateOf<List<PatchBundleInfo.Scoped>>(emptyList())
@@ -235,9 +237,16 @@ class InstalledAppInfoViewModel(
 
         if (installedInfo != null) {
             isInstalledOnDevice = true
+            isAppDeleted = false
             appInfo = installedInfo
         } else {
             isInstalledOnDevice = false
+            // App is deleted if it was installed on device but now missing
+            isAppDeleted = pm.isAppDeleted(
+                packageName = app.currentPackageName,
+                hasSavedCopy = hasSavedCopy,
+                wasInstalledOnDevice = app.installType != InstallType.SAVED
+            )
             appInfo = withContext(Dispatchers.IO) {
                 savedApkFile(app)?.let(pm::getPackageInfo)
             }
@@ -245,6 +254,16 @@ class InstalledAppInfoViewModel(
 
         // Update mounted state
         isMounted = rootInstaller.isAppMounted(app.currentPackageName)
+    }
+
+    /**
+     * Manually refresh app state (e.g., after app installation/uninstallation)
+     */
+    fun refreshCurrentAppState() {
+        val app = installedApp ?: return
+        viewModelScope.launch {
+            refreshAppState(app)
+        }
     }
 
     val exportFormat: StateFlow<String> = prefs.patchedAppExportFormat.flow
@@ -317,6 +336,14 @@ class InstalledAppInfoViewModel(
 
                 Log.i(tag, "Cleaned up invalid patches and options in database")
             }
+
+            // Show toast to user about cleanup
+            context.toast(
+                context.getString(
+                    R.string.home_app_info_repatch_cleaned_invalid_data,
+                    removedPatchCount
+                )
+            )
         }
 
         // Check if Expert Mode is enabled

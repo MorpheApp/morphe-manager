@@ -20,7 +20,9 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.platform.NetworkInfo
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
@@ -41,6 +43,9 @@ import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -103,7 +108,8 @@ class HomeViewModel(
     private val networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
     private val pm: PM,
-    val rootInstaller: RootInstaller
+    val rootInstaller: RootInstaller,
+    private val filesystem: Filesystem
 ) : ViewModel() {
 
     val availablePatches =
@@ -175,6 +181,18 @@ class HomeViewModel(
 
     // Track available updates for installed apps
     var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
+    // Track deleted apps
+    var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
+    // Package info for display
+    var youtubePackageInfo by mutableStateOf<PackageInfo?>(null)
+        private set
+    var youtubeMusicPackageInfo by mutableStateOf<PackageInfo?>(null)
+        private set
+    var redditPackageInfo by mutableStateOf<PackageInfo?>(null)
         private set
 
     // Using mount install (set externally)
@@ -399,7 +417,66 @@ class HomeViewModel(
     }
 
     /**
-     * Handle app button click (YouTube or YouTube Music)
+     * Update deleted apps status
+     */
+    fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
+        appsDeletedStatus = installedApps.associate { app ->
+            val hasSavedCopy = listOf(
+                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+            ).distinctBy { it.absolutePath }.any { it.exists() }
+
+            app.currentPackageName to pm.isAppDeleted(
+                packageName = app.currentPackageName,
+                hasSavedCopy = hasSavedCopy,
+                wasInstalledOnDevice = app.installType != InstallType.SAVED
+            )
+        }
+    }
+
+    /**
+     * Update installed apps info
+     */
+    fun updateInstalledAppsInfo(
+        youtubeApp: InstalledApp?,
+        youtubeMusicApp: InstalledApp?,
+        redditApp: InstalledApp?,
+        allInstalledApps: List<InstalledApp>
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        // Load package info in parallel
+        val youtubeJob = async { loadDisplayPackageInfo(youtubeApp) }
+        val musicJob = async { loadDisplayPackageInfo(youtubeMusicApp) }
+        val redditJob = async { loadDisplayPackageInfo(redditApp) }
+
+        youtubePackageInfo = youtubeJob.await()
+        youtubeMusicPackageInfo = musicJob.await()
+        redditPackageInfo = redditJob.await()
+
+        // Update deleted status
+        updateDeletedAppsStatus(allInstalledApps)
+    }
+
+    /**
+     * Load package info for display
+     */
+    private suspend fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
+        installedApp ?: return null
+
+        return pm.getPackageInfo(installedApp.currentPackageName)
+            ?: run {
+                val candidates = listOf(
+                    filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
+                    filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
+                ).distinctBy { it.absolutePath }
+
+                candidates.firstOrNull { it.exists() }?.let { file ->
+                    pm.getPackageInfo(file)
+                }
+            }
+    }
+
+    /**
+     * Handle app button click
      */
     fun handleAppClick(
         packageName: String,
@@ -433,7 +510,7 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = getAppName(packageName)
+        pendingAppName = AppPackages.getAppName(app, packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         showApkAvailabilityDialog = true
@@ -854,18 +931,6 @@ class HomeViewModel(
             app.toast(app.getString(R.string.sources_management_failed_to_open_url))
             showDownloadInstructionsDialog = false
             cleanupPendingData()
-        }
-    }
-
-    /**
-     * Get localized app name
-     */
-    fun getAppName(packageName: String): String {
-        return when (packageName) {
-            AppPackages.YOUTUBE -> app.getString(R.string.home_youtube)
-            AppPackages.YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
-            AppPackages.REDDIT -> app.getString(R.string.home_reddit)
-            else -> packageName
         }
     }
 
