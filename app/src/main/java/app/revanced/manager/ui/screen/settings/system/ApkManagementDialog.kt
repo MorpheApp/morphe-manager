@@ -2,7 +2,6 @@ package app.revanced.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageInfo
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,16 +23,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.data.room.apps.original.OriginalApk
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.ui.screen.shared.*
-import app.revanced.manager.util.calculateApkSize
-import app.revanced.manager.util.formatBytes
-import app.revanced.manager.util.getApkPath
-import app.revanced.manager.util.PM
-import app.revanced.manager.util.toast
+import app.revanced.manager.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -54,9 +50,26 @@ private data class ApkItemData(
     val packageName: String,
     val displayName: String,
     val version: String,
-    val fileSize: Long,
-    val packageInfo: PackageInfo?
+    val fileSize: Long
 )
+
+/**
+ * Data class representing an APK item with reference to InstalledApp
+ */
+private data class ApkItemDataWithApp(
+    val packageName: String,
+    val displayName: String,
+    val version: String,
+    val fileSize: Long,
+    val installedApp: InstalledApp
+) {
+    fun toApkItemData() = ApkItemData(
+        packageName = packageName,
+        displayName = displayName,
+        version = version,
+        fileSize = fileSize
+    )
+}
 
 /**
  * Universal dialog for managing APK files (patched or original)
@@ -91,21 +104,40 @@ private fun PatchedApksContent(
     scope: CoroutineScope
 ) {
     val repository: InstalledAppRepository = koinInject()
+    val originalApkRepository: OriginalApkRepository = koinInject()
     val pm: PM = koinInject()
+    val filesystem: Filesystem = koinInject()
+
+    // Create AppDataResolver
+    val appDataResolver = remember(context, pm, originalApkRepository, repository, filesystem) {
+        AppDataResolver(context, pm, originalApkRepository, repository, filesystem)
+    }
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
-    // Convert to ApkItemData with size calculation
-    val apkItems = remember(allInstalledApps) {
-        allInstalledApps.map { app ->
-            val packageInfo = runCatching { pm.getPackageInfo(app.currentPackageName) }.getOrNull()
-            ApkItemData(
+    // Convert to ApkItemData using AppDataResolver
+    var apkItems by remember { mutableStateOf<List<ApkItemDataWithApp>>(emptyList()) }
+
+    LaunchedEffect(allInstalledApps) {
+        apkItems = allInstalledApps.mapNotNull { app ->
+            // Check if saved APK file exists
+            val savedFile = listOf(
+                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+            ).distinct().firstOrNull { it.exists() } ?: return@mapNotNull null
+
+            // Use AppDataResolver to get data from: patched APK → installed app → original APK → constants
+            val resolvedData = appDataResolver.resolveAppData(
+                app.currentPackageName,
+                preferredSource = AppDataSource.PATCHED_APK
+            )
+
+            ApkItemDataWithApp(
                 packageName = app.currentPackageName,
-                displayName = packageInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString()
-                    ?: app.currentPackageName,
+                displayName = resolvedData.displayName,
                 version = app.version,
-                fileSize = calculateApkSize(context, app),
-                packageInfo = packageInfo
+                fileSize = savedFile.length(),
+                installedApp = app
             )
         }
     }
@@ -125,10 +157,10 @@ private fun PatchedApksContent(
         emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
         itemsContent = {
-            apkItems.forEachIndexed { index, item ->
+            apkItems.forEach { item ->
                 ApkItem(
-                    data = item,
-                    onDelete = { itemToDelete = allInstalledApps[index] }
+                    data = item.toApkItemData(),
+                    onDelete = { itemToDelete = item.installedApp }
                 )
             }
         }
@@ -171,21 +203,33 @@ private fun OriginalApksContent(
     scope: CoroutineScope
 ) {
     val repository: OriginalApkRepository = koinInject()
-    val pm = context.packageManager
+    val installedAppRepository: InstalledAppRepository = koinInject()
+    val pm: PM = koinInject()
+    val filesystem: Filesystem = koinInject()
+
+    // Create AppDataResolver
+    val appDataResolver = remember(context, pm, repository, installedAppRepository, filesystem) {
+        AppDataResolver(context, pm, repository, installedAppRepository, filesystem)
+    }
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
-    // Convert to ApkItemData
-    val apkItems = remember(originalApks) {
-        originalApks.map { apk ->
-            val packageInfo = runCatching { pm.getPackageInfo(apk.packageName, 0) }.getOrNull()
+    // Convert to ApkItemData using AppDataResolver
+    var apkItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
+
+    LaunchedEffect(originalApks) {
+        apkItems = originalApks.map { apk ->
+            // Use AppDataResolver to get data from: original APK → installed app → constants
+            val resolvedData = appDataResolver.resolveAppData(
+                apk.packageName,
+                preferredSource = AppDataSource.ORIGINAL_APK
+            )
+
             ApkItemData(
                 packageName = apk.packageName,
-                displayName = packageInfo?.applicationInfo?.loadLabel(pm)?.toString()
-                    ?: apk.packageName,
+                displayName = resolvedData.displayName,
                 version = apk.version,
-                fileSize = apk.fileSize,
-                packageInfo = packageInfo
+                fileSize = apk.fileSize
             )
         }
     }
@@ -312,13 +356,7 @@ private fun ApkItem(
     onDelete: () -> Unit
 ) {
     ApkItemCard(
-        icon = {
-            AppIcon(
-                packageInfo = data.packageInfo,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp)
-            )
-        },
+        packageName = data.packageName,
         title = data.displayName,
         subtitle = data.packageName,
         details = stringResource(
@@ -332,7 +370,7 @@ private fun ApkItem(
 
 @Composable
 private fun ApkItemCard(
-    icon: @Composable () -> Unit,
+    packageName: String,
     title: String,
     subtitle: String,
     details: String,
@@ -350,7 +388,12 @@ private fun ApkItemCard(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            icon()
+            // App Icon
+            AppIcon(
+                packageName = packageName,
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+            )
 
             // App Info
             Column(modifier = Modifier.weight(1f)) {

@@ -9,7 +9,6 @@ import androidx.compose.runtime.remember
 import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import org.koin.compose.koinInject
-import java.io.File
 
 /**
  * Convert content:// URI to file path
@@ -85,15 +84,4 @@ fun getApkPath(context: Context, app: InstalledApp): String? {
         context.packageManager.getPackageInfo(app.currentPackageName, 0)
             .applicationInfo?.sourceDir
     }.getOrNull()
-}
-
-/**
- * Calculate APK file size from installed app
- */
-fun calculateApkSize(context: Context, app: InstalledApp): Long {
-    return getApkPath(context, app)?.let { path ->
-        runCatching {
-            File(path).length()
-        }.getOrNull()
-    } ?: 0L
 }
