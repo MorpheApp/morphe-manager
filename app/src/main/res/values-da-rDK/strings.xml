@@ -160,6 +160,7 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patchet APK-fil</string>
     <string name="home_app_info_delete_item_original_apk">Original APK-fil</string>
     <string name="home_app_info_delete_preservation_note">Din patch-valg og indstillinger vil blive bevarede til fremtidig patching</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Fjernet %d forældede opdateringer fra gemt valg</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unavnet</string>
     <string name="home_app_info_patches_replace_fail">Kunne ikke importere patcher: %s</string>
@@ -174,6 +175,8 @@ Er du sikker på, at du vil fortsætte?"</string>
     <string name="home_app_info_patched_at">Reparert</string>
     <string name="home_app_info_patch_update_available">Patchoppdatering tilgjengelig</string>
     <string name="home_app_info_patch_update_available_description">En nyere version af patches er tilgængelig. Repatch din app for at få de seneste forbedringer og fikser</string>
+    <string name="home_app_info_app_deleted_warning">App fjernet udenfor manager</string>
+    <string name="home_app_info_app_deleted_description">Denne app blev fjernet udenfor manageren. Gendan den for at genoptage funktionalitet</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus kræver, at original APK er installeret på dit enhed før patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch er udelukket i root-tilstand</string>
@@ -237,9 +240,8 @@ Er du sikker på, at du vil fortsætte?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
     <string name="patcher_message_20">Fjerner vrøvl. Venligst vent… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Anvender patches</string>
-    <string name="applying_patch">Anvender %s</string>
     <string name="failed_to_execute_patch">Kunne ikke anvende %s</string>
     <string name="patched_app_saved_toast">Patch-app gemt til senere</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patch-app</string>
@@ -403,8 +405,6 @@ Bildeformateringen må være som følger:
     <string name="installer_status_shizuku_not_running">Start Shizuku eller Sui og prøv igen</string>
     <string name="installer_status_shizuku_permission">Giv Shizuku tilladelse til Morphe fra Shizuku-app\'en</string>
     <string name="installer_mount_warning_install">Din primære installer er sat til den rodede mount-installer. Denne gemte app blev ikke installeret ved hjælp af mount</string>
-    <string name="installer_mount_mismatch_title">Rooted mount-installatør ikke valgt</string>
-    <string name="installer_mount_mismatch_install">Denne app blev installeret ved hjælp af den rodede mount-installer. Skift din primære installer tilbage for at bruge mount-handlinger, så mount</string>
     <string name="mount_version_mismatch_message">Stock-app-versjon (%2$s) matcher ikke patchet app-versjon (%1$s). Mount den matchende stock-versjon, så prøv igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerede Shizuku-versjon er ikke understøttet</string>
     <string name="installer_action_open_shizuku">Åbn Shizuku</string>
@@ -419,7 +419,6 @@ Bildeformateringen må være som følger:
     <string name="installer_external_launched">Åbner %1$s…</string>
     <string name="installer_external_timeout">%1$s bekræftede ikke installationen. Tjek den anden app og prøv igen</string>
     <string name="installer_external_success">%1$s meldte en succesfuld installation</string>
-    <string name="installer_external_finished_no_change">%1$s afsluttede uden at installere app\'en. Tjek installeren for en fejlmeddelse og prøv igen</string>
     <string name="installer_unavailable_title">%s utilgångelig</string>
     <string name="installer_unavailable_message">Din foretrukne installer (%s) er for øjeblikket utilgængelig. Du kan løse problemet og prøve igen, eller bruge standardinstalleren i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Forsikrer dig om, at Shizuku kører og tilladelse er givet til denne app</string>
@@ -525,7 +524,6 @@ Bildeformateringen må være som følger:
     <string name="not_installed">Ikke installeret</string>
     <string name="view">Vis</string>
     <string name="search">Søg</string>
-    <string name="clear_search">Ryd søkehistorikk</string>
     <string name="search_no_results">Fant ingen resultater</string>
     <string name="any_version">Enhver</string>
     <string name="enabled">Aktiveret</string>
@@ -554,11 +552,11 @@ Bildeformateringen må være som følger:
     <string name="installed">Installeret</string>
     <string name="reinstall">Geninstaller</string>
     <string name="uninstall">Afinstaller</string>
+    <string name="uninstalled">Afinstalleret</string>
     <string name="save">Gem</string>
     <string name="saved">Lagret</string>
     <string name="update">Opdater</string>
     <string name="installing_ellipsis">Installerer…</string>
-    <string name="uninstalling_ellipsis">Deinstaller...</string>
     <string name="mounting_ellipsis">Montering…</string>
     <string name="unmounting_ellipsis">Forkaster…</string>
     <string name="importing_ellipsis">Importerer…</string>

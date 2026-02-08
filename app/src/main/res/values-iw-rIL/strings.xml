@@ -161,6 +161,7 @@
     <string name="home_app_info_delete_item_patched_apk">קובץ APK מתוקן</string>
     <string name="home_app_info_delete_item_original_apk">קובץ APK מקורי</string>
     <string name="home_app_info_delete_preservation_note">הבחירה שלך ותצורה תישמרו לשימוש עתידי</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">הוסר %d תיקון מיושן מהסלקציה המוגשת</string>
     <string name="home_app_info_patches_name_default">פיצ\'ים</string>
     <string name="home_app_info_patches_name_fallback">לא מוגדר</string>
     <string name="home_app_info_patches_replace_fail">שגגה להוריד פיצ\'ים: %s</string>
@@ -175,6 +176,8 @@
     <string name="home_app_info_patched_at">פיצ\'ח</string>
     <string name="home_app_info_patch_update_available">עדכון פיצ\'ה זמין זמין</string>
     <string name="home_app_info_patch_update_available_description">גרסה חדשה של תיקונים זמינה. תיקן את האפליקציה שלך כדי לקבל את התיקונים וההערות החדשים</string>
+    <string name="home_app_info_app_deleted_warning">אפליקציה בוטלה מחוץ למנהל</string>
+    <string name="home_app_info_app_deleted_description">אפליקציה זו בוטלה מחוץ למנהל. תיקנה כדי לשחזר את הפונקציונליות</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">מוד רוט דורש את APK המקורי להתקין על מכשיר שלך לפני השחזור</string>
     <string name="root_gmscore_excluded">תיקון תמיכה ב-GmsCore אינו נכלל במצב Root</string>
@@ -238,9 +241,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
     <string name="patcher_message_20">מסירים שטויות. אנא המתן… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">החלת טלאים</string>
-    <string name="applying_patch">החלת %s</string>
     <string name="failed_to_execute_patch">נכשל להחיל %s</string>
     <string name="patched_app_saved_toast">אפליקציה מתוקנת נשמרה למועד מאוחר יותר</string>
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
@@ -366,8 +368,6 @@
     <string name="installer_status_shizuku_not_running">הפעל שיזוקה או סוי ונסה שוב</string>
     <string name="installer_status_shizuku_permission">אשר את הרשאות שיזוקה ל-Morphe מהאפליקציה של שיזוקה</string>
     <string name="installer_mount_warning_install">התקן שלך הוא מותקן על התקן שורש. אפליקציה זו לא התקינה באמצעות מותקן</string>
-    <string name="installer_mount_mismatch_title">מותקן הר מותקן לא נבחר</string>
-    <string name="installer_mount_mismatch_install">אפליקציה זו התקינה באמצעות מותקן שורש. שנה את התקן המועדף שלך כדי להשתמש פעולות מותקן, ואז מותקן</string>
     <string name="mount_version_mismatch_message">גרסת אפליקציה מקורית (%2$s) אינה תואמת לגרסת אפליקציה שחורה (%1$s). מותקן את הגרסה המקורית התואמת, ואז נסה שוב</string>
     <string name="installer_status_shizuku_unsupported">גרסת שיזוקה המותקנת אינה נתמכת</string>
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
@@ -382,7 +382,6 @@
     <string name="installer_external_launched">פותח את %1$s...</string>
     <string name="installer_external_timeout">%1$s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
     <string name="installer_external_success">%1$s דיווח על התקנה מוצלחת</string>
-    <string name="installer_external_finished_no_change">%1$s הסתיים ללא התקנה של האפליקציה. בדוק את ההתקן לחשש על הודעת שגיאה ונסה שוב</string>
     <string name="installer_unavailable_title">%s אינו זמין</string>
     <string name="installer_unavailable_message">התקן המועדף שלך (%s) אינו זמין כעת. תוכל לתקן את הבעיה ולתחל שוב, או להשתמש בהתקן סטנדרטי במקום זאת</string>
     <string name="installer_unavailable_shizuku_hint">אשר שיזוקה רץ ורשאות מובנות לאפליקציה זו</string>
@@ -486,7 +485,6 @@
     <string name="not_installed">לא מותקן</string>
     <string name="view">צפה</string>
     <string name="search">חיפוש</string>
-    <string name="clear_search">נקה חיפושים</string>
     <string name="search_no_results">לא נמצאו תוצאות</string>
     <string name="any_version">כל</string>
     <string name="enabled">הפעל</string>
@@ -515,11 +513,11 @@
     <string name="installed">מותקן</string>
     <string name="reinstall">התקן מחדש</string>
     <string name="uninstall">הסרת התקנה</string>
+    <string name="uninstalled">הורד</string>
     <string name="save">שמור</string>
     <string name="saved">נשמר</string>
     <string name="update">עדכון</string>
     <string name="installing_ellipsis">מתקין…</string>
-    <string name="uninstalling_ellipsis">Desinstalación...</string>
     <string name="mounting_ellipsis">מצרף…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>
     <string name="importing_ellipsis">מוצא... </string>

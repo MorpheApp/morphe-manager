@@ -84,7 +84,7 @@ Versions compatibles :"</string>
     <string name="home_download_instructions_step1">Appuyez sur le bouton \'%1$s\' ci-dessous</string>
     <string name="home_download_instructions_step2_part1">Faites défiler la page Web et appuyez sur</string>
     <string name="home_download_instructions_download_button_toast">Appuyez sur télécharger sur le site Web, et non ici 😊</string>
-    <string name="home_download_instructions_step3">Attendez que le téléchargement ce terminé, et &lt;b&gt; n\'installez pas&lt;/b&gt; l\'APK</string>
+    <string name="home_download_instructions_step3">Attendez que le téléchargement se termine, et &lt;b&gt;n\'installez pas&lt;/b&gt; l\'APK</string>
     <string name="home_download_instructions_step3_mount">Attendez que le téléchargement ce terminé, puis &lt;b&gt;installez l\'APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">Une fois le téléchargement terminé, ouvrez à nouveau cette application.</string>
     <string name="home_download_instructions_step4_mount">Après avoir installé l\'APK d\'origine, ouvrez à nouveau cette application</string>
@@ -160,6 +160,7 @@ Versions compatibles :"</string>
     <string name="home_app_info_delete_item_patched_apk">Fichier APK patché</string>
     <string name="home_app_info_delete_item_original_apk">Fichier APK original</string>
     <string name="home_app_info_delete_preservation_note">Votre sélection de patch et vos options seront conservées pour les futurs patchage</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">%d patchs obsolètes supprimés de la sélection enregistrée</string>
     <string name="home_app_info_patches_name_default">Patchs</string>
     <string name="home_app_info_patches_name_fallback">Sans nom</string>
     <string name="home_app_info_patches_replace_fail">Échec de l\'importation des patchs : %s</string>
@@ -167,13 +168,15 @@ Versions compatibles :"</string>
     <string name="home_app_info_repatch_requires_original">Le repatchage nécessite le fichier APK original</string>
     <string name="home_app_info_original_package_name">Nom de package d\'original</string>
     <string name="home_app_info_applied_patches">Patchs appliqués</string>
-    <string name="home_app_info_patch_source_used">Source du patch utilisée</string>
+    <string name="home_app_info_patch_source_used">Source de patch utilisée</string>
     <string name="home_app_info_install_type">Type d\'installation</string>
     <string name="home_app_info_install_type_custom_installer">Installateur personnalisé</string>
     <string name="home_app_info_install_type_system_installer">Installateur système</string>
     <string name="home_app_info_patched_at">Patché</string>
     <string name="home_app_info_patch_update_available">Mise à jour de patch disponible</string>
     <string name="home_app_info_patch_update_available_description">Une version plus récente des patchs est disponible. Repatchez votre application pour bénéficier des dernières améliorations et corrections</string>
+    <string name="home_app_info_app_deleted_warning">Application désinstallée en dehors du gestionnaire</string>
+    <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors du gestionnaire. Repatchez-la pour restaurer la fonctionnalité</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Le mode Root nécessite que l\'APK d\'origine soit installé sur votre appareil avant le patchage</string>
     <string name="root_gmscore_excluded">Le patch de support GmsCore est exclu en mode root</string>
@@ -237,9 +240,8 @@ Versions compatibles :"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Votre application a de la fièvre et la seule prescription est plus de patchs… 🩺🔔</string>
     <string name="patcher_message_20">Suppression des absurdités. Veuillez patienter... 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Application des patchs</string>
-    <string name="applying_patch">Application de %s</string>
     <string name="failed_to_execute_patch">Échec de l\'application de %s</string>
     <string name="patched_app_saved_toast">Application patchée enregistrée pour plus tard</string>
     <string name="patched_app_save_failed_toast">Échec de l\'enregistrement de l\'application patchée</string>
@@ -403,8 +405,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_status_shizuku_not_running">Démarrez Shizuku ou Sui et réessayez</string>
     <string name="installer_status_shizuku_permission">Accordez à Shizuku l\'autorisation d\'accéder à Morphe depuis l\'application Shizuku</string>
     <string name="installer_mount_warning_install">Votre installateur principal est défini sur l\'installateur de montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
-    <string name="installer_mount_mismatch_title">Installateur de montage root non sélectionné</string>
-    <string name="installer_mount_mismatch_install">Cette application a été installée à l\'aide de l\'installateur de montage root. Changez votre installateur principal pour utiliser les actions de montage, puis effectuer le montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
@@ -419,7 +419,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_external_launched">Ouverture de %1$s…</string>
     <string name="installer_external_timeout">%1$s n\'a pas confirmé l\'installation. Vérifiez l\'autre application et réessayez</string>
     <string name="installer_external_success">%1$s a signalé une installation réussie</string>
-    <string name="installer_external_finished_no_change">%1$s s\'est terminé sans installer l\'application. Vérifiez si l\'installateur affiche un message d\'erreur et réessayez</string>
     <string name="installer_unavailable_title">%s indisponible</string>
     <string name="installer_unavailable_message">Votre installateur préféré (%s) est actuellement indisponible. Vous pouvez résoudre le problème et réessayer, ou utiliser l\'installateur standard à la place</string>
     <string name="installer_unavailable_shizuku_hint">Assurez-vous que Shizuku est en cours d’exécution et que l’autorisation a été accordée à cette application</string>
@@ -525,7 +524,6 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="not_installed">Non installé</string>
     <string name="view">Voir</string>
     <string name="search">Recherche</string>
-    <string name="clear_search">Effacer la recherche</string>
     <string name="search_no_results">Pas de résultat trouvé</string>
     <string name="any_version">N\'importe laquelle</string>
     <string name="enabled">Activé</string>
@@ -554,11 +552,11 @@ Open source dans son essence même, Morphe s'appuie sur les commentaires et les 
     <string name="installed">Installé</string>
     <string name="reinstall">Réinstaller</string>
     <string name="uninstall">Désinstaller</string>
+    <string name="uninstalled">Désinstallé</string>
     <string name="save">Enregistrer</string>
     <string name="saved">Enregistré</string>
     <string name="update">Mettre à jour</string>
     <string name="installing_ellipsis">Installation…</string>
-    <string name="uninstalling_ellipsis">Désinstallation…</string>
     <string name="mounting_ellipsis">Montage…</string>
     <string name="unmounting_ellipsis">Démontage…</string>
     <string name="importing_ellipsis">Importation…</string>

@@ -160,6 +160,7 @@ Biztosan folytatja?"</string>
     <string name="home_app_info_delete_item_patched_apk">Módosított APK fájl</string>
     <string name="home_app_info_delete_item_original_apk">Eredeti APK fájl</string>
     <string name="home_app_info_delete_preservation_note">A módosítási kiválasztásod és beállításai a jövőbeni módosításokhoz megmaradnak</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Eltávolítottam %d elavult javítást a mentett kiválasztásból</string>
     <string name="home_app_info_patches_name_default">Módosítások</string>
     <string name="home_app_info_patches_name_fallback">Névtelen</string>
     <string name="home_app_info_patches_replace_fail">Nem sikerült a módosítások importálása: %s</string>
@@ -174,6 +175,8 @@ Biztosan folytatja?"</string>
     <string name="home_app_info_patched_at">Módosított</string>
     <string name="home_app_info_patch_update_available">Módosítás frissítés elérhető</string>
     <string name="home_app_info_patch_update_available_description">Egy újabb módosítási verzió áll rendelkezésre. Módosítsd újra az alkalmazódat, hogy megkapd az új javításokat és fixeket</string>
+    <string name="home_app_info_app_deleted_warning">A alkalmazást a kezelőn kívül törölték</string>
+    <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a kezelőn kívül törölték. Visszaállítsa a funkciót a javításhoz</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">A root módhoz az eredeti APK-nak telepítve kell lennie az eszközön a módosítás előtt</string>
     <string name="root_gmscore_excluded">A GmsCore támogatási patch nem elérhető root módban</string>
@@ -237,9 +240,8 @@ Biztosan folytatja?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Az alkalmazása lázas, és az egyetlen gyógyír rá a mégtöbb módosítás… 🩺🔔</string>
     <string name="patcher_message_20">Ostobaságok eltávolítása. Kérjük, maradjon készen… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patch-ek alkalmazása</string>
-    <string name="applying_patch">%s alkalmazása</string>
     <string name="failed_to_execute_patch">Nem sikerült %s végrehajtása</string>
     <string name="patched_app_saved_toast">A javított APK mentve későbbre</string>
     <string name="patched_app_save_failed_toast">A javított APK mentése sikertelen</string>
@@ -403,8 +405,6 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_status_shizuku_not_running">Indítsa el a Shizuku vagy a Sui alkalmazást és próbálkozzon újra</string>
     <string name="installer_status_shizuku_permission">Adjon Shizuku engedélyt a Morphe számára a Shizuku alkalmazásból</string>
     <string name="installer_mount_warning_install">Az elsődleges telepítő root telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve</string>
-    <string name="installer_mount_mismatch_title">A root telepítő nincs kiválasztva</string>
-    <string name="installer_mount_mismatch_install">Ez az alkalmazás a root telepítővel lett telepítve. Változtassa vissza az elsődleges telepítőt a csatolási műveletek használatára, majd csatlakoztassa</string>
     <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a patchelt alkalmazás verziójával (%1$s). Csatolja a megfelelő alapverziót, majd próbálkozzon újra</string>
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott</string>
     <string name="installer_action_open_shizuku">Shizuku megnyitása</string>
@@ -419,7 +419,6 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_external_launched">%1$s megnyitása…</string>
     <string name="installer_external_timeout">%1$s nem erősítette meg a telepítést. Ellenőrizze a másik alkalmazást, és próbálja újra</string>
     <string name="installer_external_success">%1$s sikeres telepítést jelentett</string>
-    <string name="installer_external_finished_no_change">\"%1$s\" befejeződött az alkalmazás telepítése nélkül. Kérjük ellenőrizze a telepítő hibaüzeneteit és próbálja újra.</string>
     <string name="installer_unavailable_title">%s (nem elérhető)</string>
     <string name="installer_unavailable_message">A kiválaszott telepítő (%s) jelenleg nem érhető el. A problémát megoldhatja és újrapróbálhatja, vagy használhatja a szabványos telepítőt.</string>
     <string name="installer_unavailable_shizuku_hint">Győződjön meg arról, hogy Shizuku fut és az alkalmazásnak van engedélyezve a jog.</string>
@@ -525,7 +524,6 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="not_installed">Nincs telepítve</string>
     <string name="view">Megtekintés</string>
     <string name="search">Keresés</string>
-    <string name="clear_search">Keresés törlése</string>
     <string name="search_no_results">Nincs találat</string>
     <string name="any_version">Bármelyik</string>
     <string name="enabled">Engedélyezve</string>
@@ -554,11 +552,11 @@ A nyílt forráskódú Morphe a közösség visszajelzéseire és hozzájárulá
     <string name="installed">Telepítve</string>
     <string name="reinstall">Újratelepítés</string>
     <string name="uninstall">Eltávolítás</string>
+    <string name="uninstalled">eltávolítva</string>
     <string name="save">Mentés</string>
     <string name="saved">Mentett</string>
     <string name="update">Frissítés</string>
     <string name="installing_ellipsis">Telepítés…</string>
-    <string name="uninstalling_ellipsis">Eltávolítás...</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>
     <string name="importing_ellipsis">Importálás…</string>

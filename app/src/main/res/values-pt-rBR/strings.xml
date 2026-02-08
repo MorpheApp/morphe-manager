@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Outros apps</string>
-    <string name="home_not_patched_yet">Não patchado ainda</string>
+    <string name="home_other_apps">Outros aplicativos</string>
+    <string name="home_not_patched_yet">Não corrigido ainda</string>
     <string name="home_no_patches_available">Não há atualizações disponíveis</string>
-    <string name="home_default_source_disabled">Fonte do Morphe está desativada. Ative-a na folha de fontes de patch ou utilize o modo expert.</string>
-    <string name="android_11_bug_dialog_title">Bug do Android 11</string>
-    <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
+    <string name="home_default_source_disabled">O recurso de patch Morphe está desativado. Por favor, ative-o na planilha de fontes de patch ou use o modo Expert.</string>
+    <string name="android_11_bug_dialog_title">Erro do Android 11</string>
+    <string name="android_11_bug_dialog_description">A permissão de instalação do aplicativo deve ser concedida antecipadamente para evitar um erro no sistema Android 11 que afetará negativamente a experiência do usuário.</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização do gerente disponível</string>
     <string name="home_update_available_subtitle">Nova versão pronta para instalação</string>
@@ -160,6 +160,7 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="home_app_info_delete_item_patched_apk">Arquivo APK emendado</string>
     <string name="home_app_info_delete_item_original_apk">Arquivo APK original</string>
     <string name="home_app_info_delete_preservation_note">Sua seleção de emenda e opções serão preservadas para emendas futuras</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Removidos %d patches desatualizados da seleção salva</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Sem nome</string>
     <string name="home_app_info_patches_replace_fail">Falha ao importar patches: %s</string>
@@ -174,6 +175,8 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="home_app_info_patched_at">Patcheado em</string>
     <string name="home_app_info_patch_update_available">Nova versão de patches disponível</string>
     <string name="home_app_info_patch_update_available_description">Uma versão mais nova de emendas está disponível. Repare seu aplicativo para obter as últimas melhorias e correções</string>
+    <string name="home_app_info_app_deleted_warning">App desinstalado fora do gerenciador</string>
+    <string name="home_app_info_app_deleted_description">Este app foi desinstalado fora do gerenciador. Repatch para restaurar a funcionalidade</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes do patch</string>
     <string name="root_gmscore_excluded">O patch de suporte do GmsCore está excluído no modo root</string>
@@ -237,9 +240,8 @@ Você tem certeza de que deseja continuar?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Seu app está com febre e a única prescrição são mais patches… 🩺🔔</string>
     <string name="patcher_message_20">Removendo bobagens. Por favor, aguarde… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicando patches</string>
-    <string name="applying_patch">Aplicando %s</string>
     <string name="failed_to_execute_patch">Falha ao aplicar %s</string>
     <string name="patched_app_saved_toast">App modificado salvo para mais tarde</string>
     <string name="patched_app_save_failed_toast">Falha ao salvar app modificado</string>
@@ -403,8 +405,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_status_shizuku_not_running">Inicie Shizuku ou Sui e tente novamente</string>
     <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe a partir do aplicativo Shizuku</string>
     <string name="installer_mount_warning_install">Seu instalador principal está definido para o instalador montado com root. Este aplicativo salvo não foi instalado usando o montador</string>
-    <string name="installer_mount_mismatch_title">Instalador de montagem com root não selecionado</string>
-    <string name="installer_mount_mismatch_install">Este aplicativo foi instalado usando o instalador montado com root. Mude seu instalador principal de volta para usar as ações de montagem, depois monte</string>
     <string name="mount_version_mismatch_message">A versão do aplicativo original (%2$s) não corresponde à versão do aplicativo patched (%1$s). Monte a versão original correspondente, depois tente novamente</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
@@ -419,7 +419,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_external_launched">Abrindo %1$s…</string>
     <string name="installer_external_timeout">%1$s não confirmou a instalação. Verifique o outro aplicativo e tente novamente</string>
     <string name="installer_external_success">%1$s relatou uma instalação bem-sucedida</string>
-    <string name="installer_external_finished_no_change">%1$s foi finalizado sem instalar o aplicativo. Verifique o instalador para uma mensagem de erro e tente novamente</string>
     <string name="installer_unavailable_title">%s indisponível</string>
     <string name="installer_unavailable_message">Seu instalador preferido (%s) está atualmente indisponível. Você pode corrigir o problema e tentar novamente ou usar o instalador padrão</string>
     <string name="installer_unavailable_shizuku_hint">Certifique-se de que o Shizuku esteja em execução e a permissão seja concedida a este aplicativo</string>
@@ -525,7 +524,6 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="not_installed">Não instalado</string>
     <string name="view">Visualizar</string>
     <string name="search">Procurar</string>
-    <string name="clear_search">Limpar pesquisa</string>
     <string name="search_no_results">Nenhum resultado encontrado para \"\"</string>
     <string name="any_version">Qualquer</string>
     <string name="enabled">Ativado</string>
@@ -554,11 +552,11 @@ Aberto ao feedback e contribuições da comunidade, Morphe prospera com inovaç�
     <string name="installed">Instalado</string>
     <string name="reinstall">Reinstalar</string>
     <string name="uninstall">Desinstalar</string>
+    <string name="uninstalled">Desinstalado</string>
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
     <string name="update">Atualizar</string>
     <string name="installing_ellipsis">Instalando…</string>
-    <string name="uninstalling_ellipsis">Desinstalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando...</string>
     <string name="importing_ellipsis">Importando...</string>

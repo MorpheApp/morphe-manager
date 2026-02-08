@@ -160,6 +160,7 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="home_app_info_delete_item_patched_apk">Geänderte APK-Datei</string>
     <string name="home_app_info_delete_item_original_apk">Ursprüngliche APK-Datei</string>
     <string name="home_app_info_delete_preservation_note">Deine Patchauswahl und Optionen werden für zukünftiges Patchen erhalten.</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Entfernt %d veraltete Patches aus der gespeicherten Auswahl</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unbenannt</string>
     <string name="home_app_info_patches_replace_fail">Fehler beim Importieren der Patches: %s</string>
@@ -174,6 +175,8 @@ Möchten Sie trotzdem fortfahren?"</string>
     <string name="home_app_info_patched_at">Gepatched am</string>
     <string name="home_app_info_patch_update_available">Patch-Aktualisierung verfügbar</string>
     <string name="home_app_info_patch_update_available_description">Eine neuere Version von Patches ist verfügbar. Repatchen Sie Ihre App, um die neuesten Verbesserungen und Behebungen zu erhalten.</string>
+    <string name="home_app_info_app_deleted_warning">App außerhalb des Managers deinstalliert</string>
+    <string name="home_app_info_app_deleted_description">Diese App wurde außerhalb des Managers deinstalliert. Repatchen Sie sie, um die Funktionalität wiederherzustellen</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-Modus erfordert, dass die ursprüngliche APK-Datei auf deinem Gerät installiert ist, bevor du mit dem Patchen beginnst</string>
     <string name="root_gmscore_excluded">GmsCore-Unterstützungspatch ist im Root-Modus ausgeschlossen</string>
@@ -237,9 +240,8 @@ Möchten Sie trotzdem fortfahren?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Deine App hat Fieber und die einzige Verschreibung sind mehr Patches… 🩺🔔</string>
     <string name="patcher_message_20">Unsinn entfernen. Bitte warten… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patches werden angewendet</string>
-    <string name="applying_patch">%s wird angewendet</string>
     <string name="failed_to_execute_patch">Patch %s konnte nicht angewendet werden</string>
     <string name="patched_app_saved_toast">App gespeichert für später</string>
     <string name="patched_app_save_failed_toast">Fehler beim Speichern der App</string>
@@ -403,8 +405,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_status_shizuku_not_running">Starten Sie Shizuku oder Sui und versuchen Sie es erneut</string>
     <string name="installer_status_shizuku_permission">Geben Sie Shizuku die Erlaubnis, Morphe von der Shizuku-App aus zu gewähren</string>
     <string name="installer_mount_warning_install">Dein primärer Installer ist auf den Root-Mount-Installer gesetzt. Diese gespeicherte App wurde nicht mit Mount installiert</string>
-    <string name="installer_mount_mismatch_title">Root-Mount-Installer nicht ausgewählt</string>
-    <string name="installer_mount_mismatch_install">Diese App wurde mit dem Root-Mount-Installer installiert. Wechsle zurück zum primären Installer, um Mount-Aktionen zu verwenden, und führe dann Mount aus</string>
     <string name="mount_version_mismatch_message">Stock-App-Version (%2$s) stimmt nicht mit gepatchter App-Version (%1$s) überein. Mounte die passende Stock-Version und versuche es erneut</string>
     <string name="installer_status_shizuku_unsupported">Die installierte Shizuku-Version wird nicht unterstützt</string>
     <string name="installer_action_open_shizuku">Shizuku öffnen</string>
@@ -419,7 +419,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_external_launched">Öffne %1$s…</string>
     <string name="installer_external_timeout">%1$s hat die Installation nicht bestätigt. Überprüfe die andere App und versuche es erneut</string>
     <string name="installer_external_success">%1$s meldete eine erfolgreiche Installation</string>
-    <string name="installer_external_finished_no_change">%1$s beendete die Installation ohne die App zu installieren. Überprüfen Sie den Installer auf eine Fehlermeldung und versuchen Sie es erneut</string>
     <string name="installer_unavailable_title">%s nicht verfügbar</string>
     <string name="installer_unavailable_message">Ihr bevorzugtes Installationsprogramm (%s) ist aktuell nicht verfügbar. Sie können das Problem beheben und erneut versuchen oder das Standardinstallationsprogramm verwenden</string>
     <string name="installer_unavailable_shizuku_hint">Stellen Sie sicher, dass Shizuku ausgeführt wird und die Erlaubnis für diese App erteilt wurde</string>
@@ -525,7 +524,6 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="not_installed">Nicht installiert</string>
     <string name="view">Anzeigen</string>
     <string name="search">Suchen</string>
-    <string name="clear_search">Suche löschen</string>
     <string name="search_no_results">Keine Ergebnisse für »%s« gefunden</string>
     <string name="any_version">Jede</string>
     <string name="enabled">Aktiviert</string>
@@ -554,11 +552,11 @@ Morphe ist im Kern Open Source und lebt vom Feedback und den Beiträgen der Comm
     <string name="installed">Installiert</string>
     <string name="reinstall">Neu installieren</string>
     <string name="uninstall">Deinstallieren</string>
+    <string name="uninstalled">Deinstalliert</string>
     <string name="save">Speichern</string>
     <string name="saved">Gespeichert</string>
     <string name="update">Aktualisieren</string>
     <string name="installing_ellipsis">Wird installiert…</string>
-    <string name="uninstalling_ellipsis">Deinstalliert...</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
     <string name="unmounting_ellipsis">Austrennen…</string>
     <string name="importing_ellipsis">Importiere…</string>

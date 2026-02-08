@@ -160,6 +160,7 @@
     <string name="home_app_info_delete_item_patched_apk">ملف APK معدّل</string>
     <string name="home_app_info_delete_item_original_apk">ملف APK الأصلي</string>
     <string name="home_app_info_delete_preservation_note">سيتم الاحتفاظ باختياراتك وخياراتك للتعديلات المستقبلية</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">تمت إزالة %d تعديلات قديمة من التحديد المحفوظ</string>
     <string name="home_app_info_patches_name_default">التعديلات</string>
     <string name="home_app_info_patches_name_fallback">بدون اسم</string>
     <string name="home_app_info_patches_replace_fail">فشل استيراد التعديلات: %s</string>
@@ -174,6 +175,8 @@
     <string name="home_app_info_patched_at">تم التعديل</string>
     <string name="home_app_info_patch_update_available">تحديث تعديل متاح</string>
     <string name="home_app_info_patch_update_available_description">إصدار أحدث من التعديلات متاح. اعد تعديل التطبيق للحصول على آخر التحسينات و الإصلاحات</string>
+    <string name="home_app_info_app_deleted_warning">تم إلغاء تثبيت التطبيق من خارج المدير</string>
+    <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج المدير. اعد تعديله لاستعادة الوظائف</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">يتطلب وضع Root تثبيت ملف APK الأصلي على جهازك قبل التعديل</string>
     <string name="root_gmscore_excluded">تم استبعاد تعديل دعم GmsCore في وضع Root</string>
@@ -237,9 +240,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
     <string name="patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">جارٍ تطبيق التعديلات</string>
-    <string name="applying_patch">جارٍ تطبيق %s</string>
     <string name="failed_to_execute_patch">فشل تطبيق %s</string>
     <string name="patched_app_saved_toast">تم حفظ التطبيق المعدل لوقت لاحق</string>
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
@@ -403,8 +405,6 @@
     <string name="installer_status_shizuku_not_running">ابدأ بتشغيل Shizuku أو Sui وحاول مرة أخرى</string>
     <string name="installer_status_shizuku_permission">امنح Shizuku إذن للوصول إلى Morphe من تطبيق Shizuku</string>
     <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت تركيب Rooted. لم يتم تثبيت التطبيق المحفوظ باستخدام التركيب</string>
-    <string name="installer_mount_mismatch_title">لم يتم تحديد أداة تثبيت تركيب Rooted </string>
-    <string name="installer_mount_mismatch_install">تم تثبيت هذا التطبيق باستخدام أداة تثبيت تركيب Root. قم بتبديل أداة التثبيت الأساسية الخاصة بك مرة أخرى لاستخدام إجراءات التركيب، ثم قم بالتركيب</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
@@ -419,7 +419,6 @@
     <string name="installer_external_launched">جارٍ فتح %1$s…</string>
     <string name="installer_external_timeout">لم يؤكد %1$s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى</string>
     <string name="installer_external_success">أفاد %1$s عن نجاح التثبيت</string>
-    <string name="installer_external_finished_no_change">%1$s انتهى دون تثبيت التطبيق. تحقق من أداة التثبيت بحثًا عن رسالة خطأ وحاول مرة أخرى</string>
     <string name="installer_unavailable_title">%s غير متوفر</string>
     <string name="installer_unavailable_message">أداة التثبيت المفضلة لديك (%s) غير متوفرة حاليًا. يمكنك إصلاح المشكلة وإعادة المحاولة، أو استخدام أداة التثبيت القياسية بدلًا من ذلك</string>
     <string name="installer_unavailable_shizuku_hint">تأكد من تشغيل Shizuku ومنح الإذن لهذا التطبيق</string>
@@ -525,7 +524,6 @@
     <string name="not_installed">غير مثبت</string>
     <string name="view">عرض</string>
     <string name="search">البحث</string>
-    <string name="clear_search">مسح سجل البحث</string>
     <string name="search_no_results">لم يتم العثور على نتائج</string>
     <string name="any_version">أي شي</string>
     <string name="enabled">تمكين</string>
@@ -554,11 +552,11 @@
     <string name="installed">مثبت</string>
     <string name="reinstall">إعادة التثبيت</string>
     <string name="uninstall">إلغاء التثبيت</string>
+    <string name="uninstalled">تم إلغاء التثبيت</string>
     <string name="save">حفظ</string>
     <string name="saved">محفوظة</string>
     <string name="update">تحديث</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
-    <string name="uninstalling_ellipsis">جارٍ إلغاء التثبيت…</string>
     <string name="mounting_ellipsis">جارٍ التركيب…</string>
     <string name="unmounting_ellipsis">جارٍ فك التركيب…</string>
     <string name="importing_ellipsis">جارٍ استيراد…</string>

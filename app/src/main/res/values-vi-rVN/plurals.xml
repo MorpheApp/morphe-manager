@@ -7,15 +7,15 @@
         <item quantity="other">Thực thi %d bản vá</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="other">%d tập tin APK</item>
+        <item quantity="other">%d tệp APK</item>
     </plurals>
     <plurals name="settings_system_patch_selections_count">
-        <item quantity="other">%d lựa chọn đã lưu</item>
+        <item quantity="other">Đã lưu %d bản vá đã chọn</item>
     </plurals>
     <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">Vô hiệu hóa %d nguồn</item>
+        <item quantity="other">Đã vô hiệu hóa %d nguồn</item>
     </plurals>
     <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">Kích hoạt %d nguồn</item>
+        <item quantity="other">Đã kích hoạt %d nguồn</item>
     </plurals>
 </resources>
