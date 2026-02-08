@@ -35,6 +35,7 @@ import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.util.Options
 import app.revanced.manager.util.PatchSelection
 import app.revanced.manager.util.rememberFolderPickerWithPermission
+import app.revanced.manager.util.toFilePath
 
 /**
  * Advanced patch selection and configuration dialog
@@ -869,9 +870,10 @@ private fun PathInputOption(
 //            color = LocalDialogTextColor.current
 //        )
 
-        // Folder picker button
+        // Folder picker button (needs permissions for icon/header creation)
         val folderPicker = rememberFolderPickerWithPermission { uri ->
-            onValueChange(uri)
+            // Convert URI to path for patch options compatibility
+            onValueChange(uri.toFilePath())
         }
 
         MorpheDialogTextField(
