@@ -17,11 +17,11 @@
         <item quantity="other">%d selecciones guardadas</item>
     </plurals>
     <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Desactivada %d fuente</item>
-        <item quantity="other">Desactivadas %d fuentes</item>
+        <item quantity="one">%d fuente desactivada</item>
+        <item quantity="other">%d fuentes desactivadas</item>
     </plurals>
     <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Habilitada %d fuente</item>
-        <item quantity="other">Habilitadas %d fuentes</item>
+        <item quantity="one">%d fuente activada</item>
+        <item quantity="other">%d fuentes desactivadas</item>
     </plurals>
 </resources>

@@ -17,11 +17,11 @@
         <item quantity="other">%d sélections enregistrées</item>
     </plurals>
     <plurals name="sources_dialog_disabled_toast">
-        <item quantity="one">Désactivé %d source</item>
-        <item quantity="other">Désactivé %d sources</item>
+        <item quantity="one">%d source désactivée</item>
+        <item quantity="other">%d sources désactivées</item>
     </plurals>
     <plurals name="sources_dialog_enabled_toast">
-        <item quantity="one">Activé %d source</item>
-        <item quantity="other">Activé %d sources</item>
+        <item quantity="one">%d source activée</item>
+        <item quantity="other">%d sources activées</item>
     </plurals>
 </resources>

@@ -160,6 +160,7 @@
     <string name="home_app_info_delete_item_patched_apk">修补后的 APK 文件</string>
     <string name="home_app_info_delete_item_original_apk">原始 APK 文件</string>
     <string name="home_app_info_delete_preservation_note">您的修补选择和选项将保留以进行将来修补</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">已删除保存选择中的%d个过时补丁</string>
     <string name="home_app_info_patches_name_default">补丁</string>
     <string name="home_app_info_patches_name_fallback">未命名</string>
     <string name="home_app_info_patches_replace_fail">导入补丁失败：%s</string>
@@ -174,6 +175,8 @@
     <string name="home_app_info_patched_at">已修补</string>
     <string name="home_app_info_patch_update_available">有可用的补丁更新</string>
     <string name="home_app_info_patch_update_available_description">有新的修补版本可用。重新修补您的应用以获取最新改进和修复</string>
+    <string name="home_app_info_app_deleted_warning">应用在管理员外卸载</string>
+    <string name="home_app_info_app_deleted_description">此应用在管理员外卸载。重新补丁以恢复功能</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">根模式需要在修补前将原始 APK 安装在设备上</string>
     <string name="root_gmscore_excluded">Root模式下已排除GmsCore支持补丁</string>
@@ -237,9 +240,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
     <string name="patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">应用补丁</string>
-    <string name="applying_patch">正在应用 %s</string>
     <string name="failed_to_execute_patch">执行 %s 失败</string>
     <string name="patched_app_saved_toast">修补后的应用已保存以备后用</string>
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
@@ -403,8 +405,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">启动 Shizuku 或 Sui 后重试</string>
     <string name="installer_status_shizuku_permission">从 Shizuku 应用授予 Morphe Shizuku 权限</string>
     <string name="installer_mount_warning_install">您的主要安装程序设置为根挂载安装程序。此保存的应用未使用挂载安装</string>
-    <string name="installer_mount_mismatch_title">Root安装程序未选择</string>
-    <string name="installer_mount_mismatch_install">此应用使用根挂载安装程序安装。将主要安装程序切换回使用挂载操作，然后挂载</string>
     <string name="mount_version_mismatch_message">原始应用版本（%2$s）与修补后的应用版本（%1$s）不匹配。挂载匹配的原始版本，然后重试</string>
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持</string>
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
@@ -419,7 +419,6 @@ morphe_header_custom_dark.png
     <string name="installer_external_launched">正在打开 %1$s…</string>
     <string name="installer_external_timeout">%1$s 未确认安装。请检查其他应用并重试</string>
     <string name="installer_external_success">%1$s 报告安装成功</string>
-    <string name="installer_external_finished_no_change">%1$s 完成但未安装应用。请检查安装程序以获取错误消息并重试</string>
     <string name="installer_unavailable_title">%s (不可用)</string>
     <string name="installer_unavailable_message">您的首选安装程序（%s）当前不可用。您可以修复问题并重试，或使用标准安装程序</string>
     <string name="installer_unavailable_shizuku_hint">确保 Shizuku 正在运行并已授予此应用权限</string>
@@ -523,7 +522,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">未安装</string>
     <string name="view">查看</string>
     <string name="search">搜索</string>
-    <string name="clear_search">清除搜索</string>
     <string name="search_no_results">找不到结果</string>
     <string name="any_version">任意</string>
     <string name="enabled">已启用</string>
@@ -552,11 +550,11 @@ morphe_header_custom_dark.png
     <string name="installed">已安装</string>
     <string name="reinstall">重新安装</string>
     <string name="uninstall">卸载</string>
+    <string name="uninstalled">已卸载</string>
     <string name="save">保存</string>
     <string name="saved">已保存</string>
     <string name="update">更新</string>
     <string name="installing_ellipsis">正在安装…</string>
-    <string name="uninstalling_ellipsis">正在卸载...</string>
     <string name="mounting_ellipsis">正在挂载…</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
     <string name="importing_ellipsis">正在导入…</string>

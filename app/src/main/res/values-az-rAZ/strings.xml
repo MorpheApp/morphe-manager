@@ -235,9 +235,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
     <string name="patcher_message_20">Lazımsız olanı silirəm. Zəhmət olmasa, gözləyin... 🗑️ </string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Yama tətbiq olunur</string>
-    <string name="applying_patch">%s tətbiq olunur</string>
     <string name="failed_to_execute_patch">%s tətbiq etmək alınmadı</string>
     <string name="patched_app_saved_toast">Yenidən yazılmış proqram daha sonra üçün saxlanıldı</string>
     <string name="patched_app_save_failed_toast">Yenidən yazılmış proqram yadda saxlanılmadı</string>
@@ -383,7 +382,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_option_none">Ehtiyat yoxdur</string>
     <string name="installer_none_description">Ehtiyat quraşdırıcısı konfiqurasiya edilməyib</string>
     <string name="installer_status_requires_root">Root icazəsi tələb olunur</string>
-    <string name="installer_mount_mismatch_title">Kök quraşdırıcı seçilməyib</string>
     <string name="installer_action_open_shizuku">Shizuku-nu aç</string>
     <string name="installer_external_launched">%1$s açılır…</string>
     <string name="installer_unavailable_title">%s əlçatmaz</string>
@@ -492,7 +490,6 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="save">Saxla</string>
     <string name="update">Yenilə</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
-    <string name="uninstalling_ellipsis">Çıqarma ediliyor...</string>
     <string name="mounting_ellipsis">Yüklənir…</string>
     <string name="changelog">Dəyişikliklər jurnallarını görüntüleyin</string>
     <string name="changelog_loading">Dəyişikliklərin qeydi yüklənir</string>

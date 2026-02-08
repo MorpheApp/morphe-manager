@@ -160,6 +160,7 @@ Wilt u toch doorgaan?"</string>
     <string name="home_app_info_delete_item_patched_apk">Gepatcht APK-bestand</string>
     <string name="home_app_info_delete_item_original_apk">Origineel APK-bestand</string>
     <string name="home_app_info_delete_preservation_note">Uw patch-keuze en opties worden bewaard voor toekomstig patchen</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Verwijderd %d verouderde patches uit geselecteerde opslag</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Naamloos</string>
     <string name="home_app_info_patches_replace_fail">Kan patches niet importeren: %s</string>
@@ -174,6 +175,8 @@ Wilt u toch doorgaan?"</string>
     <string name="home_app_info_patched_at">Gepatcht</string>
     <string name="home_app_info_patch_update_available">Patchupdate beschikbaar</string>
     <string name="home_app_info_patch_update_available_description">Er is een nieuwere versie van patches beschikbaar. Repatch uw app om de laatste verbeteringen en correcties te krijgen</string>
+    <string name="home_app_info_app_deleted_warning">App ongedaan gemaakt buiten beheer</string>
+    <string name="home_app_info_app_deleted_description">Deze app is ongedaan gemaakt buiten de beheerder. Herpatch hem om de functionaliteit te herstellen</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-modus vereist dat de oorspronkelijke APK op uw apparaat geïnstalleerd is voordat gepatcht wordt</string>
     <string name="root_gmscore_excluded">GmsCore-ondersteuningspatch is uitgesloten in rootmodus</string>
@@ -237,9 +240,8 @@ Wilt u toch doorgaan?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Uw app heeft koorts, en de enige remedie zijn meer patches… 🩺🔔</string>
     <string name="patcher_message_20">Verwijder onzin. Even geduld… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Patches toepassen</string>
-    <string name="applying_patch">%s toepassen</string>
     <string name="failed_to_execute_patch">Kon %s niet toepassen</string>
     <string name="patched_app_saved_toast">Gepatchte app opgeslagen voor later</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
@@ -403,8 +405,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_status_shizuku_not_running">Start Shizuku of Sui en probeer het opnieuw</string>
     <string name="installer_status_shizuku_permission">Geef Shizuku toestemming aan Morphe uit de Shizuku-app</string>
     <string name="installer_mount_warning_install">Uw hoofdinstallatieprogramma is ingesteld op de gewortelde mount-installatie. Deze opgeslagen app is niet geïnstalleerd met mount</string>
-    <string name="installer_mount_mismatch_title">Rooted mount installer niet geselecteerd</string>
-    <string name="installer_mount_mismatch_install">Deze app is geïnstalleerd met het gewortelde mount-installatieprogramma. Schakel uw hoofdinstallatieprogramma terug naar het gebruik van mount-acties, dan mount</string>
     <string name="mount_version_mismatch_message">Originele app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende originele versie, dan probeer het opnieuw</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
     <string name="installer_action_open_shizuku">Shizuku openen</string>
@@ -419,7 +419,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_external_launched">%1$s wordt geopend…</string>
     <string name="installer_external_timeout">%1$s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw</string>
     <string name="installer_external_success">%1$s heeft een geslaagde installatie gemeld</string>
-    <string name="installer_external_finished_no_change">%1$s is afgelopen zonder de app te installeren. Controleer het installatieprogramma op een foutmelding en probeer het opnieuw</string>
     <string name="installer_unavailable_title">%s niet beschikbaar</string>
     <string name="installer_unavailable_message">Uw voorkeursinstallatieprogramma (%s) is momenteel niet beschikbaar. U kunt het probleem oplossen en opnieuw proberen of het standaardinstallatieprogramma gebruiken</string>
     <string name="installer_unavailable_shizuku_hint">Zorg ervoor dat Shizuku draait en dat toestemming is gegeven aan deze app</string>
@@ -525,7 +524,6 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="not_installed">Niet geïnstalleerd</string>
     <string name="view">Bekijken</string>
     <string name="search">Zoeken</string>
-    <string name="clear_search">Zoekgeschiedenis wissen</string>
     <string name="search_no_results">Geen resultaten gevonden</string>
     <string name="any_version">Elke</string>
     <string name="enabled">Ingeschakeld</string>
@@ -554,11 +552,11 @@ Open-source in zijn kernedrag, Morphe groeit op communityfeedback en bijdragen o
     <string name="installed">Geïnstalleerd</string>
     <string name="reinstall">Opn. installeren</string>
     <string name="uninstall">Deïnstalleren</string>
+    <string name="uninstalled">Verwijderd</string>
     <string name="save">Opslaan</string>
     <string name="saved">Opgeslagen</string>
     <string name="update">Update</string>
     <string name="installing_ellipsis">Installeren…</string>
-    <string name="uninstalling_ellipsis">Niet geïnstalleerd...</string>
     <string name="mounting_ellipsis">Monteren…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>
     <string name="importing_ellipsis">Importeren…</string>
