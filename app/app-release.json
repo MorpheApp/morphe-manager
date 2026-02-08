@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-07T15:43:54.892Z",
-  "description": "# app [1.6.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2026-02-07)\n\n\n### Bug Fixes\n\n* Show banner when patched app was has been uninstalled from the device ([562f23e](https://github.com/MorpheApp/morphe-manager/commit/562f23e845c18c5a6e4d34f631bec6ad095c77b8))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.7/morphe-manager-1.6.0-dev.7.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.7/morphe-manager-1.6.0-dev.7.apk.asc",
-  "version": "1.6.0-dev.7"
+  "created_at": "2026-02-08T15:56:59.117Z",
+  "description": "# app [1.6.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.7...v1.6.0-dev.8) (2026-02-08)\n\n\n### Bug Fixes\n\n* File system access request appeared where it wasn't needed ([#179](https://github.com/MorpheApp/morphe-manager/issues/179)) ([79fcec2](https://github.com/MorpheApp/morphe-manager/commit/79fcec271e9e3633cdb0ff4cbfc3689ec925db6f))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.8/morphe-manager-1.6.0-dev.8.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.6.0-dev.8/morphe-manager-1.6.0-dev.8.apk.asc",
+  "version": "1.6.0-dev.8"
 }
