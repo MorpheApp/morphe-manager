@@ -266,9 +266,9 @@ class GitHubPullRequestBundle(
                 }
             }
             install(HttpTimeout) {
-                connectTimeoutMillis = 15_000
-                socketTimeoutMillis = 30_000
-                requestTimeoutMillis = 10 * 60_000
+                connectTimeoutMillis = 20_000
+                socketTimeoutMillis = 2 * 60_000
+                requestTimeoutMillis = 5 * 60_000
             }
         }
 
