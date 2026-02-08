@@ -31,6 +31,7 @@ import app.revanced.manager.ui.viewmodel.PatchOptionKeys
 import app.revanced.manager.ui.viewmodel.PatchOptionsViewModel
 import app.revanced.manager.util.AppPackages
 import app.revanced.manager.util.rememberFolderPickerWithPermission
+import app.revanced.manager.util.toFilePath
 import kotlinx.coroutines.launch
 
 /**
@@ -313,10 +314,11 @@ fun CustomBrandingDialog(
     val appNameOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_NAME)
     val iconOption = patchOptionsViewModel.getOption(brandingOptions, PatchOptionKeys.CUSTOM_ICON)
 
-    // Folder picker with permission handling
+    // Folder picker with permission handling (needs permissions for icon creation)
     val openFolderPicker = rememberFolderPickerWithPermission(
-        onFolderPicked = { path ->
-            iconPath = path
+        onFolderPicked = { uri ->
+            // Convert URI to path for patch options compatibility
+            iconPath = uri.toFilePath()
         }
     )
 
@@ -454,10 +456,11 @@ fun CustomHeaderDialog(
     val headerOptions = patchOptionsViewModel.getHeaderOptions()
     val customOption = patchOptionsViewModel.getOption(headerOptions, PatchOptionKeys.CUSTOM_HEADER)
 
-    // Folder picker with permission handling
+    // Folder picker with permission handling (needs permissions for header creation)
     val openFolderPicker = rememberFolderPickerWithPermission(
-        onFolderPicked = { path ->
-            headerPath = path
+        onFolderPicked = { uri ->
+            // Convert URI to path for patch options compatibility
+            headerPath = uri.toFilePath()
         }
     )
 
