@@ -3,6 +3,7 @@ package app.revanced.manager.ui.screen
 import android.annotation.SuppressLint
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -105,22 +106,24 @@ fun HomeScreen(
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
 
     // Initialize launchers
-    val openApkPicker = rememberFilePickerWithPermission(
-        mimeTypes = APK_FILE_MIME_TYPES,
-        onFilePicked = { uri -> homeViewModel.handleApkSelection(uri) }
-    )
+    val openApkPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let { homeViewModel.handleApkSelection(it) }
+    }
+
+    val openBundlePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let {
+            homeViewModel.selectedBundleUri = it
+            homeViewModel.selectedBundlePath = it.toString()
+        }
+    }
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
-        RequestInstallAppsContract
+        contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
-
-    val openBundlePicker = rememberFilePickerWithPermission(
-        mimeTypes = MPP_FILE_MIME_TYPES,
-        onFilePicked = { uri ->
-            homeViewModel.selectedBundleUri = uri
-            homeViewModel.selectedBundlePath = uri.toFilePath()
-        }
-    )
 
     // Update bundle data
     LaunchedEffect(sources, bundleInfo) {
@@ -274,8 +277,8 @@ fun HomeScreen(
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = openApkPicker,
-        openBundlePicker = openBundlePicker
+        storagePickerLauncher = { openApkPicker.launch(APK_FILE_MIME_TYPES) },
+        openBundlePicker = { openBundlePicker.launch(MPP_FILE_MIME_TYPES) }
     )
 
     // Main content with pull-to-refresh

@@ -61,13 +61,14 @@ object AppPackages {
     }
 }
 
-//const val JAR_MIMETYPE = "application/java-archive"
-const val APK_MIMETYPE = "application/vnd.android.package-archive"
+const val APK_MIMETYPE  = "application/vnd.android.package-archive"
+const val JSON_MIMETYPE = "application/json"
+const val BIN_MIMETYPE  = "application/octet-stream"
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
     APK_MIMETYPE,
-    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassified
+    // ApkMirror split files of "app-whatever123_apkmirror.com.apk" regularly Android to misclassify
     // the file as an application or something incorrect. Renaming the file and
     // removing "apkmirror.com" from the file name fixes the issue, but that's not something the
     // end user will know or should have to do. Instead, show all files to ensure the user can
@@ -92,8 +93,6 @@ val APK_FILE_EXTENSIONS = setOf(
     "xapk",
     "zip"
 )
-const val JSON_MIMETYPE = "application/json"
-const val BIN_MIMETYPE = "application/octet-stream"
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
