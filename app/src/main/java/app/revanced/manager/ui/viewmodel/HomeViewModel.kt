@@ -20,7 +20,9 @@ import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
+import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.data.platform.NetworkInfo
+import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.data.room.apps.installed.InstalledApp
 import app.revanced.manager.domain.bundles.PatchBundleSource
 import app.revanced.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
@@ -31,6 +33,7 @@ import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
+import app.revanced.manager.domain.repository.PatchSelectionRepository
 import app.revanced.manager.network.api.ReVancedAPI
 import app.revanced.manager.patcher.patch.PatchBundleInfo
 import app.revanced.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -67,7 +70,8 @@ enum class BundleUpdateStatus {
 data class UnsupportedVersionDialogState(
     val packageName: String,
     val version: String,
-    val recommendedVersion: String?
+    val recommendedVersion: String?,
+    val allCompatibleVersions: List<String> = emptyList()
 )
 
 /**
@@ -95,12 +99,14 @@ class HomeViewModel(
     private val app: Application,
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
+    private val patchSelectionRepository: PatchSelectionRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val reVancedAPI: ReVancedAPI,
     private val networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
     private val pm: PM,
-    val rootInstaller: RootInstaller
+    val rootInstaller: RootInstaller,
+    private val filesystem: Filesystem
 ) : ViewModel() {
 
     val availablePatches =
@@ -152,6 +158,7 @@ class HomeViewModel(
     var pendingPackageName by mutableStateOf<String?>(null)
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<String?>(null)
+    var pendingCompatibleVersions by mutableStateOf<List<String>>(emptyList())
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
 
@@ -166,9 +173,23 @@ class HomeViewModel(
     private var apiBundle: PatchBundleSource? = null
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
+    var compatibleVersions: Map<String, List<String>> = emptyMap()
+        private set
 
     // Track available updates for installed apps
     var appUpdatesAvailable by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
+    // Track deleted apps
+    var appsDeletedStatus by mutableStateOf<Map<String, Boolean>>(emptyMap())
+        private set
+
+    // Package info for display
+    var youtubePackageInfo by mutableStateOf<PackageInfo?>(null)
+        private set
+    var youtubeMusicPackageInfo by mutableStateOf<PackageInfo?>(null)
+        private set
+    var redditPackageInfo by mutableStateOf<PackageInfo?>(null)
         private set
 
     // Using mount install (set externally)
@@ -380,7 +401,9 @@ class HomeViewModel(
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
         apiBundle = sources.firstOrNull { it.uid == DEFAULT_SOURCE_UID }
-        recommendedVersions = extractRecommendedVersions(bundleInfo)
+        val versionData = extractCompatibleVersions(bundleInfo)
+        recommendedVersions = versionData.mapValues { it.value.firstOrNull() ?: "" }
+        compatibleVersions = versionData
     }
 
     /**
@@ -391,7 +414,66 @@ class HomeViewModel(
     }
 
     /**
-     * Handle app button click (YouTube or YouTube Music)
+     * Update deleted apps status
+     */
+    fun updateDeletedAppsStatus(installedApps: List<InstalledApp>) {
+        appsDeletedStatus = installedApps.associate { app ->
+            val hasSavedCopy = listOf(
+                filesystem.getPatchedAppFile(app.currentPackageName, app.version),
+                filesystem.getPatchedAppFile(app.originalPackageName, app.version)
+            ).distinctBy { it.absolutePath }.any { it.exists() }
+
+            app.currentPackageName to pm.isAppDeleted(
+                packageName = app.currentPackageName,
+                hasSavedCopy = hasSavedCopy,
+                wasInstalledOnDevice = app.installType != InstallType.SAVED
+            )
+        }
+    }
+
+    /**
+     * Update installed apps info
+     */
+    fun updateInstalledAppsInfo(
+        youtubeApp: InstalledApp?,
+        youtubeMusicApp: InstalledApp?,
+        redditApp: InstalledApp?,
+        allInstalledApps: List<InstalledApp>
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        // Load package info in parallel
+        val youtubeJob = async { loadDisplayPackageInfo(youtubeApp) }
+        val musicJob = async { loadDisplayPackageInfo(youtubeMusicApp) }
+        val redditJob = async { loadDisplayPackageInfo(redditApp) }
+
+        youtubePackageInfo = youtubeJob.await()
+        youtubeMusicPackageInfo = musicJob.await()
+        redditPackageInfo = redditJob.await()
+
+        // Update deleted status
+        updateDeletedAppsStatus(allInstalledApps)
+    }
+
+    /**
+     * Load package info for display
+     */
+    private fun loadDisplayPackageInfo(installedApp: InstalledApp?): PackageInfo? {
+        installedApp ?: return null
+
+        return pm.getPackageInfo(installedApp.currentPackageName)
+            ?: run {
+                val candidates = listOf(
+                    filesystem.getPatchedAppFile(installedApp.currentPackageName, installedApp.version),
+                    filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
+                ).distinctBy { it.absolutePath }
+
+                candidates.firstOrNull { it.exists() }?.let { file ->
+                    pm.getPackageInfo(file)
+                }
+            }
+    }
+
+    /**
+     * Handle app button click
      */
     fun handleAppClick(
         packageName: String,
@@ -425,8 +507,9 @@ class HomeViewModel(
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
-        pendingAppName = getAppName(packageName)
+        pendingAppName = AppPackages.getAppName(app, packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
+        pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
         showApkAvailabilityDialog = true
     }
 
@@ -484,13 +567,15 @@ class HomeViewModel(
         // Check if any patches available
         if (totalPatches == 0) {
             val recommendedVersion = pendingPackageName?.let { recommendedVersions[it] }
+            val allVersions = pendingPackageName?.let { compatibleVersions[it] } ?: emptyList()
 
             if (recommendedVersion != null) {
                 pendingSelectedApp = selectedApp
                 showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                     packageName = selectedApp.packageName,
                     version = selectedApp.version ?: "unknown",
-                    recommendedVersion = recommendedVersion
+                    recommendedVersion = recommendedVersion,
+                    allCompatibleVersions = allVersions
                 )
                 cleanupPendingData(keepSelectedApp = true)
                 return
@@ -532,13 +617,51 @@ class HomeViewModel(
         }
 
         if (expertModeEnabled) {
-            // Expert Mode: show all patches from all bundles
-            val patches = allBundles.toPatchSelection(true, shouldIncludePatch)
+            // Expert Mode: Load saved selections and options
+            val savedSelections = withContext(Dispatchers.IO) {
+                // Try to load from original package name first
+                var selections = patchSelectionRepository.getSelection(selectedApp.packageName)
 
-            val savedOptions = optionsRepository.getOptions(
-                selectedApp.packageName,
-                allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-            )
+                // If no selections found, try patched package name
+                if (selections.isEmpty()) {
+                    // Get all installed apps to find patched package name
+                    val installedApps = installedAppRepository.getAll().first()
+                    val patchedPackage = installedApps
+                        .find { it.originalPackageName == selectedApp.packageName }
+                        ?.currentPackageName
+
+                    if (patchedPackage != null && patchedPackage != selectedApp.packageName) {
+                        selections = patchSelectionRepository.getSelection(patchedPackage)
+                    }
+                }
+
+                selections
+            }
+
+            // Load saved options
+            val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+            val savedOptions = withContext(Dispatchers.IO) {
+                optionsRepository.getOptions(selectedApp.packageName, bundlesMap)
+            }
+
+            // Use saved selections or create new ones
+            val patches = if (savedSelections.isNotEmpty()) {
+                // Validate saved selections against available patches
+                savedSelections.mapNotNull { (bundleUid, patchNames) ->
+                    val bundle = allBundles.find { it.uid == bundleUid } ?: return@mapNotNull null
+                    val validPatches = patchNames.filter { patchName ->
+                        bundle.patches.any { patch ->
+                            patch.name == patchName && shouldIncludePatch(bundleUid, patch)
+                        }
+                    }.toSet()
+
+                    if (validPatches.isEmpty()) null
+                    else bundleUid to validPatches
+                }.toMap()
+            } else {
+                // No saved selections - use default
+                allBundles.toPatchSelection(true, shouldIncludePatch)
+            }
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
@@ -559,6 +682,7 @@ class HomeViewModel(
                     return
                 }
 
+                // Always use default selection in Simple Mode
                 val patchNames = defaultBundle.patchSequence(allowIncompatible)
                     .filter { shouldIncludePatch(defaultBundle.uid, it) }
                     .mapTo(mutableSetOf()) { it.name }
@@ -618,6 +742,7 @@ class HomeViewModel(
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
+        pendingCompatibleVersions = emptyList()
         resolvedDownloadUrl = null
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
@@ -807,24 +932,13 @@ class HomeViewModel(
     }
 
     /**
-     * Get localized app name
-     */
-    fun getAppName(packageName: String): String {
-        return when (packageName) {
-            AppPackages.YOUTUBE -> app.getString(R.string.home_youtube)
-            AppPackages.YOUTUBE_MUSIC -> app.getString(R.string.home_youtube_music)
-            AppPackages.REDDIT -> app.getString(R.string.home_reddit)
-            else -> packageName
-        }
-    }
-
-    /**
      * Clean up pending data
      */
     fun cleanupPendingData(keepSelectedApp: Boolean = false) {
         pendingPackageName = null
         pendingAppName = null
         pendingRecommendedVersion = null
+        pendingCompatibleVersions = emptyList()
         resolvedDownloadUrl = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
@@ -848,9 +962,10 @@ class HomeViewModel(
     }
 
     /**
-     * Extract recommended versions from bundle info
+     * Extract compatible versions for each package from bundle info
+     * Returns a map of package name to sorted list of versions (newest first)
      */
-    private fun extractRecommendedVersions(bundleInfo: Map<Int, Any>): Map<String, String> {
+    private fun extractCompatibleVersions(bundleInfo: Map<Int, Any>): Map<String, List<String>> {
         return bundleInfo[0]?.let { apiBundleInfo ->
             val info = apiBundleInfo as? PatchBundleInfo
             info?.let {
@@ -865,8 +980,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty(),
+                        .distinct()
+                        .sortedDescending(),
                     AppPackages.YOUTUBE_MUSIC to it.patches
                         .filter { patch ->
                             patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC } == true
@@ -877,8 +992,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty(),
+                        .distinct()
+                        .sortedDescending(),
                     AppPackages.REDDIT to it.patches
                         .filter { patch ->
                             patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.REDDIT } == true
@@ -889,8 +1004,8 @@ class HomeViewModel(
                                 ?.versions
                                 ?: emptyList()
                         }
-                        .maxByOrNull { it }
-                        .orEmpty()
+                        .distinct()
+                        .sortedDescending()
                 ).filterValues { it.isNotEmpty() }
             } ?: emptyMap()
         } ?: emptyMap()

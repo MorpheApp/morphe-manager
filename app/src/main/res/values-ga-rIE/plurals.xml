@@ -8,10 +8,38 @@
         <item quantity="other">%d paiste</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Cuir %d paiste i bhfeidhm</item>
-        <item quantity="two">Cuir %d paistí i bhfeidhm</item>
-        <item quantity="few">Cuir %d paistí i bhfeidhm</item>
-        <item quantity="many">Cuir %d paistí i bhfeidhm</item>
-        <item quantity="other">Cuir %d paiste i bhfeidhm</item>
+        <item quantity="one">Cuir %d paiste i gcrích</item>
+        <item quantity="two">Cuir %d paistí i gcrích</item>
+        <item quantity="few">Cuir %d paistí i gcrích</item>
+        <item quantity="many">Cuir %d paistí i gcrích</item>
+        <item quantity="other">Cuir %d paistí i gcrích</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d comhad APK</item>
+        <item quantity="two">%d comhad APK</item>
+        <item quantity="few">%d comhad APK</item>
+        <item quantity="many">%d comhad APK</item>
+        <item quantity="other">%d comhad APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d rogha sábháilte</item>
+        <item quantity="two">%d rogha sábháilte</item>
+        <item quantity="few">%d rogha sábháilte</item>
+        <item quantity="many">%d rogha sábháilte</item>
+        <item quantity="other">%d rogha sábháilte</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Tá %d pacáiste díchumasaithe</item>
+        <item quantity="two">Tá %d pacáiste(í) díchumasaithe</item>
+        <item quantity="few">Tá %d pacáiste(í) díchumasaithe</item>
+        <item quantity="many">Tá %d pacáiste(í) díchumasaithe</item>
+        <item quantity="other">Tá %d pacáiste(í) díchumasaithe</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Tá %d pacáiste(í) ag obair</item>
+        <item quantity="two">Tá %d pacáiste(í) ag obair</item>
+        <item quantity="few">Tá %d pacáiste(í) ag obair</item>
+        <item quantity="many">Tá %d pacáiste(í) ag obair</item>
+        <item quantity="other">Tá %d pacáiste(í) ag obair</item>
     </plurals>
 </resources>

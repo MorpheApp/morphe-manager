@@ -21,6 +21,7 @@ import app.revanced.manager.data.room.apps.installed.InstallType
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.installer.ShizukuInstaller
+import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.service.InstallService
 import app.revanced.manager.util.PM
 import app.revanced.manager.util.simpleMessage
@@ -37,12 +38,12 @@ import java.nio.file.Files
  * Handles installation with support for multiple installers (Standard, Shizuku, Root, External).
  */
 class InstallViewModel : ViewModel(), KoinComponent {
-
     private val app: Application by inject()
     private val pm: PM by inject()
     private val rootInstaller: RootInstaller by inject()
     private val shizukuInstaller: ShizukuInstaller by inject()
     private val installerManager: InstallerManager by inject()
+    private val prefs: PreferencesManager by inject()
 
     /**
      * Current install state
@@ -86,6 +87,12 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
     var installerUnavailableDialog by mutableStateOf<InstallerUnavailableState?>(null)
         private set
+
+    var showInstallerSelectionDialog by mutableStateOf(false)
+        private set
+
+    private var oneTimeInstallerToken: InstallerManager.Token? = null
+    private var selectedInstallerToken: InstallerManager.Token? = null
 
     var mountOperation: MountOperation? by mutableStateOf(null)
         private set
@@ -202,7 +209,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Start installation process using user's preferred installer.
+     * Start installation process using user's preferred installer or prompt for selection.
      */
     fun install(
         outputFile: File,
@@ -217,6 +224,15 @@ class InstallViewModel : ViewModel(), KoinComponent {
         pendingPersistCallback = onPersistApp
 
         viewModelScope.launch {
+            // Check if we should prompt for installer selection
+            val shouldPrompt = prefs.promptInstallerOnInstall.get()
+
+            if (shouldPrompt && oneTimeInstallerToken == null) {
+                // Show installer selection dialog
+                showInstallerSelectionDialog = true
+                return@launch
+            }
+
             installState = InstallState.Installing
 
             try {
@@ -246,43 +262,90 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     }
                 }
 
-                // Resolve installation plan based on user's preferred installer
-                val resolved = installerManager.resolvePlanWithStatus(
-                    InstallerManager.InstallTarget.PATCHER,
-                    outputFile,
-                    targetPackageName,
-                    null
-                )
+                // Resolve installation plan - use one-time token if available
+                val resolved = if (oneTimeInstallerToken != null) {
+                    // Use one-time installer token for this install
+                    val token = oneTimeInstallerToken!!
+                    selectedInstallerToken = token
+                    oneTimeInstallerToken = null
 
-                Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}, " +
-                        "primaryUnavailable: ${resolved.primaryUnavailable}, " +
-                        "primaryToken: ${resolved.primaryToken}")
+                    // Check if selected installer is available
+                    val entry = installerManager.describeEntry(token, InstallerManager.InstallTarget.PATCHER)
 
-                // Check if preferred installer is unavailable
+                    if (entry != null && entry.availability.available) {
+                        // Selected installer is available - temporarily change primary
+                        val originalPrimary = installerManager.getPrimaryToken()
+
+                        // Set selected token as primary
+                        installerManager.updatePrimaryToken(token)
+
+                        // Resolve with selected token
+                        val result = installerManager.resolvePlanWithStatus(
+                            InstallerManager.InstallTarget.PATCHER,
+                            outputFile,
+                            targetPackageName,
+                            null
+                        )
+
+                        // Restore original primary
+                        installerManager.updatePrimaryToken(originalPrimary)
+
+                        result
+                    } else {
+                        // Even if the installer is unavailable, try resolve with it
+                        // to get the correct primaryToken and unavailabilityReason
+                        val originalPrimary = installerManager.getPrimaryToken()
+                        installerManager.updatePrimaryToken(token)
+                        val result = installerManager.resolvePlanWithStatus(
+                            InstallerManager.InstallTarget.PATCHER,
+                            outputFile,
+                            targetPackageName,
+                            null
+                        )
+                        installerManager.updatePrimaryToken(originalPrimary)
+                        result
+                    }
+                } else {
+                    selectedInstallerToken = null
+                    installerManager.resolvePlanWithStatus(
+                        InstallerManager.InstallTarget.PATCHER,
+                        outputFile,
+                        targetPackageName,
+                        null
+                    )
+                }
+
+                Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}")
+
+                // Check if installer is unavailable
                 if (resolved.primaryUnavailable) {
-                    when (resolved.primaryToken) {
+                    val actualToken = selectedInstallerToken ?: resolved.primaryToken
+                    when (actualToken) {
                         InstallerManager.Token.Shizuku -> {
                             Log.d(TAG, "Shizuku unavailable, showing dialog")
                             installerUnavailableDialog = InstallerUnavailableState(
-                                installerToken = resolved.primaryToken,
+                                installerToken = actualToken,
                                 reason = resolved.unavailabilityReason,
                                 canOpenApp = true
                             )
                             installState = InstallState.Ready
+                            selectedInstallerToken = null
                             return@launch
                         }
                         InstallerManager.Token.AutoSaved -> {
                             Log.d(TAG, "Root unavailable, showing dialog")
                             installerUnavailableDialog = InstallerUnavailableState(
-                                installerToken = resolved.primaryToken,
+                                installerToken = actualToken,
                                 reason = resolved.unavailabilityReason,
                                 canOpenApp = false
                             )
                             installState = InstallState.Ready
+                            selectedInstallerToken = null
                             return@launch
                         }
                         else -> {
                             // For other installers, proceed with fallback
+                            selectedInstallerToken = null
                         }
                     }
                 }
@@ -776,6 +839,29 @@ class InstallViewModel : ViewModel(), KoinComponent {
         }
     }
 
+    /**
+     * Dismiss installer selection dialog
+     */
+    fun dismissInstallerSelectionDialog() {
+        showInstallerSelectionDialog = false
+        oneTimeInstallerToken = null
+        selectedInstallerToken = null
+    }
+
+    /**
+     * Proceed with selected installer from dialog
+     */
+    fun proceedWithSelectedInstaller(token: InstallerManager.Token) {
+        oneTimeInstallerToken = token
+        showInstallerSelectionDialog = false
+
+        val file = pendingInstallFile ?: return
+        val originalPkg = pendingOriginalPackageName ?: return
+        val callback = pendingPersistCallback ?: return
+
+        install(file, originalPkg, callback)
+    }
+
     // ==================== Signature checking ====================
 
     private suspend fun hasSignatureConflict(apkFile: File, packageName: String): Boolean =
@@ -888,6 +974,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         externalInstallTimeoutJob?.cancel()
         awaitingPackageName = null
         isWaitingForUninstall = false
+        selectedInstallerToken = null
         installedPackageName = packageName
         installState = InstallState.Installed(packageName)
 
@@ -908,6 +995,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         installTimeoutJob?.cancel()
         externalInstallTimeoutJob?.cancel()
         awaitingPackageName = null
+        selectedInstallerToken = null
         installState = InstallState.Error(message)
     }
 

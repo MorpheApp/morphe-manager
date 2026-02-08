@@ -32,7 +32,6 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Imate li originalni nepotpisani APK?</string>
-    <string name="home_apk_availability_dialog_description_simple">Da patchati %1$s, trebate verziju %2$s (nepatcheno)</string>
     <string name="home_apk_availability_yes">Da, imam ga</string>
     <string name="home_apk_availability_no">Ne, pomozite mi pronaći to</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -48,26 +47,26 @@
     <string name="home_download_instructions_continue">Nastavi na APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite APK koji ste preuzeli</string>
-    <string name="home_file_picker_prompt_description">Sada odaberite %1$s APK datoteku koju ste nedavno preuzeli.</string>
+    <string name="home_file_picker_prompt_description">Sada odaberite %1$s APK datoteku koju ste nedavno preuzeli</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Otvorite APK datoteku koju sam preuzela</string>
     <string name="home_recommended_version">Preporučenu verziju</string>
     <string name="home_selected_version">Odabrana verzija</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Nepodržana verzija</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Ova APK nije preporučena verzija aplikacije. Nastavak može rezultirati nefunkcionalnom aplikacijom.</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Ova APK nije preporučena verzija aplikacije. Nastavak može rezultirati nefunkcionalnom aplikacijom</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Nastavi u svakom slučaju</string>
     <string name="home_dialog_wrong_package_title">Pogrešan paket odabran</string>
-    <string name="home_dialog_wrong_package_description">Izabrani APK nije namijenjen za aplikaciju koju želite patchati.</string>
-    <string name="home_dialog_expected_package">Očekivan paket</string>
-    <string name="home_dialog_selected_package">Izabrani paket</string>
+    <string name="home_dialog_wrong_package_description">Izabrani APK nije namijenjen za aplikaciju koju želite patchati</string>
+    <string name="home_dialog_expected_package">Očekivan paket:</string>
+    <string name="home_dialog_selected_package">Izabrani paket:</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Upute</string>
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Režim korijena zahtijeva da je originalni APK instaliran na vašem uređaju prije ispravljanja.</string>
+    <string name="root_install_apk_required">Režim korijena zahtijeva da je originalni APK instaliran na vašem uređaju prije ispravljanja</string>
     <string name="root_gmscore_excluded">Podrška GmsCore je isključena u korijenskom načinu</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška kopirana u međuspremnik</string>
@@ -115,7 +114,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Vaša aplikacija ima groznicu, a jedini recept je više lokera… 🩺🔔</string>
     <string name="patcher_message_20">Uklanjanje smetnji. Molimo ostanite na čekanju… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
@@ -123,6 +122,7 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -136,6 +136,7 @@
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
 </resources>

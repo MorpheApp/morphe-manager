@@ -19,19 +19,23 @@ import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
+import app.revanced.manager.domain.repository.PatchSelectionRepository
+import app.revanced.manager.domain.repository.PatchOptionsRepository
 import app.revanced.manager.ui.screen.settings.system.*
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.SettingsViewModel
 import app.revanced.manager.ui.viewmodel.ImportExportViewModel
 import app.revanced.manager.util.toast
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
  * System tab content
  */
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("LocalContextGetResourceValueCall")
+@SuppressLint("LocalContextGetResourceValueCheck")
 @Composable
 fun SystemTabContent(
     installerManager: InstallerManager,
@@ -44,6 +48,7 @@ fun SystemTabContent(
     onExportSettings: () -> Unit,
     onExportDebugLogs: () -> Unit,
     onAboutClick: () -> Unit,
+    onChangelogClick: () -> Unit,
     prefs: PreferencesManager
 ) {
     val scope = rememberCoroutineScope()
@@ -54,6 +59,10 @@ fun SystemTabContent(
 
     var showProcessRuntimeDialog by remember { mutableStateOf(false) }
     var showApkManagementDialog by remember { mutableStateOf<ApkManagementType?>(null) }
+    var showPatchSelectionDialog by remember { mutableStateOf(false) }
+
+    // Extract strings to avoid LocalContext issues
+    val keystoreUnavailable = stringResource(R.string.settings_system_export_keystore_unavailable)
 
     // Process runtime dialog
     if (showProcessRuntimeDialog) {
@@ -76,6 +85,13 @@ fun SystemTabContent(
         ApkManagementDialog(
             type = type,
             onDismissRequest = { showApkManagementDialog = null }
+        )
+    }
+
+    // Patch selection management dialog
+    if (showPatchSelectionDialog) {
+        PatchSelectionManagementDialog(
+            onDismissRequest = { showPatchSelectionDialog = false }
         )
     }
 
@@ -159,7 +175,7 @@ fun SystemTabContent(
                     BaseSettingsItem(
                         onClick = {
                             if (!importExportViewModel.canExport()) {
-                                context.toast(context.getString(R.string.settings_system_export_keystore_unavailable))
+                                context.toast(keystoreUnavailable)
                             } else {
                                 onExportKeystore()
                             }
@@ -278,6 +294,58 @@ fun SystemTabContent(
                         }
                     }
                 )
+
+                MorpheSettingsDivider()
+
+                // Patch Selections management with grouped count
+                val selectionRepository: PatchSelectionRepository = koinInject()
+                val optionsRepository: PatchOptionsRepository = koinInject()
+                val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
+                    .collectAsStateWithLifecycle(emptySet())
+                val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
+                    .collectAsStateWithLifecycle(emptySet())
+
+                // Calculate grouped count
+                var groupedSelectionsCount by remember { mutableIntStateOf(0) }
+
+                LaunchedEffect(packagesWithSelection, packagesWithOptions) {
+                    val allPackages = packagesWithSelection + packagesWithOptions
+                    if (allPackages.isEmpty()) {
+                        groupedSelectionsCount = 0
+                    } else {
+                        withContext(Dispatchers.IO) {
+                            val packageGroups = groupPackagesByOriginal(
+                                allPackages,
+                                installedAppRepository
+                            )
+                            groupedSelectionsCount = packageGroups.size
+                        }
+                    }
+                }
+
+                RichSettingsItem(
+                    onClick = { showPatchSelectionDialog = true },
+                    title = stringResource(R.string.settings_system_patch_selections_title),
+                    subtitle = stringResource(R.string.settings_system_patch_selections_description),
+                    leadingContent = {
+                        MorpheIcon(icon = Icons.Outlined.Tune)
+                    },
+                    trailingContent = {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (groupedSelectionsCount > 0) {
+                                InfoBadge(
+                                    text = groupedSelectionsCount.toString(),
+                                    style = InfoBadgeStyle.Default,
+                                    isCompact = true
+                                )
+                            }
+                            MorpheIcon(icon = Icons.Outlined.ChevronRight)
+                        }
+                    }
+                )
             }
         }
 
@@ -288,7 +356,10 @@ fun SystemTabContent(
         )
 
         SectionCard {
-            AboutSection(onAboutClick = onAboutClick)
+            AboutSection(
+                onAboutClick = onAboutClick,
+                onChangelogClick = onChangelogClick
+            )
         }
     }
 }

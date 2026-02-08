@@ -2,17 +2,14 @@ package app.revanced.manager.domain.installer
 
 import android.app.Application
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.os.SystemClock
 import app.revanced.manager.IRootSystemService
 import app.revanced.manager.service.ManagerRootService
-import app.revanced.manager.ui.viewmodel.PersistentValue
 import app.revanced.manager.util.PM
 import com.topjohnwu.superuser.Shell
-import com.topjohnwu.superuser.Shell.cmd
 import com.topjohnwu.superuser.ipc.RootService
 import com.topjohnwu.superuser.nio.FileSystemManager
 import kotlinx.coroutines.CompletableDeferred

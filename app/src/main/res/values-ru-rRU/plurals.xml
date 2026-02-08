@@ -2,14 +2,38 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%d патч</item>
-        <item quantity="few">%d исправления</item>
-        <item quantity="many">%d исправлений</item>
-        <item quantity="other">%d исправлений</item>
+        <item quantity="few">%d патчи</item>
+        <item quantity="many">%d патчей</item>
+        <item quantity="other">%d патчей</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Выполнить %d патч</item>
-        <item quantity="few">Выполнить %d исправления</item>
-        <item quantity="many">Выполнить %d исправлений</item>
-        <item quantity="other">Выполнить %d исправлений</item>
+        <item quantity="few">Выполнить %d патчи</item>
+        <item quantity="many">Выполнить %d патчей</item>
+        <item quantity="other">Выполнить %d патчей</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файлы</item>
+        <item quantity="many">%d APK файлов</item>
+        <item quantity="other">%d APK файлов</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d сохраненный выбор</item>
+        <item quantity="few">%d сохраненные выбраны</item>
+        <item quantity="many">%d сохраненных выборов</item>
+        <item quantity="other">%d сохраненных выборов</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Отключено %d источник</item>
+        <item quantity="few">Отключено %d источников</item>
+        <item quantity="many">Отключено %d источников</item>
+        <item quantity="other">Отключено %d источников</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Включено %d источник</item>
+        <item quantity="few">Включено %d источников</item>
+        <item quantity="many">Включено %d источников</item>
+        <item quantity="other">Включено %d источников</item>
     </plurals>
 </resources>

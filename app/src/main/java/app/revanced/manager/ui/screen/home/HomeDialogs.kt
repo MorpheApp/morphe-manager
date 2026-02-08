@@ -15,10 +15,7 @@ import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -66,12 +63,16 @@ fun HomeDialogs(
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
+        val compatibleVersions = homeViewModel.pendingCompatibleVersions
         val usingMountInstall = homeViewModel.usingMountInstall
+        val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
 
         ApkAvailabilityDialog(
             appName = appName,
             recommendedVersion = recommendedVersion,
+            compatibleVersions = compatibleVersions,
             usingMountInstall = usingMountInstall,
+            isExpertMode = isExpertMode,
             onDismiss = {
                 homeViewModel.showApkAvailabilityDialog = false
                 homeViewModel.cleanupPendingData()
@@ -150,10 +151,13 @@ fun HomeDialogs(
         exit = fadeOut(animationSpec = tween(200))
     ) {
         val dialogState = homeViewModel.showUnsupportedVersionDialog ?: return@AnimatedVisibility
+        val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
 
         UnsupportedVersionWarningDialog(
             version = dialogState.version,
             recommendedVersion = dialogState.recommendedVersion,
+            allCompatibleVersions = dialogState.allCompatibleVersions,
+            isExpertMode = isExpertMode,
             onDismiss = {
                 homeViewModel.showUnsupportedVersionDialog = null
                 homeViewModel.pendingSelectedApp?.let { app ->
@@ -335,7 +339,9 @@ fun HomeDialogs(
 private fun ApkAvailabilityDialog(
     appName: String,
     recommendedVersion: String?,
+    compatibleVersions: List<String>,
     usingMountInstall: Boolean,
+    isExpertMode: Boolean,
     onDismiss: () -> Unit,
     onHaveApk: () -> Unit,
     onNeedApk: () -> Unit
@@ -362,16 +368,42 @@ private fun ApkAvailabilityDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = stringResource(
-                    R.string.home_apk_availability_dialog_description_simple,
-                    appName,
-                    recommendedVersion ?: stringResource(R.string.any_version)
-                ),
-                style = MaterialTheme.typography.bodyLarge,
-                color = secondaryColor,
-                textAlign = TextAlign.Center
-            )
+            // Description text
+            if (isExpertMode && compatibleVersions.isNotEmpty()) {
+                // Expert mode with versions: show list of versions
+                Text(
+                    text = stringResource(
+                        R.string.home_apk_availability_dialog_expert,
+                        appName
+                    ),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = secondaryColor,
+                    textAlign = TextAlign.Center
+                )
+
+                // Unified version list card
+                VersionListCard(
+                    versions = compatibleVersions,
+                    recommendedIndex = 0
+                )
+            } else {
+                // Simple mode or single version: show card with unpatched badge
+                Text(
+                    text = stringResource(
+                        R.string.home_apk_availability_dialog_simple,
+                        appName
+                    ),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = secondaryColor,
+                    textAlign = TextAlign.Center
+                )
+
+                val versionToShow = recommendedVersion ?: stringResource(R.string.any_version)
+                VersionListCard(
+                    versions = listOf(versionToShow),
+                    showUnpatchedBadge = true
+                )
+            }
 
             // Root mode warning
             if (usingMountInstall) {
@@ -383,7 +415,6 @@ private fun ApkAvailabilityDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-
         }
     }
 }
@@ -617,6 +648,8 @@ private fun FilePickerPromptDialog(
 private fun UnsupportedVersionWarningDialog(
     version: String,
     recommendedVersion: String?,
+    allCompatibleVersions: List<String>,
+    isExpertMode: Boolean,
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
@@ -651,32 +684,73 @@ private fun UnsupportedVersionWarningDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                // Selected version (red card)
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(R.string.home_selected_version),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )
-                    Text(
-                        text = version,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontFamily = FontFamily.Monospace,
-                        color = Color.Red.copy(alpha = 0.9f)
-                    )
+
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                        tonalElevation = 1.dp
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = version,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.error
+                            )
+
+                            InfoBadge(
+                                text = stringResource(R.string.home_dialog_unsupported_version_unsupported_label),
+                                style = InfoBadgeStyle.Error,
+                                isCompact = true
+                            )
+                        }
+                    }
                 }
 
-                if (recommendedVersion != null) {
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                // Compatible versions section
+                if (isExpertMode && allCompatibleVersions.isNotEmpty()) {
+                    // Expert mode: show all compatible versions in unified card
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = stringResource(R.string.home_dialog_unsupported_version_compatible_versions),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = secondaryColor
+                        )
+
+                        VersionListCard(
+                            versions = allCompatibleVersions,
+                            recommendedIndex = 0,
+                            isCompatible = true
+                        )
+                    }
+                } else if (recommendedVersion != null) {
+                    // Simple mode or single version: show recommended version card
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
                             text = stringResource(R.string.home_recommended_version),
                             style = MaterialTheme.typography.labelMedium,
                             color = secondaryColor
                         )
-                        Text(
-                            text = recommendedVersion,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontFamily = FontFamily.Monospace,
-                            color = Color.Green.copy(alpha = 0.9f)
+
+                        VersionListCard(
+                            versions = listOf(recommendedVersion),
+                            recommendedIndex = 0,
+                            isCompatible = true
                         )
                     }
                 }
@@ -723,31 +797,133 @@ fun WrongPackageDialog(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                // Expected package (green card)
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(R.string.home_dialog_expected_package),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )
-                    Text(
-                        text = expectedPackage,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontFamily = FontFamily.Monospace,
-                        color = Color.Green.copy(alpha = 0.9f)
-                    )
+
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f),
+                        tonalElevation = 1.dp
+                    ) {
+                        Text(
+                            text = expectedPackage,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Green.copy(alpha = 0.9f),
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
                 }
 
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                // Selected package (red card)
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(R.string.home_dialog_selected_package),
                         style = MaterialTheme.typography.labelMedium,
                         color = secondaryColor
                     )
+
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                        tonalElevation = 1.dp
+                    ) {
+                        Text(
+                            text = actualPackage,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Unified version list card component
+ */
+@Composable
+private fun VersionListCard(
+    versions: List<String>,
+    recommendedIndex: Int = 0,
+    isCompatible: Boolean = false,
+    showUnpatchedBadge: Boolean = false,
+    @SuppressLint("ModifierParameter")
+    modifier: Modifier = Modifier
+) {
+    if (versions.isEmpty()) return
+
+    val containerColor = if (isCompatible) {
+        MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.25f)
+    } else {
+        MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+    }
+
+    val textColor = if (isCompatible) {
+        Color.Green.copy(alpha = 0.9f)
+    } else {
+        LocalDialogTextColor.current
+    }
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(14.dp),
+        color = containerColor,
+        tonalElevation = 1.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            versions.forEachIndexed { index, version ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Version number
                     Text(
-                        text = actualPackage,
+                        text = version,
                         style = MaterialTheme.typography.bodyLarge,
                         fontFamily = FontFamily.Monospace,
-                        color = Color.Red.copy(alpha = 0.9f)
+                        fontWeight = if (index == recommendedIndex) FontWeight.Bold else FontWeight.Normal,
+                        color = textColor
+                    )
+
+                    // Badge
+                    if (index == recommendedIndex && !showUnpatchedBadge) {
+                        InfoBadge(
+                            text = stringResource(R.string.home_apk_availability_recommended_label),
+                            style = InfoBadgeStyle.Primary,
+                            isCompact = true
+                        )
+                    } else if (showUnpatchedBadge && versions.size == 1) {
+                        InfoBadge(
+                            text = stringResource(R.string.home_apk_availability_unpatched_label),
+                            style = InfoBadgeStyle.Warning,
+                            isCompact = true
+                        )
+                    }
+                }
+
+                // Divider between versions
+                if (index < versions.lastIndex) {
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
                     )
                 }
             }

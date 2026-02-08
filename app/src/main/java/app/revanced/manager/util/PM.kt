@@ -8,18 +8,16 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.PackageInfoFlags
 import android.content.pm.PackageManager.NameNotFoundException
-import androidx.core.content.pm.PackageInfoCompat
+import android.content.pm.PackageManager.PackageInfoFlags
 import android.content.pm.Signature
 import android.os.Build
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
+import androidx.core.content.pm.PackageInfoCompat
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.receiver.InstallReceiver
 import app.revanced.manager.receiver.UninstallReceiver
-import app.revanced.manager.service.InstallService
-import app.revanced.manager.service.UninstallService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -106,7 +104,7 @@ class PM(
     fun getPackagesWithFeature(feature: String) =
         getInstalledPackages(PackageManager.GET_CONFIGURATIONS)
             .filter { pkg ->
-                pkg.reqFeatures?.any { it.name == feature } ?: false
+                pkg.reqFeatures?.any { it.name == feature } == true
             }
 
     fun getPackageInfo(packageName: String, flags: Int = 0): PackageInfo? =
@@ -171,6 +169,11 @@ class PM(
     }
 
     fun canInstallPackages() = app.packageManager.canRequestPackageInstalls()
+
+    fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
+        val currentlyInstalled = getPackageInfo(packageName) != null
+        return !currentlyInstalled && wasInstalledOnDevice && hasSavedCopy
+    }
 
     private fun PackageInstaller.Session.writeApk(apk: File) {
         apk.inputStream().use { inputStream ->

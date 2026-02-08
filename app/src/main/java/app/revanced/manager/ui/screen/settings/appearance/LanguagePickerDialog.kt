@@ -7,9 +7,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -85,17 +87,7 @@ fun LanguagePickerDialog(
                         tint = LocalDialogSecondaryTextColor.current
                     )
                 },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Close,
-                                contentDescription = stringResource(R.string.clear_search),
-                                tint = LocalDialogSecondaryTextColor.current
-                            )
-                        }
-                    }
-                }
+                showClearButton = true
             )
 
             // Language list

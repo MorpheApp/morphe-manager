@@ -4,9 +4,9 @@
     <string name="home_other_apps">Outras aplicações</string>
     <string name="home_not_patched_yet">Ainda não atualizado</string>
     <string name="home_no_patches_available">Não há patches disponíveis</string>
-    <string name="home_default_source_disabled">O Morphe patch fonte está desativado. Por favor, ative-o na folha de fontes do patch ou utilize o modo expert.</string>
+    <string name="home_default_source_disabled">O patch de Morphe estÃ¡ desativado. Ative-o na folha de fontes do patch ou use o modo expert.</string>
     <string name="android_11_bug_dialog_title">Erro do Android 11</string>
-    <string name="android_11_bug_dialog_description">A permissão de instalação da aplicação tem de ser concedida antecipadamente para evitar um erro no sistema Android 11 que afetará negativamente a experiência do utilizador.</string>
+    <string name="android_11_bug_dialog_description">A permissÃ£o de instalaÃ§Ã£o do app deve ser concedida antecipadamente para evitar um bug no sistema Android 11 que afetarÃ¡ negativamente a experiÃªncia do usuÃ¡rio.</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização disponível</string>
     <string name="home_update_available_subtitle">Nova versão disponível para instalação</string>
@@ -49,16 +49,17 @@
     <string name="sources_dialog_display_name">Nome exibido</string>
     <string name="sources_dialog_rename">Renomecer fonte de patch</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma fonte de patch com este nome</string>
-    <string name="sources_dialog_missing_error">Não foi possível atualizar esta fonte de patch.</string>
-    <string name="sources_dialog_disabled_toast">Desativado %d fonte(s)</string>
-    <string name="sources_dialog_enabled_toast">Ativado %d fonte(s)</string>
+    <string name="sources_dialog_missing_error">NÃ£o foi possÃ­vel atualizar esta fonte de patch.</string>
     <string name="sources_dialog_view_any_version">Qualquer versão</string>
     <string name="sources_dialog_view_any_package">Qualquer pacote</string>
     <string name="sources_dialog_add_source">Adicionar fonte de patch</string>
-    <string name="sources_dialog_delete_confirm_message">Excluir fonte \"%s\"? Isso não pode ser desfeito.</string>
+    <string name="sources_dialog_delete_confirm_message">Excluir a fonte \"%s\"? Isso não pode ser desfeito.</string>
     <string name="sources_dialog_remote">Remoto</string>
     <string name="sources_dialog_remote_url">URL da fonte</string>
-    <string name="sources_dialog_remote_description">Digite a URL do ponto de extremidade JSON para a fonte de patch remota</string>
+    <string name="sources_dialog_remote_url_formats">"Exemplos:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• exemplo.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Selecione o arquivo da fonte de patch</string>
     <string name="sources_dialog_local_file_description">Selecione um arquivo .mpp de fonte de patch a partir do armazenamento</string>
@@ -69,7 +70,12 @@
     <string name="sources_download_fail">Falha ao baixar fontes: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Tem o APK original sem patches?</string>
-    <string name="home_apk_availability_dialog_description_simple">Para corrigir %1$s, você precisa da versão %2$s (não corrigida)</string>
+    <string name="home_apk_availability_dialog_simple">Para corrigir %1$s, vocé precisa de um APK desatualizado com a versão:</string>
+    <string name="home_apk_availability_dialog_expert">"Vocé tem um APK desatualizado %1$s?
+
+Versões compatíveis:"</string>
+    <string name="home_apk_availability_recommended_label">Recomendado</string>
+    <string name="home_apk_availability_unpatched_label">Não atualizado</string>
     <string name="home_apk_availability_yes">Sim, eu tenho</string>
     <string name="home_apk_availability_no">Não, ajude-me a encontrá-lo</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +91,7 @@
     <string name="home_download_instructions_continue">Continuar para APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selecione o APK que você baixou</string>
-    <string name="home_file_picker_prompt_description">Agora selecione o arquivo APK %1$s que você acabou de baixar.</string>
+    <string name="home_file_picker_prompt_description">Agora selecione o arquivo %1$schapk que vocã baixou recentemente</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Abrir arquivo APK baixado</string>
     <string name="home_file_picker_prompt_open_apk">Abrir arquivo APK</string>
     <string name="home_recommended_version">Versão recomendada</string>
@@ -109,12 +115,14 @@
 Você tem certeza de que deseja continuar?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Esta APK não é uma versão recomendada do aplicativo. Prosseguir pode resultar em um aplicativo não funcional.</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Prosseguir de qualquer maneira</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Este APK não é uma versão recomendada do aplicativo. Prosseguir pode resultar em um aplicativo não funcional</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Pacote errado</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Versões compatíveis:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Não suportado</string>
     <string name="home_dialog_wrong_package_title">Pacote incorreto selecionado</string>
-    <string name="home_dialog_wrong_package_description">O APK selecionado não é para o aplicativo que você pretendia patchar.</string>
-    <string name="home_dialog_expected_package">Pacote esperado</string>
-    <string name="home_dialog_selected_package">Pacote selecionado</string>
+    <string name="home_dialog_wrong_package_description">O APK selecionado não é para o aplicativo que você pretendia emendar</string>
+    <string name="home_dialog_expected_package">Pacote esperado:</string>
+    <string name="home_dialog_selected_package">Pacote selecionado:</string>
     <!-- Patch Options -->
     <string name="custom_color">Cor personalizada</string>
     <string name="hex_color">Cor hexadecimal</string>
@@ -124,43 +132,39 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="patch_option_enter_decimal">Inserir decimal</string>
     <string name="patch_option_pick_folder">Selecionar pasta</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Criar Ã­cone adaptativo</string>
-    <string name="adaptive_icon_create">Criar Ã­cone</string>
+    <string name="adaptive_icon_create">Criar ícone adaptável</string>
     <string name="adaptive_icon_instructions">Escolha uma imagem de primeiro plano, selecione a cor de fundo e ajuste a visualizaÃ§Ã£o com gestos de pinch-to-zoom</string>
     <string name="adaptive_icon_preview">Visualizar</string>
-    <string name="adaptive_icon_select_foreground">Selecionar imagem de primeiro plano</string>
-    <string name="adaptive_icon_change_foreground">Alterar imagem de primeiro plano</string>
+    <string name="adaptive_icon_select_image">Selecionar imagem</string>
+    <string name="adaptive_icon_change_image">Alterar imagem</string>
     <string name="adaptive_icon_background_color">Cor de fundo</string>
     <string name="adaptive_icon_reset_transform">Redefinir posição e escala</string>
     <string name="adaptive_icon_safe_zone_inner">Área segura (sempre visível)</string>
     <string name="adaptive_icon_safe_zone_outer">Área de máscara (pode ser recortada)</string>
     <string name="adaptive_icon_created_success">Ícone adaptável criado com sucesso</string>
     <string name="adaptive_icon_creation_failed">Falha ao criar ícone adaptável</string>
-    <string name="adaptive_icon_create_new">Criar novo ícone</string>
     <string name="adaptive_icon_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_icons\' com os arquivos do ícone gerado</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">Criar cabeçalho personalizado</string>
-    <string name="header_creator_create">Criar cabeçalho</string>
-    <string name="header_creator_create_new">Criar novo cabeçalho</string>
+    <string name="header_creator_create">Criar cabeçalho personalizado</string>
     <string name="header_creator_instructions">Escolha imagens para temas claro e escuro, depois ajuste com gestos de zoom com dois dedos</string>
     <string name="header_creator_light_theme">Cabeçalho do tema claro</string>
     <string name="header_creator_dark_theme">Cabeçalho do tema escuro</string>
-    <string name="header_creator_select_light">Selecionar imagem do tema claro</string>
-    <string name="header_creator_change_light">Alterar imagem do tema claro</string>
-    <string name="header_creator_select_dark">Selecionar imagem do tema escuro</string>
-    <string name="header_creator_change_dark">Alterar imagem do tema escuro</string>
     <string name="header_creator_no_image">Nenhuma imagem selecionada</string>
     <string name="header_creator_success">Cabeçalho criado com sucesso</string>
     <string name="header_creator_failed">Falha ao criar cabeçalho</string>
     <string name="header_creator_folder_explanation">Selecionar onde criar a pasta \'morphe_branding/morphe_header\' com os arquivos do cabeçalho gerado</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Tem certeza de que deseja desinstalar este aplicativo?</string>
-    <string name="home_app_info_saved_app_delete_confirmation">Tem certeza de que deseja excluir este aplicativo salvo?</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">Tem certeza de que deseja excluir a cópia salva?</string>
+    <string name="home_app_info_remove_app_warning">Isto irá deletar permanentemente:</string>
+    <string name="home_app_info_delete_item_database">Entrada do banco de dados</string>
+    <string name="home_app_info_delete_item_patched_apk">Arquivo APK emendado</string>
+    <string name="home_app_info_delete_item_original_apk">Arquivo APK original</string>
+    <string name="home_app_info_delete_preservation_note">Sua seleção de emenda e opções serão preservadas para futuras emendas</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Removidos %d patches desatualizados da seleção salva</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Sem nome</string>
     <string name="home_app_info_patches_replace_fail">Falha ao importar patches: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Arquivo APK original não encontrado. Não é possível repatchar este aplicativo.</string>
+    <string name="home_app_info_repatch_no_original_apk">APK original não encontrado. Não é possível repatchar este aplicativo.</string>
     <string name="home_app_info_repatch_requires_original">Repatch requer o arquivo APK original</string>
     <string name="home_app_info_original_package_name">Nome do pacote original</string>
     <string name="home_app_info_applied_patches">Patches aplicados</string>
@@ -170,9 +174,11 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="home_app_info_install_type_system_installer">Instalador do sistema</string>
     <string name="home_app_info_patched_at">Patched</string>
     <string name="home_app_info_patch_update_available">Atualização de patch disponível</string>
-    <string name="home_app_info_patch_update_available_description">Há uma nova versão de patches disponível. Repatchar o aplicativo para obter as últimas melhorias e correções.</string>
+    <string name="home_app_info_patch_update_available_description">Há uma versão mais nova das emendas disponível. Repare seu aplicativo para obter as últimas melhorias e correções</string>
+    <string name="home_app_info_app_deleted_warning">App desinstalado fora do gerenciador</string>
+    <string name="home_app_info_app_deleted_description">Este app foi desinstalado fora do gerenciador. Reparche-o para restaurar a funcionalidade</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">O modo root exige que o APK original esteja instalado no seu dispositivo antes do patching.</string>
+    <string name="root_install_apk_required">O modo raiz requer que o APK original esteja instalado em seu dispositivo antes do patch.</string>
     <string name="root_gmscore_excluded">O patch de suporte GmsCore está excluído no modo root</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
@@ -234,23 +240,22 @@ Você tem certeza de que deseja continuar?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Seu aplicativo está com febre e a única prescrição são mais patches… 🩺🔔</string>
     <string name="patcher_message_20">Removendo besteiras. Por favor, aguarde… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicando patches</string>
-    <string name="applying_patch">Aplicando %s</string>
     <string name="failed_to_execute_patch">Falha ao aplicar %s</string>
     <string name="patched_app_saved_toast">App modificado salvo para mais tarde</string>
     <string name="patched_app_save_failed_toast">Falha ao salvar app modificado</string>
     <string name="download_apk">Baixar arquivo APK</string>
-    <string name="plugin_activity_dialog_body">A interação do usuário é necessária para prosseguir com este plugin.</string>
-    <string name="patcher_process_exit_message">O processo de correção terminou com o código %1$d.</string>
+    <string name="plugin_activity_dialog_body">Interação do usuário é necessária para prosseguir com este plugin.</string>
+    <string name="patcher_process_exit_message">O processo do patcher saiu com o código %1$d.</string>
     <string name="install_app_success">Instalado com sucesso</string>
     <string name="install_app_fail">Falha ao instalar o app: %s</string>
-    <string name="install_timeout_message">A instalação não foi concluída. Verifique a caixa de diálogo do instalador do sistema e tente novamente.</string>
+    <string name="install_timeout_message">A instalação não foi concluída. Verifique o diálogo do instalador do sistema e tente novamente.</string>
     <string name="save_apk_success">APK Salvo</string>
     <string name="saved_app_export_failed">Falha ao exportar o app modificado</string>
     <string name="saved_app_removed_toast">App modificado salvo removido</string>
     <string name="saved_app_copy_removed_toast">Cópia salva removida</string>
-    <string name="saved_app_launch_unavailable">Instale o app antes de abri-lo.</string>
+    <string name="saved_app_launch_unavailable">Instale o aplicativo antes de abri-lo.</string>
     <string name="package_name">Nome do pacote</string>
     <string name="failed_to_mount">Falha ao montar: %s</string>
     <string name="failed_to_unmount">Falha ao desmontar: %s</string>
@@ -262,11 +267,13 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="settings_appearance_background">Animação de fundo</string>
     <string name="settings_appearance_background_circles">Círculos</string>
     <string name="settings_appearance_background_rings">Anéis</string>
-    <string name="settings_appearance_background_waves">Ondas</string>
+    <string name="settings_appearance_background_mesh">Malha</string>
     <string name="settings_appearance_background_space">Espaço</string>
     <string name="settings_appearance_background_shapes">Formas</string>
     <string name="settings_appearance_background_snow">Neve</string>
     <string name="settings_appearance_background_none">Nenhum</string>
+    <string name="settings_appearance_parallax_effect">Efeito de paralaxe</string>
+    <string name="settings_appearance_parallax_effect_description">Deslocamento suave de fundo ao inclinar o dispositivo</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Aparência</string>
     <string name="settings_appearance_system">Sistema</string>
@@ -301,6 +308,16 @@ Você tem certeza de que deseja continuar?"</string>
     <string name="settings_advanced_expert_mode_description">Habilita recursos e opções de personalização avançados</string>
     <string name="settings_advanced_strip_unused_libs">Remover bibliotecas nativas desnecessárias</string>
     <string name="settings_advanced_strip_unused_libs_description">Excluir bibliotecas nativas para arquiteturas de CPU não suportadas dos aplicativos patched</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat_description">Requerido para pacotes de solicitações pull</string>
+    <string name="settings_advanced_github_pat_configured">Token configurado</string>
+    <string name="settings_advanced_github_pat_how_to_get">Como obter um token</string>
+    <string name="settings_advanced_github_pat_dialog_title">Definir Token de Acesso Pessoal do GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">Defina um Token de Acesso Pessoal do GitHub para poder adicionar solicitações pull como fontes externas. Crie um PAT com a gama de \"repositório público\".</string>
+    <string name="settings_advanced_github_pat_export_include_label">Incluir na exportação de configurações</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Adiciona este PAT às configurações exportadas do gerenciador</string>
+    <string name="settings_advanced_github_pat_export_warning">Não compartilhe seu PAT. Se você incluí-lo em uma exportação de configurações, mantenha esse arquivo privado porque ele contém o token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opções de patch</string>
     <string name="settings_advanced_patch_options_youtube_description">Opções de tema, marca, cabeçalho e Shorts</string>
@@ -374,40 +391,40 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Remover o botão de Shorts do widget do lançador</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalador</string>
+    <string name="installer_title">Selecionar instalador</string>
     <string name="installer_internal_name">Instalador do sistema</string>
     <string name="installer_internal_description">Use o instalador de pacotes do Android</string>
     <string name="installer_auto_saved_name">Instalador de montagem com root</string>
-    <string name="installer_auto_saved_description">Monta o APK modificado sobre o aplicativo instalado (requer root).</string>
-    <string name="installer_shizuku_description">Instale silenciosamente usando Shizuku ou Sui.</string>
+    <string name="installer_auto_saved_description">Monta o APK emendado sobre o aplicativo instalado (raiz necessária)</string>
+    <string name="installer_shizuku_description">Instale silenciosamente usando Shizuku ou Sui</string>
     <string name="installer_option_none">Sem fallback</string>
     <string name="installer_none_description">Nenhum instalador de fallback está configurado</string>
     <string name="installer_status_requires_root">Requer acesso root</string>
-    <string name="installer_status_not_supported">Não suportado para esta ação.</string>
-    <string name="installer_status_shizuku_not_installed">Instale Shizuku ou Sui para usar esta opção.</string>
-    <string name="installer_status_shizuku_not_running">Inicie o Shizuku ou Sui e tente novamente.</string>
-    <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe no aplicativo Shizuku.</string>
-    <string name="installer_mount_warning_install">Seu instalador principal está definido como o instalador de montagem com root. Este app salvo não foi instalado usando montagem.</string>
-    <string name="installer_mount_mismatch_title">Instalador de montagem com root não selecionado</string>
-    <string name="installer_mount_mismatch_install">Este app foi instalado usando o instalador de montagem com root. Alterne seu instalador principal de volta para usar ações de montagem, em seguida, monte.</string>
-    <string name="mount_version_mismatch_message">A versão do app original (%2$s) não corresponde à versão do app com patch (%1$s). Monte a versão original correspondente e tente novamente.</string>
-    <string name="installer_status_shizuku_unsupported">A versão instalada do Shizuku não é suportada.</string>
+    <string name="installer_status_not_supported">Não suportado para esta ação</string>
+    <string name="installer_status_shizuku_not_installed">Instale Shizuku ou Sui para usar esta opção</string>
+    <string name="installer_status_shizuku_not_running">Inicie Shizuku ou Sui e tente novamente</string>
+    <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe a partir do aplicativo Shizuku</string>
+    <string name="installer_mount_warning_install">Seu instalador principal está definido para o instalador montado enraizado. Este aplicativo salvo não foi instalado usando o montado</string>
+    <string name="mount_version_mismatch_message">A versão do aplicativo original (%2$s) não corresponde à versão do aplicativo patched (%1$s). Monte a versão original correspondente, então tente novamente</string>
+    <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
-    <string name="installer_hint_generic">A instalação falhou. Tente novamente ou mude para um instalador diferente.</string>
-    <string name="installer_hint_blocked">A instalação foi bloqueada pelo Android. Verifique o Play Protect ou as configurações de segurança.</string>
-    <string name="installer_hint_conflict">Outro aplicativo com este nome de pacote já está instalado. Desinstale-o antes de continuar.</string>
-    <string name="installer_hint_incompatible">O APK não é compatível com este dispositivo ou versão do Android.</string>
-    <string name="installer_hint_invalid">O APK é inválido ou corrompido.</string>
-    <string name="installer_hint_storage">Não há espaço de armazenamento suficiente para a instalação.</string>
-    <string name="installer_hint_timeout">A instalação atingiu o tempo limite. Tente novamente.</string>
-    <string name="installer_hint_aborted">A instalação foi cancelada.</string>
+    <string name="installer_hint_generic">A instalação falhou. Tente novamente ou mude para um instalador diferente</string>
+    <string name="installer_hint_blocked">A instalação foi bloqueada pelo Android. Verifique o Play Protect ou as configurações de segurança</string>
+    <string name="installer_hint_conflict">Outro aplicativo com este nome de pacote já está instalado. Desinstale-o antes de continuar</string>
+    <string name="installer_hint_incompatible">O APK não é compatível com este dispositivo ou versão do Android</string>
+    <string name="installer_hint_invalid">O APK é inválido ou corrompido</string>
+    <string name="installer_hint_storage">Não há espaço suficiente no armazenamento para a instalação</string>
+    <string name="installer_hint_timeout">A instalação esgotou o tempo. Tente novamente</string>
+    <string name="installer_hint_aborted">A instalação foi cancelada</string>
     <string name="installer_external_launched">Abrindo %1$s…</string>
-    <string name="installer_external_timeout">%1$s não confirmou a instalação. Verifique o outro aplicativo e tente novamente.</string>
-    <string name="installer_external_success">%1$s relatou uma instalação bem-sucedida.</string>
-    <string name="installer_external_finished_no_change">{appName} instalado(a) sem sucesso. Verifique um erro na instalação e tente novamente.</string>
+    <string name="installer_external_timeout">%1$s não confirmou a instalação. Verifique o outro aplicativo e tente novamente</string>
+    <string name="installer_external_success">%1$s relatou uma instalação bem-sucedida</string>
     <string name="installer_unavailable_title">%s indisponível</string>
-    <string name="installer_unavailable_message">Seu instalador preferido (%s) está atualmente indisponível. Você pode corrigir o problema e tentar novamente ou usar o instalador padrão em vez disso.</string>
-    <string name="installer_unavailable_shizuku_hint">Certifique-se de que Shizuku está em execução e que a permissão foi concedida a este aplicativo.</string>
+    <string name="installer_unavailable_message">Seu instalador preferencial (%s) está atualmente indisponível. Você pode consertar o problema e reinspecionar ou usar o instalador padrão em vez disso</string>
+    <string name="installer_unavailable_shizuku_hint">Certifique-se de que o Shizuku esteja em execução e a permissão seja concedida a este aplicativo</string>
     <string name="installer_use_standard">Usar padrão</string>
+    <string name="settings_prompt_installer_on_install">Solicitar instalador na instalação</string>
+    <string name="settings_prompt_installer_on_install_description">Mostrar diálogo de seleção de instalador cada vez que você instalar um aplicativo patched</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Desempenho</string>
     <string name="settings_system_process_runtime">Tempo de execução</string>
@@ -424,7 +441,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_import_keystore">Importar keystore</string>
     <string name="settings_system_import_keystore_description">Importar um keystore personalizado</string>
     <string name="settings_system_import_keystore_dialog_title">Digite as credenciais do keystore</string>
-    <string name="settings_system_import_keystore_dialog_description">Você precisará digitar as credenciais do keystore para importá-lo.</string>
+    <string name="settings_system_import_keystore_dialog_description">Você precisará entrar nas credenciais do keystore para importá-lo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nome de usuário (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Senha</string>
     <string name="settings_system_import_keystore_dialog_button">Importar</string>
@@ -455,7 +472,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_export_debug_logs_export_success">Registros exportados</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">Gerenciamento de armazenamento</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
     <string name="settings_system_apks_size">Tamanho total: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKs patched</string>
@@ -466,11 +482,20 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_system_patched_apks_deleted">APK patched excluído com sucesso</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APKs originais</string>
-    <string name="settings_system_original_apks_description">Arquivos APK originais são salvos para repatchar. Apenas a versão mais recente é mantida para cada aplicativo.</string>
+    <string name="settings_system_original_apks_description">Arquivos APK originais são salvos para repatch. Somente a versão mais recente é mantida para cada aplicativo</string>
     <string name="settings_system_original_apks_empty">Nenhum APK original armazenado</string>
     <string name="settings_system_original_apks_deleted">APK original excluído com sucesso</string>
     <string name="settings_system_original_apks_delete_title">Excluir APK original?</string>
-    <string name="settings_system_original_apks_delete_confirm">Excluir o APK original para %s? Você não poderá repatchar sem fornecer um novo APK.</string>
+    <string name="settings_system_original_apks_delete_confirm">Deletar o APK original para %s? Você não poderá repassar sem fornecer um novo APK</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Seleções de emenda</string>
+    <string name="settings_system_patch_selections_description">Gerencie as seleções de emenda e opções salvas. Essas persistem após a desinstalação do aplicativo</string>
+    <string name="settings_system_patch_selections_description_short">Salvo para emenda futura</string>
+    <string name="settings_system_patch_selections_empty">Não há seleções de emenda salvas</string>
+    <string name="settings_system_patch_selections_has_options">Tem opções</string>
+    <string name="settings_system_patch_selections_patches_options">Opções de emenda</string>
+    <string name="settings_system_patch_selection_delete_title">Deletar seleção de emenda</string>
+    <string name="settings_system_patch_selection_deleted">Seleção de emenda deletada</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_share_website">Compartilhar site</string>
@@ -485,6 +510,7 @@ O Morphe é open-source em sua essência, prosperando com feedback e contribuiç
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="reset">Repor</string>
+    <string name="confirm">Confirmar</string>
     <string name="warning">Aviso</string>
     <string name="error_">Erro</string>
     <string name="retry">Tentar novamente</string>
@@ -498,7 +524,6 @@ O Morphe é open-source em sua essência, prosperando com feedback e contribuiç
     <string name="not_installed">Não instalado</string>
     <string name="view">Visualizar</string>
     <string name="search">Pesquisa</string>
-    <string name="clear_search">Limpar pesquisa</string>
     <string name="search_no_results">Nenhum resultado encontrado</string>
     <string name="any_version">Qualquer</string>
     <string name="enabled">Habilitado</string>
@@ -527,19 +552,21 @@ O Morphe é open-source em sua essência, prosperando com feedback e contribuiç
     <string name="installed">Instalado</string>
     <string name="reinstall">Reinstalar</string>
     <string name="uninstall">Desinstalar</string>
+    <string name="uninstalled">Desinstalado</string>
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
     <string name="update">Atualizar</string>
     <string name="installing_ellipsis">Instalando…</string>
-    <string name="uninstalling_ellipsis">Desinstalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
     <string name="unmounting_ellipsis">Desmontando…</string>
     <string name="importing_ellipsis">Importando…</string>
     <string name="changelog">Ver registos de alterações</string>
+    <string name="changelog_description">Confira as últimas alterações nesta atualização</string>
     <string name="changelog_loading">A carregar changelog</string>
     <string name="changelog_download_fail">Falha ao descarregar changelog: %s</string>
     <string name="changelog_retry">Tentar novamente</string>
     <string name="changelog_empty">Nenhum registro de atualizações disponível</string>
+    <string name="no_network_toast">Não há conexão com a internet disponível</string>
     <string name="update_available">Uma atualização está disponível</string>
     <string name="ready_to_install_update">Pronto para instalar a atualização</string>
     <string name="update_completed">Atualização instalada</string>

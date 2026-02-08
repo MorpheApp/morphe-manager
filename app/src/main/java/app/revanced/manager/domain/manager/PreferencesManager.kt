@@ -10,6 +10,7 @@ import app.revanced.manager.ui.theme.Theme
 import app.revanced.manager.util.ExportNameFormatter
 import app.revanced.manager.util.isArmV7
 import app.revanced.manager.util.tag
+import app.morphe.manager.BuildConfig
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
@@ -19,6 +20,7 @@ class PreferencesManager(
 
     // Appearance tab
     val backgroundType = enumPreference("background_type", BackgroundType.CIRCLES)
+    val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
 
     val dynamicColor = booleanPreference("dynamic_color", true)
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
@@ -40,6 +42,7 @@ class PreferencesManager(
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
+    val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install",false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
@@ -72,12 +75,23 @@ class PreferencesManager(
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
+    // Hidden preference to track if prerelease was auto-enabled
+    private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
+
     init {
         runBlocking {
             if (installationTime.get() == 0L) {
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
                 Log.d(tag, "Installation time set to $now")
+            }
+
+            // Auto-enable prereleases for dev versions
+            if (isDevVersion() && !prereleaseAutoEnabled.get()) {
+                Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
+                useManagerPrereleases.update(true)
+                usePatchesPrereleases.update(true)
+                prereleaseAutoEnabled.update(true)
             }
         }
     }
@@ -196,6 +210,15 @@ class PreferencesManager(
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
+    }
+
+    companion object {
+        /**
+         * Check if current version is a development/prerelease version
+         */
+        fun isDevVersion(): Boolean {
+            return BuildConfig.VERSION_NAME.contains("-dev", ignoreCase = true)
+        }
     }
 }
 

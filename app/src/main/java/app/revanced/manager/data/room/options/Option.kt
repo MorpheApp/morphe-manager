@@ -5,8 +5,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import app.revanced.manager.patcher.patch.Option
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull

@@ -12,4 +12,28 @@
         <item quantity="many">Provést %d záplat</item>
         <item quantity="other">Provést %d záplat</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d soubor APK</item>
+        <item quantity="few">%d soubory APK</item>
+        <item quantity="many">%d souborů APK</item>
+        <item quantity="other">%d souborů APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d uložená výběr</item>
+        <item quantity="few">%d uložené výběry</item>
+        <item quantity="many">%d uložených výběrů</item>
+        <item quantity="other">%d uložených výběrů</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Zakázáno %d zdroj</item>
+        <item quantity="few">Zakázáno %d zdrojů</item>
+        <item quantity="many">Zakázáno %d zdrojů</item>
+        <item quantity="other">Zakázáno %d zdrojů</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Povoleno %d zdroj</item>
+        <item quantity="few">Povoleno %d zdrojů</item>
+        <item quantity="many">Povoleno %d zdrojů</item>
+        <item quantity="other">Povoleno %d zdrojů</item>
+    </plurals>
 </resources>

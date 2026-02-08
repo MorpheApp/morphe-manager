@@ -58,14 +58,16 @@ private object AdaptiveIconConfig {
     const val BACKGROUND_FILE_NAME = "morphe_adaptive_background_custom.png"
     const val FOREGROUND_FILE_NAME = "morphe_adaptive_foreground_custom.png"
 
-    // Density folders and sizes
-    val DENSITY_CONFIGS = mapOf(
-        160 to ("mipmap-mdpi" to 108),
-        240 to ("mipmap-hdpi" to 162),
-        320 to ("mipmap-xhdpi" to 216),
-        480 to ("mipmap-xxhdpi" to 324),
-        Int.MAX_VALUE to ("mipmap-xxxhdpi" to 432)
+    // Density folders and sizes - all densities will be generated
+    val DENSITY_CONFIGS = listOf(
+        DensityConfig("mipmap-mdpi", 108),
+        DensityConfig("mipmap-hdpi", 162),
+        DensityConfig("mipmap-xhdpi", 216),
+        DensityConfig("mipmap-xxhdpi", 324),
+        DensityConfig("mipmap-xxxhdpi", 432)
     )
+
+    data class DensityConfig(val folderName: String, val size: Int)
 
     // Transform constraints
     const val MIN_SCALE = 0.5f
@@ -154,7 +156,7 @@ fun AdaptiveIconCreatorDialog(
         uri?.let {
             scope.launch(Dispatchers.IO) {
                 try {
-                    val success = createAdaptiveIcon(
+                    val success = createAdaptiveIcons(
                         context = context,
                         baseUri = it,
                         foregroundBitmap = foregroundBitmap!!,
@@ -184,7 +186,7 @@ fun AdaptiveIconCreatorDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.adaptive_icon_creator_title),
+        title = stringResource(R.string.adaptive_icon_create),
         compactPadding = true,
         footer = {
             Column(
@@ -265,9 +267,9 @@ fun AdaptiveIconCreatorDialog(
             // Foreground selection
             MorpheDialogButton(
                 text = if (foregroundUri == null)
-                    stringResource(R.string.adaptive_icon_select_foreground)
+                    stringResource(R.string.adaptive_icon_select_image)
                 else
-                    stringResource(R.string.adaptive_icon_change_foreground),
+                    stringResource(R.string.adaptive_icon_change_image),
                 onClick = { foregroundPicker.launch("image/*") },
                 icon = Icons.Outlined.Image,
                 modifier = Modifier.fillMaxWidth()
@@ -571,11 +573,11 @@ private fun SafeZoneLegendItem(
 }
 
 /**
- * Create adaptive icon files in proper structure
+ * Create adaptive icon files for all densities in proper structure
  * Returns the path to morphe_icons folder or null if failed
  */
 @SuppressLint("UseKtx")
-private suspend fun createAdaptiveIcon(
+private suspend fun createAdaptiveIcons(
     context: Context,
     baseUri: Uri,
     foregroundBitmap: Bitmap,
@@ -585,106 +587,39 @@ private suspend fun createAdaptiveIcon(
     offsetY: Float
 ): String? = withContext(Dispatchers.IO) {
     try {
-        // Get current device density
-        val displayMetrics = context.resources.displayMetrics
-        val density = displayMetrics.densityDpi
-
-        // Determine which folder to create based on density
-        val (folderName, targetSize) = AdaptiveIconConfig.DENSITY_CONFIGS
-            .entries
-            .firstOrNull { density <= it.key }
-            ?.value
-            ?: AdaptiveIconConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
-
         // Convert URI to File path using existing utility
         val basePath = baseUri.toFilePath()
         val baseDir = File(basePath)
 
-        // Create directory structure: morphe_branding/morphe_icons/mipmap-xxx
+        // Create directory structure: morphe_branding/morphe_icons
         val brandingDir = File(baseDir, AdaptiveIconConfig.BRANDING_FOLDER_NAME)
         if (!brandingDir.exists()) brandingDir.mkdirs()
+
+        // Create .nomedia file to prevent icons from appearing in gallery
+        val nomediaFile = File(brandingDir, ".nomedia")
+        if (!nomediaFile.exists()) {
+            nomediaFile.createNewFile()
+        }
 
         val iconsDir = File(brandingDir, AdaptiveIconConfig.ICONS_FOLDER_NAME)
         if (!iconsDir.exists()) iconsDir.mkdirs()
 
-        val mipmapDir = File(iconsDir, folderName)
-        if (!mipmapDir.exists()) mipmapDir.mkdirs()
-
-        // Create background bitmap (solid color)
-        val backgroundBitmap = createBitmap(targetSize, targetSize)
-        val canvas = Canvas(backgroundBitmap)
-        val rgb = parseColorToRgb(backgroundColor)
-        val paint = Paint().apply {
-            color = android.graphics.Color.rgb(
-                (rgb.first * 255).toInt(),
-                (rgb.second * 255).toInt(),
-                (rgb.third * 255).toInt()
-            )
-        }
-        canvas.drawRect(0f, 0f, targetSize.toFloat(), targetSize.toFloat(), paint)
-
-        // Create foreground bitmap with scaling and offset
-        val foregroundScaled = createBitmap(targetSize, targetSize)
-        val foregroundCanvas = Canvas(foregroundScaled)
-
-        // Get density to convert preview offsets to target offsets
+        // Get preview density for offset calculations
         val previewDensity = context.resources.displayMetrics.density
 
-        // Preview canvas size in pixels
-        val previewCanvasSize = targetSize * previewDensity
-
-        // Calculate base size by fitting image to canvas (same logic as preview)
-        val imageAspect = foregroundBitmap.width.toFloat() / foregroundBitmap.height.toFloat()
-        val canvasAspect = previewCanvasSize / previewCanvasSize  // 1.0 for square
-
-        val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
-            // Image is wider - fit to width
-            previewCanvasSize to (previewCanvasSize / imageAspect)
-        } else {
-            // Image is taller - fit to height
-            (previewCanvasSize * imageAspect) to previewCanvasSize
+        // Create icons for all densities
+        AdaptiveIconConfig.DENSITY_CONFIGS.forEach { densityConfig ->
+            createIconsForDensity(
+                iconsDir = iconsDir,
+                densityConfig = densityConfig,
+                foregroundBitmap = foregroundBitmap,
+                backgroundColor = backgroundColor,
+                scale = scale,
+                offsetX = offsetX,
+                offsetY = offsetY,
+                previewDensity = previewDensity
+            )
         }
-
-        // Apply user scale to the fitted size
-        val scaledWidth = baseWidth * scale
-        val scaledHeight = baseHeight * scale
-
-        // Convert to target bitmap coordinates
-        val targetScaledWidth = scaledWidth / previewDensity
-        val targetScaledHeight = scaledHeight / previewDensity
-
-        // Convert offsets from preview canvas pixels to target bitmap pixels
-        val targetOffsetX = offsetX / previewDensity
-        val targetOffsetY = offsetY / previewDensity
-
-        val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
-        val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
-
-        // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
-        val bitmapPaint = Paint().apply {
-            isAntiAlias = true
-            isFilterBitmap = true
-            isDither = true
-        }
-
-        val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-        foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, bitmapPaint)
-
-        // Save background
-        val backgroundFile = File(mipmapDir, AdaptiveIconConfig.BACKGROUND_FILE_NAME)
-        FileOutputStream(backgroundFile).use { out ->
-            backgroundBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-        }
-
-        // Save foreground
-        val foregroundFile = File(mipmapDir, AdaptiveIconConfig.FOREGROUND_FILE_NAME)
-        FileOutputStream(foregroundFile).use { out ->
-            foregroundScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
-        }
-
-        // Clean up
-        backgroundBitmap.recycle()
-        foregroundScaled.recycle()
 
         // Return path to 'morphe_icons' folder
         iconsDir.absolutePath
@@ -692,4 +627,97 @@ private suspend fun createAdaptiveIcon(
         e.printStackTrace()
         null
     }
+}
+
+/**
+ * Create icon files for a specific density
+ */
+private fun createIconsForDensity(
+    iconsDir: File,
+    densityConfig: AdaptiveIconConfig.DensityConfig,
+    foregroundBitmap: Bitmap,
+    backgroundColor: String,
+    scale: Float,
+    offsetX: Float,
+    offsetY: Float,
+    previewDensity: Float
+) {
+    val targetSize = densityConfig.size
+
+    // Create mipmap directory
+    val mipmapDir = File(iconsDir, densityConfig.folderName)
+    if (!mipmapDir.exists()) mipmapDir.mkdirs()
+
+    // Create background bitmap (solid color)
+    val backgroundBitmap = createBitmap(targetSize, targetSize)
+    val canvas = Canvas(backgroundBitmap)
+    val rgb = parseColorToRgb(backgroundColor)
+    val paint = Paint().apply {
+        color = android.graphics.Color.rgb(
+            (rgb.first * 255).toInt(),
+            (rgb.second * 255).toInt(),
+            (rgb.third * 255).toInt()
+        )
+    }
+    canvas.drawRect(0f, 0f, targetSize.toFloat(), targetSize.toFloat(), paint)
+
+    // Create foreground bitmap with scaling and offset
+    val foregroundScaled = createBitmap(targetSize, targetSize)
+    val foregroundCanvas = Canvas(foregroundScaled)
+
+    // Preview canvas size in pixels
+    val previewCanvasSize = AdaptiveIconConfig.PREVIEW_SIZE.value * previewDensity
+
+    // Calculate base size by fitting image to canvas (same logic as preview)
+    val imageAspect = foregroundBitmap.width.toFloat() / foregroundBitmap.height.toFloat()
+    val canvasAspect = 1.0f  // Square canvas
+
+    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
+        // Image is wider - fit to width
+        previewCanvasSize to (previewCanvasSize / imageAspect)
+    } else {
+        // Image is taller - fit to height
+        (previewCanvasSize * imageAspect) to previewCanvasSize
+    }
+
+    // Apply user scale to the fitted size
+    val scaledWidth = baseWidth * scale
+    val scaledHeight = baseHeight * scale
+
+    // Convert to target bitmap coordinates
+    val targetScaledWidth = scaledWidth * (targetSize / previewCanvasSize)
+    val targetScaledHeight = scaledHeight * (targetSize / previewCanvasSize)
+
+    // Convert offsets from preview canvas pixels to target bitmap pixels
+    val targetOffsetX = offsetX * (targetSize / previewCanvasSize)
+    val targetOffsetY = offsetY * (targetSize / previewCanvasSize)
+
+    val left = (targetSize - targetScaledWidth) / 2 + targetOffsetX
+    val top = (targetSize - targetScaledHeight) / 2 + targetOffsetY
+
+    // Create Paint with anti-aliasing and bicubic filtering for high-quality scaling
+    val bitmapPaint = Paint().apply {
+        isAntiAlias = true
+        isFilterBitmap = true
+        isDither = true
+    }
+
+    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
+    foregroundCanvas.drawBitmap(foregroundBitmap, null, destRect, bitmapPaint)
+
+    // Save background
+    val backgroundFile = File(mipmapDir, AdaptiveIconConfig.BACKGROUND_FILE_NAME)
+    FileOutputStream(backgroundFile).use { out ->
+        backgroundBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+    }
+
+    // Save foreground
+    val foregroundFile = File(mipmapDir, AdaptiveIconConfig.FOREGROUND_FILE_NAME)
+    FileOutputStream(foregroundFile).use { out ->
+        foregroundScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+    }
+
+    // Clean up
+    backgroundBitmap.recycle()
+    foregroundScaled.recycle()
 }

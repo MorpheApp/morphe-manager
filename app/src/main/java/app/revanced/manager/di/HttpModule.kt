@@ -44,8 +44,8 @@ val httpModule = module {
             json(json)
         }
         install(HttpTimeout) {
-            connectTimeoutMillis = 10_000
-            socketTimeoutMillis = 60_000
+            connectTimeoutMillis = 20_000
+            socketTimeoutMillis = 2 * 60_000
             requestTimeoutMillis = 5 * 60_000
         }
         install(UserAgent) {

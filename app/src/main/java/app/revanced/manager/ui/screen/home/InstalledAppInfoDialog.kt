@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -196,6 +197,11 @@ fun InstalledAppInfoDialog(
         }
     }
 
+    // Refresh app state on every launch
+    LaunchedEffect(Unit) {
+        viewModel.refreshCurrentAppState()
+    }
+
     // Set back click handler
     SideEffect { viewModel.onBackClick = onDismiss }
 
@@ -264,12 +270,15 @@ fun InstalledAppInfoDialog(
     DeleteConfirmDialog(
         show = showDeleteDialog,
         isSavedOnly = installedApp?.installType == InstallType.SAVED,
+        appInfo = viewModel.appInfo,
+        appLabel = viewModel.appInfo?.applicationInfo?.loadLabel(context.packageManager)?.toString(),
         onConfirm = {
-            if (installedApp?.installType == InstallType.SAVED) viewModel.removeSavedApp()
-            else viewModel.deleteSavedCopy()
+            viewModel.removeAppCompletely()
             showDeleteDialog = false
         },
-        onDismiss = { showDeleteDialog = false }
+        onDismiss = {
+            showDeleteDialog = false
+        }
     )
 
     // Expert Mode Repatch Dialog
@@ -327,19 +336,47 @@ fun InstalledAppInfoDialog(
                     installedApp = installedApp
                 )
 
-                // Update Available Banner
+                // Deleted App Warning Banner
                 AnimatedVisibility(
-                    visible = hasUpdate,
+                    visible = viewModel.isAppDeleted,
                     enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
                             expandVertically(animationSpec = tween(durationMillis = 400)),
                     exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
                             shrinkVertically(animationSpec = tween(durationMillis = 300))
                 ) {
-                    PatchUpdateAvailableBanner(
-                        onPatchClick = {
+                    WarningBanner(
+                        icon = Icons.Outlined.Warning,
+                        title = stringResource(R.string.home_app_info_app_deleted_warning),
+                        description = stringResource(R.string.home_app_info_app_deleted_description),
+                        buttonText = stringResource(R.string.repatch),
+                        buttonIcon = Icons.Outlined.Refresh,
+                        onClick = {
                             onDismiss()
                             onTriggerPatchFlow(installedApp.originalPackageName)
-                        }
+                        },
+                        isError = true
+                    )
+                }
+
+                // Update Available Banner
+                AnimatedVisibility(
+                    visible = hasUpdate && !viewModel.isAppDeleted,
+                    enter = fadeIn(animationSpec = tween(durationMillis = 400)) +
+                            expandVertically(animationSpec = tween(durationMillis = 400)),
+                    exit = fadeOut(animationSpec = tween(durationMillis = 300)) +
+                            shrinkVertically(animationSpec = tween(durationMillis = 300))
+                ) {
+                    WarningBanner(
+                        icon = Icons.Outlined.Update,
+                        title = stringResource(R.string.home_app_info_patch_update_available),
+                        description = stringResource(R.string.home_app_info_patch_update_available_description),
+                        buttonText = stringResource(R.string.repatch),
+                        buttonIcon = Icons.Outlined.Refresh,
+                        onClick = {
+                            onDismiss()
+                            onTriggerPatchFlow(installedApp.originalPackageName)
+                        },
+                        isError = false
                     )
                 }
 
@@ -397,12 +434,30 @@ fun InstalledAppInfoDialog(
 }
 
 /**
- * Banner component showing patch update availability
+ * Unified banner component for warnings and updates
  */
 @Composable
-private fun PatchUpdateAvailableBanner(
-    onPatchClick: () -> Unit
+private fun WarningBanner(
+    icon: ImageVector,
+    title: String,
+    description: String,
+    buttonText: String,
+    buttonIcon: ImageVector,
+    onClick: () -> Unit,
+    isError: Boolean = false
 ) {
+    val containerColor = if (isError) {
+        MaterialTheme.colorScheme.errorContainer
+    } else {
+        MaterialTheme.colorScheme.primaryContainer
+    }
+
+    val contentColor = if (isError) {
+        MaterialTheme.colorScheme.onErrorContainer
+    } else {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    }
+
     MorpheCard(
         cornerRadius = 12.dp,
         elevation = 2.dp
@@ -410,7 +465,7 @@ private fun PatchUpdateAvailableBanner(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primaryContainer)
+                .background(containerColor)
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -421,32 +476,32 @@ private fun PatchUpdateAvailableBanner(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Update,
+                    imageVector = icon,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = contentColor,
                     modifier = Modifier.size(20.dp)
                 )
                 Text(
-                    text = stringResource(R.string.home_app_info_patch_update_available),
+                    text = title,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = contentColor
                 )
             }
 
             // Description
             Text(
-                text = stringResource(R.string.home_app_info_patch_update_available_description),
+                text = description,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.9f),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                color = contentColor.copy(alpha = 0.9f),
+                textAlign = TextAlign.Center
             )
 
-            // Patch button
+            // Action button
             ActionButton(
-                text = stringResource(R.string.repatch),
-                icon = Icons.Outlined.Refresh,
-                onClick = onPatchClick,
+                text = buttonText,
+                icon = buttonIcon,
+                onClick = onClick,
                 isPrimary = true,
                 isHighlighted = true,
                 modifier = Modifier.fillMaxWidth()
@@ -616,7 +671,7 @@ private fun ActionsSection(
     val destructiveActions = mutableListOf<ActionItem>()
 
     // Primary actions
-    if (!hasUpdate) { // Hide the Patch button if there is an update banner with its own button
+    if (!hasUpdate && !viewModel.isAppDeleted) { // Hide the Patch button if there is an banner with its own button
         primaryActions.add(
             ActionItem(
                 text = stringResource(R.string.patch),
@@ -924,6 +979,8 @@ private fun UninstallConfirmDialog(
 private fun DeleteConfirmDialog(
     show: Boolean,
     isSavedOnly: Boolean,
+    appInfo: PackageInfo?,
+    appLabel: String?,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -942,12 +999,66 @@ private fun DeleteConfirmDialog(
             )
         }
     ) {
-        Text(
-            text = if (isSavedOnly) stringResource(R.string.home_app_info_saved_app_delete_confirmation)
-            else stringResource(R.string.home_app_info_saved_copy_delete_confirmation),
-            style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // App Icon
+            AppIcon(
+                packageInfo = appInfo,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp)
+            )
+
+            // App Name
+            if (appLabel != null) {
+                Text(
+                    text = appLabel,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = LocalDialogTextColor.current,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // What will be deleted
+            DeletionWarningBox(
+                warningText = stringResource(R.string.home_app_info_remove_app_warning)
+            ) {
+                if (isSavedOnly) {
+                    // Saved app - only delete patched APK
+                    DeleteListItem(
+                        icon = Icons.Outlined.Delete,
+                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                    )
+                } else {
+                    // Full deletion
+                    DeleteListItem(
+                        icon = Icons.Outlined.Storage,
+                        text = stringResource(R.string.home_app_info_delete_item_database)
+                    )
+                    DeleteListItem(
+                        icon = Icons.Outlined.Android,
+                        text = stringResource(R.string.home_app_info_delete_item_patched_apk)
+                    )
+                    DeleteListItem(
+                        icon = Icons.Outlined.FilePresent,
+                        text = stringResource(R.string.home_app_info_delete_item_original_apk)
+                    )
+                }
+            }
+
+            // Description
+            if (!isSavedOnly) {
+                InfoBadge(
+                    text = stringResource(R.string.home_app_info_delete_preservation_note),
+                    style = InfoBadgeStyle.Warning,
+                    icon = Icons.Outlined.Info,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
     }
 }
 

@@ -32,7 +32,6 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Tens l\'APK original sense pedaços?</string>
-    <string name="home_apk_availability_dialog_description_simple">Per aplicar un pedaç a %1$s, necessites la versió %2$s (sense aplicar)</string>
     <string name="home_apk_availability_yes">Sí, la tinc</string>
     <string name="home_apk_availability_no">No, ajuda\'m a trobar-la</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -62,7 +61,7 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
@@ -70,6 +69,7 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -83,6 +83,7 @@
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Quant a</string>
     <!-- Shared strings -->

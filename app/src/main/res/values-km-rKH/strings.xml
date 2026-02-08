@@ -33,7 +33,6 @@
     <string name="sources_management_date_updated">បានអាប់ដេត</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_add_source">បន្ថែមប្រភពបំណះ</string>
-    <string name="sources_dialog_delete_confirm_message">លុបប្រភព \"%s\"? នេះមិនអាចធ្វើឡើងវិញបានទេ។</string>
     <string name="sources_dialog_remote_url">URL ប្រភព</string>
     <string name="sources_dialog_local_file">រើសឯកសារប្រភពបំណះ</string>
     <string name="sources_update_unavailable">មិនទាន់មានការអាប់ដេតឡើយ</string>
@@ -56,7 +55,7 @@
     <!-- Space flight communications callout. -->
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background_none">ឥតមាន</string>
@@ -68,6 +67,7 @@
     <string name="settings_appearance_app_icon_selector_title">អាយខនកម្មវិធី</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -83,6 +83,7 @@
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">អំពីកម្មវិធីនេះ</string>
     <!-- Shared strings -->

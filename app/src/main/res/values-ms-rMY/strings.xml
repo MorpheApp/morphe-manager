@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="android_11_bug_dialog_title">Pepijat Android 11</string>
-    <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif.</string>
+    <string name="android_11_bug_dialog_description">Kebenaran pemasangan aplikasi mesti diberikan lebih awal untuk mengelakkan pepijat dalam sistem Android 11 yang akan menjejaskan pengalaman pengguna secara negatif</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_error">Kemas kini gagal</string>
     <string name="home_update_error_subtitle">Semak sambungan internet kamu dan cuba lagi</string>
@@ -35,7 +35,6 @@
     <string name="sources_dialog_display_name">Nama paparan</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Adakah kamu mempunyai APK asal yang belum ditampal?</string>
-    <string name="home_apk_availability_dialog_description_simple">Untuk menampal %1$s, kamu memerlukan versi %2$s (belum ditampal)</string>
     <string name="home_apk_availability_yes">Ya, saya mempunyainya</string>
     <string name="home_apk_availability_no">Tidak, bantu saya mencarinya</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -51,19 +50,17 @@
     <string name="home_download_instructions_continue">Teruskan ke APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Pilih APK yang telah kamu muat turun</string>
-    <string name="home_file_picker_prompt_description">Sekarang pilih %1$s fail APK yang kamu baru muat turun. </string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Buka fail APK yang saya muat turun</string>
     <string name="home_recommended_version">Versi yang disyorkan</string>
     <string name="home_selected_version">Versi terpilih</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Versi tidak disokong</string>
-    <string name="home_dialog_unsupported_version_dialog_description">APK ini bukan versi aplikasi yang disyorkan. Aplikasi mungkin gagal berfungsi jika diteruskan. </string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Teruskan juga</string>
     <string name="home_dialog_wrong_package_title">Pakej yang dipilih salah</string>
-    <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal.</string>
-    <string name="home_dialog_expected_package">Pakej yang dijangkakan</string>
-    <string name="home_dialog_selected_package">Pakej terpilih</string>
+    <string name="home_dialog_wrong_package_description">APK yang dipilih bukan untuk aplikasi yang anda ingin tampal</string>
+    <string name="home_dialog_expected_package">Pakej yang dijangkakan:</string>
+    <string name="home_dialog_selected_package">Pakej terpilih:</string>
     <!-- Patch Options -->
     <!-- Adaptive Icon Creator -->
     <!-- Header Creator -->
@@ -71,7 +68,7 @@
     <string name="home_app_info_patches_name_default">Tampalan</string>
     <string name="home_app_info_patches_name_fallback">Tidak dinamakan</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal.</string>
+    <string name="root_install_apk_required">Mod root memerlukan APK asal diinstal pada peranti anda sebelum menampal</string>
     <string name="root_gmscore_excluded">Tampalan sokongan GmsCore dikecualikan dalam mod root</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
@@ -117,7 +114,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
     <string name="patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- Settings - Appearance Tab - Theme -->
@@ -125,6 +122,7 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -142,10 +140,12 @@
     <!-- Settings - System Tab - Storage Management Section -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Settings - System Tab - About Section -->
     <!-- Shared strings -->
     <string name="patches">Tampalan</string>
     <string name="settings">Pengaturan</string>
     <string name="error_">Ralat</string>
     <string name="not_selected">Tidak dipilih</string>
+    <string name="no_network_toast">Tiada sambungan internet tersedia</string>
 </resources>

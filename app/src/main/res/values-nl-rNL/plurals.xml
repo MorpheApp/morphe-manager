@@ -8,4 +8,20 @@
         <item quantity="one">Voer %d patch uit</item>
         <item quantity="other">Voer %d patches uit</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK-bestand</item>
+        <item quantity="other">%d APK-bestanden</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d opgeslagen selectie</item>
+        <item quantity="other">%d opgeslagen selecties</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Uitgeschakeld %d bron</item>
+        <item quantity="other">Uitgeschakeld %d bronnen</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Ingeschakeld %d bron</item>
+        <item quantity="other">Ingeschakeld %d bronnen</item>
+    </plurals>
 </resources>

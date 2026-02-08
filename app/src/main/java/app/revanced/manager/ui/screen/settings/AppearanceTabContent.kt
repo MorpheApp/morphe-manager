@@ -14,12 +14,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.ui.screen.settings.appearance.*
@@ -47,9 +50,14 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
+    val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
 
     var showLanguageDialog by remember { mutableStateOf(false) }
     var showTranslationInfoDialog by remember { mutableStateOf(false) }
+
+    // Localized strings for accessibility
+    val enabledState = stringResource(R.string.enabled)
+    val disabledState = stringResource(R.string.disabled)
 
     Column(
         modifier = Modifier
@@ -102,6 +110,32 @@ fun AppearanceTabContent(
                 }
             }
         )
+
+        // Parallax Effect Toggle
+        if (backgroundType != BackgroundType.NONE) {
+            RichSettingsItem(
+                onClick = {
+                    scope.launch {
+                        themeViewModel.prefs.enableBackgroundParallax.update(!enableParallax)
+                    }
+                },
+                showBorder = true,
+                title = stringResource(R.string.settings_appearance_parallax_effect),
+                subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.ScreenRotation)
+                },
+                trailingContent = {
+                    Switch(
+                        checked = enableParallax,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (enableParallax) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
 
         // Accent Color Section
         SectionTitle(
@@ -203,7 +237,7 @@ private fun LanguageSection(
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
-                        text = currentLanguageOption?.flag ?: "🌐",
+                        text = currentLanguageOption?.flag ?: "🌍",
                         style = MaterialTheme.typography.titleLarge
                     )
                 }

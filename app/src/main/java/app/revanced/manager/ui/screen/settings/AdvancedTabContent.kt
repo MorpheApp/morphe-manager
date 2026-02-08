@@ -17,6 +17,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.manager.PreferencesManager
+import app.revanced.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.revanced.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
@@ -40,6 +41,8 @@ fun AdvancedTabContent(
     // Track if expert mode was just enabled to show the notice
     var showExpertModeNotice by remember { mutableStateOf(false) }
     var previousExpertMode by remember { mutableStateOf(useExpertMode) }
+    val gitHubPat by prefs.gitHubPat.getAsState()
+    val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
 
     // Detect expert mode changes
     LaunchedEffect(useExpertMode) {
@@ -125,6 +128,20 @@ fun AdvancedTabContent(
             }
         )
 
+        // GitHub PAT (Expert mode only)
+        if (useExpertMode) {
+            GitHubPatSettingsItem(
+                currentPat = gitHubPat,
+                currentIncludeInExport = includeGitHubPatInExports,
+                onSave = { pat, include ->
+                    scope.launch {
+                        prefs.gitHubPat.update(pat)
+                        prefs.includeGitHubPatInExports.update(include)
+                    }
+                }
+            )
+        }
+
         // Strip unused native libraries (Expert mode only)
         if (useExpertMode) {
             RichSettingsItem(
@@ -151,8 +168,8 @@ fun AdvancedTabContent(
             )
         }
 
+        // In Expert mode Notice shown instead of patch options
         if (useExpertMode && showExpertModeNotice) {
-            // In Expert mode Notice shown instead of patch options
             InfoBadge(
                 icon = Icons.Outlined.Info,
                 text = stringResource(R.string.settings_advanced_patch_options_expert_mode_notice),

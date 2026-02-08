@@ -3,18 +3,18 @@
     <!-- Home Screen -->
     <string name="home_other_apps">그 외의 앱</string>
     <string name="home_not_patched_yet">아직 패치되지 않음</string>
-    <string name="home_no_patches_available">사용 가능한 패치가 없습니다</string>
-    <string name="home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요.</string>
+    <string name="home_no_patches_available">사용 가능한 패치 없음</string>
+    <string name="home_default_source_disabled">Morphe 패치 소스가 비활성화되어 있습니다. 패치 소스 시트에서 활성화하거나 전문가 모드를 사용하세요</string>
     <string name="android_11_bug_dialog_title">Android 11 버그</string>
-    <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다.</string>
+    <string name="android_11_bug_dialog_description">사용자 환경에 부정적인 영향을 미치는 Android 11 시스템 버그를 방지하려면 앱 설치 권한을 미리 부여해야 합니다</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">업데이트 사용 가능</string>
-    <string name="home_update_available_subtitle">새로운 버전 설치 준비 완료</string>
+    <string name="home_update_available">매니저 업데이트 사용 가능</string>
+    <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">인터넷 연결 상태를 확인하고 다시 시도하세요</string>
-    <string name="home_updating_sources">소스를 업데이트하는 중…</string>
+    <string name="home_updating_sources">소스 업데이트 중…</string>
     <string name="home_update_progress">%1$d/%2$d 개의 소스가 처리됨</string>
-    <string name="home_update_success">소스 업데이트 완료</string>
+    <string name="home_update_success">소스 업데이트 완료됨</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_please_wait">잠시만 기다려 주세요…</string>
@@ -23,17 +23,17 @@
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">앱을 다시 전설로 만들 준비가 되셨습니까?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">준비하세요, 패치할 시간입니다</string>
+    <string name="home_greeting_3">꽉 잡으세요, 패치할 시간입니다</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">또 다른 광고 차단된 걸작</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">광고가 싫으신가요? 저도 그래요</string>
+    <string name="home_greeting_5">광고를 보고 싶으세요? 저도 싫어요</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">앱의 동작을 개선해 보죠</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7">오늘의 예보: 패치 확률 100%</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">아쉬움을 놀라움으로 바꿔 볼까요?</string>
+    <string name="home_greeting_8">아쉬움을 놀라움으로 바꿀 준비 되셨나요?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">오늘부터 앱들을 스스로에게서 구해내는 중</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
@@ -42,34 +42,40 @@
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_management_subtitle">%d 개의 소스가 설치됨</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
-    <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
+    <string name="sources_management_failed_to_open_url">URL을 열 수 없음</string>
     <string name="sources_management_date_added">추가됨</string>
     <string name="sources_management_date_updated">업데이트됨</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">표시 이름</string>
+    <string name="sources_dialog_display_name">표시될 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
-    <string name="sources_dialog_duplicate_name_error">이 이름의 패치 소스가 이미 있습니다</string>
-    <string name="sources_dialog_missing_error">이 패치 소스를 업데이트할 수 없습니다.</string>
-    <string name="sources_dialog_disabled_toast">%d 개의 소스를 비활성화하였습니다</string>
-    <string name="sources_dialog_enabled_toast">%d 개의 소스를 활성화하였습니다</string>
+    <string name="sources_dialog_duplicate_name_error">이 이름의 패치 소스가 이미 존재합니다</string>
+    <string name="sources_dialog_missing_error">이 패치 소스를 업데이트할 수 없습니다</string>
     <string name="sources_dialog_view_any_version">모든 버전</string>
     <string name="sources_dialog_view_any_package">모든 패키지</string>
     <string name="sources_dialog_add_source">패치 소스 추가</string>
     <string name="sources_dialog_delete_confirm_message">\'%s\' 소스를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</string>
     <string name="sources_dialog_remote">원격</string>
     <string name="sources_dialog_remote_url">소스 URL</string>
-    <string name="sources_dialog_remote_description">원격 패치 소스에 대한 JSON 엔드포인트 URL을 입력하세요</string>
+    <string name="sources_dialog_remote_url_formats">"예시:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">로컬</string>
     <string name="sources_dialog_local_file">패치 소스 파일 선택</string>
     <string name="sources_dialog_local_file_description">기기 저장소에서 .mpp 패치 소스 파일을 선택하세요</string>
-    <string name="sources_dialog_local_change_file">파일 변경</string>
+    <string name="sources_dialog_local_change_file">파일 변경하기</string>
     <string name="sources_dialog_preinstalled">미리 설치됨</string>
-    <string name="sources_update_success">업데이트를 성공하였습니다</string>
-    <string name="sources_update_unavailable">새로운 업데이트가 없습니다</string>
-    <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
+    <string name="sources_update_success">업데이트 성공</string>
+    <string name="sources_update_unavailable">새 업데이트가 없습니다</string>
+    <string name="sources_download_fail">소스 다운로드 실패: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">패치할 원본 APK가 있나요?</string>
-    <string name="home_apk_availability_dialog_description_simple">\'%1$s\'를 패치하려면, 패치되지 않은 %2$s 버전이 필요합니다</string>
+    <string name="home_apk_availability_dialog_simple">\'%1$s\'를 패치하려면, 다음 버전의 패치되지 않은 APK가 필요합니다:</string>
+    <string name="home_apk_availability_dialog_expert">"패치되지 않은 '%1$s' APK가 있으신가요?
+
+호환 가능한 버전:"</string>
+    <string name="home_apk_availability_recommended_label">권장 버전</string>
+    <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
     <string name="home_apk_availability_yes">네, 가지고 있습니다</string>
     <string name="home_apk_availability_no">아니요, 찾는 데 도움을 주세요</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -77,90 +83,88 @@
     <string name="home_download_instructions_steps_title">설명서:</string>
     <string name="home_download_instructions_step1">아래 \'%1$s\' 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_part1">웹페이지를 아래로 스크롤 한 후에 이 버튼을 탭하세요</string>
-    <string name="home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 탭하세요 😊</string>
+    <string name="home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 눌러주세요 😊</string>
     <string name="home_download_instructions_step3">다운로드가 완료될 때까지 기다리세요&lt;br&gt;APK는 &lt;b&gt;설치하지 마세요&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">다운로드가 완료되면, &lt;b&gt;APK 파일을 설치하세요&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">다운로드가 완료된 후에 이 앱으로 돌아오세요</string>
-    <string name="home_download_instructions_step4_mount">원본 APK를 설치한 후에 이 앱으로 돌아오세요</string>
-    <string name="home_download_instructions_continue">APKMirror.com 으로 이동하기</string>
+    <string name="home_download_instructions_step4">다운로드가 완료된 후에 이 앱으로 다시 돌아오세요</string>
+    <string name="home_download_instructions_step4_mount">원본 APK를 설치한 후에 이 앱으로 다시 돌아오세요</string>
+    <string name="home_download_instructions_continue">APKMirror.com으로 이동하기</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">다운로드된 APK 선택</string>
-    <string name="home_file_picker_prompt_description">다운로드된 \'%1$s\' APK 파일을 선택하세요.</string>
+    <string name="home_file_picker_prompt_title">다운로드된 APK 선택하기</string>
+    <string name="home_file_picker_prompt_description">이제 방금 다운로드된 \'%1$s\' APK 파일을 선택하세요</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">다운로드된 APK 파일 열기</string>
     <string name="home_file_picker_prompt_open_apk">APK 파일 열기</string>
     <string name="home_recommended_version">권장 버전</string>
     <string name="home_selected_version">선택된 버전</string>
     <string name="home_select_apk_title">APK 선택</string>
     <string name="home_select_any_apk_description">아래 버튼을 탭하여 패치할 앱의 APK 파일을 선택하세요</string>
-    <string name="home_invalid_apk">잘못된 APK 파일</string>
+    <string name="home_invalid_apk">APK 파일가 잘못되었음</string>
     <string name="home_no_patches_for_app">이 앱에 사용 가능한 패치가 없습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">전문가 모드</string>
-    <string name="expert_mode_subtitle_extended">%1$d/%2$d 개의 패치가 선택되었습니다</string>
-    <string name="expert_mode_search">패치 검색</string>
-    <string name="expert_mode_proceed">패치 진행</string>
+    <string name="expert_mode_subtitle_extended">%2$d 중 %1$d 개의 패치가 선택되었습니다</string>
+    <string name="expert_mode_search">패치 검색하기</string>
+    <string name="expert_mode_proceed">패치 진행하기</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_enable_all">모두 활성화</string>
-    <string name="expert_mode_no_results">패치된 앱을 찾을 수 없습니다</string>
-    <string name="expert_mode_no_patches">사용 가능한 패치가 없습니다</string>
+    <string name="expert_mode_no_results">패치를 찾을 수 없음</string>
+    <string name="expert_mode_no_patches">사용 가능한 패치 없음</string>
     <string name="expert_mode_multiple_bundles_warning_title">여러 패치 소스가 선택됨</string>
     <string name="expert_mode_multiple_bundles_warning_message">"여러 패치 소스에서 패치를 선택하였습니다. 호환성 문제나 예상되지 않은 동작이 발생할 수 있습니다.
 
 그래도 계속하시겠습니까?"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">지원되지 않는 버전</string>
-    <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속하면 앱이 제대로 작동하지 않을 수 있습니다.</string>
-    <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
+    <string name="home_dialog_unsupported_version_dialog_description">이 APK는 권장 앱 버전이 아닙니다. 계속 진행하면 앱이 제대로 작동하지 않을 수 있습니다</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행하기</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
     <string name="home_dialog_wrong_package_title">잘못된 패키지가 선택됨</string>
-    <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다.</string>
-    <string name="home_dialog_expected_package">예상된 패키지</string>
-    <string name="home_dialog_selected_package">선택된 패키지</string>
+    <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
+    <string name="home_dialog_expected_package">예상된 패키지:</string>
+    <string name="home_dialog_selected_package">선택된 패키지:</string>
     <!-- Patch Options -->
     <string name="custom_color">커스텀 색상</string>
     <string name="hex_color">헥스 색상 코드</string>
     <string name="patch_option_instructions">설명서</string>
-    <string name="patch_option_enter_value">값 입력</string>
-    <string name="patch_option_enter_number">숫자 입력</string>
-    <string name="patch_option_enter_decimal">소수점 입력</string>
-    <string name="patch_option_pick_folder">폴더 선택</string>
+    <string name="patch_option_enter_value">값 입력하기</string>
+    <string name="patch_option_enter_number">숫자 입력하기</string>
+    <string name="patch_option_enter_decimal">소수점 입력하기</string>
+    <string name="patch_option_pick_folder">폴더 선택하기</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">적응형 아이콘 만들기</string>
-    <string name="adaptive_icon_create">아이콘 만들기</string>
-    <string name="adaptive_icon_instructions">전면 이미지 및 배경 색상을 선택하고, 손가락으로 확대하거나 축소하여 미리보기를 조정하세요</string>
+    <string name="adaptive_icon_create">적응형 아이콘 만들기</string>
+    <string name="adaptive_icon_instructions">이미지 및 배경 색상을 선택하고, 손가락으로 확대하거나 축소하여 미리보기를 조정하세요</string>
     <string name="adaptive_icon_preview">미리보기</string>
-    <string name="adaptive_icon_select_foreground">전면 이미지 선택</string>
-    <string name="adaptive_icon_change_foreground">전면 이미지 변경</string>
+    <string name="adaptive_icon_select_image">이미지 선택하기</string>
+    <string name="adaptive_icon_change_image">이미지 변경하기</string>
     <string name="adaptive_icon_background_color">배경 색상</string>
     <string name="adaptive_icon_reset_transform">위치 및 크기 초기화</string>
-    <string name="adaptive_icon_safe_zone_inner">안전 영역 (항상 표시됨)</string>
+    <string name="adaptive_icon_safe_zone_inner">안전한 영역 (항상 표시됨)</string>
     <string name="adaptive_icon_safe_zone_outer">마스크 영역 (잘릴 수 있음)</string>
-    <string name="adaptive_icon_created_success">적응형 아이콘을 성공적으로 만들었습니다</string>
+    <string name="adaptive_icon_created_success">적응형 아이콘이 성공적으로 만들어짐</string>
     <string name="adaptive_icon_creation_failed">적응형 아이콘을 만들 수 없습니다</string>
-    <string name="adaptive_icon_create_new">새로운 아이콘 만들기</string>
     <string name="adaptive_icon_folder_explanation">만들어진 아이콘 파일이 저장될 \'morphe_branding/morphe_icons\' 폴더의 위치를 ​​선택하세요</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">커스텀 헤더 만들기</string>
-    <string name="header_creator_create">헤더 만들기</string>
-    <string name="header_creator_create_new">새로운 헤더 만들기</string>
+    <string name="header_creator_create">커스텀 헤더 만들기</string>
     <string name="header_creator_instructions">밝은 테마와 어두운 테마에 사용될 이미지를 선택한 다음에 손가락으로 확대하거나 축소하여 이미지 크기를 조절하세요</string>
     <string name="header_creator_light_theme">밝은 테마 헤더</string>
     <string name="header_creator_dark_theme">어두운 테마 헤더</string>
-    <string name="header_creator_select_light">밝은 테마 이미지 선택</string>
-    <string name="header_creator_change_light">밝은 테마 이미지 변경</string>
-    <string name="header_creator_select_dark">어두운 테마 이미지 선택</string>
-    <string name="header_creator_change_dark">어두운 테마 이미지 변경</string>
-    <string name="header_creator_no_image">선택된 이미지가 없습니다</string>
-    <string name="header_creator_success">헤더를 성공적으로 만들었습니다</string>
+    <string name="header_creator_no_image">선택된 이미지 없음</string>
+    <string name="header_creator_success">헤더가 성공적으로 만들어짐</string>
     <string name="header_creator_failed">헤더를 만들 수 없습니다</string>
     <string name="header_creator_folder_explanation">만들어진 헤더 파일이 저장될 \'morphe_branding/morphe_header\' 폴더의 위치를 ​​선택하세요</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 언인스톨하시겠습니까?</string>
-    <string name="home_app_info_saved_app_delete_confirmation">저장된 앱을 삭제하시겠습니까?</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">저장된 사본을 삭제하시겠습니까?</string>
+    <string name="home_app_info_uninstall_app_confirmation">이 앱을 정말 제거하시겠습니까?</string>
+    <string name="home_app_info_remove_app_warning">다음 항목들이 영구적으로 삭제됩니다:</string>
+    <string name="home_app_info_delete_item_database">데이터베이스 엔트리</string>
+    <string name="home_app_info_delete_item_patched_apk">패치된 APK 파일</string>
+    <string name="home_app_info_delete_item_original_apk">원본 APK 파일</string>
+    <string name="home_app_info_delete_preservation_note">패치 선택 목록 및 옵션이 향후 패치를 위해 저장됩니다</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">저장된 선택 목록에서 %d 개의 오래된 패치를 제거하였습니다</string>
     <string name="home_app_info_patches_name_default">패치</string>
     <string name="home_app_info_patches_name_fallback">이름 없음</string>
-    <string name="home_app_info_patches_replace_fail">패치를 가져올 수 없습니다: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">원본 APK를 찾을 수 없습니다. 이 앱을 다시 패치할 수 없습니다.</string>
+    <string name="home_app_info_patches_replace_fail">패치 가져오기 실패: %s</string>
+    <string name="home_app_info_repatch_no_original_apk">원본 APK를 찾을 수 없습니다. 이 앱을 다시 패치할 수 없습니다</string>
     <string name="home_app_info_repatch_requires_original">다시 패치하려면 원본 APK 파일이 필요합니다</string>
     <string name="home_app_info_original_package_name">원본 패키지 이름</string>
     <string name="home_app_info_applied_patches">적용된 패치</string>
@@ -169,30 +173,32 @@
     <string name="home_app_info_install_type_custom_installer">커스텀 설치 프로그램</string>
     <string name="home_app_info_install_type_system_installer">시스템 설치 프로그램</string>
     <string name="home_app_info_patched_at">패치됨</string>
-    <string name="home_app_info_patch_update_available">업데이트 사용 가능</string>
-    <string name="home_app_info_patch_update_available_description">새로운 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요.</string>
+    <string name="home_app_info_patch_update_available">패치 업데이트 사용 가능</string>
+    <string name="home_app_info_patch_update_available_description">새 버전의 패치가 있습니다. 최신 개선 사항 및 수정 사항을 적용하려면 앱을 다시 패치하세요</string>
+    <string name="home_app_info_app_deleted_warning">앱이 매니저 외부에서 제거되었습니다</string>
+    <string name="home_app_info_app_deleted_description">앱은 관리자 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다.</string>
-    <string name="root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됩니다.</string>
+    <string name="root_install_apk_required">루트 모드에서는 패치 전에 원본 APK가 기기에 설치되어 있어야 합니다</string>
+    <string name="root_gmscore_excluded">루트 모드에서는 \'GmsCore support\' 패치가 제외됨</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">오류를 클립보드에 복사하였습니다</string>
+    <string name="patcher_error_copied">오류 정보를 클립보드에 복사됨</string>
     <string name="patcher_error_log">오류 로그</string>
     <string name="patcher_error_technical">기술 세부 정보</string>
     <string name="patcher_patches_progress">패치 %1$d / %2$d  개</string>
     <string name="patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
-    <string name="patcher_installing_subtitle">거의 준비 완료! 🎸</string>
+    <string name="patcher_installing_subtitle">신나게 놀 준비가 거의 다 됐어요🎸</string>
     <string name="patcher_success_title">모두 완료! 🎉</string>
     <string name="patcher_success_subtitle">앱을 패치 및 설치하였습니다!</string>
     <string name="patcher_complete_title">패치 완료! ✨</string>
     <string name="patcher_failed_title">이런! 오류가 발생하였습니다</string>
     <string name="patcher_failed_subtitle">아래에서 오류 세부 정보를 확인하세요</string>
     <string name="patcher_failed_dialog_title">패치 실패</string>
-    <string name="patcher_unknown_error">알 수 없는 오류가 발생하였습니다</string>
+    <string name="patcher_unknown_error">알 수 없는 오류가 발생했음</string>
     <string name="patcher_conflict_title">패키지 충돌</string>
-    <string name="patcher_conflict_subtitle">기존 버전을 언인스톨해야 합니다</string>
+    <string name="patcher_conflict_subtitle">기존 버전을 제거해야 합니다</string>
     <string name="patcher_install_error_title">설치 오류</string>
-    <string name="patcher_install_error_subtitle">언인스톨한 후에 다시 설치하세요</string>
-    <string name="patcher_ready_to_install_subtitle">설치하려면 아래 버튼을 탭하세요</string>
+    <string name="patcher_install_error_subtitle">앱을 제거한 후에 다시 설치해보세요</string>
+    <string name="patcher_ready_to_install_subtitle">설치하시려면 아래 버튼을 탭하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">준비하는 중</string>
@@ -206,12 +212,12 @@
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">패치를 진행하는 중…</string>
     <string name="patcher_notification_text">탭하여 패처로 돌아가기</string>
-    <string name="patcher_stop_confirm_title">패처 중지</string>
+    <string name="patcher_stop_confirm_title">패처 중지하기</string>
     <string name="patcher_stop_confirm_description">패치 프로세스를 중지하시겠습니까?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">앱을 멋지게 변환 중… 🏆</string>
-    <string name="patcher_message_2">오래된 앱에 새로운 기능 가르치는 중… 🎩</string>
-    <string name="patcher_message_3">앱을 디지털로 정비 중… 🔧</string>
+    <string name="patcher_message_2">오래된 앱에 새 기능 가르치는 중… 🎩</string>
+    <string name="patcher_message_3">앱에 디지털 튜닝 중… 🔧</string>
     <string name="patcher_message_4">디지털 마법을 부리는 중… ☕</string>
     <string name="patcher_message_5">커피 타임 추천… ☕</string>
     <string name="patcher_message_6">밖을 보세요, 날씨가 좋아요… 🌤️</string>
@@ -221,8 +227,8 @@
     <string name="patcher_message_9">패치되지 않은 앱의 버그 수정 중… 🪲</string>
     <string name="patcher_message_10">훌륭한 패치는 기다릴 가치가 있습니다… ⏳</string>
     <string name="patcher_message_11">픽셀이 반짝일 때까지 연마 중… 💎</string>
-    <string name="patcher_message_12">\"패치를 진행하는 중\" 표시등이 꺼질 때까지 자리에서 기다려 주세요… 💺✈️</string>
-    <string name="patcher_message_13">신선하고 뜨거운 패치된 앱을 요리 중… 🍳</string>
+    <string name="patcher_message_12">기장님이 \"패치 진행 중\" 표시등을 끌 때까지 자리에서 대기해 주세요… 💺✈️</string>
+    <string name="patcher_message_13">패치된 앱을 뜨겁고 신선하게 요리 중… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">바이트코드와 정중하게 협상 중… 🤝</string>
     <!-- Space flight communications callout. -->
@@ -234,26 +240,25 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">앱에서 열이 좀 나네요, 유일한 처방은 더 많은 패치뿐입니다… 🩺🔔</string>
     <string name="patcher_message_20">잡소리를 삭제 중, 잠시만 기다려 주세요… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">패치를 적용하는 중</string>
-    <string name="applying_patch">\'%s\' 적용 중</string>
     <string name="failed_to_execute_patch">\'%s\'을 적용할 수 없습니다</string>
-    <string name="patched_app_saved_toast">패치된 앱을 나중을 위해 저장하였습니다</string>
+    <string name="patched_app_saved_toast">패치된 앱은 나중을 위해 저장됨</string>
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="download_apk">APK 파일을 다운로드하는 중</string>
-    <string name="plugin_activity_dialog_body">이 플러그인을 계속 사용하려면 사용자 상호작용이 필요합니다.</string>
-    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$d\'로 종료하였습니다.</string>
-    <string name="install_app_success">성공적으로 설치하였습니다</string>
-    <string name="install_app_fail">앱을 설치할 수 없습니다: %s</string>
-    <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요.</string>
-    <string name="save_apk_success">APK를 저장하였습니다</string>
-    <string name="saved_app_export_failed">패치된 앱을 내보낼 수 없습니다</string>
-    <string name="saved_app_removed_toast">저장된 패치된 앱을 삭제하였습니다</string>
-    <string name="saved_app_copy_removed_toast">저장된 사본을 삭제하였습니다</string>
-    <string name="saved_app_launch_unavailable">열기 전에 앱을 설치하세요.</string>
+    <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
+    <string name="patcher_process_exit_message">패처 프로세스를 코드 \'%1$d\'로 종료하였습니다</string>
+    <string name="install_app_success">성공적으로 설치됨</string>
+    <string name="install_app_fail">앱 설치 실패: %s</string>
+    <string name="install_timeout_message">설치가 완료되지 않았습니다. 시스템 설치 프로그램 다이얼로그를 확인하고 다시 시도하세요</string>
+    <string name="save_apk_success">APK 저장됨</string>
+    <string name="saved_app_export_failed">패치된 앱 내보내기 실패</string>
+    <string name="saved_app_removed_toast">저장된 패치된 앱 제거됨</string>
+    <string name="saved_app_copy_removed_toast">저장된 사본 제거됨</string>
+    <string name="saved_app_launch_unavailable">열기 전에 앱을 설치하세요</string>
     <string name="package_name">패키지 이름</string>
-    <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
-    <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
+    <string name="failed_to_mount">마운트 실패: %s</string>
+    <string name="failed_to_unmount">마운트 해제 실패: %s</string>
     <!-- Settings -->
     <string name="appearance">디자인</string>
     <string name="advanced">고급</string>
@@ -262,24 +267,26 @@
     <string name="settings_appearance_background">배경 애니메이션</string>
     <string name="settings_appearance_background_circles">원</string>
     <string name="settings_appearance_background_rings">링</string>
-    <string name="settings_appearance_background_waves">파동</string>
+    <string name="settings_appearance_background_mesh">그물망</string>
     <string name="settings_appearance_background_space">우주</string>
     <string name="settings_appearance_background_shapes">도형</string>
     <string name="settings_appearance_background_snow">눈송이</string>
     <string name="settings_appearance_background_none">없음</string>
+    <string name="settings_appearance_parallax_effect">페럴랙스 효과</string>
+    <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">테마</string>
     <string name="settings_appearance_system">시스템</string>
-    <string name="settings_appearance_light">밝은</string>
-    <string name="settings_appearance_dark">어두운</string>
-    <string name="settings_appearance_black">검은</string>
+    <string name="settings_appearance_light">밝음</string>
+    <string name="settings_appearance_dark">어두움</string>
+    <string name="settings_appearance_black">검정색</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">강조 색상</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">앱 언어</string>
     <string name="settings_appearance_app_language_current">현재 언어</string>
     <string name="settings_appearance_translations_info_title">일부 언어의 번역이 누락되거나 불완전할 수 있습니다</string>
-    <string name="settings_appearance_translations_info_text">새로운 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
+    <string name="settings_appearance_translations_info_text">새 언어를 번역하거나 기존 번역을 개선하려면 %s 를 방문하세요</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">앱 아이콘</string>
     <string name="settings_appearance_app_icon_default">기본값</string>
@@ -288,19 +295,30 @@
     <string name="settings_appearance_app_icon_dark_1">바다</string>
     <string name="settings_appearance_app_icon_dark_2">공허</string>
     <string name="settings_appearance_app_icon_dark_3">남색</string>
-    <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경?</string>
+    <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경할까요?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">\'%1$s\'로 변경하고 다시 시작하시겠습니까?</string>
-    <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경</string>
+    <string name="settings_appearance_app_icon_change_dialog_confirm">앱 아이콘 변경하기</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">업데이트</string>
     <string name="settings_advanced_updates_use_prereleases">Pre-release 버전 사용하기</string>
-    <string name="settings_advanced_updates_use_prereleases_description">새로운 패치 및 매니저 기능을 미리 사용해 보세요</string>
+    <string name="settings_advanced_updates_use_prereleases_description">새 패치 및 매니저 기능을 미리 사용해 보세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
     <string name="settings_advanced_expert_mode_description">고급 기능과 커스텀 옵션을 활성화합니다</string>
-    <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 삭제</string>
+    <string name="settings_advanced_strip_unused_libs">사용되지 않는 라이브러리 제거</string>
     <string name="settings_advanced_strip_unused_libs_description">이 기기에서 지원되지 않는 CPU 아키텍처에 대한 네이티브 라이브러리를 패치된 앱에서 삭제합니다</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub 개인 액세스 토큰</string>
+    <string name="settings_advanced_github_pat_description">풀 리퀘스트 번들에 필요합니다</string>
+    <string name="settings_advanced_github_pat_configured">토큰 구성됨</string>
+    <string name="settings_advanced_github_pat_how_to_get">토큰 얻는 방법</string>
+    <string name="settings_advanced_github_pat_dialog_title">GitHub 개인 액세스 토큰 설정</string>
+    <string name="settings_advanced_github_pat_dialog_description">풀 리퀘스트를 외부 소스로 사용하기 위해 GitHub 개인 액세스 토큰이 필요합니다.
+GitHub.com 에서 public_repo 권한이 포함된 개인 액세스 토큰을 생성하세요</string>
+    <string name="settings_advanced_github_pat_export_include_label">설정 내보내기에 포함</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">내보낼 매니저 설정에 이 개인 액세스 토큰을 포함합니다</string>
+    <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">패치 옵션</string>
     <string name="settings_advanced_patch_options_youtube_description">테마, 브랜딩, 헤더 그리고 Shorts 옵션</string>
@@ -316,14 +334,14 @@
     <string name="settings_advanced_patch_options_loading">패치 옵션을 불러오는 중 …</string>
     <string name="settings_advanced_patch_options_waiting_for_source">패치 소스가 업데이트될 때까지 기다려 주세요</string>
     <string name="settings_advanced_patch_options_load_error">패치 옵션을 불러올 수 없습니다</string>
-    <string name="settings_advanced_patch_options_no_available">이 패치에 사용 가능한 옵션이 없습니다</string>
+    <string name="settings_advanced_patch_options_no_available">이 패치에 사용 가능한 옵션 없음</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">커스텀 브랜딩</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">앱 표시 이름을 변경해 보세요</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">앱이 표시될 이름을 변경해 보세요</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">앱 이름</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">커스텀 앱 이름 입력하기</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">커스텀 앱 아이콘</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"커스텀 앱 아이콘으로 사용될 이미지가 있는 폴더.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"커스텀 앱 아이콘으로 사용할 이미지가 포함된 폴더입니다.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - mipmap-mdpi
@@ -348,8 +366,8 @@ morphe_adaptive_monochrome_custom.xml
 morphe_notification_icon_custom.xml"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">커스텀 헤더 로고</string>
-    <string name="settings_advanced_patch_options_custom_header_description">헤더 로그를 변경해 보세요</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더.
+    <string name="settings_advanced_patch_options_custom_header_description">헤더 로고를 변경해 보세요</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더입니다.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
 - drawable-hdpi
@@ -369,45 +387,45 @@ morphe_header_custom_dark.png
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_features">Shorts 기능 숨기기</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Shorts 앱 바로가기 숨기기</string>
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">앱 아이콘 길게 탭하기 메뉴에서 Shorts를 삭제합니다</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">앱 아이콘 길게 탭하기 메뉴에서 Shorts를 제거합니다</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Shorts 위젯 숨기기</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">런처 위젯에서 Shorts 버튼을 삭제합니다</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">런처 위젯에서 Shorts 버튼을 제거합니다</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">설치 프로그램</string>
+    <string name="installer_title">설치 프로그램 선택</string>
     <string name="installer_internal_name">시스템 설치 프로그램</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램를 사용합니다</string>
     <string name="installer_auto_saved_name">루팅된 마운트 설치 프로그램</string>
-    <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다 (루트 권한이 요구됨).</string>
-    <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다.</string>
+    <string name="installer_auto_saved_description">설치된 앱 위에 패치된 APK를 마운트합니다 (루트 권한이 요구됨)</string>
+    <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다</string>
     <string name="installer_option_none">대체 없음</string>
     <string name="installer_none_description">설정된 대체 설치 프로그램이 없습니다</string>
     <string name="installer_status_requires_root">루트 접근이 필요합니다</string>
-    <string name="installer_status_not_supported">이 동작에는 지원되지 않습니다.</string>
-    <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요.</string>
-    <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요.</string>
-    <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 Shizuku 권한을 부여하세요.</string>
-    <string name="installer_mount_warning_install">기본 설치 프로그램이 루팅된 마운트 설치 프로그램으로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다.</string>
-    <string name="installer_mount_mismatch_title">루팅된 마운트 설치 프로그램이 선택 안됨</string>
-    <string name="installer_mount_mismatch_install">이 앱은 루팅된 마운트 설치 프로그램을 사용하여 설치되었습니다. 기본 설치 프로그램을 마운트 작업을 사용하도록 다시 전환한 다음에 마운트하세요.</string>
-    <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요.</string>
-    <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다.</string>
+    <string name="installer_status_not_supported">이 동작에는 지원되지 않습니다</string>
+    <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
+    <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
+    <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 Shizuku 권한을 부여하세요</string>
+    <string name="installer_mount_warning_install">기본 설치 프로그램이 루팅된 마운트 설치 프로그램으로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
+    <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
+    <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
-    <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요.</string>
-    <string name="installer_hint_blocked">Android에서 설치가 차단되었습니다. Play Protect 또는 보안 설정을 확인하세요.</string>
-    <string name="installer_hint_conflict">이 패키지 이름을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 삭제하세요.</string>
-    <string name="installer_hint_incompatible">APK가 이 기기 또는 Android 버전과 호환되지 않습니다.</string>
-    <string name="installer_hint_invalid">APK가 잘못되었거나 손상되어 있습니다.</string>
-    <string name="installer_hint_storage">설치에 필요한 기기 저장소 공간이 충분하지 않습니다.</string>
-    <string name="installer_hint_timeout">설치가 시간 초과되었습니다. 다시 시도하세요.</string>
-    <string name="installer_hint_aborted">설치를 취소하였습니다.</string>
+    <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
+    <string name="installer_hint_blocked">Android에서 설치가 차단되었습니다. Play Protect 또는 보안 설정을 확인하세요</string>
+    <string name="installer_hint_conflict">이 패키지 이름을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
+    <string name="installer_hint_incompatible">APK가 이 기기 또는 Android 버전과 호환되지 않습니다</string>
+    <string name="installer_hint_invalid">APK가 잘못되었거나 손상되어 있습니다</string>
+    <string name="installer_hint_storage">설치에 필요한 저장소 공간이 충분하지 않습니다</string>
+    <string name="installer_hint_timeout">설치가 시간 초과되었습니다. 다시 시도하세요</string>
+    <string name="installer_hint_aborted">설치가 취소되었습니다</string>
     <string name="installer_external_launched">\'%1$s\'을 여는 중 …</string>
-    <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요.</string>
-    <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다.</string>
-    <string name="installer_external_finished_no_change">\'%1$s\'는 앱을 설치하지 않고 완료되었습니다. 설치 프로그램에서 오류 메시지를 확인하고 다시 시도하십시오.</string>
+    <string name="installer_external_timeout">\'%1$s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
+    <string name="installer_external_success">\'%1$s\'이 설치 성공을 보고하였습니다</string>
     <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
-    <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 대신에 사용할 수 있습니다.</string>
-    <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요.</string>
+    <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 표준 설치 프로그램을 사용해 보세요</string>
+    <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
     <string name="installer_use_standard">표준을 사용하세요</string>
+    <string name="settings_prompt_installer_on_install">설치 시 설치 프로그램 안내</string>
+    <string name="settings_prompt_installer_on_install_description">패치된 앱을 설치할 때마다 설치 프로그램 선택 다이얼로그를 표시합니다</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">성능</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
@@ -424,13 +442,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore">키스토어 가져오기</string>
     <string name="settings_system_import_keystore_description">커스텀 키스토어를 가져옵니다</string>
     <string name="settings_system_import_keystore_dialog_title">키스토어 자격 증명 입력</string>
-    <string name="settings_system_import_keystore_dialog_description">키스토어를 가져오려면 키스토어의 자격 증명을 입력해야 합니다.</string>
+    <string name="settings_system_import_keystore_dialog_description">키스토어를 가져오려면 키스토어의 자격 증명을 입력해야 합니다</string>
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
     <string name="settings_system_import_keystore_dialog_button">가져오기</string>
-    <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못되었습니다</string>
-    <string name="settings_system_import_keystore_success">키스토어를 가져왔습니다</string>
-    <string name="settings_system_import_keystore_failed">키스토어를 가져올 수 없습니다</string>
+    <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못됨</string>
+    <string name="settings_system_import_keystore_success">키스토어 가져왔음</string>
+    <string name="settings_system_import_keystore_failed">키스토어 가져오기 실패</string>
     <string name="settings_system_export_keystore">키스토어 내보내기</string>
     <string name="settings_system_export_keystore_description">현재 사용되는 키스토어를 내보냅니다</string>
     <string name="settings_system_export_keystore_unavailable">내보낼 키스토어가 없습니다</string>
@@ -445,7 +463,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_manager_settings">매니저 설정 내보내기</string>
     <string name="settings_system_export_manager_settings_description">매니저 설정을 JSON 파일으로 내보냅니다</string>
     <string name="settings_system_export_manager_settings_fail">매니저 설정을 내보낼 수 없습니다: %s</string>
-    <string name="settings_system_export_manager_settings_success">매니저 설정을 내보냈습니다</string>
+    <string name="settings_system_export_manager_settings_success">매니저 설정 내보냈음</string>
     <!-- Settings - System Tab - Debug Section -->
     <string name="settings_system_debug">디버그</string>
     <string name="settings_system_export_debug_logs">디버그 로그 내보내기</string>
@@ -455,7 +473,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_success">로그를 내보냈습니다</string>
     <!-- Settings - System Tab - Storage Management Section -->
     <string name="settings_system_storage_management">저장소 관리</string>
-    <string name="settings_system_apks_count">%d 개의 APK</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
@@ -470,7 +487,16 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK를 삭제?</string>
-    <string name="settings_system_original_apks_delete_confirm">\'%s\'에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새로운 APK를 제공해야 합니다.</string>
+    <string name="settings_system_original_apks_delete_confirm">\'%s\'에 대한 원본 APK를 삭제하시겠습니까? 다시 패치할 경우에 새 APK를 제공해야 합니다.</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">패치 선택 목록</string>
+    <string name="settings_system_patch_selections_description">저장된 패치 선택 목록 및 옵션을 관리합니다. 앱을 제거한 후에도 유지됩니다</string>
+    <string name="settings_system_patch_selections_description_short">향후 패치를 위해 저장됨</string>
+    <string name="settings_system_patch_selections_empty">저장된 패치 선택 목록이 없습니다</string>
+    <string name="settings_system_patch_selections_has_options">옵션 있음</string>
+    <string name="settings_system_patch_selections_patches_options">패치 옵션</string>
+    <string name="settings_system_patch_selection_delete_title">패치 선택 목록 삭제</string>
+    <string name="settings_system_patch_selection_deleted">패치 선택 목록을 삭제합니다</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>
     <string name="settings_system_share_website">웹사이트 공유하기</string>
@@ -485,6 +511,7 @@ morphe_header_custom_dark.png
     <string name="yes">예</string>
     <string name="no">아니요</string>
     <string name="reset">초기화</string>
+    <string name="confirm">확인하기</string>
     <string name="warning">경고</string>
     <string name="error_">오류</string>
     <string name="retry">다시 시도</string>
@@ -498,7 +525,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">설치되지 않음</string>
     <string name="view">보기</string>
     <string name="search">검색</string>
-    <string name="clear_search">검색 지우기</string>
     <string name="search_no_results">검색 결과가 없습니다</string>
     <string name="any_version">모든</string>
     <string name="enabled">활성화됨</string>
@@ -526,20 +552,22 @@ morphe_header_custom_dark.png
     <string name="install">설치</string>
     <string name="installed">설치됨</string>
     <string name="reinstall">다시 설치</string>
-    <string name="uninstall">언인스톨</string>
+    <string name="uninstall">제거하기</string>
+    <string name="uninstalled">제거됨</string>
     <string name="save">저장</string>
     <string name="saved">저장됨</string>
     <string name="update">업데이트</string>
     <string name="installing_ellipsis">설치하는 중 ...</string>
-    <string name="uninstalling_ellipsis">언인스톨하는 중 ...</string>
     <string name="mounting_ellipsis">마운트하는 중 ...</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중 ...</string>
     <string name="importing_ellipsis">가져오는 중 ...</string>
     <string name="changelog">변경 사항 보기</string>
+    <string name="changelog_description">이 업데이트의 최신 변경 사항을 확인할 수 있습니다</string>
     <string name="changelog_loading">변경 사항을 불러오는 중</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
     <string name="changelog_retry">다시 시도</string>
     <string name="changelog_empty">변경 사항이 없습니다</string>
+    <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
     <string name="update_available">업데이트를 할 수 있음</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
     <string name="update_completed">업데이트하였습니다</string>

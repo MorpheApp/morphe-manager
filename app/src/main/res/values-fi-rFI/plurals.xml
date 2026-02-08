@@ -8,4 +8,20 @@
         <item quantity="one">Suorita %d korjaustiedosto</item>
         <item quantity="other">Suorita %d korjaustiedostoa</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d tiedosto</item>
+        <item quantity="other">%d tiedostoa</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d tallennettu valinta</item>
+        <item quantity="other">%d tallennettua valintaa</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Poistettu %d lähde</item>
+        <item quantity="other">Poistettu %d lähdettä</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Käytössä %d lähde</item>
+        <item quantity="other">Käytössä %d lähdettä</item>
+    </plurals>
 </resources>

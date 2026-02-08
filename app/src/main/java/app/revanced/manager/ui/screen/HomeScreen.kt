@@ -1,9 +1,9 @@
 package app.revanced.manager.ui.screen
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -51,7 +51,6 @@ fun HomeScreen(
     onPatchTriggerHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val pm: PM = koinInject()
     val installedAppRepository: InstalledAppRepository = koinInject()
     val view = LocalView.current
 
@@ -103,30 +102,28 @@ fun HomeScreen(
     var youtubeMusicInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
     var redditInstalledApp by remember { mutableStateOf<InstalledApp?>(null) }
 
-    var youtubePackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
-    var youtubeMusicPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
-    var redditPackageInfo by remember { mutableStateOf<PackageInfo?>(null) }
-
     // Observe all installed apps
     val allInstalledApps by installedAppRepository.getAll().collectAsStateWithLifecycle(emptyList())
 
     // Initialize launchers
-    val openApkPicker = rememberFilePickerWithPermission(
-        mimeTypes = APK_FILE_MIME_TYPES,
-        onFilePicked = { uri -> homeViewModel.handleApkSelection(uri) }
-    )
+    val openApkPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let { homeViewModel.handleApkSelection(it) }
+    }
+
+    val openBundlePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let {
+            homeViewModel.selectedBundleUri = it
+            homeViewModel.selectedBundlePath = it.toString()
+        }
+    }
 
     val installAppsPermissionLauncher = rememberLauncherForActivityResult(
-        RequestInstallAppsContract
+        contract = RequestInstallAppsContract
     ) { homeViewModel.showAndroid11Dialog = false }
-
-    val openBundlePicker = rememberFilePickerWithPermission(
-        mimeTypes = MPP_FILE_MIME_TYPES,
-        onFilePicked = { uri ->
-            homeViewModel.selectedBundleUri = uri
-            homeViewModel.selectedBundlePath = uri.toFilePath()
-        }
-    )
 
     // Update bundle data
     LaunchedEffect(sources, bundleInfo) {
@@ -182,17 +179,39 @@ fun HomeScreen(
     // Update installed apps when data changes
     LaunchedEffect(allInstalledApps) {
         withContext(Dispatchers.IO) {
-            // Load YouTube
             youtubeInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE }
-            youtubePackageInfo = youtubeInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
-
-            // Load YouTube Music
             youtubeMusicInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.YOUTUBE_MUSIC }
-            youtubeMusicPackageInfo = youtubeMusicInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
-
-            // Load Reddit
             redditInstalledApp = allInstalledApps.find { it.originalPackageName == AppPackages.REDDIT }
-            redditPackageInfo = redditInstalledApp?.currentPackageName?.let { pm.getPackageInfo(it) }
+        }
+
+        // Update package info and deleted status
+        homeViewModel.updateInstalledAppsInfo(
+            youtubeInstalledApp,
+            youtubeMusicInstalledApp,
+            redditInstalledApp,
+            allInstalledApps
+        )
+    }
+
+    // Get deleted status
+    val youtubePackageInfo by remember { derivedStateOf { homeViewModel.youtubePackageInfo } }
+    val youtubeMusicPackageInfo by remember { derivedStateOf { homeViewModel.youtubeMusicPackageInfo } }
+    val redditPackageInfo by remember { derivedStateOf { homeViewModel.redditPackageInfo } }
+
+    val appsDeletedStatus by remember { derivedStateOf { homeViewModel.appsDeletedStatus } }
+    val youtubeIsDeleted = youtubeInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
+    val youtubeMusicIsDeleted = youtubeMusicInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
+    val redditIsDeleted = redditInstalledApp?.currentPackageName?.let { appsDeletedStatus[it] } == true
+
+    // Update on refresh
+    LaunchedEffect(isRefreshing) {
+        if (!isRefreshing && allInstalledApps.isNotEmpty()) {
+            homeViewModel.updateInstalledAppsInfo(
+                youtubeInstalledApp,
+                youtubeMusicInstalledApp,
+                redditInstalledApp,
+                allInstalledApps
+            )
         }
     }
 
@@ -258,8 +277,8 @@ fun HomeScreen(
     // All dialogs
     HomeDialogs(
         homeViewModel = homeViewModel,
-        storagePickerLauncher = openApkPicker,
-        openBundlePicker = openBundlePicker
+        storagePickerLauncher = { openApkPicker.launch(APK_FILE_MIME_TYPES) },
+        openBundlePicker = { openBundlePicker.launch(MPP_FILE_MIME_TYPES) }
     )
 
     // Main content with pull-to-refresh
@@ -326,6 +345,9 @@ fun HomeScreen(
                 youtubePackageInfo = youtubePackageInfo,
                 youtubeMusicPackageInfo = youtubeMusicPackageInfo,
                 redditPackageInfo = redditPackageInfo,
+                youtubeIsDeleted = youtubeIsDeleted,
+                youtubeMusicIsDeleted = youtubeMusicIsDeleted,
+                redditIsDeleted = redditIsDeleted,
                 onInstalledAppClick = { app -> showInstalledAppDialog = app.currentPackageName },
                 installedAppsLoading = homeViewModel.installedAppsLoading,
 

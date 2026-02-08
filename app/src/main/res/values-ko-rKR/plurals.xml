@@ -4,6 +4,18 @@
         <item quantity="other">%d 개의 패치</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">%d 개의 패치를 실행하였습니다</item>
+        <item quantity="other">%d개의 패치 실행</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">%d 개의 APK 파일</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="other">%d 개의 저장된 선택 목록</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="other">%d 개의 소스가 비활성화됨</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="other">%d 개의 소스가 활성화됨</item>
     </plurals>
 </resources>

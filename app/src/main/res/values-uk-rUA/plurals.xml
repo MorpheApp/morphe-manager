@@ -2,14 +2,38 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%d патч</item>
-        <item quantity="few">%d патчів</item>
+        <item quantity="few">%d патчі</item>
         <item quantity="many">%d патчів</item>
-        <item quantity="other">%d патчі</item>
+        <item quantity="other">%d патчів</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Виконати %d патч</item>
-        <item quantity="few">Виконати %d патчів</item>
+        <item quantity="few">Виконати %d патчі</item>
         <item quantity="many">Виконати %d патчів</item>
-        <item quantity="other">Виконати %d патчі</item>
+        <item quantity="other">Виконати %d патчів</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK файл</item>
+        <item quantity="few">%d APK файли</item>
+        <item quantity="many">%d APK файлів</item>
+        <item quantity="other">%d APK файлів</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d збережений вибір патчів</item>
+        <item quantity="few">%d збережені вибори патчів</item>
+        <item quantity="many">%d збережених виборів патчів</item>
+        <item quantity="other">%d збережених виборів патчів</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Вимкнено %d джерело</item>
+        <item quantity="few">Вимкнено %d джерела</item>
+        <item quantity="many">Вимкнено %d джерел</item>
+        <item quantity="other">Вимкнено %d джерел</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Увімкнено %d джерело</item>
+        <item quantity="few">Увімкнено %d джерела</item>
+        <item quantity="many">Увімкнено %d джерел</item>
+        <item quantity="other">Увімкнено %d джерел</item>
     </plurals>
 </resources>

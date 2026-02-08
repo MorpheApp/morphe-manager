@@ -8,4 +8,20 @@
         <item quantity="one">Εκτέλεση %d τροποποίησης</item>
         <item quantity="other">Εκτέλεση %d τροποποιήσεων</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d αρχείο APK</item>
+        <item quantity="other">%d αρχεία APK</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d επιλεγμένη αποθήκευση</item>
+        <item quantity="other">%d επιλεγμένες αποθηκεύσεις</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">Απενεργοποιήθηκε %d πηγή</item>
+        <item quantity="other">Απενεργοποιήθηκαν %d πηγές</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">Ενεργοποιήθηκε %d πηγή</item>
+        <item quantity="other">Ενεργοποιήθηκαν %d πηγές</item>
+    </plurals>
 </resources>

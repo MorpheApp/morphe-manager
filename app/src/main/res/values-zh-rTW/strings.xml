@@ -4,9 +4,9 @@
     <string name="home_other_apps">其他應用程序</string>
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的補丁</string>
-    <string name="home_default_source_disabled">Morphe補丁源已禁用。請在補丁源表格中啟用它或使用專家模式。</string>
+    <string name="home_default_source_disabled">Morphe補丁源已禁用。請在補丁源工作表中啟用它或使用專家模式</string>
     <string name="android_11_bug_dialog_title">Android 11 錯誤</string>
-    <string name="android_11_bug_dialog_description">必須預先授予應用程式安裝權限，以避免 Android 11 系統中的錯誤影響使用者體驗。</string>
+    <string name="android_11_bug_dialog_description">應用程序安装权限必须提前授予，以避免Android 11系统中的一个错误，否则将对用户体验产生负面影响</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">有新版本可用</string>
     <string name="home_update_available_subtitle">準備安裝新版本</string>
@@ -49,16 +49,17 @@
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
     <string name="sources_dialog_duplicate_name_error">已存在名為 %s 的修補來源</string>
-    <string name="sources_dialog_missing_error">無法更新此修補來源。</string>
-    <string name="sources_dialog_disabled_toast">已停用 %d 個修補來源</string>
-    <string name="sources_dialog_enabled_toast">已啟用 %d 個修補來源</string>
+    <string name="sources_dialog_missing_error">無法更新此補丁源</string>
     <string name="sources_dialog_view_any_version">任何版本</string>
     <string name="sources_dialog_view_any_package">任何套件</string>
     <string name="sources_dialog_add_source">新增修補來源</string>
-    <string name="sources_dialog_delete_confirm_message">確定要刪除修補來源 \"%s\"？這無法復原。</string>
+    <string name="sources_dialog_delete_confirm_message">刪除源 \"%s\"？無法撤消此操作</string>
     <string name="sources_dialog_remote">遠程</string>
     <string name="sources_dialog_remote_url">修補來源 URL</string>
-    <string name="sources_dialog_remote_description">輸入遠程修補來源的 JSON 端點 URL</string>
+    <string name="sources_dialog_remote_url_formats">"示例：
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">本機</string>
     <string name="sources_dialog_local_file">選擇修補來源檔案</string>
     <string name="sources_dialog_local_file_description">從儲存中選擇 .mpp 修補來源檔案</string>
@@ -69,7 +70,12 @@
     <string name="sources_download_fail">無法下載修補來源：%s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">您有原始的未修補 APK 嗎？</string>
-    <string name="home_apk_availability_dialog_description_simple">要修補 %1$s，你需要 %2$s 版本（未修補）</string>
+    <string name="home_apk_availability_dialog_simple">要修補 %1$s，您需要未修補的 APK，版本為：</string>
+    <string name="home_apk_availability_dialog_expert">"您有未修補的 %1$s APK嗎？
+
+兼容版本："</string>
+    <string name="home_apk_availability_recommended_label">推薦</string>
+    <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_yes">是，我有</string>
     <string name="home_apk_availability_no">否，請協助我尋找</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +91,7 @@
     <string name="home_download_instructions_continue">繼續前往 APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">選取您下載的 APK</string>
-    <string name="home_file_picker_prompt_description">現在請選取您剛下載的 %1$s APK 檔案。</string>
+    <string name="home_file_picker_prompt_description">現在選擇您剛剛下載的%1$s APK 檔案</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">開啟我下載的 APK 檔案</string>
     <string name="home_file_picker_prompt_open_apk">開啟 APK 檔案</string>
     <string name="home_recommended_version">建議版本</string>
@@ -109,12 +115,14 @@
 您確定要繼續嗎？"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">不支援的版本</string>
-    <string name="home_dialog_unsupported_version_dialog_description">此 APK 不是推薦的應用程式版本。繼續可能會導致無法使用的應用程式。</string>
+    <string name="home_dialog_unsupported_version_dialog_description">這個 APK 不是建議的應用程式版本。繼續可能會導致功能無法使用的應用程式</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">仍然繼續</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">兼容版本：</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">不支援</string>
     <string name="home_dialog_wrong_package_title">錯誤的套件已選取</string>
-    <string name="home_dialog_wrong_package_description">選定的 APK 不是您想要修補的應用程式。</string>
-    <string name="home_dialog_expected_package">預期的套件</string>
-    <string name="home_dialog_selected_package">選定的套件</string>
+    <string name="home_dialog_wrong_package_description">您選擇的 APK 不符合您想要修補的應用程式</string>
+    <string name="home_dialog_expected_package">預期套件：</string>
+    <string name="home_dialog_selected_package">選取套件：</string>
     <!-- Patch Options -->
     <string name="custom_color">客製化顏色</string>
     <string name="hex_color">十六進制顏色</string>
@@ -124,43 +132,39 @@
     <string name="patch_option_enter_decimal">輸入小數</string>
     <string name="patch_option_pick_folder">選擇資料夾</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">建立自適應圖示</string>
-    <string name="adaptive_icon_create">建立圖示</string>
+    <string name="adaptive_icon_create">建立自適應圖示</string>
     <string name="adaptive_icon_instructions">選擇前景圖像，選擇背景顏色，並使用捏合手勢調整預覽</string>
     <string name="adaptive_icon_preview">預覽</string>
-    <string name="adaptive_icon_select_foreground">選擇前景圖片</string>
-    <string name="adaptive_icon_change_foreground">更改前景圖片</string>
+    <string name="adaptive_icon_select_image">選取圖像</string>
+    <string name="adaptive_icon_change_image">變更圖像</string>
     <string name="adaptive_icon_background_color">背景顏色</string>
     <string name="adaptive_icon_reset_transform">重設位置和縮放</string>
     <string name="adaptive_icon_safe_zone_inner">安全區域（始終可見）</string>
     <string name="adaptive_icon_safe_zone_outer">遮罩區域（可能會被剪裁）</string>
     <string name="adaptive_icon_created_success">適應式圖示已成功建立</string>
     <string name="adaptive_icon_creation_failed">無法建立適應式圖示</string>
-    <string name="adaptive_icon_create_new">建立新圖示</string>
     <string name="adaptive_icon_folder_explanation">選擇建立\'morphe_branding/morphe_icons\'資料夾的位置，其中包含產生的圖示檔案</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">建立自訂標頭</string>
-    <string name="header_creator_create">建立標頭</string>
-    <string name="header_creator_create_new">建立新標頭</string>
+    <string name="header_creator_create">建立自訂標頭</string>
     <string name="header_creator_instructions">選擇明亮和暗色主題的圖片，然後使用捏合手勢調整</string>
     <string name="header_creator_light_theme">明亮主題標頭</string>
     <string name="header_creator_dark_theme">暗色主題標頭</string>
-    <string name="header_creator_select_light">選擇明亮主題圖片</string>
-    <string name="header_creator_change_light">更改明亮主題圖片</string>
-    <string name="header_creator_select_dark">選擇暗色主題圖片</string>
-    <string name="header_creator_change_dark">更改暗色主題圖片</string>
     <string name="header_creator_no_image">未選擇圖片</string>
     <string name="header_creator_success">標頭已成功建立</string>
     <string name="header_creator_failed">無法建立標頭</string>
     <string name="header_creator_folder_explanation">選擇建立\'morphe_branding/morphe_header\'資料夾的位置，其中包含產生的標頭檔案</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">確定要卸載此應用程式嗎？</string>
-    <string name="home_app_info_saved_app_delete_confirmation">確定要刪除已儲存的應用程式嗎？</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">確定要刪除已儲存的副本嗎？</string>
+    <string name="home_app_info_remove_app_warning">這將永久刪除：</string>
+    <string name="home_app_info_delete_item_database">資料庫條目</string>
+    <string name="home_app_info_delete_item_patched_apk">修補後的 APK 檔案</string>
+    <string name="home_app_info_delete_item_original_apk">原始 APK 檔案</string>
+    <string name="home_app_info_delete_preservation_note">您的修補選擇和選項將保留以供未來修補使用</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">已移除保存选择中的%d個過時補丁</string>
     <string name="home_app_info_patches_name_default">修補</string>
     <string name="home_app_info_patches_name_fallback">未命名</string>
     <string name="home_app_info_patches_replace_fail">無法匯入修補：%s</string>
-    <string name="home_app_info_repatch_no_original_apk">重新修補需要原始 APK 檔案</string>
+    <string name="home_app_info_repatch_no_original_apk">找不到原始 APK。無法重新修補此應用程序</string>
     <string name="home_app_info_repatch_requires_original">重新修補需要原始 APK 檔案</string>
     <string name="home_app_info_original_package_name">原始套件名稱</string>
     <string name="home_app_info_applied_patches">已套用修補</string>
@@ -170,9 +174,11 @@
     <string name="home_app_info_install_type_system_installer">系統安裝程序</string>
     <string name="home_app_info_patched_at">已修補</string>
     <string name="home_app_info_patch_update_available">有新的修補可用</string>
-    <string name="home_app_info_patch_update_available_description">有新的修補可用。重新修補您的應用程式以獲得最新的改進和修正。</string>
+    <string name="home_app_info_patch_update_available_description">有更新的修補版本。重新修補您的應用程式以獲得最新的改進和修正</string>
+    <string name="home_app_info_app_deleted_warning">在管理員外卸載應用程序</string>
+    <string name="home_app_info_app_deleted_description">此應用程序已在管理員外卸載。重新補丁以恢復功能</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Root 模式需要裝置上先安裝原始 APK 才能進行修補。</string>
+    <string name="root_install_apk_required">根模式需要在修補之前將原始 APK 安裝在您的設備上</string>
     <string name="root_gmscore_excluded">GmsCore 支援性修補在 Root 模式中已排除</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">錯誤已複製到剪貼簿</string>
@@ -234,23 +240,22 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">您的應用程式發燒了，唯一的處方是更多的修補程式… 🩺🔔</string>
     <string name="patcher_message_20">正在移除不必要的內容。請稍候… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">套用修補程式</string>
-    <string name="applying_patch">套用中 %s</string>
     <string name="failed_to_execute_patch">無法套用 %s</string>
     <string name="patched_app_saved_toast">已儲存修補後的應用程式以供日後使用</string>
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="download_apk">下載 APK 檔案</string>
-    <string name="plugin_activity_dialog_body">必須與此外掛程式進行互動才能繼續。</string>
-    <string name="patcher_process_exit_message">Patcher 進程已退出，代碼為 %1$d。</string>
+    <string name="plugin_activity_dialog_body">需要用戶互動以繼續使用此插件</string>
+    <string name="patcher_process_exit_message">修補過程以代碼 %1$d 退出</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
-    <string name="install_timeout_message">安裝未完成。請檢查系統安裝程式對話方塊後重試。</string>
+    <string name="install_timeout_message">安裝未完成。檢查系統安裝對話框並重試</string>
     <string name="save_apk_success">APK 已儲存</string>
     <string name="saved_app_export_failed">無法匯出已修補的應用程式</string>
     <string name="saved_app_removed_toast">已移除已儲存的應用程式</string>
     <string name="saved_app_copy_removed_toast">已移除已儲存的複本</string>
-    <string name="saved_app_launch_unavailable">請在開啟應用程式前安裝。</string>
+    <string name="saved_app_launch_unavailable">在打開應用程序之前安裝應用程序</string>
     <string name="package_name">套件名稱</string>
     <string name="failed_to_mount">無法安裝：%s</string>
     <string name="failed_to_unmount">無法解除掛載：%s</string>
@@ -262,11 +267,13 @@
     <string name="settings_appearance_background">背景動畫</string>
     <string name="settings_appearance_background_circles">圓形</string>
     <string name="settings_appearance_background_rings">環形</string>
-    <string name="settings_appearance_background_waves">波浪</string>
+    <string name="settings_appearance_background_mesh">網格</string>
     <string name="settings_appearance_background_space">空間</string>
     <string name="settings_appearance_background_shapes">形狀</string>
     <string name="settings_appearance_background_snow">鍵盤</string>
     <string name="settings_appearance_background_none">無</string>
+    <string name="settings_appearance_parallax_effect"> parallax 效果</string>
+    <string name="settings_appearance_parallax_effect_description">傾斜設備時平滑背景移動</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">主題</string>
     <string name="settings_appearance_system">系統</string>
@@ -301,6 +308,16 @@
     <string name="settings_advanced_expert_mode_description">啟用高級功能和自訂設定選項</string>
     <string name="settings_advanced_strip_unused_libs">刪除未使用的原生函式庫</string>
     <string name="settings_advanced_strip_unused_libs_description">刪除不支援的 CPU 架構原生函式庫修補的應用程式</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">GitHub PAT</string>
+    <string name="settings_advanced_github_pat_description">用于合并请求捆绑包</string>
+    <string name="settings_advanced_github_pat_configured">已配置令牌</string>
+    <string name="settings_advanced_github_pat_how_to_get">如何获取令牌</string>
+    <string name="settings_advanced_github_pat_dialog_title">设置 GitHub 个人访问令牌</string>
+    <string name="settings_advanced_github_pat_dialog_description">设置 GitHub 个人访问令牌，以便能够添加外部来源的 Pull Request。创建具有公共仓库范围的 PAT。</string>
+    <string name="settings_advanced_github_pat_export_include_label">包含在设置导出中</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">将此 PAT 添加到导出的管理器设置中</string>
+    <string name="settings_advanced_github_pat_export_warning">不要分享您的 PAT。如果您将其包含在设置导出中，请将该文件保持私有，因为它包含令牌</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">修補選項</string>
     <string name="settings_advanced_patch_options_youtube_description">主題、品牌、標頭和 Shorts 選項</string>
@@ -374,40 +391,40 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">從啟動器 widget 中移除 Shorts 按鈕</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安裝器</string>
+    <string name="installer_title">選擇安裝程序</string>
     <string name="installer_internal_name">系統安裝程式</string>
     <string name="installer_internal_description">使用 Android 套件安裝程式</string>
     <string name="installer_auto_saved_name">Root 掛載安裝程式</string>
-    <string name="installer_auto_saved_description">將已修補的 APK 覆蓋已安裝的應用程式 (需要 Root 權限)。</string>
-    <string name="installer_shizuku_description">使用 Shizuku 或 Sui 安靜安裝。</string>
+    <string name="installer_auto_saved_description">將修補後的 APK 安裝在已安裝的應用程式上方（需要 root 權限）</string>
+    <string name="installer_shizuku_description">使用 Shizuku 或 Sui 無聲安裝</string>
     <string name="installer_option_none">無備用</string>
     <string name="installer_none_description">未設定任何備用安裝程式</string>
     <string name="installer_status_requires_root">需要 Root 權限</string>
-    <string name="installer_status_not_supported">此動作不支援。</string>
-    <string name="installer_status_shizuku_not_installed">請安裝 Shizuku 或 Sui 以使用此選項。</string>
-    <string name="installer_status_shizuku_not_running">請啟動 Shizuku 或 Sui 然後重試。</string>
-    <string name="installer_status_shizuku_permission">請從 Shizuku 應用程式授予 Morphe Shizuku 權限。</string>
-    <string name="installer_mount_warning_install">您的主要安裝程式已設定為已 root 的掛載安裝程式。此已儲存的應用程式並非使用掛載方式安裝。</string>
-    <string name="installer_mount_mismatch_title">未選取已 root 的掛載安裝程式</string>
-    <string name="installer_mount_mismatch_install">此應用程式是使用已 root 的掛載安裝程式安裝的。將您的主要安裝程式切換回以使用掛載動作，然後進行掛載。</string>
-    <string name="mount_version_mismatch_message">標準應用程式版本 (%2$s) 與修補的應用程式版本 (%1$s) 不符。請掛載符合的版本，然後重試。</string>
-    <string name="installer_status_shizuku_unsupported">不支援已安裝的 Shizuku 版本。</string>
+    <string name="installer_status_not_supported">對此操作不支持</string>
+    <string name="installer_status_shizuku_not_installed">安裝 Shizuku 或 Sui 以使用此選項</string>
+    <string name="installer_status_shizuku_not_running">啟動 Shizuku 或 Sui 並重試</string>
+    <string name="installer_status_shizuku_permission">從 Shizuku 應用程序中授予 Morphe 權限</string>
+    <string name="installer_mount_warning_install">您的主要安裝程序設定為根安裝程序。未使用安裝程序安裝的保存應用程序</string>
+    <string name="mount_version_mismatch_message">原始應用程序版本 (%2$s) 與修補後的應用程序版本 (%1$s) 不匹配。安裝匹配的原始版本，然後重試</string>
+    <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支持</string>
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
-    <string name="installer_hint_generic">安裝失敗。請再試一次或切換至其他安裝程式。</string>
-    <string name="installer_hint_blocked">Android 已封鎖安裝。請檢查 Play 安全防護或安全性設定。</string>
-    <string name="installer_hint_conflict">已安裝另一個具有相同套件名稱的應用程式。請先解除安裝，然後再繼續。</string>
-    <string name="installer_hint_incompatible">此 APK 不適用於此裝置或 Android 版本。</string>
-    <string name="installer_hint_invalid">此 APK 無效或已損毀。</string>
-    <string name="installer_hint_storage">儲存空間不足，無法進行安裝。</string>
-    <string name="installer_hint_timeout">安裝逾時。請再試一次。</string>
-    <string name="installer_hint_aborted">安裝已被取消。</string>
+    <string name="installer_hint_generic">安裝失敗。重試或切換到不同的安裝程序</string>
+    <string name="installer_hint_blocked">Android 阻止了安裝。檢查 Play Protect 或安全設定</string>
+    <string name="installer_hint_conflict">已安裝具有相同包名的其他應用程序。在繼續之前卸載它</string>
+    <string name="installer_hint_incompatible">APK 不兼容此設備或 Android 版本</string>
+    <string name="installer_hint_invalid">APK 無效或損壞</string>
+    <string name="installer_hint_storage">沒有足夠的存儲空間進行安裝</string>
+    <string name="installer_hint_timeout">安裝超時。重試</string>
+    <string name="installer_hint_aborted">已取消安裝</string>
     <string name="installer_external_launched">正在開啟 %1$s…</string>
-    <string name="installer_external_timeout">%1$s 並未確認安裝。請檢查其他應用程式後再試一次。</string>
-    <string name="installer_external_success">%1$s 報告安裝成功。</string>
-    <string name="installer_external_finished_no_change">%1$s 完成，但未安裝應用程式。檢查安裝器中的錯誤訊息並重試。</string>
+    <string name="installer_external_timeout">%1$s 未確認安裝。檢查其他應用程序並重試</string>
+    <string name="installer_external_success">%1$s 報告成功安裝</string>
     <string name="installer_unavailable_title">%s 未能使用</string>
-    <string name="installer_unavailable_message">您的首选安装程序（%s）当前不可用。您可以修复此问题并重试，或改用标准安装程序。</string>
-    <string name="installer_unavailable_shizuku_hint">请确保 Shizuku 正在运行，并且已授予此应用程序权限。</string>
+    <string name="installer_unavailable_message">您的首選安裝程序 (%s) 當前不可用。您可以修復問題並重試，或改用標準安裝程序</string>
+    <string name="installer_unavailable_shizuku_hint">確保 Shizuku 正在運行並授予此應用程序權限</string>
     <string name="installer_use_standard">使用標準</string>
+    <string name="settings_prompt_installer_on_install">安裝時提示安裝程序</string>
+    <string name="settings_prompt_installer_on_install_description">每次安裝修補應用程序時顯示安裝程序選擇對話框</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">效能</string>
     <string name="settings_system_process_runtime">運行時間</string>
@@ -424,7 +441,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore">匯入金鑰庫</string>
     <string name="settings_system_import_keystore_description">匯入自訂金鑰庫</string>
     <string name="settings_system_import_keystore_dialog_title">輸入金鑰庫認證資訊</string>
-    <string name="settings_system_import_keystore_dialog_description">您需要輸入金鑰庫的憑據才能匯入它。</string>
+    <string name="settings_system_import_keystore_dialog_description">您需要輸入金鑰庫的憑據才能匯入它</string>
     <string name="settings_system_import_keystore_dialog_alias_field">使用者名稱（別名）</string>
     <string name="settings_system_import_keystore_dialog_password_field">密碼</string>
     <string name="settings_system_import_keystore_dialog_button">匯入</string>
@@ -454,8 +471,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">無法匯出記錄</string>
     <string name="settings_system_export_debug_logs_export_success">記錄已匯出</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">儲存管理</string>
-    <string name="settings_system_apks_count">已修補 APK</string>
+    <string name="settings_system_storage_management">存儲管理</string>
     <string name="settings_system_apks_size">已修補 APK</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修補 APK</string>
@@ -466,11 +482,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_deleted">修補 APK 已成功刪除</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">原始 APK</string>
-    <string name="settings_system_original_apks_description">原始 APK 檔案用於重新修補。只保留每個應用程式的最新版本。</string>
+    <string name="settings_system_original_apks_description">原始 APK 文件用于重新打补丁。每个应用最多保留最近的一个版本</string>
     <string name="settings_system_original_apks_empty">沒有儲存的原始 APK</string>
     <string name="settings_system_original_apks_deleted">原始 APK 已成功刪除</string>
     <string name="settings_system_original_apks_delete_title">刪除原始 APK？</string>
-    <string name="settings_system_original_apks_delete_confirm">刪除 %s 的原始 APK？您無法重新修補此應用程式，除非提供新的 APK。</string>
+    <string name="settings_system_original_apks_delete_confirm">刪除 %s 的原始 APK？沒有新的 APK，您將無法重新修補</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">修補選擇</string>
+    <string name="settings_system_patch_selections_description">管理已保存的修補選擇和選項。這些在應用程式卸載後仍然存在</string>
+    <string name="settings_system_patch_selections_description_short">保留供未來修補使用</string>
+    <string name="settings_system_patch_selections_empty">沒有已保存的修補選擇</string>
+    <string name="settings_system_patch_selections_has_options">有選項</string>
+    <string name="settings_system_patch_selections_patches_options">修補選擇</string>
+    <string name="settings_system_patch_selection_delete_title">刪除修補選擇</string>
+    <string name="settings_system_patch_selection_deleted">修補選擇已刪除</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>
     <string name="settings_system_share_website">分享網站</string>
@@ -485,6 +510,7 @@ morphe_header_custom_dark.png
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="reset">重設</string>
+    <string name="confirm">确认</string>
     <string name="warning">警告</string>
     <string name="error_">錯誤</string>
     <string name="retry">重試</string>
@@ -498,7 +524,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">未安裝</string>
     <string name="view">檢視</string>
     <string name="search">搜尋</string>
-    <string name="clear_search">清除搜尋</string>
     <string name="search_no_results">沒有找到結果</string>
     <string name="any_version">任何</string>
     <string name="enabled">已啟用</string>
@@ -527,19 +552,21 @@ morphe_header_custom_dark.png
     <string name="installed">已安裝</string>
     <string name="reinstall">重新安裝</string>
     <string name="uninstall">解除安裝</string>
+    <string name="uninstalled">已卸載</string>
     <string name="save">儲存</string>
     <string name="saved">已儲存</string>
     <string name="update">更新</string>
     <string name="installing_ellipsis">正在安裝…</string>
-    <string name="uninstalling_ellipsis">正在解安裝…</string>
     <string name="mounting_ellipsis">正在掛載…</string>
     <string name="unmounting_ellipsis">正在解除掛載…</string>
     <string name="importing_ellipsis">正在匯入…</string>
     <string name="changelog">查看變更紀錄</string>
+    <string name="changelog_description">查看本次更新的最新变更</string>
     <string name="changelog_loading">正在載入變更日誌</string>
     <string name="changelog_download_fail">無法下載變更日誌：%s</string>
     <string name="changelog_retry">重試</string>
     <string name="changelog_empty">沒有可用的變更日誌</string>
+    <string name="no_network_toast">无法连接到互联网</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
     <string name="update_completed">更新已安裝</string>

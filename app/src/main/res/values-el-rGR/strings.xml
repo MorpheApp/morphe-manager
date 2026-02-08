@@ -4,9 +4,9 @@
     <string name="home_other_apps">Άλλες εφαρμογές</string>
     <string name="home_not_patched_yet">Δεν επεξεργάστηκε ακόμα</string>
     <string name="home_no_patches_available">Δεν υπάρχουν επεξεργασίες διαθέσιμες</string>
-    <string name="home_default_source_disabled">Η πηγή Morphe είναι απενεργοποιημένη. Παρακαλώ ενεργοποιήστε την στη φύλλο πηγών ή χρησιμοποιήστε τον τρόπο Ειδικός.</string>
+    <string name="home_default_source_disabled">Morphe πατς πηγή είναι απενεργοποιημένη. Παρακαλώ ενεργοποιήστε την στη φύλλα πηγών πατς ή χρησιμοποιήστε τον τρόπο εξειδικέων</string>
     <string name="android_11_bug_dialog_title">Σφάλμα Android 11</string>
-    <string name="android_11_bug_dialog_description">Η άδεια εγκατάστασης εφαρμογής πρέπει να έχει χορηγηθεί εκ των προτέρων για να αποφευχθεί ένα σφάλμα στο σύστημα Android 11 που θα επηρεάσει αρνητικά την εμπειρία χρήστη.</string>
+    <string name="android_11_bug_dialog_description">Η έγκριση της εγκατάστασης της εφαρμογής πρέπει να έχει γίνει προηγουμένως για να αποφευχθεί ένα σφάλμα στο σύστημα Android 11 που θα επηρεάσει αρνητικά την εμπειρία του χρήστη</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Νέο ενημέρωση διαθέσιμο</string>
     <string name="home_update_available_subtitle">Νέο έκδοση έτοιμη για εγκατάσταση</string>
@@ -49,16 +49,17 @@
     <string name="sources_dialog_display_name">Όνομα εμφάνισης</string>
     <string name="sources_dialog_rename">Αλλαγή ονόματος πηγής</string>
     <string name="sources_dialog_duplicate_name_error">Ένας πηγής με το ίδιο όνομα υπάρχει ήδη</string>
-    <string name="sources_dialog_missing_error">Δεν ήταν δυνατή η ενημέρωση του πηγή.</string>
-    <string name="sources_dialog_disabled_toast">Απενεργοποίηση %d πηγής(ων)</string>
-    <string name="sources_dialog_enabled_toast">Ενεργοποίηση %d πηγής(ων)</string>
+    <string name="sources_dialog_missing_error">Δυστυχώς, δεν μπόρεσα να ενημερώσω αυτή την πηγή πατς</string>
     <string name="sources_dialog_view_any_version">Οποιαδήποτε</string>
     <string name="sources_dialog_view_any_package">Οποιαδήποτε πακέτο</string>
     <string name="sources_dialog_add_source">Προσθήκη πηγής</string>
-    <string name="sources_dialog_delete_confirm_message">Διαγραφή πηγή «%s»? Αυτό δεν μπορεί να αναστραφεί.</string>
+    <string name="sources_dialog_delete_confirm_message">Διαγραφή πηγής «%s»? Αυτό δεν μπορεί να ανακτηθεί.</string>
     <string name="sources_dialog_remote">Διάternet</string>
     <string name="sources_dialog_remote_url">Διεύθυνση πηγής</string>
-    <string name="sources_dialog_remote_description">Εισαγωγή διεύθυνσης JSON για πηγή</string>
+    <string name="sources_dialog_remote_url_formats">"Παράδειγματα:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Τοπικό</string>
     <string name="sources_dialog_local_file">Επιλογή αρχείου πηγής</string>
     <string name="sources_dialog_local_file_description">Επιλογή αρχείου .mpp για πηγή από την αποθήκευση</string>
@@ -69,7 +70,12 @@
     <string name="sources_download_fail">Αποτυχία εξαγωγής πηγών: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Έχετε το αρχικό μη τροποποιημένο APK;</string>
-    <string name="home_apk_availability_dialog_description_simple">Για να επιδιορθώσετε το %1$s, χρειάζεστε την έκδοση %2$s (μη επιδιορθωμένη)</string>
+    <string name="home_apk_availability_dialog_simple">Για να εφαρμόσετε το %1$s, χρειάζεστε ένα ακαταπαγής APK με έκδοση:</string>
+    <string name="home_apk_availability_dialog_expert">"Είτε έχετε ακαταπαγές %1$s APK;
+
+Συμβαίνουσες εκδόσεις:"</string>
+    <string name="home_apk_availability_recommended_label">Συνιστάται</string>
+    <string name="home_apk_availability_unpatched_label">Ανεπανόρθωτο</string>
     <string name="home_apk_availability_yes">Ναι, το έχω</string>
     <string name="home_apk_availability_no">Όχι, βοήθησέ με να το βρω</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -85,7 +91,7 @@
     <string name="home_download_instructions_continue">Συνέχεια στο APKMirror.com</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Επιλέξτε το APK που κατεβάσατε</string>
-    <string name="home_file_picker_prompt_description">Τώρα επιλέξτε το αρχείο %1$s APK που μόλις κατεβάσατε.</string>
+    <string name="home_file_picker_prompt_description">Επιλέξτε τώρα το %1$s APK αρχείο που μόλις κατέβασες</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">Άνοιγμα αρχείου APK που κατέβασα</string>
     <string name="home_file_picker_prompt_open_apk">Άνοιγμα αρχείου APK</string>
     <string name="home_recommended_version">Προτεινόμενη έκδοση</string>
@@ -109,12 +115,14 @@
 Είστε σίγουροι ότι θέλετε να προχωρήσετε;"</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">Μη υποστηριμμένη έκδοση</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Αυτή η APK δεν είναι η συνηθισμένη έκδοση της εφαρμογής. Η συνέχεια μπορεί να προκαλέσει μια μη λειτουργική εφαρμογή.</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Αυτό το APK δεν είναι μια συνιστώμενη έκδοση εφαρμογής. Η συνέχεια μπορεί να οδηγήσει σε μη λειτουργική εφαρμογή</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Συνέχεια παρ’ όλα αυτά</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Συμβαδίζουν οι εκδόσεις:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Μη υποστηριζόμενο</string>
     <string name="home_dialog_wrong_package_title">Επιλέχθηκε λάθος πακέτο</string>
-    <string name="home_dialog_wrong_package_description">Η επιλεγμένη APK δεν είναι για την εφαρμογή που επιθυμείτε να τροποποιήσετε.</string>
-    <string name="home_dialog_expected_package">Αναμενόμενο πακέτο</string>
-    <string name="home_dialog_selected_package">Επιλεγμένο πακέτο</string>
+    <string name="home_dialog_wrong_package_description">Το επιλεγμένο APK δεν είναι για την εφαρμογή που επιθυμείτε να επεξεργαστείτε</string>
+    <string name="home_dialog_expected_package">Αναμενόμενο πακέτο:</string>
+    <string name="home_dialog_selected_package">Επιλεγμένο πακέτο:</string>
     <!-- Patch Options -->
     <string name="custom_color">Προσαρμοσμένο χρώμα</string>
     <string name="hex_color">Χρώμα HEX</string>
@@ -124,43 +132,39 @@
     <string name="patch_option_enter_decimal">Εισαγωγή δεκαδικού</string>
     <string name="patch_option_pick_folder">Επιλογή φακέλου</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_creator_title">Δημιουργία προσαρμοστικού εικονίδιου</string>
-    <string name="adaptive_icon_create">Δημιουργία εικονίδιου</string>
+    <string name="adaptive_icon_create">Δημιουργία προσαρμοσμένου εικονιδίου</string>
     <string name="adaptive_icon_instructions">Επιλέξτε μια εικόνα προσκηνίου, επιλέξτε χρώμα φόντου και προσαρμόστε την προεπισκόπηση με γέστες pinch-to-zoom</string>
     <string name="adaptive_icon_preview">Προεπισκόπηση</string>
-    <string name="adaptive_icon_select_foreground">Επιλέξτε εικόνα προσκήνιου</string>
-    <string name="adaptive_icon_change_foreground">Αλλαγή εικόνας προσκήνιου</string>
+    <string name="adaptive_icon_select_image">Επιλογή εικόνας</string>
+    <string name="adaptive_icon_change_image">Αλλαγή εικόνας</string>
     <string name="adaptive_icon_background_color">Χρώμα φόντου</string>
     <string name="adaptive_icon_reset_transform">Επαναφορά θέσης και κλίμακας</string>
     <string name="adaptive_icon_safe_zone_inner">Περιοχή ασφαλείας (πάντα ορατός)</string>
     <string name="adaptive_icon_safe_zone_outer">Περιοχή μάσκας (может κοπεί)</string>
     <string name="adaptive_icon_created_success">Δημιουργήθηκε επιτυχώς το εικονίδιο προσαρμογής</string>
     <string name="adaptive_icon_creation_failed">Ατυχήθηκε η δημιουργία του εικονιδίου προσαρμογής</string>
-    <string name="adaptive_icon_create_new">Δημιουργία νέου εικονιδίου</string>
     <string name="adaptive_icon_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_icons\' με τα δημιουργημένα αρχεία εικονιδίου</string>
     <!-- Header Creator -->
-    <string name="header_creator_title">Δημιουργία κεφαλίδας</string>
-    <string name="header_creator_create">Δημιουργία κεφαλίδας</string>
-    <string name="header_creator_create_new">Δημιουργία νέας κεφαλίδας</string>
+    <string name="header_creator_create">Δημιουργία προσαρμοσμένου κεφαλίδας</string>
     <string name="header_creator_instructions">Επιλέξτε εικόνες για φωτεινές και σκοτεινές θεματικές, στη συνέχεια προσαρμόστε με κινήσεις pinch-to-zoom</string>
     <string name="header_creator_light_theme">Κεφαλίδα φωτεινής θεματικής</string>
     <string name="header_creator_dark_theme">Κεφαλίδα σκοτεινής θεματικής</string>
-    <string name="header_creator_select_light">Επιλέξτε εικόνα φωτεινής θεματικής</string>
-    <string name="header_creator_change_light">Αλλαγή εικόνας φωτεινής θεματικής</string>
-    <string name="header_creator_select_dark">Επιλέξτε εικόνα σκοτεινής θεματικής</string>
-    <string name="header_creator_change_dark">Αλλαγή εικόνας σκοτεινής θεματικής</string>
     <string name="header_creator_no_image">Δεν επιλέχθηκε εικόνα</string>
     <string name="header_creator_success">Δημιουργήθηκε επιτυχώς η κεφαλίδα</string>
     <string name="header_creator_failed">Ατυχήθηκε η δημιουργία της κεφαλίδας</string>
     <string name="header_creator_folder_explanation">Επιλέξτε τον τόπο δημιουργίας της φακέλου \'morphe_branding/morphe_header\' με τα δημιουργημένα αρχεία κεφαλίδας</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Είστε βέβαιοι ότι θέλετε να αποσυνήτε αυτή την εφαρμογή;</string>
-    <string name="home_app_info_saved_app_delete_confirmation">Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την αποθηκευμένη εφαρμογή;</string>
-    <string name="home_app_info_saved_copy_delete_confirmation">Είστε βέβαιοι ότι θέλετε να διαγράψετε την αποθηκευμένη αντίγραφη;</string>
+    <string name="home_app_info_remove_app_warning">Θα διαγραφεί οριστικά:</string>
+    <string name="home_app_info_delete_item_database">Είσοδος βάσης δεδομένων</string>
+    <string name="home_app_info_delete_item_patched_apk">Επεξεργασμένο APK αρχείο</string>
+    <string name="home_app_info_delete_item_original_apk">Αρχικό APK αρχείο</string>
+    <string name="home_app_info_delete_preservation_note">Η επιλογή επεξεργασίας και οι επιλογές σου θα διατηρηθούν για μελλοντική επεξεργασία</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Εκκλείστηκαν %d παλιές αναθεματικές από την επιλεγμένη επιλογή</string>
     <string name="home_app_info_patches_name_default">Τροποποιήσεις</string>
     <string name="home_app_info_patches_name_fallback">Ανώνυμο</string>
     <string name="home_app_info_patches_replace_fail">Αποτυχία εισαγωγής τροποποιήσεων: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Δεν βρέθηκε το αρχικό APK. Δεν μπορεί να επαναπροσθηθεί αυτή την εφαρμογή.</string>
+    <string name="home_app_info_repatch_no_original_apk">Δεν βρέθηκε το αρχικό APK. Δεν είναι δυνατή η επαναπαρασκευή αυτής της εφαρμογής.</string>
     <string name="home_app_info_repatch_requires_original">Η επαναπροσθηση απαιτείται το αρχικό APK αρχείο</string>
     <string name="home_app_info_original_package_name">Όνομα πακέτου</string>
     <string name="home_app_info_applied_patches">%d τροποποιήσεις εφαρμογής</string>
@@ -170,9 +174,11 @@
     <string name="home_app_info_install_type_system_installer">Συστήμων εγκαστάσεων</string>
     <string name="home_app_info_patched_at">Τροποποιημένες</string>
     <string name="home_app_info_patch_update_available">Διαθέσιμη ενημέρωση τροποποιήσεων</string>
-    <string name="home_app_info_patch_update_available_description">Επιλογή νεότερης έκδοσης τροποποιήσεων για την επαναπροσθηση της εφαρμογής σας να λαβήσετε τις τελευταίες βελτιώσεις και διορθώσεις.</string>
+    <string name="home_app_info_patch_update_available_description">Επαναληφθείσα έκδοση επεξεργασιών είναι διαθέσιμη. Επανεπεξεργάσου την εφαρμογή σου για να λάβεις τις τελευταίες βελτιώσεις και διορθώσεις</string>
+    <string name="home_app_info_app_deleted_warning">Εφαρμογή αφαιρέθηκε εκτός διαχειριστή</string>
+    <string name="home_app_info_app_deleted_description">Αυτή η εφαρμογή αφαιρέθηκε εκτός του διαχειριστή. Αναθεμάτισέ την για να επαναφέρετε τη λειτουργικότητα</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Η λειτουργία root απαιτεί την εγκατάσταση του αρχικού APK στη συσκευή σας πριν την εφαρμογή της ενημέρωσης.</string>
+    <string name="root_install_apk_required">Η λειτουργία ριζάς απαιτεί το αρχικό APK να είναι εγκατεστημένο στο διαχείριση του ριζάς.</string>
     <string name="root_gmscore_excluded">Η ενημέρωση GmsCore έχει εξαιρεθεί στη λειτουργία root</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
@@ -234,18 +240,17 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Η εφαρμογή σας έχει πυρετό, και η μόνη συνταγή είναι περισσότερες τροποποιήσεις... 🩺🔔</string>
     <string name="patcher_message_20">Αφαιρώ ανοησίες. Παρακαλούμε περιμένετε… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Εφαρμογή επιδιορθώσεων</string>
-    <string name="applying_patch">Εφαρμογή %s</string>
     <string name="failed_to_execute_patch">Αποτυχία εφαρμογής %s</string>
     <string name="patched_app_saved_toast">Η εφαρμογή με επιδιόρθωση αποθηκεύτηκε για αργότερα</string>
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της εφαρμογής με επιδιόρθωση</string>
     <string name="download_apk">Λήψη αρχείου APK</string>
-    <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για τη συνέχιση με αυτό το πρόσθετο.</string>
-    <string name="patcher_process_exit_message">Η διαδικασία patcher ολοκληρώθηκε με κωδικό %1$d.</string>
+    <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
+    <string name="patcher_process_exit_message">Η διαδικασία επαναπαρασκευής έξοδος με κωδικό %1$d.</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
     <string name="install_app_fail">Αδυναμία εγκατάστασης εφαρμογής: %s</string>
-    <string name="install_timeout_message">Η εγκατάσταση δεν ολοκληρώθηκε. Ελέγξτε το παράθυρο διαλόγου του εγκαταστάτη συστήματος και προσπαθήστε ξανά.</string>
+    <string name="install_timeout_message">Δεν ολοκληρώθηκε η εγκατάσταση. Ελέγξτε το διάλογο εγκατάστασης του συστήματος και προσπαθήστε ξανά.</string>
     <string name="save_apk_success">Το APK αποθηκεύτηκε</string>
     <string name="saved_app_export_failed">Η εξαγωγή της τροποποιημένης εφαρμογής απέτυχε</string>
     <string name="saved_app_removed_toast">Η αποθηκευμένη τροποποιημένη εφαρμογή αφαιρέθηκε</string>
@@ -262,11 +267,13 @@
     <string name="settings_appearance_background">Δημιουργία</string>
     <string name="settings_appearance_background_circles">Κύκλοι</string>
     <string name="settings_appearance_background_rings">Δακτύλια</string>
-    <string name="settings_appearance_background_waves">Όγδοι</string>
+    <string name="settings_appearance_background_mesh">Δίκτυο</string>
     <string name="settings_appearance_background_space">Όχος</string>
     <string name="settings_appearance_background_shapes">Σχήματα</string>
     <string name="settings_appearance_background_snow">Χιόνι</string>
     <string name="settings_appearance_background_none">Κανένα</string>
+    <string name="settings_appearance_parallax_effect">Εfeito Paralax</string>
+    <string name="settings_appearance_parallax_effect_description">Γραμμή μετακίνησης φόντου με το κλίμακα του συσκευής</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Θέμα</string>
     <string name="settings_appearance_system">Συστήμενο</string>
@@ -301,6 +308,16 @@
     <string name="settings_advanced_expert_mode_description">Επιλέγει τις προχωρημένες λειτουργίες και επιλογές προσαρμοσής</string>
     <string name="settings_advanced_strip_unused_libs">Εκκαθάρισε μη χρησιμοποιούμενα ιδιότητες του συστήματος</string>
     <string name="settings_advanced_strip_unused_libs_description">Διαγραφή ιδιότητες για μη υποστηριζόμενους επεξεργαστικούς αρχιτεκτον</string>
+    <!-- Settings - Advanced Tab - GitHub PAT Settings -->
+    <string name="settings_advanced_github_pat">Γκιτ Χαμπ PAT</string>
+    <string name="settings_advanced_github_pat_description">Δημοσιεύεται για πακέτα αιτήσεων πρόσθεσης</string>
+    <string name="settings_advanced_github_pat_configured">Δοκιμή-token</string>
+    <string name="settings_advanced_github_pat_how_to_get">Πως να πάρετε ένα κλειδί</string>
+    <string name="settings_advanced_github_pat_dialog_title">Ορισμός προσωπικού κλειδιού πρόσβασης στο GitHub</string>
+    <string name="settings_advanced_github_pat_dialog_description">Ορισμός προσωπικού κλειδιού πρόσβασης στο GitHub για να μπορείτε να προσθέσετε αιτήσεις πρόσθεσης ως εξωτερικές πηγές. Δημιουργία PAT με το σκέλος public_repo github.com</string>
+    <string name="settings_advanced_github_pat_export_include_label">Συμπερίληψη στις ρυθμίσεις εξαγωγής</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Προσθήκη αυτού του PAT στις εξαγόμενες ρυθμίσεις διαχείρισης</string>
+    <string name="settings_advanced_github_pat_export_warning">Δεν πρέπει να μοιράζεστε το κλειδί. Εάν το συμπεριλάβετε σε εξαγόμενες ρυθμίσεις, διατηρήστε το αρχείο ιδιωτικό, διότι περιέχει το κλειδί</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Επιλογές τροποποιήσεων</string>
     <string name="settings_advanced_patch_options_youtube_description">Ρυθμίσεις, οπτίσεις, κεφαλαιώματα και Shorts</string>
@@ -374,40 +391,40 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Διαγραφή του κουμπιού Shorts από το widget του επιλογής</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Εγκαταστάτης</string>
+    <string name="installer_title">Επιλέξτε εγκαταστάτη.</string>
     <string name="installer_internal_name">Εγκαταστάτης συστήματος</string>
     <string name="installer_internal_description">Χρήση του εγκαταστάτη πακέτων Android</string>
     <string name="installer_auto_saved_name">Εγκαταστάτης προσάρτησης με root</string>
-    <string name="installer_auto_saved_description">Τοποθετεί το τροποποιημένο APK πάνω από την εγκατεστημένη εφαρμογή (απαιτείται root).</string>
-    <string name="installer_shizuku_description">Εγκατάσταση αθόρυβα με χρήση Shizuku ή Sui.</string>
+    <string name="installer_auto_saved_description">Επενεμήσει το επεξεργασμένο APK πάνω από την εγκατεστημένη εφαρμογή (χρειάζεται ριζικό δικαίωμα)</string>
+    <string name="installer_shizuku_description">Εγκαταστήστε τη σιωπηλώς χρησιμοποιώντας το Shizuku ή Sui.</string>
     <string name="installer_option_none">Χωρίς εφεδρεία</string>
     <string name="installer_none_description">Δεν έχει ρυθμιστεί εφεδρικός εγκαταστάτης</string>
     <string name="installer_status_requires_root">Απαιτείται πρόσβαση root</string>
-    <string name="installer_status_not_supported">Δεν υποστηρίζεται για αυτήν την ενέργεια.</string>
-    <string name="installer_status_shizuku_not_installed">Εγκαταστήστε το Shizuku ή το Sui για να χρησιμοποιήσετε αυτήν την επιλογή.</string>
-    <string name="installer_status_shizuku_not_running">Ξεκινήστε το Shizuku ή το Sui και δοκιμάστε ξανά.</string>
-    <string name="installer_status_shizuku_permission">Παραχωρήστε άδεια Shizuku στο Morphe από την εφαρμογή Shizuku.</string>
-    <string name="installer_mount_warning_install">Ο κύριος εγκαταστάτης σας έχει οριστεί στον εγκαταστάτη με τοποθέτηση root. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε με τοποθέτηση.</string>
-    <string name="installer_mount_mismatch_title">Ο εγκαταστάτης mount με root δεν επιλέχθηκε</string>
-    <string name="installer_mount_mismatch_install">Αυτή η εφαρμογή εγκαταστάθηκε χρησιμοποιώντας τον εγκαταστάτη mount με root. Αλλάξτε τον κύριο εγκαταστάτη σας πίσω για να χρησιμοποιήσετε ενέργειες mount, και μετά κάντε mount.</string>
-    <string name="mount_version_mismatch_message">Η έκδοση της εφαρμογής συστήματος (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Κάντε mount την αντίστοιχη έκδοση συστήματος, και μετά δοκιμάστε ξανά.</string>
+    <string name="installer_status_not_supported">Δεν υποστηρίζεται για αυτή την ενέργεια.</string>
+    <string name="installer_status_shizuku_not_installed">Εγκαταστήστε το Shizuku ή Sui για να χρησιμοποιήσετε αυτή την επιλογή.</string>
+    <string name="installer_status_shizuku_not_running">Εκκινήστε το Shizuku ή Sui και προσπαθήστε ξανά.</string>
+    <string name="installer_status_shizuku_permission">Δώστε άδεια στο Shizuku για να χρησιμοποιήσει το Morphe από την εφαρμογή Shizuku.</string>
+    <string name="installer_mount_warning_install">Ο προτιμώμενος εγκαταστάτης σας είναι ο ριζάς με το mount. Αυτή η εφαρμογή δεν εγκαταστάθηκε με το mount.</string>
+    <string name="mount_version_mismatch_message">Η έκδοση της εφαρμογής του κατασκευαστή (%2$s) δεν ταιριάζει με την έκδοση της επαναπαρασκευασμένης εφαρμογής (%1$s). Mount την ταιριάζουσα έκδοση του κατασκευαστή, μετά προσπαθήστε ξανά.</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
-    <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Δοκιμάστε ξανά ή επιλέξτε διαφορετικό εγκαταστάτη.</string>
-    <string name="installer_hint_blocked">Η εγκατάσταση μπλοκαρίστηκε από το Android. Ελέγξτε το Play Protect ή τις ρυθμίσεις ασφαλείας.</string>
-    <string name="installer_hint_conflict">Μια άλλη εφαρμογή με αυτό το όνομα πακέτου είναι ήδη εγκατεστημένη. Απεγκαταστήστε την πριν συνεχίσετε.</string>
-    <string name="installer_hint_incompatible">Το APK δεν είναι συμβατό με αυτήν τη συσκευή ή έκδοση Android.</string>
-    <string name="installer_hint_invalid">Το APK είναι άκυρο ή κατεστραμμένο.</string>
+    <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>
+    <string name="installer_hint_blocked">Η εγκατάσταση αποκλείστηκε από το Android. Ελέγξτε το Play Protect ή τις ρυθμίσεις ασφαλείας.</string>
+    <string name="installer_hint_conflict">Άλλη εφαρμογή με το ίδιο όνομα πακέτου είναι ήδη εγκατεστημένη. Αποσυνείδετε την πριν συνεχίσετε.</string>
+    <string name="installer_hint_incompatible">Το APK δεν είναι συμβατό με αυτό το συσκευή ή έκδοση Android.</string>
+    <string name="installer_hint_invalid">Το APK είναι ανεπαρκές ή καταστράφηκε.</string>
     <string name="installer_hint_storage">Δεν υπάρχει αρκετός χώρος αποθήκευσης για την εγκατάσταση.</string>
     <string name="installer_hint_timeout">Η εγκατάσταση έληξε. Προσπαθήστε ξανά.</string>
     <string name="installer_hint_aborted">Η εγκατάσταση ακυρώθηκε.</string>
     <string name="installer_external_launched">Άνοιγμα του %1$s…</string>
-    <string name="installer_external_timeout">Το %1$s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά.</string>
-    <string name="installer_external_success">Το %1$s ανέφερε επιτυχή εγκατάσταση.</string>
-    <string name="installer_external_finished_no_change">%1$s ολοκληρώθηκε χωρίς να εγκατασταθεί η εφαρμογή. Έλεγξτε το εγκαταστασίο για ένα μήνυμα σφάλματος και δοκιμάστε ξανά.</string>
+    <string name="installer_external_timeout">%1$s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά.</string>
+    <string name="installer_external_success">%1$s αναφέρει επιτυχή εγκατάσταση.</string>
     <string name="installer_unavailable_title">%s μη διαθέσιμο</string>
-    <string name="installer_unavailable_message">Ο προτιμώμενος εγκαταστάτης (%s) δεν είναι διαθέσιμος τώρα. Μπορείς να διορθώσεις το πρόβλημα και να προσπαθήσεις ξανά, ή να χρησιμοποιήσεις τον καθιερωμένο εγκαταστάτη αντί για αυτό.</string>
-    <string name="installer_unavailable_shizuku_hint">Βεβαιωθείτε ότι το Shizuku τρέχει και η άδεια έχει δοθεί σε αυτή την εφαρμογή.</string>
+    <string name="installer_unavailable_message">Ο προτιμώμενος εγκαταστάτης σας (%s) είναι τρέχων ακατάλληλος. Μπορείτε να διορθώσετε το πρόβλημα και να προσπαθήσετε ξανά, ή να χρησιμοποιήσετε τον παραδοσιακό εγκαταστάτη.</string>
+    <string name="installer_unavailable_shizuku_hint">Βεβαιωθείτε ότι το Shizuku τρέχει και η άδεια είναι δοθείσα σε αυτή την εφαρμογή.</string>
     <string name="installer_use_standard">Χρησιμοποιήστε τον καθορισμένο</string>
+    <string name="settings_prompt_installer_on_install">Επιλέξτε εγκαταστάτη κατά την εγκατάσταση.</string>
+    <string name="settings_prompt_installer_on_install_description">Εμφανίσε το διάλογο επιλογής εγκασταστή κάθε φορά που εγκαταστήσετε μια επαναπαρασκευασμένη εφαρμογή.</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Επιδομή</string>
     <string name="settings_system_process_runtime">Χρόνος επεξεργασίας</string>
@@ -424,7 +441,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore">Εισαγωγή κλειδιόδους</string>
     <string name="settings_system_import_keystore_description">Εισαγωγή προσαρμοσμένου κλειδιόδους</string>
     <string name="settings_system_import_keystore_dialog_title">Εισαγωγή κλειδιόδους</string>
-    <string name="settings_system_import_keystore_dialog_description">Για να εισαγάγετε το κλειδιόδους, θα χρειαστεί να εισάγετε τα στοιχεία του κλειδιόδους.</string>
+    <string name="settings_system_import_keystore_dialog_description">Θα χρειαστεί να εισάγεις τα στοιχεία του keystore για να εισάγεις το</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Όνομα (Α alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Κωδικός</string>
     <string name="settings_system_import_keystore_dialog_button">Εισαγωγή</string>
@@ -454,8 +471,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">Αποτυχία εξαγωγής αρχείων καταγραφής</string>
     <string name="settings_system_export_debug_logs_export_success">Αρχεία καταγραφής εξαγωγή</string>
     <!-- Settings - System Tab - Storage Management Section -->
-    <string name="settings_system_storage_management">Διαχείριση αρχείων</string>
-    <string name="settings_system_apks_count">%d APK(s)</string>
+    <string name="settings_system_storage_management">Διαχείριση αποθηκεύσεων</string>
     <string name="settings_system_apks_size">Σύνο μέγεθος: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Επιλεγμένες APKs</string>
@@ -466,11 +482,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_deleted">APK διαγράφη με επιτυχία</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Αρχικές APKs</string>
-    <string name="settings_system_original_apks_description">Οι αρχικές APKs αποθηκεύονται για επαναπροσθήση. Μόνο η πιο πρόσφατη έκδοση διατηρείται για κάθε εφαρμογή.</string>
+    <string name="settings_system_original_apks_description">Οι αρχικές APK αρχεία αποθηκεύονται για επαναπαρασκευή. Μόνο η πιο πρόσφατη έκδοση διατηρείται για κάθε εφαρμογή</string>
     <string name="settings_system_original_apks_empty">Δεν αποθηκευμένες APKs</string>
     <string name="settings_system_original_apks_deleted">Αρχική APK διαγράφη με επιτυχία</string>
     <string name="settings_system_original_apks_delete_title">Διαγραφή αρχικής APK;</string>
-    <string name="settings_system_original_apks_delete_confirm">Είστε βέβαιοι ότι θέλετε να διαγράψετε την αποθηκευμένη αρχική APK για %s; Δεν μπορείτε να επαναπροσθήσετε την εφαρμογή χωρίς να παρέχετε ένα νέο APK.</string>
+    <string name="settings_system_original_apks_delete_confirm">Διαγραφή αρχικού APK για %s; Δεν θα μπορείς να επαναεπεξεργαστείς χωρίς να παρέχεις ένα νέο APK</string>
+    <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_selections_title">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών</string>
+    <string name="settings_system_patch_selections_description">Διαχείριση αποθηκευμένων επιλογών επεξεργασιών και επιλογών. Αυτές διατηρούνται μετά την απενεργοποίηση της εφαρμογής</string>
+    <string name="settings_system_patch_selections_description_short">Αποθηκευμένο για μελλοντική επεξεργασία</string>
+    <string name="settings_system_patch_selections_empty">Δεν υπάρχουν αποθηκευμένες επιλογές επεξεργασιών</string>
+    <string name="settings_system_patch_selections_has_options">Επιλέγει επιλογές επεξεργασιών</string>
+    <string name="settings_system_patch_selections_patches_options">Επιλογές επεξεργασιών</string>
+    <string name="settings_system_patch_selection_delete_title">Διαγραφή επιλογής επεξεργασιών</string>
+    <string name="settings_system_patch_selection_deleted">Η επιλογή επεξεργασιών διαγράφηκε</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Σχετικά με</string>
     <string name="settings_system_share_website">Κοινοποίηση ιστότοπου</string>
@@ -483,6 +508,7 @@ morphe_header_custom_dark.png
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
     <string name="reset">Επαναφορά</string>
+    <string name="confirm">Επιβεβαίωση</string>
     <string name="warning">Προειδοποίηση</string>
     <string name="error_">Σφάλμα</string>
     <string name="retry">Προσπαθήστε ξανά</string>
@@ -496,7 +522,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">Δεν είναι εγκατεστημένο</string>
     <string name="view">Προβολή</string>
     <string name="search">Αναζήτηση</string>
-    <string name="clear_search">Εκκαθάρισε αναζήτηση</string>
     <string name="search_no_results">Δεν βρέθηκαν αποτελέσματα για</string>
     <string name="any_version">Οποιαδήποτε</string>
     <string name="enabled">Ενεργοποιήθηκε</string>
@@ -525,19 +550,21 @@ morphe_header_custom_dark.png
     <string name="installed">Εγκατεστημένο</string>
     <string name="reinstall">Επανεγκατάσταση</string>
     <string name="uninstall">Κατάργηση εγκατάστασης</string>
+    <string name="uninstalled">Διαεγκατεστημένο</string>
     <string name="save">Αποθήκευση</string>
     <string name="saved">Αποθηκευμένη</string>
     <string name="update">Ενημέρωση</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
-    <string name="uninstalling_ellipsis">Απεγκατάσταση...</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
     <string name="unmounting_ellipsis">Αποσύνιξη…</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
     <string name="changelog">Προβολή αρχείων καταγραφής αλλαγών</string>
+    <string name="changelog_description">Επισκέψου τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_loading">Φόρτωση αρχείων καταγραφής αλλαγών</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείων καταγραφής αλλαγών: %s</string>
     <string name="changelog_retry">Επανάληψη</string>
     <string name="changelog_empty">Δεν υπάρχει διαθέσιμος καταγραφή αλλαγών</string>
+    <string name="no_network_toast">Δεν υπάρχει διαθέσιμη σύνδεση στο διαδίκτυο</string>
     <string name="update_available">Μια ενημέρωση είναι διαθέσιμη</string>
     <string name="ready_to_install_update">Έτοιμο για εγκατάσταση ενημέρωσης</string>
     <string name="update_completed">Η ενημέρωση εγκαταστάθηκε</string>

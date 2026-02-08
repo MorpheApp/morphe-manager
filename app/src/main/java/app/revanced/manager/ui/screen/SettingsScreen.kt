@@ -36,19 +36,20 @@ import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
-import app.revanced.manager.ui.screen.settings.system.AboutDialog
 import app.revanced.manager.ui.screen.settings.AdvancedTabContent
 import app.revanced.manager.ui.screen.settings.AppearanceTabContent
 import app.revanced.manager.ui.screen.settings.SystemTabContent
+import app.revanced.manager.ui.screen.settings.system.AboutDialog
+import app.revanced.manager.ui.screen.settings.system.ChangelogDialog
 import app.revanced.manager.ui.screen.settings.system.InstallerSelectionDialogContainer
 import app.revanced.manager.ui.screen.settings.system.KeystoreCredentialsDialog
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.JSON_MIMETYPE
-import app.revanced.manager.util.rememberFileCreatorWithPermission
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 /**
  * Settings tabs for bottom navigation
@@ -73,7 +74,10 @@ fun SettingsScreen(
     importExportViewModel: ImportExportViewModel = koinViewModel(),
     homeViewModel: HomeViewModel = koinViewModel(),
     patchOptionsViewModel: PatchOptionsViewModel = koinViewModel(),
-    settingsViewModel: SettingsViewModel = koinViewModel()
+    settingsViewModel: SettingsViewModel = koinViewModel(),
+    updateViewModel: UpdateViewModel = koinViewModel {
+        parametersOf(false)
+    }
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -101,6 +105,7 @@ fun SettingsScreen(
     var showAboutDialog by rememberSaveable { mutableStateOf(false) }
     var showKeystoreCredentialsDialog by rememberSaveable { mutableStateOf(false) }
     var showInstallerDialog by remember { mutableStateOf(false) }
+    var showChangelogDialog by remember { mutableStateOf(false) }
 
     // Import launchers
     val importKeystoreLauncher = rememberLauncherForActivityResult(
@@ -120,20 +125,29 @@ fun SettingsScreen(
     }
 
     // Export launchers
-    val exportKeystore = rememberFileCreatorWithPermission(
-        mimeType = "*/*",
-        onFileCreated = { uri -> importExportViewModel.exportKeystore(uri) }
-    )
+    val exportKeystoreLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("*/*")
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.exportKeystore(it)
+        }
+    }
 
-    val exportSettings = rememberFileCreatorWithPermission(
-        mimeType = JSON_MIMETYPE,
-        onFileCreated = { uri -> importExportViewModel.exportManagerSettings(uri) }
-    )
+    val exportSettingsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.exportManagerSettings(it)
+        }
+    }
 
-    val exportDebugLogs = rememberFileCreatorWithPermission(
-        mimeType = "text/plain",
-        onFileCreated = { uri -> importExportViewModel.exportDebugLogs(uri) }
-    )
+    val exportDebugLogsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("text/plain")
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.exportDebugLogs(it)
+        }
+    }
 
     // Show keystore credentials dialog when needed
     LaunchedEffect(importExportViewModel.showCredentialsDialog) {
@@ -175,6 +189,14 @@ fun SettingsScreen(
         )
     }
 
+    // Manager changelog dialog
+    if (showChangelogDialog) {
+        ChangelogDialog(
+            onDismiss = { showChangelogDialog = false },
+            updateViewModel = updateViewModel
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -209,11 +231,12 @@ fun SettingsScreen(
                     onShowInstallerDialog = { showInstallerDialog = true },
                     importExportViewModel = importExportViewModel,
                     onImportKeystore = { importKeystoreLauncher.launch("*/*") },
-                    onExportKeystore = { exportKeystore("Morphe.keystore") },
+                    onExportKeystore = { exportKeystoreLauncher.launch("Morphe.keystore") },
                     onImportSettings = { importSettingsLauncher.launch(JSON_MIMETYPE) },
-                    onExportSettings = { exportSettings("morphe_manager_settings.json") },
-                    onExportDebugLogs = { exportDebugLogs(importExportViewModel.debugLogFileName) },
+                    onExportSettings = { exportSettingsLauncher.launch("morphe_manager_settings.json") },
+                    onExportDebugLogs = { exportDebugLogsLauncher.launch(importExportViewModel.debugLogFileName) },
                     onAboutClick = { showAboutDialog = true },
+                    onChangelogClick = { showChangelogDialog = true },
                     prefs = prefs
                 )
             }

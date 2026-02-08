@@ -1,6 +1,8 @@
 package app.revanced.manager.util
 
+import android.content.Context
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.R
 
 const val tag = "Morphe Manager"
 
@@ -47,10 +49,21 @@ object AppPackages {
         REDDIT -> REDDIT_DOWNLOAD_COLOR
         else -> YOUTUBE_DOWNLOAD_COLOR // Default to YouTube color
     }
+
+    /**
+     * Get localized app name for a package
+     */
+    fun getAppName(context: Context, packageName: String): String = when (packageName) {
+        YOUTUBE -> context.getString(R.string.home_youtube)
+        YOUTUBE_MUSIC -> context.getString(R.string.home_youtube_music)
+        REDDIT -> context.getString(R.string.home_reddit)
+        else -> packageName
+    }
 }
 
-//const val JAR_MIMETYPE = "application/java-archive"
-const val APK_MIMETYPE = "application/vnd.android.package-archive"
+const val APK_MIMETYPE  = "application/vnd.android.package-archive"
+const val JSON_MIMETYPE = "application/json"
+const val BIN_MIMETYPE  = "application/octet-stream"
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
@@ -80,8 +93,6 @@ val APK_FILE_EXTENSIONS = setOf(
     "xapk",
     "zip"
 )
-const val JSON_MIMETYPE = "application/json"
-const val BIN_MIMETYPE = "application/octet-stream"
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,

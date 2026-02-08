@@ -6,4 +6,16 @@
     <plurals name="patches_executed">
         <item quantity="other">%d 個のパッチを実行</item>
     </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="other">APK ファイル %d 個</item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="other">保存済みセレクション %d 件</item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="other">%d 件のソースを無効化しました</item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="other">%d 件のソースを有効化しました</item>
+    </plurals>
 </resources>
