@@ -43,6 +43,27 @@ object SplitApkInspector {
             .filterNot { it.isDirectory }
             .filter { it.name.lowercase(Locale.ROOT).endsWith(".apk") }
             .toList()
+        if (entries.isEmpty()) return null
+
+        val lowered = entries.associateWith { it.name.lowercase(Locale.ROOT) }
+        val baseEntry = lowered.entries.firstOrNull { (_, name) ->
+            name.endsWith("/base.apk") || name.endsWith("base.apk") || "base-master" in name || "base-main" in name
+        }?.key
+        if (baseEntry != null) return baseEntry
+
+        val primaryEntry = lowered.entries.firstOrNull { (_, name) ->
+            "main" in name || "master" in name
+        }?.key
+        if (primaryEntry != null) return primaryEntry
+
+        val nonConfig = lowered.entries.filter { (_, name) ->
+            !name.startsWith("config") && !name.contains("split_config") && !name.contains("config.")
+        }.map { it.key }
+        val largestNonConfig = nonConfig
+            .filter { it.size >= 0 }
+            .maxByOrNull { it.size }
+        if (largestNonConfig != null) return largestNonConfig
+
         return entries.minWithOrNull(
             compareBy<ZipEntry> { entry ->
                 val lower = entry.name.lowercase(Locale.ROOT)
