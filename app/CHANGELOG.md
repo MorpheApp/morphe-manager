@@ -1,3 +1,10 @@
+# app [1.6.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.7...v1.6.0-dev.8) (2026-02-08)
+
+
+### Bug Fixes
+
+* File system access request appeared where it wasn't needed ([#179](https://github.com/MorpheApp/morphe-manager/issues/179)) ([79fcec2](https://github.com/MorpheApp/morphe-manager/commit/79fcec271e9e3633cdb0ff4cbfc3689ec925db6f))
+
 # app [1.6.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2026-02-07)
 
 
