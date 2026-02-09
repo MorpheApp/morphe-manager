@@ -1,12 +1,12 @@
 package app.revanced.manager.network.api
 
+import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.dto.*
 import app.revanced.manager.network.service.HttpService
 import app.revanced.manager.network.utils.APIFailure
 import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
-import app.morphe.manager.BuildConfig
 import app.revanced.manager.util.MANAGER_REPO_URL
 import app.revanced.manager.util.MORPHE_API_URL
 import io.ktor.client.request.header
@@ -14,7 +14,6 @@ import io.ktor.client.request.url
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlin.runCatching
 
 class ReVancedAPI(
     private val client: HttpService,
@@ -156,8 +155,70 @@ class ReVancedAPI(
         return fetchReleaseAsset(config, includePrerelease, ::isManagerAsset)
     }
 
+    /**
+     * Get manager release info from static JSON file
+     *
+     * @param usePrerelease If true, fetches from 'dev' branch, otherwise from 'main'
+     */
+    private suspend fun getManagerReleaseFromJson(usePrerelease: Boolean): APIResponse<ManagerReleaseInfo> {
+        val config = repoConfig()
+        val branch = if (usePrerelease) "dev" else "main"
+        val jsonUrl = "https://raw.githubusercontent.com/${config.owner}/${config.name}/$branch/app/app-release.json"
+
+        return client.request<ManagerReleaseInfo> {
+            url(jsonUrl)
+        }
+    }
+
+    /**
+     * Get latest manager info using static JSON file
+     */
+    suspend fun getLatestAppInfoFromJson(): APIResponse<ReVancedAsset> {
+        val config = repoConfig()
+        val includePrerelease = prefs.useManagerPrereleases.get()
+
+        // Try to get from JSON first
+        return when (val jsonResponse = getManagerReleaseFromJson(includePrerelease)) {
+            is APIResponse.Success -> {
+                val mapped = runCatching {
+                    val releaseInfo = jsonResponse.data
+                    val version = "v${releaseInfo.version}"
+                    val pageUrl = "${config.htmlUrl}/releases/tag/$version"
+
+                    // Parse the timestamp from JSON
+                    val createdAt = Instant.parse(releaseInfo.createdAt)
+                        .toLocalDateTime(TimeZone.UTC)
+
+                    // All data is available in JSON
+                    ReVancedAsset(
+                        downloadUrl = releaseInfo.downloadUrl,
+                        createdAt = createdAt,
+                        signatureDownloadUrl = releaseInfo.signatureDownloadUrl,
+                        pageUrl = pageUrl,
+                        description = releaseInfo.description,
+                        version = version
+                    )
+                }
+
+                mapped.fold(
+                    onSuccess = { APIResponse.Success(it) },
+                    onFailure = {
+                        // If JSON parsing fails, fall back to GitHub API
+                        getLatestAppInfo()
+                    }
+                )
+            }
+            is APIResponse.Error -> getLatestAppInfo() // Fall back to GitHub API
+            is APIResponse.Failure -> getLatestAppInfo() // Fall back to GitHub API
+        }
+    }
+
+    /**
+     * Get app update using static JSON
+     * Returns update info only if a newer version is available
+     */
     suspend fun getAppUpdate(): ReVancedAsset? {
-        val asset = getLatestAppInfo().getOrNull() ?: return null
+        val asset = getLatestAppInfoFromJson().getOrNull() ?: return null
         return asset.takeIf { it.version.removePrefix("v") != BuildConfig.VERSION_NAME }
     }
 

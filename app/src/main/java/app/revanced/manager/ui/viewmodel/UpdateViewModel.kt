@@ -88,7 +88,8 @@ class UpdateViewModel(
     private val location = fs.tempDir.resolve("updater.apk")
     private val job = viewModelScope.launch {
         uiSafe(app, R.string.download_manager_failed, "Failed to download Morphe Manager") {
-            releaseInfo = reVancedAPI.getLatestAppInfo().getOrNull()
+            // Use JSON-based update check instead of GitHub API
+            releaseInfo = reVancedAPI.getLatestAppInfoFromJson().getOrNull()
 
             if (downloadOnScreenEntry) {
                 val isUpdate = releaseInfo?.version?.removePrefix("v") != BuildConfig.VERSION_NAME
