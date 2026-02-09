@@ -521,6 +521,16 @@ class HomeViewModel(
 
     /**
      * Show patch dialog
+     *
+     * Dialog logic:
+     * - SHOW dialog when:
+     *   1. New app (not installed yet) - shows download button, no saved APK button
+     *   2. Expert mode - always show with all options
+     *   3. Simple mode + no saved APK - shows download button, no saved APK button
+     *   4. Simple mode + saved APK != recommended - shows all options
+     *
+     * - SKIP dialog and auto-use saved APK when:
+     *   - Simple mode + saved APK == recommended version
      */
     fun showPatchDialog(packageName: String) {
         pendingPackageName = packageName
@@ -530,10 +540,27 @@ class HomeViewModel(
 
         // Load saved APK info if it exists
         viewModelScope.launch {
-            pendingSavedApkInfo = withContext(Dispatchers.IO) {
+            val savedInfo = withContext(Dispatchers.IO) {
                 loadSavedApkInfo(packageName)
             }
-            showApkAvailabilityDialog = true
+            pendingSavedApkInfo = savedInfo
+
+            // Check if we should auto-use saved APK in simple mode
+            val isExpertMode = prefs.useExpertMode.getBlocking()
+            val recommendedVersion = recommendedVersions[packageName]
+
+            val shouldAutoUseSaved = !isExpertMode &&
+                    savedInfo != null &&
+                    recommendedVersion != null &&
+                    savedInfo.version == recommendedVersion
+
+            if (shouldAutoUseSaved) {
+                // Skip dialog and use saved APK directly
+                handleSavedApkSelection()
+            } else {
+                // Show dialog
+                showApkAvailabilityDialog = true
+            }
         }
     }
 
