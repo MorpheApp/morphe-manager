@@ -50,7 +50,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.shared.ActionPillButton
 import app.revanced.manager.ui.screen.shared.InfoBadge
 import app.revanced.manager.ui.screen.shared.InfoBadgeStyle
-import app.revanced.manager.util.BUNDLE_URL_RELEASES
+import app.revanced.manager.util.SOURCE_REPO_URL
 import app.revanced.manager.util.getRelativeTimeString
 import app.revanced.manager.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -184,7 +184,10 @@ fun BundleManagementSheet(
                             },
                             onOpenInBrowser = {
                                 val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                    ?: BUNDLE_URL_RELEASES
+                                    ?: (bundle as? RemotePatchBundle)?.let { remote ->
+                                        RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
+                                    }
+                                    ?: SOURCE_REPO_URL
                                 try {
                                     uriHandler.openUri(pageUrl)
                                 } catch (_: Exception) {

@@ -139,6 +139,28 @@ sealed class RemotePatchBundle(
         private const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val changelogCacheMutex = Mutex()
         private val changelogCache = mutableMapOf<String, CachedChangelog>()
+
+        /**
+         * Infer GitHub page URL from various endpoint formats
+         */
+        fun inferPageUrlFromEndpoint(endpoint: String): String? {
+            return try {
+                val uri = java.net.URI(endpoint)
+                val host = uri.host?.lowercase(java.util.Locale.US)
+
+                when (host) {
+                    "raw.githubusercontent.com", "github.com" -> {
+                        uri.path?.trim('/')?.split('/')
+                            ?.filter { it.isNotBlank() }
+                            ?.takeIf { it.size >= 2 }
+                            ?.let { "https://github.com/${it[0]}/${it[1]}" }
+                    }
+                    else -> null
+                }
+            } catch (_: Exception) {
+                null
+            }
+        }
     }
 
     val installedVersionSignature: String? get() = installedVersionSignatureInternal
@@ -158,9 +180,17 @@ class JsonPatchBundle(
     enabled: Boolean,
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
-        http.request<ReVancedAsset> {
+        val asset = http.request<ReVancedAsset> {
             url(endpoint)
         }.getOrThrow()
+
+        // If pageUrl is not set, try to infer it from the endpoint
+        if (asset.pageUrl == null) {
+            val inferredPageUrl = inferPageUrlFromEndpoint(endpoint)
+            asset.copy(pageUrl = inferredPageUrl)
+        } else {
+            asset
+        }
     }
 
     override fun copy(
@@ -252,7 +282,7 @@ class GitHubPullRequestBundle(
     override suspend fun download(info: ReVancedAsset, onProgress: PatchBundleDownloadProgress?) = withContext(Dispatchers.IO) {
         val prefs: PreferencesManager by inject()
         val gitHubPat = prefs.gitHubPat.get().also {
-            if (it.isBlank()) throw RuntimeException("PAT is required.")
+            if (it.isBlank()) throw RuntimeException("PAT is required")
         }
 
         val customHttpClient = HttpClient(OkHttp) {
@@ -317,7 +347,7 @@ class GitHubPullRequestBundle(
                             }
 
                             if (copiedBytes <= 0L) {
-                                throw IOException("No .mpp file found in the pull request artifact.")
+                                throw IOException("No .mpp file found in the pull request artifact")
                             }
                             // Final progress - use actual copied bytes as total if we don't have size
                             val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
