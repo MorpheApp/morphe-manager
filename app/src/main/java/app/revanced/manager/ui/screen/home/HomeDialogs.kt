@@ -11,10 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.outlined.Check
-import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -36,6 +33,7 @@ import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.model.SelectedApp
 import app.revanced.manager.ui.screen.shared.*
 import app.revanced.manager.ui.viewmodel.HomeViewModel
+import app.revanced.manager.ui.viewmodel.SavedApkInfo
 import app.revanced.manager.util.AppPackages
 import app.revanced.manager.util.htmlAnnotatedString
 import app.revanced.manager.util.toast
@@ -66,6 +64,7 @@ fun HomeDialogs(
         val compatibleVersions = homeViewModel.pendingCompatibleVersions
         val usingMountInstall = homeViewModel.usingMountInstall
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
+        val savedApkInfo = homeViewModel.pendingSavedApkInfo
 
         ApkAvailabilityDialog(
             appName = appName,
@@ -73,6 +72,7 @@ fun HomeDialogs(
             compatibleVersions = compatibleVersions,
             usingMountInstall = usingMountInstall,
             isExpertMode = isExpertMode,
+            savedApkInfo = savedApkInfo,
             onDismiss = {
                 homeViewModel.showApkAvailabilityDialog = false
                 homeViewModel.cleanupPendingData()
@@ -88,6 +88,9 @@ fun HomeDialogs(
                     homeViewModel.showDownloadInstructionsDialog = true
                     homeViewModel.resolveDownloadRedirect()
                 }
+            },
+            onUseSaved = {
+                homeViewModel.handleSavedApkSelection()
             }
         )
     }
@@ -342,23 +345,44 @@ private fun ApkAvailabilityDialog(
     compatibleVersions: List<String>,
     usingMountInstall: Boolean,
     isExpertMode: Boolean,
+    savedApkInfo: SavedApkInfo?,
     onDismiss: () -> Unit,
     onHaveApk: () -> Unit,
-    onNeedApk: () -> Unit
+    onNeedApk: () -> Unit,
+    onUseSaved: () -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.home_apk_availability_dialog_title),
         footer = {
-            MorpheDialogButtonRow(
-                primaryText = stringResource(R.string.home_apk_availability_no),
-                onPrimaryClick = onNeedApk,
-                primaryIcon = Icons.Outlined.Download,
-                secondaryText = stringResource(R.string.home_apk_availability_yes),
-                onSecondaryClick = onHaveApk,
-                secondaryIcon = Icons.Outlined.Check,
-                layout = DialogButtonLayout.Vertical
-            )
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Main action buttons
+                MorpheDialogButtonRow(
+                    primaryText = stringResource(R.string.home_apk_availability_no),
+                    onPrimaryClick = onNeedApk,
+                    primaryIcon = Icons.Outlined.Download,
+                    secondaryText = stringResource(R.string.home_apk_availability_yes),
+                    onSecondaryClick = onHaveApk,
+                    secondaryIcon = Icons.Outlined.Check,
+                    layout = DialogButtonLayout.Vertical
+                )
+
+                // Saved APK button (if available)
+                if (savedApkInfo != null) {
+                    MorpheDialogOutlinedButton(
+                        text = stringResource(
+                            R.string.home_apk_use_saved_with_version,
+                            savedApkInfo.version
+                        ),
+                        onClick = onUseSaved,
+                        icon = Icons.Outlined.History,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
         }
     ) {
         val secondaryColor = LocalDialogSecondaryTextColor.current

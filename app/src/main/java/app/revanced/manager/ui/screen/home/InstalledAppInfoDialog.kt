@@ -348,8 +348,8 @@ fun InstalledAppInfoDialog(
                         icon = Icons.Outlined.Warning,
                         title = stringResource(R.string.home_app_info_app_deleted_warning),
                         description = stringResource(R.string.home_app_info_app_deleted_description),
-                        buttonText = stringResource(R.string.repatch),
-                        buttonIcon = Icons.Outlined.Refresh,
+                        buttonText = stringResource(R.string.patch),
+                        buttonIcon = Icons.Outlined.AutoFixHigh,
                         onClick = {
                             onDismiss()
                             onTriggerPatchFlow(installedApp.originalPackageName)
@@ -370,8 +370,8 @@ fun InstalledAppInfoDialog(
                         icon = Icons.Outlined.Update,
                         title = stringResource(R.string.home_app_info_patch_update_available),
                         description = stringResource(R.string.home_app_info_patch_update_available_description),
-                        buttonText = stringResource(R.string.repatch),
-                        buttonIcon = Icons.Outlined.Refresh,
+                        buttonText = stringResource(R.string.patch),
+                        buttonIcon = Icons.Outlined.AutoFixHigh,
                         onClick = {
                             onDismiss()
                             onTriggerPatchFlow(installedApp.originalPackageName)
@@ -397,17 +397,9 @@ fun InstalledAppInfoDialog(
                     isInstalling = isInstalling,
                     mountOperation = mountOperation,
                     hasUpdate = hasUpdate,
-                    onPatchClick = { onTriggerPatchFlow(installedApp.originalPackageName) },
-                    onRepatchClick = {
-                        viewModel.startRepatch { pkgName, originalFile, patches, options ->
-                            onNavigateToPatcher(
-                                pkgName,
-                                originalFile.name.substringAfterLast("_").substringBeforeLast("_original.apk"),
-                                originalFile.absolutePath,
-                                patches,
-                                options
-                            )
-                        }
+                    onPatchClick = {
+                        onDismiss()
+                        onTriggerPatchFlow(installedApp.originalPackageName)
                     },
                     onUninstall = { showUninstallConfirm = true },
                     onDelete = { showDeleteDialog = true },
@@ -418,10 +410,10 @@ fun InstalledAppInfoDialog(
                     }
                 )
 
-                // Warning for missing original APK
+                // Info about saved APK availability
                 if (!viewModel.hasOriginalApk) {
                     InfoBadge(
-                        text = stringResource(R.string.home_app_info_repatch_requires_original),
+                        text = stringResource(R.string.home_app_info_no_saved_apk),
                         style = InfoBadgeStyle.Warning,
                         icon = Icons.Outlined.Info,
                         isExpanded = true,
@@ -659,7 +651,6 @@ private fun ActionsSection(
     mountOperation: InstallViewModel.MountOperation?,
     hasUpdate: Boolean,
     onPatchClick: () -> Unit,
-    onRepatchClick: () -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit,
     onExport: () -> Unit,
@@ -670,24 +661,15 @@ private fun ActionsSection(
     val secondaryActions = mutableListOf<ActionItem>()
     val destructiveActions = mutableListOf<ActionItem>()
 
-    // Primary actions
-    if (!hasUpdate && !viewModel.isAppDeleted) { // Hide the Patch button if there is an banner with its own button
+    // Primary actions - Single Patch button that triggers APK selection dialog
+    // The dialog will show "Use saved APK" option if original APK exists
+    if (!hasUpdate && !viewModel.isAppDeleted) { // Hide the Patch button if there is a banner with its own button
         primaryActions.add(
             ActionItem(
                 text = stringResource(R.string.patch),
                 icon = Icons.Outlined.AutoFixHigh,
                 onClick = onPatchClick,
                 enabled = availablePatches > 0
-            )
-        )
-    }
-
-    if (viewModel.hasOriginalApk) {
-        primaryActions.add(
-            ActionItem(
-                text = stringResource(R.string.repatch),
-                icon = Icons.Outlined.Refresh,
-                onClick = onRepatchClick
             )
         )
     }

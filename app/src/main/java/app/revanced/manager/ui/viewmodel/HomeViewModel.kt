@@ -30,6 +30,7 @@ import app.revanced.manager.domain.bundles.RemotePatchBundle
 import app.revanced.manager.domain.installer.RootInstaller
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
+import app.revanced.manager.domain.repository.OriginalApkRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.revanced.manager.domain.repository.PatchOptionsRepository
@@ -92,6 +93,15 @@ data class QuickPatchParams(
 )
 
 /**
+ * Saved APK information for display in APK selection dialog
+ */
+data class SavedApkInfo(
+    val fileName: String,
+    val filePath: String,
+    val version: String
+)
+
+/**
  * Combined ViewModel for Home and Dashboard functionality
  * Manages all dialogs, user interactions, APK processing, and bundle management
  */
@@ -99,6 +109,7 @@ class HomeViewModel(
     private val app: Application,
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
+    private val originalApkRepository: OriginalApkRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val reVancedAPI: ReVancedAPI,
@@ -115,6 +126,11 @@ class HomeViewModel(
     val bundleImportProgress = patchBundleRepository.bundleImportProgress
     private val contentResolver: ContentResolver = app.contentResolver
     private val powerManager = app.getSystemService<PowerManager>()!!
+
+    // App data resolver for getting app info from APK files
+    private val appDataResolver by lazy {
+        AppDataResolver(app, pm, originalApkRepository, installedAppRepository, filesystem)
+    }
 
     /**
      * Android 11 kills the app process after granting the "install apps" permission
@@ -161,6 +177,7 @@ class HomeViewModel(
     var pendingCompatibleVersions by mutableStateOf<List<String>>(emptyList())
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
+    var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
 
     // Bundle update snackbar state
     var showBundleUpdateSnackbar by mutableStateOf(false)
@@ -510,7 +527,44 @@ class HomeViewModel(
         pendingAppName = AppPackages.getAppName(app, packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
-        showApkAvailabilityDialog = true
+
+        // Load saved APK info if it exists
+        viewModelScope.launch {
+            pendingSavedApkInfo = withContext(Dispatchers.IO) {
+                loadSavedApkInfo(packageName)
+            }
+            showApkAvailabilityDialog = true
+        }
+    }
+
+    /**
+     * Load information about saved original APK for a package
+     */
+    private suspend fun loadSavedApkInfo(packageName: String): SavedApkInfo? {
+        try {
+            val originalApk = originalApkRepository.get(packageName) ?: return null
+            val file = File(originalApk.filePath)
+            if (!file.exists()) return null
+
+            // Use AppDataResolver to get accurate version from APK file
+            val resolvedData = appDataResolver.resolveAppData(
+                packageName = packageName,
+                preferredSource = AppDataSource.ORIGINAL_APK
+            )
+
+            // Use resolved version
+            val version = resolvedData.version
+                ?: originalApk.version
+
+            return SavedApkInfo(
+                fileName = file.name,
+                filePath = file.absolutePath,
+                version = version
+            )
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to load saved APK info", e)
+            return null
+        }
     }
 
     /**
@@ -531,6 +585,54 @@ class HomeViewModel(
                 processSelectedApp(selectedApp)
             } else {
                 app.toast(app.getString(R.string.home_invalid_apk))
+            }
+        }
+    }
+
+    /**
+     * Handle selection of saved APK from APK availability dialog
+     */
+    fun handleSavedApkSelection() {
+        val savedInfo = pendingSavedApkInfo
+        val packageName = pendingPackageName
+
+        if (savedInfo == null || packageName == null) {
+            app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+            cleanupPendingData()
+            return
+        }
+
+        viewModelScope.launch {
+            showApkAvailabilityDialog = false
+
+            // Create SelectedApp from saved APK file
+            val selectedApp = withContext(Dispatchers.IO) {
+                try {
+                    val file = File(savedInfo.filePath)
+                    if (!file.exists()) {
+                        app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+                        return@withContext null
+                    }
+
+                    // Mark as used
+                    originalApkRepository.markUsed(packageName)
+
+                    SelectedApp.Local(
+                        packageName = packageName,
+                        version = savedInfo.version,
+                        file = file,
+                        temporary = false // Don't delete saved APK files
+                    )
+                } catch (e: Exception) {
+                    Log.e(tag, "Failed to load saved APK", e)
+                    null
+                }
+            }
+
+            if (selectedApp != null) {
+                processSelectedApp(selectedApp)
+            } else {
+                cleanupPendingData()
             }
         }
     }
@@ -940,6 +1042,7 @@ class HomeViewModel(
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
         resolvedDownloadUrl = null
+        pendingSavedApkInfo = null
         if (!keepSelectedApp) {
             pendingSelectedApp?.let { app ->
                 if (app is SelectedApp.Local && app.temporary) {
