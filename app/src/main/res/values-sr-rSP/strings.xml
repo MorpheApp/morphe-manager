@@ -160,6 +160,7 @@ Kompatibilne verzije:"</string>
     <string name="home_app_info_delete_item_patched_apk">Патчиран APK фајл</string>
     <string name="home_app_info_delete_item_original_apk">Оригинални APK фајл</string>
     <string name="home_app_info_delete_preservation_note">Ваша патч селекција и опције ће бити сачуване за будуће патчење</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Уклањао сам %d застарелих исправки из сачуване селекције</string>
     <string name="home_app_info_patches_name_default">Патчеви</string>
     <string name="home_app_info_patches_name_fallback">Без имена</string>
     <string name="home_app_info_patches_replace_fail">Неуспешно увоз извора: %s</string>
@@ -174,6 +175,8 @@ Kompatibilne verzije:"</string>
     <string name="home_app_info_patched_at">Патчето</string>
     <string name="home_app_info_patch_update_available">Доступно ажурирање патчева</string>
     <string name="home_app_info_patch_update_available_description">Доступна је нова верзија патчева. Репатујте своју апликацију да добијете најновије побољшања и исправке</string>
+    <string name="home_app_info_app_deleted_warning">Апликација је деинсталирана изван менаџера</string>
+    <string name="home_app_info_app_deleted_description">Ова апликација је деинсталирана изван менаџера. Поново је инсталирајте да бисте вратили функционалност</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root режим захтева да оригинални APK буде инсталиран на вашем уређају пре печовања</string>
     <string name="root_gmscore_excluded">Печ подршке GmsCore је искључен у root режиму</string>
@@ -237,9 +240,8 @@ Kompatibilne verzije:"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Ваша апликација има повишену температуру, а једини лек су додатни печеви… 🩺🔔</string>
     <string name="patcher_message_20">Уклањање глупости. Молимо сачекајте… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Примена крпења</string>
-    <string name="applying_patch">Примена %s</string>
     <string name="failed_to_execute_patch">Није успело да се примени %s</string>
     <string name="patched_app_saved_toast">Крпељом потписана апликација сачувана за касније</string>
     <string name="patched_app_save_failed_toast">Није успело чување крпељом потписане апликације</string>
@@ -403,8 +405,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">Почните Шизуку или Суи и покушајте поново.</string>
     <string name="installer_status_shizuku_permission">Дозволите Шизуку да дозволи Морфеу из апликације Шизуку.</string>
     <string name="installer_mount_warning_install">Ваш главни инсталатор је постављен на инсталатор за кореновани монтажу. Ова сачувана апликација није инсталирана коришћењем монтаже.</string>
-    <string name="installer_mount_mismatch_title">Инсталатер за монтирање са рутовањем није изабран</string>
-    <string name="installer_mount_mismatch_install">Ова апликација је инсталирана коришћењем инсталатора за кореновани монтажу. Вратите се на главни инсталатор да бисте користили монтажу, а затим монтирајте.</string>
     <string name="mount_version_mismatch_message">Верзија оригиналне апликације (%2$s) не одговара верзији патчене апликације (%1$s). Монтирајте одговараћу оригиналну верзију, а затим покушајте поново.</string>
     <string name="installer_status_shizuku_unsupported">Верзија Шизуку која је инсталирана није подржана.</string>
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
@@ -419,7 +419,6 @@ morphe_header_custom_dark.png
     <string name="installer_external_launched">Отварање %1$s…</string>
     <string name="installer_external_timeout">%1$s није потврдио инсталацију. Проверите другу апликацију и покушајте поново.</string>
     <string name="installer_external_success">%1$s известио је о успешној инсталацији.</string>
-    <string name="installer_external_finished_no_change">%1$s завршен је без инсталације апликације. Проверите инсталатор за грешке и покушајте поново.</string>
     <string name="installer_unavailable_title">%s није доступно</string>
     <string name="installer_unavailable_message">Ваш главни инсталатор (%s) тренутно није доступан. Можете решити проблем и покушати поново или користити стандардни инсталатор уместо тога.</string>
     <string name="installer_unavailable_shizuku_hint">Уверите се да је Шизуку покренут и дозвола је дата овој апликацији.</string>
@@ -525,7 +524,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">Није инсталирано</string>
     <string name="view">Погледај</string>
     <string name="search">Претрага</string>
-    <string name="clear_search">Очистите претрагу</string>
     <string name="search_no_results">Нису пронађени резултати за \'\'</string>
     <string name="any_version">Било која</string>
     <string name="enabled">Омогућено</string>
@@ -554,11 +552,11 @@ morphe_header_custom_dark.png
     <string name="installed">Инсталирано</string>
     <string name="reinstall">Поново инсталирај</string>
     <string name="uninstall">Деинсталирај</string>
+    <string name="uninstalled">Уклањено</string>
     <string name="save">Сачувај</string>
     <string name="saved">Сачувано</string>
     <string name="update">Ажурирај</string>
     <string name="installing_ellipsis">Инсталирање…</string>
-    <string name="uninstalling_ellipsis">Декомпилирање...</string>
     <string name="mounting_ellipsis">Монтирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>
     <string name="importing_ellipsis">Увоз…</string>

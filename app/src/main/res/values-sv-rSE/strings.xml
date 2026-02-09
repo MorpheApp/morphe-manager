@@ -215,9 +215,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Din app har feber, och det enda botemedlet är fler korrigeringar … 🩺🔔</string>
     <string name="patcher_message_20">Tar bort nonsens. Var god dröj … 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Tillämpar korrigeringar</string>
-    <string name="applying_patch">Tillämpar %s</string>
     <string name="failed_to_execute_patch">Det gick inte att tillämpa %s</string>
     <string name="patched_app_saved_toast">Den korrigerade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
@@ -363,8 +362,6 @@ Bildernas mått ska vara följande:
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
     <string name="installer_status_shizuku_permission">Ge Shizuku behörighet till Morphe från Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
-    <string name="installer_mount_mismatch_title">Rootad monteringsinstallerare har inte valts</string>
-    <string name="installer_mount_mismatch_install">Den här appen installerades med den rootade monteringsinstalleraren. Byt din primära installerare tillbaka till den för att använda monteringsåtgärder, och montera sedan</string>
     <string name="mount_version_mismatch_message">Standardappversionen (%2$s) matchar inte den patchade appversionen (%1$s). Montera den matchande standardversionen och försök igen</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
@@ -373,7 +370,6 @@ Bildernas mått ska vara följande:
     <string name="installer_hint_incompatible">APK-filen är inte kompatibel med den här enheten eller Android-versionen</string>
     <string name="installer_hint_invalid">APK-filen är ogiltig eller skadad</string>
     <string name="installer_external_launched">Öppnar %1$s …</string>
-    <string name="installer_external_finished_no_change">%1$s slutförde utan att installera appen. Kontrollera installeraren efter ett felmeddelande och försök igen</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestanda</string>
     <string name="settings_system_process_runtime">Processkörning</string>
@@ -463,7 +459,6 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="not_installed">Inte installerad</string>
     <string name="view">Visa</string>
     <string name="search">Sök</string>
-    <string name="clear_search">Rensa sökning</string>
     <string name="search_no_results">Inga resultat hittades</string>
     <string name="any_version">Valfri</string>
     <string name="enabled">Aktiverad</string>
@@ -496,7 +491,6 @@ Med öppen källkod som grund bygger Morphe sin framgång på feedback och bidra
     <string name="saved">Sparad</string>
     <string name="update">Uppdatera</string>
     <string name="installing_ellipsis">Installerar …</string>
-    <string name="uninstalling_ellipsis">Avinstallerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>
     <string name="importing_ellipsis">Importerar …</string>

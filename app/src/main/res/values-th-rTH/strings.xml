@@ -160,6 +160,7 @@
     <string name="home_app_info_delete_item_patched_apk">ไฟล์ APK ที่แก้ไขแล้ว</string>
     <string name="home_app_info_delete_item_original_apk">ไฟล์ APK รุ่นต้นฉบับ</string>
     <string name="home_app_info_delete_preservation_note">แพตซ์ที่คุณเลือกไว้และการตั้งค่าของคุณจะถูกเก็บไว้สำหรับการแก้ไขในอนาคต</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">ลบ %d ปัญหาเก่าไปจากการเลือกที่ถูกบันทึก</string>
     <string name="home_app_info_patches_name_default">แพตช์</string>
     <string name="home_app_info_patches_name_fallback">ไม่มีชื่อ</string>
     <string name="home_app_info_patches_replace_fail">ไม่สามารถนำเข้าแพตช์: %s</string>
@@ -174,6 +175,8 @@
     <string name="home_app_info_patched_at">อัปเด็ดท์แล้ว</string>
     <string name="home_app_info_patch_update_available">มีอัพเดทแพตซ์ใหม่ให้ใช้งานแล้ว</string>
     <string name="home_app_info_patch_update_available_description">มีแพตซ์เวอร์ชันใหม่พร้อมใช้งานแล้ว ให้แพตซ์อีกครั้งเพื่อรับการปรับปรุงและการแก้ไขสำหรับเวอร์ชันล่าสุด</string>
+    <string name="home_app_info_app_deleted_warning">แอปถูกลบนอกจากตัวจัดการ</string>
+    <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบนอกจากตัวจัดการ โปรดรีเพทช์เพื่อฟื้นฟูฟังก์ชัน</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
     <string name="root_gmscore_excluded">การรองรับ GmsCore ถูกยกเว้นในโหมด Root</string>
@@ -237,9 +240,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
     <string name="patcher_message_20">กำลังไล่เบา กรุณารอสักครู่… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">กำลังใช้แพตช์</string>
-    <string name="applying_patch">กำลังใช้ %s</string>
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
     <string name="patched_app_saved_toast">บันทึกแอปที่แก้ไขแล้วสำหรับภายหลัง</string>
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แก้ไขได้</string>
@@ -404,8 +406,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">เริ่มต้น Shizuku หรือ Sui และลองอีกครั้ง</string>
     <string name="installer_status_shizuku_permission">ให้สิทธิ์ Shizuku ให้ Morphe จากแอป Shizuku</string>
     <string name="installer_mount_warning_install">ตัวติดตั้งหลักของคุณตั้งเป็นตัวติดตั้งมอนต์รากรูต. แอปนี้ไม่ได้ติดตั้งด้วยมอนต์</string>
-    <string name="installer_mount_mismatch_title">ไม่ได้เลือกโปรแกรมติดตั้งเมาท์ที่มี root</string>
-    <string name="installer_mount_mismatch_install">แอปนี้ได้ติดตั้งด้วยตัวติดตั้งมอนต์รากรูต. เปลี่ยนตัวติดตั้งหลักกลับเพื่อใช้การดำเนินการมอนต์, แล้วมอนต์</string>
     <string name="mount_version_mismatch_message">รุ่นแอปสต็อก (%2$s) ไม่ตรงกับรุ่นแอปปรับแก้ (%1$s). มอนต์รุ่นสต็อกที่ตรงกัน, แล้วลองอีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
@@ -420,7 +420,6 @@ morphe_header_custom_dark.png
     <string name="installer_external_launched">กำลังเปิด %1$s…</string>
     <string name="installer_external_timeout">%1$s ไม่ยืนยันการติดตั้ง. ตรวจสอบแอปอื่นและลองอีกครั้ง</string>
     <string name="installer_external_success">%1$s รายงานการติดตั้งสำเร็จ</string>
-    <string name="installer_external_finished_no_change">%1$s สิ้นสุดลงโดยไม่ต้องติดตั้งแอปพลิเคชัน. ตรวจสอบข้อความผิดพลาดในตัวติดตั้งและลองอีกครั้ง</string>
     <string name="installer_unavailable_title">%s ไม่พร้อมใช้งาน</string>
     <string name="installer_unavailable_message">ตัวติดตั้งที่คุณชอบ (%s) ไม่พร้อมใช้งานในขณะนี้. คุณสามารถแก้ไขปัญหาและลองอีกครั้งหรือใช้ตัวติดตั้งมาตรฐานแทน</string>
     <string name="installer_unavailable_shizuku_hint">ให้แน่ใจว่า Shizuku กำลังทำงานและให้สิทธิ์แก่แอปนี้</string>
@@ -525,7 +524,6 @@ morphe_header_custom_dark.png
     <string name="not_installed">ไม่ได้ติดตั้ง</string>
     <string name="view">ดู</string>
     <string name="search">ค้นหา</string>
-    <string name="clear_search">พร้อมูล</string>
     <string name="search_no_results">เปิด</string>
     <string name="any_version">เวอร์ชันใดก็ได้</string>
     <string name="enabled">เปิดใช้งานแล้ว</string>
@@ -554,11 +552,11 @@ morphe_header_custom_dark.png
     <string name="installed">ติดตั้งแล้ว</string>
     <string name="reinstall">ติดตั้งใหม่</string>
     <string name="uninstall">ถอนการติดตั้ง</string>
+    <string name="uninstalled">ถูกถอนออก</string>
     <string name="save">บันทึก</string>
     <string name="saved">บันทึกแล้ว</string>
     <string name="update">อัปเดต</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
-    <string name="uninstalling_ellipsis">กำลังถก uninstall…</string>
     <string name="mounting_ellipsis">กำลังเมานท์…</string>
     <string name="unmounting_ellipsis">กำลังแยก…</string>
     <string name="importing_ellipsis">กำลังนำเข้า…</string>

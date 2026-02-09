@@ -160,6 +160,7 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_app_info_delete_item_patched_apk">Fișierul APK modificat</string>
     <string name="home_app_info_delete_item_original_apk">Fișierul APK original</string>
     <string name="home_app_info_delete_preservation_note">Selectia și opțiunile de modificare vor fi păstrate pentru viitoarele modificări</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Eliminat %d pacheturi vechi din selecţie salvată</string>
     <string name="home_app_info_patches_name_default">Patachuri</string>
     <string name="home_app_info_patches_name_fallback">Fără nume</string>
     <string name="home_app_info_patches_replace_fail">Nu s-a putut importa patachuri: %s</string>
@@ -174,6 +175,8 @@ Sunteți sigur că doriți să continuați?"</string>
     <string name="home_app_info_patched_at">Patachizat</string>
     <string name="home_app_info_patch_update_available">Actualizare patach disponibilă</string>
     <string name="home_app_info_patch_update_available_description">O versiune mai nouă a modificărilor este disponibilă. Repătați aplicația pentru a obține ultimele îmbunătățiri și corectări</string>
+    <string name="home_app_info_app_deleted_warning">Aplicatia a fost dezinstalata in afara managerului</string>
+    <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara managerului. Repacheaza-o pentru a restaura funcționalitatea</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
     <string name="root_gmscore_excluded">Suportul GmsCore este exclus în modul root</string>
@@ -237,9 +240,8 @@ Sunteți sigur că doriți să continuați?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
     <string name="patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Aplicarea modificărilor</string>
-    <string name="applying_patch">Se aplică %s</string>
     <string name="failed_to_execute_patch">Nu s-a putut aplica %s</string>
     <string name="patched_app_saved_toast">Aplicație modificată salvată pentru mai târziu</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
@@ -403,8 +405,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_shizuku_not_running">Porniți Shizuku sau Sui și reîncercați</string>
     <string name="installer_status_shizuku_permission">Grantă Shizuku permisiunea pentru Morphe din aplicația Shizuku</string>
     <string name="installer_mount_warning_install">Instalatorul principal setat la instalatorul montat radical. Această aplicație salvată nu a fost instalată folosind montaj</string>
-    <string name="installer_mount_mismatch_title">Instalator bazat pe montare nenoselectat</string>
-    <string name="installer_mount_mismatch_install">Această aplicație a fost instalată folosind instalatorul montat radical. Schimbați instalatorul principal pentru a utiliza acțiunile de montaj, apoi montează</string>
     <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivște cu versiunea aplicației patate (%1$s). Montează versiunea de bază potrivită, apoi reîncercați</string>
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
@@ -419,7 +419,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_external_launched">Se deschide %1$s…</string>
     <string name="installer_external_timeout">%1$s nu a confirmat instalarea. Verificați altă aplicație și reîncercați</string>
     <string name="installer_external_success">%1$s a raportat o instalare reușită</string>
-    <string name="installer_external_finished_no_change">%1$s s-a finalizat fără instalarea aplicației. Verificați instalatorul pentru un mesaj de eroare și reîncercați</string>
     <string name="installer_unavailable_title">%s indisponibil</string>
     <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți fixa problema și reinstalare, sau folosi instalatorul standard în schimb</string>
     <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>
@@ -525,7 +524,6 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="not_installed">Neinstalată</string>
     <string name="view">Vizualizează</string>
     <string name="search">Caută</string>
-    <string name="clear_search">Șterge căutarea</string>
     <string name="search_no_results">Nu s-au găsit rezultate pentru „”</string>
     <string name="any_version">Orice</string>
     <string name="enabled">Activat</string>
@@ -554,11 +552,11 @@ Open-source la nivelul său de nucleu, Morphe se bazează pe feedback-ul comunit
     <string name="installed">Instalat</string>
     <string name="reinstall">Reinstalați</string>
     <string name="uninstall">Dezinstalați</string>
+    <string name="uninstalled">Deinstalat</string>
     <string name="save">Salvați</string>
     <string name="saved">Salvat</string>
     <string name="update">Actualizare</string>
     <string name="installing_ellipsis">Se instalează…</string>
-    <string name="uninstalling_ellipsis">Se dezinstalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>

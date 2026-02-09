@@ -160,6 +160,7 @@ Tá sé cinnte duit go bhfuil sé ag dul chugat?"</string>
     <string name="home_app_info_delete_item_patched_apk">Comhad APK ghearrtha</string>
     <string name="home_app_info_delete_item_original_apk">Comhad APK bunaidh</string>
     <string name="home_app_info_delete_preservation_note">Coinneofar do rogha paiste agus roghanna le haghaidh paistí amach anseo</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Tugadh amach %d seachadán atá bréagach ó roghhnú faoi seach</string>
     <string name="home_app_info_patches_name_default">Paistí</string>
     <string name="home_app_info_patches_name_fallback">Gan ainm</string>
     <string name="home_app_info_patches_replace_fail">Theip ar phaistí a iompórtáil: %s</string>
@@ -174,6 +175,8 @@ Tá sé cinnte duit go bhfuil sé ag dul chugat?"</string>
     <string name="home_app_info_patched_at">Paisteáilte</string>
     <string name="home_app_info_patch_update_available">Nuashonrú paiste ar fáil</string>
     <string name="home_app_info_patch_update_available_description">Tá leagan níos nuaí de na paistí ar fáil. Déan paiste nua ar d\'aip chun na feabhsuithe agus na socruithe is déanaí a fháil.</string>
+    <string name="home_app_info_app_deleted_warning">Tugadh amach an app seach</string>
+    <string name="home_app_info_app_deleted_description">Tá an app seo tarchur amach as an rialúchán. Tarchuraigh é chugainn le haghaidh athrú</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Éilíonn mód fréimhe go mbeidh an APK bunaidh suiteáilte ar do ghléas sula ndéantar paisteáil</string>
     <string name="root_gmscore_excluded">Tá paiste tacaíochta GmsCore eiscthe i mód fréimhe</string>
@@ -237,9 +240,8 @@ Tá sé cinnte duit go bhfuil sé ag dul chugat?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
     <string name="patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paistí á gcur i bhfeidhm</string>
-    <string name="applying_patch">Ag cur %s i bhfeidhm</string>
     <string name="failed_to_execute_patch">Theip ar %s a chur i bhfeidhm</string>
     <string name="patched_app_saved_toast">Comhadaithe aip sábháilte le haghaidh níos déanaí</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
@@ -401,8 +403,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_status_shizuku_not_running">Tosaigh Shizuku nó Sui agus déan iarracht arís</string>
     <string name="installer_status_shizuku_permission">Tabhair cead do Shizuku Morphe a dhéanamh ón aip Shizuku</string>
     <string name="installer_mount_warning_install">Tá do phríomhshuiteálaí socraithe chuig an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as gléas gléasta</string>
-    <string name="installer_mount_mismatch_title">Níor roghnaíodh suiteálaí gléasta fréamhaithe</string>
-    <string name="installer_mount_mismatch_install">Suiteáladh an aip seo ag baint úsáide as an suiteálaí gléasta fréamhaithe. Athraigh do phríomhshuiteálaí ar ais chun gníomhartha gléasta a úsáid, agus ansin gléas</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
@@ -417,7 +417,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_external_launched">Ag oscailt %1$s…</string>
     <string name="installer_external_timeout">%1$s ní chugainn an instealladh. Glaoigh ar an gcló eile agus tairgfidh tú arís</string>
     <string name="installer_external_success">%1$s tugadh instealladh rathúil</string>
-    <string name="installer_external_finished_no_change">%1$s chríochnaigh gan an app a instealladh. Glaoigh ar an suiteálaí agus tairgfidh tú arís</string>
     <string name="installer_unavailable_title">%s ar an deireadh</string>
     <string name="installer_unavailable_message">Tá an suiteálaí atá ag teastáil agat (%s) curtha ar an gcló. Tairgfidh tú an tseachadán, nó úsáid an suiteálaí stándard</string>
     <string name="installer_unavailable_shizuku_hint">Cuirfidh Shizuku ag rith agus tairgfidh cead don gcló seo</string>
@@ -523,7 +522,6 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="not_installed">Gan suiteáil</string>
     <string name="view">Amharc</string>
     <string name="search">Cuardaigh</string>
-    <string name="clear_search">Glan an cuardach</string>
     <string name="search_no_results">Níor aimsíodh aon torthaí</string>
     <string name="any_version">Aon</string>
     <string name="enabled">Cumasaithe</string>
@@ -552,11 +550,11 @@ Foinse oscailte ina chroílár, bíonn Morphe ag brath ar aiseolas agus ranníoc
     <string name="installed">Suiteáilte</string>
     <string name="reinstall">Athshuiteáil</string>
     <string name="uninstall">Díshuiteáil</string>
+    <string name="uninstalled">Déanadh</string>
     <string name="save">Sábháil</string>
     <string name="saved">Saved</string>
     <string name="update">Nuashonraigh</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
-    <string name="uninstalling_ellipsis">Ceacht...</string>
     <string name="mounting_ellipsis">Ag mountáil…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Ag iompórtáil…</string>

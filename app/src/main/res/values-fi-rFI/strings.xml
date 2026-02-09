@@ -160,6 +160,7 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_app_info_delete_item_patched_apk">Korjattu APK-tiedosto</string>
     <string name="home_app_info_delete_item_original_apk">Alkuperäinen APK-tiedosto</string>
     <string name="home_app_info_delete_preservation_note">Sovelluksesi korjausvalinnat ja asetukset säilytetään tulevaisuuden korjaukseen</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Poistettiin tallennetusta valinnosta %d vanhentuneita korjauspäivityksiä</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Ei-nimeltä</string>
     <string name="home_app_info_patches_replace_fail">Ei saatu tuoda patches: %s</string>
@@ -174,6 +175,8 @@ Oletko varma, että haluat jatkaa?"</string>
     <string name="home_app_info_patched_at">Muokattu</string>
     <string name="home_app_info_patch_update_available">Uusi patch-versio on saatavilla</string>
     <string name="home_app_info_patch_update_available_description">Uudempi korjausversio on saatavilla. Korjaa sovelluksesi uudelleen saadaksesi uusimmat parannukset ja korjaukset</string>
+    <string name="home_app_info_app_deleted_warning">Sovellus poistettu ulkopuolelta</string>
+    <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin ulkopuolelta. Korjaa se palauttamaan toiminnallisuuden</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Juurtimemoodi vaatii alkuperäisen APK-tiedoston asennuksen laitteellesi ennen korjausta.</string>
     <string name="root_gmscore_excluded">GmsCore-tukikorjaus on poissuljettu juuritilassa</string>
@@ -237,9 +240,8 @@ Oletko varma, että haluat jatkaa?"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa resepti on lisää korjauksia… 🩺🔔</string>
     <string name="patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
-    <!-- Patcher Screen - Other hiden strings -->
+    <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Paikkojen käyttöönotto</string>
-    <string name="applying_patch">Käyttöönotto %s</string>
     <string name="failed_to_execute_patch">Virhe %s:n suorittamisessa</string>
     <string name="patched_app_saved_toast">Muokattu sovellus tallennettu myöhempää käyttöä varten</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
@@ -403,8 +405,6 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_status_shizuku_not_running">Käynnistä Shizuku tai Sui ja yritä uudelleen.</string>
     <string name="installer_status_shizuku_permission">Myönnä Shizukulle lupa Morphelle Shizuku-sovelluksesta.</string>
     <string name="installer_mount_warning_install">Pääasennuksesi on asetettu juurtimen asennukseen. Tämä tallennettu sovellus ei ole asennettu juurtimella.</string>
-    <string name="installer_mount_mismatch_title">Rootattua asennusohjelmaa ei valittu</string>
-    <string name="installer_mount_mismatch_install">Tämä sovellus on asennettu juurtimen asennukseen. Palauta pääasennuksesi juurtimelle, jotta voit käyttää juurtimetoimintoja, sitten juurta.</string>
     <string name="mount_version_mismatch_message">Perusversion (%2$s) ei vastaa korjattua sovellusta (%1$s). Juurta korjatun perusversion kanssa, sitten yritä uudelleen.</string>
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
@@ -419,7 +419,6 @@ Kuvien mitat on oltava seuraavasti:
     <string name="installer_external_launched">Avataan kohdetta %1$s…</string>
     <string name="installer_external_timeout">%1$s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen.</string>
     <string name="installer_external_success">%1$s raportoi onnistuneen asennuksen.</string>
-    <string name="installer_external_finished_no_change">%1$s päättyi ilman sovelluksen asennusta. Tarkista asennusväline virheviestistä ja yritä uudelleen.</string>
     <string name="installer_unavailable_title">%s ei ole käytettävissä</string>
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
@@ -525,7 +524,6 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="not_installed">Ei asennettu</string>
     <string name="view">Näytä</string>
     <string name="search">Haku</string>
-    <string name="clear_search">Tyhjennä hakuhistoria</string>
     <string name="search_no_results">Hakutuloksia ei löytynyt</string>
     <string name="any_version">Mikä tahansa</string>
     <string name="enabled">Käytössä</string>
@@ -554,11 +552,11 @@ Avoimainen luonteisuuden peruste on yhteisöityksen palautus ja osallistuminen, 
     <string name="installed">Asennettu</string>
     <string name="reinstall">Asenna uudelleen</string>
     <string name="uninstall">Poista asennus</string>
+    <string name="uninstalled">Poistettu</string>
     <string name="save">Tallenna</string>
     <string name="saved">Tallennettu</string>
     <string name="update">Päivitä</string>
     <string name="installing_ellipsis">Asennetaan…</string>
-    <string name="uninstalling_ellipsis">Poistetaan...</string>
     <string name="mounting_ellipsis">Liitetään…</string>
     <string name="unmounting_ellipsis">Poistetaan…</string>
     <string name="importing_ellipsis">Tuotaan…</string>
