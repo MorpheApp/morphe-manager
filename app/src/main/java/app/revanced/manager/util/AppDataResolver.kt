@@ -8,6 +8,7 @@ import app.revanced.manager.data.platform.Filesystem
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.OriginalApkRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import java.io.File
 
@@ -162,12 +163,23 @@ class AppDataResolver(
 
     /**
      * Try to get app data from saved patched APK
+     * Searches both by direct package name match and by originalPackageName
+     * to handle cases where the search uses original package but app is patched with different name
      */
     private suspend fun tryGetFromPatchedApk(packageName: String): ResolvedAppData? {
         return try {
             // Try to find installed app record by package name
-            // The repository might store it under currentPackageName or originalPackageName
-            val installedApp = installedAppRepository.get(packageName) ?: return null
+            // First try direct lookup (packageName might be currentPackageName)
+            var installedApp = installedAppRepository.get(packageName)
+
+            // If not found, search all installed apps to find one with matching originalPackageName
+            // This handles case where packageName is the original package but app is patched with different name
+            if (installedApp == null) {
+                val allApps = installedAppRepository.getAll().first()
+                installedApp = allApps.firstOrNull { it.originalPackageName == packageName }
+            }
+
+            if (installedApp == null) return null
 
             // Get saved APK file from filesystem - try both current and original package names
             val savedFile = listOf(

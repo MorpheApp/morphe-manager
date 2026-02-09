@@ -257,7 +257,8 @@ private fun SavedSelectionItem(
             AppIcon(
                 packageName = data.packageName,
                 contentDescription = null,
-                modifier = Modifier.size(48.dp)
+                modifier = Modifier.size(48.dp),
+                preferredSource = AppDataSource.ORIGINAL_APK
             )
 
             // Selection Info
@@ -342,7 +343,8 @@ private fun DeleteSelectionConfirmationDialog(
             AppIcon(
                 packageName = packageName,
                 contentDescription = null,
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier.size(64.dp),
+                preferredSource = AppDataSource.ORIGINAL_APK
             )
 
             // App Info
