@@ -1,5 +1,6 @@
 package app.revanced.manager.network.api
 
+import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.network.dto.*
@@ -9,6 +10,7 @@ import app.revanced.manager.network.utils.APIResponse
 import app.revanced.manager.network.utils.getOrNull
 import app.revanced.manager.util.MANAGER_REPO_URL
 import app.revanced.manager.util.MORPHE_API_URL
+import app.revanced.manager.util.tag
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import kotlinx.datetime.Instant
@@ -165,6 +167,8 @@ class ReVancedAPI(
         val branch = if (usePrerelease) "dev" else "main"
         val jsonUrl = "https://raw.githubusercontent.com/${config.owner}/${config.name}/$branch/app/app-release.json"
 
+        Log.d(tag, "Fetching manager info from JSON: $jsonUrl")
+
         return client.request<ManagerReleaseInfo> {
             url(jsonUrl)
         }
@@ -188,6 +192,8 @@ class ReVancedAPI(
                     // Parse the timestamp from JSON
                     val createdAt = Instant.parse(releaseInfo.createdAt)
                         .toLocalDateTime(TimeZone.UTC)
+
+                    Log.d(tag, "Manager: version=$version, downloadUrl=${releaseInfo.downloadUrl}, createdAt=$createdAt")
 
                     // All data is available in JSON
                     ReVancedAsset(
