@@ -212,6 +212,51 @@ class HomeViewModel(
     // Using mount install (set externally)
     var usingMountInstall: Boolean = false
 
+    // Controls the pre-patching installer selection dialog for root-capable devices.
+    var showPrePatchInstallerDialog by mutableStateOf(false)
+
+    // Stores the pending arguments while the pre-patching installer dialog is visible.
+    private var pendingPatchApp: SelectedApp? = null
+    private var pendingPatchAllowIncompatible: Boolean = false
+
+    /**
+     * Called when a root-capable device triggers patching. Instead of starting immediately,
+     * opens the pre-patching installer dialog so the user can choose Root Mount vs Standard.
+     */
+    fun requestPrePatchInstallerSelection(
+        selectedApp: SelectedApp,
+        allowIncompatible: Boolean
+    ) {
+        pendingPatchApp = selectedApp
+        pendingPatchAllowIncompatible = allowIncompatible
+        showPrePatchInstallerDialog = true
+    }
+
+    /**
+     * Called when the user selects an installation method from the pre-patching dialog.
+     * Sets [usingMountInstall] and starts patching with the correct patch configuration.
+     */
+    fun resolvePrePatchInstallerChoice(useMount: Boolean) {
+        showPrePatchInstallerDialog = false
+        usingMountInstall = useMount
+
+        val selectedApp = pendingPatchApp ?: return
+        val allowIncompatible = pendingPatchAllowIncompatible
+        pendingPatchApp = null
+
+        viewModelScope.launch {
+            startPatchingWithApp(selectedApp, allowIncompatible)
+        }
+    }
+
+    /**
+     * Dismisses the pre-patching installer dialog without starting patching.
+     */
+    fun dismissPrePatchInstallerDialog() {
+        showPrePatchInstallerDialog = false
+        pendingPatchApp = null
+    }
+
     // Callback for starting patch
     var onStartQuickPatch: ((QuickPatchParams) -> Unit)? = null
 
@@ -718,7 +763,16 @@ class HomeViewModel(
             }
         }
 
-        startPatchingWithApp(selectedApp, allowIncompatible)
+        // For root-capable devices, we must know the installation method BEFORE patching
+        // because it affects which patches are included (GmsCore is excluded for mount install).
+        // Show the pre-patching installer dialog so the user can choose.
+        // For non-root devices, just proceed - installer selection happens after patching.
+        if (rootInstaller.isDeviceRooted()) {
+            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
+        } else {
+            usingMountInstall = false
+            startPatchingWithApp(selectedApp, allowIncompatible)
+        }
     }
 
     /**
@@ -740,7 +794,7 @@ class HomeViewModel(
             return
         }
 
-        // Patch filter: exclude GmsCore support in root mode
+        // Patch filter: exclude GmsCore support when mounting as root module.
         val shouldIncludePatch: (Int, PatchInfo) -> Boolean = { _, patch ->
             patch.include && (!usingMountInstall || !patch.name.equals("GmsCore support", ignoreCase = true))
         }

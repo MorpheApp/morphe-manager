@@ -10,16 +10,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.InstallMobile
+import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.revanced.manager.domain.installer.InstallerManager
@@ -572,6 +577,124 @@ fun InstallerUnavailableDialog(
                     isExpanded = true
                 )
             }
+        }
+    }
+}
+
+/**
+ * Dialog shown to root device users before patching to choose between Root Mount and Standard Install.
+ *
+ * The installation method directly affects how the APK is patched:
+ * - **Root Mount** excludes the GmsCore support patch - the mounted APK replaces the
+ *   stock APK in-place via bind-mount, so the original Google services remain available
+ *   and GmsCore would actually interfere.
+ * - **Standard Install** includes GmsCore support - the patched APK is installed as a
+ *   separate app that needs the microG / GmsCore bridge to communicate with Google services.
+ *
+ * Because of this, the choice cannot be deferred to after patching. The user must decide now so
+ * the correct set of patches is applied.
+ */
+@Composable
+fun PrePatchInstallerDialog(
+    onSelectMount: () -> Unit,
+    onSelectStandard: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    MorpheDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.root_pre_patch_installer_title),
+        footer = {
+            MorpheDialogButtonRow(
+                primaryText = stringResource(android.R.string.cancel),
+                onPrimaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Description
+            Text(
+                text = stringResource(R.string.root_pre_patch_installer_description),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
+
+            // Root Mount option
+            InstallerOptionCard(
+                icon = Icons.Outlined.Link,
+                title = stringResource(R.string.root_pre_patch_installer_mount_title),
+                description = stringResource(R.string.root_pre_patch_installer_mount_description),
+                onClick = onSelectMount
+            )
+
+            // Standard Install option
+            InstallerOptionCard(
+                icon = Icons.Outlined.InstallMobile,
+                title = stringResource(R.string.root_pre_patch_installer_standard_title),
+                description = stringResource(R.string.root_pre_patch_installer_standard_description),
+                onClick = onSelectStandard
+            )
+
+            // Info hint
+            InfoBadge(
+                text = stringResource(R.string.root_pre_patch_installer_hint),
+                style = InfoBadgeStyle.Primary,
+                icon = Icons.Rounded.Info,
+                isExpanded = true
+            )
+        }
+    }
+}
+
+/**
+ * Clickable card representing an installer option in the pre-patch dialog
+ */
+@Composable
+private fun InstallerOptionCard(
+    icon: ImageVector,
+    title: String,
+    description: String,
+    onClick: () -> Unit
+) {
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
+            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(Modifier.height(2.dp))
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Icon(
+                imageVector = Icons.Outlined.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }

@@ -18,11 +18,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.revanced.manager.data.room.apps.installed.InstalledApp
-import app.revanced.manager.domain.manager.InstallerPreferenceTokens
 import app.revanced.manager.domain.manager.PreferencesManager
 import app.revanced.manager.domain.repository.InstalledAppRepository
 import app.revanced.manager.domain.repository.PatchBundleRepository
 import app.revanced.manager.ui.screen.home.*
+import app.revanced.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.revanced.manager.ui.viewmodel.*
 import app.revanced.manager.util.*
 import kotlinx.coroutines.Dispatchers
@@ -79,10 +79,16 @@ fun HomeScreen(
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val bundleInfo by homeViewModel.patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
 
-    // Calculate mount install state
-    val usingMountInstall = prefs.installerPrimary.getBlocking() == InstallerPreferenceTokens.AUTO_SAVED &&
-            homeViewModel.rootInstaller.hasRootAccess()
-    usingMountInstallState.value = usingMountInstall
+    val isDeviceRooted = homeViewModel.rootInstaller.isDeviceRooted()
+    if (!isDeviceRooted) {
+        // Non-root: always standard install, sync the state
+        usingMountInstallState.value = false
+        homeViewModel.usingMountInstall = false
+    } else {
+        // Root: the value is set by resolvePrePatchInstallerChoice() via the dialog,
+        // just keep usingMountInstallState in sync for PatcherScreen to read
+        usingMountInstallState.value = homeViewModel.usingMountInstall
+    }
 
     // Calculate if Other Apps button should be visible
     val useExpertMode by prefs.useExpertMode.getAsState()
@@ -93,7 +99,6 @@ fun HomeScreen(
 
     // Set up HomeViewModel
     LaunchedEffect(Unit) {
-        homeViewModel.usingMountInstall = usingMountInstall
         homeViewModel.onStartQuickPatch = onStartQuickPatch
     }
 
@@ -280,6 +285,17 @@ fun HomeScreen(
         storagePickerLauncher = { openApkPicker.launch(APK_FILE_MIME_TYPES) },
         openBundlePicker = { openBundlePicker.launch(MPP_FILE_MIME_TYPES) }
     )
+
+    // Pre-patching installer selection dialog for root-capable devices.
+    // This dialog must appear before patching starts because the installation method
+    // determines which patches are applied
+    if (homeViewModel.showPrePatchInstallerDialog) {
+        PrePatchInstallerDialog(
+            onSelectMount = { homeViewModel.resolvePrePatchInstallerChoice(useMount = true) },
+            onSelectStandard = { homeViewModel.resolvePrePatchInstallerChoice(useMount = false) },
+            onDismiss = homeViewModel::dismissPrePatchInstallerDialog
+        )
+    }
 
     // Main content with pull-to-refresh
     PullToRefreshBox(
