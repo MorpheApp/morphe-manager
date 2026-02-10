@@ -31,10 +31,15 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFA
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
-import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
+import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
+import app.morphe.manager.util.PatchSelectionUtils.togglePatch
+import app.morphe.manager.util.PatchSelectionUtils.updateOption
+import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
+import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -771,10 +776,12 @@ class HomeViewModel(
             return
         }
 
-        // Patch filter: exclude GmsCore support when mounting as root module.
-        val shouldIncludePatch: (Int, PatchInfo) -> Boolean = { _, patch ->
-            patch.include && (!usingMountInstall || !patch.name.equals("GmsCore support", ignoreCase = true))
-        }
+        // Create bundles map for validation
+        val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+
+        // Helper function to apply GmsCore filter if needed
+        fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
+            if (usingMountInstall) this.filterGmsCore() else this
 
         if (expertModeEnabled) {
             // Expert Mode: Load saved selections and options
@@ -799,7 +806,6 @@ class HomeViewModel(
             }
 
             // Load saved options
-            val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
             val savedOptions = withContext(Dispatchers.IO) {
                 optionsRepository.getOptions(selectedApp.packageName, bundlesMap)
             }
@@ -807,26 +813,19 @@ class HomeViewModel(
             // Use saved selections or create new ones
             val patches = if (savedSelections.isNotEmpty()) {
                 // Validate saved selections against available patches
-                savedSelections.mapNotNull { (bundleUid, patchNames) ->
-                    val bundle = allBundles.find { it.uid == bundleUid } ?: return@mapNotNull null
-                    val validPatches = patchNames.filter { patchName ->
-                        bundle.patches.any { patch ->
-                            patch.name == patchName && shouldIncludePatch(bundleUid, patch)
-                        }
-                    }.toSet()
-
-                    if (validPatches.isEmpty()) null
-                    else bundleUid to validPatches
-                }.toMap()
+                validatePatchSelection(savedSelections, bundlesMap)
             } else {
                 // No saved selections - use default
-                allBundles.toPatchSelection(true, shouldIncludePatch)
-            }
+                allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
+            }.applyGmsCoreFilter()
+
+            // Validate options
+            val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
             expertModePatches = patches.toMutableMap()
-            expertModeOptions = savedOptions.toMutableMap()
+            expertModeOptions = validatedOptions.toMutableMap()
             showExpertModeDialog = true
         } else {
             // Simple Mode: check if this is a main app or "other app"
@@ -844,7 +843,7 @@ class HomeViewModel(
 
                 // Always use default selection in Simple Mode
                 val patchNames = defaultBundle.patchSequence(allowIncompatible)
-                    .filter { shouldIncludePatch(defaultBundle.uid, it) }
+                    .filter { it.include }
                     .mapTo(mutableSetOf()) { it.name }
 
                 if (patchNames.isEmpty()) {
@@ -853,14 +852,16 @@ class HomeViewModel(
                     return
                 }
 
-                proceedWithPatching(selectedApp, mapOf(defaultBundle.uid to patchNames), emptyMap())
+                val patches = mapOf(defaultBundle.uid to patchNames).applyGmsCoreFilter()
+
+                proceedWithPatching(selectedApp, patches, emptyMap())
             } else {
                 // For "Other Apps": search all enabled bundles for patches
                 val bundleWithPatches = allBundles
                     .filter { it.enabled }
                     .map { bundle ->
                         val patchNames = bundle.patchSequence(allowIncompatible)
-                            .filter { shouldIncludePatch(bundle.uid, it) }
+                            .filter { it.include }
                             .mapTo(mutableSetOf()) { it.name }
                         bundle to patchNames
                     }
@@ -873,11 +874,11 @@ class HomeViewModel(
                 }
 
                 // Use all available patches from all bundles
-                val allPatches = bundleWithPatches.associate { (bundle, patches) ->
-                    bundle.uid to patches
-                }
+                val patches = bundleWithPatches
+                    .associate { (bundle, patches) -> bundle.uid to patches }
+                    .applyGmsCoreFilter()
 
-                proceedWithPatching(selectedApp, allPatches, emptyMap())
+                proceedWithPatching(selectedApp, patches, emptyMap())
             }
         }
     }
@@ -909,25 +910,11 @@ class HomeViewModel(
     }
 
     /**
-     * Toggle patch in expert mode
+     * Toggle patch in expert mode.
+     * Supports adding patches from bundles not yet in the selection.
      */
     fun togglePatchInExpertMode(bundleUid: Int, patchName: String) {
-        val currentPatches = expertModePatches.toMutableMap()
-        val bundlePatches = currentPatches[bundleUid]?.toMutableSet() ?: return
-
-        if (patchName in bundlePatches) {
-            bundlePatches.remove(patchName)
-        } else {
-            bundlePatches.add(patchName)
-        }
-
-        if (bundlePatches.isEmpty()) {
-            currentPatches.remove(bundleUid)
-        } else {
-            currentPatches[bundleUid] = bundlePatches
-        }
-
-        expertModePatches = currentPatches
+        expertModePatches = expertModePatches.togglePatch(bundleUid, patchName)
     }
 
     /**
@@ -939,47 +926,14 @@ class HomeViewModel(
         optionKey: String,
         value: Any?
     ) {
-        val currentOptions = expertModeOptions.toMutableMap()
-        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
-        val patchOptions = bundleOptions[patchName]?.toMutableMap() ?: mutableMapOf()
-
-        if (value == null) {
-            patchOptions.remove(optionKey)
-        } else {
-            patchOptions[optionKey] = value
-        }
-
-        if (patchOptions.isEmpty()) {
-            bundleOptions.remove(patchName)
-        } else {
-            bundleOptions[patchName] = patchOptions
-        }
-
-        if (bundleOptions.isEmpty()) {
-            currentOptions.remove(bundleUid)
-        } else {
-            currentOptions[bundleUid] = bundleOptions
-        }
-
-        expertModeOptions = currentOptions
+        expertModeOptions = expertModeOptions.updateOption(bundleUid, patchName, optionKey, value)
     }
 
     /**
      * Reset options for a patch in expert mode
      */
     fun resetOptionsInExpertMode(bundleUid: Int, patchName: String) {
-        val currentOptions = expertModeOptions.toMutableMap()
-        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: return
-
-        bundleOptions.remove(patchName)
-
-        if (bundleOptions.isEmpty()) {
-            currentOptions.remove(bundleUid)
-        } else {
-            currentOptions[bundleUid] = bundleOptions
-        }
-
-        expertModeOptions = currentOptions
+        expertModeOptions = expertModeOptions.resetOptionsForPatch(bundleUid, patchName)
     }
 
     /**
@@ -1127,49 +1081,18 @@ class HomeViewModel(
      * Returns a map of package name to sorted list of versions (newest first)
      */
     private fun extractCompatibleVersions(bundleInfo: Map<Int, Any>): Map<String, List<String>> {
-        return bundleInfo[0]?.let { apiBundleInfo ->
-            val info = apiBundleInfo as? PatchBundleInfo
-            info?.let {
-                mapOf(
-                    AppPackages.YOUTUBE to it.patches
-                        .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE } == true
-                        }
-                        .flatMap { patch ->
-                            patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE }
-                                ?.versions
-                                ?: emptyList()
-                        }
-                        .distinct()
-                        .sortedDescending(),
-                    AppPackages.YOUTUBE_MUSIC to it.patches
-                        .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC } == true
-                        }
-                        .flatMap { patch ->
-                            patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.YOUTUBE_MUSIC }
-                                ?.versions
-                                ?: emptyList()
-                        }
-                        .distinct()
-                        .sortedDescending(),
-                    AppPackages.REDDIT to it.patches
-                        .filter { patch ->
-                            patch.compatiblePackages?.any { pkg -> pkg.packageName == AppPackages.REDDIT } == true
-                        }
-                        .flatMap { patch ->
-                            patch.compatiblePackages
-                                ?.firstOrNull { pkg -> pkg.packageName == AppPackages.REDDIT }
-                                ?.versions
-                                ?: emptyList()
-                        }
-                        .distinct()
-                        .sortedDescending()
-                ).filterValues { it.isNotEmpty() }
-            } ?: emptyMap()
-        } ?: emptyMap()
+        val info = bundleInfo[0] as? PatchBundleInfo ?: return emptyMap()
+        return mainAppPackages.associateWith { packageName ->
+            info.patches
+                .flatMap { patch ->
+                    patch.compatiblePackages
+                        ?.firstOrNull { it.packageName == packageName }
+                        ?.versions
+                        ?: emptyList()
+                }
+                .distinct()
+                .sortedDescending()
+        }.filterValues { it.isNotEmpty() }
     }
 
     /**

@@ -37,6 +37,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -65,46 +67,14 @@ class PatcherViewModel(
     private val savedStateHandle: SavedStateHandle = get()
 
     private var savedPatchedApp by savedStateHandle.saveableVar { false }
-    val hasSavedPatchedApp get() = savedPatchedApp
+
+    private val saveOriginalApkMutex = Mutex()
 
     var exportMetadata by mutableStateOf<PatchedAppExportData?>(null)
         private set
     private var appliedSelection: PatchSelection = input.selectedPatches.mapValues { it.value.toSet() }
     private var appliedOptions: Options = input.options
     val currentSelectedApp: SelectedApp get() = selectedApp
-
-    fun currentSelectionSnapshot(): PatchSelection =
-        appliedSelection.mapValues { (_, patches) -> patches.toSet() }
-
-    fun currentOptionsSnapshot(): Options =
-        appliedOptions.mapValues { (_, bundleOptions) ->
-            bundleOptions.mapValues { (_, patchOptions) -> patchOptions.toMap() }.toMap()
-        }.toMap()
-
-    fun dismissMissingPatchWarning() {
-        missingPatchWarning = null
-    }
-
-    fun proceedAfterMissingPatchWarning() {
-        if (missingPatchWarning == null) return
-        viewModelScope.launch {
-            missingPatchWarning = null
-            startWorker()
-        }
-    }
-
-    fun removeMissingPatchesAndStart() {
-        val warning = missingPatchWarning ?: return
-        viewModelScope.launch {
-            val scopedBundles = gatherScopedBundles()
-            val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundles)
-            val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundles)
-            appliedSelection = sanitizedSelection
-            appliedOptions = sanitizedOptions
-            missingPatchWarning = null
-            startWorker()
-        }
-    }
 
     private var currentActivityRequest: Pair<CompletableDeferred<Boolean>, String>? by mutableStateOf(
         null
@@ -250,7 +220,7 @@ class PatcherViewModel(
     private var forceKeepLocalInput = false
 
     private var patcherWorkerId: ParcelUuid?
-        get() = savedStateHandle.get("patcher_worker_id")
+        get() = savedStateHandle["patcher_worker_id"]
         set(value) {
             if (value == null) {
                 savedStateHandle.remove<ParcelUuid>("patcher_worker_id")
@@ -277,21 +247,20 @@ class PatcherViewModel(
             observeWorker(existingId)
         } else {
             viewModelScope.launch {
-                runPreflightCheck()
-            }
-        }
-
-        // Fallback: if inputFile is null and we have SelectedApp.Installed,
-        // try to get the original APK from repository (for repatch feature)
-        if (inputFile == null && input.selectedApp is SelectedApp.Installed) {
-            viewModelScope.launch(Dispatchers.IO) {
-                val originalApk = originalApkRepository.get(packageName)
-                if (originalApk != null) {
-                    val file = File(originalApk.filePath)
-                    if (file.exists()) {
-                        inputFile = file
+                // Resolve inputFile before preflight check to prevent race condition
+                // where the worker could start before inputFile is set.
+                if (inputFile == null && input.selectedApp is SelectedApp.Installed) {
+                    withContext(Dispatchers.IO) {
+                        val originalApk = originalApkRepository.get(packageName)
+                        if (originalApk != null) {
+                            val file = File(originalApk.filePath)
+                            if (file.exists()) {
+                                inputFile = file
+                            }
+                        }
                     }
                 }
+                runPreflightCheck()
             }
         }
     }
@@ -324,8 +293,10 @@ class PatcherViewModel(
      * Called after successful patching, independent of installation method.
      * For split APK archives (apkm, apks, xapk), saves the original archive.
      * For regular APK files, saves the APK itself.
+     *
+     * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
      */
-    private suspend fun saveOriginalApkIfNeeded() {
+    private suspend fun saveOriginalApkIfNeeded() = saveOriginalApkMutex.withLock {
         try {
             // Determine which file to save:
             // - For SelectedApp.Local with split archives: save the original user file
@@ -349,7 +320,7 @@ class PatcherViewModel(
 
             if (fileToSave == null || !fileToSave.exists()) {
                 Log.w(TAG, "File to save doesn't exist, skipping original APK save")
-                return
+                return@withLock
             }
 
             // Get version from the package info
@@ -359,7 +330,7 @@ class PatcherViewModel(
             val apkPackageInfo = pm.getPackageInfo(outputFile)
             if (apkPackageInfo == null) {
                 Log.w(TAG, "Cannot get package info from output APK, skipping save")
-                return
+                return@withLock
             }
 
             val originalVersion = apkPackageInfo.versionName?.takeUnless { it.isBlank() }
@@ -370,7 +341,7 @@ class PatcherViewModel(
             val existing = originalApkRepository.get(packageName)
             if (existing != null && existing.version == originalVersion) {
                 Log.d(TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
-                return
+                return@withLock
             }
 
             // If we got here, we need to save the original
@@ -469,29 +440,6 @@ class PatcherViewModel(
         true
     }
 
-    fun savePatchedAppForLater(
-        onResult: (Boolean) -> Unit = {},
-        showToast: Boolean = true
-    ) {
-        if (!outputFile.exists()) {
-            app.toast(app.getString(R.string.patched_app_save_failed_toast))
-            onResult(false)
-            return
-        }
-
-        viewModelScope.launch {
-            val success = persistPatchedApp(null, InstallType.SAVED)
-            if (success) {
-                if (showToast) {
-                    app.toast(app.getString(R.string.patched_app_saved_toast))
-                }
-            } else {
-                app.toast(app.getString(R.string.patched_app_save_failed_toast))
-            }
-            onResult(success)
-        }
-    }
-
     private val patchCount = input.selectedPatches.values.sumOf { it.size }
     private var completedPatchCount by savedStateHandle.saveable {
         // SavedStateHandle.saveable only supports the boxed version.
@@ -525,7 +473,6 @@ class PatcherViewModel(
             }
 
             // Save metadata to database
-            val wasAlreadySaved = hasSavedPatchedApp
             val saved = persistPatchedApp(null, InstallType.SAVED)
 
             // Show appropriate success message
@@ -535,51 +482,6 @@ class PatcherViewModel(
                 app.toast(app.getString(R.string.save_apk_success))
             }
         }
-    }
-
-    fun exportLogs(context: Context) {
-        val stepLines = steps.mapIndexed { index, step ->
-            buildString {
-                append(index + 1)
-                append(". ")
-                append(step.name)
-                append(" [")
-                append(context.getString(step.category.displayName))
-                append("] - ")
-                append(step.state.name)
-                step.message?.takeIf { it.isNotBlank() }?.let {
-                    append(": ")
-                    append(it)
-                }
-            }
-        }
-
-        val logLines = logs.toList().map { (level, msg) -> "[${level.name}]: $msg" }
-
-        val content = buildString {
-            appendLine("=== Patcher Steps ===")
-            if (stepLines.isEmpty()) {
-                appendLine("No steps recorded.")
-            } else {
-                stepLines.forEach { appendLine(it) }
-            }
-            appendLine()
-            appendLine("=== Patcher Log ===")
-            if (logLines.isEmpty()) {
-                appendLine("No log messages recorded.")
-            } else {
-                logLines.forEach { appendLine(it) }
-            }
-        }
-
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, content)
-            type = "text/plain"
-        }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        context.startActivity(shareIntent)
     }
 
     fun rejectInteraction() {
@@ -743,32 +645,6 @@ class PatcherViewModel(
         }
     }
 
-    fun dismissMemoryAdjustmentDialog() {
-        memoryAdjustmentDialog = null
-    }
-
-    fun retryAfterMemoryAdjustment() {
-        viewModelScope.launch {
-            memoryAdjustmentDialog = null
-            handledFailureIds.clear()
-            resetStateForRetry()
-            patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
-            val newId = launchWorker()
-            patcherWorkerId = ParcelUuid(newId)
-            observeWorker(newId)
-        }
-    }
-
-    private fun resetStateForRetry() {
-        completedPatchCount = 0
-        downloadProgress = null
-        val newSteps = generateSteps(app, input.selectedApp, requiresSplitPreparation).toMutableStateList()
-        steps.clear()
-        steps.addAll(newSteps)
-        currentStepIndex = newSteps.indexOfFirst { it.state == State.RUNNING }.takeIf { it >= 0 } ?: 0
-        _patcherSucceeded.value = null
-    }
-
     private fun initialSplitRequirement(selectedApp: SelectedApp): Boolean =
         when (selectedApp) {
             is SelectedApp.Local -> SplitApkPreparer.isSplitArchive(selectedApp.file)
@@ -898,11 +774,6 @@ class PatcherViewModel(
             inputFile = null
             updateSplitStepRequirement(null)
         }
-    }
-
-    fun onBack() {
-        // tempDir cannot be deleted inside onCleared because it gets called on system-initiated process death.
-        tempDir.deleteRecursively()
     }
 
     private companion object {

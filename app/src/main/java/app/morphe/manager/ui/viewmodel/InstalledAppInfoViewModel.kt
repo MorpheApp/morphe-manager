@@ -2,7 +2,6 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.pm.PackageInfo
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,12 +14,23 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
-import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.util.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
+import app.morphe.manager.util.PatchSelectionUtils.togglePatch
+import app.morphe.manager.util.PatchSelectionUtils.updateOption
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -70,8 +80,6 @@ class InstalledAppInfoViewModel(
 
     val primaryInstallerIsMount: Boolean
         get() = installerManager.getPrimaryToken() == InstallerManager.Token.AutoSaved
-    val primaryInstallerToken: InstallerManager.Token
-        get() = installerManager.getPrimaryToken()
 
     init {
         viewModelScope.launch {
@@ -110,7 +118,6 @@ class InstalledAppInfoViewModel(
         val payload = app.selectionPayload ?: return@withContext emptyMap()
         val sources = patchBundleRepository.sources.first()
         val sourceIds = sources.map { it.uid }.toSet()
-        val signatures = patchBundleRepository.allBundlesInfoFlow.first().toSignatureMap()
         val (remappedPayload, remappedSelection) = payload.remapAndExtractSelection(sources)
         val persistableSelection = remappedSelection.filterKeys { it in sourceIds }
         if (persistableSelection.isNotEmpty()) {
@@ -197,27 +204,19 @@ class InstalledAppInfoViewModel(
     fun updateInstallType(packageName: String, newInstallType: InstallType) = viewModelScope.launch {
         val app = installedApp ?: return@launch
         // Update in database
-        installedAppRepository.addOrUpdate(
-            packageName,
-            app.originalPackageName,
-            app.version,
-            newInstallType,
-            appliedPatches ?: emptyMap(),
-            app.selectionPayload,
-            app.patchedAt
-        )
-        // Refresh app state to update UI
-        delay(500) // Small delay to let database update complete
-        refreshAppState(app.copy(installType = newInstallType, currentPackageName = packageName))
-    }
-
-    fun deleteSavedCopy() = viewModelScope.launch {
-        val app = installedApp ?: return@launch
         withContext(Dispatchers.IO) {
-            savedApkFile(app)?.delete()
+            installedAppRepository.addOrUpdate(
+                packageName,
+                app.originalPackageName,
+                app.version,
+                newInstallType,
+                appliedPatches ?: emptyMap(),
+                app.selectionPayload,
+                app.patchedAt
+            )
         }
-        hasSavedCopy = false
-        context.toast(context.getString(R.string.saved_app_copy_removed_toast))
+        // Refresh app state to update UI
+        refreshAppState(app.copy(installType = newInstallType, currentPackageName = packageName))
     }
 
     fun savedApkFile(app: InstalledApp? = this.installedApp): File? {
@@ -271,106 +270,6 @@ class InstalledAppInfoViewModel(
 
     val allowIncompatiblePatches: StateFlow<Boolean> = prefs.disablePatchVersionCompatCheck.flow
         .stateIn(viewModelScope, SharingStarted.Lazily, prefs.disablePatchVersionCompatCheck.getBlocking())
-
-    /**
-     * Start repatch flow - Expert Mode or Simple Mode
-     */
-    fun startRepatch(
-        onStartPatch: (String, File, PatchSelection, Options) -> Unit
-    ) = viewModelScope.launch {
-        val app = installedApp ?: return@launch
-
-        // Check if original APK exists
-        val originalApk = originalApkRepository.get(app.originalPackageName)
-        if (originalApk == null) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
-
-        // Check if file exists
-        val originalFile = File(originalApk.filePath)
-        if (!originalFile.exists()) {
-            context.toast(context.getString(R.string.home_app_info_repatch_no_original_apk))
-            return@launch
-        }
-
-        // Get current bundle info to validate against
-        val currentBundleInfo = patchBundleRepository.bundleInfoFlow.first()
-        val bundlePatches = currentBundleInfo.mapValues { (_, info) ->
-            info.patches.associateBy { it.name }
-        }
-
-        // Get saved patches and options
-        val savedPatches = appliedPatches ?: resolveAppliedSelection(app)
-        val savedOptions = patchOptionsRepository.getOptions(
-            app.originalPackageName,
-            bundlePatches
-        )
-
-        // Validate and filter patches - only keep patches that exist in current bundles
-        val validatedPatches = validatePatchSelection(savedPatches, bundlePatches)
-
-        // Validate and filter options - only keep options for patches that exist
-        val validatedOptions = validatePatchOptions(savedOptions, bundlePatches)
-
-        // Log validation results and update database if needed
-        val removedPatchCount = savedPatches.values.sumOf { it.size } - validatedPatches.values.sumOf { it.size }
-        if (removedPatchCount > 0) {
-            Log.w(tag, "Removed $removedPatchCount invalid patches from selection during repatch")
-
-            // Save validated data back to database to clean up invalid records
-            withContext(Dispatchers.IO) {
-                // Update installed app with validated patches
-                installedAppRepository.addOrUpdate(
-                    app.currentPackageName,
-                    app.originalPackageName,
-                    app.version,
-                    app.installType,
-                    validatedPatches,
-                    app.selectionPayload,
-                    app.patchedAt
-                )
-
-                // Update options with validated options
-                patchOptionsRepository.saveOptions(app.originalPackageName, validatedOptions)
-
-                Log.i(tag, "Cleaned up invalid patches and options in database")
-            }
-
-            // Show toast to user about cleanup
-            context.toast(
-                context.getString(
-                    R.string.home_app_info_repatch_cleaned_invalid_data,
-                    removedPatchCount
-                )
-            )
-        }
-
-        // Check if Expert Mode is enabled
-        val useExpertMode = prefs.useExpertMode.getBlocking()
-
-        if (useExpertMode) {
-            // Expert Mode: Show dialog for patch selection
-            // Load all available bundles
-            val allBundles = patchBundleRepository
-                .scopedBundleInfoFlow(app.originalPackageName, originalApk.version)
-                .first()
-
-            // Filter to show only bundles that were used during patching
-            val usedBundleUids = validatedPatches.keys
-            repatchBundles = allBundles.filter { bundle ->
-                bundle.uid in usedBundleUids
-            }
-
-            repatchPatches = validatedPatches.toMutableMap()
-            repatchOptions = validatedOptions.toMutableMap()
-            showRepatchDialog = true
-        } else {
-            // Simple Mode: Start patching immediately with original APK file
-            originalApkRepository.markUsed(app.originalPackageName)
-            onStartPatch(app.originalPackageName, originalFile, validatedPatches, validatedOptions)
-        }
-    }
 
     /**
      * Proceed with repatch after Expert Mode dialog
@@ -427,22 +326,7 @@ class InstalledAppInfoViewModel(
      * Toggle patch in repatch dialog
      */
     fun toggleRepatchPatch(bundleUid: Int, patchName: String) {
-        val currentPatches = repatchPatches.toMutableMap()
-        val bundlePatches = currentPatches[bundleUid]?.toMutableSet() ?: return
-
-        if (patchName in bundlePatches) {
-            bundlePatches.remove(patchName)
-        } else {
-            bundlePatches.add(patchName)
-        }
-
-        if (bundlePatches.isEmpty()) {
-            currentPatches.remove(bundleUid)
-        } else {
-            currentPatches[bundleUid] = bundlePatches
-        }
-
-        repatchPatches = currentPatches
+        repatchPatches = repatchPatches.togglePatch(bundleUid, patchName)
     }
 
     /**
@@ -454,124 +338,17 @@ class InstalledAppInfoViewModel(
         optionKey: String,
         value: Any?
     ) {
-        val currentOptions = repatchOptions.toMutableMap()
-        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: mutableMapOf()
-        val patchOptions = bundleOptions[patchName]?.toMutableMap() ?: mutableMapOf()
-
-        if (value == null) {
-            patchOptions.remove(optionKey)
-        } else {
-            patchOptions[optionKey] = value
-        }
-
-        if (patchOptions.isEmpty()) {
-            bundleOptions.remove(patchName)
-        } else {
-            bundleOptions[patchName] = patchOptions
-        }
-
-        if (bundleOptions.isEmpty()) {
-            currentOptions.remove(bundleUid)
-        } else {
-            currentOptions[bundleUid] = bundleOptions
-        }
-
-        repatchOptions = currentOptions
+        repatchOptions = repatchOptions.updateOption(bundleUid, patchName, optionKey, value)
     }
 
     /**
      * Reset options for patch in repatch dialog
      */
     fun resetRepatchOptions(bundleUid: Int, patchName: String) {
-        val currentOptions = repatchOptions.toMutableMap()
-        val bundleOptions = currentOptions[bundleUid]?.toMutableMap() ?: return
-
-        bundleOptions.remove(patchName)
-
-        if (bundleOptions.isEmpty()) {
-            currentOptions.remove(bundleUid)
-        } else {
-            currentOptions[bundleUid] = bundleOptions
-        }
-
-        repatchOptions = currentOptions
-    }
-
-    /**
-     * Validate patch selection against current bundle info
-     * Removes patches that no longer exist in the current bundles
-     */
-    private fun validatePatchSelection(
-        savedSelection: PatchSelection,
-        bundlePatches: Map<Int, Map<String, PatchInfo>>
-    ): PatchSelection {
-        return savedSelection.mapNotNull { (bundleUid, patchNames) ->
-            // Check if bundle still exists
-            val currentBundlePatches = bundlePatches[bundleUid] ?: return@mapNotNull null
-
-            // Filter patches that still exist in the current bundle
-            val validPatches = patchNames.filter { patchName ->
-                currentBundlePatches.containsKey(patchName)
-            }.toSet()
-
-            // Only include this bundle if it has valid patches
-            if (validPatches.isEmpty()) null else bundleUid to validPatches
-        }.toMap()
-    }
-
-    /**
-     * Validate patch options against current bundle info
-     * Removes options for patches that no longer exist or options that are no longer valid
-     */
-    private fun validatePatchOptions(
-        savedOptions: Options,
-        bundlePatches: Map<Int, Map<String, PatchInfo>>
-    ): Options {
-        return savedOptions.mapNotNull { (bundleUid, bundlePatchOptions) ->
-            // Check if bundle still exists
-            val currentBundlePatches = bundlePatches[bundleUid] ?: return@mapNotNull null
-
-            // Filter options for patches that still exist
-            val validOptions = bundlePatchOptions.mapNotNull { (patchName, patchOptions) ->
-                // Check if patch still exists
-                val patchInfo = currentBundlePatches[patchName] ?: return@mapNotNull null
-
-                // Filter options that are still valid for this patch
-                val validPatchOptions = patchOptions.filterKeys { optionKey ->
-                    patchInfo.options?.any { it.key == optionKey } == true
-                }
-
-                // Only include this patch if it has valid options
-                if (validPatchOptions.isEmpty()) null else patchName to validPatchOptions
-            }.toMap()
-
-            // Only include this bundle if it has valid options
-            if (validOptions.isEmpty()) null else bundleUid to validOptions
-        }.toMap()
+        repatchOptions = repatchOptions.resetOptionsForPatch(bundleUid, patchName)
     }
 
     override fun onCleared() {
         super.onCleared()
     }
-}
-
-enum class MountWarningAction {
-    INSTALL,
-    UPDATE,
-    UNINSTALL
-}
-
-enum class MountWarningReason {
-    PRIMARY_IS_MOUNT_FOR_NON_MOUNT_APP,
-    PRIMARY_NOT_MOUNT_FOR_MOUNT_APP
-}
-
-data class MountWarningState(
-    val action: MountWarningAction,
-    val reason: MountWarningReason
-)
-
-sealed class InstallResult {
-    data class Success(val message: String) : InstallResult()
-    data class Failure(val message: String) : InstallResult()
 }

@@ -296,7 +296,7 @@ fun InstalledAppInfoDialog(
                 viewModel.proceedWithRepatch(viewModel.repatchPatches, viewModel.repatchOptions) { pkgName, originalFile, patches, options ->
                     onNavigateToPatcher(
                         pkgName,
-                        originalFile.name.substringAfterLast("_").substringBeforeLast("_original.apk"),
+                        installedApp?.version ?: "unknown",
                         originalFile.absolutePath,
                         patches,
                         options

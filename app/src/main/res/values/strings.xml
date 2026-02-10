@@ -179,7 +179,6 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
     <string name="home_app_info_delete_item_original_apk">Original APK file</string>
     <string name="home_app_info_delete_preservation_note">Your patch selection and options will be preserved for future patching</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Removed %d outdated patches from saved selection</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
