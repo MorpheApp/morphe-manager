@@ -172,7 +172,7 @@
     <string name="home_app_info_install_type">Тип установки</string>
     <string name="home_app_info_install_type_custom_installer">Пользовательский установщик</string>
     <string name="home_app_info_install_type_system_installer">Системный установщик</string>
-    <string name="home_app_info_patched_at">Патched</string>
+    <string name="home_app_info_patched_at">Пропатчен</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
     <string name="home_app_info_patch_update_available_description">Доступна более новая версия патчей. Перепатчайте свою программу, чтобы получить последние улучшения и исправления</string>
     <string name="home_app_info_app_deleted_warning">Приложение удалено за пределами менеджера</string>
@@ -207,7 +207,7 @@
     <string name="patcher_step_unpack">Чтение файла APK</string>
     <string name="patcher_step_group_patching">Патчинг</string>
     <string name="patcher_step_group_saving">Сохранение</string>
-    <string name="patcher_step_write_patched">Запись пропатченного APK-файла</string>
+    <string name="patcher_step_write_patched">Запись патченного APK файла</string>
     <string name="patcher_step_sign_apk">Подпись пропатченного APK-файла</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Патчинг в процессе…</string>
@@ -285,8 +285,8 @@
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Язык приложения YouTube</string>
     <string name="settings_appearance_app_language_current">Текущий язык</string>
-    <string name="settings_appearance_translations_info_title">Переводы для некоторых языков могут быть отсутствовать или неполными</string>
-    <string name="settings_appearance_translations_info_text">Чтобы перевести новые языки или улучшить существующие переводы, посетите %s</string>
+    <string name="settings_appearance_translations_info_title">Переводы для некоторых языков могут отсутствовать или быть неполными</string>
+    <string name="settings_appearance_translations_info_text">Для перевода на новые языки или улучшения существующих переводов посетите %s</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Иконка приложения</string>
     <string name="settings_appearance_app_icon_default">По умолчанию</string>
@@ -322,8 +322,8 @@
     <string name="settings_advanced_patch_options">Параметры патчей</string>
     <string name="settings_advanced_patch_options_youtube_description">Параметры темы, брендинга, заголовка и Shorts</string>
     <string name="settings_advanced_patch_options_youtube_music_description">Параметры темы и брендинга</string>
-    <string name="settings_advanced_patch_options_restart_message">Изменение параметров патчей требует повторной патчирования приложения, чтобы вступить в силу</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчирования</string>
+    <string name="settings_advanced_patch_options_restart_message">Чтобы изменения параметров патчей вступили в силу, нужно повторно патчить приложение</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">В режиме эксперта параметры патчей будут доступны во время процесса патчинга</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Theme Colors -->
     <string name="settings_advanced_patch_options_theme_colors">Цвета темы приложения</string>
     <string name="settings_advanced_patch_options_theme_colors_description">Изменить цвет фона</string>
@@ -424,16 +424,16 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_shizuku_hint">Убедитесь, что Shizuku запущен, и этой программе предоставлено разрешение</string>
     <string name="installer_use_standard">Использовать стандартный</string>
     <string name="settings_prompt_installer_on_install">Предложить установщик при установке</string>
-    <string name="settings_prompt_installer_on_install_description">Показывать диалог выбора установщика каждый раз, когда устанавливается запатченное приложение</string>
+    <string name="settings_prompt_installer_on_install_description">Показывать диалоговое окно выбора установщика каждый раз, когда вы устанавливаете патченное приложение</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Производительность</string>
     <string name="settings_system_process_runtime">Время выполнения процесса</string>
-    <string name="settings_system_process_runtime_description">Выполнять патчирование в отдельном процессе для лучшей стабильности</string>
+    <string name="settings_system_process_runtime_description">Выполнять патчинг в отдельном процессе для лучшей стабильности</string>
     <string name="settings_system_process_runtime_memory_limit">Ограничение памяти</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Более высокие ограничения памяти могут ускорить патчирование, но могут не работать на старых устройствах</string>
+    <string name="settings_system_process_runtime_memory_limit_description">Высший предел памяти может ускорить патчинг, но может не работать на старых устройствах</string>
     <string name="settings_system_process_runtime_enable">Включить время выполнения процесса</string>
-    <string name="settings_system_memory_limit_subtitle">Доступная память для патчирования</string>
-    <string name="settings_system_memory_limit_warning">Низкое ограничение памяти может привести к сбоям при патчировании больших приложений</string>
+    <string name="settings_system_memory_limit_subtitle">Доступная память для патчинга</string>
+    <string name="settings_system_memory_limit_warning">Низкий лимит памяти может вызвать сбой при патчинге больших приложений</string>
     <string name="settings_system_process_runtime_enabled_description">Ограничение %d МБ</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
     <!-- Settings - System Tab - Import and export keystore -->
@@ -474,12 +474,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_management">Управление хранилищем</string>
     <string name="settings_system_apks_size">Общий размер: %s</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_title">Патched APKs</string>
-    <string name="settings_system_patched_apks_description">Управление сохраненными файлами патched приложения</string>
-    <string name="settings_system_patched_apks_empty">Пока нет сохраненных патched APK</string>
-    <string name="settings_system_patched_apks_delete_title">Удалить патched APK?</string>
-    <string name="settings_system_patched_apks_delete_confirm">Вы действительно хотите удалить сохраненный патched APK для %s?</string>
-    <string name="settings_system_patched_apks_deleted">Патched APK успешно удален</string>
+    <string name="settings_system_patched_apks_title">Патченые APK</string>
+    <string name="settings_system_patched_apks_description">Управление сохраненными патчеными файлами приложений</string>
+    <string name="settings_system_patched_apks_empty">Патченые файлы APK еще не сохранены</string>
+    <string name="settings_system_patched_apks_delete_title">Удалить патченный APK ?</string>
+    <string name="settings_system_patched_apks_delete_confirm">Уверены, что хотите удалить сохраненный патченный APK для %s?</string>
+    <string name="settings_system_patched_apks_deleted">Патченый APK удален успешно</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинальные APK</string>
     <string name="settings_system_original_apks_description">Оригинальные файлы APK сохраняются для повторной установки патчей. Для каждого приложения хранится только самая новая версия</string>
@@ -500,9 +500,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Об интеграции</string>
     <string name="settings_system_share_website">Поделиться веб-сайтом</string>
     <string name="settings_system_share_website_description">Поделиться официальным сайтом Morphe</string>
-    <string name="settings_system_manager_description">"Morphe — это экспериментальный проект с открытым исходным кодом, направленный на создание современного, удобного патчирования популярных приложений Android
+    <string name="settings_system_manager_description">"Morphe это экспериментальный проект с открытым кодом, ориентированный на современный и оптимизированный патчинг популярных Android приложений
 
-Open-source в своей основе, Morphe процветает на основе обратной связи и вклада сообщества для продвижения будущих инноваций"</string>
+С открытым кодом в своей основе, Morphe процветает благодаря отзывам и вкладам сообщества, стимулирующим будущие инновации"</string>
     <!-- Shared strings -->
     <string name="patches">Патчи</string>
     <string name="home">Домашняя страница</string>
@@ -543,7 +543,7 @@ Open-source в своей основе, Morphe процветает на осн�
     <string name="version">Версия</string>
     <string name="patch">Патч</string>
     <string name="repatch">Применить патч</string>
-    <string name="open">Открыто</string>
+    <string name="open">Открыть</string>
     <string name="mount">Смонтировано</string>
     <string name="mounted">Смонтировано</string>
     <string name="unmounted">Размонтировано</string>

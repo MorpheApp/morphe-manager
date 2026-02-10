@@ -69,9 +69,9 @@
     <string name="sources_update_unavailable">Güncelleme mevcut değil</string>
     <string name="sources_download_fail">Kaynağları indirmek başarısız: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'nız var mı?</string>
-    <string name="home_apk_availability_dialog_simple">Bu sürümü yapmak için, %1$s\'yi güncellememiş bir APK ile sürüm:</string>
-    <string name="home_apk_availability_dialog_expert">"%1$s'yi güncellememiş bir APK varsa?
+    <string name="home_apk_availability_dialog_title">Orijinal yamalanmamış APK\'iniz var mı?</string>
+    <string name="home_apk_availability_dialog_simple">%1$s\'i yamalamak için gerekli yamalanmamış APK sürümü:</string>
+    <string name="home_apk_availability_dialog_expert">"Yamalanmamış %1$s APK'iniz var mı?
 
  Uyumlu sürümler:"</string>
     <string name="home_apk_availability_recommended_label">Tavsiye edilen</string>
@@ -79,18 +79,18 @@
     <string name="home_apk_availability_yes">Evet, bende var</string>
     <string name="home_apk_availability_no">Hayır, bulmama yardım et</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
-    <string name="home_download_instructions_title">Orijinal APK\'yı indir</string>
+    <string name="home_download_instructions_title">Orijinal APK\'i indir</string>
     <string name="home_download_instructions_steps_title">Talimatlar:</string>
     <string name="home_download_instructions_step1">Aşağıdaki \'%1$s\' düğmesine tıklayın</string>
     <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
-    <string name="home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'yı &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
-    <string name="home_download_instructions_step3_mount">İndirme tamamlanınca APK\'yı &lt;b&gt;yükleyin&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3">İndirme tamamlanana kadar bekleyin ve APK\'i &lt;b&gt;yüklemeyin&lt;/b&gt;</string>
+    <string name="home_download_instructions_step3_mount">İndirme tamamlanınca APK\'i &lt;b&gt;yükleyin&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">İndirme bittikten sonra bu uygulamayı tekrar açın</string>
-    <string name="home_download_instructions_step4_mount">Orijinal APK\'yı yükledikten sonra bu uygulamayı tekrar açın</string>
+    <string name="home_download_instructions_step4_mount">Orijinal APK\'i yükledikten sonra bu uygulamayı tekrar açın</string>
     <string name="home_download_instructions_continue">APKMirror.com\'a Devam Et</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
-    <string name="home_file_picker_prompt_title">İndirdiğiniz APK\'yı seçin</string>
+    <string name="home_file_picker_prompt_title">İndirdiğiniz APK\'i seçin</string>
     <string name="home_file_picker_prompt_description">Şimdi, indirilen %1$s APK dosyasını seçin</string>
     <string name="home_file_picker_prompt_open_downloaded_apk">İndirilen APK dosyasını aç</string>
     <string name="home_file_picker_prompt_open_apk">APK dosyasını aç</string>
@@ -155,7 +155,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="header_creator_folder_explanation">Oluşturulan başlık dosyalarını içeren \'morphe_branding/morphe_header\' klasörünü oluşturmak için yer seçin</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Bu uygulamayı kaldırmak istediğinizden emin misiniz?</string>
-    <string name="home_app_info_remove_app_warning">Permanently delete:</string>
+    <string name="home_app_info_remove_app_warning">Bu aşağıdakileri kalıcı olarak silecektir:</string>
     <string name="home_app_info_delete_item_database">Veritabanı girişi</string>
     <string name="home_app_info_delete_item_patched_apk">Yama edilmiş APK dosyası</string>
     <string name="home_app_info_delete_item_original_apk">Orijinal APK dosyası</string>
@@ -178,7 +178,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="home_app_info_app_deleted_warning">Uygulamadan dışarı silindi</string>
     <string name="home_app_info_app_deleted_description">Bu uygulama yöneticiden dışarı silindi. İşlevselliği geri yüklemek için tekrar işlem yapın</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'nın cihazınızda yüklü olmasını gerektirir</string>
+    <string name="root_install_apk_required">Root modu, yamalama yapmadan önce orijinal APK\'in cihazınızda yüklü olmasını gerektirir</string>
     <string name="root_gmscore_excluded">GmsCore destek yaması root modunda hariç tutulmuştur</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
@@ -307,7 +307,7 @@ Devam etmek istiyor musunuz?"</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>
     <string name="settings_advanced_expert_mode_description">Gelişmiş özellikleri ve özelleştirme seçeneklerini etkinleştirin</string>
     <string name="settings_advanced_strip_unused_libs">Kullanılmayan yerel kütüphaneleri kaldır</string>
-    <string name="settings_advanced_strip_unused_libs_description">APK\'yi yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
+    <string name="settings_advanced_strip_unused_libs_description">APK\'i yamalarken desteklenmeyen CPU mimarileri için kullanılan yerel kütüphaneleri silin</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat">GitHub PAT</string>
     <string name="settings_advanced_github_pat_description">Çekme isteği paketleri için gereklidir</string>
@@ -477,16 +477,16 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_system_patched_apks_title">Değiştirilmiş APK\'ler</string>
     <string name="settings_system_patched_apks_description">Kaydedilen değiştirilmiş uygulama dosyalarını yönet</string>
     <string name="settings_system_patched_apks_empty">Henüz hiç değiştirilmiş APK kaydedilmedi</string>
-    <string name="settings_system_patched_apks_delete_title">Değiştirilmiş APK\'yi sil?</string>
-    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen değiştirilmiş APK\'yi silmek istediğinizden emin misiniz?</string>
+    <string name="settings_system_patched_apks_delete_title">Değiştirilmiş APK silinsin mi?</string>
+    <string name="settings_system_patched_apks_delete_confirm">%s için kaydedilen değiştirilmiş APK\'i silmek istediğinizden emin misiniz?</string>
     <string name="settings_system_patched_apks_deleted">%s için değiştirilmiş APK başarıyla silindi</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Orijinal APK\'ler</string>
     <string name="settings_system_original_apks_description">Orijinal APK dosyaları yenileme için saklanır. Her uygulama için en son sürüm tek bir kopyada tutulur</string>
     <string name="settings_system_original_apks_empty">Hiç orijinal APK saklanmadı</string>
     <string name="settings_system_original_apks_deleted">%s için orijinal APK başarıyla silindi</string>
-    <string name="settings_system_original_apks_delete_title">%s için orijinal APK\'yi sil?</string>
-    <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK\'yi silmek istiyor musunuz? Yeniden yama yapmak için yeni bir APK sağlanması gerekir</string>
+    <string name="settings_system_original_apks_delete_title">Orijinal APK silinsin mi?</string>
+    <string name="settings_system_original_apks_delete_confirm">%s için orijinal APK\'i silmek istiyor musunuz? Yeniden yama yapmak için yeni bir APK sağlanması gerekir</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
     <string name="settings_system_patch_selections_description">Kayıtlı yama seçeneklerini yönetin. Bunlar uygulama kaldırılmasından sonra da kalır</string>

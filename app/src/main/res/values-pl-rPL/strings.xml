@@ -441,7 +441,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_import_keystore">Importuj magazyn kluczy</string>
     <string name="settings_system_import_keystore_description">Importuj własny magazyn kluczy</string>
     <string name="settings_system_import_keystore_dialog_title">Wprowadź dane uwierzytelniające magazynu kluczy</string>
-    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, by go zaimportować</string>
+    <string name="settings_system_import_keystore_dialog_description">Musisz wpisać dane uwierzytelniające magazynu kluczy, aby go zaimportować</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nazwa użytkownika (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Hasło</string>
     <string name="settings_system_import_keystore_dialog_button">Zaimportuj</string>
