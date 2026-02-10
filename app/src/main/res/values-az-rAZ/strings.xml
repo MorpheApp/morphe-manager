@@ -6,6 +6,7 @@
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_default_source_disabled">Morphe yamaq mənbəyi qapalıdır. Xahiş olunur, bunu Yamaq mənbələri səhifəsində aktivləşdirin və ya Mütəxəssis rejimin istifadə edin</string>
     <string name="android_11_bug_dialog_title">Android 11 səhvi</string>
+    <string name="android_11_bug_dialog_description">Tətbiq quraşdırılması icazəsi istifadəçi təcrübəsinə mənfi təsir edəcək Android 11 sistemindəki səhvə mane olmaq üçün əvvəlcədən qəbul edilməlidir</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Menecer yeniləməsi var</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırmaq üçün hazır</string>
@@ -52,6 +53,7 @@
     <string name="sources_dialog_view_any_version">İstənilən versiya</string>
     <string name="sources_dialog_view_any_package">İstənilən paket</string>
     <string name="sources_dialog_add_source">Yamaq mənbəsi əlavə et</string>
+    <string name="sources_dialog_delete_confirm_message">\"%s\" mənbəsini silməlimi? Bu geri alına bilməz</string>
     <string name="sources_dialog_remote">Uzaqdan</string>
     <string name="sources_dialog_remote_url">Mənbə URL-si</string>
     <string name="sources_dialog_remote_url_formats">"Nümunələr:

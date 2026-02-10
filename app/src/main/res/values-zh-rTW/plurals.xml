@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="other">%d 個修補程式</item>
+        <item quantity="other">%d 項修補</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="other">執行 %d 個修補程式</item>
+        <item quantity="other">執行 %d 項修補</item>
     </plurals>
     <plurals name="settings_system_apks_count">
-        <item quantity="other">%d 个 APK 文件</item>
+        <item quantity="other">%d 個 APK 檔案</item>
     </plurals>
     <plurals name="settings_system_patch_selections_count">
-        <item quantity="other">%d 个保存的选择</item>
+        <item quantity="other">%d 項儲存的選配</item>
     </plurals>
     <plurals name="sources_dialog_disabled_toast">
-        <item quantity="other">禁用了 %d 个来源</item>
+        <item quantity="other">已停用 %d 個來源</item>
     </plurals>
     <plurals name="sources_dialog_enabled_toast">
-        <item quantity="other">启用了 %d 个来源</item>
+        <item quantity="other">已啟用 %d 個來源</item>
     </plurals>
 </resources>
