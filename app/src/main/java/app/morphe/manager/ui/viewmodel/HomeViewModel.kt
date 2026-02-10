@@ -30,7 +30,7 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.revanced.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.repository.PatchOptionsRepository

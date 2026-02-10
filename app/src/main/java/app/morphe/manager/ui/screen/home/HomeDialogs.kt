@@ -33,7 +33,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
-import app.revanced.manager.ui.viewmodel.SavedApkInfo
+import app.morphe.manager.ui.viewmodel.SavedApkInfo
 import app.morphe.manager.util.AppPackages
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.toast

@@ -23,12 +23,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.calculateApkSize
+import app.morphe.manager.util.AppDataResolver
+import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.formatBytes
 import app.morphe.manager.util.getApkPath
 import app.morphe.manager.util.PM

@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.revanced.manager.data.platform.Filesystem
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository

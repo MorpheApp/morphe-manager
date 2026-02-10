@@ -1,12 +1,12 @@
-package app.revanced.manager.util
+package app.morphe.manager.util
 
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
-import app.revanced.manager.data.platform.Filesystem
-import app.revanced.manager.domain.repository.InstalledAppRepository
-import app.revanced.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
