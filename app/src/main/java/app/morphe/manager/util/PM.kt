@@ -1,0 +1,229 @@
+package app.morphe.manager.util
+
+import android.annotation.SuppressLint
+import android.app.Application
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
+import android.content.pm.PackageManager
+import android.content.pm.PackageManager.NameNotFoundException
+import android.content.pm.PackageManager.PackageInfoFlags
+import android.content.pm.Signature
+import android.os.Build
+import android.os.Parcelable
+import androidx.compose.runtime.Immutable
+import androidx.core.content.pm.PackageInfoCompat
+import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.receiver.InstallReceiver
+import app.morphe.manager.receiver.UninstallReceiver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import kotlinx.parcelize.Parcelize
+import java.io.File
+
+private const val byteArraySize = 1024 * 1024 // Because 1,048,576 is not readable
+
+@Immutable
+@Parcelize
+data class AppInfo(
+    val packageName: String,
+    val patches: Int?,
+    val packageInfo: PackageInfo?
+) : Parcelable
+
+@SuppressLint("QueryPermissionsNeeded")
+class PM(
+    private val app: Application,
+    patchBundleRepository: PatchBundleRepository
+) {
+    private val scope = CoroutineScope(Dispatchers.IO)
+    val application: Application get() = app
+
+    val appList = patchBundleRepository.enabledBundlesInfoFlow.map { bundles ->
+        val compatibleApps = scope.async {
+            val compatiblePackages = bundles
+                .flatMap { (_, bundle) -> bundle.patches }
+                .flatMap { it.compatiblePackages.orEmpty() }
+                .groupingBy { it.packageName }
+                .eachCount()
+
+            compatiblePackages.keys.map { pkg ->
+                getPackageInfo(pkg)?.let { packageInfo ->
+                    AppInfo(
+                        pkg,
+                        compatiblePackages[pkg],
+                        packageInfo
+                    )
+                } ?: AppInfo(
+                    pkg,
+                    compatiblePackages[pkg],
+                    null
+                )
+            }
+        }
+
+        val installedApps = scope.async {
+            getInstalledPackages().map { packageInfo ->
+                AppInfo(
+                    packageInfo.packageName,
+                    0,
+                    packageInfo
+                )
+            }
+        }
+
+        if (compatibleApps.await().isNotEmpty()) {
+            (compatibleApps.await() + installedApps.await())
+                .distinctBy { it.packageName }
+                .sortedWith(
+                    compareByDescending<AppInfo> {
+                        it.packageInfo != null && (it.patches ?: 0) > 0
+                    }.thenByDescending {
+                        it.patches
+                    }.thenBy {
+                        it.packageInfo?.label()
+                    }.thenBy { it.packageName }
+                )
+        } else {
+            emptyList()
+        }
+    }.flowOn(Dispatchers.IO)
+
+    private fun getInstalledPackages(flags: Int = 0): List<PackageInfo> =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            app.packageManager.getInstalledPackages(PackageInfoFlags.of(flags.toLong()))
+        else
+            app.packageManager.getInstalledPackages(flags)
+
+    fun getPackagesWithFeature(feature: String) =
+        getInstalledPackages(PackageManager.GET_CONFIGURATIONS)
+            .filter { pkg ->
+                pkg.reqFeatures?.any { it.name == feature } == true
+            }
+
+    fun getPackageInfo(packageName: String, flags: Int = 0): PackageInfo? =
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                app.packageManager.getPackageInfo(packageName, PackageInfoFlags.of(flags.toLong()))
+            else
+                app.packageManager.getPackageInfo(packageName, flags)
+        } catch (_: NameNotFoundException) {
+            null
+        }
+
+    fun getPackageInfo(file: File): PackageInfo? {
+        val path = file.absolutePath
+        val flags = PackageManager.GET_META_DATA or PackageManager.GET_ACTIVITIES
+        val pkgInfo = app.packageManager.getPackageArchiveInfo(path, flags) ?: return null
+
+        // This is needed in order to load label and icon.
+        pkgInfo.applicationInfo!!.apply {
+            sourceDir = path
+            publicSourceDir = path
+        }
+
+        return pkgInfo
+    }
+
+    fun PackageInfo.label(): String {
+        val raw = this.applicationInfo!!.loadLabel(app.packageManager).toString()
+        return cleanLabel(raw, this.packageName)
+    }
+
+    fun getVersionCode(packageInfo: PackageInfo) = PackageInfoCompat.getLongVersionCode(packageInfo)
+
+    fun getSignature(packageName: String): Signature =
+        // Get the last signature from the list because we want the newest one if SigningInfo.getSigningCertificateHistory() was used.
+        PackageInfoCompat.getSignatures(app.packageManager, packageName).last()
+
+    @SuppressLint("InlinedApi")
+    fun hasSignature(packageName: String, signature: ByteArray) = PackageInfoCompat.hasSignatures(
+        app.packageManager,
+        packageName,
+        mapOf(signature to PackageManager.CERT_INPUT_RAW_X509),
+        false
+    )
+
+    suspend fun installApp(apks: List<File>) = withContext(Dispatchers.IO) {
+        val packageInstaller = app.packageManager.packageInstaller
+        packageInstaller.openSession(packageInstaller.createSession(sessionParams)).use { session ->
+            apks.forEach { apk -> session.writeApk(apk) }
+            session.commit(app.installIntentSender)
+        }
+    }
+
+    fun uninstallPackage(pkg: String) {
+        val packageInstaller = app.packageManager.packageInstaller
+        packageInstaller.uninstall(pkg, app.uninstallIntentSender)
+    }
+
+    fun launch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg)?.let {
+        it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        app.startActivity(it)
+    }
+
+    fun canInstallPackages() = app.packageManager.canRequestPackageInstalls()
+
+    fun isAppDeleted(packageName: String, hasSavedCopy: Boolean, wasInstalledOnDevice: Boolean): Boolean {
+        val currentlyInstalled = getPackageInfo(packageName) != null
+        return !currentlyInstalled && wasInstalledOnDevice && hasSavedCopy
+    }
+
+    private fun PackageInstaller.Session.writeApk(apk: File) {
+        apk.inputStream().use { inputStream ->
+            openWrite(apk.name, 0, apk.length()).use { outputStream ->
+                inputStream.copyTo(outputStream, byteArraySize)
+                fsync(outputStream)
+            }
+        }
+    }
+
+    private val intentFlags
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            PendingIntent.FLAG_MUTABLE
+        else
+            0
+
+    private val sessionParams
+        get() = PackageInstaller.SessionParams(
+            PackageInstaller.SessionParams.MODE_FULL_INSTALL
+        ).apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+                setRequestUpdateOwnership(true)
+            setInstallReason(PackageManager.INSTALL_REASON_USER)
+        }
+
+    private fun cleanLabel(raw: String, packageName: String): String {
+        val trimmed = raw.trim()
+        if (trimmed.isEmpty()) return trimmed
+        // If the label contains the package name or a dotted class, strip to the last segment.
+        val hasDots = trimmed.contains('.')
+        val pkgMatch = packageName.isNotEmpty() && (trimmed.startsWith(packageName) || trimmed.contains(packageName))
+        val base = if (hasDots || pkgMatch) trimmed.substringAfterLast('.') else trimmed
+        val withoutSuffix = base.removeSuffix("Application")
+        val candidate = withoutSuffix.ifBlank { base }
+        return candidate.ifBlank { trimmed }
+    }
+
+    private val Context.installIntentSender
+        get() = PendingIntent.getBroadcast(
+            this,
+            0,
+            Intent(this, InstallReceiver::class.java),
+            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
+        ).intentSender
+
+    private val Context.uninstallIntentSender
+        get() = PendingIntent.getBroadcast(
+            this,
+            0,
+            Intent(this, UninstallReceiver::class.java),
+            intentFlags or PendingIntent.FLAG_UPDATE_CURRENT
+        ).intentSender
+}
