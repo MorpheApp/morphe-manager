@@ -498,8 +498,9 @@ class InstalledAppInfoViewModel(
     }
 
     /**
-     * Validate patch selection against current bundle info
-     * Removes patches that no longer exist in the current bundles
+     * Validate patch selection against current bundle info.
+     * - Removes patches that no longer exist in the current bundles
+     * - Adds new patches that have include=true by default
      */
     private fun validatePatchSelection(
         savedSelection: PatchSelection,
@@ -509,13 +510,21 @@ class InstalledAppInfoViewModel(
             // Check if bundle still exists
             val currentBundlePatches = bundlePatches[bundleUid] ?: return@mapNotNull null
 
-            // Filter patches that still exist in the current bundle
-            val validPatches = patchNames.filter { patchName ->
+            // Keep saved patches that still exist
+            val validSavedPatches = patchNames.filter { patchName ->
                 currentBundlePatches.containsKey(patchName)
-            }.toSet()
+            }
 
-            // Only include this bundle if it has valid patches
-            if (validPatches.isEmpty()) null else bundleUid to validPatches
+            // Find NEW patches that appeared in the bundle and are included by default
+            val newDefaultPatches = currentBundlePatches.values
+                .filter { patchInfo ->
+                    patchInfo.include && patchInfo.name !in patchNames
+                }
+                .map { it.name }
+
+            val finalPatches = (validSavedPatches + newDefaultPatches).toSet()
+
+            if (finalPatches.isEmpty()) null else bundleUid to finalPatches
         }.toMap()
     }
 

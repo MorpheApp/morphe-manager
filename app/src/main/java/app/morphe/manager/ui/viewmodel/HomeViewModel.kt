@@ -809,14 +809,27 @@ class HomeViewModel(
                 // Validate saved selections against available patches
                 savedSelections.mapNotNull { (bundleUid, patchNames) ->
                     val bundle = allBundles.find { it.uid == bundleUid } ?: return@mapNotNull null
-                    val validPatches = patchNames.filter { patchName ->
+
+                    // Keep saved patches that still exist and pass the filter
+                    val validSavedPatches = patchNames.filter { patchName ->
                         bundle.patches.any { patch ->
                             patch.name == patchName && shouldIncludePatch(bundleUid, patch)
                         }
-                    }.toSet()
+                    }
 
-                    if (validPatches.isEmpty()) null
-                    else bundleUid to validPatches
+                    // Add NEW patches that appeared and are included by default
+                    val newDefaultPatches = bundle.patches
+                        .filter { patch ->
+                            patch.include
+                                    && patch.name !in patchNames
+                                    && shouldIncludePatch(bundleUid, patch)
+                        }
+                        .map { it.name }
+
+                    val finalPatches = (validSavedPatches + newDefaultPatches).toSet()
+
+                    if (finalPatches.isEmpty()) null
+                    else bundleUid to finalPatches
                 }.toMap()
             } else {
                 // No saved selections - use default
