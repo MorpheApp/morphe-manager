@@ -92,8 +92,8 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Виберіть завантажений APK файл</string>
     <string name="home_file_picker_prompt_description">Тепер виберіть файл %1$s APK файл, який ви щойно завантажили</string>
-    <string name="home_file_picker_prompt_open_downloaded_apk">Відкрити завантажений APK файл</string>
-    <string name="home_file_picker_prompt_open_apk">Відкрити APK файл</string>
+    <string name="home_file_picker_prompt_open_downloaded_apk">Вибрати завантажений APK файл</string>
+    <string name="home_file_picker_prompt_open_apk">Вибрати APK файл</string>
     <string name="home_recommended_version">Рекомендована версія</string>
     <string name="home_selected_version">Вибрана версія</string>
     <string name="home_select_apk_title">Вибрати APK файл</string>
@@ -203,7 +203,7 @@
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Підготовка</string>
     <string name="patcher_step_load_patches">Завантаження патчів</string>
-    <string name="patcher_step_prepare_split_apk">Об’єднання split APK файл</string>
+    <string name="patcher_step_prepare_split_apk">Об’єднання split APK файлу</string>
     <string name="patcher_step_unpack">Читання APK файлу</string>
     <string name="patcher_step_group_patching">Патчінг</string>
     <string name="patcher_step_group_saving">Збереження</string>

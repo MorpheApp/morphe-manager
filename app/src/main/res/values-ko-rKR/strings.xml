@@ -530,7 +530,7 @@ morphe_header_custom_dark.png
     <string name="enabled">활성화됨</string>
     <string name="disabled">비활성화됨</string>
     <string name="selected">선택됨</string>
-    <string name="not_selected">선택되지 않음</string>
+    <string name="not_selected">선택 안 함</string>
     <string name="rename">이름 변경</string>
     <string name="export">내보내기</string>
     <string name="download">다운로드</string>

@@ -58,6 +58,7 @@
     <string name="home_recommended_version">ભલામણ કરેલ સંસ્કરણ</string>
     <string name="home_selected_version">પસંદ કરેલ સંસ્કરણ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_no_patches">કોઈ પેચો ઉપલબ્ધ નથી</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_dialog_unsupported_version_dialog_title">અસમર્થિત સંસ્કરણ</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">ઘરની ધોરાજી ચલાવો</string>

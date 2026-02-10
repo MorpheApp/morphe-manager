@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%d zakrpa</item>
-        <item quantity="few">%d zakrpe</item>
-        <item quantity="other">%d zakrpe</item>
+        <item quantity="one">%d patch</item>
+        <item quantity="few">%d patcheva </item>
+        <item quantity="other">%d patcheva </item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">Izvrši %d popravku</item>
-        <item quantity="few">Izvrši %d popravku</item>
-        <item quantity="other">Izvrši %d popravke</item>
+        <item quantity="one">Izvrši %d patch</item>
+        <item quantity="few">Izvrši %d patcheva </item>
+        <item quantity="other">Izvrši %d patcheva </item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%d APK datoteka</item>
+        <item quantity="few">%d APK datoteka </item>
+        <item quantity="other">%d APK datoteka </item>
+    </plurals>
+    <plurals name="settings_system_patch_selections_count">
+        <item quantity="one">%d selekcija spremljena </item>
+        <item quantity="few">%d selekcija spremljeno</item>
+        <item quantity="other">%d selekcija spremljeno </item>
+    </plurals>
+    <plurals name="sources_dialog_disabled_toast">
+        <item quantity="one">%d izvor onemogućen </item>
+        <item quantity="few">%d izvora onemogućeno</item>
+        <item quantity="other">%d izvora onemogućeno </item>
+    </plurals>
+    <plurals name="sources_dialog_enabled_toast">
+        <item quantity="one">%d izvor omogućen </item>
+        <item quantity="few">Omogućen %d izvor</item>
+        <item quantity="other">%d izvora omogućeno </item>
     </plurals>
 </resources>

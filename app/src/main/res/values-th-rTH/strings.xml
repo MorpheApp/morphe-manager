@@ -50,6 +50,7 @@
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งข้อมูล</string>
     <string name="sources_dialog_duplicate_name_error">แหล่งข้อมูลที่มีชื่อนี้อยู่แล้ว</string>
+    <string name="sources_dialog_missing_error">ไม่สามารถอัปเดตแหล่งที่มาแล้ว</string>
     <string name="sources_dialog_view_any_version">เวอร์ชันใด ๆ</string>
     <string name="sources_dialog_view_any_package">แพ็คเกจใด ๆ</string>
     <string name="sources_dialog_add_source">เพิ่มแหล่งข้อมูล</string>

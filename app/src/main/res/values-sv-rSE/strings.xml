@@ -4,6 +4,7 @@
     <string name="home_other_apps">Andra appar</string>
     <string name="home_not_patched_yet">Inte korrigerad än</string>
     <string name="home_no_patches_available">Inga korrigeringar är tillgängliga</string>
+    <string name="home_default_source_disabled">Morphe-korrigeringskällan är inaktiverad. Aktivera den i Korrigeringskällor eller använd expertläget</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <!-- Home Screen - Update Notifications -->
@@ -55,6 +56,10 @@
     <string name="sources_dialog_delete_confirm_message">Ta bort källan \"%s\"? Det går inte att ångra den här åtgärden</string>
     <string name="sources_dialog_remote">Fjärrbaserad</string>
     <string name="sources_dialog_remote_url">Webbadress för källan</string>
+    <string name="sources_dialog_remote_url_formats">"Exempel:
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
+• exempel.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Lokal</string>
     <string name="sources_dialog_local_file">Välj källfil för korrigeringar</string>
     <string name="sources_dialog_local_file_description">Välj en källfil för korrigeringar i .mpp-format från lagringen</string>
@@ -65,6 +70,12 @@
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_dialog_title">Har du den ursprungliga okorrigerade APK-filen?</string>
+    <string name="home_apk_availability_dialog_simple">Om du vill korrigera %1$s behöver du en okorrigerad APK-fil med följande version:</string>
+    <string name="home_apk_availability_dialog_expert">"Har du en okorrigerad APK-fil för %1$s?
+
+Kompatibla versioner:"</string>
+    <string name="home_apk_availability_recommended_label">Rekommenderad</string>
+    <string name="home_apk_availability_unpatched_label">Okorrigerad</string>
     <string name="home_apk_availability_yes">Ja, jag har den</string>
     <string name="home_apk_availability_no">Nej, hjälp mig att hitta den</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -104,6 +115,8 @@
     <string name="home_dialog_unsupported_version_dialog_title">Version som inte stöds</string>
     <string name="home_dialog_unsupported_version_dialog_description">Den här APK-filen är inte en rekommenderad appversion. Om du fortsätter kan det leda till att appen inte fungerar</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsätt ändå</string>
+    <string name="home_dialog_unsupported_version_compatible_versions">Kompatibla versioner:</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Stöds inte</string>
     <string name="home_dialog_wrong_package_title">Fel paket har valts</string>
     <string name="home_dialog_wrong_package_description">Den valda APK-filen är inte för den app du avsåg att korrigera</string>
     <string name="home_dialog_expected_package">Förväntat paket:</string>
@@ -120,6 +133,8 @@
     <string name="adaptive_icon_create">Skapa adaptiv ikon</string>
     <string name="adaptive_icon_instructions">Välj en förgrundsbild, välj bakgrundsfärg och justera förhandsgranskningen genom att nypa den</string>
     <string name="adaptive_icon_preview">Förhandsgranskning</string>
+    <string name="adaptive_icon_select_image">Välj bild</string>
+    <string name="adaptive_icon_change_image">Ändra bild</string>
     <string name="adaptive_icon_background_color">Bakgrundsfärg</string>
     <string name="adaptive_icon_reset_transform">Återställ position och skala</string>
     <string name="adaptive_icon_safe_zone_inner">Säker zon (alltid synlig)</string>
@@ -138,6 +153,12 @@
     <string name="header_creator_folder_explanation">Välj var mappen \"morphe_branding/morphe_header\" ska skapas med genererade sidhuvudfiler</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_app_confirmation">Är du säker på att du vill avinstallera den här appen?</string>
+    <string name="home_app_info_remove_app_warning">Det här tar bort följande permanent:</string>
+    <string name="home_app_info_delete_item_database">Databaspost</string>
+    <string name="home_app_info_delete_item_patched_apk">Korrigerad APK-fil</string>
+    <string name="home_app_info_delete_item_original_apk">Ursprunglig APK-fil</string>
+    <string name="home_app_info_delete_preservation_note">Ditt urval av korrigeringar och dess inställningar sparas för framtida korrigering</string>
+    <string name="home_app_info_repatch_cleaned_invalid_data">Tog bort %d inaktuella korrigeringar från sparat urval</string>
     <string name="home_app_info_patches_name_default">Korrigeringar</string>
     <string name="home_app_info_patches_name_fallback">Namnlös</string>
     <string name="home_app_info_patches_replace_fail">Det gick inte att importera korrigeringar: %s</string>
@@ -152,6 +173,8 @@
     <string name="home_app_info_patched_at">Korrigerad</string>
     <string name="home_app_info_patch_update_available">Uppdatering för korrigeringar är tillgänglig</string>
     <string name="home_app_info_patch_update_available_description">En nyare version av korrigeringarna är tillgänglig. Korrigera din app igen för att få de senaste förbättringarna och felkorrigeringarna</string>
+    <string name="home_app_info_app_deleted_warning">Appen har avinstallerats utanför Manager</string>
+    <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Manager. Korrigera den igen för att återställa funktionaliteten</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Rotläget kräver att den ursprungliga APK-filen är installerad på din enhet innan korrigering</string>
     <string name="root_gmscore_excluded">Stödkorrigeringen för GmsCore exkluderas i rotläge</string>
@@ -221,6 +244,7 @@
     <string name="patched_app_saved_toast">Den korrigerade appen sparades till senare</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den korrigerade appen</string>
     <string name="download_apk">Ladda ned APK-fil</string>
+    <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med det här plugin-programmet</string>
     <string name="patcher_process_exit_message">Korrigeringsprocessen avslutades med koden %1$d</string>
     <string name="install_app_success">Installationen lyckades</string>
     <string name="install_app_fail">Det gick inte att installera appen: %s</string>
@@ -229,6 +253,7 @@
     <string name="saved_app_export_failed">Det gick inte att exportera den korrigerade appen</string>
     <string name="saved_app_removed_toast">Tog bort den sparade korrigerade appen</string>
     <string name="saved_app_copy_removed_toast">Tog bort den sparade kopian</string>
+    <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den</string>
     <string name="package_name">Paketnamn</string>
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
     <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
@@ -240,10 +265,13 @@
     <string name="settings_appearance_background">Bakgrundsanimation</string>
     <string name="settings_appearance_background_circles">Cirklar</string>
     <string name="settings_appearance_background_rings">Ringar</string>
+    <string name="settings_appearance_background_mesh">Nät</string>
     <string name="settings_appearance_background_space">Rymden</string>
     <string name="settings_appearance_background_shapes">Former</string>
     <string name="settings_appearance_background_snow">Snö</string>
     <string name="settings_appearance_background_none">Ingen</string>
+    <string name="settings_appearance_parallax_effect">Parallaxeffekt</string>
+    <string name="settings_appearance_parallax_effect_description">Bakgrunden flyttas jämnt när enheten lutas</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_system">System</string>
@@ -352,24 +380,36 @@ Bildernas mått ska vara följande:
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Ta bort knappen Shorts från widgeten i startprogrammet</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installerare</string>
+    <string name="installer_title">Välj installerare</string>
     <string name="installer_internal_name">Systeminstallationsprogram</string>
     <string name="installer_internal_description">Använd Androids pakethanterare</string>
     <string name="installer_auto_saved_name">Installerare för rotningsmontering</string>
     <string name="installer_auto_saved_description">Monterar den korrigerade APK-filen över den installerade appen (rotåtkomst krävs)</string>
+    <string name="installer_shizuku_description">Installera tyst med Shizuku eller Sui</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
     <string name="installer_none_description">Ingen alternativ installerare har konfigurerats</string>
     <string name="installer_status_requires_root">Kräver rotåtkomst</string>
+    <string name="installer_status_not_supported">Stöds inte för den här åtgärden</string>
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
+    <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen</string>
     <string name="installer_status_shizuku_permission">Ge Shizuku behörighet till Morphe från Shizuku-appen</string>
     <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
-    <string name="mount_version_mismatch_message">Standardappversionen (%2$s) matchar inte den patchade appversionen (%1$s). Montera den matchande standardversionen och försök igen</string>
+    <string name="mount_version_mismatch_message">Standardappens version (%2$s) matchar inte den korrigerade appens version (%1$s). Montera den matchande standardversionen och försök igen</string>
+    <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
     <string name="installer_hint_blocked">Installationen blockerades av Android. Kontrollera Play Protect eller säkerhetsinställningarna</string>
     <string name="installer_hint_conflict">En annan app med det här paketnamnet är redan installerad. Avinstallera den innan du fortsätter</string>
     <string name="installer_hint_incompatible">APK-filen är inte kompatibel med den här enheten eller Android-versionen</string>
     <string name="installer_hint_invalid">APK-filen är ogiltig eller skadad</string>
+    <string name="installer_hint_storage">Det finns inte tillräckligt med lagringsutrymme för installationen</string>
+    <string name="installer_hint_timeout">Tidsgränsen överskreds för installationen. Försök igen</string>
+    <string name="installer_hint_aborted">Installationen avbröts</string>
     <string name="installer_external_launched">Öppnar %1$s …</string>
+    <string name="installer_external_timeout">%1$s bekräftade inte installationen. Kontrollera den andra appen och försök igen</string>
+    <string name="installer_external_success">%1$s meddelade om en lyckad installation</string>
+    <string name="installer_unavailable_title">%s är inte tillgänglig</string>
+    <string name="installer_unavailable_message">Din föredragna installerare (%s) är för närvarande inte tillgänglig. Du kan åtgärda problemet och försöka igen eller använda standardinstalleraren istället</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_performance">Prestanda</string>
     <string name="settings_system_process_runtime">Processkörning</string>
