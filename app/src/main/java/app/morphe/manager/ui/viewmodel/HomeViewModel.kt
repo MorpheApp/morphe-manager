@@ -9,14 +9,12 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.os.PowerManager
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -25,16 +23,11 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.PatchBundleSource
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
-import app.morphe.manager.domain.repository.PatchOptionsRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -43,12 +36,9 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.receiveAsFlow
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
@@ -123,9 +113,7 @@ class HomeViewModel(
     val availablePatches =
         patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
-    val bundleImportProgress = patchBundleRepository.bundleImportProgress
     private val contentResolver: ContentResolver = app.contentResolver
-    private val powerManager = app.getSystemService<PowerManager>()!!
 
     // App data resolver for getting app info from APK files
     private val appDataResolver by lazy {
@@ -139,9 +127,6 @@ class HomeViewModel(
 
     var updatedManagerVersion: String? by mutableStateOf(null)
         private set
-
-    private val bundleListEventsChannel = Channel<BundleListViewModel.Event>()
-    val bundleListEventsFlow = bundleListEventsChannel.receiveAsFlow()
 
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
@@ -274,32 +259,6 @@ class HomeViewModel(
         }
     }
 
-    fun setShowManagerUpdateDialogOnLaunch(value: Boolean) {
-        viewModelScope.launch {
-            prefs.showManagerUpdateDialogOnLaunch.update(value)
-        }
-    }
-
-    fun applyAutoUpdatePrefs(manager: Boolean, patches: Boolean) = viewModelScope.launch {
-        prefs.firstLaunch.update(false)
-
-        prefs.managerAutoUpdates.update(manager)
-
-        if (manager) checkForManagerUpdates()
-
-        if (patches) {
-            with(patchBundleRepository) {
-                sources
-                    .first()
-                    .find { it.uid == DEFAULT_SOURCE_UID }
-                    ?.asRemoteOrNull
-                    ?.setAutoUpdate(true)
-
-                updateCheck()
-            }
-        }
-    }
-
     /**
      * Check for bundle updates for installed apps
      */
@@ -335,15 +294,7 @@ class HomeViewModel(
         appUpdatesAvailable = updates
     }
 
-    private fun sendEvent(event: BundleListViewModel.Event) {
-        viewModelScope.launch { bundleListEventsChannel.send(event) }
-    }
-
-    fun cancelSourceSelection() = sendEvent(BundleListViewModel.Event.CANCEL)
-    fun updateSources() = sendEvent(BundleListViewModel.Event.UPDATE_SELECTED)
-    fun deleteSources() = sendEvent(BundleListViewModel.Event.DELETE_SELECTED)
-    fun disableSources() = sendEvent(BundleListViewModel.Event.DISABLE_SELECTED)
-
+    @SuppressLint("ShowToast")
     private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
         val progressToast = withContext(Dispatchers.Main) {
             Toast.makeText(
@@ -425,18 +376,6 @@ class HomeViewModel(
     fun createRemoteSource(apiUrl: String, autoUpdate: Boolean) = viewModelScope.launch {
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
-        }
-    }
-
-    fun createLocalSourceFromFile(path: String) = viewModelScope.launch {
-        withContext(NonCancellable) {
-            withPersistentImportToast {
-                val file = File(path)
-                val length = file.length().takeIf { it > 0L }
-                patchBundleRepository.createLocal(length) {
-                    FileInputStream(file)
-                }
-            }
         }
     }
 
@@ -763,12 +702,50 @@ class HomeViewModel(
             }
         }
 
-        // For root-capable devices, we must know the installation method BEFORE patching
-        // because it affects which patches are included (GmsCore is excluded for mount install).
-        // Show the pre-patching installer dialog so the user can choose.
-        // For non-root devices, just proceed - installer selection happens after patching.
+        // For root-capable devices, we need to determine the installation method BEFORE patching
+        // IF the bundle contains an enabled GmsCore support patch - because that patch must be
+        // excluded for mount install but included for standard install, producing different APKs.
+        //
+        // However, if no bundle contains an enabled GmsCore patch (either the bundle doesn't
+        // ship it, or the user disabled it in Expert Mode selections), then the APK will be
+        // identical regardless of the installation method. In that case we can skip the
+        // pre-patching dialog and let the user choose the installer AFTER patching — same UX
+        // as non-root devices.
         if (rootInstaller.isDeviceRooted()) {
-            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
+            val hasEnabledGmsCore = bundles.any { bundle ->
+                bundle.patches.any { patch ->
+                    patch.name.equals("GmsCore support", ignoreCase = true) && patch.include
+                }
+            }
+
+            // Also check Expert Mode saved selections - if GmsCore was manually deselected,
+            // it won't be included regardless, so no pre-patch decision is needed.
+            val gmsCoreInSavedSelections = if (prefs.useExpertMode.getBlocking() && hasEnabledGmsCore) {
+                val savedSelections = withContext(Dispatchers.IO) {
+                    patchSelectionRepository.getSelection(selectedApp.packageName)
+                }
+                if (savedSelections.isNotEmpty()) {
+                    // If there are saved selections, check if GmsCore is among them
+                    savedSelections.values.any { patchNames ->
+                        patchNames.any { it.equals("GmsCore support", ignoreCase = true) }
+                    }
+                } else {
+                    // No saved selections - default inclusion applies, so GmsCore IS present
+                    true
+                }
+            } else {
+                hasEnabledGmsCore
+            }
+
+            if (gmsCoreInSavedSelections) {
+                // GmsCore will be included by default → must choose install method first
+                requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
+            } else {
+                // No GmsCore in the patch set → APK is identical for mount and standard,
+                // so skip the pre-patch dialog. User picks installer after patching.
+                usingMountInstall = false
+                startPatchingWithApp(selectedApp, allowIncompatible)
+            }
         } else {
             usingMountInstall = false
             startPatchingWithApp(selectedApp, allowIncompatible)
@@ -1206,7 +1183,7 @@ class HomeViewModel(
         try {
             // Copy file to cache with original extension detection
             val fileName = context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
-                val nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME)
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                 cursor.moveToFirst()
                 cursor.getString(nameIndex)
             } ?: "temp_${System.currentTimeMillis()}"
