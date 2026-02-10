@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import app.morphe.manager.BuildConfig
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -155,25 +154,24 @@ class ManagerApplication : Application() {
     // ============================================================================
 
     /**
-     * Migrate app icons from old package name to new one
-     * This is a one-time migration for existing users
+     * Disable old icon components from previous package name.
+     * This prevents the app from having duplicate launcher icons.
      *
      * TODO: Remove this entire function after most users have migrated (recommended: 3-6 months after release)
      */
     private fun migrateAppIcons() {
         val pm = packageManager
         val oldPackage = "app.revanced.manager"
-        val newPackage = packageName // Current package name (app.morphe.manager)
 
         // Check if migration is needed
-        val migrationKey = "app_icon_migration_completed"
-        val prefs = getSharedPreferences("migration", Context.MODE_PRIVATE)
+        val migrationKey = "app_icon_components_disabled"
+        val prefs = getSharedPreferences("migration", MODE_PRIVATE)
         if (prefs.getBoolean(migrationKey, false)) {
             return // Migration already done
         }
 
         try {
-            // Find which old icon was enabled
+            // List of old icon component names
             val oldIcons = listOf(
                 "MainActivity_Default",
                 "MainActivity_Light_2",
@@ -183,58 +181,28 @@ class ManagerApplication : Application() {
                 "MainActivity_Dark_3"
             )
 
-            var enabledOldIcon: String? = null
-
+            // Disable all old components to prevent duplicate icons
             for (iconName in oldIcons) {
                 val oldComponent = ComponentName(oldPackage, "$oldPackage.$iconName")
                 try {
-                    val state = pm.getComponentEnabledSetting(oldComponent)
-                    if (state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-                        enabledOldIcon = iconName
-                        // Disable old component
-                        pm.setComponentEnabledSetting(
-                            oldComponent,
-                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                            PackageManager.DONT_KILL_APP
-                        )
-                        Log.d(tag, "Disabled old icon component: $oldComponent")
-                    }
+                    pm.setComponentEnabledSetting(
+                        oldComponent,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP
+                    )
+                    Log.d(tag, "Disabled old icon component: $oldComponent")
                 } catch (_: Exception) {
-                    // Component doesn't exist, continue
-                    Log.d(tag, "Old icon component not found: $oldComponent")
+                    // Component doesn't exist or already disabled, continue
+                    Log.d(tag, "Old icon component not found or already disabled: $oldComponent")
                 }
-            }
-
-            // If a custom icon was enabled, enable the corresponding new one
-            if (enabledOldIcon != null && enabledOldIcon != "MainActivity_Default") {
-                val newComponent = ComponentName(newPackage, "$newPackage.$enabledOldIcon")
-
-                // Disable default new icon
-                val defaultComponent = ComponentName(newPackage, "$newPackage.MainActivity_Default")
-                pm.setComponentEnabledSetting(
-                    defaultComponent,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP
-                )
-
-                // Enable the migrated icon
-                pm.setComponentEnabledSetting(
-                    newComponent,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    0 // Will restart app
-                )
-
-                Log.d(tag, "Successfully migrated app icon from $enabledOldIcon to new package")
-            } else {
-                Log.d(tag, "No custom icon migration needed (using default icon)")
             }
 
             // Mark migration as complete
             prefs.edit { putBoolean(migrationKey, true) }
-            Log.d(tag, "App icon migration completed")
+            Log.d(tag, "Old app icon components migration completed - users will see default icon")
 
         } catch (e: Exception) {
-            Log.e(tag, "Failed to migrate app icons", e)
+            Log.e(tag, "Failed to disable old icon components", e)
             // Don't crash the app, just log the error
         }
     }
