@@ -4,6 +4,12 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -14,6 +20,7 @@ import androidx.compose.material.icons.outlined.Update
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -822,6 +829,119 @@ private fun AppCardLayout(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     content = content
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Shimmer loading animation for app cards
+ */
+@Composable
+fun AppLoadingCard(
+    gradientColors: List<Color>,
+    modifier: Modifier = Modifier
+) {
+    val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
+
+    // Pulse animation for gradient background
+    val pulseAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.3f,
+        targetValue = 0.5f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulse_alpha"
+    )
+
+    // Shimmer animation
+    val shimmerOffset by infiniteTransition.animateFloat(
+        initialValue = -1f,
+        targetValue = 2f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1500, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "shimmer_offset"
+    )
+
+    val shape = RoundedCornerShape(24.dp)
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp)
+    ) {
+        // Base gradient background
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(shape)
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = gradientColors.map { it.copy(alpha = pulseAlpha) },
+                        start = Offset(0f, 0f),
+                        end = Offset.Infinite
+                    )
+                )
+        )
+
+        // Shimmer overlay
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(shape)
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0f),
+                            Color.White.copy(alpha = 0.3f),
+                            Color.White.copy(alpha = 0f)
+                        ),
+                        start = Offset(shimmerOffset * 1000, 0f),
+                        end = Offset((shimmerOffset + 1f) * 1000, 0f)
+                    )
+                )
+        )
+
+        // Content skeleton
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Icon skeleton
+            ShimmerBox(
+                modifier = Modifier.size(48.dp),
+                shape = RoundedCornerShape(12.dp),
+                baseColor = Color.White.copy(alpha = 0.2f)
+            )
+
+            // Text skeleton
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                // Title skeleton
+                ShimmerBox(
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .height(20.dp),
+                    shape = RoundedCornerShape(4.dp),
+                    baseColor = Color.White.copy(alpha = 0.25f)
+                )
+
+                // Subtitle skeleton
+                ShimmerBox(
+                    modifier = Modifier
+                        .fillMaxWidth(0.4f)
+                        .height(14.dp),
+                    shape = RoundedCornerShape(4.dp),
+                    baseColor = Color.White.copy(alpha = 0.15f)
                 )
             }
         }

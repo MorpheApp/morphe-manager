@@ -121,20 +121,20 @@ private fun ResolvedAppIcon(
         isLoading = false
     }
 
-    if (resolvedPackageInfo != null) {
+    if (isLoading) {
+        // Show shimmer placeholder while loading
+        ShimmerBox(
+            modifier = modifier,
+            shape = RoundedCornerShape(100)
+        )
+    } else if (resolvedPackageInfo != null) {
         SimpleAppIcon(
             packageInfo = resolvedPackageInfo!!,
             contentDescription = contentDescription,
             modifier = modifier
         )
-    } else if (!isLoading) {
-        // Show fallback icon if resolution failed
-        FallbackIcon(
-            contentDescription = contentDescription,
-            modifier = modifier
-        )
     } else {
-        // Show placeholder while loading
+        // Show fallback icon if resolution failed
         FallbackIcon(
             contentDescription = contentDescription,
             modifier = modifier

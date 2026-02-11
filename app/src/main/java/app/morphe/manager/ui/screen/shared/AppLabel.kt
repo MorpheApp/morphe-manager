@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -23,6 +24,7 @@ import io.github.fornewid.placeholder.material3.placeholder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
+import androidx.compose.ui.platform.LocalResources
 
 /**
  * Universal app label component
@@ -133,6 +135,7 @@ private fun ResolvedAppLabel(
     }
 
     var label by remember(packageName) { mutableStateOf<String?>(null) }
+    var isLoading by remember(packageName) { mutableStateOf(true) }
 
     LaunchedEffect(packageName, preferredSource) {
         // Use resolveAppData to get complete data in one call
@@ -143,19 +146,25 @@ private fun ResolvedAppLabel(
         } else {
             resolvedData.displayName
         }
+        isLoading = false
     }
 
-    Text(
-        label ?: stringResource(R.string.loading),
-        modifier = Modifier
-            .placeholder(
-                visible = label == null,
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = RoundedCornerShape(100)
-            )
-            .then(modifier),
-        style = style
-    )
+    if (isLoading) {
+        // Show shimmer while loading
+        ShimmerText(
+            modifier = modifier,
+            widthFraction = 0.6f,
+            height = with(LocalResources.current.displayMetrics) {
+                (style.fontSize.value * density).dp
+            }
+        )
+    } else {
+        Text(
+            label ?: stringResource(R.string.loading),
+            modifier = modifier,
+            style = style
+        )
+    }
 }
 
 /**

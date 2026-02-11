@@ -1,15 +1,17 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.home.ReleaseInfoSection
-import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
+import app.morphe.manager.ui.screen.shared.MorpheDialog
+import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
+import app.morphe.manager.ui.screen.shared.ShimmerChangelog
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 
 /**
@@ -22,7 +24,6 @@ fun ChangelogDialog(
     updateViewModel: UpdateViewModel
 ) {
     val textColor = LocalDialogTextColor.current
-    val secondaryColor = LocalDialogSecondaryTextColor.current
 
     // Load current version changelog when dialog opens
     LaunchedEffect(Unit) {
@@ -43,27 +44,15 @@ fun ChangelogDialog(
         val releaseInfo = updateViewModel.currentVersionReleaseInfo
 
         if (releaseInfo == null) {
-            // Loading state
-            Box(
+            // Shimmer loading state
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 48.dp),
-                contentAlignment = Alignment.Center
+                    .padding(vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    CircularProgressIndicator(
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(48.dp)
-                    )
-                    Text(
-                        text = stringResource(R.string.changelog_loading),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = secondaryColor
-                    )
-                }
+                // Show shimmer changelog item
+                ShimmerChangelog()
             }
         } else {
             // Reuse the same component from update dialog
