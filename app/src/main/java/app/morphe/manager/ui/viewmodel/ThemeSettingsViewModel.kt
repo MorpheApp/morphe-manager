@@ -16,14 +16,12 @@ enum class ThemePreset {
     DEFAULT,
     LIGHT,
     DARK,
-    DYNAMIC,
-    PURE_BLACK
+    DYNAMIC
 }
 
 private data class ThemePresetConfig(
     val theme: Theme,
     val dynamicColor: Boolean = false,
-    val pureBlackTheme: Boolean = false,
     val customAccentHex: String = "",
     val customThemeHex: String = ""
 )
@@ -44,10 +42,6 @@ class ThemeSettingsViewModel(
         ThemePreset.DYNAMIC to ThemePresetConfig(
             theme = Theme.SYSTEM,
             dynamicColor = true
-        ),
-        ThemePreset.PURE_BLACK to ThemePresetConfig(
-            theme = Theme.DARK,
-            pureBlackTheme = true
         )
     )
 
@@ -69,7 +63,11 @@ class ThemeSettingsViewModel(
         prefs.themePresetSelectionEnabled.update(true)
         prefs.theme.update(config.theme)
         prefs.dynamicColor.update(config.dynamicColor)
-        prefs.pureBlackTheme.update(config.pureBlackTheme)
+
+        // Pure Black should be disabled for incompatible themes
+        if (preset == ThemePreset.LIGHT) {
+            prefs.pureBlackTheme.update(false)
+        }
 
         // Only reset colors for DYNAMIC preset, preserve for others
         if (preset == ThemePreset.DYNAMIC) {

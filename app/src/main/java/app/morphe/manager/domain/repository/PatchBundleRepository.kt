@@ -16,7 +16,6 @@ import app.morphe.manager.data.room.bundles.PatchBundleEntity
 import app.morphe.manager.data.room.bundles.PatchBundleProperties
 import app.morphe.manager.data.room.bundles.Source
 import app.morphe.manager.domain.bundles.*
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.patch.PatchBundleInfo
@@ -87,7 +86,6 @@ class PatchBundleRepository(
     val bundleUpdateProgress: StateFlow<BundleUpdateProgress?> = bundleUpdateProgressFlow.asStateFlow()
 
     private val bundleImportProgressFlow = MutableStateFlow<ImportProgress?>(null)
-    val bundleImportProgress: StateFlow<ImportProgress?> = bundleImportProgressFlow.asStateFlow()
 
     private val updateJobMutex = Mutex()
     private var updateJob: Job? = null
@@ -345,24 +343,12 @@ class PatchBundleRepository(
         }
         val info = loadMetadata(sources).toMutableMap()
 
+        // Ensure official bundle has default display name if none is set
         val officialSource = sources[0]
         val officialDisplayName = "Official Morphe Patches"
-        if (officialSource != null) {
-            val storedCustomName = prefs.officialBundleCustomDisplayName.get().takeIf { it.isNotBlank() }
-            val currentName = officialSource.displayName
-            when {
-                storedCustomName != null && currentName != storedCustomName -> {
-                    updateDb(officialSource.uid) { it.copy(displayName = storedCustomName) }
-                    sources[officialSource.uid] = officialSource.copy(displayName = storedCustomName)
-                }
-                storedCustomName == null && currentName.isNullOrBlank() -> {
-                    updateDb(officialSource.uid) { it.copy(displayName = officialDisplayName) }
-                    sources[officialSource.uid] = officialSource.copy(displayName = officialDisplayName)
-                }
-                storedCustomName == null && !currentName.isNullOrBlank() && currentName != officialDisplayName -> {
-                    prefs.officialBundleCustomDisplayName.update(currentName)
-                }
-            }
+        if (officialSource != null && officialSource.displayName.isNullOrBlank()) {
+            updateDb(officialSource.uid) { it.copy(displayName = officialDisplayName) }
+            sources[officialSource.uid] = officialSource.copy(displayName = officialDisplayName)
         }
 
         manualUpdateInfoFlow.update { current ->
@@ -382,13 +368,10 @@ class PatchBundleRepository(
     private suspend fun loadFromDb(): List<PatchBundleEntity> {
         val all = dao.all()
         if (all.isEmpty()) {
-            val shouldRestoreDefault = !prefs.officialBundleRemoved.get()
-            if (shouldRestoreDefault) {
-                val default = createDefaultEntityWithStoredOrder()
-                dao.upsert(default)
-                return listOf(default)
-            }
-            return emptyList()
+            // Always restore default bundle if database is empty
+            val default = createDefaultEntity()
+            dao.upsert(default)
+            return listOf(default)
         }
 
         return all
@@ -499,48 +482,9 @@ class PatchBundleRepository(
     }
 
     private suspend fun loadEntitiesEnforcingOfficialOrder(): List<PatchBundleEntity> {
-        var entities = loadFromDb()
-        if (enforceOfficialSortOrderIfNeeded(entities)) {
-            entities = loadFromDb()
-        }
+        val entities = loadFromDb()
         entities.forEach { Log.d(tag, "Bundle: $it") }
         return entities
-    }
-
-    private suspend fun enforceOfficialSortOrderIfNeeded(entities: List<PatchBundleEntity>): Boolean {
-        if (entities.isEmpty()) return false
-        val ordered = entities.sortedBy { it.sortOrder }
-        val currentIndex = ordered.indexOfFirst { it.uid == DEFAULT_SOURCE_UID }
-        if (currentIndex == -1) return false
-
-        val desiredOrder = prefs.officialBundleSortOrder.get()
-        val currentOrder = currentIndex.coerceAtLeast(0)
-        if (desiredOrder < 0) {
-            prefs.officialBundleSortOrder.update(currentOrder)
-            return false
-        }
-
-        val targetIndex = desiredOrder.coerceIn(0, ordered.lastIndex)
-        if (currentIndex == targetIndex) {
-            prefs.officialBundleSortOrder.update(currentOrder)
-            return false
-        }
-
-        val reordered = ordered.toMutableList()
-        val defaultEntity = reordered.removeAt(currentIndex)
-        reordered.add(targetIndex, defaultEntity)
-
-        reordered.forEachIndexed { index, entity ->
-            dao.updateSortOrder(entity.uid, index)
-        }
-        prefs.officialBundleSortOrder.update(targetIndex)
-        return true
-    }
-
-    private suspend fun createDefaultEntityWithStoredOrder(): PatchBundleEntity {
-        val storedOrder = prefs.officialBundleSortOrder.get().takeIf { it >= 0 }
-        val base = defaultSource()
-        return storedOrder?.let { base.copy(sortOrder = it) } ?: base
     }
 
     private suspend fun nextSortOrder(): Int = (dao.maxSortOrder() ?: -1) + 1
@@ -636,7 +580,6 @@ class PatchBundleRepository(
 
     suspend fun reset() = dispatchAction("Reset") { state ->
         dao.reset()
-        prefs.officialBundleRemoved.update(false)
         state.sources.keys.forEach { directoryOf(it).deleteRecursively() }
         doReload()
     }
@@ -696,12 +639,6 @@ class PatchBundleRepository(
             val sources = state.sources.toMutableMap()
             val info = state.info.toMutableMap()
             bundles.forEach {
-                if (it.isDefault) {
-                    prefs.officialBundleRemoved.update(true)
-                    val storedOrder = dao.getProps(it.uid)?.sortOrder ?: 0
-                    prefs.officialBundleSortOrder.update(storedOrder.coerceAtLeast(0))
-                }
-
                 dao.remove(it.uid)
                 directoryOf(it.uid).deleteRecursively()
                 sources.remove(it.uid)
@@ -762,10 +699,6 @@ class PatchBundleRepository(
                 val updated = src.copy(displayName = normalized)
                 state.copy(sources = state.sources.put(uid, updated))
             }
-        }
-
-        if (uid == DEFAULT_SOURCE_UID && result == DisplayNameUpdateResult.SUCCESS) {
-            prefs.officialBundleCustomDisplayName.update(normalized.orEmpty())
         }
 
         return result
@@ -1107,22 +1040,6 @@ class PatchBundleRepository(
         return "https://$host$normalizedPath$query"
     }
 
-    suspend fun RemotePatchBundle.setAutoUpdate(value: Boolean) {
-        dispatchAction("Set auto update ($name, $value)") { state ->
-            updateDb(uid) { it.copy(autoUpdate = value) }
-            val newSrc = (state.sources[uid] as? RemotePatchBundle)?.copy(autoUpdate = value)
-                ?: return@dispatchAction state
-
-            state.copy(sources = state.sources.put(uid, newSrc))
-        }
-
-        if (value) {
-            manualUpdateInfoFlow.update { map -> map - uid }
-        } else {
-            checkManualUpdates(uid)
-        }
-    }
-
     suspend fun update(
         vararg sources: RemotePatchBundle,
         showToast: Boolean = false,
@@ -1180,10 +1097,6 @@ class PatchBundleRepository(
 
         finalOrder.forEachIndexed { index, uid ->
             dao.updateSortOrder(uid, index)
-        }
-        val defaultIndex = finalOrder.indexOf(DEFAULT_SOURCE_UID)
-        if (defaultIndex != -1) {
-            prefs.officialBundleSortOrder.update(defaultIndex)
         }
 
         doReload()
@@ -1602,7 +1515,9 @@ class PatchBundleRepository(
     internal companion object {
         const val DEFAULT_SOURCE_UID = 0
         const val LOCAL_IMPORT_STEPS = 2
-        fun defaultSource() = PatchBundleEntity(
+
+        // Create default entity with sortOrder 0
+        fun createDefaultEntity() = PatchBundleEntity(
             uid = DEFAULT_SOURCE_UID,
             name = "",
             displayName = null,

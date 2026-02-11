@@ -61,9 +61,6 @@ class PreferencesManager(
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
-    val officialBundleRemoved = booleanPreference("official_bundle_removed", false)
-    val officialBundleSortOrder = intPreference("official_bundle_sort_order", -1)
-    val officialBundleCustomDisplayName = stringPreference("official_bundle_custom_display_name", "")
     val patchedAppExportFormat = stringPreference(
         "patched_app_export_format",
         ExportNameFormatter.DEFAULT_TEMPLATE
@@ -71,7 +68,6 @@ class PreferencesManager(
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
     val managerAutoUpdates = booleanPreference("manager_auto_updates", true)
-    val showManagerUpdateDialogOnLaunch = booleanPreference("show_manager_update_dialog_on_launch", true)
     val installationTime = longPreference("manager_installation_time", 0)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
@@ -159,8 +155,6 @@ class PreferencesManager(
         useProcessRuntime = useProcessRuntime.get(),
         patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
         patchedAppExportFormat = patchedAppExportFormat.get(),
-        officialBundleRemoved = officialBundleRemoved.get(),
-        officialBundleCustomDisplayName = officialBundleCustomDisplayName.get(),
         allowMeteredUpdates = allowMeteredUpdates.get(),
         installerPrimary = installerPrimary.get(),
         installerCustomComponents = installerCustomComponents.get(),
@@ -169,7 +163,6 @@ class PreferencesManager(
         keystorePass = keystorePass.get(),
         firstLaunch = firstLaunch.get(),
         managerAutoUpdates = managerAutoUpdates.get(),
-        showManagerUpdateDialogOnLaunch = showManagerUpdateDialogOnLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         usePatchesPrereleases = usePatchesPrereleases.get(),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
@@ -192,8 +185,6 @@ class PreferencesManager(
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
         snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
         snapshot.patchedAppExportFormat?.let { patchedAppExportFormat.value = it }
-        snapshot.officialBundleRemoved?.let { officialBundleRemoved.value = it }
-        snapshot.officialBundleCustomDisplayName?.let { officialBundleCustomDisplayName.value = it }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }
@@ -202,9 +193,6 @@ class PreferencesManager(
         snapshot.keystorePass?.let { keystorePass.value = it }
         snapshot.firstLaunch?.let { firstLaunch.value = it }
         snapshot.managerAutoUpdates?.let { managerAutoUpdates.value = it }
-        snapshot.showManagerUpdateDialogOnLaunch?.let {
-            showManagerUpdateDialogOnLaunch.value = it
-        }
         snapshot.useManagerPrereleases?.let { useManagerPrereleases.value = it }
         snapshot.usePatchesPrereleases?.let { usePatchesPrereleases.value = it }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }

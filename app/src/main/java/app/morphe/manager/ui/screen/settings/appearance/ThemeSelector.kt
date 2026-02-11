@@ -19,7 +19,6 @@ import app.morphe.manager.ui.theme.Theme
 @Composable
 fun ThemeSelector(
     theme: Theme,
-    pureBlackTheme: Boolean,
     dynamicColor: Boolean,
     supportsDynamicColor: Boolean,
     onThemeSelected: (String) -> Unit
@@ -31,15 +30,16 @@ fun ThemeSelector(
         WindowWidthSizeClass.Expanded -> 5
     }
 
+    // Determine current theme selection
     val currentTheme = when {
         dynamicColor && supportsDynamicColor -> "DYNAMIC"
-        pureBlackTheme -> "BLACK"
         theme == Theme.SYSTEM -> "SYSTEM"
         theme == Theme.LIGHT -> "LIGHT"
         theme == Theme.DARK -> "DARK"
         else -> "SYSTEM"
     }
 
+    // Build theme options
     val themeOptions = buildList {
         add(
             Triple(
@@ -60,13 +60,6 @@ fun ThemeSelector(
                 "DARK",
                 Icons.Outlined.DarkMode,
                 stringResource(R.string.settings_appearance_dark)
-            )
-        )
-        add(
-            Triple(
-                "BLACK",
-                Icons.Outlined.Contrast,
-                stringResource(R.string.settings_appearance_black)
             )
         )
         if (supportsDynamicColor) {

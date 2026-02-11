@@ -221,7 +221,8 @@ private fun ProgressDetailsSection(
             InfoBadge(
                 text = stringResource(R.string.patcher_long_step_warning),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Rounded.Info
+                icon = Icons.Rounded.Info,
+                isCentered = true
             )
         }
 

@@ -1,7 +1,6 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageInfo
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -21,12 +20,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,7 +40,6 @@ private data class SavedSelectionItemData(
     val displayName: String,
     val patchCount: Int,
     val hasOptions: Boolean,
-    val packageInfo: PackageInfo?,
     val relatedPackages: Set<String> // All related packages (original + patched variants)
 )
 
@@ -60,6 +59,8 @@ fun PatchSelectionManagementDialog(
     val selectionRepository: PatchSelectionRepository = koinInject()
     val optionsRepository: PatchOptionsRepository = koinInject()
     val installedAppRepository: InstalledAppRepository = koinInject()
+    val originalApkRepository: OriginalApkRepository = koinInject()
+    val filesystem: Filesystem = koinInject()
 
     // Get packages with saved selections
     val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
@@ -79,6 +80,11 @@ fun PatchSelectionManagementDialog(
 
     // Extract strings to avoid LocalContext issues
     val selectionDeleted = stringResource(R.string.settings_system_patch_selection_deleted)
+
+    // Create AppDataResolver
+    val appDataResolver = remember(context, pm, originalApkRepository, installedAppRepository, filesystem) {
+        AppDataResolver(context, pm, originalApkRepository, installedAppRepository, filesystem)
+    }
 
     LaunchedEffect(allPackages) {
         if (allPackages.isEmpty()) {
@@ -101,46 +107,17 @@ fun PatchSelectionManagementDialog(
                 // Check if any related package has options
                 val hasOptions = relatedPackages.any { it in packagesWithOptions }
 
-                // Try to get PackageInfo from the original package first
-                val packageInfo = try {
-                    pm.getPackageInfo(originalPackage)
-                } catch (_: Exception) {
-                    // Try to get from any related package
-                    relatedPackages.firstNotNullOfOrNull { pkg ->
-                        try {
-                            pm.getPackageInfo(pkg)
-                        } catch (_: Exception) {
-                            null
-                        }
-                    }
-                }
-
-                // Get display name from original package
-                val displayName = try {
-                    if (packageInfo != null) {
-                        packageInfo.applicationInfo?.loadLabel(context.packageManager)?.toString()
-                    } else {
-                        val appInfo = context.packageManager.getApplicationInfo(originalPackage, 0)
-                        context.packageManager.getApplicationLabel(appInfo).toString()
-                    }
-                } catch (_: Exception) {
-                    // Try to get name from any related package
-                    relatedPackages.firstNotNullOfOrNull { pkg ->
-                        try {
-                            val appInfo = context.packageManager.getApplicationInfo(pkg, 0)
-                            context.packageManager.getApplicationLabel(appInfo).toString()
-                        } catch (_: Exception) {
-                            null
-                        }
-                    } ?: originalPackage
-                } ?: originalPackage
+                // Use AppDataResolver to get data from: installed app → original APK → patched APK → constants
+                val resolvedData = appDataResolver.resolveAppData(
+                    originalPackage,
+                    preferredSource = AppDataSource.INSTALLED
+                )
 
                 SavedSelectionItemData(
                     packageName = originalPackage,
-                    displayName = displayName,
+                    displayName = resolvedData.displayName,
                     patchCount = patchCount,
                     hasOptions = hasOptions,
-                    packageInfo = packageInfo,
                     relatedPackages = relatedPackages
                 )
             }.sortedBy { it.displayName }
@@ -171,7 +148,6 @@ fun PatchSelectionManagementDialog(
             DeleteSelectionConfirmationDialog(
                 packageName = itemData.packageName,
                 displayName = itemData.displayName,
-                packageInfo = itemData.packageInfo,
                 patchCount = itemData.patchCount,
                 hasOptions = itemData.hasOptions,
                 onDismiss = { itemToDelete = null },
@@ -277,11 +253,12 @@ private fun SavedSelectionItem(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // App icon (or default Android icon if not available)
+            // App Icon
             AppIcon(
-                packageInfo = data.packageInfo,
+                packageName = data.packageName,
                 contentDescription = null,
-                modifier = Modifier.size(48.dp)
+                modifier = Modifier.size(48.dp),
+                preferredSource = AppDataSource.ORIGINAL_APK
             )
 
             // Selection Info
@@ -339,7 +316,6 @@ private fun SavedSelectionItem(
 private fun DeleteSelectionConfirmationDialog(
     packageName: String,
     displayName: String,
-    packageInfo: PackageInfo?,
     patchCount: Int,
     hasOptions: Boolean,
     onDismiss: () -> Unit,
@@ -365,9 +341,10 @@ private fun DeleteSelectionConfirmationDialog(
         ) {
             // App Icon
             AppIcon(
-                packageInfo = packageInfo,
+                packageName = packageName,
                 contentDescription = null,
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier.size(64.dp),
+                preferredSource = AppDataSource.ORIGINAL_APK
             )
 
             // App Info
