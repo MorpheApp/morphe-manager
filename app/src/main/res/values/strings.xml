@@ -46,7 +46,6 @@
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
-    <string name="sources_management_subtitle">%d sources installed</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_date_added">Added</string>
