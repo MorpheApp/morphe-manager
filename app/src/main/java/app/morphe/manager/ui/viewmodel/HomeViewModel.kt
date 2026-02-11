@@ -707,50 +707,12 @@ class HomeViewModel(
             }
         }
 
-        // For root-capable devices, we need to determine the installation method BEFORE patching
-        // IF the bundle contains an enabled GmsCore support patch - because that patch must be
-        // excluded for mount install but included for standard install, producing different APKs.
-        //
-        // However, if no bundle contains an enabled GmsCore patch (either the bundle doesn't
-        // ship it, or the user disabled it in Expert Mode selections), then the APK will be
-        // identical regardless of the installation method. In that case we can skip the
-        // pre-patching dialog and let the user choose the installer AFTER patching — same UX
-        // as non-root devices.
+        // For root-capable devices, we must know the installation method BEFORE patching
+        // because it affects which patches are included (GmsCore is excluded for mount install).
+        // Show the pre-patching installer dialog so the user can choose.
+        // For non-root devices, just proceed - installer selection happens after patching.
         if (rootInstaller.isDeviceRooted()) {
-            val hasEnabledGmsCore = bundles.any { bundle ->
-                bundle.patches.any { patch ->
-                    patch.name.equals("GmsCore support", ignoreCase = true) && patch.include
-                }
-            }
-
-            // Also check Expert Mode saved selections - if GmsCore was manually deselected,
-            // it won't be included regardless, so no pre-patch decision is needed.
-            val gmsCoreInSavedSelections = if (prefs.useExpertMode.getBlocking() && hasEnabledGmsCore) {
-                val savedSelections = withContext(Dispatchers.IO) {
-                    patchSelectionRepository.getSelection(selectedApp.packageName)
-                }
-                if (savedSelections.isNotEmpty()) {
-                    // If there are saved selections, check if GmsCore is among them
-                    savedSelections.values.any { patchNames ->
-                        patchNames.any { it.equals("GmsCore support", ignoreCase = true) }
-                    }
-                } else {
-                    // No saved selections - default inclusion applies, so GmsCore IS present
-                    true
-                }
-            } else {
-                hasEnabledGmsCore
-            }
-
-            if (gmsCoreInSavedSelections) {
-                // GmsCore will be included by default → must choose install method first
-                requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
-            } else {
-                // No GmsCore in the patch set → APK is identical for mount and standard,
-                // so skip the pre-patch dialog. User picks installer after patching.
-                usingMountInstall = false
-                startPatchingWithApp(selectedApp, allowIncompatible)
-            }
+            requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
         } else {
             usingMountInstall = false
             startPatchingWithApp(selectedApp, allowIncompatible)
