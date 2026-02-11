@@ -1,3 +1,10 @@
+# app [1.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* Incorrect content color for badge style ([f4ad9aa](https://github.com/MorpheApp/morphe-manager/commit/f4ad9aaa70d827ab5d511ed63c0eb7bebb999f07))
+
 # app [1.7.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.6.0...v1.7.0-dev.1) (2026-02-11)
 
 
