@@ -120,6 +120,22 @@ fun AppearanceTabContent(
             )
         }
 
+        // Accent Color Section
+        AnimatedVisibility(visible = !dynamicColor) {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                SectionTitle(
+                    text = stringResource(R.string.settings_appearance_accent_color),
+                    icon = Icons.Outlined.ColorLens
+                )
+
+                AccentColorSelector(
+                    selectedColorHex = customAccentColorHex,
+                    onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
+                    dynamicColorEnabled = dynamicColor
+                )
+            }
+        }
+
         // Background Type Section
         SectionTitle(
             text = stringResource(R.string.settings_appearance_background),
@@ -160,18 +176,6 @@ fun AppearanceTabContent(
                 }
             )
         }
-
-        // Accent Color Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_accent_color),
-            icon = Icons.Outlined.ColorLens
-        )
-
-        AccentColorSelector(
-            selectedColorHex = customAccentColorHex,
-            onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-            dynamicColorEnabled = dynamicColor
-        )
 
         // App Icon Section
         SectionTitle(
