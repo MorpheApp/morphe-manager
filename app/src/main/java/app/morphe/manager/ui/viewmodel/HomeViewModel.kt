@@ -774,8 +774,26 @@ class HomeViewModel(
 
             // Use saved selections or create new ones
             val patches = if (savedSelections.isNotEmpty()) {
+                // Count patches before validation
+                val patchesBeforeValidation = savedSelections.values.sumOf { it.size }
+
                 // Validate saved selections against available patches
-                validatePatchSelection(savedSelections, bundlesMap)
+                val validatedPatches = validatePatchSelection(savedSelections, bundlesMap)
+
+                // Count patches after validation
+                val patchesAfterValidation = validatedPatches.values.sumOf { it.size }
+
+                // Show toast if patches were removed
+                val removedCount = patchesBeforeValidation - patchesAfterValidation
+                if (removedCount > 0) {
+                    app.toast(app.resources.getQuantityString(
+                        R.plurals.home_app_info_repatch_cleaned_invalid_data,
+                        removedCount,
+                        removedCount
+                    ))
+                }
+
+                validatedPatches
             } else {
                 // No saved selections - use default
                 allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
