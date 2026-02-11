@@ -46,7 +46,6 @@
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
-    <string name="sources_management_subtitle">%d sources installed</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_date_added">Added</string>
@@ -87,6 +86,8 @@ Compatible versions:"</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_yes">Yes, I have it</string>
     <string name="home_apk_availability_no">No, help me find it</string>
+    <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
+    <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
@@ -177,12 +178,10 @@ Are you sure you want to proceed?"</string>
     <string name="home_app_info_delete_item_patched_apk">Patched APK file</string>
     <string name="home_app_info_delete_item_original_apk">Original APK file</string>
     <string name="home_app_info_delete_preservation_note">Your patch selection and options will be preserved for future patching</string>
-    <string name="home_app_info_repatch_cleaned_invalid_data">Removed %d outdated patches from saved selection</string>
     <string name="home_app_info_patches_name_default">Patches</string>
     <string name="home_app_info_patches_name_fallback">Unnamed</string>
     <string name="home_app_info_patches_replace_fail">Failed to import patches: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Original APK not found. Cannot repatch this app</string>
-    <string name="home_app_info_repatch_requires_original">Repatch requires the original APK file</string>
     <string name="home_app_info_original_package_name">Original package name</string>
     <string name="home_app_info_applied_patches">Applied patches</string>
     <string name="home_app_info_patch_source_used">Patch source used</string>
@@ -199,6 +198,13 @@ Are you sure you want to proceed?"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode requires the original APK to be installed on your device before patching</string>
     <string name="root_gmscore_excluded">GmsCore support patch is excluded in root mode</string>
+    <string name="root_pre_patch_installer_title">Choose installation method</string>
+    <string name="root_pre_patch_installer_description">Your device has root access. Choose how you want to install the patched app</string>
+    <string name="root_pre_patch_installer_mount_title">Root Mount</string>
+    <string name="root_pre_patch_installer_mount_description">Mount patched APK over the stock app. No GmsCore needed</string>
+    <string name="root_pre_patch_installer_standard_title">Standard Install</string>
+    <string name="root_pre_patch_installer_standard_description">Install as a separate app with GmsCore support. Choose installer (System installer, Shizuku, etc.) after patching</string>
+    <string name="root_pre_patch_installer_hint">The installation method determines which patches are included and cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -309,9 +315,10 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Light</string>
     <string name="settings_appearance_dark">Dark</string>
-    <string name="settings_appearance_black">Black</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
+    <string name="settings_appearance_pure_black">Pure Black</string>
+    <string name="settings_appearance_pure_black_description">Use true black backgrounds for OLED displays</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>

@@ -24,4 +24,12 @@
         <item quantity="one">Enabled %d source</item>
         <item quantity="other">Enabled %d sources</item>
     </plurals>
+    <plurals name="home_app_info_repatch_cleaned_invalid_data">
+        <item quantity="one">Removed %1$d outdated patch from saved selection</item>
+        <item quantity="other">Removed %1$d outdated patches from saved selection</item>
+    </plurals>
+    <plurals name="sources_management_subtitle">
+        <item quantity="one">%1$d source installed</item>
+        <item quantity="other">%1$d sources installed</item>
+    </plurals>
 </resources>

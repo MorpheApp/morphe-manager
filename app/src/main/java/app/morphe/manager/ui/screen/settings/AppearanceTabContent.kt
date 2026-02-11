@@ -80,7 +80,6 @@ fun AppearanceTabContent(
 
         ThemeSelector(
             theme = theme,
-            pureBlackTheme = pureBlackTheme,
             dynamicColor = dynamicColor,
             supportsDynamicColor = supportsDynamicColor,
             onThemeSelected = { selectedTheme ->
@@ -89,12 +88,53 @@ fun AppearanceTabContent(
                         "SYSTEM" -> themeViewModel.applyThemePreset(ThemePreset.DEFAULT)
                         "LIGHT" -> themeViewModel.applyThemePreset(ThemePreset.LIGHT)
                         "DARK" -> themeViewModel.applyThemePreset(ThemePreset.DARK)
-                        "BLACK" -> themeViewModel.applyThemePreset(ThemePreset.PURE_BLACK)
                         "DYNAMIC" -> themeViewModel.applyThemePreset(ThemePreset.DYNAMIC)
                     }
                 }
             }
         )
+
+        // Pure Black Theme Toggle
+        AnimatedVisibility(visible = theme != Theme.LIGHT) {
+            RichSettingsItem(
+                onClick = {
+                    scope.launch {
+                        themeViewModel.prefs.pureBlackTheme.update(!pureBlackTheme)
+                    }
+                },
+                showBorder = true,
+                title = stringResource(R.string.settings_appearance_pure_black),
+                subtitle = stringResource(R.string.settings_appearance_pure_black_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Contrast)
+                },
+                trailingContent = {
+                    Switch(
+                        checked = pureBlackTheme,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (pureBlackTheme) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
+
+        // Accent Color Section
+        AnimatedVisibility(visible = !dynamicColor) {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                SectionTitle(
+                    text = stringResource(R.string.settings_appearance_accent_color),
+                    icon = Icons.Outlined.ColorLens
+                )
+
+                AccentColorSelector(
+                    selectedColorHex = customAccentColorHex,
+                    onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
+                    dynamicColorEnabled = dynamicColor
+                )
+            }
+        }
 
         // Background Type Section
         SectionTitle(
@@ -112,7 +152,7 @@ fun AppearanceTabContent(
         )
 
         // Parallax Effect Toggle
-        if (backgroundType != BackgroundType.NONE) {
+        AnimatedVisibility(visible = backgroundType != BackgroundType.NONE) {
             RichSettingsItem(
                 onClick = {
                     scope.launch {
@@ -136,18 +176,6 @@ fun AppearanceTabContent(
                 }
             )
         }
-
-        // Accent Color Section
-        SectionTitle(
-            text = stringResource(R.string.settings_appearance_accent_color),
-            icon = Icons.Outlined.ColorLens
-        )
-
-        AccentColorSelector(
-            selectedColorHex = customAccentColorHex,
-            onColorSelected = { color -> themeViewModel.setCustomAccentColor(color) },
-            dynamicColorEnabled = dynamicColor
-        )
 
         // App Icon Section
         SectionTitle(
@@ -237,7 +265,7 @@ private fun LanguageSection(
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
-                        text = currentLanguageOption?.flag ?: "🌍",
+                        text = currentLanguageOption?.flag ?: "🌐",
                         style = MaterialTheme.typography.titleLarge
                     )
                 }

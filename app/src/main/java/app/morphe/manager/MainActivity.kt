@@ -136,7 +136,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             },
         ) {
-            // Clunky work around to get a boolean calculated in the home screen
+            // Shared state between HomeScreen and PatcherScreen for mount install mode.
+            // Set by HomeViewModel.resolvePrePatchInstallerChoice()
             val usingMountInstallState = mutableStateOf(false)
 
             composable<HomeScreen> { entry ->

@@ -35,6 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -50,7 +51,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.ActionPillButton
 import app.morphe.manager.ui.screen.shared.InfoBadge
 import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
-import app.morphe.manager.util.BUNDLE_URL_RELEASES
+import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -128,8 +129,9 @@ fun BundleManagementSheet(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = stringResource(
-                                R.string.sources_management_subtitle,
+                            text = pluralStringResource(
+                                R.plurals.sources_management_subtitle,
+                                sources.size,
                                 sources.size
                             ),
                             style = MaterialTheme.typography.bodySmall,
@@ -184,7 +186,10 @@ fun BundleManagementSheet(
                             },
                             onOpenInBrowser = {
                                 val pageUrl = manualUpdateInfo[bundle.uid]?.pageUrl
-                                    ?: BUNDLE_URL_RELEASES
+                                    ?: (bundle as? RemotePatchBundle)?.let { remote ->
+                                        RemotePatchBundle.inferPageUrlFromEndpoint(remote.endpoint)
+                                    }
+                                    ?: SOURCE_REPO_URL
                                 try {
                                     uriHandler.openUri(pageUrl)
                                 } catch (_: Exception) {
