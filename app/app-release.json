@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-11T12:49:59.818Z",
-  "description": "# app [1.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2026-02-11)\n\n\n### Bug Fixes\n\n* Incorrect content color for badge style ([f4ad9aa](https://github.com/MorpheApp/morphe-manager/commit/f4ad9aaa70d827ab5d511ed63c0eb7bebb999f07))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.2/morphe-manager-1.7.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.2/morphe-manager-1.7.0-dev.2.apk.asc",
-  "version": "1.7.0-dev.2"
+  "created_at": "2026-02-11T19:28:48.690Z",
+  "description": "# app [1.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2026-02-11)\n\n\n### Bug Fixes\n\n* Refactor changelog component and add shimmer effect ([44d0318](https://github.com/MorpheApp/morphe-manager/commit/44d03189c2e0f1ee1a6971b7cd05f8d5b98a7651))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.3/morphe-manager-1.7.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.3/morphe-manager-1.7.0-dev.3.apk.asc",
+  "version": "1.7.0-dev.3"
 }

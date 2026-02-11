@@ -1,3 +1,10 @@
+# app [1.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2026-02-11)
+
+
+### Bug Fixes
+
+* Refactor changelog component and add shimmer effect ([44d0318](https://github.com/MorpheApp/morphe-manager/commit/44d03189c2e0f1ee1a6971b7cd05f8d5b98a7651))
+
 # app [1.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2026-02-11)
 
 
