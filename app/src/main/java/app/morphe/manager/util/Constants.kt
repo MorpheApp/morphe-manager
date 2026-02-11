@@ -6,8 +6,10 @@ import app.morphe.manager.R
 
 const val tag = "Morphe Manager"
 
+const val SOURCE_NAME = "Morphe Patches"
 const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
+const val SOURCE_REPO_URL_RAW = "https://raw.githubusercontent.com/MorpheApp/morphe-patches"
 internal const val MORPHE_API_URL = "https://api.morphe.software"
 
 // Package identifiers with their associated colors

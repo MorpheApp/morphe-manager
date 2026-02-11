@@ -122,7 +122,8 @@ fun InfoBadge(
                 )
             }
             Text(
-                text = text,
+                // Add zero-width space, an invisible character that allows line breaks at this position
+                text = text.replace("/", "/\u200B").replace(".", ".\u200B"),
                 style = textStyle,
                 color = contentColor,
                 textAlign = if (isCentered) TextAlign.Center else TextAlign.Start

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.PatchBundleSource
@@ -37,6 +38,7 @@ import app.morphe.manager.network.dto.MorpheAsset
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.simpleMessage
+import app.morphe.manager.util.toFilePath
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.compose.koinInject
 
@@ -170,7 +172,7 @@ private fun RemoteTabContent(
                     Text(stringResource(R.string.sources_dialog_remote_url))
                 },
                 placeholder = {
-                    Text(text = "github.com/owner/repo")
+                    Text(text = "https://github.com/owner/repo")
                 },
                 showClearButton = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri)
@@ -180,7 +182,8 @@ private fun RemoteTabContent(
         // Description
         InfoBadge(
             icon = Icons.Outlined.Info,
-            text = stringResource(R.string.sources_dialog_remote_url_formats),
+            text = stringResource(R.string.sources_dialog_remote_url_formats_title) +
+                    stringResource(R.string.sources_dialog_remote_url_formats_list),
             style = InfoBadgeStyle.Default
         )
     }
@@ -210,7 +213,7 @@ private fun LocalTabContent(
         if (selectedPath != null) {
             InfoBadge(
                 icon = null,
-                text = selectedPath,
+                text = selectedPath.toUri().toFilePath(),
                 style = InfoBadgeStyle.Default
             )
         }

@@ -19,10 +19,7 @@ import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.patch.PatchBundleInfo
-import app.morphe.manager.util.PatchSelection
-import app.morphe.manager.util.simpleMessage
-import app.morphe.manager.util.tag
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import io.ktor.http.Url
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.mutate
@@ -345,10 +342,9 @@ class PatchBundleRepository(
 
         // Ensure official bundle has default display name if none is set
         val officialSource = sources[0]
-        val officialDisplayName = "Official Morphe Patches"
         if (officialSource != null && officialSource.displayName.isNullOrBlank()) {
-            updateDb(officialSource.uid) { it.copy(displayName = officialDisplayName) }
-            sources[officialSource.uid] = officialSource.copy(displayName = officialDisplayName)
+            updateDb(officialSource.uid) { it.copy(displayName = SOURCE_NAME) }
+            sources[officialSource.uid] = officialSource.copy(displayName = SOURCE_NAME)
         }
 
         manualUpdateInfoFlow.update { current ->
@@ -523,7 +519,7 @@ class PatchBundleRepository(
         val existingProps = dao.getProps(resolvedUid)
         val normalizedDisplayName = displayName?.takeUnless { it.isBlank() }
             ?: existingProps?.displayName?.takeUnless { it.isBlank() }
-            ?: if (resolvedUid == DEFAULT_SOURCE_UID) "Official Morphe Patches" else null
+            ?: if (resolvedUid == DEFAULT_SOURCE_UID) SOURCE_NAME else null
         val normalizedName = if (resolvedUid == DEFAULT_SOURCE_UID) {
             name
         } else {
@@ -772,6 +768,14 @@ class PatchBundleRepository(
                         PatchBundle(tempFile.absolutePath).manifestAttributes?.name
                     }.getOrNull()?.takeUnless { it.isBlank() }
 
+                    // Block importing official Morphe source
+//                    if (manifestName?.equals(SOURCE_NAME, ignoreCase = true) == true) {
+//                        withContext(Dispatchers.Main) {
+//                            app.toast(app.getString("This source cannot be added because it is already built-in"))
+//                        }
+//                        return
+//                    }
+
                     val uid = stableLocalUid(manifestName, tempFile, precomputedDigest)
                     val existingProps = dao.getProps(uid)
                     displayName = (manifestName ?: existingProps?.name).orEmpty()
@@ -912,6 +916,16 @@ class PatchBundleRepository(
                 }
                 return@dispatchAction state
             }
+
+            // Block adding official Morphe repository
+//            val isOfficialRepo = normalizedUrl.contains(SOURCE_REPO_URL, ignoreCase = true) ||
+//                    normalizedUrl.contains(SOURCE_REPO_URL_RAW, ignoreCase = true)
+//            if (isOfficialRepo) {
+//                withContext(Dispatchers.Main) {
+//                    app.toast(app.getString("This source cannot be added because it is already built-in"))
+//                }
+//                return@dispatchAction state
+//            }
 
             val src = createEntity(
                 "",
@@ -1078,29 +1092,6 @@ class PatchBundleRepository(
 
     suspend fun checkManualUpdates(vararg bundleUids: Int) =
         store.dispatch(ManualUpdateCheck(bundleUids.toSet().takeIf { it.isNotEmpty() }))
-
-    suspend fun reorderBundles(prioritizedUids: List<Int>) = dispatchAction("Reorder bundles") { state ->
-        val currentOrder = state.sources.keys.toList()
-        if (currentOrder.isEmpty()) return@dispatchAction state
-
-        val sanitized = LinkedHashSet(prioritizedUids.filter { it in currentOrder })
-        if (sanitized.isEmpty()) return@dispatchAction state
-
-        val finalOrder = buildList {
-            addAll(sanitized)
-            currentOrder.filterNotTo(this) { it in sanitized }
-        }
-
-        if (finalOrder == currentOrder) {
-            return@dispatchAction state
-        }
-
-        finalOrder.forEachIndexed { index, uid ->
-            dao.updateSortOrder(uid, index)
-        }
-
-        doReload()
-    }
 
     private inner class Update(
         private val force: Boolean = false,
