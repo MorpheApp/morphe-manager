@@ -35,6 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -128,8 +129,9 @@ fun BundleManagementSheet(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = stringResource(
-                                R.string.sources_management_subtitle,
+                            text = pluralStringResource(
+                                R.plurals.sources_management_subtitle,
+                                sources.size,
                                 sources.size
                             ),
                             style = MaterialTheme.typography.bodySmall,
