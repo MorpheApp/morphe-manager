@@ -29,7 +29,7 @@ enum class InfoBadgeStyle {
      */
     @Composable
     fun colors(): Pair<Color, Color> = when (this) {
-        Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
+        Primary -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.onPrimaryContainer
         Success -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
         Warning -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
         Error -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer

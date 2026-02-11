@@ -10,10 +10,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -641,7 +641,7 @@ fun PrePatchInstallerDialog(
             InfoBadge(
                 text = stringResource(R.string.root_pre_patch_installer_hint),
                 style = InfoBadgeStyle.Primary,
-                icon = Icons.Rounded.Info,
+                icon = Icons.Outlined.Info,
                 isExpanded = true
             )
         }

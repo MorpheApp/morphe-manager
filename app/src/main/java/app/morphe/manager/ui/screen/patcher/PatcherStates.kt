@@ -14,7 +14,7 @@ import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -483,7 +483,7 @@ private fun SuccessRootWarning(
         InfoBadge(
             text = stringResource(R.string.root_gmscore_excluded),
             style = InfoBadgeStyle.Primary,
-            icon = Icons.Rounded.Info,
+            icon = Icons.Outlined.Info,
             isCentered = true
         )
     }
