@@ -80,7 +80,6 @@ fun AppearanceTabContent(
 
         ThemeSelector(
             theme = theme,
-            pureBlackTheme = pureBlackTheme,
             dynamicColor = dynamicColor,
             supportsDynamicColor = supportsDynamicColor,
             onThemeSelected = { selectedTheme ->
@@ -89,12 +88,37 @@ fun AppearanceTabContent(
                         "SYSTEM" -> themeViewModel.applyThemePreset(ThemePreset.DEFAULT)
                         "LIGHT" -> themeViewModel.applyThemePreset(ThemePreset.LIGHT)
                         "DARK" -> themeViewModel.applyThemePreset(ThemePreset.DARK)
-                        "BLACK" -> themeViewModel.applyThemePreset(ThemePreset.PURE_BLACK)
                         "DYNAMIC" -> themeViewModel.applyThemePreset(ThemePreset.DYNAMIC)
                     }
                 }
             }
         )
+
+        // Pure Black Theme Toggle
+        AnimatedVisibility(visible = theme != Theme.LIGHT) {
+            RichSettingsItem(
+                onClick = {
+                    scope.launch {
+                        themeViewModel.prefs.pureBlackTheme.update(!pureBlackTheme)
+                    }
+                },
+                showBorder = true,
+                title = stringResource(R.string.settings_appearance_pure_black),
+                subtitle = stringResource(R.string.settings_appearance_pure_black_description),
+                leadingContent = {
+                    MorpheIcon(icon = Icons.Outlined.Contrast)
+                },
+                trailingContent = {
+                    Switch(
+                        checked = pureBlackTheme,
+                        onCheckedChange = null,
+                        modifier = Modifier.semantics {
+                            stateDescription = if (pureBlackTheme) enabledState else disabledState
+                        }
+                    )
+                }
+            )
+        }
 
         // Background Type Section
         SectionTitle(
@@ -112,7 +136,7 @@ fun AppearanceTabContent(
         )
 
         // Parallax Effect Toggle
-        if (backgroundType != BackgroundType.NONE) {
+        AnimatedVisibility(visible = backgroundType != BackgroundType.NONE) {
             RichSettingsItem(
                 onClick = {
                     scope.launch {
@@ -237,7 +261,7 @@ private fun LanguageSection(
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
-                        text = currentLanguageOption?.flag ?: "🌍",
+                        text = currentLanguageOption?.flag ?: "🌐",
                         style = MaterialTheme.typography.titleLarge
                     )
                 }

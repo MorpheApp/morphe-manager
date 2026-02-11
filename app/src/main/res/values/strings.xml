@@ -315,9 +315,10 @@ Are you sure you want to proceed?"</string>
     <string name="settings_appearance_system">System</string>
     <string name="settings_appearance_light">Light</string>
     <string name="settings_appearance_dark">Dark</string>
-    <string name="settings_appearance_black">Black</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_accent_color">Accent color</string>
+    <string name="settings_appearance_pure_black">Pure Black</string>
+    <string name="settings_appearance_pure_black_description">Use true black backgrounds for OLED displays</string>
 
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">App language</string>
