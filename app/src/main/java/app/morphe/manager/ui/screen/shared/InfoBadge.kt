@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 /**
@@ -44,6 +45,7 @@ enum class InfoBadgeStyle {
  * @param icon Optional icon to display before text
  * @param isCompact Whether to use compact sizing (smaller padding and icon)
  * @param isExpanded Whether to use expanded variant (larger padding, centered content)
+ * @param isCentered Whether to center content horizontally within the badge
  * @param modifier Modifier to be applied to the badge
  */
 @Composable
@@ -53,6 +55,7 @@ fun InfoBadge(
     icon: ImageVector? = null,
     isCompact: Boolean = false,
     isExpanded: Boolean = false,
+    isCentered: Boolean = false,
     @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier
 ) {
@@ -95,6 +98,12 @@ fun InfoBadge(
         MaterialTheme.typography.bodySmall
     }
 
+    val horizontalArrangement = if (isCentered) {
+        Arrangement.spacedBy(if (isExpanded) 12.dp else 8.dp, Alignment.CenterHorizontally)
+    } else {
+        Arrangement.spacedBy(if (isExpanded) 12.dp else 8.dp)
+    }
+
     Surface(
         modifier = surfaceModifier,
         shape = RoundedCornerShape(shapeRadius),
@@ -102,7 +111,7 @@ fun InfoBadge(
     ) {
         Row(
             modifier = Modifier.padding(horizontal = horizontalPadding, vertical = verticalPadding),
-            horizontalArrangement = Arrangement.spacedBy(if (isExpanded) 12.dp else 8.dp),
+            horizontalArrangement = horizontalArrangement,
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
@@ -115,7 +124,8 @@ fun InfoBadge(
             Text(
                 text = text,
                 style = textStyle,
-                color = contentColor
+                color = contentColor,
+                textAlign = if (isCentered) TextAlign.Center else TextAlign.Start
             )
         }
     }
