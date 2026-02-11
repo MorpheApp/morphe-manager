@@ -3,13 +3,14 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -156,5 +157,63 @@ fun ShimmerChangelog(
             widthFraction = 0.3f,
             height = 12.dp
         )
+    }
+}
+
+/**
+ * Shimmer loading state for changelog header
+ */
+@Composable
+fun ShimmerChangelogHeader() {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Icon shimmer
+            ShimmerBox(
+                modifier = Modifier.size(56.dp),
+                shape = CircleShape,
+                baseColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                shimmerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)
+            )
+
+            // Text shimmer
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Version shimmer
+                ShimmerText(
+                    widthFraction = 0.35f,
+                    height = 24.dp,
+                    cornerRadius = 6.dp
+                )
+
+                // Date shimmer
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    ShimmerBox(
+                        modifier = Modifier.size(16.dp),
+                        shape = CircleShape,
+                        baseColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                        shimmerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)
+                    )
+                    ShimmerText(
+                        widthFraction = 0.22f,
+                        height = 14.dp,
+                        cornerRadius = 4.dp
+                    )
+                }
+            }
+        }
     }
 }

@@ -179,7 +179,7 @@ fun MorpheDialogButtonRow(
         // Vertical layout - primary on top
         Column(
             modifier = modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             MorpheDialogButton(
                 text = primaryText,
@@ -236,7 +236,7 @@ fun MorpheDialogButtonColumn(
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = content
     )
