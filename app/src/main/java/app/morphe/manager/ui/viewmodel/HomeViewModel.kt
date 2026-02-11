@@ -791,6 +791,14 @@ class HomeViewModel(
                         removedCount,
                         removedCount
                     ))
+
+                    // Save validated selection
+                    withContext(Dispatchers.IO) {
+                        patchSelectionRepository.updateSelection(
+                            packageName = selectedApp.packageName,
+                            selection = validatedPatches
+                        )
+                    }
                 }
 
                 validatedPatches
@@ -801,6 +809,13 @@ class HomeViewModel(
 
             // Validate options
             val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
+
+            // Save validated options if anything changed
+            if (validatedOptions != savedOptions) {
+                withContext(Dispatchers.IO) {
+                    optionsRepository.saveOptions(selectedApp.packageName, validatedOptions)
+                }
+            }
 
             expertModeSelectedApp = selectedApp
             expertModeBundles = allBundles
