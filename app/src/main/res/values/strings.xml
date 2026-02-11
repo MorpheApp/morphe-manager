@@ -62,16 +62,16 @@
     <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone</string>
     <string name="sources_dialog_remote">Remote</string>
     <string name="sources_dialog_remote_url">Source URL</string>
-    <string name="sources_dialog_remote_url_formats">"Examples:
-• github.com/owner/repo
-• raw.githubusercontent.com/owner/repo/main/patches-bundle.json
-• example.com/patches-bundle.json"</string>
+    <string name="sources_dialog_remote_url_formats_title">Examples:</string>
+    <string name="sources_dialog_remote_url_formats_list" translatable="false">"
+• https://github.com/owner/repo
+• https://raw.githubusercontent.com/owner/repo/patches-bundle.json
+• https://example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Select patch source file</string>
     <string name="sources_dialog_local_file_description">Select a .mpp patch source file from storage</string>
     <string name="sources_dialog_local_change_file">Change file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
-
     <string name="sources_update_success">Update successful</string>
     <string name="sources_update_unavailable">No update available</string>
     <string name="sources_download_fail">Failed to download sources: %s</string>

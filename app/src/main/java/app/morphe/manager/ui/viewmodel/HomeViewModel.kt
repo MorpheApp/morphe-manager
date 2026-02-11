@@ -177,7 +177,6 @@ class HomeViewModel(
     var installedAppsLoading by mutableStateOf(true)
 
     // Bundle data
-    private var apiBundle: PatchBundleSource? = null
     var recommendedVersions: Map<String, String> = emptyMap()
         private set
     var compatibleVersions: Map<String, List<String>> = emptyMap()
@@ -406,8 +405,12 @@ class HomeViewModel(
      * Update bundle data when sources or bundle info changes
      */
     fun updateBundleData(sources: List<PatchBundleSource>, bundleInfo: Map<Int, Any>) {
-        apiBundle = sources.firstOrNull { it.uid == DEFAULT_SOURCE_UID }
-        val versionData = extractCompatibleVersions(bundleInfo)
+        // Get set of enabled bundle UIDs
+        val enabledBundleUids = sources.filter { it.enabled }.map { it.uid }.toSet()
+
+        // Extract versions from all enabled bundles
+        val versionData = extractCompatibleVersions(bundleInfo, enabledBundleUids)
+
         recommendedVersions = versionData.mapValues { it.value.firstOrNull() ?: "" }
         compatibleVersions = versionData
     }
@@ -684,10 +687,12 @@ class HomeViewModel(
 
         // Check if any patches available
         if (totalPatches == 0) {
-            val recommendedVersion = pendingPackageName?.let { recommendedVersions[it] }
-            val allVersions = pendingPackageName?.let { compatibleVersions[it] } ?: emptyList()
+            // First check if we have version info for this package
+            val recommendedVersion = recommendedVersions[selectedApp.packageName]
+            val allVersions = compatibleVersions[selectedApp.packageName] ?: emptyList()
 
-            if (recommendedVersion != null) {
+            if (recommendedVersion != null || allVersions.isNotEmpty()) {
+                // Patches exist for this package, but not for this version
                 pendingSelectedApp = selectedApp
                 showUnsupportedVersionDialog = UnsupportedVersionDialogState(
                     packageName = selectedApp.packageName,
@@ -698,6 +703,7 @@ class HomeViewModel(
                 cleanupPendingData(keepSelectedApp = true)
                 return
             } else {
+                // No patches at all for this package
                 app.toast(app.getString(R.string.home_no_patches_for_app))
                 if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                     selectedApp.file.delete()
@@ -1075,18 +1081,49 @@ class HomeViewModel(
      * Extract compatible versions for each package from bundle info
      * Returns a map of package name to sorted list of versions (newest first)
      */
-    private fun extractCompatibleVersions(bundleInfo: Map<Int, Any>): Map<String, List<String>> {
-        val info = bundleInfo[0] as? PatchBundleInfo ?: return emptyMap()
-        return mainAppPackages.associateWith { packageName ->
-            info.patches
+    private fun extractCompatibleVersions(
+        bundleInfo: Map<Int, Any>,
+        enabledBundleUids: Set<Int> = emptySet()
+    ): Map<String, List<String>> {
+        // Collect versions from all enabled bundles
+        val allVersionsByPackage = mutableMapOf<String, MutableSet<String>>()
+
+        bundleInfo.forEach { (bundleUid, bundleData) ->
+            // Skip disabled bundles if we have the enabled list
+            if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) {
+                return@forEach
+            }
+
+            val info = bundleData as? PatchBundleInfo ?: return@forEach
+
+            // Collect all unique package names from all patches in this bundle
+            val packagesInBundle = info.patches
                 .flatMap { patch ->
-                    patch.compatiblePackages
-                        ?.firstOrNull { it.packageName == packageName }
-                        ?.versions
-                        ?: emptyList()
+                    patch.compatiblePackages?.map { it.packageName } ?: emptyList()
                 }
                 .distinct()
-                .sortedDescending()
+
+            // For each package, collect all compatible versions
+            packagesInBundle.forEach { packageName ->
+                val versions = info.patches
+                    .flatMap { patch ->
+                        patch.compatiblePackages
+                            ?.firstOrNull { it.packageName == packageName }
+                            ?.versions
+                            ?: emptyList()
+                    }
+                    .distinct()
+
+                if (versions.isNotEmpty()) {
+                    allVersionsByPackage.getOrPut(packageName) { mutableSetOf() }
+                        .addAll(versions)
+                }
+            }
+        }
+
+        // Convert to sorted lists (newest first)
+        return allVersionsByPackage.mapValues { (_, versions) ->
+            versions.toList().sortedDescending()
         }.filterValues { it.isNotEmpty() }
     }
 
