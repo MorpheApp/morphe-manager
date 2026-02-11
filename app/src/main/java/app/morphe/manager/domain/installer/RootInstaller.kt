@@ -109,12 +109,12 @@ class RootInstaller(
      * TODO: Remove this code after most users have migrated (recommended: 3-6 months after release)
      */
     private suspend fun migrateModuleIfNeeded(packageName: String) = withContext(Dispatchers.IO) {
-        val oldModulePath = "$modulesPath/$packageName-revanced"
-        val newModulePath = "$modulesPath/$packageName-morphe"
+        val oldModulePath = "$MODULES_PATH/$packageName-revanced"
+        val newModulePath = "$MODULES_PATH/$packageName-morphe"
 
         val remoteFS = try {
             awaitRemoteFS()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             return@withContext // Can't migrate without root
         }
 
@@ -186,7 +186,7 @@ class RootInstaller(
     private suspend fun isAppMountedInternal(packageName: String) = withContext(Dispatchers.IO) {
         pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir?.let {
             execute("mount | grep \"$it\"").isSuccess
-        } ?: false
+        } == true
     }
 
     /**
@@ -210,27 +210,10 @@ class RootInstaller(
     // END OF TEMPORARY MIGRATION CODE
     // ============================================================================
 
-    suspend fun isAppInstalled(packageName: String): Boolean {
-        // TEMPORARY: Try migration first
-        // TODO: Remove migration call after adoption period
-        migrateModuleIfNeeded(packageName)
-
-        val remoteFS = awaitRemoteFS()
-
-        // Check new path
-        val newPath = remoteFS.getFile("$modulesPath/$packageName-morphe")
-        if (newPath.exists()) return true
-
-        // TEMPORARY: Fallback to old path for backward compatibility
-        // TODO: Remove this fallback after migration period
-        val oldPath = remoteFS.getFile("$modulesPath/$packageName-revanced")
-        return oldPath.exists()
-    }
-
     suspend fun isAppMounted(packageName: String) = withContext(Dispatchers.IO) {
         pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir?.let {
             execute("mount | grep \"$it\"").isSuccess
-        } ?: false
+        } == true
     }
 
     suspend fun mount(packageName: String) {
@@ -247,12 +230,12 @@ class RootInstaller(
             val remoteFS = awaitRemoteFS()
 
             // Try new path first
-            var patchedAPK = "$modulesPath/$packageName-morphe/$packageName.apk"
+            var patchedAPK = "$MODULES_PATH/$packageName-morphe/$packageName.apk"
 
             // TEMPORARY: Fallback to old path if new doesn't exist
             // TODO: Remove this fallback after migration period
             if (!remoteFS.getFile(patchedAPK).exists()) {
-                patchedAPK = "$modulesPath/$packageName-revanced/$packageName.apk"
+                patchedAPK = "$MODULES_PATH/$packageName-revanced/$packageName.apk"
             }
 
             execute("mount -o bind \"$patchedAPK\" \"$stockAPK\"")
@@ -282,7 +265,7 @@ class RootInstaller(
         val assets = app.assets
 
         // Use new path for new installations
-        val modulePath = "$modulesPath/$packageName-morphe"
+        val modulePath = "$MODULES_PATH/$packageName-morphe"
 
         unmount(packageName)
 
@@ -345,12 +328,12 @@ class RootInstaller(
             unmount(packageName)
 
         // Try new path first
-        var moduleDir = remoteFS.getFile("$modulesPath/$packageName-morphe")
+        var moduleDir = remoteFS.getFile("$MODULES_PATH/$packageName-morphe")
 
         // TEMPORARY: Fallback to old path for backward compatibility
         // TODO: Remove this fallback after migration period
         if (!moduleDir.exists()) {
-            moduleDir = remoteFS.getFile("$modulesPath/$packageName-revanced")
+            moduleDir = remoteFS.getFile("$MODULES_PATH/$packageName-revanced")
         }
 
         if (!moduleDir.exists()) return
@@ -361,7 +344,7 @@ class RootInstaller(
     }
 
     companion object {
-        const val modulesPath = "/data/adb/modules"
+        const val MODULES_PATH = "/data/adb/modules"
         private const val TAG = "RootInstaller"
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
