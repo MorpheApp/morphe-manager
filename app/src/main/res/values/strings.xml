@@ -577,6 +577,7 @@ Details: %2$s"</string>
     <string name="settings_system_patch_options_title">Patch options</string>
     <string name="settings_system_options_count">%d options</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
+    <string name="settings_system_patch_selection_bundles_count">%d bundles</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>

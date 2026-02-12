@@ -25,6 +25,7 @@ import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -335,20 +336,24 @@ fun SystemTabContent(
 
                 MorpheSettingsDivider()
 
-                // Patch Selections management with grouped count
+                // Patch Selections management with normalized count
                 val selectionRepository: PatchSelectionRepository = koinInject()
                 val optionsRepository: PatchOptionsRepository = koinInject()
+                val appDataResolver: AppDataResolver = koinInject()
+
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
                     .collectAsStateWithLifecycle(emptySet())
                 val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
                     .collectAsStateWithLifecycle(emptySet())
 
-                // Calculate grouped count
-                var groupedSelectionsCount by remember { mutableIntStateOf(0) }
+                // Calculate normalized count (group by original package names)
+                var normalizedSelectionsCount by remember { mutableIntStateOf(0) }
 
                 LaunchedEffect(packagesWithSelection, packagesWithOptions) {
                     val allPackages = packagesWithSelection + packagesWithOptions
-                    groupedSelectionsCount = allPackages.size
+                    // Normalize package names to get unique original packages
+                    val normalizedPackages = appDataResolver.normalizePackageNames(allPackages)
+                    normalizedSelectionsCount = normalizedPackages.values.toSet().size
                 }
 
                 RichSettingsItem(
@@ -363,9 +368,9 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (groupedSelectionsCount > 0) {
+                            if (normalizedSelectionsCount > 0) {
                                 InfoBadge(
-                                    text = groupedSelectionsCount.toString(),
+                                    text = normalizedSelectionsCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )

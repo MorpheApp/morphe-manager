@@ -51,6 +51,54 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
+     * Normalize multiple package names
+     * @return Map of packageName to originalPackageName
+     */
+    suspend fun normalizePackageNames(packageNames: Collection<String>): Map<String, String> {
+        val allApps = installedAppRepository.getAll().first()
+        val patchedToOriginal = allApps.associate {
+            it.currentPackageName to it.originalPackageName
+        }
+
+        return packageNames.associateWith { packageName ->
+            patchedToOriginal[packageName] ?: packageName
+        }
+    }
+
+    /**
+     * Group selections by normalized (original) package names
+     * This prevents showing duplicate entries for original + patched variants
+     *
+     * @param selections Map<PackageName, Map<BundleUid, PatchCount>>
+     * @return Map<OriginalPackageName, Map<BundleUid, PatchCount>> with deduplicated entries
+     */
+    suspend fun groupSelectionsByOriginalPackage(
+        selections: Map<String, Map<Int, Int>>
+    ): Map<String, Map<Int, Int>> {
+        val allApps = installedAppRepository.getAll().first()
+        val patchedToOriginal = allApps.associate {
+            it.currentPackageName to it.originalPackageName
+        }
+
+        // Group by original package name
+        val grouped = mutableMapOf<String, MutableMap<Int, Int>>()
+
+        selections.forEach { (packageName, bundleMap) ->
+            // Get original package name
+            val originalPackage = patchedToOriginal[packageName] ?: packageName
+
+            // For each bundle, keep only the maximum count (not sum)
+            // This prevents doubling when both original and patched have same selections
+            val targetMap = grouped.getOrPut(originalPackage) { mutableMapOf() }
+            bundleMap.forEach { (bundleUid, count) ->
+                targetMap[bundleUid] = maxOf(targetMap[bundleUid] ?: 0, count)
+            }
+        }
+
+        return grouped
+    }
+
+    /**
      * Resolve app data from any available source
      * @param packageName Package name to resolve
      * @param preferredSource Preferred data source (will still fallback if unavailable)

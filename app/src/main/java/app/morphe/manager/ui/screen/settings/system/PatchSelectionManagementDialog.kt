@@ -24,6 +24,7 @@ import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.util.AppDataResolver
+import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -33,6 +34,7 @@ import org.koin.compose.koinInject
 /**
  * Dialog for managing patch selections
  * Allows viewing and deleting saved selections per package and bundle
+ * Shows only original package names
  */
 @Composable
 fun PatchSelectionManagementDialog(
@@ -57,13 +59,20 @@ fun PatchSelectionManagementDialog(
         bundles.associate { it.uid to it.name }
     }
 
-    // Calculate total selections
-    val totalSelections = remember(selections) {
-        selections.values.sumOf { bundleMap -> bundleMap.values.sum() }
+    // Normalize selections to group by original package names
+    var normalizedSelections by remember(selections) { mutableStateOf(selections) }
+
+    LaunchedEffect(selections) {
+        normalizedSelections = appDataResolver.groupSelectionsByOriginalPackage(selections)
+    }
+
+    // Calculate total selections from normalized data
+    val totalSelections = remember(normalizedSelections) {
+        normalizedSelections.values.sumOf { bundleMap -> bundleMap.values.sum() }
     }
 
     PatchSelectionManagementDialogContent(
-        selections = selections,
+        selections = normalizedSelections,
         totalSelections = totalSelections,
         bundleNames = bundleNames,
         onDismiss = onDismiss,
@@ -191,7 +200,8 @@ private fun PatchSelectionManagementDialogContent(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        scrollable = false
+        scrollable = false,
+        compactPadding = true
     ) {
         if (selections.isEmpty()) {
             Column(
@@ -300,30 +310,90 @@ private fun PackageSelectionItem(
 ) {
     var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
+    var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
 
-    // Resolve app name
+    // Resolve app name and source
     LaunchedEffect(packageName) {
         val appData = appDataResolver.resolveAppData(packageName)
         displayName = appData.displayName
+        appDataSource = appData.source
     }
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
 
     SectionCard {
         Column {
-            // Header - clickable to expand/collapse
-            ExpandableSection(
-                title = displayName,
-                description = stringResource(
-                    R.string.settings_system_patch_selection_patches_in_bundles,
-                    totalPatches,
-                    bundleMap.size
-                ),
-                expanded = expanded,
-                onExpandChange = { expanded = it }
+            // Header with app icon
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded }
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // Bundle list
+                // App icon
+                AppIcon(
+                    packageName = packageName,
+                    contentDescription = displayName,
+                    modifier = Modifier.size(48.dp),
+                    preferredSource = appDataSource
+                )
+
+                // App info
                 Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = displayName,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = LocalDialogTextColor.current
+                    )
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        InfoBadge(
+                            text = pluralStringResource(
+                                R.plurals.patch_count,
+                                totalPatches,
+                                totalPatches
+                            ),
+                            style = InfoBadgeStyle.Primary,
+                            isCompact = true
+                        )
+
+                        if (bundleMap.size > 1) {
+                            InfoBadge(
+                                text = stringResource(
+                                    R.string.settings_system_patch_selection_bundles_count,
+                                    bundleMap.size
+                                ),
+                                style = InfoBadgeStyle.Default,
+                                isCompact = true
+                            )
+                        }
+                    }
+                }
+
+                // Expand icon
+                Icon(
+                    imageVector = if (expanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
+                    contentDescription = if (expanded)
+                        stringResource(R.string.collapse)
+                    else
+                        stringResource(R.string.expand),
+                    tint = LocalDialogSecondaryTextColor.current
+                )
+            }
+
+            // Expanded content
+            if (expanded) {
+                Column(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     bundleMap.forEach { (bundleUid, patchCount) ->
