@@ -341,7 +341,7 @@ private fun PackageSelectionItem(
                         )
                     }
 
-                    MorpheSettingsDivider()
+                    MorpheSettingsDivider(fullWidth = true)
 
                     // Reset all for this package
                     MorpheDialogButton(
@@ -399,6 +399,8 @@ private fun BundleSelectionItem(
             .padding(vertical = 4.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        MorpheSettingsDivider(fullWidth = true)
+
         // Bundle info header
         Row(
             modifier = Modifier
@@ -433,17 +435,6 @@ private fun BundleSelectionItem(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
-            // Reset button
-            ActionPillButton(
-                onClick = onReset,
-                icon = Icons.Outlined.Delete,
-                contentDescription = stringResource(R.string.reset),
-                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
-                )
-            )
-
             // Import button
             ActionPillButton(
                 onClick = { importLauncher.launch(JSON_MIMETYPE) },
@@ -459,6 +450,17 @@ private fun BundleSelectionItem(
                 },
                 icon = Icons.Outlined.Upload,
                 contentDescription = stringResource(R.string.export)
+            )
+
+            // Reset button
+            ActionPillButton(
+                onClick = onReset,
+                icon = Icons.Outlined.Delete,
+                contentDescription = stringResource(R.string.reset),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer
+                )
             )
         }
     }
@@ -684,7 +686,7 @@ private fun PatchDetailsDialog(
         isLoading = false
     }
 
-    val bundleDisplayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_bundle_format, bundleUid)
+    val bundleDisplayName = bundleName ?: "Source"
 
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -709,7 +711,7 @@ private fun PatchDetailsDialog(
                     color = LocalDialogTextColor.current
                 )
                 Text(
-                    text = "$bundleDisplayName ($bundleUid)",
+                    text = "$bundleDisplayName (#$bundleUid)",
                     style = MaterialTheme.typography.bodySmall,
                     color = LocalDialogSecondaryTextColor.current
                 )
