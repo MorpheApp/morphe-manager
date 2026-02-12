@@ -1,22 +1,31 @@
 package app.morphe.manager.ui.screen.settings.system
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.util.AppDataResolver
+import app.morphe.manager.util.JSON_MIMETYPE
 import org.koin.compose.koinInject
 
 /**
@@ -29,12 +38,20 @@ fun PatchSelectionManagementDialog(
     onDismiss: () -> Unit,
     onResetAll: () -> Unit,
     onResetPackage: (String) -> Unit,
-    onResetPackageBundle: (String, Int) -> Unit
+    onResetPackageBundle: (String, Int) -> Unit,
+    importExportViewModel: ImportExportViewModel = koinInject()
 ) {
     var showResetAllConfirmation by remember { mutableStateOf(false) }
     var resetTarget by remember { mutableStateOf<ResetTarget?>(null) }
 
     val appDataResolver: AppDataResolver = koinInject()
+    val patchBundleRepository: PatchBundleRepository = koinInject()
+
+    // Get bundle names for display
+    val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
+    val bundleNames = remember(bundles) {
+        bundles.associate { it.uid to it.name }
+    }
 
     // Calculate total selections
     val totalSelections = remember(selections) {
@@ -44,10 +61,12 @@ fun PatchSelectionManagementDialog(
     PatchSelectionManagementDialogContent(
         selections = selections,
         totalSelections = totalSelections,
+        bundleNames = bundleNames,
         onDismiss = onDismiss,
         onShowResetAllConfirmation = { showResetAllConfirmation = true },
         onSetResetTarget = { resetTarget = it },
-        appDataResolver = appDataResolver
+        appDataResolver = appDataResolver,
+        importExportViewModel = importExportViewModel
     )
 
     // Reset all confirmation dialog
@@ -118,10 +137,12 @@ fun PatchSelectionManagementDialog(
 private fun PatchSelectionManagementDialogContent(
     selections: Map<String, Map<Int, Int>>,
     totalSelections: Int,
+    bundleNames: Map<Int, String>,
     onDismiss: () -> Unit,
     onShowResetAllConfirmation: () -> Unit,
     onSetResetTarget: (ResetTarget) -> Unit,
-    appDataResolver: AppDataResolver
+    appDataResolver: AppDataResolver,
+    importExportViewModel: ImportExportViewModel
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
@@ -151,7 +172,8 @@ private fun PatchSelectionManagementDialogContent(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        scrollable = false
+        scrollable = false,
+        compactPadding = true
     ) {
         if (selections.isEmpty()) {
             Column(
@@ -171,8 +193,10 @@ private fun PatchSelectionManagementDialogContent(
             SelectionList(
                 selections = selections,
                 totalSelections = totalSelections,
+                bundleNames = bundleNames,
                 appDataResolver = appDataResolver,
-                onSetResetTarget = onSetResetTarget
+                onSetResetTarget = onSetResetTarget,
+                importExportViewModel = importExportViewModel
             )
         }
     }
@@ -185,8 +209,10 @@ private fun PatchSelectionManagementDialogContent(
 private fun SelectionList(
     selections: Map<String, Map<Int, Int>>,
     totalSelections: Int,
+    bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
-    onSetResetTarget: (ResetTarget) -> Unit
+    onSetResetTarget: (ResetTarget) -> Unit,
+    importExportViewModel: ImportExportViewModel
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -222,9 +248,11 @@ private fun SelectionList(
                 PackageSelectionItem(
                     packageName = packageName,
                     bundleMap = bundleMap,
+                    bundleNames = bundleNames,
                     appDataResolver = appDataResolver,
                     onResetPackage = resetPackageAction,
-                    onResetPackageBundle = resetBundleAction
+                    onResetPackageBundle = resetBundleAction,
+                    importExportViewModel = importExportViewModel
                 )
             }
         }
@@ -238,9 +266,11 @@ private fun SelectionList(
 private fun PackageSelectionItem(
     packageName: String,
     bundleMap: Map<Int, Int>,
+    bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
     onResetPackage: () -> Unit,
-    onResetPackageBundle: (Int) -> Unit
+    onResetPackageBundle: (Int) -> Unit,
+    importExportViewModel: ImportExportViewModel
 ) {
     var expanded by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(packageName) }
@@ -272,11 +302,14 @@ private fun PackageSelectionItem(
                 ) {
                     bundleMap.forEach { (bundleUid, patchCount) ->
                         val resetAction: () -> Unit = { onResetPackageBundle(bundleUid) }
+                        val bundleName = bundleNames[bundleUid]
 
                         BundleSelectionItem(
                             bundleUid = bundleUid,
+                            bundleName = bundleName,
                             patchCount = patchCount,
-                            onReset = resetAction
+                            onReset = resetAction,
+                            importExportViewModel = importExportViewModel
                         )
                     }
 
@@ -296,37 +329,91 @@ private fun PackageSelectionItem(
 }
 
 /**
- * Individual bundle selection item
+ * Individual bundle selection item with import/export buttons
  */
 @Composable
 private fun BundleSelectionItem(
     bundleUid: Int,
+    bundleName: String?,
     patchCount: Int,
-    onReset: () -> Unit
+    onReset: () -> Unit,
+    importExportViewModel: ImportExportViewModel
 ) {
-    Row(
+    // Display bundle name or fallback to "Bundle #N"
+    val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_bundle_format, bundleUid)
+
+    // Export launcher
+    val exportLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.exportPatchBundleData(bundleUid, bundleName, it)
+        }
+    }
+
+    // Import launcher
+    val importLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            importExportViewModel.importPatchBundleData(bundleUid, it)
+        }
+    }
+
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = stringResource(R.string.settings_system_patch_selection_bundle_format, bundleUid),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current
-            )
-            Text(
-                text = stringResource(R.string.settings_system_patch_selection_patches_count, patchCount),
-                style = MaterialTheme.typography.bodySmall,
-                color = LocalDialogSecondaryTextColor.current
+        // Bundle info
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = displayName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogTextColor.current
+                )
+                Text(
+                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = LocalDialogSecondaryTextColor.current
+                )
+            }
+
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.reset),
+                onClick = onReset,
+                isDestructive = true,
+                modifier = Modifier.wrapContentWidth()
             )
         }
 
-        MorpheDialogOutlinedButton(
-            text = stringResource(R.string.reset),
-            onClick = onReset,
-            isDestructive = true,
-            modifier = Modifier.wrapContentWidth()
-        )
+        // Import/Export buttons row
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Import button
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.import_),
+                onClick = { importLauncher.launch(JSON_MIMETYPE) },
+                modifier = Modifier.weight(1f),
+                icon = Icons.Outlined.Download
+            )
+
+            // Export button
+            MorpheDialogOutlinedButton(
+                text = stringResource(R.string.export),
+                onClick = {
+                    val fileName = importExportViewModel.getBundleDataExportFileName(bundleUid, bundleName)
+                    exportLauncher.launch(fileName)
+                },
+                modifier = Modifier.weight(1f),
+                icon = Icons.Outlined.Upload
+            )
+        }
     }
 }
 
@@ -488,10 +575,7 @@ private fun ConfirmResetPackageBundleDialog(
             ) {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = stringResource(
-                        R.string.settings_system_patch_selection_patches_count,
-                        patchCount
-                    )
+                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount),
                 )
             }
         }

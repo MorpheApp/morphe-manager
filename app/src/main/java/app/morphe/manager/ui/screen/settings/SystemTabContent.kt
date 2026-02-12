@@ -121,7 +121,8 @@ fun SystemTabContent(
                     selectionRepository.resetSelectionForPackageAndBundle(packageName, bundleUid)
                     selectionsSummary = selectionRepository.getSelectionsSummary()
                 }
-            }
+            },
+            importExportViewModel = importExportViewModel
         )
     }
 

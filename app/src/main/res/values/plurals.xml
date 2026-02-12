@@ -28,16 +28,4 @@
         <item quantity="one">%1$d source installed</item>
         <item quantity="other">%1$d sources installed</item>
     </plurals>
-    <plurals name="settings_system_patch_selection_bundles_count">
-        <item quantity="one">%d bundle</item>
-        <item quantity="other">%d bundles</item>
-    </plurals>
-    <plurals name="settings_system_patch_selection_patches_count">
-        <item quantity="one">%d patch</item>
-        <item quantity="other">%d patches</item>
-    </plurals>
-    <plurals name="settings_system_patch_selection_options_count">
-        <item quantity="one">%d option</item>
-        <item quantity="other">%d options</item>
-    </plurals>
 </resources>

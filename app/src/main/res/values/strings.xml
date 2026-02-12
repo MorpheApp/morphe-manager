@@ -560,7 +560,6 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
     <string name="settings_system_patch_selection_total_summary">%1$d patches across %2$d packages</string>
     <string name="settings_system_patch_selection_patches_in_bundles">%1$d patches in %2$d bundles</string>
-    <string name="settings_system_patch_selection_patches_count">%d patches</string>
     <string name="settings_system_patch_selection_bundle_format">Bundle #%d</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
     <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and bundles.</string>
@@ -569,6 +568,10 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_reset_all_success">All selections deleted</string>
     <string name="settings_system_patch_selection_reset_package_success">Package selections deleted</string>
     <string name="settings_system_patch_selection_reset_bundle_success">Bundle selection deleted</string>
+    <string name="settings_system_export_bundle_data_fail">Failed to export bundle data</string>
+    <string name="settings_system_export_bundle_data_success">Bundle data exported successfully</string>
+    <string name="settings_system_import_bundle_data_fail">Failed to import bundle data</string>
+    <string name="settings_system_import_bundle_data_success">Bundle data imported successfully</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
@@ -608,6 +611,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
     <string name="rename">Rename</string>
+    <string name="import_">Import</string>
     <string name="export">Export</string>
     <string name="download">Download</string>
     <string name="less">Less</string>
