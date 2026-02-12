@@ -157,44 +157,46 @@ class ImportExportViewModel(
     }
 
     /**
-     * Export patch selections and options for a specific bundle
+     * Export patch selections and options for a specific package+bundle combination
      */
-    fun exportPatchBundleData(bundleUid: Int, bundleName: String?, target: Uri) = viewModelScope.launch {
+    fun exportPackageBundleData(
+        packageName: String,
+        bundleUid: Int,
+        bundleName: String?,
+        target: Uri
+    ) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_bundle_data_fail, "Failed to export bundle data") {
             val (selections, optionsData) = withContext(Dispatchers.IO) {
-                val selections = patchSelectionRepository.export(bundleUid)
+                // Export only this specific package for this bundle
+                val patchList = patchSelectionRepository.exportForPackageAndBundle(packageName, bundleUid)
 
-                // Get options directly from database for all packages in selections
-                val optionsData = mutableMapOf<String, Map<String, Map<String, String>>>()
+                // Get options for this package+bundle
+                val rawOptions = patchOptionsRepository.getOptionsForBundle(
+                    packageName = packageName,
+                    bundleUid = bundleUid,
+                    bundlePatchInfo = emptyMap() // Empty map to get raw serialized values
+                )
 
-                selections.keys.forEach { packageName ->
-                    // Get raw options from database for this package/bundle
-                    val rawOptions = patchOptionsRepository.getOptionsForBundle(
-                        packageName = packageName,
-                        bundleUid = bundleUid,
-                        bundlePatchInfo = emptyMap() // Empty map to get raw serialized values
-                    )
-
-                    if (rawOptions.isNotEmpty()) {
-                        // Convert to simple string format for JSON export
-                        val serializedOptions = rawOptions.mapValues { (_, patchOptions) ->
-                            patchOptions.mapValues { (_, value) ->
-                                // Serialize value to string representation
-                                when (value) {
-                                    null -> "null"
-                                    is Boolean -> value.toString()
-                                    is Number -> value.toString()
-                                    is String -> value
-                                    is List<*> -> value.joinToString("|")
-                                    else -> value.toString()
-                                }
+                val optionsData = if (rawOptions.isNotEmpty()) {
+                    val serializedOptions = rawOptions.mapValues { (_, patchOptions) ->
+                        patchOptions.mapValues { (_, value) ->
+                            // Serialize value to string representation
+                            when (value) {
+                                null -> "null"
+                                is Boolean -> value.toString()
+                                is Number -> value.toString()
+                                is String -> value
+                                is List<*> -> value.joinToString("|")
+                                else -> value.toString()
                             }
                         }
-                        optionsData[packageName] = serializedOptions
                     }
+                    mapOf(packageName to serializedOptions)
+                } else {
+                    emptyMap()
                 }
 
-                selections to optionsData
+                mapOf(packageName to patchList) to optionsData
             }
 
             val exportFile = PatchBundleDataExportFile(
@@ -216,9 +218,10 @@ class ImportExportViewModel(
     }
 
     /**
-     * Import patch selections and options for a specific bundle
+     * Import patch selections and options for a specific package into a target bundle
+     * This replaces data ONLY for the package in the imported file
      */
-    fun importPatchBundleData(targetBundleUid: Int, source: Uri) = viewModelScope.launch {
+    fun importPackageBundleData(targetBundleUid: Int, source: Uri) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_bundle_data_fail, "Failed to import bundle data") {
             val exportFile = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use {
@@ -227,8 +230,15 @@ class ImportExportViewModel(
             }
 
             withContext(Dispatchers.IO) {
-                // Import selections
-                patchSelectionRepository.import(targetBundleUid, exportFile.selections)
+                // Import each package from the file (usually just one)
+                exportFile.selections.forEach { (packageName, patchList) ->
+                    // Import selections for this package+bundle
+                    patchSelectionRepository.importForPackageAndBundle(
+                        packageName = packageName,
+                        bundleUid = targetBundleUid,
+                        patches = patchList
+                    )
+                }
 
                 // Import options for each package
                 exportFile.options.forEach { (packageName, packageOptions) ->
@@ -272,12 +282,13 @@ class ImportExportViewModel(
     }
 
     /**
-     * Get filename for bundle data export
+     * Get filename for package+bundle data export
      */
-    fun getBundleDataExportFileName(bundleUid: Int, bundleName: String?): String {
+    fun getPackageBundleDataExportFileName(packageName: String, bundleUid: Int, bundleName: String?): String {
         val time = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now())
-        val name = bundleName?.replace(" ", "_")?.take(20) ?: "bundle_$bundleUid"
-        return "morphe_${name}_$time.json"
+        val bundle = bundleName?.replace(" ", "_")?.take(20) ?: "bundle_$bundleUid"
+        val pkg = packageName.substringAfterLast('.').take(15)
+        return "morphe_${bundle}_${pkg}_$time.json"
     }
 
     val debugLogFileName: String

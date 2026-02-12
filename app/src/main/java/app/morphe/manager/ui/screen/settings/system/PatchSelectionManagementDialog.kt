@@ -172,8 +172,7 @@ private fun PatchSelectionManagementDialogContent(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        scrollable = false,
-        compactPadding = true
+        scrollable = false
     ) {
         if (selections.isEmpty()) {
             Column(
@@ -305,6 +304,7 @@ private fun PackageSelectionItem(
                         val bundleName = bundleNames[bundleUid]
 
                         BundleSelectionItem(
+                            packageName = packageName,
                             bundleUid = bundleUid,
                             bundleName = bundleName,
                             patchCount = patchCount,
@@ -333,6 +333,7 @@ private fun PackageSelectionItem(
  */
 @Composable
 private fun BundleSelectionItem(
+    packageName: String,
     bundleUid: Int,
     bundleName: String?,
     patchCount: Int,
@@ -342,21 +343,21 @@ private fun BundleSelectionItem(
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_bundle_format, bundleUid)
 
-    // Export launcher
+    // Export launcher - exports THIS package for THIS bundle
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument(JSON_MIMETYPE)
     ) { uri ->
         uri?.let {
-            importExportViewModel.exportPatchBundleData(bundleUid, bundleName, it)
+            importExportViewModel.exportPackageBundleData(packageName, bundleUid, bundleName, it)
         }
     }
 
-    // Import launcher
+    // Import launcher - imports to THIS package in THIS bundle
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
-            importExportViewModel.importPatchBundleData(bundleUid, it)
+            importExportViewModel.importPackageBundleData(bundleUid, it)
         }
     }
 
@@ -407,7 +408,7 @@ private fun BundleSelectionItem(
             MorpheDialogOutlinedButton(
                 text = stringResource(R.string.export),
                 onClick = {
-                    val fileName = importExportViewModel.getBundleDataExportFileName(bundleUid, bundleName)
+                    val fileName = importExportViewModel.getPackageBundleDataExportFileName(packageName, bundleUid, bundleName)
                     exportLauncher.launch(fileName)
                 },
                 modifier = Modifier.weight(1f),
