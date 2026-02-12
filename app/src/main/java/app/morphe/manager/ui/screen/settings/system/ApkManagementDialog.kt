@@ -29,12 +29,7 @@ import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.AppDataResolver
-import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.formatBytes
-import app.morphe.manager.util.getApkPath
-import app.morphe.manager.util.PM
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -109,14 +104,8 @@ private fun PatchedApksContent(
     scope: CoroutineScope
 ) {
     val repository: InstalledAppRepository = koinInject()
-    val originalApkRepository: OriginalApkRepository = koinInject()
-    val pm: PM = koinInject()
     val filesystem: Filesystem = koinInject()
-
-    // Create AppDataResolver
-    val appDataResolver = remember(context, pm, originalApkRepository, repository, filesystem) {
-        AppDataResolver(context, pm, originalApkRepository, repository, filesystem)
-    }
+    val appDataResolver: AppDataResolver = koinInject()
 
     val allInstalledApps by repository.getAll().collectAsStateWithLifecycle(emptyList())
 
@@ -208,14 +197,7 @@ private fun OriginalApksContent(
     scope: CoroutineScope
 ) {
     val repository: OriginalApkRepository = koinInject()
-    val installedAppRepository: InstalledAppRepository = koinInject()
-    val pm: PM = koinInject()
-    val filesystem: Filesystem = koinInject()
-
-    // Create AppDataResolver
-    val appDataResolver = remember(context, pm, repository, installedAppRepository, filesystem) {
-        AppDataResolver(context, pm, repository, installedAppRepository, filesystem)
-    }
+    val appDataResolver: AppDataResolver = koinInject()
 
     val originalApks by repository.getAll().collectAsStateWithLifecycle(emptyList())
 

@@ -101,15 +101,7 @@ private fun ResolvedAppIcon(
     modifier: Modifier = Modifier,
     preferredSource: AppDataSource = AppDataSource.INSTALLED
 ) {
-    val context = LocalContext.current
-    val pm: PM = koinInject()
-    val originalApkRepository: OriginalApkRepository = koinInject()
-    val installedAppRepository: InstalledAppRepository = koinInject()
-    val filesystem: Filesystem = koinInject()
-
-    val appDataResolver = remember(context, pm, originalApkRepository, installedAppRepository, filesystem) {
-        AppDataResolver(context, pm, originalApkRepository, installedAppRepository, filesystem)
-    }
+    val appDataResolver: AppDataResolver = koinInject()
 
     var resolvedPackageInfo by remember(packageName) { mutableStateOf<PackageInfo?>(null) }
     var isLoading by remember(packageName) { mutableStateOf(true) }

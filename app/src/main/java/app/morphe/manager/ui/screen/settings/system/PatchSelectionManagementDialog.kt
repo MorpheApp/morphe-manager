@@ -6,31 +6,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.repository.InstalledAppRepository
-import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.ui.screen.shared.DeleteListItem
-import app.morphe.manager.ui.screen.shared.DeletionWarningBox
-import app.morphe.manager.ui.screen.shared.ExpandableSection
-import app.morphe.manager.ui.screen.shared.InfoBadge
-import app.morphe.manager.ui.screen.shared.InfoBadgeStyle
-import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
-import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
-import app.morphe.manager.ui.screen.shared.MorpheDialog
-import app.morphe.manager.ui.screen.shared.MorpheDialogButton
-import app.morphe.manager.ui.screen.shared.MorpheDialogButtonRow
-import app.morphe.manager.ui.screen.shared.MorpheDialogOutlinedButton
-import app.morphe.manager.ui.screen.shared.MorpheSettingsDivider
-import app.morphe.manager.ui.screen.shared.SectionCard
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.AppDataResolver
-import app.morphe.manager.util.PM
 import org.koin.compose.koinInject
 
 /**
@@ -48,20 +34,11 @@ fun PatchSelectionManagementDialog(
     var showResetAllConfirmation by remember { mutableStateOf(false) }
     var resetTarget by remember { mutableStateOf<ResetTarget?>(null) }
 
-    val repository: InstalledAppRepository = koinInject()
-    val originalApkRepository: OriginalApkRepository = koinInject()
-    val pm: PM = koinInject()
-    val filesystem: Filesystem = koinInject()
-    val context = LocalContext.current
+    val appDataResolver: AppDataResolver = koinInject()
 
     // Calculate total selections
     val totalSelections = remember(selections) {
         selections.values.sumOf { bundleMap -> bundleMap.values.sum() }
-    }
-
-    // Create AppDataResolver
-    val appDataResolver = remember(context, pm, originalApkRepository, repository, filesystem) {
-        AppDataResolver(context, pm, originalApkRepository, repository, filesystem)
     }
 
     PatchSelectionManagementDialogContent(

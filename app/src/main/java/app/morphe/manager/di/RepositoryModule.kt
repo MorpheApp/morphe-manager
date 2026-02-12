@@ -5,6 +5,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.util.AppDataResolver
 import org.koin.core.module.dsl.createdAtStart
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -22,11 +23,7 @@ val repositoryModule = module {
         createdAtStart()
     }
     singleOf(::WorkerRepository)
-    single {
-        InstalledAppRepository(
-            db = get(),
-            patchBundleRepository = get()
-        )
-    }
+    singleOf(::InstalledAppRepository)
     singleOf(::OriginalApkRepository)
+    singleOf(::AppDataResolver)
 }

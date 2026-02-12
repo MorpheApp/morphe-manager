@@ -124,15 +124,7 @@ private fun ResolvedAppLabel(
     defaultText: String? = null,
     preferredSource: AppDataSource = AppDataSource.INSTALLED
 ) {
-    val context = LocalContext.current
-    val pm: PM = koinInject()
-    val originalApkRepository: OriginalApkRepository = koinInject()
-    val installedAppRepository: InstalledAppRepository = koinInject()
-    val filesystem: Filesystem = koinInject()
-
-    val appDataResolver = remember(context, pm, originalApkRepository, installedAppRepository, filesystem) {
-        AppDataResolver(context, pm, originalApkRepository, installedAppRepository, filesystem)
-    }
+    val appDataResolver: AppDataResolver = koinInject()
 
     var label by remember(packageName) { mutableStateOf<String?>(null) }
     var isLoading by remember(packageName) { mutableStateOf(true) }
