@@ -207,7 +207,11 @@ class ImportExportViewModel(
      * Import patch selections and options for a specific package into a target bundle
      * This replaces data ONLY for the package in the imported file
      */
-    fun importPackageBundleData(targetBundleUid: Int, source: Uri) = viewModelScope.launch {
+    fun importPackageBundleData(
+        targetBundleUid: Int,
+        source: Uri,
+        onComplete: () -> Unit = {}
+    ) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_import_bundle_data_fail, "Failed to import bundle data") {
             val exportFile = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use {
@@ -238,6 +242,9 @@ class ImportExportViewModel(
             }
 
             app.toast(app.getString(R.string.settings_system_import_bundle_data_success))
+
+            // Call completion callback after successful import
+            onComplete()
         }
     }
 

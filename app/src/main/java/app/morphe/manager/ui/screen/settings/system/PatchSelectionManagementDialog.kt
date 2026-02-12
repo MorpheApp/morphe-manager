@@ -458,9 +458,14 @@ private fun BundleSelectionItem(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
-            importExportViewModel.importPackageBundleData(bundleUid, it)
-            // Refresh data after import to update UI
-            onRefresh()
+            importExportViewModel.importPackageBundleData(
+                targetBundleUid = bundleUid,
+                source = it,
+                onComplete = {
+                    // Refresh data after successful import
+                    onRefresh()
+                }
+            )
         }
     }
 
