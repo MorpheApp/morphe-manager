@@ -27,6 +27,7 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.*
 import org.koin.compose.koinInject
 
 /**
@@ -677,11 +678,17 @@ private fun PatchDetailsDialog(
         isLoading = true
         withContext(Dispatchers.IO) {
             patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
-            optionsMap = optionsRepository.getOptionsForBundle(
+            // Get raw serialized options from repository
+            val rawOptions = optionsRepository.exportOptionsForBundle(
                 packageName = packageName,
-                bundleUid = bundleUid,
-                bundlePatchInfo = emptyMap()
+                bundleUid = bundleUid
             )
+            // Convert JSON strings to display values
+            optionsMap = rawOptions.mapValues { (_, patchOptions) ->
+                patchOptions.mapValues { (_, jsonString) ->
+                    parseJsonValue(jsonString)
+                }
+            }
         }
         isLoading = false
     }
@@ -765,24 +772,24 @@ private fun PatchDetailsDialog(
                                 )
 
                                 options.forEach { (key, value) ->
-                                    Row(
+                                    val formattedValue = formatOptionValue(value)
+
+                                    Column(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(start = 12.dp),
-                                        horizontalArrangement = Arrangement.SpaceBetween
+                                            .padding(start = 12.dp, bottom = 4.dp)
                                     ) {
                                         Text(
-                                            text = "• $key:",
+                                            text = "• $key",
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = LocalDialogSecondaryTextColor.current,
-                                            modifier = Modifier.weight(1f)
+                                            color = LocalDialogSecondaryTextColor.current
                                         )
                                         Text(
-                                            text = value?.toString() ?: "null",
+                                            text = formattedValue,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = LocalDialogTextColor.current,
                                             fontWeight = FontWeight.Medium,
-                                            modifier = Modifier.padding(start = 8.dp)
+                                            modifier = Modifier.padding(start = 12.dp, top = 2.dp)
                                         )
                                     }
                                 }
@@ -806,5 +813,75 @@ private fun PatchDetailsDialog(
                 }
             }
         }
+    }
+}
+
+/**
+ * Parse JSON string value to actual value type
+ */
+private fun parseJsonValue(jsonString: String): Any? {
+    return try {
+        // Use kotlinx.serialization to parse JSON properly
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
+        val element = json.parseToJsonElement(jsonString)
+
+        when (element) {
+            is JsonNull -> null
+            is JsonPrimitive -> {
+                when {
+                    element.isString -> element.content
+                    element.booleanOrNull != null -> element.boolean
+                    element.intOrNull != null -> element.int
+                    element.longOrNull != null -> element.long
+                    element.floatOrNull != null -> element.float
+                    element.doubleOrNull != null -> element.double
+                    else -> element.content
+                }
+            }
+
+            is JsonArray -> {
+                element.map { item ->
+                    when (item) {
+                        is JsonPrimitive -> {
+                            when {
+                                item.isString -> item.content
+                                item.booleanOrNull != null -> item.boolean
+                                item.intOrNull != null -> item.int
+                                item.longOrNull != null -> item.long
+                                item.floatOrNull != null -> item.float
+                                else -> item.content
+                            }
+                        }
+
+                        else -> item.toString()
+                    }
+                }
+            }
+
+            else -> jsonString
+        }
+    } catch (_: Exception) {
+        jsonString // Return raw string if parsing fails
+    }
+}
+/**
+ * Format option value for display
+ */
+private fun formatOptionValue(value: Any?): String {
+    return when (value) {
+        null -> "null"
+        is String -> value
+        is Boolean -> value.toString()
+        is Number -> value.toString()
+        is List<*> -> {
+            if (value.isEmpty()) {
+                "[]"
+            } else {
+                value.joinToString(", ")
+            }
+        }
+        else -> value.toString()
     }
 }
