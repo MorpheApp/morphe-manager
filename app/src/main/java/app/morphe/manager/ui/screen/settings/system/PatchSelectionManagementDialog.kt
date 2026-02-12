@@ -7,17 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material.icons.outlined.Upload
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -718,7 +709,7 @@ private fun PatchDetailsDialog(
                     color = LocalDialogTextColor.current
                 )
                 Text(
-                    text = bundleDisplayName,
+                    text = "$bundleDisplayName ($bundleUid)",
                     style = MaterialTheme.typography.bodySmall,
                     color = LocalDialogSecondaryTextColor.current
                 )
@@ -737,101 +728,66 @@ private fun PatchDetailsDialog(
             } else {
                 // Patches section
                 if (patchList.isNotEmpty()) {
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            text = stringResource(R.string.settings_system_selected_patches, patchList.size),
-                            style = MaterialTheme.typography.titleSmall,
-                            color = LocalDialogTextColor.current
-                        )
-
-                        SectionCard {
-                            Column(
-                                modifier = Modifier.padding(12.dp),
-                                verticalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                patchList.forEach { patchName ->
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Text(
-                                            text = patchName,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = LocalDialogTextColor.current,
-                                            modifier = Modifier.weight(1f)
-                                        )
-
-                                        // Show if patch has options
-                                        if (optionsMap.containsKey(patchName)) {
-                                            InfoBadge(
-                                                text = stringResource(
-                                                    R.string.settings_system_options_count,
-                                                    optionsMap[patchName]?.size ?: 0
-                                                ),
-                                                style = InfoBadgeStyle.Default,
-                                                isCompact = true
-                                            )
-                                        }
-                                    }
-                                }
-                            }
+                    InfoBox(
+                        title = stringResource(R.string.settings_system_selected_patches, patchList.size),
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                        titleColor = MaterialTheme.colorScheme.primary
+                    ) {
+                        patchList.forEach { patchName ->
+                            Text(
+                                text = "• $patchName",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LocalDialogTextColor.current,
+                                modifier = Modifier.padding(vertical = 2.dp)
+                            )
                         }
                     }
                 }
 
                 // Options section
                 if (optionsMap.isNotEmpty()) {
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            text = stringResource(R.string.settings_system_patch_options_title),
-                            style = MaterialTheme.typography.titleSmall,
-                            color = LocalDialogTextColor.current
-                        )
-
-                        SectionCard {
+                    InfoBox(
+                        title = stringResource(R.string.settings_system_patch_options_title),
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                        titleColor = MaterialTheme.colorScheme.secondary
+                    ) {
+                        optionsMap.forEach { (patchName, options) ->
                             Column(
-                                modifier = Modifier.padding(12.dp),
-                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
-                                optionsMap.forEach { (patchName, options) ->
-                                    Column(
-                                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                                Text(
+                                    text = patchName,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = LocalDialogTextColor.current
+                                )
+
+                                options.forEach { (key, value) ->
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(start = 12.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween
                                     ) {
                                         Text(
-                                            text = patchName,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            fontWeight = FontWeight.SemiBold,
-                                            color = LocalDialogTextColor.current
+                                            text = "• $key:",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = LocalDialogSecondaryTextColor.current,
+                                            modifier = Modifier.weight(1f)
                                         )
-
-                                        options.forEach { (key, value) ->
-                                            Row(
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(start = 8.dp),
-                                                horizontalArrangement = Arrangement.SpaceBetween
-                                            ) {
-                                                Text(
-                                                    text = key,
-                                                    style = MaterialTheme.typography.bodySmall,
-                                                    color = LocalDialogSecondaryTextColor.current,
-                                                    modifier = Modifier.weight(1f)
-                                                )
-                                                Text(
-                                                    text = value?.toString() ?: "null",
-                                                    style = MaterialTheme.typography.bodySmall,
-                                                    color = LocalDialogTextColor.current,
-                                                    modifier = Modifier.padding(start = 8.dp)
-                                                )
-                                            }
-                                        }
-                                    }
-
-                                    if (patchName != optionsMap.keys.last()) {
-                                        MorpheSettingsDivider()
+                                        Text(
+                                            text = value?.toString() ?: "null",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = LocalDialogTextColor.current,
+                                            fontWeight = FontWeight.Medium,
+                                            modifier = Modifier.padding(start = 8.dp)
+                                        )
                                     }
                                 }
+                            }
+
+                            if (patchName != optionsMap.keys.last()) {
+                                Spacer(modifier = Modifier.height(8.dp))
                             }
                         }
                     }
