@@ -170,28 +170,14 @@ class ImportExportViewModel(
                 // Export only this specific package for this bundle
                 val patchList = patchSelectionRepository.exportForPackageAndBundle(packageName, bundleUid)
 
-                // Get options for this package+bundle
-                val rawOptions = patchOptionsRepository.getOptionsForBundle(
+                // Get raw serialized options for this package+bundle
+                val rawOptions = patchOptionsRepository.exportOptionsForBundle(
                     packageName = packageName,
-                    bundleUid = bundleUid,
-                    bundlePatchInfo = emptyMap() // Empty map to get raw serialized values
+                    bundleUid = bundleUid
                 )
 
                 val optionsData = if (rawOptions.isNotEmpty()) {
-                    val serializedOptions = rawOptions.mapValues { (_, patchOptions) ->
-                        patchOptions.mapValues { (_, value) ->
-                            // Serialize value to string representation
-                            when (value) {
-                                null -> "null"
-                                is Boolean -> value.toString()
-                                is Number -> value.toString()
-                                is String -> value
-                                is List<*> -> value.joinToString("|")
-                                else -> value.toString()
-                            }
-                        }
-                    }
-                    mapOf(packageName to serializedOptions)
+                    mapOf(packageName to rawOptions)
                 } else {
                     emptyMap()
                 }
@@ -242,37 +228,11 @@ class ImportExportViewModel(
 
                 // Import options for each package
                 exportFile.options.forEach { (packageName, packageOptions) ->
-                    // Convert string values back to proper types
-                    val deserializedOptions = packageOptions.mapValues { (_, patchOptions) ->
-                        patchOptions.mapValues { (_, value) ->
-                            // Parse string back to appropriate type
-                            when {
-                                value == "null" -> null
-                                value == "true" -> true
-                                value == "false" -> false
-                                value.contains("|") -> value.split("|").map { item ->
-                                    when {
-                                        item.toIntOrNull() != null -> item.toInt()
-                                        item.toLongOrNull() != null -> item.toLong()
-                                        item.toFloatOrNull() != null -> item.toFloat()
-                                        item == "true" -> true
-                                        item == "false" -> false
-                                        else -> item
-                                    }
-                                }
-                                value.toIntOrNull() != null -> value.toInt()
-                                value.toLongOrNull() != null -> value.toLong()
-                                value.toFloatOrNull() != null -> value.toFloat()
-                                value.toDoubleOrNull() != null -> value.toDouble()
-                                else -> value
-                            }
-                        }
-                    }
-
-                    patchOptionsRepository.saveOptionsForBundle(
+                    // Options are already in the correct JSON string format from export
+                    patchOptionsRepository.importOptionsForBundle(
                         packageName = packageName,
                         bundleUid = targetBundleUid,
-                        patchOptions = deserializedOptions
+                        options = packageOptions
                     )
                 }
             }

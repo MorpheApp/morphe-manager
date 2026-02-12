@@ -204,6 +204,27 @@ class PatchOptionsRepository(db: AppDatabase) {
         resetEventsFlow.emit(ResetEvent.All)
     }
 
+    /**
+     * Export raw option values for a specific package and bundle
+     * Returns: Map<PatchName, Map<OptionKey, JsonString>>
+     */
+    suspend fun exportOptionsForBundle(packageName: String, bundleUid: Int): Map<String, Map<String, String>> {
+        return dao.exportOptionsForBundle(packageName, bundleUid)
+    }
+
+    /**
+     * Import raw option values for a specific package and bundle
+     * Accepts JSON strings from export and stores them directly
+     */
+    suspend fun importOptionsForBundle(
+        packageName: String,
+        bundleUid: Int,
+        options: Map<String, Map<String, String>>
+    ) {
+        dao.importOptionsForBundle(packageName, bundleUid, options)
+        resetEventsFlow.emit(ResetEvent.PackageBundle(packageName, bundleUid))
+    }
+
     sealed interface ResetEvent {
         data object All : ResetEvent
         data class Package(val packageName: String) : ResetEvent
