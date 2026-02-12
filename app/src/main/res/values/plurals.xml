@@ -12,10 +12,6 @@
         <item quantity="one">%d APK file</item>
         <item quantity="other">%d APK files</item>
     </plurals>
-    <plurals name="settings_system_patch_selections_count">
-        <item quantity="one">%d saved selection</item>
-        <item quantity="other">%d saved selections</item>
-    </plurals>
     <plurals name="sources_dialog_disabled_toast">
         <item quantity="one">Disabled %d source</item>
         <item quantity="other">Disabled %d sources</item>
@@ -31,5 +27,17 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%1$d source installed</item>
         <item quantity="other">%1$d sources installed</item>
+    </plurals>
+    <plurals name="settings_system_patch_selection_bundles_count">
+        <item quantity="one">%d bundle</item>
+        <item quantity="other">%d bundles</item>
+    </plurals>
+    <plurals name="settings_system_patch_selection_patches_count">
+        <item quantity="one">%d patch</item>
+        <item quantity="other">%d patches</item>
+    </plurals>
+    <plurals name="settings_system_patch_selection_options_count">
+        <item quantity="one">%d option</item>
+        <item quantity="other">%d options</item>
     </plurals>
 </resources>

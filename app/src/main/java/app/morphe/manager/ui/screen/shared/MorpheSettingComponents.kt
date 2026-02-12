@@ -371,11 +371,12 @@ fun CardHeader(
  */
 @Composable
 fun ExpandableSection(
-    icon: ImageVector,
+    icon: ImageVector? = null,
     title: String,
     description: String,
     expanded: Boolean,
     onExpandChange: (Boolean) -> Unit,
+    @SuppressLint("ModifierParameter")
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
@@ -393,7 +394,11 @@ fun ExpandableSection(
                     .fillMaxWidth()
                     .clickable { onExpandChange(!expanded) }
                     .padding(MorpheDefaults.ContentPadding),
-                leadingContent = { MorpheIcon(icon = icon) },
+                leadingContent = {
+                    if (icon != null) {
+                        MorpheIcon(icon = icon)
+                    }
+                },
                 title = title,
                 description = description,
                 trailingContent = {
@@ -480,7 +485,7 @@ fun DeletionWarningBox(
             Text(
                 text = warningText,
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+                fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.error
             )
 

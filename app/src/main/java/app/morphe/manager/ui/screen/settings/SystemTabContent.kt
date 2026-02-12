@@ -19,12 +19,12 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
-import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
+import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,10 +88,40 @@ fun SystemTabContent(
         )
     }
 
+    val selectionRepository: PatchSelectionRepository = koinInject()
+    var selectionsSummary by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
+
+    LaunchedEffect(showPatchSelectionDialog) {
+        if (showPatchSelectionDialog) {
+            selectionsSummary = withContext(Dispatchers.IO) {
+                selectionRepository.getSelectionsSummary()
+            }
+        }
+    }
+
     // Patch selection management dialog
     if (showPatchSelectionDialog) {
         PatchSelectionManagementDialog(
-            onDismissRequest = { showPatchSelectionDialog = false }
+            selections = selectionsSummary,
+            onDismiss = { showPatchSelectionDialog = false },
+            onResetAll = {
+                scope.launch {
+                    selectionRepository.reset()
+                    selectionsSummary = selectionRepository.getSelectionsSummary()
+                }
+            },
+            onResetPackage = { packageName ->
+                scope.launch {
+                    selectionRepository.resetSelectionForPackage(packageName)
+                    selectionsSummary = selectionRepository.getSelectionsSummary()
+                }
+            },
+            onResetPackageBundle = { packageName, bundleUid ->
+                scope.launch {
+                    selectionRepository.resetSelectionForPackageAndBundle(packageName, bundleUid)
+                    selectionsSummary = selectionRepository.getSelectionsSummary()
+                }
+            }
         )
     }
 
@@ -310,17 +340,7 @@ fun SystemTabContent(
 
                 LaunchedEffect(packagesWithSelection, packagesWithOptions) {
                     val allPackages = packagesWithSelection + packagesWithOptions
-                    if (allPackages.isEmpty()) {
-                        groupedSelectionsCount = 0
-                    } else {
-                        withContext(Dispatchers.IO) {
-                            val packageGroups = groupPackagesByOriginal(
-                                allPackages,
-                                installedAppRepository
-                            )
-                            groupedSelectionsCount = packageGroups.size
-                        }
-                    }
+                    groupedSelectionsCount = allPackages.size
                 }
 
                 RichSettingsItem(

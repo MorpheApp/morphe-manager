@@ -18,6 +18,7 @@ import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
+import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
@@ -46,6 +47,7 @@ class InstalledAppInfoViewModel(
     val rootInstaller: RootInstaller by inject()
     private val installerManager: InstallerManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
+    private val patchSelectionRepository: PatchSelectionRepository by inject()
     private val patchOptionsRepository: PatchOptionsRepository by inject()
     private val prefs: PreferencesManager by inject()
     private val filesystem: Filesystem by inject()
@@ -297,8 +299,27 @@ class InstalledAppInfoViewModel(
         // Update last used timestamp
         originalApkRepository.markUsed(app.originalPackageName)
 
-        // Save updated options
-        patchOptionsRepository.saveOptions(app.originalPackageName, options)
+        // Save updated selections per bundle
+        withContext(Dispatchers.IO) {
+            patches.forEach { (bundleUid, bundlePatches) ->
+                patchSelectionRepository.updateSelectionForBundle(
+                    packageName = app.originalPackageName,
+                    bundleUid = bundleUid,
+                    patches = bundlePatches
+                )
+            }
+        }
+
+        // Save updated options per bundle
+        withContext(Dispatchers.IO) {
+            options.forEach { (bundleUid, bundleOptions) ->
+                patchOptionsRepository.saveOptionsForBundle(
+                    packageName = app.originalPackageName,
+                    bundleUid = bundleUid,
+                    patchOptions = bundleOptions
+                )
+            }
+        }
 
         // Start patching with original APK file
         onStartPatch(app.originalPackageName, originalFile, patches, options)

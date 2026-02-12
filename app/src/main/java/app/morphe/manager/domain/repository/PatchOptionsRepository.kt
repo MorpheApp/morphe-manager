@@ -22,11 +22,46 @@ class PatchOptionsRepository(db: AppDatabase) {
             packageName = packageName
         ).also { dao.createOptionGroup(it) }.uid
 
-    suspend fun getOptions(
+    /**
+     * Get options for a specific bundle and package
+     */
+    suspend fun getOptionsForBundle(
+        packageName: String,
+        bundleUid: Int,
+        bundlePatchInfo: Map<String, PatchInfo>
+    ): Map<String, Map<String, Any?>> {
+        val options = dao.getOptionsForBundle(packageName, bundleUid)
+
+        // Patches -> Patch options
+        return buildMap<String, MutableMap<String, Any?>> {
+            options.forEach { dbOption ->
+                val deserializedPatchOptions = this.getOrPut(dbOption.patchName, ::mutableMapOf)
+
+                val patchOption = bundlePatchInfo[dbOption.patchName]?.options?.find { it.key == dbOption.key }
+                if (patchOption != null) {
+                    try {
+                        deserializedPatchOptions[patchOption.key] = dbOption.value.deserializeFor(patchOption)
+                    } catch (e: Option.SerializationException) {
+                        Log.w(
+                            tag,
+                            "Option ${dbOption.patchName}:${patchOption.key} could not be deserialized",
+                            e
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get all options for a package across all bundles
+     */
+    suspend fun getAllOptionsForPackage(
         packageName: String,
         bundlePatches: Map<Int, Map<String, PatchInfo>>
-    ): Options {
+    ): Map<Int, Map<String, Map<String, Any?>>> {
         val options = dao.getOptions(packageName)
+
         // Bundle -> Patches
         return buildMap<Int, MutableMap<String, MutableMap<String, Any?>>>(options.size) {
             options.forEach { (sourceUid, bundlePatchOptionsList) ->
@@ -36,16 +71,16 @@ class PatchOptionsRepository(db: AppDatabase) {
                         val deserializedPatchOptions =
                             bundlePatchOptions.getOrPut(dbOption.patchName, ::mutableMapOf)
 
-                        val option =
+                        val patchOption =
                             bundlePatches[sourceUid]?.get(dbOption.patchName)?.options?.find { it.key == dbOption.key }
-                        if (option != null) {
+                        if (patchOption != null) {
                             try {
-                                deserializedPatchOptions[option.key] =
-                                    dbOption.value.deserializeFor(option)
+                                deserializedPatchOptions[patchOption.key] =
+                                    dbOption.value.deserializeFor(patchOption)
                             } catch (e: Option.SerializationException) {
                                 Log.w(
                                     tag,
-                                    "Option ${dbOption.patchName}:${option.key} could not be deserialized",
+                                    "Option ${dbOption.patchName}:${patchOption.key} could not be deserialized",
                                     e
                                 )
                             }
@@ -57,6 +92,48 @@ class PatchOptionsRepository(db: AppDatabase) {
         }
     }
 
+    /**
+     * Get options for a package - returns combined data from all bundles
+     * @deprecated Use getOptionsForBundle or getAllOptionsForPackage instead
+     */
+    @Deprecated(
+        "Use getOptionsForBundle for bundle-specific options or getAllOptionsForPackage for all bundles",
+        ReplaceWith("getAllOptionsForPackage(packageName, bundlePatches)")
+    )
+    suspend fun getOptions(
+        packageName: String,
+        bundlePatches: Map<Int, Map<String, PatchInfo>>
+    ): Options = getAllOptionsForPackage(packageName, bundlePatches)
+
+    /**
+     * Save options for a specific bundle and package
+     */
+    suspend fun saveOptionsForBundle(
+        packageName: String,
+        bundleUid: Int,
+        patchOptions: Map<String, Map<String, Any?>>
+    ) {
+        val groupId = getOrCreateGroup(bundleUid, packageName)
+
+        val optionsList = patchOptions.flatMap { (patchName, options) ->
+            options.mapNotNull { (key, value) ->
+                val serialized = try {
+                    Option.SerializedValue.fromValue(value)
+                } catch (e: Option.SerializationException) {
+                    Log.e(tag, "Option $patchName:$key could not be serialized", e)
+                    return@mapNotNull null
+                }
+
+                Option(groupId, patchName, key, serialized)
+            }
+        }
+
+        dao.updateOptionsForGroup(groupId, optionsList)
+    }
+
+    /**
+     * Save options for multiple bundles for a package
+     */
     suspend fun saveOptions(packageName: String, options: Options) =
         dao.updateOptions(options.entries.associate { (sourceUid, bundlePatchOptions) ->
             val groupId = getOrCreateGroup(sourceUid, packageName)
@@ -75,19 +152,53 @@ class PatchOptionsRepository(db: AppDatabase) {
             }
         })
 
+    /**
+     * Get all packages that have saved options for any bundle
+     */
     fun getPackagesWithSavedOptions() =
         dao.getPackagesWithOptions().map(Iterable<String>::toSet).distinctUntilChanged()
 
+    /**
+     * Get all packages that have saved options for a specific bundle
+     */
+    fun getPackagesWithSavedOptionsForBundle(bundleUid: Int) =
+        dao.getPackagesWithOptionsForBundle(bundleUid).map(Iterable<String>::toSet).distinctUntilChanged()
+
+    /**
+     * Get summary of options per bundle+package
+     * Returns: Map<PackageName, Map<BundleUid, OptionCount>>
+     */
+    suspend fun getOptionsSummary(): Map<String, Map<Int, Int>> {
+        return dao.getOptionsSummary()
+    }
+
+    /**
+     * Reset options for a specific package (all bundles)
+     */
     suspend fun resetOptionsForPackage(packageName: String) {
         dao.resetOptionsForPackage(packageName)
         resetEventsFlow.emit(ResetEvent.Package(packageName))
     }
 
+    /**
+     * Reset options for a specific package and bundle combination
+     */
+    suspend fun resetOptionsForPackageAndBundle(packageName: String, bundleUid: Int) {
+        dao.resetOptionsForPackageAndBundle(packageName, bundleUid)
+        resetEventsFlow.emit(ResetEvent.PackageBundle(packageName, bundleUid))
+    }
+
+    /**
+     * Reset options for a specific bundle (all packages)
+     */
     suspend fun resetOptionsForPatchBundle(uid: Int) {
         dao.resetOptionsForPatchBundle(uid)
         resetEventsFlow.emit(ResetEvent.Bundle(uid))
     }
 
+    /**
+     * Reset all options
+     */
     suspend fun reset() {
         dao.reset()
         resetEventsFlow.emit(ResetEvent.All)
@@ -97,5 +208,6 @@ class PatchOptionsRepository(db: AppDatabase) {
         data object All : ResetEvent
         data class Package(val packageName: String) : ResetEvent
         data class Bundle(val bundleUid: Int) : ResetEvent
+        data class PackageBundle(val packageName: String, val bundleUid: Int) : ResetEvent
     }
 }

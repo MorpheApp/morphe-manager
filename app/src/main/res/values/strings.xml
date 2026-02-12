@@ -88,6 +88,8 @@ Compatible versions:"</string>
     <string name="home_apk_availability_no">No, help me find it</string>
     <string name="home_apk_use_saved_with_version">Use saved APK (v%s)</string>
     <string name="home_app_info_no_saved_apk">No saved APK. Patching will require selecting the APK file again</string>
+    <string name="home_app_info_repatch_no_bundle_info">Cannot determine which bundle was used for this app</string>
+    <string name="home_app_info_repatch_bundle_not_available">The bundle used for this app is no longer available</string>
 
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Download the original APK</string>
@@ -552,12 +554,21 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
-    <string name="settings_system_patch_selections_description_short">Saved for future patching</string>
-    <string name="settings_system_patch_selections_empty">No saved patch selections</string>
-    <string name="settings_system_patch_selections_has_options">Has options</string>
-    <string name="settings_system_patch_selections_patches_options">Patches options</string>
-    <string name="settings_system_patch_selection_delete_title">Delete patch selection</string>
-    <string name="settings_system_patch_selection_deleted">Patch selection deleted</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Reset All Selections?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Reset Package Selections?</string>
+    <string name="settings_system_patch_selection_reset_bundle_confirm_title">Reset Bundle Selection?</string>
+    <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
+    <string name="settings_system_patch_selection_total_summary">%1$d patches across %2$d packages</string>
+    <string name="settings_system_patch_selection_patches_in_bundles">%1$d patches in %2$d bundles</string>
+    <string name="settings_system_patch_selection_patches_count">%d patches</string>
+    <string name="settings_system_patch_selection_bundle_format">Bundle #%d</string>
+    <string name="settings_system_patch_selection_will_delete">This will delete:</string>
+    <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and bundles.</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all bundles.</string>
+    <string name="settings_system_patch_selection_reset_bundle_warning">This will permanently delete saved patch selections for %1$s in bundle #%2$d.</string>
+    <string name="settings_system_patch_selection_reset_all_success">All selections deleted</string>
+    <string name="settings_system_patch_selection_reset_package_success">Package selections deleted</string>
+    <string name="settings_system_patch_selection_reset_bundle_success">Bundle selection deleted</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
@@ -575,6 +586,7 @@ Open-source at its core, Morphe thrives on community feedback and contributions 
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="reset">Reset</string>
+    <string name="reset_all">Reset All</string>
     <string name="confirm">Confirm</string>
     <string name="warning">Warning</string>
     <string name="error_">Error</string>
