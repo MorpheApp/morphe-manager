@@ -122,6 +122,13 @@ fun SystemTabContent(
                     selectionsSummary = selectionRepository.getSelectionsSummary()
                 }
             },
+            onRefresh = {
+                scope.launch {
+                    selectionsSummary = withContext(Dispatchers.IO) {
+                        selectionRepository.getSelectionsSummary()
+                    }
+                }
+            },
             importExportViewModel = importExportViewModel
         )
     }

@@ -572,6 +572,11 @@ Details: %2$s"</string>
     <string name="settings_system_export_bundle_data_success">Bundle data exported successfully</string>
     <string name="settings_system_import_bundle_data_fail">Failed to import bundle data</string>
     <string name="settings_system_import_bundle_data_success">Bundle data imported successfully</string>
+    <string name="settings_system_patch_details_title">Patch Details</string>
+    <string name="settings_system_selected_patches">Selected patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patch options</string>
+    <string name="settings_system_options_count">%d options</string>
+    <string name="settings_system_no_patches_or_options">No patches or options saved</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
