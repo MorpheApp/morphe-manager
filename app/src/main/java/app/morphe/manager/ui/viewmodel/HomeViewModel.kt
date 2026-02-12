@@ -752,10 +752,12 @@ class HomeViewModel(
             if (usingMountInstall) this.filterGmsCore() else this
 
         if (expertModeEnabled) {
-            // Expert Mode: Load saved selections and options
+            // Expert Mode: Load saved selections and options only for current bundles
+            val currentBundleUids = allBundles.map { it.uid }.toSet()
+
             val savedSelections = withContext(Dispatchers.IO) {
                 // Try to load from original package name first
-                var selections = patchSelectionRepository.getSelection(selectedApp.packageName)
+                var selections = patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
 
                 // If no selections found, try patched package name
                 if (selections.isEmpty()) {
@@ -766,16 +768,22 @@ class HomeViewModel(
                         ?.currentPackageName
 
                     if (patchedPackage != null && patchedPackage != selectedApp.packageName) {
-                        selections = patchSelectionRepository.getSelection(patchedPackage)
+                        selections = patchSelectionRepository.getAllSelectionsForPackage(patchedPackage)
                     }
                 }
 
-                selections
+                // Filter to only include selections for current bundles
+                selections.filterKeys { it in currentBundleUids }
             }
 
-            // Load saved options
+            // Load saved options only for current bundles
             val savedOptions = withContext(Dispatchers.IO) {
-                optionsRepository.getOptions(selectedApp.packageName, bundlesMap)
+                val allOptions = optionsRepository.getAllOptionsForPackage(
+                    selectedApp.packageName,
+                    bundlesMap
+                )
+                // Filter to only include options for current bundles
+                allOptions.filterKeys { it in currentBundleUids }
             }
 
             // Use saved selections or create new ones
@@ -809,7 +817,7 @@ class HomeViewModel(
 
                 validatedPatches
             } else {
-                // No saved selections - use default
+                // No saved selections - use default for all current bundles
                 allBundles.toPatchSelection(allowIncompatible) { _, patch -> patch.include }
             }.applyGmsCoreFilter()
 
