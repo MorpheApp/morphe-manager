@@ -38,12 +38,10 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun PatchSelectionManagementDialog(
-    selections: Map<String, Map<Int, Int>>, // Map<PackageName, Map<BundleUid, PatchCount>>
     onDismiss: () -> Unit,
     onResetAll: () -> Unit,
     onResetPackage: (String) -> Unit,
     onResetPackageBundle: (String, Int) -> Unit,
-    onRefresh: () -> Unit,
     importExportViewModel: ImportExportViewModel = koinInject()
 ) {
     var showResetAllConfirmation by remember { mutableStateOf(false) }
@@ -52,11 +50,28 @@ fun PatchSelectionManagementDialog(
 
     val appDataResolver: AppDataResolver = koinInject()
     val patchBundleRepository: PatchBundleRepository = koinInject()
+    val selectionRepository: PatchSelectionRepository = koinInject()
 
     // Get bundle names for display
     val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
     val bundleNames = remember(bundles) {
         bundles.associate { it.uid to it.name }
+    }
+
+    // Load selections data internally with refresh capability
+    var selections by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
+    var refreshTrigger by remember { mutableIntStateOf(0) }
+
+    // Load data from repository
+    LaunchedEffect(refreshTrigger) {
+        withContext(Dispatchers.IO) {
+            selections = selectionRepository.getSelectionsSummary()
+        }
+    }
+
+    // Refresh function
+    val onRefresh: () -> Unit = {
+        refreshTrigger++
     }
 
     // Normalize selections to group by original package names
@@ -95,7 +110,7 @@ fun PatchSelectionManagementDialog(
 
         ConfirmResetAllDialog(
             totalSelections = totalSelections,
-            packageCount = selections.size,
+            packageCount = normalizedSelections.size,
             onConfirm = confirmAction,
             onDismiss = dismissAction
         )
@@ -105,7 +120,7 @@ fun PatchSelectionManagementDialog(
     resetTarget?.let { target ->
         when (target) {
             is ResetTarget.Package -> {
-                val bundleMap = selections[target.packageName] ?: emptyMap()
+                val bundleMap = normalizedSelections[target.packageName] ?: emptyMap()
                 val patchCount = bundleMap.values.sum()
 
                 val confirmAction: () -> Unit = {
@@ -124,7 +139,7 @@ fun PatchSelectionManagementDialog(
                 )
             }
             is ResetTarget.PackageBundle -> {
-                val patchCount = selections[target.packageName]?.get(target.bundleUid) ?: 0
+                val patchCount = normalizedSelections[target.packageName]?.get(target.bundleUid) ?: 0
 
                 val confirmAction: () -> Unit = {
                     onResetPackageBundle(target.packageName, target.bundleUid)

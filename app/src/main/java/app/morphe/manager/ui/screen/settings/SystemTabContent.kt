@@ -27,9 +27,7 @@ import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.toast
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
 /**
@@ -90,44 +88,28 @@ fun SystemTabContent(
     }
 
     val selectionRepository: PatchSelectionRepository = koinInject()
-    var selectionsSummary by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
-
-    LaunchedEffect(showPatchSelectionDialog) {
-        if (showPatchSelectionDialog) {
-            selectionsSummary = withContext(Dispatchers.IO) {
-                selectionRepository.getSelectionsSummary()
-            }
-        }
-    }
+    val optionsRepository: PatchOptionsRepository = koinInject()
 
     // Patch selection management dialog
     if (showPatchSelectionDialog) {
         PatchSelectionManagementDialog(
-            selections = selectionsSummary,
             onDismiss = { showPatchSelectionDialog = false },
             onResetAll = {
                 scope.launch {
                     selectionRepository.reset()
-                    selectionsSummary = selectionRepository.getSelectionsSummary()
+                    optionsRepository.reset()
                 }
             },
             onResetPackage = { packageName ->
                 scope.launch {
                     selectionRepository.resetSelectionForPackage(packageName)
-                    selectionsSummary = selectionRepository.getSelectionsSummary()
+                    optionsRepository.resetOptionsForPackage(packageName)
                 }
             },
             onResetPackageBundle = { packageName, bundleUid ->
                 scope.launch {
                     selectionRepository.resetSelectionForPackageAndBundle(packageName, bundleUid)
-                    selectionsSummary = selectionRepository.getSelectionsSummary()
-                }
-            },
-            onRefresh = {
-                scope.launch {
-                    selectionsSummary = withContext(Dispatchers.IO) {
-                        selectionRepository.getSelectionsSummary()
-                    }
+                    optionsRepository.resetOptionsForPackageAndBundle(packageName, bundleUid)
                 }
             },
             importExportViewModel = importExportViewModel
@@ -337,8 +319,6 @@ fun SystemTabContent(
                 MorpheSettingsDivider()
 
                 // Patch Selections management with normalized count
-                val selectionRepository: PatchSelectionRepository = koinInject()
-                val optionsRepository: PatchOptionsRepository = koinInject()
                 val appDataResolver: AppDataResolver = koinInject()
 
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
