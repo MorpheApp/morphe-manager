@@ -66,36 +66,43 @@ class AppDataResolver(
     }
 
     /**
-     * Group selections by normalized (original) package names
+     * Group selections by normalized (patched) package names
      * This prevents showing duplicate entries for original + patched variants
      *
+     * Returns both the grouped data and a mapping of which actual package to use for operations
+     *
      * @param selections Map<PackageName, Map<BundleUid, PatchCount>>
-     * @return Map<OriginalPackageName, Map<BundleUid, PatchCount>> with deduplicated entries
+     * @return Pair of:
+     *   - Map<CurrentPackageName, Map<BundleUid, PatchCount>> - grouped data for display
+     *   - Map<CurrentPackageName, ActualPackageName> - which package has the actual data
      */
-    suspend fun groupSelectionsByOriginalPackage(
+    suspend fun groupSelectionsWithActualPackages(
         selections: Map<String, Map<Int, Int>>
-    ): Map<String, Map<Int, Int>> {
+    ): Pair<Map<String, Map<Int, Int>>, Map<String, String>> {
         val allApps = installedAppRepository.getAll().first()
-        val patchedToOriginal = allApps.associate {
-            it.currentPackageName to it.originalPackageName
+        val originalToPatched = allApps.associate {
+            it.originalPackageName to it.currentPackageName
         }
 
-        // Group by original package name
+        // Group by original package name and track which package has data
         val grouped = mutableMapOf<String, MutableMap<Int, Int>>()
+        val actualPackages = mutableMapOf<String, String>()
 
         selections.forEach { (packageName, bundleMap) ->
-            // Get original package name
-            val originalPackage = patchedToOriginal[packageName] ?: packageName
+            // Get patched package name
+            val patchedPackage = originalToPatched[packageName] ?: packageName
 
-            // For each bundle, keep only the maximum count (not sum)
-            // This prevents doubling when both original and patched have same selections
-            val targetMap = grouped.getOrPut(originalPackage) { mutableMapOf() }
-            bundleMap.forEach { (bundleUid, count) ->
-                targetMap[bundleUid] = maxOf(targetMap[bundleUid] ?: 0, count)
+            // Check if this is a patched package
+            val isPatchedPackage = originalToPatched.containsKey(packageName)
+
+            // Priority: patched package data overwrites original package data
+            if (isPatchedPackage || !actualPackages.containsKey(patchedPackage)) {
+                actualPackages[patchedPackage] = packageName
+                grouped[patchedPackage] = bundleMap.toMutableMap()
             }
         }
 
-        return grouped
+        return grouped to actualPackages
     }
 
     /**

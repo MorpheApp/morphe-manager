@@ -27,6 +27,7 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.*
 import org.koin.compose.koinInject
@@ -51,6 +52,7 @@ fun PatchSelectionManagementDialog(
     val appDataResolver: AppDataResolver = koinInject()
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val selectionRepository: PatchSelectionRepository = koinInject()
+    val optionsRepository: PatchOptionsRepository = koinInject()
 
     // Get bundle names for display
     val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
@@ -58,14 +60,30 @@ fun PatchSelectionManagementDialog(
         bundles.associate { it.uid to it.name }
     }
 
-    // Load selections data internally with refresh capability
+    // Load selections and options data internally with refresh capability
     var selections by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
+    var options by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
     var refreshTrigger by remember { mutableIntStateOf(0) }
 
     // Load data from repository
     LaunchedEffect(refreshTrigger) {
         withContext(Dispatchers.IO) {
             selections = selectionRepository.getSelectionsSummary()
+            options = optionsRepository.getOptionsSummary()
+        }
+    }
+
+    // Listen for reset events from repositories and trigger refresh
+    LaunchedEffect(Unit) {
+        launch {
+            selectionRepository.resetEventsFlow.collect {
+                refreshTrigger++
+            }
+        }
+        launch {
+            optionsRepository.resetEventsFlow.collect {
+                refreshTrigger++
+            }
         }
     }
 
@@ -76,9 +94,12 @@ fun PatchSelectionManagementDialog(
 
     // Normalize selections to group by original package names
     var normalizedSelections by remember(selections) { mutableStateOf(selections) }
+    var actualPackages by remember(selections) { mutableStateOf<Map<String, String>>(emptyMap()) }
 
     LaunchedEffect(selections) {
-        normalizedSelections = appDataResolver.groupSelectionsByOriginalPackage(selections)
+        val (grouped, actual) = appDataResolver.groupSelectionsWithActualPackages(selections)
+        normalizedSelections = grouped
+        actualPackages = actual
     }
 
     // Calculate total selections from normalized data
@@ -88,6 +109,7 @@ fun PatchSelectionManagementDialog(
 
     PatchSelectionManagementDialogContent(
         selections = normalizedSelections,
+        actualPackages = actualPackages,
         totalSelections = totalSelections,
         bundleNames = bundleNames,
         onDismiss = onDismiss,
@@ -177,6 +199,7 @@ fun PatchSelectionManagementDialog(
 @Composable
 private fun PatchSelectionManagementDialogContent(
     selections: Map<String, Map<Int, Int>>,
+    actualPackages: Map<String, String>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
     onDismiss: () -> Unit,
@@ -235,6 +258,7 @@ private fun PatchSelectionManagementDialogContent(
         } else {
             SelectionList(
                 selections = selections,
+                actualPackages = actualPackages,
                 totalSelections = totalSelections,
                 bundleNames = bundleNames,
                 appDataResolver = appDataResolver,
@@ -253,6 +277,7 @@ private fun PatchSelectionManagementDialogContent(
 @Composable
 private fun SelectionList(
     selections: Map<String, Map<Int, Int>>,
+    actualPackages: Map<String, String>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
@@ -284,16 +309,20 @@ private fun SelectionList(
             items(
                 items = selections.entries.toList(),
                 key = { it.key }
-            ) { (packageName, bundleMap) ->
+            ) { (displayPackageName, bundleMap) ->
+                // Get the actual package name that has the data
+                val actualPackageName = actualPackages[displayPackageName] ?: displayPackageName
+
                 val resetPackageAction: () -> Unit = {
-                    onSetResetTarget(ResetTarget.Package(packageName))
+                    onSetResetTarget(ResetTarget.Package(actualPackageName))
                 }
                 val resetBundleAction: (Int) -> Unit = { bundleUid ->
-                    onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
+                    onSetResetTarget(ResetTarget.PackageBundle(actualPackageName, bundleUid))
                 }
 
                 PackageSelectionItem(
-                    packageName = packageName,
+                    packageName = actualPackageName,
+                    displayPackageName = displayPackageName,
                     bundleMap = bundleMap,
                     bundleNames = bundleNames,
                     appDataResolver = appDataResolver,
@@ -314,6 +343,7 @@ private fun SelectionList(
 @Composable
 private fun PackageSelectionItem(
     packageName: String,
+    displayPackageName: String,
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
@@ -324,12 +354,12 @@ private fun PackageSelectionItem(
     onRefresh: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var displayName by remember { mutableStateOf(packageName) }
+    var displayName by remember { mutableStateOf(displayPackageName) }
     var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
 
-    // Resolve app name and source
-    LaunchedEffect(packageName) {
-        val appData = appDataResolver.resolveAppData(packageName)
+    // Resolve app name and source using displayPackageName for UI
+    LaunchedEffect(displayPackageName) {
+        val appData = appDataResolver.resolveAppData(displayPackageName)
         displayName = appData.displayName
         appDataSource = appData.source
     }
@@ -349,7 +379,7 @@ private fun PackageSelectionItem(
             ) {
                 // App icon
                 AppIcon(
-                    packageName = packageName,
+                    packageName = displayPackageName,
                     contentDescription = displayName,
                     modifier = Modifier.size(48.dp),
                     preferredSource = appDataSource
