@@ -388,21 +388,14 @@ private fun PackageSelectionItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         InfoBadge(
-                            text = pluralStringResource(
-                                R.plurals.patch_count,
-                                totalPatches,
-                                totalPatches
-                            ),
+                            text = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
                             style = InfoBadgeStyle.Primary,
                             isCompact = true
                         )
 
                         if (bundleMap.size > 1) {
                             InfoBadge(
-                                text = stringResource(
-                                    R.string.settings_system_patch_selection_bundles_count,
-                                    bundleMap.size
-                                ),
+                                text = pluralStringResource(R.plurals.source_count, bundleMap.size, bundleMap.size),
                                 style = InfoBadgeStyle.Default,
                                 isCompact = true
                             )
@@ -473,7 +466,7 @@ private fun BundleSelectionItem(
     onRefresh: () -> Unit
 ) {
     // Display bundle name or fallback to "Bundle #N"
-    val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_bundle_format, bundleUid)
+    val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
 
     // Export launcher
     val exportLauncher = rememberLauncherForActivityResult(
@@ -640,11 +633,7 @@ private fun ConfirmResetAllDialog(
                 if (totalOptions > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.patch_options_count,
-                            totalOptions,
-                            totalOptions
-                        )
+                        text = pluralStringResource(R.plurals.patch_options_count, totalOptions,  totalOptions)
                     )
                 }
             }
@@ -709,7 +698,7 @@ private fun ConfirmResetPackageDialog(
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
-                        R.string.settings_system_patch_selection_patches_in_bundles,
+                        R.string.settings_system_patch_selection_patches_in_sources,
                         patchCount,
                         bundleCount
                     )
@@ -718,11 +707,7 @@ private fun ConfirmResetPackageDialog(
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.patch_options_count,
-                            optionsCount,
-                            optionsCount
-                        )
+                        text = pluralStringResource(R.plurals.patch_options_count, optionsCount, optionsCount)
                     )
                 }
             }
@@ -758,7 +743,7 @@ private fun ConfirmResetPackageBundleDialog(
 
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.settings_system_patch_selection_reset_bundle_confirm_title),
+        title = stringResource(R.string.settings_system_patch_selection_reset_source_confirm_title),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.reset),
@@ -774,7 +759,7 @@ private fun ConfirmResetPackageBundleDialog(
         ) {
             Text(
                 text = stringResource(
-                    R.string.settings_system_patch_selection_reset_bundle_warning,
+                    R.string.settings_system_patch_selection_reset_source_warning,
                     displayName,
                     bundleUid
                 ),
@@ -793,11 +778,7 @@ private fun ConfirmResetPackageBundleDialog(
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(
-                            R.plurals.patch_options_count,
-                            optionsCount,
-                            optionsCount
-                        )
+                        text = pluralStringResource(R.plurals.patch_options_count, optionsCount, optionsCount)
                     )
                 }
             }
@@ -914,7 +895,7 @@ private fun PatchDetailsDialog(
                 // Patches section
                 if (patchList.isNotEmpty()) {
                     InfoBox(
-                        title = stringResource(R.string.settings_system_selected_patches, patchList.size),
+                        title = stringResource(R.string.settings_system_selected_patches_title, patchList.size),
                         containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                         titleColor = MaterialTheme.colorScheme.primary
                     ) {
@@ -932,7 +913,7 @@ private fun PatchDetailsDialog(
                 // Options section
                 if (optionsMap.isNotEmpty()) {
                     InfoBox(
-                        title = stringResource(R.string.settings_system_patch_options_title),
+                        title = stringResource(R.string.settings_system_patch_options_title, optionsMap.size),
                         containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                         titleColor = MaterialTheme.colorScheme.secondary
                     ) {

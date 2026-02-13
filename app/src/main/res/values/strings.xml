@@ -554,30 +554,25 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Patch selections</string>
     <string name="settings_system_patch_selections_description">Manage saved patch selections and options. These persist after app uninstallation</string>
-    <string name="settings_system_patch_selection_reset_all_confirm_title">Reset All Selections?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Reset Package Selections?</string>
-    <string name="settings_system_patch_selection_reset_bundle_confirm_title">Reset Bundle Selection?</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Reset all selections?</string>
+    <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
     <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
     <string name="settings_system_patch_selection_total_summary">%1$d patches across %2$d packages</string>
-    <string name="settings_system_patch_selection_patches_in_bundles">%1$d patches in %2$d bundles</string>
-    <string name="settings_system_patch_selection_bundle_format">Bundle #%d</string>
+    <string name="settings_system_patch_selection_patches_in_sources">%1$d patches in %2$d sources</string>
+    <string name="settings_system_patch_selection_source_format">Source #%d</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
-    <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and bundles.</string>
-    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all bundles.</string>
-    <string name="settings_system_patch_selection_reset_bundle_warning">This will permanently delete saved patch selections for %1$s in bundle #%2$d.</string>
-    <string name="settings_system_patch_selection_reset_all_success">All selections deleted</string>
-    <string name="settings_system_patch_selection_reset_package_success">Package selections deleted</string>
-    <string name="settings_system_patch_selection_reset_bundle_success">Bundle selection deleted</string>
-    <string name="settings_system_export_bundle_data_fail">Failed to export bundle data</string>
-    <string name="settings_system_export_bundle_data_success">Bundle data exported successfully</string>
-    <string name="settings_system_import_bundle_data_fail">Failed to import bundle data</string>
-    <string name="settings_system_import_bundle_data_success">Bundle data imported successfully</string>
-    <string name="settings_system_patch_details_title">Patch Details</string>
-    <string name="settings_system_selected_patches">Selected patches (%d)</string>
-    <string name="settings_system_patch_options_title">Patch options</string>
-    <string name="settings_system_options_count">%d options</string>
+    <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
+    <string name="settings_system_patch_selection_reset_package_warning">This will permanently delete all saved patch selections for %s across all sources</string>
+    <string name="settings_system_patch_selection_reset_source_warning">This will permanently delete saved patch selections for %1$s in source #%2$d</string>
+    <string name="settings_system_export_source_data_fail">Failed to export source data</string>
+    <string name="settings_system_export_source_data_success">Source data exported successfully</string>
+    <string name="settings_system_import_source_data_fail">Failed to import source data</string>
+    <string name="settings_system_import_source_data_success">Source data imported successfully</string>
+    <string name="settings_system_patch_details_title">Patch details</string>
+    <string name="settings_system_selected_patches_title">Selected patches (%d)</string>
+    <string name="settings_system_patch_options_title">Patch options (%d)</string>
     <string name="settings_system_no_patches_or_options">No patches or options saved</string>
-    <string name="settings_system_patch_selection_bundles_count">%d bundles</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>

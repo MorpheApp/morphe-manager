@@ -168,7 +168,7 @@ class ImportExportViewModel(
         bundleName: String?,
         target: Uri
     ) = viewModelScope.launch {
-        uiSafe(app, R.string.settings_system_export_bundle_data_fail, "Failed to export bundle data") {
+        uiSafe(app, R.string.settings_system_export_source_data_fail, "Failed to export source data") {
             // Get original package name for consistent export
             val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
 
@@ -208,7 +208,7 @@ class ImportExportViewModel(
                 }
             }
 
-            app.toast(app.getString(R.string.settings_system_export_bundle_data_success))
+            app.toast(app.getString(R.string.settings_system_export_source_data_success))
         }
     }
 
@@ -221,7 +221,7 @@ class ImportExportViewModel(
         source: Uri,
         onComplete: () -> Unit = {}
     ) = viewModelScope.launch {
-        uiSafe(app, R.string.settings_system_import_bundle_data_fail, "Failed to import bundle data") {
+        uiSafe(app, R.string.settings_system_import_source_data_fail, "Failed to import source data") {
             val exportFile = withContext(Dispatchers.IO) {
                 contentResolver.openInputStream(source)!!.use {
                     json.decodeFromStream<PatchBundleDataExportFile>(it)
@@ -256,7 +256,7 @@ class ImportExportViewModel(
                 }
             }
 
-            app.toast(app.getString(R.string.settings_system_import_bundle_data_success))
+            app.toast(app.getString(R.string.settings_system_import_source_data_success))
 
             // Call completion callback after successful import
             onComplete()
@@ -305,8 +305,9 @@ class ImportExportViewModel(
 
         if (exitCode == 0)
             app.toast(app.getString(R.string.settings_system_export_debug_logs_export_success))
-        else
-            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed, exitCode))
+        else {
+            app.toast(app.getString(R.string.settings_system_export_debug_logs_export_read_failed).format(exitCode))
+        }
     }
 
     override fun onCleared() {
