@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-11T19:28:48.690Z",
-  "description": "# app [1.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2026-02-11)\n\n\n### Bug Fixes\n\n* Refactor changelog component and add shimmer effect ([44d0318](https://github.com/MorpheApp/morphe-manager/commit/44d03189c2e0f1ee1a6971b7cd05f8d5b98a7651))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.3/morphe-manager-1.7.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.3/morphe-manager-1.7.0-dev.3.apk.asc",
-  "version": "1.7.0-dev.3"
+  "created_at": "2026-02-13T07:34:11.012Z",
+  "description": "# app [1.7.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.3...v1.7.0-dev.4) (2026-02-13)\n\n\n### Bug Fixes\n\n* Publish release before updating app-release.json ([f1c556a](https://github.com/MorpheApp/morphe-manager/commit/f1c556aa7b9d163297152c53b348f87a6960fe1a))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.4/morphe-manager-1.7.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.4/morphe-manager-1.7.0-dev.4.apk.asc",
+  "version": "1.7.0-dev.4"
 }
