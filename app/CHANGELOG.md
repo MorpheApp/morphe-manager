@@ -1,3 +1,10 @@
+# app [1.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.4...v1.7.0-dev.5) (2026-02-13)
+
+
+### Bug Fixes
+
+* Commit app-release.json after semantic release ([4f89c8c](https://github.com/MorpheApp/morphe-manager/commit/4f89c8c5e02c375f04f0540b94cb4b1a817c120f))
+
 # app [1.7.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.3...v1.7.0-dev.4) (2026-02-13)
 
 
