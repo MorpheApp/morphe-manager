@@ -32,7 +32,6 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -46,11 +45,7 @@ import org.koin.compose.koinInject
  */
 @Composable
 fun PatchSelectionManagementDialog(
-    onDismiss: () -> Unit,
-    onResetAll: () -> Unit,
-    onResetPackage: (String) -> Unit,
-    onResetPackageBundle: (String, Int) -> Unit,
-    importExportViewModel: ImportExportViewModel = koinInject()
+    onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     var showResetAllConfirmation by remember { mutableStateOf(false) }
@@ -60,6 +55,7 @@ fun PatchSelectionManagementDialog(
     val appDataResolver: AppDataResolver = koinInject()
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val selectionRepository: PatchSelectionRepository = koinInject()
+    val optionsRepository: PatchOptionsRepository = koinInject()
 
     // Get bundle names for display
     val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
@@ -104,7 +100,6 @@ fun PatchSelectionManagementDialog(
         onSetResetTarget = { resetTarget = it },
         onShowPatchDetails = { showPatchDetailsTarget = it },
         appDataResolver = appDataResolver,
-        importExportViewModel = importExportViewModel,
         onRefresh = onRefresh
     )
 
@@ -112,8 +107,10 @@ fun PatchSelectionManagementDialog(
     if (showResetAllConfirmation) {
         val confirmAction: () -> Unit = {
             scope.launch {
-                onResetAll()
-                delay(50) // Small delay to ensure DB operation completes
+                withContext(Dispatchers.IO) {
+                    selectionRepository.reset()
+                    optionsRepository.reset()
+                }
                 onRefresh()
                 showResetAllConfirmation = false
                 onDismiss()
@@ -138,8 +135,11 @@ fun PatchSelectionManagementDialog(
 
                 val confirmAction: () -> Unit = {
                     scope.launch {
-                        onResetPackage(target.packageName)
-                        delay(50) // Small delay to ensure DB operation completes
+                        withContext(Dispatchers.IO) {
+                            val originalPackageName = appDataResolver.getOriginalPackageName(target.packageName)
+                            selectionRepository.resetSelectionForPackage(originalPackageName)
+                            optionsRepository.resetOptionsForPackage(originalPackageName)
+                        }
                         onRefresh()
                         resetTarget = null
                     }
@@ -160,8 +160,11 @@ fun PatchSelectionManagementDialog(
 
                 val confirmAction: () -> Unit = {
                     scope.launch {
-                        onResetPackageBundle(target.packageName, target.bundleUid)
-                        delay(50) // Small delay to ensure DB operation completes
+                        withContext(Dispatchers.IO) {
+                            val originalPackageName = appDataResolver.getOriginalPackageName(target.packageName)
+                            selectionRepository.resetSelectionForPackageAndBundle(originalPackageName, target.bundleUid)
+                            optionsRepository.resetOptionsForPackageAndBundle(originalPackageName, target.bundleUid)
+                        }
                         onRefresh()
                         resetTarget = null
                     }
@@ -205,7 +208,6 @@ private fun PatchSelectionManagementDialogContent(
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
     appDataResolver: AppDataResolver,
-    importExportViewModel: ImportExportViewModel,
     onRefresh: () -> Unit
 ) {
     MorpheDialog(
@@ -256,7 +258,6 @@ private fun PatchSelectionManagementDialogContent(
                 appDataResolver = appDataResolver,
                 onSetResetTarget = onSetResetTarget,
                 onShowPatchDetails = onShowPatchDetails,
-                importExportViewModel = importExportViewModel,
                 onRefresh = onRefresh
             )
         }
@@ -274,7 +275,6 @@ private fun SelectionList(
     appDataResolver: AppDataResolver,
     onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    importExportViewModel: ImportExportViewModel,
     onRefresh: () -> Unit
 ) {
     Column(
@@ -327,7 +327,6 @@ private fun SelectionList(
                     onResetPackage = resetPackageAction,
                     onResetPackageBundle = resetBundleAction,
                     onShowPatchDetails = onShowPatchDetails,
-                    importExportViewModel = importExportViewModel,
                     onRefresh = onRefresh
                 )
             }
@@ -347,7 +346,6 @@ private fun PackageSelectionItem(
     onResetPackage: () -> Unit,
     onResetPackageBundle: (Int) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
-    importExportViewModel: ImportExportViewModel,
     onRefresh: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -442,7 +440,6 @@ private fun PackageSelectionItem(
                             patchCount = patchCount,
                             onReset = resetAction,
                             onShowDetails = { onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid)) },
-                            importExportViewModel = importExportViewModel,
                             onRefresh = onRefresh
                         )
                     }
@@ -473,9 +470,10 @@ private fun BundleSelectionItem(
     patchCount: Int,
     onReset: () -> Unit,
     onShowDetails: () -> Unit,
-    importExportViewModel: ImportExportViewModel,
     onRefresh: () -> Unit
 ) {
+    val importExportViewModel: ImportExportViewModel = koinInject()
+
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
     val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)

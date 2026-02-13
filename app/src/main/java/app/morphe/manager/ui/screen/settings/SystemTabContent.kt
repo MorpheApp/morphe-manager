@@ -87,35 +87,10 @@ fun SystemTabContent(
         )
     }
 
-    val selectionRepository: PatchSelectionRepository = koinInject()
-    val optionsRepository: PatchOptionsRepository = koinInject()
-    val appDataResolver: AppDataResolver = koinInject()
-
     // Patch selection management dialog
     if (showPatchSelectionDialog) {
         PatchSelectionManagementDialog(
-            onDismiss = { showPatchSelectionDialog = false },
-            onResetAll = {
-                scope.launch {
-                    selectionRepository.reset()
-                    optionsRepository.reset()
-                }
-            },
-            onResetPackage = { packageName ->
-                scope.launch {
-                    val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
-                    selectionRepository.resetSelectionForPackage(originalPackageName)
-                    optionsRepository.resetOptionsForPackage(originalPackageName)
-                }
-            },
-            onResetPackageBundle = { packageName, bundleUid ->
-                scope.launch {
-                    val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
-                    selectionRepository.resetSelectionForPackageAndBundle(originalPackageName, bundleUid)
-                    optionsRepository.resetOptionsForPackageAndBundle(originalPackageName, bundleUid)
-                }
-            },
-            importExportViewModel = importExportViewModel
+            onDismiss = { showPatchSelectionDialog = false }
         )
     }
 
@@ -322,6 +297,8 @@ fun SystemTabContent(
                 MorpheSettingsDivider()
 
                 // Patch Selections management
+                val selectionRepository: PatchSelectionRepository = koinInject()
+                val optionsRepository: PatchOptionsRepository = koinInject()
                 val appDataResolver: AppDataResolver = koinInject()
 
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
