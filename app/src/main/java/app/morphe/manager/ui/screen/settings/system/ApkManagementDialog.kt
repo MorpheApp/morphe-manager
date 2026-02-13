@@ -4,13 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material.icons.outlined.Storage
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -150,13 +154,9 @@ private fun PatchedApksContent(
         isEmpty = apkItems.isEmpty(),
         emptyMessage = stringResource(R.string.settings_system_patched_apks_empty),
         onDismissRequest = onDismissRequest,
-        itemsContent = {
-            apkItems.forEach { item ->
-                ApkItem(
-                    data = item.toApkItemData(),
-                    onDelete = { itemToDelete = item.installedApp }
-                )
-            }
+        items = apkItems.map { it.toApkItemData() },
+        onDelete = { index ->
+            itemToDelete = apkItems[index].installedApp
         }
     )
 
@@ -235,13 +235,9 @@ private fun OriginalApksContent(
         isEmpty = apkItems.isEmpty(),
         emptyMessage = stringResource(R.string.settings_system_original_apks_empty),
         onDismissRequest = onDismissRequest,
-        itemsContent = {
-            apkItems.forEachIndexed { index, item ->
-                ApkItem(
-                    data = item,
-                    onDelete = { itemToDelete = originalApks[index] }
-                )
-            }
+        items = apkItems,
+        onDelete = { index ->
+            itemToDelete = originalApks[index]
         }
     )
 
@@ -273,7 +269,8 @@ private fun ApkManagementDialogContent(
     isEmpty: Boolean,
     emptyMessage: String,
     onDismissRequest: () -> Unit,
-    itemsContent: @Composable ColumnScope.() -> Unit
+    items: List<ApkItemData>,
+    onDelete: (Int) -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismissRequest,
@@ -284,53 +281,46 @@ private fun ApkManagementDialogContent(
                 onClick = onDismissRequest,
                 modifier = Modifier.fillMaxWidth()
             )
-        }
+        },
+        scrollable = false,
+        compactPadding = true
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Summary
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+            // Summary box
+            InfoBox(
+                title = pluralStringResource(R.plurals.settings_system_apks_count, count, count),
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                titleColor = MaterialTheme.colorScheme.primary,
+                icon = icon
             ) {
-                Row(
-                    modifier = Modifier.padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column {
-                        Text(
-                            text = pluralStringResource(R.plurals.settings_system_apks_count, count, count),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = LocalDialogTextColor.current
-                        )
-                        Text(
-                            text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize)),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    }
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+                Text(
+                    text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize)),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalDialogSecondaryTextColor.current
+                )
             }
 
             // List of APKs
             if (isEmpty) {
                 EmptyState(message = emptyMessage)
             } else {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                LazyColumn(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    itemsContent()
+                    items(
+                        items = items,
+                        key = { it.packageName }
+                    ) { item ->
+                        val index = items.indexOf(item)
+                        ApkItemCard(
+                            data = item,
+                            onDelete = { onDelete(index) }
+                        )
+                    }
                 }
             }
         }
@@ -338,36 +328,11 @@ private fun ApkManagementDialogContent(
 }
 
 @Composable
-private fun ApkItem(
+private fun ApkItemCard(
     data: ApkItemData,
     onDelete: () -> Unit
 ) {
-    ApkItemCard(
-        packageName = data.packageName,
-        title = data.displayName,
-        subtitle = data.packageName,
-        details = stringResource(
-            R.string.settings_system_apk_item_info,
-            data.version,
-            formatBytes(data.fileSize)
-        ),
-        onDelete = onDelete
-    )
-}
-
-@Composable
-private fun ApkItemCard(
-    packageName: String,
-    title: String,
-    subtitle: String,
-    details: String,
-    onDelete: () -> Unit
-) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-    ) {
+    SectionCard {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -377,31 +342,39 @@ private fun ApkItemCard(
         ) {
             // App Icon
             AppIcon(
-                packageName = packageName,
+                packageName = data.packageName,
                 contentDescription = null,
                 modifier = Modifier.size(48.dp)
             )
 
             // App Info
-            Column(modifier = Modifier.weight(1f)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
                 Text(
-                    text = title,
+                    text = data.displayName,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color = LocalDialogTextColor.current
                 )
                 Text(
-                    text = subtitle,
+                    text = data.packageName,
                     style = MaterialTheme.typography.bodySmall,
                     color = LocalDialogSecondaryTextColor.current
                 )
                 Text(
-                    text = details,
+                    text = stringResource(
+                        R.string.settings_system_apk_item_info,
+                        data.version,
+                        formatBytes(data.fileSize)
+                    ),
                     style = MaterialTheme.typography.bodySmall,
                     color = LocalDialogSecondaryTextColor.current
                 )
             }
 
+            // Delete button
             IconButton(onClick = onDelete) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,
@@ -450,7 +423,7 @@ private fun EmptyState(message: String) {
             .fillMaxWidth()
             .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Icon(
             imageVector = Icons.Outlined.FolderOff,
@@ -461,7 +434,8 @@ private fun EmptyState(message: String) {
         Text(
             text = message,
             style = MaterialTheme.typography.bodyLarge,
-            color = LocalDialogSecondaryTextColor.current
+            color = LocalDialogSecondaryTextColor.current,
+            textAlign = TextAlign.Center
         )
     }
 }

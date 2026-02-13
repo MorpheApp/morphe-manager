@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -14,6 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -276,16 +281,27 @@ private fun SelectionList(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Summary badge
-        InfoBadge(
-            text = stringResource(
-                R.string.settings_system_patch_selection_total_summary,
-                totalSelections,
+        // Summary box
+        InfoBox(
+            title = pluralStringResource(
+                R.plurals.patch_selection_packages_count,
+                selections.size,
                 selections.size
             ),
-            style = InfoBadgeStyle.Primary,
-            isCompact = true
-        )
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+            titleColor = MaterialTheme.colorScheme.primary,
+            icon = Icons.Outlined.Tune
+        ) {
+            Text(
+                text = pluralStringResource(
+                    R.plurals.patch_selection_total_patches,
+                    totalSelections,
+                    totalSelections
+                ),
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalDialogSecondaryTextColor.current
+            )
+        }
 
         // List of packages with selections
         LazyColumn(
@@ -462,6 +478,8 @@ private fun BundleSelectionItem(
 ) {
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
+    val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+    val contentDesc = "$displayName: $patchCountText"
 
     // Export launcher
     val exportLauncher = rememberLauncherForActivityResult(
@@ -496,33 +514,52 @@ private fun BundleSelectionItem(
     ) {
         MorpheSettingsDivider(fullWidth = true)
 
-        // Bundle info header
-        Row(
+        // Bundle info card
+        Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(onClick = onShowDetails)
-                .padding(vertical = 4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .semantics {
+                    contentDescription = contentDesc
+                    role = Role.Button
+                },
+            shape = RoundedCornerShape(12.dp),
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            onClick = onShowDetails
         ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = displayName,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = LocalDialogTextColor.current
+            Row(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Extension,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                    tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
-                Text(
-                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalDialogSecondaryTextColor.current
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = displayName,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
+                        maxLines = 1
+                    )
+                    Text(
+                        text = patchCountText,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        maxLines = 1
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Outlined.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
-
-            Icon(
-                imageVector = Icons.Outlined.ChevronRight,
-                contentDescription = stringResource(R.string.view),
-                tint = LocalDialogSecondaryTextColor.current
-            )
         }
 
         // Action buttons row

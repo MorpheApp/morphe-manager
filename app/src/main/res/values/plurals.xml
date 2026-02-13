@@ -36,4 +36,12 @@
         <item quantity="one">%1$d source installed</item>
         <item quantity="other">%1$d sources installed</item>
     </plurals>
+    <plurals name="patch_selection_packages_count">
+        <item quantity="one">%d package</item>
+        <item quantity="other">%d packages</item>
+    </plurals>
+    <plurals name="patch_selection_total_patches">
+        <item quantity="one">%d patch selected</item>
+        <item quantity="other">%d patches selected</item>
+    </plurals>
 </resources>

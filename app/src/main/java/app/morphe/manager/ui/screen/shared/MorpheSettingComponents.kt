@@ -503,6 +503,7 @@ fun InfoBox(
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
     titleColor: Color = MaterialTheme.colorScheme.onSurface,
+    icon: ImageVector? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Surface(
@@ -510,18 +511,35 @@ fun InfoBox(
         shape = RoundedCornerShape(12.dp),
         color = containerColor
     ) {
-        Column(
+        Row(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = titleColor
-            )
+            // Main content column
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = titleColor
+                )
 
-            content()
+                content()
+            }
+
+            // Trailing icon
+            icon?.let {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                    modifier = Modifier.size(32.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
 }
