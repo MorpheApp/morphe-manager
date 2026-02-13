@@ -208,19 +208,14 @@ private fun PatchSelectionManagementDialogContent(
         title = stringResource(R.string.settings_system_patch_selections_title),
         titleTrailingContent = if (selections.isNotEmpty()) {
             {
-                TextButton(onClick = onShowResetAllConfirmation) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Icon(
-                            imageVector = Icons.Outlined.Refresh,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.reset_all),
-                            color = LocalDialogTextColor.current
-                        )
-                    }
-                }}
+                IconButton(onClick = onShowResetAllConfirmation) {
+                    Icon(
+                        imageVector = Icons.Outlined.Restore,
+                        contentDescription = stringResource(R.string.reset),
+                        tint = LocalDialogTextColor.current
+                    )
+                }
+            }
         } else {
             null
         },

@@ -102,7 +102,7 @@ fun ThemeColorDialog(
             }
         },
         footer = {
-            MorpheDialogOutlinedButton(
+            MorpheDialogButton(
                 text = stringResource(R.string.save),
                 onClick = onDismiss,
                 modifier = Modifier.fillMaxWidth()
