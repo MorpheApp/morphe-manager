@@ -747,6 +747,10 @@ class HomeViewModel(
         // Create bundles map for validation
         val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
 
+        // Get the original package name to use for ALL database operations
+        // This ensures consistency whether we're patching from original or patched APK
+        val originalPackageName = appDataResolver.getOriginalPackageName(selectedApp.packageName)
+
         // Helper function to apply GmsCore filter if needed
         fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
             if (usingMountInstall) this.filterGmsCore() else this
@@ -755,35 +759,16 @@ class HomeViewModel(
             // Expert Mode: Load saved selections and options only for current bundles
             val currentBundleUids = allBundles.map { it.uid }.toSet()
 
+            // Load selections
             val savedSelections = withContext(Dispatchers.IO) {
-                // Try to load from original package name first
-                var selections = patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
-
-                // If no selections found, try patched package name
-                if (selections.isEmpty()) {
-                    // Get all installed apps to find patched package name
-                    val installedApps = installedAppRepository.getAll().first()
-                    val patchedPackage = installedApps
-                        .find { it.originalPackageName == selectedApp.packageName }
-                        ?.currentPackageName
-
-                    if (patchedPackage != null && patchedPackage != selectedApp.packageName) {
-                        selections = patchSelectionRepository.getAllSelectionsForPackage(patchedPackage)
-                    }
-                }
-
-                // Filter to only include selections for current bundles
-                selections.filterKeys { it in currentBundleUids }
+                patchSelectionRepository.getAllSelectionsForPackage(originalPackageName)
+                    .filterKeys { it in currentBundleUids }
             }
 
-            // Load saved options only for current bundles
+            // Load options
             val savedOptions = withContext(Dispatchers.IO) {
-                val allOptions = optionsRepository.getAllOptionsForPackage(
-                    selectedApp.packageName,
-                    bundlesMap
-                )
-                // Filter to only include options for current bundles
-                allOptions.filterKeys { it in currentBundleUids }
+                optionsRepository.getAllOptionsForPackage(originalPackageName, bundlesMap)
+                    .filterKeys { it in currentBundleUids }
             }
 
             // Use saved selections or create new ones
@@ -809,7 +794,7 @@ class HomeViewModel(
                     // Save validated selection
                     withContext(Dispatchers.IO) {
                         patchSelectionRepository.updateSelection(
-                            packageName = selectedApp.packageName,
+                            packageName = originalPackageName,
                             selection = validatedPatches
                         )
                     }
@@ -827,7 +812,7 @@ class HomeViewModel(
             // Save validated options if anything changed
             if (validatedOptions != savedOptions) {
                 withContext(Dispatchers.IO) {
-                    optionsRepository.saveOptions(selectedApp.packageName, validatedOptions)
+                    optionsRepository.saveOptions(originalPackageName, validatedOptions)
                 }
             }
 
@@ -889,6 +874,16 @@ class HomeViewModel(
 
                 proceedWithPatching(selectedApp, patches, emptyMap())
             }
+        }
+    }
+
+    /**
+     * Save options to repository
+     */
+    fun saveOptions(packageName: String, options: Options) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
+            optionsRepository.saveOptions(originalPackageName, options)
         }
     }
 
@@ -1074,15 +1069,6 @@ class HomeViewModel(
         }
         showDownloadInstructionsDialog = false
         showFilePickerPromptDialog = false
-    }
-
-    /**
-     * Save options to repository
-     */
-    fun saveOptions(packageName: String, options: Options) {
-        viewModelScope.launch(Dispatchers.IO) {
-            optionsRepository.saveOptions(packageName, options)
-        }
     }
 
     /**

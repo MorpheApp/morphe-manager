@@ -280,7 +280,7 @@ private fun ApkManagementDialogContent(
         title = title,
         footer = {
             MorpheDialogButton(
-                text = stringResource(android.R.string.ok),
+                text = stringResource(R.string.close),
                 onClick = onDismissRequest,
                 modifier = Modifier.fillMaxWidth()
             )

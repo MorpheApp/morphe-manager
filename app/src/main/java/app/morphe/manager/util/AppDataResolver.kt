@@ -51,6 +51,25 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
+     * Get the original package name for a given package name.
+     * If the package is patched (currentPackageName != originalPackageName), returns the original.
+     * Otherwise, returns the same package name.
+     *
+     * This ensures consistency when saving/loading patch selections and options.
+     *
+     * @param packageName The package name to resolve (can be current/patched or original)
+     * @return The original package name
+     */
+    suspend fun getOriginalPackageName(packageName: String): String {
+        return withContext(Dispatchers.IO) {
+            val installedApps = installedAppRepository.getAll().first()
+            installedApps.find { it.currentPackageName == packageName }
+                ?.originalPackageName
+                ?: packageName
+        }
+    }
+
+    /**
      * Filter package names to return only patched packages
      * @param packageNames Collection of package names to filter
      * @return Set of package names that are patched (currentPackageName != originalPackageName)

@@ -12,9 +12,9 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
+import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.tag
 import app.morphe.manager.util.toast
 import app.morphe.manager.util.uiSafe
@@ -22,7 +22,6 @@ import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -60,7 +59,7 @@ data class PatchBundleDataExportFile(
     // Map<PackageName, List<PatchName>>
     val selections: Map<String, List<String>>,
     // Map<PackageName, Map<PatchName, Map<OptionKey, OptionValue>>>
-    val options: Map<String, Map<String, Map<String, String>>>
+    val options: Map<String, Map<String, Map<String, String>>>?
 )
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -70,7 +69,7 @@ class ImportExportViewModel(
     private val preferencesManager: PreferencesManager,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val patchOptionsRepository: PatchOptionsRepository,
-    private val installedAppRepository: InstalledAppRepository
+    private val appDataResolver: AppDataResolver
 ) : ViewModel() {
     private val contentResolver = app.contentResolver
 
@@ -161,6 +160,7 @@ class ImportExportViewModel(
 
     /**
      * Export patch selections and options for a specific package+bundle combination
+     * MODIFIED: Always exports using original package name via AppDataResolver
      */
     fun exportPackageBundleData(
         packageName: String,
@@ -169,23 +169,29 @@ class ImportExportViewModel(
         target: Uri
     ) = viewModelScope.launch {
         uiSafe(app, R.string.settings_system_export_bundle_data_fail, "Failed to export bundle data") {
-            val (selections, optionsData) = withContext(Dispatchers.IO) {
-                // Export only this specific package for this bundle
-                val patchList = patchSelectionRepository.exportForPackageAndBundle(packageName, bundleUid)
+            // Get original package name for consistent export
+            val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
 
-                // Get raw serialized options for this package+bundle
+            val (selections, optionsData) = withContext(Dispatchers.IO) {
+                // Export using original package name
+                val patchList = patchSelectionRepository.exportForPackageAndBundle(
+                    originalPackageName,
+                    bundleUid
+                )
+
+                // Get raw serialized options using original package name
                 val rawOptions = patchOptionsRepository.exportOptionsForBundle(
-                    packageName = packageName,
+                    packageName = originalPackageName,
                     bundleUid = bundleUid
                 )
 
                 val optionsData = if (rawOptions.isNotEmpty()) {
-                    mapOf(packageName to rawOptions)
+                    mapOf(originalPackageName to rawOptions)
                 } else {
                     emptyMap()
                 }
 
-                mapOf(packageName to patchList) to optionsData
+                mapOf(originalPackageName to patchList) to optionsData
             }
 
             val exportFile = PatchBundleDataExportFile(
@@ -208,7 +214,7 @@ class ImportExportViewModel(
 
     /**
      * Import patch selections and options for a specific package into a target bundle
-     * Imports data for BOTH original and patched package names to ensure consistency
+     * Always imports using original package names
      */
     fun importPackageBundleData(
         targetBundleUid: Int,
@@ -223,57 +229,30 @@ class ImportExportViewModel(
             }
 
             withContext(Dispatchers.IO) {
-                // Get all installed apps to find original<->patched relationships
-                val allApps = installedAppRepository.getAll().first()
+                // Import each package from the file
+                exportFile.selections.forEach { (exportedPackageName, patchList) ->
+                    // Normalize to original package name
+                    val originalPackageName = appDataResolver.getOriginalPackageName(exportedPackageName)
 
-                // Import each package from the file (usually just one)
-                exportFile.selections.forEach { (packageName, patchList) ->
-                    // Find original package name if this is a patched package
-                    val installedApp = allApps.find {
-                        it.currentPackageName == packageName || it.originalPackageName == packageName
-                    }
-
-                    val packagesToImport = mutableSetOf(packageName)
-
-                    if (installedApp != null) {
-                        // Add both original and patched package names
-                        packagesToImport.add(installedApp.originalPackageName)
-                        packagesToImport.add(installedApp.currentPackageName)
-                    }
-
-                    // Import selections for all package variants
-                    packagesToImport.forEach { pkgName ->
-                        patchSelectionRepository.importForPackageAndBundle(
-                            packageName = pkgName,
-                            bundleUid = targetBundleUid,
-                            patches = patchList
-                        )
-                    }
+                    // Import selection using original package name
+                    patchSelectionRepository.importForPackageAndBundle(
+                        packageName = originalPackageName,
+                        bundleUid = targetBundleUid,
+                        patches = patchList
+                    )
                 }
 
                 // Import options for each package
-                exportFile.options.forEach { (packageName, packageOptions) ->
-                    // Find original package name if this is a patched package
-                    val installedApp = allApps.find {
-                        it.currentPackageName == packageName || it.originalPackageName == packageName
-                    }
+                exportFile.options?.forEach { (exportedPackageName, packageOptions) ->
+                    // Normalize to original package name
+                    val originalPackageName = appDataResolver.getOriginalPackageName(exportedPackageName)
 
-                    val packagesToImport = mutableSetOf(packageName)
-
-                    if (installedApp != null) {
-                        // Add both original and patched package names
-                        packagesToImport.add(installedApp.originalPackageName)
-                        packagesToImport.add(installedApp.currentPackageName)
-                    }
-
-                    // Import options for all package variants
-                    packagesToImport.forEach { pkgName ->
-                        patchOptionsRepository.importOptionsForBundle(
-                            packageName = pkgName,
-                            bundleUid = targetBundleUid,
-                            options = packageOptions
-                        )
-                    }
+                    // Import options using original package name
+                    patchOptionsRepository.importOptionsForBundle(
+                        packageName = originalPackageName,
+                        bundleUid = targetBundleUid,
+                        options = packageOptions
+                    )
                 }
             }
 

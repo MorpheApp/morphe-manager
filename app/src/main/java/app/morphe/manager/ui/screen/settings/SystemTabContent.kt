@@ -89,6 +89,7 @@ fun SystemTabContent(
 
     val selectionRepository: PatchSelectionRepository = koinInject()
     val optionsRepository: PatchOptionsRepository = koinInject()
+    val appDataResolver: AppDataResolver = koinInject()
 
     // Patch selection management dialog
     if (showPatchSelectionDialog) {
@@ -102,14 +103,16 @@ fun SystemTabContent(
             },
             onResetPackage = { packageName ->
                 scope.launch {
-                    selectionRepository.resetSelectionForPackage(packageName)
-                    optionsRepository.resetOptionsForPackage(packageName)
+                    val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
+                    selectionRepository.resetSelectionForPackage(originalPackageName)
+                    optionsRepository.resetOptionsForPackage(originalPackageName)
                 }
             },
             onResetPackageBundle = { packageName, bundleUid ->
                 scope.launch {
-                    selectionRepository.resetSelectionForPackageAndBundle(packageName, bundleUid)
-                    optionsRepository.resetOptionsForPackageAndBundle(packageName, bundleUid)
+                    val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
+                    selectionRepository.resetSelectionForPackageAndBundle(originalPackageName, bundleUid)
+                    optionsRepository.resetOptionsForPackageAndBundle(originalPackageName, bundleUid)
                 }
             },
             importExportViewModel = importExportViewModel
