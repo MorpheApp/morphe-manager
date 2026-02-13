@@ -51,58 +51,46 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
-     * Normalize multiple package names
-     * @return Map of packageName to originalPackageName
+     * Filter package names to return only patched packages
+     * @param packageNames Collection of package names to filter
+     * @return Set of package names that are patched (currentPackageName != originalPackageName)
      */
-    suspend fun normalizePackageNames(packageNames: Collection<String>): Map<String, String> {
+    suspend fun filterPatchedPackageNames(packageNames: Collection<String>): Set<String> {
         val allApps = installedAppRepository.getAll().first()
-        val patchedToOriginal = allApps.associate {
-            it.currentPackageName to it.originalPackageName
-        }
 
-        return packageNames.associateWith { packageName ->
-            patchedToOriginal[packageName] ?: packageName
-        }
+        // Build set of patched package names
+        val patchedPackages = allApps
+            .filter { it.currentPackageName != it.originalPackageName }
+            .map { it.currentPackageName }
+            .toSet()
+
+        // Return only packages that are patched
+        return packageNames.filter { it in patchedPackages }.toSet()
     }
 
     /**
-     * Group selections by normalized (patched) package names
-     * This prevents showing duplicate entries for original + patched variants
+     * Filter selections to show only patched packages
+     * Original (non-patched) packages are excluded from the results
      *
-     * Returns both the grouped data and a mapping of which actual package to use for operations
+     * This is used for patch selection management where only patched packages
+     * are relevant for repatching operations
      *
      * @param selections Map<PackageName, Map<BundleUid, PatchCount>>
-     * @return Pair of:
-     *   - Map<CurrentPackageName, Map<BundleUid, PatchCount>> - grouped data for display
-     *   - Map<CurrentPackageName, ActualPackageName> - which package has the actual data
+     * @return Map<PackageName, Map<BundleUid, PatchCount>> with only patched packages
      */
-    suspend fun groupSelectionsWithActualPackages(
+    suspend fun filterPatchedPackagesOnly(
         selections: Map<String, Map<Int, Int>>
-    ): Pair<Map<String, Map<Int, Int>>, Map<String, String>> {
+    ): Map<String, Map<Int, Int>> {
         val allApps = installedAppRepository.getAll().first()
-        val originalToPatched = allApps.associate {
-            it.originalPackageName to it.currentPackageName
-        }
 
-        // Group by original package name and track which package has data
-        val grouped = mutableMapOf<String, MutableMap<Int, Int>>()
-        val actualPackages = mutableMapOf<String, String>()
+        // Build set of patched package names (currentPackageName != originalPackageName)
+        val patchedPackages = allApps
+            .filter { it.currentPackageName != it.originalPackageName }
+            .map { it.currentPackageName }
+            .toSet()
 
-        selections.forEach { (packageName, bundleMap) ->
-            // Get patched package name
-            val patchedPackage = originalToPatched[packageName] ?: packageName
-
-            // Check if this is a patched package
-            val isPatchedPackage = originalToPatched.containsKey(packageName)
-
-            // Priority: patched package data overwrites original package data
-            if (isPatchedPackage || !actualPackages.containsKey(patchedPackage)) {
-                actualPackages[patchedPackage] = packageName
-                grouped[patchedPackage] = bundleMap.toMutableMap()
-            }
-        }
-
-        return grouped to actualPackages
+        // Filter selections to include only patched packages
+        return selections.filterKeys { packageName -> packageName in patchedPackages }
     }
 
     /**

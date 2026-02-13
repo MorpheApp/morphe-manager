@@ -318,7 +318,7 @@ fun SystemTabContent(
 
                 MorpheSettingsDivider()
 
-                // Patch Selections management with normalized count
+                // Patch Selections management
                 val appDataResolver: AppDataResolver = koinInject()
 
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
@@ -326,14 +326,13 @@ fun SystemTabContent(
                 val packagesWithOptions by optionsRepository.getPackagesWithSavedOptions()
                     .collectAsStateWithLifecycle(emptySet())
 
-                // Calculate normalized count (group by original package names)
-                var normalizedSelectionsCount by remember { mutableIntStateOf(0) }
+                // Filter to show only patched packages
+                var patchedPackagesCount by remember { mutableIntStateOf(0) }
 
                 LaunchedEffect(packagesWithSelection, packagesWithOptions) {
                     val allPackages = packagesWithSelection + packagesWithOptions
-                    // Normalize package names to get unique original packages
-                    val normalizedPackages = appDataResolver.normalizePackageNames(allPackages)
-                    normalizedSelectionsCount = normalizedPackages.values.toSet().size
+                    val patchedPackages = appDataResolver.filterPatchedPackageNames(allPackages)
+                    patchedPackagesCount = patchedPackages.size
                 }
 
                 RichSettingsItem(
@@ -348,9 +347,9 @@ fun SystemTabContent(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            if (normalizedSelectionsCount > 0) {
+                            if (patchedPackagesCount > 0) {
                                 InfoBadge(
-                                    text = normalizedSelectionsCount.toString(),
+                                    text = patchedPackagesCount.toString(),
                                     style = InfoBadgeStyle.Default,
                                     isCompact = true
                                 )

@@ -27,6 +27,7 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.*
@@ -45,6 +46,7 @@ fun PatchSelectionManagementDialog(
     onResetPackageBundle: (String, Int) -> Unit,
     importExportViewModel: ImportExportViewModel = koinInject()
 ) {
+    val scope = rememberCoroutineScope()
     var showResetAllConfirmation by remember { mutableStateOf(false) }
     var resetTarget by remember { mutableStateOf<ResetTarget?>(null) }
     var showPatchDetailsTarget by remember { mutableStateOf<PatchDetailsTarget?>(null) }
@@ -52,7 +54,6 @@ fun PatchSelectionManagementDialog(
     val appDataResolver: AppDataResolver = koinInject()
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val selectionRepository: PatchSelectionRepository = koinInject()
-    val optionsRepository: PatchOptionsRepository = koinInject()
 
     // Get bundle names for display
     val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
@@ -60,30 +61,14 @@ fun PatchSelectionManagementDialog(
         bundles.associate { it.uid to it.name }
     }
 
-    // Load selections and options data internally with refresh capability
+    // Load selections data internally with refresh capability
     var selections by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
-    var options by remember { mutableStateOf<Map<String, Map<Int, Int>>>(emptyMap()) }
     var refreshTrigger by remember { mutableIntStateOf(0) }
 
     // Load data from repository
     LaunchedEffect(refreshTrigger) {
         withContext(Dispatchers.IO) {
             selections = selectionRepository.getSelectionsSummary()
-            options = optionsRepository.getOptionsSummary()
-        }
-    }
-
-    // Listen for reset events from repositories and trigger refresh
-    LaunchedEffect(Unit) {
-        launch {
-            selectionRepository.resetEventsFlow.collect {
-                refreshTrigger++
-            }
-        }
-        launch {
-            optionsRepository.resetEventsFlow.collect {
-                refreshTrigger++
-            }
         }
     }
 
@@ -92,24 +77,20 @@ fun PatchSelectionManagementDialog(
         refreshTrigger++
     }
 
-    // Normalize selections to group by original package names
-    var normalizedSelections by remember(selections) { mutableStateOf(selections) }
-    var actualPackages by remember(selections) { mutableStateOf<Map<String, String>>(emptyMap()) }
+    // Filter to show only patched packages
+    var filteredSelections by remember(selections) { mutableStateOf(selections) }
 
     LaunchedEffect(selections) {
-        val (grouped, actual) = appDataResolver.groupSelectionsWithActualPackages(selections)
-        normalizedSelections = grouped
-        actualPackages = actual
+        filteredSelections = appDataResolver.filterPatchedPackagesOnly(selections)
     }
 
-    // Calculate total selections from normalized data
-    val totalSelections = remember(normalizedSelections) {
-        normalizedSelections.values.sumOf { bundleMap -> bundleMap.values.sum() }
+    // Calculate total selections from filtered data
+    val totalSelections = remember(filteredSelections) {
+        filteredSelections.values.sumOf { bundleMap -> bundleMap.values.sum() }
     }
 
     PatchSelectionManagementDialogContent(
-        selections = normalizedSelections,
-        actualPackages = actualPackages,
+        selections = filteredSelections,
         totalSelections = totalSelections,
         bundleNames = bundleNames,
         onDismiss = onDismiss,
@@ -124,15 +105,19 @@ fun PatchSelectionManagementDialog(
     // Reset all confirmation dialog
     if (showResetAllConfirmation) {
         val confirmAction: () -> Unit = {
-            onResetAll()
-            showResetAllConfirmation = false
-            onDismiss()
+            scope.launch {
+                onResetAll()
+                delay(50) // Small delay to ensure DB operation completes
+                onRefresh()
+                showResetAllConfirmation = false
+                onDismiss()
+            }
         }
         val dismissAction: () -> Unit = { showResetAllConfirmation = false }
 
         ConfirmResetAllDialog(
             totalSelections = totalSelections,
-            packageCount = normalizedSelections.size,
+            packageCount = filteredSelections.size,
             onConfirm = confirmAction,
             onDismiss = dismissAction
         )
@@ -142,12 +127,16 @@ fun PatchSelectionManagementDialog(
     resetTarget?.let { target ->
         when (target) {
             is ResetTarget.Package -> {
-                val bundleMap = normalizedSelections[target.packageName] ?: emptyMap()
+                val bundleMap = filteredSelections[target.packageName] ?: emptyMap()
                 val patchCount = bundleMap.values.sum()
 
                 val confirmAction: () -> Unit = {
-                    onResetPackage(target.packageName)
-                    resetTarget = null
+                    scope.launch {
+                        onResetPackage(target.packageName)
+                        delay(50) // Small delay to ensure DB operation completes
+                        onRefresh()
+                        resetTarget = null
+                    }
                 }
                 val dismissAction: () -> Unit = { resetTarget = null }
 
@@ -161,11 +150,15 @@ fun PatchSelectionManagementDialog(
                 )
             }
             is ResetTarget.PackageBundle -> {
-                val patchCount = normalizedSelections[target.packageName]?.get(target.bundleUid) ?: 0
+                val patchCount = filteredSelections[target.packageName]?.get(target.bundleUid) ?: 0
 
                 val confirmAction: () -> Unit = {
-                    onResetPackageBundle(target.packageName, target.bundleUid)
-                    resetTarget = null
+                    scope.launch {
+                        onResetPackageBundle(target.packageName, target.bundleUid)
+                        delay(50) // Small delay to ensure DB operation completes
+                        onRefresh()
+                        resetTarget = null
+                    }
                 }
                 val dismissAction: () -> Unit = { resetTarget = null }
 
@@ -199,7 +192,6 @@ fun PatchSelectionManagementDialog(
 @Composable
 private fun PatchSelectionManagementDialogContent(
     selections: Map<String, Map<Int, Int>>,
-    actualPackages: Map<String, String>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
     onDismiss: () -> Unit,
@@ -258,7 +250,6 @@ private fun PatchSelectionManagementDialogContent(
         } else {
             SelectionList(
                 selections = selections,
-                actualPackages = actualPackages,
                 totalSelections = totalSelections,
                 bundleNames = bundleNames,
                 appDataResolver = appDataResolver,
@@ -277,7 +268,6 @@ private fun PatchSelectionManagementDialogContent(
 @Composable
 private fun SelectionList(
     selections: Map<String, Map<Int, Int>>,
-    actualPackages: Map<String, String>,
     totalSelections: Int,
     bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
@@ -309,20 +299,16 @@ private fun SelectionList(
             items(
                 items = selections.entries.toList(),
                 key = { it.key }
-            ) { (displayPackageName, bundleMap) ->
-                // Get the actual package name that has the data
-                val actualPackageName = actualPackages[displayPackageName] ?: displayPackageName
-
+            ) { (packageName, bundleMap) ->
                 val resetPackageAction: () -> Unit = {
-                    onSetResetTarget(ResetTarget.Package(actualPackageName))
+                    onSetResetTarget(ResetTarget.Package(packageName))
                 }
                 val resetBundleAction: (Int) -> Unit = { bundleUid ->
-                    onSetResetTarget(ResetTarget.PackageBundle(actualPackageName, bundleUid))
+                    onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
                 }
 
                 PackageSelectionItem(
-                    packageName = actualPackageName,
-                    displayPackageName = displayPackageName,
+                    packageName = packageName,
                     bundleMap = bundleMap,
                     bundleNames = bundleNames,
                     appDataResolver = appDataResolver,
@@ -343,7 +329,6 @@ private fun SelectionList(
 @Composable
 private fun PackageSelectionItem(
     packageName: String,
-    displayPackageName: String,
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
     appDataResolver: AppDataResolver,
@@ -354,12 +339,12 @@ private fun PackageSelectionItem(
     onRefresh: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var displayName by remember { mutableStateOf(displayPackageName) }
+    var displayName by remember { mutableStateOf(packageName) }
     var appDataSource by remember { mutableStateOf(AppDataSource.INSTALLED) }
 
-    // Resolve app name and source using displayPackageName for UI
-    LaunchedEffect(displayPackageName) {
-        val appData = appDataResolver.resolveAppData(displayPackageName)
+    // Resolve app name and source
+    LaunchedEffect(packageName) {
+        val appData = appDataResolver.resolveAppData(packageName)
         displayName = appData.displayName
         appDataSource = appData.source
     }
@@ -379,7 +364,7 @@ private fun PackageSelectionItem(
             ) {
                 // App icon
                 AppIcon(
-                    packageName = displayPackageName,
+                    packageName = packageName,
                     contentDescription = displayName,
                     modifier = Modifier.size(48.dp),
                     preferredSource = appDataSource
@@ -797,12 +782,15 @@ private fun PatchDetailsDialog(
     LaunchedEffect(packageName, bundleUid) {
         isLoading = true
         withContext(Dispatchers.IO) {
+            // Load selections for this package (always patched package)
             patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
+
             // Get raw serialized options from repository
             val rawOptions = optionsRepository.exportOptionsForBundle(
                 packageName = packageName,
                 bundleUid = bundleUid
             )
+
             // Convert JSON strings to display values
             optionsMap = rawOptions.mapValues { (_, patchOptions) ->
                 patchOptions.mapValues { (_, jsonString) ->
