@@ -28,6 +28,7 @@ import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.JSON_MIMETYPE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.*
@@ -582,6 +583,26 @@ private fun ConfirmResetAllDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val optionsRepository: PatchOptionsRepository = koinInject()
+    val appDataResolver: AppDataResolver = koinInject()
+    var totalOptions by remember { mutableIntStateOf(0) }
+
+    // Load total options count for patched packages only
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            // Get all packages with options
+            val packagesWithOptions = optionsRepository.getPackagesWithSavedOptions().first()
+
+            // Filter to only patched packages
+            val patchedPackages = appDataResolver.filterPatchedPackageNames(packagesWithOptions)
+
+            // Count options for patched packages only
+            totalOptions = patchedPackages.sumOf { packageName ->
+                optionsRepository.getOptionsCountForPackage(packageName)
+            }
+        }
+    }
+
     MorpheDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.settings_system_patch_selection_reset_all_confirm_title),
@@ -615,6 +636,17 @@ private fun ConfirmResetAllDialog(
                         packageCount
                     )
                 )
+
+                if (totalOptions > 0) {
+                    DeleteListItem(
+                        icon = Icons.Outlined.Tune,
+                        text = pluralStringResource(
+                            R.plurals.patch_options_count,
+                            totalOptions,
+                            totalOptions
+                        )
+                    )
+                }
             }
         }
     }
@@ -632,11 +664,18 @@ private fun ConfirmResetPackageDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val optionsRepository: PatchOptionsRepository = koinInject()
     var displayName by remember { mutableStateOf(packageName) }
+    var optionsCount by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(packageName) {
         val appData = appDataResolver.resolveAppData(packageName)
         displayName = appData.displayName
+
+        // Load options count for this package
+        withContext(Dispatchers.IO) {
+            optionsCount = optionsRepository.getOptionsCountForPackage(packageName)
+        }
     }
 
     MorpheDialog(
@@ -675,6 +714,17 @@ private fun ConfirmResetPackageDialog(
                         bundleCount
                     )
                 )
+
+                if (optionsCount > 0) {
+                    DeleteListItem(
+                        icon = Icons.Outlined.Tune,
+                        text = pluralStringResource(
+                            R.plurals.patch_options_count,
+                            optionsCount,
+                            optionsCount
+                        )
+                    )
+                }
             }
         }
     }
@@ -692,11 +742,18 @@ private fun ConfirmResetPackageBundleDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val optionsRepository: PatchOptionsRepository = koinInject()
     var displayName by remember { mutableStateOf(packageName) }
+    var optionsCount by remember { mutableIntStateOf(0) }
 
-    LaunchedEffect(packageName) {
+    LaunchedEffect(packageName, bundleUid) {
         val appData = appDataResolver.resolveAppData(packageName)
         displayName = appData.displayName
+
+        // Load options count for this package+bundle
+        withContext(Dispatchers.IO) {
+            optionsCount = optionsRepository.getOptionsCountForBundle(packageName, bundleUid)
+        }
     }
 
     MorpheDialog(
@@ -730,8 +787,19 @@ private fun ConfirmResetPackageBundleDialog(
             ) {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount),
+                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
                 )
+
+                if (optionsCount > 0) {
+                    DeleteListItem(
+                        icon = Icons.Outlined.Tune,
+                        text = pluralStringResource(
+                            R.plurals.patch_options_count,
+                            optionsCount,
+                            optionsCount
+                        )
+                    )
+                }
             }
         }
     }

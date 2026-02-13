@@ -4,6 +4,10 @@
         <item quantity="one">%d patch</item>
         <item quantity="other">%d patches</item>
     </plurals>
+    <plurals name="patch_options_count">
+        <item quantity="one">%d patch option</item>
+        <item quantity="other">%d patch options</item>
+    </plurals>
     <plurals name="patches_executed">
         <item quantity="one">Execute %d patch</item>
         <item quantity="other">Execute %d patches</item>

@@ -234,4 +234,28 @@ class PatchOptionsRepository(db: AppDatabase) {
         data class Bundle(val bundleUid: Int) : ResetEvent
         data class PackageBundle(val packageName: String, val bundleUid: Int) : ResetEvent
     }
+
+    /**
+     * Get count of options for a package across all bundles
+     * Used for displaying counts in UI without deserialization
+     */
+    suspend fun getOptionsCountForPackage(packageName: String): Int {
+        return dao.getOptions(packageName).values.sumOf { optionsList -> optionsList.size }
+    }
+
+    /**
+     * Get count of options for a specific package+bundle
+     * Used for displaying counts in UI without deserialization
+     */
+    suspend fun getOptionsCountForBundle(packageName: String, bundleUid: Int): Int {
+        return dao.getOptionsForBundle(packageName, bundleUid).size
+    }
+
+    /**
+     * Get total count of all options across all packages
+     * Used for displaying counts in UI without deserialization
+     */
+    suspend fun getTotalOptionsCount(): Int {
+        return dao.getOptionsSummaryRaw().sumOf { it.optionCount }
+    }
 }
