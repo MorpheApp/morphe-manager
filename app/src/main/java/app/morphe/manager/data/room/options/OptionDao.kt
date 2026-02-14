@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.MapColumn
 import androidx.room.Query
 import androidx.room.Transaction
+import app.morphe.manager.data.room.AppDatabase
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -67,7 +68,7 @@ abstract class OptionDao {
         // Get or create option group for this package+bundle
         val groupId = getGroupId(bundleUid, packageName) ?: run {
             val newGroup = OptionGroup(
-                uid = app.morphe.manager.data.room.AppDatabase.generateUid(),
+                uid = AppDatabase.generateUid(),
                 patchBundle = bundleUid,
                 packageName = packageName
             )

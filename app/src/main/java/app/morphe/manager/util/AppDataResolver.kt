@@ -51,51 +51,6 @@ class AppDataResolver(
     private val packageManager: PackageManager = context.packageManager
 
     /**
-     * Get all installed apps from repository
-     * Helper method for internal use
-     */
-    suspend fun getInstalledApps() = withContext(Dispatchers.IO) {
-        installedAppRepository.getAll().first()
-    }
-
-    /**
-     * Get the original package name for a given package name.
-     * If the package is patched (currentPackageName != originalPackageName), returns the original.
-     * Otherwise, returns the same package name.
-     *
-     * This ensures consistency when saving/loading patch selections and options.
-     *
-     * @param packageName The package name to resolve (can be current/patched or original)
-     * @return The original package name
-     */
-    suspend fun getOriginalPackageName(packageName: String): String {
-        return withContext(Dispatchers.IO) {
-            val installedApps = installedAppRepository.getAll().first()
-            installedApps.find { it.currentPackageName == packageName }
-                ?.originalPackageName
-                ?: packageName
-        }
-    }
-
-    /**
-     * Filter package names to return only patched packages
-     * @param packageNames Collection of package names to filter
-     * @return Set of package names that are patched (currentPackageName != originalPackageName)
-     */
-    suspend fun filterPatchedPackageNames(packageNames: Collection<String>): Set<String> {
-        val allApps = installedAppRepository.getAll().first()
-
-        // Build set of patched package names
-        val patchedPackages = allApps
-            .filter { it.currentPackageName != it.originalPackageName }
-            .map { it.currentPackageName }
-            .toSet()
-
-        // Return only packages that are patched
-        return packageNames.filter { it in patchedPackages }.toSet()
-    }
-
-    /**
      * Resolve app data from any available source
      * @param packageName Package name to resolve
      * @param preferredSource Preferred data source (will still fallback if unavailable)

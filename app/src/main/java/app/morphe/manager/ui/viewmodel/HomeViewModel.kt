@@ -747,10 +747,6 @@ class HomeViewModel(
         // Create bundles map for validation
         val bundlesMap = allBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
 
-        // Get the original package name to use for ALL database operations
-        // This ensures consistency whether we're patching from original or patched APK
-        val originalPackageName = appDataResolver.getOriginalPackageName(selectedApp.packageName)
-
         // Helper function to apply GmsCore filter if needed
         fun PatchSelection.applyGmsCoreFilter(): PatchSelection =
             if (usingMountInstall) this.filterGmsCore() else this
@@ -761,13 +757,13 @@ class HomeViewModel(
 
             // Load selections
             val savedSelections = withContext(Dispatchers.IO) {
-                patchSelectionRepository.getAllSelectionsForPackage(originalPackageName)
+                patchSelectionRepository.getAllSelectionsForPackage(selectedApp.packageName)
                     .filterKeys { it in currentBundleUids }
             }
 
             // Load options
             val savedOptions = withContext(Dispatchers.IO) {
-                optionsRepository.getAllOptionsForPackage(originalPackageName, bundlesMap)
+                optionsRepository.getAllOptionsForPackage(selectedApp.packageName, bundlesMap)
                     .filterKeys { it in currentBundleUids }
             }
 
@@ -794,7 +790,7 @@ class HomeViewModel(
                     // Save validated selection
                     withContext(Dispatchers.IO) {
                         patchSelectionRepository.updateSelection(
-                            packageName = originalPackageName,
+                            packageName = selectedApp.packageName,
                             selection = validatedPatches
                         )
                     }
@@ -812,7 +808,7 @@ class HomeViewModel(
             // Save validated options if anything changed
             if (validatedOptions != savedOptions) {
                 withContext(Dispatchers.IO) {
-                    optionsRepository.saveOptions(originalPackageName, validatedOptions)
+                    optionsRepository.saveOptions(selectedApp.packageName, validatedOptions)
                 }
             }
 
@@ -882,8 +878,7 @@ class HomeViewModel(
      */
     fun saveOptions(packageName: String, options: Options) {
         viewModelScope.launch(Dispatchers.IO) {
-            val originalPackageName = appDataResolver.getOriginalPackageName(packageName)
-            optionsRepository.saveOptions(originalPackageName, options)
+            optionsRepository.saveOptions(packageName , options)
         }
     }
 

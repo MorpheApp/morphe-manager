@@ -8,15 +8,12 @@ import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 class PatchOptionsRepository(db: AppDatabase) {
     private val dao = db.optionDao()
     private val _resetEventsFlow = MutableSharedFlow<ResetEvent>(extraBufferCapacity = 4)
-    val resetEventsFlow: SharedFlow<ResetEvent> = _resetEventsFlow.asSharedFlow()
 
     private suspend fun getOrCreateGroup(bundleUid: Int, packageName: String) =
         dao.getGroupId(bundleUid, packageName) ?: OptionGroup(

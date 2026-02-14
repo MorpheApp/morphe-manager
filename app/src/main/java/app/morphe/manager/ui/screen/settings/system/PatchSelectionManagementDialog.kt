@@ -63,48 +63,15 @@ fun PatchSelectionManagementDialog(
 
     // Get bundle names for display
     val bundles by patchBundleRepository.sources.collectAsStateWithLifecycle(emptyList())
-    val bundleNames = remember(bundles) {
-        bundles.associate { it.uid to it.name }
-    }
+    val bundleNames = remember(bundles) { bundles.associate { it.uid to it.name } }
 
-    // State for selections and package name mapping
-    val rawSelections by selectionRepository.getSelectionsSummaryFlow().collectAsStateWithLifecycle(emptyMap())
-    // Build package name mapping (original -> patched)
-    val packageNameMapping by produceState<Map<String, String>>(
-        initialValue = emptyMap(),
-        key1 = rawSelections
-    ) {
-        value = withContext(Dispatchers.IO) {
-            val installedApps = appDataResolver.getInstalledApps()
-
-            rawSelections.keys.associateWith { originalPackageName ->
-                val patchedApp = installedApps.find {
-                    it.originalPackageName == originalPackageName
-                }
-                patchedApp?.currentPackageName ?: originalPackageName
-            }
-        }
-    }
-
-    // Transform selections to display names
-    val selections by remember(rawSelections, packageNameMapping) {
-        derivedStateOf {
-            rawSelections.mapKeys { (originalName, _) ->
-                packageNameMapping[originalName] ?: originalName
-            }
-        }
-    }
-
-    // Show all selections from database
-    val filteredSelections = selections
+    val selections by selectionRepository.getSelectionsSummaryFlow().collectAsStateWithLifecycle(emptyMap())
 
     // Calculate total selections from filtered data
-    val totalSelections = remember(filteredSelections) {
-        filteredSelections.values.sumOf { bundleMap -> bundleMap.values.sum() }
-    }
+    val totalSelections = remember(selections) { selections.values.sumOf { bundleMap -> bundleMap.values.sum() } }
 
     PatchSelectionManagementDialogContent(
-        selections = filteredSelections,
+        selections = selections,
         totalSelections = totalSelections,
         bundleNames = bundleNames,
         onDismiss = onDismiss,
@@ -129,7 +96,7 @@ fun PatchSelectionManagementDialog(
 
         ConfirmResetAllDialog(
             totalSelections = totalSelections,
-            packageCount = filteredSelections.size,
+            packageCount = selections.size,
             onConfirm = confirmAction,
             onDismiss = dismissAction
         )
@@ -139,22 +106,14 @@ fun PatchSelectionManagementDialog(
     resetTarget?.let { target ->
         when (target) {
             is ResetTarget.Package -> {
-                // Convert display name back to original name for database operations
-                val originalPackageName = remember(target.packageName, packageNameMapping) {
-                    packageNameMapping.entries
-                        .find { it.value == target.packageName }?.key
-                        ?: target.packageName
-                }
-
-                val bundleMap = filteredSelections[target.packageName] ?: emptyMap()
+                val bundleMap = selections[target.packageName] ?: emptyMap()
                 val patchCount = bundleMap.values.sum()
 
                 val confirmAction: () -> Unit = {
                     scope.launch {
                         withContext(Dispatchers.IO) {
-                            // Use original package name for database operations
-                            selectionRepository.resetSelectionForPackage(originalPackageName)
-                            optionsRepository.resetOptionsForPackage(originalPackageName)
+                            selectionRepository.resetSelectionForPackage(target.packageName)
+                            optionsRepository.resetOptionsForPackage(target.packageName)
                         }
                         resetTarget = null
                     }
@@ -171,21 +130,13 @@ fun PatchSelectionManagementDialog(
                 )
             }
             is ResetTarget.PackageBundle -> {
-                // Convert display name back to original name for database operations
-                val originalPackageName = remember(target.packageName, packageNameMapping) {
-                    packageNameMapping.entries
-                        .find { it.value == target.packageName }?.key
-                        ?: target.packageName
-                }
-
-                val patchCount = filteredSelections[target.packageName]?.get(target.bundleUid) ?: 0
+                val patchCount = selections[target.packageName]?.get(target.bundleUid) ?: 0
 
                 val confirmAction: () -> Unit = {
                     scope.launch {
                         withContext(Dispatchers.IO) {
-                            // Use original package name for database operations
-                            selectionRepository.resetSelectionForPackageAndBundle(originalPackageName, target.bundleUid)
-                            optionsRepository.resetOptionsForPackageAndBundle(originalPackageName, target.bundleUid)
+                            selectionRepository.resetSelectionForPackageAndBundle(target.packageName, target.bundleUid)
+                            optionsRepository.resetOptionsForPackageAndBundle(target.packageName, target.bundleUid)
                         }
                         resetTarget = null
                     }
@@ -206,16 +157,8 @@ fun PatchSelectionManagementDialog(
 
     // Patch details dialog
     showPatchDetailsTarget?.let { target ->
-        // Convert display name back to original for data loading
-        val originalPackageName = remember(target.packageName, packageNameMapping) {
-            packageNameMapping.entries
-                .find { it.value == target.packageName }?.key
-                ?: target.packageName
-        }
-
         PatchDetailsDialog(
-            originalPackageName = originalPackageName,  // For loading data from database
-            displayPackageName = target.packageName,    // For UI display
+            packageName = target.packageName,
             bundleUid = target.bundleUid,
             bundleName = bundleNames[target.bundleUid],
             appDataResolver = appDataResolver,
@@ -612,7 +555,6 @@ private fun ConfirmResetAllDialog(
     onDismiss: () -> Unit
 ) {
     val optionsRepository: PatchOptionsRepository = koinInject()
-    val appDataResolver: AppDataResolver = koinInject()
     var totalOptions by remember { mutableIntStateOf(0) }
 
     // Load total options count for patched packages only
@@ -621,11 +563,8 @@ private fun ConfirmResetAllDialog(
             // Get all packages with options
             val packagesWithOptions = optionsRepository.getPackagesWithSavedOptions().first()
 
-            // Filter to only patched packages
-            val patchedPackages = appDataResolver.filterPatchedPackageNames(packagesWithOptions)
-
             // Count options for patched packages only
-            totalOptions = patchedPackages.sumOf { packageName ->
+            totalOptions = packagesWithOptions.sumOf { packageName ->
                 optionsRepository.getOptionsCountForPackage(packageName)
             }
         }
@@ -840,8 +779,7 @@ private data class PatchDetailsTarget(
 /**
  * Dialog showing detailed patch selections and options
  *
- * @param originalPackageName Original package name for loading data from database
- * @param displayPackageName Patched package name for UI display
+ * @param packageName Original package name for loading data from database
  * @param bundleUid Bundle identifier
  * @param bundleName Bundle display name
  * @param appDataResolver Resolver for app data
@@ -849,8 +787,7 @@ private data class PatchDetailsTarget(
  */
 @Composable
 private fun PatchDetailsDialog(
-    originalPackageName: String,
-    displayPackageName: String,
+    packageName: String,
     bundleUid: Int,
     bundleName: String?,
     appDataResolver: AppDataResolver,
@@ -859,27 +796,27 @@ private fun PatchDetailsDialog(
     val selectionRepository: PatchSelectionRepository = koinInject()
     val optionsRepository: PatchOptionsRepository = koinInject()
 
-    var displayName by remember { mutableStateOf(displayPackageName) }
+    var displayName by remember { mutableStateOf(packageName) }
     var patchList by remember { mutableStateOf<List<String>>(emptyList()) }
     var optionsMap by remember { mutableStateOf<Map<String, Map<String, Any?>>>(emptyMap()) }
     var isLoading by remember { mutableStateOf(true) }
 
     // Resolve app name using display package name
-    LaunchedEffect(displayPackageName) {
-        val appData = appDataResolver.resolveAppData(displayPackageName)
+    LaunchedEffect(packageName) {
+        val appData = appDataResolver.resolveAppData(packageName)
         displayName = appData.displayName
     }
 
     // Load patch selections and options using original package name
-    LaunchedEffect(originalPackageName, bundleUid) {
+    LaunchedEffect(packageName, bundleUid) {
         isLoading = true
         withContext(Dispatchers.IO) {
             // Load selections using original package name (from database)
-            patchList = selectionRepository.exportForPackageAndBundle(originalPackageName, bundleUid)
+            patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
 
             // Get raw serialized options using original package name (from database)
             val rawOptions = optionsRepository.exportOptionsForBundle(
-                packageName = originalPackageName,
+                packageName = packageName,
                 bundleUid = bundleUid
             )
 

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.map
 class PatchSelectionRepository(db: AppDatabase) {
     private val dao = db.selectionDao()
     private val _resetEventsFlow = MutableSharedFlow<ResetEvent>(extraBufferCapacity = 4)
-    val resetEventsFlow: SharedFlow<ResetEvent> = _resetEventsFlow.asSharedFlow()
 
     private suspend fun getOrCreateSelection(bundleUid: Int, packageName: String) =
         dao.getSelectionId(bundleUid, packageName) ?: PatchSelection(

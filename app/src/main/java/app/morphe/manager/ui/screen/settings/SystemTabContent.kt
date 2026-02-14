@@ -25,7 +25,6 @@ import app.morphe.manager.ui.screen.settings.system.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
-import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -299,7 +298,6 @@ fun SystemTabContent(
                 // Patch Selections management
                 val selectionRepository: PatchSelectionRepository = koinInject()
                 val optionsRepository: PatchOptionsRepository = koinInject()
-                val appDataResolver: AppDataResolver = koinInject()
 
                 val packagesWithSelection by selectionRepository.getPackagesWithSavedSelection()
                     .collectAsStateWithLifecycle(emptySet())
@@ -311,8 +309,7 @@ fun SystemTabContent(
 
                 LaunchedEffect(packagesWithSelection, packagesWithOptions) {
                     val allPackages = packagesWithSelection + packagesWithOptions
-                    val patchedPackages = appDataResolver.filterPatchedPackageNames(allPackages)
-                    patchedPackagesCount = patchedPackages.size
+                    patchedPackagesCount = allPackages.size
                 }
 
                 RichSettingsItem(
