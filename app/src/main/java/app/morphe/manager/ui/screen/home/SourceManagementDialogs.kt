@@ -57,8 +57,7 @@ fun AddBundleDialog(
     var remoteUrl by rememberSaveable { mutableStateOf("") }
     var selectedTab by rememberSaveable { mutableIntStateOf(0) } // 0 = Remote, 1 = Local
 
-    val isRemoteValid = remoteUrl.isNotBlank() &&
-            (remoteUrl.startsWith("http://") || remoteUrl.startsWith("https://"))
+    val isRemoteValid = remoteUrl.isNotBlank()
     val isLocalValid = selectedLocalPath != null
 
     MorpheDialog(
@@ -69,7 +68,10 @@ fun AddBundleDialog(
                 primaryText = stringResource(R.string.add),
                 onPrimaryClick = {
                     when (selectedTab) {
-                        0 -> if (isRemoteValid) onRemoteSubmit(remoteUrl)
+                        0 -> if (isRemoteValid) {
+                            val normalizedUrl = normalizeUrl(remoteUrl)
+                            onRemoteSubmit(normalizedUrl)
+                        }
                         1 -> if (isLocalValid) onLocalSubmit()
                     }
                 },
@@ -803,3 +805,19 @@ private fun String.sanitizePatchChangelogMarkdown(): String =
         val link = match.groupValues[2]
         "[\\[$label\\]]($link)"
     }
+
+/**
+ * Normalizes a URL by adding https:// if no protocol is specified
+ */
+private fun normalizeUrl(url: String): String {
+    val trimmed = url.trim()
+
+    return when {
+        // Already has protocol
+        trimmed.startsWith("http://", ignoreCase = true) ||
+                trimmed.startsWith("https://", ignoreCase = true) -> trimmed
+
+        // Add https:// by default
+        else -> "https://$trimmed"
+    }
+}

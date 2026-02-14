@@ -64,9 +64,9 @@
     <string name="sources_dialog_remote_url">Source URL</string>
     <string name="sources_dialog_remote_url_formats_title">Examples:</string>
     <string name="sources_dialog_remote_url_formats_list" translatable="false">"
-• https://github.com/owner/repo
-• https://raw.githubusercontent.com/owner/repo/patches-bundle.json
-• https://example.com/patches-bundle.json"</string>
+• github.com/owner/repo
+• raw.githubusercontent.com/owner/repo/patches-bundle.json
+• example.com/patches-bundle.json"</string>
     <string name="sources_dialog_local">Local</string>
     <string name="sources_dialog_local_file">Select patch source file</string>
     <string name="sources_dialog_local_file_description">Select a .mpp patch source file from storage</string>

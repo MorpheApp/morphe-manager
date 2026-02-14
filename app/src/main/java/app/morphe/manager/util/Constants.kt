@@ -9,7 +9,13 @@ const val tag = "Morphe Manager"
 const val SOURCE_NAME = "Morphe Patches"
 const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
-internal const val MORPHE_API_URL = "https://api.morphe.software"
+const val MORPHE_API_URL = "https://api.morphe.software"
+
+/** Controls whether manager updates are fetched directly from JSON files in the repository instead of using the GitHub API */
+const val USE_MANAGER_DIRECT_JSON = true
+
+/** Controls whether patches are fetched directly from JSON files in the repository instead of using the Morphe API */
+const val USE_PATCHES_DIRECT_JSON = true
 
 // Package identifiers with their associated colors
 object AppPackages {

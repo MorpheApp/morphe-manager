@@ -179,9 +179,53 @@ class JsonPatchBundle(
     autoUpdate: Boolean,
     enabled: Boolean,
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, autoUpdate, enabled) {
+
+    /**
+     * Parse GitHub URL and convert to raw.githubusercontent.com format
+     * Supports:
+     * - https://github.com/owner/repo/tree/branch/path/file.json
+     * - https://github.com/owner/repo/blob/branch/path/file.json
+     * - https://raw.githubusercontent.com/owner/repo/branch/path/file.json (passthrough)
+     */
+    private fun parseGitHubUrl(url: String): String {
+        return try {
+            val uri = java.net.URI(url)
+            val host = uri.host?.lowercase(java.util.Locale.US)
+
+            when (host) {
+                "raw.githubusercontent.com" -> {
+                    // Already in correct format
+                    url
+                }
+                "github.com" -> {
+                    // Parse: /owner/repo/tree|blob/branch/path/to/file.json
+                    val pathParts = uri.path?.trim('/')?.split('/') ?: return url
+
+                    if (pathParts.size < 5) return url // Need at least: owner, repo, tree/blob, branch, file
+
+                    val owner = pathParts[0]
+                    val repo = pathParts[1]
+                    val type = pathParts[2] // "tree" or "blob"
+
+                    if (type !in listOf("tree", "blob")) return url
+
+                    val branch = pathParts[3]
+                    val filePath = pathParts.drop(4).joinToString("/")
+
+                    "https://raw.githubusercontent.com/$owner/$repo/$branch/$filePath"
+                }
+                else -> url // Unknown host, return as-is
+            }
+        } catch (_: Exception) {
+            url // If parsing fails, return original URL
+        }
+    }
+
     override suspend fun getLatestInfo() = withContext(Dispatchers.IO) {
+        val normalizedEndpoint = parseGitHubUrl(endpoint)
+
         val asset = http.request<MorpheAsset> {
-            url(endpoint)
+            url(normalizedEndpoint)
         }.getOrThrow()
 
         // If pageUrl is not set, try to infer it from the endpoint
@@ -296,9 +340,9 @@ class GitHubPullRequestBundle(
                 }
             }
             install(HttpTimeout) {
-                connectTimeoutMillis = 20_000
-                socketTimeoutMillis = 2 * 60_000
-                requestTimeoutMillis = 5 * 60_000
+                connectTimeoutMillis = 20_000L
+                socketTimeoutMillis  = 5 * 60_000L
+                requestTimeoutMillis = 10 * 60_000L
             }
         }
 

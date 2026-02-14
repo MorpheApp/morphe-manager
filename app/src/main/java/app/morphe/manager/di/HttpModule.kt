@@ -42,9 +42,9 @@ val httpModule = module {
             json(json)
         }
         install(HttpTimeout) {
-            connectTimeoutMillis = 20_000
-            socketTimeoutMillis = 2 * 60_000
-            requestTimeoutMillis = 5 * 60_000
+            connectTimeoutMillis = 20_000L
+            socketTimeoutMillis  = 5 * 60_000L
+            requestTimeoutMillis = 10 * 60_000L
         }
         install(UserAgent) {
             agent = "Morphe-Manager/${BuildConfig.VERSION_CODE}"
