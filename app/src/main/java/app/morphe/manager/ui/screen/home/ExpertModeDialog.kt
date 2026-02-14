@@ -57,7 +57,7 @@ fun ExpertModeDialog(
 ) {
     var selectedPatchForOptions by remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     var searchQuery by remember { mutableStateOf("") }
-    var showMultipleBundlesWarning by remember { mutableStateOf(false) }
+    var showMultipleSourcesWarning by remember { mutableStateOf(false) }
 
     // Create local mutable state from incoming selectedPatches
     var localSelectedPatches by remember(selectedPatches) {
@@ -269,7 +269,7 @@ fun ExpertModeDialog(
                 onClick = {
                     // Check if multiple bundles are selected
                     if (hasMultipleBundles) {
-                        showMultipleBundlesWarning = true
+                        showMultipleSourcesWarning = true
                     } else {
                         syncAndProceed()
                     }
@@ -282,11 +282,11 @@ fun ExpertModeDialog(
     }
 
     // Multiple bundles warning dialog
-    if (showMultipleBundlesWarning) {
-        MultipleBundlesWarningDialog(
-            onDismiss = { showMultipleBundlesWarning = false },
+    if (showMultipleSourcesWarning) {
+        MultipleSourcesWarningDialog(
+            onDismiss = { showMultipleSourcesWarning = false },
             onProceed = {
-                showMultipleBundlesWarning = false
+                showMultipleSourcesWarning = false
                 syncAndProceed()
             }
         )
@@ -1232,16 +1232,16 @@ fun ScrollableInstruction(
 
 
 /**
- * Warning dialog shown when user selects patches from multiple bundles
+ * Warning dialog shown when user selects patches from multiple sources
  */
 @Composable
-private fun MultipleBundlesWarningDialog(
+private fun MultipleSourcesWarningDialog(
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
     MorpheDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.expert_mode_multiple_bundles_warning_title),
+        title = stringResource(R.string.expert_mode_multiple_sources_warning_title),
         footer = {
             MorpheDialogButtonRow(
                 primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
@@ -1252,7 +1252,7 @@ private fun MultipleBundlesWarningDialog(
         }
     ) {
         Text(
-            text = stringResource(R.string.expert_mode_multiple_bundles_warning_message),
+            text = stringResource(R.string.expert_mode_multiple_sources_warning_message),
             style = MaterialTheme.typography.bodyLarge,
             color = LocalDialogSecondaryTextColor.current
         )
