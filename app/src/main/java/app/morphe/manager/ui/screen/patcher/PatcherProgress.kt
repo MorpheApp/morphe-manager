@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -307,11 +308,17 @@ private fun CircularProgressWithStats(
 
             Spacer(Modifier.height(8.dp))
 
+            val totalPatchesText = pluralStringResource(
+                R.plurals.patch_count,
+                total,
+                total
+            )
+
             Text(
                 text = stringResource(
-                    R.string.patcher_patches_progress,
+                    R.string.patcher_patches_progress_format,
                     completed,
-                    total
+                    totalPatchesText
                 ),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

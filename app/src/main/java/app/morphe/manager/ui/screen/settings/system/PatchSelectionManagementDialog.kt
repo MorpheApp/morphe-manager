@@ -40,12 +40,6 @@ import org.koin.compose.koinInject
 
 /**
  * Dialog for managing patch selections
- * Displays patched package names but operates on original package names in database
- *
- * Architecture:
- * - Database stores: original package names (com.example.app)
- * - UI displays: patched package names (com.example.app.patched)
- * - Mapping layer: converts between original <-> patched names
  */
 @Composable
 fun PatchSelectionManagementDialog(
@@ -241,7 +235,7 @@ private fun SelectionList(
         // Summary box
         InfoBox(
             title = pluralStringResource(
-                R.plurals.patch_selection_packages_count,
+                R.plurals.package_count,
                 selections.size,
                 selections.size
             ),
@@ -351,14 +345,22 @@ private fun PackageSelectionItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         InfoBadge(
-                            text = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                            text = pluralStringResource(
+                                R.plurals.patch_count,
+                                totalPatches,
+                                totalPatches
+                            ),
                             style = InfoBadgeStyle.Primary,
                             isCompact = true
                         )
 
                         if (bundleMap.size > 1) {
                             InfoBadge(
-                                text = pluralStringResource(R.plurals.source_count, bundleMap.size, bundleMap.size),
+                                text = pluralStringResource(
+                                    R.plurals.source_count,
+                                    bundleMap.size,
+                                    bundleMap.size
+                                ),
                                 style = InfoBadgeStyle.Default,
                                 isCompact = true
                             )
@@ -428,7 +430,11 @@ private fun BundleSelectionItem(
 
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
-    val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+    val patchCountText = pluralStringResource(
+        R.plurals.patch_count,
+        patchCount,
+        patchCount
+    )
     val contentDesc = "$displayName: $patchCountText"
 
     // Export launcher
@@ -557,13 +563,13 @@ private fun ConfirmResetAllDialog(
     val optionsRepository: PatchOptionsRepository = koinInject()
     var totalOptions by remember { mutableIntStateOf(0) }
 
-    // Load total options count for patched packages only
+    // Load total options count
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             // Get all packages with options
             val packagesWithOptions = optionsRepository.getPackagesWithSavedOptions().first()
 
-            // Count options for patched packages only
+            // Count options
             totalOptions = packagesWithOptions.sumOf { packageName ->
                 optionsRepository.getOptionsCountForPackage(packageName)
             }
@@ -595,19 +601,35 @@ private fun ConfirmResetAllDialog(
             DeletionWarningBox(
                 warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
             ) {
+                val patchesText = pluralStringResource(
+                    R.plurals.patch_count,
+                    totalSelections,
+                    totalSelections
+                )
+
+                val packagesText = pluralStringResource(
+                    R.plurals.package_count,
+                    packageCount,
+                    packageCount
+                )
+
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
-                        R.string.settings_system_patch_selection_total_summary,
-                        totalSelections,
-                        packageCount
+                        R.string.settings_system_patch_selection_total_summary_format,
+                        patchesText,
+                        packagesText
                     )
                 )
 
                 if (totalOptions > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(R.plurals.patch_options_count, totalOptions,  totalOptions)
+                        text = pluralStringResource(
+                            R.plurals.option_count,
+                            totalOptions,
+                            totalOptions
+                        )
                     )
                 }
             }
@@ -669,19 +691,35 @@ private fun ConfirmResetPackageDialog(
             DeletionWarningBox(
                 warningText = stringResource(R.string.settings_system_patch_selection_will_delete)
             ) {
+                val patchesText = pluralStringResource(
+                    R.plurals.patch_count,
+                    patchCount,
+                    patchCount
+                )
+
+                val sourcesText = pluralStringResource(
+                    R.plurals.source_count,
+                    bundleCount,
+                    bundleCount
+                )
+
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
                     text = stringResource(
-                        R.string.settings_system_patch_selection_patches_in_sources,
-                        patchCount,
-                        bundleCount
+                        R.string.settings_system_patch_selection_patches_in_sources_format,
+                        patchesText,
+                        sourcesText
                     )
                 )
 
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(R.plurals.patch_options_count, optionsCount, optionsCount)
+                        text = pluralStringResource(
+                            R.plurals.option_count,
+                            optionsCount,
+                            optionsCount
+                        )
                     )
                 }
             }
@@ -746,13 +784,21 @@ private fun ConfirmResetPackageBundleDialog(
             ) {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+                    text = pluralStringResource(
+                        R.plurals.patch_count,
+                        patchCount,
+                        patchCount
+                    )
                 )
 
                 if (optionsCount > 0) {
                     DeleteListItem(
                         icon = Icons.Outlined.Tune,
-                        text = pluralStringResource(R.plurals.patch_options_count, optionsCount, optionsCount)
+                        text = pluralStringResource(
+                            R.plurals.option_count,
+                            optionsCount,
+                            optionsCount
+                        )
                     )
                 }
             }
@@ -807,14 +853,14 @@ private fun PatchDetailsDialog(
         displayName = appData.displayName
     }
 
-    // Load patch selections and options using original package name
+    // Load patch selections and options
     LaunchedEffect(packageName, bundleUid) {
         isLoading = true
         withContext(Dispatchers.IO) {
-            // Load selections using original package name (from database)
+            // Load selections
             patchList = selectionRepository.exportForPackageAndBundle(packageName, bundleUid)
 
-            // Get raw serialized options using original package name (from database)
+            // Get raw serialized options
             val rawOptions = optionsRepository.exportOptionsForBundle(
                 packageName = packageName,
                 bundleUid = bundleUid

@@ -291,7 +291,11 @@ private fun ApkManagementDialogContent(
         ) {
             // Summary box
             InfoBox(
-                title = pluralStringResource(R.plurals.settings_system_apks_count, count, count),
+                title = pluralStringResource(
+                    R.plurals.settings_system_apks_count,
+                    count,
+                    count
+                ),
                 containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                 titleColor = MaterialTheme.colorScheme.primary,
                 icon = icon

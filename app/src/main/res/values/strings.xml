@@ -16,7 +16,7 @@
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Check your internet connection and try again</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <string name="home_update_progress">%1$d/%2$d sources processed</string>
+    <string name="home_update_progress_format">%1$s processed</string>
     <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
@@ -117,7 +117,7 @@ Compatible versions:"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
-    <string name="expert_mode_subtitle_extended">%1$d of %2$d patches selected</string>
+    <string name="expert_mode_subtitle_extended_format">%1$d of %2$s selected</string>
     <string name="expert_mode_search">Search patches</string>
     <string name="expert_mode_proceed">Proceed to Patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
@@ -212,7 +212,7 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_patches_progress">%1$d / %2$d patches</string>
+    <string name="patcher_patches_progress_format">%1$d / %2$s</string>
     <string name="patcher_percentage" translatable="false">%1$d%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
@@ -558,8 +558,8 @@ Details: %2$s"</string>
     <string name="settings_system_patch_selection_reset_package_confirm_title">Reset package selections?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Reset source selection?</string>
     <string name="settings_system_patch_selection_no_saved">No saved patch selections</string>
-    <string name="settings_system_patch_selection_total_summary">%1$d patches across %2$d packages</string>
-    <string name="settings_system_patch_selection_patches_in_sources">%1$d patches in %2$d sources</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s across %2$s</string>
+    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
     <string name="settings_system_patch_selection_source_format">Source #%d</string>
     <string name="settings_system_patch_selection_will_delete">This will delete:</string>
     <string name="settings_system_patch_selection_reset_all_warning">This will permanently delete all saved patch selections for all packages and sources</string>
