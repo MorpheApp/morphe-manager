@@ -1,3 +1,10 @@
+# app [1.7.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.7...v1.7.0-dev.8) (2026-02-14)
+
+
+### Bug Fixes
+
+* Prefer IPv4 connections over IPv6 ([e665e59](https://github.com/MorpheApp/morphe-manager/commit/e665e595ac50fb7925fd6814ce89beebcd4fe453))
+
 # app [1.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2026-02-14)
 
 
