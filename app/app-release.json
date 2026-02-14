@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-02-13T07:35:11.012Z",
-  "description": "# app [1.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.3...v1.7.0-dev.5) (2026-02-13)\n\n\n### Bug Fixes\n\n* Publish release before updating app-release.json ([f1c556a](https://github.com/MorpheApp/morphe-manager/commit/f1c556aa7b9d163297152c53b348f87a6960fe1a))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.5/morphe-manager-1.7.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.5/morphe-manager-1.7.0-dev.5.apk.asc",
-  "version": "1.7.0-dev.5"
+  "created_at": "2026-02-14T15:26:27.146Z",
+  "description": "# app [1.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2026-02-14)\n\n\n### Bug Fixes\n\n* Change to old GitHub release logic ([94c2fb7](https://github.com/MorpheApp/morphe-manager/commit/94c2fb70f389daff493dbc2deb02c0c906940407))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.7/morphe-manager-1.7.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.7.0-dev.7/morphe-manager-1.7.0-dev.7.apk.asc",
+  "version": "1.7.0-dev.7"
 }

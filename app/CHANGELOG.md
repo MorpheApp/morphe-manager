@@ -1,3 +1,10 @@
+# app [1.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2026-02-14)
+
+
+### Bug Fixes
+
+* Change to old GitHub release logic ([94c2fb7](https://github.com/MorpheApp/morphe-manager/commit/94c2fb70f389daff493dbc2deb02c0c906940407))
+
 # app [1.7.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.7.0-dev.5...v1.7.0-dev.6) (2026-02-14)
 
 
