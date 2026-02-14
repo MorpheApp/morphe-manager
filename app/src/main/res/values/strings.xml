@@ -212,7 +212,7 @@ Are you sure you want to proceed?"</string>
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_patches_progress_format">%1$d / %2$s</string>
+    <string name="patcher_patches_progress_format" translatable="false">%1$d / %2$s</string>
     <string name="patcher_percentage" translatable="false">%1$d%%</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
     <string name="patcher_installing_subtitle">Almost ready to rock! 🎸</string>
