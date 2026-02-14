@@ -25,11 +25,9 @@ val httpModule = module {
                 dns(object : Dns {
                     override fun lookup(hostname: String): List<InetAddress> {
                         val addresses = Dns.SYSTEM.lookup(hostname)
-                        return if (hostname == "raw.githubusercontent.com") {
-                            addresses.filterIsInstance<Inet4Address>()
-                        } else {
-                            addresses
-                        }
+                        val ipv4Addresses = addresses.filterIsInstance<Inet4Address>()
+                        // Force IPv4 if available, fallback to IPv6 only if no IPv4 addresses are found
+                        return ipv4Addresses.ifEmpty { addresses }
                     }
                 })
                 // Force HTTP/1.1 to avoid intermittent HTTP/2 PROTOCOL_ERROR stream resets when
